@@ -1,18 +1,21 @@
 package xyz.btcland.libretube
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class TrendingAdapter(private val trendingFeed: List<Trending>): RecyclerView.Adapter<CustomViewHolder>() {
+class TrendingAdapter(private val videoFeed: List<Video>): RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
-        return trendingFeed.size
+        return videoFeed.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -22,17 +25,34 @@ class TrendingAdapter(private val trendingFeed: List<Trending>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val trending = trendingFeed[position]
+        val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
         holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ videoViews(trending.views)+" • "+trending.uploadedDate
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
+        channelImage.setOnClickListener{
+            println("channel clicked")
+        }
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)
+        holder.v.setOnClickListener{
+            //val intent = Intent(holder.v.context, Player::class.java)
+            //intent.putExtra("videoId",trending.url.replace("/watch?v=",""))
+            //holder.v.context.startActivity(intent)
+            var bundle = Bundle()
+            bundle.putString("videoId",trending.url.replace("/watch?v=",""))
+            var frag = PlayerFragment()
+            frag.arguments = bundle
+            val activity = holder.v.context as AppCompatActivity
+            activity.supportFragmentManager.beginTransaction()
+                .add(R.id.container, frag)
+                .commitNow()
+        }
     }
 }
 class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v){
-
+    init {
+    }
 }
 fun videoViews(views: Int): String{
     when {

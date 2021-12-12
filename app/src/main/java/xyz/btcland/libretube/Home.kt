@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -97,8 +95,8 @@ class Home : Fragment() {
                         val body = response.body!!.string()
                         println(body)
                         val gson = GsonBuilder().create()
-                        val itemType = object : TypeToken<List<Trending>>() {}.type
-                        val trendingList = gson.fromJson<List<Trending>>(body, itemType)
+                        val itemType = object : TypeToken<List<Video>>() {}.type
+                        val trendingList = gson.fromJson<List<Video>>(body, itemType)
                         runOnUiThread {
                             progressBar.visibility = View.GONE
                             recyclerView.adapter = TrendingAdapter(trendingList)
