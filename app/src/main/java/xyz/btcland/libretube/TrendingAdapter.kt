@@ -45,7 +45,10 @@ class TrendingAdapter(private val videoFeed: List<Video>): RecyclerView.Adapter<
             frag.arguments = bundle
             val activity = holder.v.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
-                .add(R.id.container, frag)
+                .remove(PlayerFragment())
+                .commit()
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.container, frag)
                 .commitNow()
         }
     }

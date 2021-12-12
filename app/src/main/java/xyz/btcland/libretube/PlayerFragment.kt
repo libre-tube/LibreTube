@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -64,6 +66,8 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mainActivity = activity as MainActivity
+        mainActivity.findViewById<FrameLayout>(R.id.container).visibility=View.VISIBLE
         val playerMotionLayout = view.findViewById<SingleViewTouchableMotionLayout>(R.id.playerMotionLayout)
         motionLayout = playerMotionLayout
         exoPlayerView = view.findViewById(R.id.player)
@@ -111,9 +115,21 @@ class PlayerFragment : Fragment() {
         playerMotionLayout.progress=1.toFloat()
         playerMotionLayout.transitionToStart()
         fetchJson(view)
+        view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener{
+            println("wtf?")
+            val mainActivity = activity as MainActivity
+            mainActivity.supportFragmentManager.beginTransaction()
+                .remove(this)
+                .commit()
+            mainActivity.findViewById<FrameLayout>(R.id.container).layoutParams=ViewGroup.LayoutParams(0,0)
+
+        }
     }
 
-
+    override fun onStop() {
+        super.onStop()
+        exoPlayer.stop()
+    }
 
     companion object {
         /**
@@ -140,6 +156,7 @@ class PlayerFragment : Fragment() {
         exoPlayerView.player = exoPlayer
         exoPlayer.setMediaItem(MediaItem.fromUri(url))
         exoPlayer.prepare()
+        exoPlayer.play()
     }
 
     private fun fetchJson(view: View) {
@@ -162,7 +179,7 @@ class PlayerFragment : Fragment() {
                         val videoInPlayer = gson.fromJson(body, VideoInPlayer::class.java)
                         runOnUiThread {
                             initPlayer(view,videoInPlayer.hls)
-
+                            view.findViewById<TextView>(R.id.title_textView).text = videoInPlayer.title
                         }
                     }
 
