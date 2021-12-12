@@ -5,9 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
+
+import com.google.android.exoplayer2.ui.PlayerView
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import okhttp3.*
+import java.io.IOException
 import kotlin.math.abs
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,6 +39,13 @@ class PlayerFragment : Fragment() {
     private var lastProgress: Float = 0.toFloat()
     private var sId: Int=0
     private var eId: Int=0
+
+
+    private lateinit var exoPlayerView: PlayerView
+    private lateinit var motionLayout: SingleViewTouchableMotionLayout
+    private lateinit var exoPlayer: ExoPlayer
+    private lateinit var mediaSource: MediaSource
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -46,7 +65,8 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val playerMotionLayout = view.findViewById<SingleViewTouchableMotionLayout>(R.id.playerMotionLayout)
-
+        motionLayout = playerMotionLayout
+        exoPlayerView = view.findViewById(R.id.player)
         view.findViewById<TextView>(R.id.textTest).text = videoId
         playerMotionLayout.addTransitionListener(object: MotionLayout.TransitionListener {
             override fun onTransitionStarted(
@@ -90,7 +110,10 @@ class PlayerFragment : Fragment() {
         })
         playerMotionLayout.progress=1.toFloat()
         playerMotionLayout.transitionToStart()
+        fetchJson(view)
     }
+
+
 
     companion object {
         /**
@@ -110,5 +133,49 @@ class PlayerFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun initPlayer(view: View,url: String){
+        exoPlayer = ExoPlayer.Builder(view.context).build()
+        exoPlayerView.player = exoPlayer
+        exoPlayer.setMediaItem(MediaItem.fromUri(url))
+        exoPlayer.prepare()
+    }
+
+    private fun fetchJson(view: View) {
+        val client = OkHttpClient()
+
+        fun run() {
+            val request = Request.Builder()
+                .url("https://pipedapi.kavin.rocks/streams/$videoId")
+                .build()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                }
+                override fun onResponse(call: Call, response: Response) {
+                    response.use {
+                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                        val body = response.body!!.string()
+                        println(body)
+                        val gson = GsonBuilder().create()
+                        val videoInPlayer = gson.fromJson(body, VideoInPlayer::class.java)
+                        runOnUiThread {
+                            initPlayer(view,videoInPlayer.hls)
+
+                        }
+                    }
+
+
+                }
+            })
+        }
+        run()
+
+    }
+    fun Fragment?.runOnUiThread(action: () -> Unit) {
+        this ?: return
+        if (!isAdded) return // Fragment not attached to an Activity
+        activity?.runOnUiThread(action)
     }
 }
