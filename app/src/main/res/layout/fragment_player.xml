@@ -68,6 +68,7 @@
         app:layout_constraintEnd_toEndOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
         android:src="@drawable/ic_close"
+        android:visibility="gone"
         />
 
     <ImageView
@@ -79,7 +80,9 @@
         android:src="@drawable/ic_play"
         app:layout_constraintBottom_toBottomOf="@+id/close_imageView"
         app:layout_constraintEnd_toStartOf="@+id/close_imageView"
-        app:layout_constraintTop_toTopOf="@+id/close_imageView" />
+        app:layout_constraintTop_toTopOf="@+id/close_imageView"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/title_textView"
@@ -90,7 +93,6 @@
         android:alpha="0"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="This is very very very very long title"
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"
         app:layout_constraintStart_toEndOf="@+id/player"

@@ -1,28 +1,58 @@
 package xyz.btcland.libretube
 
+import android.R.attr
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 
 import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.ui.StyledPlayerControlView
+import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import java.io.IOException
 import kotlin.math.abs
+import com.google.android.exoplayer2.util.MimeTypes
+import com.google.common.collect.ImmutableList
+import android.R.attr.subtitle
+import android.content.DialogInterface
+import android.graphics.Color
+import android.widget.*
+import androidx.core.net.toUri
+import com.google.android.exoplayer2.C.SELECTION_FLAG_DEFAULT
+import com.google.android.exoplayer2.MediaItem.fromUri
+import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
+import com.google.android.exoplayer2.source.MergingMediaSource
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DataSource
+
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import android.widget.PopupWindow
+import android.widget.TextView
+
+import android.graphics.drawable.Drawable
+import com.google.android.exoplayer2.util.Util
+import android.graphics.drawable.ColorDrawable
+import androidx.appcompat.app.AlertDialog
+
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.exoplayer2.util.RepeatModeUtil
+
+import com.google.android.exoplayer2.ui.TimeBar
+import com.google.android.exoplayer2.ui.TimeBar.OnScrubListener
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,11 +71,12 @@ class PlayerFragment : Fragment() {
     private var lastProgress: Float = 0.toFloat()
     private var sId: Int=0
     private var eId: Int=0
+    private var paused =false
 
 
-    private lateinit var exoPlayerView: PlayerView
+    private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: SingleViewTouchableMotionLayout
-    private lateinit var exoPlayer: ExoPlayer
+    lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,8 +126,14 @@ class PlayerFragment : Fragment() {
                 val mainActivity = activity as MainActivity
                 val mainMotionLayout = mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId==eId) {
+                    view.findViewById<ImageButton>(R.id.quality_select).visibility =View.GONE
+                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility =View.GONE
+                    view.findViewById<TextView>(R.id.quality_text).visibility =View.GONE
                     mainMotionLayout.progress = 1.toFloat()
                 }else if(currentId==sId){
+                    view.findViewById<ImageButton>(R.id.quality_select).visibility =View.VISIBLE
+                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility =View.VISIBLE
+                    view.findViewById<TextView>(R.id.quality_text).visibility =View.VISIBLE
                     mainMotionLayout.progress = 0.toFloat()
                 }
 
@@ -116,19 +153,41 @@ class PlayerFragment : Fragment() {
         playerMotionLayout.transitionToStart()
         fetchJson(view)
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener{
-            println("wtf?")
             val mainActivity = activity as MainActivity
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
-            mainActivity.findViewById<FrameLayout>(R.id.container).layoutParams=ViewGroup.LayoutParams(0,0)
 
         }
+        view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener{
+            val mainActivity = activity as MainActivity
+            mainActivity.supportFragmentManager.beginTransaction()
+                .remove(this)
+                .commit()
+
+        }
+        val playImageView = view.findViewById<ImageView>(R.id.play_imageView)
+        playImageView.setOnClickListener{
+            paused = if(paused){
+                playImageView.setImageResource(R.drawable.ic_play)
+                exoPlayer.play()
+                false
+            }else {
+                playImageView.setImageResource(R.drawable.ic_pause)
+                exoPlayer.pause()
+                true
+            }
+        }
+
+
     }
 
     override fun onStop() {
         super.onStop()
-        exoPlayer.stop()
+        try {
+            exoPlayer.stop()
+        }catch (e: Exception){}
+
     }
 
     companion object {
@@ -151,13 +210,7 @@ class PlayerFragment : Fragment() {
             }
     }
 
-    private fun initPlayer(view: View,url: String){
-        exoPlayer = ExoPlayer.Builder(view.context).build()
-        exoPlayerView.player = exoPlayer
-        exoPlayer.setMediaItem(MediaItem.fromUri(url))
-        exoPlayer.prepare()
-        exoPlayer.play()
-    }
+
 
     private fun fetchJson(view: View) {
         val client = OkHttpClient()
@@ -177,9 +230,77 @@ class PlayerFragment : Fragment() {
                         println(body)
                         val gson = GsonBuilder().create()
                         val videoInPlayer = gson.fromJson(body, VideoInPlayer::class.java)
+                        var videosNameArray: Array<CharSequence> = arrayOf()
+                        videosNameArray += "HLS"
+                        for (vids in videoInPlayer.videoStreams){
+                            val name = vids.quality +" "+ vids.format
+                            videosNameArray += name
+                        }
                         runOnUiThread {
-                            initPlayer(view,videoInPlayer.hls)
+                            var subtitle = mutableListOf<SubtitleConfiguration>()
+                            subtitle?.add(SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
+                                .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
+                                .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
+                                .build())
+                            val mediaItem: MediaItem = MediaItem.Builder()
+                                .setUri(videoInPlayer.hls)
+                                .setSubtitleConfigurations(subtitle)
+                                .build()
+                            exoPlayer = ExoPlayer.Builder(view.context)
+                                .build()
+                            exoPlayerView.setShowSubtitleButton(true)
+                            exoPlayerView.setShowNextButton(false)
+                            exoPlayerView.setShowPreviousButton(false)
+                            exoPlayerView.player = exoPlayer
+                            exoPlayer.setMediaItem(mediaItem)
+                            ///exoPlayer.getMediaItemAt(5)
+                            exoPlayer.prepare()
+                            exoPlayer.play()
+
                             view.findViewById<TextView>(R.id.title_textView).text = videoInPlayer.title
+
+                            view.findViewById<ImageButton>(R.id.quality_select).setOnClickListener{
+                                val builder: AlertDialog.Builder? = activity?.let {
+                                    AlertDialog.Builder(it)
+                                }
+                                builder!!.setTitle("Choose Quality:")
+                                    .setItems(videosNameArray,
+                                        DialogInterface.OnClickListener { dialog, which ->
+                                            // The 'which' argument contains the index position
+                                            // of the selected item
+                                            //println(which)
+                                            var subtitle = mutableListOf<SubtitleConfiguration>()
+                                            subtitle?.add(SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
+                                                .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
+                                                .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
+                                                .build())
+
+                                            if(which==0){
+                                                val mediaItem: MediaItem = MediaItem.Builder()
+                                                    .setUri(videoInPlayer.hls)
+                                                    .setSubtitleConfigurations(subtitle)
+                                                    .build()
+                                                exoPlayer.setMediaItem(mediaItem)
+                                            }else{
+                                                val dataSourceFactory: DataSource.Factory =
+                                                    DefaultHttpDataSource.Factory()
+                                                val videoSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                    .createMediaSource(fromUri(videoInPlayer.videoStreams[which-1].url))
+                                                var audioSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                    .createMediaSource(fromUri(videoInPlayer.audioStreams[0].url))
+                                                if (videoInPlayer.videoStreams[which-1].quality=="720p" || videoInPlayer.videoStreams[which-1].quality=="1080p" || videoInPlayer.videoStreams[which-1].quality=="480p" ){
+                                                    audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                        .createMediaSource(fromUri(videoInPlayer.audioStreams[getMostBitRate(videoInPlayer.audioStreams)].url))
+                                                    //println("fuckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkitttttttttttttttttttttt")
+                                                }
+                                                val mergeSource: MediaSource = MergingMediaSource(videoSource,audioSource)
+                                                exoPlayer.setMediaSource(mergeSource)
+                                                view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[which]
+                                            }
+                                        })
+                                val dialog: AlertDialog? = builder?.create()
+                                dialog?.show()
+                            }
                         }
                     }
 
@@ -194,5 +315,18 @@ class PlayerFragment : Fragment() {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
+    }
+
+    fun getMostBitRate(audios: List<Stream>):Int{
+        var bitrate =0
+        var index = 0
+        for ((i, audio) in audios.withIndex()){
+            val q = audio.quality.replace(" kbps","").toInt()
+            if (q>bitrate){
+                bitrate=q
+                index = i
+            }
+        }
+        return index
     }
 }

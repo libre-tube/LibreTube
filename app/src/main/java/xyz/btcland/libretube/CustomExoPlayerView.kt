@@ -5,16 +5,19 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.ui.StyledPlayerControlView
+import com.google.android.exoplayer2.ui.StyledPlayerView
 
 internal class CustomExoPlayerView(
     context: Context, attributeSet: AttributeSet? = null
-) : PlayerView(context, attributeSet) {
+) : StyledPlayerView(context, attributeSet) {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 showController()
+
             }
         }
         return false
