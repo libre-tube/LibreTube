@@ -16,8 +16,11 @@ internal class CustomExoPlayerView(
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                showController()
-
+                if (isControllerFullyVisible) {
+                    hideController()
+                }else {
+                    showController()
+                }
             }
         }
         return false

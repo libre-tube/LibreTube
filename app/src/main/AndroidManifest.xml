@@ -10,15 +10,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LibreTube">
+        android:theme="@style/Theme.LibreTube"
+        android:name=".myApp"
+        >
         <activity
             android:name=".Player"
             android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|screenSize"
             />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package xyz.btcland.libretube
 
 import android.R.attr
+import android.R.attr.*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,8 +26,10 @@ import java.io.IOException
 import kotlin.math.abs
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.common.collect.ImmutableList
-import android.R.attr.subtitle
+import android.app.ActionBar
 import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.widget.*
 import androidx.core.net.toUri
@@ -46,8 +49,11 @@ import android.graphics.drawable.Drawable
 import com.google.android.exoplayer2.util.Util
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.PrecomputedTextCompat
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.util.RepeatModeUtil
 
 import com.google.android.exoplayer2.ui.TimeBar
@@ -72,11 +78,12 @@ class PlayerFragment : Fragment() {
     private var sId: Int=0
     private var eId: Int=0
     private var paused =false
-
+    private var isFullScreen = false
+    private var whichQuality = 0
 
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: SingleViewTouchableMotionLayout
-    lateinit var exoPlayer: ExoPlayer
+    private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -179,8 +186,20 @@ class PlayerFragment : Fragment() {
             }
         }
 
+        view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener{
+            exoPlayer.pause()
+            println(exoPlayer.currentPosition)
+            println("---------------------------------------------------------------------------------")
+            val intent = Intent(view.context, Player::class.java)
+            intent.putExtra("videoId", videoId)
+            intent.putExtra("seekTo",exoPlayer.currentPosition.toString())
+            intent.putExtra("quality",whichQuality.toString())
+            startActivity(intent)
+
+        }
 
     }
+
 
     override fun onStop() {
         super.onStop()
@@ -211,7 +230,6 @@ class PlayerFragment : Fragment() {
     }
 
 
-
     private fun fetchJson(view: View) {
         val client = OkHttpClient()
 
@@ -238,10 +256,11 @@ class PlayerFragment : Fragment() {
                         }
                         runOnUiThread {
                             var subtitle = mutableListOf<SubtitleConfiguration>()
+                            if(videoInPlayer.subtitles.isNotEmpty()){
                             subtitle?.add(SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
                                 .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
                                 .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
-                                .build())
+                                .build())}
                             val mediaItem: MediaItem = MediaItem.Builder()
                                 .setUri(videoInPlayer.hls)
                                 .setSubtitleConfigurations(subtitle)
@@ -251,6 +270,8 @@ class PlayerFragment : Fragment() {
                             exoPlayerView.setShowSubtitleButton(true)
                             exoPlayerView.setShowNextButton(false)
                             exoPlayerView.setShowPreviousButton(false)
+                            exoPlayerView.controllerShowTimeoutMs = 1500
+                            exoPlayerView.controllerHideOnTouch = true
                             exoPlayerView.player = exoPlayer
                             exoPlayer.setMediaItem(mediaItem)
                             ///exoPlayer.getMediaItemAt(5)
@@ -263,18 +284,23 @@ class PlayerFragment : Fragment() {
                                 val builder: AlertDialog.Builder? = activity?.let {
                                     AlertDialog.Builder(it)
                                 }
-                                builder!!.setTitle("Choose Quality:")
+                                builder!!.setTitle(R.string.choose_quality_dialog)
                                     .setItems(videosNameArray,
-                                        DialogInterface.OnClickListener { dialog, which ->
+                                        DialogInterface.OnClickListener { _, which ->
                                             // The 'which' argument contains the index position
                                             // of the selected item
                                             //println(which)
-                                            var subtitle = mutableListOf<SubtitleConfiguration>()
-                                            subtitle?.add(SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
-                                                .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
-                                                .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
-                                                .build())
-
+                                            whichQuality = which
+                                            if(videoInPlayer.subtitles.isNotEmpty()) {
+                                                var subtitle =
+                                                    mutableListOf<SubtitleConfiguration>()
+                                                subtitle?.add(
+                                                    SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
+                                                        .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
+                                                        .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
+                                                        .build()
+                                                )
+                                            }
                                             if(which==0){
                                                 val mediaItem: MediaItem = MediaItem.Builder()
                                                     .setUri(videoInPlayer.hls)
@@ -284,9 +310,13 @@ class PlayerFragment : Fragment() {
                                             }else{
                                                 val dataSourceFactory: DataSource.Factory =
                                                     DefaultHttpDataSource.Factory()
-                                                val videoSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                                    .createMediaSource(fromUri(videoInPlayer.videoStreams[which-1].url))
-                                                var audioSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                val videoItem: MediaItem = MediaItem.Builder()
+                                                    .setUri(videoInPlayer.videoStreams[which-1].url)
+                                                    .setSubtitleConfigurations(subtitle)
+                                                    .build()
+                                                val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
+                                                    .createMediaSource(videoItem)
+                                                var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
                                                     .createMediaSource(fromUri(videoInPlayer.audioStreams[0].url))
                                                 if (videoInPlayer.videoStreams[which-1].quality=="720p" || videoInPlayer.videoStreams[which-1].quality=="1080p" || videoInPlayer.videoStreams[which-1].quality=="480p" ){
                                                     audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
@@ -295,8 +325,8 @@ class PlayerFragment : Fragment() {
                                                 }
                                                 val mergeSource: MediaSource = MergingMediaSource(videoSource,audioSource)
                                                 exoPlayer.setMediaSource(mergeSource)
-                                                view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[which]
                                             }
+                                            view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[which]
                                         })
                                 val dialog: AlertDialog? = builder?.create()
                                 dialog?.show()
@@ -328,5 +358,12 @@ class PlayerFragment : Fragment() {
             }
         }
         return index
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+        println("wtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtf")
     }
 }

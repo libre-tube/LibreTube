@@ -2,4 +2,5 @@
     <string name="app_name">LibreTube</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_quality_dialog">Choose Quality:</string>
 </resources>

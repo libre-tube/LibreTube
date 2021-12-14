@@ -20,18 +20,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_container"
         android:background="@color/white"
+
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+
+            >
 
             <TextView
                 android:id="@+id/textTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="fuckkkkkkkkkkkkkkkkkkkkkkkkkkkkk"/>
+                android:text=""
+
+                />
         </LinearLayout>
     </ScrollView>
 
@@ -39,7 +44,7 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:background="#EBFFFFFF"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,96 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_player_scene"
     tools:context=".Player"
-    android:background="#00ffffff"
+    android:background="@color/black"
     >
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <xyz.btcland.libretube.CustomExoPlayerView
+        android:id="@+id/fullscreen_player"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_container">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="fuckkkkkkkkkkkkkkkkkkkkkkkkkkkkk"/>
-        </LinearLayout>
-    </ScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_container"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="#10000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/player"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@id/main_container"
-        app:layout_constraintStart_toStartOf="@id/main_container"
-        app:layout_constraintTop_toTopOf="@id/main_container"
-
+        android:layout_height="match_parent"
+        android:background="@color/black"
         />
 
-    <ImageView
-        android:id="@+id/close_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:alpha="0"
-        app:layout_constraintBottom_toBottomOf="@id/main_container"
-        app:layout_constraintEnd_toEndOf="@id/main_container"
-        app:layout_constraintTop_toTopOf="@id/main_container"
-        android:src="@drawable/ic_close"
-        />
 
-    <ImageView
-        android:id="@+id/play_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:alpha="0"
-        app:layout_constraintBottom_toBottomOf="@+id/close_imageView"
-        app:layout_constraintEnd_toStartOf="@+id/close_imageView"
-        app:layout_constraintTop_toTopOf="@+id/close_imageView"
-        android:src="@drawable/ic_play"
-        />
-
-    <TextView
-        android:id="@+id/title_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="12dp"
-        android:alpha="0"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="This is very very very very long title"
-        app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
-        app:layout_constraintEnd_toStartOf="@+id/play_imageView"
-        app:layout_constraintStart_toEndOf="@+id/player"
-        app:layout_constraintTop_toTopOf="@+id/play_imageView" />
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</RelativeLayout>

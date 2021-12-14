@@ -20,6 +20,7 @@
          entirety of the parent in code, after the parent's size has been
          determined. See: https://github.com/google/ExoPlayer/issues/8726.
     -->
+
     <View android:id="@id/exo_controls_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -130,6 +131,9 @@
             <ImageButton android:id="@id/exo_settings"
                 style="@style/ExoStyledControls.Button.Bottom.Settings"/>
 
+            <ImageButton android:id="@+id/fullscreen"
+                style="@style/ExoStyledControls.Button.Bottom.FullScreen"/>
+
             <ImageButton android:id="@id/exo_fullscreen"
                 style="@style/ExoStyledControls.Button.Bottom.FullScreen"/>
 
@@ -162,7 +166,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_styled_progress_layout_height"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/exo_styled_progress_margin_bottom"/>
+        android:layout_marginBottom="@dimen/exo_styled_progress_margin_bottom"
+        android:background="@color/exo_bottom_bar_background"
+        />
 
     <LinearLayout android:id="@id/exo_minimal_controls"
         android:layout_width="wrap_content"
