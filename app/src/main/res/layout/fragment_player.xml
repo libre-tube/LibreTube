@@ -24,6 +24,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/linLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -55,12 +56,13 @@
     <xyz.btcland.libretube.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-
+        app:show_buffering="always"
+        android:background="@color/black"
         />
 
     <ImageView
@@ -101,6 +103,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"
         app:layout_constraintStart_toEndOf="@+id/player"
-        app:layout_constraintTop_toTopOf="@+id/play_imageView" />
+        app:layout_constraintTop_toTopOf="@+id/play_imageView"
+        android:visibility="gone"
+        />
 
 </xyz.btcland.libretube.SingleViewTouchableMotionLayout>

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
-import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 
 import com.google.android.exoplayer2.ui.PlayerView
@@ -90,7 +89,6 @@ class PlayerFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             videoId = it.getString("videoId")
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -171,30 +169,44 @@ class PlayerFragment : Fragment() {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
-
         }
         val playImageView = view.findViewById<ImageView>(R.id.play_imageView)
         playImageView.setOnClickListener{
             paused = if(paused){
-                playImageView.setImageResource(R.drawable.ic_play)
+                playImageView.setImageResource(R.drawable.ic_pause)
                 exoPlayer.play()
                 false
             }else {
-                playImageView.setImageResource(R.drawable.ic_pause)
+                playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
                 true
             }
         }
-
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener{
-            exoPlayer.pause()
-            println(exoPlayer.currentPosition)
-            println("---------------------------------------------------------------------------------")
-            val intent = Intent(view.context, Player::class.java)
-            intent.putExtra("videoId", videoId)
-            intent.putExtra("seekTo",exoPlayer.currentPosition.toString())
-            intent.putExtra("quality",whichQuality.toString())
-            startActivity(intent)
+            if (!isFullScreen){
+                view.findViewById<ScrollView>(R.id.scrollView2).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
+                view.findViewById<TextView>(R.id.textTest).visibility = View.GONE
+                view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.GONE
+                with(motionLayout) {
+                    getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+                    enableTransition(R.xml.player_scene,false)
+                }
+                (activity as MainActivity)?.supportActionBar?.hide()
+                isFullScreen=true
+
+            }else{
+                view.findViewById<ScrollView>(R.id.scrollView2).visibility = View.VISIBLE
+                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+                view.findViewById<TextView>(R.id.textTest).visibility = View.VISIBLE
+                view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.VISIBLE
+                with(motionLayout) {
+                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                    enableTransition(R.xml.player_scene,true)
+                }
+                (activity as MainActivity)?.supportActionBar?.show()
+                isFullScreen=false
+            }
 
         }
 
@@ -270,7 +282,7 @@ class PlayerFragment : Fragment() {
                             exoPlayerView.setShowSubtitleButton(true)
                             exoPlayerView.setShowNextButton(false)
                             exoPlayerView.setShowPreviousButton(false)
-                            exoPlayerView.controllerShowTimeoutMs = 1500
+                            //exoPlayerView.controllerShowTimeoutMs = 1500
                             exoPlayerView.controllerHideOnTouch = true
                             exoPlayerView.player = exoPlayer
                             exoPlayer.setMediaItem(mediaItem)
@@ -362,8 +374,6 @@ class PlayerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-
         println("wtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtf")
     }
 }

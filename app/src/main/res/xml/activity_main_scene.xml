@@ -25,7 +25,7 @@
            <KeyAttribute
                motion:motionTarget="@+id/container"
                motion:framePosition="100"
-               android:scaleY="0.86" />
+               android:translationY="-60dp" />
        </KeyFrameSet>
     </Transition>
 
