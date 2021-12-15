@@ -83,7 +83,7 @@ class Home : Fragment() {
 
         fun run() {
             val request = Request.Builder()
-                .url("https://pipedapi.kavin.rocks/trending?region=US")
+                .url("http://piped-api.alefvanoon.xyz/trending?region=US")
                 .build()
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {

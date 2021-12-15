@@ -135,11 +135,13 @@ class PlayerFragment : Fragment() {
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility =View.GONE
                     view.findViewById<TextView>(R.id.quality_text).visibility =View.GONE
                     mainMotionLayout.progress = 1.toFloat()
+                    mainActivity.supportActionBar?.show()
                 }else if(currentId==sId){
                     view.findViewById<ImageButton>(R.id.quality_select).visibility =View.VISIBLE
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility =View.VISIBLE
                     view.findViewById<TextView>(R.id.quality_text).visibility =View.VISIBLE
                     mainMotionLayout.progress = 0.toFloat()
+                    mainActivity.supportActionBar?.hide()
                 }
 
             }
@@ -183,28 +185,27 @@ class PlayerFragment : Fragment() {
             }
         }
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener{
+            //remember to hide everything when new shit added
             if (!isFullScreen){
                 view.findViewById<ScrollView>(R.id.scrollView2).visibility = View.GONE
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
                 view.findViewById<TextView>(R.id.textTest).visibility = View.GONE
-                view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.GONE
+                //view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.GONE
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                    enableTransition(R.xml.player_scene,false)
+                    //getTransition(R.id.yt_transition).isEnabled = false
                 }
-                (activity as MainActivity)?.supportActionBar?.hide()
                 isFullScreen=true
 
             }else{
                 view.findViewById<ScrollView>(R.id.scrollView2).visibility = View.VISIBLE
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
                 view.findViewById<TextView>(R.id.textTest).visibility = View.VISIBLE
-                view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.VISIBLE
+                //view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.VISIBLE
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.xml.player_scene,true)
+                    //getTransition(R.id.yt_transition).isEnabled = true
                 }
-                (activity as MainActivity)?.supportActionBar?.show()
                 isFullScreen=false
             }
 
@@ -247,7 +248,7 @@ class PlayerFragment : Fragment() {
 
         fun run() {
             val request = Request.Builder()
-                .url("https://pipedapi.kavin.rocks/streams/$videoId")
+                .url("http://piped-api.alefvanoon.xyz/streams/$videoId")
                 .build()
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
