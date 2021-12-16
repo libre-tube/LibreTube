@@ -1,1 +1,1 @@
-# #LibreTube
+# LibreTube
