@@ -52,6 +52,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.PrecomputedTextCompat
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.Player.STATE_IDLE
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.util.RepeatModeUtil
 
@@ -81,7 +83,7 @@ class PlayerFragment : Fragment() {
     private var whichQuality = 0
 
     private lateinit var exoPlayerView: StyledPlayerView
-    private lateinit var motionLayout: SingleViewTouchableMotionLayout
+    private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
@@ -104,7 +106,7 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mainActivity = activity as MainActivity
         mainActivity.findViewById<FrameLayout>(R.id.container).visibility=View.VISIBLE
-        val playerMotionLayout = view.findViewById<SingleViewTouchableMotionLayout>(R.id.playerMotionLayout)
+        val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
         motionLayout = playerMotionLayout
         exoPlayerView = view.findViewById(R.id.player)
         view.findViewById<TextView>(R.id.textTest).text = videoId
@@ -242,7 +244,6 @@ class PlayerFragment : Fragment() {
             }
     }
 
-
     private fun fetchJson(view: View) {
         val client = OkHttpClient()
 
@@ -344,6 +345,22 @@ class PlayerFragment : Fragment() {
                                 val dialog: AlertDialog? = builder?.create()
                                 dialog?.show()
                             }
+                            exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
+                                override fun onPlayerStateChanged(playWhenReady: Boolean,playbackState: Int) {
+                                    if (playWhenReady && playbackState == Player.STATE_READY) {
+                                        // media actually playing
+                                        view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_pause)
+                                    } else if (playWhenReady) {
+                                        // might be idle (plays after prepare()),
+                                        // buffering (plays when data available)
+                                        // or ended (plays when seek away from end)
+                                        view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_play)
+                                    } else {
+                                        // player paused in any state
+                                        view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_play)
+                                    }
+                                }
+                            })
                         }
                     }
 
@@ -375,6 +392,5 @@ class PlayerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        println("wtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtfwtf")
     }
 }
