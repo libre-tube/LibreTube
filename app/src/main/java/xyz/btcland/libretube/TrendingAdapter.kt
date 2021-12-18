@@ -10,10 +10,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import xyz.btcland.libretube.obj.StreamItem
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class TrendingAdapter(private val videoFeed: List<Video>): RecyclerView.Adapter<CustomViewHolder>() {
+class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
@@ -40,7 +41,7 @@ class TrendingAdapter(private val videoFeed: List<Video>): RecyclerView.Adapter<
             //intent.putExtra("videoId",trending.url.replace("/watch?v=",""))
             //holder.v.context.startActivity(intent)
             var bundle = Bundle()
-            bundle.putString("videoId",trending.url.replace("/watch?v=",""))
+            bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = holder.v.context as AppCompatActivity
@@ -57,9 +58,9 @@ class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v){
     init {
     }
 }
-fun videoViews(views: Int): String{
+fun videoViews(views: Long?): String{
     when {
-        views<1000 -> {
+        views!!<1000 -> {
             return views.toString()
         }
         views in 1000..999999 -> {

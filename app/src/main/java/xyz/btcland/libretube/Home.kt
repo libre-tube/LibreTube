@@ -1,24 +1,27 @@
 package xyz.btcland.libretube
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
+
 import okhttp3.*
+import retrofit2.HttpException
 import java.io.IOException
+import java.lang.Exception
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+const val TAG = "HomeFragment"
 /**
  * A simple [Fragment] subclass.
  * Use the [Home.newInstance] factory method to
@@ -79,10 +82,10 @@ class Home : Fragment() {
     }
 
    private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
-        val client = OkHttpClient()
+        //val client = OkHttpClient()
 
         fun run() {
-            val request = Request.Builder()
+/*            val request = Request.Builder()
                 .url("http://piped-api.alefvanoon.xyz/trending?region=US")
                 .build()
             client.newCall(request).enqueue(object : Callback {
@@ -102,10 +105,24 @@ class Home : Fragment() {
                             recyclerView.adapter = TrendingAdapter(trendingList)
                         }
                     }
-
-
                 }
-            })
+            })*/
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.getTrending("US")
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launchWhenCreated
+                }
+                runOnUiThread {
+                    progressBar.visibility = View.GONE
+                    recyclerView.adapter = TrendingAdapter(response)
+                }
+            }
         }
        run()
 

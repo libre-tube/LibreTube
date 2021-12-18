@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId 'xyz.btcland.libretube'
-        minSdk 19
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName '1.0'
@@ -39,14 +39,16 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
-    implementation 'com.google.code.gson:gson:2.8.9'
+
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
 
 }
