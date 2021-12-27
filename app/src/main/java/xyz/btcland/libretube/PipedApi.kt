@@ -12,4 +12,13 @@ interface PipedApi {
 
     @GET("streams/{videoId}")
     suspend fun getStreams(@Path("videoId") videoId: String): Streams
+
+    @GET("search")
+    suspend fun getSearchResults(
+        @Query("q") searchQuery: String,
+        @Query("filter") filer: String
+    ): List<StreamItem>
+
+    @GET("suggestions")
+    suspend fun getSuggestions(@Query("query") query: String): List<String>
 }

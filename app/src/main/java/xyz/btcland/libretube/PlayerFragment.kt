@@ -230,6 +230,7 @@ class PlayerFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         try {
+            (activity as MainActivity).supportActionBar?.show()
             exoPlayer.stop()
         }catch (e: Exception){}
 
@@ -256,135 +257,7 @@ class PlayerFragment : Fragment() {
     }
 
     private fun fetchJson(view: View) {
-        //val client = OkHttpClient()
-
         fun run() {
-/*            val request = Request.Builder()
-                .url("http://piped-api.alefvanoon.xyz/streams/$videoId")
-                .build()
-*//*            val retrofit = Retrofit.Builder()
-                .baseUrl("http://piped-api.alefvanoon.xyz/")
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build()
-
-            val videoInPlayer2 = retrofit.create(vidVid::class.java).vidIn(videoId)*//*
-
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                }
-                override fun onResponse(call: Call, response: Response) {
-                    response.use {
-                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                        val body = response.body!!.string()
-                        println(body)
-                        val gson = GsonBuilder().create()
-                        val videoInPlayer = gson.fromJson(body, VideoInPlayer::class.java)
-                        var videosNameArray: Array<CharSequence> = arrayOf()
-                        videosNameArray += "HLS"
-                        for (vid in videoInPlayer.videoStreams){
-                            val name = vid.quality +" "+ vid.format
-                            videosNameArray += name
-                        }
-                        runOnUiThread {
-                            var subtitle = mutableListOf<SubtitleConfiguration>()
-                            if(videoInPlayer.subtitles.isNotEmpty()){
-                            subtitle?.add(SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
-                                .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
-                                .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
-                                .build())}
-                            val mediaItem: MediaItem = MediaItem.Builder()
-                                .setUri(videoInPlayer.hls)
-                                .setSubtitleConfigurations(subtitle)
-                                .build()
-                            exoPlayer = ExoPlayer.Builder(view.context)
-                                .build()
-                            exoPlayerView.setShowSubtitleButton(true)
-                            exoPlayerView.setShowNextButton(false)
-                            exoPlayerView.setShowPreviousButton(false)
-                            //exoPlayerView.controllerShowTimeoutMs = 1500
-                            exoPlayerView.controllerHideOnTouch = true
-                            exoPlayerView.player = exoPlayer
-                            exoPlayer.setMediaItem(mediaItem)
-                            ///exoPlayer.getMediaItemAt(5)
-                            exoPlayer.prepare()
-                            exoPlayer.play()
-
-                            view.findViewById<TextView>(R.id.title_textView).text = videoInPlayer.title
-
-                            view.findViewById<ImageButton>(R.id.quality_select).setOnClickListener{
-                                //Dialog for quality selection
-                                val builder: AlertDialog.Builder? = activity?.let {
-                                    AlertDialog.Builder(it)
-                                }
-                                builder!!.setTitle(R.string.choose_quality_dialog)
-                                    .setItems(videosNameArray,
-                                        DialogInterface.OnClickListener { _, which ->
-                                            whichQuality = which
-                                            if(videoInPlayer.subtitles.isNotEmpty()) {
-                                                var subtitle =
-                                                    mutableListOf<SubtitleConfiguration>()
-                                                subtitle?.add(
-                                                    SubtitleConfiguration.Builder(videoInPlayer.subtitles[0].url.toUri())
-                                                        .setMimeType(videoInPlayer.subtitles[0].mimeType) // The correct MIME type (required).
-                                                        .setLanguage(videoInPlayer.subtitles[0].code) // The subtitle language (optional).
-                                                        .build()
-                                                )
-                                            }
-                                            if(which==0){
-                                                val mediaItem: MediaItem = MediaItem.Builder()
-                                                    .setUri(videoInPlayer.hls)
-                                                    .setSubtitleConfigurations(subtitle)
-                                                    .build()
-                                                exoPlayer.setMediaItem(mediaItem)
-                                            }else{
-                                                val dataSourceFactory: DataSource.Factory =
-                                                    DefaultHttpDataSource.Factory()
-                                                val videoItem: MediaItem = MediaItem.Builder()
-                                                    .setUri(videoInPlayer.videoStreams[which-1].url)
-                                                    .setSubtitleConfigurations(subtitle)
-                                                    .build()
-                                                val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                                    .createMediaSource(videoItem)
-                                                var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                                    .createMediaSource(fromUri(videoInPlayer.audioStreams[0].url))
-                                                if (videoInPlayer.videoStreams[which-1].quality=="720p" || videoInPlayer.videoStreams[which-1].quality=="1080p" || videoInPlayer.videoStreams[which-1].quality=="480p" ){
-                                                    audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                                        .createMediaSource(fromUri(videoInPlayer.audioStreams[getMostBitRate(videoInPlayer.audioStreams)].url))
-                                                    //println("fuckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkitttttttttttttttttttttt")
-                                                }
-                                                val mergeSource: MediaSource = MergingMediaSource(videoSource,audioSource)
-                                                exoPlayer.setMediaSource(mergeSource)
-                                            }
-                                            view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[which]
-                                        })
-                                val dialog: AlertDialog? = builder?.create()
-                                dialog?.show()
-                            }
-                            //Listener for play and pause icon change
-                            exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
-                                override fun onPlayerStateChanged(playWhenReady: Boolean,playbackState: Int) {
-                                    if (playWhenReady && playbackState == Player.STATE_READY) {
-                                        // media actually playing
-                                        view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_pause)
-                                    } else if (playWhenReady) {
-                                        // might be idle (plays after prepare()),
-                                        // buffering (plays when data available)
-                                        // or ended (plays when seek away from end)
-                                        view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_play)
-                                    } else {
-                                        // player paused in any state
-                                        view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_play)
-                                    }
-                                }
-                            })
-                        }
-                    }
-
-
-                }
-            })*/
-
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getStreams(videoId!!)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:id="@+id/action_search"
+        app:showAsAction="always"
+        />
+    <item android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        android:id="@+id/action_settings"
+        app:showAsAction="ifRoom"
+        />
+</menu>
