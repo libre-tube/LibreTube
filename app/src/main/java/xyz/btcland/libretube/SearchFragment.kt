@@ -11,6 +11,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -61,11 +64,13 @@ class SearchFragment : Fragment() {
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(s!! != ""){
-                        println(s.toString())
-                        fetchSuggestions(s.toString(), autoTextView)
+                        GlobalScope.launch {
+                            fetchSuggestions(s.toString(), autoTextView)
+                            delay(2000)
+                            fetchSearch(s.toString())
+                        }
                     }
-
-                    }
+                }
 
                 override fun afterTextChanged(s: Editable?) {
 
@@ -94,7 +99,21 @@ class SearchFragment : Fragment() {
             autoTextView.setAdapter(adapter)
         }
     }
-
+    private fun fetchSearch(query: String){
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.api.getSearchResults(query, "all")
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG, "IOException, you might not have internet connection")
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                return@launchWhenCreated
+            }
+            print(response!!.items!![0])
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

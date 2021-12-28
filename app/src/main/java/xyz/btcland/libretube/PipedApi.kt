@@ -5,6 +5,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import xyz.btcland.libretube.obj.StreamItem
 import xyz.btcland.libretube.obj.Streams
+import xyz.btcland.libretube.obj.SearchResult
 
 interface PipedApi {
     @GET("trending")
@@ -16,8 +17,8 @@ interface PipedApi {
     @GET("search")
     suspend fun getSearchResults(
         @Query("q") searchQuery: String,
-        @Query("filter") filer: String
-    ): List<StreamItem>
+        @Query("filter") filter: String
+    ): SearchResult
 
     @GET("suggestions")
     suspend fun getSuggestions(@Query("query") query: String): List<String>
