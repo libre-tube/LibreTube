@@ -64,7 +64,7 @@ class SearchFragment : Fragment() {
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(s!! != ""){
-                        GlobalScope.launch {
+                        lifecycleScope.launchWhenCreated {
                             fetchSuggestions(s.toString(), autoTextView)
                             delay(2000)
                             fetchSearch(s.toString())
@@ -111,7 +111,9 @@ class SearchFragment : Fragment() {
                 Log.e(TAG, "HttpException, unexpected response")
                 return@launchWhenCreated
             }
-            print(response!!.items!![0])
+            if(response.items!!.isNotEmpty()){
+                print(response!!.items!![0])
+            }
         }
     }
     companion object {
