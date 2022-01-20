@@ -1,4 +1,4 @@
-package xyz.btcland.libretube
+package xyz.btcland.libretube.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import xyz.btcland.libretube.PlayerFragment
+import xyz.btcland.libretube.R
 import xyz.btcland.libretube.obj.StreamItem
+import xyz.btcland.libretube.videoViews
 
 class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
@@ -30,13 +33,11 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
         channelImage.setOnClickListener{
             println("channel clicked")
+            //TODO
         }
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)
         holder.v.setOnClickListener{
-            //val intent = Intent(holder.v.context, Player::class.java)
-            //intent.putExtra("videoId",trending.url.replace("/watch?v=",""))
-            //holder.v.context.startActivity(intent)
             var bundle = Bundle()
             bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))
             var frag = PlayerFragment()

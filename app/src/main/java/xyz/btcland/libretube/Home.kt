@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import okhttp3.*
 import retrofit2.HttpException
+import xyz.btcland.libretube.adapters.TrendingAdapter
 import java.io.IOException
-import java.lang.Exception
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,7 +54,6 @@ class Home : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView =  view.findViewById<RecyclerView>(R.id.recview)
         recyclerView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
-
         val progressbar = view.findViewById<ProgressBar>(R.id.progressBar)
         fetchJson(progressbar,recyclerView)
 
@@ -82,31 +81,7 @@ class Home : Fragment() {
     }
 
    private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
-        //val client = OkHttpClient()
-
         fun run() {
-/*            val request = Request.Builder()
-                .url("http://piped-api.alefvanoon.xyz/trending?region=US")
-                .build()
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                }
-                override fun onResponse(call: Call, response: Response) {
-                    response.use {
-                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                        val body = response.body!!.string()
-                        println(body)
-                        val gson = GsonBuilder().create()
-                        val itemType = object : TypeToken<List<Video>>() {}.type
-                        val trendingList = gson.fromJson<List<Video>>(body, itemType)
-                        runOnUiThread {
-                            progressBar.visibility = View.GONE
-                            recyclerView.adapter = TrendingAdapter(trendingList)
-                        }
-                    }
-                }
-            })*/
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getTrending("US")
@@ -127,7 +102,7 @@ class Home : Fragment() {
        run()
 
     }
-    fun Fragment?.runOnUiThread(action: () -> Unit) {
+    private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)

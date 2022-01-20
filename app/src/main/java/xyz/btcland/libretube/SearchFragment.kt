@@ -11,10 +11,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import xyz.btcland.libretube.adapters.SearchAdapter
 import java.io.IOException
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,6 +54,8 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
+        recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
             autoTextView.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -64,10 +69,10 @@ class SearchFragment : Fragment() {
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if(s!! != ""){
-                        lifecycleScope.launchWhenCreated {
+                        GlobalScope.launch {
                             fetchSuggestions(s.toString(), autoTextView)
                             delay(2000)
-                            fetchSearch(s.toString())
+                            fetchSearch(s.toString(),recyclerView)
                         }
                     }
                 }
@@ -77,10 +82,6 @@ class SearchFragment : Fragment() {
                 }
 
             })
-
-
-
-
     }
 
     private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView){
@@ -99,7 +100,7 @@ class SearchFragment : Fragment() {
             autoTextView.setAdapter(adapter)
         }
     }
-    private fun fetchSearch(query: String){
+    private fun fetchSearch(query: String, recyclerView: RecyclerView){
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, "all")
@@ -112,8 +113,11 @@ class SearchFragment : Fragment() {
                 return@launchWhenCreated
             }
             if(response.items!!.isNotEmpty()){
-                print(response!!.items!![0])
+               runOnUiThread {
+                   recyclerView.adapter = SearchAdapter(response.items)
+               }
             }
+
         }
     }
     companion object {
