@@ -46,11 +46,14 @@ import android.widget.TextView
 import android.graphics.drawable.Drawable
 import com.google.android.exoplayer2.util.Util
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
+import android.text.Html
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.PrecomputedTextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.exoplayer2.Player
@@ -60,6 +63,7 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 
 import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.ui.TimeBar.OnScrubListener
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -68,6 +72,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import xyz.btcland.libretube.adapters.TrendingAdapter
 import xyz.btcland.libretube.obj.PipedStream
 
 
@@ -92,6 +97,7 @@ class PlayerFragment : Fragment() {
     private var isFullScreen = false
     private var whichQuality = 0
 
+    private lateinit var relatedRecView: RecyclerView
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
@@ -119,7 +125,7 @@ class PlayerFragment : Fragment() {
         val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
         motionLayout = playerMotionLayout
         exoPlayerView = view.findViewById(R.id.player)
-        view.findViewById<TextView>(R.id.textTest).text = videoId
+        view.findViewById<TextView>(R.id.player_description).text = videoId
         playerMotionLayout.addTransitionListener(object: MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
@@ -147,13 +153,11 @@ class PlayerFragment : Fragment() {
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility =View.GONE
                     view.findViewById<TextView>(R.id.quality_text).visibility =View.GONE
                     mainMotionLayout.progress = 1.toFloat()
-                    mainActivity.supportActionBar?.show()
                 }else if(currentId==sId){
                     view.findViewById<ImageButton>(R.id.quality_select).visibility =View.VISIBLE
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility =View.VISIBLE
                     view.findViewById<TextView>(R.id.quality_text).visibility =View.VISIBLE
                     mainMotionLayout.progress = 0.toFloat()
-                    mainActivity.supportActionBar?.hide()
                 }
 
             }
@@ -223,6 +227,9 @@ class PlayerFragment : Fragment() {
             }
 
         }
+        relatedRecView = view.findViewById(R.id.player_recView)
+        relatedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+
 
     }
 
@@ -230,7 +237,6 @@ class PlayerFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         try {
-            (activity as MainActivity).supportActionBar?.show()
             exoPlayer.stop()
         }catch (e: Exception){}
 
@@ -366,6 +372,17 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     })
+                    relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
+                    view.findViewById<TextView>(R.id.player_description).text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
+                    } else {
+                        Html.fromHtml(response.description)
+                    }
+                    view.findViewById<TextView>(R.id.player_sub).text = response.views.videoViews() + " views • "+response.uploadDate
+                    view.findViewById<TextView>(R.id.textLike).text = response.likes.videoViews()
+                    val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
+                    Picasso.get().load(response.uploaderAvatar).into(channelImage)
+                    view.findViewById<TextView>(R.id.player_channelName).text=response.uploader
                 }
             }
 

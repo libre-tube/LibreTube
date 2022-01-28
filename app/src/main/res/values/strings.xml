@@ -5,4 +5,7 @@
     <string name="choose_quality_dialog">Choose Quality:</string>
     <string name="search_hint">Search</string>
     <string name="subscribe">SUBSCRIBE</string>
+    <string name="share">Share</string>
+    <string name="download">Download</string>
+    <string name="save">Save</string>
 </resources>

@@ -32,12 +32,169 @@
             >
 
             <TextView
-                android:id="@+id/textTest"
+                android:id="@+id/player_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 />
+            <TextView
+                android:id="@+id/player_sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                >
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/player_like"
+                        android:src="@drawable/ic_like"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="16dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1K"
+                        android:id="@+id/textLike"
+                        android:layout_below="@id/player_like"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/player_share"
+                        android:src="@drawable/ic_share"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="16dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/textShare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/player_share"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/share" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/player_download"
+                        android:src="@drawable/ic_download"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="16dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/download"
+                        android:id="@+id/textDownload"
+                        android:layout_below="@id/player_download"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/player_save"
+                        android:src="@drawable/ic_save"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="16dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/save"
+                        android:id="@+id/textSave"
+                        android:layout_below="@id/player_save"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/player_channelImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    />
+
+                <TextView
+                    android:id="@+id/player_channelName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/player_channelImage"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+
+                    />
+
+
+                <Button
+                    android:id="@+id/player_subscribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="#00000000"
+                    android:text="SUBSCRIBE"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/player_recView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
