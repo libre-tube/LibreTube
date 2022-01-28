@@ -37,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:paddingRight="8dp"
                 android:paddingLeft="8dp"
                 />
@@ -62,13 +63,12 @@
                     >
 
                     <ImageView
+                        android:id="@+id/player_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/player_like"
-                        android:src="@drawable/ic_like"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="16dp"
-                        />
+                        android:src="@drawable/ic_like" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -208,17 +208,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <xyz.btcland.libretube.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/black"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-        app:show_buffering="always"
-        android:background="@color/black"
-        />
+        app:show_buffering="always" />
 
     <ImageView
         android:id="@+id/close_imageView"

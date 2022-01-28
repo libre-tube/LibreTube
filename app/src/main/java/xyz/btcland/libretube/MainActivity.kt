@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.exoplayer2.ExoPlayer
@@ -28,37 +29,38 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
 
+/*        bottomNavigationView.setOnItemSelectedListener {
+            println("fuckoff")
+            onNavDestinationSelected(it,navController)
+        }*/
+
+
+
         toolbar = findViewById(R.id.toolbar)
+
         toolbar.setOnMenuItemClickListener{
             when (it.itemId){
                 R.id.action_search -> {
                     val navController = findNavController(R.id.fragment)
                     navController.popBackStack()
                     navController.navigate(R.id.searchFragment)
-                    //bottomNavigationView.clearFocus()
-                    //val navController = findNavController(R.id.fragment)
-                    //navController.navigate(R.id.searchFragment)
-                    //navController.navigate(R.id.home2)
                     true
                 }
                 R.id.action_settings -> {
-
                     true
                 }
             }
             false
         }
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return true
-    }
+
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val orientation = newConfig.orientation
-        if (orientation == Configuration.ORIENTATION_PORTRAIT)
-        {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             println("Portrait")
             //findViewById<MotionLayout>(R.id.playerMotionLayout).getTransition(R.id.yt_transition).isEnabled = true
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
