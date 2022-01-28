@@ -20,6 +20,7 @@ import com.google.android.exoplayer2.ExoPlayer
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
+    var f = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                     val navController = findNavController(R.id.fragment)
                     navController.popBackStack()
                     navController.navigate(R.id.searchFragment)
+                    f = true
                     true
                 }
                 R.id.action_settings -> {
@@ -55,7 +57,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    override fun onBackPressed() {
+        if (f){
+            val navController = findNavController(R.id.fragment)
+            navController.popBackStack()
+            navController.navigate(R.id.home2)
+            f = false
+        }else {super.onBackPressed()}
+    }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
