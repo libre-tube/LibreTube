@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.LibreTube" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorPrimary">#cc322d</item>
+        <item name="colorPrimaryDark">#BA2E2A</item>
+        <item name="colorAccent">#2F3133</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
