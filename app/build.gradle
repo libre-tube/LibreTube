@@ -7,7 +7,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId 'xyz.btcland.libretube'
+        applicationId 'com.github.libretube'
         minSdk 21
         targetSdk 31
         versionCode 1

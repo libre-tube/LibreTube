@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="xyz.btcland.libretube.Home"
+        android:name="com.github.libretube.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/subscriptions"
-        android:name="xyz.btcland.libretube.Subscriptions"
+        android:name="com.github.libretube.Subscriptions"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" >
         <action
@@ -27,13 +27,13 @@
     </fragment>
     <fragment
         android:id="@+id/library"
-        android:name="xyz.btcland.libretube.Library"
+        android:name="com.github.libretube.Library"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" >
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="xyz.btcland.libretube.SearchFragment"
+        android:name="com.github.libretube.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 </navigation>

@@ -8,7 +8,7 @@
     android:background="@color/black"
     >
 
-    <xyz.btcland.libretube.CustomExoPlayerView
+    <com.github.libretube.CustomExoPlayerView
         android:id="@+id/fullscreen_player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

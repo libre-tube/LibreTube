@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xyz.btcland.libretube.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.libretube.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -209,7 +209,7 @@
         app:layout_constraintTop_toTopOf="parent">
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <xyz.btcland.libretube.CustomExoPlayerView
+    <com.github.libretube.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -262,4 +262,4 @@
         android:visibility="gone"
         />
 
-</xyz.btcland.libretube.SingleViewTouchableMotionLayout>
+</com.github.libretube.SingleViewTouchableMotionLayout>
