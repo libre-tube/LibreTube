@@ -15,8 +15,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".5"/>
-    <ImageView
-        android:id="@+id/search_thumbnail"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_search_thumbnail"
+        app:cardCornerRadius="20dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,8 +26,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline">
+
+    <ImageView
+        android:id="@+id/search_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/search_description"
@@ -34,9 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="TextView"
-        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search_thumbnail"
+        app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -46,7 +52,7 @@
         android:layout_marginStart="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search_thumbnail"
+        app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/search_description" />
 
     <de.hdodenhof.circleimageview.CircleImageView

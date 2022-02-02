@@ -5,12 +5,16 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/drawable/ic_libretube_foreground.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/drawable/ic_like.xml" value="0.329" />
         <entry key="app/src/main/res/drawable/ic_play.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.329" />
         <entry key="app/src/main/res/drawable/ic_search2.xml" value="0.17135416666666667" />
+        <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.186" />
+        <entry key="app/src/main/res/drawable/ic_share.xml" value="0.329" />
         <entry key="app/src/main/res/drawable/libretube.xml" value="0.17135416666666667" />
         <entry key="app/src/main/res/layout-land/fragment_player.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17" />
-        <entry key="app/src/main/res/layout/activity_player.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_player.xml" value="0.27685185185185185" />
         <entry key="app/src/main/res/layout/channel_search_row.xml" value="0.33" />
         <entry key="app/src/main/res/layout/exo_styled_player_control_view.xml" value="0.12" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16" />
