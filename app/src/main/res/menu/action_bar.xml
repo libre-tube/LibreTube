@@ -7,9 +7,5 @@
         android:id="@+id/action_search"
         app:showAsAction="always"
         />
-    <item android:title="Settings"
-        android:icon="@drawable/ic_settings"
-        android:id="@+id/action_settings"
-        app:showAsAction="ifRoom"
-        />
+
 </menu>

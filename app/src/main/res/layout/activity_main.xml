@@ -8,23 +8,22 @@
     tools:context=".MainActivity"
     android:id="@+id/mainMotionLayout"
     >
-
-    <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:layout_height="?attr/actionBarSize"
         app:menu="@menu/action_bar"
+        app:titleCentered="true"
+        app:subtitleCentered="true"
         app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_settings"
+
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

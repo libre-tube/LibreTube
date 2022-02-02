@@ -22,7 +22,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
-        android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
@@ -44,9 +43,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:background="#00FFFFFF"
+        android:background="@android:color/transparent"
         android:text="@string/subscribe"
-        android:textColor="#DC1212"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
         app:layout_constraintTop_toBottomOf="@+id/search_views" />
 

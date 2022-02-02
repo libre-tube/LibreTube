@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.content.res.Configuration
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,6 +19,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.material.color.DynamicColors
 
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
@@ -24,7 +27,9 @@ class MainActivity : AppCompatActivity() {
     var f = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
+
+        DynamicColors.applyToActivitiesIfAvailable(application)
+
 
         setContentView(R.layout.activity_main)
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
@@ -39,6 +44,16 @@ class MainActivity : AppCompatActivity() {
 
 
         toolbar = findViewById(R.id.toolbar)
+        val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
+        val appName = HtmlCompat.fromHtml(
+            "Libre<span  style='color:$hexColor';>Tube</span>",
+            HtmlCompat.FROM_HTML_MODE_COMPACT
+        )
+        toolbar.setTitle(appName)
+
+        toolbar.setNavigationOnClickListener{
+            true
+        }
 
         toolbar.setOnMenuItemClickListener{
             when (it.itemId){
@@ -47,9 +62,6 @@ class MainActivity : AppCompatActivity() {
                     navController.popBackStack()
                     navController.navigate(R.id.searchFragment)
                     f = true
-                    true
-                }
-                R.id.action_settings -> {
                     true
                 }
             }
