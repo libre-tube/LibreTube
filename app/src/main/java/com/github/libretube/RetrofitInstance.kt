@@ -6,7 +6,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 object RetrofitInstance {
     val api: PipedApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://pipedapi.tokhmi.xyz/")
+            .baseUrl("https://pipedapi.kavin.rocks/")
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
             .create(PipedApi::class.java)

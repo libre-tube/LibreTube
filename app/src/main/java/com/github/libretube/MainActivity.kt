@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.color.DynamicColors
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
@@ -72,15 +73,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
-        if (mainMotionLayout.progress == 0.toFloat()){
-            mainMotionLayout.transitionToEnd()
-            findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
-        }else{
-        navController.popBackStack()
-        if (navController.currentBackStackEntry == null){
-            finish()
-        }}
+        try{
+            val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
+            if (mainMotionLayout.progress == 0.toFloat()){
+                mainMotionLayout.transitionToEnd()
+                findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+            }else{
+                navController.popBackStack()
+                if (navController.currentBackStackEntry == null){
+                    finish()
+                }}
+        }catch (e: Exception){
+            navController.popBackStack()
+            if (navController.currentBackStackEntry == null){
+                finish()
+            }
+        }
+
 
     }
 
