@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
 
         setContentView(R.layout.activity_main)
-        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNavigationView = findViewById(R.id.bottomNav)
 
 
         navController = findNavController(R.id.fragment)
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             "Libre<span  style='color:$hexColor';>Tube</span>",
             HtmlCompat.FROM_HTML_MODE_COMPACT
         )
-        toolbar.setTitle(appName)
+        toolbar.title= appName
 
         toolbar.setNavigationOnClickListener{
             //settings fragment stuff
@@ -72,11 +72,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
+        val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
+        if (mainMotionLayout.progress == 0.toFloat()){
+            mainMotionLayout.transitionToEnd()
+            findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+        }else{
         navController.popBackStack()
         if (navController.currentBackStackEntry == null){
             finish()
-        }
+        }}
 
     }
 
