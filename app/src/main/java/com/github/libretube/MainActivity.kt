@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
@@ -24,6 +26,8 @@ import com.google.android.material.color.DynamicColors
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
+    lateinit var navController : NavController
+
     var f = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
-        val navController = findNavController(R.id.fragment)
+
+
+        navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
 
-/*        bottomNavigationView.setOnItemSelectedListener {
-            println("fuckoff")
-            onNavDestinationSelected(it,navController)
-        }*/
+
 
 
 
@@ -52,16 +55,14 @@ class MainActivity : AppCompatActivity() {
         toolbar.setTitle(appName)
 
         toolbar.setNavigationOnClickListener{
+            //settings fragment stuff
             true
         }
 
         toolbar.setOnMenuItemClickListener{
             when (it.itemId){
                 R.id.action_search -> {
-                    val navController = findNavController(R.id.fragment)
-                    navController.popBackStack()
                     navController.navigate(R.id.searchFragment)
-                    f = true
                     true
                 }
             }
@@ -71,12 +72,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (f){
-            val navController = findNavController(R.id.fragment)
-            navController.popBackStack()
-            navController.navigate(R.id.home2)
-            f = false
-        }else {super.onBackPressed()}
+
+        navController.popBackStack()
+        if (navController.currentBackStackEntry == null){
+            finish()
+        }
+
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
