@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/libretube.svg" width="150" height="150" alt="LibreTube">
+  <img src="https://avatars.githubusercontent.com/u/96022078?s=200&v=4" width="150" height="150" alt="LibreTube">
   <h1>LibreTube</h1>
   <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
 
