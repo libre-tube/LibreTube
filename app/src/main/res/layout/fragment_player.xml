@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="Description"
+                android:text=""
                 android:textSize="15sp"
                 android:layout_margin="7dp"
                 android:textStyle="bold" />
@@ -52,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="4">
+                android:weightSum="4"
+                android:baselineAligned="false">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -65,7 +66,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_like" />
+                        android:src="@drawable/ic_like"
+                        android:contentDescription="like"/>
 
                     <TextView
                         android:id="@+id/textLike"
@@ -155,25 +157,23 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="4dp" />
+                    android:layout_marginEnd="4dp" />
 
                 <TextView
                     android:id="@+id/player_channelName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/player_channelImage"
+                    android:layout_toEndOf="@+id/player_channelImage"
                     android:text=""
-                    android:textStyle="bold"
-
-                    />
+                    android:textStyle="bold" />
 
 
                 <Button
                     android:id="@+id/player_subscribe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@android:color/transparent"
                     android:text="SUBSCRIBE"
