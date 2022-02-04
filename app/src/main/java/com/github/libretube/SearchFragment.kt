@@ -32,6 +32,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class SearchFragment : Fragment() {
     // TODO: Rename and change types of parameters
+    private val TAG = "SearchFragment"
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -96,7 +98,7 @@ class SearchFragment : Fragment() {
                 Log.e(TAG, "HttpException, unexpected response")
                 return@launchWhenCreated
             }
-            val adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, response)
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response)
             autoTextView.setAdapter(adapter)
         }
     }

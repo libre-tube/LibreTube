@@ -17,7 +17,7 @@
         app:layout_constraintGuide_percent=".5"/>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_search_thumbnail"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="8dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -10,7 +10,9 @@ import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.MainActivity
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
@@ -83,6 +85,11 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
         channelViews.text = item.subscribers.videoViews() + "subscribers • "+ item.videos + " videos"
+        v.setOnClickListener {
+            val activity = v.context as MainActivity
+            val bundle = bundleOf("channel_id" to item.url)
+            activity.navController.navigate(R.id.channel,bundle)
+        }
         //todo sub button
     }
     private fun bindPlaylist(item: SearchItem) {

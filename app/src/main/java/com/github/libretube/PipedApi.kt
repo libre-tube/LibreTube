@@ -1,5 +1,6 @@
 package com.github.libretube
 
+import com.github.libretube.obj.Channel
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -22,4 +23,7 @@ interface PipedApi {
 
     @GET("suggestions")
     suspend fun getSuggestions(@Query("query") query: String): List<String>
+
+    @GET("channel/{channelId}")
+    suspend fun getChannel(@Path("channelId") channelId: String): Channel
 }

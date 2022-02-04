@@ -51,6 +51,7 @@ import android.text.Html
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.core.text.PrecomputedTextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -88,6 +89,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class PlayerFragment : Fragment() {
     // TODO: Rename and change types of parameters
+    private val TAG = "PlayerFragment"
     private var videoId: String? = null
     private var param2: String? = null
     private var lastProgress: Float = 0.toFloat()
@@ -267,7 +269,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getStreams(videoId!!)
-                }catch(e: IOException) {
+                } catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -383,6 +385,14 @@ class PlayerFragment : Fragment() {
                     val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
                     Picasso.get().load(response.uploaderAvatar).into(channelImage)
                     view.findViewById<TextView>(R.id.player_channelName).text=response.uploader
+                    view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
+
+                        val activity = view.context as MainActivity
+                        val bundle = bundleOf("channel_id" to response.uploaderUrl)
+                        activity.navController.navigate(R.id.channel,bundle)
+                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
+                        view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+                    }
                 }
             }
 

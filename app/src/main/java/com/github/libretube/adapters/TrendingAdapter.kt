@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.MainActivity
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
@@ -32,8 +34,9 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
         channelImage.setOnClickListener{
-            println("channel clicked")
-            //TODO
+            val activity = holder.v.context as MainActivity
+            val bundle = bundleOf("channel_id" to trending.uploaderUrl)
+            activity.navController.navigate(R.id.channel, bundle)
         }
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)
