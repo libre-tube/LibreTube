@@ -16,9 +16,14 @@ import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.videoViews
 
-class ChannelAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<ChannelViewHolder>() {
+class ChannelAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerView.Adapter<ChannelViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
+    }
+    fun updateItems(newItems: List<StreamItem>){
+        videoFeed.addAll(newItems)
+        println("suck another dick: "+newItems[0].title)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {

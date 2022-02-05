@@ -26,4 +26,7 @@ interface PipedApi {
 
     @GET("channel/{channelId}")
     suspend fun getChannel(@Path("channelId") channelId: String): Channel
+
+    @GET("nextpage/channel/{channelId}")
+    suspend fun getChannelNextPage(@Path("channelId") channelId: String, @Query("nextpage") nextPage: String): Channel
 }

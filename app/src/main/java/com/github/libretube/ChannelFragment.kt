@@ -1,5 +1,7 @@
 package com.github.libretube
 
+import android.net.Uri.encode
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +20,8 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +36,8 @@ class ChannelFragment : Fragment() {
     private var channel_id: String? = null
     private val TAG = "ChannelFragment"
     lateinit var recyclerView: RecyclerView
+    lateinit var nextPage: String
+    lateinit var channelAdapter: ChannelAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +60,9 @@ class ChannelFragment : Fragment() {
         view.findViewById<TextView>(R.id.channel_name).text=channel_id
         recyclerView = view.findViewById(R.id.channel_recView)
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
+
         fetchChannel(view)
+
     }
 
     private fun fetchChannel(view: View){
@@ -68,6 +78,7 @@ class ChannelFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
+                nextPage = response.nextpage!!
                 runOnUiThread {
                     view.findViewById<TextView>(R.id.channel_name).text=response.name
                     view.findViewById<TextView>(R.id.channel_subs).text=response.subscriberCount.videoViews() + " subscribers"
@@ -76,7 +87,44 @@ class ChannelFragment : Fragment() {
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
                     Picasso.get().load(response.bannerUrl).into(bannerImage)
                     Picasso.get().load(response.avatarUrl).into(channelImage)
-                    recyclerView.adapter = ChannelAdapter(response.relatedStreams!!)
+                    channelAdapter = ChannelAdapter(response.relatedStreams!!.toMutableList())
+                    recyclerView.adapter = channelAdapter
+
+                    val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
+                    scrollView.viewTreeObserver
+                        .addOnScrollChangedListener {
+                            if (scrollView.getChildAt(0).bottom
+                                == (scrollView.height + scrollView.scrollY)) {
+                                //scroll view is at bottom
+                                println("suck a dick: "+channel_id+"?nextpage="+nextPage)
+                                    fetchNextPage()
+
+                            } else {
+                                //scroll view is not at bottom
+                            }
+                        }
+                }
+            }
+        }
+        run()
+    }
+    private fun fetchNextPage(){
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.getChannelNextPage(channel_id!!,nextPage)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response,"+e.response())
+                    return@launchWhenCreated
+                }
+                nextPage = response.nextpage!!
+                runOnUiThread {
+                    channelAdapter.updateItems(response.relatedStreams!!)
+
                 }
             }
         }
