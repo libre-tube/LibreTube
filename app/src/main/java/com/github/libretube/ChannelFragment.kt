@@ -24,16 +24,9 @@ import java.io.IOException
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ChannelFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChannelFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var channel_id: String? = null
     private val TAG = "ChannelFragment"
     //lateinit var recyclerView: RecyclerView
