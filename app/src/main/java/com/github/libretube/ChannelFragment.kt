@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
@@ -26,6 +29,8 @@ class ChannelFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var channel_id: String? = null
     private val TAG = "ChannelFragment"
+    lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,6 +50,8 @@ class ChannelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         channel_id = channel_id!!.replace("/channel/","")
         view.findViewById<TextView>(R.id.channel_name).text=channel_id
+        recyclerView = view.findViewById(R.id.channel_recView)
+        recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         fetchChannel(view)
     }
 
@@ -69,6 +76,7 @@ class ChannelFragment : Fragment() {
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
                     Picasso.get().load(response.bannerUrl).into(bannerImage)
                     Picasso.get().load(response.avatarUrl).into(channelImage)
+                    recyclerView.adapter = ChannelAdapter(response.relatedStreams!!)
                 }
             }
         }
