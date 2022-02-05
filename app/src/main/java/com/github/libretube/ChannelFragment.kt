@@ -87,7 +87,6 @@ class ChannelFragment : Fragment() {
                     Picasso.get().load(response.avatarUrl).into(channelImage)
                     channelAdapter = ChannelAdapter(response.relatedStreams!!.toMutableList())
                     view.findViewById<RecyclerView>(R.id.channel_recView).adapter = channelAdapter
-                    AppWatcher.objectWatcher.watch(channelAdapter, "View was detached")
                     val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
                     scrollView.viewTreeObserver
                         .addOnScrollChangedListener {
