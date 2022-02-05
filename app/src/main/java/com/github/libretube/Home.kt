@@ -107,4 +107,9 @@ class Home : Fragment() {
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
     }
+
+    override fun onDestroyView() {
+        view?.findViewById<RecyclerView>(R.id.recview)?.adapter=null
+        super.onDestroyView()
+    }
 }

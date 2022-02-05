@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
@@ -35,7 +36,7 @@ class ChannelFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var channel_id: String? = null
     private val TAG = "ChannelFragment"
-    lateinit var recyclerView: RecyclerView
+    //lateinit var recyclerView: RecyclerView
     lateinit var nextPage: String
     lateinit var channelAdapter: ChannelAdapter
 
@@ -58,8 +59,8 @@ class ChannelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         channel_id = channel_id!!.replace("/channel/","")
         view.findViewById<TextView>(R.id.channel_name).text=channel_id
-        recyclerView = view.findViewById(R.id.channel_recView)
-        recyclerView.layoutManager = GridLayoutManager(view.context, 1)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.channel_recView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
         fetchChannel(view)
 
@@ -88,7 +89,7 @@ class ChannelFragment : Fragment() {
                     Picasso.get().load(response.bannerUrl).into(bannerImage)
                     Picasso.get().load(response.avatarUrl).into(channelImage)
                     channelAdapter = ChannelAdapter(response.relatedStreams!!.toMutableList())
-                    recyclerView.adapter = channelAdapter
+                    view.findViewById<RecyclerView>(R.id.channel_recView).adapter = channelAdapter
 
                     val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
                     scrollView.viewTreeObserver
@@ -96,8 +97,8 @@ class ChannelFragment : Fragment() {
                             if (scrollView.getChildAt(0).bottom
                                 == (scrollView.height + scrollView.scrollY)) {
                                 //scroll view is at bottom
-                                println("suck a dick: "+channel_id+"?nextpage="+nextPage)
-                                    fetchNextPage()
+                            //todo find a better solution to load more videos in channel
+                            //fetchNextPage()
 
                             } else {
                                 //scroll view is not at bottom
@@ -122,10 +123,8 @@ class ChannelFragment : Fragment() {
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage!!
-                runOnUiThread {
-                    channelAdapter.updateItems(response.relatedStreams!!)
+                channelAdapter.updateItems(response.relatedStreams!!)
 
-                }
             }
         }
         run()

@@ -22,7 +22,7 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerVi
     }
     fun updateItems(newItems: List<StreamItem>){
         videoFeed.addAll(newItems)
-        println("suck another dick: "+newItems[0].title)
+        //println("suck another dick: "+newItems[0].title)
         notifyDataSetChanged()
     }
 
