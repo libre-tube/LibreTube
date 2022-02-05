@@ -1,0 +1,1 @@
+LibreTube is not connected to google directly, instead it uses piped instances to load data and play videos. Therefore this app doesn’t need to use any of Google Services installed. Also there is no need for a YouTube account, and it’s FLOSS
