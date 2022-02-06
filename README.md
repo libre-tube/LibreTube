@@ -4,7 +4,7 @@
   <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
 
 [![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Matrix](https://badges.alefvanoon.xyz/matrix/LibreTube:matrix.org)](https://matrix.to/#/#libretube:matrix.org)
+[![Matrix](https://badges.alefvanoon.xyz/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
 
 </div>
 WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
