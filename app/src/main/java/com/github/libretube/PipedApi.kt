@@ -1,12 +1,9 @@
 package com.github.libretube
 
-import com.github.libretube.obj.Channel
+import com.github.libretube.obj.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import com.github.libretube.obj.StreamItem
-import com.github.libretube.obj.Streams
-import com.github.libretube.obj.SearchResult
 
 interface PipedApi {
     @GET("trending")
@@ -29,4 +26,11 @@ interface PipedApi {
 
     @GET("nextpage/channel/{channelId}")
     suspend fun getChannelNextPage(@Path("channelId") channelId: String, @Query("nextpage") nextPage: String): Channel
+
+    @GET("playlists/{playlistId}")
+    suspend fun getPlaylist(@Path("playlistId") playlistId: String): Playlist
+
+    @GET("nextpage/playlists/{playlistId}")
+    suspend fun getPlaylistNextPage(@Path("playlistId") playlistId: String, @Query("nextpage") nextPage: String): Playlist
+
 }

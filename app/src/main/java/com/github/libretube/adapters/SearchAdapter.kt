@@ -103,6 +103,12 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         playlistChannelName.text = item.uploaderName
         val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
         playlistVideosNumber.text = item.videos.toString()+" videos"
+        v.setOnClickListener {
+            //playlist clicked
+            val activity = v.context as MainActivity
+            val bundle = bundleOf("playlist_id" to item.url)
+            activity.navController.navigate(R.id.playlistFragment,bundle)
+        }
     }
 
     fun bind(searchItem: SearchItem) {
