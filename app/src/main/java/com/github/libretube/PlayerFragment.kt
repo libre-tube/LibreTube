@@ -229,10 +229,15 @@ class PlayerFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         try {
             exoPlayer.stop()
         }catch (e: Exception){}
-
     }
 
     private fun fetchJson(view: View) {

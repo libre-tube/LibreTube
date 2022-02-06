@@ -46,5 +46,4 @@ interface PipedApi {
     @GET("subscriptions")
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
 
-
 }
