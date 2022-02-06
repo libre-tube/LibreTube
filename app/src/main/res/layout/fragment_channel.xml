@@ -13,13 +13,14 @@
     <ImageView
         android:id="@+id/channel_banner"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     />
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/channel_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         />
 
         <TextView
@@ -29,15 +30,17 @@
             android:layout_gravity="center_horizontal"
             android:text="Mia Plays"
             android:textSize="20sp"
+            android:layout_marginTop="7dp"
             android:textStyle="bold" />
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/channel_subscribe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent"
         android:text="@string/subscribe"
-        android:textColor="@color/colorPrimary"
+        android:textColor="?attr/colorPrimary"
+        android:background="?android:attr/selectableItemBackground"
+
         />
     <TextView
         android:id="@+id/channel_subs"
@@ -46,13 +49,32 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/app_name"/>
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Description"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:textSize="17sp" />
+        <TextView
             android:id="@+id/channel_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text=""
-            android:textAlignment="center"
-            android:padding="8dp"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Videos"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="17sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,6 +82,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/channel_recView"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
