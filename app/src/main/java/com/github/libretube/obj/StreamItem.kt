@@ -10,7 +10,8 @@ data class StreamItem(
     var uploadedDate: String?,
     var duration: Long?,
     var views: Long?,
-    var uploaderVerified: Boolean?
+    var uploaderVerified: Boolean?,
+    var uploaded: Long?
 ){
-    constructor() : this("","","","","","","",0,0,null)
+    constructor() : this("","","","","","","",0,0,null,0)
 }

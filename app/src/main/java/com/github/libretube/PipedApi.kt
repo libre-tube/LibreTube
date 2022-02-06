@@ -1,9 +1,7 @@
 package com.github.libretube
 
 import com.github.libretube.obj.*
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface PipedApi {
     @GET("trending")
@@ -32,5 +30,21 @@ interface PipedApi {
 
     @GET("nextpage/playlists/{playlistId}")
     suspend fun getPlaylistNextPage(@Path("playlistId") playlistId: String, @Query("nextpage") nextPage: String): Playlist
+
+    @POST("login")
+    suspend fun login(@Body login: Login): Token
+
+    @POST("register")
+    suspend fun register(@Body login: Login): Token
+
+    @GET("feed")
+    suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>
+
+    @GET("subscribed")
+    suspend fun isSubscribed(@Query("channelId") channelId: String, @Header("Authorization") token: String): Subscribed
+
+    @GET("subscriptions")
+    suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
+
 
 }
