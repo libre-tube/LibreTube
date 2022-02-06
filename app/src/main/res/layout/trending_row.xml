@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?android:attr/selectableItemBackground"
+
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView

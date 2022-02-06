@@ -29,5 +29,6 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_primaryInverse</item>
 
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="fontFamily">@font/roboto</item>
     </style>
 </resources>
