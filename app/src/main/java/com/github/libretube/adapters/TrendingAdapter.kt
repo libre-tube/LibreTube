@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
@@ -37,6 +38,15 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
             val activity = holder.v.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
+            try {
+                val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                if (mainMotionLayout.progress == 0.toFloat()) {
+                    mainMotionLayout.transitionToEnd()
+                    activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+                }
+            }catch (e: Exception){
+
+            }
         }
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)

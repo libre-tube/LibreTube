@@ -1,7 +1,6 @@
 package com.github.libretube
 
-import android.net.Uri.encode
-import android.os.Build
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,19 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.ChannelAdapter
-import com.github.libretube.adapters.TrendingAdapter
 import com.squareup.picasso.Picasso
-import leakcanary.AppWatcher
 import retrofit2.HttpException
 import java.io.IOException
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 
 class ChannelFragment : Fragment() {
@@ -93,9 +86,9 @@ class ChannelFragment : Fragment() {
                             if (scrollView.getChildAt(0).bottom
                                 == (scrollView.height + scrollView.scrollY)) {
                                 //scroll view is at bottom
-                            //todo find a better solution to load more videos in channel
                                 if(nextPage!=null){
-                            fetchNextPage()}
+                                    fetchNextPage()
+                                }
 
                             } else {
                                 //scroll view is not at bottom
@@ -120,7 +113,6 @@ class ChannelFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response,"+e.response())
                     return@launchWhenCreated
                 }
-                println("dafaq")
                 nextPage = response.nextpage
                 channelAdapter.updateItems(response.relatedStreams!!)
 
@@ -135,6 +127,7 @@ class ChannelFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+
         view?.findViewById<RecyclerView>(R.id.channel_recView)?.adapter=null
         super.onDestroyView()
     }
