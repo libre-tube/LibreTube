@@ -20,7 +20,7 @@ on:
       - '.github/**/*.md'
 
 jobs:
-  build-and-test-jvm:
+  debug-builds:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
