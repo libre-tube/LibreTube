@@ -14,7 +14,7 @@
         >
 
         <ImageView
-            android:id="@+id/player_like"
+            android:id="@+id/boogh"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="Coming Soon!"
             android:id="@+id/textLike"
-            android:layout_below="@id/player_like"
+            android:layout_below="@id/boogh"
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
             android:textSize="20sp"

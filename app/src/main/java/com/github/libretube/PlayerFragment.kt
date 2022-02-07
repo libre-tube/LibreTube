@@ -229,8 +229,6 @@ class PlayerFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-
-
     }
 
     override fun onDestroy() {
