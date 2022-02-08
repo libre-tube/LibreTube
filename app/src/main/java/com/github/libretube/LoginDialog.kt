@@ -64,7 +64,7 @@ class LoginDialog : DialogFragment() {
                 }
                 if (response.error!= null){
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                }else{
+                }else if(response.token!=null){
                     Toast.makeText(context,R.string.loggedIn, Toast.LENGTH_SHORT).show()
                     dialog?.dismiss()
                 }
@@ -91,7 +91,7 @@ class LoginDialog : DialogFragment() {
                 }
                 if (response.error!= null){
                 Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                }else{
+                }else if(response.token!=null){
                     Toast.makeText(context,R.string.registered, Toast.LENGTH_SHORT).show()
                     dialog?.dismiss()
                 }

@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
     lateinit var navController : NavController
-
-    var f = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener{
             //settings fragment stuff
+            navController.navigate(R.id.settings)
             true
         }
 

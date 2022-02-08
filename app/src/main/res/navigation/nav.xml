@@ -54,4 +54,8 @@
             android:name="playlist_id"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.github.libretube.Settings"
+        android:label="Settings" />
 </navigation>

@@ -53,6 +53,21 @@ class ChannelFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         fetchChannel(view)
+        val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
+        scrollView.viewTreeObserver
+            .addOnScrollChangedListener {
+                if (scrollView.getChildAt(0).bottom
+                    == (scrollView.height + scrollView.scrollY)) {
+                    //scroll view is at bottom
+                    if(nextPage!=null && !isLoading){
+                        isLoading=true
+                        fetchNextPage()
+                    }
+
+                } else {
+                    //scroll view is not at bottom
+                }
+            }
 
     }
 
@@ -81,21 +96,7 @@ class ChannelFragment : Fragment() {
                     Picasso.get().load(response.avatarUrl).into(channelImage)
                     channelAdapter = ChannelAdapter(response.relatedStreams!!.toMutableList())
                     view.findViewById<RecyclerView>(R.id.channel_recView).adapter = channelAdapter
-                    val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
-                    scrollView.viewTreeObserver
-                        .addOnScrollChangedListener {
-                            if (scrollView.getChildAt(0).bottom
-                                == (scrollView.height + scrollView.scrollY)) {
-                                //scroll view is at bottom
-                                if(nextPage!=null && !isLoading){
-                                    isLoading=true
-                                    fetchNextPage()
-                                }
 
-                            } else {
-                                //scroll view is not at bottom
-                            }
-                        }
                 }
             }
         }
