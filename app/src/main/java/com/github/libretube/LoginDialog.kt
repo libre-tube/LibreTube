@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.Login
 import retrofit2.HttpException
@@ -27,22 +29,35 @@ class LoginDialog : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
-
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            val view = inflater.inflate(R.layout.dialog_login, null)
-            username=view.findViewById(R.id.username)
-            password=view.findViewById(R.id.password)
-            view.findViewById<Button>(R.id.login).setOnClickListener {
-                val login = Login(username.text.toString(),password.text.toString())
-                login(login)
-            }
-            view.findViewById<Button>(R.id.register).setOnClickListener {
-                val login = Login(username.text.toString(),password.text.toString())
-                register(login)
+            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+            val token = sharedPref?.getString("token","")
+            var view: View
+            Log.e("dafaq",token!!)
+            if(token!=""){
+                view = inflater.inflate(R.layout.dialog_logout, null)
+                view.findViewById<Button>(R.id.logout).setOnClickListener {
+                    Toast.makeText(context,R.string.loggedout, Toast.LENGTH_SHORT).show()
+                    val sharedPref = context?.getSharedPreferences("token",Context.MODE_PRIVATE)
+                    with (sharedPref!!.edit()) {
+                        putString("token","")
+                        apply()
+                    }
+                    dialog?.dismiss()
+                }
+            }else{
+                view = inflater.inflate(R.layout.dialog_login, null)
+                username=view.findViewById(R.id.username)
+                password=view.findViewById(R.id.password)
+                view.findViewById<Button>(R.id.login).setOnClickListener {
+                    val login = Login(username.text.toString(),password.text.toString())
+                    login(login)
+                }
+                view.findViewById<Button>(R.id.register).setOnClickListener {
+                    val login = Login(username.text.toString(),password.text.toString())
+                    register(login)
+                }
             }
             builder.setView(view)
-                // Add action buttons
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -64,8 +79,13 @@ class LoginDialog : DialogFragment() {
                 }
                 if (response.error!= null){
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                }else{
+                }else if(response.token!=null){
                     Toast.makeText(context,R.string.loggedIn, Toast.LENGTH_SHORT).show()
+                    val sharedPref = context?.getSharedPreferences("token",Context.MODE_PRIVATE)
+                    with (sharedPref!!.edit()) {
+                        putString("token",response.token)
+                        apply()
+                    }
                     dialog?.dismiss()
                 }
 
@@ -91,8 +111,13 @@ class LoginDialog : DialogFragment() {
                 }
                 if (response.error!= null){
                 Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                }else{
+                }else if(response.token!=null){
                     Toast.makeText(context,R.string.registered, Toast.LENGTH_SHORT).show()
+                    val sharedPref = context?.getSharedPreferences("token",Context.MODE_PRIVATE)
+                    with (sharedPref!!.edit()) {
+                        putString("token",response.token)
+                        apply()
+                    }
                     dialog?.dismiss()
                 }
 

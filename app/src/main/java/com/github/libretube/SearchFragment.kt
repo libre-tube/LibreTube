@@ -96,7 +96,7 @@ class SearchFragment : Fragment() {
                 RetrofitInstance.api.getSearchResults(query, "all")
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
+                Log.e(TAG, "IOException, you might not have internet connection "+e.toString())
                 return@launchWhenCreated
             } catch (e: HttpException) {
                 Log.e(TAG, "HttpException, unexpected response")

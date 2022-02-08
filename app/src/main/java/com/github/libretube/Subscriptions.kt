@@ -1,7 +1,9 @@
 package com.github.libretube
 
+import android.content.Context
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,11 +43,9 @@ class Subscriptions : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ImageView>(R.id.boogh).setOnClickListener {
-            val newFragment = LoginDialog()
-            newFragment.show(childFragmentManager,"fuck")
+        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+        Log.e("dafaq",sharedPref?.getString("token","")!!)
 
-        }
     }
 
     companion object {

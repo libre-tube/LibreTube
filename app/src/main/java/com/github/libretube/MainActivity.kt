@@ -20,6 +20,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.color.DynamicColors
 import java.lang.Exception
@@ -28,10 +29,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
     lateinit var navController : NavController
-
-    var f = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        RetrofitInstance.url=sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
 
         DynamicColors.applyToActivitiesIfAvailable(application)
 
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener{
             //settings fragment stuff
+            navController.navigate(R.id.settings)
             true
         }
 

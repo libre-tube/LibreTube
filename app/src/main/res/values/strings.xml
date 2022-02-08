@@ -12,7 +12,14 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="logout">Logout</string>
     <string name="cancel">Cancel</string>
     <string name="loggedIn">Logged in successfully!</string>
+    <string name="loggedout">Logged out successfully!</string>
     <string name="registered">Registered successfully! You may now subscribe to channels you want.</string>
+    <string name="already_logged_in">You are already logged in, you may logout of your account.</string>
+    <string name="instances">Choose an instance</string>
+    <string name="customInstance">Add a custom instance</string>
+    <string name="region">Choose a region</string>
+    <string name="login_register">Login/Register</string>
 </resources>
