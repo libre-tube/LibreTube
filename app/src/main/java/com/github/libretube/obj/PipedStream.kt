@@ -1,5 +1,8 @@
 package com.github.libretube.obj
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class PipedStream(
     var url: String?,
     var format: String?,

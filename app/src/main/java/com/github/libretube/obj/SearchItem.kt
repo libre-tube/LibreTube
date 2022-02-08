@@ -1,5 +1,8 @@
 package com.github.libretube.obj
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class SearchItem(
     var url: String?,
     var thumbnail: String?,

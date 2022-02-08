@@ -1,5 +1,8 @@
 package com.github.libretube.obj
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Subtitle(
     val url: String?,
     val mimeType: String?,

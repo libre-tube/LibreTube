@@ -1,7 +1,8 @@
 package com.github.libretube.obj
 
-import com.github.libretube.obj.StreamItem
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class SearchResult(
     val items: List<SearchItem>? = listOf(),
     val nextpage: String? ="",
