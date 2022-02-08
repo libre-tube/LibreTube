@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths-ignore:
+      - 'README*.md'
+      - 'fastlane/**'
+      - 'assets/**'
+      - '.github/**/*.md'
+  push:
+    paths-ignore:
+      - 'README*.md'
+      - 'fastlane/**'
+      - 'assets/**'
+      - '.github/**/*.md'
+
+jobs:
+  debug-builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gradle/wrapper-validation-action@v1
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: "temurin"
+          cache: 'gradle'
+
+      - name: Build debug APK and run jvm tests
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/*.apk
