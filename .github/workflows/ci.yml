@@ -29,10 +29,6 @@ jobs:
           distribution: "temurin"
           cache: 'gradle'
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-
       - name: Build debug APK and run jvm tests
         run: ./gradlew assembleDebug
 
