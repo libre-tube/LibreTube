@@ -4,6 +4,7 @@ data class SearchItem(
     var url: String?,
     var thumbnail: String?,
     var uploaderName: String?,
+    var uploaded: String?,
     //Video only attributes
     var title: String?,
     var uploaderUrl: String?,
@@ -19,5 +20,5 @@ data class SearchItem(
     var videos: Long? = -1,
     var verified: Boolean? = null
 ){
-    constructor() : this("","","","","","","",0,0,null)
+    constructor() : this("","","","","","","","",0,0,null)
 }

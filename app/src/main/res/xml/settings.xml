@@ -3,12 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.preference.SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+        app:key="darkMode"
+        app:title="Toggle dark mode"
+        app:isPreferenceVisible="false"/>
+    <ListPreference
+        app:key="region"
+        app:title="@string/region"
+        app:entries="@array/regions"
+        app:entryValues="@array/regionsValue"
+        app:defaultValue="US"
+        app:useSimpleSummaryProvider="true"
+        />
 
+    <ListPreference
+        app:key="instance"
+        app:title="@string/instances"
+        app:entries="@array/instances"
+        app:entryValues="@array/instancesValue"
+        app:defaultValue="https://pipedapi.kavin.rocks/"
+        app:useSimpleSummaryProvider="true"/>
+    <androidx.preference.EditTextPreference
+    app:key="customInstance"
+    app:title="@string/customInstance"
+        app:isPreferenceVisible="false"/>
     <androidx.preference.Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
-
+        app:key="login_register"
+        app:title="@string/login_register"
+        />
 </androidx.preference.PreferenceScreen>

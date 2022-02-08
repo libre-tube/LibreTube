@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -51,7 +52,8 @@ class Home : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getTrending("US")
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    RetrofitInstance.api.getTrending(sharedPreferences.getString("region", "US")!!)
                 }catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

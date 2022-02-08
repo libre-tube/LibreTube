@@ -64,8 +64,6 @@ class ChannelFragment : Fragment() {
                         fetchNextPage()
                     }
 
-                } else {
-                    //scroll view is not at bottom
                 }
             }
 
