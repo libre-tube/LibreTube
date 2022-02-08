@@ -33,20 +33,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url=sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
-
         DynamicColors.applyToActivitiesIfAvailable(application)
-
-
         setContentView(R.layout.activity_main)
+
         bottomNavigationView = findViewById(R.id.bottomNav)
-
-
         navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
 
-
-
-
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home2 -> {
+                    navController.navigate(R.id.home2)
+                    true
+                }
+                R.id.subscriptions -> {
+                    navController.navigate(R.id.subscriptions)
+                    true
+                }
+                R.id.library -> {
+                    navController.navigate(R.id.library)
+                    true
+                }
+            }
+            false
+        }
 
         toolbar = findViewById(R.id.toolbar)
         val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
@@ -91,8 +101,6 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
-
-
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
