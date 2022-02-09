@@ -9,22 +9,12 @@
         android:id="@+id/home2"
         android:name="com.github.libretube.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home2_to_subscriptions"
-            app:destination="@id/subscriptions"
-            app:popUpTo="@id/home2" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/subscriptions"
         android:name="com.github.libretube.Subscriptions"
         android:label="fragment_subscriptions"
-        tools:layout="@layout/fragment_subscriptions" >
-        <action
-            android:id="@+id/action_subscriptions_to_home2"
-            app:destination="@id/home2"
-            app:popUpTo="@id/subscriptions" />
-    </fragment>
+        tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/library"
         android:name="com.github.libretube.Library"

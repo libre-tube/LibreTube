@@ -43,14 +43,17 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home2 -> {
+                    navController.backQueue.clear()
                     navController.navigate(R.id.home2)
                     true
                 }
                 R.id.subscriptions -> {
+                    //navController.backQueue.clear()
                     navController.navigate(R.id.subscriptions)
                     true
                 }
                 R.id.library -> {
+                    //navController.backQueue.clear()
                     navController.navigate(R.id.library)
                     true
                 }
@@ -84,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     override fun onBackPressed() {
         try{
             val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
@@ -93,16 +97,15 @@ class MainActivity : AppCompatActivity() {
             }else{
                 navController.popBackStack()
                 if (navController.currentBackStackEntry == null){
-                    finish()
+                    super.onBackPressed()
                 }}
         }catch (e: Exception){
             navController.popBackStack()
             if (navController.currentBackStackEntry == null){
-                finish()
+                super.onBackPressed()
             }
         }
     }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val orientation = newConfig.orientation
