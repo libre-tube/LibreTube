@@ -46,4 +46,11 @@ interface PipedApi {
     @GET("subscriptions")
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
 
+    @POST("subscribe")
+    suspend fun subscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): String
+
+    @POST("unsubscribe")
+    suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): String
+
+
 }

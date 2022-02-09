@@ -6,6 +6,9 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import okhttp3.HttpUrl
+import retrofit2.Retrofit
+import retrofit2.converter.jackson.JacksonConverterFactory
 
 class Settings : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -13,6 +16,7 @@ class Settings : PreferenceFragmentCompat() {
         val instance = findPreference<ListPreference>("instance")
         instance?.setOnPreferenceChangeListener { preference, newValue ->
             RetrofitInstance.url=newValue.toString()
+            RetrofitInstance.lazyMgr.reset()
             true
         }
         val login = findPreference<Preference>("login_register")

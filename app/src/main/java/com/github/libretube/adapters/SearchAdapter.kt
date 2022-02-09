@@ -77,6 +77,11 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
                 .replace(R.id.container, frag)
                 .commitNow()
         }
+        channelImage.setOnClickListener {
+            val activity = v.context as MainActivity
+            val bundle = bundleOf("channel_id" to item.uploaderUrl)
+            activity.navController.navigate(R.id.channel, bundle)
+        }
     }
     private fun bindChannel(item: SearchItem) {
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
