@@ -77,7 +77,7 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 
 
-
+var isFullScreen = false
 class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
@@ -87,7 +87,6 @@ class PlayerFragment : Fragment() {
     private var sId: Int=0
     private var eId: Int=0
     private var paused =false
-    private var isFullScreen = false
     private var whichQuality = 0
 
     private lateinit var relatedRecView: RecyclerView
@@ -233,10 +232,13 @@ class PlayerFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        val mainActivity = activity as MainActivity
+        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         try {
             exoPlayer.stop()
         }catch (e: Exception){}
     }
+
 
     private fun fetchJson(view: View) {
         fun run() {

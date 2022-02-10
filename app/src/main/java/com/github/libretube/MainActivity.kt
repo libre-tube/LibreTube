@@ -9,8 +9,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.getWindowInsetsController
@@ -99,12 +101,22 @@ class MainActivity : AppCompatActivity() {
             val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
             if (mainMotionLayout.progress == 0.toFloat()){
                 mainMotionLayout.transitionToEnd()
-                findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+                findViewById<ConstraintLayout>(R.id.main_container).isClickable=false
+                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                motionLayout.transitionToEnd()
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                with(motionLayout) {
+                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                    enableTransition(R.id.yt_transition,true)
+                }
+                findViewById<LinearLayout>(R.id.linLayout).visibility=View.VISIBLE
+                isFullScreen=false
             }else{
                 navController.popBackStack()
                 if (navController.currentBackStackEntry == null){
                     super.onBackPressed()
-                }}
+                }
+            }
         }catch (e: Exception){
             navController.popBackStack()
             if (navController.currentBackStackEntry == null){
@@ -118,27 +130,10 @@ class MainActivity : AppCompatActivity() {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             println("Portrait")
             unsetFullscreen()
-            //findViewById<MotionLayout>(R.id.playerMotionLayout).getTransition(R.id.yt_transition).isEnabled = true
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             println("Landscape")
             setFullscreen()
-/*            window.decorView.apply {
-                // Hide both the navigation bar and the status bar.
-                // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
-                // a general rule, you should design your app to hide the status bar whenever you
-                // hide the navigation bar.
-                systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-            }*/
         }
-    }
-    private fun hideSystemBars() {
-        val windowInsetsController =
-            getWindowInsetsController(window.decorView) ?: return
-        // Configure the behavior of the hidden system bars
-        windowInsetsController.systemBarsBehavior =
-            BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        // Hide both the status bar and the navigation bar
-        //windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
     }
     private fun setFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
