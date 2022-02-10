@@ -168,14 +168,18 @@ class PlayerFragment : Fragment() {
         playerMotionLayout.transitionToStart()
         fetchJson(view)
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener{
+            motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
 
         }
         view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener{
+            motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -232,8 +236,6 @@ class PlayerFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        val mainActivity = activity as MainActivity
-        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         try {
             exoPlayer.stop()
         }catch (e: Exception){}

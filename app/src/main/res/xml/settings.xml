@@ -21,7 +21,7 @@
         app:entries="@array/instances"
         app:entryValues="@array/instancesValue"
         app:defaultValue="https://pipedapi.kavin.rocks/"
-        app:useSimpleSummaryProvider="true"/>
+        />
     <androidx.preference.EditTextPreference
     app:key="customInstance"
     app:title="@string/customInstance"
