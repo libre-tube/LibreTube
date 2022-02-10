@@ -205,6 +205,7 @@ class PlayerFragment : Fragment() {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                     //getTransition(R.id.yt_transition).isEnabled = false
                 }
+                view.findViewById<LinearLayout>(R.id.linLayout).visibility=View.GONE
                 isFullScreen=true
 
             }else{
@@ -216,6 +217,7 @@ class PlayerFragment : Fragment() {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     //getTransition(R.id.yt_transition).isEnabled = true
                 }
+                view.findViewById<LinearLayout>(R.id.linLayout).visibility=View.VISIBLE
                 isFullScreen=false
             }
 
@@ -334,6 +336,10 @@ class PlayerFragment : Fragment() {
                     //Listener for play and pause icon change
                     exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
                         override fun onPlayerStateChanged(playWhenReady: Boolean,playbackState: Int) {
+
+                            exoPlayerView.keepScreenOn = !(playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED ||
+                                    !playWhenReady)
+
                             if (playWhenReady && playbackState == Player.STATE_READY) {
                                 // media actually playing
                                 view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_pause)
@@ -380,7 +386,7 @@ class PlayerFragment : Fragment() {
         activity?.runOnUiThread(action)
     }
 
-     fun getMostBitRate(audios: List<PipedStream>):Int{
+     private fun getMostBitRate(audios: List<PipedStream>):Int{
         var bitrate =0
         var index = 0
         for ((i, audio) in audios.withIndex()){
