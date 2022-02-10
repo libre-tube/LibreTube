@@ -1,5 +1,6 @@
 package com.github.libretube
 
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.url=sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         DynamicColors.applyToActivitiesIfAvailable(application)
         setContentView(R.layout.activity_main)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         bottomNavigationView = findViewById(R.id.bottomNav)
         navController = findNavController(R.id.fragment)

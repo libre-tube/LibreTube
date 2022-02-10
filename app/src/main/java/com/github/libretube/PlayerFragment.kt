@@ -206,6 +206,8 @@ class PlayerFragment : Fragment() {
                     //getTransition(R.id.yt_transition).isEnabled = false
                 }
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility=View.GONE
+                val mainActivity = activity as MainActivity
+                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                 isFullScreen=true
 
             }else{
@@ -218,6 +220,8 @@ class PlayerFragment : Fragment() {
                     //getTransition(R.id.yt_transition).isEnabled = true
                 }
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility=View.VISIBLE
+                val mainActivity = activity as MainActivity
+                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 isFullScreen=false
             }
 
