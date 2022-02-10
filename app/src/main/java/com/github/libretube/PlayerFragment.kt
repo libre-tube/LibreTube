@@ -197,28 +197,22 @@ class PlayerFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener{
             //remember to hide everything when new shit added
             if (!isFullScreen){
-                /*view.findViewById<ScrollView>(R.id.scrollView2).visibility = View.GONE
-                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
-                view.findViewById<TextView>(R.id.textTest).visibility = View.GONE*/
-                //view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.GONE
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                    //getTransition(R.id.yt_transition).isEnabled = false
+                    enableTransition(R.id.yt_transition,false)
                 }
+                view.findViewById<ConstraintLayout>(R.id.main_container).isClickable =true
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility=View.GONE
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                 isFullScreen=true
 
             }else{
-                /*view.findViewById<ScrollView>(R.id.scrollView2).visibility = View.VISIBLE
-                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-                view.findViewById<TextView>(R.id.textTest).visibility = View.VISIBLE*/
-                //view.findViewById<ConstraintLayout>(R.id.main_container).visibility = View.VISIBLE
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    //getTransition(R.id.yt_transition).isEnabled = true
+                    enableTransition(R.id.yt_transition,true)
                 }
+                view.findViewById<ConstraintLayout>(R.id.main_container).isClickable =false
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility=View.VISIBLE
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
