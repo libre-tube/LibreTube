@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -26,14 +27,15 @@ class Settings : PreferenceFragmentCompat() {
             RetrofitInstance.lazyMgr.reset()
             true
         }
-        val login = findPreference<Preference>("login_register")
-        login?.setOnPreferenceClickListener {
-            val newFragment = LoginDialog()
-            newFragment.show(childFragmentManager, "fuck")
-            true
-        }
 
-    }
+            val login = findPreference<Preference>("login_register")
+            login?.setOnPreferenceClickListener {
+                val newFragment = LoginDialog()
+                newFragment.show(childFragmentManager, "fuck")
+                true
+            }
+
+        }
 
     private fun fetchInstance() {
         val api: PipedApi by lazy{
@@ -81,6 +83,14 @@ class Settings : PreferenceFragmentCompat() {
                 val instance = findPreference<ListPreference>("instance")
                 instance?.entries = entries
                 instance?.entryValues = entryValues
+                instance?.summaryProvider = Preference.SummaryProvider<ListPreference> { preference ->
+                    val text = preference.entry
+                    if (TextUtils.isEmpty(text)) {
+                        "Not set"
+                    } else {
+                        text
+                    }
+                }
             }
         }
     }
