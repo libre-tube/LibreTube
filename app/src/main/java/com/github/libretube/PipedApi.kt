@@ -52,5 +52,7 @@ interface PipedApi {
     @POST("unsubscribe")
     suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): String
 
+    @GET("Instances.md")
+    suspend fun getInstances(): String
 
 }

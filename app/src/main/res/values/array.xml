@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="instances">
-        <item>piped.tokhmi.xyz</item>
-        <item>piped.kavin.rocks</item>
+        <item>kavin.rocks (Official)</item>
+        <item>silkky.cloud</item>
+        <item>tokhmi.xyz</item>
+        <item>moomoo.me</item>
+        <item>mint.lgbt</item>
     </string-array>
     <string-array name="instancesValue">
-        <item>https://pipedapi.tokhmi.xyz/</item>
         <item>https://pipedapi.kavin.rocks/</item>
+        <item>https://api.piped.silkky.cloud</item>
+        <item>https://pipedapi.tokhmi.xyz/</item>
+        <item>https://pipedapi.moomoo.me</item>
+        <item>https://pa.mint.lgbt</item>
     </string-array>
     <string-array name="regions">
         <item>Afghanistan</item>
