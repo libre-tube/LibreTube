@@ -8,28 +8,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.*
+import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.adapters.SubscriptionAdapter
+import com.github.libretube.adapters.SubscriptionChannelAdapter
+import com.github.libretube.adapters.TrendingAdapter
+import retrofit2.HttpException
+import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Subscriptions.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Subscriptions : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    val TAG = "SubFragment"
+    lateinit var token: String
+    var isLoaded = false
+    private var subscriptionAdapter: SubscriptionAdapter? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -44,27 +42,86 @@ class Subscriptions : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        Log.e("dafaq",sharedPref?.getString("token","")!!)
+        token = sharedPref?.getString("token","")!!
+        Log.e(TAG,token)
+        if(token!=""){
+            view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility=View.GONE
+            var progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
+            progressBar.visibility=View.VISIBLE
 
-    }
+            var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
+            channelRecView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            fetchChannels(channelRecView)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Subscriptions.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Subscriptions().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+            var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
+            feedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+            fetchFeed(feedRecView, progressBar)
+
+            val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
+            scrollView.viewTreeObserver
+                .addOnScrollChangedListener {
+                    if (scrollView.getChildAt(0).bottom
+                        == (scrollView.height + scrollView.scrollY)) {
+                        //scroll view is at bottom
+                        if(isLoaded){
+                            subscriptionAdapter?.updateItems()
+                        }
+
+                    }
                 }
-            }
+        }
     }
+
+    private fun fetchFeed(feedRecView: RecyclerView, progressBar: ProgressBar) {
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.getFeed(token)
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launchWhenCreated
+                }
+                subscriptionAdapter = SubscriptionAdapter(response)
+                feedRecView?.adapter= subscriptionAdapter
+                progressBar.visibility=View.GONE
+                isLoaded=true
+            }
+        }
+        run()
+    }
+
+    private fun fetchChannels(channelRecView: RecyclerView) {
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.subscriptions(token)
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launchWhenCreated
+                }
+                channelRecView?.adapter=SubscriptionChannelAdapter(response.toMutableList())
+            }
+        }
+        run()
+    }
+
+    override fun onStop() {
+        Log.e(TAG,"Stopped")
+        subscriptionAdapter = null
+        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
+        super.onStop()
+    }
+    override fun onDestroy() {
+        Log.e(TAG,"Destroyed")
+        super.onDestroy()
+    }
+
 }

@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Subscriptions">
+    <ProgressBar
+        android:id="@+id/sub_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
 
     <RelativeLayout
+        android:id="@+id/loginOrRegister"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         >
@@ -19,17 +27,49 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_campaign" />
+            android:src="@drawable/ic_login" />
+
         <TextView
+            android:id="@+id/textLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coming Soon!"
-            android:id="@+id/textLike"
             android:layout_below="@id/boogh"
             android:layout_centerHorizontal="true"
-            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/please_login"
             android:textSize="20sp"
-            />
+            android:textStyle="bold" />
     </RelativeLayout>
+    <ScrollView
+        android:id="@+id/scrollview_sub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
 
-</FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sub_channels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sub_feed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

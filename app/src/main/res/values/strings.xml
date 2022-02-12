@@ -22,4 +22,5 @@
     <string name="customInstance">Add a custom instance</string>
     <string name="region">Choose a region</string>
     <string name="login_register">Login/Register</string>
+    <string name="please_login">Please Login or Register from the settings to show your Subscriptions!</string>
 </resources>
