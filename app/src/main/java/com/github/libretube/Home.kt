@@ -79,6 +79,7 @@ class Home : Fragment() {
 
     override fun onDestroyView() {
         view?.findViewById<RecyclerView>(R.id.recview)?.adapter=null
+        Log.e(TAG,"destroyview")
         super.onDestroyView()
     }
 }

@@ -1,9 +1,11 @@
 package com.github.libretube
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
@@ -25,6 +27,14 @@ class Settings : PreferenceFragmentCompat() {
         instance?.setOnPreferenceChangeListener { preference, newValue ->
             RetrofitInstance.url = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
+            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+            if(sharedPref?.getString("token","")!="") {
+                with(sharedPref!!.edit()) {
+                    putString("token", "")
+                    apply()
+                }
+                Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
+            }
             true
         }
 
