@@ -381,9 +381,12 @@ class PlayerFragment : Fragment() {
                         activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
                         view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                     }
-                    val channelId = response.uploaderUrl?.replace("/channel/","")
-                    val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
-                    isSubscribed(subButton, channelId!!)
+                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    if(sharedPref?.getString("token","")!=""){
+                        val channelId = response.uploaderUrl?.replace("/channel/","")
+                        val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
+                        isSubscribed(subButton, channelId!!)
+                    }
                 }
             }
 
@@ -413,6 +416,7 @@ class PlayerFragment : Fragment() {
                         button.text=getString(R.string.unsubscribe)
                         button.setTextColor(R.attr.colorPrimaryDark)
                     }
+                    if(response.subscribed!=null){
                     button.setOnClickListener {
                         if(isSubscribed){
                             unsubscribe(channel_id)
@@ -424,7 +428,7 @@ class PlayerFragment : Fragment() {
                             button.text=getString(R.string.unsubscribe)
                             button.setTextColor(R.attr.colorPrimaryDark)
                         }
-                    }
+                    }}
                 }
             }
         }

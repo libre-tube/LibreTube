@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,8 +58,11 @@ class ChannelFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.channel_recView)
         recyclerView.layoutManager = LinearLayoutManager(context)
         fetchChannel(view)
-        val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
-        isSubscribed(subButton)
+        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+        if(sharedPref?.getString("token","")!=""){
+            val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
+            isSubscribed(subButton)
+        }
         val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
         scrollView.viewTreeObserver
             .addOnScrollChangedListener {
@@ -97,6 +101,7 @@ class ChannelFragment : Fragment() {
                         button.text=getString(R.string.unsubscribe)
                         button.setTextColor(R.attr.colorPrimaryDark)
                     }
+                    if(response.subscribed!=null){
                     button.setOnClickListener {
                         if(isSubscribed){
                             unsubscribe()
@@ -108,7 +113,7 @@ class ChannelFragment : Fragment() {
                             button.text=getString(R.string.unsubscribe)
                             button.setTextColor(R.attr.colorPrimaryDark)
                         }
-                    }
+                    }}
                 }
             }
         }

@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:background="@android:color/transparent"
+                    android:background="?android:attr/selectableItemBackground"
                     android:text="@string/subscribe"
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
