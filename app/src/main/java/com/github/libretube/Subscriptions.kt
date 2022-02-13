@@ -85,8 +85,11 @@ class Subscriptions : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-                subscriptionAdapter = SubscriptionAdapter(response)
-                feedRecView?.adapter= subscriptionAdapter
+                if (response.isNotEmpty()){
+                    subscriptionAdapter = SubscriptionAdapter(response)
+                    feedRecView?.adapter= subscriptionAdapter
+
+                }
                 progressBar.visibility=View.GONE
                 isLoaded=true
             }
@@ -107,7 +110,11 @@ class Subscriptions : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-                channelRecView?.adapter=SubscriptionChannelAdapter(response.toMutableList())
+                if (response.isNotEmpty()){
+                    channelRecView?.adapter=SubscriptionChannelAdapter(response.toMutableList())
+                }else{
+                    Toast.makeText(context,R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         run()
