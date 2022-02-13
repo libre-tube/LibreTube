@@ -47,10 +47,10 @@ interface PipedApi {
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
 
     @POST("subscribe")
-    suspend fun subscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): String
+    suspend fun subscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
     @POST("unsubscribe")
-    suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): String
+    suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
     //only for fetching servers list
     @GET("Instances.md")

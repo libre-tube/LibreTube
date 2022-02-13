@@ -1,6 +1,8 @@
 package com.github.libretube
 
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.ChannelAdapter
+import com.github.libretube.obj.Subscribe
+import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
@@ -26,6 +30,7 @@ class ChannelFragment : Fragment() {
     var nextPage: String? =null
     var channelAdapter: ChannelAdapter? = null
     var isLoading = true
+    var isSubscribed: Boolean =false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +56,9 @@ class ChannelFragment : Fragment() {
         view.findViewById<TextView>(R.id.channel_name).text=channel_id
         val recyclerView = view.findViewById<RecyclerView>(R.id.channel_recView)
         recyclerView.layoutManager = LinearLayoutManager(context)
-
         fetchChannel(view)
+        val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
+        isSubscribed(subButton)
         val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
         scrollView.viewTreeObserver
             .addOnScrollChangedListener {
@@ -67,6 +73,85 @@ class ChannelFragment : Fragment() {
                 }
             }
 
+
+    }
+
+    private fun isSubscribed(button: MaterialButton){
+        @SuppressLint("ResourceAsColor")
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    RetrofitInstance.api.isSubscribed(channel_id!!,sharedPref?.getString("token","")!!)
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launchWhenCreated
+                }
+                runOnUiThread {
+                    if (response.subscribed==true){
+                        isSubscribed=true
+                        button.text=getString(R.string.unsubscribe)
+                        button.setTextColor(R.attr.colorPrimaryDark)
+                    }
+                    button.setOnClickListener {
+                        if(isSubscribed){
+                            unsubscribe()
+                            button.text=getString(R.string.subscribe)
+                            button.setTextColor(resources.getColor(R.color.md_theme_light_primary))
+
+                        }else{
+                            subscribe()
+                            button.text=getString(R.string.unsubscribe)
+                            button.setTextColor(R.attr.colorPrimaryDark)
+                        }
+                    }
+                }
+            }
+        }
+        run()
+    }
+
+    private fun subscribe(){
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    RetrofitInstance.api.subscribe(sharedPref?.getString("token","")!!, Subscribe(channel_id))
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response$e")
+                    return@launchWhenCreated
+                }
+                isSubscribed=true
+            }
+        }
+        run()
+    }
+    private fun unsubscribe(){
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    RetrofitInstance.api.unsubscribe(sharedPref?.getString("token","")!!, Subscribe(channel_id))
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launchWhenCreated
+                }
+                isSubscribed=false
+            }
+        }
+        run()
     }
 
     private fun fetchChannel(view: View){

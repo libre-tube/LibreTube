@@ -151,7 +151,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp">
+                android:paddingRight="8dp"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/selectableItemBackground">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/player_channelImage"
@@ -178,7 +180,7 @@
                     android:layout_centerVertical="true"
                     android:background="@android:color/transparent"
                     android:text="@string/subscribe"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"/>
             </RelativeLayout>
 
             <RelativeLayout

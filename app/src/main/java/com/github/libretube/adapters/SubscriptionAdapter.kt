@@ -27,6 +27,8 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
     fun updateItems(){
         //limitedVideoFeed.add("")
         i += 10
+        if(i>videoFeed.size)
+            i=videoFeed.size
         //println("suck another dick: "+newItems[0].title)
         notifyDataSetChanged()
     }

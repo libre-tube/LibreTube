@@ -129,10 +129,10 @@ class MainActivity : AppCompatActivity() {
         val orientation = newConfig.orientation
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             println("Portrait")
-            //unsetFullscreen()
+            unsetFullscreen()
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             println("Landscape")
-            //setFullscreen()
+            setFullscreen()
         }
     }
     private fun setFullscreen() {
