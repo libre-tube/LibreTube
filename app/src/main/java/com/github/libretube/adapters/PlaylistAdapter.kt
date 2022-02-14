@@ -1,6 +1,7 @@
 package com.github.libretube.adapters
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerV
         val streamItem = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.channel_description).text = streamItem.title
         holder.v.findViewById<TextView>(R.id.channel_views).text = streamItem.uploaderName
+        holder.v.findViewById<TextView>(R.id.channel_duration).text = DateUtils.formatElapsedTime(streamItem.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
         Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
         holder.v.setOnClickListener{

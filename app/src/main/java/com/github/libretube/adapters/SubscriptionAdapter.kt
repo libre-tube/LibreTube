@@ -1,6 +1,7 @@
 package com.github.libretube.adapters
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,8 +43,9 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.videoViews()+" • "+trending.uploadedDate
+        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.videoViews()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
+        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
         channelImage.setOnClickListener{
             val activity = holder.v.context as MainActivity

@@ -1,6 +1,7 @@
 package com.github.libretube.adapters
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,8 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerVi
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.channel_description).text = trending.title
-        holder.v.findViewById<TextView>(R.id.channel_views).text = trending.views.videoViews()+" • "+trending.uploadedDate
+        holder.v.findViewById<TextView>(R.id.channel_views).text = trending.views.videoViews()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.channel_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         holder.v.setOnClickListener{
