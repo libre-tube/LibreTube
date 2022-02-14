@@ -279,6 +279,8 @@ class PlayerFragment : Fragment() {
                         .setSubtitleConfigurations(subtitle)
                         .build()
                     exoPlayer = ExoPlayer.Builder(view.context)
+                        .setSeekBackIncrementMs(5000)
+                        .setSeekForwardIncrementMs(5000)
                         .build()
                     exoPlayerView.setShowSubtitleButton(true)
                     exoPlayerView.setShowNextButton(false)

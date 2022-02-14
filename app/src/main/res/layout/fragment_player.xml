@@ -206,20 +206,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/colorSurface"
-/>
+        android:background="?attr/colorSurface" />
 
     <com.github.libretube.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#000000"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-        app:show_buffering="always"
-        android:background="?attr/colorSurface"
-        />
+        app:show_buffering="always" />
 
     <ImageView
         android:id="@+id/close_imageView"
