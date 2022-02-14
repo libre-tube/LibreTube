@@ -18,10 +18,14 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
