@@ -1,7 +1,5 @@
 package com.github.libretube
 
-import android.R.attr
-import android.R.attr.*
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,18 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.source.MediaSource
 
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.ui.StyledPlayerControlView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
-import okhttp3.*
 import java.io.IOException
 import kotlin.math.abs
 import com.google.android.exoplayer2.util.MimeTypes
@@ -29,26 +23,17 @@ import android.app.ActionBar
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.widget.*
 import androidx.core.net.toUri
-import com.google.android.exoplayer2.C.SELECTION_FLAG_DEFAULT
 import com.google.android.exoplayer2.MediaItem.fromUri
-import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
 import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DataSource
 
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import android.widget.PopupWindow
 import android.widget.TextView
 
-import android.graphics.drawable.Drawable
-import com.google.android.exoplayer2.util.Util
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.text.Html
 import android.util.Log
@@ -56,27 +41,14 @@ import android.util.TypedValue
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
-import androidx.core.text.PrecomputedTextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.Player.STATE_IDLE
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.util.RepeatModeUtil
 
-import com.google.android.exoplayer2.ui.TimeBar
-import com.google.android.exoplayer2.ui.TimeBar.OnScrubListener
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
@@ -372,8 +344,8 @@ class PlayerFragment : Fragment() {
                     } else {
                         Html.fromHtml(response.description)
                     }
-                    view.findViewById<TextView>(R.id.player_sub).text = response.views.videoViews() + " views • "+response.uploadDate
-                    view.findViewById<TextView>(R.id.textLike).text = response.likes.videoViews()
+                    view.findViewById<TextView>(R.id.player_sub).text = response.views.formatShort() + " views • "+response.uploadDate
+                    view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
                     val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
                     Picasso.get().load(response.uploaderAvatar).into(channelImage)
                     view.findViewById<TextView>(R.id.player_channelName).text=response.uploader

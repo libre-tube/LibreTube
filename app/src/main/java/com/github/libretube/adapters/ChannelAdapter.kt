@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
-import com.github.libretube.videoViews
+import com.github.libretube.formatShort
 
 class ChannelAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerView.Adapter<ChannelViewHolder>() {
     override fun getItemCount(): Int {
@@ -36,7 +34,7 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerVi
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.channel_description).text = trending.title
-        holder.v.findViewById<TextView>(R.id.channel_views).text = trending.views.videoViews()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.channel_views).text = trending.views.formatShort()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         holder.v.findViewById<TextView>(R.id.channel_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)

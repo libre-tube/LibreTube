@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
-import com.github.libretube.videoViews
+import com.github.libretube.formatShort
 
 class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<SubscriptionViewHolder>() {
     //private var limitedVideoFeed: MutableList<String> = [""].toMutableList()
@@ -43,7 +43,7 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.videoViews()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.formatShort()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
         holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)

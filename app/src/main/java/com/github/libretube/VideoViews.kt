@@ -3,7 +3,7 @@ package com.github.libretube
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-fun Long?.videoViews(): String = when {
+fun Long?.formatShort(): String = when {
                                             this!!<1000 -> {
                                                 this.toString()
                                             }

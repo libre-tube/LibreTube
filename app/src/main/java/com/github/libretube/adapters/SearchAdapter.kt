@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
@@ -17,8 +15,7 @@ import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.obj.SearchItem
-import com.github.libretube.obj.StreamItem
-import com.github.libretube.videoViews
+import com.github.libretube.formatShort
 
 
 class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
@@ -61,7 +58,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val title = v.findViewById<TextView>(R.id.search_description)
         title.text = item.title
         val views = v.findViewById<TextView>(R.id.search_views)
-        views.text = item.views.videoViews() +" • "+item.uploadedDate
+        views.text = item.views.formatShort() +" • "+item.uploadedDate
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.uploaderName
         v.setOnClickListener{
@@ -89,7 +86,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = item.subscribers.videoViews() + "subscribers • "+ item.videos + " videos"
+        channelViews.text = item.subscribers.formatShort() + "subscribers • "+ item.videos + " videos"
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)

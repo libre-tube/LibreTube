@@ -191,7 +191,7 @@ class ChannelFragment : Fragment() {
                 isLoading=false
                 runOnUiThread {
                     view.findViewById<TextView>(R.id.channel_name).text=response.name
-                    view.findViewById<TextView>(R.id.channel_subs).text=response.subscriberCount.videoViews() + " subscribers"
+                    view.findViewById<TextView>(R.id.channel_subs).text=response.subscriberCount.formatShort() + " subscribers"
                     view.findViewById<TextView>(R.id.channel_description).text=response.description
                     val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
