@@ -1,9 +1,9 @@
+---
 name: Feature request
 about: Suggest a feature that would improve LibreTube
 title: "[FEATURE] <description of feature>"
 labels: enhancement
 assignees: ''
-
 ---
 
 
