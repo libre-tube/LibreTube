@@ -2,17 +2,18 @@ package com.github.libretube
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -95,23 +96,37 @@ class ChannelFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
+                val colorPrimary = TypedValue()
+                (context as Activity).theme.resolveAttribute(
+                    android.R.attr.colorPrimary,
+                    colorPrimary,
+                    true)
+
+                val ColorText = TypedValue()
+                (context as Activity).theme.resolveAttribute(
+                    R.attr.colorOnSurface,
+                    ColorText,
+                    true)
+
                 runOnUiThread {
                     if (response.subscribed==true){
                         isSubscribed=true
                         button.text=getString(R.string.unsubscribe)
-                        button.setTextColor(R.attr.colorPrimaryDark)
+                        button.setTextColor(ColorText.data)
+
                     }
                     if(response.subscribed!=null){
                     button.setOnClickListener {
                         if(isSubscribed){
                             unsubscribe()
                             button.text=getString(R.string.subscribe)
-                            button.setTextColor(resources.getColor(R.color.md_theme_light_primary))
+                            button.setTextColor(colorPrimary.data)
+
 
                         }else{
                             subscribe()
                             button.text=getString(R.string.unsubscribe)
-                            button.setTextColor(R.attr.colorPrimaryDark)
+                            button.setTextColor(ColorText.data)
                         }
                     }}
                 }
