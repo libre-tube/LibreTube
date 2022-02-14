@@ -19,7 +19,7 @@ import com.github.libretube.videoViews
 
 class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<SubscriptionViewHolder>() {
     //private var limitedVideoFeed: MutableList<String> = [""].toMutableList()
-    var i = 10
+    var i = 0
     override fun getItemCount(): Int {
         return i
     }

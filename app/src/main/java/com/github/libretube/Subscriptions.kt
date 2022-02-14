@@ -88,7 +88,7 @@ class Subscriptions : Fragment() {
                 if (response.isNotEmpty()){
                     subscriptionAdapter = SubscriptionAdapter(response)
                     feedRecView?.adapter= subscriptionAdapter
-
+                    subscriptionAdapter?.updateItems()
                 }
                 progressBar.visibility=View.GONE
                 isLoaded=true
