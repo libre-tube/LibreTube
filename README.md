@@ -25,12 +25,12 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 | Feature  | Availability |
 | - | - |
-| User Accounts | 🔴 |
-| Subscriptions | 🔴 ||
+| User Accounts | ✅ |
+| Subscriptions | ✅ ||
 | User Playlists | 🔴 |
 | Trending | ✅ |
 | Channels | ✅ |
-| Channel Playlists | 🔴 |
+| Channel Playlists | ✅ |
 | Search | ✅ |
 | Search Suggestions | ✅ |
 | Search Filters | 🔴 |
