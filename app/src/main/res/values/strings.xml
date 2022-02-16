@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">LibreTube</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="choose_quality_dialog">Choose Quality:</string>
     <string name="search_hint">Search</string>
