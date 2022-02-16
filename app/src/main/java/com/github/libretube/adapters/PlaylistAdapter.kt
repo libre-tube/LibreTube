@@ -1,20 +1,18 @@
 package com.github.libretube.adapters
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
-import com.github.libretube.videoViews
 
 class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerView.Adapter<PlaylistViewHolder>() {
     override fun getItemCount(): Int {
@@ -36,6 +34,7 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerV
         val streamItem = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.channel_description).text = streamItem.title
         holder.v.findViewById<TextView>(R.id.channel_views).text = streamItem.uploaderName
+        holder.v.findViewById<TextView>(R.id.channel_duration).text = DateUtils.formatElapsedTime(streamItem.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
         Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
         holder.v.setOnClickListener{

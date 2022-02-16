@@ -3,6 +3,9 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
 
+    <color name="duration_background_color">#AA000000</color>
+    <color name="duration_text_color">#EEFFFFFF</color>
+
     <color name="colorPrimary">#B81B3B</color>
     <color name="md_theme_light_primary">#B81B3B</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
