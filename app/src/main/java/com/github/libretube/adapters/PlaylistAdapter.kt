@@ -20,7 +20,6 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerV
     }
     fun updateItems(newItems: List<StreamItem>){
         videoFeed.addAll(newItems)
-        //println("suck another dick: "+newItems[0].title)
         notifyDataSetChanged()
     }
 

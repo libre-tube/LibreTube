@@ -178,7 +178,7 @@ class PlayerFragment : Fragment() {
         }
         //FullScreen button trigger
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener{
-            //remember to hide everything when new shit added
+            //remember to hide everything when new thing added
             if (!isFullScreen){
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)

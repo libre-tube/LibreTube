@@ -41,7 +41,7 @@ class Settings : PreferenceFragmentCompat() {
             val login = findPreference<Preference>("login_register")
             login?.setOnPreferenceClickListener {
                 val newFragment = LoginDialog()
-                newFragment.show(childFragmentManager, "fuck")
+                newFragment.show(childFragmentManager, "Login")
                 true
             }
 
