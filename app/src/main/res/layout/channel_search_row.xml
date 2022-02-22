@@ -48,6 +48,7 @@
         android:text="@string/subscribe"
         android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
-        app:layout_constraintTop_toBottomOf="@+id/search_views" />
+        app:layout_constraintTop_toBottomOf="@+id/search_views"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
