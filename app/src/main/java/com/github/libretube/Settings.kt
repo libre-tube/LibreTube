@@ -48,16 +48,9 @@ class Settings : PreferenceFragmentCompat() {
         }
 
     private fun fetchInstance() {
-        val api: PipedApi by lazy{
-            Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com/wiki/TeamPiped/Piped-Frontend/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build()
-                .create(PipedApi::class.java)
-        }
         lifecycleScope.launchWhenCreated {
             val response = try {
-                api.getInstances()
+                RetrofitInstance.api.getInstances("https://instances.tokhmi.xyz/")
             } catch (e: IOException) {
                 println(e)
                 Log.e("settings", "IOException, you might not have internet connection")
@@ -72,20 +65,9 @@ class Settings : PreferenceFragmentCompat() {
             //println("dafaq $response")
             val listEntries: MutableList<String> = ArrayList()
             val listEntryValues: MutableList<String> = ArrayList()
-            var skipped = 0
-            val lines = response.split("\n")
-            for(line in lines) {
-                val split = line.split("|")
-                if (split.size == 5) {
-                    if (skipped < 2) {
-                        skipped++
-                    }else{
-                        println("dafaq $line")
-                        listEntries.add(split[0])
-                        listEntryValues.add(split[1])
-                    }
-                }
-
+            for(item in response){
+                listEntries.add(item.name!!)
+                listEntryValues.add(item.api_url!!)
             }
             val entries = listEntries.toTypedArray<CharSequence>()
             val entryValues = listEntryValues.toTypedArray<CharSequence>()

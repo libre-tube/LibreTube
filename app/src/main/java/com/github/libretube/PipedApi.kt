@@ -53,7 +53,7 @@ interface PipedApi {
     suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
     //only for fetching servers list
-    @GET("Instances.md")
-    suspend fun getInstances(): String
+    @GET
+    suspend fun getInstances(@Url url: String): List<Instances>
 
 }
