@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId 'com.github.libretube'
-        minSdk 24
+        minSdk 21
         targetSdk 31
         versionCode 4
         versionName '0.2.2'
@@ -62,5 +62,5 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
     implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
 
-    implementation 'com.arthenica:ffmpeg-kit-full:4.5.1'
+    implementation 'com.arthenica:ffmpeg-kit-https:4.5.1.LTS'
 }

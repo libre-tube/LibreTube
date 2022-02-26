@@ -1,12 +1,17 @@
 package com.github.libretube
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Environment
+import android.os.Environment.DIRECTORY_DOWNLOADS
 import android.text.Html
 import android.util.Log
 import android.util.TypedValue
@@ -17,6 +22,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -42,6 +48,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
+import java.io.File
 import java.io.IOException
 import kotlin.math.abs
 
@@ -358,8 +365,38 @@ class PlayerFragment : Fragment() {
                         isSubscribed(subButton, channelId!!)
                     }
                     relDownloadVideo.setOnClickListener {
+                        val mainActivity = activity as MainActivity
                         Log.e(TAG,"download button clicked!")
-                        FFmpegKit.executeAsync("-i ${response.videoStreams[0].url} -i ${response.audioStreams!![0].url} -c copy output.mkv",
+                        if (SDK_INT >= Build.VERSION_CODES.R) {
+                            Log.d("myz", "" + SDK_INT)
+                            if (!Environment.isExternalStorageManager()) {
+                                ActivityCompat.requestPermissions(
+                                    mainActivity, arrayOf(
+                                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                                    ), 1
+                                ) //permission request code is just an int
+                            }
+                        } else {
+                            if (ActivityCompat.checkSelfPermission(
+                                    requireContext(),
+                                    Manifest.permission.READ_EXTERNAL_STORAGE
+                                ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                                    requireContext(),
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                ) != PackageManager.PERMISSION_GRANTED
+                            ) {
+                                ActivityCompat.requestPermissions(
+                                    mainActivity,
+                                    arrayOf(
+                                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                    ),
+                                    1
+                                )
+                            }
+                        }
+                        FFmpegKit.executeAsync("-i ${response.videoStreams[0].url} -i ${response.audioStreams!![0].url} -c copy ${context?.getExternalFilesDir(DIRECTORY_DOWNLOADS)}${File.separator}output1.mkv",
                             { session ->
                                 val state = session.state
                                 val returnCode = session.returnCode
@@ -376,6 +413,7 @@ class PlayerFragment : Fragment() {
                                 )
                             }, {
                                 // CALLED WHEN SESSION PRINTS LOGS
+                                Log.e(TAG,it.toString())
                             }) {
                             // CALLED WHEN SESSION GENERATES STATISTICS
                         }
