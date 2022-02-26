@@ -1,58 +1,49 @@
 package com.github.libretube
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
-import com.google.android.exoplayer2.source.MediaSource
-
-import com.google.android.exoplayer2.ui.StyledPlayerView
-
-import java.io.IOException
-import kotlin.math.abs
-import com.google.android.exoplayer2.util.MimeTypes
-import com.google.common.collect.ImmutableList
-import android.app.ActionBar
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ActivityInfo
-import android.widget.*
-import androidx.core.net.toUri
-import com.google.android.exoplayer2.MediaItem.fromUri
-import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DataSource
-
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import android.widget.TextView
-
 import android.os.Build
+import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.util.TypedValue
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-
-import com.squareup.picasso.Picasso
-import retrofit2.HttpException
+import androidx.recyclerview.widget.RecyclerView
+import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
+import com.google.android.exoplayer2.MediaItem.fromUri
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.MergingMediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.material.button.MaterialButton
+import com.squareup.picasso.Picasso
+import retrofit2.HttpException
+import java.io.IOException
+import kotlin.math.abs
 
 
 var isFullScreen = false
@@ -75,6 +66,8 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
+    private lateinit var relDownloadVideo: RelativeLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -92,6 +85,7 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        relDownloadVideo = view.findViewById(R.id.relPlayer_download)
         val mainActivity = activity as MainActivity
         mainActivity.findViewById<FrameLayout>(R.id.container).visibility=View.VISIBLE
         val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
@@ -363,6 +357,30 @@ class PlayerFragment : Fragment() {
                         val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
                         isSubscribed(subButton, channelId!!)
                     }
+                    relDownloadVideo.setOnClickListener {
+                        Log.e(TAG,"download button clicked!")
+                        FFmpegKit.executeAsync("-i ${response.videoStreams[0].url} -i ${response.audioStreams!![0].url} -c copy output.mkv",
+                            { session ->
+                                val state = session.state
+                                val returnCode = session.returnCode
+
+                                // CALLED WHEN SESSION IS EXECUTED
+                                Log.d(
+                                    TAG,
+                                    String.format(
+                                        "FFmpeg process exited with state %s and rc %s.%s",
+                                        state,
+                                        returnCode,
+                                        session.failStackTrace
+                                    )
+                                )
+                            }, {
+                                // CALLED WHEN SESSION PRINTS LOGS
+                            }) {
+                            // CALLED WHEN SESSION GENERATES STATISTICS
+                        }
+
+                    }
                 }
             }
 
@@ -370,6 +388,8 @@ class PlayerFragment : Fragment() {
         run()
 
     }
+
+
 
     private fun isSubscribed(button: MaterialButton, channel_id: String){
         @SuppressLint("ResourceAsColor")
