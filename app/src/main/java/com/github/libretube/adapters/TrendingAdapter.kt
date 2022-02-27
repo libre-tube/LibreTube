@@ -50,8 +50,16 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
 
             }
         }
-        Picasso.get().load(trending.thumbnail).into(thumbnailImage)
-        Picasso.get().load(trending.uploaderAvatar).into(channelImage)
+        if (trending.thumbnail!!.isEmpty()) {
+        } else{
+            Picasso.get().load(trending.thumbnail).into(thumbnailImage)
+        }
+        if (trending.uploaderAvatar!!.isEmpty()) {
+        } else{
+            Picasso.get().load(trending.uploaderAvatar).into(channelImage)
+        }
+
+
         holder.v.setOnClickListener{
             var bundle = Bundle()
             bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))

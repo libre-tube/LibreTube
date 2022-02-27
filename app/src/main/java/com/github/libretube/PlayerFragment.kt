@@ -396,7 +396,7 @@ class PlayerFragment : Fragment() {
                                 )
                             }
                         }
-                        FFmpegKit.executeAsync("-i ${response.videoStreams[0].url} -i ${response.audioStreams!![0].url} -c copy ${context?.getExternalFilesDir(DIRECTORY_DOWNLOADS)}${File.separator}output1.mkv",
+                        FFmpegKit.executeAsync("-i ${response.videoStreams[0].url} -i ${response.audioStreams!![0].url} -c copy ${context?.getExternalFilesDir(DIRECTORY_DOWNLOADS)}${File.separator}output2.mkv",
                             { session ->
                                 val state = session.state
                                 val returnCode = session.returnCode

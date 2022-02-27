@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -35,6 +35,18 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    splits {
+        abi {
+            enable true
+            reset()
+            include "armeabi-v7a","arm64-v8a","x86","x86_64"
+            universalApk false
+
+        }
+    }
+    packagingOptions {
+        exclude 'lib/armeabi-v7a/*_neon.so'
     }
 }
 
