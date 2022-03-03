@@ -23,4 +23,5 @@
     <string name="login_register">Login/Register</string>
     <string name="please_login">Please Login or Register from the settings to show your Subscriptions!</string>
     <string name="subscribeIsEmpty">Subscribe to some channels first!</string>
+    <string name="cannotDownload">Can\'t Download this stream!</string>
 </resources>

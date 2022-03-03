@@ -3,15 +3,16 @@ package com.github.libretube
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
-import android.os.Environment.DIRECTORY_DOWNLOADS
 import android.text.Html
 import android.util.Log
 import android.util.TypedValue
@@ -23,13 +24,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
@@ -48,7 +49,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
-import java.io.File
 import java.io.IOException
 import kotlin.math.abs
 
@@ -364,6 +364,9 @@ class PlayerFragment : Fragment() {
                         val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
                         isSubscribed(subButton, channelId!!)
                     }
+                    //check if livestream
+                    if (response.duration!!>0){
+                    //download clicked
                     relDownloadVideo.setOnClickListener {
                         val mainActivity = activity as MainActivity
                         Log.e(TAG,"download button clicked!")
@@ -396,11 +399,24 @@ class PlayerFragment : Fragment() {
                                 )
                             }
                         }
-                        FFmpegKit.executeAsync("-i ${response.videoStreams[0].url} -i ${response.audioStreams!![0].url} -c copy ${context?.getExternalFilesDir(DIRECTORY_DOWNLOADS)}${File.separator}output2.mkv",
+                        val builderr: AlertDialog.Builder? = activity?.let {
+                            AlertDialog.Builder(it)
+                        }
+                        var videos = videosNameArray.drop(1).toTypedArray()
+                        builderr!!.setTitle(R.string.choose_quality_dialog)
+                            .setItems(videos,
+                                DialogInterface.OnClickListener { _, which ->
+                                    val intent = Intent(context,DownloadService::class.java)
+                                    intent.putExtra("videoId",videoId)
+                                    intent.putExtra("videoUrl",response.videoStreams[which].url)
+                                    intent.putExtra("audioUrl",response.audioStreams!![0].url)
+                                    intent.putExtra("duration",response.duration)
+                                    //intent.putExtra("command","-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv")
+                                    context?.startService(intent)
+                        /*FFmpegKit.executeAsync("-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv",
                             { session ->
                                 val state = session.state
                                 val returnCode = session.returnCode
-
                                 // CALLED WHEN SESSION IS EXECUTED
                                 Log.d(
                                     TAG,
@@ -413,11 +429,17 @@ class PlayerFragment : Fragment() {
                                 )
                             }, {
                                 // CALLED WHEN SESSION PRINTS LOGS
-                                Log.e(TAG,it.toString())
+                                Log.e(TAG,it.message.toString())
                             }) {
                             // CALLED WHEN SESSION GENERATES STATISTICS
-                        }
-
+                            Log.e(TAG,it.time.toString())
+                        }*/
+                                })
+                        val dialog: AlertDialog? = builderr?.create()
+                        dialog?.show()
+                    }
+                    }else{
+                        Toast.makeText(context,R.string.cannotDownload, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -427,8 +449,15 @@ class PlayerFragment : Fragment() {
 
     }
 
-
-
+/*    private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+        for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
+    }*/
     private fun isSubscribed(button: MaterialButton, channel_id: String){
         @SuppressLint("ResourceAsColor")
         fun run() {

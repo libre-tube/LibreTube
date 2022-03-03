@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_libretube"
@@ -17,6 +18,7 @@
         android:name=".myApp"
         android:networkSecurityConfig="@xml/network_security_config"
         android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         >
         <activity
             android:name=".Player"
@@ -37,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".DownloadService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
