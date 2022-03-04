@@ -11,11 +11,10 @@ import android.os.Build
 import android.os.Environment
 import android.os.IBinder
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
-import java.lang.Exception
+
 
 var IS_DOWNLOAD_RUNNING = false
 class DownloadService : Service(){
@@ -57,8 +56,12 @@ class DownloadService : Service(){
                        // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
                        ""
                    }
-               val pendingIntent: PendingIntent = PendingIntent.getActivity(
-                   this@DownloadService, 0, intent, 0)
+        var pendingIntent: PendingIntent? = null
+        pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        }
         //Creating a notification and setting its various attributes
         notification =
             NotificationCompat.Builder(this@DownloadService, channelId)
