@@ -20,7 +20,6 @@ import java.lang.Exception
 var IS_DOWNLOAD_RUNNING = false
 class DownloadService : Service(){
     val TAG = "DownloadService"
-
     private var downloadId: Long =-1
     private lateinit var videoId: String
     private lateinit var videoUrl: String
@@ -30,7 +29,8 @@ class DownloadService : Service(){
     //private lateinit var command: String
     private lateinit var audioDir: File
     private lateinit var videoDir: File
-
+    lateinit var service: NotificationManager
+    lateinit var notification: NotificationCompat.Builder
     override fun onCreate() {
         super.onCreate()
         IS_DOWNLOAD_RUNNING = true
@@ -43,6 +43,35 @@ class DownloadService : Service(){
         extension = intent.getStringExtra("extension")!!
         //command = intent.getStringExtra("command")!!
         duration = intent.getIntExtra("duration",1)
+        service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+               val channelId =
+                   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                       val chan = NotificationChannel("service",
+                           "DownloadService", NotificationManager.IMPORTANCE_NONE)
+                       chan.lightColor = Color.BLUE
+                       chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+                       service.createNotificationChannel(chan)
+                       "service"
+                   } else {
+                       // If earlier version channel ID is not used
+                       // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
+                       ""
+                   }
+               val pendingIntent: PendingIntent = PendingIntent.getActivity(
+                   this@DownloadService, 0, intent, 0)
+        //Creating a notification and setting its various attributes
+        notification =
+            NotificationCompat.Builder(this@DownloadService, channelId)
+                .setSmallIcon(R.drawable.ic_download)
+                .setContentTitle("LibreTube")
+                .setContentText("Downloading")
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setOngoing(true)
+                .setOnlyAlertOnce(true)
+                .setProgress(100, 0, true)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+        startForeground(1,notification.build())
         downloadManager()
 
         return super.onStartCommand(intent, flags, startId)
@@ -79,7 +108,7 @@ class DownloadService : Service(){
             val downloadManager: DownloadManager =
                 applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             downloadId = downloadManager.enqueue(request)
-            if(audioUrl=="") downloadId = 0L
+            if(audioUrl==""){downloadId = 0L}
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "download error $e")
             try{
@@ -124,36 +153,6 @@ class DownloadService : Service(){
                 downloadManager.enqueue(request)
                 }catch (e: Exception){}
             }else if (downloadId == 0L){
-                /*val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                val channelId =
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        val chan = NotificationChannel("service",
-                            "DownloadService", NotificationManager.IMPORTANCE_NONE)
-                        chan.lightColor = Color.BLUE
-                        chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-                        service.createNotificationChannel(chan)
-                        "service"
-                    } else {
-                        // If earlier version channel ID is not used
-                        // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
-                        ""
-                    }
-                val pendingIntent: PendingIntent = PendingIntent.getActivity(
-                    this@DownloadService, 0, intent, 0)*/
-                //Sets the maximum progress as 100
-                /*val progressMax = 100
-                //Creating a notification and setting its various attributes
-                val notification =
-                    NotificationCompat.Builder(this@DownloadService, channelId)
-                        .setSmallIcon(R.drawable.ic_download)
-                        .setContentTitle("LibreTube")
-                        .setContentText("Downloading")
-                        .setPriority(NotificationCompat.PRIORITY_LOW)
-                        .setOngoing(true)
-                        .setOnlyAlertOnce(true)
-                        .setProgress(progressMax, 0, true)
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)*/
                 val libreTube = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"LibreTube")
                 if (!libreTube.exists()) {
                     libreTube.mkdirs()
@@ -172,6 +171,7 @@ class DownloadService : Service(){
                         "-y -i $videoDir -i $audioDir -c copy ${libreTube}/${videoId}$extension"
                     }
                 }
+                notification.setContentTitle("Muxing")
                 FFmpegKit.executeAsync(command,
                     { session ->
                         val state = session.state
@@ -190,8 +190,8 @@ class DownloadService : Service(){
                         val folder_main = ".tmp"
                         val f = File(path, folder_main)
                         f.deleteRecursively()
-                        stopForeground(true)
                         //Toast.makeText(this@DownloadService, R.string.dlcomplete, Toast.LENGTH_LONG).show()
+                        stopForeground(true)
                         stopService(Intent(this@DownloadService,DownloadService::class.java))
                     }, {
                         // CALLED WHEN SESSION PRINTS LOGS
@@ -206,7 +206,7 @@ class DownloadService : Service(){
                         service.notify(1,notification.build())
                     }*/
                 }
-                //startForeground(1,notification.build())
+
             }
         }
     }
