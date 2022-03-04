@@ -6,7 +6,6 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -366,8 +365,10 @@ class PlayerFragment : Fragment() {
                     }
                     //check if livestream
                     if (response.duration!!>0){
+
                     //download clicked
                     relDownloadVideo.setOnClickListener {
+                        if(!IS_DOWNLOAD_RUNNING){
                         val mainActivity = activity as MainActivity
                         Log.e(TAG,"download button clicked!")
                         if (SDK_INT >= Build.VERSION_CODES.R) {
@@ -399,45 +400,39 @@ class PlayerFragment : Fragment() {
                                 )
                             }
                         }
-                        val builderr: AlertDialog.Builder? = activity?.let {
-                            AlertDialog.Builder(it)
+                        var vidName = arrayListOf<String>()
+                        vidName.add("No video")
+                        var vidUrl = arrayListOf<String>()
+                        vidUrl.add("")
+                        for (vid in response.videoStreams!!){
+                            val name = vid.quality +" "+ vid.format
+                            vidName.add(name)
+                            vidUrl.add(vid.url!!)
                         }
-                        var videos = videosNameArray.drop(1).toTypedArray()
-                        builderr!!.setTitle(R.string.choose_quality_dialog)
-                            .setItems(videos,
-                                DialogInterface.OnClickListener { _, which ->
-                                    val intent = Intent(context,DownloadService::class.java)
-                                    intent.putExtra("videoId",videoId)
-                                    intent.putExtra("videoUrl",response.videoStreams[which].url)
-                                    intent.putExtra("audioUrl",response.audioStreams!![0].url)
-                                    intent.putExtra("duration",response.duration)
-                                    //intent.putExtra("command","-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv")
-                                    context?.startService(intent)
-                        /*FFmpegKit.executeAsync("-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv",
-                            { session ->
-                                val state = session.state
-                                val returnCode = session.returnCode
-                                // CALLED WHEN SESSION IS EXECUTED
-                                Log.d(
-                                    TAG,
-                                    String.format(
-                                        "FFmpeg process exited with state %s and rc %s.%s",
-                                        state,
-                                        returnCode,
-                                        session.failStackTrace
-                                    )
-                                )
-                            }, {
-                                // CALLED WHEN SESSION PRINTS LOGS
-                                Log.e(TAG,it.message.toString())
-                            }) {
-                            // CALLED WHEN SESSION GENERATES STATISTICS
-                            Log.e(TAG,it.time.toString())
-                        }*/
-                                })
-                        val dialog: AlertDialog? = builderr?.create()
-                        dialog?.show()
-                    }
+                        var audioName = arrayListOf<String>()
+                        audioName.add("No audio")
+                        var audioUrl = arrayListOf<String>()
+                        audioUrl.add("")
+                        for (audio in response.audioStreams!!){
+                            val name = audio.quality +" "+ audio.format
+                            audioName.add(name)
+                            audioUrl.add(audio.url!!)
+                        }
+                        val newFragment = DownloadDialog()
+                        var bundle = Bundle()
+                        bundle.putStringArrayList("videoName",vidName)
+                        bundle.putStringArrayList("videoUrl",vidUrl)
+                        bundle.putStringArrayList("audioName",audioName)
+                        bundle.putStringArrayList("audioUrl",audioUrl)
+                        bundle.putString("videoId",videoId)
+                        bundle.putInt("duration",response.duration)
+                        newFragment.arguments = bundle
+                        newFragment.show(childFragmentManager, "Download")
+                        }else{
+                            Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        }
                     }else{
                         Toast.makeText(context,R.string.cannotDownload, Toast.LENGTH_SHORT).show()
                     }
@@ -449,15 +444,6 @@ class PlayerFragment : Fragment() {
 
     }
 
-/*    private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
-        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
-        for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
-    }*/
     private fun isSubscribed(button: MaterialButton, channel_id: String){
         @SuppressLint("ResourceAsColor")
         fun run() {

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+
+    <ImageView
+        android:src="@drawable/ic_libretube_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:scaleType="center"
+        android:background="#CD5757"
+        android:contentDescription="@string/app_name" />
+
+    <Spinner
+        android:id="@+id/video_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        />
+    <Spinner
+        android:id="@+id/audio_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"/>
+    <RadioGroup
+        android:id="@+id/radioGp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+        <RadioButton
+            android:id="@+id/mkv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=".mkv"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/mp4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=".mp4"/>
+    </RadioGroup>
+        <Button
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/download"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"/>
+</LinearLayout>

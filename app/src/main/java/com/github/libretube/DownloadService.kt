@@ -12,25 +12,35 @@ import android.os.Environment
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
+import java.lang.Exception
 
+var IS_DOWNLOAD_RUNNING = false
 class DownloadService : Service(){
     val TAG = "DownloadService"
-    private var downloadId: Long =0
+
+    private var downloadId: Long =-1
     private lateinit var videoId: String
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
+    private lateinit var extension: String
     private var duration: Int = 0
     //private lateinit var command: String
     private lateinit var audioDir: File
     private lateinit var videoDir: File
+
+    override fun onCreate() {
+        super.onCreate()
+        IS_DOWNLOAD_RUNNING = true
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         videoId = intent?.getStringExtra("videoId")!!
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
+        extension = intent.getStringExtra("extension")!!
         //command = intent.getStringExtra("command")!!
         duration = intent.getIntExtra("duration",1)
         downloadManager()
@@ -49,12 +59,15 @@ class DownloadService : Service(){
             f.mkdirs()
             Log.e(TAG, "Directory make")
         } else {
+            f.deleteRecursively()
+            f.mkdirs()
             Log.e(TAG, "Directory already have")
         }
         audioDir = File(f, "$videoId-audio")
         videoDir = File(f, "$videoId-video")
         try {
             Log.e(TAG, "Directory make")
+            registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
             val request: DownloadManager.Request =
                 DownloadManager.Request(Uri.parse(videoUrl))
                     .setTitle("Video") // Title of the Download Notification
@@ -66,22 +79,11 @@ class DownloadService : Service(){
             val downloadManager: DownloadManager =
                 applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             downloadId = downloadManager.enqueue(request)
-
-            registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+            if(audioUrl=="") downloadId = 0L
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "download error $e")
-        }
-    }
-
-    private val onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            //Fetching the download id received with the broadcast
-            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-            //Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadId == id) {
-                Toast.makeText(this@DownloadService, "Download Completed", Toast.LENGTH_SHORT)
-                    .show()
-                downloadId=0
+            try{
+                downloadId = 0L
                 val request: DownloadManager.Request =
                     DownloadManager.Request(Uri.parse(audioUrl))
                         .setTitle("Audio") // Title of the Download Notification
@@ -94,8 +96,35 @@ class DownloadService : Service(){
                     applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
                 downloadManager.enqueue(request)
 
+            }catch (e: Exception){
+                Log.e(TAG, "audio download error $e")
+                stopService(Intent(this,DownloadService::class.java))}
+
+        }
+    }
+
+    private val onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            //Fetching the download id received with the broadcast
+            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            //Checking if the received broadcast is for our enqueued download by matching download id
+            if (downloadId == id) {
+                downloadId=0L
+                try{
+                val request: DownloadManager.Request =
+                    DownloadManager.Request(Uri.parse(audioUrl))
+                        .setTitle("Audio") // Title of the Download Notification
+                        .setDescription("Downloading") // Description of the Download Notification
+                        .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE) // Visibility of the download Notification
+                        .setDestinationUri(Uri.fromFile(audioDir))
+                        .setAllowedOverMetered(true) // Set if download is allowed on Mobile network
+                        .setAllowedOverRoaming(true) //
+                val downloadManager: DownloadManager =
+                    applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                downloadManager.enqueue(request)
+                }catch (e: Exception){}
             }else if (downloadId == 0L){
-                val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                /*val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 val channelId =
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         val chan = NotificationChannel("service",
@@ -109,11 +138,10 @@ class DownloadService : Service(){
                         // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
                         ""
                     }
-                //Toast.makeText(this,command, Toast.LENGTH_SHORT).show()
                 val pendingIntent: PendingIntent = PendingIntent.getActivity(
-                    this@DownloadService, 0, intent, 0)
+                    this@DownloadService, 0, intent, 0)*/
                 //Sets the maximum progress as 100
-                val progressMax = 100
+                /*val progressMax = 100
                 //Creating a notification and setting its various attributes
                 val notification =
                     NotificationCompat.Builder(this@DownloadService, channelId)
@@ -125,9 +153,26 @@ class DownloadService : Service(){
                         .setOnlyAlertOnce(true)
                         .setProgress(progressMax, 0, true)
                         .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)
-
-                FFmpegKit.executeAsync("-y -i $videoDir -i $audioDir -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv",
+                        .setAutoCancel(true)*/
+                val libreTube = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"LibreTube")
+                if (!libreTube.exists()) {
+                    libreTube.mkdirs()
+                    Log.e(TAG, "libreTube Directory make")
+                } else {
+                    Log.e(TAG, "libreTube Directory already have")
+                }
+                var command: String = when {
+                    videoUrl=="" -> {
+                        "-y -i $audioDir -c copy ${libreTube}/${videoId}-audio$extension"
+                    }
+                    audioUrl=="" -> {
+                        "-y -i $videoDir -c copy ${libreTube}/${videoId}-video$extension"
+                    }
+                    else -> {
+                        "-y -i $videoDir -i $audioDir -c copy ${libreTube}/${videoId}$extension"
+                    }
+                }
+                FFmpegKit.executeAsync(command,
                     { session ->
                         val state = session.state
                         val returnCode = session.returnCode
@@ -146,27 +191,33 @@ class DownloadService : Service(){
                         val f = File(path, folder_main)
                         f.deleteRecursively()
                         stopForeground(true)
+                        //Toast.makeText(this@DownloadService, R.string.dlcomplete, Toast.LENGTH_LONG).show()
+                        stopService(Intent(this@DownloadService,DownloadService::class.java))
                     }, {
                         // CALLED WHEN SESSION PRINTS LOGS
                         Log.e(TAG,it.message.toString())
                     }) {
                     // CALLED WHEN SESSION GENERATES STATISTICS
                     Log.e(TAG+"stat",it.time.toString())
-                    val progress = it.time/(10*duration!!)
+                    /*val progress = it.time/(10*duration!!)
                     if (progress<1){
                         notification
                             .setProgress(progressMax, progress.toInt(), false)
                         service.notify(1,notification.build())
-                    }
+                    }*/
                 }
-                startForeground(1,notification.build())
+                //startForeground(1,notification.build())
             }
         }
     }
 
 
     override fun onDestroy() {
-        unregisterReceiver(onDownloadComplete)
+        try {
+            unregisterReceiver(onDownloadComplete)
+        }catch (e: Exception){}
+        IS_DOWNLOAD_RUNNING = false
+        Log.d(TAG,"dl finished!")
         super.onDestroy()
     }
 
