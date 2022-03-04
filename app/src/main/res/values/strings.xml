@@ -26,4 +26,5 @@
     <string name="cannotDownload">Can\'t Download this stream!</string>
     <string name="dlcomplete">Download is completed!</string>
     <string name="dlisinprogress">Another Download is already in progress please wait till it\'s finished!</string>
+    <string name="downloadfailed">Download Failed!</string>
 </resources>

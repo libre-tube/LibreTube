@@ -12,6 +12,7 @@ import android.os.Environment
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
 
@@ -193,7 +194,18 @@ class DownloadService : Service(){
                         val folder_main = ".tmp"
                         val f = File(path, folder_main)
                         f.deleteRecursively()
-                        //Toast.makeText(this@DownloadService, R.string.dlcomplete, Toast.LENGTH_LONG).show()
+                        if (returnCode.toString()!="0"){
+                            var builder = NotificationCompat.Builder(this@DownloadService, "failed")
+                                .setSmallIcon(R.drawable.ic_download)
+                                .setContentTitle(resources.getString(R.string.downloadfailed))
+                                .setContentText("failure")
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                            createNotificationChannel()
+                            with(NotificationManagerCompat.from(this@DownloadService)) {
+                                // notificationId is a unique int for each notification that you must define
+                                notify(69, builder.build())
+                            }
+                        }
                         stopForeground(true)
                         stopService(Intent(this@DownloadService,DownloadService::class.java))
                     }, {
@@ -214,7 +226,22 @@ class DownloadService : Service(){
         }
     }
 
-
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "failed"
+            val descriptionText = "Download Failed"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("failed", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
     override fun onDestroy() {
         try {
             unregisterReceiver(onDownloadComplete)
