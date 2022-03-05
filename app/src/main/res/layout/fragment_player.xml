@@ -79,11 +79,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relPlayer_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <ImageView
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground">
+                <ImageView
                         android:id="@+id/player_share"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

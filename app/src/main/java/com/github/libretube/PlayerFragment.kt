@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Build
@@ -28,6 +29,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.TrendingAdapter
@@ -363,9 +365,16 @@ class PlayerFragment : Fragment() {
                         val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
                         isSubscribed(subButton, channelId!!)
                     }
+                    //share button
+                    view.findViewById<RelativeLayout>(R.id.relPlayer_share).setOnClickListener {
+                        val intent= Intent()
+                        intent.action=Intent.ACTION_SEND
+                        intent.putExtra(Intent.EXTRA_TEXT, "https://piped.tokhmi.xyz/$videoId")
+                        intent.type="text/plain"
+                        startActivity(Intent.createChooser(intent,"Share Url To:"))
+                    }
                     //check if livestream
                     if (response.duration!!>0){
-
                     //download clicked
                     relDownloadVideo.setOnClickListener {
                         if(!IS_DOWNLOAD_RUNNING){
