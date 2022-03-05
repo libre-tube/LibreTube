@@ -24,7 +24,7 @@ class Settings : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
         val instance = findPreference<ListPreference>("instance")
         fetchInstance()
-        instance?.setOnPreferenceChangeListener { preference, newValue ->
+        instance?.setOnPreferenceChangeListener { _, newValue ->
             RetrofitInstance.url = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
@@ -62,7 +62,6 @@ class Settings : PreferenceFragmentCompat() {
                 Log.e("settings",e.toString())
                 return@launchWhenCreated
             }
-            //println("dafaq $response")
             val listEntries: MutableList<String> = ArrayList()
             val listEntryValues: MutableList<String> = ArrayList()
             for(item in response){

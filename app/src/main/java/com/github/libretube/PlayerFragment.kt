@@ -1,58 +1,55 @@
 package com.github.libretube
 
+import android.Manifest
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
-import com.google.android.exoplayer2.source.MediaSource
-
-import com.google.android.exoplayer2.ui.StyledPlayerView
-
-import java.io.IOException
-import kotlin.math.abs
-import com.google.android.exoplayer2.util.MimeTypes
-import com.google.common.collect.ImmutableList
-import android.app.ActionBar
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ActivityInfo
-import android.widget.*
-import androidx.core.net.toUri
-import com.google.android.exoplayer2.MediaItem.fromUri
-import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DataSource
-
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import android.widget.TextView
-
+import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
+import android.os.Bundle
+import android.os.Environment
 import android.text.Html
 import android.util.Log
 import android.util.TypedValue
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-
-import com.squareup.picasso.Picasso
-import retrofit2.HttpException
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
+import com.google.android.exoplayer2.MediaItem.fromUri
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.MergingMediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.material.button.MaterialButton
+import com.squareup.picasso.Picasso
+import retrofit2.HttpException
+import java.io.IOException
+import kotlin.math.abs
 
 
 var isFullScreen = false
@@ -75,6 +72,8 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
+    private lateinit var relDownloadVideo: RelativeLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -92,6 +91,7 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        relDownloadVideo = view.findViewById(R.id.relPlayer_download)
         val mainActivity = activity as MainActivity
         mainActivity.findViewById<FrameLayout>(R.id.container).visibility=View.VISIBLE
         val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
@@ -362,6 +362,79 @@ class PlayerFragment : Fragment() {
                         val channelId = response.uploaderUrl?.replace("/channel/","")
                         val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
                         isSubscribed(subButton, channelId!!)
+                    }
+                    //check if livestream
+                    if (response.duration!!>0){
+
+                    //download clicked
+                    relDownloadVideo.setOnClickListener {
+                        if(!IS_DOWNLOAD_RUNNING){
+                        val mainActivity = activity as MainActivity
+                        Log.e(TAG,"download button clicked!")
+                        if (SDK_INT >= Build.VERSION_CODES.R) {
+                            Log.d("myz", "" + SDK_INT)
+                            if (!Environment.isExternalStorageManager()) {
+                                ActivityCompat.requestPermissions(
+                                    mainActivity, arrayOf(
+                                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                                    ), 1
+                                ) //permission request code is just an int
+                            }
+                        } else {
+                            if (ActivityCompat.checkSelfPermission(
+                                    requireContext(),
+                                    Manifest.permission.READ_EXTERNAL_STORAGE
+                                ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                                    requireContext(),
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                ) != PackageManager.PERMISSION_GRANTED
+                            ) {
+                                ActivityCompat.requestPermissions(
+                                    mainActivity,
+                                    arrayOf(
+                                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                    ),
+                                    1
+                                )
+                            }
+                        }
+                        var vidName = arrayListOf<String>()
+                        vidName.add("No video")
+                        var vidUrl = arrayListOf<String>()
+                        vidUrl.add("")
+                        for (vid in response.videoStreams!!){
+                            val name = vid.quality +" "+ vid.format
+                            vidName.add(name)
+                            vidUrl.add(vid.url!!)
+                        }
+                        var audioName = arrayListOf<String>()
+                        audioName.add("No audio")
+                        var audioUrl = arrayListOf<String>()
+                        audioUrl.add("")
+                        for (audio in response.audioStreams!!){
+                            val name = audio.quality +" "+ audio.format
+                            audioName.add(name)
+                            audioUrl.add(audio.url!!)
+                        }
+                        val newFragment = DownloadDialog()
+                        var bundle = Bundle()
+                        bundle.putStringArrayList("videoName",vidName)
+                        bundle.putStringArrayList("videoUrl",vidUrl)
+                        bundle.putStringArrayList("audioName",audioName)
+                        bundle.putStringArrayList("audioUrl",audioUrl)
+                        bundle.putString("videoId",videoId)
+                        bundle.putInt("duration",response.duration)
+                        newFragment.arguments = bundle
+                        newFragment.show(childFragmentManager, "Download")
+                        }else{
+                            Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        }
+                    }else{
+                        Toast.makeText(context,R.string.cannotDownload, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
