@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchFragment"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <com.google.android.material.card.MaterialCardView

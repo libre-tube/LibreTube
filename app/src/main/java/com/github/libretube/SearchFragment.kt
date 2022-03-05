@@ -1,31 +1,31 @@
 package com.github.libretube
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.adapters.SearchAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import com.github.libretube.adapters.SearchAdapter
 import java.io.IOException
 
 
 class SearchFragment : Fragment() {
-
     private val TAG = "SearchFragment"
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -61,7 +61,7 @@ class SearchFragment : Fragment() {
                     if(s!! != ""){
                         GlobalScope.launch {
                             fetchSuggestions(s.toString(), autoTextView)
-                            delay(2000)
+                            delay(3000)
                             fetchSearch(s.toString(),recyclerView)
                         }
                     }
@@ -96,7 +96,7 @@ class SearchFragment : Fragment() {
                 RetrofitInstance.api.getSearchResults(query, "all")
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection "+e.toString())
+                Log.e(TAG, "IOException, you might not have internet connection $e")
                 return@launchWhenCreated
             } catch (e: HttpException) {
                 Log.e(TAG, "HttpException, unexpected response")
@@ -117,4 +117,10 @@ class SearchFragment : Fragment() {
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
     }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
 }
