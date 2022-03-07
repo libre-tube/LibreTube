@@ -16,8 +16,8 @@
         }
       ],
       "attributes": [],
-      "versionCode": 4,
-      "versionName": "0.2.2",
+      "versionCode": 5,
+      "versionName": "0.2.3",
       "outputFile": "app-x86_64-release.apk"
     },
     {
@@ -29,8 +29,8 @@
         }
       ],
       "attributes": [],
-      "versionCode": 4,
-      "versionName": "0.2.2",
+      "versionCode": 5,
+      "versionName": "0.2.3",
       "outputFile": "app-arm64-v8a-release.apk"
     },
     {
@@ -42,8 +42,8 @@
         }
       ],
       "attributes": [],
-      "versionCode": 4,
-      "versionName": "0.2.2",
+      "versionCode": 5,
+      "versionName": "0.2.3",
       "outputFile": "app-x86-release.apk"
     },
     {
@@ -55,8 +55,8 @@
         }
       ],
       "attributes": [],
-      "versionCode": 4,
-      "versionName": "0.2.2",
+      "versionCode": 5,
+      "versionName": "0.2.3",
       "outputFile": "app-armeabi-v7a-release.apk"
     }
   ],

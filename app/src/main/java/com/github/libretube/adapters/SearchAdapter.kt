@@ -86,7 +86,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = item.subscribers.formatShort() + "subscribers • "+ item.videos + " videos"
+        channelViews.text = item.subscribers.formatShort() + " subscribers • "+ item.videos + " videos"
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
