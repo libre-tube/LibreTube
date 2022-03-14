@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewCompat.getWindowInsetsController
@@ -101,7 +102,59 @@ class MainActivity : AppCompatActivity() {
 
         if (data != null) {
             Log.d("dafaq",data.host+" ${data.path} ")
+            if(data.host != null){
+                if(data.host!!.contains("youtube.com",true)){
+                    if(data.path != null){
+                        //channel
+                        if(data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains("/user/")){
+                            var channel = data.path
+                            channel = channel!!.replace("/c/","")
+                            channel = channel!!.replace("/user/","")
+                            val bundle = bundleOf("channel_id" to channel)
+                            navController.navigate(R.id.channel,bundle)
+                        }else if(data.path!!.contains("/playlist")){
+                            var playlist = data.query
+                            playlist = playlist!!.replace("list=","")
+                            val bundle = bundleOf("playlist_id" to playlist)
+                            navController.navigate(R.id.playlistFragment,bundle)
+                        }else if(data.path!!.contains("/shorts/") || data.path!!.contains("/embed/") || data.path!!.contains("/v/")){
+                            var watch = data.path!!.replace("/shorts/","").replace("/v/","").replace("/embed/","")
+                            var bundle = Bundle()
+                            bundle.putString("videoId",watch)
+                            var frag = PlayerFragment()
+                            frag.arguments = bundle
+                            supportFragmentManager.beginTransaction()
+                                .remove(PlayerFragment())
+                                .commit()
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, frag)
+                                .commitNow()
+                        }else if(data.path!!.contains("/watch") && data.query != null){
+                            Log.d("dafaq",data.query!!)
+                            var watch = data.query!!
+                            var watches = watch.split("&")
+                            if (watches.size >1){
+                                for (v in watches){
+                                    if (v.contains("v=")){
+                                        var bundle = Bundle()
+                                        bundle.putString("videoId",v.replace("v=",""))
+                                        var frag = PlayerFragment()
+                                        frag.arguments = bundle
+                                        supportFragmentManager.beginTransaction()
+                                            .remove(PlayerFragment())
+                                            .commit()
+                                        supportFragmentManager.beginTransaction()
+                                            .replace(R.id.container, frag)
+                                            .commitNow()
+                                        break
+                                    }
+                                }
+                            }
 
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -95,6 +95,7 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        videoId = videoId!!.replace("/watch?v=","")
         relDownloadVideo = view.findViewById(R.id.relPlayer_download)
         val mainActivity = activity as MainActivity
         mainActivity.findViewById<FrameLayout>(R.id.container).visibility=View.VISIBLE
