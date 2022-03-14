@@ -39,6 +39,6 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 
 ## Contributing
-If you're interestred in contributing, you can browse the [issues](https://github.com/libre-tube/libretube/issues) list or create a new one to discuss your feature idea. Every contribution is very welcome.
+If you're interested in contributing, you can browse the [issues](https://github.com/libre-tube/libretube/issues) list or create a new one to discuss your feature idea. Every contribution is very welcome.
 ### Donate
 **BTC:** `bc1qfcgqwddr894mywn9rk2crzlgvlac3prkwhdrdq`
