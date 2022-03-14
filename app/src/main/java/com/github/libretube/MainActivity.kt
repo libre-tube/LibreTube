@@ -3,6 +3,7 @@ package com.github.libretube
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,6 +34,7 @@ import com.google.android.material.color.DynamicColors
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
+    val TAG = "MainActivity"
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
     lateinit var navController : NavController
@@ -93,6 +95,14 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+        val action: String? = intent?.action
+        val data: Uri? = intent?.data
+        Log.d(TAG, "dafaq"+data.toString())
+
+        if (data != null) {
+            Log.d("dafaq",data.host+" ${data.path} ")
+
+        }
     }
 
 
