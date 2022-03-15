@@ -27,4 +27,6 @@
     <string name="dlcomplete">Download is completed!</string>
     <string name="dlisinprogress">Another Download is already in progress please wait till it\'s finished!</string>
     <string name="downloadfailed">Download Failed!</string>
+    <string name="vlc">Open in VLC</string>
+    <string name="vlcerror">Can\'t open in VLC. Maybe it\'s not installed yet?</string>
 </resources>

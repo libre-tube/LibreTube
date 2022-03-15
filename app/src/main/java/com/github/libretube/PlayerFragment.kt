@@ -3,12 +3,12 @@ package com.github.libretube
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ActivityManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
@@ -19,19 +19,15 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.TrendingAdapter
@@ -449,6 +445,24 @@ class PlayerFragment : Fragment() {
                     }else{
                         Toast.makeText(context,R.string.cannotDownload, Toast.LENGTH_SHORT).show()
                     }
+                    if (response.hls!=null){
+                    view.findViewById<RelativeLayout>(R.id.relPlayer_vlc).setOnClickListener {
+                        exoPlayer.pause()
+                        try{
+                        val vlcRequestCode = 42
+                        val uri: Uri = Uri.parse(response.hls)
+                        val vlcIntent = Intent(Intent.ACTION_VIEW)
+                        vlcIntent.setPackage("org.videolan.vlc")
+                        vlcIntent.setDataAndTypeAndNormalize(uri, "video/*")
+                        vlcIntent.putExtra("title", response.title)
+                        vlcIntent.putExtra("from_start", false)
+                        vlcIntent.putExtra("position", exoPlayer.currentPosition)
+                        startActivityForResult(vlcIntent, vlcRequestCode)
+                        }catch(e: Exception){
+                            Toast.makeText(context, R.string.vlcerror, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }}
                 }
             }
 

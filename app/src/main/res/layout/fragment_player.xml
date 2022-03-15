@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="4"
+                android:weightSum="5"
                 android:baselineAligned="false">
 
                 <RelativeLayout
@@ -124,7 +124,29 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/download" />
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relPlayer_vlc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground">
 
+                    <ImageView
+                        android:id="@+id/player_vlc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="16dp"
+                        android:src="@drawable/ic_vlc" />
+
+                    <TextView
+                        android:id="@+id/textVlc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/player_vlc"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/vlc" />
+                </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
