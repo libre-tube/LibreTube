@@ -48,7 +48,7 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>) :
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
             activity.navController.navigate(R.id.channelFragment, bundle)
             try {
-                val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mlMain)
                 if (mainMotionLayout.progress == 0.toFloat()) {
                     mainMotionLayout.transitionToEnd()
                     activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()

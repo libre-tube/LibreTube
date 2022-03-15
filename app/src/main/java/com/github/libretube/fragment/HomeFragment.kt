@@ -18,38 +18,39 @@ import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import retrofit2.HttpException
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.databinding.FragmentHomeBinding
 import java.io.IOException
 
 private const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
 
+    private val binding = FragmentHomeBinding.inflate(layoutInflater)
+
     private var refreshLayout: SwipeRefreshLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recview)
-        val progressbar = view.findViewById<ProgressBar>(R.id.progressBar)
 
-        recyclerView.layoutManager =
+        binding.rvHome.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
-        fetchJson(progressbar, recyclerView)
+        fetchJson()
         refreshLayout = view.findViewById(R.id.home_refresh)
         refreshLayout?.isEnabled = true
         refreshLayout?.setOnRefreshListener {
             Log.d(TAG,"hmm")
-            fetchJson(progressbar,recyclerView)
+            fetchJson()
         }
     }
 
-    private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
+    private fun fetchJson() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -69,8 +70,8 @@ class HomeFragment : Fragment() {
                     refreshLayout?.isRefreshing = false
                 }
                 runOnUiThread {
-                    progressBar.isVisible = false
-                    recyclerView.adapter = TrendingAdapter(response)
+                    binding.pbHome.isVisible = false
+                    binding.rvHome.adapter = TrendingAdapter(response)
                 }
             }
         }
@@ -84,9 +85,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        view?.findViewById<RecyclerView>(R.id.recview)?.adapter = null
+        binding.rvHome.adapter = null
         refreshLayout = null
-        Log.e(TAG,"destroyview")
         super.onDestroyView()
     }
 }

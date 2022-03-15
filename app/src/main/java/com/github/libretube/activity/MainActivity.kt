@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -21,12 +20,12 @@ import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
+import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragment.PlayerFragment
 import com.github.libretube.fragment.isFullScreen
 import com.google.android.material.color.DynamicColors
@@ -35,65 +34,68 @@ import java.lang.Exception
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-    lateinit var bottomNavigationView: BottomNavigationView
-    lateinit var toolbar: Toolbar
+
+    private lateinit var binding: ActivityMainBinding
+
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url =
             sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         DynamicColors.applyToActivitiesIfAvailable(application)
-        setContentView(R.layout.activity_main)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
         navController = findNavController(R.id.navHostFragment)
-        bottomNavigationView.setupWithNavController(navController)
 
-        bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeFragment -> {
-                    navController.backQueue.clear()
-                    navController.navigate(R.id.homeFragment)
-                    true
+        binding.bottomNavigationView.apply {
+            setupWithNavController(navController)
+            setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.homeFragment -> {
+                        navController.backQueue.clear()
+                        navController.navigate(R.id.homeFragment)
+                        true
+                    }
+                    R.id.subscriptionsFragment -> {
+                        //navController.backQueue.clear()
+                        navController.navigate(R.id.subscriptionsFragment)
+                        true
+                    }
+                    R.id.libraryFragment -> {
+                        //navController.backQueue.clear()
+                        navController.navigate(R.id.libraryFragment)
+                        true
+                    }
                 }
-                R.id.subscriptionsFragment -> {
-                    //navController.backQueue.clear()
-                    navController.navigate(R.id.subscriptionsFragment)
-                    true
-                }
-                R.id.libraryFragment -> {
-                    //navController.backQueue.clear()
-                    navController.navigate(R.id.libraryFragment)
-                    true
-                }
+                false
             }
-            false
         }
 
-        toolbar = findViewById(R.id.toolbar)
         val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
         val appName = HtmlCompat.fromHtml(
             "Libre<span  style='color:$hexColor';>Tube</span>",
             HtmlCompat.FROM_HTML_MODE_COMPACT
         )
-        toolbar.title = appName
-
-        toolbar.setNavigationOnClickListener {
-            navController.navigate(R.id.settingsFragment)
-            true
-        }
-
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_search -> {
-                    navController.navigate(R.id.searchFragment)
-                    true
-                }
+        binding.toolbar.apply {
+            title = appName
+            setNavigationOnClickListener {
+                navController.navigate(R.id.settingsFragment)
+                true
             }
-            false
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_search -> {
+                        navController.navigate(R.id.searchFragment)
+                        true
+                    }
+                }
+                false
+            }
         }
     }
 
@@ -204,9 +206,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         try {
-            val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
-            if (mainMotionLayout.progress == 0.toFloat()) {
-                mainMotionLayout.transitionToEnd()
+            if (binding.mlMain.progress == 0.toFloat()) {
+                binding.mlMain.transitionToEnd()
                 findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 

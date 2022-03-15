@@ -124,7 +124,7 @@ class PlayerFragment : Fragment() {
                 progress: Float,
             ) {
                 val mainMotionLayout =
-                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    mainActivity.findViewById<MotionLayout>(R.id.mlMain)
                 mainMotionLayout.progress = abs(progress)
                 eId = endId
                 sId = startId
@@ -134,7 +134,7 @@ class PlayerFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 println(currentId)
                 val mainMotionLayout =
-                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    mainActivity.findViewById<MotionLayout>(R.id.mlMain)
                 if (currentId == eId) {
                     view.findViewById<ImageButton>(R.id.quality_select).isVisible = false
                     view.findViewById<ImageButton>(R.id.close_imageButton).isVisible = false
@@ -444,7 +444,7 @@ class PlayerFragment : Fragment() {
                         val activity = view.context as MainActivity
                         val bundle = bundleOf("channel_id" to response.uploaderUrl)
                         activity.navController.navigate(R.id.channelFragment, bundle)
-                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
+                        activity.findViewById<MotionLayout>(R.id.mlMain).transitionToEnd()
                         view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                     }
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
