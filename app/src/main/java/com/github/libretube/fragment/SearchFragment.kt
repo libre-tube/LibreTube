@@ -15,10 +15,10 @@ import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.SearchAdapter
+import com.github.libretube.databinding.FragmentSearchBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,28 +29,29 @@ private const val TAG = "SearchFragment"
 
 class SearchFragment : Fragment() {
 
+    private lateinit var binding: FragmentSearchBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentSearchBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
-        recyclerView.layoutManager = GridLayoutManager(view.context, 1)
-        val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
-        autoTextView.requestFocus()
+        binding.rvSearch.layoutManager = GridLayoutManager(view.context, 1)
+        binding.tvSearch.requestFocus()
         val imm =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
-        autoTextView.addTextChangedListener(object : TextWatcher {
+        imm.showSoftInput(binding.tvSearch, InputMethodManager.SHOW_IMPLICIT)
+        binding.tvSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
                 start: Int,
                 count: Int,
-                after: Int
+                after: Int,
             ) {
                 // no op
             }
@@ -58,9 +59,9 @@ class SearchFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s!! != "") {
                     GlobalScope.launch {
-                        fetchSuggestions(s.toString(), autoTextView)
+                        fetchSuggestions(s.toString())
                         delay(3000)
-                        fetchSearch(s.toString(), recyclerView)
+                        fetchSearch(s.toString())
                     }
                 }
             }
@@ -71,7 +72,7 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView) {
+    private fun fetchSuggestions(query: String) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSuggestions(query)
@@ -85,11 +86,11 @@ class SearchFragment : Fragment() {
             }
             val adapter =
                 ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response)
-            autoTextView.setAdapter(adapter)
+            binding.tvSearch.setAdapter(adapter)
         }
     }
 
-    private fun fetchSearch(query: String, recyclerView: RecyclerView) {
+    private fun fetchSearch(query: String) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, "all")
@@ -103,7 +104,7 @@ class SearchFragment : Fragment() {
             }
             if (response.items!!.isNotEmpty()) {
                 runOnUiThread {
-                    recyclerView.adapter = SearchAdapter(response.items)
+                    binding.rvSearch.adapter = SearchAdapter(response.items)
                 }
             }
         }

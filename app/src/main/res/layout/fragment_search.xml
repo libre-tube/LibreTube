@@ -26,7 +26,7 @@
             app:hintEnabled="false">
 
             <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView"
+                android:id="@+id/tvSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -39,7 +39,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_recycler"
+        android:id="@+id/rvSearch"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
