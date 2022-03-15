@@ -6,7 +6,7 @@
     tools:context=".fragment.SubscriptionsFragment">
 
     <ProgressBar
-        android:id="@+id/sub_progress"
+        android:id="@+id/pbSubscriptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -41,12 +41,12 @@
     </RelativeLayout>
 
     <com.github.libretube.CustomSwipeToRefresh
-        android:id="@+id/sub_refresh"
+        android:id="@+id/srlSubscriptions"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@+id/scrollview_sub"
+            android:id="@+id/svSubscriptions"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -73,7 +73,7 @@
                     android:descendantFocusability="blocksDescendants">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/sub_feed"
+                        android:id="@+id/rvSubscriptionFeed"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:nestedScrollingEnabled="false" />
