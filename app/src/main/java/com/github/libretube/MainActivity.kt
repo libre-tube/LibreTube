@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
@@ -96,6 +97,11 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         val action: String? = intent?.action
         val data: Uri? = intent?.data
         Log.d(TAG, "dafaq"+data.toString())
@@ -103,7 +109,6 @@ class MainActivity : AppCompatActivity() {
         if (data != null) {
             Log.d("dafaq",data.host+" ${data.path} ")
             if(data.host != null){
-                if(data.host!!.contains("youtube.com",true)){
                     if(data.path != null){
                         //channel
                         if(data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains("/user/")){
@@ -113,8 +118,18 @@ class MainActivity : AppCompatActivity() {
                             val bundle = bundleOf("channel_id" to channel)
                             navController.navigate(R.id.channel,bundle)
                         }else if(data.path!!.contains("/playlist")){
-                            var playlist = data.query
-                            playlist = playlist!!.replace("list=","")
+                            var playlist = data.query!!
+                            if (playlist.contains("&"))
+                            {
+                                var playlists = playlist.split("&")
+                                for (v in playlists){
+                                    if (v.contains("list=")){
+                                        playlist = v
+                                        break
+                                    }
+                                }
+                            }
+                            playlist = playlist.replace("list=","")
                             val bundle = bundleOf("playlist_id" to playlist)
                             navController.navigate(R.id.playlistFragment,bundle)
                         }else if(data.path!!.contains("/shorts/") || data.path!!.contains("/embed/") || data.path!!.contains("/v/")){
@@ -129,35 +144,44 @@ class MainActivity : AppCompatActivity() {
                             supportFragmentManager.beginTransaction()
                                 .replace(R.id.container, frag)
                                 .commitNow()
+                            Handler().postDelayed({
+                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                                motionLayout.transitionToEnd()
+                                motionLayout.transitionToStart()
+                            }, 100)
                         }else if(data.path!!.contains("/watch") && data.query != null){
                             Log.d("dafaq",data.query!!)
                             var watch = data.query!!
-                            var watches = watch.split("&")
-                            if (watches.size >1){
+                            if (watch.contains("&"))
+                            {
+                                var watches = watch.split("&")
                                 for (v in watches){
                                     if (v.contains("v=")){
-                                        var bundle = Bundle()
-                                        bundle.putString("videoId",v.replace("v=",""))
-                                        var frag = PlayerFragment()
-                                        frag.arguments = bundle
-                                        supportFragmentManager.beginTransaction()
-                                            .remove(PlayerFragment())
-                                            .commit()
-                                        supportFragmentManager.beginTransaction()
-                                            .replace(R.id.container, frag)
-                                            .commitNow()
+                                        watch = v
                                         break
                                     }
                                 }
                             }
+                            var bundle = Bundle()
+                            bundle.putString("videoId",watch.replace("v=",""))
+                            var frag = PlayerFragment()
+                            frag.arguments = bundle
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, frag)
+                                .commitNow()
+                            Handler().postDelayed({
+                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                                motionLayout.transitionToEnd()
+                                motionLayout.transitionToStart()
+                            }, 100)
 
                         }
                     }
-                }
+
             }
+
         }
     }
-
 
     override fun onBackPressed() {
         try{
