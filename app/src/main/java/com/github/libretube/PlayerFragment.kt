@@ -95,6 +95,7 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideKeyboard()
         videoId = videoId!!.replace("/watch?v=","")
         relDownloadVideo = view.findViewById(R.id.relPlayer_download)
         val mainActivity = activity as MainActivity

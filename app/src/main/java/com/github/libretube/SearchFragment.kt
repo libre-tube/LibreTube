@@ -47,6 +47,9 @@ class SearchFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+        autoTextView.requestFocus()
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm!!.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
             autoTextView.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -110,7 +113,6 @@ class SearchFragment : Fragment() {
 
         }
     }
-
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return

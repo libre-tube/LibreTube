@@ -77,7 +77,7 @@ class Settings : PreferenceFragmentCompat() {
                 instance?.summaryProvider = Preference.SummaryProvider<ListPreference> { preference ->
                     val text = preference.entry
                     if (TextUtils.isEmpty(text)) {
-                        "Not set"
+                        "kavin.rocks (Official)"
                     } else {
                         text
                     }
