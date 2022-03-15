@@ -167,6 +167,9 @@ class MainActivity : AppCompatActivity() {
                             var frag = PlayerFragment()
                             frag.arguments = bundle
                             supportFragmentManager.beginTransaction()
+                                .remove(PlayerFragment())
+                                .commit()
+                            supportFragmentManager.beginTransaction()
                                 .replace(R.id.container, frag)
                                 .commitNow()
                             Handler().postDelayed({
