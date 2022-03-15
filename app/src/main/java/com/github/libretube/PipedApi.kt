@@ -38,10 +38,10 @@ interface PipedApi {
     ): Playlist
 
     @POST("login")
-    suspend fun login(@Body login: Login): Token
+    suspend fun login(@Body login: UserWithPassword): Token
 
     @POST("register")
-    suspend fun register(@Body login: Login): Token
+    suspend fun register(@Body login: UserWithPassword): Token
 
     @GET("feed")
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>

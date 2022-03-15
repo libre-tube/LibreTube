@@ -6,14 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
-import com.github.libretube.model.Login
+import com.github.libretube.databinding.DialogLoginBinding
+import com.github.libretube.databinding.DialogLogoutBinding
+import com.github.libretube.model.UserWithPassword
 import retrofit2.HttpException
 import java.io.IOException
 import java.lang.Exception
@@ -21,22 +22,24 @@ import java.lang.Exception
 private const val TAG = "LoginDialog"
 
 class LoginDialogFragment : DialogFragment() {
-    private lateinit var username: EditText
-    private lateinit var password: EditText
+
+    private lateinit var dialogLoginBinding: DialogLoginBinding
+    private lateinit var dialogLogoutBinding: DialogLogoutBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        dialogLoginBinding = DialogLoginBinding.inflate(layoutInflater)
+        dialogLogoutBinding = DialogLogoutBinding.inflate(layoutInflater)
+
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater;
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+            var sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
             val token = sharedPref?.getString("token", "")
-            val view: View
             Log.e("dafaq", token!!)
-            if (token != "") {
-                view = inflater.inflate(R.layout.dialog_logout, null)
-                view.findViewById<Button>(R.id.logout).setOnClickListener {
+
+            if (token.isNotEmpty()) {
+                dialogLogoutBinding.btnLogout.setOnClickListener {
                     Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
                     with(sharedPref!!.edit()) {
                         putString("token", "")
                         apply()
@@ -44,36 +47,27 @@ class LoginDialogFragment : DialogFragment() {
                     dialog?.dismiss()
                 }
             } else {
-                view = inflater.inflate(R.layout.dialog_login, null)
-                username = view.findViewById(R.id.username)
-                password = view.findViewById(R.id.password)
-                view.findViewById<Button>(R.id.login).setOnClickListener {
-                    if (username.text.toString() != "" && password.text.toString() != "") {
-                        val login = Login(username.text.toString(), password.text.toString())
-                        login(login)
-                    } else {
-                        Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                    }
+                dialogLoginBinding.btnLogin.setOnClickListener {
+                    login(getUserWithPassword())
                 }
-                view.findViewById<Button>(R.id.register).setOnClickListener {
-                    if (username.text.toString() != "" && password.text.toString() != "") {
-                        val login = Login(username.text.toString(), password.text.toString())
-                        register(login)
-                    } else {
-                        Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                    }
+                dialogLoginBinding.btnRegister.setOnClickListener {
+                    register(getUserWithPassword())
                 }
             }
-            builder.setView(view)
+            builder.setView(dialogLoginBinding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun login(login: Login) {
+    private fun getUserWithPassword() =
+        UserWithPassword(dialogLoginBinding.etUsername.text.toString(),
+            dialogLoginBinding.etPassword.text.toString())
+
+    private fun login(userWithPassword: UserWithPassword) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.login(login)
+                    RetrofitInstance.api.login(userWithPassword)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -84,7 +78,7 @@ class LoginDialogFragment : DialogFragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?" + e.toString())
+                    Log.e(TAG, "dafaq? $e")
                     return@launchWhenCreated
                 }
                 if (response.error != null) {
@@ -103,11 +97,11 @@ class LoginDialogFragment : DialogFragment() {
         run()
     }
 
-    private fun register(login: Login) {
+    private fun register(userWithPassword: UserWithPassword) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.register(login)
+                    RetrofitInstance.api.register(userWithPassword)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -118,7 +112,7 @@ class LoginDialogFragment : DialogFragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?" + e.toString())
+                    Log.e(TAG, "dafaq? $e")
                     return@launchWhenCreated
                 }
                 if (response.error != null) {

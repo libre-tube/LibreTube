@@ -1,6 +1,6 @@
 package com.github.libretube.model
 
-data class Login(
+data class UserWithPassword(
     val username: String? = null,
     val password: String? = null
 )
