@@ -1,0 +1,4 @@
+Added support for download with ffmpeg
+Fixed subscribe button
+Update dependencies and show stream duration
+Added Share button for sharing url to videos
