@@ -2,24 +2,25 @@ package com.github.libretube.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.PlaylistAdapter
+import com.github.libretube.databinding.FragmentPlaylistBinding
 import retrofit2.HttpException
 import java.io.IOException
 
 private const val TAG = "PlaylistFragment"
 
 class PlaylistFragment : Fragment() {
+
+    private lateinit var binding: FragmentPlaylistBinding
+
     private var playlistId: String? = null
     var nextPage: String? = null
     var playlistAdapter: PlaylistAdapter? = null
@@ -34,23 +35,21 @@ class PlaylistFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_playlist, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentPlaylistBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         playlistId = playlistId!!.replace("/playlist?list=", "")
-        view.findViewById<TextView>(R.id.playlist_name).text = playlistId
-        val recyclerView = view.findViewById<RecyclerView>(R.id.playlist_recView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        fetchPlaylist(view)
+        binding.tvPlaylistName.text = playlistId
+        binding.rvPlaylist.layoutManager = LinearLayoutManager(context)
+        fetchPlaylist()
     }
 
-    private fun fetchPlaylist(view: View) {
+    private fun fetchPlaylist() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -66,17 +65,16 @@ class PlaylistFragment : Fragment() {
                 nextPage = response.nextpage
                 isLoading = false
                 runOnUiThread {
-                    view.findViewById<TextView>(R.id.playlist_name).text = response.name
-                    view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
-                    view.findViewById<TextView>(R.id.playlist_totVideos).text =
-                        response.videos.toString() + " Videos"
+                    binding.tvPlaylistName.text = response.name
+                    binding.tvPlaylistUploader.text = response.uploader
+                    binding.tvPlaylistTotVideos.text = response.videos.toString() + " Videos"
                     playlistAdapter = PlaylistAdapter(response.relatedStreams!!.toMutableList())
-                    view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
-                    val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)
-                    scrollView.viewTreeObserver
+                    binding.rvPlaylist.adapter = playlistAdapter
+
+                    binding.svPlaylist.viewTreeObserver
                         .addOnScrollChangedListener {
-                            if (scrollView.getChildAt(0).bottom
-                                == (scrollView.height + scrollView.scrollY)
+                            if (binding.svPlaylist.getChildAt(0).bottom
+                                == (binding.svPlaylist.height + binding.svPlaylist.scrollY)
                             ) {
                                 //scroll view is at bottom
                                 if (nextPage != null && !isLoading) {
