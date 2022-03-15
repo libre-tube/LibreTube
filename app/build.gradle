@@ -46,7 +46,9 @@ android {
         }
     }
     packagingOptions {
-        exclude 'lib/armeabi-v7a/*_neon.so'
+        jniLibs {
+            excludes += ['lib/armeabi-v7a/*_neon.so']
+        }
     }
 }
 
