@@ -3,61 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.preference.SwitchPreferenceCompat
+        app:isPreferenceVisible="false"
         app:key="darkMode"
-        app:title="Toggle dark mode"
-        app:isPreferenceVisible="false"/>
+        app:title="Toggle dark mode" />
+
     <ListPreference
-        app:key="region"
-        app:title="@string/region"
+        android:icon="@drawable/ic_language"
+        app:defaultValue="US"
         app:entries="@array/regions"
         app:entryValues="@array/regionsValue"
-        app:defaultValue="US"
-        app:useSimpleSummaryProvider="true"
-        android:icon="@drawable/ic_language"
-        />
+        app:key="region"
+        app:title="@string/region"
+        app:useSimpleSummaryProvider="true" />
 
     <ListPreference
-        app:key="instance"
-        app:title="@string/instances"
+        android:icon="@drawable/ic_server"
+        app:defaultValue="https://pipedapi.kavin.rocks/"
         app:entries="@array/instances"
         app:entryValues="@array/instancesValue"
-        app:defaultValue="https://pipedapi.kavin.rocks/"
-        android:icon="@drawable/ic_server"
-        />
+        app:key="instance"
+        app:title="@string/instances" />
+
     <androidx.preference.EditTextPreference
-    app:key="customInstance"
-    app:title="@string/customInstance"
-        app:isPreferenceVisible="false"/>
+        app:isPreferenceVisible="false"
+        app:key="customInstance"
+        app:title="@string/customInstance" />
+
     <androidx.preference.Preference
-        app:key="login_register"
-        app:title="@string/login_register"
         android:icon="@drawable/ic_login"
         android:summary="@string/notgmail"
-        />
+        app:key="login_register"
+        app:title="@string/login_register" />
+
     <androidx.preference.Preference
-        app:key="import_from_yt"
-        app:title="@string/import_from_yt"
         android:hint="This is my hint"
-        android:summary=""
         android:icon="@drawable/ic_import"
-        />
+        android:summary=""
+        app:key="import_from_yt"
+        app:title="@string/import_from_yt" />
 
     <ListPreference
-        app:title="@string/app_theme"
-        app:key="theme_togglee"
+        android:icon="@drawable/ic_theme"
+        app:defaultValue="A"
         app:entries="@array/themes"
         app:entryValues="@array/themesValue"
-        app:defaultValue="A"
-        android:icon="@drawable/ic_theme"
-        />
+        app:key="theme_togglee"
+        app:title="@string/app_theme" />
+
     <ListPreference
-        app:title="@string/defres"
-        app:key="default_res"
+        android:icon="@drawable/ic_hd"
+        app:defaultValue=""
         app:entries="@array/defres"
         app:entryValues="@array/defres"
-        app:defaultValue=""
-        android:icon="@drawable/ic_hd"
-        app:useSimpleSummaryProvider="true"
-        />
-
+        app:key="default_res"
+        app:title="@string/defres"
+        app:useSimpleSummaryProvider="true" />
 </androidx.preference.PreferenceScreen>

@@ -23,13 +23,19 @@ interface PipedApi {
     suspend fun getChannel(@Path("channelId") channelId: String): Channel
 
     @GET("nextpage/channel/{channelId}")
-    suspend fun getChannelNextPage(@Path("channelId") channelId: String, @Query("nextpage") nextPage: String): Channel
+    suspend fun getChannelNextPage(
+        @Path("channelId") channelId: String,
+        @Query("nextpage") nextPage: String
+    ): Channel
 
     @GET("playlists/{playlistId}")
     suspend fun getPlaylist(@Path("playlistId") playlistId: String): Playlist
 
     @GET("nextpage/playlists/{playlistId}")
-    suspend fun getPlaylistNextPage(@Path("playlistId") playlistId: String, @Query("nextpage") nextPage: String): Playlist
+    suspend fun getPlaylistNextPage(
+        @Path("playlistId") playlistId: String,
+        @Query("nextpage") nextPage: String
+    ): Playlist
 
     @POST("login")
     suspend fun login(@Body login: Login): Token
@@ -41,19 +47,27 @@ interface PipedApi {
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>
 
     @GET("subscribed")
-    suspend fun isSubscribed(@Query("channelId") channelId: String, @Header("Authorization") token: String): Subscribed
+    suspend fun isSubscribed(
+        @Query("channelId") channelId: String,
+        @Header("Authorization") token: String
+    ): Subscribed
 
     @GET("subscriptions")
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
 
     @POST("subscribe")
-    suspend fun subscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
+    suspend fun subscribe(
+        @Header("Authorization") token: String,
+        @Body subscribe: Subscribe
+    ): Message
 
     @POST("unsubscribe")
-    suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
+    suspend fun unsubscribe(
+        @Header("Authorization") token: String,
+        @Body subscribe: Subscribe
+    ): Message
 
     //only for fetching servers list
     @GET
     suspend fun getInstances(@Url url: String): List<Instances>
-
 }

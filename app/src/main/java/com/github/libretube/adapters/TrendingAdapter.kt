@@ -18,26 +18,32 @@ import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.formatShort
 
-class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<CustomViewHolder>() {
+class TrendingAdapter(private val videoFeed: List<StreamItem>) :
+    RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.trending_row,parent,false)
+        val cell = layoutInflater.inflate(R.layout.trending_row, parent, false)
         return CustomViewHolder(cell)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val trending = videoFeed[position]
-        holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.formatShort()+" • "+DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
-        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
-        val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
-        channelImage.setOnClickListener{
-            val activity = holder.v.context as MainActivity
+        val thumbnailImage = holder.view.findViewById<ImageView>(R.id.thumbnail)
+        val channelImage = holder.view.findViewById<ImageView>(R.id.channel_image)
+
+        holder.view.findViewById<TextView>(R.id.textView_title).text = trending.title
+        holder.view.findViewById<TextView>(R.id.textView_channel).text =
+            trending.uploaderName + " • " + trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(
+                trending.uploaded!!
+            )
+        holder.view.findViewById<TextView>(R.id.thumbnail_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
+        channelImage.setOnClickListener {
+            val activity = holder.view.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
             try {
@@ -46,26 +52,25 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
                     mainMotionLayout.transitionToEnd()
                     activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                 }
-            }catch (e: Exception){
-
+            } catch (e: Exception) {
+                // TODO: Handle exception
             }
         }
-        if (trending.thumbnail!!.isEmpty()) {
-        } else{
+        if (trending.thumbnail!!.isNotEmpty()) {
             Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         }
-        if (trending.uploaderAvatar!!.isEmpty()) {
-        } else{
+
+        if (trending.uploaderAvatar!!.isNotEmpty()) {
             Picasso.get().load(trending.uploaderAvatar).into(channelImage)
         }
 
+        holder.view.setOnClickListener {
+            val bundle = Bundle()
+            val frag = PlayerFragment()
+            val activity = holder.view.context as AppCompatActivity
 
-        holder.v.setOnClickListener{
-            var bundle = Bundle()
-            bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))
-            var frag = PlayerFragment()
+            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
             frag.arguments = bundle
-            val activity = holder.v.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
@@ -75,7 +80,5 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
         }
     }
 }
-class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v){
-    init {
-    }
-}
+
+class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view)

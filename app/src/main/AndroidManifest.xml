@@ -15,13 +15,13 @@
         android:roundIcon="@mipmap/ic_libretube_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LibreTube"
-        android:name=".myApp"
+        android:name=".LibreTubeApplication"
         android:networkSecurityConfig="@xml/network_security_config"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         >
         <activity
-            android:name=".Player"
+            android:name=".PlayerActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|screenSize"

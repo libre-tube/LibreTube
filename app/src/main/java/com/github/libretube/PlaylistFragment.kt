@@ -6,29 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.PlaylistAdapter
-import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
 
+private const val TAG = "PlaylistFragment"
 
 class PlaylistFragment : Fragment() {
-    private var playlist_id: String? = null
-    private val TAG = "PlaylistFragment"
-    var nextPage: String? =null
+    private var playlistId: String? = null
+    var nextPage: String? = null
     var playlistAdapter: PlaylistAdapter? = null
     var isLoading = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            playlist_id = it.getString("playlist_id")
+            playlistId = it.getString("playlist_id")
         }
     }
 
@@ -36,26 +34,26 @@ class PlaylistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_playlist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        playlist_id = playlist_id!!.replace("/playlist?list=","")
-        view.findViewById<TextView>(R.id.playlist_name).text=playlist_id
+        playlistId = playlistId!!.replace("/playlist?list=", "")
+        view.findViewById<TextView>(R.id.playlist_name).text = playlistId
         val recyclerView = view.findViewById<RecyclerView>(R.id.playlist_recView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         fetchPlaylist(view)
     }
-    private fun fetchPlaylist(view: View){
+
+    private fun fetchPlaylist(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getPlaylist(playlist_id!!)
-                }catch(e: IOException) {
+                    RetrofitInstance.api.getPlaylist(playlistId!!)
+                } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -64,24 +62,25 @@ class PlaylistFragment : Fragment() {
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
-                isLoading=false
+                isLoading = false
                 runOnUiThread {
-                    view.findViewById<TextView>(R.id.playlist_name).text=response.name
-                    view.findViewById<TextView>(R.id.playlist_uploader).text=response.uploader
-                    view.findViewById<TextView>(R.id.playlist_totVideos).text=response.videos.toString()+" Videos"
+                    view.findViewById<TextView>(R.id.playlist_name).text = response.name
+                    view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
+                    view.findViewById<TextView>(R.id.playlist_totVideos).text =
+                        response.videos.toString() + " Videos"
                     playlistAdapter = PlaylistAdapter(response.relatedStreams!!.toMutableList())
                     view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
                     val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)
                     scrollView.viewTreeObserver
                         .addOnScrollChangedListener {
                             if (scrollView.getChildAt(0).bottom
-                                == (scrollView.height + scrollView.scrollY)) {
+                                == (scrollView.height + scrollView.scrollY)
+                            ) {
                                 //scroll view is at bottom
-                                if(nextPage!=null && !isLoading){
-                                    isLoading=true
+                                if (nextPage != null && !isLoading) {
+                                    isLoading = true
                                     fetchNextPage()
                                 }
-
                             } else {
                                 //scroll view is not at bottom
                             }
@@ -92,24 +91,23 @@ class PlaylistFragment : Fragment() {
         run()
     }
 
-    private fun fetchNextPage(){
+    private fun fetchNextPage() {
         fun run() {
 
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getPlaylistNextPage(playlist_id!!,nextPage!!)
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response,"+e.response())
+                    Log.e(TAG, "HttpException, unexpected response," + e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
                 playlistAdapter?.updateItems(response.relatedStreams!!)
-                isLoading=false
-
+                isLoading = false
             }
         }
         run()

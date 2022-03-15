@@ -2,38 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:layout_marginBottom="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:id="@+id/video_search"
-    >
+    android:background="?android:attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".5"/>
+        app:layout_constraintGuide_percent=".5" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_search_thumbnail"
-        app:cardCornerRadius="8dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintEnd_toStartOf="@+id/guideline">
+        app:layout_constraintVertical_bias="0.0">
 
-    <ImageView
-        android:id="@+id/search_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <ImageView
+            android:id="@+id/search_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -41,20 +41,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="search description" />
 
     <TextView
         android:id="@+id/search_views"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/search_description" />
+        app:layout_constraintTop_toBottomOf="@+id/search_description"
+        tools:text="search views" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/search_channel_image"
@@ -71,10 +71,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
-        app:layout_constraintTop_toBottomOf="@+id/search_views" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/search_views"
+        tools:text="search channel name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

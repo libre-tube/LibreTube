@@ -6,59 +6,57 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:layout_marginBottom="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    >
+    android:background="?android:attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".5"/>
+        app:layout_constraintGuide_percent=".5" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_playlist"
-        app:cardCornerRadius="8dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintEnd_toStartOf="@+id/guideline">
-    <ImageView
-        android:id="@+id/search_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/search_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
         <RelativeLayout
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:background="#CC000000"
-            >
+            android:layout_gravity="end"
+            android:background="#CC000000">
 
             <TextView
                 android:id="@+id/search_playlist_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
-                android:textColor="#ECE4E4"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                />
+                android:layout_centerVertical="true"
+                android:text="10"
+                android:textColor="#ECE4E4" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_playlist"
+                android:layout_below="@+id/search_playlist_number"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_below="@+id/search_playlist_number"
-                />
-
+                app:srcCompat="@drawable/ic_playlist" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -68,31 +66,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="2dp"
-        android:text="TextView"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_playlist"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Search description" />
 
     <TextView
         android:id="@+id/search_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_playlist"
-        app:layout_constraintTop_toBottomOf="@+id/search_description" />
+        app:layout_constraintTop_toBottomOf="@+id/search_description"
+        tools:text="search name" />
 
     <TextView
         android:id="@+id/search_playlist_videos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/search_name" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/search_name"
+        tools:text="search playlist videos" />
 </androidx.constraintlayout.widget.ConstraintLayout>

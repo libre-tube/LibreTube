@@ -21,45 +21,43 @@ import com.github.libretube.adapters.TrendingAdapter
 import retrofit2.HttpException
 import java.io.IOException
 
-class Subscriptions : Fragment() {
-    val TAG = "SubFragment"
-    lateinit var token: String
+private const val TAG = "SubFragment"
+
+class SubscriptionsFragment : Fragment() {
     var isLoaded = false
-    private var subscriptionAdapter: SubscriptionAdapter? =null
+    private var subscriptionAdapter: SubscriptionAdapter? = null
     private var refreshLayout: SwipeRefreshLayout? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
+    lateinit var token: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_subscriptions, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        token = sharedPref?.getString("token","")!!
-        Log.e(TAG,token)
+        token = sharedPref?.getString("token", "")!!
+        Log.e(TAG, token)
         refreshLayout = view.findViewById(R.id.sub_refresh)
-        if(token!=""){
-            view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility=View.GONE
+        if (token != "") {
+            view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility = View.GONE
             refreshLayout?.isEnabled = true
+            val progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
+            val channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
+            val feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
+            val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
 
-            var progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
-            progressBar.visibility=View.VISIBLE
+            progressBar.visibility = View.VISIBLE
 
-            var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
-            channelRecView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            channelRecView?.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             fetchChannels(channelRecView)
 
-            var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
-            feedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+            feedRecView.layoutManager =
+                GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
             fetchFeed(feedRecView, progressBar)
 
             refreshLayout?.setOnRefreshListener {
@@ -67,18 +65,17 @@ class Subscriptions : Fragment() {
                 fetchFeed(feedRecView, progressBar)
             }
 
-            val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
             scrollView.viewTreeObserver
                 .addOnScrollChangedListener {
                     if (scrollView.getChildAt(0).bottom
-                        == (scrollView.height + scrollView.scrollY)) {
+                        == (scrollView.height + scrollView.scrollY)
+                    ) {
                         //scroll view is at bottom
-                        if(isLoaded){
+                        if (isLoaded) {
                             refreshLayout?.isRefreshing = true
                             subscriptionAdapter?.updateItems()
                             refreshLayout?.isRefreshing = false
                         }
-
                     }
                 }
         } else {
@@ -91,7 +88,7 @@ class Subscriptions : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getFeed(token)
-                }catch(e: IOException) {
+                } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -101,13 +98,13 @@ class Subscriptions : Fragment() {
                 } finally {
                     refreshLayout?.isRefreshing = false
                 }
-                if (response.isNotEmpty()){
+                if (response.isNotEmpty()) {
                     subscriptionAdapter = SubscriptionAdapter(response)
-                    feedRecView?.adapter= subscriptionAdapter
+                    feedRecView.adapter = subscriptionAdapter
                     subscriptionAdapter?.updateItems()
                 }
-                progressBar.visibility=View.GONE
-                isLoaded=true
+                progressBar.visibility = View.GONE
+                isLoaded = true
             }
         }
         run()
@@ -118,7 +115,7 @@ class Subscriptions : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.subscriptions(token)
-                }catch(e: IOException) {
+                } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -128,10 +125,10 @@ class Subscriptions : Fragment() {
                 } finally {
                     refreshLayout?.isRefreshing = false
                 }
-                if (response.isNotEmpty()){
-                    channelRecView?.adapter=SubscriptionChannelAdapter(response.toMutableList())
-                }else{
-                    Toast.makeText(context,R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
+                if (response.isNotEmpty()) {
+                    channelRecView.adapter = SubscriptionChannelAdapter(response.toMutableList())
+                } else {
+                    Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -139,14 +136,14 @@ class Subscriptions : Fragment() {
     }
 
     override fun onStop() {
-        Log.e(TAG,"Stopped")
+        Log.e(TAG, "Stopped")
         subscriptionAdapter = null
-        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
+        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter = null
         super.onStop()
     }
+
     override fun onDestroy() {
-        Log.e(TAG,"Destroyed")
+        Log.e(TAG, "Destroyed")
         super.onDestroy()
     }
-
 }

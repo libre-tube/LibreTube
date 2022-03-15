@@ -18,36 +18,42 @@ import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.formatShort
 
-class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<SubscriptionViewHolder>() {
-    //private var limitedVideoFeed: MutableList<String> = [""].toMutableList()
-    var i = 0
+class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
+    RecyclerView.Adapter<SubscriptionViewHolder>() {
+    var amountOfItems = 0
+
     override fun getItemCount(): Int {
-        return i
+        return amountOfItems
     }
 
-    fun updateItems(){
-        //limitedVideoFeed.add("")
-        i += 10
-        if(i>videoFeed.size)
-            i=videoFeed.size
+    fun updateItems() {
+        amountOfItems += 10
+        if (amountOfItems > videoFeed.size)
+            amountOfItems = videoFeed.size
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.trending_row,parent,false)
+        val cell = layoutInflater.inflate(R.layout.trending_row, parent, false)
         return SubscriptionViewHolder(cell)
     }
 
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = videoFeed[position]
-        holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.formatShort()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
-        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
-        val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
-        channelImage.setOnClickListener{
-            val activity = holder.v.context as MainActivity
+        val thumbnailImage = holder.view.findViewById<ImageView>(R.id.thumbnail)
+        val channelImage = holder.view.findViewById<ImageView>(R.id.channel_image)
+
+        holder.view.findViewById<TextView>(R.id.textView_title).text = trending.title
+        holder.view.findViewById<TextView>(R.id.textView_channel).text =
+            trending.uploaderName + " • " + trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(
+                trending.uploaded!!
+            )
+        holder.view.findViewById<TextView>(R.id.thumbnail_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
+
+        channelImage.setOnClickListener {
+            val activity = holder.view.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
             try {
@@ -56,18 +62,19 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
                     mainMotionLayout.transitionToEnd()
                     activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                 }
-            }catch (e: Exception){
-
+            } catch (e: Exception) {
+                // TODO: handle exception
             }
         }
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)
-        holder.v.setOnClickListener{
-            var bundle = Bundle()
-            bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))
-            var frag = PlayerFragment()
+        holder.view.setOnClickListener {
+            val bundle = Bundle()
+            val frag = PlayerFragment()
+            val activity = holder.view.context as AppCompatActivity
+
+            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
             frag.arguments = bundle
-            val activity = holder.v.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
@@ -77,7 +84,5 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
         }
     }
 }
-class SubscriptionViewHolder(val v: View): RecyclerView.ViewHolder(v){
-    init {
-    }
-}
+
+class SubscriptionViewHolder(val view: View) : RecyclerView.ViewHolder(view)

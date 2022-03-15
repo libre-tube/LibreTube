@@ -18,7 +18,7 @@ internal class CustomExoPlayerView(
             MotionEvent.ACTION_DOWN -> {
                 if (isControllerFullyVisible) {
                     hideController()
-                }else {
+                } else {
                     showController()
                 }
             }

@@ -28,12 +28,11 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.ZipFile
 
-class Settings : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -93,7 +92,7 @@ class Settings : PreferenceFragmentCompat() {
 
         val login = findPreference<Preference>("login_register")
         login?.setOnPreferenceClickListener {
-            val newFragment = LoginDialog()
+            val newFragment = LoginDialogFragment()
             newFragment.show(childFragmentManager, "Login")
             true
         }
@@ -133,8 +132,6 @@ class Settings : PreferenceFragmentCompat() {
             }
 
             getContent.launch("application/zip")
-
-
             true
         }
 
@@ -167,12 +164,13 @@ class Settings : PreferenceFragmentCompat() {
             }
             val listEntries: MutableList<String> = ArrayList()
             val listEntryValues: MutableList<String> = ArrayList()
+            val entries = listEntries.toTypedArray<CharSequence>()
+            val entryValues = listEntryValues.toTypedArray<CharSequence>()
+
             for (item in response) {
                 listEntries.add(item.name!!)
                 listEntryValues.add(item.api_url!!)
             }
-            val entries = listEntries.toTypedArray<CharSequence>()
-            val entryValues = listEntryValues.toTypedArray<CharSequence>()
             runOnUiThread {
                 val instance = findPreference<ListPreference>("instance")
                 instance?.entries = entries

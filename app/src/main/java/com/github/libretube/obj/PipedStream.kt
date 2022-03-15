@@ -18,6 +18,4 @@ data class PipedStream(
     var width: Int?,
     var height: Int?,
     var fps: Int?
-    ){
-    constructor(): this("","","","","",null,-1,-1,-1,-1,-1,-1,-1,-1)
-}
+)

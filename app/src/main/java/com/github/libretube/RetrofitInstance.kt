@@ -13,5 +13,4 @@ object RetrofitInstance {
             .build()
             .create(PipedApi::class.java)
     }
-
 }

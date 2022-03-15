@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/player_scene"
-    tools:context=".PlayerFragment"
-    >
+    tools:context=".PlayerFragment">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -18,26 +17,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_container"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/main_container">
 
         <LinearLayout
             android:id="@+id/linLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/player_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="7dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:text=""
                 android:textSize="15sp"
-                android:layout_margin="7dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,9 +47,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:weightSum="5"
-                android:baselineAligned="false">
+                android:weightSum="5">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -66,8 +62,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_like"
-                        android:contentDescription="like"/>
+                        android:contentDescription="like"
+                        android:src="@drawable/ic_like" />
 
                     <TextView
                         android:id="@+id/textLike"
@@ -84,7 +80,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?android:attr/selectableItemBackground">
-                <ImageView
+
+                    <ImageView
                         android:id="@+id/player_share"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,6 +121,7 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/download" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/relPlayer_vlc"
                     android:layout_width="wrap_content"
@@ -147,6 +145,7 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/vlc" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,11 +173,11 @@
                 android:id="@+id/player_channel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 android:layout_marginStart="8dp"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/player_channelImage"
@@ -229,12 +228,12 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.35"
+        android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/colorSurface" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.libretube.CustomExoPlayerView
         android:id="@+id/player"
@@ -285,5 +284,4 @@
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"
         app:layout_constraintStart_toEndOf="@+id/player"
         app:layout_constraintTop_toTopOf="@+id/play_imageView" />
-
 </com.github.libretube.SingleViewTouchableMotionLayout>

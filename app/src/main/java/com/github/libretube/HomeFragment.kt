@@ -19,52 +19,43 @@ import retrofit2.HttpException
 import com.github.libretube.adapters.TrendingAdapter
 import java.io.IOException
 
+private const val TAG = "HomeFragment"
 
-class Home : Fragment() {
+class HomeFragment : Fragment() {
 
-    private val TAG = "HomeFragment"
     private var refreshLayout: SwipeRefreshLayout? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView =  view.findViewById<RecyclerView>(R.id.recview)
-        recyclerView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recview)
         val progressbar = view.findViewById<ProgressBar>(R.id.progressBar)
-        fetchJson(progressbar,recyclerView)
+
+        recyclerView.layoutManager =
+            GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+        fetchJson(progressbar, recyclerView)
         refreshLayout = view.findViewById(R.id.home_refresh)
         refreshLayout?.isEnabled = true
         refreshLayout?.setOnRefreshListener {
             Log.d(TAG,"hmm")
             fetchJson(progressbar,recyclerView)
         }
-
-
-
     }
 
-
-   private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
+    private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    val sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(requireContext())
                     RetrofitInstance.api.getTrending(sharedPreferences.getString("region", "US")!!)
-                }catch(e: IOException) {
+                } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
@@ -82,9 +73,9 @@ class Home : Fragment() {
                 }
             }
         }
-       run()
-
+        run()
     }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
@@ -92,7 +83,7 @@ class Home : Fragment() {
     }
 
     override fun onDestroyView() {
-        view?.findViewById<RecyclerView>(R.id.recview)?.adapter=null
+        view?.findViewById<RecyclerView>(R.id.recview)?.adapter = null
         refreshLayout = null
         Log.e(TAG,"destroyview")
         super.onDestroyView()

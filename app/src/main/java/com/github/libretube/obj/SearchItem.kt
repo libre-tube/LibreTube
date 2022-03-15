@@ -23,6 +23,4 @@ data class SearchItem(
     var subscribers: Long? = -1,
     var videos: Long? = -1,
     var verified: Boolean? = null
-){
-    constructor() : this("","","",0,"","","","","",0,0,null)
-}
+)

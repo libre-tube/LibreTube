@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +16,8 @@ import com.github.libretube.R
 import com.github.libretube.obj.SearchItem
 import com.github.libretube.formatShort
 
-
-class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
+class SearchAdapter(private val searchItems: List<SearchItem>) :
+    RecyclerView.Adapter<CustomViewHolder1>() {
     override fun getItemCount(): Int {
         return searchItems.size
     }
@@ -31,7 +30,7 @@ class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Ada
             else -> throw IllegalArgumentException("Invalid type")
         }
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(layout,parent,false)
+        val cell = layoutInflater.inflate(layout, parent, false)
         return CustomViewHolder1(cell)
     }
 
@@ -41,32 +40,36 @@ class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Ada
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            searchItems[position].url!!.startsWith("/watch",false) -> 0
-            searchItems[position].url!!.startsWith("/channel",false) -> 1
-            searchItems[position].url!!.startsWith("/playlist",false) -> 2
+            searchItems[position].url!!.startsWith("/watch", false) -> 0
+            searchItems[position].url!!.startsWith("/channel", false) -> 1
+            searchItems[position].url!!.startsWith("/playlist", false) -> 2
             else -> 3
         }
     }
 }
-class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
+
+class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) {
 
     private fun bindWatch(item: SearchItem) {
-        val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
+        val thumbnailImage = view.findViewById<ImageView>(R.id.search_thumbnail)
+        val channelImage = view.findViewById<ImageView>(R.id.search_channel_image)
+        val title = view.findViewById<TextView>(R.id.search_description)
+        val views = view.findViewById<TextView>(R.id.search_views)
+        val channelName = view.findViewById<TextView>(R.id.search_channel_name)
+
         Picasso.get().load(item.thumbnail).into(thumbnailImage)
-        val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
         Picasso.get().load(item.uploaderAvatar).into(channelImage)
-        val title = v.findViewById<TextView>(R.id.search_description)
         title.text = item.title
-        val views = v.findViewById<TextView>(R.id.search_views)
-        views.text = item.views.formatShort() +" • "+item.uploadedDate
-        val channelName = v.findViewById<TextView>(R.id.search_channel_name)
+        views.text = item.views.formatShort() + " • " + item.uploadedDate
         channelName.text = item.uploaderName
-        v.setOnClickListener{
-            var bundle = Bundle()
-            bundle.putString("videoId",item.url!!.replace("/watch?v=",""))
-            var frag = PlayerFragment()
+
+        view.setOnClickListener {
+            val bundle = Bundle()
+            val frag = PlayerFragment()
+            val activity = view.context as AppCompatActivity
+
             frag.arguments = bundle
-            val activity = v.context as AppCompatActivity
+            bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
@@ -75,50 +78,57 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
                 .commitNow()
         }
         channelImage.setOnClickListener {
-            val activity = v.context as MainActivity
+            val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to item.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
         }
     }
+
     private fun bindChannel(item: SearchItem) {
-        val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
+        val channelImage = view.findViewById<ImageView>(R.id.search_channel_image)
+        val channelName = view.findViewById<TextView>(R.id.search_channel_name)
+        val channelViews = view.findViewById<TextView>(R.id.search_views)
+
         Picasso.get().load(item.thumbnail).into(channelImage)
-        val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
-        val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = item.subscribers.formatShort() + " subscribers • "+ item.videos + " videos"
-        v.setOnClickListener {
-            val activity = v.context as MainActivity
+        channelViews.text =
+            item.subscribers.formatShort() + " subscribers • " + item.videos + " videos"
+        view.setOnClickListener {
+            val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
-            activity.navController.navigate(R.id.channel,bundle)
+            activity.navController.navigate(R.id.channel, bundle)
         }
         //todo sub button
     }
+
     private fun bindPlaylist(item: SearchItem) {
-        val playlistImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).into(playlistImage)
-        val playlistNumber = v.findViewById<TextView>(R.id.search_playlist_number)
+        val playlistImage = view.findViewById<ImageView>(R.id.search_thumbnail)
+        val playlistNumber = view.findViewById<TextView>(R.id.search_playlist_number)
+        val playlistName = view.findViewById<TextView>(R.id.search_description)
+        val playlistChannelName = view.findViewById<TextView>(R.id.search_name)
+        val playlistVideosNumber = view.findViewById<TextView>(R.id.search_playlist_videos)
+
         playlistNumber.text = item.videos.toString()
-        val playlistName = v.findViewById<TextView>(R.id.search_description)
+        Picasso.get().load(item.thumbnail).into(playlistImage)
         playlistName.text = item.name
-        val playlistChannelName = v.findViewById<TextView>(R.id.search_name)
         playlistChannelName.text = item.uploaderName
-        val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
-        playlistVideosNumber.text = item.videos.toString()+" videos"
-        v.setOnClickListener {
+        playlistVideosNumber.text = item.videos.toString() + " videos"
+
+        view.setOnClickListener {
             //playlist clicked
-            val activity = v.context as MainActivity
+            val activity = view.context as MainActivity
             val bundle = bundleOf("playlist_id" to item.url)
-            activity.navController.navigate(R.id.playlistFragment,bundle)
+            activity.navController.navigate(R.id.playlistFragment, bundle)
         }
     }
 
     fun bind(searchItem: SearchItem) {
         when {
-            searchItem.url!!.startsWith("/watch",false) -> bindWatch(searchItem)
-            searchItem.url!!.startsWith("/channel",false) -> bindChannel(searchItem)
-            searchItem.url!!.startsWith("/playlist",false) -> bindPlaylist(searchItem)
+            searchItem.url!!.startsWith("/watch", false) -> bindWatch(searchItem)
+            searchItem.url!!.startsWith("/channel", false) -> bindChannel(searchItem)
+            searchItem.url!!.startsWith("/playlist", false) -> bindPlaylist(searchItem)
             else -> {
+                // no op
             }
         }
     }

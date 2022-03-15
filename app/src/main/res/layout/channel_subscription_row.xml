@@ -2,20 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
-    android:padding="8dp"
     android:background="?android:attr/selectableItemBackground"
-    >
+    android:orientation="vertical"
+    android:padding="8dp">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/subscription_channel_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginBottom="4dp" />
+
     <TextView
-        android:text="kirrrrrrrrrrrrrrrrrrrrrrrrrrfgdfg"
         android:id="@+id/subscription_channel_name"
+        tools:text="Subscription channel name"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

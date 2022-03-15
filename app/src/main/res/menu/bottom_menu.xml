@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:id="@+id/home2" android:title="Home" android:icon="@drawable/ic_home"/>
-    <item android:id="@+id/subscriptions" android:title="Subscriptions" android:icon="@drawable/ic_subscriptions"/>
-    <item android:id="@+id/library" android:title="Library" android:icon="@drawable/ic_library"/>
-
-
+    <item
+        android:id="@+id/home2"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/subscriptions"
+        android:icon="@drawable/ic_subscriptions"
+        android:title="@string/subscriptions" />
+    <item
+        android:id="@+id/library"
+        android:icon="@drawable/ic_library"
+        android:title="@string/library" />
 </menu>

@@ -26,7 +26,4 @@ data class Streams(
     val livestream: Boolean?,
     val proxyUrl: String?,
     val chapters: List<ChapterSegment>?
-){
-    constructor(): this("","","","","","","","","","",null,-1,-1,-1,-1, emptyList(), emptyList(),
-        emptyList(), emptyList(), null,"", emptyList())
-}
+)

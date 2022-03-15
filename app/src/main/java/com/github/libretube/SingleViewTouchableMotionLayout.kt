@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
  *
  */
 
-class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) : MotionLayout(context, attributeSet) {
+class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) :
+    MotionLayout(context, attributeSet) {
 
     private val viewToDetectTouch by lazy {
         findViewById<View>(R.id.main_container) //TODO move to Attributes
@@ -27,16 +28,17 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private val transitionListenerList = mutableListOf<TransitionListener?>()
 
     init {
-        addTransitionListener(object : MotionLayout.TransitionListener {
+        addTransitionListener(object : TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int
             ) {
-
+                // no op
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                // no op
             }
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
@@ -49,17 +51,17 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
                 positive: Boolean,
                 progress: Float
             ) {
-
+                // no op
             }
         })
 
-        super.setTransitionListener(object : MotionLayout.TransitionListener {
+        super.setTransitionListener(object : TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int
             ) {
-
+                // no op
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
@@ -78,7 +80,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
                 positive: Boolean,
                 progress: Float
             ) {
-
+                // no op
             }
         })
     }
@@ -91,12 +93,13 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
         transitionListenerList += listener
     }
 
-    private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-            transitionToEnd()
-            return false
-        }
-    })
+    private val gestureDetector =
+        GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                transitionToEnd()
+                return false
+            }
+        })
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         //gestureDetector.onTouchEvent(event)

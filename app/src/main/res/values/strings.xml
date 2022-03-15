@@ -36,4 +36,12 @@
     <string name="empty">Username and Password can\'t be empty!</string>
     <string name="notgmail">This is not your gmail account!</string>
     <string name="defres">Default Video Resolution</string>
+    <string name="home">Home</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="library">Library</string>
+    <string name="mkv">.mkv</string>
+    <string name="mp4">.mp4</string>
+    <string name="videos">Videos</string>
+    <string name="description">Description</string>
+    <string name="search">Search</string>
 </resources>
