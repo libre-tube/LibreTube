@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
+import com.github.libretube.fragment.PlayerFragment
 import com.github.libretube.model.StreamItem
+import com.squareup.picasso.Picasso
 
 class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
     RecyclerView.Adapter<PlaylistViewHolder>() {
@@ -33,18 +33,22 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val streamItem = videoFeed[position]
-        holder.v.findViewById<TextView>(R.id.channel_description).text = streamItem.title
-        holder.v.findViewById<TextView>(R.id.channel_views).text = streamItem.uploaderName
-        holder.v.findViewById<TextView>(R.id.channel_duration).text =
-            DateUtils.formatElapsedTime(streamItem.duration!!)
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
+        val thumbnailImage = holder.view.findViewById<ImageView>(R.id.channel_thumbnail)
+
         Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
-        holder.v.setOnClickListener {
+
+        holder.view.findViewById<TextView>(R.id.channel_description).text = streamItem.title
+        holder.view.findViewById<TextView>(R.id.channel_views).text = streamItem.uploaderName
+        holder.view.findViewById<TextView>(R.id.channel_duration).text =
+            DateUtils.formatElapsedTime(streamItem.duration!!)
+
+        holder.view.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
             val frag = PlayerFragment()
+            val activity = holder.view.context as AppCompatActivity
+
+            bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
             frag.arguments = bundle
-            val activity = holder.v.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
@@ -55,4 +59,4 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
     }
 }
 
-class PlaylistViewHolder(val v: View) : RecyclerView.ViewHolder(v)
+class PlaylistViewHolder(val view: View) : RecyclerView.ViewHolder(view)

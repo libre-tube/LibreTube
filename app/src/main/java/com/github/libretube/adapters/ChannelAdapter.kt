@@ -10,10 +10,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.model.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.PlayerFragment
 
 class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
     RecyclerView.Adapter<ChannelViewHolder>() {
@@ -34,19 +34,23 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
 
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
-        holder.v.findViewById<TextView>(R.id.channel_description).text = trending.title
-        holder.v.findViewById<TextView>(R.id.channel_views).text =
-            trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-        holder.v.findViewById<TextView>(R.id.channel_duration).text =
-            DateUtils.formatElapsedTime(trending.duration!!)
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
+        val thumbnailImage = holder.view.findViewById<ImageView>(R.id.channel_thumbnail)
+
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
-        holder.v.setOnClickListener {
+
+        holder.view.findViewById<TextView>(R.id.channel_description).text = trending.title
+        holder.view.findViewById<TextView>(R.id.channel_views).text =
+            trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.view.findViewById<TextView>(R.id.channel_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
+
+        holder.view.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
             val frag = PlayerFragment()
+            val activity = holder.view.context as AppCompatActivity
+
+            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
             frag.arguments = bundle
-            val activity = holder.v.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
@@ -57,4 +61,4 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
     }
 }
 
-class ChannelViewHolder(val v: View) : RecyclerView.ViewHolder(v)
+class ChannelViewHolder(val view: View) : RecyclerView.ViewHolder(view)

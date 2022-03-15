@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
@@ -24,15 +23,23 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
+import com.github.libretube.activity.MainActivity
+import com.github.libretube.activity.hideKeyboard
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.formatShort
 import com.github.libretube.model.PipedStream
 import com.github.libretube.model.Subscribe
+import com.github.libretube.service.IS_DOWNLOAD_RUNNING
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
@@ -51,7 +58,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import kotlin.math.abs
-
 
 var isFullScreen = false
 private const val TAG = "PlayerFragment"
@@ -98,7 +104,7 @@ class PlayerFragment : Fragment() {
         hideKeyboard()
         videoId = videoId!!.replace("/watch?v=", "")
         relDownloadVideo = view.findViewById(R.id.relPlayer_download)
-        mainActivity.findViewById<FrameLayout>(R.id.container).visibility = View.VISIBLE
+        mainActivity.findViewById<FrameLayout>(R.id.container).isVisible = true
         motionLayout = playerMotionLayout
         exoPlayerView = view.findViewById(R.id.player)
         view.findViewById<TextView>(R.id.player_description).text = videoId
@@ -130,14 +136,14 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
-                    view.findViewById<ImageButton>(R.id.quality_select).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.GONE
-                    view.findViewById<TextView>(R.id.quality_text).visibility = View.GONE
+                    view.findViewById<ImageButton>(R.id.quality_select).isVisible = false
+                    view.findViewById<ImageButton>(R.id.close_imageButton).isVisible = false
+                    view.findViewById<TextView>(R.id.quality_text).isVisible = false
                     mainMotionLayout.progress = 1.toFloat()
                 } else if (currentId == sId) {
-                    view.findViewById<ImageButton>(R.id.quality_select).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.quality_text).visibility = View.VISIBLE
+                    view.findViewById<ImageButton>(R.id.quality_select).isVisible = true
+                    view.findViewById<ImageButton>(R.id.close_imageButton).isVisible = true
+                    view.findViewById<TextView>(R.id.quality_text).isVisible = true
                     mainMotionLayout.progress = 0.toFloat()
                 }
             }
@@ -190,7 +196,7 @@ class PlayerFragment : Fragment() {
                     enableTransition(R.id.yt_transition, false)
                 }
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = true
-                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
+                view.findViewById<LinearLayout>(R.id.linLayout).isVisible = false
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                 isFullScreen = true
 
@@ -200,7 +206,7 @@ class PlayerFragment : Fragment() {
                     enableTransition(R.id.yt_transition, true)
                 }
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
-                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+                view.findViewById<LinearLayout>(R.id.linLayout).isVisible = true
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 isFullScreen = false
             }
@@ -339,56 +345,56 @@ class PlayerFragment : Fragment() {
                             AlertDialog.Builder(it)
                         }
                         builder!!.setTitle(R.string.choose_quality_dialog)
-                            .setItems(videosNameArray,
-                                DialogInterface.OnClickListener { _, which ->
-                                    whichQuality = which
-                                    if (response.subtitles.isNotEmpty()) {
-                                        val subtitle =
-                                            mutableListOf<SubtitleConfiguration>()
-                                        subtitle.add(
-                                            SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
-                                                .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
-                                                .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
-                                                .build()
-                                        )
-                                    }
-                                    if (which == 0) {
-                                        val mediaItem: MediaItem = MediaItem.Builder()
-                                            .setUri(response.hls)
-                                            .setSubtitleConfigurations(subtitle)
+                            .setItems(
+                                videosNameArray
+                            ) { _, which ->
+                                whichQuality = which
+                                if (response.subtitles.isNotEmpty()) {
+                                    subtitle = mutableListOf()
+                                    subtitle.add(
+                                        SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
+                                            .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
+                                            .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
                                             .build()
-                                        exoPlayer.setMediaItem(mediaItem)
-                                    } else {
-                                        val dataSourceFactory: DataSource.Factory =
-                                            DefaultHttpDataSource.Factory()
-                                        val videoItem: MediaItem = MediaItem.Builder()
-                                            .setUri(response.videoStreams[which - 1].url)
-                                            .setSubtitleConfigurations(subtitle)
-                                            .build()
-                                        val videoSource: MediaSource =
-                                            DefaultMediaSourceFactory(dataSourceFactory)
-                                                .createMediaSource(videoItem)
-                                        var audioSource: MediaSource =
-                                            DefaultMediaSourceFactory(dataSourceFactory)
-                                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                                        if (response.videoStreams[which - 1].quality == "720p" || response.videoStreams[which - 1].quality == "1080p" || response.videoStreams[which - 1].quality == "480p") {
-                                            audioSource =
-                                                ProgressiveMediaSource.Factory(dataSourceFactory)
-                                                    .createMediaSource(
-                                                        fromUri(
-                                                            response.audioStreams[getMostBitRate(
-                                                                response.audioStreams
-                                                            )].url!!
-                                                        )
+                                    )
+                                }
+                                if (which == 0) {
+                                    mediaItem = MediaItem.Builder()
+                                        .setUri(response.hls)
+                                        .setSubtitleConfigurations(subtitle)
+                                        .build()
+                                    exoPlayer.setMediaItem(mediaItem)
+                                } else {
+                                    val dataSourceFactory: DataSource.Factory =
+                                        DefaultHttpDataSource.Factory()
+                                    val videoItem: MediaItem = MediaItem.Builder()
+                                        .setUri(response.videoStreams[which - 1].url)
+                                        .setSubtitleConfigurations(subtitle)
+                                        .build()
+                                    val videoSource: MediaSource =
+                                        DefaultMediaSourceFactory(dataSourceFactory)
+                                            .createMediaSource(videoItem)
+                                    var audioSource: MediaSource =
+                                        DefaultMediaSourceFactory(dataSourceFactory)
+                                            .createMediaSource(fromUri(response.audioStreams!![0].url!!))
+                                    if (response.videoStreams[which - 1].quality == "720p" || response.videoStreams[which - 1].quality == "1080p" || response.videoStreams[which - 1].quality == "480p") {
+                                        audioSource =
+                                            ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                .createMediaSource(
+                                                    fromUri(
+                                                        response.audioStreams[getMostBitRate(
+                                                            response.audioStreams
+                                                        )].url!!
                                                     )
-                                        }
-                                        val mergeSource: MediaSource =
-                                            MergingMediaSource(videoSource, audioSource)
-                                        exoPlayer.setMediaSource(mergeSource)
+                                                )
                                     }
-                                    view.findViewById<TextView>(R.id.quality_text).text =
-                                        videosNameArray[which]
-                                })
+                                    val mergeSource: MediaSource =
+                                        MergingMediaSource(videoSource, audioSource)
+                                    exoPlayer.setMediaSource(mergeSource)
+                                }
+                                view.findViewById<TextView>(R.id.quality_text).text =
+                                    videosNameArray[which]
+                            }
                         val dialog: AlertDialog = builder.create()
                         dialog.show()
                     }
@@ -437,7 +443,7 @@ class PlayerFragment : Fragment() {
 
                         val activity = view.context as MainActivity
                         val bundle = bundleOf("channel_id" to response.uploaderUrl)
-                        activity.navController.navigate(R.id.channel, bundle)
+                        activity.navController.navigate(R.id.channelFragment, bundle)
                         activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
                         view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                     }

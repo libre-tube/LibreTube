@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -68,7 +69,7 @@ class HomeFragment : Fragment() {
                     refreshLayout?.isRefreshing = false
                 }
                 runOnUiThread {
-                    progressBar.visibility = View.GONE
+                    progressBar.isVisible = false
                     recyclerView.adapter = TrendingAdapter(response)
                 }
             }

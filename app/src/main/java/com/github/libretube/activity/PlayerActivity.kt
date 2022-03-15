@@ -10,8 +10,3 @@ class PlayerActivity : Activity() {
         setContentView(R.layout.activity_player)
     }
 }
-
-
-
-
-

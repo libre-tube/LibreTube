@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.github.libretube.DownloadService
 import com.github.libretube.R
+import com.github.libretube.service.DownloadService
 
 private const val TAG = "DownloadDialogFragment"
 

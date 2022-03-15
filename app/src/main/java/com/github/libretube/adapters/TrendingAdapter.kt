@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.activity.MainActivity
-import com.squareup.picasso.Picasso
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.model.StreamItem
+import com.github.libretube.activity.MainActivity
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.PlayerFragment
+import com.github.libretube.model.StreamItem
+import com.squareup.picasso.Picasso
 
 class TrendingAdapter(private val videoFeed: List<StreamItem>) :
     RecyclerView.Adapter<CustomViewHolder>() {
@@ -42,10 +42,11 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>) :
             )
         holder.view.findViewById<TextView>(R.id.thumbnail_duration).text =
             DateUtils.formatElapsedTime(trending.duration!!)
+
         channelImage.setOnClickListener {
             val activity = holder.view.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
             try {
                 val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (mainMotionLayout.progress == 0.toFloat()) {

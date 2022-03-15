@@ -11,11 +11,11 @@
             <KeyAttribute
                 android:translationY="0dp"
                 motion:framePosition="0"
-                motion:motionTarget="@+id/bottomNav" />
+                motion:motionTarget="@+id/bottomNavigationView" />
             <KeyAttribute
                 android:translationY="55dp"
                 motion:framePosition="75"
-                motion:motionTarget="@+id/bottomNav" />
+                motion:motionTarget="@+id/bottomNavigationView" />
             <KeyAttribute
                 android:scaleY="1"
                 motion:framePosition="50"

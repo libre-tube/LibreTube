@@ -13,10 +13,10 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.activity.MainActivity
 import com.squareup.picasso.Picasso
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.model.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.PlayerFragment
 
 class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
     RecyclerView.Adapter<SubscriptionViewHolder>() {
@@ -55,7 +55,7 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
         channelImage.setOnClickListener {
             val activity = holder.view.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
             try {
                 val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (mainMotionLayout.progress == 0.toFloat()) {
@@ -70,16 +70,16 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)
         holder.view.setOnClickListener {
             val bundle = Bundle()
-            val frag = PlayerFragment()
+            val playerFragment = PlayerFragment()
             val activity = holder.view.context as AppCompatActivity
 
             bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
-            frag.arguments = bundle
+            playerFragment.arguments = bundle
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
             activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
+                .replace(R.id.container, playerFragment)
                 .commitNow()
         }
     }

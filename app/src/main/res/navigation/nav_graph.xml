@@ -2,23 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav"
-    app:startDestination="@id/home2">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/home2"
-        android:name="com.github.libretube.HomeFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.github.libretube.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/subscriptions"
+        android:id="@+id/subscriptionsFragment"
         android:name="com.github.libretube.fragment.SubscriptionsFragment"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
 
     <fragment
-        android:id="@+id/library"
+        android:id="@+id/libraryFragment"
         android:name="com.github.libretube.fragment.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" />
@@ -30,9 +30,9 @@
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/channel"
-        android:name="com.github.libretube.ChannelFragment"
-        android:label="channel"
+        android:id="@+id/channelFragment"
+        android:name="com.github.libretube.fragment.ChannelFragment"
+        android:label="fragment_channel"
         tools:layout="@layout/fragment_channel">
 
         <argument
@@ -45,13 +45,14 @@
         android:name="com.github.libretube.fragment.PlaylistFragment"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist">
+
         <argument
             android:name="playlist_id"
             app:argType="string" />
     </fragment>
 
     <fragment
-        android:id="@+id/settings"
+        android:id="@+id/settingsFragment"
         android:name="com.github.libretube.fragment.SettingsFragment"
         android:label="Settings" />
 </navigation>

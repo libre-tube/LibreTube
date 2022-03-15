@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +50,7 @@ class SubscriptionsFragment : Fragment() {
             val feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
 
-            progressBar.visibility = View.VISIBLE
+            progressBar.isVisible = true
 
             channelRecView?.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -102,7 +103,7 @@ class SubscriptionsFragment : Fragment() {
                     feedRecView.adapter = subscriptionAdapter
                     subscriptionAdapter?.updateItems()
                 }
-                progressBar.visibility = View.GONE
+                progressBar.isVisible = false
                 isLoaded = true
             }
         }

@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-
 private const val TAG = "SearchFragment"
 
 class SearchFragment : Fragment() {

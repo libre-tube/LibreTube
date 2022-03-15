@@ -5,8 +5,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 
 object RetrofitInstance {
     lateinit var url: String
-    val lazyMgr = resettableManager()
-    val api: PipedApi by resettableLazy(lazyMgr) {
+    val resettableLazyManager = resettableManager()
+    val api: PipedApi by resettableLazy(resettableLazyManager) {
         Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(JacksonConverterFactory.create())

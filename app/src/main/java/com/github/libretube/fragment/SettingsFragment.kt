@@ -80,7 +80,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         fetchInstance()
         instance?.setOnPreferenceChangeListener { _, newValue ->
             RetrofitInstance.url = newValue.toString()
-            RetrofitInstance.lazyMgr.reset()
+            RetrofitInstance.resettableLazyManager.reset()
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
             if (sharedPref?.getString("token", "") != "") {
                 with(sharedPref!!.edit()) {

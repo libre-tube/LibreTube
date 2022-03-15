@@ -18,6 +18,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,25 +48,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        bottomNavigationView = findViewById(R.id.bottomNav)
-        navController = findNavController(R.id.fragment)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        navController = findNavController(R.id.navHostFragment)
         bottomNavigationView.setupWithNavController(navController)
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home2 -> {
+                R.id.homeFragment -> {
                     navController.backQueue.clear()
-                    navController.navigate(R.id.home2)
+                    navController.navigate(R.id.homeFragment)
                     true
                 }
-                R.id.subscriptions -> {
+                R.id.subscriptionsFragment -> {
                     //navController.backQueue.clear()
-                    navController.navigate(R.id.subscriptions)
+                    navController.navigate(R.id.subscriptionsFragment)
                     true
                 }
-                R.id.library -> {
+                R.id.libraryFragment -> {
                     //navController.backQueue.clear()
-                    navController.navigate(R.id.library)
+                    navController.navigate(R.id.libraryFragment)
                     true
                 }
             }
@@ -81,8 +82,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = appName
 
         toolbar.setNavigationOnClickListener {
-            //settings fragment stuff
-            navController.navigate(R.id.settings)
+            navController.navigate(R.id.settingsFragment)
             true
         }
 
@@ -107,15 +107,14 @@ class MainActivity : AppCompatActivity() {
             Log.d("dafaq", data.host + " ${data.path} ")
             if (data.host != null) {
                 if (data.path != null) {
-                    //channel
                     if (data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains(
                             "/user/")
                     ) {
                         var channel = data.path
                         channel = channel!!.replace("/c/", "")
-                        channel = channel!!.replace("/user/", "")
+                        channel = channel.replace("/user/", "")
                         val bundle = bundleOf("channel_id" to channel)
-                        navController.navigate(R.id.channel, bundle)
+                        navController.navigate(R.id.channelFragment, bundle)
                     } else if (data.path!!.contains("/playlist")) {
                         var playlist = data.query!!
                         if (playlist.contains("&")) {
@@ -135,9 +134,10 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         var watch = data.path!!.replace("/shorts/", "").replace("/v/", "")
                             .replace("/embed/", "")
-                        var bundle = Bundle()
+                        val bundle = Bundle()
+                        val frag = PlayerFragment()
+
                         bundle.putString("videoId", watch)
-                        var frag = PlayerFragment()
                         frag.arguments = bundle
                         supportFragmentManager.beginTransaction()
                             .remove(PlayerFragment())
@@ -208,14 +208,15 @@ class MainActivity : AppCompatActivity() {
             if (mainMotionLayout.progress == 0.toFloat()) {
                 mainMotionLayout.transitionToEnd()
                 findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
-                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                motionLayout.transitionToEnd()
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-                with(motionLayout) {
+
+                val playerMotionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                with(playerMotionLayout) {
+                    transitionToEnd()
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
                 }
-                findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+                findViewById<LinearLayout>(R.id.linLayout).isVisible = true
                 isFullScreen = false
             } else {
                 navController.popBackStack()
@@ -255,7 +256,7 @@ class MainActivity : AppCompatActivity() {
                 hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        } else
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
                     or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -263,7 +264,6 @@ class MainActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
-        }
     }
 
     private fun unsetFullscreen() {
@@ -278,11 +278,10 @@ class MainActivity : AppCompatActivity() {
                 show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        } else
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-        }
     }
 }
 

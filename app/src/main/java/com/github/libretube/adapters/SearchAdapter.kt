@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.activity.MainActivity
-import com.squareup.picasso.Picasso
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.model.SearchItem
+import com.github.libretube.activity.MainActivity
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.PlayerFragment
+import com.github.libretube.model.SearchItem
+import com.squareup.picasso.Picasso
 
 class SearchAdapter(private val searchItems: List<SearchItem>) :
     RecyclerView.Adapter<CustomViewHolder1>() {
@@ -80,7 +80,7 @@ class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) 
         channelImage.setOnClickListener {
             val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to item.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
         }
     }
 
@@ -96,7 +96,7 @@ class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) 
         view.setOnClickListener {
             val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
         }
         //todo sub button
     }
@@ -108,8 +108,8 @@ class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) 
         val playlistChannelName = view.findViewById<TextView>(R.id.search_name)
         val playlistVideosNumber = view.findViewById<TextView>(R.id.search_playlist_videos)
 
-        playlistNumber.text = item.videos.toString()
         Picasso.get().load(item.thumbnail).into(playlistImage)
+        playlistNumber.text = item.videos.toString()
         playlistName.text = item.name
         playlistChannelName.text = item.uploaderName
         playlistVideosNumber.text = item.videos.toString() + " videos"

@@ -31,13 +31,13 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         val subscription = subscriptions[position]
         val avatar = holder.view.findViewById<ImageView>(R.id.subscription_channel_image)
 
-        holder.view.findViewById<TextView>(R.id.subscription_channel_name).text = subscription.name
         Picasso.get().load(subscription.avatar).into(avatar)
 
+        holder.view.findViewById<TextView>(R.id.subscription_channel_name).text = subscription.name
         holder.view.setOnClickListener {
             val activity = holder.view.context as MainActivity
             val bundle = bundleOf("channel_id" to subscription.url)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
         }
     }
 }
