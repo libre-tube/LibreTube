@@ -9,9 +9,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ScrollView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.ChannelAdapter
+import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.formatShort
 import com.github.libretube.model.Subscribe
-import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
@@ -29,6 +27,8 @@ import java.io.IOException
 private const val TAG = "ChannelFragment"
 
 class ChannelFragment : Fragment() {
+
+    private lateinit var binding: FragmentChannelBinding
 
     private var channelId: String? = null
     var nextPage: String? = null
@@ -45,29 +45,27 @@ class ChannelFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_channel, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentChannelBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         channelId = channelId!!.replace("/channel/", "")
-        view.findViewById<TextView>(R.id.channel_name).text = channelId
-        val recyclerView = view.findViewById<RecyclerView>(R.id.channel_recView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        fetchChannel(view)
+        binding.tvChannelName.text = channelId
+        binding.rvChannels.layoutManager = LinearLayoutManager(context)
+        fetchChannel()
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
         if (sharedPref?.getString("token", "") != "") {
-            val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
-            isSubscribed(subButton)
+            isSubscribed()
         }
-        val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
-        scrollView.viewTreeObserver
+        binding.svChannel.viewTreeObserver
             .addOnScrollChangedListener {
-                if (scrollView.getChildAt(0).bottom
-                    == (scrollView.height + scrollView.scrollY)
+                if (binding.svChannel.getChildAt(0).bottom
+                    == (binding.svChannel.height + binding.svChannel.scrollY)
                 ) {
                     //scroll view is at bottom
                     if (nextPage != null && !isLoading) {
@@ -78,7 +76,7 @@ class ChannelFragment : Fragment() {
             }
     }
 
-    private fun isSubscribed(button: MaterialButton) {
+    private fun isSubscribed() {
         @SuppressLint("ResourceAsColor")
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -113,20 +111,20 @@ class ChannelFragment : Fragment() {
                 runOnUiThread {
                     if (response.subscribed == true) {
                         isSubscribed = true
-                        button.text = getString(R.string.unsubscribe)
-                        button.setTextColor(colorText.data)
+                        binding.btnSubscribeChannel.text = getString(R.string.unsubscribe)
+                        binding.btnSubscribeChannel.setTextColor(colorText.data)
 
                     }
                     if (response.subscribed != null) {
-                        button.setOnClickListener {
+                        binding.btnSubscribeChannel.setOnClickListener {
                             if (isSubscribed) {
                                 unsubscribe()
-                                button.text = getString(R.string.subscribe)
-                                button.setTextColor(colorPrimary.data)
+                                binding.btnSubscribeChannel.text = getString(R.string.subscribe)
+                                binding.btnSubscribeChannel.setTextColor(colorPrimary.data)
                             } else {
                                 subscribe()
-                                button.text = getString(R.string.unsubscribe)
-                                button.setTextColor(colorText.data)
+                                binding.btnSubscribeChannel.text = getString(R.string.unsubscribe)
+                                binding.btnSubscribeChannel.setTextColor(colorText.data)
                             }
                         }
                     }
@@ -182,7 +180,7 @@ class ChannelFragment : Fragment() {
         run()
     }
 
-    private fun fetchChannel(view: View) {
+    private fun fetchChannel() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -197,18 +195,18 @@ class ChannelFragment : Fragment() {
                 }
                 nextPage = response.nextpage
                 isLoading = false
+
                 runOnUiThread {
-                    view.findViewById<TextView>(R.id.channel_name).text = response.name
-                    view.findViewById<TextView>(R.id.channel_subs).text =
+                    binding.tvChannelName.text = response.name
+                    binding.tvChannelSubscriptions.text =
                         response.subscriberCount.formatShort() + " subscribers"
-                    view.findViewById<TextView>(R.id.channel_description).text =
-                        response.description
-                    val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
-                    val channelImage = view.findViewById<ImageView>(R.id.channel_image)
-                    Picasso.get().load(response.bannerUrl).into(bannerImage)
-                    Picasso.get().load(response.avatarUrl).into(channelImage)
+                    binding.tvChannelDescription.text = response.description
+
+                    Picasso.get().load(response.bannerUrl).into(binding.ivChannelBanner)
+                    Picasso.get().load(response.avatarUrl).into(binding.ivChannel)
+
                     channelAdapter = ChannelAdapter(response.relatedStreams!!.toMutableList())
-                    view.findViewById<RecyclerView>(R.id.channel_recView).adapter = channelAdapter
+                    binding.rvChannels.adapter = channelAdapter
                 }
             }
         }
@@ -243,12 +241,8 @@ class ChannelFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        val scrollView = view?.findViewById<ScrollView>(R.id.channel_scrollView)
-        scrollView?.viewTreeObserver?.removeOnScrollChangedListener {
-            // TODO: fill or delete
-        }
         channelAdapter = null
-        view?.findViewById<RecyclerView>(R.id.channel_recView)?.adapter = null
+        binding.rvChannels.adapter = null
         super.onDestroyView()
     }
 }

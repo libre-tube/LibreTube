@@ -48,7 +48,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
-        app:layout_constraintStart_toEndOf="@+id/channel_image"
+        app:layout_constraintStart_toEndOf="@+id/ivChannel"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard" />
 
     <TextView
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_title" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/channel_image"
+        android:id="@+id/ivChannel"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"

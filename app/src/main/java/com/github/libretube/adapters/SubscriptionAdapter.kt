@@ -42,7 +42,7 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = videoFeed[position]
         val thumbnailImage = holder.view.findViewById<ImageView>(R.id.thumbnail)
-        val channelImage = holder.view.findViewById<ImageView>(R.id.channel_image)
+        val channelImage = holder.view.findViewById<ImageView>(R.id.ivChannel)
 
         holder.view.findViewById<TextView>(R.id.textView_title).text = trending.title
         holder.view.findViewById<TextView>(R.id.textView_channel).text =

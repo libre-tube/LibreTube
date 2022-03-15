@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/channel_scrollView"
+    android:id="@+id/svChannel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,19 +13,19 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/channel_banner"
+            android:id="@+id/ivChannelBanner"
             android:layout_width="match_parent"
             android:layout_height="80dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/channel_image"
+            android:id="@+id/ivChannel"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp" />
 
         <TextView
-            android:id="@+id/channel_name"
+            android:id="@+id/tvChannelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -35,7 +35,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/channel_subscribe"
+            android:id="@+id/btnSubscribeChannel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -44,7 +44,7 @@
             android:textColor="?attr/colorPrimary" />
 
         <TextView
-            android:id="@+id/channel_subs"
+            android:id="@+id/tvChannelSubscriptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -60,7 +60,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/channel_description"
+            android:id="@+id/tvChannelDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -83,7 +83,7 @@
             android:descendantFocusability="blocksDescendants">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/channel_recView"
+                android:id="@+id/rvChannels"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

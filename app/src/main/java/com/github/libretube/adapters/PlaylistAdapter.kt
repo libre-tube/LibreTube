@@ -37,7 +37,7 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
 
         Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
 
-        holder.view.findViewById<TextView>(R.id.channel_description).text = streamItem.title
+        holder.view.findViewById<TextView>(R.id.tvChannelDescription).text = streamItem.title
         holder.view.findViewById<TextView>(R.id.channel_views).text = streamItem.uploaderName
         holder.view.findViewById<TextView>(R.id.channel_duration).text =
             DateUtils.formatElapsedTime(streamItem.duration!!)

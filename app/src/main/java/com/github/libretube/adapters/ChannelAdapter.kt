@@ -38,7 +38,7 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
 
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
 
-        holder.view.findViewById<TextView>(R.id.channel_description).text = trending.title
+        holder.view.findViewById<TextView>(R.id.tvChannelDescription).text = trending.title
         holder.view.findViewById<TextView>(R.id.channel_views).text =
             trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         holder.view.findViewById<TextView>(R.id.channel_duration).text =

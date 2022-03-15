@@ -47,7 +47,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/channel_description"
+        android:id="@+id/tvChannelDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -63,6 +63,6 @@
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/channel_description"
+        app:layout_constraintTop_toBottomOf="@+id/tvChannelDescription"
         tools:text="channel views" />
 </androidx.constraintlayout.widget.ConstraintLayout>
