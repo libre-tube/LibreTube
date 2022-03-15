@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFragment">
+    tools:context=".fragment.SearchFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/outlinedTextField"

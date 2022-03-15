@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
+import com.github.libretube.activity.MainActivity
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.obj.SearchItem
+import com.github.libretube.model.SearchItem
 import com.github.libretube.formatShort
 
 class SearchAdapter(private val searchItems: List<SearchItem>) :

@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
+import com.github.libretube.activity.MainActivity
 import com.github.libretube.R
-import com.github.libretube.obj.Subscription
+import com.github.libretube.model.Subscription
 import com.squareup.picasso.Picasso
 
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :

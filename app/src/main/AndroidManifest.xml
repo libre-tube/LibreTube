@@ -7,32 +7,31 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
+        android:name=".LibreTubeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_libretube"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_libretube_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LibreTube"
-        android:name=".LibreTubeApplication"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:largeHeap="true"
-        android:requestLegacyExternalStorage="true"
-        >
+        android:theme="@style/Theme.LibreTube">
+
         <activity
-            android:name=".PlayerActivity"
+            android:name=".activity.PlayerActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:configChanges="orientation|screenSize"
-            />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize"
+            android:exported="true"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -40,8 +39,10 @@
             <!-- youtube -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="youtube.com" />
@@ -119,8 +120,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="piped.tokhmi.xyz" />
@@ -132,10 +135,10 @@
                 <data android:pathPrefix="/" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".DownloadService"
             android:enabled="true"
             android:exported="false" />
     </application>
-
 </manifest>

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.obj.StreamItem
+import com.github.libretube.model.StreamItem
 
 class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
     RecyclerView.Adapter<PlaylistViewHolder>() {

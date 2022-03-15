@@ -4,7 +4,7 @@
     android:id="@+id/playlist_scrollview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaylistFragment">
+    tools:context=".fragment.PlaylistFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

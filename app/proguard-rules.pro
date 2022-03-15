@@ -21,4 +21,4 @@
 #-renamesourcefileattribute SourceFile
 #uncomment for debug
 #-keepnames class **
--keep class com.github.libretube.obj.** { *; }
+-keep class com.github.libretube.model.** { *; }

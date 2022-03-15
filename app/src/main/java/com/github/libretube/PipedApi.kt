@@ -1,6 +1,6 @@
 package com.github.libretube
 
-import com.github.libretube.obj.*
+import com.github.libretube.model.*
 import retrofit2.http.*
 
 interface PipedApi {
