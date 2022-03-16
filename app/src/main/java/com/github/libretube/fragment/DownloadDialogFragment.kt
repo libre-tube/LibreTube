@@ -14,13 +14,13 @@ import com.github.libretube.service.DownloadService
 private const val TAG = "DownloadDialogFragment"
 
 class DownloadDialogFragment : DialogFragment() {
-    var vidName = arrayListOf<String>()
-    var vidUrl = arrayListOf<String>()
-    var audioName = arrayListOf<String>()
-    var audioUrl = arrayListOf<String>()
+    private var vidName = arrayListOf<String>()
+    private var vidUrl = arrayListOf<String>()
+    private var audioName = arrayListOf<String>()
+    private var audioUrl = arrayListOf<String>()
     var selectedVideo = 0
     var selectedAudio = 0
-    var extension = ".mkv"
+    private var extension = ".mkv"
     var duration = 0
 
     private lateinit var videoId: String

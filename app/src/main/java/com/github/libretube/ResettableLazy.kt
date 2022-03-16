@@ -25,7 +25,7 @@ interface Resettable {
     fun reset()
 }
 
-class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () -> PROPTYPE) :
+class ResettableLazy<PROPTYPE>(private val manager: ResettableLazyManager, val init: () -> PROPTYPE) :
     Resettable {
     @Volatile
     var lazyHolder = makeInitBlock()

@@ -72,7 +72,7 @@ class PlayerFragment : Fragment() {
     private var paused = false
     private var whichQuality = 0
 
-    var isSubscribed: Boolean = false
+    private var isSubscribed: Boolean = false
 
     private lateinit var relatedRecView: RecyclerView
     private lateinit var exoPlayerView: StyledPlayerView

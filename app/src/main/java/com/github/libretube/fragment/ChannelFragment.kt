@@ -31,10 +31,10 @@ class ChannelFragment : Fragment() {
     private lateinit var binding: FragmentChannelBinding
 
     private var channelId: String? = null
-    var nextPage: String? = null
-    var channelAdapter: ChannelAdapter? = null
-    var isLoading = true
-    var isSubscribed: Boolean = false
+    private var nextPage: String? = null
+    private var channelAdapter: ChannelAdapter? = null
+    private var isLoading = true
+    private var isSubscribed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

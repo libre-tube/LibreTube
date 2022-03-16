@@ -31,7 +31,7 @@ class DownloadService : Service() {
     //private lateinit var command: String
     private lateinit var audioDir: File
     private lateinit var videoDir: File
-    lateinit var service: NotificationManager
+    private lateinit var service: NotificationManager
     lateinit var notification: NotificationCompat.Builder
     override fun onCreate() {
         super.onCreate()

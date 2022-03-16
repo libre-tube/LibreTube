@@ -22,9 +22,9 @@ class PlaylistFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null
-    var nextPage: String? = null
-    var playlistAdapter: PlaylistAdapter? = null
-    var isLoading = true
+    private var nextPage: String? = null
+    private var playlistAdapter: PlaylistAdapter? = null
+    private var isLoading = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

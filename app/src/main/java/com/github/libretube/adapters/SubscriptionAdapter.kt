@@ -20,7 +20,7 @@ import com.github.libretube.fragment.PlayerFragment
 
 class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
     RecyclerView.Adapter<SubscriptionViewHolder>() {
-    var amountOfItems = 0
+    private var amountOfItems = 0
 
     override fun getItemCount(): Int {
         return amountOfItems
