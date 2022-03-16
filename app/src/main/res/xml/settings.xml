@@ -30,4 +30,9 @@
         app:key="login_register"
         app:title="@string/login_register"
         />
+    <androidx.preference.Preference
+        app:key="import_from_yt"
+        app:title="@string/import_from_yt"
+        />
+
 </androidx.preference.PreferenceScreen>

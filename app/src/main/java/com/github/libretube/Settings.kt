@@ -1,25 +1,73 @@
 package com.github.libretube
 
+import android.Manifest
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import android.content.ContentValues.TAG
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Environment
+import androidx.core.app.ActivityCompat
 import androidx.preference.PreferenceManager
+import com.blankj.utilcode.util.UriUtils
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.util.zip.ZipFile
 
 class Settings : PreferenceFragmentCompat() {
+
+    companion object {
+        lateinit var getContent: ActivityResultLauncher<String>
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
+
+            var zipfile = ZipFile(UriUtils.uri2File(uri))
+
+            var zipentry =
+                zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+
+            var inputStream = zipfile.getInputStream(zipentry)
+
+            val baos = ByteArrayOutputStream()
+
+            inputStream.use { it.copyTo(baos) }
+
+            var subscriptions = baos.toByteArray().decodeToString()
+
+            var subscribedCount = 0
+
+            for(text in subscriptions.lines()){
+                if(text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()){
+                    subscribe(text.take(24))
+                    subscribedCount++
+                    Log.d(TAG, "subscribed: " + text +" total: " + subscribedCount)
+                }
+            }
+        }
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
         val instance = findPreference<ListPreference>("instance")
@@ -44,6 +92,47 @@ class Settings : PreferenceFragmentCompat() {
                 newFragment.show(childFragmentManager, "Login")
                 true
             }
+
+        val importFromYt = findPreference<Preference>("import_from_yt")
+        importFromYt?.setOnPreferenceClickListener {
+
+            //check StorageAccess
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                Log.d("myz", "" + Build.VERSION.SDK_INT)
+                if (!Environment.isExternalStorageManager()) {
+                    ActivityCompat.requestPermissions(
+                        this.requireActivity(), arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                        ), 1
+                    ) //permission request code is just an int
+                }
+            } else {
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        this.requireActivity(),
+                        arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ),
+                        1
+                    )
+                }
+            }
+
+            getContent.launch("application/zip")
+
+
+            true
+        }
 
         }
 
@@ -90,4 +179,25 @@ class Settings : PreferenceFragmentCompat() {
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
     }
+
+
+    private fun subscribe(channel_id: String){
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    RetrofitInstance.api.subscribe(sharedPref?.getString("token","")!!, Subscribe(channel_id))
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response$e")
+                    return@launchWhenCreated
+                }
+            }
+        }
+        run()
+    }
 }
+
