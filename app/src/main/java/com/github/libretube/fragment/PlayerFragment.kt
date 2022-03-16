@@ -248,9 +248,9 @@ class PlayerFragment : Fragment() {
                 runOnUiThread {
                     var subtitle = mutableListOf<SubtitleConfiguration>()
                     if (response.subtitles!!.isNotEmpty()) {
-                        subtitle?.add(SubtitleConfiguration.Builder(response.subtitles!![0].url!!.toUri())
-                            .setMimeType(response.subtitles!![0].mimeType!!) // The correct MIME type (required).
-                            .setLanguage(response.subtitles!![0].code) // The subtitle language (optional).
+                        subtitle.add(SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
+                            .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
+                            .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
                             .build())
                     }
 
@@ -270,7 +270,7 @@ class PlayerFragment : Fragment() {
                     when {
                         defres != "" -> {
                             run lit@{
-                                response.videoStreams!!.forEachIndexed { index, pipedStream ->
+                                response.videoStreams.forEachIndexed { index, pipedStream ->
                                     if (pipedStream.quality!!.contains(defres)) {
                                         val dataSourceFactory: DataSource.Factory =
                                             DefaultHttpDataSource.Factory()
@@ -284,10 +284,13 @@ class PlayerFragment : Fragment() {
                                         var audioSource: MediaSource =
                                             DefaultMediaSourceFactory(dataSourceFactory)
                                                 .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                                        if (response.videoStreams[index].quality == "720p" || response.videoStreams[index].quality == "1080p" || response.videoStreams[index].quality == "480p") {
+                                        if (response.videoStreams[index].quality == "720p" ||
+                                            response.videoStreams[index].quality == "1080p" ||
+                                            response.videoStreams[index].quality == "480p"
+                                        ) {
                                             audioSource =
                                                 ProgressiveMediaSource.Factory(dataSourceFactory)
-                                                    .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(
+                                                    .createMediaSource(fromUri(response.audioStreams[getMostBitRate(
                                                         response.audioStreams)].url!!))
                                         }
                                         val mergeSource: MediaSource =
@@ -321,9 +324,12 @@ class PlayerFragment : Fragment() {
                             var audioSource: MediaSource =
                                 DefaultMediaSourceFactory(dataSourceFactory)
                                     .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                            if (response.videoStreams[0].quality == "720p" || response.videoStreams[0].quality == "1080p" || response.videoStreams[0].quality == "480p") {
+                            if (response.videoStreams[0].quality == "720p" ||
+                                response.videoStreams[0].quality == "1080p" ||
+                                response.videoStreams[0].quality == "480p"
+                            ) {
                                 audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                    .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(
+                                    .createMediaSource(fromUri(response.audioStreams[getMostBitRate(
                                         response.audioStreams)].url!!))
                             }
                             val mergeSource: MediaSource =
@@ -359,7 +365,7 @@ class PlayerFragment : Fragment() {
                                     )
                                 }
                                 if (which == 0) {
-                                    mediaItem = MediaItem.Builder()
+                                    val mediaItem = MediaItem.Builder()
                                         .setUri(response.hls)
                                         .setSubtitleConfigurations(subtitle)
                                         .build()
@@ -377,7 +383,10 @@ class PlayerFragment : Fragment() {
                                     var audioSource: MediaSource =
                                         DefaultMediaSourceFactory(dataSourceFactory)
                                             .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                                    if (response.videoStreams[which - 1].quality == "720p" || response.videoStreams[which - 1].quality == "1080p" || response.videoStreams[which - 1].quality == "480p") {
+                                    if (response.videoStreams[which - 1].quality == "720p" ||
+                                        response.videoStreams[which - 1].quality == "1080p" ||
+                                        response.videoStreams[which - 1].quality == "480p"
+                                    ) {
                                         audioSource =
                                             ProgressiveMediaSource.Factory(dataSourceFactory)
                                                 .createMediaSource(

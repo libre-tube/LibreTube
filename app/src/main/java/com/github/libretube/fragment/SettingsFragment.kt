@@ -20,11 +20,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import com.blankj.utilcode.util.UriUtils
-import com.github.libretube.obj.Subscribe
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
+import com.github.libretube.model.Subscribe
 import retrofit2.HttpException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -40,36 +39,32 @@ class SettingsFragment : PreferenceFragmentCompat() {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
-                var zipfile = ZipFile(UriUtils.uri2File(uri))
+                val zipFile = ZipFile(UriUtils.uri2File(uri))
 
-                var zipentry =
-                    zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+                val zipEntry =
+                    zipFile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
 
-                var inputStream = zipfile.getInputStream(zipentry)
-
-                val baos = ByteArrayOutputStream()
-
-                inputStream.use { it.copyTo(baos) }
-
-                var subscriptions = baos.toByteArray().decodeToString()
-
+                val inputStream = zipFile.getInputStream(zipEntry)
+                val babyteArrayOutputStreams = ByteArrayOutputStream()
+                val subscriptions = babyteArrayOutputStreams.toByteArray().decodeToString()
                 var subscribedCount = 0
 
+                inputStream.use { it.copyTo(babyteArrayOutputStreams) }
+
                 for (text in subscriptions.lines()) {
-                    if (text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()) {
+                    if (text.take(24) != "Channel Id,Channel Url,C" && text.take(24).isNotEmpty()) {
                         subscribe(text.take(24))
                         subscribedCount++
-                        Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
+                        Log.d(TAG, "subscribed: $text total: $subscribedCount")
                     }
                 }
 
                 Toast.makeText(
                     context,
-                    "Subscribed to " + subscribedCount + " channels.",
+                    "Subscribed to $subscribedCount channels.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
         super.onCreate(savedInstanceState)
     }

@@ -36,7 +36,6 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -137,7 +137,7 @@
         </activity>
 
         <service
-            android:name=".DownloadService"
+            android:name=".service.DownloadService"
             android:enabled="true"
             android:exported="false" />
     </application>
