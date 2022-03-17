@@ -1,33 +1,27 @@
 package com.github.libretube
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import android.content.ContentValues.TAG
-import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Environment
-import androidx.core.app.ActivityCompat
-import androidx.preference.PreferenceManager
 import com.blankj.utilcode.util.UriUtils
-import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.ZipFile
@@ -42,7 +36,7 @@ class Settings : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
-            if(uri != null){
+            if (uri != null) {
                 var zipfile = ZipFile(UriUtils.uri2File(uri))
 
                 var zipentry =
@@ -58,15 +52,19 @@ class Settings : PreferenceFragmentCompat() {
 
                 var subscribedCount = 0
 
-                for(text in subscriptions.lines()){
-                    if(text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()){
+                for (text in subscriptions.lines()) {
+                    if (text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()) {
                         subscribe(text.take(24))
                         subscribedCount++
-                        Log.d(TAG, "subscribed: " + text +" total: " + subscribedCount)
+                        Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
                     }
                 }
 
-                Toast.makeText(context, "Subscribed to " + subscribedCount + " channels.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Subscribed to " + subscribedCount + " channels.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
@@ -81,7 +79,7 @@ class Settings : PreferenceFragmentCompat() {
             RetrofitInstance.url = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            if(sharedPref?.getString("token","")!="") {
+            if (sharedPref?.getString("token", "") != "") {
                 with(sharedPref!!.edit()) {
                     putString("token", "")
                     apply()
@@ -91,12 +89,12 @@ class Settings : PreferenceFragmentCompat() {
             true
         }
 
-            val login = findPreference<Preference>("login_register")
-            login?.setOnPreferenceClickListener {
-                val newFragment = LoginDialog()
-                newFragment.show(childFragmentManager, "Login")
-                true
-            }
+        val login = findPreference<Preference>("login_register")
+        login?.setOnPreferenceClickListener {
+            val newFragment = LoginDialog()
+            newFragment.show(childFragmentManager, "Login")
+            true
+        }
 
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
@@ -139,7 +137,7 @@ class Settings : PreferenceFragmentCompat() {
             true
         }
 
-        }
+    }
 
     private fun fetchInstance() {
         lifecycleScope.launchWhenCreated {
@@ -150,15 +148,15 @@ class Settings : PreferenceFragmentCompat() {
                 Log.e("settings", "IOException, you might not have internet connection")
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e("settings", "HttpException, unexpected response ${e.toString()}")
+                Log.e("settings", "HttpException, unexpected response $e")
                 return@launchWhenCreated
-            } catch (e: Exception){
-                Log.e("settings",e.toString())
+            } catch (e: Exception) {
+                Log.e("settings", e.toString())
                 return@launchWhenCreated
             }
             val listEntries: MutableList<String> = ArrayList()
             val listEntryValues: MutableList<String> = ArrayList()
-            for(item in response){
+            for (item in response) {
                 listEntries.add(item.name!!)
                 listEntryValues.add(item.api_url!!)
             }
@@ -168,17 +166,19 @@ class Settings : PreferenceFragmentCompat() {
                 val instance = findPreference<ListPreference>("instance")
                 instance?.entries = entries
                 instance?.entryValues = entryValues
-                instance?.summaryProvider = Preference.SummaryProvider<ListPreference> { preference ->
-                    val text = preference.entry
-                    if (TextUtils.isEmpty(text)) {
-                        "kavin.rocks (Official)"
-                    } else {
-                        text
+                instance?.summaryProvider =
+                    Preference.SummaryProvider<ListPreference> { preference ->
+                        val text = preference.entry
+                        if (TextUtils.isEmpty(text)) {
+                            "kavin.rocks (Official)"
+                        } else {
+                            text
+                        }
                     }
-                }
             }
         }
     }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
@@ -186,14 +186,16 @@ class Settings : PreferenceFragmentCompat() {
     }
 
 
-    private fun subscribe(channel_id: String){
+    private fun subscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.subscribe(sharedPref?.getString("token","")!!, Subscribe(channel_id))
-                }catch(e: IOException) {
-                    println(e)
+                    RetrofitInstance.api.subscribe(
+                        sharedPref?.getString("token", "")!!,
+                        Subscribe(channel_id)
+                    )
+                } catch (e: IOException) {
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
