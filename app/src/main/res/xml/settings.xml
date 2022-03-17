@@ -37,4 +37,22 @@
         />
 
 
+<!--    <ListPreference-->
+<!--        app:key="theme_toggleee"-->
+<!--        app:title="@string/region"-->
+<!--        app:entries="@array/regions"-->
+<!--        app:entryValues="@array/regionsValue"-->
+<!--        app:defaultValue="US"-->
+<!--        app:useSimpleSummaryProvider="true"-->
+<!--        />-->
+
+    <ListPreference
+        app:title="@string/app_theme"
+        app:key="theme_togglee"
+        app:entries="@array/themes"
+        app:entryValues="@array/themesValue"
+        app:defaultValue="A"
+        />
+
+
 </androidx.preference.PreferenceScreen>

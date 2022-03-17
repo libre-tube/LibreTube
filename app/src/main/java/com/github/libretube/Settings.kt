@@ -13,12 +13,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import com.blankj.utilcode.util.UriUtils
 import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
@@ -100,7 +102,6 @@ class Settings : PreferenceFragmentCompat() {
         importFromYt?.setOnPreferenceClickListener {
 
             //check StorageAccess
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
                 if (!Environment.isExternalStorageManager()) {
@@ -134,6 +135,16 @@ class Settings : PreferenceFragmentCompat() {
             getContent.launch("application/zip")
 
 
+            true
+        }
+
+        val themeToggle = findPreference<ListPreference>("theme_togglee")
+        themeToggle?.setOnPreferenceChangeListener { _, newValue ->
+            when (newValue.toString()) {
+                "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
             true
         }
 
