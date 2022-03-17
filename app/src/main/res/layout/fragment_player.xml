@@ -189,12 +189,15 @@
 
                 <TextView
                     android:id="@+id/player_channelName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/player_channelImage"
+                    android:layout_toStartOf="@+id/player_subscribe"
                     android:text=""
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
 
                 <com.google.android.material.button.MaterialButton
