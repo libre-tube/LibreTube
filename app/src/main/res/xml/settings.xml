@@ -33,6 +33,7 @@
     <androidx.preference.Preference
         app:key="import_from_yt"
         app:title="@string/import_from_yt"
+        android:hint="This is my hint"
         />
 
 </androidx.preference.PreferenceScreen>

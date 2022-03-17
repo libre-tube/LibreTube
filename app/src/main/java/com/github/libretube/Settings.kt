@@ -40,30 +40,35 @@ class Settings : PreferenceFragmentCompat() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri ->
+        getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
-            var zipfile = ZipFile(UriUtils.uri2File(uri))
+            if(uri != null){
+                var zipfile = ZipFile(UriUtils.uri2File(uri))
 
-            var zipentry =
-                zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+                var zipentry =
+                    zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
 
-            var inputStream = zipfile.getInputStream(zipentry)
+                var inputStream = zipfile.getInputStream(zipentry)
 
-            val baos = ByteArrayOutputStream()
+                val baos = ByteArrayOutputStream()
 
-            inputStream.use { it.copyTo(baos) }
+                inputStream.use { it.copyTo(baos) }
 
-            var subscriptions = baos.toByteArray().decodeToString()
+                var subscriptions = baos.toByteArray().decodeToString()
 
-            var subscribedCount = 0
+                var subscribedCount = 0
 
-            for(text in subscriptions.lines()){
-                if(text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()){
-                    subscribe(text.take(24))
-                    subscribedCount++
-                    Log.d(TAG, "subscribed: " + text +" total: " + subscribedCount)
+                for(text in subscriptions.lines()){
+                    if(text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()){
+                        subscribe(text.take(24))
+                        subscribedCount++
+                        Log.d(TAG, "subscribed: " + text +" total: " + subscribedCount)
+                    }
                 }
+
+                Toast.makeText(context, "Subscribed to " + subscribedCount + " channels.", Toast.LENGTH_SHORT).show()
             }
+
         }
         super.onCreate(savedInstanceState)
     }
