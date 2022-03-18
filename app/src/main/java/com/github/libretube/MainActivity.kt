@@ -75,6 +75,11 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
+        bottomNavigationView.setOnItemReselectedListener {
+            // Nothing, I think is better UX like this, as we implemented the SwipeRefresLayout
+            // in home and subscriptions (in library will be too?) and I think it useless to refresh
+            // constantly the fragments when the user reselect a tab
+        }
 
         toolbar = findViewById(R.id.toolbar)
         val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
