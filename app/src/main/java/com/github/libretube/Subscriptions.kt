@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
@@ -25,6 +26,7 @@ class Subscriptions : Fragment() {
     lateinit var token: String
     var isLoaded = false
     private var subscriptionAdapter: SubscriptionAdapter? =null
+    private var refreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,8 +46,11 @@ class Subscriptions : Fragment() {
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token","")!!
         Log.e(TAG,token)
+        refreshLayout = view.findViewById(R.id.sub_refresh)
         if(token!=""){
             view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility=View.GONE
+            refreshLayout?.isEnabled = true
+
             var progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
             progressBar.visibility=View.VISIBLE
 
@@ -57,6 +62,11 @@ class Subscriptions : Fragment() {
             feedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
             fetchFeed(feedRecView, progressBar)
 
+            refreshLayout?.setOnRefreshListener {
+                fetchChannels(channelRecView)
+                fetchFeed(feedRecView, progressBar)
+            }
+
             val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
             scrollView.viewTreeObserver
                 .addOnScrollChangedListener {
@@ -64,11 +74,15 @@ class Subscriptions : Fragment() {
                         == (scrollView.height + scrollView.scrollY)) {
                         //scroll view is at bottom
                         if(isLoaded){
+                            refreshLayout?.isRefreshing = true
                             subscriptionAdapter?.updateItems()
+                            refreshLayout?.isRefreshing = false
                         }
 
                     }
                 }
+        } else {
+            refreshLayout?.isEnabled = false
         }
     }
 
@@ -84,6 +98,8 @@ class Subscriptions : Fragment() {
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
+                } finally {
+                    refreshLayout?.isRefreshing = false
                 }
                 if (response.isNotEmpty()){
                     subscriptionAdapter = SubscriptionAdapter(response)
@@ -109,6 +125,8 @@ class Subscriptions : Fragment() {
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
+                } finally {
+                    refreshLayout?.isRefreshing = false
                 }
                 if (response.isNotEmpty()){
                     channelRecView?.adapter=SubscriptionChannelAdapter(response.toMutableList())
