@@ -4,22 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Subscriptions">
+
     <ProgressBar
         android:id="@+id/sub_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        />
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/loginOrRegister"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        >
+        android:layout_centerVertical="true">
 
         <ImageView
             android:id="@+id/boogh"
@@ -40,36 +39,46 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
-    <ScrollView
-        android:id="@+id/scrollview_sub"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sub_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <ScrollView
+            android:id="@+id/scrollview_sub"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <RelativeLayout
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
+                android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_channels"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
+                    android:descendantFocusability="blocksDescendants">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_feed"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_channels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false" />
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_feed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>
