@@ -181,6 +181,23 @@ class MainActivity : AppCompatActivity() {
                                 motionLayout.transitionToStart()
                             }, 100)
 
+                        }else{
+                            var watch = data.path!!.replace("/","")
+                            var bundle = Bundle()
+                            bundle.putString("videoId",watch)
+                            var frag = PlayerFragment()
+                            frag.arguments = bundle
+                            supportFragmentManager.beginTransaction()
+                                .remove(PlayerFragment())
+                                .commit()
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, frag)
+                                .commitNow()
+                            Handler().postDelayed({
+                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                                motionLayout.transitionToEnd()
+                                motionLayout.transitionToStart()
+                            }, 100)
                         }
                     }
 

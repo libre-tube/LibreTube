@@ -164,9 +164,9 @@
 
     <View android:id="@id/exo_progress_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/exo_styled_progress_layout_height"
+        android:layout_height="15dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/exo_styled_progress_margin_bottom"
+        android:layout_marginBottom="1dp"
         android:background="@color/exo_bottom_bar_background"
         />
 

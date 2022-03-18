@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import okhttp3.*
 import retrofit2.HttpException
@@ -21,6 +23,7 @@ import java.io.IOException
 class Home : Fragment() {
 
     private val TAG = "HomeFragment"
+    private var refreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -43,6 +46,13 @@ class Home : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
         val progressbar = view.findViewById<ProgressBar>(R.id.progressBar)
         fetchJson(progressbar,recyclerView)
+        refreshLayout = view.findViewById(R.id.home_refresh)
+        refreshLayout?.isEnabled = true
+        refreshLayout?.setOnRefreshListener {
+            Log.d(TAG,"hmm")
+            fetchJson(progressbar,recyclerView)
+        }
+
 
 
     }
@@ -57,10 +67,14 @@ class Home : Fragment() {
                 }catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
+                }finally {
+                    refreshLayout?.isRefreshing = false
                 }
                 runOnUiThread {
                     progressBar.visibility = View.GONE
@@ -79,6 +93,7 @@ class Home : Fragment() {
 
     override fun onDestroyView() {
         view?.findViewById<RecyclerView>(R.id.recview)?.adapter=null
+        refreshLayout = null
         Log.e(TAG,"destroyview")
         super.onDestroyView()
     }

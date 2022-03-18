@@ -13,6 +13,7 @@
         app:entryValues="@array/regionsValue"
         app:defaultValue="US"
         app:useSimpleSummaryProvider="true"
+        android:icon="@drawable/ic_language"
         />
 
     <ListPreference
@@ -21,6 +22,7 @@
         app:entries="@array/instances"
         app:entryValues="@array/instancesValue"
         app:defaultValue="https://pipedapi.kavin.rocks/"
+        android:icon="@drawable/ic_server"
         />
     <androidx.preference.EditTextPreference
     app:key="customInstance"
@@ -29,22 +31,16 @@
     <androidx.preference.Preference
         app:key="login_register"
         app:title="@string/login_register"
+        android:icon="@drawable/ic_login"
+        android:summary="@string/notgmail"
         />
     <androidx.preference.Preference
         app:key="import_from_yt"
         app:title="@string/import_from_yt"
         android:hint="This is my hint"
+        android:summary=""
+        android:icon="@drawable/ic_import"
         />
-
-
-<!--    <ListPreference-->
-<!--        app:key="theme_toggleee"-->
-<!--        app:title="@string/region"-->
-<!--        app:entries="@array/regions"-->
-<!--        app:entryValues="@array/regionsValue"-->
-<!--        app:defaultValue="US"-->
-<!--        app:useSimpleSummaryProvider="true"-->
-<!--        />-->
 
     <ListPreference
         app:title="@string/app_theme"
@@ -52,6 +48,7 @@
         app:entries="@array/themes"
         app:entryValues="@array/themesValue"
         app:defaultValue="A"
+        android:icon="@drawable/ic_theme"
         />
 
 

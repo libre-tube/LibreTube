@@ -31,5 +31,8 @@
     <string name="vlcerror">Can\'t open in VLC. Maybe it\'s not installed yet?</string>
     <string name="import_from_yt">Import subscriptions from youtube</string>
     <string name="app_theme">App theme</string>
-
+    <string name="server_error">Server countered a problem. Maybe try another instance?</string>
+    <string name="unknown_error">Network error!</string>
+    <string name="empty">Username and Password can\'t be empty!</string>
+    <string name="notgmail">This is not your gmail account!</string>
 </resources>

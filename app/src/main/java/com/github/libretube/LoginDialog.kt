@@ -49,12 +49,20 @@ class LoginDialog : DialogFragment() {
                 username=view.findViewById(R.id.username)
                 password=view.findViewById(R.id.password)
                 view.findViewById<Button>(R.id.login).setOnClickListener {
+                    if(username.text.toString()!="" && password.text.toString()!=""){
                     val login = Login(username.text.toString(),password.text.toString())
                     login(login)
+                    }else{
+                        Toast.makeText(context,R.string.empty, Toast.LENGTH_SHORT).show()
+                    }
                 }
                 view.findViewById<Button>(R.id.register).setOnClickListener {
+                    if(username.text.toString()!="" && password.text.toString()!=""){
                     val login = Login(username.text.toString(),password.text.toString())
                     register(login)
+                    }else{
+                        Toast.makeText(context,R.string.empty, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
             builder.setView(view)
@@ -69,9 +77,11 @@ class LoginDialog : DialogFragment() {
                 }catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
                     Log.e(TAG,"dafaq?"+e.toString())
@@ -101,9 +111,11 @@ class LoginDialog : DialogFragment() {
                 }catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
                     Log.e(TAG,"dafaq?"+e.toString())
