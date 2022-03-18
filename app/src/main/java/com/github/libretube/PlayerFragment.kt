@@ -50,6 +50,7 @@ import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.URLEncoder
 import kotlin.math.abs
 
 
@@ -393,9 +394,9 @@ class PlayerFragment : Fragment() {
                         val intent= Intent()
                         intent.action=Intent.ACTION_SEND
                         var url = "https://piped.kavin.rocks/watch?v=$videoId"
-                        val instance = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!.dropLast(1)
+                        val instance = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks")!!
                         if (instance != "https://pipedapi.kavin.rocks")
-                            url += "&instance=$instance"
+                            url += "&instance=${URLEncoder.encode(instance, "UTF-8")}"
                         intent.putExtra(Intent.EXTRA_TEXT, url)
                         intent.type="text/plain"
                         startActivity(Intent.createChooser(intent,"Share Url To:"))
