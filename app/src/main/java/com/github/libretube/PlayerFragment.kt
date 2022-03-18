@@ -28,6 +28,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.TrendingAdapter
@@ -388,9 +389,14 @@ class PlayerFragment : Fragment() {
                     }
                     //share button
                     view.findViewById<RelativeLayout>(R.id.relPlayer_share).setOnClickListener {
+                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
                         val intent= Intent()
                         intent.action=Intent.ACTION_SEND
-                        intent.putExtra(Intent.EXTRA_TEXT, "https://piped.tokhmi.xyz/$videoId")
+                        var url = "https://piped.kavin.rocks/watch?v=$videoId"
+                        val instance = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!.dropLast(1)
+                        if (instance != "https://pipedapi.kavin.rocks")
+                            url += "&instance=$instance"
+                        intent.putExtra(Intent.EXTRA_TEXT, url)
                         intent.type="text/plain"
                         startActivity(Intent.createChooser(intent,"Share Url To:"))
                     }
