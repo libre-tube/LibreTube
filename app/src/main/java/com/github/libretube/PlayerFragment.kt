@@ -263,29 +263,62 @@ class PlayerFragment : Fragment() {
                     //exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
                     exoPlayerView.player = exoPlayer
-                    if (response.hls != null) {
-                        val mediaItem: MediaItem = MediaItem.Builder()
-                            .setUri(response.hls)
-                            .setSubtitleConfigurations(subtitle)
-                            .build()
-                        exoPlayer.setMediaItem(mediaItem)
-                    }else{
-                        val dataSourceFactory: DataSource.Factory =
-                            DefaultHttpDataSource.Factory()
-                        val videoItem: MediaItem = MediaItem.Builder()
-                            .setUri(response.videoStreams[0].url)
-                            .setSubtitleConfigurations(subtitle)
-                            .build()
-                        val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                            .createMediaSource(videoItem)
-                        var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                            .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                        if (response.videoStreams[0].quality=="720p" || response.videoStreams[0].quality=="1080p" || response.videoStreams[0].quality=="480p" ){
-                            audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(response.audioStreams)].url!!))
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    val defres = sharedPreferences.getString("default_res", "")!!
+                    when {
+                        defres!="" -> {
+                            run lit@ {
+                                response.videoStreams!!.forEachIndexed { index, pipedStream ->
+                                    if (pipedStream.quality!!.contains(defres)){
+                                        val dataSourceFactory: DataSource.Factory =
+                                            DefaultHttpDataSource.Factory()
+                                        val videoItem: MediaItem = MediaItem.Builder()
+                                            .setUri(response.videoStreams[index].url)
+                                            .setSubtitleConfigurations(subtitle)
+                                            .build()
+                                        val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
+                                            .createMediaSource(videoItem)
+                                        var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
+                                            .createMediaSource(fromUri(response.audioStreams!![0].url!!))
+                                        if (response.videoStreams[index].quality=="720p" || response.videoStreams[index].quality=="1080p" || response.videoStreams[index].quality=="480p" ){
+                                            audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(response.audioStreams)].url!!))
+                                        }
+                                        val mergeSource: MediaSource = MergingMediaSource(videoSource,audioSource)
+                                        exoPlayer.setMediaSource(mergeSource)
+                                        view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[index+1]
+                                        return@lit
+                                    }
+                                }
+                            }
+
                         }
-                        val mergeSource: MediaSource = MergingMediaSource(videoSource,audioSource)
-                        exoPlayer.setMediaSource(mergeSource)
+                        response.hls != null -> {
+                            val mediaItem: MediaItem = MediaItem.Builder()
+                                .setUri(response.hls)
+                                .setSubtitleConfigurations(subtitle)
+                                .build()
+                            exoPlayer.setMediaItem(mediaItem)
+                        }
+                        else -> {
+                            val dataSourceFactory: DataSource.Factory =
+                                DefaultHttpDataSource.Factory()
+                            val videoItem: MediaItem = MediaItem.Builder()
+                                .setUri(response.videoStreams[0].url)
+                                .setSubtitleConfigurations(subtitle)
+                                .build()
+                            val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
+                                .createMediaSource(videoItem)
+                            var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
+                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
+                            if (response.videoStreams[0].quality=="720p" || response.videoStreams[0].quality=="1080p" || response.videoStreams[0].quality=="480p" ){
+                                audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+                                    .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(response.audioStreams)].url!!))
+                            }
+                            val mergeSource: MediaSource = MergingMediaSource(videoSource,audioSource)
+                            exoPlayer.setMediaSource(mergeSource)
+                            view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[1]
+                        }
                     }
 
                     ///exoPlayer.getMediaItemAt(5)

@@ -50,6 +50,14 @@
         app:defaultValue="A"
         android:icon="@drawable/ic_theme"
         />
-
+    <ListPreference
+        app:title="@string/defres"
+        app:key="default_res"
+        app:entries="@array/defres"
+        app:entryValues="@array/defres"
+        app:defaultValue=""
+        android:icon="@drawable/ic_hd"
+        app:useSimpleSummaryProvider="true"
+        />
 
 </androidx.preference.PreferenceScreen>

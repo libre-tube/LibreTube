@@ -35,4 +35,5 @@
     <string name="unknown_error">Network error!</string>
     <string name="empty">Username and Password can\'t be empty!</string>
     <string name="notgmail">This is not your gmail account!</string>
+    <string name="defres">Default Video Resolution</string>
 </resources>
