@@ -74,4 +74,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
+
+    implementation 'com.blankj:utilcode:1.30.0'
+
 }

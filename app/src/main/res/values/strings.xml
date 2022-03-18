@@ -29,4 +29,7 @@
     <string name="downloadfailed">Download Failed!</string>
     <string name="vlc">Open in VLC</string>
     <string name="vlcerror">Can\'t open in VLC. Maybe it\'s not installed yet?</string>
+    <string name="import_from_yt">Import subscriptions from youtube</string>
+    <string name="app_theme">App theme</string>
+
 </resources>
