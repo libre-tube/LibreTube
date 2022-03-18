@@ -72,7 +72,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
 }
