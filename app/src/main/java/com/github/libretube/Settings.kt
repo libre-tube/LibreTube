@@ -34,34 +34,13 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.ZipFile
 
-/**
- * FIXME: After implemented the back button in the toolbar, when changing the theme, the navigation
- *  icon and listener resets to the default one instead, idk how the theme changer works so I can't
- *  help with it
- */
 class Settings : PreferenceFragmentCompat() {
 
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
     }
 
-    private var toolbar: MaterialToolbar? = null
-    private var parentActivity: FragmentActivity? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        // We save now the activity because when this fragment is detached it can't get the activity
-        // to rollback the navigationListener
-        parentActivity = requireActivity()
-
-        toolbar = parentActivity?.findViewById(R.id.toolbar)
-        toolbar?.setNavigationIcon(R.drawable.ic_round_arrow_back_24)
-        toolbar?.setNavigationOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
-
-        //TODO: Hide the bottomNavigationView when user is in the settings fragment (idk why I can't hide it from here)
-        (parentActivity as MainActivity).setBottomNavigationViewVisibility(View.GONE)
-
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
@@ -242,18 +221,5 @@ class Settings : PreferenceFragmentCompat() {
             }
         }
         run()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
-        // Sincerely I don't know if this is the correct way to do this, but is working :/
-        toolbar?.setNavigationIcon(R.drawable.ic_settings)
-        toolbar?.setNavigationOnClickListener {
-            val navController: NavController = parentActivity!!.findNavController(R.id.fragment)
-            navController.navigate(R.id.settings)
-        }
-
-        (parentActivity as MainActivity).setBottomNavigationViewVisibility(View.VISIBLE)
     }
 }

@@ -107,7 +107,19 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-
+        navController.addOnDestinationChangedListener {_, destination, _ ->
+            if (destination.id == R.id.settings) {
+                toolbar.setNavigationIcon(R.drawable.ic_round_arrow_back_24)
+                toolbar.setNavigationOnClickListener {
+                    onBackPressed()
+                }
+            } else {
+                toolbar.setNavigationIcon(R.drawable.ic_settings)
+                toolbar.setNavigationOnClickListener {
+                    navController.navigate(R.id.settings)
+                }
+            }
+        }
     }
 
     override fun onStart() {
