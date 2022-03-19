@@ -3,11 +3,12 @@ package com.github.libretube
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -20,7 +21,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import com.blankj.utilcode.util.UriUtils
 import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
@@ -28,48 +28,70 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.ZipFile
 
+
 class Settings : PreferenceFragmentCompat() {
 
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
+        lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            try {
+                if (uri != null) {
+                    var zipfile = ZipFile(UriUtils.uri2File(uri))
 
-            if (uri != null) {
-                var zipfile = ZipFile(UriUtils.uri2File(uri))
+                    var zipentry =
+                        zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
 
-                var zipentry =
-                    zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+                    var inputStream = zipfile.getInputStream(zipentry)
 
-                var inputStream = zipfile.getInputStream(zipentry)
+                    val baos = ByteArrayOutputStream()
 
-                val baos = ByteArrayOutputStream()
+                    inputStream.use { it.copyTo(baos) }
 
-                inputStream.use { it.copyTo(baos) }
+                    var subscriptions = baos.toByteArray().decodeToString()
 
-                var subscriptions = baos.toByteArray().decodeToString()
+                    var subscribedCount = 0
 
-                var subscribedCount = 0
-
-                for (text in subscriptions.lines()) {
-                    if (text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()) {
-                        subscribe(text.take(24))
-                        subscribedCount++
-                        Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
+                    for (text in subscriptions.lines()) {
+                        if (text.take(24) != "Channel Id,Channel Url,C" && !text.take(24)
+                                .isEmpty()
+                        ) {
+                            subscribe(text.take(24))
+                            subscribedCount++
+                            Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
+                        }
                     }
+
+                    Toast.makeText(
+                        context,
+                        "Subscribed to " + subscribedCount + " channels.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
-                Toast.makeText(
-                    context,
-                    "Subscribed to " + subscribedCount + " channels.",
-                    Toast.LENGTH_SHORT
-                ).show()
+            } catch (e: java.lang.Exception) {
+                Toast.makeText(this.requireContext(), "Failed: " + e.message, Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
+
+        requestPermissionLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted: Boolean ->
+                if (isGranted) {
+                    Log.d(TAG, "onCreate: already granted")
+                } else {
+                    Log.d(TAG, "onCreate: failed")
+                }
+            }
+
         super.onCreate(savedInstanceState)
     }
 
@@ -101,39 +123,29 @@ class Settings : PreferenceFragmentCompat() {
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
 
-            //check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Log.d("myz", "" + Build.VERSION.SDK_INT)
                 if (!Environment.isExternalStorageManager()) {
-                    ActivityCompat.requestPermissions(
-                        this.requireActivity(), arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                        ), 1
-                    ) //permission request code is just an int
+                    val intent = Intent()
+                    intent.action =
+                        Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+                    val uri =
+                        Uri.fromParts("package", this.requireActivity().getPackageName(), null)
+                    intent.data = uri
+                    startActivity(intent)
                 }
             } else {
-                if (ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        this.requireActivity(),
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ),
-                        1
-                    )
-                }
+
             }
 
-            getContent.launch("application/zip")
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                arrayOf(
+                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), 1
+            )
 
+            getContent.launch("application/zip")
 
             true
         }
@@ -195,7 +207,6 @@ class Settings : PreferenceFragmentCompat() {
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
     }
-
 
     private fun subscribe(channel_id: String) {
         fun run() {

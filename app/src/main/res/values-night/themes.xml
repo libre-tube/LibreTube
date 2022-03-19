@@ -31,7 +31,7 @@
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="fontFamily">@font/roboto</item>
+<!--        <item name="fontFamily">@font/roboto</item>-->
 
     </style>
 </resources>
