@@ -123,6 +123,14 @@ class Settings : PreferenceFragmentCompat() {
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
 
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                arrayOf(
+                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), 1
+            )
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (!Environment.isExternalStorageManager()) {
                     val intent = Intent()
@@ -144,13 +152,7 @@ class Settings : PreferenceFragmentCompat() {
             }
 
 
-            ActivityCompat.requestPermissions(
-                this.requireActivity(),
-                arrayOf(
-                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ), 1
-            )
+
 
             getContent.launch("application/zip")
 
