@@ -41,6 +41,8 @@ class Settings : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             try {
+
+
                 if (uri != null) {
                     var zipfile = ZipFile(UriUtils.uri2File(uri))
 
