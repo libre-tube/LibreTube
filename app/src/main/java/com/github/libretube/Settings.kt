@@ -142,13 +142,7 @@ class Settings : PreferenceFragmentCompat() {
                     startActivity(intent)
                 }
             } else {
-                val intent = Intent()
-                intent.action =
-                    Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
-                val uri =
-                    Uri.fromParts("package", this.requireActivity().getPackageName(), null)
-                intent.data = uri
-                startActivity(intent)
+
             }
 
 
