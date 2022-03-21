@@ -19,6 +19,7 @@ const val KEY_VIDEO_URL = "videoUrl"
 const val KEY_AUDIO_NAME = "audioName"
 const val KEY_AUDIO_URL = "audioUrl"
 const val KEY_DURATION = "duration"
+const val KEY_EXTENSION = "extension"
 
 class DownloadDialogFragment : DialogFragment() {
     private lateinit var binding: DialogDownloadBinding
@@ -43,9 +44,6 @@ class DownloadDialogFragment : DialogFragment() {
             duration = arguments?.getInt(KEY_DURATION)!!
             videoId = arguments?.getString(KEY_VIDEO_ID)!!
             val builder = AlertDialog.Builder(it)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater
-            val view: View = inflater.inflate(R.layout.dialog_download, null)
             val videoArrayAdapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
@@ -103,12 +101,13 @@ class DownloadDialogFragment : DialogFragment() {
                 Log.d(TAG, extension)
             }
             binding.btnDownload.setOnClickListener {
-                val intent = Intent(context, DownloadService::class.java)
-                intent.putExtra(KEY_VIDEO_ID, videoId)
-                intent.putExtra(KEY_VIDEO_URL, vidUrl[selectedVideo])
-                intent.putExtra(KEY_AUDIO_URL, audioUrl[selectedAudio])
-                intent.putExtra(KEY_DURATION, duration)
-                intent.putExtra("extension", extension)
+                val intent = Intent(context, DownloadService::class.java).apply {
+                    putExtra(KEY_VIDEO_ID, videoId)
+                    putExtra(KEY_VIDEO_URL, vidUrl[selectedVideo])
+                    putExtra(KEY_AUDIO_URL, audioUrl[selectedAudio])
+                    putExtra(KEY_DURATION, duration)
+                    putExtra(KEY_EXTENSION, extension)
+                }
                 context?.startService(intent)
                 dismiss()
             }

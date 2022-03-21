@@ -15,11 +15,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.R
-import com.github.libretube.fragment.KEY_VIDEO_ID
+import com.github.libretube.fragment.*
 import java.io.File
 
 var IS_DOWNLOAD_RUNNING = false
 private const val TAG = "DownloadService"
+private const val NOTIFICATION_CHANNEL_ID_SERVICE = "service"
 
 class DownloadService : Service() {
     private lateinit var videoId: String
@@ -41,22 +42,21 @@ class DownloadService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         videoId = intent?.getStringExtra(KEY_VIDEO_ID)!!
-        videoUrl = intent.getStringExtra("videoUrl")!!
-        audioUrl = intent.getStringExtra("audioUrl")!!
-        extension = intent.getStringExtra("extension")!!
-        //command = intent.getStringExtra("command")!!
-        duration = intent.getIntExtra("duration", 1)
+        videoUrl = intent.getStringExtra(KEY_VIDEO_URL)!!
+        audioUrl = intent.getStringExtra(KEY_AUDIO_URL)!!
+        extension = intent.getStringExtra(KEY_EXTENSION)!!
+        duration = intent.getIntExtra(KEY_DURATION, 1)
         service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val chan = NotificationChannel(
-                    "service",
+                val notificationChannel = NotificationChannel(
+                    NOTIFICATION_CHANNEL_ID_SERVICE,
                     "DownloadService", NotificationManager.IMPORTANCE_NONE
                 )
-                chan.lightColor = Color.BLUE
-                chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-                service.createNotificationChannel(chan)
-                "service"
+                notificationChannel.lightColor = Color.BLUE
+                notificationChannel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+                service.createNotificationChannel(notificationChannel)
+                NOTIFICATION_CHANNEL_ID_SERVICE
             } else {
                 // If earlier version channel ID is not used
                 // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
