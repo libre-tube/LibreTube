@@ -34,12 +34,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.activity.MainActivity
-import com.github.libretube.activity.hideKeyboard
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.formatShort
 import com.github.libretube.model.PipedStream
 import com.github.libretube.model.Subscribe
 import com.github.libretube.service.IS_DOWNLOAD_RUNNING
+import com.github.libretube.utils.hideKeyboard
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
