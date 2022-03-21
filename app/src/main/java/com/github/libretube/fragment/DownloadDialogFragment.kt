@@ -24,8 +24,8 @@ const val KEY_EXTENSION = "extension"
 class DownloadDialogFragment : DialogFragment() {
     private lateinit var binding: DialogDownloadBinding
     private lateinit var videoId: String
-    private var vidName = arrayListOf<String>()
-    private var vidUrl = arrayListOf<String>()
+    private var videoName = arrayListOf<String>()
+    private var videoUrl = arrayListOf<String>()
     private var audioName = arrayListOf<String>()
     private var audioUrl = arrayListOf<String>()
     private var extension = ".mkv"
@@ -37,21 +37,62 @@ class DownloadDialogFragment : DialogFragment() {
         binding = DialogDownloadBinding.inflate(layoutInflater)
 
         return activity?.let {
-            vidName = arguments?.getStringArrayList(KEY_VIDEO_NAME) as ArrayList<String>
-            vidUrl = arguments?.getStringArrayList(KEY_VIDEO_URL) as ArrayList<String>
-            audioName = arguments?.getStringArrayList(KEY_AUDIO_NAME) as ArrayList<String>
-            audioUrl = arguments?.getStringArrayList(KEY_AUDIO_URL) as ArrayList<String>
-            duration = arguments?.getInt(KEY_DURATION)!!
-            videoId = arguments?.getString(KEY_VIDEO_ID)!!
+            getExtras()
+            setupVideoSpinner()
+            setupAudioSpinner()
+            setupListener()
+
             val builder = AlertDialog.Builder(it)
-            val videoArrayAdapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                vidName
-            )
-            videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.videoSpinner.adapter = videoArrayAdapter
-            binding.videoSpinner.onItemSelectedListener =
+            builder.setView(binding.root)
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun getExtras() {
+        videoName = arguments?.getStringArrayList(KEY_VIDEO_NAME) as ArrayList<String>
+        videoUrl = arguments?.getStringArrayList(KEY_VIDEO_URL) as ArrayList<String>
+        audioName = arguments?.getStringArrayList(KEY_AUDIO_NAME) as ArrayList<String>
+        audioUrl = arguments?.getStringArrayList(KEY_AUDIO_URL) as ArrayList<String>
+        duration = arguments?.getInt(KEY_DURATION)!!
+        videoId = arguments?.getString(KEY_VIDEO_ID)!!
+    }
+
+    private fun setupListener() {
+        binding.radioGp.setOnCheckedChangeListener { _, checkedId ->
+            extension = when (checkedId) {
+                R.id.mkv -> binding.mkv.text.toString()
+                R.id.mp4 -> binding.mp4.text.toString()
+                else -> {
+                    ""
+                }
+            }
+            Log.d(TAG, extension)
+        }
+        binding.btnDownload.setOnClickListener {
+            val intent = Intent(context, DownloadService::class.java).apply {
+                putExtra(KEY_VIDEO_ID, videoId)
+                putExtra(KEY_VIDEO_URL, videoUrl[selectedVideo])
+                putExtra(KEY_AUDIO_URL, audioUrl[selectedAudio])
+                putExtra(KEY_DURATION, duration)
+                putExtra(KEY_EXTENSION, extension)
+            }
+            context?.startService(intent)
+            dismiss()
+        }
+    }
+
+    private fun setupVideoSpinner() {
+        val videoArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            videoName
+        ).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        binding.videoSpinner.apply {
+            adapter = videoArrayAdapter
+            onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
                         parent: AdapterView<*>,
@@ -67,14 +108,21 @@ class DownloadDialogFragment : DialogFragment() {
                         // no op
                     }
                 }
-            val audioArrayAdapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                audioName
-            )
-            audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.audioSpinner.adapter = audioArrayAdapter
-            binding.audioSpinner.onItemSelectedListener =
+        }
+    }
+
+    private fun setupAudioSpinner() {
+        val audioArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            audioName
+        ).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        binding.audioSpinner.apply {
+            adapter = audioArrayAdapter
+            onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
                         parent: AdapterView<*>,
@@ -90,35 +138,12 @@ class DownloadDialogFragment : DialogFragment() {
                         // no op
                     }
                 }
-            binding.radioGp.setOnCheckedChangeListener { _, checkedId ->
-                extension = when (checkedId) {
-                    R.id.mkv -> binding.mkv.text.toString()
-                    R.id.mp4 -> binding.mp4.text.toString()
-                    else -> {
-                        ""
-                    }
-                }
-                Log.d(TAG, extension)
-            }
-            binding.btnDownload.setOnClickListener {
-                val intent = Intent(context, DownloadService::class.java).apply {
-                    putExtra(KEY_VIDEO_ID, videoId)
-                    putExtra(KEY_VIDEO_URL, vidUrl[selectedVideo])
-                    putExtra(KEY_AUDIO_URL, audioUrl[selectedAudio])
-                    putExtra(KEY_DURATION, duration)
-                    putExtra(KEY_EXTENSION, extension)
-                }
-                context?.startService(intent)
-                dismiss()
-            }
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        }
     }
 
     override fun onDestroy() {
-        vidName.clear()
-        vidUrl.clear()
+        videoName.clear()
+        videoUrl.clear()
         audioUrl.clear()
         audioName.clear()
         super.onDestroy()
