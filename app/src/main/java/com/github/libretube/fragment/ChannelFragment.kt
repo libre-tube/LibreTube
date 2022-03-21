@@ -9,11 +9,9 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.ChannelAdapter
@@ -58,8 +56,8 @@ class ChannelFragment : Fragment() {
         binding.tvChannelName.text = channelId
         binding.rvChannels.layoutManager = LinearLayoutManager(context)
         fetchChannel()
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        if (sharedPref?.getString("token", "") != "") {
+        val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
+        if (sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "") != "") {
             isSubscribed()
         }
         binding.svChannel.viewTreeObserver
@@ -81,10 +79,10 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     RetrofitInstance.api.isSubscribed(
                         channelId!!,
-                        sharedPref?.getString("token", "")!!
+                        sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "")!!
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -138,9 +136,9 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
+                        sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "")!!,
                         Subscribe(channelId)
                     )
                 } catch (e: IOException) {
@@ -161,9 +159,9 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     RetrofitInstance.api.unsubscribe(
-                        sharedPref?.getString("token", "")!!,
+                        sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "")!!,
                         Subscribe(channelId)
                     )
                 } catch (e: IOException) {

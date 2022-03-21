@@ -38,8 +38,8 @@ class SubscriptionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        token = sharedPref?.getString("token", "")!!
+        val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
+        token = sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "")!!
         Log.e(TAG, token)
         if (token != "") {
             binding.loginOrRegister.isVisible = false

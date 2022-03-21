@@ -4,8 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -31,16 +29,16 @@ class LoginDialogFragment : DialogFragment() {
 
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-            var sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")
+            var sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
+            val token = sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "")
             Log.e("dafaq", token!!)
 
             if (token.isNotEmpty()) {
                 dialogLogoutBinding.btnLogout.setOnClickListener {
                     Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-                    sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     with(sharedPref!!.edit()) {
-                        putString("token", "")
+                        putString(SHARED_PREFERENCES_KEY_TOKEN, "")
                         apply()
                     }
                     dialog?.dismiss()
@@ -84,9 +82,9 @@ class LoginDialogFragment : DialogFragment() {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 } else if (response.token != null) {
                     Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     with(sharedPref!!.edit()) {
-                        putString("token", response.token)
+                        putString(SHARED_PREFERENCES_KEY_TOKEN, response.token)
                         apply()
                     }
                     dialog?.dismiss()
@@ -118,9 +116,9 @@ class LoginDialogFragment : DialogFragment() {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 } else if (response.token != null) {
                     Toast.makeText(context, R.string.registered, Toast.LENGTH_SHORT).show()
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     with(sharedPref!!.edit()) {
-                        putString("token", response.token)
+                        putString(SHARED_PREFERENCES_KEY_TOKEN, response.token)
                         apply()
                     }
                     dialog?.dismiss()

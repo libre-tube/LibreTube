@@ -15,7 +15,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -29,6 +28,8 @@ import retrofit2.HttpException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.ZipFile
+
+const val SHARED_PREFERENCES_KEY_TOKEN = "sharedPreferencesKeyToken"
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -77,10 +78,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         instance?.setOnPreferenceChangeListener { _, newValue ->
             RetrofitInstance.url = newValue.toString()
             RetrofitInstance.resettableLazyManager.reset()
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            if (sharedPref?.getString("token", "") != "") {
+            val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
+            if (sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "") != "") {
                 with(sharedPref!!.edit()) {
-                    putString("token", "")
+                    putString(SHARED_PREFERENCES_KEY_TOKEN, "")
                     apply()
                 }
                 Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
@@ -190,9 +191,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context?.getSharedPreferences(SHARED_PREFERENCES_KEY_TOKEN, Context.MODE_PRIVATE)
                     RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
+                        sharedPref?.getString(SHARED_PREFERENCES_KEY_TOKEN, "")!!,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {
