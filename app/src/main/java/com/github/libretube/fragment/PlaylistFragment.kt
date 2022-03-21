@@ -18,7 +18,6 @@ import java.io.IOException
 private const val TAG = "PlaylistFragment"
 
 class PlaylistFragment : Fragment() {
-
     private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null

@@ -27,9 +27,7 @@ import java.io.IOException
 private const val TAG = "ChannelFragment"
 
 class ChannelFragment : Fragment() {
-
     private lateinit var binding: FragmentChannelBinding
-
     private var channelId: String? = null
     private var nextPage: String? = null
     private var channelAdapter: ChannelAdapter? = null

@@ -63,7 +63,6 @@ var isFullScreen = false
 private const val TAG = "PlayerFragment"
 
 class PlayerFragment : Fragment() {
-
     private var videoId: String? = null
     private var param2: String? = null
     private var lastProgress: Float = 0.toFloat()
@@ -79,7 +78,6 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
-
     private lateinit var relDownloadVideo: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {

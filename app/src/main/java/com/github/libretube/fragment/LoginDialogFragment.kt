@@ -22,7 +22,6 @@ import java.lang.Exception
 private const val TAG = "LoginDialog"
 
 class LoginDialogFragment : DialogFragment() {
-
     private lateinit var dialogLoginBinding: DialogLoginBinding
     private lateinit var dialogLogoutBinding: DialogLogoutBinding
 

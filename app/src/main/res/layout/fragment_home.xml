@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/home_refresh"
+        android:id="@+id/srlHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

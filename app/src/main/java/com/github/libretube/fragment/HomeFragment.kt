@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
@@ -24,10 +22,7 @@ import java.io.IOException
 private const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
-
     private lateinit var binding: FragmentHomeBinding
-
-    private var refreshLayout: SwipeRefreshLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +38,8 @@ class HomeFragment : Fragment() {
         binding.rvHome.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
         fetchJson()
-        refreshLayout = view.findViewById(R.id.home_refresh)
-        refreshLayout?.isEnabled = true
-        refreshLayout?.setOnRefreshListener {
+        binding.srlHome.isEnabled = true
+        binding.srlHome.setOnRefreshListener {
             Log.d(TAG,"hmm")
             fetchJson()
         }
@@ -68,7 +62,7 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }finally {
-                    refreshLayout?.isRefreshing = false
+                    binding.srlHome.isRefreshing = false
                 }
                 runOnUiThread {
                     binding.pbHome.isVisible = false
@@ -87,7 +81,6 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         binding.rvHome.adapter = null
-        refreshLayout = null
         super.onDestroyView()
     }
 }

@@ -28,7 +28,6 @@ import java.io.IOException
 private const val TAG = "SearchFragment"
 
 class SearchFragment : Fragment() {
-
     private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
