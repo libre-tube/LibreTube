@@ -17,6 +17,7 @@ import com.github.libretube.RetrofitInstance
 import retrofit2.HttpException
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.utils.runOnUiThread
 import java.io.IOException
 
 private const val TAG = "HomeFragment"
@@ -71,12 +72,6 @@ class HomeFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 
     override fun onDestroyView() {

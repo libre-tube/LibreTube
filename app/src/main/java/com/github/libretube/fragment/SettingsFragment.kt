@@ -24,6 +24,7 @@ import com.blankj.utilcode.util.UriUtils
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.model.Subscribe
+import com.github.libretube.utils.runOnUiThread
 import retrofit2.HttpException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -184,13 +185,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
     }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
-    }
-
 
     private fun subscribe(channel_id: String) {
         fun run() {

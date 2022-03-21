@@ -40,6 +40,7 @@ import com.github.libretube.model.PipedStream
 import com.github.libretube.model.Subscribe
 import com.github.libretube.service.IS_DOWNLOAD_RUNNING
 import com.github.libretube.utils.hideKeyboard
+import com.github.libretube.utils.runOnUiThread
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
@@ -676,13 +677,6 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
-    }
-
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 
     private fun getMostBitRate(audios: List<PipedStream>): Int {

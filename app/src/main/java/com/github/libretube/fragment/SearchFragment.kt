@@ -19,6 +19,7 @@ import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.databinding.FragmentSearchBinding
+import com.github.libretube.utils.runOnUiThread
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -107,12 +108,6 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 
     override fun onResume() {

@@ -20,6 +20,7 @@ import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.formatShort
 import com.github.libretube.model.Subscribe
+import com.github.libretube.utils.runOnUiThread
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
@@ -231,12 +232,6 @@ class ChannelFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 
     override fun onDestroyView() {
