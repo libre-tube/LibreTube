@@ -25,8 +25,7 @@ import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.databinding.ActivityMainBinding
-import com.github.libretube.fragment.PlayerFragment
-import com.github.libretube.fragment.isFullScreen
+import com.github.libretube.fragment.*
 import com.google.android.material.color.DynamicColors
 
 private const val TAG = "MainActivity"
@@ -112,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 if (checkIfPathContainsSubString(path, setOf("/channel/", "/c/", "/user/"))) {
                     val channel = path.replace("/c/", "")
                         .replace("/user/", "")
-                    bundle = bundleOf("channel_id" to channel)
+                    bundle = bundleOf(KEY_CHANNEL_ID to channel)
                     navController.navigate(R.id.channelFragment, bundle)
                 } else if (checkIfPathContainsSubString(path, setOf("/playlist"))) {
                     var playlist = data.query!!
@@ -126,17 +125,17 @@ class MainActivity : AppCompatActivity() {
                     val watch = path.replace("/shorts/", "")
                         .replace("/embed/", "")
                         .replace("/v/", "")
-                    bundle.putString("videoId", watch)
+                    bundle.putString(KEY_VIDEO_ID, watch)
                     showPlayer(bundle)
                 } else if (path.contains("/watch") && data.query != null) {
                     Log.d("dafaq", data.query!!)
                     var watch = data.query!!
                     watch = checkIfQueryContainsString(watch, "v=")
-                    bundle.putString("videoId", watch.replace("v=", ""))
+                    bundle.putString(KEY_VIDEO_ID, watch.replace("v=", ""))
                     showPlayer(bundle)
                 } else {
                     val watch = path.replace("/", "")
-                    bundle.putString("videoId", watch)
+                    bundle.putString(KEY_VIDEO_ID, watch)
                     showPlayer(bundle)
                 }
             }

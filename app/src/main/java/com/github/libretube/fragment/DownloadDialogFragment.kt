@@ -14,6 +14,12 @@ import com.github.libretube.service.DownloadService
 
 private const val TAG = "DownloadDialogFragment"
 
+const val KEY_VIDEO_NAME = "videoName"
+const val KEY_VIDEO_URL = "videoUrl"
+const val KEY_AUDIO_NAME = "audioName"
+const val KEY_AUDIO_URL = "audioUrl"
+const val KEY_DURATION = "duration"
+
 class DownloadDialogFragment : DialogFragment() {
     private lateinit var binding: DialogDownloadBinding
     private lateinit var videoId: String
@@ -30,12 +36,12 @@ class DownloadDialogFragment : DialogFragment() {
         binding = DialogDownloadBinding.inflate(layoutInflater)
 
         return activity?.let {
-            vidName = arguments?.getStringArrayList("videoName") as ArrayList<String>
-            vidUrl = arguments?.getStringArrayList("videoUrl") as ArrayList<String>
-            audioName = arguments?.getStringArrayList("audioName") as ArrayList<String>
-            audioUrl = arguments?.getStringArrayList("audioUrl") as ArrayList<String>
-            duration = arguments?.getInt("duration")!!
-            videoId = arguments?.getString("videoId")!!
+            vidName = arguments?.getStringArrayList(KEY_VIDEO_NAME) as ArrayList<String>
+            vidUrl = arguments?.getStringArrayList(KEY_VIDEO_URL) as ArrayList<String>
+            audioName = arguments?.getStringArrayList(KEY_AUDIO_NAME) as ArrayList<String>
+            audioUrl = arguments?.getStringArrayList(KEY_AUDIO_URL) as ArrayList<String>
+            duration = arguments?.getInt(KEY_DURATION)!!
+            videoId = arguments?.getString(KEY_VIDEO_ID)!!
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater
@@ -98,10 +104,10 @@ class DownloadDialogFragment : DialogFragment() {
             }
             binding.btnDownload.setOnClickListener {
                 val intent = Intent(context, DownloadService::class.java)
-                intent.putExtra("videoId", videoId)
-                intent.putExtra("videoUrl", vidUrl[selectedVideo])
-                intent.putExtra("audioUrl", audioUrl[selectedAudio])
-                intent.putExtra("duration", duration)
+                intent.putExtra(KEY_VIDEO_ID, videoId)
+                intent.putExtra(KEY_VIDEO_URL, vidUrl[selectedVideo])
+                intent.putExtra(KEY_AUDIO_URL, audioUrl[selectedAudio])
+                intent.putExtra(KEY_DURATION, duration)
                 intent.putExtra("extension", extension)
                 context?.startService(intent)
                 dismiss()

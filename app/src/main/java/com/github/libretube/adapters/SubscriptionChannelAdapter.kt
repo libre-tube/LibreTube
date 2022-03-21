@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.activity.MainActivity
 import com.github.libretube.R
+import com.github.libretube.fragment.KEY_CHANNEL_ID
 import com.github.libretube.model.Subscription
 import com.squareup.picasso.Picasso
 
@@ -36,7 +37,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         holder.view.findViewById<TextView>(R.id.subscription_channel_name).text = subscription.name
         holder.view.setOnClickListener {
             val activity = holder.view.context as MainActivity
-            val bundle = bundleOf("channel_id" to subscription.url)
+            val bundle = bundleOf(KEY_CHANNEL_ID to subscription.url)
             activity.navController.navigate(R.id.channelFragment, bundle)
         }
     }

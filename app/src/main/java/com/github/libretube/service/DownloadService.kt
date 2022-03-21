@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.R
+import com.github.libretube.fragment.KEY_VIDEO_ID
 import java.io.File
 
 var IS_DOWNLOAD_RUNNING = false
@@ -39,7 +40,7 @@ class DownloadService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        videoId = intent?.getStringExtra("videoId")!!
+        videoId = intent?.getStringExtra(KEY_VIDEO_ID)!!
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
         extension = intent.getStringExtra("extension")!!

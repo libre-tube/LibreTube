@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso
 import com.github.libretube.R
 import com.github.libretube.model.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.KEY_CHANNEL_ID
+import com.github.libretube.fragment.KEY_VIDEO_ID
 import com.github.libretube.fragment.PlayerFragment
 
 class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
@@ -54,7 +56,7 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
 
         channelImage.setOnClickListener {
             val activity = holder.view.context as MainActivity
-            val bundle = bundleOf("channel_id" to trending.uploaderUrl)
+            val bundle = bundleOf(KEY_CHANNEL_ID to trending.uploaderUrl)
             activity.navController.navigate(R.id.channelFragment, bundle)
             try {
                 val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mlMain)
@@ -73,7 +75,7 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
             val playerFragment = PlayerFragment()
             val activity = holder.view.context as AppCompatActivity
 
-            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
+            bundle.putString(KEY_VIDEO_ID, trending.url!!.replace("/watch?v=", ""))
             playerFragment.arguments = bundle
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())

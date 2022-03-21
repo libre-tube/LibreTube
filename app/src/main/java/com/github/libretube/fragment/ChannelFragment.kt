@@ -25,6 +25,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 private const val TAG = "ChannelFragment"
+const val KEY_CHANNEL_ID = "channel_id"
 
 class ChannelFragment : Fragment() {
     private lateinit var binding: FragmentChannelBinding
@@ -37,7 +38,7 @@ class ChannelFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            channelId = it.getString("channel_id")
+            channelId = it.getString(KEY_CHANNEL_ID)
         }
     }
 

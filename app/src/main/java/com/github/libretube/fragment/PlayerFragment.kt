@@ -59,8 +59,9 @@ import java.io.IOException
 import java.net.URLEncoder
 import kotlin.math.abs
 
-var isFullScreen = false
 private const val TAG = "PlayerFragment"
+const val KEY_VIDEO_ID = "videoId"
+var isFullScreen = false
 
 class PlayerFragment : Fragment() {
     private var videoId: String? = null
@@ -83,7 +84,7 @@ class PlayerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            videoId = it.getString("videoId")
+            videoId = it.getString(KEY_VIDEO_ID)
         }
     }
 
@@ -449,7 +450,7 @@ class PlayerFragment : Fragment() {
                     view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
 
                         val activity = view.context as MainActivity
-                        val bundle = bundleOf("channel_id" to response.uploaderUrl)
+                        val bundle = bundleOf(KEY_CHANNEL_ID to response.uploaderUrl)
                         activity.navController.navigate(R.id.channelFragment, bundle)
                         activity.findViewById<MotionLayout>(R.id.mlMain).transitionToEnd()
                         view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
@@ -532,12 +533,12 @@ class PlayerFragment : Fragment() {
                                     audioName.add(name)
                                     audioUrl.add(audio.url!!)
                                 }
-                                bundle.putStringArrayList("videoName", vidName)
-                                bundle.putStringArrayList("videoUrl", vidUrl)
-                                bundle.putStringArrayList("audioName", audioName)
-                                bundle.putStringArrayList("audioUrl", audioUrl)
-                                bundle.putString("videoId", videoId)
-                                bundle.putInt("duration", response.duration)
+                                bundle.putStringArrayList(KEY_VIDEO_NAME, vidName)
+                                bundle.putStringArrayList(KEY_VIDEO_URL, vidUrl)
+                                bundle.putStringArrayList(KEY_AUDIO_NAME, audioName)
+                                bundle.putStringArrayList(KEY_AUDIO_URL, audioUrl)
+                                bundle.putString(KEY_VIDEO_ID, videoId)
+                                bundle.putInt(KEY_DURATION, response.duration)
                                 newFragment.arguments = bundle
                                 newFragment.show(childFragmentManager, "Download")
                             } else {

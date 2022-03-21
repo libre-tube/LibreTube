@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.activity.MainActivity
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.KEY_CHANNEL_ID
+import com.github.libretube.fragment.KEY_VIDEO_ID
 import com.github.libretube.fragment.PlayerFragment
 import com.github.libretube.model.SearchItem
 import com.squareup.picasso.Picasso
@@ -69,7 +71,7 @@ class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) 
             val activity = view.context as AppCompatActivity
 
             frag.arguments = bundle
-            bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
+            bundle.putString(KEY_VIDEO_ID, item.url!!.replace("/watch?v=", ""))
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
                 .commit()
@@ -79,7 +81,7 @@ class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) 
         }
         channelImage.setOnClickListener {
             val activity = view.context as MainActivity
-            val bundle = bundleOf("channel_id" to item.uploaderUrl)
+            val bundle = bundleOf(KEY_CHANNEL_ID to item.uploaderUrl)
             activity.navController.navigate(R.id.channelFragment, bundle)
         }
     }
@@ -95,7 +97,7 @@ class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) 
             item.subscribers.formatShort() + " subscribers • " + item.videos + " videos"
         view.setOnClickListener {
             val activity = view.context as MainActivity
-            val bundle = bundleOf("channel_id" to item.url)
+            val bundle = bundleOf(KEY_CHANNEL_ID to item.url)
             activity.navController.navigate(R.id.channelFragment, bundle)
         }
         //todo sub button

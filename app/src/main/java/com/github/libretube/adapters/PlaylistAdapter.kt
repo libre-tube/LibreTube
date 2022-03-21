@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.fragment.KEY_VIDEO_ID
 import com.github.libretube.fragment.PlayerFragment
 import com.github.libretube.model.StreamItem
 import com.squareup.picasso.Picasso
@@ -47,7 +48,7 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
             val frag = PlayerFragment()
             val activity = holder.view.context as AppCompatActivity
 
-            bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
+            bundle.putString(KEY_VIDEO_ID, streamItem.url!!.replace("/watch?v=", ""))
             frag.arguments = bundle
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())

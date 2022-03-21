@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso
 import com.github.libretube.R
 import com.github.libretube.model.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.fragment.KEY_VIDEO_ID
 import com.github.libretube.fragment.PlayerFragment
 
 class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
@@ -49,7 +50,7 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
             val frag = PlayerFragment()
             val activity = holder.view.context as AppCompatActivity
 
-            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
+            bundle.putString(KEY_VIDEO_ID, trending.url!!.replace("/watch?v=", ""))
             frag.arguments = bundle
             activity.supportFragmentManager.beginTransaction()
                 .remove(PlayerFragment())
