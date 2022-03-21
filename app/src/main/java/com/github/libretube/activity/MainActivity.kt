@@ -1,27 +1,24 @@
 package com.github.libretube.activity
 
-import android.app.Activity
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.*
-import android.view.inputmethod.InputMethodManager
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
@@ -31,9 +28,9 @@ import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragment.PlayerFragment
 import com.github.libretube.fragment.isFullScreen
 import com.google.android.material.color.DynamicColors
-import java.lang.Exception
 
 private const val TAG = "MainActivity"
+private const val MOTION_LAYOUT_DELAY_IN_MILLIS = 100.toLong()
 
 class MainActivity : AppCompatActivity() {
 
@@ -104,107 +101,89 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        intent?.action
         val data: Uri? = intent?.data
+        var bundle = Bundle()
+
         Log.d(TAG, "dafaq" + data.toString())
 
         if (data != null) {
             Log.d("dafaq", data.host + " ${data.path} ")
-            if (data.host != null) {
-                if (data.path != null) {
-                    if (data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains(
-                            "/user/")
-                    ) {
-                        var channel = data.path
-                        channel = channel!!.replace("/c/", "")
-                        channel = channel.replace("/user/", "")
-                        val bundle = bundleOf("channel_id" to channel)
-                        navController.navigate(R.id.channelFragment, bundle)
-                    } else if (data.path!!.contains("/playlist")) {
-                        var playlist = data.query!!
-                        if (playlist.contains("&")) {
-                            var playlists = playlist.split("&")
-                            for (v in playlists) {
-                                if (v.contains("list=")) {
-                                    playlist = v
-                                    break
-                                }
-                            }
-                        }
-                        playlist = playlist.replace("list=", "")
-                        val bundle = bundleOf("playlist_id" to playlist)
-                        navController.navigate(R.id.playlistFragment, bundle)
-                    } else if (data.path!!.contains("/shorts/") || data.path!!.contains("/embed/") || data.path!!.contains(
-                            "/v/")
-                    ) {
-                        var watch = data.path!!.replace("/shorts/", "").replace("/v/", "")
-                            .replace("/embed/", "")
-                        val bundle = Bundle()
-                        val frag = PlayerFragment()
-
-                        bundle.putString("videoId", watch)
-                        frag.arguments = bundle
-                        supportFragmentManager.beginTransaction()
-                            .remove(PlayerFragment())
-                            .commit()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, frag)
-                            .commitNow()
-                        Handler().postDelayed({
-                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            motionLayout.transitionToEnd()
-                            motionLayout.transitionToStart()
-                        }, 100)
-                    } else if (data.path!!.contains("/watch") && data.query != null) {
-                        Log.d("dafaq", data.query!!)
-                        var watch = data.query!!
-                        if (watch.contains("&")) {
-                            var watches = watch.split("&")
-                            for (v in watches) {
-                                if (v.contains("v=")) {
-                                    watch = v
-                                    break
-                                }
-                            }
-                        }
-                        var bundle = Bundle()
-                        bundle.putString("videoId", watch.replace("v=", ""))
-                        var frag = PlayerFragment()
-                        frag.arguments = bundle
-                        supportFragmentManager.beginTransaction()
-                            .remove(PlayerFragment())
-                            .commit()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, frag)
-                            .commitNow()
-                        Handler().postDelayed({
-                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            motionLayout.transitionToEnd()
-                            motionLayout.transitionToStart()
-                        }, 100)
-
-                    } else {
-                        var watch = data.path!!.replace("/", "")
-                        var bundle = Bundle()
-                        bundle.putString("videoId", watch)
-                        var frag = PlayerFragment()
-                        frag.arguments = bundle
-                        supportFragmentManager.beginTransaction()
-                            .remove(PlayerFragment())
-                            .commit()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, frag)
-                            .commitNow()
-                        Handler().postDelayed({
-                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            motionLayout.transitionToEnd()
-                            motionLayout.transitionToStart()
-                        }, 100)
-                    }
+            data.path?.let { path ->
+                if (checkIfPathContainsSubString(path, setOf("/channel/", "/c/", "/user/"))) {
+                    val channel = path.replace("/c/", "")
+                        .replace("/user/", "")
+                    bundle = bundleOf("channel_id" to channel)
+                    navController.navigate(R.id.channelFragment, bundle)
+                } else if (checkIfPathContainsSubString(path, setOf("/playlist"))) {
+                    var playlist = data.query!!
+                    playlist = checkIfQueryContainsString(playlist, "list=")
+                    playlist = playlist.replace("list=", "")
+                    bundle = bundleOf("playlist_id" to playlist)
+                    navController.navigate(R.id.playlistFragment, bundle)
+                } else if (checkIfPathContainsSubString(path,
+                        setOf("/shorts/", "/embed/", "/v/"))
+                ) {
+                    val watch = path.replace("/shorts/", "")
+                        .replace("/embed/", "")
+                        .replace("/v/", "")
+                    bundle.putString("videoId", watch)
+                    showPlayer(bundle)
+                } else if (path.contains("/watch") && data.query != null) {
+                    Log.d("dafaq", data.query!!)
+                    var watch = data.query!!
+                    watch = checkIfQueryContainsString(watch, "v=")
+                    bundle.putString("videoId", watch.replace("v=", ""))
+                    showPlayer(bundle)
+                } else {
+                    val watch = path.replace("/", "")
+                    bundle.putString("videoId", watch)
+                    showPlayer(bundle)
                 }
-
             }
         }
+    }
+
+    private fun checkIfPathContainsSubString(path: String, substrings: Set<String>): Boolean {
+        for (substring in substrings) {
+            if (path.contains(substring)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun checkIfQueryContainsString(
+        queryString: String,
+        stringToFind: String,
+    ): String {
+        var modifiedQueryString = queryString
+        if (modifiedQueryString.contains("&")) {
+            val subStrings = modifiedQueryString.split("&")
+            for (subString in subStrings) {
+                if (subString.contains(stringToFind)) {
+                    modifiedQueryString = subString
+                    break
+                }
+            }
+        }
+        return modifiedQueryString
+    }
+
+    private fun showPlayer(
+        bundle: Bundle,
+    ) {
+        val playerFragment = PlayerFragment().apply { arguments = bundle }
+        supportFragmentManager.beginTransaction()
+            .remove(PlayerFragment())
+            .commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, playerFragment)
+            .commitNow()
+        Handler().postDelayed({
+            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+            motionLayout.transitionToEnd()
+            motionLayout.transitionToStart()
+        }, MOTION_LAYOUT_DELAY_IN_MILLIS)
     }
 
     override fun onBackPressed() {
@@ -287,17 +266,4 @@ class MainActivity : AppCompatActivity() {
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
     }
-}
-
-fun Fragment.hideKeyboard() {
-    view?.let { activity?.hideKeyboard(it) }
-}
-
-fun Activity.hideKeyboard() {
-    hideKeyboard(currentFocus ?: View(this))
-}
-
-fun Context.hideKeyboard(view: View) {
-    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
