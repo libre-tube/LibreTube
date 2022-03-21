@@ -3,7 +3,6 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.activity.MainActivity
 import com.squareup.picasso.Picasso
 import com.github.libretube.R
+import com.github.libretube.databinding.TrendingRowBinding
+import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.model.StreamItem
 import com.github.libretube.formatShort
 import com.github.libretube.fragment.KEY_CHANNEL_ID
@@ -37,54 +38,59 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.trending_row, parent, false)
-        return SubscriptionViewHolder(cell)
+        val trendingRowBinding = TrendingRowBinding.inflate(layoutInflater, parent, false)
+        return SubscriptionViewHolder(trendingRowBinding)
     }
 
-    override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
-        val trending = videoFeed[position]
-        val thumbnailImage = holder.view.findViewById<ImageView>(R.id.thumbnail)
-        val channelImage = holder.view.findViewById<ImageView>(R.id.ivChannel)
+    override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) =
+        with(holder.trendingRowBinding) {
+            val trending = videoFeed[position]
 
-        holder.view.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.view.findViewById<TextView>(R.id.textView_channel).text =
-            trending.uploaderName + " • " + trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(
-                trending.uploaded!!
-            )
-        holder.view.findViewById<TextView>(R.id.thumbnail_duration).text =
-            DateUtils.formatElapsedTime(trending.duration!!)
+            textViewTitle.text = trending.title
+            textViewChannel.text =
+                trending.uploaderName + " • " + trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(
+                    trending.uploaded!!
+                )
+            thumbnailDuration.text =
+                DateUtils.formatElapsedTime(trending.duration!!)
 
-        channelImage.setOnClickListener {
-            val activity = holder.view.context as MainActivity
-            val bundle = bundleOf(KEY_CHANNEL_ID to trending.uploaderUrl)
-            activity.navController.navigate(R.id.channelFragment, bundle)
-            try {
-                val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mlMain)
-                if (mainMotionLayout.progress == 0.toFloat()) {
-                    mainMotionLayout.transitionToEnd()
-                    activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+            ivChannel.setOnClickListener {
+                val activity = root.context as MainActivity
+                val bundle = bundleOf(KEY_CHANNEL_ID to trending.uploaderUrl)
+                activity.navController.navigate(R.id.channelFragment, bundle)
+                try {
+                    val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mlMain)
+                    if (mainMotionLayout.progress == 0.toFloat()) {
+                        mainMotionLayout.transitionToEnd()
+                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            .transitionToEnd()
+                    }
+                } catch (e: Exception) {
+                    // TODO: handle exception
                 }
-            } catch (e: Exception) {
-                // TODO: handle exception
+            }
+            Picasso.get().apply {
+                load(trending.thumbnail).into(thumbnail)
+                load(trending.uploaderAvatar).into(ivChannel)
+            }
+
+            root.setOnClickListener {
+                val bundle = Bundle()
+                val playerFragment = PlayerFragment()
+                val activity = root.context as AppCompatActivity
+
+                bundle.putString(KEY_VIDEO_ID, trending.url!!.replace("/watch?v=", ""))
+                playerFragment.arguments = bundle
+
+                activity.supportFragmentManager.beginTransaction()
+                    .remove(PlayerFragment())
+                    .commit()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, playerFragment)
+                    .commitNow()
             }
         }
-        Picasso.get().load(trending.thumbnail).into(thumbnailImage)
-        Picasso.get().load(trending.uploaderAvatar).into(channelImage)
-        holder.view.setOnClickListener {
-            val bundle = Bundle()
-            val playerFragment = PlayerFragment()
-            val activity = holder.view.context as AppCompatActivity
-
-            bundle.putString(KEY_VIDEO_ID, trending.url!!.replace("/watch?v=", ""))
-            playerFragment.arguments = bundle
-            activity.supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, playerFragment)
-                .commitNow()
-        }
-    }
 }
 
-class SubscriptionViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class SubscriptionViewHolder(val trendingRowBinding: TrendingRowBinding) :
+    RecyclerView.ViewHolder(trendingRowBinding.root)

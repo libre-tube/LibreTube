@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,6 +8,8 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.activity.MainActivity
 import com.github.libretube.R
+import com.github.libretube.databinding.ChannelSubscriptionRowBinding
+import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.fragment.KEY_CHANNEL_ID
 import com.github.libretube.model.Subscription
 import com.squareup.picasso.Picasso
@@ -21,26 +22,27 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.channel_subscription_row, parent, false)
-        return SubscriptionChannelViewHolder(cell)
+        val channelSubscriptionRowBinding =
+            ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
+        return SubscriptionChannelViewHolder(channelSubscriptionRowBinding)
     }
 
-    override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
-        val subscription = subscriptions[position]
-        val avatar = holder.view.findViewById<ImageView>(R.id.subscription_channel_image)
+    override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) =
+        with(holder.channelSubscriptionRowBinding) {
+            val subscription = subscriptions[position]
+            Picasso.get().load(subscription.avatar).into(subscriptionChannelImage)
+            subscriptionChannelName.text = subscription.name
 
-        Picasso.get().load(subscription.avatar).into(avatar)
-
-        holder.view.findViewById<TextView>(R.id.subscription_channel_name).text = subscription.name
-        holder.view.setOnClickListener {
-            val activity = holder.view.context as MainActivity
-            val bundle = bundleOf(KEY_CHANNEL_ID to subscription.url)
-            activity.navController.navigate(R.id.channelFragment, bundle)
+            root.setOnClickListener {
+                val activity = root.context as MainActivity
+                val bundle = bundleOf(KEY_CHANNEL_ID to subscription.url)
+                activity.navController.navigate(R.id.channelFragment, bundle)
+            }
         }
-    }
 }
 
-class SubscriptionChannelViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class SubscriptionChannelViewHolder(val channelSubscriptionRowBinding: ChannelSubscriptionRowBinding) :
+    RecyclerView.ViewHolder(channelSubscriptionRowBinding.root)

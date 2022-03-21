@@ -19,12 +19,12 @@ import com.github.libretube.model.SearchItem
 import com.squareup.picasso.Picasso
 
 class SearchAdapter(private val searchItems: List<SearchItem>) :
-    RecyclerView.Adapter<CustomViewHolder1>() {
+    RecyclerView.Adapter<SearchViewHolder>() {
     override fun getItemCount(): Int {
         return searchItems.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder1 {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layout = when (viewType) {
             0 -> R.layout.video_search_row
             1 -> R.layout.channel_search_row
@@ -33,10 +33,10 @@ class SearchAdapter(private val searchItems: List<SearchItem>) :
         }
         val layoutInflater = LayoutInflater.from(parent.context)
         val cell = layoutInflater.inflate(layout, parent, false)
-        return CustomViewHolder1(cell)
+        return SearchViewHolder(cell)
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder1, position: Int) {
+    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(searchItems[position])
     }
 
@@ -50,7 +50,7 @@ class SearchAdapter(private val searchItems: List<SearchItem>) :
     }
 }
 
-class CustomViewHolder1(private val view: View) : RecyclerView.ViewHolder(view) {
+class SearchViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = view.findViewById<ImageView>(R.id.search_thumbnail)

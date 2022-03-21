@@ -3,13 +3,11 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.fragment.KEY_VIDEO_ID
 import com.github.libretube.fragment.PlayerFragment
 import com.github.libretube.model.StreamItem
@@ -28,36 +26,37 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.video_channel_row, parent, false)
-        return PlaylistViewHolder(cell)
+        val videoChannelRowBinding = VideoChannelRowBinding.inflate(layoutInflater, parent, false)
+        return PlaylistViewHolder(videoChannelRowBinding)
     }
 
-    override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        val streamItem = videoFeed[position]
-        val thumbnailImage = holder.view.findViewById<ImageView>(R.id.channel_thumbnail)
+    override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) =
+        with(holder.videoChannelRowBinding) {
+            val streamItem = videoFeed[position]
+            Picasso.get().load(streamItem.thumbnail).into(channelThumbnail)
 
-        Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
+            tvChannelDescription.text = streamItem.title
+            channelViews.text = streamItem.uploaderName
+            channelDuration.text =
+                DateUtils.formatElapsedTime(streamItem.duration!!)
 
-        holder.view.findViewById<TextView>(R.id.tvChannelDescription).text = streamItem.title
-        holder.view.findViewById<TextView>(R.id.channel_views).text = streamItem.uploaderName
-        holder.view.findViewById<TextView>(R.id.channel_duration).text =
-            DateUtils.formatElapsedTime(streamItem.duration!!)
+            root.setOnClickListener {
+                val bundle = Bundle()
+                val playerFragment = PlayerFragment()
+                val activity = root.context as AppCompatActivity
 
-        holder.view.setOnClickListener {
-            val bundle = Bundle()
-            val frag = PlayerFragment()
-            val activity = holder.view.context as AppCompatActivity
+                bundle.putString(KEY_VIDEO_ID, streamItem.url!!.replace("/watch?v=", ""))
+                playerFragment.arguments = bundle
 
-            bundle.putString(KEY_VIDEO_ID, streamItem.url!!.replace("/watch?v=", ""))
-            frag.arguments = bundle
-            activity.supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
+                activity.supportFragmentManager.beginTransaction()
+                    .remove(PlayerFragment())
+                    .commit()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, playerFragment)
+                    .commitNow()
+            }
         }
-    }
 }
 
-class PlaylistViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class PlaylistViewHolder(val videoChannelRowBinding: VideoChannelRowBinding) :
+    RecyclerView.ViewHolder(videoChannelRowBinding.root)
