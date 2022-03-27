@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -13,28 +12,18 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.ViewCompat.getWindowInsetsController
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.color.DynamicColors
 import java.lang.Exception
 
@@ -43,10 +32,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
     lateinit var navController : NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        RetrofitInstance.url=sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
+        RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         DynamicColors.applyToActivitiesIfAvailable(application)
         setContentView(R.layout.activity_main)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
