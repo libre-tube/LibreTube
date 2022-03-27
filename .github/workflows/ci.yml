@@ -16,7 +16,14 @@ on:
       - '.github/**/*.md'
 
 jobs:
+  linting: 
+  - name: Kotlin Linter
+      uses: vroy/gha-kotlin-linter@v3
+      # with:
+        # patterns: # optional, default is **/*.kt
+  
   debug-builds:
+    needs: linting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
