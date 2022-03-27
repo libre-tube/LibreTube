@@ -4,24 +4,21 @@ on:
   workflow_dispatch:
   pull_request:
     paths-ignore:
-      - 'README*.md'
-      - 'fastlane/**'
-      - 'assets/**'
-      - '.github/**/*.md'
+      - "README*.md"
+      - "fastlane/**"
+      - "assets/**"
+      - ".github/**/*.md"
   push:
     paths-ignore:
-      - 'README*.md'
-      - 'fastlane/**'
-      - 'assets/**'
-      - '.github/**/*.md'
+      - "README*.md"
+      - "fastlane/**"
+      - "assets/**"
+      - ".github/**/*.md"
 
 jobs:
-  linting: 
-  - name: Kotlin Linter
-      uses: vroy/gha-kotlin-linter@v3
-      # with:
-        # patterns: # optional, default is **/*.kt
-  
+  # with:
+  # patterns: # optional, default is **/*.kt
+
   debug-builds:
     needs: linting
     runs-on: ubuntu-latest
@@ -29,12 +26,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
 
+      - name: "ktlint"
+        uses: "vroy/gha-kotlin-linter@v3"
       - name: set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: 11
           distribution: "temurin"
-          cache: 'gradle'
+          cache: "gradle"
 
       - name: Build debug APK and run jvm tests
         run: ./gradlew assembleDebug
