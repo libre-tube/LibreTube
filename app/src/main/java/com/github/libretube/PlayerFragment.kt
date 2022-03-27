@@ -26,6 +26,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -48,7 +49,6 @@ import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
@@ -95,6 +95,8 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
+
+        val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
         relDownloadVideo = view.findViewById(R.id.relPlayer_download)
         val mainActivity = activity as MainActivity
@@ -174,6 +176,12 @@ class PlayerFragment : Fragment() {
                 exoPlayer.pause()
                 true
             }
+        }
+
+        view.findViewById<ConstraintLayout>(R.id.player_title_layout).setOnClickListener {
+            var visible = playerDescription.isVisible
+
+            playerDescription.visibility = if (visible) View.GONE else View.VISIBLE
         }
         // FullScreen button trigger
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener {
