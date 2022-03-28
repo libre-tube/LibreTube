@@ -1,6 +1,5 @@
 package com.github.libretube
 
-import com.github.libretube.obj.*
 import retrofit2.http.*
 
 interface PipedApi {
@@ -52,8 +51,7 @@ interface PipedApi {
     @POST("unsubscribe")
     suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
-    //only for fetching servers list
+    // only for fetching servers list
     @GET
     suspend fun getInstances(@Url url: String): List<Instances>
-
 }

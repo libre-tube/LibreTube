@@ -6,6 +6,6 @@ class myApp : Application() {
 
     companion object {
         @JvmField
-        var seekTo : Long? = 0
+        var seekTo: Long? = 0
     }
 }

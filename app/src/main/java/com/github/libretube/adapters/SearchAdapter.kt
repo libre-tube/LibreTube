@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
-import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.obj.SearchItem
 import com.github.libretube.formatShort
+import com.github.libretube.obj.SearchItem
+import com.squareup.picasso.Picasso
 
-
-class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
+class SearchAdapter(private val searchItems: List<SearchItem>) : RecyclerView.Adapter<CustomViewHolder1>() {
     override fun getItemCount(): Int {
         return searchItems.size
     }
@@ -31,7 +29,7 @@ class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Ada
             else -> throw IllegalArgumentException("Invalid type")
         }
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(layout,parent,false)
+        val cell = layoutInflater.inflate(layout, parent, false)
         return CustomViewHolder1(cell)
     }
 
@@ -41,14 +39,14 @@ class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Ada
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            searchItems[position].url!!.startsWith("/watch",false) -> 0
-            searchItems[position].url!!.startsWith("/channel",false) -> 1
-            searchItems[position].url!!.startsWith("/playlist",false) -> 2
+            searchItems[position].url!!.startsWith("/watch", false) -> 0
+            searchItems[position].url!!.startsWith("/channel", false) -> 1
+            searchItems[position].url!!.startsWith("/playlist", false) -> 2
             else -> 3
         }
     }
 }
-class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
+class CustomViewHolder1(private val v: View) : RecyclerView.ViewHolder(v) {
 
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
@@ -58,12 +56,12 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val title = v.findViewById<TextView>(R.id.search_description)
         title.text = item.title
         val views = v.findViewById<TextView>(R.id.search_views)
-        views.text = item.views.formatShort() +" • "+item.uploadedDate
+        views.text = item.views.formatShort() + " • " + item.uploadedDate
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.uploaderName
-        v.setOnClickListener{
+        v.setOnClickListener {
             var bundle = Bundle()
-            bundle.putString("videoId",item.url!!.replace("/watch?v=",""))
+            bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = v.context as AppCompatActivity
@@ -86,13 +84,13 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = item.subscribers.formatShort() + " subscribers • "+ item.videos + " videos"
+        channelViews.text = item.subscribers.formatShort() + " subscribers • " + item.videos + " videos"
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
-            activity.navController.navigate(R.id.channel,bundle)
+            activity.navController.navigate(R.id.channel, bundle)
         }
-        //todo sub button
+        // todo sub button
     }
     private fun bindPlaylist(item: SearchItem) {
         val playlistImage = v.findViewById<ImageView>(R.id.search_thumbnail)
@@ -104,20 +102,20 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val playlistChannelName = v.findViewById<TextView>(R.id.search_name)
         playlistChannelName.text = item.uploaderName
         val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
-        playlistVideosNumber.text = item.videos.toString()+" videos"
+        playlistVideosNumber.text = item.videos.toString() + " videos"
         v.setOnClickListener {
-            //playlist clicked
+            // playlist clicked
             val activity = v.context as MainActivity
             val bundle = bundleOf("playlist_id" to item.url)
-            activity.navController.navigate(R.id.playlistFragment,bundle)
+            activity.navController.navigate(R.id.playlistFragment, bundle)
         }
     }
 
     fun bind(searchItem: SearchItem) {
         when {
-            searchItem.url!!.startsWith("/watch",false) -> bindWatch(searchItem)
-            searchItem.url!!.startsWith("/channel",false) -> bindChannel(searchItem)
-            searchItem.url!!.startsWith("/playlist",false) -> bindPlaylist(searchItem)
+            searchItem.url!!.startsWith("/watch", false) -> bindWatch(searchItem)
+            searchItem.url!!.startsWith("/channel", false) -> bindChannel(searchItem)
+            searchItem.url!!.startsWith("/playlist", false) -> bindPlaylist(searchItem)
             else -> {
             }
         }

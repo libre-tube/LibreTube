@@ -23,24 +23,22 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,35 +47,32 @@ class SearchFragment : Fragment() {
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         autoTextView.requestFocus()
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm!!.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
-            autoTextView.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
+        imm.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
+        autoTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
 
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(s!! != ""){
-                        GlobalScope.launch {
-                            fetchSuggestions(s.toString(), autoTextView)
-                            delay(3000)
-                            fetchSearch(s.toString(),recyclerView)
-                        }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s!! != "") {
+                    GlobalScope.launch {
+                        fetchSuggestions(s.toString(), autoTextView)
+                        delay(3000)
+                        fetchSearch(s.toString(), recyclerView)
                     }
                 }
+            }
 
-                override fun afterTextChanged(s: Editable?) {
-
-                }
-
-            })
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 
-    private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView){
+    private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSuggestions(query)
@@ -93,7 +88,7 @@ class SearchFragment : Fragment() {
             autoTextView.setAdapter(adapter)
         }
     }
-    private fun fetchSearch(query: String, recyclerView: RecyclerView){
+    private fun fetchSearch(query: String, recyclerView: RecyclerView) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, "all")
@@ -105,12 +100,11 @@ class SearchFragment : Fragment() {
                 Log.e(TAG, "HttpException, unexpected response")
                 return@launchWhenCreated
             }
-            if(response.items!!.isNotEmpty()){
-               runOnUiThread {
-                   recyclerView.adapter = SearchAdapter(response.items)
-               }
+            if (response.items!!.isNotEmpty()) {
+                runOnUiThread {
+                    recyclerView.adapter = SearchAdapter(response.items)
+                }
             }
-
         }
     }
 
@@ -124,5 +118,4 @@ class SearchFragment : Fragment() {
         super.onResume()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
-
 }

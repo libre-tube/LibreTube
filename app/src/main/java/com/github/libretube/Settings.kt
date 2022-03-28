@@ -20,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import com.blankj.utilcode.util.UriUtils
 import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
@@ -33,7 +32,6 @@ class Settings : PreferenceFragmentCompat() {
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -68,7 +66,6 @@ class Settings : PreferenceFragmentCompat() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
         super.onCreate(savedInstanceState)
     }
@@ -101,25 +98,27 @@ class Settings : PreferenceFragmentCompat() {
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
 
-            //check StorageAccess
+            // check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
                 if (!Environment.isExternalStorageManager()) {
                     ActivityCompat.requestPermissions(
-                        this.requireActivity(), arrayOf(
+                        this.requireActivity(),
+                        arrayOf(
                             Manifest.permission.READ_EXTERNAL_STORAGE,
                             Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                        ), 1
-                    ) //permission request code is just an int
+                        ),
+                        1
+                    ) // permission request code is just an int
                 }
             } else {
                 if (ActivityCompat.checkSelfPermission(
                         requireContext(),
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
+                            requireContext(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     ActivityCompat.requestPermissions(
                         this.requireActivity(),
@@ -134,7 +133,6 @@ class Settings : PreferenceFragmentCompat() {
 
             getContent.launch("application/zip")
 
-
             true
         }
 
@@ -147,7 +145,6 @@ class Settings : PreferenceFragmentCompat() {
             }
             true
         }
-
     }
 
     private fun fetchInstance() {
@@ -196,7 +193,6 @@ class Settings : PreferenceFragmentCompat() {
         activity?.runOnUiThread(action)
     }
 
-
     private fun subscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -218,4 +214,3 @@ class Settings : PreferenceFragmentCompat() {
         run()
     }
 }
-

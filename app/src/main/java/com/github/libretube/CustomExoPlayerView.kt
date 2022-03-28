@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.ui.StyledPlayerControlView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 internal class CustomExoPlayerView(
-    context: Context, attributeSet: AttributeSet? = null
+    context: Context,
+    attributeSet: AttributeSet? = null
 ) : StyledPlayerView(context, attributeSet) {
 
     @SuppressLint("ClickableViewAccessibility")
@@ -18,7 +17,7 @@ internal class CustomExoPlayerView(
             MotionEvent.ACTION_DOWN -> {
                 if (isControllerFullyVisible) {
                     hideController()
-                }else {
+                } else {
                     showController()
                 }
             }
