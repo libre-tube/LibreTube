@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.preference.SwitchPreferenceCompat
-        app:key="darkMode"
-        app:title="Toggle dark mode"
-        app:isPreferenceVisible="false"/>
     <ListPreference
         app:key="region"
         app:title="@string/region"
@@ -57,6 +52,15 @@
         app:entryValues="@array/defresValue"
         app:defaultValue=""
         android:icon="@drawable/ic_hd"
+        app:useSimpleSummaryProvider="true"
+        />
+    <ListPreference
+        app:title="@string/grid"
+        app:key="grid"
+        app:entries="@array/grid"
+        app:entryValues="@array/grid"
+        app:defaultValue=""
+        android:icon="@drawable/ic_column"
         app:useSimpleSummaryProvider="true"
         />
 

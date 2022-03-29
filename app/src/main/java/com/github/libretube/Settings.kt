@@ -26,10 +26,11 @@ import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.io.InputStream
 import java.util.zip.ZipFile
 
 class Settings : PreferenceFragmentCompat() {
-
+    val TAG = "Settings"
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
     }
@@ -39,27 +40,34 @@ class Settings : PreferenceFragmentCompat() {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
-                var zipfile = ZipFile(UriUtils.uri2File(uri))
+                try{
+                    Log.d(TAG,UriUtils.uri2File(uri).toString())
+                    val file = UriUtils.uri2File(uri)
+                    var inputStream: InputStream? = null
+                    if (file.extension == "zip") {
+                        var zipfile = ZipFile(file)
 
-                var zipentry =
-                    zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+                        var zipentry =
+                            zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
 
-                var inputStream = zipfile.getInputStream(zipentry)
-
-                val baos = ByteArrayOutputStream()
-
-                inputStream.use { it.copyTo(baos) }
-
-                var subscriptions = baos.toByteArray().decodeToString()
-
-                var subscribedCount = 0
-
-                for (text in subscriptions.lines()) {
-                    if (text.take(24) != "Channel Id,Channel Url,C" && !text.take(24).isEmpty()) {
-                        subscribe(text.take(24))
-                        subscribedCount++
-                        Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
+                        inputStream = zipfile.getInputStream(zipentry)
+                    }else if(file.extension == "csv"){
+                        inputStream = file.inputStream()
                     }
+                    val baos = ByteArrayOutputStream()
+
+                    inputStream?.use { it.copyTo(baos) }
+
+                    var subscriptions = baos.toByteArray().decodeToString()
+
+                    var subscribedCount = 0
+
+                    for (text in subscriptions.lines()) {
+                        if (text.take(24) != "Channel Id,Channel Url,C" && text.take(24).isNotEmpty()) {
+                            subscribe(text.take(24))
+                            subscribedCount++
+                            Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
+                        }
                 }
 
                 Toast.makeText(
@@ -67,7 +75,15 @@ class Settings : PreferenceFragmentCompat() {
                     "Subscribed to " + subscribedCount + " channels.",
                     Toast.LENGTH_SHORT
                 ).show()
+            }catch (e: Exception){
+                    Toast.makeText(
+                        context,
+                        R.string.error,
+                        Toast.LENGTH_SHORT
+                    ).show()
             }
+            }
+
 
         }
         super.onCreate(savedInstanceState)
@@ -111,6 +127,8 @@ class Settings : PreferenceFragmentCompat() {
                             Manifest.permission.MANAGE_EXTERNAL_STORAGE
                         ), 1
                     ) //permission request code is just an int
+                }else{
+                    getContent.launch("*/*")
                 }
             } else {
                 if (ActivityCompat.checkSelfPermission(
@@ -129,12 +147,10 @@ class Settings : PreferenceFragmentCompat() {
                         ),
                         1
                     )
+                }else{
+                    getContent.launch("*/*")
                 }
             }
-
-            getContent.launch("application/zip")
-
-
             true
         }
 
