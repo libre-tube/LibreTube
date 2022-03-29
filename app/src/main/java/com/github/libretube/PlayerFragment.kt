@@ -234,9 +234,11 @@ class PlayerFragment : Fragment() {
                 } catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
                 var videosNameArray: Array<CharSequence> = arrayOf()
@@ -267,9 +269,11 @@ class PlayerFragment : Fragment() {
                     val defres = sharedPreferences.getString("default_res", "")!!
                     when {
                         defres!="" -> {
+                            var foundRes = false
                             run lit@ {
                                 response.videoStreams!!.forEachIndexed { index, pipedStream ->
                                     if (pipedStream.quality!!.contains(defres)){
+                                        foundRes = true
                                         val dataSourceFactory: DataSource.Factory =
                                             DefaultHttpDataSource.Factory()
                                         val videoItem: MediaItem = MediaItem.Builder()
@@ -288,6 +292,12 @@ class PlayerFragment : Fragment() {
                                         exoPlayer.setMediaSource(mergeSource)
                                         view.findViewById<TextView>(R.id.quality_text).text=videosNameArray[index+1]
                                         return@lit
+                                    }else if (index+1 == response.videoStreams.size){
+                                            val mediaItem: MediaItem = MediaItem.Builder()
+                                                .setUri(response.hls)
+                                                .setSubtitleConfigurations(subtitle)
+                                                .build()
+                                            exoPlayer.setMediaItem(mediaItem)
                                     }
                                 }
                             }

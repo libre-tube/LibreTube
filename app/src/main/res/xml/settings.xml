@@ -54,7 +54,7 @@
         app:title="@string/defres"
         app:key="default_res"
         app:entries="@array/defres"
-        app:entryValues="@array/defres"
+        app:entryValues="@array/defresValue"
         app:defaultValue=""
         android:icon="@drawable/ic_hd"
         app:useSimpleSummaryProvider="true"
