@@ -116,7 +116,8 @@ class Settings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
-
+            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+            val token = sharedPref?.getString("token","")!!
             //check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
@@ -127,8 +128,10 @@ class Settings : PreferenceFragmentCompat() {
                             Manifest.permission.MANAGE_EXTERNAL_STORAGE
                         ), 1
                     ) //permission request code is just an int
-                }else{
+                }else if (token != ""){
                     getContent.launch("*/*")
+                }else{
+                    Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                 }
             } else {
                 if (ActivityCompat.checkSelfPermission(
@@ -147,8 +150,10 @@ class Settings : PreferenceFragmentCompat() {
                         ),
                         1
                     )
-                }else{
+                }else if (token != ""){
                     getContent.launch("*/*")
+                }else{
+                    Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                 }
             }
             true

@@ -59,7 +59,9 @@ class Subscriptions : Fragment() {
             fetchChannels(channelRecView)
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
-            feedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val grid = sharedPreferences.getString("grid", resources.getInteger(R.integer.grid_items).toString())!!
+            feedRecView.layoutManager = GridLayoutManager(view.context, grid.toInt())
             fetchFeed(feedRecView, progressBar)
 
             refreshLayout?.setOnRefreshListener {
@@ -137,16 +139,11 @@ class Subscriptions : Fragment() {
         }
         run()
     }
-
-    override fun onStop() {
-        Log.e(TAG,"Stopped")
-        subscriptionAdapter = null
-        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
-        super.onStop()
-    }
     override fun onDestroy() {
         Log.e(TAG,"Destroyed")
         super.onDestroy()
+        subscriptionAdapter = null
+        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
     }
 
 }
