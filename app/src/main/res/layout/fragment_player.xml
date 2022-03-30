@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/player_scene"
-    tools:context=".PlayerFragment"
+    tools:context=".fragments.PlayerFragment"
     >
 
     <ScrollView
@@ -236,7 +236,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="?attr/colorSurface" />
 
-    <com.github.libretube.CustomExoPlayerView
+<!--    <com.github.libretube.CustomExoPlayerView-->
+    <com.google.android.exoplayer2.ui.StyledPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="0dp"

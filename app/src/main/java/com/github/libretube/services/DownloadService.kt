@@ -1,6 +1,11 @@
-package com.github.libretube
+package com.github.libretube.services
 
-import android.app.*
+import android.app.DownloadManager
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -14,10 +19,11 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
+import com.github.libretube.R
 import java.io.File
 
-var IS_DOWNLOAD_RUNNING = false
 class DownloadService : Service() {
+    var isDownloadRunning = false
     val TAG = "DownloadService"
     private var downloadId: Long = -1
     private lateinit var videoId: String
@@ -25,14 +31,14 @@ class DownloadService : Service() {
     private lateinit var audioUrl: String
     private lateinit var extension: String
     private var duration: Int = 0
-    // private lateinit var command: String
     private lateinit var audioDir: File
     private lateinit var videoDir: File
     lateinit var service: NotificationManager
     lateinit var notification: NotificationCompat.Builder
+
     override fun onCreate() {
         super.onCreate()
-        IS_DOWNLOAD_RUNNING = true
+        isDownloadRunning = true
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -247,7 +253,7 @@ class DownloadService : Service() {
         try {
             unregisterReceiver(onDownloadComplete)
         } catch (e: Exception) {}
-        IS_DOWNLOAD_RUNNING = false
+        isDownloadRunning = false
         Log.d(TAG, "dl finished!")
         super.onDestroy()
     }

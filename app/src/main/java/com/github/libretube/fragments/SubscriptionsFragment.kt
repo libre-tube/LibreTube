@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,19 +6,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
+import android.widget.ScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import retrofit2.HttpException
 import java.io.IOException
 
-class Subscriptions : Fragment() {
+class SubscriptionsFragment : Fragment() {
     val TAG = "SubFragment"
     lateinit var token: String
     var isLoaded = false
@@ -49,14 +54,14 @@ class Subscriptions : Fragment() {
             view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility = View.GONE
             refreshLayout?.isEnabled = true
 
-            var progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
+            val progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
             progressBar.visibility = View.VISIBLE
 
-            var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
+            val channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
             channelRecView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             fetchChannels(channelRecView)
 
-            var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
+            val feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             feedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
             fetchFeed(feedRecView, progressBar)
 

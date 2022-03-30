@@ -15,19 +15,18 @@
         android:roundIcon="@mipmap/ic_libretube_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LibreTube"
-        android:name=".myApp"
         android:networkSecurityConfig="@xml/network_security_config"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         >
         <activity
-            android:name=".Player"
+            android:name=".activities.PlayerActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|screenSize"
             />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
@@ -133,7 +132,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".DownloadService"
+            android:name=".services.DownloadService"
             android:enabled="true"
             android:exported="false" />
     </application>

@@ -1,11 +1,11 @@
 package com.github.libretube
 
-import java.util.*
+import java.util.LinkedList
 import kotlin.reflect.KProperty
 
 class ResettableLazyManager {
     // we synchronize to make sure the timing of a reset() call and new inits do not collide
-    val managedDelegates = LinkedList<Resettable>()
+    private val managedDelegates = LinkedList<Resettable>()
 
     fun register(managed: Resettable) {
         synchronized(managedDelegates) {
@@ -36,7 +36,7 @@ class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () 
         lazyHolder = makeInitBlock()
     }
 
-    fun makeInitBlock(): Lazy<PROPTYPE> {
+    private fun makeInitBlock(): Lazy<PROPTYPE> {
         return lazy {
             manager.register(this)
             init()

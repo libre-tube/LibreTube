@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.SearchAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

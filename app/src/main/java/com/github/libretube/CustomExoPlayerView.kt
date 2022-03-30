@@ -1,6 +1,5 @@
 package com.github.libretube
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -11,7 +10,6 @@ internal class CustomExoPlayerView(
     attributeSet: AttributeSet? = null
 ) : StyledPlayerView(context, attributeSet) {
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {

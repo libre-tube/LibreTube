@@ -7,28 +7,28 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="com.github.libretube.Home"
+        android:name="com.github.libretube.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/subscriptions"
-        android:name="com.github.libretube.Subscriptions"
+        android:name="com.github.libretube.fragments.SubscriptionsFragment"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/library"
-        android:name="com.github.libretube.Library"
+        android:name="com.github.libretube.fragments.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" >
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.github.libretube.SearchFragment"
+        android:name="com.github.libretube.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/channel"
-        android:name="com.github.libretube.ChannelFragment"
+        android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
         tools:layout="@layout/fragment_channel" >
         <argument
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
-        android:name="com.github.libretube.PlaylistFragment"
+        android:name="com.github.libretube.fragments.PlaylistFragment"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist" >
         <argument
@@ -46,6 +46,6 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="com.github.libretube.Settings"
+        android:name="com.github.libretube.fragments.SettingsFragment"
         android:label="Settings" />
 </navigation>

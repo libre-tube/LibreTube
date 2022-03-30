@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.app.Dialog
 import android.content.Context
@@ -11,12 +11,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.Login
 import retrofit2.HttpException
 import java.io.IOException
 import java.lang.Exception
 
-class LoginDialog : DialogFragment() {
+class LoginDialogFragment : DialogFragment() {
     private val TAG = "LoginDialog"
     lateinit var username: EditText
     lateinit var password: EditText

@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.formatShort
+import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
 

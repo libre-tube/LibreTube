@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -13,12 +13,13 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.TrendingAdapter
-import okhttp3.*
 import retrofit2.HttpException
 import java.io.IOException
 
-class Home : Fragment() {
+class HomeFragment : Fragment() {
 
     private val TAG = "HomeFragment"
     private var refreshLayout: SwipeRefreshLayout? = null

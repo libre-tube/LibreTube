@@ -1,15 +1,22 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.R
+import com.github.libretube.services.DownloadService
 
-class DownloadDialog : DialogFragment() {
+class DownloadDialogFragment : DialogFragment() {
     private val TAG = "DownloadDialog"
     var vidName = arrayListOf<String>()
     var vidUrl = arrayListOf<String>()

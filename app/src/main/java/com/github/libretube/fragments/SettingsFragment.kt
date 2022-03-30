@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.Manifest
 import android.content.ContentValues.TAG
@@ -21,13 +21,15 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.blankj.utilcode.util.UriUtils
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.ZipFile
 
-class Settings : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
@@ -37,18 +39,18 @@ class Settings : PreferenceFragmentCompat() {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
-                var zipfile = ZipFile(UriUtils.uri2File(uri))
+                val zipfile = ZipFile(UriUtils.uri2File(uri))
 
-                var zipentry =
+                val zipentry =
                     zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
 
-                var inputStream = zipfile.getInputStream(zipentry)
+                val inputStream = zipfile.getInputStream(zipentry)
 
                 val baos = ByteArrayOutputStream()
 
                 inputStream.use { it.copyTo(baos) }
 
-                var subscriptions = baos.toByteArray().decodeToString()
+                val subscriptions = baos.toByteArray().decodeToString()
 
                 var subscribedCount = 0
 
@@ -90,7 +92,7 @@ class Settings : PreferenceFragmentCompat() {
 
         val login = findPreference<Preference>("login_register")
         login?.setOnPreferenceClickListener {
-            val newFragment = LoginDialog()
+            val newFragment = LoginDialogFragment()
             newFragment.show(childFragmentManager, "Login")
             true
         }
@@ -196,7 +198,7 @@ class Settings : PreferenceFragmentCompat() {
     private fun subscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
                     RetrofitInstance.api.subscribe(
                         sharedPref?.getString("token", "")!!,

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChannelFragment"
+    tools:context=".fragments.ChannelFragment"
     android:id="@+id/channel_scrollView">
     <LinearLayout
         android:orientation="vertical"

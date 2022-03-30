@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -16,7 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.adapters.ChannelAdapter
+import com.github.libretube.formatShort
 import com.github.libretube.obj.Subscribe
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
@@ -122,7 +125,7 @@ class ChannelFragment : Fragment() {
                                 button.text = getString(R.string.unsubscribe)
                                 button.setTextColor(ColorText.data)
                             }
-                        } 
+                        }
                     }
                 }
             }

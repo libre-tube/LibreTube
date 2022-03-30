@@ -1,9 +1,10 @@
-package com.github.libretube
+package com.github.libretube.activities
 
 import android.app.Activity
 import android.os.Bundle
+import com.github.libretube.R
 
-class Player : Activity() {
+class PlayerActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
