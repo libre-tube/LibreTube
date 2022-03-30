@@ -215,19 +215,14 @@ class DownloadService : Service() {
                         }
                         stopForeground(true)
                         stopService(Intent(this@DownloadService, DownloadService::class.java))
-                    }, {
-                    // CALLED WHEN SESSION PRINTS LOGS
-                    Log.e(TAG, it.message.toString())
-                }
+                    },
+                    {
+                        // CALLED WHEN SESSION PRINTS LOGS
+                        Log.e(TAG, it.message.toString())
+                    }
                 ) {
                     // CALLED WHEN SESSION GENERATES STATISTICS
                     Log.e(TAG + "stat", it.time.toString())
-                    /*val progress = it.time/(10*duration!!)
-                    if (progress<1){
-                        notification
-                            .setProgress(progressMax, progress.toInt(), false)
-                        service.notify(1,notification.build())
-                    }*/
                 }
             }
         }
