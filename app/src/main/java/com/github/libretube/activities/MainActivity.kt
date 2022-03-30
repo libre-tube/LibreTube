@@ -191,11 +191,14 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.container, frag)
                             .commitNow()
-                        Handler().postDelayed({
-                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            motionLayout.transitionToEnd()
-                            motionLayout.transitionToStart()
-                        }, 100)
+                        Handler().postDelayed(
+                            {
+                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                                motionLayout.transitionToEnd()
+                                motionLayout.transitionToStart()
+                            },
+                            100
+                        )
                     }
                 }
             }
