@@ -52,8 +52,13 @@ interface PipedApi {
     @POST("unsubscribe")
     suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
+    @POST("import")
+    suspend fun importSubscriptions(@Header("Authorization") token: String, @Body channels: List<String>): Message
+
     //only for fetching servers list
     @GET
     suspend fun getInstances(@Url url: String): List<Instances>
+
+
 
 }

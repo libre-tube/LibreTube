@@ -125,4 +125,8 @@ class SearchFragment : Fragment() {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
+    override fun onStop() {
+        super.onStop()
+        hideKeyboard()
+    }
 }

@@ -59,7 +59,7 @@
         app:key="grid"
         app:entries="@array/grid"
         app:entryValues="@array/grid"
-        app:defaultValue=""
+        app:defaultValue="@integer/grid_items"
         android:icon="@drawable/ic_column"
         app:useSimpleSummaryProvider="true"
         />
