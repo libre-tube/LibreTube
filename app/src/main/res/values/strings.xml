@@ -39,4 +39,8 @@
     <string name="notgmail">This is not your gmail account!</string>
     <string name="defres">Default Video Resolution</string>
     <string name="grid">Choose the grid columns</string>
+    <string name="live">Live</string>
+    <string name="trending">Trending</string>
+    <string name="music">Music</string>
+    <string name="film">Film</string>
 </resources>
