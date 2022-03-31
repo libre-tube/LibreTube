@@ -74,7 +74,7 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
-    private lateinit var relDownloadVideo: RelativeLayout
+    private lateinit var relDownloadVideo: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -414,6 +414,7 @@ class PlayerFragment : Fragment() {
                         Html.fromHtml(response.description)
                     }
                     view.findViewById<TextView>(R.id.player_sub).text = response.views.formatShort() + " views • "+response.uploadDate
+                    view.findViewById<TextView>(R.id.player_title).text = response.title
                     view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
                     val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
                     Picasso.get().load(response.uploaderAvatar).into(channelImage)
@@ -433,7 +434,7 @@ class PlayerFragment : Fragment() {
                         isSubscribed(subButton, channelId!!)
                     }
                     //share button
-                    view.findViewById<RelativeLayout>(R.id.relPlayer_share).setOnClickListener {
+                    view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
                         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
                         val intent= Intent()
                         intent.action=Intent.ACTION_SEND
@@ -518,7 +519,7 @@ class PlayerFragment : Fragment() {
                         Toast.makeText(context,R.string.cannotDownload, Toast.LENGTH_SHORT).show()
                     }
                     if (response.hls!=null){
-                    view.findViewById<RelativeLayout>(R.id.relPlayer_vlc).setOnClickListener {
+                    view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
                         exoPlayer.pause()
                         try{
                         val vlcRequestCode = 42

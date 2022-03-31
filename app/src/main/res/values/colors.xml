@@ -6,7 +6,7 @@
     <color name="duration_background_color">#AA000000</color>
     <color name="duration_text_color">#EEFFFFFF</color>
 
-    <color name="colorPrimary">#B81B3B</color>
+    <color name="colorPrimary">#632125</color>
     <color name="md_theme_light_primary">#B81B3B</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#FFDADC</color>
