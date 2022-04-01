@@ -1,13 +1,12 @@
 package com.github.libretube
 
 import android.Manifest
-import android.content.ContentValues.TAG
+import android.content.ContentResolver
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -15,19 +14,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
 import com.blankj.utilcode.util.UriUtils
-import com.github.libretube.obj.Subscribe
 import retrofit2.HttpException
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 import java.util.zip.ZipFile
+
 
 class Settings : PreferenceFragmentCompat() {
     val TAG = "Settings"
@@ -35,47 +32,74 @@ class Settings : PreferenceFragmentCompat() {
         lateinit var getContent: ActivityResultLauncher<String>
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
                 try{
-                    Log.d(TAG,UriUtils.uri2File(uri).toString())
-                    val file = UriUtils.uri2File(uri)
-                    var inputStream: InputStream? = null
-                    if (file.extension == "zip") {
-                        var zipfile = ZipFile(file)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-                        var zipentry =
-                            zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+                        // Open a specific media item using ParcelFileDescriptor.
+                        val resolver: ContentResolver =
+                            requireActivity()
+                                .contentResolver
 
-                        inputStream = zipfile.getInputStream(zipentry)
-                    }else if(file.extension == "csv"){
-                        inputStream = file.inputStream()
-                    }
-                    val baos = ByteArrayOutputStream()
+                        // "rw" for read-and-write;
+                        // "rwt" for truncating or overwriting existing file contents.
+                        val readOnlyMode = "r"
+                        // uri - I have got from onActivityResult
+                        //uri = data.getData();
+                        val parcelFile = resolver.openFileDescriptor(uri, readOnlyMode)
+                        val fileReader = FileReader(parcelFile!!.fileDescriptor)
+                        val reader = BufferedReader(fileReader)
+                        var line: String?
+                        var channels: MutableList<String> = emptyList<String>().toMutableList()
+                        var subscribedCount = 0
+                        while (reader.readLine().also { line = it } != null) {
+                            if (line!!.replace(" ","") != "" && subscribedCount >0) {
+                                val channel = line!!.split(",")[0]
+                                channels.add(channel)
 
-                    inputStream?.use { it.copyTo(baos) }
-
-                    var subscriptions = baos.toByteArray().decodeToString()
-
-                    var subscribedCount = 0
-
-                    for (text in subscriptions.lines()) {
-                        if (text.take(24) != "Channel Id,Channel Url,C" && text.take(24).isNotEmpty()) {
-                            subscribe(text.take(24))
+                                Log.d(TAG, "subscribed: " + line + " total: " + subscribedCount)
+                            }
                             subscribedCount++
-                            Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
                         }
-                }
+                        subscribe(channels)
+                        reader.close()
+                        fileReader.close()
+                    }else{
+                        Log.d(TAG,UriUtils.uri2File(uri).toString())
+                        val file = UriUtils.uri2File(uri)
+                        var inputStream: InputStream? = null
+                        if (file.extension == "zip") {
+                            var zipfile = ZipFile(file)
 
-                Toast.makeText(
-                    context,
-                    "Subscribed to " + subscribedCount + " channels.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                            var zipentry =
+                                zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
+
+                            inputStream = zipfile.getInputStream(zipentry)
+                        }else if(file.extension == "csv"){
+                            inputStream = file.inputStream()
+                        }
+                        val baos = ByteArrayOutputStream()
+
+                        inputStream?.use { it.copyTo(baos) }
+
+                        var subscriptions = baos.toByteArray().decodeToString()
+                        var channels: MutableList<String> = emptyList<String>().toMutableList()
+                        var subscribedCount = 0
+                        for (text in subscriptions.lines().subList(1,subscriptions.lines().size)) {
+                            if (text.replace(" ","") != "") {
+                                val channel = text.split(",")[0]
+                                channels.add(channel)
+                                subscribedCount++
+                                Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
+                            }
+                        }
+                        subscribe(channels)
+                    }
             }catch (e: Exception){
+                    Log.e(TAG,e.toString())
                     Toast.makeText(
                         context,
                         R.string.error,
@@ -121,7 +145,9 @@ class Settings : PreferenceFragmentCompat() {
             //check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
-                if (!Environment.isExternalStorageManager()) {
+                if (ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
                     ActivityCompat.requestPermissions(
                         this.requireActivity(), arrayOf(
                             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -218,15 +244,12 @@ class Settings : PreferenceFragmentCompat() {
     }
 
 
-    private fun subscribe(channel_id: String) {
+    private fun subscribe(channels: List<String>) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
-                        Subscribe(channel_id)
-                    )
+                    RetrofitInstance.api.importSubscriptions(sharedPref?.getString("token", "")!!,channels)
                 } catch (e: IOException) {
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -234,9 +257,17 @@ class Settings : PreferenceFragmentCompat() {
                     Log.e(TAG, "HttpException, unexpected response$e")
                     return@launchWhenCreated
                 }
+                if(response.message == "ok"){
+                    Toast.makeText(
+                        context,
+                        R.string.importsuccess,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
         run()
     }
 }
+
 

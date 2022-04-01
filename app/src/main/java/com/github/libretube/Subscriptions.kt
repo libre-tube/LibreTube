@@ -45,7 +45,6 @@ class Subscriptions : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token","")!!
-        Log.e(TAG,token)
         refreshLayout = view.findViewById(R.id.sub_refresh)
         if(token!=""){
             view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility=View.GONE
@@ -94,7 +93,7 @@ class Subscriptions : Fragment() {
                 val response = try {
                     RetrofitInstance.api.getFeed(token)
                 }catch(e: IOException) {
-                    println(e)
+                    Log.e(TAG,e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
@@ -121,7 +120,7 @@ class Subscriptions : Fragment() {
                 val response = try {
                     RetrofitInstance.api.subscriptions(token)
                 }catch(e: IOException) {
-                    println(e)
+                    Log.e(TAG,e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
