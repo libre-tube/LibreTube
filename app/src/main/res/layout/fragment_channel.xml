@@ -25,6 +25,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp" />
 
+
+
         <TextView
             android:id="@+id/channel_name"
             android:layout_width="wrap_content"
@@ -34,6 +36,15 @@
             android:text="Mia Plays"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+
+
+        <TextView
+            android:id="@+id/channel_subs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="17.5K subscribers" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/channel_subscribe"
@@ -48,19 +59,12 @@
             android:textColor="@color/white"
             android:textSize="12dp"
             app:cornerRadius="11dp" />
-
-        <TextView
-            android:id="@+id/channel_subs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="17.5K subscribers" />
-
         <TextView
             android:id="@+id/channel_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
             android:layout_marginBottom="5dp"
             android:text="" />
 
@@ -68,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             android:text="Videos"
