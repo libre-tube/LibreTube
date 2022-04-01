@@ -53,9 +53,18 @@ class Settings : PreferenceFragmentCompat() {
                         val fileReader = FileReader(parcelFile!!.fileDescriptor)
                         val reader = BufferedReader(fileReader)
                         var line: String?
+                        var channels: MutableList<String> = emptyList<String>().toMutableList()
+                        var subscribedCount = 0
                         while (reader.readLine().also { line = it } != null) {
-                            Log.d(TAG,reader.readLine())
+                            if (line!!.replace(" ","") != "" && subscribedCount >0) {
+                                val channel = line!!.split(",")[0]
+                                channels.add(channel)
+
+                                Log.d(TAG, "subscribed: " + line + " total: " + subscribedCount)
+                            }
+                            subscribedCount++
                         }
+                        subscribe(channels)
                         reader.close()
                         fileReader.close()
                     }else{
