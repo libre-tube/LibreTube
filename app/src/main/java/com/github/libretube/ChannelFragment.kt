@@ -96,23 +96,12 @@ class ChannelFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-                val colorPrimary = TypedValue()
-                (context as Activity).theme.resolveAttribute(
-                    android.R.attr.colorPrimary,
-                    colorPrimary,
-                    true)
 
-                val ColorText = TypedValue()
-                (context as Activity).theme.resolveAttribute(
-                    R.attr.colorOnSurface,
-                    ColorText,
-                    true)
 
                 runOnUiThread {
                     if (response.subscribed==true){
                         isSubscribed=true
                         button.text=getString(R.string.unsubscribe)
-                        button.setTextColor(ColorText.data)
 
                     }
                     if(response.subscribed!=null){
@@ -120,13 +109,11 @@ class ChannelFragment : Fragment() {
                         if(isSubscribed){
                             unsubscribe()
                             button.text=getString(R.string.subscribe)
-                            button.setTextColor(colorPrimary.data)
 
 
                         }else{
                             subscribe()
                             button.text=getString(R.string.unsubscribe)
-                            button.setTextColor(ColorText.data)
                         }
                     }}
                 }
