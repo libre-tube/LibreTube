@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -75,6 +77,17 @@ class SearchFragment : Fragment() {
                 }
 
             })
+        autoTextView.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                hideKeyboard();
+                autoTextView.dismissDropDown();
+                return@OnEditorActionListener true
+            }
+            false
+        })
+        autoTextView.setOnDismissListener {
+            hideKeyboard();
+        }
     }
 
     private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView){
