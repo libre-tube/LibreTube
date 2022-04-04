@@ -194,9 +194,9 @@ class PlayerFragment : Fragment() {
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = true
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
                 val mainActivity = activity as MainActivity
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-                isFullScreen = true
-            } else {
+                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                isFullScreen=true
+            }else{
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
@@ -231,9 +231,11 @@ class PlayerFragment : Fragment() {
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
                 var videosNameArray: Array<CharSequence> = arrayOf()
@@ -266,10 +268,12 @@ class PlayerFragment : Fragment() {
                     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
                     val defres = sharedPreferences.getString("default_res", "")!!
                     when {
-                        defres != "" -> {
-                            run lit@{
+                        defres!="" -> {
+                            var foundRes = false
+                            run lit@ {
                                 response.videoStreams!!.forEachIndexed { index, pipedStream ->
-                                    if (pipedStream.quality!!.contains(defres)) {
+                                    if (pipedStream.quality!!.contains(defres)){
+                                        foundRes = true
                                         val dataSourceFactory: DataSource.Factory =
                                             DefaultHttpDataSource.Factory()
                                         val videoItem: MediaItem = MediaItem.Builder()
@@ -288,6 +292,12 @@ class PlayerFragment : Fragment() {
                                         exoPlayer.setMediaSource(mergeSource)
                                         view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[index + 1]
                                         return@lit
+                                    }else if (index+1 == response.videoStreams.size){
+                                            val mediaItem: MediaItem = MediaItem.Builder()
+                                                .setUri(response.hls)
+                                                .setSubtitleConfigurations(subtitle)
+                                                .build()
+                                            exoPlayer.setMediaItem(mediaItem)
                                     }
                                 }
                             }

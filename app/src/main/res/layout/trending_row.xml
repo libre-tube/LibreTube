@@ -51,7 +51,9 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
         app:layout_constraintStart_toEndOf="@+id/channel_image"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard" />
+        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
+        android:ellipsize="end"
+        android:maxLines="2"/>
 
     <TextView
         android:id="@+id/textView_channel"

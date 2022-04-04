@@ -236,12 +236,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/player_channelImage"
                     android:layout_toStartOf="@+id/player_subscribe"
-                    android:text=""
-                    android:textStyle="bold"
+                    android:layout_toEndOf="@+id/player_channelImage"
                     android:ellipsize="end"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:text=""
+                    android:textStyle="bold" />
 
 
                 <com.google.android.material.button.MaterialButton

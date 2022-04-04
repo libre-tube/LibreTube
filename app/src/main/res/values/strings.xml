@@ -17,11 +17,13 @@
     <string name="loggedout">Logged out successfully!</string>
     <string name="registered">Registered successfully! You may now subscribe to channels you want.</string>
     <string name="already_logged_in">You are already logged in, you may logout of your account.</string>
+    <string name="login_first">Please login and try again!</string>
     <string name="instances">Choose an instance</string>
     <string name="customInstance">Add a custom instance</string>
     <string name="region">Choose a region</string>
     <string name="login_register">Login/Register</string>
     <string name="please_login">Please Login or Register from the settings to show your Subscriptions!</string>
+    <string name="importsuccess">Subscribed successfully!</string>
     <string name="subscribeIsEmpty">Subscribe to some channels first!</string>
     <string name="cannotDownload">Can\'t Download this stream!</string>
     <string name="dlcomplete">Download is completed!</string>
@@ -33,7 +35,9 @@
     <string name="app_theme">App theme</string>
     <string name="server_error">Server countered a problem. Maybe try another instance?</string>
     <string name="unknown_error">Network error!</string>
+    <string name="error">Something went wrong!</string>
     <string name="empty">Username and Password can\'t be empty!</string>
     <string name="notgmail">This is not your gmail account!</string>
     <string name="defres">Default Video Resolution</string>
+    <string name="grid">Choose the grid columns</string>
 </resources>

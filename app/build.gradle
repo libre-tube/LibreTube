@@ -10,8 +10,8 @@ android {
         applicationId 'com.github.libretube'
         minSdk 21
         targetSdk 31
-        versionCode 6
-        versionName '0.2.4'
+        versionCode 7
+        versionName '0.2.5'
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         resValue "string", "app_name", "LibreTube"
@@ -71,7 +71,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
+    //do not update jackson annotations! it does not supports <api26
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
 

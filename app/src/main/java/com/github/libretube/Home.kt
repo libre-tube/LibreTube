@@ -43,7 +43,9 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView =  view.findViewById<RecyclerView>(R.id.recview)
-        recyclerView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val grid = sharedPreferences.getString("grid", resources.getInteger(R.integer.grid_items).toString())!!
+        recyclerView.layoutManager = GridLayoutManager(view.context, grid.toInt())
         val progressbar = view.findViewById<ProgressBar>(R.id.progressBar)
         fetchJson(progressbar,recyclerView)
         refreshLayout = view.findViewById(R.id.home_refresh)

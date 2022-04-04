@@ -45,7 +45,6 @@ class Subscriptions : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token","")!!
-        Log.e(TAG,token)
         refreshLayout = view.findViewById(R.id.sub_refresh)
         if(token!=""){
             view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility=View.GONE
@@ -59,7 +58,9 @@ class Subscriptions : Fragment() {
             fetchChannels(channelRecView)
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
-            feedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val grid = sharedPreferences.getString("grid", resources.getInteger(R.integer.grid_items).toString())!!
+            feedRecView.layoutManager = GridLayoutManager(view.context, grid.toInt())
             fetchFeed(feedRecView, progressBar)
 
             refreshLayout?.setOnRefreshListener {
@@ -92,7 +93,7 @@ class Subscriptions : Fragment() {
                 val response = try {
                     RetrofitInstance.api.getFeed(token)
                 }catch(e: IOException) {
-                    println(e)
+                    Log.e(TAG,e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
@@ -119,7 +120,7 @@ class Subscriptions : Fragment() {
                 val response = try {
                     RetrofitInstance.api.subscriptions(token)
                 }catch(e: IOException) {
-                    println(e)
+                    Log.e(TAG,e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
@@ -137,16 +138,11 @@ class Subscriptions : Fragment() {
         }
         run()
     }
-
-    override fun onStop() {
-        Log.e(TAG,"Stopped")
-        subscriptionAdapter = null
-        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
-        super.onStop()
-    }
     override fun onDestroy() {
         Log.e(TAG,"Destroyed")
         super.onDestroy()
+        subscriptionAdapter = null
+        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
     }
 
 }
