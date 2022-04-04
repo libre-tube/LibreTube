@@ -198,8 +198,7 @@ class PlayerFragment : Fragment() {
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-                isFullScreen = true
+                isFullScreen=true
 
             } else {
                 with(motionLayout) {
