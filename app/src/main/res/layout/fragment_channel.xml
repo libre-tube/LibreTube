@@ -1,92 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.libretube.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/channel_refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ChannelFragment"
-    android:id="@+id/channel_scrollView">
-    <LinearLayout
-        android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/channel_scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/channel_banner"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    />
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/channel_image"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ChannelFragment"
+        android:visibility="invisible">
 
-        <TextView
-            android:id="@+id/channel_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Mia Plays"
-            android:textSize="20sp"
-            android:layout_marginTop="7dp"
-            android:textStyle="bold" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/channel_subscribe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/subscribe"
-        android:textColor="?attr/colorPrimary"
-        android:background="?android:attr/selectableItemBackground"
-
-        />
-    <TextView
-        android:id="@+id/channel_subs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Description"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp"
-            android:textSize="17sp" />
-        <TextView
-            android:id="@+id/channel_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Videos"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="17sp" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="blocksDescendants">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/channel_recView"
+            <ImageView
+                android:id="@+id/channel_banner"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/channel_image"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/channel_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="7dp"
+                android:text="Mia Plays"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/channel_subscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/subscribe"
+                android:textColor="?attr/colorPrimary"
+
+                />
+
+            <TextView
+                android:id="@+id/channel_subs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Description"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/channel_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="Videos"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+                android:descendantFocusability="blocksDescendants">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/channel_recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:nestedScrollingEnabled="false" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</com.github.libretube.CustomSwipeToRefresh>
