@@ -4,6 +4,7 @@ package com.github.libretube
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.obj.Subscribe
 import com.google.android.material.button.MaterialButton
@@ -33,6 +35,7 @@ class ChannelFragment : Fragment() {
     var channelAdapter: ChannelAdapter? = null
     var isLoading = true
     var isSubscribed: Boolean =false
+    private var refreshLayout: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +61,22 @@ class ChannelFragment : Fragment() {
         view.findViewById<TextView>(R.id.channel_name).text=channel_id
         val recyclerView = view.findViewById<RecyclerView>(R.id.channel_recView)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        fetchChannel(view)
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        if(sharedPref?.getString("token","")!=""){
+        refreshLayout = view.findViewById(R.id.channel_refresh)
+
+        val refreshChannel = {
+            refreshLayout?.isRefreshing = true
+            fetchChannel(view)
+            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
             val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
-            isSubscribed(subButton)
+            if (sharedPref?.getString("token","") != "") {
+                isSubscribed(subButton)
+            }
         }
+        refreshChannel()
+        refreshLayout?.setOnRefreshListener {
+            refreshChannel()
+        }
+
         val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
         scrollView.viewTreeObserver
             .addOnScrollChangedListener {
@@ -72,6 +85,7 @@ class ChannelFragment : Fragment() {
                     //scroll view is at bottom
                     if(nextPage!=null && !isLoading){
                         isLoading=true
+                        refreshLayout?.isRefreshing = true;
                         fetchNextPage()
                     }
 
@@ -180,16 +194,20 @@ class ChannelFragment : Fragment() {
                 val response = try {
                     RetrofitInstance.api.getChannel(channel_id!!)
                 }catch(e: IOException) {
+                    refreshLayout?.isRefreshing = false;
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
+                    refreshLayout?.isRefreshing = false;
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
                 isLoading=false
+                refreshLayout?.isRefreshing = false;
                 runOnUiThread {
+                    view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_name).text=response.name
                     view.findViewById<TextView>(R.id.channel_subs).text=response.subscriberCount.formatShort() + " subscribers"
                     view.findViewById<TextView>(R.id.channel_description).text=response.description
@@ -212,17 +230,19 @@ class ChannelFragment : Fragment() {
                 val response = try {
                     RetrofitInstance.api.getChannelNextPage(channel_id!!,nextPage!!)
                 } catch (e: IOException) {
+                    refreshLayout?.isRefreshing = false;
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
+                    refreshLayout?.isRefreshing = false;
                     Log.e(TAG, "HttpException, unexpected response,"+e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
                 channelAdapter?.updateItems(response.relatedStreams!!)
                 isLoading=false
-
+                refreshLayout?.isRefreshing = false;
             }
         }
         run()
