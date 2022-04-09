@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView.OnEditorActionListener
@@ -85,8 +86,8 @@ class SearchFragment : Fragment() {
             }
             false
         })
-        autoTextView.setOnDismissListener {
-            hideKeyboard();
+        autoTextView.setOnItemClickListener { _, _, _, _ ->
+            hideKeyboard()
         }
     }
 
