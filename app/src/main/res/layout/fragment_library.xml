@@ -6,30 +6,60 @@
     tools:context=".Library">
 
     <RelativeLayout
+        android:id="@+id/loginOrRegister2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        >
+        android:layout_centerVertical="true">
 
         <ImageView
-            android:id="@+id/player_like"
+            android:id="@+id/boogh2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_campaign" />
+            android:src="@drawable/ic_login" />
+
         <TextView
+            android:id="@+id/textLike2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coming Soon!"
-            android:id="@+id/textLike"
-            android:layout_below="@id/player_like"
+            android:layout_below="@id/boogh2"
             android:layout_centerHorizontal="true"
-            android:textStyle="bold"
+            android:gravity="center"
+            android:text="@string/please_login"
             android:textSize="20sp"
-            />
+            android:textStyle="bold" />
     </RelativeLayout>
 
+    <com.github.libretube.CustomSwipeToRefresh
+        android:id="@+id/playlist_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollview_playlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/playlist_recView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </com.github.libretube.CustomSwipeToRefresh>
 </FrameLayout>

@@ -230,19 +230,19 @@ class ChannelFragment : Fragment() {
                 val response = try {
                     RetrofitInstance.api.getChannelNextPage(channel_id!!,nextPage!!)
                 } catch (e: IOException) {
-                    refreshLayout?.isRefreshing = false;
+                    refreshLayout?.isRefreshing = false
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    refreshLayout?.isRefreshing = false;
+                    refreshLayout?.isRefreshing = false
                     Log.e(TAG, "HttpException, unexpected response,"+e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
                 channelAdapter?.updateItems(response.relatedStreams!!)
                 isLoading=false
-                refreshLayout?.isRefreshing = false;
+                refreshLayout?.isRefreshing = false
             }
         }
         run()
