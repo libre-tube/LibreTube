@@ -249,7 +249,7 @@ class Settings : PreferenceFragmentCompat() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.importSubscriptions(sharedPref?.getString("token", "")!!,channels)
+                    RetrofitInstance.api.importSubscriptions("false",sharedPref?.getString("token", "")!!,channels)
                 } catch (e: IOException) {
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
