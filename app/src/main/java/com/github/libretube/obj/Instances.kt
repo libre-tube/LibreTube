@@ -1,5 +1,8 @@
 package com.github.libretube.obj
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Instances(
     var name: String? = null,
     var api_url: String? = null,

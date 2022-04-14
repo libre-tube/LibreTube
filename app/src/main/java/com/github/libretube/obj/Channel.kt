@@ -1,5 +1,8 @@
 package com.github.libretube.obj
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Channel(
     var id: String? = null,
     var name: String? = null,

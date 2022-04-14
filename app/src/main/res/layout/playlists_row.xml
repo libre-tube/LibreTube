@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delete_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,5 +55,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
-
+    <ImageView
+        android:id="@+id/delete_playlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?android:attr/selectableItemBackground"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

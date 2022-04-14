@@ -3,7 +3,7 @@ package com.github.libretube.obj
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class Login(
-    val username: String? = null,
-    val password: String? = null
+data class PlaylistId(
+    var playlistId: String? = null,
+    var videoId: String? = null,
 )

@@ -334,6 +334,7 @@ class PlayerFragment : Fragment() {
                     exoPlayer.prepare()
                     exoPlayer.play()
 
+                    view.findViewById<TextView>(R.id.title_textView).text = response.title
                     view.findViewById<TextView>(R.id.player_title).text = response.title
                     view.findViewById<TextView>(R.id.player_description).text = response.description
 

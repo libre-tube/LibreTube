@@ -1,5 +1,5 @@
 <resources>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="yes">Yes</string>
     <string name="choose_quality_dialog">Choose Quality:</string>
     <string name="search_hint">Search</string>
     <string name="subscribe">SUBSCRIBE</string>
@@ -22,7 +22,7 @@
     <string name="customInstance">Add a custom instance</string>
     <string name="region">Choose a region</string>
     <string name="login_register">Login/Register</string>
-    <string name="please_login">Please Login or Register from the settings to show your Subscriptions!</string>
+    <string name="please_login">Please Login or Register in the settings First!</string>
     <string name="importsuccess">Subscribed successfully!</string>
     <string name="subscribeIsEmpty">Subscribe to some channels first!</string>
     <string name="cannotDownload">Can\'t Download this stream!</string>
