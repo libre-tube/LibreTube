@@ -40,21 +40,27 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
+import java.util.concurrent.Executors
 import kotlin.math.abs
 
+
 var isFullScreen = false
+
 class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
@@ -113,9 +119,15 @@ class PlayerFragment : Fragment() {
             ) {
             }
 
-            override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {
+            override fun onTransitionChange(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float
+            ) {
                 val mainActivity = activity as MainActivity
-                val mainMotionLayout = mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                val mainMotionLayout =
+                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 mainMotionLayout.progress = abs(progress)
                 eId = endId
                 sId = startId
@@ -124,7 +136,8 @@ class PlayerFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 println(currentId)
                 val mainActivity = activity as MainActivity
-                val mainMotionLayout = mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                val mainMotionLayout =
+                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
                     view.findViewById<ImageButton>(R.id.quality_select).visibility = View.GONE
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.GONE
@@ -195,8 +208,8 @@ class PlayerFragment : Fragment() {
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-                isFullScreen=true
-            }else{
+                isFullScreen = true
+            } else {
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
@@ -209,7 +222,8 @@ class PlayerFragment : Fragment() {
             }
         }
         relatedRecView = view.findViewById(R.id.player_recView)
-        relatedRecView.layoutManager = GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+        relatedRecView.layoutManager =
+            GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
     }
 
     override fun onStop() {
@@ -220,7 +234,8 @@ class PlayerFragment : Fragment() {
         super.onDestroy()
         try {
             exoPlayer.stop()
-        } catch (e: Exception) {}
+        } catch (e: Exception) {
+        }
     }
 
     private fun fetchJson(view: View) {
@@ -231,11 +246,11 @@ class PlayerFragment : Fragment() {
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
-                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
                 var videosNameArray: Array<CharSequence> = arrayOf()
@@ -255,7 +270,19 @@ class PlayerFragment : Fragment() {
                         )
                     }
 
+                    val cronetEngine: CronetEngine = CronetEngine.Builder(context)
+                        .build()
+                    val cronetDataSourceFactory: CronetDataSource.Factory =
+                        CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
+
+                    val dataSourceFactory = DefaultDataSource.Factory(
+                        requireContext(),
+                        cronetDataSourceFactory
+                    )
+
+
                     exoPlayer = ExoPlayer.Builder(view.context)
+                        .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
                         .setSeekBackIncrementMs(5000)
                         .setSeekForwardIncrementMs(5000)
                         .build()
@@ -265,14 +292,15 @@ class PlayerFragment : Fragment() {
                     // exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
                     exoPlayerView.player = exoPlayer
-                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    val sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(requireContext())
                     val defres = sharedPreferences.getString("default_res", "")!!
                     when {
-                        defres!="" -> {
+                        defres != "" -> {
                             var foundRes = false
-                            run lit@ {
+                            run lit@{
                                 response.videoStreams!!.forEachIndexed { index, pipedStream ->
-                                    if (pipedStream.quality!!.contains(defres)){
+                                    if (pipedStream.quality!!.contains(defres)) {
                                         foundRes = true
                                         val dataSourceFactory: DataSource.Factory =
                                             DefaultHttpDataSource.Factory()
@@ -280,24 +308,35 @@ class PlayerFragment : Fragment() {
                                             .setUri(response.videoStreams[index].url)
                                             .setSubtitleConfigurations(subtitle)
                                             .build()
-                                        val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                            .createMediaSource(videoItem)
-                                        var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                            .createMediaSource(fromUri(response.audioStreams!![0].url!!))
+                                        val videoSource: MediaSource =
+                                            DefaultMediaSourceFactory(dataSourceFactory)
+                                                .createMediaSource(videoItem)
+                                        var audioSource: MediaSource =
+                                            DefaultMediaSourceFactory(dataSourceFactory)
+                                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
                                         if (response.videoStreams[index].quality == "720p" || response.videoStreams[index].quality == "1080p" || response.videoStreams[index].quality == "480p") {
-                                            audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                                .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(response.audioStreams)].url!!))
+                                            audioSource =
+                                                ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                    .createMediaSource(
+                                                        fromUri(
+                                                            response.audioStreams!![getMostBitRate(
+                                                                response.audioStreams
+                                                            )].url!!
+                                                        )
+                                                    )
                                         }
-                                        val mergeSource: MediaSource = MergingMediaSource(videoSource, audioSource)
+                                        val mergeSource: MediaSource =
+                                            MergingMediaSource(videoSource, audioSource)
                                         exoPlayer.setMediaSource(mergeSource)
-                                        view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[index + 1]
+                                        view.findViewById<TextView>(R.id.quality_text).text =
+                                            videosNameArray[index + 1]
                                         return@lit
-                                    }else if (index+1 == response.videoStreams.size){
-                                            val mediaItem: MediaItem = MediaItem.Builder()
-                                                .setUri(response.hls)
-                                                .setSubtitleConfigurations(subtitle)
-                                                .build()
-                                            exoPlayer.setMediaItem(mediaItem)
+                                    } else if (index + 1 == response.videoStreams.size) {
+                                        val mediaItem: MediaItem = MediaItem.Builder()
+                                            .setUri(response.hls)
+                                            .setSubtitleConfigurations(subtitle)
+                                            .build()
+                                        exoPlayer.setMediaItem(mediaItem)
                                     }
                                 }
                             }
@@ -316,15 +355,24 @@ class PlayerFragment : Fragment() {
                                 .setUri(response.videoStreams[0].url)
                                 .setSubtitleConfigurations(subtitle)
                                 .build()
-                            val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                .createMediaSource(videoItem)
-                            var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
+                            val videoSource: MediaSource =
+                                DefaultMediaSourceFactory(dataSourceFactory)
+                                    .createMediaSource(videoItem)
+                            var audioSource: MediaSource =
+                                DefaultMediaSourceFactory(dataSourceFactory)
+                                    .createMediaSource(fromUri(response.audioStreams!![0].url!!))
                             if (response.videoStreams[0].quality == "720p" || response.videoStreams[0].quality == "1080p" || response.videoStreams[0].quality == "480p") {
                                 audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                    .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(response.audioStreams)].url!!))
+                                    .createMediaSource(
+                                        fromUri(
+                                            response.audioStreams!![getMostBitRate(
+                                                response.audioStreams
+                                            )].url!!
+                                        )
+                                    )
                             }
-                            val mergeSource: MediaSource = MergingMediaSource(videoSource, audioSource)
+                            val mergeSource: MediaSource =
+                                MergingMediaSource(videoSource, audioSource)
                             exoPlayer.setMediaSource(mergeSource)
                             view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[1]
                         }
@@ -371,18 +419,29 @@ class PlayerFragment : Fragment() {
                                             .setUri(response.videoStreams[which - 1].url)
                                             .setSubtitleConfigurations(subtitle)
                                             .build()
-                                        val videoSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                            .createMediaSource(videoItem)
-                                        var audioSource: MediaSource = DefaultMediaSourceFactory(dataSourceFactory)
-                                            .createMediaSource(fromUri(response.audioStreams!![0].url!!))
+                                        val videoSource: MediaSource =
+                                            DefaultMediaSourceFactory(dataSourceFactory)
+                                                .createMediaSource(videoItem)
+                                        var audioSource: MediaSource =
+                                            DefaultMediaSourceFactory(dataSourceFactory)
+                                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
                                         if (response.videoStreams[which - 1].quality == "720p" || response.videoStreams[which - 1].quality == "1080p" || response.videoStreams[which - 1].quality == "480p") {
-                                            audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                                                .createMediaSource(fromUri(response.audioStreams!![getMostBitRate(response.audioStreams)].url!!))
+                                            audioSource =
+                                                ProgressiveMediaSource.Factory(dataSourceFactory)
+                                                    .createMediaSource(
+                                                        fromUri(
+                                                            response.audioStreams!![getMostBitRate(
+                                                                response.audioStreams
+                                                            )].url!!
+                                                        )
+                                                    )
                                         }
-                                        val mergeSource: MediaSource = MergingMediaSource(videoSource, audioSource)
+                                        val mergeSource: MediaSource =
+                                            MergingMediaSource(videoSource, audioSource)
                                         exoPlayer.setMediaSource(mergeSource)
                                     }
-                                    view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[which]
+                                    view.findViewById<TextView>(R.id.quality_text).text =
+                                        videosNameArray[which]
                                 }
                             )
                         val dialog: AlertDialog? = builder?.create()
@@ -390,34 +449,42 @@ class PlayerFragment : Fragment() {
                     }
                     // Listener for play and pause icon change
                     exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
-                        override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                        override fun onPlayerStateChanged(
+                            playWhenReady: Boolean,
+                            playbackState: Int
+                        ) {
 
                             exoPlayerView.keepScreenOn = !(
-                                playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED ||
-                                    !playWhenReady
-                                )
+                                    playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED ||
+                                            !playWhenReady
+                                    )
 
                             if (playWhenReady && playbackState == Player.STATE_READY) {
                                 // media actually playing
-                                view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_pause)
+                                view.findViewById<ImageView>(R.id.play_imageView)
+                                    .setImageResource(R.drawable.ic_pause)
                             } else if (playWhenReady) {
                                 // might be idle (plays after prepare()),
                                 // buffering (plays when data available)
                                 // or ended (plays when seek away from end)
-                                view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_play)
+                                view.findViewById<ImageView>(R.id.play_imageView)
+                                    .setImageResource(R.drawable.ic_play)
                             } else {
                                 // player paused in any state
-                                view.findViewById<ImageView>(R.id.play_imageView).setImageResource(R.drawable.ic_play)
+                                view.findViewById<ImageView>(R.id.play_imageView)
+                                    .setImageResource(R.drawable.ic_play)
                             }
                         }
                     })
                     relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
-                    view.findViewById<TextView>(R.id.player_description).text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
-                    } else {
-                        Html.fromHtml(response.description)
-                    }
-                    view.findViewById<TextView>(R.id.player_views_info).text = response.views.formatShort() + " views • " + response.uploadDate
+                    view.findViewById<TextView>(R.id.player_description).text =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
+                        } else {
+                            Html.fromHtml(response.description)
+                        }
+                    view.findViewById<TextView>(R.id.player_views_info).text =
+                        response.views.formatShort() + " views • " + response.uploadDate
                     view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
                     val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
                     Picasso.get().load(response.uploaderAvatar).into(channelImage)
@@ -438,11 +505,15 @@ class PlayerFragment : Fragment() {
                     }
                     // share button
                     view.findViewById<RelativeLayout>(R.id.relPlayer_share).setOnClickListener {
-                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        val sharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(requireContext())
                         val intent = Intent()
                         intent.action = Intent.ACTION_SEND
                         var url = "https://piped.kavin.rocks/watch?v=$videoId"
-                        val instance = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks")!!
+                        val instance = sharedPreferences.getString(
+                            "instance",
+                            "https://pipedapi.kavin.rocks"
+                        )!!
                         if (instance != "https://pipedapi.kavin.rocks")
                             url += "&instance=${URLEncoder.encode(instance, "UTF-8")}"
                         intent.putExtra(Intent.EXTRA_TEXT, url)
@@ -450,7 +521,7 @@ class PlayerFragment : Fragment() {
                         startActivity(Intent.createChooser(intent, "Share Url To:"))
                     }
                     // check if livestream
-                    if (response.duration!!> 0) {
+                    if (response.duration!! > 0) {
                         // download clicked
                         relDownloadVideo.setOnClickListener {
                             if (!IS_DOWNLOAD_RUNNING) {
@@ -473,9 +544,9 @@ class PlayerFragment : Fragment() {
                                             requireContext(),
                                             Manifest.permission.READ_EXTERNAL_STORAGE
                                         ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                                                requireContext(),
-                                                Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                            ) != PackageManager.PERMISSION_GRANTED
+                                            requireContext(),
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                        ) != PackageManager.PERMISSION_GRANTED
                                     ) {
                                         ActivityCompat.requestPermissions(
                                             mainActivity,
@@ -540,7 +611,7 @@ class PlayerFragment : Fragment() {
                                 Toast.makeText(context, R.string.vlcerror, Toast.LENGTH_SHORT)
                                     .show()
                             }
-                        } 
+                        }
                     }
                 }
             }
@@ -554,7 +625,10 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.isSubscribed(channel_id, sharedPref?.getString("token", "")!!)
+                    RetrofitInstance.api.isSubscribed(
+                        channel_id,
+                        sharedPref?.getString("token", "")!!
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -594,7 +668,7 @@ class PlayerFragment : Fragment() {
                                 button.text = getString(R.string.unsubscribe)
                                 button.setTextColor(colorPrimary.data)
                             }
-                        } 
+                        }
                     }
                 }
             }
@@ -607,7 +681,10 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.subscribe(sharedPref?.getString("token", "")!!, Subscribe(channel_id))
+                    RetrofitInstance.api.subscribe(
+                        sharedPref?.getString("token", "")!!,
+                        Subscribe(channel_id)
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -621,12 +698,16 @@ class PlayerFragment : Fragment() {
         }
         run()
     }
+
     private fun unsubscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.unsubscribe(sharedPref?.getString("token", "")!!, Subscribe(channel_id))
+                    RetrofitInstance.api.unsubscribe(
+                        sharedPref?.getString("token", "")!!,
+                        Subscribe(channel_id)
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -652,7 +733,7 @@ class PlayerFragment : Fragment() {
         var index = 0
         for ((i, audio) in audios.withIndex()) {
             val q = audio.quality!!.replace(" kbps", "").toInt()
-            if (q> bitrate) {
+            if (q > bitrate) {
                 bitrate = q
                 index = i
             }
