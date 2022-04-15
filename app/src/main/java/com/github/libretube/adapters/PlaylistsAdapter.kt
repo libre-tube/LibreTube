@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.StringUtils.getString
 import com.blankj.utilcode.util.ThreadUtils.runOnUiThread
 import com.github.libretube.*
 import com.github.libretube.obj.PlaylistId
@@ -53,8 +54,8 @@ class PlaylistsAdapter(private val playlists: MutableList<Playlists>): RecyclerV
         holder.v.findViewById<TextView>(R.id.playlist_title).text = playlist.name
         holder.v.findViewById<ImageView>(R.id.delete_playlist).setOnClickListener {
             val builder = AlertDialog.Builder(holder.v.context)
-            builder.setTitle("Androidly Alert")
-            builder.setMessage("We have a message")
+            builder.setTitle(getString(R.string.deletePlaylist))
+            builder.setMessage(getString(R.string.areYouSure))
             builder.setPositiveButton(R.string.yes) { dialog, which ->
                 val sharedPref = holder.v.context.getSharedPreferences("token", Context.MODE_PRIVATE)
                 val token = sharedPref?.getString("token","")!!
@@ -92,6 +93,9 @@ class PlaylistsAdapter(private val playlists: MutableList<Playlists>): RecyclerV
                         Log.d(TAG,"deleted!")
                         playlists.removeAt(position)
                         runOnUiThread{notifyDataSetChanged()}
+                        /*if(playlists.isEmpty()){
+                            view.findViewById<ImageView>(R.id.boogh2).visibility=View.VISIBLE
+                        }*/
                     }
                 }catch (e:Exception){
                     Log.e(TAG,e.toString())

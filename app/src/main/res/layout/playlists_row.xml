@@ -41,7 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toStartOf="@+id/delete_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,17 +51,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/delete_playlist"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,16 +83,60 @@ class Library : Fragment() {
                     refreshLayout?.isRefreshing = false
                 }
                 if (response.isNotEmpty()){
+                    runOnUiThread {
+                        with(view.findViewById<ImageView>(R.id.boogh2)){
+                            visibility=View.GONE
+                        }
+                        with(view.findViewById<TextView>(R.id.textLike2)){
+                            visibility=View.GONE
+                        }
+                    }
                     val playlistsAdapter = PlaylistsAdapter(response.toMutableList())
                     playlistRecyclerView.adapter= playlistsAdapter
+                }else{
+                    runOnUiThread {
+                        with(view.findViewById<ImageView>(R.id.boogh2)){
+                            visibility=View.VISIBLE
+                            setImageResource(R.drawable.ic_list)
+                        }
+                        with(view.findViewById<TextView>(R.id.textLike2)){
+                            visibility=View.VISIBLE
+                            text = getString(R.string.emptyList)
+                        }
+                    }
                 }
-                runOnUiThread {
 
-                }
             }
         }
         run()
     }
+    private fun createPlaylist(name: String, view: View){
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.createPlaylist(token, name)
+                }catch(e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
+                    return@launchWhenCreated
+                }
+                if (response != null){
+                    Toast.makeText(context,R.string.playlistCreated, Toast.LENGTH_SHORT).show()
+                    fetchPlaylists(view)
+                }else{
+
+                }
+
+            }
+        }
+        run()
+    }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity

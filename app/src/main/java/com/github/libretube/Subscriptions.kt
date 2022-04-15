@@ -1,7 +1,6 @@
 package com.github.libretube
 
 import android.content.Context
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
-import com.github.libretube.adapters.TrendingAdapter
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -61,11 +59,11 @@ class Subscriptions : Fragment() {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
             val grid = sharedPreferences.getString("grid", resources.getInteger(R.integer.grid_items).toString())!!
             feedRecView.layoutManager = GridLayoutManager(view.context, grid.toInt())
-            fetchFeed(feedRecView, progressBar)
+            fetchFeed(feedRecView, progressBar, view)
 
             refreshLayout?.setOnRefreshListener {
                 fetchChannels(channelRecView)
-                fetchFeed(feedRecView, progressBar)
+                fetchFeed(feedRecView, progressBar, view)
             }
 
             val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
@@ -87,7 +85,7 @@ class Subscriptions : Fragment() {
         }
     }
 
-    private fun fetchFeed(feedRecView: RecyclerView, progressBar: ProgressBar) {
+    private fun fetchFeed(feedRecView: RecyclerView, progressBar: ProgressBar, view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -106,6 +104,18 @@ class Subscriptions : Fragment() {
                     subscriptionAdapter = SubscriptionAdapter(response)
                     feedRecView?.adapter= subscriptionAdapter
                     subscriptionAdapter?.updateItems()
+                }else{
+                    runOnUiThread {
+                        with(view.findViewById<ImageView>(R.id.boogh)){
+                            visibility=View.VISIBLE
+                            setImageResource(R.drawable.ic_list)
+                        }
+                        with(view.findViewById<TextView>(R.id.textLike)){
+                            visibility=View.VISIBLE
+                            text = getString(R.string.emptyList)
+                        }
+                        view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility=View.VISIBLE
+                    }
                 }
                 progressBar.visibility=View.GONE
                 isLoaded=true
@@ -143,6 +153,11 @@ class Subscriptions : Fragment() {
         super.onDestroy()
         subscriptionAdapter = null
         view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter=null
+    }
+    private fun Fragment?.runOnUiThread(action: () -> Unit) {
+        this ?: return
+        if (!isAdded) return // Fragment not attached to an Activity
+        activity?.runOnUiThread(action)
     }
 
 }
