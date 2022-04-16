@@ -62,7 +62,7 @@ interface PipedApi {
     suspend fun deletePlaylist(@Header("Authorization") token: String, @Body playlistId: PlaylistId): Message
 
     @POST("user/playlists/create")
-    suspend fun createPlaylist(@Header("Authorization") token: String, @Body name: String): PlaylistId
+    suspend fun createPlaylist(@Header("Authorization") token: String, @Body name: Playlists): PlaylistId
 
     //only for fetching servers list
     @GET

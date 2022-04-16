@@ -20,12 +20,11 @@ class CreatePlaylistDialog: DialogFragment() {
             val inflater = requireActivity().layoutInflater;
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
             val token = sharedPref?.getString("token","")
-            var view: View
+            var view: View = inflater.inflate(R.layout.dialog_createplaylist, null)
             Log.e("dafaq",token!!)
             if(token!=""){
                 val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                 val user = sharedPref2?.getString("username","")
-                view = inflater.inflate(R.layout.dialog_logout, null)
                 view.findViewById<TextView>(R.id.user).text = view.findViewById<TextView>(R.id.user).text.toString()+" ("+user+")"
                 view.findViewById<Button>(R.id.logout).setOnClickListener {
                     Toast.makeText(context,R.string.loggedout, Toast.LENGTH_SHORT).show()
