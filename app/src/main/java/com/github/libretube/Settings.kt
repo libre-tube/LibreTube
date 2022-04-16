@@ -20,14 +20,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.blankj.utilcode.util.UriUtils
 import retrofit2.HttpException
 import java.io.*
-import java.util.zip.ZipFile
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 
 
 class Settings : PreferenceFragmentCompat() {
     val TAG = "Settings"
+
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
     }
@@ -36,76 +37,52 @@ class Settings : PreferenceFragmentCompat() {
         getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
             if (uri != null) {
-                try{
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                try {
+                    // Open a specific media item using ParcelFileDescriptor.
+                    val resolver: ContentResolver =
+                        requireActivity()
+                            .contentResolver
 
-                        // Open a specific media item using ParcelFileDescriptor.
-                        val resolver: ContentResolver =
-                            requireActivity()
-                                .contentResolver
+                    // "rw" for read-and-write;
+                    // "rwt" for truncating or overwriting existing file contents.
+                    val readOnlyMode = "r"
+                    // uri - I have got from onActivityResult
+                    val type = resolver.getType(uri)
 
-                        // "rw" for read-and-write;
-                        // "rwt" for truncating or overwriting existing file contents.
-                        val readOnlyMode = "r"
-                        // uri - I have got from onActivityResult
-                        //uri = data.getData();
-                        val parcelFile = resolver.openFileDescriptor(uri, readOnlyMode)
-                        val fileReader = FileReader(parcelFile!!.fileDescriptor)
-                        val reader = BufferedReader(fileReader)
-                        var line: String?
-                        var channels: MutableList<String> = emptyList<String>().toMutableList()
-                        var subscribedCount = 0
-                        while (reader.readLine().also { line = it } != null) {
-                            if (line!!.replace(" ","") != "" && subscribedCount >0) {
-                                val channel = line!!.split(",")[0]
-                                channels.add(channel)
+                    var inputStream: InputStream? = resolver.openInputStream(uri)
 
-                                Log.d(TAG, "subscribed: " + line + " total: " + subscribedCount)
+                    if (type == "application/zip") {
+                        val zis = ZipInputStream(inputStream)
+                        var entry: ZipEntry? = zis.nextEntry
+                        while (entry != null) {
+                            if (entry.name.endsWith(".csv")) {
+                                inputStream = zis
+                                break
                             }
-                            subscribedCount++
+                            entry = zis.nextEntry
                         }
-                        subscribe(channels)
-                        reader.close()
-                        fileReader.close()
-                    }else{
-                        Log.d(TAG,UriUtils.uri2File(uri).toString())
-                        val file = UriUtils.uri2File(uri)
-                        var inputStream: InputStream? = null
-                        if (file.extension == "zip") {
-                            var zipfile = ZipFile(file)
-
-                            var zipentry =
-                                zipfile.getEntry("Takeout/YouTube and YouTube Music/subscriptions/subscriptions.csv")
-
-                            inputStream = zipfile.getInputStream(zipentry)
-                        }else if(file.extension == "csv"){
-                            inputStream = file.inputStream()
-                        }
-                        val baos = ByteArrayOutputStream()
-
-                        inputStream?.use { it.copyTo(baos) }
-
-                        var subscriptions = baos.toByteArray().decodeToString()
-                        var channels: MutableList<String> = emptyList<String>().toMutableList()
-                        var subscribedCount = 0
-                        for (text in subscriptions.lines().subList(1,subscriptions.lines().size)) {
-                            if (text.replace(" ","") != "") {
-                                val channel = text.split(",")[0]
-                                channels.add(channel)
-                                subscribedCount++
-                                Log.d(TAG, "subscribed: " + text + " total: " + subscribedCount)
-                            }
-                        }
-                        subscribe(channels)
                     }
-            }catch (e: Exception){
-                    Log.e(TAG,e.toString())
+                    val channels = ArrayList<String>()
+
+                    inputStream?.bufferedReader()?.readLines()?.forEach {
+                        if (it.isNotBlank()) {
+                            val channelId = it.substringBefore(",")
+                            if (channelId.length == 24)
+                                channels.add(channelId)
+                        }
+                    }
+
+                    inputStream?.close()
+
+                    subscribe(channels)
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                     Toast.makeText(
                         context,
                         R.string.error,
                         Toast.LENGTH_SHORT
                     ).show()
-            }
+                }
             }
 
 
@@ -141,11 +118,14 @@ class Settings : PreferenceFragmentCompat() {
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token","")!!
+            val token = sharedPref?.getString("token", "")!!
             //check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
-                if (ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(
+                        this.requireContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
                     != PackageManager.PERMISSION_GRANTED
                 ) {
                     ActivityCompat.requestPermissions(
@@ -154,9 +134,9 @@ class Settings : PreferenceFragmentCompat() {
                             Manifest.permission.MANAGE_EXTERNAL_STORAGE
                         ), 1
                     ) //permission request code is just an int
-                }else if (token != ""){
+                } else if (token != "") {
                     getContent.launch("*/*")
-                }else{
+                } else {
                     Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                 }
             } else {
@@ -176,9 +156,9 @@ class Settings : PreferenceFragmentCompat() {
                         ),
                         1
                     )
-                }else if (token != ""){
+                } else if (token != "") {
                     getContent.launch("*/*")
-                }else{
+                } else {
                     Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -249,7 +229,11 @@ class Settings : PreferenceFragmentCompat() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.importSubscriptions("false",sharedPref?.getString("token", "")!!,channels)
+                    RetrofitInstance.api.importSubscriptions(
+                        false,
+                        sharedPref?.getString("token", "")!!,
+                        channels
+                    )
                 } catch (e: IOException) {
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -257,7 +241,7 @@ class Settings : PreferenceFragmentCompat() {
                     Log.e(TAG, "HttpException, unexpected response$e")
                     return@launchWhenCreated
                 }
-                if(response.message == "ok"){
+                if (response.message == "ok") {
                     Toast.makeText(
                         context,
                         R.string.importsuccess,

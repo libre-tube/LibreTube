@@ -53,7 +53,7 @@ interface PipedApi {
     suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
     @POST("import")
-    suspend fun importSubscriptions(@Query("override") override: String, @Header("Authorization") token: String, @Body channels: List<String>): Message
+    suspend fun importSubscriptions(@Query("override") override: Boolean, @Header("Authorization") token: String, @Body channels: List<String>): Message
 
     @GET("user/playlists")
     suspend fun playlists(@Header("Authorization") token: String): List<Playlists>

@@ -30,6 +30,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -76,6 +77,5 @@ dependencies {
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
 
-    implementation 'com.blankj:utilcode:1.30.0'
-
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
 }
