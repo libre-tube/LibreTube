@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.adapters.SubscriptionAdapter
+import com.github.libretube.obj.Playlists
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
@@ -60,6 +58,19 @@ class Library : Fragment() {
             refreshLayout?.setOnRefreshListener {
                 Log.d(TAG,"hmm")
                 fetchPlaylists(view)
+            }
+            val playlistName = view.findViewById<EditText>(R.id.playlists_name)
+            view.findViewById<Button>(R.id.create_playlist).setOnClickListener {
+                if(playlistName.text.toString()!="") createPlaylist(playlistName.text.toString(),view)
+            }
+        } else{
+            with(view.findViewById<ImageView>(R.id.boogh2)){
+                visibility=View.VISIBLE
+                setImageResource(R.drawable.ic_login)
+            }
+            with(view.findViewById<TextView>(R.id.textLike2)){
+                visibility=View.VISIBLE
+                text = getString(R.string.please_login)
             }
         }
     }
@@ -114,14 +125,14 @@ class Library : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.createPlaylist(token, name)
+                    RetrofitInstance.api.createPlaylist(token, Playlists(name = name))
                 }catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     Toast.makeText(context,R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG, "HttpException, unexpected response $e")
                     Toast.makeText(context,R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
