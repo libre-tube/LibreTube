@@ -49,7 +49,7 @@
                         android:padding="8dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:text="Title"
+                        android:text="Loading..."
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@id/player_description_arrow"
@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:text="TextView"
+                        android:text=""
                         android:textSize="12sp"
                         app:layout_constraintEnd_toStartOf="@id/player_description_arrow"
                         app:layout_constraintStart_toStartOf="parent"
@@ -192,9 +192,11 @@
                         android:text="@string/vlc" />
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground">
 
                     <ImageView
                         android:id="@+id/player_save"

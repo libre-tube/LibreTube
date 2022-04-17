@@ -1,35 +1,27 @@
 package com.github.libretube.adapters
 
+import android.app.Activity
 import android.content.Context
-import android.media.Image
-import android.os.Bundle
-import android.text.format.DateUtils
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.*
 import com.github.libretube.obj.PlaylistId
-import com.squareup.picasso.Picasso
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Playlists
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class PlaylistsAdapter(private val playlists: MutableList<Playlists>): RecyclerView.Adapter<PlaylistsViewHolder>() {
+
+class PlaylistsAdapter(private val playlists: MutableList<Playlists>, private val activity: Activity): RecyclerView.Adapter<PlaylistsViewHolder>() {
     val TAG = "PlaylistsAdapter"
     override fun getItemCount(): Int {
         return playlists.size
@@ -91,7 +83,8 @@ class PlaylistsAdapter(private val playlists: MutableList<Playlists>): RecyclerV
                         Log.d(TAG,"deleted!")
                         playlists.removeAt(position)
                         // FIXME: This needs to run on UI thread?
-                        notifyDataSetChanged()
+                        activity.runOnUiThread { notifyDataSetChanged() }
+
                         /*if(playlists.isEmpty()){
                             view.findViewById<ImageView>(R.id.boogh2).visibility=View.VISIBLE
                         }*/
@@ -105,6 +98,7 @@ class PlaylistsAdapter(private val playlists: MutableList<Playlists>): RecyclerV
         run()
 
     }
+
 }
 class PlaylistsViewHolder(val v: View): RecyclerView.ViewHolder(v){
     init {

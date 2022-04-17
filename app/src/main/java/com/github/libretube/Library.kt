@@ -62,6 +62,7 @@ class Library : Fragment() {
             val playlistName = view.findViewById<EditText>(R.id.playlists_name)
             view.findViewById<Button>(R.id.create_playlist).setOnClickListener {
                 if(playlistName.text.toString()!="") createPlaylist(playlistName.text.toString(),view)
+                hideKeyboard()
             }
         } else{
             with(view.findViewById<ImageView>(R.id.boogh2)){
@@ -102,7 +103,7 @@ class Library : Fragment() {
                             visibility=View.GONE
                         }
                     }
-                    val playlistsAdapter = PlaylistsAdapter(response.toMutableList())
+                    val playlistsAdapter = PlaylistsAdapter(response.toMutableList(),requireActivity())
                     playlistRecyclerView.adapter= playlistsAdapter
                 }else{
                     runOnUiThread {

@@ -502,6 +502,13 @@ class PlayerFragment : Fragment() {
                         val channelId = response.uploaderUrl?.replace("/channel/", "")
                         val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
                         isSubscribed(subButton, channelId!!)
+                        view.findViewById<RelativeLayout>(R.id.save).setOnClickListener {
+                            val newFragment = AddtoPlaylistDialog()
+                            var bundle = Bundle()
+                            bundle.putString("videoId", videoId)
+                            newFragment.arguments = bundle
+                            newFragment.show(childFragmentManager, "AddToPlaylist")
+                        }
                     }
                     // share button
                     view.findViewById<RelativeLayout>(R.id.relPlayer_share).setOnClickListener {

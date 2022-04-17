@@ -1,5 +1,6 @@
 package com.github.libretube
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -69,7 +70,13 @@ class PlaylistFragment : Fragment() {
                     view.findViewById<TextView>(R.id.playlist_name).text=response.name
                     view.findViewById<TextView>(R.id.playlist_uploader).text=response.uploader
                     view.findViewById<TextView>(R.id.playlist_totVideos).text=response.videos.toString()+" Videos"
-                    playlistAdapter = PlaylistAdapter(response.relatedStreams!!.toMutableList())
+                    val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
+                    val user = sharedPref2?.getString("username","")
+                    var isOwner = false
+                    if(response.uploaderUrl == null && response.uploader == user){
+                        isOwner = true
+                    }
+                    playlistAdapter = PlaylistAdapter(response.relatedStreams!!.toMutableList(), playlist_id!!, isOwner, requireActivity())
                     view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
                     val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)
                     scrollView.viewTreeObserver
