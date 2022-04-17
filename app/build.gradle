@@ -30,6 +30,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -78,6 +79,8 @@ dependencies {
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
 
+
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
     implementation 'com.google.android.exoplayer:extension-cronet:2.17.1'
     implementation 'org.chromium.net:cronet-embedded:98.4758.101'
 

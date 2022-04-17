@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.obj.Login
 
-class CreatePlaylistDialog: DialogFragment() {
+class CreatePlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -35,6 +35,7 @@ class CreatePlaylistDialog: DialogFragment() {
                     }
                     dialog?.dismiss()
                 }
+                dialog?.dismiss()
             }
             builder.setView(view)
             builder.create()
