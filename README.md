@@ -5,6 +5,7 @@
 
 [![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Matrix](https://badges.alefvanoon.xyz/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
+[![Twitter](https://badges.alefvanoon.xyz/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
