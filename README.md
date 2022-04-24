@@ -30,7 +30,7 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 | - | - |
 | User Accounts | ✅ |
 | Subscriptions | ✅ ||
-| User Playlists | 🔴 |
+| User Playlists | ✅ |
 | Trending | ✅ |
 | Channels | ✅ |
 | Channel Playlists | ✅ |
