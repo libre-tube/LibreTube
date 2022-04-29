@@ -87,6 +87,8 @@
                     android:padding="8dp"
                     android:textSize="14sp"
                     android:visibility="gone"
+                    android:autoLink="web"
+                    android:textIsSelectable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/player_title_layout" />
