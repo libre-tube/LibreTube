@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="choose_quality_dialog">انتخاب کیفیت:</string>
+    <string name="subscribe">مشترک شدن</string>
+    <string name="save">ذخیره</string>
+    <string name="username">نام کاربری</string>
+    <string name="password">رمز عبور</string>
+    <string name="login">ورود</string>
+    <string name="logout">خروج</string>
+    <string name="cancel">لغو</string>
+    <string name="loggedIn">با موفقیت وارد شدید!</string>
+    <string name="loggedout">با موفقیت خارج شدید!</string>
+    <string name="yes">بله</string>
+    <string name="unsubscribe">لغو اشتراک</string>
+    <string name="search_hint">جستجو</string>
+    <string name="share">اشتراک گذاری</string>
+    <string name="download">دانلود</string>
+    <string name="register">ثبت نام</string>
+</resources>
