@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="save">Guardar</string>
+    <string name="download">Descargar</string>
+    <string name="subscribe">SUSCRIBIRME</string>
+    <string name="unsubscribe">DESUSCRIBIRME</string>
+    <string name="share">Compartir</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="choose_quality_dialog">Elija la calidad:</string>
+    <string name="search_hint">Buscar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="cancel">Cancelar</string>
+    <string name="loggedIn">¡Se ha iniciado sesión con éxito!</string>
+    <string name="yes">Sí</string>
+</resources>
