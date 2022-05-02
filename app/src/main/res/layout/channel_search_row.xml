@@ -10,9 +10,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/search_channel_image"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/search_channel_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
         android:textSize="16sp"
@@ -32,8 +32,8 @@
         android:id="@+id/search_views"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
