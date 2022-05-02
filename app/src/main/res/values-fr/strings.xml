@@ -2,5 +2,17 @@
 <resources>
     <string name="yes">Oui</string>
     <string name="search_hint">Recherche</string>
-    <string name="subscribe">Abonnement</string>
+    <string name="subscribe">S\'abonner</string>
+    <string name="share">Partage</string>
+    <string name="register">Inscription</string>
+    <string name="download">Télécharger</string>
+    <string name="save">Enregistrer</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="unsubscribe">Se désabonner</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="logout">Déconnexion</string>
+    <string name="cancel">Annuler</string>
+    <string name="loggedIn">Connexion réussi!</string>
+    <string name="loggedout">Déconnexion réussi!</string>
 </resources>
