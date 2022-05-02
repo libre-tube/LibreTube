@@ -15,4 +15,15 @@
     <string name="cancel">Cancelar</string>
     <string name="loggedIn">¡Se ha iniciado sesión con éxito!</string>
     <string name="yes">Sí</string>
+    <string name="registered">¡Se ha registrado con éxito! Ahora puede suscribirse a los canales que desee.</string>
+    <string name="already_logged_in">Ya ha iniciado sesión, puede cerrar la sesión de su cuenta.</string>
+    <string name="instances">Elija una instancia</string>
+    <string name="customInstance">Añadir una instancia personalizada</string>
+    <string name="login_register">Iniciar sesión/registrarse</string>
+    <string name="please_login">¡Por favor, inicie sesión o regístrese en los ajustes primero!</string>
+    <string name="importsuccess">¡Suscrito con éxito!</string>
+    <string name="subscribeIsEmpty">¡Suscríbase primero a algunos canales!</string>
+    <string name="loggedout">¡Se ha cerrado sesión con éxito!</string>
+    <string name="login_first">Por favor, inicie sesión e inténtelo de nuevo.</string>
+    <string name="region">Elija una región</string>
 </resources>
