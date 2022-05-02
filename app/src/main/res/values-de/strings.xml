@@ -1,2 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="search_hint">Suche</string>
+    <string name="subscribe">ABONNIEREN</string>
+    <string name="share">Teilen</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="login">Anmelden</string>
+    <string name="register">Registrieren</string>
+    <string name="logout">Abmelden</string>
+    <string name="loggedIn">Erfolgreich angemeldet!</string>
+    <string name="loggedout">Erfolgreich abgemeldet!</string>
+    <string name="registered">Registrierung erfolgreich! Du kannst nun Kanäle, die du magst, abonnieren.</string>
+    <string name="login_first">Bitte melde dich an und versuche es nochmal!</string>
+    <string name="instances">Instanz wählen</string>
+    <string name="customInstance">Benutzerdefinierte Instanz hinzufügen</string>
+    <string name="region">Region wählen</string>
+    <string name="importsuccess">Erfolgreich abonniert!</string>
+    <string name="subscribeIsEmpty">Abonniere zuerst einige Kanäle!</string>
+    <string name="cannotDownload">Video kann nicht heruntergeladen werden!</string>
+    <string name="dlisinprogress">Ein anderer Download läuft bereits, bitte warte bis dieser beendet ist!</string>
+    <string name="downloadfailed">Herunterladen fehlgeschlagen!</string>
+    <string name="vlcerror">Kann nicht in VLC geöffnet werden. Vielleicht ist VLC noch nicht installiert\?</string>
+    <string name="app_theme">Erscheinungsbild</string>
+    <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eventuell eine andere Instanz\?</string>
+    <string name="unknown_error">Netzwerkfehler!</string>
+    <string name="error">Ups! Etwas ist schiefgelaufen!</string>
+    <string name="notgmail">Dies ist nicht dein Gmail-Account!</string>
+    <string name="defres">Standard-Auflösung</string>
+    <string name="grid">Spaltenanzahl wählen</string>
+    <string name="emptyList">Gähnende Leere!</string>
+    <string name="success">Erfolg!</string>
+    <string name="yes">Ja</string>
+    <string name="download">Herunterladen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="createPlaylist">Wiedergabeliste erstellen</string>
+    <string name="playlistCreated">Wiedergabeliste erstellt!</string>
+    <string name="playlistName">Playlist-Name</string>
+    <string name="addToPlaylist">Zu Wiedergabeliste hinzufügen</string>
+    <string name="fail">Fehlgeschlagen :(</string>
+    <string name="choose_quality_dialog">Qualtität wählen:</string>
+    <string name="login_register">Anmelden/Registrieren</string>
+    <string name="dlcomplete">Herunterladen abgeschlossen!</string>
+    <string name="unsubscribe">ABONNIERT</string>
+    <string name="save">Speichern</string>
+    <string name="already_logged_in">Du bist bereits angemeldet, du kannst dich von deinem Account abmelden.</string>
+    <string name="please_login">Bitte melde dich zuerst an oder registriere dich in den Einstellungen!</string>
+    <string name="vlc">In VLC öffnen</string>
+    <string name="import_from_yt">Abos von YouTube importieren</string>
+    <string name="empty">Benutzername und Passwort können nicht leer sein!</string>
+    <string name="deletePlaylist">Wiedergabeliste löschen</string>
+    <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
+</resources>
