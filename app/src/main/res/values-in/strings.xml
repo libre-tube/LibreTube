@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="yes">Ya</string>
+    <string name="unsubscribe">UNSUBSCRIBE</string>
+    <string name="choose_quality_dialog">Pilih Kualitas:</string>
+    <string name="search_hint">Telusuri</string>
+    <string name="subscribe">SUBSCRIBE</string>
+    <string name="download">Unduh</string>
+    <string name="save">Simpan</string>
+    <string name="password">Kata Sandi</string>
+    <string name="share">Bagikan</string>
+    <string name="username">Username</string>
+</resources>
