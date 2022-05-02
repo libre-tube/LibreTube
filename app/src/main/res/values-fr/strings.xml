@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="yes">Oui</string>
+    <string name="search_hint">Recherche</string>
+    <string name="subscribe">Abonnement</string>
+</resources>
