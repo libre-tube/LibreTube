@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="choose_quality_dialog">품질 선택:</string>
+    <string name="search_hint">검색</string>
+    <string name="subscribe">구독</string>
+    <string name="unsubscribe">구독 취소</string>
+    <string name="share">공유</string>
+    <string name="download">다운로드</string>
+    <string name="save">저장</string>
+    <string name="username">사용자 이름</string>
+    <string name="password">비밀번호</string>
+    <string name="login">로그인</string>
+    <string name="register">회원가입</string>
+    <string name="logout">로그아웃</string>
+    <string name="cancel">취소</string>
+    <string name="loggedIn">성공적으로 로그인했습니다!</string>
+    <string name="loggedout">성공적으로 로그아웃했습니다!</string>
+    <string name="registered">성공적으로 가입되었습니다! 이제 원하는 채널을 구독할 수 있습니다.</string>
+</resources>
