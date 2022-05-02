@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="yes">Ya</string>
+    <string name="unsubscribe">UNSUBSCRIBE</string>
+    <string name="choose_quality_dialog">Pilih Kualitas:</string>
+    <string name="search_hint">Telusuri</string>
+    <string name="subscribe">SUBSCRIBE</string>
+    <string name="download">Unduh</string>
+    <string name="save">Simpan</string>
+    <string name="password">Kata Sandi</string>
+    <string name="share">Bagikan</string>
+    <string name="username">Username</string>
+    <string name="register">Daftar</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Batalkan</string>
+    <string name="loggedIn">Login telah berhasil</string>
+    <string name="loggedout">Logout Berhasil</string>
+    <string name="registered">Daftar Telah Berhasil! Anda sekarang bisa subscribe yang ada mau.</string>
+    <string name="login">Login</string>
+</resources>
