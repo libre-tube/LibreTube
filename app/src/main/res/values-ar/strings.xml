@@ -28,4 +28,26 @@
     <string name="region">اختر المنطقة</string>
     <string name="importsuccess">تم الاشتراك بنجاح!</string>
     <string name="dlcomplete">تم التنزيل!</string>
+    <string name="downloadfailed">فشل التنزيل!</string>
+    <string name="vlcerror">لا يمكن الفتح باستخدام VLC. ربما هو غير مثبت أصلا؟</string>
+    <string name="import_from_yt">استيراد الاشتراكات من يوتيوب</string>
+    <string name="app_theme">سمة التطبيق</string>
+    <string name="empty">لا يمكن لاسم المستخدم وكلمة المرور أن يكونوا فارغين!</string>
+    <string name="notgmail">هذا ليس حاسبك الـgmail!</string>
+    <string name="defres">جودة الفيديو الافتراضية</string>
+    <string name="grid">اختر أعمدة الشبكة</string>
+    <string name="emptyList">لا شيء هنا!</string>
+    <string name="deletePlaylist">حذف قائمة التشغيل</string>
+    <string name="areYouSure">هل أنت متأكد من حذف قائمة التشغيل هذه؟</string>
+    <string name="createPlaylist">إنشاء قائمة تشغيل</string>
+    <string name="playlistCreated">تم إنشاء قائمة التشغيل!</string>
+    <string name="playlistName">اسم قائمة التشغيل</string>
+    <string name="success">نجاح!</string>
+    <string name="fail">فشل ذريع :(</string>
+    <string name="dlisinprogress">هناك عملية تنزيل أخرى، رجاء انتظر قليلا ريثما تنتهي!</string>
+    <string name="vlc">فتح باستخدام VLC</string>
+    <string name="unknown_error">خطأ في الشبكة!</string>
+    <string name="server_error">تعرض الخادم لخطأ ما. لما لا تجرب نظير آخر؟</string>
+    <string name="error">حدث خطأ ما!</string>
+    <string name="addToPlaylist">إضافة إلى قائمة التشغيل</string>
 </resources>
