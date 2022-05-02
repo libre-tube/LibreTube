@@ -3,10 +3,12 @@
   <h1>LibreTube</h1>
   <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
 
+<a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
 [![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Matrix](https://badges.alefvanoon.xyz/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
 [![Twitter](https://badges.alefvanoon.xyz/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
 
+ 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
 </div>
@@ -42,6 +44,15 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 
 ## Contributing
-If you're interested in contributing, you can browse the [issues](https://github.com/libre-tube/libretube/issues) list or create a new one to discuss your feature idea. Every contribution is very welcome.
+Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done the better it gets!
+
+### Translation
+<a href="https://hosted.weblate.org/projects/libretube/#languages">
+<img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
+</a>
+
 ### Donate
 **BTC:** `bc1qfcgqwddr894mywn9rk2crzlgvlac3prkwhdrdq`
+
+## Mirrors (read-only)
+<a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
