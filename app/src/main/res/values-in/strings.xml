@@ -10,4 +10,11 @@
     <string name="password">Kata Sandi</string>
     <string name="share">Bagikan</string>
     <string name="username">Username</string>
+    <string name="register">Daftar</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Batalkan</string>
+    <string name="loggedIn">Login telah berhasil</string>
+    <string name="loggedout">Logout Berhasil</string>
+    <string name="registered">Daftar Telah Berhasil! Anda sekarang bisa subscribe yang ada mau.</string>
+    <string name="login">Login</string>
 </resources>
