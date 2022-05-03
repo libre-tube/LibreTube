@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

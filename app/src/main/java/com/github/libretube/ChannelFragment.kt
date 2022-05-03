@@ -209,7 +209,7 @@ class ChannelFragment : Fragment() {
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_name).text=response.name
-                    view.findViewById<TextView>(R.id.channel_subs).text=response.subscriberCount.formatShort() + " subscribers"
+                    view.findViewById<TextView>(R.id.channel_subs).text=response.subscriberCount.formatShort() + " " + resources.getString(R.string.subscribers)
                     view.findViewById<TextView>(R.id.channel_description).text=response.description
                     val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
