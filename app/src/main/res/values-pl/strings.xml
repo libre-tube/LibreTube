@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="login">Zaloguj się</string>
+    <string name="region">Wybierz region</string>
+    <string name="yes">Tak</string>
+    <string name="download">Pobierz</string>
+    <string name="choose_quality_dialog">Wybierz jakość:</string>
+    <string name="search_hint">Szukaj</string>
+    <string name="subscribe">Subskrybuj</string>
+    <string name="unsubscribe">ODSUBSKRYBUJ</string>
+    <string name="share">Udostępnij</string>
+    <string name="save">Zapisz</string>
+    <string name="username">Nazwa użytkownika</string>
+    <string name="password">Hasło</string>
+    <string name="register">Zarejestruj się</string>
+    <string name="cancel">Anuluj</string>
+    <string name="loggedIn">Zalogowano się pomyślnie!</string>
+    <string name="loggedout">Wylogowano się pomyślnie!</string>
+    <string name="already_logged_in">Jesteś już zalogowany, możesz się wylogować ze swojego konta.</string>
+    <string name="login_first">Zaloguj się i spróbuj jeszcze raz!</string>
+    <string name="instances">Wybierz instancję</string>
+    <string name="customInstance">Dodaj niestandardową instancję</string>
+    <string name="login_register">Zaloguj/Zarejestruj się</string>
+    <string name="please_login">Najpierw zaloguj lub zarejestruj się przechodząc do ustawień!</string>
+    <string name="importsuccess">Dodano subskrypcję!</string>
+    <string name="subscribeIsEmpty">Zasubskrybuj ulubione kanały, aby widzieć tutaj ich najnowsze publikacje!</string>
+    <string name="dlcomplete">Pobieranie ukończone!</string>
+    <string name="dlisinprogress">Pobieranie innego materiału trwa, poczekaj aż proces zostanie ukończony!</string>
+    <string name="downloadfailed">Pobieranie nie udało się!</string>
+    <string name="logout">Wyloguj się</string>
+    <string name="import_from_yt">Importuj listę subskrybcji z YouTube</string>
+    <string name="app_theme">Motyw aplikacji</string>
+    <string name="server_error">Serwer napotkał problem. Spróbuj może użyć innej instancji\?</string>
+    <string name="unknown_error">Błąd sieci!</string>
+    <string name="error">Coś poszło nie tak!</string>
+    <string name="notgmail">To nie jest twoje stare konto gmail!</string>
+    <string name="defres">Domyślna jakość video</string>
+    <string name="grid">Wybierz zagęszczenie siatki filmów</string>
+    <string name="emptyList">Tu jeszcze nic nie ma!</string>
+    <string name="deletePlaylist">Usuń playlistę</string>
+    <string name="createPlaylist">Utwórz nową playlistę</string>
+    <string name="playlistCreated">Utworzono playlistę!</string>
+    <string name="playlistName">Nazwa playlisty</string>
+    <string name="success">Udało się!</string>
+    <string name="fail">Nie powiodło się :(</string>
+    <string name="about">O LibreTube</string>
+    <string name="registered">Zarejestrowano się pomyślnie! Od teraz masz możliwość subskrybowania kanałów.</string>
+    <string name="cannotDownload">Niemożliwe jest pobranie tej transmisji!</string>
+    <string name="vlc">Otwórz w VLC</string>
+    <string name="empty">Nazwa użytkownika i hasło nie mogą być puste!</string>
+    <string name="vlcerror">Nie można otworzyć w programie VLC. Sprawdź, czy jest zainstalowany!</string>
+    <string name="areYouSure">Na pewno chcesz usunąć tę palistę\?</string>
+    <string name="addToPlaylist">Dodaj do playlisty</string>
+</resources>
