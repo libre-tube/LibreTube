@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="register">Kaydol</string>
+    <string name="already_logged_in">Zaten giriş yaptınız, hesabınızdan çıkış yapabilirsiniz.</string>
+    <string name="download">İndir</string>
+    <string name="password">Parola</string>
+    <string name="unsubscribe">Abonelikten Çık</string>
+    <string name="registered">Kayıt olundu! Artık istediğiniz kanallara abone olabilirsiniz.</string>
+    <string name="dlcomplete">İndirme Tamamlandı!</string>
+    <string name="dlisinprogress">Başka bir indirme devam ediyor. Lütfen bitene kadar bekle!</string>
+    <string name="downloadfailed">İndirme Başarısız Oldu!</string>
+    <string name="app_theme">Tema</string>
+    <string name="unknown_error">Bağlantı Hatası!</string>
+    <string name="empty">Kullanıcı Adı ve Parola boş olamaz!</string>
+    <string name="notgmail">Bu sizin gmail hesabınız değildir!</string>
+    <string name="defres">Varsayılan Video Çözünürlüğü</string>
+    <string name="deletePlaylist">Oynatma Listesini Sil</string>
+    <string name="createPlaylist">Oynatma Listesi Oluştur</string>
+    <string name="fail">Başarısız :(</string>
+    <string name="yes">Evet</string>
+    <string name="search_hint">Ara</string>
+    <string name="share">Paylaş</string>
+    <string name="username">Kullanıcı Adı</string>
+    <string name="choose_quality_dialog">Kaliteyi Seç:</string>
+    <string name="subscribe">Abone Ol</string>
+    <string name="save">Kaydet</string>
+    <string name="login">Giriş Yap</string>
+    <string name="logout">Çıkıș Yap</string>
+    <string name="cancel">İptal</string>
+    <string name="loggedout">Çıkış Yapıldı!</string>
+    <string name="loggedIn">Giriş Yapıldı!</string>
+    <string name="login_first">Lütfen giriş yap ve tekrar dene!</string>
+    <string name="region">Bir bölge seç</string>
+    <string name="login_register">Giriş Yap/Kaydol</string>
+    <string name="please_login">Lütfen ilk önce ayarlardan giriş yap veya kaydol!</string>
+    <string name="importsuccess">Abone Olundu!</string>
+    <string name="subscribeIsEmpty">İlk Başta Bazı Kanallara Abone Ol!</string>
+    <string name="cannotDownload">Bu Video İndirilemiyor!</string>
+    <string name="vlc">VLC\'de Aç</string>
+    <string name="import_from_yt">Abonelikleri YouTube\'dan İçe Aktar</string>
+    <string name="error">Bir şeyler yanlış gitti!</string>
+    <string name="emptyList">Burada Hiç Bir Şey Yok!</string>
+    <string name="playlistCreated">Oynatma Listesi Olușturuldu!</string>
+    <string name="areYouSure">Oynatma listesini silmek istediğinize emin misiniz\?</string>
+    <string name="addToPlaylist">Oynatma Listesine Ekle</string>
+    <string name="success">Başarılı!</string>
+    <string name="playlistName">Oynatma Listesi Adı</string>
+    <string name="about">Hakkında</string>
+    <string name="vlcerror">VLC\'de açılamıyor. Cihazınızda yüklü olduğundan emin misiniz\?</string>
+</resources>
