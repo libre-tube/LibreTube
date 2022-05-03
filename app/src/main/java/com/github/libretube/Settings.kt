@@ -3,6 +3,7 @@ package com.github.libretube
 import android.Manifest
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -21,7 +22,8 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import retrofit2.HttpException
-import java.io.*
+import java.io.IOException
+import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
@@ -174,7 +176,13 @@ class Settings : PreferenceFragmentCompat() {
             }
             true
         }
-
+        val about = findPreference<Preference>("about")
+        about?.setOnPreferenceClickListener {
+            val uri = Uri.parse("https://libre-tube.github.io/")
+            val intent = Intent(Intent.ACTION_VIEW).setData(uri)
+            startActivity(intent)
+            true
+        }
     }
 
     private fun fetchInstance() {
