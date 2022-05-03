@@ -7,7 +7,7 @@
     <string name="unsubscribe">Abonelikten Çık</string>
     <string name="registered">Kaydınız bitti. Artık istediğiniz kanala abone olabilirsiniz.</string>
     <string name="dlcomplete">İndirme bitti!</string>
-    <string name="dlisinprogress">Başka bir indirme sürüyor, o bitene değin bekleyin lûtfen!</string>
+    <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene kadar bekleyin!</string>
     <string name="downloadfailed">İndirme bitirilemedi!</string>
     <string name="app_theme">Tema</string>
     <string name="unknown_error">Bağlantı hatası oldu!</string>
@@ -15,7 +15,7 @@
     <string name="notgmail">Gireceğiniz, G-mail hesabınız olmayacak!</string>
     <string name="defres">Başlangıçtaki görüntü çözünürlüğü</string>
     <string name="deletePlaylist">Oynatma listesini sil</string>
-    <string name="createPlaylist">Bir oynatma listesi vâr et</string>
+    <string name="createPlaylist">Oynatma listesi oluştur</string>
     <string name="fail">Yarıda kaldı :(</string>
     <string name="yes">Evet</string>
     <string name="search_hint">Ara</string>
@@ -29,20 +29,20 @@
     <string name="cancel">Vazgeç</string>
     <string name="loggedout">Çıkış bitti!</string>
     <string name="loggedIn">Giriş bitti!</string>
-    <string name="login_first">Girdikten sonra yeniden deneyin, lûtfen!</string>
+    <string name="login_first">Lütfen girdikten sonra yeniden deneyin!</string>
     <string name="region">Bir bölge seçin</string>
     <string name="login_register">Girin/Kaydolun</string>
-    <string name="please_login">Önce ayarlardan girin veya kaydolun, lûtfen!</string>
+    <string name="please_login">Lütfen önce ayarlardan girin veya kaydolun!</string>
     <string name="importsuccess">Abone olundu!</string>
     <string name="subscribeIsEmpty">Önce birkaç kanala abone olun!</string>
     <string name="cannotDownload">Bu görüntü indirilemiyor!</string>
     <string name="vlc">VLC\'de aç</string>
-    <string name="import_from_yt">Abonelikleri YouTube\'dan İçe Aktar</string>
+    <string name="import_from_yt">Abonelikleri YouTube\'dan içe aktar</string>
     <string name="error">Bir şey düzgün yürümedi!</string>
     <string name="emptyList">Burada hiçbir şey yok!</string>
-    <string name="playlistCreated">Yeni bir oynatma listesi var!</string>
+    <string name="playlistCreated">Oynatma listesi oluşturuldu!</string>
     <string name="areYouSure">Oynatma listesini silmek istediğinize emin misiniz\?</string>
-    <string name="addToPlaylist">Oynatma listesine kat</string>
+    <string name="addToPlaylist">Oynatma listesine ekle</string>
     <string name="success">Bitti!</string>
     <string name="playlistName">Oynatma listesinin adı</string>
     <string name="about">Hakkında</string>
@@ -50,5 +50,5 @@
     <string name="instances">Bir erişim aracısı seçin</string>
     <string name="customInstance">Kendiniz bir erişim aracı ekleyin</string>
     <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracısını deneyebilir misiniz\?</string>
-    <string name="grid">Sûtun sayısını seçin</string>
+    <string name="grid">Sütun sayısını seçin</string>
 </resources>
