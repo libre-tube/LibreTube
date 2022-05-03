@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="startpage">Trends</string>
+    <string name="subscriptions">Abos</string>
+    <string name="library">Bibliothek</string>
     <string name="search_hint">Suche</string>
     <string name="subscribe">ABONNIEREN</string>
     <string name="share">Teilen</string>
@@ -50,4 +53,7 @@
     <string name="empty">Benutzername und Passwort können nicht leer sein!</string>
     <string name="deletePlaylist">Wiedergabeliste löschen</string>
     <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
+    <string name="systemDefault">Automatisch</string>
+    <string name="lightTheme">Hell</string>
+    <string name="darkTheme">Dunkel</string>
 </resources>
