@@ -12,7 +12,7 @@
         android:id="@+id/search_channel_image"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        android:layout_marginStart="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,9 +20,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/search_channel_image"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
