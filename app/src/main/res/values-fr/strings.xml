@@ -34,4 +34,7 @@
     <string name="dlisinprogress">Un autre téléchargement est en cours, veuillez attendre que celui-ci termine !</string>
     <string name="please_login">Vous devez d\'abord vous connecter ou vous inscrire à l\'aide du menu paramètre !</string>
     <string name="import_from_yt">Importer la liste d\'abonnements depuis youtube</string>
+    <string name="server_error">Le serveur a rencontré un problème . Peut-être essayez une autre instance \?</string>
+    <string name="unknown_error">Erreur réseau !</string>
+    <string name="error">Quelque chose s\'est mal passé !</string>
 </resources>
