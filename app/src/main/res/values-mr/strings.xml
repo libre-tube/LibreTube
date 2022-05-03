@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="subscribe">सदस्यता घ्या</string>
+    <string name="yes">होय</string>
+    <string name="download">डाउनलोड करा</string>
+    <string name="save">जतन करा</string>
+    <string name="password">पासवर्ड</string>
+    <string name="register">नोंदणी करा</string>
+    <string name="logout">बाहेर पडणे</string>
+    <string name="cancel">रद्द करा</string>
+    <string name="loggedout">यशस्वीरित्या लॉग आउट केले!</string>
+    <string name="already_logged_in">तुम्ही आधीच लॉग इन केले आहे, तुम्ही तुमच्या खात्यातून लॉग आउट करू शकता.</string>
+    <string name="customInstance">सानुकूल उदाहरण जोडा</string>
+    <string name="region">एक प्रदेश निवडा</string>
+    <string name="importsuccess">यशस्वीरित्या सदस्यता घेतली!</string>
+    <string name="subscribeIsEmpty">प्रथम काही चॅनेलची सदस्यता घ्या!</string>
+    <string name="dlcomplete">डाउनलोड पूर्ण झाले!</string>
+    <string name="downloadfailed">डाउनलोड अयशस्वी!</string>
+    <string name="vlc">VLC मध्ये उघडा</string>
+    <string name="import_from_yt">YouTube वरून सदस्यता आयात करा</string>
+    <string name="app_theme">अ‍ॅप थीम</string>
+    <string name="error">काहीतरी चूक झाली!</string>
+    <string name="notgmail">हे तुमचे gmail खाते नाही!</string>
+    <string name="defres">डीफॉल्ट व्हिडिओ रिझोल्यूशन</string>
+    <string name="emptyList">येथे काहीही नाही!</string>
+    <string name="deletePlaylist">प्लेलिस्ट हटवा</string>
+    <string name="playlistName">प्लेलिस्टचे नाव</string>
+    <string name="addToPlaylist">प्लेलिस्टमध्ये जोडा</string>
+    <string name="success">यश!</string>
+    <string name="fail">अयशस्वी :(</string>
+    <string name="about">बद्दल</string>
+    <string name="choose_quality_dialog">गुणवत्ता निवडा:</string>
+    <string name="search_hint">शोधा</string>
+    <string name="share">शेअर करा</string>
+    <string name="username">वापरकर्तानाव</string>
+    <string name="login">लॉगिन करा</string>
+    <string name="loggedIn">यशस्वीरित्या लॉग इन केले!</string>
+    <string name="registered">यशस्वीरित्या नोंदणी केली! तुम्ही आता तुम्हाला हव्या असलेल्या चॅनेलची सदस्यता घेऊ शकता.</string>
+    <string name="instances">एक उदाहरण निवडा</string>
+    <string name="vlcerror">VLC मध्ये उघडू शकत नाही. कदाचित ते अद्याप स्थापित केलेले नाही\?</string>
+    <string name="login_first">कृपया लॉग इन करा आणि पुन्हा प्रयत्न करा!</string>
+    <string name="login_register">लॉगिन/नोंदणी करा</string>
+    <string name="please_login">कृपया प्रथम सेटिंग्जमध्ये लॉगिन करा किंवा नोंदणी करा!</string>
+    <string name="cannotDownload">हा प्रवाह डाउनलोड करू शकत नाही!</string>
+    <string name="dlisinprogress">दुसरे डाउनलोड आधीपासूनच प्रगतीपथावर आहे कृपया ते पूर्ण होईपर्यंत प्रतीक्षा करा!</string>
+    <string name="server_error">सर्व्हरने समस्येचा सामना केला. कदाचित दुसरे उदाहरण वापरून पहा\?</string>
+    <string name="unknown_error">नेटवर्क त्रुटी!</string>
+    <string name="empty">वापरकर्तानाव आणि पासवर्ड रिक्त असू शकत नाही!</string>
+    <string name="grid">ग्रिड स्तंभ निवडा</string>
+    <string name="createPlaylist">प्लेलिस्ट तयार करा</string>
+    <string name="playlistCreated">प्लेलिस्ट तयार केली!</string>
+    <string name="areYouSure">तुमची खात्री आहे की तुम्ही ही प्लेलिस्ट हटवू इच्छिता\?</string>
+    <string name="unsubscribe">सदस्यत्व रद्द करा</string>
+</resources>
