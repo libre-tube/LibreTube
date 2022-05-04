@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="yes">Kyllä</string>
+    <string name="unsubscribe">Peruuta tilaus</string>
+    <string name="search_hint">Hae</string>
+    <string name="download">Lataa</string>
+    <string name="loggedout">Uloskirjautuminen onnistui!</string>
+    <string name="loggedIn">Sisäänkirjautuminen onnistui!</string>
+    <string name="instances">Valitse instanssi</string>
+    <string name="region">Valitse alue</string>
+    <string name="subscribe">Tilaa</string>
+    <string name="save">Tallenna</string>
+    <string name="username">Käyttäjätunnus</string>
+    <string name="password">Salasana</string>
+    <string name="login">Kirjaudu sisään</string>
+    <string name="register">Rekisteröidy</string>
+    <string name="logout">Kirjaudu ulos</string>
+    <string name="cancel">Peruuta</string>
+    <string name="registered">Rekisteröityminen onnistui! Voit nyt tilata haluamiasi kanavia.</string>
+    <string name="already_logged_in">Olet jo kirjautunut sisään, voit kirjautua ulos tililtäsi.</string>
+    <string name="login_first">Kirjaudu sisään ja yritä uudelleen!</string>
+    <string name="login_register">Kirjaudu sisään/rekisteröidy</string>
+    <string name="please_login">Kirjaudu sisään tai rekisteröidy asetuksiin ensin!</string>
+    <string name="importsuccess">Tilattu onnistuneesti!</string>
+    <string name="dlcomplete">Lataus on valmis!</string>
+    <string name="downloadfailed">Lataus epäonnistui!</string>
+    <string name="vlcerror">Ei voi avata VLC:ssä. Ehkä sitä ei ole vielä asennettu\?</string>
+    <string name="server_error">Palvelin vastasi ongelmaan. Ehkä kokeile toista instanssia\?</string>
+    <string name="empty">Käyttäjätunnus ja salasana eivät voi olla tyhjiä!</string>
+    <string name="notgmail">Tämä ei ole Gmail-tilisi!</string>
+    <string name="defres">Videon oletustarkkuus</string>
+    <string name="grid">Valitse ruudukon sarakkeet</string>
+    <string name="app_theme">Sovelluksen teema</string>
+    <string name="success">Onnistui!</string>
+    <string name="about">Tietoja</string>
+    <string name="choose_quality_dialog">Valitse laatu:</string>
+    <string name="share">Jaa</string>
+    <string name="customInstance">Lisää mukautettu instanssi</string>
+    <string name="subscribeIsEmpty">Tilaa ensin joitakin kanavia!</string>
+    <string name="dlisinprogress">Toinen lataus on jo käynnissä, odota kunnes se on valmis!</string>
+    <string name="cannotDownload">Ei voi ladata tätä videota!</string>
+    <string name="vlc">Avaa VLC:ssä</string>
+    <string name="unknown_error">Verkkovirhe!</string>
+    <string name="import_from_yt">Tuo tilaukset YouTubesta</string>
+    <string name="error">Jokin meni pieleen!</string>
+    <string name="playlistCreated">Soittolista luotu!</string>
+    <string name="emptyList">Täällä ei ole mitään!</string>
+    <string name="deletePlaylist">Poista soittolista</string>
+    <string name="areYouSure">Haluatko varmasti poistaa tämän soittolistan\?</string>
+    <string name="fail">Epäonnistui :(</string>
+    <string name="createPlaylist">Luo soittolista</string>
+    <string name="playlistName">Soittolistan nimi</string>
+    <string name="addToPlaylist">Lisää soittolistaan</string>
+</resources>
