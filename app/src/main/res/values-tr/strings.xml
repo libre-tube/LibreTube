@@ -38,7 +38,7 @@
     <string name="cannotDownload">Bu görüntü indirilemiyor!</string>
     <string name="vlc">VLC\'de aç</string>
     <string name="import_from_yt">Abonelikleri YouTube\'dan içe aktar</string>
-    <string name="error">Bir şey düzgün yürümedi!</string>
+    <string name="error">Bir şeyler ters gitti!</string>
     <string name="emptyList">Burada hiçbir şey yok!</string>
     <string name="playlistCreated">Oynatma listesi yaratıldı!</string>
     <string name="areYouSure">Oynatma listesini silmek istediğinize emin misiniz\?</string>
