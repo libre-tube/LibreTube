@@ -3,7 +3,7 @@
     <string name="search_hint">Cerca</string>
     <string name="loggedIn">Autenticato con Successo!</string>
     <string name="yes">Sì</string>
-    <string name="choose_quality_dialog">Scegli Qualità:</string>
+    <string name="choose_quality_dialog">Scegli qualità:</string>
     <string name="unsubscribe">DISISCRIVITI</string>
     <string name="share">Condividi</string>
     <string name="download">Scarica</string>
@@ -19,17 +19,17 @@
     <string name="password">Password</string>
     <string name="subscribe">Iscriviti</string>
     <string name="cannotDownload">Impossibile scaricare!</string>
-    <string name="dlcomplete">Download Completato!</string>
-    <string name="downloadfailed">Download Fallito!</string>
+    <string name="dlcomplete">Scaricamento completato!</string>
+    <string name="downloadfailed">Scaricamento fallito!</string>
     <string name="vlc">Apri in VLC</string>
     <string name="vlcerror">Impossibile aprirlo in VLC. Forse non è ancora installato\?</string>
-    <string name="import_from_yt">Importa iscrizioni da Youtube</string>
-    <string name="app_theme">Tema dell\'App</string>
+    <string name="import_from_yt">Importa iscrizioni da YouTube</string>
+    <string name="app_theme">Tema dell\'app</string>
     <string name="error">Qualcosa è andato storto!</string>
-    <string name="empty">Utente e Password non possono essere vuoti!</string>
+    <string name="empty">Il nome utente e la password non possono essere vuoti!</string>
     <string name="notgmail">Non è il tuo account Gmail!</string>
     <string name="defres">Risoluzione video di Default</string>
-    <string name="dlisinprogress">Un altro Download è in Scaricamento, aspetta che finisca!</string>
+    <string name="dlisinprogress">Un altro scaricamento è già in corso, si prega di aspettare che sia finito!</string>
     <string name="unknown_error">Errore di connessione!</string>
     <string name="server_error">Il server ha un problema. Prova un\'altra istanza\?</string>
     <string name="customInstance">Aggiungi un\'istanza personalizzata</string>
@@ -37,8 +37,8 @@
     <string name="success">Successo!</string>
     <string name="fail">Fallito :(</string>
     <string name="emptyList">Non c\'è Nulla!</string>
-    <string name="deletePlaylist">Cancella Playlist</string>
-    <string name="areYouSure">Sei sicuro di volerla Eliminare\?</string>
+    <string name="deletePlaylist">Elimina la playlist</string>
+    <string name="areYouSure">Sei sicuro/a di volerla eliminare\?</string>
     <string name="grid">Scegli le colonne della griglia</string>
     <string name="save">Salva</string>
     <string name="region">Scegli una Regione</string>
@@ -46,9 +46,9 @@
     <string name="login_register">Accedi/Registrati</string>
     <string name="please_login">Accedi o Registrati nelle impostazioni prima!</string>
     <string name="subscribeIsEmpty">Iscriviti prima ad alcuni canali!</string>
-    <string name="createPlaylist">Crea Playlist</string>
-    <string name="playlistCreated">Playlist Creata!</string>
-    <string name="playlistName">Nome Playilist</string>
-    <string name="addToPlaylist">Aggiungi a Playlist</string>
+    <string name="createPlaylist">Crea playlist</string>
+    <string name="playlistCreated">Playlist creata!</string>
+    <string name="playlistName">Nome playlist</string>
+    <string name="addToPlaylist">Aggiungi a playlist</string>
     <string name="about">Informazioni</string>
 </resources>
