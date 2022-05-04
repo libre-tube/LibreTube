@@ -46,6 +46,7 @@
     <string name="createPlaylist">Create Playlist</string>
     <string name="playlistCreated">Playlist created!</string>
     <string name="playlistName">Playlist Name</string>
+    <string name="emptyPlaylistName">The playlist name can\'t be empty</string>
     <string name="addToPlaylist">Add to Playlist</string>
     <string name="success">Success!</string>
     <string name="fail">Failed :(</string>
