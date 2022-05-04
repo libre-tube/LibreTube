@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_hint">Suche</string>
-    <string name="subscribe">ABONNIEREN</string>
+    <string name="subscribe">Abonnieren</string>
     <string name="share">Teilen</string>
     <string name="username">Benutzername</string>
     <string name="password">Passwort</string>
@@ -25,7 +25,7 @@
     <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eventuell eine andere Instanz\?</string>
     <string name="unknown_error">Netzwerkfehler!</string>
     <string name="error">Ups! Etwas ist schiefgelaufen!</string>
-    <string name="notgmail">Dies ist nicht dein Gmail-Account!</string>
+    <string name="notgmail">Dies ist nicht dein Gmail-Konto!</string>
     <string name="defres">Standard-Auflösung</string>
     <string name="grid">Spaltenanzahl</string>
     <string name="emptyList">Gähnende Leere!</string>
