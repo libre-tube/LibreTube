@@ -50,4 +50,5 @@
     <string name="server_error">تعرض الخادم لخطأ ما. لما لا تجرب نظير آخر؟</string>
     <string name="error">حدث خطأ ما!</string>
     <string name="addToPlaylist">إضافة إلى قائمة التشغيل</string>
+    <string name="about">معلومة</string>
 </resources>

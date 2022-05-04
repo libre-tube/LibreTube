@@ -29,7 +29,7 @@
     <string name="notgmail">Esta não é sua conta do Gmail!</string>
     <string name="defres">Resolução de vídeo padrão</string>
     <string name="grid">Número de colunas da grade</string>
-    <string name="emptyList">Nada aqui!</string>
+    <string name="emptyList">Não há nada aqui!</string>
     <string name="deletePlaylist">Excluir playlist</string>
     <string name="areYouSure">Tem certeza de que deseja excluir esta playlist\?</string>
     <string name="createPlaylist">Criar playlist</string>
@@ -46,8 +46,9 @@
     <string name="please_login">Por favor, faça login ou registre-se nas configurações primeiro!</string>
     <string name="dlisinprogress">Outro download já está em andamento, por favor aguarde até que seja concluído!</string>
     <string name="vlc">Abrir no VLC</string>
-    <string name="vlcerror">Não é possível abrir no VLC. Talvez ainda não esteja instalado, não\?</string>
+    <string name="vlcerror">Não é possível abrir no VLC. Talvez ainda não esteja instalado.</string>
     <string name="import_from_yt">Importar inscrições do YouTube</string>
     <string name="empty">Nome de usuário e senha não podem estar vazios!</string>
     <string name="fail">Falhou</string>
+    <string name="about">Sobre</string>
 </resources>
