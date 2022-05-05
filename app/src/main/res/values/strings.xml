@@ -53,4 +53,5 @@
     <string name="success">Success!</string>
     <string name="fail">Failed :(</string>
     <string name="about">About</string>
+    <string name="changeLanguage">Change Language</string>
 </resources>

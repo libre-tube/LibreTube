@@ -12,6 +12,16 @@
         />
 
     <ListPreference
+        app:key="language"
+        app:title="@string/changeLanguage"
+        app:entries="@array/languages"
+        app:entryValues="@array/languagesValue"
+        app:defaultValue="en"
+        app:useSimpleSummaryProvider="true"
+        android:icon="@drawable/ic_language"
+        />
+
+    <ListPreference
         app:key="instance"
         app:title="@string/instances"
         app:entries="@array/instances"
