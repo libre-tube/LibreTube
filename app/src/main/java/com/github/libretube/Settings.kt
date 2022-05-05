@@ -21,6 +21,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import org.json.JSONArray
+import org.json.JSONObject
+import org.json.JSONTokener
 import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
@@ -47,33 +50,43 @@ class Settings : PreferenceFragmentCompat() {
 
                     // "rw" for read-and-write;
                     // "rwt" for truncating or overwriting existing file contents.
-                    val readOnlyMode = "r"
+                    //val readOnlyMode = "r"
                     // uri - I have got from onActivityResult
                     val type = resolver.getType(uri)
 
                     var inputStream: InputStream? = resolver.openInputStream(uri)
-
-                    if (type == "application/zip") {
-                        val zis = ZipInputStream(inputStream)
-                        var entry: ZipEntry? = zis.nextEntry
-                        while (entry != null) {
-                            if (entry.name.endsWith(".csv")) {
-                                inputStream = zis
-                                break
-                            }
-                            entry = zis.nextEntry
-                        }
-                    }
                     val channels = ArrayList<String>()
+                    if(type == "application/json"){
+                        val json = inputStream?.bufferedReader()?.readLines()?.get(0)
+                        val jsonObject = JSONTokener(json).nextValue() as JSONObject
+                        Log.e(TAG,jsonObject.getJSONArray("subscriptions").toString())
+                        for (i in 0 until jsonObject.getJSONArray("subscriptions").length()) {
+                            var url = jsonObject.getJSONArray("subscriptions").getJSONObject(i).getString("url")
+                            url = url.replace("https://www.youtube.com/channel/","")
+                            Log.e(TAG,url)
+                            channels.add(url)
+                        }
+                    }else {
+                        if (type == "application/zip") {
+                            val zis = ZipInputStream(inputStream)
+                            var entry: ZipEntry? = zis.nextEntry
+                            while (entry != null) {
+                                if (entry.name.endsWith(".csv")) {
+                                    inputStream = zis
+                                    break
+                                }
+                                entry = zis.nextEntry
+                            }
+                        }
 
-                    inputStream?.bufferedReader()?.readLines()?.forEach {
-                        if (it.isNotBlank()) {
-                            val channelId = it.substringBefore(",")
-                            if (channelId.length == 24)
-                                channels.add(channelId)
+                        inputStream?.bufferedReader()?.readLines()?.forEach {
+                            if (it.isNotBlank()) {
+                                val channelId = it.substringBefore(",")
+                                if (channelId.length == 24)
+                                    channels.add(channelId)
+                            }
                         }
                     }
-
                     inputStream?.close()
 
                     subscribe(channels)
