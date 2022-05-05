@@ -1,2 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="unsubscribe">Απεγγραφή</string>
+    <string name="username">Όνομα Χρήστη</string>
+    <string name="password">Κωδικός Πρόσβασης</string>
+    <string name="login">Σύνδεση</string>
+    <string name="already_logged_in">Έχετε ήδη συνδεθεί. Μπορείτε να αποσυνδεθείτε από τον λογαριασμό σας.</string>
+    <string name="login_first">Παρακαλώ συνδεθείτε και προσπαθήστε πάλι!</string>
+    <string name="instances">Επιλέξτε instance</string>
+    <string name="customInstance">Προσθέστε άλλο instance</string>
+    <string name="region">Επιλέξτε Περιοχή</string>
+    <string name="login_register">Σύνδεση/Δημιουργία Λογαριασμού</string>
+    <string name="please_login">Παρακαλώ συνδεθείτε ή εγγραφείτε πρώτα στις ρυθμίσεις.</string>
+    <string name="cannotDownload">Αποτυχία λήψης αυτού του stream.</string>
+    <string name="dlcomplete">Επιτυχής Λήψη.</string>
+    <string name="dlisinprogress">Μια άλλη λήψη βρίσκεται ήδη σε εξέλιξη. Περιμένετε μέχρι να τελειώσει.</string>
+    <string name="downloadfailed">Ανεπιτυχής Λήψη.</string>
+    <string name="vlc">Ανοίξτε στο VLC</string>
+    <string name="vlcerror">Το βίντεο δεν κατάφερε να ανοίξει στο VLC. Ίσως δεν είναι εγκατεστημένο;</string>
+    <string name="import_from_yt">Εισαγωγή Εγγράφων</string>
+    <string name="import_from_yt_summary">Από το YouTube ή το NewPipe</string>
+    <string name="app_theme">Θέμα</string>
+    <string name="server_error">Υπάρχει πρόβλημα με τον διακομιστή. Μήπως να δοκιμάσετε άλλο instance;</string>
+    <string name="unknown_error">Πρόβλημα Δικτύου.</string>
+    <string name="error">Κάτι πήγε λάθος.</string>
+    <string name="empty">Πρέπει να εισάγετε όνομα χρήστη και κωδικό πρόσβασης.</string>
+    <string name="deletePlaylist">Διαγραφή λίστας αναπαραγωγής</string>
+    <string name="areYouSure">Διαγραφή της λίστας αναπαραγωγής;</string>
+    <string name="search_hint">Αναζήτηση</string>
+    <string name="subscribe">Εγγραφή</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="register">Δημιουργία Λογαριασμού</string>
+    <string name="createPlaylist">Δημιουργία λίστας αναπαραγωγής</string>
+    <string name="playlistCreated">Η λίστα αναπαραγωγής δημιουργήθηκε!</string>
+    <string name="playlistName">Όνομα λίστας αναπαραγωγής</string>
+    <string name="emptyPlaylistName">Το όνομα της λίστας αναπαραγωγής δεν γίνεται να είναι άδειο</string>
+    <string name="addToPlaylist">Προσθέστε στην λίστα αναπαραγωγής</string>
+    <string name="success">Επιτυχία!</string>
+    <string name="fail">Αποτυχία :(</string>
+    <string name="about">Σχετικά με</string>
+    <string name="share">Κοινοποίηση</string>
+    <string name="yes">Ναι</string>
+    <string name="choose_quality_dialog">Επιλέξτε Ποιότητα:</string>
+    <string name="download">Λήψη</string>
+    <string name="registered">Εγγεγραμμένος. Τώρα μπορείς να εγγραφείς σε κανάλια.</string>
+    <string name="logout">Αποσύνδεση</string>
+    <string name="cancel">Ακύρωση</string>
+    <string name="loggedout">Αποσυνδέθηκε</string>
+    <string name="loggedIn">Συνδέθηκε</string>
+    <string name="importsuccess">Εγγεγραμμένος.</string>
+    <string name="subscribeIsEmpty">Εγγραφείτε σε μερικά κανάλια πρώτα .</string>
+    <string name="grid">Επιλέξτε στήλες πλέγματος</string>
+    <string name="notgmail">Αυτός δεν είναι ο λογαριασμός Gmail σας.</string>
+    <string name="defres">Προεπιλεγμένη ανάλυση βίντεο</string>
+    <string name="emptyList">Τίποτα εδώ.</string>
+</resources>
