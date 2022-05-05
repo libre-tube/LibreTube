@@ -51,4 +51,5 @@
     <string name="createPlaylist">Luo soittolista</string>
     <string name="playlistName">Soittolistan nimi</string>
     <string name="addToPlaylist">Lisää soittolistaan</string>
+    <string name="emptyPlaylistName">Soittolistan nimi ei voi olla tyhjä</string>
 </resources>
