@@ -46,8 +46,9 @@
     <string name="areYouSure">Delete the playlist?</string>
     <string name="createPlaylist">Create playlist</string>
     <string name="playlistCreated">Playlist created!</string>
-    <string name="playlistName">Playlist name</string>
-    <string name="addToPlaylist">Add to playlist</string>
+    <string name="playlistName">Playlist Name</string>
+    <string name="emptyPlaylistName">The playlist name can\'t be empty</string>
+    <string name="addToPlaylist">Add to Playlist</string>
     <string name="success">Success!</string>
     <string name="fail">Failed :(</string>
     <string name="about">About</string>

@@ -3,21 +3,20 @@ package com.github.libretube
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.PlaylistsAdapter
-import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.obj.Playlists
-import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -59,10 +58,13 @@ class Library : Fragment() {
                 Log.d(TAG,"hmm")
                 fetchPlaylists(view)
             }
-            val playlistName = view.findViewById<EditText>(R.id.playlists_name)
             view.findViewById<Button>(R.id.create_playlist).setOnClickListener {
-                if(playlistName.text.toString()!="") createPlaylist(playlistName.text.toString(),view)
-                hideKeyboard()
+                val newFragment = CreatePlaylistDialog()
+                newFragment.show(childFragmentManager, "Create Playlist")
+            }
+            childFragmentManager.setFragmentResultListener("key_parent", this) { _, result->
+                val playlistName = result.getString("playlistName")
+                createPlaylist("$playlistName", view);
             }
         } else{
             with(view.findViewById<ImageView>(R.id.boogh2)){
