@@ -3,7 +3,7 @@
     <string name="registered">Sikeres regisztráció! Mostantól feliratkozhatsz csatornákra.</string>
     <string name="already_logged_in">Már be vagy jelentkezve, ha akarsz kijelentkezhetsz a fiókódból.</string>
     <string name="search_hint">Keresés</string>
-    <string name="unsubscribe">LEIRATKOZÁS</string>
+    <string name="unsubscribe">Leiratkozás</string>
     <string name="share">Megosztás</string>
     <string name="username">Felhasználónév</string>
     <string name="cancel">Mégse</string>
@@ -28,7 +28,7 @@
     <string name="success">Sikerült!</string>
     <string name="yes">Igen</string>
     <string name="logout">Kilépés</string>
-    <string name="subscribe">FELIRATKOZÁS</string>
+    <string name="subscribe">Feliratkozás</string>
     <string name="choose_quality_dialog">Válassz minőséget:</string>
     <string name="download">Letöltés</string>
     <string name="save">Mentés</string>
@@ -50,4 +50,5 @@
     <string name="notgmail">Ez nem a GMail fiókod!</string>
     <string name="playlistName">Lejátszási lista neve</string>
     <string name="fail">Nem sikerült :(</string>
+    <string name="about">A programról</string>
 </resources>
