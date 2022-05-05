@@ -651,10 +651,10 @@ class PlayerFragment : Fragment() {
                     true
                 )
 
-                val ColorText = TypedValue()
+                val colorText = TypedValue()
                 (context as Activity).theme.resolveAttribute(
                     R.attr.colorOnSurface,
-                    ColorText,
+                    colorText,
                     true
                 )
 
@@ -662,7 +662,7 @@ class PlayerFragment : Fragment() {
                     if (response.subscribed == true) {
                         isSubscribed = true
                         button.text = getString(R.string.unsubscribe)
-                        button.setTextColor(ColorText.data)
+                        button.setTextColor(colorText.data)
                     }
                     if (response.subscribed != null) {
                         button.setOnClickListener {
@@ -673,7 +673,7 @@ class PlayerFragment : Fragment() {
                             } else {
                                 subscribe(channel_id)
                                 button.text = getString(R.string.unsubscribe)
-                                button.setTextColor(colorPrimary.data)
+                                button.setTextColor(colorText.data)
                             }
                         }
                     }
