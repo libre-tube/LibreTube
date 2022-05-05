@@ -6,9 +6,9 @@
     <string name="password">Parola</string>
     <string name="unsubscribe">Abonelikten çık</string>
     <string name="registered">Kaydoldunuz. Artık istediğiniz kanala abone olabilirsiniz.</string>
-    <string name="dlcomplete">İndirme tamamlandı.</string>
-    <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene kadar bekleyin.</string>
-    <string name="downloadfailed">İndirme başarısız.</string>
+    <string name="dlcomplete">İndirme bitti.</string>
+    <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene değin bekleyin.</string>
+    <string name="downloadfailed">İndirme bitirilemedi.</string>
     <string name="app_theme">Tema</string>
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Bir kullanıcı adı ve parola girmelisiniz.</string>
@@ -48,9 +48,9 @@
     <string name="about">Hakkında</string>
     <string name="vlcerror">VLC\'de açılamıyor. Cihazınızda yüklü olduğuna emin misiniz\?</string>
     <string name="instances">Bir erişim aracısı seçin</string>
-    <string name="customInstance">Bir erişim aracı ekle</string>
+    <string name="customInstance">Dilediğiniz bir erişim aracısını ekleyin</string>
     <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracısını deneyebilir misiniz\?</string>
     <string name="grid">Sütun sayısını seçin</string>
-    <string name="import_from_yt_summary">Youtube veya Newpipe\'tan</string>
+    <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
 </resources>
