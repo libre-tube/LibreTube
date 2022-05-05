@@ -9,7 +9,7 @@
     <string name="dlcomplete">İndirme bitti.</string>
     <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene değin bekleyin.</string>
     <string name="downloadfailed">İndirme bitirilemedi.</string>
-    <string name="app_theme">Görünüş</string>
+    <string name="app_theme">Görünüm</string>
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Bir kullanıcı adı ve parola girmelisiniz.</string>
     <string name="notgmail">Bu, sizin Gmail hesabınız değildir.</string>
