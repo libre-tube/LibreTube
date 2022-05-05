@@ -18,7 +18,7 @@
     <string name="vlcerror">Megnyitás VLC-ben sikertelen, talán még nincs telepítve\?</string>
     <string name="import_from_yt">Feliratkozások imporálása Youtube-ról</string>
     <string name="server_error">Szerver hiba. Megpróbálod egy másik instance-al\?</string>
-    <string name="unknown_error">Hálózati hiba!</string>
+    <string name="unknown_error">Hálózati hiba.</string>
     <string name="empty">A felhasználónév és jelszó mezők nem lehetnek üresek!</string>
     <string name="defres">Alapértelmezett videó felbontás</string>
     <string name="deletePlaylist">Lejátszási lista törlése</string>
@@ -42,9 +42,9 @@
     <string name="dlisinprogress">Egy másik letöltés már folyamatban van, kérlek várj amíg befejeződik!</string>
     <string name="customInstance">Egyedi instance hozzáadása</string>
     <string name="dlcomplete">Sikeres letöltés!</string>
-    <string name="importsuccess">Sikeres feliratkozás!</string>
+    <string name="importsuccess">Sikeres feliratkozás.</string>
     <string name="subscribeIsEmpty">Iratkozz fel előbb néhány csatornára!</string>
-    <string name="error">Valami gond van!</string>
+    <string name="error">Valami gond van.</string>
     <string name="region">Válassz régiót</string>
     <string name="grid">Válaszd ki a rács elrendezés oszlopait</string>
     <string name="notgmail">Ez nem a GMail fiókod!</string>
