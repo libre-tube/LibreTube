@@ -44,11 +44,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var languageName = sharedPreferences.getString("language", "en")!!
         if (languageName != "") {
-            val locale = Locale("$languageName")
+            val locale = Locale(languageName)
             val res = resources
             val dm = res.displayMetrics
             val conf = res.configuration
-            conf.locale = locale
+            conf.setLocale(locale)
+            Locale.setDefault(locale)
             res.updateConfiguration(conf, dm)
         }
         when (sharedPreferences.getString("theme_togglee", "A")!!) {

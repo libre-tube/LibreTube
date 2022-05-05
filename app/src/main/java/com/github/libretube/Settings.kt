@@ -195,18 +195,8 @@ class Settings : PreferenceFragmentCompat() {
         }
 
         val changeLanguage = findPreference<ListPreference>("language")
-        changeLanguage?.setOnPreferenceChangeListener { _, languageName ->
-            val locale = Locale("$languageName")
-            val res = resources
-            val dm = res.displayMetrics
-            val conf = res.configuration
-            conf.locale = locale
-            res.updateConfiguration(conf, dm)
-            val refresh = Intent(
-                context,
-                MainActivity::class.java
-            )
-            refresh.putExtra("$languageName", "$languageName")
+        changeLanguage?.setOnPreferenceChangeListener { _, _ ->
+            val refresh = Intent(context, MainActivity::class.java)
             startActivity(refresh)
             true
         }
