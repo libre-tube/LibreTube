@@ -6,14 +6,14 @@
     <string name="password">Parola</string>
     <string name="unsubscribe">Abonelikten çık</string>
     <string name="registered">Kaydoldunuz. Artık istediğiniz kanala abone olabilirsiniz.</string>
-    <string name="dlcomplete">İndirme tamamlandı.</string>
-    <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene kadar bekleyin.</string>
+    <string name="dlcomplete">İndirme bitti.</string>
+    <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene değin bekleyin.</string>
     <string name="downloadfailed">İndirme bitirilemedi.</string>
     <string name="app_theme">Görünüş</string>
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Bir kullanıcı adı ve parola girmelisiniz.</string>
     <string name="notgmail">Bu, sizin Gmail hesabınız değildir.</string>
-    <string name="defres">Varsayılan Video Çözünürlüğü</string>
+    <string name="defres">Varsayılan video çözünürlüğü</string>
     <string name="deletePlaylist">Oynatma listesini sil</string>
     <string name="createPlaylist">Oynatma listesi oluştur</string>
     <string name="fail">Başarısız oldu :(</string>
