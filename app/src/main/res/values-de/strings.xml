@@ -57,5 +57,5 @@
     <string name="systemDefault">Automatisch</string>
     <string name="lightTheme">Hell</string>
     <string name="darkTheme">Dunkel</string>
-    <string name="subscribers">#subCount Abonnenten</string>
+    <string name="subscribers">%1$s Abonnenten</string>
 </resources>
