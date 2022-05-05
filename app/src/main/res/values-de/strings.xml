@@ -6,7 +6,6 @@
     <string name="search_hint">Suche</string>
     <string name="subscribe">ABONNIEREN</string>
     <string name="unsubscribe">ABONNIERT</string>
-    <string name="subscribers">Abonnenten</string>
     <string name="videos">Videos</string>
     <string name="share">Teilen</string>
     <string name="username">Benutzername</string>
@@ -58,4 +57,5 @@
     <string name="systemDefault">Automatisch</string>
     <string name="lightTheme">Hell</string>
     <string name="darkTheme">Dunkel</string>
+    <string name="subscribers">#subCount Abonnenten</string>
 </resources>

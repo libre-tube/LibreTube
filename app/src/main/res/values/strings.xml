@@ -7,7 +7,6 @@
     <string name="search_hint">Search</string>
     <string name="subscribe">SUBSCRIBE</string>
     <string name="unsubscribe">UNSUBSCRIBE</string>
-    <string name="subscribers">subscribers</string>
     <string name="videos">Videos</string>
     <string name="share">Share</string>
     <string name="download">Download</string>
@@ -58,4 +57,5 @@
     <string name="systemDefault">System Default</string>
     <string name="lightTheme">Light Theme</string>
     <string name="darkTheme">Dark Theme</string>
+    <string name="subscribers">#subCount subscribers</string>
 </resources>
