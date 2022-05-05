@@ -51,4 +51,5 @@
     <string name="deletePlaylist">Wiedergabeliste löschen</string>
     <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
     <string name="about">Über</string>
+    <string name="emptyPlaylistName">Der Name der Wiedergabeliste darf nicht leer sein</string>
 </resources>
