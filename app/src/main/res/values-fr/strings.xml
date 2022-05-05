@@ -51,4 +51,5 @@
     <string name="playlistCreated">Liste de lecture créée !</string>
     <string name="playlistName">Nom de la liste de lecture</string>
     <string name="about">À propos</string>
+    <string name="emptyPlaylistName">Le nom de la liste de lecture ne peut pas être vide</string>
 </resources>
