@@ -24,7 +24,7 @@
     <string name="region">Choose a region</string>
     <string name="login_register">Log in/Register</string>
     <string name="please_login">Please log in or register in the settings first.</string>
-    <string name="importsuccess">Subscribed.</string>
+    <string name="importsuccess">Subscribed</string>
     <string name="subscribeIsEmpty">Subscribe to some channels first.</string>
     <string name="cannotDownload">Can\'t download this stream.</string>
     <string name="dlcomplete">Download completed.</string>
