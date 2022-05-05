@@ -34,10 +34,10 @@
     <string name="login_register">Girin/Kaydolun</string>
     <string name="please_login">Önce ayarlardan girin veya kaydolun, lütfen!</string>
     <string name="importsuccess">Abone olundu</string>
-    <string name="subscribeIsEmpty">Önce birkaç kanala abone olun!</string>
+    <string name="subscribeIsEmpty">Önce birkaç kanala abone olun.</string>
     <string name="cannotDownload">Bu görüntü indirilemiyor.</string>
     <string name="vlc">VLC\'de aç</string>
-    <string name="import_from_yt">Abonelikleri YouTube\'dan içe aktar</string>
+    <string name="import_from_yt">Abonelikleri içe aktar</string>
     <string name="error">Bir şeyler ters gitti.</string>
     <string name="emptyList">Burada hiçbir şey yok.</string>
     <string name="playlistCreated">Oynatma listesi oluşturuldu!</string>
@@ -51,4 +51,6 @@
     <string name="customInstance">Bir erişim aracı ekle</string>
     <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracısını deneyebilir misiniz\?</string>
     <string name="grid">Sütun sayısını seçin</string>
+    <string name="import_from_yt_summary">Youtube veya Newpipe\'tan</string>
+    <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
 </resources>
