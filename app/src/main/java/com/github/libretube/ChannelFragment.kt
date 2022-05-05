@@ -116,17 +116,17 @@ class ChannelFragment : Fragment() {
                     colorPrimary,
                     true)
 
-                val ColorText = TypedValue()
+                val colorText = TypedValue()
                 (context as Activity).theme.resolveAttribute(
                     R.attr.colorOnSurface,
-                    ColorText,
+                    colorText,
                     true)
 
                 runOnUiThread {
                     if (response.subscribed==true){
                         isSubscribed=true
                         button.text=getString(R.string.unsubscribe)
-                        button.setTextColor(ColorText.data)
+                        button.setTextColor(colorText.data)
 
                     }
                     if(response.subscribed!=null){
@@ -140,7 +140,7 @@ class ChannelFragment : Fragment() {
                         }else{
                             subscribe()
                             button.text=getString(R.string.unsubscribe)
-                            button.setTextColor(ColorText.data)
+                            button.setTextColor(colorText.data)
                         }
                     }}
                 }

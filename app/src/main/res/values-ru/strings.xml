@@ -3,7 +3,7 @@
     <string name="yes">Да</string>
     <string name="choose_quality_dialog">Выберите качество:</string>
     <string name="search_hint">Поиск</string>
-    <string name="subscribe">ПОДПИСАТЬСЯ</string>
+    <string name="subscribe">Подписаться</string>
     <string name="unsubscribe">ОТПИСАТЬСЯ</string>
     <string name="share">Поделиться</string>
     <string name="download">Скачать</string>
@@ -50,4 +50,5 @@
     <string name="addToPlaylist">Добавить в плейлист</string>
     <string name="success">Получилось!</string>
     <string name="fail">Не получилось :(</string>
+    <string name="about">О нас</string>
 </resources>

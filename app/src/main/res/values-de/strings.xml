@@ -54,6 +54,7 @@
     <string name="empty">Benutzername und Passwort können nicht leer sein!</string>
     <string name="deletePlaylist">Wiedergabeliste löschen</string>
     <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
+    <string name="about">Über</string>  
     <string name="systemDefault">Automatisch</string>
     <string name="lightTheme">Hell</string>
     <string name="darkTheme">Dunkel</string>
