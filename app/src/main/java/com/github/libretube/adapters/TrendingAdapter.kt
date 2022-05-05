@@ -73,6 +73,7 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
                 .replace(R.id.container, frag)
                 .commitNow()
         }
+        holder.v.setOnLongClickListener { TODO("Not yet implemented") }
     }
 }
 class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v){
