@@ -32,7 +32,8 @@
     <string name="downloadfailed">Download failed.</string>
     <string name="vlc">Open in VLC</string>
     <string name="vlcerror">Can\'t open in VLC. Maybe it\'s not installed?</string>
-    <string name="import_from_yt">Import subscriptions from YouTube</string>
+    <string name="import_from_yt">Import subscriptions</string>
+    <string name="import_from_yt_summary">From Youtube or Newpipe</string>
     <string name="app_theme">Theme</string>
     <string name="server_error">There is a problem with the server. Try another instance?</string>
     <string name="unknown_error">Network error.</string>
