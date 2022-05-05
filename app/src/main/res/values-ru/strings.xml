@@ -31,10 +31,10 @@
     <string name="dlisinprogress">Другая загрузка уже идет, пожалуйста, подождите, пока она завершится!</string>
     <string name="downloadfailed">Загрузка не удалась!</string>
     <string name="vlc">Открыть в VLC</string>
-    <string name="vlcerror">Не удается открыть в VLC. Может быть он не установлен?</string>
+    <string name="vlcerror">Не удается открыть в VLC. Может быть он не установлен\?</string>
     <string name="import_from_yt">Импортировать подписки с YouTube</string>
     <string name="app_theme">Тема приложения</string>
-    <string name="server_error">На сервере возникла проблема. Может быть, попробовать другой экземпляр?</string>
+    <string name="server_error">На сервере возникла проблема. Может быть, попробовать другой экземпляр\?</string>
     <string name="unknown_error">Ошибка сети!</string>
     <string name="error">Что-то пошло не так!</string>
     <string name="empty">Имя пользователя и пароль не могут быть пустыми!</string>
@@ -43,7 +43,7 @@
     <string name="grid">Выберите столбцы сетки</string>
     <string name="emptyList">Ничего здесь нет!</string>
     <string name="deletePlaylist">Удалить список воспроизведения</string>
-    <string name="areYouSure">Вы уверены, что хотите удалить этот плейлист?</string>
+    <string name="areYouSure">Вы уверены, что хотите удалить этот плейлист\?</string>
     <string name="createPlaylist">Создать плейлист</string>
     <string name="playlistCreated">Плейлист создан!</string>
     <string name="playlistName">Имя плейлиста</string>
