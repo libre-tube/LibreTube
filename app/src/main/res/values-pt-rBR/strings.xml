@@ -23,7 +23,7 @@
     <string name="downloadfailed">Falha no Download!</string>
     <string name="vlc">Abrir no VLC</string>
     <string name="vlcerror">Não é possível abrir no VLC. Talvez ainda não esteja instalado\?</string>
-    <string name="import_from_yt">Importar inscrições do Youtube</string>
+    <string name="import_from_yt">Importar inscrições</string>
     <string name="app_theme">Tema do aplicativo</string>
     <string name="server_error">O servidor encontrou um problema. Talvez tentar outra instância\?</string>
     <string name="unknown_error">Erro de rede!</string>
@@ -51,4 +51,16 @@
     <string name="region">Escolha uma região</string>
     <string name="importsuccess">Inscrito</string>
     <string name="areYouSure">Tem certeza de que deseja excluir esta playlist\?</string>
+    <string name="emptyPlaylistName">O nome da playlist não pode estar vazio</string>
+    <string name="subscriptions">Inscricoes</string>
+    <string name="videos">Videos</string>
+    <string name="changeLanguage">Mudar idioma</string>
+    <string name="systemLanguage">Idioma do sistema</string>
+    <string name="systemDefault">Padrão do sistema</string>
+    <string name="lightTheme">Tema claro</string>
+    <string name="darkTheme">Tema escuro</string>
+    <string name="import_from_yt_summary">Do YouTube ou NewPipe</string>
+    <string name="subscribers">%1$s inscrições</string>
+    <string name="library">Biblioteca</string>
+    <string name="startpage">Início</string>
 </resources>
