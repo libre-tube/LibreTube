@@ -42,7 +42,7 @@
     <string name="grid">Scegli le colonne della griglia</string>
     <string name="save">Salva</string>
     <string name="region">Scegli una Regione</string>
-    <string name="importsuccess">Sottoscritto.</string>
+    <string name="importsuccess">Sottoscritto</string>
     <string name="login_register">Accedi/Registrati</string>
     <string name="please_login">Accedi o Registrati nelle impostazioni prima!</string>
     <string name="subscribeIsEmpty">Iscriviti prima ad alcuni canali.</string>
@@ -52,4 +52,15 @@
     <string name="addToPlaylist">Aggiungi a playlist</string>
     <string name="about">Informazioni</string>
     <string name="emptyPlaylistName">Il nome della playlist non può essere vuoto</string>
+    <string name="library">Raccolta</string>
+    <string name="videos">Video</string>
+    <string name="import_from_yt_summary">Da YouTube o Newpipe</string>
+    <string name="systemDefault">Predefinito del sistema</string>
+    <string name="startpage">Pagina principale</string>
+    <string name="subscribers">%1$s abbonati</string>
+    <string name="subscriptions">Abbonamenti</string>
+    <string name="changeLanguage">Cambia la lingua</string>
+    <string name="systemLanguage">Lingua del sistema</string>
+    <string name="lightTheme">Tema chiaro</string>
+    <string name="darkTheme">Tema scuro</string>
 </resources>
