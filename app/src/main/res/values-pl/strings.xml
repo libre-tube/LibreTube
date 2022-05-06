@@ -28,7 +28,7 @@
     <string name="dlisinprogress">Pobieranie innego materiału trwa, poczekaj aż proces zostanie ukończony!</string>
     <string name="downloadfailed">Pobieranie nie udało się!</string>
     <string name="logout">Wyloguj się</string>
-    <string name="import_from_yt">Importuj listę subskrybcji z YouTube</string>
+    <string name="import_from_yt">Importuj subskrybcje</string>
     <string name="app_theme">Motyw aplikacji</string>
     <string name="server_error">Serwer napotkał problem. Spróbuj może użyć innej instancji\?</string>
     <string name="unknown_error">Błąd sieci!</string>
@@ -51,4 +51,16 @@
     <string name="vlcerror">Nie można otworzyć w programie VLC. Sprawdź, czy jest zainstalowany!</string>
     <string name="areYouSure">Na pewno chcesz usunąć tę palistę\?</string>
     <string name="addToPlaylist">Dodaj do playlisty</string>
+    <string name="emptyPlaylistName">Nazwa playlisty nie może być pusta</string>
+    <string name="import_from_yt_summary">Z YouTube lub NewPipe</string>
+    <string name="videos">Filmy</string>
+    <string name="changeLanguage">Zmień język</string>
+    <string name="systemLanguage">Język systemowy</string>
+    <string name="systemDefault">Motyw systemu</string>
+    <string name="lightTheme">Tryb jasny</string>
+    <string name="subscribers">%1$s subskrypcji</string>
+    <string name="startpage">Główna</string>
+    <string name="darkTheme">Tryb ciemny</string>
+    <string name="subscriptions">Subskrypcje</string>
+    <string name="library">Biblioteka</string>
 </resources>
