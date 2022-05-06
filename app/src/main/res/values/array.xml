@@ -406,9 +406,9 @@
     </string-array>
 
     <string-array name="themes">
-        <item>System Default</item>
-        <item>Light Theme</item>
-        <item>Dark Theme</item>
+        <item>@string/systemDefault</item>
+        <item>@string/lightTheme</item>
+        <item>@string/darkTheme</item>
     </string-array>
 
     <string-array name="themesValue">
