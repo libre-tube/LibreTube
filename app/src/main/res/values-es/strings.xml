@@ -2,7 +2,7 @@
 <resources>
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
-    <string name="subscribe">Subscribirse</string>
+    <string name="subscribe">Suscribirse</string>
     <string name="unsubscribe">Desuscribirse</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
@@ -20,7 +20,7 @@
     <string name="instances">Elija una instancia</string>
     <string name="customInstance">Añadir una instancia personalizada</string>
     <string name="login_register">Iniciar sesión/registrarse</string>
-    <string name="please_login">Por favor, inicie sesión o regístrese en los ajustes primero!</string>
+    <string name="please_login">Por favor, inicie sesión o regístrese primero en los ajustes.</string>
     <string name="importsuccess">¡Suscrito con éxito!</string>
     <string name="subscribeIsEmpty">Suscríbase primero a algunos canales!</string>
     <string name="loggedout">¡Se ha cerrado sesión con éxito!</string>
@@ -52,4 +52,8 @@
     <string name="addToPlaylist">Añadir a la lista de reproducción</string>
     <string name="about">Acerca de</string>
     <string name="emptyPlaylistName">El nombre de la lista de reproducción no puede estar vacío</string>
+    <string name="startpage">Inicio</string>
+    <string name="subscriptions">Suscripciones</string>
+    <string name="library">Librería</string>
+    <string name="videos">Videos</string>
 </resources>
