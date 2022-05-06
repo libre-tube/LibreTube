@@ -405,10 +405,56 @@
         <item>ZW</item>
     </string-array>
 
+    <string-array name="languages">
+        <item>@string/systemLanguage</item>
+        <item>Arabic</item>
+        <item>Czech</item>
+        <item>English</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Hindi</item>
+        <item>Hungarian</item>
+        <item>Italian</item>
+        <item>Korean</item>
+        <item>Marathi</item>
+        <item>Norwegian</item>
+        <item>Persian</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Portuguese (Brazil)</item>
+        <item>Russian</item>
+        <item>Sorani</item>
+        <item>Spanish</item>
+        <item>Turkish</item>
+    </string-array>
+
+    <string-array name="languagesValue">
+        <item>sys</item>
+        <item>ar</item>
+        <item>cs</item>
+        <item>en</item>
+        <item>fr</item>
+        <item>de</item>
+        <item>hi</item>
+        <item>hu</item>
+        <item>it</item>
+        <item>ko</item>
+        <item>mr</item>
+        <item>nb-rNO</item>
+        <item>ckb</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>pr-rBR</item>
+        <item>ru</item>
+        <item>fa</item>
+        <item>es</item>
+        <item>tr</item>
+    </string-array>
+
     <string-array name="themes">
-        <item>System Default</item>
-        <item>Light Theme</item>
-        <item>Dark Theme</item>
+        <item>@string/systemDefault</item>
+        <item>@string/lightTheme</item>
+        <item>@string/darkTheme</item>
     </string-array>
 
     <string-array name="themesValue">

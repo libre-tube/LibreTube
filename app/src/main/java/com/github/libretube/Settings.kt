@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -16,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
@@ -27,8 +29,10 @@ import org.json.JSONTokener
 import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
+import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import kotlin.collections.ArrayList
 
 
 class Settings : PreferenceFragmentCompat() {
@@ -189,6 +193,14 @@ class Settings : PreferenceFragmentCompat() {
             }
             true
         }
+
+        val changeLanguage = findPreference<ListPreference>("language")
+        changeLanguage?.setOnPreferenceChangeListener { _, _ ->
+            val refresh = Intent(context, MainActivity::class.java)
+            startActivity(refresh)
+            true
+        }
+
         val about = findPreference<Preference>("about")
         about?.setOnPreferenceClickListener {
             val uri = Uri.parse("https://libre-tube.github.io/")

@@ -2,6 +2,7 @@ package com.github.libretube
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.Uri
@@ -27,6 +28,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
 import java.lang.Exception
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
@@ -40,6 +42,20 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         DynamicColors.applyToActivitiesIfAvailable(application)
         setContentView(R.layout.activity_main)
+        val languageName = sharedPreferences.getString("language", "sys")
+        if (languageName != "") {
+            var locale = if (languageName != "sys") {
+                Locale(languageName)
+            } else {
+                Locale.getDefault()
+            }
+            val res = resources
+            val dm = res.displayMetrics
+            val conf = res.configuration
+            conf.setLocale(locale)
+            Locale.setDefault(locale)
+            res.updateConfiguration(conf, dm)
+        }
         when (sharedPreferences.getString("theme_togglee", "A")!!) {
             "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
