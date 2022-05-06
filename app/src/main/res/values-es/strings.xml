@@ -51,4 +51,5 @@
     <string name="createPlaylist">Crear lista de reproducción</string>
     <string name="addToPlaylist">Añadir a la lista de reproducción</string>
     <string name="about">Acerca de</string>
+    <string name="emptyPlaylistName">El nombre de la lista de reproducción no puede estar vacío</string>
 </resources>
