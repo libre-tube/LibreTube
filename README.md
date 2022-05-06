@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://avatars.githubusercontent.com/u/96022078?s=200&v=4" width="150" height="150" alt="LibreTube">
-  <h1>LibreTube</h1>
+  <a href="https://libre-tube.github.io" target="_blank" style="color: darkred;"><h1>LibreTube</h1></a>
   <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
@@ -38,8 +38,8 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 | Channel Playlists | ✅ |
 | Search | ✅ |
 | Search Suggestions | ✅ |
-| Search Filters | 🔴 |
 | Subtitles | ✅ |
+| Search Filters | 🔴 |
 | Comments | 🔴 |
 
 
