@@ -45,8 +45,8 @@
     <string name="registered">Εγγεγραμμένος. Τώρα μπορείς να εγγραφείς σε κανάλια.</string>
     <string name="logout">Αποσύνδεση</string>
     <string name="cancel">Ακύρωση</string>
-    <string name="loggedout">Αποσυνδέθηκε</string>
-    <string name="loggedIn">Συνδέθηκε</string>
+    <string name="loggedout">Αποσύνδεση επιτυχής.</string>
+    <string name="loggedIn">Σύνδεση επιτυχής.</string>
     <string name="importsuccess">Εγγεγραμμένος.</string>
     <string name="subscribeIsEmpty">Εγγραφείτε σε μερικά κανάλια πρώτα .</string>
     <string name="grid">Επιλέξτε στήλες πλέγματος</string>
