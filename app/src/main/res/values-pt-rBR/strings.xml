@@ -49,6 +49,6 @@
     <string name="login_first">Por favor, faça o login e tente novamente!</string>
     <string name="cancel">Cancelar</string>
     <string name="region">Escolha uma região</string>
-    <string name="importsuccess">Inscrito com sucesso!</string>
+    <string name="importsuccess">Inscrito</string>
     <string name="areYouSure">Tem certeza de que deseja excluir esta playlist\?</string>
 </resources>
