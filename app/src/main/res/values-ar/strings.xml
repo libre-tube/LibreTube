@@ -26,11 +26,11 @@
     <string name="subscribeIsEmpty">اشترك ببعض القنوات أولا!</string>
     <string name="cannotDownload">لم يُقدر على تنزيل هذا البث!</string>
     <string name="region">اختر المنطقة</string>
-    <string name="importsuccess">تم الاشتراك بنجاح!</string>
+    <string name="importsuccess">تم الاشتراك</string>
     <string name="dlcomplete">تم التنزيل!</string>
     <string name="downloadfailed">فشل التنزيل!</string>
     <string name="vlcerror">لا يمكن الفتح باستخدام VLC. ربما هو غير مثبت أصلا؟</string>
-    <string name="import_from_yt">استيراد الاشتراكات من يوتيوب</string>
+    <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن لاسم المستخدم وكلمة المرور أن يكونوا فارغين!</string>
     <string name="notgmail">هذا ليس حاسبك الـgmail!</string>
@@ -51,4 +51,16 @@
     <string name="error">حدث خطأ ما!</string>
     <string name="addToPlaylist">إضافة إلى قائمة التشغيل</string>
     <string name="about">معلومة</string>
+    <string name="emptyPlaylistName">لا يمكن لاسم قائمة التشغيل أن يكون فارغا</string>
+    <string name="startpage">الرئيسية</string>
+    <string name="changeLanguage">تغيير اللغة</string>
+    <string name="systemDefault">افتراضي النظام</string>
+    <string name="lightTheme">السمة الفاتحة</string>
+    <string name="library">المكتبة</string>
+    <string name="import_from_yt_summary">من يوتيوب أو نيو بايب</string>
+    <string name="subscriptions">الاشتراكات</string>
+    <string name="videos">الفيديوهات</string>
+    <string name="systemLanguage">لغة النظام</string>
+    <string name="darkTheme">السمة الداكنة</string>
+    <string name="subscribers">%1$s مشتركين</string>
 </resources>
