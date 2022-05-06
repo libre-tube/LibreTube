@@ -19,7 +19,7 @@
     <string name="login_first">Veuillez vous connecter et réessayer !</string>
     <string name="instances">Sélectionner une instance</string>
     <string name="customInstance">Ajouter une instance personnalisé</string>
-    <string name="importsuccess">Abonné.</string>
+    <string name="importsuccess">Abonné</string>
     <string name="subscribeIsEmpty">Vous devez d\'abord vous abonner à des chaînes.</string>
     <string name="cannotDownload">Impossible de télécharger ce flux.</string>
     <string name="dlcomplete">Téléchargement terminé.</string>
@@ -52,4 +52,15 @@
     <string name="playlistName">Nom de la liste de lecture</string>
     <string name="about">À propos</string>
     <string name="emptyPlaylistName">Le nom de la liste de lecture ne peut pas être vide</string>
+    <string name="import_from_yt_summary">Depuis YouTube ou Newpipe</string>
+    <string name="subscriptions">Abonnements</string>
+    <string name="lightTheme">Thème clair</string>
+    <string name="library">Bibliothèque</string>
+    <string name="startpage">Accueil</string>
+    <string name="videos">Vidéos</string>
+    <string name="changeLanguage">Changer la langue</string>
+    <string name="systemLanguage">Langue du système</string>
+    <string name="systemDefault">Par défaut du système</string>
+    <string name="darkTheme">Thème sombre</string>
+    <string name="subscribers">%1$s abonnés</string>
 </resources>

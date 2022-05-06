@@ -51,4 +51,16 @@
     <string name="success">انجام شد!</string>
     <string name="fail">ناموفق :(</string>
     <string name="about">درباره ما</string>
+    <string name="emptyPlaylistName">نام پلی لیست نمیتونه خالی باشه</string>
+    <string name="import_from_yt_summary">از یوتوب یا نیوپایپ</string>
+    <string name="startpage">خانه</string>
+    <string name="library">کتابخانه</string>
+    <string name="changeLanguage">تغییر زبان</string>
+    <string name="systemDefault">دیفالت سیستم</string>
+    <string name="lightTheme">تم روشن</string>
+    <string name="darkTheme">تم تیره</string>
+    <string name="subscribers">%1$s مشترکین</string>
+    <string name="videos">ویدیو ها</string>
+    <string name="subscriptions">اشتراک ها</string>
+    <string name="systemLanguage">زبان سیستم</string>
 </resources>

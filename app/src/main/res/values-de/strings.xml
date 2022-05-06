@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="startpage">Trends</string>
+    <string name="startpage">Startseite</string>
     <string name="subscriptions">Abos</string>
     <string name="library">Bibliothek</string>
     <string name="search_hint">Suche</string>
@@ -20,7 +20,7 @@
     <string name="instances">Instanz wählen</string>
     <string name="customInstance">Benutzerdefinierte Instanz hinzufügen</string>
     <string name="region">Region wählen</string>
-    <string name="importsuccess">Abonniert.</string>
+    <string name="importsuccess">Abonniert</string>
     <string name="subscribeIsEmpty">Abonniere erst einige Kanäle.</string>
     <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
     <string name="dlisinprogress">Ein anderer Datenübertragung läuft bereits, bitte warte bis dieser beendet ist.</string>
@@ -45,7 +45,7 @@
     <string name="fail">Fehlgeschlagen :(</string>
     <string name="choose_quality_dialog">Qualtität wählen:</string>
     <string name="login_register">Anmelden/Registrieren</string>
-    <string name="dlcomplete">Herunterladen abgeschlossen!</string>
+    <string name="dlcomplete">Herunterladen abgeschlossen.</string>
     <string name="save">Speichern</string>
     <string name="already_logged_in">Du bist bereits angemeldet. Du kannst dich hier von deinem Account abmelden.</string>
     <string name="please_login">Bitte melde dich zuerst an oder registriere dich in den Einstellungen!</string>
@@ -54,9 +54,13 @@
     <string name="empty">Benutzername und Passwort können nicht leer sein.</string>
     <string name="deletePlaylist">Wiedergabeliste löschen</string>
     <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
-    <string name="about">Über</string>  
+    <string name="about">Über</string>
     <string name="systemDefault">Automatisch</string>
     <string name="lightTheme">Hell</string>
     <string name="darkTheme">Dunkel</string>
     <string name="subscribers">%1$s Abonnenten</string>
+    <string name="emptyPlaylistName">Der Name der Wiedergabeliste darf nicht leer sein</string>
+    <string name="import_from_yt_summary">Von YouTube oder Newpipe</string>
+    <string name="changeLanguage">Sprache ändern</string>
+    <string name="systemLanguage">Systemsprache</string>
 </resources>

@@ -53,4 +53,14 @@
     <string name="grid">Sütun sayısını seçin</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
+    <string name="subscriptions">Abonelikler</string>
+    <string name="library">Kütüphane</string>
+    <string name="systemDefault">Sistem Varsayılanı</string>
+    <string name="darkTheme">Koyu</string>
+    <string name="subscribers">%1$s Abone</string>
+    <string name="lightTheme">Açık</string>
+    <string name="videos">Videolar</string>
+    <string name="startpage">Ana Sayfa</string>
+    <string name="changeLanguage">Dili Değiştir</string>
+    <string name="systemLanguage">Sistem Dili</string>
 </resources>

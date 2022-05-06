@@ -21,7 +21,7 @@
     <string name="login_first">Kirjaudu sisään ja yritä uudelleen!</string>
     <string name="login_register">Kirjaudu sisään/rekisteröidy</string>
     <string name="please_login">Kirjaudu sisään tai rekisteröidy asetuksiin ensin!</string>
-    <string name="importsuccess">Tilattu.</string>
+    <string name="importsuccess">Tilattu</string>
     <string name="dlcomplete">Lataus on valmis.</string>
     <string name="downloadfailed">Lataus epäonnistui.</string>
     <string name="vlcerror">Ei voi avata VLC:ssä. Ehkä sitä ei ole vielä asennettu\?</string>
@@ -52,4 +52,15 @@
     <string name="playlistName">Soittolistan nimi</string>
     <string name="addToPlaylist">Lisää soittolistaan</string>
     <string name="emptyPlaylistName">Soittolistan nimi ei voi olla tyhjä</string>
+    <string name="import_from_yt_summary">YouTubesta tai Newpipestä</string>
+    <string name="startpage">Etusivu</string>
+    <string name="subscriptions">Tilaukset</string>
+    <string name="library">Kirjasto</string>
+    <string name="videos">Videot</string>
+    <string name="changeLanguage">Vaihda kieltä</string>
+    <string name="systemLanguage">Järjestelmän kieli</string>
+    <string name="darkTheme">Tumma teema</string>
+    <string name="systemDefault">Järjestelmän oletusarvo</string>
+    <string name="lightTheme">Vaalea teema</string>
+    <string name="subscribers">%1$s tilaajaa</string>
 </resources>
