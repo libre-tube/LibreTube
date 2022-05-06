@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         DynamicColors.applyToActivitiesIfAvailable(application)
-        setContentView(R.layout.activity_main)
         val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
             var locale = if (languageName != "sys") {
@@ -56,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             Locale.setDefault(locale)
             res.updateConfiguration(conf, dm)
         }
+        setContentView(R.layout.activity_main)
         when (sharedPreferences.getString("theme_togglee", "A")!!) {
             "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
