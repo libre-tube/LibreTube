@@ -476,7 +476,7 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     })
-                    relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
+                    relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!, childFragmentManager)
                     view.findViewById<TextView>(R.id.player_description).text =
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)

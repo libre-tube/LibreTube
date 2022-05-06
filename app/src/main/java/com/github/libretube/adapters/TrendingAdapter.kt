@@ -10,15 +10,19 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
+import com.github.libretube.*
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.formatShort
 
-class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<CustomViewHolder>() {
+class TrendingAdapter(
+    private val videoFeed: List<StreamItem>,
+    private val childFragmentManager: FragmentManager
+) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
@@ -73,7 +77,10 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Ada
                 .replace(R.id.container, frag)
                 .commitNow()
         }
-        holder.v.setOnLongClickListener { TODO("Not yet implemented") }
+        holder.v.setOnLongClickListener {
+            VideoOptionsDialog().show(childFragmentManager, VideoOptionsDialog.TAG)
+            true
+        }
     }
 }
 class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v){
