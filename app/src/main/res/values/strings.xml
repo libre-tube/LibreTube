@@ -57,6 +57,8 @@
     <string name="success">Success!</string>
     <string name="fail">Failed :(</string>
     <string name="about">About</string>
+    <string name="changeLanguage">Change Language</string>
+    <string name="systemLanguage">System Language</string>
     <string name="systemDefault">System Default</string>
     <string name="lightTheme">Light Theme</string>
     <string name="darkTheme">Dark Theme</string>
