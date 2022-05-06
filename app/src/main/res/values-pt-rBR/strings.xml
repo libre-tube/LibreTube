@@ -53,7 +53,7 @@
     <string name="areYouSure">Tem certeza de que deseja excluir esta playlist\?</string>
     <string name="emptyPlaylistName">O nome da playlist não pode estar vazio</string>
     <string name="subscriptions">Inscricoes</string>
-    <string name="videos">Videos</string>
+    <string name="videos">Vídeos</string>
     <string name="changeLanguage">Mudar idioma</string>
     <string name="systemLanguage">Idioma do sistema</string>
     <string name="systemDefault">Padrão do sistema</string>
