@@ -29,7 +29,7 @@
     <string name="region">یک منطقه را انتخاب کنید</string>
     <string name="login_register">ورود/ثبت‌نام</string>
     <string name="app_theme">تم برنامه</string>
-    <string name="import_from_yt">وارد کردن اشتراک‌ها از یوتیوب</string>
+    <string name="import_from_yt">وارد کردن اشتراک‌ها</string>
     <string name="registered">ثبت نام با موفقیت انجام شد! حالا می‌توانید چنل مورد نظر خودتان را دنبال کنید.</string>
     <string name="already_logged_in">شما در حال حاضر وارد حساب‌تان شدید، می‌توانید از حساب‌تان خارج شوید.</string>
     <string name="dlisinprogress">دانلود دیگری در جریان است، لطفا صبر کنید تا دانلود کامل شود!</string>
