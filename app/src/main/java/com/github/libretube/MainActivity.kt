@@ -42,9 +42,13 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         DynamicColors.applyToActivitiesIfAvailable(application)
         setContentView(R.layout.activity_main)
-        var languageName = sharedPreferences.getString("language", "en")!!
+        val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
-            val locale = Locale(languageName)
+            var locale = if (languageName != "sys") {
+                Locale(languageName)
+            } else {
+                Locale.getDefault()
+            }
             val res = resources
             val dm = res.displayMetrics
             val conf = res.configuration

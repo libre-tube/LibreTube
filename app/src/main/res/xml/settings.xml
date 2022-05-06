@@ -8,7 +8,7 @@
         app:entryValues="@array/regionsValue"
         app:defaultValue="US"
         app:useSimpleSummaryProvider="true"
-        android:icon="@drawable/ic_language"
+        android:icon="@drawable/ic_region"
         />
 
     <ListPreference
@@ -16,9 +16,9 @@
         app:title="@string/changeLanguage"
         app:entries="@array/languages"
         app:entryValues="@array/languagesValue"
-        app:defaultValue="en"
+        app:defaultValue="sys"
         app:useSimpleSummaryProvider="true"
-        android:icon="@drawable/ic_language"
+        android:icon="@drawable/ic_flag"
         />
 
     <ListPreference

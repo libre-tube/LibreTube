@@ -406,6 +406,7 @@
     </string-array>
 
     <string-array name="languages">
+        <item>@string/systemLanguage</item>
         <item>Arabic</item>
         <item>Czech</item>
         <item>English</item>
@@ -428,6 +429,7 @@
     </string-array>
 
     <string-array name="languagesValue">
+        <item>sys</item>
         <item>ar</item>
         <item>cs</item>
         <item>en</item>
