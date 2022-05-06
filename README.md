@@ -53,6 +53,7 @@ Whether you have ideas, translations, design changes, code cleaning, or real hea
 
 ### Donate
 **BTC:** `bc1q0hk2smc74ej8fxupfrp05wk867e54e2zztnxfc`
+
 **XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`
 
 ## Mirrors (read-only)
