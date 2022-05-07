@@ -4,11 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Dialog with different options for a selected video.
@@ -24,7 +25,7 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
     /**
      * The response that gets when called the Api.
      */
-    private lateinit var response: Streams
+    private var response: Streams? = null
 
     /**
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
@@ -39,6 +40,9 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
      */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
+            .setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
             .setAdapter(
                 ArrayAdapter(
                     requireContext(),
@@ -51,15 +55,7 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
                 when (which) {
                     // This for example will be the "Background mode" option
                     0 -> {
-                        lifecycleScope.launchWhenCreated {
-                            // FIXME: For some reason I can't get the response
-                            response = RetrofitInstance.api.getStreams(videoId)
-                            initializePlayer()
-
-                            player?.playWhenReady = playWhenReady
-                            player?.seekTo(currentItem, playbackPosition)
-                            player?.prepare()
-                        }
+                        playOnBackgroundMode()
                     }
                     else -> {
                         dialog.dismiss()
@@ -70,19 +66,21 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
     }
 
     /**
-     * Initializes the [Exoplayer] player with the [MediaItem].
+     * Initializes the [player] player with the [MediaItem].
      */
     private fun initializePlayer() {
         player = ExoPlayer.Builder(requireContext())
             .build()
             .also { exoPlayer ->
-                val mediaItem = MediaItem.fromUri(response.hls!!)
-                exoPlayer.setMediaItem(mediaItem)
+                response?.let {
+                    val mediaItem = MediaItem.fromUri(response!!.hls!!)
+                    exoPlayer.setMediaItem(mediaItem)
+                }
             }
     }
 
     /**
-     * Releases the [ExoPlayer].
+     * Releases the [player].
      */
     private fun releasePlayer() {
         player?.let { exoPlayer ->
@@ -94,6 +92,24 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
         player = null
     }
 
+    /**
+     * Gets the video data and prepares the [player].
+     */
+    private fun playOnBackgroundMode() {
+        runBlocking {
+            val job = launch {
+                response = RetrofitInstance.api.getStreams(videoId)
+            }
+            // Wait until the job is done, to load correctly later in the player
+            job.join()
+
+            initializePlayer()
+
+            player?.playWhenReady = playWhenReady
+            player?.seekTo(currentItem, playbackPosition)
+            player?.prepare()
+        }
+    }
 
     companion object {
         const val TAG = "VideoOptionsDialog"
