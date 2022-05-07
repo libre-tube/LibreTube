@@ -80,7 +80,7 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
 
-    private lateinit var relDownloadVideo: RelativeLayout
+    private lateinit var relDownloadVideo: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -191,7 +191,7 @@ class PlayerFragment : Fragment() {
             }
         }
 
-        view.findViewById<ConstraintLayout>(R.id.player_title_layout).setOnClickListener {
+        view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
             var visible = playerDescription.isVisible
 
             playerDescription.visibility = if (visible) View.GONE else View.VISIBLE
@@ -502,7 +502,7 @@ class PlayerFragment : Fragment() {
                         val channelId = response.uploaderUrl?.replace("/channel/", "")
                         val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
                         isSubscribed(subButton, channelId!!)
-                        view.findViewById<RelativeLayout>(R.id.save).setOnClickListener {
+                        view.findViewById<LinearLayout>(R.id.save).setOnClickListener {
                             val newFragment = AddtoPlaylistDialog()
                             var bundle = Bundle()
                             bundle.putString("videoId", videoId)
@@ -511,7 +511,7 @@ class PlayerFragment : Fragment() {
                         }
                     }
                     // share button
-                    view.findViewById<RelativeLayout>(R.id.relPlayer_share).setOnClickListener {
+                    view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
                         val sharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(requireContext())
                         val intent = Intent()
@@ -602,7 +602,7 @@ class PlayerFragment : Fragment() {
                         Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
                     }
                     if (response.hls != null) {
-                        view.findViewById<RelativeLayout>(R.id.relPlayer_vlc).setOnClickListener {
+                        view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
                             exoPlayer.pause()
                             try {
                                 val vlcRequestCode = 42
@@ -644,36 +644,21 @@ class PlayerFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-                val colorPrimary = TypedValue()
-                (context as Activity).theme.resolveAttribute(
-                    android.R.attr.colorPrimary,
-                    colorPrimary,
-                    true
-                )
 
-                val colorText = TypedValue()
-                (context as Activity).theme.resolveAttribute(
-                    R.attr.colorOnSurface,
-                    colorText,
-                    true
-                )
 
                 runOnUiThread {
                     if (response.subscribed == true) {
                         isSubscribed = true
                         button.text = getString(R.string.unsubscribe)
-                        button.setTextColor(colorText.data)
                     }
                     if (response.subscribed != null) {
                         button.setOnClickListener {
                             if (isSubscribed) {
                                 unsubscribe(channel_id)
                                 button.text = getString(R.string.subscribe)
-                                button.setTextColor(colorPrimary.data)
                             } else {
                                 subscribe(channel_id)
                                 button.text = getString(R.string.unsubscribe)
-                                button.setTextColor(colorText.data)
                             }
                         }
                     }
