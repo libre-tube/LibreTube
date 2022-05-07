@@ -43,8 +43,10 @@ class MainActivity : AppCompatActivity() {
         DynamicColors.applyToActivitiesIfAvailable(application)
         val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
-            var locale = if (languageName != "sys") {
+            var locale = if (languageName != "sys" && "$languageName".length < 3 ){
                 Locale(languageName)
+            } else if ("$languageName".length > 3) {
+                Locale(languageName?.substring(0,2), languageName?.substring(4,6))
             } else {
                 Locale.getDefault()
             }
