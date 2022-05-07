@@ -2,8 +2,8 @@
 <resources>
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
-    <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Desuscribirse</string>
+    <string name="subscribe">Suscribirme</string>
+    <string name="unsubscribe">Desuscribirme</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -35,8 +35,8 @@
     <string name="app_theme">Tema</string>
     <string name="error">Algo salio mal.</string>
     <string name="empty">Tienes que introducir un nombre de usuario y una contraseña.</string>
-    <string name="notgmail">Esta no es tu cuenta de Gmail.</string>
-    <string name="defres">Resolución de video predeterminada</string>
+    <string name="notgmail">Esta no es su cuenta de Gmail.</string>
+    <string name="defres">Resolución predeterminada de video</string>
     <string name="grid">Elija las columnas de la cuadrícula</string>
     <string name="emptyList">No hay nada aquí.</string>
     <string name="areYouSure">¿Eliminar la lista de reproducción\?</string>
@@ -54,7 +54,7 @@
     <string name="emptyPlaylistName">El nombre de la lista de reproducción no puede estar vacío</string>
     <string name="startpage">Inicio</string>
     <string name="subscriptions">Suscripciones</string>
-    <string name="library">Librería</string>
+    <string name="library">Biblioteca</string>
     <string name="videos">Videos</string>
     <string name="import_from_yt_summary">De YouTube o Newpipe</string>
     <string name="changeLanguage">Cambiar idioma</string>
