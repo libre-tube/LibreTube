@@ -253,6 +253,19 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                val commentsResponse = try {
+                    RetrofitInstance.api.getComments(videoId!!)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                    return@launchWhenCreated
+                }
+                Toast.makeText(context, commentsResponse.disabled.toString(), Toast.LENGTH_LONG).show()
                 var videosNameArray: Array<CharSequence> = arrayOf()
                 videosNameArray += "HLS"
                 for (vid in response.videoStreams!!) {

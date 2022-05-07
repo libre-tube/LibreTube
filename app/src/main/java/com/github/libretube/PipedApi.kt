@@ -10,6 +10,9 @@ interface PipedApi {
     @GET("streams/{videoId}")
     suspend fun getStreams(@Path("videoId") videoId: String): Streams
 
+    @GET("comments/{videoId}")
+    suspend fun getComments(@Path("videoId") videoId: String): CommentsPage
+
     @GET("search")
     suspend fun getSearchResults(
         @Query("q") searchQuery: String,
