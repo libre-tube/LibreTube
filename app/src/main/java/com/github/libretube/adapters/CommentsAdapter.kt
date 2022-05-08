@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.obj.Comment
@@ -19,11 +20,20 @@ class CommentsAdapter(private val comments: List<Comment>):  RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.v.findViewById<TextView>(R.id.comment_author).text = comments[position].author.toString() + " • " + comments[position].commentedTime.toString()
+        holder.v.findViewById<TextView>(R.id.comment_infos).text = comments[position].author.toString() + " • " + comments[position].commentedTime.toString()
         holder.v.findViewById<TextView>(R.id.comment_text).text = comments[position].commentText.toString()
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.commentor_image)
         Picasso.get().load(comments[position].thumbnail).into(thumbnailImage)
         holder.v.findViewById<TextView>(R.id.likes_textView).text = comments[position].likeCount.toString()
+        if (comments[position].verified == true) {
+            holder.v.findViewById<ImageView>(R.id.verified_imageView).visibility = View.VISIBLE
+        }
+        if (comments[position].pinned == true) {
+            holder.v.findViewById<ImageView>(R.id.pinned_imageView).visibility = View.VISIBLE
+        }
+        if (comments[position].hearted == true) {
+            holder.v.findViewById<ImageView>(R.id.hearted_imageView).visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {
