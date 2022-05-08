@@ -254,19 +254,26 @@
                     android:id="@+id/tv_suggestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="More like that"
-                    android:textSize="17sp" 
-                    android:visibility="gone"/>
+                    android:layout_margin="10dp"
+                    android:text="@string/comments"
+                    android:textSize="17sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_below="@id/tv_suggestion" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/player_recView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_suggestion"
-                    android:layout_margin="10dp"
+                    android:layout_below="@id/comments_recView"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:nestedScrollingEnabled="false" />
             </RelativeLayout>
 

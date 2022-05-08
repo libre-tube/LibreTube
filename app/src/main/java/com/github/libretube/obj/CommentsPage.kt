@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class CommentsPage(
-        val comments: List<Comment>? = listOf(),
+        val comments: List<Comment> = listOf(),
         val disabled: Boolean? = null,
         val nextpage: String? = "",
 ){

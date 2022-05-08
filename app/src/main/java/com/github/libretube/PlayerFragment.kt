@@ -31,7 +31,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
@@ -75,6 +77,7 @@ class PlayerFragment : Fragment() {
     var isSubscribed: Boolean = false
 
     private lateinit var relatedRecView: RecyclerView
+    private lateinit var commentsRecView: RecyclerView
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
@@ -221,6 +224,9 @@ class PlayerFragment : Fragment() {
                 isFullScreen = false
             }
         }
+        commentsRecView = view.findViewById(R.id.comments_recView)
+        commentsRecView.layoutManager = LinearLayoutManager(view.context)
+
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
@@ -265,7 +271,6 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
-                Toast.makeText(context, commentsResponse.disabled.toString(), Toast.LENGTH_LONG).show()
                 var videosNameArray: Array<CharSequence> = arrayOf()
                 videosNameArray += "HLS"
                 for (vid in response.videoStreams!!) {
@@ -489,6 +494,7 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     })
+                    commentsRecView.adapter = CommentsAdapter(commentsResponse.comments)
                     relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
                     view.findViewById<TextView>(R.id.player_description).text =
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
