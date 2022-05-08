@@ -33,6 +33,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
@@ -78,6 +79,8 @@ class PlayerFragment : Fragment() {
 
     private lateinit var relatedRecView: RecyclerView
     private lateinit var commentsRecView: RecyclerView
+    private var nextPage: String? = null
+    var commentsAdapter: CommentsAdapter? = null
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
@@ -195,14 +198,13 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            var visible = playerDescription.isVisible
-
-            playerDescription.visibility = if (visible) View.GONE else View.VISIBLE
+            playerDescription.visibility =
+                if (playerDescription.isVisible) View.GONE else View.VISIBLE
         }
 
         view.findViewById<ConstraintLayout>(R.id.comments_toggle).setOnClickListener {
-            var visible = commentsRecView.isVisible
-            commentsRecView.visibility = if (visible) View.GONE else View.VISIBLE
+            commentsRecView.visibility = if (commentsRecView.isVisible) View.GONE else View.VISIBLE
+            relatedRecView.visibility = if (relatedRecView.isVisible) View.GONE else View.VISIBLE
         }
 
         // FullScreen button trigger
@@ -230,6 +232,18 @@ class PlayerFragment : Fragment() {
                 isFullScreen = false
             }
         }
+
+        val scrollView = view.findViewById<ScrollView>(R.id.player_scrollView)
+        scrollView.viewTreeObserver
+            .addOnScrollChangedListener {
+                if (scrollView.getChildAt(0).bottom
+                    == (scrollView.height + scrollView.scrollY)
+                ) {
+                    fetchNextComments()
+                }
+
+            }
+
         commentsRecView = view.findViewById(R.id.comments_recView)
         commentsRecView.layoutManager = LinearLayoutManager(view.context)
 
@@ -500,8 +514,11 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     })
-                    commentsRecView.adapter = CommentsAdapter(commentsResponse.comments)
+                    commentsAdapter = CommentsAdapter(commentsResponse.comments)
+                    commentsRecView.adapter = commentsAdapter
+                    nextPage = commentsResponse.nextpage
                     relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
+
                     view.findViewById<TextView>(R.id.player_description).text =
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
@@ -760,5 +777,26 @@ class PlayerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    private fun fetchNextComments(){
+        fun run() {
+
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response,"+e.response())
+                    return@launchWhenCreated
+                }
+                nextPage = response.nextpage
+                commentsAdapter?.updateItems(response.comments!!)
+            }
+        }
+        run()
     }
 }

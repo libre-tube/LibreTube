@@ -9,9 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.formatShort
 import com.github.libretube.obj.Comment
+import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
 
-class CommentsAdapter(private val comments: List<Comment>):  RecyclerView.Adapter<ViewHolder>(){
+class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView.Adapter<ViewHolder>(){
+
+    fun updateItems(newItems: List<Comment>){
+        comments.addAll(newItems)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
          var commentsView = LayoutInflater.from(parent.context).inflate(R.layout.comments_row, parent, false)
