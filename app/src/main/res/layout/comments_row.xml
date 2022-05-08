@@ -10,7 +10,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/commentor_image"
@@ -38,8 +40,29 @@
                 android:id="@+id/comment_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
+                android:layout_marginBottom="4dp"
                 android:text="Comment Text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/likes_imageView"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="2dp"
+                    app:srcCompat="@drawable/ic_thumb_up" />
+
+                <TextView
+                    android:id="@+id/likes_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
