@@ -199,6 +199,12 @@ class PlayerFragment : Fragment() {
 
             playerDescription.visibility = if (visible) View.GONE else View.VISIBLE
         }
+
+        view.findViewById<ConstraintLayout>(R.id.comments_toggle).setOnClickListener {
+            var visible = commentsRecView.isVisible
+            commentsRecView.visibility = if (visible) View.GONE else View.VISIBLE
+        }
+
         // FullScreen button trigger
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener {
             // remember to hide everything when new thing added
