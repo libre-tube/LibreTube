@@ -33,7 +33,6 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
@@ -780,8 +779,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun fetchNextComments(){
-        fun run() {
-
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
@@ -796,7 +793,5 @@ class PlayerFragment : Fragment() {
                 nextPage = response.nextpage
                 commentsAdapter?.updateItems(response.comments!!)
             }
-        }
-        run()
     }
 }
