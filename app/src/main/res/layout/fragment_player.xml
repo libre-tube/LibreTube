@@ -288,6 +288,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_below="@id/comments_toggle"
+                    android:nestedScrollingEnabled="false"
                     android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
