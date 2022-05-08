@@ -1,14 +1,13 @@
 package com.github.libretube.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.formatShort
 import com.github.libretube.obj.Comment
 import com.squareup.picasso.Picasso
 
@@ -24,7 +23,7 @@ class CommentsAdapter(private val comments: List<Comment>):  RecyclerView.Adapte
         holder.v.findViewById<TextView>(R.id.comment_text).text = comments[position].commentText.toString()
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.commentor_image)
         Picasso.get().load(comments[position].thumbnail).into(thumbnailImage)
-        holder.v.findViewById<TextView>(R.id.likes_textView).text = comments[position].likeCount.toString()
+        holder.v.findViewById<TextView>(R.id.likes_textView).text = comments[position].likeCount?.toLong().formatShort()
         if (comments[position].verified == true) {
             holder.v.findViewById<ImageView>(R.id.verified_imageView).visibility = View.VISIBLE
         }
