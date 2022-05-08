@@ -78,8 +78,9 @@ class PlayerFragment : Fragment() {
 
     private lateinit var relatedRecView: RecyclerView
     private lateinit var commentsRecView: RecyclerView
+    private var commentsAdapter: CommentsAdapter? = null
     private var nextPage: String? = null
-    var commentsAdapter: CommentsAdapter? = null
+    private var isLoading = true
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
@@ -290,6 +291,7 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                isLoading = false
                 var videosNameArray: Array<CharSequence> = arrayOf()
                 videosNameArray += "HLS"
                 for (vid in response.videoStreams!!) {
@@ -780,18 +782,22 @@ class PlayerFragment : Fragment() {
 
     private fun fetchNextComments(){
             lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response,"+e.response())
-                    return@launchWhenCreated
+                if (!isLoading) {
+                    isLoading = true
+                    val response = try {
+                        RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                    } catch (e: IOException) {
+                        println(e)
+                        Log.e(TAG, "IOException, you might not have internet connection")
+                        return@launchWhenCreated
+                    } catch (e: HttpException) {
+                        Log.e(TAG, "HttpException, unexpected response," + e.response())
+                        return@launchWhenCreated
+                    }
+                    nextPage = response.nextpage
+                    commentsAdapter?.updateItems(response.comments!!)
+                    isLoading = false
                 }
-                nextPage = response.nextpage
-                commentsAdapter?.updateItems(response.comments!!)
             }
     }
 }
