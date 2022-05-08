@@ -16,7 +16,7 @@ class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView
 
     fun updateItems(newItems: List<Comment>){
         comments.addAll(newItems)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(comments.size, newItems.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
