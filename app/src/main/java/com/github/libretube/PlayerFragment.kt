@@ -247,6 +247,11 @@ class PlayerFragment : Fragment() {
         commentsRecView = view.findViewById(R.id.comments_recView)
         commentsRecView.layoutManager = LinearLayoutManager(view.context)
 
+        commentsRecView.setItemViewCacheSize(20);
+        commentsRecView.setDrawingCacheEnabled(true);
+        commentsRecView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
