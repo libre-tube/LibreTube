@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.TextView.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -189,6 +190,7 @@ class SearchFragment : Fragment() {
         }
 
 
+
         if (splited_history.size > 10) {
             splited_history = splited_history.takeLast(10)
         }
@@ -202,7 +204,6 @@ class SearchFragment : Fragment() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         var history = sharedPreferences.getString("search_history", "")
         var splited_history = history!!.split("|")
-
         return splited_history
     }
 }
