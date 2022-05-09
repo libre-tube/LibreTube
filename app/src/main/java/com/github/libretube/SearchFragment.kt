@@ -62,41 +62,53 @@ class SearchFragment : Fragment() {
         historyRecycler.visibility = VISIBLE
         history_tv.visibility = VISIBLE
 
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = SearchHistoryAdapter(getHistory())
-
+        historyRecycler.layoutManager = LinearLayoutManager(view.context)
+        historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory())
 
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         autoTextView.requestFocus()
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
-            autoTextView.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
+        autoTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
 
-                }
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(s!! != ""){
-                        GlobalScope.launch {
-                            fetchSuggestions(s.toString(), autoTextView)
-                            delay(3000)
-                            addtohistory(s.toString())
-                            fetchSearch(s.toString(),recyclerView)
-                        }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s!! != "") {
+                    recyclerView.visibility = VISIBLE
+                    historyRecycler.visibility = GONE
+                    history_tv.visibility = GONE
+                    recyclerView.adapter = null
+
+                    GlobalScope.launch {
+                        fetchSuggestions(s.toString(), autoTextView)
+                        delay(3000)
+                        addtohistory(s.toString())
+                        fetchSearch(s.toString(), recyclerView)
                     }
-                }
 
-                override fun afterTextChanged(s: Editable?) {
 
                 }
+            }
 
-            })
+            override fun afterTextChanged(s: Editable?) {
+                if (s!!.isEmpty()) {
+                    recyclerView.visibility = GONE
+                    historyRecycler.visibility = VISIBLE
+                    history_tv.visibility = VISIBLE
+                    historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory())
+                }
+            }
+
+        })
         autoTextView.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideKeyboard();
@@ -169,6 +181,8 @@ class SearchFragment : Fragment() {
         var splited_history = getHistory()
 
         if (query == splited_history.get(splited_history.size - 1)) {
+            return
+        } else if (query == "") {
             return
         } else {
             splited_history = splited_history + query

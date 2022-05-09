@@ -1,13 +1,16 @@
 package com.github.libretube.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.google.android.material.imageview.ShapeableImageView
 
-class SearchHistoryAdapter(private val historyList: List<String>) :
+class SearchHistoryAdapter(private val context: Context, private val historyList: List<String>) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
     override fun getItemCount(): Int {
         return historyList.size
@@ -23,9 +26,18 @@ class SearchHistoryAdapter(private val historyList: List<String>) :
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
         val history = historyList[position]
         holder.v.findViewById<TextView>(R.id.history_text).text = history
-//        holder.v.findViewById<TextView>(R.id.delete_history).setOnClickListener(
-//
-//        )
+
+
+        holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            var splited_history = sharedPreferences.getString("search_history", "")!!.split("|")
+
+            splited_history = splited_history - history
+
+            sharedPreferences.edit().putString("search_history", splited_history.joinToString("|"))
+                .apply()
+
+        }
     }
 }
 
