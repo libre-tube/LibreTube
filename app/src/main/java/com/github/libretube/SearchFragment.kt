@@ -11,13 +11,15 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.TextView.OnEditorActionListener
+import android.widget.TextView
+import android.widget.TextView.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
 import kotlinx.coroutines.GlobalScope
@@ -48,6 +50,21 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
+
+        val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
+        val history_tv = view.findViewById<TextView>(R.id.tv_history)
+
+
+        //show search history
+
+        recyclerView.visibility = GONE
+        historyRecycler.visibility = VISIBLE
+        history_tv.visibility = VISIBLE
+
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.adapter
+
+
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         autoTextView.requestFocus()
@@ -68,6 +85,7 @@ class SearchFragment : Fragment() {
                         GlobalScope.launch {
                             fetchSuggestions(s.toString(), autoTextView)
                             delay(3000)
+                            addtohistory(s.toString())
                             fetchSearch(s.toString(),recyclerView)
                         }
                     }
@@ -142,5 +160,22 @@ class SearchFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         hideKeyboard()
+    }
+
+    private fun addtohistory(query: String) {
+        var queryFromated = "|" + query
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        var history = sharedPreferences.getString("search_history", "")
+
+        var splited_history = history!!.split("|") + queryFromated
+
+        if (splited_history.size > 10) {
+            splited_history.drop(9)
+        }
+
+
+        sharedPreferences.edit().putString("search_history",splited_history.joinToString("|") ).apply()
     }
 }
