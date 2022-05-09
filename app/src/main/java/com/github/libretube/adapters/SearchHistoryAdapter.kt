@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import com.github.libretube.R
 import com.google.android.material.imageview.ShapeableImageView
 
 
-class SearchHistoryAdapter(private val context: Context, private val historyList: List<String>) :
+class SearchHistoryAdapter(private val context: Context, private val historyList: List<String> , private val editText : AutoCompleteTextView) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
     override fun getItemCount(): Int {
         return historyList.size -1
@@ -39,6 +40,10 @@ class SearchHistoryAdapter(private val context: Context, private val historyList
             sharedPreferences.edit().putString("search_history", splited_history.joinToString("|"))
                 .apply()
 
+        }
+
+        holder.v.setOnClickListener {
+            editText.setText(history)
         }
     }
 }

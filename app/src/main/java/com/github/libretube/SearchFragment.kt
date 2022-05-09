@@ -53,6 +53,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
 
+        val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+
         val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
         val history_tv = view.findViewById<TextView>(R.id.tv_history)
 
@@ -64,10 +66,9 @@ class SearchFragment : Fragment() {
         history_tv.visibility = VISIBLE
 
         historyRecycler.layoutManager = LinearLayoutManager(view.context)
-        historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory())
+        historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory(),autoTextView)
 
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
-        val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         autoTextView.requestFocus()
         val imm =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -105,7 +106,7 @@ class SearchFragment : Fragment() {
                     recyclerView.visibility = GONE
                     historyRecycler.visibility = VISIBLE
                     history_tv.visibility = VISIBLE
-                    historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory())
+                    historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory(),autoTextView)
                 }
             }
 
