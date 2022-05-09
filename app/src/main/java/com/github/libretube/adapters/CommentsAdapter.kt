@@ -28,7 +28,7 @@ class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView
         holder.v.findViewById<TextView>(R.id.comment_infos).text = comments[position].author.toString() + " • " + comments[position].commentedTime.toString()
         holder.v.findViewById<TextView>(R.id.comment_text).text = comments[position].commentText.toString()
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.commentor_image)
-        Picasso.get().load(comments[position].thumbnail).resize(50,50).centerCrop().into(thumbnailImage)
+        Picasso.get().load(comments[position].thumbnail).fit().centerCrop().into(thumbnailImage)
         holder.v.findViewById<TextView>(R.id.likes_textView).text = comments[position].likeCount?.toLong().formatShort()
         if (comments[position].verified == true) {
             holder.v.findViewById<ImageView>(R.id.verified_imageView).visibility = View.VISIBLE
