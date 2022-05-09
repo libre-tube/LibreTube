@@ -1,7 +1,7 @@
 package com.github.libretube.adapters
 
-import android.content.res.Resources
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +53,8 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
         Picasso.get().load(item.thumbnail).into(thumbnailImage)
+        val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
+        thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
         Picasso.get().load(item.uploaderAvatar).into(channelImage)
         val title = v.findViewById<TextView>(R.id.search_description)
