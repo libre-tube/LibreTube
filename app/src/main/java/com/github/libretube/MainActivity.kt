@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -57,63 +60,76 @@ class MainActivity : AppCompatActivity() {
             Locale.setDefault(locale)
             res.updateConfiguration(conf, dm)
         }
-        setContentView(R.layout.activity_main)
+
         when (sharedPreferences.getString("theme_togglee", "A")!!) {
             "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        bottomNavigationView = findViewById(R.id.bottomNav)
-        navController = findNavController(R.id.fragment)
-        bottomNavigationView.setupWithNavController(navController)
+        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo=connectivityManager.activeNetworkInfo
+        val isConnected = networkInfo != null && networkInfo.isConnected
 
-        bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home2 -> {
-                    navController.backQueue.clear()
-                    navController.navigate(R.id.home2)
-                    true
-                }
-                R.id.subscriptions -> {
-                    //navController.backQueue.clear()
-                    navController.navigate(R.id.subscriptions)
-                    true
-                }
-                R.id.library -> {
-                    //navController.backQueue.clear()
-                    navController.navigate(R.id.library)
-                    true
-                }
+        if (isConnected == false) {
+            setContentView(R.layout.activity_nointernet)
+            findViewById<Button>(R.id.retry_button).setOnClickListener() {
+                recreate()
             }
-            false
-        }
+        } else {
+            setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbar)
-        val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
-        val appName = HtmlCompat.fromHtml(
-            "Libre<span  style='color:$hexColor';>Tube</span>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
-        toolbar.title= appName
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        toolbar.setNavigationOnClickListener{
-            //settings fragment stuff
-            navController.navigate(R.id.settings)
-            true
-        }
+            bottomNavigationView = findViewById(R.id.bottomNav)
+            navController = findNavController(R.id.fragment)
+            bottomNavigationView.setupWithNavController(navController)
 
-        toolbar.setOnMenuItemClickListener{
-            when (it.itemId){
-                R.id.action_search -> {
-                    navController.navigate(R.id.searchFragment)
-                    true
+            bottomNavigationView.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.home2 -> {
+                        navController.backQueue.clear()
+                        navController.navigate(R.id.home2)
+                        true
+                    }
+                    R.id.subscriptions -> {
+                        //navController.backQueue.clear()
+                        navController.navigate(R.id.subscriptions)
+                        true
+                    }
+                    R.id.library -> {
+                        //navController.backQueue.clear()
+                        navController.navigate(R.id.library)
+                        true
+                    }
                 }
+                false
             }
-            false
-        }
 
+            toolbar = findViewById(R.id.toolbar)
+            val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
+            val appName = HtmlCompat.fromHtml(
+                "Libre<span  style='color:$hexColor';>Tube</span>",
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+            )
+            toolbar.title = appName
+
+            toolbar.setNavigationOnClickListener {
+                //settings fragment stuff
+                navController.navigate(R.id.settings)
+                true
+            }
+
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_search -> {
+                        navController.navigate(R.id.searchFragment)
+                        true
+                    }
+                }
+                false
+            }
+        }
 
     }
 
