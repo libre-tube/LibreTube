@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
+import com.github.libretube.adapters.SearchHistoryAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -62,7 +63,7 @@ class SearchFragment : Fragment() {
         history_tv.visibility = VISIBLE
 
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter
+        recyclerView.adapter = SearchHistoryAdapter(getHistory())
 
 
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
@@ -163,19 +164,32 @@ class SearchFragment : Fragment() {
     }
 
     private fun addtohistory(query: String) {
-        var queryFromated = "|" + query
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-        var history = sharedPreferences.getString("search_history", "")
+        var splited_history = getHistory()
 
-        var splited_history = history!!.split("|") + queryFromated
-
-        if (splited_history.size > 10) {
-            splited_history.drop(9)
+        if (query == splited_history.get(splited_history.size - 1)) {
+            return
+        } else {
+            splited_history = splited_history + query
         }
 
 
-        sharedPreferences.edit().putString("search_history",splited_history.joinToString("|") ).apply()
+        if (splited_history.size > 10) {
+            splited_history = splited_history.takeLast(10)
+        }
+
+
+        sharedPreferences.edit().putString("search_history", splited_history.joinToString("|"))
+            .apply()
+    }
+
+    private fun getHistory(): List<String> {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        var history = sharedPreferences.getString("search_history", "")
+        var splited_history = history!!.split("|")
+
+        return splited_history
     }
 }
+
