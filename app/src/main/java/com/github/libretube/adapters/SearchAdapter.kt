@@ -1,5 +1,6 @@
 package com.github.libretube.adapters
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -89,7 +90,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = item.subscribers.formatShort() + " subscribers • "+ item.videos + " videos"
+        channelViews.text = v.context.getString(R.string.subscribers, item.subscribers.formatShort()) + " • " + v.context.getString(R.string.videoCount, item.videos.toString())
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
