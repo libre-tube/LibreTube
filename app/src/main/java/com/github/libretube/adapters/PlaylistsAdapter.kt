@@ -2,16 +2,18 @@ package com.github.libretube.adapters
 
 import android.app.Activity
 import android.content.Context
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.*
+import com.github.libretube.MainActivity
+import com.github.libretube.R
+import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.squareup.picasso.Picasso

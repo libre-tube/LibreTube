@@ -277,16 +277,16 @@
     <!--    </LinearLayout>-->
 
 
-    <TextView
-        android:id="@+id/tv_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:text="@string/history"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
-        android:visibility="gone"/>
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_history"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="25dp"-->
+    <!--        android:text="@string/history"-->
+    <!--        android:textSize="14sp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"-->
+    <!--        android:visibility="gone"/>-->
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -297,7 +297,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_history"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView

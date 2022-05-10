@@ -13,7 +13,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.TextView
 import android.widget.TextView.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -55,14 +54,12 @@ class SearchFragment : Fragment() {
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
 
         val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
-        val history_tv = view.findViewById<TextView>(R.id.tv_history)
 
 
         //show search history
 
         recyclerView.visibility = GONE
         historyRecycler.visibility = VISIBLE
-        history_tv.visibility = VISIBLE
 
         historyRecycler.layoutManager = LinearLayoutManager(view.context)
 
@@ -91,7 +88,6 @@ class SearchFragment : Fragment() {
                 if (s!! != "") {
                     recyclerView.visibility = VISIBLE
                     historyRecycler.visibility = GONE
-                    history_tv.visibility = GONE
                     recyclerView.adapter = null
 
                     GlobalScope.launch {
@@ -109,7 +105,6 @@ class SearchFragment : Fragment() {
                 if (s!!.isEmpty()) {
                     recyclerView.visibility = GONE
                     historyRecycler.visibility = VISIBLE
-                    history_tv.visibility = VISIBLE
                     var historylist = getHistory()
                     if (historylist.size != 0) {
                         historyRecycler.adapter =

@@ -12,12 +12,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException

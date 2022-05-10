@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,18 +34,14 @@ class SearchHistoryAdapter(private val context: Context, private var historyList
 
         holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-//            var historyList = sharedPreferences.getStringSet("search_history", null)!!.toList()
 
             historyList = historyList - history
 
             sharedPreferences.edit().putStringSet("search_history", HashSet(historyList))
                 .apply()
 
-            Log.d("TAG", "onBindViewHolder: " + historyList.size)
-
             notifyDataSetChanged()
         }
-
 
         holder.v.setOnClickListener {
             editText.setText(history)

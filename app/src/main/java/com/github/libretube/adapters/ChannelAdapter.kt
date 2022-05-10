@@ -9,11 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.obj.StreamItem
+import com.squareup.picasso.Picasso
 
 class ChannelAdapter(private val videoFeed: MutableList<StreamItem>): RecyclerView.Adapter<ChannelViewHolder>() {
     override fun getItemCount(): Int {
