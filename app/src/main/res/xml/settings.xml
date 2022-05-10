@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/locationSettings">
+
     <ListPreference
         app:key="region"
         app:title="@string/region"
@@ -21,6 +24,11 @@
         android:icon="@drawable/ic_flag"
         />
 
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/instanceSettings">
+
     <ListPreference
         app:key="instance"
         app:title="@string/instances"
@@ -29,22 +37,30 @@
         app:defaultValue="https://pipedapi.kavin.rocks/"
         android:icon="@drawable/ic_server"
         />
+
     <androidx.preference.EditTextPreference
     app:key="customInstance"
     app:title="@string/customInstance"
         app:isPreferenceVisible="false"/>
+
     <androidx.preference.Preference
         app:key="login_register"
         app:title="@string/login_register"
         android:icon="@drawable/ic_login"
         android:summary="@string/notgmail"
         />
+
     <androidx.preference.Preference
         app:key="import_from_yt"
         app:title="@string/import_from_yt"
         android:summary="@string/import_from_yt_summary"
         android:icon="@drawable/ic_import"
         />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/themingSettings">
 
     <ListPreference
         app:title="@string/app_theme"
@@ -54,6 +70,7 @@
         app:defaultValue="A"
         android:icon="@drawable/ic_theme"
         />
+
     <ListPreference
         app:title="@string/defres"
         app:key="default_res"
@@ -63,6 +80,7 @@
         android:icon="@drawable/ic_hd"
         app:useSimpleSummaryProvider="true"
         />
+
     <ListPreference
         app:title="@string/grid"
         app:key="grid"
@@ -72,10 +90,17 @@
         android:icon="@drawable/ic_column"
         app:useSimpleSummaryProvider="true"
         />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+
     <Preference
         app:title="@string/about"
         app:key="about"
         android:icon="@drawable/ic_info"
         />
+
+    </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

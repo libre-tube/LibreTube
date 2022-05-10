@@ -44,16 +44,13 @@ class SettingsActivity : AppCompatActivity(),
                 .replace(R.id.settings, SettingsFragment())
                 .commit()
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
 
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-
-    }
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, rootKey: String?) {}
 
 
     class SettingsFragment : PreferenceFragmentCompat() {

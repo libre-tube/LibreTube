@@ -64,4 +64,7 @@
     <string name="darkTheme">Dark Theme</string>
     <string name="subscribers">%1$s subscribers</string>
     <string name="settings">Settings</string>
+    <string name="locationSettings">Location</string>
+    <string name="instanceSettings">Instance</string>
+    <string name="themingSettings">Theming</string>
 </resources>
