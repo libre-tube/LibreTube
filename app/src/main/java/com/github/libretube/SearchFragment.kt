@@ -213,9 +213,14 @@ class SearchFragment : Fragment() {
     }
 
     private fun getHistory(): List<String> {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val set: Set<String> = sharedPreferences.getStringSet("search_history", null)!!
-        return set.toList()
+        try {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val set: Set<String> = sharedPreferences.getStringSet("search_history", HashSet())!!
+            return set.toList()
+        } catch (e: Exception) {
+            return emptyList()
+        }
+
     }
 }
 
