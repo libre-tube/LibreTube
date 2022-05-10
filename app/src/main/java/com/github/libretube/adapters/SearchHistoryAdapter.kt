@@ -13,8 +13,10 @@ import com.github.libretube.R
 import com.google.android.material.imageview.ShapeableImageView
 
 
-class SearchHistoryAdapter(private val context: Context, private val historyList: List<String> , private val editText : AutoCompleteTextView) :
+class SearchHistoryAdapter(private val context: Context, private var historyList: List<String> , private val editText : AutoCompleteTextView) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
+
+
     override fun getItemCount(): Int {
         return historyList.size
     }
@@ -33,14 +35,18 @@ class SearchHistoryAdapter(private val context: Context, private val historyList
 
         holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-            var splited_history = sharedPreferences.getString("search_history", "")!!.split("|")
+//            var historyList = sharedPreferences.getStringSet("search_history", null)!!.toList()
 
-            splited_history = splited_history - history
+            historyList = historyList - history
 
-            sharedPreferences.edit().putString("search_history", splited_history.joinToString("|"))
+            sharedPreferences.edit().putStringSet("search_history", HashSet(historyList))
                 .apply()
 
+            Log.d("TAG", "onBindViewHolder: " + historyList.size)
+
+            notifyDataSetChanged()
         }
+
 
         holder.v.setOnClickListener {
             editText.setText(history)

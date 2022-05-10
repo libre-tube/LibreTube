@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.TextView.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -66,7 +65,12 @@ class SearchFragment : Fragment() {
         history_tv.visibility = VISIBLE
 
         historyRecycler.layoutManager = LinearLayoutManager(view.context)
-        historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory(),autoTextView)
+
+        var historylist = getHistory()
+        if (historylist.size != 0) {
+            historyRecycler.adapter =
+                SearchHistoryAdapter(requireContext(), historylist, autoTextView)
+        }
 
         recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         autoTextView.requestFocus()
@@ -106,7 +110,11 @@ class SearchFragment : Fragment() {
                     recyclerView.visibility = GONE
                     historyRecycler.visibility = VISIBLE
                     history_tv.visibility = VISIBLE
-                    historyRecycler.adapter = SearchHistoryAdapter(requireContext(),getHistory(),autoTextView)
+                    var historylist = getHistory()
+                    if (historylist.size != 0) {
+                        historyRecycler.adapter =
+                            SearchHistoryAdapter(requireContext(), historylist, autoTextView)
+                    }
                 }
             }
 
@@ -206,9 +214,7 @@ class SearchFragment : Fragment() {
 
     private fun getHistory(): List<String> {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-
         val set: Set<String> = sharedPreferences.getStringSet("search_history", null)!!
-
         return set.toList()
     }
 }
