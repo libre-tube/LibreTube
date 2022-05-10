@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.app.Activity
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -26,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.github.libretube.SettingsActivity
 import com.google.android.material.color.DynamicColors
 import java.lang.Exception
 import java.util.*
@@ -100,7 +102,8 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener{
             //settings fragment stuff
-            navController.navigate(R.id.settings)
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
             true
         }
 
