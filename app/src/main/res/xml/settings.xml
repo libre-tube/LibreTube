@@ -93,10 +93,10 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory app:title="@string/about">
 
     <Preference
-        app:title="@string/about"
+        app:title="@string/website"
         app:key="about"
         android:icon="@drawable/ic_info"
         />

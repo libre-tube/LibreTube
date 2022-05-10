@@ -67,4 +67,5 @@
     <string name="locationSettings">Location</string>
     <string name="instanceSettings">Instance</string>
     <string name="themingSettings">Theming</string>
+    <string name="website">Website</string>
 </resources>
