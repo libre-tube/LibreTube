@@ -180,32 +180,36 @@ class SearchFragment : Fragment() {
     private fun addtohistory(query: String) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-        var splited_history = getHistory()
+        var historyList = getHistory()
 
-        if (query == splited_history.get(splited_history.size - 1)) {
+
+        if (historyList.size != 0 && query == historyList.get(historyList.size - 1)) {
             return
         } else if (query == "") {
             return
         } else {
-            splited_history = splited_history + query
+            historyList = historyList + query
+
         }
 
 
 
-        if (splited_history.size > 10) {
-            splited_history = splited_history.takeLast(10)
+        if (historyList.size > 10) {
+            historyList = historyList.takeLast(10)
         }
 
+        var set: Set<String> = HashSet(historyList)
 
-        sharedPreferences.edit().putString("search_history", splited_history.joinToString("|"))
+        sharedPreferences.edit().putStringSet("search_history", set)
             .apply()
     }
 
     private fun getHistory(): List<String> {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        var history = sharedPreferences.getString("search_history", "")
-        var splited_history = history!!.split("|")
-        return splited_history
+
+        val set: Set<String> = sharedPreferences.getStringSet("search_history", null)!!
+
+        return set.toList()
     }
 }
 
