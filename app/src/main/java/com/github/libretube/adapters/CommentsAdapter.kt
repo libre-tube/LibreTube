@@ -14,8 +14,8 @@ import com.squareup.picasso.Picasso
 class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView.Adapter<ViewHolder>(){
 
     fun updateItems(newItems: List<Comment>){
-        comments.addAll(newItems)
         var commentsSize = comments.size
+        comments.addAll(newItems)
         notifyItemRangeInserted(commentsSize, newItems.size)
     }
 
