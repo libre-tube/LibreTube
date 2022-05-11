@@ -2,7 +2,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/locationSettings">
+    <PreferenceCategory app:title="@string/location">
 
     <ListPreference
         app:key="region"
@@ -27,7 +27,7 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory app:title="@string/instanceSettings">
+    <PreferenceCategory app:title="@string/instance">
 
     <ListPreference
         app:key="instance"
@@ -60,7 +60,7 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory app:title="@string/themingSettings">
+    <PreferenceCategory app:title="@string/customization">
 
     <ListPreference
         app:title="@string/app_theme"

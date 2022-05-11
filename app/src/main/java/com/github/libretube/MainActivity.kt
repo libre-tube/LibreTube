@@ -27,7 +27,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import com.github.libretube.SettingsActivity
 import com.google.android.material.color.DynamicColors
 import java.lang.Exception
 import java.util.*
@@ -101,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.title= appName
 
         toolbar.setNavigationOnClickListener{
-            //settings fragment stuff
+            //settings activity stuff
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
             true
