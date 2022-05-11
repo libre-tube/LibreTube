@@ -63,5 +63,4 @@
     <string name="lightTheme">Light Theme</string>
     <string name="darkTheme">Dark Theme</string>
     <string name="subscribers">%1$s subscribers</string>
-    <string name="history">History</string>
 </resources>
