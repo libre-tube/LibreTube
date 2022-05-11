@@ -63,4 +63,5 @@
     <string name="systemLanguage">Lingua del sistema</string>
     <string name="lightTheme">Tema chiaro</string>
     <string name="darkTheme">Tema scuro</string>
+    <string name="comments">Commenti</string>
 </resources>
