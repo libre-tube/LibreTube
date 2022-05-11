@@ -65,4 +65,5 @@
     <string name="subscribers">%1$s subscribers</string>
     <string name="noInternet">No Internet Connection</string>
     <string name="retry">Retry</string>
+    <string name="comments">Comments</string>
 </resources>

@@ -31,7 +31,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
@@ -75,6 +77,10 @@ class PlayerFragment : Fragment() {
     var isSubscribed: Boolean = false
 
     private lateinit var relatedRecView: RecyclerView
+    private lateinit var commentsRecView: RecyclerView
+    private var commentsAdapter: CommentsAdapter? = null
+    private var nextPage: String? = null
+    private var isLoading = true
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
@@ -192,10 +198,15 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            var visible = playerDescription.isVisible
-
-            playerDescription.visibility = if (visible) View.GONE else View.VISIBLE
+            playerDescription.visibility =
+                if (playerDescription.isVisible) View.GONE else View.VISIBLE
         }
+
+        view.findViewById<ConstraintLayout>(R.id.comments_toggle).setOnClickListener {
+            commentsRecView.visibility = if (commentsRecView.isVisible) View.GONE else View.VISIBLE
+            relatedRecView.visibility = if (relatedRecView.isVisible) View.GONE else View.VISIBLE
+        }
+
         // FullScreen button trigger
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener {
             // remember to hide everything when new thing added
@@ -221,6 +232,25 @@ class PlayerFragment : Fragment() {
                 isFullScreen = false
             }
         }
+
+        val scrollView = view.findViewById<ScrollView>(R.id.player_scrollView)
+        scrollView.viewTreeObserver
+            .addOnScrollChangedListener {
+                if (scrollView.getChildAt(0).bottom
+                    == (scrollView.height + scrollView.scrollY)
+                ) {
+                    fetchNextComments()
+                }
+
+            }
+
+        commentsRecView = view.findViewById(R.id.comments_recView)
+        commentsRecView.layoutManager = LinearLayoutManager(view.context)
+
+        commentsRecView.setItemViewCacheSize(20)
+        commentsRecView.setDrawingCacheEnabled(true)
+        commentsRecView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH)
+
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
@@ -253,6 +283,19 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                val commentsResponse = try {
+                    RetrofitInstance.api.getComments(videoId!!)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                    return@launchWhenCreated
+                }
+                isLoading = false
                 var videosNameArray: Array<CharSequence> = arrayOf()
                 videosNameArray += "HLS"
                 for (vid in response.videoStreams!!) {
@@ -476,7 +519,11 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     })
+                    commentsAdapter = CommentsAdapter(commentsResponse.comments)
+                    commentsRecView.adapter = commentsAdapter
+                    nextPage = commentsResponse.nextpage
                     relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
+
                     view.findViewById<TextView>(R.id.player_description).text =
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
@@ -735,5 +782,26 @@ class PlayerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    private fun fetchNextComments(){
+            lifecycleScope.launchWhenCreated {
+                if (!isLoading) {
+                    isLoading = true
+                    val response = try {
+                        RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                    } catch (e: IOException) {
+                        println(e)
+                        Log.e(TAG, "IOException, you might not have internet connection")
+                        return@launchWhenCreated
+                    } catch (e: HttpException) {
+                        Log.e(TAG, "HttpException, unexpected response," + e.response())
+                        return@launchWhenCreated
+                    }
+                    nextPage = response.nextpage
+                    commentsAdapter?.updateItems(response.comments!!)
+                    isLoading = false
+                }
+            }
     }
 }
