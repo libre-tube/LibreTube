@@ -63,4 +63,5 @@
     <string name="startpage">Ana Sayfa</string>
     <string name="changeLanguage">Dili Değiştir</string>
     <string name="systemLanguage">Sistem Dili</string>
+    <string name="comments">Yorumlar</string>
 </resources>
