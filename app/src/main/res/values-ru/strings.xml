@@ -14,8 +14,8 @@
     <string name="register">Регистрация</string>
     <string name="logout">Выйти</string>
     <string name="cancel">Отмена</string>
-    <string name="loggedIn">Успешный вход!</string>
-    <string name="loggedout">Успешный выход!</string>
+    <string name="loggedIn">Успешный вход.</string>
+    <string name="loggedout">Успешный выход.</string>
     <string name="registered">Успешная регистрация! Теперь вы можете подписаться на нужные вам каналы.</string>
     <string name="already_logged_in">Вы уже вошли в систему, вы можете выйти из своего аккаунта.</string>
     <string name="login_first">Пожалуйста, войдите и попробуйте снова!</string>
@@ -35,13 +35,13 @@
     <string name="import_from_yt">Импортировать подписки с YouTube</string>
     <string name="app_theme">Тема приложения</string>
     <string name="server_error">На сервере возникла проблема. Может быть, попробовать другой экземпляр\?</string>
-    <string name="unknown_error">Ошибка сети!</string>
-    <string name="error">Что-то пошло не так!</string>
-    <string name="empty">Имя пользователя и пароль не могут быть пустыми!</string>
-    <string name="notgmail">Это не ваш аккаунт Gmail!</string>
+    <string name="unknown_error">Ошибка сети.</string>
+    <string name="error">Что-то пошло не так.</string>
+    <string name="empty">Имя пользователя и пароль не могут быть пустыми.</string>
+    <string name="notgmail">Это не ваш аккаунт Gmail.</string>
     <string name="defres">Разрешение видео по умолчанию</string>
     <string name="grid">Выберите столбцы сетки</string>
-    <string name="emptyList">Ничего здесь нет!</string>
+    <string name="emptyList">Ничего здесь нет.</string>
     <string name="deletePlaylist">Удалить список воспроизведения</string>
     <string name="areYouSure">Вы уверены, что хотите удалить этот плейлист\?</string>
     <string name="createPlaylist">Создать плейлист</string>
@@ -63,4 +63,5 @@
     <string name="startpage">Тренды</string>
     <string name="import_from_yt_summary">Из YouTube или NewPipe</string>
     <string name="emptyPlaylistName">Имя плейлиста не может быть пустым</string>
+    <string name="comments">Комментарии</string>
 </resources>
