@@ -63,4 +63,5 @@
     <string name="darkTheme">Tema oscuro</string>
     <string name="subscribers">%1$s suscriptores</string>
     <string name="systemDefault">Predeterminado del sistema</string>
+    <string name="comments">Comentarios</string>
 </resources>
