@@ -64,4 +64,7 @@
     <string name="lightTheme">Tema chiaro</string>
     <string name="darkTheme">Tema scuro</string>
     <string name="comments">Commenti</string>
+    <string name="videoCount">%1$s video</string>
+    <string name="noInternet">Nessuna connessione a Internet</string>
+    <string name="retry">Riprova</string>
 </resources>
