@@ -68,5 +68,8 @@
     <string name="instance">Instance</string>
     <string name="customization">Customization</string>
     <string name="website">Website</string>
+    <string name="videoCount">%1$s videos</string>
+    <string name="noInternet">No Internet Connection</string>
+    <string name="retry">Retry</string>
     <string name="comments">Comments</string>
 </resources>

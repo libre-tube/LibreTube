@@ -4,38 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFragment"
-    >
+    tools:context=".SearchFragment">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/outlinedTextField"
         style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="27dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="5dp"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="false"
-            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-           android:background="@android:color/transparent"
->
+            android:layout_marginRight="20dp"
+            android:background="@android:color/transparent"
+            app:hintEnabled="false">
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:hint="Search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
-                android:background="@android:color/transparent"
                 android:padding="12dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -43,6 +42,263 @@
     </com.google.android.material.card.MaterialCardView>
 
 
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_genres"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="25dp"-->
+    <!--        android:text="Explore different genres"-->
+    <!--        android:textSize="16sp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField" />-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/genres"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="10dp"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        android:layout_marginRight="10dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tv_genres">-->
+
+    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--            android:id="@+id/btn_trending"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="20dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_weight=".5"-->
+    <!--            android:background="@android:color/transparent"-->
+    <!--            app:cardBackgroundColor="@android:color/transparent"-->
+    <!--            app:strokeWidth="0dp">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_ic"-->
+    <!--                    android:layout_width="25dp"-->
+    <!--                    android:layout_height="25dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginStart="5dp"-->
+    <!--                    android:layout_marginTop="5dp"-->
+    <!--                    android:layout_marginEnd="5dp"-->
+    <!--                    android:layout_marginBottom="5dp"-->
+    <!--                    android:src="@drawable/ic_hot" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="7dp"-->
+    <!--                    android:layout_toRightOf="@id/iv_ic"-->
+    <!--                    android:text="@string/trending"-->
+    <!--                    android:textSize="16sp" />-->
+
+    <!--                <ImageView-->
+    <!--                    android:layout_width="10dp"-->
+    <!--                    android:layout_height="10dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:src="@drawable/ic_arrow" />-->
+
+    <!--            </RelativeLayout>-->
+
+
+    <!--        </com.google.android.material.card.MaterialCardView>-->
+
+    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--            android:id="@+id/btn_live"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="30dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_weight=".5"-->
+    <!--            android:background="@android:color/transparent"-->
+    <!--            app:cardBackgroundColor="@android:color/transparent"-->
+    <!--            app:strokeWidth="0dp">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_ic2"-->
+    <!--                    android:layout_width="25dp"-->
+    <!--                    android:layout_height="25dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginStart="5dp"-->
+    <!--                    android:layout_marginTop="5dp"-->
+    <!--                    android:layout_marginEnd="5dp"-->
+    <!--                    android:layout_marginBottom="5dp"-->
+    <!--                    android:src="@drawable/ic_live" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="7dp"-->
+    <!--                    android:layout_toRightOf="@id/iv_ic2"-->
+    <!--                    android:text="@string/live"-->
+    <!--                    android:textSize="16sp" />-->
+
+    <!--                <ImageView-->
+    <!--                    android:layout_width="10dp"-->
+    <!--                    android:layout_height="10dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:src="@drawable/ic_arrow" />-->
+
+    <!--            </RelativeLayout>-->
+
+
+    <!--        </com.google.android.material.card.MaterialCardView>-->
+
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/genres2"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="10dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginRight="10dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/genres">-->
+
+    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--            android:id="@+id/btn_music"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="20dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_weight=".5"-->
+    <!--            android:background="@android:color/transparent"-->
+    <!--            app:cardBackgroundColor="@android:color/transparent"-->
+    <!--            app:strokeWidth="0dp">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_ic3"-->
+    <!--                    android:layout_width="25dp"-->
+    <!--                    android:layout_height="25dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginStart="5dp"-->
+    <!--                    android:layout_marginTop="5dp"-->
+    <!--                    android:layout_marginEnd="5dp"-->
+    <!--                    android:layout_marginBottom="5dp"-->
+    <!--                    android:src="@drawable/ic_music" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="7dp"-->
+    <!--                    android:layout_toRightOf="@id/iv_ic3"-->
+    <!--                    android:text="@string/music"-->
+    <!--                    android:textSize="16sp" />-->
+
+    <!--                <ImageView-->
+    <!--                    android:layout_width="10dp"-->
+    <!--                    android:layout_height="10dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:src="@drawable/ic_arrow" />-->
+
+    <!--            </RelativeLayout>-->
+
+
+    <!--        </com.google.android.material.card.MaterialCardView>-->
+
+    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--            android:id="@+id/btn_films"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="30dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_weight=".5"-->
+    <!--            android:background="@android:color/transparent"-->
+    <!--            app:cardBackgroundColor="@android:color/transparent"-->
+    <!--            app:strokeWidth="0dp">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_ic4"-->
+    <!--                    android:layout_width="25dp"-->
+    <!--                    android:layout_height="25dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginStart="5dp"-->
+    <!--                    android:layout_marginTop="5dp"-->
+    <!--                    android:layout_marginEnd="5dp"-->
+    <!--                    android:layout_marginBottom="5dp"-->
+    <!--                    android:src="@drawable/ic_film" />-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="7dp"-->
+    <!--                    android:layout_toRightOf="@id/iv_ic4"-->
+    <!--                    android:text="@string/film"-->
+    <!--                    android:textSize="16sp" />-->
+
+    <!--                <ImageView-->
+    <!--                    android:layout_width="10dp"-->
+    <!--                    android:layout_height="10dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:src="@drawable/ic_arrow" />-->
+
+    <!--            </RelativeLayout>-->
+
+
+    <!--        </com.google.android.material.card.MaterialCardView>-->
+
+    <!--    </LinearLayout>-->
+
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_history"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="25dp"-->
+    <!--        android:text="@string/history"-->
+    <!--        android:textSize="14sp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"-->
+    <!--        android:visibility="gone"/>-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/history_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler"

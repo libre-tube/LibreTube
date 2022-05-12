@@ -34,6 +34,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/search_thumbnail_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
+            android:textSize="11dp"
+            android:textColor="@color/duration_text_color"
+            android:background="@color/duration_background_color"
+            android:padding="0.5dp"/>
     </com.google.android.material.card.MaterialCardView>
 
     <TextView

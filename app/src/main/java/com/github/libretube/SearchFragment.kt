@@ -11,15 +11,17 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.TextView.OnEditorActionListener
+import android.widget.TextView.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
+import com.github.libretube.adapters.SearchHistoryAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,36 +50,70 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler)
-        recyclerView.layoutManager = GridLayoutManager(view.context, 1)
+
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+
+        val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
+
+
+        //show search history
+
+        recyclerView.visibility = GONE
+        historyRecycler.visibility = VISIBLE
+
+        historyRecycler.layoutManager = LinearLayoutManager(view.context)
+
+        var historylist = getHistory()
+        if (historylist.size != 0) {
+            historyRecycler.adapter =
+                SearchHistoryAdapter(requireContext(), historylist, autoTextView)
+        }
+
+        recyclerView.layoutManager = GridLayoutManager(view.context, 1)
         autoTextView.requestFocus()
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
-            autoTextView.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
+        autoTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s!! != "") {
+                    recyclerView.visibility = VISIBLE
+                    historyRecycler.visibility = GONE
+                    recyclerView.adapter = null
+
+                    GlobalScope.launch {
+                        fetchSuggestions(s.toString(), autoTextView)
+                        delay(3000)
+                        addtohistory(s.toString())
+                        fetchSearch(s.toString(), recyclerView)
+                    }
+
 
                 }
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(s!! != ""){
-                        GlobalScope.launch {
-                            fetchSuggestions(s.toString(), autoTextView)
-                            delay(3000)
-                            fetchSearch(s.toString(),recyclerView)
-                        }
+            override fun afterTextChanged(s: Editable?) {
+                if (s!!.isEmpty()) {
+                    recyclerView.visibility = GONE
+                    historyRecycler.visibility = VISIBLE
+                    var historylist = getHistory()
+                    if (historylist.size != 0) {
+                        historyRecycler.adapter =
+                            SearchHistoryAdapter(requireContext(), historylist, autoTextView)
                     }
                 }
+            }
 
-                override fun afterTextChanged(s: Editable?) {
-
-                }
-
-            })
+        })
         autoTextView.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideKeyboard();
@@ -143,4 +179,43 @@ class SearchFragment : Fragment() {
         super.onStop()
         hideKeyboard()
     }
+
+    private fun addtohistory(query: String) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        var historyList = getHistory()
+
+
+        if (historyList.size != 0 && query == historyList.get(historyList.size - 1)) {
+            return
+        } else if (query == "") {
+            return
+        } else {
+            historyList = historyList + query
+
+        }
+
+
+
+        if (historyList.size > 10) {
+            historyList = historyList.takeLast(10)
+        }
+
+        var set: Set<String> = HashSet(historyList)
+
+        sharedPreferences.edit().putStringSet("search_history", set)
+            .apply()
+    }
+
+    private fun getHistory(): List<String> {
+        try {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val set: Set<String> = sharedPreferences.getStringSet("search_history", HashSet())!!
+            return set.toList()
+        } catch (e: Exception) {
+            return emptyList()
+        }
+
+    }
 }
+
