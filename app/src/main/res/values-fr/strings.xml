@@ -64,4 +64,7 @@
     <string name="darkTheme">Thème sombre</string>
     <string name="subscribers">%1$s abonnés</string>
     <string name="comments">Commentaires</string>
+    <string name="videoCount">%1$s vidéos</string>
+    <string name="retry">Réessayer</string>
+    <string name="noInternet">Pas de connexion Internet</string>
 </resources>
