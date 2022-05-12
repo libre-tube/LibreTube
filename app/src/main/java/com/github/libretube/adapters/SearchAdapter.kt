@@ -1,6 +1,7 @@
 package com.github.libretube.adapters
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,8 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
         Picasso.get().load(item.thumbnail).into(thumbnailImage)
+        val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
+        thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
         Picasso.get().load(item.uploaderAvatar).into(channelImage)
         val title = v.findViewById<TextView>(R.id.search_description)
@@ -89,7 +92,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = item.subscribers.formatShort() + " subscribers • "+ item.videos + " videos"
+        channelViews.text = v.context.getString(R.string.subscribers, item.subscribers.formatShort()) + " • " + v.context.getString(R.string.videoCount, item.videos.toString())
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
