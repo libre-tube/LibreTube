@@ -64,4 +64,7 @@
     <string name="changeLanguage">Dili Değiştir</string>
     <string name="systemLanguage">Sistem Dili</string>
     <string name="comments">Yorumlar</string>
+    <string name="videoCount">%1$s video</string>
+    <string name="noInternet">İnternet Bağlantısı Yok</string>
+    <string name="retry">Yeniden Dene</string>
 </resources>
