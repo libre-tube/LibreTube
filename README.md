@@ -5,8 +5,9 @@
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
 [![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Matrix](https://badges.alefvanoon.xyz/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
-[![Twitter](https://badges.alefvanoon.xyz/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
+[![Matrix](https://img.shields.io/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
+[![Telegram](https://img.shields.io/endpoint?color=neon&style=flat-square&url=https://tg.sumanjay.workers.dev/libretube)](https://t.me/libretube)
+[![Twitter](https://img.shields.io/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
 
  
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
