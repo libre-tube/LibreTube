@@ -48,8 +48,8 @@ class Library : Fragment() {
         playlistRecyclerView.layoutManager = LinearLayoutManager(view.context)
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
         token = sharedPref?.getString("token","")!!
+        refreshLayout = view.findViewById(R.id.playlist_refresh)
         if(token!="") {
-            refreshLayout = view.findViewById(R.id.playlist_refresh)
             view.findViewById<ImageView>(R.id.boogh2).visibility=View.GONE
             view.findViewById<TextView>(R.id.textLike2).visibility=View.GONE
             fetchPlaylists(view)
@@ -67,6 +67,8 @@ class Library : Fragment() {
                 createPlaylist("$playlistName", view);
             }
         } else{
+            refreshLayout?.isEnabled = false
+            view.findViewById<Button>(R.id.create_playlist).visibility = View.GONE
             with(view.findViewById<ImageView>(R.id.boogh2)){
                 visibility=View.VISIBLE
                 setImageResource(R.drawable.ic_login)
