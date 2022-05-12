@@ -51,6 +51,7 @@ android {
             excludes += ['lib/armeabi-v7a/*_neon.so']
         }
     }
+    namespace 'com.github.libretube'
 }
 
 dependencies {
