@@ -63,4 +63,7 @@
     <string name="library">라이브러리</string>
     <string name="darkTheme">다크 테마</string>
     <string name="systemDefault">시스템 기본값</string>
+    <string name="retry">재시도</string>
+    <string name="comments">댓글</string>
+    <string name="noInternet">인터넷에 연결되지 않음</string>
 </resources>
