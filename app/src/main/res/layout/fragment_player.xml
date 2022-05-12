@@ -235,11 +235,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:backgroundTint="?android:attr/colorBackground"
                     android:drawableLeft="@drawable/ic_bell"
-                    android:drawableTint="@color/white"
+                    android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
-                    android:textColor="@color/white"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="12dp"
                     app:cornerRadius="11dp" />
             </RelativeLayout>
