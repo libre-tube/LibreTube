@@ -64,4 +64,7 @@
     <string name="changeLanguage">Sprache ändern</string>
     <string name="systemLanguage">Systemsprache</string>
     <string name="comments">Kommentare</string>
+    <string name="retry">Erneut versuchen</string>
+    <string name="noInternet">Keine Internetverbindung</string>
+    <string name="videoCount">%1$s Videos</string>
 </resources>
