@@ -58,7 +58,7 @@
     <string name="emptyPlaylistName">플레이리스트 이름은 비워 둘 수 없습니다</string>
     <string name="changeLanguage">언어 변경</string>
     <string name="systemLanguage">시스템 언어</string>
-    <string name="subscribers">%1$s 구독자</string>
+    <string name="subscribers">%1$s명의 구독자</string>
     <string name="lightTheme">라이트 테마</string>
     <string name="library">라이브러리</string>
     <string name="darkTheme">다크 테마</string>
@@ -66,4 +66,5 @@
     <string name="retry">재시도</string>
     <string name="comments">댓글</string>
     <string name="noInternet">인터넷에 연결되지 않음</string>
+    <string name="videoCount">동영상 %1$s개</string>
 </resources>
