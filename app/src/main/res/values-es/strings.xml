@@ -8,23 +8,23 @@
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
-    <string name="register">Registrarse</string>
+    <string name="register">Registrarme</string>
     <string name="choose_quality_dialog">Elija la calidad:</string>
     <string name="search_hint">Buscar</string>
     <string name="logout">Cerrar sesión</string>
     <string name="cancel">Cancelar</string>
-    <string name="loggedIn">¡Se ha iniciado sesión con éxito!</string>
+    <string name="loggedIn">Conectado.</string>
     <string name="yes">Sí</string>
-    <string name="registered">¡Se ha registrado con éxito! Ahora puede suscribirse a los canales que desee.</string>
-    <string name="already_logged_in">Ya ha iniciado sesión, puede cerrar la sesión de su cuenta.</string>
+    <string name="registered">Registrado. Ahora puede suscribirse a los canales.</string>
+    <string name="already_logged_in">Ya ha iniciado sesión. Puede salir de su cuenta.</string>
     <string name="instances">Elija una instancia</string>
     <string name="customInstance">Añadir una instancia personalizada</string>
     <string name="login_register">Iniciar sesión/registrarse</string>
     <string name="please_login">Por favor, inicie sesión o regístrese primero en los ajustes.</string>
     <string name="importsuccess">Suscrito</string>
     <string name="subscribeIsEmpty">Suscríbase primero a algunos canales.</string>
-    <string name="loggedout">¡Se ha cerrado sesión con éxito!</string>
-    <string name="login_first">Por favor, inicie sesión e intente de nuevo.</string>
+    <string name="loggedout">Desconectado.</string>
+    <string name="login_first">Por favor, conéctese e inténtelo de nuevo.</string>
     <string name="region">Elija una región</string>
     <string name="cannotDownload">No se puede descargar esta transmisión.</string>
     <string name="dlcomplete">Descarga completada.</string>
@@ -56,7 +56,7 @@
     <string name="subscriptions">Suscripciones</string>
     <string name="library">Biblioteca</string>
     <string name="videos">Videos</string>
-    <string name="import_from_yt_summary">De YouTube o Newpipe</string>
+    <string name="import_from_yt_summary">Desde Youtube o Newpipe</string>
     <string name="changeLanguage">Cambiar idioma</string>
     <string name="systemLanguage">Idioma del sistema</string>
     <string name="lightTheme">Tema ligero</string>
@@ -64,4 +64,7 @@
     <string name="subscribers">%1$s suscriptores</string>
     <string name="systemDefault">Predeterminado del sistema</string>
     <string name="comments">Comentarios</string>
+    <string name="videoCount">%1$s videos</string>
+    <string name="noInternet">Sin conexión a Internet</string>
+    <string name="retry">Reintentar</string>
 </resources>
