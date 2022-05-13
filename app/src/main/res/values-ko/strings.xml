@@ -67,4 +67,9 @@
     <string name="comments">댓글</string>
     <string name="noInternet">인터넷에 연결되지 않음</string>
     <string name="videoCount">동영상 %1$s개</string>
+    <string name="location">위치</string>
+    <string name="customization">커스터마이징</string>
+    <string name="settings">설정</string>
+    <string name="instance">인스턴스</string>
+    <string name="website">웹사이트</string>
 </resources>
