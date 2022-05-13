@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_hint">Meklēt</string>
-    <string name="logout">Iznākt</string>
+    <string name="logout">Izlogoties</string>
     <string name="importsuccess">Abonēts</string>
     <string name="dlisinprogress">Pašlaik jau notiek cita lejupielāde. Lūdzu pagaidiet, līdz tā ir pabeigta.</string>
     <string name="server_error">Ar serveri ir problēma. Varbūt varat pamēģināt citu instanci\?</string>
@@ -13,11 +13,11 @@
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
     <string name="defres">Noklusējuma video izšķirtspēja</string>
     <string name="playlistCreated">Atskaņošanas saraksts izveidots!</string>
-    <string name="already_logged_in">Jūs jau esat ienācis. Jūs varat iznākt no sava konta.</string>
+    <string name="already_logged_in">Jūs jau esat ielogojušies. Jūs varat izlogoties no sava konta.</string>
     <string name="notgmail">Šis nav Jūsu Gmail konts.</string>
     <string name="registered">Jūsu konts ir reģistrēts. Tagad varat abonēt kanālus.</string>
     <string name="startpage">Sākums</string>
-    <string name="login_register">Ienākt/reģistrēties</string>
+    <string name="login_register">Ielogoties/reģistrēties</string>
     <string name="empty">Jums vajag ievadīt lietotājvārdu un paroli.</string>
     <string name="yes">Jā</string>
     <string name="videos">Video</string>
@@ -25,25 +25,25 @@
     <string name="share">Kopīgot</string>
     <string name="download">Lejupielādēt</string>
     <string name="save">Saglabāt</string>
-    <string name="subscriptions">Abonamenti</string>
+    <string name="subscriptions">Abonementi</string>
     <string name="library">Bibliotēka</string>
-    <string name="unsubscribe">Anulēt abonamentu</string>
+    <string name="unsubscribe">Anulēt abonementu</string>
     <string name="username">Lietotājvārds</string>
     <string name="login">Ienākt</string>
     <string name="cancel">Atcelt</string>
     <string name="region">Izvēlēties reģionu</string>
     <string name="instances">Izvēlēties instanci</string>
     <string name="customInstance">Pievienot pielāgotu instanci</string>
-    <string name="loggedIn">Jūs esat ienācis.</string>
-    <string name="login_first">Ienāciet kontā un mēģiniet vēlreiz!</string>
-    <string name="please_login">Vispirms ienāciet vai reģistrējieties iestatījumos.</string>
+    <string name="loggedIn">Jūs esat ielogojies.</string>
+    <string name="login_first">Ielogojies kontā un mēģiniet vēlreiz!</string>
+    <string name="please_login">Vispirms ielogojaties vai reģistrējieties iestatījumos.</string>
     <string name="dlcomplete">Lejupielāde pabeigta.</string>
     <string name="vlc">Atvērt ar VLC</string>
-    <string name="import_from_yt">Importēt abonamentus</string>
+    <string name="import_from_yt">Importēt abonementus</string>
     <string name="app_theme">Tēma</string>
     <string name="error">Kaut kas nogāja greizi.</string>
     <string name="deletePlaylist">Izdzēst atskaņošanas sarakstu</string>
-    <string name="areYouSure">Vai izdzēst atskaņošanas sarakstu\?</string>
+    <string name="areYouSure">Vai tiešām vēlaties izdzēst atskaņošanas sarakstu\?</string>
     <string name="emptyList">Šeit nekā nav.</string>
     <string name="grid">Izvēlēties režģa kolonnas</string>
     <string name="register">Reģistrēties</string>
@@ -62,5 +62,5 @@
     <string name="darkTheme">Tumša tēma</string>
     <string name="lightTheme">Gaiša tēma</string>
     <string name="createPlaylist">Izveidot atskaņošanas sarakstu</string>
-    <string name="loggedout">Jūs neesat ienācis.</string>
+    <string name="loggedout">Jūs izlogojaties.</string>
 </resources>
