@@ -37,11 +37,13 @@ import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
@@ -323,6 +325,10 @@ class PlayerFragment : Fragment() {
                         cronetDataSourceFactory
                     )
 
+                    val audioAttributes = AudioAttributes.Builder()
+                        .setUsage(C.USAGE_MEDIA)
+                        .setContentType(C.CONTENT_TYPE_MOVIE)
+                        .build()
 
                     exoPlayer = ExoPlayer.Builder(view.context)
                         .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
@@ -334,6 +340,7 @@ class PlayerFragment : Fragment() {
                     exoPlayerView.setShowPreviousButton(false)
                     // exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
+                    exoPlayer.setAudioAttributes(audioAttributes,true);
                     exoPlayerView.player = exoPlayer
                     val sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(requireContext())
