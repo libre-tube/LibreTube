@@ -434,6 +434,7 @@ class PlayerFragment : Fragment() {
                         val builder: AlertDialog.Builder? = activity?.let {
                             AlertDialog.Builder(it)
                         }
+                        var lastPosition = exoPlayer.currentPosition
                         builder!!.setTitle(R.string.choose_quality_dialog)
                             .setItems(
                                 videosNameArray,
@@ -455,6 +456,8 @@ class PlayerFragment : Fragment() {
                                             .setSubtitleConfigurations(subtitle)
                                             .build()
                                         exoPlayer.setMediaItem(mediaItem)
+
+
                                     } else {
                                         val dataSourceFactory: DataSource.Factory =
                                             DefaultHttpDataSource.Factory()
@@ -483,6 +486,7 @@ class PlayerFragment : Fragment() {
                                             MergingMediaSource(videoSource, audioSource)
                                         exoPlayer.setMediaSource(mergeSource)
                                     }
+                                    exoPlayer.seekTo(lastPosition);
                                     view.findViewById<TextView>(R.id.quality_text).text =
                                         videosNameArray[which]
                                 }
