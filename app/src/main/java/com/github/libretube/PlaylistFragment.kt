@@ -73,7 +73,7 @@ class PlaylistFragment : Fragment() {
                     val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                     val user = sharedPref2?.getString("username","")
                     var isOwner = false
-                    if(response.uploaderUrl == null && response.uploader == user){
+                    if(response.uploaderUrl == null && response.uploader.equals(user, true)){
                         isOwner = true
                     }
                     playlistAdapter = PlaylistAdapter(response.relatedStreams!!.toMutableList(), playlist_id!!, isOwner, requireActivity())
