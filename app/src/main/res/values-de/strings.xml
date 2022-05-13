@@ -67,4 +67,9 @@
     <string name="retry">Erneut versuchen</string>
     <string name="noInternet">Keine Internetverbindung</string>
     <string name="videoCount">%1$s Videos</string>
+    <string name="settings">Einstellungen</string>
+    <string name="location">Standort</string>
+    <string name="customization">Anpassung</string>
+    <string name="website">Website</string>
+    <string name="instance">Instanz</string>
 </resources>
