@@ -24,7 +24,7 @@
     <string name="importsuccess">Suscrito</string>
     <string name="subscribeIsEmpty">Suscríbase primero a algunos canales.</string>
     <string name="loggedout">Desconectado.</string>
-    <string name="login_first">Por favor, conéctese e inténtelo de nuevo.</string>
+    <string name="login_first">¡Por favor, conéctese e inténtelo de nuevo!</string>
     <string name="region">Elija una región</string>
     <string name="cannotDownload">No se puede descargar esta transmisión.</string>
     <string name="dlcomplete">Descarga completada.</string>
@@ -67,4 +67,9 @@
     <string name="videoCount">%1$s videos</string>
     <string name="noInternet">Sin conexión a Internet</string>
     <string name="retry">Reintentar</string>
+    <string name="customization">Personalización</string>
+    <string name="instance">Instancia</string>
+    <string name="settings">Ajustes</string>
+    <string name="website">Sitio web</string>
+    <string name="location">Ubicación</string>
 </resources>
