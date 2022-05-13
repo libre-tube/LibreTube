@@ -456,8 +456,6 @@ class PlayerFragment : Fragment() {
                                             .setSubtitleConfigurations(subtitle)
                                             .build()
                                         exoPlayer.setMediaItem(mediaItem)
-
-
                                     } else {
                                         val dataSourceFactory: DataSource.Factory =
                                             DefaultHttpDataSource.Factory()
