@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="register">Kaydolun</string>
+    <string name="register">Kaydol</string>
     <string name="already_logged_in">Zaten girmişsiniz, dilerseniz hesabınızdan çıkabilirsiniz.</string>
     <string name="download">İndir</string>
     <string name="password">Parola</string>
@@ -8,8 +8,8 @@
     <string name="registered">Kaydoldunuz. Artık istediğiniz kanala abone olabilirsiniz.</string>
     <string name="dlcomplete">İndirme bitti.</string>
     <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene değin bekleyin.</string>
-    <string name="downloadfailed">İndirme bitirilemedi.</string>
-    <string name="app_theme">Görünüş</string>
+    <string name="downloadfailed">İndirme başarısız.</string>
+    <string name="app_theme">Görünüm</string>
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Bir kullanıcı adı ve parola girmelisiniz.</string>
     <string name="notgmail">Bu, sizin Gmail hesabınız değildir.</string>
@@ -24,8 +24,8 @@
     <string name="choose_quality_dialog">Kaliteyi seç:</string>
     <string name="subscribe">Abone Ol</string>
     <string name="save">Kaydet</string>
-    <string name="login">Girin</string>
-    <string name="logout">Çıkın</string>
+    <string name="login">Giriş Yap</string>
+    <string name="logout">Çıkış Yap</string>
     <string name="cancel">Vazgeç</string>
     <string name="loggedout">Çıkış yapıldı.</string>
     <string name="loggedIn">Giriş yapıldı.</string>
@@ -67,4 +67,9 @@
     <string name="videoCount">%1$s video</string>
     <string name="noInternet">İnternet Bağlantısı Yok</string>
     <string name="retry">Yeniden Dene</string>
+    <string name="location">Konum</string>
+    <string name="settings">Ayarlar</string>
+    <string name="instance">Erişim Aracı</string>
+    <string name="customization">Özelleştirme</string>
+    <string name="website">İnternet Sitesi</string>
 </resources>
