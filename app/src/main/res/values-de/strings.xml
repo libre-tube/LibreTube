@@ -63,4 +63,5 @@
     <string name="import_from_yt_summary">Von YouTube oder Newpipe</string>
     <string name="changeLanguage">Sprache ändern</string>
     <string name="systemLanguage">Systemsprache</string>
+    <string name="comments">Kommentare</string>
 </resources>

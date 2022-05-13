@@ -25,9 +25,9 @@
     <string name="share">Kopīgot</string>
     <string name="download">Lejupielādēt</string>
     <string name="save">Saglabāt</string>
-    <string name="subscriptions">Abonamenti</string>
+    <string name="subscriptions">Abonementi</string>
     <string name="library">Bibliotēka</string>
-    <string name="unsubscribe">Anulēt abonamentu</string>
+    <string name="unsubscribe">Anulēt abonementu</string>
     <string name="username">Lietotājvārds</string>
     <string name="login">Ienākt</string>
     <string name="cancel">Atcelt</string>
@@ -39,7 +39,7 @@
     <string name="please_login">Vispirms ienāciet vai reģistrējieties iestatījumos.</string>
     <string name="dlcomplete">Lejupielāde pabeigta.</string>
     <string name="vlc">Atvērt ar VLC</string>
-    <string name="import_from_yt">Importēt abonamentus</string>
+    <string name="import_from_yt">Importēt abonementus</string>
     <string name="app_theme">Tēma</string>
     <string name="error">Kaut kas nogāja greizi.</string>
     <string name="deletePlaylist">Izdzēst atskaņošanas sarakstu</string>
@@ -59,8 +59,8 @@
     <string name="choose_quality_dialog">Izvēlēties kvalitāti:</string>
     <string name="subscribeIsEmpty">Vispirms abonējiet dažus kanālus.</string>
     <string name="success">Izdevās!</string>
-    <string name="darkTheme">Tumša tēma</string>
-    <string name="lightTheme">Gaiša tēma</string>
+    <string name="darkTheme">Tumšais motīvs</string>
+    <string name="lightTheme">Gaišais motīvs</string>
     <string name="createPlaylist">Izveidot atskaņošanas sarakstu</string>
     <string name="loggedout">Jūs neesat ienācis.</string>
 </resources>

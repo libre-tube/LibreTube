@@ -42,7 +42,7 @@
     <string name="dlisinprogress">Egy másik letöltés már folyamatban van, kérlek várj amíg befejeződik.</string>
     <string name="customInstance">Egyedi instance hozzáadása</string>
     <string name="dlcomplete">Sikeres letöltés.</string>
-    <string name="importsuccess">Sikeres feliratkozás.</string>
+    <string name="importsuccess">Sikeres feliratkozás</string>
     <string name="subscribeIsEmpty">Iratkozz fel előbb néhány csatornára.</string>
     <string name="error">Valami gond van.</string>
     <string name="region">Válassz régiót</string>
@@ -53,4 +53,14 @@
     <string name="about">A programról</string>
     <string name="emptyPlaylistName">A lejátszási lista neve nem lehet üres</string>
     <string name="import_from_yt_summary">Youtube-ról vagy NewPipe-ból</string>
+    <string name="systemDefault">Rendszer alapértelmezett</string>
+    <string name="subscribers">%1$s feliratkozó</string>
+    <string name="systemLanguage">Rendszer nyelv</string>
+    <string name="startpage">Home</string>
+    <string name="videos">Videók</string>
+    <string name="changeLanguage">Nyelv választás</string>
+    <string name="subscriptions">Feliratkozások</string>
+    <string name="darkTheme">Sötét téma</string>
+    <string name="library">Könyvtár</string>
+    <string name="lightTheme">Világos téma</string>
 </resources>

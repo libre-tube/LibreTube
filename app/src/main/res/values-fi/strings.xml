@@ -63,4 +63,5 @@
     <string name="systemDefault">Järjestelmän oletusarvo</string>
     <string name="lightTheme">Vaalea teema</string>
     <string name="subscribers">%1$s tilaajaa</string>
+    <string name="comments">Kommentit</string>
 </resources>
