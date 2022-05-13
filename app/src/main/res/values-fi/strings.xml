@@ -67,4 +67,9 @@
     <string name="noInternet">Ei Internet-yhteyttä</string>
     <string name="videoCount">%1$s videota</string>
     <string name="retry">Yritä uudelleen</string>
+    <string name="location">Sijainti</string>
+    <string name="customization">Mukauttaminen</string>
+    <string name="settings">Asetukset</string>
+    <string name="instance">Instanssi</string>
+    <string name="website">Verkkosivusto</string>
 </resources>
