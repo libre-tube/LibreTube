@@ -51,6 +51,7 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import org.chromium.net.CronetEngine
@@ -332,6 +333,7 @@ class PlayerFragment : Fragment() {
                     exoPlayerView.setShowSubtitleButton(true)
                     exoPlayerView.setShowNextButton(false)
                     exoPlayerView.setShowPreviousButton(false)
+                    exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL);
                     // exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
                     exoPlayerView.player = exoPlayer
