@@ -4,7 +4,7 @@
     <string name="search_hint">Procurar</string>
     <string name="unsubscribe">Cancelar inscrição</string>
     <string name="share">Compartilhar</string>
-    <string name="download">Baixar</string>
+    <string name="download">Download</string>
     <string name="save">Salvar</string>
     <string name="password">Senha</string>
     <string name="login">Login</string>
@@ -71,4 +71,5 @@
     <string name="website">Sítio Web</string>
     <string name="comments">Comentários</string>
     <string name="noInternet">Sem ligação à Internet</string>
+    <string name="retry">Tente novamente</string>
 </resources>
