@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.app.Activity
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -114,11 +115,12 @@ class MainActivity : AppCompatActivity() {
             )
             toolbar.title = appName
 
-            toolbar.setNavigationOnClickListener {
-                //settings fragment stuff
-                navController.navigate(R.id.settings)
-                true
-            }
+        toolbar.setNavigationOnClickListener{
+            //settings activity stuff
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+            true
+        }
 
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {

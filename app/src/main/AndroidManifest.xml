@@ -28,6 +28,10 @@
             android:configChanges="orientation|screenSize"
             />
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize"

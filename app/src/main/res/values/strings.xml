@@ -63,6 +63,11 @@
     <string name="lightTheme">Light Theme</string>
     <string name="darkTheme">Dark Theme</string>
     <string name="subscribers">%1$s subscribers</string>
+    <string name="settings">Settings</string>
+    <string name="location">Location</string>
+    <string name="instance">Instance</string>
+    <string name="customization">Customization</string>
+    <string name="website">Website</string>
     <string name="videoCount">%1$s videos</string>
     <string name="noInternet">No Internet Connection</string>
     <string name="retry">Retry</string>

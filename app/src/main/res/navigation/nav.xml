@@ -46,6 +46,6 @@
     </fragment>
     <fragment
         android:id="@+id/settings"
-        android:name="com.github.libretube.Settings"
+        android:name="com.github.libretube.SettingsActivity$SettingsFragment"
         android:label="Settings" />
 </navigation>
