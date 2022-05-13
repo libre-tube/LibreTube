@@ -13,7 +13,7 @@
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
     <string name="defres">Noklusējuma video izšķirtspēja</string>
     <string name="playlistCreated">Atskaņošanas saraksts izveidots!</string>
-    <string name="already_logged_in">Jūs jau esat ielogojušies. Jūs varat izlogoties no sava konta.</string>
+    <string name="already_logged_in">Jūs jau esat ielogojies. Jūs varat izlogoties no sava konta.</string>
     <string name="notgmail">Šis nav Jūsu Gmail konts.</string>
     <string name="registered">Jūsu konts ir reģistrēts. Tagad varat abonēt kanālus.</string>
     <string name="startpage">Sākums</string>
