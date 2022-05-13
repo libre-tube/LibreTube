@@ -63,4 +63,12 @@
     <string name="subscribers">%1$s inscrições</string>
     <string name="library">Biblioteca</string>
     <string name="startpage">Início</string>
+    <string name="customization">Personalização</string>
+    <string name="settings">Configurações</string>
+    <string name="videoCount">%1$s vídeos</string>
+    <string name="location">Localização</string>
+    <string name="instance">Instância</string>
+    <string name="website">Sítio Web</string>
+    <string name="comments">Comentários</string>
+    <string name="noInternet">Sem ligação à Internet</string>
 </resources>
