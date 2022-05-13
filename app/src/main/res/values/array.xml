@@ -470,6 +470,19 @@
         <item>L</item>
         <item>D</item>
     </string-array>
+
+    <string-array name="tabs">
+        <item>@string/startpage</item>
+        <item>@string/subscriptions</item>
+        <item>@string/library</item>
+    </string-array>
+
+    <string-array name="tabsValue">
+        <item>home</item>
+        <item>subscriptions</item>
+        <item>library</item>
+    </string-array>
+
     <string-array name="defres">
         <item>HLS</item>
         <item>1080p</item>

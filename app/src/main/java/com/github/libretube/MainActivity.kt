@@ -18,6 +18,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -85,6 +86,12 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView = findViewById(R.id.bottomNav)
             navController = findNavController(R.id.fragment)
             bottomNavigationView.setupWithNavController(navController)
+
+            when (sharedPreferences.getString("default_tab", "home")!!) {
+                "home" -> navController.navigate(R.id.home2)
+                "subscriptions" -> navController.navigate(R.id.subscriptions)
+                "library" -> navController.navigate(R.id.library)
+            }
 
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
