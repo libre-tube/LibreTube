@@ -63,4 +63,12 @@
     <string name="changeLanguage">Změna jazyka</string>
     <string name="systemLanguage">Systémový jazyk</string>
     <string name="subscribers">%1$s odběratelů</string>
+    <string name="settings">Nastavení</string>
+    <string name="retry">Zkusit znovu</string>
+    <string name="location">Lokace</string>
+    <string name="instance">Instance</string>
+    <string name="customization">Přizpůsobení</string>
+    <string name="website">Webové stránky</string>
+    <string name="videoCount">%1$s videí</string>
+    <string name="noInternet">Žádné připojení k internetu</string>
 </resources>
