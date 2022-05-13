@@ -63,4 +63,11 @@
     <string name="subscribers">%1$s εγγεγραμμένοι</string>
     <string name="systemDefault">Προεπιλογή συστήματος</string>
     <string name="darkTheme">Σκοτεινό θέμα</string>
+    <string name="comments">Σχόλια</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="customization">Προσαρμογή</string>
+    <string name="website">Ιστοσελίδα</string>
+    <string name="location">Περιοχή</string>
+    <string name="noInternet">Δεν υπάρχει σύνδεση στο διαδίκτυο</string>
+    <string name="retry">Ξαναδοκιμάστε</string>
 </resources>
