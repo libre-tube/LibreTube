@@ -9,14 +9,14 @@
     <string name="save">Simpan</string>
     <string name="password">Kata Sandi</string>
     <string name="share">Bagikan</string>
-    <string name="username">Username</string>
+    <string name="username">Nama Pengguna</string>
     <string name="register">Daftar</string>
-    <string name="logout">Logout</string>
+    <string name="logout">Keluar</string>
     <string name="cancel">Batalkan</string>
     <string name="loggedIn">Berhasil masuk.</string>
     <string name="loggedout">Berhasil keluar.</string>
     <string name="registered">Daftar Telah Berhasil! Anda sekarang bisa subscribe yang ada mau.</string>
-    <string name="login">Login</string>
+    <string name="login">Masuk</string>
     <string name="videos">Video</string>
     <string name="downloadfailed">Unduhan Gagal.</string>
     <string name="vlcerror">Tidak dapat dibuka di VLC. Mungkin belum terpasang\?</string>
@@ -25,7 +25,7 @@
     <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun anda.</string>
     <string name="login_first">Silahkan login dan coba lagi!</string>
     <string name="instances">Pilih instance</string>
-    <string name="customInstance">Tambah instance kostum</string>
+    <string name="customInstance">Tambahkan instance kustom</string>
     <string name="region">Pilih wilayah</string>
     <string name="login_register">Masuk/Daftar</string>
     <string name="subscribeIsEmpty">Berlangganan beberapa saluran terlebih dahulu.</string>
@@ -43,7 +43,7 @@
     <string name="createPlaylist">Buat Daftar Putar</string>
     <string name="playlistName">Nama Daftar Putar</string>
     <string name="import_from_yt_summary">Dari Youtube atau Newpipe</string>
-    <string name="server_error">Server sedang bermasalah. Cobalah contoh yang lain\?</string>
+    <string name="server_error">Server sedang bermasalah. Cobalah instance yang lain\?</string>
     <string name="unknown_error">Masalah jaringan.</string>
     <string name="error">Ada yang tidak beres.</string>
     <string name="empty">Nama pengguna dan Kata sandi harus diisi.</string>
@@ -51,7 +51,7 @@
     <string name="startpage">Beranda</string>
     <string name="subscriptions">Langganan</string>
     <string name="library">Perpustakaan</string>
-    <string name="app_theme">Tema</string>
+    <string name="app_theme">Tema aplikasi</string>
     <string name="changeLanguage">Ganti Bahasa</string>
     <string name="systemDefault">Bawaan Sistem</string>
     <string name="systemLanguage">Bahasa Sistem</string>
@@ -65,7 +65,7 @@
     <string name="subscribers">%1$s subscriber</string>
     <string name="settings">Pengaturan</string>
     <string name="location">Lokasi</string>
-    <string name="instance">Instansi</string>
+    <string name="instance">Instance</string>
     <string name="customization">Kustomisasi</string>
     <string name="website">Halaman web</string>
     <string name="videoCount">%1$s video</string>
