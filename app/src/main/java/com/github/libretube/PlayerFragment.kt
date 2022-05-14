@@ -85,7 +85,6 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
-    private lateinit var currentView: View
 
     private lateinit var relDownloadVideo: LinearLayout
 
@@ -108,7 +107,6 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
-        currentView = view
 
         val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
