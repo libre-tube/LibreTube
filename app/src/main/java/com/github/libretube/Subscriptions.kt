@@ -52,7 +52,7 @@ class Subscriptions : Fragment() {
             progressBar.visibility=View.VISIBLE
 
             var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
-            channelRecView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            channelRecView?.layoutManager = GridLayoutManager(context, 4)
             fetchChannels(channelRecView)
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
@@ -64,6 +64,12 @@ class Subscriptions : Fragment() {
             refreshLayout?.setOnRefreshListener {
                 fetchChannels(channelRecView)
                 fetchFeed(feedRecView, progressBar, view)
+            }
+
+            var toggleSubs = view.findViewById<RelativeLayout>(R.id.toggle_subs)
+            toggleSubs.setOnClickListener {
+                channelRecView.visibility = if (channelRecView.visibility == View.GONE) View.VISIBLE else View.GONE
+                feedRecView.visibility = if (feedRecView.visibility == View.GONE) View.VISIBLE else View.GONE
             }
 
             val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
