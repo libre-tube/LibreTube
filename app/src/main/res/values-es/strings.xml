@@ -2,13 +2,13 @@
 <resources>
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
-    <string name="subscribe">Suscribirme</string>
-    <string name="unsubscribe">Desuscribirme</string>
+    <string name="subscribe">Suscribirse</string>
+    <string name="unsubscribe">Desuscribirse</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
-    <string name="register">Registrarme</string>
+    <string name="register">Registrarse</string>
     <string name="choose_quality_dialog">Elija la calidad:</string>
     <string name="search_hint">Buscar</string>
     <string name="logout">Cerrar sesión</string>
@@ -36,7 +36,7 @@
     <string name="error">Algo salio mal.</string>
     <string name="empty">Tienes que introducir un nombre de usuario y una contraseña.</string>
     <string name="notgmail">Esta no es su cuenta de Gmail.</string>
-    <string name="defres">Resolución predeterminada de video</string>
+    <string name="defres">Resolución de video predeterminada</string>
     <string name="grid">Elija las columnas de la cuadrícula</string>
     <string name="emptyList">No hay nada aquí.</string>
     <string name="areYouSure">¿Eliminar la lista de reproducción\?</string>
@@ -55,11 +55,11 @@
     <string name="startpage">Inicio</string>
     <string name="subscriptions">Suscripciones</string>
     <string name="library">Biblioteca</string>
-    <string name="videos">Videos</string>
+    <string name="videos">Vídeos</string>
     <string name="import_from_yt_summary">Desde Youtube o Newpipe</string>
     <string name="changeLanguage">Cambiar idioma</string>
     <string name="systemLanguage">Idioma del sistema</string>
-    <string name="lightTheme">Tema ligero</string>
+    <string name="lightTheme">Tema claro</string>
     <string name="darkTheme">Tema oscuro</string>
     <string name="subscribers">%1$s suscriptores</string>
     <string name="systemDefault">Predeterminado del sistema</string>
