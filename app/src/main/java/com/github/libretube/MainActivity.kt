@@ -317,6 +317,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        for(fragment in supportFragmentManager.fragments)
+        {
+            if(fragment is PlayerFragment)
+            {
+                fragment.onUserLeaveHint();
+            }
+        }
+    }
+
 }
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }

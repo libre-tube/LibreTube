@@ -85,6 +85,7 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
+    private lateinit var currentView: View
 
     private lateinit var relDownloadVideo: LinearLayout
 
@@ -107,6 +108,7 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
+        currentView = view
 
         val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
@@ -803,5 +805,33 @@ class PlayerFragment : Fragment() {
                     isLoading = false
                 }
             }
+    }
+
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+        if (isInPictureInPictureMode) {
+            exoPlayerView.hideController()
+            with(motionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+                enableTransition(R.id.yt_transition, false)
+            }
+            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
+            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.GONE
+            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
+        } else {
+            with(motionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                enableTransition(R.id.yt_transition, true)
+            }
+            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
+            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.VISIBLE
+            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
+        }
+    }
+
+    fun onUserLeaveHint() {
+        if (SDK_INT >= Build.VERSION_CODES.N && exoPlayer.isPlaying) {
+            requireActivity().enterPictureInPictureMode()
+        };
     }
 }
