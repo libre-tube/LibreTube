@@ -817,6 +817,7 @@ class PlayerFragment : Fragment() {
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            isFullScreen = false;
         } else {
             with(motionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
