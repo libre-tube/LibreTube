@@ -67,4 +67,9 @@
     <string name="noInternet">Нет Интернет Соединения</string>
     <string name="videoCount">%1$sвидео</string>
     <string name="retry">Попробовать Снова</string>
+    <string name="settings">Настройки</string>
+    <string name="location">Локация</string>
+    <string name="instance">Инстант</string>
+    <string name="customization">Кастомизация</string>
+    <string name="website">Вебсайт</string>
 </resources>
