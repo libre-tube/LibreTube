@@ -13,8 +13,8 @@
     <string name="register">Daftar</string>
     <string name="logout">Logout</string>
     <string name="cancel">Batalkan</string>
-    <string name="loggedIn">Login telah berhasil</string>
-    <string name="loggedout">Logout Berhasil</string>
+    <string name="loggedIn">Berhasil masuk.</string>
+    <string name="loggedout">Berhasil keluar.</string>
     <string name="registered">Daftar Telah Berhasil! Anda sekarang bisa subscribe yang ada mau.</string>
     <string name="login">Login</string>
     <string name="videos">Video</string>
@@ -52,4 +52,24 @@
     <string name="subscriptions">Langganan</string>
     <string name="library">Perpustakaan</string>
     <string name="app_theme">Tema</string>
+    <string name="changeLanguage">Ganti Bahasa</string>
+    <string name="systemDefault">Bawaan Sistem</string>
+    <string name="systemLanguage">Bahasa Sistem</string>
+    <string name="lightTheme">Tema terang</string>
+    <string name="darkTheme">Tema gelap</string>
+    <string name="success">Sukses!</string>
+    <string name="fail">Gagal :(</string>
+    <string name="about">Tentang</string>
+    <string name="addToPlaylist">Tambahkan ke Daftar Putar</string>
+    <string name="emptyPlaylistName">Nama Daftar Putar tidak bisa kosong</string>
+    <string name="subscribers">%1$s subscriber</string>
+    <string name="settings">Pengaturan</string>
+    <string name="location">Lokasi</string>
+    <string name="instance">Instansi</string>
+    <string name="customization">Kustomisasi</string>
+    <string name="website">Halaman web</string>
+    <string name="videoCount">%1$s video</string>
+    <string name="noInternet">Tidak ada jaringan internet</string>
+    <string name="retry">Coba lagi</string>
+    <string name="comments">Komentar</string>
 </resources>
