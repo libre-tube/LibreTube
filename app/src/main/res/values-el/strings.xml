@@ -6,8 +6,8 @@
     <string name="login">Σύνδεση</string>
     <string name="already_logged_in">Έχετε ήδη συνδεθεί. Μπορείτε να αποσυνδεθείτε από τον λογαριασμό σας.</string>
     <string name="login_first">Παρακαλώ συνδεθείτε και προσπαθήστε πάλι!</string>
-    <string name="instances">Επιλέξτε instance</string>
-    <string name="customInstance">Προσθέστε άλλο instance</string>
+    <string name="instances">Επιλογή διακομιστή</string>
+    <string name="customInstance">Πρόσθεση άλλου διακομιστή</string>
     <string name="region">Επιλέξτε περιοχή</string>
     <string name="login_register">Σύνδεση/Εγγραφή</string>
     <string name="please_login">Παρακαλώ συνδεθείτε ή εγγραφείτε πρώτα στις ρυθμίσεις.</string>
@@ -20,7 +20,7 @@
     <string name="import_from_yt">Εισαγωγή εγγραφών</string>
     <string name="import_from_yt_summary">Από το YouTube ή το NewPipe</string>
     <string name="app_theme">Θέμα</string>
-    <string name="server_error">Υπάρχει πρόβλημα με τον διακομιστή. Μήπως να δοκιμάσετε άλλο instance;</string>
+    <string name="server_error">Υπάρχει πρόβλημα με τον διακομιστή. Μήπως να δοκιμάσετε άλλο διακομιστή;</string>
     <string name="unknown_error">Πρόβλημα δικτύου.</string>
     <string name="error">Κάτι πήγε στραβά.</string>
     <string name="empty">Πρέπει να εισάγετε όνομα χρήστη και κωδικό πρόσβασης.</string>
@@ -70,4 +70,6 @@
     <string name="location">Περιοχή</string>
     <string name="noInternet">Δεν υπάρχει σύνδεση στο διαδίκτυο</string>
     <string name="retry">Ξαναδοκιμάστε</string>
+    <string name="instance">Διακομιστής</string>
+    <string name="videoCount">%1$s βίντεο</string>
 </resources>
