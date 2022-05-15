@@ -61,15 +61,21 @@ class SearchFragment : Fragment() {
         val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
 
         val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
+
+        var checkedItem = 0
+        var tempSelectedItem = 0
+
         filterImageView.setOnClickListener {
-            val options = arrayOf("Alle", "Videos")
-            var checkItem = 1
+            val options = arrayOf(getString(R.string.all), getString(R.string.videos), getString(R.string.channels), getString(R.string.playlists))
             AlertDialog.Builder(view.context)
-                .setTitle("Choose an Option")
-                .setSingleChoiceItems(options, checkItem, DialogInterface.OnClickListener {
-                      dialog, id -> Toast.makeText(view.context,id.toString(),Toast.LENGTH_LONG).show()
+                .setTitle(getString(R.string.choose_filter))
+                .setSingleChoiceItems(options, checkedItem, DialogInterface.OnClickListener {
+                      dialog, id -> tempSelectedItem = id
                 })
-                    
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id -> checkedItem = tempSelectedItem
+                })
+                .setNegativeButton("Cancel", null)
                 .create()
                 .show()
         }

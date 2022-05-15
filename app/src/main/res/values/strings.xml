@@ -72,4 +72,8 @@
     <string name="noInternet">No Internet Connection</string>
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
+    <string name="choose_filter">Choose search filter</string>
+    <string name="channels">Channels</string>
+    <string name="all">All</string>
+    <string name="playlists">Playlists</string>
 </resources>
