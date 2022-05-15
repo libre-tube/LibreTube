@@ -27,7 +27,6 @@ import com.github.libretube.adapters.SearchHistoryAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -38,7 +37,7 @@ class SearchFragment : Fragment() {
     private var nextPage : String? = null
     private lateinit var searchRecView : RecyclerView
     private var searchAdapter : SearchAdapter? = null
-    private var isLoading : Boolean = false
+    private var isLoading : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -204,7 +203,7 @@ class SearchFragment : Fragment() {
                    searchRecView.adapter = searchAdapter
                }
             }
-
+            isLoading = false
         }
     }
 
@@ -215,7 +214,7 @@ class SearchFragment : Fragment() {
                 val response = try {
                     RetrofitInstance.api.getSearchResultsNextPage(
                         query!!,
-                        apiSearchFilter,
+                        apiSearchFilter!!,
                         nextPage!!
                     )
                 } catch (e: IOException) {
