@@ -27,6 +27,7 @@ import com.github.libretube.adapters.SearchHistoryAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -37,6 +38,7 @@ class SearchFragment : Fragment() {
     private var nextPage : String? = null
     private lateinit var searchRecView : RecyclerView
     private var searchAdapter : SearchAdapter? = null
+    private var isLoading : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -207,8 +209,14 @@ class SearchFragment : Fragment() {
 
     private fun fetchNextSearchItems(query: String){
         lifecycleScope.launchWhenCreated {
+            if (!isLoading) {
+                isLoading = true
                 val response = try {
-                    RetrofitInstance.api.getSearchResultsNextPage(query!!, apiSearchFilter, nextPage!!)
+                    RetrofitInstance.api.getSearchResultsNextPage(
+                        query!!,
+                        apiSearchFilter,
+                        nextPage!!
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -219,7 +227,9 @@ class SearchFragment : Fragment() {
                 }
                 nextPage = response.nextpage
                 searchAdapter?.updateItems(response.items!!)
+                isLoading = false
             }
+        }
         }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
