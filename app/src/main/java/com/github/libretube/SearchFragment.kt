@@ -33,6 +33,7 @@ import java.io.IOException
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
     private var selectedFilter = 0
+    private var apiSearchFilter = "all"
     private var nextPage : String? = null
     private lateinit var searchRecView : RecyclerView
     private var searchAdapter : SearchAdapter? = null
@@ -72,8 +73,15 @@ class SearchFragment : Fragment() {
                 .setSingleChoiceItems(options, selectedFilter, DialogInterface.OnClickListener {
                         _, id -> tempSelectedItem = id
                 })
-                .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener {
-                        _, _ -> selectedFilter = tempSelectedItem
+                .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener { _, _ ->
+                    selectedFilter = tempSelectedItem
+                    apiSearchFilter = when (selectedFilter) {
+                        0 -> "all"
+                        1 -> "videos"
+                        2 -> "channels"
+                        3 -> "playlists"
+                        else -> "all"
+                    }
                         fetchSearch(autoTextView.text.toString())
                 })
                 .setNegativeButton(getString(R.string.cancel), null)
@@ -177,7 +185,7 @@ class SearchFragment : Fragment() {
     private fun fetchSearch(query: String){
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.api.getSearchResults(query, "videos")
+                RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG, "IOException, you might not have internet connection $e")
@@ -189,7 +197,7 @@ class SearchFragment : Fragment() {
             nextPage = response.nextpage
             if(response.items!!.isNotEmpty()){
                runOnUiThread {
-                   searchAdapter = SearchAdapter(response.items, selectedFilter)
+                   searchAdapter = SearchAdapter(response.items)
                    searchRecView.adapter = searchAdapter
                }
             }
@@ -200,7 +208,7 @@ class SearchFragment : Fragment() {
     private fun fetchNextSearchItems(query: String){
         lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getSearchResultsNextPage(query!!, "videos", nextPage!!)
+                    RetrofitInstance.api.getSearchResultsNextPage(query!!, apiSearchFilter, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

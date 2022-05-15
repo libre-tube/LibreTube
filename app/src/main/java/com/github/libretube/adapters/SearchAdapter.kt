@@ -14,16 +14,11 @@ import com.github.libretube.MainActivity
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.formatShort
-import com.github.libretube.obj.Comment
 import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.NonDisposableHandle.parent
 
-private var showVideos = true
-private var showChannels = true
-private var showPlaylists = true
 
-class SearchAdapter(private val searchItems: MutableList<SearchItem>, private val selectedFilter : Int): RecyclerView.Adapter<CustomViewHolder1>() {
+class SearchAdapter(private val searchItems: MutableList<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
 
     fun updateItems(newItems: List<SearchItem>){
         var searchItemsSize = searchItems.size
@@ -36,20 +31,11 @@ class SearchAdapter(private val searchItems: MutableList<SearchItem>, private va
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder1 {
-        when (selectedFilter) {
-            0 -> { showChannels = true; showVideos = true; showPlaylists = true }
-            1 -> { showChannels = false; showVideos = true; showPlaylists = false }
-            2 -> { showChannels = true; showVideos = false; showPlaylists = false }
-            3 -> { showChannels = false; showVideos = false; showPlaylists = true }
-        }
-        val layout = if (viewType == 0 && showVideos) {
-            R.layout.video_search_row
-        } else if (viewType == 1 && showChannels){
-            R.layout.channel_search_row
-        } else if (viewType == 2 && showPlaylists) {
-            R.layout.playlist_search_row
-        } else {
-            R.layout.layout_empty
+        val layout = when (viewType) {
+            0 -> R.layout.video_search_row
+            1 -> R.layout.channel_search_row
+            2 -> R.layout.playlist_search_row
+            else -> throw IllegalArgumentException("Invalid type")
         }
         val layoutInflater = LayoutInflater.from(parent.context)
         val cell = layoutInflater.inflate(layout,parent,false)
@@ -141,9 +127,12 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     }
 
     fun bind(searchItem: SearchItem) {
-        if (searchItem.url!!.startsWith("/watch",false) && showVideos) bindWatch(searchItem)
-        else if (searchItem.url!!.startsWith("/channel",false) && showChannels) bindChannel(searchItem)
-        else if (searchItem.url!!.startsWith("/playlist",false) && showPlaylists) bindPlaylist(searchItem)
-        else {}
+        when {
+            searchItem.url!!.startsWith("/watch",false) -> bindWatch(searchItem)
+            searchItem.url!!.startsWith("/channel",false) -> bindChannel(searchItem)
+            searchItem.url!!.startsWith("/playlist",false) -> bindPlaylist(searchItem)
+            else -> {
+            }
+        }
     }
 }
