@@ -2,12 +2,12 @@ package com.github.libretube
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.Html
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -803,5 +802,40 @@ class PlayerFragment : Fragment() {
                     isLoading = false
                 }
             }
+    }
+
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+        if (isInPictureInPictureMode) {
+            exoPlayerView.hideController()
+            with(motionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+                enableTransition(R.id.yt_transition, false)
+            }
+            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
+            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.GONE
+            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
+            val mainActivity = activity as MainActivity
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            isFullScreen = false;
+        } else {
+            with(motionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                enableTransition(R.id.yt_transition, true)
+            }
+            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
+            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.VISIBLE
+            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
+        }
+    }
+
+    fun onUserLeaveHint() {
+        val bounds = Rect()
+        val scrollView = view?.findViewById<ScrollView>(R.id.player_scrollView)
+        scrollView?.getHitRect(bounds)
+
+        if (SDK_INT >= Build.VERSION_CODES.N && exoPlayer.isPlaying && (scrollView?.getLocalVisibleRect(bounds) == true || isFullScreen)) {
+            requireActivity().enterPictureInPictureMode()
+        };
     }
 }
