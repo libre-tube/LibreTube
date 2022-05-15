@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.TextView.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -29,7 +28,6 @@ import com.github.libretube.adapters.SearchHistoryAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -71,10 +69,11 @@ class SearchFragment : Fragment() {
             AlertDialog.Builder(view.context)
                 .setTitle(getString(R.string.choose_filter))
                 .setSingleChoiceItems(options, selectedFilter, DialogInterface.OnClickListener {
-                        dialog, id -> tempSelectedItem = id
+                        _, id -> tempSelectedItem = id
                 })
                 .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener {
-                        dialog, id -> selectedFilter = tempSelectedItem
+                        _, _ -> selectedFilter = tempSelectedItem
+                        fetchSearch(autoTextView.text.toString(), recyclerView)
                 })
                 .setNegativeButton(getString(R.string.cancel), null)
                 .create()
@@ -117,7 +116,7 @@ class SearchFragment : Fragment() {
 
                     GlobalScope.launch {
                         fetchSuggestions(s.toString(), autoTextView)
-                        delay(3000)
+                        delay(1000)
                         addtohistory(s.toString())
                         fetchSearch(s.toString(), recyclerView)
                     }
