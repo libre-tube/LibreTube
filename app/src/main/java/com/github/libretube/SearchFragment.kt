@@ -34,6 +34,8 @@ import retrofit2.HttpException
 import java.io.IOException
 
 
+private var selectedFilter = 0
+
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,18 +64,17 @@ class SearchFragment : Fragment() {
 
         val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
 
-        var checkedItem = 0
         var tempSelectedItem = 0
 
         filterImageView.setOnClickListener {
             val options = arrayOf(getString(R.string.all), getString(R.string.videos), getString(R.string.channels), getString(R.string.playlists))
             AlertDialog.Builder(view.context)
                 .setTitle(getString(R.string.choose_filter))
-                .setSingleChoiceItems(options, checkedItem, DialogInterface.OnClickListener {
+                .setSingleChoiceItems(options, selectedFilter, DialogInterface.OnClickListener {
                         dialog, id -> tempSelectedItem = id
                 })
                 .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener {
-                        dialog, id -> checkedItem = tempSelectedItem
+                        dialog, id -> selectedFilter = tempSelectedItem
                 })
                 .setNegativeButton(getString(R.string.cancel), null)
                 .create()
@@ -181,7 +182,7 @@ class SearchFragment : Fragment() {
             }
             if(response.items!!.isNotEmpty()){
                runOnUiThread {
-                   recyclerView.adapter = SearchAdapter(response.items)
+                   recyclerView.adapter = SearchAdapter(response.items, selectedFilter)
                }
             }
 

@@ -18,17 +18,23 @@ import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.NonDisposableHandle.parent
 
-private val showVideos = true
-private val showChannels = true
-private val showPlaylists = true
+private var showVideos = true
+private var showChannels = true
+private var showPlaylists = true
 
-class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
+class SearchAdapter(private val searchItems: List<SearchItem>, private val selectedFilter : Int): RecyclerView.Adapter<CustomViewHolder1>() {
 
     override fun getItemCount(): Int {
         return searchItems.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder1 {
+        when (selectedFilter) {
+            0 -> { showChannels = true; showVideos = true; showPlaylists = true }
+            1 -> { showChannels = false; showVideos = true; showPlaylists = false }
+            2 -> { showChannels = true; showVideos = false; showPlaylists = false }
+            3 -> { showChannels = false; showVideos = false; showPlaylists = true }
+        }
         val layout = if (viewType == 0 && showVideos) {
             R.layout.video_search_row
         } else if (viewType == 1 && showChannels){
