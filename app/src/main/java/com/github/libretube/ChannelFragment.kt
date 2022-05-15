@@ -4,8 +4,6 @@ package com.github.libretube
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.media.Image
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -210,7 +208,8 @@ class ChannelFragment : Fragment() {
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_name).text=response.name
-                    if (response.verified) view.findViewById<ImageView>(R.id.channel_verified).visibility = View.VISIBLE
+                    val channelVerified = view.findViewById<ImageView>(R.id.channel_verified)
+                    if (response.verified) channelVerified.visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_subs).text=resources.getString(R.string.subscribers, response.subscriberCount.formatShort())
                     view.findViewById<TextView>(R.id.channel_description).text=response.description
                     val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
