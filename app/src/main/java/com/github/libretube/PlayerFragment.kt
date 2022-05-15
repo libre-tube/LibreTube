@@ -2,12 +2,12 @@ package com.github.libretube
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.Html
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,11 +36,13 @@ import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Subscribe
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
@@ -51,6 +52,7 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import org.chromium.net.CronetEngine
@@ -323,6 +325,10 @@ class PlayerFragment : Fragment() {
                         cronetDataSourceFactory
                     )
 
+                    val audioAttributes = AudioAttributes.Builder()
+                        .setUsage(C.USAGE_MEDIA)
+                        .setContentType(C.CONTENT_TYPE_MOVIE)
+                        .build()
 
                     exoPlayer = ExoPlayer.Builder(view.context)
                         .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
@@ -332,8 +338,10 @@ class PlayerFragment : Fragment() {
                     exoPlayerView.setShowSubtitleButton(true)
                     exoPlayerView.setShowNextButton(false)
                     exoPlayerView.setShowPreviousButton(false)
+                    exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL);
                     // exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
+                    exoPlayer.setAudioAttributes(audioAttributes,true);
                     exoPlayerView.player = exoPlayer
                     val sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -434,6 +442,7 @@ class PlayerFragment : Fragment() {
                         val builder: AlertDialog.Builder? = activity?.let {
                             AlertDialog.Builder(it)
                         }
+                        var lastPosition = exoPlayer.currentPosition
                         builder!!.setTitle(R.string.choose_quality_dialog)
                             .setItems(
                                 videosNameArray,
@@ -483,6 +492,7 @@ class PlayerFragment : Fragment() {
                                             MergingMediaSource(videoSource, audioSource)
                                         exoPlayer.setMediaSource(mergeSource)
                                     }
+                                    exoPlayer.seekTo(lastPosition);
                                     view.findViewById<TextView>(R.id.quality_text).text =
                                         videosNameArray[which]
                                 }
@@ -803,5 +813,40 @@ class PlayerFragment : Fragment() {
                     isLoading = false
                 }
             }
+    }
+
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+        if (isInPictureInPictureMode) {
+            exoPlayerView.hideController()
+            with(motionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+                enableTransition(R.id.yt_transition, false)
+            }
+            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
+            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.GONE
+            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
+            val mainActivity = activity as MainActivity
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            isFullScreen = false;
+        } else {
+            with(motionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                enableTransition(R.id.yt_transition, true)
+            }
+            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
+            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.VISIBLE
+            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
+        }
+    }
+
+    fun onUserLeaveHint() {
+        val bounds = Rect()
+        val scrollView = view?.findViewById<ScrollView>(R.id.player_scrollView)
+        scrollView?.getHitRect(bounds)
+
+        if (SDK_INT >= Build.VERSION_CODES.N && exoPlayer.isPlaying && (scrollView?.getLocalVisibleRect(bounds) == true || isFullScreen)) {
+            requireActivity().enterPictureInPictureMode()
+        };
     }
 }

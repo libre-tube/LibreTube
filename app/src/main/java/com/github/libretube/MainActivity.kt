@@ -263,14 +263,12 @@ class MainActivity : AppCompatActivity() {
             }else{
                 navController.popBackStack()
                 if (navController.currentBackStackEntry == null){
-                    super.onBackPressed()
+                    moveTaskToBack(true)
                 }
             }
         }catch (e: Exception){
             navController.popBackStack()
-            if (navController.currentBackStackEntry == null){
-                super.onBackPressed()
-            }
+            moveTaskToBack(true)
         }
     }
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -321,6 +319,13 @@ class MainActivity : AppCompatActivity() {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+        }
+    }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        supportFragmentManager.fragments.forEach { fragment ->
+            (fragment as? PlayerFragment)?.onUserLeaveHint()
         }
     }
 
