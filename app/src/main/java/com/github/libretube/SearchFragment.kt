@@ -136,7 +136,8 @@ class SearchFragment : Fragment() {
                     GlobalScope.launch {
                         fetchSuggestions(s.toString(), autoTextView)
                         delay(1000)
-                        addtohistory(s.toString())
+                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        if (sharedPreferences.getBoolean("search_history_toggle", true)) addtohistory(s.toString())
                         fetchSearch(s.toString())
                     }
                 }
