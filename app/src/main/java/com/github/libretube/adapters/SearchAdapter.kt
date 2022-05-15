@@ -59,11 +59,11 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
 
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).into(thumbnailImage)
+        Picasso.get().load(item.thumbnail).fit().centerCrop().into(thumbnailImage)
         val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
         thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
-        Picasso.get().load(item.uploaderAvatar).into(channelImage)
+        Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(channelImage)
         val title = v.findViewById<TextView>(R.id.search_description)
         if (item.title!!.length > 60) {
             title.text = item.title?.substring(0, 60) + "..."
@@ -95,7 +95,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     }
     private fun bindChannel(item: SearchItem) {
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
-        Picasso.get().load(item.thumbnail).into(channelImage)
+        Picasso.get().load(item.thumbnail).fit().centerCrop().into(channelImage)
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
@@ -109,7 +109,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     }
     private fun bindPlaylist(item: SearchItem) {
         val playlistImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).into(playlistImage)
+        Picasso.get().load(item.thumbnail).fit().centerCrop().into(playlistImage)
         val playlistNumber = v.findViewById<TextView>(R.id.search_playlist_number)
         playlistNumber.text = item.videos.toString()
         val playlistName = v.findViewById<TextView>(R.id.search_description)
