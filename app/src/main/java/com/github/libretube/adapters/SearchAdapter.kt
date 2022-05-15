@@ -16,19 +16,27 @@ import com.github.libretube.R
 import com.github.libretube.formatShort
 import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.NonDisposableHandle.parent
 
+private val showVideos = true
+private val showChannels = true
+private val showPlaylists = true
 
 class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
+
     override fun getItemCount(): Int {
         return searchItems.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder1 {
-        val layout = when (viewType) {
-            0 -> R.layout.video_search_row
-            1 -> R.layout.channel_search_row
-            2 -> R.layout.playlist_search_row
-            else -> throw IllegalArgumentException("Invalid type")
+        val layout = if (viewType == 0 && showVideos) {
+            R.layout.video_search_row
+        } else if (viewType == 1 && showChannels){
+            R.layout.channel_search_row
+        } else if (viewType == 2 && showPlaylists) {
+            R.layout.playlist_search_row
+        } else {
+            R.layout.layout_empty
         }
         val layoutInflater = LayoutInflater.from(parent.context)
         val cell = layoutInflater.inflate(layout,parent,false)
@@ -120,12 +128,9 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     }
 
     fun bind(searchItem: SearchItem) {
-        when {
-            searchItem.url!!.startsWith("/watch",false) -> bindWatch(searchItem)
-            searchItem.url!!.startsWith("/channel",false) -> bindChannel(searchItem)
-            searchItem.url!!.startsWith("/playlist",false) -> bindPlaylist(searchItem)
-            else -> {
-            }
-        }
+        if (searchItem.url!!.startsWith("/watch",false) && showVideos) bindWatch(searchItem)
+        else if (searchItem.url!!.startsWith("/channel",false) && showChannels) bindChannel(searchItem)
+        else if (searchItem.url!!.startsWith("/playlist",false) && showPlaylists) bindPlaylist(searchItem)
+        else {}
     }
 }

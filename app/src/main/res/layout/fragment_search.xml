@@ -6,41 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/outlinedTextField"
-        style="@style/Widget.Material3.CardView.Filled"
+    <RelativeLayout
+        android:id="@+id/searchbar_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="27dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/outlinedTextField"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@android:color/transparent"
-            app:hintEnabled="false">
+            android:layout_margin="16dp"
+            app:cardCornerRadius="27dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@android:color/transparent"
-                android:hint="@string/search_hint"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:padding="12dp" />
+                app:hintEnabled="false">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="12dp" />
 
-    </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.textfield.TextInputLayout>
 
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/filterMenu_imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_filter" />
+    </RelativeLayout>
 
     <!--    <TextView-->
     <!--        android:id="@+id/tv_genres"-->
@@ -297,7 +313,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+        app:layout_constraintTop_toBottomOf="@+id/searchbar_holder"
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -311,7 +327,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+        app:layout_constraintTop_toBottomOf="@+id/searchbar_holder"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

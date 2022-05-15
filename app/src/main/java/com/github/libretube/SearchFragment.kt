@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +14,10 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ImageView
 import android.widget.TextView.*
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -25,6 +29,7 @@ import com.github.libretube.adapters.SearchHistoryAdapter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -55,6 +60,19 @@ class SearchFragment : Fragment() {
 
         val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
 
+        val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
+        filterImageView.setOnClickListener {
+            val options = arrayOf("Alle", "Videos")
+            var checkItem = 1
+            AlertDialog.Builder(view.context)
+                .setTitle("Choose an Option")
+                .setSingleChoiceItems(options, checkItem, DialogInterface.OnClickListener {
+                      dialog, id -> Toast.makeText(view.context,id.toString(),Toast.LENGTH_LONG).show()
+                })
+                    
+                .create()
+                .show()
+        }
 
         //show search history
 
