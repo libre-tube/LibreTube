@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/searchbar_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,9 +16,13 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/outlinedTextField"
             style="@style/Widget.Material3.CardView.Filled"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="27dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +56,12 @@
             android:id="@+id/filterMenu_imageView"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_weight="0"
             android:layout_alignParentRight="true"
             android:layout_marginTop="25dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_filter" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <!--    <TextView-->
     <!--        android:id="@+id/tv_genres"-->
@@ -320,10 +325,7 @@
         android:id="@+id/search_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
