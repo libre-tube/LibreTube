@@ -14,6 +14,7 @@ import com.github.libretube.MainActivity
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.formatShort
+import com.github.libretube.obj.Comment
 import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.NonDisposableHandle.parent
@@ -22,7 +23,13 @@ private var showVideos = true
 private var showChannels = true
 private var showPlaylists = true
 
-class SearchAdapter(private val searchItems: List<SearchItem>, private val selectedFilter : Int): RecyclerView.Adapter<CustomViewHolder1>() {
+class SearchAdapter(private val searchItems: MutableList<SearchItem>, private val selectedFilter : Int): RecyclerView.Adapter<CustomViewHolder1>() {
+
+    fun updateItems(newItems: List<SearchItem>){
+        var searchItemsSize = searchItems.size
+        searchItems.addAll(newItems)
+        notifyItemRangeInserted(searchItemsSize, newItems.size)
+    }
 
     override fun getItemCount(): Int {
         return searchItems.size
