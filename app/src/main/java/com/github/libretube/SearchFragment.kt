@@ -70,12 +70,12 @@ class SearchFragment : Fragment() {
             AlertDialog.Builder(view.context)
                 .setTitle(getString(R.string.choose_filter))
                 .setSingleChoiceItems(options, checkedItem, DialogInterface.OnClickListener {
-                      dialog, id -> tempSelectedItem = id
+                        dialog, id -> tempSelectedItem = id
                 })
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, id -> checkedItem = tempSelectedItem
+                .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener {
+                        dialog, id -> checkedItem = tempSelectedItem
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .create()
                 .show()
         }
