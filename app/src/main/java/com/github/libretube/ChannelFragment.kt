@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils.substring
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -207,11 +208,11 @@ class ChannelFragment : Fragment() {
                 refreshLayout?.isRefreshing = false;
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.channel_name).text=response.name
+                    view.findViewById<TextView>(R.id.channel_name).text = if (response.name?.length!! > 19) response.name.toString().substring(0,16) + "..." else response.name
                     val channelVerified = view.findViewById<ImageView>(R.id.channel_verified)
                     if (response.verified) channelVerified.visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_subs).text=resources.getString(R.string.subscribers, response.subscriberCount.formatShort())
-                    view.findViewById<TextView>(R.id.channel_description).text=response.description
+                    view.findViewById<TextView>(R.id.channel_description).text=response.description?.trim()
                     val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
                     Picasso.get().load(response.bannerUrl).into(bannerImage)
