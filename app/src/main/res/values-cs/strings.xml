@@ -71,4 +71,5 @@
     <string name="website">Webové stránky</string>
     <string name="videoCount">%1$s videí</string>
     <string name="noInternet">Žádné připojení k internetu</string>
+    <string name="comments">Komentáře</string>
 </resources>
