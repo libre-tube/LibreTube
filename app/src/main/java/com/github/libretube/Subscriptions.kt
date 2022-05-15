@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -52,8 +53,6 @@ class Subscriptions : Fragment() {
             progressBar.visibility=View.VISIBLE
 
             var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
-            channelRecView?.layoutManager = GridLayoutManager(context, 4)
-            fetchChannels(channelRecView)
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -67,9 +66,18 @@ class Subscriptions : Fragment() {
             }
 
             var toggleSubs = view.findViewById<RelativeLayout>(R.id.toggle_subs)
+            toggleSubs.visibility = View.VISIBLE
             toggleSubs.setOnClickListener {
-                channelRecView.visibility = if (channelRecView.visibility == View.GONE) View.VISIBLE else View.GONE
-                feedRecView.visibility = if (feedRecView.visibility == View.GONE) View.VISIBLE else View.GONE
+                if (!channelRecView.isVisible) {
+                    channelRecView?.layoutManager = GridLayoutManager(context, 4)
+                    fetchChannels(channelRecView)
+                    channelRecView.visibility = View.VISIBLE
+                    feedRecView.visibility = View.GONE
+                }
+                else {
+                    channelRecView.visibility = View.GONE
+                    feedRecView.visibility = View.VISIBLE
+                }
             }
 
             val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
