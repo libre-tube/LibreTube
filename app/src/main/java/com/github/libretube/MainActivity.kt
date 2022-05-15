@@ -256,14 +256,12 @@ class MainActivity : AppCompatActivity() {
             }else{
                 navController.popBackStack()
                 if (navController.currentBackStackEntry == null){
-                    super.onBackPressed()
+                    moveTaskToBack(true)
                 }
             }
         }catch (e: Exception){
             navController.popBackStack()
-            if (navController.currentBackStackEntry == null){
-                super.onBackPressed()
-            }
+            moveTaskToBack(true)
         }
     }
     override fun onConfigurationChanged(newConfig: Configuration) {
