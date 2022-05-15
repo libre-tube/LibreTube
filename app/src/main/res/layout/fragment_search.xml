@@ -46,7 +46,8 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:padding="12dp" />
+                    android:padding="12dp"
+                    android:dropDownWidth="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
