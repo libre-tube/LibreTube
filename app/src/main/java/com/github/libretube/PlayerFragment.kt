@@ -322,34 +322,41 @@ class PlayerFragment : Fragment() {
                     return@launchWhenCreated
                 }
                 if(SponsorBlockSettings.sponsorBlockEnabled) {
-                    segmentData = try {
-                        val categories: ArrayList<String> = arrayListOf()
-                        if (SponsorBlockSettings.introEnabled) {
-                            categories.add("intro")
-                        }
-                        if (SponsorBlockSettings.selfPromoEnabled) {
-                            categories.add("selfpromo")
-                        }
-                        if (SponsorBlockSettings.interactionEnabled) {
-                            categories.add("interaction")
-                        }
-                        if (SponsorBlockSettings.sponsorsEnabled) {
-                            categories.add("sponsor")
-                        }
-                        if (SponsorBlockSettings.outroEnabled) {
-                            categories.add("outro")
-                        }
+                    val categories: ArrayList<String> = arrayListOf()
+                    if (SponsorBlockSettings.introEnabled) {
+                        categories.add("intro")
+                    }
+                    if (SponsorBlockSettings.selfPromoEnabled) {
+                        categories.add("selfpromo")
+                    }
+                    if (SponsorBlockSettings.interactionEnabled) {
+                        categories.add("interaction")
+                    }
+                    if (SponsorBlockSettings.sponsorsEnabled) {
+                        categories.add("sponsor")
+                    }
+                    if (SponsorBlockSettings.outroEnabled) {
+                        categories.add("outro")
+                    }
+                    if(categories.size > 0) {
+                        segmentData = try {
 
-                        RetrofitInstance.api.getSegments(videoId!!, "[\"" + TextUtils.join("\",\"", categories) + "\"]")
-                    } catch (e: IOException) {
-                        println(e)
-                        Log.e(TAG, "IOException, you might not have internet connection")
-                        Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                        return@launchWhenCreated
-                    } catch (e: HttpException) {
-                        Log.e(TAG, "HttpException, unexpected response")
-                        Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                        return@launchWhenCreated
+                            RetrofitInstance.api.getSegments(
+                                videoId!!,
+                                "[\"" + TextUtils.join("\",\"", categories) + "\"]"
+                            )
+                        } catch (e: IOException) {
+                            println(e)
+                            Log.e(TAG, "IOException, you might not have internet connection")
+                            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT)
+                                .show()
+                            return@launchWhenCreated
+                        } catch (e: HttpException) {
+                            Log.e(TAG, "HttpException, unexpected response")
+                            Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT)
+                                .show()
+                            return@launchWhenCreated
+                        }
                     }
                 }
 
