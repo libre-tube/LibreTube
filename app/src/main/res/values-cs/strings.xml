@@ -72,4 +72,21 @@
     <string name="videoCount">%1$s videí</string>
     <string name="noInternet">Žádné připojení k internetu</string>
     <string name="comments">Komentáře</string>
+    <string name="defaultTab">Výchozí karta</string>
+    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock_summary">Používá API z https://sponsor.ajay.app/</string>
+    <string name="segment_skipped">Segment přeskočen.</string>
+    <string name="category_header_title">SponsorBlock</string>
+    <string name="sponsorblock_state">Povolený</string>
+    <string name="category_segments">Segmenty</string>
+    <string name="category_sponsor">Sponzor</string>
+    <string name="category_sponsor_description">Placená propagace, placené doporučení a přímá reklama. Nikoliv pro sebepropagaci nebo bezplatnnou zmíňku tvůrce/webové stránky/produktu, které se jim líbí.</string>
+    <string name="category_selfpromo">Neplacená/vlastní propagace</string>
+    <string name="category_selfpromo_description">Podobné jako „sponzor“, s výjimkou neplacené nebo vlastní propagace. To zahrnuje sekce o vlastních produktech, darech nebo informacích o tom, s kým spolupracovali.</string>
+    <string name="category_interaction">Připomenutí interakce (přihlášení k odběru)</string>
+    <string name="category_interaction_description">Když se uprostřed obsahu objeví krátká připomínka, abyste je lajkovali, přihlásili se k odběru nebo sledovali. Pokud je dlouhý nebo se týká něčeho konkrétního, měl by být místo toho pod kategoriívlastní propagace.</string>
+    <string name="category_intro">Přestávka/Intro</string>
+    <string name="category_intro_description">Interval bez skutečného obsahu. Může to být pauza, statický snímek nebo opakující se animace. Nemělo by se používat pro přechody obsahující informace.</string>
+    <string name="category_outro">Titulky</string>
+    <string name="category_outro_description">Titulky nebo návrhy jiných videí na konci videa. Ne pro závěry s informacemi.</string>
 </resources>
