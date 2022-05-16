@@ -37,3 +37,7 @@ jobs:
         with:
           name: app
           path: app/build/outputs/apk/debug/*.apk
+        
+      - name: Kotlin Linter
+        uses: vroy/gha-kotlin-linter@v3
+
