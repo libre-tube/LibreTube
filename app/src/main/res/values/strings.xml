@@ -88,5 +88,5 @@
     <string name="category_intro">Intermission/Intro Animation</string>
     <string name="category_intro_description">An interval without actual content. Could be a pause, static frame, repeating animation. This should not be used for transitions containing information.</string>
     <string name="category_outro">Endcards/Credits</string>
-    <string name="category_outro_description">Credits or when the YouTube endcards appear. Not for conclusions with information.</string
+    <string name="category_outro_description">Credits or when the YouTube endcards appear. Not for conclusions with information.</string>
 </resources>
