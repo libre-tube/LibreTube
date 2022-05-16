@@ -39,7 +39,9 @@ class SettingsActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overridePendingTransition(50, 50);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            overridePendingTransition(50, 50);
+        }
         val view = this.findViewById<View>(android.R.id.content)
         view.setAlpha(0F);
         view.animate().alpha(1F).setDuration(300);
@@ -155,6 +157,15 @@ class SettingsActivity : AppCompatActivity(),
             login?.setOnPreferenceClickListener {
                 val newFragment = LoginDialog()
                 newFragment.show(childFragmentManager, "Login")
+                true
+            }
+
+            val sponsorblock = findPreference<Preference>("sponsorblock")
+            sponsorblock?.setOnPreferenceClickListener {
+                val newFragment = SponsorBlockSettings()
+                    parentFragmentManager.beginTransaction()
+                    .replace(R.id.settings, newFragment)
+                    .commitNow()
                 true
             }
 

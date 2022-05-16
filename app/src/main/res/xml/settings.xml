@@ -71,6 +71,22 @@
         android:icon="@drawable/ic_theme"
         />
 
+    <androidx.preference.Preference
+        app:title="@string/sponsorblock"
+        app:key="sponsorblock"
+        app:summary="@string/sponsorblock_summary"
+        android:icon="@drawable/ic_sponsorblock"
+        />
+
+    <ListPreference
+        app:title="@string/defaultTab"
+        app:key="default_tab"
+        app:entries="@array/tabs"
+        app:entryValues="@array/tabsValue"
+        app:defaultValue="home"
+        android:icon="@drawable/ic_home"
+        />
+
     <ListPreference
         app:title="@string/defres"
         app:key="default_res"

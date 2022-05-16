@@ -18,6 +18,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -44,6 +45,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
+        SponsorBlockSettings.sponsorBlockEnabled = sharedPreferences.getBoolean("sponsorblock_enabled_key", false)
+        SponsorBlockSettings.introEnabled = sharedPreferences.getBoolean("intro_category_key", false)
+        SponsorBlockSettings.selfPromoEnabled = sharedPreferences.getBoolean("selfpromo_category_key", false)
+        SponsorBlockSettings.interactionEnabled = sharedPreferences.getBoolean("interaction_category_key", false)
+        SponsorBlockSettings.sponsorsEnabled = sharedPreferences.getBoolean("sponsors_category_key", false)
+        SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
+
         DynamicColors.applyToActivitiesIfAvailable(application)
         val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
@@ -85,6 +93,12 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView = findViewById(R.id.bottomNav)
             navController = findNavController(R.id.fragment)
             bottomNavigationView.setupWithNavController(navController)
+
+            when (sharedPreferences.getString("default_tab", "home")!!) {
+                "home" -> navController.navigate(R.id.home2)
+                "subscriptions" -> navController.navigate(R.id.subscriptions)
+                "library" -> navController.navigate(R.id.library)
+            }
 
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
