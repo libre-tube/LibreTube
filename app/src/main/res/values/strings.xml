@@ -80,4 +80,8 @@
     <string name="history">History</string>
     <string name="search_history">Search History</string>
     <string name="clear_history">Clear History</string>
+    <string name="music_songs">Music Songs</string>
+    <string name="music_videos">Music Videos</string>
+    <string name="music_albums">Music Albums</string>
+    <string name="music_playlists">Music Playlists</string>
 </resources>

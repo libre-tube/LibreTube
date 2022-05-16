@@ -15,7 +15,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import android.widget.TextView.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -68,10 +67,20 @@ class SearchFragment : Fragment() {
         var tempSelectedItem = 0
 
         filterImageView.setOnClickListener {
-            val options = arrayOf(getString(R.string.all), getString(R.string.videos), getString(R.string.channels), getString(R.string.playlists))
+            val filterOptions = arrayOf(
+                getString(R.string.all),
+                getString(R.string.videos),
+                getString(R.string.channels),
+                getString(R.string.playlists),
+                getString(R.string.music_songs),
+                getString(R.string.music_videos),
+                getString(R.string.music_albums),
+                getString(R.string.music_playlists)
+            )
+
             AlertDialog.Builder(view.context)
                 .setTitle(getString(R.string.choose_filter))
-                .setSingleChoiceItems(options, selectedFilter, DialogInterface.OnClickListener {
+                .setSingleChoiceItems(filterOptions, selectedFilter, DialogInterface.OnClickListener {
                         _, id -> tempSelectedItem = id
                 })
                 .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener { _, _ ->
@@ -81,6 +90,10 @@ class SearchFragment : Fragment() {
                         1 -> "videos"
                         2 -> "channels"
                         3 -> "playlists"
+                        4 -> "music_songs"
+                        5 -> "music_videos"
+                        6 -> "music_albums"
+                        7 -> "music_playlists"
                         else -> "all"
                     }
                         fetchSearch(autoTextView.text.toString())
@@ -98,7 +111,7 @@ class SearchFragment : Fragment() {
         historyRecycler.layoutManager = LinearLayoutManager(view.context)
 
         var historylist = getHistory()
-        if (historylist.size != 0) {
+        if (historylist.isNotEmpty()) {
             historyRecycler.adapter =
                 SearchHistoryAdapter(requireContext(), historylist, autoTextView)
         }
@@ -107,7 +120,7 @@ class SearchFragment : Fragment() {
         autoTextView.requestFocus()
         val imm =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm!!.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
+        imm.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
         autoTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
@@ -147,7 +160,7 @@ class SearchFragment : Fragment() {
                     searchRecView.visibility = GONE
                     historyRecycler.visibility = VISIBLE
                     var historylist = getHistory()
-                    if (historylist.size != 0) {
+                    if (historylist.isNotEmpty()) {
                         historyRecycler.adapter =
                             SearchHistoryAdapter(requireContext(), historylist, autoTextView)
                     }
@@ -157,8 +170,8 @@ class SearchFragment : Fragment() {
         })
         autoTextView.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                hideKeyboard();
-                autoTextView.dismissDropDown();
+                hideKeyboard()
+                autoTextView.dismissDropDown()
                 return@OnEditorActionListener true
             }
             false
@@ -212,11 +225,7 @@ class SearchFragment : Fragment() {
             if (!isLoading) {
                 isLoading = true
                 val response = try {
-                    RetrofitInstance.api.getSearchResultsNextPage(
-                        query!!,
-                        apiSearchFilter!!,
-                        nextPage!!
-                    )
+                    RetrofitInstance.api.getSearchResultsNextPage(query,apiSearchFilter,nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
