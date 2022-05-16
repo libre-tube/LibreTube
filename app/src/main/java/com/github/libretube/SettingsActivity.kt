@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.system.Os.remove
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -232,6 +233,13 @@ class SettingsActivity : AppCompatActivity(),
             changeLanguage?.setOnPreferenceChangeListener { _, _ ->
                 val refresh = Intent(context, MainActivity::class.java)
                 startActivity(refresh)
+                true
+            }
+
+            val clearHistory = findPreference<Preference>("clear_history")
+            clearHistory?.setOnPreferenceClickListener {
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                sharedPreferences.edit().remove("search_history").commit()
                 true
             }
 

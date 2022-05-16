@@ -41,7 +41,7 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 | Search Suggestions | ✅ |
 | Subtitles | ✅ |
 | Comments | ✅ |
-| Search Filters | 🔴 |
+| Search Filters | ✅ |
 
 
 ## Contributing

@@ -109,6 +109,21 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/history">
+
+        <SwitchPreference
+            app:title="@string/search_history"
+            app:key="search_history_toggle"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_history" />
+
+        <Preference
+            app:title="@string/clear_history"
+            app:key="clear_history"
+            android:icon="@drawable/ic_trash" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/about">
 
     <Preference

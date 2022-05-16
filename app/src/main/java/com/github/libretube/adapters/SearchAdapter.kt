@@ -18,7 +18,14 @@ import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
 
 
-class SearchAdapter(private val searchItems: List<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
+class SearchAdapter(private val searchItems: MutableList<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
+
+    fun updateItems(newItems: List<SearchItem>){
+        var searchItemsSize = searchItems.size
+        searchItems.addAll(newItems)
+        notifyItemRangeInserted(searchItemsSize, newItems.size)
+    }
+
     override fun getItemCount(): Int {
         return searchItems.size
     }
@@ -52,19 +59,17 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
 
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).into(thumbnailImage)
+        Picasso.get().load(item.thumbnail).fit().centerCrop().into(thumbnailImage)
         val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
         thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
-        Picasso.get().load(item.uploaderAvatar).into(channelImage)
+        Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(channelImage)
         val title = v.findViewById<TextView>(R.id.search_description)
-        if (item.title!!.length > 60) {
-            title.text = item.title?.substring(0, 60) + "..."
-        } else {
-            title.text = item.title
-        }
+        title.text = if (item.title!!.length > 60) item.title?.substring(0, 60) + "..." else item.title
         val views = v.findViewById<TextView>(R.id.search_views)
-        views.text = item.views.formatShort() +" • "+item.uploadedDate
+        val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
+        val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
+        views.text = if (viewsString != "" && uploadDate != "") viewsString + " • " + uploadDate else viewsString + uploadDate
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.uploaderName
         v.setOnClickListener{
@@ -88,7 +93,7 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     }
     private fun bindChannel(item: SearchItem) {
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
-        Picasso.get().load(item.thumbnail).into(channelImage)
+        Picasso.get().load(item.thumbnail).fit().centerCrop().into(channelImage)
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.name
         val channelViews = v.findViewById<TextView>(R.id.search_views)
@@ -102,15 +107,15 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
     }
     private fun bindPlaylist(item: SearchItem) {
         val playlistImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).into(playlistImage)
+        Picasso.get().load(item.thumbnail).fit().centerCrop().into(playlistImage)
         val playlistNumber = v.findViewById<TextView>(R.id.search_playlist_number)
-        playlistNumber.text = item.videos.toString()
+        if (item.videos?.toInt() != -1) playlistNumber.text = item.videos.toString()
         val playlistName = v.findViewById<TextView>(R.id.search_description)
         playlistName.text = item.name
         val playlistChannelName = v.findViewById<TextView>(R.id.search_name)
         playlistChannelName.text = item.uploaderName
         val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
-        playlistVideosNumber.text = item.videos.toString()+" videos"
+        if (item.videos?.toInt() != -1) playlistVideosNumber.text = v.context.getString(R.string.videoCount, item.videos.toString())
         v.setOnClickListener {
             //playlist clicked
             val activity = v.context as MainActivity

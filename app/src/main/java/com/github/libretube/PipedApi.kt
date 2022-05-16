@@ -25,6 +25,13 @@ interface PipedApi {
         @Query("filter") filter: String
     ): SearchResult
 
+    @GET("nextpage/search")
+    suspend fun getSearchResultsNextPage(
+        @Query("q") searchQuery: String,
+        @Query("filter") filter: String,
+        @Query("nextpage") nextPage: String
+    ): SearchResult
+
     @GET("suggestions")
     suspend fun getSuggestions(@Query("query") query: String): List<String>
 
