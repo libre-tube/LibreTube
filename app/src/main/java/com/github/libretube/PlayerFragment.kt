@@ -340,8 +340,7 @@ class PlayerFragment : Fragment() {
                             categories.add("outro")
                         }
 
-                        RetrofitInstance.api.getSegments(videoId!!, "[\"" + TextUtils.join("\",\"", categories) + "\"]"
-                        )
+                        RetrofitInstance.api.getSegments(videoId!!, "[\"" + TextUtils.join("\",\"", categories) + "\"]")
                     } catch (e: IOException) {
                         println(e)
                         Log.e(TAG, "IOException, you might not have internet connection")
