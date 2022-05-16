@@ -80,7 +80,7 @@
     <string name="category_sponsor">Sponsor</string>
     <string name="category_sponsor_description">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free shoutouts to causes/creators/websites/products they like.</string>
     <string name="category_selfpromo">Unpaid/Self Promotion</string>
-    <string name="category_selfpromo_description">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free shoutouts to causes/creators/websites/products they like.</string>
+    <string name="category_selfpromo_description">Similar to \"sponsor\" except for unpaid or self promotion. This includes sections about merchandise, donations, or information about who they collaborated with.</string>
     <string name="category_interaction">Interaction Reminder (Subscribe)</string>
     <string name="category_interaction_description">When there is a short reminder to like, subscribe or follow them in the middle of content. If it is long or about something specific, it should be under self promotion instead.</string>
     <string name="category_intro">Intermission/Intro Animation</string>
