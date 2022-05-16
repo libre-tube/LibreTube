@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
+import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -67,10 +68,14 @@ class Subscriptions : Fragment() {
 
             var toggleSubs = view.findViewById<RelativeLayout>(R.id.toggle_subs)
             toggleSubs.visibility = View.VISIBLE
+            var loadedSubbedChannels = false
             toggleSubs.setOnClickListener {
                 if (!channelRecView.isVisible) {
-                    channelRecView?.layoutManager = GridLayoutManager(context, 4)
-                    fetchChannels(channelRecView)
+                    if (!loadedSubbedChannels) {
+                        channelRecView?.layoutManager = GridLayoutManager(context, 4)
+                        fetchChannels(channelRecView)
+                        loadedSubbedChannels = true
+                    }
                     channelRecView.visibility = View.VISIBLE
                     feedRecView.visibility = View.GONE
                 }
