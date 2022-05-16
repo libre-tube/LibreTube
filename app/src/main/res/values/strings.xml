@@ -87,8 +87,7 @@
     <string name="defaultTab">Default Tab</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Uses API from https://sponsor.ajay.app/</string>
-    <string name="segment_skipped">Skipped segment.</string>
-    <string name="category_header_title">SponsorBlock</string>
+    <string name="segment_skipped">Skipped segment</string>
     <string name="sponsorblock_state">Enabled</string>
     <string name="category_segments">Segments</string>
     <string name="category_sponsor">Sponsor</string>
