@@ -72,4 +72,5 @@
     <string name="settings">설정</string>
     <string name="instance">인스턴스</string>
     <string name="website">웹사이트</string>
+    <string name="defaultTab">기본 탭</string>
 </resources>
