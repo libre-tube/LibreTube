@@ -606,9 +606,9 @@ class PlayerFragment : Fragment() {
 
                     view.findViewById<TextView>(R.id.player_description).text =
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT)
+                            Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT).trim()
                         } else {
-                            Html.fromHtml(response.description)
+                            Html.fromHtml(response.description).trim()
                         }
                     view.findViewById<TextView>(R.id.player_views_info).text =
                         response.views.formatShort() + " views • " + response.uploadDate

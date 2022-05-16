@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
+import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -52,8 +54,6 @@ class Subscriptions : Fragment() {
             progressBar.visibility=View.VISIBLE
 
             var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
-            channelRecView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            fetchChannels(channelRecView)
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -64,6 +64,25 @@ class Subscriptions : Fragment() {
             refreshLayout?.setOnRefreshListener {
                 fetchChannels(channelRecView)
                 fetchFeed(feedRecView, progressBar, view)
+            }
+
+            var toggleSubs = view.findViewById<RelativeLayout>(R.id.toggle_subs)
+            toggleSubs.visibility = View.VISIBLE
+            var loadedSubbedChannels = false
+            toggleSubs.setOnClickListener {
+                if (!channelRecView.isVisible) {
+                    if (!loadedSubbedChannels) {
+                        channelRecView?.layoutManager = GridLayoutManager(context, 4)
+                        fetchChannels(channelRecView)
+                        loadedSubbedChannels = true
+                    }
+                    channelRecView.visibility = View.VISIBLE
+                    feedRecView.visibility = View.GONE
+                }
+                else {
+                    channelRecView.visibility = View.GONE
+                    feedRecView.visibility = View.VISIBLE
+                }
             }
 
             val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)

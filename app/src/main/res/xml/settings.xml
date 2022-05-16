@@ -71,6 +71,15 @@
         android:icon="@drawable/ic_theme"
         />
 
+     <ListPreference
+        app:title="@string/defaultTab"
+        app:key="default_tab"
+        app:entries="@array/tabs"
+        app:entryValues="@array/tabsValue"
+        app:defaultValue="home"
+        android:icon="@drawable/ic_home"
+        />
+      
     <androidx.preference.Preference
         app:title="@string/sponsorblock"
         app:key="sponsorblock"

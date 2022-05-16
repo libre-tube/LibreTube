@@ -72,6 +72,7 @@
     <string name="noInternet">No Internet Connection</string>
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
+    <string name="defaultTab">Default Tab</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Uses API from https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Skipped segment.</string>
@@ -87,5 +88,5 @@
     <string name="category_intro">Intermission/Intro Animation</string>
     <string name="category_intro_description">An interval without actual content. Could be a pause, static frame, repeating animation. This should not be used for transitions containing information.</string>
     <string name="category_outro">Endcards/Credits</string>
-    <string name="category_outro_description">Credits or when the YouTube endcards appear. Not for conclusions with information.</string>
+    <string name="category_outro_description">Credits or when the YouTube endcards appear. Not for conclusions with information.</string
 </resources>
