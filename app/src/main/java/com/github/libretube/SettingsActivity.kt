@@ -1,15 +1,13 @@
 package com.github.libretube
 
 import android.Manifest
-import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.app.AlertDialog
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.system.Os.remove
+import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -20,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
@@ -248,6 +247,24 @@ class SettingsActivity : AppCompatActivity(),
                 val uri = Uri.parse("https://libre-tube.github.io/")
                 val intent = Intent(Intent.ACTION_VIEW).setData(uri)
                 startActivity(intent)
+                true
+            }
+
+            val license = findPreference<Preference>("license")
+            license?.setOnPreferenceClickListener {
+                val licenseString = view?.context?.assets!!.open("gpl3.html").bufferedReader().use{
+                    it.readText()
+                }
+                val licenseHtml = if (Build.VERSION.SDK_INT >= 24) {
+                    Html.fromHtml(licenseString,1)
+                } else {
+                    Html.fromHtml(licenseString)
+                }
+                AlertDialog.Builder(view?.context!!)
+                    .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener{ _,_ -> })
+                    .setMessage(licenseHtml)
+                    .create()
+                    .show()
                 true
             }
         }
