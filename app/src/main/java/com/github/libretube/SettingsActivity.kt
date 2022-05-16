@@ -159,6 +159,15 @@ class SettingsActivity : AppCompatActivity(),
                 true
             }
 
+            val sponsorblock = findPreference<Preference>("sponsorblock")
+            sponsorblock?.setOnPreferenceClickListener {
+                val newFragment = SponsorBlockSettings()
+                    parentFragmentManager.beginTransaction()
+                    .replace(R.id.settings, newFragment)
+                    .commitNow()
+                true
+            }
+
             val importFromYt = findPreference<Preference>("import_from_yt")
             importFromYt?.setOnPreferenceClickListener {
                 val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)

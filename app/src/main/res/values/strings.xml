@@ -73,4 +73,20 @@
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
     <string name="defaultTab">Default Tab</string>
+    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock_summary">Uses API from https://sponsor.ajay.app/</string>
+    <string name="segment_skipped">Skipped segment.</string>
+    <string name="category_header_title">SponsorBlock</string>
+    <string name="sponsorblock_state">Enabled</string>
+    <string name="category_segments">Segments</string>
+    <string name="category_sponsor">Sponsor</string>
+    <string name="category_sponsor_description">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free shoutouts to causes/creators/websites/products they like.</string>
+    <string name="category_selfpromo">Unpaid/Self Promotion</string>
+    <string name="category_selfpromo_description">Similar to \"sponsor\" except for unpaid or self promotion. This includes sections about merchandise, donations, or information about who they collaborated with.</string>
+    <string name="category_interaction">Interaction Reminder (Subscribe)</string>
+    <string name="category_interaction_description">When there is a short reminder to like, subscribe or follow them in the middle of content. If it is long or about something specific, it should be under self promotion instead.</string>
+    <string name="category_intro">Intermission/Intro Animation</string>
+    <string name="category_intro_description">An interval without actual content. Could be a pause, static frame, repeating animation. This should not be used for transitions containing information.</string>
+    <string name="category_outro">Endcards/Credits</string>
+    <string name="category_outro_description">Credits or when the YouTube endcards appear. Not for conclusions with information.</string>
 </resources>

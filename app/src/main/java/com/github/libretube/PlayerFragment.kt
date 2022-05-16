@@ -14,6 +14,7 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
 import android.text.Html
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
+import com.github.libretube.obj.Segment
+import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Subscribe
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -87,6 +90,7 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
+    private lateinit var segmentData: Segments
 
     private lateinit var relDownloadVideo: LinearLayout
 
@@ -270,6 +274,26 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    private fun checkForSegments()
+    {
+        if (!exoPlayer.isPlaying || !SponsorBlockSettings.sponsorBlockEnabled) return
+
+        exoPlayerView.postDelayed(this::checkForSegments, 100)
+
+        if(segmentData.segments.isEmpty() )
+            return
+
+        segmentData.segments.forEach { segment: Segment ->
+            val segmentStart = (segment.segment!![0] * 1000.0f).toLong()
+            val segmentEnd = (segment.segment!![1] * 1000.0f).toLong()
+            val currentPosition = exoPlayer.currentPosition
+            if(currentPosition in segmentStart until segmentEnd) {
+                Toast.makeText(context,R.string.segment_skipped, Toast.LENGTH_SHORT).show()
+                exoPlayer.seekTo(segmentEnd);
+            }
+        }
+    }
+
     private fun fetchJson(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -297,6 +321,45 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                if(SponsorBlockSettings.sponsorBlockEnabled) {
+                    val categories: ArrayList<String> = arrayListOf()
+                    if (SponsorBlockSettings.introEnabled) {
+                        categories.add("intro")
+                    }
+                    if (SponsorBlockSettings.selfPromoEnabled) {
+                        categories.add("selfpromo")
+                    }
+                    if (SponsorBlockSettings.interactionEnabled) {
+                        categories.add("interaction")
+                    }
+                    if (SponsorBlockSettings.sponsorsEnabled) {
+                        categories.add("sponsor")
+                    }
+                    if (SponsorBlockSettings.outroEnabled) {
+                        categories.add("outro")
+                    }
+                    if(categories.size > 0) {
+                        segmentData = try {
+
+                            RetrofitInstance.api.getSegments(
+                                videoId!!,
+                                "[\"" + TextUtils.join("\",\"", categories) + "\"]"
+                            )
+                        } catch (e: IOException) {
+                            println(e)
+                            Log.e(TAG, "IOException, you might not have internet connection")
+                            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT)
+                                .show()
+                            return@launchWhenCreated
+                        } catch (e: HttpException) {
+                            Log.e(TAG, "HttpException, unexpected response")
+                            Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT)
+                                .show()
+                            return@launchWhenCreated
+                        }
+                    }
+                }
+
                 isLoading = false
                 var videosNameArray: Array<CharSequence> = arrayOf()
                 videosNameArray += "HLS"
@@ -502,6 +565,13 @@ class PlayerFragment : Fragment() {
                     }
                     // Listener for play and pause icon change
                     exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
+                        override fun onIsPlayingChanged(isPlaying: Boolean) {
+                            if(isPlaying && SponsorBlockSettings.sponsorBlockEnabled)
+                            {
+                                exoPlayerView.postDelayed(this@PlayerFragment::checkForSegments, 100)
+                            }
+                        }
+
                         override fun onPlayerStateChanged(
                             playWhenReady: Boolean,
                             playbackState: Int

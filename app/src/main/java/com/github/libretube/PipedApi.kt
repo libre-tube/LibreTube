@@ -13,6 +13,9 @@ interface PipedApi {
     @GET("comments/{videoId}")
     suspend fun getComments(@Path("videoId") videoId: String): CommentsPage
 
+    @GET("sponsors/{videoId}")
+    suspend fun getSegments(@Path("videoId") videoId: String, @Query("category") category: String): Segments
+
     @GET("nextpage/comments/{videoId}")
     suspend fun getCommentsNextPage(@Path("videoId") videoId: String, @Query("nextpage") nextPage: String): CommentsPage
 
