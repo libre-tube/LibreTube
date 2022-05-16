@@ -71,6 +71,12 @@
         android:icon="@drawable/ic_theme"
         />
 
+    <androidx.preference.Preference
+        app:title="@string/sponsorblock"
+        app:key="sponsorblock"
+        android:icon="@drawable/ic_sponsorblock"
+        />
+
     <ListPreference
         app:title="@string/defres"
         app:key="default_res"

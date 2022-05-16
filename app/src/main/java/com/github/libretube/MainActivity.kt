@@ -44,6 +44,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
+        SponsorBlockSettings.sponsorBlockEnabled = sharedPreferences.getBoolean("sponsorblock_enabled_key", false)
+        SponsorBlockSettings.introEnabled = sharedPreferences.getBoolean("intro_category_key", false)
+        SponsorBlockSettings.selfPromoEnabled = sharedPreferences.getBoolean("selfpromo_category_key", false)
+        SponsorBlockSettings.interactionEnabled = sharedPreferences.getBoolean("interaction_category_key", false)
+        SponsorBlockSettings.sponsorsEnabled = sharedPreferences.getBoolean("sponsors_category_key", false)
+        SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
+
         DynamicColors.applyToActivitiesIfAvailable(application)
         val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
