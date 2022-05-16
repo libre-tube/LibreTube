@@ -1,2 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="yes">അതെ</string>
+    <string name="choose_quality_dialog">നിലവാരം തിരഞ്ഞെടുക്കൂ:</string>
+    <string name="subscriptions">സബ്സ്ക്രിപ്പ്ഷനുകൾ</string>
+    <string name="videos">വീഡിയോകൾ</string>
+    <string name="subscribe">സബ്സ്ക്രൈബ്</string>
+    <string name="share">പങ്കിടുക</string>
+    <string name="download">ഡൗൺലോഡ്</string>
+    <string name="username">ഉപയോക്തൃനാമം</string>
+    <string name="login">പ്രവേശിക്കുക</string>
+    <string name="register">രജിസ്റ്റർ ചെയ്യൂ</string>
+    <string name="logout">പുറത്തു കടക്കുക</string>
+    <string name="registered">രജിസ്റ്റർ ചെയ്തു. താങ്കൾക്ക് ചാനലുകൾ സബ്സ്ക്രൈബ് ചെയ്യാം.</string>
+    <string name="instances">ഒരു ഇൻസ്റ്റൻസ് തിരഞ്ഞെടുക്കുക</string>
+    <string name="region">ഒരു പ്രദേശം തിരഞ്ഞെടുക്കുക</string>
+    <string name="login_register">പ്രവേശിക്കുക/രജിസ്റ്റർ ചെയ്യുക</string>
+    <string name="loggedIn">പ്രവേശിച്ചിരിക്കുന്നു.</string>
+    <string name="login_first">ദയവായി ലോഗിൻ ചെയ്‌ത് വീണ്ടും ശ്രമിക്കുക!</string>
+    <string name="error">എന്തോ പ്രശ്നം പറ്റി.</string>
+    <string name="areYouSure">ഈ പ്ലേലിസ്റ്റ് ഇല്ലാതാക്കണോ\?</string>
+    <string name="playlistName">പ്ലേലിസ്റ്റിന്റെ പേര്</string>
+    <string name="emptyPlaylistName">പ്ലേലിസ്റ്റിന്റെ പേര് ശൂന്യമാക്കാൻ കഴിയില്ല</string>
+    <string name="addToPlaylist">പ്ലേലിസ്റ്റിലേക്ക് ചെർക്കുക</string>
+    <string name="changeLanguage">ഭാഷ മാറ്റുക</string>
+    <string name="location">സ്ഥലം</string>
+    <string name="subscribers">%1$s സബ്സ്ക്രൈബറുകൾ</string>
+    <string name="website">വെബ്സൈറ്റ്</string>
+    <string name="retry">വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="noInternet">ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല</string>
+    <string name="library">ലൈബ്രറി</string>
+    <string name="startpage">ഹോം</string>
+    <string name="search_hint">തിരയുക</string>
+    <string name="password">രഹസ്യവാക്ക്</string>
+    <string name="save">ചേർക്കുക</string>
+    <string name="cancel">റദ്ദാക്കൂ</string>
+    <string name="notgmail">ഇത് നിങ്ങളുടെ ജിമെയിൽ അക്കൗണ്ട് അല്ല.</string>
+    <string name="importsuccess">സബ്സ്ക്രൈബ് ചെയ്തു</string>
+    <string name="emptyList">ഇവിടെ ഒന്നും ഇല്ല.</string>
+    <string name="deletePlaylist">പ്ലേലിസ്റ്റ് ഇല്ലാതാകുക</string>
+    <string name="createPlaylist">പ്ലേലിസ്റ്റ് നിർമ്മിക്കുക</string>
+    <string name="playlistCreated">പ്ലേലിസ്റ്റ് നിർമ്മിച്ചു!</string>
+    <string name="systemLanguage">സിസ്റ്റം ഭാഷ</string>
+    <string name="success">വിജയകരം!</string>
+    <string name="videoCount">%1$s വീഡിയോകൾ</string>
+    <string name="dlcomplete">ഡൗൺലോഡ് പൂർത്തിയായി.</string>
+    <string name="subscribeIsEmpty">കുറച്ച് ചാനലുകൾ ഒക്കെ സബ്സ്ക്രൈബ് ചെയ്യൂ.</string>
+    <string name="vlc">വിഎൽസി-യിൽ തുറക്കൂ</string>
+    <string name="app_theme">തീം</string>
+    <string name="fail">പരാജയപ്പെട്ടു:(</string>
+    <string name="about">ഇതിനെ കുറിച്ച്</string>
+    <string name="settings">ക്രമീകരണങ്ങൾ</string>
+</resources>
