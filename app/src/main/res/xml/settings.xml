@@ -74,6 +74,7 @@
     <androidx.preference.Preference
         app:title="@string/sponsorblock"
         app:key="sponsorblock"
+        app:summary="@string/sponsorblock_summary"
         android:icon="@drawable/ic_sponsorblock"
         />
 

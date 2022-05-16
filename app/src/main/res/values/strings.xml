@@ -73,6 +73,7 @@
     <string name="retry">Retry</string>
     <string name="comments">Comments</string>
     <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock_summary">Uses API from https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Skipped segment.</string>
     <string name="category_header_title">SponsorBlock</string>
     <string name="sponsorblock_state">Enabled</string>
