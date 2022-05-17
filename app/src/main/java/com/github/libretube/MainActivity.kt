@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.engine = CronetEngine.Builder(applicationContext)
             .enableHttp2(true)
             .enableQuic(true)
+            .enableBrotli(true)
             .enableHttpCache(HttpCacheType.DISK, 1024 * 1024)
             .build()
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
