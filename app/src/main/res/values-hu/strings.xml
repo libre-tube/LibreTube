@@ -63,4 +63,8 @@
     <string name="darkTheme">Sötét téma</string>
     <string name="library">Könyvtár</string>
     <string name="lightTheme">Világos téma</string>
+    <string name="videoCount">%1$s videó</string>
+    <string name="noInternet">Nincs internetkapcsolat</string>
+    <string name="retry">Újra</string>
+    <string name="comments">Megjegyzések</string>
 </resources>
