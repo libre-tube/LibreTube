@@ -35,10 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
-import com.github.libretube.obj.PipedStream
-import com.github.libretube.obj.Segment
-import com.github.libretube.obj.Segments
-import com.github.libretube.obj.Subscribe
+import com.github.libretube.obj.*
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -78,6 +75,7 @@ class PlayerFragment : Fragment() {
     private var eId: Int = 0
     private var paused = false
     private var whichQuality = 0
+    private var transitioning = false
 
     var isSubscribed: Boolean = false
 
@@ -91,6 +89,7 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var mediaSource: MediaSource
     private lateinit var segmentData: Segments
+    private var relatedStreams: List<StreamItem>? = arrayListOf()
 
     private lateinit var relDownloadVideo: LinearLayout
 
@@ -361,6 +360,7 @@ class PlayerFragment : Fragment() {
                 }
 
                 isLoading = false
+                relatedStreams = response.relatedStreams
                 var videosNameArray: Array<CharSequence> = arrayOf()
                 videosNameArray += "HLS"
                 for (vid in response.videoStreams!!) {
@@ -456,6 +456,7 @@ class PlayerFragment : Fragment() {
                             }
                         }
                         response.hls != null -> {
+                            Log.d("Test", response.hls!!)
                             val mediaItem: MediaItem = MediaItem.Builder()
                                 .setUri(response.hls)
                                 .setSubtitleConfigurations(subtitle)
@@ -491,7 +492,6 @@ class PlayerFragment : Fragment() {
                             view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[1]
                         }
                     }
-
                     // /exoPlayer.getMediaItemAt(5)
                     exoPlayer.prepare()
                     exoPlayer.play()
@@ -563,7 +563,7 @@ class PlayerFragment : Fragment() {
                         val dialog: AlertDialog? = builder?.create()
                         dialog?.show()
                     }
-                    // Listener for play and pause icon change
+                    // Listener for play, pause icon change, sponsorblock and auto play
                     exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
                         override fun onIsPlayingChanged(isPlaying: Boolean) {
                             if(isPlaying && SponsorBlockSettings.sponsorBlockEnabled)
@@ -582,7 +582,15 @@ class PlayerFragment : Fragment() {
                                             !playWhenReady
                                     )
 
+                            if(playbackState == Player.STATE_ENDED && relatedStreams != null && relatedStreams!!.isNotEmpty() && !transitioning)
+                            {
+                                transitioning = true
+                                videoId = relatedStreams!![0].url!!.replace("/watch?v=","")
+                                fetchJson(view)
+                            }
+
                             if (playWhenReady && playbackState == Player.STATE_READY) {
+                                transitioning = false
                                 // media actually playing
                                 view.findViewById<ImageView>(R.id.play_imageView)
                                     .setImageResource(R.drawable.ic_pause)
@@ -747,6 +755,7 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     }
+
                 }
             }
         }
