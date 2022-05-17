@@ -1,16 +1,13 @@
 package com.github.libretube
 
 import android.app.Activity
-import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -18,7 +15,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -27,12 +24,11 @@ import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
-import java.lang.Exception
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -269,8 +265,8 @@ class MainActivity : AppCompatActivity() {
                 isFullScreen=false
             }else{
                 navController.popBackStack()
-                if (navController.currentBackStackEntry == null){
-                    moveTaskToBack(true)
+                if (navController.currentBackStackEntry == null && (parent as View).id != R.id.settings){
+                    super.onBackPressed()
                 }
             }
         }catch (e: Exception){
