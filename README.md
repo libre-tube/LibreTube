@@ -29,19 +29,16 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 ## Features
 
-| Feature  | Availability |
+| Feature ||
 | - | - |
 | User Accounts | ✅ |
-| Subscriptions | ✅ ||
+| Subscriptions | ✅ |
 | User Playlists | ✅ |
-| Trending | ✅ |
-| Channels | ✅ |
 | Channel Playlists | ✅ |
-| Search | ✅ |
-| Search Suggestions | ✅ |
+| Search Filters | ✅ |
+| SponsorBlock | ✅ |
 | Subtitles | ✅ |
 | Comments | ✅ |
-| Search Filters | ✅ |
 
 
 ## Contributing
