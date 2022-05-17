@@ -456,7 +456,6 @@ class PlayerFragment : Fragment() {
                             }
                         }
                         response.hls != null -> {
-                            Log.d("Test", response.hls!!)
                             val mediaItem: MediaItem = MediaItem.Builder()
                                 .setUri(response.hls)
                                 .setSubtitleConfigurations(subtitle)
