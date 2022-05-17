@@ -29,7 +29,7 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 ## Features
 
-| Feature  | Availability |
+| Feature ||
 | - | - |
 | User Accounts | ✅ |
 | Subscriptions | ✅ |
