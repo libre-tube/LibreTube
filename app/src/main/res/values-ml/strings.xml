@@ -50,4 +50,18 @@
     <string name="fail">പരാജയപ്പെട്ടു:(</string>
     <string name="about">ഇതിനെ കുറിച്ച്</string>
     <string name="settings">ക്രമീകരണങ്ങൾ</string>
+    <string name="unsubscribe">സബ്സ്ക്രൈബ് ചെയ്യേണ്ടാ</string>
+    <string name="loggedout">പറത്ത് കടന്നു.</string>
+    <string name="customInstance">ഒരു കസ്റ്റ്ം ഇൻസ്റ്റൻസ് ചേർക്കുക</string>
+    <string name="instance">ഇൻസ്റ്റൻസ്</string>
+    <string name="channels">ചാനലുകൾ</string>
+    <string name="all">എല്ലാം</string>
+    <string name="playlists">പ്ലേലിസ്റ്റുകൾ</string>
+    <string name="okay">അതെ</string>
+    <string name="history">ചരിത്രം</string>
+    <string name="search_history">തിരയൽ ചരിത്രം</string>
+    <string name="clear_history">ചരിത്രം മായ്ക്കുക</string>
+    <string name="music_songs">പാട്ടുകൾ</string>
+    <string name="sponsorblock_summary">ഉപയോഗിക്കുന്ന എപിഐ https://sponsor.ajay.app/</string>
+    <string name="license">ലൈസൻസ്</string>
 </resources>
