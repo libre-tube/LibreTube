@@ -75,7 +75,7 @@ class PlayerFragment : Fragment() {
     private var eId: Int = 0
     private var paused = false
     private var whichQuality = 0
-    private var transitioning = false
+    private var transitioningToNextVideo = false
 
     var isSubscribed: Boolean = false
 
@@ -582,15 +582,15 @@ class PlayerFragment : Fragment() {
                                             !playWhenReady
                                     )
 
-                            if(playbackState == Player.STATE_ENDED && relatedStreams != null && relatedStreams!!.isNotEmpty() && !transitioning)
+                            if(playbackState == Player.STATE_ENDED && relatedStreams != null && relatedStreams!!.isNotEmpty() && !transitioningToNextVideo)
                             {
-                                transitioning = true
+                                transitioningToNextVideo = true
                                 videoId = relatedStreams!![0].url!!.replace("/watch?v=","")
                                 fetchJson(view)
                             }
 
                             if (playWhenReady && playbackState == Player.STATE_READY) {
-                                transitioning = false
+                                transitioningToNextVideo = false
                                 // media actually playing
                                 view.findViewById<ImageView>(R.id.play_imageView)
                                     .setImageResource(R.drawable.ic_pause)
