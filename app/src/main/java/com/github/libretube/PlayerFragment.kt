@@ -59,6 +59,7 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import org.chromium.net.CronetEngine
+import org.chromium.net.impl.HttpCacheType
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
@@ -378,8 +379,8 @@ class PlayerFragment : Fragment() {
                         )
                     }
 
-                    val cronetEngine: CronetEngine = CronetEngine.Builder(context)
-                        .build()
+                    val cronetEngine: CronetEngine = RetrofitInstance.engine
+                    
                     val cronetDataSourceFactory: CronetDataSource.Factory =
                         CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
 

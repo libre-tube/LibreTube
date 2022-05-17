@@ -29,6 +29,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
+import org.chromium.net.CronetEngine
+import org.chromium.net.impl.HttpCacheType
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +42,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        RetrofitInstance.engine = CronetEngine.Builder(applicationContext)
+            .enableHttp2(true)
+            .enableQuic(true)
+            .enableHttpCache(HttpCacheType.DISK, 1024 * 1024)
+            .build()
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         SponsorBlockSettings.sponsorBlockEnabled = sharedPreferences.getBoolean("sponsorblock_enabled_key", false)
         SponsorBlockSettings.introEnabled = sharedPreferences.getBoolean("intro_category_key", false)
