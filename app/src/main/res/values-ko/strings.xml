@@ -100,4 +100,5 @@
     <string name="category_intro_description">실제 내용이 없는 간격입니다. 일시 중지, 정적 프레임, 반복 애니메이션이 될 수 있습니다. 정보가 포함된 전환에는 사용하면 안 됩니다.</string>
     <string name="category_outro">엔드카드/크레딧</string>
     <string name="category_outro_description">크레딧 또는 YouTube 엔드카드가 표시되는 시점 정보로 결론을 내리기 위한 것이 아닙니다.</string>
+    <string name="license">라이선스</string>
 </resources>
