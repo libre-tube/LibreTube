@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="yes">Bəli</string>
+    <string name="choose_quality_dialog">Keyfiyyəti seçin:</string>
+    <string name="search_hint">Axtar</string>
+    <string name="videos">Videolar</string>
+    <string name="subscribe">Abunə ol</string>
+    <string name="unsubscribe">Abunəlikdən çıxın</string>
+    <string name="share">Paylaşın</string>
+    <string name="save">Yadda saxlayın</string>
+    <string name="download">Endirin</string>
+    <string name="username">İstifadəçi adı</string>
+    <string name="password">Parol</string>
+    <string name="login">Daxil olun</string>
+    <string name="register">Qeydiyyatdan keçin</string>
+    <string name="logout">Çıxış edin</string>
+    <string name="cancel">İmtina</string>
+    <string name="loggedIn">Daxil oldunuz.</string>
+    <string name="loggedout">Çıxış edildi.</string>
+    <string name="registered">Qeydiyyatdan keçibsiz.İndi kanallara abunə ola bilərsiniz.</string>
+    <string name="already_logged_in">Artıq daxil olmusunuz.İstəsiz hesabınızdan çıxa bilərsiniz.</string>
+    <string name="login_first">Zəhmət olmasa daxil olun və yenidən cəhd edin!</string>
+    <string name="startpage">Ev</string>
+    <string name="subscriptions">Abunəliklər</string>
+    <string name="library">Kitabxana</string>
+    <string name="instances">Nümunə seçin</string>
+    <string name="customInstance">Fərdi nümunə əlavə edin</string>
+    <string name="region">Bölgə seçin</string>
+</resources>
