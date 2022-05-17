@@ -129,8 +129,12 @@
     <Preference
         app:title="@string/website"
         app:key="about"
-        android:icon="@drawable/ic_info"
-        />
+        android:icon="@drawable/ic_region" />
+
+        <Preference
+            app:title="@string/license"
+            app:key="license"
+            android:icon="@drawable/ic_gnu" />
 
     </PreferenceCategory>
 
