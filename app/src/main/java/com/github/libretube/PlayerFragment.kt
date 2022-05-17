@@ -565,7 +565,7 @@ class PlayerFragment : Fragment() {
                     // Listener for play, pause icon change, sponsorblock and auto play
                     exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
                         override fun onIsPlayingChanged(isPlaying: Boolean) {
-                            if(isPlaying && SponsorBlockSettings.sponsorBlockEnabled)
+                            if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled)
                             {
                                 exoPlayerView.postDelayed(this@PlayerFragment::checkForSegments, 100)
                             }
@@ -581,10 +581,9 @@ class PlayerFragment : Fragment() {
                                             !playWhenReady
                                     )
 
-                            if(playbackState == Player.STATE_ENDED && relatedStreams != null && relatedStreams!!.isNotEmpty() && !transitioningToNextVideo)
-                            {
+                            if (playbackState == Player.STATE_ENDED && relatedStreams != null && relatedStreams!!.isNotEmpty() && !transitioningToNextVideo) {
                                 transitioningToNextVideo = true
-                                videoId = relatedStreams!![0].url!!.replace("/watch?v=","")
+                                videoId = relatedStreams!![0].url!!.replace("/watch?v=", "")
                                 fetchJson(view)
                             }
 
