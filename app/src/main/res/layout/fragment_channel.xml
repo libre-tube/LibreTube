@@ -88,7 +88,7 @@
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="11dp"
-                    android:drawableLeft="@drawable/ic_bell"
+                    android:drawableLeft="@drawable/ic_bell_small"
                     android:drawableTint="?android:attr/textColorPrimary"
                     />
 

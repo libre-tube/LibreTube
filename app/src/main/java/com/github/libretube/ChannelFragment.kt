@@ -191,7 +191,8 @@ class ChannelFragment : Fragment() {
                 refreshLayout?.isRefreshing = false;
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.channel_name).text = if (response.name?.length!! > 17) response.name.toString().substring(0,15) + "..." else response.name
+                    val channelName = view.findViewById<TextView>(R.id.channel_name)
+                    channelName.text = if (response.name?.length!! > 18) response.name.toString().substring(0,16) + "..." else response.name
                     val channelVerified = view.findViewById<ImageView>(R.id.channel_verified)
                     if (response.verified) channelVerified.visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_subs).text=resources.getString(R.string.subscribers, response.subscriberCount.formatShort())
