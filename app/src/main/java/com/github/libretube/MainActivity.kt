@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -30,6 +31,7 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
@@ -118,7 +120,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             toolbar = findViewById(R.id.toolbar)
-            val hexColor = String.format("#%06X", 0xFFFFFF and 0xcc322d)
+            val typedValue = TypedValue()
+            this.theme.resolveAttribute(R.attr.colorPrimaryDark ,typedValue, true);
+            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
             val appName = HtmlCompat.fromHtml(
                 "Libre<span  style='color:$hexColor';>Tube</span>",
                 HtmlCompat.FROM_HTML_MODE_COMPACT
