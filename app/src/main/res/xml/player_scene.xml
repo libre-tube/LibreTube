@@ -33,7 +33,7 @@
             />
     </Transition>
 
-    <ConstraintSet>
+    <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/player"
             android:layout_width="match_parent"
