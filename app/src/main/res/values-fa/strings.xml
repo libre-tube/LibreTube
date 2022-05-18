@@ -63,4 +63,22 @@
     <string name="videos">ویدیو ها</string>
     <string name="subscriptions">اشتراک ها</string>
     <string name="systemLanguage">زبان سیستم</string>
+    <string name="history">سابقه</string>
+    <string name="search_history">سابقه جستجو</string>
+    <string name="channels">کانال‌ها</string>
+    <string name="all">همه</string>
+    <string name="okay">باشه</string>
+    <string name="clear_history">پاک کردن سابقه</string>
+    <string name="settings">تنظیمات</string>
+    <string name="instance">نمونه</string>
+    <string name="customization">شخصی‌سازی</string>
+    <string name="website">وب‌سایت</string>
+    <string name="videoCount">%1$s ویدیوها</string>
+    <string name="noInternet">اتصال اینترنت وجود ندارد</string>
+    <string name="retry">دوباره امتحان کنید</string>
+    <string name="comments">نظرات</string>
+    <string name="defaultTab">زبانه پیش فرض</string>
+    <string name="sponsorblock">اسپانسربلاک</string>
+    <string name="sponsorblock_state">فعال شده</string>
+    <string name="category_sponsor">اسپانسر</string>
 </resources>

@@ -100,4 +100,5 @@
     <string name="music_albums">YT Müzik Albümleri</string>
     <string name="music_videos">YT Müzik Videoları</string>
     <string name="music_playlists">YT Müzik Oynatma Listeleri</string>
+    <string name="license">Lisans</string>
 </resources>
