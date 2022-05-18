@@ -77,4 +77,8 @@
     <string name="noInternet">اتصال اینترنت وجود ندارد</string>
     <string name="retry">دوباره امتحان کنید</string>
     <string name="comments">نظرات</string>
+    <string name="defaultTab">زبانه پیش فرض</string>
+    <string name="sponsorblock">اسپانسربلاک</string>
+    <string name="sponsorblock_state">فعال شده</string>
+    <string name="category_sponsor">اسپانسر</string>
 </resources>
