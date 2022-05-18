@@ -102,7 +102,7 @@ class ChannelFragment : Fragment() {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
                     RetrofitInstance.api.isSubscribed(channel_id!!,sharedPref?.getString("token","")!!)
-                }catch(e: IOException) {
+                } catch(e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
@@ -110,37 +110,20 @@ class ChannelFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-                val colorPrimary = TypedValue()
-                (context as Activity).theme.resolveAttribute(
-                    android.R.attr.colorPrimary,
-                    colorPrimary,
-                    true)
-
-                val colorText = TypedValue()
-                (context as Activity).theme.resolveAttribute(
-                    R.attr.colorOnSurface,
-                    colorText,
-                    true)
 
                 runOnUiThread {
                     if (response.subscribed==true){
                         isSubscribed=true
                         button.text=getString(R.string.unsubscribe)
-                        button.setTextColor(colorText.data)
-
                     }
                     if(response.subscribed!=null){
                     button.setOnClickListener {
                         if(isSubscribed){
                             unsubscribe()
                             button.text=getString(R.string.subscribe)
-                            button.setTextColor(colorPrimary.data)
-
-
                         }else{
                             subscribe()
                             button.text=getString(R.string.unsubscribe)
-                            button.setTextColor(colorText.data)
                         }
                     }}
                 }
@@ -208,7 +191,7 @@ class ChannelFragment : Fragment() {
                 refreshLayout?.isRefreshing = false;
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.channel_name).text = if (response.name?.length!! > 19) response.name.toString().substring(0,16) + "..." else response.name
+                    view.findViewById<TextView>(R.id.channel_name).text = if (response.name?.length!! > 17) response.name.toString().substring(0,15) + "..." else response.name
                     val channelVerified = view.findViewById<ImageView>(R.id.channel_verified)
                     if (response.verified) channelVerified.visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.channel_subs).text=resources.getString(R.string.subscribers, response.subscriberCount.formatShort())
