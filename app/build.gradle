@@ -76,7 +76,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
     //do not update jackson annotations! it does not supports <api26
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.3'
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
 
