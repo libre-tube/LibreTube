@@ -4,22 +4,22 @@ on:
   workflow_dispatch:
   pull_request:
     paths-ignore:
-      - 'README*.md'
-      - 'fastlane/**'
-      - 'assets/**'
-      - '.github/**/*.md'
+      - "README*.md"
+      - "fastlane/**"
+      - "assets/**"
+      - ".github/**/*.md"
   push:
     paths-ignore:
-      - 'README*.md'
-      - 'fastlane/**'
-      - 'assets/**'
-      - '.github/**/*.md'
+      - "README*.md"
+      - "fastlane/**"
+      - "assets/**"
+      - ".github/**/*.md"
 
 jobs:
   debug-builds:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@v1
 
       - name: set up JDK 11
@@ -27,7 +27,7 @@ jobs:
         with:
           java-version: 11
           distribution: "temurin"
-          cache: 'gradle'
+          cache: "gradle"
 
       - name: Build debug APK and run jvm tests
         run: ./gradlew assembleDebug
