@@ -208,7 +208,7 @@ class PlayerFragment : Fragment() {
                 if (playerDescription.isVisible) View.GONE else View.VISIBLE
         }
 
-        view.findViewById<ConstraintLayout>(R.id.comments_toggle).setOnClickListener {
+        view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.comments_toggle).setOnClickListener {
             commentsRecView.visibility = if (commentsRecView.isVisible) View.GONE else View.VISIBLE
             relatedRecView.visibility = if (relatedRecView.isVisible) View.GONE else View.VISIBLE
         }
