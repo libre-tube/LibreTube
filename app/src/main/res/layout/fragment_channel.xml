@@ -83,9 +83,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
                     android:background="?android:attr/selectableItemBackground"
                     android:text="@string/subscribe"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="11sp"
+                    android:drawableLeft="@drawable/ic_bell_small"
+                    android:drawableTint="?android:attr/textColorPrimary"
                     />
 
             </LinearLayout>

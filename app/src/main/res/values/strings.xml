@@ -80,10 +80,10 @@
     <string name="history">History</string>
     <string name="search_history">Search History</string>
     <string name="clear_history">Clear History</string>
-    <string name="music_songs">Music Songs</string>
-    <string name="music_videos">Music Videos</string>
-    <string name="music_albums">Music Albums</string>
-    <string name="music_playlists">Music Playlists</string>
+    <string name="music_songs">YT Music Songs</string>
+    <string name="music_videos">YT Music Videos</string>
+    <string name="music_albums">YT Music Albums</string>
+    <string name="music_playlists">YT Music Playlists</string>
     <string name="defaultTab">Default Tab</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Uses API from https://sponsor.ajay.app/</string>

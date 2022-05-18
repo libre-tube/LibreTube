@@ -37,10 +37,3 @@ jobs:
         with:
           name: app
           path: app/build/outputs/apk/debug/*.apk
-        
-      - name: ktlint
-        uses: ScaCap/action-ktlint@master
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-
