@@ -32,7 +32,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     lateinit var bottomNavigationView: BottomNavigationView
