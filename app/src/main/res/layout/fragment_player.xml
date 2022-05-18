@@ -202,6 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="?android:attr/selectableItemBackground"
@@ -250,35 +251,45 @@
                 android:layout_height="wrap_content"
                 android:descendantFocusability="blocksDescendants">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/comments_toggle"
+                    style="@style/Widget.Material3.CardView.Elevated"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="17dp"
+                    app:cardCornerRadius="27dp">
 
-                    <TextView
-                        android:id="@+id/commentsToggle_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/comments"
-                        android:textSize="17sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/commentsToggle_imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_arrow_down"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/commentsToggle_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="@string/comments"
+                            android:textSize="17sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:id="@+id/commentsToggle_imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
+                            android:src="@drawable/ic_arrow_up_down"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/comments_recView"
