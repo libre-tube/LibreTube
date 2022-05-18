@@ -76,7 +76,6 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Používá API z https://sponsor.ajay.app/</string>
     <string name="segment_skipped">Segment přeskočen.</string>
-    <string name="category_header_title">SponsorBlock</string>
     <string name="sponsorblock_state">Povolený</string>
     <string name="category_segments">Segmenty</string>
     <string name="category_sponsor">Sponzor</string>
