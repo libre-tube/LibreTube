@@ -72,4 +72,15 @@
     <string name="videoCount">%1$sفيديوهات</string>
     <string name="instance">سيرفر</string>
     <string name="customization">تخصيص</string>
+    <string name="history">السجل</string>
+    <string name="channels">قنوات</string>
+    <string name="all">كل</string>
+    <string name="okay">حسناً</string>
+    <string name="search_history">سجل البحث</string>
+    <string name="clear_history">امح السجل</string>
+    <string name="music_songs">أغاني يوتيوب</string>
+    <string name="music_videos">فيديوهات يوتيوب الموسيقية</string>
+    <string name="music_albums">ألبومات يوتيوب الموسيقية</string>
+    <string name="sponsorblock_state">مُفَعَّل</string>
+    <string name="category_sponsor">راعي</string>
 </resources>
