@@ -87,7 +87,7 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="11dp"
+                    android:textSize="11sp"
                     android:drawableLeft="@drawable/ic_bell_small"
                     android:drawableTint="?android:attr/textColorPrimary"
                     />
