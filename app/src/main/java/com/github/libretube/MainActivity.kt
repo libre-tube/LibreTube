@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.sponsorsEnabled = sharedPreferences.getBoolean("sponsors_category_key", false)
         SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
 
-        DynamicColors.applyToActivitiesIfAvailable(application)
+        
         val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
             var locale = if (languageName != "sys" && "$languageName".length < 3 ){
