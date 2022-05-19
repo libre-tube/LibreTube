@@ -236,7 +236,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:backgroundTint="?android:attr/colorBackground"
+                    android:backgroundTint="?attr/colorOnPrimary"
                     android:drawableLeft="@drawable/ic_bell"
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"

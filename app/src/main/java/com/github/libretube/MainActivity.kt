@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
 
         updateAccentColor(this)
+        updateThemeMode(this)
 
         DynamicColors.applyToActivitiesIfAvailable(application)
 
@@ -70,22 +71,17 @@ class MainActivity : AppCompatActivity() {
             res.updateConfiguration(conf, dm)
         }
 
-        when (sharedPreferences.getString("theme_togglee", "A")!!) {
-            "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-
         val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo=connectivityManager.activeNetworkInfo
         val isConnected = networkInfo != null && networkInfo.isConnected
 
-        if (isConnected == false) {
+        if (!isConnected) {
             setContentView(R.layout.activity_nointernet)
             findViewById<Button>(R.id.retry_button).setOnClickListener() {
                 recreate()
             }
         } else {
+            updateAccentColor(this)
             setContentView(R.layout.activity_main)
 
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -100,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                 "library" -> navController.navigate(R.id.library)
             }
 
+            bottomNavigationView.setBackgroundColor(0) // otherwise Navbar Theme doesn't change
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.home2 -> {
