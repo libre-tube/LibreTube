@@ -12,14 +12,11 @@
         <item name="colorOnSecondaryContainer">@color/red_light_background</item> // navbar icon fill
         <item name="android:colorBackground">@color/red_light_background</item> // background
         <item name="colorOnBackground">@color/red_light_background</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:colorButtonNormal">@color/black</item>
-
 
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.Blue" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.Blue" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/blue_light_accentLight</item> // container
         <item name="colorOnPrimary">@color/blue_light_accentDark</item> // title
@@ -31,14 +28,12 @@
         <item name="colorOnSecondaryContainer">@color/blue_light_background</item> // navbar icon fill
         <item name="android:colorBackground">@color/blue_light_background</item> // background
         <item name="colorOnBackground">@color/blue_light_background</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:colorButtonNormal">@color/black</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
 
     </style>
 
-    <style name="Theme.Yellow" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.Yellow" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/yellow_light_accentLight</item> // container
         <item name="colorOnPrimary">@color/yellow_light_accentDark</item> // title
@@ -50,13 +45,12 @@
         <item name="colorOnSecondaryContainer">@color/yellow_light_background</item> // navbar icon fill
         <item name="android:colorBackground">@color/yellow_light_background</item> // background
         <item name="colorOnBackground">@color/yellow_light_background</item>
-        <item name="android:textColor">@color/black</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
 
     </style>
 
-    <style name="Theme.Green" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.Green" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/green_light_accentLight</item> // container
         <item name="colorOnPrimary">@color/green_light_accentDark</item> // title
@@ -68,13 +62,12 @@
         <item name="colorOnSecondaryContainer">@color/green_light_background</item> // navbar icon fill
         <item name="android:colorBackground">@color/green_light_background</item> // background
         <item name="colorOnBackground">@color/green_light_background</item>
-        <item name="android:textColor">@color/black</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
 
     </style>
 
-    <style name="Theme.Purple" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.Purple" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/purple_light_accentLight</item> // container
         <item name="colorOnPrimary">@color/purple_light_accentDark</item> // title
@@ -86,7 +79,6 @@
         <item name="colorOnSecondaryContainer">@color/purple_light_background</item> // navbar icon fill
         <item name="android:colorBackground">@color/purple_light_background</item> // background
         <item name="colorOnBackground">@color/purple_light_background</item>
-        <item name="android:textColor">@color/black</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
 
