@@ -10,11 +10,7 @@ import kotlinx.coroutines.runBlocking
 /**
  * Loads the selected video audio in background mode with a notification area.
  *
- * @param c
- * The context, necessarily to build the [ExoPlayer] player.
- *
- * @param videoId
- * The video id to get the video data.
+ * Needs the [c], necessarily to build the [ExoPlayer] player, and [videoId] to get the video data.
  */
 class BackgroundMode(private val c: Context, private val videoId: String) {
     /**
