@@ -23,6 +23,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.google.android.material.color.DynamicColors
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.HttpException
@@ -36,6 +37,7 @@ class SettingsActivity :
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DynamicColors.applyToActivityIfAvailable(this)
         updateAccentColor(this)
         updateThemeMode(this)
 
