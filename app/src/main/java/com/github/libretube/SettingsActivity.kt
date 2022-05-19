@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -32,8 +31,9 @@ import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
-class SettingsActivity : AppCompatActivity(),
-    SharedPreferences.OnSharedPreferenceChangeListener{
+class SettingsActivity :
+    AppCompatActivity(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         updateAccentColor(this)
@@ -47,8 +47,6 @@ class SettingsActivity : AppCompatActivity(),
         view.setAlpha(0F)
         view.animate().alpha(1F).setDuration(300)
 
-
-
         setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -59,11 +57,9 @@ class SettingsActivity : AppCompatActivity(),
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
-
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, rootKey: String?) {}
-
 
     class SettingsFragment : PreferenceFragmentCompat() {
         val TAG = "Settings"
@@ -83,23 +79,23 @@ class SettingsActivity : AppCompatActivity(),
 
                         // "rw" for read-and-write;
                         // "rwt" for truncating or overwriting existing file contents.
-                        //val readOnlyMode = "r"
+                        // val readOnlyMode = "r"
                         // uri - I have got from onActivityResult
                         val type = resolver.getType(uri)
 
                         var inputStream: InputStream? = resolver.openInputStream(uri)
                         val channels = ArrayList<String>()
-                        if(type == "application/json"){
+                        if (type == "application/json") {
                             val json = inputStream?.bufferedReader()?.readLines()?.get(0)
                             val jsonObject = JSONTokener(json).nextValue() as JSONObject
-                            Log.e(TAG,jsonObject.getJSONArray("subscriptions").toString())
+                            Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
                             for (i in 0 until jsonObject.getJSONArray("subscriptions").length()) {
                                 var url = jsonObject.getJSONArray("subscriptions").getJSONObject(i).getString("url")
-                                url = url.replace("https://www.youtube.com/channel/","")
-                                Log.e(TAG,url)
+                                url = url.replace("https://www.youtube.com/channel/", "")
+                                Log.e(TAG, url)
                                 channels.add(url)
                             }
-                        }else {
+                        } else {
                             if (type == "application/zip") {
                                 val zis = ZipInputStream(inputStream)
                                 var entry: ZipEntry? = zis.nextEntry
@@ -132,8 +128,6 @@ class SettingsActivity : AppCompatActivity(),
                         ).show()
                     }
                 }
-
-
             }
             super.onCreate(savedInstanceState)
         }
@@ -166,7 +160,7 @@ class SettingsActivity : AppCompatActivity(),
             val sponsorblock = findPreference<Preference>("sponsorblock")
             sponsorblock?.setOnPreferenceClickListener {
                 val newFragment = SponsorBlockSettings()
-                    parentFragmentManager.beginTransaction()
+                parentFragmentManager.beginTransaction()
                     .replace(R.id.settings, newFragment)
                     .commitNow()
                 true
@@ -176,7 +170,7 @@ class SettingsActivity : AppCompatActivity(),
             importFromYt?.setOnPreferenceClickListener {
                 val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
                 val token = sharedPref?.getString("token", "")!!
-                //check StorageAccess
+                // check StorageAccess
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     Log.d("myz", "" + Build.VERSION.SDK_INT)
                     if (ContextCompat.checkSelfPermission(
@@ -186,11 +180,13 @@ class SettingsActivity : AppCompatActivity(),
                         != PackageManager.PERMISSION_GRANTED
                     ) {
                         ActivityCompat.requestPermissions(
-                            this.requireActivity(), arrayOf(
+                            this.requireActivity(),
+                            arrayOf(
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
                                 Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                            ), 1
-                        ) //permission request code is just an int
+                            ),
+                            1
+                        ) // permission request code is just an int
                     } else if (token != "") {
                         getContent.launch("*/*")
                     } else {
@@ -201,9 +197,9 @@ class SettingsActivity : AppCompatActivity(),
                             requireContext(),
                             Manifest.permission.READ_EXTERNAL_STORAGE
                         ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ) != PackageManager.PERMISSION_GRANTED
+                                requireContext(),
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                            ) != PackageManager.PERMISSION_GRANTED
                     ) {
                         ActivityCompat.requestPermissions(
                             this.requireActivity(),
@@ -230,7 +226,7 @@ class SettingsActivity : AppCompatActivity(),
             }
 
             val accentColor = findPreference<Preference>("accent_color")
-            accentColor?.setOnPreferenceChangeListener {_, _ ->
+            accentColor?.setOnPreferenceChangeListener { _, _ ->
                 val refresh = Intent(context, SettingsActivity::class.java)
                 startActivity(refresh)
                 true
@@ -238,7 +234,7 @@ class SettingsActivity : AppCompatActivity(),
 
             val changeLanguage = findPreference<ListPreference>("language")
             changeLanguage?.setOnPreferenceChangeListener { _, _ ->
-                val refresh = Intent(context, SettingsActivity::class.java)
+                val refresh = Intent(context, MainActivity::class.java)
                 startActivity(refresh)
                 true
             }
@@ -260,16 +256,16 @@ class SettingsActivity : AppCompatActivity(),
 
             val license = findPreference<Preference>("license")
             license?.setOnPreferenceClickListener {
-                val licenseString = view?.context?.assets!!.open("gpl3.html").bufferedReader().use{
+                val licenseString = view?.context?.assets!!.open("gpl3.html").bufferedReader().use {
                     it.readText()
                 }
                 val licenseHtml = if (Build.VERSION.SDK_INT >= 24) {
-                    Html.fromHtml(licenseString,1)
+                    Html.fromHtml(licenseString, 1)
                 } else {
                     Html.fromHtml(licenseString)
                 }
                 AlertDialog.Builder(view?.context!!)
-                    .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener{ _,_ -> })
+                    .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener { _, _ -> })
                     .setMessage(licenseHtml)
                     .create()
                     .show()
@@ -323,7 +319,6 @@ class SettingsActivity : AppCompatActivity(),
             activity?.runOnUiThread(action)
         }
 
-
         private fun subscribe(channels: List<String>) {
             fun run() {
                 lifecycleScope.launchWhenCreated {
@@ -360,5 +355,4 @@ class SettingsActivity : AppCompatActivity(),
         intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-
 }
