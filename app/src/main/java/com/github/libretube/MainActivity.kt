@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
 
         DynamicColors.applyToActivitiesIfAvailable(application)
+
         val languageName = sharedPreferences.getString("language", "sys")
         if (languageName != "") {
             var locale = if (languageName != "sys" && "$languageName".length < 3 ){
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+        //setTheme(R.style.YellowTheme)
 
         val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo=connectivityManager.activeNetworkInfo
