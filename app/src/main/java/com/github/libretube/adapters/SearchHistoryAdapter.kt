@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.google.android.material.imageview.ShapeableImageView
 
-
-class SearchHistoryAdapter(private val context: Context, private var historyList: List<String> , private val editText : AutoCompleteTextView) :
+class SearchHistoryAdapter(
+    private val context: Context,
+    private var historyList: List<String>,
+    private val editText: AutoCompleteTextView
+) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
-
 
     override fun getItemCount(): Int {
         return historyList.size
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -30,7 +31,6 @@ class SearchHistoryAdapter(private val context: Context, private var historyList
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
         val history = historyList[position]
         holder.v.findViewById<TextView>(R.id.history_text).text = history
-
 
         holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)

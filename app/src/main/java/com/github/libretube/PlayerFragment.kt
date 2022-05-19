@@ -58,13 +58,12 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -247,7 +246,6 @@ class PlayerFragment : Fragment() {
                 ) {
                     fetchNextComments()
                 }
-
             }
 
         commentsRecView = view.findViewById(R.id.comments_recView)
@@ -274,22 +272,21 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun checkForSegments()
-    {
+    private fun checkForSegments() {
         if (!exoPlayer.isPlaying || !SponsorBlockSettings.sponsorBlockEnabled) return
 
         exoPlayerView.postDelayed(this::checkForSegments, 100)
 
-        if(segmentData.segments.isEmpty() )
+        if (segmentData.segments.isEmpty())
             return
 
         segmentData.segments.forEach { segment: Segment ->
             val segmentStart = (segment.segment!![0] * 1000.0f).toLong()
             val segmentEnd = (segment.segment!![1] * 1000.0f).toLong()
             val currentPosition = exoPlayer.currentPosition
-            if(currentPosition in segmentStart until segmentEnd) {
-                Toast.makeText(context,R.string.segment_skipped, Toast.LENGTH_SHORT).show()
-                exoPlayer.seekTo(segmentEnd);
+            if (currentPosition in segmentStart until segmentEnd) {
+                Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
+                exoPlayer.seekTo(segmentEnd)
             }
         }
     }
@@ -321,7 +318,7 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
-                if(SponsorBlockSettings.sponsorBlockEnabled) {
+                if (SponsorBlockSettings.sponsorBlockEnabled) {
                     val categories: ArrayList<String> = arrayListOf()
                     if (SponsorBlockSettings.introEnabled) {
                         categories.add("intro")
@@ -338,7 +335,7 @@ class PlayerFragment : Fragment() {
                     if (SponsorBlockSettings.outroEnabled) {
                         categories.add("outro")
                     }
-                    if(categories.size > 0) {
+                    if (categories.size > 0) {
                         segmentData = try {
 
                             RetrofitInstance.api.getSegments(
@@ -401,10 +398,10 @@ class PlayerFragment : Fragment() {
                     exoPlayerView.setShowSubtitleButton(true)
                     exoPlayerView.setShowNextButton(false)
                     exoPlayerView.setShowPreviousButton(false)
-                    exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL);
+                    exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
                     // exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
-                    exoPlayer.setAudioAttributes(audioAttributes,true);
+                    exoPlayer.setAudioAttributes(audioAttributes, true)
                     exoPlayerView.player = exoPlayer
                     val sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -433,9 +430,11 @@ class PlayerFragment : Fragment() {
                                                 ProgressiveMediaSource.Factory(dataSourceFactory)
                                                     .createMediaSource(
                                                         fromUri(
-                                                            response.audioStreams!![getMostBitRate(
-                                                                response.audioStreams
-                                                            )].url!!
+                                                            response.audioStreams!![
+                                                                getMostBitRate(
+                                                                    response.audioStreams
+                                                                )
+                                                            ].url!!
                                                         )
                                                     )
                                         }
@@ -479,9 +478,11 @@ class PlayerFragment : Fragment() {
                                 audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
                                     .createMediaSource(
                                         fromUri(
-                                            response.audioStreams!![getMostBitRate(
-                                                response.audioStreams
-                                            )].url!!
+                                            response.audioStreams!![
+                                                getMostBitRate(
+                                                    response.audioStreams
+                                                )
+                                            ].url!!
                                         )
                                     )
                             }
@@ -545,9 +546,11 @@ class PlayerFragment : Fragment() {
                                                 ProgressiveMediaSource.Factory(dataSourceFactory)
                                                     .createMediaSource(
                                                         fromUri(
-                                                            response.audioStreams!![getMostBitRate(
-                                                                response.audioStreams
-                                                            )].url!!
+                                                            response.audioStreams!![
+                                                                getMostBitRate(
+                                                                    response.audioStreams
+                                                                )
+                                                            ].url!!
                                                         )
                                                     )
                                         }
@@ -555,7 +558,7 @@ class PlayerFragment : Fragment() {
                                             MergingMediaSource(videoSource, audioSource)
                                         exoPlayer.setMediaSource(mergeSource)
                                     }
-                                    exoPlayer.seekTo(lastPosition);
+                                    exoPlayer.seekTo(lastPosition)
                                     view.findViewById<TextView>(R.id.quality_text).text =
                                         videosNameArray[which]
                                 }
@@ -566,8 +569,7 @@ class PlayerFragment : Fragment() {
                     // Listener for play and pause icon change
                     exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
                         override fun onIsPlayingChanged(isPlaying: Boolean) {
-                            if(isPlaying && SponsorBlockSettings.sponsorBlockEnabled)
-                            {
+                            if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
                                 exoPlayerView.postDelayed(this@PlayerFragment::checkForSegments, 100)
                             }
                         }
@@ -578,9 +580,9 @@ class PlayerFragment : Fragment() {
                         ) {
 
                             exoPlayerView.keepScreenOn = !(
-                                    playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED ||
-                                            !playWhenReady
-                                    )
+                                playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED ||
+                                    !playWhenReady
+                                )
 
                             if (playWhenReady && playbackState == Player.STATE_READY) {
                                 // media actually playing
@@ -678,9 +680,9 @@ class PlayerFragment : Fragment() {
                                             requireContext(),
                                             Manifest.permission.READ_EXTERNAL_STORAGE
                                         ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                                            requireContext(),
-                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                        ) != PackageManager.PERMISSION_GRANTED
+                                                requireContext(),
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                            ) != PackageManager.PERMISSION_GRANTED
                                     ) {
                                         ActivityCompat.requestPermissions(
                                             mainActivity,
@@ -771,7 +773,6 @@ class PlayerFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-
 
                 runOnUiThread {
                     if (response.subscribed == true) {
@@ -864,25 +865,25 @@ class PlayerFragment : Fragment() {
         super.onResume()
     }
 
-    private fun fetchNextComments(){
-            lifecycleScope.launchWhenCreated {
-                if (!isLoading) {
-                    isLoading = true
-                    val response = try {
-                        RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
-                    } catch (e: IOException) {
-                        println(e)
-                        Log.e(TAG, "IOException, you might not have internet connection")
-                        return@launchWhenCreated
-                    } catch (e: HttpException) {
-                        Log.e(TAG, "HttpException, unexpected response," + e.response())
-                        return@launchWhenCreated
-                    }
-                    nextPage = response.nextpage
-                    commentsAdapter?.updateItems(response.comments!!)
-                    isLoading = false
+    private fun fetchNextComments() {
+        lifecycleScope.launchWhenCreated {
+            if (!isLoading) {
+                isLoading = true
+                val response = try {
+                    RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response," + e.response())
+                    return@launchWhenCreated
                 }
+                nextPage = response.nextpage
+                commentsAdapter?.updateItems(response.comments!!)
+                isLoading = false
             }
+        }
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
@@ -898,7 +899,7 @@ class PlayerFragment : Fragment() {
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-            isFullScreen = false;
+            isFullScreen = false
         } else {
             with(motionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
@@ -917,6 +918,6 @@ class PlayerFragment : Fragment() {
 
         if (SDK_INT >= Build.VERSION_CODES.N && exoPlayer.isPlaying && (scrollView?.getLocalVisibleRect(bounds) == true || isFullScreen)) {
             requireActivity().enterPictureInPictureMode()
-        };
+        }
     }
 }

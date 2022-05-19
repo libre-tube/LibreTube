@@ -27,11 +27,10 @@ class CreatePlaylistDialog : DialogFragment() {
         val createPlaylistBtn = rootView.findViewById<Button>(R.id.create_new_playlist)
         createPlaylistBtn.setOnClickListener {
             var listName = playlistName.text.toString()
-            if(listName != "") {
+            if (listName != "") {
                 setFragmentResult("key_parent", bundleOf("playlistName" to "$listName"))
                 dismiss()
-            }
-            else {
+            } else {
                 Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_LONG).show()
             }
         }

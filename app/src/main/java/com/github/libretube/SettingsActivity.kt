@@ -24,13 +24,13 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 
 class SettingsActivity :
     AppCompatActivity(),

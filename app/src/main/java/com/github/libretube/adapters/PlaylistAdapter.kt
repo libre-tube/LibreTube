@@ -18,24 +18,29 @@ import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
+import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
-class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>, private val playlistId: String, private val isOwner: Boolean, private val activity: Activity): RecyclerView.Adapter<PlaylistViewHolder>() {
+class PlaylistAdapter(
+    private val videoFeed: MutableList<StreamItem>,
+    private val playlistId: String,
+    private val isOwner: Boolean,
+    private val activity: Activity
+) : RecyclerView.Adapter<PlaylistViewHolder>() {
     private val TAG = "PlaylistAdapter"
     override fun getItemCount(): Int {
         return videoFeed.size
     }
-    fun updateItems(newItems: List<StreamItem>){
+    fun updateItems(newItems: List<StreamItem>) {
         videoFeed.addAll(newItems)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.playlist_row,parent,false)
+        val cell = layoutInflater.inflate(R.layout.playlist_row, parent, false)
         return PlaylistViewHolder(cell)
     }
 
@@ -46,9 +51,9 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>, private va
         holder.v.findViewById<TextView>(R.id.playlist_duration).text = DateUtils.formatElapsedTime(streamItem.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.playlist_thumbnail)
         Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
-        holder.v.setOnClickListener{
+        holder.v.setOnClickListener {
             var bundle = Bundle()
-            bundle.putString("videoId",streamItem.url!!.replace("/watch?v=",""))
+            bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = holder.v.context as AppCompatActivity
@@ -59,34 +64,33 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>, private va
                 .replace(R.id.container, frag)
                 .commitNow()
         }
-        if(isOwner){
+        if (isOwner) {
             val delete = holder.v.findViewById<ImageView>(R.id.delete_playlist)
             delete.visibility = View.VISIBLE
             delete.setOnClickListener {
                 val sharedPref = holder.v.context.getSharedPreferences("token", Context.MODE_PRIVATE)
-                val token = sharedPref?.getString("token","")!!
+                val token = sharedPref?.getString("token", "")!!
                 removeFromPlaylist(token, position)
             }
         }
     }
     private fun removeFromPlaylist(token: String, position: Int) {
         fun run() {
-            GlobalScope.launch{
+            GlobalScope.launch {
                 val response = try {
                     RetrofitInstance.api.removeFromPlaylist(token, PlaylistId(playlistId = playlistId, index = position))
-                }catch(e: IOException) {
+                } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launch
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launch
-                }finally {
-
+                } finally {
                 }
-                try{
-                    if(response.message == "ok"){
-                        Log.d(TAG,"deleted!")
+                try {
+                    if (response.message == "ok") {
+                        Log.d(TAG, "deleted!")
                         videoFeed.removeAt(position)
                         // FIXME: This needs to run on UI thread?
                         activity.runOnUiThread { notifyDataSetChanged() }
@@ -95,17 +99,15 @@ class PlaylistAdapter(private val videoFeed: MutableList<StreamItem>, private va
                             view.findViewById<ImageView>(R.id.boogh2).visibility=View.VISIBLE
                         }*/
                     }
-                }catch (e:Exception){
-                    Log.e(TAG,e.toString())
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                 }
-
             }
         }
         run()
-
     }
 }
-class PlaylistViewHolder(val v: View): RecyclerView.ViewHolder(v){
+class PlaylistViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }

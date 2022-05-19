@@ -7,6 +7,6 @@ data class Segment(
     val actionType: String?,
     val category: String?,
     val segment: List<Float>?
-){
-    constructor(): this("", "", arrayListOf())
+) {
+    constructor() : this("", "", arrayListOf())
 }

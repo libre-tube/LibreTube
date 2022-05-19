@@ -17,10 +17,9 @@ import com.github.libretube.formatShort
 import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
 
+class SearchAdapter(private val searchItems: MutableList<SearchItem>) : RecyclerView.Adapter<CustomViewHolder1>() {
 
-class SearchAdapter(private val searchItems: MutableList<SearchItem>): RecyclerView.Adapter<CustomViewHolder1>() {
-
-    fun updateItems(newItems: List<SearchItem>){
+    fun updateItems(newItems: List<SearchItem>) {
         var searchItemsSize = searchItems.size
         searchItems.addAll(newItems)
         notifyItemRangeInserted(searchItemsSize, newItems.size)
@@ -38,7 +37,7 @@ class SearchAdapter(private val searchItems: MutableList<SearchItem>): RecyclerV
             else -> throw IllegalArgumentException("Invalid type")
         }
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(layout,parent,false)
+        val cell = layoutInflater.inflate(layout, parent, false)
         return CustomViewHolder1(cell)
     }
 
@@ -48,14 +47,14 @@ class SearchAdapter(private val searchItems: MutableList<SearchItem>): RecyclerV
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            searchItems[position].url!!.startsWith("/watch",false) -> 0
-            searchItems[position].url!!.startsWith("/channel",false) -> 1
-            searchItems[position].url!!.startsWith("/playlist",false) -> 2
+            searchItems[position].url!!.startsWith("/watch", false) -> 0
+            searchItems[position].url!!.startsWith("/channel", false) -> 1
+            searchItems[position].url!!.startsWith("/playlist", false) -> 2
             else -> 3
         }
     }
 }
-class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
+class CustomViewHolder1(private val v: View) : RecyclerView.ViewHolder(v) {
 
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
@@ -72,9 +71,9 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         views.text = if (viewsString != "" && uploadDate != "") viewsString + " • " + uploadDate else viewsString + uploadDate
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.uploaderName
-        v.setOnClickListener{
+        v.setOnClickListener {
             var bundle = Bundle()
-            bundle.putString("videoId",item.url!!.replace("/watch?v=",""))
+            bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = v.context as AppCompatActivity
@@ -101,9 +100,9 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
-            activity.navController.navigate(R.id.channel,bundle)
+            activity.navController.navigate(R.id.channel, bundle)
         }
-        //todo sub button
+        // todo sub button
     }
     private fun bindPlaylist(item: SearchItem) {
         val playlistImage = v.findViewById<ImageView>(R.id.search_thumbnail)
@@ -117,18 +116,18 @@ class CustomViewHolder1(private val v: View): RecyclerView.ViewHolder(v){
         val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
         if (item.videos?.toInt() != -1) playlistVideosNumber.text = v.context.getString(R.string.videoCount, item.videos.toString())
         v.setOnClickListener {
-            //playlist clicked
+            // playlist clicked
             val activity = v.context as MainActivity
             val bundle = bundleOf("playlist_id" to item.url)
-            activity.navController.navigate(R.id.playlistFragment,bundle)
+            activity.navController.navigate(R.id.playlistFragment, bundle)
         }
     }
 
     fun bind(searchItem: SearchItem) {
         when {
-            searchItem.url!!.startsWith("/watch",false) -> bindWatch(searchItem)
-            searchItem.url!!.startsWith("/channel",false) -> bindChannel(searchItem)
-            searchItem.url!!.startsWith("/playlist",false) -> bindPlaylist(searchItem)
+            searchItem.url!!.startsWith("/watch", false) -> bindWatch(searchItem)
+            searchItem.url!!.startsWith("/channel", false) -> bindChannel(searchItem)
+            searchItem.url!!.startsWith("/playlist", false) -> bindPlaylist(searchItem)
             else -> {
             }
         }
