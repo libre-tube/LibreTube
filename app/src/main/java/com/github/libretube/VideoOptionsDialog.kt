@@ -9,8 +9,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 /**
  * Dialog with different options for a selected video.
  *
- * @param videoId
- * The video id.
+ * Needs the [videoId] to load the content from the right video.
  */
 class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
     /**
@@ -38,7 +37,7 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
                 when (which) {
                     // This for example will be the "Background mode" option
                     0 -> {
-                        BackgroundMode(requireContext(), videoId).playOnBackgroundMode()
+                        BackgroundMode.getInstance().playOnBackgroundMode(requireContext(), videoId)
                     }
                     else -> {
                         dialog.dismiss()

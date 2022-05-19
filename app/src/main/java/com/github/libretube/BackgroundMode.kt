@@ -9,10 +9,8 @@ import kotlinx.coroutines.runBlocking
 
 /**
  * Loads the selected video audio in background mode with a notification area.
- *
- * Needs the [c], necessarily to build the [ExoPlayer] player, and [videoId] to get the video data.
  */
-class BackgroundMode(private val c: Context, private val videoId: String) {
+class BackgroundMode {
     /**
      * The response that gets when called the Api.
      */
@@ -23,40 +21,37 @@ class BackgroundMode(private val c: Context, private val videoId: String) {
      */
     private var player: ExoPlayer? = null
     private var playWhenReadyPlayer = true
-    private var currentItem = 0
-    private var playbackPosition = 0L
 
     /**
      * Initializes the [player] player with the [MediaItem].
      */
-    private fun initializePlayer() {
-        player = ExoPlayer.Builder(c)
-            .build()
-            .also { exoPlayer ->
-                response?.let {
-                    val mediaItem = MediaItem.fromUri(response!!.hls!!)
-                    exoPlayer.setMediaItem(mediaItem)
-                }
-            }
+    private fun initializePlayer(c: Context) {
+        if (player == null) player = ExoPlayer.Builder(c).build()
+        setMediaItem()
     }
 
     /**
      * Releases the [player].
      */
     private fun releasePlayer() {
-        player?.let { exoPlayer ->
-            playbackPosition = exoPlayer.currentPosition
-            currentItem = exoPlayer.currentMediaItemIndex
-            playWhenReadyPlayer = exoPlayer.playWhenReady
-            exoPlayer.release()
-        }
+        player?.release()
         player = null
+    }
+
+    /**
+     * Sets the [MediaItem] with the [response] into the [player].
+     */
+    private fun setMediaItem() {
+        response?.let {
+            val mediaItem = MediaItem.fromUri(response!!.hls!!)
+            player?.setMediaItem(mediaItem)
+        }
     }
 
     /**
      * Gets the video data and prepares the [player].
      */
-    fun playOnBackgroundMode() {
+    fun playOnBackgroundMode(c: Context, videoId: String) {
         runBlocking {
             val job = launch {
                 response = RetrofitInstance.api.getStreams(videoId)
@@ -64,13 +59,24 @@ class BackgroundMode(private val c: Context, private val videoId: String) {
             // Wait until the job is done, to load correctly later in the player
             job.join()
 
-            initializePlayer()
+            initializePlayer(c)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
-                seekTo(currentItem, playbackPosition)
                 prepare()
             }
+        }
+    }
+
+    /**
+     * Creates a singleton of this class, to not create a new [player] every time.
+     */
+    companion object {
+        private var INSTANCE: BackgroundMode? = null
+
+        fun getInstance(): BackgroundMode {
+            if (INSTANCE == null) INSTANCE = BackgroundMode()
+            return INSTANCE!!
         }
     }
 }
