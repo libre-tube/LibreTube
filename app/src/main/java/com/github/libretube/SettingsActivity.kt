@@ -36,6 +36,7 @@ class SettingsActivity : AppCompatActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             overridePendingTransition(50, 50);
