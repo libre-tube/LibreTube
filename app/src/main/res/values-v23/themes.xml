@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.MY" parent="Theme.Material3.Light.NoActionBar"></style>
+
     <style name="Theme.Red" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/red_light_accentLight</item> // container

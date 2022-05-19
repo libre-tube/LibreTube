@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="Theme.MY" parent="Theme.Material3.Dark.NoActionBar"></style>
+
     <style name="Theme.Red" parent="Theme.Material3.Dark.NoActionBar">
 
         <item name="colorPrimary">@color/red_dark_accentLight</item> // container

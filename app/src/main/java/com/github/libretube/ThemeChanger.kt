@@ -8,7 +8,7 @@ import java.util.*
 fun updateAccentColor(context: Context) {
     val colorAccent = PreferenceManager.getDefaultSharedPreferences(context).getString("accent_color", "red")
     when (colorAccent) {
-        "my" -> {}
+        "my" -> context.setTheme(R.style.Theme_MY)
         "red" -> context.setTheme(R.style.Theme_Red)
         "blue" -> context.setTheme(R.style.Theme_Blue)
         "yellow" -> context.setTheme(R.style.Theme_Yellow)
