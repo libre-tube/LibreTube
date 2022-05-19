@@ -8,6 +8,7 @@ import java.util.*
 fun updateAccentColor(context: Context) {
     val colorAccent = PreferenceManager.getDefaultSharedPreferences(context).getString("accent_color", "red")
     when (colorAccent) {
+        "my" -> {}
         "red" -> context.setTheme(R.style.Theme_Red)
         "blue" -> context.setTheme(R.style.Theme_Blue)
         "yellow" -> context.setTheme(R.style.Theme_Yellow)
@@ -35,10 +36,10 @@ fun updateLanguage(context: Context) {
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     val languageName = sharedPreferences.getString("language", "sys")
     if (languageName != "") {
-        var locale = if (languageName != "sys" && "$languageName".length < 3 ) {
+        var locale = if (languageName != "sys" && "$languageName".length < 3) {
             Locale(languageName)
         } else if ("$languageName".length > 3) {
-            Locale(languageName?.substring(0,2), languageName?.substring(4,6))
+            Locale(languageName?.substring(0, 2), languageName?.substring(4, 6))
         } else {
             Locale.getDefault()
         }

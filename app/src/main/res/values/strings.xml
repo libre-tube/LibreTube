@@ -108,4 +108,5 @@
     <string name="color_green">Green</string>
     <string name="color_purple">Purple</string>
     <string name="oledTheme">OLED Theme</string>
+    <string name="material_you">Material You</string>
 </resources>

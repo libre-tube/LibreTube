@@ -44,8 +44,8 @@ class SettingsActivity :
             overridePendingTransition(50, 50)
         }
         val view = this.findViewById<View>(android.R.id.content)
-        view.setAlpha(0F)
-        view.animate().alpha(1F).setDuration(300)
+        view.alpha = 0F
+        view.animate().alpha(1F).duration = 300
 
         setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
