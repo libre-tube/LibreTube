@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                 recreate()
             }
         } else {
-            updateAccentColor(this)
             setContentView(R.layout.activity_main)
 
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -119,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
             toolbar = findViewById(R.id.toolbar)
             val typedValue = TypedValue()
-            this.theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true)
+            this.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
             val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
             val appName = HtmlCompat.fromHtml(
                 "Libre<span  style='color:$hexColor';>Tube</span>",
