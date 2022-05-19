@@ -31,11 +31,11 @@
     <color name="yellow_dark_background">#201A1A</color>
 
     <color name="green_light_accentLight">#8BC34A</color>
-    <color name="green_light_accentDark">#006104</color>
+    <color name="green_light_accentDark">#5BD861</color>
     <color name="green_light_background">#FFFFFF</color>
 
     <color name="green_dark_accentLight">#8BC34A</color>
-    <color name="green_dark_accentDark">#003A05</color>
+    <color name="green_dark_accentDark">#155C1B</color>
     <color name="green_dark_background">#201A1A</color>
 
     <color name="purple_light_accentLight">#db1fb6</color>
