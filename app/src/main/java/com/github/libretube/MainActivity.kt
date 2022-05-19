@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             setContentView(R.layout.activity_main)
-
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
             bottomNavigationView = findViewById(R.id.bottomNav)

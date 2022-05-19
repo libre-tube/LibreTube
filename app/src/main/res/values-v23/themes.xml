@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.LibreTube" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.Red" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/red_light_accentLight</item> // container
         <item name="colorOnPrimary">@color/red_light_accentDark</item> // title

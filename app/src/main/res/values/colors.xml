@@ -22,12 +22,12 @@
     <color name="blue_dark_accentDark">#0E4B67</color>
     <color name="blue_dark_background">#201A1A</color>
 
-    <color name="yellow_light_accentLight">#FFC107</color>
-    <color name="yellow_light_accentDark">#AC6600</color>
+    <color name="yellow_light_accentLight">#F3E570</color>
+    <color name="yellow_light_accentDark">#EDE06A</color>
     <color name="yellow_light_background">#FFFFFF</color>
 
-    <color name="yellow_dark_accentLight">#FFC107</color>
-    <color name="yellow_dark_accentDark">#714400</color>
+    <color name="yellow_dark_accentLight">#E2EF55</color>
+    <color name="yellow_dark_accentDark">#999520</color>
     <color name="yellow_dark_background">#201A1A</color>
 
     <color name="green_light_accentLight">#8BC34A</color>
@@ -38,12 +38,12 @@
     <color name="green_dark_accentDark">#003A05</color>
     <color name="green_dark_background">#201A1A</color>
 
-    <color name="purple_light_accentLight">#972EA8</color>
-    <color name="purple_light_accentDark">#371377</color>
+    <color name="purple_light_accentLight">#db1fb6</color>
+    <color name="purple_light_accentDark">#d42cb2</color>
     <color name="purple_light_background">#FFFFFF</color>
 
     <color name="purple_dark_accentLight">#9621AA</color>
-    <color name="purple_dark_accentDark">#2E1261</color>
+    <color name="purple_dark_accentDark">#371377</color>
     <color name="purple_dark_background">#201A1A</color>
 
 </resources>

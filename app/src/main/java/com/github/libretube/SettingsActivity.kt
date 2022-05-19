@@ -36,6 +36,9 @@ class SettingsActivity : AppCompatActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        updateAccentColor(this)
+        updateThemeMode(this)
+
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             overridePendingTransition(50, 50)
@@ -44,7 +47,7 @@ class SettingsActivity : AppCompatActivity(),
         view.setAlpha(0F)
         view.animate().alpha(1F).setDuration(300)
 
-        updateAccentColor(this)
+
 
         setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
@@ -221,11 +224,8 @@ class SettingsActivity : AppCompatActivity(),
 
             val themeToggle = findPreference<ListPreference>("theme_togglee")
             themeToggle?.setOnPreferenceChangeListener { _, newValue ->
-                when (newValue.toString()) {
-                    "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
+                val refresh = Intent(context, SettingsActivity::class.java)
+                startActivity(refresh)
                 true
             }
 

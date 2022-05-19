@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.LibreTube" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.Red" parent="Theme.Material3.Dark.NoActionBar">
 
         <item name="colorPrimary">@color/red_dark_accentLight</item> // container
         <item name="colorOnPrimary">@color/red_dark_accentDark</item> // title
@@ -94,5 +94,9 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
     </style>
-    
+
+    <style name="Theme.OLED" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+
 </resources>
