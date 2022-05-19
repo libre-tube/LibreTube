@@ -38,11 +38,14 @@ class SettingsActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            overridePendingTransition(50, 50);
+            overridePendingTransition(50, 50)
         }
         val view = this.findViewById<View>(android.R.id.content)
-        view.setAlpha(0F);
-        view.animate().alpha(1F).setDuration(300);
+        view.setAlpha(0F)
+        view.animate().alpha(1F).setDuration(300)
+
+        updateAccentColor(this)
+
         setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -68,7 +71,6 @@ class SettingsActivity : AppCompatActivity(),
 
         override fun onCreate(savedInstanceState: Bundle?) {
             getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-
                 if (uri != null) {
                     try {
                         // Open a specific media item using ParcelFileDescriptor.
@@ -227,9 +229,16 @@ class SettingsActivity : AppCompatActivity(),
                 true
             }
 
+            val accentColor = findPreference<Preference>("accent_color")
+            accentColor?.setOnPreferenceChangeListener {_, _ ->
+                val refresh = Intent(context, SettingsActivity::class.java)
+                startActivity(refresh)
+                true
+            }
+
             val changeLanguage = findPreference<ListPreference>("language")
             changeLanguage?.setOnPreferenceChangeListener { _, _ ->
-                val refresh = Intent(context, MainActivity::class.java)
+                val refresh = Intent(context, SettingsActivity::class.java)
                 startActivity(refresh)
                 true
             }

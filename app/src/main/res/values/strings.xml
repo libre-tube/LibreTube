@@ -101,4 +101,10 @@
     <string name="category_outro">Endcards/Credits</string>
     <string name="category_outro_description">Credits or when the YouTube endcards appear. Not for conclusions with information.</string>
     <string name="license">License</string>
+    <string name="color_accent">Color Accent</string>
+    <string name="color_red">Red</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_green">Green</string>
+    <string name="color_purple">Purple</string>
 </resources>

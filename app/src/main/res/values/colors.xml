@@ -14,36 +14,36 @@
     <color name="red_dark_accentDark">#8F001D</color>
     <color name="red_dark_background">#201A1A</color>
 
-    <color name="blue_light_accentLight">#F1395E</color>
-    <color name="blue_light_accentDark">#B81B3B</color>
+    <color name="blue_light_accentLight">#2196F3</color>
+    <color name="blue_light_accentDark">#3F51B5</color>
     <color name="blue_light_background">#FFFFFF</color>
 
-    <color name="blue_dark_accentLight">#F1395E</color>
-    <color name="blue_dark_accentDark">#8F001D</color>
+    <color name="blue_dark_accentLight">#2196F3</color>
+    <color name="blue_dark_accentDark">#3F51B5</color>
     <color name="blue_dark_background">#201A1A</color>
 
-    <color name="yellow_light_accentLight">#F1395E</color>
-    <color name="yellow_light_accentDark">#B81B3B</color>
+    <color name="yellow_light_accentLight">#FFC107</color>
+    <color name="yellow_light_accentDark">#AC6600</color>
     <color name="yellow_light_background">#FFFFFF</color>
 
-    <color name="yellow_dark_accentLight">#F1395E</color>
-    <color name="yellow_dark_accentDark">#8F001D</color>
+    <color name="yellow_dark_accentLight">#FFC107</color>
+    <color name="yellow_dark_accentDark">#B36B00</color>
     <color name="yellow_dark_background">#201A1A</color>
 
-    <color name="green_light_accentLight">#F1395E</color>
-    <color name="green_light_accentDark">#B81B3B</color>
+    <color name="green_light_accentLight">#8BC34A</color>
+    <color name="green_light_accentDark">#4CAF50</color>
     <color name="green_light_background">#FFFFFF</color>
 
-    <color name="green_dark_accentLight">#F1395E</color>
-    <color name="green_dark_accentDark">#8F001D</color>
+    <color name="green_dark_accentLight">#8BC34A</color>
+    <color name="green_dark_accentDark">#4CAF50</color>
     <color name="green_dark_background">#201A1A</color>
 
-    <color name="purple_light_accentLight">#F1395E</color>
-    <color name="purple_light_accentDark">#B81B3B</color>
+    <color name="purple_light_accentLight">#9C27B0</color>
+    <color name="purple_light_accentDark">#673AB7</color>
     <color name="purple_light_background">#FFFFFF</color>
 
-    <color name="purple_dark_accentLight">#F1395E</color>
-    <color name="purple_dark_accentDark">#8F001D</color>
+    <color name="purple_dark_accentLight">#9C27B0</color>
+    <color name="purple_dark_accentDark">#673AB7</color>
     <color name="purple_dark_background">#201A1A</color>
 
 </resources>

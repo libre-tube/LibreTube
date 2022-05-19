@@ -471,6 +471,22 @@
         <item>D</item>
     </string-array>
 
+    <string-array name="accents">
+        <item>@string/color_red</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_green</item>
+        <item>@string/color_purple</item>
+    </string-array>
+
+    <string-array name="accentsValue">
+        <item>red</item>
+        <item>blue</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>purple</item>
+    </string-array>
+
     <string-array name="tabs">
         <item>@string/startpage</item>
         <item>@string/subscriptions</item>
