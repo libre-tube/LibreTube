@@ -83,10 +83,10 @@
     <string name="defaultTab">Προεπιλεγμένη καρτέλα</string>
     <string name="category_sponsor_description">Προώθηση επί πληρωμή, παραπομπές επί πληρωμή και άμεσες διαφημίσεις. Όχι για αυτοπροβιβασμό ή δωρεάν διαφήμιση σε σκοπούς/δημιουργούς/ιστοτόπους/προϊόντα που τους αρέσουν.</string>
     <string name="category_sponsor">Χορηγός</string>
-    <string name="music_songs">Μουσική τραγούδια</string>
-    <string name="music_videos">Μουσική βίντεο</string>
-    <string name="music_albums">Μουσική άλμπουμ</string>
-    <string name="music_playlists">Μουσική λίστες αναπαραγωγής</string>
+    <string name="music_songs">YT Music τραγούδια</string>
+    <string name="music_videos">YT Music βίντεο</string>
+    <string name="music_albums">YT Music άλμπουμ</string>
+    <string name="music_playlists">YT Music λίστες αναπαραγωγής</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Χρησιμοποιεί API από https://sponsor.ajay.app/</string>
     <string name="sponsorblock_state">Ενεργοποιημένο</string>
