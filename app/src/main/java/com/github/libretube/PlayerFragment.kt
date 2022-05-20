@@ -83,6 +83,7 @@ class PlayerFragment : Fragment() {
     private lateinit var relatedRecView: RecyclerView
     private lateinit var commentsRecView: RecyclerView
     private var commentsAdapter: CommentsAdapter? = null
+    private var commentsLoaded: Boolean? = false
     private var nextPage: String? = null
     private var isLoading = true
     private lateinit var exoPlayerView: StyledPlayerView
@@ -210,6 +211,7 @@ class PlayerFragment : Fragment() {
         view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.comments_toggle).setOnClickListener {
             commentsRecView.visibility = if (commentsRecView.isVisible) View.GONE else View.VISIBLE
             relatedRecView.visibility = if (relatedRecView.isVisible) View.GONE else View.VISIBLE
+            if (!commentsLoaded!!) fetchComments()
         }
 
         // FullScreen button trigger
@@ -298,18 +300,6 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getStreams(videoId!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                val commentsResponse = try {
-                    RetrofitInstance.api.getComments(videoId!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -603,9 +593,6 @@ class PlayerFragment : Fragment() {
                             }
                         }
                     })
-                    commentsAdapter = CommentsAdapter(commentsResponse.comments)
-                    commentsRecView.adapter = commentsAdapter
-                    nextPage = commentsResponse.nextpage
                     relatedRecView.adapter = TrendingAdapter(response.relatedStreams!!)
 
                     view.findViewById<TextView>(R.id.player_description).text =
@@ -865,6 +852,27 @@ class PlayerFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    private fun fetchComments() {
+        lifecycleScope.launchWhenCreated {
+            val commentsResponse = try {
+                RetrofitInstance.api.getComments(videoId!!)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG, "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            }
+            commentsAdapter = CommentsAdapter(commentsResponse.comments)
+            commentsRecView.adapter = commentsAdapter
+            nextPage = commentsResponse.nextpage
+            commentsLoaded = true
+        }
     }
 
     private fun fetchNextComments() {
