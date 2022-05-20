@@ -24,6 +24,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
@@ -268,7 +269,7 @@ class SettingsActivity :
                 } else {
                     Html.fromHtml(licenseString)
                 }
-                AlertDialog.Builder(view?.context!!)
+                MaterialAlertDialogBuilder(view?.context!!)
                     .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener { _, _ -> })
                     .setMessage(licenseHtml)
                     .create()
