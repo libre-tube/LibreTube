@@ -1,7 +1,6 @@
 package com.github.libretube
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -18,20 +17,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.color.DynamicColors
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 
 class SettingsActivity :
     AppCompatActivity(),

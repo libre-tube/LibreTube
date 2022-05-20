@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
@@ -16,11 +15,12 @@ import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistsAdapter(
     private val playlists: MutableList<Playlists>,
@@ -47,7 +47,7 @@ class PlaylistsAdapter(
         Picasso.get().load(playlist.thumbnail).into(thumbnailImage)
         holder.v.findViewById<TextView>(R.id.playlist_title).text = playlist.name
         holder.v.findViewById<ImageView>(R.id.delete_playlist).setOnClickListener {
-            val builder = AlertDialog.Builder(holder.v.context)
+            val builder = MaterialAlertDialogBuilder(holder.v.context)
             builder.setTitle(R.string.deletePlaylist)
             builder.setMessage(R.string.areYouSure)
             builder.setPositiveButton(R.string.yes) { dialog, which ->

@@ -10,16 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.obj.Login
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.w3c.dom.Text
 import retrofit2.HttpException
 import java.io.IOException
-import java.lang.Exception
 
 class LoginDialog : DialogFragment() {
     private val TAG = "LoginDialog"

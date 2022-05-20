@@ -20,7 +20,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
@@ -59,12 +58,12 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
