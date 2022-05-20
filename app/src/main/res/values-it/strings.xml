@@ -54,7 +54,7 @@
     <string name="emptyPlaylistName">Il nome della playlist non può essere vuoto</string>
     <string name="library">Raccolta</string>
     <string name="videos">Video</string>
-    <string name="import_from_yt_summary">Da YouTube o Newpipe</string>
+    <string name="import_from_yt_summary">Da YouTube o NewPipe</string>
     <string name="systemDefault">Predefinito del sistema</string>
     <string name="startpage">Pagina principale</string>
     <string name="subscribers">%1$s abbonati</string>
