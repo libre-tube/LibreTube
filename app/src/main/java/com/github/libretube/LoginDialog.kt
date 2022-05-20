@@ -20,7 +20,6 @@ import org.w3c.dom.Text
 import retrofit2.HttpException
 import java.io.IOException
 import java.lang.Exception
-import retrofit2.HttpException
 
 class LoginDialog : DialogFragment() {
     private val TAG = "LoginDialog"
