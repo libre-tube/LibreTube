@@ -155,6 +155,8 @@ class SettingsActivity : AppCompatActivity(),
 
             val login = findPreference<Preference>("login_register")
             login?.setOnPreferenceClickListener {
+
+
                 val newFragment = LoginDialog()
                 newFragment.show(childFragmentManager, "Login")
                 true
