@@ -42,7 +42,7 @@
     <string name="areYouSure">Apakah anda yakin ingin menghapus daftar putar ini\?</string>
     <string name="createPlaylist">Buat Daftar Putar</string>
     <string name="playlistName">Nama Daftar Putar</string>
-    <string name="import_from_yt_summary">Dari Youtube atau Newpipe</string>
+    <string name="import_from_yt_summary">Dari YouTube atau NewPipe</string>
     <string name="server_error">Server sedang bermasalah. Cobalah instance yang lain\?</string>
     <string name="unknown_error">Masalah jaringan.</string>
     <string name="error">Ada yang tidak beres.</string>
