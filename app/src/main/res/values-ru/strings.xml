@@ -61,7 +61,7 @@
     <string name="darkTheme">Тёмная тема</string>
     <string name="subscribers">%1$s подписчиков</string>
     <string name="startpage">Домашняя</string>
-    <string name="import_from_yt_summary">Из Youtube или Newpipe</string>
+    <string name="import_from_yt_summary">Из YouTube или NewPipe</string>
     <string name="emptyPlaylistName">Имя плейлиста не может быть пустым</string>
     <string name="comments">Комментарии</string>
     <string name="noInternet">Нет Интернет Соединения</string>
@@ -78,7 +78,7 @@
     <string name="all">Все</string>
     <string name="clear_history">Очистить Историю</string>
     <string name="playlists">Плейлисты</string>
-    <string name="okay">Ок</string>
+    <string name="okay">ОК</string>
     <string name="history">История</string>
     <string name="search_history">История поиска</string>
     <string name="sponsorblock">SponsorBlock</string>
