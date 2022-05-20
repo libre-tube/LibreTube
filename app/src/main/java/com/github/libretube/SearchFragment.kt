@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
 import java.io.IOException
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -77,7 +78,7 @@ class SearchFragment : Fragment() {
                 getString(R.string.music_playlists)
             )
 
-            AlertDialog.Builder(view.context)
+            MaterialAlertDialogBuilder(view.context)
                 .setTitle(getString(R.string.choose_filter))
                 .setSingleChoiceItems(
                     filterOptions, selectedFilter,
