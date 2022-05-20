@@ -51,7 +51,7 @@
     <string name="notgmail">이것은 당신의 Gmail 계정이 아닙니다.</string>
     <string name="defres">기본 비디오 해상도</string>
     <string name="playlistName">플레이리스트 이름</string>
-    <string name="import_from_yt_summary">Youtube 또는 Newpipe에서</string>
+    <string name="import_from_yt_summary">YouTube 또는 NewPipe에서</string>
     <string name="startpage">홈</string>
     <string name="subscriptions">구독</string>
     <string name="videos">비디오</string>
