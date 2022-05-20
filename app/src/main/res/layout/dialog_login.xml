@@ -28,6 +28,11 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="4dp"
+
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
         >
 
     <com.google.android.material.textfield.TextInputEditText
@@ -48,6 +53,12 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="4dp"
+
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
