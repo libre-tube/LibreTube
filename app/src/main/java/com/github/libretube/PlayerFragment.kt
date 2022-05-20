@@ -57,6 +57,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.net.URLEncoder
@@ -505,8 +506,8 @@ class PlayerFragment : Fragment() {
 
                     view.findViewById<ImageButton>(R.id.quality_select).setOnClickListener {
                         // Dialog for quality selection
-                        val builder: AlertDialog.Builder? = activity?.let {
-                            AlertDialog.Builder(it)
+                        val builder: MaterialAlertDialogBuilder? = activity?.let {
+                            MaterialAlertDialogBuilder(it)
                         }
                         var lastPosition = exoPlayer.currentPosition
                         builder!!.setTitle(R.string.choose_quality_dialog)
@@ -565,7 +566,7 @@ class PlayerFragment : Fragment() {
                                         videosNameArray[which]
                                 }
                             )
-                        val dialog: AlertDialog? = builder?.create()
+                        val dialog = builder?.create()
                         dialog?.show()
                     }
                     // Listener for play and pause icon change
