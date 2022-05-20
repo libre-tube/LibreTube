@@ -101,4 +101,12 @@
     <string name="category_sponsor">赞助商</string>
     <string name="category_interaction">交互提示（订阅）</string>
     <string name="category_interaction_description">这里指内容中的一个求按赞、订阅或关注他们的简短提示。如果是长篇大论或关于某些特定的内容，则应放在自我推广下。</string>
+    <string name="color_accent">色彩风格</string>
+    <string name="color_purple">紫</string>
+    <string name="color_red">红</string>
+    <string name="color_blue">蓝</string>
+    <string name="color_yellow">黄</string>
+    <string name="color_green">绿</string>
+    <string name="oledTheme">OLED主题</string>
+    <string name="material_you">Material You设计</string>
 </resources>
