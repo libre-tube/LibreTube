@@ -267,7 +267,7 @@ class PlayerFragment : Fragment() {
             .addOnScrollChangedListener {
                 if (scrollView.getChildAt(0).bottom
                     == (scrollView.height + scrollView.scrollY)
-                ) {
+                    && nextPage != null) {
                     fetchNextComments()
                 }
             }
@@ -285,7 +285,9 @@ class PlayerFragment : Fragment() {
     }
 
     override fun onStop() {
-        exoPlayer.release()
+        try {
+            exoPlayer.release()
+        }catch (e: Exception){}
         super.onStop()
     }
 
