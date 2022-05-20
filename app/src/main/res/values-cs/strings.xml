@@ -52,7 +52,7 @@
     <string name="notgmail">Toto není váš účet Gmail.</string>
     <string name="about">O aplikaci</string>
     <string name="emptyPlaylistName">Název seznamu skladeb nesmí být prázdný</string>
-    <string name="import_from_yt_summary">Z Youtube nebo Newpipe</string>
+    <string name="import_from_yt_summary">Z YouTube nebo NewPipe</string>
     <string name="videos">Videa</string>
     <string name="darkTheme">Tmavý motiv</string>
     <string name="lightTheme">Světlý motiv</string>
