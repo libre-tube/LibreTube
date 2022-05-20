@@ -101,4 +101,12 @@
     <string name="category_outro">엔드카드/크레딧</string>
     <string name="category_outro_description">크레딧 또는 YouTube 엔드카드가 표시되는 시점 정보로 결론을 내리기 위한 것이 아닙니다.</string>
     <string name="license">라이선스</string>
+    <string name="oledTheme">OLED 테마</string>
+    <string name="color_accent">컬러 액센트</string>
+    <string name="color_blue">파란색</string>
+    <string name="material_you">머터리얼</string>
+    <string name="color_green">초록색</string>
+    <string name="color_red">빨간색</string>
+    <string name="color_yellow">노란색</string>
+    <string name="color_purple">보라색</string>
 </resources>
