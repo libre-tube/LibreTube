@@ -7,7 +7,6 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
