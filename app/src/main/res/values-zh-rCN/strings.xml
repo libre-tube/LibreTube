@@ -26,7 +26,7 @@
     <string name="vlc">在VLC中打开</string>
     <string name="vlcerror">在VLC中打开失败。您安装VLC了吗？</string>
     <string name="import_from_yt">导入订阅列表</string>
-    <string name="import_from_yt_summary">从Youtube或者Newpipe账户</string>
+    <string name="import_from_yt_summary">从YouTube或者NewPipe账户</string>
     <string name="app_theme">主题</string>
     <string name="server_error">服务器错误。试试其他服务提供商？</string>
     <string name="unknown_error">网络错误。</string>
