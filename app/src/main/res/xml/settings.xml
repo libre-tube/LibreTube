@@ -21,7 +21,7 @@
         app:entryValues="@array/languagesValue"
         app:defaultValue="sys"
         app:useSimpleSummaryProvider="true"
-        android:icon="@drawable/ic_flag"
+        android:icon="@drawable/ic_translate"
         />
 
     </PreferenceCategory>
@@ -54,7 +54,7 @@
         app:key="import_from_yt"
         app:title="@string/import_from_yt"
         android:summary="@string/import_from_yt_summary"
-        android:icon="@drawable/ic_import"
+        android:icon="@drawable/ic_upload"
         />
 
     </PreferenceCategory>
@@ -84,7 +84,7 @@
         app:title="@string/sponsorblock"
         app:key="sponsorblock"
         app:summary="@string/sponsorblock_summary"
-        android:icon="@drawable/ic_sponsorblock"
+        android:icon="@drawable/ic_block"
         />
 
     <ListPreference
@@ -93,7 +93,7 @@
         app:entries="@array/tabs"
         app:entryValues="@array/tabsValue"
         app:defaultValue="home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_outlined"
         />
 
     <ListPreference
@@ -112,7 +112,7 @@
         app:entries="@array/grid"
         app:entryValues="@array/grid"
         app:defaultValue="@integer/grid_items"
-        android:icon="@drawable/ic_column"
+        android:icon="@drawable/ic_grid"
         app:useSimpleSummaryProvider="true"
         />
 
@@ -129,7 +129,7 @@
         <Preference
             app:title="@string/clear_history"
             app:key="clear_history"
-            android:icon="@drawable/ic_trash" />
+            android:icon="@drawable/ic_delete" />
 
     </PreferenceCategory>
 
@@ -143,7 +143,7 @@
         <Preference
             app:title="@string/license"
             app:key="license"
-            android:icon="@drawable/ic_gnu" />
+            android:icon="@drawable/ic_info" />
 
     </PreferenceCategory>
 
