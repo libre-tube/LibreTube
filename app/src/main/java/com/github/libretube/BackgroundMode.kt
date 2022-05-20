@@ -4,6 +4,7 @@ import android.content.Context
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -22,12 +23,23 @@ class BackgroundMode {
     private var player: ExoPlayer? = null
     private var playWhenReadyPlayer = true
 
+    private var playerNotificationManager: PlayerNotificationManager? = null
+
     /**
      * Initializes the [player] player with the [MediaItem].
      */
     private fun initializePlayer(c: Context) {
         if (player == null) player = ExoPlayer.Builder(c).build()
         setMediaItem()
+    }
+
+    /**
+     * Initializes the [playerNotificationManager] attached to the [player].
+     */
+    private fun initializePlayerNotification(c: Context) {
+        playerNotificationManager =
+            PlayerNotificationManager.Builder(c, 1, "background_mode").build()
+        playerNotificationManager?.setPlayer(player)
     }
 
     /**
@@ -60,6 +72,7 @@ class BackgroundMode {
             job.join()
 
             initializePlayer(c)
+            initializePlayerNotification(c)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
