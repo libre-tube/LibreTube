@@ -52,7 +52,7 @@
     <string name="playlistName">Nom de la liste de lecture</string>
     <string name="about">À propos</string>
     <string name="emptyPlaylistName">Le nom de la liste de lecture ne peut pas être vide</string>
-    <string name="import_from_yt_summary">Depuis YouTube ou Newpipe</string>
+    <string name="import_from_yt_summary">Depuis YouTube ou NewPipe</string>
     <string name="subscriptions">Abonnements</string>
     <string name="lightTheme">Thème clair</string>
     <string name="library">Bibliothèque</string>
