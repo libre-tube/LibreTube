@@ -60,7 +60,7 @@
     <string name="darkTheme">Dunkel</string>
     <string name="subscribers">%1$s Abonnenten</string>
     <string name="emptyPlaylistName">Der Name der Wiedergabeliste darf nicht leer sein</string>
-    <string name="import_from_yt_summary">Von YouTube oder Newpipe</string>
+    <string name="import_from_yt_summary">Von YouTube oder NewPipe</string>
     <string name="changeLanguage">Sprache ändern</string>
     <string name="systemLanguage">Systemsprache</string>
     <string name="comments">Kommentare</string>
