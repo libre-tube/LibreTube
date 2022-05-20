@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
-import java.io.IOException
-import org.chromium.base.ThreadUtils.runOnUiThread
 import retrofit2.HttpException
+import java.io.IOException
+
 
 class Subscriptions : Fragment() {
     val TAG = "SubFragment"
@@ -78,9 +81,29 @@ class Subscriptions : Fragment() {
                     }
                     channelRecView.visibility = View.VISIBLE
                     feedRecView.visibility = View.GONE
+
+                    //toggle button
+                    val rotate = RotateAnimation(
+                        0F,
+                        180F,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    )
+                    rotate.duration = 100
+                    rotate.interpolator = LinearInterpolator()
+                    rotate.fillAfter = true
+                    val image = view.findViewById<ImageView>(R.id.toggle)
+                    image.startAnimation(rotate)
+
                 } else {
                     channelRecView.visibility = View.GONE
                     feedRecView.visibility = View.VISIBLE
+
+                    //toggle button
+                    val image = view.findViewById<ImageView>(R.id.toggle)
+                    image.clearAnimation()
                 }
             }
 
