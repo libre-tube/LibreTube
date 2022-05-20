@@ -5,17 +5,20 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.Login
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.w3c.dom.Text
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,7 +31,7 @@ class LoginDialog : DialogFragment() {
     lateinit var password: EditText
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            val builder = AlertDialog.Builder(it)
+            val builder = MaterialAlertDialogBuilder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater;
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
@@ -70,6 +73,17 @@ class LoginDialog : DialogFragment() {
                     }
                 }
             }
+
+            val typedValue = TypedValue()
+            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
+            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
+            val appName = HtmlCompat.fromHtml(
+                "Libre<span  style='color:$hexColor';>Tube</span>",
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+            )
+            view.findViewById<TextView>(R.id.title).text = appName
+
+
             builder.setView(view)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

@@ -4,10 +4,13 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class DownloadDialog : DialogFragment() {
@@ -29,7 +32,7 @@ class DownloadDialog : DialogFragment() {
             audioUrl = arguments?.getStringArrayList("audioUrl") as ArrayList<String>
             duration = arguments?.getInt("duration")!!
             videoId = arguments?.getString("videoId")!!
-            val builder = AlertDialog.Builder(it)
+            val builder = MaterialAlertDialogBuilder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater
             var view: View = inflater.inflate(R.layout.dialog_download, null)
@@ -82,6 +85,16 @@ class DownloadDialog : DialogFragment() {
                 context?.startService(intent)
                 dismiss()
             }
+
+            val typedValue = TypedValue()
+            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
+            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
+            val appName = HtmlCompat.fromHtml(
+                "Libre<span  style='color:$hexColor';>Tube</span>",
+                HtmlCompat.FROM_HTML_MODE_COMPACT
+            )
+            view.findViewById<TextView>(R.id.title).text = appName
+
             builder.setView(view)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
