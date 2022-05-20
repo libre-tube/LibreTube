@@ -17,7 +17,10 @@ interface PipedApi {
     suspend fun getSegments(@Path("videoId") videoId: String, @Query("category") category: String): Segments
 
     @GET("nextpage/comments/{videoId}")
-    suspend fun getCommentsNextPage(@Path("videoId") videoId: String, @Query("nextpage") nextPage: String): CommentsPage
+    suspend fun getCommentsNextPage(
+        @Path("videoId") videoId: String,
+        @Query("nextpage") nextPage: String
+    ): CommentsPage
 
     @GET("search")
     suspend fun getSearchResults(
@@ -39,13 +42,19 @@ interface PipedApi {
     suspend fun getChannel(@Path("channelId") channelId: String): Channel
 
     @GET("nextpage/channel/{channelId}")
-    suspend fun getChannelNextPage(@Path("channelId") channelId: String, @Query("nextpage") nextPage: String): Channel
+    suspend fun getChannelNextPage(
+        @Path("channelId") channelId: String,
+        @Query("nextpage") nextPage: String
+    ): Channel
 
     @GET("playlists/{playlistId}")
     suspend fun getPlaylist(@Path("playlistId") playlistId: String): Playlist
 
     @GET("nextpage/playlists/{playlistId}")
-    suspend fun getPlaylistNextPage(@Path("playlistId") playlistId: String, @Query("nextpage") nextPage: String): Playlist
+    suspend fun getPlaylistNextPage(
+        @Path("playlistId") playlistId: String,
+        @Query("nextpage") nextPage: String
+    ): Playlist
 
     @POST("login")
     suspend fun login(@Body login: Login): Token
@@ -57,7 +66,10 @@ interface PipedApi {
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>
 
     @GET("subscribed")
-    suspend fun isSubscribed(@Query("channelId") channelId: String, @Header("Authorization") token: String): Subscribed
+    suspend fun isSubscribed(
+        @Query("channelId") channelId: String,
+        @Header("Authorization") token: String
+    ): Subscribed
 
     @GET("subscriptions")
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
@@ -69,7 +81,11 @@ interface PipedApi {
     suspend fun unsubscribe(@Header("Authorization") token: String, @Body subscribe: Subscribe): Message
 
     @POST("import")
-    suspend fun importSubscriptions(@Query("override") override: Boolean, @Header("Authorization") token: String, @Body channels: List<String>): Message
+    suspend fun importSubscriptions(
+        @Query("override") override: Boolean,
+        @Header("Authorization") token: String,
+        @Body channels: List<String>
+    ): Message
 
     @GET("user/playlists")
     suspend fun playlists(@Header("Authorization") token: String): List<Playlists>
@@ -84,12 +100,12 @@ interface PipedApi {
     suspend fun addToPlaylist(@Header("Authorization") token: String, @Body playlistId: PlaylistId): Message
 
     @POST("user/playlists/remove")
-    suspend fun removeFromPlaylist(@Header("Authorization") token: String, @Body playlistId: PlaylistId): Message
+    suspend fun removeFromPlaylist(
+        @Header("Authorization") token: String,
+        @Body playlistId: PlaylistId
+    ): Message
 
-    //only for fetching servers list
+    // only for fetching servers list
     @GET
     suspend fun getInstances(@Url url: String): List<Instances>
-
-
-
 }

@@ -50,7 +50,7 @@
         android:layout_marginStart="24dp"
         android:background="@android:color/transparent"
         android:text="@string/subscribe"
-        android:textColor="@color/colorPrimary"
+        android:textColor="?attr/colorPrimary"
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image" />
 

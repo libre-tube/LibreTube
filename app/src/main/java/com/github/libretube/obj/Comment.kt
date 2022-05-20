@@ -14,7 +14,6 @@ data class Comment(
     val pinned: Boolean?,
     val thumbnail: String?,
     val verified: Boolean?
-){
-    constructor(): this("", "","","","",null,0,null,"",null)
+) {
+    constructor() : this("", "", "", "", "", null, 0, null, "", null)
 }
-

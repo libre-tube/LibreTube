@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -30,13 +29,12 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var toolbar: Toolbar
-    lateinit var navController : NavController
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
@@ -50,42 +48,21 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.sponsorsEnabled = sharedPreferences.getBoolean("sponsors_category_key", false)
         SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
 
-        
-        val languageName = sharedPreferences.getString("language", "sys")
-        if (languageName != "") {
-            var locale = if (languageName != "sys" && "$languageName".length < 3 ){
-                Locale(languageName)
-            } else if ("$languageName".length > 3) {
-                Locale(languageName?.substring(0,2), languageName?.substring(4,6))
-            } else {
-                Locale.getDefault()
-            }
-            val res = resources
-            val dm = res.displayMetrics
-            val conf = res.configuration
-            conf.setLocale(locale)
-            Locale.setDefault(locale)
-            res.updateConfiguration(conf, dm)
-        }
-
-        when (sharedPreferences.getString("theme_togglee", "A")!!) {
-            "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
+        updateAccentColor(this)
+        updateThemeMode(this)
+        updateLanguage(this)
 
         val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo=connectivityManager.activeNetworkInfo
+        val networkInfo = connectivityManager.activeNetworkInfo
         val isConnected = networkInfo != null && networkInfo.isConnected
 
-        if (isConnected == false) {
+        if (!isConnected) {
             setContentView(R.layout.activity_nointernet)
             findViewById<Button>(R.id.retry_button).setOnClickListener() {
                 recreate()
             }
         } else {
             setContentView(R.layout.activity_main)
-
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
             bottomNavigationView = findViewById(R.id.bottomNav)
@@ -98,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 "library" -> navController.navigate(R.id.library)
             }
 
+            bottomNavigationView.setBackgroundColor(0) // otherwise Navbar Theme doesn't change
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.home2 -> {
@@ -106,12 +84,12 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     R.id.subscriptions -> {
-                        //navController.backQueue.clear()
+                        // navController.backQueue.clear()
                         navController.navigate(R.id.subscriptions)
                         true
                     }
                     R.id.library -> {
-                        //navController.backQueue.clear()
+                        // navController.backQueue.clear()
                         navController.navigate(R.id.library)
                         true
                     }
@@ -121,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
             toolbar = findViewById(R.id.toolbar)
             val typedValue = TypedValue()
-            this.theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
+            this.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
             val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
             val appName = HtmlCompat.fromHtml(
                 "Libre<span  style='color:$hexColor';>Tube</span>",
@@ -129,12 +107,12 @@ class MainActivity : AppCompatActivity() {
             )
             toolbar.title = appName
 
-        toolbar.setNavigationOnClickListener{
-            //settings activity stuff
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-            true
-        }
+            toolbar.setNavigationOnClickListener {
+                // settings activity stuff
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
 
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -146,134 +124,128 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-
     }
 
     override fun onStart() {
         super.onStart()
         val action: String? = intent?.action
         val data: Uri? = intent?.data
-        Log.d(TAG, "dafaq"+data.toString())
+        Log.d(TAG, "dafaq" + data.toString())
 
         if (data != null) {
-            Log.d("dafaq",data.host+" ${data.path} ")
-            if(data.host != null){
-                    if(data.path != null){
-                        //channel
-                        if(data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains("/user/")){
-                            var channel = data.path
-                            channel = channel!!.replace("/c/","")
-                            channel = channel!!.replace("/user/","")
-                            val bundle = bundleOf("channel_id" to channel)
-                            navController.navigate(R.id.channel,bundle)
-                        }else if(data.path!!.contains("/playlist")){
-                            var playlist = data.query!!
-                            if (playlist.contains("&"))
-                            {
-                                var playlists = playlist.split("&")
-                                for (v in playlists){
-                                    if (v.contains("list=")){
-                                        playlist = v
-                                        break
-                                    }
+            Log.d("dafaq", data.host + " ${data.path} ")
+            if (data.host != null) {
+                if (data.path != null) {
+                    // channel
+                    if (data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains("/user/")) {
+                        var channel = data.path
+                        channel = channel!!.replace("/c/", "")
+                        channel = channel!!.replace("/user/", "")
+                        val bundle = bundleOf("channel_id" to channel)
+                        navController.navigate(R.id.channel, bundle)
+                    } else if (data.path!!.contains("/playlist")) {
+                        var playlist = data.query!!
+                        if (playlist.contains("&")) {
+                            var playlists = playlist.split("&")
+                            for (v in playlists) {
+                                if (v.contains("list=")) {
+                                    playlist = v
+                                    break
                                 }
                             }
-                            playlist = playlist.replace("list=","")
-                            val bundle = bundleOf("playlist_id" to playlist)
-                            navController.navigate(R.id.playlistFragment,bundle)
-                        }else if(data.path!!.contains("/shorts/") || data.path!!.contains("/embed/") || data.path!!.contains("/v/")){
-                            var watch = data.path!!.replace("/shorts/","").replace("/v/","").replace("/embed/","")
-                            var bundle = Bundle()
-                            bundle.putString("videoId",watch)
-                            var frag = PlayerFragment()
-                            frag.arguments = bundle
-                            supportFragmentManager.beginTransaction()
-                                .remove(PlayerFragment())
-                                .commit()
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, frag)
-                                .commitNow()
-                            Handler().postDelayed({
-                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                                motionLayout.transitionToEnd()
-                                motionLayout.transitionToStart()
-                            }, 100)
-                        }else if(data.path!!.contains("/watch") && data.query != null){
-                            Log.d("dafaq",data.query!!)
-                            var watch = data.query!!
-                            if (watch.contains("&"))
-                            {
-                                var watches = watch.split("&")
-                                for (v in watches){
-                                    if (v.contains("v=")){
-                                        watch = v
-                                        break
-                                    }
-                                }
-                            }
-                            var bundle = Bundle()
-                            bundle.putString("videoId",watch.replace("v=",""))
-                            var frag = PlayerFragment()
-                            frag.arguments = bundle
-                            supportFragmentManager.beginTransaction()
-                                .remove(PlayerFragment())
-                                .commit()
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, frag)
-                                .commitNow()
-                            Handler().postDelayed({
-                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                                motionLayout.transitionToEnd()
-                                motionLayout.transitionToStart()
-                            }, 100)
-
-                        }else{
-                            var watch = data.path!!.replace("/","")
-                            var bundle = Bundle()
-                            bundle.putString("videoId",watch)
-                            var frag = PlayerFragment()
-                            frag.arguments = bundle
-                            supportFragmentManager.beginTransaction()
-                                .remove(PlayerFragment())
-                                .commit()
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, frag)
-                                .commitNow()
-                            Handler().postDelayed({
-                                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                                motionLayout.transitionToEnd()
-                                motionLayout.transitionToStart()
-                            }, 100)
                         }
+                        playlist = playlist.replace("list=", "")
+                        val bundle = bundleOf("playlist_id" to playlist)
+                        navController.navigate(R.id.playlistFragment, bundle)
+                    } else if (data.path!!.contains("/shorts/") || data.path!!.contains("/embed/") || data.path!!.contains("/v/")) {
+                        var watch = data.path!!.replace("/shorts/", "").replace("/v/", "").replace("/embed/", "")
+                        var bundle = Bundle()
+                        bundle.putString("videoId", watch)
+                        var frag = PlayerFragment()
+                        frag.arguments = bundle
+                        supportFragmentManager.beginTransaction()
+                            .remove(PlayerFragment())
+                            .commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, frag)
+                            .commitNow()
+                        Handler().postDelayed({
+                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            motionLayout.transitionToEnd()
+                            motionLayout.transitionToStart()
+                        }, 100)
+                    } else if (data.path!!.contains("/watch") && data.query != null) {
+                        Log.d("dafaq", data.query!!)
+                        var watch = data.query!!
+                        if (watch.contains("&")) {
+                            var watches = watch.split("&")
+                            for (v in watches) {
+                                if (v.contains("v=")) {
+                                    watch = v
+                                    break
+                                }
+                            }
+                        }
+                        var bundle = Bundle()
+                        bundle.putString("videoId", watch.replace("v=", ""))
+                        var frag = PlayerFragment()
+                        frag.arguments = bundle
+                        supportFragmentManager.beginTransaction()
+                            .remove(PlayerFragment())
+                            .commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, frag)
+                            .commitNow()
+                        Handler().postDelayed({
+                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            motionLayout.transitionToEnd()
+                            motionLayout.transitionToStart()
+                        }, 100)
+                    } else {
+                        var watch = data.path!!.replace("/", "")
+                        var bundle = Bundle()
+                        bundle.putString("videoId", watch)
+                        var frag = PlayerFragment()
+                        frag.arguments = bundle
+                        supportFragmentManager.beginTransaction()
+                            .remove(PlayerFragment())
+                            .commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, frag)
+                            .commitNow()
+                        Handler().postDelayed({
+                            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            motionLayout.transitionToEnd()
+                            motionLayout.transitionToStart()
+                        }, 100)
                     }
-
+                }
             }
-
         }
     }
 
     override fun onBackPressed() {
-        try{
+        try {
             val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
-            if (mainMotionLayout.progress == 0.toFloat()){
+            if (mainMotionLayout.progress == 0.toFloat()) {
                 mainMotionLayout.transitionToEnd()
-                findViewById<ConstraintLayout>(R.id.main_container).isClickable=false
+                findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
                 motionLayout.transitionToEnd()
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition,true)
+                    enableTransition(R.id.yt_transition, true)
                 }
-                findViewById<LinearLayout>(R.id.linLayout).visibility=View.VISIBLE
-                isFullScreen=false
-            }else{
+                findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+                isFullScreen = false
+            } else {
                 navController.popBackStack()
-                if (navController.currentBackStackEntry == null && (parent as View).id != R.id.settings){
+                if (navController.currentBackStackEntry == null && (parent as View).id != R.id.settings) {
                     super.onBackPressed()
                 }
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             navController.popBackStack()
             moveTaskToBack(true)
         }
@@ -303,15 +275,17 @@ class MainActivity : AppCompatActivity() {
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
+            window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN
                     or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                     or View.SYSTEM_UI_FLAG_IMMERSIVE
                     or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                )
         }
     }
-    private fun unsetFullscreen(){
+    private fun unsetFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT
@@ -335,7 +309,6 @@ class MainActivity : AppCompatActivity() {
             (fragment as? PlayerFragment)?.onUserLeaveHint()
         }
     }
-
 }
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }

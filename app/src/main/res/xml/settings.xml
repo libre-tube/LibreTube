@@ -71,6 +71,15 @@
         android:icon="@drawable/ic_theme"
         />
 
+        <ListPreference
+            app:title="@string/color_accent"
+            app:key="accent_color"
+            app:entries="@array/accents"
+            app:entryValues="@array/accentsValue"
+            app:defaultValue="red"
+            android:icon="@drawable/ic_color"
+            />
+
     <androidx.preference.Preference
         app:title="@string/sponsorblock"
         app:key="sponsorblock"

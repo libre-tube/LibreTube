@@ -12,7 +12,6 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-
 class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
     var vidName = arrayListOf<String>()
@@ -37,9 +36,9 @@ class DownloadDialog : DialogFragment() {
             val inflater = requireActivity().layoutInflater
             var view: View = inflater.inflate(R.layout.dialog_download, null)
             val videoSpinner = view.findViewById<Spinner>(R.id.video_spinner)
-            val videoArrayAdapter =ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,vidName)
+            val videoArrayAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, vidName)
             videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            videoSpinner.adapter=videoArrayAdapter
+            videoSpinner.adapter = videoArrayAdapter
             videoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
@@ -48,12 +47,12 @@ class DownloadDialog : DialogFragment() {
                     id: Long
                 ) {
                     selectedVideo = position
-                    Log.d(TAG,selectedVideo.toString())
+                    Log.d(TAG, selectedVideo.toString())
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
             val audioSpinner = view.findViewById<Spinner>(R.id.audio_spinner)
-            val audioArrayAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,audioName)
+            val audioArrayAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, audioName)
             audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             audioSpinner.adapter = audioArrayAdapter
             audioSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -64,7 +63,7 @@ class DownloadDialog : DialogFragment() {
                     id: Long
                 ) {
                     selectedAudio = position
-                    Log.d(TAG,selectedAudio.toString())
+                    Log.d(TAG, selectedAudio.toString())
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
@@ -72,16 +71,16 @@ class DownloadDialog : DialogFragment() {
             radioGroup.setOnCheckedChangeListener { group, checkedId ->
                 val radio: RadioButton = view.findViewById(checkedId)
                 extension = radio.text.toString()
-                Log.d(TAG,extension)
+                Log.d(TAG, extension)
             }
             view.findViewById<Button>(R.id.download).setOnClickListener {
-                val intent = Intent(context,DownloadService::class.java)
-                intent.putExtra("videoId",videoId)
-                intent.putExtra("videoUrl",vidUrl[selectedVideo])
-                intent.putExtra("audioUrl",audioUrl[selectedAudio])
-                intent.putExtra("duration",duration)
-                intent.putExtra("extension",extension)
-                //intent.putExtra("command","-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv")
+                val intent = Intent(context, DownloadService::class.java)
+                intent.putExtra("videoId", videoId)
+                intent.putExtra("videoUrl", vidUrl[selectedVideo])
+                intent.putExtra("audioUrl", audioUrl[selectedAudio])
+                intent.putExtra("duration", duration)
+                intent.putExtra("extension", extension)
+                // intent.putExtra("command","-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv")
                 context?.startService(intent)
                 dismiss()
             }

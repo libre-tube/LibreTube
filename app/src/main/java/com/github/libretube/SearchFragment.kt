@@ -23,37 +23,36 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
+import java.io.IOException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
     private var selectedFilter = 0
     private var apiSearchFilter = "all"
-    private var nextPage : String? = null
-    private lateinit var searchRecView : RecyclerView
-    private var searchAdapter : SearchAdapter? = null
-    private var isLoading : Boolean = true
+    private var nextPage: String? = null
+    private lateinit var searchRecView: RecyclerView
+    private var searchAdapter: SearchAdapter? = null
+    private var isLoading: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,30 +80,37 @@ class SearchFragment : Fragment() {
 
             MaterialAlertDialogBuilder(view.context)
                 .setTitle(getString(R.string.choose_filter))
-                .setSingleChoiceItems(filterOptions, selectedFilter, DialogInterface.OnClickListener {
-                        _, id -> tempSelectedItem = id
-                })
-                .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener { _, _ ->
-                    selectedFilter = tempSelectedItem
-                    apiSearchFilter = when (selectedFilter) {
-                        0 -> "all"
-                        1 -> "videos"
-                        2 -> "channels"
-                        3 -> "playlists"
-                        4 -> "music_songs"
-                        5 -> "music_videos"
-                        6 -> "music_albums"
-                        7 -> "music_playlists"
-                        else -> "all"
+                .setSingleChoiceItems(
+                    filterOptions, selectedFilter,
+                    DialogInterface.OnClickListener {
+                            _, id ->
+                        tempSelectedItem = id
                     }
+                )
+                .setPositiveButton(
+                    getString(R.string.okay),
+                    DialogInterface.OnClickListener { _, _ ->
+                        selectedFilter = tempSelectedItem
+                        apiSearchFilter = when (selectedFilter) {
+                            0 -> "all"
+                            1 -> "videos"
+                            2 -> "channels"
+                            3 -> "playlists"
+                            4 -> "music_songs"
+                            5 -> "music_videos"
+                            6 -> "music_albums"
+                            7 -> "music_playlists"
+                            else -> "all"
+                        }
                         fetchSearch(autoTextView.text.toString())
-                })
+                    }
+                )
                 .setNegativeButton(getString(R.string.cancel), null)
                 .create()
                 .show()
         }
 
-        //show search history
+        // show search history
 
         searchRecView.visibility = GONE
         historyRecycler.visibility = VISIBLE
@@ -129,7 +135,6 @@ class SearchFragment : Fragment() {
                 count: Int,
                 after: Int
             ) {
-
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -143,7 +148,6 @@ class SearchFragment : Fragment() {
                             if (!searchRecView.canScrollVertically(1)) {
                                 fetchNextSearchItems(autoTextView.text.toString())
                             }
-
                         }
 
                     GlobalScope.launch {
@@ -167,22 +171,23 @@ class SearchFragment : Fragment() {
                     }
                 }
             }
-
         })
-        autoTextView.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                hideKeyboard()
-                autoTextView.dismissDropDown()
-                return@OnEditorActionListener true
+        autoTextView.setOnEditorActionListener(
+            OnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    hideKeyboard()
+                    autoTextView.dismissDropDown()
+                    return@OnEditorActionListener true
+                }
+                false
             }
-            false
-        })
+        )
         autoTextView.setOnItemClickListener { _, _, _, _ ->
             hideKeyboard()
         }
     }
 
-    private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView){
+    private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSuggestions(query)
@@ -198,7 +203,7 @@ class SearchFragment : Fragment() {
             autoTextView.setAdapter(adapter)
         }
     }
-    private fun fetchSearch(query: String){
+    private fun fetchSearch(query: String) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
@@ -211,22 +216,22 @@ class SearchFragment : Fragment() {
                 return@launchWhenCreated
             }
             nextPage = response.nextpage
-            if(response.items!!.isNotEmpty()){
-               runOnUiThread {
-                   searchAdapter = SearchAdapter(response.items)
-                   searchRecView.adapter = searchAdapter
-               }
+            if (response.items!!.isNotEmpty()) {
+                runOnUiThread {
+                    searchAdapter = SearchAdapter(response.items)
+                    searchRecView.adapter = searchAdapter
+                }
             }
             isLoading = false
         }
     }
 
-    private fun fetchNextSearchItems(query: String){
+    private fun fetchNextSearchItems(query: String) {
         lifecycleScope.launchWhenCreated {
             if (!isLoading) {
                 isLoading = true
                 val response = try {
-                    RetrofitInstance.api.getSearchResultsNextPage(query,apiSearchFilter,nextPage!!)
+                    RetrofitInstance.api.getSearchResultsNextPage(query, apiSearchFilter, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -240,7 +245,7 @@ class SearchFragment : Fragment() {
                 isLoading = false
             }
         }
-        }
+    }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
@@ -263,17 +268,13 @@ class SearchFragment : Fragment() {
 
         var historyList = getHistory()
 
-
         if (historyList.size != 0 && query == historyList.get(historyList.size - 1)) {
             return
         } else if (query == "") {
             return
         } else {
             historyList = historyList + query
-
         }
-
-
 
         if (historyList.size > 10) {
             historyList = historyList.takeLast(10)
@@ -293,7 +294,5 @@ class SearchFragment : Fragment() {
         } catch (e: Exception) {
             return emptyList()
         }
-
     }
 }
-

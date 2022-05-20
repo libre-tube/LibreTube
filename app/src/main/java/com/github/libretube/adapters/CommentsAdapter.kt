@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +14,9 @@ import com.github.libretube.formatShort
 import com.github.libretube.obj.Comment
 import com.squareup.picasso.Picasso
 
-class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView.Adapter<ViewHolder>(){
+class CommentsAdapter(private val comments: MutableList<Comment>) : RecyclerView.Adapter<ViewHolder>() {
 
-    fun updateItems(newItems: List<Comment>){
+    fun updateItems(newItems: List<Comment>) {
         var commentsSize = comments.size
         comments.addAll(newItems)
         notifyItemRangeInserted(commentsSize, newItems.size)
@@ -43,7 +42,7 @@ class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView
         if (comments[position].hearted == true) {
             holder.v.findViewById<ImageView>(R.id.hearted_imageView).visibility = View.VISIBLE
         }
-        channelImage.setOnClickListener{
+        channelImage.setOnClickListener {
             val activity = holder.v.context as MainActivity
             val bundle = bundleOf("channel_id" to comments[position].commentorUrl)
             activity.navController.navigate(R.id.channel, bundle)
@@ -53,8 +52,7 @@ class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView
                     mainMotionLayout.transitionToEnd()
                     activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                 }
-            }catch (e: Exception){
-
+            } catch (e: Exception) {
             }
         }
     }
@@ -62,10 +60,9 @@ class CommentsAdapter(private val comments: MutableList<Comment>):  RecyclerView
     override fun getItemCount(): Int {
         return comments.size
     }
-
 }
 
-class ViewHolder(val v: View): RecyclerView.ViewHolder(v){
+class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }
