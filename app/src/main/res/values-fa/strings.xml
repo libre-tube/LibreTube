@@ -57,8 +57,8 @@
     <string name="library">کتابخانه</string>
     <string name="changeLanguage">تغییر زبان</string>
     <string name="systemDefault">دیفالت سیستم</string>
-    <string name="lightTheme">تم روشن</string>
-    <string name="darkTheme">تم تیره</string>
+    <string name="lightTheme">پوسته روشن</string>
+    <string name="darkTheme">پوسته تیره</string>
     <string name="subscribers">%1$s مشترکین</string>
     <string name="videos">ویدیو ها</string>
     <string name="subscriptions">اشتراک ها</string>
@@ -81,4 +81,5 @@
     <string name="sponsorblock">اسپانسربلاک</string>
     <string name="sponsorblock_state">فعال شده</string>
     <string name="category_sponsor">اسپانسر</string>
+    <string name="location">مکان</string>
 </resources>
