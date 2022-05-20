@@ -19,6 +19,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -204,8 +207,27 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            playerDescription.visibility =
-                if (playerDescription.isVisible) View.GONE else View.VISIBLE
+                if (playerDescription.isVisible){
+                    val image = view.findViewById<ImageView>(R.id.player_description_arrow)
+                    image.clearAnimation()
+                    playerDescription.visibility = View.GONE
+                } else {
+                    //toggle button
+                    val rotate = RotateAnimation(
+                        0F,
+                        180F,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    )
+                    rotate.duration = 100
+                    rotate.interpolator = LinearInterpolator()
+                    rotate.fillAfter = true
+                    val image = view.findViewById<ImageView>(R.id.player_description_arrow)
+                    image.startAnimation(rotate)
+                    playerDescription.visibility = View.VISIBLE
+                }
         }
 
         view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.comments_toggle).setOnClickListener {
