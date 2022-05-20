@@ -8,7 +8,7 @@
 [![Matrix](https://img.shields.io/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
 [![Telegram](https://img.shields.io/endpoint?color=neon&style=flat-square&url=https://tg.sumanjay.workers.dev/libretube)](https://t.me/libretube)
 [![Twitter](https://img.shields.io/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
-
+[![Reddit](https://img.shields.io/reddit/subreddit-subscribers/libretube?style=social)](https://www.reddit.com/r/Libretube/)
  
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
