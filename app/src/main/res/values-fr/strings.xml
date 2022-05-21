@@ -101,4 +101,12 @@
     <string name="category_interaction_description">Lorsqu\'il y a un bref rappel pour aimer, s\'abonner ou suivre l\'entreprise au milieu du contenu. S\'il est long ou s\'il traite d\'un sujet spécifique, il doit plutôt être placé sous la rubrique « autopromotion ».</string>
     <string name="category_sponsor_description">Promotion payée, références payées et publicités directes. Il ne s\'agit pas d\'autopromotion ou de citation gratuite de causes/créateurs/sites web/produits qu\'ils aiment.</string>
     <string name="category_interaction">Rappel d\'interaction (S\'abonner)</string>
+    <string name="color_purple">Violet</string>
+    <string name="color_blue">Bleu</string>
+    <string name="color_accent">Accentuation des couleurs</string>
+    <string name="color_red">Rouge</string>
+    <string name="color_yellow">Jaune</string>
+    <string name="oledTheme">Thème OLED</string>
+    <string name="material_you">Material You</string>
+    <string name="color_green">Vert</string>
 </resources>
