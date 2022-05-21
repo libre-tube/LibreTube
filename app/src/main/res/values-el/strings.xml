@@ -42,7 +42,7 @@
     <string name="yes">Ναι</string>
     <string name="choose_quality_dialog">Επιλογή ποιότητας:</string>
     <string name="download">Λήψη</string>
-    <string name="registered">Εγγεγραμμένος. Τώρα μπορείς να εγγραφείς σε κανάλια.</string>
+    <string name="registered">Εγγραφή επιτυχής. Τώρα μπορείτε να εγγραφείτε σε κανάλια.</string>
     <string name="logout">Αποσύνδεση</string>
     <string name="cancel">Ακύρωση</string>
     <string name="loggedout">Αποσύνδεση επιτυχής.</string>
@@ -81,7 +81,7 @@
     <string name="search_history">Ιστορικό αναζήτησης</string>
     <string name="clear_history">Εκκαθάριση ιστορικού</string>
     <string name="defaultTab">Προεπιλεγμένη καρτέλα</string>
-    <string name="category_sponsor_description">Προώθηση επί πληρωμή, παραπομπές επί πληρωμή και άμεσες διαφημίσεις. Όχι για αυτοπροβιβασμό ή δωρεάν διαφήμιση σε σκοπούς/δημιουργούς/ιστοτόπους/προϊόντα που τους αρέσουν.</string>
+    <string name="category_sponsor_description">Προώθηση επί πληρωμή, παραπομπές επί πληρωμή και άμεσες διαφημίσεις. Όχι για προσωπική προώθηση ή δωρεάν διαφήμιση σε σκοπούς/δημιουργούς/ιστοτόπους/προϊόντα που τους αρέσουν.</string>
     <string name="category_sponsor">Χορηγός</string>
     <string name="music_songs">YT Music τραγούδια</string>
     <string name="music_videos">YT Music βίντεο</string>
@@ -95,10 +95,18 @@
     <string name="category_intro">Διάλειμμα/Εισαγωγή</string>
     <string name="category_selfpromo">Μη-χορηγούμενη/Προσωπική προώθηση</string>
     <string name="category_interaction">Υπενθύμιση αλληλεπίδρασης (Εγγραφή)</string>
-    <string name="category_selfpromo_description">Παρόμοιο με την επιλογή \"Χορηγός\" αλλά για ενημέρωση έλλειψης χορηγίας ή προσωπικής προώθησης. Αυτό περιλαμβάνει ενότητες σχετικά με εμπορεύματα, δωρεές ή πληροφορίες σχετικά με όσους συνεργάστηκαν.</string>
+    <string name="category_selfpromo_description">Παρόμοιο με την επιλογή \"Χορηγός\" αλλά για ενημέρωση μη-χορηγούμενης/προσωπικής προώθησης. Αυτό περιλαμβάνει ενότητες σχετικά με εμπορεύματα, δωρεές ή πληροφορίες σχετικά με όσους συνεργάστηκαν.</string>
     <string name="category_outro">Κάρτες τέλους/Τίτλοι τέλους</string>
     <string name="category_outro_description">Τίτλοι τέλους ή όταν εμφανίζονται οι τελικές κάρτες του YouTube. Όχι για συμπεράσματα με πληροφορίες.</string>
     <string name="category_intro_description">Ένα χρονικό διάστημα χωρίς πραγματικό περιεχόμενο. Μπορεί να είναι παύση, στατικό καρέ, επαναλαμβανόμενη κινούμενη εικόνα. Αυτό δεν πρέπει να χρησιμοποιείται για μεταβάσεις που περιέχουν πληροφορίες.</string>
     <string name="category_interaction_description">Όταν υπάρχει μια σύντομη υπενθύμιση για να πατήσετε μου αρέσει, να εγγραφείτε ή να ακολουθήσετε το κανάλι τους στη μέση του περιεχομένου. Εάν είναι μεγάλης διάρκειας ή για κάτι συγκεκριμένο, θα πρέπει να παρατίθεται στην επιλογή \" Μη-χορηγούμενη/Προσωπική προώθηση\".</string>
     <string name="license">Άδεια</string>
+    <string name="oledTheme">OLED Θέμα</string>
+    <string name="color_accent">Απόχρωση χρώματος</string>
+    <string name="color_blue">Μπλέ</string>
+    <string name="color_yellow">Κίτρινο</string>
+    <string name="color_green">Πράσινο</string>
+    <string name="color_purple">Μωβ</string>
+    <string name="color_red">Κόκκινο</string>
+    <string name="material_you">Material You</string>
 </resources>

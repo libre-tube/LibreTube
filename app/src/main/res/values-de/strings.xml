@@ -60,7 +60,7 @@
     <string name="darkTheme">Dunkel</string>
     <string name="subscribers">%1$s Abonnenten</string>
     <string name="emptyPlaylistName">Der Name der Wiedergabeliste darf nicht leer sein</string>
-    <string name="import_from_yt_summary">Von YouTube oder Newpipe</string>
+    <string name="import_from_yt_summary">Von YouTube oder NewPipe</string>
     <string name="changeLanguage">Sprache ändern</string>
     <string name="systemLanguage">Systemsprache</string>
     <string name="comments">Kommentare</string>
@@ -98,7 +98,14 @@
     <string name="category_selfpromo">Unbezahlte/Selbst Promotion</string>
     <string name="category_interaction">Interaktionserinnerung (Abonnieren)</string>
     <string name="category_outro_description">Credits oder wenn die YouTube-Endkarten erscheinen. Nicht für Schlussfolgerungen mit Informationen.</string>
-    <string name="category_interaction_description">Wenn es mitten im Inhalt eine kurze Erinnerung zum Liken, Abonnieren oder Folgen gibt. Wenn es lang ist oder es um etwas Bestimmtes geht, sollte es stattdessen unter Eigenwerbung stehen.</string>
+    <string name="category_interaction_description">Wenn es mitten im Inhalt eine kurze Erinnerung zum Mögen, Abonnieren oder Folgen gibt. Wenn es lang ist oder es um etwas Bestimmtes geht, sollte es stattdessen unter Eigenwerbung stehen.</string>
     <string name="category_intro_description">Ein Intervall ohne eigentlichen Inhalt. Könnte eine Pause, ein statischer Rahmen oder eine sich wiederholende Animation sein. Dies sollte nicht für Übergänge verwendet werden, die Informationen enthalten.</string>
     <string name="license">Lizenz</string>
+    <string name="color_accent">Farbakzent</string>
+    <string name="color_red">Rot</string>
+    <string name="color_blue">Blau</string>
+    <string name="color_yellow">Gelb</string>
+    <string name="color_green">Grün</string>
+    <string name="color_purple">Lila</string>
+    <string name="oledTheme">OLED-Farbschema</string>
 </resources>

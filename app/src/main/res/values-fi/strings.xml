@@ -52,7 +52,7 @@
     <string name="playlistName">Soittolistan nimi</string>
     <string name="addToPlaylist">Lisää soittolistaan</string>
     <string name="emptyPlaylistName">Soittolistan nimi ei voi olla tyhjä</string>
-    <string name="import_from_yt_summary">YouTubesta tai Newpipestä</string>
+    <string name="import_from_yt_summary">YouTubesta tai NewPipestä</string>
     <string name="startpage">Etusivu</string>
     <string name="subscriptions">Tilaukset</string>
     <string name="library">Kirjasto</string>

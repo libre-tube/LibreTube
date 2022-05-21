@@ -52,7 +52,7 @@
     <string name="fail">Nem sikerült :(</string>
     <string name="about">A programról</string>
     <string name="emptyPlaylistName">A lejátszási lista neve nem lehet üres</string>
-    <string name="import_from_yt_summary">Youtube-ról vagy NewPipe-ból</string>
+    <string name="import_from_yt_summary">YouTube-ról vagy NewPipe-ból</string>
     <string name="systemDefault">Rendszer alapértelmezett</string>
     <string name="subscribers">%1$s feliratkozó</string>
     <string name="systemLanguage">Rendszer nyelv</string>
