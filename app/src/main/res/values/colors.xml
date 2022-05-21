@@ -7,43 +7,43 @@
     <color name="duration_text_color">#EEFFFFFF</color>
 
     <color name="red_light_accentLight">#F1395E</color>
-    <color name="red_light_accentDark">#B81B3B</color>
-    <color name="red_light_background">#FFC3C3</color>
+    <color name="red_light_accentDark">#EF5350</color>
+    <color name="red_light_background">#FFF1F2</color>
 
-    <color name="red_dark_accentLight">#F1395E</color>
-    <color name="red_dark_accentDark">#8F001D</color>
+    <color name="red_dark_accentLight">#B71C1C</color>
+    <color name="red_dark_accentDark">#B71C1C</color>
     <color name="red_dark_background">#1E0D0D</color>
 
-    <color name="blue_light_accentLight">#2196F3</color>
-    <color name="blue_light_accentDark">#0E4B67</color>
-    <color name="blue_light_background">#DDF0FF</color>
+    <color name="blue_light_accentLight">#039BE5</color>
+    <color name="blue_light_accentDark">#4FC3F7</color>
+    <color name="blue_light_background">#EDF8FD</color>
 
-    <color name="blue_dark_accentLight">#2196F3</color>
+    <color name="blue_dark_accentLight">#0288D1</color>
     <color name="blue_dark_accentDark">#0E4B67</color>
-    <color name="blue_dark_background">#080C20</color>
+    <color name="blue_dark_background">#030307</color>
 
-    <color name="yellow_light_accentLight">#F3E570</color>
-    <color name="yellow_light_accentDark">#EDE06A</color>
-    <color name="yellow_light_background">#FFF9C8</color>
+    <color name="yellow_light_accentLight">#FFA000</color>
+    <color name="yellow_light_accentDark">#FFB300</color>
+    <color name="yellow_light_background">#FFF8E1</color>
 
-    <color name="yellow_dark_accentLight">#E2EF55</color>
-    <color name="yellow_dark_accentDark">#999520</color>
-    <color name="yellow_dark_background">#1C1A05</color>
+    <color name="yellow_dark_accentLight">#FFCA28</color>
+    <color name="yellow_dark_accentDark">#FF8F00</color>
+    <color name="yellow_dark_background">#0E0D04</color>
 
-    <color name="green_light_accentLight">#8BC34A</color>
-    <color name="green_light_accentDark">#5BD861</color>
+    <color name="green_light_accentLight">#7CB342</color>
+    <color name="green_light_accentDark">#8BC34A</color>
     <color name="green_light_background">#E8FFCE</color>
 
     <color name="green_dark_accentLight">#8BC34A</color>
-    <color name="green_dark_accentDark">#155C1B</color>
-    <color name="green_dark_background">#131C09</color>
+    <color name="green_dark_accentDark">#33681E</color>
+    <color name="green_dark_background">#030502</color>
 
-    <color name="purple_light_accentLight">#db1fb6</color>
-    <color name="purple_light_accentDark">#d42cb2</color>
-    <color name="purple_light_background">#FFDAE6</color>
+    <color name="purple_light_accentLight">#7E57C2</color>
+    <color name="purple_light_accentDark">#B39DDB</color>
+    <color name="purple_light_background">#EDE7F6</color>
 
-    <color name="purple_dark_accentLight">#9621AA</color>
-    <color name="purple_dark_accentDark">#371377</color>
-    <color name="purple_dark_background">#120B20</color>
+    <color name="purple_dark_accentLight">#7E57C2</color>
+    <color name="purple_dark_accentDark">#311B92</color>
+    <color name="purple_dark_background">#050409</color>
 
 </resources>
