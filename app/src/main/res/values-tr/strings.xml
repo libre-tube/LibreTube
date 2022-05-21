@@ -104,4 +104,9 @@
     <string name="color_accent">Vurgu Rengi</string>
     <string name="oledTheme">OLED</string>
     <string name="material_you">Materyal You</string>
+    <string name="color_green">Yeşil</string>
+    <string name="color_purple">Mor</string>
+    <string name="color_yellow">Sarı</string>
+    <string name="color_blue">Mavi</string>
+    <string name="color_red">Kırmızı</string>
 </resources>
