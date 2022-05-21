@@ -232,11 +232,11 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/player_subscribe"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:backgroundTint="?attr/colorOnPrimary"
                     android:drawableLeft="@drawable/ic_bell"
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
