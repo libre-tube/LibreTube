@@ -80,9 +80,9 @@
     <string name="history">Historial</string>
     <string name="search_history">Historial de búsqueda</string>
     <string name="clear_history">Borrar historial</string>
-    <string name="music_songs">Canciones musicales</string>
-    <string name="music_videos">Vídeos musicales</string>
-    <string name="music_albums">Álbumes musicales</string>
+    <string name="music_songs">Canciones de YT Music</string>
+    <string name="music_videos">Videos musicales de YT</string>
+    <string name="music_albums">Álbumes musicales de YT</string>
     <string name="music_playlists">Listas de reproducción musical</string>
     <string name="defaultTab">Pestaña predeterminada</string>
     <string name="sponsorblock">SponsorBlock</string>
@@ -100,4 +100,13 @@
     <string name="category_outro">Tarjetas finales/Créditos</string>
     <string name="category_outro_description">Créditos o cuando aparezcan los tarjetas finales de YouTube. No para conclusiones con información.</string>
     <string name="category_intro_description">Un intervalo sin contenido real. Puede ser una pausa, un fotograma estático, una animación que se repite. No debe utilizarse para transiciones que contengan información.</string>
+    <string name="license">Licencia</string>
+    <string name="color_red">Rojo</string>
+    <string name="color_accent">Acento de color</string>
+    <string name="color_yellow">Amarillo</string>
+    <string name="color_green">Verde</string>
+    <string name="color_blue">Azul</string>
+    <string name="color_purple">Púrpura</string>
+    <string name="oledTheme">Tema OLED</string>
+    <string name="material_you">Material You</string>
 </resources>
