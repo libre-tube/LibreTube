@@ -408,6 +408,8 @@
     <string-array name="languages">
         <item>@string/systemLanguage</item>
         <item>Arabic</item>
+        <item>Azerbaijani</item>
+        <item>Chinese (simplified)</item>
         <item>Czech</item>
         <item>English</item>
         <item>Finnish</item>
@@ -419,7 +421,10 @@
         <item>Hungarian</item>
         <item>Indonesian</item>
         <item>Italian</item>
+        <item>Japanese</item>
         <item>Korean</item>
+        <item>Latvian</item>
+        <item>Malayalam</item>
         <item>Marathi</item>
         <item>Norwegian</item>
         <item>Persian</item>
@@ -435,6 +440,8 @@
     <string-array name="languagesValue">
         <item>sys</item>
         <item>ar</item>
+        <item>az</item>
+        <item>zh</item>
         <item>cs</item>
         <item>en</item>
         <item>fi</item>
@@ -446,7 +453,10 @@
         <item>hu</item>
         <item>in</item>
         <item>it</item>
+        <item>ja</item>
         <item>ko</item>
+        <item>lv</item>
+        <item>ml</item>
         <item>mr</item>
         <item>nb-rNO</item>
         <item>fa</item>
