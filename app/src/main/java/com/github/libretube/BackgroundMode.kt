@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.content.Context
+import com.github.libretube.adapters.MediaDescriptionAdapter
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -38,16 +39,10 @@ class BackgroundMode {
      */
     private fun initializePlayerNotification(c: Context) {
         playerNotificationManager =
-            PlayerNotificationManager.Builder(c, 1, "background_mode").build()
+            PlayerNotificationManager.Builder(c, 1, "background_mode")
+                .setMediaDescriptionAdapter(MediaDescriptionAdapter(response!!.title!!))
+                .build()
         playerNotificationManager?.setPlayer(player)
-    }
-
-    /**
-     * Releases the [player].
-     */
-    private fun releasePlayer() {
-        player?.release()
-        player = null
     }
 
     /**
@@ -55,7 +50,7 @@ class BackgroundMode {
      */
     private fun setMediaItem() {
         response?.let {
-            val mediaItem = MediaItem.fromUri(response!!.hls!!)
+            val mediaItem = MediaItem.fromUri(it.hls!!)
             player?.setMediaItem(mediaItem)
         }
     }
