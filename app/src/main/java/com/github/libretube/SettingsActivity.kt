@@ -1,7 +1,11 @@
 package com.github.libretube
 
 import android.Manifest
-import android.content.*
+import android.content.ContentResolver
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -24,13 +28,13 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 
 class SettingsActivity :
     AppCompatActivity(),
@@ -61,7 +65,11 @@ class SettingsActivity :
             .registerOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, rootKey: String?) {}
+    override fun onSharedPreferenceChanged(
+        sharedPreferences: SharedPreferences?,
+        rootKey: String?
+    ) {
+    }
 
     class SettingsFragment : PreferenceFragmentCompat() {
         val TAG = "Settings"
@@ -71,66 +79,72 @@ class SettingsActivity :
         }
 
         override fun onCreate(savedInstanceState: Bundle?) {
-            getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-                if (uri != null) {
-                    try {
-                        // Open a specific media item using ParcelFileDescriptor.
-                        val resolver: ContentResolver =
-                            requireActivity()
-                                .contentResolver
+            getContent =
+                registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                    if (uri != null) {
+                        try {
+                            // Open a specific media item using ParcelFileDescriptor.
+                            val resolver: ContentResolver =
+                                requireActivity()
+                                    .contentResolver
 
-                        // "rw" for read-and-write;
-                        // "rwt" for truncating or overwriting existing file contents.
-                        // val readOnlyMode = "r"
-                        // uri - I have got from onActivityResult
-                        val type = resolver.getType(uri)
+                            // "rw" for read-and-write;
+                            // "rwt" for truncating or overwriting existing file contents.
+                            // val readOnlyMode = "r"
+                            // uri - I have got from onActivityResult
+                            val type = resolver.getType(uri)
 
-                        var inputStream: InputStream? = resolver.openInputStream(uri)
-                        val channels = ArrayList<String>()
-                        if (type == "application/json") {
-                            val json = inputStream?.bufferedReader()?.readLines()?.get(0)
-                            val jsonObject = JSONTokener(json).nextValue() as JSONObject
-                            Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
-                            for (i in 0 until jsonObject.getJSONArray("subscriptions").length()) {
-                                var url = jsonObject.getJSONArray("subscriptions").getJSONObject(i).getString("url")
-                                url = url.replace("https://www.youtube.com/channel/", "")
-                                Log.e(TAG, url)
-                                channels.add(url)
-                            }
-                        } else {
-                            if (type == "application/zip") {
-                                val zis = ZipInputStream(inputStream)
-                                var entry: ZipEntry? = zis.nextEntry
-                                while (entry != null) {
-                                    if (entry.name.endsWith(".csv")) {
-                                        inputStream = zis
-                                        break
+                            var inputStream: InputStream? = resolver.openInputStream(uri)
+                            val channels = ArrayList<String>()
+                            if (type == "application/json") {
+                                val json = inputStream?.bufferedReader()?.readLines()?.get(0)
+                                val jsonObject = JSONTokener(json).nextValue() as JSONObject
+                                Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
+                                for (
+                                    i in 0 until jsonObject.getJSONArray("subscriptions")
+                                        .length()
+                                ) {
+                                    var url =
+                                        jsonObject.getJSONArray("subscriptions").getJSONObject(i)
+                                            .getString("url")
+                                    url = url.replace("https://www.youtube.com/channel/", "")
+                                    Log.e(TAG, url)
+                                    channels.add(url)
+                                }
+                            } else {
+                                if (type == "application/zip") {
+                                    val zis = ZipInputStream(inputStream)
+                                    var entry: ZipEntry? = zis.nextEntry
+                                    while (entry != null) {
+                                        if (entry.name.endsWith(".csv")) {
+                                            inputStream = zis
+                                            break
+                                        }
+                                        entry = zis.nextEntry
                                     }
-                                    entry = zis.nextEntry
                                 }
-                            }
 
-                            inputStream?.bufferedReader()?.readLines()?.forEach {
-                                if (it.isNotBlank()) {
-                                    val channelId = it.substringBefore(",")
-                                    if (channelId.length == 24)
-                                        channels.add(channelId)
+                                inputStream?.bufferedReader()?.readLines()?.forEach {
+                                    if (it.isNotBlank()) {
+                                        val channelId = it.substringBefore(",")
+                                        if (channelId.length == 24)
+                                            channels.add(channelId)
+                                    }
                                 }
                             }
+                            inputStream?.close()
+
+                            subscribe(channels)
+                        } catch (e: Exception) {
+                            Log.e(TAG, e.toString())
+                            Toast.makeText(
+                                context,
+                                R.string.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                        inputStream?.close()
-
-                        subscribe(channels)
-                    } catch (e: Exception) {
-                        Log.e(TAG, e.toString())
-                        Toast.makeText(
-                            context,
-                            R.string.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                 }
-            }
             super.onCreate(savedInstanceState)
         }
 
@@ -154,7 +168,6 @@ class SettingsActivity :
 
             val login = findPreference<Preference>("login_register")
             login?.setOnPreferenceClickListener {
-
 
                 val newFragment = LoginDialog()
                 newFragment.show(childFragmentManager, "Login")
@@ -200,7 +213,8 @@ class SettingsActivity :
                     if (ActivityCompat.checkSelfPermission(
                             requireContext(),
                             Manifest.permission.READ_EXTERNAL_STORAGE
-                        ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                        ) != PackageManager.PERMISSION_GRANTED ||
+                        ActivityCompat.checkSelfPermission(
                                 requireContext(),
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE
                             ) != PackageManager.PERMISSION_GRANTED
@@ -245,7 +259,8 @@ class SettingsActivity :
 
             val clearHistory = findPreference<Preference>("clear_history")
             clearHistory?.setOnPreferenceClickListener {
-                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                val sharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(requireContext())
                 sharedPreferences.edit().remove("search_history").commit()
                 true
             }
@@ -269,7 +284,10 @@ class SettingsActivity :
                     Html.fromHtml(licenseString)
                 }
                 MaterialAlertDialogBuilder(view?.context!!)
-                    .setPositiveButton(getString(R.string.okay), DialogInterface.OnClickListener { _, _ -> })
+                    .setPositiveButton(
+                        getString(R.string.okay),
+                        DialogInterface.OnClickListener { _, _ -> }
+                    )
                     .setMessage(licenseHtml)
                     .create()
                     .show()
@@ -327,7 +345,8 @@ class SettingsActivity :
             fun run() {
                 lifecycleScope.launchWhenCreated {
                     val response = try {
-                        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                        val sharedPref =
+                            context?.getSharedPreferences("token", Context.MODE_PRIVATE)
                         RetrofitInstance.api.importSubscriptions(
                             false,
                             sharedPref?.getString("token", "")!!,
@@ -359,5 +378,4 @@ class SettingsActivity :
         intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
-
 }

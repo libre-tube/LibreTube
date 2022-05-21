@@ -15,10 +15,12 @@ import com.github.libretube.formatShort
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
 
-class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) : RecyclerView.Adapter<ChannelViewHolder>() {
+class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
+    RecyclerView.Adapter<ChannelViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
+
     fun updateItems(newItems: List<StreamItem>) {
         videoFeed.addAll(newItems)
         notifyDataSetChanged()
@@ -33,8 +35,11 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) : RecyclerV
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.channel_description).text = trending.title
-        holder.v.findViewById<TextView>(R.id.channel_views).text = trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-        holder.v.findViewById<TextView>(R.id.channel_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
+        holder.v.findViewById<TextView>(R.id.channel_views).text =
+            trending.views.formatShort() + " • " +
+            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.channel_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         holder.v.setOnClickListener {
@@ -52,6 +57,7 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) : RecyclerV
         }
     }
 }
+
 class ChannelViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }

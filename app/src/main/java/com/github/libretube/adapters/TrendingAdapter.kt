@@ -18,7 +18,8 @@ import com.github.libretube.formatShort
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
 
-class TrendingAdapter(private val videoFeed: List<StreamItem>) : RecyclerView.Adapter<CustomViewHolder>() {
+class TrendingAdapter(private val videoFeed: List<StreamItem>) :
+    RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
@@ -32,9 +33,13 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName + " • " + trending.views.formatShort() + " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.textView_channel).text =
+            trending.uploaderName + " • " +
+            trending.views.formatShort() + " • " +
+            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
-        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
+        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
         channelImage.setOnClickListener {
             val activity = holder.v.context as MainActivity
@@ -73,6 +78,7 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>) : RecyclerView.Ad
         }
     }
 }
+
 class CustomViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }

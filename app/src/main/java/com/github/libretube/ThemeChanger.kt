@@ -3,10 +3,11 @@ package com.github.libretube
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
-import java.util.*
+import java.util.Locale
 
 fun updateAccentColor(context: Context) {
-    val colorAccent = PreferenceManager.getDefaultSharedPreferences(context).getString("accent_color", "red")
+    val colorAccent =
+        PreferenceManager.getDefaultSharedPreferences(context).getString("accent_color", "red")
     when (colorAccent) {
         "my" -> context.setTheme(R.style.Theme_MY)
         "red" -> context.setTheme(R.style.Theme_Red)
@@ -18,7 +19,8 @@ fun updateAccentColor(context: Context) {
 }
 
 fun updateThemeMode(context: Context) {
-    val themeMode = PreferenceManager.getDefaultSharedPreferences(context).getString("theme_togglee", "A")
+    val themeMode =
+        PreferenceManager.getDefaultSharedPreferences(context).getString("theme_togglee", "A")
     when (themeMode) {
         "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

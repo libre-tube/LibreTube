@@ -12,12 +12,14 @@ import com.github.libretube.R
 import com.github.libretube.obj.Subscription
 import com.squareup.picasso.Picasso
 
-class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) : RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
+class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
+    RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
     override fun getItemCount(): Int {
         return subscriptions.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionChannelViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+        SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cell = layoutInflater.inflate(R.layout.channel_subscription_row, parent, false)
         return SubscriptionChannelViewHolder(cell)
@@ -35,6 +37,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         }
     }
 }
+
 class SubscriptionChannelViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }

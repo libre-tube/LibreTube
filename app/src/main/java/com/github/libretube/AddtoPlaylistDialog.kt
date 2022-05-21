@@ -6,15 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.obj.PlaylistId
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class AddtoPlaylistDialog : DialogFragment() {
     private val TAG = "AddToPlaylistDialog"
@@ -49,6 +53,7 @@ class AddtoPlaylistDialog : DialogFragment() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
+
     private fun fetchPlaylists() {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -69,8 +74,11 @@ class AddtoPlaylistDialog : DialogFragment() {
                     for (playlist in response) {
                         names.add(playlist.name!!)
                     }
-                    val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
-                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    val arrayAdapter =
+                        ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
+                    arrayAdapter.setDropDownViewResource(
+                        android.R.layout.simple_spinner_dropdown_item
+                    )
                     spinner.adapter = arrayAdapter
                     runOnUiThread {
                         button.setOnClickListener {
@@ -83,6 +91,7 @@ class AddtoPlaylistDialog : DialogFragment() {
         }
         run()
     }
+
     private fun addToPlaylist(playlistId: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -108,6 +117,7 @@ class AddtoPlaylistDialog : DialogFragment() {
         }
         run()
     }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity

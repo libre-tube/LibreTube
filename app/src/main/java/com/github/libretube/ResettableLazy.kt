@@ -1,6 +1,6 @@
 package com.github.libretube
 
-import java.util.*
+import java.util.LinkedList
 import kotlin.reflect.KProperty
 
 class ResettableLazyManager {
@@ -25,8 +25,10 @@ interface Resettable {
     fun reset()
 }
 
-class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () -> PROPTYPE) : Resettable {
-    @Volatile var lazyHolder = makeInitBlock()
+class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () -> PROPTYPE) :
+    Resettable {
+    @Volatile
+    var lazyHolder = makeInitBlock()
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): PROPTYPE {
         return lazyHolder.value
@@ -44,7 +46,8 @@ class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () 
     }
 }
 
-fun <PROPTYPE> resettableLazy(manager: ResettableLazyManager, init: () -> PROPTYPE): ResettableLazy<PROPTYPE> {
+fun <PROPTYPE> resettableLazy(manager: ResettableLazyManager, init: () -> PROPTYPE):
+    ResettableLazy<PROPTYPE> {
     return ResettableLazy(manager, init)
 }
 

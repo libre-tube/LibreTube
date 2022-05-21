@@ -33,6 +33,7 @@ class PlaylistAdapter(
     override fun getItemCount(): Int {
         return videoFeed.size
     }
+
     fun updateItems(newItems: List<StreamItem>) {
         videoFeed.addAll(newItems)
         notifyDataSetChanged()
@@ -48,7 +49,8 @@ class PlaylistAdapter(
         val streamItem = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.playlist_title).text = streamItem.title
         holder.v.findViewById<TextView>(R.id.playlist_description).text = streamItem.uploaderName
-        holder.v.findViewById<TextView>(R.id.playlist_duration).text = DateUtils.formatElapsedTime(streamItem.duration!!)
+        holder.v.findViewById<TextView>(R.id.playlist_duration).text =
+            DateUtils.formatElapsedTime(streamItem.duration!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.playlist_thumbnail)
         Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
         holder.v.setOnClickListener {
@@ -68,17 +70,24 @@ class PlaylistAdapter(
             val delete = holder.v.findViewById<ImageView>(R.id.delete_playlist)
             delete.visibility = View.VISIBLE
             delete.setOnClickListener {
-                val sharedPref = holder.v.context.getSharedPreferences("token", Context.MODE_PRIVATE)
+                val sharedPref = holder.v.context.getSharedPreferences(
+                    "token",
+                    Context.MODE_PRIVATE
+                )
                 val token = sharedPref?.getString("token", "")!!
                 removeFromPlaylist(token, position)
             }
         }
     }
+
     private fun removeFromPlaylist(token: String, position: Int) {
         fun run() {
             GlobalScope.launch {
                 val response = try {
-                    RetrofitInstance.api.removeFromPlaylist(token, PlaylistId(playlistId = playlistId, index = position))
+                    RetrofitInstance.api.removeFromPlaylist(
+                        token,
+                        PlaylistId(playlistId = playlistId, index = position)
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -107,6 +116,7 @@ class PlaylistAdapter(
         run()
     }
 }
+
 class PlaylistViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }

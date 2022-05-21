@@ -9,7 +9,12 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
-import android.widget.*
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -19,9 +24,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
-import retrofit2.HttpException
 import java.io.IOException
-
+import retrofit2.HttpException
 
 class Subscriptions : Fragment() {
     val TAG = "SubFragment"
@@ -60,7 +64,9 @@ class Subscriptions : Fragment() {
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            val grid = sharedPreferences.getString("grid", resources.getInteger(R.integer.grid_items).toString())!!
+            val grid = sharedPreferences.getString(
+                "grid", resources.getInteger(R.integer.grid_items).toString()
+            )!!
             feedRecView.layoutManager = GridLayoutManager(view.context, grid.toInt())
             fetchFeed(feedRecView, progressBar, view)
 
@@ -82,7 +88,7 @@ class Subscriptions : Fragment() {
                     channelRecView.visibility = View.VISIBLE
                     feedRecView.visibility = View.GONE
 
-                    //toggle button
+                    // toggle button
                     val rotate = RotateAnimation(
                         0F,
                         180F,
@@ -96,12 +102,11 @@ class Subscriptions : Fragment() {
                     rotate.fillAfter = true
                     val image = view.findViewById<ImageView>(R.id.toggle)
                     image.startAnimation(rotate)
-
                 } else {
                     channelRecView.visibility = View.GONE
                     feedRecView.visibility = View.VISIBLE
 
-                    //toggle button
+                    // toggle button
                     val image = view.findViewById<ImageView>(R.id.toggle)
                     image.clearAnimation()
                 }
@@ -143,7 +148,7 @@ class Subscriptions : Fragment() {
                 }
                 if (response.isNotEmpty()) {
                     subscriptionAdapter = SubscriptionAdapter(response)
-                    feedRecView?.adapter = subscriptionAdapter
+                    feedRecView.adapter = subscriptionAdapter
                     subscriptionAdapter?.updateItems()
                 } else {
                     runOnUiThread {
@@ -155,7 +160,8 @@ class Subscriptions : Fragment() {
                             visibility = View.VISIBLE
                             text = getString(R.string.emptyList)
                         }
-                        view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility = View.VISIBLE
+                        view.findViewById<RelativeLayout>(R.id.loginOrRegister)
+                            .visibility = View.VISIBLE
                     }
                 }
                 progressBar.visibility = View.GONE
@@ -181,7 +187,7 @@ class Subscriptions : Fragment() {
                     refreshLayout?.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
-                    channelRecView?.adapter = SubscriptionChannelAdapter(response.toMutableList())
+                    channelRecView.adapter = SubscriptionChannelAdapter(response.toMutableList())
                 } else {
                     Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
                 }
@@ -189,12 +195,14 @@ class Subscriptions : Fragment() {
         }
         run()
     }
+
     override fun onDestroy() {
         Log.e(TAG, "Destroyed")
         super.onDestroy()
         subscriptionAdapter = null
         view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter = null
     }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity

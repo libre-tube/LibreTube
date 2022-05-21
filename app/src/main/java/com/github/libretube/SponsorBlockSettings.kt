@@ -6,6 +6,7 @@ import androidx.preference.SwitchPreferenceCompat
 
 class SponsorBlockSettings : PreferenceFragmentCompat() {
     private val TAG = "SponsorBlockDialog"
+
     companion object {
         var sponsorBlockEnabled: Boolean = false
         var sponsorsEnabled: Boolean = false
