@@ -48,6 +48,7 @@ class PlaylistFragment : Fragment() {
 
         fetchPlaylist(view)
     }
+
     private fun fetchPlaylist(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -66,14 +67,21 @@ class PlaylistFragment : Fragment() {
                 runOnUiThread {
                     view.findViewById<TextView>(R.id.playlist_name).text = response.name
                     view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
-                    view.findViewById<TextView>(R.id.playlist_totVideos).text = response.videos.toString() + " Videos"
-                    val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
+                    view.findViewById<TextView>(R.id.playlist_totVideos).text =
+                        response.videos.toString() + " Videos"
+                    val sharedPref2 =
+                        context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                     val user = sharedPref2?.getString("username", "")
                     var isOwner = false
                     if (response.uploaderUrl == null && response.uploader.equals(user, true)) {
                         isOwner = true
                     }
-                    playlistAdapter = PlaylistAdapter(response.relatedStreams!!.toMutableList(), playlist_id!!, isOwner, requireActivity())
+                    playlistAdapter = PlaylistAdapter(
+                        response.relatedStreams!!.toMutableList(),
+                        playlist_id!!,
+                        isOwner,
+                        requireActivity()
+                    )
                     view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
                     val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)
                     scrollView.viewTreeObserver

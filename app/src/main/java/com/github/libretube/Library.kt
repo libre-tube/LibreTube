@@ -52,8 +52,8 @@ class Library : Fragment() {
             view.findViewById<ImageView>(R.id.boogh2).visibility = View.GONE
             view.findViewById<TextView>(R.id.textLike2).visibility = View.GONE
             fetchPlaylists(view)
-            refreshLayout?.isEnabled = true
-            refreshLayout?.setOnRefreshListener {
+            refreshLayout.isEnabled = true
+            refreshLayout.setOnRefreshListener {
                 Log.d(TAG, "hmm")
                 fetchPlaylists(view)
             }
@@ -66,7 +66,7 @@ class Library : Fragment() {
                 createPlaylist("$playlistName", view)
             }
         } else {
-            refreshLayout?.isEnabled = false
+            refreshLayout.isEnabled = false
             view.findViewById<Button>(R.id.create_playlist).visibility = View.GONE
             with(view.findViewById<ImageView>(R.id.boogh2)) {
                 visibility = View.VISIBLE
@@ -81,7 +81,7 @@ class Library : Fragment() {
 
     private fun fetchPlaylists(view: View) {
         fun run() {
-            refreshLayout?.isRefreshing = true
+            refreshLayout.isRefreshing = true
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.playlists(token)
@@ -95,7 +95,7 @@ class Library : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } finally {
-                    refreshLayout?.isRefreshing = false
+                    refreshLayout.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
                     runOnUiThread {
@@ -106,7 +106,10 @@ class Library : Fragment() {
                             visibility = View.GONE
                         }
                     }
-                    val playlistsAdapter = PlaylistsAdapter(response.toMutableList(), requireActivity())
+                    val playlistsAdapter = PlaylistsAdapter(
+                        response.toMutableList(),
+                        requireActivity()
+                    )
                     playlistRecyclerView.adapter = playlistsAdapter
                 } else {
                     runOnUiThread {
@@ -124,6 +127,7 @@ class Library : Fragment() {
         }
         run()
     }
+
     private fun createPlaylist(name: String, view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {

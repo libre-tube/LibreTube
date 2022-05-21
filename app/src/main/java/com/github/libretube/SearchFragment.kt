@@ -9,13 +9,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
-import android.widget.TextView.*
+import android.widget.TextView.GONE
+import android.widget.TextView.OnEditorActionListener
+import android.widget.TextView.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
@@ -25,11 +27,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
@@ -83,8 +85,7 @@ class SearchFragment : Fragment() {
                 .setTitle(getString(R.string.choose_filter))
                 .setSingleChoiceItems(
                     filterOptions, selectedFilter,
-                    DialogInterface.OnClickListener {
-                            _, id ->
+                    DialogInterface.OnClickListener { _, id ->
                         tempSelectedItem = id
                     }
                 )
@@ -154,8 +155,13 @@ class SearchFragment : Fragment() {
                     GlobalScope.launch {
                         fetchSuggestions(s.toString(), autoTextView)
                         delay(1000)
-                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        if (sharedPreferences.getBoolean("search_history_toggle", true)) addtohistory(s.toString())
+                        val sharedPreferences =
+                            PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        if (sharedPreferences.getBoolean(
+                                "search_history_toggle",
+                                true
+                            )
+                        ) addtohistory(s.toString())
                         fetchSearch(s.toString())
                     }
                 }
@@ -200,10 +206,12 @@ class SearchFragment : Fragment() {
                 Log.e(TAG, "HttpException, unexpected response")
                 return@launchWhenCreated
             }
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response)
+            val adapter =
+                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response)
             autoTextView.setAdapter(adapter)
         }
     }
+
     private fun fetchSearch(query: String) {
         lifecycleScope.launchWhenCreated {
             val response = try {
@@ -232,7 +240,11 @@ class SearchFragment : Fragment() {
             if (!isLoading) {
                 isLoading = true
                 val response = try {
-                    RetrofitInstance.api.getSearchResultsNextPage(query, apiSearchFilter, nextPage!!)
+                    RetrofitInstance.api.getSearchResultsNextPage(
+                        query,
+                        apiSearchFilter,
+                        nextPage!!
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -256,7 +268,7 @@ class SearchFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        requireActivity().window.setSoftInputMode(SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
     override fun onStop() {

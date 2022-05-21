@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import com.google.android.material.textfield.TextInputEditText
 
 class CreatePlaylistDialog : DialogFragment() {
     override fun onCreateView(
@@ -35,7 +36,7 @@ class CreatePlaylistDialog : DialogFragment() {
             dismiss()
         }
 
-        val playlistName = rootView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.playlist_name)
+        val playlistName = rootView.findViewById<TextInputEditText>(R.id.playlist_name)
         val createPlaylistBtn = rootView.findViewById<Button>(R.id.create_new_playlist)
         createPlaylistBtn.setOnClickListener {
             var listName = playlistName.text.toString()

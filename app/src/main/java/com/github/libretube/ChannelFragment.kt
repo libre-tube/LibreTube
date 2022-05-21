@@ -3,7 +3,6 @@ package com.github.libretube
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils.substring
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -94,7 +93,10 @@ class ChannelFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.isSubscribed(channel_id!!, sharedPref?.getString("token", "")!!)
+                    RetrofitInstance.api.isSubscribed(
+                        channel_id!!,
+                        sharedPref?.getString("token", "")!!
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -131,7 +133,10 @@ class ChannelFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.subscribe(sharedPref?.getString("token", "")!!, Subscribe(channel_id))
+                    RetrofitInstance.api.subscribe(
+                        sharedPref?.getString("token", "")!!,
+                        Subscribe(channel_id)
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -145,12 +150,16 @@ class ChannelFragment : Fragment() {
         }
         run()
     }
+
     private fun unsubscribe() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.unsubscribe(sharedPref?.getString("token", "")!!, Subscribe(channel_id))
+                    RetrofitInstance.api.unsubscribe(
+                        sharedPref?.getString("token", "")!!,
+                        Subscribe(channel_id)
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -186,12 +195,19 @@ class ChannelFragment : Fragment() {
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
                     val channelName = view.findViewById<TextView>(R.id.channel_name)
-                    channelName.text = if (response.name?.length!! > 18) response.name.toString().substring(0, 16) + "..." else response.name
+                    channelName.text = if (response.name?.length!! > 18) response.name.toString()
+                        .substring(0, 16) + "..." else response.name
                     val channelVerified = view.findViewById<ImageView>(R.id.channel_verified)
                     if (response.verified) channelVerified.visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.channel_subs).text = resources.getString(R.string.subscribers, response.subscriberCount.formatShort())
+                    view.findViewById<TextView>(R.id.channel_subs).text = resources.getString(
+                        R.string.subscribers,
+                        response.subscriberCount.formatShort()
+                    )
                     val channelDescription = view.findViewById<TextView>(R.id.channel_description)
-                    if (response.description?.trim() == "") channelDescription.visibility = View.GONE else channelDescription.text = response.description?.trim()
+                    if (response.description?.trim() == "")
+                        channelDescription.visibility = View.GONE
+                    else
+                        channelDescription.text = response.description?.trim()
                     val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
                     Picasso.get().load(response.bannerUrl).into(bannerImage)
@@ -203,6 +219,7 @@ class ChannelFragment : Fragment() {
         }
         run()
     }
+
     private fun fetchNextPage() {
         fun run() {
 
@@ -227,6 +244,7 @@ class ChannelFragment : Fragment() {
         }
         run()
     }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity

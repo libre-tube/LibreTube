@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.TrendingAdapter
 import java.io.IOException
-import okhttp3.*
 import retrofit2.HttpException
 
 class Home : Fragment() {
@@ -42,7 +41,10 @@ class Home : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recview)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val grid = sharedPreferences.getString("grid", resources.getInteger(R.integer.grid_items).toString())!!
+        val grid = sharedPreferences.getString(
+            "grid",
+            resources.getInteger(R.integer.grid_items).toString()
+        )!!
         recyclerView.layoutManager = GridLayoutManager(view.context, grid.toInt())
         val progressbar = view.findViewById<ProgressBar>(R.id.progressBar)
         fetchJson(progressbar, recyclerView)
@@ -58,7 +60,8 @@ class Home : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    val sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(requireContext())
                     RetrofitInstance.api.getTrending(sharedPreferences.getString("region", "US")!!)
                 } catch (e: IOException) {
                     println(e)
@@ -80,6 +83,7 @@ class Home : Fragment() {
         }
         run()
     }
+
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity

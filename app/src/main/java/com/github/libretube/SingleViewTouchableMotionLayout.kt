@@ -14,7 +14,8 @@ import androidx.constraintlayout.motion.widget.MotionLayout
  *
  */
 
-class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) : MotionLayout(context, attributeSet) {
+class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) :
+    MotionLayout(context, attributeSet) {
 
     private val viewToDetectTouch by lazy {
         findViewById<View>(R.id.main_container) // TODO move to Attributes

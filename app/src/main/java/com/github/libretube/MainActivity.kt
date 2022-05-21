@@ -12,7 +12,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
-import android.view.*
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
@@ -40,25 +43,33 @@ class MainActivity : AppCompatActivity() {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        RetrofitInstance.url = sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
-        SponsorBlockSettings.sponsorBlockEnabled = sharedPreferences.getBoolean("sponsorblock_enabled_key", false)
-        SponsorBlockSettings.introEnabled = sharedPreferences.getBoolean("intro_category_key", false)
-        SponsorBlockSettings.selfPromoEnabled = sharedPreferences.getBoolean("selfpromo_category_key", false)
-        SponsorBlockSettings.interactionEnabled = sharedPreferences.getBoolean("interaction_category_key", false)
-        SponsorBlockSettings.sponsorsEnabled = sharedPreferences.getBoolean("sponsors_category_key", false)
-        SponsorBlockSettings.outroEnabled = sharedPreferences.getBoolean("outro_category_key", false)
+        RetrofitInstance.url =
+            sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
+        SponsorBlockSettings.sponsorBlockEnabled =
+            sharedPreferences.getBoolean("sponsorblock_enabled_key", false)
+        SponsorBlockSettings.introEnabled =
+            sharedPreferences.getBoolean("intro_category_key", false)
+        SponsorBlockSettings.selfPromoEnabled =
+            sharedPreferences.getBoolean("selfpromo_category_key", false)
+        SponsorBlockSettings.interactionEnabled =
+            sharedPreferences.getBoolean("interaction_category_key", false)
+        SponsorBlockSettings.sponsorsEnabled =
+            sharedPreferences.getBoolean("sponsors_category_key", false)
+        SponsorBlockSettings.outroEnabled =
+            sharedPreferences.getBoolean("outro_category_key", false)
 
         updateAccentColor(this)
         updateThemeMode(this)
         updateLanguage(this)
 
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         val isConnected = networkInfo != null && networkInfo.isConnected
 
         if (!isConnected) {
             setContentView(R.layout.activity_nointernet)
-            findViewById<Button>(R.id.retry_button).setOnClickListener() {
+            findViewById<Button>(R.id.retry_button).setOnClickListener {
                 recreate()
             }
         } else {
@@ -137,10 +148,13 @@ class MainActivity : AppCompatActivity() {
             if (data.host != null) {
                 if (data.path != null) {
                     // channel
-                    if (data.path!!.contains("/channel/") || data.path!!.contains("/c/") || data.path!!.contains("/user/")) {
+                    if (data.path!!.contains("/channel/") ||
+                        data.path!!.contains("/c/") ||
+                        data.path!!.contains("/user/")
+                    ) {
                         var channel = data.path
                         channel = channel!!.replace("/c/", "")
-                        channel = channel!!.replace("/user/", "")
+                        channel = channel.replace("/user/", "")
                         val bundle = bundleOf("channel_id" to channel)
                         navController.navigate(R.id.channel, bundle)
                     } else if (data.path!!.contains("/playlist")) {
@@ -157,11 +171,17 @@ class MainActivity : AppCompatActivity() {
                         playlist = playlist.replace("list=", "")
                         val bundle = bundleOf("playlist_id" to playlist)
                         navController.navigate(R.id.playlistFragment, bundle)
-                    } else if (data.path!!.contains("/shorts/") || data.path!!.contains("/embed/") || data.path!!.contains("/v/")) {
-                        var watch = data.path!!.replace("/shorts/", "").replace("/v/", "").replace("/embed/", "")
-                        var bundle = Bundle()
+                    } else if (data.path!!.contains("/shorts/") ||
+                        data.path!!.contains("/embed/") ||
+                        data.path!!.contains("/v/")
+                    ) {
+                        val watch = data.path!!
+                            .replace("/shorts/", "")
+                            .replace("/v/", "")
+                            .replace("/embed/", "")
+                        val bundle = Bundle()
                         bundle.putString("videoId", watch)
-                        var frag = PlayerFragment()
+                        val frag = PlayerFragment()
                         frag.arguments = bundle
                         supportFragmentManager.beginTransaction()
                             .remove(PlayerFragment())
@@ -241,7 +261,9 @@ class MainActivity : AppCompatActivity() {
                 isFullScreen = false
             } else {
                 navController.popBackStack()
-                if (navController.currentBackStackEntry == null && (parent as View).id != R.id.settings) {
+                if (navController.currentBackStackEntry == null &&
+                    (parent as View).id != R.id.settings
+                ) {
                     super.onBackPressed()
                 }
             }
@@ -250,6 +272,7 @@ class MainActivity : AppCompatActivity() {
             moveTaskToBack(true)
         }
     }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val orientation = newConfig.orientation
@@ -261,6 +284,7 @@ class MainActivity : AppCompatActivity() {
             setFullscreen()
         }
     }
+
     private fun setFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes.layoutInDisplayCutoutMode =
@@ -285,6 +309,7 @@ class MainActivity : AppCompatActivity() {
                 )
         }
     }
+
     private fun unsetFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes.layoutInDisplayCutoutMode =
@@ -299,7 +324,8 @@ class MainActivity : AppCompatActivity() {
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            window.decorView.systemUiVisibility =
+                (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         }
     }
 
@@ -310,6 +336,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }

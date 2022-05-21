@@ -1,6 +1,11 @@
 package com.github.libretube
 
-import android.app.*
+import android.app.DownloadManager
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,6 +14,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.Environment.DIRECTORY_DOWNLOADS
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -17,6 +23,7 @@ import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
 
 var IS_DOWNLOAD_RUNNING = false
+
 class DownloadService : Service() {
     val TAG = "DownloadService"
     private var downloadId: Long = -1
@@ -25,6 +32,7 @@ class DownloadService : Service() {
     private lateinit var audioUrl: String
     private lateinit var extension: String
     private var duration: Int = 0
+
     // private lateinit var command: String
     private lateinit var audioDir: File
     private lateinit var videoDir: File
@@ -81,6 +89,7 @@ class DownloadService : Service() {
 
         return super.onStartCommand(intent, flags, startId)
     }
+
     override fun onBind(intent: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
@@ -101,7 +110,10 @@ class DownloadService : Service() {
         videoDir = File(f, "$videoId-video")
         try {
             Log.e(TAG, "Directory make")
-            registerReceiver(onDownloadComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+            registerReceiver(
+                onDownloadComplete,
+                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+            )
             val request: DownloadManager.Request =
                 DownloadManager.Request(Uri.parse(videoUrl))
                     .setTitle("Video") // Title of the Download Notification
@@ -113,7 +125,9 @@ class DownloadService : Service() {
             val downloadManager: DownloadManager =
                 applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             downloadId = downloadManager.enqueue(request)
-            if (audioUrl == "") { downloadId = 0L }
+            if (audioUrl == "") {
+                downloadId = 0L
+            }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "download error $e")
             try {
@@ -155,9 +169,12 @@ class DownloadService : Service() {
                     val downloadManager: DownloadManager =
                         applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
                     downloadManager.enqueue(request)
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
             } else if (downloadId == 0L) {
-                val libreTube = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "LibreTube")
+                val libreTube = File(
+                    Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS), "LibreTube"
+                )
                 if (!libreTube.exists()) {
                     libreTube.mkdirs()
                     Log.e(TAG, "libreTube Directory make")
@@ -191,7 +208,8 @@ class DownloadService : Service() {
                                 session.failStackTrace
                             )
                         )
-                        val path = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                        val path =
+                            applicationContext.getExternalFilesDir(DIRECTORY_DOWNLOADS)
                         val folder_main = ".tmp"
                         val f = File(path, folder_main)
                         f.deleteRecursively()
@@ -243,10 +261,12 @@ class DownloadService : Service() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
     override fun onDestroy() {
         try {
             unregisterReceiver(onDownloadComplete)
-        } catch (e: Exception) {}
+        } catch (e: Exception) {
+        }
         IS_DOWNLOAD_RUNNING = false
         Log.d(TAG, "dl finished!")
         super.onDestroy()

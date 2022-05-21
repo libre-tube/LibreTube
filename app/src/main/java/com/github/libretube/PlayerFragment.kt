@@ -22,7 +22,14 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
@@ -61,12 +68,12 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -207,34 +214,37 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-                if (playerDescription.isVisible){
-                    val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-                    image.clearAnimation()
-                    playerDescription.visibility = View.GONE
-                } else {
-                    //toggle button
-                    val rotate = RotateAnimation(
-                        0F,
-                        180F,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f
-                    )
-                    rotate.duration = 100
-                    rotate.interpolator = LinearInterpolator()
-                    rotate.fillAfter = true
-                    val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-                    image.startAnimation(rotate)
-                    playerDescription.visibility = View.VISIBLE
-                }
+            if (playerDescription.isVisible) {
+                val image = view.findViewById<ImageView>(R.id.player_description_arrow)
+                image.clearAnimation()
+                playerDescription.visibility = View.GONE
+            } else {
+                // toggle button
+                val rotate = RotateAnimation(
+                    0F,
+                    180F,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f,
+                    Animation.RELATIVE_TO_SELF,
+                    0.5f
+                )
+                rotate.duration = 100
+                rotate.interpolator = LinearInterpolator()
+                rotate.fillAfter = true
+                val image = view.findViewById<ImageView>(R.id.player_description_arrow)
+                image.startAnimation(rotate)
+                playerDescription.visibility = View.VISIBLE
+            }
         }
 
-        view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.comments_toggle).setOnClickListener {
-            commentsRecView.visibility = if (commentsRecView.isVisible) View.GONE else View.VISIBLE
-            relatedRecView.visibility = if (relatedRecView.isVisible) View.GONE else View.VISIBLE
-            if (!commentsLoaded!!) fetchComments()
-        }
+        view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.comments_toggle)
+            .setOnClickListener {
+                commentsRecView.visibility =
+                    if (commentsRecView.isVisible) View.GONE else View.VISIBLE
+                relatedRecView.visibility =
+                    if (relatedRecView.isVisible) View.GONE else View.VISIBLE
+                if (!commentsLoaded!!) fetchComments()
+            }
 
         // FullScreen button trigger
         view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener {
@@ -266,8 +276,9 @@ class PlayerFragment : Fragment() {
         scrollView.viewTreeObserver
             .addOnScrollChangedListener {
                 if (scrollView.getChildAt(0).bottom
-                    == (scrollView.height + scrollView.scrollY)
-                    && nextPage != null) {
+                    == (scrollView.height + scrollView.scrollY) &&
+                    nextPage != null
+                ) {
                     fetchNextComments()
                 }
             }
@@ -276,8 +287,8 @@ class PlayerFragment : Fragment() {
         commentsRecView.layoutManager = LinearLayoutManager(view.context)
 
         commentsRecView.setItemViewCacheSize(20)
-        commentsRecView.setDrawingCacheEnabled(true)
-        commentsRecView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH)
+        commentsRecView.isDrawingCacheEnabled = true
+        commentsRecView.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
 
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =
@@ -287,7 +298,8 @@ class PlayerFragment : Fragment() {
     override fun onStop() {
         try {
             exoPlayer.release()
-        }catch (e: Exception){}
+        } catch (e: Exception) {
+        }
         super.onStop()
     }
 
@@ -310,7 +322,7 @@ class PlayerFragment : Fragment() {
 
         segmentData.segments.forEach { segment: Segment ->
             val segmentStart = (segment.segment!![0] * 1000.0f).toLong()
-            val segmentEnd = (segment.segment!![1] * 1000.0f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000.0f).toLong()
             val currentPosition = exoPlayer.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
                 Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
@@ -383,10 +395,10 @@ class PlayerFragment : Fragment() {
                 runOnUiThread {
                     var subtitle = mutableListOf<SubtitleConfiguration>()
                     if (response.subtitles!!.isNotEmpty()) {
-                        subtitle?.add(
-                            SubtitleConfiguration.Builder(response.subtitles!![0].url!!.toUri())
-                                .setMimeType(response.subtitles!![0].mimeType!!) // The correct MIME type (required).
-                                .setLanguage(response.subtitles!![0].code) // The subtitle language (optional).
+                        subtitle.add(
+                            SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
+                                .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
+                                .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
                                 .build()
                         )
                     }
@@ -426,7 +438,7 @@ class PlayerFragment : Fragment() {
                         defres != "" -> {
                             var foundRes = false
                             run lit@{
-                                response.videoStreams!!.forEachIndexed { index, pipedStream ->
+                                response.videoStreams.forEachIndexed { index, pipedStream ->
                                     if (pipedStream.quality!!.contains(defres)) {
                                         foundRes = true
                                         val dataSourceFactory: DataSource.Factory =
@@ -440,13 +452,18 @@ class PlayerFragment : Fragment() {
                                                 .createMediaSource(videoItem)
                                         var audioSource: MediaSource =
                                             DefaultMediaSourceFactory(dataSourceFactory)
-                                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                                        if (response.videoStreams[index].quality == "720p" || response.videoStreams[index].quality == "1080p" || response.videoStreams[index].quality == "480p") {
+                                                .createMediaSource(
+                                                    fromUri(response.audioStreams!![0].url!!)
+                                                )
+                                        if (response.videoStreams[index].quality == "720p" ||
+                                            response.videoStreams[index].quality == "1080p" ||
+                                            response.videoStreams[index].quality == "480p"
+                                        ) {
                                             audioSource =
                                                 ProgressiveMediaSource.Factory(dataSourceFactory)
                                                     .createMediaSource(
                                                         fromUri(
-                                                            response.audioStreams!![
+                                                            response.audioStreams[
                                                                 getMostBitRate(
                                                                     response.audioStreams
                                                                 )
@@ -490,11 +507,14 @@ class PlayerFragment : Fragment() {
                             var audioSource: MediaSource =
                                 DefaultMediaSourceFactory(dataSourceFactory)
                                     .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                            if (response.videoStreams[0].quality == "720p" || response.videoStreams[0].quality == "1080p" || response.videoStreams[0].quality == "480p") {
+                            if (response.videoStreams[0].quality == "720p" ||
+                                response.videoStreams[0].quality == "1080p" ||
+                                response.videoStreams[0].quality == "480p"
+                            ) {
                                 audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
                                     .createMediaSource(
                                         fromUri(
-                                            response.audioStreams!![
+                                            response.audioStreams[
                                                 getMostBitRate(
                                                     response.audioStreams
                                                 )
@@ -528,13 +548,15 @@ class PlayerFragment : Fragment() {
                                 videosNameArray,
                                 DialogInterface.OnClickListener { _, which ->
                                     whichQuality = which
-                                    if (response.subtitles!!.isNotEmpty()) {
+                                    if (response.subtitles.isNotEmpty()) {
                                         var subtitle =
                                             mutableListOf<SubtitleConfiguration>()
-                                        subtitle?.add(
-                                            SubtitleConfiguration.Builder(response.subtitles!![0].url!!.toUri())
-                                                .setMimeType(response.subtitles!![0].mimeType!!) // The correct MIME type (required).
-                                                .setLanguage(response.subtitles!![0].code) // The subtitle language (optional).
+                                        subtitle.add(
+                                            SubtitleConfiguration.Builder(
+                                                response.subtitles[0].url!!.toUri()
+                                            )
+                                                .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
+                                                .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
                                                 .build()
                                         )
                                     }
@@ -556,13 +578,18 @@ class PlayerFragment : Fragment() {
                                                 .createMediaSource(videoItem)
                                         var audioSource: MediaSource =
                                             DefaultMediaSourceFactory(dataSourceFactory)
-                                                .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                                        if (response.videoStreams[which - 1].quality == "720p" || response.videoStreams[which - 1].quality == "1080p" || response.videoStreams[which - 1].quality == "480p") {
+                                                .createMediaSource(
+                                                    fromUri(response.audioStreams!![0].url!!)
+                                                )
+                                        if (response.videoStreams[which - 1].quality == "720p" ||
+                                            response.videoStreams[which - 1].quality == "1080p" ||
+                                            response.videoStreams[which - 1].quality == "480p"
+                                        ) {
                                             audioSource =
                                                 ProgressiveMediaSource.Factory(dataSourceFactory)
                                                     .createMediaSource(
                                                         fromUri(
-                                                            response.audioStreams!![
+                                                            response.audioStreams[
                                                                 getMostBitRate(
                                                                     response.audioStreams
                                                                 )
@@ -579,14 +606,17 @@ class PlayerFragment : Fragment() {
                                         videosNameArray[which]
                                 }
                             )
-                        val dialog = builder?.create()
-                        dialog?.show()
+                        val dialog = builder.create()
+                        dialog.show()
                     }
                     // Listener for play and pause icon change
-                    exoPlayer!!.addListener(object : com.google.android.exoplayer2.Player.Listener {
+                    exoPlayer.addListener(object : com.google.android.exoplayer2.Player.Listener {
                         override fun onIsPlayingChanged(isPlaying: Boolean) {
                             if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
-                                exoPlayerView.postDelayed(this@PlayerFragment::checkForSegments, 100)
+                                exoPlayerView.postDelayed(
+                                    this@PlayerFragment::checkForSegments,
+                                    100
+                                )
                             }
                         }
 
@@ -596,7 +626,8 @@ class PlayerFragment : Fragment() {
                         ) {
 
                             exoPlayerView.keepScreenOn = !(
-                                playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED ||
+                                playbackState == Player.STATE_IDLE ||
+                                    playbackState == Player.STATE_ENDED ||
                                     !playWhenReady
                                 )
 
@@ -692,7 +723,8 @@ class PlayerFragment : Fragment() {
                                     if (ActivityCompat.checkSelfPermission(
                                             requireContext(),
                                             Manifest.permission.READ_EXTERNAL_STORAGE
-                                        ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                                        ) != PackageManager.PERMISSION_GRANTED ||
+                                        ActivityCompat.checkSelfPermission(
                                                 requireContext(),
                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE
                                             ) != PackageManager.PERMISSION_GRANTED
@@ -711,7 +743,7 @@ class PlayerFragment : Fragment() {
                                 vidName.add("No video")
                                 var vidUrl = arrayListOf<String>()
                                 vidUrl.add("")
-                                for (vid in response.videoStreams!!) {
+                                for (vid in response.videoStreams) {
                                     val name = vid.quality + " " + vid.format
                                     vidName.add(name)
                                     vidUrl.add(vid.url!!)
@@ -874,10 +906,6 @@ class PlayerFragment : Fragment() {
         return index
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun fetchComments() {
         lifecycleScope.launchWhenCreated {
             val commentsResponse = try {
@@ -914,7 +942,7 @@ class PlayerFragment : Fragment() {
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
-                commentsAdapter?.updateItems(response.comments!!)
+                commentsAdapter?.updateItems(response.comments)
                 isLoading = false
             }
         }
@@ -950,7 +978,12 @@ class PlayerFragment : Fragment() {
         val scrollView = view?.findViewById<ScrollView>(R.id.player_scrollView)
         scrollView?.getHitRect(bounds)
 
-        if (SDK_INT >= Build.VERSION_CODES.N && exoPlayer.isPlaying && (scrollView?.getLocalVisibleRect(bounds) == true || isFullScreen)) {
+        if (SDK_INT >= Build.VERSION_CODES.N &&
+            exoPlayer.isPlaying && (
+                scrollView?.getLocalVisibleRect(bounds) == true ||
+                    isFullScreen
+                )
+        ) {
             requireActivity().enterPictureInPictureMode()
         }
     }

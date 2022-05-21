@@ -15,8 +15,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.obj.Login
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class LoginDialog : DialogFragment() {
     private val TAG = "LoginDialog"
@@ -35,7 +35,8 @@ class LoginDialog : DialogFragment() {
                 val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                 val user = sharedPref2?.getString("username", "")
                 view = inflater.inflate(R.layout.dialog_logout, null)
-                view.findViewById<TextView>(R.id.user).text = view.findViewById<TextView>(R.id.user).text.toString() + " (" + user + ")"
+                view.findViewById<TextView>(R.id.user).text =
+                    view.findViewById<TextView>(R.id.user).text.toString() + " (" + user + ")"
                 view.findViewById<Button>(R.id.logout).setOnClickListener {
                     Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
                     val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
@@ -76,11 +77,11 @@ class LoginDialog : DialogFragment() {
             )
             view.findViewById<TextView>(R.id.title).text = appName
 
-
             builder.setView(view)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
+
     private fun login(login: Login) {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -108,7 +109,8 @@ class LoginDialog : DialogFragment() {
                         putString("token", response.token)
                         apply()
                     }
-                    val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
+                    val sharedPref2 =
+                        context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                     with(sharedPref2!!.edit()) {
                         putString("username", login.username)
                         apply()
@@ -119,6 +121,7 @@ class LoginDialog : DialogFragment() {
         }
         run()
     }
+
     private fun register(login: Login) {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -146,7 +149,8 @@ class LoginDialog : DialogFragment() {
                         putString("token", response.token)
                         apply()
                     }
-                    val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
+                    val sharedPref2 =
+                        context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                     with(sharedPref2!!.edit()) {
                         putString("username", login.username)
                         apply()
