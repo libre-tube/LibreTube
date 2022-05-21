@@ -75,7 +75,7 @@
     <string name="defaultTab">Varsayılan Sekme</string>
     <string name="choose_filter">Arama filtresi seç</string>
     <string name="category_outro_description">Kanal ikonları veya YouTube video kartları göründüğünde. Bilgi ile sonuçlar için değil.</string>
-    <string name="sponsorblock_state">Etkinleştirildi</string>
+    <string name="sponsorblock_state">Etkinleştir</string>
     <string name="clear_history">Geçmişi Temizle</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="channels">Kanallar</string>
@@ -101,4 +101,7 @@
     <string name="music_videos">YT Müzik Videoları</string>
     <string name="music_playlists">YT Müzik Oynatma Listeleri</string>
     <string name="license">Lisans</string>
+    <string name="color_accent">Vurgu Rengi</string>
+    <string name="oledTheme">OLED</string>
+    <string name="material_you">Materyal You</string>
 </resources>
