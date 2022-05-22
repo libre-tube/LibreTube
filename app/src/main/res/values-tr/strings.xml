@@ -109,4 +109,5 @@
     <string name="color_yellow">Sarı</string>
     <string name="color_blue">Mavi</string>
     <string name="color_red">Kırmızı</string>
+    <string name="sponsorblock_notifications">Bildirimler</string>
 </resources>
