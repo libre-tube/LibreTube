@@ -19,9 +19,8 @@ import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.obj.Subscribe
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import retrofit2.HttpException
 import java.io.IOException
-
+import retrofit2.HttpException
 
 class ChannelFragment : Fragment() {
 
@@ -198,8 +197,9 @@ class ChannelFragment : Fragment() {
                     val channelName = view.findViewById<TextView>(R.id.channel_name)
                     channelName.text = response.name
                     if (response.verified) {
-                            channelName.setCompoundDrawablesWithIntrinsicBounds(
-                                0, 0, R.drawable.ic_verified, 0);
+                        channelName.setCompoundDrawablesWithIntrinsicBounds(
+                            0, 0, R.drawable.ic_verified, 0
+                        )
                     }
                     view.findViewById<TextView>(R.id.channel_subs).text = resources.getString(
                         R.string.subscribers,
