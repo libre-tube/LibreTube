@@ -4,11 +4,11 @@
     <PreferenceCategory app:title="@string/sponsorblock">
 
     <SwitchPreferenceCompat
-        app:key="sponsorblock_enabled_key"
+        app:key="sb_enabled_key"
         app:title="@string/sponsorblock_state"/>
 
         <SwitchPreferenceCompat
-            app:key="sponsorblock_notifications_key"
+            app:key="sb_notifications_key"
             app:title="@string/sponsorblock_notifications"/>
 
     </PreferenceCategory>

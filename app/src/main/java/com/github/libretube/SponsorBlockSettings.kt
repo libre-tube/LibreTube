@@ -19,14 +19,14 @@ class SponsorBlockSettings : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.sponsorblock_settings, rootKey)
-        val sponsorBlockToggle = findPreference<SwitchPreferenceCompat>("sponsorblock_enabled_key")
+        val sponsorBlockToggle = findPreference<SwitchPreferenceCompat>("sb_enabled_key")
         sponsorBlockToggle?.setOnPreferenceChangeListener { _, newValue ->
             sponsorBlockEnabled = newValue as Boolean
             true
         }
 
-        val sponsorBlockNotificationsToggle = findPreference<SwitchPreferenceCompat>("sponsorblock_notifications_key")
-        sponsorBlockNotificationsToggle?.setOnPreferenceChangeListener { _, newValue ->
+        val notificationsToggle = findPreference<SwitchPreferenceCompat>("sb_notifications_key")
+        notificationsToggle?.setOnPreferenceChangeListener { _, newValue ->
             sponsorNotificationsEnabled = newValue as Boolean
             true
         }
