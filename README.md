@@ -33,10 +33,12 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 | - | - |
 | User Accounts | ✅ |
 | Subscriptions | ✅ |
+| Popular | 🔴 |
 | User Playlists | ✅ |
 | Channel Playlists | ✅ |
 | Search Filters | ✅ |
 | SponsorBlock | ✅ |
+| Search Filters | 🔴 |
 | Subtitles | ✅ |
 | Comments | ✅ |
 
