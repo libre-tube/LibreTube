@@ -1,11 +1,7 @@
 package com.github.libretube
 
 import android.Manifest
-import android.content.ContentResolver
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -250,6 +246,12 @@ class SettingsActivity :
             accentColor?.setOnPreferenceChangeListener { _, _ ->
                 val refresh = Intent(context, SettingsActivity::class.java)
                 startActivity(refresh)
+                true
+            }
+
+            val iconChange = findPreference<ListPreference>("icon_change")
+            iconChange?.setOnPreferenceChangeListener { _, _ ->
+                changeIcon(requireContext())
                 true
             }
 
