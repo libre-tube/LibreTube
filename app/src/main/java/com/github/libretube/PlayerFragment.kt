@@ -68,6 +68,7 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.base.ThreadUtils.runOnUiThread
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
@@ -325,7 +326,9 @@ class PlayerFragment : Fragment() {
             val segmentEnd = (segment.segment[1] * 1000.0f).toLong()
             val currentPosition = exoPlayer.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
-                Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
+                if (SponsorBlockSettings.sponsorNotificationsEnabled) {
+                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
+                }
                 exoPlayer.seekTo(segmentEnd)
             }
         }

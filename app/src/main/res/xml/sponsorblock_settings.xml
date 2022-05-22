@@ -7,6 +7,10 @@
         app:key="sponsorblock_enabled_key"
         app:title="@string/sponsorblock_state"/>
 
+        <SwitchPreferenceCompat
+            app:key="sponsorblock_notifications_key"
+            app:title="@string/sponsorblock_notifications"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/category_segments">
@@ -37,4 +41,5 @@
         app:summary="@string/category_outro_description"/>
 
     </PreferenceCategory>
+
 </androidx.preference.PreferenceScreen>
