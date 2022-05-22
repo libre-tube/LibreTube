@@ -14,6 +14,7 @@ import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,6 +36,8 @@ import java.util.zip.ZipInputStream
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.HttpException
+
+private var isCurrentViewMainSettings = true
 
 class SettingsActivity :
     AppCompatActivity(),
@@ -176,6 +179,7 @@ class SettingsActivity :
 
             val sponsorblock = findPreference<Preference>("sponsorblock")
             sponsorblock?.setOnPreferenceClickListener {
+                isCurrentViewMainSettings = false
                 val newFragment = SponsorBlockSettings()
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.settings, newFragment)
@@ -237,7 +241,7 @@ class SettingsActivity :
             }
 
             val themeToggle = findPreference<ListPreference>("theme_togglee")
-            themeToggle?.setOnPreferenceChangeListener { _, newValue ->
+            themeToggle?.setOnPreferenceChangeListener { _, _ ->
                 val refresh = Intent(context, SettingsActivity::class.java)
                 startActivity(refresh)
                 true
@@ -373,9 +377,17 @@ class SettingsActivity :
     }
 
     override fun onBackPressed() {
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
-        intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        if (isCurrentViewMainSettings) {
+            PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this)
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            isCurrentViewMainSettings = true
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.settings, SettingsFragment())
+                .commit()
+        }
     }
 }
