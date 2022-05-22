@@ -66,8 +66,7 @@ class CustomViewHolder1(private val v: View) : RecyclerView.ViewHolder(v) {
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
         Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(channelImage)
         val title = v.findViewById<TextView>(R.id.search_description)
-        title.text =
-            if (item.title!!.length > 60) item.title?.substring(0, 60) + "..." else item.title
+        title.text = item.title
         val views = v.findViewById<TextView>(R.id.search_views)
         val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
         val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""

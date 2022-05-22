@@ -19,8 +19,9 @@ import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.obj.Subscribe
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
+
 
 class ChannelFragment : Fragment() {
 
@@ -195,10 +196,11 @@ class ChannelFragment : Fragment() {
                 runOnUiThread {
                     view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
                     val channelName = view.findViewById<TextView>(R.id.channel_name)
-                    channelName.text = if (response.name?.length!! > 18) response.name.toString()
-                        .substring(0, 16) + "..." else response.name
-                    val channelVerified = view.findViewById<ImageView>(R.id.channel_verified)
-                    if (response.verified) channelVerified.visibility = View.VISIBLE
+                    channelName.text = response.name
+                    if (response.verified) {
+                            channelName.setCompoundDrawablesWithIntrinsicBounds(
+                                0, 0, R.drawable.ic_verified, 0);
+                    }
                     view.findViewById<TextView>(R.id.channel_subs).text = resources.getString(
                         R.string.subscribers,
                         response.subscriberCount.formatShort()

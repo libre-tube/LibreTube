@@ -54,6 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,6 +84,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
         app:layout_constraintTop_toBottomOf="@+id/search_views" />
 
