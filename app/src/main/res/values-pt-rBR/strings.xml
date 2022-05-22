@@ -101,4 +101,12 @@
     <string name="category_interaction">Lembrete de interação (Inscrever-se)</string>
     <string name="category_interaction_description">Quando tem um breve lembrete para gostar, se inscrever ou segui-los no meio do conteúdo. Se for muito longo ou sobre algo específico, deve, em vez disso, estar sob auto-promoção.</string>
     <string name="category_outro_description">Créditos ou quando as telas finais do YouTube aparecem.</string>
+    <string name="color_accent">Cor de realce</string>
+    <string name="color_red">Vermelho</string>
+    <string name="color_blue">Azul</string>
+    <string name="color_yellow">Amarelo</string>
+    <string name="color_green">Verde</string>
+    <string name="color_purple">Roxo</string>
+    <string name="oledTheme">Tema OLED</string>
+    <string name="material_you">Material You</string>
 </resources>
