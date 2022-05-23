@@ -140,11 +140,99 @@
 
         <activity-alias
             android:label="@string/app_name"
-            android:icon="@mipmap/ic_launcher"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:name=".OptIconOne"
+            android:icon="@mipmap/ic_gradient"
+            android:roundIcon="@mipmap/ic_gradient_round"
+            android:name=".IconGradient"
             android:enabled="false"
             android:targetActivity=".MainActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:hardwareAccelerated="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_fire"
+            android:roundIcon="@mipmap/ic_fire_round"
+            android:name=".IconFire"
+            android:enabled="false"
+            android:targetActivity=".MainActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:hardwareAccelerated="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_flame"
+            android:roundIcon="@mipmap/ic_flame_round"
+            android:name=".IconFlame"
+            android:enabled="false"
+            android:targetActivity=".MainActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:hardwareAccelerated="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_shaped"
+            android:roundIcon="@mipmap/ic_shaped_round"
+            android:name=".IconShaped"
+            android:enabled="false"
+            android:targetActivity=".MainActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:hardwareAccelerated="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_torch"
+            android:roundIcon="@mipmap/ic_torch_round"
+            android:name=".IconTorch"
+            android:enabled="false"
+            android:targetActivity=".MainActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:hardwareAccelerated="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_legacy"
+            android:roundIcon="@mipmap/ic_legacy_round"
+            android:name=".IconLegacy"
+            android:enabled="false"
+            android:targetActivity=".MainActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:hardwareAccelerated="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

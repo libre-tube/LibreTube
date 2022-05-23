@@ -540,11 +540,21 @@
     </string-array>
 
     <string-array name="icons">
-        <item>Old</item>
-        <item>New</item>
+        <item>Default</item>
+        <item>Legacy</item>
+        <item>Gradient</item>
+        <item>Fire</item>
+        <item>Torch</item>
+        <item>Shaped</item>
+        <item>Flame</item>
     </string-array>
     <string-array name="iconsValue">
         <item>com\.github\.libretube\.MainActivity</item>
-        <item>com\.github\.libretube\.OptIconOne</item>
+        <item>com\.github\.libretube\.IconLegacy</item>
+        <item>com\.github\.libretube\.IconGradient</item>
+        <item>com\.github\.libretube\.IconFire</item>
+        <item>com\.github\.libretube\.IconTorch</item>
+        <item>com\.github\.libretube\.IconShaped</item>
+        <item>com\.github\.libretube\.IconFlame</item>
     </string-array>
 </resources>
