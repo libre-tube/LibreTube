@@ -2,7 +2,9 @@ package com.github.libretube
 
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import java.util.*
@@ -78,5 +80,6 @@ fun changeIcon(context: Context, newLogoActivityAlias: String) {
 fun restartMainActivity(context: Context) {
     val pm: PackageManager = context.packageManager
     val intent = pm.getLaunchIntentForPackage(context.packageName)
+    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     context.startActivity(intent)
 }
