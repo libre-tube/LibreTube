@@ -73,3 +73,10 @@ fun changeIcon(context: Context, newLogoActivityAlias: String) {
         PackageManager.DONT_KILL_APP
     )
 }
+
+// Needed due to different MainActivity Aliases because of the app icons
+fun restartMainActivity(context: Context) {
+    val pm: PackageManager = context.packageManager
+    val intent = pm.getLaunchIntentForPackage(context.packageName)
+    context.startActivity(intent)
+}

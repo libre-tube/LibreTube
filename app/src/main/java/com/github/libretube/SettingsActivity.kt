@@ -1,11 +1,7 @@
 package com.github.libretube
 
 import android.Manifest
-import android.content.ContentResolver
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -28,13 +24,14 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
+
 
 private var isCurrentViewMainSettings = true
 
@@ -261,8 +258,7 @@ class SettingsActivity :
 
             val changeLanguage = findPreference<ListPreference>("language")
             changeLanguage?.setOnPreferenceChangeListener { _, _ ->
-                val refresh = Intent(context, MainActivity::class.java)
-                startActivity(refresh)
+                restartMainActivity(requireContext())
                 true
             }
 
@@ -385,8 +381,7 @@ class SettingsActivity :
         if (isCurrentViewMainSettings) {
             PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this)
-            intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            restartMainActivity(this)
         } else {
             isCurrentViewMainSettings = true
             supportFragmentManager

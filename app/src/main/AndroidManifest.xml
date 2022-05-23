@@ -28,8 +28,7 @@
             />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings"
-            android:parentActivityName=".MainActivity" />
+            android:label="@string/settings" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
