@@ -9,6 +9,7 @@ class SponsorBlockSettings : PreferenceFragmentCompat() {
 
     companion object {
         var sponsorBlockEnabled: Boolean = false
+        var sponsorNotificationsEnabled: Boolean = false
         var sponsorsEnabled: Boolean = false
         var selfPromoEnabled: Boolean = false
         var interactionEnabled: Boolean = false
@@ -18,9 +19,15 @@ class SponsorBlockSettings : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.sponsorblock_settings, rootKey)
-        val sponsorBlockToggle = findPreference<SwitchPreferenceCompat>("sponsorblock_enabled_key")
+        val sponsorBlockToggle = findPreference<SwitchPreferenceCompat>("sb_enabled_key")
         sponsorBlockToggle?.setOnPreferenceChangeListener { _, newValue ->
             sponsorBlockEnabled = newValue as Boolean
+            true
+        }
+
+        val notificationsToggle = findPreference<SwitchPreferenceCompat>("sb_notifications_key")
+        notificationsToggle?.setOnPreferenceChangeListener { _, newValue ->
+            sponsorNotificationsEnabled = newValue as Boolean
             true
         }
 

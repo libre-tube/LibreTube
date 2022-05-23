@@ -1,19 +1,16 @@
 <div align="center">
-  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="150" height="150" alt="LibreTube">
-  <h1><a href="https://libre-tube.github.io">LibreTube</a></h1>
-  <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
+  <img src="https://libre-tube.github.io/assets/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
-<a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
-[![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Matrix](https://img.shields.io/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
-[![Telegram](https://img.shields.io/endpoint?color=neon&style=flat-square&url=https://tg.sumanjay.workers.dev/libretube)](https://t.me/libretube)
-[![Twitter](https://img.shields.io/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
-[![Reddit](https://img.shields.io/reddit/subreddit-subscribers/libretube?style=social)](https://www.reddit.com/r/Libretube/)
+[![GPL-v3](https://libre-tube.github.io/assets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Matrix](https://libre-tube.github.io/assets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org)
+[![Telegram](https://libre-tube.github.io/assets/tg-widget.svg)](https://t.me/libretube)
+[![Twitter](https://libre-tube.github.io/assets/tw-widget.svg)](https://twitter.com/libretube)
+[![Reddit](https://libre-tube.github.io/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
  
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
-[<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
+[<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="https://libre-tube.github.io/assets/tgload.png" alt="Get it on GitHub" height="80">](https://t.me/LibreTube)
 </div>
-WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
 
 ## Screenshots
 
@@ -43,6 +40,8 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 ## Contributing
 Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done the better it gets!
+
+WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
 
 ### Translation
 <a href="https://hosted.weblate.org/projects/libretube/#languages">

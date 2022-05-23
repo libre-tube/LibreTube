@@ -109,5 +109,6 @@
     <string name="color_purple">Purple</string>
     <string name="oledTheme">OLED Theme</string>
     <string name="material_you">Material You</string>
+    <string name="sponsorblock_notifications">Notifications</string>
     <string name="app_icon">App Icon</string>
 </resources>
