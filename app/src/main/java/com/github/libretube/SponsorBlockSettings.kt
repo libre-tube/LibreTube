@@ -1,7 +1,6 @@
 package com.github.libretube
 
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 
