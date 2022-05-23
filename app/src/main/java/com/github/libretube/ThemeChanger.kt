@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
-import java.util.Locale
+import java.util.*
 
 fun updateAccentColor(context: Context) {
     val colorAccent =
@@ -58,19 +58,20 @@ fun updateLanguage(context: Context) {
 
 fun changeIcon(context: Context) {
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    val newLogoActivityAlias = "com.github.libretube." + sharedPreferences.getString("icon_change", "MainActivity")
-    val activityAliases = context?.resources.getStringArray(R.array.iconsValue)
+    val newLogoActivityAlias = "com.github.libretube." +
+        sharedPreferences.getString("icon_change", "MainActivity")
+    val activityAliases = context.resources.getStringArray(R.array.iconsValue)
     // Disable Old Icon(s)
     for (activityAlias in activityAliases) {
-        context?.packageManager.setComponentEnabledSetting(
-            ComponentName(context?.packageName, "com.github.libretube.$activityAlias"),
+        context.packageManager.setComponentEnabledSetting(
+            ComponentName(context.packageName, "com.github.libretube.$activityAlias"),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
             PackageManager.DONT_KILL_APP
         )
     }
     // Enable New Icon
-    context?.packageManager.setComponentEnabledSetting(
-        ComponentName(context?.packageName, newLogoActivityAlias!!),
+    context.packageManager.setComponentEnabledSetting(
+        ComponentName(context.packageName, newLogoActivityAlias),
         PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
         PackageManager.DONT_KILL_APP
     )
