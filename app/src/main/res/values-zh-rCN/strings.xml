@@ -37,7 +37,7 @@
     <string name="comments">评论</string>
     <string name="choose_filter">搜索过滤条件</string>
     <string name="channels">频道</string>
-    <string name="category_segments">段</string>
+    <string name="category_segments">片段</string>
     <string name="save">保存</string>
     <string name="category_intro">中场休息/开场动画</string>
     <string name="category_intro_description">视频中没有实际内容的一段。可以是暂停、静态帧或者重复的动画。这不包括包含信息的过渡。</string>
@@ -91,7 +91,7 @@
     <string name="website">网站</string>
     <string name="all">所有</string>
     <string name="playlists">播放列表</string>
-    <string name="segment_skipped">跳过的段落</string>
+    <string name="segment_skipped">跳过的片段</string>
     <string name="category_sponsor_description">有偿推广、有偿推荐和直接广告。不是为了自我宣传或免费的事业/创造者/网站/产品的推广。</string>
     <string name="category_selfpromo">无偿/自我推广</string>
     <string name="category_selfpromo_description">除了无偿或自我宣传，与 \"赞助商 \"类似。这包括有关商品、捐赠或与谁合作的信息。</string>
@@ -108,6 +108,6 @@
     <string name="color_yellow">黄</string>
     <string name="color_green">绿</string>
     <string name="oledTheme">OLED 主题</string>
-    <string name="material_you">Material You 设计</string>
+    <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">通知</string>
 </resources>
