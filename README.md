@@ -11,7 +11,6 @@
 [<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
 [<img src="https://libre-tube.github.io/assets/tgload.png" alt="Get it on GitHub" height="80">](https://t.me/LibreTube)
 </div>
-WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
 
 ## Screenshots
 
@@ -41,6 +40,8 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 ## Contributing
 Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done the better it gets!
+
+WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
 
 ### Translation
 <a href="https://hosted.weblate.org/projects/libretube/#languages">
