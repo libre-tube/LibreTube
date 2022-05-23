@@ -67,4 +67,6 @@
     <string name="noInternet">Nincs internetkapcsolat</string>
     <string name="retry">Újra</string>
     <string name="comments">Megjegyzések</string>
+    <string name="settings">Beállítások</string>
+    <string name="location">Hely</string>
 </resources>
