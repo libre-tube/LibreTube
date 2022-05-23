@@ -109,4 +109,5 @@
     <string name="color_green">绿</string>
     <string name="oledTheme">OLED 主题</string>
     <string name="material_you">Material You 设计</string>
+    <string name="sponsorblock_notifications">通知</string>
 </resources>
