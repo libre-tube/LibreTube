@@ -3,6 +3,7 @@ package com.github.libretube
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import java.util.*
@@ -56,10 +57,7 @@ fun updateLanguage(context: Context) {
     }
 }
 
-fun changeIcon(context: Context) {
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    val newLogoActivityAlias = "com.github.libretube." +
-        sharedPreferences.getString("icon_change", "MainActivity")
+fun changeIcon(context: Context, newLogoActivityAlias: String) {
     val activityAliases = context.resources.getStringArray(R.array.iconsValue)
     // Disable Old Icon(s)
     for (activityAlias in activityAliases) {
@@ -71,7 +69,7 @@ fun changeIcon(context: Context) {
     }
     // Enable New Icon
     context.packageManager.setComponentEnabledSetting(
-        ComponentName(context.packageName, newLogoActivityAlias),
+        ComponentName(context.packageName, "com.github.libretube.$newLogoActivityAlias"),
         PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
         PackageManager.DONT_KILL_APP
     )

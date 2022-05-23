@@ -254,8 +254,8 @@ class SettingsActivity :
             }
 
             val iconChange = findPreference<ListPreference>("icon_change")
-            iconChange?.setOnPreferenceChangeListener { _, _ ->
-                changeIcon(requireContext())
+            iconChange?.setOnPreferenceChangeListener { _, newValue ->
+                changeIcon(requireContext(), newValue.toString())
                 true
             }
 
