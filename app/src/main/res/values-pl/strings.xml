@@ -71,7 +71,7 @@
     <string name="channels">Kanały</string>
     <string name="all">Wszystkie</string>
     <string name="playlists">Playlisty</string>
-    <string name="okay">Okej</string>
+    <string name="okay">OK</string>
     <string name="history">Historia</string>
     <string name="search_history">Historia wyszukiwania</string>
     <string name="clear_history">Wyczyść Historie</string>
@@ -98,4 +98,13 @@
     <string name="noInternet">Brak Połączenia z Internetem</string>
     <string name="retry">Spróbuj Ponownie</string>
     <string name="comments">Komentarze</string>
+    <string name="color_blue">Niebieski</string>
+    <string name="color_yellow">Żółty</string>
+    <string name="color_green">Zielony</string>
+    <string name="color_accent">Akcent kolorystyczny</string>
+    <string name="color_red">Czerwony</string>
+    <string name="color_purple">Fioletowy</string>
+    <string name="oledTheme">Motyw OLED</string>
+    <string name="material_you">Material You</string>
+    <string name="sponsorblock_notifications">Powiadomienia</string>
 </resources>
