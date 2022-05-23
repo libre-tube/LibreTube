@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         SponsorBlockSettings.sponsorBlockEnabled =
             sharedPreferences.getBoolean("sb_enabled_key", false)
-        SponsorBlockSettings.sponsorBlockEnabled =
+        SponsorBlockSettings.sponsorNotificationsEnabled =
             sharedPreferences.getBoolean("sb_notifications_key", false)
         SponsorBlockSettings.introEnabled =
             sharedPreferences.getBoolean("intro_category_key", false)
