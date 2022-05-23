@@ -80,6 +80,15 @@
             android:icon="@drawable/ic_color"
             />
 
+        <ListPreference
+            app:title="@string/app_icon"
+            app:key="icon_change"
+            app:entries="@array/icons"
+            app:entryValues="@array/iconsValue"
+            app:defaultValue="red"
+            android:icon="@drawable/ic_color"
+            />
+
     <androidx.preference.Preference
         app:title="@string/sponsorblock"
         app:key="sponsorblock"

@@ -538,4 +538,13 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+    <string-array name="icons">
+        <item>Old</item>
+        <item>New</item>
+    </string-array>
+    <string-array name="iconsValue">
+        <item>com\.github\.libretube\.MainActivity</item>
+        <item>com\.github\.libretube\.OptIconOne</item>
+    </string-array>
 </resources>
