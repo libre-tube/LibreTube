@@ -306,7 +306,6 @@ class PlayerFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
-            exoPlayer.stop()
             exoPlayer.release()
         } catch (e: Exception) {
         }
