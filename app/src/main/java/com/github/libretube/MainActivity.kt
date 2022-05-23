@@ -88,7 +88,6 @@ class MainActivity : AppCompatActivity() {
                 "library" -> navController.navigate(R.id.library)
             }
 
-            bottomNavigationView.setBackgroundColor(0) // otherwise Navbar Theme doesn't change
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.home2 -> {
