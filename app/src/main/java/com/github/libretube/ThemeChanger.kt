@@ -3,7 +3,6 @@ package com.github.libretube
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import java.util.*
