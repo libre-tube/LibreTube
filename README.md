@@ -1,7 +1,5 @@
 <div align="center">
-  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="150" height="150" alt="LibreTube">
-  <h1><a href="https://libre-tube.github.io">LibreTube</a></h1>
-  <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
+  <img src="https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
 [![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
@@ -10,8 +8,9 @@
 [![Twitter](https://img.shields.io/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
 [![Reddit](https://img.shields.io/reddit/subreddit-subscribers/libretube?style=social)](https://www.reddit.com/r/Libretube/)
  
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
-[<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/fdrload.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
+[<img src="https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/ghload.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/tgload.png" alt="Get it on GitHub" height="80">](https://t.me/LibreTube)
 </div>
 WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
 
