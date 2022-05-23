@@ -306,7 +306,6 @@ class PlayerFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
-            exoPlayer.stop()
             exoPlayer.release()
         } catch (e: Exception) {
         }
@@ -317,7 +316,7 @@ class PlayerFragment : Fragment() {
 
         exoPlayerView.postDelayed(this::checkForSegments, 100)
 
-        if (segmentData.segments.isEmpty())
+        if (!::segmentData.isInitialized || segmentData.segments.isEmpty())
             return
 
         segmentData.segments.forEach { segment: Segment ->
