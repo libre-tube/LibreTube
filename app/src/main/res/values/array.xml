@@ -547,14 +547,16 @@
         <item>Torch</item>
         <item>Shaped</item>
         <item>Flame</item>
+        <item>Bird</item>
     </string-array>
     <string-array name="iconsValue">
-        <item>com\.github\.libretube\.MainActivity</item>
-        <item>com\.github\.libretube\.IconLegacy</item>
-        <item>com\.github\.libretube\.IconGradient</item>
-        <item>com\.github\.libretube\.IconFire</item>
-        <item>com\.github\.libretube\.IconTorch</item>
-        <item>com\.github\.libretube\.IconShaped</item>
-        <item>com\.github\.libretube\.IconFlame</item>
+        <item>MainActivity</item>
+        <item>IconLegacy</item>
+        <item>IconGradient</item>
+        <item>IconFire</item>
+        <item>IconTorch</item>
+        <item>IconShaped</item>
+        <item>IconFlame</item>
+        <item>IconBird</item>
     </string-array>
 </resources>

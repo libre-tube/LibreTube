@@ -85,7 +85,7 @@
             app:key="icon_change"
             app:entries="@array/icons"
             app:entryValues="@array/iconsValue"
-            app:defaultValue="com\.github\.libretube\.MainActivity"
+            app:defaultValue="MainActivity"
             android:icon="@drawable/ic_color"
             />
 

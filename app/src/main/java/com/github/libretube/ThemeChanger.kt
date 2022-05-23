@@ -58,12 +58,12 @@ fun updateLanguage(context: Context) {
 
 fun changeIcon(context: Context) {
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    val newLogoActivityAlias = sharedPreferences.getString("icon_change", "com.github.libretube.MainActivity")
+    val newLogoActivityAlias = "com.github.libretube." + sharedPreferences.getString("icon_change", "MainActivity")
     val activityAliases = context?.resources.getStringArray(R.array.iconsValue)
     // Disable Old Icon(s)
     for (activityAlias in activityAliases) {
         context?.packageManager.setComponentEnabledSetting(
-            ComponentName(context?.packageName, activityAlias),
+            ComponentName(context?.packageName, "com.github.libretube.$activityAlias"),
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
             PackageManager.DONT_KILL_APP
         )
