@@ -109,4 +109,5 @@
     <string name="color_red">빨간색</string>
     <string name="color_yellow">노란색</string>
     <string name="color_purple">보라색</string>
+    <string name="sponsorblock_notifications">알림</string>
 </resources>
