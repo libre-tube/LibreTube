@@ -1,12 +1,11 @@
 <div align="center">
   <img src="https://libre-tube.github.io/assets/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
-<a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
-[![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Matrix](https://img.shields.io/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
-[![Telegram](https://img.shields.io/endpoint?color=neon&style=flat-square&url=https://tg.sumanjay.workers.dev/libretube)](https://t.me/libretube)
-[![Twitter](https://img.shields.io/twitter/follow/libretube?style=social)](https://twitter.com/libretube)
-[![Reddit](https://img.shields.io/reddit/subreddit-subscribers/libretube?style=social)](https://www.reddit.com/r/Libretube/)
+[![GPL-v3](https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/rd-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Matrix](https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org)
+[![Telegram](https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/tg-widget.svg)](https://t.me/libretube)
+[![Twitter](https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/tw-widget.svg)](https://twitter.com/libretube)
+[![Reddit](https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
  
 [<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
