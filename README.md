@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://libre-tube.github.io/assets/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
-[![GPL-v3](https://libre-tube.github.io/assets/rd-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![GPL-v3](https://libre-tube.github.io/assets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![Matrix](https://libre-tube.github.io/assets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org)
 [![Telegram](https://libre-tube.github.io/assets/tg-widget.svg)](https://t.me/libretube)
 [![Twitter](https://libre-tube.github.io/assets/tw-widget.svg)](https://twitter.com/libretube)
