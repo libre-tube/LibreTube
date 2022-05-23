@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/gh-banner.png" width="768" height="256" alt="LibreTube">
+  <img src="https://raw.githubusercontent.com/XelXen/libre-tube.github.io/main/assets/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages" alt="Translation Status"><img src="https://hosted.weblate.org/widgets/libretube/-/svg-badge.svg"></a>
 [![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
