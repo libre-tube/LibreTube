@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.url =
             sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
         SponsorBlockSettings.sponsorBlockEnabled =
-            sharedPreferences.getBoolean("sponsorblock_enabled_key", false)
+            sharedPreferences.getBoolean("sb_enabled_key", false)
+        SponsorBlockSettings.sponsorBlockEnabled =
+            sharedPreferences.getBoolean("sb_notifications_key", false)
         SponsorBlockSettings.introEnabled =
             sharedPreferences.getBoolean("intro_category_key", false)
         SponsorBlockSettings.selfPromoEnabled =
