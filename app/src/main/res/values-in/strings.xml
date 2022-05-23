@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="yes">Ya</string>
-    <string name="unsubscribe">UNSUBSCRIBE</string>
+    <string name="unsubscribe">BERHENTI BERLANGGANAN</string>
     <string name="choose_quality_dialog">Pilih Kualitas:</string>
     <string name="search_hint">Telusuri</string>
-    <string name="subscribe">SUBSCRIBE</string>
+    <string name="subscribe">BERLANGGANAN</string>
     <string name="download">Unduh</string>
     <string name="save">Simpan</string>
     <string name="password">Kata Sandi</string>
@@ -34,8 +34,8 @@
     <string name="dlisinprogress">Unduhan yang lain sedang berlangsung. Silahkan tunggu sampai selesai.</string>
     <string name="vlc">Buka di VLC</string>
     <string name="playlistCreated">Daftar Putar dibuat!</string>
-    <string name="please_login">Silahkan Masuk atau Mendaftar di pengaturan pertama!</string>
-    <string name="importsuccess">Berlangganan berhasil</string>
+    <string name="please_login">Silahkan masuk atau mendaftar dulu di pengaturan!</string>
+    <string name="importsuccess">Berlangganan</string>
     <string name="grid">Pilih kolom grid</string>
     <string name="emptyList">Tidak ada apa-apa di sini.</string>
     <string name="deletePlaylist">Hapus Daftar Putar</string>
@@ -49,7 +49,7 @@
     <string name="empty">Nama pengguna dan Kata sandi harus diisi.</string>
     <string name="defres">Resolusi Video Bawaan</string>
     <string name="startpage">Beranda</string>
-    <string name="subscriptions">Langganan</string>
+    <string name="subscriptions">Berlangganan</string>
     <string name="library">Perpustakaan</string>
     <string name="app_theme">Tema aplikasi</string>
     <string name="changeLanguage">Ganti Bahasa</string>
@@ -72,4 +72,25 @@
     <string name="noInternet">Tidak ada jaringan internet</string>
     <string name="retry">Coba lagi</string>
     <string name="comments">Komentar</string>
+    <string name="choose_filter">Pilih filter pencarian</string>
+    <string name="channels">Channel</string>
+    <string name="all">Semua</string>
+    <string name="playlists">Daftar Putar</string>
+    <string name="okay">OK</string>
+    <string name="history">Riwayat</string>
+    <string name="search_history">Riwayat Pencarian</string>
+    <string name="clear_history">Bersihkan Riwayat</string>
+    <string name="music_songs">YT Musik Lagu</string>
+    <string name="music_videos">YT Musik Video</string>
+    <string name="sponsorblock_state">Aktifkan</string>
+    <string name="music_albums">YT Musik Album</string>
+    <string name="music_playlists">YT Daftar Putar Musik</string>
+    <string name="defaultTab">Tab Default</string>
+    <string name="sponsorblock">BlokSponsor</string>
+    <string name="sponsorblock_summary">Pakai API dari https://sponsor.ajay.app/</string>
+    <string name="segment_skipped">Lewati segmen</string>
+    <string name="category_sponsor">Sponsor</string>
+    <string name="category_segments">Segmen</string>
+    <string name="category_sponsor_description">Promosi berbayar, referral berbayar dan iklan langsung. Tidak untuk promosi-diri atau ciutan gratis untuk penyebab/kreator/situs/produk yang disukai</string>
+    <string name="category_selfpromo">Tidak berbayar/Promosi Diri</string>
 </resources>
