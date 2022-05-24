@@ -110,4 +110,6 @@
     <string name="oledTheme">OLED 主题</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">通知</string>
+    <string name="enabled">已启用</string>
+    <string name="disabled">已停用</string>
 </resources>
