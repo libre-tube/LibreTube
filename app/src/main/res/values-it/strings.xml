@@ -107,4 +107,7 @@
     <string name="oledTheme">Tema OLED</string>
     <string name="clear_history">Cancella la cronologia</string>
     <string name="material_you">Material You</string>
+    <string name="sponsorblock_notifications">Notifiche</string>
+    <string name="enabled">Abilitato</string>
+    <string name="disabled">Disabilitato</string>
 </resources>
