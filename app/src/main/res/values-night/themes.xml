@@ -106,10 +106,11 @@
     <style name="Theme.OLED" parent="Theme.Material3.Dark.NoActionBar">
 
         <item name="android:colorBackground">@color/black</item>
+        <item name="colorSurface">@color/black</item>
+
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-
     </style>
 
 </resources>
