@@ -37,9 +37,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="28dp"
+                    android:layout_marginEnd="30dp"
                     android:text="Video Title"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
 
                 <ImageView
