@@ -93,7 +93,7 @@
     <string name="sponsorblock_state">Ieslēgts</string>
     <string name="category_sponsor_description">Apmaksāta reklāma, apmaksāta pieminēšana un tiešas reklāmas. Ne pašreklamēšanās vai bezmaksas reklāmas veidotājiem/mājaslapām/produktiem, kas viņiem patīk.</string>
     <string name="category_selfpromo_description">Līdzīgs \"sponsoram\", taču neapmaksātām reklāmām vai pašreklamēšanai. Tas ietver sadaļas par precēm, ziedošanu vai informāciju par to, ar kuru viņi sadarbojās.</string>
-    <string name="license">License</string>
+    <string name="license">Licence</string>
     <string name="color_accent">Krāsu akcents</string>
     <string name="color_red">Sarkans</string>
     <string name="color_blue">Zils</string>
@@ -110,4 +110,6 @@
     <string name="customization">Pielāgošana</string>
     <string name="website">Mājaslapa</string>
     <string name="sponsorblock_notifications">Notifikācijas</string>
+    <string name="enabled">Ieslēgts</string>
+    <string name="disabled">Izslēgts</string>
 </resources>
