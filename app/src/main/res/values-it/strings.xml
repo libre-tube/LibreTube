@@ -100,7 +100,7 @@
     <string name="license">Licenza</string>
     <string name="color_accent">Accento di colore</string>
     <string name="color_red">Rosso</string>
-    <string name="color_blue">Blu</string>
+    <string name="color_blue">Blu pixel</string>
     <string name="color_yellow">Giallo</string>
     <string name="color_green">Verde</string>
     <string name="color_purple">Viola</string>
@@ -110,4 +110,6 @@
     <string name="sponsorblock_notifications">Notifiche</string>
     <string name="enabled">Abilitato</string>
     <string name="disabled">Disabilitato</string>
+    <string name="category_outro">Titoli di coda/Crediti</string>
+    <string name="category_outro_description">Crediti o quando appaiono le miniature di YouTube. Non deve essere usato se contengono informazioni rilevanti.</string>
 </resources>
