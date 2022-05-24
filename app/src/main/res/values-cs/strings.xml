@@ -75,7 +75,7 @@
     <string name="defaultTab">Výchozí karta</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Používá API z https://sponsor.ajay.app/</string>
-    <string name="segment_skipped">Segment přeskočen.</string>
+    <string name="segment_skipped">Segment přeskočen</string>
     <string name="sponsorblock_state">Povolený</string>
     <string name="category_segments">Segmenty</string>
     <string name="category_sponsor">Sponzor</string>
@@ -88,4 +88,28 @@
     <string name="category_intro_description">Interval bez skutečného obsahu. Může to být pauza, statický snímek nebo opakující se animace. Nemělo by se používat pro přechody obsahující informace.</string>
     <string name="category_outro">Titulky</string>
     <string name="category_outro_description">Titulky nebo návrhy jiných videí na konci videa. Ne pro závěry s informacemi.</string>
+    <string name="channels">Kanály</string>
+    <string name="all">Vše</string>
+    <string name="choose_filter">Vyberte filtr hledání</string>
+    <string name="playlists">Seznamy videí</string>
+    <string name="okay">OK</string>
+    <string name="history">Historie</string>
+    <string name="search_history">Prohledat historii</string>
+    <string name="clear_history">Vyčistit historii</string>
+    <string name="music_songs">Hudba YT Music</string>
+    <string name="music_videos">Videa YT Music</string>
+    <string name="music_albums">Alba YT Music</string>
+    <string name="music_playlists">Seznamy videí YT Music</string>
+    <string name="license">Licence</string>
+    <string name="color_blue">Pixel modrá</string>
+    <string name="color_accent">Barevný akcent</string>
+    <string name="color_red">Červená</string>
+    <string name="color_yellow">Žlutá</string>
+    <string name="color_green">Zelená</string>
+    <string name="color_purple">Fialová</string>
+    <string name="oledTheme">OLED motiv</string>
+    <string name="material_you">Material You</string>
+    <string name="sponsorblock_notifications">Upozornění</string>
+    <string name="enabled">Povoleno</string>
+    <string name="disabled">Zakázáno</string>
 </resources>
