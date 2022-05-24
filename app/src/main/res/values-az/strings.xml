@@ -5,11 +5,11 @@
     <string name="search_hint">Axtarın</string>
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Olun</string>
-    <string name="unsubscribe">Abunəlikdən çıxın</string>
+    <string name="unsubscribe">Abunəlikdən Çıxın</string>
     <string name="share">Paylaşın</string>
-    <string name="save">Yadda saxlayın</string>
+    <string name="save">Saxlayın</string>
     <string name="download">Endirin</string>
-    <string name="username">İstifadəçi adınız</string>
+    <string name="username">İstifadəçi Adınız</string>
     <string name="password">Parol</string>
     <string name="login">Daxil olun</string>
     <string name="register">Qeydiyyatdan keçin</string>
@@ -30,10 +30,10 @@
     <string name="choose_filter">Axtarış filtrini seçin</string>
     <string name="channels">Kanallar</string>
     <string name="playlists">Pleylistlər</string>
-    <string name="okay">OK</string>
+    <string name="okay">Oldu</string>
     <string name="history">Tarixçə</string>
     <string name="search_history">Axtarış Tarixçəsi</string>
-    <string name="clear_history">Tarixçəni təmizləyin</string>
+    <string name="clear_history">Tarixçəni Təmizləyin</string>
     <string name="music_albums">YT Musiqi Albomları</string>
     <string name="music_songs">YT Musiqi Mahnıları</string>
     <string name="music_videos">YT Musiqi Videoları</string>
@@ -42,7 +42,7 @@
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app/ saytından API istifadə edir</string>
     <string name="category_intro_description">Aktual məzmunu olmayan bir aralıq.Fasilə, statik çərçivə, təkrarlanan animasiya ola bilər. Bu məlumatı ehtiva edən keçidlər üçün istifadə edilməməlidir.</string>
-    <string name="category_outro">Bitiş kartları/Jenerik</string>
+    <string name="category_outro">Bitiş Kartları/Töhfə Verənlər</string>
     <string name="category_outro_description">YouTube bitiş kartları göründüyü zaman. Məlumatla nəticə çıxarmaq üçün deyil.</string>
     <string name="category_segments">Seqmentlər</string>
     <string name="category_sponsor">Sponsor</string>
@@ -60,17 +60,17 @@
     <string name="category_sponsor_description">Ödənişli reklam, yönləndirmə və birbaşa reklamlar. Özünü tanıtmaq və ya bəyəndikləri səbəblərə/yaradıcılara/veb-saytlara/məhsullara pulsuz çağırışlar üçün deyil.</string>
     <string name="category_interaction">İnteraksiya Xatırlatma (Abunə olun)</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
-    <string name="login_register">Daxil ol/Qeydiyyatdan keçin</string>
+    <string name="login_register">Daxil olun/Qeydiyyatdan keçin</string>
     <string name="please_login">Zəhmət olmasa əvvəlcə tənzimləmələrdə daxil olun və ya qeydiyyatdan keçin.</string>
-    <string name="importsuccess">Abunə olundu</string>
+    <string name="importsuccess">Abunə Olundu</string>
     <string name="subscribeIsEmpty">Əvvəlcə bəzi kanallara abunə olun.</string>
     <string name="cannotDownload">Bu yayımı endirmək mümkün deyil.</string>
-    <string name="dlcomplete">Yükləmə tamamlandı.</string>
-    <string name="dlisinprogress">Digər endirmə artıq davam edir. Zəhmət olmasa, bitənə qədər gözləyin.</string>
-    <string name="downloadfailed">Yükləmək alınmadı.</string>
+    <string name="dlcomplete">Endirmə tamamlandı.</string>
+    <string name="dlisinprogress">Digər endirmə hələdə davam edir. Zəhmət olmasa, bitənə qədər gözləyin.</string>
+    <string name="downloadfailed">Endirmək alınmadı.</string>
     <string name="vlc">VLC-də açın</string>
     <string name="vlcerror">VLC-də açmaq mümkün deyil. Cihazınızda quraşdırdığınıza əminsiniz\?</string>
-    <string name="import_from_yt">Abunəlikləri idxal edin</string>
+    <string name="import_from_yt">Abunəlikləri İdxal Edin</string>
     <string name="import_from_yt_summary">YouTube vəya NewPipe dan</string>
     <string name="app_theme">Mövzu</string>
     <string name="server_error">Serverdə problem var. Başqa bir serveri cəhd edə bilərsiniz\?</string>
@@ -93,7 +93,7 @@
     <string name="systemLanguage">Sistem Dili</string>
     <string name="systemDefault">Sistem Defoltu</string>
     <string name="lightTheme">Açıq Mövzu</string>
-    <string name="darkTheme">Qaranlıq Mövzu</string>
+    <string name="darkTheme">Tünd Mövzu</string>
     <string name="subscribers">%1$s abunəçi</string>
     <string name="videoCount">%1$s video</string>
     <string name="settings">Tənzimləmələr</string>
@@ -110,4 +110,6 @@
     <string name="oledTheme">OLED Teması</string>
     <string name="material_you">Material Dizaynı</string>
     <string name="sponsorblock_notifications">Bildirişlər</string>
+    <string name="enabled">Aktivdir</string>
+    <string name="disabled">Qeyri-aktivdir</string>
 </resources>
