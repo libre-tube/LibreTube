@@ -108,4 +108,8 @@
     <string name="color_green">Grün</string>
     <string name="color_purple">Lila</string>
     <string name="oledTheme">OLED-Farbschema</string>
+    <string name="material_you">Material You</string>
+    <string name="sponsorblock_notifications">Benachrichtigungen</string>
+    <string name="enabled">Aktiviert</string>
+    <string name="disabled">Deaktiviert</string>
 </resources>
