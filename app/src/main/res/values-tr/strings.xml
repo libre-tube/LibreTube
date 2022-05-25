@@ -111,5 +111,5 @@
     <string name="color_red">Kırmızı</string>
     <string name="sponsorblock_notifications">Bildirimler</string>
     <string name="enabled">Etkinleştirildi</string>
-    <string name="disabled">Engellendi</string>
+    <string name="disabled">Devre dışı bırakıldı</string>
 </resources>
