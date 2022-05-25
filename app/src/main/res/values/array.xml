@@ -538,4 +538,25 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+    <string-array name="icons">
+        <item>Default</item>
+        <item>Legacy</item>
+        <item>Gradient</item>
+        <item>Fire</item>
+        <item>Torch</item>
+        <item>Shaped</item>
+        <item>Flame</item>
+        <item>Bird</item>
+    </string-array>
+    <string-array name="iconsValue">
+        <item>MainActivity</item>
+        <item>IconLegacy</item>
+        <item>IconGradient</item>
+        <item>IconFire</item>
+        <item>IconTorch</item>
+        <item>IconShaped</item>
+        <item>IconFlame</item>
+        <item>IconBird</item>
+    </string-array>
 </resources>

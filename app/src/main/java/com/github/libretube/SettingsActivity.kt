@@ -253,10 +253,15 @@ class SettingsActivity :
                 true
             }
 
+            val iconChange = findPreference<ListPreference>("icon_change")
+            iconChange?.setOnPreferenceChangeListener { _, newValue ->
+                changeIcon(requireContext(), newValue.toString())
+                true
+            }
+
             val changeLanguage = findPreference<ListPreference>("language")
             changeLanguage?.setOnPreferenceChangeListener { _, _ ->
-                val refresh = Intent(context, MainActivity::class.java)
-                startActivity(refresh)
+                restartMainActivity(requireContext())
                 true
             }
 
@@ -379,8 +384,7 @@ class SettingsActivity :
         if (isCurrentViewMainSettings) {
             PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this)
-            intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            restartMainActivity(this)
         } else {
             isCurrentViewMainSettings = true
             supportFragmentManager

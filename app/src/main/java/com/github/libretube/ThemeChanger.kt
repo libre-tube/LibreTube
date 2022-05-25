@@ -1,9 +1,12 @@
 package com.github.libretube
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
-import java.util.Locale
+import java.util.*
 
 fun updateAccentColor(context: Context) {
     val colorAccent =
@@ -52,4 +55,30 @@ fun updateLanguage(context: Context) {
         Locale.setDefault(locale)
         res.updateConfiguration(conf, dm)
     }
+}
+
+fun changeIcon(context: Context, newLogoActivityAlias: String) {
+    val activityAliases = context.resources.getStringArray(R.array.iconsValue)
+    // Disable Old Icon(s)
+    for (activityAlias in activityAliases) {
+        context.packageManager.setComponentEnabledSetting(
+            ComponentName(context.packageName, "com.github.libretube.$activityAlias"),
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP
+        )
+    }
+    // Enable New Icon
+    context.packageManager.setComponentEnabledSetting(
+        ComponentName(context.packageName, "com.github.libretube.$newLogoActivityAlias"),
+        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+        PackageManager.DONT_KILL_APP
+    )
+}
+
+// Needed due to different MainActivity Aliases because of the app icons
+fun restartMainActivity(context: Context) {
+    val pm: PackageManager = context.packageManager
+    val intent = pm.getLaunchIntentForPackage(context.packageName)
+    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    context.startActivity(intent)
 }
