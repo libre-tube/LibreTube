@@ -102,11 +102,14 @@
     <string name="category_sponsor_description">Promotion payée, références payées et publicités directes. Il ne s\'agit pas d\'autopromotion ou de citation gratuite de causes/créateurs/sites web/produits qu\'ils aiment.</string>
     <string name="category_interaction">Rappel d\'interaction (S\'abonner)</string>
     <string name="color_purple">Violet</string>
-    <string name="color_blue">Bleu</string>
+    <string name="color_blue">Bleu pixel</string>
     <string name="color_accent">Accentuation des couleurs</string>
     <string name="color_red">Rouge</string>
     <string name="color_yellow">Jaune</string>
     <string name="oledTheme">Thème OLED</string>
     <string name="material_you">Material You</string>
     <string name="color_green">Vert</string>
+    <string name="sponsorblock_notifications">Notifications</string>
+    <string name="enabled">Activé</string>
+    <string name="disabled">Désactivé</string>
 </resources>
