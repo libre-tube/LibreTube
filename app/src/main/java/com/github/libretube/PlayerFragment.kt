@@ -297,7 +297,7 @@ class PlayerFragment : Fragment() {
 
     override fun onStop() {
         try {
-            exoPlayer.release()
+            exoPlayer.pause()
         } catch (e: Exception) {
         }
         super.onStop()
