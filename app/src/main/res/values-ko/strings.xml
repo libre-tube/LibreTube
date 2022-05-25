@@ -103,11 +103,13 @@
     <string name="license">라이선스</string>
     <string name="oledTheme">OLED 테마</string>
     <string name="color_accent">컬러 액센트</string>
-    <string name="color_blue">파란색</string>
+    <string name="color_blue">픽셀 블루</string>
     <string name="material_you">머터리얼</string>
     <string name="color_green">초록색</string>
     <string name="color_red">빨간색</string>
     <string name="color_yellow">노란색</string>
     <string name="color_purple">보라색</string>
     <string name="sponsorblock_notifications">알림</string>
+    <string name="enabled">활성화</string>
+    <string name="disabled">비활성화</string>
 </resources>
