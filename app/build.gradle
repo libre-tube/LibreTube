@@ -70,6 +70,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
+    implementation 'com.google.android.exoplayer:extension-mediasession:2.17.1'
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
