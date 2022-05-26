@@ -688,18 +688,35 @@ class PlayerFragment : Fragment() {
                     view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
                         val sharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        val intent = Intent()
-                        intent.action = Intent.ACTION_SEND
-                        var url = "https://piped.kavin.rocks/watch?v=$videoId"
-                        val instance = sharedPreferences.getString(
+                        val instancePref = sharedPreferences.getString(
                             "instance",
                             "https://pipedapi.kavin.rocks"
                         )!!
-                        if (instance != "https://pipedapi.kavin.rocks")
-                            url += "&instance=${URLEncoder.encode(instance, "UTF-8")}"
-                        intent.putExtra(Intent.EXTRA_TEXT, url)
-                        intent.type = "text/plain"
-                        startActivity(Intent.createChooser(intent, "Share Url To:"))
+                        val instance = "&instance=${URLEncoder.encode(instancePref, "UTF-8")}"
+                        val shareOptions = arrayOf(
+                            getString(R.string.piped),
+                            getString(R.string.instance),
+                            getString(R.string.youtube)
+                        )
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(getString(R.string.share))
+                            .setItems(
+                                shareOptions,
+                                DialogInterface.OnClickListener { _, id ->
+                                    val url = when (id) {
+                                        0 -> "https://piped.kavin.rocks/watch?v=$videoId"
+                                        1 -> "https://piped.kavin.rocks/watch?v=$videoId$instance"
+                                        2 -> "https://youtu.be/$videoId"
+                                        else -> "https://piped.kavin.rocks/watch?v=$videoId"
+                                    }
+                                    val intent = Intent()
+                                    intent.action = Intent.ACTION_SEND
+                                    intent.putExtra(Intent.EXTRA_TEXT, url)
+                                    intent.type = "text/plain"
+                                    startActivity(Intent.createChooser(intent, "Share Url To:"))
+                                }
+                            )
+                            .show()
                     }
                     // check if livestream
                     if (response.duration!! > 0) {
