@@ -22,7 +22,7 @@
     <string name="dlcomplete">Scaricamento completato.</string>
     <string name="downloadfailed">Scaricamento fallito.</string>
     <string name="vlc">Apri in VLC</string>
-    <string name="vlcerror">Impossibile aprirlo in VLC. Forse non è ancora installato\?</string>
+    <string name="vlcerror">Non si può aprire in VLC. Potrebbe non essere installato.</string>
     <string name="import_from_yt">Importa iscrizioni da YouTube</string>
     <string name="app_theme">Tema dell\'app</string>
     <string name="error">Qualcosa è andato storto.</string>
@@ -112,4 +112,5 @@
     <string name="disabled">Disabilitato</string>
     <string name="category_outro">Titoli di coda/Crediti</string>
     <string name="category_outro_description">Crediti o quando appaiono le miniature di YouTube. Non deve essere usato se contengono informazioni rilevanti.</string>
+    <string name="app_icon">Icona dell\'app</string>
 </resources>
