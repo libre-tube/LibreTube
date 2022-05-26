@@ -26,7 +26,7 @@
     <string name="downloadfailed">Téléchargement échoué.</string>
     <string name="vlc">Ouvrir avec VLC</string>
     <string name="registered">Inscription réussie ! Vous pouvez maintenant vous abonner aux canaux souhaité .</string>
-    <string name="vlcerror">Impossible d\'ouvrir avec VLC . L\'application n\'est peut-être pas installé \?</string>
+    <string name="vlcerror">Impossible de l\'ouvrir dans VLC. Il se peut qu\'il ne soit pas installé.</string>
     <string name="app_theme">Thème de l\'appli</string>
     <string name="already_logged_in">Vous êtes déjà connecté(e), vous pouvez vous déconnecter.</string>
     <string name="region">Sélectionner une région</string>
@@ -112,4 +112,5 @@
     <string name="sponsorblock_notifications">Notifications</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
+    <string name="app_icon">Icône de l\'appli</string>
 </resources>
