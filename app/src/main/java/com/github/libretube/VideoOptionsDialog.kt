@@ -15,7 +15,7 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
     /**
      * List that stores the different menu options. In the future could be add more options here.
      */
-    private val list = listOf("Background mode")
+    private val list = listOf("Play on background")
 
     /**
      * Dialog that returns a [MaterialAlertDialogBuilder] showing a menu of options.

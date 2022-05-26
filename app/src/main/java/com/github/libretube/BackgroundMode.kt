@@ -1,10 +1,11 @@
 package com.github.libretube
 
 import android.content.Context
+import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaMetadata
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -24,42 +25,53 @@ class BackgroundMode {
     private var player: ExoPlayer? = null
     private var playWhenReadyPlayer = true
 
-    private var playerNotificationManager: PlayerNotificationManager? = null
+    /**
+     * The [MediaSessionCompat] for the [response].
+     */
+    private lateinit var mediaSession: MediaSessionCompat
 
     /**
-     * Initializes the [player] player with the [MediaItem].
+     * The [MediaSessionConnector] to connect with the [mediaSession] and implement it with the [player].
+     */
+    private lateinit var mediaSessionConnector: MediaSessionConnector
+
+    /**
+     * The [PlayerNotificationManager] to load the [mediaSession] content on it.
+     */
+    private lateinit var playerNotification: PlayerNotificationManager
+
+    /**
+     * Initializes the [player] with the [MediaItem].
      */
     private fun initializePlayer(c: Context) {
         if (player == null) player = ExoPlayer.Builder(c).build()
-        setMediaItem()
+        setMediaItem(c)
     }
 
     /**
-     * Initializes the [playerNotificationManager] attached to the [player].
+     * Initializes the [playerNotification] attached to the [player] and shows it.
      */
     private fun initializePlayerNotification(c: Context) {
-        playerNotificationManager =
-            PlayerNotificationManager.Builder(c, 1, "background_mode").build()
-        playerNotificationManager?.setPlayer(player)
+        playerNotification = PlayerNotificationManager.Builder(c, 1, "background_mode").build()
+        playerNotification.setPlayer(player)
+        playerNotification.setMediaSessionToken(mediaSession.sessionToken)
     }
 
     /**
-     * Sets the [MediaItem] with the [response] into the [player].
+     * Sets the [MediaItem] with the [response] into the [player]. Also creates a [MediaSessionConnector]
+     * with the [mediaSession] and attach it to the [player].
      */
-    private fun setMediaItem() {
+    private fun setMediaItem(c: Context) {
         response?.let {
-            // Builds the song metadata
-            val metaData = MediaMetadata.Builder()
-                .setTitle(it.title)
-                .build()
-            // Builds the song item
-            val mediaItem = MediaItem.Builder()
-                .setUri(it.hls!!)
-                .setMediaMetadata(metaData)
-                .build()
-
+            val mediaItem = MediaItem.Builder().setUri(it.hls!!).build()
             player?.setMediaItem(mediaItem)
         }
+
+        mediaSession = MediaSessionCompat(c, this.javaClass.name)
+        mediaSession.isActive = true
+
+        mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setPlayer(player)
     }
 
     /**

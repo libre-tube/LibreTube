@@ -20,7 +20,7 @@ class myApp : Application() {
             // Create the NotificationChannel
             val name = "Background Mode"
             val descriptionText = "Shows a notification with buttons to control the audio player"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val importance = NotificationManager.IMPORTANCE_LOW
             val mChannel = NotificationChannel("background_mode", name, importance)
             mChannel.description = descriptionText
 
