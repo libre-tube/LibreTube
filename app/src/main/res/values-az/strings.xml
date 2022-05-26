@@ -113,4 +113,6 @@
     <string name="enabled">Aktivdir</string>
     <string name="disabled">Qeyri-aktivdir</string>
     <string name="app_icon">Tətbiq Nişanı</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
 </resources>
