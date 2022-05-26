@@ -18,7 +18,6 @@ import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.formatShort
 import com.github.libretube.obj.StreamItem
-import com.squareup.picasso.Picasso
 
 class TrendingAdapter(
     private val videoFeed: List<StreamItem>,

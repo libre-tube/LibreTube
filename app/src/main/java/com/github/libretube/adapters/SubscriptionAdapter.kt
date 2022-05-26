@@ -10,15 +10,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
-import com.github.libretube.PlayerFragment
-import com.github.libretube.R
-import com.github.libretube.formatShort
+import com.github.libretube.*
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
 
-class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
+class SubscriptionAdapter(
+    private val videoFeed: List<StreamItem>,
+    private val childFragmentManager: FragmentManager
+) :
     RecyclerView.Adapter<SubscriptionViewHolder>() {
     // private var limitedVideoFeed: MutableList<String> = [""].toMutableList()
     var i = 0
@@ -45,8 +46,8 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
         holder.v.findViewById<TextView>(R.id.textView_channel).text =
             trending.uploaderName + " • " +
-            trending.views.formatShort() + " • " +
-            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+                    trending.views.formatShort() + " • " +
+                    DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
         holder.v.findViewById<TextView>(R.id.thumbnail_duration).text =
             DateUtils.formatElapsedTime(trending.duration!!)
@@ -78,6 +79,11 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.container, frag)
                 .commitNow()
+        }
+        holder.v.setOnLongClickListener {
+            val videoId = trending.url!!.replace("/watch?v=", "")
+            VideoOptionsDialog(videoId).show(childFragmentManager, VideoOptionsDialog.TAG)
+            true
         }
     }
 }
