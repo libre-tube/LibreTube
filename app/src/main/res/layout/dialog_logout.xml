@@ -3,13 +3,16 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
-        android:src="@drawable/ic_libretube_foreground"
+
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="center"
-        android:background="#CD5757"
-        android:contentDescription="@string/app_name" />
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        />
 
     <TextView
         android:id="@+id/user"
@@ -24,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logout"
+            android:textColor="?attr/colorSurface"
             android:padding="8dp"
             android:layout_margin="8dp"
             android:layout_gravity="center"/>

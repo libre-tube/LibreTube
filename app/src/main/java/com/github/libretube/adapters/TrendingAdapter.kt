@@ -16,8 +16,9 @@ import com.github.libretube.*
 import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.obj.StreamItem
+import com.squareup.picasso.Picasso
 
 class TrendingAdapter(
     private val videoFeed: List<StreamItem>,
@@ -29,18 +30,22 @@ class TrendingAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.trending_row,parent,false)
+        val cell = layoutInflater.inflate(R.layout.trending_row, parent, false)
         return CustomViewHolder(cell)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.formatShort()+" • "+DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.textView_channel).text =
+            trending.uploaderName + " • " +
+            trending.views.formatShort() + " • " +
+            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
-        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
+        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
-        channelImage.setOnClickListener{
+        channelImage.setOnClickListener {
             val activity = holder.v.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
@@ -50,23 +55,21 @@ class TrendingAdapter(
                     mainMotionLayout.transitionToEnd()
                     activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                 }
-            }catch (e: Exception){
-
+            } catch (e: Exception) {
             }
         }
         if (trending.thumbnail!!.isEmpty()) {
-        } else{
+        } else {
             Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         }
         if (trending.uploaderAvatar!!.isEmpty()) {
-        } else{
+        } else {
             Picasso.get().load(trending.uploaderAvatar).into(channelImage)
         }
 
-
-        holder.v.setOnClickListener{
+        holder.v.setOnClickListener {
             var bundle = Bundle()
-            bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))
+            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = holder.v.context as AppCompatActivity
@@ -84,7 +87,8 @@ class TrendingAdapter(
         }
     }
 }
-class CustomViewHolder(val v: View): RecyclerView.ViewHolder(v){
+
+class CustomViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }

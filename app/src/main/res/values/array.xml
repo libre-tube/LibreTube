@@ -405,17 +405,114 @@
         <item>ZW</item>
     </string-array>
 
+    <string-array name="languages">
+        <item>@string/systemLanguage</item>
+        <item>Arabic</item>
+        <item>Azerbaijani</item>
+        <item>Chinese (simplified)</item>
+        <item>Czech</item>
+        <item>English</item>
+        <item>Finnish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Greek</item>
+        <item>Gujarati</item>
+        <item>Hindi</item>
+        <item>Hungarian</item>
+        <item>Indonesian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Latvian</item>
+        <item>Malayalam</item>
+        <item>Marathi</item>
+        <item>Norwegian</item>
+        <item>Persian</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Portuguese (Brazil)</item>
+        <item>Russian</item>
+        <item>Sorani</item>
+        <item>Spanish</item>
+        <item>Turkish</item>
+    </string-array>
+
+    <string-array name="languagesValue">
+        <item>sys</item>
+        <item>ar</item>
+        <item>az</item>
+        <item>zh</item>
+        <item>cs</item>
+        <item>en</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>de</item>
+        <item>el</item>
+        <item>gu</item>
+        <item>hi</item>
+        <item>hu</item>
+        <item>in</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>lv</item>
+        <item>ml</item>
+        <item>mr</item>
+        <item>nb-rNO</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>pt-rBR</item>
+        <item>ru</item>
+        <item>ckb</item>
+        <item>es</item>
+        <item>tr</item>
+    </string-array>
+
     <string-array name="themes">
-        <item>System Default</item>
-        <item>Light Theme</item>
-        <item>Dark Theme</item>
+        <item>@string/systemDefault</item>
+        <item>@string/lightTheme</item>
+        <item>@string/darkTheme</item>
+        <item>@string/oledTheme</item>
     </string-array>
 
     <string-array name="themesValue">
         <item>A</item>
         <item>L</item>
         <item>D</item>
+        <item>O</item>
     </string-array>
+
+    <string-array name="accents">
+        <item>@string/material_you</item>
+        <item>@string/color_red</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_green</item>
+        <item>@string/color_purple</item>
+    </string-array>
+
+    <string-array name="accentsValue">
+        <item>my</item>
+        <item>red</item>
+        <item>blue</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>purple</item>
+    </string-array>
+
+    <string-array name="tabs">
+        <item>@string/startpage</item>
+        <item>@string/subscriptions</item>
+        <item>@string/library</item>
+    </string-array>
+
+    <string-array name="tabsValue">
+        <item>home</item>
+        <item>subscriptions</item>
+        <item>library</item>
+    </string-array>
+
     <string-array name="defres">
         <item>HLS</item>
         <item>1080p</item>
@@ -440,5 +537,26 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+
+    <string-array name="icons">
+        <item>Default</item>
+        <item>Legacy</item>
+        <item>Gradient</item>
+        <item>Fire</item>
+        <item>Torch</item>
+        <item>Shaped</item>
+        <item>Flame</item>
+        <item>Bird</item>
+    </string-array>
+    <string-array name="iconsValue">
+        <item>MainActivity</item>
+        <item>IconLegacy</item>
+        <item>IconGradient</item>
+        <item>IconFire</item>
+        <item>IconTorch</item>
+        <item>IconShaped</item>
+        <item>IconFlame</item>
+        <item>IconBird</item>
     </string-array>
 </resources>

@@ -1,15 +1,16 @@
 <div align="center">
-  <img src="https://avatars.githubusercontent.com/u/96022078?s=200&v=4" width="150" height="150" alt="LibreTube">
-  <h1>LibreTube</h1>
-  <p>Alternative YouTube frontend for Android<br />built with <a href="https://github.com/TeamPiped/Piped">Piped</a></p>
+  <img src="https://libre-tube.github.io/assets/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
-[![GPL-v3](https://shields.io/badge/License-GPL%20v3-red.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Matrix](https://badges.alefvanoon.xyz/matrix/LibreTube:matrix.org)](https://matrix.to/#/#LibreTube:matrix.org)
-
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
-[<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
+[![GPL-v3](https://libre-tube.github.io/assets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![Matrix](https://libre-tube.github.io/assets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org)
+[![Telegram](https://libre-tube.github.io/assets/tg-widget.svg)](https://t.me/libretube)
+[![Twitter](https://libre-tube.github.io/assets/tw-widget.svg)](https://twitter.com/libretube)
+[![Reddit](https://libre-tube.github.io/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
+ 
+[<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
+[<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="https://libre-tube.github.io/assets/tgload.png" alt="Get it on GitHub" height="80">](https://t.me/LibreTube)
 </div>
-WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
 
 ## Screenshots
 
@@ -25,22 +26,32 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 ## Features
 
-| Feature  | Availability |
+| Feature ||
 | - | - |
 | User Accounts | ✅ |
-| Subscriptions | ✅ ||
-| User Playlists | 🔴 |
-| Trending | ✅ |
-| Channels | ✅ |
+| Subscriptions | ✅ |
+| User Playlists | ✅ |
 | Channel Playlists | ✅ |
-| Search | ✅ |
-| Search Suggestions | ✅ |
-| Search Filters | 🔴 |
+| Search Filters | ✅ |
+| SponsorBlock | ✅ |
 | Subtitles | ✅ |
-| Comments | 🔴 |
+| Comments | ✅ |
 
 
 ## Contributing
-If you're interested in contributing, you can browse the [issues](https://github.com/libre-tube/libretube/issues) list or create a new one to discuss your feature idea. Every contribution is very welcome.
+Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done the better it gets!
+
+WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OPEN AN ISSUE VIA OUR GITHUB REPOSITORY.
+
+### Translation
+<a href="https://hosted.weblate.org/projects/libretube/#languages">
+<img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
+</a>
+
 ### Donate
-**BTC:** `bc1qfcgqwddr894mywn9rk2crzlgvlac3prkwhdrdq`
+**BTC:** `bc1q0hk2smc74ej8fxupfrp05wk867e54e2zztnxfc`
+
+**XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`
+
+## Mirrors (read-only)
+<a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>

@@ -16,6 +16,6 @@ data class StreamItem(
     var uploaderVerified: Boolean?,
     var uploaded: Long?,
     var shortDescription: String?
-){
-    constructor() : this("","","","","","","",0,0,null,0,"")
+) {
+    constructor() : this("", "", "", "", "", "", "", 0, 0, null, 0, "")
 }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/location">
+
     <ListPreference
         app:key="region"
         app:title="@string/region"
@@ -8,8 +11,23 @@
         app:entryValues="@array/regionsValue"
         app:defaultValue="US"
         app:useSimpleSummaryProvider="true"
-        android:icon="@drawable/ic_language"
+        android:icon="@drawable/ic_region"
         />
+
+    <ListPreference
+        app:key="language"
+        app:title="@string/changeLanguage"
+        app:entries="@array/languages"
+        app:entryValues="@array/languagesValue"
+        app:defaultValue="sys"
+        app:useSimpleSummaryProvider="true"
+        android:icon="@drawable/ic_translate"
+        />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/instance">
 
     <ListPreference
         app:key="instance"
@@ -19,23 +37,30 @@
         app:defaultValue="https://pipedapi.kavin.rocks/"
         android:icon="@drawable/ic_server"
         />
+
     <androidx.preference.EditTextPreference
     app:key="customInstance"
     app:title="@string/customInstance"
         app:isPreferenceVisible="false"/>
+
     <androidx.preference.Preference
         app:key="login_register"
         app:title="@string/login_register"
         android:icon="@drawable/ic_login"
         android:summary="@string/notgmail"
         />
+
     <androidx.preference.Preference
         app:key="import_from_yt"
         app:title="@string/import_from_yt"
-        android:hint="This is my hint"
-        android:summary=""
-        android:icon="@drawable/ic_import"
+        android:summary="@string/import_from_yt_summary"
+        android:icon="@drawable/ic_upload"
         />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/customization">
 
     <ListPreference
         app:title="@string/app_theme"
@@ -45,6 +70,41 @@
         app:defaultValue="A"
         android:icon="@drawable/ic_theme"
         />
+
+        <ListPreference
+            app:title="@string/color_accent"
+            app:key="accent_color"
+            app:entries="@array/accents"
+            app:entryValues="@array/accentsValue"
+            app:defaultValue="red"
+            android:icon="@drawable/ic_color"
+            />
+
+        <ListPreference
+            app:title="@string/app_icon"
+            app:key="icon_change"
+            app:entries="@array/icons"
+            app:entryValues="@array/iconsValue"
+            app:defaultValue="MainActivity"
+            android:icon="@drawable/ic_color"
+            />
+
+    <androidx.preference.Preference
+        app:title="@string/sponsorblock"
+        app:key="sponsorblock"
+        app:summary="@string/sponsorblock_summary"
+        android:icon="@drawable/ic_block"
+        />
+
+    <ListPreference
+        app:title="@string/defaultTab"
+        app:key="default_tab"
+        app:entries="@array/tabs"
+        app:entryValues="@array/tabsValue"
+        app:defaultValue="home"
+        android:icon="@drawable/ic_home_outlined"
+        />
+
     <ListPreference
         app:title="@string/defres"
         app:key="default_res"
@@ -54,14 +114,46 @@
         android:icon="@drawable/ic_hd"
         app:useSimpleSummaryProvider="true"
         />
+
     <ListPreference
         app:title="@string/grid"
         app:key="grid"
         app:entries="@array/grid"
         app:entryValues="@array/grid"
         app:defaultValue="@integer/grid_items"
-        android:icon="@drawable/ic_column"
+        android:icon="@drawable/ic_grid"
         app:useSimpleSummaryProvider="true"
         />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/history">
+
+        <SwitchPreference
+            app:title="@string/search_history"
+            app:key="search_history_toggle"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_history" />
+
+        <Preference
+            app:title="@string/clear_history"
+            app:key="clear_history"
+            android:icon="@drawable/ic_delete" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/about">
+
+    <Preference
+        app:title="@string/website"
+        app:key="about"
+        android:icon="@drawable/ic_region" />
+
+        <Preference
+            app:title="@string/license"
+            app:key="license"
+            android:icon="@drawable/ic_info" />
+
+    </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

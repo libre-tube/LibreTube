@@ -12,41 +12,46 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
-import com.squareup.picasso.Picasso
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.formatShort
+import com.github.libretube.obj.StreamItem
+import com.squareup.picasso.Picasso
 
-class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView.Adapter<SubscriptionViewHolder>() {
-    //private var limitedVideoFeed: MutableList<String> = [""].toMutableList()
+class SubscriptionAdapter(private val videoFeed: List<StreamItem>) :
+    RecyclerView.Adapter<SubscriptionViewHolder>() {
+    // private var limitedVideoFeed: MutableList<String> = [""].toMutableList()
     var i = 0
     override fun getItemCount(): Int {
         return i
     }
 
-    fun updateItems(){
-        //limitedVideoFeed.add("")
+    fun updateItems() {
+        // limitedVideoFeed.add("")
         i += 10
-        if(i>videoFeed.size)
-            i=videoFeed.size
+        if (i > videoFeed.size)
+            i = videoFeed.size
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.trending_row,parent,false)
+        val cell = layoutInflater.inflate(R.layout.trending_row, parent, false)
         return SubscriptionViewHolder(cell)
     }
 
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
-        holder.v.findViewById<TextView>(R.id.textView_channel).text = trending.uploaderName +" • "+ trending.views.formatShort()+" • "+ DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+        holder.v.findViewById<TextView>(R.id.textView_channel).text =
+            trending.uploaderName + " • " +
+            trending.views.formatShort() + " • " +
+            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
-        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text = DateUtils.formatElapsedTime(trending.duration!!)
+        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text =
+            DateUtils.formatElapsedTime(trending.duration!!)
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
-        channelImage.setOnClickListener{
+        channelImage.setOnClickListener {
             val activity = holder.v.context as MainActivity
             val bundle = bundleOf("channel_id" to trending.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
@@ -56,15 +61,14 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
                     mainMotionLayout.transitionToEnd()
                     activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
                 }
-            }catch (e: Exception){
-
+            } catch (e: Exception) {
             }
         }
         Picasso.get().load(trending.thumbnail).into(thumbnailImage)
         Picasso.get().load(trending.uploaderAvatar).into(channelImage)
-        holder.v.setOnClickListener{
+        holder.v.setOnClickListener {
             var bundle = Bundle()
-            bundle.putString("videoId",trending.url!!.replace("/watch?v=",""))
+            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = holder.v.context as AppCompatActivity
@@ -77,7 +81,8 @@ class SubscriptionAdapter(private val videoFeed: List<StreamItem>): RecyclerView
         }
     }
 }
-class SubscriptionViewHolder(val v: View): RecyclerView.ViewHolder(v){
+
+class SubscriptionViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }

@@ -6,225 +6,208 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/player_scene"
-    tools:context=".PlayerFragment"
-    >
+    tools:context=".PlayerFragment">
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/player_scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorSurface"
+        android:background="?android:attr/colorBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_container"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/main_container">
 
         <LinearLayout
             android:id="@+id/linLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="vertical">
 
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/player_info_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/player_title_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/player_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:text="Loading..."
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/player_description_arrow"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/player_views_info"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-                        android:text=""
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toStartOf="@id/player_description_arrow"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/player_title" />
-
-                    <ImageView
-                        android:id="@+id/player_description_arrow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:paddingLeft="16dp"
-                        android:src="@drawable/ic_arrow_down"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/player_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:textSize="14sp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/player_title_layout" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="5"
-                android:baselineAligned="false">
+                android:id="@+id/player_title_layout"
+                android:orientation="horizontal">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/player_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="Video Title"
+                    android:textSize="18sp" />
 
-                    <ImageView
-                        android:id="@+id/player_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_like"
-                        android:contentDescription="like"/>
 
-                    <TextView
-                        android:id="@+id/textLike"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/player_like"
-                        android:layout_centerHorizontal="true"
-                        android:text="1K" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relPlayer_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground">
                 <ImageView
-                        android:id="@+id/player_share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_share" />
-
-                    <TextView
-                        android:id="@+id/textShare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/player_share"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/share" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relPlayer_download"
+                    android:id="@+id/player_description_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_arrow_down" />
 
-                    <ImageView
-                        android:id="@+id/player_download"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_download" />
+            </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/textDownload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/player_download"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/download" />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/relPlayer_vlc"
-                    android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/player_views_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:text="10M views    2 days ago " />
+
+            <TextView
+                android:id="@+id/player_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:padding="8dp"
+                android:textIsSelectable="true"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="17dp"
+                app:cardCornerRadius="27dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/player_vlc"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_vlc" />
+                        android:layout_weight=".25"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textVlc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/player_vlc"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/vlc" />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_like" />
 
-                    <ImageView
-                        android:id="@+id/player_save"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_save" />
+                        <TextView
+                            android:id="@+id/textLike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.2K" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textSave"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/relPlayer_share"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/player_save"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/save" />
-                </RelativeLayout>
-            </LinearLayout>
+                        android:layout_weight=".25"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_share" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/share" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/relPlayer_download"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_download" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/download"
+                            android:maxLines="1"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/relPlayer_vlc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_vlc" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="VLC" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/save"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".25"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_save" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/save" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <RelativeLayout
                 android:id="@+id/player_channel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 android:layout_marginStart="8dp"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/player_channelImage"
@@ -238,49 +221,113 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
                     android:layout_toStartOf="@+id/player_subscribe"
                     android:layout_toEndOf="@+id/player_channelImage"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text=""
-                    android:textStyle="bold" />
+                    android:textSize="15dp" />
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/player_subscribe"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:background="?android:attr/selectableItemBackground"
+                    android:drawableLeft="@drawable/ic_bell"
+                    android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="12dp"
+                    app:cornerRadius="11dp" />
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:descendantFocusability="blocksDescendants">
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/comments_toggle"
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="17dp"
+                    app:cardCornerRadius="27dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/commentsToggle_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="@string/comments"
+                            android:textSize="17sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/commentsToggle_imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
+                            android:src="@drawable/ic_arrow_up_down"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@id/comments_toggle"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/player_recView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/comments_recView"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:nestedScrollingEnabled="false" />
             </RelativeLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.35"
+        android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.35"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/colorSurface" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.libretube.CustomExoPlayerView
         android:id="@+id/player"

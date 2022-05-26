@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:key="sb_enabled_key"
+        app:title="@string/sponsorblock"
+        android:summaryOff="@string/disabled"
+        android:summaryOn="@string/enabled"/>
+
+        <SwitchPreferenceCompat
+            app:key="sb_notifications_key"
+            app:title="@string/sponsorblock_notifications"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled"/>
+
+    <PreferenceCategory app:title="@string/category_segments">
+
+    <SwitchPreferenceCompat
+        app:key="sponsors_category_key"
+        app:title="@string/category_sponsor"
+        app:summary="@string/category_sponsor_description"/>
+
+    <SwitchPreferenceCompat
+        app:key="selfpromo_category_key"
+        app:title="@string/category_selfpromo"
+        app:summary="@string/category_selfpromo_description"/>
+
+    <SwitchPreferenceCompat
+        app:key="interaction_category_key"
+        app:title="@string/category_interaction"
+        app:summary="@string/category_interaction_description"/>
+
+    <SwitchPreferenceCompat
+        app:key="intro_category_key"
+        app:title="@string/category_intro"
+        app:summary="@string/category_intro_description"/>
+
+    <SwitchPreferenceCompat
+        app:key="outro_category_key"
+        app:title="@string/category_outro"
+        app:summary="@string/category_outro_description"/>
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
