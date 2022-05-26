@@ -22,7 +22,7 @@
     <string name="dlcomplete">Download concluído.</string>
     <string name="downloadfailed">Falha no download.</string>
     <string name="vlc">Abrir no VLC</string>
-    <string name="vlcerror">Não é possível abrir no VLC. Talvez ainda não esteja instalado\?</string>
+    <string name="vlcerror">Não é possível abrir no VLC. Pode não estar instalado.</string>
     <string name="import_from_yt">Importar inscrições</string>
     <string name="app_theme">Tema</string>
     <string name="server_error">O servidor encontrou um problema. Talvez tentar outra instância\?</string>
@@ -103,10 +103,13 @@
     <string name="category_outro_description">Créditos ou quando as telas finais do YouTube aparecem.</string>
     <string name="color_accent">Cor de realce</string>
     <string name="color_red">Vermelho</string>
-    <string name="color_blue">Azul</string>
+    <string name="color_blue">Azul Pixel</string>
     <string name="color_yellow">Amarelo</string>
     <string name="color_green">Verde</string>
     <string name="color_purple">Roxo</string>
     <string name="oledTheme">Tema OLED</string>
     <string name="material_you">Material You</string>
+    <string name="app_icon">Ícone do aplicativo</string>
+    <string name="sponsorblock_notifications">Notificações</string>
+    <string name="enabled">Habilitado</string>
 </resources>
