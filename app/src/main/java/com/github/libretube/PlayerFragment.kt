@@ -2,7 +2,6 @@ package com.github.libretube
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -43,7 +42,6 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.RetrofitInstance.url
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
@@ -74,7 +72,6 @@ import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.base.ThreadUtils.runOnUiThread
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
@@ -695,6 +692,7 @@ class PlayerFragment : Fragment() {
                             "instance",
                             "https://pipedapi.kavin.rocks"
                         )!!
+                        val instanceStr = "&instance=${URLEncoder.encode(instance, "UTF-8")}"
                         val shareOptions = arrayOf(
                             getString(R.string.piped),
                             getString(R.string.instance),
@@ -706,7 +704,7 @@ class PlayerFragment : Fragment() {
                                 DialogInterface.OnClickListener { _, id ->
                                     val url = when (id) {
                                         0 -> "https://piped.kavin.rocks/watch?v=$videoId"
-                                        1 -> "https://piped.kavin.rocks/watch?v=$videoId" + "&instance=${URLEncoder.encode(instance, "UTF-8")}"
+                                        1 -> "https://piped.kavin.rocks/watch?v=$videoId$instanceStr"
                                         2 -> "https://youtu.be/$videoId"
                                         else -> "https://piped.kavin.rocks/watch?v=$videoId"
                                     }
