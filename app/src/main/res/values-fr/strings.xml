@@ -113,4 +113,6 @@
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
     <string name="app_icon">Icône de l\'appli</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
 </resources>
