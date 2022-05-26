@@ -688,15 +688,16 @@ class PlayerFragment : Fragment() {
                     view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
                         val sharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        val instance = sharedPreferences.getString(
+                        val instancePref = sharedPreferences.getString(
                             "instance",
                             "https://pipedapi.kavin.rocks"
                         )!!
-                        val instanceStr = "&instance=${URLEncoder.encode(instance, "UTF-8")}"
+                        val instance = "&instance=${URLEncoder.encode(instancePref, "UTF-8")}"
                         val shareOptions = arrayOf(
                             getString(R.string.piped),
                             getString(R.string.instance),
-                            getString(R.string.youtube))
+                            getString(R.string.youtube)
+                        )
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle(getString(R.string.share))
                             .setItems(
@@ -704,7 +705,7 @@ class PlayerFragment : Fragment() {
                                 DialogInterface.OnClickListener { _, id ->
                                     val url = when (id) {
                                         0 -> "https://piped.kavin.rocks/watch?v=$videoId"
-                                        1 -> "https://piped.kavin.rocks/watch?v=$videoId$instanceStr"
+                                        1 -> "https://piped.kavin.rocks/watch?v=$videoId$instance"
                                         2 -> "https://youtu.be/$videoId"
                                         else -> "https://piped.kavin.rocks/watch?v=$videoId"
                                     }
