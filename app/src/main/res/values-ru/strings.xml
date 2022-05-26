@@ -31,7 +31,7 @@
     <string name="dlisinprogress">Другая загрузка уже идет. Пожалуйста, подождите, пока она завершится.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
-    <string name="vlcerror">Не удаётся открыть в VLC. Может быть он не установлен\?</string>
+    <string name="vlcerror">Не могу открыть в VLC. Он может быть не установлен.</string>
     <string name="import_from_yt">Импортировать подписки</string>
     <string name="app_theme">Тема</string>
     <string name="server_error">На сервере возникла проблема. Попробовать другой экземпляр\?</string>
@@ -68,9 +68,9 @@
     <string name="videoCount">%1$s видео</string>
     <string name="retry">Попробовать снова</string>
     <string name="settings">Настройки</string>
-    <string name="location">Локация</string>
+    <string name="location">Место нахождения</string>
     <string name="instance">Экземпляр</string>
-    <string name="customization">Кастомизация</string>
+    <string name="customization">Индивидуализация</string>
     <string name="website">Вебсайт</string>
     <string name="defaultTab">Вкладка по умолчанию</string>
     <string name="choose_filter">Выберите фильтр поиска</string>
@@ -103,10 +103,13 @@
     <string name="license">Лицензия</string>
     <string name="color_accent">Акцентный цвет</string>
     <string name="color_red">Красный</string>
-    <string name="color_blue">Синий</string>
+    <string name="color_blue">Пиксель Синий</string>
     <string name="color_yellow">Жёлтый</string>
     <string name="color_green">Зелёный</string>
     <string name="color_purple">Фиолетовый</string>
     <string name="oledTheme">Для OLED</string>
     <string name="material_you">Material You</string>
+    <string name="app_icon">Значок приложения</string>
+    <string name="sponsorblock_notifications">Уведомления</string>
+    <string name="enabled">Включено</string>
 </resources>
