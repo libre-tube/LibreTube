@@ -112,4 +112,6 @@
     <string name="sponsorblock_notifications">Notifications</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
 </resources>

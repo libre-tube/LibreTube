@@ -2,6 +2,7 @@ package com.github.libretube
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -42,6 +43,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.RetrofitInstance.url
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.obj.PipedStream
@@ -68,12 +70,13 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.base.ThreadUtils.runOnUiThread
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -688,18 +691,30 @@ class PlayerFragment : Fragment() {
                     view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
                         val sharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        val intent = Intent()
-                        intent.action = Intent.ACTION_SEND
-                        var url = "https://piped.kavin.rocks/watch?v=$videoId"
                         val instance = sharedPreferences.getString(
                             "instance",
                             "https://pipedapi.kavin.rocks"
                         )!!
-                        if (instance != "https://pipedapi.kavin.rocks")
-                            url += "&instance=${URLEncoder.encode(instance, "UTF-8")}"
-                        intent.putExtra(Intent.EXTRA_TEXT, url)
-                        intent.type = "text/plain"
-                        startActivity(Intent.createChooser(intent, "Share Url To:"))
+                        val shareOptions = arrayOf(getString(R.string.piped), getString(R.string.instance), getString(R.string.youtube))
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(getString(R.string.share))
+                            .setSingleChoiceItems(
+                                shareOptions, 0,
+                                DialogInterface.OnClickListener { _, id ->
+                                    val url = when (id) {
+                                        0 -> "https://piped.kavin.rocks/watch?v=$videoId"
+                                        1 -> "$instance/watch?v=$videoId"
+                                        2 -> "https://youtu.be/$videoId"
+                                        else -> "https://piped.kavin.rocks/watch?v=$videoId"
+                                    }
+                                    val intent = Intent()
+                                    intent.action = Intent.ACTION_SEND
+                                    intent.putExtra(Intent.EXTRA_TEXT, url)
+                                    intent.type = "text/plain"
+                                    startActivity(Intent.createChooser(intent, "Share Url To:"))
+                                }
+                            )
+                            .show()
                     }
                     // check if livestream
                     if (response.duration!! > 0) {
