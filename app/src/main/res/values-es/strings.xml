@@ -30,7 +30,7 @@
     <string name="dlcomplete">Descarga completada.</string>
     <string name="downloadfailed">Error de descarga.</string>
     <string name="vlc">Abrir en VLC</string>
-    <string name="vlcerror">No se puede abrir en VLC. ¿Tal vez no está instalado\?</string>
+    <string name="vlcerror">No se puede abrir en VLC. Puede que no esté instalado.</string>
     <string name="import_from_yt">Importar suscripciones</string>
     <string name="app_theme">Tema</string>
     <string name="error">Algo salio mal.</string>
@@ -80,10 +80,10 @@
     <string name="history">Historial</string>
     <string name="search_history">Historial de búsqueda</string>
     <string name="clear_history">Borrar historial</string>
-    <string name="music_songs">Canciones de YT Music</string>
+    <string name="music_songs">Canciones musicales de YT</string>
     <string name="music_videos">Videos musicales de YT</string>
     <string name="music_albums">Álbumes musicales de YT</string>
-    <string name="music_playlists">Listas de reproducción musical</string>
+    <string name="music_playlists">Playlists de música de YT</string>
     <string name="defaultTab">Pestaña predeterminada</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Utiliza la API de https://sponsor.ajay.app/</string>
@@ -105,7 +105,7 @@
     <string name="color_accent">Acento de color</string>
     <string name="color_yellow">Amarillo</string>
     <string name="color_green">Verde</string>
-    <string name="color_blue">Azul</string>
+    <string name="color_blue">Azul píxel</string>
     <string name="color_purple">Púrpura</string>
     <string name="oledTheme">Tema OLED</string>
     <string name="material_you">Material You</string>
@@ -115,4 +115,5 @@
     <string name="sponsorblock_notifications">Notificaciones</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
+    <string name="playOnBackground">Reproducir en segundo plano</string>
 </resources>
