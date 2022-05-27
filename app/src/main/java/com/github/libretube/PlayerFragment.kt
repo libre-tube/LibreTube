@@ -48,6 +48,7 @@ import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.util.CronetHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -404,8 +405,7 @@ class PlayerFragment : Fragment() {
                         )
                     }
 
-                    val cronetEngine: CronetEngine = CronetEngine.Builder(context)
-                        .build()
+                    val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
                     val cronetDataSourceFactory: CronetDataSource.Factory =
                         CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
 
