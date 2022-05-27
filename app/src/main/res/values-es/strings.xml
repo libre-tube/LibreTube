@@ -109,4 +109,10 @@
     <string name="color_purple">Púrpura</string>
     <string name="oledTheme">Tema OLED</string>
     <string name="material_you">Material You</string>
+    <string name="app_icon">Icono de la aplicación</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="sponsorblock_notifications">Notificaciones</string>
+    <string name="enabled">Activado</string>
+    <string name="disabled">Desactivado</string>
 </resources>
