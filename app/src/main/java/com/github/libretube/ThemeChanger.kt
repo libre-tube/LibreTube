@@ -79,6 +79,6 @@ fun changeIcon(context: Context, newLogoActivityAlias: String) {
 fun restartMainActivity(context: Context) {
     val pm: PackageManager = context.packageManager
     val intent = pm.getLaunchIntentForPackage(context.packageName)
-    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
     context.startActivity(intent)
 }
