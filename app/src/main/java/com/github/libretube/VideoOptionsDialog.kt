@@ -2,15 +2,10 @@ package com.github.libretube
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentActivity
-import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.net.URLEncoder
 
 /**
  * Dialog with different options for a selected video.

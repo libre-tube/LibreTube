@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.PlaylistsAdapter
-import com.github.libretube.obj.Playlists
 import java.io.IOException
 import retrofit2.HttpException
 
