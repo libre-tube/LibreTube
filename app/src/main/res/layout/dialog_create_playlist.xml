@@ -23,10 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hintEnabled="false"
+
         android:layout_marginTop="16dp"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginBottom="4dp"
+
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
         >
 
     <com.google.android.material.textfield.TextInputEditText

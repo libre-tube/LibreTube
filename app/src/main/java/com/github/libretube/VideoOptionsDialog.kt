@@ -17,7 +17,8 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
      * List that stores the different menu options. In the future could be add more options here.
      */
     private val list = listOf(
-        context.getString(R.string.playOnBackground)
+        context.getString(R.string.playOnBackground),
+        context.getString(R.string.addToPlaylist)
     )
 
     /**
@@ -43,6 +44,14 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                         BackgroundMode
                             .getInstance()
                             .playOnBackgroundMode(requireContext(), videoId, 0)
+                    }
+                    // Add Video to Playlist Dialog
+                    1 -> {
+                        val newFragment = AddtoPlaylistDialog()
+                        var bundle = Bundle()
+                        bundle.putString("videoId", videoId)
+                        newFragment.arguments = bundle
+                        newFragment.show(parentFragmentManager, "AddToPlaylist")
                     }
                     else -> {
                         dialog.dismiss()
