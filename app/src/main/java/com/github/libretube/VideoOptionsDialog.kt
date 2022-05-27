@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
@@ -11,11 +12,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  *
  * Needs the [videoId] to load the content from the right video.
  */
-class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
+class VideoOptionsDialog(private val videoId: String, context: Context) : DialogFragment() {
     /**
      * List that stores the different menu options. In the future could be add more options here.
      */
-    private val list = listOf("Play on background")
+    private val list = listOf(
+        context.getString(R.string.playOnBackground)
+    )
 
     /**
      * Dialog that returns a [MaterialAlertDialogBuilder] showing a menu of options.
@@ -37,7 +40,9 @@ class VideoOptionsDialog(private val videoId: String) : DialogFragment() {
                 when (which) {
                     // This for example will be the "Background mode" option
                     0 -> {
-                        BackgroundMode.getInstance().playOnBackgroundMode(requireContext(), videoId)
+                        BackgroundMode
+                            .getInstance()
+                            .playOnBackgroundMode(requireContext(), videoId, 0)
                     }
                     else -> {
                         dialog.dismiss()
