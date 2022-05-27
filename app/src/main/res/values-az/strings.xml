@@ -115,4 +115,5 @@
     <string name="app_icon">Tətbiq Nişanı</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Arxa fonda oynat</string>
 </resources>
