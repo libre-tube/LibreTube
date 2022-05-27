@@ -112,4 +112,8 @@
     <string name="app_icon">Ícone do aplicativo</string>
     <string name="sponsorblock_notifications">Notificações</string>
     <string name="enabled">Habilitado</string>
+    <string name="piped">Canalizado</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Reproduzir em segundo plano</string>
+    <string name="disabled">Desabilitado</string>
 </resources>
