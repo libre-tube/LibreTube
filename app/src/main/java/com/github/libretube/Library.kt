@@ -61,9 +61,8 @@ class Library : Fragment() {
                 val newFragment = CreatePlaylistDialog()
                 newFragment.show(childFragmentManager, "Create Playlist")
             }
-            childFragmentManager.setFragmentResultListener("key_parent", this) { _, result ->
-                val playlistName = result.getString("playlistName")
-                createPlaylist("$playlistName", view)
+            childFragmentManager.setFragmentResultListener("fetchPlaylists", this) { _, _ ->
+                fetchPlaylists(view)
             }
         } else {
             refreshLayout.isEnabled = false
@@ -122,31 +121,6 @@ class Library : Fragment() {
                             text = getString(R.string.emptyList)
                         }
                     }
-                }
-            }
-        }
-        run()
-    }
-
-    private fun createPlaylist(name: String, view: View) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.api.createPlaylist(token, Playlists(name = name))
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response $e")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                if (response != null) {
-                    Toast.makeText(context, R.string.playlistCreated, Toast.LENGTH_SHORT).show()
-                    fetchPlaylists(view)
-                } else {
                 }
             }
         }
