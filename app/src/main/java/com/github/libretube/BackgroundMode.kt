@@ -3,8 +3,10 @@ package com.github.libretube
 import android.content.Context
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.launch
@@ -44,7 +46,19 @@ class BackgroundMode {
      * Initializes the [player] with the [MediaItem].
      */
     private fun initializePlayer(c: Context) {
-        if (player == null) player = ExoPlayer.Builder(c).build()
+        /**
+         * The [audioAttributes] handle the audio focus of the [player]
+         */
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(C.USAGE_MEDIA)
+            .setContentType(C.CONTENT_TYPE_MUSIC)
+            .build()
+
+        if (player == null) {
+            player = ExoPlayer.Builder(c)
+                .setAudioAttributes(audioAttributes, true)
+                .build()
+        }
         setMediaItem(c)
     }
 
@@ -77,7 +91,7 @@ class BackgroundMode {
     /**
      * Gets the video data and prepares the [player].
      */
-    fun playOnBackgroundMode(c: Context, videoId: String) {
+    fun playOnBackgroundMode(c: Context, videoId: String, seekToPosition : Long) {
         runBlocking {
             val job = launch {
                 response = RetrofitInstance.api.getStreams(videoId)
@@ -92,8 +106,11 @@ class BackgroundMode {
                 playWhenReady = playWhenReadyPlayer
                 prepare()
             }
+
+            if (!seekToPosition.equals(0)) player?.seekTo(seekToPosition)
         }
     }
+
 
     /**
      * Creates a singleton of this class, to not create a new [player] every time.
