@@ -77,7 +77,7 @@ class Home : Fragment() {
                 }
                 runOnUiThread {
                     progressBar.visibility = View.GONE
-                    recyclerView.adapter = TrendingAdapter(response)
+                    recyclerView.adapter = TrendingAdapter(response, childFragmentManager)
                 }
             }
         }

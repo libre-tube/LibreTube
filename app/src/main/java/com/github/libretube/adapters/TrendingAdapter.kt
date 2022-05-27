@@ -10,16 +10,20 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
+import com.github.libretube.VideoOptionsDialog
 import com.github.libretube.formatShort
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
 
-class TrendingAdapter(private val videoFeed: List<StreamItem>) :
-    RecyclerView.Adapter<CustomViewHolder>() {
+class TrendingAdapter(
+    private val videoFeed: List<StreamItem>,
+    private val childFragmentManager: FragmentManager
+) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
@@ -75,6 +79,11 @@ class TrendingAdapter(private val videoFeed: List<StreamItem>) :
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.container, frag)
                 .commitNow()
+        }
+        holder.v.setOnLongClickListener {
+            val videoId = trending.url!!.replace("/watch?v=", "")
+            VideoOptionsDialog(videoId).show(childFragmentManager, VideoOptionsDialog.TAG)
+            true
         }
     }
 }

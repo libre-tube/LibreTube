@@ -147,7 +147,7 @@ class Subscriptions : Fragment() {
                     refreshLayout?.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
-                    subscriptionAdapter = SubscriptionAdapter(response)
+                    subscriptionAdapter = SubscriptionAdapter(response, childFragmentManager)
                     feedRecView.adapter = subscriptionAdapter
                     subscriptionAdapter?.updateItems()
                 } else {
