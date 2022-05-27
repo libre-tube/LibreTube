@@ -40,7 +40,9 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                 when (which) {
                     // This for example will be the "Background mode" option
                     0 -> {
-                        BackgroundMode.getInstance().playOnBackgroundMode(requireContext(), videoId, 0)
+                        BackgroundMode
+                            .getInstance()
+                            .playOnBackgroundMode(requireContext(), videoId, 0)
                     }
                     else -> {
                         dialog.dismiss()

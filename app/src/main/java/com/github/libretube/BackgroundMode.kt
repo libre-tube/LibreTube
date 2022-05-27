@@ -91,7 +91,7 @@ class BackgroundMode {
     /**
      * Gets the video data and prepares the [player].
      */
-    fun playOnBackgroundMode(c: Context, videoId: String, seekToPosition : Long) {
+    fun playOnBackgroundMode(c: Context, videoId: String, seekToPosition: Long) {
         runBlocking {
             val job = launch {
                 response = RetrofitInstance.api.getStreams(videoId)
@@ -110,7 +110,6 @@ class BackgroundMode {
             if (!seekToPosition.equals(0)) player?.seekTo(seekToPosition)
         }
     }
-
 
     /**
      * Creates a singleton of this class, to not create a new [player] every time.
