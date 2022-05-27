@@ -12,7 +12,11 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.*
+import com.github.libretube.MainActivity
+import com.github.libretube.PlayerFragment
+import com.github.libretube.R
+import com.github.libretube.VideoOptionsDialog
+import com.github.libretube.formatShort
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
 
@@ -46,8 +50,8 @@ class SubscriptionAdapter(
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
         holder.v.findViewById<TextView>(R.id.textView_channel).text =
             trending.uploaderName + " • " +
-                    trending.views.formatShort() + " • " +
-                    DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+            trending.views.formatShort() + " • " +
+            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
         holder.v.findViewById<TextView>(R.id.thumbnail_duration).text =
             DateUtils.formatElapsedTime(trending.duration!!)

@@ -12,12 +12,13 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.*
-import com.squareup.picasso.Picasso
+import com.github.libretube.MainActivity
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
+import com.github.libretube.VideoOptionsDialog
 import com.github.libretube.formatShort
 import com.github.libretube.obj.StreamItem
+import com.squareup.picasso.Picasso
 
 class TrendingAdapter(
     private val videoFeed: List<StreamItem>,
