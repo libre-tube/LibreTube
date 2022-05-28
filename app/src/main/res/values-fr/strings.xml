@@ -115,4 +115,5 @@
     <string name="app_icon">Icône de l\'appli</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Lecture en arrière-plan</string>
 </resources>
