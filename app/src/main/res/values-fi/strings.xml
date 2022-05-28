@@ -72,4 +72,24 @@
     <string name="settings">Asetukset</string>
     <string name="instance">Instanssi</string>
     <string name="website">Verkkosivusto</string>
+    <string name="app_icon">Sovelluksen kuvake</string>
+    <string name="enabled">Käytössä</string>
+    <string name="disabled">Pois käytöltä</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="choose_filter">Valitse hakusuodatin</string>
+    <string name="channels">Kanavat</string>
+    <string name="all">Kaikki</string>
+    <string name="playlists">Soittolistat</string>
+    <string name="okay">OK</string>
+    <string name="history">Historia</string>
+    <string name="search_history">Hakuhistoria</string>
+    <string name="clear_history">Tyhjennä historia</string>
+    <string name="defaultTab">Oletusvälilehti</string>
+    <string name="sponsorblock">SponsorBlock</string>
+    <string name="playOnBackground">Toista taustalla</string>
+    <string name="color_green">Vihreä</string>
+    <string name="color_purple">Violetti</string>
+    <string name="oledTheme">OLED-teema</string>
+    <string name="sponsorblock_notifications">Ilmoitukset</string>
 </resources>
