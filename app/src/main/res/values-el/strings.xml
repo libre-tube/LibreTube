@@ -16,7 +16,7 @@
     <string name="dlisinprogress">Μια άλλη λήψη βρίσκεται ήδη σε εξέλιξη. Περιμένετε μέχρι να τελειώσει.</string>
     <string name="downloadfailed">Λήψη ανεπιτυχής.</string>
     <string name="vlc">Άνοιγμα στο VLC</string>
-    <string name="vlcerror">Το βίντεο δεν κατάφερε να ανοίξει στο VLC. Ίσως δεν είναι εγκατεστημένο;</string>
+    <string name="vlcerror">Το βίντεο δεν κατάφερε να ανοίξει στο VLC. Ίσως δεν είναι εγκατεστημένο.</string>
     <string name="import_from_yt">Εισαγωγή εγγραφών</string>
     <string name="import_from_yt_summary">Από το YouTube ή το NewPipe</string>
     <string name="app_theme">Θέμα</string>
@@ -103,11 +103,17 @@
     <string name="license">Άδεια</string>
     <string name="oledTheme">OLED Θέμα</string>
     <string name="color_accent">Απόχρωση χρώματος</string>
-    <string name="color_blue">Μπλέ</string>
+    <string name="color_blue">Pixel Μπλέ</string>
     <string name="color_yellow">Κίτρινο</string>
     <string name="color_green">Πράσινο</string>
     <string name="color_purple">Μωβ</string>
     <string name="color_red">Κόκκινο</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Ειδοποιήσεις</string>
+    <string name="app_icon">Εικονίδιο εφαρμογής</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="enabled">Ενεργοποιημένο</string>
+    <string name="disabled">Απενεργοποιημένο</string>
+    <string name="playOnBackground">Αναπαραγωγή στο υπόβαθρο</string>
 </resources>

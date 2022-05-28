@@ -24,7 +24,7 @@
     <string name="dlisinprogress">另一个下载进程正在进行中。请先等待其完成。</string>
     <string name="downloadfailed">下载失败。</string>
     <string name="vlc">在 VLC 中打开</string>
-    <string name="vlcerror">无法在 VLC 中打开。也许没有安装？</string>
+    <string name="vlcerror">无法在 VLC 中打开。也许没有安装它。</string>
     <string name="import_from_yt">导入订阅列表</string>
     <string name="import_from_yt_summary">从 YouTube 或 NewPipe</string>
     <string name="app_theme">主题</string>
@@ -112,4 +112,7 @@
     <string name="sponsorblock_notifications">通知</string>
     <string name="enabled">已启用</string>
     <string name="disabled">已停用</string>
+    <string name="app_icon">应用图标</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
 </resources>

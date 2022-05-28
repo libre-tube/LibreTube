@@ -35,7 +35,7 @@
     <string name="dlisinprogress">Another download is already in progress. Please wait till it\'s finished.</string>
     <string name="downloadfailed">Download failed.</string>
     <string name="vlc">Open in VLC</string>
-    <string name="vlcerror">Can\'t open in VLC. Maybe it\'s not installed?</string>
+    <string name="vlcerror">Can\'t open in VLC. It might not be installed.</string>
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
     <string name="app_theme">Theme</string>

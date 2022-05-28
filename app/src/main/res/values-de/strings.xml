@@ -25,7 +25,7 @@
     <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
     <string name="dlisinprogress">Ein anderer Datenübertragung läuft bereits, bitte warte bis dieser beendet ist.</string>
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
-    <string name="vlcerror">Kann nicht in VLC geöffnet werden. Vielleicht ist VLC noch nicht installiert\?</string>
+    <string name="vlcerror">Kann nicht in VLC geöffnet werden. Möglicherweise ist es nicht installiert.</string>
     <string name="app_theme">Erscheinungsbild</string>
     <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eventuell eine andere Instanz\?</string>
     <string name="unknown_error">Netzwerkfehler.</string>
@@ -112,4 +112,5 @@
     <string name="sponsorblock_notifications">Benachrichtigungen</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>
+    <string name="app_icon">App-Symbol</string>
 </resources>

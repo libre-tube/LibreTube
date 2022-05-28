@@ -46,7 +46,7 @@
     <string name="success">Bitti!</string>
     <string name="playlistName">Oynatma Listesi Adı</string>
     <string name="about">Hakkında</string>
-    <string name="vlcerror">VLC\'de açılamıyor. Cihazınızda yüklü olduğuna emin misiniz\?</string>
+    <string name="vlcerror">VLC\'de açılamıyor. Kurulmamış olabilir.</string>
     <string name="instances">Erişim Aracı Seç</string>
     <string name="customInstance">Dilediğiniz bir erişim aracısını ekleyin</string>
     <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracını deneyebilir misiniz\?</string>
@@ -112,4 +112,8 @@
     <string name="sponsorblock_notifications">Bildirimler</string>
     <string name="enabled">Etkinleştirildi</string>
     <string name="disabled">Devre dışı bırakıldı</string>
+    <string name="app_icon">Uygulama Simgesi</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Arka Planda Oynat</string>
 </resources>

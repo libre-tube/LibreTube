@@ -69,7 +69,7 @@
     <string name="dlisinprogress">Digər endirmə hələdə davam edir. Zəhmət olmasa, bitənə qədər gözləyin.</string>
     <string name="downloadfailed">Endirmək alınmadı.</string>
     <string name="vlc">VLC-də açın</string>
-    <string name="vlcerror">VLC-də açmaq mümkün deyil. Cihazınızda quraşdırdığınıza əminsiniz\?</string>
+    <string name="vlcerror">VLC-də açmaq mümkün deyil. O, quraşdırılmamış ola bilər.</string>
     <string name="import_from_yt">Abunəlikləri İdxal Edin</string>
     <string name="import_from_yt_summary">YouTube vəya NewPipe dan</string>
     <string name="app_theme">Mövzu</string>
@@ -112,4 +112,8 @@
     <string name="sponsorblock_notifications">Bildirişlər</string>
     <string name="enabled">Aktivdir</string>
     <string name="disabled">Qeyri-aktivdir</string>
+    <string name="app_icon">Tətbiq Nişanı</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Arxa fonda oynat</string>
 </resources>

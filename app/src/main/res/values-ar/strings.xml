@@ -110,4 +110,7 @@
     <string name="category_sponsor_description">ترويج مدفوع وإحالات مدفوعة وإعلانات مباشرة. ليس للترويج الذاتي أو الصيحات المجانية لأسباب / منشئي محتوى / مواقع ويب / منتجات يحبونها.</string>
     <string name="category_outro">بطاقات النهاية / الاعتمادات</string>
     <string name="sponsorblock_notifications">الإشعارات</string>
+    <string name="app_icon">أيقونة التطبيق</string>
+    <string name="enabled">مفعل</string>
+    <string name="disabled">معطل</string>
 </resources>
