@@ -19,6 +19,7 @@ import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.obj.Subscribe
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
+import org.chromium.base.ThreadUtils.runOnUiThread
 import java.io.IOException
 import retrofit2.HttpException
 
@@ -206,10 +207,11 @@ class ChannelFragment : Fragment() {
                         response.subscriberCount.formatShort()
                     )
                     val channelDescription = view.findViewById<TextView>(R.id.channel_description)
-                    if (response.description?.trim() == "")
+                    if (response.description?.trim() == "") {
                         channelDescription.visibility = View.GONE
-                    else
+                    } else {
                         channelDescription.text = response.description?.trim()
+                    }
                     val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
                     Picasso.get().load(response.bannerUrl).into(bannerImage)

@@ -69,12 +69,13 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.base.ThreadUtils.runOnUiThread
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -654,13 +655,20 @@ class PlayerFragment : Fragment() {
                         response.relatedStreams!!,
                         childFragmentManager
                     )
-
+                    val description = response.description!!
                     view.findViewById<TextView>(R.id.player_description).text =
-                        if (SDK_INT >= Build.VERSION_CODES.N) {
-                            Html.fromHtml(response.description, Html.FROM_HTML_MODE_COMPACT).trim()
+                        // detect whether the description is html formatted
+                        if (description.contains("<") && description.contains(">")) {
+                            if (SDK_INT >= Build.VERSION_CODES.N) {
+                                Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+                                    .trim()
+                            } else {
+                                Html.fromHtml(description).trim()
+                            }
                         } else {
-                            Html.fromHtml(response.description).trim()
+                            description
                         }
+
                     view.findViewById<TextView>(R.id.player_views_info).text =
                         response.views.formatShort() + " views • " + response.uploadDate
                     view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
