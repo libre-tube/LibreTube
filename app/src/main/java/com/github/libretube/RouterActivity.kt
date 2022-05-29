@@ -31,6 +31,7 @@ class RouterActivity : AppCompatActivity() {
             intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent?.data = Uri.parse(it)
             this.startActivity(intent)
+            this.finish()
         }
     }
 }
