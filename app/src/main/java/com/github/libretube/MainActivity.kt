@@ -1,7 +1,6 @@
 package com.github.libretube
 
 import android.app.Activity
-import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -34,7 +33,6 @@ import androidx.preference.PreferenceManager
 import com.github.libretube.util.CronetHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
