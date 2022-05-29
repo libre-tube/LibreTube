@@ -13,8 +13,11 @@ class RouterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         when (intent?.action) {
             Intent.ACTION_SEND -> {
-                if ("text/plain" == intent.type) {
-                    handleSendText(intent) // Handle text being sent
+                if (intent.type == "text/plain") {
+                    handleSendText(intent)
+                } else {
+                    // start app as normal if wrong intent type
+                    restartMainActivity(this)
                 }
             }
         }
