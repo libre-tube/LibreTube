@@ -19,7 +19,6 @@ import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.obj.Subscribe
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import org.chromium.base.ThreadUtils.runOnUiThread
 import java.io.IOException
 import retrofit2.HttpException
 
