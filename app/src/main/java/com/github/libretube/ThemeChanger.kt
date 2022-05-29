@@ -41,7 +41,7 @@ fun updateLanguage(context: Context) {
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     val languageName = sharedPreferences.getString("language", "sys")
     if (languageName != "") {
-        var locale = if (languageName != "sys" && "$languageName".length < 3) {
+        val locale = if (languageName != "sys" && "$languageName".length < 3) {
             Locale(languageName)
         } else if ("$languageName".length > 3) {
             Locale(languageName?.substring(0, 2), languageName?.substring(4, 6))
@@ -51,7 +51,9 @@ fun updateLanguage(context: Context) {
         val res = context.resources
         val dm = res.displayMetrics
         val conf = res.configuration
+        // Change App Language
         conf.setLocale(locale)
+        // Change API Language
         Locale.setDefault(locale)
         res.updateConfiguration(conf, dm)
     }

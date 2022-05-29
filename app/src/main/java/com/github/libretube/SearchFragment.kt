@@ -62,12 +62,13 @@ class SearchFragment : Fragment() {
         searchRecView = view.findViewById<RecyclerView>(R.id.search_recycler)
 
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
-
         val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
-
         val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
 
         var tempSelectedItem = 0
+
+        val sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         filterImageView.setOnClickListener {
             val filterOptions = arrayOf(
@@ -119,10 +120,10 @@ class SearchFragment : Fragment() {
 
         historyRecycler.layoutManager = LinearLayoutManager(view.context)
 
-        var historylist = getHistory()
-        if (historylist.isNotEmpty()) {
+        val historyList = getHistory()
+        if (historyList.isNotEmpty()) {
             historyRecycler.adapter =
-                SearchHistoryAdapter(requireContext(), historylist, autoTextView)
+                SearchHistoryAdapter(requireContext(), historyList, autoTextView)
         }
 
         searchRecView.layoutManager = GridLayoutManager(view.context, 1)
@@ -155,13 +156,6 @@ class SearchFragment : Fragment() {
                     GlobalScope.launch {
                         fetchSuggestions(s.toString(), autoTextView)
                         delay(1000)
-                        val sharedPreferences =
-                            PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        if (sharedPreferences.getBoolean(
-                                "search_history_toggle",
-                                true
-                            )
-                        ) addtohistory(s.toString())
                         fetchSearch(s.toString())
                     }
                 }
@@ -171,10 +165,10 @@ class SearchFragment : Fragment() {
                 if (s!!.isEmpty()) {
                     searchRecView.visibility = GONE
                     historyRecycler.visibility = VISIBLE
-                    var historylist = getHistory()
-                    if (historylist.isNotEmpty()) {
+                    val historyList = getHistory()
+                    if (historyList.isNotEmpty()) {
                         historyRecycler.adapter =
-                            SearchHistoryAdapter(requireContext(), historylist, autoTextView)
+                            SearchHistoryAdapter(requireContext(), historyList, autoTextView)
                     }
                 }
             }
@@ -184,6 +178,14 @@ class SearchFragment : Fragment() {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     hideKeyboard()
                     autoTextView.dismissDropDown()
+                    if (sharedPreferences.getBoolean(
+                            "search_history_toggle",
+                            true
+                        )
+                    ) {
+                        val newString = autoTextView.text.toString()
+                        addToHistory(newString)
+                    }
                     return@OnEditorActionListener true
                 }
                 false
@@ -276,12 +278,12 @@ class SearchFragment : Fragment() {
         hideKeyboard()
     }
 
-    private fun addtohistory(query: String) {
+    private fun addToHistory(query: String) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         var historyList = getHistory()
 
-        if (historyList.size != 0 && query == historyList.get(historyList.size - 1)) {
+        if (historyList.isNotEmpty() && query == historyList[historyList.size - 1]) {
             return
         } else if (query == "") {
             return
@@ -293,19 +295,19 @@ class SearchFragment : Fragment() {
             historyList = historyList.takeLast(10)
         }
 
-        var set: Set<String> = HashSet(historyList)
+        val set: Set<String> = HashSet(historyList)
 
         sharedPreferences.edit().putStringSet("search_history", set)
             .apply()
     }
 
     private fun getHistory(): List<String> {
-        try {
+        return try {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
             val set: Set<String> = sharedPreferences.getStringSet("search_history", HashSet())!!
-            return set.toList()
+            set.toList()
         } catch (e: Exception) {
-            return emptyList()
+            emptyList()
         }
     }
 }

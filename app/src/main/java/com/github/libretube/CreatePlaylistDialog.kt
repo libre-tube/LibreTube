@@ -50,9 +50,11 @@ class CreatePlaylistDialog : DialogFragment() {
             val playlistName = view.findViewById<TextInputEditText>(R.id.playlist_name)
             val createPlaylistBtn = view.findViewById<Button>(R.id.create_new_playlist)
             createPlaylistBtn.setOnClickListener {
-                var listName = playlistName.text.toString()
+                // avoid creating the same playlist multiple times by spamming the button
+                createPlaylistBtn.setOnClickListener(null)
+                val listName = playlistName.text.toString()
                 if (listName != "") {
-                    createPlaylist("$listName")
+                    createPlaylist(listName)
                 } else {
                     Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_LONG).show()
                 }
@@ -83,7 +85,7 @@ class CreatePlaylistDialog : DialogFragment() {
                     Toast.makeText(context, getString(R.string.unknown_error), Toast.LENGTH_SHORT)
                         .show()
                 }
-            }.invokeOnCompletion {
+                // tell the Subscription Activity to fetch the playlists again
                 setFragmentResult("fetchPlaylists", bundleOf("" to ""))
                 dismiss()
             }
