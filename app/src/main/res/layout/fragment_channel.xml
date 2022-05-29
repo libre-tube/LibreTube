@@ -96,6 +96,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
+                android:autoLink="web"
                 android:text="" />
 
             <RelativeLayout
