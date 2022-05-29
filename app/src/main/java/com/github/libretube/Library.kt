@@ -23,8 +23,8 @@ class Library : Fragment() {
 
     private val TAG = "LibraryFragment"
     lateinit var token: String
-    lateinit var playlistRecyclerView: RecyclerView
-    lateinit var refreshLayout: SwipeRefreshLayout
+    private lateinit var playlistRecyclerView: RecyclerView
+    private lateinit var refreshLayout: SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
