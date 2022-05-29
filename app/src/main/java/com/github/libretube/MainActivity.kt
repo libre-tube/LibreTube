@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val action: String? = intent?.action
-        val data: Uri? = intent?.data
+        val data: Uri? = z
         Log.d(TAG, "dafaq" + data.toString())
 
         if (data != null) {
