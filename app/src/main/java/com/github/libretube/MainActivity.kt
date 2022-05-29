@@ -142,8 +142,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val action: String? = intent?.action
-        val data: Uri? = z
+        val data: Uri? = intent?.data
         Log.d(TAG, "dafaq" + data.toString())
 
         if (data != null) {
@@ -155,12 +154,15 @@ class MainActivity : AppCompatActivity() {
                         data.path!!.contains("/c/") ||
                         data.path!!.contains("/user/")
                     ) {
+                        Log.i(TAG, "URI Type: Channel")
                         var channel = data.path
                         channel = channel!!.replace("/c/", "")
                         channel = channel.replace("/user/", "")
+                        Log.i(TAG, channel)
                         val bundle = bundleOf("channel_id" to channel)
                         navController.navigate(R.id.channel, bundle)
                     } else if (data.path!!.contains("/playlist")) {
+                        Log.i(TAG, "URI Type: Playlist")
                         var playlist = data.query!!
                         if (playlist.contains("&")) {
                             var playlists = playlist.split("&")
@@ -178,6 +180,7 @@ class MainActivity : AppCompatActivity() {
                         data.path!!.contains("/embed/") ||
                         data.path!!.contains("/v/")
                     ) {
+                        Log.i(TAG, "URI Type: Video")
                         val watch = data.path!!
                             .replace("/shorts/", "")
                             .replace("/v/", "")
