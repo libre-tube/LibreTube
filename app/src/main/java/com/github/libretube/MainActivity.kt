@@ -143,8 +143,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val intentData: Uri? = intent?.data
+        // check whether an URI got submitted over the intent data
         if (intentData != null && intentData.host != null && intentData.path != null) {
             Log.d("intentData", "${intentData.host} ${intentData.path} ")
+            // load the URI of the submitted link (e.g. video)
             loadIntentData(intentData)
         }
     }
