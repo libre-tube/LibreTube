@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -47,11 +49,17 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     }
                     // Add Video to Playlist Dialog
                     1 -> {
-                        val newFragment = AddtoPlaylistDialog()
-                        var bundle = Bundle()
-                        bundle.putString("videoId", videoId)
-                        newFragment.arguments = bundle
-                        newFragment.show(parentFragmentManager, "AddToPlaylist")
+                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        val token = sharedPreferences.getString("token", "")
+                        if (token != "") {
+                            val newFragment = AddtoPlaylistDialog()
+                            var bundle = Bundle()
+                            bundle.putString("videoId", videoId)
+                            newFragment.arguments = bundle
+                            newFragment.show(parentFragmentManager, "AddToPlaylist")
+                        } else {
+                            Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+                        }
                     }
                     else -> {
                         dialog.dismiss()

@@ -27,11 +27,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
@@ -229,7 +229,7 @@ class SearchFragment : Fragment() {
             nextPage = response.nextpage
             if (response.items!!.isNotEmpty()) {
                 runOnUiThread {
-                    searchAdapter = SearchAdapter(response.items)
+                    searchAdapter = SearchAdapter(response.items, childFragmentManager)
                     searchRecView.adapter = searchAdapter
                 }
             }

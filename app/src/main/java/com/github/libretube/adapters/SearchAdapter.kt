@@ -9,15 +9,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
-import com.github.libretube.PlayerFragment
-import com.github.libretube.R
-import com.github.libretube.formatShort
+import com.github.libretube.*
 import com.github.libretube.obj.SearchItem
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.NonDisposableHandle.parent
 
-class SearchAdapter(private val searchItems: MutableList<SearchItem>) :
+class SearchAdapter(
+    private val searchItems: MutableList<SearchItem>,
+    private val childFragmentManager: FragmentManager
+) :
     RecyclerView.Adapter<CustomViewHolder1>() {
 
     fun updateItems(newItems: List<SearchItem>) {
@@ -39,7 +41,7 @@ class SearchAdapter(private val searchItems: MutableList<SearchItem>) :
         }
         val layoutInflater = LayoutInflater.from(parent.context)
         val cell = layoutInflater.inflate(layout, parent, false)
-        return CustomViewHolder1(cell)
+        return CustomViewHolder1(cell, childFragmentManager)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder1, position: Int) {
@@ -56,7 +58,10 @@ class SearchAdapter(private val searchItems: MutableList<SearchItem>) :
     }
 }
 
-class CustomViewHolder1(private val v: View) : RecyclerView.ViewHolder(v) {
+class CustomViewHolder1(
+    private val v: View,
+    private val childFragmentManager: FragmentManager
+) : RecyclerView.ViewHolder(v) {
 
     private fun bindWatch(item: SearchItem) {
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
@@ -89,6 +94,12 @@ class CustomViewHolder1(private val v: View) : RecyclerView.ViewHolder(v) {
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.container, frag)
                 .commitNow()
+        }
+        v.setOnLongClickListener {
+            val videoId = item.url!!.replace("/watch?v=", "")
+            VideoOptionsDialog(videoId, v.context)
+                .show(childFragmentManager, VideoOptionsDialog.TAG)
+            true
         }
         channelImage.setOnClickListener {
             val activity = v.context as MainActivity
