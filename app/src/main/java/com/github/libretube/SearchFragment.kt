@@ -229,7 +229,7 @@ class SearchFragment : Fragment() {
             nextPage = response.nextpage
             if (response.items!!.isNotEmpty()) {
                 runOnUiThread {
-                    searchAdapter = SearchAdapter(response.items)
+                    searchAdapter = SearchAdapter(response.items, childFragmentManager)
                     searchRecView.adapter = searchAdapter
                 }
             }
