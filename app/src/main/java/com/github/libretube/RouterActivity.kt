@@ -13,7 +13,7 @@ class RouterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         when (intent?.action) {
             Intent.ACTION_SEND -> {
-                if (intent.type == "text/plain") {
+                if (intent.type == "text/plain" && checkHost(intent)) {
                     handleSendText(intent)
                 } else {
                     // start app as normal if wrong intent type
@@ -21,6 +21,14 @@ class RouterActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun checkHost(intent: Intent): Boolean {
+        val hostsList = resources.getStringArray(R.array.shareHostsList)
+        val intentDataUri: Uri = Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT))
+        val intentDataHost = intentDataUri.host
+        Log.d(TAG, "$intentDataHost")
+        return hostsList.contains(intentDataHost)
     }
 
     private fun handleSendText(intent: Intent) {
