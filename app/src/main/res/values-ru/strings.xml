@@ -112,4 +112,8 @@
     <string name="app_icon">Значок приложения</string>
     <string name="sponsorblock_notifications">Уведомления</string>
     <string name="enabled">Включено</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Воспроизвести в фоне</string>
+    <string name="disabled">Отключено</string>
 </resources>
