@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.net.URLEncoder
 
 /**
  * Dialog with different options for a selected video.
@@ -52,11 +51,12 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     }
                     // Add Video to Playlist Dialog
                     1 -> {
-                        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                        val sharedPreferences = PreferenceManager
+                            .getDefaultSharedPreferences(requireContext())
                         val token = sharedPreferences.getString("token", "")
                         if (token != "") {
                             val newFragment = AddtoPlaylistDialog()
-                            var bundle = Bundle()
+                            val bundle = Bundle()
                             bundle.putString("videoId", videoId)
                             newFragment.arguments = bundle
                             newFragment.show(parentFragmentManager, "AddToPlaylist")
@@ -65,6 +65,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                         }
                     }
                     2 -> {
+                        /* crashes
                         val sharedPreferences =
                             PreferenceManager.getDefaultSharedPreferences(requireContext())
                         val instancePref = sharedPreferences.getString(
@@ -77,8 +78,6 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                             getString(R.string.instance),
                             getString(R.string.youtube)
                         )
-                        /*
-                        // crashes
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle(getString(R.string.share))
                             .setItems(
@@ -101,7 +100,10 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                          */
                         val intent = Intent()
                         intent.action = Intent.ACTION_SEND
-                        intent.putExtra(Intent.EXTRA_TEXT, "https://piped.kavin.rocks/watch?v=$videoId")
+                        intent.putExtra(
+                            Intent.EXTRA_TEXT,
+                            "https://piped.kavin.rocks/watch?v=$videoId"
+                        )
                         intent.type = "text/plain"
                         startActivity(Intent.createChooser(intent, "Share Url To:"))
                     }
