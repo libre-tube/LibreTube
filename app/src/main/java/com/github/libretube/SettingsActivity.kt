@@ -28,20 +28,20 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 
 private var isCurrentViewMainSettings = true
+private var requireMainActivityRestart = false
 
 class SettingsActivity :
     AppCompatActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         updateAccentColor(this)
@@ -243,11 +243,13 @@ class SettingsActivity :
             themeToggle?.setOnPreferenceChangeListener { _, _ ->
                 val refresh = Intent(context, SettingsActivity::class.java)
                 startActivity(refresh)
+                requireMainActivityRestart = true
                 true
             }
 
             val accentColor = findPreference<Preference>("accent_color")
             accentColor?.setOnPreferenceChangeListener { _, _ ->
+                requireMainActivityRestart = true
                 val refresh = Intent(context, SettingsActivity::class.java)
                 startActivity(refresh)
                 true
@@ -259,9 +261,9 @@ class SettingsActivity :
                 true
             }
 
-            val changeLanguage = findPreference<ListPreference>("language")
-            changeLanguage?.setOnPreferenceChangeListener { _, _ ->
-                restartMainActivity(requireContext())
+            val gridColumns = findPreference<ListPreference>("grid")
+            gridColumns?.setOnPreferenceChangeListener { _, _ ->
+                requireMainActivityRestart = true
                 true
             }
 
@@ -384,7 +386,13 @@ class SettingsActivity :
         if (isCurrentViewMainSettings) {
             PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this)
-            restartMainActivity(this)
+            if (requireMainActivityRestart) {
+                restartMainActivity(this)
+                finishAffinity()
+            } else {
+                super.onBackPressed()
+            }
+            finishAndRemoveTask()
         } else {
             isCurrentViewMainSettings = true
             supportFragmentManager
