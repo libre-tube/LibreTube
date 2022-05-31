@@ -388,6 +388,7 @@ class SettingsActivity :
             PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this)
             if (requireMainActivityRestart) {
+                requireMainActivityRestart = false
                 restartMainActivity(this)
                 finishAffinity()
             } else {
