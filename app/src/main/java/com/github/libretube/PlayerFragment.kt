@@ -409,13 +409,13 @@ class PlayerFragment : Fragment() {
 
     private fun initializePlayerView(view: View, response: Streams) {
         isLoading = false
-        var videosNameArray: Array<CharSequence> = arrayOf()
-        videosNameArray += "HLS"
-        for (vid in response.videoStreams!!) {
-            val name = vid.quality + " " + vid.format
-            videosNameArray += name
-        }
         runOnUiThread {
+            var videosNameArray: Array<CharSequence> = arrayOf()
+            videosNameArray += "HLS"
+            for (vid in response.videoStreams!!) {
+                val name = vid.quality + " " + vid.format
+                videosNameArray += name
+            }
             var subtitle = mutableListOf<SubtitleConfiguration>()
             if (response.subtitles!!.isNotEmpty()) {
                 subtitle.add(
@@ -871,9 +871,12 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializePlayerNotification(c: Context) {
-        playerNotification = PlayerNotificationManager.Builder(c, notificationId, "background_mode")
+        playerNotification = PlayerNotificationManager
+            .Builder(c, notificationId, "background_mode")
             .build()
         playerNotification.setPlayer(exoPlayer)
+        playerNotification.setUseNextAction(false)
+        playerNotification.setUsePreviousAction(false)
         playerNotification.setMediaSessionToken(mediaSession.sessionToken)
     }
 

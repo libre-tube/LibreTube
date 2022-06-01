@@ -66,8 +66,11 @@ class BackgroundMode {
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
     private fun initializePlayerNotification(c: Context) {
-        playerNotification = PlayerNotificationManager.Builder(c, 1, "background_mode").build()
+        playerNotification = PlayerNotificationManager
+            .Builder(c, 1, "background_mode").build()
         playerNotification.setPlayer(player)
+        playerNotification.setUsePreviousAction(false)
+        playerNotification.setUseNextAction(false)
         playerNotification.setMediaSessionToken(mediaSession.sessionToken)
     }
 
