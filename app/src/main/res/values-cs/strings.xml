@@ -22,7 +22,7 @@
     <string name="downloadfailed">Stahování se nezdařilo.</string>
     <string name="app_theme">Motiv aplikace</string>
     <string name="server_error">Server zaznamenal problém. Možná zkuste jinou instanci.</string>
-    <string name="vlcerror">Nelze otevřít ve VLC. Máte VLC nainstalováno\?</string>
+    <string name="vlcerror">Nelze otevřít ve VLC. Možná není nainstalováno.</string>
     <string name="unknown_error">Chyba sítě.</string>
     <string name="grid">Výběr sloupců mřížky</string>
     <string name="emptyList">Nic tu není.</string>
@@ -112,4 +112,8 @@
     <string name="sponsorblock_notifications">Upozornění</string>
     <string name="enabled">Povoleno</string>
     <string name="disabled">Zakázáno</string>
+    <string name="app_icon">Ikona aplikace</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Přehrát na pozadí</string>
 </resources>

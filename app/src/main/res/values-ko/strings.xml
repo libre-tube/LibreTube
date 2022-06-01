@@ -29,7 +29,7 @@
     <string name="dlcomplete">다운로드가 완료되었습니다.</string>
     <string name="downloadfailed">다운로드에 실패했습니다.</string>
     <string name="vlc">VLC에서 열기</string>
-    <string name="vlcerror">VLC에서 열 수 없습니다. 아직 설치가 안된 거 아닐까요\?</string>
+    <string name="vlcerror">VLC에서 열 수 없습니다. 설치되어 있지 않을 수 있습니다.</string>
     <string name="import_from_yt">구독 가져오기</string>
     <string name="app_theme">앱 테마</string>
     <string name="server_error">서버에 문제가 발생했습니다. 다른 인스턴스를 시도할까요\?</string>
@@ -112,4 +112,8 @@
     <string name="sponsorblock_notifications">알림</string>
     <string name="enabled">활성화</string>
     <string name="disabled">비활성화</string>
+    <string name="app_icon">앱 아이콘</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">백그라운드에서 재생</string>
+    <string name="piped">Piped</string>
 </resources>

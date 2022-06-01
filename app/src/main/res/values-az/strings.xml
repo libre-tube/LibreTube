@@ -11,10 +11,10 @@
     <string name="download">Endirin</string>
     <string name="username">İstifadəçi Adınız</string>
     <string name="password">Parol</string>
-    <string name="login">Daxil olun</string>
-    <string name="register">Qeydiyyatdan keçin</string>
+    <string name="login">Daxil Olun</string>
+    <string name="register">Qeydiyyatdan Keçin</string>
     <string name="logout">Çıxış edin</string>
-    <string name="cancel">İmtina edin</string>
+    <string name="cancel">İmtina</string>
     <string name="loggedIn">Daxil oldunuz.</string>
     <string name="loggedout">Çıxış edildi.</string>
     <string name="registered">Qeydiyyatdan keçibsiz.İndi kanallara abunə ola bilərsiniz.</string>
@@ -25,7 +25,7 @@
     <string name="library">Kitabxana</string>
     <string name="instances">Server seçin</string>
     <string name="customInstance">Fərdi server əlavə edin</string>
-    <string name="region">Məkan seçin</string>
+    <string name="region">Məkan Seçin</string>
     <string name="all">Hamısı</string>
     <string name="choose_filter">Axtarış filtrini seçin</string>
     <string name="channels">Kanallar</string>
@@ -39,7 +39,7 @@
     <string name="music_videos">YT Musiqi Videoları</string>
     <string name="music_playlists">YT Musiqi Pleylistləri</string>
     <string name="defaultTab">Defolt Tab</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">SponsorBlok</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app/ saytından API istifadə edir</string>
     <string name="category_intro_description">Aktual məzmunu olmayan bir aralıq.Fasilə, statik çərçivə, təkrarlanan animasiya ola bilər. Bu məlumatı ehtiva edən keçidlər üçün istifadə edilməməlidir.</string>
     <string name="category_outro">Bitiş Kartları/Töhfə Verənlər</string>
@@ -53,10 +53,10 @@
     <string name="emptyPlaylistName">Pleylist adı boş ola bilməz</string>
     <string name="success">Uğurlu oldu!</string>
     <string name="comments">Şərhlər</string>
-    <string name="noInternet">İnternet bağlantısı yoxdur</string>
-    <string name="retry">Yenidən cəhd edin</string>
+    <string name="noInternet">İnternet Bağlantısı Yoxdur</string>
+    <string name="retry">Yenidən Cəhd Edin</string>
     <string name="segment_skipped">Seqment ötürüldü</string>
-    <string name="sponsorblock_state">Aktiv edildi</string>
+    <string name="sponsorblock_state">Aktiv Edildi</string>
     <string name="category_sponsor_description">Ödənişli reklam, yönləndirmə və birbaşa reklamlar. Özünü tanıtmaq və ya bəyəndikləri səbəblərə/yaradıcılara/veb-saytlara/məhsullara pulsuz çağırışlar üçün deyil.</string>
     <string name="category_interaction">İnteraksiya Xatırlatma (Abunə olun)</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
@@ -68,7 +68,7 @@
     <string name="dlcomplete">Endirmə tamamlandı.</string>
     <string name="dlisinprogress">Digər endirmə hələdə davam edir. Zəhmət olmasa, bitənə qədər gözləyin.</string>
     <string name="downloadfailed">Endirmək alınmadı.</string>
-    <string name="vlc">VLC-də açın</string>
+    <string name="vlc">VLC-də Açın</string>
     <string name="vlcerror">VLC-də açmaq mümkün deyil. O, quraşdırılmamış ola bilər.</string>
     <string name="import_from_yt">Abunəlikləri İdxal Edin</string>
     <string name="import_from_yt_summary">YouTube vəya NewPipe dan</string>
@@ -100,7 +100,7 @@
     <string name="location">Məkan</string>
     <string name="instance">Server</string>
     <string name="customization">Fərdiləşdirmə</string>
-    <string name="website">Veb sayt</string>
+    <string name="website">Veb Sayt</string>
     <string name="color_accent">Vurğu Rəngi</string>
     <string name="color_red">Qırmızı</string>
     <string name="color_blue">Piksel Mavisi</string>
@@ -110,10 +110,10 @@
     <string name="oledTheme">OLED Teması</string>
     <string name="material_you">Material Dizaynı</string>
     <string name="sponsorblock_notifications">Bildirişlər</string>
-    <string name="enabled">Aktivdir</string>
+    <string name="enabled">Aktivləşdirildi</string>
     <string name="disabled">Qeyri-aktivdir</string>
     <string name="app_icon">Tətbiq Nişanı</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
-    <string name="playOnBackground">Arxa fonda oynat</string>
+    <string name="playOnBackground">Arxa Fonda Oynat</string>
 </resources>

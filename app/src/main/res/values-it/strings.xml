@@ -113,4 +113,7 @@
     <string name="category_outro">Titoli di coda/Crediti</string>
     <string name="category_outro_description">Crediti o quando appaiono le miniature di YouTube. Non deve essere usato se contengono informazioni rilevanti.</string>
     <string name="app_icon">Icona dell\'app</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Riproduci in sfondo</string>
 </resources>

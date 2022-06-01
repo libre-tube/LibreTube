@@ -79,15 +79,15 @@
     <string name="category_selfpromo">Bezpłatna / własna promocja</string>
     <string name="category_segments">Segmenty</string>
     <string name="category_sponsor">Sponsor</string>
-    <string name="category_sponsor_description">"Płatna promocja, płatne polecenia i reklamy bezpośrednie.  Nie do autopromocji lub bezpłatnych okrzyków do celów/twórców/stron internetowych/produktów, które im się podobają."</string>
+    <string name="category_sponsor_description">Płatna promocja, płatne polecenia i reklamy bezpośrednie. Nie do autopromocji lub bezpłatnych okrzyków do celów/twórców/stron internetowych/produktów, które im się podobają.</string>
     <string name="segment_skipped">Pominiento segment filmu !</string>
-    <string name="category_selfpromo_description">"Podobny do „sponsora”, z wyjątkiem bezpłatnej lub własnej promocji.  Obejmuje to sekcje dotyczące towarów, darowizn lub informacji o tym, z kim współpracowali."</string>
+    <string name="category_selfpromo_description">Podobny do „sponsora”, z wyjątkiem bezpłatnej lub własnej promocji. Obejmuje to sekcje dotyczące towarów, darowizn lub informacji o tym, z kim współpracowali.</string>
     <string name="category_interaction">Przypomnienie o interakcji (subskrybuj)</string>
-    <string name="category_interaction_description">"Gdy pojawi się krótkie przypomnienie, aby polubić, zasubskrybuj lub postępuj zgodnie z nimi w środku treści.  Jeśli jest długi lub dotyczy czegoś konkretnego, powinien być w ramach samo promocji."</string>
+    <string name="category_interaction_description">Gdy pojawi się krótkie przypomnienie, aby polubić, zasubskrybuj lub postępuj zgodnie z nimi w środku treści. Jeśli jest długi lub dotyczy czegoś konkretnego, powinien być w ramach samo promocji.</string>
     <string name="category_intro">Przerywnik / Animacja wprowadzająca</string>
-    <string name="category_intro_description">"Interwał bez faktycznej treści.  Może to być pauza, statyczna klatka, powtarzająca się animacja.  Nie należy tego używać do przejść zawierających informacje."</string>
+    <string name="category_intro_description">Interwał bez faktycznej treści. Może to być pauza, statyczna klatka, powtarzająca się animacja. Nie należy tego używać do przejść zawierających informacje.</string>
     <string name="category_outro">Karty końcowe / kredyty</string>
-    <string name="category_outro_description">"Kredyty lub kiedy pojawią się plansze końcowe YouTube.  Nie dla wniosków z informacją."</string>
+    <string name="category_outro_description">Kredyty lub kiedy pojawią się plansze końcowe YouTube. Nie dla wniosków z informacją.</string>
     <string name="license">Licencja</string>
     <string name="location">Lokalizacja</string>
     <string name="settings">Ustawienia</string>
@@ -98,7 +98,7 @@
     <string name="noInternet">Brak Połączenia z Internetem</string>
     <string name="retry">Spróbuj Ponownie</string>
     <string name="comments">Komentarze</string>
-    <string name="color_blue">Niebieski</string>
+    <string name="color_blue">Pixelowy Niebieski</string>
     <string name="color_yellow">Żółty</string>
     <string name="color_green">Zielony</string>
     <string name="color_accent">Akcent kolorystyczny</string>
@@ -107,4 +107,14 @@
     <string name="oledTheme">Motyw OLED</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Powiadomienia</string>
+    <string name="app_icon">Ikona aplikacji</string>
+    <string name="youtube">YouTube</string>
+    <string name="music_songs">Muzyka YT Piosenki</string>
+    <string name="music_videos">Muzyka YT Filmy</string>
+    <string name="music_albums">Muzyka YT Albumy</string>
+    <string name="music_playlists">Muzyka YT Playlisty</string>
+    <string name="playOnBackground">Graj w tyle</string>
+    <string name="piped">Piped</string>
+    <string name="enabled">Włonczony</string>
+    <string name="disabled">Wyłonczony</string>
 </resources>

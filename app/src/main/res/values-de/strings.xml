@@ -15,7 +15,7 @@
     <string name="logout">Abmelden</string>
     <string name="loggedIn">Angemeldet.</string>
     <string name="loggedout">Abgemeldet.</string>
-    <string name="registered">Registrierung erfolgreich! Du kannst nun Kanäle, die du magst, abonnieren.</string>
+    <string name="registered">Registrierung erfolgreich! Du kannst nun Kanäle abonnieren.</string>
     <string name="login_first">Bitte melde dich an und versuche es nochmal!</string>
     <string name="instances">Instanz wählen</string>
     <string name="customInstance">Benutzerdefinierte Instanz hinzufügen</string>
@@ -27,7 +27,7 @@
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="vlcerror">Kann nicht in VLC geöffnet werden. Möglicherweise ist es nicht installiert.</string>
     <string name="app_theme">Erscheinungsbild</string>
-    <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eventuell eine andere Instanz\?</string>
+    <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eine andere Instanz\?</string>
     <string name="unknown_error">Netzwerkfehler.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
     <string name="notgmail">Dies ist nicht dein Gmail-Konto.</string>
@@ -113,4 +113,7 @@
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>
     <string name="app_icon">App-Symbol</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Im Hintergrund abspielen</string>
 </resources>
