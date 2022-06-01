@@ -2,6 +2,7 @@ package com.github.libretube
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -73,12 +74,13 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
+
 
 var isFullScreen = false
 
@@ -112,6 +114,7 @@ class PlayerFragment : Fragment() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
+    private val notificationId = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -316,6 +319,8 @@ class PlayerFragment : Fragment() {
         super.onDestroy()
         try {
             exoPlayer.release()
+            val nManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nManager.cancel(notificationId)
         } catch (e: Exception) {
         }
     }
@@ -852,13 +857,20 @@ class PlayerFragment : Fragment() {
     private fun setMediaItem(c: Context) {
         mediaSession = MediaSessionCompat(c, this.javaClass.name)
         mediaSession.isActive = true
-
+        /* might be useful for setting the notification title
+        mediaSession.setMetadata(MediaMetadataCompat.Builder()
+            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, "")
+            .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, "")
+            .build()
+        )
+        */
         mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(exoPlayer)
     }
 
     private fun initializePlayerNotification(c: Context) {
-        playerNotification = PlayerNotificationManager.Builder(c, 1, "background_mode").build()
+        playerNotification = PlayerNotificationManager.Builder(c, notificationId, "background_mode")
+            .build()
         playerNotification.setPlayer(exoPlayer)
         playerNotification.setMediaSessionToken(mediaSession.sessionToken)
     }
