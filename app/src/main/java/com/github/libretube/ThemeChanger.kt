@@ -82,7 +82,8 @@ fun changeIcon(context: Context, newLogoActivityAlias: String) {
 // Needed due to different MainActivity Aliases because of the app icons
 fun restartMainActivity(context: Context) {
     // kill player notification
-    val nManager = context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
+    val nManager = context
+        .getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
     nManager.cancelAll()
     // restart to MainActivity
     val pm: PackageManager = context.packageManager
