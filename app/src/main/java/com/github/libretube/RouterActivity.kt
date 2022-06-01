@@ -11,15 +11,12 @@ class RouterActivity : AppCompatActivity() {
     val TAG = "RouterActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Check if Intent Action is ACTION_SEND
-        if (intent?.action == Intent.ACTION_SEND) {
-            if (intent.type == "text/plain" && checkHost(intent)) {
-                // start the main activity using the given URI as data if the host is known
-                handleSendText(intent)
-            } else {
-                // start app as normal if wrong intent type
-                restartMainActivity(this)
-            }
+        if (checkHost(intent)) {
+            // start the main activity using the given URI as data if the host is known
+            handleSendText(intent)
+        } else {
+            // start app as normal if URI not in host list
+            restartMainActivity(this)
         }
     }
 
