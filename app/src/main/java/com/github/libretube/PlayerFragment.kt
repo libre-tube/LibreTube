@@ -319,7 +319,10 @@ class PlayerFragment : Fragment() {
         super.onDestroy()
         try {
             exoPlayer.release()
-            val nManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            // kill notification
+            val nManager = context?.getSystemService(
+                Context.NOTIFICATION_SERVICE
+            ) as NotificationManager
             nManager.cancel(notificationId)
         } catch (e: Exception) {
         }
