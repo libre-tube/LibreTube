@@ -1,9 +1,11 @@
 package com.github.libretube
 
+import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import java.util.*
@@ -79,6 +81,10 @@ fun changeIcon(context: Context, newLogoActivityAlias: String) {
 
 // Needed due to different MainActivity Aliases because of the app icons
 fun restartMainActivity(context: Context) {
+    // kill player notification
+    val nManager = context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
+    nManager.cancelAll()
+    // restart to MainActivity
     val pm: PackageManager = context.packageManager
     val intent = pm.getLaunchIntentForPackage(context.packageName)
     intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK

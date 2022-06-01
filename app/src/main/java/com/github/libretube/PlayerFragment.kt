@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
+import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
 import android.util.Log
@@ -57,10 +58,12 @@ import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
@@ -69,12 +72,12 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -104,6 +107,10 @@ class PlayerFragment : Fragment() {
     private lateinit var segmentData: Segments
 
     private lateinit var relDownloadVideo: LinearLayout
+
+    private lateinit var mediaSession: MediaSessionCompat
+    private lateinit var mediaSessionConnector: MediaSessionConnector
+    private lateinit var playerNotification: PlayerNotificationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -405,32 +412,14 @@ class PlayerFragment : Fragment() {
                         )
                     }
 
-                    val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
-                    val cronetDataSourceFactory: CronetDataSource.Factory =
-                        CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
+                    createExoPlayer(view)
 
-                    val dataSourceFactory = DefaultDataSource.Factory(
-                        requireContext(),
-                        cronetDataSourceFactory
-                    )
-
-                    val audioAttributes = AudioAttributes.Builder()
-                        .setUsage(C.USAGE_MEDIA)
-                        .setContentType(C.CONTENT_TYPE_MOVIE)
-                        .build()
-
-                    exoPlayer = ExoPlayer.Builder(view.context)
-                        .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
-                        .setSeekBackIncrementMs(5000)
-                        .setSeekForwardIncrementMs(5000)
-                        .build()
                     exoPlayerView.setShowSubtitleButton(true)
                     exoPlayerView.setShowNextButton(false)
                     exoPlayerView.setShowPreviousButton(false)
                     exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
                     // exoPlayerView.controllerShowTimeoutMs = 1500
                     exoPlayerView.controllerHideOnTouch = true
-                    exoPlayer.setAudioAttributes(audioAttributes, true)
                     exoPlayerView.player = exoPlayer
                     val sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -827,6 +816,47 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    private fun createExoPlayer(view: View) {
+        val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
+        val cronetDataSourceFactory: CronetDataSource.Factory =
+            CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
+
+        val dataSourceFactory = DefaultDataSource.Factory(
+            requireContext(),
+            cronetDataSourceFactory
+        )
+
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(C.USAGE_MEDIA)
+            .setContentType(C.CONTENT_TYPE_MOVIE)
+            .build()
+
+        exoPlayer = ExoPlayer.Builder(view.context)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
+            .setSeekBackIncrementMs(5000)
+            .setSeekForwardIncrementMs(5000)
+            .build()
+
+        exoPlayer.setAudioAttributes(audioAttributes, true)
+
+        setMediaItem(requireContext())
+        initializePlayerNotification(requireContext())
+    }
+
+    private fun setMediaItem(c: Context) {
+        mediaSession = MediaSessionCompat(c, this.javaClass.name)
+        mediaSession.isActive = true
+
+        mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setPlayer(exoPlayer)
+    }
+
+    private fun initializePlayerNotification(c: Context) {
+        playerNotification = PlayerNotificationManager.Builder(c, 1, "background_mode").build()
+        playerNotification.setPlayer(exoPlayer)
+        playerNotification.setMediaSessionToken(mediaSession.sessionToken)
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {

@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.Manifest
+import android.app.NotificationManager
 import android.content.ContentResolver
 import android.content.Context
 import android.content.DialogInterface
@@ -28,13 +29,14 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
+
 
 private var isCurrentViewMainSettings = true
 private var requireMainActivityRestart = false
@@ -389,6 +391,9 @@ class SettingsActivity :
                 .unregisterOnSharedPreferenceChangeListener(this)
             if (requireMainActivityRestart) {
                 requireMainActivityRestart = false
+                // kill player notification
+                val nManager = this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                nManager.cancelAll()
                 restartMainActivity(this)
                 finishAffinity()
             } else {
