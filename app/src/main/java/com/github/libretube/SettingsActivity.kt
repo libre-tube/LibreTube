@@ -1,6 +1,7 @@
 package com.github.libretube
 
 import android.Manifest
+import android.app.NotificationManager
 import android.content.ContentResolver
 import android.content.Context
 import android.content.DialogInterface
@@ -389,6 +390,9 @@ class SettingsActivity :
                 .unregisterOnSharedPreferenceChangeListener(this)
             if (requireMainActivityRestart) {
                 requireMainActivityRestart = false
+                // kill player notification
+                val nManager = this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                nManager.cancelAll()
                 restartMainActivity(this)
                 finishAffinity()
             } else {
