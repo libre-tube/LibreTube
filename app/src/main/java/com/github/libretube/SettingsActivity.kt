@@ -172,7 +172,7 @@ class SettingsActivity :
 
             val login = findPreference<Preference>("login_register")
             login?.setOnPreferenceClickListener {
-
+                requireMainActivityRestart = true
                 val newFragment = LoginDialog()
                 newFragment.show(childFragmentManager, "Login")
                 true

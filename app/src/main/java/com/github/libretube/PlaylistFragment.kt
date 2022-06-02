@@ -80,7 +80,8 @@ class PlaylistFragment : Fragment() {
                         response.relatedStreams!!.toMutableList(),
                         playlist_id!!,
                         isOwner,
-                        requireActivity()
+                        requireActivity(),
+                        childFragmentManager
                     )
                     view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
                     val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)
