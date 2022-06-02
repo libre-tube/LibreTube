@@ -50,7 +50,10 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     }
                     // Add Video to Playlist Dialog
                     1 -> {
-                        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                        val sharedPref = context?.getSharedPreferences(
+                            "token",
+                            Context.MODE_PRIVATE
+                        )
                         val token = sharedPref?.getString("token", "")
                         if (token != "") {
                             val newFragment = AddtoPlaylistDialog()
