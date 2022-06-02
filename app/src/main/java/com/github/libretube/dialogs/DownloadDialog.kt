@@ -1,8 +1,12 @@
 package com.github.libretube.dialogs
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -13,14 +17,18 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.DownloadService
+import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.obj.Streams
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
+    var streams: Streams = Streams()
     var vidName = arrayListOf<String>()
     var vidUrl = arrayListOf<String>()
     var audioName = arrayListOf<String>()
@@ -32,12 +40,62 @@ class DownloadDialog : DialogFragment() {
     private lateinit var videoId: String
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            vidName = arguments?.getStringArrayList("videoName") as ArrayList<String>
-            vidUrl = arguments?.getStringArrayList("videoUrl") as ArrayList<String>
-            audioName = arguments?.getStringArrayList("audioName") as ArrayList<String>
-            audioUrl = arguments?.getStringArrayList("audioUrl") as ArrayList<String>
-            duration = arguments?.getInt("duration")!!
-            videoId = arguments?.getString("videoId")!!
+            streams = arguments?.getParcelable("streams")!!
+            videoId = arguments?.getString("video_id")!!
+
+            val mainActivity = activity as MainActivity
+            Log.e(TAG, "download button clicked!")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                Log.d("myz", "" + Build.VERSION.SDK_INT)
+                if (!Environment.isExternalStorageManager()) {
+                    ActivityCompat.requestPermissions(
+                        mainActivity,
+                        arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                        ),
+                        1
+                    ) // permission request code is just an int
+                }
+            } else {
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        mainActivity,
+                        arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ),
+                        1
+                    )
+                }
+            }
+            var vidName = arrayListOf<String>()
+            vidName.add("No video")
+            var vidUrl = arrayListOf<String>()
+            vidUrl.add("")
+            for (vid in streams?.videoStreams!!) {
+                val name = vid.quality + " " + vid.format
+                vidName.add(name)
+                vidUrl.add(vid.url!!)
+            }
+            var audioName = arrayListOf<String>()
+            audioName.add("No audio")
+            var audioUrl = arrayListOf<String>()
+            audioUrl.add("")
+            for (audio in streams?.audioStreams!!) {
+                val name = audio.quality + " " + audio.format
+                audioName.add(name)
+                audioUrl.add(audio.url!!)
+            }
+
             val builder = MaterialAlertDialogBuilder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater
@@ -114,13 +172,5 @@ class DownloadDialog : DialogFragment() {
             builder.setView(view)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    override fun onDestroy() {
-        vidName.clear()
-        vidUrl.clear()
-        audioUrl.clear()
-        audioName.clear()
-        super.onDestroy()
     }
 }

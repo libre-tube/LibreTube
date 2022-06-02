@@ -1,19 +1,16 @@
 package com.github.libretube.fragments
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.os.Environment
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
@@ -34,7 +31,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -85,11 +81,11 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -729,66 +725,10 @@ class PlayerFragment : Fragment() {
                 // download clicked
                 relDownloadVideo.setOnClickListener {
                     if (!IS_DOWNLOAD_RUNNING) {
-                        val mainActivity = activity as MainActivity
-                        Log.e(TAG, "download button clicked!")
-                        if (SDK_INT >= Build.VERSION_CODES.R) {
-                            Log.d("myz", "" + SDK_INT)
-                            if (!Environment.isExternalStorageManager()) {
-                                ActivityCompat.requestPermissions(
-                                    mainActivity,
-                                    arrayOf(
-                                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                                    ),
-                                    1
-                                ) // permission request code is just an int
-                            }
-                        } else {
-                            if (ActivityCompat.checkSelfPermission(
-                                    requireContext(),
-                                    Manifest.permission.READ_EXTERNAL_STORAGE
-                                ) != PackageManager.PERMISSION_GRANTED ||
-                                ActivityCompat.checkSelfPermission(
-                                        requireContext(),
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                    ) != PackageManager.PERMISSION_GRANTED
-                            ) {
-                                ActivityCompat.requestPermissions(
-                                    mainActivity,
-                                    arrayOf(
-                                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                    ),
-                                    1
-                                )
-                            }
-                        }
-                        var vidName = arrayListOf<String>()
-                        vidName.add("No video")
-                        var vidUrl = arrayListOf<String>()
-                        vidUrl.add("")
-                        for (vid in response.videoStreams) {
-                            val name = vid.quality + " " + vid.format
-                            vidName.add(name)
-                            vidUrl.add(vid.url!!)
-                        }
-                        var audioName = arrayListOf<String>()
-                        audioName.add("No audio")
-                        var audioUrl = arrayListOf<String>()
-                        audioUrl.add("")
-                        for (audio in response.audioStreams!!) {
-                            val name = audio.quality + " " + audio.format
-                            audioName.add(name)
-                            audioUrl.add(audio.url!!)
-                        }
                         val newFragment = DownloadDialog()
                         var bundle = Bundle()
-                        bundle.putStringArrayList("videoName", vidName)
-                        bundle.putStringArrayList("videoUrl", vidUrl)
-                        bundle.putStringArrayList("audioName", audioName)
-                        bundle.putStringArrayList("audioUrl", audioUrl)
-                        bundle.putString("videoId", videoId)
-                        bundle.putInt("duration", response.duration)
+                        bundle.putString("video_id", videoId)
+                        bundle.putParcelable("streams", response)
                         newFragment.arguments = bundle
                         newFragment.show(childFragmentManager, "Download")
                     } else {
