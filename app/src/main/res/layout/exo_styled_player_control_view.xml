@@ -48,13 +48,10 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_close2"
                 android:padding="@dimen/exo_icon_padding"
-                android:background="#00FFFFFF"
-
-                />
+                android:background="#00FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/quality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
@@ -63,14 +60,23 @@
             android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
             android:layout_gravity="center_vertical|end"
             android:layoutDirection="ltr">
+            <ImageButton
+                android:id="@+id/aspect_ratio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_aspect_ratio"
+                android:padding="@dimen/exo_icon_padding"
+                android:layout_marginEnd="12dp"
+                android:background="#00FFFFFF"/>
 
             <TextView
                 android:id="@+id/quality_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:padding="@dimen/exo_icon_padding"
                 android:text="HLS"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"/>
             <ImageButton
                 android:id="@+id/quality_select"
                 android:layout_width="wrap_content"
