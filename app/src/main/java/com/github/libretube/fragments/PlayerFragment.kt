@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -44,11 +44,17 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.IS_DOWNLOAD_RUNNING
+import com.github.libretube.MainActivity
+import com.github.libretube.R
+import com.github.libretube.SponsorBlockSettings
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.showShareDialog
+import com.github.libretube.formatShort
+import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
