@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.PlaylistAdapter
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class PlaylistFragment : Fragment() {
     private var playlist_id: String? = null
