@@ -86,7 +86,7 @@
             app:entries="@array/icons"
             app:entryValues="@array/iconsValue"
             app:defaultValue="MainActivity"
-            android:icon="@drawable/ic_color"
+            android:icon="@drawable/ic_frame"
             />
 
     <androidx.preference.Preference
@@ -152,7 +152,7 @@
         <Preference
             app:title="@string/license"
             app:key="license"
-            android:icon="@drawable/ic_info" />
+            android:icon="@drawable/ic_license" />
 
     </PreferenceCategory>
 
