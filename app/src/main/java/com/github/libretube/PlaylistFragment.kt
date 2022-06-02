@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.PlaylistAdapter
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistFragment : Fragment() {
     private var playlist_id: String? = null
@@ -80,7 +80,8 @@ class PlaylistFragment : Fragment() {
                         response.relatedStreams!!.toMutableList(),
                         playlist_id!!,
                         isOwner,
-                        requireActivity()
+                        requireActivity(),
+                        childFragmentManager
                     )
                     view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
                     val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)

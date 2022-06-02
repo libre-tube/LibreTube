@@ -11,23 +11,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.PlayerFragment
 import com.github.libretube.R
 import com.github.libretube.RetrofitInstance
+import com.github.libretube.VideoOptionsDialog
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,
     private val playlistId: String,
     private val isOwner: Boolean,
-    private val activity: Activity
+    private val activity: Activity,
+    private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
     private val TAG = "PlaylistAdapter"
     override fun getItemCount(): Int {
@@ -66,6 +69,13 @@ class PlaylistAdapter(
                 .replace(R.id.container, frag)
                 .commitNow()
         }
+        holder.v.setOnLongClickListener {
+            val videoId = streamItem.url!!.replace("/watch?v=", "")
+            VideoOptionsDialog(videoId, holder.v.context)
+                .show(childFragmentManager, VideoOptionsDialog.TAG)
+            true
+        }
+
         if (isOwner) {
             val delete = holder.v.findViewById<ImageView>(R.id.delete_playlist)
             delete.visibility = View.VISIBLE

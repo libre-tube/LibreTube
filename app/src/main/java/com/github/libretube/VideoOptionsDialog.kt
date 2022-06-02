@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -51,9 +50,8 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     }
                     // Add Video to Playlist Dialog
                     1 -> {
-                        val sharedPreferences = PreferenceManager
-                            .getDefaultSharedPreferences(requireContext())
-                        val token = sharedPreferences.getString("token", "")
+                        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                        val token = sharedPref?.getString("token", "")
                         if (token != "") {
                             val newFragment = AddtoPlaylistDialog()
                             val bundle = Bundle()
