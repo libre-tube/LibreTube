@@ -152,7 +152,7 @@
         <Preference
             app:title="@string/license"
             app:key="license"
-            android:icon="@drawable/ic_info" />
+            android:icon="@drawable/ic_license" />
 
     </PreferenceCategory>
 
