@@ -287,7 +287,7 @@ class PlayerFragment : Fragment() {
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
         view.findViewById<ImageButton>(R.id.aspect_ratio_button).setOnClickListener {
-            if(isZoomed) {
+            if (isZoomed) {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 isZoomed = false
             } else {
