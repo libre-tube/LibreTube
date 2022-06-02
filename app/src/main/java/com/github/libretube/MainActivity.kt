@@ -30,7 +30,10 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.github.libretube.fragments.PlayerFragment
+import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.util.CronetHelper
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
 

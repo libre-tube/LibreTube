@@ -13,12 +13,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.PlayerFragment
 import com.github.libretube.R
-import com.github.libretube.RetrofitInstance
-import com.github.libretube.VideoOptionsDialog
+import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import java.io.IOException
 import kotlinx.coroutines.GlobalScope

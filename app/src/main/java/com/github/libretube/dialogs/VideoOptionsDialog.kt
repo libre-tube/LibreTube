@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Context
@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.BackgroundMode
+import com.github.libretube.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -44,8 +46,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                 when (which) {
                     // This for example will be the "Background mode" option
                     0 -> {
-                        BackgroundMode
-                            .getInstance()
+                        BackgroundMode.getInstance()
                             .playOnBackgroundMode(requireContext(), videoId, 0)
                     }
                     // Add Video to Playlist Dialog

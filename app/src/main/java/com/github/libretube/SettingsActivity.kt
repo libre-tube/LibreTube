@@ -27,6 +27,8 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.github.libretube.dialogs.LoginDialog
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException

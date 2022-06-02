@@ -3,6 +3,7 @@ package com.github.libretube
 import android.content.Context
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem

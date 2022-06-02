@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Context
@@ -13,7 +13,9 @@ import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.R
 import com.github.libretube.obj.Login
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 import retrofit2.HttpException

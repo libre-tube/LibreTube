@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Intent
@@ -15,6 +15,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.DownloadService
+import com.github.libretube.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadDialog : DialogFragment() {

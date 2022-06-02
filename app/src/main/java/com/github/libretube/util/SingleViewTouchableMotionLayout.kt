@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.util
 
 import android.content.Context
 import android.graphics.Rect
@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.github.libretube.R
 
 /**
  *

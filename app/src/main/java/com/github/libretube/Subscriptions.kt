@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
+import com.github.libretube.util.RetrofitInstance
 import java.io.IOException
 import retrofit2.HttpException
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.libretube.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.libretube.util.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/channel_refresh"
     android:layout_width="match_parent"
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ChannelFragment"
+        tools:context=".fragments.ChannelFragment"
         android:visibility="invisible">
 
         <LinearLayout
@@ -115,4 +115,4 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-</com.github.libretube.CustomSwipeToRefresh>
+</com.github.libretube.util.CustomSwipeToRefresh>
