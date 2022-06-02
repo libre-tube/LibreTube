@@ -1,12 +1,13 @@
-package com.github.libretube
+package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.BackgroundMode
+import com.github.libretube.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -44,8 +45,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                 when (which) {
                     // This for example will be the "Background mode" option
                     0 -> {
-                        BackgroundMode
-                            .getInstance()
+                        BackgroundMode.getInstance()
                             .playOnBackgroundMode(requireContext(), videoId, 0)
                     }
                     // Add Video to Playlist Dialog
@@ -66,47 +66,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                         }
                     }
                     2 -> {
-                        /* crashes
-                        val sharedPreferences =
-                            PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        val instancePref = sharedPreferences.getString(
-                            "instance",
-                            "https://pipedapi.kavin.rocks"
-                        )!!
-                        val instance = "&instance=${URLEncoder.encode(instancePref, "UTF-8")}"
-                        val shareOptions = arrayOf(
-                            getString(R.string.piped),
-                            getString(R.string.instance),
-                            getString(R.string.youtube)
-                        )
-                        MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(getString(R.string.share))
-                            .setItems(
-                                shareOptions
-                            ) { _, id ->
-                                val url = when (id) {
-                                    0 -> "https://piped.kavin.rocks/watch?v=$videoId"
-                                    1 -> "https://piped.kavin.rocks/watch?v=$videoId$instance"
-                                    2 -> "https://youtu.be/$videoId"
-                                    else -> "https://piped.kavin.rocks/watch?v=$videoId"
-                                }
-                                dismiss()
-                                val intent = Intent()
-                                intent.action = Intent.ACTION_SEND
-                                intent.putExtra(Intent.EXTRA_TEXT, url)
-                                intent.type = "text/plain"
-                                startActivity(Intent.createChooser(intent, "Share Url To:"))
-                            }
-                            .show()
-                         */
-                        val intent = Intent()
-                        intent.action = Intent.ACTION_SEND
-                        intent.putExtra(
-                            Intent.EXTRA_TEXT,
-                            "https://piped.kavin.rocks/watch?v=$videoId"
-                        )
-                        intent.type = "text/plain"
-                        startActivity(Intent.createChooser(intent, "Share Url To:"))
+                        showShareDialog(requireContext(), videoId)
                     }
                     else -> {
                         dialog.dismiss()

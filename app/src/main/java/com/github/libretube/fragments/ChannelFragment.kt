@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,8 +15,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
+import com.github.libretube.formatShort
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import java.io.IOException

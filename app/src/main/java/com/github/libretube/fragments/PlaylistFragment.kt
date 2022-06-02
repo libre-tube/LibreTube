@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
+import com.github.libretube.util.RetrofitInstance
 import java.io.IOException
 import retrofit2.HttpException
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaylistFragment"
+    tools:context=".fragments.PlaylistFragment"
     android:id="@+id/playlist_scrollview">
 <LinearLayout
     android:orientation="vertical"

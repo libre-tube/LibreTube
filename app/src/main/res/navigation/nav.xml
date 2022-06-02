@@ -23,12 +23,12 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.github.libretube.SearchFragment"
+        android:name="com.github.libretube.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/channel"
-        android:name="com.github.libretube.ChannelFragment"
+        android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
         tools:layout="@layout/fragment_channel" >
         <argument
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
-        android:name="com.github.libretube.PlaylistFragment"
+        android:name="com.github.libretube.fragments.PlaylistFragment"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist" >
         <argument

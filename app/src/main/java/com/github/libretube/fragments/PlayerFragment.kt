@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -44,14 +44,24 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.IS_DOWNLOAD_RUNNING
+import com.github.libretube.MainActivity
+import com.github.libretube.R
+import com.github.libretube.SponsorBlockSettings
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.dialogs.AddtoPlaylistDialog
+import com.github.libretube.dialogs.DownloadDialog
+import com.github.libretube.dialogs.showShareDialog
+import com.github.libretube.formatShort
+import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.util.CronetHelper
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -76,7 +86,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import java.io.IOException
-import java.net.URLEncoder
 import java.util.concurrent.Executors
 import kotlin.math.abs
 import org.chromium.net.CronetEngine
@@ -423,6 +432,16 @@ class PlayerFragment : Fragment() {
     private fun initializePlayerView(view: View, response: Streams) {
         isLoading = false
         runOnUiThread {
+            createExoPlayer(view)
+
+            exoPlayerView.setShowSubtitleButton(true)
+            exoPlayerView.setShowNextButton(false)
+            exoPlayerView.setShowPreviousButton(false)
+            exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
+            // exoPlayerView.controllerShowTimeoutMs = 1500
+            exoPlayerView.controllerHideOnTouch = true
+            exoPlayerView.player = exoPlayer
+
             var videosNameArray: Array<CharSequence> = arrayOf()
             videosNameArray += "HLS"
             for (vid in response.videoStreams!!) {
@@ -438,16 +457,6 @@ class PlayerFragment : Fragment() {
                         .build()
                 )
             }
-
-            createExoPlayer(view)
-
-            exoPlayerView.setShowSubtitleButton(true)
-            exoPlayerView.setShowNextButton(false)
-            exoPlayerView.setShowPreviousButton(false)
-            exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
-            // exoPlayerView.controllerShowTimeoutMs = 1500
-            exoPlayerView.controllerHideOnTouch = true
-            exoPlayerView.player = exoPlayer
             val sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(requireContext())
             val defres = sharedPreferences.getString("default_res", "")!!
@@ -713,37 +722,7 @@ class PlayerFragment : Fragment() {
             }
             // share button
             view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
-                val sharedPreferences =
-                    PreferenceManager.getDefaultSharedPreferences(requireContext())
-                val instancePref = sharedPreferences.getString(
-                    "instance",
-                    "https://pipedapi.kavin.rocks"
-                )!!
-                val instance = "&instance=${URLEncoder.encode(instancePref, "UTF-8")}"
-                val shareOptions = arrayOf(
-                    getString(R.string.piped),
-                    getString(R.string.instance),
-                    getString(R.string.youtube)
-                )
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle(getString(R.string.share))
-                    .setItems(
-                        shareOptions,
-                        DialogInterface.OnClickListener { _, id ->
-                            val url = when (id) {
-                                0 -> "https://piped.kavin.rocks/watch?v=$videoId"
-                                1 -> "https://piped.kavin.rocks/watch?v=$videoId$instance"
-                                2 -> "https://youtu.be/$videoId"
-                                else -> "https://piped.kavin.rocks/watch?v=$videoId"
-                            }
-                            val intent = Intent()
-                            intent.action = Intent.ACTION_SEND
-                            intent.putExtra(Intent.EXTRA_TEXT, url)
-                            intent.type = "text/plain"
-                            startActivity(Intent.createChooser(intent, "Share Url To:"))
-                        }
-                    )
-                    .show()
+                showShareDialog(requireContext(), videoId!!)
             }
             // check if livestream
             if (response.duration!! > 0) {

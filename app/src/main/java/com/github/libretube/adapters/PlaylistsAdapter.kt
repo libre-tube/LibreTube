@@ -12,9 +12,9 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
-import com.github.libretube.RetrofitInstance
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import java.io.IOException

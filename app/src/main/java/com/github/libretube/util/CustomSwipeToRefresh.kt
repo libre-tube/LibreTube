@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.util
 
 import android.content.Context
 import android.util.AttributeSet
