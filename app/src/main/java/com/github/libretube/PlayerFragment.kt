@@ -65,6 +65,7 @@ import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
@@ -93,6 +94,7 @@ class PlayerFragment : Fragment() {
     private var eId: Int = 0
     private var paused = false
     private var whichQuality = 0
+    private var isZoomed: Boolean = false
 
     var isSubscribed: Boolean = false
 
@@ -280,6 +282,17 @@ class PlayerFragment : Fragment() {
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 isFullScreen = false
+            }
+        }
+
+        // switching between original aspect ratio (black bars) and zoomed to fill device screen
+        view.findViewById<ImageButton>(R.id.aspect_ratio_button).setOnClickListener {
+            if (isZoomed) {
+                exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+                isZoomed = false
+            } else {
+                exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                isZoomed = true
             }
         }
 
