@@ -451,6 +451,46 @@ class PlayerFragment : Fragment() {
             view.findViewById<TextView>(R.id.player_title).text = response.title
             view.findViewById<TextView>(R.id.player_description).text = response.description
 
+            // Listener for play and pause icon change
+            exoPlayer.addListener(object : com.google.android.exoplayer2.Player.Listener {
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
+                        exoPlayerView.postDelayed(
+                            this@PlayerFragment::checkForSegments,
+                            100
+                        )
+                    }
+                }
+
+                override fun onPlayerStateChanged(
+                    playWhenReady: Boolean,
+                    playbackState: Int
+                ) {
+
+                    exoPlayerView.keepScreenOn = !(
+                        playbackState == Player.STATE_IDLE ||
+                            playbackState == Player.STATE_ENDED ||
+                            !playWhenReady
+                        )
+
+                    if (playWhenReady && playbackState == Player.STATE_READY) {
+                        // media actually playing
+                        view.findViewById<ImageView>(R.id.play_imageView)
+                            .setImageResource(R.drawable.ic_pause)
+                    } else if (playWhenReady) {
+                        // might be idle (plays after prepare()),
+                        // buffering (plays when data available)
+                        // or ended (plays when seek away from end)
+                        view.findViewById<ImageView>(R.id.play_imageView)
+                            .setImageResource(R.drawable.ic_play)
+                    } else {
+                        // player paused in any state
+                        view.findViewById<ImageView>(R.id.play_imageView)
+                            .setImageResource(R.drawable.ic_play)
+                    }
+                }
+            })
+
             // share button
             view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
                 showShareDialog(requireContext(), videoId!!)
@@ -513,45 +553,6 @@ class PlayerFragment : Fragment() {
                     description
                 }
 
-            // Listener for play and pause icon change
-            exoPlayer.addListener(object : com.google.android.exoplayer2.Player.Listener {
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
-                        exoPlayerView.postDelayed(
-                            this@PlayerFragment::checkForSegments,
-                            100
-                        )
-                    }
-                }
-
-                override fun onPlayerStateChanged(
-                    playWhenReady: Boolean,
-                    playbackState: Int
-                ) {
-
-                    exoPlayerView.keepScreenOn = !(
-                        playbackState == Player.STATE_IDLE ||
-                            playbackState == Player.STATE_ENDED ||
-                            !playWhenReady
-                        )
-
-                    if (playWhenReady && playbackState == Player.STATE_READY) {
-                        // media actually playing
-                        view.findViewById<ImageView>(R.id.play_imageView)
-                            .setImageResource(R.drawable.ic_pause)
-                    } else if (playWhenReady) {
-                        // might be idle (plays after prepare()),
-                        // buffering (plays when data available)
-                        // or ended (plays when seek away from end)
-                        view.findViewById<ImageView>(R.id.play_imageView)
-                            .setImageResource(R.drawable.ic_play)
-                    } else {
-                        // player paused in any state
-                        view.findViewById<ImageView>(R.id.play_imageView)
-                            .setImageResource(R.drawable.ic_play)
-                    }
-                }
-            })
             view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
 
                 val activity = view.context as MainActivity
