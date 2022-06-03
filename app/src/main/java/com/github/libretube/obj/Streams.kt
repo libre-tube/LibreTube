@@ -52,8 +52,7 @@ data class Streams(
         parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
         parcel.readString(),
         TODO("chapters")
-    ) {
-    }
+    )
 
     constructor() : this(
         "", "", "", "", "", "", "", "", "", "", null, -1, -1, -1, -1, emptyList(), emptyList(),

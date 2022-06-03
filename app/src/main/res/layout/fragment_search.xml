@@ -320,7 +320,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchbar_holder"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler"
@@ -330,7 +330,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchbar_holder"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/searchbar_holder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

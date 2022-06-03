@@ -15,8 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="5dp"
-        />
+        android:layout_margin="5dp" />
+
     <TextView
         android:id="@+id/history_text"
         android:layout_width="0dp"

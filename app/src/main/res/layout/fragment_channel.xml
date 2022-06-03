@@ -48,18 +48,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/channel_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Channel Name"
-                        android:drawablePadding="3dip"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        />
+                        <TextView
+                            android:id="@+id/channel_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:text="Channel Name"
+                            android:drawablePadding="3dip"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
 
                     </LinearLayout>
 
@@ -84,8 +83,7 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="11sp"
                     android:drawableLeft="@drawable/ic_bell_small"
-                    android:drawableTint="?android:attr/textColorPrimary"
-                    />
+                    android:drawableTint="?android:attr/textColorPrimary" />
 
             </LinearLayout>
 

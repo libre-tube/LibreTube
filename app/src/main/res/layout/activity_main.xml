@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_main_scene"
     tools:context=".MainActivity"
-    android:id="@+id/mainMotionLayout"
-    >
-        <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/mainMotionLayout">
+
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -16,7 +16,7 @@
         app:titleCentered="true"
         app:subtitleCentered="true"
         app:title="@string/app_name"
-            app:navigationIcon="@drawable/ic_settings"
+        app:navigationIcon="@drawable/ic_settings"
 
         />
 
@@ -48,6 +48,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:color/transparent"
-        />
+        android:background="@android:color/transparent" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

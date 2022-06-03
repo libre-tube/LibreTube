@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    >
+    android:background="?android:attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".45"/>
+        app:layout_constraintGuide_percent=".45" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_playlist"
         app:cardCornerRadius="8dp"
@@ -27,17 +27,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintEnd_toStartOf="@+id/guideline">
-    <ImageView
-        android:id="@+id/search_thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/search_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
         <RelativeLayout
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:background="#CC000000"
-            >
+            android:background="#CC000000">
 
             <TextView
                 android:id="@+id/search_playlist_number"

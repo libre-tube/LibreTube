@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
@@ -8,29 +7,27 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="10"
-        motion:motionInterpolator="easeInOut"
-        >
-       <KeyFrameSet>
-           <KeyAttribute
-               motion:motionTarget="@+id/close_imageView"
-               motion:framePosition="90"
-               android:alpha="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/play_imageView"
-               motion:framePosition="90"
-               android:alpha="0" />
-           <KeyAttribute
-               motion:motionTarget="@+id/title_textView"
-               motion:framePosition="95"
-               android:alpha="0" />
-       </KeyFrameSet>
+        motion:motionInterpolator="easeInOut">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:motionTarget="@+id/close_imageView"
+                motion:framePosition="90"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/play_imageView"
+                motion:framePosition="90"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/title_textView"
+                motion:framePosition="95"
+                android:alpha="0" />
+        </KeyFrameSet>
         <OnSwipe
             motion:touchAnchorId="@+id/main_container"
             motion:dragDirection="dragDown"
             motion:touchAnchorSide="bottom"
             motion:maxAcceleration="40"
-            motion:dragScale="6"
-            />
+            motion:dragScale="6" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -108,8 +105,7 @@
             android:layout_marginEnd="16dp"
             android:alpha="1"
             motion:layout_constraintTop_toTopOf="@id/main_container"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
         <Constraint
             android:id="@+id/play_imageView"
             motion:layout_constraintEnd_toStartOf="@+id/close_imageView"
@@ -119,8 +115,7 @@
             android:layout_marginEnd="24dp"
             android:alpha="1"
             motion:layout_constraintTop_toTopOf="@+id/close_imageView"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
         <Constraint
             android:id="@+id/title_textView"
             motion:layout_constraintEnd_toStartOf="@+id/play_imageView"
@@ -132,7 +127,6 @@
             android:alpha="1"
             android:layout_marginStart="8dp"
             motion:layout_constraintTop_toTopOf="@+id/play_imageView"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
     </ConstraintSet>
 </MotionScene>

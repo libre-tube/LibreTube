@@ -19,8 +19,7 @@
         android:id="@+id/library"
         android:name="com.github.libretube.Library"
         android:label="fragment_library"
-        tools:layout="@layout/fragment_library" >
-    </fragment>
+        tools:layout="@layout/fragment_library"></fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.github.libretube.fragments.SearchFragment"
@@ -30,7 +29,7 @@
         android:id="@+id/channel"
         android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
-        tools:layout="@layout/fragment_channel" >
+        tools:layout="@layout/fragment_channel">
         <argument
             android:name="channel_id"
             app:argType="string" />
@@ -39,7 +38,7 @@
         android:id="@+id/playlistFragment"
         android:name="com.github.libretube.fragments.PlaylistFragment"
         android:label="fragment_playlist"
-        tools:layout="@layout/fragment_playlist" >
+        tools:layout="@layout/fragment_playlist">
         <argument
             android:name="playlist_id"
             app:argType="string" />

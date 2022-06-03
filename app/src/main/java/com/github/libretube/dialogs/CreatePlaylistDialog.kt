@@ -66,6 +66,7 @@ class CreatePlaylistDialog : DialogFragment() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
+
     private fun createPlaylist(name: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {

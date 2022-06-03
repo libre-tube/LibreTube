@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="10"
-        motion:layoutDuringTransition="honorRequest"
-        >
-       <KeyFrameSet>
-           <KeyAttribute
-               motion:motionTarget="@+id/bottomNav"
-               motion:framePosition="0"
-               android:translationY="0dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/bottomNav"
-               motion:framePosition="75"
-               android:translationY="55dp" />
-           <KeyAttribute
-               motion:motionTarget="@+id/container"
-               motion:framePosition="50"
-               android:scaleY="1" />
-           <KeyAttribute
-               motion:motionTarget="@+id/container"
-               motion:framePosition="100"
-               android:translationY="-80dp" />
-       </KeyFrameSet>
+        motion:layoutDuringTransition="honorRequest">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:motionTarget="@+id/bottomNav"
+                motion:framePosition="0"
+                android:translationY="0dp" />
+            <KeyAttribute
+                motion:motionTarget="@+id/bottomNav"
+                motion:framePosition="75"
+                android:translationY="55dp" />
+            <KeyAttribute
+                motion:motionTarget="@+id/container"
+                motion:framePosition="50"
+                android:scaleY="1" />
+            <KeyAttribute
+                motion:motionTarget="@+id/container"
+                motion:framePosition="100"
+                android:translationY="-80dp" />
+        </KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
-    </ConstraintSet>
+    <ConstraintSet android:id="@+id/start"></ConstraintSet>
 
-    <ConstraintSet android:id="@+id/end">
-    </ConstraintSet>
+    <ConstraintSet android:id="@+id/end"></ConstraintSet>
 </MotionScene>

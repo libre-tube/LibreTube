@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
-
+    android:layout_height="wrap_content">
 
 
     <TextView
@@ -15,8 +13,7 @@
         android:text="@string/app_name"
         android:gravity="center"
         android:layout_margin="10dp"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -32,16 +29,15 @@
         app:boxCornerRadiusBottomStart="15dp"
         app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        >
+        app:boxCornerRadiusTopStart="15dp">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/playlist_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/playlistName"
-        android:inputType="text"
-        android:padding="12dp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/playlist_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/playlistName"
+            android:inputType="text"
+            android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -50,6 +46,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
+
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
@@ -57,15 +54,16 @@
             android:text="@string/cancel"
             android:textColor="?attr/colorSurface"
             android:padding="8dp"
-            android:layout_margin="8dp"/>
-    <Button
-        android:id="@+id/create_new_playlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/createPlaylist"
-        android:textColor="?attr/colorSurface"
-        android:padding="8dp"
-        android:layout_margin="8dp"/>
+            android:layout_margin="8dp" />
+
+        <Button
+            android:id="@+id/create_new_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/createPlaylist"
+            android:textColor="?attr/colorSurface"
+            android:padding="8dp"
+            android:layout_margin="8dp" />
 
     </LinearLayout>
 
