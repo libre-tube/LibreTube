@@ -181,11 +181,14 @@ class PlayerFragment : Fragment() {
                     view.findViewById<ImageButton>(R.id.quality_select).visibility = View.GONE
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.GONE
                     view.findViewById<TextView>(R.id.quality_text).visibility = View.GONE
+                    view.findViewById<ImageButton>(R.id.aspect_ratio_button).visibility = View.GONE
                     mainMotionLayout.progress = 1.toFloat()
                 } else if (currentId == sId) {
                     view.findViewById<ImageButton>(R.id.quality_select).visibility = View.VISIBLE
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.quality_text).visibility = View.VISIBLE
+                    view.findViewById<ImageButton>(R.id.aspect_ratio_button)
+                        .visibility = View.VISIBLE
                     mainMotionLayout.progress = 0.toFloat()
                 }
             }
