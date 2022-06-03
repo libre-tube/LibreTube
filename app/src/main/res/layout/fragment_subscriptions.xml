@@ -64,16 +64,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/subscriptions"
-                        />
+                        android:text="@string/subscriptions" />
 
                     <ImageView
                         android:id="@+id/toggle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_arrow_down"
-                    />
+                        android:src="@drawable/ic_arrow_down" />
 
                 </RelativeLayout>
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="?android:attr/selectableItemBackground"
 
@@ -25,8 +24,8 @@
             android:id="@+id/thumbnail"
             android:src="@mipmap/ic_launcher"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
+
         <TextView
             android:id="@+id/thumbnail_duration"
             android:layout_width="wrap_content"
@@ -35,7 +34,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/duration_text_color"
             android:background="@color/duration_background_color"
-            android:padding="0.5dp"/>
+            android:padding="0.5dp" />
     </androidx.cardview.widget.CardView>
 
 
@@ -53,7 +52,7 @@
         app:layout_constraintStart_toEndOf="@+id/channel_image"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
         android:ellipsize="end"
-        android:maxLines="2"/>
+        android:maxLines="2" />
 
     <TextView
         android:id="@+id/textView_channel"
@@ -63,8 +62,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView_title"
         app:layout_constraintStart_toStartOf="@+id/textView_title"
         app:layout_constraintTop_toBottomOf="@+id/textView_title"
-        android:paddingBottom="16dp"
-        />
+        android:paddingBottom="16dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/channel_image"

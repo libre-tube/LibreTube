@@ -6,15 +6,15 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     android:background="?android:attr/selectableItemBackground"
-    android:id="@+id/video_search"
-    >
+    android:id="@+id/video_search">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".45"/>
+        app:layout_constraintGuide_percent=".45" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_search_thumbnail"
         app:cardCornerRadius="8dp"
@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
         <TextView
             android:id="@+id/channel_duration"
             android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/duration_text_color"
             android:background="@color/duration_background_color"
-            android:padding="0.5dp"/>
+            android:padding="0.5dp" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView

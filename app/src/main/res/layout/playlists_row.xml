@@ -7,15 +7,15 @@
     android:layout_margin="8dp"
     android:layout_marginBottom="16dp"
     android:background="?android:attr/selectableItemBackground"
-    android:id="@+id/playlist"
-    >
+    android:id="@+id/playlist">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".45"/>
+        app:layout_constraintGuide_percent=".45" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_playlist_thumbnail"
         app:cardCornerRadius="8dp"
@@ -55,6 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/delete_playlist"
         android:layout_width="0dp"
@@ -64,6 +65,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        />
+        android:padding="8dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

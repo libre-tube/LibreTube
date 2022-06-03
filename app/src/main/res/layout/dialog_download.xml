@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
 
     <TextView
@@ -13,44 +12,47 @@
         android:text="@string/app_name"
         android:gravity="center"
         android:layout_margin="10dp"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/video_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        />
+        android:layout_margin="8dp" />
+
     <Spinner
         android:id="@+id/audio_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp" />
+
     <RadioGroup
         android:id="@+id/radioGp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
+
         <RadioButton
             android:id="@+id/mkv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=".mkv"
-            android:checked="true"/>
+            android:checked="true" />
+
         <RadioButton
             android:id="@+id/mp4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=".mp4"/>
+            android:text=".mp4" />
     </RadioGroup>
-        <Button
-            android:id="@+id/download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/download"
-            android:textColor="?attr/colorSurface"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download"
+        android:textColor="?attr/colorSurface"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="center" />
 </LinearLayout>

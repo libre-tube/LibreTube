@@ -11,8 +11,7 @@
         android:text="@string/app_name"
         android:gravity="center"
         android:layout_margin="10dp"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/user"
@@ -20,16 +19,16 @@
         android:layout_height="wrap_content"
         android:text="@string/already_logged_in"
         android:padding="8dp"
+        android:layout_margin="8dp" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:textColor="?attr/colorSurface"
+        android:padding="8dp"
         android:layout_margin="8dp"
-        />
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:textColor="?attr/colorSurface"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
 </LinearLayout>

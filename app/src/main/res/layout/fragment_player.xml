@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/download"
-                            android:maxLines="1"/>
+                            android:maxLines="1" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -285,7 +285,7 @@
                             android:src="@drawable/ic_arrow_up_down"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
