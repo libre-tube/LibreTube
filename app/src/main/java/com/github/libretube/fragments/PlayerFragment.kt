@@ -59,6 +59,7 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
@@ -81,11 +82,12 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
+
 
 var isFullScreen = false
 
@@ -93,8 +95,6 @@ class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
     private var videoId: String? = null
-    private var param2: String? = null
-    private var lastProgress: Float = 0.toFloat()
     private var sId: Int = 0
     private var eId: Int = 0
     private var paused = false
@@ -112,7 +112,6 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
-    private lateinit var mediaSource: MediaSource
     private lateinit var segmentData: Segments
 
     private lateinit var relDownloadVideo: LinearLayout
@@ -150,6 +149,7 @@ class PlayerFragment : Fragment() {
         val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
         motionLayout = playerMotionLayout
         exoPlayerView = view.findViewById(R.id.player)
+
         view.findViewById<TextView>(R.id.player_description).text = videoId
         playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
@@ -199,6 +199,7 @@ class PlayerFragment : Fragment() {
             ) {
             }
         })
+
         playerMotionLayout.progress = 1.toFloat()
         playerMotionLayout.transitionToStart()
         fetchJson(view)
@@ -324,14 +325,6 @@ class PlayerFragment : Fragment() {
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
     }
 
-    override fun onStop() {
-        try {
-            // exoPlayer.pause() // breaks background play
-        } catch (e: Exception) {
-        }
-        super.onStop()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         try {
@@ -419,160 +412,162 @@ class PlayerFragment : Fragment() {
                         }
                     }
                 }
-                initializePlayerView(view, response)
+                runOnUiThread {
+                    createExoPlayer(view)
+                    prepareExoPlayerView()
+                    setResolutionAndSubtitles(view, response)
+                    exoPlayer.prepare()
+                    exoPlayer.play()
+                    initializePlayerView(view, response)
+                }
             }
         }
         run()
     }
 
+    private fun prepareExoPlayerView() {
+        exoPlayerView.setShowSubtitleButton(true)
+        exoPlayerView.setShowNextButton(false)
+        exoPlayerView.setShowPreviousButton(false)
+        exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
+        // exoPlayerView.controllerShowTimeoutMs = 1500
+        exoPlayerView.controllerHideOnTouch = true
+        exoPlayerView.player = exoPlayer
+    }
+
     private fun initializePlayerView(view: View, response: Streams) {
-        isLoading = false
-        runOnUiThread {
-            createExoPlayer(view)
+        view.findViewById<TextView>(R.id.player_views_info).text =
+            response.views.formatShort() + " views • " + response.uploadDate
+        view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
+        val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
+        Picasso.get().load(response.uploaderAvatar).into(channelImage)
+        view.findViewById<TextView>(R.id.player_channelName).text = response.uploader
 
-            exoPlayerView.setShowSubtitleButton(true)
-            exoPlayerView.setShowNextButton(false)
-            exoPlayerView.setShowPreviousButton(false)
-            exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
-            // exoPlayerView.controllerShowTimeoutMs = 1500
-            exoPlayerView.controllerHideOnTouch = true
-            exoPlayerView.player = exoPlayer
+        view.findViewById<TextView>(R.id.title_textView).text = response.title
+        view.findViewById<TextView>(R.id.player_title).text = response.title
+        view.findViewById<TextView>(R.id.player_description).text = response.description
 
-            setResolutionAndSubtitles(view, response)
-
-            view.findViewById<TextView>(R.id.player_views_info).text =
-                response.views.formatShort() + " views • " + response.uploadDate
-            view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
-            val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
-            Picasso.get().load(response.uploaderAvatar).into(channelImage)
-            view.findViewById<TextView>(R.id.player_channelName).text = response.uploader
-
-            view.findViewById<TextView>(R.id.title_textView).text = response.title
-            view.findViewById<TextView>(R.id.player_title).text = response.title
-            view.findViewById<TextView>(R.id.player_description).text = response.description
-
-            // Listener for play and pause icon change
-            exoPlayer.addListener(object : com.google.android.exoplayer2.Player.Listener {
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
-                        exoPlayerView.postDelayed(
-                            this@PlayerFragment::checkForSegments,
-                            100
-                        )
-                    }
+        // Listener for play and pause icon change
+        exoPlayer.addListener(object : com.google.android.exoplayer2.Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
+                    exoPlayerView.postDelayed(
+                        this@PlayerFragment::checkForSegments,
+                        100
+                    )
                 }
-
-                override fun onPlayerStateChanged(
-                    playWhenReady: Boolean,
-                    playbackState: Int
-                ) {
-
-                    exoPlayerView.keepScreenOn = !(
-                        playbackState == Player.STATE_IDLE ||
-                            playbackState == Player.STATE_ENDED ||
-                            !playWhenReady
-                        )
-
-                    if (playWhenReady && playbackState == Player.STATE_READY) {
-                        // media actually playing
-                        view.findViewById<ImageView>(R.id.play_imageView)
-                            .setImageResource(R.drawable.ic_pause)
-                    } else if (playWhenReady) {
-                        // might be idle (plays after prepare()),
-                        // buffering (plays when data available)
-                        // or ended (plays when seek away from end)
-                        view.findViewById<ImageView>(R.id.play_imageView)
-                            .setImageResource(R.drawable.ic_play)
-                    } else {
-                        // player paused in any state
-                        view.findViewById<ImageView>(R.id.play_imageView)
-                            .setImageResource(R.drawable.ic_play)
-                    }
-                }
-            })
-
-            // share button
-            view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
-                showShareDialog(requireContext(), videoId!!)
             }
-            // check if livestream
-            if (response.duration!! > 0) {
-                // download clicked
-                relDownloadVideo.setOnClickListener {
-                    if (!IS_DOWNLOAD_RUNNING) {
-                        val newFragment = DownloadDialog()
-                        var bundle = Bundle()
-                        bundle.putString("video_id", videoId)
-                        bundle.putParcelable("streams", response)
-                        newFragment.arguments = bundle
-                        newFragment.show(childFragmentManager, "Download")
-                    } else {
-                        Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
-                            .show()
-                    }
+
+            override fun onPlayerStateChanged(
+                playWhenReady: Boolean,
+                playbackState: Int
+            ) {
+
+                exoPlayerView.keepScreenOn = !(
+                    playbackState == Player.STATE_IDLE ||
+                        playbackState == Player.STATE_ENDED ||
+                        !playWhenReady
+                    )
+
+                if (playWhenReady && playbackState == Player.STATE_READY) {
+                    // media actually playing
+                    view.findViewById<ImageView>(R.id.play_imageView)
+                        .setImageResource(R.drawable.ic_pause)
+                } else if (playWhenReady) {
+                    // might be idle (plays after prepare()),
+                    // buffering (plays when data available)
+                    // or ended (plays when seek away from end)
+                    view.findViewById<ImageView>(R.id.play_imageView)
+                        .setImageResource(R.drawable.ic_play)
+                } else {
+                    // player paused in any state
+                    view.findViewById<ImageView>(R.id.play_imageView)
+                        .setImageResource(R.drawable.ic_play)
+                }
+            }
+        })
+
+        // share button
+        view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
+            showShareDialog(requireContext(), videoId!!)
+        }
+        // check if livestream
+        if (response.duration!! > 0) {
+            // download clicked
+            relDownloadVideo.setOnClickListener {
+                if (!IS_DOWNLOAD_RUNNING) {
+                    val newFragment = DownloadDialog()
+                    var bundle = Bundle()
+                    bundle.putString("video_id", videoId)
+                    bundle.putParcelable("streams", response)
+                    newFragment.arguments = bundle
+                    newFragment.show(childFragmentManager, "Download")
+                } else {
+                    Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        } else {
+            Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
+        }
+
+        if (response.hls != null) {
+            view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
+                exoPlayer.pause()
+                try {
+                    val vlcRequestCode = 42
+                    val uri: Uri = Uri.parse(response.hls)
+                    val vlcIntent = Intent(Intent.ACTION_VIEW)
+                    vlcIntent.setPackage("org.videolan.vlc")
+                    vlcIntent.setDataAndTypeAndNormalize(uri, "video/*")
+                    vlcIntent.putExtra("title", response.title)
+                    vlcIntent.putExtra("from_start", false)
+                    vlcIntent.putExtra("position", exoPlayer.currentPosition)
+                    startActivityForResult(vlcIntent, vlcRequestCode)
+                } catch (e: Exception) {
+                    Toast.makeText(context, R.string.vlcerror, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+
+        relatedRecView.adapter = TrendingAdapter(
+            response.relatedStreams!!,
+            childFragmentManager
+        )
+        val description = response.description!!
+        view.findViewById<TextView>(R.id.player_description).text =
+            // detect whether the description is html formatted
+            if (description.contains("<") && description.contains(">")) {
+                if (SDK_INT >= Build.VERSION_CODES.N) {
+                    Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
+                        .trim()
+                } else {
+                    Html.fromHtml(description).trim()
                 }
             } else {
-                Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
+                description
             }
 
-            if (response.hls != null) {
-                view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
-                    exoPlayer.pause()
-                    try {
-                        val vlcRequestCode = 42
-                        val uri: Uri = Uri.parse(response.hls)
-                        val vlcIntent = Intent(Intent.ACTION_VIEW)
-                        vlcIntent.setPackage("org.videolan.vlc")
-                        vlcIntent.setDataAndTypeAndNormalize(uri, "video/*")
-                        vlcIntent.putExtra("title", response.title)
-                        vlcIntent.putExtra("from_start", false)
-                        vlcIntent.putExtra("position", exoPlayer.currentPosition)
-                        startActivityForResult(vlcIntent, vlcRequestCode)
-                    } catch (e: Exception) {
-                        Toast.makeText(context, R.string.vlcerror, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            }
+        view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
 
-            relatedRecView.adapter = TrendingAdapter(
-                response.relatedStreams!!,
-                childFragmentManager
-            )
-            val description = response.description!!
-            view.findViewById<TextView>(R.id.player_description).text =
-                // detect whether the description is html formatted
-                if (description.contains("<") && description.contains(">")) {
-                    if (SDK_INT >= Build.VERSION_CODES.N) {
-                        Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
-                            .trim()
-                    } else {
-                        Html.fromHtml(description).trim()
-                    }
-                } else {
-                    description
-                }
-
-            view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
-
-                val activity = view.context as MainActivity
-                val bundle = bundleOf("channel_id" to response.uploaderUrl)
-                activity.navController.navigate(R.id.channel, bundle)
-                activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
-                view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
-            }
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            if (sharedPref?.getString("token", "") != "") {
-                val channelId = response.uploaderUrl?.replace("/channel/", "")
-                val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
-                isSubscribed(subButton, channelId!!)
-                view.findViewById<LinearLayout>(R.id.save).setOnClickListener {
-                    val newFragment = AddtoPlaylistDialog()
-                    var bundle = Bundle()
-                    bundle.putString("videoId", videoId)
-                    newFragment.arguments = bundle
-                    newFragment.show(childFragmentManager, "AddToPlaylist")
-                }
+            val activity = view.context as MainActivity
+            val bundle = bundleOf("channel_id" to response.uploaderUrl)
+            activity.navController.navigate(R.id.channel, bundle)
+            activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
+            view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+        }
+        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+        if (sharedPref?.getString("token", "") != "") {
+            val channelId = response.uploaderUrl?.replace("/channel/", "")
+            val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
+            isSubscribed(subButton, channelId!!)
+            view.findViewById<LinearLayout>(R.id.save).setOnClickListener {
+                val newFragment = AddtoPlaylistDialog()
+                var bundle = Bundle()
+                bundle.putString("videoId", videoId)
+                newFragment.arguments = bundle
+                newFragment.show(childFragmentManager, "AddToPlaylist")
             }
         }
     }
@@ -598,11 +593,9 @@ class PlayerFragment : Fragment() {
         val defres = sharedPreferences.getString("default_res", "")!!
         when {
             defres != "" -> {
-                var foundRes = false
                 run lit@{
                     response.videoStreams.forEachIndexed { index, pipedStream ->
                         if (pipedStream.quality!!.contains(defres)) {
-                            foundRes = true
                             val dataSourceFactory: DataSource.Factory =
                                 DefaultHttpDataSource.Factory()
                             val videoItem: MediaItem = MediaItem.Builder()
@@ -691,10 +684,6 @@ class PlayerFragment : Fragment() {
             }
         }
 
-        // /exoPlayer.getMediaItemAt(5)
-        exoPlayer.prepare()
-        exoPlayer.play()
-
         view.findViewById<ImageButton>(R.id.quality_select).setOnClickListener {
             // Dialog for quality selection
             val builder: MaterialAlertDialogBuilder? = activity?.let {
@@ -779,13 +768,21 @@ class PlayerFragment : Fragment() {
             cronetDataSourceFactory
         )
 
+        // handles the audio focus
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MOVIE)
             .build()
 
+        // handles the duration of media to retain in the buffer prior to the current playback position (for fast backward seeking)
+        val loadControl = DefaultLoadControl.Builder()
+            // cache the last three minutes
+            .setBackBuffer(1000 * 60 * 3, true)
+            .build()
+
         exoPlayer = ExoPlayer.Builder(view.context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
+            .setLoadControl(loadControl)
             .setSeekBackIncrementMs(5000)
             .setSeekForwardIncrementMs(5000)
             .build()
@@ -944,6 +941,7 @@ class PlayerFragment : Fragment() {
             commentsRecView.adapter = commentsAdapter
             nextPage = commentsResponse.nextpage
             commentsLoaded = true
+            isLoading = false
         }
     }
 
