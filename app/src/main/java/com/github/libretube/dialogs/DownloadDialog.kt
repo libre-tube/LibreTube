@@ -81,7 +81,7 @@ class DownloadDialog : DialogFragment() {
             vidName.add("No video")
             var vidUrl = arrayListOf<String>()
             vidUrl.add("")
-            for (vid in streams?.videoStreams!!) {
+            for (vid in streams.videoStreams!!) {
                 val name = vid.quality + " " + vid.format
                 vidName.add(name)
                 vidUrl.add(vid.url!!)
@@ -90,7 +90,7 @@ class DownloadDialog : DialogFragment() {
             audioName.add("No audio")
             var audioUrl = arrayListOf<String>()
             audioUrl.add("")
-            for (audio in streams?.audioStreams!!) {
+            for (audio in streams.audioStreams!!) {
                 val name = audio.quality + " " + audio.format
                 audioName.add(name)
                 audioUrl.add(audio.url!!)

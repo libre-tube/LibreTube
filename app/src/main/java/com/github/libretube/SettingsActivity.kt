@@ -31,13 +31,13 @@ import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 
 private var isCurrentViewMainSettings = true
 private var requireMainActivityRestart = false
