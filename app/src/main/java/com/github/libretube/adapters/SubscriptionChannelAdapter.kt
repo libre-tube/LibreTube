@@ -15,11 +15,11 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
@@ -47,27 +47,31 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             val bundle = bundleOf("channelId" to subscription.url)
             activity.navController.navigate(R.id.channel, bundle)
         }
-        val subscribeBtn = holder.v.findViewById<com.google.android.material.button.MaterialButton>(R.id.subscription_subscribe)
+        val subscribeBtn = holder.v
+            .findViewById<com.google.android.material.button.MaterialButton>(
+                R.id.subscription_subscribe
+            )
         subscribeBtn.setOnClickListener {
             if (!isLoading) {
                 isLoading = true
                 val channelId = subscription.url?.replace("/channel/", "")!!
                 if (subscribed) {
-                    unsubscribe(holder.v, channelId)
+                    unsubscribe(holder.v.context, channelId)
                     subscribeBtn.text = holder.v.context.getString(R.string.subscribe)
                 } else {
-                    subscribe(holder.v, channelId)
+                    subscribe(holder.v.context, channelId)
                     subscribeBtn.text = holder.v.context.getString(R.string.unsubscribe)
                 }
             }
         }
     }
 
-    private fun subscribe(view: View, channelId: String) {
+    private fun subscribe(context: Context, channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    val sharedPref = view.context.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val sharedPref = context
+                        .getSharedPreferences("token", Context.MODE_PRIVATE)
                     RetrofitInstance.api.subscribe(
                         sharedPref?.getString("token", "")!!,
                         Subscribe(channelId)
@@ -85,12 +89,12 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         run()
     }
 
-    private fun unsubscribe(view: View, channelId: String) {
+    private fun unsubscribe(context: Context, channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     val sharedPref =
-                        view.context.getSharedPreferences("token", Context.MODE_PRIVATE)
+                        context.getSharedPreferences("token", Context.MODE_PRIVATE)
                     RetrofitInstance.api.unsubscribe(
                         sharedPref?.getString("token", "")!!,
                         Subscribe(channelId)
