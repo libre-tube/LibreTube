@@ -64,27 +64,14 @@
         </ScrollView>
     </com.github.libretube.util.CustomSwipeToRefresh>
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_playlist"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_gravity="right"
-            android:id="@+id/create_playlist"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            app:cornerRadius="16dp"
-            app:icon="@drawable/ic_add"
-            android:backgroundTint="?attr/colorSecondary"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp" />
-    </FrameLayout>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:tint="?android:attr/colorBackground"
+        app:backgroundTint="?attr/colorSecondary"
+        app:srcCompat="@drawable/ic_add" />
 
 </FrameLayout>
