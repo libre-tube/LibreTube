@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.SubscriptionAdapter
@@ -82,7 +83,7 @@ class Subscriptions : Fragment() {
             toggleSubs.setOnClickListener {
                 if (!channelRecView.isVisible) {
                     if (!loadedSubbedChannels) {
-                        channelRecView?.layoutManager = GridLayoutManager(context, 4)
+                        channelRecView?.layoutManager = LinearLayoutManager(context)
                         fetchChannels(channelRecView)
                         loadedSubbedChannels = true
                     }

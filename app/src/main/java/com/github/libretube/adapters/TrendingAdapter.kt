@@ -23,18 +23,18 @@ import com.squareup.picasso.Picasso
 class TrendingAdapter(
     private val videoFeed: List<StreamItem>,
     private val childFragmentManager: FragmentManager
-) : RecyclerView.Adapter<CustomViewHolder>() {
+) : RecyclerView.Adapter<TrendingViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cell = layoutInflater.inflate(R.layout.trending_row, parent, false)
-        return CustomViewHolder(cell)
+        return TrendingViewHolder(cell)
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.v.findViewById<TextView>(R.id.textView_title).text = trending.title
         holder.v.findViewById<TextView>(R.id.textView_channel).text =
@@ -89,7 +89,7 @@ class TrendingAdapter(
     }
 }
 
-class CustomViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
+class TrendingViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }

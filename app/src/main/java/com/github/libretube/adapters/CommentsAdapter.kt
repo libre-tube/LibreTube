@@ -15,7 +15,7 @@ import com.github.libretube.obj.Comment
 import com.squareup.picasso.Picasso
 
 class CommentsAdapter(private val comments: MutableList<Comment>) :
-    RecyclerView.Adapter<ViewHolder>() {
+    RecyclerView.Adapter<CommentsViewHolder>() {
 
     fun updateItems(newItems: List<Comment>) {
         var commentsSize = comments.size
@@ -23,13 +23,13 @@ class CommentsAdapter(private val comments: MutableList<Comment>) :
         notifyItemRangeInserted(commentsSize, newItems.size)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
         var commentsView =
             LayoutInflater.from(parent.context).inflate(R.layout.comments_row, parent, false)
-        return ViewHolder(commentsView)
+        return CommentsViewHolder(commentsView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         holder.v.findViewById<TextView>(R.id.comment_infos).text =
             comments[position].author.toString() +
             " • " + comments[position].commentedTime.toString()
@@ -68,7 +68,7 @@ class CommentsAdapter(private val comments: MutableList<Comment>) :
     }
 }
 
-class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
+class CommentsViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }
