@@ -148,7 +148,8 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/download"
-                            android:maxLines="1" />
+                            android:maxLines="1"
+                            android:autoSizeTextType="uniform"/>
                     </LinearLayout>
 
                     <LinearLayout
