@@ -1000,7 +1000,7 @@ class PlayerFragment : Fragment() {
         val scrollView = view?.findViewById<ScrollView>(R.id.player_scrollView)
         scrollView?.getHitRect(bounds)
 
-        if (SDK_INT >= Build.VERSION_CODES.N &&
+        if (SDK_INT >= Build.VERSION_CODES.O &&
             exoPlayer.isPlaying && (
                 scrollView?.getLocalVisibleRect(bounds) == true ||
                     isFullScreen
