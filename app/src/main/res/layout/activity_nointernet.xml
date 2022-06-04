@@ -5,6 +5,15 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/noInternet_settingsImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/noInternet_imageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -16,7 +25,7 @@
         app:srcCompat="@drawable/ic_wifi_off" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/noInternet_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/noInternet"
@@ -32,5 +41,6 @@
         android:text="@string/retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/noInternet_textView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -156,6 +156,19 @@ class SettingsActivity :
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.settings, rootKey)
+
+            val region = findPreference<Preference>("region")
+            region?.setOnPreferenceChangeListener { _, _ ->
+                requireMainActivityRestart = true
+                true
+            }
+
+            val language = findPreference<ListPreference>("language")
+            language?.setOnPreferenceChangeListener { _, _ ->
+                restartMainActivity(requireContext())
+                true
+            }
+
             val instance = findPreference<ListPreference>("instance")
             fetchInstance()
             instance?.setOnPreferenceChangeListener { _, newValue ->

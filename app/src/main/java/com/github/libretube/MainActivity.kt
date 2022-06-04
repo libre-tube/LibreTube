@@ -18,6 +18,7 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -78,6 +79,10 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.activity_nointernet)
             findViewById<Button>(R.id.retry_button).setOnClickListener {
                 recreate()
+            }
+            findViewById<ImageView>(R.id.noInternet_settingsImageView).setOnClickListener {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
         } else {
             setContentView(R.layout.activity_main)
