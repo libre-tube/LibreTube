@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -58,7 +57,8 @@ class Library : Fragment() {
                 Log.d(TAG, "hmm")
                 fetchPlaylists(view)
             }
-            view.findViewById<Button>(R.id.create_playlist).setOnClickListener {
+            view.findViewById<com.google.android.material.floatingactionbutton
+                .FloatingActionButton>(R.id.create_playlist).setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
                 newFragment.show(childFragmentManager, "Create Playlist")
             }
@@ -67,7 +67,8 @@ class Library : Fragment() {
             }
         } else {
             refreshLayout.isEnabled = false
-            view.findViewById<Button>(R.id.create_playlist).visibility = View.GONE
+            view.findViewById<com.google.android.material.floatingactionbutton
+                .FloatingActionButton>(R.id.create_playlist).visibility = View.GONE
             with(view.findViewById<ImageView>(R.id.boogh2)) {
                 visibility = View.VISIBLE
                 setImageResource(R.drawable.ic_login)
