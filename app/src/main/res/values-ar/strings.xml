@@ -29,7 +29,7 @@
     <string name="importsuccess">تم الاشتراك</string>
     <string name="dlcomplete">تم التنزيل.</string>
     <string name="downloadfailed">فشل التنزيل.</string>
-    <string name="vlcerror">لا يمكن الفتح باستخدام VLC. ربما هو غير مثبت أصلا؟</string>
+    <string name="vlcerror">لا يمكن فتحه في VLC. قد لا يكون مثبتا.</string>
     <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن لاسم المستخدم وكلمة المرور أن يكونوا فارغين.</string>
@@ -113,4 +113,7 @@
     <string name="app_icon">أيقونة التطبيق</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">معطل</string>
+    <string name="piped">الانابيب</string>
+    <string name="youtube">يوتيوب</string>
+    <string name="playOnBackground">تشغيل في الخلفية</string>
 </resources>
