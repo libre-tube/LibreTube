@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -25,6 +24,8 @@ import java.io.IOException
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
     val TAG = "SubChannelAdapter"
+    private var subscribed = true
+    private var isLoading = false
     override fun getItemCount(): Int {
         return subscriptions.size
     }
@@ -43,24 +44,33 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         Picasso.get().load(subscription.avatar).into(avatar)
         holder.v.setOnClickListener {
             val activity = holder.v.context as MainActivity
-            val bundle = bundleOf("channel_id" to subscription.url)
+            val bundle = bundleOf("channelId" to subscription.url)
             activity.navController.navigate(R.id.channel, bundle)
         }
-        val unsubscribeBtn = holder.v.findViewById<com.google.android.material.button.MaterialButton>(R.id.subs_subscribe)
-        unsubscribeBtn.setOnClickListener {
-            val channel_id = subscription.url?.replace("/channel/", "")!!
-            unsubscribe(holder.v.context, channel_id)
+        val subscribeBtn = holder.v.findViewById<com.google.android.material.button.MaterialButton>(R.id.subscription_subscribe)
+        subscribeBtn.setOnClickListener {
+            if (!isLoading) {
+                isLoading = true
+                val channelId = subscription.url?.replace("/channel/", "")!!
+                if (subscribed) {
+                    unsubscribe(holder.v, channelId)
+                    subscribeBtn.text = holder.v.context.getString(R.string.subscribe)
+                } else {
+                    subscribe(holder.v, channelId)
+                    subscribeBtn.text = holder.v.context.getString(R.string.unsubscribe)
+                }
+            }
         }
     }
 
-    private fun unsubscribe(context: Context, channel_id: String) {
+    private fun subscribe(view: View, channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    RetrofitInstance.api.unsubscribe(
+                    val sharedPref = view.context.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    RetrofitInstance.api.subscribe(
                         sharedPref?.getString("token", "")!!,
-                        Subscribe(channel_id)
+                        Subscribe(channelId)
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -68,6 +78,31 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
                 }
+                subscribed = true
+                isLoading = false
+            }
+        }
+        run()
+    }
+
+    private fun unsubscribe(view: View, channelId: String) {
+        fun run() {
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = try {
+                    val sharedPref =
+                        view.context.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    RetrofitInstance.api.unsubscribe(
+                        sharedPref?.getString("token", "")!!,
+                        Subscribe(channelId)
+                    )
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                }
+                subscribed = false
+                isLoading = false
             }
         }
         run()
