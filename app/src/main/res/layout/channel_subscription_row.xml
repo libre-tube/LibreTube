@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
-    android:padding="8dp"
     android:background="?android:attr/selectableItemBackground">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/subscription_channel_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="4dp" />
+        android:layout_centerVertical="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 
     <TextView
-        android:text="kirrrrrrrrrrrrrrrrrrrrrrrrrrfgdfg"
         android:id="@+id/subscription_channel_name"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@id/subscription_channel_image"
         android:ellipsize="end"
-        android:maxLines="1" />
-</LinearLayout>
+        android:maxLines="1"
+        android:text="Channel Name"
+        android:textSize="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/subs_subscribe"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorOnPrimary"
+        android:layout_alignParentEnd="true"
+        android:drawableLeft="@drawable/ic_bell"
+        android:drawableTint="@color/white"
+        android:textColor="@color/white"
+        android:text="@string/unsubscribe"
+        app:cornerRadius="11dp" />
+</RelativeLayout>
