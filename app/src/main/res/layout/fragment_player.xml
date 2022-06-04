@@ -257,9 +257,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="17dp"
-                    app:cardCornerRadius="27dp">
+                    app:cardCornerRadius="18dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -283,9 +281,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="3dp"
                             android:src="@drawable/ic_arrow_up_down"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
