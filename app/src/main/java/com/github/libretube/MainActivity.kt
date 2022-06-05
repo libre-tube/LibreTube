@@ -286,7 +286,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 navController.popBackStack()
                 moveTaskToBack(true)
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 super.onBackPressed()
             }
         }
