@@ -8,7 +8,7 @@
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
     <string name="import_from_yt_summary">No YouTube vai NewPipe</string>
-    <string name="vlcerror">Nevar atvērt ar VLC. Vai tas ir ieinstalēts\?</string>
+    <string name="vlcerror">Nevar atvērt ar VLC. Tas, iespējams, nav uzinstalēts.</string>
     <string name="unknown_error">Tīkla kļūda.</string>
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
     <string name="defres">Noklusējuma video izšķirtspēja</string>
@@ -96,7 +96,7 @@
     <string name="license">Licence</string>
     <string name="color_accent">Krāsu akcents</string>
     <string name="color_red">Sarkans</string>
-    <string name="color_blue">Zils</string>
+    <string name="color_blue">Pixel zils</string>
     <string name="color_yellow">Dzeltens</string>
     <string name="color_green">Zaļš</string>
     <string name="color_purple">Violets</string>
@@ -112,4 +112,8 @@
     <string name="sponsorblock_notifications">Notifikācijas</string>
     <string name="enabled">Ieslēgts</string>
     <string name="disabled">Izslēgts</string>
+    <string name="app_icon">Aplikācijas ikona</string>
+    <string name="piped">Piped</string>
+    <string name="youtube">YouTube</string>
+    <string name="playOnBackground">Atskaņot fonā</string>
 </resources>
