@@ -48,7 +48,7 @@ import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
-import com.github.libretube.dialogs.showShareDialog
+import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.formatShort
 import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.PipedStream
@@ -493,7 +493,8 @@ class PlayerFragment : Fragment() {
 
         // share button
         view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
-            showShareDialog(requireContext(), videoId!!)
+            val shareDialog = ShareDialog(videoId!!)
+            shareDialog.show(childFragmentManager, "ShareDialog")
         }
         // check if livestream
         if (response.duration!! > 0) {

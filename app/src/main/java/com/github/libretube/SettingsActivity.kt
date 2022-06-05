@@ -29,6 +29,9 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.changeIcon
+import com.github.libretube.util.restartMainActivity
+import com.github.libretube.util.updateTheme
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
@@ -48,8 +51,7 @@ class SettingsActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
-        updateAccentColor(this)
-        updateThemeMode(this)
+        updateTheme(this)
 
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

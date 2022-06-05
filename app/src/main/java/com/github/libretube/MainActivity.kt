@@ -35,6 +35,8 @@ import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.updateLanguage
+import com.github.libretube.util.updateTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
 
@@ -66,8 +68,7 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.outroEnabled =
             sharedPreferences.getBoolean("outro_category_key", false)
 
-        updateAccentColor(this)
-        updateThemeMode(this)
+        updateTheme(this)
         updateLanguage(this)
 
         val connectivityManager =
