@@ -63,8 +63,8 @@
     <string name="darkTheme">Tryb ciemny</string>
     <string name="subscriptions">Subskrypcje</string>
     <string name="library">Biblioteka</string>
-    <string name="defaultTab">Domyślna zakładka</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="defaultTab">Strona Główna</string>
+    <string name="sponsorblock">Blocker Sponsorów</string>
     <string name="sponsorblock_summary">Używa API z https://sponsor.ajay.app/</string>
     <string name="choose_filter">Wybierz filter wyszukiwania</string>
     <string name="channels">Kanały</string>
@@ -100,7 +100,7 @@
     <string name="color_blue">Pixelowy Niebieski</string>
     <string name="color_yellow">Żółty</string>
     <string name="color_green">Zielony</string>
-    <string name="color_accent">Akcent kolorystyczny</string>
+    <string name="color_accent">Colory Akcentów</string>
     <string name="color_red">Czerwony</string>
     <string name="color_purple">Fioletowy</string>
     <string name="oledTheme">Motyw OLED</string>
