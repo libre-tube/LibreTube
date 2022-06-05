@@ -71,7 +71,7 @@
     <string name="vlc">VLC-də Açın</string>
     <string name="vlcerror">VLC-də açmaq mümkün deyil. O, quraşdırılmamış ola bilər.</string>
     <string name="import_from_yt">Abunəlikləri İdxal Edin</string>
-    <string name="import_from_yt_summary">YouTube vəya NewPipe dan</string>
+    <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Mövzu</string>
     <string name="server_error">Serverdə problem var. Başqa bir serveri cəhd edə bilərsiniz\?</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
