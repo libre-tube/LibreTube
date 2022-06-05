@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MY"
-        android:name=".myApp"
+        android:name=".MyApp"
         android:networkSecurityConfig="@xml/network_security_config"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
