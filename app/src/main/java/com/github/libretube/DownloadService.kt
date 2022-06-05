@@ -7,7 +7,6 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Context.DOWNLOAD_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
@@ -18,7 +17,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.app.ServiceCompat.stopForeground
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
 
@@ -36,6 +34,9 @@ class DownloadService : Service() {
     private lateinit var audioDir: File
     private lateinit var videoDir: File
     private lateinit var notification: NotificationCompat.Builder
+    private lateinit var downloadType: String
+    private lateinit var libretubeDir: File
+    private lateinit var tempDir: File
     override fun onCreate() {
         super.onCreate()
         IS_DOWNLOAD_RUNNING = true
@@ -47,8 +48,16 @@ class DownloadService : Service() {
         audioUrl = intent.getStringExtra("audioUrl")!!
         extension = intent.getStringExtra("extension")!!
         duration = intent.getIntExtra("duration", 1)
-        downloadNotification(intent)
-        downloadManager()
+        downloadType = if (audioUrl != "" && videoUrl != "") "mux"
+        else if (audioUrl != "") "audio"
+        else if (videoUrl != "") "video"
+        else "none"
+        if (downloadType != "none") {
+            downloadNotification(intent)
+            downloadManager()
+        } else {
+            onDestroy()
+        }
 
         return super.onStartCommand(intent, flags, startId)
     }
@@ -58,29 +67,48 @@ class DownloadService : Service() {
     }
 
     private fun downloadManager() {
-        val path = applicationContext.getExternalFilesDir(DIRECTORY_DOWNLOADS)
-        val folder_main = ".tmp"
-        val f = File(path, folder_main)
-        if (!f.exists()) {
-            f.mkdirs()
+
+        // create folder for temporary files
+        tempDir = File(
+            applicationContext.getExternalFilesDir(DIRECTORY_DOWNLOADS),
+            ".tmp"
+        )
+        if (!tempDir.exists()) {
+            tempDir.mkdirs()
             Log.e(TAG, "Directory make")
         } else {
-            f.deleteRecursively()
-            f.mkdirs()
+            tempDir.deleteRecursively()
+            tempDir.mkdirs()
             Log.e(TAG, "Directory already have")
         }
-        audioDir = File(f, "$videoId-audio")
-        videoDir = File(f, "$videoId-video")
+
+        // create LibreTube folder in Downloads
+        libretubeDir = File(
+            Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
+            "LibreTube"
+        )
+        if (!libretubeDir.exists()) libretubeDir.mkdirs()
+
+        // start download
         try {
-            Log.e(TAG, "Directory make")
             registerReceiver(
                 onDownloadComplete,
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
             )
-            if (videoUrl != "") {
-                downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
-            } else if (audioUrl != "") {
-                downloadId = downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
+            when (downloadType) {
+                "mux" -> {
+                    audioDir = File(tempDir, "$videoId-audio")
+                    videoDir = File(tempDir, "$videoId-video")
+                    downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
+                }
+                "video" -> {
+                    videoDir = File(libretubeDir, "$videoId-video")
+                    downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
+                }
+                "audio" -> {
+                    audioDir = File(libretubeDir, "$videoId-audio")
+                    downloadId = downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
+                }
             }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "download error $e")
@@ -92,22 +120,15 @@ class DownloadService : Service() {
             // Fetching the download id received with the broadcast
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             // Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadId == id && videoUrl != "" && audioUrl != "") {
-                downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
-            } else {
-                // create LibreTube folder in Downloads
-                val libreTubeDir = File(
-                    Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
-                    "LibreTube"
-                )
-                if (!libreTubeDir.exists()) {
-                    libreTubeDir.mkdirs()
-                    Log.e(TAG, "libreTube Directory make")
+            if (downloadId == id) {
+                if (downloadType == "mux") {
+                    downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
                 } else {
-                    Log.e(TAG, "libreTube Directory already have")
+                    downloadSucceededNotification()
+                    onDestroy()
                 }
-                muxDownloadedMedia(libreTubeDir)
-                onDestroy()
+            } else {
+                muxDownloadedMedia()
             }
         }
     }
@@ -195,18 +216,25 @@ class DownloadService : Service() {
         }
     }
 
-    private fun muxDownloadedMedia(targetDir: File) {
-        val command: String = when {
-            videoUrl == "" -> {
-                "-y -i $audioDir -c copy $targetDir/$videoId-audio$extension"
-            }
-            audioUrl == "" -> {
-                "-y -i $videoDir -c copy $targetDir/$videoId-video$extension"
-            }
-            else -> {
-                "-y -i $videoDir -i $audioDir -c copy $targetDir/${videoId}$extension"
-            }
+    private fun downloadSucceededNotification() {
+        Log.i(TAG, "Download succeeded")
+        val builder = NotificationCompat.Builder(this@DownloadService, "failed")
+            .setSmallIcon(R.drawable.ic_download)
+            .setContentTitle(resources.getString(R.string.success))
+            .setContentText("success")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+        createNotificationChannel(
+            "success", "success", "Download succeeded",
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+        with(NotificationManagerCompat.from(this@DownloadService)) {
+            // notificationId is a unique int for each notification that you must define
+            notify(70, builder.build())
         }
+    }
+
+    private fun muxDownloadedMedia() {
+        val command = "-y -i $videoDir -i $audioDir -c copy $libretubeDir/${videoId}$extension"
         notification.setContentTitle("Muxing")
         FFmpegKit.executeAsync(
             command,
@@ -223,14 +251,10 @@ class DownloadService : Service() {
                         session.failStackTrace
                     )
                 )
-                val path =
-                    applicationContext.getExternalFilesDir(DIRECTORY_DOWNLOADS)
-                val folder_main = ".tmp"
-                val f = File(path, folder_main)
-                f.deleteRecursively()
+                tempDir.deleteRecursively()
                 if (returnCode.toString() != "0") downloadFailedNotification()
-                stopForeground(true)
-                stopService(Intent(this@DownloadService, DownloadService::class.java))
+                else downloadSucceededNotification()
+                onDestroy()
             }, {
             // CALLED WHEN SESSION PRINTS LOGS
             Log.e(TAG, it.message.toString())
@@ -250,10 +274,12 @@ class DownloadService : Service() {
     override fun onDestroy() {
         try {
             unregisterReceiver(onDownloadComplete)
-        } catch (e: Exception) {
-        }
+        } catch (e: Exception) { }
+
         IS_DOWNLOAD_RUNNING = false
         Log.d(TAG, "dl finished!")
+        stopForeground(true)
+        stopService(Intent(this@DownloadService, DownloadService::class.java))
         super.onDestroy()
     }
 }
