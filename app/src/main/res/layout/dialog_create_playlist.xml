@@ -22,9 +22,9 @@
         app:hintEnabled="false"
 
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
 
         app:boxCornerRadiusBottomStart="15dp"
         app:boxCornerRadiusBottomEnd="15dp"
@@ -45,25 +45,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="right">
 
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:textColor="@color/white"
+            android:layout_gravity="right"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
             android:padding="8dp"
-            android:layout_margin="8dp" />
+            android:layout_marginBottom="8dp" />
 
         <Button
             android:id="@+id/create_new_playlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/createPlaylist"
-            android:textColor="@color/white"
+            android:layout_gravity="right"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
             android:padding="8dp"
-            android:layout_margin="8dp" />
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp" />
 
     </LinearLayout>
 

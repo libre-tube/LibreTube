@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:gravity="center"
         android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="@string/app_name"
         android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/playlists_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:padding="8dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/addToPlaylist"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/addToPlaylist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/addToPlaylist"
-            android:textColor="@color/white"
-            android:padding="8dp"
-            android:layout_margin="8dp" />
-
-    </LinearLayout>
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:padding="8dp"
+        android:text="@string/addToPlaylist"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="14sp" />
 
 </LinearLayout>
