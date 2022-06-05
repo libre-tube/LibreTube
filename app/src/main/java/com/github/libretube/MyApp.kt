@@ -5,7 +5,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 
-class myApp : Application() {
+const val NOTIFICATION_ID = 1
+
+class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
 

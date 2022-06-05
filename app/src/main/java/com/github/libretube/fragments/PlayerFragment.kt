@@ -42,6 +42,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
+import com.github.libretube.NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.SponsorBlockSettings
 import com.github.libretube.adapters.CommentsAdapter
@@ -118,7 +119,6 @@ class PlayerFragment : Fragment() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
-    private val notificationId = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -332,12 +332,15 @@ class PlayerFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
-            exoPlayer.release()
-            // kill notification
-            val nManager = context?.getSystemService(
+            mediaSession.isActive = false
+            mediaSession.release()
+            mediaSessionConnector.setPlayer(null)
+            playerNotification.setPlayer(null)
+            val notificationManager = context?.getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
-            nManager.cancel(notificationId)
+            notificationManager.cancel(NOTIFICATION_ID)
+            exoPlayer.release()
         } catch (e: Exception) {
         }
     }
@@ -430,13 +433,15 @@ class PlayerFragment : Fragment() {
     }
 
     private fun prepareExoPlayerView() {
-        exoPlayerView.setShowSubtitleButton(true)
-        exoPlayerView.setShowNextButton(false)
-        exoPlayerView.setShowPreviousButton(false)
-        exoPlayerView.setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
-        // exoPlayerView.controllerShowTimeoutMs = 1500
-        exoPlayerView.controllerHideOnTouch = true
-        exoPlayerView.player = exoPlayer
+        exoPlayerView.apply {
+            setShowSubtitleButton(true)
+            setShowNextButton(false)
+            setShowPreviousButton(false)
+            setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
+            // controllerShowTimeoutMs = 1500
+            controllerHideOnTouch = true
+            player = exoPlayer
+        }
     }
 
     private fun initializePlayerView(view: View, response: Streams) {
@@ -793,33 +798,29 @@ class PlayerFragment : Fragment() {
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
-
-        setMediaItem(requireContext())
         initializePlayerNotification(requireContext())
     }
 
-    private fun setMediaItem(c: Context) {
+    private fun initializePlayerNotification(c: Context) {
+
         mediaSession = MediaSessionCompat(c, this.javaClass.name)
-        mediaSession.isActive = true
-        /* might be useful for setting the notification title
-        mediaSession.setMetadata(MediaMetadataCompat.Builder()
-            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, "")
-            .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, "")
-            .build()
-        )
-        */
+        mediaSession.apply {
+            isActive = true
+        }
+
         mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(exoPlayer)
-    }
 
-    private fun initializePlayerNotification(c: Context) {
         playerNotification = PlayerNotificationManager
-            .Builder(c, notificationId, "background_mode")
+            .Builder(c, NOTIFICATION_ID, "background_mode")
             .build()
-        playerNotification.setPlayer(exoPlayer)
-        playerNotification.setUseNextAction(false)
-        playerNotification.setUsePreviousAction(false)
-        playerNotification.setMediaSessionToken(mediaSession.sessionToken)
+
+        playerNotification.apply {
+            setPlayer(exoPlayer)
+            setUseNextAction(false)
+            setUsePreviousAction(false)
+            setMediaSessionToken(mediaSession.sessionToken)
+        }
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
