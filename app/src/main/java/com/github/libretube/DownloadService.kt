@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.DOWNLOAD_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
@@ -17,6 +18,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.ServiceCompat.stopForeground
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
 
@@ -75,19 +77,13 @@ class DownloadService : Service() {
                 onDownloadComplete,
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
             )
-            downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
             if (videoUrl != "") {
-                downloadId = 0L
+                downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
+            } else if (audioUrl != "") {
+                downloadId = downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
             }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "download error $e")
-            try {
-                downloadId = 0L
-                downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
-            } catch (e: Exception) {
-                Log.e(TAG, "audio download error $e")
-                stopService(Intent(this, DownloadService::class.java))
-            }
         }
     }
 
@@ -96,28 +92,32 @@ class DownloadService : Service() {
             // Fetching the download id received with the broadcast
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             // Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadId == id) {
-                downloadId = 0L
-                try {
-                    downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
-                } catch (e: Exception) {
-                }
-            } else if (downloadId == 0L) {
-                val libreTube = File(
-                    Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS), "LibreTube"
+            if (downloadId == id && videoUrl != "" && audioUrl != "") {
+                downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
+            } else {
+                // create LibreTube folder in Downloads
+                val libreTubeDir = File(
+                    Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
+                    "LibreTube"
                 )
-                if (!libreTube.exists()) {
-                    libreTube.mkdirs()
+                if (!libreTubeDir.exists()) {
+                    libreTubeDir.mkdirs()
                     Log.e(TAG, "libreTube Directory make")
                 } else {
                     Log.e(TAG, "libreTube Directory already have")
                 }
-                muxDownloadedMedia(libreTube)
+                muxDownloadedMedia(libreTubeDir)
+                onDestroy()
             }
         }
     }
 
-    private fun downloadManagerRequest(title: String, descriptionText: String, url: String, fileDir: File): Long {
+    private fun downloadManagerRequest(
+        title: String,
+        descriptionText: String,
+        url: String,
+        fileDir: File
+    ): Long {
         val request: DownloadManager.Request =
             DownloadManager.Request(Uri.parse(url))
                 .setTitle(title) // Title of the Download Notification
@@ -131,7 +131,12 @@ class DownloadService : Service() {
         return downloadManager.enqueue(request)
     }
 
-    private fun createNotificationChannel(id: String, name: String, descriptionText: String, importance: Int): String {
+    private fun createNotificationChannel(
+        id: String,
+        name: String,
+        descriptionText: String,
+        importance: Int
+    ): String {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -180,7 +185,10 @@ class DownloadService : Service() {
             .setContentTitle(resources.getString(R.string.downloadfailed))
             .setContentText("failure")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-        createNotificationChannel("failed", "failed", "Download Failed", NotificationManager.IMPORTANCE_DEFAULT)
+        createNotificationChannel(
+            "failed", "failed", "Download Failed",
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
             notify(69, builder.build())
