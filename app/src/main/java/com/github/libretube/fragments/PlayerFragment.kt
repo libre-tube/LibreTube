@@ -943,7 +943,7 @@ class PlayerFragment : Fragment() {
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
-            commentsAdapter = CommentsAdapter(commentsResponse.comments)
+            commentsAdapter = CommentsAdapter(videoId!!, commentsResponse.comments)
             commentsRecView.adapter = commentsAdapter
             nextPage = commentsResponse.nextpage
             commentsLoaded = true
