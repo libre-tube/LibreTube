@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.util
 
 import android.app.NotificationManager
 import android.content.ComponentName
@@ -8,7 +8,13 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import com.github.libretube.R
 import java.util.*
+
+fun updateTheme(context: Context) {
+    updateAccentColor(context)
+    updateThemeMode(context)
+}
 
 fun updateAccentColor(context: Context) {
     val colorAccent =
@@ -30,13 +36,11 @@ fun updateThemeMode(context: Context) {
         "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        "O" -> oledMode(context)
+        "O" -> {
+            context.setTheme(R.style.OLED)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
-}
-
-fun oledMode(context: Context) {
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    context.setTheme(R.style.Theme_OLED)
 }
 
 fun updateLanguage(context: Context) {
