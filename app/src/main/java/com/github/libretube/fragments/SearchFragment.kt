@@ -65,6 +65,7 @@ class SearchFragment : Fragment() {
         searchRecView = view.findViewById<RecyclerView>(R.id.search_recycler)
 
         val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+        val clearSearchButton = view.findViewById<ImageView>(R.id.clearSearch_imageView)
         val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
         val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
 
@@ -72,6 +73,10 @@ class SearchFragment : Fragment() {
 
         val sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        clearSearchButton.setOnClickListener {
+            autoTextView.text.clear()
+        }
 
         filterImageView.setOnClickListener {
             val filterOptions = arrayOf(
