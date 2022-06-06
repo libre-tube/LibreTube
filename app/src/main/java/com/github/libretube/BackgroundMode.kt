@@ -68,7 +68,7 @@ class BackgroundMode {
      */
     private fun initializePlayerNotification(c: Context) {
         playerNotification = PlayerNotificationManager
-            .Builder(c, NOTIFICATION_ID, "background_mode").build()
+            .Builder(c, 1, "background_mode").build()
         playerNotification.setPlayer(player)
         playerNotification.setUsePreviousAction(false)
         playerNotification.setUseNextAction(false)

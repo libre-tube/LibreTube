@@ -1,8 +1,6 @@
 package com.github.libretube
 
 import android.app.DownloadManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.BroadcastReceiver
@@ -152,33 +150,7 @@ class DownloadService : Service() {
         return downloadManager.enqueue(request)
     }
 
-    private fun createNotificationChannel(
-        id: String,
-        name: String,
-        descriptionText: String,
-        importance: Int
-    ): String {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(id, name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-            id
-        } else ""
-    }
-
     private fun downloadNotification(intent: Intent) {
-        // Creating the notification channel
-        val channelId = createNotificationChannel(
-            "service", "service", "DownloadService",
-            NotificationManager.IMPORTANCE_NONE
-        )
-
         var pendingIntent: PendingIntent? = null
         pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
@@ -187,7 +159,7 @@ class DownloadService : Service() {
         }
         // Creating a notification and setting its various attributes
         notification =
-            NotificationCompat.Builder(this@DownloadService, channelId)
+            NotificationCompat.Builder(this@DownloadService, "download_service")
                 .setSmallIcon(R.drawable.ic_download)
                 .setContentTitle("LibreTube")
                 .setContentText("Downloading")
@@ -201,35 +173,27 @@ class DownloadService : Service() {
     }
 
     private fun downloadFailedNotification() {
-        val builder = NotificationCompat.Builder(this@DownloadService, "failed")
+        val builder = NotificationCompat.Builder(this@DownloadService, "download_service")
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.downloadfailed))
             .setContentText("failure")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-        createNotificationChannel(
-            "failed", "failed", "Download Failed",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
-            notify(69, builder.build())
+            notify(3, builder.build())
         }
     }
 
     private fun downloadSucceededNotification() {
         Log.i(TAG, "Download succeeded")
-        val builder = NotificationCompat.Builder(this@DownloadService, "failed")
+        val builder = NotificationCompat.Builder(this@DownloadService, "download_service")
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.success))
             .setContentText("success")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-        createNotificationChannel(
-            "success", "success", "Download succeeded",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
-            notify(70, builder.build())
+            notify(4, builder.build())
         }
     }
 
