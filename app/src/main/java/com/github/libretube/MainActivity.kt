@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             setContentView(R.layout.activity_main)
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
             bottomNavigationView = findViewById(R.id.bottomNav)
             navController = findNavController(R.id.fragment)
@@ -266,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
                 motionLayout.transitionToEnd()
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)

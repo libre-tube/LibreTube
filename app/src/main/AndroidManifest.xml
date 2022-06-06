@@ -35,7 +35,7 @@
             android:supportsPictureInPicture="true"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="userPortrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
