@@ -282,8 +282,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } catch (e: Exception) {
-            navController.popBackStack()
-            moveTaskToBack(true)
+            // try catch to prevent nointernet activity to crash
+            try {
+                navController.popBackStack()
+                moveTaskToBack(true)
+            } catch (e: Exception) {
+                super.onBackPressed()
+            }
         }
     }
 
