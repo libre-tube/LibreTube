@@ -30,6 +30,7 @@ import androidx.preference.PreferenceManager
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.changeIcon
+import com.github.libretube.util.checkUpdate
 import com.github.libretube.util.restartMainActivity
 import com.github.libretube.util.updateTheme
 import com.google.android.material.color.DynamicColors
@@ -154,6 +155,11 @@ class SettingsActivity :
                     }
                 }
             super.onCreate(savedInstanceState)
+            try {
+                checkUpdate(childFragmentManager)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
