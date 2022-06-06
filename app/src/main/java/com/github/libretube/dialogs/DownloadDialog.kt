@@ -35,7 +35,7 @@ class DownloadDialog : DialogFragment() {
     var audioUrl = arrayListOf<String>()
     var selectedVideo = 0
     var selectedAudio = 0
-    var extension = ".mkv"
+    var extension = ".mp4"
     var duration = 0
     private lateinit var videoId: String
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

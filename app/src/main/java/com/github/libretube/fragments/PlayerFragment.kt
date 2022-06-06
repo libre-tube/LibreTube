@@ -42,7 +42,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
-import com.github.libretube.NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.SponsorBlockSettings
 import com.github.libretube.adapters.CommentsAdapter
@@ -339,7 +338,7 @@ class PlayerFragment : Fragment() {
             val notificationManager = context?.getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
-            notificationManager.cancel(NOTIFICATION_ID)
+            notificationManager.cancel(1)
             exoPlayer.release()
         } catch (e: Exception) {
         }
@@ -812,7 +811,7 @@ class PlayerFragment : Fragment() {
         mediaSessionConnector.setPlayer(exoPlayer)
 
         playerNotification = PlayerNotificationManager
-            .Builder(c, NOTIFICATION_ID, "background_mode")
+            .Builder(c, 1, "background_mode")
             .build()
 
         playerNotification.apply {
