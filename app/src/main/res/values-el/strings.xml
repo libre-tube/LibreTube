@@ -116,4 +116,6 @@
     <string name="enabled">Ενεργοποιημένο</string>
     <string name="disabled">Απενεργοποιημένο</string>
     <string name="playOnBackground">Αναπαραγωγή στο υπόβαθρο</string>
+    <string name="update_available">Η έκδοση %1$s είναι διαθέσιμη</string>
+    <string name="update_available_text">Υπάρχει μια νέα ενημέρωση διαθέσιμη. Κάντε κλικ στο OK για να ανακατευθυνθείτε στη σελίδα ενημέρωσης στο GitHub.</string>
 </resources>
