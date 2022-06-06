@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,11 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val searchButton = view.findViewById<com.google.android.material.floatingactionbutton
+        .FloatingActionButton>(R.id.search_fab)
+        searchButton.setOnClickListener {
+            findNavController().navigate(R.id.searchFragment)
+        }
         val recyclerView = view.findViewById<RecyclerView>(R.id.recview)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val grid = sharedPreferences.getString(
