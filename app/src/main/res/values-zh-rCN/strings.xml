@@ -116,4 +116,5 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">后台播放</string>
+    <string name="update_available">版本 %1$s 可用</string>
 </resources>
