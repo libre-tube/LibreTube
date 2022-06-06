@@ -116,4 +116,6 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arxa Fonda Oynat</string>
+    <string name="update_available">%1$s Versiyası Mövcuddur</string>
+    <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub-da yeniləmə səhifəsinə yönləndirilmək üçün oldu düyməsini klikləyin.</string>
 </resources>
