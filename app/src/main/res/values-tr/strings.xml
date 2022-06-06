@@ -77,7 +77,7 @@
     <string name="category_outro_description">Kanal ikonları veya YouTube video kartları göründüğünde. Bilgi ile sonuçlar için değil.</string>
     <string name="sponsorblock_state">Etkinleştir</string>
     <string name="clear_history">Geçmişi Temizle</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">SponsorBlok</string>
     <string name="channels">Kanallar</string>
     <string name="playlists">Oynatma Listeleri</string>
     <string name="okay">Tamam</string>
@@ -116,4 +116,6 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arka Planda Oynat</string>
+    <string name="update_available">%1$s Sürümü Mevcut</string>
+    <string name="update_available_text">Yeni bir güncelleme mevcut. GitHub\'daki güncelleme sayfasına yönlendirilmek için tamam\'a tıklayın.</string>
 </resources>
