@@ -42,7 +42,7 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val searchButton = view.findViewById<com.google.android.material.floatingactionbutton
-        .FloatingActionButton>(R.id.search_fab)
+            .FloatingActionButton>(R.id.search_fab)
         searchButton.setOnClickListener {
             findNavController().navigate(R.id.searchFragment)
         }
