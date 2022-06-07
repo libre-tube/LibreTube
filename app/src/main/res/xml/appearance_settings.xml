@@ -41,7 +41,7 @@
             app:entries="@array/tabs"
             app:entryValues="@array/tabsValue"
             app:defaultValue="home"
-            android:icon="@drawable/ic_home_outlined"
+            android:icon="@drawable/ic_home"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference

@@ -35,6 +35,6 @@
         android:layout_alignParentEnd="true"
         android:backgroundTint="?attr/colorOnPrimary"
         android:text="@string/unsubscribe"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         app:cornerRadius="20dp" />
 </RelativeLayout>
