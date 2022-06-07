@@ -79,17 +79,12 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/about">
+    <PreferenceCategory>
 
         <Preference
-            app:title="@string/website"
+            app:title="@string/about"
             app:key="about"
-            android:icon="@drawable/ic_region" />
-
-        <Preference
-            app:title="@string/license"
-            app:key="license"
-            android:icon="@drawable/ic_license" />
+            android:icon="@drawable/ic_info" />
 
     </PreferenceCategory>
 
