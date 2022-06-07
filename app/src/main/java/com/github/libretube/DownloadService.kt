@@ -226,19 +226,20 @@ class DownloadService : Service() {
         ) {
             // CALLED WHEN SESSION GENERATES STATISTICS
             Log.e(TAG + "stat", it.time.toString())
-                /*val progress = it.time/(10*duration!!)
-                if (progress<1){
-                    notification
-                        .setProgress(progressMax, progress.toInt(), false)
-                    service.notify(1,notification.build())
-                }*/
+            /*val progress = it.time/(10*duration!!)
+            if (progress<1){
+                notification
+                    .setProgress(progressMax, progress.toInt(), false)
+                service.notify(1,notification.build())
+            }*/
         }
     }
 
     override fun onDestroy() {
         try {
             unregisterReceiver(onDownloadComplete)
-        } catch (e: Exception) { }
+        } catch (e: Exception) {
+        }
 
         IS_DOWNLOAD_RUNNING = false
         Log.d(TAG, "dl finished!")

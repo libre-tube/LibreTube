@@ -17,8 +17,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.dialogs.CreatePlaylistDialog
 import com.github.libretube.util.RetrofitInstance
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Library : Fragment() {
 

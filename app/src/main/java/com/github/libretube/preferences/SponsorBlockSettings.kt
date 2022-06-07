@@ -1,11 +1,12 @@
-package com.github.libretube
+package com.github.libretube.preferences
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import com.github.libretube.R
 
 class SponsorBlockSettings : PreferenceFragmentCompat() {
-    private val TAG = "SponsorBlockDialog"
+    private val TAG = "SponsorBlockSettings"
 
     companion object {
         var sponsorBlockEnabled: Boolean = false

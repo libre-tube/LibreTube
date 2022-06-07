@@ -15,11 +15,11 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {

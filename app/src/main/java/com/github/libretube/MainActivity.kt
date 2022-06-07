@@ -33,6 +33,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
+import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.updateLanguage

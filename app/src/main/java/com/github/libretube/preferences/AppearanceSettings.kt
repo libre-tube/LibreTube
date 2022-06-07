@@ -1,0 +1,46 @@
+package com.github.libretube.preferences
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import com.github.libretube.R
+import com.github.libretube.SettingsActivity
+import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.util.changeIcon
+
+class AppearanceSettings : PreferenceFragmentCompat() {
+    private val TAG = "CustomizationSettings"
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.appearance_settings, rootKey)
+
+        val themeToggle = findPreference<ListPreference>("theme_togglee")
+        themeToggle?.setOnPreferenceChangeListener { _, _ ->
+            val refresh = Intent(context, SettingsActivity::class.java)
+            startActivity(refresh)
+            requireMainActivityRestart = true
+            true
+        }
+
+        val accentColor = findPreference<Preference>("accent_color")
+        accentColor?.setOnPreferenceChangeListener { _, _ ->
+            requireMainActivityRestart = true
+            val refresh = Intent(context, SettingsActivity::class.java)
+            startActivity(refresh)
+            true
+        }
+
+        val iconChange = findPreference<ListPreference>("icon_change")
+        iconChange?.setOnPreferenceChangeListener { _, newValue ->
+            changeIcon(requireContext(), newValue.toString())
+            true
+        }
+
+        val gridColumns = findPreference<ListPreference>("grid")
+        gridColumns?.setOnPreferenceChangeListener { _, _ ->
+            requireMainActivityRestart = true
+            true
+        }
+    }
+}

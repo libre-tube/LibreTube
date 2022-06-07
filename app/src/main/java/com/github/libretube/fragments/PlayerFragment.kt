@@ -43,7 +43,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
 import com.github.libretube.R
-import com.github.libretube.SponsorBlockSettings
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
@@ -56,6 +55,7 @@ import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
@@ -82,11 +82,11 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
