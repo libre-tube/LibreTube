@@ -120,4 +120,9 @@
     <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub-da yeniləmə səhifəsinə yönləndirilmək üçün oldu düyməsini klikləyin.</string>
     <string name="appearance">Görünüş</string>
     <string name="app_behavior">Tətbiq Davranışı</string>
+    <string name="downloads">Endirmələr</string>
+    <string name="video_format">Video formatı</string>
+    <string name="video_format_summary">Endirilmiş videolar video formatına çevrilir (yalnız hər iki audio və video endirildikdə tətbiq edilir).</string>
+    <string name="download_directory">Endirmə qovluğu</string>
+    <string name="download_directory_summary">Endirdiyiniz medianın saxlandığı qovluq.</string>
 </resources>
