@@ -45,7 +45,7 @@
     <string name="empty">You have to enter a username and password.</string>
     <string name="notgmail">This is not your Gmail account.</string>
     <string name="defres">Default video resolution</string>
-    <string name="grid">Choose grid columns</string>
+    <string name="grid">Grid columns</string>
     <string name="emptyList">Nothing here.</string>
     <string name="deletePlaylist">Delete playlist</string>
     <string name="areYouSure">Delete the playlist?</string>
@@ -135,4 +135,9 @@
     <string name="update_summary">Click here to check whether there\'s a new app update available.</string>
     <string name="app_uptodate">App up to date</string>
     <string name="no_update_available">There\'s currently no new update available. Stay tuned!</string>
+    <string name="playback_speed">Default playback speed</string>
+    <string name="advanced">Advanced</string>
+    <string name="player">Player</string>
+    <string name="appearance_summary">Make the app look how you want to.</string>
+    <string name="advanced_summary">Player, Downloads, History</string>
 </resources>

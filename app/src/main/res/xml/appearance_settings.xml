@@ -10,7 +10,8 @@
             app:entries="@array/themes"
             app:entryValues="@array/themesValue"
             app:defaultValue="A"
-            android:icon="@drawable/ic_theme" />
+            android:icon="@drawable/ic_theme"
+            app:useSimpleSummaryProvider="true" />
 
         <ListPreference
             app:title="@string/color_accent"
@@ -18,7 +19,8 @@
             app:entries="@array/accents"
             app:entryValues="@array/accentsValue"
             app:defaultValue="red"
-            android:icon="@drawable/ic_color" />
+            android:icon="@drawable/ic_color"
+            app:useSimpleSummaryProvider="true" />
 
         <ListPreference
             app:title="@string/app_icon"
@@ -26,7 +28,8 @@
             app:entries="@array/icons"
             app:entryValues="@array/iconsValue"
             app:defaultValue="MainActivity"
-            android:icon="@drawable/ic_frame" />
+            android:icon="@drawable/ic_frame"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
@@ -38,15 +41,7 @@
             app:entries="@array/tabs"
             app:entryValues="@array/tabsValue"
             app:defaultValue="home"
-            android:icon="@drawable/ic_home_outlined" />
-
-        <ListPreference
-            app:title="@string/defres"
-            app:key="default_res"
-            app:entries="@array/defres"
-            app:entryValues="@array/defresValue"
-            app:defaultValue=""
-            android:icon="@drawable/ic_hd"
+            android:icon="@drawable/ic_home_outlined"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference

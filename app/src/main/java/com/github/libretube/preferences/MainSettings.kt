@@ -149,6 +149,13 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
+        val appearance = findPreference<Preference>("appearance")
+        appearance?.setOnPreferenceClickListener {
+            val newFragment = AppearanceSettings()
+            navigateSettings(newFragment)
+            true
+        }
+
         val sponsorblock = findPreference<Preference>("sponsorblock")
         sponsorblock?.setOnPreferenceClickListener {
             val newFragment = SponsorBlockSettings()
@@ -156,23 +163,9 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val downloads = findPreference<Preference>("downloads")
-        downloads?.setOnPreferenceClickListener {
-            val newFragment = DownloadSettings()
-            navigateSettings(newFragment)
-            true
-        }
-
-        val history = findPreference<Preference>("history")
-        history?.setOnPreferenceClickListener {
-            val newFragment = HistorySettings()
-            navigateSettings(newFragment)
-            true
-        }
-
-        val appearance = findPreference<Preference>("appearance")
-        appearance?.setOnPreferenceClickListener {
-            val newFragment = AppearanceSettings()
+        val advanced = findPreference<Preference>("advanced")
+        advanced?.setOnPreferenceClickListener {
+            val newFragment = AdvancedSettings()
             navigateSettings(newFragment)
             true
         }

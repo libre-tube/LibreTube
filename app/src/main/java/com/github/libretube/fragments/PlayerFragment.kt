@@ -797,6 +797,11 @@ class PlayerFragment : Fragment() {
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        exoPlayer.setPlaybackSpeed(playbackSpeed!!)
+
         initializePlayerNotification(requireContext())
     }
 

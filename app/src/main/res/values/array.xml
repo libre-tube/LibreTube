@@ -610,4 +610,24 @@
         <item>.mkv</item>
     </string-array>
 
+    <string-array name="playbackSpeed">
+        <item>0.25x</item>
+        <item>0.5x</item>
+        <item>0.75x</item>
+        <item>1x</item>
+        <item>1.25x</item>
+        <item>1.5x</item>
+        <item>2x</item>
+    </string-array>
+
+    <string-array name="playbackSpeedValues">
+        <item>0.25F</item>
+        <item>0.5F</item>
+        <item>0.75F</item>
+        <item>1F</item>
+        <item>1.25F</item>
+        <item>1.5F</item>
+        <item>2F</item>
+    </string-array>
+
 </resources>
