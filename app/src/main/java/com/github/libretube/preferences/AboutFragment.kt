@@ -62,6 +62,7 @@ class AboutFragment : Fragment() {
             checkUpdate(childFragmentManager)
         }
     }
+
     private fun openLink(link: String) {
         val uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW).setData(uri)

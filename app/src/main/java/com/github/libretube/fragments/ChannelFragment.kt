@@ -22,8 +22,8 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class ChannelFragment : Fragment() {
 
