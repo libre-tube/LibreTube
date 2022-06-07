@@ -3,6 +3,7 @@ package com.github.libretube.preferences
 import android.content.Intent
 import android.os.Bundle
 import android.provider.DocumentsContract
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -14,6 +15,9 @@ class AdvancedSettings : PreferenceFragmentCompat() {
     private val directoryRequestCode = 9999
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.advanced_settings, rootKey)
+
+        val settingsTextView = view?.findViewById<TextView>(R.id.settings_textView)
+        settingsTextView?.text = getString(R.string.advanced)
 
         val clearHistory = findPreference<Preference>("clear_history")
         clearHistory?.setOnPreferenceClickListener {
