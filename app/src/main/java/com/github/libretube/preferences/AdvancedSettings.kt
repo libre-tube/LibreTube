@@ -16,8 +16,8 @@ class AdvancedSettings : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.advanced_settings, rootKey)
 
-        val settingsTextView = view?.findViewById<TextView>(R.id.settings_textView)
-        settingsTextView?.text = getString(R.string.advanced)
+        val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
+        topBarTextView?.text = getString(R.string.advanced)
 
         val clearHistory = findPreference<Preference>("clear_history")
         clearHistory?.setOnPreferenceClickListener {

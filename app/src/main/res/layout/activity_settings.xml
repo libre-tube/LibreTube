@@ -7,15 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/back_imageView"
+    <ImageButton
+        android:id="@+id/back_imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@android:color/transparent"
         android:src="@drawable/ic_arrow_back"/>
 
         <TextView
-            android:id="@+id/settings_textView"
+            android:id="@+id/topBar_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settings"

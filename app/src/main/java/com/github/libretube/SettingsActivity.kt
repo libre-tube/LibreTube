@@ -4,7 +4,8 @@ import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.github.libretube.preferences.MainSettings
@@ -32,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_settings)
 
-        val backButton = view.findViewById<ImageView>(R.id.back_imageView)
+        val backButton = view.findViewById<ImageButton>(R.id.back_imageButton)
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -65,6 +66,8 @@ class SettingsActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.settings, MainSettings())
                 .commit()
+            val topBarTextView = findViewById<TextView>(R.id.topBar_textView)
+            topBarTextView?.text = getString(R.string.settings)
         }
     }
 }
