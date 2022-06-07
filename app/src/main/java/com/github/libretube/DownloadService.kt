@@ -16,9 +16,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File

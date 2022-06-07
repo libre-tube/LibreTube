@@ -1,12 +1,10 @@
 package com.github.libretube.preferences
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
-import com.github.libretube.SettingsActivity
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
 
