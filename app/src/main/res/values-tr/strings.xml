@@ -118,4 +118,6 @@
     <string name="playOnBackground">Arka Planda Oynat</string>
     <string name="update_available">%1$s Sürümü Mevcut</string>
     <string name="update_available_text">Yeni bir güncelleme mevcut. GitHub\'daki güncelleme sayfasına yönlendirilmek için tamam\'a tıklayın.</string>
+    <string name="appearance">Görünüm</string>
+    <string name="app_behavior">Uygulama Davranışı</string>
 </resources>
