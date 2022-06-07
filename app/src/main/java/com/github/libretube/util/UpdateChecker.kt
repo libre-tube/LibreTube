@@ -4,12 +4,12 @@ import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.BuildConfig
 import com.github.libretube.dialogs.UpdateAvailableDialog
-import org.json.JSONArray
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
+import org.json.JSONArray
+import org.json.JSONObject
 
 fun checkUpdate(childFragmentManager: FragmentManager) {
     var updateInfo: UpdateInfo? = UpdateInfo("", "")
