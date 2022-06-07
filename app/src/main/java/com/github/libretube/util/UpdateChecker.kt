@@ -28,7 +28,16 @@ fun checkUpdate(childFragmentManager: FragmentManager) {
     if (updateInfo?.tagName != "" && BuildConfig.VERSION_NAME != updateInfo?.tagName) {
         val updateAvailableDialog = UpdateAvailableDialog(
             updateInfo?.tagName!!,
-            updateInfo?.updateUrl!!
+            updateInfo?.updateUrl!!,
+            true
+        )
+        updateAvailableDialog.show(childFragmentManager, "UpdateDialog")
+    } else {
+        // otherwise show the no update available dialog
+        val updateAvailableDialog = UpdateAvailableDialog(
+            updateInfo?.tagName!!,
+            updateInfo?.updateUrl!!,
+            false
         )
         updateAvailableDialog.show(childFragmentManager, "UpdateAvailableDialog")
     }

@@ -3,12 +3,10 @@ package com.github.libretube.preferences
 import android.Manifest
 import android.content.ContentResolver
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -27,8 +25,6 @@ import com.github.libretube.isCurrentViewMainSettings
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
-import com.github.libretube.util.checkUpdate
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
@@ -112,11 +108,6 @@ class MainSettings : PreferenceFragmentCompat() {
                 }
             }
         super.onCreate(savedInstanceState)
-        try {
-            checkUpdate(childFragmentManager)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -186,6 +177,13 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
+        val about = findPreference<Preference>("about")
+        about?.setOnPreferenceClickListener {
+            val newFragment = AboutFragment()
+            navigateSettings(newFragment)
+            true
+        }
+
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
             val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
@@ -238,34 +236,9 @@ class MainSettings : PreferenceFragmentCompat() {
             }
             true
         }
-
-        val about = findPreference<Preference>("about")
-        about?.setOnPreferenceClickListener {
-            val uri = Uri.parse("https://libre-tube.github.io/")
-            val intent = Intent(Intent.ACTION_VIEW).setData(uri)
-            startActivity(intent)
-            true
-        }
-
-        val license = findPreference<Preference>("license")
-        license?.setOnPreferenceClickListener {
-            val licenseString = view?.context?.assets!!
-                .open("gpl3.html").bufferedReader().use {
-                    it.readText()
-                }
-            val licenseHtml = if (Build.VERSION.SDK_INT >= 24) Html.fromHtml(licenseString, 1)
-            else Html.fromHtml(licenseString)
-
-            MaterialAlertDialogBuilder(view?.context!!)
-                .setPositiveButton(getString(R.string.okay)) { _, _ -> }
-                .setMessage(licenseHtml)
-                .create()
-                .show()
-            true
-        }
     }
 
-    private fun navigateSettings(newFragment: PreferenceFragmentCompat) {
+    private fun navigateSettings(newFragment: Fragment) {
         isCurrentViewMainSettings = false
         parentFragmentManager.beginTransaction()
             .replace(R.id.settings, newFragment)

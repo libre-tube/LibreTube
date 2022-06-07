@@ -125,4 +125,14 @@
     <string name="video_format_summary">The video format downloaded videos get converted to (only applies if both, audio and video, are downloaded).</string>
     <string name="download_directory">Download directory</string>
     <string name="download_directory_summary">The directory where your downloaded media gets stored.</string>
+    <string name="website_summary">Visit our website to learn more about the app and its features.</string>
+    <string name="contributing">Contributing</string>
+    <string name="contributing_summary">Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done the better it gets!</string>
+    <string name="license_summary">The GNU General Public License is a free, copyleft license for software and other kinds of works.</string>
+    <string name="donate">Donate</string>
+    <string name="donate_summary">If you like the app and appreciate our work we\'d be happy about a donation.</string>
+    <string name="update">App update</string>
+    <string name="update_summary">Click here to check whether there\'s a new app update available.</string>
+    <string name="app_uptodate">App up to date</string>
+    <string name="no_update_available">There\'s currently no new update available. Stay tuned!</string>
 </resources>
