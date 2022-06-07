@@ -9,11 +9,19 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.github.libretube.R
 
-class DownloadSettings : PreferenceFragmentCompat() {
-    val TAG = "DownloadSettings"
+class AdvancedSettings : PreferenceFragmentCompat() {
+    val TAG = "AdvancedSettings"
     private val directoryRequestCode = 9999
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.download_settings, rootKey)
+        setPreferencesFromResource(R.xml.advanced_settings, rootKey)
+
+        val clearHistory = findPreference<Preference>("clear_history")
+        clearHistory?.setOnPreferenceClickListener {
+            val sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(requireContext())
+            sharedPreferences.edit().remove("search_history").commit()
+            true
+        }
 
         // doesn't work yet
         val directory = findPreference<Preference>("download_directory")

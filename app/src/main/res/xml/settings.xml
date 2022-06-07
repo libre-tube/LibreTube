@@ -59,6 +59,7 @@
         <Preference
             app:key="appearance"
             app:title="@string/appearance"
+            app:summary="@string/appearance_summary"
             android:icon="@drawable/ic_color" />
 
         <Preference
@@ -68,14 +69,10 @@
             android:icon="@drawable/ic_block" />
 
         <Preference
-            app:title="@string/downloads"
-            app:key="downloads"
-            android:icon="@drawable/ic_file_download" />
-
-        <Preference
-            app:key="history"
-            app:title="@string/history"
-            android:icon="@drawable/ic_history" />
+            app:key="advanced"
+            app:title="@string/advanced"
+            app:summary="@string/advanced_summary"
+            android:icon="@drawable/ic_list" />
 
     </PreferenceCategory>
 
