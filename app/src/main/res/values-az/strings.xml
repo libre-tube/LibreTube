@@ -79,7 +79,7 @@
     <string name="empty">Siz istifadəçi adı və şifrə daxil etməlisiniz.</string>
     <string name="notgmail">Bu sizin Gmail hesabınız deyil.</string>
     <string name="defres">Defolt video keyfiyyəti</string>
-    <string name="grid">Şəbəkə sütunlarını seçin</string>
+    <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
     <string name="deletePlaylist">Pleylisti silin</string>
     <string name="areYouSure">Pleylist silinsin\?</string>
@@ -125,4 +125,19 @@
     <string name="video_format_summary">Endirilmiş videolar video formatına çevrilir (yalnız hər iki audio və video endirildikdə tətbiq edilir).</string>
     <string name="download_directory">Endirmə qovluğu</string>
     <string name="download_directory_summary">Endirdiyiniz medianın saxlandığı qovluq.</string>
+    <string name="website_summary">Tətbiq və onun xüsusiyyətləri haqqında daha çox öyrənmək üçün veb saytımızı ziyarət edin.</string>
+    <string name="contributing">Töhfə</string>
+    <string name="contributing_summary">İdeyalarınız, tərcümələriniz, dizayn dəyişiklikləriniz, kodun təmizlənməsi və ya real ağır kod dəyişiklikləriniz olsun, kömək həmişə xoşdur. Nə qədər çox edilsə, bir o qədər yaxşı olar!</string>
+    <string name="license_summary">GNU Ümumi İctimai Lisenziya proqram təminatı və digər iş növləri üçün pulsuz,ümumi lisenziyadır.</string>
+    <string name="donate">İanə Edin</string>
+    <string name="donate_summary">Tətbiqi bəyənirsinizsə və işimizi qiymətləndirirsinizsə, ianə etmənizdən məmnun olarıq.</string>
+    <string name="update">Tətbiq Yenilənməsi</string>
+    <string name="app_uptodate">Tətbiq Yenilənir</string>
+    <string name="playback_speed">Defolt oynatma sürəti</string>
+    <string name="advanced">Qabaqcıl</string>
+    <string name="player">Oynadıcı</string>
+    <string name="appearance_summary">Tətbiqin istədiyiniz kimi görünməsini təmin edin.</string>
+    <string name="advanced_summary">Oynadıcı, Endirmələr, Tarixçə</string>
+    <string name="update_summary">Yeni tətbiq yeniləməsinin mövcud olub-olmadığını yoxlamaq üçün bura klikləyin.</string>
+    <string name="no_update_available">Hazırda yeni yeniləmə mövcud deyil. Bizimlə qalın!</string>
 </resources>
