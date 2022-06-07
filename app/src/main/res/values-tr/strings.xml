@@ -131,4 +131,13 @@
     <string name="donate_summary">Uygulamayı beğenirseniz ve çalışmalarımızı takdir ederseniz, bağış yapmanızdan memnuniyet duyarız.</string>
     <string name="website_summary">Uygulama ve özellikleri hakkında daha fazla bilgi edinmek için web sitemizi ziyaret edin.</string>
     <string name="contributing_summary">Fikirleriniz, çevirileriniz, tasarım değişiklikleriniz, kod temizlemeniz veya gerçek ağır kod değişiklikleriniz olsun, yardım her zaman memnuniyetle karşılanır. Ne kadar çok yapılırsa o kadar iyi olur!</string>
+    <string name="update_summary">Yeni bir uygulama güncellemesi olup-olmadığını kontrol etmek için burayı tıklayın.</string>
+    <string name="app_uptodate">Uygulama Güncel</string>
+    <string name="no_update_available">Şu anda yeni bir güncelleme mevcut değil. Bizi izlemeye devam edin!</string>
+    <string name="playback_speed">Varsayılan oynatma hızı</string>
+    <string name="advanced">Gelişmiş</string>
+    <string name="player">Oynatıcı</string>
+    <string name="appearance_summary">Uygulamanın istediğiniz gibi görünmesini sağlayın.</string>
+    <string name="advanced_summary">Oyuncu, İndirilenler, Geçmiş</string>
+    <string name="update">Uygulama Güncellenmesi</string>
 </resources>
