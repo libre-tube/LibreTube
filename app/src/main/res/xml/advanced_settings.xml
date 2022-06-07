@@ -56,7 +56,7 @@
         <Preference
             app:title="@string/clear_history"
             app:key="clear_history"
-            android:icon="@drawable/ic_delete" />
+            android:icon="@drawable/ic_trash" />
 
     </PreferenceCategory>
 

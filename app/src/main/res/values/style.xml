@@ -8,8 +8,8 @@
 
     <style name="OLED">
 
-        <item name="android:colorBackground">@color/black</item>
-        <item name="colorSurface">@color/black</item>
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
