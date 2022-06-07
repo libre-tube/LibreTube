@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.github.libretube.preferences.MainSettings
@@ -30,6 +31,12 @@ class SettingsActivity : AppCompatActivity() {
         view.animate().alpha(1F).duration = 300
 
         setContentView(R.layout.activity_settings)
+
+        val backButton = view.findViewById<ImageView>(R.id.back_imageView)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
