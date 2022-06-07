@@ -49,7 +49,7 @@
     <string name="loggedIn">Σύνδεση επιτυχής.</string>
     <string name="importsuccess">Εγγεγραμμένος</string>
     <string name="subscribeIsEmpty">Εγγραφείτε σε μερικά κανάλια πρώτα .</string>
-    <string name="grid">Επιλέξτε στήλες πλέγματος</string>
+    <string name="grid">Στήλες πλέγματος</string>
     <string name="notgmail">Αυτός δεν είναι ο λογαριασμός Gmail σας.</string>
     <string name="defres">Προεπιλεγμένη ανάλυση βίντεο</string>
     <string name="emptyList">Τίποτα εδώ.</string>
@@ -118,4 +118,26 @@
     <string name="playOnBackground">Αναπαραγωγή στο υπόβαθρο</string>
     <string name="update_available">Η έκδοση %1$s είναι διαθέσιμη</string>
     <string name="update_available_text">Υπάρχει μια νέα ενημέρωση διαθέσιμη. Κάντε κλικ στο OK για να ανακατευθυνθείτε στη σελίδα ενημέρωσης στο GitHub.</string>
+    <string name="appearance">Εμφάνιση</string>
+    <string name="app_behavior">Συμεριφορά εφαρμογής</string>
+    <string name="downloads">Λήψεις</string>
+    <string name="video_format">Μορφή βίντεο</string>
+    <string name="video_format_summary">Η μορφή βίντεο στην οποία μετατρέπονται τα κατεβασμένα βίντεο (εφαρμόζεται μόνο αν ο ήχος και το βίντεο έχουν κατέβει).</string>
+    <string name="download_directory">Φάκελος λήψεων</string>
+    <string name="download_directory_summary">Ο φάκελος στον οποίο τα κατεβασμένα αρχεία αποθηκεύονται.</string>
+    <string name="website_summary">Επισκεφθείτε την ιστοσελίδα μας για να μάθετε περισσότερα περί της εφαρμογής και των δυνατοτήτων της.</string>
+    <string name="license_summary">Η Γενική Δημόσια Άδεια GNU είναι μια δωρεάν, ανοιχτή προς αντιγραφή άδεια για λογισμικό και άλλα είδη έργων.</string>
+    <string name="donate">Συνεισφορά</string>
+    <string name="update">Ενημέρωση εφαρμογής</string>
+    <string name="update_summary">Πατήστε εδώ για να ελέγξετε αν είναι διαθέσιμη μία νέα ενημέρωση της εφαρμογής.</string>
+    <string name="no_update_available">Δεν υπάρχει κάποια ενημέρωση αυτή τη στιγμή. Μείνετε συντονισμένοι!</string>
+    <string name="contributing">Συμβάλοντας</string>
+    <string name="appearance_summary">Κάντε την εφαρμογή να φαίνεται όπως θέλετε.</string>
+    <string name="player">Αναπαραγωγέας</string>
+    <string name="playback_speed">Προκαθορισμένη ταχύτητα αναπαραγωγής</string>
+    <string name="contributing_summary">Είτε έχετε ιδέες, μεταφράσεις, αλλαγές σχεδίασης, καθαρισμό κώδικα ή πραγματικές αλλαγές κώδικα, η βοήθεια είναι πάντα ευπρόσδεκτη. Όσο περισσότερα γίνονται τόσο καλύτερη γίνεται η εφαρμογή!</string>
+    <string name="donate_summary">Εάν σας αρέσει η εφαρμογή και εκτιμάτε τη δουλειά μας, θα ήμασταν ευγνώμων μίας δωρεά σας.</string>
+    <string name="app_uptodate">Η εφαρμογή είναι ενημερωμένη</string>
+    <string name="advanced">Για προχωρημένους</string>
+    <string name="advanced_summary">Αναπαραγωγέας, Λήψεις, Ιστορικό</string>
 </resources>
