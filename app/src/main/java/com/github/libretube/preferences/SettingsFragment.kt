@@ -26,16 +26,16 @@ import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.isCurrentViewMainSettings
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.checkUpdate
-import com.github.libretube.util.restartMainActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 
 class SettingsFragment : PreferenceFragmentCompat() {
     val TAG = "Settings"
@@ -130,7 +130,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->
-            restartMainActivity(requireContext())
+            ThemeHelper().restartMainActivity(requireContext())
             true
         }
 

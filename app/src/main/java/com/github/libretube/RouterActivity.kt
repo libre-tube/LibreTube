@@ -6,7 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.github.libretube.util.restartMainActivity
+import com.github.libretube.util.ThemeHelper
 
 class RouterActivity : AppCompatActivity() {
     val TAG = "RouterActivity"
@@ -17,7 +17,7 @@ class RouterActivity : AppCompatActivity() {
             handleSendText(intent)
         } else {
             // start app as normal if URI not in host list
-            restartMainActivity(this)
+            ThemeHelper().restartMainActivity(this)
         }
     }
 

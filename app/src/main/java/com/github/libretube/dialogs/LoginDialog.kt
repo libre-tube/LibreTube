@@ -17,8 +17,8 @@ import com.github.libretube.R
 import com.github.libretube.obj.Login
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class LoginDialog : DialogFragment() {
     private val TAG = "LoginDialog"

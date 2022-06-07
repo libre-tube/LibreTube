@@ -7,8 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.github.libretube.preferences.SettingsFragment
-import com.github.libretube.util.restartMainActivity
-import com.github.libretube.util.updateTheme
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
 
 var isCurrentViewMainSettings = true
@@ -18,7 +17,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
-        updateTheme(this)
+        ThemeHelper().updateTheme(this)
 
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -43,9 +42,9 @@ class SettingsActivity : AppCompatActivity() {
                 requireMainActivityRestart = false
                 // kill player notification
                 val nManager =
-                    this.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
+                    this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 nManager.cancelAll()
-                restartMainActivity(this)
+                ThemeHelper().restartMainActivity(this)
                 ActivityCompat.finishAffinity(this)
             } else {
                 super.onBackPressed()

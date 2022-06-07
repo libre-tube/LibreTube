@@ -8,7 +8,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.SettingsActivity
 import com.github.libretube.requireMainActivityRestart
-import com.github.libretube.util.changeIcon
+import com.github.libretube.util.ThemeHelper
 
 class AppearanceSettings : PreferenceFragmentCompat() {
     private val TAG = "CustomizationSettings"
@@ -33,7 +33,7 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val iconChange = findPreference<ListPreference>("icon_change")
         iconChange?.setOnPreferenceChangeListener { _, newValue ->
-            changeIcon(requireContext(), newValue.toString())
+            ThemeHelper().changeIcon(requireContext(), newValue.toString())
             true
         }
 
