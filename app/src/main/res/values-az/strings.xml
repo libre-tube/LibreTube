@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="yes">Bəli</string>
-    <string name="choose_quality_dialog">Keyfiyyəti seçin:</string>
+    <string name="choose_quality_dialog">Keyfiyyəti Seçin:</string>
     <string name="search_hint">Axtarın</string>
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Olun</string>
@@ -10,13 +10,13 @@
     <string name="save">Saxlayın</string>
     <string name="download">Endirin</string>
     <string name="username">İstifadəçi Adınız</string>
-    <string name="password">Parol</string>
+    <string name="password">Şifrə</string>
     <string name="login">Daxil Olun</string>
     <string name="register">Qeydiyyatdan Keçin</string>
-    <string name="logout">Çıxış edin</string>
+    <string name="logout">Çıxın</string>
     <string name="cancel">İmtina</string>
     <string name="loggedIn">Daxil oldunuz.</string>
-    <string name="loggedout">Çıxış edildi.</string>
+    <string name="loggedout">Çıxıldı.</string>
     <string name="registered">Qeydiyyatdan keçibsiz.İndi kanallara abunə ola bilərsiniz.</string>
     <string name="already_logged_in">Artıq daxil olmusunuz.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
     <string name="login_first">Zəhmət olmasa daxil olun və yenidən cəhd edin!</string>
@@ -42,13 +42,13 @@
     <string name="sponsorblock">SponsorBlok</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app/ saytından API istifadə edir</string>
     <string name="category_intro_description">Aktual məzmunu olmayan bir aralıq.Fasilə, statik çərçivə, təkrarlanan animasiya ola bilər. Bu məlumatı ehtiva edən keçidlər üçün istifadə edilməməlidir.</string>
-    <string name="category_outro">Bitiş Kartları/Töhfə Verənlər</string>
+    <string name="category_outro">Bitiş Kartları/Kanal Nişanı</string>
     <string name="category_outro_description">YouTube bitiş kartları göründüyü zaman. Məlumatla nəticə çıxarmaq üçün deyil.</string>
     <string name="category_segments">Seqmentlər</string>
     <string name="category_sponsor">Sponsor</string>
-    <string name="category_selfpromo">Ödənişsiz/Öz Reklamı</string>
+    <string name="category_selfpromo">Ödənişsiz/Özünü Reklam</string>
     <string name="category_selfpromo_description">Ödənişsiz və ya özünü reklam istisna olmaqla, \"sponsor\" kimi. Buraya mallar, ianələr və ya onların kiminlə əməkdaşlıq etdiyi şəxslər barədə məlumatlar haqqında bölmələr daxildir.</string>
-    <string name="category_interaction_description">Bəyənin, abunə olun və ya məzmunun ortasında onları izləmək üçün qısa xatırlatma olduqda. Əgər uzun və ya konkret bir şey haqqındadırsa, bunun əvəzinə \"Öz reklamı\" lazımdır.</string>
+    <string name="category_interaction_description">Bəyənin, abunə olun və ya məzmunun ortasında onları izləmək üçün qısa xatırlatma olduqda. Əgər uzun və ya konkret bir şey haqqındadırsa, bunun əvəzinə \"Özünü reklam\" lazımdır.</string>
     <string name="license">Lisenziya</string>
     <string name="emptyPlaylistName">Pleylist adı boş ola bilməz</string>
     <string name="success">Uğurlu oldu!</string>
@@ -56,7 +56,7 @@
     <string name="noInternet">İnternet Bağlantısı Yoxdur</string>
     <string name="retry">Yenidən Cəhd Edin</string>
     <string name="segment_skipped">Seqment ötürüldü</string>
-    <string name="sponsorblock_state">Aktiv Edildi</string>
+    <string name="sponsorblock_state">Aktivləşdirildi</string>
     <string name="category_sponsor_description">Ödənişli reklam, yönləndirmə və birbaşa reklamlar. Özünü tanıtmaq və ya bəyəndikləri səbəblərə/yaradıcılara/veb-saytlara/məhsullara pulsuz çağırışlar üçün deyil.</string>
     <string name="category_interaction">İnteraksiya Xatırlatma (Abunə olun)</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
@@ -76,10 +76,10 @@
     <string name="server_error">Serverdə problem var. Başqa bir serveri cəhd edə bilərsiniz\?</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
-    <string name="empty">Siz istifadəçi adı və parol daxil etməlisiniz.</string>
+    <string name="empty">Siz istifadəçi adı və şifrə daxil etməlisiniz.</string>
     <string name="notgmail">Bu sizin Gmail hesabınız deyil.</string>
     <string name="defres">Defolt video keyfiyyəti</string>
-    <string name="grid">Şəbəkə sütunlarını seçin</string>
+    <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
     <string name="deletePlaylist">Pleylisti silin</string>
     <string name="areYouSure">Pleylist silinsin\?</string>
@@ -107,8 +107,8 @@
     <string name="color_yellow">Sarı</string>
     <string name="color_green">Yaşıl</string>
     <string name="color_purple">Bənövşəyi</string>
-    <string name="oledTheme">OLED Teması</string>
-    <string name="material_you">Material Dizaynı</string>
+    <string name="oledTheme">OLED Mövzu</string>
+    <string name="material_you">Öz Dizaynı</string>
     <string name="sponsorblock_notifications">Bildirişlər</string>
     <string name="enabled">Aktivləşdirildi</string>
     <string name="disabled">Qeyri-aktivdir</string>
@@ -116,4 +116,28 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arxa Fonda Oynat</string>
+    <string name="update_available">%1$s Versiyası Mövcuddur</string>
+    <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub-da yeniləmə səhifəsinə yönləndirilmək üçün oldu düyməsini klikləyin.</string>
+    <string name="appearance">Görünüş</string>
+    <string name="app_behavior">Tətbiq Davranışı</string>
+    <string name="downloads">Endirmələr</string>
+    <string name="video_format">Video formatı</string>
+    <string name="video_format_summary">Endirilmiş videolar video formatına çevrilir (yalnız hər iki audio və video endirildikdə tətbiq edilir).</string>
+    <string name="download_directory">Endirmə qovluğu</string>
+    <string name="download_directory_summary">Endirdiyiniz medianın saxlandığı qovluq.</string>
+    <string name="website_summary">Tətbiq və onun xüsusiyyətləri haqqında daha çox öyrənmək üçün veb saytımızı ziyarət edin.</string>
+    <string name="contributing">Töhfə</string>
+    <string name="contributing_summary">İdeyalarınız, tərcümələriniz, dizayn dəyişiklikləriniz, kodun təmizlənməsi və ya real ağır kod dəyişiklikləriniz olsun, kömək həmişə xoşdur. Nə qədər çox edilsə, bir o qədər yaxşı olar!</string>
+    <string name="license_summary">GNU Ümumi İctimai Lisenziya proqram təminatı və digər iş növləri üçün pulsuz,ümumi lisenziyadır.</string>
+    <string name="donate">İanə Edin</string>
+    <string name="donate_summary">Tətbiqi bəyənirsinizsə və işimizi qiymətləndirirsinizsə, ianə etmənizdən məmnun olarıq.</string>
+    <string name="update">Tətbiq Yenilənməsi</string>
+    <string name="app_uptodate">Tətbiq Yenilənir</string>
+    <string name="playback_speed">Defolt oynatma sürəti</string>
+    <string name="advanced">Qabaqcıl</string>
+    <string name="player">Oynadıcı</string>
+    <string name="appearance_summary">Tətbiqin istədiyiniz kimi görünməsini təmin edin.</string>
+    <string name="advanced_summary">Oynadıcı, Endirmələr, Tarixçə</string>
+    <string name="update_summary">Yeni tətbiq yeniləməsinin mövcud olub-olmadığını yoxlamaq üçün bura klikləyin.</string>
+    <string name="no_update_available">Hazırda yeni yeniləmə mövcud deyil. Bizimlə qalın!</string>
 </resources>
