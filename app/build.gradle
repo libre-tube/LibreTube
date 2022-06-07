@@ -41,7 +41,7 @@ android {
         abi {
             enable true
             reset()
-            include "armeabi-v7a","arm64-v8a","x86","x86_64"
+            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
             universalApk false
 
         }
@@ -83,7 +83,7 @@ dependencies {
 
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
-    implementation ('com.google.android.exoplayer:extension-cronet:2.17.1') { exclude group: 'com.google.android.gms' }
+    implementation('com.google.android.exoplayer:extension-cronet:2.17.1') { exclude group: 'com.google.android.gms' }
     implementation 'org.chromium.net:cronet-embedded:101.4951.41'
 
 }

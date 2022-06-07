@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/appearance">
+
+        <androidx.preference.ListPreference
+            app:title="@string/app_theme"
+            app:key="theme_togglee"
+            app:entries="@array/themes"
+            app:entryValues="@array/themesValue"
+            app:defaultValue="A"
+            android:icon="@drawable/ic_theme" />
+
+        <androidx.preference.ListPreference
+            app:title="@string/color_accent"
+            app:key="accent_color"
+            app:entries="@array/accents"
+            app:entryValues="@array/accentsValue"
+            app:defaultValue="red"
+            android:icon="@drawable/ic_color" />
+
+        <androidx.preference.ListPreference
+            app:title="@string/app_icon"
+            app:key="icon_change"
+            app:entries="@array/icons"
+            app:entryValues="@array/iconsValue"
+            app:defaultValue="MainActivity"
+            android:icon="@drawable/ic_frame" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/app_behavior">
+
+        <androidx.preference.ListPreference
+            app:title="@string/defaultTab"
+            app:key="default_tab"
+            app:entries="@array/tabs"
+            app:entryValues="@array/tabsValue"
+            app:defaultValue="home"
+            android:icon="@drawable/ic_home_outlined" />
+
+        <androidx.preference.ListPreference
+            app:title="@string/defres"
+            app:key="default_res"
+            app:entries="@array/defres"
+            app:entryValues="@array/defresValue"
+            app:defaultValue=""
+            android:icon="@drawable/ic_hd"
+            app:useSimpleSummaryProvider="true" />
+
+        <androidx.preference.ListPreference
+            app:title="@string/grid"
+            app:key="grid"
+            app:entries="@array/grid"
+            app:entryValues="@array/grid"
+            app:defaultValue="@integer/grid_items"
+            android:icon="@drawable/ic_grid"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

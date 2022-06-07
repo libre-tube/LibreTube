@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="8dp"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <RadioButton
             android:id="@+id/mkv"

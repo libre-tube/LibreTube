@@ -54,32 +54,12 @@
 
     </PreferenceCategory>
 
-
     <PreferenceCategory app:title="@string/customization">
 
-        <ListPreference
-            app:title="@string/app_theme"
-            app:key="theme_togglee"
-            app:entries="@array/themes"
-            app:entryValues="@array/themesValue"
-            app:defaultValue="A"
-            android:icon="@drawable/ic_theme" />
-
-        <ListPreference
-            app:title="@string/color_accent"
-            app:key="accent_color"
-            app:entries="@array/accents"
-            app:entryValues="@array/accentsValue"
-            app:defaultValue="red"
+        <Preference
+            app:key="appearance"
+            app:title="@string/appearance"
             android:icon="@drawable/ic_color" />
-
-        <ListPreference
-            app:title="@string/app_icon"
-            app:key="icon_change"
-            app:entries="@array/icons"
-            app:entryValues="@array/iconsValue"
-            app:defaultValue="MainActivity"
-            android:icon="@drawable/ic_frame" />
 
         <androidx.preference.Preference
             app:title="@string/sponsorblock"
@@ -87,46 +67,10 @@
             app:summary="@string/sponsorblock_summary"
             android:icon="@drawable/ic_block" />
 
-        <ListPreference
-            app:title="@string/defaultTab"
-            app:key="default_tab"
-            app:entries="@array/tabs"
-            app:entryValues="@array/tabsValue"
-            app:defaultValue="home"
-            android:icon="@drawable/ic_home_outlined" />
-
-        <ListPreference
-            app:title="@string/defres"
-            app:key="default_res"
-            app:entries="@array/defres"
-            app:entryValues="@array/defresValue"
-            app:defaultValue=""
-            android:icon="@drawable/ic_hd"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:title="@string/grid"
-            app:key="grid"
-            app:entries="@array/grid"
-            app:entryValues="@array/grid"
-            app:defaultValue="@integer/grid_items"
-            android:icon="@drawable/ic_grid"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/history">
-
-        <SwitchPreference
-            app:title="@string/search_history"
-            app:key="search_history_toggle"
-            android:defaultValue="true"
+        <androidx.preference.Preference
+            app:key="history"
+            app:title="@string/history"
             android:icon="@drawable/ic_history" />
-
-        <Preference
-            app:title="@string/clear_history"
-            app:key="clear_history"
-            android:icon="@drawable/ic_delete" />
 
     </PreferenceCategory>
 
