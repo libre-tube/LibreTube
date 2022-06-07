@@ -26,29 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
-    <RadioGroup
-        android:id="@+id/radioGp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="8dp"
-        android:visibility="gone">
-
-        <RadioButton
-            android:id="@+id/mkv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=".mkv"
-            android:layout_marginRight="16dp"
-            android:checked="true" />
-
-        <RadioButton
-            android:id="@+id/mp4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=".mp4" />
-    </RadioGroup>
-
     <Button
         android:id="@+id/download"
         android:layout_width="wrap_content"
@@ -61,4 +38,5 @@
         android:padding="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp" />
+
 </LinearLayout>

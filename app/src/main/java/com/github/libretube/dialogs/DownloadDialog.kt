@@ -13,8 +13,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
@@ -29,13 +27,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
     var streams: Streams = Streams()
-    var vidName = arrayListOf<String>()
-    var vidUrl = arrayListOf<String>()
-    var audioName = arrayListOf<String>()
-    var audioUrl = arrayListOf<String>()
     var selectedVideo = 0
     var selectedAudio = 0
-    var extension = ".mp4"
     var duration = 0
     private lateinit var videoId: String
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -142,19 +135,13 @@ class DownloadDialog : DialogFragment() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-            val radioGroup = view.findViewById<RadioGroup>(R.id.radioGp)
-            radioGroup.setOnCheckedChangeListener { group, checkedId ->
-                val radio: RadioButton = view.findViewById(checkedId)
-                extension = radio.text.toString()
-                Log.d(TAG, extension)
-            }
+
             view.findViewById<Button>(R.id.download).setOnClickListener {
                 val intent = Intent(context, DownloadService::class.java)
                 intent.putExtra("videoId", videoId)
                 intent.putExtra("videoUrl", vidUrl[selectedVideo])
                 intent.putExtra("audioUrl", audioUrl[selectedAudio])
                 intent.putExtra("duration", duration)
-                intent.putExtra("extension", extension)
                 // intent.putExtra("command","-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv")
                 context?.startService(intent)
                 dismiss()

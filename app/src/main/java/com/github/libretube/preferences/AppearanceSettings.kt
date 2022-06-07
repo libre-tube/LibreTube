@@ -11,14 +11,13 @@ import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
 
 class AppearanceSettings : PreferenceFragmentCompat() {
-    private val TAG = "CustomizationSettings"
+    private val TAG = "AppearanceSettings"
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
-            val refresh = Intent(context, SettingsActivity::class.java)
-            startActivity(refresh)
+            activity?.recreate()
             requireMainActivityRestart = true
             true
         }
@@ -26,8 +25,7 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         val accentColor = findPreference<Preference>("accent_color")
         accentColor?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
-            val refresh = Intent(context, SettingsActivity::class.java)
-            startActivity(refresh)
+            activity?.recreate()
             true
         }
 

@@ -599,4 +599,15 @@
         <item>IconFlame</item>
         <item>IconBird</item>
     </string-array>
+
+    <string-array name="videoFormats">
+        <item>MP4</item>
+        <item>MKV</item>
+    </string-array>
+
+    <string-array name="videoFormatsValues">
+        <item>.mp4</item>
+        <item>.mkv</item>
+    </string-array>
+
 </resources>

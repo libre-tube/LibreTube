@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.DOWNLOAD_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
@@ -15,6 +16,10 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.net.toFile
+import androidx.core.net.toUri
+import androidx.preference.PreferenceManager
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
 
@@ -44,8 +49,9 @@ class DownloadService : Service() {
         videoId = intent?.getStringExtra("videoId")!!
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
-        extension = intent.getStringExtra("extension")!!
         duration = intent.getIntExtra("duration", 1)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        extension = sharedPreferences.getString("video_format", ".mp4")!!
         downloadType = if (audioUrl != "" && videoUrl != "") "mux"
         else if (audioUrl != "") "audio"
         else if (videoUrl != "") "video"
@@ -81,11 +87,22 @@ class DownloadService : Service() {
         }
 
         // create LibreTube folder in Downloads
+        /*
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val downloadsDirectory = sharedPreferences.getString("download_directory_path", "")
+        Log.i(TAG, downloadsDirectory!!)
+        libretubeDir = if (downloadsDirectory == "") File(
+            Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
+            "LibreTube"
+        )
+        else File(downloadsDirectory)
+         */
         libretubeDir = File(
             Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
             "LibreTube"
         )
         if (!libretubeDir.exists()) libretubeDir.mkdirs()
+        Log.i(TAG, libretubeDir.toString())
 
         // start download
         try {

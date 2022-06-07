@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.github.libretube.preferences.SettingsFragment
+import com.github.libretube.preferences.MainSettings
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
 
@@ -14,7 +14,7 @@ var isCurrentViewMainSettings = true
 var requireMainActivityRestart = false
 
 class SettingsActivity : AppCompatActivity() {
-
+    val TAG = "SettingsActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         ThemeHelper().updateTheme(this)
@@ -31,7 +31,7 @@ class SettingsActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
+                .replace(R.id.settings, MainSettings())
                 .commit()
         }
     }
@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
             isCurrentViewMainSettings = true
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.settings, SettingsFragment())
+                .replace(R.id.settings, MainSettings())
                 .commit()
         }
     }
