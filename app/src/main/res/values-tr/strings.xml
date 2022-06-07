@@ -120,4 +120,9 @@
     <string name="update_available_text">Yeni bir güncelleme mevcut. GitHub\'daki güncelleme sayfasına yönlendirilmek için tamam\'a tıklayın.</string>
     <string name="appearance">Görünüm</string>
     <string name="app_behavior">Uygulama Davranışı</string>
+    <string name="downloads">İndirilenler</string>
+    <string name="video_format">Video formatı</string>
+    <string name="video_format_summary">İndirilen videoların dönüştürüldüğü video formatı (yalnızca hem ses hem de video indirilirse geçerlidir).</string>
+    <string name="download_directory">İndirme dizini</string>
+    <string name="download_directory_summary">İndirdiğiniz medyanın depolandığı dizin.</string>
 </resources>
