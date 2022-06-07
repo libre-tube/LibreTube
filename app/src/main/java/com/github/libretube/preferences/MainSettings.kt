@@ -37,8 +37,8 @@ import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.HttpException
 
-class SettingsFragment : PreferenceFragmentCompat() {
-    val TAG = "Settings"
+class MainSettings : PreferenceFragmentCompat() {
+    val TAG = "SettingsFragment"
 
     companion object {
         lateinit var getContent: ActivityResultLauncher<String>
@@ -161,6 +161,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val sponsorblock = findPreference<Preference>("sponsorblock")
         sponsorblock?.setOnPreferenceClickListener {
             val newFragment = SponsorBlockSettings()
+            navigateSettings(newFragment)
+            true
+        }
+
+        val downloads = findPreference<Preference>("downloads")
+        downloads?.setOnPreferenceClickListener {
+            val newFragment = DownloadSettings()
             navigateSettings(newFragment)
             true
         }
