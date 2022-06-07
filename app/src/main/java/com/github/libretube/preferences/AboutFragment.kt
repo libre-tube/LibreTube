@@ -27,6 +27,9 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val topBarText = activity?.findViewById<TextView>(R.id.topBar_textView)
+        topBarText?.text = getString(R.string.about)
+
         val appVersion = view?.findViewById<TextView>(R.id.app_version)
         appVersion.text = BuildConfig.VERSION_NAME
         val website = view?.findViewById<MaterialCardView>(R.id.website)

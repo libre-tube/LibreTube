@@ -1,6 +1,7 @@
 package com.github.libretube.preferences
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -12,6 +13,9 @@ class AppearanceSettings : PreferenceFragmentCompat() {
     private val TAG = "AppearanceSettings"
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
+
+        val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
+        topBarTextView?.text = getString(R.string.appearance)
 
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
