@@ -15,4 +15,12 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
     </style>
+
+    <style name="MaterialAlertDialog">
+
+        <item name="alertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
+        <item name="dialogCornerRadius">28dp</item>
+
+    </style>
+
 </resources>

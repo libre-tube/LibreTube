@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/appearance">
 
-        <androidx.preference.ListPreference
+        <ListPreference
             app:title="@string/app_theme"
             app:key="theme_togglee"
             app:entries="@array/themes"
@@ -12,7 +12,7 @@
             app:defaultValue="A"
             android:icon="@drawable/ic_theme" />
 
-        <androidx.preference.ListPreference
+        <ListPreference
             app:title="@string/color_accent"
             app:key="accent_color"
             app:entries="@array/accents"
@@ -20,7 +20,7 @@
             app:defaultValue="red"
             android:icon="@drawable/ic_color" />
 
-        <androidx.preference.ListPreference
+        <ListPreference
             app:title="@string/app_icon"
             app:key="icon_change"
             app:entries="@array/icons"
@@ -32,7 +32,7 @@
 
     <PreferenceCategory app:title="@string/app_behavior">
 
-        <androidx.preference.ListPreference
+        <ListPreference
             app:title="@string/defaultTab"
             app:key="default_tab"
             app:entries="@array/tabs"
@@ -40,7 +40,7 @@
             app:defaultValue="home"
             android:icon="@drawable/ic_home_outlined" />
 
-        <androidx.preference.ListPreference
+        <ListPreference
             app:title="@string/defres"
             app:key="default_res"
             app:entries="@array/defres"
@@ -49,7 +49,7 @@
             android:icon="@drawable/ic_hd"
             app:useSimpleSummaryProvider="true" />
 
-        <androidx.preference.ListPreference
+        <ListPreference
             app:title="@string/grid"
             app:key="grid"
             app:entries="@array/grid"
@@ -60,4 +60,4 @@
 
     </PreferenceCategory>
 
-</androidx.preference.PreferenceScreen>
+</PreferenceScreen>

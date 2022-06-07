@@ -18,6 +18,8 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         ThemeHelper().updateTheme(this)
+        // makes the preference dialogs use material dialogs
+        setTheme(R.style.MaterialAlertDialog)
 
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

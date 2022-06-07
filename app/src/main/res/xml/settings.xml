@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/location">
@@ -35,18 +35,18 @@
             app:defaultValue="https://pipedapi.kavin.rocks/"
             android:icon="@drawable/ic_server" />
 
-        <androidx.preference.EditTextPreference
+        <EditTextPreference
             app:key="customInstance"
             app:title="@string/customInstance"
             app:isPreferenceVisible="false" />
 
-        <androidx.preference.Preference
+        <Preference
             app:key="login_register"
             app:title="@string/login_register"
             android:icon="@drawable/ic_login"
             android:summary="@string/notgmail" />
 
-        <androidx.preference.Preference
+        <Preference
             app:key="import_from_yt"
             app:title="@string/import_from_yt"
             android:summary="@string/import_from_yt_summary"
@@ -56,23 +56,23 @@
 
     <PreferenceCategory app:title="@string/customization">
 
-        <androidx.preference.Preference
+        <Preference
             app:key="appearance"
             app:title="@string/appearance"
             android:icon="@drawable/ic_color" />
 
-        <androidx.preference.Preference
+        <Preference
             app:title="@string/sponsorblock"
             app:key="sponsorblock"
             app:summary="@string/sponsorblock_summary"
             android:icon="@drawable/ic_block" />
 
-        <androidx.preference.Preference
+        <Preference
             app:title="@string/downloads"
             app:key="downloads"
             android:icon="@drawable/ic_file_download" />
 
-        <androidx.preference.Preference
+        <Preference
             app:key="history"
             app:title="@string/history"
             android:icon="@drawable/ic_history" />
@@ -93,4 +93,4 @@
 
     </PreferenceCategory>
 
-</androidx.preference.PreferenceScreen>
+</PreferenceScreen>
