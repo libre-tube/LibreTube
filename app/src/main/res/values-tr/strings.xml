@@ -50,7 +50,7 @@
     <string name="instances">Erişim Aracı Seç</string>
     <string name="customInstance">Dilediğiniz bir erişim aracısını ekleyin</string>
     <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracını deneyebilir misiniz\?</string>
-    <string name="grid">Sütun Sayısını Seç</string>
+    <string name="grid">Ağ sütunları</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
     <string name="subscriptions">Abonelikler</string>
@@ -125,4 +125,10 @@
     <string name="video_format_summary">İndirilen videoların dönüştürüldüğü video formatı (yalnızca hem ses hem de video indirilirse geçerlidir).</string>
     <string name="download_directory">İndirme dizini</string>
     <string name="download_directory_summary">İndirdiğiniz medyanın depolandığı dizin.</string>
+    <string name="contributing">Katkı</string>
+    <string name="license_summary">GNU Genel Kamu Lisansı, yazılım ve diğer çalışma türleri için ücretsiz, genel bir lisanstır.</string>
+    <string name="donate">Bağış Yapın</string>
+    <string name="donate_summary">Uygulamayı beğenirseniz ve çalışmalarımızı takdir ederseniz, bağış yapmanızdan memnuniyet duyarız.</string>
+    <string name="website_summary">Uygulama ve özellikleri hakkında daha fazla bilgi edinmek için web sitemizi ziyaret edin.</string>
+    <string name="contributing_summary">Fikirleriniz, çevirileriniz, tasarım değişiklikleriniz, kod temizlemeniz veya gerçek ağır kod değişiklikleriniz olsun, yardım her zaman memnuniyetle karşılanır. Ne kadar çok yapılırsa o kadar iyi olur!</string>
 </resources>
