@@ -116,15 +116,15 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Riproduci in sfondo</string>
-    <string name="downloads">Downloads</string>
+    <string name="downloads">Scaricamenti</string>
     <string name="video_format_summary">Il formato in cui vengono convertiti i video scaricati (viene applicato solo se entrambi, audio e video, vengono scaricati).</string>
     <string name="video_format">Formato video</string>
-    <string name="advanced_summary">Lettore, Downloads, Cronologia</string>
+    <string name="advanced_summary">Lettore, scaricamenti, cronologia</string>
     <string name="update_available">La versione %1$s è disponibile</string>
-    <string name="update_available_text">C\'è una nuova versione disponibile. Clicca okay per essere reindirizzato alla pagina dell\'aggiornamento su GitHub.</string>
+    <string name="update_available_text">C\'è una nuova versione disponibile. Clicca OK per essere reindirizzato alla pagina dell\'aggiornamento su GitHub.</string>
     <string name="appearance">Aspetto</string>
-    <string name="app_behavior">Comportamento App</string>
-    <string name="download_directory">Cartella download</string>
+    <string name="app_behavior">Comportamento app</string>
+    <string name="download_directory">Cartella scaricamento</string>
     <string name="download_directory_summary">La cartella dove i tuoi contenuti scaricati vengono memorizzati.</string>
     <string name="website_summary">Visita il nostro sito per saperne di più sull\'app e le sue funzionalità.</string>
     <string name="contributing">Collabora</string>
@@ -135,10 +135,10 @@
     <string name="update">Aggiornamento app</string>
     <string name="update_summary">Clicca qui per verificare se è disponibile un nuovo aggiornamento dell\'app.</string>
     <string name="app_uptodate">App aggiornata</string>
-    <string name="no_update_available">Al momento non ci sono nuovi aggiornamenti disponibili.Restate sintonizzati!</string>
+    <string name="no_update_available">Al momento non ci sono nuovi aggiornamenti disponibili. Restate sintonizzati!</string>
     <string name="playback_speed">Velocità di riproduzione predefinita</string>
     <string name="advanced">Avanzate</string>
     <string name="player">Lettore</string>
     <string name="appearance_summary">Personalizza l\'app come vuoi tu.</string>
-    <string name="live">Dal Vivo</string>
+    <string name="live">Dal vivo</string>
 </resources>
