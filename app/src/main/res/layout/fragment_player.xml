@@ -149,7 +149,7 @@
                             android:gravity="center"
                             android:text="@string/download"
                             android:maxLines="1"
-                            android:autoSizeTextType="uniform"/>
+                            android:autoSizeTextType="uniform" />
                     </LinearLayout>
 
                     <LinearLayout

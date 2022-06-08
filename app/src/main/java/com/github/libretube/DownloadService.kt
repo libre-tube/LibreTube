@@ -15,6 +15,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.preference.PreferenceManager
 import com.arthenica.ffmpegkit.FFmpegKit
 import java.io.File
 
@@ -44,8 +45,9 @@ class DownloadService : Service() {
         videoId = intent?.getStringExtra("videoId")!!
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
-        extension = intent.getStringExtra("extension")!!
         duration = intent.getIntExtra("duration", 1)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        extension = sharedPreferences.getString("video_format", ".mp4")!!
         downloadType = if (audioUrl != "" && videoUrl != "") "mux"
         else if (audioUrl != "") "audio"
         else if (videoUrl != "") "video"
@@ -81,11 +83,22 @@ class DownloadService : Service() {
         }
 
         // create LibreTube folder in Downloads
+        /*
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val downloadsDirectory = sharedPreferences.getString("download_directory_path", "")
+        Log.i(TAG, downloadsDirectory!!)
+        libretubeDir = if (downloadsDirectory == "") File(
+            Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
+            "LibreTube"
+        )
+        else File(downloadsDirectory)
+         */
         libretubeDir = File(
             Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
             "LibreTube"
         )
         if (!libretubeDir.exists()) libretubeDir.mkdirs()
+        Log.i(TAG, libretubeDir.toString())
 
         // start download
         try {
@@ -226,19 +239,20 @@ class DownloadService : Service() {
         ) {
             // CALLED WHEN SESSION GENERATES STATISTICS
             Log.e(TAG + "stat", it.time.toString())
-                /*val progress = it.time/(10*duration!!)
-                if (progress<1){
-                    notification
-                        .setProgress(progressMax, progress.toInt(), false)
-                    service.notify(1,notification.build())
-                }*/
+            /*val progress = it.time/(10*duration!!)
+            if (progress<1){
+                notification
+                    .setProgress(progressMax, progress.toInt(), false)
+                service.notify(1,notification.build())
+            }*/
         }
     }
 
     override fun onDestroy() {
         try {
             unregisterReceiver(onDownloadComplete)
-        } catch (e: Exception) { }
+        } catch (e: Exception) {
+        }
 
         IS_DOWNLOAD_RUNNING = false
         Log.d(TAG, "dl finished!")

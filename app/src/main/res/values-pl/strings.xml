@@ -14,8 +14,8 @@
     <string name="password">Hasło</string>
     <string name="register">Zarejestruj się</string>
     <string name="cancel">Anuluj</string>
-    <string name="loggedIn">Zalogowano się pomyślnie!</string>
-    <string name="loggedout">Wylogowano się pomyślnie!</string>
+    <string name="loggedIn">Zostałeś zalogowany.</string>
+    <string name="loggedout">Zostałeś wylogowany.</string>
     <string name="already_logged_in">Jesteś już zalogowany, możesz się wylogować ze swojego konta.</string>
     <string name="login_first">Zaloguj się i spróbuj jeszcze raz!</string>
     <string name="instances">Wybierz instancję</string>
@@ -24,7 +24,7 @@
     <string name="please_login">Najpierw zaloguj lub zarejestruj się przechodząc do ustawień!</string>
     <string name="importsuccess">Dodano subskrypcję!</string>
     <string name="subscribeIsEmpty">Zasubskrybuj ulubione kanały, aby widzieć tutaj ich najnowsze publikacje!</string>
-    <string name="dlcomplete">Pobieranie ukończone!</string>
+    <string name="dlcomplete">Pobieranie ukończone.</string>
     <string name="dlisinprogress">Pobieranie innego materiału trwa, poczekaj aż proces zostanie ukończony!</string>
     <string name="downloadfailed">Pobieranie nie udało się!</string>
     <string name="logout">Wyloguj się</string>
@@ -116,4 +116,6 @@
     <string name="piped">Piped</string>
     <string name="enabled">Włączone</string>
     <string name="disabled">Wyłączone</string>
+    <string name="update_available_text">Dostępne jest nowe uaktualnienie aplikacji. Kliknij Okej, aby zostać przeniesionym na stronę z aktualizacją na GitHub’ie.</string>
+    <string name="update_available">Dostępna jest wersja %1$s</string>
 </resources>

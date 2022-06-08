@@ -1,7 +1,8 @@
-package com.github.libretube
+package com.github.libretube.util
 
 import android.app.Activity
 import android.os.Bundle
+import com.github.libretube.R
 import com.google.android.material.color.DynamicColors
 
 class Player : Activity() {

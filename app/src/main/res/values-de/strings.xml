@@ -116,4 +116,6 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Im Hintergrund abspielen</string>
+    <string name="update_available">Version %1$s ist verfügbar</string>
+    <string name="update_available_text">Es ist ein neues Update verfügbar. Klicken Sie auf \"OK\", um zur Aktualisierungsseite auf GitHub weitergeleitet zu werden.</string>
 </resources>

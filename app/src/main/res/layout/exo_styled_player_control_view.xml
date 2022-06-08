@@ -52,7 +52,7 @@
                 android:src="@drawable/ic_close"
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF"
-                app:tint="@color/white" />
+                app:tint="@android:color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +90,7 @@
                 android:src="@drawable/ic_arrow_down"
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF"
-                app:tint="@color/white" />
+                app:tint="@android:color/white" />
         </LinearLayout>
 
     </FrameLayout>
