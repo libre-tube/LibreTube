@@ -46,12 +46,17 @@ class PlaylistsAdapter(
         val playlist = playlists[position]
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.playlist_thumbnail)
         Picasso.get().load(playlist.thumbnail).into(thumbnailImage)
+        // set imageview drawable as empty playlist if imageview empty
+        if (thumbnailImage.drawable == null) {
+            thumbnailImage.setImageResource(R.drawable.ic_empty_playlist)
+            thumbnailImage.setBackgroundColor(R.attr.colorSurface)
+        }
         holder.v.findViewById<TextView>(R.id.playlist_title).text = playlist.name
         holder.v.findViewById<ImageView>(R.id.delete_playlist).setOnClickListener {
             val builder = MaterialAlertDialogBuilder(holder.v.context)
             builder.setTitle(R.string.deletePlaylist)
             builder.setMessage(R.string.areYouSure)
-            builder.setPositiveButton(R.string.yes) { dialog, which ->
+            builder.setPositiveButton(R.string.yes) { _, _ ->
                 val sharedPref = holder.v.context.getSharedPreferences(
                     "token",
                     Context.MODE_PRIVATE
@@ -59,7 +64,7 @@ class PlaylistsAdapter(
                 val token = sharedPref?.getString("token", "")!!
                 deletePlaylist(playlist.id!!, token, position)
             }
-            builder.setNegativeButton(R.string.cancel) { dialog, which ->
+            builder.setNegativeButton(R.string.cancel) { _, _ ->
             }
             builder.show()
         }

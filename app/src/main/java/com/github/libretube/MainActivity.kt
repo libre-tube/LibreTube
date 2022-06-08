@@ -33,10 +33,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
+import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
+import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
-import com.github.libretube.util.updateLanguage
-import com.github.libretube.util.updateTheme
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
 
@@ -68,8 +69,8 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.outroEnabled =
             sharedPreferences.getBoolean("outro_category_key", false)
 
-        updateTheme(this)
-        updateLanguage(this)
+        ThemeHelper().updateTheme(this)
+        LocaleHelper().updateLanguage(this)
 
         val connectivityManager =
             this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             setContentView(R.layout.activity_main)
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
             bottomNavigationView = findViewById(R.id.bottomNav)
             navController = findNavController(R.id.fragment)
@@ -266,7 +267,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
                 motionLayout.transitionToEnd()
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
@@ -282,8 +283,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } catch (e: Exception) {
-            navController.popBackStack()
-            moveTaskToBack(true)
+            // try catch to prevent nointernet activity to crash
+            try {
+                navController.popBackStack()
+                moveTaskToBack(true)
+            } catch (e: Exception) {
+                super.onBackPressed()
+            }
         }
     }
 

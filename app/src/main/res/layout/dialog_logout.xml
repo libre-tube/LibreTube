@@ -26,9 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/logout"
-        android:textColor="@color/white"
+        android:layout_gravity="right"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="14sp"
         android:padding="8dp"
-        android:layout_margin="8dp"
-        android:layout_gravity="center" />
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp" />
 
 </LinearLayout>

@@ -42,9 +42,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
-import com.github.libretube.NOTIFICATION_ID
 import com.github.libretube.R
-import com.github.libretube.SponsorBlockSettings
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
@@ -57,6 +55,7 @@ import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
@@ -210,7 +209,7 @@ class PlayerFragment : Fragment() {
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -218,7 +217,7 @@ class PlayerFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener {
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -290,7 +289,7 @@ class PlayerFragment : Fragment() {
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
                 val mainActivity = activity as MainActivity
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 isFullScreen = false
             }
         }
@@ -339,7 +338,7 @@ class PlayerFragment : Fragment() {
             val notificationManager = context?.getSystemService(
                 Context.NOTIFICATION_SERVICE
             ) as NotificationManager
-            notificationManager.cancel(NOTIFICATION_ID)
+            notificationManager.cancel(1)
             exoPlayer.release()
         } catch (e: Exception) {
         }
@@ -798,6 +797,11 @@ class PlayerFragment : Fragment() {
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        exoPlayer.setPlaybackSpeed(playbackSpeed!!)
+
         initializePlayerNotification(requireContext())
     }
 
@@ -812,7 +816,7 @@ class PlayerFragment : Fragment() {
         mediaSessionConnector.setPlayer(exoPlayer)
 
         playerNotification = PlayerNotificationManager
-            .Builder(c, NOTIFICATION_ID, "background_mode")
+            .Builder(c, 1, "background_mode")
             .build()
 
         playerNotification.apply {
@@ -984,7 +988,7 @@ class PlayerFragment : Fragment() {
             view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.GONE
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
         } else {
             with(motionLayout) {

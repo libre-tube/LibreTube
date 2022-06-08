@@ -12,7 +12,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 0dp dimensions are used to prevent this view from influencing the size of
          the parent view if it uses "wrap_content". It is expanded to occupy the
@@ -48,9 +49,10 @@
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close2"
+                android:src="@drawable/ic_close"
                 android:padding="@dimen/exo_icon_padding"
-                android:background="#00FFFFFF" />
+                android:background="#00FFFFFF"
+                app:tint="@android:color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,9 +87,10 @@
                 android:id="@+id/quality_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down2"
+                android:src="@drawable/ic_arrow_down"
                 android:padding="@dimen/exo_icon_padding"
-                android:background="#00FFFFFF" />
+                android:background="#00FFFFFF"
+                app:tint="@android:color/white" />
         </LinearLayout>
 
     </FrameLayout>
