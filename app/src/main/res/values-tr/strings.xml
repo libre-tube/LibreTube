@@ -75,7 +75,7 @@
     <string name="defaultTab">Varsayılan Sekme</string>
     <string name="choose_filter">Arama filtresi seç</string>
     <string name="category_outro_description">Kanal ikonları veya YouTube video kartları göründüğünde. Bilgi ile sonuçlar için değil.</string>
-    <string name="sponsorblock_state">Etkinleştir</string>
+    <string name="sponsorblock_state">Etkinleştirildi</string>
     <string name="clear_history">Geçmişi Temizle</string>
     <string name="sponsorblock">SponsorBlok</string>
     <string name="channels">Kanallar</string>
@@ -140,4 +140,5 @@
     <string name="appearance_summary">Uygulamanın istediğiniz gibi görünmesini sağlayın.</string>
     <string name="advanced_summary">Oyuncu, İndirilenler, Geçmiş</string>
     <string name="update">Uygulama Güncellenmesi</string>
+    <string name="live">Canlı</string>
 </resources>
