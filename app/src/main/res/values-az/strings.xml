@@ -17,7 +17,7 @@
     <string name="cancel">İmtina</string>
     <string name="loggedIn">Daxil oldunuz.</string>
     <string name="loggedout">Çıxıldı.</string>
-    <string name="registered">Qeydiyyatdan keçibsiz.İndi kanallara abunə ola bilərsiniz.</string>
+    <string name="registered">Qeydiyyatdan keçibsiniz.İndi kanallara abunə ola bilərsiniz.</string>
     <string name="already_logged_in">Artıq daxil olmusunuz.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
     <string name="login_first">Zəhmət olmasa daxil olun və yenidən cəhd edin!</string>
     <string name="startpage">Ev</string>
@@ -122,7 +122,7 @@
     <string name="app_behavior">Tətbiq Davranışı</string>
     <string name="downloads">Endirmələr</string>
     <string name="video_format">Video formatı</string>
-    <string name="video_format_summary">Endirilmiş videolar video formatına çevrilir (yalnız hər iki audio və video endirildikdə tətbiq edilir).</string>
+    <string name="video_format_summary">Endirilmiş videolar video formatına çevrilir (yalnız səs və video birlikdə endirildikdə tətbiq edilir).</string>
     <string name="download_directory">Endirmə qovluğu</string>
     <string name="download_directory_summary">Endirdiyiniz medianın saxlandığı qovluq.</string>
     <string name="website_summary">Tətbiq və onun xüsusiyyətləri haqqında daha çox öyrənmək üçün veb saytımızı ziyarət edin.</string>
@@ -132,7 +132,7 @@
     <string name="donate">İanə Edin</string>
     <string name="donate_summary">Tətbiqi bəyənirsinizsə və işimizi qiymətləndirirsinizsə, ianə etmənizdən məmnun olarıq.</string>
     <string name="update">Tətbiq Yenilənməsi</string>
-    <string name="app_uptodate">Tətbiq Yenilənir</string>
+    <string name="app_uptodate">Tətbiq Yenilənib</string>
     <string name="playback_speed">Defolt oynatma sürəti</string>
     <string name="advanced">Qabaqcıl</string>
     <string name="player">Oynadıcı</string>
@@ -140,4 +140,5 @@
     <string name="advanced_summary">Oynadıcı, Endirmələr, Tarixçə</string>
     <string name="update_summary">Yeni tətbiq yeniləməsinin mövcud olub-olmadığını yoxlamaq üçün bura klikləyin.</string>
     <string name="no_update_available">Hazırda yeni yeniləmə mövcud deyil. Bizimlə qalın!</string>
+    <string name="live">Canlı</string>
 </resources>
