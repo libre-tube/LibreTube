@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
@@ -16,11 +17,11 @@ import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class CommentsAdapter(
     private val videoId: String,
@@ -31,6 +32,7 @@ class CommentsAdapter(
     private var isLoading = false
     private var nextPage = ""
     private lateinit var repliesRecView: RecyclerView
+    private lateinit var repliesPage: CommentsPage
 
     fun updateItems(newItems: List<Comment>) {
         var commentsSize = comments.size
@@ -77,15 +79,17 @@ class CommentsAdapter(
             }
         }
         repliesRecView = holder.v.findViewById(R.id.replies_recView)
-        // repliesRecView.layoutManager = LinearLayoutManager(holder.v.context)
+        repliesRecView.layoutManager = LinearLayoutManager(holder.v.context)
+        val repliesAdapter = RepliesAdapter(CommentsPage().comments)
+        repliesRecView.adapter = repliesAdapter
         holder.v.setOnClickListener {
-            if (repliesRecView.visibility == View.GONE) {
-                repliesRecView.visibility = View.VISIBLE
+            Log.e("clicekd", "clicked")
+            if (repliesAdapter.itemCount == 0) {
                 nextPage = comments[position].repliesPage!!
-                repliesRecView.adapter = CommentsAdapter(videoId, comments)
-                // fetchReplies()
+                fetchReplies(repliesAdapter)
+                // repliesAdapter.updateItems(repliesPage.comments)
             } else {
-                repliesRecView.visibility = View.GONE
+                repliesAdapter.clear()
             }
         }
     }
@@ -94,23 +98,20 @@ class CommentsAdapter(
         return comments.size
     }
 
-    private fun fetchReplies() {
-        CoroutineScope(Dispatchers.IO).launch {
+    private fun fetchReplies(repliesAdapter: RepliesAdapter) {
+        CoroutineScope(Dispatchers.Main).launch {
             if (!isLoading && nextPage != null) {
-                var response = CommentsPage()
                 isLoading = true
                 try {
-                    response = RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                    repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response," + e.response())
                 }
-                nextPage = if (response.nextpage != null) response.nextpage!!
-                else ""
-                // commentsAdapter?.updateItems(response.comments)
-                repliesRecView.adapter = RepliesAdapter(response.comments)
+                // nextPage = if (repliesPage.nextpage!! != null) repliesPage.nextpage!! else ""
+                repliesAdapter.updateItems(repliesPage.comments)
                 isLoading = false
             }
         }

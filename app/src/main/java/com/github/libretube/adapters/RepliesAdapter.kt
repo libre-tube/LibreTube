@@ -22,6 +22,12 @@ class RepliesAdapter(
     private var isLoading = false
     private var nextPage = ""
 
+    fun clear() {
+        val size: Int = replies.size
+        replies.clear()
+        notifyItemRangeRemoved(0, size)
+    }
+
     fun updateItems(newItems: List<Comment>) {
         var repliesSize = replies.size
         replies.addAll(newItems)

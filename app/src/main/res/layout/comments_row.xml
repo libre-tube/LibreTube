@@ -105,10 +105,9 @@
         android:id="@+id/replies_recView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:nestedScrollingEnabled="false"
-        android:visibility="gone" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
