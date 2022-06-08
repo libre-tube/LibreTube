@@ -32,6 +32,7 @@ class AboutFragment : Fragment() {
 
         val appVersion = view?.findViewById<TextView>(R.id.app_version)
         appVersion.text = BuildConfig.VERSION_NAME
+
         val website = view?.findViewById<MaterialCardView>(R.id.website)
         website?.setOnClickListener {
             openLink("https://libre-tube.github.io/")

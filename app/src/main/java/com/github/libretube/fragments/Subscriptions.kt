@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -23,11 +23,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.github.libretube.R
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.util.RetrofitInstance
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Subscriptions : Fragment() {
     val TAG = "SubFragment"

@@ -54,9 +54,8 @@ class SubscriptionAdapter(
             DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
         val thumbnailDuration = holder.v.findViewById<TextView>(R.id.thumbnail_duration)
-        val itemDuration = DateUtils.formatElapsedTime(trending.duration!!)
-        if (itemDuration != "00:-1") {
-            thumbnailDuration.text = itemDuration
+        if (trending.duration != -1L) {
+            thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
         } else {
             thumbnailDuration.text = holder.v.context.getString(R.string.live)
             thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)

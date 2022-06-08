@@ -7,14 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/back_imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:layout_marginVertical="10dp"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/ic_arrow_back"/>
+        <ImageButton
+            android:id="@+id/back_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginVertical="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back" />
 
         <TextView
             android:id="@+id/topBar_textView"
@@ -23,7 +23,7 @@
             android:text="@string/settings"
             android:layout_marginLeft="14dp"
             android:textSize="20sp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
     </LinearLayout>
 

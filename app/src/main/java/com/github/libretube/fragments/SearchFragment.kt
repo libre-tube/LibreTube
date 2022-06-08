@@ -30,11 +30,11 @@ import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.hideKeyboard
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"

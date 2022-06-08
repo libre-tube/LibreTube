@@ -19,8 +19,8 @@ import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class AddtoPlaylistDialog : DialogFragment() {
     private val TAG = "AddToPlaylistDialog"

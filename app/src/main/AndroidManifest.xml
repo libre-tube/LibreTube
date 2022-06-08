@@ -21,7 +21,7 @@
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true">
         <activity
-            android:name=".Player"
+            android:name=".util.Player"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|screenSize" />
