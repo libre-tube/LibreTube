@@ -1,10 +1,7 @@
 package com.github.libretube.adapters
 
-import android.graphics.Color
-import android.graphics.Color.rgb
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
