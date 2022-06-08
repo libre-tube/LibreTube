@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
@@ -18,10 +17,10 @@ import com.github.libretube.obj.Playlists
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistsAdapter(
     private val playlists: MutableList<Playlists>,
@@ -48,7 +47,10 @@ class PlaylistsAdapter(
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.playlist_thumbnail)
         Picasso.get().load(playlist.thumbnail).into(thumbnailImage)
         // set imageview drawable as empty playlist if imageview empty
-        // if (thumbnailImage.drawable == null) thumbnailImage.setImageResource(R.mipmap.empty_playlist)
+        if (thumbnailImage.drawable == null) {
+            thumbnailImage.setImageResource(R.drawable.ic_empty_playlist)
+            thumbnailImage.setBackgroundColor(R.attr.colorSurface)
+        }
         holder.v.findViewById<TextView>(R.id.playlist_title).text = playlist.name
         holder.v.findViewById<ImageView>(R.id.delete_playlist).setOnClickListener {
             val builder = MaterialAlertDialogBuilder(holder.v.context)
