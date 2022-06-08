@@ -70,9 +70,8 @@ class SearchViewHolder(
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
         Picasso.get().load(item.thumbnail).fit().centerCrop().into(thumbnailImage)
         val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
-        val itemDuration = DateUtils.formatElapsedTime(item.duration!!)
-        if (itemDuration != "00:-1") {
-            thumbnailDuration.text = itemDuration
+        if (item.duration != -1L) {
+            thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
         } else {
             thumbnailDuration.text = v.context.getString(R.string.live)
             thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
