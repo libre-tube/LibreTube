@@ -25,13 +25,13 @@ import com.github.libretube.isCurrentViewMainSettings
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 
 class MainSettings : PreferenceFragmentCompat() {
     val TAG = "SettingsFragment"
