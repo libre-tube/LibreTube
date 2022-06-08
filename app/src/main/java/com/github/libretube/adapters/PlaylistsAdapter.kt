@@ -17,10 +17,10 @@ import com.github.libretube.obj.Playlists
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import java.io.IOException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class PlaylistsAdapter(
     private val playlists: MutableList<Playlists>,
