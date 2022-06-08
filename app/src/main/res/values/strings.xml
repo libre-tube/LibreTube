@@ -140,4 +140,5 @@
     <string name="player">Player</string>
     <string name="appearance_summary">Make the app look how you want to.</string>
     <string name="advanced_summary">Player, Downloads, History</string>
+    <string name="live">Live</string>
 </resources>

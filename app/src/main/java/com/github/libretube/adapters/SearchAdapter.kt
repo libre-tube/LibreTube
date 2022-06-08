@@ -1,7 +1,10 @@
 package com.github.libretube.adapters
 
+import android.graphics.Color
+import android.graphics.Color.rgb
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,7 +73,13 @@ class SearchViewHolder(
         val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
         Picasso.get().load(item.thumbnail).fit().centerCrop().into(thumbnailImage)
         val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
-        thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
+        val itemDuration = DateUtils.formatElapsedTime(item.duration!!)
+        if (itemDuration != "00:-1") {
+            thumbnailDuration.text = itemDuration
+        } else {
+            thumbnailDuration.text = v.context.getString(R.string.live)
+            thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
+        }
         val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
         Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(channelImage)
         val title = v.findViewById<TextView>(R.id.search_description)

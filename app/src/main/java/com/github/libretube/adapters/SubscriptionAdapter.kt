@@ -53,8 +53,14 @@ class SubscriptionAdapter(
             trending.views.formatShort() + " • " +
             DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
         val thumbnailImage = holder.v.findViewById<ImageView>(R.id.thumbnail)
-        holder.v.findViewById<TextView>(R.id.thumbnail_duration).text =
-            DateUtils.formatElapsedTime(trending.duration!!)
+        val thumbnailDuration = holder.v.findViewById<TextView>(R.id.thumbnail_duration)
+        val itemDuration = DateUtils.formatElapsedTime(trending.duration!!)
+        if (itemDuration != "00:-1") {
+            thumbnailDuration.text = itemDuration
+        } else {
+            thumbnailDuration.text = holder.v.context.getString(R.string.live)
+            thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
+        }
         val channelImage = holder.v.findViewById<ImageView>(R.id.channel_image)
         channelImage.setOnClickListener {
             val activity = holder.v.context as MainActivity
