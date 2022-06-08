@@ -83,7 +83,6 @@ class CommentsAdapter(
         val repliesAdapter = RepliesAdapter(CommentsPage().comments)
         repliesRecView.adapter = repliesAdapter
         holder.v.setOnClickListener {
-            Log.e("clicekd", "clicked")
             if (repliesAdapter.itemCount == 0) {
                 nextPage = comments[position].repliesPage!!
                 fetchReplies(repliesAdapter)
