@@ -141,4 +141,7 @@
     <string name="update_summary">Yeni tətbiq yeniləməsinin mövcud olub-olmadığını yoxlamaq üçün bura klikləyin.</string>
     <string name="no_update_available">Hazırda yeni yeniləmə mövcud deyil. Bizimlə qalın!</string>
     <string name="live">Canlı</string>
+    <string name="authors">Müəlliflər</string>
+    <string name="authors_summary">LibreTube Komandasının arxasında kimin olduğunu və sehri kimin etdiyini öyrənin.</string>
+    <string name="no_replies">Bu şərhə cavab yoxdur.</string>
 </resources>
