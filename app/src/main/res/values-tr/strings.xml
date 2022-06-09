@@ -141,4 +141,7 @@
     <string name="advanced_summary">Oyuncu, İndirilenler, Geçmiş</string>
     <string name="update">Uygulama Güncellenmesi</string>
     <string name="live">Canlı</string>
+    <string name="no_replies">Bu yoruma cevap yok.</string>
+    <string name="authors">Yazarlar</string>
+    <string name="authors_summary">LibreTube Ekipinin arkasında kimin olduğunu ve sihri kimin yapdığını öğrenin.</string>
 </resources>
