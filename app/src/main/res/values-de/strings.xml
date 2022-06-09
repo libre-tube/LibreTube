@@ -140,4 +140,8 @@
     <string name="player">Player</string>
     <string name="appearance_summary">Gestalte die App so, wie du es wünschst.</string>
     <string name="live">Live</string>
+    <string name="no_replies">Dieser Kommentar hat keine Antworten.</string>
+    <string name="authors">Autoren</string>
+    <string name="authors_summary">Finde heraus, wer hinter dem Team LibreTube steckt und die Magie ausübt.</string>
+    <string name="contributing">Beitragen</string>
 </resources>
