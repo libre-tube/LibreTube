@@ -141,4 +141,7 @@
     <string name="player">Lecteur</string>
     <string name="appearance_summary">Donnez à l\'application l\'aspect que vous souhaitez.</string>
     <string name="live">En direct</string>
+    <string name="no_replies">Ce commentaire n\'a pas de réponse.</string>
+    <string name="authors">Auteurs</string>
+    <string name="authors_summary">Découvrez qui se cache derrière l\'équipe LibreTube et fait des merveilles.</string>
 </resources>
