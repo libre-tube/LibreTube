@@ -63,8 +63,8 @@
     <string name="appearance">מראה</string>
     <string name="app_behavior">התנהגות היישום</string>
     <string name="video_format">תצורת סרטונים</string>
-    <string name="download_directory">תיקיית הורדות</string>
-    <string name="download_directory_summary">התיקייה בה יאוחסנו פריטי המדינה שבחרת להוריד.</string>
+    <string name="download_directory">מקום הורדות</string>
+    <string name="download_directory_summary">המקום בו יאוחסנו פריטי המדיה שבחרת להוריד.</string>
     <string name="website_summary">אפשר לבקר באתר שלנו כדי ללמוד עוד על היישום והיכולות שלו.</string>
     <string name="donate">תרומה</string>
     <string name="license_summary">הרישיון הציבורי הכללי של גנו הוא רישיון חופשי ומתירני לתוכנה ולסוגים נוספים של יצירות.</string>
@@ -144,4 +144,12 @@
     <string name="authors">יוצרים</string>
     <string name="authors_summary">כאן מופיעים אלו שעומדים מאחורי LibreTube ועושים את הקסם.</string>
     <string name="no_replies">להערה זו אין תגובות.</string>
+    <string name="download_folder_summary">שם התיקייה שבה מאוחסנת מדיה שהורדה.</string>
+    <string name="internal_storage">אחסון פנימי</string>
+    <string name="downloads_directory">תיקיית הורדות</string>
+    <string name="movies_directory">תיקיית סרטים</string>
+    <string name="music_directory">תיקיית מוזיקה</string>
+    <string name="download_folder">שם תיקייה</string>
+    <string name="sdcard">כרטיס SD</string>
+    <string name="shareTo">שיתוף כתובת אל:</string>
 </resources>
