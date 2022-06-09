@@ -123,7 +123,7 @@
     <string name="donate">Faire un don</string>
     <string name="advanced_summary">Lecteur, téléchargements, historique</string>
     <string name="video_format_summary">Le format vidéo vers lequel les vidéos téléchargées sont converties (ne s\'applique que si les deux formats, audio et vidéo, sont téléchargés).</string>
-    <string name="download_directory_summary">Le répertoire dans lequel vos médias téléchargés sont stockés.</string>
+    <string name="download_directory_summary">L\'emplacement où vos médias téléchargés sont stockés.</string>
     <string name="license_summary">La licence publique générale GNU est une licence libre, avec gauche d\'auteur, pour les logiciels et autres types d\'œuvres.</string>
     <string name="update_available">La version %1$s est disponible</string>
     <string name="update_available_text">Il y a une nouvelle mise à jour disponible. Cliquez sur OK pour être redirigé vers la page de mise à jour sur GitHub.</string>
@@ -131,7 +131,7 @@
     <string name="app_behavior">Comportement de l\'appli</string>
     <string name="downloads">Téléchargements</string>
     <string name="video_format">Format vidéo</string>
-    <string name="download_directory">Répertoire de téléchargement</string>
+    <string name="download_directory">Emplacement de téléchargement</string>
     <string name="update">Mise à jour de l\'appli</string>
     <string name="update_summary">Cliquez ici pour vérifier si une nouvelle mise à jour de l\'application est disponible.</string>
     <string name="app_uptodate">L\'application est à jour</string>
@@ -144,4 +144,12 @@
     <string name="no_replies">Ce commentaire n\'a pas de réponse.</string>
     <string name="authors">Auteurs</string>
     <string name="authors_summary">Découvrez qui se cache derrière l\'équipe LibreTube et fait des merveilles.</string>
+    <string name="sdcard">Carte SD</string>
+    <string name="download_folder_summary">Le nom du répertoire dans lequel les médias téléchargés sont stockés.</string>
+    <string name="download_folder">Nom du répertoire</string>
+    <string name="internal_storage">Stockage interne</string>
+    <string name="downloads_directory">Répertoire des téléchargements</string>
+    <string name="music_directory">Répertoire de musique</string>
+    <string name="shareTo">Partager l\'URL vers :</string>
+    <string name="movies_directory">Répertoire de films</string>
 </resources>
