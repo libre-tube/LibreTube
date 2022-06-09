@@ -117,12 +117,12 @@
     <string name="website">אתר</string>
     <string name="noInternet">אין חיבור לאינטרנט</string>
     <string name="retry">לנסות שוב</string>
-    <string name="sponsorblock">חסימת מממנים</string>
+    <string name="sponsorblock">חסימת חסות</string>
     <string name="category_segments">מקטעים</string>
     <string name="material_you">Material You</string>
     <string name="update_available">גרסה %1$s זמינה כעת</string>
     <string name="segment_skipped">מקטע שדולג</string>
-    <string name="category_sponsor">מממן</string>
+    <string name="category_sponsor">נותן חסות</string>
     <string name="category_selfpromo">קידום לא בתשלום/עצמי</string>
     <string name="disabled">מושבת</string>
     <string name="piped">Piped</string>
@@ -139,4 +139,9 @@
     <string name="appearance_summary">לשנות את מראה היישומון לטעמך.</string>
     <string name="category_intro_description">פרק זמן ללא תוכן ממשי. יכולה להיות השהייה, תמונה ללא תזוזה, הנפשה מחזורית. אסור להשתמש בזה למעברונים שמכילים מידע.</string>
     <string name="contributing_summary">אם יש לך רעיונות, תרגומים, שינויים בעיצוב, ניקוי קוד או שינויי קוד מעמיקים, נשמח לקבל עזרה. ככל שיותר נעשה כך היישומון משתפר יותר!</string>
+    <string name="category_selfpromo_description">דומה ל„נותן חסות” למעט קידום עצמי ללא תשלום. לרבות סעיפים על אביזרים ממותגים, תרומות או מידע על שיתופי פעולה.</string>
+    <string name="category_intro">הפוגה/הנפשת הקדמה</string>
+    <string name="authors">יוצרים</string>
+    <string name="authors_summary">כאן מופיעים אלו שעומדים מאחורי LibreTube ועושים את הקסם.</string>
+    <string name="no_replies">להערה זו אין תגובות.</string>
 </resources>
