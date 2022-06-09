@@ -3,6 +3,7 @@ package com.github.libretube.util
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.BuildConfig
+import com.github.libretube.dialogs.NoUpdateAvailableDialog
 import com.github.libretube.dialogs.UpdateAvailableDialog
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -28,18 +29,13 @@ fun checkUpdate(childFragmentManager: FragmentManager) {
     if (updateInfo?.tagName != "" && BuildConfig.VERSION_NAME != updateInfo?.tagName) {
         val updateAvailableDialog = UpdateAvailableDialog(
             updateInfo?.tagName!!,
-            updateInfo?.updateUrl!!,
-            true
-        )
-        updateAvailableDialog.show(childFragmentManager, "UpdateDialog")
-    } else {
-        // otherwise show the no update available dialog
-        val updateAvailableDialog = UpdateAvailableDialog(
-            updateInfo?.tagName!!,
-            updateInfo?.updateUrl!!,
-            false
+            updateInfo?.updateUrl!!
         )
         updateAvailableDialog.show(childFragmentManager, "UpdateAvailableDialog")
+    } else {
+        // otherwise show the no update available dialog
+        val noUpdateAvailableDialog = NoUpdateAvailableDialog()
+        noUpdateAvailableDialog.show(childFragmentManager, "NoUpdateAvailableDialog")
     }
 }
 
