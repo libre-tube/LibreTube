@@ -123,8 +123,8 @@
     <string name="downloads">Downloads</string>
     <string name="video_format">Video format</string>
     <string name="video_format_summary">The video format downloaded videos get converted to (only applies if both, audio and video, are downloaded).</string>
-    <string name="download_directory">Download directory</string>
-    <string name="download_directory_summary">The directory where your downloaded media gets stored.</string>
+    <string name="download_directory">Download location</string>
+    <string name="download_directory_summary">The location where your downloaded media gets stored.</string>
     <string name="website_summary">Visit our website to learn more about the app and its features.</string>
     <string name="contributing">Contributing</string>
     <string name="contributing_summary">Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done the better it gets!</string>
@@ -144,4 +144,12 @@
     <string name="no_replies">This comment has no replies.</string>
     <string name="authors">Authors</string>
     <string name="authors_summary">Find out who\'s behind Team LibreTube and does the magic.</string>
+    <string name="download_folder">Directory name</string>
+    <string name="download_folder_summary">The name of the directory downloaded media gets stored in.</string>
+    <string name="internal_storage">Internal storage</string>
+    <string name="downloads_directory">Downloads directory</string>
+    <string name="sdcard">SD card</string>
+    <string name="music_directory">Music directory</string>
+    <string name="movies_directory">Movies directory</string>
+    <string name="shareTo">Share Url To:</string>
 </resources>

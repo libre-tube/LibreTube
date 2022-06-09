@@ -11,6 +11,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.os.Environment.DIRECTORY_DOWNLOADS
+import android.os.Environment.DIRECTORY_MOVIES
+import android.os.Environment.DIRECTORY_MUSIC
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -82,20 +84,21 @@ class DownloadService : Service() {
             Log.e(TAG, "Directory already have")
         }
 
-        // create LibreTube folder in Downloads
-        /*
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val downloadsDirectory = sharedPreferences.getString("download_directory_path", "")
-        Log.i(TAG, downloadsDirectory!!)
-        libretubeDir = if (downloadsDirectory == "") File(
-            Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
-            "LibreTube"
-        )
-        else File(downloadsDirectory)
-         */
+        val downloadLocationPref = sharedPreferences.getString("download_location", "")
+        val folderName = sharedPreferences.getString("download_folder", "")
+
+        val location = when (downloadLocationPref) {
+            "downloads" -> Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)
+            "music" -> Environment.getExternalStoragePublicDirectory(DIRECTORY_MUSIC)
+            "movies" -> Environment.getExternalStoragePublicDirectory(DIRECTORY_MOVIES)
+            "sdcard" -> Environment.getExternalStorageDirectory()
+            else -> Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)
+        }
+
         libretubeDir = File(
-            Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
-            "LibreTube"
+            location,
+            folderName
         )
         if (!libretubeDir.exists()) libretubeDir.mkdirs()
         Log.i(TAG, libretubeDir.toString())
