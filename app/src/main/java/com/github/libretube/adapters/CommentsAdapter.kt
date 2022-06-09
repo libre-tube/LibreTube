@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,9 +31,8 @@ class CommentsAdapter(
 
     private val TAG = "CommentsAdapter"
     private var isLoading = false
-    private var nextPage = ""
-    private lateinit var repliesRecView: RecyclerView
-    private lateinit var repliesPage: CommentsPage
+    private var nextpage = ""
+    private var repliesPage = CommentsPage()
 
     fun updateItems(newItems: List<Comment>) {
         var commentsSize = comments.size
@@ -78,14 +78,18 @@ class CommentsAdapter(
             } catch (e: Exception) {
             }
         }
-        repliesRecView = holder.v.findViewById(R.id.replies_recView)
+        val repliesRecView = holder.v.findViewById<RecyclerView>(R.id.replies_recView)
         repliesRecView.layoutManager = LinearLayoutManager(holder.v.context)
         val repliesAdapter = RepliesAdapter(CommentsPage().comments)
         repliesRecView.adapter = repliesAdapter
         holder.v.setOnClickListener {
             if (repliesAdapter.itemCount == 0) {
-                nextPage = comments[position].repliesPage!!
-                fetchReplies(repliesAdapter)
+                if (comments[position].repliesPage != null) {
+                    nextpage = comments[position].repliesPage!!
+                    fetchReplies(nextpage, repliesAdapter)
+                } else {
+                    Toast.makeText(holder.v.context, R.string.no_replies, Toast.LENGTH_SHORT).show()
+                }
                 // repliesAdapter.updateItems(repliesPage.comments)
             } else {
                 repliesAdapter.clear()
@@ -97,19 +101,19 @@ class CommentsAdapter(
         return comments.size
     }
 
-    private fun fetchReplies(repliesAdapter: RepliesAdapter) {
+    private fun fetchReplies(nextpage: String, repliesAdapter: RepliesAdapter) {
         CoroutineScope(Dispatchers.Main).launch {
-            if (!isLoading && nextPage != null) {
+            if (!isLoading && nextpage != null) {
                 isLoading = true
                 try {
-                    repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
+                    repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId!!, nextpage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response," + e.response())
                 }
-                // nextPage = if (repliesPage.nextpage!! != null) repliesPage.nextpage!! else ""
+                // nextpage = if (repliesPage.nextpage!! != null) repliesPage.nextpage!! else ""
                 repliesAdapter.updateItems(repliesPage.comments)
                 isLoading = false
             }
