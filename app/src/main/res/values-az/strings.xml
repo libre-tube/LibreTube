@@ -117,14 +117,14 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arxa Fonda Oynat</string>
     <string name="update_available">%1$s Versiyası Mövcuddur</string>
-    <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub-da yeniləmə səhifəsinə yönləndirilmək üçün oldu düyməsini klikləyin.</string>
+    <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub\'da yeniləmə səhifəsinə yönləndirilmək üçün oldu düyməsini klikləyin.</string>
     <string name="appearance">Görünüş</string>
     <string name="app_behavior">Tətbiq Davranışı</string>
     <string name="downloads">Endirmələr</string>
     <string name="video_format">Video formatı</string>
     <string name="video_format_summary">Endirilmiş videolar video formatına çevrilir (yalnız səs və video birlikdə endirildikdə tətbiq edilir).</string>
-    <string name="download_directory">Endirmə qovluğu</string>
-    <string name="download_directory_summary">Endirdiyiniz medianın saxlandığı qovluq.</string>
+    <string name="download_directory">Endirmə yeri</string>
+    <string name="download_directory_summary">Endirdiyiniz medianın saxlandığı yer.</string>
     <string name="website_summary">Tətbiq və onun xüsusiyyətləri haqqında daha çox öyrənmək üçün veb saytımızı ziyarət edin.</string>
     <string name="contributing">Töhfə</string>
     <string name="contributing_summary">İdeyalarınız, tərcümələriniz, dizayn dəyişiklikləriniz, kodun təmizlənməsi və ya real ağır kod dəyişiklikləriniz olsun, kömək həmişə xoşdur. Nə qədər çox edilsə, bir o qədər yaxşı olar!</string>
@@ -144,4 +144,12 @@
     <string name="authors">Müəlliflər</string>
     <string name="authors_summary">LibreTube Komandasının arxasında kimin olduğunu və sehri kimin etdiyini öyrənin.</string>
     <string name="no_replies">Bu şərhə cavab yoxdur.</string>
+    <string name="downloads_directory">Endirmələr qovluğu</string>
+    <string name="music_directory">Musiqi qovluğu</string>
+    <string name="movies_directory">Filmlər qovluğu</string>
+    <string name="shareTo">URL Paylaşın:</string>
+    <string name="download_folder">Qovluq adı</string>
+    <string name="sdcard">SD kart</string>
+    <string name="internal_storage">Daxili yaddaş</string>
+    <string name="download_folder_summary">Endirilmiş media, adı ilə qovluqda saxlanılır.</string>
 </resources>
