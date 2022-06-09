@@ -8,12 +8,12 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.util.checkUpdate
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AboutFragment : Fragment() {
@@ -33,19 +33,23 @@ class AboutFragment : Fragment() {
         val appVersion = view?.findViewById<TextView>(R.id.app_version)
         appVersion.text = BuildConfig.VERSION_NAME
 
-        val website = view?.findViewById<MaterialCardView>(R.id.website)
+        val website = view?.findViewById<LinearLayout>(R.id.website)
         website?.setOnClickListener {
-            openLink("https://libre-tube.github.io/")
+            openLinkFromHref("https://libre-tube.github.io/")
         }
-        val donate = view?.findViewById<MaterialCardView>(R.id.donate)
+        val authors = view?.findViewById<LinearLayout>(R.id.authors)
+        authors?.setOnClickListener {
+            openLinkFromHref("https://github.com/libre-tube/LibreTube/graphs/contributors")
+        }
+        val donate = view?.findViewById<LinearLayout>(R.id.donate)
         donate?.setOnClickListener {
-            openLink("https://libre-tube.github.io/#donate")
+            openLinkFromHref("https://libre-tube.github.io/#donate")
         }
-        val contributing = view?.findViewById<MaterialCardView>(R.id.contributing)
+        val contributing = view?.findViewById<LinearLayout>(R.id.contributing)
         contributing?.setOnClickListener {
-            openLink("https://github.com/libre-tube/LibreTube")
+            openLinkFromHref("https://github.com/libre-tube/LibreTube")
         }
-        val license = view.findViewById<MaterialCardView>(R.id.license)
+        val license = view.findViewById<LinearLayout>(R.id.license)
         license?.setOnClickListener {
             val licenseString = view?.context?.assets!!
                 .open("gpl3.html").bufferedReader().use {
@@ -61,13 +65,13 @@ class AboutFragment : Fragment() {
                 .show()
             true
         }
-        val update = view.findViewById<MaterialCardView>(R.id.update)
+        val update = view.findViewById<LinearLayout>(R.id.update)
         update?.setOnClickListener {
             checkUpdate(childFragmentManager)
         }
     }
 
-    private fun openLink(link: String) {
+    private fun openLinkFromHref(link: String) {
         val uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW).setData(uri)
         startActivity(intent)
