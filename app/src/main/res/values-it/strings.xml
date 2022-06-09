@@ -124,8 +124,8 @@
     <string name="update_available_text">C\'è una nuova versione disponibile. Clicca OK per essere reindirizzato alla pagina dell\'aggiornamento su GitHub.</string>
     <string name="appearance">Aspetto</string>
     <string name="app_behavior">Comportamento app</string>
-    <string name="download_directory">Cartella scaricamento</string>
-    <string name="download_directory_summary">La cartella dove i tuoi contenuti scaricati vengono memorizzati.</string>
+    <string name="download_directory">Posizione di scaricamento</string>
+    <string name="download_directory_summary">La posizione in cui vengono memorizzati i media scaricati.</string>
     <string name="website_summary">Visita il nostro sito per saperne di più sull\'app e le sue funzionalità.</string>
     <string name="contributing">Collabora</string>
     <string name="contributing_summary">Che tu abbia idee, traduzioni, modifiche di design, pulizia del codice o modifiche del codice pesanti, l\'aiuto è sempre benvenuto. Più si fa, meglio è!</string>
@@ -144,4 +144,12 @@
     <string name="authors">Autori</string>
     <string name="no_replies">Questo commento non ha risposte.</string>
     <string name="authors_summary">Scopri chi c\'è dietro il team di LibreTube e fa la magia.</string>
+    <string name="downloads_directory">Directory degli scaricamenti</string>
+    <string name="sdcard">Scheda SD</string>
+    <string name="music_directory">Directory musicale</string>
+    <string name="shareTo">Condividi l\'URL a:</string>
+    <string name="download_folder">Nome della directory</string>
+    <string name="download_folder_summary">Il nome della directory in cui vengono memorizzati i media scaricati.</string>
+    <string name="internal_storage">Memoria interna</string>
+    <string name="movies_directory">Directory dei film</string>
 </resources>
