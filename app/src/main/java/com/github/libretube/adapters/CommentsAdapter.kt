@@ -1,5 +1,6 @@
 package com.github.libretube.adapters
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -35,17 +36,18 @@ class CommentsAdapter(
     private var repliesPage = CommentsPage()
 
     fun updateItems(newItems: List<Comment>) {
-        var commentsSize = comments.size
+        val commentsSize = comments.size
         comments.addAll(newItems)
         notifyItemRangeInserted(commentsSize, newItems.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
-        var commentsView =
+        val commentsView =
             LayoutInflater.from(parent.context).inflate(R.layout.comments_row, parent, false)
         return CommentsViewHolder(commentsView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         holder.v.findViewById<TextView>(R.id.comment_infos).text =
             comments[position].author.toString() +
@@ -103,10 +105,10 @@ class CommentsAdapter(
 
     private fun fetchReplies(nextpage: String, repliesAdapter: RepliesAdapter) {
         CoroutineScope(Dispatchers.Main).launch {
-            if (!isLoading && nextpage != null) {
+            if (!isLoading) {
                 isLoading = true
                 try {
-                    repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId!!, nextpage!!)
+                    repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId, nextpage)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
