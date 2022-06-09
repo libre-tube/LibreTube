@@ -630,4 +630,18 @@
         <item>2F</item>
     </string-array>
 
+    <string-array name="downloadLocation">
+        <item>@string/downloads_directory</item>
+        <item>@string/music_directory</item>
+        <item>@string/movies_directory</item>
+        <item>@string/sdcard</item>
+    </string-array>
+
+    <string-array name="downloadLocationValues">
+        <item>downloads</item>
+        <item>music</item>
+        <item>movies</item>
+        <item>sdcard</item>
+    </string-array>
+
 </resources>

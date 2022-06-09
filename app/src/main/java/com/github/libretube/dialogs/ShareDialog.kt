@@ -40,7 +40,9 @@ class ShareDialog(private val videoId: String) : DialogFragment() {
                     intent.action = Intent.ACTION_SEND
                     intent.putExtra(Intent.EXTRA_TEXT, url)
                     intent.type = "text/plain"
-                    context?.startActivity(Intent.createChooser(intent, "Share Url To:"))
+                    context?.startActivity(
+                        Intent.createChooser(intent, context?.getString(R.string.shareTo))
+                    )
                 }
                 .show()
         } ?: throw IllegalStateException("Activity cannot be null")

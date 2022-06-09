@@ -35,13 +35,21 @@
             app:summary="@string/video_format_summary"
             app:icon="@drawable/ic_videocam" />
 
-        <!--
-        <Preference
-            app:key="download_directory"
+        <ListPreference
+            app:key="download_location"
             app:title="@string/download_directory"
             app:summary="@string/download_directory_summary"
-            app:icon="@drawable/ic_folder" />
-        -->
+            android:defaultValue="downloads"
+            android:entries="@array/downloadLocation"
+            android:entryValues="@array/downloadLocationValues"
+            app:icon="@drawable/ic_download" />
+
+        <EditTextPreference
+            app:key="download_folder"
+            app:title="@string/download_folder"
+            app:summary="@string/download_folder_summary"
+            app:icon="@drawable/ic_folder"
+            android:defaultValue="LibreTube" />
 
     </PreferenceCategory>
 

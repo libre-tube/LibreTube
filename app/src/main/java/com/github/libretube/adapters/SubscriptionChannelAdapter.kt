@@ -44,7 +44,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         Picasso.get().load(subscription.avatar).into(avatar)
         holder.v.setOnClickListener {
             val activity = holder.v.context as MainActivity
-            val bundle = bundleOf("channelId" to subscription.url)
+            val bundle = bundleOf("channel_id" to subscription.url)
             activity.navController.navigate(R.id.channel, bundle)
         }
         val subscribeBtn = holder.v

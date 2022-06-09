@@ -11,9 +11,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/subscription_channel_image"
-        android:layout_centerVertical="true"
         android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/subscription_channel_name"
@@ -35,6 +35,7 @@
         android:layout_alignParentEnd="true"
         android:backgroundTint="?attr/colorOnPrimary"
         android:text="@string/unsubscribe"
+        android:textSize="11dp"
         android:textColor="@android:color/white"
         app:cornerRadius="20dp" />
 </RelativeLayout>
