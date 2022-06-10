@@ -89,4 +89,16 @@
     <string name="videoCount">%1$s videoer</string>
     <string name="retry">Prøv igjen</string>
     <string name="comments">Kommentarer</string>
+    <string name="app_icon">Programikon</string>
+    <string name="youtube">YouTube</string>
+    <string name="no_replies">Ubesvart kommentar.</string>
+    <string name="authors">Utviklere</string>
+    <string name="download_folder">Mappenavn</string>
+    <string name="internal_storage">Internlagring</string>
+    <string name="sdcard">SD-kort</string>
+    <string name="music_directory">Musikkmappe</string>
+    <string name="update_available">Versjon %1$s er tilgjengelig</string>
+    <string name="appearance">Utseende</string>
+    <string name="video_format">Videoformat</string>
+    <string name="live">Direkte</string>
 </resources>
