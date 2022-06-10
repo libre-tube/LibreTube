@@ -76,7 +76,7 @@
     <string name="darkTheme">深色主题</string>
     <string name="okay">确定</string>
     <string name="music_songs">YT Music 歌曲</string>
-    <string name="grid">选择首页视频流的栏数</string>
+    <string name="grid">网格列</string>
     <string name="deletePlaylist">删除播放列表</string>
     <string name="areYouSure">要删除这个播放列表吗？</string>
     <string name="createPlaylist">创建播放列表</string>

@@ -75,7 +75,7 @@
     <string name="defaultTab">Varsayılan Sekme</string>
     <string name="choose_filter">Arama filtresi seç</string>
     <string name="category_outro_description">Kanal ikonları veya YouTube video kartları göründüğünde. Bilgi ile sonuçlar için değil.</string>
-    <string name="sponsorblock_state">Etkinleştir</string>
+    <string name="sponsorblock_state">Etkinleştirildi</string>
     <string name="clear_history">Geçmişi Temizle</string>
     <string name="sponsorblock">SponsorBlok</string>
     <string name="channels">Kanallar</string>
@@ -102,8 +102,8 @@
     <string name="music_playlists">YT Müzik Oynatma Listeleri</string>
     <string name="license">Lisans</string>
     <string name="color_accent">Vurgu Rengi</string>
-    <string name="oledTheme">OLED</string>
-    <string name="material_you">Materyal You</string>
+    <string name="oledTheme">OLED Tema</string>
+    <string name="material_you">Kendi Tasarımı</string>
     <string name="color_green">Yeşil</string>
     <string name="color_purple">Mor</string>
     <string name="color_yellow">Sarı</string>
@@ -123,8 +123,8 @@
     <string name="downloads">İndirilenler</string>
     <string name="video_format">Video formatı</string>
     <string name="video_format_summary">İndirilen videoların dönüştürüldüğü video formatı (yalnızca hem ses hem de video indirilirse geçerlidir).</string>
-    <string name="download_directory">İndirme dizini</string>
-    <string name="download_directory_summary">İndirdiğiniz medyanın depolandığı dizin.</string>
+    <string name="download_directory">İndirme konumu</string>
+    <string name="download_directory_summary">İndirdiğiniz medyanın depolandığı konum.</string>
     <string name="contributing">Katkı</string>
     <string name="license_summary">GNU Genel Kamu Lisansı, yazılım ve diğer çalışma türleri için ücretsiz, genel bir lisanstır.</string>
     <string name="donate">Bağış Yapın</string>
@@ -138,6 +138,18 @@
     <string name="advanced">Gelişmiş</string>
     <string name="player">Oynatıcı</string>
     <string name="appearance_summary">Uygulamanın istediğiniz gibi görünmesini sağlayın.</string>
-    <string name="advanced_summary">Oyuncu, İndirilenler, Geçmiş</string>
+    <string name="advanced_summary">Oynatıcı, İndirilenler, Geçmiş</string>
     <string name="update">Uygulama Güncellenmesi</string>
+    <string name="live">Canlı</string>
+    <string name="no_replies">Bu yoruma cevap yok.</string>
+    <string name="authors">Yazarlar</string>
+    <string name="authors_summary">LibreTube Ekipinin arkasında kimin olduğunu ve sihri kimin yapdığını öğrenin.</string>
+    <string name="internal_storage">Dahili depolama</string>
+    <string name="download_folder_summary">İndirilen medya adı ile bir klasörde saklanır.</string>
+    <string name="movies_directory">Filmler dizini</string>
+    <string name="shareTo">URL\'yi Paylaşın:</string>
+    <string name="download_folder">Dizin adı</string>
+    <string name="downloads_directory">İndirilenler dizini</string>
+    <string name="sdcard">Hafıza kartı</string>
+    <string name="music_directory">Müzik dizini</string>
 </resources>

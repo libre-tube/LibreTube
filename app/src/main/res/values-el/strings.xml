@@ -123,8 +123,8 @@
     <string name="downloads">Λήψεις</string>
     <string name="video_format">Μορφή βίντεο</string>
     <string name="video_format_summary">Η μορφή βίντεο στην οποία μετατρέπονται τα κατεβασμένα βίντεο (εφαρμόζεται μόνο αν ο ήχος και το βίντεο έχουν κατέβει).</string>
-    <string name="download_directory">Φάκελος λήψεων</string>
-    <string name="download_directory_summary">Ο φάκελος στον οποίο τα κατεβασμένα αρχεία αποθηκεύονται.</string>
+    <string name="download_directory">Τοποθεσία λήψεων</string>
+    <string name="download_directory_summary">Η τοποθεσία στην οποία τα κατεβασμένα αρχεία αποθηκεύονται.</string>
     <string name="website_summary">Επισκεφθείτε την ιστοσελίδα μας για να μάθετε περισσότερα περί της εφαρμογής και των δυνατοτήτων της.</string>
     <string name="license_summary">Η Γενική Δημόσια Άδεια GNU είναι μια δωρεάν, ανοιχτή προς αντιγραφή άδεια για λογισμικό και άλλα είδη έργων.</string>
     <string name="donate">Συνεισφορά</string>
@@ -140,4 +140,16 @@
     <string name="app_uptodate">Η εφαρμογή είναι ενημερωμένη</string>
     <string name="advanced">Για προχωρημένους</string>
     <string name="advanced_summary">Αναπαραγωγέας, Λήψεις, Ιστορικό</string>
+    <string name="authors">Συγγραφείς</string>
+    <string name="authors_summary">Μάθετε ποιος βρίσκεται πίσω από την ομάδα του LibreTube και κάνει τα μαγικά.</string>
+    <string name="download_folder">Όνομα φακέλου</string>
+    <string name="internal_storage">Εσωτερικός χώρος</string>
+    <string name="sdcard">Κάρτα SD</string>
+    <string name="music_directory">Φάκελος μουσικής</string>
+    <string name="movies_directory">Φάκελος ταινιών</string>
+    <string name="shareTo">Κοινή χρήση URL σε:</string>
+    <string name="downloads_directory">Φάκελος λήψεων</string>
+    <string name="no_replies">Αυτό το σχόλιο δεν έχει απαντήσεις.</string>
+    <string name="download_folder_summary">Το όνομα του φακέλου στον οποίο τα κατεβασμένα αρχεία αποθηκεύονται.</string>
+    <string name="live">Ζωντανά</string>
 </resources>
