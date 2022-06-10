@@ -48,7 +48,6 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
-import com.github.libretube.util.formatShort
 import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
@@ -58,6 +57,7 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.formatShort
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -445,7 +445,8 @@ class PlayerFragment : Fragment() {
 
     private fun initializePlayerView(view: View, response: Streams) {
         view.findViewById<TextView>(R.id.player_views_info).text =
-            context?.getString(R.string.views, response.views.formatShort()) + " • " + response.uploadDate
+            context?.getString(R.string.views, response.views.formatShort()) +
+            " • " + response.uploadDate
         view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
         val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
         Picasso.get().load(response.uploaderAvatar).into(channelImage)
