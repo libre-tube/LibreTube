@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.util
 
 import java.math.BigDecimal
 import java.math.RoundingMode

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
-import com.github.libretube.formatShort
+import com.github.libretube.util.formatShort
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.button.MaterialButton

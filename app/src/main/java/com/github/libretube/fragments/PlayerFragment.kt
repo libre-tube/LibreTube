@@ -48,7 +48,7 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
-import com.github.libretube.formatShort
+import com.github.libretube.util.formatShort
 import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
@@ -445,7 +445,7 @@ class PlayerFragment : Fragment() {
 
     private fun initializePlayerView(view: View, response: Streams) {
         view.findViewById<TextView>(R.id.player_views_info).text =
-            response.views.formatShort() + " views • " + response.uploadDate
+            context?.getString(R.string.views, response.views.formatShort()) + " • " + response.uploadDate
         view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
         val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
         Picasso.get().load(response.uploaderAvatar).into(channelImage)

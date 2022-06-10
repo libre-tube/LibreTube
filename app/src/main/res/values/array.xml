@@ -580,14 +580,14 @@
     </string-array>
 
     <string-array name="icons">
-        <item>Default</item>
-        <item>Legacy</item>
-        <item>Gradient</item>
-        <item>Fire</item>
-        <item>Torch</item>
-        <item>Shaped</item>
-        <item>Flame</item>
-        <item>Bird</item>
+        <item>@string/defaultIcon</item>
+        <item>@string/legacyIcon</item>
+        <item>@string/gradientIcon</item>
+        <item>@string/fireIcon</item>
+        <item>@string/torchIcon</item>
+        <item>@string/shapedIcon</item>
+        <item>@string/flameIcon</item>
+        <item>@string/birdIcon</item>
     </string-array>
     <string-array name="iconsValue">
         <item>MainActivity</item>
@@ -604,7 +604,6 @@
         <item>MP4</item>
         <item>MKV</item>
     </string-array>
-
     <string-array name="videoFormatsValues">
         <item>.mp4</item>
         <item>.mkv</item>
@@ -619,7 +618,6 @@
         <item>1.5x</item>
         <item>2x</item>
     </string-array>
-
     <string-array name="playbackSpeedValues">
         <item>0.25F</item>
         <item>0.5F</item>
@@ -636,7 +634,6 @@
         <item>@string/movies_directory</item>
         <item>@string/sdcard</item>
     </string-array>
-
     <string-array name="downloadLocationValues">
         <item>downloads</item>
         <item>music</item>

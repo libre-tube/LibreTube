@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.dialogs.VideoOptionsDialog
-import com.github.libretube.formatShort
+import com.github.libretube.util.formatShort
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
 import com.squareup.picasso.Picasso

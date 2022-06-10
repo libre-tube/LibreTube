@@ -152,4 +152,13 @@
     <string name="music_directory">Music directory</string>
     <string name="movies_directory">Movies directory</string>
     <string name="shareTo">Share Url To:</string>
+    <string name="views">%1$s views</string>
+    <string name="defaultIcon">Default</string>
+    <string name="legacyIcon">Legacy</string>
+    <string name="gradientIcon">Gradient</string>
+    <string name="fireIcon">Fire</string>
+    <string name="torchIcon">Torch</string>
+    <string name="shapedIcon">Shaped</string>
+    <string name="flameIcon">Flame</string>
+    <string name="birdIcon">Bird</string>
 </resources>

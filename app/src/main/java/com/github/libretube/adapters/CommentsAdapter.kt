@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
-import com.github.libretube.formatShort
+import com.github.libretube.util.formatShort
 import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
 import com.github.libretube.util.RetrofitInstance
