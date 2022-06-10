@@ -42,12 +42,11 @@
                     android:background="@android:color/transparent"
                     app:hintEnabled="false">
 
-                    <AutoCompleteTextView
+                    <EditText
                         android:id="@+id/autoCompleteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:dropDownWidth="match_parent"
                         android:hint="@string/search_hint"
                         android:imeOptions="actionSearch"
                         android:inputType="text"

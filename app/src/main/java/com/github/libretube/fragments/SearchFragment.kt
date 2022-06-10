@@ -1,7 +1,6 @@
 package com.github.libretube.fragments
 
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,8 +11,7 @@ import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView.GONE
 import android.widget.TextView.OnEditorActionListener
@@ -27,14 +25,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
+import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.hideKeyboard
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
@@ -42,6 +40,7 @@ class SearchFragment : Fragment() {
     private var apiSearchFilter = "all"
     private var nextPage: String? = null
     private lateinit var searchRecView: RecyclerView
+    private lateinit var historyRecView: RecyclerView
     private var searchAdapter: SearchAdapter? = null
     private var isLoading: Boolean = true
 
@@ -62,11 +61,11 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchRecView = view.findViewById<RecyclerView>(R.id.search_recycler)
+        searchRecView = view.findViewById(R.id.search_recycler)
+        historyRecView = view.findViewById(R.id.history_recycler)
 
-        val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
+        val autoTextView = view.findViewById<EditText>(R.id.autoCompleteTextView)
         val clearSearchButton = view.findViewById<ImageView>(R.id.clearSearch_imageView)
-        val historyRecycler = view.findViewById<RecyclerView>(R.id.history_recycler)
         val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
 
         var tempSelectedItem = 0
@@ -92,30 +91,26 @@ class SearchFragment : Fragment() {
 
             MaterialAlertDialogBuilder(view.context)
                 .setTitle(getString(R.string.choose_filter))
-                .setSingleChoiceItems(
-                    filterOptions, selectedFilter,
-                    DialogInterface.OnClickListener { _, id ->
-                        tempSelectedItem = id
-                    }
-                )
+                .setSingleChoiceItems(filterOptions, selectedFilter) { _, id ->
+                    tempSelectedItem = id
+                }
                 .setPositiveButton(
                     getString(R.string.okay),
-                    DialogInterface.OnClickListener { _, _ ->
-                        selectedFilter = tempSelectedItem
-                        apiSearchFilter = when (selectedFilter) {
-                            0 -> "all"
-                            1 -> "videos"
-                            2 -> "channels"
-                            3 -> "playlists"
-                            4 -> "music_songs"
-                            5 -> "music_videos"
-                            6 -> "music_albums"
-                            7 -> "music_playlists"
-                            else -> "all"
-                        }
-                        fetchSearch(autoTextView.text.toString())
+                ) { _, _ ->
+                    selectedFilter = tempSelectedItem
+                    apiSearchFilter = when (selectedFilter) {
+                        0 -> "all"
+                        1 -> "videos"
+                        2 -> "channels"
+                        3 -> "playlists"
+                        4 -> "music_songs"
+                        5 -> "music_videos"
+                        6 -> "music_albums"
+                        7 -> "music_playlists"
+                        else -> "all"
                     }
-                )
+                    fetchSearch(autoTextView.text.toString())
+                }
                 .setNegativeButton(getString(R.string.cancel), null)
                 .create()
                 .show()
@@ -124,13 +119,13 @@ class SearchFragment : Fragment() {
         // show search history
 
         searchRecView.visibility = GONE
-        historyRecycler.visibility = VISIBLE
+        historyRecView.visibility = VISIBLE
 
-        historyRecycler.layoutManager = LinearLayoutManager(view.context)
+        historyRecView.layoutManager = LinearLayoutManager(view.context)
 
         val historyList = getHistory()
         if (historyList.isNotEmpty()) {
-            historyRecycler.adapter =
+            historyRecView.adapter =
                 SearchHistoryAdapter(requireContext(), historyList, autoTextView)
         }
 
@@ -150,8 +145,6 @@ class SearchFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s!! != "") {
-                    searchRecView.visibility = VISIBLE
-                    historyRecycler.visibility = GONE
                     searchRecView.adapter = null
 
                     searchRecView.viewTreeObserver
@@ -163,8 +156,6 @@ class SearchFragment : Fragment() {
 
                     GlobalScope.launch {
                         fetchSuggestions(s.toString(), autoTextView)
-                        delay(1000)
-                        fetchSearch(s.toString())
                     }
                 }
             }
@@ -172,10 +163,10 @@ class SearchFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if (s!!.isEmpty()) {
                     searchRecView.visibility = GONE
-                    historyRecycler.visibility = VISIBLE
+                    historyRecView.visibility = GONE
                     val historyList = getHistory()
                     if (historyList.isNotEmpty()) {
-                        historyRecycler.adapter =
+                        historyRecView.adapter =
                             SearchHistoryAdapter(requireContext(), historyList, autoTextView)
                     }
                 }
@@ -185,7 +176,9 @@ class SearchFragment : Fragment() {
             OnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     hideKeyboard()
-                    autoTextView.dismissDropDown()
+                    searchRecView.visibility = VISIBLE
+                    historyRecView.visibility = GONE
+                    fetchSearch(autoTextView.text.toString())
                     if (sharedPreferences.getBoolean(
                             "search_history_toggle",
                             true
@@ -199,12 +192,9 @@ class SearchFragment : Fragment() {
                 false
             }
         )
-        autoTextView.setOnItemClickListener { _, _, _, _ ->
-            hideKeyboard()
-        }
     }
 
-    private fun fetchSuggestions(query: String, autoTextView: AutoCompleteTextView) {
+    private fun fetchSuggestions(query: String, autoTextView: EditText) {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSuggestions(query)
@@ -216,9 +206,9 @@ class SearchFragment : Fragment() {
                 Log.e(TAG, "HttpException, unexpected response")
                 return@launchWhenCreated
             }
-            val adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, response)
-            autoTextView.setAdapter(adapter)
+            historyRecView.visibility = VISIBLE
+            val suggestionsAdapter = SearchSuggestionsAdapter(response, autoTextView)
+            historyRecView.adapter = suggestionsAdapter
         }
     }
 

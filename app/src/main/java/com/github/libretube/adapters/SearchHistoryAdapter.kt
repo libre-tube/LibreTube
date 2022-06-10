@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +14,7 @@ import com.google.android.material.imageview.ShapeableImageView
 class SearchHistoryAdapter(
     private val context: Context,
     private var historyList: List<String>,
-    private val editText: AutoCompleteTextView
+    private val editText: EditText
 ) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
