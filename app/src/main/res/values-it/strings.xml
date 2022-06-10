@@ -152,4 +152,13 @@
     <string name="download_folder_summary">Il nome della directory in cui vengono memorizzati i media scaricati.</string>
     <string name="internal_storage">Memoria interna</string>
     <string name="movies_directory">Directory dei film</string>
+    <string name="torchIcon">Torcia</string>
+    <string name="legacyIcon">Eredità</string>
+    <string name="gradientIcon">Gradiente</string>
+    <string name="fireIcon">Fuoco</string>
+    <string name="birdIcon">Uccello</string>
+    <string name="defaultIcon">Predefinito</string>
+    <string name="shapedIcon">Sagomato</string>
+    <string name="views">%1$s visualizzazioni</string>
+    <string name="flameIcon">Fiamma</string>
 </resources>
