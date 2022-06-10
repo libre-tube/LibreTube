@@ -7,10 +7,12 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.fragments.SearchFragment
 
 class SearchSuggestionsAdapter(
     private var suggestionsList: List<String>,
-    private var autoCompleteTextView: EditText
+    private var editText: EditText,
+    private val searchFragment: SearchFragment
 ) :
     RecyclerView.Adapter<SearchSuggestionsViewHolder>() {
 
@@ -29,7 +31,8 @@ class SearchSuggestionsAdapter(
         val suggestionTextView = holder.v.findViewById<TextView>(R.id.suggestion_text)
         suggestionTextView.text = suggestion
         holder.v.setOnClickListener {
-            autoCompleteTextView.setText(suggestion)
+            editText.setText(suggestion)
+            searchFragment.fetchSearch(editText.text.toString())
         }
     }
 }

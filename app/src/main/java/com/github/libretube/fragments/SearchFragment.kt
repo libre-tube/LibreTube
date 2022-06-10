@@ -41,8 +41,10 @@ class SearchFragment : Fragment() {
     private var nextPage: String? = null
     private lateinit var searchRecView: RecyclerView
     private lateinit var historyRecView: RecyclerView
+    private lateinit var autoTextView: EditText
     private var searchAdapter: SearchAdapter? = null
     private var isLoading: Boolean = true
+    private var isFetchingSearch: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,15 +65,12 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         searchRecView = view.findViewById(R.id.search_recycler)
         historyRecView = view.findViewById(R.id.history_recycler)
+        autoTextView = view.findViewById(R.id.autoCompleteTextView)
 
-        val autoTextView = view.findViewById<EditText>(R.id.autoCompleteTextView)
         val clearSearchButton = view.findViewById<ImageView>(R.id.clearSearch_imageView)
         val filterImageView = view.findViewById<ImageView>(R.id.filterMenu_imageView)
 
         var tempSelectedItem = 0
-
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         clearSearchButton.setOnClickListener {
             autoTextView.text.clear()
@@ -117,23 +116,15 @@ class SearchFragment : Fragment() {
         }
 
         // show search history
-
-        searchRecView.visibility = GONE
-        historyRecView.visibility = VISIBLE
-
         historyRecView.layoutManager = LinearLayoutManager(view.context)
-
-        val historyList = getHistory()
-        if (historyList.isNotEmpty()) {
-            historyRecView.adapter =
-                SearchHistoryAdapter(requireContext(), historyList, autoTextView)
-        }
+        showHistory()
 
         searchRecView.layoutManager = GridLayoutManager(view.context, 1)
         autoTextView.requestFocus()
         val imm =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(autoTextView, InputMethodManager.SHOW_IMPLICIT)
+
         autoTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
@@ -162,13 +153,7 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s!!.isEmpty()) {
-                    searchRecView.visibility = GONE
-                    historyRecView.visibility = GONE
-                    val historyList = getHistory()
-                    if (historyList.isNotEmpty()) {
-                        historyRecView.adapter =
-                            SearchHistoryAdapter(requireContext(), historyList, autoTextView)
-                    }
+                    showHistory()
                 }
             }
         })
@@ -179,14 +164,6 @@ class SearchFragment : Fragment() {
                     searchRecView.visibility = VISIBLE
                     historyRecView.visibility = GONE
                     fetchSearch(autoTextView.text.toString())
-                    if (sharedPreferences.getBoolean(
-                            "search_history_toggle",
-                            true
-                        )
-                    ) {
-                        val newString = autoTextView.text.toString()
-                        addToHistory(newString)
-                    }
                     return@OnEditorActionListener true
                 }
                 false
@@ -195,25 +172,33 @@ class SearchFragment : Fragment() {
     }
 
     private fun fetchSuggestions(query: String, autoTextView: EditText) {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getSuggestions(query)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
-                return@launchWhenCreated
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                searchRecView.visibility = GONE
+                historyRecView.visibility = VISIBLE
+                val response = try {
+                    RetrofitInstance.api.getSuggestions(query)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launchWhenCreated
+                }
+                val suggestionsAdapter =
+                    SearchSuggestionsAdapter(response, autoTextView, this@SearchFragment)
+                historyRecView.adapter = suggestionsAdapter
             }
-            historyRecView.visibility = VISIBLE
-            val suggestionsAdapter = SearchSuggestionsAdapter(response, autoTextView)
-            historyRecView.adapter = suggestionsAdapter
         }
+        if (!isFetchingSearch) run()
     }
 
-    private fun fetchSearch(query: String) {
+    fun fetchSearch(query: String) {
         lifecycleScope.launchWhenCreated {
+            isFetchingSearch = true
+            hideKeyboard()
+            Log.e("here", "here")
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
             } catch (e: IOException) {
@@ -227,11 +212,15 @@ class SearchFragment : Fragment() {
             nextPage = response.nextpage
             if (response.items!!.isNotEmpty()) {
                 runOnUiThread {
+                    historyRecView.visibility = GONE
+                    searchRecView.visibility = VISIBLE
                     searchAdapter = SearchAdapter(response.items, childFragmentManager)
                     searchRecView.adapter = searchAdapter
                 }
             }
+            addToHistory(query)
             isLoading = false
+            isFetchingSearch = false
         }
     }
 
@@ -276,27 +265,37 @@ class SearchFragment : Fragment() {
         hideKeyboard()
     }
 
+    private fun showHistory() {
+        searchRecView.visibility = GONE
+        val historyList = getHistory()
+        if (historyList.isNotEmpty()) {
+            historyRecView.adapter =
+                SearchHistoryAdapter(requireContext(), historyList, autoTextView, this)
+            historyRecView.visibility = VISIBLE
+        }
+    }
+
     private fun addToHistory(query: String) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val searchHistoryEnabled = sharedPreferences.getBoolean("search_history_toggle", true)
+        if (searchHistoryEnabled) {
+            var historyList = getHistory()
 
-        var historyList = getHistory()
+            if ((historyList.isNotEmpty() && historyList.contains(query)) || query == "") {
+                return
+            } else {
+                historyList = historyList + query
+            }
 
-        if (historyList.isNotEmpty() && query == historyList[historyList.size - 1]) {
-            return
-        } else if (query == "") {
-            return
-        } else {
-            historyList = historyList + query
+            if (historyList.size > 10) {
+                historyList = historyList.takeLast(10)
+            }
+
+            val set: Set<String> = HashSet(historyList)
+
+            sharedPreferences.edit().putStringSet("search_history", set)
+                .apply()
         }
-
-        if (historyList.size > 10) {
-            historyList = historyList.takeLast(10)
-        }
-
-        val set: Set<String> = HashSet(historyList)
-
-        sharedPreferences.edit().putStringSet("search_history", set)
-            .apply()
     }
 
     private fun getHistory(): List<String> {
