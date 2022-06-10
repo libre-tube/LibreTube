@@ -152,4 +152,13 @@
     <string name="no_replies">Αυτό το σχόλιο δεν έχει απαντήσεις.</string>
     <string name="download_folder_summary">Το όνομα του φακέλου στον οποίο τα κατεβασμένα αρχεία αποθηκεύονται.</string>
     <string name="live">Ζωντανά</string>
+    <string name="torchIcon">Πυρσός</string>
+    <string name="fireIcon">Φωτιά</string>
+    <string name="gradientIcon">Nτεγκραντέ</string>
+    <string name="shapedIcon">Σχηματιστό</string>
+    <string name="legacyIcon">Κλασικό</string>
+    <string name="views">%1$s προβολές</string>
+    <string name="defaultIcon">Προκαθορισμένο</string>
+    <string name="flameIcon">Φλόγα</string>
+    <string name="birdIcon">Πουλί</string>
 </resources>
