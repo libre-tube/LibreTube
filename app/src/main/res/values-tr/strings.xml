@@ -152,4 +152,13 @@
     <string name="downloads_directory">İndirilenler dizini</string>
     <string name="sdcard">Hafıza kartı</string>
     <string name="music_directory">Müzik dizini</string>
+    <string name="defaultIcon">Varsayılan</string>
+    <string name="gradientIcon">Gradyan</string>
+    <string name="fireIcon">Yangın</string>
+    <string name="torchIcon">El Feneri</string>
+    <string name="birdIcon">Kuş</string>
+    <string name="legacyIcon">Eski</string>
+    <string name="views">%1$s görüntüleme</string>
+    <string name="shapedIcon">Şekilli</string>
+    <string name="flameIcon">Alev</string>
 </resources>
