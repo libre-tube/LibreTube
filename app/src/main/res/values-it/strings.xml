@@ -92,7 +92,7 @@
     <string name="category_segments">Segmenti</string>
     <string name="category_sponsor_description">Promozione a pagamento, riferimento a pagamento e pubblicità diretta. Non per l\'autopromozione o per la pubblicità gratuita di cause/creatori/siti web/prodotti di loro gradimento.</string>
     <string name="category_selfpromo">Non retribuito/Autopromozione</string>
-    <string name="category_selfpromo_description">Simile a \"sponsor\", tranne che per la promozione personale o non retribuita. Sono incluse le sezioni relative al merchandising, alle donazioni o alle informazioni sulle persone con cui hanno collaborato.</string>
+    <string name="category_selfpromo_description">Simile a sponsor, tranne che per la promozione personale o non retribuita. Sono incluse le sezioni relative al merchandising, alle donazioni o alle informazioni sulle persone con cui hanno collaborato.</string>
     <string name="category_intro">Intervallo/Animazione</string>
     <string name="category_intro_description">Un intervallo senza contenuto effettivo. Può essere una pausa, un fotogramma statico, un\'animazione ripetuta. Non deve essere utilizzato per transizioni contenenti informazioni.</string>
     <string name="category_interaction">Promemoria di interazione (mi piace e iscriviti)</string>
@@ -167,6 +167,6 @@
     <string name="empty_instance">Devi compilare il nome e l\'url API.</string>
     <string name="instance_summary">Piped, accesso, iscrizioni</string>
     <string name="customInstance_summary">Aggiungi un\'istanza personalizzata (a tuo rischio)</string>
-    <string name="instance_api_url">Url API dell\'istanza</string>
-    <string name="invalid_url">Si prega di inserire un url valido</string>
+    <string name="instance_api_url">URL API dell\'istanza</string>
+    <string name="invalid_url">Si prega di inserire un URL valido</string>
 </resources>
