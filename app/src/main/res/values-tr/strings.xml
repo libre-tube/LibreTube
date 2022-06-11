@@ -7,7 +7,7 @@
     <string name="unsubscribe">Abonelikten çık</string>
     <string name="registered">Kaydoldunuz. Artık istediğiniz kanala abone olabilirsiniz.</string>
     <string name="dlcomplete">İndirme tamamlandı.</string>
-    <string name="dlisinprogress">Başka bir indirme sürüyor, lütfen o bitene değin bekleyin.</string>
+    <string name="dlisinprogress">Lütfen tüm indirmeler bitene kadar bekleyin…</string>
     <string name="downloadfailed">İndirme başarısız.</string>
     <string name="app_theme">Görünüm</string>
     <string name="unknown_error">Bağlantı hatası.</string>
@@ -29,8 +29,8 @@
     <string name="cancel">Vazgeç</string>
     <string name="loggedout">Çıkış yapıldı.</string>
     <string name="loggedIn">Giriş yapıldı.</string>
-    <string name="login_first">Lütfen girdikten sonra yeniden deneyin!</string>
-    <string name="region">Bölge Seç</string>
+    <string name="login_first">Lütfen giriş yapın ve tekrar deneyin.</string>
+    <string name="region">Bölge</string>
     <string name="login_register">Giriş Yap/Kaydol</string>
     <string name="please_login">Lütfen önce ayarlardan giriş yap veya kaydol.</string>
     <string name="importsuccess">Abone olundu</string>
@@ -161,4 +161,11 @@
     <string name="views">%1$s görüntüleme</string>
     <string name="shapedIcon">Şekilli</string>
     <string name="flameIcon">Alev</string>
+    <string name="instance_summary">Piped, giriş, abonelikler</string>
+    <string name="addInstance">Oluşum ekle</string>
+    <string name="clear_customInstances">Özel oluşumları temizle</string>
+    <string name="instance_api_url">Oluşumun API bağlantısı</string>
+    <string name="customInstance_summary">Özel bir oluşum ekleyin (riski size ait olmak üzere)</string>
+    <string name="empty_instance">Adı ve API bağlantısını doldurmanız gerekir.</string>
+    <string name="instance_name">Oluşumun adı</string>
 </resources>
