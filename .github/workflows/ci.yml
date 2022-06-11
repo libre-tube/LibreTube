@@ -48,9 +48,7 @@ jobs:
           mv app/build/outputs/apk/debug/*.apk .github/
           cd .github
           curl https://libre-tube.github.io/assets/LibreSpace.png --output space.png
-          curl https://raw.githubusercontent.com/LibreTubeAlpha/Telegram-BotAPI-CI/main/build/telegram-bot-api --output bot-api
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
           python -m pip install --upgrade pip
           pip install python-telegram-bot
-          ./bot-api --api-id=${{ secrets.API_ID }} --api-hash=${{ secrets.API_HASH }}
           python tg.py
