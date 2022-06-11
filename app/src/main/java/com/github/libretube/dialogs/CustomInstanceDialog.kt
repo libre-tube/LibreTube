@@ -46,7 +46,9 @@ class CustomInstanceDialog : DialogFragment() {
                         dismiss()
                     } catch (e: Exception) {
                         // invalid URL
-                        Toast.makeText(context, getString(R.string.invalid_url), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context, getString(R.string.invalid_url), Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
                     // at least one empty input
