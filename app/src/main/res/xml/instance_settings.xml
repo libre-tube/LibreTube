@@ -9,13 +9,19 @@
             app:defaultValue="https://pipedapi.kavin.rocks/"
             app:entries="@array/instances"
             app:entryValues="@array/instancesValue"
-            app:key="instance_server"
+            app:key="selectInstance"
             app:title="@string/instances" />
 
-        <EditTextPreference
-            app:isPreferenceVisible="false"
+        <Preference
             app:key="customInstance"
-            app:title="@string/customInstance" />
+            app:title="@string/customInstance"
+            app:summary="@string/customInstance_summary"
+            android:icon="@drawable/ic_add_instance" />
+
+        <Preference
+            app:key="clearCustomInstances"
+            app:title="@string/clear_customInstances"
+            android:icon="@drawable/ic_trash" />
 
         <Preference
             android:icon="@drawable/ic_login"
