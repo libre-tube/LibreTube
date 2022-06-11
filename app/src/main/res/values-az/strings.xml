@@ -24,8 +24,8 @@
     <string name="subscriptions">Abunəliklər</string>
     <string name="library">Kitabxana</string>
     <string name="instances">Server seçin</string>
-    <string name="customInstance">Fərdi server əlavə edin</string>
-    <string name="region">Məkan Seçin</string>
+    <string name="customInstance">Fərdi server</string>
+    <string name="region">Məkan</string>
     <string name="all">Hamısı</string>
     <string name="choose_filter">Axtarış filtrini seçin</string>
     <string name="channels">Kanallar</string>
@@ -161,4 +161,12 @@
     <string name="flameIcon">Uçan alov</string>
     <string name="birdIcon">Gücləndirilmiş quş</string>
     <string name="torchIcon">Dəbli fənər</string>
+    <string name="instance_name">Server adı</string>
+    <string name="instance_api_url">Server API url\'si</string>
+    <string name="addInstance">Server Əlavə Edin</string>
+    <string name="invalid_url">Lütfən, etibarlı url daxil edin</string>
+    <string name="customInstance_summary">Fərdi server əlavə edin (riski özünüzə aiddir</string>
+    <string name="instance_summary">Piped, giriş, abunəliklər</string>
+    <string name="empty_instance">Siz adı və API url\'ni doldurmalısınız.</string>
+    <string name="clear_customInstances">Fərdi serverləri silin</string>
 </resources>
