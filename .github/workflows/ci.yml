@@ -18,9 +18,16 @@ on:
 jobs:
   debug-builds:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/xelxen/build:ubuntu
+
     steps:
       - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
       - name: set up JDK 11
         uses: actions/setup-java@v3
@@ -37,3 +44,15 @@ jobs:
         with:
           name: app
           path: app/build/outputs/apk/debug/*.apk
+
+      - name: Telegram Bot
+        run: |
+          mv app/build/outputs/apk/debug/*.apk .github/
+          cd .github
+          curl https://libre-tube.github.io/assets/LibreSpace.png --output space.png
+          curl https://raw.githubusercontent.com/LibreTubeAlpha/Telegram-BotAPI-CI/main/build/telegram-bot-api --output bot-api
+          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
+          python -m pip install --upgrade pip
+          pip install python-telegram-bot
+          ./bot-api --api-id=${{ secrets.API_ID }} --api-hash=${{ secrets.API_HASH }}
+          python tg.py
