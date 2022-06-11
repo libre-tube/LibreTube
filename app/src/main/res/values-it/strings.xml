@@ -32,7 +32,7 @@
     <string name="dlisinprogress">Si prega di aspettare che tutti gli scaricamenti siano finiti…</string>
     <string name="unknown_error">Errore di connessione.</string>
     <string name="server_error">Il server ha un problema. Prova un\'altra istanza\?</string>
-    <string name="customInstance">Aggiungi un\'istanza personalizzata</string>
+    <string name="customInstance">Istanza personalizzata</string>
     <string name="instances">Scegli un\'Istanza</string>
     <string name="success">Finito.</string>
     <string name="fail">Fallito :(</string>
@@ -41,7 +41,7 @@
     <string name="areYouSure">Sei sicuro/a di volerla eliminare\?</string>
     <string name="grid">Colonne della griglia</string>
     <string name="save">Salva</string>
-    <string name="region">Scegli una Regione</string>
+    <string name="region">Regione</string>
     <string name="importsuccess">Sottoscritto</string>
     <string name="login_register">Accedi/registrati</string>
     <string name="please_login">Accedi o Registrati nelle impostazioni prima!</string>
@@ -161,4 +161,12 @@
     <string name="shapedIcon">Sagomato sciocco</string>
     <string name="views">%1$s visualizzazioni</string>
     <string name="flameIcon">Fiamma volante</string>
+    <string name="instance_name">Nome istanza</string>
+    <string name="addInstance">Aggiungi istanza</string>
+    <string name="clear_customInstances">Pulisci istanze personalizzate</string>
+    <string name="empty_instance">Devi compilare il nome e l\'url API.</string>
+    <string name="instance_summary">Piped, accesso, iscrizioni</string>
+    <string name="customInstance_summary">Aggiungi un\'istanza personalizzata (a tuo rischio)</string>
+    <string name="instance_api_url">Url API dell\'istanza</string>
+    <string name="invalid_url">Si prega di inserire un url valido</string>
 </resources>
