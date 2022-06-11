@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         CronetHelper.initCronet(this.applicationContext)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url =
-            sharedPreferences.getString("instance", "https://pipedapi.kavin.rocks/")!!
+            sharedPreferences.getString("selectInstance", "https://pipedapi.kavin.rocks/")!!
         SponsorBlockSettings.sponsorBlockEnabled =
             sharedPreferences.getBoolean("sb_enabled_key", false)
         SponsorBlockSettings.sponsorNotificationsEnabled =

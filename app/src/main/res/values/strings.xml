@@ -24,7 +24,7 @@
     <string name="already_logged_in">Already logged in. You may log out of your account.</string>
     <string name="login_first">Please log in and try again.</string>
     <string name="instances">Choose an instance</string>
-    <string name="customInstance">Add a custom instance</string>
+    <string name="customInstance">Custom instance</string>
     <string name="region">Region</string>
     <string name="login_register">Log in/register</string>
     <string name="please_login">Please log in or register in the settings first.</string>
@@ -162,4 +162,8 @@
     <string name="flameIcon">Flying flame</string>
     <string name="birdIcon">Boosted bird</string>
     <string name="instance_summary">Piped, login, subscriptions</string>
+    <string name="customInstance_summary">Add a custom instance (on your own risk)</string>
+    <string name="instance_name">Instance name</string>
+    <string name="instance_api_url">Instance API url</string>
+    <string name="addInstance">Add Instance</string>
 </resources>

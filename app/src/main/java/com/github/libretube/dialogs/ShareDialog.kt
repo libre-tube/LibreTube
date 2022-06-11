@@ -16,7 +16,7 @@ class ShareDialog(private val videoId: String) : DialogFragment() {
             val sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(requireContext())
             val instancePref = sharedPreferences.getString(
-                "instance",
+                "selectInstance",
                 "https://pipedapi.kavin.rocks"
             )!!
             val instance = "&instance=${URLEncoder.encode(instancePref, "UTF-8")}"

@@ -16,10 +16,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
+import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
@@ -110,19 +112,19 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
         topBarTextView?.text = getString(R.string.instance)
 
-        val instance = findPreference<ListPreference>("instance_server")
+        val instance = findPreference<ListPreference>("selectInstance")
         fetchInstance()
         instance?.setOnPreferenceChangeListener { _, newValue ->
             RetrofitInstance.url = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            if (sharedPref?.getString("token", "") != "") {
-                with(sharedPref!!.edit()) {
-                    putString("token", "")
-                    apply()
-                }
-                Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-            }
+            logout()
+            true
+        }
+
+        val customInstance = findPreference<Preference>("customInstance")
+        customInstance?.setOnPreferenceClickListener {
+            val newFragment = CustomInstanceDialog()
+            newFragment.show(childFragmentManager, "CustomInstanceDialog")
             true
         }
 
@@ -188,6 +190,18 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
     }
 
+    private fun logout() {
+        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+        if (token != "") {
+            with(sharedPref!!.edit()) {
+                putString("token", "")
+                apply()
+            }
+            Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun fetchInstance() {
         lifecycleScope.launchWhenCreated {
             val response = try {
@@ -212,7 +226,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             val entries = listEntries.toTypedArray<CharSequence>()
             val entryValues = listEntryValues.toTypedArray<CharSequence>()
             runOnUiThread {
-                val instance = findPreference<ListPreference>("instance_server")
+                val instance = findPreference<ListPreference>("officialInstance")
                 instance?.entries = entries
                 instance?.entryValues = entryValues
                 instance?.summaryProvider =
