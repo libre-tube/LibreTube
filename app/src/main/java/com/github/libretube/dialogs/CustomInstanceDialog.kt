@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import java.net.URL
 
 class CustomInstanceDialog : DialogFragment() {
     val TAG = "CustomInstanceDialog"
@@ -35,39 +36,20 @@ class CustomInstanceDialog : DialogFragment() {
             addInstanceButton.setOnClickListener {
                 val instanceName = instanceNameEditText.text.toString()
                 val instanceApiUrl = instanceApiUrlEditText.text.toString()
+
                 if (instanceName != "" && instanceApiUrl != "") {
-                    val sharedPreferences = PreferenceManager
-                        .getDefaultSharedPreferences(requireContext())
-
-                    // get the names of the other custom instances
-                    var customInstancesNames = try {
-                        sharedPreferences
-                            .getStringSet("custom_instances_name", HashSet())!!.toList()
+                    try {
+                        // check whether the URL is valid, otherwise catch
+                        val u = URL(instanceApiUrl).toURI()
+                        saveCustomInstance(instanceName, instanceApiUrl)
+                        activity?.recreate()
+                        dismiss()
                     } catch (e: Exception) {
-                        emptyList()
+                        // invalid URL
+                        Toast.makeText(context, getString(R.string.invalid_url), Toast.LENGTH_SHORT).show()
                     }
-
-                    // get the urls of the other custom instances
-                    var customInstancesUrls = try {
-                        sharedPreferences
-                            .getStringSet("custom_instances_url", HashSet())!!.toList()
-                    } catch (e: Exception) {
-                        emptyList()
-                    }
-
-                    // append new instance to the list
-                    customInstancesNames += instanceName
-                    customInstancesUrls += instanceApiUrl
-                    Log.e(TAG, customInstancesNames.toString())
-
-                    // save them to the shared preferences
-                    sharedPreferences.edit()
-                        .putStringSet("custom_instances_name", HashSet(customInstancesNames))
-                        .putStringSet("custom_instances_url", HashSet(customInstancesUrls))
-                        .apply()
-                    activity?.recreate()
-                    dismiss()
                 } else {
+                    // at least one empty input
                     Toast.makeText(
                         context, context?.getString(R.string.empty_instance), Toast.LENGTH_SHORT
                     ).show()
@@ -86,5 +68,37 @@ class CustomInstanceDialog : DialogFragment() {
             builder.setView(view)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun saveCustomInstance(instanceName: String, instanceApiUrl: String) {
+        val sharedPreferences = PreferenceManager
+            .getDefaultSharedPreferences(requireContext())
+
+        // get the names of the other custom instances
+        var customInstancesNames = try {
+            sharedPreferences
+                .getStringSet("custom_instances_name", HashSet())!!.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        // get the urls of the other custom instances
+        var customInstancesUrls = try {
+            sharedPreferences
+                .getStringSet("custom_instances_url", HashSet())!!.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        // append new instance to the list
+        customInstancesNames += instanceName
+        customInstancesUrls += instanceApiUrl
+        Log.e(TAG, customInstancesNames.toString())
+
+        // save them to the shared preferences
+        sharedPreferences.edit()
+            .putStringSet("custom_instances_name", HashSet(customInstancesNames))
+            .putStringSet("custom_instances_url", HashSet(customInstancesUrls))
+            .apply()
     }
 }
