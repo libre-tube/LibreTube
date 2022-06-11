@@ -19,7 +19,7 @@
     <string name="register">注册</string>
     <string name="logout">退出登录</string>
     <string name="cancel">取消</string>
-    <string name="region">选择地区</string>
+    <string name="region">地区</string>
     <string name="dlcomplete">下载已完成。</string>
     <string name="dlisinprogress">请等待直至所有下载完毕…</string>
     <string name="downloadfailed">下载失败。</string>
@@ -50,7 +50,7 @@
     <string name="registered">注册成功。您现在可以订阅频道了。</string>
     <string name="login_first">请登录并重试。</string>
     <string name="loggedout">已退出登录。</string>
-    <string name="customInstance">添加自定义实例</string>
+    <string name="customInstance">自定义实例</string>
     <string name="login_register">登录/注册</string>
     <string name="subscribeIsEmpty">请先订阅一些频道。</string>
     <string name="please_login">请先在设置中登录或注册。</string>
