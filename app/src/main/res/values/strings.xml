@@ -166,4 +166,6 @@
     <string name="instance_name">Instance name</string>
     <string name="instance_api_url">Instance API url</string>
     <string name="addInstance">Add Instance</string>
+    <string name="empty_instance">You have to fill in the name and the API url.</string>
+    <string name="clear_customInstances">Clear custom instances</string>
 </resources>

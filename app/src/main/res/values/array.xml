@@ -2,17 +2,27 @@
 <resources>
     <string-array name="instances">
         <item>kavin.rocks (Official)</item>
-        <item>silkky.cloud</item>
         <item>tokhmi.xyz</item>
         <item>moomoo.me</item>
         <item>mint.lgbt</item>
+        <item>il.ax</item>
+        <item>syncpundit.com</item>
+        <item>mha.fi</item>
+        <item>shimul.me</item>
+        <item>jae.fi</item>
+        <item>privacy.com.de</item>
     </string-array>
     <string-array name="instancesValue">
         <item>https://pipedapi.kavin.rocks/</item>
-        <item>https://api.piped.silkky.cloud</item>
         <item>https://pipedapi.tokhmi.xyz/</item>
-        <item>https://pipedapi.moomoo.me</item>
-        <item>https://pa.mint.lgbt</item>
+        <item>https://pipedapi.moomoo.me/</item>
+        <item>https://pa.mint.lgbt/</item>
+        <item>https://pa.il.ax/</item>
+        <item>https://pipedapi.syncpundit.com/</item>
+        <item>https://api-piped.mha.fi/</item>
+        <item>https://api-piped.shimul.me/</item>
+        <item>https://api.yt.jae.fi/</item>
+        <item>https://piped-api.privacy.com.de/</item>
     </string-array>
     <string-array name="shareHostsList">
         <item>youtube.com"</item>

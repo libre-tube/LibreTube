@@ -19,6 +19,11 @@
             android:icon="@drawable/ic_add_instance" />
 
         <Preference
+            app:key="clearCustomInstances"
+            app:title="@string/clear_customInstances"
+            android:icon="@drawable/ic_trash" />
+
+        <Preference
             android:icon="@drawable/ic_login"
             android:summary="@string/notgmail"
             app:key="login_register"

@@ -13,25 +13,27 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.recreate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
+import org.chromium.base.ThreadUtils.runOnUiThread
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
@@ -113,8 +115,10 @@ class InstanceSettings : PreferenceFragmentCompat() {
         topBarTextView?.text = getString(R.string.instance)
 
         val instance = findPreference<ListPreference>("selectInstance")
-        fetchInstance()
+        // fetchInstance()
+        initCustomInstances()
         instance?.setOnPreferenceChangeListener { _, newValue ->
+            requireMainActivityRestart = true
             RetrofitInstance.url = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
@@ -125,6 +129,17 @@ class InstanceSettings : PreferenceFragmentCompat() {
         customInstance?.setOnPreferenceClickListener {
             val newFragment = CustomInstanceDialog()
             newFragment.show(childFragmentManager, "CustomInstanceDialog")
+            true
+        }
+
+        val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
+        clearCustomInstances?.setOnPreferenceClickListener {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            sharedPreferences.edit()
+                .remove("custom_instances_name")
+                .remove("custom_instances_url")
+                .commit()
+            activity?.recreate()
             true
         }
 
@@ -190,6 +205,43 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
     }
 
+    private fun initCustomInstances() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        // get the names of the custom instances
+        val customInstancesNames = try {
+            sharedPreferences
+                .getStringSet("custom_instances_name", HashSet())!!.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        // get the urls of the custom instances
+        val customInstancesUrls = try {
+            sharedPreferences
+                .getStringSet("custom_instances_url", HashSet())!!.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        val instanceNames = resources.getStringArray(R.array.instances) + customInstancesNames
+        val instanceValues = resources.getStringArray(R.array.instancesValue) + customInstancesUrls
+
+        // add custom instances to the list preference
+        val instance = findPreference<ListPreference>("selectInstance")
+        instance?.entries = instanceNames
+        instance?.entryValues = instanceValues
+        instance?.summaryProvider =
+            Preference.SummaryProvider<ListPreference> { preference ->
+                val text = preference.entry
+                if (TextUtils.isEmpty(text)) {
+                    "kavin.rocks (Official)"
+                } else {
+                    text
+                }
+            }
+    }
+
     private fun logout() {
         val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
         val token = sharedPref?.getString("token", "")
@@ -223,10 +275,13 @@ class InstanceSettings : PreferenceFragmentCompat() {
                 listEntries.add(item.name!!)
                 listEntryValues.add(item.api_url!!)
             }
+
+            // add custom instances to the list
+
             val entries = listEntries.toTypedArray<CharSequence>()
             val entryValues = listEntryValues.toTypedArray<CharSequence>()
             runOnUiThread {
-                val instance = findPreference<ListPreference>("officialInstance")
+                val instance = findPreference<ListPreference>("selectInstance")
                 instance?.entries = entries
                 instance?.entryValues = entryValues
                 instance?.summaryProvider =
