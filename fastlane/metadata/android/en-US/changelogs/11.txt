@@ -1,0 +1,6 @@
+Added Option to change the app icon
+You can now open YouTube/Piped links with the app
+New video options dialog on longpressing a video 
+Audio only mode
+Aspect ratio option in player 
+And many bug fixes :)
