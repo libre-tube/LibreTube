@@ -36,7 +36,8 @@ class CustomInstanceDialog : DialogFragment() {
                 val instanceName = instanceNameEditText.text.toString()
                 val instanceApiUrl = instanceApiUrlEditText.text.toString()
                 if (instanceName != "" && instanceApiUrl != "") {
-                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    val sharedPreferences = PreferenceManager
+                        .getDefaultSharedPreferences(requireContext())
 
                     // get the names of the other custom instances
                     var customInstancesNames = try {

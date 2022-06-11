@@ -26,14 +26,14 @@ import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
-import org.chromium.base.ThreadUtils.runOnUiThread
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
 import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import org.chromium.base.ThreadUtils.runOnUiThread
+import org.json.JSONObject
+import org.json.JSONTokener
+import retrofit2.HttpException
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
