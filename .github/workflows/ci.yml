@@ -18,8 +18,6 @@ on:
 jobs:
   debug-builds:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/xelxen/build:ubuntu
 
     steps:
       - uses: actions/checkout@v3
