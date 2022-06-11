@@ -18,7 +18,7 @@
     <string name="choose_quality_dialog">Qualité :</string>
     <string name="login_first">Veuillez vous connecter et réessayer.</string>
     <string name="instances">Sélectionner une instance</string>
-    <string name="customInstance">Ajouter une instance personnalisé</string>
+    <string name="customInstance">Instance personnalisée</string>
     <string name="importsuccess">Abonné</string>
     <string name="subscribeIsEmpty">Vous devez d\'abord vous abonner à des chaînes.</string>
     <string name="cannotDownload">Impossible de télécharger ce flux.</string>
@@ -29,7 +29,7 @@
     <string name="vlcerror">Impossible de l\'ouvrir dans VLC. Il se peut qu\'il ne soit pas installé.</string>
     <string name="app_theme">Thème de l\'appli</string>
     <string name="already_logged_in">Vous êtes déjà connecté(e), vous pouvez vous déconnecter.</string>
-    <string name="region">Sélectionner une région</string>
+    <string name="region">Région</string>
     <string name="login_register">Se connecter/s\'inscrire</string>
     <string name="dlisinprogress">Veuillez attendre que tous les téléchargements soient terminés…</string>
     <string name="please_login">Vous devez d\'abord vous connecter ou vous inscrire à l\'aide du menu paramètre !</string>
@@ -54,14 +54,14 @@
     <string name="emptyPlaylistName">Le nom de la liste de lecture ne peut pas être vide</string>
     <string name="import_from_yt_summary">Depuis YouTube ou NewPipe</string>
     <string name="subscriptions">Abonnements</string>
-    <string name="lightTheme">Clair éclairant</string>
+    <string name="lightTheme">Lumière éclairante</string>
     <string name="library">Bibliothèque</string>
     <string name="startpage">Accueil</string>
     <string name="videos">Vidéos</string>
     <string name="changeLanguage">Langue</string>
     <string name="systemLanguage">Système</string>
     <string name="systemDefault">Système</string>
-    <string name="darkTheme">Sombre qui disparaît</string>
+    <string name="darkTheme">Obscurité disparaissante</string>
     <string name="subscribers">%1$s abonnés</string>
     <string name="comments">Commentaires</string>
     <string name="videoCount">%1$s vidéos</string>
@@ -153,5 +153,19 @@
     <string name="shareTo">Partager l\'URL vers</string>
     <string name="movies_directory">Dossier de films</string>
     <string name="views">%1$s vues</string>
-    <string name="defaultIcon">Préréglage</string>
+    <string name="defaultIcon">Par défaut</string>
+    <string name="legacyIcon">Héritage perdu</string>
+    <string name="fireIcon">Feu à la mode</string>
+    <string name="birdIcon">Oiseau boosté</string>
+    <string name="torchIcon">Torche tendance</string>
+    <string name="instance_summary">Piped, connexion, abonnements</string>
+    <string name="invalid_url">Veuillez entrer une URL valide</string>
+    <string name="customInstance_summary">Ajouter une instance personnalisée (à vos risques et périls)</string>
+    <string name="instance_name">Nom de l\'instance</string>
+    <string name="flameIcon">Flamme volante</string>
+    <string name="instance_api_url">URL de l\'API de l\'instance</string>
+    <string name="clear_customInstances">Effacer les instances personnalisées</string>
+    <string name="addInstance">Ajouter une instance</string>
+    <string name="empty_instance">Vous devez compléter le nom et l\'URL de l\'API.</string>
+    <string name="shapedIcon">Forme idiote</string>
 </resources>
