@@ -57,7 +57,14 @@
         <Preference
             android:icon="@drawable/ic_info"
             app:key="about"
+            app:summary="@string/about_summary"
             app:title="@string/about" />
+
+        <Preference
+            android:icon="@drawable/ic_update"
+            app:key="update"
+            app:summary="@string/update_summary"
+            app:title="App version" />
 
     </PreferenceCategory>
 

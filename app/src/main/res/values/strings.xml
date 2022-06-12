@@ -143,7 +143,7 @@
     <string name="live">Live</string>
     <string name="no_replies">This comment has no replies.</string>
     <string name="authors">Authors</string>
-    <string name="authors_summary">Get to know team LibreTube and how it all happens.</string>
+    <string name="authors_summary">Get to know team LibreTube and all its contributors helping to improve the app.</string>
     <string name="download_folder">Name</string>
     <string name="download_folder_summary">The name of the folder downloaded media is stored in.</string>
     <string name="internal_storage">Internal storage</string>
@@ -169,4 +169,6 @@
     <string name="empty_instance">You have to fill in the name and the API url.</string>
     <string name="clear_customInstances">Clear custom instances</string>
     <string name="invalid_url">Please enter a valid url</string>
+    <string name="version">Version %1$s</string>
+    <string name="about_summary">Get to know team LibreTube and how it all happens.</string>
 </resources>
