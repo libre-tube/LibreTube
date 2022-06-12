@@ -141,7 +141,7 @@
     <string name="advanced">Για προχωρημένους</string>
     <string name="advanced_summary">Αναπαραγωγέας, λήψεις, ιστορικό</string>
     <string name="authors">Συγγραφείς</string>
-    <string name="authors_summary">Γνωρίστε την ομάδα του LibreTube και πώς συμβαίνουν όλα αυτά.</string>
+    <string name="authors_summary">Γνωρίστε την ομάδα του LibreTube και όλους τους συνεισφέροντες της που βοηθούν στη βελτίωση της εφαρμογής.</string>
     <string name="download_folder">Όνομα</string>
     <string name="internal_storage">Εσωτερικός χώρος</string>
     <string name="sdcard">Κάρτα SD</string>
@@ -169,4 +169,6 @@
     <string name="instance_api_url">Σύνδεσμος URL του API του διακομιστή</string>
     <string name="addInstance">Προσθήκη διακομιστή</string>
     <string name="empty_instance">Πρέπει να συμπληρώσετε το όνομα και τη διεύθυνση URL του API.</string>
+    <string name="about_summary">Γνωρίστε την ομάδα του LibreTube και πώς συμβαίνουν όλα αυτά.</string>
+    <string name="version">Έκδοση %1$s</string>
 </resources>
