@@ -162,7 +162,7 @@
     <string name="flameIcon">Ιπτάμενη φλόγα</string>
     <string name="birdIcon">Ενισχυμένο πουλί</string>
     <string name="clear_customInstances">Εκκαθάριση προσαρμοσμένων διακομιστών</string>
-    <string name="customInstance_summary">Προσθέση προσαρμοσμένου διακομιστή (με δική σας ευθύνη)</string>
+    <string name="customInstance_summary">Προσθήκη προσαρμοσμένου διακομιστή (με δική σας ευθύνη)</string>
     <string name="instance_name">Όνομα διακομιστή</string>
     <string name="instance_summary">Piped, σύνδεση, εγγραφές</string>
     <string name="invalid_url">Εισαγάγετε μια έγκυρη διεύθυνση URL</string>
