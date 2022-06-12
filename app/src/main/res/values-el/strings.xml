@@ -59,10 +59,10 @@
     <string name="videos">Βίντεο</string>
     <string name="changeLanguage">Γλώσσα</string>
     <string name="systemLanguage">Συστήματος</string>
-    <string name="lightTheme">Φωτιστικό φώς</string>
+    <string name="lightTheme">Φωτεινό θέμα</string>
     <string name="subscribers">%1$s εγγεγραμμένοι</string>
     <string name="systemDefault">Συστήματος</string>
-    <string name="darkTheme">Εξαφανιζόμενο σκοτάδι</string>
+    <string name="darkTheme">Σκοτεινό θέμα</string>
     <string name="comments">Σχόλια</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="customization">Προσαρμογές</string>
@@ -101,11 +101,11 @@
     <string name="category_intro_description">Ένα χρονικό διάστημα χωρίς πραγματικό περιεχόμενο. Μπορεί να είναι παύση, στατικό καρέ, επαναλαμβανόμενη κινούμενη εικόνα. Δεν πρέπει να χρησιμοποιείται για μεταβάσεις που περιέχουν πληροφορίες.</string>
     <string name="category_interaction_description">Όταν υπάρχει μια σύντομη υπενθύμιση για να πατήσετε μου αρέσει, να εγγραφείτε ή να ακολουθήσετε το κανάλι τους στη μέση του περιεχομένου. Εάν είναι μεγάλης διάρκειας ή για κάτι συγκεκριμένο, θα πρέπει να παρατίθεται στην επιλογή \" Μη-χορηγούμενη/Προσωπική προώθηση\".</string>
     <string name="license">Άδεια</string>
-    <string name="oledTheme">Τυφλό μαύρο</string>
+    <string name="oledTheme">Μαύρο θέμα</string>
     <string name="color_accent">Αποχρώσεις</string>
-    <string name="color_blue">Μπλε βάρκα</string>
+    <string name="color_blue">Pixel μπλε</string>
     <string name="color_yellow">Κίτρινο που μυρίζει</string>
-    <string name="color_green">Επισκέπτης πράσινο</string>
+    <string name="color_green">Αυλό πράσινο</string>
     <string name="color_purple">Απολαυστικό μωβ</string>
     <string name="color_red">Κόκκινη ανάπαυση</string>
     <string name="material_you">Μυστικό Υλικό 3</string>
@@ -171,4 +171,6 @@
     <string name="empty_instance">Πρέπει να συμπληρώσετε το όνομα και τη διεύθυνση URL του API.</string>
     <string name="about_summary">Γνωρίστε την ομάδα του LibreTube και πώς συμβαίνουν όλα αυτά.</string>
     <string name="version">Έκδοση %1$s</string>
+    <string name="related_streams">Σχετικά βίντεο</string>
+    <string name="related_streams_summary">Εμφάνιση σχετικών βίντεο κάτω από το βίντεο.</string>
 </resources>
