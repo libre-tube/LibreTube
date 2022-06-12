@@ -143,7 +143,7 @@
     <string name="live">Dal vivo</string>
     <string name="authors">Autori</string>
     <string name="no_replies">Questo commento non ha risposte.</string>
-    <string name="authors_summary">Conosci il team LibreTube e come tutto accade.</string>
+    <string name="authors_summary">Conosci il team LibreTube e tutti i suoi collaboratori che contribuiscono a migliorare l\'applicazione.</string>
     <string name="downloads_directory">Cartella degli scaricamenti</string>
     <string name="sdcard">Scheda SD</string>
     <string name="music_directory">Cartella musicale</string>
@@ -169,4 +169,6 @@
     <string name="customInstance_summary">Aggiungi un\'istanza personalizzata (a tuo rischio)</string>
     <string name="instance_api_url">URL API dell\'istanza</string>
     <string name="invalid_url">Si prega di inserire un URL valido</string>
+    <string name="version">Versione %1$s</string>
+    <string name="about_summary">Conosci il team LibreTube e come tutto accade.</string>
 </resources>
