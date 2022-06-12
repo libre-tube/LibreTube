@@ -1,0 +1,41 @@
+name: Telegram Builder
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - "README*.md"
+      - "fastlane/**"
+      - "assets/**"
+      - ".github/**/*.md"
+
+jobs:
+  debug-builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: "temurin"
+          cache: "gradle"
+
+      - name: Build debug APK and run jvm tests
+        run: ./gradlew assembleDebug
+
+      - name: Telegram Bot
+        run: |
+          mv app/build/outputs/apk/debug/*.apk .github/
+          cd .github
+          curl https://libre-tube.github.io/assets/LibreSpace.png --output space.png
+          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
+          python -m pip install --upgrade pip
+          pip install python-telegram-bot
+          python tg.py
