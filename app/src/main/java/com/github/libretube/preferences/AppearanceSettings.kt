@@ -19,8 +19,8 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
-            activity?.recreate()
             requireMainActivityRestart = true
+            ThemeHelper().restartMainActivity(requireContext())
             true
         }
 
