@@ -61,8 +61,8 @@
     <string name="subscriptions">Abbonamenti</string>
     <string name="changeLanguage">Lingua</string>
     <string name="systemLanguage">Sistema</string>
-    <string name="lightTheme">Luce illuminante</string>
-    <string name="darkTheme">Buio morente</string>
+    <string name="lightTheme">Tema chiaro</string>
+    <string name="darkTheme">Tema scuro</string>
     <string name="comments">Commenti</string>
     <string name="videoCount">%1$s video</string>
     <string name="noInternet">Connettiti ad internet prima.</string>
@@ -104,7 +104,7 @@
     <string name="color_yellow">Giallo lanciato</string>
     <string name="color_green">Verde groovy</string>
     <string name="color_purple">Viola piacevole</string>
-    <string name="oledTheme">Nero cieco</string>
+    <string name="oledTheme">Tema nero</string>
     <string name="clear_history">Cancella la cronologia</string>
     <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">Notifiche</string>
