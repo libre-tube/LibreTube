@@ -60,8 +60,8 @@
     <string name="changeLanguage">Language</string>
     <string name="systemLanguage">System</string>
     <string name="systemDefault">System</string>
-    <string name="lightTheme">Luminating light</string>
-    <string name="darkTheme">Dissapearing dark</string>
+    <string name="lightTheme">Light theme</string>
+    <string name="darkTheme">Dark theme</string>
     <string name="subscribers">%1$s subscribers</string>
     <string name="settings">Settings</string>
     <string name="location">Location</string>
@@ -107,7 +107,7 @@
     <string name="color_yellow">Yeeting yellow</string>
     <string name="color_green">Groovy green</string>
     <string name="color_purple">Pleasurable purple</string>
-    <string name="oledTheme">Blind black</string>
+    <string name="oledTheme">Black theme</string>
     <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">Notifications</string>
     <string name="app_icon">Icon</string>
