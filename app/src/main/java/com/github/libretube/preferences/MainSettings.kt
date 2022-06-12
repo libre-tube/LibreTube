@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.isCurrentViewMainSettings
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
+import com.github.libretube.util.checkUpdate
 
 class MainSettings : PreferenceFragmentCompat() {
     val TAG = "SettingsFragment"
@@ -65,6 +67,13 @@ class MainSettings : PreferenceFragmentCompat() {
         about?.setOnPreferenceClickListener {
             val newFragment = AboutFragment()
             navigateSettings(newFragment)
+            true
+        }
+
+        val update = findPreference<Preference>("update")
+        update?.title = getString(R.string.version, BuildConfig.VERSION_NAME)
+        update?.setOnPreferenceClickListener {
+            checkUpdate(childFragmentManager)
             true
         }
     }
