@@ -426,7 +426,8 @@ class PlayerFragment : Fragment() {
                     }
                 }
                 // check whether related streams are enabled
-                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                val sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(requireContext())
                 relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
                 runOnUiThread {
                     createExoPlayer(view)
