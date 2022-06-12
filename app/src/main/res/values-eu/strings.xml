@@ -21,8 +21,8 @@
     <string name="already_logged_in">Iadanik saioa hasia duzu. Saioa itxi beharko duzu.</string>
     <string name="login_first">Saioa hasi eta saiatu berriro mesedez.</string>
     <string name="instances">Hautatu instantzia</string>
-    <string name="customInstance">Gehitu instantzia pertsonalizatua</string>
-    <string name="region">Hautatu lurraldea</string>
+    <string name="customInstance">Instantzia pertsonalizatua</string>
+    <string name="region">Lurraldea</string>
     <string name="login_register">Saioa hasi/erregistratu</string>
     <string name="please_login">Lehenengo ezarpenetan saioa hasi edo erregistratu mesedez.</string>
     <string name="importsuccess">Harpidetuta</string>
@@ -70,7 +70,7 @@
     <string name="music_videos">YT Musika bideoak</string>
     <string name="music_albums">YT Musika albumak</string>
     <string name="music_playlists">YT Musika erreprodukzio zerrendak</string>
-    <string name="defaultTab">Default Tab</string>
+    <string name="defaultTab">Fitxa lehenetsia</string>
     <string name="sponsorblock">Iragarki blokeatzailea</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app APIa erabiltzen du</string>
     <string name="category_sponsor_description">Ordaindutako promozioak, ordaindutako erreferentziak eta iragarki zuzenak. Autopromozio edo gustoko dituzten debaldeko iragarkietarako ez.</string>
@@ -98,7 +98,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Abiarazi atzeko planoan</string>
     <string name="update_available">%1$s bertsioa eskuragarri dago</string>
-    <string name="update_available_text">GitHub-eko bertsioetara joan deskargatzeko\?</string>
+    <string name="update_available_text">GitHub-era joan deskargatzeko\?</string>
     <string name="category_outro">Amaitzeko txartelak eta kredituak</string>
     <string name="video_format">Bideo formatua</string>
     <string name="video_format_summary">Audioa eta bideoa deskargatzen badira, fitxategi bihurtzea.</string>
@@ -150,7 +150,7 @@
     <string name="downloads">Deskargak</string>
     <string name="app_behavior">Portaera</string>
     <string name="appearance">Itxura</string>
-    <string name="website_summary">Bisitatu web gunea, aplikazioari eta haren ezaugarriei buruzko informazio gehiago lortzeko.</string>
+    <string name="website_summary">Bisitatu web gunea, aplikazioari eta haren ezaugarriei buruzko informazio gehiago izateko.</string>
     <string name="contributing">Lagundu</string>
     <string name="donate_summary">Eman zuretzako balio duenaren arabera, ahal baduzu.</string>
     <string name="update">Bertsio berria bilatu</string>
@@ -161,4 +161,12 @@
     <string name="playback_speed">Erreprodukzio-abiadura lehenetsia</string>
     <string name="authors">Egileak</string>
     <string name="internal_storage">Barne biltegiratzea</string>
+    <string name="customInstance_summary">Gehitu instantzia pertsonalizatua (zure ardurapean)</string>
+    <string name="instance_api_url">Intantziaren API url-a</string>
+    <string name="empty_instance">Izena eta API url-a bete behar dituzu.</string>
+    <string name="invalid_url">Mesedez, sartu baliozko URL bat</string>
+    <string name="instance_name">Instantziaren izena</string>
+    <string name="addInstance">Gehitu instantzia</string>
+    <string name="clear_customInstances">Ezabatu instantzia pertsonalizatuak</string>
+    <string name="instance_summary">Piped, saioa hasi, harpidetzak</string>
 </resources>

@@ -17,8 +17,8 @@
     <string name="loggedout">로그아웃했습니다.</string>
     <string name="registered">가입되었습니다. 이제 채널을 구독할 수 있습니다.</string>
     <string name="instances">인스턴스 선택</string>
-    <string name="customInstance">커스텀 인스턴스 추가</string>
-    <string name="region">지역 선택</string>
+    <string name="customInstance">커스텀 인스턴스</string>
+    <string name="region">지역</string>
     <string name="login_register">로그인/회원가입</string>
     <string name="please_login">먼저 설정에서 로그인하거나 회원가입하세요!</string>
     <string name="already_logged_in">이미 로그인했습니다. 계정에서 로그아웃할 수 있습니다.</string>
@@ -110,8 +110,8 @@
     <string name="color_yellow">노란색</string>
     <string name="color_purple">보라색</string>
     <string name="sponsorblock_notifications">알림</string>
-    <string name="enabled">온</string>
-    <string name="disabled">오프</string>
+    <string name="enabled">켬</string>
+    <string name="disabled">끔</string>
     <string name="app_icon">아이콘</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">백그라운드에서 재생</string>
@@ -154,4 +154,12 @@
     <string name="downloads_directory">다운로드 폴더</string>
     <string name="download_folder_summary">다운로드한 미디어가 저장되는 폴더의 이름입니다.</string>
     <string name="internal_storage">내부 저장소</string>
+    <string name="addInstance">인스턴스 추가</string>
+    <string name="customInstance_summary">사용자 정의 인스턴스 추가(위험 부담)</string>
+    <string name="instance_name">인스턴스 이름</string>
+    <string name="clear_customInstances">커스텀 인스턴스 지우기</string>
+    <string name="instance_api_url">인스턴스 API URL</string>
+    <string name="empty_instance">이름과 API URL을 입력해야 합니다.</string>
+    <string name="invalid_url">유효한 URL을 입력 해주세요</string>
+    <string name="instance_summary">Piped, 로그인, 구독</string>
 </resources>
