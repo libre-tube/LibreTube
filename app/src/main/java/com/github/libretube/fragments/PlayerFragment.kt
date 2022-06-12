@@ -49,6 +49,7 @@ import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.hideKeyboard
+import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
@@ -80,6 +81,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import java.io.IOException
@@ -112,6 +114,7 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var segmentData: Segments
+    private var relatedStreamsEnabled = true
 
     private lateinit var relDownloadVideo: LinearLayout
 
@@ -259,13 +262,9 @@ class PlayerFragment : Fragment() {
             }
         }
 
-        view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.comments_toggle)
+        view.findViewById<MaterialCardView>(R.id.comments_toggle)
             .setOnClickListener {
-                commentsRecView.visibility =
-                    if (commentsRecView.isVisible) View.GONE else View.VISIBLE
-                relatedRecView.visibility =
-                    if (relatedRecView.isVisible) View.GONE else View.VISIBLE
-                if (!commentsLoaded!!) fetchComments()
+                toggleComments()
             }
 
         // FullScreen button trigger
@@ -326,6 +325,14 @@ class PlayerFragment : Fragment() {
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+    }
+
+    private fun toggleComments() {
+        commentsRecView.visibility =
+            if (commentsRecView.isVisible) View.GONE else View.VISIBLE
+        relatedRecView.visibility =
+            if (relatedRecView.isVisible) View.GONE else View.VISIBLE
+        if (!commentsLoaded!!) fetchComments()
     }
 
     override fun onDestroy() {
@@ -418,13 +425,18 @@ class PlayerFragment : Fragment() {
                         }
                     }
                 }
+                // check whether related streams are enabled
+                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
                 runOnUiThread {
                     createExoPlayer(view)
                     prepareExoPlayerView()
+                    if (response.chapters != null) initializeChapters(response.chapters)
                     setResolutionAndSubtitles(view, response)
                     exoPlayer.prepare()
                     exoPlayer.play()
                     initializePlayerView(view, response)
+                    if (!relatedStreamsEnabled) toggleComments()
                 }
             }
         }
@@ -540,11 +552,12 @@ class PlayerFragment : Fragment() {
                 }
             }
         }
-
-        relatedRecView.adapter = TrendingAdapter(
-            response.relatedStreams!!,
-            childFragmentManager
-        )
+        if (relatedStreamsEnabled) {
+            relatedRecView.adapter = TrendingAdapter(
+                response.relatedStreams!!,
+                childFragmentManager
+            )
+        }
         val description = response.description!!
         view.findViewById<TextView>(R.id.player_description).text =
             // detect whether the description is html formatted
@@ -579,6 +592,12 @@ class PlayerFragment : Fragment() {
                 newFragment.arguments = bundle
                 newFragment.show(childFragmentManager, "AddToPlaylist")
             }
+        }
+    }
+
+    private fun initializeChapters(chapters: List<ChapterSegment>) {
+        chapters.forEach { chapter ->
+            Log.e(TAG, chapter.title!!)
         }
     }
 
