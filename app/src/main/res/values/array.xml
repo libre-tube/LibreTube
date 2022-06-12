@@ -459,14 +459,17 @@
         <item>@string/systemLanguage</item>
         <item>Arabic</item>
         <item>Azerbaijani</item>
+        <item>Basque</item>
         <item>Chinese (simplified)</item>
         <item>Czech</item>
+        <item>Danish</item>
         <item>English</item>
         <item>Finnish</item>
         <item>French</item>
         <item>German</item>
         <item>Greek</item>
         <item>Gujarati</item>
+        <item>Hebrew</item>
         <item>Hindi</item>
         <item>Hungarian</item>
         <item>Indonesian</item>
@@ -485,20 +488,24 @@
         <item>Sorani</item>
         <item>Spanish</item>
         <item>Turkish</item>
+        <item>Ukrainian</item>
     </string-array>
 
     <string-array name="languagesValue">
         <item>sys</item>
         <item>ar</item>
         <item>az</item>
+        <item>eu</item>
         <item>zh</item>
         <item>cs</item>
+        <item>da</item>
         <item>en</item>
         <item>fi</item>
         <item>fr</item>
         <item>de</item>
         <item>el</item>
         <item>gu</item>
+        <item>he</item>
         <item>hi</item>
         <item>hu</item>
         <item>in</item>
@@ -517,6 +524,7 @@
         <item>ckb</item>
         <item>es</item>
         <item>tr</item>
+        <item>uk</item>
     </string-array>
 
     <string-array name="themes">
