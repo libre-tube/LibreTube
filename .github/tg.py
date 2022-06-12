@@ -6,7 +6,7 @@ from time import sleep
 f = open('commit.json')
 data = load(f)
   
-title = f'''*bold \Libretube {data['sha'][0:7]} // Alpha*
+title = f'''<b>Libretube {data['sha'][0:7]} // Alpha</b>
 
 {data['commit']['message']}
 
@@ -18,7 +18,7 @@ f.close()
 TG_CHAT_ID = "-1001537505605"
 bot = telegram.Bot(TG_TOKEN)
 
-bot.send_photo(TG_CHAT_ID, open('alpha.png', 'rb'), title, telegram.ParseMode.MarkdownV2)
+bot.send_photo(TG_CHAT_ID, open('alpha.png', 'rb'), title, telegram.ParseMode.HTML)
 bot.send_document(TG_CHAT_ID, open('app-arm64-v8a-debug.apk', 'rb'))
 bot.send_document(TG_CHAT_ID, open('app-armeabi-v7a-debug.apk', 'rb'))
 bot.send_document(TG_CHAT_ID, open('app-x86_64-debug.apk', 'rb'))
