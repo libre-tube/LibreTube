@@ -120,7 +120,7 @@
     <string name="video_format_summary">오디오와 비디오가 모두 다운로드된 경우 파일 변환.</string>
     <string name="appearance_summary">원하는 대로 앱을 조정하세요.</string>
     <string name="no_replies">이 댓글에는 답글이 없습니다.</string>
-    <string name="authors_summary">LibreTube 팀과 이 모든 일이 어떻게 일어나는지 알아보십시오.</string>
+    <string name="authors_summary">LibreTube 팀과 앱 개선에 도움이 되는 모든 기여자들을 알아보세요.</string>
     <string name="update_available">%1$s 버전 사용 가능</string>
     <string name="update_available_text">GitHub의 릴리스로 이동하여 다운로드하시겠습니까\?</string>
     <string name="app_behavior">동작</string>
@@ -162,4 +162,8 @@
     <string name="empty_instance">이름과 API URL을 입력해야 합니다.</string>
     <string name="invalid_url">유효한 URL을 입력 해주세요</string>
     <string name="instance_summary">Piped, 로그인, 구독</string>
+    <string name="related_streams">관련 스트림</string>
+    <string name="related_streams_summary">관련 스트림을 비디오에 표시합니다.</string>
+    <string name="version">버전 %1$s</string>
+    <string name="about_summary">LibreTube 팀과 그 모든 일이 어떻게 일어나는지 알아보세요.</string>
 </resources>
