@@ -173,4 +173,6 @@
     <string name="about_summary">Ezagutu LibreTubeko taldea eta nola gertatzen den dena.</string>
     <string name="related_streams">Erlazionatutako fluxuak</string>
     <string name="related_streams_summary">Erakutsi bideoekin erlazionatutako fluxuak.</string>
+    <string name="show_chapters">Erakutsi kapituluak</string>
+    <string name="hide_chapters">Ezkutatu kapituluak</string>
 </resources>
