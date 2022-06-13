@@ -5,21 +5,21 @@
     <PreferenceCategory app:title="@string/player">
 
         <ListPreference
-            app:title="@string/defres"
-            app:key="default_res"
+            android:icon="@drawable/ic_hd"
+            app:defaultValue=""
             app:entries="@array/defres"
             app:entryValues="@array/defresValue"
-            app:defaultValue=""
-            android:icon="@drawable/ic_hd"
+            app:key="default_res"
+            app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:title="@string/playback_speed"
-            app:key="playback_speed"
+            android:icon="@drawable/ic_play"
+            app:defaultValue="1F"
             app:entries="@array/playbackSpeed"
             app:entryValues="@array/playbackSpeedValues"
-            app:defaultValue="1F"
-            android:icon="@drawable/ic_play"
+            app:key="playback_speed"
+            app:title="@string/playback_speed"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -27,55 +27,44 @@
     <PreferenceCategory app:title="@string/downloads">
 
         <ListPreference
-            app:key="video_format"
-            app:title="@string/video_format"
+            app:defaultValue=".mp4"
             app:entries="@array/videoFormats"
             app:entryValues="@array/videoFormatsValues"
-            app:defaultValue=".mp4"
+            app:icon="@drawable/ic_videocam"
+            app:key="video_format"
             app:summary="@string/video_format_summary"
-            app:icon="@drawable/ic_videocam" />
+            app:title="@string/video_format" />
 
         <ListPreference
-            app:key="download_location"
-            app:title="@string/download_directory"
-            app:summary="@string/download_directory_summary"
             android:defaultValue="downloads"
             android:entries="@array/downloadLocation"
             android:entryValues="@array/downloadLocationValues"
-            app:icon="@drawable/ic_download" />
+            app:icon="@drawable/ic_download"
+            app:key="download_location"
+            app:summary="@string/download_directory_summary"
+            app:title="@string/download_directory" />
 
         <EditTextPreference
-            app:key="download_folder"
-            app:title="@string/download_folder"
-            app:summary="@string/download_folder_summary"
+            android:defaultValue="LibreTube"
             app:icon="@drawable/ic_folder"
-            android:defaultValue="LibreTube" />
+            app:key="download_folder"
+            app:summary="@string/download_folder_summary"
+            app:title="@string/download_folder" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/search_history">
 
         <SwitchPreference
-            app:title="@string/search_history"
-            app:key="search_history_toggle"
             android:defaultValue="true"
-            android:icon="@drawable/ic_history" />
+            android:icon="@drawable/ic_history"
+            app:key="search_history_toggle"
+            app:title="@string/search_history" />
 
         <Preference
-            app:title="@string/clear_history"
+            android:icon="@drawable/ic_trash"
             app:key="clear_history"
-            android:icon="@drawable/ic_trash" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory>
-
-        <SwitchPreference
-            app:key="related_streams_toggle"
-            app:title="@string/related_streams"
-            app:summary="@string/related_streams_summary"
-            android:defaultValue="true"
-            android:icon="@drawable/ic_list"/>
+            app:title="@string/clear_history" />
 
     </PreferenceCategory>
 
