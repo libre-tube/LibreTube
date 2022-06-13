@@ -43,6 +43,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
@@ -597,8 +598,28 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
-        chapters.forEach { chapter ->
-            Log.e(TAG, chapter.title!!)
+        val chaptersToggle = view?.findViewById<LinearLayout>(R.id.chapters_toggle)
+        val chaptersRecView = view?.findViewById<RecyclerView>(R.id.chapters_recView)
+        val chaptersToggleText = view?.findViewById<TextView>(R.id.chapters_toggle_text)
+        val chaptersToggleArrow = view?.findViewById<ImageView>(R.id.chapters_toggle_arrow)
+
+        if (chapters.isNotEmpty()) {
+            chaptersToggle?.visibility = View.VISIBLE
+
+            chaptersToggle?.setOnClickListener {
+                if (chaptersRecView?.isVisible!!) {
+                    chaptersRecView?.visibility = View.GONE
+                    chaptersToggleText?.text = getString(R.string.show_chapters)
+                } else {
+                    chaptersRecView?.visibility = View.VISIBLE
+                    chaptersToggleText?.text = getString(R.string.hide_chapters)
+                }
+                chaptersToggleArrow!!.animate().setDuration(100).rotationBy(180F).start()
+            }
+
+            chaptersRecView?.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            chaptersRecView?.adapter = ChaptersAdapter(chapters, exoPlayer)
         }
     }
 

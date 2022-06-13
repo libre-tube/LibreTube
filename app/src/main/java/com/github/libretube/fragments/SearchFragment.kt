@@ -198,7 +198,6 @@ class SearchFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             isFetchingSearch = true
             hideKeyboard()
-            Log.e("here", "here")
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
             } catch (e: IOException) {
