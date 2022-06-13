@@ -11,7 +11,7 @@
     <string name="loggedIn">נכנסת.</string>
     <string name="loggedout">יצאת.</string>
     <string name="instances">בחירת עותק</string>
-    <string name="customInstance">הוספת עותק אחר</string>
+    <string name="customInstance">עותק אחר</string>
     <string name="login_register">כניסה/הרשמה</string>
     <string name="subscribeIsEmpty">עליך להירשם לכמה ערוצים תחילה.</string>
     <string name="import_from_yt_summary">מ־YouTube או NewPipe</string>
@@ -47,7 +47,7 @@
     <string name="category_sponsor_description">קידום ממומן, הפניות בתשלום ופרסום ישיר. לא למטרות קידום עצמי או הוקרה של מטרות/יוצרים/אתרים/מוצרים אהובים עליהם.</string>
     <string name="category_interaction">תזכורת אינטראקציה (לייק ומינוי)</string>
     <string name="category_outro">כרטיסי סיום וקרדיטים</string>
-    <string name="category_outro_description">קרדיטים או כאשר כרטיסי הסיום של YouTube מופיעים. לא למסקנות עם מידע.</string>
+    <string name="category_outro_description">מידע לאחר הסיום. לא למסקנות עם מידע.</string>
     <string name="license">רישיון</string>
     <string name="color_accent">צבעים משניים</string>
     <string name="color_red">אדום</string>
@@ -59,13 +59,13 @@
     <string name="app_icon">סמל</string>
     <string name="enabled">פעיל</string>
     <string name="playOnBackground">ניגון ברקע</string>
-    <string name="update_available_text">יש עדכון חדש זמין. יש ללחוץ על אישור כדי לעבור לעמוד העדכון ב־GitHub.</string>
+    <string name="update_available_text">לעבור ל־releases (מהדורות) ב־GitHub כדי להוריד אותה\?</string>
     <string name="appearance">מראה</string>
     <string name="app_behavior">התנהגות</string>
     <string name="video_format">תצורת סרטונים</string>
     <string name="download_directory">הורדה אל</string>
     <string name="download_directory_summary">איפה יאוחסנו פריטי המדיה שבחרת להוריד.</string>
-    <string name="website_summary">אפשר לבקר באתר שלנו כדי ללמוד עוד על היישום והיכולות שלו.</string>
+    <string name="website_summary">כדאי לבקר באתר למידע נוסף על היישום והיכולות שלו.</string>
     <string name="donate">תרומה</string>
     <string name="license_summary">הרישיון הציבורי הכללי של גנו הוא רישיון חופשי ומתירני לתוכנה ולסוגים נוספים של יצירות.</string>
     <string name="update_summary">לחיצה כאן תבדוק אם היישומון עדכני.</string>
@@ -96,8 +96,8 @@
     <string name="registered">ההרשמה הצליחה. עכשיו אפשר להירשם למינוי לערוצים.</string>
     <string name="login_first">נא להיכנס ולנסות שוב.</string>
     <string name="save">שמירה</string>
-    <string name="region">בחירת אזור</string>
-    <string name="dlisinprogress">הורדה אחרת כבר מתבצעת. נא להמתין לסיומה.</string>
+    <string name="region">אזור</string>
+    <string name="dlisinprogress">נא להמתין לסיום כל ההורדות…</string>
     <string name="downloadfailed">ההורדה נכשלה.</string>
     <string name="import_from_yt">ייבוא מינויים</string>
     <string name="systemDefault">מערכת</string>
@@ -113,7 +113,7 @@
     <string name="darkTheme">אפלה נעלמת</string>
     <string name="instance">עותק</string>
     <string name="videoCount">%1$s סרטונים</string>
-    <string name="category_interaction_description">כשיש תזכורת קצרה לעשות לייק, להירשם למינוי או לעקוב אחריהם באמצע התוכן. אם זה ארוך או על משהו מסוים, זה אמור להיות תחת קידום עצמי במקום.</string>
+    <string name="category_interaction_description">כשיש תזכורת קצרה לעשות לייק, להירשם למינוי או לעקוב באמצע התוכן. אם זה ארוך או על משהו מסוים, זה אמור להיות קידום עצמי במקום.</string>
     <string name="website">אתר</string>
     <string name="noInternet">קודם צריך להתחבר לאינטרנט.</string>
     <string name="retry">לנסות שוב</string>
@@ -127,10 +127,10 @@
     <string name="disabled">כבוי</string>
     <string name="piped">Piped</string>
     <string name="downloads">הורדות</string>
-    <string name="video_format_summary">תצורת הסרטונים אליה מומרים הסרטונים שבחרת להוריד (חל רק אם מורידים שמע וסרטון).</string>
+    <string name="video_format_summary">להמיר קבצים רק אם גם השמע והסרטון התקבלו.</string>
     <string name="contributing">תרומה</string>
     <string name="no_update_available">זאת הגרסה העדכנית ביותר.</string>
-    <string name="donate_summary">אם אהבת את היישומון והעבודה שלנו מוערכת בעיניך נשמח לתרומה.</string>
+    <string name="donate_summary">אפשר להעניק בהתאם לערך שהוא מעניק לך. צוות LibreTube קטן מהתרומה או הסיוע שלך.</string>
     <string name="update">איתור גרסה חדשה</string>
     <string name="advanced_summary">נגן, הורדות, היסטוריה</string>
     <string name="app_uptodate">היישומון עדכני.</string>
@@ -142,9 +142,9 @@
     <string name="category_selfpromo_description">דומה ל„נותן חסות” למעט קידום עצמי ללא תשלום. לרבות סעיפים על אביזרים ממותגים, תרומות או מידע על שיתופי פעולה.</string>
     <string name="category_intro">הפוגה/הנפשת הקדמה</string>
     <string name="authors">יוצרים</string>
-    <string name="authors_summary">כאן מופיעים אלו שעומדים מאחורי LibreTube ועושים את הקסם.</string>
+    <string name="authors_summary">כאן מופיעים אלו שעומדים מאחורי LibreTube לצד אלו שמסייעים בשיפור היישומון.</string>
     <string name="no_replies">להערה זו אין תגובות.</string>
-    <string name="download_folder_summary">שם התיקייה שבה מאוחסנת מדיה שהורדה.</string>
+    <string name="download_folder_summary">שם התיקייה שבה תאוחסן מדיה שהורדה.</string>
     <string name="internal_storage">אחסון פנימי</string>
     <string name="downloads_directory">תיקיית הורדות</string>
     <string name="movies_directory">תיקיית סרטים</string>
@@ -160,4 +160,14 @@
     <string name="flameIcon">להבה מעופפת</string>
     <string name="birdIcon">ציפור מוגברת</string>
     <string name="torchIcon">לפיד בוער</string>
+    <string name="instance_summary">Piped, כניסה, מינויים</string>
+    <string name="customInstance_summary">הוספת עותק משלך (על אחריותך)</string>
+    <string name="instance_name">שם העותק</string>
+    <string name="empty_instance">יש למלא את השם ואת כתובת ה־API.</string>
+    <string name="invalid_url">נא למלא כתובת תקנית</string>
+    <string name="version">גרסה %1$s</string>
+    <string name="about_summary">היכרות עם הצוות של LibreTube ואיך הכול התחיל.</string>
+    <string name="instance_api_url">כתובת API של העותק</string>
+    <string name="addInstance">הוספת עותק</string>
+    <string name="clear_customInstances">מחיקת עותקים אחרים</string>
 </resources>

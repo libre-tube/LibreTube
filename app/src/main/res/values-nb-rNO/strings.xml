@@ -161,4 +161,16 @@
     <string name="playback_speed">Forvalgt avspillingshastighet</string>
     <string name="advanced">Avansert</string>
     <string name="player">Spiller</string>
+    <string name="instance_summary">Piped, innlogging, abonnementer</string>
+    <string name="customInstance_summary">Legg til en egendefinert instans (på egen risiko)</string>
+    <string name="instance_name">Navn på instans</string>
+    <string name="instance_api_url">Nettadresse for instans-API</string>
+    <string name="addInstance">Legg til instans</string>
+    <string name="invalid_url">Skriv inn en nettadresse som virker</string>
+    <string name="about_summary">Bli kjent med LibreTube-laget og alt som skjer.</string>
+    <string name="empty_instance">Du må fylle inn navnet og API-nettadressen.</string>
+    <string name="version">Versjon %1$s</string>
+    <string name="clear_customInstances">Tøm egendefinerte instanser</string>
+    <string name="related_streams">Relaterte strømmer</string>
+    <string name="related_streams_summary">Vis videoer relatert til det du ser.</string>
 </resources>
