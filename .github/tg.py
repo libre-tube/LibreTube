@@ -1,7 +1,6 @@
 import telegram
 from tgconfig import TG_TOKEN
 from json import load
-from time import sleep
 
 f = open('commit.json')
 data = load(f)
