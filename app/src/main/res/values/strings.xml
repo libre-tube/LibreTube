@@ -60,8 +60,8 @@
     <string name="changeLanguage">Language</string>
     <string name="systemLanguage">System</string>
     <string name="systemDefault">System</string>
-    <string name="lightTheme">Light theme</string>
-    <string name="darkTheme">Dark theme</string>
+    <string name="lightTheme">Light</string>
+    <string name="darkTheme">Dark</string>
     <string name="subscribers">%1$s subscribers</string>
     <string name="settings">Settings</string>
     <string name="location">Location</string>
@@ -91,7 +91,7 @@
     <string name="sponsorblock_state">On</string>
     <string name="category_segments">Segments</string>
     <string name="category_sponsor">Sponsor</string>
-    <string name="category_sponsor_description">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free shoutouts to causes/creators/websites/products they like.</string>
+    <string name="category_sponsor_description">Paid promotion, paid referrals and direct advertisements. Not for self-promotion or free genuine shoutouts to causes, creators, websites, and products.</string>
     <string name="category_selfpromo">Unpaid/Self Promotion</string>
     <string name="category_selfpromo_description">Similar to \"sponsor\" except for unpaid or self promotion. This includes sections about merchandise, donations, or info about who they collaborated with.</string>
     <string name="category_interaction">Interaction reminder (like and subscribe)</string>
@@ -103,11 +103,11 @@
     <string name="license">License</string>
     <string name="color_accent">Accents</string>
     <string name="color_red">Resting red</string>
-    <string name="color_blue">Pixel blue</string>
+    <string name="color_blue">Blissful blue</string>
     <string name="color_yellow">Yeeting yellow</string>
     <string name="color_green">Groovy green</string>
     <string name="color_purple">Pleasurable purple</string>
-    <string name="oledTheme">Black theme</string>
+    <string name="oledTheme">Black</string>
     <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">Notifications</string>
     <string name="app_icon">Icon</string>
@@ -143,7 +143,7 @@
     <string name="live">Live</string>
     <string name="no_replies">This comment has no replies.</string>
     <string name="authors">Authors</string>
-    <string name="authors_summary">Get to know team LibreTube and all its contributors helping to improve the app.</string>
+    <string name="authors_summary">Get to know everyone.</string>
     <string name="download_folder">Name</string>
     <string name="download_folder_summary">The name of the folder downloaded media is stored in.</string>
     <string name="internal_storage">Internal storage</string>
@@ -164,13 +164,13 @@
     <string name="instance_summary">Piped, login, subscriptions</string>
     <string name="customInstance_summary">Add a custom instance (on your own risk)</string>
     <string name="instance_name">Instance name</string>
-    <string name="instance_api_url">Instance API url</string>
+    <string name="instance_api_url">Instance API URL</string>
     <string name="addInstance">Add Instance</string>
-    <string name="empty_instance">You have to fill in the name and the API url.</string>
+    <string name="empty_instance">Fill in the name and the API URL.</string>
     <string name="clear_customInstances">Clear custom instances</string>
-    <string name="invalid_url">Please enter a valid url</string>
+    <string name="invalid_url">Please enter a URL that works</string>
     <string name="version">Version %1$s</string>
     <string name="about_summary">Get to know team LibreTube and how it all happens.</string>
     <string name="related_streams">Related streams</string>
-    <string name="related_streams_summary">Show related streams to videos.</string>
+    <string name="related_streams_summary">Show streams related to videos you watch.</string>
 </resources>
