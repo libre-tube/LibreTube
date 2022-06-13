@@ -173,4 +173,6 @@
     <string name="version">Version %1$s</string>
     <string name="customInstance_summary">Lägg till en tillpassad instans (på egen risk)</string>
     <string name="donate_summary">Ge det detta är värt for dig, om du kan. LibreTube-teamet är mindre än din donation eller hjälp.</string>
+    <string name="show_chapters">Visa kapitel</string>
+    <string name="hide_chapters">Dölj kapitel</string>
 </resources>
