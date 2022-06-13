@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/instance">
+
+        <ListPreference
+            android:icon="@drawable/ic_server"
+            app:defaultValue="https://pipedapi.kavin.rocks/"
+            app:entries="@array/instances"
+            app:entryValues="@array/instancesValue"
+            app:key="selectInstance"
+            app:title="@string/instances" />
+
+        <Preference
+            app:key="customInstance"
+            app:title="@string/customInstance"
+            app:summary="@string/customInstance_summary"
+            android:icon="@drawable/ic_add_instance" />
+
+        <Preference
+            app:key="clearCustomInstances"
+            app:title="@string/clear_customInstances"
+            android:icon="@drawable/ic_trash" />
+
+        <Preference
+            android:icon="@drawable/ic_login"
+            android:summary="@string/notgmail"
+            app:key="login_register"
+            app:title="@string/login_register" />
+
+        <Preference
+            android:icon="@drawable/ic_upload"
+            android:summary="@string/import_from_yt_summary"
+            app:key="import_from_yt"
+            app:title="@string/import_from_yt" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

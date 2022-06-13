@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:paddingHorizontal="20dp" android:paddingVertical="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:paddingHorizontal="20dp" android:paddingVertical="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:paddingHorizontal="20dp" android:paddingVertical="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:paddingHorizontal="20dp" android:paddingVertical="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:paddingHorizontal="20dp" android:paddingVertical="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -131,26 +131,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/license_summary" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/update"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/update_summary" />
 
         </LinearLayout>
 

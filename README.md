@@ -8,6 +8,7 @@
 [![Reddit](https://libre-tube.github.io/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
  
 [<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/en/packages/com.github.libretube/)
+[<img src="https://libre-tube.github.io/assets/izzyload.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)
 [<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" height="80">](https://github.com/libre-tube/LibreTube/releases/latest)
 [<img src="https://libre-tube.github.io/assets/tgload.png" alt="Get it on GitHub" height="80">](https://t.me/LibreTube)
 </div>
@@ -49,6 +50,8 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 </a>
 
 ### Donate
+[![Support us on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dlibretubeteam%26type%3Dpatrons&style=for-the-badge)](https://patreon.com/libretubeteam)
+
 **BTC:** `bc1q0hk2smc74ej8fxupfrp05wk867e54e2zztnxfc`
 
 **XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`

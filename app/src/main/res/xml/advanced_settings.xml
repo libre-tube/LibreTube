@@ -68,4 +68,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory>
+
+        <SwitchPreference
+            app:key="related_streams_toggle"
+            app:title="@string/related_streams"
+            app:summary="@string/related_streams_summary"
+            android:defaultValue="true"
+            android:icon="@drawable/ic_list"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -24,7 +24,7 @@
     <string name="importsuccess">Tilattu</string>
     <string name="dlcomplete">Lataus on valmis.</string>
     <string name="downloadfailed">Lataus epäonnistui.</string>
-    <string name="vlcerror">Ei voi avata VLC:ssä. Ehkä sitä ei ole vielä asennettu\?</string>
+    <string name="vlcerror">Ei voi avata VLC:ssä. Sitä ei ehkä ole asennettu.</string>
     <string name="server_error">Palvelin vastasi ongelmaan. Ehkä kokeile toista instanssia\?</string>
     <string name="empty">Käyttäjätunnus ja salasana eivät voi olla tyhjiä.</string>
     <string name="notgmail">Tämä ei ole Gmail-tilisi.</string>
@@ -92,4 +92,16 @@
     <string name="color_purple">Violetti</string>
     <string name="oledTheme">OLED-teema</string>
     <string name="sponsorblock_notifications">Ilmoitukset</string>
+    <string name="authors">Tekijät</string>
+    <string name="no_replies">Tähän kommenttiin ei ole vastauksia.</string>
+    <string name="update_available">Versio %1$s on saatavilla.</string>
+    <string name="appearance">Ulkonäkö</string>
+    <string name="downloads">Lataukset</string>
+    <string name="video_format">Videoformaatti</string>
+    <string name="app_uptodate">Sovellus ajan tasalla</string>
+    <string name="donate">Lahjoita</string>
+    <string name="advanced_summary">Soitin, lataukset, historia</string>
+    <string name="appearance_summary">Tee sovelluksesta haluamasi näköinen.</string>
+    <string name="advanced">Edistynyt</string>
+    <string name="live">Live</string>
 </resources>

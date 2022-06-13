@@ -4,17 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.fragments.SearchFragment
 import com.google.android.material.imageview.ShapeableImageView
 
 class SearchHistoryAdapter(
     private val context: Context,
     private var historyList: List<String>,
-    private val editText: AutoCompleteTextView
+    private val editText: EditText,
+    private val searchFragment: SearchFragment
 ) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
@@ -34,17 +36,14 @@ class SearchHistoryAdapter(
 
         holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
             historyList = historyList - history
-
-            sharedPreferences.edit().putStringSet("search_history", HashSet(historyList))
-                .apply()
-
+            sharedPreferences.edit().putStringSet("search_history", HashSet(historyList)).apply()
             notifyDataSetChanged()
         }
 
         holder.v.setOnClickListener {
             editText.setText(history)
+            searchFragment.fetchSearch(history)
         }
     }
 }

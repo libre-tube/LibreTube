@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
-import com.github.libretube.util.checkUpdate
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AboutFragment : Fragment() {
@@ -64,10 +63,6 @@ class AboutFragment : Fragment() {
                 .create()
                 .show()
             true
-        }
-        val update = view.findViewById<LinearLayout>(R.id.update)
-        update?.setOnClickListener {
-            checkUpdate(childFragmentManager)
         }
     }
 

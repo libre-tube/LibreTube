@@ -2,17 +2,27 @@
 <resources>
     <string-array name="instances">
         <item>kavin.rocks (Official)</item>
-        <item>silkky.cloud</item>
         <item>tokhmi.xyz</item>
         <item>moomoo.me</item>
         <item>mint.lgbt</item>
+        <item>il.ax</item>
+        <item>syncpundit.com</item>
+        <item>mha.fi</item>
+        <item>shimul.me</item>
+        <item>jae.fi</item>
+        <item>privacy.com.de</item>
     </string-array>
     <string-array name="instancesValue">
         <item>https://pipedapi.kavin.rocks/</item>
-        <item>https://api.piped.silkky.cloud</item>
         <item>https://pipedapi.tokhmi.xyz/</item>
-        <item>https://pipedapi.moomoo.me</item>
-        <item>https://pa.mint.lgbt</item>
+        <item>https://pipedapi.moomoo.me/</item>
+        <item>https://pa.mint.lgbt/</item>
+        <item>https://pa.il.ax/</item>
+        <item>https://pipedapi.syncpundit.com/</item>
+        <item>https://api-piped.mha.fi/</item>
+        <item>https://api-piped.shimul.me/</item>
+        <item>https://api.yt.jae.fi/</item>
+        <item>https://piped-api.privacy.com.de/</item>
     </string-array>
     <string-array name="shareHostsList">
         <item>youtube.com"</item>
@@ -449,14 +459,17 @@
         <item>@string/systemLanguage</item>
         <item>Arabic</item>
         <item>Azerbaijani</item>
+        <item>Basque</item>
         <item>Chinese (simplified)</item>
         <item>Czech</item>
+        <item>Danish</item>
         <item>English</item>
         <item>Finnish</item>
         <item>French</item>
         <item>German</item>
         <item>Greek</item>
         <item>Gujarati</item>
+        <item>Hebrew</item>
         <item>Hindi</item>
         <item>Hungarian</item>
         <item>Indonesian</item>
@@ -475,20 +488,24 @@
         <item>Sorani</item>
         <item>Spanish</item>
         <item>Turkish</item>
+        <item>Ukrainian</item>
     </string-array>
 
     <string-array name="languagesValue">
         <item>sys</item>
         <item>ar</item>
         <item>az</item>
+        <item>eu</item>
         <item>zh</item>
         <item>cs</item>
+        <item>da</item>
         <item>en</item>
         <item>fi</item>
         <item>fr</item>
         <item>de</item>
         <item>el</item>
         <item>gu</item>
+        <item>he</item>
         <item>hi</item>
         <item>hu</item>
         <item>in</item>
@@ -507,6 +524,7 @@
         <item>ckb</item>
         <item>es</item>
         <item>tr</item>
+        <item>uk</item>
     </string-array>
 
     <string-array name="themes">
@@ -580,14 +598,14 @@
     </string-array>
 
     <string-array name="icons">
-        <item>Default</item>
-        <item>Legacy</item>
-        <item>Gradient</item>
-        <item>Fire</item>
-        <item>Torch</item>
-        <item>Shaped</item>
-        <item>Flame</item>
-        <item>Bird</item>
+        <item>@string/defaultIcon</item>
+        <item>@string/legacyIcon</item>
+        <item>@string/gradientIcon</item>
+        <item>@string/fireIcon</item>
+        <item>@string/torchIcon</item>
+        <item>@string/shapedIcon</item>
+        <item>@string/flameIcon</item>
+        <item>@string/birdIcon</item>
     </string-array>
     <string-array name="iconsValue">
         <item>MainActivity</item>
@@ -604,7 +622,6 @@
         <item>MP4</item>
         <item>MKV</item>
     </string-array>
-
     <string-array name="videoFormatsValues">
         <item>.mp4</item>
         <item>.mkv</item>
@@ -619,7 +636,6 @@
         <item>1.5x</item>
         <item>2x</item>
     </string-array>
-
     <string-array name="playbackSpeedValues">
         <item>0.25F</item>
         <item>0.5F</item>
@@ -636,7 +652,6 @@
         <item>@string/movies_directory</item>
         <item>@string/sdcard</item>
     </string-array>
-
     <string-array name="downloadLocationValues">
         <item>downloads</item>
         <item>music</item>
