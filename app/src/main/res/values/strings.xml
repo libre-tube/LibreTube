@@ -173,4 +173,6 @@
     <string name="about_summary">Get to know team LibreTube and how it all happens.</string>
     <string name="related_streams">Related streams</string>
     <string name="related_streams_summary">Show related streams to videos.</string>
+    <string name="show_chapters">Show chapters</string>
+    <string name="hide_chapters">Hide chapters</string>
 </resources>
