@@ -173,4 +173,6 @@
     <string name="shapedIcon">צורה טיפשית</string>
     <string name="related_streams">תזרימים קשורים</string>
     <string name="related_streams_summary">הצגת תזרימים שקשורים לסרטון.</string>
+    <string name="show_chapters">הצגת פרקים</string>
+    <string name="hide_chapters">הסתרת פרקים</string>
 </resources>
