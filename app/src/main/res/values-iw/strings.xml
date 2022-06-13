@@ -28,7 +28,7 @@
     <string name="success">בוצע.</string>
     <string name="fail">נכשל :(</string>
     <string name="about">על אודות</string>
-    <string name="lightTheme">אור זורח</string>
+    <string name="lightTheme">ערכת עיצוב בהירה</string>
     <string name="subscribers">%1$s מנויים</string>
     <string name="comments">הערות</string>
     <string name="choose_filter">בחירת מסנן חיפוש</string>
@@ -50,11 +50,11 @@
     <string name="category_outro_description">מידע לאחר הסיום. לא למסקנות עם מידע.</string>
     <string name="license">רישיון</string>
     <string name="color_accent">צבעים משניים</string>
-    <string name="color_red">אדום</string>
-    <string name="color_yellow">צהוב</string>
-    <string name="color_green">ירוק</string>
-    <string name="color_purple">סגול</string>
-    <string name="oledTheme">ערכת עיצוב ל־OLED</string>
+    <string name="color_red">אדום אתנחתא</string>
+    <string name="color_yellow">צהוב צורח</string>
+    <string name="color_green">ירוק יוקד</string>
+    <string name="color_purple">סגול סובלני</string>
+    <string name="oledTheme">ערכת עיצוב שחורה</string>
     <string name="sponsorblock_notifications">התראות</string>
     <string name="app_icon">סמל</string>
     <string name="enabled">פעיל</string>
@@ -67,7 +67,7 @@
     <string name="download_directory_summary">איפה יאוחסנו פריטי המדיה שבחרת להוריד.</string>
     <string name="website_summary">כדאי לבקר באתר למידע נוסף על היישום והיכולות שלו.</string>
     <string name="donate">תרומה</string>
-    <string name="license_summary">הרישיון הציבורי הכללי של גנו הוא רישיון חופשי ומתירני לתוכנה ולסוגים נוספים של יצירות.</string>
+    <string name="license_summary">GPLv3+‎ הוא רישיון חופשי ומתירני. מותר להשתמש, לחקור, לערוך ולשתף, עם כולם.</string>
     <string name="update_summary">לחיצה כאן תבדוק אם היישומון עדכני.</string>
     <string name="player">נגן</string>
     <string name="library">ספרייה</string>
@@ -90,7 +90,7 @@
     <string name="vlc">פתיחה ב־VLC</string>
     <string name="sponsorblock_summary">משתמש ב־API ‏https://sponsor.ajay.app/‎</string>
     <string name="sponsorblock_state">פעיל</string>
-    <string name="youtube">YouTube</string>
+    <string name="youtube">YouTube‎</string>
     <string name="download">הורדה</string>
     <string name="username">שם משתמש</string>
     <string name="registered">ההרשמה הצליחה. עכשיו אפשר להירשם למינוי לערוצים.</string>
@@ -110,7 +110,7 @@
     <string name="areYouSure">למחוק את רשימת הנגינה\?</string>
     <string name="playlistCreated">נוצרה רשימת נגינה.</string>
     <string name="changeLanguage">שפה</string>
-    <string name="darkTheme">אפלה נעלמת</string>
+    <string name="darkTheme">ערכת עיצוב כהה</string>
     <string name="instance">עותק</string>
     <string name="videoCount">%1$s סרטונים</string>
     <string name="category_interaction_description">כשיש תזכורת קצרה לעשות לייק, להירשם למינוי או לעקוב באמצע התוכן. אם זה ארוך או על משהו מסוים, זה אמור להיות קידום עצמי במקום.</string>
@@ -119,13 +119,13 @@
     <string name="retry">לנסות שוב</string>
     <string name="sponsorblock">חסימת חסות</string>
     <string name="category_segments">מקטעים</string>
-    <string name="material_you">Mystic Material 3</string>
+    <string name="material_you">Mystic Material 3‎</string>
     <string name="update_available">גרסה %1$s זמינה כעת</string>
     <string name="segment_skipped">מקטע שדולג</string>
     <string name="category_sponsor">נותן חסות</string>
     <string name="category_selfpromo">קידום לא בתשלום/עצמי</string>
     <string name="disabled">כבוי</string>
-    <string name="piped">Piped</string>
+    <string name="piped">Piped‎</string>
     <string name="downloads">הורדות</string>
     <string name="video_format_summary">להמיר קבצים רק אם גם השמע והסרטון התקבלו.</string>
     <string name="contributing">תרומה</string>
@@ -138,7 +138,7 @@
     <string name="advanced">מתקדם</string>
     <string name="appearance_summary">התאמת היישומון לטעמך.</string>
     <string name="category_intro_description">פרק זמן ללא תוכן ממשי. יכולה להיות השהייה, תמונה ללא תזוזה, הנפשה מחזורית. אסור להשתמש בזה למעברונים שמכילים מידע.</string>
-    <string name="contributing_summary">אם יש לך רעיונות, תרגומים, שינויים בעיצוב, ניקוי קוד או שינויי קוד מעמיקים, נשמח לקבל עזרה. ככל שיותר נעשה כך היישומון משתפר יותר!</string>
+    <string name="contributing_summary">אפשר לספק רעיונות, תרגומים, שינויים בעיצוב, ניקוי שינויים מעמיקים בקוד. ככל שיותר נעשה כך היישומון משתפר יותר!</string>
     <string name="category_selfpromo_description">דומה ל„נותן חסות” למעט קידום עצמי ללא תשלום. לרבות סעיפים על אביזרים ממותגים, תרומות או מידע על שיתופי פעולה.</string>
     <string name="category_intro">הפוגה/הנפשת הקדמה</string>
     <string name="authors">יוצרים</string>
@@ -170,4 +170,7 @@
     <string name="instance_api_url">כתובת API של העותק</string>
     <string name="addInstance">הוספת עותק</string>
     <string name="clear_customInstances">מחיקת עותקים אחרים</string>
+    <string name="shapedIcon">צורה טיפשית</string>
+    <string name="related_streams">תזרימים קשורים</string>
+    <string name="related_streams_summary">הצגת תזרימים שקשורים לסרטון.</string>
 </resources>
