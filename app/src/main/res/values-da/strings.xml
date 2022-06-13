@@ -161,4 +161,15 @@
     <string name="category_outro">Slutinfo og rulletekst</string>
     <string name="category_outro_description">Info som kommer efter slutten af videoen. Ikke for konklusioner med info.</string>
     <string name="license_summary">GPLv3+ er en gemenfrihedslig lisens. Brug, studer, ændre og del; med alle.</string>
+    <string name="instance_summary">Piped, indlogging, abonnementer</string>
+    <string name="customInstance_summary">Læg til en egendefineret instans (på egen risiko)</string>
+    <string name="instance_name">Navn på instans</string>
+    <string name="instance_api_url">URL til instansens API</string>
+    <string name="addInstance">Læg til instans</string>
+    <string name="clear_customInstances">Tøm egendefinerede instanser</string>
+    <string name="invalid_url">Skriv ind en URL der virker</string>
+    <string name="related_streams">Relaterede strømmer</string>
+    <string name="version">Version %1$s</string>
+    <string name="about_summary">Bliv kendt med LibreTube-laget og hvordan det hele går til.</string>
+    <string name="related_streams_summary">Vis videoer relateret til det du ser.</string>
 </resources>
