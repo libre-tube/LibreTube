@@ -19,3 +19,4 @@ Signed-off-by: {data['commit']['author']['name']}
 bot.send_document(TG_CHAT_ID, open('app-arm64-v8a-debug.apk', 'rb'))
 bot.send_document(TG_CHAT_ID, open('app-armeabi-v7a-debug.apk', 'rb'))
 bot.send_document(TG_CHAT_ID, open('app-x86_64-debug.apk', 'rb'))
+bot.send_document(TG_CHAT_ID, open('app-x86-debug.apk', 'rb'))
