@@ -173,4 +173,6 @@
     <string name="clear_customInstances">Tøm egendefinerte instanser</string>
     <string name="related_streams">Relaterte strømmer</string>
     <string name="related_streams_summary">Vis videoer relatert til det du ser.</string>
+    <string name="show_chapters">Vis kapitler</string>
+    <string name="hide_chapters">Skjul kapitler</string>
 </resources>
