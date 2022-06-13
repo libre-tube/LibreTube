@@ -218,7 +218,10 @@ class ChannelFragment : Fragment() {
                     val channelImage = view.findViewById<ImageView>(R.id.channel_image)
                     Picasso.get().load(response.bannerUrl).into(bannerImage)
                     Picasso.get().load(response.avatarUrl).into(channelImage)
-                    channelAdapter = ChannelAdapter(response.relatedStreams!!.toMutableList())
+                    channelAdapter = ChannelAdapter(
+                        response.relatedStreams!!.toMutableList(),
+                        childFragmentManager
+                    )
                     view.findViewById<RecyclerView>(R.id.channel_recView).adapter = channelAdapter
                 }
             }
