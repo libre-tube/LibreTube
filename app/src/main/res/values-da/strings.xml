@@ -172,4 +172,7 @@
     <string name="version">Version %1$s</string>
     <string name="about_summary">Bliv kendt med LibreTube-laget og hvordan det hele går til.</string>
     <string name="related_streams_summary">Vis videoer relateret til det du ser.</string>
+    <string name="empty_instance">Du må fylde ind navnet og API-URL.</string>
+    <string name="show_chapters">Vis kapitler</string>
+    <string name="hide_chapters">Skjul kaptitler</string>
 </resources>
