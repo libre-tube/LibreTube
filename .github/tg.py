@@ -15,8 +15,6 @@ bot.send_photo(TG_CHAT_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][
 {data['commit']['message']}
 
 Signed-off-by: {data['commit']['author']['name']}
-
-[Commit]({data}['html_url'])
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
 bot.send_document(TG_CHAT_ID, open('app-arm64-v8a-debug.apk', 'rb'))
 bot.send_document(TG_CHAT_ID, open('app-armeabi-v7a-debug.apk', 'rb'))
