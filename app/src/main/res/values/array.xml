@@ -659,4 +659,12 @@
         <item>sdcard</item>
     </string-array>
 
+    <string-array name="bufferingGoal">
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+        <item>450</item>
+    </string-array>
+
 </resources>
