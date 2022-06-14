@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -199,19 +200,12 @@ class MainActivity : AppCompatActivity() {
                 .replace("/embed/", "")
             val bundle = Bundle()
             bundle.putString("videoId", watch)
-            val frag = PlayerFragment()
-            frag.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
-            Handler().postDelayed({
-                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                motionLayout.transitionToEnd()
-                motionLayout.transitionToStart()
-            }, 100)
+            // for time stamped links
+            if (data.query?.contains("t=")!!) {
+                val timeStamp = data.query.toString().split("t=")[1]
+                bundle.putLong("timeStamp", timeStamp.toLong())
+            }
+            loadWatch(bundle)
         } else if (data.path!!.contains("/watch") && data.query != null) {
             Log.d("dafaq", data.query!!)
             var watch = data.query!!
@@ -226,37 +220,39 @@ class MainActivity : AppCompatActivity() {
             }
             var bundle = Bundle()
             bundle.putString("videoId", watch.replace("v=", ""))
-            var frag = PlayerFragment()
-            frag.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
-            Handler().postDelayed({
-                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                motionLayout.transitionToEnd()
-                motionLayout.transitionToStart()
-            }, 100)
+            // for time stamped links
+            if (data.query?.contains("t=")!!) {
+                val timeStamp = data.query.toString().split("t=")[1]
+                bundle.putLong("timeStamp", timeStamp.toLong())
+            }
+            loadWatch(bundle)
         } else {
             var watch = data.path!!.replace("/", "")
             var bundle = Bundle()
             bundle.putString("videoId", watch)
-            var frag = PlayerFragment()
-            frag.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
-            Handler().postDelayed({
-                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                motionLayout.transitionToEnd()
-                motionLayout.transitionToStart()
-            }, 100)
+            // for time stamped links
+            if (data.query?.contains("t=")!!) {
+                val timeStamp = data.query.toString().split("t=")[1]
+                bundle.putLong("timeStamp", timeStamp.toLong())
+            }
+            loadWatch(bundle)
         }
+    }
+
+    private fun loadWatch(bundle: Bundle) {
+        var frag = PlayerFragment()
+        frag.arguments = bundle
+        supportFragmentManager.beginTransaction()
+            .remove(PlayerFragment())
+            .commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, frag)
+            .commitNow()
+        Handler(Looper.getMainLooper()).postDelayed({
+            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+            motionLayout.transitionToEnd()
+            motionLayout.transitionToStart()
+        }, 100)
     }
 
     override fun onBackPressed() {

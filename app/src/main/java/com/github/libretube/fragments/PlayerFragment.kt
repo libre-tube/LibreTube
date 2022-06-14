@@ -435,9 +435,15 @@ class PlayerFragment : Fragment() {
                     prepareExoPlayerView()
                     if (response.chapters != null) initializeChapters(response.chapters)
                     setResolutionAndSubtitles(view, response)
+                    // support for time stamped links
+                    if (arguments?.getLong("timeStamp") != null) {
+                        val position = arguments?.getLong("timeStamp")!! * 1000
+                        exoPlayer.seekTo(position)
+                    }
                     exoPlayer.prepare()
                     exoPlayer.play()
                     initializePlayerView(view, response)
+                    initializePlayerNotification(requireContext())
                     if (!relatedStreamsEnabled) toggleComments()
                 }
             }
@@ -843,8 +849,6 @@ class PlayerFragment : Fragment() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
         exoPlayer.setPlaybackSpeed(playbackSpeed!!)
-
-        initializePlayerNotification(requireContext())
     }
 
     private fun initializePlayerNotification(c: Context) {
