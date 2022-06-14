@@ -174,4 +174,11 @@
     <string name="related_streams">Əlaqədar yayımlar</string>
     <string name="related_streams_summary">Videolara əlaqəli yayımları göstərin.</string>
     <string name="category_filler">Əlaqəsiz/Zarafatlar</string>
+    <string name="show_chapters">Fəsilləri göstərin</string>
+    <string name="category_music_offtopic">Musiqisizlik: Musiqi olmayan bölmə</string>
+    <string name="category_preview">Önbaxış/Anons</string>
+    <string name="category_preview_description">Eyni seriyanın bu və ya gələcək videolarında nələrin olacağını göstərən, lakin əlavə məlumat təqdim etməyən seqmentlər üçün. Əgər o, yalnız burada görünən klipləri ehtiva edirsə, bu, çox güman ki, düzgün kateqoriya deyil.</string>
+    <string name="hide_chapters">Fəsilləri gizlədin</string>
+    <string name="category_filler_description">Bu, videonun əsas məzmununu başa düşmək üçün tələb olunmayan, yalnız doldurucu və ya yumor üçün əlavə edilmiş tangensial səhnələr üçündür.</string>
+    <string name="category_music_offtopic_description">Bu, yalnız musiqi videolarında istifadə üçündür. O, rəsmi qarışıqların bir hissəsi deyil, videonun hissələrini əhatə etməlidir. Nəhayət, video Spotify və ya hər hansı digər miks versiyasını mümkün qədər yaxından xatırlatmalı və ya danışıq və ya digər diqqəti yayındıran amilləri azaltmalıdır.</string>
 </resources>
