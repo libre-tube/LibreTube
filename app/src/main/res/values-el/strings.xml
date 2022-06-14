@@ -173,4 +173,6 @@
     <string name="version">Έκδοση %1$s</string>
     <string name="related_streams">Σχετικά βίντεο</string>
     <string name="related_streams_summary">Εμφάνιση σχετικών βίντεο κάτω από το βίντεο.</string>
+    <string name="show_chapters">Εμφάνιση κεφαλαίων</string>
+    <string name="hide_chapters">Απόκρυψη κεφαλαίων</string>
 </resources>
