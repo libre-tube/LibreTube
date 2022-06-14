@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="cancel">Ezeztatu</string>
-    <string name="startpage">Etxea</string>
+    <string name="startpage">Hasiera</string>
     <string name="subscriptions">Harpidetzak</string>
     <string name="library">Liburutegia</string>
     <string name="yes">Bai</string>
@@ -18,7 +18,7 @@
     <string name="logout">Saioa itxi</string>
     <string name="loggedIn">Saioa hasita.</string>
     <string name="registered">Erregistratuta. Orain kanaletan harpidetu zaitezke.</string>
-    <string name="already_logged_in">Iadanik saioa hasia duzu. Saioa itxi beharko duzu.</string>
+    <string name="already_logged_in">Saioa hasia duzu. Saioa itxi dezakezu.</string>
     <string name="login_first">Saioa hasi eta saiatu berriro mesedez.</string>
     <string name="instances">Hautatu instantzia</string>
     <string name="customInstance">Instantzia pertsonalizatua</string>
@@ -28,7 +28,7 @@
     <string name="importsuccess">Harpidetuta</string>
     <string name="subscribeIsEmpty">Lehenengo kanalen batean harpidetu mesedez.</string>
     <string name="cannotDownload">Ezin da deskargatu jario hau.</string>
-    <string name="dlcomplete">Deskarga egina.</string>
+    <string name="dlcomplete">Deskargatuta.</string>
     <string name="dlisinprogress">Itxaron deskarga guztiak bukatu arte mesedez…</string>
     <string name="downloadfailed">Ezin izan da deskargatu.</string>
     <string name="vlc">Ireki VLC-n</string>
@@ -58,7 +58,7 @@
     <string name="settings">Ezarpenak</string>
     <string name="location">Lekua</string>
     <string name="instance">Instantzia</string>
-    <string name="customization">Doiketak</string>
+    <string name="customization">Ezarpenak</string>
     <string name="website">Webgunea</string>
     <string name="videoCount">%1$s bideo</string>
     <string name="noInternet">Konektatu internetera lehenengo.</string>
@@ -71,11 +71,11 @@
     <string name="music_albums">YT Musika albumak</string>
     <string name="music_playlists">YT Musika erreprodukzio zerrendak</string>
     <string name="defaultTab">Fitxa lehenetsia</string>
-    <string name="sponsorblock">Iragarki blokeatzailea</string>
+    <string name="sponsorblock">Babesle blokeatzailea</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app APIa erabiltzen du</string>
-    <string name="category_sponsor_description">Ordaindutako promozioak, ordaindutako erreferentziak eta iragarki zuzenak. Autopromozio edo gustoko dituzten debaldeko iragarkietarako ez.</string>
+    <string name="category_sponsor_description">Ordaindutako promozioak, ordaindutako erreferentziak eta iragarki zuzenak. Ez da autopromozioa edo gustoko dituzten debaldeko iragarkietarako.</string>
     <string name="category_selfpromo">Ez ordaindua/Autopromozioa</string>
-    <string name="category_selfpromo_description">\"Pateozinatzaile\"aren antzekoa, baino ez da ordaintzen edo autopromozionatzen da. Honek donazioak, salgaiak edo kolaboratu dutenen informazioa dakar.</string>
+    <string name="category_selfpromo_description">\"Babesle\"aren antzekoa, baino ez da ordaintzen edo autopromozioa da. Honek donazioen, salgaien edo kolaboratu dutenen informazioa dakar.</string>
     <string name="category_interaction">Interakzio gogorarazpena (gustokoa eta harpidetza)</string>
     <string name="category_interaction_description">Edukien erdian gustokoen, harpidetzen edo jarraipenen jakinarazpen labur bat dagoenean. Zerbaiti buruz zehatza bada edo luzea bada, autopromozio gisa behar luke.</string>
     <string name="category_intro_description">Eduki errealik gabeko tartea. Etenaldi bat izan liteke, fotograma estatikoa, animazio errepikatua. Ez da erabili behar informazioa duten trantsizioetarako.</string>
@@ -129,7 +129,7 @@
     <string name="flameIcon">Sugar hegalaria</string>
     <string name="birdIcon">Hegazti indartua</string>
     <string name="search_hint">Bilaketa</string>
-    <string name="unsubscribe">Harpidetza kendu</string>
+    <string name="unsubscribe">Kendu harpidetza</string>
     <string name="loggedout">Saioa itxita.</string>
     <string name="empty">Erabiltzaile izena eta pasahitza sartu behar dituzu.</string>
     <string name="createPlaylist">Erreprodukzio zerrenda sortu</string>
@@ -142,10 +142,10 @@
     <string name="history">Historiala</string>
     <string name="search_history">Bilatu historiala</string>
     <string name="playlists">Erreprodukzio zerrendak</string>
-    <string name="category_sponsor">Iragarkiak</string>
+    <string name="category_sponsor">Babeslea</string>
     <string name="segment_skipped">Alde batera utzitako zatiak</string>
     <string name="sponsorblock_state">Piztuta</string>
-    <string name="category_segments">Zatiak</string>
+    <string name="category_segments">Segmentuak</string>
     <string name="contributing_summary">Ideiak, itzulpenak, diseinu aldaketak, kode moldaketak... Zenbat eta gehiago egin orduan eta hobeto!</string>
     <string name="downloads">Deskargak</string>
     <string name="app_behavior">Portaera</string>
