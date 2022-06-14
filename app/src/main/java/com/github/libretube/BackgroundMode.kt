@@ -11,7 +11,6 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import gen._base._base_java__rjava_resources.srcjar.R.id.title
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -46,13 +45,15 @@ class BackgroundMode {
     private lateinit var playerNotification: PlayerNotificationManager
 
     /**
+     * The [AudioAttributes] handle the audio focus of the [player]
+     */
+    private lateinit var audioAttributes: AudioAttributes
+
+    /**
      * Initializes the [player] with the [MediaItem].
      */
     private fun initializePlayer(c: Context) {
-        /**
-         * The [audioAttributes] handle the audio focus of the [player]
-         */
-        val audioAttributes = AudioAttributes.Builder()
+        audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MUSIC)
             .build()
@@ -68,12 +69,16 @@ class BackgroundMode {
     /**
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
-    private fun initializePlayerNotification(c: Context, streams: Streams) {
+    private fun initializePlayerNotification(c: Context) {
         playerNotification = PlayerNotificationManager
             .Builder(c, 1, "background_mode")
             // set the description of the notification
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(streams.title!!, streams.uploader!!, streams.thumbnailUrl!!)
+                DescriptionAdapter(
+                    response?.title!!,
+                    response?.uploader!!,
+                    response?.thumbnailUrl!!
+                )
             )
             .build()
         playerNotification.apply {
@@ -113,7 +118,7 @@ class BackgroundMode {
             job.join()
 
             initializePlayer(c)
-            initializePlayerNotification(c, response!!)
+            initializePlayerNotification(c)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
