@@ -175,4 +175,12 @@
     <string name="related_streams_summary">Erakutsi bideoekin erlazionatutako fluxuak.</string>
     <string name="show_chapters">Erakutsi kapituluak</string>
     <string name="hide_chapters">Ezkutatu kapituluak</string>
+    <string name="category_music_offtopic">Musika: Musikarik gabeko atala</string>
+    <string name="category_preview">Aurrebista</string>
+    <string name="category_preview_description">Serie bereko bideo honetan edo etorkizunean agertuko dena erakusten duten segmentuetarako, baina ez dute informazio gehigarririk ematen. Hemen bakarrik agertzen diren klipak baditu, oso litekeena da hori ez izatea kategoria zuzena.</string>
+    <string name="buffering_goal_summary">Bideoak aurrekargatzen diren segundo kopuru maximoa.</string>
+    <string name="category_filler">Betegarria/Txisteak</string>
+    <string name="category_filler_description">Bideoaren eduki nagusia ulertzeko beharrezkoak ez diren betegarrirako edo umorerako soilik gehitutako eszenak dira.</string>
+    <string name="category_music_offtopic_description">Musika-bideoetan bakarrik erabil daiteke. Nahaste ofizialetakoak ez diren bideo-zatiak estaliko ditu. Azkenean, bideoak Spotifyaren edo nahasteko beste edozein bertsioren antzekoa izan behar du, edo hitz egitea edo beste entretenimendu batzuk murriztu behar ditu.</string>
+    <string name="buffering_goal">Buffering helburua</string>
 </resources>
