@@ -207,7 +207,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putString("videoId", watch)
             // for time stamped links
-            if (data.query?.contains("t=")!!) {
+            if (data.query != null && data.query?.contains("t=")!!) {
                 val timeStamp = data.query.toString().split("t=")[1]
                 bundle.putLong("timeStamp", timeStamp.toLong())
             }
@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
             var bundle = Bundle()
             bundle.putString("videoId", watch.replace("v=", ""))
             // for time stamped links
-            if (data.query?.contains("t=")!!) {
+            if (data.query != null && data.query?.contains("t=")!!) {
                 val timeStamp = data.query.toString().split("t=")[1]
                 bundle.putLong("timeStamp", timeStamp.toLong())
             }
@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity() {
             var bundle = Bundle()
             bundle.putString("videoId", watch)
             // for time stamped links
-            if (data.query?.contains("t=")!!) {
+            if (data.query != null && data.query?.contains("t=")!!) {
                 val timeStamp = data.query.toString().split("t=")[1]
                 bundle.putLong("timeStamp", timeStamp.toLong())
             }
