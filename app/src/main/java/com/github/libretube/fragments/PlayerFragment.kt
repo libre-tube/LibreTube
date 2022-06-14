@@ -58,6 +58,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
+import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.google.android.exoplayer2.C
@@ -85,11 +86,11 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -122,6 +123,10 @@ class PlayerFragment : Fragment() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
+
+    private lateinit var title: String
+    private lateinit var uploader: String
+    private lateinit var thumbnailUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -209,7 +214,7 @@ class PlayerFragment : Fragment() {
 
         playerMotionLayout.progress = 1.toFloat()
         playerMotionLayout.transitionToStart()
-        fetchJson(view)
+        fetchJsonAndInitPlayer(view)
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
@@ -373,7 +378,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun fetchJson(view: View) {
+    private fun fetchJsonAndInitPlayer(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -388,6 +393,40 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                // for the notification description adapter
+                title = response.title!!
+                uploader = response.uploader!!
+                thumbnailUrl = response.thumbnailUrl!!
+
+                // check whether related streams are enabled
+                val sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(requireContext())
+                relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
+                runOnUiThread {
+                    createExoPlayer(view)
+                    prepareExoPlayerView()
+                    if (response.chapters != null) initializeChapters(response.chapters)
+                    setResolutionAndSubtitles(view, response)
+                    // support for time stamped links
+                    if (arguments?.getLong("timeStamp") != null) {
+                        val position = arguments?.getLong("timeStamp")!! * 1000
+                        exoPlayer.seekTo(position)
+                    }
+                    exoPlayer.prepare()
+                    exoPlayer.play()
+                    initializePlayerView(view, response)
+                    initializePlayerNotification(requireContext())
+                    fetchSponsorBlockSegments()
+                    if (!relatedStreamsEnabled) toggleComments()
+                }
+            }
+        }
+        run()
+    }
+
+    private fun fetchSponsorBlockSegments() {
+        fun run() {
+            lifecycleScope.launchWhenCreated {
                 if (SponsorBlockSettings.sponsorBlockEnabled) {
                     val categories: ArrayList<String> = arrayListOf()
                     if (SponsorBlockSettings.introEnabled) {
@@ -425,26 +464,6 @@ class PlayerFragment : Fragment() {
                             return@launchWhenCreated
                         }
                     }
-                }
-                // check whether related streams are enabled
-                val sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(requireContext())
-                relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
-                runOnUiThread {
-                    createExoPlayer(view)
-                    prepareExoPlayerView()
-                    if (response.chapters != null) initializeChapters(response.chapters)
-                    setResolutionAndSubtitles(view, response)
-                    // support for time stamped links
-                    if (arguments?.getLong("timeStamp") != null) {
-                        val position = arguments?.getLong("timeStamp")!! * 1000
-                        exoPlayer.seekTo(position)
-                    }
-                    exoPlayer.prepare()
-                    exoPlayer.play()
-                    initializePlayerView(view, response)
-                    initializePlayerNotification(requireContext())
-                    if (!relatedStreamsEnabled) toggleComments()
                 }
             }
         }
@@ -863,6 +882,9 @@ class PlayerFragment : Fragment() {
 
         playerNotification = PlayerNotificationManager
             .Builder(c, 1, "background_mode")
+            .setMediaDescriptionAdapter(
+                DescriptionAdapter(title, uploader, thumbnailUrl)
+            )
             .build()
 
         playerNotification.apply {
