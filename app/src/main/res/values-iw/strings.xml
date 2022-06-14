@@ -175,4 +175,10 @@
     <string name="related_streams_summary">הצגת תזרימים שקשורים לסרטון.</string>
     <string name="show_chapters">הצגת פרקים</string>
     <string name="hide_chapters">הסתרת פרקים</string>
+    <string name="category_filler">בדיחות/משיקים למילוי</string>
+    <string name="category_filler_description">זה מיועד לסצנות משיקות שנוספו רק כדי להעביר זמן או הומור שאינם נחוצים להבנת התוכן העיקרי של הסרטון.</string>
+    <string name="category_music_offtopic">מוזיקה: קטע לא מוזיקלי</string>
+    <string name="category_preview">תצוגה מקדימה/סיכום</string>
+    <string name="category_music_offtopic_description">זה מיוחד רק לסרטונים מוזיקליים. הוא אמור לכסות חלקים מהסרטון שאינם חלק מהערבולים הרשמיים. בסוף, הסרטון אמור לחקות את Spotify או כל גרסה מעורבלת אחרת בצורה כמה שיותר נאמנה או לצמצם דיבור או כל הפרעה אחרת.</string>
+    <string name="category_preview_description">למקטעים שמציגים מה עתיד לקרות בסרטון הזה או בסרטונים העוקבים, אך לא מספק מידע נוסף. אם הוא כולל מקטעים שמופיעים רק כאן, סביר להניח שזאת לא הקטגוריה הנכונה.</string>
 </resources>
