@@ -29,40 +29,42 @@ class AboutFragment : Fragment() {
         val topBarText = activity?.findViewById<TextView>(R.id.topBar_textView)
         topBarText?.text = getString(R.string.about)
 
-        val appVersion = view?.findViewById<TextView>(R.id.app_version)
+        val appVersion = view.findViewById<TextView>(R.id.app_version)
         appVersion.text = BuildConfig.VERSION_NAME
 
-        val website = view?.findViewById<LinearLayout>(R.id.website)
-        website?.setOnClickListener {
+        val website = view.findViewById<LinearLayout>(R.id.website)
+        website.setOnClickListener {
             openLinkFromHref("https://libre-tube.github.io/")
         }
-        val authors = view?.findViewById<LinearLayout>(R.id.authors)
-        authors?.setOnClickListener {
+        val authors = view.findViewById<LinearLayout>(R.id.authors)
+        authors.setOnClickListener {
             openLinkFromHref("https://github.com/libre-tube/LibreTube/graphs/contributors")
         }
-        val donate = view?.findViewById<LinearLayout>(R.id.donate)
-        donate?.setOnClickListener {
+        val donate = view.findViewById<LinearLayout>(R.id.donate)
+        donate.setOnClickListener {
             openLinkFromHref("https://libre-tube.github.io/#donate")
         }
-        val contributing = view?.findViewById<LinearLayout>(R.id.contributing)
-        contributing?.setOnClickListener {
+        val contributing = view.findViewById<LinearLayout>(R.id.contributing)
+        contributing.setOnClickListener {
             openLinkFromHref("https://github.com/libre-tube/LibreTube")
         }
         val license = view.findViewById<LinearLayout>(R.id.license)
-        license?.setOnClickListener {
-            val licenseString = view?.context?.assets!!
+        license.setOnClickListener {
+            val licenseString = view.context.assets
                 .open("gpl3.html").bufferedReader().use {
                     it.readText()
                 }
-            val licenseHtml = if (Build.VERSION.SDK_INT >= 24) Html.fromHtml(licenseString, 1)
-            else Html.fromHtml(licenseString)
+            val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(licenseString, 1)
+            } else {
+                Html.fromHtml(licenseString)
+            }
 
-            MaterialAlertDialogBuilder(view?.context!!)
+            MaterialAlertDialogBuilder(view.context!!)
                 .setPositiveButton(getString(R.string.okay)) { _, _ -> }
                 .setMessage(licenseHtml)
                 .create()
                 .show()
-            true
         }
     }
 

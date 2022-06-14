@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="10dp"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/chapter_image"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/chapter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="Title"
+        android:textSize="13sp" />
+
+</LinearLayout>

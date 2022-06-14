@@ -100,6 +100,12 @@
     <string name="category_intro_description">An interval without actual content. Could be a pause, static frame, repeating animation. Should not be used for transitions containing info.</string>
     <string name="category_outro">End cards and credits</string>
     <string name="category_outro_description">Info following the ending. Not for conclusions with info.</string>
+    <string name="category_filler">Filler Tangent/Jokes</string>
+    <string name="category_filler_description">This is for tangential scenes added only for filler or humor that are not required to understand the main content of the video.</string>
+    <string name="category_music_offtopic">Music: Non-Music Section</string>
+    <string name="category_music_offtopic_description">This is only for use in music videos. It should cover parts of the video not part of official mixes. In the end, the video should resemble the Spotify or any other mix version as closely as possible, or should reduce talking or other distractions.</string>
+    <string name="category_preview">Preview/Recap</string>
+    <string name="category_preview_description">For segments that show what is coming up in this or future videos of the same series, but do not provide additional information. If it includes clips that only appear here, this is very likely not the right category.</string>
     <string name="license">License</string>
     <string name="color_accent">Accents</string>
     <string name="color_red">Resting red</string>
@@ -173,4 +179,6 @@
     <string name="about_summary">Get to know team LibreTube and how it all happens.</string>
     <string name="related_streams">Related streams</string>
     <string name="related_streams_summary">Show related streams to videos.</string>
+    <string name="show_chapters">Show chapters</string>
+    <string name="hide_chapters">Hide chapters</string>
 </resources>
