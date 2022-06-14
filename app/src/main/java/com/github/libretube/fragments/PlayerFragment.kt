@@ -430,6 +430,15 @@ class PlayerFragment : Fragment() {
                     if (SponsorBlockSettings.outroEnabled) {
                         categories.add("outro")
                     }
+                    if (SponsorBlockSettings.fillerEnabled) {
+                        categories.add("filler")
+                    }
+                    if (SponsorBlockSettings.musicOfftopicEnabled) {
+                        categories.add("music_offtopic")
+                    }
+                    if (SponsorBlockSettings.previewEnabled) {
+                        categories.add("preview")
+                    }
                     if (categories.size > 0) {
                         segmentData = try {
 
