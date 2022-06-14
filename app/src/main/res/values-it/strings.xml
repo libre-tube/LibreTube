@@ -181,4 +181,6 @@
     <string name="category_music_offtopic_description">Questo è solo per l\'uso in video musicali. Dovrebbe coprire parti del video non parte di mix ufficiali. Alla fine, il video dovrebbe assomigliare al mix di Spotify o a qualsiasi altra versione il più vicino possibile, o dovrebbe ridurre la conversazione o altre distrazioni.</string>
     <string name="category_preview">Anteprima/riepilogo</string>
     <string name="category_preview_description">Per i segmenti che mostrano ciò che sta arrivando in questo o futuri video della stessa serie, ma non forniscono ulteriori informazioni. Se include clip che appaiono solo qui, questa probabilmente non è la categoria giusta.</string>
+    <string name="buffering_goal">Obiettivo di caricamento</string>
+    <string name="buffering_goal_summary">La quantità di secondi che viene precaricata al massimo nei video.</string>
 </resources>
