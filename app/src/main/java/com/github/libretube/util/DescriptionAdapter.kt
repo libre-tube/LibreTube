@@ -5,17 +5,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.net.URL
-
 
 // used to show title and thumbnail of the video in the notification
 class DescriptionAdapter(
     private val title: String,
     private val channelName: String,
-    private val thumbnailUrl: String) :
+    private val thumbnailUrl: String
+) :
     PlayerNotificationManager.MediaDescriptionAdapter {
     override fun getCurrentContentTitle(player: Player): CharSequence {
         // return controller.metadata.description.title.toString()

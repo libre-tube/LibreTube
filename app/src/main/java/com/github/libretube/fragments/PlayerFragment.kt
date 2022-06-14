@@ -18,9 +18,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -86,11 +83,11 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -148,6 +145,11 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
 
+        initializeTransitionLayout(view)
+        fetchJsonAndInitPlayer(view)
+    }
+
+    private fun initializeTransitionLayout(view: View) {
         val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
         relDownloadVideo = view.findViewById(R.id.relPlayer_download)
@@ -214,7 +216,7 @@ class PlayerFragment : Fragment() {
 
         playerMotionLayout.progress = 1.toFloat()
         playerMotionLayout.transitionToStart()
-        fetchJsonAndInitPlayer(view)
+
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
@@ -245,25 +247,11 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
+            val image = view.findViewById<ImageView>(R.id.player_description_arrow)
+            image.animate().rotationBy(180F).setDuration(100).start()
             if (playerDescription.isVisible) {
-                val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-                image.clearAnimation()
                 playerDescription.visibility = View.GONE
             } else {
-                // toggle button
-                val rotate = RotateAnimation(
-                    0F,
-                    180F,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f
-                )
-                rotate.duration = 100
-                rotate.interpolator = LinearInterpolator()
-                rotate.fillAfter = true
-                val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-                image.startAnimation(rotate)
                 playerDescription.visibility = View.VISIBLE
             }
         }
@@ -325,8 +313,6 @@ class PlayerFragment : Fragment() {
         commentsRecView.layoutManager = LinearLayoutManager(view.context)
 
         commentsRecView.setItemViewCacheSize(20)
-        commentsRecView.isDrawingCacheEnabled = true
-        commentsRecView.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
 
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =

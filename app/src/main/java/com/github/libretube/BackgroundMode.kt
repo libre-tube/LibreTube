@@ -3,6 +3,7 @@ package com.github.libretube
 import android.content.Context
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
+import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -10,6 +11,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
+import gen._base._base_java__rjava_resources.srcjar.R.id.title
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -66,13 +68,20 @@ class BackgroundMode {
     /**
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
-    private fun initializePlayerNotification(c: Context) {
+    private fun initializePlayerNotification(c: Context, streams: Streams) {
         playerNotification = PlayerNotificationManager
-            .Builder(c, 1, "background_mode").build()
-        playerNotification.setPlayer(player)
-        playerNotification.setUsePreviousAction(false)
-        playerNotification.setUseNextAction(false)
-        playerNotification.setMediaSessionToken(mediaSession.sessionToken)
+            .Builder(c, 1, "background_mode")
+            // set the description of the notification
+            .setMediaDescriptionAdapter(
+                DescriptionAdapter(streams.title!!, streams.uploader!!, streams.thumbnailUrl!!)
+            )
+            .build()
+        playerNotification.apply {
+            setPlayer(player)
+            setUsePreviousAction(false)
+            setUseNextAction(false)
+            setMediaSessionToken(mediaSession.sessionToken)
+        }
     }
 
     /**
@@ -104,7 +113,7 @@ class BackgroundMode {
             job.join()
 
             initializePlayer(c)
-            initializePlayerNotification(c)
+            initializePlayerNotification(c, response!!)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
