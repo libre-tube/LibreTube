@@ -41,6 +41,21 @@
             app:title="@string/category_outro"
             app:summary="@string/category_outro_description" />
 
+        <SwitchPreferenceCompat
+            app:key="filler_category_key"
+            app:title="@string/category_filler"
+            app:summary="@string/category_filler_description" />
+
+        <SwitchPreferenceCompat
+            app:key="music_offtopic_category_key"
+            app:title="@string/category_music_offtopic"
+            app:summary="@string/category_music_offtopic_description" />
+
+        <SwitchPreferenceCompat
+            app:key="preview_category_key"
+            app:title="@string/category_preview"
+            app:summary="@string/category_preview_description" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

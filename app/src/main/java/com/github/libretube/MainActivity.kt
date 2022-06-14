@@ -69,6 +69,12 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.getBoolean("sponsors_category_key", false)
         SponsorBlockSettings.outroEnabled =
             sharedPreferences.getBoolean("outro_category_key", false)
+        SponsorBlockSettings.fillerEnabled =
+            sharedPreferences.getBoolean("filler_category_key", false)
+        SponsorBlockSettings.musicOfftopicEnabled =
+            sharedPreferences.getBoolean("music_offtopic_category_key", false)
+        SponsorBlockSettings.previewEnabled =
+            sharedPreferences.getBoolean("preview_category_key", false)
 
         ThemeHelper().updateTheme(this)
         LocaleHelper().updateLanguage(this)
@@ -201,7 +207,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = Bundle()
             bundle.putString("videoId", watch)
             // for time stamped links
-            if (data.query?.contains("t=")!!) {
+            if (data.query != null && data.query?.contains("t=")!!) {
                 val timeStamp = data.query.toString().split("t=")[1]
                 bundle.putLong("timeStamp", timeStamp.toLong())
             }
@@ -221,7 +227,7 @@ class MainActivity : AppCompatActivity() {
             var bundle = Bundle()
             bundle.putString("videoId", watch.replace("v=", ""))
             // for time stamped links
-            if (data.query?.contains("t=")!!) {
+            if (data.query != null && data.query?.contains("t=")!!) {
                 val timeStamp = data.query.toString().split("t=")[1]
                 bundle.putLong("timeStamp", timeStamp.toLong())
             }
@@ -231,7 +237,7 @@ class MainActivity : AppCompatActivity() {
             var bundle = Bundle()
             bundle.putString("videoId", watch)
             // for time stamped links
-            if (data.query?.contains("t=")!!) {
+            if (data.query != null && data.query?.contains("t=")!!) {
                 val timeStamp = data.query.toString().split("t=")[1]
                 bundle.putLong("timeStamp", timeStamp.toLong())
             }
