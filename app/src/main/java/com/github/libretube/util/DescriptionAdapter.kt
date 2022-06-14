@@ -36,6 +36,7 @@ class DescriptionAdapter(
         lateinit var bitmap: Bitmap
         val thread = Thread {
             try {
+                // try to parse the thumbnailUrl to a Bitmap
                 val inputStream = URL(thumbnailUrl).openStream()
                 bitmap = BitmapFactory.decodeStream(inputStream)
             } catch (ex: java.lang.Exception) {
@@ -44,6 +45,7 @@ class DescriptionAdapter(
         }
         thread.start()
         thread.join()
+        // return bitmap if initialized
         return try {
             bitmap
         } catch (e: Exception) {
