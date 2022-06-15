@@ -42,7 +42,8 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="5dp"
             app:cardBackgroundColor="@color/duration_background_color"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
 
             <TextView
                 android:id="@+id/playlist_duration"

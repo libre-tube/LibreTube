@@ -42,7 +42,8 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="3dp"
             app:cardBackgroundColor="@color/duration_background_color"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
 
             <TextView
                 android:id="@+id/search_thumbnail_duration"
