@@ -183,4 +183,5 @@
     <string name="category_preview_description">Per i segmenti che mostrano ciò che sta arrivando in questo o futuri video della stessa serie, ma non forniscono ulteriori informazioni. Se include clip che appaiono solo qui, questa probabilmente non è la categoria giusta.</string>
     <string name="buffering_goal">Obiettivo di caricamento</string>
     <string name="buffering_goal_summary">La quantità di secondi che viene precaricata al massimo nei video.</string>
+    <string name="playerVideoFormat">Formato video del lettore</string>
 </resources>
