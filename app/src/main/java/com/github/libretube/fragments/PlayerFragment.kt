@@ -499,6 +499,7 @@ class PlayerFragment : Fragment() {
                     )
                 }
             }
+
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
                 playWhenReady: Boolean,
