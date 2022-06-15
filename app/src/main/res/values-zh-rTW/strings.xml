@@ -77,11 +77,11 @@
     <string name="sponsorblock_state">開啟</string>
     <string name="category_segments">片段</string>
     <string name="category_sponsor_description">含有直接推薦產品，付費宣傳廣告的影片。而非該頻道主自己願意推薦的產品。</string>
-    <string name="category_selfpromo">無收款/自我推薦</string>
+    <string name="category_selfpromo">無贊助/自我推薦</string>
     <string name="category_sponsor">贊助商廣告</string>
     <string name="category_selfpromo_description">跟「贊助商廣告」很類似，但並非廠商付費或自我推薦。此區域包含頻道主所提供的週邊連接、捐款選項，以及合作對象。</string>
     <string name="category_interaction">互動提醒 (喜歡和訂閱)</string>
-    <string name="category_interaction_description">當畫面中出現叫觀眾按讚或訂閱，時間過長即視為自我推薦。</string>
+    <string name="category_interaction_description">影片中出現叫觀眾按讚或訂閱的畫面，時間過長即視為自我推薦。</string>
     <string name="category_intro">中場休息/片頭動畫</string>
     <string name="category_intro_description">無內容的中間片段。可能為影片暫停，停止畫面，重複性的動畫。沒有任何資訊的轉場。</string>
     <string name="category_outro">片尾資訊卡與片尾名單</string>
@@ -172,7 +172,7 @@
     <string name="noInternet">請先連上網路。</string>
     <string name="playlists">播放清單</string>
     <string name="category_music_offtopic">音樂: 非音樂片段</string>
-    <string name="category_music_offtopic_description">此設定僅用於音樂影片，不包含官方合輯。影片最後應只顯示Spotify的類似版本，避免多餘干擾。</string>
+    <string name="category_music_offtopic_description">此設定僅用於音樂影片，不包含官方合輯。影片最後應只顯示Spotify的類似版本，避免多餘談話或干擾。</string>
     <string name="disabled">關閉</string>
     <string name="update_available_text">前往Github Releases下載？</string>
     <string name="video_format_summary">影片和音訊都下載完成後進行轉檔。</string>
