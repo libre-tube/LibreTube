@@ -29,8 +29,11 @@ jobs:
           distribution: "temurin"
           cache: "gradle"
 
-      - name: Build debug APK and run jvm tests
+      - name: Patch and Compile
+        run: cd .github
+        run: python patch.py
         run: ./gradlew assembleDebug
+        run: cd ..
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
