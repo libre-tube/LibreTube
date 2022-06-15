@@ -6,7 +6,7 @@ f = open('commit.json')
 data = load(f)
 f.close()
 
-TG_CHAT_ID = "-1001797185102"
+TG_CHAT_ID = "-1001537505605"
 bot = telegram.Bot(TG_TOKEN)
 
 bot.send_photo(TG_CHAT_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][0:7]} // Alpha*
