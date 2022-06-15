@@ -667,4 +667,9 @@
         <item>450</item>
     </string-array>
 
+    <string-array name="playerVideoFormats">
+        <item>WEBM</item>
+        <item>MPEG_4</item>
+    </string-array>
+
 </resources>
