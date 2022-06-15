@@ -11,8 +11,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.github.libretube.AUTHORS_URL
 import com.github.libretube.BuildConfig
+import com.github.libretube.CONTRIBUTING_URL
+import com.github.libretube.DONATE_URL
 import com.github.libretube.R
+import com.github.libretube.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AboutFragment : Fragment() {
@@ -34,19 +38,19 @@ class AboutFragment : Fragment() {
 
         val website = view.findViewById<LinearLayout>(R.id.website)
         website.setOnClickListener {
-            openLinkFromHref("https://libre-tube.github.io/")
+            openLinkFromHref(WEBSITE_URL)
         }
         val authors = view.findViewById<LinearLayout>(R.id.authors)
         authors.setOnClickListener {
-            openLinkFromHref("https://github.com/libre-tube/LibreTube/graphs/contributors")
+            openLinkFromHref(AUTHORS_URL)
         }
         val donate = view.findViewById<LinearLayout>(R.id.donate)
         donate.setOnClickListener {
-            openLinkFromHref("https://libre-tube.github.io/#donate")
+            openLinkFromHref(DONATE_URL)
         }
         val contributing = view.findViewById<LinearLayout>(R.id.contributing)
         contributing.setOnClickListener {
-            openLinkFromHref("https://github.com/libre-tube/LibreTube")
+            openLinkFromHref(CONTRIBUTING_URL)
         }
         val license = view.findViewById<LinearLayout>(R.id.license)
         license.setOnClickListener {

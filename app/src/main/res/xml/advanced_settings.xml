@@ -22,6 +22,15 @@
             app:title="@string/playback_speed"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:icon="@drawable/ic_timelapse"
+            app:defaultValue="50"
+            app:entries="@array/bufferingGoal"
+            app:entryValues="@array/bufferingGoal"
+            app:key="buffering_goal"
+            app:title="@string/buffering_goal"
+            app:summary="@string/buffering_goal_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/downloads">

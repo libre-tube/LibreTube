@@ -7,7 +7,10 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import java.net.URL
 
-// used to show title and thumbnail of the video in the notification
+/**
+ * The [DescriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
+ * Basic example [here](https://github.com/AnthonyMarkD/AudioPlayerSampleTest)
+ */
 class DescriptionAdapter(
     private val title: String,
     private val channelName: String,

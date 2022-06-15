@@ -828,6 +828,10 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!!
+
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
             CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
@@ -847,6 +851,12 @@ class PlayerFragment : Fragment() {
         val loadControl = DefaultLoadControl.Builder()
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
+            .setBufferDurationsMs(
+                DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
+                bufferingGoal * 1000, // buffering goal, s -> ms
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
+            )
             .build()
 
         exoPlayer = ExoPlayer.Builder(view.context)
@@ -858,8 +868,6 @@ class PlayerFragment : Fragment() {
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
         exoPlayer.setPlaybackSpeed(playbackSpeed!!)
     }
 
