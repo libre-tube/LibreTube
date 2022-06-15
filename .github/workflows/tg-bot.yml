@@ -28,9 +28,10 @@ jobs:
           cache: "gradle"
 
       - name: Patch and Compile
-        run: cd .github
-        run: python patch.py
-        run: ./gradlew assembleDebug
+        run: |
+          cd .github
+          python patch.py
+          ./gradlew assembleDebug
 
       - name: Telegram Bot
         run: |
