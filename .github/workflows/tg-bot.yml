@@ -36,7 +36,7 @@ jobs:
 
       - name: Telegram Bot
         run: |
-          mv ./app/build/outputs/apk/debug/*.apk .
+          mv ./app/build/outputs/apk/debug/*.apk .github/
           cd .github
           curl https://libre-tube.github.io/assets/LibreAlpha.png --output alpha.png
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
