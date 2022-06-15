@@ -173,4 +173,7 @@
     <string name="about_summary">Découvrez l\'équipe LibreTube et comment tout cela se passe.</string>
     <string name="related_streams">Streams connexes</string>
     <string name="related_streams_summary">Afficher les flux associés aux vidéos.</string>
+    <string name="category_filler">Tangente de remplissage/blagues</string>
+    <string name="category_preview">Aperçu / récap</string>
+    <string name="category_filler_description">Il s\'agit de scènes tangentielles ajoutées uniquement à titre de remplissage ou d\'humour et qui ne sont pas nécessaires pour comprendre le contenu principal de la vidéo.</string>
 </resources>
