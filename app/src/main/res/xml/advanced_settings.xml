@@ -14,6 +14,15 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
+            android:icon="@drawable/ic_hd"
+            app:defaultValue="WEBM"
+            app:entries="@array/playerVideoFormats"
+            app:entryValues="@array/playerVideoFormats"
+            app:key="player_video_format"
+            app:title="@string/playerVideoFormat"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
             android:icon="@drawable/ic_play"
             app:defaultValue="1F"
             app:entries="@array/playbackSpeed"
@@ -28,8 +37,8 @@
             app:entries="@array/bufferingGoal"
             app:entryValues="@array/bufferingGoal"
             app:key="buffering_goal"
-            app:title="@string/buffering_goal"
-            app:summary="@string/buffering_goal_summary" />
+            app:summary="@string/buffering_goal_summary"
+            app:title="@string/buffering_goal" />
 
     </PreferenceCategory>
 
