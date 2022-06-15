@@ -10,7 +10,9 @@ TG_CHAT_ID = "-1001797185102"
 bot = telegram.Bot(TG_TOKEN)
 
 bot.send_photo(TG_CHAT_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][0:7]} // Alpha*
+
 {data['commit']['message']}
+
 Signed-off-by: {data['commit']['author']['name']}
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
 bot.send_document(TG_CHAT_ID, open('app-arm64-v8a-debug.apk', 'rb'))
