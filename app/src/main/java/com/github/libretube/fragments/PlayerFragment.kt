@@ -499,6 +499,7 @@ class PlayerFragment : Fragment() {
                     )
                 }
             }
+
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
                 playWhenReady: Boolean,
@@ -642,13 +643,53 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    private fun setMediaSource(
+        streams: Streams,
+        subtitle: MutableList<SubtitleConfiguration>,
+        videoUri: Uri
+    ) {
+        val dataSourceFactory: DataSource.Factory =
+            DefaultHttpDataSource.Factory()
+        val videoItem: MediaItem = MediaItem.Builder()
+            .setUri(videoUri)
+            .setSubtitleConfigurations(subtitle)
+            .build()
+        val videoSource: MediaSource =
+            DefaultMediaSourceFactory(dataSourceFactory)
+                .createMediaSource(videoItem)
+        var audioSource: MediaSource =
+            ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(
+                    fromUri(
+                        streams.audioStreams!![
+                            getMostBitRate(
+                                streams.audioStreams
+                            )
+                        ].url!!
+                    )
+                )
+        val mergeSource: MediaSource =
+            MergingMediaSource(videoSource, audioSource)
+        exoPlayer.setMediaSource(mergeSource)
+    }
+
     private fun setResolutionAndSubtitles(view: View, response: Streams) {
+        val sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
+
         var videosNameArray: Array<CharSequence> = arrayOf()
+        var videosUrlArray: Array<Uri> = arrayOf()
         videosNameArray += "HLS"
+
+        // append quality to list if it has the preferred format
+        val videoFormatPreference = sharedPreferences.getString("player_video_format", "WEBM")
         for (vid in response.videoStreams!!) {
-            val name = vid.quality + " " + vid.format
-            videosNameArray += name
+            if (vid.format.equals(videoFormatPreference)) {
+                videosNameArray += vid.quality!!
+                videosUrlArray += vid.url!!.toUri()
+            }
         }
+        // create a list of subtitles
         val subtitle = mutableListOf<SubtitleConfiguration>()
         if (response.subtitles!!.isNotEmpty()) {
             subtitle.add(
@@ -658,49 +699,18 @@ class PlayerFragment : Fragment() {
                     .build()
             )
         }
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
+        // set resolution in the beginning
         val defres = sharedPreferences.getString("default_res", "")!!
         when {
+            // search for the default resolution in the videoNamesArray, select quality if found
             defres != "" -> {
                 run lit@{
-                    response.videoStreams.forEachIndexed { index, pipedStream ->
-                        if (pipedStream.quality!!.contains(defres)) {
-                            val dataSourceFactory: DataSource.Factory =
-                                DefaultHttpDataSource.Factory()
-                            val videoItem: MediaItem = MediaItem.Builder()
-                                .setUri(response.videoStreams[index].url)
-                                .setSubtitleConfigurations(subtitle)
-                                .build()
-                            val videoSource: MediaSource =
-                                DefaultMediaSourceFactory(dataSourceFactory)
-                                    .createMediaSource(videoItem)
-                            var audioSource: MediaSource =
-                                DefaultMediaSourceFactory(dataSourceFactory)
-                                    .createMediaSource(
-                                        fromUri(response.audioStreams!![0].url!!)
-                                    )
-                            if (response.videoStreams[index].quality == "720p" ||
-                                response.videoStreams[index].quality == "1080p" ||
-                                response.videoStreams[index].quality == "480p"
-                            ) {
-                                audioSource =
-                                    ProgressiveMediaSource.Factory(dataSourceFactory)
-                                        .createMediaSource(
-                                            fromUri(
-                                                response.audioStreams[
-                                                    getMostBitRate(
-                                                        response.audioStreams
-                                                    )
-                                                ].url!!
-                                            )
-                                        )
-                            }
-                            val mergeSource: MediaSource =
-                                MergingMediaSource(videoSource, audioSource)
-                            exoPlayer.setMediaSource(mergeSource)
+                    videosNameArray.forEachIndexed { index, pipedStream ->
+                        if (pipedStream.contains(defres)) {
+                            val videoUri = videosUrlArray[index - 1]
+                            setMediaSource(response, subtitle, videoUri)
                             view.findViewById<TextView>(R.id.quality_text).text =
-                                videosNameArray[index + 1]
+                                videosNameArray[index]
                             return@lit
                         } else if (index + 1 == response.videoStreams.size) {
                             val mediaItem: MediaItem = MediaItem.Builder()
@@ -720,36 +730,8 @@ class PlayerFragment : Fragment() {
                 exoPlayer.setMediaItem(mediaItem)
             }
             else -> {
-                val dataSourceFactory: DataSource.Factory =
-                    DefaultHttpDataSource.Factory()
-                val videoItem: MediaItem = MediaItem.Builder()
-                    .setUri(response.videoStreams[0].url)
-                    .setSubtitleConfigurations(subtitle)
-                    .build()
-                val videoSource: MediaSource =
-                    DefaultMediaSourceFactory(dataSourceFactory)
-                        .createMediaSource(videoItem)
-                var audioSource: MediaSource =
-                    DefaultMediaSourceFactory(dataSourceFactory)
-                        .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                if (response.videoStreams[0].quality == "720p" ||
-                    response.videoStreams[0].quality == "1080p" ||
-                    response.videoStreams[0].quality == "480p"
-                ) {
-                    audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                        .createMediaSource(
-                            fromUri(
-                                response.audioStreams[
-                                    getMostBitRate(
-                                        response.audioStreams
-                                    )
-                                ].url!!
-                            )
-                        )
-                }
-                val mergeSource: MediaSource =
-                    MergingMediaSource(videoSource, audioSource)
-                exoPlayer.setMediaSource(mergeSource)
+                val videoUri = response.videoStreams[1].url?.toUri()!!
+                setMediaSource(response, subtitle, videoUri)
                 view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[1]
             }
         }
@@ -765,18 +747,6 @@ class PlayerFragment : Fragment() {
                     videosNameArray
                 ) { _, which ->
                     whichQuality = which
-                    if (response.subtitles.isNotEmpty()) {
-                        val subtitle =
-                            mutableListOf<SubtitleConfiguration>()
-                        subtitle.add(
-                            SubtitleConfiguration.Builder(
-                                response.subtitles[0].url!!.toUri()
-                            )
-                                .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
-                                .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
-                                .build()
-                        )
-                    }
                     if (which == 0) {
                         val mediaItem: MediaItem = MediaItem.Builder()
                             .setUri(response.hls)
@@ -784,43 +754,11 @@ class PlayerFragment : Fragment() {
                             .build()
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
-                        val dataSourceFactory: DataSource.Factory =
-                            DefaultHttpDataSource.Factory()
-                        val videoItem: MediaItem = MediaItem.Builder()
-                            .setUri(response.videoStreams[which - 1].url)
-                            .setSubtitleConfigurations(subtitle)
-                            .build()
-                        val videoSource: MediaSource =
-                            DefaultMediaSourceFactory(dataSourceFactory)
-                                .createMediaSource(videoItem)
-                        var audioSource: MediaSource =
-                            DefaultMediaSourceFactory(dataSourceFactory)
-                                .createMediaSource(
-                                    fromUri(response.audioStreams!![0].url!!)
-                                )
-                        if (response.videoStreams[which - 1].quality == "720p" ||
-                            response.videoStreams[which - 1].quality == "1080p" ||
-                            response.videoStreams[which - 1].quality == "480p"
-                        ) {
-                            audioSource =
-                                ProgressiveMediaSource.Factory(dataSourceFactory)
-                                    .createMediaSource(
-                                        fromUri(
-                                            response.audioStreams[
-                                                getMostBitRate(
-                                                    response.audioStreams
-                                                )
-                                            ].url!!
-                                        )
-                                    )
-                        }
-                        val mergeSource: MediaSource =
-                            MergingMediaSource(videoSource, audioSource)
-                        exoPlayer.setMediaSource(mergeSource)
+                        val videoUri = videosUrlArray[which - 1]
+                        setMediaSource(response, subtitle, videoUri)
                     }
                     exoPlayer.seekTo(lastPosition)
-                    view.findViewById<TextView>(R.id.quality_text).text =
-                        videosNameArray[which]
+                    view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[which]
                 }
             val dialog = builder.create()
             dialog.show()
@@ -828,6 +766,10 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!!
+
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
             CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
@@ -847,6 +789,12 @@ class PlayerFragment : Fragment() {
         val loadControl = DefaultLoadControl.Builder()
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
+            .setBufferDurationsMs(
+                DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
+                bufferingGoal * 1000, // buffering goal, s -> ms
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
+            )
             .build()
 
         exoPlayer = ExoPlayer.Builder(view.context)
@@ -858,8 +806,6 @@ class PlayerFragment : Fragment() {
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
         exoPlayer.setPlaybackSpeed(playbackSpeed!!)
     }
 

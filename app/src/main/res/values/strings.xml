@@ -181,4 +181,7 @@
     <string name="related_streams_summary">Show related streams to videos.</string>
     <string name="show_chapters">Show chapters</string>
     <string name="hide_chapters">Hide chapters</string>
+    <string name="buffering_goal">Buffering goal</string>
+    <string name="buffering_goal_summary">The amount of seconds videos get preloaded at maximum.</string>
+    <string name="playerVideoFormat">Player video format</string>
 </resources>
