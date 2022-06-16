@@ -3,8 +3,10 @@ package com.github.libretube.util
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.BuildConfig
+import com.github.libretube.GITHUB_API_URL
 import com.github.libretube.dialogs.NoUpdateAvailableDialog
 import com.github.libretube.dialogs.UpdateAvailableDialog
+import com.github.libretube.obj.UpdateInfo
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
@@ -40,7 +42,7 @@ fun checkUpdate(childFragmentManager: FragmentManager) {
 }
 
 fun getUpdateInfo(): UpdateInfo? {
-    val latest = URL("https://api.github.com/repos/libre-tube/LibreTube/releases/latest")
+    val latest = URL(GITHUB_API_URL)
     val json = StringBuilder()
     val urlConnection: HttpsURLConnection?
     urlConnection = latest.openConnection() as HttpsURLConnection
@@ -49,7 +51,7 @@ fun getUpdateInfo(): UpdateInfo? {
     var line: String?
     while (br.readLine().also { line = it } != null) json.append(line)
 
-    // Parse and return json data
+    // Parse and return the json data
     val jsonRoot = JSONObject(json.toString())
     if (jsonRoot.has("tag_name") &&
         jsonRoot.has("html_url") &&
@@ -63,7 +65,7 @@ fun getUpdateInfo(): UpdateInfo? {
                 val name = jsonAsset.getString("name")
                 if (name.endsWith(".apk")) {
                     val tagName = jsonRoot.getString("name")
-                    Log.i("", "Lastest version: $tagName")
+                    Log.i("", "Latest version: $tagName")
                     return UpdateInfo(updateUrl, tagName)
                 }
             }
@@ -71,9 +73,3 @@ fun getUpdateInfo(): UpdateInfo? {
     }
     return null
 }
-
-// data class for the update info, required to return the data
-data class UpdateInfo(
-    val updateUrl: String,
-    val tagName: String
-)

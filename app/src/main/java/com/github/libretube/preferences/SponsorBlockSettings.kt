@@ -17,6 +17,9 @@ class SponsorBlockSettings : PreferenceFragmentCompat() {
         var interactionEnabled: Boolean = false
         var introEnabled: Boolean = false
         var outroEnabled: Boolean = false
+        var fillerEnabled: Boolean = false
+        var musicOfftopicEnabled: Boolean = false
+        var previewEnabled: Boolean = false
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -63,6 +66,24 @@ class SponsorBlockSettings : PreferenceFragmentCompat() {
         val outroToggle = findPreference<SwitchPreferenceCompat>("outro_category_key")
         outroToggle?.setOnPreferenceChangeListener { _, newValue ->
             outroEnabled = newValue as Boolean
+            true
+        }
+
+        val fillerToggle = findPreference<SwitchPreferenceCompat>("filler_category_key")
+        fillerToggle?.setOnPreferenceChangeListener { _, newValue ->
+            fillerEnabled = newValue as Boolean
+            true
+        }
+
+        val musicToggle = findPreference<SwitchPreferenceCompat>("music_offtopic_category_key")
+        musicToggle?.setOnPreferenceChangeListener { _, newValue ->
+            musicOfftopicEnabled = newValue as Boolean
+            true
+        }
+
+        val previewToggle = findPreference<SwitchPreferenceCompat>("preview_category_key")
+        previewToggle?.setOnPreferenceChangeListener { _, newValue ->
+            previewEnabled = newValue as Boolean
             true
         }
     }

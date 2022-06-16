@@ -8,14 +8,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.formatShort
 import com.squareup.picasso.Picasso
 
-class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
+class ChannelAdapter(
+    private val videoFeed: MutableList<StreamItem>,
+    private val childFragmentManager: FragmentManager
+) :
     RecyclerView.Adapter<ChannelViewHolder>() {
     override fun getItemCount(): Int {
         return videoFeed.size
@@ -54,6 +59,12 @@ class ChannelAdapter(private val videoFeed: MutableList<StreamItem>) :
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.container, frag)
                 .commitNow()
+        }
+        holder.v.setOnLongClickListener {
+            val videoId = trending.url!!.replace("/watch?v=", "")
+            VideoOptionsDialog(videoId, holder.v.context)
+                .show(childFragmentManager, VideoOptionsDialog.TAG)
+            true
         }
     }
 }

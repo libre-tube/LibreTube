@@ -3,6 +3,7 @@ package com.github.libretube
 import android.content.Context
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
+import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -44,13 +45,15 @@ class BackgroundMode {
     private lateinit var playerNotification: PlayerNotificationManager
 
     /**
+     * The [AudioAttributes] handle the audio focus of the [player]
+     */
+    private lateinit var audioAttributes: AudioAttributes
+
+    /**
      * Initializes the [player] with the [MediaItem].
      */
     private fun initializePlayer(c: Context) {
-        /**
-         * The [audioAttributes] handle the audio focus of the [player]
-         */
-        val audioAttributes = AudioAttributes.Builder()
+        audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MUSIC)
             .build()
@@ -68,11 +71,22 @@ class BackgroundMode {
      */
     private fun initializePlayerNotification(c: Context) {
         playerNotification = PlayerNotificationManager
-            .Builder(c, 1, "background_mode").build()
-        playerNotification.setPlayer(player)
-        playerNotification.setUsePreviousAction(false)
-        playerNotification.setUseNextAction(false)
-        playerNotification.setMediaSessionToken(mediaSession.sessionToken)
+            .Builder(c, 1, "background_mode")
+            // set the description of the notification
+            .setMediaDescriptionAdapter(
+                DescriptionAdapter(
+                    response?.title!!,
+                    response?.uploader!!,
+                    response?.thumbnailUrl!!
+                )
+            )
+            .build()
+        playerNotification.apply {
+            setPlayer(player)
+            setUsePreviousAction(false)
+            setUseNextAction(false)
+            setMediaSessionToken(mediaSession.sessionToken)
+        }
     }
 
     /**

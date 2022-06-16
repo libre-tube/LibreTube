@@ -56,8 +56,8 @@
     <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
     <string name="about">Über</string>
     <string name="systemDefault">System</string>
-    <string name="lightTheme">Beleuchtendes Licht</string>
-    <string name="darkTheme">Verschwindende Dunkelheit</string>
+    <string name="lightTheme">Helles Farbschema</string>
+    <string name="darkTheme">Dunkles Farbschema</string>
     <string name="subscribers">%1$s Abonnenten</string>
     <string name="emptyPlaylistName">Der Name der Wiedergabeliste darf nicht leer sein</string>
     <string name="import_from_yt_summary">Von YouTube oder NewPipe</string>
@@ -103,12 +103,12 @@
     <string name="license">Lizenz</string>
     <string name="color_accent">Akzente</string>
     <string name="color_red">Ruhendes Rot</string>
-    <string name="color_blue">Bootblau</string>
+    <string name="color_blue">Pixelblau</string>
     <string name="color_yellow">Gelb</string>
-    <string name="color_green">Gastgrün</string>
+    <string name="color_green">Groovy grün</string>
     <string name="color_purple">Angenehmes Lila</string>
-    <string name="oledTheme">Blindschwarz</string>
-    <string name="material_you">Material You</string>
+    <string name="oledTheme">Schwarzes Farbschema</string>
+    <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">Benachrichtigungen</string>
     <string name="enabled">Ein</string>
     <string name="disabled">Aus</string>
@@ -127,10 +127,10 @@
     <string name="download_directory">Herunterladen auf</string>
     <string name="download_directory_summary">Der Ort, an dem deine heruntergeladenen Medien gespeichert werden.</string>
     <string name="website_summary">Besuche die Website, um weitere Informationen über die Anwendung und ihre Funktionen zu erhalten.</string>
-    <string name="contributing_summary">Egal, ob du Ideen, Übersetzungen, Designänderungen, Codebereinigung oder wirklich schwerwiegende Codeänderungen hast, Hilfe ist immer willkommen. Je mehr getan wird, desto besser wird es!</string>
-    <string name="license_summary">Die GNU General Public License ist eine freie Copyleft-Lizenz für Software und andere Arten von Werken.</string>
+    <string name="contributing_summary">Stellen Sie Ideen, Übersetzungen, Designänderungen bereit, bereinigen und schreiben Sie Code. Je mehr getan wird, desto besser wird es!</string>
+    <string name="license_summary">Die GPLv3+ ist eine Copylefted-Libre-Lizenz. Verwenden, studieren, ändern und teilen; mit allen.</string>
     <string name="donate">Spenden</string>
-    <string name="donate_summary">Wenn dir die Anwendung gefällt und du unsere Arbeit schätzest, würden wir uns über eine Spende freuen.</string>
+    <string name="donate_summary">Geben Sie, was Ihnen das wert ist, wenn Sie können. Das Team LibreTube ist kleiner als Ihre Spende oder Hilfe.</string>
     <string name="update">Suche nach neuer Version</string>
     <string name="update_summary">Klicke hier, um herauszufinden, ob die Anwendung auf dem neuesten Stand ist.</string>
     <string name="app_uptodate">Es läuft die neueste Version.</string>
@@ -142,7 +142,7 @@
     <string name="live">Live</string>
     <string name="no_replies">Dieser Kommentar hat keine Antworten.</string>
     <string name="authors">Autoren</string>
-    <string name="authors_summary">Finde heraus, wer hinter dem Team LibreTube steckt und die Magie ausübt.</string>
+    <string name="authors_summary">Lernen Sie das Team LibreTube und all seine Mitwirkenden kennen, die helfen, die Anwendung zu verbessern.</string>
     <string name="contributing">Beitragen</string>
     <string name="download_folder">Name</string>
     <string name="download_folder_summary">Der Name des Ordners, in dem die heruntergeladenen Medien gespeichert sind.</string>
@@ -160,4 +160,6 @@
     <string name="empty_instance">Du musst den Namen und die API-URL eingeben.</string>
     <string name="clear_customInstances">Benutzerdefinierte Instanzen löschen</string>
     <string name="invalid_url">Bitte gib eine gültige URL ein</string>
+    <string name="instance_summary">Piped, Anmeldung, Abonnements</string>
+    <string name="customInstance_summary">Hinzufügen einer benutzerdefinierten Instanz (auf eigenes Risiko)</string>
 </resources>

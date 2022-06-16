@@ -61,8 +61,8 @@
     <string name="subscriptions">Abbonamenti</string>
     <string name="changeLanguage">Lingua</string>
     <string name="systemLanguage">Sistema</string>
-    <string name="lightTheme">Luce illuminante</string>
-    <string name="darkTheme">Buio morente</string>
+    <string name="lightTheme">Tema chiaro</string>
+    <string name="darkTheme">Tema scuro</string>
     <string name="comments">Commenti</string>
     <string name="videoCount">%1$s video</string>
     <string name="noInternet">Connettiti ad internet prima.</string>
@@ -100,11 +100,11 @@
     <string name="license">Licenza</string>
     <string name="color_accent">Accenti</string>
     <string name="color_red">Rosso riposante</string>
-    <string name="color_blue">Blu barca</string>
+    <string name="color_blue">Blu pixel</string>
     <string name="color_yellow">Giallo lanciato</string>
-    <string name="color_green">Verde ospite</string>
+    <string name="color_green">Verde groovy</string>
     <string name="color_purple">Viola piacevole</string>
-    <string name="oledTheme">Nero cieco</string>
+    <string name="oledTheme">Tema nero</string>
     <string name="clear_history">Cancella la cronologia</string>
     <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">Notifiche</string>
@@ -143,7 +143,7 @@
     <string name="live">Dal vivo</string>
     <string name="authors">Autori</string>
     <string name="no_replies">Questo commento non ha risposte.</string>
-    <string name="authors_summary">Conosci il team LibreTube e come tutto accade.</string>
+    <string name="authors_summary">Conosci il team LibreTube e tutti i suoi collaboratori che contribuiscono a migliorare l\'applicazione.</string>
     <string name="downloads_directory">Cartella degli scaricamenti</string>
     <string name="sdcard">Scheda SD</string>
     <string name="music_directory">Cartella musicale</string>
@@ -169,4 +169,8 @@
     <string name="customInstance_summary">Aggiungi un\'istanza personalizzata (a tuo rischio)</string>
     <string name="instance_api_url">URL API dell\'istanza</string>
     <string name="invalid_url">Si prega di inserire un URL valido</string>
+    <string name="version">Versione %1$s</string>
+    <string name="about_summary">Conosci il team LibreTube e come tutto accade.</string>
+    <string name="related_streams_summary">Mostra stream correlati al video.</string>
+    <string name="related_streams">Stream correlati</string>
 </resources>

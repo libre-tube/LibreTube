@@ -3,7 +3,6 @@ package com.github.libretube.fragments
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Rect
@@ -18,9 +17,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -43,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.dialogs.AddtoPlaylistDialog
@@ -57,6 +54,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
+import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.google.android.exoplayer2.C
@@ -102,7 +100,7 @@ class PlayerFragment : Fragment() {
     private var whichQuality = 0
     private var isZoomed: Boolean = false
 
-    var isSubscribed: Boolean = false
+    private var isSubscribed: Boolean = false
 
     private lateinit var relatedRecView: RecyclerView
     private lateinit var commentsRecView: RecyclerView
@@ -121,6 +119,10 @@ class PlayerFragment : Fragment() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
+
+    private lateinit var title: String
+    private lateinit var uploader: String
+    private lateinit var thumbnailUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,6 +144,11 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
 
+        initializeTransitionLayout(view)
+        fetchJsonAndInitPlayer(view)
+    }
+
+    private fun initializeTransitionLayout(view: View) {
         val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
         relDownloadVideo = view.findViewById(R.id.relPlayer_download)
@@ -208,7 +215,7 @@ class PlayerFragment : Fragment() {
 
         playerMotionLayout.progress = 1.toFloat()
         playerMotionLayout.transitionToStart()
-        fetchJson(view)
+
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
@@ -239,25 +246,11 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
+            val image = view.findViewById<ImageView>(R.id.player_description_arrow)
+            image.animate().rotationBy(180F).setDuration(100).start()
             if (playerDescription.isVisible) {
-                val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-                image.clearAnimation()
                 playerDescription.visibility = View.GONE
             } else {
-                // toggle button
-                val rotate = RotateAnimation(
-                    0F,
-                    180F,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f,
-                    Animation.RELATIVE_TO_SELF,
-                    0.5f
-                )
-                rotate.duration = 100
-                rotate.interpolator = LinearInterpolator()
-                rotate.fillAfter = true
-                val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-                image.startAnimation(rotate)
                 playerDescription.visibility = View.VISIBLE
             }
         }
@@ -319,8 +312,6 @@ class PlayerFragment : Fragment() {
         commentsRecView.layoutManager = LinearLayoutManager(view.context)
 
         commentsRecView.setItemViewCacheSize(20)
-        commentsRecView.isDrawingCacheEnabled = true
-        commentsRecView.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
 
         relatedRecView = view.findViewById(R.id.player_recView)
         relatedRecView.layoutManager =
@@ -372,7 +363,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun fetchJson(view: View) {
+    private fun fetchJsonAndInitPlayer(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -387,6 +378,40 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                // for the notification description adapter
+                title = response.title!!
+                uploader = response.uploader!!
+                thumbnailUrl = response.thumbnailUrl!!
+
+                // check whether related streams are enabled
+                val sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(requireContext())
+                relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
+                runOnUiThread {
+                    createExoPlayer(view)
+                    prepareExoPlayerView()
+                    if (response.chapters != null) initializeChapters(response.chapters)
+                    setResolutionAndSubtitles(view, response)
+                    // support for time stamped links
+                    if (arguments?.getLong("timeStamp") != null) {
+                        val position = arguments?.getLong("timeStamp")!! * 1000
+                        exoPlayer.seekTo(position)
+                    }
+                    exoPlayer.prepare()
+                    exoPlayer.play()
+                    initializePlayerView(view, response)
+                    initializePlayerNotification(requireContext())
+                    fetchSponsorBlockSegments()
+                    if (!relatedStreamsEnabled) toggleComments()
+                }
+            }
+        }
+        run()
+    }
+
+    private fun fetchSponsorBlockSegments() {
+        fun run() {
+            lifecycleScope.launchWhenCreated {
                 if (SponsorBlockSettings.sponsorBlockEnabled) {
                     val categories: ArrayList<String> = arrayListOf()
                     if (SponsorBlockSettings.introEnabled) {
@@ -403,6 +428,15 @@ class PlayerFragment : Fragment() {
                     }
                     if (SponsorBlockSettings.outroEnabled) {
                         categories.add("outro")
+                    }
+                    if (SponsorBlockSettings.fillerEnabled) {
+                        categories.add("filler")
+                    }
+                    if (SponsorBlockSettings.musicOfftopicEnabled) {
+                        categories.add("music_offtopic")
+                    }
+                    if (SponsorBlockSettings.previewEnabled) {
+                        categories.add("preview")
                     }
                     if (categories.size > 0) {
                         segmentData = try {
@@ -424,20 +458,6 @@ class PlayerFragment : Fragment() {
                             return@launchWhenCreated
                         }
                     }
-                }
-                // check whether related streams are enabled
-                val sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(requireContext())
-                relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
-                runOnUiThread {
-                    createExoPlayer(view)
-                    prepareExoPlayerView()
-                    if (response.chapters != null) initializeChapters(response.chapters)
-                    setResolutionAndSubtitles(view, response)
-                    exoPlayer.prepare()
-                    exoPlayer.play()
-                    initializePlayerView(view, response)
-                    if (!relatedStreamsEnabled) toggleComments()
                 }
             }
         }
@@ -470,7 +490,7 @@ class PlayerFragment : Fragment() {
         view.findViewById<TextView>(R.id.player_description).text = response.description
 
         // Listener for play and pause icon change
-        exoPlayer.addListener(object : com.google.android.exoplayer2.Player.Listener {
+        exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
                 if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
                     exoPlayerView.postDelayed(
@@ -480,6 +500,7 @@ class PlayerFragment : Fragment() {
                 }
             }
 
+            @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
                 playWhenReady: Boolean,
                 playbackState: Int
@@ -520,7 +541,7 @@ class PlayerFragment : Fragment() {
             relDownloadVideo.setOnClickListener {
                 if (!IS_DOWNLOAD_RUNNING) {
                     val newFragment = DownloadDialog()
-                    var bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putString("video_id", videoId)
                     bundle.putParcelable("streams", response)
                     newFragment.arguments = bundle
@@ -588,7 +609,7 @@ class PlayerFragment : Fragment() {
             isSubscribed(subButton, channelId!!)
             view.findViewById<LinearLayout>(R.id.save).setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()
-                var bundle = Bundle()
+                val bundle = Bundle()
                 bundle.putString("videoId", videoId)
                 newFragment.arguments = bundle
                 newFragment.show(childFragmentManager, "AddToPlaylist")
@@ -597,19 +618,79 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
-        chapters.forEach { chapter ->
-            Log.e(TAG, chapter.title!!)
+        val chaptersToggle = view?.findViewById<LinearLayout>(R.id.chapters_toggle)
+        val chaptersRecView = view?.findViewById<RecyclerView>(R.id.chapters_recView)
+        val chaptersToggleText = view?.findViewById<TextView>(R.id.chapters_toggle_text)
+        val chaptersToggleArrow = view?.findViewById<ImageView>(R.id.chapters_toggle_arrow)
+
+        if (chapters.isNotEmpty()) {
+            chaptersToggle?.visibility = View.VISIBLE
+
+            chaptersToggle?.setOnClickListener {
+                if (chaptersRecView?.isVisible!!) {
+                    chaptersRecView?.visibility = View.GONE
+                    chaptersToggleText?.text = getString(R.string.show_chapters)
+                } else {
+                    chaptersRecView?.visibility = View.VISIBLE
+                    chaptersToggleText?.text = getString(R.string.hide_chapters)
+                }
+                chaptersToggleArrow!!.animate().setDuration(100).rotationBy(180F).start()
+            }
+
+            chaptersRecView?.layoutManager =
+                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            chaptersRecView?.adapter = ChaptersAdapter(chapters, exoPlayer)
         }
     }
 
+    private fun setMediaSource(
+        streams: Streams,
+        subtitle: MutableList<SubtitleConfiguration>,
+        videoUri: Uri
+    ) {
+        val dataSourceFactory: DataSource.Factory =
+            DefaultHttpDataSource.Factory()
+        val videoItem: MediaItem = MediaItem.Builder()
+            .setUri(videoUri)
+            .setSubtitleConfigurations(subtitle)
+            .build()
+        val videoSource: MediaSource =
+            DefaultMediaSourceFactory(dataSourceFactory)
+                .createMediaSource(videoItem)
+        var audioSource: MediaSource =
+            ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(
+                    fromUri(
+                        streams.audioStreams!![
+                            getMostBitRate(
+                                streams.audioStreams
+                            )
+                        ].url!!
+                    )
+                )
+        val mergeSource: MediaSource =
+            MergingMediaSource(videoSource, audioSource)
+        exoPlayer.setMediaSource(mergeSource)
+    }
+
     private fun setResolutionAndSubtitles(view: View, response: Streams) {
+        val sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
+
         var videosNameArray: Array<CharSequence> = arrayOf()
+        var videosUrlArray: Array<Uri> = arrayOf()
         videosNameArray += "HLS"
+
+        // append quality to list if it has the preferred format
+        val videoFormatPreference = sharedPreferences.getString("player_video_format", "WEBM")
         for (vid in response.videoStreams!!) {
-            val name = vid.quality + " " + vid.format
-            videosNameArray += name
+            if (vid.format.equals(videoFormatPreference)) {
+                videosNameArray += vid.quality!!
+                videosUrlArray += vid.url!!.toUri()
+            }
         }
-        var subtitle = mutableListOf<SubtitleConfiguration>()
+        // create a list of subtitles
+        val subtitle = mutableListOf<SubtitleConfiguration>()
         if (response.subtitles!!.isNotEmpty()) {
             subtitle.add(
                 SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
@@ -618,49 +699,18 @@ class PlayerFragment : Fragment() {
                     .build()
             )
         }
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
+        // set resolution in the beginning
         val defres = sharedPreferences.getString("default_res", "")!!
         when {
+            // search for the default resolution in the videoNamesArray, select quality if found
             defres != "" -> {
                 run lit@{
-                    response.videoStreams.forEachIndexed { index, pipedStream ->
-                        if (pipedStream.quality!!.contains(defres)) {
-                            val dataSourceFactory: DataSource.Factory =
-                                DefaultHttpDataSource.Factory()
-                            val videoItem: MediaItem = MediaItem.Builder()
-                                .setUri(response.videoStreams[index].url)
-                                .setSubtitleConfigurations(subtitle)
-                                .build()
-                            val videoSource: MediaSource =
-                                DefaultMediaSourceFactory(dataSourceFactory)
-                                    .createMediaSource(videoItem)
-                            var audioSource: MediaSource =
-                                DefaultMediaSourceFactory(dataSourceFactory)
-                                    .createMediaSource(
-                                        fromUri(response.audioStreams!![0].url!!)
-                                    )
-                            if (response.videoStreams[index].quality == "720p" ||
-                                response.videoStreams[index].quality == "1080p" ||
-                                response.videoStreams[index].quality == "480p"
-                            ) {
-                                audioSource =
-                                    ProgressiveMediaSource.Factory(dataSourceFactory)
-                                        .createMediaSource(
-                                            fromUri(
-                                                response.audioStreams[
-                                                    getMostBitRate(
-                                                        response.audioStreams
-                                                    )
-                                                ].url!!
-                                            )
-                                        )
-                            }
-                            val mergeSource: MediaSource =
-                                MergingMediaSource(videoSource, audioSource)
-                            exoPlayer.setMediaSource(mergeSource)
+                    videosNameArray.forEachIndexed { index, pipedStream ->
+                        if (pipedStream.contains(defres)) {
+                            val videoUri = videosUrlArray[index - 1]
+                            setMediaSource(response, subtitle, videoUri)
                             view.findViewById<TextView>(R.id.quality_text).text =
-                                videosNameArray[index + 1]
+                                videosNameArray[index]
                             return@lit
                         } else if (index + 1 == response.videoStreams.size) {
                             val mediaItem: MediaItem = MediaItem.Builder()
@@ -680,36 +730,8 @@ class PlayerFragment : Fragment() {
                 exoPlayer.setMediaItem(mediaItem)
             }
             else -> {
-                val dataSourceFactory: DataSource.Factory =
-                    DefaultHttpDataSource.Factory()
-                val videoItem: MediaItem = MediaItem.Builder()
-                    .setUri(response.videoStreams[0].url)
-                    .setSubtitleConfigurations(subtitle)
-                    .build()
-                val videoSource: MediaSource =
-                    DefaultMediaSourceFactory(dataSourceFactory)
-                        .createMediaSource(videoItem)
-                var audioSource: MediaSource =
-                    DefaultMediaSourceFactory(dataSourceFactory)
-                        .createMediaSource(fromUri(response.audioStreams!![0].url!!))
-                if (response.videoStreams[0].quality == "720p" ||
-                    response.videoStreams[0].quality == "1080p" ||
-                    response.videoStreams[0].quality == "480p"
-                ) {
-                    audioSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                        .createMediaSource(
-                            fromUri(
-                                response.audioStreams[
-                                    getMostBitRate(
-                                        response.audioStreams
-                                    )
-                                ].url!!
-                            )
-                        )
-                }
-                val mergeSource: MediaSource =
-                    MergingMediaSource(videoSource, audioSource)
-                exoPlayer.setMediaSource(mergeSource)
+                val videoUri = response.videoStreams[1].url?.toUri()!!
+                setMediaSource(response, subtitle, videoUri)
                 view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[1]
             }
         }
@@ -719,76 +741,35 @@ class PlayerFragment : Fragment() {
             val builder: MaterialAlertDialogBuilder? = activity?.let {
                 MaterialAlertDialogBuilder(it)
             }
-            var lastPosition = exoPlayer.currentPosition
+            val lastPosition = exoPlayer.currentPosition
             builder!!.setTitle(R.string.choose_quality_dialog)
                 .setItems(
-                    videosNameArray,
-                    DialogInterface.OnClickListener { _, which ->
-                        whichQuality = which
-                        if (response.subtitles.isNotEmpty()) {
-                            var subtitle =
-                                mutableListOf<SubtitleConfiguration>()
-                            subtitle.add(
-                                SubtitleConfiguration.Builder(
-                                    response.subtitles[0].url!!.toUri()
-                                )
-                                    .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
-                                    .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
-                                    .build()
-                            )
-                        }
-                        if (which == 0) {
-                            val mediaItem: MediaItem = MediaItem.Builder()
-                                .setUri(response.hls)
-                                .setSubtitleConfigurations(subtitle)
-                                .build()
-                            exoPlayer.setMediaItem(mediaItem)
-                        } else {
-                            val dataSourceFactory: DataSource.Factory =
-                                DefaultHttpDataSource.Factory()
-                            val videoItem: MediaItem = MediaItem.Builder()
-                                .setUri(response.videoStreams[which - 1].url)
-                                .setSubtitleConfigurations(subtitle)
-                                .build()
-                            val videoSource: MediaSource =
-                                DefaultMediaSourceFactory(dataSourceFactory)
-                                    .createMediaSource(videoItem)
-                            var audioSource: MediaSource =
-                                DefaultMediaSourceFactory(dataSourceFactory)
-                                    .createMediaSource(
-                                        fromUri(response.audioStreams!![0].url!!)
-                                    )
-                            if (response.videoStreams[which - 1].quality == "720p" ||
-                                response.videoStreams[which - 1].quality == "1080p" ||
-                                response.videoStreams[which - 1].quality == "480p"
-                            ) {
-                                audioSource =
-                                    ProgressiveMediaSource.Factory(dataSourceFactory)
-                                        .createMediaSource(
-                                            fromUri(
-                                                response.audioStreams[
-                                                    getMostBitRate(
-                                                        response.audioStreams
-                                                    )
-                                                ].url!!
-                                            )
-                                        )
-                            }
-                            val mergeSource: MediaSource =
-                                MergingMediaSource(videoSource, audioSource)
-                            exoPlayer.setMediaSource(mergeSource)
-                        }
-                        exoPlayer.seekTo(lastPosition)
-                        view.findViewById<TextView>(R.id.quality_text).text =
-                            videosNameArray[which]
+                    videosNameArray
+                ) { _, which ->
+                    whichQuality = which
+                    if (which == 0) {
+                        val mediaItem: MediaItem = MediaItem.Builder()
+                            .setUri(response.hls)
+                            .setSubtitleConfigurations(subtitle)
+                            .build()
+                        exoPlayer.setMediaItem(mediaItem)
+                    } else {
+                        val videoUri = videosUrlArray[which - 1]
+                        setMediaSource(response, subtitle, videoUri)
                     }
-                )
+                    exoPlayer.seekTo(lastPosition)
+                    view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[which]
+                }
             val dialog = builder.create()
             dialog.show()
         }
     }
 
     private fun createExoPlayer(view: View) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!!
+
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
             CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
@@ -808,6 +789,12 @@ class PlayerFragment : Fragment() {
         val loadControl = DefaultLoadControl.Builder()
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
+            .setBufferDurationsMs(
+                DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
+                bufferingGoal * 1000, // buffering goal, s -> ms
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
+                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
+            )
             .build()
 
         exoPlayer = ExoPlayer.Builder(view.context)
@@ -819,11 +806,7 @@ class PlayerFragment : Fragment() {
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
         exoPlayer.setPlaybackSpeed(playbackSpeed!!)
-
-        initializePlayerNotification(requireContext())
     }
 
     private fun initializePlayerNotification(c: Context) {
@@ -838,6 +821,9 @@ class PlayerFragment : Fragment() {
 
         playerNotification = PlayerNotificationManager
             .Builder(c, 1, "background_mode")
+            .setMediaDescriptionAdapter(
+                DescriptionAdapter(title, uploader, thumbnailUrl)
+            )
             .build()
 
         playerNotification.apply {

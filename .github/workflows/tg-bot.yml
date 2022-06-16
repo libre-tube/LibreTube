@@ -27,12 +27,16 @@ jobs:
           distribution: "temurin"
           cache: "gradle"
 
-      - name: Build debug APK and run jvm tests
-        run: ./gradlew assembleDebug
+      - name: Patch and Compile
+        run: |
+          cd .github
+          python patch.py
+          cd ..
+          ./gradlew assembleDebug
 
       - name: Telegram Bot
         run: |
-          mv app/build/outputs/apk/debug/*.apk .github/
+          mv ./app/build/outputs/apk/debug/*.apk .github/
           cd .github
           curl https://libre-tube.github.io/assets/LibreAlpha.png --output alpha.png
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py

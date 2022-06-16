@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="startpage">หน้าแรก</string>
+    <string name="share">แชร์</string>
+    <string name="deletePlaylist">ลบเพลย์ลิสต์</string>
+    <string name="playlistCreated">สร้างเพลย์ลิสต์แล้ว</string>
+    <string name="playlistName">ชื่อเพลย์ลิสต์</string>
+    <string name="addToPlaylist">เพิ่มไปยังเพลย์ลิสต์</string>
+    <string name="videoCount">%1$s วิดีโอ</string>
+    <string name="version">เวอร์ชั่น %1$s</string>
+    <string name="subscriptions">การติดตาม</string>
+    <string name="vlc">เปิดใน VLC</string>
+</resources>

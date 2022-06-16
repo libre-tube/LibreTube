@@ -52,8 +52,8 @@
     <string name="about">Honi buruz</string>
     <string name="changeLanguage">Hizkuntza</string>
     <string name="systemDefault">Sistema</string>
-    <string name="lightTheme">Argi argiztatua</string>
-    <string name="darkTheme">Iluntasunaren desagertzea</string>
+    <string name="lightTheme">Gai argia</string>
+    <string name="darkTheme">Gai iluna</string>
     <string name="subscribers">%1$s harpidetu</string>
     <string name="settings">Ezarpenak</string>
     <string name="location">Lekua</string>
@@ -88,7 +88,7 @@
     <string name="color_yellow">Horia</string>
     <string name="color_green">Berdea</string>
     <string name="color_purple">Morea</string>
-    <string name="oledTheme">Beltza</string>
+    <string name="oledTheme">Gai beltza</string>
     <string name="material_you">Material mistikoa</string>
     <string name="sponsorblock_notifications">Jakinarazpenak</string>
     <string name="app_icon">Ikonoa</string>
@@ -111,7 +111,7 @@
     <string name="appearance_summary">Egokitu aplikazioa zure gustura.</string>
     <string name="advanced_summary">Erreproduzitzailea, deskargak, historiala</string>
     <string name="no_replies">Iruzkin honek ez du erantzunik.</string>
-    <string name="authors_summary">Ezagutu LibreTubeko taldea eta nola gertatzen den dena.</string>
+    <string name="authors_summary">Ezagutu LibreTube taldea eta aplikazioa hobetzen laguntzen duten guztiak.</string>
     <string name="download_folder">Izena</string>
     <string name="download_folder_summary">Deskargatutako multimediak gordetzen diren karpetaren izena.</string>
     <string name="downloads_directory">Deskarga karpeta</string>
@@ -169,4 +169,8 @@
     <string name="addInstance">Gehitu instantzia</string>
     <string name="clear_customInstances">Ezabatu instantzia pertsonalizatuak</string>
     <string name="instance_summary">Piped, saioa hasi, harpidetzak</string>
+    <string name="version">%1$s bertsioa</string>
+    <string name="about_summary">Ezagutu LibreTubeko taldea eta nola gertatzen den dena.</string>
+    <string name="related_streams">Erlazionatutako fluxuak</string>
+    <string name="related_streams_summary">Erakutsi bideoekin erlazionatutako fluxuak.</string>
 </resources>
