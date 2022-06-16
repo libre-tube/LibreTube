@@ -27,6 +27,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -85,6 +86,8 @@ import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
+import kotlinx.coroutines.NonCancellable.isActive
+import org.chromium.base.ThreadUtils.runOnUiThread
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
@@ -644,9 +647,9 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setMediaSource(
-        streams: Streams,
         subtitle: MutableList<SubtitleConfiguration>,
-        videoUri: Uri
+        videoUri: Uri,
+        audioUrl: String
     ) {
         val dataSourceFactory: DataSource.Factory =
             DefaultHttpDataSource.Factory()
@@ -659,15 +662,7 @@ class PlayerFragment : Fragment() {
                 .createMediaSource(videoItem)
         var audioSource: MediaSource =
             ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(
-                    fromUri(
-                        streams.audioStreams!![
-                            getMostBitRate(
-                                streams.audioStreams
-                            )
-                        ].url!!
-                    )
-                )
+                .createMediaSource(fromUri(audioUrl))
         val mergeSource: MediaSource =
             MergingMediaSource(videoSource, audioSource)
         exoPlayer.setMediaSource(mergeSource)
@@ -677,15 +672,29 @@ class PlayerFragment : Fragment() {
         val sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(requireContext())
 
+        val videoFormatPreference = sharedPreferences.getString("player_video_format", "WEBM")
+        val defres = sharedPreferences.getString("default_res", "")!!
+
+        val qualityText = view.findViewById<TextView>(R.id.quality_text)
+        val qualitySelect = view.findViewById<ImageButton>(R.id.quality_select)
+
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
-        videosNameArray += "HLS"
 
-        // append quality to list if it has the preferred format
-        val videoFormatPreference = sharedPreferences.getString("player_video_format", "WEBM")
+        // append hls to list if available
+        if (response.hls != null) {
+            videosNameArray += "HLS"
+            videosUrlArray += response.hls.toUri()
+        }
+
         for (vid in response.videoStreams!!) {
-            if (vid.format.equals(videoFormatPreference)) {
+            Log.e(TAG, vid.toString())
+            // append quality to list if it has the preferred format (e.g. MPEG)
+            if (vid.format.equals(videoFormatPreference)) { // preferred format
                 videosNameArray += vid.quality!!
+                videosUrlArray += vid.url!!.toUri()
+            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format)
+                videosNameArray += "LBRY MP4"
                 videosUrlArray += vid.url!!.toUri()
             }
         }
@@ -700,17 +709,16 @@ class PlayerFragment : Fragment() {
             )
         }
         // set resolution in the beginning
-        val defres = sharedPreferences.getString("default_res", "")!!
         when {
             // search for the default resolution in the videoNamesArray, select quality if found
             defres != "" -> {
                 run lit@{
                     videosNameArray.forEachIndexed { index, pipedStream ->
                         if (pipedStream.contains(defres)) {
-                            val videoUri = videosUrlArray[index - 1]
-                            setMediaSource(response, subtitle, videoUri)
-                            view.findViewById<TextView>(R.id.quality_text).text =
-                                videosNameArray[index]
+                            val videoUri = videosUrlArray[index]
+                            val audioUrl = getMostBitRate(response.audioStreams!!)
+                            setMediaSource(subtitle, videoUri, audioUrl)
+                            qualityText.text = videosNameArray[index]
                             return@lit
                         } else if (index + 1 == response.videoStreams.size) {
                             val mediaItem: MediaItem = MediaItem.Builder()
@@ -722,6 +730,7 @@ class PlayerFragment : Fragment() {
                     }
                 }
             }
+            // if defres doesn't match use hls if available
             response.hls != null -> {
                 val mediaItem: MediaItem = MediaItem.Builder()
                     .setUri(response.hls)
@@ -729,14 +738,16 @@ class PlayerFragment : Fragment() {
                     .build()
                 exoPlayer.setMediaItem(mediaItem)
             }
+            // otherwise use the first list entry
             else -> {
-                val videoUri = response.videoStreams[1].url?.toUri()!!
-                setMediaSource(response, subtitle, videoUri)
-                view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[1]
+                val videoUri = videosUrlArray[0]
+                val audioUrl = getMostBitRate(response.audioStreams!!)
+                setMediaSource(subtitle, videoUri, audioUrl)
+                qualityText.text = videosNameArray[0]
             }
         }
 
-        view.findViewById<ImageButton>(R.id.quality_select).setOnClickListener {
+        qualitySelect.setOnClickListener {
             // Dialog for quality selection
             val builder: MaterialAlertDialogBuilder? = activity?.let {
                 MaterialAlertDialogBuilder(it)
@@ -747,18 +758,23 @@ class PlayerFragment : Fragment() {
                     videosNameArray
                 ) { _, which ->
                     whichQuality = which
-                    if (which == 0) {
+                    if (
+                        videosNameArray[which] == "HLS" ||
+                        videosNameArray[which] == "LBRY HLS"
+                    ) {
+                        // no need to merge sources if using hls
                         val mediaItem: MediaItem = MediaItem.Builder()
-                            .setUri(response.hls)
+                            .setUri(videosUrlArray[which])
                             .setSubtitleConfigurations(subtitle)
                             .build()
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
-                        val videoUri = videosUrlArray[which - 1]
-                        setMediaSource(response, subtitle, videoUri)
+                        val videoUri = videosUrlArray[which]
+                        val audioUrl = getMostBitRate(response.audioStreams!!)
+                        setMediaSource(subtitle, videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
-                    view.findViewById<TextView>(R.id.quality_text).text = videosNameArray[which]
+                    qualityText.text = videosNameArray[which]
                 }
             val dialog = builder.create()
             dialog.show()
@@ -927,7 +943,7 @@ class PlayerFragment : Fragment() {
         activity?.runOnUiThread(action)
     }
 
-    private fun getMostBitRate(audios: List<PipedStream>): Int {
+    private fun getMostBitRate(audios: List<PipedStream>): String {
         var bitrate = 0
         var index = 0
         for ((i, audio) in audios.withIndex()) {
@@ -937,7 +953,7 @@ class PlayerFragment : Fragment() {
                 index = i
             }
         }
-        return index
+        return audios[index].url!!
     }
 
     private fun fetchComments() {
