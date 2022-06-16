@@ -175,4 +175,13 @@
     <string name="related_streams_summary">Εμφάνιση σχετικών βίντεο κάτω από το βίντεο.</string>
     <string name="show_chapters">Εμφάνιση κεφαλαίων</string>
     <string name="hide_chapters">Απόκρυψη κεφαλαίων</string>
+    <string name="category_filler_description">Αυτό ισχύει για εφαπτομενικές σκηνές που προστίθενται μόνο για πληρωτικό υλικό ή χιούμορ που δεν απαιτούνται για την κατανόηση του κύριου περιεχομένου του βίντεο.</string>
+    <string name="category_music_offtopic">Μουσική: Μη-Μουσικό Τμήμα</string>
+    <string name="category_preview">Προεπισκόπηση/Ανακεφαλαίωση</string>
+    <string name="category_filler">Εφαπτομενικό πληρωτικό υλικό/Αστεία</string>
+    <string name="buffering_goal">Στόχος buffering</string>
+    <string name="buffering_goal_summary">Ο αριθμός των δευτερολέπτων που προφορτώνονται τα βίντεο στο μέγιστο.</string>
+    <string name="playerVideoFormat">Μορφή βίντεο αναπαραγωγέα</string>
+    <string name="category_music_offtopic_description">Αυτό προορίζεται μόνο για χρήση σε μουσικά βίντεο. Θα πρέπει να καλύπτει μέρη του βίντεο που δεν περιλαμβάνονται στις επίσημες μίξεις. Στο τέλος, το βίντεο θα πρέπει να μοιάζει όσο το δυνατόν περισσότερο με την έκδοση του Spotify ή οποιασδήποτε άλλης μίξης, ή θα πρέπει να μειώνει τις ομιλίες ή άλλους περισπασμούς.</string>
+    <string name="category_preview_description">Για τμήματα που δείχνουν τι θα ακολουθήσει σε αυτό ή σε μελλοντικά βίντεο της ίδιας σειράς, αλλά δεν παρέχουν πρόσθετες πληροφορίες. Αν περιλαμβάνει αποσπάσματα που εμφανίζονται μόνο εδώ, είναι πολύ πιθανό να μην είναι η σωστή κατηγορία.</string>
 </resources>
