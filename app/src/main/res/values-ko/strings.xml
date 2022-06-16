@@ -59,9 +59,9 @@
     <string name="changeLanguage">언어</string>
     <string name="systemLanguage">시스템</string>
     <string name="subscribers">%1$s명의 구독자</string>
-    <string name="lightTheme">라이트 테마</string>
+    <string name="lightTheme">라이트</string>
     <string name="library">라이브러리</string>
-    <string name="darkTheme">다크 테마</string>
+    <string name="darkTheme">다크</string>
     <string name="systemDefault">시스템</string>
     <string name="retry">재시도</string>
     <string name="comments">댓글</string>
@@ -120,7 +120,7 @@
     <string name="video_format_summary">오디오와 비디오가 모두 다운로드된 경우 파일 변환.</string>
     <string name="appearance_summary">원하는 대로 앱을 조정하세요.</string>
     <string name="no_replies">이 댓글에는 답글이 없습니다.</string>
-    <string name="authors_summary">LibreTube 팀과 이 모든 일이 어떻게 일어나는지 알아보십시오.</string>
+    <string name="authors_summary">모두를 알아보세요.</string>
     <string name="update_available">%1$s 버전 사용 가능</string>
     <string name="update_available_text">GitHub의 릴리스로 이동하여 다운로드하시겠습니까\?</string>
     <string name="app_behavior">동작</string>
@@ -158,8 +158,21 @@
     <string name="customInstance_summary">사용자 정의 인스턴스 추가(위험 부담)</string>
     <string name="instance_name">인스턴스 이름</string>
     <string name="clear_customInstances">커스텀 인스턴스 지우기</string>
-    <string name="instance_api_url">인스턴스 API URL</string>
-    <string name="empty_instance">이름과 API URL을 입력해야 합니다.</string>
-    <string name="invalid_url">유효한 URL을 입력 해주세요</string>
+    <string name="instance_api_url">인스턴스 API에 대한 URL</string>
+    <string name="empty_instance">이름과 API URL을 입력합니다.</string>
+    <string name="invalid_url">작동하는 URL을 입력하세요</string>
     <string name="instance_summary">Piped, 로그인, 구독</string>
+    <string name="related_streams">관련된 컨텐츠</string>
+    <string name="related_streams_summary">시청 중인 콘텐츠와 함께 관련 스트림을 표시합니다.</string>
+    <string name="version">버전 %1$s</string>
+    <string name="about_summary">LibreTube 팀과 그 모든 일이 어떻게 일어나는지 알아보세요.</string>
+    <string name="show_chapters">챕터 보기</string>
+    <string name="hide_chapters">챕터 숨기기</string>
+    <string name="category_music_offtopic">음악: 비음악 섹션</string>
+    <string name="category_preview">미리보기/요약</string>
+    <string name="category_preview_description">이 시리즈 또는 시리즈의 향후 비디오에서 예정된 콘텐츠를 자세히 설명하지만 추가 정보를 제공하지 않는 세그먼트의 경우. 여기에만 나타나는 클립이 포함된 경우 잘못된 범주일 가능성이 높습니다.</string>
+    <string name="category_music_offtopic_description">뮤직 비디오에서만 사용합니다. 공식 믹스의 일부가 아닌 비디오의 일부를 다루어야 합니다. 결국 비디오는 Spotify 또는 기타 혼합 버전과 최대한 유사하거나 말이나 기타 방해 요소를 줄여야 합니다.</string>
+    <string name="buffering_goal_summary">최대 버퍼링할 비디오의 시간(초)입니다.</string>
+    <string name="playerVideoFormat">플레이어의 비디오 형식</string>
+    <string name="buffering_goal">사전 로딩</string>
 </resources>

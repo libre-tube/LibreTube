@@ -71,7 +71,7 @@
     <string name="instance">Instancia</string>
     <string name="settings">Ajustes</string>
     <string name="website">Sitio web</string>
-    <string name="location">Ubicación</string>
+    <string name="location">Localización</string>
     <string name="choose_filter">Elija el filtro de búsqueda</string>
     <string name="channels">Canales</string>
     <string name="all">Todo</string>
@@ -173,4 +173,8 @@
     <string name="appearance_summary">Ajuste la aplicación a su gusto.</string>
     <string name="playback_speed">Velocidad de reproducción predeterminada</string>
     <string name="live">En vivo</string>
+    <string name="show_chapters">Mostrar capítulos</string>
+    <string name="hide_chapters">Ocultar capítulos</string>
+    <string name="buffering_goal">Objetivo del búfer</string>
+    <string name="buffering_goal_summary">La cantidad de segundos que los videos se precargan al máximo.</string>
 </resources>

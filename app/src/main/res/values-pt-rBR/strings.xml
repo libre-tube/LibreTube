@@ -41,7 +41,7 @@
     <string name="success">Sucesso!</string>
     <string name="fail">Falhou :(</string>
     <string name="about">Sobre</string>
-    <string name="choose_quality_dialog">Escolha a qualidade:</string>
+    <string name="choose_quality_dialog">Qualidade</string>
     <string name="subscribe">Inscrever-se</string>
     <string name="dlisinprogress">Outro download já está em andamento, por favor aguarde até que seja concluído.</string>
     <string name="username">Nome do usuário</string>

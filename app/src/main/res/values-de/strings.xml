@@ -162,4 +162,12 @@
     <string name="invalid_url">Bitte gib eine gültige URL ein</string>
     <string name="instance_summary">Piped, Anmeldung, Abonnements</string>
     <string name="customInstance_summary">Hinzufügen einer benutzerdefinierten Instanz (auf eigenes Risiko)</string>
+    <string name="category_music_offtopic">Musik: Nicht-musikalische Abteilung</string>
+    <string name="category_preview">Vorschau/Rückblick</string>
+    <string name="hide_chapters">Kapitel ausblenden</string>
+    <string name="show_chapters">Kapitel anzeigen</string>
+    <string name="buffering_goal">Ziel der Pufferung</string>
+    <string name="buffering_goal_summary">Die Anzahl der Sekunden, die Videos maximal vorgeladen werden.</string>
+    <string name="category_music_offtopic_description">Dies ist nur zur Verwendung in Musikvideos gedacht. Es sollte Teile des Videos abdecken, die nicht Teil der offiziellen Mixe sind. Am Ende sollte das Video der Spotify- oder einer anderen Mix-Version so nahe wie möglich kommen oder das Sprechen oder andere Ablenkungen reduzieren.</string>
+    <string name="playerVideoFormat">Player-Videoformat</string>
 </resources>
