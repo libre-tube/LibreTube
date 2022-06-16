@@ -175,4 +175,13 @@
     <string name="donate_summary">Ge det detta är värt for dig, om du kan. LibreTube-teamet är mindre än din donation eller hjälp.</string>
     <string name="show_chapters">Visa kapitel</string>
     <string name="hide_chapters">Dölj kapitel</string>
+    <string name="category_filler">Tangentiella avledningar/skämt</string>
+    <string name="category_filler_description">For extra scener som lagts till som fyllstoff eller skämt som inte krävs for att förstå huvudinnehållande av videon.</string>
+    <string name="category_music_offtopic">Musik: Parti utan musik</string>
+    <string name="category_music_offtopic_description">Endast for bruk i musikvideor. Brukas for delar som inte är en del av den officiella mixen. Den ändliga videon ska matcha Spotify-versionen eller en annan mixad version så närt som mögligt, eller reducera snack och andra distraktioner.</string>
+    <string name="category_preview">Förhandsvisning/retrospektiv</string>
+    <string name="category_preview_description">For segment som visar vad som följer i denne videon, eller kommande videor i samma serie, men inte ger ytterligare info. Om det inkluderar klipp som endast finnas här er det antaglig fel kategori.</string>
+    <string name="buffering_goal">Inlastningsmängd</string>
+    <string name="buffering_goal_summary">Maks. antal sekunder videor att buffra.</string>
+    <string name="playerVideoFormat">Videoformat for spelaren</string>
 </resources>
