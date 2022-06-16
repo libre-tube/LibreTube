@@ -168,4 +168,9 @@
     <string name="customInstance_summary">Özel bir oluşum ekleyin (riski size ait olmak üzere)</string>
     <string name="empty_instance">Adı ve API bağlantısını doldurmanız gerekir.</string>
     <string name="instance_name">Oluşumun adı</string>
+    <string name="invalid_url">Lütfen geçerli bir URL girin</string>
+    <string name="version">Sürüm %1$s</string>
+    <string name="about_summary">LibreTube ekibini tanıyın ve tüm bunların nasıl gerçekleştiğini öğrenin.</string>
+    <string name="show_chapters">Bölümleri göster</string>
+    <string name="hide_chapters">Bölümleri gizle</string>
 </resources>
