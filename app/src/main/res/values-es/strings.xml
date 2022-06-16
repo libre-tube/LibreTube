@@ -59,8 +59,8 @@
     <string name="import_from_yt_summary">Desde YouTube o NewPipe</string>
     <string name="changeLanguage">Idioma</string>
     <string name="systemLanguage">Sistema</string>
-    <string name="lightTheme">Tema claro</string>
-    <string name="darkTheme">Tema oscuro</string>
+    <string name="lightTheme">Claro</string>
+    <string name="darkTheme">Oscuro</string>
     <string name="subscribers">%1$s suscriptores</string>
     <string name="systemDefault">Sistema</string>
     <string name="comments">Comentarios</string>
@@ -89,7 +89,7 @@
     <string name="sponsorblock_summary">Utiliza la API de https://sponsor.ajay.app</string>
     <string name="segment_skipped">Segmento omitido</string>
     <string name="category_sponsor">Patrocinador</string>
-    <string name="category_sponsor_description">Promoción pagada, referencias pagadas y anuncios directos. No para la autopromoción o los anuncios gratuitos de causas/creadores/sitios web/productos que les gustan.</string>
+    <string name="category_sponsor_description">Promoción pagada, referencias pagadas y anuncios directos. No para la autopromoción o los agradecimientos genuinos y gratuitos a las causas, creadores, sitios web y productos.</string>
     <string name="sponsorblock_state">Activado</string>
     <string name="category_segments">Segmentos</string>
     <string name="category_selfpromo_description">Similar a \"patrocinador\", excepto que no se paga o se hace autopromoción. Esto incluye secciones sobre mercancía, donaciones o información sobre con quién han colaborado.</string>
@@ -107,7 +107,7 @@
     <string name="color_green">Verde</string>
     <string name="color_blue">Azul</string>
     <string name="color_purple">Púrpura</string>
-    <string name="oledTheme">Tema negro</string>
+    <string name="oledTheme">Negro</string>
     <string name="material_you">Mystic Material 3</string>
     <string name="app_icon">Icono</string>
     <string name="piped">Piped</string>
@@ -123,7 +123,7 @@
     <string name="appearance">Apariencia</string>
     <string name="no_replies">Este comentario no tiene respuestas.</string>
     <string name="authors">Autores</string>
-    <string name="authors_summary">Conoce al equipo de LibreTube y a todos los colaboradores que ayudan a mejorar la aplicación.</string>
+    <string name="authors_summary">Conozca a todos.</string>
     <string name="internal_storage">Almacenamiento interno</string>
     <string name="sdcard">Tarjeta SD</string>
     <string name="shareTo">Compartir con</string>
@@ -141,14 +141,14 @@
     <string name="birdIcon">Pájaro</string>
     <string name="instance_summary">Piped, sesión y suscripciones</string>
     <string name="instance_name">Nombre de la instancia</string>
-    <string name="instance_api_url">URL de la instancia</string>
-    <string name="empty_instance">Tienes que llenar el nombre y el URL</string>
+    <string name="instance_api_url">URL de la API de la instancia</string>
+    <string name="empty_instance">Introduzca el nombre y la URL de la API.</string>
     <string name="clear_customInstances">Eliminar instancias personalizadas</string>
-    <string name="invalid_url">Por favor, introduce un URL válido</string>
+    <string name="invalid_url">Por favor, introduzca una URL que funcione</string>
     <string name="version">Versión %1$s</string>
     <string name="about_summary">Conoce al equipo de LibreTube y como sucede todo.</string>
-    <string name="related_streams">Transmisiones relacionadas</string>
-    <string name="related_streams_summary">Mostrar transmisiones relacionadas con los videos.</string>
+    <string name="related_streams">Contenido relacionado</string>
+    <string name="related_streams_summary">Mostrar transmisiones relacionadas con lo que ves.</string>
     <string name="website_summary">Visita el sitio web para más información de la aplicación y sus características.</string>
     <string name="contributing_summary">Aportar ideas, traducciones, cambios de diseño, limpiar y escribir código. ¡Cuanto más se haga, mejor será!</string>
     <string name="license_summary">La GPLv3+ es una licencia libre con copyleft. Utiliza, estudia, cambia y comparte; con todos.</string>
@@ -175,6 +175,13 @@
     <string name="live">En vivo</string>
     <string name="show_chapters">Mostrar capítulos</string>
     <string name="hide_chapters">Ocultar capítulos</string>
-    <string name="buffering_goal">Objetivo del búfer</string>
-    <string name="buffering_goal_summary">La cantidad de segundos que los videos se precargan al máximo.</string>
+    <string name="buffering_goal">Precarga</string>
+    <string name="buffering_goal_summary">Cantidad máxima de segundos de vídeo a almacenar en búfer.</string>
+    <string name="category_filler">Tangente/chistes de relleno</string>
+    <string name="category_music_offtopic">Música: Sección no musical</string>
+    <string name="category_preview">Vista previa/Resumen</string>
+    <string name="category_preview_description">Para los segmentos que detallan los próximos contenidos de este o futuros vídeos de su serie, pero que no proporcionan información adicional. Si incluye clips que sólo aparecen aquí, es muy probable que esta sea la categoría equivocada.</string>
+    <string name="category_filler_description">Para las escenas tangenciales que se añaden sólo para el relleno o el humor que no es necesario para entender el contenido principal del vídeo.</string>
+    <string name="playerVideoFormat">Formato de vídeo para el reproductor</string>
+    <string name="category_music_offtopic_description">Sólo para su uso en vídeos musicales. Debe abarcar partes del vídeo que no formen parte de las mezclas oficiales. Al final, el vídeo debe parecerse lo más posible a la versión de Spotify o a cualquier otra versión mezclada, o reducir las conversaciones u otras distracciones.</string>
 </resources>
