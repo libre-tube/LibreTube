@@ -720,12 +720,18 @@ class PlayerFragment : Fragment() {
                             setMediaSource(subtitle, videoUri, audioUrl)
                             qualityText.text = videosNameArray[index]
                             return@lit
-                        } else if (index + 1 == response.videoStreams.size) {
+                        } else if (response.hls != null) {
                             val mediaItem: MediaItem = MediaItem.Builder()
                                 .setUri(response.hls)
                                 .setSubtitleConfigurations(subtitle)
                                 .build()
                             exoPlayer.setMediaItem(mediaItem)
+                        } else {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.unknown_error),
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
                 }
@@ -967,7 +973,6 @@ class PlayerFragment : Fragment() {
                 return@launchWhenCreated
             } catch (e: HttpException) {
                 Log.e(TAG, "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
             commentsAdapter = CommentsAdapter(videoId!!, commentsResponse.comments)
