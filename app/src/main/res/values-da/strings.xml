@@ -175,4 +175,11 @@
     <string name="empty_instance">Du må fylde ind navnet og API-URL.</string>
     <string name="show_chapters">Vis kapitler</string>
     <string name="hide_chapters">Skjul kaptitler</string>
+    <string name="category_filler">Fyld-udledelser/vitser</string>
+    <string name="category_preview_description">For segmenter som viser vad som følger i denne eller kommende videoer i serien, men ikke har yderligere info. Hvis dette inkluderer klip som kun vises her er dette antagelig ikke rigtig kategori.</string>
+    <string name="buffering_goal">Mellemlagringsmål</string>
+    <string name="playerVideoFormat">Videoformat for afspiller</string>
+    <string name="category_music_offtopic_description">Kun for brug i musikvideoer. Skal bruges for deler av videoen som ikke er en del av den officielle miksen. Til sidst skal videoen tilsvare den på Spotify, eller en anden mikset version så nært som mugligt, eller reducere snakk eller andre distraktioner.</string>
+    <string name="category_music_offtopic">Musik: Parti uden musik</string>
+    <string name="category_preview">Forhåndsvisning/tilbageblik</string>
 </resources>
