@@ -184,4 +184,10 @@
     <string name="playerVideoFormat">Μορφή βίντεο για τον αναπαραγωγέα</string>
     <string name="category_music_offtopic_description">Μόνο για χρήση σε μουσικά βίντεο. Θα πρέπει να καλύπτει μέρη του βίντεο που δεν περιλαμβάνονται στις επίσημες μίξεις. Στο τέλος, το βίντεο θα πρέπει να μοιάζει όσο το δυνατόν περισσότερο με την έκδοση του Spotify ή οποιαδήποτε άλλη μίξη, ή να μειώνει τις ομιλίες ή άλλους περισπασμούς.</string>
     <string name="category_preview_description">Για τμήματα που περιγράφουν λεπτομερώς το επερχόμενο περιεχόμενο σε αυτό ή σε μελλοντικά βίντεο της σειράς, αλλά δεν παρέχουν πρόσθετες πληροφορίες. Εάν περιλαμβάνει κλιπ που εμφανίζεται μόνο εδώ, είναι πολύ πιθανό να πρόκειται για την λάθος κατηγορία.</string>
+    <string name="no_audio">Χωρίς ήχο</string>
+    <string name="no_video">Χωρίς βίντεο</string>
+    <string name="audio">Ήχος</string>
+    <string name="video">Βίντεο</string>
+    <string name="player_autoplay">Αυτόματη αναπαραγωγή</string>
+    <string name="downloading">Λήψη</string>
 </resources>
