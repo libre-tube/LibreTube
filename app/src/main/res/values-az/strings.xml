@@ -92,8 +92,8 @@
     <string name="changeLanguage">Dil</string>
     <string name="systemLanguage">Sistem</string>
     <string name="systemDefault">Sistem</string>
-    <string name="lightTheme">Parlaq işıq</string>
-    <string name="darkTheme">Zülmət qaranlıq</string>
+    <string name="lightTheme">Açıq mövzu</string>
+    <string name="darkTheme">Tünd mövzu</string>
     <string name="subscribers">%1$s abunəçi</string>
     <string name="videoCount">%1$s video</string>
     <string name="settings">Tənzimləmələr</string>
@@ -103,11 +103,11 @@
     <string name="website">Veb Sayt</string>
     <string name="color_accent">Vurğular</string>
     <string name="color_red">Rahatladıcı qırmızı</string>
-    <string name="color_blue">Qayıq mavisi</string>
+    <string name="color_blue">Piksel mavisi</string>
     <string name="color_yellow">Yeeting sarı</string>
-    <string name="color_green">Qonaq yaşılı</string>
+    <string name="color_green">Möhtəşəm yaşıl</string>
     <string name="color_purple">Zövqlü bənövşəyi</string>
-    <string name="oledTheme">Zil qara</string>
+    <string name="oledTheme">Qara mövzu</string>
     <string name="material_you">Mistik Material 3</string>
     <string name="sponsorblock_notifications">Bildirişlər</string>
     <string name="enabled">Açıq</string>
@@ -142,7 +142,7 @@
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
     <string name="authors">Müəlliflər</string>
-    <string name="authors_summary">LibreTube komandası və bunların necə baş verdiyini öyrənin.</string>
+    <string name="authors_summary">Tətbiqi təkmilləşdirməyə kömək edən LibreTube komandası və onun bütün töhfəçiləri ilə tanış olun.</string>
     <string name="no_replies">Bu şərhə cavab yoxdur.</string>
     <string name="downloads_directory">Endirmə qovluğu</string>
     <string name="music_directory">Musiqi qovluğu</string>
@@ -169,4 +169,16 @@
     <string name="instance_summary">Piped, giriş, abunəliklər</string>
     <string name="empty_instance">Siz adı və API url\'ni doldurmalısınız.</string>
     <string name="clear_customInstances">Fərdi serverləri silin</string>
+    <string name="version">Versiya %1$s</string>
+    <string name="about_summary">LibreTube komandası və bunların necə baş verdiyini öyrənin.</string>
+    <string name="related_streams">Əlaqədar yayımlar</string>
+    <string name="related_streams_summary">Videolara əlaqəli yayımları göstərin.</string>
+    <string name="category_filler">Əlaqəsiz/Zarafatlar</string>
+    <string name="show_chapters">Fəsilləri göstərin</string>
+    <string name="category_music_offtopic">Musiqisizlik: Musiqi olmayan bölmə</string>
+    <string name="category_preview">Önbaxış/Anons</string>
+    <string name="category_preview_description">Eyni seriyanın bu və ya gələcək videolarında nələrin olacağını göstərən, lakin əlavə məlumat təqdim etməyən seqmentlər üçün. Əgər o, yalnız burada görünən klipləri ehtiva edirsə, bu, çox güman ki, düzgün kateqoriya deyil.</string>
+    <string name="hide_chapters">Fəsilləri gizlədin</string>
+    <string name="category_filler_description">Bu, videonun əsas məzmununu başa düşmək üçün tələb olunmayan, yalnız doldurucu və ya yumor üçün əlavə edilmiş tangensial səhnələr üçündür.</string>
+    <string name="category_music_offtopic_description">Bu, yalnız musiqi videolarında istifadə üçündür. O, rəsmi qarışıqların bir hissəsi deyil, videonun hissələrini əhatə etməlidir. Nəhayət, video Spotify və ya hər hansı digər miks versiyasını mümkün qədər yaxından xatırlatmalı və ya danışıq və ya digər diqqəti yayındıran amilləri azaltmalıdır.</string>
 </resources>

@@ -173,4 +173,15 @@
     <string name="about_summary">Découvrez l\'équipe LibreTube et comment tout cela se passe.</string>
     <string name="related_streams">Streams connexes</string>
     <string name="related_streams_summary">Afficher les flux associés aux vidéos.</string>
+    <string name="category_filler">Tangente de remplissage/blagues</string>
+    <string name="category_preview">Aperçu / récap</string>
+    <string name="category_filler_description">Il s\'agit de scènes tangentielles ajoutées uniquement à titre de remplissage ou d\'humour et qui ne sont pas nécessaires pour comprendre le contenu principal de la vidéo.</string>
+    <string name="show_chapters">Afficher les chapitres</string>
+    <string name="category_music_offtopic">Musique : section non musicale</string>
+    <string name="hide_chapters">Masquer les chapitres</string>
+    <string name="buffering_goal">Objectif de mémoire tampon</string>
+    <string name="buffering_goal_summary">Le nombre de secondes pendant lesquelles les vidéos sont préchargées au maximum.</string>
+    <string name="category_music_offtopic_description">Ceci est uniquement destiné à être utilisé dans des vidéos musicales. Il doit couvrir les parties de la vidéo qui ne font pas partie des mixages officiels. Au final, la vidéo doit ressembler le plus possible à la version de Spotify ou de tout autre mix, ou doit réduire les bavardages ou autres distractions.</string>
+    <string name="playerVideoFormat">Format vidéo du lecteur</string>
+    <string name="category_preview_description">Pour les segments qui montrent ce qui est à venir dans cette vidéo ou dans les vidéos futures de la même série, mais qui ne fournissent pas d\'informations supplémentaires. S\'il s\'agit de clips qui n\'apparaissent qu\'ici, il est très probable que cette catégorie ne soit pas la bonne.</string>
 </resources>

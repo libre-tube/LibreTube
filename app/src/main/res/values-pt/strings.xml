@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="loggedout">Desconectado com sucesso!</string>
-    <string name="choose_quality_dialog">Escolha a qualidade:</string>
+    <string name="choose_quality_dialog">Qualidade</string>
     <string name="search_hint">Procurar</string>
     <string name="subscribe">Inscrever-se</string>
     <string name="unsubscribe">CANCELAR INSCRIÇÃO</string>
@@ -21,7 +21,7 @@
     <string name="subscribeIsEmpty">Inscreva-se em alguns canais primeiro!</string>
     <string name="cannotDownload">Não é possível baixar esta transmissão!</string>
     <string name="dlcomplete">O download foi concluído!</string>
-    <string name="downloadfailed">Falha no download!</string>
+    <string name="downloadfailed">Falha no download.</string>
     <string name="app_theme">Tema do aplicativo</string>
     <string name="server_error">O servidor encontrou um problema. Talvez tente outra instância\?</string>
     <string name="unknown_error">Erro de rede!</string>
@@ -51,4 +51,8 @@
     <string name="empty">Nome de usuário e senha não podem estar vazios!</string>
     <string name="fail">Falhou</string>
     <string name="about">Sobre</string>
+    <string name="videos">Vídeos</string>
+    <string name="library">Biblioteca</string>
+    <string name="startpage">Início</string>
+    <string name="subscriptions">Subscrições</string>
 </resources>
