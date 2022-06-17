@@ -71,7 +71,7 @@ class DownloadDialog : DialogFragment() {
                 }
             }
             var vidName = arrayListOf<String>()
-            vidName.add("No video")
+            vidName.add(getString(R.string.no_video))
             var vidUrl = arrayListOf<String>()
             vidUrl.add("")
             for (vid in streams.videoStreams!!) {
@@ -80,7 +80,7 @@ class DownloadDialog : DialogFragment() {
                 vidUrl.add(vid.url!!)
             }
             var audioName = arrayListOf<String>()
-            audioName.add("No audio")
+            audioName.add(getString(R.string.no_audio))
             var audioUrl = arrayListOf<String>()
             audioUrl.add("")
             for (audio in streams.audioStreams!!) {
