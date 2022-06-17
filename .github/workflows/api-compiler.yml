@@ -11,23 +11,15 @@ jobs:
 
       - name: Prepare for Compilation
         run: |
-          sudo apt-get update
-          sudo apt-get upgrade
-          sudo apt-get install make git zlib1g-dev libssl-dev gperf cmake g++
           git config --global user.name "XelXen"
           git config --global user.email "78258352+XelXen@users.noreply.github.com"
           git config --global credential.helper store
           echo "https://XelXen:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
-          git clone --recursive https://github.com/tdlib/telegram-bot-api.git
-          cd telegram-bot-api
-          rm -rf build
-          mkdir build
-          cd build
 
-      - name: Patch and Compile
+      - name: Run Script
         run: |
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
-          cmake --build . --target install
+            chmod 755 .github/compiler.sh
+            .github/compiler.sh
 
       - name: Binary Archive
         run: |
