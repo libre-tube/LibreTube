@@ -184,4 +184,5 @@
     <string name="buffering_goal">Precaricamento</string>
     <string name="buffering_goal_summary">La quantità massima di secondi che viene bufferizzata nei video.</string>
     <string name="playerVideoFormat">Formato video del lettore</string>
+    <string name="player_autoplay">Riproduzione automatica</string>
 </resources>
