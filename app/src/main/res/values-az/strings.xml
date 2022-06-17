@@ -185,4 +185,9 @@
     <string name="buffering_goal_summary">Maks. bufer üçün video saniyələrin miqdarı.</string>
     <string name="buffering_goal">Ön yükləmə</string>
     <string name="player_autoplay">Avto-oynatma</string>
+    <string name="no_video">Video yoxdur</string>
+    <string name="downloading">Endirilir</string>
+    <string name="video">Video</string>
+    <string name="no_audio">Səs yoxdur</string>
+    <string name="audio">Səs</string>
 </resources>
