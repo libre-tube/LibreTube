@@ -189,4 +189,5 @@
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="downloading">Downloading</string>
+    <string name="player_autoplay">Autoplay</string>
 </resources>
