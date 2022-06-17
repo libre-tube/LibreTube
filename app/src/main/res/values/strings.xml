@@ -184,4 +184,10 @@
     <string name="buffering_goal">Preloading</string>
     <string name="buffering_goal_summary">Max. amount of seconds of video to buffer.</string>
     <string name="playerVideoFormat">Video format for player</string>
+    <string name="no_audio">No audio</string>
+    <string name="no_video">No video</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="downloading">Downloading</string>
+    <string name="player_autoplay">Autoplay</string>
 </resources>

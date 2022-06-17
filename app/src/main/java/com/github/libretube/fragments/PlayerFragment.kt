@@ -53,6 +53,7 @@ import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
@@ -101,6 +102,8 @@ class PlayerFragment : Fragment() {
     private var eId: Int = 0
     private var paused = false
     private var whichQuality = 0
+    private var transitioning = false
+    private var autoplay = false
     private var isZoomed: Boolean = false
 
     private var isSubscribed: Boolean = false
@@ -115,6 +118,7 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var segmentData: Segments
+    private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var relatedStreamsEnabled = true
 
     private lateinit var relDownloadVideo: LinearLayout
@@ -386,10 +390,13 @@ class PlayerFragment : Fragment() {
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
 
-                // check whether related streams are enabled
+                // check whether related streams and autoplay are enabled
                 val sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(requireContext())
+                autoplay = sharedPreferences.getBoolean("autoplay", false)
                 relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
+                // save related streams for autoplay
+                relatedStreams = response.relatedStreams
                 runOnUiThread {
                     createExoPlayer(view)
                     prepareExoPlayerView()
@@ -515,8 +522,22 @@ class PlayerFragment : Fragment() {
                         !playWhenReady
                     )
 
+                // check if video has ended, next video is available and autoplay is enabled.
+                if (
+                    playbackState == Player.STATE_ENDED &&
+                    relatedStreams != null &&
+                    relatedStreams!!.isNotEmpty() &&
+                    !transitioning &&
+                    autoplay
+                ) {
+                    transitioning = true
+                    videoId = relatedStreams!![0].url!!.replace("/watch?v=", "")
+                    fetchJsonAndInitPlayer(view)
+                }
+
                 if (playWhenReady && playbackState == Player.STATE_READY) {
                     // media actually playing
+                    transitioning = false
                     view.findViewById<ImageView>(R.id.play_imageView)
                         .setImageResource(R.drawable.ic_pause)
                 } else if (playWhenReady) {

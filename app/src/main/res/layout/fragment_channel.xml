@@ -83,7 +83,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="11sp"
                     android:drawableLeft="@drawable/ic_bell_small"
-                    android:drawableTint="@android:color/white" />
+                    android:drawableTint="?android:attr/textColorPrimary" />
 
             </LinearLayout>
 
