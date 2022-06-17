@@ -185,4 +185,9 @@
     <string name="playerVideoFormat">Format vidéo pour le lecteur</string>
     <string name="category_preview_description">Pour les segments détaillant le contenu à venir de cette vidéo ou des futures vidéos de sa série, mais qui ne fournissent pas d\'informations supplémentaires. Si elle comprend des clips qui n\'apparaissent qu\'ici, il s\'agit très probablement de la mauvaise catégorie.</string>
     <string name="player_autoplay">Lecture automatique</string>
+    <string name="no_audio">Sans audio</string>
+    <string name="no_video">Sans vidéo</string>
+    <string name="audio">Audio</string>
+    <string name="video">Vidéo</string>
+    <string name="downloading">Téléchargement</string>
 </resources>
