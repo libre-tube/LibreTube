@@ -113,15 +113,30 @@ class DownloadService : Service() {
                 "mux" -> {
                     audioDir = File(tempDir, "$videoId-audio")
                     videoDir = File(tempDir, "$videoId-video")
-                    downloadId = downloadManagerRequest(getString(R.string.video), getString(R.string.downloading), videoUrl, videoDir)
+                    downloadId = downloadManagerRequest(
+                        getString(R.string.video),
+                        getString(R.string.downloading),
+                        videoUrl,
+                        videoDir
+                    )
                 }
                 "video" -> {
                     videoDir = File(libretubeDir, "$videoId-video")
-                    downloadId = downloadManagerRequest(getString(R.string.video), getString(R.string.downloading), videoUrl, videoDir)
+                    downloadId = downloadManagerRequest(
+                        getString(R.string.video),
+                        getString(R.string.downloading),
+                        videoUrl,
+                        videoDir
+                    )
                 }
                 "audio" -> {
                     audioDir = File(libretubeDir, "$videoId-audio")
-                    downloadId = downloadManagerRequest(getString(R.string.audio), getString(R.string.downloading), audioUrl, audioDir)
+                    downloadId = downloadManagerRequest(
+                        getString(R.string.audio),
+                        getString(R.string.downloading),
+                        audioUrl,
+                        audioDir
+                    )
                 }
             }
         } catch (e: IllegalArgumentException) {
@@ -136,7 +151,12 @@ class DownloadService : Service() {
             // Checking if the received broadcast is for our enqueued download by matching download id
             if (downloadId == id) {
                 if (downloadType == "mux") {
-                    downloadManagerRequest(getString(R.string.video), getString(R.string.downloading), audioUrl, audioDir)
+                    downloadManagerRequest(
+                        getString(R.string.video),
+                        getString(R.string.downloading),
+                        audioUrl,
+                        audioDir
+                    )
                 } else {
                     downloadSucceededNotification()
                     onDestroy()
