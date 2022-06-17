@@ -75,7 +75,6 @@ class DownloadDialog : DialogFragment() {
                 }
             }
 
-
             var vidName = arrayListOf<String>()
             var vidUrl = arrayListOf<String>()
 
