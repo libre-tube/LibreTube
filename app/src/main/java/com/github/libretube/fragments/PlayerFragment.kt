@@ -522,9 +522,9 @@ class PlayerFragment : Fragment() {
                         !playWhenReady
                     )
 
-
                 // check if video has ended, next video is available and autoplay is enabled.
-                if(playbackState == Player.STATE_ENDED && relatedStreams != null && relatedStreams!!.isNotEmpty() && !transitioning && autoplay) {
+                if(playbackState == Player.STATE_ENDED && relatedStreams != null && 
+                    relatedStreams!!.isNotEmpty() && !transitioning && autoplay) {
                     transitioning = true
                     videoId = relatedStreams!![0].url!!.replace("/watch?v=", "")
                     fetchJsonAndInitPlayer(view)
