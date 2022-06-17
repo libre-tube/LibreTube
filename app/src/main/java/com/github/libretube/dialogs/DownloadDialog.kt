@@ -10,7 +10,6 @@ import android.os.Environment
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -26,18 +25,23 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
-    var streams: Streams = Streams()
-    var selectedVideo = 0
-    var selectedAudio = 0
-    var duration = 0
+
+    private lateinit var streams: Streams
     private lateinit var videoId: String
+    private var duration = 0
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             streams = arguments?.getParcelable("streams")!!
             videoId = arguments?.getString("video_id")!!
 
             val mainActivity = activity as MainActivity
-            Log.e(TAG, "download button clicked!")
+            val builder = MaterialAlertDialogBuilder(it)
+            // Get the layout inflater
+            val inflater = requireActivity().layoutInflater
+            var view: View = inflater.inflate(R.layout.dialog_download, null)
+
+            // request storage permissions if not granted yet
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
                 if (!Environment.isExternalStorageManager()) {
@@ -70,50 +74,45 @@ class DownloadDialog : DialogFragment() {
                     )
                 }
             }
+
             var vidName = arrayListOf<String>()
-            vidName.add(getString(R.string.no_video))
             var vidUrl = arrayListOf<String>()
+
+            // add empty selection
+            vidName.add(getString(R.string.no_video))
             vidUrl.add("")
+
+            // add all available video streams
             for (vid in streams.videoStreams!!) {
                 val name = vid.quality + " " + vid.format
                 vidName.add(name)
                 vidUrl.add(vid.url!!)
             }
+
             var audioName = arrayListOf<String>()
-            audioName.add(getString(R.string.no_audio))
             var audioUrl = arrayListOf<String>()
+
+            // add empty selection
+            audioName.add(getString(R.string.no_audio))
             audioUrl.add("")
+
+            // add all available audio streams
             for (audio in streams.audioStreams!!) {
                 val name = audio.quality + " " + audio.format
                 audioName.add(name)
                 audioUrl.add(audio.url!!)
             }
 
-            val builder = MaterialAlertDialogBuilder(it)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater
-            var view: View = inflater.inflate(R.layout.dialog_download, null)
             val videoSpinner = view.findViewById<Spinner>(R.id.video_spinner)
-            val videoArrayAdapter = ArrayAdapter<String>(
+            val videoArrayAdapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
                 vidName
             )
             videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             videoSpinner.adapter = videoArrayAdapter
-            videoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    selectedVideo = position
-                    Log.d(TAG, selectedVideo.toString())
-                }
+            videoSpinner.setSelection(1)
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
             val audioSpinner = view.findViewById<Spinner>(R.id.audio_spinner)
             val audioArrayAdapter = ArrayAdapter(
                 requireContext(),
@@ -122,27 +121,17 @@ class DownloadDialog : DialogFragment() {
             )
             audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             audioSpinner.adapter = audioArrayAdapter
-            audioSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    selectedAudio = position
-                    Log.d(TAG, selectedAudio.toString())
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
+            audioSpinner.setSelection(1)
 
             view.findViewById<Button>(R.id.download).setOnClickListener {
+                val selectedAudioUrl = audioUrl[audioSpinner.selectedItemPosition]
+                val selectedVideoUrl = vidUrl[videoSpinner.selectedItemPosition]
+
                 val intent = Intent(context, DownloadService::class.java)
                 intent.putExtra("videoId", videoId)
-                intent.putExtra("videoUrl", vidUrl[selectedVideo])
-                intent.putExtra("audioUrl", audioUrl[selectedAudio])
+                intent.putExtra("videoUrl", selectedVideoUrl)
+                intent.putExtra("audioUrl", selectedAudioUrl)
                 intent.putExtra("duration", duration)
-                // intent.putExtra("command","-y -i ${response.videoStreams[which].url} -i ${response.audioStreams!![0].url} -c copy ${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)}/${videoId}.mkv")
                 context?.startService(intent)
                 dismiss()
             }

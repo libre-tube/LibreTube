@@ -152,7 +152,7 @@ class DownloadService : Service() {
             if (downloadId == id) {
                 if (downloadType == "mux") {
                     downloadManagerRequest(
-                        getString(R.string.video),
+                        getString(R.string.audio),
                         getString(R.string.downloading),
                         audioUrl,
                         audioDir
