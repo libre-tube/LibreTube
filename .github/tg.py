@@ -2,11 +2,11 @@ import telegram
 from tgconfig import *
 from json import load
 import multiprocessing
-from os import system as run
+import os
 from time import sleep as wait
 
 def deploy():
-    run(f'~/bot-api --local --api-id={TG_API_ID} --api-hash={TG_API_HASH}')
+    os.system(f'~/bot-api --local --api-id={TG_API_ID} --api-hash={TG_API_HASH}')
 
 def bot():
     wait(10)
@@ -22,8 +22,10 @@ def bot():
 Signed-off-by: {data['commit']['author']['name']}
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
     bot.send_media_group(TG_POST_ID, [telegram.InputMediaDocument(open('app-x86-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-x86_64-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-armeabi-v7a-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-arm64-v8a-debug.apk', 'rb'))])
-    run('pid=$(pgrep bot-api)')
-    run('pkill $pid')
+    for line in os.popen("ps ax | grep bot-api | grep -v grep"):
+        fields = line.split()
+        pid = fields[0]
+        os.kill(int(pid), signal.SIGKILL)
     
 
 if __name__ == '__main__':
