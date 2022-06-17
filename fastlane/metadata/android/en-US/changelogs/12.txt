@@ -1,0 +1,9 @@
+Subscribed Channels Rework
+Update Checker
+About Section in Settings
+Live videos fix and indication
+Comment replies
+Search suggestions rewrite
+Custom instance option
+Video chapters support
+Player notification thumbnail and description
