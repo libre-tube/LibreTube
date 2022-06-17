@@ -184,4 +184,5 @@
     <string name="category_filler_description">Para las escenas tangenciales que se añaden sólo para el relleno o el humor que no es necesario para entender el contenido principal del vídeo.</string>
     <string name="playerVideoFormat">Formato de vídeo para el reproductor</string>
     <string name="category_music_offtopic_description">Sólo para su uso en vídeos musicales. Debe abarcar partes del vídeo que no formen parte de las mezclas oficiales. Al final, el vídeo debe parecerse lo más posible a la versión de Spotify o a cualquier otra versión mezclada, o reducir las conversaciones u otras distracciones.</string>
+    <string name="player_autoplay">Reproducción automática</string>
 </resources>
