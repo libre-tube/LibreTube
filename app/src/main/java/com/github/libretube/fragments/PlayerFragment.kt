@@ -523,7 +523,7 @@ class PlayerFragment : Fragment() {
                     )
 
                 // check if video has ended, next video is available and autoplay is enabled.
-                if(
+                if (
                     playbackState == Player.STATE_ENDED &&
                     relatedStreams != null &&
                     relatedStreams!!.isNotEmpty() &&
