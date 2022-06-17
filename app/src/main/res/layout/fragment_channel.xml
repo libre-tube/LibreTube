@@ -80,7 +80,7 @@
                     android:layout_alignParentEnd="true"
                     android:backgroundTint="?attr/colorOnPrimary"
                     android:text="@string/subscribe"
-                    android:textColor="@android:color/white"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="11sp"
                     android:drawableLeft="@drawable/ic_bell_small"
                     android:drawableTint="?android:attr/textColorPrimary" />
