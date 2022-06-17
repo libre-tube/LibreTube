@@ -36,6 +36,6 @@
         android:backgroundTint="?attr/colorOnPrimary"
         android:text="@string/unsubscribe"
         android:textSize="11dp"
-        android:textColor="@android:color/white"
+        android:textColor="?android:attr/textColorPrimary"
         app:cornerRadius="20dp" />
 </RelativeLayout>
