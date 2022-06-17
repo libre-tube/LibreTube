@@ -103,7 +103,7 @@ class PlayerFragment : Fragment() {
     private var paused = false
     private var whichQuality = 0
     private var transitioning = false
-    private var autoplay = false;
+    private var autoplay = false
     private var isZoomed: Boolean = false
 
     private var isSubscribed: Boolean = false
