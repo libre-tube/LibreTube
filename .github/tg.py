@@ -1,19 +1,36 @@
 import telegram
 from tgconfig import *
 from json import load
+import multiprocessing
+from os import system as run
+from time import sleep as wait
 
-f = open('commit.json')
-data = load(f)
-f.close()
+def deploy():
+    run(f'~/bot-api --local --api_id={TG_API_ID} --api_hash={TG_API_HASH}')
 
-bot = telegram.Bot(TG_TOKEN)
-bot.send_photo(TG_POST_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][0:7]} // Alpha*
+def bot():
+    wait(10)
+    f = open('commit.json')
+    data = load(f)
+    f.close()
 
-{data['commit']['message']}
+    bot = telegram.Bot(TG_TOKEN, base_url="http://0.0.0.0:8081/bot")
+    bot.send_photo(TG_POST_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][0:7]} // Alpha*
 
-Signed-off-by: {data['commit']['author']['name']}
-''', parse_mode=telegram.ParseMode.MARKDOWN)
-bot.send_document(TG_POST_ID, open('app-arm64-v8a-debug.apk', 'rb'))
-bot.send_document(TG_POST_ID, open('app-armeabi-v7a-debug.apk', 'rb'))
-bot.send_document(TG_POST_ID, open('app-x86_64-debug.apk', 'rb'))
-bot.send_document(TG_POST_ID, open('app-x86-debug.apk', 'rb'))
+    {data['commit']['message']}
+
+    Signed-off-by: {data['commit']['author']['name']}
+    ''', parse_mode=telegram.ParseMode.MARKDOWN)
+    bot.send_document(TG_POST_ID, open('app-arm64-v8a-debug.apk', 'rb'))
+    bot.send_document(TG_POST_ID, open('app-armeabi-v7a-debug.apk', 'rb'))
+    bot.send_document(TG_POST_ID, open('app-x86_64-debug.apk', 'rb'))
+    bot.send_document(TG_POST_ID, open('app-x86-debug.apk', 'rb'))
+    
+
+if __name__ == '__main__':
+    multideploy = multiprocessing.Process(target=deploy)
+    multibot = multiprocessing.Process(target=bot)
+    multideploy.start()
+    multibot.start()
+    multideploy.join()
+    multibot.join()
