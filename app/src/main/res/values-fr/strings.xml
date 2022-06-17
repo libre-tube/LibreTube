@@ -159,14 +159,14 @@
     <string name="birdIcon">Oiseau boosté</string>
     <string name="torchIcon">Torche tendance</string>
     <string name="instance_summary">Piped, connexion, abonnements</string>
-    <string name="invalid_url">Veuillez entrer une URL valide</string>
+    <string name="invalid_url">Veuillez entrer une URL qui fonctionne</string>
     <string name="customInstance_summary">Ajouter une instance personnalisée (à vos risques et périls)</string>
     <string name="instance_name">Nom de l\'instance</string>
     <string name="flameIcon">Flamme volante</string>
     <string name="instance_api_url">URL de l\'API de l\'instance</string>
     <string name="clear_customInstances">Effacer les instances personnalisées</string>
     <string name="addInstance">Ajouter une instance</string>
-    <string name="empty_instance">Vous devez compléter le nom et l\'URL de l\'API.</string>
+    <string name="empty_instance">Complétez le nom et l\'URL de l\'API.</string>
     <string name="shapedIcon">Forme idiote</string>
     <string name="gradientIcon">Dégradé désinvolte</string>
     <string name="version">Version %1$s</string>
@@ -179,9 +179,10 @@
     <string name="show_chapters">Afficher les chapitres</string>
     <string name="category_music_offtopic">Musique : section non musicale</string>
     <string name="hide_chapters">Masquer les chapitres</string>
-    <string name="buffering_goal">Objectif de mémoire tampon</string>
-    <string name="buffering_goal_summary">Le nombre de secondes pendant lesquelles les vidéos sont préchargées au maximum.</string>
+    <string name="buffering_goal">Préchargement</string>
+    <string name="buffering_goal_summary">Nombre maximal de secondes de vidéo à mettre en mémoire tampon.</string>
     <string name="category_music_offtopic_description">Uniquement pour une utilisation dans des vidéos musicales. Elle doit couvrir les parties de la vidéo qui ne font pas partie des mixages officiels. Au final, la vidéo doit ressembler le plus possible à la version Spotify ou à toute autre version mixée, ou réduire les discussions ou autres distractions.</string>
-    <string name="playerVideoFormat">Format vidéo du lecteur</string>
+    <string name="playerVideoFormat">Format vidéo pour le lecteur</string>
     <string name="category_preview_description">Pour les segments détaillant le contenu à venir de cette vidéo ou des futures vidéos de sa série, mais qui ne fournissent pas d\'informations supplémentaires. Si elle comprend des clips qui n\'apparaissent qu\'ici, il s\'agit très probablement de la mauvaise catégorie.</string>
+    <string name="player_autoplay">Lecture automatique</string>
 </resources>
