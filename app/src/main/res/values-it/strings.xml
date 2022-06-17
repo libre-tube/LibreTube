@@ -185,4 +185,9 @@
     <string name="buffering_goal_summary">La quantità massima di secondi che viene bufferizzata nei video.</string>
     <string name="playerVideoFormat">Formato video del lettore</string>
     <string name="player_autoplay">Riproduzione automatica</string>
+    <string name="audio">Con audio</string>
+    <string name="no_audio">Senza audio</string>
+    <string name="no_video">Senza video</string>
+    <string name="video">Con video</string>
+    <string name="downloading">Scaricando</string>
 </resources>
