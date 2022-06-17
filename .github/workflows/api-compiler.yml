@@ -25,7 +25,7 @@ jobs:
         run: |
           git clone https://github.com/LibreTubeAlpha/Telegram-BotAPI bot-api
           rm -rf bot-api/*
-          mv telegram-bot-api bot-api/exec
+          mv ~/telegram-bot-api/bin/telegram-bot-api bot-api/exec
           cd bot-api
           git add -f *
           git commit -m "WORKFLOW: BUILD BINARIES"
