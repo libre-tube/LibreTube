@@ -185,4 +185,9 @@
     <string name="customInstance_summary">إضافة مثيل مخصص (على مسؤوليتك الخاصة)</string>
     <string name="movies_directory">مجلد الأفلام</string>
     <string name="shareTo">مشاركة عنوان URL إلى</string>
+    <string name="no_audio">لا يوجد صوت</string>
+    <string name="no_video">لا يوجد فيديو</string>
+    <string name="audio">صوت</string>
+    <string name="video">فيديو</string>
+    <string name="downloading">قيد التحميل</string>
 </resources>
