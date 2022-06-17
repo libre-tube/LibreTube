@@ -40,6 +40,13 @@
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_play"
+            app:key="autoplay"
+            app:title="@string/player_autoplay"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/downloads">
