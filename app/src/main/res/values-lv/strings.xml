@@ -59,8 +59,8 @@
     <string name="choose_quality_dialog">Kvalitāte</string>
     <string name="subscribeIsEmpty">Vispirms abonējiet dažus kanālus.</string>
     <string name="success">Izdarīts.</string>
-    <string name="darkTheme">Tumšais motīvs</string>
-    <string name="lightTheme">Gaišais motīvs</string>
+    <string name="darkTheme">Tumšs</string>
+    <string name="lightTheme">Gaišs</string>
     <string name="createPlaylist">Izveidot atskaņošanas sarakstu</string>
     <string name="loggedout">Jūs neesat pierakstījies.</string>
     <string name="noInternet">Vispirms savienojieties ar internetu.</string>
@@ -91,7 +91,7 @@
     <string name="category_outro_description">Informācija pēc video beigām. Nav domāts secinājumiem ar informāciju.</string>
     <string name="segment_skipped">Izlaida segmentu</string>
     <string name="sponsorblock_state">Ieslēgts</string>
-    <string name="category_sponsor_description">Apmaksāta reklāma, apmaksāta pieminēšana un tiešas reklāmas. Ne pašreklamēšanās vai bezmaksas reklāmas veidotājiem/mājaslapām/produktiem, kas viņiem patīk.</string>
+    <string name="category_sponsor_description">Apmaksāta reklāma, apmaksāta pieminēšana un tiešas reklāmas. Nav pašreklāmai vai neapmaksātai reklāmai veidotājiem/mājaslapām/produktiem, kas viņiem patīk.</string>
     <string name="category_selfpromo_description">Līdzīgs \"sponsoram\", taču neapmaksātām reklāmām vai pašreklamēšanai. Tas ietver sadaļas par precēm, ziedošanu vai informāciju par to, ar kuru viņi sadarbojās.</string>
     <string name="license">Licence</string>
     <string name="color_accent">Akcents</string>
@@ -100,7 +100,7 @@
     <string name="color_yellow">Dzeltens</string>
     <string name="color_green">Zaļš</string>
     <string name="color_purple">Violets</string>
-    <string name="oledTheme">Melnais motīvs</string>
+    <string name="oledTheme">Melns</string>
     <string name="material_you">Material 3</string>
     <string name="category_outro">Beigu ekrāns un titri</string>
     <string name="category_intro_description">Brīdis bez īsta satura. Varētu būt pauze, statisks kadrs, atkārtota animācija. Šo nevajadzētu izmantot brīžiem, kas satur informāciju.</string>
@@ -118,7 +118,7 @@
     <string name="playOnBackground">Atskaņot fonā</string>
     <string name="no_replies">Šim komentāram nav atbilžu.</string>
     <string name="authors">Autori</string>
-    <string name="authors_summary">Iepazīstieties ar LibreTube komandu un visiem, kas palīdz uzlabot šo aplikāciju.</string>
+    <string name="authors_summary">Iepazīstieties ar visiem.</string>
     <string name="download_folder_summary">Nosaukums mapei, kurā tiek saglabāti lejupielādētie faili.</string>
     <string name="download_directory">Lejupielādēt uz</string>
     <string name="download_folder">Nosaukums</string>
@@ -162,12 +162,12 @@
     <string name="playback_speed">Noklusējuma atskaņošanas ātrums</string>
     <string name="live">Tiešraide</string>
     <string name="customInstance_summary">Pievienot pielāgotu instanci (uz jūsu atbildību)</string>
-    <string name="empty_instance">Jums vajag ierakstīt nosaukumu un API URL.</string>
+    <string name="empty_instance">Ierakstiet nosaukumu un API URL.</string>
     <string name="clear_customInstances">Notīrīt pielāgotās instances</string>
     <string name="invalid_url">Lūdzu ievadiet derīgu URL</string>
     <string name="show_chapters">Rādīt nodaļas</string>
     <string name="hide_chapters">Paslēpt nodaļas</string>
-    <string name="category_filler_description">Šis ir sprīžiem, kas nav par tēmu vai jokiem, kas nav nepieciešami, lai saprastu video galveno saturu.</string>
+    <string name="category_filler_description">Laika sprīžiem, kas nav par tēmu vai jokiem, kas nav nepieciešami, lai saprastu video galveno saturu.</string>
     <string name="category_filler">Ne par tēmu/joki</string>
     <string name="category_music_offtopic">Mūzika: sprīži bez mūzikas</string>
     <string name="category_preview">Priekšskatījums/atkārtojums</string>
@@ -177,11 +177,12 @@
     <string name="instance_api_url">Instances API URL</string>
     <string name="addInstance">Pievienot instanci</string>
     <string name="version">Versija %1$s</string>
-    <string name="about_summary">Iepazīstieties ar LibreTube komandu un kā tas viss notiek.</string>
-    <string name="related_streams">Saistītās tiešraides</string>
-    <string name="related_streams_summary">Rādīt saistītās tiešraides pie video.</string>
-    <string name="buffering_goal">Buferizācijas mērķis</string>
+    <string name="about_summary">Iepazīstieties ar LibreTube komandu un kā šeit viss notiek.</string>
+    <string name="related_streams">Saistīts saturs</string>
+    <string name="related_streams_summary">Rādīt saistītās tiešraides pie tā, ko jūs skatāties.</string>
+    <string name="buffering_goal">Iepriekšēja ielādēšana</string>
     <string name="buffering_goal_summary">Maksimālais ilgums sekundēs, cik video tiek iepriekš ielādēts.</string>
     <string name="playerVideoFormat">Atskaņotāja video formāts</string>
-    <string name="category_music_offtopic_description">Šis ir tikai priekš mūzikas video. Tas ir laika sprīžiem, kas nav oficiālajā dziesmas versijā. Beigās video vajadzētu būt tik līdzīgam Spotify vai jebkurai citai dziesmas versijai, cik vien iespējams.</string>
+    <string name="category_music_offtopic_description">Tikai priekš mūzikas video. Tas ir laika sprīžiem, kas nav oficiālajā dziesmas versijā. Beigās video vajadzētu būt tik līdzīgam Spotify vai jebkurai citai dziesmas versijai, cik vien iespējams vai ar samazinātu runāšanas daudzumu un uzmanības novēršanu.</string>
+    <string name="player_autoplay">Automātiski atskaņot</string>
 </resources>
