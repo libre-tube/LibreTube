@@ -174,4 +174,11 @@
     <string name="about_summary">Lernen Sie das Team LibreTube kennen und erfahren Sie, wie das alles abläuft.</string>
     <string name="category_preview_description">Für Segmente, die auf kommende Inhalte in diesem oder zukünftigen Videos der Serie hinweisen, aber keine zusätzlichen Informationen liefern. Wenn es Clips enthält, die nur hier erscheinen, ist dies sehr wahrscheinlich die falsche Kategorie.</string>
     <string name="player_autoplay">Automatische Wiedergabe</string>
+    <string name="related_streams_summary">Zeigen Sie verwandte Streams neben dem, was Sie sehen.</string>
+    <string name="related_streams">Verwandte Inhalte</string>
+    <string name="no_audio">Kein Ton</string>
+    <string name="no_video">Kein Video</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="downloading">Wird heruntergeladen</string>
 </resources>
