@@ -721,11 +721,11 @@ class PlayerFragment : Fragment() {
         }
         // create a list of subtitles
         val subtitle = mutableListOf<SubtitleConfiguration>()
-        if (response.subtitles!!.isNotEmpty()) {
+        response.subtitles!!.forEach {
             subtitle.add(
-                SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
-                    .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
-                    .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
+                SubtitleConfiguration.Builder(it.url!!.toUri())
+                    .setMimeType(it.mimeType!!) // The correct MIME type (required).
+                    .setLanguage(it.code) // The subtitle language (optional).
                     .build()
             )
         }
@@ -867,7 +867,7 @@ class PlayerFragment : Fragment() {
         playerNotification = PlayerNotificationManager
             .Builder(c, 1, "background_mode")
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(title, uploader, thumbnailUrl)
+                DescriptionAdapter(title, uploader, thumbnailUrl, requireContext())
             )
             .build()
 
