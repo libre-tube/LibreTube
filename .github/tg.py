@@ -21,7 +21,7 @@ def bot():
 
 Signed-off-by: {data['commit']['author']['name']}
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
-    run('htop')
+    os.system('htop')
     
 
 if __name__ == '__main__':
