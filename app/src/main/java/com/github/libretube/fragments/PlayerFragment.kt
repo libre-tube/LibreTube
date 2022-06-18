@@ -811,7 +811,9 @@ class PlayerFragment : Fragment() {
     private fun createExoPlayer(view: View) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
-        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!!
+        // multiply by thousand: s -> ms
+        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!! * 1000
+        val seekIncrement = sharedPreferences.getString("seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
@@ -834,7 +836,7 @@ class PlayerFragment : Fragment() {
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
                 DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
-                bufferingGoal * 1000, // buffering goal, s -> ms
+                bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
@@ -843,8 +845,8 @@ class PlayerFragment : Fragment() {
         exoPlayer = ExoPlayer.Builder(view.context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
-            .setSeekBackIncrementMs(5000)
-            .setSeekForwardIncrementMs(5000)
+            .setSeekBackIncrementMs(seekIncrement)
+            .setSeekForwardIncrementMs(seekIncrement)
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
