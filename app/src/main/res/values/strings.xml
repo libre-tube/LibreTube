@@ -190,4 +190,6 @@
     <string name="video">Video</string>
     <string name="downloading">Downloading</string>
     <string name="player_autoplay">Autoplay</string>
+    <string name="hideTrendingPage">Hide trending page</string>
+    <string name="instance_frontend_url">URL to instance frontend</string>
 </resources>
