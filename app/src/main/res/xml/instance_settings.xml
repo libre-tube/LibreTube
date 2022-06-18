@@ -24,7 +24,7 @@
             android:icon="@drawable/ic_trash" />
 
         <Preference
-            android:icon="@drawable/ic_login"
+            android:icon="@drawable/ic_login_filled"
             android:summary="@string/notgmail"
             app:key="login_register"
             app:title="@string/login_register" />
