@@ -190,4 +190,6 @@
     <string name="video">Βίντεο</string>
     <string name="player_autoplay">Αυτόματη αναπαραγωγή</string>
     <string name="downloading">Λήψη</string>
+    <string name="hideTrendingPage">Απόκρυψη σελίδας τάσεων</string>
+    <string name="instance_frontend_url">Διεύθυνση URL στη σελίδα του διακομιστή</string>
 </resources>
