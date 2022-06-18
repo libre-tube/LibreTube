@@ -21,12 +21,7 @@ def bot():
 
 Signed-off-by: {data['commit']['author']['name']}
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
-    bot.send_media_group(TG_POST_ID, [telegram.InputMediaDocument(open('app-x86-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-x86_64-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-armeabi-v7a-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-arm64-v8a-debug.apk', 'rb'))])
-    subprocess = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
-    for line in subprocess.communicate().splitlines():
-        if "bot-api" in str(line):
-            pid = int(line.split(None, 1)[0])
-            os.kill(pid, 9)
+    run('htop')
     
 
 if __name__ == '__main__':
