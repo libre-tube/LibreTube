@@ -77,7 +77,8 @@ class BackgroundMode {
                 DescriptionAdapter(
                     response?.title!!,
                     response?.uploader!!,
-                    response?.thumbnailUrl!!
+                    response?.thumbnailUrl!!,
+                    c
                 )
             )
             .build()
