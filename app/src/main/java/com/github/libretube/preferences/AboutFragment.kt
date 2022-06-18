@@ -15,6 +15,7 @@ import com.github.libretube.AUTHORS_URL
 import com.github.libretube.BuildConfig
 import com.github.libretube.CONTRIBUTING_URL
 import com.github.libretube.DONATE_URL
+import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
 import com.github.libretube.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -43,6 +44,10 @@ class AboutFragment : Fragment() {
         val authors = view.findViewById<LinearLayout>(R.id.authors)
         authors.setOnClickListener {
             openLinkFromHref(AUTHORS_URL)
+        }
+        val piped = view.findViewById<LinearLayout>(R.id.piped)
+        piped.setOnClickListener {
+            openLinkFromHref(PIPED_GITHUB_URL)
         }
         val donate = view.findViewById<LinearLayout>(R.id.donate)
         donate.setOnClickListener {
