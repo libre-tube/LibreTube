@@ -26,10 +26,13 @@ jobs:
           java-version: 11
           distribution: "temurin"
           cache: "gradle"
+      - name: Check for Execution Orders
+        run: |
+          cd .github
+          python checkrun.py
 
       - name: Patch and Compile
         run: |
-          cd .github
           python patch.py
           cd ..
           ./gradlew assembleDebug
