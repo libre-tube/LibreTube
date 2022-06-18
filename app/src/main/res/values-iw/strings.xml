@@ -69,7 +69,7 @@
     <string name="donate">תרומה</string>
     <string name="license_summary">GPLv3+‎ הוא רישיון חופשי ומתירני. מותר להשתמש, לחקור, לערוך ולשתף, עם כולם.</string>
     <string name="update_summary">לחיצה כאן תבדוק אם היישומון עדכני.</string>
-    <string name="player">נגן</string>
+    <string name="player">שמע ווידאו</string>
     <string name="library">ספרייה</string>
     <string name="password">סיסמה</string>
     <string name="register">הרשמה</string>
@@ -132,7 +132,7 @@
     <string name="no_update_available">זאת הגרסה העדכנית ביותר.</string>
     <string name="donate_summary">אפשר להעניק בהתאם לערך שהוא מעניק לך. צוות LibreTube קטן מהתרומה או הסיוע שלך.</string>
     <string name="update">איתור גרסה חדשה</string>
-    <string name="advanced_summary">נגן, הורדות, היסטוריה</string>
+    <string name="advanced_summary">הורדות, היסטוריה</string>
     <string name="app_uptodate">היישומון עדכני.</string>
     <string name="playback_speed">מהירות נגינה כברירת מחדל</string>
     <string name="advanced">מתקדם</string>
@@ -190,4 +190,9 @@
     <string name="video">וידאו</string>
     <string name="downloading">מתבצעת הורדה</string>
     <string name="player_autoplay">נגינה אוטומטית</string>
+    <string name="hideTrendingPage">הסתרת עמוד המובילים</string>
+    <string name="instance_frontend_url">כתובת למנשק המשתמש של העותק</string>
+    <string name="player_summary">איכות והתנהגות הנגן</string>
+    <string name="quality">איכות</string>
+    <string name="behavior">התנהגות</string>
 </resources>
