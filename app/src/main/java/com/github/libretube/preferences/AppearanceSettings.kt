@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.github.libretube.R
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
@@ -39,6 +40,12 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val gridColumns = findPreference<ListPreference>("grid")
         gridColumns?.setOnPreferenceChangeListener { _, _ ->
+            requireMainActivityRestart = true
+            true
+        }
+
+        val hideTrending = findPreference<SwitchPreference>("hide_trending_page")
+        hideTrending?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
             true
         }

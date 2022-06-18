@@ -195,4 +195,5 @@
     <string name="quality">Quality</string>
     <string name="behavior">Behavior</string>
     <string name="player_summary">Quality and player behavior</string>
+    <string name="seek_increment">Seek increment</string>
 </resources>

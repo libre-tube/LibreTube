@@ -635,6 +635,7 @@
         <item>1.25x</item>
         <item>1.5x</item>
         <item>2x</item>
+        <item>4x</item>
     </string-array>
     <string-array name="playbackSpeedValues">
         <item>0.25F</item>
@@ -644,6 +645,7 @@
         <item>1.25F</item>
         <item>1.5F</item>
         <item>2F</item>
+        <item>4F</item>
     </string-array>
 
     <string-array name="downloadLocation">
@@ -660,6 +662,13 @@
     </string-array>
 
     <string-array name="bufferingGoal">
+        <item>50s</item>
+        <item>100s</item>
+        <item>200s</item>
+        <item>300s</item>
+        <item>450s</item>
+    </string-array>
+    <string-array name="bufferingGoalValues">
         <item>50</item>
         <item>100</item>
         <item>200</item>
@@ -670,6 +679,19 @@
     <string-array name="playerVideoFormats">
         <item>WEBM</item>
         <item>MPEG_4</item>
+    </string-array>
+
+    <string-array name="seekIncrement">
+        <item>5s</item>
+        <item>10s</item>
+        <item>20s</item>
+        <item>30s</item>
+    </string-array>
+    <string-array name="seekIncrementValues">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
     </string-array>
 
 </resources>
