@@ -14,7 +14,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            android:icon="@drawable/ic_hd"
+            android:icon="@drawable/ic_video"
             app:defaultValue="WEBM"
             app:entries="@array/playerVideoFormats"
             app:entryValues="@array/playerVideoFormats"
@@ -23,7 +23,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            android:icon="@drawable/ic_play"
+            android:icon="@drawable/ic_speed"
             app:defaultValue="1F"
             app:entries="@array/playbackSpeed"
             app:entryValues="@array/playbackSpeedValues"
@@ -32,7 +32,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            android:icon="@drawable/ic_timelapse"
+            android:icon="@drawable/ic_time"
             app:defaultValue="50"
             app:entries="@array/bufferingGoal"
             app:entryValues="@array/bufferingGoal"
@@ -64,7 +64,7 @@
             android:defaultValue="downloads"
             android:entries="@array/downloadLocation"
             android:entryValues="@array/downloadLocationValues"
-            app:icon="@drawable/ic_download"
+            app:icon="@drawable/ic_download_filled"
             app:key="download_location"
             app:summary="@string/download_directory_summary"
             app:title="@string/download_directory" />
