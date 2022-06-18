@@ -63,8 +63,6 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
-
-        
         val advanced = findPreference<Preference>("advanced")
         advanced?.setOnPreferenceClickListener {
             val newFragment = AdvancedSettings()
