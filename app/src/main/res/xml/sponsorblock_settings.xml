@@ -6,20 +6,23 @@
         app:key="sb_enabled_key"
         app:title="@string/sponsorblock"
         android:summaryOff="@string/disabled"
-        android:summaryOn="@string/enabled" />
+        android:summaryOn="@string/enabled" 
+        defaultValue="true"/>
 
     <SwitchPreferenceCompat
         app:key="sb_notifications_key"
         app:title="@string/sponsorblock_notifications"
         android:summaryOff="@string/disabled"
-        android:summaryOn="@string/enabled" />
+        android:summaryOn="@string/enabled" 
+        defaultValue="true"/>
 
     <PreferenceCategory app:title="@string/category_segments">
 
         <SwitchPreferenceCompat
             app:key="sponsors_category_key"
             app:title="@string/category_sponsor"
-            app:summary="@string/category_sponsor_description" />
+            app:summary="@string/category_sponsor_description" 
+            defaultValue="true"/>
 
         <SwitchPreferenceCompat
             app:key="selfpromo_category_key"
