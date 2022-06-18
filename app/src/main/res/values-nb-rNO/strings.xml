@@ -122,7 +122,7 @@
     <string name="download_directory">Last ned til …</string>
     <string name="material_you">Mystisk Materiell 3</string>
     <string name="download_directory_summary">Der nedlastet media lagres.</string>
-    <string name="contributing_summary">Send inn idéer, oversettelser, designendringer, rens og skriv kode. Dest mer som blir gjort, desto bedre blir det.</string>
+    <string name="contributing_summary">Send inn idéer, oversettelser, designendringer, rens og skriv kode. Desto mer som blir gjort, desto bedre blir det.</string>
     <string name="license_summary">GPLv3+ er en gemenfrihetslig lisens. Bruk, studer, endre, og del; med alle.</string>
     <string name="update_summary">Klikk for å finne ut om programmet er av nyeste dato.</string>
     <string name="app_uptodate">Kjører siste versjon.</string>
@@ -184,4 +184,12 @@
     <string name="buffering_goal_summary">Maks. antall sekunders forhåndsinnlasting av videoer.</string>
     <string name="category_preview_description">For segmenter som viser hva som følger i denne eller kommende videoer i serien, men ikke har ytterligere info. Hvis dette inkluderer klipp som kun vises her er det antagelig ikke riktig kategori.</string>
     <string name="buffering_goal">Mellomlagringsmål</string>
+    <string name="downloading">Laster ned …</string>
+    <string name="player_autoplay">Spill automatisk</string>
+    <string name="hideTrendingPage">Ikke vis ting på vei opp</string>
+    <string name="instance_frontend_url">Nettadresse til instans-skjermflate</string>
+    <string name="audio">Lyd</string>
+    <string name="video">Video</string>
+    <string name="no_audio">Ingen lyd</string>
+    <string name="no_video">Ingen video</string>
 </resources>
