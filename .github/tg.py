@@ -20,6 +20,7 @@ def bot():
 {data['commit']['message']}
 
 Signed-off-by: {data['commit']['author']['name']}
+[inline URL](http://www.example.com/)
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
     bot.send_media_group(TG_POST_ID, [telegram.InputMediaDocument(open('app-x86-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-x86_64-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-armeabi-v7a-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-arm64-v8a-debug.apk', 'rb'))])
     system('killall -9 python')
