@@ -2,7 +2,6 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
@@ -27,6 +26,9 @@ class CustomInstanceDialog : DialogFragment() {
 
             val instanceNameEditText = view.findViewById<TextInputEditText>(R.id.instanceName)
             val instanceApiUrlEditText = view.findViewById<TextInputEditText>(R.id.instanceApiUrl)
+            val instanceFrontendUrlEditText = view
+                .findViewById<TextInputEditText>(R.id.instanceFrontendUrl)
+
             val addInstanceButton = view.findViewById<Button>(R.id.addInstance)
             val cancelButton = view.findViewById<Button>(R.id.cancel)
             cancelButton.setOnClickListener {
@@ -36,12 +38,15 @@ class CustomInstanceDialog : DialogFragment() {
             addInstanceButton.setOnClickListener {
                 val instanceName = instanceNameEditText.text.toString()
                 val instanceApiUrl = instanceApiUrlEditText.text.toString()
+                val instanceFrontendUrl = instanceFrontendUrlEditText.text.toString()
 
-                if (instanceName != "" && instanceApiUrl != "") {
+                if (instanceName != "" && instanceApiUrl != "" && instanceFrontendUrl != "") {
                     try {
                         // check whether the URL is valid, otherwise catch
-                        val u = URL(instanceApiUrl).toURI()
-                        saveCustomInstance(instanceName, instanceApiUrl)
+                        URL(instanceApiUrl).toURI()
+                        URL(instanceFrontendUrl).toURI()
+
+                        saveCustomInstance(instanceName, instanceApiUrl, instanceFrontendUrl)
                         activity?.recreate()
                         dismiss()
                     } catch (e: Exception) {
@@ -72,7 +77,11 @@ class CustomInstanceDialog : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun saveCustomInstance(instanceName: String, instanceApiUrl: String) {
+    private fun saveCustomInstance(
+        instanceName: String,
+        instanceApiUrl: String,
+        instanceFrontendApiUrl: String
+    ) {
         val sharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(requireContext())
 
@@ -84,8 +93,16 @@ class CustomInstanceDialog : DialogFragment() {
             emptyList()
         }
 
-        // get the urls of the other custom instances
+        // get the api urls of the other custom instances
         var customInstancesUrls = try {
+            sharedPreferences
+                .getStringSet("custom_instances_url", HashSet())!!.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        // get the frontend urls of the other custom instances
+        var customInstancesFrontendUrls = try {
             sharedPreferences
                 .getStringSet("custom_instances_url", HashSet())!!.toList()
         } catch (e: Exception) {
@@ -95,12 +112,13 @@ class CustomInstanceDialog : DialogFragment() {
         // append new instance to the list
         customInstancesNames += instanceName
         customInstancesUrls += instanceApiUrl
-        Log.e(TAG, customInstancesNames.toString())
+        customInstancesFrontendUrls += instanceFrontendApiUrl
 
         // save them to the shared preferences
         sharedPreferences.edit()
             .putStringSet("custom_instances_name", HashSet(customInstancesNames))
             .putStringSet("custom_instances_url", HashSet(customInstancesUrls))
+            .putStringSet("custom_instances_frontend_url", HashSet(customInstancesFrontendUrls))
             .apply()
     }
 }
