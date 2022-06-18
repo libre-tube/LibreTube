@@ -6,9 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
@@ -79,9 +76,13 @@ class Subscriptions : Fragment() {
             }
 
             var toggleSubs = view.findViewById<RelativeLayout>(R.id.toggle_subs)
+            val arrowImageView = view.findViewById<ImageView>(R.id.toggle)
+
             toggleSubs.visibility = View.VISIBLE
             var loadedSubbedChannels = false
+
             toggleSubs.setOnClickListener {
+                arrowImageView.animate().rotationBy(180F).setDuration(100).start()
                 if (!channelRecView.isVisible) {
                     if (!loadedSubbedChannels) {
                         channelRecView?.layoutManager = LinearLayoutManager(context)
@@ -90,21 +91,6 @@ class Subscriptions : Fragment() {
                     }
                     channelRecView.visibility = View.VISIBLE
                     feedRecView.visibility = View.GONE
-
-                    // toggle button
-                    val rotate = RotateAnimation(
-                        0F,
-                        180F,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f,
-                        Animation.RELATIVE_TO_SELF,
-                        0.5f
-                    )
-                    rotate.duration = 100
-                    rotate.interpolator = LinearInterpolator()
-                    rotate.fillAfter = true
-                    val image = view.findViewById<ImageView>(R.id.toggle)
-                    image.startAnimation(rotate)
                 } else {
                     channelRecView.visibility = View.GONE
                     feedRecView.visibility = View.VISIBLE
