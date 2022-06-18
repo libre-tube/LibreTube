@@ -17,7 +17,7 @@ def bot():
     bot = telegram.Bot(TG_TOKEN, base_url="http://0.0.0.0:8081/bot")
     bot.send_photo(TG_POST_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][0:7]} // Alpha*
 
-[{data['commit']['message']}]({data['commit']['url']})
+[{data['commit']['message']}]({data['html_url']})
 
 Signed-off-by: {data['commit']['author']['name']}
 ''', parse_mode=telegram.ParseMode.MARKDOWN)
