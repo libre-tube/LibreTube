@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/quality">
+
+        <ListPreference
+            android:icon="@drawable/ic_hd"
+            app:defaultValue=""
+            app:entries="@array/defres"
+            app:entryValues="@array/defresValue"
+            app:key="default_res"
+            app:title="@string/defres"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_video"
+            app:defaultValue="WEBM"
+            app:entries="@array/playerVideoFormats"
+            app:entryValues="@array/playerVideoFormats"
+            app:key="player_video_format"
+            app:title="@string/playerVideoFormat"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/behavior">
+
+        <ListPreference
+            android:icon="@drawable/ic_speed"
+            app:defaultValue="1F"
+            app:entries="@array/playbackSpeed"
+            app:entryValues="@array/playbackSpeedValues"
+            app:key="playback_speed"
+            app:title="@string/playback_speed"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_time"
+            app:defaultValue="50"
+            app:entries="@array/bufferingGoal"
+            app:entryValues="@array/bufferingGoal"
+            app:key="buffering_goal"
+            app:summary="@string/buffering_goal_summary"
+            app:title="@string/buffering_goal" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_play"
+            app:key="autoplay"
+            app:title="@string/player_autoplay"
+            android:summaryOff="@string/disabled"
+            android:summaryOn="@string/enabled" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -253,8 +253,8 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-            image.animate().rotationBy(180F).setDuration(100).start()
+            val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
+            arrowImageView.animate().rotationBy(180F).setDuration(100).start()
             if (playerDescription.isVisible) {
                 playerDescription.visibility = View.GONE
             } else {
