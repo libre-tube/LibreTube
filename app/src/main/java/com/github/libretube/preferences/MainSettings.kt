@@ -62,18 +62,18 @@ class MainSettings : PreferenceFragmentCompat() {
             navigateSettings(newFragment)
             true
         }
+        
+        val update = findPreference<Preference>("update")
+        update?.title = getString(R.string.version, BuildConfig.VERSION_NAME)
+        update?.setOnPreferenceClickListener {
+            checkUpdate(childFragmentManager)
+            true
+        }        
 
         val about = findPreference<Preference>("about")
         about?.setOnPreferenceClickListener {
             val newFragment = AboutFragment()
             navigateSettings(newFragment)
-            true
-        }
-
-        val update = findPreference<Preference>("update")
-        update?.title = getString(R.string.version, BuildConfig.VERSION_NAME)
-        update?.setOnPreferenceClickListener {
-            checkUpdate(childFragmentManager)
             true
         }
     }
