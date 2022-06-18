@@ -56,6 +56,13 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
+        val player = findPreference<Preference>("player")
+        player?.setOnPreferenceClickListener {
+            val newFragment = PlayerSettings()
+            navigateSettings(newFragment)
+            true
+        }
+
         val advanced = findPreference<Preference>("advanced")
         advanced?.setOnPreferenceClickListener {
             val newFragment = AdvancedSettings()
