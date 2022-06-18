@@ -190,4 +190,5 @@
     <string name="no_video">Senza video</string>
     <string name="video">Con video</string>
     <string name="downloading">Scaricando</string>
+    <string name="hideTrendingPage">Nascondi la pagina Tendenze</string>
 </resources>
