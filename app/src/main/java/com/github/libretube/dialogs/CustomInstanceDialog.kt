@@ -26,7 +26,8 @@ class CustomInstanceDialog : DialogFragment() {
 
             val instanceNameEditText = view.findViewById<TextInputEditText>(R.id.instanceName)
             val instanceApiUrlEditText = view.findViewById<TextInputEditText>(R.id.instanceApiUrl)
-            val instanceFrontendUrlEditText = view.findViewById<TextInputEditText>(R.id.instanceFrontendUrl)
+            val instanceFrontendUrlEditText = view
+                .findViewById<TextInputEditText>(R.id.instanceFrontendUrl)
 
             val addInstanceButton = view.findViewById<Button>(R.id.addInstance)
             val cancelButton = view.findViewById<Button>(R.id.cancel)
