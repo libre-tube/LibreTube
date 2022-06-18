@@ -21,26 +21,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:text="LibreTube"
             android:textSize="27sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/app_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="30dp"
-            android:textSize="18sp" />
+        <View style="@style/HorizontalLine" />
 
         <LinearLayout
             android:id="@+id/website"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
+            style="@style/AboutItem">
 
             <TextView
                 android:layout_width="match_parent"
@@ -55,13 +45,11 @@
 
         </LinearLayout>
 
+        <View style="@style/HorizontalLine" />
+
         <LinearLayout
             android:id="@+id/contributing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
+            style="@style/AboutItem">
 
             <TextView
                 android:layout_width="match_parent"
@@ -76,13 +64,11 @@
 
         </LinearLayout>
 
+        <View style="@style/HorizontalLine" />
+
         <LinearLayout
             android:id="@+id/authors"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
+            style="@style/AboutItem">
 
             <TextView
                 android:layout_width="match_parent"
@@ -97,13 +83,11 @@
 
         </LinearLayout>
 
+        <View style="@style/HorizontalLine" />
+
         <LinearLayout
             android:id="@+id/piped"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
+            style="@style/AboutItem">
 
             <TextView
                 android:layout_width="match_parent"
@@ -118,13 +102,11 @@
 
         </LinearLayout>
 
+        <View style="@style/HorizontalLine" />
+
         <LinearLayout
             android:id="@+id/donate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
+            style="@style/AboutItem">
 
             <TextView
                 android:layout_width="match_parent"
@@ -139,13 +121,11 @@
 
         </LinearLayout>
 
+        <View style="@style/HorizontalLine" />
+
         <LinearLayout
             android:id="@+id/license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
+            style="@style/AboutItem">
 
             <TextView
                 android:layout_width="match_parent"

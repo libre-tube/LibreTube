@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.libretube.AUTHORS_URL
-import com.github.libretube.BuildConfig
 import com.github.libretube.CONTRIBUTING_URL
 import com.github.libretube.DONATE_URL
 import com.github.libretube.PIPED_GITHUB_URL
@@ -33,9 +32,6 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val topBarText = activity?.findViewById<TextView>(R.id.topBar_textView)
         topBarText?.text = getString(R.string.about)
-
-        val appVersion = view.findViewById<TextView>(R.id.app_version)
-        appVersion.text = BuildConfig.VERSION_NAME
 
         val website = view.findViewById<LinearLayout>(R.id.website)
         website.setOnClickListener {
