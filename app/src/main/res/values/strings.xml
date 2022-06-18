@@ -190,4 +190,5 @@
     <string name="video">Video</string>
     <string name="downloading">Downloading</string>
     <string name="player_autoplay">Autoplay</string>
+    <string name="hideTrendingPage">Hide trending page</string>
 </resources>

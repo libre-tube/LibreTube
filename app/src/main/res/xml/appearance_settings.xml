@@ -44,6 +44,13 @@
             app:title="@string/defaultTab"
             app:useSimpleSummaryProvider="true" />
 
+        <SwitchPreference
+            android:icon="@drawable/ic_trending"
+            app:defaultValue="false"
+            app:key="hide_trending_page"
+            app:title="@string/hideTrendingPage"
+            app:useSimpleSummaryProvider="true" />
+
         <ListPreference
             android:icon="@drawable/ic_grid"
             app:defaultValue="@integer/grid_items"
