@@ -12,7 +12,7 @@
     <string name="app_theme">Görünüm</string>
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Kullanıcı adı ve parola girmelisiniz.</string>
-    <string name="notgmail">Bu bir LibreTube hesabı içindir.</string>
+    <string name="notgmail">Bu, LibreTube hesabı içindir.</string>
     <string name="defres">Varsayılan Video Çözünürlüğü</string>
     <string name="deletePlaylist">Oynatma listesini sil</string>
     <string name="createPlaylist">Oynatma Listesi Oluştur</string>
@@ -36,7 +36,7 @@
     <string name="importsuccess">Abone olundu</string>
     <string name="subscribeIsEmpty">Önce birkaç kanala abone olun.</string>
     <string name="cannotDownload">Bu görüntü indirilemiyor.</string>
-    <string name="vlc">VLC\'de aç</string>
+    <string name="vlc">VLC\'de Aç</string>
     <string name="import_from_yt">Abonelikleri İçe Aktar</string>
     <string name="error">Bir şeyler ters gitti.</string>
     <string name="emptyList">Burada hiçbir şey yok.</string>
@@ -57,7 +57,7 @@
     <string name="library">Kütüphane</string>
     <string name="systemDefault">Sistem</string>
     <string name="darkTheme">Koyu</string>
-    <string name="subscribers">%1$s Abone</string>
+    <string name="subscribers">%1$s abone</string>
     <string name="lightTheme">Açık</string>
     <string name="videos">Videolar</string>
     <string name="startpage">Ana Sayfa</string>
@@ -89,12 +89,12 @@
     <string name="category_sponsor">Bağışçı</string>
     <string name="segment_skipped">Bölüm atlandı</string>
     <string name="category_sponsor_description">Ücretli promosyon, yönlendirmeler ve doğrudan reklamlar. Kendi reklamını yapmak veya amaçlara, yaratıcılara, internet sitelerine ve ürünlere ücretsiz hakiki duyurular için değil.</string>
-    <string name="category_selfpromo">Ödenmemiş/Kendini Tanıtmak</string>
+    <string name="category_selfpromo">Ödenmemiş/Kendi Reklamı</string>
     <string name="category_interaction">Etkileşim hatırlatıcısı (beğen ve abone ol)</string>
     <string name="category_intro">Ara Verme/Giriş Animasyonu</string>
     <string name="category_intro_description">Gerçek içeriği olmayan bir aralık. Duraklatma, statik kare, yinelenen animasyon olabilir. Bilgi içeren geçişler için kullanılmamalıdır.</string>
-    <string name="category_interaction_description">İçeriğin ortasında beğenmek, abone olmak veya takip etmek için kısa bir hatırlatma olduğunda. Uzun veya belirli bir şey hakkındaysa, bunun yerine kendini tanıtmalıdır.</string>
-    <string name="category_selfpromo_description">Ücretsiz veya kendini tanıtım dışında \"bağışçı\" ile benzer. Bu, mallar, bağışlar veya kiminle işbirliği yaptığına dair bilgilerle ilgili bölümleri içerir.</string>
+    <string name="category_interaction_description">İçeriğin ortasında beğenmek, abone olmak veya takip etmek için kısa bir hatırlatma olduğunda. Uzun veya belirli bir şey hakkındaysa, bunun yerine kendi reklamıdır.</string>
+    <string name="category_selfpromo_description">Ücretsiz veya kendi reklamı dışında \"bağışçı\" ile benzer. Bu, mallar, bağışlar veya kiminle işbirliği yaptığına dair bilgilerle ilgili bölümleri içerir.</string>
     <string name="category_outro">Bitiş kartları ve kanal simgesi</string>
     <string name="music_songs">YT Müzik Şarkıları</string>
     <string name="music_albums">YT Müzik Albümleri</string>
@@ -147,7 +147,7 @@
     <string name="internal_storage">Dahili depolama</string>
     <string name="download_folder_summary">İndirilen medyanın saklandığı klasörün adı.</string>
     <string name="movies_directory">Filmler klasörü</string>
-    <string name="shareTo">URL\'yi şununla paylaş:</string>
+    <string name="shareTo">URL\'yi şununla paylaş</string>
     <string name="download_folder">Ad</string>
     <string name="downloads_directory">İndirme klasörü</string>
     <string name="sdcard">Hafıza kartı</string>
@@ -162,12 +162,12 @@
     <string name="shapedIcon">Aptal şekilli</string>
     <string name="flameIcon">Uçan alev</string>
     <string name="instance_summary">Piped, giriş, abonelikler</string>
-    <string name="addInstance">Oluşum ekle</string>
-    <string name="clear_customInstances">Özel oluşumları temizle</string>
+    <string name="addInstance">Sunucu Ekle</string>
+    <string name="clear_customInstances">Özel sunucuları temizle</string>
     <string name="instance_api_url">Erişim aracı API\'sinin URL\'si</string>
-    <string name="customInstance_summary">Özel bir oluşum ekleyin (riski size ait olmak üzere)</string>
+    <string name="customInstance_summary">Özel bir sunucu ekleyin (kendi sorumluluğunuzdadır)</string>
     <string name="empty_instance">Adı ve API URL\'sini girin.</string>
-    <string name="instance_name">Oluşumun adı</string>
+    <string name="instance_name">Sunucu adı</string>
     <string name="invalid_url">Lütfen, çalışan bir URL girin</string>
     <string name="version">Sürüm %1$s</string>
     <string name="about_summary">LibreTube ekibini tanıyın ve tüm bunların nasıl gerçekleştiğini öğrenin.</string>
@@ -189,4 +189,11 @@
     <string name="audio">Ses</string>
     <string name="video">Video</string>
     <string name="downloading">İndiriliyor</string>
+    <string name="player_autoplay">Oto.oynat</string>
+    <string name="hideTrendingPage">Trend sayfasını gizle</string>
+    <string name="quality">Kalite</string>
+    <string name="behavior">Davranış</string>
+    <string name="player_summary">Kalite ve oynatıcı davranışı</string>
+    <string name="piped_summary">Piped, kullandığımız API\'yi sağlayan YouTube için açık kaynaklı alternatif bir internet ön yüzüdür. Piped olmasaydı LibreTube olmazdı. Geliştiricilerine çok teşekkürler!</string>
+    <string name="instance_frontend_url">Erişim aracı ön ucuna giden URL</string>
 </resources>
