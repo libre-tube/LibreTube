@@ -194,7 +194,7 @@
     <string name="quality">Keyfiyyət</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
-    <string name="seek_increment">Seek increment</string>
+    <string name="seek_increment">Axtarışı artırın</string>
     <string name="piped_summary">Piped, istifadə etdiyimiz API\' ni təmin edən YouTube üçün açıq mənbəli alternativ veb interfeysidir. Piped olmasaydı LibreTube olmazdı. Tərtibatçılarına böyük təşəkkürlər!</string>
     <string name="instance_frontend_url">Server üçün URL</string>
 </resources>
