@@ -1,0 +1,32 @@
+name: Bot API Compiler
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug-builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Prepare for Compilation
+        run: |
+          git config --global user.name "XelXen"
+          git config --global user.email "78258352+XelXen@users.noreply.github.com"
+          git config --global credential.helper store
+          echo "https://XelXen:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
+
+      - name: Run Script
+        run: |
+            chmod 755 .github/compiler.sh
+            .github/compiler.sh
+
+      - name: Binary Archive
+        run: |
+          git clone https://github.com/LibreTubeAlpha/Telegram-BotAPI bot-api
+          rm -rf bot-api/*
+          mv ~/telegram-bot-api/bin/telegram-bot-api bot-api/exec
+          cd bot-api
+          git add -f *
+          git commit -m "WORKFLOW: BUILD BINARIES"
+          git push -u
