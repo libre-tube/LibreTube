@@ -64,7 +64,7 @@
             android:icon="@drawable/ic_update"
             app:key="update"
             app:summary="@string/update_summary"
-            app:title="App version" />        
+            app:title="App version" />
 
         <Preference
             android:icon="@drawable/ic_info"

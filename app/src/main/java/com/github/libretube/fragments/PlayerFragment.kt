@@ -27,7 +27,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -87,8 +86,6 @@ import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import kotlinx.coroutines.NonCancellable.isActive
-import org.chromium.base.ThreadUtils.runOnUiThread
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
@@ -721,11 +718,11 @@ class PlayerFragment : Fragment() {
         }
         // create a list of subtitles
         val subtitle = mutableListOf<SubtitleConfiguration>()
-        if (response.subtitles!!.isNotEmpty()) {
+        response.subtitles!!.forEach {
             subtitle.add(
-                SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
-                    .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
-                    .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
+                SubtitleConfiguration.Builder(it.url!!.toUri())
+                    .setMimeType(it.mimeType!!) // The correct MIME type (required).
+                    .setLanguage(it.code) // The subtitle language (optional).
                     .build()
             )
         }
@@ -867,7 +864,7 @@ class PlayerFragment : Fragment() {
         playerNotification = PlayerNotificationManager
             .Builder(c, 1, "background_mode")
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(title, uploader, thumbnailUrl)
+                DescriptionAdapter(title, uploader, thumbnailUrl, requireContext())
             )
             .build()
 
