@@ -48,7 +48,7 @@
     <string name="about">Hakkında</string>
     <string name="vlcerror">VLC\'de açılamıyor. Kurulmamış olabilir.</string>
     <string name="instances">Erişim Aracı Seç</string>
-    <string name="customInstance">Dilediğiniz bir erişim aracısını ekleyin</string>
+    <string name="customInstance">Özel erişim aracı</string>
     <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracını deneyebilir misiniz\?</string>
     <string name="grid">Ağ sütunları</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
@@ -56,9 +56,9 @@
     <string name="subscriptions">Abonelikler</string>
     <string name="library">Kütüphane</string>
     <string name="systemDefault">Sistem</string>
-    <string name="darkTheme">Tamamen karanlık</string>
+    <string name="darkTheme">Koyu</string>
     <string name="subscribers">%1$s Abone</string>
-    <string name="lightTheme">Parlak işık</string>
+    <string name="lightTheme">Açık</string>
     <string name="videos">Videolar</string>
     <string name="startpage">Ana Sayfa</string>
     <string name="changeLanguage">Dil</string>
@@ -74,7 +74,7 @@
     <string name="website">İnternet Sitesi</string>
     <string name="defaultTab">Varsayılan Sekme</string>
     <string name="choose_filter">Arama filtresi seç</string>
-    <string name="category_outro_description">Kanal ikonları veya YouTube video kartları göründüğünde. Bilgi ile sonuçlar için değil.</string>
+    <string name="category_outro_description">Sonunu takip eden bilgi. Bilgi içeren sonuçlar için değil.</string>
     <string name="sponsorblock_state">Açık</string>
     <string name="clear_history">Geçmişi Temizle</string>
     <string name="sponsorblock">SponsorBlok</string>
@@ -88,14 +88,14 @@
     <string name="category_segments">Bölümler</string>
     <string name="category_sponsor">Bağışçı</string>
     <string name="segment_skipped">Bölüm atlandı</string>
-    <string name="category_sponsor_description">Ücretli promosyon, ücretli yönlendirmeler ve reklamlar içindir. Kendini veya sevdikleri nedenleri/üreticileri/internet sitelerini/ürünleri tanıtmak için değildir.</string>
+    <string name="category_sponsor_description">Ücretli promosyon, yönlendirmeler ve doğrudan reklamlar. Kendi reklamını yapmak veya amaçlara, yaratıcılara, internet sitelerine ve ürünlere ücretsiz hakiki duyurular için değil.</string>
     <string name="category_selfpromo">Ödenmemiş/Kendini Tanıtmak</string>
-    <string name="category_interaction">Etkileşim Hatırlatıcısı (Abone Ol)</string>
+    <string name="category_interaction">Etkileşim hatırlatıcısı (beğen ve abone ol)</string>
     <string name="category_intro">Ara Verme/Giriş Animasyonu</string>
-    <string name="category_intro_description">Gerçek içerik olmayan bir bölge. Duraklatma, durağan bir bölüm, tekrarlayan animasyon olabilir. Bu, bilgi içeren geçişler için kullanılmamalıdır.</string>
-    <string name="category_interaction_description">İçeriğin ortasında beğenmek, abone olmak veya takip etmek için kısa bir hatırlatma olduğunda işe yarar. Uzunsa ya da belirli bir şey hakkında ise, bunun yerine \"kendini tanıtım\" altında olmalıdır.</string>
+    <string name="category_intro_description">Gerçek içeriği olmayan bir aralık. Duraklatma, statik kare, yinelenen animasyon olabilir. Bilgi içeren geçişler için kullanılmamalıdır.</string>
+    <string name="category_interaction_description">İçeriğin ortasında beğenmek, abone olmak veya takip etmek için kısa bir hatırlatma olduğunda. Uzun veya belirli bir şey hakkındaysa, bunun yerine kendini tanıtmalıdır.</string>
     <string name="category_selfpromo_description">Ücretsiz veya kendini tanıtım dışında \"bağışçı\" ile benzer. Bu, mallar, bağışlar veya kiminle işbirliği yaptığına dair bilgilerle ilgili bölümleri içerir.</string>
-    <string name="category_outro">Video Kartları/Kanal İkonu</string>
+    <string name="category_outro">Bitiş kartları ve kanal simgesi</string>
     <string name="music_songs">YT Müzik Şarkıları</string>
     <string name="music_albums">YT Müzik Albümleri</string>
     <string name="music_videos">YT Müzik Videoları</string>
@@ -173,4 +173,5 @@
     <string name="about_summary">LibreTube ekibini tanıyın ve tüm bunların nasıl gerçekleştiğini öğrenin.</string>
     <string name="show_chapters">Bölümleri göster</string>
     <string name="hide_chapters">Bölümleri gizle</string>
+    <string name="category_filler">Alakasız/Şakalar</string>
 </resources>
