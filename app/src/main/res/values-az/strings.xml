@@ -172,7 +172,7 @@
     <string name="version">Versiya %1$s</string>
     <string name="about_summary">LibreTube komandası və bunların necə baş verdiyini öyrənin.</string>
     <string name="related_streams">Əlaqədar məzmun</string>
-    <string name="related_streams_summary">Baxdıqlarınızla yanaşı əlaqəli yayımları göstərin.</string>
+    <string name="related_streams_summary">İzlədiyinizin altında əlaqəli yayımları göstərin.</string>
     <string name="category_filler">Əlaqəsiz/Zarafatlar</string>
     <string name="show_chapters">Bölmələri göstərin</string>
     <string name="category_music_offtopic">Musiqi: Musiqisiz Bölmə</string>
@@ -194,7 +194,7 @@
     <string name="quality">Keyfiyyət</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
-    <string name="seek_increment">Gəlir axtarın</string>
+    <string name="seek_increment">Seek increment</string>
     <string name="piped_summary">Piped, istifadə etdiyimiz API\' ni təmin edən YouTube üçün açıq mənbəli alternativ veb interfeysidir. Piped olmasaydı LibreTube olmazdı. Tərtibatçılarına böyük təşəkkürlər!</string>
     <string name="instance_frontend_url">Server üçün URL</string>
 </resources>
