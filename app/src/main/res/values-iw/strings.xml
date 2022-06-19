@@ -142,7 +142,7 @@
     <string name="category_selfpromo_description">דומה ל„נותן חסות” למעט קידום עצמי ללא תשלום. לרבות סעיפים על אביזרים ממותגים, תרומות או מידע על שיתופי פעולה.</string>
     <string name="category_intro">הפוגה/הנפשת הקדמה</string>
     <string name="authors">יוצרים</string>
-    <string name="authors_summary">כאן מופיעים כל החבר׳ה.</string>
+    <string name="authors_summary">כאן מופיעים כל מי שמעורב בפיתוח ושיפור היישומון.</string>
     <string name="no_replies">להערה זו אין תגובות.</string>
     <string name="download_folder_summary">שם התיקייה שבה תאוחסן מדיה שהורדה.</string>
     <string name="internal_storage">אחסון פנימי</string>
@@ -195,4 +195,6 @@
     <string name="player_summary">איכות והתנהגות הנגן</string>
     <string name="quality">איכות</string>
     <string name="behavior">התנהגות</string>
+    <string name="seek_increment">הגדלת קפיצה</string>
+    <string name="piped_summary">Piped הוא חלופה בקוד פתוח למנשק המשתמש של YouTube ומספק את ה־API בו אנו משתמשים. בלי Piped,‏ LibreTube לא היה קיים. אנו מודים למפתחים מקרב לב!</string>
 </resources>
