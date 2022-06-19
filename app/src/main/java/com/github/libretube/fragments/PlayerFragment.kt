@@ -27,7 +27,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -87,8 +86,6 @@ import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import kotlinx.coroutines.NonCancellable.isActive
-import org.chromium.base.ThreadUtils.runOnUiThread
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
