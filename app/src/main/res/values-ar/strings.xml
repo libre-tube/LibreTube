@@ -175,13 +175,13 @@
     <string name="video_format_summary">تحويل الملفات إذا تم تنزيل كل من الصوت والفيديو.</string>
     <string name="download_directory_summary">حيث يتم تخزين الوسائط التي تم تنزيلها.</string>
     <string name="advanced">متقدم</string>
-    <string name="player">المشغل</string>
+    <string name="player">الصوت والفيديو</string>
     <string name="license_summary">GPLv3+ هو ترخيص حر متروك للحقوق. الاستخدام والدراسة والتغيير والمشاركة؛ مع الجميع.</string>
     <string name="donate_summary">أعط ما يستحقه هذا لك ، إذا استطعت. فريق LibreTube أصغر من تبرعك أو مساعدتك.</string>
     <string name="playback_speed">سرعة التشغيل الافتراضية</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك.</string>
-    <string name="authors_summary">تعرف على الجميع.</string>
-    <string name="advanced_summary">المشغل، التنزيلات، التاريخ</string>
+    <string name="authors_summary">تعرف على كل من يشارك في تطوير التطبيق وتحسينه.</string>
+    <string name="advanced_summary">التنزيلات والتاريخ</string>
     <string name="customInstance_summary">إضافة مثيل مخصص (على مسؤوليتك الخاصة)</string>
     <string name="movies_directory">مجلد الأفلام</string>
     <string name="shareTo">مشاركة عنوان URL إلى</string>
@@ -190,4 +190,11 @@
     <string name="audio">صوت</string>
     <string name="video">فيديو</string>
     <string name="downloading">قيد التحميل</string>
+    <string name="hideTrendingPage">إخفاء صفحة المحتوى الشائع</string>
+    <string name="instance_frontend_url">عنوان URL لمثيل الواجهة الأمامية</string>
+    <string name="quality">الجودة</string>
+    <string name="behavior">السلوك</string>
+    <string name="player_summary">الجودة وسلوك المشغل</string>
+    <string name="seek_increment">معدل التقديم</string>
+    <string name="piped_summary">Piped هي واجهة ويب بديلة مفتوحة المصدر ل YouTube توفر واجهة برمجة التطبيقات التي نستخدمها. بدون Piped ، لن يكون LibreTube موجودا. شكرا جزيلا لمطوريهم!</string>
 </resources>
