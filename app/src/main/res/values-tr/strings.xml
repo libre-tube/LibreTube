@@ -47,9 +47,9 @@
     <string name="playlistName">Oynatma listesi adı</string>
     <string name="about">Hakkında</string>
     <string name="vlcerror">VLC\'de açılamıyor. Kurulmamış olabilir.</string>
-    <string name="instances">Erişim Aracı Seç</string>
-    <string name="customInstance">Özel erişim aracı</string>
-    <string name="server_error">Sunucu bir engelle karşılaştı, başka bir erişim aracını deneyebilir misiniz\?</string>
+    <string name="instances">Sunucu seç</string>
+    <string name="customInstance">Özel sunucu</string>
+    <string name="server_error">Sunucu bir engelle karşılaştı, başka sunucunu deneyebilir misiniz\?</string>
     <string name="grid">Ağ sütunları</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
@@ -69,7 +69,7 @@
     <string name="retry">Yeniden Dene</string>
     <string name="location">Konum</string>
     <string name="settings">Ayarlar</string>
-    <string name="instance">Erişim Aracı</string>
+    <string name="instance">Sunucu</string>
     <string name="customization">Ayarlamalar</string>
     <string name="website">İnternet Sitesi</string>
     <string name="defaultTab">Varsayılan Sekme</string>
@@ -164,7 +164,7 @@
     <string name="instance_summary">Piped, giriş, abonelikler</string>
     <string name="addInstance">Sunucu Ekle</string>
     <string name="clear_customInstances">Özel sunucuları temizle</string>
-    <string name="instance_api_url">Erişim aracı API\'sinin URL\'si</string>
+    <string name="instance_api_url">Sunucu API\'sinin URL\'si</string>
     <string name="customInstance_summary">Özel bir sunucu ekleyin (kendi sorumluluğunuzdadır)</string>
     <string name="empty_instance">Adı ve API URL\'sini girin.</string>
     <string name="instance_name">Sunucu adı</string>
@@ -176,7 +176,7 @@
     <string name="category_filler">Alakasız/Şakalar</string>
     <string name="category_filler_description">Videonun ana içeriğini anlamak için gerekli olmayan yalnızca dolgu veya mizah için eklenen teğet sahneler için.</string>
     <string name="category_music_offtopic">Müzik: Müzik Dışı Bölüm</string>
-    <string name="category_music_offtopic_description">Sadece müzik videolarında kullanım içindir. Resmi mikslerin değil videonun bazı kısımlarını kapsamalıdır. Sonuç olarak, video Spotify\'a veya diğer karışık versiyonlara mümkün olduğunca yakın olmalı veya konuşmayı ve diğer dikkat dağıtıcı unsurları azaltmalıdır.</string>
+    <string name="category_music_offtopic_description">Sadece müzik videolarında kullanım içindir. Resmi mikslerin değil videonun bazı kısımlarını kapsamalıdır. Sonuç olarak, video Spotify\'a veya diğer miks versiyona mümkün olduğunca yakın olmalı veya konuşmayı ve diğer dikkat dağıtıcı unsurları azaltmalıdır.</string>
     <string name="category_preview">Önizleme/Özet</string>
     <string name="category_preview_description">Bu veya serisindeki gelecekteki videolarda gelecek içeriği detaylandıran, ancak ek bilgi sağlamayan segmentler için. Yalnızca burada görünen klipleri içeriyorsa, bu büyük olasılıkla yanlış kategoridir.</string>
     <string name="related_streams">İlgili içerik</string>
@@ -190,10 +190,10 @@
     <string name="video">Video</string>
     <string name="downloading">İndiriliyor</string>
     <string name="player_autoplay">Oto.oynat</string>
-    <string name="hideTrendingPage">Trend sayfasını gizle</string>
+    <string name="hideTrendingPage">Popüler sayfasını gizle</string>
     <string name="quality">Kalite</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Kalite ve oynatıcı davranışı</string>
     <string name="piped_summary">Piped, kullandığımız API\'yi sağlayan YouTube için açık kaynaklı alternatif bir internet ön yüzüdür. Piped olmasaydı LibreTube olmazdı. Geliştiricilerine çok teşekkürler!</string>
-    <string name="instance_frontend_url">Erişim aracı ön ucuna giden URL</string>
+    <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
 </resources>
