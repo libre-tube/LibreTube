@@ -113,6 +113,7 @@
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
             android:layout_gravity="center_vertical|start"
+            android:layout_marginBottom="10dp"
             android:layoutDirection="ltr">
 
             <TextView
@@ -132,6 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
+            android:layout_marginBottom="10dp"
             android:layoutDirection="ltr">
 
             <ImageButton
@@ -191,13 +193,28 @@
 
     </FrameLayout>
 
-    <View
-        android:id="@id/exo_progress_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
+    <LinearLayout
+        android:id="@+id/progress_bar"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="1dp"
-        android:background="@color/exo_bottom_bar_background" />
+        android:layout_above="@id/exo_basic_controls"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" >
+
+        <com.google.android.exoplayer2.ui.DefaultTimeBar
+            android:id="@id/exo_progress"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            app:bar_height="2dp"
+            app:scrubber_color="?attr/colorOnPrimary"
+            app:played_color="?attr/colorOnSecondary"
+            app:scrubber_enabled_size="12dp"
+            app:scrubber_dragged_size="15dp"
+            android:background="@color/exo_bottom_bar_background" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@id/exo_minimal_controls"
