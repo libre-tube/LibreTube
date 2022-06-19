@@ -73,7 +73,7 @@
     <string name="instance">인스턴스</string>
     <string name="website">웹사이트</string>
     <string name="defaultTab">기본 탭</string>
-    <string name="category_sponsor_description">유료 프로모션, 유료 추천 및 직접 광고. 자기 홍보나 그들이 좋아하는 원인/제작자/웹사이트/제품에 대한 무료 홍보용이 아닙니다.</string>
+    <string name="category_sponsor_description">유료 프로모션, 유료 추천 및 직접 광고가 해당됩니다. 자기 홍보나 재료/제작자/웹사이트/제품에 대한 공인된 무료 홍보물은 포함되지 않습니다.</string>
     <string name="segment_skipped">건너뛴 구간</string>
     <string name="sponsorblock_state">켜기</string>
     <string name="category_segments">구간</string>
@@ -101,10 +101,10 @@
     <string name="category_outro">엔드카드 및 크레딧</string>
     <string name="category_outro_description">엔딩 이후의 정보. 정보가 포함된 결론이 아닙니다.</string>
     <string name="license">라이선스</string>
-    <string name="oledTheme">OLED 테마</string>
+    <string name="oledTheme">검정</string>
     <string name="color_accent">액센트</string>
-    <string name="color_blue">픽셀 블루</string>
-    <string name="material_you">머터리얼</string>
+    <string name="color_blue">파란색</string>
+    <string name="material_you">미스틱 머터리얼 3</string>
     <string name="color_green">초록색</string>
     <string name="color_red">빨간색</string>
     <string name="color_yellow">노란색</string>
@@ -141,7 +141,7 @@
     <string name="no_update_available">최신 버전을 실행하고 있습니다.</string>
     <string name="playback_speed">기본 재생 속도</string>
     <string name="advanced">고급</string>
-    <string name="player">플레이어</string>
+    <string name="player">오디오 및 비디오</string>
     <string name="advanced_summary">플레이어, 다운로드, 기록</string>
     <string name="live">실시간</string>
     <string name="download_folder">이름</string>
@@ -175,4 +175,11 @@
     <string name="buffering_goal_summary">최대 버퍼링할 비디오의 시간(초)입니다.</string>
     <string name="playerVideoFormat">플레이어의 비디오 형식</string>
     <string name="buffering_goal">사전 로딩</string>
+    <string name="legacyIcon">레거시</string>
+    <string name="torchIcon">세련된 등불</string>
+    <string name="fireIcon">멋진 불</string>
+    <string name="category_filler">사족/농담</string>
+    <string name="category_filler_description">분량을 채우기 위한 사족 씬이나 동영상의 메인 컨텐츠를 이해하는데 필요하지 않은 유머가 해당됩니다.</string>
+    <string name="birdIcon">돌진하는 새</string>
+    <string name="flameIcon">휘날리는 화염</string>
 </resources>
