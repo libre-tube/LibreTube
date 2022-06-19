@@ -135,14 +135,14 @@
     <string name="app_uptodate">Ən son versiya işlədilir.</string>
     <string name="playback_speed">Defolt oynatma sürəti</string>
     <string name="advanced">Qabaqcıl</string>
-    <string name="player">Oynadıcı</string>
+    <string name="player">Səs və video</string>
     <string name="appearance_summary">Tətbiqi öz zövqünüzə uyğunlaşdırın.</string>
-    <string name="advanced_summary">Oynadıcı, endirmələr, tarixçə</string>
+    <string name="advanced_summary">Endirmələr, tarixçə</string>
     <string name="update_summary">Tətbiqin güncəl olub-olmadığını öyrənmək üçün klikləyin.</string>
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
     <string name="authors">Müəlliflər</string>
-    <string name="authors_summary">Hər kəslə tanış olun.</string>
+    <string name="authors_summary">Tətbiqin hazırlanmasında və təkmilləşdirilməsində iştirak edən hər kəslə tanış olun.</string>
     <string name="no_replies">Bu şərhə cavab yoxdur.</string>
     <string name="downloads_directory">Endirmə qovluğu</string>
     <string name="music_directory">Musiqi qovluğu</string>
@@ -190,4 +190,11 @@
     <string name="video">Video</string>
     <string name="no_audio">Səs yoxdur</string>
     <string name="audio">Səs</string>
+    <string name="hideTrendingPage">Populyar səhifəsini gizlədin</string>
+    <string name="quality">Keyfiyyət</string>
+    <string name="behavior">Davranış</string>
+    <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
+    <string name="seek_increment">Gəlir axtarın</string>
+    <string name="piped_summary">(Piped) YouTube üçün açıq mənbəli alternativ veb-frontendi, istifadə etdiyimiz API təmin edir. Piped olmasaydı, LibreTube mövcud olmazdı. Onların tərtibatçılarına böyük təşəkkürlər!</string>
+    <string name="instance_frontend_url">Server üçün URL</string>
 </resources>
