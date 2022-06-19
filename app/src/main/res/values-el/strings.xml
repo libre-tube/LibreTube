@@ -133,15 +133,15 @@
     <string name="no_update_available">Εκτελείτε την τελευταία έκδοση.</string>
     <string name="contributing">Συμβάλοντας</string>
     <string name="appearance_summary">Προσαρμόστε την εφαρμογή σύμφωνα με τις προτιμήσεις σας.</string>
-    <string name="player">Αναπαραγωγέας</string>
+    <string name="player">Ήχος και βίντεο</string>
     <string name="playback_speed">Προεπιλεγμένη ταχύτητα αναπαραγωγής</string>
     <string name="contributing_summary">Παρέχετε ιδέες, μεταφράσεις, αλλαγές σχεδίασης, καθαρίστε και γράψτε κώδικα. Όσο περισσότερα γίνονται τόσο καλύτερη γίνεται η εφαρμογή!</string>
     <string name="donate_summary">Δώστε ό,τι αξίζει για εσάς, αν μπορείτε. Η ομάδα του LibreTube είναι μικρότερη από τη δωρεά ή τη βοήθειά σας.</string>
     <string name="app_uptodate">Εκτελείται η τελευταία έκδοση.</string>
     <string name="advanced">Για προχωρημένους</string>
-    <string name="advanced_summary">Αναπαραγωγέας, λήψεις, ιστορικό</string>
+    <string name="advanced_summary">Λήψεις, ιστορικό</string>
     <string name="authors">Ομάδα</string>
-    <string name="authors_summary">Γνωρίστε τους πάντες.</string>
+    <string name="authors_summary">Γνωρίστε όλους όσους συμμετέχουν στην ανάπτυξη και τη βελτίωση της εφαρμογής.</string>
     <string name="download_folder">Όνομα</string>
     <string name="internal_storage">Εσωτερικός χώρος αποθήκευσης</string>
     <string name="sdcard">Κάρτα SD</string>
@@ -192,4 +192,9 @@
     <string name="downloading">Λήψη</string>
     <string name="hideTrendingPage">Απόκρυψη σελίδας τάσεων</string>
     <string name="instance_frontend_url">Διεύθυνση URL στη σελίδα του διακομιστή</string>
+    <string name="quality">Ποιότητα</string>
+    <string name="behavior">Συμπεριφορά</string>
+    <string name="player_summary">Ποιότητα και συμπεριφορά του αναπαραγωγέα</string>
+    <string name="seek_increment">Προσάυξηση αναζήτησης</string>
+    <string name="piped_summary">Το Piped είναι μία εναλλακτική σελίδα ανοικτού κώδικα για το YouTube που παρέχει το API που χρησιμοποιούμε. Χωρίς το Piped, το LibreTube δεν θα υπήρχε. Τεράστιες ευχαριστίες στους προγραμματιστές του!</string>
 </resources>
