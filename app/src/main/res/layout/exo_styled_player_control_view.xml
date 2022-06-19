@@ -208,8 +208,8 @@
             android:layout_width="match_parent"
             android:layout_height="15dp"
             app:bar_height="2dp"
-            app:scrubber_color="?@attr/colorOnPrimary"
-            app:played_color="?@attr/colorOnSecondary"
+            app:scrubber_color="?attr/colorOnPrimary"
+            app:played_color="?attr/colorOnSecondary"
             app:scrubber_enabled_size="12dp"
             app:scrubber_dragged_size="15dp"
             android:background="@color/exo_bottom_bar_background" />
