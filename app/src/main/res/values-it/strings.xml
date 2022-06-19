@@ -119,7 +119,7 @@
     <string name="downloads">Scaricamenti</string>
     <string name="video_format_summary">Conversione dei file se entrambi audio e video vengono scaricati.</string>
     <string name="video_format">Formato video</string>
-    <string name="advanced_summary">Lettore, scaricamenti, cronologia</string>
+    <string name="advanced_summary">Scaricamenti, cronologia</string>
     <string name="update_available">La versione %1$s è disponibile</string>
     <string name="update_available_text">Andare ai rilasci su GitHub per scaricarlo\?</string>
     <string name="appearance">Aspetto</string>
@@ -138,12 +138,12 @@
     <string name="no_update_available">Stai eseguendo l\'ultima versione.</string>
     <string name="playback_speed">Velocità di riproduzione predefinita</string>
     <string name="advanced">Avanzate</string>
-    <string name="player">Lettore</string>
+    <string name="player">Audio e video</string>
     <string name="appearance_summary">Regola l\'app a tuo piacimento.</string>
     <string name="live">Dal vivo</string>
     <string name="authors">Autori</string>
     <string name="no_replies">Questo commento non ha risposte.</string>
-    <string name="authors_summary">Fai conoscenza con tutti.</string>
+    <string name="authors_summary">Conosci tutti coloro che sono coinvolti nello sviluppo e nel miglioramento dell\'applicazione.</string>
     <string name="downloads_directory">Cartella degli scaricamenti</string>
     <string name="sdcard">Scheda SD</string>
     <string name="music_directory">Cartella musicale</string>
@@ -191,4 +191,10 @@
     <string name="video">Con video</string>
     <string name="downloading">Scaricando</string>
     <string name="hideTrendingPage">Nascondi la pagina Tendenze</string>
+    <string name="instance_frontend_url">URL dell\'istanza frontend</string>
+    <string name="quality">Qualità</string>
+    <string name="behavior">Comportamento</string>
+    <string name="player_summary">Qualità e comportamento lettore</string>
+    <string name="seek_increment">Cerca incremento</string>
+    <string name="piped_summary">Piped è un\' alternativa web-frontend open-source per YouTube che fornisce l\'API che usiamo. Senza Piped, LibreTube non esisterebbe. Un enorme grazie ai loro sviluppatori!</string>
 </resources>
