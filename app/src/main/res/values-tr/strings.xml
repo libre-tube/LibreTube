@@ -196,4 +196,5 @@
     <string name="player_summary">Kalite ve oynatıcı davranışı</string>
     <string name="piped_summary">Piped, kullandığımız API\'yi sağlayan YouTube için açık kaynaklı alternatif bir internet ön yüzüdür. Piped olmasaydı LibreTube olmazdı. Geliştiricilerine çok teşekkürler!</string>
     <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
+    <string name="seek_increment">Aramayı artırın</string>
 </resources>
