@@ -191,19 +191,12 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
-                    view.findViewById<ImageButton>(R.id.exo_play_pause).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.quality_select).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.GONE
-                    view.findViewById<TextView>(R.id.quality_text).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.aspect_ratio_button).visibility = View.GONE
+                    exoPlayerView.hideController()
+                    exoPlayerView.useController = false
                     mainMotionLayout.progress = 1.toFloat()
                 } else if (currentId == sId) {
-                    view.findViewById<ImageButton>(R.id.exo_play_pause).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.quality_select).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.quality_text).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.aspect_ratio_button)
-                        .visibility = View.VISIBLE
+                    exoPlayerView.showController()
+                    exoPlayerView.useController = true
                     mainMotionLayout.progress = 0.toFloat()
                 }
             }
@@ -1028,12 +1021,12 @@ class PlayerFragment : Fragment() {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
             exoPlayerView.hideController()
+            exoPlayerView.useController = false
             with(motionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                 enableTransition(R.id.yt_transition, false)
             }
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
-            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.GONE
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -1043,8 +1036,9 @@ class PlayerFragment : Fragment() {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                 enableTransition(R.id.yt_transition, true)
             }
+            exoPlayerView.showController()
+            exoPlayerView.useController = true
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
-            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.VISIBLE
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
         }
     }
