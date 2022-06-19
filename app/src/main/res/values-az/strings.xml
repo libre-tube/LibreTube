@@ -124,7 +124,7 @@
     <string name="video_format">Video formatı</string>
     <string name="video_format_summary">Həm səs, həm də video endirilərsə, faylların dönüşdürülməsi.</string>
     <string name="download_directory">Bura Endirin</string>
-    <string name="download_directory_summary">Endirilmiş media harada saxlanılır.</string>
+    <string name="download_directory_summary">Endirilmiş medianın saxlandığı yer.</string>
     <string name="website_summary">Tətbiq və onun xüsusiyyətləri haqqında ətraflı məlumat üçün veb sayta daxil olun.</string>
     <string name="contributing">Töhfə</string>
     <string name="contributing_summary">İdeyalar, tərcümələr, dizayn dəyişiklikləri təmin edin, kodu aydınlaşdırın və yazın. Nə qədər çox etsəniz, bir o qədər yaxşıdır!</string>
