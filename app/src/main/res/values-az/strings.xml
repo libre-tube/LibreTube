@@ -151,7 +151,7 @@
     <string name="download_folder">Ad</string>
     <string name="sdcard">SD kart</string>
     <string name="internal_storage">Daxili yaddaş</string>
-    <string name="download_folder_summary">Endirilmiş media qovluğunun adı saxlanılır.</string>
+    <string name="download_folder_summary">Endirilmiş medianın saxlandığı qovluğun adı.</string>
     <string name="views">%1$s baxış</string>
     <string name="defaultIcon">Defolt</string>
     <string name="legacyIcon">İtmiş miras</string>
