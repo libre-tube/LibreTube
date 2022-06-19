@@ -73,6 +73,7 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.android.exoplayer2.ui.DefaultTimeBar
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
@@ -196,12 +197,14 @@ class PlayerFragment : Fragment() {
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.GONE
                     view.findViewById<TextView>(R.id.quality_text).visibility = View.GONE
                     view.findViewById<ImageButton>(R.id.aspect_ratio_button).visibility = View.GONE
+                    view.findViewById<DefaultTimeBar>(R.id.exo_progress).visibility = View.GONE
                     mainMotionLayout.progress = 1.toFloat()
                 } else if (currentId == sId) {
                     view.findViewById<ImageButton>(R.id.exo_play_pause).visibility = View.VISIBLE
                     view.findViewById<ImageButton>(R.id.quality_select).visibility = View.VISIBLE
                     view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.VISIBLE
                     view.findViewById<TextView>(R.id.quality_text).visibility = View.VISIBLE
+                    view.findViewById<DefaultTimeBar>(R.id.exo_progress).visibility = View.VISIBLE
                     view.findViewById<ImageButton>(R.id.aspect_ratio_button)
                         .visibility = View.VISIBLE
                     mainMotionLayout.progress = 0.toFloat()
