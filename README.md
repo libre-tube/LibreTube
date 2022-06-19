@@ -42,7 +42,7 @@
 ## Contributing
 Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome.The more is done the better it gets!
 
-If creating a pull request, please make sure to format your code (with ktlint) before.
+If creating a pull request, please make sure to format your code (preferred ktlint) before.
 
 If opening an issue without following the issue template, we will ignore the issue and force close it.
 

@@ -184,4 +184,5 @@
     <string name="category_music_offtopic_description">Musika-bideoetan bakarrik erabil daiteke. Nahaste ofizialetakoak ez diren bideo-zatiak estaliko ditu. Azkenean, bideoak Spotifyren edo beste edozein nahasketa bertsioren antzekoa izan behar du, edo hitz egitea edo beste entretenimendu batzuk murriztu behar ditu.</string>
     <string name="buffering_goal">Aurrez kargatzea</string>
     <string name="playerVideoFormat">Erreproduzitzailearen bideo formatua</string>
+    <string name="player_autoplay">Erreprodukzio automatikoa</string>
 </resources>

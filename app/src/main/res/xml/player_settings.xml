@@ -54,7 +54,7 @@
             app:title="@string/buffering_goal" />
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_play"
+            android:icon="@drawable/ic_play_filled"
             app:key="autoplay"
             app:title="@string/player_autoplay"
             android:summaryOff="@string/disabled"

@@ -1039,7 +1039,6 @@ class PlayerFragment : Fragment() {
             exoPlayerView.showController()
             exoPlayerView.useController = true
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
-            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.VISIBLE
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
         }
     }
