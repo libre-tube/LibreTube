@@ -5,7 +5,7 @@
     <string name="search_hint">Axtarın</string>
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Olun</string>
-    <string name="unsubscribe">Abunəlikdən Çıxın</string>
+    <string name="unsubscribe">Abunəlikdən çıxın</string>
     <string name="share">Paylaşın</string>
     <string name="save">Saxlayın</string>
     <string name="download">Endirin</string>
@@ -38,7 +38,7 @@
     <string name="music_songs">YT Musiqi Mahnıları</string>
     <string name="music_videos">YT Musiqi Videoları</string>
     <string name="music_playlists">YT Musiqi Pleylistləri</string>
-    <string name="defaultTab">Defolt Tab</string>
+    <string name="defaultTab">Defolt Panel</string>
     <string name="sponsorblock">SponsorBlok</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API\'sini istifadə edir</string>
     <string name="category_intro_description">Həqiqi məzmunu olmayan aralıq. Fasilə, statik çərçivə, təkrarlanan animasiya ola bilər. Məlumat ehtiva edən keçidlər üçün istifadə edilməməlidir.</string>
@@ -46,9 +46,9 @@
     <string name="category_outro_description">Bitişdən sonra məlumat. Məlumatla nəticə çıxarmaq üçün deyil.</string>
     <string name="category_segments">Seqmentlər</string>
     <string name="category_sponsor">Sponsor</string>
-    <string name="category_selfpromo">Ödənişsiz/Özünü Reklam</string>
-    <string name="category_selfpromo_description">Ödənişsiz və ya özünü reklam istisna olmaqla, \"sponsor\" kimi. Buraya mallar, ianələr və ya onların kiminlə əməkdaşlıq etdiyi barədə məlumatlar haqqında bölmələr daxildir.</string>
-    <string name="category_interaction_description">Bəyənmək, abunə olmaq və ya məzmunun ortasında izləmək üçün qısa xatırlatma olduqda. Əgər uzun və ya konkret bir şey haqqındadırsa, bunun əvəzinə özünü reklam lazımdır.</string>
+    <string name="category_selfpromo">Ödənişsiz/Öz Reklamı</string>
+    <string name="category_selfpromo_description">Ödənişsiz və ya öz reklamı istisna olmaqla, \"sponsor\" kimi. Buraya mallar, ianələr və ya onların kiminlə əməkdaşlıq etdiyi barədə məlumatlar haqqında bölmələr daxildir.</string>
+    <string name="category_interaction_description">Bəyənmək, abunə olmaq və ya məzmunun ortasında izləmək üçün qısa xatırlatma olduqda. Əgər uzun və ya konkret bir şey haqqındadırsa, bunun əvəzinə öz reklamıdır.</string>
     <string name="license">Lisenziya</string>
     <string name="emptyPlaylistName">Pleylist adı boş ola bilməz</string>
     <string name="success">Bitdi.</string>
@@ -57,7 +57,7 @@
     <string name="retry">Yenidən Cəhd Edin</string>
     <string name="segment_skipped">Seqment ötürüldü</string>
     <string name="sponsorblock_state">Açıq</string>
-    <string name="category_sponsor_description">Ödənişli reklam ,tövsiyələr və birbaşa reklamlar. Səbəblərə, yaradıcılara, vebsaytlara və məhsullara özünü reklam və ya pulsuz orijinal çağırışlar üçün deyil.</string>
+    <string name="category_sponsor_description">Ödənişli reklam, tövsiyələr və birbaşa reklamlar.Öz reklamı və ya səbəblərə, yaradıcılara, veb saytlara və məhsullara pulsuz orijinal elanlar üçün deyil.</string>
     <string name="category_interaction">İnteraksiya xatırlatma(bəyən və abunə ol)</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
     <string name="login_register">Daxil olun/qeydiyyatdan keçin</string>
@@ -70,7 +70,7 @@
     <string name="downloadfailed">Endirmək alınmadı.</string>
     <string name="vlc">VLC\'də Açın</string>
     <string name="vlcerror">VLC\'də açmaq mümkün deyil. O, quraşdırılmamış ola bilər.</string>
-    <string name="import_from_yt">Abunəlikləri İdxal Edin</string>
+    <string name="import_from_yt">Abunəlikləri idxal edin</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Mövzu</string>
     <string name="server_error">Serverdə problem var. Başqasını cəhd edə bilərsiniz\?</string>
@@ -92,8 +92,8 @@
     <string name="changeLanguage">Dil</string>
     <string name="systemLanguage">Sistem</string>
     <string name="systemDefault">Sistem</string>
-    <string name="lightTheme">Açıq</string>
-    <string name="darkTheme">Tünd</string>
+    <string name="lightTheme">İşıqlı</string>
+    <string name="darkTheme">Qaranlıq</string>
     <string name="subscribers">%1$s abunəçi</string>
     <string name="videoCount">%1$s video</string>
     <string name="settings">Tənzimləmələr</string>
@@ -128,9 +128,9 @@
     <string name="website_summary">Tətbiq və onun xüsusiyyətləri haqqında ətraflı məlumat üçün veb sayta daxil olun.</string>
     <string name="contributing">Töhfə</string>
     <string name="contributing_summary">İdeyalar, tərcümələr, dizayn dəyişiklikləri təmin edin, kodu aydınlaşdırın və yazın. Nə qədər çox etsəniz, bir o qədər yaxşıdır!</string>
-    <string name="license_summary">GPLv3+ kopyalanmış azad lisenziyadır. İstifadə edin, öyrənin, dəyişdirin və paylaşın; hamı ilə.</string>
+    <string name="license_summary">GPLv3+ kopyalanmış pulsuz lisenziyadır. İstifadə edin, öyrənin, dəyişdirin və paylaşın; birlikdə.</string>
     <string name="donate">İanə Edin</string>
-    <string name="donate_summary">Mümkünsə, bunun sizə nə dəyəri varsa verin. LibreTube komandası ianə və ya yardımınızdan kiçikdir.</string>
+    <string name="donate_summary">Mümkünsə, bunun sizə nə dəyəri varsa verin. LibreTube komandası ianə və ya yardımınızdan daha kiçikdir.</string>
     <string name="update">Yeni versiyanı axtarın</string>
     <string name="app_uptodate">Ən son versiya işlədilir.</string>
     <string name="playback_speed">Defolt oynatma sürəti</string>
@@ -180,7 +180,7 @@
     <string name="category_preview_description">Bu və ya onun seriyasındakı gələcək videolarda qarşıdan gələn məzmunu təfərrüatlandıran, lakin əlavə məlumat təqdim etməyən seqmentlər üçün. Əgər o, yalnız burada görünən klipləri ehtiva edirsə, bu, çox güman ki, yanlış kateqoriyadır.</string>
     <string name="hide_chapters">Bölmələri gizlədin</string>
     <string name="category_filler_description">Yalnız doldurucu və ya yumor üçün əlavə edilmiş əlaqəsiz səhnələr üçün,videonun əsas məzmununu başa düşmək tələb olunmur.</string>
-    <string name="category_music_offtopic_description">Yalnız musiqi videolarında istifadə üçün. O, rəsmi qarışıqların bir hissəsi deyil, videonun hissələrini əhatə etməlidir. Sonda video Spotify və ya hər hansı digər qarışıq versiyaya mümkün qədər yaxından bənzəməlidir və ya danışıq və ya digər diqqəti yayındıran amilləri azaltmalıdır.</string>
+    <string name="category_music_offtopic_description">Yalnız musiqi videolarında istifadə üçün. O, rəsmi mikslərin bir hissəsi deyil, videonun hissələrini əhatə etməlidir. Sonda video Spotify və ya hər hansı digər miks versiyaya mümkün qədər yaxından bənzəməlidir və ya danışıq və ya digər diqqəti yayındıran amilləri azaltmalıdır.</string>
     <string name="playerVideoFormat">Oynadıcı üçün video formatı</string>
     <string name="buffering_goal_summary">Maks. bufer üçün video saniyələrin miqdarı.</string>
     <string name="buffering_goal">Ön yükləmə</string>
@@ -195,6 +195,6 @@
     <string name="behavior">Davranış</string>
     <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
     <string name="seek_increment">Gəlir axtarın</string>
-    <string name="piped_summary">(Piped) YouTube üçün açıq mənbəli alternativ veb-frontendi, istifadə etdiyimiz API təmin edir. Piped olmasaydı, LibreTube mövcud olmazdı. Onların tərtibatçılarına böyük təşəkkürlər!</string>
+    <string name="piped_summary">Piped, istifadə etdiyimiz API\' ni təmin edən YouTube üçün açıq mənbəli alternativ veb interfeysidir. Piped olmasaydı LibreTube olmazdı. Tərtibatçılarına böyük təşəkkürlər!</string>
     <string name="instance_frontend_url">Server üçün URL</string>
 </resources>
