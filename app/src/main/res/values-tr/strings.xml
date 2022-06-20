@@ -197,4 +197,7 @@
     <string name="piped_summary">Piped, kullandığımız API\'yi sağlayan YouTube için açık kaynaklı alternatif bir internet ön yüzüdür. Piped olmasaydı LibreTube olmazdı. Geliştiricilerine çok teşekkürler!</string>
     <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
     <string name="seek_increment">Aramayı artırın</string>
+    <string name="pauseOnScreenOff">Oto.duraklama</string>
+    <string name="pauseOnScreenOff_summary">Ekran kapatıldığında oynatıcıyı duraklatın.</string>
+    <string name="autoplay_summary">Akım bittiğinde sonraki videoyu otomatik olarak oynatın.</string>
 </resources>
