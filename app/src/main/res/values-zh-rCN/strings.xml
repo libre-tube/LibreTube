@@ -47,7 +47,7 @@
     <string name="login">登录</string>
     <string name="loggedIn">已登录。</string>
     <string name="already_logged_in">您已登录。您可以退出您的帐号。</string>
-    <string name="registered">注册成功。您现在可以订阅频道了。</string>
+    <string name="registered">注册成功。现在您可以订阅频道了。</string>
     <string name="login_first">请登录并重试。</string>
     <string name="loggedout">已退出登录。</string>
     <string name="customInstance">自定义实例</string>
