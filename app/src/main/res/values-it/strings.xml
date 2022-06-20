@@ -197,4 +197,7 @@
     <string name="player_summary">Qualità e comportamento lettore</string>
     <string name="seek_increment">Cerca incremento</string>
     <string name="piped_summary">Piped è un\' alternativa web-frontend open-source per YouTube che fornisce l\'API che usiamo. Senza Piped, LibreTube non esisterebbe. Un enorme grazie ai loro sviluppatori!</string>
+    <string name="autoplay_summary">Riproduci automaticamente il video successivo quando quello corrente è finito.</string>
+    <string name="pauseOnScreenOff">Pausa automatica</string>
+    <string name="pauseOnScreenOff_summary">Metti in pausa il lettore quando lo schermo é spento.</string>
 </resources>
