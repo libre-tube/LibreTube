@@ -134,4 +134,22 @@
     <string name="downloads">下载</string>
     <string name="contributing">贡献</string>
     <string name="donate">捐赠</string>
+    <string name="authors">作者</string>
+    <string name="downloads_directory">下载文件夹</string>
+    <string name="sdcard">SD 卡</string>
+    <string name="download_folder_summary">保存视频或音频的文件夹名称。</string>
+    <string name="download_folder">文件夹名称</string>
+    <string name="internal_storage">内部存储</string>
+    <string name="playback_speed">默认播放速度</string>
+    <string name="advanced">高级</string>
+    <string name="player">音频和视频</string>
+    <string name="appearance_summary">根据您自己的喜好调整应用程序。</string>
+    <string name="advanced_summary">下载， 历史记录</string>
+    <string name="no_replies">此评论没有人回复。</string>
+    <string name="music_directory">音乐文件夹</string>
+    <string name="movies_directory">电影文件夹</string>
+    <string name="authors_summary">了解参与开发和改进LibreTube的每个人。</string>
+    <string name="app_uptodate">正在使用最新的版本</string>
+    <string name="no_update_available">您正在运行最新的版本。</string>
+    <string name="live">直播</string>
 </resources>
