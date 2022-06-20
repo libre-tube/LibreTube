@@ -51,7 +51,7 @@ class PlaylistOptionsDialog(
                     }
                     // share the playlist
                     1 -> {
-                        val shareDialog = ShareDialog(playlistId)
+                        val shareDialog = ShareDialog(playlistId, true)
                         // using parentFragmentManager is important here
                         shareDialog.show(parentFragmentManager, "ShareDialog")
                     }

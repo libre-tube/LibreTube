@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -45,10 +46,11 @@ class PlaylistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         playlistId = playlistId!!.replace("/playlist?list=", "")
-        view.findViewById<TextView>(R.id.playlist_name).text = playlistId
         val recyclerView = view.findViewById<RecyclerView>(R.id.playlist_recView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        val progressBar = view.findViewById<ProgressBar>(R.id.playlist_progress)
+        progressBar.visibility = View.VISIBLE
         fetchPlaylist(view)
     }
 
@@ -68,6 +70,7 @@ class PlaylistFragment : Fragment() {
                 nextPage = response.nextpage
                 isLoading = false
                 runOnUiThread {
+                    view.findViewById<ProgressBar>(R.id.playlist_progress).visibility = View.GONE
                     view.findViewById<TextView>(R.id.playlist_name).text = response.name
                     view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
                     view.findViewById<TextView>(R.id.playlist_totVideos).text =

@@ -66,7 +66,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                         }
                     }
                     2 -> {
-                        val shareDialog = ShareDialog(videoId)
+                        val shareDialog = ShareDialog(videoId, false)
                         // using parentFragmentManager is important here
                         shareDialog.show(parentFragmentManager, "ShareDialog")
                     }
