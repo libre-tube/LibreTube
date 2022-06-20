@@ -564,7 +564,7 @@ class PlayerFragment : Fragment() {
 
         // share button
         view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!)
+            val shareDialog = ShareDialog(videoId!!, false)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
         // check if livestream

@@ -200,4 +200,5 @@
     <string name="pauseOnScreenOff">Autopause</string>
     <string name="pauseOnScreenOff_summary">Pause the player when the screen is turned off.</string>
     <string name="autoplay_summary">Automatically play the next video when the current is finished.</string>
+    <string name="clonePlaylist">Clone playlist</string>
 </resources>

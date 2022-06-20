@@ -21,7 +21,8 @@ import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import java.io.IOException
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -92,7 +93,7 @@ class PlaylistAdapter(
 
     private fun removeFromPlaylist(token: String, position: Int) {
         fun run() {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     RetrofitInstance.api.removeFromPlaylist(
                         token,

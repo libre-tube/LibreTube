@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PlaylistFragment"
-    android:id="@+id/playlist_scrollview">
+    tools:context=".fragments.PlaylistFragment">
+
+    <ProgressBar
+        android:id="@+id/playlist_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/playlist_scrollview">
 
     <LinearLayout
         android:orientation="vertical"
@@ -47,5 +59,6 @@
 
     </LinearLayout>
 
-
 </ScrollView>
+
+</RelativeLayout>
