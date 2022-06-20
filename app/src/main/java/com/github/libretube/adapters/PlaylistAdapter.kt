@@ -20,9 +20,9 @@ import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import java.io.IOException
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
