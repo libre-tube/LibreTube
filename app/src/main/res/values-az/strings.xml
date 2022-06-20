@@ -197,4 +197,7 @@
     <string name="seek_increment">Axtarışı artırın</string>
     <string name="piped_summary">Piped, istifadə etdiyimiz API\' ni təmin edən YouTube üçün açıq mənbəli alternativ veb interfeysidir. Piped olmasaydı LibreTube olmazdı. Tərtibatçılarına böyük təşəkkürlər!</string>
     <string name="instance_frontend_url">Server üçün URL</string>
+    <string name="autoplay_summary">Cari bitdikdə növbəti videonu avtomatik olaraq oynadın.</string>
+    <string name="pauseOnScreenOff">Avto-fasilə</string>
+    <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə pleyeri dayandırın.</string>
 </resources>
