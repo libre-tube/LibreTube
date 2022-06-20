@@ -107,11 +107,11 @@
     <string name="app_uptodate">Azken bertsioa da hau.</string>
     <string name="no_update_available">Azken bertsioa erabiltzen ari zara.</string>
     <string name="advanced">Aurreratua</string>
-    <string name="player">Erabiltzailea</string>
+    <string name="player">Audioa eta bideoa</string>
     <string name="appearance_summary">Egokitu aplikazioa zure gustura.</string>
-    <string name="advanced_summary">Erreproduzitzailea, deskargak, historiala</string>
+    <string name="advanced_summary">Deskargak, historiala</string>
     <string name="no_replies">Iruzkin honek ez du erantzunik.</string>
-    <string name="authors_summary">Ezagutu guztiak.</string>
+    <string name="authors_summary">Ezagutu aplikazioaren garapenean eta hobekuntzan parte hartzen duten guztiak.</string>
     <string name="download_folder">Izena</string>
     <string name="download_folder_summary">Deskargatutako multimediak gordetzen diren karpetaren izena.</string>
     <string name="downloads_directory">Deskarga karpeta</string>
@@ -185,4 +185,16 @@
     <string name="buffering_goal">Aurrez kargatzea</string>
     <string name="playerVideoFormat">Erreproduzitzailearen bideo formatua</string>
     <string name="player_autoplay">Erreprodukzio automatikoa</string>
+    <string name="no_video">Bideorik gabe</string>
+    <string name="no_audio">Audiorik gabe</string>
+    <string name="audio">Audioa</string>
+    <string name="video">Bideoa</string>
+    <string name="downloading">Deskargatzen</string>
+    <string name="hideTrendingPage">Ezkutatu joera-orria</string>
+    <string name="instance_frontend_url">Instantziaren frontenderako URLa</string>
+    <string name="quality">Kalitatea</string>
+    <string name="behavior">Portaera</string>
+    <string name="player_summary">Kalitatea eta erreprodukzioaen portaera</string>
+    <string name="seek_increment">Bilatu gehikuntza</string>
+    <string name="piped_summary">Piped kode irekiko web-frontend alternatibo bat da eta YouTube-k erabiltzen duen APIa eskaintzen du. Piped gabe, LibreTube ez litzateke existituko. Mila esker haien garatzaileei!</string>
 </resources>
