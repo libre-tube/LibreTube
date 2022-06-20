@@ -200,4 +200,5 @@
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausa el reproductor cuando se apaga la pantalla.</string>
     <string name="autoplay_summary">Reproduce automáticamente el siguiente vídeo cuando el actual haya terminado.</string>
+    <string name="clonePlaylist">Clonar lista de reproducción</string>
 </resources>
