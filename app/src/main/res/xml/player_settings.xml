@@ -57,8 +57,13 @@
             android:icon="@drawable/ic_play_filled"
             app:key="autoplay"
             app:title="@string/player_autoplay"
-            android:summaryOff="@string/disabled"
-            android:summaryOn="@string/enabled" />
+            android:summary="@string/autoplay_summary" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_pause_filled"
+            app:key="pause_screen_off"
+            app:title="@string/pauseOnScreenOff"
+            android:summary="@string/pauseOnScreenOff_summary" />
 
     </PreferenceCategory>
 

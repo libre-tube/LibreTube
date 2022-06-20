@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
@@ -321,6 +322,23 @@ class PlayerFragment : Fragment() {
         relatedRecView.visibility =
             if (relatedRecView.isVisible) View.GONE else View.VISIBLE
         if (!commentsLoaded!!) fetchComments()
+    }
+
+    override fun onPause() {
+        // pause the player if the screen is turned off
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val pausePlayerOnScreenOffEnabled = sharedPreferences
+            .getBoolean("pause_screen_off", false)
+
+        // check whether the screen is on
+        val pm = context?.getSystemService(Context.POWER_SERVICE) as PowerManager
+        val isScreenOn = pm.isInteractive
+
+        // pause player if screen off and setting enabled
+        if (exoPlayer != null && !isScreenOn && pausePlayerOnScreenOffEnabled) {
+            exoPlayer.pause()
+        }
+        super.onPause()
     }
 
     override fun onDestroy() {
