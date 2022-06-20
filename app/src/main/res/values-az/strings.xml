@@ -200,4 +200,5 @@
     <string name="autoplay_summary">Cari bitdikdə növbəti videonu avtomatik olaraq oynadın.</string>
     <string name="pauseOnScreenOff">Avto-fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə pleyeri dayandırın.</string>
+    <string name="clonePlaylist">Pleylisti klonlayın</string>
 </resources>
