@@ -117,6 +117,12 @@ interface PipedApi {
         @Body channels: List<String>
     ): Message
 
+    @POST("import/playlist")
+    suspend fun importPlaylist(
+        @Header("Authorization") token: String,
+        @Body playlistId: String
+    ): Message
+
     @GET("user/playlists")
     suspend fun playlists(@Header("Authorization") token: String): List<Playlists>
 
