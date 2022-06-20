@@ -22,7 +22,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -30,15 +29,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
-import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
@@ -46,8 +42,6 @@ import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
-import retrofit2.HttpException
-import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
@@ -160,30 +154,6 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
-        importPlaylist(applicationContext, "PLr6ePnxUUANvLpkBIDsY-MbArrGNBknt_")
-    }
-
-    private fun importPlaylist(context: Context, playlistId: String) {
-        fun run() {
-            val sharedPref = context.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")!!
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.api.importPlaylist(token, playlistId)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response $e")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                Log.e(TAG, response.toString())
-            }
-        }
-        run()
     }
 
     private fun isNetworkAvailable(context: Context): Boolean {

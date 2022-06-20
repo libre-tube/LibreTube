@@ -19,7 +19,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
     /**
      * List that stores the different menu options. In the future could be add more options here.
      */
-    private val list = listOf(
+    private val optionsList = listOf(
         context.getString(R.string.playOnBackground),
         context.getString(R.string.addToPlaylist),
         context.getString(R.string.share)
@@ -37,9 +37,9 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                 ArrayAdapter(
                     requireContext(),
                     R.layout.video_options_dialog_item,
-                    list
+                    optionsList
                 )
-            ) { dialog, which ->
+            ) { _, which ->
                 // For now, this checks the position of the option with the position that is in the
                 // list. I don't like it, but we will do like this for now.
                 when (which) {
@@ -69,9 +69,6 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                         val shareDialog = ShareDialog(videoId)
                         // using parentFragmentManager is important here
                         shareDialog.show(parentFragmentManager, "ShareDialog")
-                    }
-                    else -> {
-                        dialog.dismiss()
                     }
                 }
             }

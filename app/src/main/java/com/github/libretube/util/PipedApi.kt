@@ -120,7 +120,7 @@ interface PipedApi {
     @POST("import/playlist")
     suspend fun importPlaylist(
         @Header("Authorization") token: String,
-        @Body playlistId: String
+        @Body playlistId: PlaylistId
     ): Message
 
     @GET("user/playlists")
