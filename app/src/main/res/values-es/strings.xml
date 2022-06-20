@@ -9,7 +9,7 @@
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="register">Registrarse</string>
-    <string name="choose_quality_dialog">Calidad:</string>
+    <string name="choose_quality_dialog">Calidad</string>
     <string name="search_hint">Buscar</string>
     <string name="logout">Cerrar sesión</string>
     <string name="cancel">Cancelar</string>
@@ -197,4 +197,7 @@
     <string name="player_summary">Calidad y comportamiento del reproductor</string>
     <string name="seek_increment">Incremento de búsqueda</string>
     <string name="piped_summary">Piped es una interfaz web alternativa de código abierto para YouTube que proporciona la API que usamos. Sin Piped, LibreTube no existiría. ¡Muchas gracias a sus desarrolladores!</string>
+    <string name="pauseOnScreenOff">Pausa automática</string>
+    <string name="pauseOnScreenOff_summary">Pausa el reproductor cuando se apaga la pantalla.</string>
+    <string name="autoplay_summary">Reproduce automáticamente el siguiente vídeo cuando el actual haya terminado.</string>
 </resources>
