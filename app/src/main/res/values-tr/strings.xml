@@ -200,4 +200,5 @@
     <string name="pauseOnScreenOff">Oto.duraklama</string>
     <string name="pauseOnScreenOff_summary">Ekran kapatıldığında oynatıcıyı duraklatın.</string>
     <string name="autoplay_summary">Akım bittiğinde sonraki videoyu otomatik olarak oynatın.</string>
+    <string name="clonePlaylist">Oynatma listesini klonla</string>
 </resources>
