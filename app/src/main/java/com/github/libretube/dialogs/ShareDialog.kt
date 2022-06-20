@@ -3,11 +3,9 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.DialogFragment
 import androidx.preference.PreferenceManager
 import com.github.libretube.R
-import com.github.libretube.util.RetrofitInstance.url
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
