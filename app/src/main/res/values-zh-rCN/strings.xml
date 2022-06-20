@@ -118,14 +118,14 @@
     <string name="playOnBackground">后台播放</string>
     <string name="update_available">版本 %1$s 可用</string>
     <string name="update_available_text">是否前往GitHub下载最新版本？</string>
-    <string name="download_directory_summary">选择下载视频（音频）的存储位置</string>
+    <string name="download_directory_summary">选择下载视频（音频）的存储位置。</string>
     <string name="website_summary">访问LibreTube的官方网站获取LibreTube应用了解更多信息。</string>
     <string name="contributing_summary">提供想法、翻译、设计、更改、清理和编写代码。做得越多越好！</string>
     <string name="video_format_summary">如果同时下载了视频和音频文件，将会合并成视频文件。</string>
     <string name="download_directory">下载到</string>
     <string name="donate_summary">如果可以的话，把这对你有价值的东西给你。 LibreTube 团队比您的捐赠或帮助更小。</string>
     <string name="update">检测新版本</string>
-    <string name="update_summary">点击查找LibreTube的最新版本</string>
+    <string name="update_summary">单击检查应用是否是最新版。</string>
     <string name="license_summary">LibreTube使用了GPLv3+许可证。你可以用来学习、研究和分享。</string>
     <string name="category_preview">预览/回放</string>
     <string name="video_format">视频格式</string>
