@@ -15,7 +15,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_color"
-            app:defaultValue="red"
+            app:defaultValue="purple"
             app:entries="@array/accents"
             app:entryValues="@array/accentsValue"
             app:key="accent_color"
