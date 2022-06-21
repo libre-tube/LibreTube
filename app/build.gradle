@@ -29,14 +29,17 @@ android {
             resValue "string", "app_name", "LibreTube Debug"
         }
     }
+
     compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     splits {
         abi {
             enable true
@@ -46,11 +49,13 @@ android {
 
         }
     }
+
     packagingOptions {
         jniLibs {
             excludes += ['lib/armeabi-v7a/*_neon.so']
         }
     }
+
     namespace 'com.github.libretube'
 }
 
@@ -76,14 +81,12 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
-    //do not update jackson annotations! it does not supports <api26
+    // Do not update jackson annotations! It does not supports < API 26.
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.3'
 
     implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
 
-
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation('com.google.android.exoplayer:extension-cronet:2.17.1') { exclude group: 'com.google.android.gms' }
     implementation 'org.chromium.net:cronet-embedded:101.4951.41'
-
 }
