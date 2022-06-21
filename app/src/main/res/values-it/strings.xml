@@ -201,4 +201,6 @@
     <string name="pauseOnScreenOff">Pausa automatica</string>
     <string name="pauseOnScreenOff_summary">Metti in pausa il lettore quando lo schermo é spento.</string>
     <string name="clonePlaylist">Clona playlist</string>
+    <string name="reset">Ripristina predefiniti</string>
+    <string name="reset_message">Sei sicuro\? Questo ti disconnetterà e ripristinerà tutte le tue impostazioni!</string>
 </resources>
