@@ -201,4 +201,6 @@
     <string name="pauseOnScreenOff_summary">Ekran kapatıldığında oynatıcıyı duraklatın.</string>
     <string name="autoplay_summary">Akım bittiğinde sonraki videoyu otomatik olarak oynatın.</string>
     <string name="clonePlaylist">Oynatma listesini klonla</string>
+    <string name="reset">Varsayılanlara sıfırla</string>
+    <string name="reset_message">Emin misin\? Bu, oturumunuzu kapatacak ve tüm ayarlarınızı sıfırlayacaktır!</string>
 </resources>
