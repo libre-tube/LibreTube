@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
@@ -44,8 +45,16 @@ class PlaylistOptionsDialog(
                     0 -> {
                         val sharedPref =
                             context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                        val token = sharedPref?.getString("token", "")!!
-                        importPlaylist(token, playlistId)
+                        val token = sharedPref?.getString("token", "")
+                        if (token != "") {
+                            importPlaylist(token!!, playlistId)
+                        } else {
+                            Toast.makeText(
+                                context,
+                                R.string.login_first,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                     // share the playlist
                     1 -> {

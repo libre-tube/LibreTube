@@ -46,4 +46,13 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory>
+
+        <Preference
+            android:icon="@drawable/ic_reset"
+            app:key="reset_settings"
+            app:title="@string/reset" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
