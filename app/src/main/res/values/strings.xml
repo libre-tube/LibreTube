@@ -201,4 +201,6 @@
     <string name="pauseOnScreenOff_summary">Pause the player when the screen is turned off.</string>
     <string name="autoplay_summary">Automatically play the next video when the current is finished.</string>
     <string name="clonePlaylist">Clone playlist</string>
+    <string name="reset">Restore defaults</string>
+    <string name="reset_message">Are you sure? This will log you out and reset all your settings!</string>
 </resources>
