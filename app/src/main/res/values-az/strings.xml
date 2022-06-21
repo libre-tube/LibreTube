@@ -201,4 +201,6 @@
     <string name="pauseOnScreenOff">Avto-fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə pleyeri dayandırın.</string>
     <string name="clonePlaylist">Pleylisti klonlayın</string>
+    <string name="reset">Defoltlara bərpa edin</string>
+    <string name="reset_message">Siz əminsiz\? Bu, sizi sistemdən çıxaracaq və bütün tənzimləmələrinizi sıfırlayacaq!</string>
 </resources>
