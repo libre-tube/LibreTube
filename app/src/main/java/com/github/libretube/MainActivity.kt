@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -44,8 +45,9 @@ import com.google.android.material.color.DynamicColors
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
+
     lateinit var bottomNavigationView: BottomNavigationView
-    lateinit var toolbar: Toolbar
+    private lateinit var toolbar: Toolbar
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +58,9 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.url =
             sharedPreferences.getString("selectInstance", "https://pipedapi.kavin.rocks/")!!
         SponsorBlockSettings.sponsorBlockEnabled =
-            sharedPreferences.getBoolean("sb_enabled_key", false)
+            sharedPreferences.getBoolean("sb_enabled_key", true)
         SponsorBlockSettings.sponsorNotificationsEnabled =
-            sharedPreferences.getBoolean("sb_notifications_key", false)
+            sharedPreferences.getBoolean("sb_notifications_key", true)
         SponsorBlockSettings.introEnabled =
             sharedPreferences.getBoolean("intro_category_key", false)
         SponsorBlockSettings.selfPromoEnabled =
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         SponsorBlockSettings.interactionEnabled =
             sharedPreferences.getBoolean("interaction_category_key", false)
         SponsorBlockSettings.sponsorsEnabled =
-            sharedPreferences.getBoolean("sponsors_category_key", false)
+            sharedPreferences.getBoolean("sponsors_category_key", true)
         SponsorBlockSettings.outroEnabled =
             sharedPreferences.getBoolean("outro_category_key", false)
         SponsorBlockSettings.fillerEnabled =
@@ -79,12 +81,8 @@ class MainActivity : AppCompatActivity() {
         ThemeHelper().updateTheme(this)
         LocaleHelper().updateLanguage(this)
 
-        val connectivityManager =
-            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        val isConnected = networkInfo != null && networkInfo.isConnected
-
-        if (!isConnected) {
+        // show noInternet Activity if no internet available on app startup
+        if (!isNetworkAvailable(this)) {
             setContentView(R.layout.activity_nointernet)
             findViewById<Button>(R.id.retry_button).setOnClickListener {
                 recreate()
@@ -101,7 +99,13 @@ class MainActivity : AppCompatActivity() {
             navController = findNavController(R.id.fragment)
             bottomNavigationView.setupWithNavController(navController)
 
-            when (sharedPreferences.getString("default_tab", "home")!!) {
+            // hide the trending page if enabled
+            val hideTrendingPage = sharedPreferences.getBoolean("hide_trending_page", false)
+            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.home2).isVisible = false
+
+            // navigate to the default start tab
+            val defaultTab = sharedPreferences.getString("default_tab", "home")
+            when (defaultTab) {
                 "home" -> navController.navigate(R.id.home2)
                 "subscriptions" -> navController.navigate(R.id.subscriptions)
                 "library" -> navController.navigate(R.id.library)
@@ -112,17 +116,14 @@ class MainActivity : AppCompatActivity() {
                     R.id.home2 -> {
                         navController.backQueue.clear()
                         navController.navigate(R.id.home2)
-                        true
                     }
                     R.id.subscriptions -> {
                         // navController.backQueue.clear()
                         navController.navigate(R.id.subscriptions)
-                        true
                     }
                     R.id.library -> {
                         // navController.backQueue.clear()
                         navController.navigate(R.id.library)
-                        true
                     }
                 }
                 false
@@ -142,18 +143,38 @@ class MainActivity : AppCompatActivity() {
                 // settings activity stuff
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
-                true
             }
 
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_search -> {
                         navController.navigate(R.id.searchFragment)
-                        true
                     }
                 }
                 false
             }
+        }
+    }
+
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val nw = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+            return when {
+                // WiFi
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                // Mobile
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                // Ethernet
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                // Bluetooth
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
+                else -> false
+            }
+        } else {
+            return connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
     }
 
@@ -184,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "URI Type: Playlist")
             var playlist = data.query!!
             if (playlist.contains("&")) {
-                var playlists = playlist.split("&")
+                val playlists = playlist.split("&")
                 for (v in playlists) {
                     if (v.contains("list=")) {
                         playlist = v
@@ -216,7 +237,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("dafaq", data.query!!)
             var watch = data.query!!
             if (watch.contains("&")) {
-                var watches = watch.split("&")
+                val watches = watch.split("&")
                 for (v in watches) {
                     if (v.contains("v=")) {
                         watch = v
@@ -224,7 +245,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putString("videoId", watch.replace("v=", ""))
             // for time stamped links
             if (data.query != null && data.query?.contains("t=")!!) {
@@ -233,8 +254,8 @@ class MainActivity : AppCompatActivity() {
             }
             loadWatch(bundle)
         } else {
-            var watch = data.path!!.replace("/", "")
-            var bundle = Bundle()
+            val watch = data.path!!.replace("/", "")
+            val bundle = Bundle()
             bundle.putString("videoId", watch)
             // for time stamped links
             if (data.query != null && data.query?.contains("t=")!!) {
@@ -246,7 +267,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadWatch(bundle: Bundle) {
-        var frag = PlayerFragment()
+        val frag = PlayerFragment()
         frag.arguments = bundle
         supportFragmentManager.beginTransaction()
             .remove(PlayerFragment())
@@ -278,11 +299,6 @@ class MainActivity : AppCompatActivity() {
                 isFullScreen = false
             } else {
                 navController.popBackStack()
-                if (navController.currentBackStackEntry == null &&
-                    (parent as View).id != R.id.settings
-                ) {
-                    super.onBackPressed()
-                }
             }
         } catch (e: Exception) {
             // try catch to prevent nointernet activity to crash

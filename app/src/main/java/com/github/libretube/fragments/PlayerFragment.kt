@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
@@ -27,7 +28,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -51,9 +51,9 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
+import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
@@ -87,8 +87,6 @@ import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import kotlinx.coroutines.NonCancellable.isActive
-import org.chromium.base.ThreadUtils.runOnUiThread
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
@@ -194,19 +192,12 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
-                    view.findViewById<ImageButton>(R.id.exo_play_pause).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.quality_select).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.GONE
-                    view.findViewById<TextView>(R.id.quality_text).visibility = View.GONE
-                    view.findViewById<ImageButton>(R.id.aspect_ratio_button).visibility = View.GONE
+                    exoPlayerView.hideController()
+                    exoPlayerView.useController = false
                     mainMotionLayout.progress = 1.toFloat()
                 } else if (currentId == sId) {
-                    view.findViewById<ImageButton>(R.id.exo_play_pause).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.quality_select).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.close_imageButton).visibility = View.VISIBLE
-                    view.findViewById<TextView>(R.id.quality_text).visibility = View.VISIBLE
-                    view.findViewById<ImageButton>(R.id.aspect_ratio_button)
-                        .visibility = View.VISIBLE
+                    exoPlayerView.showController()
+                    exoPlayerView.useController = true
                     mainMotionLayout.progress = 0.toFloat()
                 }
             }
@@ -253,8 +244,8 @@ class PlayerFragment : Fragment() {
         }
 
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            val image = view.findViewById<ImageView>(R.id.player_description_arrow)
-            image.animate().rotationBy(180F).setDuration(100).start()
+            val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
+            arrowImageView.animate().rotationBy(180F).setDuration(100).start()
             if (playerDescription.isVisible) {
                 playerDescription.visibility = View.GONE
             } else {
@@ -331,6 +322,23 @@ class PlayerFragment : Fragment() {
         relatedRecView.visibility =
             if (relatedRecView.isVisible) View.GONE else View.VISIBLE
         if (!commentsLoaded!!) fetchComments()
+    }
+
+    override fun onPause() {
+        // pause the player if the screen is turned off
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val pausePlayerOnScreenOffEnabled = sharedPreferences
+            .getBoolean("pause_screen_off", false)
+
+        // check whether the screen is on
+        val pm = context?.getSystemService(Context.POWER_SERVICE) as PowerManager
+        val isScreenOn = pm.isInteractive
+
+        // pause player if screen off and setting enabled
+        if (exoPlayer != null && !isScreenOn && pausePlayerOnScreenOffEnabled) {
+            exoPlayer.pause()
+        }
+        super.onPause()
     }
 
     override fun onDestroy() {
@@ -556,7 +564,7 @@ class PlayerFragment : Fragment() {
 
         // share button
         view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!)
+            val shareDialog = ShareDialog(videoId!!, false)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
         // check if livestream
@@ -721,11 +729,11 @@ class PlayerFragment : Fragment() {
         }
         // create a list of subtitles
         val subtitle = mutableListOf<SubtitleConfiguration>()
-        if (response.subtitles!!.isNotEmpty()) {
+        response.subtitles!!.forEach {
             subtitle.add(
-                SubtitleConfiguration.Builder(response.subtitles[0].url!!.toUri())
-                    .setMimeType(response.subtitles[0].mimeType!!) // The correct MIME type (required).
-                    .setLanguage(response.subtitles[0].code) // The subtitle language (optional).
+                SubtitleConfiguration.Builder(it.url!!.toUri())
+                    .setMimeType(it.mimeType!!) // The correct MIME type (required).
+                    .setLanguage(it.code) // The subtitle language (optional).
                     .build()
             )
         }
@@ -811,7 +819,9 @@ class PlayerFragment : Fragment() {
     private fun createExoPlayer(view: View) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
-        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!!
+        // multiply by thousand: s -> ms
+        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!! * 1000
+        val seekIncrement = sharedPreferences.getString("seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
@@ -834,7 +844,7 @@ class PlayerFragment : Fragment() {
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
                 DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
-                bufferingGoal * 1000, // buffering goal, s -> ms
+                bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
@@ -843,8 +853,8 @@ class PlayerFragment : Fragment() {
         exoPlayer = ExoPlayer.Builder(view.context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
-            .setSeekBackIncrementMs(5000)
-            .setSeekForwardIncrementMs(5000)
+            .setSeekBackIncrementMs(seekIncrement)
+            .setSeekForwardIncrementMs(seekIncrement)
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
@@ -865,7 +875,7 @@ class PlayerFragment : Fragment() {
         playerNotification = PlayerNotificationManager
             .Builder(c, 1, "background_mode")
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(title, uploader, thumbnailUrl)
+                DescriptionAdapter(title, uploader, thumbnailUrl, requireContext())
             )
             .build()
 
@@ -1029,12 +1039,12 @@ class PlayerFragment : Fragment() {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
             exoPlayerView.hideController()
+            exoPlayerView.useController = false
             with(motionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                 enableTransition(R.id.yt_transition, false)
             }
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
-            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.GONE
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -1044,8 +1054,9 @@ class PlayerFragment : Fragment() {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                 enableTransition(R.id.yt_transition, true)
             }
+            exoPlayerView.showController()
+            exoPlayerView.useController = true
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
-            view?.findViewById<LinearLayout>(R.id.linLayout)?.visibility = View.VISIBLE
             view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
         }
     }

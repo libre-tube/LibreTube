@@ -15,7 +15,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_color"
-            app:defaultValue="red"
+            app:defaultValue="purple"
             app:entries="@array/accents"
             app:entryValues="@array/accentsValue"
             app:key="accent_color"
@@ -42,6 +42,13 @@
             app:entryValues="@array/tabsValue"
             app:key="default_tab"
             app:title="@string/defaultTab"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:icon="@drawable/ic_trending"
+            app:defaultValue="false"
+            app:key="hide_trending_page"
+            app:title="@string/hideTrendingPage"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference

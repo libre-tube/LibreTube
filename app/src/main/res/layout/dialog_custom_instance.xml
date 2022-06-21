@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -15,20 +14,7 @@
         android:layout_margin="10dp"
         android:textSize="20sp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hintEnabled="false"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="4dp"
-
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp">
+    <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/instanceName"
@@ -39,22 +25,18 @@
             android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hintEnabled="false"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+    <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
 
-        app:boxCornerRadiusBottomStart="15dp"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/instanceFrontendUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/instance_frontend_url"
+            android:inputType="text"
+            android:padding="12dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        >
+    <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/instanceApiUrl"
@@ -73,30 +55,13 @@
 
         <Button
             android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/cancel"
-            android:layout_gravity="end"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="14sp"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            style="?android:attr/buttonBarButtonStyle" />
+            style="@style/CustomDialogButton" />
 
         <Button
             android:id="@+id/addInstance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/addInstance"
-            android:layout_gravity="end"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="14sp"
-            android:padding="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="?android:attr/buttonBarButtonStyle" />
+            style="@style/CustomDialogButton" />
 
     </LinearLayout>
 

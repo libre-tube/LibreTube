@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -19,15 +20,16 @@ import java.io.IOException
 import retrofit2.HttpException
 
 class PlaylistFragment : Fragment() {
-    private var playlist_id: String? = null
     private val TAG = "PlaylistFragment"
+
+    private var playlistId: String? = null
     var nextPage: String? = null
     var playlistAdapter: PlaylistAdapter? = null
     var isLoading = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            playlist_id = it.getString("playlist_id")
+            playlistId = it.getString("playlist_id")
         }
     }
 
@@ -43,11 +45,12 @@ class PlaylistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        playlist_id = playlist_id!!.replace("/playlist?list=", "")
-        view.findViewById<TextView>(R.id.playlist_name).text = playlist_id
+        playlistId = playlistId!!.replace("/playlist?list=", "")
         val recyclerView = view.findViewById<RecyclerView>(R.id.playlist_recView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        val progressBar = view.findViewById<ProgressBar>(R.id.playlist_progress)
+        progressBar.visibility = View.VISIBLE
         fetchPlaylist(view)
     }
 
@@ -55,7 +58,7 @@ class PlaylistFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getPlaylist(playlist_id!!)
+                    RetrofitInstance.api.getPlaylist(playlistId!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -67,10 +70,11 @@ class PlaylistFragment : Fragment() {
                 nextPage = response.nextpage
                 isLoading = false
                 runOnUiThread {
+                    view.findViewById<ProgressBar>(R.id.playlist_progress).visibility = View.GONE
                     view.findViewById<TextView>(R.id.playlist_name).text = response.name
                     view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
                     view.findViewById<TextView>(R.id.playlist_totVideos).text =
-                        response.videos.toString() + " Videos"
+                        getString(R.string.videoCount, response.videos.toString())
                     val sharedPref2 =
                         context?.getSharedPreferences("username", Context.MODE_PRIVATE)
                     val user = sharedPref2?.getString("username", "")
@@ -80,7 +84,7 @@ class PlaylistFragment : Fragment() {
                     }
                     playlistAdapter = PlaylistAdapter(
                         response.relatedStreams!!.toMutableList(),
-                        playlist_id!!,
+                        playlistId!!,
                         isOwner,
                         requireActivity(),
                         childFragmentManager
@@ -112,7 +116,7 @@ class PlaylistFragment : Fragment() {
 
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getPlaylistNextPage(playlist_id!!, nextPage!!)
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

@@ -56,16 +56,16 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val advanced = findPreference<Preference>("advanced")
-        advanced?.setOnPreferenceClickListener {
-            val newFragment = AdvancedSettings()
+        val player = findPreference<Preference>("player")
+        player?.setOnPreferenceClickListener {
+            val newFragment = PlayerSettings()
             navigateSettings(newFragment)
             true
         }
 
-        val about = findPreference<Preference>("about")
-        about?.setOnPreferenceClickListener {
-            val newFragment = AboutFragment()
+        val advanced = findPreference<Preference>("advanced")
+        advanced?.setOnPreferenceClickListener {
+            val newFragment = AdvancedSettings()
             navigateSettings(newFragment)
             true
         }
@@ -74,6 +74,13 @@ class MainSettings : PreferenceFragmentCompat() {
         update?.title = getString(R.string.version, BuildConfig.VERSION_NAME)
         update?.setOnPreferenceClickListener {
             checkUpdate(childFragmentManager)
+            true
+        }
+
+        val about = findPreference<Preference>("about")
+        about?.setOnPreferenceClickListener {
+            val newFragment = AboutFragment()
+            navigateSettings(newFragment)
             true
         }
     }

@@ -56,8 +56,8 @@
     <string name="areYouSure">Bist du sicher, dass du die Wiedergabeliste löschen möchtest\?</string>
     <string name="about">Über</string>
     <string name="systemDefault">System</string>
-    <string name="lightTheme">Helles Farbschema</string>
-    <string name="darkTheme">Dunkles Farbschema</string>
+    <string name="lightTheme">Hell</string>
+    <string name="darkTheme">Dunkel</string>
     <string name="subscribers">%1$s Abonnenten</string>
     <string name="emptyPlaylistName">Der Name der Wiedergabeliste darf nicht leer sein</string>
     <string name="import_from_yt_summary">Von YouTube oder NewPipe</string>
@@ -94,7 +94,7 @@
     <string name="segment_skipped">Abschnitt übersprungen</string>
     <string name="category_sponsor">Sponsor</string>
     <string name="sponsorblock_state">Ein</string>
-    <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung oder kostenlose Empfehlungen für Anliegen/Ersteller/Websites/Produkte, die sie mögen.</string>
+    <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Verweise und direkte Anzeigen. Nicht für Eigenwerbung oder kostenlose echte Shoutouts für Ursachen, Schöpfer, Websites und Produkte.</string>
     <string name="category_selfpromo">Unbezahlte/Selbst Promotion</string>
     <string name="category_interaction">Interaktionserinnerung (mögen und abonnieren)</string>
     <string name="category_outro_description">Infos nach dem Ende. Nicht für Schlussfolgerungen mit Infos.</string>
@@ -166,8 +166,19 @@
     <string name="category_preview">Vorschau/Rückblick</string>
     <string name="hide_chapters">Kapitel ausblenden</string>
     <string name="show_chapters">Kapitel anzeigen</string>
-    <string name="buffering_goal">Ziel der Pufferung</string>
+    <string name="buffering_goal">Wird vorgeladen</string>
     <string name="buffering_goal_summary">Die Anzahl der Sekunden, die Videos maximal vorgeladen werden.</string>
-    <string name="category_music_offtopic_description">Dies ist nur zur Verwendung in Musikvideos gedacht. Es sollte Teile des Videos abdecken, die nicht Teil der offiziellen Mixe sind. Am Ende sollte das Video der Spotify- oder einer anderen Mix-Version so nahe wie möglich kommen oder das Sprechen oder andere Ablenkungen reduzieren.</string>
-    <string name="playerVideoFormat">Player-Videoformat</string>
+    <string name="category_music_offtopic_description">Nur zur Verwendung in Musikvideos. Es sollte Teile des Videos abdecken, die nicht Teil der offiziellen Abmischungen sind. Am Ende sollte das Video der Spotify- oder einer anderen abgemischten Version so nahe wie möglich kommen oder das Sprechen oder andere Ablenkungen reduzieren.</string>
+    <string name="playerVideoFormat">Videoformat für Player</string>
+    <string name="version">Version %1$s</string>
+    <string name="about_summary">Lernen Sie das Team LibreTube kennen und erfahren Sie, wie das alles abläuft.</string>
+    <string name="category_preview_description">Für Segmente, die auf kommende Inhalte in diesem oder zukünftigen Videos der Serie hinweisen, aber keine zusätzlichen Informationen liefern. Wenn es Clips enthält, die nur hier erscheinen, ist dies sehr wahrscheinlich die falsche Kategorie.</string>
+    <string name="player_autoplay">Automatische Wiedergabe</string>
+    <string name="related_streams_summary">Zeigen Sie verwandte Streams neben dem, was Sie sehen.</string>
+    <string name="related_streams">Verwandte Inhalte</string>
+    <string name="no_audio">Kein Ton</string>
+    <string name="no_video">Kein Video</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="downloading">Wird heruntergeladen</string>
 </resources>

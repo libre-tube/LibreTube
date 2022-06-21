@@ -113,15 +113,30 @@ class DownloadService : Service() {
                 "mux" -> {
                     audioDir = File(tempDir, "$videoId-audio")
                     videoDir = File(tempDir, "$videoId-video")
-                    downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
+                    downloadId = downloadManagerRequest(
+                        getString(R.string.video),
+                        getString(R.string.downloading),
+                        videoUrl,
+                        videoDir
+                    )
                 }
                 "video" -> {
                     videoDir = File(libretubeDir, "$videoId-video")
-                    downloadId = downloadManagerRequest("Video", "Downloading", videoUrl, videoDir)
+                    downloadId = downloadManagerRequest(
+                        getString(R.string.video),
+                        getString(R.string.downloading),
+                        videoUrl,
+                        videoDir
+                    )
                 }
                 "audio" -> {
                     audioDir = File(libretubeDir, "$videoId-audio")
-                    downloadId = downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
+                    downloadId = downloadManagerRequest(
+                        getString(R.string.audio),
+                        getString(R.string.downloading),
+                        audioUrl,
+                        audioDir
+                    )
                 }
             }
         } catch (e: IllegalArgumentException) {
@@ -136,7 +151,12 @@ class DownloadService : Service() {
             // Checking if the received broadcast is for our enqueued download by matching download id
             if (downloadId == id) {
                 if (downloadType == "mux") {
-                    downloadManagerRequest("Audio", "Downloading", audioUrl, audioDir)
+                    downloadManagerRequest(
+                        getString(R.string.audio),
+                        getString(R.string.downloading),
+                        audioUrl,
+                        audioDir
+                    )
                 } else {
                     downloadSucceededNotification()
                     onDestroy()
@@ -178,7 +198,7 @@ class DownloadService : Service() {
             NotificationCompat.Builder(this@DownloadService, "download_service")
                 .setSmallIcon(R.drawable.ic_download)
                 .setContentTitle("LibreTube")
-                .setContentText("Downloading")
+                .setContentText(getString(R.string.downloading))
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
@@ -192,7 +212,7 @@ class DownloadService : Service() {
         val builder = NotificationCompat.Builder(this@DownloadService, "download_service")
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.downloadfailed))
-            .setContentText("failure")
+            .setContentText(getString(R.string.fail))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
@@ -205,7 +225,7 @@ class DownloadService : Service() {
         val builder = NotificationCompat.Builder(this@DownloadService, "download_service")
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.success))
-            .setContentText("success")
+            .setContentText(getString(R.string.fail))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define

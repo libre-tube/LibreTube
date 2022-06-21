@@ -1,51 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PlaylistFragment"
-    android:id="@+id/playlist_scrollview">
+    tools:context=".fragments.PlaylistFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ProgressBar
+        android:id="@+id/playlist_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/playlist_scrollview">
 
-        <TextView
-            android:id="@+id/playlist_name"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:padding="8dp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/playlist_uploader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/playlist_totVideos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="blocksDescendants">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/playlist_recView"
+            <TextView
+                android:id="@+id/playlist_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
-        </RelativeLayout>
+                android:text=""
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="8dp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/playlist_uploader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/playlist_totVideos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
 
-</ScrollView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/playlist_recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

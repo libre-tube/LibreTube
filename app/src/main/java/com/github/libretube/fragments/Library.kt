@@ -18,6 +18,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.dialogs.CreatePlaylistDialog
 import com.github.libretube.util.RetrofitInstance
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.IOException
 import retrofit2.HttpException
 
@@ -68,16 +69,7 @@ class Library : Fragment() {
             }
         } else {
             refreshLayout.isEnabled = false
-            view.findViewById<com.google.android.material.floatingactionbutton
-                .FloatingActionButton>(R.id.create_playlist).visibility = View.GONE
-            with(view.findViewById<ImageView>(R.id.boogh2)) {
-                visibility = View.VISIBLE
-                setImageResource(R.drawable.ic_login)
-            }
-            with(view.findViewById<TextView>(R.id.textLike2)) {
-                visibility = View.VISIBLE
-                text = getString(R.string.please_login)
-            }
+            view.findViewById<FloatingActionButton>(R.id.create_playlist).visibility = View.GONE
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.SearchItem
@@ -152,6 +153,12 @@ class SearchViewHolder(
             val activity = v.context as MainActivity
             val bundle = bundleOf("playlist_id" to item.url)
             activity.navController.navigate(R.id.playlistFragment, bundle)
+        }
+        v.setOnLongClickListener {
+            val playlistId = item.url!!.replace("/playlist?list=", "")
+            PlaylistOptionsDialog(playlistId, v.context)
+                .show(childFragmentManager, "PlaylistOptionsDialog")
+            true
         }
     }
 

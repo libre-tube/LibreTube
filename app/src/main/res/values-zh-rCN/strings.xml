@@ -92,7 +92,7 @@
     <string name="all">所有</string>
     <string name="playlists">播放列表</string>
     <string name="segment_skipped">跳过的片段</string>
-    <string name="category_sponsor_description">有偿推广、有偿推荐和直接广告。不是自我宣传或无偿发自内心的赞美创造者、网站和产品。</string>
+    <string name="category_sponsor_description">有偿推广、有偿推荐和直接广告。不是自我宣传或无偿发自内心的赞美动机、创造者、网站和产品。</string>
     <string name="category_selfpromo">无偿/自我推广</string>
     <string name="category_selfpromo_description">除了无偿或自我宣传，与 \"赞助商 \"类似。这包括有关商品、捐赠或与谁合作的信息。</string>
     <string name="sponsorblock">SponsorBlock</string>
