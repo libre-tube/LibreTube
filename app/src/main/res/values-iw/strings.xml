@@ -201,4 +201,6 @@
     <string name="pauseOnScreenOff_summary">השהיית הנגן עם כיבוי המסך.</string>
     <string name="clonePlaylist">שכפול רשימת הנגינה</string>
     <string name="autoplay_summary">לנגן את הסרטון הבא אוטומטית כשהנוכחי מסתיים.</string>
+    <string name="reset">שחזור ברירות מחדל</string>
+    <string name="reset_message">להמשיך\? פעולה זו תוציא אותך מהמערכת ותאפס את כל ההגדרות שלך!</string>
 </resources>
