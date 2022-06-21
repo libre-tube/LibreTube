@@ -8,7 +8,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.requireMainActivityRestart
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.chromium.base.CommandLine.reset
 
