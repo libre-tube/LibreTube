@@ -9,7 +9,6 @@ import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.requireMainActivityRestart
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.chromium.base.CommandLine.reset
 
 class AdvancedSettings : PreferenceFragmentCompat() {
     val TAG = "AdvancedSettings"
