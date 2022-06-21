@@ -200,4 +200,7 @@
     <string name="pauseOnScreenOff">الإيقاف المؤقت التلقائي</string>
     <string name="autoplay_summary">قم بتشغيل الفيديو التالي تلقائيا عند الانتهاء من الحالي.</string>
     <string name="pauseOnScreenOff_summary">أوقف المشغل مؤقتا عند إيقاف تشغيل الشاشة.</string>
+    <string name="reset">استعادة الإعدادات الافتراضية</string>
+    <string name="reset_message">هل أنت متأكد؟ سيؤدي ذلك إلى تسجيل خروجك وإعادة تعيين جميع إعداداتك!</string>
+    <string name="clonePlaylist">نسخ قائمة التشغيل</string>
 </resources>
