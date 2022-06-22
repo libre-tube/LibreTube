@@ -156,7 +156,7 @@
     <string name="app_uptodate">Šī ir jaunākā versija.</string>
     <string name="no_update_available">Šī ir jaunākā versija.</string>
     <string name="advanced">Tehniski</string>
-    <string name="player">Atskaņotājs</string>
+    <string name="player">Audio un video</string>
     <string name="appearance_summary">Pielāgojiet aplikāciju tā, kā jūs to vēlaties.</string>
     <string name="advanced_summary">Atskaņotājs, lejupielādes, vēsture</string>
     <string name="playback_speed">Noklusējuma atskaņošanas ātrums</string>
