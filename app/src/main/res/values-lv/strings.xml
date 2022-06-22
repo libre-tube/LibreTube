@@ -118,7 +118,7 @@
     <string name="playOnBackground">Atskaņot fonā</string>
     <string name="no_replies">Šim komentāram nav atbilžu.</string>
     <string name="authors">Autori</string>
-    <string name="authors_summary">Iepazīstieties ar visiem.</string>
+    <string name="authors_summary">Iepazīstieties ar visiem, kas ir iesaistīti aplikācijas veidošanā un uzlabošanā.</string>
     <string name="download_folder_summary">Nosaukums mapei, kurā tiek saglabāti lejupielādētie faili.</string>
     <string name="download_directory">Lejupielādēt uz</string>
     <string name="download_folder">Nosaukums</string>
@@ -158,7 +158,7 @@
     <string name="advanced">Tehniski</string>
     <string name="player">Audio un video</string>
     <string name="appearance_summary">Pielāgojiet aplikāciju tā, kā jūs to vēlaties.</string>
-    <string name="advanced_summary">Atskaņotājs, lejupielādes, vēsture</string>
+    <string name="advanced_summary">Lejupielādes, vēsture</string>
     <string name="playback_speed">Noklusējuma atskaņošanas ātrums</string>
     <string name="live">Tiešraide</string>
     <string name="customInstance_summary">Pievienot pielāgotu instanci (uz jūsu atbildību)</string>
@@ -185,4 +185,22 @@
     <string name="playerVideoFormat">Atskaņotāja video formāts</string>
     <string name="category_music_offtopic_description">Tikai priekš mūzikas video. Tas ir laika sprīžiem, kas nav oficiālajā dziesmas versijā. Beigās video vajadzētu būt tik līdzīgam Spotify vai jebkurai citai dziesmas versijai, cik vien iespējams vai ar samazinātu runāšanas daudzumu un uzmanības novēršanu.</string>
     <string name="player_autoplay">Automātiski atskaņot</string>
+    <string name="reset">Atjaunot noklusējumu</string>
+    <string name="reset_message">Vai esat pārliecināts\? Šī darbība jūs izrakstīs un iestatīs visus iestatījumus uz noklusējumu!</string>
+    <string name="no_audio">Nav audio</string>
+    <string name="no_video">Nav video</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="downloading">Lejupielādē</string>
+    <string name="hideTrendingPage">Paslēpt tendenču lapu</string>
+    <string name="instance_frontend_url">URL instances frontend</string>
+    <string name="quality">Kvalitāte</string>
+    <string name="behavior">Uzvedība</string>
+    <string name="player_summary">Kvalitāte un atskaņotāja uzvedība</string>
+    <string name="seek_increment">Meklēšanas iedaļa</string>
+    <string name="piped_summary">Piped ir atvērta pirmkoda alternatīva mājaslapa priekš YouTube, kas sniedz API, ko mēs izmantojam. Bez Piped, LibreTube neeksistētu. Milzīgs paldies viņu veidotājiem!</string>
+    <string name="pauseOnScreenOff">Automātiska pauzēšana</string>
+    <string name="pauseOnScreenOff_summary">Iepauzēt atskaņotāju, kamēr ekrāns ir izslēgts.</string>
+    <string name="autoplay_summary">Automātiski atskaņot nākamo video, kad pašreizējais ir beidzies.</string>
+    <string name="clonePlaylist">Duplicēt atskaņošanas sarakstu</string>
 </resources>
