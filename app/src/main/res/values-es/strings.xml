@@ -9,7 +9,7 @@
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="register">Registrarse</string>
-    <string name="choose_quality_dialog">Calidad:</string>
+    <string name="choose_quality_dialog">Calidad</string>
     <string name="search_hint">Buscar</string>
     <string name="logout">Cerrar sesión</string>
     <string name="cancel">Cancelar</string>
@@ -123,7 +123,7 @@
     <string name="appearance">Apariencia</string>
     <string name="no_replies">Este comentario no tiene respuestas.</string>
     <string name="authors">Autores</string>
-    <string name="authors_summary">Conozca a todos.</string>
+    <string name="authors_summary">Conozca a todos los que están involucrados en el desarrollo y la mejora de la aplicación.</string>
     <string name="internal_storage">Almacenamiento interno</string>
     <string name="sdcard">Tarjeta SD</string>
     <string name="shareTo">Compartir con</string>
@@ -154,7 +154,7 @@
     <string name="license_summary">La GPLv3+ es una licencia libre con copyleft. Utiliza, estudia, cambia y comparte; con todos.</string>
     <string name="movies_directory">Carpeta de películas</string>
     <string name="no_update_available">Estás utilizando la última versión.</string>
-    <string name="advanced_summary">Reproductor, descargas e historial</string>
+    <string name="advanced_summary">Descargas, historial</string>
     <string name="legacyIcon">Antiguo</string>
     <string name="download_folder_summary">El nombre de la carpeta en la que se almacenan los medios descargados.</string>
     <string name="addInstance">Añadir instancia</string>
@@ -169,7 +169,7 @@
     <string name="contributing">Contribución</string>
     <string name="donate">Donar</string>
     <string name="advanced">Avanzado</string>
-    <string name="player">Reproductor</string>
+    <string name="player">Audio y vídeo</string>
     <string name="appearance_summary">Ajuste la aplicación a su gusto.</string>
     <string name="playback_speed">Velocidad de reproducción predeterminada</string>
     <string name="live">En vivo</string>
@@ -192,4 +192,15 @@
     <string name="no_audio">Sin audio</string>
     <string name="audio">Audio</string>
     <string name="video">Vídeo</string>
+    <string name="quality">Calidad</string>
+    <string name="behavior">Comportamiento</string>
+    <string name="player_summary">Calidad y comportamiento del reproductor</string>
+    <string name="seek_increment">Incremento de búsqueda</string>
+    <string name="piped_summary">Piped es una interfaz web alternativa de código abierto para YouTube que proporciona la API que usamos. Sin Piped, LibreTube no existiría. ¡Muchas gracias a sus desarrolladores!</string>
+    <string name="pauseOnScreenOff">Pausa automática</string>
+    <string name="pauseOnScreenOff_summary">Pausa el reproductor cuando se apaga la pantalla.</string>
+    <string name="autoplay_summary">Reproduce automáticamente el siguiente vídeo cuando el actual haya terminado.</string>
+    <string name="clonePlaylist">Clonar lista de reproducción</string>
+    <string name="reset">Restaurar los valores predeterminados</string>
+    <string name="reset_message">¿Está seguro\? ¡Esto te cerrará la sesión y restablecerá todos tus ajustes!</string>
 </resources>

@@ -143,7 +143,7 @@
     <string name="live">En direct</string>
     <string name="no_replies">Ce commentaire n\'a pas de réponse.</string>
     <string name="authors">Auteurs</string>
-    <string name="authors_summary">Apprenez à connaître tout le monde.</string>
+    <string name="authors_summary">Apprenez à connaître toutes les personnes qui participent au développement et à l\'amélioration de l\'application.</string>
     <string name="sdcard">Carte SD</string>
     <string name="download_folder_summary">Le nom du dossier dans lequel le média téléchargé est stocké.</string>
     <string name="download_folder">Nom</string>
@@ -196,4 +196,11 @@
     <string name="behavior">Comportement</string>
     <string name="player_summary">Qualité et comportement du lecteur</string>
     <string name="seek_increment">Rechercher l\'incrément</string>
+    <string name="piped_summary">Piped est un front-end web alternatif open-source pour YouTube qui fournit l\'API que nous utilisons. Sans Piped, LibreTube n\'existerait pas. Un grand merci à leurs développeurs !</string>
+    <string name="reset">Restaurer les valeurs par défaut</string>
+    <string name="reset_message">Êtes-vous sûr·e \? Ceci va vous déconnecter et réinitialiser tous vos paramètres !</string>
+    <string name="pauseOnScreenOff">Pause automatique</string>
+    <string name="pauseOnScreenOff_summary">Mettre le lecteur en pause lorsque l\'écran est éteint.</string>
+    <string name="autoplay_summary">Lancer automatiquement la vidéo suivante lorsque la vidéo en cours est terminée.</string>
+    <string name="clonePlaylist">Cloner la liste de lecture</string>
 </resources>

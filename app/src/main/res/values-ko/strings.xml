@@ -120,7 +120,7 @@
     <string name="video_format_summary">오디오와 비디오가 모두 다운로드된 경우 파일 변환.</string>
     <string name="appearance_summary">원하는 대로 앱을 조정하세요.</string>
     <string name="no_replies">이 댓글에는 답글이 없습니다.</string>
-    <string name="authors_summary">모두를 알아보세요.</string>
+    <string name="authors_summary">앱 개발과 개선에 참여한 사람이 누구인지 알아보세요.</string>
     <string name="update_available">%1$s 버전 사용 가능</string>
     <string name="update_available_text">GitHub의 릴리스로 이동하여 다운로드하시겠습니까\?</string>
     <string name="app_behavior">동작</string>
@@ -182,4 +182,21 @@
     <string name="category_filler_description">분량을 채우기 위한 사족 씬이나 동영상의 메인 컨텐츠를 이해하는데 필요하지 않은 유머가 해당됩니다.</string>
     <string name="birdIcon">돌진하는 새</string>
     <string name="flameIcon">휘날리는 화염</string>
+    <string name="reset">초기값으로 복원</string>
+    <string name="reset_message">정말 실행합니까\? 이후 로그아웃되며 설정값이 모두 지워집니다!</string>
+    <string name="autoplay_summary">현재 동영상이 끝나면 다음 동영상을 자동으로 재생합니다.</string>
+    <string name="no_audio">오디오 없음</string>
+    <string name="no_video">비디오 없음</string>
+    <string name="audio">오디오</string>
+    <string name="video">비디오</string>
+    <string name="downloading">다운로드 중</string>
+    <string name="player_autoplay">자동 재생</string>
+    <string name="hideTrendingPage">인기 동영상 페이지 숨기기</string>
+    <string name="quality">품질</string>
+    <string name="behavior">행동</string>
+    <string name="player_summary">품질 및 플레이어 행동</string>
+    <string name="piped_summary">Piped는 이 앱이 사용하는, YouTube용 오픈소스 대안 웹 프로트엔드 API를 제공합니다. Piped 없이는 LibreTube가 존재하지 않습니다. 그들의 개발품에 매우 큰 감사를 보냅니다!</string>
+    <string name="pauseOnScreenOff">자동 일시중지</string>
+    <string name="pauseOnScreenOff_summary">화면이 꺼질 경우 동영상 재생을 일시중지합니다.</string>
+    <string name="clonePlaylist">재생목록 복제</string>
 </resources>
