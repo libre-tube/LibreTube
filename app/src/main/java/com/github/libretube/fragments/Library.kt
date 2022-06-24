@@ -19,8 +19,8 @@ import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.dialogs.CreatePlaylistDialog
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Library : Fragment() {
 

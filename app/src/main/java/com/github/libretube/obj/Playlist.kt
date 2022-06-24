@@ -12,5 +12,5 @@ data class Playlist(
     var uploaderUrl: String? = null,
     var uploaderAvatar: String? = null,
     var videos: Int? = 0,
-    var relatedStreams: List<StreamItem>? = null,
+    var relatedStreams: List<StreamItem>? = null
 )
