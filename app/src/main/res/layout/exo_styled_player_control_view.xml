@@ -150,7 +150,8 @@
 
             <ImageButton
                 android:id="@+id/fullscreen"
-                style="@style/ExoStyledControls.Button.Bottom.FullScreen" />
+                style="@style/ExoStyledControls.Button.Bottom.FullScreen"
+                android:src="@drawable/ic_fullscreen"/>
 
         </LinearLayout>
 

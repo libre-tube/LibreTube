@@ -182,6 +182,7 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 mainMotionLayout.progress = abs(progress)
+                exoPlayerView.hideController()
                 eId = endId
                 sId = startId
             }
@@ -192,13 +193,11 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
-                    exoPlayerView.hideController()
                     exoPlayerView.useController = false
-                    mainMotionLayout.progress = 1.toFloat()
+                    mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
-                    exoPlayerView.showController()
                     exoPlayerView.useController = true
-                    mainMotionLayout.progress = 0.toFloat()
+                    mainMotionLayout.progress = 0F
                 }
             }
 
@@ -269,6 +268,7 @@ class PlayerFragment : Fragment() {
                 }
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = true
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
+                fullScreenButton.setImageResource(R.drawable.ic_fullscreen_exit)
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
                 isFullScreen = true
@@ -279,6 +279,7 @@ class PlayerFragment : Fragment() {
                 }
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+                fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 isFullScreen = false
