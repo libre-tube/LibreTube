@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.util.RetrofitInstance
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistFragment : Fragment() {
     private val TAG = "PlaylistFragment"
@@ -113,7 +113,6 @@ class PlaylistFragment : Fragment() {
 
     private fun fetchNextPage() {
         fun run() {
-
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)

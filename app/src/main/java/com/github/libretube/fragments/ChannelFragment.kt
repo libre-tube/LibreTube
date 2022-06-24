@@ -22,8 +22,8 @@ import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class ChannelFragment : Fragment() {
 
@@ -201,7 +201,10 @@ class ChannelFragment : Fragment() {
                     channelName.text = response.name
                     if (response.verified) {
                         channelName.setCompoundDrawablesWithIntrinsicBounds(
-                            0, 0, R.drawable.ic_verified, 0
+                            0,
+                            0,
+                            R.drawable.ic_verified,
+                            0
                         )
                     }
                     view.findViewById<TextView>(R.id.channel_subs).text = resources.getString(
@@ -231,7 +234,6 @@ class ChannelFragment : Fragment() {
 
     private fun fetchNextPage() {
         fun run() {
-
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getChannelNextPage(channel_id!!, nextPage!!)

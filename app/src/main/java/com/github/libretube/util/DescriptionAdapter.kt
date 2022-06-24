@@ -82,7 +82,10 @@ class DescriptionAdapter(
          */
         return try {
             val resizedBitmap = Bitmap.createScaledBitmap(
-                bitmap, 1080, 1080, false
+                bitmap,
+                1080,
+                1080,
+                false
             )
             resizedBitmap
         } catch (e: Exception) {

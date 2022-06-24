@@ -85,10 +85,11 @@ class SearchViewHolder(
         val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
         val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
         views.text =
-            if (viewsString != "" && uploadDate != "")
+            if (viewsString != "" && uploadDate != "") {
                 "$viewsString • $uploadDate"
-            else
+            } else {
                 viewsString + uploadDate
+            }
         val channelName = v.findViewById<TextView>(R.id.search_channel_name)
         channelName.text = item.uploaderName
         v.setOnClickListener {
@@ -145,9 +146,10 @@ class SearchViewHolder(
         val playlistChannelName = v.findViewById<TextView>(R.id.search_name)
         playlistChannelName.text = item.uploaderName
         val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
-        if (item.videos?.toInt() != -1)
+        if (item.videos?.toInt() != -1) {
             playlistVideosNumber.text =
                 v.context.getString(R.string.videoCount, item.videos.toString())
+        }
         v.setOnClickListener {
             // playlist clicked
             val activity = v.context as MainActivity

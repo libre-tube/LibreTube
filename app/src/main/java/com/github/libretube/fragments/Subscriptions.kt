@@ -24,8 +24,8 @@ import com.github.libretube.R
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.util.RetrofitInstance
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Subscriptions : Fragment() {
     val TAG = "SubFragment"
@@ -65,7 +65,8 @@ class Subscriptions : Fragment() {
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
             val grid = sharedPreferences.getString(
-                "grid", resources.getInteger(R.integer.grid_items).toString()
+                "grid",
+                resources.getInteger(R.integer.grid_items).toString()
             )!!
             feedRecView.layoutManager = GridLayoutManager(view.context, grid.toInt())
             fetchFeed(feedRecView, progressBar, view)
