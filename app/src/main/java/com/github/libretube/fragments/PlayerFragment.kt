@@ -259,8 +259,9 @@ class PlayerFragment : Fragment() {
             }
 
         // FullScreen button trigger
-        view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener {
-            // remember to hide everything when new thing added
+        val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
+        fullScreenButton.setOnClickListener {
+            exoPlayerView.hideController()
             if (!isFullScreen) {
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
