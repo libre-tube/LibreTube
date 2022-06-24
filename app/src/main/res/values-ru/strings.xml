@@ -132,7 +132,7 @@
     <string name="gradientIcon">Гладкий градиент</string>
     <string name="update_available_text">Перейти к выпускам на GitHub, чтобы загрузить его\?</string>
     <string name="app_behavior">Поведение</string>
-    <string name="authors_summary">Познакомьтесь со всеми.</string>
+    <string name="authors_summary">Познакомьтесь со всеми, кто участвует в разработке и улучшении приложения.</string>
     <string name="download_folder_summary">Имя папки, в которой хранится загруженные медиафайлы.</string>
     <string name="birdIcon">Прикольная птица</string>
     <string name="fireIcon">Огненный огонь</string>
@@ -179,9 +179,9 @@
     <string name="no_update_available">Вы используете последнюю версию.</string>
     <string name="playback_speed">Скорость воспроизведения по умолчанию</string>
     <string name="advanced">Продвинутое</string>
-    <string name="player">Плеер</string>
+    <string name="player">Аудио и видео</string>
     <string name="appearance_summary">Настройте приложение по своему вкусу.</string>
-    <string name="advanced_summary">Плеер, загрузки, история</string>
+    <string name="advanced_summary">Загрузки, история</string>
     <string name="live">В прямом эфире</string>
     <string name="playerVideoFormat">Формат видео для плеера</string>
     <string name="audio">Аудио</string>
@@ -191,4 +191,16 @@
     <string name="hideTrendingPage">Скрыть вкладку \"тренды\"</string>
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
+    <string name="reset">Восстановить настройки по-умолчанию</string>
+    <string name="piped_summary">Piped — это альтернативный веб-интерфейс с открытым исходным кодом для YouTube, предоставляющий API, который мы используем. Без Piped не существовало бы LibreTube. Огромное спасибо их разработчикам!</string>
+    <string name="reset_message">Вы уверены\? Это выведет вас из системы и сбросит все ваши настройки!</string>
+    <string name="instance_frontend_url">URL-адрес экземпляра</string>
+    <string name="quality">Качество</string>
+    <string name="behavior">Поведение</string>
+    <string name="player_summary">Качество и поведение плеера</string>
+    <string name="seek_increment">Шаг перемотки</string>
+    <string name="pauseOnScreenOff">Автопауза</string>
+    <string name="pauseOnScreenOff_summary">Ставить плеер на паузу, когда экран выключен.</string>
+    <string name="autoplay_summary">Автоматически воспроизводить следующее видео после завершения текущего.</string>
+    <string name="clonePlaylist">Клонировать плейлист</string>
 </resources>

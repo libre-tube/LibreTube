@@ -19,7 +19,7 @@
     <string name="already_logged_in">आप पहले ही लॉग इन हैं, आप अपने खाते से लॉगआउट कर सकते हैं।</string>
     <string name="login_first">कृपया पुनः लॉगिन करें और पुनः प्रयास करें!</string>
     <string name="instances">इंस्टेंस चुनें</string>
-    <string name="customInstance">एक कस्टम इंस्टेंस जोड़ें</string>
+    <string name="customInstance">अलग इंस्टेंस जोड़ें</string>
     <string name="login_register">लॉग इन/रजिस्टर</string>
     <string name="importsuccess">सफलतापूर्वक सब्सक्राइब ही गया!</string>
     <string name="cannotDownload">इस स्ट्रीम को डाउनलोड नहीं कर सकते!</string>
@@ -51,4 +51,8 @@
     <string name="dlisinprogress">एक और डाउनलोड पहले से ही हो रहा है कृपया इसके समाप्त होने तक प्रतीक्षा करें!</string>
     <string name="choose_quality_dialog">क्वालिटी चुनें:</string>
     <string name="about">के बारे में</string>
+    <string name="startpage">होम</string>
+    <string name="subscriptions">सदस्यता</string>
+    <string name="library">लायब्ररी</string>
+    <string name="videos">वीडियो</string>
 </resources>

@@ -195,6 +195,6 @@
     <string name="quality">Ποιότητα</string>
     <string name="behavior">Συμπεριφορά</string>
     <string name="player_summary">Ποιότητα και συμπεριφορά του αναπαραγωγέα</string>
-    <string name="seek_increment">Προσάυξηση αναζήτησης</string>
+    <string name="seek_increment">Προσαύξηση αναπήδησης</string>
     <string name="piped_summary">Το Piped είναι μία εναλλακτική σελίδα ανοικτού κώδικα για το YouTube που παρέχει το API που χρησιμοποιούμε. Χωρίς το Piped, το LibreTube δεν θα υπήρχε. Τεράστιες ευχαριστίες στους προγραμματιστές του!</string>
 </resources>
