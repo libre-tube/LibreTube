@@ -62,3 +62,4 @@ WARNING: THIS IS A BETA VERSION, THEREFORE YOU MAY ENCOUNTER BUGS. IF YOU DO, OP
 
 ## Mirrors (read-only)
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
+<a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
