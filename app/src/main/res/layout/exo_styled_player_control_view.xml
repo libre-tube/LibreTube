@@ -46,16 +46,27 @@
             android:layoutDirection="ltr">
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_close"
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF"
-                app:tint="@android:color/white" />
+                app:tint="@android:color/white"
+                android:layout_marginRight="10dp"/>
+
+            <ImageButton
+                android:id="@+id/lock_player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_unlocked"
+                android:padding="@dimen/exo_icon_padding"
+                android:background="#00FFFFFF" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/controls_top_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
@@ -137,14 +148,6 @@
             android:layoutDirection="ltr">
 
             <ImageButton
-                android:id="@id/exo_vr"
-                style="@style/ExoStyledControls.Button.Bottom.VR" />
-
-            <ImageButton
-                android:id="@id/exo_shuffle"
-                style="@style/ExoStyledControls.Button.Bottom.Shuffle" />
-
-            <ImageButton
                 android:id="@id/exo_repeat_toggle"
                 style="@style/ExoStyledControls.Button.Bottom.RepeatToggle" />
 
@@ -158,15 +161,8 @@
 
             <ImageButton
                 android:id="@+id/fullscreen"
-                style="@style/ExoStyledControls.Button.Bottom.FullScreen" />
-
-            <ImageButton
-                android:id="@id/exo_fullscreen"
-                style="@style/ExoStyledControls.Button.Bottom.FullScreen" />
-
-            <ImageButton
-                android:id="@id/exo_overflow_show"
-                style="@style/ExoStyledControls.Button.Bottom.OverflowShow" />
+                style="@style/ExoStyledControls.Button.Bottom.FullScreen"
+                android:src="@drawable/ic_fullscreen"/>
 
         </LinearLayout>
 
@@ -191,30 +187,30 @@
 
         </HorizontalScrollView>
 
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/progress_bar"
-        android:layout_gravity="bottom"
-        android:layout_above="@id/exo_basic_controls"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="15dp">
-
-        <com.google.android.exoplayer2.ui.DefaultTimeBar
-            android:id="@id/exo_progress"
+        <LinearLayout
+            android:id="@+id/progress_bar"
+            android:layout_gravity="bottom"
+            android:layout_above="@id/exo_basic_controls"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
-            app:bar_height="2dp"
-            app:scrubber_color="?attr/colorOnPrimary"
-            app:played_color="?attr/colorOnSecondary"
-            app:scrubber_enabled_size="12dp"
-            app:scrubber_dragged_size="15dp"
-            android:background="@color/exo_bottom_bar_background" />
+            android:layout_height="15dp">
 
-    </LinearLayout>
+            <com.google.android.exoplayer2.ui.DefaultTimeBar
+                android:id="@id/exo_progress"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                app:bar_height="2dp"
+                app:scrubber_color="?attr/colorOnPrimary"
+                app:played_color="?attr/colorOnSecondary"
+                app:scrubber_enabled_size="12dp"
+                app:scrubber_dragged_size="15dp"
+                android:background="@color/exo_bottom_bar_background" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@id/exo_minimal_controls"
@@ -225,10 +221,6 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layoutDirection="ltr">
-
-        <ImageButton
-            android:id="@id/exo_minimal_fullscreen"
-            style="@style/ExoStyledControls.Button.Bottom.FullScreen" />
 
     </LinearLayout>
 

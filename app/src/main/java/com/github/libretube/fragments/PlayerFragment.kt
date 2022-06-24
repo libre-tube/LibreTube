@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -84,11 +85,11 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import org.chromium.net.CronetEngine
+import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-import org.chromium.net.CronetEngine
-import retrofit2.HttpException
 
 var isFullScreen = false
 
@@ -118,6 +119,7 @@ class PlayerFragment : Fragment() {
     private lateinit var segmentData: Segments
     private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var relatedStreamsEnabled = true
+    private var isPlayerLocked: Boolean = false
 
     private lateinit var relDownloadVideo: LinearLayout
 
@@ -182,6 +184,7 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 mainMotionLayout.progress = abs(progress)
+                exoPlayerView.hideController()
                 eId = endId
                 sId = startId
             }
@@ -192,13 +195,11 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
-                    exoPlayerView.hideController()
                     exoPlayerView.useController = false
-                    mainMotionLayout.progress = 1.toFloat()
+                    mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
-                    exoPlayerView.showController()
                     exoPlayerView.useController = true
-                    mainMotionLayout.progress = 0.toFloat()
+                    mainMotionLayout.progress = 0F
                 }
             }
 
@@ -259,8 +260,9 @@ class PlayerFragment : Fragment() {
             }
 
         // FullScreen button trigger
-        view.findViewById<ImageButton>(R.id.fullscreen).setOnClickListener {
-            // remember to hide everything when new thing added
+        val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
+        fullScreenButton.setOnClickListener {
+            exoPlayerView.hideController()
             if (!isFullScreen) {
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
@@ -268,6 +270,7 @@ class PlayerFragment : Fragment() {
                 }
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = true
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
+                fullScreenButton.setImageResource(R.drawable.ic_fullscreen_exit)
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
                 isFullScreen = true
@@ -278,6 +281,7 @@ class PlayerFragment : Fragment() {
                 }
                 view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
                 view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+                fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 isFullScreen = false
@@ -293,6 +297,23 @@ class PlayerFragment : Fragment() {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
                 isZoomed = true
             }
+        }
+
+        // lock and unlock the player
+        val lockPlayerButton = view.findViewById<ImageButton>(R.id.lock_player)
+        lockPlayerButton.setOnClickListener {
+            // change the locked/unlocked icon
+            if (!isPlayerLocked) {
+                lockPlayerButton.setImageResource(R.drawable.ic_locked)
+            } else {
+                lockPlayerButton.setImageResource(R.drawable.ic_unlocked)
+            }
+
+            // show/hide all the controls
+            lockPlayer(isPlayerLocked)
+
+            // change locked status
+            isPlayerLocked = !isPlayerLocked
         }
 
         val scrollView = view.findViewById<ScrollView>(R.id.player_scrollView)
@@ -362,8 +383,9 @@ class PlayerFragment : Fragment() {
 
         exoPlayerView.postDelayed(this::checkForSegments, 100)
 
-        if (!::segmentData.isInitialized || segmentData.segments.isEmpty())
+        if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) {
             return
+        }
 
         segmentData.segments.forEach { segment: Segment ->
             val segmentStart = (segment.segment!![0] * 1000.0f).toLong()
@@ -458,7 +480,6 @@ class PlayerFragment : Fragment() {
                     }
                     if (categories.size > 0) {
                         segmentData = try {
-
                             RetrofitInstance.api.getSegments(
                                 videoId!!,
                                 "[\"" + TextUtils.join("\",\"", categories) + "\"]"
@@ -523,7 +544,6 @@ class PlayerFragment : Fragment() {
                 playWhenReady: Boolean,
                 playbackState: Int
             ) {
-
                 exoPlayerView.keepScreenOn = !(
                     playbackState == Player.STATE_IDLE ||
                         playbackState == Player.STATE_ENDED ||
@@ -627,7 +647,6 @@ class PlayerFragment : Fragment() {
             }
 
         view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
-
             val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to response.uploaderUrl)
             activity.navController.navigate(R.id.channel, bundle)
@@ -717,7 +736,6 @@ class PlayerFragment : Fragment() {
         }
 
         for (vid in response.videoStreams!!) {
-            Log.e(TAG, vid.toString())
             // append quality to list if it has the preferred format (e.g. MPEG)
             if (vid.format.equals(videoFormatPreference)) { // preferred format
                 videosNameArray += vid.quality!!
@@ -863,7 +881,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializePlayerNotification(c: Context) {
-
         mediaSession = MediaSessionCompat(c, this.javaClass.name)
         mediaSession.apply {
             isActive = true
@@ -885,6 +902,15 @@ class PlayerFragment : Fragment() {
             setUsePreviousAction(false)
             setMediaSessionToken(mediaSession.sessionToken)
         }
+    }
+
+    private fun lockPlayer(isLocked: Boolean) {
+        val visibility = if (isLocked) View.VISIBLE else View.GONE
+        exoPlayerView.findViewById<LinearLayout>(R.id.controls_top_right).visibility = visibility
+        exoPlayerView.findViewById<ImageButton>(R.id.exo_play_pause).visibility = visibility
+        exoPlayerView.findViewById<Button>(R.id.exo_ffwd_with_amount).visibility = visibility
+        exoPlayerView.findViewById<Button>(R.id.exo_rew_with_amount).visibility = visibility
+        exoPlayerView.findViewById<FrameLayout>(R.id.exo_bottom_bar).visibility = visibility
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {

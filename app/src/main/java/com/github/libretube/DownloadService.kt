@@ -69,7 +69,6 @@ class DownloadService : Service() {
     }
 
     private fun downloadManager() {
-
         // create folder for temporary files
         tempDir = File(
             applicationContext.getExternalFilesDir(DIRECTORY_DOWNLOADS),
@@ -255,10 +254,11 @@ class DownloadService : Service() {
                 if (returnCode.toString() != "0") downloadFailedNotification()
                 else downloadSucceededNotification()
                 onDestroy()
-            }, {
-            // CALLED WHEN SESSION PRINTS LOGS
-            Log.e(TAG, it.message.toString())
-        }
+            },
+            {
+                // CALLED WHEN SESSION PRINTS LOGS
+                Log.e(TAG, it.message.toString())
+            }
         ) {
             // CALLED WHEN SESSION GENERATES STATISTICS
             Log.e(TAG + "stat", it.time.toString())

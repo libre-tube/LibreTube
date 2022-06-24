@@ -16,8 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.util.RetrofitInstance
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Home : Fragment() {
 
@@ -34,7 +34,6 @@ class Home : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
