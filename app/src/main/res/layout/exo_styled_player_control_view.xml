@@ -244,18 +244,22 @@
 
         <Button
             android:id="@id/exo_rew_with_amount"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
+            android:layout_marginRight="25dp"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
             style="@style/ExoStyledControls.Button.Center.RewWithAmount" />
 
         <ImageButton
             android:id="@id/exo_play_pause"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
             style="@style/ExoStyledControls.Button.Center.PlayPause" />
 
         <Button
             android:id="@id/exo_ffwd_with_amount"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
+            android:layout_marginLeft="25dp"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
             style="@style/ExoStyledControls.Button.Center.FfwdWithAmount" />
 
     </LinearLayout>
