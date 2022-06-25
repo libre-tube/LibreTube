@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import com.github.libretube.obj.Channel
 import com.github.libretube.obj.CommentsPage
+import com.github.libretube.obj.DeleteUserRequest
 import com.github.libretube.obj.Instances
 import com.github.libretube.obj.Login
 import com.github.libretube.obj.Message
@@ -85,6 +86,12 @@ interface PipedApi {
 
     @POST("register")
     suspend fun register(@Body login: Login): Token
+
+    @POST("user/delete")
+    suspend fun deleteAccount(
+        @Header("Authorization") token: String,
+        @Body password: DeleteUserRequest
+    ): Message
 
     @GET("feed")
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>

@@ -26,8 +26,6 @@
             android:textSize="27sp"
             android:textStyle="bold" />
 
-        <View style="@style/HorizontalLine" />
-
         <LinearLayout
             android:id="@+id/website"
             style="@style/AboutItem">
@@ -44,8 +42,6 @@
                 android:text="@string/website_summary" />
 
         </LinearLayout>
-
-        <View style="@style/HorizontalLine" />
 
         <LinearLayout
             android:id="@+id/contributing"
@@ -64,8 +60,6 @@
 
         </LinearLayout>
 
-        <View style="@style/HorizontalLine" />
-
         <LinearLayout
             android:id="@+id/authors"
             style="@style/AboutItem">
@@ -82,8 +76,6 @@
                 android:text="@string/authors_summary" />
 
         </LinearLayout>
-
-        <View style="@style/HorizontalLine" />
 
         <LinearLayout
             android:id="@+id/piped"
@@ -102,8 +94,6 @@
 
         </LinearLayout>
 
-        <View style="@style/HorizontalLine" />
-
         <LinearLayout
             android:id="@+id/donate"
             style="@style/AboutItem">
@@ -120,8 +110,6 @@
                 android:text="@string/donate_summary" />
 
         </LinearLayout>
-
-        <View style="@style/HorizontalLine" />
 
         <LinearLayout
             android:id="@+id/license"
