@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instances">اختر نظير</string>
-    <string name="customInstance">نظير مخصص</string>
+    <string name="instances">اختر نموذج</string>
+    <string name="customInstance">نموذج مخصص</string>
     <string name="choose_quality_dialog">الجودة</string>
     <string name="registered">تم إنشاء حساب بنجاح! تستطيع الآن أن تشترك بالقنوات التي تريدها.</string>
     <string name="search_hint">بحث</string>
@@ -24,7 +24,7 @@
     <string name="register">إنشاء حساب جديد</string>
     <string name="already_logged_in">لقد سجلت دخولك من قبل، تستطيع أن تسجل خروجك إذا أردت.</string>
     <string name="subscribeIsEmpty">اشترك ببعض القنوات أولا.</string>
-    <string name="cannotDownload">لم يُقدر على تنزيل هذا البث.</string>
+    <string name="cannotDownload">لا بمكن تنزيل هذا البث.</string>
     <string name="region">المنطقة</string>
     <string name="importsuccess">تم الاشتراك</string>
     <string name="dlcomplete">تم التنزيل.</string>
