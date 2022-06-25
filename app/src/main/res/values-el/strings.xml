@@ -197,4 +197,10 @@
     <string name="player_summary">Ποιότητα και συμπεριφορά του αναπαραγωγέα</string>
     <string name="seek_increment">Προσαύξηση αναπήδησης</string>
     <string name="piped_summary">Το Piped είναι μία εναλλακτική σελίδα ανοικτού κώδικα για το YouTube που παρέχει το API που χρησιμοποιούμε. Χωρίς το Piped, το LibreTube δεν θα υπήρχε. Τεράστιες ευχαριστίες στους προγραμματιστές του!</string>
+    <string name="reset">Επαναφορά προεπιλογών</string>
+    <string name="reset_message">Είστε σίγουρος/η; Αυτό θα σας αποσυνδέσει και θα επαναφέρει όλες τις ρυθμίσεις σας!</string>
+    <string name="pauseOnScreenOff">Αυτόματη παύση</string>
+    <string name="pauseOnScreenOff_summary">Παύση της αναπαραγωγής όταν η οθόνη είναι απενεργοποιημένη.</string>
+    <string name="autoplay_summary">Αυτόματη αναπαραγωγή του επόμενου βίντεο όταν τελειώσει το τρέχον.</string>
+    <string name="clonePlaylist">Κλωνοποίηση λίστας αναπαραγωγής</string>
 </resources>

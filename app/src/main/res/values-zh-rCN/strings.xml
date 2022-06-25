@@ -201,4 +201,6 @@
     <string name="clonePlaylist">复制播放列表</string>
     <string name="category_music_offtopic_description">仅用于音乐视频。它应该涵盖视频的一部分，而不是官方混音的一部分。最后，视频应尽可能类似于 Spotify 或任何其他混合版本，或减少谈话或其他干扰。</string>
     <string name="category_preview_description">对于详细说明此系列视频或未来视频中即将出现的内容的片段，但不提供其他信息。如果它包含仅出现在此处的剪辑，则这很可能是错误的类别。</string>
+    <string name="reset">恢复默认值</string>
+    <string name="reset_message">你确定吗？这会让你退出账户并重置你的所有设置！</string>
 </resources>
