@@ -114,9 +114,6 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
         topBarTextView?.text = getString(R.string.instance)
 
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        val token = sharedPref?.getString("token", "")
-
         val instance = findPreference<ListPreference>("selectInstance")
         // fetchInstance()
         initCustomInstances()
@@ -155,8 +152,9 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
 
         val deleteAccount = findPreference<Preference>("delete_account")
-        deleteAccount?.parent?.removePreference(deleteAccount)
         deleteAccount?.setOnPreferenceClickListener {
+            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+            val token = sharedPref?.getString("token", "")
             if (token != "") {
                 val newFragment = DeleteAccountDialog()
                 newFragment.show(childFragmentManager, "DeleteAccountDialog")
@@ -168,6 +166,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
+            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+            val token = sharedPref?.getString("token", "")
             // check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)

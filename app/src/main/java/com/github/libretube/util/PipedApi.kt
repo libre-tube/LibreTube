@@ -91,7 +91,7 @@ interface PipedApi {
     suspend fun deleteAccount(
         @Header("Authorization") token: String,
         @Body password: DeleteUserRequest
-    ): Message
+    )
 
     @GET("feed")
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>

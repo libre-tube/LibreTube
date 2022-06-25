@@ -3,6 +3,7 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.widget.Button
 import android.widget.EditText
@@ -62,7 +63,8 @@ class DeleteAccountDialog : DialogFragment() {
                 val response = try {
                     RetrofitInstance.api.deleteAccount(token, DeleteUserRequest(password))
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    Log.e(TAG, e.toString())
+                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
