@@ -60,8 +60,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
                             val jsonObject = JSONTokener(json).nextValue() as JSONObject
                             Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
                             for (
-                                i in 0 until jsonObject.getJSONArray("subscriptions")
-                                    .length()
+                            i in 0 until jsonObject.getJSONArray("subscriptions")
+                                .length()
                             ) {
                                 var url =
                                     jsonObject.getJSONArray("subscriptions").getJSONObject(i)
