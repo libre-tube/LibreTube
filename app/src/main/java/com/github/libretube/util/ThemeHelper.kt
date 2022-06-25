@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.preference.PreferenceManager
 import com.github.libretube.R
 
 class ThemeHelper {
@@ -17,10 +16,8 @@ class ThemeHelper {
         updateThemeMode(context)
     }
 
-    fun updateAccentColor(context: Context) {
-        val colorAccent =
-            PreferenceManager.getDefaultSharedPreferences(context).getString("accent_color", "red")
-        when (colorAccent) {
+    private fun updateAccentColor(context: Context) {
+        when (PreferenceHelper.getString(context, "accent_color", "red")) {
             "my" -> context.setTheme(R.style.Theme_MY)
             "red" -> context.setTheme(R.style.Theme_Red)
             "blue" -> context.setTheme(R.style.Theme_Blue)
@@ -30,10 +27,8 @@ class ThemeHelper {
         }
     }
 
-    fun updateThemeMode(context: Context) {
-        val themeMode =
-            PreferenceManager.getDefaultSharedPreferences(context).getString("theme_togglee", "A")
-        when (themeMode) {
+    private fun updateThemeMode(context: Context) {
+        when (PreferenceHelper.getString(context, "theme_togglee", "A")) {
             "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

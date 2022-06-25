@@ -58,6 +58,7 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.google.android.exoplayer2.C
@@ -347,9 +348,11 @@ class PlayerFragment : Fragment() {
 
     override fun onPause() {
         // pause the player if the screen is turned off
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val pausePlayerOnScreenOffEnabled = sharedPreferences
-            .getBoolean("pause_screen_off", false)
+        val pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "pause_screen_off",
+            false
+        )
 
         // check whether the screen is on
         val pm = context?.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -717,11 +720,8 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setResolutionAndSubtitles(view: View, response: Streams) {
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
-
-        val videoFormatPreference = sharedPreferences.getString("player_video_format", "WEBM")
-        val defres = sharedPreferences.getString("default_res", "")!!
+        val videoFormatPreference = PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
+        val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
         val qualityText = view.findViewById<TextView>(R.id.quality_text)
         val qualitySelect = view.findViewById<ImageButton>(R.id.quality_select)
