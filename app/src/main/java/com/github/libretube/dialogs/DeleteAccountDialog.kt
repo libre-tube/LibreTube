@@ -3,7 +3,6 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.widget.Button
 import android.widget.EditText
@@ -16,8 +15,6 @@ import com.github.libretube.R
 import com.github.libretube.obj.DeleteUserRequest
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
-import java.io.IOException
 
 class DeleteAccountDialog : DialogFragment() {
     private val TAG = "DeleteAccountDialog"
@@ -27,7 +24,11 @@ class DeleteAccountDialog : DialogFragment() {
         return activity?.let {
             val builder = MaterialAlertDialogBuilder(it)
             val inflater = requireActivity().layoutInflater
-            val view = inflater.inflate(R.layout.dialog_login, null)
+            val view = inflater.inflate(R.layout.dialog_delete_account, null)
+
+            view.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+                dialog?.dismiss()
+            }
 
             password = view.findViewById(R.id.delete_password)
             view.findViewById<Button>(R.id.delete_account_confirm).setOnClickListener {
@@ -60,18 +61,8 @@ class DeleteAccountDialog : DialogFragment() {
 
                 val response = try {
                     RetrofitInstance.api.deleteAccount(token, DeleteUserRequest(password))
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?$e")
-                    return@launchWhenCreated
+                    e.printStackTrace()
                 }
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
                 logout()

@@ -22,6 +22,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.dialogs.CustomInstanceDialog
+import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
@@ -59,8 +60,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
                             val jsonObject = JSONTokener(json).nextValue() as JSONObject
                             Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
                             for (
-                            i in 0 until jsonObject.getJSONArray("subscriptions")
-                                .length()
+                                i in 0 until jsonObject.getJSONArray("subscriptions")
+                                    .length()
                             ) {
                                 var url =
                                     jsonObject.getJSONArray("subscriptions").getJSONObject(i)
@@ -113,6 +114,9 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
         topBarTextView?.text = getString(R.string.instance)
 
+        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("token", "")
+
         val instance = findPreference<ListPreference>("selectInstance")
         // fetchInstance()
         initCustomInstances()
@@ -150,10 +154,19 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
+        val deleteAccount = findPreference<Preference>("delete_account")
+        deleteAccount?.setOnPreferenceClickListener {
+            if (token != "") {
+                val newFragment = DeleteAccountDialog()
+                newFragment.show(childFragmentManager, "DeleteAccountDialog")
+            } else {
+                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")!!
             // check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
