@@ -25,6 +25,7 @@ import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -134,11 +135,9 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
         clearCustomInstances?.setOnPreferenceClickListener {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            sharedPreferences.edit()
-                .remove("custom_instances_name")
-                .remove("custom_instances_url")
-                .commit()
+            PreferenceHelper.removePreference(requireContext(), "custom_instances_name")
+            PreferenceHelper.removePreference(requireContext(), "custom_instances_url")
+            PreferenceHelper.removePreference(requireContext(), "custom_instances_frontend_url")
             activity?.recreate()
             true
         }

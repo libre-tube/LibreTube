@@ -2,14 +2,12 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.os.Build
-import androidx.preference.PreferenceManager
 import java.util.*
 
 class LocaleHelper {
 
     fun updateLanguage(context: Context) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val languageName = sharedPreferences.getString("language", "sys")
+        val languageName = PreferenceHelper.getString(context, "language", "en")
         if (languageName != "") {
             setLanguage(context, languageName!!)
         }
