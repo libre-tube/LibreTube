@@ -155,6 +155,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
 
         val deleteAccount = findPreference<Preference>("delete_account")
+        deleteAccount?.parent?.removePreference(deleteAccount)
         deleteAccount?.setOnPreferenceClickListener {
             if (token != "") {
                 val newFragment = DeleteAccountDialog()

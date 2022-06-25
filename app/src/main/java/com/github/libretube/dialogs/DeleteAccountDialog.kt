@@ -63,6 +63,7 @@ class DeleteAccountDialog : DialogFragment() {
                     RetrofitInstance.api.deleteAccount(token, DeleteUserRequest(password))
                 } catch (e: Exception) {
                     e.printStackTrace()
+                    return@launchWhenCreated
                 }
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
                 logout()
