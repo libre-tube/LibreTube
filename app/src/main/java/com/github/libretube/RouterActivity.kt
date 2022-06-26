@@ -21,7 +21,7 @@ class RouterActivity : AppCompatActivity() {
             handleSendText(uri!!)
         } else {
             // start app as normal if URI not in host list
-            ThemeHelper().restartMainActivity(this)
+            ThemeHelper.restartMainActivity(this)
         }
     }
 

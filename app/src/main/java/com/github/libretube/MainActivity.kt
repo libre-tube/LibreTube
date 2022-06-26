@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         RetrofitInstance.url =
             PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
 
-        ThemeHelper().updateTheme(this)
-        LocaleHelper().updateLanguage(this)
+        ThemeHelper.updateTheme(this)
+        LocaleHelper.updateLanguage(this)
 
         // show noInternet Activity if no internet available on app startup
         if (!isNetworkAvailable(this)) {
