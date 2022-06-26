@@ -18,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.google.android.material.button.MaterialButton
@@ -63,9 +64,8 @@ class ChannelFragment : Fragment() {
         val refreshChannel = {
             refreshLayout?.isRefreshing = true
             fetchChannel(view)
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
             val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
-            if (sharedPref?.getString("token", "") != "") {
+            if (PreferenceHelper.getToken(requireContext()) != "") {
                 isSubscribed(subButton)
             }
         }
@@ -95,10 +95,10 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.isSubscribed(
                         channel_id!!,
-                        sharedPref?.getString("token", "")!!
+                        token
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -135,9 +135,9 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {
@@ -158,9 +158,9 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.unsubscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {

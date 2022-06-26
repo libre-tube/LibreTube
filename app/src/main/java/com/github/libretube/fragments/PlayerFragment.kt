@@ -34,7 +34,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -426,7 +425,7 @@ class PlayerFragment : Fragment() {
                 thumbnailUrl = response.thumbnailUrl!!
 
                 // check whether related streams and autoplay are enabled
-                autoplay = PreferenceHelper.getBoolean(requireContext(),"autoplay", false)
+                autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
                 relatedStreamsEnabled = PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
@@ -679,8 +678,8 @@ class PlayerFragment : Fragment() {
             activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
             view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
         }
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        if (sharedPref?.getString("token", "") != "") {
+        val token = PreferenceHelper.getToken(requireContext())
+        if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
             val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
             isSubscribed(subButton, channelId!!)
@@ -940,10 +939,10 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.isSubscribed(
                         channel_id,
-                        sharedPref?.getString("token", "")!!
+                        token
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -980,9 +979,9 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {
@@ -1003,9 +1002,9 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.unsubscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {

@@ -39,9 +39,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
                 PreferenceHelper.clearPreferences(requireContext())
 
                 // clear login token
-                val sharedPrefToken =
-                    context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                sharedPrefToken?.edit()?.clear()?.commit()
+                PreferenceHelper.setToken(requireContext(), "")
 
                 requireMainActivityRestart = true
                 activity?.recreate()

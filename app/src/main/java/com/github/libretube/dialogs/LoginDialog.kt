@@ -40,11 +40,7 @@ class LoginDialog : DialogFragment() {
                     view.findViewById<TextView>(R.id.user).text.toString() + " (" + user + ")"
                 view.findViewById<Button>(R.id.logout).setOnClickListener {
                     Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    with(sharedPref!!.edit()) {
-                        putString("token", "")
-                        apply()
-                    }
+                    PreferenceHelper.setToken(requireContext(), "")
                     dialog?.dismiss()
                 }
             } else {
@@ -105,17 +101,8 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 } else if (response.token != null) {
                     Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    with(sharedPref!!.edit()) {
-                        putString("token", response.token)
-                        apply()
-                    }
-                    val sharedPref2 =
-                        context?.getSharedPreferences("username", Context.MODE_PRIVATE)
-                    with(sharedPref2!!.edit()) {
-                        putString("username", login.username)
-                        apply()
-                    }
+                    PreferenceHelper.setToken(requireContext(), response.token!!)
+                    PreferenceHelper.setUsername(requireContext(), login.username!!)
                     dialog?.dismiss()
                 }
             }
@@ -138,24 +125,15 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?" + e.toString())
+                    Log.e(TAG, "dafaq?$e")
                     return@launchWhenCreated
                 }
                 if (response.error != null) {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 } else if (response.token != null) {
                     Toast.makeText(context, R.string.registered, Toast.LENGTH_SHORT).show()
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                    with(sharedPref!!.edit()) {
-                        putString("token", response.token)
-                        apply()
-                    }
-                    val sharedPref2 =
-                        context?.getSharedPreferences("username", Context.MODE_PRIVATE)
-                    with(sharedPref2!!.edit()) {
-                        putString("username", login.username)
-                        apply()
-                    }
+                    PreferenceHelper.setToken(requireContext(), response.token!!)
+                    PreferenceHelper.setUsername(requireContext(), login.username!!)
                     dialog?.dismiss()
                 }
             }

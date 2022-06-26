@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -82,7 +81,7 @@ class PlaylistAdapter(
             val delete = holder.v.findViewById<ImageView>(R.id.delete_playlist)
             delete.visibility = View.VISIBLE
             delete.setOnClickListener {
-                val token = PreferenceHelper.getString(holder.v.context, "token", "")!!
+                val token = PreferenceHelper.getToken(holder.v.context)
                 removeFromPlaylist(token, position)
             }
         }

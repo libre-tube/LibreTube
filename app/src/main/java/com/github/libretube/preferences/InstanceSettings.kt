@@ -309,11 +309,10 @@ class InstanceSettings : PreferenceFragmentCompat() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref =
-                        context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.importSubscriptions(
                         false,
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         channels
                     )
                 } catch (e: IOException) {
