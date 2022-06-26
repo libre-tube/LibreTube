@@ -2,6 +2,7 @@ package com.github.libretube.fragments
 
 import android.annotation.SuppressLint
 import android.app.NotificationManager
+import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -92,6 +93,7 @@ import java.util.concurrent.Executors
 import kotlin.math.abs
 
 var isFullScreen = false
+var isMiniPlayerVisible = false
 
 class PlayerFragment : Fragment() {
 
@@ -197,9 +199,11 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
+                    isMiniPlayerVisible = true
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
+                    isMiniPlayerVisible = false
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
                 }
@@ -218,6 +222,7 @@ class PlayerFragment : Fragment() {
         playerMotionLayout.transitionToStart()
 
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
+            isMiniPlayerVisible = false
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -226,6 +231,7 @@ class PlayerFragment : Fragment() {
                 .commit()
         }
         view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener {
+            isMiniPlayerVisible = false
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -434,17 +440,20 @@ class PlayerFragment : Fragment() {
                     createExoPlayer(view)
                     prepareExoPlayerView()
                     if (response.chapters != null) initializeChapters(response.chapters)
+                    // set media sources for the player
                     setResolutionAndSubtitles(view, response)
+                    exoPlayer.prepare()
+                    initializePlayerView(view, response)
                     // support for time stamped links
                     if (arguments?.getLong("timeStamp") != null) {
                         val position = arguments?.getLong("timeStamp")!! * 1000
                         exoPlayer.seekTo(position)
                     }
-                    exoPlayer.prepare()
                     exoPlayer.play()
-                    initializePlayerView(view, response)
+                    exoPlayerView.useController = true
                     initializePlayerNotification(requireContext())
                     fetchSponsorBlockSegments()
+                    // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
                 }
             }
@@ -537,6 +546,7 @@ class PlayerFragment : Fragment() {
             setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
             // controllerShowTimeoutMs = 1500
             controllerHideOnTouch = true
+            useController = false
             player = exoPlayer
         }
     }
@@ -1124,7 +1134,11 @@ class PlayerFragment : Fragment() {
                     isFullScreen
                 )
         ) {
-            requireActivity().enterPictureInPictureMode()
+            activity?.enterPictureInPictureMode(updatePipParams())
         }
     }
+
+    private fun updatePipParams() = PictureInPictureParams.Builder()
+        .setActions(emptyList())
+        .build()
 }
