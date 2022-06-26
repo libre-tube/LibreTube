@@ -230,6 +230,7 @@ class PlayerFragment : Fragment() {
                 .commit()
         }
         view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener {
+            isMiniPlayerVisible = false
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
