@@ -92,6 +92,7 @@ import java.util.concurrent.Executors
 import kotlin.math.abs
 
 var isFullScreen = false
+var isMiniPlayerVisible = false
 
 class PlayerFragment : Fragment() {
 
@@ -197,9 +198,11 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                 if (currentId == eId) {
+                    isMiniPlayerVisible = true
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
+                    isMiniPlayerVisible = false
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
                 }
@@ -218,6 +221,7 @@ class PlayerFragment : Fragment() {
         playerMotionLayout.transitionToStart()
 
         view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
+            isMiniPlayerVisible = false
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -226,6 +230,7 @@ class PlayerFragment : Fragment() {
                 .commit()
         }
         view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener {
+            isMiniPlayerVisible = false
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT

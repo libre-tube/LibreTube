@@ -28,6 +28,8 @@ class Library : Fragment() {
     lateinit var token: String
     private lateinit var playlistRecyclerView: RecyclerView
     private lateinit var refreshLayout: SwipeRefreshLayout
+    private lateinit var createPlaylistButton: FloatingActionButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,7 +60,8 @@ class Library : Fragment() {
                 Log.d(TAG, "hmm")
                 fetchPlaylists(view)
             }
-            view.findViewById<FloatingActionButton>(R.id.create_playlist).setOnClickListener {
+            createPlaylistButton = view.findViewById<FloatingActionButton>(R.id.create_playlist)
+            createPlaylistButton.setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
                 newFragment.show(childFragmentManager, "Create Playlist")
             }
@@ -69,6 +72,14 @@ class Library : Fragment() {
             refreshLayout.isEnabled = false
             view.findViewById<FloatingActionButton>(R.id.create_playlist).visibility = View.GONE
         }
+    }
+
+    override fun onResume() {
+        // optimize CreatePlaylistFab bottom margin
+        val layoutParams = createPlaylistButton.layoutParams as ViewGroup.MarginLayoutParams
+        layoutParams.bottomMargin = if (isMiniPlayerVisible) 180 else 64
+        createPlaylistButton.layoutParams = layoutParams
+        super.onResume()
     }
 
     private fun fetchPlaylists(view: View) {
