@@ -442,14 +442,15 @@ class PlayerFragment : Fragment() {
                     if (response.chapters != null) initializeChapters(response.chapters)
                     // set media sources for the player
                     setResolutionAndSubtitles(view, response)
+                    exoPlayer.prepare()
                     initializePlayerView(view, response)
                     // support for time stamped links
                     if (arguments?.getLong("timeStamp") != null) {
                         val position = arguments?.getLong("timeStamp")!! * 1000
                         exoPlayer.seekTo(position)
                     }
-                    exoPlayer.prepare()
                     exoPlayer.play()
+                    exoPlayerView.useController = true
                     initializePlayerNotification(requireContext())
                     fetchSponsorBlockSegments()
                     // show comments if related streams disabled
@@ -545,6 +546,7 @@ class PlayerFragment : Fragment() {
             setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
             // controllerShowTimeoutMs = 1500
             controllerHideOnTouch = true
+            useController = false
             player = exoPlayer
         }
     }
