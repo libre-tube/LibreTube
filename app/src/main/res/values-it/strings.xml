@@ -27,7 +27,7 @@
     <string name="app_theme">Tema dell\'app</string>
     <string name="error">Qualcosa è andato storto.</string>
     <string name="empty">Il nome utente e la password non possono essere vuoti.</string>
-    <string name="notgmail">Questo è per un account LibreTube.</string>
+    <string name="notgmail">Questo è per un account Piped.</string>
     <string name="defres">Risoluzione video di Default</string>
     <string name="dlisinprogress">Si prega di aspettare che tutti gli scaricamenti siano finiti…</string>
     <string name="unknown_error">Errore di connessione.</string>
@@ -199,8 +199,12 @@
     <string name="piped_summary">Piped è un\' alternativa web-frontend open-source per YouTube che fornisce l\'API che usiamo. Senza Piped, LibreTube non esisterebbe. Un enorme grazie ai loro sviluppatori!</string>
     <string name="autoplay_summary">Riproduci automaticamente il video successivo quando quello corrente è finito.</string>
     <string name="pauseOnScreenOff">Pausa automatica</string>
-    <string name="pauseOnScreenOff_summary">Metti in pausa il lettore quando lo schermo é spento.</string>
+    <string name="pauseOnScreenOff_summary">Metti in pausa il player quando lo schermo è spento.</string>
     <string name="clonePlaylist">Clona playlist</string>
     <string name="reset">Ripristina predefiniti</string>
-    <string name="reset_message">Sei sicuro\? Questo ti disconnetterà e ripristinerà tutte le tue impostazioni!</string>
+    <string name="reset_message">Sei sicuro/a\? Questo ti disconnetterà e ripristinerà tutte le tue impostazioni!</string>
+    <string name="deleteAccount">Elimina l\'account</string>
+    <string name="deleteAccount_summary">Elimina l\'account Piped</string>
+    <string name="restore">Ripristina</string>
+    <string name="account">Account</string>
 </resources>
