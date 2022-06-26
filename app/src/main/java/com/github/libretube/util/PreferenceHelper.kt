@@ -56,13 +56,13 @@ object PreferenceHelper {
     fun clearPreferences(context: Context) {
         val editor = getDefaultSharedPreferencesEditor(context)
         editor.clear()
-        editor.commit()
+        editor.apply()
     }
 
     fun removePreference(context: Context, value: String?) {
         val editor = getDefaultSharedPreferencesEditor(context)
         editor.remove(value)
-        editor.commit()
+        editor.apply()
     }
 
     fun getToken(context: Context): String {
@@ -72,7 +72,7 @@ object PreferenceHelper {
 
     fun setToken(context: Context, newValue: String) {
         val editor = context.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
-        editor.putString("token", newValue)
+        editor.putString("token", newValue).apply()
     }
 
     fun getUsername(context: Context): String {
@@ -82,7 +82,7 @@ object PreferenceHelper {
 
     fun setUsername(context: Context, newValue: String) {
         val editor = context.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
-        editor.putString("username", newValue)
+        editor.putString("username", newValue).apply()
     }
 
     fun saveCustomInstance(context: Context, customInstance: CustomInstance) {
@@ -93,7 +93,7 @@ object PreferenceHelper {
         customInstancesList += customInstance
 
         val json = gson.toJson(customInstancesList)
-        editor.putString("customInstances", json).commit()
+        editor.putString("customInstances", json).apply()
     }
 
     fun getCustomInstances(context: Context): ArrayList<CustomInstance> {
