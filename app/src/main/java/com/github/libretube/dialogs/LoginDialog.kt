@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.obj.Login
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
@@ -29,13 +30,11 @@ class LoginDialog : DialogFragment() {
             val builder = MaterialAlertDialogBuilder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")
+            val token = PreferenceHelper.getToken(requireContext())
             var view: View
             Log.e("dafaq", token!!)
             if (token != "") {
-                val sharedPref2 = context?.getSharedPreferences("username", Context.MODE_PRIVATE)
-                val user = sharedPref2?.getString("username", "")
+                val user = PreferenceHelper.getUsername(requireContext())
                 view = inflater.inflate(R.layout.dialog_logout, null)
                 view.findViewById<TextView>(R.id.user).text =
                     view.findViewById<TextView>(R.id.user).text.toString() + " (" + user + ")"

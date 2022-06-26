@@ -32,7 +32,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.preference.PreferenceManager
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.util.CronetHelper
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         CronetHelper.initCronet(this.applicationContext)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
         RetrofitInstance.url =
             PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
 
@@ -80,12 +79,11 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView.setupWithNavController(navController)
 
             // hide the trending page if enabled
-            val hideTrendingPage = sharedPreferences.getBoolean("hide_trending_page", false)
+            val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
             if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.home2).isVisible = false
 
             // navigate to the default start tab
-            val defaultTab = sharedPreferences.getString("default_tab", "home")
-            when (defaultTab) {
+            when (PreferenceHelper.getString(this, "default_tab", "home")) {
                 "home" -> navController.navigate(R.id.home2)
                 "subscriptions" -> navController.navigate(R.id.subscriptions)
                 "library" -> navController.navigate(R.id.library)

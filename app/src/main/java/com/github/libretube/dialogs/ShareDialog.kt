@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.preference.PreferenceManager
 import com.github.libretube.R
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
@@ -56,7 +57,8 @@ class ShareDialog(
     private fun getCustomInstanceFrontendUrl(): String {
         val sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val instancePref = sharedPreferences.getString(
+        val instancePref = PreferenceHelper.getString(
+            requireContext(),
             "selectInstance",
             "https://pipedapi.kavin.rocks"
         )

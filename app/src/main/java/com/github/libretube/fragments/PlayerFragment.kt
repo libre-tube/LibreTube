@@ -858,11 +858,10 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        val playbackSpeed = PreferenceHelper.getString(requireContext(), "playback_speed", "1F")?.toFloat()
         // multiply by thousand: s -> ms
-        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!! * 1000
-        val seekIncrement = sharedPreferences.getString("seek_increment", "5")?.toLong()!! * 1000
+        val bufferingGoal = PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
+        val seekIncrement = PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =

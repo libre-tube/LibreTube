@@ -61,9 +61,24 @@ object PreferenceHelper {
         editor.commit()
     }
 
-    fun setPrivateStringPref(context: Context, key: String, newValue: String) {
-        val editor = context.getSharedPreferences(key, Context.MODE_PRIVATE).edit()
-        editor.putString(key, newValue).apply()
+    fun getToken(context: Context): String {
+        val sharedPref = context.getSharedPreferences("token", Context.MODE_PRIVATE)
+        return sharedPref?.getString("token", "")!!
+    }
+
+    fun setToken(context: Context, newValue: String) {
+        val editor = context.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
+        editor.putString("token", newValue)
+    }
+
+    fun getUsername(context: Context): String {
+        val sharedPref = context.getSharedPreferences("username", Context.MODE_PRIVATE)
+        return sharedPref.getString("username", "")!!
+    }
+
+    fun setUsername(context: Context, newValue: String) {
+        val editor = context.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
+        editor.putString("username", newValue)
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {

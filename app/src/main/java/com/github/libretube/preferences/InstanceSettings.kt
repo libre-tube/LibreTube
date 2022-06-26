@@ -152,8 +152,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val deleteAccount = findPreference<Preference>("delete_account")
         deleteAccount?.setOnPreferenceClickListener {
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")
+            val token = PreferenceHelper.getToken(requireContext())
             if (token != "") {
                 val newFragment = DeleteAccountDialog()
                 newFragment.show(childFragmentManager, "DeleteAccountDialog")
@@ -165,8 +164,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")
+            val token = PreferenceHelper.getToken(requireContext())
             // check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
@@ -255,15 +253,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun logout() {
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        val token = sharedPref?.getString("token", "")
-        if (token != "") {
-            with(sharedPref!!.edit()) {
-                putString("token", "")
-                apply()
-            }
-            Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-        }
+        PreferenceHelper.setToken(requireContext(), "")
     }
 
     private fun fetchInstance() {

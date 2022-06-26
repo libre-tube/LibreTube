@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
@@ -34,8 +35,7 @@ class AddtoPlaylistDialog : DialogFragment() {
             val builder = MaterialAlertDialogBuilder(it)
             // Get the layout inflater
             val inflater = requireActivity().layoutInflater
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            token = sharedPref?.getString("token", "")!!
+            token = PreferenceHelper.getToken(requireContext())
             var view: View = inflater.inflate(R.layout.dialog_addtoplaylist, null)
             spinner = view.findViewById(R.id.playlists_spinner)
             button = view.findViewById(R.id.addToPlaylist)

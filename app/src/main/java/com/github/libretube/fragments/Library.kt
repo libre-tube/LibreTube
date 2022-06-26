@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.dialogs.CreatePlaylistDialog
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.HttpException
@@ -47,8 +48,7 @@ class Library : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         playlistRecyclerView = view.findViewById(R.id.playlist_recView)
         playlistRecyclerView.layoutManager = LinearLayoutManager(view.context)
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        token = sharedPref?.getString("token", "")!!
+        token = PreferenceHelper.getToken(requireContext())
         refreshLayout = view.findViewById(R.id.playlist_refresh)
         if (token != "") {
             view.findViewById<ImageView>(R.id.boogh2).visibility = View.GONE
@@ -59,8 +59,7 @@ class Library : Fragment() {
                 Log.d(TAG, "hmm")
                 fetchPlaylists(view)
             }
-            view.findViewById<com.google.android.material.floatingactionbutton
-                .FloatingActionButton>(R.id.create_playlist).setOnClickListener {
+            view.findViewById<FloatingActionButton>(R.id.create_playlist).setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
                 newFragment.show(childFragmentManager, "Create Playlist")
             }

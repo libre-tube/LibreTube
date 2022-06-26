@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -75,9 +76,7 @@ class PlaylistFragment : Fragment() {
                     view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
                     view.findViewById<TextView>(R.id.playlist_totVideos).text =
                         getString(R.string.videoCount, response.videos.toString())
-                    val sharedPref2 =
-                        context?.getSharedPreferences("username", Context.MODE_PRIVATE)
-                    val user = sharedPref2?.getString("username", "")
+                    val user = PreferenceHelper.getUsername(requireContext())
                     var isOwner = false
                     if (response.uploaderUrl == null && response.uploader.equals(user, true)) {
                         isOwner = true

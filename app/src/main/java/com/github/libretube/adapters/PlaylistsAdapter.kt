@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
@@ -57,11 +57,7 @@ class PlaylistsAdapter(
             builder.setTitle(R.string.deletePlaylist)
             builder.setMessage(R.string.areYouSure)
             builder.setPositiveButton(R.string.yes) { _, _ ->
-                val sharedPref = holder.v.context.getSharedPreferences(
-                    "token",
-                    Context.MODE_PRIVATE
-                )
-                val token = sharedPref?.getString("token", "")!!
+                val token = PreferenceHelper.getToken(holder.v.context)
                 deletePlaylist(playlist.id!!, token, position)
             }
             builder.setNegativeButton(R.string.cancel) { _, _ ->
@@ -96,10 +92,6 @@ class PlaylistsAdapter(
                         playlists.removeAt(position)
                         // FIXME: This needs to run on UI thread?
                         activity.runOnUiThread { notifyDataSetChanged() }
-
-                        /*if(playlists.isEmpty()){
-                            view.findViewById<ImageView>(R.id.boogh2).visibility=View.VISIBLE
-                        }*/
                     }
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())
