@@ -1,6 +1,5 @@
 package com.github.libretube.preferences
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.TextView
 import androidx.preference.Preference

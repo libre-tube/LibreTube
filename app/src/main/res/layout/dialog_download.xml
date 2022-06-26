@@ -30,6 +30,6 @@
         android:id="@+id/download"
         android:text="@string/download"
         style="@style/CustomDialogButton"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginRight="16dp" />
 
 </LinearLayout>

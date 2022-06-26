@@ -275,7 +275,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun addToHistory(query: String) {
-        val searchHistoryEnabled = PreferenceHelper.getBoolean(requireContext(), "search_history_toggle", true)
+        val searchHistoryEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "search_history_toggle", true)
         if (searchHistoryEnabled) {
             var historyList = PreferenceHelper.getHistory(requireContext())
 

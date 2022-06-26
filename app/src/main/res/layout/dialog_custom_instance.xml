@@ -62,7 +62,7 @@
             android:id="@+id/addInstance"
             android:text="@string/addInstance"
             style="@style/CustomDialogButton"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp" />
 
     </LinearLayout>
 

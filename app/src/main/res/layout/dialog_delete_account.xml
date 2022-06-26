@@ -40,7 +40,7 @@
             android:id="@+id/delete_account_confirm"
             android:text="@string/deleteAccount"
             style="@style/CustomDialogButton"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp" />
 
     </LinearLayout>
 

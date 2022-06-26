@@ -426,7 +426,8 @@ class PlayerFragment : Fragment() {
 
                 // check whether related streams and autoplay are enabled
                 autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
-                relatedStreamsEnabled = PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
+                relatedStreamsEnabled =
+                    PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
                 runOnUiThread {
@@ -742,7 +743,8 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setResolutionAndSubtitles(view: View, response: Streams) {
-        val videoFormatPreference = PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
+        val videoFormatPreference =
+            PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
         val qualityText = view.findViewById<TextView>(R.id.quality_text)
@@ -857,10 +859,13 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
-        val playbackSpeed = PreferenceHelper.getString(requireContext(), "playback_speed", "1F")?.toFloat()
+        val playbackSpeed =
+            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")?.toFloat()
         // multiply by thousand: s -> ms
-        val bufferingGoal = PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
-        val seekIncrement = PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
+        val bufferingGoal =
+            PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
+        val seekIncrement =
+            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =

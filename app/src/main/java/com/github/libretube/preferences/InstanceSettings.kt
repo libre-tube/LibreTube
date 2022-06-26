@@ -2,7 +2,6 @@ package com.github.libretube.preferences
 
 import android.Manifest
 import android.content.ContentResolver
-import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -19,7 +18,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
@@ -214,11 +212,11 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun initCustomInstances() {
-       val customInstances = PreferenceHelper.getCustomInstances(requireContext())
+        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
 
         var instanceNames = resources.getStringArray(R.array.instances)
         var instanceValues = resources.getStringArray(R.array.instancesValue)
-        customInstances.forEach{instance ->
+        customInstances.forEach { instance ->
             instanceNames += instance.name
             instanceValues += instance.apiUrl
         }

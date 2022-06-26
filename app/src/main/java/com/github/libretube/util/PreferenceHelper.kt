@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.preference.PreferenceManager
 import com.github.libretube.obj.CustomInstance
 import com.google.common.reflect.TypeToken
@@ -128,6 +127,7 @@ object PreferenceHelper {
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
+
     private fun getDefaultSharedPreferencesEditor(context: Context): SharedPreferences.Editor {
         return getDefaultSharedPreferences(context).edit()
     }
