@@ -33,7 +33,7 @@
     <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن لاسم المستخدم وكلمة المرور أن يكونوا فارغين.</string>
-    <string name="notgmail">هذا من أجل حساب LibreTube الخاص بك.</string>
+    <string name="notgmail">هذا لحساب Piped.</string>
     <string name="defres">جودة الفيديو الافتراضية</string>
     <string name="grid">أعمدة الشبكة</string>
     <string name="emptyList">لا شيء هنا.</string>
@@ -113,7 +113,7 @@
     <string name="app_icon">أيقونة</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">معطل</string>
-    <string name="piped">الانابيب</string>
+    <string name="piped">Piped</string>
     <string name="youtube">يوتيوب</string>
     <string name="playOnBackground">تشغيل في الخلفية</string>
     <string name="no_replies">هذا التعليق ليس له ردود.</string>
@@ -203,4 +203,8 @@
     <string name="reset">استعادة الإعدادات الافتراضية</string>
     <string name="reset_message">هل أنت متأكد؟ سيؤدي ذلك إلى تسجيل خروجك وإعادة تعيين جميع إعداداتك!</string>
     <string name="clonePlaylist">نسخ قائمة التشغيل</string>
+    <string name="deleteAccount">حذف الحساب</string>
+    <string name="account">الحساب</string>
+    <string name="restore">استعادة</string>
+    <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
 </resources>
