@@ -2,6 +2,7 @@ package com.github.libretube.fragments
 
 import android.annotation.SuppressLint
 import android.app.NotificationManager
+import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -439,7 +440,9 @@ class PlayerFragment : Fragment() {
                     createExoPlayer(view)
                     prepareExoPlayerView()
                     if (response.chapters != null) initializeChapters(response.chapters)
+                    // set media sources for the player
                     setResolutionAndSubtitles(view, response)
+                    initializePlayerView(view, response)
                     // support for time stamped links
                     if (arguments?.getLong("timeStamp") != null) {
                         val position = arguments?.getLong("timeStamp")!! * 1000
@@ -447,9 +450,9 @@ class PlayerFragment : Fragment() {
                     }
                     exoPlayer.prepare()
                     exoPlayer.play()
-                    initializePlayerView(view, response)
                     initializePlayerNotification(requireContext())
                     fetchSponsorBlockSegments()
+                    // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
                 }
             }
@@ -1129,7 +1132,11 @@ class PlayerFragment : Fragment() {
                     isFullScreen
                 )
         ) {
-            requireActivity().enterPictureInPictureMode()
+            activity?.enterPictureInPictureMode(updatePipParams())
         }
     }
+
+    private fun updatePipParams() = PictureInPictureParams.Builder()
+        .setActions(emptyList())
+        .build()
 }
