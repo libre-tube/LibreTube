@@ -51,7 +51,8 @@
         <Button
             android:id="@+id/login"
             android:text="@string/login"
-            style="@style/CustomDialogButton" />
+            style="@style/CustomDialogButton"
+            android:layout_marginRight="16dp"/>
 
     </LinearLayout>
 
