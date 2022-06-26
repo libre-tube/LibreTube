@@ -2,7 +2,6 @@ package com.github.libretube.preferences
 
 import android.Manifest
 import android.content.ContentResolver
-import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -19,7 +18,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
@@ -135,9 +133,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
         clearCustomInstances?.setOnPreferenceClickListener {
-            PreferenceHelper.removePreference(requireContext(), "custom_instances_name")
-            PreferenceHelper.removePreference(requireContext(), "custom_instances_url")
-            PreferenceHelper.removePreference(requireContext(), "custom_instances_frontend_url")
+            PreferenceHelper.removePreference(requireContext(), "customInstances")
             activity?.recreate()
             true
         }
@@ -152,8 +148,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val deleteAccount = findPreference<Preference>("delete_account")
         deleteAccount?.setOnPreferenceClickListener {
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")
+            val token = PreferenceHelper.getToken(requireContext())
             if (token != "") {
                 val newFragment = DeleteAccountDialog()
                 newFragment.show(childFragmentManager, "DeleteAccountDialog")
@@ -165,8 +160,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            val token = sharedPref?.getString("token", "")
+            val token = PreferenceHelper.getToken(requireContext())
             // check StorageAccess
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 Log.d("myz", "" + Build.VERSION.SDK_INT)
@@ -218,26 +212,14 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun initCustomInstances() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
 
-        // get the names of the custom instances
-        val customInstancesNames = try {
-            sharedPreferences
-                .getStringSet("custom_instances_name", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
+        var instanceNames = resources.getStringArray(R.array.instances)
+        var instanceValues = resources.getStringArray(R.array.instancesValue)
+        customInstances.forEach { instance ->
+            instanceNames += instance.name
+            instanceValues += instance.apiUrl
         }
-
-        // get the urls of the custom instances
-        val customInstancesUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        val instanceNames = resources.getStringArray(R.array.instances) + customInstancesNames
-        val instanceValues = resources.getStringArray(R.array.instancesValue) + customInstancesUrls
 
         // add custom instances to the list preference
         val instance = findPreference<ListPreference>("selectInstance")
@@ -255,15 +237,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun logout() {
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        val token = sharedPref?.getString("token", "")
-        if (token != "") {
-            with(sharedPref!!.edit()) {
-                putString("token", "")
-                apply()
-            }
-            Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-        }
+        PreferenceHelper.setToken(requireContext(), "")
     }
 
     private fun fetchInstance() {
@@ -319,11 +293,10 @@ class InstanceSettings : PreferenceFragmentCompat() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref =
-                        context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.importSubscriptions(
                         false,
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         channels
                     )
                 } catch (e: IOException) {

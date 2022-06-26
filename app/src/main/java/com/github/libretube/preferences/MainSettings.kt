@@ -31,7 +31,7 @@ class MainSettings : PreferenceFragmentCompat() {
 
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->
-            ThemeHelper().restartMainActivity(requireContext())
+            ThemeHelper.restartMainActivity(requireContext())
             true
         }
 

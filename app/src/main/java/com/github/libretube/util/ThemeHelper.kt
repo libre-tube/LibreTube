@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.github.libretube.R
 
-class ThemeHelper {
+object ThemeHelper {
 
     fun updateTheme(context: Context) {
         updateAccentColor(context)

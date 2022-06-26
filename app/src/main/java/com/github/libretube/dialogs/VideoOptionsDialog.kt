@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.BackgroundMode
 import com.github.libretube.R
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -50,11 +51,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     }
                     // Add Video to Playlist Dialog
                     1 -> {
-                        val sharedPref = context?.getSharedPreferences(
-                            "token",
-                            Context.MODE_PRIVATE
-                        )
-                        val token = sharedPref?.getString("token", "")
+                        val token = PreferenceHelper.getToken(requireContext())
                         if (token != "") {
                             val newFragment = AddtoPlaylistDialog()
                             val bundle = Bundle()

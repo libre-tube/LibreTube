@@ -1,7 +1,6 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -15,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.obj.DeleteUserRequest
 import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -58,8 +58,7 @@ class DeleteAccountDialog : DialogFragment() {
     private fun deleteAccount(password: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                val token = sharedPref?.getString("token", "")!!
+                val token = PreferenceHelper.getToken(requireContext())
 
                 try {
                     RetrofitInstance.api.deleteAccount(token, DeleteUserRequest(password))
@@ -78,13 +77,6 @@ class DeleteAccountDialog : DialogFragment() {
     }
 
     private fun logout() {
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        val token = sharedPref?.getString("token", "")
-        if (token != "") {
-            with(sharedPref!!.edit()) {
-                putString("token", "")
-                apply()
-            }
-        }
+        PreferenceHelper.setToken(requireContext(), "")
     }
 }

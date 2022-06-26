@@ -19,7 +19,7 @@ class SettingsActivity : AppCompatActivity() {
     val TAG = "SettingsActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
-        ThemeHelper().updateTheme(this)
+        ThemeHelper.updateTheme(this)
         // makes the preference dialogs use material dialogs
         setTheme(R.style.MaterialAlertDialog)
 
@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
                 val nManager =
                     this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 nManager.cancelAll()
-                ThemeHelper().restartMainActivity(this)
+                ThemeHelper.restartMainActivity(this)
                 ActivityCompat.finishAffinity(this)
             } else {
                 super.onBackPressed()

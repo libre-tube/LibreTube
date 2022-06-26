@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.fragments.SearchFragment
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.imageview.ShapeableImageView
 
 class SearchHistoryAdapter(
@@ -35,9 +35,8 @@ class SearchHistoryAdapter(
         holder.v.findViewById<TextView>(R.id.history_text).text = history
 
         holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             historyList = historyList - history
-            sharedPreferences.edit().putStringSet("search_history", HashSet(historyList)).apply()
+            PreferenceHelper.saveHistory(context, historyList)
             notifyDataSetChanged()
         }
 
