@@ -1,7 +1,6 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -16,6 +15,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.obj.Playlists
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -46,8 +46,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 dismiss()
             }
 
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            token = sharedPref?.getString("token", "")!!
+            token = PreferenceHelper.getToken(requireContext())
 
             val playlistName = view.findViewById<TextInputEditText>(R.id.playlist_name)
             val createPlaylistBtn = view.findViewById<Button>(R.id.create_new_playlist)

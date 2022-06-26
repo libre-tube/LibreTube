@@ -34,7 +34,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,10 +51,10 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
+import com.github.libretube.obj.SponsorBlockPrefs
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
-import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.PreferenceHelper
@@ -131,6 +130,7 @@ class PlayerFragment : Fragment() {
     private lateinit var title: String
     private lateinit var uploader: String
     private lateinit var thumbnailUrl: String
+    private val sponsorBlockPrefs = SponsorBlockPrefs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,6 +152,7 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
 
+        setSponsorBlockPrefs()
         initializeTransitionLayout(view)
         fetchJsonAndInitPlayer(view)
     }
@@ -382,7 +383,7 @@ class PlayerFragment : Fragment() {
     }
 
     private fun checkForSegments() {
-        if (!exoPlayer.isPlaying || !SponsorBlockSettings.sponsorBlockEnabled) return
+        if (!exoPlayer.isPlaying || !sponsorBlockPrefs.sponsorBlockEnabled) return
 
         exoPlayerView.postDelayed(this::checkForSegments, 100)
 
@@ -395,7 +396,7 @@ class PlayerFragment : Fragment() {
             val segmentEnd = (segment.segment[1] * 1000.0f).toLong()
             val currentPosition = exoPlayer.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
-                if (SponsorBlockSettings.sponsorNotificationsEnabled) {
+                if (sponsorBlockPrefs.sponsorNotificationsEnabled) {
                     Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
                 }
                 exoPlayer.seekTo(segmentEnd)
@@ -424,10 +425,9 @@ class PlayerFragment : Fragment() {
                 thumbnailUrl = response.thumbnailUrl!!
 
                 // check whether related streams and autoplay are enabled
-                val sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(requireContext())
-                autoplay = sharedPreferences.getBoolean("autoplay", false)
-                relatedStreamsEnabled = sharedPreferences.getBoolean("related_streams_toggle", true)
+                autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
+                relatedStreamsEnabled =
+                    PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
                 runOnUiThread {
@@ -452,33 +452,56 @@ class PlayerFragment : Fragment() {
         run()
     }
 
+    private fun setSponsorBlockPrefs() {
+        sponsorBlockPrefs.sponsorBlockEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "sb_enabled_key", true)
+        sponsorBlockPrefs.sponsorNotificationsEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "sb_notifications_key", true)
+        sponsorBlockPrefs.introEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "intro_category_key", false)
+        sponsorBlockPrefs.selfPromoEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "selfpromo_category_key", false)
+        sponsorBlockPrefs.interactionEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "interaction_category_key", false)
+        sponsorBlockPrefs.sponsorsEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "sponsors_category_key", true)
+        sponsorBlockPrefs.outroEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "outro_category_key", false)
+        sponsorBlockPrefs.fillerEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "filler_category_key", false)
+        sponsorBlockPrefs.musicOffTopicEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "music_offtopic_category_key", false)
+        sponsorBlockPrefs.previewEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "preview_category_key", false)
+    }
+
     private fun fetchSponsorBlockSegments() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                if (SponsorBlockSettings.sponsorBlockEnabled) {
+                if (sponsorBlockPrefs.sponsorBlockEnabled) {
                     val categories: ArrayList<String> = arrayListOf()
-                    if (SponsorBlockSettings.introEnabled) {
+                    if (sponsorBlockPrefs.introEnabled) {
                         categories.add("intro")
                     }
-                    if (SponsorBlockSettings.selfPromoEnabled) {
+                    if (sponsorBlockPrefs.selfPromoEnabled) {
                         categories.add("selfpromo")
                     }
-                    if (SponsorBlockSettings.interactionEnabled) {
+                    if (sponsorBlockPrefs.interactionEnabled) {
                         categories.add("interaction")
                     }
-                    if (SponsorBlockSettings.sponsorsEnabled) {
+                    if (sponsorBlockPrefs.sponsorsEnabled) {
                         categories.add("sponsor")
                     }
-                    if (SponsorBlockSettings.outroEnabled) {
+                    if (sponsorBlockPrefs.outroEnabled) {
                         categories.add("outro")
                     }
-                    if (SponsorBlockSettings.fillerEnabled) {
+                    if (sponsorBlockPrefs.fillerEnabled) {
                         categories.add("filler")
                     }
-                    if (SponsorBlockSettings.musicOfftopicEnabled) {
+                    if (sponsorBlockPrefs.musicOffTopicEnabled) {
                         categories.add("music_offtopic")
                     }
-                    if (SponsorBlockSettings.previewEnabled) {
+                    if (sponsorBlockPrefs.previewEnabled) {
                         categories.add("preview")
                     }
                     if (categories.size > 0) {
@@ -534,7 +557,7 @@ class PlayerFragment : Fragment() {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
-                if (isPlaying && SponsorBlockSettings.sponsorBlockEnabled) {
+                if (isPlaying && sponsorBlockPrefs.sponsorBlockEnabled) {
                     exoPlayerView.postDelayed(
                         this@PlayerFragment::checkForSegments,
                         100
@@ -656,8 +679,8 @@ class PlayerFragment : Fragment() {
             activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
             view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
         }
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        if (sharedPref?.getString("token", "") != "") {
+        val token = PreferenceHelper.getToken(requireContext())
+        if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
             val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
             isSubscribed(subButton, channelId!!)
@@ -720,7 +743,8 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setResolutionAndSubtitles(view: View, response: Streams) {
-        val videoFormatPreference = PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
+        val videoFormatPreference =
+            PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
         val qualityText = view.findViewById<TextView>(R.id.quality_text)
@@ -835,11 +859,13 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val playbackSpeed = sharedPreferences.getString("playback_speed", "1F")?.toFloat()
+        val playbackSpeed =
+            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")?.toFloat()
         // multiply by thousand: s -> ms
-        val bufferingGoal = sharedPreferences.getString("buffering_goal", "50")?.toInt()!! * 1000
-        val seekIncrement = sharedPreferences.getString("seek_increment", "5")?.toLong()!! * 1000
+        val bufferingGoal =
+            PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
+        val seekIncrement =
+            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
@@ -918,10 +944,10 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.isSubscribed(
                         channel_id,
-                        sharedPref?.getString("token", "")!!
+                        token
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -958,9 +984,9 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {
@@ -981,9 +1007,9 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.api.unsubscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channel_id)
                     )
                 } catch (e: IOException) {

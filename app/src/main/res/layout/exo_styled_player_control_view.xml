@@ -54,7 +54,7 @@
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF"
                 app:tint="@android:color/white"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp" />
 
             <ImageButton
                 android:id="@+id/lock_player"
@@ -162,7 +162,7 @@
             <ImageButton
                 android:id="@+id/fullscreen"
                 style="@style/ExoStyledControls.Button.Bottom.FullScreen"
-                android:src="@drawable/ic_fullscreen"/>
+                android:src="@drawable/ic_fullscreen" />
 
         </LinearLayout>
 

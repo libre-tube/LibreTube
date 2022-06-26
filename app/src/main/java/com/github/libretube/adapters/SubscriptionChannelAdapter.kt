@@ -13,6 +13,7 @@ import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -70,10 +71,9 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    val sharedPref = context
-                        .getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(context)
                     RetrofitInstance.api.subscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channelId)
                     )
                 } catch (e: IOException) {
@@ -93,10 +93,9 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    val sharedPref =
-                        context.getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val token = PreferenceHelper.getToken(context)
                     RetrofitInstance.api.unsubscribe(
-                        sharedPref?.getString("token", "")!!,
+                        token,
                         Subscribe(channelId)
                     )
                 } catch (e: IOException) {

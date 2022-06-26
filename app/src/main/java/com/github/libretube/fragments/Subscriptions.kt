@@ -1,6 +1,5 @@
 package com.github.libretube.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -50,8 +49,7 @@ class Subscriptions : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        token = sharedPref?.getString("token", "")!!
+        token = PreferenceHelper.getToken(requireContext())
         refreshLayout = view.findViewById(R.id.sub_refresh)
         if (token != "") {
             view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility = View.GONE
@@ -63,8 +61,8 @@ class Subscriptions : Fragment() {
             var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
 
             var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            val grid = sharedPreferences.getString(
+            val grid = PreferenceHelper.getString(
+                requireContext(),
                 "grid",
                 resources.getInteger(R.integer.grid_items).toString()
             )!!

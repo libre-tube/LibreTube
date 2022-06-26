@@ -18,7 +18,6 @@ import android.widget.TextView.OnEditorActionListener
 import android.widget.TextView.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -267,7 +266,7 @@ class SearchFragment : Fragment() {
 
     private fun showHistory() {
         searchRecView.visibility = GONE
-        val historyList = getHistory()
+        val historyList = PreferenceHelper.getHistory(requireContext())
         if (historyList.isNotEmpty()) {
             historyRecView.adapter =
                 SearchHistoryAdapter(requireContext(), historyList, autoTextView, this)
@@ -276,10 +275,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun addToHistory(query: String) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val searchHistoryEnabled = PreferenceHelper.getBoolean(requireContext(), "search_history_toggle", true)
+        val searchHistoryEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "search_history_toggle", true)
         if (searchHistoryEnabled) {
-            var historyList = getHistory()
+            var historyList = PreferenceHelper.getHistory(requireContext())
 
             if ((historyList.isNotEmpty() && historyList.contains(query)) || query == "") {
                 return
@@ -291,20 +290,7 @@ class SearchFragment : Fragment() {
                 historyList = historyList.takeLast(10)
             }
 
-            val set: Set<String> = HashSet(historyList)
-
-            sharedPreferences.edit().putStringSet("search_history", set)
-                .apply()
-        }
-    }
-
-    private fun getHistory(): List<String> {
-        return try {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            val set: Set<String> = sharedPreferences.getStringSet("search_history", HashSet())!!
-            set.toList()
-        } catch (e: Exception) {
-            emptyList()
+            PreferenceHelper.saveHistory(requireContext(), historyList)
         }
     }
 }

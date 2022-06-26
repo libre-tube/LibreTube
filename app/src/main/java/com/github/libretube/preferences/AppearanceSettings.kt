@@ -21,7 +21,7 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
-            ThemeHelper().restartMainActivity(requireContext())
+            ThemeHelper.restartMainActivity(requireContext())
             true
         }
 
@@ -34,7 +34,7 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val iconChange = findPreference<ListPreference>("icon_change")
         iconChange?.setOnPreferenceChangeListener { _, newValue ->
-            ThemeHelper().changeIcon(requireContext(), newValue.toString())
+            ThemeHelper.changeIcon(requireContext(), newValue.toString())
             true
         }
 

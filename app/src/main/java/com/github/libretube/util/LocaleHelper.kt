@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Build
 import java.util.*
 
-class LocaleHelper {
+object LocaleHelper {
 
     fun updateLanguage(context: Context) {
         val languageName = PreferenceHelper.getString(context, "language", "en")

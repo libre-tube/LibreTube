@@ -3,6 +3,10 @@ package com.github.libretube.util
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.github.libretube.obj.CustomInstance
+import com.google.common.reflect.TypeToken
+import com.google.gson.Gson
+import java.lang.reflect.Type
 
 object PreferenceHelper {
     fun setString(context: Context, key: String?, value: String?) {
@@ -61,9 +65,69 @@ object PreferenceHelper {
         editor.commit()
     }
 
+    fun getToken(context: Context): String {
+        val sharedPref = context.getSharedPreferences("token", Context.MODE_PRIVATE)
+        return sharedPref?.getString("token", "")!!
+    }
+
+    fun setToken(context: Context, newValue: String) {
+        val editor = context.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
+        editor.putString("token", newValue)
+    }
+
+    fun getUsername(context: Context): String {
+        val sharedPref = context.getSharedPreferences("username", Context.MODE_PRIVATE)
+        return sharedPref.getString("username", "")!!
+    }
+
+    fun setUsername(context: Context, newValue: String) {
+        val editor = context.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
+        editor.putString("username", newValue)
+    }
+
+    fun saveCustomInstance(context: Context, customInstance: CustomInstance) {
+        val editor = getDefaultSharedPreferencesEditor(context)
+        val gson = Gson()
+
+        val customInstancesList = getCustomInstances(context)
+        customInstancesList += customInstance
+
+        val json = gson.toJson(customInstancesList)
+        editor.putString("customInstances", json).commit()
+    }
+
+    fun getCustomInstances(context: Context): ArrayList<CustomInstance> {
+        val settings = getDefaultSharedPreferences(context)
+        val gson = Gson()
+        val json: String = settings.getString("customInstances", "")!!
+        val type: Type = object : TypeToken<List<CustomInstance?>?>() {}.type
+        return try {
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            arrayListOf()
+        }
+    }
+
+    fun getHistory(context: Context): List<String> {
+        return try {
+            val settings = getDefaultSharedPreferences(context)
+            val set: Set<String> = settings.getStringSet("search_history", HashSet())!!
+            set.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun saveHistory(context: Context, historyList: List<String>) {
+        val editor = getDefaultSharedPreferencesEditor(context)
+        val set: Set<String> = HashSet(historyList)
+        editor.putStringSet("search_history", set).apply()
+    }
+
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
+
     private fun getDefaultSharedPreferencesEditor(context: Context): SharedPreferences.Editor {
         return getDefaultSharedPreferences(context).edit()
     }

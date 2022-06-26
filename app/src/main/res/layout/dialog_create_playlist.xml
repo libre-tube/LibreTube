@@ -41,7 +41,7 @@
             android:id="@+id/create_new_playlist"
             android:text="@string/createPlaylist"
             style="@style/CustomDialogButton"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp" />
 
     </LinearLayout>
 
