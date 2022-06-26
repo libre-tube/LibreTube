@@ -135,9 +135,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
         clearCustomInstances?.setOnPreferenceClickListener {
-            PreferenceHelper.removePreference(requireContext(), "custom_instances_name")
-            PreferenceHelper.removePreference(requireContext(), "custom_instances_url")
-            PreferenceHelper.removePreference(requireContext(), "custom_instances_frontend_url")
+            PreferenceHelper.removePreference(requireContext(), "customInstances")
             activity?.recreate()
             true
         }
@@ -216,26 +214,14 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun initCustomInstances() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+       val customInstances = PreferenceHelper.getCustomInstances(requireContext())
 
-        // get the names of the custom instances
-        val customInstancesNames = try {
-            sharedPreferences
-                .getStringSet("custom_instances_name", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
+        var instanceNames = resources.getStringArray(R.array.instances)
+        var instanceValues = resources.getStringArray(R.array.instancesValue)
+        customInstances.forEach{instance ->
+            instanceNames += instance.name
+            instanceValues += instance.apiUrl
         }
-
-        // get the urls of the custom instances
-        val customInstancesUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        val instanceNames = resources.getStringArray(R.array.instances) + customInstancesNames
-        val instanceValues = resources.getStringArray(R.array.instancesValue) + customInstancesUrls
 
         // add custom instances to the list preference
         val instance = findPreference<ListPreference>("selectInstance")

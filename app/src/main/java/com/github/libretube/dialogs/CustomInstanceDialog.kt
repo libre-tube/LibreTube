@@ -9,8 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import androidx.preference.PreferenceManager
 import com.github.libretube.R
+import com.github.libretube.obj.CustomInstance
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import java.net.URL
@@ -36,17 +37,22 @@ class CustomInstanceDialog : DialogFragment() {
             }
 
             addInstanceButton.setOnClickListener {
-                val instanceName = instanceNameEditText.text.toString()
-                val instanceApiUrl = instanceApiUrlEditText.text.toString()
-                val instanceFrontendUrl = instanceFrontendUrlEditText.text.toString()
+                val customInstance = CustomInstance()
+                customInstance.name = instanceNameEditText.text.toString()
+                customInstance.apiUrl = instanceApiUrlEditText.text.toString()
+                customInstance.frontendUrl = instanceFrontendUrlEditText.text.toString()
 
-                if (instanceName != "" && instanceApiUrl != "" && instanceFrontendUrl != "") {
+                if (
+                    customInstance.name != "" &&
+                    customInstance.apiUrl != "" &&
+                    customInstance.frontendUrl != ""
+                ) {
                     try {
                         // check whether the URL is valid, otherwise catch
-                        URL(instanceApiUrl).toURI()
-                        URL(instanceFrontendUrl).toURI()
+                        URL(customInstance.apiUrl).toURI()
+                        URL(customInstance.frontendUrl).toURI()
 
-                        saveCustomInstance(instanceName, instanceApiUrl, instanceFrontendUrl)
+                        PreferenceHelper.saveCustomInstance(requireContext(), customInstance)
                         activity?.recreate()
                         dismiss()
                     } catch (e: Exception) {
@@ -79,50 +85,5 @@ class CustomInstanceDialog : DialogFragment() {
             builder.setView(view)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
-    }
-
-    private fun saveCustomInstance(
-        instanceName: String,
-        instanceApiUrl: String,
-        instanceFrontendApiUrl: String
-    ) {
-        val sharedPreferences = PreferenceManager
-            .getDefaultSharedPreferences(requireContext())
-
-        // get the names of the other custom instances
-        var customInstancesNames = try {
-            sharedPreferences
-                .getStringSet("custom_instances_name", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        // get the api urls of the other custom instances
-        var customInstancesUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        // get the frontend urls of the other custom instances
-        var customInstancesFrontendUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        // append new instance to the list
-        customInstancesNames += instanceName
-        customInstancesUrls += instanceApiUrl
-        customInstancesFrontendUrls += instanceFrontendApiUrl
-
-        // save them to the shared preferences
-        sharedPreferences.edit()
-            .putStringSet("custom_instances_name", HashSet(customInstancesNames))
-            .putStringSet("custom_instances_url", HashSet(customInstancesUrls))
-            .putStringSet("custom_instances_frontend_url", HashSet(customInstancesFrontendUrls))
-            .apply()
     }
 }

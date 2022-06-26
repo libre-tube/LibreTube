@@ -55,8 +55,6 @@ class ShareDialog(
 
     // get the frontend url if it's a custom instance
     private fun getCustomInstanceFrontendUrl(): String {
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
         val instancePref = PreferenceHelper.getString(
             requireContext(),
             "selectInstance",
@@ -64,27 +62,12 @@ class ShareDialog(
         )
 
         // get the api urls of the other custom instances
-        var customInstancesUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        // get the frontend urls of the other custom instances
-        var customInstancesFrontendUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
+        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
 
         // return the custom instance frontend url if available
-        return if (customInstancesUrls.contains(instancePref)) {
-            val index = customInstancesUrls.indexOf(instancePref)
-            return customInstancesFrontendUrls[index]
-        } else {
-            ""
+        customInstances.forEach { instance ->
+            if (instance.apiUrl == instancePref) return instance.apiUrl
         }
+        return ""
     }
 }

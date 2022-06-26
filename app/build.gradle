@@ -85,4 +85,5 @@ dependencies {
 
     coreLibraryDesugaring libs.desugaring
     implementation libs.cronet.embedded
+    implementation libs.gson
 }
