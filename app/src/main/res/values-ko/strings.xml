@@ -142,7 +142,7 @@
     <string name="playback_speed">기본 재생 속도</string>
     <string name="advanced">고급</string>
     <string name="player">오디오 및 비디오</string>
-    <string name="advanced_summary">플레이어, 다운로드, 기록</string>
+    <string name="advanced_summary">다운로드, 기록</string>
     <string name="live">실시간</string>
     <string name="download_folder">이름</string>
     <string name="sdcard">SD 카드</string>
@@ -175,7 +175,7 @@
     <string name="buffering_goal_summary">최대 버퍼링할 비디오의 시간(초)입니다.</string>
     <string name="playerVideoFormat">플레이어의 비디오 형식</string>
     <string name="buffering_goal">사전 로딩</string>
-    <string name="legacyIcon">레거시</string>
+    <string name="legacyIcon">잃어버린 레거시</string>
     <string name="torchIcon">세련된 등불</string>
     <string name="fireIcon">멋진 불</string>
     <string name="category_filler">사족/농담</string>
@@ -199,4 +199,5 @@
     <string name="pauseOnScreenOff">자동 일시중지</string>
     <string name="pauseOnScreenOff_summary">화면이 꺼질 경우 동영상 재생을 일시중지합니다.</string>
     <string name="clonePlaylist">재생목록 복제</string>
+    <string name="instance_frontend_url">인스턴스 프론트엔드에 대한 URL</string>
 </resources>
