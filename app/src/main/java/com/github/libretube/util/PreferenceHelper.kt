@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.preference.PreferenceManager
 import com.github.libretube.obj.CustomInstance
 import com.google.common.reflect.TypeToken
@@ -106,6 +107,22 @@ object PreferenceHelper {
         } catch (e: Exception) {
             arrayListOf()
         }
+    }
+
+    fun getHistory(context: Context): List<String> {
+        return try {
+            val settings = getDefaultSharedPreferences(context)
+            val set: Set<String> = settings.getStringSet("search_history", HashSet())!!
+            set.toList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun saveHistory(context: Context, historyList: List<String>) {
+        val editor = getDefaultSharedPreferencesEditor(context)
+        val set: Set<String> = HashSet(historyList)
+        editor.putStringSet("search_history", set).apply()
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
