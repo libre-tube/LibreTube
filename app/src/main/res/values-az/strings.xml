@@ -77,7 +77,7 @@
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">Siz istifadəçi adı və şifrə daxil etməlisiniz.</string>
-    <string name="notgmail">Bu, LibreTube hesabı üçündür.</string>
+    <string name="notgmail">Bu, Piped hesabı üçündür.</string>
     <string name="defres">Defolt video keyfiyyəti</string>
     <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
@@ -201,6 +201,10 @@
     <string name="pauseOnScreenOff">Avto-fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə pleyeri dayandırın.</string>
     <string name="clonePlaylist">Pleylisti klonlayın</string>
-    <string name="reset">Defoltlara bərpa edin</string>
+    <string name="reset">İlkin tənzimləmələrə bərpa edin</string>
     <string name="reset_message">Siz əminsiz\? Bu, sizi sistemdən çıxaracaq və bütün tənzimləmələrinizi sıfırlayacaq!</string>
+    <string name="account">Hesab</string>
+    <string name="restore">Bərpa edin</string>
+    <string name="deleteAccount">Hesabı silin</string>
+    <string name="deleteAccount_summary">Piped hesabınızı silin</string>
 </resources>
