@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.obj.DeleteUserRequest
+import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -60,13 +61,14 @@ class DeleteAccountDialog : DialogFragment() {
                 val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
                 val token = sharedPref?.getString("token", "")!!
 
-                val response = try {
+                try {
                     RetrofitInstance.api.deleteAccount(token, DeleteUserRequest(password))
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
+                requireMainActivityRestart = true
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
                 logout()
                 dialog?.dismiss()
