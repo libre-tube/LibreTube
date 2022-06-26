@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.fragments.Library
 import com.github.libretube.obj.Playlists
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
@@ -87,8 +88,13 @@ class CreatePlaylistDialog : DialogFragment() {
                     Toast.makeText(context, getString(R.string.unknown_error), Toast.LENGTH_SHORT)
                         .show()
                 }
-                // tell the Subscription Activity to fetch the playlists again
-                setFragmentResult("fetchPlaylists", bundleOf("" to ""))
+                // refresh the playlists in the library
+                try {
+                    val parent = parentFragment as Library
+                    parent.fetchPlaylists()
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
+                }
                 dismiss()
             }
         }

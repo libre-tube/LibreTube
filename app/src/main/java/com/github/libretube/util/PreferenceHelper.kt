@@ -55,14 +55,12 @@ object PreferenceHelper {
 
     fun clearPreferences(context: Context) {
         val editor = getDefaultSharedPreferencesEditor(context)
-        editor.clear()
-        editor.apply()
+        editor.clear().apply()
     }
 
     fun removePreference(context: Context, value: String?) {
         val editor = getDefaultSharedPreferencesEditor(context)
-        editor.remove(value)
-        editor.apply()
+        editor.remove(value).apply()
     }
 
     fun getToken(context: Context): String {
