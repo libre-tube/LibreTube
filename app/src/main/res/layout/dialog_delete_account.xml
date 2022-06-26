@@ -4,7 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -17,22 +16,11 @@
     <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username"
-            android:inputType="text"
-            android:padding="12dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:inputType="textPassword"
+            android:id="@+id/delete_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,13 +32,13 @@
         android:gravity="right">
 
         <Button
-            android:id="@+id/register"
-            android:text="@string/register"
+            android:id="@+id/cancel_button"
+            android:text="@string/cancel"
             style="@style/CustomDialogButton" />
 
         <Button
-            android:id="@+id/login"
-            android:text="@string/login"
+            android:id="@+id/delete_account_confirm"
+            android:text="@string/deleteAccount"
             style="@style/CustomDialogButton"
             android:layout_marginRight="16dp"/>
 

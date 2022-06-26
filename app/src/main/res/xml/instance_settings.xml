@@ -13,21 +13,35 @@
             app:title="@string/instances" />
 
         <Preference
+            android:icon="@drawable/ic_add_instance"
             app:key="customInstance"
-            app:title="@string/customInstance"
             app:summary="@string/customInstance_summary"
-            android:icon="@drawable/ic_add_instance" />
+            app:title="@string/customInstance" />
 
         <Preference
+            android:icon="@drawable/ic_trash"
             app:key="clearCustomInstances"
-            app:title="@string/clear_customInstances"
-            android:icon="@drawable/ic_trash" />
+            app:title="@string/clear_customInstances" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/account">
 
         <Preference
             android:icon="@drawable/ic_login_filled"
             android:summary="@string/notgmail"
             app:key="login_register"
             app:title="@string/login_register" />
+
+        <Preference
+            android:icon="@drawable/ic_reset"
+            android:summary="@string/deleteAccount_summary"
+            app:key="delete_account"
+            app:title="@string/deleteAccount" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/restore">
 
         <Preference
             android:icon="@drawable/ic_upload"

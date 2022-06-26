@@ -27,6 +27,7 @@ import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.hideKeyboard
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.GlobalScope
@@ -276,7 +277,7 @@ class SearchFragment : Fragment() {
 
     private fun addToHistory(query: String) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val searchHistoryEnabled = sharedPreferences.getBoolean("search_history_toggle", true)
+        val searchHistoryEnabled = PreferenceHelper.getBoolean(requireContext(), "search_history_toggle", true)
         if (searchHistoryEnabled) {
             var historyList = getHistory()
 

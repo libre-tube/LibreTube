@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.github.libretube.R
 import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AdvancedSettings : PreferenceFragmentCompat() {
@@ -21,9 +21,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
 
         val clearHistory = findPreference<Preference>("clear_history")
         clearHistory?.setOnPreferenceClickListener {
-            val sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(requireContext())
-            sharedPreferences.edit().remove("search_history").commit()
+            PreferenceHelper.removePreference(requireContext(), "search_history")
             true
         }
 
@@ -38,9 +36,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         MaterialAlertDialogBuilder(requireContext())
             .setPositiveButton(R.string.reset) { _, _ ->
                 // clear default preferences
-                val sharedPreferences =
-                    PreferenceManager.getDefaultSharedPreferences(requireContext())
-                sharedPreferences.edit().clear().commit()
+                PreferenceHelper.clearPreferences(requireContext())
 
                 // clear login token
                 val sharedPrefToken =
