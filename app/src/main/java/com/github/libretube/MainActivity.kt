@@ -35,9 +35,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
-import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -56,27 +56,7 @@ class MainActivity : AppCompatActivity() {
         CronetHelper.initCronet(this.applicationContext)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         RetrofitInstance.url =
-            sharedPreferences.getString("selectInstance", "https://pipedapi.kavin.rocks/")!!
-        SponsorBlockSettings.sponsorBlockEnabled =
-            sharedPreferences.getBoolean("sb_enabled_key", true)
-        SponsorBlockSettings.sponsorNotificationsEnabled =
-            sharedPreferences.getBoolean("sb_notifications_key", true)
-        SponsorBlockSettings.introEnabled =
-            sharedPreferences.getBoolean("intro_category_key", false)
-        SponsorBlockSettings.selfPromoEnabled =
-            sharedPreferences.getBoolean("selfpromo_category_key", false)
-        SponsorBlockSettings.interactionEnabled =
-            sharedPreferences.getBoolean("interaction_category_key", false)
-        SponsorBlockSettings.sponsorsEnabled =
-            sharedPreferences.getBoolean("sponsors_category_key", true)
-        SponsorBlockSettings.outroEnabled =
-            sharedPreferences.getBoolean("outro_category_key", false)
-        SponsorBlockSettings.fillerEnabled =
-            sharedPreferences.getBoolean("filler_category_key", false)
-        SponsorBlockSettings.musicOfftopicEnabled =
-            sharedPreferences.getBoolean("music_offtopic_category_key", false)
-        SponsorBlockSettings.previewEnabled =
-            sharedPreferences.getBoolean("preview_category_key", false)
+            PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
 
         ThemeHelper().updateTheme(this)
         LocaleHelper().updateLanguage(this)

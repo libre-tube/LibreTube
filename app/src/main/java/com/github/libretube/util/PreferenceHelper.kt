@@ -61,6 +61,11 @@ object PreferenceHelper {
         editor.commit()
     }
 
+    fun setPrivateStringPref(context: Context, key: String, newValue: String) {
+        val editor = context.getSharedPreferences(key, Context.MODE_PRIVATE).edit()
+        editor.putString(key, newValue).apply()
+    }
+
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }

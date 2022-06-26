@@ -99,7 +99,7 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?" + e.toString())
+                    Log.e(TAG, "dafaq?$e")
                     return@launchWhenCreated
                 }
                 if (response.error != null) {
