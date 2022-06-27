@@ -80,7 +80,7 @@
             android:visibility="invisible" />
 
         <LinearLayout
-            android:id="@+id/controls_top_right"
+            android:id="@+id/exo_top_bar_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
