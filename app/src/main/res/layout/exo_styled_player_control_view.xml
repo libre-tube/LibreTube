@@ -27,7 +27,7 @@
         android:layout_height="0dp"
         android:background="@color/exo_black_opacity_60" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
@@ -42,7 +42,7 @@
             android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
-            android:layout_gravity="center_vertical|start"
+            android:layout_gravity="center"
             android:layoutDirection="ltr">
 
             <ImageButton
@@ -64,17 +64,20 @@
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF" />
 
-            <TextView
-                android:id="@+id/exo_title"
-                android:layout_width="500dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:visibility="gone"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/exo_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:id="@+id/controls_top_right"
@@ -84,7 +87,7 @@
             android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
-            android:layout_gravity="center_vertical|end"
+            android:layout_gravity="center"
             android:layoutDirection="ltr">
 
             <ImageButton
@@ -96,11 +99,16 @@
                 android:layout_marginEnd="12dp"
                 android:background="#00FFFFFF" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quality_linLayout">
+
             <TextView
                 android:id="@+id/quality_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:padding="@dimen/exo_icon_padding"
                 android:text="HLS"
                 android:textColor="#FFFFFF" />
@@ -113,9 +121,11 @@
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF"
                 app:tint="@android:color/white" />
+
+            </LinearLayout>
         </LinearLayout>
 
-    </FrameLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@id/exo_bottom_bar"

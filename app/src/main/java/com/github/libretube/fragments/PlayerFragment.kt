@@ -267,7 +267,6 @@ class PlayerFragment : Fragment() {
                 toggleComments()
             }
 
-
         val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
         val exoTitle = view.findViewById<TextView>(R.id.exo_title)
         val mainContainer = view.findViewById<ConstraintLayout>(R.id.main_container)
@@ -298,7 +297,7 @@ class PlayerFragment : Fragment() {
                 mainContainer.isClickable = false
                 linLayout.visibility = View.VISIBLE
                 fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
-                exoTitle.visibility = View.GONE
+                exoTitle.visibility = View.INVISIBLE
 
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -770,7 +769,7 @@ class PlayerFragment : Fragment() {
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
         val qualityText = view.findViewById<TextView>(R.id.quality_text)
-        val qualitySelect = view.findViewById<ImageButton>(R.id.quality_select)
+        val qualitySelect = view.findViewById<LinearLayout>(R.id.quality_linLayout)
 
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
