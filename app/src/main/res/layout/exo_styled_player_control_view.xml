@@ -63,6 +63,17 @@
                 android:src="@drawable/ic_unlocked"
                 android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF" />
+
+            <TextView
+                android:id="@+id/exo_title"
+                android:layout_width="500dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
