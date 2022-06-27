@@ -113,13 +113,12 @@
                 android:text="HLS"
                 android:textColor="#FFFFFF" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/quality_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_down"
                 android:padding="@dimen/exo_icon_padding"
-                android:background="#00FFFFFF"
                 app:tint="@android:color/white" />
 
             </LinearLayout>
