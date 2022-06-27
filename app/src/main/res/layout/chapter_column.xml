@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_marginHorizontal="10dp"
     android:layout_width="80dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/chapter_image"
@@ -16,8 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:maxLines="3"
         android:ellipsize="end"
+        android:maxLines="3"
         android:text="Title"
         android:textSize="13sp" />
 

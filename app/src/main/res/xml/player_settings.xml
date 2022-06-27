@@ -55,15 +55,15 @@
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_play_filled"
+            android:summary="@string/autoplay_summary"
             app:key="autoplay"
-            app:title="@string/player_autoplay"
-            android:summary="@string/autoplay_summary" />
+            app:title="@string/player_autoplay" />
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_pause_filled"
+            android:summary="@string/pauseOnScreenOff_summary"
             app:key="pause_screen_off"
-            app:title="@string/pauseOnScreenOff"
-            android:summary="@string/pauseOnScreenOff_summary" />
+            app:title="@string/pauseOnScreenOff" />
 
     </PreferenceCategory>
 
