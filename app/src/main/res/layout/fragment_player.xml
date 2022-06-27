@@ -62,11 +62,54 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/player_views_info"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10M views    2 days ago " />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/player_views_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10M views    2 days ago " />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="2dp">
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/ic_like" />
+
+                        <TextView
+                            android:id="@+id/textLike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:text="4.2K" />
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginLeft="5dp"
+                            android:src="@drawable/ic_like"
+                            android:rotation="180"/>
+
+                        <TextView
+                            android:id="@+id/textDislike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:text="1.3K" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/chapters_toggle"
@@ -130,25 +173,6 @@
                     android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_like" />
-
-                        <TextView
-                            android:id="@+id/textLike"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4.2K" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
