@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_marginBottom="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
     android:background="?android:attr/selectableItemBackground">
 
     <ImageView
@@ -21,15 +21,13 @@
         android:id="@+id/history_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text=""
+        android:layout_marginHorizontal="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/delete_history"
         app:layout_constraintStart_toEndOf="@id/history_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/delete_history"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

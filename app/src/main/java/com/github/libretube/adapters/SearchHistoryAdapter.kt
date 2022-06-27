@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.fragments.SearchFragment
 import com.github.libretube.util.PreferenceHelper
-import com.google.android.material.imageview.ShapeableImageView
 
 class SearchHistoryAdapter(
     private val context: Context,
@@ -34,7 +34,7 @@ class SearchHistoryAdapter(
         val history = historyList[position]
         holder.v.findViewById<TextView>(R.id.history_text).text = history
 
-        holder.v.findViewById<ShapeableImageView>(R.id.delete_history).setOnClickListener {
+        holder.v.findViewById<ImageView>(R.id.delete_history).setOnClickListener {
             historyList = historyList - history
             PreferenceHelper.saveHistory(context, historyList)
             notifyDataSetChanged()
