@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -18,13 +17,14 @@ import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
-import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,
@@ -81,11 +81,7 @@ class PlaylistAdapter(
             val delete = holder.v.findViewById<ImageView>(R.id.delete_playlist)
             delete.visibility = View.VISIBLE
             delete.setOnClickListener {
-                val sharedPref = holder.v.context.getSharedPreferences(
-                    "token",
-                    Context.MODE_PRIVATE
-                )
-                val token = sharedPref?.getString("token", "")!!
+                val token = PreferenceHelper.getToken(holder.v.context)
                 removeFromPlaylist(token, position)
             }
         }

@@ -5,14 +5,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp">
 
         <ImageButton
             android:id="@+id/back_imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
             android:layout_marginVertical="10dp"
+            android:layout_marginLeft="15dp"
+            android:background="?android:selectableItemBackgroundBorderless"
             android:backgroundTint="@android:color/transparent"
             android:src="@drawable/ic_arrow_back" />
 
@@ -20,16 +22,16 @@
             android:id="@+id/topBar_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
             android:text="@string/settings"
-            android:layout_marginLeft="14dp"
-            android:textSize="20sp"
-            android:layout_gravity="center" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/settings"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 </LinearLayout>

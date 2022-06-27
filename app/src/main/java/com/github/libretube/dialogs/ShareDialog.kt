@@ -4,8 +4,8 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import androidx.preference.PreferenceManager
 import com.github.libretube.R
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
@@ -54,35 +54,19 @@ class ShareDialog(
 
     // get the frontend url if it's a custom instance
     private fun getCustomInstanceFrontendUrl(): String {
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val instancePref = sharedPreferences.getString(
+        val instancePref = PreferenceHelper.getString(
+            requireContext(),
             "selectInstance",
             "https://pipedapi.kavin.rocks"
         )
 
         // get the api urls of the other custom instances
-        var customInstancesUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-        // get the frontend urls of the other custom instances
-        var customInstancesFrontendUrls = try {
-            sharedPreferences
-                .getStringSet("custom_instances_url", HashSet())!!.toList()
-        } catch (e: Exception) {
-            emptyList()
-        }
+        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
 
         // return the custom instance frontend url if available
-        return if (customInstancesUrls.contains(instancePref)) {
-            val index = customInstancesUrls.indexOf(instancePref)
-            return customInstancesFrontendUrls[index]
-        } else {
-            ""
+        customInstances.forEach { instance ->
+            if (instance.apiUrl == instancePref) return instance.apiUrl
         }
+        return ""
     }
 }

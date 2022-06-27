@@ -34,8 +34,9 @@ class SubscriptionAdapter(
     fun updateItems() {
         // limitedVideoFeed.add("")
         i += 10
-        if (i > videoFeed.size)
+        if (i > videoFeed.size) {
             i = videoFeed.size
+        }
         notifyDataSetChanged()
     }
 

@@ -32,12 +32,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.preference.PreferenceManager
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
-import com.github.libretube.preferences.SponsorBlockSettings
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -54,32 +53,12 @@ class MainActivity : AppCompatActivity() {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
         CronetHelper.initCronet(this.applicationContext)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        RetrofitInstance.url =
-            sharedPreferences.getString("selectInstance", "https://pipedapi.kavin.rocks/")!!
-        SponsorBlockSettings.sponsorBlockEnabled =
-            sharedPreferences.getBoolean("sb_enabled_key", true)
-        SponsorBlockSettings.sponsorNotificationsEnabled =
-            sharedPreferences.getBoolean("sb_notifications_key", true)
-        SponsorBlockSettings.introEnabled =
-            sharedPreferences.getBoolean("intro_category_key", false)
-        SponsorBlockSettings.selfPromoEnabled =
-            sharedPreferences.getBoolean("selfpromo_category_key", false)
-        SponsorBlockSettings.interactionEnabled =
-            sharedPreferences.getBoolean("interaction_category_key", false)
-        SponsorBlockSettings.sponsorsEnabled =
-            sharedPreferences.getBoolean("sponsors_category_key", true)
-        SponsorBlockSettings.outroEnabled =
-            sharedPreferences.getBoolean("outro_category_key", false)
-        SponsorBlockSettings.fillerEnabled =
-            sharedPreferences.getBoolean("filler_category_key", false)
-        SponsorBlockSettings.musicOfftopicEnabled =
-            sharedPreferences.getBoolean("music_offtopic_category_key", false)
-        SponsorBlockSettings.previewEnabled =
-            sharedPreferences.getBoolean("preview_category_key", false)
 
-        ThemeHelper().updateTheme(this)
-        LocaleHelper().updateLanguage(this)
+        RetrofitInstance.url =
+            PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
+
+        ThemeHelper.updateTheme(this)
+        LocaleHelper.updateLanguage(this)
 
         // show noInternet Activity if no internet available on app startup
         if (!isNetworkAvailable(this)) {
@@ -100,12 +79,11 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView.setupWithNavController(navController)
 
             // hide the trending page if enabled
-            val hideTrendingPage = sharedPreferences.getBoolean("hide_trending_page", false)
+            val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
             if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.home2).isVisible = false
 
             // navigate to the default start tab
-            val defaultTab = sharedPreferences.getString("default_tab", "home")
-            when (defaultTab) {
+            when (PreferenceHelper.getString(this, "default_tab", "home")) {
                 "home" -> navController.navigate(R.id.home2)
                 "subscriptions" -> navController.navigate(R.id.subscriptions)
                 "library" -> navController.navigate(R.id.library)

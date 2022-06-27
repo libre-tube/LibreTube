@@ -17,8 +17,8 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.preference.PreferenceManager
 import com.arthenica.ffmpegkit.FFmpegKit
+import com.github.libretube.util.PreferenceHelper
 import java.io.File
 
 var IS_DOWNLOAD_RUNNING = false
@@ -48,8 +48,7 @@ class DownloadService : Service() {
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
         duration = intent.getIntExtra("duration", 1)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        extension = sharedPreferences.getString("video_format", ".mp4")!!
+        extension = PreferenceHelper.getString(this, "video_format", ".mp4")!!
         downloadType = if (audioUrl != "" && videoUrl != "") "mux"
         else if (audioUrl != "") "audio"
         else if (videoUrl != "") "video"
@@ -69,7 +68,6 @@ class DownloadService : Service() {
     }
 
     private fun downloadManager() {
-
         // create folder for temporary files
         tempDir = File(
             applicationContext.getExternalFilesDir(DIRECTORY_DOWNLOADS),
@@ -84,9 +82,8 @@ class DownloadService : Service() {
             Log.e(TAG, "Directory already have")
         }
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val downloadLocationPref = sharedPreferences.getString("download_location", "")
-        val folderName = sharedPreferences.getString("download_folder", "")
+        val downloadLocationPref = PreferenceHelper.getString(this, "download_location", "")
+        val folderName = PreferenceHelper.getString(this, "download_folder", "LibreTube")
 
         val location = when (downloadLocationPref) {
             "downloads" -> Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)
@@ -255,10 +252,11 @@ class DownloadService : Service() {
                 if (returnCode.toString() != "0") downloadFailedNotification()
                 else downloadSucceededNotification()
                 onDestroy()
-            }, {
-            // CALLED WHEN SESSION PRINTS LOGS
-            Log.e(TAG, it.message.toString())
-        }
+            },
+            {
+                // CALLED WHEN SESSION PRINTS LOGS
+                Log.e(TAG, it.message.toString())
+            }
         ) {
             // CALLED WHEN SESSION GENERATES STATISTICS
             Log.e(TAG + "stat", it.time.toString())

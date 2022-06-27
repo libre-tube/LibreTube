@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="?android:attr/selectableItemBackground"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,11 +11,11 @@
         android:orientation="vertical">
 
         <LinearLayout
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp">
+            android:paddingBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/commentor_image"
@@ -48,19 +48,19 @@
                         android:id="@+id/verified_imageView"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginTop="4dp"
                         android:layout_marginLeft="4dp"
-                        app:srcCompat="@drawable/ic_verified"
-                        android:visibility="gone" />
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_verified" />
 
                     <ImageView
                         android:id="@+id/pinned_imageView"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginTop="4dp"
                         android:layout_marginLeft="4dp"
-                        app:srcCompat="@drawable/ic_pinned"
-                        android:visibility="gone" />
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_pinned" />
                 </LinearLayout>
 
                 <TextView
@@ -80,8 +80,8 @@
                         android:id="@+id/likes_imageView"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginRight="6dp"
                         android:layout_marginTop="2dp"
+                        android:layout_marginRight="6dp"
                         app:srcCompat="@drawable/ic_thumb_up" />
 
                     <TextView
@@ -96,8 +96,8 @@
                         android:layout_height="14dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="3dp"
-                        app:srcCompat="@drawable/ic_hearted"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_hearted" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

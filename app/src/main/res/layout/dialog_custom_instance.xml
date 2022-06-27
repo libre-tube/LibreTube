@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:gravity="center"
         android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="@string/app_name"
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
@@ -40,28 +40,29 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/instanceApiUrl"
-            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/instance_api_url"
+            android:inputType="text"
             android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
+        android:gravity="end"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancel"
-            android:text="@string/cancel"
-            style="@style/CustomDialogButton" />
+            style="@style/CustomDialogButton"
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/addInstance"
-            android:text="@string/addInstance"
-            style="@style/CustomDialogButton" />
+            style="@style/CustomDialogButton"
+            android:layout_marginRight="16dp"
+            android:text="@string/addInstance" />
 
     </LinearLayout>
 

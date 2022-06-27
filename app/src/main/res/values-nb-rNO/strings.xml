@@ -197,4 +197,10 @@
     <string name="player_summary">Kvalitet og avspilleroppførsel</string>
     <string name="seek_increment">Blafringsmengde</string>
     <string name="piped_summary">Piped er en fri alternativ grenseflate for YouTube som tilbyr API-et programmet bruker. Uten Piped ville ikke LibreTube eksistert. Stor takk til utviklerne deres.</string>
+    <string name="reset_message">Logg ut og tilbakestill alle innstillinger\?</string>
+    <string name="autoplay_summary">Spill neste video når nåværende er fullført.</string>
+    <string name="reset">Gjenopprett forvalg</string>
+    <string name="pauseOnScreenOff">Automatisk pause</string>
+    <string name="pauseOnScreenOff_summary">Sett avspilleren på pause når skjermen skrus av.</string>
+    <string name="clonePlaylist">Dupliser spillelisten</string>
 </resources>

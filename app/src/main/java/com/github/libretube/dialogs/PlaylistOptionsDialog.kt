@@ -9,13 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistOptionsDialog(
     private val playlistId: String,
@@ -43,9 +44,7 @@ class PlaylistOptionsDialog(
                 when (which) {
                     // Clone the playlist to the users Piped account
                     0 -> {
-                        val sharedPref =
-                            context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-                        val token = sharedPref?.getString("token", "")
+                        val token = PreferenceHelper.getToken(requireContext())
                         if (token != "") {
                             importPlaylist(token!!, playlistId)
                         } else {

@@ -43,7 +43,7 @@
     <string name="unknown_error">Network error.</string>
     <string name="error">Something went wrong.</string>
     <string name="empty">You have to enter a username and password.</string>
-    <string name="notgmail">This is for a LibreTube account.</string>
+    <string name="notgmail">This is for a Piped account.</string>
     <string name="defres">Default video resolution</string>
     <string name="grid">Grid columns</string>
     <string name="emptyList">Nothing here.</string>
@@ -202,5 +202,9 @@
     <string name="autoplay_summary">Automatically play the next video when the current is finished.</string>
     <string name="clonePlaylist">Clone playlist</string>
     <string name="reset">Restore defaults</string>
-    <string name="reset_message">Are you sure you want to reset all the apps settings to its default?</string>
+    <string name="reset_message">Are you sure? This will log you out and reset all your settings!</string>
+    <string name="deleteAccount">Delete account</string>
+    <string name="deleteAccount_summary">Delete your Piped account</string>
+    <string name="account">Account</string>
+    <string name="restore">Restore</string>
 </resources>

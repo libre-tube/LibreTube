@@ -55,35 +55,35 @@ android {
 }
 
 dependencies {
-    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    //debugImplementation libs.square.leakcanary
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.legacySupport
+    implementation libs.androidx.multidex
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.ui
+    implementation libs.androidx.preference
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation libs.androidx.test.junit
+    androidTestImplementation libs.androidx.test.espressoCore
 
-    implementation 'com.squareup.picasso:picasso:2.8'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
-    implementation 'com.google.android.exoplayer:extension-mediasession:2.17.1'
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation libs.circleimageview
 
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
-    //do not update jackson annotations! it does not supports <api26
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.3'
+    implementation libs.material
+    implementation libs.exoplayer
+    implementation(libs.exoplayer.extension.cronet) { exclude group: 'com.google.android.gms' }
+    implementation libs.exoplayer.extension.mediasession
 
-    implementation 'com.arthenica:ffmpeg-kit-min:4.5.1.LTS'
+    implementation libs.square.picasso
+    implementation libs.square.retrofit
+    implementation libs.square.retrofit.converterJackson
+    // Do not update jackson annotations! It does not supports < API 26.
+    implementation libs.jacksonAnnotations
 
+    implementation libs.mobileffmpeg
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
-    implementation('com.google.android.exoplayer:extension-cronet:2.17.1') { exclude group: 'com.google.android.gms' }
-    implementation 'org.chromium.net:cronet-embedded:101.4951.41'
-
+    coreLibraryDesugaring libs.desugaring
+    implementation libs.cronet.embedded
+    implementation libs.gson
 }

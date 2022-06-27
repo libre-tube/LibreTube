@@ -2,21 +2,21 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_main_scene"
-    tools:context=".MainActivity"
-    android:id="@+id/mainMotionLayout">
+    tools:context=".MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:menu="@menu/action_bar"
-        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_settings"
         app:subtitleCentered="true"
         app:title="@string/app_name"
-        app:navigationIcon="@drawable/ic_settings"
+        app:titleCentered="true"
 
         />
 
@@ -44,9 +44,9 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:color/transparent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

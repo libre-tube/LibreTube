@@ -1,0 +1,45 @@
+[versions]
+appcompat = "1.4.1"
+constraintlayout = "2.1.3"
+material = "1.6.0"
+navigation = "2.4.2"
+legacySupport = "1.0.0"
+preference = "1.2.0"
+extJunit = "1.1.3"
+espresso = "3.4.0"
+picasso = "2.8"
+circleimageview = "3.1.0"
+exoplayer = "2.17.1"
+multidex = "2.0.1"
+retrofit = "2.9.0"
+jacksonAnnotations = "2.13.3"
+mobileffmpeg = "4.5.1.LTS"
+desugaring = "1.1.5"
+cronetEmbedded = "101.4951.41"
+leakcanary = "2.8.1"
+gson = "2.9.0"
+
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+androidx-legacySupport = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupport" }
+androidx-preference = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
+androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
+androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+square-picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
+exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
+androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
+square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+square-retrofit-converterJackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
+jacksonAnnotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jacksonAnnotations" }
+mobileffmpeg = { group = "com.arthenica", name = "ffmpeg-kit-min", version.ref = "mobileffmpeg" }
+desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
+exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
+cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
+square-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+gson = { group = "com.google.code.gson", name="gson", version.ref = "gson"}

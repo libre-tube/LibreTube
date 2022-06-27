@@ -1,6 +1,5 @@
 package com.github.libretube.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,10 +16,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.dialogs.CreatePlaylistDialog
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Library : Fragment() {
 
@@ -28,6 +28,7 @@ class Library : Fragment() {
     lateinit var token: String
     private lateinit var playlistRecyclerView: RecyclerView
     private lateinit var refreshLayout: SwipeRefreshLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -47,25 +48,20 @@ class Library : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         playlistRecyclerView = view.findViewById(R.id.playlist_recView)
         playlistRecyclerView.layoutManager = LinearLayoutManager(view.context)
-        val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-        token = sharedPref?.getString("token", "")!!
+        token = PreferenceHelper.getToken(requireContext())
         refreshLayout = view.findViewById(R.id.playlist_refresh)
         if (token != "") {
             view.findViewById<ImageView>(R.id.boogh2).visibility = View.GONE
             view.findViewById<TextView>(R.id.textLike2).visibility = View.GONE
-            fetchPlaylists(view)
+            fetchPlaylists()
             refreshLayout.isEnabled = true
             refreshLayout.setOnRefreshListener {
-                Log.d(TAG, "hmm")
-                fetchPlaylists(view)
+                fetchPlaylists()
             }
-            view.findViewById<com.google.android.material.floatingactionbutton
-                .FloatingActionButton>(R.id.create_playlist).setOnClickListener {
+            val createPlaylistButton = view.findViewById<FloatingActionButton>(R.id.create_playlist)
+            createPlaylistButton.setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
                 newFragment.show(childFragmentManager, "Create Playlist")
-            }
-            childFragmentManager.setFragmentResultListener("fetchPlaylists", this) { _, _ ->
-                fetchPlaylists(view)
             }
         } else {
             refreshLayout.isEnabled = false
@@ -73,7 +69,16 @@ class Library : Fragment() {
         }
     }
 
-    private fun fetchPlaylists(view: View) {
+    override fun onResume() {
+        // optimize CreatePlaylistFab bottom margin if miniPlayer active
+        val createPlaylistButton = view?.findViewById<FloatingActionButton>(R.id.create_playlist)
+        val layoutParams = createPlaylistButton?.layoutParams as ViewGroup.MarginLayoutParams
+        layoutParams.bottomMargin = if (isMiniPlayerVisible) 180 else 64
+        createPlaylistButton?.layoutParams = layoutParams
+        super.onResume()
+    }
+
+    fun fetchPlaylists() {
         fun run() {
             refreshLayout.isRefreshing = true
             lifecycleScope.launchWhenCreated {
@@ -93,12 +98,8 @@ class Library : Fragment() {
                 }
                 if (response.isNotEmpty()) {
                     runOnUiThread {
-                        with(view.findViewById<ImageView>(R.id.boogh2)) {
-                            visibility = View.GONE
-                        }
-                        with(view.findViewById<TextView>(R.id.textLike2)) {
-                            visibility = View.GONE
-                        }
+                        view?.findViewById<ImageView>(R.id.boogh2)?.visibility = View.GONE
+                        view?.findViewById<TextView>(R.id.textLike2)?.visibility = View.GONE
                     }
                     val playlistsAdapter = PlaylistsAdapter(
                         response.toMutableList(),
@@ -107,13 +108,13 @@ class Library : Fragment() {
                     playlistRecyclerView.adapter = playlistsAdapter
                 } else {
                     runOnUiThread {
-                        with(view.findViewById<ImageView>(R.id.boogh2)) {
-                            visibility = View.VISIBLE
-                            setImageResource(R.drawable.ic_list)
+                        view?.findViewById<ImageView>(R.id.boogh2).apply {
+                            this?.visibility = View.VISIBLE
+                            this?.setImageResource(R.drawable.ic_list)
                         }
-                        with(view.findViewById<TextView>(R.id.textLike2)) {
-                            visibility = View.VISIBLE
-                            text = getString(R.string.emptyList)
+                        view?.findViewById<TextView>(R.id.textLike2).apply {
+                            this?.visibility = View.VISIBLE
+                            this?.text = getString(R.string.emptyList)
                         }
                     }
                 }

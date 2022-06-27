@@ -7,12 +7,12 @@ import com.github.libretube.GITHUB_API_URL
 import com.github.libretube.dialogs.NoUpdateAvailableDialog
 import com.github.libretube.dialogs.UpdateAvailableDialog
 import com.github.libretube.obj.UpdateInfo
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
-import org.json.JSONArray
-import org.json.JSONObject
 
 fun checkUpdate(childFragmentManager: FragmentManager) {
     var updateInfo: UpdateInfo? = UpdateInfo("", "")

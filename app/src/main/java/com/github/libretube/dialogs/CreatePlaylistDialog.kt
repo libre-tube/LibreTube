@@ -1,7 +1,6 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -9,18 +8,18 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.fragments.Library
 import com.github.libretube.obj.Playlists
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class CreatePlaylistDialog : DialogFragment() {
     val TAG = "CreatePlaylistDialog"
@@ -46,8 +45,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 dismiss()
             }
 
-            val sharedPref = context?.getSharedPreferences("token", Context.MODE_PRIVATE)
-            token = sharedPref?.getString("token", "")!!
+            token = PreferenceHelper.getToken(requireContext())
 
             val playlistName = view.findViewById<TextInputEditText>(R.id.playlist_name)
             val createPlaylistBtn = view.findViewById<Button>(R.id.create_new_playlist)
@@ -88,8 +86,13 @@ class CreatePlaylistDialog : DialogFragment() {
                     Toast.makeText(context, getString(R.string.unknown_error), Toast.LENGTH_SHORT)
                         .show()
                 }
-                // tell the Subscription Activity to fetch the playlists again
-                setFragmentResult("fetchPlaylists", bundleOf("" to ""))
+                // refresh the playlists in the library
+                try {
+                    val parent = parentFragment as Library
+                    parent.fetchPlaylists()
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
+                }
                 dismiss()
             }
         }

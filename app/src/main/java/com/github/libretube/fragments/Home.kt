@@ -9,15 +9,15 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class Home : Fragment() {
 
@@ -34,7 +34,6 @@ class Home : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -42,8 +41,8 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recview)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val grid = sharedPreferences.getString(
+        val grid = PreferenceHelper.getString(
+            requireContext(),
             "grid",
             resources.getInteger(R.integer.grid_items).toString()
         )!!
@@ -62,9 +61,8 @@ class Home : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val sharedPreferences =
-                        PreferenceManager.getDefaultSharedPreferences(requireContext())
-                    RetrofitInstance.api.getTrending(sharedPreferences.getString("region", "US")!!)
+                    val region = PreferenceHelper.getString(requireContext(), "region", "US")
+                    RetrofitInstance.api.getTrending(region!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

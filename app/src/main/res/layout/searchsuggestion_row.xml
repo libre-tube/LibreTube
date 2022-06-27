@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:paddingVertical="8dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
 
     <ImageView
         android:id="@+id/search_icon"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:src="@drawable/ic_search"
-        android:layout_marginTop="3dp"
-        android:layout_marginHorizontal="5dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/suggestion_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_gravity="center" />
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/arrow"
+        app:layout_constraintStart_toEndOf="@id/search_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/ic_arrow_up_left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -197,4 +197,10 @@
     <string name="behavior">התנהגות</string>
     <string name="seek_increment">הגדלת קפיצה</string>
     <string name="piped_summary">Piped הוא חלופה בקוד פתוח למנשק המשתמש של YouTube ומספק את ה־API בו אנו משתמשים. בלי Piped,‏ LibreTube לא היה קיים. אנו מודים למפתחים מקרב לב!</string>
+    <string name="pauseOnScreenOff">השהיה אוטומטית</string>
+    <string name="pauseOnScreenOff_summary">השהיית הנגן עם כיבוי המסך.</string>
+    <string name="clonePlaylist">שכפול רשימת הנגינה</string>
+    <string name="autoplay_summary">לנגן את הסרטון הבא אוטומטית כשהנוכחי מסתיים.</string>
+    <string name="reset">שחזור ברירות מחדל</string>
+    <string name="reset_message">להמשיך\? פעולה זו תוציא אותך מהמערכת ותאפס את כל ההגדרות שלך!</string>
 </resources>
