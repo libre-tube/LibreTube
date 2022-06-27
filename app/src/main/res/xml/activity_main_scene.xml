@@ -9,21 +9,21 @@
         motion:layoutDuringTransition="honorRequest">
         <KeyFrameSet>
             <KeyAttribute
-                motion:motionTarget="@+id/bottomNav"
+                android:translationY="0dp"
                 motion:framePosition="0"
-                android:translationY="0dp" />
+                motion:motionTarget="@+id/bottomNav" />
             <KeyAttribute
-                motion:motionTarget="@+id/bottomNav"
+                android:translationY="55dp"
                 motion:framePosition="75"
-                android:translationY="55dp" />
+                motion:motionTarget="@+id/bottomNav" />
             <KeyAttribute
-                motion:motionTarget="@+id/container"
+                android:scaleY="1"
                 motion:framePosition="50"
-                android:scaleY="1" />
+                motion:motionTarget="@+id/container" />
             <KeyAttribute
-                motion:motionTarget="@+id/container"
+                android:translationY="-80dp"
                 motion:framePosition="100"
-                android:translationY="-80dp" />
+                motion:motionTarget="@+id/container" />
         </KeyFrameSet>
     </Transition>
 

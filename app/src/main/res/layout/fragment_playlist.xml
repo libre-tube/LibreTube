@@ -14,23 +14,23 @@
         android:visibility="gone" />
 
     <ScrollView
+        android:id="@+id/playlist_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/playlist_scrollview">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/playlist_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text=""
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:padding="8dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/playlist_uploader"

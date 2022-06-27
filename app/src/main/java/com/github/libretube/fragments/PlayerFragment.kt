@@ -267,8 +267,12 @@ class PlayerFragment : Fragment() {
                 toggleComments()
             }
 
-        // FullScreen button trigger
         val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
+        val exoTitle = view.findViewById<TextView>(R.id.exo_title)
+        val mainContainer = view.findViewById<ConstraintLayout>(R.id.main_container)
+        val linLayout = view.findViewById<LinearLayout>(R.id.linLayout)
+
+        // FullScreen button trigger
         fullScreenButton.setOnClickListener {
             exoPlayerView.hideController()
             if (!isFullScreen) {
@@ -276,24 +280,29 @@ class PlayerFragment : Fragment() {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                     enableTransition(R.id.yt_transition, false)
                 }
-                view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = true
-                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.GONE
+
+                mainContainer.isClickable = true
+                linLayout.visibility = View.GONE
                 fullScreenButton.setImageResource(R.drawable.ic_fullscreen_exit)
+                exoTitle.visibility = View.VISIBLE
+
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-                isFullScreen = true
             } else {
                 with(motionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
                 }
-                view.findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
-                view.findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+
+                mainContainer.isClickable = false
+                linLayout.visibility = View.VISIBLE
                 fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
+                exoTitle.visibility = View.INVISIBLE
+
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                isFullScreen = false
             }
+            isFullScreen = !isFullScreen
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
@@ -564,6 +573,8 @@ class PlayerFragment : Fragment() {
         view.findViewById<TextView>(R.id.player_title).text = response.title
         view.findViewById<TextView>(R.id.player_description).text = response.description
 
+        view.findViewById<TextView>(R.id.exo_title).text = response.title
+
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -758,7 +769,7 @@ class PlayerFragment : Fragment() {
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
         val qualityText = view.findViewById<TextView>(R.id.quality_text)
-        val qualitySelect = view.findViewById<ImageButton>(R.id.quality_select)
+        val qualitySelect = view.findViewById<LinearLayout>(R.id.quality_linLayout)
 
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
