@@ -952,12 +952,14 @@ class PlayerFragment : Fragment() {
     }
 
     private fun lockPlayer(isLocked: Boolean) {
-        val visibility = if (isLocked) View.VISIBLE else View.GONE
-        exoPlayerView.findViewById<LinearLayout>(R.id.controls_top_right).visibility = visibility
+        val visibility = if (isLocked) View.VISIBLE else View.INVISIBLE
+        exoPlayerView.findViewById<LinearLayout>(R.id.exo_top_bar_right).visibility = visibility
         exoPlayerView.findViewById<ImageButton>(R.id.exo_play_pause).visibility = visibility
         exoPlayerView.findViewById<Button>(R.id.exo_ffwd_with_amount).visibility = visibility
         exoPlayerView.findViewById<Button>(R.id.exo_rew_with_amount).visibility = visibility
         exoPlayerView.findViewById<FrameLayout>(R.id.exo_bottom_bar).visibility = visibility
+        exoPlayerView.findViewById<TextView>(R.id.exo_title).visibility =
+            if (isLocked && isFullScreen) View.VISIBLE else View.INVISIBLE
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
