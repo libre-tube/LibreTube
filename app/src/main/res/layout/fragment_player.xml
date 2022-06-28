@@ -28,6 +28,7 @@
 
             <RelativeLayout
                 android:id="@+id/player_title_layout"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -153,12 +154,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -173,12 +169,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_download"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -196,12 +187,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_vlc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -218,12 +204,7 @@
 
                     <LinearLayout
                         android:id="@+id/save"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
