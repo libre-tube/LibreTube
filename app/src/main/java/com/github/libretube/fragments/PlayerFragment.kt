@@ -565,6 +565,7 @@ class PlayerFragment : Fragment() {
             context?.getString(R.string.views, response.views.formatShort()) +
             " • " + response.uploadDate
         view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
+        view.findViewById<TextView>(R.id.textDislike).text = response.dislikes.formatShort()
         val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
         Picasso.get().load(response.uploaderAvatar).into(channelImage)
         view.findViewById<TextView>(R.id.player_channelName).text = response.uploader
