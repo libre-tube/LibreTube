@@ -102,8 +102,8 @@
     <string name="internal_storage">Kho lưu trữ nội bộ</string>
     <string name="views">%1$s lượt xem</string>
     <string name="defaultIcon">Mặc định</string>
-    <string name="dlisinprogress">Hãy chờ cho tới khi tất cả các phiên tải xuống hoàn thành…</string>
-    <string name="notgmail">Cái này dành cho tài khoản LibreTube.</string>
+    <string name="dlisinprogress">Đang có một phiên tải đang thực thi, hãy chờ cho tới khi nó hoàn thành.</string>
+    <string name="notgmail">Cái này dành cho tài khoản Piped.</string>
     <string name="playlistCreated">Danh sách phát đã được tạo.</string>
     <string name="playlistName">Tên danh sách phát</string>
     <string name="systemDefault">Hệ thống</string>
@@ -203,4 +203,8 @@
     <string name="pauseOnScreenOff_summary">Dừng trình phát khi màn hình tắt.</string>
     <string name="autoplay_summary">Tự động phát video tiếp theo khi video hiện tại kết thúc.</string>
     <string name="clonePlaylist">Nhân bản danh sách phát</string>
+    <string name="deleteAccount">Xóa tài khoản</string>
+    <string name="deleteAccount_summary">Xóa tài khoản Piped của bạn</string>
+    <string name="account">Tài khoản</string>
+    <string name="restore">Khôi phục</string>
 </resources>
