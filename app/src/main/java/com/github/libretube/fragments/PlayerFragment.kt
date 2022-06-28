@@ -38,7 +38,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.adapters.ChaptersAdapter
@@ -56,6 +55,7 @@ import com.github.libretube.obj.SponsorBlockPrefs
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.PreferenceHelper
