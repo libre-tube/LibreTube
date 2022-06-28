@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
 
+        // start service that gets called on closure
         startService(Intent(this, ClosingService::class.java))
 
         CronetHelper.initCronet(this.applicationContext)

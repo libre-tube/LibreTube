@@ -252,14 +252,12 @@ class PlayerFragment : Fragment() {
             }
         }
 
+        // video description and chapters toggle
+        val descLinLayout = view.findViewById<LinearLayout>(R.id.desc_linLayout)
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
             val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
             arrowImageView.animate().rotationBy(180F).setDuration(100).start()
-            if (playerDescription.isVisible) {
-                playerDescription.visibility = View.GONE
-            } else {
-                playerDescription.visibility = View.VISIBLE
-            }
+            descLinLayout.visibility = if (descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
         view.findViewById<MaterialCardView>(R.id.comments_toggle)
@@ -723,6 +721,7 @@ class PlayerFragment : Fragment() {
             chaptersRecView?.layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
             chaptersRecView?.adapter = ChaptersAdapter(chapters, exoPlayer)
+            chaptersRecView?.visibility = View.VISIBLE
         }
     }
 
