@@ -29,7 +29,7 @@
     <string name="empty">Il nome utente e la password non possono essere vuoti.</string>
     <string name="notgmail">Questo è per un account Piped.</string>
     <string name="defres">Risoluzione video di Default</string>
-    <string name="dlisinprogress">Si prega di aspettare che tutti gli scaricamenti siano finiti…</string>
+    <string name="dlisinprogress">Un altro download è in corso, si prega di attendere che termini.</string>
     <string name="unknown_error">Errore di connessione.</string>
     <string name="server_error">Il server ha un problema. Prova un\'altra istanza\?</string>
     <string name="customInstance">Istanza personalizzata</string>
