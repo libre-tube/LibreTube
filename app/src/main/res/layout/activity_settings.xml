@@ -10,9 +10,9 @@
 
         <ImageButton
             android:id="@+id/back_imageButton"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginVertical="5dp"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginLeft="15dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:backgroundTint="@android:color/transparent"
