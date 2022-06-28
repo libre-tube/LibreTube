@@ -177,7 +177,7 @@
     <string name="autoplay_summary">ভিডিও শেষ হওয়ার পর স্বয়ংক্রিয়ভাবে নতুন ভিডিও প্লে করুন।</string>
     <string name="reset_message">আপনি কি নিশ্চিত\? আপনি লগ আউট হয়ে যাবেন এবং সমস্ত সেটিংস আগের অবস্থায় ফিরে যাবে!</string>
     <string name="vlcerror">ভিএলসি অ্যাপে প্রদর্শন করা যাচ্ছে না। সম্ভবত অ্যাপটি ইনস্টল করা হয়নি।</string>
-    <string name="notgmail">এটি একটি লিবরাটিউব অ্যাকাউন্টের জন্য।</string>
+    <string name="notgmail">এটি একটি পাইপড অ্যাকাউন্টের জন্য।</string>
     <string name="noInternet">প্রথমে ইন্টারনেট চালু করুন।</string>
     <string name="yes">হ্যাঁ</string>
     <string name="choose_quality_dialog">কোয়ালিটি</string>
@@ -203,4 +203,8 @@
     <string name="login">লগ ইন</string>
     <string name="customInstance">কাস্টম ইনস্ট্যান্স</string>
     <string name="vlc">ভিএলসি অ্যাপে প্রদর্শন</string>
+    <string name="deleteAccount">অ্যাকাউন্ট মুছে ফেলুন</string>
+    <string name="deleteAccount_summary">পাইপড অ্যাকাউন্ট মুছে ফেলুন</string>
+    <string name="restore">ফিরিয়ে আনুন</string>
+    <string name="account">অ্যাকাউন্ট</string>
 </resources>

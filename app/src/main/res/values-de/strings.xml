@@ -30,7 +30,7 @@
     <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eine andere Instanz\?</string>
     <string name="unknown_error">Netzwerkfehler.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
-    <string name="notgmail">Dies ist für ein LibreTube-Konto.</string>
+    <string name="notgmail">Dies ist für ein Piped-Konto.</string>
     <string name="defres">Standard-Auflösung</string>
     <string name="grid">Spaltenanzahl</string>
     <string name="emptyList">Gähnende Leere.</string>
@@ -181,4 +181,16 @@
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="downloading">Wird heruntergeladen</string>
+    <string name="reset">Standardwerte wiederherstellen</string>
+    <string name="reset_message">Sind Sie sicher\? Dadurch werden Sie abgemeldet und alle Ihre Einstellungen zurückgesetzt!</string>
+    <string name="deleteAccount">Konto löschen</string>
+    <string name="deleteAccount_summary">Ihr Piped-Konto löschen</string>
+    <string name="account">Konto</string>
+    <string name="restore">Wiederherstellen</string>
+    <string name="hideTrendingPage">Trendseite ausblenden</string>
+    <string name="quality">Qualität</string>
+    <string name="behavior">Verhalten</string>
+    <string name="player_summary">Qualität und Verhalten des Players</string>
+    <string name="pauseOnScreenOff">Automatische Pause</string>
+    <string name="clonePlaylist">Wiedergabeliste klonen</string>
 </resources>

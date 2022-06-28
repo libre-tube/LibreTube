@@ -19,7 +19,7 @@
     <string name="server_error">יש תקלה עם השרת. לנסות עותק אחר\?</string>
     <string name="error">משהו השתבש.</string>
     <string name="empty">עליך למלא שם משתמש וסיסמה.</string>
-    <string name="notgmail">זה לחשבון LibreTube.</string>
+    <string name="notgmail">זה לחשבון Piped.</string>
     <string name="grid">עמודות רשת</string>
     <string name="createPlaylist">יצירת רשימת נגינה</string>
     <string name="playlistName">שם רשימת הנגינה</string>
@@ -203,4 +203,8 @@
     <string name="autoplay_summary">לנגן את הסרטון הבא אוטומטית כשהנוכחי מסתיים.</string>
     <string name="reset">שחזור ברירות מחדל</string>
     <string name="reset_message">להמשיך\? פעולה זו תוציא אותך מהמערכת ותאפס את כל ההגדרות שלך!</string>
+    <string name="account">חשבון</string>
+    <string name="restore">שחזור</string>
+    <string name="deleteAccount">מחיקת חשבון</string>
+    <string name="deleteAccount_summary">מחיקת חשבון ה־Piped</string>
 </resources>

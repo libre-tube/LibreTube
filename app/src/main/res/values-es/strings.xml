@@ -35,7 +35,7 @@
     <string name="app_theme">Tema</string>
     <string name="error">Algo salió mal.</string>
     <string name="empty">Tienes que introducir un nombre de usuario y una contraseña.</string>
-    <string name="notgmail">Esto es para una cuenta de LibreTube.</string>
+    <string name="notgmail">Esto es para una cuenta Piped.</string>
     <string name="defres">Resolución de vídeo predeterminada</string>
     <string name="grid">Columnas de la cuadrícula</string>
     <string name="emptyList">No hay nada aquí.</string>
@@ -44,7 +44,7 @@
     <string name="playlistName">Nombre de la lista de reproducción</string>
     <string name="success">Hecho.</string>
     <string name="fail">Error :(</string>
-    <string name="dlisinprogress">Por favor, espere hasta que todas las descargas hayan terminado…</string>
+    <string name="dlisinprogress">Otra descarga ya está en curso, por favor espere hasta que termine.</string>
     <string name="server_error">Hay un problema con el servidor. ¿Probar con otra instancia\?</string>
     <string name="unknown_error">Error de red.</string>
     <string name="deletePlaylist">Eliminar lista de reproducción</string>
@@ -108,7 +108,7 @@
     <string name="color_blue">Azul</string>
     <string name="color_purple">Púrpura</string>
     <string name="oledTheme">Negro</string>
-    <string name="material_you">Mystic Material 3</string>
+    <string name="material_you">Material místico 3</string>
     <string name="app_icon">Icono</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -195,7 +195,7 @@
     <string name="quality">Calidad</string>
     <string name="behavior">Comportamiento</string>
     <string name="player_summary">Calidad y comportamiento del reproductor</string>
-    <string name="seek_increment">Incremento de búsqueda</string>
+    <string name="seek_increment">Incremento de desplazamiento</string>
     <string name="piped_summary">Piped es una interfaz web alternativa de código abierto para YouTube que proporciona la API que usamos. Sin Piped, LibreTube no existiría. ¡Muchas gracias a sus desarrolladores!</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausa el reproductor cuando se apaga la pantalla.</string>
@@ -203,4 +203,8 @@
     <string name="clonePlaylist">Clonar lista de reproducción</string>
     <string name="reset">Restaurar los valores predeterminados</string>
     <string name="reset_message">¿Está seguro\? ¡Esto te cerrará la sesión y restablecerá todos tus ajustes!</string>
+    <string name="account">Cuenta</string>
+    <string name="restore">Restaurar</string>
+    <string name="deleteAccount_summary">Elimina su cuenta Piped</string>
+    <string name="deleteAccount">Eliminar cuenta</string>
 </resources>
