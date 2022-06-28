@@ -13,7 +13,7 @@
     <string name="please_login">Παρακαλούμε συνδεθείτε ή εγγραφείτε πρώτα στις ρυθμίσεις.</string>
     <string name="cannotDownload">Αποτυχία λήψης αυτού του μέσου.</string>
     <string name="dlcomplete">Η λήψη ολοκληρώθηκε.</string>
-    <string name="dlisinprogress">Παρακαλώ περιμένετε μέχρι να ολοκληρωθούν όλες οι λήψεις…</string>
+    <string name="dlisinprogress">Μια άλλη λήψη είναι ήδη σε εξέλιξη, περιμένετε μέχρι να ολοκληρωθεί.</string>
     <string name="downloadfailed">Η λήψη απέτυχε.</string>
     <string name="vlc">Άνοιγμα στο VLC</string>
     <string name="vlcerror">Δεν μπορεί να ανοίξει στο VLC. Μπορεί να μην έχει εγκατασταθεί.</string>
@@ -50,7 +50,7 @@
     <string name="importsuccess">Εγγεγραμμένος</string>
     <string name="subscribeIsEmpty">Εγγραφείτε πρώτα σε κάποια κανάλια.</string>
     <string name="grid">Στήλες πλέγματος</string>
-    <string name="notgmail">Αυτό είναι για έναν λογαριασμό LibreTube.</string>
+    <string name="notgmail">Αυτό είναι για λογαριασμό Piped.</string>
     <string name="defres">Προεπιλεγμένη ανάλυση βίντεο</string>
     <string name="emptyList">Τίποτα εδώ.</string>
     <string name="startpage">Αρχική σελίδα</string>
@@ -203,4 +203,8 @@
     <string name="pauseOnScreenOff_summary">Παύση της αναπαραγωγής όταν η οθόνη είναι απενεργοποιημένη.</string>
     <string name="autoplay_summary">Αυτόματη αναπαραγωγή του επόμενου βίντεο όταν τελειώσει το τρέχον.</string>
     <string name="clonePlaylist">Κλωνοποίηση λίστας αναπαραγωγής</string>
+    <string name="deleteAccount">Διαγραφή λογαριασμού</string>
+    <string name="account">Λογαριασμός</string>
+    <string name="deleteAccount_summary">Διαγράψτε τον Piped λογαριασμό σας</string>
+    <string name="restore">Επαναφορά</string>
 </resources>
