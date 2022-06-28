@@ -55,21 +55,16 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginHorizontal="10dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/player_views_info"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="10M views    2 days ago " />
 
@@ -81,8 +76,8 @@
 
                         <ImageView
                             android:layout_gravity="center"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:src="@drawable/ic_like" />
 
                         <TextView
@@ -94,8 +89,8 @@
 
                         <ImageView
                             android:layout_gravity="center"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:layout_marginLeft="5dp"
                             android:src="@drawable/ic_like"
                             android:rotation="180"/>
@@ -110,31 +105,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/chapters_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/chapters_toggle_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/show_chapters" />
-
-                    <ImageView
-                        android:id="@+id/chapters_toggle_arrow"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="bottom"
-                        android:src="@drawable/ic_arrow_down" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chapters_recView"

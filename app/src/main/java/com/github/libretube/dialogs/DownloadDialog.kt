@@ -17,10 +17,10 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import com.github.libretube.DownloadService
 import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.obj.Streams
+import com.github.libretube.services.DownloadService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadDialog : DialogFragment() {

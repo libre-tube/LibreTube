@@ -272,9 +272,15 @@
         </activity>
 
         <service
-            android:name=".DownloadService"
+            android:name=".services.DownloadService"
             android:enabled="true"
             android:exported="false" />
+
+        <service
+            android:name=".services.ClosingService"
+            android:stopWithTask="false"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>
