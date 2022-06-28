@@ -34,6 +34,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
+import com.github.libretube.services.ClosingService
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
@@ -52,6 +53,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         super.onCreate(savedInstanceState)
+
+        // start service that gets called on closure
+        startService(Intent(this, ClosingService::class.java))
+
         CronetHelper.initCronet(this.applicationContext)
 
         RetrofitInstance.url =

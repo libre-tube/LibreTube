@@ -38,7 +38,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.adapters.ChaptersAdapter
@@ -56,6 +55,7 @@ import com.github.libretube.obj.SponsorBlockPrefs
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.PreferenceHelper
@@ -252,14 +252,12 @@ class PlayerFragment : Fragment() {
             }
         }
 
+        // video description and chapters toggle
+        val descLinLayout = view.findViewById<LinearLayout>(R.id.desc_linLayout)
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
             val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
             arrowImageView.animate().rotationBy(180F).setDuration(100).start()
-            if (playerDescription.isVisible) {
-                playerDescription.visibility = View.GONE
-            } else {
-                playerDescription.visibility = View.VISIBLE
-            }
+            descLinLayout.visibility = if (descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
         view.findViewById<MaterialCardView>(R.id.comments_toggle)
@@ -447,11 +445,11 @@ class PlayerFragment : Fragment() {
                 relatedStreams = response.relatedStreams
                 runOnUiThread {
                     createExoPlayer(view)
-                    prepareExoPlayerView()
                     if (response.chapters != null) initializeChapters(response.chapters)
                     // set media sources for the player
                     setResolutionAndSubtitles(view, response)
                     exoPlayer.prepare()
+                    prepareExoPlayerView()
                     initializePlayerView(view, response)
                     // support for time stamped links
                     if (arguments?.getLong("timeStamp") != null) {
@@ -717,28 +715,13 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
-        val chaptersToggle = view?.findViewById<LinearLayout>(R.id.chapters_toggle)
         val chaptersRecView = view?.findViewById<RecyclerView>(R.id.chapters_recView)
-        val chaptersToggleText = view?.findViewById<TextView>(R.id.chapters_toggle_text)
-        val chaptersToggleArrow = view?.findViewById<ImageView>(R.id.chapters_toggle_arrow)
 
         if (chapters.isNotEmpty()) {
-            chaptersToggle?.visibility = View.VISIBLE
-
-            chaptersToggle?.setOnClickListener {
-                if (chaptersRecView?.isVisible!!) {
-                    chaptersRecView?.visibility = View.GONE
-                    chaptersToggleText?.text = getString(R.string.show_chapters)
-                } else {
-                    chaptersRecView?.visibility = View.VISIBLE
-                    chaptersToggleText?.text = getString(R.string.hide_chapters)
-                }
-                chaptersToggleArrow!!.animate().setDuration(100).rotationBy(180F).start()
-            }
-
             chaptersRecView?.layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
             chaptersRecView?.adapter = ChaptersAdapter(chapters, exoPlayer)
+            chaptersRecView?.visibility = View.VISIBLE
         }
     }
 
@@ -1121,7 +1104,7 @@ class PlayerFragment : Fragment() {
                 enableTransition(R.id.yt_transition, false)
             }
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
-            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
+            view?.findViewById<LinearLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
@@ -1133,7 +1116,7 @@ class PlayerFragment : Fragment() {
             exoPlayerView.showController()
             exoPlayerView.useController = true
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
-            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
+            view?.findViewById<LinearLayout>(R.id.top_bar)?.visibility = View.VISIBLE
         }
     }
 
