@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/addToPlaylist"
-        android:text="@string/addToPlaylist"
         style="@style/CustomDialogButton"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:text="@string/addToPlaylist" />
 
 </LinearLayout>

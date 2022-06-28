@@ -16,10 +16,10 @@
 
     <LinearLayout
         android:id="@+id/constraintLayout"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_channel_image"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,9 +29,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:textSize="16sp"
+            android:ellipsize="end"
             android:maxLines="1"
-            android:ellipsize="end" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/search_views"

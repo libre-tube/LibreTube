@@ -70,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:tint="?android:attr/colorBackground"
         app:backgroundTint="?attr/colorSecondary"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        app:tint="?android:attr/colorBackground" />
 
 </FrameLayout>

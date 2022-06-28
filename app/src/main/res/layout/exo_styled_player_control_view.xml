@@ -12,8 +12,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<merge xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- 0dp dimensions are used to prevent this view from influencing the size of
          the parent view if it uses "wrap_content". It is expanded to occupy the
@@ -27,91 +27,111 @@
         android:layout_height="0dp"
         android:background="@color/exo_black_opacity_60" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
-        android:layout_marginBottom="@dimen/exo_styled_bottom_bar_margin_top"
         android:layout_gravity="top"
+        android:layout_marginBottom="@dimen/exo_styled_bottom_bar_margin_top"
         android:layoutDirection="ltr">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layoutDirection="ltr"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
-            android:layout_gravity="center_vertical|start"
-            android:layoutDirection="ltr">
+            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
+            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
 
             <ImageButton
-                android:visibility="gone"
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close"
-                android:padding="@dimen/exo_icon_padding"
+                android:layout_marginRight="10dp"
                 android:background="#00FFFFFF"
-                app:tint="@android:color/white"
-                android:layout_marginRight="10dp" />
+                android:padding="@dimen/exo_icon_padding"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:tint="@android:color/white" />
 
             <ImageButton
                 android:id="@+id/lock_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_unlocked"
+                android:background="#00FFFFFF"
                 android:padding="@dimen/exo_icon_padding"
-                android:background="#00FFFFFF" />
+                android:src="@drawable/ic_unlocked" />
+
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/exo_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="invisible" />
+
         <LinearLayout
-            android:id="@+id/controls_top_right"
+            android:id="@+id/exo_top_bar_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layoutDirection="ltr"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
-            android:layout_gravity="center_vertical|end"
-            android:layoutDirection="ltr">
+            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
+            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
 
             <ImageButton
                 android:id="@+id/aspect_ratio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_aspect_ratio"
-                android:padding="@dimen/exo_icon_padding"
                 android:layout_marginEnd="12dp"
-                android:background="#00FFFFFF" />
-
-            <TextView
-                android:id="@+id/quality_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/exo_icon_padding"
-                android:text="HLS"
-                android:textColor="#FFFFFF" />
-
-            <ImageButton
-                android:id="@+id/quality_select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down"
-                android:padding="@dimen/exo_icon_padding"
                 android:background="#00FFFFFF"
-                app:tint="@android:color/white" />
+                android:padding="@dimen/exo_icon_padding"
+                android:src="@drawable/ic_aspect_ratio" />
+
+            <LinearLayout
+                android:id="@+id/quality_linLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/quality_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/exo_icon_padding"
+                    android:text="HLS"
+                    android:textColor="#FFFFFF" />
+
+                <ImageView
+                    android:id="@+id/quality_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/exo_icon_padding"
+                    android:src="@drawable/ic_arrow_down"
+                    app:tint="@android:color/white" />
+
+            </LinearLayout>
         </LinearLayout>
 
-    </FrameLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@id/exo_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
-        android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
         android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
         android:background="@color/exo_bottom_bar_background"
         android:layoutDirection="ltr">
 
@@ -119,13 +139,13 @@
             android:id="@id/exo_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding"
             android:layout_gravity="center_vertical|start"
             android:layout_marginBottom="10dp"
-            android:layoutDirection="ltr">
+            android:layoutDirection="ltr"
+            android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
+            android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
+            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
+            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
 
             <TextView
                 android:id="@id/exo_position"
@@ -168,24 +188,24 @@
 
         <LinearLayout
             android:id="@+id/progress_bar"
-            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
             android:layout_above="@id/exo_basic_controls"
-            android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="15dp">
+            android:layout_marginBottom="10dp">
 
             <com.google.android.exoplayer2.ui.DefaultTimeBar
                 android:id="@id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
+                android:background="@color/exo_bottom_bar_background"
                 app:bar_height="2dp"
-                app:scrubber_color="?attr/colorOnPrimary"
                 app:played_color="?attr/colorOnSecondary"
-                app:scrubber_enabled_size="12dp"
+                app:scrubber_color="?attr/colorOnPrimary"
                 app:scrubber_dragged_size="15dp"
-                android:background="@color/exo_bottom_bar_background" />
+                app:scrubber_enabled_size="12dp" />
 
         </LinearLayout>
 
@@ -197,9 +217,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/exo_styled_minimal_controls_margin_bottom"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layoutDirection="ltr">
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
 
     </LinearLayout>
 
@@ -209,29 +229,29 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
+        android:clipToPadding="false"
         android:gravity="center"
-        android:padding="@dimen/exo_styled_controls_padding"
-        android:clipToPadding="false">
+        android:padding="@dimen/exo_styled_controls_padding">
 
         <Button
             android:id="@id/exo_rew_with_amount"
+            style="@style/ExoStyledControls.Button.Center.RewWithAmount"
             android:layout_marginRight="25dp"
             android:scaleX="1.1"
-            android:scaleY="1.1"
-            style="@style/ExoStyledControls.Button.Center.RewWithAmount" />
+            android:scaleY="1.1" />
 
         <ImageButton
             android:id="@id/exo_play_pause"
+            style="@style/ExoStyledControls.Button.Center.PlayPause"
             android:scaleX="1.1"
-            android:scaleY="1.1"
-            style="@style/ExoStyledControls.Button.Center.PlayPause" />
+            android:scaleY="1.1" />
 
         <Button
             android:id="@id/exo_ffwd_with_amount"
+            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
             android:layout_marginLeft="25dp"
             android:scaleX="1.1"
-            android:scaleY="1.1"
-            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount" />
+            android:scaleY="1.1" />
 
     </LinearLayout>
 
