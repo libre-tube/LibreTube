@@ -23,14 +23,14 @@
             android:id="@+id/linLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:animateLayoutChanges="true" >
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/player_title_layout"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView

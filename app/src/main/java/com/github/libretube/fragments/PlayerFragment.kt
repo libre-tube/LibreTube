@@ -1,6 +1,5 @@
 package com.github.libretube.fragments
 
-import android.R.attr.mimeType
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PictureInPictureParams

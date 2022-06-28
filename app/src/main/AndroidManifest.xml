@@ -278,9 +278,9 @@
 
         <service
             android:name=".services.ClosingService"
-            android:stopWithTask="false"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false"
+            android:stopWithTask="false" />
     </application>
 
 </manifest>
