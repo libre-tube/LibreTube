@@ -1,5 +1,6 @@
 package com.github.libretube.fragments
 
+import android.R.attr.mimeType
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PictureInPictureParams
@@ -655,29 +656,28 @@ class PlayerFragment : Fragment() {
 
         if (response.hls != null) {
             view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
-                exoPlayer.pause()
-                try {
-                    val vlcRequestCode = 42
-                    val uri: Uri = Uri.parse(response.hls)
-                    val vlcIntent = Intent(Intent.ACTION_VIEW)
-                    vlcIntent.setPackage("org.videolan.vlc")
-                    vlcIntent.setDataAndTypeAndNormalize(uri, "video/*")
-                    vlcIntent.putExtra("title", response.title)
-                    vlcIntent.putExtra("from_start", false)
-                    vlcIntent.putExtra("position", exoPlayer.currentPosition)
-                    startActivityForResult(vlcIntent, vlcRequestCode)
-                } catch (e: Exception) {
-                    Toast.makeText(context, R.string.vlcerror, Toast.LENGTH_SHORT)
-                        .show()
-                }
+                // start an intent with video as mimetype using the hls stream
+                val uri: Uri = Uri.parse(response.hls)
+                val intent = Intent()
+
+                intent.action = Intent.ACTION_VIEW
+                intent.setDataAndType(uri, "video/*")
+                intent.putExtra(Intent.EXTRA_TITLE, title)
+                intent.putExtra("title", title)
+                intent.putExtra("artist", uploader)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                startActivity(intent)
             }
         }
         if (relatedStreamsEnabled) {
+            // only show related streams if enabled
             relatedRecView.adapter = TrendingAdapter(
                 response.relatedStreams!!,
                 childFragmentManager
             )
         }
+        // set video description
         val description = response.description!!
         view.findViewById<TextView>(R.id.player_description).text =
             // detect whether the description is html formatted
