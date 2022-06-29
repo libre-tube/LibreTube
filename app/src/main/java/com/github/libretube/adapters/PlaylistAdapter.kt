@@ -60,6 +60,7 @@ class PlaylistAdapter(
         holder.v.setOnClickListener {
             var bundle = Bundle()
             bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
+            bundle.putString("playlistId", playlistId)
             var frag = PlayerFragment()
             frag.arguments = bundle
             val activity = holder.v.context as AppCompatActivity
