@@ -17,7 +17,7 @@ object ThemeHelper {
     }
 
     private fun updateAccentColor(context: Context) {
-        when (PreferenceHelper.getString(context, "accent_color", "red")) {
+        when (PreferenceHelper.getString(context, "accent_color", "purple")) {
             "my" -> context.setTheme(R.style.Theme_MY)
             "red" -> context.setTheme(R.style.Theme_Red)
             "blue" -> context.setTheme(R.style.Theme_Blue)
