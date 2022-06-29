@@ -125,9 +125,12 @@ class PlayerFragment : Fragment() {
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var segmentData: Segments
     private var relatedStreamsEnabled = true
+
     private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var nextStreamId: String? = null
     private var playlistStreamIds: MutableList<String> = arrayListOf()
+    private var playlistNextPage: String? = null
+
     private var isPlayerLocked: Boolean = false
 
     private lateinit var relDownloadVideo: LinearLayout
@@ -482,25 +485,42 @@ class PlayerFragment : Fragment() {
     private fun initAutoPlay() {
         // save related streams for autoplay
         if (autoplay) {
-            // save related streams for autoplay
+            // if it's a playlist use the next video
             if (playlistId != null) {
+                lateinit var playlist: Playlist // var for saving the list in
                 if (playlistStreamIds.isEmpty()) {
-                    lateinit var playlist: Playlist
                     CoroutineScope(Dispatchers.IO).launch {
                         // fetch the playlists videos
                         playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
                         playlist.relatedStreams?.forEach { video ->
                             playlistStreamIds += video.url?.replace("/watch?v=", "")!!
                         }
-                        // if the playlists contain the video, then save the next video as next stream
-                        if (playlistStreamIds.contains(videoId)) {
-                            val index = playlistStreamIds.indexOf(videoId)
-                            if (index + 1 <= playlistStreamIds.size) {
-                                nextStreamId = playlistStreamIds[index + 1]
-                            }
-                        }
+                        // restart the function after videos are loaded
+                        playlistNextPage = playlist.nextpage
+                        initAutoPlay()
                     }
                 }
+                // if the playlists contain the video, then save the next video as next stream
+                else if (playlistStreamIds.contains(videoId)) {
+                    val index = playlistStreamIds.indexOf(videoId)
+                    // check whether there's a next video
+                    if (index + 1 <= playlistStreamIds.size) {
+                        nextStreamId = playlistStreamIds[index + 1]
+                    }
+                    // fetch the next page of the playlist if the video isn't contained
+                } else if (playlistNextPage != null) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        Log.e(TAG, "fetching next autoplay page list")
+                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, playlistNextPage!!)
+                        playlist.relatedStreams?.forEach { video ->
+                            playlistStreamIds += video.url?.replace("/watch?v=", "")!!
+                        }
+                        // restart the function after videos are loaded
+                        playlistNextPage = playlist.nextpage
+                        initAutoPlay()
+                    }
+                }
+                // if it's not a playlist then use the next related video
             } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
                 nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")!!
@@ -512,24 +532,6 @@ class PlayerFragment : Fragment() {
         // save the id of the next stream as videoId and load the next video
         videoId = nextStreamId
         fetchJsonAndInitPlayer(view!!)
-    }
-
-    private fun fetchNextPage() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response," + e.response())
-                    return@launchWhenCreated
-                }
-            }
-        }
-        run()
     }
 
     private fun setSponsorBlockPrefs() {
