@@ -482,21 +482,25 @@ class PlayerFragment : Fragment() {
         run()
     }
 
+    // the function is working recursively
     private fun initAutoPlay() {
         // save related streams for autoplay
         if (autoplay) {
             // if it's a playlist use the next video
             if (playlistId != null) {
                 lateinit var playlist: Playlist // var for saving the list in
+                // runs only the first time when starting a video from a playlist
                 if (playlistStreamIds.isEmpty()) {
                     CoroutineScope(Dispatchers.IO).launch {
                         // fetch the playlists videos
                         playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
+                        // save the playlist urls in the array
                         playlist.relatedStreams?.forEach { video ->
                             playlistStreamIds += video.url?.replace("/watch?v=", "")!!
                         }
-                        // restart the function after videos are loaded
+                        // save playlistNextPage for usage if video is not contained
                         playlistNextPage = playlist.nextpage
+                        // restart the function after videos are loaded
                         initAutoPlay()
                     }
                 }
@@ -510,16 +514,19 @@ class PlayerFragment : Fragment() {
                     // fetch the next page of the playlist if the video isn't contained
                 } else if (playlistNextPage != null) {
                     CoroutineScope(Dispatchers.IO).launch {
-                        Log.e(TAG, "fetching next autoplay page list")
                         RetrofitInstance.api.getPlaylistNextPage(playlistId!!, playlistNextPage!!)
+                        // append all the playlist item urls to the array
                         playlist.relatedStreams?.forEach { video ->
                             playlistStreamIds += video.url?.replace("/watch?v=", "")!!
                         }
-                        // restart the function after videos are loaded
+                        // save playlistNextPage for usage if video is not contained
                         playlistNextPage = playlist.nextpage
+                        // restart the function after videos are loaded
                         initAutoPlay()
                     }
                 }
+                // else: the video must be the last video of the playlist so nothing happens
+
                 // if it's not a playlist then use the next related video
             } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
@@ -528,10 +535,15 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    // used for autoplay and skipping to next video
     private fun playNextVideo() {
-        // save the id of the next stream as videoId and load the next video
-        videoId = nextStreamId
-        fetchJsonAndInitPlayer(view!!)
+        // check whether there is a new video in the queue
+        // by making sure that the next and the current video aren't the same
+        if (videoId != nextStreamId) {
+            // save the id of the next stream as videoId and load the next video
+            videoId = nextStreamId
+            fetchJsonAndInitPlayer(view!!)
+        }
     }
 
     private fun setSponsorBlockPrefs() {
