@@ -49,6 +49,7 @@ import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
+import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.SponsorBlockPrefs
@@ -86,6 +87,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
@@ -99,6 +103,7 @@ class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
     private var videoId: String? = null
+    private var playlistId: String? = null
     private var sId: Int = 0
     private var eId: Int = 0
     private var paused = false
@@ -119,8 +124,10 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var segmentData: Segments
-    private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var relatedStreamsEnabled = true
+    private var relatedStreams: List<StreamItem>? = arrayListOf()
+    private var nextStreamId: String? = null
+    private var playlistStreamIds: MutableList<String> = arrayListOf()
     private var isPlayerLocked: Boolean = false
 
     private lateinit var relDownloadVideo: LinearLayout
@@ -138,6 +145,7 @@ class PlayerFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             videoId = it.getString("videoId")
+            playlistId = it.getString("playlistId")
         }
     }
 
@@ -437,12 +445,13 @@ class PlayerFragment : Fragment() {
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
 
-                // check whether related streams and autoplay are enabled
+                // save whether related streams and autoplay are enabled
                 autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
                 relatedStreamsEnabled =
                     PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
+
                 runOnUiThread {
                     createExoPlayer(view)
                     if (response.chapters != null) initializeChapters(response.chapters)
@@ -462,6 +471,61 @@ class PlayerFragment : Fragment() {
                     fetchSponsorBlockSegments()
                     // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
+                    // prepare for autoplay
+                    initAutoPlay()
+                }
+            }
+        }
+        run()
+    }
+
+    private fun initAutoPlay() {
+        // save related streams for autoplay
+        if (autoplay) {
+            // save related streams for autoplay
+            if (playlistId != null) {
+                if (playlistStreamIds.isEmpty()) {
+                    lateinit var playlist: Playlist
+                    CoroutineScope(Dispatchers.IO).launch {
+                        // fetch the playlists videos
+                        playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
+                        playlist.relatedStreams?.forEach { video ->
+                            playlistStreamIds += video.url?.replace("/watch?v=", "")!!
+                        }
+                        // if the playlists contain the video, then save the next video as next stream
+                        if (playlistStreamIds.contains(videoId)) {
+                            val index = playlistStreamIds.indexOf(videoId)
+                            if (index + 1 <= playlistStreamIds.size) {
+                                nextStreamId = playlistStreamIds[index + 1]
+                            }
+                        }
+                    }
+                }
+            } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
+                // save next video from related streams for autoplay
+                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")!!
+            }
+        }
+    }
+
+    private fun playNextVideo() {
+        // save the id of the next stream as videoId and load the next video
+        videoId = nextStreamId
+        fetchJsonAndInitPlayer(view!!)
+    }
+
+    private fun fetchNextPage() {
+        fun run() {
+            lifecycleScope.launchWhenCreated {
+                val response = try {
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launchWhenCreated
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response," + e.response())
+                    return@launchWhenCreated
                 }
             }
         }
@@ -599,14 +663,13 @@ class PlayerFragment : Fragment() {
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (
                     playbackState == Player.STATE_ENDED &&
-                    relatedStreams != null &&
-                    relatedStreams!!.isNotEmpty() &&
+                    nextStreamId != null &&
                     !transitioning &&
                     autoplay
                 ) {
                     transitioning = true
-                    videoId = relatedStreams!![0].url!!.replace("/watch?v=", "")
-                    fetchJsonAndInitPlayer(view)
+                    // check whether autoplay is enabled
+                    if (autoplay) playNextVideo()
                 }
 
                 if (playWhenReady && playbackState == Player.STATE_READY) {
