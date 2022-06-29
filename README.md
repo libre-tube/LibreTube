@@ -6,7 +6,7 @@
 [![Telegram](https://libre-tube.github.io/assets/tg-widget.svg)](https://t.me/libretube)
 [![Twitter](https://libre-tube.github.io/assets/tw-widget.svg)](https://twitter.com/libretube)
 [![Reddit](https://libre-tube.github.io/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
- 
+
 [<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" width="120">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="https://libre-tube.github.io/assets/izzyload.png" alt="Get it on IzzyOnDroid" width="120">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)
 [<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" width="120">](https://github.com/libre-tube/LibreTube/releases/latest)
@@ -32,17 +32,16 @@
 
 ## ⭐ Features
 
-| Feature ||
-| - | - |
-| User Accounts | ✅ |
-| Subscriptions | ✅ |
-| User Playlists | ✅ |
-| Channel Playlists | ✅ |
-| Search Filters | ✅ |
-| SponsorBlock | ✅ |
-| Subtitles | ✅ |
-| Comments | ✅ |
-
+| Feature           |     |
+| ----------------- | --- |
+| User Accounts     | ✅  |
+| Subscriptions     | ✅  |
+| User Playlists    | ✅  |
+| Channel Playlists | ✅  |
+| Search Filters    | ✅  |
+| SponsorBlock      | ✅  |
+| Subtitles         | ✅  |
+| Comments          | ✅  |
 
 ## 😇 Contributing
 
@@ -52,7 +51,7 @@ If creating a pull request, please make sure to format your code (preferred ktli
 
 If opening an issue without following the issue template, we will ignore the issue and force close it.
 
->**⚠️ WARNING: This is a beta version, therefore you may encounter bugs. If you do, open an issue via our github repository.**
+> **⚠️ WARNING: This is a beta version, therefore you may encounter bugs. If you do, open an issue via our github repository.**
 
 ### 📝 Translation
 
@@ -69,5 +68,6 @@ If opening an issue without following the issue template, we will ignore the iss
 **XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`
 
 ## 🪞 Mirrors (read-only)
+
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
 <a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
