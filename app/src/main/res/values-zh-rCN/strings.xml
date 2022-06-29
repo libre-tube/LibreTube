@@ -69,7 +69,7 @@
     <string name="clear_history">清除历史记录</string>
     <string name="music_videos">YT Music 视频</string>
     <string name="music_playlists">YT Music 播放列表</string>
-    <string name="notgmail">请在此输入 LibreTube 账户。</string>
+    <string name="notgmail">请在此输入 Piped 账户。</string>
     <string name="defres">默认分辨率</string>
     <string name="playlistCreated">已创建播放列表。</string>
     <string name="lightTheme">浅色</string>
@@ -203,4 +203,8 @@
     <string name="category_preview_description">对于详细说明此系列视频或未来视频中即将出现的内容的片段，但不提供其他信息。如果它包含仅出现在此处的剪辑，则这很可能是错误的类别。</string>
     <string name="reset">恢复默认值</string>
     <string name="reset_message">你确定吗？这会让你退出账户并重置你的所有设置！</string>
+    <string name="deleteAccount_summary">删除你的 Piped 账户</string>
+    <string name="account">账户</string>
+    <string name="restore">恢复</string>
+    <string name="deleteAccount">删除账户</string>
 </resources>

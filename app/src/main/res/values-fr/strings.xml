@@ -38,7 +38,7 @@
     <string name="unknown_error">Erreur réseau.</string>
     <string name="error">Quelque chose s\'est mal passé.</string>
     <string name="empty">Le nom d\'utilisateur et le mot de passe ne peuvent pas être vides.</string>
-    <string name="notgmail">Ceci est pour un compte LibreTube.</string>
+    <string name="notgmail">Ceci est pour un compte Piped.</string>
     <string name="defres">Résolution vidéo par défaut</string>
     <string name="addToPlaylist">Ajouter à la liste de lecture</string>
     <string name="success">Terminé.</string>
@@ -203,4 +203,8 @@
     <string name="pauseOnScreenOff_summary">Mettre le lecteur en pause lorsque l\'écran est éteint.</string>
     <string name="autoplay_summary">Lancer automatiquement la vidéo suivante lorsque la vidéo en cours est terminée.</string>
     <string name="clonePlaylist">Cloner la liste de lecture</string>
+    <string name="deleteAccount_summary">Supprimer votre compte Piped</string>
+    <string name="deleteAccount">Supprimer le compte</string>
+    <string name="account">Compte</string>
+    <string name="restore">Restaurer</string>
 </resources>

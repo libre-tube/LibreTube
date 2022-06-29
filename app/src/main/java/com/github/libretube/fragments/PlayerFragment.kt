@@ -38,7 +38,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.IS_DOWNLOAD_RUNNING
 import com.github.libretube.MainActivity
 import com.github.libretube.R
 import com.github.libretube.adapters.ChaptersAdapter
@@ -50,12 +49,14 @@ import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
+import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.SponsorBlockPrefs
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.PreferenceHelper
@@ -86,6 +87,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
@@ -99,6 +103,7 @@ class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
     private var videoId: String? = null
+    private var playlistId: String? = null
     private var sId: Int = 0
     private var eId: Int = 0
     private var paused = false
@@ -119,8 +124,13 @@ class PlayerFragment : Fragment() {
     private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var segmentData: Segments
-    private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var relatedStreamsEnabled = true
+
+    private var relatedStreams: List<StreamItem>? = arrayListOf()
+    private var nextStreamId: String? = null
+    private var playlistStreamIds: MutableList<String> = arrayListOf()
+    private var playlistNextPage: String? = null
+
     private var isPlayerLocked: Boolean = false
 
     private lateinit var relDownloadVideo: LinearLayout
@@ -138,6 +148,7 @@ class PlayerFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             videoId = it.getString("videoId")
+            playlistId = it.getString("playlistId")
         }
     }
 
@@ -155,8 +166,9 @@ class PlayerFragment : Fragment() {
         hideKeyboard()
 
         setSponsorBlockPrefs()
+        createExoPlayer(view)
         initializeTransitionLayout(view)
-        fetchJsonAndInitPlayer(view)
+        playVideo(view)
     }
 
     private fun initializeTransitionLayout(view: View) {
@@ -252,14 +264,12 @@ class PlayerFragment : Fragment() {
             }
         }
 
+        // video description and chapters toggle
+        val descLinLayout = view.findViewById<LinearLayout>(R.id.desc_linLayout)
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
             val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
-            arrowImageView.animate().rotationBy(180F).setDuration(100).start()
-            if (playerDescription.isVisible) {
-                playerDescription.visibility = View.GONE
-            } else {
-                playerDescription.visibility = View.VISIBLE
-            }
+            arrowImageView.animate().rotationBy(180F).setDuration(250).start()
+            descLinLayout.visibility = if (descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
         view.findViewById<MaterialCardView>(R.id.comments_toggle)
@@ -375,7 +385,12 @@ class PlayerFragment : Fragment() {
         val isScreenOn = pm.isInteractive
 
         // pause player if screen off and setting enabled
-        if (exoPlayer != null && !isScreenOn && pausePlayerOnScreenOffEnabled) {
+        if (
+            this::exoPlayer.isInitialized &&
+            exoPlayer != null &&
+            !isScreenOn &&
+            pausePlayerOnScreenOffEnabled
+        ) {
             exoPlayer.pause()
         }
         super.onPause()
@@ -419,7 +434,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun fetchJsonAndInitPlayer(view: View) {
+    private fun playVideo(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -439,19 +454,19 @@ class PlayerFragment : Fragment() {
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
 
-                // check whether related streams and autoplay are enabled
+                // save whether related streams and autoplay are enabled
                 autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
                 relatedStreamsEnabled =
                     PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
+
                 runOnUiThread {
-                    createExoPlayer(view)
-                    prepareExoPlayerView()
                     if (response.chapters != null) initializeChapters(response.chapters)
                     // set media sources for the player
                     setResolutionAndSubtitles(view, response)
                     exoPlayer.prepare()
+                    prepareExoPlayerView()
                     initializePlayerView(view, response)
                     // support for time stamped links
                     if (arguments?.getLong("timeStamp") != null) {
@@ -464,10 +479,76 @@ class PlayerFragment : Fragment() {
                     fetchSponsorBlockSegments()
                     // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
+                    // prepare for autoplay
+                    initAutoPlay()
                 }
             }
         }
         run()
+    }
+
+    // the function is working recursively
+    private fun initAutoPlay() {
+        // save related streams for autoplay
+        if (autoplay) {
+            // if it's a playlist use the next video
+            if (playlistId != null) {
+                lateinit var playlist: Playlist // var for saving the list in
+                // runs only the first time when starting a video from a playlist
+                if (playlistStreamIds.isEmpty()) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        // fetch the playlists videos
+                        playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
+                        // save the playlist urls in the array
+                        playlist.relatedStreams?.forEach { video ->
+                            playlistStreamIds += video.url?.replace("/watch?v=", "")!!
+                        }
+                        // save playlistNextPage for usage if video is not contained
+                        playlistNextPage = playlist.nextpage
+                        // restart the function after videos are loaded
+                        initAutoPlay()
+                    }
+                }
+                // if the playlists contain the video, then save the next video as next stream
+                else if (playlistStreamIds.contains(videoId)) {
+                    val index = playlistStreamIds.indexOf(videoId)
+                    // check whether there's a next video
+                    if (index + 1 <= playlistStreamIds.size) {
+                        nextStreamId = playlistStreamIds[index + 1]
+                    }
+                    // fetch the next page of the playlist if the video isn't contained
+                } else if (playlistNextPage != null) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, playlistNextPage!!)
+                        // append all the playlist item urls to the array
+                        playlist.relatedStreams?.forEach { video ->
+                            playlistStreamIds += video.url?.replace("/watch?v=", "")!!
+                        }
+                        // save playlistNextPage for usage if video is not contained
+                        playlistNextPage = playlist.nextpage
+                        // restart the function after videos are loaded
+                        initAutoPlay()
+                    }
+                }
+                // else: the video must be the last video of the playlist so nothing happens
+
+                // if it's not a playlist then use the next related video
+            } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
+                // save next video from related streams for autoplay
+                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")!!
+            }
+        }
+    }
+
+    // used for autoplay and skipping to next video
+    private fun playNextVideo() {
+        // check whether there is a new video in the queue
+        // by making sure that the next and the current video aren't the same
+        if (videoId != nextStreamId) {
+            // save the id of the next stream as videoId and load the next video
+            videoId = nextStreamId
+            playVideo(view!!)
+        }
     }
 
     private fun setSponsorBlockPrefs() {
@@ -495,7 +576,7 @@ class PlayerFragment : Fragment() {
 
     private fun fetchSponsorBlockSegments() {
         fun run() {
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch(Dispatchers.IO) {
                 if (sponsorBlockPrefs.sponsorBlockEnabled) {
                     val categories: ArrayList<String> = arrayListOf()
                     if (sponsorBlockPrefs.introEnabled) {
@@ -531,14 +612,10 @@ class PlayerFragment : Fragment() {
                         } catch (e: IOException) {
                             println(e)
                             Log.e(TAG, "IOException, you might not have internet connection")
-                            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT)
-                                .show()
-                            return@launchWhenCreated
+                            return@launch
                         } catch (e: HttpException) {
                             Log.e(TAG, "HttpException, unexpected response")
-                            Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT)
-                                .show()
-                            return@launchWhenCreated
+                            return@launch
                         }
                     }
                 }
@@ -601,14 +678,13 @@ class PlayerFragment : Fragment() {
                 // check if video has ended, next video is available and autoplay is enabled.
                 if (
                     playbackState == Player.STATE_ENDED &&
-                    relatedStreams != null &&
-                    relatedStreams!!.isNotEmpty() &&
+                    nextStreamId != null &&
                     !transitioning &&
                     autoplay
                 ) {
                     transitioning = true
-                    videoId = relatedStreams!![0].url!!.replace("/watch?v=", "")
-                    fetchJsonAndInitPlayer(view)
+                    // check whether autoplay is enabled
+                    if (autoplay) playNextVideo()
                 }
 
                 if (playWhenReady && playbackState == Player.STATE_READY) {
@@ -657,29 +733,28 @@ class PlayerFragment : Fragment() {
 
         if (response.hls != null) {
             view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
-                exoPlayer.pause()
-                try {
-                    val vlcRequestCode = 42
-                    val uri: Uri = Uri.parse(response.hls)
-                    val vlcIntent = Intent(Intent.ACTION_VIEW)
-                    vlcIntent.setPackage("org.videolan.vlc")
-                    vlcIntent.setDataAndTypeAndNormalize(uri, "video/*")
-                    vlcIntent.putExtra("title", response.title)
-                    vlcIntent.putExtra("from_start", false)
-                    vlcIntent.putExtra("position", exoPlayer.currentPosition)
-                    startActivityForResult(vlcIntent, vlcRequestCode)
-                } catch (e: Exception) {
-                    Toast.makeText(context, R.string.vlcerror, Toast.LENGTH_SHORT)
-                        .show()
-                }
+                // start an intent with video as mimetype using the hls stream
+                val uri: Uri = Uri.parse(response.hls)
+                val intent = Intent()
+
+                intent.action = Intent.ACTION_VIEW
+                intent.setDataAndType(uri, "video/*")
+                intent.putExtra(Intent.EXTRA_TITLE, title)
+                intent.putExtra("title", title)
+                intent.putExtra("artist", uploader)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                startActivity(intent)
             }
         }
         if (relatedStreamsEnabled) {
+            // only show related streams if enabled
             relatedRecView.adapter = TrendingAdapter(
                 response.relatedStreams!!,
                 childFragmentManager
             )
         }
+        // set video description
         val description = response.description!!
         view.findViewById<TextView>(R.id.player_description).text =
             // detect whether the description is html formatted
@@ -717,28 +792,13 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
-        val chaptersToggle = view?.findViewById<LinearLayout>(R.id.chapters_toggle)
         val chaptersRecView = view?.findViewById<RecyclerView>(R.id.chapters_recView)
-        val chaptersToggleText = view?.findViewById<TextView>(R.id.chapters_toggle_text)
-        val chaptersToggleArrow = view?.findViewById<ImageView>(R.id.chapters_toggle_arrow)
 
         if (chapters.isNotEmpty()) {
-            chaptersToggle?.visibility = View.VISIBLE
-
-            chaptersToggle?.setOnClickListener {
-                if (chaptersRecView?.isVisible!!) {
-                    chaptersRecView?.visibility = View.GONE
-                    chaptersToggleText?.text = getString(R.string.show_chapters)
-                } else {
-                    chaptersRecView?.visibility = View.VISIBLE
-                    chaptersToggleText?.text = getString(R.string.hide_chapters)
-                }
-                chaptersToggleArrow!!.animate().setDuration(100).rotationBy(180F).start()
-            }
-
             chaptersRecView?.layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
             chaptersRecView?.adapter = ChaptersAdapter(chapters, exoPlayer)
+            chaptersRecView?.visibility = View.VISIBLE
         }
     }
 
@@ -1121,7 +1181,7 @@ class PlayerFragment : Fragment() {
                 enableTransition(R.id.yt_transition, false)
             }
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
-            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.GONE
+            view?.findViewById<LinearLayout>(R.id.top_bar)?.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
@@ -1133,7 +1193,7 @@ class PlayerFragment : Fragment() {
             exoPlayerView.showController()
             exoPlayerView.useController = true
             view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
-            view?.findViewById<FrameLayout>(R.id.top_bar)?.visibility = View.VISIBLE
+            view?.findViewById<LinearLayout>(R.id.top_bar)?.visibility = View.VISIBLE
         }
     }
 

@@ -23,12 +23,14 @@
             android:id="@+id/linLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/player_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -55,108 +57,84 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/player_views_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="10M views    2 days ago " />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/player_views_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10M views    2 days ago " />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginTop="2dp">
-
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_like" />
-
-                        <TextView
-                            android:id="@+id/textLike"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
-                            android:text="4.2K" />
-
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/ic_like"
-                            android:rotation="180"/>
-
-                        <TextView
-                            android:id="@+id/textDislike"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
-                            android:text="1.3K" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/chapters_toggle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/chapters_toggle_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/show_chapters" />
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="2dp">
 
                     <ImageView
-                        android:id="@+id/chapters_toggle_arrow"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_gravity="bottom"
-                        android:src="@drawable/ic_arrow_down" />
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_like" />
+
+                    <TextView
+                        android:id="@+id/textLike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:text="4.2K" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:rotation="180"
+                        android:src="@drawable/ic_like" />
+
+                    <TextView
+                        android:id="@+id/textDislike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:text="1.3K" />
 
                 </LinearLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chapters_recView"
+            <LinearLayout
+                android:id="@+id/desc_linLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/comments_toggle"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:nestedScrollingEnabled="false"
-                android:visibility="gone" />
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/player_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoLink="web"
-                android:padding="8dp"
-                android:textIsSelectable="true"
-                android:textSize="14sp"
-                android:visibility="gone" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chapters_recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/comments_toggle"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_marginTop="20dp"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
 
+                <TextView
+                    android:id="@+id/player_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:padding="8dp"
+                    android:textIsSelectable="true"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.Material3.CardView.Elevated"
@@ -176,12 +154,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -196,12 +169,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_download"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -219,12 +187,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_vlc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -241,12 +204,7 @@
 
                     <LinearLayout
                         android:id="@+id/save"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".25"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -315,6 +273,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:descendantFocusability="blocksDescendants">
 
                 <com.google.android.material.card.MaterialCardView
