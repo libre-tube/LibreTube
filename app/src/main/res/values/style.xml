@@ -30,17 +30,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingRight">20dp</item>
-        <item name="android:paddingTop">15dp</item>
-        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
-
-    </style>
-
-    <style name="HorizontalLine">
-
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.8dp</item>
-        <item name="android:background">@android:color/darker_gray</item>
 
     </style>
 
@@ -68,6 +60,17 @@
         <item name="boxCornerRadiusBottomEnd">15dp</item>
         <item name="boxCornerRadiusTopEnd">15dp</item>
         <item name="boxCornerRadiusTopStart">15dp</item>
+
+    </style>
+
+    <style name="PlayerActionsLayout">
+
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
 
     </style>
 

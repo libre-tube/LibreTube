@@ -12,7 +12,7 @@
     <string name="app_theme">Görünüm</string>
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Kullanıcı adı ve parola girmelisiniz.</string>
-    <string name="notgmail">Bu, LibreTube hesabı içindir.</string>
+    <string name="notgmail">Bu, Piped hesabı içindir.</string>
     <string name="defres">Varsayılan Video Çözünürlüğü</string>
     <string name="deletePlaylist">Oynatma listesini sil</string>
     <string name="createPlaylist">Oynatma Listesi Oluştur</string>
@@ -203,4 +203,8 @@
     <string name="clonePlaylist">Oynatma listesini klonla</string>
     <string name="reset">Varsayılanlara sıfırla</string>
     <string name="reset_message">Emin misin\? Bu, oturumunuzu kapatacak ve tüm ayarlarınızı sıfırlayacaktır!</string>
+    <string name="deleteAccount_summary">Piped hesabınızı silin</string>
+    <string name="account">Hesap</string>
+    <string name="restore">Eski haline getir</string>
+    <string name="deleteAccount">Hesabı sil</string>
 </resources>

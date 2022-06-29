@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.services
 
 import android.app.DownloadManager
 import android.app.PendingIntent
@@ -18,6 +18,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
+import com.github.libretube.R
 import com.github.libretube.util.PreferenceHelper
 import java.io.File
 

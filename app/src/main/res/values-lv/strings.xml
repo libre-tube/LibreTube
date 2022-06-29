@@ -14,7 +14,7 @@
     <string name="defres">Noklusējuma video izšķirtspēja</string>
     <string name="playlistCreated">Atskaņošanas saraksts izveidots.</string>
     <string name="already_logged_in">Jūs jau esat pierakstījies. Jūs varat izrakstīties no sava konta.</string>
-    <string name="notgmail">Šis ir LibreTube kontam.</string>
+    <string name="notgmail">Šis ir Piped kontam.</string>
     <string name="registered">Jūsu konts ir reģistrēts. Tagad varat abonēt kanālus.</string>
     <string name="startpage">Sākums</string>
     <string name="login_register">Pierakstīties/reģistrēties</string>
@@ -203,4 +203,8 @@
     <string name="pauseOnScreenOff_summary">Iepauzēt atskaņotāju, kamēr ekrāns ir izslēgts.</string>
     <string name="autoplay_summary">Automātiski atskaņot nākamo video, kad pašreizējais ir beidzies.</string>
     <string name="clonePlaylist">Duplicēt atskaņošanas sarakstu</string>
+    <string name="deleteAccount">Izdzēst kontu</string>
+    <string name="deleteAccount_summary">Izdzēst Piped kontu</string>
+    <string name="restore">Atjaunot</string>
+    <string name="account">Konts</string>
 </resources>
