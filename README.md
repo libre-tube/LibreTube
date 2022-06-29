@@ -7,7 +7,10 @@
 [![Twitter](https://libre-tube.github.io/assets/tw-widget.svg)](https://twitter.com/libretube)
 [![Reddit](https://libre-tube.github.io/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
  
-[<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" width="45%">](https://f-droid.org/en/packages/com.github.libretube/) [<img src="https://libre-tube.github.io/assets/izzyload.png" alt="Get it on IzzyOnDroid" width="45%">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube) [<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" width="45%">](https://github.com/libre-tube/LibreTube/releases/latest) [<img src="https://libre-tube.github.io/assets/tgload.png" alt="Get it on GitHub" width="45%">](https://t.me/LibreTube)
+[<img src="https://libre-tube.github.io/assets/fdrload.png" alt="Get it on F-Droid" width="32%">](https://f-droid.org/en/packages/com.github.libretube/)
+[<img src="https://libre-tube.github.io/assets/izzyload.png" alt="Get it on IzzyOnDroid" width="32%">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)
+[<img src="https://libre-tube.github.io/assets/ghload.png" alt="Get it on GitHub" width="35%">](https://github.com/libre-tube/LibreTube/releases/latest)
+[<img src="https://libre-tube.github.io/assets/tgload.png" alt="Get it on GitHub" width="35%">](https://t.me/LibreTube)
 
 </div>
 
@@ -15,7 +18,15 @@
 
 <div align="center">
 
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png" width=32% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png" width=32% alt="Search">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png" width=32% alt="Player">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png" width=32% alt="Channel">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png" width=32% alt="Settings">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png" width=32% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png" width=32% alt="Subscriptions List">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png" width=32% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png) [<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png" width=32% alt="Playlist">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png" width=30% alt="Search">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png" width=30% alt="Player">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png" width=30% alt="Channel">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png" width=30% alt="Settings">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png" width=30% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png" width=30% alt="Subscriptions List">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png" width=30% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png" width=30% alt="Playlist">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png)
 
 </div>
 
@@ -54,6 +65,6 @@ If opening an issue without following the issue template, we will ignore the iss
 
 **XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`
 
-## Mirrors (read-only)
+## 🪞 Mirrors (read-only)
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
 <a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
