@@ -166,8 +166,9 @@ class PlayerFragment : Fragment() {
         hideKeyboard()
 
         setSponsorBlockPrefs()
+        createExoPlayer(view)
         initializeTransitionLayout(view)
-        fetchJsonAndInitPlayer(view)
+        playVideo(view)
     }
 
     private fun initializeTransitionLayout(view: View) {
@@ -267,7 +268,7 @@ class PlayerFragment : Fragment() {
         val descLinLayout = view.findViewById<LinearLayout>(R.id.desc_linLayout)
         view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
             val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
-            arrowImageView.animate().rotationBy(180F).setDuration(100).start()
+            arrowImageView.animate().rotationBy(180F).setDuration(250).start()
             descLinLayout.visibility = if (descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
@@ -384,7 +385,12 @@ class PlayerFragment : Fragment() {
         val isScreenOn = pm.isInteractive
 
         // pause player if screen off and setting enabled
-        if (exoPlayer != null && !isScreenOn && pausePlayerOnScreenOffEnabled) {
+        if (
+            this::exoPlayer.isInitialized &&
+            exoPlayer != null &&
+            !isScreenOn &&
+            pausePlayerOnScreenOffEnabled
+        ) {
             exoPlayer.pause()
         }
         super.onPause()
@@ -428,7 +434,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun fetchJsonAndInitPlayer(view: View) {
+    private fun playVideo(view: View) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -456,7 +462,6 @@ class PlayerFragment : Fragment() {
                 relatedStreams = response.relatedStreams
 
                 runOnUiThread {
-                    createExoPlayer(view)
                     if (response.chapters != null) initializeChapters(response.chapters)
                     // set media sources for the player
                     setResolutionAndSubtitles(view, response)
@@ -542,7 +547,7 @@ class PlayerFragment : Fragment() {
         if (videoId != nextStreamId) {
             // save the id of the next stream as videoId and load the next video
             videoId = nextStreamId
-            fetchJsonAndInitPlayer(view!!)
+            playVideo(view!!)
         }
     }
 
@@ -571,7 +576,7 @@ class PlayerFragment : Fragment() {
 
     private fun fetchSponsorBlockSegments() {
         fun run() {
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch(Dispatchers.IO) {
                 if (sponsorBlockPrefs.sponsorBlockEnabled) {
                     val categories: ArrayList<String> = arrayListOf()
                     if (sponsorBlockPrefs.introEnabled) {
@@ -607,14 +612,10 @@ class PlayerFragment : Fragment() {
                         } catch (e: IOException) {
                             println(e)
                             Log.e(TAG, "IOException, you might not have internet connection")
-                            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT)
-                                .show()
-                            return@launchWhenCreated
+                            return@launch
                         } catch (e: HttpException) {
                             Log.e(TAG, "HttpException, unexpected response")
-                            Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT)
-                                .show()
-                            return@launchWhenCreated
+                            return@launch
                         }
                     }
                 }
