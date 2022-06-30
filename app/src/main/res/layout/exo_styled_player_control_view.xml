@@ -28,7 +28,7 @@
         android:background="@color/exo_black_opacity_60" />
 
     <LinearLayout
-        android:id="@+id/top_bar"
+        android:id="@+id/exo_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
         android:layout_gravity="top"
