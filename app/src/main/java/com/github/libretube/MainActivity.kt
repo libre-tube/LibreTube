@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.services.ClosingService
@@ -46,7 +47,9 @@ import com.google.android.material.color.DynamicColors
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
 
-    lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var binding: ActivityMainBinding
+
+    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var toolbar: Toolbar
     lateinit var navController: NavController
 
@@ -76,12 +79,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         } else {
-            setContentView(R.layout.activity_main)
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
-            bottomNavigationView = findViewById(R.id.bottomNav)
             navController = findNavController(R.id.fragment)
-            bottomNavigationView.setupWithNavController(navController)
+            binding.bottomNav.setupWithNavController(navController)
 
             // hide the trending page if enabled
             val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
@@ -94,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 "library" -> navController.navigate(R.id.library)
             }
 
-            bottomNavigationView.setOnItemSelectedListener {
+            binding.bottomNav.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.home2 -> {
                         navController.backQueue.clear()
@@ -112,7 +115,6 @@ class MainActivity : AppCompatActivity() {
                 false
             }
 
-            toolbar = findViewById(R.id.toolbar)
             val typedValue = TypedValue()
             this.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
             val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
@@ -120,15 +122,15 @@ class MainActivity : AppCompatActivity() {
                 "Libre<span  style='color:$hexColor';>Tube</span>",
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
-            toolbar.title = appName
+            binding.toolbar.title = appName
 
-            toolbar.setNavigationOnClickListener {
+            binding.toolbar.setNavigationOnClickListener {
                 // settings activity stuff
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
 
-            toolbar.setOnMenuItemClickListener {
+            binding.toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_search -> {
                         navController.navigate(R.id.searchFragment)
@@ -267,7 +269,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         try {
-            val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
+            val mainMotionLayout = binding.mainMotionLayout
             if (mainMotionLayout.progress == 0.toFloat()) {
                 mainMotionLayout.transitionToEnd()
                 findViewById<ConstraintLayout>(R.id.main_container).isClickable = false

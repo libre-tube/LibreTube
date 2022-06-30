@@ -43,6 +43,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
@@ -102,6 +103,8 @@ var isMiniPlayerVisible = false
 class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
+    private lateinit var binding: FragmentPlayerBinding
+
     private var videoId: String? = null
     private var playlistId: String? = null
     private var sId: Int = 0
@@ -157,8 +160,9 @@ class PlayerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentPlayerBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_player, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -172,17 +176,16 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeTransitionLayout(view: View) {
-        val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
-        relDownloadVideo = view.findViewById(R.id.relPlayer_download)
+
         val mainActivity = activity as MainActivity
-        mainActivity.findViewById<FrameLayout>(R.id.container).visibility = View.VISIBLE
-        val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
-        motionLayout = playerMotionLayout
-        exoPlayerView = view.findViewById(R.id.player)
+        mainActivity.binding.container.visibility = View.VISIBLE
+
+        motionLayout = binding.playerMotionLayout
+        exoPlayerView = binding.player
 
         view.findViewById<TextView>(R.id.player_description).text = videoId
-        playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+        motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
@@ -198,7 +201,7 @@ class PlayerFragment : Fragment() {
             ) {
                 val mainActivity = activity as MainActivity
                 val mainMotionLayout =
-                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    mainActivity.binding.mainMotionLayout
                 mainMotionLayout.progress = abs(progress)
                 exoPlayerView.hideController()
                 eId = endId
@@ -209,7 +212,7 @@ class PlayerFragment : Fragment() {
                 println(currentId)
                 val mainActivity = activity as MainActivity
                 val mainMotionLayout =
-                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
                     isMiniPlayerVisible = true
                     exoPlayerView.useController = false
@@ -230,10 +233,10 @@ class PlayerFragment : Fragment() {
             }
         })
 
-        playerMotionLayout.progress = 1.toFloat()
-        playerMotionLayout.transitionToStart()
+        motionLayout.progress = 1.toFloat()
+        motionLayout.transitionToStart()
 
-        view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
+        binding.closeImageView.setOnClickListener {
             isMiniPlayerVisible = false
             motionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
@@ -251,25 +254,23 @@ class PlayerFragment : Fragment() {
                 .remove(this)
                 .commit()
         }
-        val playImageView = view.findViewById<ImageView>(R.id.play_imageView)
-        playImageView.setOnClickListener {
+        binding.playImageView.setOnClickListener {
             paused = if (paused) {
-                playImageView.setImageResource(R.drawable.ic_pause)
+                binding.playImageView.setImageResource(R.drawable.ic_pause)
                 exoPlayer.play()
                 false
             } else {
-                playImageView.setImageResource(R.drawable.ic_play)
+                binding.playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
                 true
             }
         }
 
         // video description and chapters toggle
-        val descLinLayout = view.findViewById<LinearLayout>(R.id.desc_linLayout)
-        view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
-            arrowImageView.animate().rotationBy(180F).setDuration(250).start()
-            descLinLayout.visibility = if (descLinLayout.isVisible) View.GONE else View.VISIBLE
+        binding.playerTitleLayout.setOnClickListener {
+            binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
+            binding.descLinLayout.visibility =
+                if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
         view.findViewById<MaterialCardView>(R.id.comments_toggle)
@@ -279,8 +280,6 @@ class PlayerFragment : Fragment() {
 
         val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
         val exoTitle = view.findViewById<TextView>(R.id.exo_title)
-        val mainContainer = view.findViewById<ConstraintLayout>(R.id.main_container)
-        val linLayout = view.findViewById<LinearLayout>(R.id.linLayout)
 
         // FullScreen button trigger
         fullScreenButton.setOnClickListener {
@@ -291,8 +290,8 @@ class PlayerFragment : Fragment() {
                     enableTransition(R.id.yt_transition, false)
                 }
 
-                mainContainer.isClickable = true
-                linLayout.visibility = View.GONE
+                binding.mainContainer.isClickable = true
+                binding.linLayout.visibility = View.GONE
                 fullScreenButton.setImageResource(R.drawable.ic_fullscreen_exit)
                 exoTitle.visibility = View.VISIBLE
 
@@ -304,8 +303,8 @@ class PlayerFragment : Fragment() {
                     enableTransition(R.id.yt_transition, true)
                 }
 
-                mainContainer.isClickable = false
-                linLayout.visibility = View.VISIBLE
+                binding.mainContainer.isClickable = false
+                binding.linLayout.visibility = View.VISIBLE
                 fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
                 exoTitle.visibility = View.INVISIBLE
 
@@ -714,7 +713,7 @@ class PlayerFragment : Fragment() {
         // check if livestream
         if (response.duration!! > 0) {
             // download clicked
-            relDownloadVideo.setOnClickListener {
+            binding.relPlayerDownload.setOnClickListener {
                 if (!IS_DOWNLOAD_RUNNING) {
                     val newFragment = DownloadDialog()
                     val bundle = Bundle()
