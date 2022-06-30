@@ -17,6 +17,10 @@ android {
         resValue "string", "app_name", "LibreTube"
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled true
