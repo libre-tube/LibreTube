@@ -969,7 +969,7 @@ class PlayerFragment : Fragment() {
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
-                DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
+                1000 * 10, // exo default is 50s
                 bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
