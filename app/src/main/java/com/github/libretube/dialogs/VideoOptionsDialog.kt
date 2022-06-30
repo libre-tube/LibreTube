@@ -47,7 +47,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     // This for example will be the "Background mode" option
                     0 -> {
                         BackgroundMode.getInstance()
-                            .playOnBackgroundMode(requireContext(), videoId, 0)
+                            .playOnBackgroundMode(requireContext(), videoId)
                     }
                     // Add Video to Playlist Dialog
                     1 -> {

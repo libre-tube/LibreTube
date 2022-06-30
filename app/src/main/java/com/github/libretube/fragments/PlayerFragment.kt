@@ -1006,8 +1006,8 @@ class PlayerFragment : Fragment() {
 
         playerNotification.apply {
             setPlayer(exoPlayer)
-            setUseNextAction(false)
             setUsePreviousAction(false)
+            setUseStopAction(true)
             setMediaSessionToken(mediaSession.sessionToken)
         }
     }
