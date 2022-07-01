@@ -9,22 +9,20 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.util.TypedValue
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
+    private lateinit var binding: DialogDownloadBinding
 
     private lateinit var streams: Streams
     private lateinit var videoId: String
@@ -37,9 +35,7 @@ class DownloadDialog : DialogFragment() {
 
             val mainActivity = activity as MainActivity
             val builder = MaterialAlertDialogBuilder(it)
-            // Get the layout inflater
-            val inflater = requireActivity().layoutInflater
-            var view: View = inflater.inflate(R.layout.dialog_download, null)
+            binding = DialogDownloadBinding.inflate(layoutInflater)
 
             // request storage permissions if not granted yet
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -103,29 +99,27 @@ class DownloadDialog : DialogFragment() {
                 audioUrl.add(audio.url!!)
             }
 
-            val videoSpinner = view.findViewById<Spinner>(R.id.video_spinner)
             val videoArrayAdapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
                 vidName
             )
             videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            videoSpinner.adapter = videoArrayAdapter
-            videoSpinner.setSelection(1)
+            binding.videoSpinner.adapter = videoArrayAdapter
+            binding.videoSpinner.setSelection(1)
 
-            val audioSpinner = view.findViewById<Spinner>(R.id.audio_spinner)
             val audioArrayAdapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
                 audioName
             )
             audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            audioSpinner.adapter = audioArrayAdapter
-            audioSpinner.setSelection(1)
+            binding.audioSpinner.adapter = audioArrayAdapter
+            binding.audioSpinner.setSelection(1)
 
-            view.findViewById<Button>(R.id.download).setOnClickListener {
-                val selectedAudioUrl = audioUrl[audioSpinner.selectedItemPosition]
-                val selectedVideoUrl = vidUrl[videoSpinner.selectedItemPosition]
+            binding.download.setOnClickListener {
+                val selectedAudioUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
+                val selectedVideoUrl = vidUrl[binding.videoSpinner.selectedItemPosition]
 
                 val intent = Intent(context, DownloadService::class.java)
                 intent.putExtra("videoId", videoId)
@@ -143,9 +137,9 @@ class DownloadDialog : DialogFragment() {
                 "Libre<span  style='color:$hexColor';>Tube</span>",
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
-            view.findViewById<TextView>(R.id.title).text = appName
+            binding.title.text = appName
 
-            builder.setView(view)
+            builder.setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

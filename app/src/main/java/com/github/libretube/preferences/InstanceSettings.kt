@@ -22,6 +22,7 @@ import com.github.libretube.R
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
+import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
@@ -140,9 +141,15 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val login = findPreference<Preference>("login_register")
         login?.setOnPreferenceClickListener {
-            requireMainActivityRestart = true
-            val newFragment = LoginDialog()
-            newFragment.show(childFragmentManager, "Login")
+            val token = PreferenceHelper.getToken(requireContext())
+            if (token == "") {
+                val newFragment = LoginDialog()
+                newFragment.show(childFragmentManager, "Login")
+            } else {
+                val newFragment = LogoutDialog()
+                newFragment.show(childFragmentManager, "Logout")
+            }
+
             true
         }
 

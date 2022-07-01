@@ -24,6 +24,7 @@
     <Button
         android:id="@+id/logout"
         style="@style/CustomDialogButton"
+        android:layout_marginRight="16dp"
         android:text="@string/logout" />
 
 </LinearLayout>

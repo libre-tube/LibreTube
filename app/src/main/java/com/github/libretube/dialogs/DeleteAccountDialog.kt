@@ -4,14 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.obj.DeleteUserRequest
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.PreferenceHelper
@@ -20,22 +18,20 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DeleteAccountDialog : DialogFragment() {
     private val TAG = "DeleteAccountDialog"
-    lateinit var username: EditText
-    lateinit var password: EditText
+    private lateinit var binding: DialogDeleteAccountBinding
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = MaterialAlertDialogBuilder(it)
-            val inflater = requireActivity().layoutInflater
-            val view = inflater.inflate(R.layout.dialog_delete_account, null)
+            binding = DialogDeleteAccountBinding.inflate(layoutInflater)
 
-            view.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+            binding.cancelButton.setOnClickListener {
                 dialog?.dismiss()
             }
 
-            password = view.findViewById(R.id.delete_password)
-            view.findViewById<Button>(R.id.delete_account_confirm).setOnClickListener {
-                if (password.text.toString() != "") {
-                    deleteAccount(password.text.toString())
+            binding.deleteAccountConfirm.setOnClickListener {
+                if (binding.deletePassword.text.toString() != "") {
+                    deleteAccount(binding.deletePassword.text.toString())
                 } else {
                     Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
                 }
@@ -48,9 +44,9 @@ class DeleteAccountDialog : DialogFragment() {
                 "Libre<span  style='color:$hexColor';>Tube</span>",
                 HtmlCompat.FROM_HTML_MODE_COMPACT
             )
-            view.findViewById<TextView>(R.id.title).text = appName
+            binding.title.text = appName
 
-            builder.setView(view)
+            builder.setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
