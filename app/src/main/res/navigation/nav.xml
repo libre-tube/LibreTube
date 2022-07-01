@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="com.github.libretube.fragments.Home"
+        android:name="com.github.libretube.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/subscriptions"
-        android:name="com.github.libretube.fragments.Subscriptions"
+        android:name="com.github.libretube.fragments.SubscriptionsFragment"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/library"
-        android:name="com.github.libretube.fragments.Library"
+        android:name="com.github.libretube.fragments.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library"></fragment>
     <fragment

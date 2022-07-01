@@ -5,12 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.github.libretube.util.PreferenceHelper
@@ -27,6 +26,8 @@ class PlaylistsAdapter(
     private val activity: Activity
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
     val TAG = "PlaylistsAdapter"
+    private lateinit var binding: PlaylistsRowBinding
+
     override fun getItemCount(): Int {
         return playlists.size
     }
@@ -38,37 +39,38 @@ class PlaylistsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.playlists_row, parent, false)
-        return PlaylistsViewHolder(cell)
+        binding = PlaylistsRowBinding.inflate(layoutInflater, parent, false)
+        return PlaylistsViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
         val playlist = playlists[position]
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.playlist_thumbnail)
-        Picasso.get().load(playlist.thumbnail).into(thumbnailImage)
-        // set imageview drawable as empty playlist if imageview empty
-        if (thumbnailImage.drawable == null) {
-            thumbnailImage.setImageResource(R.drawable.ic_empty_playlist)
-            thumbnailImage.setBackgroundColor(R.attr.colorSurface)
-        }
-        holder.v.findViewById<TextView>(R.id.playlist_title).text = playlist.name
-        holder.v.findViewById<ImageView>(R.id.delete_playlist).setOnClickListener {
-            val builder = MaterialAlertDialogBuilder(holder.v.context)
-            builder.setTitle(R.string.deletePlaylist)
-            builder.setMessage(R.string.areYouSure)
-            builder.setPositiveButton(R.string.yes) { _, _ ->
-                val token = PreferenceHelper.getToken(holder.v.context)
-                deletePlaylist(playlist.id!!, token, position)
+        binding.apply {
+            Picasso.get().load(playlist.thumbnail).into(playlistThumbnail)
+            // set imageview drawable as empty playlist if imageview empty
+            if (playlistThumbnail.drawable == null) {
+                playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)
+                playlistThumbnail.setBackgroundColor(R.attr.colorSurface)
             }
-            builder.setNegativeButton(R.string.cancel) { _, _ ->
+            playlistTitle.text = playlist.name
+            deletePlaylist.setOnClickListener {
+                val builder = MaterialAlertDialogBuilder(holder.v.context)
+                builder.setTitle(R.string.deletePlaylist)
+                builder.setMessage(R.string.areYouSure)
+                builder.setPositiveButton(R.string.yes) { _, _ ->
+                    val token = PreferenceHelper.getToken(holder.v.context)
+                    deletePlaylist(playlist.id!!, token, position)
+                }
+                builder.setNegativeButton(R.string.cancel) { _, _ ->
+                }
+                builder.show()
             }
-            builder.show()
-        }
-        holder.v.setOnClickListener {
-            // playlists clicked
-            val activity = holder.v.context as MainActivity
-            val bundle = bundleOf("playlist_id" to playlist.id)
-            activity.navController.navigate(R.id.playlistFragment, bundle)
+            root.setOnClickListener {
+                // playlists clicked
+                val activity = holder.v.context as MainActivity
+                val bundle = bundleOf("playlist_id" to playlist.id)
+                activity.navController.navigate(R.id.playlistFragment, bundle)
+            }
         }
     }
 

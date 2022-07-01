@@ -7,12 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
@@ -34,6 +33,8 @@ class PlaylistAdapter(
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
     private val TAG = "PlaylistAdapter"
+    private lateinit var binding: PlaylistRowBinding
+
     override fun getItemCount(): Int {
         return videoFeed.size
     }
@@ -45,45 +46,44 @@ class PlaylistAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.playlist_row, parent, false)
-        return PlaylistViewHolder(cell)
+        binding = PlaylistRowBinding.inflate(layoutInflater, parent, false)
+        return PlaylistViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val streamItem = videoFeed[position]
-        holder.v.findViewById<TextView>(R.id.playlist_title).text = streamItem.title
-        holder.v.findViewById<TextView>(R.id.playlist_description).text = streamItem.uploaderName
-        holder.v.findViewById<TextView>(R.id.playlist_duration).text =
-            DateUtils.formatElapsedTime(streamItem.duration!!)
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.playlist_thumbnail)
-        Picasso.get().load(streamItem.thumbnail).into(thumbnailImage)
-        holder.v.setOnClickListener {
-            var bundle = Bundle()
-            bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
-            bundle.putString("playlistId", playlistId)
-            var frag = PlayerFragment()
-            frag.arguments = bundle
-            val activity = holder.v.context as AppCompatActivity
-            activity.supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
-        }
-        holder.v.setOnLongClickListener {
-            val videoId = streamItem.url!!.replace("/watch?v=", "")
-            VideoOptionsDialog(videoId, holder.v.context)
-                .show(childFragmentManager, VideoOptionsDialog.TAG)
-            true
-        }
+        binding.apply {
+            playlistTitle.text = streamItem.title
+            playlistDescription.text = streamItem.uploaderName
+            playlistDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
+            Picasso.get().load(streamItem.thumbnail).into(playlistThumbnail)
+            root.setOnClickListener {
+                var bundle = Bundle()
+                bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
+                bundle.putString("playlistId", playlistId)
+                var frag = PlayerFragment()
+                frag.arguments = bundle
+                val activity = holder.v.context as AppCompatActivity
+                activity.supportFragmentManager.beginTransaction()
+                    .remove(PlayerFragment())
+                    .commit()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, frag)
+                    .commitNow()
+            }
+            root.setOnLongClickListener {
+                val videoId = streamItem.url!!.replace("/watch?v=", "")
+                VideoOptionsDialog(videoId, holder.v.context)
+                    .show(childFragmentManager, VideoOptionsDialog.TAG)
+                true
+            }
 
-        if (isOwner) {
-            val delete = holder.v.findViewById<ImageView>(R.id.delete_playlist)
-            delete.visibility = View.VISIBLE
-            delete.setOnClickListener {
-                val token = PreferenceHelper.getToken(holder.v.context)
-                removeFromPlaylist(token, position)
+            if (isOwner) {
+                deletePlaylist.visibility = View.VISIBLE
+                deletePlaylist.setOnClickListener {
+                    val token = PreferenceHelper.getToken(holder.v.context)
+                    removeFromPlaylist(token, position)
+                }
             }
         }
     }
@@ -111,10 +111,6 @@ class PlaylistAdapter(
                         videoFeed.removeAt(position)
                         // FIXME: This needs to run on UI thread?
                         activity.runOnUiThread { notifyDataSetChanged() }
-
-                        /*if(playlists.isEmpty()){
-                            view.findViewById<ImageView>(R.id.boogh2).visibility=View.VISIBLE
-                        }*/
                     }
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())

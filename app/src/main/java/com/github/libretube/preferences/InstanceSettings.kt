@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -19,9 +18,11 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
+import com.github.libretube.SettingsActivity
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
+import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.requireMainActivityRestart
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
@@ -110,8 +111,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
 
-        val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
-        topBarTextView?.text = getString(R.string.instance)
+        val settingsActivity = activity as SettingsActivity
+        settingsActivity.binding.topBarTextView.text = getString(R.string.instance)
 
         val instance = findPreference<ListPreference>("selectInstance")
         // fetchInstance()
@@ -140,9 +141,15 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val login = findPreference<Preference>("login_register")
         login?.setOnPreferenceClickListener {
-            requireMainActivityRestart = true
-            val newFragment = LoginDialog()
-            newFragment.show(childFragmentManager, "Login")
+            val token = PreferenceHelper.getToken(requireContext())
+            if (token == "") {
+                val newFragment = LoginDialog()
+                newFragment.show(childFragmentManager, "Login")
+            } else {
+                val newFragment = LogoutDialog()
+                newFragment.show(childFragmentManager, "Logout")
+            }
+
             true
         }
 
