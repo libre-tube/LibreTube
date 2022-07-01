@@ -76,7 +76,7 @@
     <string name="choose_filter">Arama filtresi seç</string>
     <string name="category_outro_description">Sonunu takip eden bilgi. Bilgi içeren sonuçlar için değil.</string>
     <string name="sponsorblock_state">Açık</string>
-    <string name="clear_history">Geçmişi Temizle</string>
+    <string name="clear_history">Geçmişi temizle</string>
     <string name="sponsorblock">SponsorBlok</string>
     <string name="channels">Kanallar</string>
     <string name="playlists">Oynatma Listeleri</string>
@@ -207,4 +207,5 @@
     <string name="account">Hesap</string>
     <string name="restore">Sıfırla</string>
     <string name="deleteAccount">Hesabı sil</string>
+    <string name="watch_history">İzleme geçmişi</string>
 </resources>
