@@ -1,10 +1,11 @@
-package com.github.libretube
+package com.github.libretube.activities
 
 import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.preferences.MainSettings
 import com.github.libretube.util.ThemeHelper

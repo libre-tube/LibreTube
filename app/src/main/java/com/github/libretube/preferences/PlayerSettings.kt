@@ -3,7 +3,7 @@ package com.github.libretube.preferences
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
-import com.github.libretube.SettingsActivity
+import com.github.libretube.activities.SettingsActivity
 
 class PlayerSettings : PreferenceFragmentCompat() {
     val TAG = "PlayerSettings"

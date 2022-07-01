@@ -19,11 +19,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
@@ -33,8 +28,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
+import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
@@ -42,7 +38,6 @@ import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
-import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Playlist
@@ -80,7 +75,6 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -233,7 +227,7 @@ class PlayerFragment : Fragment() {
                 .remove(this)
                 .commit()
         }
-        view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener {
+        binding.player.binding.closeImageButton.setOnClickListener {
             isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
@@ -261,13 +255,12 @@ class PlayerFragment : Fragment() {
                 if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
-        view.findViewById<MaterialCardView>(R.id.comments_toggle)
-            .setOnClickListener {
-                toggleComments()
-            }
+        binding.commentsToggle.setOnClickListener {
+            toggleComments()
+        }
 
-        val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
-        val exoTitle = view.findViewById<TextView>(R.id.exo_title)
+        val fullScreenButton = binding.player.binding.fullscreen
+        val exoTitle = binding.player.binding.exoTitle
 
         // FullScreen button trigger
         fullScreenButton.setOnClickListener {
@@ -303,7 +296,8 @@ class PlayerFragment : Fragment() {
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        view.findViewById<ImageButton>(R.id.aspect_ratio_button).setOnClickListener {
+        val aspectRatioButton = binding.player.binding.aspectRatioButton
+        aspectRatioButton.setOnClickListener {
             if (isZoomed) {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 isZoomed = false
@@ -314,7 +308,7 @@ class PlayerFragment : Fragment() {
         }
 
         // lock and unlock the player
-        val lockPlayerButton = view.findViewById<ImageButton>(R.id.lock_player)
+        val lockPlayerButton = binding.player.binding.lockPlayer
         lockPlayerButton.setOnClickListener {
             // change the locked/unlocked icon
             if (!isPlayerLocked) {
@@ -630,7 +624,7 @@ class PlayerFragment : Fragment() {
         binding.playerTitle.text = response.title
         binding.playerDescription.text = response.description
 
-        view.findViewById<TextView>(R.id.exo_title).text = response.title
+        binding.player.binding.exoTitle.text = response.title
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -802,8 +796,8 @@ class PlayerFragment : Fragment() {
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
-        val qualityText = view.findViewById<TextView>(R.id.quality_text)
-        val qualitySelect = view.findViewById<LinearLayout>(R.id.quality_linLayout)
+        val qualityText = binding.player.binding.qualityText
+        val qualitySelect = binding.player.binding.qualitySelect
 
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
@@ -987,12 +981,12 @@ class PlayerFragment : Fragment() {
 
     private fun lockPlayer(isLocked: Boolean) {
         val visibility = if (isLocked) View.VISIBLE else View.INVISIBLE
-        exoPlayerView.findViewById<LinearLayout>(R.id.exo_top_bar_right).visibility = visibility
-        exoPlayerView.findViewById<ImageButton>(R.id.exo_play_pause).visibility = visibility
-        exoPlayerView.findViewById<Button>(R.id.exo_ffwd_with_amount).visibility = visibility
-        exoPlayerView.findViewById<Button>(R.id.exo_rew_with_amount).visibility = visibility
-        exoPlayerView.findViewById<FrameLayout>(R.id.exo_bottom_bar).visibility = visibility
-        exoPlayerView.findViewById<TextView>(R.id.exo_title).visibility =
+        binding.player.binding.exoTopBarRight.visibility = visibility
+        binding.player.binding.exoPlayPause.visibility = visibility
+        binding.player.binding.exoFfwdWithAmount.visibility = visibility
+        binding.player.binding.exoRewWithAmount.visibility = visibility
+        binding.player.binding.exoBottomBar.visibility = visibility
+        binding.player.binding.exoTitle.visibility =
             if (isLocked && isFullScreen) View.VISIBLE else View.INVISIBLE
     }
 
@@ -1154,7 +1148,7 @@ class PlayerFragment : Fragment() {
                 enableTransition(R.id.yt_transition, false)
             }
             binding.mainContainer.isClickable = true
-            view?.findViewById<LinearLayout>(R.id.exo_top_bar)?.visibility = View.GONE
+            binding.player.binding.exoTopBar.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
@@ -1166,7 +1160,7 @@ class PlayerFragment : Fragment() {
             exoPlayerView.showController()
             exoPlayerView.useController = true
             binding.mainContainer.isClickable = false
-            view?.findViewById<LinearLayout>(R.id.exo_top_bar)?.visibility = View.VISIBLE
+            binding.player.binding.exoTopBar.visibility = View.VISIBLE
         }
     }
 

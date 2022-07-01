@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
-import com.github.libretube.SettingsActivity
-import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

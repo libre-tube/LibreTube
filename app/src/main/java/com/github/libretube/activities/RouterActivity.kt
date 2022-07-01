@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.activities
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.github.libretube.R
 import com.github.libretube.util.ThemeHelper
 
 class RouterActivity : AppCompatActivity() {

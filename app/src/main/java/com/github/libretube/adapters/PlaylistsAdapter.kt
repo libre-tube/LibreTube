@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists

@@ -3,7 +3,6 @@ package com.github.libretube.util
 import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.BuildConfig
-import com.github.libretube.GITHUB_API_URL
 import com.github.libretube.dialogs.NoUpdateAvailableDialog
 import com.github.libretube.dialogs.UpdateAvailableDialog
 import com.github.libretube.obj.UpdateInfo

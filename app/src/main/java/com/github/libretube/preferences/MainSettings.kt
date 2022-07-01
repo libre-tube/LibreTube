@@ -8,8 +8,8 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
-import com.github.libretube.isCurrentViewMainSettings
-import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.activities.isCurrentViewMainSettings
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.checkUpdate
 
