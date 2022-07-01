@@ -46,7 +46,8 @@ class LibraryFragment : Fragment() {
         token = PreferenceHelper.getToken(requireContext())
 
         // hide watch history button of history disabled
-        val watchHistoryEnabled = PreferenceHelper.getBoolean(requireContext(), "watch_history_toggle", true)
+        val watchHistoryEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "watch_history_toggle", true)
         if (!watchHistoryEnabled) {
             binding.showWatchHistory.visibility = View.GONE
         } else {

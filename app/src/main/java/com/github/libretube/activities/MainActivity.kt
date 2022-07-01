@@ -79,7 +79,8 @@ class MainActivity : AppCompatActivity() {
 
             // hide the trending page if enabled
             val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
-            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.homeFragment).isVisible = false
+            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.homeFragment).isVisible =
+                false
 
             // navigate to the default start tab
             when (PreferenceHelper.getString(this, "default_tab", "home")) {
