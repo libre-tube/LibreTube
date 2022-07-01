@@ -207,4 +207,5 @@
     <string name="deleteAccount">Supprimer le compte</string>
     <string name="account">Compte</string>
     <string name="restore">Restaurer</string>
+    <string name="watch_history">Regarder l’historique</string>
 </resources>
