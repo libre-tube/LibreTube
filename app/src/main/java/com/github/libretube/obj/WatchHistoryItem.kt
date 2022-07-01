@@ -5,6 +5,7 @@ data class WatchHistoryItem(
     val title: String?,
     val uploadDate: String?,
     val uploader: String?,
+    val uploaderAvatar: String?,
     val uploaderUrl: String?,
     val thumbnailUrl: String?,
     val duration: Int?

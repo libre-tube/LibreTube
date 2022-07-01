@@ -137,6 +137,7 @@ object PreferenceHelper {
             streams.uploadDate,
             streams.uploader,
             streams.uploaderUrl?.replace("/channel/", ""),
+            streams.uploaderAvatar,
             streams.thumbnailUrl,
             streams.duration
         )
