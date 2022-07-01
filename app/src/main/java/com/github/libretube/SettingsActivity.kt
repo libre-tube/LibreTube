@@ -3,11 +3,9 @@ package com.github.libretube
 import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.preferences.MainSettings
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
@@ -17,24 +15,27 @@ var requireMainActivityRestart = false
 
 class SettingsActivity : AppCompatActivity() {
     val TAG = "SettingsActivity"
+    lateinit var binding: ActivitySettingsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
         ThemeHelper.updateTheme(this)
+
         // makes the preference dialogs use material dialogs
         setTheme(R.style.MaterialAlertDialog)
 
         super.onCreate(savedInstanceState)
+
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             overridePendingTransition(50, 50)
         }
-        val view = this.findViewById<View>(android.R.id.content)
-        view.alpha = 0F
-        view.animate().alpha(1F).duration = 300
+        binding.root.alpha = 0F
+        binding.root.animate().alpha(1F).duration = 300
 
-        setContentView(R.layout.activity_settings)
+        setContentView(binding.root)
 
-        val backButton = view.findViewById<ImageButton>(R.id.back_imageButton)
-        backButton.setOnClickListener {
+        binding.backImageButton.setOnClickListener {
             onBackPressed()
         }
 
@@ -66,8 +67,7 @@ class SettingsActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.settings, MainSettings())
                 .commit()
-            val topBarTextView = findViewById<TextView>(R.id.topBar_textView)
-            topBarTextView?.text = getString(R.string.settings)
+            binding.topBarTextView.text = getString(R.string.settings)
         }
     }
 }

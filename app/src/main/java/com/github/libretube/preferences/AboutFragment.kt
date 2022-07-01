@@ -17,15 +17,19 @@ import com.github.libretube.DONATE_URL
 import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
 import com.github.libretube.WEBSITE_URL
+import com.github.libretube.databinding.FragmentAboutBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AboutFragment : Fragment() {
+    private lateinit var binding: FragmentAboutBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
+    ): View {
+        binding = FragmentAboutBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

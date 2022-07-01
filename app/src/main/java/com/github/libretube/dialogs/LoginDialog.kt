@@ -29,7 +29,8 @@ class LoginDialog : DialogFragment() {
 
             binding.login.setOnClickListener {
                 if (binding.username.text.toString() != "" && binding.password.text.toString() != "") {
-                    val login = Login(binding.username.text.toString(), binding.password.text.toString())
+                    val login =
+                        Login(binding.username.text.toString(), binding.password.text.toString())
                     login(login)
                 } else {
                     Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
