@@ -47,5 +47,5 @@
         android:id="@+id/watchHistoryFragment"
         android:name="com.github.libretube.fragments.WatchHistoryFragment"
         android:label="@string/watch_history"
-        tools:layout="@layout/fragment_watch_history"/>
+        tools:layout="@layout/fragment_watch_history" />
 </navigation>

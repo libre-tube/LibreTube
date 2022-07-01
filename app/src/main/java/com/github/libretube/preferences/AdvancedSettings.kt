@@ -1,6 +1,8 @@
 package com.github.libretube.preferences
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
@@ -49,7 +51,8 @@ class AdvancedSettings : PreferenceFragmentCompat() {
                 PreferenceHelper.setToken(requireContext(), "")
 
                 requireMainActivityRestart = true
-                activity?.recreate()
+                val intent = Intent(context, SettingsActivity::class.java)
+                startActivity(intent)
             }
             .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
             .setTitle(R.string.reset)

@@ -27,7 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.NoInternetActivity"
-            android:label="@string/noInternet"/>
+            android:label="@string/noInternet" />
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/settings" />

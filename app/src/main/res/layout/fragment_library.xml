@@ -11,88 +11,88 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/showWatchHistory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="?attr/selectableItemBackground"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/showWatchHistory"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_time_outlined"
-            android:layout_gravity="center"/>
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="@string/watch_history"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_time_outlined" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/watch_history"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/loginOrRegister2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/boogh"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_login" />
-
-        <TextView
-            android:id="@+id/text_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/boogh"
+        <RelativeLayout
+            android:id="@+id/loginOrRegister2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="@string/please_login"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+            android:layout_centerVertical="true">
 
-    <com.github.libretube.util.CustomSwipeToRefresh
-        android:id="@+id/playlist_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/boogh"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_login" />
 
-        <ScrollView
-            android:id="@+id/scrollview_playlist"
+            <TextView
+                android:id="@+id/text_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/boogh"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/please_login"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <com.github.libretube.util.CustomSwipeToRefresh
+            android:id="@+id/playlist_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <ScrollView
+                android:id="@+id/scrollview_playlist"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:descendantFocusability="blocksDescendants">
+                    android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/playlist_recView"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:nestedScrollingEnabled="false" />
+                        android:descendantFocusability="blocksDescendants">
 
-                </RelativeLayout>
-            </LinearLayout>
-        </ScrollView>
-    </com.github.libretube.util.CustomSwipeToRefresh>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/playlist_recView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:nestedScrollingEnabled="false" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+        </com.github.libretube.util.CustomSwipeToRefresh>
 
     </LinearLayout>
 

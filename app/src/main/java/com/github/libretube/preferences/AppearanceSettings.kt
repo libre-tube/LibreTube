@@ -1,6 +1,8 @@
 package com.github.libretube.preferences
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -28,7 +30,8 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         val accentColor = findPreference<Preference>("accent_color")
         accentColor?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
-            activity?.recreate()
+            val intent = Intent(context, SettingsActivity::class.java)
+            startActivity(intent)
             true
         }
 

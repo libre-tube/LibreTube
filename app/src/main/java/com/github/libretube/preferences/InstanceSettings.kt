@@ -2,6 +2,7 @@ package com.github.libretube.preferences
 
 import android.Manifest
 import android.content.ContentResolver
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -135,7 +136,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
         clearCustomInstances?.setOnPreferenceClickListener {
             PreferenceHelper.removePreference(requireContext(), "customInstances")
-            activity?.recreate()
+            val intent = Intent(context, SettingsActivity::class.java)
+            startActivity(intent)
             true
         }
 
