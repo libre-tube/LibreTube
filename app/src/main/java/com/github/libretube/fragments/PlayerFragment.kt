@@ -19,11 +19,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
@@ -33,8 +28,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
+import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
@@ -42,7 +38,6 @@ import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
-import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Playlist
@@ -261,8 +256,8 @@ class PlayerFragment : Fragment() {
         }
 
         binding.commentsToggle.setOnClickListener {
-                toggleComments()
-            }
+            toggleComments()
+        }
 
         val fullScreenButton = binding.player.binding.fullscreen
         val exoTitle = binding.player.binding.exoTitle

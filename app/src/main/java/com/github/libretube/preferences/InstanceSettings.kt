@@ -19,11 +19,11 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
-import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import org.json.JSONObject

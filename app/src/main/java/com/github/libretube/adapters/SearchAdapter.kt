@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.ChannelSearchRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoSearchRowBinding
