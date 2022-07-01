@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-import android.R.attr.data
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -18,7 +17,6 @@ import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.WatchHistoryItem
 import com.squareup.picasso.Picasso
-
 
 class WatchHistoryAdapter(
     private val watchHistory: MutableList<WatchHistoryItem>,

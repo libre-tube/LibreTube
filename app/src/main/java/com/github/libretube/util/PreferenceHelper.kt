@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.preference.PreferenceManager
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.Streams
@@ -150,7 +149,6 @@ object PreferenceHelper {
             if (item.videoId == videoId) indexToRemove = index
         }
         if (indexToRemove != Int.MAX_VALUE) watchHistory.removeAt(indexToRemove)
-
 
         watchHistory += watchHistoryItem
 

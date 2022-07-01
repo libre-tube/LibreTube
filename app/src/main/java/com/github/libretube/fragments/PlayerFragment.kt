@@ -457,8 +457,9 @@ class PlayerFragment : Fragment() {
                     initAutoPlay()
                     val watchHistoryEnabled =
                         PreferenceHelper.getBoolean(requireContext(), "Watch_history_toggle", true)
-                    if (watchHistoryEnabled)
+                    if (watchHistoryEnabled) {
                         PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
+                    }
                 }
             }
         }

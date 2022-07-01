@@ -30,7 +30,6 @@ class WatchHistoryFragment : Fragment() {
         val watchHistoryAdapter = WatchHistoryAdapter(watchHistory, childFragmentManager)
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
 
-
         binding.clearHistory.setOnClickListener {
             PreferenceHelper.removePreference(requireContext(), "watch_history")
             watchHistoryAdapter.clear()
