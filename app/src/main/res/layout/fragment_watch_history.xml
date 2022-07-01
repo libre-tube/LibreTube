@@ -4,15 +4,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/watch_history" />
+        android:paddingHorizontal="8dp"
+        android:layout_marginBottom="8dp" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/watch_history"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/clearHistory"
+            android:layout_gravity="center"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_trash"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/watchHistoryRecView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:nestedScrollingEnabled="false"/>
 
 </LinearLayout>

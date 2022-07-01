@@ -143,6 +143,15 @@ object PreferenceHelper {
         )
 
         val watchHistory = getWatchHistory(context)
+
+        // delete entries that have the same videoId
+        var indexToRemove = Int.MAX_VALUE
+        watchHistory.forEachIndexed { index, item ->
+            if (item.videoId == videoId) indexToRemove = index
+        }
+        if (indexToRemove != Int.MAX_VALUE) watchHistory.removeAt(indexToRemove)
+
+
         watchHistory += watchHistoryItem
 
         val json = gson.toJson(watchHistory)

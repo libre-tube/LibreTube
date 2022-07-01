@@ -27,7 +27,20 @@ class WatchHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val watchHistory = PreferenceHelper.getWatchHistory(requireContext())
-        binding.watchHistoryRecView.adapter = WatchHistoryAdapter(watchHistory)
-        binding.watchHistoryRecView.layoutManager = LinearLayoutManager(view.context)
+        val watchHistoryAdapter = WatchHistoryAdapter(watchHistory, childFragmentManager)
+        binding.watchHistoryRecView.adapter = watchHistoryAdapter
+
+
+        binding.clearHistory.setOnClickListener {
+            PreferenceHelper.removePreference(requireContext(), "watch_history")
+            watchHistoryAdapter.clear()
+        }
+
+        // reverse order
+        val linearLayoutManager = LinearLayoutManager(view.context)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+
+        binding.watchHistoryRecView.layoutManager = linearLayoutManager
     }
 }

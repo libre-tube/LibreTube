@@ -45,8 +45,14 @@ class LibraryFragment : Fragment() {
         binding.playlistRecView.layoutManager = LinearLayoutManager(view.context)
         token = PreferenceHelper.getToken(requireContext())
 
-        binding.showWatchHistory.setOnClickListener {
-            findNavController().navigate(R.id.watchHistoryFragment)
+        // hide watch history button of history disabled
+        val watchHistoryEnabled = PreferenceHelper.getBoolean(requireContext(), "watch_history_toggle", true)
+        if (!watchHistoryEnabled) {
+            binding.showWatchHistory.visibility = View.GONE
+        } else {
+            binding.showWatchHistory.setOnClickListener {
+                findNavController().navigate(R.id.watchHistoryFragment)
+            }
         }
 
         if (token != "") {
