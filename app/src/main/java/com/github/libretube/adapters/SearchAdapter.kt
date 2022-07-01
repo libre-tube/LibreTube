@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.databinding.ChannelSearchRowBinding
+import com.github.libretube.databinding.PlaylistSearchRowBinding
+import com.github.libretube.databinding.VideoSearchRowBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
@@ -37,15 +40,15 @@ class SearchAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val layout = when (viewType) {
-            0 -> R.layout.video_search_row
-            1 -> R.layout.channel_search_row
-            2 -> R.layout.playlist_search_row
+        val layoutInflater = LayoutInflater.from(parent.context)
+
+        val binding = when (viewType) {
+            0 -> VideoSearchRowBinding.inflate(layoutInflater, parent, false)
+            1 -> ChannelSearchRowBinding.inflate(layoutInflater, parent, false)
+            2 -> PlaylistSearchRowBinding.inflate(layoutInflater, parent, false)
             else -> throw IllegalArgumentException("Invalid type")
         }
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(layout, parent, false)
-        return SearchViewHolder(cell, childFragmentManager)
+        return SearchViewHolder(binding.root, childFragmentManager)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

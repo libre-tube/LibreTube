@@ -19,8 +19,6 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -50,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var toolbar: Toolbar
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,14 +67,8 @@ class MainActivity : AppCompatActivity() {
 
         // show noInternet Activity if no internet available on app startup
         if (!isNetworkAvailable(this)) {
-            setContentView(R.layout.activity_nointernet)
-            findViewById<Button>(R.id.retry_button).setOnClickListener {
-                recreate()
-            }
-            findViewById<ImageView>(R.id.noInternet_settingsImageView).setOnClickListener {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-            }
+            val noInternetIntent = Intent(this, NoInternetActivity::class.java)
+            startActivity(noInternetIntent)
         } else {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
@@ -286,7 +277,6 @@ class MainActivity : AppCompatActivity() {
                 navController.popBackStack()
             }
         } catch (e: Exception) {
-            // try catch to prevent nointernet activity to crash
             try {
                 navController.popBackStack()
                 moveTaskToBack(true)
@@ -362,10 +352,6 @@ class MainActivity : AppCompatActivity() {
 
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
-}
-
-fun Activity.hideKeyboard() {
-    hideKeyboard(currentFocus ?: View(this))
 }
 
 fun Context.hideKeyboard(view: View) {

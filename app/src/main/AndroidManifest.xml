@@ -24,8 +24,10 @@
         <activity
             android:name=".util.Player"
             android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:exported="false" />
+        <activity
+            android:name=".NoInternetActivity"
+            android:label="@string/noInternet"/>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings" />
