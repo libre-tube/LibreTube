@@ -79,28 +79,28 @@ class MainActivity : AppCompatActivity() {
 
             // hide the trending page if enabled
             val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
-            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.home2).isVisible = false
+            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.homeFragment).isVisible = false
 
             // navigate to the default start tab
             when (PreferenceHelper.getString(this, "default_tab", "home")) {
-                "home" -> navController.navigate(R.id.home2)
-                "subscriptions" -> navController.navigate(R.id.subscriptions)
-                "library" -> navController.navigate(R.id.library)
+                "home" -> navController.navigate(R.id.homeFragment)
+                "subscriptions" -> navController.navigate(R.id.subscriptionsFragment)
+                "library" -> navController.navigate(R.id.libraryFragment)
             }
 
             binding.bottomNav.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.home2 -> {
+                    R.id.homeFragment -> {
                         navController.backQueue.clear()
-                        navController.navigate(R.id.home2)
+                        navController.navigate(R.id.homeFragment)
                     }
-                    R.id.subscriptions -> {
+                    R.id.subscriptionsFragment -> {
                         // navController.backQueue.clear()
-                        navController.navigate(R.id.subscriptions)
+                        navController.navigate(R.id.subscriptionsFragment)
                     }
-                    R.id.library -> {
+                    R.id.libraryFragment -> {
                         // navController.backQueue.clear()
-                        navController.navigate(R.id.library)
+                        navController.navigate(R.id.libraryFragment)
                     }
                 }
                 false
@@ -176,7 +176,7 @@ class MainActivity : AppCompatActivity() {
             channel = channel!!.replace("/c/", "")
             channel = channel.replace("/user/", "")
             val bundle = bundleOf("channel_id" to channel)
-            navController.navigate(R.id.channel, bundle)
+            navController.navigate(R.id.channelFragment, bundle)
         } else if (data.path!!.contains("/playlist")) {
             Log.i(TAG, "URI Type: Playlist")
             var playlist = data.query!!

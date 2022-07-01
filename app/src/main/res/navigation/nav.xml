@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/home2">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/home2"
+        android:id="@+id/homeFragment"
         android:name="com.github.libretube.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/subscriptions"
+        android:id="@+id/subscriptionsFragment"
         android:name="com.github.libretube.fragments.SubscriptionsFragment"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
-        android:id="@+id/library"
+        android:id="@+id/libraryFragment"
         android:name="com.github.libretube.fragments.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library"></fragment>
@@ -26,7 +26,7 @@
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
-        android:id="@+id/channel"
+        android:id="@+id/channelFragment"
         android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
         tools:layout="@layout/fragment_channel">
@@ -44,7 +44,8 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/settings"
-        android:name="com.github.libretube.SettingsActivity$SettingsFragment"
-        android:label="Settings" />
+        android:id="@+id/watchHistoryFragment"
+        android:name="com.github.libretube.fragments.WatchHistoryFragment"
+        android:label="@string/watch_history"
+        tools:layout="@layout/fragment_watch_history"/>
 </navigation>

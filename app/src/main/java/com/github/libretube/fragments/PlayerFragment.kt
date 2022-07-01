@@ -746,7 +746,7 @@ class PlayerFragment : Fragment() {
         binding.playerChannel.setOnClickListener {
             val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to response.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
@@ -43,6 +44,11 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.playlistRecView.layoutManager = LinearLayoutManager(view.context)
         token = PreferenceHelper.getToken(requireContext())
+
+        binding.showWatchHistory.setOnClickListener {
+            findNavController().navigate(R.id.watchHistoryFragment)
+        }
+
         if (token != "") {
             binding.boogh.visibility = View.GONE
             binding.textLike.visibility = View.GONE
