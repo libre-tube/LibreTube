@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.databinding.ChannelSubscriptionRowBinding
+import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
@@ -22,6 +24,8 @@ class ChannelAdapter(
     private val childFragmentManager: FragmentManager
 ) :
     RecyclerView.Adapter<ChannelViewHolder>() {
+    private lateinit var binding: VideoChannelRowBinding
+
     override fun getItemCount(): Int {
         return videoFeed.size
     }
@@ -33,38 +37,39 @@ class ChannelAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.video_channel_row, parent, false)
-        return ChannelViewHolder(cell)
+        binding = VideoChannelRowBinding.inflate(layoutInflater, parent, false)
+        return ChannelViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
-        holder.v.findViewById<TextView>(R.id.channel_description).text = trending.title
-        holder.v.findViewById<TextView>(R.id.channel_views).text =
-            trending.views.formatShort() + " • " +
-            DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-        holder.v.findViewById<TextView>(R.id.channel_duration).text =
-            DateUtils.formatElapsedTime(trending.duration!!)
-        val thumbnailImage = holder.v.findViewById<ImageView>(R.id.channel_thumbnail)
-        Picasso.get().load(trending.thumbnail).into(thumbnailImage)
-        holder.v.setOnClickListener {
-            var bundle = Bundle()
-            bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
-            var frag = PlayerFragment()
-            frag.arguments = bundle
-            val activity = holder.v.context as AppCompatActivity
-            activity.supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
-        }
-        holder.v.setOnLongClickListener {
-            val videoId = trending.url!!.replace("/watch?v=", "")
-            VideoOptionsDialog(videoId, holder.v.context)
-                .show(childFragmentManager, VideoOptionsDialog.TAG)
-            true
+        binding.apply {
+            channelDescription.text = trending.title
+            channelViews.text =
+                trending.views.formatShort() + " • " +
+                        DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+            channelDuration.text =
+                DateUtils.formatElapsedTime(trending.duration!!)
+            Picasso.get().load(trending.thumbnail).into(channelThumbnail)
+            root.setOnClickListener {
+                var bundle = Bundle()
+                bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
+                var frag = PlayerFragment()
+                frag.arguments = bundle
+                val activity = holder.v.context as AppCompatActivity
+                activity.supportFragmentManager.beginTransaction()
+                    .remove(PlayerFragment())
+                    .commit()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, frag)
+                    .commitNow()
+            }
+            root.setOnLongClickListener {
+                val videoId = trending.url!!.replace("/watch?v=", "")
+                VideoOptionsDialog(videoId, holder.v.context)
+                    .show(childFragmentManager, VideoOptionsDialog.TAG)
+                true
+            }
         }
     }
 }
