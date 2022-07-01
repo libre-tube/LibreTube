@@ -183,6 +183,9 @@ class SearchFragment : Fragment() {
     }
 
     fun fetchSearch(query: String) {
+        runOnUiThread {
+            binding.historyRecycler.visibility = GONE
+        }
         lifecycleScope.launchWhenCreated {
             isFetchingSearch = true
             hideKeyboard()
@@ -199,7 +202,6 @@ class SearchFragment : Fragment() {
             nextPage = response.nextpage
             if (response.items!!.isNotEmpty()) {
                 runOnUiThread {
-                    binding.historyRecycler.visibility = GONE
                     binding.searchRecycler.visibility = VISIBLE
                     searchAdapter = SearchAdapter(response.items, childFragmentManager)
                     binding.searchRecycler.adapter = searchAdapter
