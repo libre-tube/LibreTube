@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Library">
+    tools:context=".fragments.LibraryFragment">
 
     <RelativeLayout
         android:id="@+id/loginOrRegister2"
@@ -14,7 +14,7 @@
         android:layout_centerVertical="true">
 
         <ImageView
-            android:id="@+id/boogh2"
+            android:id="@+id/boogh"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
@@ -22,10 +22,10 @@
             android:src="@drawable/ic_login" />
 
         <TextView
-            android:id="@+id/textLike2"
+            android:id="@+id/text_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/boogh2"
+            android:layout_below="@id/boogh"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/please_login"

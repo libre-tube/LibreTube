@@ -5,11 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.ScrollView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -17,21 +13,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
+import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
-class Subscriptions : Fragment() {
+class SubscriptionsFragment : Fragment() {
     val TAG = "SubFragment"
+    private lateinit var binding: FragmentSubscriptionsBinding
+
     lateinit var token: String
-    var isLoaded = false
+    private var isLoaded = false
     private var subscriptionAdapter: SubscriptionAdapter? = null
-    private var refreshLayout: SwipeRefreshLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -42,84 +40,72 @@ class Subscriptions : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_subscriptions, container, false)
+    ): View {
+        binding = FragmentSubscriptionsBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         token = PreferenceHelper.getToken(requireContext())
-        refreshLayout = view.findViewById(R.id.sub_refresh)
+
         if (token != "") {
-            view.findViewById<RelativeLayout>(R.id.loginOrRegister).visibility = View.GONE
-            refreshLayout?.isEnabled = true
+            binding.loginOrRegister.visibility = View.GONE
+            binding.subRefresh.isEnabled = true
 
-            var progressBar = view.findViewById<ProgressBar>(R.id.sub_progress)
-            progressBar.visibility = View.VISIBLE
+            binding.subProgress.visibility = View.VISIBLE
 
-            var channelRecView = view.findViewById<RecyclerView>(R.id.sub_channels)
-
-            var feedRecView = view.findViewById<RecyclerView>(R.id.sub_feed)
             val grid = PreferenceHelper.getString(
                 requireContext(),
                 "grid",
                 resources.getInteger(R.integer.grid_items).toString()
             )!!
-            feedRecView.layoutManager = GridLayoutManager(view.context, grid.toInt())
-            fetchFeed(feedRecView, progressBar, view)
+            binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
+            fetchFeed(binding.subFeed, binding.subProgress)
 
-            refreshLayout?.setOnRefreshListener {
-                fetchChannels(channelRecView)
-                fetchFeed(feedRecView, progressBar, view)
+            binding.subRefresh.setOnRefreshListener {
+                fetchChannels(binding.subChannels)
+                fetchFeed(binding.subFeed, binding.subProgress)
             }
 
-            var toggleSubs = view.findViewById<RelativeLayout>(R.id.toggle_subs)
-            val arrowImageView = view.findViewById<ImageView>(R.id.toggle)
-
-            toggleSubs.visibility = View.VISIBLE
+            binding.toggleSubs.visibility = View.VISIBLE
             var loadedSubbedChannels = false
 
-            toggleSubs.setOnClickListener {
-                arrowImageView.animate().rotationBy(180F).setDuration(100).start()
-                if (!channelRecView.isVisible) {
+            binding.toggleSubs.setOnClickListener {
+                binding.toggle.animate().rotationBy(180F).setDuration(100).start()
+                if (!binding.subChannels.isVisible) {
                     if (!loadedSubbedChannels) {
-                        channelRecView?.layoutManager = LinearLayoutManager(context)
-                        fetchChannels(channelRecView)
+                        binding.subChannels.layoutManager = LinearLayoutManager(context)
+                        fetchChannels(binding.subChannels)
                         loadedSubbedChannels = true
                     }
-                    channelRecView.visibility = View.VISIBLE
-                    feedRecView.visibility = View.GONE
+                    binding.subChannels.visibility = View.VISIBLE
+                    binding.subFeed.visibility = View.GONE
                 } else {
-                    channelRecView.visibility = View.GONE
-                    feedRecView.visibility = View.VISIBLE
-
-                    // toggle button
-                    val image = view.findViewById<ImageView>(R.id.toggle)
-                    image.clearAnimation()
+                    binding.subChannels.visibility = View.GONE
+                    binding.subFeed.visibility = View.VISIBLE
                 }
             }
 
-            val scrollView = view.findViewById<ScrollView>(R.id.scrollview_sub)
-            scrollView.viewTreeObserver
+            binding.scrollviewSub.viewTreeObserver
                 .addOnScrollChangedListener {
-                    if (scrollView.getChildAt(0).bottom
-                        == (scrollView.height + scrollView.scrollY)
+                    if (binding.scrollviewSub.getChildAt(0).bottom
+                        == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
                     ) {
                         // scroll view is at bottom
                         if (isLoaded) {
-                            refreshLayout?.isRefreshing = true
+                            binding.subRefresh.isRefreshing = true
                             subscriptionAdapter?.updateItems()
-                            refreshLayout?.isRefreshing = false
+                            binding.subRefresh.isRefreshing = false
                         }
                     }
                 }
         } else {
-            refreshLayout?.isEnabled = false
+            binding.subRefresh.isEnabled = false
         }
     }
 
-    private fun fetchFeed(feedRecView: RecyclerView, progressBar: ProgressBar, view: View) {
+    private fun fetchFeed(feedRecView: RecyclerView, progressBar: ProgressBar) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -132,7 +118,7 @@ class Subscriptions : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 } finally {
-                    refreshLayout?.isRefreshing = false
+                    binding.subRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
                     subscriptionAdapter = SubscriptionAdapter(response, childFragmentManager)
@@ -140,16 +126,15 @@ class Subscriptions : Fragment() {
                     subscriptionAdapter?.updateItems()
                 } else {
                     runOnUiThread {
-                        with(view.findViewById<ImageView>(R.id.boogh)) {
+                        with(binding.boogh) {
                             visibility = View.VISIBLE
                             setImageResource(R.drawable.ic_list)
                         }
-                        with(view.findViewById<TextView>(R.id.textLike)) {
+                        with(binding.textLike) {
                             visibility = View.VISIBLE
                             text = getString(R.string.emptyList)
                         }
-                        view.findViewById<RelativeLayout>(R.id.loginOrRegister)
-                            .visibility = View.VISIBLE
+                        binding.loginOrRegister.visibility = View.VISIBLE
                     }
                 }
                 progressBar.visibility = View.GONE
@@ -172,7 +157,7 @@ class Subscriptions : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 } finally {
-                    refreshLayout?.isRefreshing = false
+                    binding.subRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
                     channelRecView.adapter = SubscriptionChannelAdapter(response.toMutableList())
@@ -182,13 +167,6 @@ class Subscriptions : Fragment() {
             }
         }
         run()
-    }
-
-    override fun onDestroy() {
-        Log.e(TAG, "Destroyed")
-        super.onDestroy()
-        subscriptionAdapter = null
-        view?.findViewById<RecyclerView>(R.id.sub_feed)?.adapter = null
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

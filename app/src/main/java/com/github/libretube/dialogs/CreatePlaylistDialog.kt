@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
-import com.github.libretube.fragments.Library
+import com.github.libretube.fragments.LibraryFragment
 import com.github.libretube.obj.Playlists
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
@@ -82,7 +82,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 }
                 // refresh the playlists in the library
                 try {
-                    val parent = parentFragment as Library
+                    val parent = parentFragment as LibraryFragment
                     parent.fetchPlaylists()
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())

@@ -369,10 +369,7 @@ class PlayerFragment : Fragment() {
 
         // pause player if screen off and setting enabled
         if (
-            this::exoPlayer.isInitialized &&
-            exoPlayer != null &&
-            !isScreenOn &&
-            pausePlayerOnScreenOffEnabled
+            this::exoPlayer.isInitialized && !isScreenOn && pausePlayerOnScreenOffEnabled
         ) {
             exoPlayer.pause()
         }
@@ -518,7 +515,7 @@ class PlayerFragment : Fragment() {
                 // if it's not a playlist then use the next related video
             } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
-                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")!!
+                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")
             }
         }
     }
@@ -792,7 +789,7 @@ class PlayerFragment : Fragment() {
         val videoSource: MediaSource =
             DefaultMediaSourceFactory(dataSourceFactory)
                 .createMediaSource(videoItem)
-        var audioSource: MediaSource =
+        val audioSource: MediaSource =
             ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(fromUri(audioUrl))
         val mergeSource: MediaSource =
@@ -1178,10 +1175,7 @@ class PlayerFragment : Fragment() {
         binding.playerScrollView.getHitRect(bounds)
 
         if (SDK_INT >= Build.VERSION_CODES.O &&
-            exoPlayer.isPlaying && (
-                binding.playerScrollView.getLocalVisibleRect(bounds) == true ||
-                    isFullScreen
-                )
+            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || isFullScreen)
         ) {
             activity?.enterPictureInPictureMode(updatePipParams())
         }
