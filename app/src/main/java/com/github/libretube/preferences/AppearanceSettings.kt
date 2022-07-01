@@ -6,8 +6,8 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.github.libretube.R
-import com.github.libretube.SettingsActivity
-import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
 
 class AppearanceSettings : PreferenceFragmentCompat() {

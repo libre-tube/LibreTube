@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.util
 
 const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/LibreTube/releases/latest"
 const val WEBSITE_URL = "https://libre-tube.github.io/"

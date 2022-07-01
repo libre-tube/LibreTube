@@ -33,7 +33,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.MainActivity
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.R
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
@@ -42,7 +42,7 @@ import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
-import com.github.libretube.hideKeyboard
+import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Playlist

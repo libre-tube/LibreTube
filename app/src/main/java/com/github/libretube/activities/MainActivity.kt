@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.activities
 
 import android.app.Activity
 import android.content.Context
@@ -21,7 +21,6 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -30,6 +29,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen

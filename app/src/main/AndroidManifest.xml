@@ -26,13 +26,13 @@
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".NoInternetActivity"
+            android:name=".activities.NoInternetActivity"
             android:label="@string/noInternet"/>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/settings" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -55,7 +55,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_gradient_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -72,7 +72,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_fire_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -89,7 +89,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_flame_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -106,7 +106,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_shaped_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -123,7 +123,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_torch_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -140,7 +140,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_legacy_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -157,7 +157,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_bird_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".MainActivity">
+            android:targetActivity=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -165,7 +165,7 @@
         </activity-alias>
 
         <activity
-            android:name=".RouterActivity"
+            android:name=".activities.RouterActivity"
             android:exported="true"
             android:launchMode="singleInstance">
             <intent-filter>

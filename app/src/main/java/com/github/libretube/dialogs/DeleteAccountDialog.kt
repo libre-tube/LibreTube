@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.obj.DeleteUserRequest
-import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

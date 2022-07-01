@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
-import com.github.libretube.MainActivity
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.obj.Streams
