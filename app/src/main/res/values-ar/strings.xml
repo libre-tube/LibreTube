@@ -44,7 +44,7 @@
     <string name="playlistName">اسم قائمة التشغيل</string>
     <string name="success">انتهى.</string>
     <string name="fail">فشل ذريع :(</string>
-    <string name="dlisinprogress">برجاء الانتظار حتى تنتهي كل عمليات التنزيل…</string>
+    <string name="dlisinprogress">هناك تنزيل آخر قيد التقدم بالفعل ، يرجى الانتظار حتى ينتهي.</string>
     <string name="vlc">فتح باستخدام VLC</string>
     <string name="unknown_error">خطأ في الشبكة.</string>
     <string name="server_error">تعرض الخادم لخطأ ما. لما لا تجرب نظير آخر؟</string>
@@ -113,7 +113,7 @@
     <string name="app_icon">أيقونة</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">معطل</string>
-    <string name="piped">Piped</string>
+    <string name="piped">الأنابيب</string>
     <string name="youtube">يوتيوب</string>
     <string name="playOnBackground">تشغيل في الخلفية</string>
     <string name="no_replies">هذا التعليق ليس له ردود.</string>
