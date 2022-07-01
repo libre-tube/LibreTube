@@ -455,7 +455,10 @@ class PlayerFragment : Fragment() {
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
                     initAutoPlay()
-                    PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
+                    val watchHistoryEnabled =
+                        PreferenceHelper.getBoolean(requireContext(), "Watch_history_toggle", true)
+                    if (watchHistoryEnabled)
+                        PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
                 }
             }
         }
