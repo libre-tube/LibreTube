@@ -5,8 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
@@ -61,7 +59,8 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                         subscriptionSubscribe.text = holder.v.context.getString(R.string.subscribe)
                     } else {
                         subscribe(root.context, channelId)
-                        subscriptionSubscribe.text = holder.v.context.getString(R.string.unsubscribe)
+                        subscriptionSubscribe.text =
+                            holder.v.context.getString(R.string.unsubscribe)
                     }
                 }
             }

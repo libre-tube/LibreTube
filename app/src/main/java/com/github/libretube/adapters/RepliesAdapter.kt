@@ -3,8 +3,6 @@ package com.github.libretube.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +43,7 @@ class RepliesAdapter(
             val reply = replies[position]
             commentInfos.text =
                 reply.author.toString() +
-                        " • " + reply.commentedTime.toString()
+                " • " + reply.commentedTime.toString()
             commentText.text =
                 reply.commentText.toString()
             Picasso.get().load(reply.thumbnail).fit().centerCrop().into(commentorImage)
@@ -65,10 +63,12 @@ class RepliesAdapter(
                 val bundle = bundleOf("channel_id" to reply.commentorUrl)
                 activity.navController.navigate(R.id.channel, bundle)
                 try {
-                    val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    val mainMotionLayout =
+                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                     if (mainMotionLayout.progress == 0.toFloat()) {
                         mainMotionLayout.transitionToEnd()
-                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            .transitionToEnd()
                     }
                 } catch (e: Exception) {
                 }

@@ -5,13 +5,10 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
@@ -47,7 +44,7 @@ class ChannelAdapter(
             channelDescription.text = trending.title
             channelViews.text =
                 trending.views.formatShort() + " • " +
-                        DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+                DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             channelDuration.text =
                 DateUtils.formatElapsedTime(trending.duration!!)
             Picasso.get().load(trending.thumbnail).into(channelThumbnail)

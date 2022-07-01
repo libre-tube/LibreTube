@@ -64,10 +64,12 @@ class SubscriptionAdapter(
                 val bundle = bundleOf("channel_id" to trending.uploaderUrl)
                 activity.navController.navigate(R.id.channel, bundle)
                 try {
-                    val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    val mainMotionLayout =
+                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                     if (mainMotionLayout.progress == 0.toFloat()) {
                         mainMotionLayout.transitionToEnd()
-                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            .transitionToEnd()
                     }
                 } catch (e: Exception) {
                 }

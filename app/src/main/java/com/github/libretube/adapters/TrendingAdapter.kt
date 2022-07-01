@@ -5,8 +5,6 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
@@ -14,7 +12,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.MainActivity
 import com.github.libretube.R
-import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
@@ -27,7 +24,7 @@ class TrendingAdapter(
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<TrendingViewHolder>() {
     private val TAG = "TrendingAdapter"
-    private lateinit var  binding: TrendingRowBinding
+    private lateinit var binding: TrendingRowBinding
 
     override fun getItemCount(): Int {
         return videoFeed.size
@@ -45,8 +42,8 @@ class TrendingAdapter(
             textViewTitle.text = trending.title
             textViewChannel.text =
                 trending.uploaderName + " • " +
-                        trending.views.formatShort() + " • " +
-                        DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+                trending.views.formatShort() + " • " +
+                DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             if (trending.duration != -1L) {
                 thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
             } else {
@@ -58,10 +55,12 @@ class TrendingAdapter(
                 val bundle = bundleOf("channel_id" to trending.uploaderUrl)
                 activity.navController.navigate(R.id.channel, bundle)
                 try {
-                    val mainMotionLayout = activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    val mainMotionLayout =
+                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
                     if (mainMotionLayout.progress == 0.toFloat()) {
                         mainMotionLayout.transitionToEnd()
-                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
+                            .transitionToEnd()
                     }
                 } catch (e: Exception) {
                 }

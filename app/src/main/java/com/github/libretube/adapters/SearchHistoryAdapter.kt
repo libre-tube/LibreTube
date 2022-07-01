@@ -5,12 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
 import com.github.libretube.databinding.SearchhistoryRowBinding
-import com.github.libretube.databinding.SearchsuggestionRowBinding
 import com.github.libretube.fragments.SearchFragment
 import com.github.libretube.util.PreferenceHelper
 

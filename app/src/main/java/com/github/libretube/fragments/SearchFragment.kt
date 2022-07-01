@@ -259,7 +259,12 @@ class SearchFragment : Fragment() {
         val historyList = PreferenceHelper.getHistory(requireContext())
         if (historyList.isNotEmpty()) {
             binding.historyRecycler.adapter =
-                SearchHistoryAdapter(requireContext(), historyList, binding.autoCompleteTextView, this)
+                SearchHistoryAdapter(
+                    requireContext(),
+                    historyList,
+                    binding.autoCompleteTextView,
+                    this
+                )
             binding.historyRecycler.visibility = VISIBLE
         }
     }

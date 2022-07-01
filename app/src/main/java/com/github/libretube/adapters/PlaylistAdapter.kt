@@ -7,14 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.PlaylistRowBinding
-import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
