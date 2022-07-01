@@ -17,13 +17,22 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="?attr/selectableItemBackground"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_time_outlined"
+            android:layout_gravity="center"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:text="@string/watch_history"
-            android:textSize="20sp"/>
+            android:textStyle="bold"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 

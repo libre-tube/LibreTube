@@ -7,22 +7,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="8dp"
-        android:layout_marginBottom="8dp" >
+        android:layout_marginBottom="8dp"
+        android:paddingHorizontal="8dp">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/watch_history"
-        android:layout_weight="1"
-        android:textSize="16sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/watch_history"
+            android:textSize="16sp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/clearHistory"
-            android:layout_gravity="center"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:src="@drawable/ic_trash"/>
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_reset" />
 
     </LinearLayout>
 
@@ -31,6 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:nestedScrollingEnabled="false"/>
+        android:nestedScrollingEnabled="false" />
 
 </LinearLayout>
