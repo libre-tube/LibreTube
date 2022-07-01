@@ -455,6 +455,11 @@ class PlayerFragment : Fragment() {
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
                     initAutoPlay()
+                    val watchHistoryEnabled =
+                        PreferenceHelper.getBoolean(requireContext(), "Watch_history_toggle", true)
+                    if (watchHistoryEnabled) {
+                        PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
+                    }
                 }
             }
         }
@@ -742,7 +747,7 @@ class PlayerFragment : Fragment() {
         binding.playerChannel.setOnClickListener {
             val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to response.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }

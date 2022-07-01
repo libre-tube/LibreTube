@@ -4,11 +4,15 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.github.libretube.obj.CustomInstance
+import com.github.libretube.obj.Streams
+import com.github.libretube.obj.WatchHistoryItem
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
 object PreferenceHelper {
+    private val TAG = "PreferenceHelper"
+
     fun setString(context: Context, key: String?, value: String?) {
         val editor = getDefaultSharedPreferencesEditor(context)
         editor.putString(key, value)
@@ -120,6 +124,48 @@ object PreferenceHelper {
         val editor = getDefaultSharedPreferencesEditor(context)
         val set: Set<String> = HashSet(historyList)
         editor.putStringSet("search_history", set).apply()
+    }
+
+    fun addToWatchHistory(context: Context, videoId: String, streams: Streams) {
+        val editor = getDefaultSharedPreferencesEditor(context)
+        val gson = Gson()
+
+        val watchHistoryItem = WatchHistoryItem(
+            videoId,
+            streams.title,
+            streams.uploadDate,
+            streams.uploader,
+            streams.uploaderUrl?.replace("/channel/", ""),
+            streams.uploaderAvatar,
+            streams.thumbnailUrl,
+            streams.duration
+        )
+
+        val watchHistory = getWatchHistory(context)
+
+        // delete entries that have the same videoId
+        var indexToRemove = Int.MAX_VALUE
+        watchHistory.forEachIndexed { index, item ->
+            if (item.videoId == videoId) indexToRemove = index
+        }
+        if (indexToRemove != Int.MAX_VALUE) watchHistory.removeAt(indexToRemove)
+
+        watchHistory += watchHistoryItem
+
+        val json = gson.toJson(watchHistory)
+        editor.putString("watch_history", json).apply()
+    }
+
+    fun getWatchHistory(context: Context): ArrayList<WatchHistoryItem> {
+        val settings = getDefaultSharedPreferences(context)
+        val gson = Gson()
+        val json: String = settings.getString("watch_history", "")!!
+        val type: Type = object : TypeToken<List<WatchHistoryItem?>?>() {}.type
+        return try {
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            arrayListOf()
+        }
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {

@@ -117,7 +117,7 @@ class SearchViewHolder(
         channelImage.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
         }
     }
 
@@ -134,7 +134,7 @@ class SearchViewHolder(
         v.setOnClickListener {
             val activity = v.context as MainActivity
             val bundle = bundleOf("channel_id" to item.url)
-            activity.navController.navigate(R.id.channel, bundle)
+            activity.navController.navigate(R.id.channelFragment, bundle)
         }
         // todo sub button
     }

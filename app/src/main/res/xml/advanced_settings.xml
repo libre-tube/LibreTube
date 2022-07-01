@@ -46,6 +46,21 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/watch_history">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_history_filled"
+            app:key="watch_history_toggle"
+            app:title="@string/watch_history" />
+
+        <Preference
+            android:icon="@drawable/ic_trash"
+            app:key="clear_watch_history"
+            app:title="@string/clear_history" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory>
 
         <Preference

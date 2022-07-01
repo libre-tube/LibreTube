@@ -48,7 +48,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             root.setOnClickListener {
                 val activity = holder.v.context as MainActivity
                 val bundle = bundleOf("channel_id" to subscription.url)
-                activity.navController.navigate(R.id.channel, bundle)
+                activity.navController.navigate(R.id.channelFragment, bundle)
             }
             subscriptionSubscribe.setOnClickListener {
                 if (!isLoading) {

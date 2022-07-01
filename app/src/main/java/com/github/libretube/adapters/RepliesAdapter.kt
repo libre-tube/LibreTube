@@ -61,7 +61,7 @@ class RepliesAdapter(
             commentorImage.setOnClickListener {
                 val activity = holder.v.context as MainActivity
                 val bundle = bundleOf("channel_id" to reply.commentorUrl)
-                activity.navController.navigate(R.id.channel, bundle)
+                activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
                     val mainMotionLayout =
                         activity.findViewById<MotionLayout>(R.id.mainMotionLayout)

@@ -53,7 +53,7 @@ class TrendingAdapter(
             channelImage.setOnClickListener {
                 val activity = holder.v.context as MainActivity
                 val bundle = bundleOf("channel_id" to trending.uploaderUrl)
-                activity.navController.navigate(R.id.channel, bundle)
+                activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
                     val mainMotionLayout =
                         activity.findViewById<MotionLayout>(R.id.mainMotionLayout)

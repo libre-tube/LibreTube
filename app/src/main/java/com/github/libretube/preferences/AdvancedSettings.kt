@@ -18,9 +18,17 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.binding.topBarTextView.text = getString(R.string.advanced)
 
+        // clear search history
         val clearHistory = findPreference<Preference>("clear_history")
         clearHistory?.setOnPreferenceClickListener {
             PreferenceHelper.removePreference(requireContext(), "search_history")
+            true
+        }
+
+        // clear watch history
+        val clearWatchHistory = findPreference<Preference>("clear_watch_history")
+        clearWatchHistory?.setOnPreferenceClickListener {
+            PreferenceHelper.removePreference(requireContext(), "watch_history")
             true
         }
 

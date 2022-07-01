@@ -12,56 +12,45 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
-import com.github.libretube.databinding.TrendingRowBinding
+import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
-import com.github.libretube.obj.StreamItem
-import com.github.libretube.util.formatShort
+import com.github.libretube.obj.WatchHistoryItem
 import com.squareup.picasso.Picasso
 
-class SubscriptionAdapter(
-    private val videoFeed: List<StreamItem>,
+class WatchHistoryAdapter(
+    private val watchHistory: MutableList<WatchHistoryItem>,
     private val childFragmentManager: FragmentManager
-) : RecyclerView.Adapter<SubscriptionViewHolder>() {
-    private val TAG = "SubscriptionAdapter"
-    private lateinit var binding: TrendingRowBinding
+) :
+    RecyclerView.Adapter<WatchHistoryViewHolder>() {
+    private val TAG = "WatchHistoryAdapter"
+    private lateinit var binding: WatchHistoryRowBinding
 
-    var i = 0
-    override fun getItemCount(): Int {
-        return i
+    fun clear() {
+        val size = watchHistory.size
+        watchHistory.clear()
+        notifyItemRangeRemoved(0, size)
     }
 
-    fun updateItems() {
-        i += 10
-        if (i > videoFeed.size) {
-            i = videoFeed.size
-        }
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
-        return SubscriptionViewHolder(binding.root)
+        binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
+        return WatchHistoryViewHolder(binding.root)
     }
 
-    override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
-        val trending = videoFeed[position]
+    override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
+        val video = watchHistory[position]
         binding.apply {
-            textViewTitle.text = trending.title
-            textViewChannel.text =
-                trending.uploaderName + " • " +
-                trending.views.formatShort() + " • " +
-                DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-            if (trending.duration != -1L) {
-                thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
-            } else {
-                thumbnailDuration.text = holder.v.context.getString(R.string.live)
-                thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
-            }
+            videoTitle.text = video.title
+            channelName.text = video.uploader
+            uploadDate.text = video.uploadDate
+            thumbnailDuration.text = DateUtils.formatElapsedTime(video.duration?.toLong()!!)
+            Picasso.get().load(video.thumbnailUrl).into(thumbnail)
+            Picasso.get().load(video.uploaderAvatar).into(channelImage)
+
             channelImage.setOnClickListener {
                 val activity = holder.v.context as MainActivity
-                val bundle = bundleOf("channel_id" to trending.uploaderUrl)
+                val bundle = bundleOf("channel_id" to video.uploaderUrl)
                 activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
                     val mainMotionLayout =
@@ -74,12 +63,11 @@ class SubscriptionAdapter(
                 } catch (e: Exception) {
                 }
             }
-            Picasso.get().load(trending.thumbnail).into(thumbnail)
-            Picasso.get().load(trending.uploaderAvatar).into(channelImage)
+
             root.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
-                val frag = PlayerFragment()
+                var bundle = Bundle()
+                bundle.putString("videoId", video.videoId)
+                var frag = PlayerFragment()
                 frag.arguments = bundle
                 val activity = holder.v.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
@@ -90,16 +78,19 @@ class SubscriptionAdapter(
                     .commitNow()
             }
             root.setOnLongClickListener {
-                val videoId = trending.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, holder.v.context)
+                VideoOptionsDialog(video.videoId!!, holder.v.context)
                     .show(childFragmentManager, VideoOptionsDialog.TAG)
                 true
             }
         }
     }
+
+    override fun getItemCount(): Int {
+        return watchHistory.size
+    }
 }
 
-class SubscriptionViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
+class WatchHistoryViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
     init {
     }
 }
