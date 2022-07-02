@@ -3,10 +3,7 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
@@ -30,7 +27,7 @@ class SearchAdapter(
     RecyclerView.Adapter<SearchViewHolder>() {
 
     fun updateItems(newItems: List<SearchItem>) {
-        var searchItemsSize = searchItems.size
+        val searchItemsSize = searchItems.size
         searchItems.addAll(newItems)
         notifyItemRangeInserted(searchItemsSize, newItems.size)
     }
@@ -42,17 +39,30 @@ class SearchAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val binding = when (viewType) {
-            0 -> VideoSearchRowBinding.inflate(layoutInflater, parent, false)
-            1 -> ChannelSearchRowBinding.inflate(layoutInflater, parent, false)
-            2 -> PlaylistSearchRowBinding.inflate(layoutInflater, parent, false)
+        return when (viewType) {
+            0 -> SearchViewHolder(
+                VideoSearchRowBinding.inflate(layoutInflater, parent, false)
+            )
+            1 -> SearchViewHolder(
+                ChannelSearchRowBinding.inflate(layoutInflater, parent, false)
+            )
+            2 -> SearchViewHolder(
+                PlaylistSearchRowBinding.inflate(layoutInflater, parent, false)
+            )
             else -> throw IllegalArgumentException("Invalid type")
         }
-        return SearchViewHolder(binding.root, childFragmentManager)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(searchItems[position])
+        val searchItem = searchItems[position]
+
+        val videoRowBinding = holder.videoRowBinding
+        val channelRowBinding = holder.channelRowBinding
+        val playlistRowBinding = holder.playlistRowBinding
+
+        if (videoRowBinding != null) bindWatch(searchItem, videoRowBinding)
+        else if (channelRowBinding != null) bindChannel(searchItem, channelRowBinding)
+        else if (playlistRowBinding != null) bindPlaylist(searchItem, playlistRowBinding)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -63,117 +73,110 @@ class SearchAdapter(
             else -> 3
         }
     }
+
+    private fun bindWatch(item: SearchItem, binding: VideoSearchRowBinding) {
+        binding.apply {
+            Picasso.get().load(item.thumbnail).fit().centerCrop().into(searchThumbnail)
+            if (item.duration != -1L) {
+                searchThumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
+            } else {
+                searchThumbnailDuration.text = root.context.getString(R.string.live)
+                searchThumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
+            }
+            Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(searchChannelImage)
+            searchDescription.text = item.title
+            val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
+            val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
+            searchViews.text =
+                if (viewsString != "" && uploadDate != "") {
+                    "$viewsString • $uploadDate"
+                } else {
+                    viewsString + uploadDate
+                }
+            searchChannelName.text = item.uploaderName
+            root.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
+                val frag = PlayerFragment()
+                frag.arguments = bundle
+                val activity = root.context as AppCompatActivity
+                activity.supportFragmentManager.beginTransaction()
+                    .remove(PlayerFragment())
+                    .commit()
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, frag)
+                    .commitNow()
+            }
+            root.setOnLongClickListener {
+                val videoId = item.url!!.replace("/watch?v=", "")
+                VideoOptionsDialog(videoId, root.context)
+                    .show(childFragmentManager, VideoOptionsDialog.TAG)
+                true
+            }
+            searchChannelImage.setOnClickListener {
+                val activity = root.context as MainActivity
+                val bundle = bundleOf("channel_id" to item.uploaderUrl)
+                activity.navController.navigate(R.id.channelFragment, bundle)
+            }
+        }
+    }
+
+    private fun bindChannel(item: SearchItem, binding: ChannelSearchRowBinding) {
+        binding.apply {
+            Picasso.get().load(item.thumbnail).fit().centerCrop().into(searchChannelImage)
+            searchChannelName.text = item.name
+            searchViews.text = root.context.getString(
+                R.string.subscribers,
+                item.subscribers.formatShort()
+            ) + " • " + root.context.getString(R.string.videoCount, item.videos.toString())
+            root.setOnClickListener {
+                val activity = root.context as MainActivity
+                val bundle = bundleOf("channel_id" to item.url)
+                activity.navController.navigate(R.id.channelFragment, bundle)
+            }
+        }
+    }
+
+    private fun bindPlaylist(item: SearchItem, binding: PlaylistSearchRowBinding) {
+        binding.apply {
+            Picasso.get().load(item.thumbnail).fit().centerCrop().into(searchThumbnail)
+            if (item.videos?.toInt() != -1) searchPlaylistNumber.text = item.videos.toString()
+            searchDescription.text = item.name
+            searchName.text = item.uploaderName
+            if (item.videos?.toInt() != -1) {
+                searchPlaylistNumber.text =
+                    root.context.getString(R.string.videoCount, item.videos.toString())
+            }
+            root.setOnClickListener {
+                // playlist clicked
+                val activity = root.context as MainActivity
+                val bundle = bundleOf("playlist_id" to item.url)
+                activity.navController.navigate(R.id.playlistFragment, bundle)
+            }
+            root.setOnLongClickListener {
+                val playlistId = item.url!!.replace("/playlist?list=", "")
+                PlaylistOptionsDialog(playlistId, root.context)
+                    .show(childFragmentManager, "PlaylistOptionsDialog")
+                true
+            }
+        }
+    }
 }
 
-class SearchViewHolder(
-    private val v: View,
-    private val childFragmentManager: FragmentManager
-) : RecyclerView.ViewHolder(v) {
+class SearchViewHolder : RecyclerView.ViewHolder {
+    var videoRowBinding: VideoSearchRowBinding? = null
+    var channelRowBinding: ChannelSearchRowBinding? = null
+    var playlistRowBinding: PlaylistSearchRowBinding? = null
 
-    private fun bindWatch(item: SearchItem) {
-        val thumbnailImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).fit().centerCrop().into(thumbnailImage)
-        val thumbnailDuration = v.findViewById<TextView>(R.id.search_thumbnail_duration)
-        if (item.duration != -1L) {
-            thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
-        } else {
-            thumbnailDuration.text = v.context.getString(R.string.live)
-            thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
-        }
-        val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
-        Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(channelImage)
-        val title = v.findViewById<TextView>(R.id.search_description)
-        title.text = item.title
-        val views = v.findViewById<TextView>(R.id.search_views)
-        val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
-        val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
-        views.text =
-            if (viewsString != "" && uploadDate != "") {
-                "$viewsString • $uploadDate"
-            } else {
-                viewsString + uploadDate
-            }
-        val channelName = v.findViewById<TextView>(R.id.search_channel_name)
-        channelName.text = item.uploaderName
-        v.setOnClickListener {
-            var bundle = Bundle()
-            bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
-            var frag = PlayerFragment()
-            frag.arguments = bundle
-            val activity = v.context as AppCompatActivity
-            activity.supportFragmentManager.beginTransaction()
-                .remove(PlayerFragment())
-                .commit()
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, frag)
-                .commitNow()
-        }
-        v.setOnLongClickListener {
-            val videoId = item.url!!.replace("/watch?v=", "")
-            VideoOptionsDialog(videoId, v.context)
-                .show(childFragmentManager, VideoOptionsDialog.TAG)
-            true
-        }
-        channelImage.setOnClickListener {
-            val activity = v.context as MainActivity
-            val bundle = bundleOf("channel_id" to item.uploaderUrl)
-            activity.navController.navigate(R.id.channelFragment, bundle)
-        }
+    constructor(binding: VideoSearchRowBinding) : super(binding.root) {
+        videoRowBinding = binding
     }
 
-    private fun bindChannel(item: SearchItem) {
-        val channelImage = v.findViewById<ImageView>(R.id.search_channel_image)
-        Picasso.get().load(item.thumbnail).fit().centerCrop().into(channelImage)
-        val channelName = v.findViewById<TextView>(R.id.search_channel_name)
-        channelName.text = item.name
-        val channelViews = v.findViewById<TextView>(R.id.search_views)
-        channelViews.text = v.context.getString(
-            R.string.subscribers,
-            item.subscribers.formatShort()
-        ) + " • " + v.context.getString(R.string.videoCount, item.videos.toString())
-        v.setOnClickListener {
-            val activity = v.context as MainActivity
-            val bundle = bundleOf("channel_id" to item.url)
-            activity.navController.navigate(R.id.channelFragment, bundle)
-        }
-        // todo sub button
+    constructor(binding: ChannelSearchRowBinding) : super(binding.root) {
+        channelRowBinding = binding
     }
 
-    private fun bindPlaylist(item: SearchItem) {
-        val playlistImage = v.findViewById<ImageView>(R.id.search_thumbnail)
-        Picasso.get().load(item.thumbnail).fit().centerCrop().into(playlistImage)
-        val playlistNumber = v.findViewById<TextView>(R.id.search_playlist_number)
-        if (item.videos?.toInt() != -1) playlistNumber.text = item.videos.toString()
-        val playlistName = v.findViewById<TextView>(R.id.search_description)
-        playlistName.text = item.name
-        val playlistChannelName = v.findViewById<TextView>(R.id.search_name)
-        playlistChannelName.text = item.uploaderName
-        val playlistVideosNumber = v.findViewById<TextView>(R.id.search_playlist_videos)
-        if (item.videos?.toInt() != -1) {
-            playlistVideosNumber.text =
-                v.context.getString(R.string.videoCount, item.videos.toString())
-        }
-        v.setOnClickListener {
-            // playlist clicked
-            val activity = v.context as MainActivity
-            val bundle = bundleOf("playlist_id" to item.url)
-            activity.navController.navigate(R.id.playlistFragment, bundle)
-        }
-        v.setOnLongClickListener {
-            val playlistId = item.url!!.replace("/playlist?list=", "")
-            PlaylistOptionsDialog(playlistId, v.context)
-                .show(childFragmentManager, "PlaylistOptionsDialog")
-            true
-        }
-    }
-
-    fun bind(searchItem: SearchItem) {
-        when {
-            searchItem.url!!.startsWith("/watch", false) -> bindWatch(searchItem)
-            searchItem.url!!.startsWith("/channel", false) -> bindChannel(searchItem)
-            searchItem.url!!.startsWith("/playlist", false) -> bindPlaylist(searchItem)
-            else -> {
-            }
-        }
+    constructor(binding: PlaylistSearchRowBinding) : super(binding.root) {
+        playlistRowBinding = binding
     }
 }
