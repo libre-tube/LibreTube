@@ -77,7 +77,7 @@
     <string name="all">كل</string>
     <string name="okay">حسناً</string>
     <string name="search_history">سجل البحث</string>
-    <string name="clear_history">امح السجل</string>
+    <string name="clear_history">مسح السجل</string>
     <string name="music_songs">أغاني يوتيوب</string>
     <string name="music_videos">فيديوهات يوتيوب الموسيقية</string>
     <string name="music_albums">ألبومات يوتيوب الموسيقية</string>
@@ -207,4 +207,5 @@
     <string name="account">الحساب</string>
     <string name="restore">استعادة</string>
     <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
+    <string name="watch_history">سجل المشاهدة</string>
 </resources>
