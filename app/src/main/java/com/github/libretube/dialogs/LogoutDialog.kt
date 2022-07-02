@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.databinding.DialogLogoutBinding
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -25,6 +26,7 @@ class LogoutDialog : DialogFragment() {
             binding.user.text =
                 binding.user.text.toString() + " (" + user + ")"
             binding.logout.setOnClickListener {
+                requireMainActivityRestart = true
                 Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
                 PreferenceHelper.setToken(requireContext(), "")
                 dialog?.dismiss()
