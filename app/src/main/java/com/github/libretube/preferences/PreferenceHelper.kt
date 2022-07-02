@@ -6,6 +6,7 @@ import androidx.preference.PreferenceManager
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.WatchHistoryItem
+import com.github.libretube.obj.WatchPosition
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import java.lang.reflect.Type
@@ -144,11 +145,11 @@ object PreferenceHelper {
         val watchHistory = getWatchHistory(context)
 
         // delete entries that have the same videoId
-        var indexToRemove = Int.MAX_VALUE
+        var indexToRemove: Int? = null
         watchHistory.forEachIndexed { index, item ->
             if (item.videoId == videoId) indexToRemove = index
         }
-        if (indexToRemove != Int.MAX_VALUE) watchHistory.removeAt(indexToRemove)
+        if (indexToRemove != null) watchHistory.removeAt(indexToRemove!!)
 
         watchHistory += watchHistoryItem
 
@@ -161,6 +162,55 @@ object PreferenceHelper {
         val gson = Gson()
         val json: String = settings.getString("watch_history", "")!!
         val type: Type = object : TypeToken<List<WatchHistoryItem?>?>() {}.type
+        return try {
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            arrayListOf()
+        }
+    }
+
+    fun saveWatchPosition(context: Context, videoId: String, position: Long) {
+        val editor = getDefaultSharedPreferencesEditor(context)
+
+        val watchPositions = getWatchPositions(context)
+        val watchPositionItem = WatchPosition(videoId, position)
+
+        var indexToRemove: Int? = null
+        watchPositions.forEachIndexed { index, item ->
+            if (item.videoId == videoId) indexToRemove = index
+        }
+
+        if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
+
+        watchPositions += watchPositionItem
+
+        val gson = Gson()
+        val json = gson.toJson(watchPositions)
+        editor.putString("watch_positions", json).commit()
+    }
+
+    fun removeWatchPosition(context: Context, videoId: String) {
+        val editor = getDefaultSharedPreferencesEditor(context)
+
+        val watchPositions = getWatchPositions(context)
+
+        var indexToRemove: Int? = null
+        watchPositions.forEachIndexed { index, item ->
+            if (item.videoId == videoId) indexToRemove = index
+        }
+
+        if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
+
+        val gson = Gson()
+        val json = gson.toJson(watchPositions)
+        editor.putString("watch_positions", json).commit()
+    }
+
+    fun getWatchPositions(context: Context): ArrayList<WatchPosition> {
+        val settings = getDefaultSharedPreferences(context)
+        val gson = Gson()
+        val json: String = settings.getString("watch_positions", "")!!
+        val type: Type = object : TypeToken<List<WatchPosition?>?>() {}.type
         return try {
             gson.fromJson(json, type)
         } catch (e: Exception) {
