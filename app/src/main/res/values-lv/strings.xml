@@ -207,4 +207,5 @@
     <string name="deleteAccount_summary">Izdzēst Piped kontu</string>
     <string name="restore">Atjaunot</string>
     <string name="account">Konts</string>
+    <string name="watch_history">Skatīšanās vēsture</string>
 </resources>
