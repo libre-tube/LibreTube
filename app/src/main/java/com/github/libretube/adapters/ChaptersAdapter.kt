@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.ChapterColumnBinding
@@ -14,17 +13,16 @@ class ChaptersAdapter(
     private val exoPlayer: ExoPlayer
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     val TAG = "ChaptersAdapter"
-    private lateinit var binding: ChapterColumnBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChaptersViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = ChapterColumnBinding.inflate(layoutInflater, parent, false)
-        return ChaptersViewHolder(binding.root)
+        val binding = ChapterColumnBinding.inflate(layoutInflater, parent, false)
+        return ChaptersViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
         val chapter = chapters[position]
-        binding.apply {
+        holder.binding.apply {
             Picasso.get().load(chapter.image).fit().centerCrop().into(chapterImage)
             chapterTitle.text = chapter.title
 
@@ -40,7 +38,4 @@ class ChaptersAdapter(
     }
 }
 
-class ChaptersViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class ChaptersViewHolder(val binding: ChapterColumnBinding) : RecyclerView.ViewHolder(binding.root)

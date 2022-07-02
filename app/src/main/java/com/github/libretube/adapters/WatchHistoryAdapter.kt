@@ -3,7 +3,6 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -24,7 +23,6 @@ class WatchHistoryAdapter(
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
     private val TAG = "WatchHistoryAdapter"
-    private lateinit var binding: WatchHistoryRowBinding
 
     fun clear() {
         val size = watchHistory.size
@@ -34,13 +32,13 @@ class WatchHistoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
-        return WatchHistoryViewHolder(binding.root)
+        val binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
+        return WatchHistoryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: WatchHistoryViewHolder, position: Int) {
         val video = watchHistory[position]
-        binding.apply {
+        holder.binding.apply {
             videoTitle.text = video.title
             channelName.text = video.uploader
             uploadDate.text = video.uploadDate
@@ -49,7 +47,7 @@ class WatchHistoryAdapter(
             Picasso.get().load(video.uploaderAvatar).into(channelImage)
 
             channelImage.setOnClickListener {
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to video.uploaderUrl)
                 activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
@@ -69,7 +67,7 @@ class WatchHistoryAdapter(
                 bundle.putString("videoId", video.videoId)
                 var frag = PlayerFragment()
                 frag.arguments = bundle
-                val activity = holder.v.context as AppCompatActivity
+                val activity = root.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
                     .remove(PlayerFragment())
                     .commit()
@@ -78,7 +76,7 @@ class WatchHistoryAdapter(
                     .commitNow()
             }
             root.setOnLongClickListener {
-                VideoOptionsDialog(video.videoId!!, holder.v.context)
+                VideoOptionsDialog(video.videoId!!, root.context)
                     .show(childFragmentManager, VideoOptionsDialog.TAG)
                 true
             }
@@ -90,7 +88,4 @@ class WatchHistoryAdapter(
     }
 }
 
-class WatchHistoryViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class WatchHistoryViewHolder(val binding: WatchHistoryRowBinding) : RecyclerView.ViewHolder(binding.root)

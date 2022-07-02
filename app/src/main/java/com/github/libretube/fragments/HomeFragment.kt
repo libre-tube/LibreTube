@@ -5,12 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentHomeBinding
@@ -46,15 +44,14 @@ class HomeFragment : Fragment() {
             resources.getInteger(R.integer.grid_items).toString()
         )!!
         binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
-        fetchJson(binding.progressBar, binding.recview)
+        fetchJson()
         binding.homeRefresh.isEnabled = true
         binding.homeRefresh.setOnRefreshListener {
-            Log.d(TAG, "hmm")
-            fetchJson(binding.progressBar, binding.recview)
+            fetchJson()
         }
     }
 
-    private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
+    private fun fetchJson() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -73,8 +70,8 @@ class HomeFragment : Fragment() {
                     binding.homeRefresh.isRefreshing = false
                 }
                 runOnUiThread {
-                    progressBar.visibility = View.GONE
-                    recyclerView.adapter = TrendingAdapter(response, childFragmentManager)
+                    binding.progressBar.visibility = View.GONE
+                    binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
                 }
             }
         }

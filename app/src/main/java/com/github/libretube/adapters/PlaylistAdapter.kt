@@ -33,7 +33,6 @@ class PlaylistAdapter(
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
     private val TAG = "PlaylistAdapter"
-    private lateinit var binding: PlaylistRowBinding
 
     override fun getItemCount(): Int {
         return videoFeed.size
@@ -46,13 +45,13 @@ class PlaylistAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = PlaylistRowBinding.inflate(layoutInflater, parent, false)
-        return PlaylistViewHolder(binding.root)
+        val binding = PlaylistRowBinding.inflate(layoutInflater, parent, false)
+        return PlaylistViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val streamItem = videoFeed[position]
-        binding.apply {
+        holder.binding.apply {
             playlistTitle.text = streamItem.title
             playlistDescription.text = streamItem.uploaderName
             playlistDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
@@ -63,7 +62,7 @@ class PlaylistAdapter(
                 bundle.putString("playlistId", playlistId)
                 var frag = PlayerFragment()
                 frag.arguments = bundle
-                val activity = holder.v.context as AppCompatActivity
+                val activity = root.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
                     .remove(PlayerFragment())
                     .commit()
@@ -73,7 +72,7 @@ class PlaylistAdapter(
             }
             root.setOnLongClickListener {
                 val videoId = streamItem.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, holder.v.context)
+                VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, VideoOptionsDialog.TAG)
                 true
             }
@@ -81,7 +80,7 @@ class PlaylistAdapter(
             if (isOwner) {
                 deletePlaylist.visibility = View.VISIBLE
                 deletePlaylist.setOnClickListener {
-                    val token = PreferenceHelper.getToken(holder.v.context)
+                    val token = PreferenceHelper.getToken(root.context)
                     removeFromPlaylist(token, position)
                 }
             }
@@ -121,7 +120,4 @@ class PlaylistAdapter(
     }
 }
 
-class PlaylistViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class PlaylistViewHolder(val binding: PlaylistRowBinding) : RecyclerView.ViewHolder(binding.root)

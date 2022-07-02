@@ -3,7 +3,6 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -24,7 +23,6 @@ class TrendingAdapter(
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<TrendingViewHolder>() {
     private val TAG = "TrendingAdapter"
-    private lateinit var binding: TrendingRowBinding
 
     override fun getItemCount(): Int {
         return videoFeed.size
@@ -32,13 +30,13 @@ class TrendingAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
-        return TrendingViewHolder(binding.root)
+        val binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
+        return TrendingViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
         val trending = videoFeed[position]
-        binding.apply {
+        holder.binding.apply {
             textViewTitle.text = trending.title
             textViewChannel.text =
                 trending.uploaderName + " • " +
@@ -47,11 +45,11 @@ class TrendingAdapter(
             if (trending.duration != -1L) {
                 thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
             } else {
-                thumbnailDuration.text = holder.v.context.getString(R.string.live)
+                thumbnailDuration.text = root.context.getString(R.string.live)
                 thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
             }
             channelImage.setOnClickListener {
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to trending.uploaderUrl)
                 activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
@@ -77,7 +75,7 @@ class TrendingAdapter(
                 bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
                 var frag = PlayerFragment()
                 frag.arguments = bundle
-                val activity = holder.v.context as AppCompatActivity
+                val activity = root.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
                     .remove(PlayerFragment())
                     .commit()
@@ -87,7 +85,7 @@ class TrendingAdapter(
             }
             root.setOnLongClickListener {
                 val videoId = trending.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, holder.v.context)
+                VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, VideoOptionsDialog.TAG)
                 true
             }
@@ -95,7 +93,4 @@ class TrendingAdapter(
     }
 }
 
-class TrendingViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class TrendingViewHolder(val binding: TrendingRowBinding) : RecyclerView.ViewHolder(binding.root)

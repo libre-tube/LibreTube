@@ -3,7 +3,6 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -21,7 +20,6 @@ class ChannelAdapter(
     private val childFragmentManager: FragmentManager
 ) :
     RecyclerView.Adapter<ChannelViewHolder>() {
-    private lateinit var binding: VideoChannelRowBinding
 
     override fun getItemCount(): Int {
         return videoFeed.size
@@ -34,13 +32,13 @@ class ChannelAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = VideoChannelRowBinding.inflate(layoutInflater, parent, false)
-        return ChannelViewHolder(binding.root)
+        val binding = VideoChannelRowBinding.inflate(layoutInflater, parent, false)
+        return ChannelViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
-        binding.apply {
+        holder.binding.apply {
             channelDescription.text = trending.title
             channelViews.text =
                 trending.views.formatShort() + " • " +
@@ -53,7 +51,7 @@ class ChannelAdapter(
                 bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
                 var frag = PlayerFragment()
                 frag.arguments = bundle
-                val activity = holder.v.context as AppCompatActivity
+                val activity = root.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
                     .remove(PlayerFragment())
                     .commit()
@@ -63,7 +61,7 @@ class ChannelAdapter(
             }
             root.setOnLongClickListener {
                 val videoId = trending.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, holder.v.context)
+                VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, VideoOptionsDialog.TAG)
                 true
             }
@@ -71,7 +69,4 @@ class ChannelAdapter(
     }
 }
 
-class ChannelViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class ChannelViewHolder(val binding: VideoChannelRowBinding) : RecyclerView.ViewHolder(binding.root)

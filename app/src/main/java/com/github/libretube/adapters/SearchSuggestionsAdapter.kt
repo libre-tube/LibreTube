@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +15,6 @@ class SearchSuggestionsAdapter(
     RecyclerView.Adapter<SearchSuggestionsViewHolder>() {
 
     private val TAG = "SearchSuggestionsAdapter"
-    private lateinit var binding: SearchsuggestionRowBinding
 
     override fun getItemCount(): Int {
         return suggestionsList.size
@@ -24,13 +22,13 @@ class SearchSuggestionsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchSuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = SearchsuggestionRowBinding.inflate(layoutInflater, parent, false)
-        return SearchSuggestionsViewHolder(binding.root)
+        val binding = SearchsuggestionRowBinding.inflate(layoutInflater, parent, false)
+        return SearchSuggestionsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchSuggestionsViewHolder, position: Int) {
         val suggestion = suggestionsList[position]
-        binding.apply {
+        holder.binding.apply {
             suggestionText.text = suggestion
             root.setOnClickListener {
                 editText.setText(suggestion)
@@ -40,7 +38,4 @@ class SearchSuggestionsAdapter(
     }
 }
 
-class SearchSuggestionsViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class SearchSuggestionsViewHolder(val binding: SearchsuggestionRowBinding) : RecyclerView.ViewHolder(binding.root)

@@ -3,7 +3,6 @@ package com.github.libretube.adapters
 import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +25,6 @@ class PlaylistsAdapter(
     private val activity: Activity
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
     val TAG = "PlaylistsAdapter"
-    private lateinit var binding: PlaylistsRowBinding
 
     override fun getItemCount(): Int {
         return playlists.size
@@ -39,13 +37,13 @@ class PlaylistsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = PlaylistsRowBinding.inflate(layoutInflater, parent, false)
-        return PlaylistsViewHolder(binding.root)
+        val binding = PlaylistsRowBinding.inflate(layoutInflater, parent, false)
+        return PlaylistsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
         val playlist = playlists[position]
-        binding.apply {
+        holder.binding.apply {
             Picasso.get().load(playlist.thumbnail).into(playlistThumbnail)
             // set imageview drawable as empty playlist if imageview empty
             if (playlistThumbnail.drawable == null) {
@@ -54,11 +52,11 @@ class PlaylistsAdapter(
             }
             playlistTitle.text = playlist.name
             deletePlaylist.setOnClickListener {
-                val builder = MaterialAlertDialogBuilder(holder.v.context)
+                val builder = MaterialAlertDialogBuilder(root.context)
                 builder.setTitle(R.string.deletePlaylist)
                 builder.setMessage(R.string.areYouSure)
                 builder.setPositiveButton(R.string.yes) { _, _ ->
-                    val token = PreferenceHelper.getToken(holder.v.context)
+                    val token = PreferenceHelper.getToken(root.context)
                     deletePlaylist(playlist.id!!, token, position)
                 }
                 builder.setNegativeButton(R.string.cancel) { _, _ ->
@@ -67,7 +65,7 @@ class PlaylistsAdapter(
             }
             root.setOnClickListener {
                 // playlists clicked
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("playlist_id" to playlist.id)
                 activity.navController.navigate(R.id.playlistFragment, bundle)
             }
@@ -104,7 +102,4 @@ class PlaylistsAdapter(
     }
 }
 
-class PlaylistsViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class PlaylistsViewHolder(val binding: PlaylistsRowBinding) : RecyclerView.ViewHolder(binding.root)
