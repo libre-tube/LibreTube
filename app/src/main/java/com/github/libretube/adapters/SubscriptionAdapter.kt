@@ -97,4 +97,5 @@ class SubscriptionAdapter(
     }
 }
 
-class SubscriptionViewHolder(val binding: TrendingRowBinding) : RecyclerView.ViewHolder(binding.root)
+class SubscriptionViewHolder(val binding: TrendingRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

@@ -6,37 +6,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:paddingHorizontal="8dp">
-
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/watch_history"
-            android:textSize="16sp" />
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="8dp">
 
-        <ImageView
-            android:id="@+id/clearHistory"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_reset" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/watch_history"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/clearHistory"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_reset" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/watchHistoryRecView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:nestedScrollingEnabled="false" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/watchHistoryRecView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 

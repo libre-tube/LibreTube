@@ -39,7 +39,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <com.github.libretube.util.CustomSwipeToRefresh
+    <com.github.libretube.views.CustomSwipeToRefresh
         android:id="@+id/sub_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -101,5 +101,5 @@
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
-    </com.github.libretube.util.CustomSwipeToRefresh>
+    </com.github.libretube.views.CustomSwipeToRefresh>
 </RelativeLayout>

@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.obj.PlaylistId
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.github.libretube.R
+import com.github.libretube.preferences.PreferenceHelper
 
 object ThemeHelper {
 

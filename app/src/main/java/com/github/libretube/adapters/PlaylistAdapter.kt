@@ -16,7 +16,7 @@ import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope

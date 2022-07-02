@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Purple">
         <activity
-            android:name=".util.Player"
+            android:name=".activities.Player"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity

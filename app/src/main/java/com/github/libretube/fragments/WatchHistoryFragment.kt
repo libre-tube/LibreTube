@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.adapters.WatchHistoryAdapter
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 
 class WatchHistoryFragment : Fragment() {
     private val TAG = "WatchHistoryFragment"

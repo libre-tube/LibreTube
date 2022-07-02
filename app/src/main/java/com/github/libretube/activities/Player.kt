@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.activities
 
 import android.app.Activity
 import android.os.Bundle

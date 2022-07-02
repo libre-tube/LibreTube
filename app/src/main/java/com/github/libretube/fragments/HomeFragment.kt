@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentHomeBinding
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException

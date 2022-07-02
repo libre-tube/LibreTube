@@ -88,4 +88,5 @@ class WatchHistoryAdapter(
     }
 }
 
-class WatchHistoryViewHolder(val binding: WatchHistoryRowBinding) : RecyclerView.ViewHolder(binding.root)
+class WatchHistoryViewHolder(val binding: WatchHistoryRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

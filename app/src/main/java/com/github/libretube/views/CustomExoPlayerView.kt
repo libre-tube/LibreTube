@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.views
 
 import android.annotation.SuppressLint
 import android.content.Context

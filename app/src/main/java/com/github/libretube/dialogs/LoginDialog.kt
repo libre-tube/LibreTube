@@ -12,7 +12,7 @@ import com.github.libretube.R
 import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.obj.Login
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
