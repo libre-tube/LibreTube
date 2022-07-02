@@ -70,7 +70,7 @@ class PlaylistOptionsDialog(
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    RetrofitInstance.api.importPlaylist(token, PlaylistId(playlistId))
+                    RetrofitInstance.authApi.importPlaylist(token, PlaylistId(playlistId))
                 } catch (e: IOException) {
                     println(e)
                     return@launch

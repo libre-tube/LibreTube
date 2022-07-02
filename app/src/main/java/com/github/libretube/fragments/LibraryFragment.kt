@@ -87,7 +87,7 @@ class LibraryFragment : Fragment() {
             binding.playlistRefresh.isRefreshing = true
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.playlists(token)
+                    RetrofitInstance.authApi.playlists(token)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

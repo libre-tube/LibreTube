@@ -91,7 +91,7 @@ class PlaylistAdapter(
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    RetrofitInstance.api.removeFromPlaylist(
+                    RetrofitInstance.authApi.removeFromPlaylist(
                         token,
                         PlaylistId(playlistId = playlistId, index = position)
                     )

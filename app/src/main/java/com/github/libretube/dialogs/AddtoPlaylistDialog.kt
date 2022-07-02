@@ -55,7 +55,7 @@ class AddtoPlaylistDialog : DialogFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.playlists(token)
+                    RetrofitInstance.authApi.playlists(token)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -95,7 +95,7 @@ class AddtoPlaylistDialog : DialogFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.addToPlaylist(token, PlaylistId(playlistId, videoId))
+                    RetrofitInstance.authApi.addToPlaylist(token, PlaylistId(playlistId, videoId))
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
