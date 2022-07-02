@@ -2,7 +2,6 @@ package com.github.libretube.preferences
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R

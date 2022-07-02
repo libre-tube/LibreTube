@@ -2,7 +2,6 @@ package com.github.libretube.preferences
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
