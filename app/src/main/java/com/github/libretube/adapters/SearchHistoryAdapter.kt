@@ -18,21 +18,19 @@ class SearchHistoryAdapter(
 ) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
-    private lateinit var binding: SearchhistoryRowBinding
-
     override fun getItemCount(): Int {
         return historyList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = SearchhistoryRowBinding.inflate(layoutInflater, parent, false)
-        return SearchHistoryViewHolder(binding.root)
+        val binding = SearchhistoryRowBinding.inflate(layoutInflater, parent, false)
+        return SearchHistoryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
         val history = historyList[position]
-        binding.apply {
+        holder.binding.apply {
             historyText.text = history
 
             deleteHistory.setOnClickListener {
@@ -49,7 +47,4 @@ class SearchHistoryAdapter(
     }
 }
 
-class SearchHistoryViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class SearchHistoryViewHolder(val binding: SearchhistoryRowBinding) : RecyclerView.ViewHolder(binding.root)

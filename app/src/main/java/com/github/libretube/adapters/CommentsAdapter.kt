@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
+import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
@@ -28,7 +29,6 @@ class CommentsAdapter(
     private val comments: MutableList<Comment>
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
     private val TAG = "CommentsAdapter"
-    private lateinit var binding: CommentsRowBinding
 
     private var isLoading = false
     private var nextpage = ""
@@ -42,13 +42,13 @@ class CommentsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
-        return CommentsViewHolder(binding.root)
+        val binding = CommentsRowBinding.inflate(layoutInflater, parent, false)
+        return CommentsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         val comment = comments[position]
-        binding.apply {
+        holder.binding.apply {
             commentInfos.text =
                 comment.author.toString() +
                 " • " + comment.commentedTime.toString()
@@ -67,7 +67,7 @@ class CommentsAdapter(
                 heartedImageView.visibility = View.VISIBLE
             }
             commentorImage.setOnClickListener {
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to comment.commentorUrl)
                 activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
@@ -81,7 +81,7 @@ class CommentsAdapter(
                 } catch (e: Exception) {
                 }
             }
-            repliesRecView.layoutManager = LinearLayoutManager(holder.v.context)
+            repliesRecView.layoutManager = LinearLayoutManager(root.context)
             val repliesAdapter = RepliesAdapter(CommentsPage().comments)
             repliesRecView.adapter = repliesAdapter
             root.setOnClickListener {
@@ -90,7 +90,7 @@ class CommentsAdapter(
                         nextpage = comment.repliesPage
                         fetchReplies(nextpage, repliesAdapter)
                     } else {
-                        Toast.makeText(holder.v.context, R.string.no_replies, Toast.LENGTH_SHORT)
+                        Toast.makeText(root.context, R.string.no_replies, Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {
@@ -123,7 +123,4 @@ class CommentsAdapter(
     }
 }
 
-class CommentsViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class CommentsViewHolder(val binding: CommentsRowBinding) : RecyclerView.ViewHolder(binding.root)

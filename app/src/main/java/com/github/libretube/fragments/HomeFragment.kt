@@ -46,15 +46,14 @@ class HomeFragment : Fragment() {
             resources.getInteger(R.integer.grid_items).toString()
         )!!
         binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
-        fetchJson(binding.progressBar, binding.recview)
+        fetchJson()
         binding.homeRefresh.isEnabled = true
         binding.homeRefresh.setOnRefreshListener {
-            Log.d(TAG, "hmm")
-            fetchJson(binding.progressBar, binding.recview)
+            fetchJson()
         }
     }
 
-    private fun fetchJson(progressBar: ProgressBar, recyclerView: RecyclerView) {
+    private fun fetchJson() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -73,8 +72,8 @@ class HomeFragment : Fragment() {
                     binding.homeRefresh.isRefreshing = false
                 }
                 runOnUiThread {
-                    progressBar.visibility = View.GONE
-                    recyclerView.adapter = TrendingAdapter(response, childFragmentManager)
+                    binding.progressBar.visibility = View.GONE
+                    binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.github.libretube.adapters
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +23,6 @@ import java.io.IOException
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
     val TAG = "SubChannelAdapter"
-    private lateinit var binding: ChannelSubscriptionRowBinding
 
     private var subscribed = true
     private var isLoading = false
@@ -36,17 +34,17 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
         SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
-        return SubscriptionChannelViewHolder(binding.root)
+        val binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
+        return SubscriptionChannelViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
         val subscription = subscriptions[position]
-        binding.apply {
+        holder.binding.apply {
             subscriptionChannelName.text = subscription.name
             Picasso.get().load(subscription.avatar).into(subscriptionChannelImage)
             root.setOnClickListener {
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to subscription.url)
                 activity.navController.navigate(R.id.channelFragment, bundle)
             }
@@ -56,11 +54,11 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                     val channelId = subscription.url?.replace("/channel/", "")!!
                     if (subscribed) {
                         unsubscribe(root.context, channelId)
-                        subscriptionSubscribe.text = holder.v.context.getString(R.string.subscribe)
+                        subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
                     } else {
                         subscribe(root.context, channelId)
                         subscriptionSubscribe.text =
-                            holder.v.context.getString(R.string.unsubscribe)
+                            root.context.getString(R.string.unsubscribe)
                     }
                 }
             }
@@ -112,7 +110,4 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     }
 }
 
-class SubscriptionChannelViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class SubscriptionChannelViewHolder(val binding: ChannelSubscriptionRowBinding) : RecyclerView.ViewHolder(binding.root)

@@ -16,9 +16,7 @@ import com.squareup.picasso.Picasso
 class RepliesAdapter(
     private val replies: MutableList<Comment>
 ) : RecyclerView.Adapter<RepliesViewHolder>() {
-
     private val TAG = "RepliesAdapter"
-    private lateinit var binding: RepliesRowBinding
 
     fun clear() {
         val size: Int = replies.size
@@ -34,12 +32,12 @@ class RepliesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepliesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = RepliesRowBinding.inflate(layoutInflater, parent, false)
-        return RepliesViewHolder(binding.root)
+        val binding = RepliesRowBinding.inflate(layoutInflater, parent, false)
+        return RepliesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RepliesViewHolder, position: Int) {
-        binding.apply {
+        holder.binding.apply {
             val reply = replies[position]
             commentInfos.text =
                 reply.author.toString() +
@@ -59,7 +57,7 @@ class RepliesAdapter(
                 heartedImageView.visibility = View.VISIBLE
             }
             commentorImage.setOnClickListener {
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to reply.commentorUrl)
                 activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
@@ -81,7 +79,4 @@ class RepliesAdapter(
     }
 }
 
-class RepliesViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class RepliesViewHolder(val binding: RepliesRowBinding) : RecyclerView.ViewHolder(binding.root)

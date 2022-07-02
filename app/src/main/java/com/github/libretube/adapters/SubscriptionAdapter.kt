@@ -24,7 +24,6 @@ class SubscriptionAdapter(
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<SubscriptionViewHolder>() {
     private val TAG = "SubscriptionAdapter"
-    private lateinit var binding: TrendingRowBinding
 
     var i = 0
     override fun getItemCount(): Int {
@@ -41,13 +40,13 @@ class SubscriptionAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
-        return SubscriptionViewHolder(binding.root)
+        val binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
+        return SubscriptionViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = videoFeed[position]
-        binding.apply {
+        holder.binding.apply {
             textViewTitle.text = trending.title
             textViewChannel.text =
                 trending.uploaderName + " • " +
@@ -56,11 +55,11 @@ class SubscriptionAdapter(
             if (trending.duration != -1L) {
                 thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
             } else {
-                thumbnailDuration.text = holder.v.context.getString(R.string.live)
+                thumbnailDuration.text = root.context.getString(R.string.live)
                 thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
             }
             channelImage.setOnClickListener {
-                val activity = holder.v.context as MainActivity
+                val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to trending.uploaderUrl)
                 activity.navController.navigate(R.id.channelFragment, bundle)
                 try {
@@ -81,7 +80,7 @@ class SubscriptionAdapter(
                 bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
                 val frag = PlayerFragment()
                 frag.arguments = bundle
-                val activity = holder.v.context as AppCompatActivity
+                val activity = root.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
                     .remove(PlayerFragment())
                     .commit()
@@ -91,7 +90,7 @@ class SubscriptionAdapter(
             }
             root.setOnLongClickListener {
                 val videoId = trending.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, holder.v.context)
+                VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, VideoOptionsDialog.TAG)
                 true
             }
@@ -99,7 +98,4 @@ class SubscriptionAdapter(
     }
 }
 
-class SubscriptionViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class SubscriptionViewHolder(val binding: TrendingRowBinding) : RecyclerView.ViewHolder(binding.root)
