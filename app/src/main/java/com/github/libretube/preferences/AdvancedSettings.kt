@@ -25,10 +25,11 @@ class AdvancedSettings : PreferenceFragmentCompat() {
             true
         }
 
-        // clear watch history
+        // clear watch history and positions
         val clearWatchHistory = findPreference<Preference>("clear_watch_history")
         clearWatchHistory?.setOnPreferenceClickListener {
             PreferenceHelper.removePreference(requireContext(), "watch_history")
+            PreferenceHelper.removePreference(requireContext(), "watch_positions")
             true
         }
 

@@ -54,6 +54,13 @@
             app:key="watch_history_toggle"
             app:title="@string/watch_history" />
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_play_filled"
+            app:key="watch_position_toggle"
+            app:title="@string/watch_positions"
+            app:summary="@string/watch_positions_summary"/>
+
         <Preference
             android:icon="@drawable/ic_trash"
             app:key="clear_watch_history"

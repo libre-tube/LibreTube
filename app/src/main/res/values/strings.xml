@@ -208,4 +208,6 @@
     <string name="account">Account</string>
     <string name="restore">Restore</string>
     <string name="watch_history">Watch History</string>
+    <string name="watch_positions">Remember position</string>
+    <string name="watch_positions_summary">Remember the watch position and automatically seek to it.</string>
 </resources>

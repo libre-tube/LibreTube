@@ -371,6 +371,7 @@ class PlayerFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
+            saveWatchPosition()
             mediaSession.isActive = false
             mediaSession.release()
             mediaSessionConnector.setPlayer(null)
@@ -381,6 +382,25 @@ class PlayerFragment : Fragment() {
             notificationManager.cancel(1)
             exoPlayer.release()
         } catch (e: Exception) {
+        }
+    }
+
+    // save the watch position if video isn't finished and option enabled
+    private fun saveWatchPosition() {
+        val watchPositionsEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "watch_positions_toggle",
+            true
+        )
+        if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
+            PreferenceHelper.saveWatchPosition(
+                requireContext(),
+                videoId!!,
+                exoPlayer.currentPosition
+            )
+        } else if (watchPositionsEnabled) {
+            // delete watch position if video has ended
+            PreferenceHelper.removeWatchPosition(requireContext(), videoId!!)
         }
     }
 
@@ -445,6 +465,7 @@ class PlayerFragment : Fragment() {
                         val position = arguments?.getLong("timeStamp")!! * 1000
                         exoPlayer.seekTo(position)
                     }
+                    seekToWatchPosition()
                     exoPlayer.play()
                     exoPlayerView.useController = true
                     initializePlayerNotification(requireContext())
@@ -462,6 +483,14 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    // seek to saved watch position if available
+    private fun seekToWatchPosition() {
+        val watchPositions = PreferenceHelper.getWatchPositions(requireContext())
+        watchPositions.forEach {
+            if (it.videoId == videoId) exoPlayer.seekTo(it.position)
+        }
     }
 
     // the function is working recursively
