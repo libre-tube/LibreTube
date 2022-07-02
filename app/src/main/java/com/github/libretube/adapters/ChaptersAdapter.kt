@@ -1,11 +1,9 @@
 package com.github.libretube.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.ChapterColumnBinding
-import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.obj.ChapterSegment
 import com.google.android.exoplayer2.ExoPlayer
 import com.squareup.picasso.Picasso

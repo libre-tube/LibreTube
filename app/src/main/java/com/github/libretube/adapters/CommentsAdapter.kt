@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
-import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
