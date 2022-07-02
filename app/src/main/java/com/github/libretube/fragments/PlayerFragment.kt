@@ -34,6 +34,7 @@ import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
@@ -93,6 +94,7 @@ class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
     private lateinit var binding: FragmentPlayerBinding
+    private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
 
     private var videoId: String? = null
     private var playlistId: String? = null
@@ -145,6 +147,7 @@ class PlayerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPlayerBinding.inflate(layoutInflater, container, false)
+        playerBinding = binding.player.binding
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -227,7 +230,7 @@ class PlayerFragment : Fragment() {
                 .remove(this)
                 .commit()
         }
-        binding.player.binding.closeImageButton.setOnClickListener {
+        playerBinding.closeImageButton.setOnClickListener {
             isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
@@ -259,11 +262,8 @@ class PlayerFragment : Fragment() {
             toggleComments()
         }
 
-        val fullScreenButton = binding.player.binding.fullscreen
-        val exoTitle = binding.player.binding.exoTitle
-
         // FullScreen button trigger
-        fullScreenButton.setOnClickListener {
+        playerBinding.fullscreen.setOnClickListener {
             exoPlayerView.hideController()
             if (!isFullScreen) {
                 with(binding.playerMotionLayout) {
@@ -273,8 +273,8 @@ class PlayerFragment : Fragment() {
 
                 binding.mainContainer.isClickable = true
                 binding.linLayout.visibility = View.GONE
-                fullScreenButton.setImageResource(R.drawable.ic_fullscreen_exit)
-                exoTitle.visibility = View.VISIBLE
+                playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
+                playerBinding.exoTitle.visibility = View.VISIBLE
 
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -286,8 +286,8 @@ class PlayerFragment : Fragment() {
 
                 binding.mainContainer.isClickable = false
                 binding.linLayout.visibility = View.VISIBLE
-                fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
-                exoTitle.visibility = View.INVISIBLE
+                playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
+                playerBinding.exoTitle.visibility = View.INVISIBLE
 
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -296,8 +296,7 @@ class PlayerFragment : Fragment() {
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        val aspectRatioButton = binding.player.binding.aspectRatioButton
-        aspectRatioButton.setOnClickListener {
+        playerBinding.aspectRatioButton.setOnClickListener {
             if (isZoomed) {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 isZoomed = false
@@ -308,13 +307,12 @@ class PlayerFragment : Fragment() {
         }
 
         // lock and unlock the player
-        val lockPlayerButton = binding.player.binding.lockPlayer
-        lockPlayerButton.setOnClickListener {
+        playerBinding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
             if (!isPlayerLocked) {
-                lockPlayerButton.setImageResource(R.drawable.ic_locked)
+                playerBinding.lockPlayer.setImageResource(R.drawable.ic_locked)
             } else {
-                lockPlayerButton.setImageResource(R.drawable.ic_unlocked)
+                playerBinding.lockPlayer.setImageResource(R.drawable.ic_unlocked)
             }
 
             // show/hide all the controls
@@ -629,7 +627,7 @@ class PlayerFragment : Fragment() {
         binding.playerTitle.text = response.title
         binding.playerDescription.text = response.description
 
-        binding.player.binding.exoTitle.text = response.title
+        playerBinding.exoTitle.text = response.title
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -801,9 +799,6 @@ class PlayerFragment : Fragment() {
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
-        val qualityText = binding.player.binding.qualityText
-        val qualitySelect = binding.player.binding.qualitySelect
-
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
 
@@ -843,7 +838,7 @@ class PlayerFragment : Fragment() {
                             val videoUri = videosUrlArray[index]
                             val audioUrl = getMostBitRate(response.audioStreams!!)
                             setMediaSource(subtitle, videoUri, audioUrl)
-                            qualityText.text = videosNameArray[index]
+                            playerBinding.qualityText.text = videosNameArray[index]
                             return@lit
                         } else if (response.hls != null) {
                             val mediaItem: MediaItem = MediaItem.Builder()
@@ -874,11 +869,11 @@ class PlayerFragment : Fragment() {
                 val videoUri = videosUrlArray[0]
                 val audioUrl = getMostBitRate(response.audioStreams!!)
                 setMediaSource(subtitle, videoUri, audioUrl)
-                qualityText.text = videosNameArray[0]
+                playerBinding.qualityText.text = videosNameArray[0]
             }
         }
 
-        qualitySelect.setOnClickListener {
+        playerBinding.qualitySelect.setOnClickListener {
             // Dialog for quality selection
             val builder: MaterialAlertDialogBuilder? = activity?.let {
                 MaterialAlertDialogBuilder(it)
@@ -905,7 +900,7 @@ class PlayerFragment : Fragment() {
                         setMediaSource(subtitle, videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
-                    qualityText.text = videosNameArray[which]
+                    playerBinding.qualityText.text = videosNameArray[which]
                 }
             val dialog = builder.create()
             dialog.show()
@@ -986,12 +981,12 @@ class PlayerFragment : Fragment() {
 
     private fun lockPlayer(isLocked: Boolean) {
         val visibility = if (isLocked) View.VISIBLE else View.INVISIBLE
-        binding.player.binding.exoTopBarRight.visibility = visibility
-        binding.player.binding.exoPlayPause.visibility = visibility
-        binding.player.binding.exoFfwdWithAmount.visibility = visibility
-        binding.player.binding.exoRewWithAmount.visibility = visibility
-        binding.player.binding.exoBottomBar.visibility = visibility
-        binding.player.binding.exoTitle.visibility =
+        playerBinding.exoTopBarRight.visibility = visibility
+        playerBinding.exoPlayPause.visibility = visibility
+        playerBinding.exoFfwdWithAmount.visibility = visibility
+        playerBinding.exoRewWithAmount.visibility = visibility
+        playerBinding.exoBottomBar.visibility = visibility
+        playerBinding.exoTitle.visibility =
             if (isLocked && isFullScreen) View.VISIBLE else View.INVISIBLE
     }
 
@@ -1153,7 +1148,7 @@ class PlayerFragment : Fragment() {
                 enableTransition(R.id.yt_transition, false)
             }
             binding.mainContainer.isClickable = true
-            binding.player.binding.exoTopBar.visibility = View.GONE
+            playerBinding.exoTopBar.visibility = View.GONE
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
@@ -1165,7 +1160,7 @@ class PlayerFragment : Fragment() {
             exoPlayerView.showController()
             exoPlayerView.useController = true
             binding.mainContainer.isClickable = false
-            binding.player.binding.exoTopBar.visibility = View.VISIBLE
+            playerBinding.exoTopBar.visibility = View.VISIBLE
         }
     }
 
