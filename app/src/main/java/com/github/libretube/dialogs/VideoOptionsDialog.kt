@@ -7,8 +7,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.BackgroundMode
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**

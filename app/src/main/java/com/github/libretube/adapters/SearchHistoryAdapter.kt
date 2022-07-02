@@ -7,7 +7,7 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SearchhistoryRowBinding
 import com.github.libretube.fragments.SearchFragment
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 
 class SearchHistoryAdapter(
     private val context: Context,
@@ -46,4 +46,5 @@ class SearchHistoryAdapter(
     }
 }
 
-class SearchHistoryViewHolder(val binding: SearchhistoryRowBinding) : RecyclerView.ViewHolder(binding.root)
+class SearchHistoryViewHolder(val binding: SearchhistoryRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

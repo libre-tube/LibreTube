@@ -11,7 +11,7 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso

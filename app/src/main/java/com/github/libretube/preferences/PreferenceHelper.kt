@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.preferences
 
 import android.content.Context
 import android.content.SharedPreferences

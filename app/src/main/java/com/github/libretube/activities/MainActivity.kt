@@ -33,10 +33,10 @@ import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView

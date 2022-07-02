@@ -38,4 +38,5 @@ class SearchSuggestionsAdapter(
     }
 }
 
-class SearchSuggestionsViewHolder(val binding: SearchsuggestionRowBinding) : RecyclerView.ViewHolder(binding.root)
+class SearchSuggestionsViewHolder(val binding: SearchsuggestionRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

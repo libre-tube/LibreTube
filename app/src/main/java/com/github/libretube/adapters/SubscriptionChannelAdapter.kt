@@ -11,7 +11,7 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -110,4 +110,5 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     }
 }
 
-class SubscriptionChannelViewHolder(val binding: ChannelSubscriptionRowBinding) : RecyclerView.ViewHolder(binding.root)
+class SubscriptionChannelViewHolder(val binding: ChannelSubscriptionRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

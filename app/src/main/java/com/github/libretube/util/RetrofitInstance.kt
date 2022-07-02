@@ -1,7 +1,5 @@
 package com.github.libretube.util
 
-import com.github.libretube.resettableLazy
-import com.github.libretube.resettableManager
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 

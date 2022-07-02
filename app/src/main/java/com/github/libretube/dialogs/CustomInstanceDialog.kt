@@ -11,7 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.obj.CustomInstance
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.net.URL
 

@@ -25,7 +25,7 @@ import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.databinding.FragmentSearchBinding
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
