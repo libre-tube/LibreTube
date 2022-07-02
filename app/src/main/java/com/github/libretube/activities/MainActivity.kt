@@ -61,6 +61,8 @@ class MainActivity : AppCompatActivity() {
 
         RetrofitInstance.url =
             PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
+        RetrofitInstance.authUrl =
+            PreferenceHelper.getString(this, "selectAuthInstance", "https://pipedapi.kavin.rocks/")!!
 
         ThemeHelper.updateTheme(this)
         LocaleHelper.updateLanguage(this)

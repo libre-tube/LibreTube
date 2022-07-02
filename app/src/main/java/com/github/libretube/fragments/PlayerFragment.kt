@@ -1025,7 +1025,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.isSubscribed(
+                    RetrofitInstance.authApi.isSubscribed(
                         channel_id,
                         token
                     )
@@ -1065,7 +1065,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.subscribe(
+                    RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channel_id)
                     )
@@ -1088,7 +1088,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.unsubscribe(
+                    RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channel_id)
                     )

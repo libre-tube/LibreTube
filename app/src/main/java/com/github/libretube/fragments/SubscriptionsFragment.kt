@@ -109,7 +109,7 @@ class SubscriptionsFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getFeed(token)
+                    RetrofitInstance.authApi.getFeed(token)
                 } catch (e: IOException) {
                     Log.e(TAG, e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -148,7 +148,7 @@ class SubscriptionsFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.subscriptions(token)
+                    RetrofitInstance.authApi.subscriptions(token)
                 } catch (e: IOException) {
                     Log.e(TAG, e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")

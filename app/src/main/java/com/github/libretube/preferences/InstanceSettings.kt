@@ -120,6 +120,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
         instance?.setOnPreferenceChangeListener { _, newValue ->
             requireMainActivityRestart = true
             RetrofitInstance.url = newValue.toString()
+            RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
             true
@@ -302,7 +303,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.importSubscriptions(
+                    RetrofitInstance.authApi.importSubscriptions(
                         false,
                         token,
                         channels

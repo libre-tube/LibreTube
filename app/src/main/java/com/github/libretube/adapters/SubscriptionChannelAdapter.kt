@@ -70,7 +70,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     val token = PreferenceHelper.getToken(context)
-                    RetrofitInstance.api.subscribe(
+                    RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channelId)
                     )
@@ -92,7 +92,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     val token = PreferenceHelper.getToken(context)
-                    RetrofitInstance.api.unsubscribe(
+                    RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channelId)
                     )

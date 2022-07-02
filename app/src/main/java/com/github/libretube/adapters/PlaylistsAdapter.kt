@@ -76,7 +76,7 @@ class PlaylistsAdapter(
         fun run() {
             GlobalScope.launch {
                 val response = try {
-                    RetrofitInstance.api.deletePlaylist(token, PlaylistId(id))
+                    RetrofitInstance.authApi.deletePlaylist(token, PlaylistId(id))
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

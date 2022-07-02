@@ -57,7 +57,7 @@ class DeleteAccountDialog : DialogFragment() {
                 val token = PreferenceHelper.getToken(requireContext())
 
                 try {
-                    RetrofitInstance.api.deleteAccount(token, DeleteUserRequest(password))
+                    RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
