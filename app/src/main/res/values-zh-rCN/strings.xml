@@ -207,4 +207,5 @@
     <string name="account">账户</string>
     <string name="restore">恢复</string>
     <string name="deleteAccount">删除账户</string>
+    <string name="watch_history">观看历史</string>
 </resources>

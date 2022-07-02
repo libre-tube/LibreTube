@@ -97,7 +97,7 @@
     <string name="login_first">נא להיכנס ולנסות שוב.</string>
     <string name="save">שמירה</string>
     <string name="region">אזור</string>
-    <string name="dlisinprogress">נא להמתין לסיום כל ההורדות…</string>
+    <string name="dlisinprogress">כבר מתבצעת הורדה, נא להמתין לסיומה.</string>
     <string name="downloadfailed">ההורדה נכשלה.</string>
     <string name="import_from_yt">ייבוא מינויים</string>
     <string name="systemDefault">מערכת</string>
@@ -207,4 +207,5 @@
     <string name="restore">שחזור</string>
     <string name="deleteAccount">מחיקת חשבון</string>
     <string name="deleteAccount_summary">מחיקת חשבון ה־Piped</string>
+    <string name="watch_history">היסטוריית צפייה</string>
 </resources>

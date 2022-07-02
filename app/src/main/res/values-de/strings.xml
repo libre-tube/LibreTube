@@ -23,7 +23,7 @@
     <string name="importsuccess">Abonniert</string>
     <string name="subscribeIsEmpty">Abonniere erst einige Kanäle.</string>
     <string name="cannotDownload">Video kann nicht heruntergeladen werden.</string>
-    <string name="dlisinprogress">Bitte warte, bis alle Datenübertragungen abgeschlossen sind …</string>
+    <string name="dlisinprogress">Eine weitere Datenübertragung ist bereits im Gange, bitte warten Sie, bis sie beendet ist.</string>
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="vlcerror">Kann nicht in VLC geöffnet werden. Möglicherweise ist es nicht installiert.</string>
     <string name="app_theme">Erscheinungsbild</string>
@@ -193,4 +193,9 @@
     <string name="player_summary">Qualität und Verhalten des Players</string>
     <string name="pauseOnScreenOff">Automatische Pause</string>
     <string name="clonePlaylist">Wiedergabeliste klonen</string>
+    <string name="watch_history">Verlauf ansehen</string>
+    <string name="instance_frontend_url">URL zum Instanz-Frontend</string>
+    <string name="piped_summary">Piped ist ein alternatives quelloffenes Web-Frontend für YouTube, das die von uns verwendete API bereitstellt. Ohne Piped, würde LibreTube nicht existieren. Großer Dank an ihre Entwickler!</string>
+    <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist.</string>
+    <string name="autoplay_summary">Das nächste Video automatisch abspielen, wenn das aktuelle beendet ist.</string>
 </resources>

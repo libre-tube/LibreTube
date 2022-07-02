@@ -33,7 +33,7 @@
     <string name="okay">Oldu</string>
     <string name="history">Tarixçə</string>
     <string name="search_history">Axtarış Tarixçəsi</string>
-    <string name="clear_history">Tarixçəni Təmizləyin</string>
+    <string name="clear_history">Tarixçəni təmizləyin</string>
     <string name="music_albums">YT Musiqi Albomları</string>
     <string name="music_songs">YT Musiqi Mahnıları</string>
     <string name="music_videos">YT Musiqi Videoları</string>
@@ -201,10 +201,11 @@
     <string name="pauseOnScreenOff">Avto-fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynadıcını dayandırın.</string>
     <string name="clonePlaylist">Pleylisti klonlayın</string>
-    <string name="reset">İlkin tənzimləmələrə bərpa edin</string>
-    <string name="reset_message">Siz əminsiz\? Bu, sizi sistemdən çıxaracaq və bütün tənzimləmələrinizi sıfırlayacaq!</string>
+    <string name="reset">İlkin tənzimləmələri qaytarın</string>
+    <string name="reset_message">Siz əminsiniz\? Bu, sizi sistemdən çıxaracaq və bütün tənzimləmələrinizi sıfırlayacaq!</string>
     <string name="account">Hesab</string>
-    <string name="restore">Bərpa edin</string>
+    <string name="restore">Bərpa Edin</string>
     <string name="deleteAccount">Hesabı silin</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
+    <string name="watch_history">Baxış Tarixçəsi</string>
 </resources>

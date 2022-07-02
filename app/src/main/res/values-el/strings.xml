@@ -207,4 +207,5 @@
     <string name="account">Λογαριασμός</string>
     <string name="deleteAccount_summary">Διαγράψτε τον Piped λογαριασμό σας</string>
     <string name="restore">Επαναφορά</string>
+    <string name="watch_history">Ιστορικό παρακολούθησης</string>
 </resources>

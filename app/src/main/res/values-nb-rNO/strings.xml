@@ -203,4 +203,9 @@
     <string name="pauseOnScreenOff">Automatisk pause</string>
     <string name="pauseOnScreenOff_summary">Sett avspilleren på pause når skjermen skrus av.</string>
     <string name="clonePlaylist">Dupliser spillelisten</string>
+    <string name="deleteAccount">Slett konto</string>
+    <string name="deleteAccount_summary">Slett din Piped-konto</string>
+    <string name="account">Konto</string>
+    <string name="restore">Gjenopprett</string>
+    <string name="watch_history">Visningshistorikk</string>
 </resources>
