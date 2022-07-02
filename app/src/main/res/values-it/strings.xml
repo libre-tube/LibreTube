@@ -208,4 +208,6 @@
     <string name="restore">Ripristina</string>
     <string name="account">Account</string>
     <string name="watch_history">Guarda la cronologia</string>
+    <string name="watch_positions">Ricorda posizione</string>
+    <string name="watch_positions_summary">Ricorda la posizione a che minuto stavi guardando e cercala automaticamente.</string>
 </resources>
