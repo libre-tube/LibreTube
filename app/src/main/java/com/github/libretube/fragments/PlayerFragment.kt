@@ -702,8 +702,6 @@ class PlayerFragment : Fragment() {
                         ).toFloat()
                 }
                 binding.mainContainer.requestLayout()
-
-                // FIXME and make me work :/
             }
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
