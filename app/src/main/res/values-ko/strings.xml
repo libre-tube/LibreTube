@@ -45,10 +45,10 @@
     <string name="success">완료.</string>
     <string name="fail">실패:(</string>
     <string name="about">정보</string>
-    <string name="dlisinprogress">모든 다운로드가 완료될 때까지 기다려 주십시오…</string>
+    <string name="dlisinprogress">다른 다운로드가 이미 진행 중입니다. 완료될 때까지 기다려 주십시오.</string>
     <string name="subscribeIsEmpty">먼저 일부 채널을 구독하세요.</string>
     <string name="error">문제가 발생했습니다.</string>
-    <string name="notgmail">LibreTube 계정용입니다.</string>
+    <string name="notgmail">이것은 Piped 계정을 위한 것입니다.</string>
     <string name="defres">기본 비디오 해상도</string>
     <string name="playlistName">플레이리스트 이름</string>
     <string name="import_from_yt_summary">YouTube 또는 NewPipe에서</string>
@@ -200,4 +200,11 @@
     <string name="pauseOnScreenOff_summary">화면이 꺼질 경우 동영상 재생을 일시중지합니다.</string>
     <string name="clonePlaylist">재생목록 복제</string>
     <string name="instance_frontend_url">인스턴스 프론트엔드에 대한 URL</string>
+    <string name="deleteAccount">계정 삭제</string>
+    <string name="deleteAccount_summary">당신의 Piped 계정을 삭제합니다</string>
+    <string name="account">계정</string>
+    <string name="restore">복원</string>
+    <string name="watch_history">시청 기록</string>
+    <string name="watch_positions">위치 기억</string>
+    <string name="watch_positions_summary">시청 위치를 기억하고 자동으로 찾습니다.</string>
 </resources>
