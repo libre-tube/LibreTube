@@ -268,7 +268,9 @@ class PlayerFragment : Fragment() {
         // FullScreen button trigger
         playerBinding.fullscreen.setOnClickListener {
             exoPlayerView.hideController()
+            var scaleFactor: Float? = null
             if (!isFullScreen) {
+                // go to fullscreen mode
                 with(binding.playerMotionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                     enableTransition(R.id.yt_transition, false)
@@ -279,9 +281,12 @@ class PlayerFragment : Fragment() {
                 playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
                 playerBinding.exoTitle.visibility = View.VISIBLE
 
+                scaleFactor = 1.3F
+
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
             } else {
+                // leave fullscreen mode
                 with(binding.playerMotionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
@@ -292,10 +297,20 @@ class PlayerFragment : Fragment() {
                 playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
                 playerBinding.exoTitle.visibility = View.INVISIBLE
 
+                scaleFactor = 1F
+
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             }
             isFullScreen = !isFullScreen
+
+            // scale the exo player center controls
+            playerBinding.exoFfwdWithAmount.scaleX = scaleFactor
+            playerBinding.exoFfwdWithAmount.scaleY = scaleFactor
+            playerBinding.exoRewWithAmount.scaleX = scaleFactor
+            playerBinding.exoRewWithAmount.scaleY = scaleFactor
+            playerBinding.exoPlayPause.scaleX = scaleFactor
+            playerBinding.exoPlayPause.scaleY = scaleFactor
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
@@ -680,16 +695,13 @@ class PlayerFragment : Fragment() {
                 // Set new width/height of view
                 // height or width must be cast to float as int/int will give 0
 
-                val currentWidth = binding.mainContainer.height
-                // Redraw myView
+                // Redraw the player container with the new layout height
                 (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
                     matchConstraintPercentHeight = (
                         videoSize.height / videoSize.width
                         ).toFloat()
                 }
                 binding.mainContainer.requestLayout()
-
-                // FIXME and make me work :/
             }
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
@@ -1032,14 +1044,14 @@ class PlayerFragment : Fragment() {
     }
 
     private fun lockPlayer(isLocked: Boolean) {
-        val visibility = if (isLocked) View.VISIBLE else View.INVISIBLE
+        val visibility = if (isLocked) View.VISIBLE else View.GONE
         playerBinding.exoTopBarRight.visibility = visibility
         playerBinding.exoPlayPause.visibility = visibility
         playerBinding.exoFfwdWithAmount.visibility = visibility
         playerBinding.exoRewWithAmount.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
-        playerBinding.exoTitle.visibility =
-            if (isLocked && isFullScreen) View.VISIBLE else View.INVISIBLE
+        playerBinding.closeImageButton.visibility = visibility
+        playerBinding.exoTitle.visibility = visibility
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/player_scene"
-    tools:context=".PlayerFragment">
+    tools:context=".fragments.PlayerFragment">
 
     <ScrollView
         android:id="@+id/player_scrollView"
@@ -358,7 +358,7 @@
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
+        android:background="?attr/colorSurface"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"

@@ -49,11 +49,10 @@
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:background="#00FFFFFF"
                 android:padding="@dimen/exo_icon_padding"
                 android:src="@drawable/ic_close"
-                android:visibility="gone"
                 app:tint="@android:color/white" />
 
             <ImageButton
@@ -132,7 +131,6 @@
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
-        android:background="@color/exo_bottom_bar_background"
         android:layoutDirection="ltr">
 
         <LinearLayout
@@ -200,7 +198,6 @@
                 android:id="@id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@color/exo_bottom_bar_background"
                 app:bar_height="2dp"
                 app:played_color="?attr/colorOnSecondary"
                 app:scrubber_color="?attr/colorOnPrimary"
@@ -225,7 +222,7 @@
 
     <LinearLayout
         android:id="@id/exo_center_controls"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
@@ -233,25 +230,37 @@
         android:gravity="center"
         android:padding="@dimen/exo_styled_controls_padding">
 
-        <Button
-            android:id="@id/exo_rew_with_amount"
-            style="@style/ExoStyledControls.Button.Center.RewWithAmount"
-            android:layout_marginRight="25dp"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@id/exo_rew_with_amount"
+                style="@style/ExoStyledControls.Button.Center.RewWithAmount"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp" />
+
+        </LinearLayout>
 
         <ImageButton
             android:id="@id/exo_play_pause"
-            style="@style/ExoStyledControls.Button.Center.PlayPause"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+            style="@style/ExoStyledControls.Button.Center.PlayPause" />
 
-        <Button
-            android:id="@id/exo_ffwd_with_amount"
-            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
-            android:layout_marginLeft="25dp"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@id/exo_ffwd_with_amount"
+                style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
