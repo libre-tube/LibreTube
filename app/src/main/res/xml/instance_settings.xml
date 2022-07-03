@@ -23,6 +23,21 @@
             app:key="clearCustomInstances"
             app:title="@string/clear_customInstances" />
 
+        <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_auth"
+            app:key="auth_instance_toggle"
+            app:summary="@string/auth_instance_summary"
+            app:title="@string/auth_instance" />
+
+        <ListPreference
+            android:icon="@drawable/ic_server"
+            app:defaultValue="https://pipedapi.kavin.rocks/"
+            app:entries="@array/instances"
+            app:entryValues="@array/instancesValue"
+            app:key="selectAuthInstance"
+            app:title="@string/auth_instances" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/account">
