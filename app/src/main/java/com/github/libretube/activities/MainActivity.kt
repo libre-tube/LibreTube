@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
+
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
             navController = findNavController(R.id.fragment)
@@ -91,12 +92,19 @@ class MainActivity : AppCompatActivity() {
             if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
                 false
 
-            // navigate to the default start tab
-            when (PreferenceHelper.getString(this, "default_tab", "home")) {
-                "home" -> navController.navigate(R.id.homeFragment)
-                "subscriptions" -> navController.navigate(R.id.subscriptionsFragment)
-                "library" -> navController.navigate(R.id.libraryFragment)
+            // save start tab fragment id
+            val fragmentId = when (PreferenceHelper.getString(this, "default_tab", "home")) {
+                "home" -> R.id.homeFragment
+                "subscriptions" -> R.id.subscriptionsFragment
+                "library" -> R.id.libraryFragment
+                else -> R.id.homeFragment
             }
+
+            // set default tab as start fragment
+            navController.graph.setStartDestination(fragmentId)
+
+            // navigate to the default fragment
+            navController.navigate(fragmentId)
 
             binding.bottomNav.setOnItemSelectedListener {
                 when (it.itemId) {
