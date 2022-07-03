@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.activities.requireMainActivityRestart
@@ -116,13 +117,41 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val instance = findPreference<ListPreference>("selectInstance")
         // fetchInstance()
-        initCustomInstances()
-        instance?.setOnPreferenceChangeListener { _, newValue ->
+        initCustomInstances(instance!!)
+        instance.setOnPreferenceChangeListener { _, newValue ->
             requireMainActivityRestart = true
             RetrofitInstance.url = newValue.toString()
+            if (!PreferenceHelper.getBoolean(requireContext(), "auth_instance_toggle", false)) {
+                RetrofitInstance.authUrl = newValue.toString()
+                logout()
+            }
+            RetrofitInstance.lazyMgr.reset()
+            true
+        }
+
+        val authInstance = findPreference<ListPreference>("selectAuthInstance")
+        initCustomInstances(authInstance!!)
+        // hide auth instance if option deselected
+        if (!PreferenceHelper.getBoolean(requireContext(), "auth_instance_toggle", false)) {
+            authInstance.isVisible = false
+        }
+        authInstance.setOnPreferenceChangeListener { _, newValue ->
+            requireMainActivityRestart = true
+            // save new auth url
             RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
+            true
+        }
+
+        val authInstanceToggle = findPreference<SwitchPreference>("auth_instance_toggle")
+        authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
+            requireMainActivityRestart = true
+            authInstance.isVisible = newValue == true
+            logout()
+            // either use new auth url or the normal api url if auth instance disabled
+            RetrofitInstance.authUrl = if (newValue == false) RetrofitInstance.url
+            else authInstance.value
             true
         }
 
@@ -169,58 +198,12 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>("import_from_yt")
         importFromYt?.setOnPreferenceClickListener {
-            val token = PreferenceHelper.getToken(requireContext())
-            // check StorageAccess
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Log.d("myz", "" + Build.VERSION.SDK_INT)
-                if (ContextCompat.checkSelfPermission(
-                        this.requireContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        this.requireActivity(),
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                        ),
-                        1
-                    ) // permission request code is just an int
-                } else if (token != "") {
-                    MainSettings.getContent.launch("*/*")
-                } else {
-                    Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                if (ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED ||
-                    ActivityCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        this.requireActivity(),
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ),
-                        1
-                    )
-                } else if (token != "") {
-                    MainSettings.getContent.launch("*/*")
-                } else {
-                    Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-                }
-            }
+            importSubscriptions()
             true
         }
     }
 
-    private fun initCustomInstances() {
+    private fun initCustomInstances(instancePref: ListPreference) {
         val customInstances = PreferenceHelper.getCustomInstances(requireContext())
 
         var instanceNames = resources.getStringArray(R.array.instances)
@@ -231,10 +214,9 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
 
         // add custom instances to the list preference
-        val instance = findPreference<ListPreference>("selectInstance")
-        instance?.entries = instanceNames
-        instance?.entryValues = instanceValues
-        instance?.summaryProvider =
+        instancePref.entries = instanceNames
+        instancePref.entryValues = instanceValues
+        instancePref.summaryProvider =
             Preference.SummaryProvider<ListPreference> { preference ->
                 val text = preference.entry
                 if (TextUtils.isEmpty(text)) {
@@ -247,6 +229,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
     private fun logout() {
         PreferenceHelper.setToken(requireContext(), "")
+        Toast.makeText(context, getString(R.string.loggedout), Toast.LENGTH_SHORT).show()
     }
 
     private fun fetchInstance() {
@@ -296,6 +279,56 @@ class InstanceSettings : PreferenceFragmentCompat() {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
+    }
+
+    private fun importSubscriptions() {
+        val token = PreferenceHelper.getToken(requireContext())
+        // check StorageAccess
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Log.d("myz", "" + Build.VERSION.SDK_INT)
+            if (ContextCompat.checkSelfPermission(
+                    this.requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this.requireActivity(),
+                    arrayOf(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                    ),
+                    1
+                ) // permission request code is just an int
+            } else if (token != "") {
+                MainSettings.getContent.launch("*/*")
+            } else {
+                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this.requireActivity(),
+                    arrayOf(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ),
+                    1
+                )
+            } else if (token != "") {
+                MainSettings.getContent.launch("*/*")
+            } else {
+                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun subscribe(channels: List<String>) {
