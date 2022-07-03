@@ -695,8 +695,7 @@ class PlayerFragment : Fragment() {
                 // Set new width/height of view
                 // height or width must be cast to float as int/int will give 0
 
-                val currentWidth = binding.mainContainer.height
-                // Redraw myView
+                // Redraw the player container with the new layout height
                 (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
                     matchConstraintPercentHeight = (
                         videoSize.height / videoSize.width

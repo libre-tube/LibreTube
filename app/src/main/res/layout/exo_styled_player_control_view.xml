@@ -131,7 +131,6 @@
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
-        android:background="@color/exo_bottom_bar_background"
         android:layoutDirection="ltr">
 
         <LinearLayout
@@ -199,7 +198,6 @@
                 android:id="@id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@color/exo_bottom_bar_background"
                 app:bar_height="2dp"
                 app:played_color="?attr/colorOnSecondary"
                 app:scrubber_color="?attr/colorOnPrimary"
@@ -234,15 +232,15 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-        <Button
-            android:id="@id/exo_rew_with_amount"
-            style="@style/ExoStyledControls.Button.Center.RewWithAmount"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center" />
+            <Button
+                android:id="@id/exo_rew_with_amount"
+                style="@style/ExoStyledControls.Button.Center.RewWithAmount"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp" />
 
         </LinearLayout>
 
@@ -250,19 +248,19 @@
             android:id="@id/exo_play_pause"
             style="@style/ExoStyledControls.Button.Center.PlayPause" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@id/exo_ffwd_with_amount"
-            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp" />
+            <Button
+                android:id="@id/exo_ffwd_with_amount"
+                style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp" />
 
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
