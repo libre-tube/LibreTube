@@ -34,7 +34,7 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val settingsActivity = activity as SettingsActivity
-        settingsActivity.binding.topBarTextView.text = getString(R.string.about)
+        settingsActivity.changeTopBarText(getString(R.string.about))
 
         binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)

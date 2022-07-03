@@ -1,14 +1,12 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
-import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.preferences.PreferenceHelper
@@ -45,8 +43,7 @@ class CustomInstanceDialog : DialogFragment() {
                         URL(customInstance.frontendUrl).toURI()
 
                         PreferenceHelper.saveCustomInstance(requireContext(), customInstance)
-                        val intent = Intent(context, SettingsActivity::class.java)
-                        startActivity(intent)
+                        activity?.recreate()
                         dismiss()
                     } catch (e: Exception) {
                         // invalid URL

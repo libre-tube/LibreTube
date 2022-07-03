@@ -12,6 +12,6 @@ class PlayerSettings : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.player_settings, rootKey)
 
         val settingsActivity = activity as SettingsActivity
-        settingsActivity.binding.topBarTextView.text = getString(R.string.player)
+        settingsActivity.changeTopBarText(getString(R.string.player))
     }
 }

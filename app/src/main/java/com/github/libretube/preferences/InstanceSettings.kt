@@ -113,7 +113,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
 
         val settingsActivity = activity as SettingsActivity
-        settingsActivity.binding.topBarTextView.text = getString(R.string.instance)
+        settingsActivity.changeTopBarText(getString(R.string.instance))
 
         val instance = findPreference<ListPreference>("selectInstance")
         // fetchInstance()

@@ -39,7 +39,6 @@ import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    private lateinit var bottomNavigationView: BottomNavigationView
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
             // hide the trending page if enabled
             val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
-            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.homeFragment).isVisible =
+            if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
                 false
 
             // navigate to the default start tab

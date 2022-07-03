@@ -68,7 +68,11 @@ class SettingsActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(R.id.settings, MainSettings())
                 .commit()
-            binding.topBarTextView.text = getString(R.string.settings)
+            changeTopBarText(getString(R.string.settings))
         }
+    }
+
+    fun changeTopBarText(text: String) {
+        if (this::binding.isInitialized) binding.topBarTextView.text = text
     }
 }
