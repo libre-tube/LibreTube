@@ -208,4 +208,5 @@
     <string name="account">Konto</string>
     <string name="restore">Gjenopprett</string>
     <string name="watch_history">Visningshistorikk</string>
+    <string name="watch_positions">Husk posisjon</string>
 </resources>

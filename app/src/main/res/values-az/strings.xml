@@ -208,4 +208,6 @@
     <string name="deleteAccount">Hesabı silin</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
     <string name="watch_history">Baxış Tarixçəsi</string>
+    <string name="watch_positions">Mövqeyi xatırlayın</string>
+    <string name="watch_positions_summary">İzləmə mövqeyini xatırlayın və avtomatik olaraq onu axtarın.</string>
 </resources>

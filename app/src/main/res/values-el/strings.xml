@@ -208,4 +208,6 @@
     <string name="deleteAccount_summary">Διαγράψτε τον Piped λογαριασμό σας</string>
     <string name="restore">Επαναφορά</string>
     <string name="watch_history">Ιστορικό παρακολούθησης</string>
+    <string name="watch_positions">Αποθήκευση θέσης</string>
+    <string name="watch_positions_summary">Αποθήκευση της θέσης παρακολούθησης και αυτόματη επαναφορά σε αυτή.</string>
 </resources>
