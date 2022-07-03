@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            style="@style/roundedImageViewRounded"
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/CircleImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,107 +27,137 @@
             android:textSize="27sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/website"
-            style="@style/AboutItem">
+            style="@style/AboutCard">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/website"
-                android:textStyle="bold" />
+            <LinearLayout
+                style="@style/AboutItem">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/website_summary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/website"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/website_summary" />
 
-        <LinearLayout
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/contributing"
-            style="@style/AboutItem">
+            style="@style/AboutCard">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/contributing"
-                android:textStyle="bold" />
+            <LinearLayout
+                style="@style/AboutItem">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/contributing_summary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/contributing"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/contributing_summary" />
 
-        <LinearLayout
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/authors"
-            style="@style/AboutItem">
+            style="@style/AboutCard">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/authors"
-                android:textStyle="bold" />
+            <LinearLayout
+                style="@style/AboutItem">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/authors_summary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/authors"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/authors_summary" />
 
-        <LinearLayout
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/piped"
-            style="@style/AboutItem">
+            style="@style/AboutCard">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/piped"
-                android:textStyle="bold" />
+            <LinearLayout
+                style="@style/AboutItem">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/piped_summary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/piped"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/piped_summary" />
 
-        <LinearLayout
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/donate"
-            style="@style/AboutItem">
+            style="@style/AboutCard">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/donate"
-                android:textStyle="bold" />
+            <LinearLayout
+                style="@style/AboutItem">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/donate_summary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/donate"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/donate_summary" />
 
-        <LinearLayout
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/license"
-            style="@style/AboutItem">
+            style="@style/AboutCard">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/license"
-                android:textStyle="bold" />
+            <LinearLayout
+                style="@style/AboutItem">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/license_summary" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/license"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/license_summary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

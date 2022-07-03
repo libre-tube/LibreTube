@@ -16,6 +16,7 @@ import com.github.libretube.util.AUTHORS_URL
 import com.github.libretube.util.CONTRIBUTING_URL
 import com.github.libretube.util.DONATE_URL
 import com.github.libretube.util.PIPED_GITHUB_URL
+import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -33,6 +34,7 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.about))
 
@@ -48,7 +50,7 @@ class AboutFragment : Fragment() {
         binding.donate.setOnClickListener {
             openLinkFromHref(DONATE_URL)
         }
-        binding.contributing.setOnClickListener {
+        binding.github.setOnClickListener {
             openLinkFromHref(CONTRIBUTING_URL)
         }
         binding.license.setOnClickListener {
