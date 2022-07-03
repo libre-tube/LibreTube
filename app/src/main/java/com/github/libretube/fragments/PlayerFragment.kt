@@ -268,6 +268,7 @@ class PlayerFragment : Fragment() {
         // FullScreen button trigger
         playerBinding.fullscreen.setOnClickListener {
             exoPlayerView.hideController()
+            var scaleFactor: Float? = null
             if (!isFullScreen) {
                 // go to fullscreen mode
                 with(binding.playerMotionLayout) {
@@ -279,6 +280,8 @@ class PlayerFragment : Fragment() {
                 binding.linLayout.visibility = View.GONE
                 playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
                 playerBinding.exoTitle.visibility = View.VISIBLE
+
+                scaleFactor = 1.3F
 
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -294,10 +297,20 @@ class PlayerFragment : Fragment() {
                 playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
                 playerBinding.exoTitle.visibility = View.INVISIBLE
 
+                scaleFactor = 1F
+
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             }
             isFullScreen = !isFullScreen
+
+            // scale the exo player center controls
+            playerBinding.exoFfwdWithAmount.scaleX = scaleFactor
+            playerBinding.exoFfwdWithAmount.scaleY = scaleFactor
+            playerBinding.exoRewWithAmount.scaleX = scaleFactor
+            playerBinding.exoRewWithAmount.scaleY = scaleFactor
+            playerBinding.exoPlayPause.scaleX = scaleFactor
+            playerBinding.exoPlayPause.scaleY = scaleFactor
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
