@@ -198,4 +198,10 @@
     <string name="piped_summary">Piped ist ein alternatives quelloffenes Web-Frontend für YouTube, das die von uns verwendete API bereitstellt. Ohne Piped, würde LibreTube nicht existieren. Großer Dank an ihre Entwickler!</string>
     <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist.</string>
     <string name="autoplay_summary">Das nächste Video automatisch abspielen, wenn das aktuelle beendet ist.</string>
+    <string name="watch_positions">Position merken</string>
+    <string name="auth_instance">Authentifizierungsinstanz</string>
+    <string name="auth_instance_summary">Verwenden Sie für authentifizierte Anrufe eine andere Instanz.</string>
+    <string name="auth_instances">Wählen Sie eine Autorisierungsinstanz</string>
+    <string name="github">GitHub</string>
+    <string name="hls">Auto</string>
 </resources>
