@@ -684,7 +684,7 @@ class PlayerFragment : Fragment() {
                 // Redraw myView
                 (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
                     matchConstraintPercentHeight = (
-                        videoSize.height / videoSize.width * currentWidth
+                        videoSize.height / videoSize.width
                         ).toFloat()
                 }
                 binding.mainContainer.requestLayout()

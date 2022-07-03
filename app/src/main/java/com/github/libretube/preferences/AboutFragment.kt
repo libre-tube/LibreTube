@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.FragmentAboutBinding
-import com.github.libretube.util.AUTHORS_URL
-import com.github.libretube.util.CONTRIBUTING_URL
 import com.github.libretube.util.DONATE_URL
+import com.github.libretube.util.GITHUB_URL
 import com.github.libretube.util.PIPED_GITHUB_URL
 import com.github.libretube.util.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -33,14 +32,12 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.about))
 
         binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)
-        }
-        binding.authors.setOnClickListener {
-            openLinkFromHref(AUTHORS_URL)
         }
         binding.piped.setOnClickListener {
             openLinkFromHref(PIPED_GITHUB_URL)
@@ -48,8 +45,8 @@ class AboutFragment : Fragment() {
         binding.donate.setOnClickListener {
             openLinkFromHref(DONATE_URL)
         }
-        binding.contributing.setOnClickListener {
-            openLinkFromHref(CONTRIBUTING_URL)
+        binding.github.setOnClickListener {
+            openLinkFromHref(GITHUB_URL)
         }
         binding.license.setOnClickListener {
             val licenseString = view.context.assets
