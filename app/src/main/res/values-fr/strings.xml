@@ -208,4 +208,11 @@
     <string name="account">Compte</string>
     <string name="restore">Restaurer</string>
     <string name="watch_history">Regarder l’historique</string>
+    <string name="watch_positions">Se souvenir de la position</string>
+    <string name="watch_positions_summary">Se souvenir de l\'endroit que vous regardiez et le chercher automatiquement.</string>
+    <string name="auth_instance">Instance d\'authentification</string>
+    <string name="hls">Auto</string>
+    <string name="github">GitHub</string>
+    <string name="auth_instance_summary">Utilisez une instance différente pour les appels authentifiés.</string>
+    <string name="auth_instances">Choisissez une instance d\'authentification</string>
 </resources>
