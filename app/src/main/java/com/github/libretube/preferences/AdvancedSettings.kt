@@ -1,6 +1,5 @@
 package com.github.libretube.preferences
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -16,7 +15,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.advanced_settings, rootKey)
 
         val settingsActivity = activity as SettingsActivity
-        settingsActivity.binding.topBarTextView.text = getString(R.string.advanced)
+        settingsActivity.changeTopBarText(getString(R.string.advanced))
 
         // clear search history
         val clearHistory = findPreference<Preference>("clear_history")
@@ -50,8 +49,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
                 PreferenceHelper.setToken(requireContext(), "")
 
                 requireMainActivityRestart = true
-                val intent = Intent(context, SettingsActivity::class.java)
-                startActivity(intent)
+                activity?.recreate()
             }
             .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
             .setTitle(R.string.reset)

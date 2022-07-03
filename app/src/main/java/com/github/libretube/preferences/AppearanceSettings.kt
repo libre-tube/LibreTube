@@ -1,6 +1,5 @@
 package com.github.libretube.preferences
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -17,20 +16,19 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 
         val settingsActivity = activity as SettingsActivity
-        settingsActivity.binding.topBarTextView.text = getString(R.string.appearance)
+        settingsActivity.changeTopBarText(getString(R.string.appearance))
 
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
-            ThemeHelper.restartMainActivity(requireContext())
+            activity?.recreate()
             true
         }
 
         val accentColor = findPreference<Preference>("accent_color")
         accentColor?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
-            val intent = Intent(context, SettingsActivity::class.java)
-            startActivity(intent)
+            activity?.recreate()
             true
         }
 

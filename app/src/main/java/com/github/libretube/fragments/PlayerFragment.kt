@@ -454,18 +454,12 @@ class PlayerFragment : Fragment() {
                 relatedStreams = response.relatedStreams
 
                 runOnUiThread {
-                    if (response.chapters != null) initializeChapters(response.chapters)
                     // set media sources for the player
                     setResolutionAndSubtitles(view, response)
-                    exoPlayer.prepare()
                     prepareExoPlayerView()
                     initializePlayerView(view, response)
-                    // support for time stamped links
-                    if (arguments?.getLong("timeStamp") != null) {
-                        val position = arguments?.getLong("timeStamp")!! * 1000
-                        exoPlayer.seekTo(position)
-                    }
                     seekToWatchPosition()
+                    exoPlayer.prepare()
                     exoPlayer.play()
                     exoPlayerView.useController = true
                     initializePlayerNotification(requireContext())
@@ -485,11 +479,16 @@ class PlayerFragment : Fragment() {
         run()
     }
 
-    // seek to saved watch position if available
     private fun seekToWatchPosition() {
+        // seek to saved watch position if available
         val watchPositions = PreferenceHelper.getWatchPositions(requireContext())
         watchPositions.forEach {
             if (it.videoId == videoId) exoPlayer.seekTo(it.position)
+        }
+        // support for time stamped links
+        if (arguments?.getLong("timeStamp") != null) {
+            val position = arguments?.getLong("timeStamp")!! * 1000
+            exoPlayer.seekTo(position)
         }
     }
 
@@ -657,6 +656,9 @@ class PlayerFragment : Fragment() {
         binding.playerDescription.text = response.description
 
         playerBinding.exoTitle.text = response.title
+
+        // init the chapters recyclerview
+        if (response.chapters != null) initializeChapters(response.chapters)
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {

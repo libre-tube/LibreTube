@@ -12,6 +12,6 @@ class SponsorBlockSettings : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.sponsorblock_settings, rootKey)
 
         val settingsActivity = activity as SettingsActivity
-        settingsActivity.binding.topBarTextView.text = getString(R.string.sponsorblock)
+        settingsActivity.changeTopBarText(getString(R.string.sponsorblock))
     }
 }
