@@ -214,4 +214,5 @@
     <string name="auth_instances">选择认证实例</string>
     <string name="auth_instance">认证实例</string>
     <string name="hls">自动</string>
+    <string name="github">GitHub</string>
 </resources>
