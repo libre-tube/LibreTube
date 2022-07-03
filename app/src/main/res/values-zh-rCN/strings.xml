@@ -210,4 +210,7 @@
     <string name="watch_history">观看历史</string>
     <string name="watch_positions_summary">记住观看位置并自动定位。</string>
     <string name="watch_positions">记住观看位置</string>
+    <string name="auth_instance_summary">对经认证的调用指令(call)使用不同实例。</string>
+    <string name="auth_instances">选择认证实例</string>
+    <string name="auth_instance">认证实例</string>
 </resources>
