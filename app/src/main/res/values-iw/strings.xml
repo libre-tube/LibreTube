@@ -210,4 +210,5 @@
     <string name="watch_history">היסטוריית צפייה</string>
     <string name="watch_positions">שמירת המיקום</string>
     <string name="watch_positions_summary">לזכור את מיקום הצפייה ולקפוץ אליו אוטומטית.</string>
+    <string name="auth_instance">עותק של אימות</string>
 </resources>
