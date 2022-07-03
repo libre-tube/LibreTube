@@ -269,6 +269,7 @@ class PlayerFragment : Fragment() {
         playerBinding.fullscreen.setOnClickListener {
             exoPlayerView.hideController()
             if (!isFullScreen) {
+                // go to fullscreen mode
                 with(binding.playerMotionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                     enableTransition(R.id.yt_transition, false)
@@ -282,6 +283,7 @@ class PlayerFragment : Fragment() {
                 val mainActivity = activity as MainActivity
                 mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
             } else {
+                // leave fullscreen mode
                 with(binding.playerMotionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                     enableTransition(R.id.yt_transition, true)
@@ -1032,14 +1034,14 @@ class PlayerFragment : Fragment() {
     }
 
     private fun lockPlayer(isLocked: Boolean) {
-        val visibility = if (isLocked) View.VISIBLE else View.INVISIBLE
+        val visibility = if (isLocked) View.VISIBLE else View.GONE
         playerBinding.exoTopBarRight.visibility = visibility
         playerBinding.exoPlayPause.visibility = visibility
         playerBinding.exoFfwdWithAmount.visibility = visibility
         playerBinding.exoRewWithAmount.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
-        playerBinding.exoTitle.visibility =
-            if (isLocked && isFullScreen) View.VISIBLE else View.INVISIBLE
+        playerBinding.closeImageButton.visibility = visibility
+        playerBinding.exoTitle.visibility = visibility
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {

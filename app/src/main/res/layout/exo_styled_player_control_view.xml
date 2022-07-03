@@ -49,11 +49,10 @@
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:background="#00FFFFFF"
                 android:padding="@dimen/exo_icon_padding"
                 android:src="@drawable/ic_close"
-                android:visibility="gone"
                 app:tint="@android:color/white" />
 
             <ImageButton
@@ -225,7 +224,7 @@
 
     <LinearLayout
         android:id="@id/exo_center_controls"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
@@ -233,25 +232,37 @@
         android:gravity="center"
         android:padding="@dimen/exo_styled_controls_padding">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
         <Button
             android:id="@id/exo_rew_with_amount"
             style="@style/ExoStyledControls.Button.Center.RewWithAmount"
-            android:layout_marginRight="25dp"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center" />
+
+        </LinearLayout>
 
         <ImageButton
             android:id="@id/exo_play_pause"
-            style="@style/ExoStyledControls.Button.Center.PlayPause"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+            style="@style/ExoStyledControls.Button.Center.PlayPause" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
             android:id="@id/exo_ffwd_with_amount"
             style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
-            android:layout_marginLeft="25dp"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
 
     </LinearLayout>
 
