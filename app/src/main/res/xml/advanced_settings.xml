@@ -58,8 +58,8 @@
             android:defaultValue="true"
             android:icon="@drawable/ic_play_filled"
             app:key="watch_position_toggle"
-            app:title="@string/watch_positions"
-            app:summary="@string/watch_positions_summary"/>
+            app:summary="@string/watch_positions_summary"
+            app:title="@string/watch_positions" />
 
         <Preference
             android:icon="@drawable/ic_trash"

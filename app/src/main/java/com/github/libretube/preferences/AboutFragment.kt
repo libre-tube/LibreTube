@@ -12,11 +12,9 @@ import androidx.fragment.app.Fragment
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.FragmentAboutBinding
-import com.github.libretube.util.AUTHORS_URL
-import com.github.libretube.util.CONTRIBUTING_URL
 import com.github.libretube.util.DONATE_URL
+import com.github.libretube.util.GITHUB_URL
 import com.github.libretube.util.PIPED_GITHUB_URL
-import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -41,9 +39,6 @@ class AboutFragment : Fragment() {
         binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)
         }
-        binding.authors.setOnClickListener {
-            openLinkFromHref(AUTHORS_URL)
-        }
         binding.piped.setOnClickListener {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
@@ -51,7 +46,7 @@ class AboutFragment : Fragment() {
             openLinkFromHref(DONATE_URL)
         }
         binding.github.setOnClickListener {
-            openLinkFromHref(CONTRIBUTING_URL)
+            openLinkFromHref(GITHUB_URL)
         }
         binding.license.setOnClickListener {
             val licenseString = view.context.assets
