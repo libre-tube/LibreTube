@@ -69,7 +69,6 @@ class LoginDialog : DialogFragment() {
     private fun login(login: Login) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                Log.e(TAG, RetrofitInstance.authUrl)
                 val response = try {
                     RetrofitInstance.authApi.login(login)
                 } catch (e: IOException) {

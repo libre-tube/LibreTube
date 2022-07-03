@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         RetrofitInstance.url =
             PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
+        // set auth instance
         RetrofitInstance.authUrl =
             if (PreferenceHelper.getBoolean(this, "auth_instance_toggle", false)) {
                 PreferenceHelper.getString(

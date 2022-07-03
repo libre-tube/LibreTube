@@ -34,7 +34,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import kotlin.math.log
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
@@ -62,8 +61,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
                             val jsonObject = JSONTokener(json).nextValue() as JSONObject
                             Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
                             for (
-                                i in 0 until jsonObject.getJSONArray("subscriptions")
-                                    .length()
+                            i in 0 until jsonObject.getJSONArray("subscriptions")
+                                .length()
                             ) {
                                 var url =
                                     jsonObject.getJSONArray("subscriptions").getJSONObject(i)
@@ -138,6 +137,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
         authInstance.setOnPreferenceChangeListener { _, newValue ->
             requireMainActivityRestart = true
+            // save new auth url
             RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
@@ -149,6 +149,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             requireMainActivityRestart = true
             authInstance.isVisible = newValue == true
             logout()
+            // either use new auth url or the normal api url if auth instance disabled
             RetrofitInstance.authUrl = if (newValue == false) RetrofitInstance.url
             else authInstance.value
             true
