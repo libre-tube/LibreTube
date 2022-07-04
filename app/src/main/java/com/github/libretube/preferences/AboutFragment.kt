@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,8 @@ class AboutFragment : Fragment() {
         binding.piped.setOnClickListener {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
-        binding.piped.setOnLongClickListener { val text = context?.getString(R.string.piped_summary)!!
+        binding.piped.setOnLongClickListener {
+            val text = context?.getString(R.string.piped_summary)!!
             showSnackBar(text)
             true
         }
@@ -57,7 +59,8 @@ class AboutFragment : Fragment() {
         binding.donate.setOnClickListener {
             openLinkFromHref(DONATE_URL)
         }
-        binding.donate.setOnLongClickListener { val text = context?.getString(R.string.donate_summary)!!
+        binding.donate.setOnLongClickListener {
+            val text = context?.getString(R.string.donate_summary)!!
             showSnackBar(text)
             true
         }
@@ -74,7 +77,6 @@ class AboutFragment : Fragment() {
         binding.license.setOnClickListener {
             showLicense()
         }
-
         binding.license.setOnLongClickListener {
             val text = context?.getString(R.string.license_summary)!!
             showSnackBar(text)
@@ -91,6 +93,8 @@ class AboutFragment : Fragment() {
     private fun showSnackBar(text: String) {
         val snackBar = Snackbar
             .make(binding.root, text, Snackbar.LENGTH_LONG)
+        snackBar.setBackgroundTint(getThemeColor(R.attr.colorSurface))
+        snackBar.setTextColor(getThemeColor(R.attr.colorPrimary))
         snackBar.show()
     }
 
@@ -114,5 +118,11 @@ class AboutFragment : Fragment() {
             .setMessage(licenseHtml)
             .create()
             .show()
+    }
+
+    private fun getThemeColor(colorCode: Int): Int {
+        val value = TypedValue()
+        context!!.theme.resolveAttribute(colorCode, value, true)
+        return value.data
     }
 }
