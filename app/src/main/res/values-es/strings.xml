@@ -207,4 +207,12 @@
     <string name="restore">Restaurar</string>
     <string name="deleteAccount_summary">Elimina su cuenta Piped</string>
     <string name="deleteAccount">Eliminar cuenta</string>
+    <string name="watch_history">Historial de visualizaciones</string>
+    <string name="watch_positions">Recordar posición</string>
+    <string name="watch_positions_summary">Recuerda la posición de visualización y se desplaza automáticamente hacia ella.</string>
+    <string name="auth_instance">Instancia de autenticación</string>
+    <string name="auth_instance_summary">Utilice una instancia diferente para las llamadas autenticadas.</string>
+    <string name="auth_instances">Elija una instancia de autenticación</string>
+    <string name="hls">Automática</string>
+    <string name="github">GitHub</string>
 </resources>
