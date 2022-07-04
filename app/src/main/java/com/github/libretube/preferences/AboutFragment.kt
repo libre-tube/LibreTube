@@ -93,8 +93,14 @@ class AboutFragment : Fragment() {
     private fun showSnackBar(text: String) {
         val snackBar = Snackbar
             .make(binding.root, text, Snackbar.LENGTH_LONG)
+
+        // set snackBar color
         snackBar.setBackgroundTint(getThemeColor(requireContext(), R.attr.colorSurface))
         snackBar.setTextColor(getThemeColor(requireContext(), R.attr.colorPrimary))
+
+        // prevent the text from being partially hidden
+        snackBar.setTextMaxLines(3)
+
         snackBar.show()
     }
 
