@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -76,7 +75,6 @@ import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
-import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
@@ -284,7 +282,24 @@ class PlayerFragment : Fragment() {
                 scaleFactor = 1.3F
 
                 val mainActivity = activity as MainActivity
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                val fullscreenOrientationPref = PreferenceHelper
+                    .getString(requireContext(), "fullscreen_orientation", "ratio")
+                Log.e(TAG, fullscreenOrientationPref.toString())
+                val orientation = when (fullscreenOrientationPref) {
+                    "ratio" -> {
+                        val videoSize = exoPlayer.videoSize
+                        // probably a youtube shorts video
+                        Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
+                        if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                        // a video with normal aspect ratio
+                        else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                    }
+                    "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
+                    "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                    "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                    else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                }
+                mainActivity.requestedOrientation = orientation
             } else {
                 // leave fullscreen mode
                 with(binding.playerMotionLayout) {
@@ -689,6 +704,7 @@ class PlayerFragment : Fragment() {
                 }
             }
 
+            /*
             override fun onVideoSizeChanged(
                 videoSize: VideoSize
             ) {
@@ -703,6 +719,7 @@ class PlayerFragment : Fragment() {
                 }
                 binding.mainContainer.requestLayout()
             }
+            */
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
@@ -1214,7 +1231,7 @@ class PlayerFragment : Fragment() {
                 enableTransition(R.id.yt_transition, false)
             }
             binding.mainContainer.isClickable = true
-            
+
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false

@@ -694,4 +694,17 @@
         <item>30</item>
     </string-array>
 
+    <string-array name="fullscreenOrientation">
+        <item>@string/aspect_ratio</item>
+        <item>@string/auto_rotation</item>
+        <item>@string/landscape</item>
+        <item>@string/portrait</item>
+    </string-array>
+    <string-array name="fullscreenOrientationValues">
+        <item>ratio</item>
+        <item>auto</item>
+        <item>landscape</item>
+        <item>portrait</item>
+    </string-array>
+
 </resources>

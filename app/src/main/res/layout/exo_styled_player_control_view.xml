@@ -240,13 +240,16 @@
                 android:id="@id/exo_rew_with_amount"
                 style="@style/ExoStyledControls.Button.Center.RewWithAmount"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginStart="20dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp" />
 
         </LinearLayout>
 
         <ImageButton
             android:id="@id/exo_play_pause"
-            style="@style/ExoStyledControls.Button.Center.PlayPause" />
+            style="@style/ExoStyledControls.Button.Center.PlayPause"
+            app:tint="@android:color/white" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -258,7 +261,9 @@
                 android:id="@id/exo_ffwd_with_amount"
                 style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
                 android:layout_gravity="center"
-                android:layout_marginRight="20dp" />
+                android:layout_marginEnd="20dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp" />
 
         </LinearLayout>
 
