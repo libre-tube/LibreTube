@@ -240,6 +240,8 @@
                 android:id="@id/exo_rew_with_amount"
                 style="@style/ExoStyledControls.Button.Center.RewWithAmount"
                 android:layout_gravity="center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:layout_marginStart="20dp" />
 
         </LinearLayout>
@@ -259,6 +261,8 @@
                 android:id="@id/exo_ffwd_with_amount"
                 style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
                 android:layout_gravity="center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:layout_marginEnd="20dp" />
 
         </LinearLayout>
