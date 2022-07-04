@@ -214,4 +214,5 @@
     <string name="auth_instance_summary">להשתמש בעותק אחר לשיחות מאומתות.</string>
     <string name="auth_instances">בחירת עותק אימות</string>
     <string name="hls">אוטומטי</string>
+    <string name="github">GitHub</string>
 </resources>

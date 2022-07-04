@@ -209,4 +209,10 @@
     <string name="restore">Gjenopprett</string>
     <string name="watch_history">Visningshistorikk</string>
     <string name="watch_positions">Husk posisjon</string>
+    <string name="auth_instances">Velg en instans for identitetsbekreftelse</string>
+    <string name="hls">Auto</string>
+    <string name="github">GitHub</string>
+    <string name="auth_instance">Instans for identitetsbekreftelse</string>
+    <string name="auth_instance_summary">Bruk en annen instans for identitetsbekreftede kall.</string>
+    <string name="watch_positions_summary">Husk visningsposisjon og begynn derfra.</string>
 </resources>

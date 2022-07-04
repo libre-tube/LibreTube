@@ -210,4 +210,9 @@
     <string name="watch_history">Guarda la cronologia</string>
     <string name="watch_positions">Ricorda posizione</string>
     <string name="watch_positions_summary">Ricorda la posizione a che minuto stavi guardando e cercala automaticamente.</string>
+    <string name="auth_instance">Istanza di autenticazione</string>
+    <string name="auth_instance_summary">Usa un\'istanza diversa per le chiamate di autenticazione.</string>
+    <string name="auth_instances">Scegli un\'istanza di autenticazione</string>
+    <string name="hls">Auto</string>
+    <string name="github">GitHub</string>
 </resources>

@@ -195,13 +195,13 @@
     <string name="behavior">Davranış</string>
     <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
     <string name="seek_increment">Axtarışı artırın</string>
-    <string name="piped_summary">Piped, istifadə etdiyimiz API\' ni təmin edən YouTube üçün açıq mənbəli alternativ veb interfeysidir. Piped olmasaydı LibreTube olmazdı. Tərtibatçılarına böyük təşəkkürlər!</string>
+    <string name="piped_summary">Piped, istifadə etdiyimiz API\'ni təmin edən YouTube üçün açıq mənbəli alternativ veb interfeysidir. Piped olmasaydı LibreTube olmazdı. Tərtibatçılarına böyük təşəkkürlər!</string>
     <string name="instance_frontend_url">Server üçün URL</string>
     <string name="autoplay_summary">Cari bitdikdə növbəti videonu avtomatik olaraq oynadın.</string>
     <string name="pauseOnScreenOff">Avto-fasilə</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynadıcını dayandırın.</string>
     <string name="clonePlaylist">Pleylisti klonlayın</string>
-    <string name="reset">İlkin tənzimləmələri qaytarın</string>
+    <string name="reset">İlkin tənzimləmələri bərpa edin</string>
     <string name="reset_message">Siz əminsiniz\? Bu, sizi sistemdən çıxaracaq və bütün tənzimləmələrinizi sıfırlayacaq!</string>
     <string name="account">Hesab</string>
     <string name="restore">Bərpa Edin</string>
@@ -210,4 +210,9 @@
     <string name="watch_history">Baxış Tarixçəsi</string>
     <string name="watch_positions">Mövqeyi xatırlayın</string>
     <string name="watch_positions_summary">İzləmə mövqeyini xatırlayın və avtomatik olaraq onu axtarın.</string>
+    <string name="auth_instances">Təsdiqləmə serveri seçin</string>
+    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli serverdən istifadə edin.</string>
+    <string name="auth_instance">Təsdiqləmə serveri</string>
+    <string name="github">GitHub</string>
+    <string name="hls">Avtomatik</string>
 </resources>
