@@ -1207,12 +1207,14 @@ class PlayerFragment : Fragment() {
         if (isInPictureInPictureMode) {
             exoPlayerView.hideController()
             exoPlayerView.useController = false
+            binding.linLayout.visibility = View.GONE
+
             with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                 enableTransition(R.id.yt_transition, false)
             }
             binding.mainContainer.isClickable = true
-            playerBinding.exoTopBar.visibility = View.GONE
+            
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
@@ -1221,10 +1223,10 @@ class PlayerFragment : Fragment() {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                 enableTransition(R.id.yt_transition, true)
             }
-            exoPlayerView.showController()
+
             exoPlayerView.useController = true
+            binding.linLayout.visibility = View.VISIBLE
             binding.mainContainer.isClickable = false
-            playerBinding.exoTopBar.visibility = View.VISIBLE
         }
     }
 
