@@ -706,6 +706,7 @@ class PlayerFragment : Fragment() {
                 }
             }
 
+            /*
             override fun onVideoSizeChanged(
                 videoSize: VideoSize
             ) {
@@ -720,6 +721,7 @@ class PlayerFragment : Fragment() {
                 }
                 binding.mainContainer.requestLayout()
             }
+            */
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
