@@ -48,7 +48,7 @@
             android:icon="@drawable/ic_video"
             app:key="player"
             app:summary="@string/player_summary"
-            app:title="@string/player" />
+            app:title="@string/audio_video" />
 
         <Preference
             android:icon="@drawable/ic_list"
