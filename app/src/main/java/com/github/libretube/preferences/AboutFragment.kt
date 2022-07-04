@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.github.libretube.databinding.FragmentAboutBinding
 import com.github.libretube.util.DONATE_URL
 import com.github.libretube.util.GITHUB_URL
 import com.github.libretube.util.PIPED_GITHUB_URL
+import com.github.libretube.util.ThemeHelper.getThemeColor
 import com.github.libretube.util.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -93,8 +93,8 @@ class AboutFragment : Fragment() {
     private fun showSnackBar(text: String) {
         val snackBar = Snackbar
             .make(binding.root, text, Snackbar.LENGTH_LONG)
-        snackBar.setBackgroundTint(getThemeColor(R.attr.colorSurface))
-        snackBar.setTextColor(getThemeColor(R.attr.colorPrimary))
+        snackBar.setBackgroundTint(getThemeColor(requireContext(), R.attr.colorSurface))
+        snackBar.setTextColor(getThemeColor(requireContext(), R.attr.colorPrimary))
         snackBar.show()
     }
 
@@ -118,11 +118,5 @@ class AboutFragment : Fragment() {
             .setMessage(licenseHtml)
             .create()
             .show()
-    }
-
-    private fun getThemeColor(colorCode: Int): Int {
-        val value = TypedValue()
-        context!!.theme.resolveAttribute(colorCode, value, true)
-        return value.data
     }
 }

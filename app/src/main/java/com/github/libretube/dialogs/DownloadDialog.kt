@@ -8,16 +8,15 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.util.TypedValue
 import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DownloadDialog : DialogFragment() {
@@ -130,14 +129,7 @@ class DownloadDialog : DialogFragment() {
                 dismiss()
             }
 
-            val typedValue = TypedValue()
-            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            binding.title.text = appName
+            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
             builder.setView(binding.root)
             builder.create()

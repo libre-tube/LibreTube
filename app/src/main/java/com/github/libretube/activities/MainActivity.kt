@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -24,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -124,14 +122,7 @@ class MainActivity : AppCompatActivity() {
                 false
             }
 
-            val typedValue = TypedValue()
-            this.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            binding.toolbar.title = appName
+            binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
             binding.toolbar.setNavigationOnClickListener {
                 // settings activity stuff
