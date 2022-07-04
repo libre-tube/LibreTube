@@ -41,7 +41,7 @@
     <string name="error">Bir şeyler ters gitti.</string>
     <string name="emptyList">Burada hiçbir şey yok.</string>
     <string name="playlistCreated">Oynatma listesi oluşturuldu.</string>
-    <string name="areYouSure">Oynatma listesini silmek istediğinize emin misiniz\?</string>
+    <string name="areYouSure">Oynatma listesi silinsin mi\?</string>
     <string name="addToPlaylist">Oynatma listesine ekle</string>
     <string name="success">Bitti.</string>
     <string name="playlistName">Oynatma listesi adı</string>
@@ -180,7 +180,7 @@
     <string name="category_preview">Önizleme/Özet</string>
     <string name="category_preview_description">Bu veya serisindeki gelecekteki videolarda gelecek içeriği detaylandıran, ancak ek bilgi sağlamayan bölümler için. Yalnızca burada görünen klipleri içeriyorsa, bu büyük olasılıkla yanlış kategoridir.</string>
     <string name="related_streams">İlgili içerik</string>
-    <string name="related_streams_summary">İzlediklerinizin yanında ilgili akışları gösterin.</string>
+    <string name="related_streams_summary">İlgili akışları izlediklerinizle yan yana gösterin.</string>
     <string name="buffering_goal">Ön yükleme</string>
     <string name="buffering_goal_summary">Maks. arabelleğe alınacak videonun saniye miktarı.</string>
     <string name="playerVideoFormat">Oynatıcı için video formatı</string>
@@ -190,7 +190,7 @@
     <string name="video">Video</string>
     <string name="downloading">İndiriliyor</string>
     <string name="player_autoplay">Oto.oynat</string>
-    <string name="hideTrendingPage">Popüler sayfasını gizle</string>
+    <string name="hideTrendingPage">Trend sayfasını gizle</string>
     <string name="quality">Kalite</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Kalite ve oynatıcı davranışı</string>
@@ -208,4 +208,11 @@
     <string name="restore">Sıfırla</string>
     <string name="deleteAccount">Hesabı sil</string>
     <string name="watch_history">İzleme Geçmişi</string>
+    <string name="watch_positions_summary">İzleme konumunu hatırlayın ve otomatik olarak onu arayın.</string>
+    <string name="watch_positions">Konumu hatırla</string>
+    <string name="auth_instance_summary">Doğrulanmış davetiyeler için farklı bir sunucu kullanın.</string>
+    <string name="auth_instances">Bir doğrulama sunucusu seçin</string>
+    <string name="auth_instance">Doğrulama sunucusu</string>
+    <string name="hls">Otomatik</string>
+    <string name="github">GitHub</string>
 </resources>
