@@ -1,0 +1,7 @@
+Autoplay for videos and playlists
+Player improvements
+Clone YouTube Playlist Option
+Delete Account Option
+RYD Integration
+Added Watch History
+Remember watch position
