@@ -24,7 +24,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/behavior">
+    <PreferenceCategory app:title="@string/player">
 
         <ListPreference
             android:icon="@drawable/ic_speed"
@@ -53,6 +53,10 @@
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/behavior">
+
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_play_filled"
             android:summary="@string/autoplay_summary"
@@ -64,6 +68,15 @@
             android:summary="@string/pauseOnScreenOff_summary"
             app:key="pause_screen_off"
             app:title="@string/pauseOnScreenOff" />
+
+        <ListPreference
+            android:icon="@drawable/ic_fullscreen"
+            app:defaultValue="ratio"
+            app:entries="@array/fullscreenOrientation"
+            app:entryValues="@array/fullscreenOrientationValues"
+            app:key="fullscreen_orientation"
+            app:title="@string/fullscreen_orientation"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 

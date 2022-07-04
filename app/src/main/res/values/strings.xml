@@ -143,7 +143,7 @@
     <string name="no_update_available">You are running the latest version.</string>
     <string name="playback_speed">Default playback speed</string>
     <string name="advanced">Advanced</string>
-    <string name="player">Audio and video</string>
+    <string name="player">Player</string>
     <string name="appearance_summary">Adjust the app to your liking.</string>
     <string name="advanced_summary">Downloads, history</string>
     <string name="live">Live</string>
@@ -215,4 +215,10 @@
     <string name="auth_instances">Choose an auth instance</string>
     <string name="hls">Auto</string>
     <string name="github">GitHub</string>
+    <string name="audio_video">Audio and video</string>
+    <string name="fullscreen_orientation">Fullscreen orientation</string>
+    <string name="aspect_ratio">Video aspect ratio</string>
+    <string name="auto_rotation">Auto rotation</string>
+    <string name="landscape">Landscape</string>
+    <string name="portrait">Portrait</string>
 </resources>
