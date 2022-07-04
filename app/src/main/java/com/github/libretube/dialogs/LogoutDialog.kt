@@ -2,14 +2,13 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.TypedValue
 import android.widget.Toast
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.databinding.DialogLogoutBinding
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LogoutDialog : DialogFragment() {
@@ -32,14 +31,7 @@ class LogoutDialog : DialogFragment() {
                 dialog?.dismiss()
             }
 
-            val typedValue = TypedValue()
-            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            binding.title.text = appName
+            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
             builder.setView(binding.root)
             builder.create()

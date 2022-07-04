@@ -3,9 +3,7 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.widget.Toast
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -14,6 +12,7 @@ import com.github.libretube.fragments.LibraryFragment
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
@@ -28,14 +27,7 @@ class CreatePlaylistDialog : DialogFragment() {
             val builder = MaterialAlertDialogBuilder(it)
             binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
 
-            val typedValue = TypedValue()
-            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            binding.title.text = appName
+            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
             binding.cancelButton.setOnClickListener {
                 dismiss()
