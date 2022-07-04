@@ -193,7 +193,7 @@
     <string name="player_summary">Qualität und Verhalten des Players</string>
     <string name="pauseOnScreenOff">Automatische Pause</string>
     <string name="clonePlaylist">Wiedergabeliste klonen</string>
-    <string name="watch_history">Verlauf ansehen</string>
+    <string name="watch_history">Wiedergabeverlauf</string>
     <string name="instance_frontend_url">URL zum Instanz-Frontend</string>
     <string name="piped_summary">Piped ist ein alternatives quelloffenes Web-Frontend für YouTube, das die von uns verwendete API bereitstellt. Ohne Piped, würde LibreTube nicht existieren. Großer Dank an ihre Entwickler!</string>
     <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist.</string>
