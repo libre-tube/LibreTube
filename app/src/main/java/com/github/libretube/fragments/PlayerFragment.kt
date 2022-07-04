@@ -285,11 +285,13 @@ class PlayerFragment : Fragment() {
 
                 val mainActivity = activity as MainActivity
                 val fullscreenOrientationPref = PreferenceHelper
-                    .getString(requireContext(), "fullscreen_rotation", "ratio")
-                val orientation = when(fullscreenOrientationPref) {
+                    .getString(requireContext(), "fullscreen_orientation", "ratio")
+                Log.e(TAG, fullscreenOrientationPref.toString())
+                val orientation = when (fullscreenOrientationPref) {
                     "ratio" -> {
                         val videoSize = exoPlayer.videoSize
                         // probably a youtube shorts video
+                        Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
                         if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                         // a video with normal aspect ratio
                         else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -299,7 +301,7 @@ class PlayerFragment : Fragment() {
                     "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                     else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
                 }
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                mainActivity.requestedOrientation = orientation
             } else {
                 // leave fullscreen mode
                 with(binding.playerMotionLayout) {
