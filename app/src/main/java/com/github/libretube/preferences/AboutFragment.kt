@@ -17,6 +17,7 @@ import com.github.libretube.util.GITHUB_URL
 import com.github.libretube.util.PIPED_GITHUB_URL
 import com.github.libretube.util.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class AboutFragment : Fragment() {
     private lateinit var binding: FragmentAboutBinding
@@ -39,31 +40,45 @@ class AboutFragment : Fragment() {
         binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)
         }
+        binding.website.setOnLongClickListener {
+            val text = context?.getString(R.string.website_summary)!!
+            showSnackBar(text)
+            true
+        }
+
         binding.piped.setOnClickListener {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
+        binding.piped.setOnLongClickListener { val text = context?.getString(R.string.piped_summary)!!
+            showSnackBar(text)
+            true
+        }
+
         binding.donate.setOnClickListener {
             openLinkFromHref(DONATE_URL)
         }
+        binding.donate.setOnLongClickListener { val text = context?.getString(R.string.donate_summary)!!
+            showSnackBar(text)
+            true
+        }
+
         binding.github.setOnClickListener {
             openLinkFromHref(GITHUB_URL)
         }
-        binding.license.setOnClickListener {
-            val licenseString = view.context.assets
-                .open("gpl3.html").bufferedReader().use {
-                    it.readText()
-                }
-            val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(licenseString, 1)
-            } else {
-                Html.fromHtml(licenseString)
-            }
+        binding.github.setOnLongClickListener {
+            val text = context?.getString(R.string.contributing_summary)!!
+            showSnackBar(text)
+            true
+        }
 
-            MaterialAlertDialogBuilder(view.context!!)
-                .setPositiveButton(getString(R.string.okay)) { _, _ -> }
-                .setMessage(licenseHtml)
-                .create()
-                .show()
+        binding.license.setOnClickListener {
+            showLicense()
+        }
+
+        binding.license.setOnLongClickListener {
+            val text = context?.getString(R.string.license_summary)!!
+            showSnackBar(text)
+            true
         }
     }
 
@@ -71,5 +86,33 @@ class AboutFragment : Fragment() {
         val uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW).setData(uri)
         startActivity(intent)
+    }
+
+    private fun showSnackBar(text: String) {
+        val snackBar = Snackbar
+            .make(binding.root, text, Snackbar.LENGTH_LONG)
+        snackBar.show()
+    }
+
+    private fun showLicense() {
+        val assets = view?.context?.assets
+        val licenseString = assets
+            ?.open("gpl3.html")
+            ?.bufferedReader()
+            .use {
+                it?.readText()
+            }
+
+        val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(licenseString.toString(), 1)
+        } else {
+            Html.fromHtml(licenseString.toString())
+        }
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setPositiveButton(getString(R.string.okay)) { _, _ -> }
+            .setMessage(licenseHtml)
+            .create()
+            .show()
     }
 }
