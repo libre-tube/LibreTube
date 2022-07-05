@@ -213,8 +213,6 @@
     <string name="audio_video">오디오 및 비디오</string>
     <string name="aspect_ratio">비디오 종횡비</string>
     <string name="auto_rotation">자동 회전</string>
-    <string name="matrix"/>
     <string name="auth_instances">인증 인스턴스 선택</string>
-    <string name="discord"/>
     <string name="fullscreen_orientation">전체 화면 방향</string>
 </resources>
