@@ -180,7 +180,8 @@
             <ImageButton
                 android:id="@+id/fullscreen"
                 style="@style/ExoStyledControls.Button.Bottom.FullScreen"
-                android:src="@drawable/ic_fullscreen" />
+                android:src="@drawable/ic_fullscreen"
+                app:tint="@android:color/white" />
 
         </LinearLayout>
 
