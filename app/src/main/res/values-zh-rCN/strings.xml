@@ -219,6 +219,6 @@
     <string name="fullscreen_orientation">全屏方向</string>
     <string name="aspect_ratio">视频长宽比</string>
     <string name="auto_rotation">自动旋转</string>
-    <string name="landscape">竖屏</string>
-    <string name="portrait">横屏</string>
+    <string name="landscape">横屏</string>
+    <string name="portrait">竖屏</string>
 </resources>
