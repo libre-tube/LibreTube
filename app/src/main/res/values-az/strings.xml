@@ -217,4 +217,8 @@
     <string name="hls">Avtomatik</string>
     <string name="audio_video">Səs və video</string>
     <string name="fullscreen_orientation">Tam ekran istiqaməti</string>
+    <string name="aspect_ratio">Video aspekt nisbəti</string>
+    <string name="auto_rotation">Avtomatik fırlatma</string>
+    <string name="portrait">Portret</string>
+    <string name="landscape">Landşaft</string>
 </resources>
