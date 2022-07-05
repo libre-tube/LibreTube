@@ -135,7 +135,7 @@
     <string name="app_uptodate">Ən son versiya işlədilir.</string>
     <string name="playback_speed">Defolt oynatma sürəti</string>
     <string name="advanced">Qabaqcıl</string>
-    <string name="player">Səs və video</string>
+    <string name="player">Oynadıcı</string>
     <string name="appearance_summary">Tətbiqi öz zövqünüzə uyğunlaşdırın.</string>
     <string name="advanced_summary">Endirmələr, tarixçə</string>
     <string name="update_summary">Tətbiqin güncəl olub-olmadığını öyrənmək üçün klikləyin.</string>
@@ -215,4 +215,6 @@
     <string name="auth_instance">Təsdiqləmə serveri</string>
     <string name="github">GitHub</string>
     <string name="hls">Avtomatik</string>
+    <string name="audio_video">Səs və video</string>
+    <string name="fullscreen_orientation">Tam ekran istiqaməti</string>
 </resources>
