@@ -95,7 +95,7 @@
     <string name="category_sponsor_description">有偿推广、有偿推荐和直接广告。不是自我宣传或无偿发自内心的赞美动机、创造者、网站和产品。</string>
     <string name="category_selfpromo">无偿/自我推广</string>
     <string name="category_selfpromo_description">除了无偿或自我宣传，与 \"赞助商 \"类似。这包括有关商品、捐赠或与谁合作的信息。</string>
-    <string name="sponsorblock">赞助板块</string>
+    <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">使用 https://sponsor.ajay.app 的 API</string>
     <string name="sponsorblock_state">开</string>
     <string name="category_sponsor">赞助商</string>
@@ -113,7 +113,7 @@
     <string name="enabled">开</string>
     <string name="disabled">关</string>
     <string name="app_icon">图标</string>
-    <string name="piped">管道</string>
+    <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">后台播放</string>
     <string name="update_available">版本 %1$s 可用</string>
@@ -160,7 +160,7 @@
     <string name="gradientIcon">渐变</string>
     <string name="torchIcon">时尚火炬</string>
     <string name="fireIcon">简约火焰</string>
-    <string name="instance_summary">管道，登录，订阅</string>
+    <string name="instance_summary">Piped、登录、订阅</string>
     <string name="instance_api_url">URL或API</string>
     <string name="addInstance">添加实例</string>
     <string name="empty_instance">需要填写名称与实例URL或链接才能保存。</string>
@@ -171,7 +171,7 @@
     <string name="customInstance_summary">添加自定义实例（后果自负）</string>
     <string name="instance_name">实例名称</string>
     <string name="version">当前版本 %1$s</string>
-    <string name="about_summary">了解LibreTube 团队以及更多信息。</string>
+    <string name="about_summary">了解 LibreTube 团队以及更多信息。</string>
     <string name="show_chapters">显示章节</string>
     <string name="hide_chapters">隐藏章节</string>
     <string name="buffering_goal">预加载</string>
@@ -193,7 +193,7 @@
     <string name="quality">清晰度</string>
     <string name="behavior">布局</string>
     <string name="player_summary">清晰度和播放器行为</string>
-    <string name="seek_increment">寻求增量</string>
+    <string name="seek_increment">快进增量</string>
     <string name="piped_summary">Piped是YouTube的一个开源替代网络前端，提供我们使用的API。没有Piped，LibreTube就不会存在。衷心感谢他们的开发者!</string>
     <string name="pauseOnScreenOff">自动暂停</string>
     <string name="pauseOnScreenOff_summary">当屏幕关闭时暂停播放视频。</string>
@@ -210,7 +210,7 @@
     <string name="watch_history">观看历史</string>
     <string name="watch_positions_summary">记住观看位置并自动定位。</string>
     <string name="watch_positions">记住观看位置</string>
-    <string name="auth_instance_summary">对经认证的调用指令(call)使用不同实例。</string>
+    <string name="auth_instance_summary">对认证指令(call)使用不同实例。</string>
     <string name="auth_instances">选择认证实例</string>
     <string name="auth_instance">认证实例</string>
     <string name="hls">自动</string>
