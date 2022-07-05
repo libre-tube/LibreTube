@@ -9,14 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.github.libretube.DONATE_URL
+import com.github.libretube.GITHUB_URL
+import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
+import com.github.libretube.WEBSITE_URL
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.FragmentAboutBinding
-import com.github.libretube.util.DONATE_URL
-import com.github.libretube.util.GITHUB_URL
-import com.github.libretube.util.PIPED_GITHUB_URL
 import com.github.libretube.util.ThemeHelper.getThemeColor
-import com.github.libretube.util.WEBSITE_URL
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 

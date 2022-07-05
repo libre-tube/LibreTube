@@ -69,8 +69,12 @@
         <Preference
             android:icon="@drawable/ic_info"
             app:key="about"
-            app:summary="@string/about_summary"
             app:title="@string/about" />
+
+        <Preference
+            android:icon="@drawable/ic_community"
+            app:key="community"
+            app:title="@string/community" />
 
     </PreferenceCategory>
 

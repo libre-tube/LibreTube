@@ -221,4 +221,10 @@
     <string name="auto_rotation">Auto rotation</string>
     <string name="landscape">Landscape</string>
     <string name="portrait">Portrait</string>
+    <string name="community">Community</string>
+    <string name="discord">Discord</string>
+    <string name="matrix">Matrix</string>
+    <string name="telegram">Telegram</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
 </resources>
