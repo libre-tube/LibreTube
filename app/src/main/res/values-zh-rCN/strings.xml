@@ -142,7 +142,7 @@
     <string name="internal_storage">内部存储</string>
     <string name="playback_speed">默认播放速度</string>
     <string name="advanced">高级</string>
-    <string name="player">音频和视频</string>
+    <string name="player">播放器</string>
     <string name="appearance_summary">根据您自己的喜好调整应用程序。</string>
     <string name="advanced_summary">下载， 历史记录</string>
     <string name="no_replies">此评论没有人回复。</string>
@@ -215,4 +215,10 @@
     <string name="auth_instance">认证实例</string>
     <string name="hls">自动</string>
     <string name="github">GitHub</string>
+    <string name="audio_video">音频和视频</string>
+    <string name="fullscreen_orientation">全屏方向</string>
+    <string name="aspect_ratio">视频长宽比</string>
+    <string name="auto_rotation">自动旋转</string>
+    <string name="landscape">竖屏</string>
+    <string name="portrait">横屏</string>
 </resources>
