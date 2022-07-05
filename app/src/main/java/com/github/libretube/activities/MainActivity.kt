@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     lateinit var navController: NavController
+    private var startFragmentId = R.id.homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                 false
 
             // save start tab fragment id
-            val fragmentId = when (PreferenceHelper.getString(this, "default_tab", "home")) {
+            startFragmentId = when (PreferenceHelper.getString(this, "default_tab", "home")) {
                 "home" -> R.id.homeFragment
                 "subscriptions" -> R.id.subscriptionsFragment
                 "library" -> R.id.libraryFragment
@@ -99,23 +100,23 @@ class MainActivity : AppCompatActivity() {
             }
 
             // set default tab as start fragment
-            navController.graph.setStartDestination(fragmentId)
+            navController.graph.setStartDestination(startFragmentId)
 
             // navigate to the default fragment
-            navController.navigate(fragmentId)
+            navController.navigate(startFragmentId)
 
             binding.bottomNav.setOnItemSelectedListener {
+                // clear backstack if it's the start fragment
+                if (startFragmentId == it.itemId) navController.backQueue.clear()
+                // set menu item on click listeners
                 when (it.itemId) {
                     R.id.homeFragment -> {
-                        navController.backQueue.clear()
                         navController.navigate(R.id.homeFragment)
                     }
                     R.id.subscriptionsFragment -> {
-                        // navController.backQueue.clear()
                         navController.navigate(R.id.subscriptionsFragment)
                     }
                     R.id.libraryFragment -> {
-                        // navController.backQueue.clear()
                         navController.navigate(R.id.libraryFragment)
                     }
                 }
@@ -268,31 +269,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        try {
-            val mainMotionLayout = binding.mainMotionLayout
-            if (mainMotionLayout.progress == 0.toFloat()) {
-                mainMotionLayout.transitionToEnd()
-                findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
-                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                motionLayout.transitionToEnd()
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                with(motionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition, true)
-                }
-                findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-                isFullScreen = false
-            } else {
-                navController.popBackStack()
-            }
-        } catch (e: Exception) {
-            try {
-                navController.popBackStack()
-                moveTaskToBack(true)
-            } catch (e: Exception) {
-                super.onBackPressed()
-            }
+        if (binding.mainMotionLayout.progress == 0F) {
+            try { minimizePlayer() } catch (e: Exception) {}
+        } else if (navController.currentDestination?.id == startFragmentId) {
+            navController.popBackStack()
+            super.onBackPressed()
+        } else {
+            navController.popBackStack()
         }
+    }
+
+    private fun minimizePlayer() {
+        binding.mainMotionLayout.transitionToEnd()
+        findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
+        val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+        motionLayout.transitionToEnd()
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        with(motionLayout) {
+            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+            enableTransition(R.id.yt_transition, true)
+        }
+        findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+        isFullScreen = false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
