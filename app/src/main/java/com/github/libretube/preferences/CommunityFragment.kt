@@ -12,6 +12,7 @@ import com.github.libretube.MATRIX_URL
 import com.github.libretube.R
 import com.github.libretube.REDDIT_URL
 import com.github.libretube.TELEGRAM_URL
+import com.github.libretube.TWITTER_URL
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.FragmentCommunityBinding
 
@@ -47,6 +48,10 @@ class CommunityFragment : Fragment() {
 
         binding.reddit.setOnClickListener {
             openLinkFromHref(REDDIT_URL)
+        }
+
+        binding.twitter.setOnClickListener {
+            openLinkFromHref(TWITTER_URL)
         }
     }
 

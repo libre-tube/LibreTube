@@ -16,7 +16,8 @@ const val PIPED_GITHUB_URL = "https://github.com/TeamPiped/Piped"
 /**
  * Social media links for the community fragment
  */
-const val TELEGRAM_URL = ""
-const val MATRIX_URL = ""
-const val DISCORD_URL = ""
-const val REDDIT_URL = ""
+const val TELEGRAM_URL = "https://libre-tube.github.io/assets/tg-widget.svg)](https://t.me/libretube"
+const val MATRIX_URL = "https://libre-tube.github.io/assets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org"
+const val DISCORD_URL = "https://discord.com/invite/Qc34xCj2GV"
+const val REDDIT_URL = "https://libre-tube.github.io/assets/rd-widget.svg)](https://www.reddit.com/r/Libretube/"
+const val TWITTER_URL = "https://libre-tube.github.io/assets/tw-widget.svg)](https://twitter.com/libretube"
