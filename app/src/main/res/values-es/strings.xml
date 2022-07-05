@@ -169,7 +169,7 @@
     <string name="contributing">Contribución</string>
     <string name="donate">Donar</string>
     <string name="advanced">Avanzado</string>
-    <string name="player">Audio y vídeo</string>
+    <string name="player">Reproductor</string>
     <string name="appearance_summary">Ajuste la aplicación a su gusto.</string>
     <string name="playback_speed">Velocidad de reproducción predeterminada</string>
     <string name="live">En vivo</string>
@@ -215,4 +215,10 @@
     <string name="auth_instances">Elija una instancia de autenticación</string>
     <string name="hls">Automática</string>
     <string name="github">GitHub</string>
+    <string name="audio_video">Audio y vídeo</string>
+    <string name="fullscreen_orientation">Orientación de pantalla completa</string>
+    <string name="landscape">Horizontal</string>
+    <string name="portrait">Vertical</string>
+    <string name="aspect_ratio">Relación de aspecto del vídeo</string>
+    <string name="auto_rotation">Rotación automática</string>
 </resources>
