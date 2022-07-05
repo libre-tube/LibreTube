@@ -136,7 +136,7 @@
     <string name="no_update_available">En son sürümü çalıştırıyorsunuz.</string>
     <string name="playback_speed">Varsayılan oynatma hızı</string>
     <string name="advanced">Gelişmiş</string>
-    <string name="player">Ses ve video</string>
+    <string name="player">Oynatıcı</string>
     <string name="appearance_summary">Uygulamayı zevkinize göre ayarlayın.</string>
     <string name="advanced_summary">İndirilenler, geçmiş</string>
     <string name="update">Yeni sürümü arayın</string>
@@ -215,4 +215,10 @@
     <string name="auth_instance">Doğrulama sunucusu</string>
     <string name="hls">Otomatik</string>
     <string name="github">GitHub</string>
+    <string name="fullscreen_orientation">Tam ekran yönü</string>
+    <string name="aspect_ratio">Video en boy oranı</string>
+    <string name="auto_rotation">Otomatik döndürme</string>
+    <string name="portrait">Dikey</string>
+    <string name="landscape">Yatay</string>
+    <string name="audio_video">Ses ve video</string>
 </resources>
