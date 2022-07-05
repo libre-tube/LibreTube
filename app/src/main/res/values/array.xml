@@ -608,7 +608,7 @@
         <item>@string/birdIcon</item>
     </string-array>
     <string-array name="iconsValue">
-        <item>MainActivity</item>
+        <item>activities.MainActivity</item>
         <item>IconLegacy</item>
         <item>IconGradient</item>
         <item>IconFire</item>
