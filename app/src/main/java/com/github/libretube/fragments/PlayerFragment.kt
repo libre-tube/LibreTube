@@ -169,7 +169,6 @@ class PlayerFragment : Fragment() {
         mainActivity.binding.container.visibility = View.VISIBLE
 
         exoPlayerView = binding.player
-        binding.mainContainer.visibility = View.GONE
 
         binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
