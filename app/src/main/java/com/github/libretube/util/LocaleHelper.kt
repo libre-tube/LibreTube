@@ -8,20 +8,21 @@ import java.util.*
 object LocaleHelper {
 
     fun updateLanguage(context: Context) {
-        val languageName = PreferenceHelper.getString(context, "language", "en")
-        if (languageName != "") {
-            setLanguage(context, languageName!!)
+        val languageName = PreferenceHelper.getString(context, "language", "sys")
+        if (languageName == "sys") updateLocaleConf(context, Locale.getDefault())
+        else if ("$languageName".length < 3) {
+            val locale = Locale(languageName.toString())
+            updateLocaleConf(context, locale)
+        } else if ("$languageName".length > 3) {
+            val locale = Locale(
+                languageName?.substring(0, 2).toString(),
+                languageName?.substring(4, 6).toString()
+            )
+            updateLocaleConf(context, locale)
         }
     }
 
-    private fun setLanguage(context: Context, languageName: String) {
-        val locale = if (languageName != "sys" && "$languageName".length < 3) {
-            Locale(languageName)
-        } else if ("$languageName".length > 3) {
-            Locale(languageName?.substring(0, 2), languageName?.substring(4, 6))
-        } else {
-            Locale.getDefault()
-        }
+    private fun updateLocaleConf(context: Context, locale: Locale) {
         // Change API Language
         Locale.setDefault(locale)
 
