@@ -60,9 +60,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // set the theme
-        ThemeHelper.updateTheme(applicationContext)
+        ThemeHelper.updateTheme(this)
         // set the language
-        LocaleHelper.updateLanguage(applicationContext)
+        LocaleHelper.updateLanguage(this)
 
         super.onCreate(savedInstanceState)
 
