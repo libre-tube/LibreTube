@@ -227,4 +227,6 @@
     <string name="reddit">Reddit</string>
     <string name="twitter">Twitter</string>
     <string name="discord">Discord</string>
+    <string name="open">Açıq…</string>
+    <string name="turnInternetOn">Zəhmət olmasa, WiFi və ya mobil datanı yandırmaqla internetə qoşulun.</string>
 </resources>
