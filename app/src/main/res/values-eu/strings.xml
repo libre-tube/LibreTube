@@ -29,7 +29,7 @@
     <string name="subscribeIsEmpty">Lehenengo kanalen batean harpidetu mesedez.</string>
     <string name="cannotDownload">Ezin da deskargatu jario hau.</string>
     <string name="dlcomplete">Deskargatuta.</string>
-    <string name="dlisinprogress">Itxaron deskarga guztiak bukatu arte mesedez…</string>
+    <string name="dlisinprogress">Beste deskarga bat abian dago, itxaron bukatu arte mesedez.</string>
     <string name="downloadfailed">Ezin izan da deskargatu.</string>
     <string name="vlc">Ireki VLC-n</string>
     <string name="vlcerror">Ezin da VLC-n ireki. Agian ez dago instalatuta.</string>
@@ -39,7 +39,7 @@
     <string name="server_error">Zerbitzariarekin arazoren bat dago. Saiatu la zara beste instantzia batekin\?</string>
     <string name="unknown_error">Sareko akatsa.</string>
     <string name="error">Zerbait ez dabil ondo.</string>
-    <string name="notgmail">Hau LibreTubeko kontu baterako da.</string>
+    <string name="notgmail">Hau Piped kontu baterako da.</string>
     <string name="defres">Lehenetsitako bideo bereizmena</string>
     <string name="grid">Lauki-sare zutabea</string>
     <string name="emptyList">Ezer hemen.</string>
@@ -107,7 +107,7 @@
     <string name="app_uptodate">Azken bertsioa da hau.</string>
     <string name="no_update_available">Azken bertsioa erabiltzen ari zara.</string>
     <string name="advanced">Aurreratua</string>
-    <string name="player">Audioa eta bideoa</string>
+    <string name="player">Erreproduzitzailea</string>
     <string name="appearance_summary">Egokitu aplikazioa zure gustura</string>
     <string name="advanced_summary">Deskargak, historiala</string>
     <string name="no_replies">Iruzkin honek ez du erantzunik.</string>
@@ -203,4 +203,28 @@
     <string name="autoplay_summary">Erreproduzitu automatikoki hurrengo bideoa unekoa amaitzen denean.</string>
     <string name="pauseOnScreenOff">Automatikoki gelditzea</string>
     <string name="clonePlaylist">Klonatu erreprodukzio-zerrenda</string>
+    <string name="deleteAccount">Ezabatu kontua</string>
+    <string name="deleteAccount_summary">Ezabatu zure Piped kontua</string>
+    <string name="account">Kontua</string>
+    <string name="restore">Berreskuratu</string>
+    <string name="watch_history">Ikusi historiala</string>
+    <string name="watch_positions">Gogoratu posizioa</string>
+    <string name="watch_positions_summary">Erreprodukzioaren kokapena gogoratu eta bertara joan automatikoki.</string>
+    <string name="auth_instance_summary">Egiaztatze deietarako erabili beste instantzia bat.</string>
+    <string name="auth_instance">Egiaztatze instantzia</string>
+    <string name="auth_instances">Hautatu egiaztatze instantzia</string>
+    <string name="hls">Automatikoa</string>
+    <string name="github">GitHub</string>
+    <string name="audio_video">Audioa eta bideoa</string>
+    <string name="fullscreen_orientation">Pantaila osorako orientazioa</string>
+    <string name="aspect_ratio">Bideoaren aspektu-erlazioa</string>
+    <string name="auto_rotation">Errotazio automatikoa</string>
+    <string name="landscape">Paisaia</string>
+    <string name="portrait">Erretratua</string>
+    <string name="community">Komunitatea</string>
+    <string name="discord">Discord</string>
+    <string name="matrix">Matrix</string>
+    <string name="reddit">Reddit</string>
+    <string name="telegram">Telegram</string>
+    <string name="twitter">Twitter</string>
 </resources>
