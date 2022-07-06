@@ -138,7 +138,7 @@
     <string name="no_update_available">Stai eseguendo l\'ultima versione.</string>
     <string name="playback_speed">Velocità di riproduzione predefinita</string>
     <string name="advanced">Avanzate</string>
-    <string name="player">Audio e video</string>
+    <string name="player">Riproduttore</string>
     <string name="appearance_summary">Regola l\'app a tuo piacimento.</string>
     <string name="live">Dal vivo</string>
     <string name="authors">Autori</string>
@@ -215,4 +215,16 @@
     <string name="auth_instances">Scegli un\'istanza di autenticazione</string>
     <string name="hls">Auto</string>
     <string name="github">GitHub</string>
+    <string name="audio_video">Audio e video</string>
+    <string name="fullscreen_orientation">Orientamento a schermo intero</string>
+    <string name="auto_rotation">Rotazione automatica</string>
+    <string name="landscape">Orizzontale</string>
+    <string name="community">Comunità</string>
+    <string name="discord">Discord</string>
+    <string name="twitter">Twitter</string>
+    <string name="aspect_ratio">Rapporto d\'aspetto del video</string>
+    <string name="portrait">Verticale</string>
+    <string name="matrix">Matrix</string>
+    <string name="telegram">Telegram</string>
+    <string name="reddit">Reddit</string>
 </resources>

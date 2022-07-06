@@ -207,4 +207,12 @@
     <string name="watch_history">시청 기록</string>
     <string name="watch_positions">위치 기억</string>
     <string name="watch_positions_summary">시청 위치를 기억하고 자동으로 찾습니다.</string>
+    <string name="auth_instance">인증 인스턴스</string>
+    <string name="auth_instance_summary">인증된 호출에 다른 인스턴스를 사용합니다.</string>
+    <string name="hls">자동</string>
+    <string name="audio_video">오디오 및 비디오</string>
+    <string name="aspect_ratio">비디오 종횡비</string>
+    <string name="auto_rotation">자동 회전</string>
+    <string name="auth_instances">인증 인스턴스 선택</string>
+    <string name="fullscreen_orientation">전체 화면 방향</string>
 </resources>
