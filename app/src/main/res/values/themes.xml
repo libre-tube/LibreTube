@@ -1,11 +1,5 @@
 <resources>
 
-    <style name="Theme.MY" parent="Theme.Material3.Light.NoActionBar">
-
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-
-    </style>
-
     <style name="Theme.Red" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="colorPrimary">@color/red_light_accentLight</item>
