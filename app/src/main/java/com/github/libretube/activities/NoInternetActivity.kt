@@ -12,6 +12,7 @@ class NoInternetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DynamicColors.applyToActivityIfAvailable(this)
+        ThemeHelper.updateTheme(this)
         super.onCreate(savedInstanceState)
         binding = ActivityNointernetBinding.inflate(layoutInflater)
         binding.retryButton.setOnClickListener {

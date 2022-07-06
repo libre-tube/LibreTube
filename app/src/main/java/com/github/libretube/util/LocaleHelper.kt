@@ -15,12 +15,12 @@ object LocaleHelper {
     }
 
     private fun setLanguage(context: Context, languageName: String) {
-        val locale = if (languageName != "sys" && "$languageName".length < 3) {
+        val locale : Locale? = if (languageName == "sys" && "$languageName".length < 3) {
             Locale(languageName)
         } else if ("$languageName".length > 3) {
             Locale(languageName?.substring(0, 2), languageName?.substring(4, 6))
         } else {
-            Locale.getDefault()
+            null
         }
         // Change API Language
         Locale.setDefault(locale)
