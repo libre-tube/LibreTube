@@ -14,7 +14,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            android:icon="@drawable/ic_video"
+            android:icon="@drawable/ic_player"
             app:defaultValue="WEBM"
             app:entries="@array/playerVideoFormats"
             app:entryValues="@array/playerVideoFormats"

@@ -227,4 +227,6 @@
     <string name="telegram">Telegram</string>
     <string name="reddit">Reddit</string>
     <string name="twitter">Twitter</string>
+    <string name="turnInternetOn">Please connect to the internet by turning on WiFi or mobile data.</string>
+    <string name="open">Open …</string>
 </resources>

@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -33,6 +31,7 @@ import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.ClosingService
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         LocaleHelper.updateLanguage(this)
 
         // show noInternet Activity if no internet available on app startup
-        if (!isNetworkAvailable(this)) {
+        if (!ConnectionHelper.isNetworkAvailable(this)) {
             val noInternetIntent = Intent(this, NoInternetActivity::class.java)
             startActivity(noInternetIntent)
         } else {
@@ -139,28 +138,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 false
             }
-        }
-    }
-
-    private fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val nw = connectivityManager.activeNetwork ?: return false
-            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
-            return when {
-                // WiFi
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                // Mobile
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                // Ethernet
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                // Bluetooth
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
-                else -> false
-            }
-        } else {
-            return connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
     }
 
