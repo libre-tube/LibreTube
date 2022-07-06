@@ -47,7 +47,23 @@ class MainActivity : AppCompatActivity() {
     private var startFragmentId = R.id.homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DynamicColors.applyToActivityIfAvailable(this)
+        /**
+         * apply dynamic colors if enabled
+         */
+        val materialColorsEnabled = PreferenceHelper
+            .getString(this, "accent_color", "purple") == "my"
+        if (materialColorsEnabled) {
+            // apply dynamic colors to the current activity
+            DynamicColors.applyToActivityIfAvailable(this)
+            // apply dynamic colors to the all other activities
+            DynamicColors.applyToActivitiesIfAvailable(application)
+        }
+
+        // set the theme
+        ThemeHelper.updateTheme(applicationContext)
+        // set the language
+        LocaleHelper.updateLanguage(applicationContext)
+
         super.onCreate(savedInstanceState)
 
         // start service that gets called on closure
@@ -68,9 +84,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 RetrofitInstance.url
             }
-
-        ThemeHelper.updateTheme(this)
-        LocaleHelper.updateLanguage(this)
 
         // show noInternet Activity if no internet available on app startup
         if (!ConnectionHelper.isNetworkAvailable(this)) {

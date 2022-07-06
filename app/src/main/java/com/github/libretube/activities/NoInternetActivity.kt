@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
@@ -14,8 +15,15 @@ class NoInternetActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNointernetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DynamicColors.applyToActivityIfAvailable(this)
-        ThemeHelper.updateTheme(this)
+        /**
+         * apply dynamic colors if enabled
+         */
+        val materialColorsEnabled = PreferenceHelper
+            .getString(this, "accent_color", "purple") == "my"
+        if (materialColorsEnabled) {
+            DynamicColors.applyToActivityIfAvailable(this)
+        }
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityNointernetBinding.inflate(layoutInflater)
