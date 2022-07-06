@@ -175,7 +175,7 @@
     <string name="video_format_summary">تحويل الملفات إذا تم تنزيل كل من الصوت والفيديو.</string>
     <string name="download_directory_summary">حيث يتم تخزين الوسائط التي تم تنزيلها.</string>
     <string name="advanced">متقدم</string>
-    <string name="player">الصوت والفيديو</string>
+    <string name="player">المشغل</string>
     <string name="license_summary">GPLv3+ هو ترخيص حر متروك للحقوق. الاستخدام والدراسة والتغيير والمشاركة؛ مع الجميع.</string>
     <string name="donate_summary">أعط ما يستحقه هذا لك ، إذا استطعت. فريق LibreTube أصغر من تبرعك أو مساعدتك.</string>
     <string name="playback_speed">سرعة التشغيل الافتراضية</string>
@@ -208,4 +208,23 @@
     <string name="restore">استعادة</string>
     <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
     <string name="watch_history">سجل المشاهدة</string>
+    <string name="watch_positions">تذكر مكان التوقف</string>
+    <string name="watch_positions_summary">تذكر مكان التوقف وابحث عنه تلقائيا.</string>
+    <string name="auth_instance">مصادقة المثيل</string>
+    <string name="auth_instance_summary">استخدم مثيلا مختلفا للمكالمات المصادق عليها.</string>
+    <string name="auth_instances">اختر مثيل المصادقة</string>
+    <string name="hls">تلقائي</string>
+    <string name="github">جيت هب</string>
+    <string name="audio_video">الصوت والفيديو</string>
+    <string name="fullscreen_orientation">اتجاه ملء الشاشة</string>
+    <string name="aspect_ratio">نسبة أبعاد الفيديو</string>
+    <string name="auto_rotation">الدوران التلقائي</string>
+    <string name="landscape">افقي</string>
+    <string name="portrait">عمودي</string>
+    <string name="community">المجتمع</string>
+    <string name="discord">ديسكورد</string>
+    <string name="matrix">المصفوفة</string>
+    <string name="telegram">تيليجرام</string>
+    <string name="reddit">ريديت</string>
+    <string name="twitter">تويتر</string>
 </resources>
