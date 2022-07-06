@@ -138,7 +138,7 @@
     <string name="no_update_available">Vous utilisez la dernière version.</string>
     <string name="playback_speed">Vitesse de lecture par défaut</string>
     <string name="advanced">Avancé</string>
-    <string name="player">Audio et vidéo</string>
+    <string name="player">Lecteur</string>
     <string name="appearance_summary">Ajustez l\'application à votre convenance.</string>
     <string name="live">En direct</string>
     <string name="no_replies">Ce commentaire n\'a pas de réponse.</string>
@@ -215,4 +215,16 @@
     <string name="github">GitHub</string>
     <string name="auth_instance_summary">Utilisez une instance différente pour les appels authentifiés.</string>
     <string name="auth_instances">Choisissez une instance d\'authentification</string>
+    <string name="audio_video">Audio et vidéo</string>
+    <string name="fullscreen_orientation">Orientation du plein-écran</string>
+    <string name="auto_rotation">Rotation automatique</string>
+    <string name="landscape">Paysage</string>
+    <string name="portrait">Portrait</string>
+    <string name="aspect_ratio">Ratio d\'aspect vidéo</string>
+    <string name="matrix">Matrix</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
+    <string name="telegram">Telegram</string>
+    <string name="community">Communauté</string>
+    <string name="discord">Discord</string>
 </resources>
