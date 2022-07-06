@@ -15,7 +15,6 @@ class NoInternetActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNointernetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         /**
          * apply dynamic colors if enabled
          */
