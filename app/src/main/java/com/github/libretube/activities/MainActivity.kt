@@ -136,6 +136,12 @@ class MainActivity : AppCompatActivity() {
                 false
             }
 
+            /**
+             * don't remove this line
+             * this prevents reselected items at the bottomNav to be duplicated in the backstack
+             */
+            binding.bottomNav.setOnItemReselectedListener {}
+
             binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
             binding.toolbar.setNavigationOnClickListener {
@@ -260,13 +266,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (
-            binding.mainMotionLayout.progress == 0F
-        ) {
+        if (binding.mainMotionLayout.progress == 1F) {
             try {
                 minimizePlayer()
             } catch (e: Exception) {
-                super.onBackPressed()
+                if (navController.currentDestination?.id == startFragmentId) {
+                    super.onBackPressed()
+                } else {
+                    navController.popBackStack()
+                }
             }
         } else if (navController.currentDestination?.id == startFragmentId) {
             super.onBackPressed()
