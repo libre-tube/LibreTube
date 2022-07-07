@@ -1,7 +1,5 @@
 package com.github.libretube.obj
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Streams(
     val title: String?,
@@ -26,4 +24,9 @@ data class Streams(
     val livestream: Boolean?,
     val proxyUrl: String?,
     val chapters: List<ChapterSegment>?
-)
+) {
+    constructor() : this(
+        "", "", "", "", "", "", "", "", "", "", null, -1, -1, -1, -1, emptyList(), emptyList(),
+        emptyList(), emptyList(), null, "", emptyList()
+    )
+}
