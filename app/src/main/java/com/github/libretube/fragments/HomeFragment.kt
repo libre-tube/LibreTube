@@ -13,6 +13,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -49,7 +50,11 @@ class HomeFragment : Fragment() {
         val regionPref = PreferenceHelper.getString(requireContext(), "region", "sys")!!
 
         // get the system default country if auto region selected
-        region = if (regionPref == "sys") Locale.getDefault().country else regionPref
+        region = if (regionPref == "sys") {
+            LocaleHelper
+                .getDetectedCountry(requireContext(), "UK")
+                .uppercase()
+        } else regionPref
 
         binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
         fetchJson()
