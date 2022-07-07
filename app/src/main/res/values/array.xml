@@ -65,6 +65,7 @@
         <item>il.ax"</item>
     </string-array>
     <string-array name="regions">
+        <item>@string/systemDefault</item>
         <item>Afghanistan</item>
         <item>Albania</item>
         <item>Algeria</item>
@@ -260,6 +261,7 @@
         <item>Zimbabwe</item>
     </string-array>
     <string-array name="regionsValue">
+        <item>sys</item>
         <item>AF</item>
         <item>AL</item>
         <item>DZ</item>
