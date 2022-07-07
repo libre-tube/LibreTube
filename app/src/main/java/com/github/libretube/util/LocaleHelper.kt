@@ -40,7 +40,6 @@ object LocaleHelper {
     }
 
     fun getDetectedCountry(context: Context, defaultCountryIsoCode: String): String {
-
         detectSIMCountry(context)?.let {
             return it
         }
