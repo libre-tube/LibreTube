@@ -266,7 +266,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (binding.mainMotionLayout.progress == 1F) {
+        if (binding.mainMotionLayout.progress == 0F) {
             try {
                 minimizePlayer()
             } catch (e: Exception) {
