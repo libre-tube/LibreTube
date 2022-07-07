@@ -16,10 +16,12 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.*
 
 class HomeFragment : Fragment() {
     private val TAG = "HomeFragment"
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var region: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,12 @@ class HomeFragment : Fragment() {
             "grid",
             resources.getInteger(R.integer.grid_items).toString()
         )!!
+
+        val regionPref = PreferenceHelper.getString(requireContext(), "region", "sys")!!
+
+        // get the system default country if auto region selected
+        region = if (regionPref == "sys") Locale.getDefault().country else regionPref
+
         binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
         fetchJson()
         binding.homeRefresh.isEnabled = true
@@ -55,8 +63,7 @@ class HomeFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val region = PreferenceHelper.getString(requireContext(), "region", "US")
-                    RetrofitInstance.api.getTrending(region!!)
+                    RetrofitInstance.api.getTrending(region)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
