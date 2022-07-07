@@ -514,14 +514,16 @@ class PlayerFragment : Fragment() {
     private fun seekToWatchPosition() {
         // seek to saved watch position if available
         val watchPositions = PreferenceHelper.getWatchPositions(requireContext())
+        var position: Long? = null
         watchPositions.forEach {
-            if (it.videoId == videoId) exoPlayer.seekTo(it.position)
+            if (it.videoId == videoId) position = it.position
         }
         // support for time stamped links
-        if (arguments?.getLong("timeStamp") != null) {
-            val position = arguments?.getLong("timeStamp")!! * 1000
-            exoPlayer.seekTo(position)
+        val timeStamp: Long? = arguments?.getLong("timeStamp")
+        if (timeStamp != null && timeStamp != 0L) {
+            position = timeStamp * 1000
         }
+        if (position != null) exoPlayer.seekTo(position!!)
     }
 
     // the function is working recursively
