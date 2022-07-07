@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -259,10 +260,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (binding.mainMotionLayout.progress == 0F) {
-            try { minimizePlayer() } catch (e: Exception) {}
+        if (
+            binding.mainMotionLayout.progress == 0F
+        ) {
+            try {
+                minimizePlayer()
+            } catch (e: Exception) {
+                super.onBackPressed()
+            }
         } else if (navController.currentDestination?.id == startFragmentId) {
-            navController.popBackStack()
             super.onBackPressed()
         } else {
             navController.popBackStack()
