@@ -774,9 +774,8 @@ class PlayerFragment : Fragment() {
                     val newFragment = DownloadDialog()
                     val bundle = Bundle()
                     bundle.putString("video_id", videoId)
-                    bundle.putParcelable("streams", response)
                     newFragment.arguments = bundle
-                    newFragment.show(childFragmentManager, "Download")
+                    newFragment.show(childFragmentManager, "DownloadDialog")
                 } else {
                     Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
                         .show()
