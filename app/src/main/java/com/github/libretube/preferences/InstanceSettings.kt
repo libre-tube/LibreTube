@@ -34,7 +34,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import kotlin.math.log
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
