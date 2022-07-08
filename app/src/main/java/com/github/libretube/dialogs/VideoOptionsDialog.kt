@@ -43,14 +43,14 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
             ) { _, which ->
                 // For now, this checks the position of the option with the position that is in the
                 // list. I don't like it, but we will do like this for now.
-                when (which) {
+                when (optionsList[which]) {
                     // This for example will be the "Background mode" option
-                    0 -> {
+                    context?.getString(R.string.playOnBackground) -> {
                         BackgroundMode.getInstance()
                             .playOnBackgroundMode(requireContext(), videoId)
                     }
                     // Add Video to Playlist Dialog
-                    1 -> {
+                    context?.getString(R.string.addToPlaylist) -> {
                         val token = PreferenceHelper.getToken(requireContext())
                         if (token != "") {
                             val newFragment = AddtoPlaylistDialog()
@@ -62,7 +62,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                             Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                         }
                     }
-                    2 -> {
+                    context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(videoId, false)
                         // using parentFragmentManager is important here
                         shareDialog.show(parentFragmentManager, "ShareDialog")

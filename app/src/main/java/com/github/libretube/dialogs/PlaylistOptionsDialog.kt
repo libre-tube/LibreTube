@@ -7,8 +7,6 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.preferences.PreferenceHelper
@@ -16,7 +14,6 @@ import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -36,8 +33,8 @@ class PlaylistOptionsDialog(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         if (isOwner) {
             optionsList = optionsList +
-                    context?.getString(R.string.deletePlaylist)!! -
-                    context?.getString(R.string.clonePlaylist)!!
+                context?.getString(R.string.deletePlaylist)!! -
+                context?.getString(R.string.clonePlaylist)!!
         }
 
         val dialog = MaterialAlertDialogBuilder(requireContext())
