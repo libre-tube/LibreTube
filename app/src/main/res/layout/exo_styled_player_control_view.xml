@@ -203,9 +203,10 @@
 
     <LinearLayout
         android:id="@id/exo_center_controls"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:gravity="center"
         android:padding="@dimen/exo_styled_controls_padding">
@@ -213,6 +214,7 @@
         <ImageButton
             android:id="@id/exo_play_pause"
             style="@style/ExoStyledControls.Button.Center.PlayPause"
+            android:background="?android:selectableItemBackgroundBorderless"
             app:tint="@android:color/white" />
 
     </LinearLayout>

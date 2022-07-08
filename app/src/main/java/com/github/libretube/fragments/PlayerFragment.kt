@@ -270,63 +270,15 @@ class PlayerFragment : Fragment() {
 
         // FullScreen button trigger
         playerBinding.fullscreen.setOnClickListener {
+            // hide player controller
             exoPlayerView.hideController()
-            var scaleFactor: Float? = null
             if (!isFullScreen) {
                 // go to fullscreen mode
-                with(binding.playerMotionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                    enableTransition(R.id.yt_transition, false)
-                }
-
-                binding.mainContainer.isClickable = true
-                binding.linLayout.visibility = View.GONE
-                playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
-                playerBinding.exoTitle.visibility = View.VISIBLE
-
-                scaleFactor = 1.3F
-
-                val mainActivity = activity as MainActivity
-                val fullscreenOrientationPref = PreferenceHelper
-                    .getString(requireContext(), "fullscreen_orientation", "ratio")
-                Log.e(TAG, fullscreenOrientationPref.toString())
-                val orientation = when (fullscreenOrientationPref) {
-                    "ratio" -> {
-                        val videoSize = exoPlayer.videoSize
-                        // probably a youtube shorts video
-                        Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
-                        if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                        // a video with normal aspect ratio
-                        else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-                    }
-                    "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
-                    "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-                    "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                    else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-                }
-                mainActivity.requestedOrientation = orientation
+                setFullscreen()
             } else {
-                // leave fullscreen mode
-                with(binding.playerMotionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition, true)
-                }
-
-                binding.mainContainer.isClickable = false
-                binding.linLayout.visibility = View.VISIBLE
-                playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
-                playerBinding.exoTitle.visibility = View.INVISIBLE
-
-                scaleFactor = 1F
-
-                val mainActivity = activity as MainActivity
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                // exit fullscreen mode
+                unsetFullscreen()
             }
-            isFullScreen = !isFullScreen
-
-            // scale the exo player center controls
-            playerBinding.exoPlayPause.scaleX = scaleFactor
-            playerBinding.exoPlayPause.scaleY = scaleFactor
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
@@ -371,6 +323,66 @@ class PlayerFragment : Fragment() {
 
         binding.relatedRecView.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+    }
+
+    private fun setFullscreen() {
+        with(binding.playerMotionLayout) {
+            getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+            enableTransition(R.id.yt_transition, false)
+        }
+
+        binding.mainContainer.isClickable = true
+        binding.linLayout.visibility = View.GONE
+        playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
+        playerBinding.exoTitle.visibility = View.VISIBLE
+
+        val mainActivity = activity as MainActivity
+        val fullscreenOrientationPref = PreferenceHelper
+            .getString(requireContext(), "fullscreen_orientation", "ratio")
+
+        val scaleFactor = 1.3F
+        playerBinding.exoPlayPause.scaleX = scaleFactor
+        playerBinding.exoPlayPause.scaleY = scaleFactor
+
+        val orientation = when (fullscreenOrientationPref) {
+            "ratio" -> {
+                val videoSize = exoPlayer.videoSize
+                // probably a youtube shorts video
+                Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
+                if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                // a video with normal aspect ratio
+                else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+            }
+            "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
+            "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+            "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+            else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+        }
+        mainActivity.requestedOrientation = orientation
+
+        isFullScreen = true
+    }
+
+    private fun unsetFullscreen() {
+        // leave fullscreen mode
+        with(binding.playerMotionLayout) {
+            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+            enableTransition(R.id.yt_transition, true)
+        }
+
+        binding.mainContainer.isClickable = false
+        binding.linLayout.visibility = View.VISIBLE
+        playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
+        playerBinding.exoTitle.visibility = View.INVISIBLE
+
+        val scaleFactor = 1F
+        playerBinding.exoPlayPause.scaleX = scaleFactor
+        playerBinding.exoPlayPause.scaleY = scaleFactor
+
+        val mainActivity = activity as MainActivity
+        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+
+        isFullScreen = false
     }
 
     private fun toggleComments() {
