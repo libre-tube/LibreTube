@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -718,6 +719,9 @@ class PlayerFragment : Fragment() {
                 params.height = videoSize.height / videoSize.width * params.width
                 binding.player.layoutParams = params
                 binding.player.requestLayout()
+                (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply{
+                    matchConstraintPercentHeight = (videoSize.height / videoSize.width).toFloat()
+                }
             }
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
