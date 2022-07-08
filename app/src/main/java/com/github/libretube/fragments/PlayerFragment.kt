@@ -54,6 +54,7 @@ import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
+import com.github.libretube.views.DoubleClickListener
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -319,10 +320,6 @@ class PlayerFragment : Fragment() {
             isFullScreen = !isFullScreen
 
             // scale the exo player center controls
-            playerBinding.exoFfwdWithAmount.scaleX = scaleFactor
-            playerBinding.exoFfwdWithAmount.scaleY = scaleFactor
-            playerBinding.exoRewWithAmount.scaleX = scaleFactor
-            playerBinding.exoRewWithAmount.scaleY = scaleFactor
             playerBinding.exoPlayPause.scaleX = scaleFactor
             playerBinding.exoPlayPause.scaleY = scaleFactor
         }
@@ -691,6 +688,8 @@ class PlayerFragment : Fragment() {
 
         playerBinding.exoTitle.text = response.title
 
+        enableDoubleTapToSeek()
+
         // init the chapters recyclerview
         if (response.chapters != null) initializeChapters(response.chapters)
 
@@ -842,6 +841,31 @@ class PlayerFragment : Fragment() {
                 newFragment.show(childFragmentManager, "AddToPlaylist")
             }
         }
+    }
+
+    private fun enableDoubleTapToSeek() {
+        val seekIncrement =
+            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
+
+        playerBinding.rewindFL.setOnClickListener(
+            DoubleClickListener(
+                callback = object : DoubleClickListener.Callback {
+                    override fun doubleClicked() {
+                        exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
+                    }
+                }
+            )
+        )
+
+        playerBinding.forwardFL.setOnClickListener(
+            DoubleClickListener(
+                callback = object : DoubleClickListener.Callback {
+                    override fun doubleClicked() {
+                        exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
+                    }
+                }
+            )
+        )
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
@@ -1064,8 +1088,6 @@ class PlayerFragment : Fragment() {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
         playerBinding.exoTopBarRight.visibility = visibility
         playerBinding.exoPlayPause.visibility = visibility
-        playerBinding.exoFfwdWithAmount.visibility = visibility
-        playerBinding.exoRewWithAmount.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility = visibility
