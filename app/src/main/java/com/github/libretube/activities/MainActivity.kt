@@ -38,6 +38,8 @@ import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
@@ -98,6 +100,12 @@ class MainActivity : AppCompatActivity() {
 
             navController = findNavController(R.id.fragment)
             binding.bottomNav.setupWithNavController(navController)
+            
+            // gets the surface color of the bottom navigation view
+            val color = SurfaceColors.getColorForElevation(this, 10F)
+
+            // sets the navigation bar color to the previously calculated color
+            window.navigationBarColor = color
 
             // hide the trending page if enabled
             val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
