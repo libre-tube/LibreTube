@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/boogh"
             android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dp"
             android:gravity="center"
             android:text="@string/please_login"
             android:textSize="20sp"
