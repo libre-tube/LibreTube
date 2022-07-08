@@ -78,6 +78,7 @@ import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
+import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
@@ -706,7 +707,6 @@ class PlayerFragment : Fragment() {
                 }
             }
 
-            /*
             override fun onVideoSizeChanged(
                 videoSize: VideoSize
             ) {
@@ -714,14 +714,11 @@ class PlayerFragment : Fragment() {
                 // height or width must be cast to float as int/int will give 0
 
                 // Redraw the player container with the new layout height
-                (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    matchConstraintPercentHeight = (
-                        videoSize.height / videoSize.width
-                        ).toFloat()
-                }
-                binding.mainContainer.requestLayout()
+                val params = binding.player.layoutParams
+                params.height = videoSize.height / videoSize.width * params.width
+                binding.player.layoutParams = params
+                binding.player.requestLayout()
             }
-            */
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
@@ -849,6 +846,7 @@ class PlayerFragment : Fragment() {
         val seekIncrement =
             PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
+        // enable rewind button
         binding.rewindFL.setOnClickListener(
             DoubleClickListener(
                 callback = object : DoubleClickListener.Callback {
@@ -856,14 +854,19 @@ class PlayerFragment : Fragment() {
                         binding.rewindBTN.visibility = View.VISIBLE
                         exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
                         Handler(Looper.getMainLooper()).postDelayed({
-                                binding.rewindBTN.visibility = View.INVISIBLE
-                            }, 500)
+                            binding.rewindBTN.visibility = View.INVISIBLE
+                        }, 700)
+                    }
+
+                    override fun singleClicked() {
+                        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+                        else exoPlayerView.showController()
                     }
                 }
             )
         )
 
-
+        // enable fast forward button
         binding.forwardFL.setOnClickListener(
             DoubleClickListener(
                 callback = object : DoubleClickListener.Callback {
@@ -872,7 +875,12 @@ class PlayerFragment : Fragment() {
                         exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
                         Handler(Looper.getMainLooper()).postDelayed({
                             binding.forwardBTN.visibility = View.INVISIBLE
-                        }, 500)
+                        }, 700)
+                    }
+
+                    override fun singleClicked() {
+                        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+                        else exoPlayerView.showController()
                     }
                 }
             )

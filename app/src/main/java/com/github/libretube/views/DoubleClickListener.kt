@@ -1,20 +1,31 @@
 package com.github.libretube.views
 
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 
-class DoubleClickListener(private val doubleClickTimeLimitMills: Long = 500, private val callback: Callback) : View.OnClickListener {
+class DoubleClickListener(
+    private val doubleClickTimeLimitMills: Long = 300,
+    private val callback: Callback
+) : View.OnClickListener {
     private var lastClicked: Long = -1L
+    private var doubleClicked: Boolean = false
 
     override fun onClick(v: View?) {
         lastClicked = when {
             lastClicked == -1L -> {
+                doubleClicked = false
                 System.currentTimeMillis()
             }
             isDoubleClicked() -> {
+                doubleClicked = true
                 callback.doubleClicked()
                 -1L
             }
             else -> {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    if (!doubleClicked) callback.singleClicked()
+                }, doubleClickTimeLimitMills)
                 System.currentTimeMillis()
             }
         }
@@ -33,5 +44,6 @@ class DoubleClickListener(private val doubleClickTimeLimitMills: Long = 500, pri
 
     interface Callback {
         fun doubleClicked()
+        fun singleClicked()
     }
 }
