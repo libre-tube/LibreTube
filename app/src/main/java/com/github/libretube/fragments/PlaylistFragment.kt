@@ -74,16 +74,16 @@ class PlaylistFragment : Fragment() {
                     binding.playlistTotVideos.text =
                         getString(R.string.videoCount, response.videos.toString())
 
-                    // show playlist options
-                    binding.optionsMenu.setOnClickListener {
-                        val newFragment = PlaylistOptionsDialog(playlistId!!, requireContext())
-                        newFragment.show(childFragmentManager, "PlaylistOptionsDialog")
-                    }
                     val user = PreferenceHelper.getUsername(requireContext())
-
                     // check whether the user owns the playlist
                     val isOwner = response.uploaderUrl == null &&
-                    response.uploader.equals(user, true)
+                        response.uploader.equals(user, true)
+
+                    // show playlist options
+                    binding.optionsMenu.setOnClickListener {
+                        val optionsDialog = PlaylistOptionsDialog(playlistId!!, isOwner, requireContext())
+                        optionsDialog.show(childFragmentManager, "PlaylistOptionsDialog")
+                    }
 
                     playlistAdapter = PlaylistAdapter(
                         response.relatedStreams!!.toMutableList(),

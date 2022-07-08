@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.preferences.PreferenceHelper
@@ -14,22 +16,30 @@ import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistOptionsDialog(
     private val playlistId: String,
+    private val isOwner: Boolean,
     context: Context
 ) : DialogFragment() {
     val TAG = "PlaylistOptionsDialog"
 
-    private val optionsList = listOf(
+    private var optionsList = listOf(
         context.getString(R.string.clonePlaylist),
         context.getString(R.string.share)
     )
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        if (isOwner) {
+            optionsList = optionsList +
+                    context?.getString(R.string.deletePlaylist)!! -
+                    context?.getString(R.string.clonePlaylist)!!
+        }
+
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setNegativeButton(R.string.cancel) { dialog, _ ->
                 dialog.dismiss()
@@ -41,12 +51,12 @@ class PlaylistOptionsDialog(
                     optionsList
                 )
             ) { _, which ->
-                when (which) {
+                when (optionsList[which]) {
                     // Clone the playlist to the users Piped account
-                    0 -> {
+                    context?.getString(R.string.clonePlaylist) -> {
                         val token = PreferenceHelper.getToken(requireContext())
                         if (token != "") {
-                            importPlaylist(token!!, playlistId)
+                            importPlaylist(token, playlistId)
                         } else {
                             Toast.makeText(
                                 context,
@@ -56,10 +66,14 @@ class PlaylistOptionsDialog(
                         }
                     }
                     // share the playlist
-                    1 -> {
+                    context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(playlistId, true)
-                        // using parentFragmentManager is important here
+                        // using parentFragmentManager, childFragmentManager doesn't work here
                         shareDialog.show(parentFragmentManager, "ShareDialog")
+                    }
+                    context?.getString(R.string.deletePlaylist) -> {
+                        val token = PreferenceHelper.getToken(requireContext())
+                        deletePlaylist(playlistId, token)
                     }
                 }
             }
@@ -78,6 +92,24 @@ class PlaylistOptionsDialog(
                     return@launch
                 }
                 Log.e(TAG, response.toString())
+            }
+        }
+        run()
+    }
+
+    private fun deletePlaylist(id: String, token: String) {
+        fun run() {
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = try {
+                    RetrofitInstance.authApi.deletePlaylist(token, PlaylistId(id))
+                } catch (e: IOException) {
+                    println(e)
+                    Log.e(TAG, "IOException, you might not have internet connection")
+                    return@launch
+                } catch (e: HttpException) {
+                    Log.e(TAG, "HttpException, unexpected response")
+                    return@launch
+                }
             }
         }
         run()
