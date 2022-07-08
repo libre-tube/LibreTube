@@ -66,7 +66,7 @@
                         android:id="@+id/channel_subs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
+                        android:layout_gravity="start"
                         android:text="@string/app_name"
                         android:textSize="12sp" />
 
@@ -76,11 +76,10 @@
                     android:id="@+id/channel_subscribe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="?attr/colorOnPrimary"
-                    android:drawableLeft="@drawable/ic_bell_small"
-                    android:drawableTint="?android:attr/textColorPrimary"
+                    android:drawableStart="@drawable/ic_bell_small"
+                    android:drawableTint="@android:color/white"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="11sp" />

@@ -9,15 +9,20 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
+import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import retrofit2.HttpException
+import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
@@ -29,12 +34,13 @@ class DownloadDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            streams = arguments?.getParcelable("streams")!!
             videoId = arguments?.getString("video_id")!!
 
             val mainActivity = activity as MainActivity
             val builder = MaterialAlertDialogBuilder(it)
             binding = DialogDownloadBinding.inflate(layoutInflater)
+
+            fetchStreams()
 
             // request storage permissions if not granted yet
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -70,69 +76,89 @@ class DownloadDialog : DialogFragment() {
                 }
             }
 
-            var vidName = arrayListOf<String>()
-            var vidUrl = arrayListOf<String>()
-
-            // add empty selection
-            vidName.add(getString(R.string.no_video))
-            vidUrl.add("")
-
-            // add all available video streams
-            for (vid in streams.videoStreams!!) {
-                val name = vid.quality + " " + vid.format
-                vidName.add(name)
-                vidUrl.add(vid.url!!)
-            }
-
-            var audioName = arrayListOf<String>()
-            var audioUrl = arrayListOf<String>()
-
-            // add empty selection
-            audioName.add(getString(R.string.no_audio))
-            audioUrl.add("")
-
-            // add all available audio streams
-            for (audio in streams.audioStreams!!) {
-                val name = audio.quality + " " + audio.format
-                audioName.add(name)
-                audioUrl.add(audio.url!!)
-            }
-
-            val videoArrayAdapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                vidName
-            )
-            videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.videoSpinner.adapter = videoArrayAdapter
-            binding.videoSpinner.setSelection(1)
-
-            val audioArrayAdapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                audioName
-            )
-            audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.audioSpinner.adapter = audioArrayAdapter
-            binding.audioSpinner.setSelection(1)
-
-            binding.download.setOnClickListener {
-                val selectedAudioUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
-                val selectedVideoUrl = vidUrl[binding.videoSpinner.selectedItemPosition]
-
-                val intent = Intent(context, DownloadService::class.java)
-                intent.putExtra("videoId", videoId)
-                intent.putExtra("videoUrl", selectedVideoUrl)
-                intent.putExtra("audioUrl", selectedAudioUrl)
-                intent.putExtra("duration", duration)
-                context?.startService(intent)
-                dismiss()
-            }
-
             binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
             builder.setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    private fun fetchStreams() {
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.api.getStreams(videoId!!)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG, "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            }
+            initDownloadOptions(response)
+        }
+    }
+
+    private fun initDownloadOptions(streams: Streams) {
+        var vidName = arrayListOf<String>()
+        var vidUrl = arrayListOf<String>()
+
+        // add empty selection
+        vidName.add(getString(R.string.no_video))
+        vidUrl.add("")
+
+        // add all available video streams
+        for (vid in streams.videoStreams!!) {
+            val name = vid.quality + " " + vid.format
+            vidName.add(name)
+            vidUrl.add(vid.url!!)
+        }
+
+        var audioName = arrayListOf<String>()
+        var audioUrl = arrayListOf<String>()
+
+        // add empty selection
+        audioName.add(getString(R.string.no_audio))
+        audioUrl.add("")
+
+        // add all available audio streams
+        for (audio in streams.audioStreams!!) {
+            val name = audio.quality + " " + audio.format
+            audioName.add(name)
+            audioUrl.add(audio.url!!)
+        }
+
+        val videoArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            vidName
+        )
+        videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.videoSpinner.adapter = videoArrayAdapter
+        binding.videoSpinner.setSelection(1)
+
+        val audioArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            audioName
+        )
+        audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.audioSpinner.adapter = audioArrayAdapter
+        binding.audioSpinner.setSelection(1)
+
+        binding.download.setOnClickListener {
+            val selectedAudioUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
+            val selectedVideoUrl = vidUrl[binding.videoSpinner.selectedItemPosition]
+
+            val intent = Intent(context, DownloadService::class.java)
+            intent.putExtra("videoId", videoId)
+            intent.putExtra("videoUrl", selectedVideoUrl)
+            intent.putExtra("audioUrl", selectedAudioUrl)
+            intent.putExtra("duration", duration)
+            context?.startService(intent)
+            dismiss()
+        }
     }
 }
