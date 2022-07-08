@@ -17,7 +17,6 @@ import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.*
 
 class HomeFragment : Fragment() {
     private val TAG = "HomeFragment"

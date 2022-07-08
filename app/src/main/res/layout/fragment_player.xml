@@ -361,7 +361,7 @@
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-        app:show_buffering="always">
+        app:show_buffering="when_playing">
 
         <FrameLayout
             android:id="@+id/forwardFL"

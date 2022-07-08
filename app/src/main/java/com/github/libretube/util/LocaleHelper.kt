@@ -57,7 +57,8 @@ object LocaleHelper {
 
     private fun detectSIMCountry(context: Context): String? {
         try {
-            val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             return telephonyManager.simCountryIso
         } catch (e: Exception) {
             e.printStackTrace()
@@ -67,7 +68,8 @@ object LocaleHelper {
 
     private fun detectNetworkCountry(context: Context): String? {
         try {
-            val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             return telephonyManager.networkCountryIso
         } catch (e: Exception) {
             e.printStackTrace()

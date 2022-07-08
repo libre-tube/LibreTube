@@ -865,8 +865,7 @@ class PlayerFragment : Fragment() {
                     }
 
                     override fun singleClicked() {
-                        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
-                        else exoPlayerView.showController()
+                        toggleController()
                     }
                 }
             )
@@ -885,12 +884,17 @@ class PlayerFragment : Fragment() {
                     }
 
                     override fun singleClicked() {
-                        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
-                        else exoPlayerView.showController()
+                        toggleController()
                     }
                 }
             )
         )
+    }
+
+    // toggle the visibility of the player controller
+    private fun toggleController() {
+        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+        else exoPlayerView.showController()
     }
 
     // enable seek bar preview
@@ -906,6 +910,9 @@ class PlayerFragment : Fragment() {
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
                 exoPlayer.play()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    exoPlayerView.hideController()
+                }, 200)
             }
         })
     }
