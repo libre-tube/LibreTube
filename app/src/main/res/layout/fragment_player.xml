@@ -362,7 +362,47 @@
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-        app:show_buffering="always" />
+        app:show_buffering="always" >
+
+        <FrameLayout
+            android:id="@+id/forwardFL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/forwardBTN"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_forward"
+                android:clickable="false"
+                app:tint="@android:color/white"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/rewindFL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/rewindBTN"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_rewind"
+                android:clickable="false"
+                app:tint="@android:color/white"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
+
+    </com.github.libretube.views.CustomExoPlayerView>
 
     <ImageView
         android:id="@+id/close_imageView"

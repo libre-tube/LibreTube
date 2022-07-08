@@ -170,7 +170,6 @@
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:layout_above="@id/exo_basic_controls"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -207,52 +206,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:gravity="center"
         android:padding="@dimen/exo_styled_controls_padding">
-
-        <FrameLayout
-            android:id="@+id/rewindFL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/rewindBTN"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_vertical"
-                android:background="?android:selectableItemBackground"
-                android:src="@drawable/ic_three_dots"
-                android:clickable="false"
-                app:tint="@android:color/white" />
-
-        </FrameLayout>
 
         <ImageButton
             android:id="@id/exo_play_pause"
             style="@style/ExoStyledControls.Button.Center.PlayPause"
             app:tint="@android:color/white" />
-
-        <FrameLayout
-            android:id="@+id/forwardFL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/forwardBTN"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_vertical|end"
-                android:background="?android:selectableItemBackground"
-                android:src="@drawable/ic_three_dots"
-                android:clickable="false"
-                app:tint="@android:color/white" />
-
-        </FrameLayout>
-
 
     </LinearLayout>
 

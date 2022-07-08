@@ -11,6 +11,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
@@ -847,21 +849,30 @@ class PlayerFragment : Fragment() {
         val seekIncrement =
             PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
-        playerBinding.rewindFL.setOnClickListener(
+        binding.rewindFL.setOnClickListener(
             DoubleClickListener(
                 callback = object : DoubleClickListener.Callback {
                     override fun doubleClicked() {
+                        binding.rewindBTN.visibility = View.VISIBLE
                         exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                                binding.rewindBTN.visibility = View.INVISIBLE
+                            }, 500)
                     }
                 }
             )
         )
 
-        playerBinding.forwardFL.setOnClickListener(
+
+        binding.forwardFL.setOnClickListener(
             DoubleClickListener(
                 callback = object : DoubleClickListener.Callback {
                     override fun doubleClicked() {
+                        binding.forwardBTN.visibility = View.VISIBLE
                         exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.forwardBTN.visibility = View.INVISIBLE
+                        }, 500)
                     }
                 }
             )
