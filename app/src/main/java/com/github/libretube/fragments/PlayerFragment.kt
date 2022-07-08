@@ -11,6 +11,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
@@ -21,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -54,6 +57,7 @@ import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
+import com.github.libretube.views.DoubleClickListener
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -75,6 +79,7 @@ import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
+import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
@@ -319,10 +324,6 @@ class PlayerFragment : Fragment() {
             isFullScreen = !isFullScreen
 
             // scale the exo player center controls
-            playerBinding.exoFfwdWithAmount.scaleX = scaleFactor
-            playerBinding.exoFfwdWithAmount.scaleY = scaleFactor
-            playerBinding.exoRewWithAmount.scaleX = scaleFactor
-            playerBinding.exoRewWithAmount.scaleY = scaleFactor
             playerBinding.exoPlayPause.scaleX = scaleFactor
             playerBinding.exoPlayPause.scaleY = scaleFactor
         }
@@ -691,6 +692,8 @@ class PlayerFragment : Fragment() {
 
         playerBinding.exoTitle.text = response.title
 
+        enableDoubleTapToSeek()
+
         // init the chapters recyclerview
         if (response.chapters != null) initializeChapters(response.chapters)
 
@@ -705,7 +708,6 @@ class PlayerFragment : Fragment() {
                 }
             }
 
-            /*
             override fun onVideoSizeChanged(
                 videoSize: VideoSize
             ) {
@@ -713,14 +715,14 @@ class PlayerFragment : Fragment() {
                 // height or width must be cast to float as int/int will give 0
 
                 // Redraw the player container with the new layout height
+                val params = binding.player.layoutParams
+                params.height = videoSize.height / videoSize.width * params.width
+                binding.player.layoutParams = params
+                binding.player.requestLayout()
                 (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    matchConstraintPercentHeight = (
-                        videoSize.height / videoSize.width
-                        ).toFloat()
+                    matchConstraintPercentHeight = (videoSize.height / videoSize.width).toFloat()
                 }
-                binding.mainContainer.requestLayout()
             }
-            */
 
             @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
             override fun onPlayerStateChanged(
@@ -842,6 +844,51 @@ class PlayerFragment : Fragment() {
                 newFragment.show(childFragmentManager, "AddToPlaylist")
             }
         }
+    }
+
+    private fun enableDoubleTapToSeek() {
+        val seekIncrement =
+            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
+
+        // enable rewind button
+        binding.rewindFL.setOnClickListener(
+            DoubleClickListener(
+                callback = object : DoubleClickListener.Callback {
+                    override fun doubleClicked() {
+                        binding.rewindBTN.visibility = View.VISIBLE
+                        exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.rewindBTN.visibility = View.INVISIBLE
+                        }, 700)
+                    }
+
+                    override fun singleClicked() {
+                        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+                        else exoPlayerView.showController()
+                    }
+                }
+            )
+        )
+
+        // enable fast forward button
+        binding.forwardFL.setOnClickListener(
+            DoubleClickListener(
+                callback = object : DoubleClickListener.Callback {
+                    override fun doubleClicked() {
+                        binding.forwardBTN.visibility = View.VISIBLE
+                        exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.forwardBTN.visibility = View.INVISIBLE
+                        }, 700)
+                    }
+
+                    override fun singleClicked() {
+                        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+                        else exoPlayerView.showController()
+                    }
+                }
+            )
+        )
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
@@ -1064,8 +1111,6 @@ class PlayerFragment : Fragment() {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
         playerBinding.exoTopBarRight.visibility = visibility
         playerBinding.exoPlayPause.visibility = visibility
-        playerBinding.exoFfwdWithAmount.visibility = visibility
-        playerBinding.exoRewWithAmount.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility = visibility
