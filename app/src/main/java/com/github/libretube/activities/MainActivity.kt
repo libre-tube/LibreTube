@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             navController = findNavController(R.id.fragment)
             binding.bottomNav.setupWithNavController(navController)
             
-            // gets the surface color for a elevation of 20dp
+            // gets the surface color of the bottom navigation view
             val color = SurfaceColors.getColorForElevation(this, 10F)
 
             // sets the navigation bar color to the previously calculated color
