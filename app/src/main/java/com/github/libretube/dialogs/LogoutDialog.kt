@@ -29,6 +29,7 @@ class LogoutDialog : DialogFragment() {
                 Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
                 PreferenceHelper.setToken(requireContext(), "")
                 dialog?.dismiss()
+                activity?.recreate()
             }
 
             binding.title.text = ThemeHelper.getStyledAppName(requireContext())

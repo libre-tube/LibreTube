@@ -84,6 +84,7 @@ class LoginDialog : DialogFragment() {
                     PreferenceHelper.setUsername(requireContext(), login.username!!)
                     requireMainActivityRestart = true
                     dialog?.dismiss()
+                    activity?.recreate()
                 }
             }
         }
