@@ -15,7 +15,8 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -74,7 +75,7 @@ class PlaylistsAdapter(
 
     private fun deletePlaylist(id: String, token: String, position: Int) {
         fun run() {
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     RetrofitInstance.authApi.deletePlaylist(token, PlaylistId(id))
                 } catch (e: IOException) {
@@ -84,7 +85,6 @@ class PlaylistsAdapter(
                 } catch (e: HttpException) {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launch
-                } finally {
                 }
                 try {
                     if (response.message == "ok") {

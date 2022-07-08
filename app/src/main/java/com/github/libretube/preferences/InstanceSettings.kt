@@ -171,8 +171,9 @@ class InstanceSettings : PreferenceFragmentCompat() {
         }
 
         val login = findPreference<Preference>("login_register")
+        val token = PreferenceHelper.getToken(requireContext())
+        if (token != "") login?.setTitle(R.string.logout)
         login?.setOnPreferenceClickListener {
-            val token = PreferenceHelper.getToken(requireContext())
             if (token == "") {
                 val newFragment = LoginDialog()
                 newFragment.show(childFragmentManager, "Login")

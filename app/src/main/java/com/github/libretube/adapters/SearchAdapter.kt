@@ -155,7 +155,7 @@ class SearchAdapter(
             }
             root.setOnLongClickListener {
                 val playlistId = item.url!!.replace("/playlist?list=", "")
-                PlaylistOptionsDialog(playlistId, root.context)
+                PlaylistOptionsDialog(playlistId, false, root.context)
                     .show(childFragmentManager, "PlaylistOptionsDialog")
                 true
             }

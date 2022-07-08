@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.databinding.FragmentPlaylistBinding
+import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
@@ -72,11 +73,18 @@ class PlaylistFragment : Fragment() {
                     binding.playlistUploader.text = response.uploader
                     binding.playlistTotVideos.text =
                         getString(R.string.videoCount, response.videos.toString())
+
                     val user = PreferenceHelper.getUsername(requireContext())
-                    var isOwner = false
-                    if (response.uploaderUrl == null && response.uploader.equals(user, true)) {
-                        isOwner = true
+                    // check whether the user owns the playlist
+                    val isOwner = response.uploaderUrl == null &&
+                        response.uploader.equals(user, true)
+
+                    // show playlist options
+                    binding.optionsMenu.setOnClickListener {
+                        val optionsDialog = PlaylistOptionsDialog(playlistId!!, isOwner, requireContext())
+                        optionsDialog.show(childFragmentManager, "PlaylistOptionsDialog")
                     }
+
                     playlistAdapter = PlaylistAdapter(
                         response.relatedStreams!!.toMutableList(),
                         playlistId!!,
