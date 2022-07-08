@@ -75,6 +75,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
@@ -692,6 +693,7 @@ class PlayerFragment : Fragment() {
 
         playerBinding.exoTitle.text = response.title
 
+        enableSeekbarPreview()
         enableDoubleTapToSeek()
 
         // init the chapters recyclerview
@@ -889,6 +891,23 @@ class PlayerFragment : Fragment() {
                 }
             )
         )
+    }
+
+    // enable seek bar preview
+    private fun enableSeekbarPreview() {
+        playerBinding.exoProgress.addListener(object : TimeBar.OnScrubListener {
+            override fun onScrubStart(timeBar: TimeBar, position: Long) {
+                exoPlayer.pause()
+            }
+
+            override fun onScrubMove(timeBar: TimeBar, position: Long) {
+                exoPlayer.seekTo(position)
+            }
+
+            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                exoPlayer.play()
+            }
+        })
     }
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
