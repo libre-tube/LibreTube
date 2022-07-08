@@ -719,7 +719,7 @@ class PlayerFragment : Fragment() {
                 params.height = videoSize.height / videoSize.width * params.width
                 binding.player.layoutParams = params
                 binding.player.requestLayout()
-                (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply{
+                (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
                     matchConstraintPercentHeight = (videoSize.height / videoSize.width).toFloat()
                 }
             }

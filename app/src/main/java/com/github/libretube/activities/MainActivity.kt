@@ -38,7 +38,6 @@ import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.MaterialColors
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : AppCompatActivity() {
@@ -100,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
             navController = findNavController(R.id.fragment)
             binding.bottomNav.setupWithNavController(navController)
-            
+
             // gets the surface color of the bottom navigation view
             val color = SurfaceColors.getColorForElevation(this, 10F)
 
