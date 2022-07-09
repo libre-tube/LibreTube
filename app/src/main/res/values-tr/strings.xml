@@ -229,4 +229,5 @@
     <string name="discord">Discord</string>
     <string name="open">Açık …</string>
     <string name="turnInternetOn">Lütfen, WiFi veya mobil verileri açarak internete bağlanın.</string>
+    <string name="chapters">Bölümler</string>
 </resources>
