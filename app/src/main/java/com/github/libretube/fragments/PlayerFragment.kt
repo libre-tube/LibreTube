@@ -991,8 +991,9 @@ class PlayerFragment : Fragment() {
         }
         Log.e(TAG, chapterName.toString())
         // change the chapter name textView text to the chapterName
-        if (chapterName != null && chapterName != playerBinding.chapterName.text)
+        if (chapterName != null && chapterName != playerBinding.chapterName.text) {
             playerBinding.chapterName.text = chapterName
+        }
     }
 
     private fun setMediaSource(
