@@ -11,6 +11,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
@@ -19,14 +21,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.ScrollView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -37,16 +31,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
+import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
-import com.github.libretube.hideKeyboard
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Playlist
@@ -56,12 +51,13 @@ import com.github.libretube.obj.SponsorBlockPrefs
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
-import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
+import com.github.libretube.views.DoubleClickListener
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -79,12 +75,13 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
+import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -102,6 +99,9 @@ var isMiniPlayerVisible = false
 class PlayerFragment : Fragment() {
 
     private val TAG = "PlayerFragment"
+    private lateinit var binding: FragmentPlayerBinding
+    private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
+
     private var videoId: String? = null
     private var playlistId: String? = null
     private var sId: Int = 0
@@ -114,14 +114,11 @@ class PlayerFragment : Fragment() {
 
     private var isSubscribed: Boolean = false
 
-    private lateinit var relatedRecView: RecyclerView
-    private lateinit var commentsRecView: RecyclerView
     private var commentsAdapter: CommentsAdapter? = null
     private var commentsLoaded: Boolean? = false
     private var nextPage: String? = null
     private var isLoading = true
     private lateinit var exoPlayerView: StyledPlayerView
-    private lateinit var motionLayout: MotionLayout
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var segmentData: Segments
     private var relatedStreamsEnabled = true
@@ -132,8 +129,6 @@ class PlayerFragment : Fragment() {
     private var playlistNextPage: String? = null
 
     private var isPlayerLocked: Boolean = false
-
-    private lateinit var relDownloadVideo: LinearLayout
 
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
@@ -156,9 +151,11 @@ class PlayerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        binding = FragmentPlayerBinding.inflate(layoutInflater, container, false)
+        playerBinding = binding.player.binding
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_player, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -172,17 +169,14 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeTransitionLayout(view: View) {
-        val playerDescription = view.findViewById<TextView>(R.id.player_description)
         videoId = videoId!!.replace("/watch?v=", "")
-        relDownloadVideo = view.findViewById(R.id.relPlayer_download)
-        val mainActivity = activity as MainActivity
-        mainActivity.findViewById<FrameLayout>(R.id.container).visibility = View.VISIBLE
-        val playerMotionLayout = view.findViewById<MotionLayout>(R.id.playerMotionLayout)
-        motionLayout = playerMotionLayout
-        exoPlayerView = view.findViewById(R.id.player)
 
-        view.findViewById<TextView>(R.id.player_description).text = videoId
-        playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+        val mainActivity = activity as MainActivity
+        mainActivity.binding.container.visibility = View.VISIBLE
+
+        exoPlayerView = binding.player
+
+        binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
@@ -198,7 +192,7 @@ class PlayerFragment : Fragment() {
             ) {
                 val mainActivity = activity as MainActivity
                 val mainMotionLayout =
-                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    mainActivity.binding.mainMotionLayout
                 mainMotionLayout.progress = abs(progress)
                 exoPlayerView.hideController()
                 eId = endId
@@ -209,7 +203,7 @@ class PlayerFragment : Fragment() {
                 println(currentId)
                 val mainActivity = activity as MainActivity
                 val mainMotionLayout =
-                    mainActivity.findViewById<MotionLayout>(R.id.mainMotionLayout)
+                    mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
                     isMiniPlayerVisible = true
                     exoPlayerView.useController = false
@@ -222,7 +216,7 @@ class PlayerFragment : Fragment() {
             }
 
             override fun onTransitionTrigger(
-                motionLayout: MotionLayout?,
+                MotionLayout: MotionLayout?,
                 triggerId: Int,
                 positive: Boolean,
                 progress: Float
@@ -230,93 +224,65 @@ class PlayerFragment : Fragment() {
             }
         })
 
-        playerMotionLayout.progress = 1.toFloat()
-        playerMotionLayout.transitionToStart()
+        binding.playerMotionLayout.progress = 1.toFloat()
+        binding.playerMotionLayout.transitionToStart()
 
-        view.findViewById<ImageView>(R.id.close_imageView).setOnClickListener {
+        binding.closeImageView.setOnClickListener {
             isMiniPlayerVisible = false
-            motionLayout.transitionToEnd()
+            binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
         }
-        view.findViewById<ImageButton>(R.id.close_imageButton).setOnClickListener {
+        playerBinding.closeImageButton.setOnClickListener {
             isMiniPlayerVisible = false
-            motionLayout.transitionToEnd()
+            binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
         }
-        val playImageView = view.findViewById<ImageView>(R.id.play_imageView)
-        playImageView.setOnClickListener {
+        binding.playImageView.setOnClickListener {
             paused = if (paused) {
-                playImageView.setImageResource(R.drawable.ic_pause)
+                binding.playImageView.setImageResource(R.drawable.ic_pause)
                 exoPlayer.play()
                 false
             } else {
-                playImageView.setImageResource(R.drawable.ic_play)
+                binding.playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
                 true
             }
         }
 
         // video description and chapters toggle
-        val descLinLayout = view.findViewById<LinearLayout>(R.id.desc_linLayout)
-        view.findViewById<RelativeLayout>(R.id.player_title_layout).setOnClickListener {
-            val arrowImageView = view.findViewById<ImageView>(R.id.player_description_arrow)
-            arrowImageView.animate().rotationBy(180F).setDuration(250).start()
-            descLinLayout.visibility = if (descLinLayout.isVisible) View.GONE else View.VISIBLE
+        binding.playerTitleLayout.setOnClickListener {
+            binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
+            binding.descLinLayout.visibility =
+                if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
         }
 
-        view.findViewById<MaterialCardView>(R.id.comments_toggle)
-            .setOnClickListener {
-                toggleComments()
-            }
-
-        val fullScreenButton = view.findViewById<ImageButton>(R.id.fullscreen)
-        val exoTitle = view.findViewById<TextView>(R.id.exo_title)
-        val mainContainer = view.findViewById<ConstraintLayout>(R.id.main_container)
-        val linLayout = view.findViewById<LinearLayout>(R.id.linLayout)
+        binding.commentsToggle.setOnClickListener {
+            toggleComments()
+        }
 
         // FullScreen button trigger
-        fullScreenButton.setOnClickListener {
+        playerBinding.fullscreen.setOnClickListener {
+            // hide player controller
             exoPlayerView.hideController()
             if (!isFullScreen) {
-                with(motionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                    enableTransition(R.id.yt_transition, false)
-                }
-
-                mainContainer.isClickable = true
-                linLayout.visibility = View.GONE
-                fullScreenButton.setImageResource(R.drawable.ic_fullscreen_exit)
-                exoTitle.visibility = View.VISIBLE
-
-                val mainActivity = activity as MainActivity
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                // go to fullscreen mode
+                setFullscreen()
             } else {
-                with(motionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition, true)
-                }
-
-                mainContainer.isClickable = false
-                linLayout.visibility = View.VISIBLE
-                fullScreenButton.setImageResource(R.drawable.ic_fullscreen)
-                exoTitle.visibility = View.INVISIBLE
-
-                val mainActivity = activity as MainActivity
-                mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                // exit fullscreen mode
+                unsetFullscreen()
             }
-            isFullScreen = !isFullScreen
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        view.findViewById<ImageButton>(R.id.aspect_ratio_button).setOnClickListener {
+        playerBinding.aspectRatioButton.setOnClickListener {
             if (isZoomed) {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 isZoomed = false
@@ -327,13 +293,12 @@ class PlayerFragment : Fragment() {
         }
 
         // lock and unlock the player
-        val lockPlayerButton = view.findViewById<ImageButton>(R.id.lock_player)
-        lockPlayerButton.setOnClickListener {
+        playerBinding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
             if (!isPlayerLocked) {
-                lockPlayerButton.setImageResource(R.drawable.ic_locked)
+                playerBinding.lockPlayer.setImageResource(R.drawable.ic_locked)
             } else {
-                lockPlayerButton.setImageResource(R.drawable.ic_unlocked)
+                playerBinding.lockPlayer.setImageResource(R.drawable.ic_unlocked)
             }
 
             // show/hide all the controls
@@ -343,32 +308,88 @@ class PlayerFragment : Fragment() {
             isPlayerLocked = !isPlayerLocked
         }
 
-        val scrollView = view.findViewById<ScrollView>(R.id.player_scrollView)
-        scrollView.viewTreeObserver
+        binding.playerScrollView.viewTreeObserver
             .addOnScrollChangedListener {
-                if (scrollView.getChildAt(0).bottom
-                    == (scrollView.height + scrollView.scrollY) &&
+                if (binding.playerScrollView.getChildAt(0).bottom
+                    == (binding.playerScrollView.height + binding.playerScrollView.scrollY) &&
                     nextPage != null
                 ) {
                     fetchNextComments()
                 }
             }
 
-        commentsRecView = view.findViewById(R.id.comments_recView)
-        commentsRecView.layoutManager = LinearLayoutManager(view.context)
+        binding.commentsRecView.layoutManager = LinearLayoutManager(view.context)
+        binding.commentsRecView.setItemViewCacheSize(20)
 
-        commentsRecView.setItemViewCacheSize(20)
-
-        relatedRecView = view.findViewById(R.id.player_recView)
-        relatedRecView.layoutManager =
+        binding.relatedRecView.layoutManager =
             GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
     }
 
+    private fun setFullscreen() {
+        with(binding.playerMotionLayout) {
+            getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+            enableTransition(R.id.yt_transition, false)
+        }
+
+        binding.mainContainer.isClickable = true
+        binding.linLayout.visibility = View.GONE
+        playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
+        playerBinding.exoTitle.visibility = View.VISIBLE
+
+        val mainActivity = activity as MainActivity
+        val fullscreenOrientationPref = PreferenceHelper
+            .getString(requireContext(), "fullscreen_orientation", "ratio")
+
+        val scaleFactor = 1.3F
+        playerBinding.exoPlayPause.scaleX = scaleFactor
+        playerBinding.exoPlayPause.scaleY = scaleFactor
+
+        val orientation = when (fullscreenOrientationPref) {
+            "ratio" -> {
+                val videoSize = exoPlayer.videoSize
+                // probably a youtube shorts video
+                Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
+                if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                // a video with normal aspect ratio
+                else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+            }
+            "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
+            "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+            "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+            else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+        }
+        mainActivity.requestedOrientation = orientation
+
+        isFullScreen = true
+    }
+
+    private fun unsetFullscreen() {
+        // leave fullscreen mode
+        with(binding.playerMotionLayout) {
+            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+            enableTransition(R.id.yt_transition, true)
+        }
+
+        binding.mainContainer.isClickable = false
+        binding.linLayout.visibility = View.VISIBLE
+        playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
+        playerBinding.exoTitle.visibility = View.INVISIBLE
+
+        val scaleFactor = 1F
+        playerBinding.exoPlayPause.scaleX = scaleFactor
+        playerBinding.exoPlayPause.scaleY = scaleFactor
+
+        val mainActivity = activity as MainActivity
+        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+
+        isFullScreen = false
+    }
+
     private fun toggleComments() {
-        commentsRecView.visibility =
-            if (commentsRecView.isVisible) View.GONE else View.VISIBLE
-        relatedRecView.visibility =
-            if (relatedRecView.isVisible) View.GONE else View.VISIBLE
+        binding.commentsRecView.visibility =
+            if (binding.commentsRecView.isVisible) View.GONE else View.VISIBLE
+        binding.relatedRecView.visibility =
+            if (binding.relatedRecView.isVisible) View.GONE else View.VISIBLE
         if (!commentsLoaded!!) fetchComments()
     }
 
@@ -386,10 +407,7 @@ class PlayerFragment : Fragment() {
 
         // pause player if screen off and setting enabled
         if (
-            this::exoPlayer.isInitialized &&
-            exoPlayer != null &&
-            !isScreenOn &&
-            pausePlayerOnScreenOffEnabled
+            this::exoPlayer.isInitialized && !isScreenOn && pausePlayerOnScreenOffEnabled
         ) {
             exoPlayer.pause()
         }
@@ -399,6 +417,7 @@ class PlayerFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
+            saveWatchPosition()
             mediaSession.isActive = false
             mediaSession.release()
             mediaSessionConnector.setPlayer(null)
@@ -409,6 +428,25 @@ class PlayerFragment : Fragment() {
             notificationManager.cancel(1)
             exoPlayer.release()
         } catch (e: Exception) {
+        }
+    }
+
+    // save the watch position if video isn't finished and option enabled
+    private fun saveWatchPosition() {
+        val watchPositionsEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "watch_positions_toggle",
+            true
+        )
+        if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
+            PreferenceHelper.saveWatchPosition(
+                requireContext(),
+                videoId!!,
+                exoPlayer.currentPosition
+            )
+        } else if (watchPositionsEnabled) {
+            // delete watch position if video has ended
+            PreferenceHelper.removeWatchPosition(requireContext(), videoId!!)
         }
     }
 
@@ -462,17 +500,12 @@ class PlayerFragment : Fragment() {
                 relatedStreams = response.relatedStreams
 
                 runOnUiThread {
-                    if (response.chapters != null) initializeChapters(response.chapters)
                     // set media sources for the player
                     setResolutionAndSubtitles(view, response)
-                    exoPlayer.prepare()
                     prepareExoPlayerView()
                     initializePlayerView(view, response)
-                    // support for time stamped links
-                    if (arguments?.getLong("timeStamp") != null) {
-                        val position = arguments?.getLong("timeStamp")!! * 1000
-                        exoPlayer.seekTo(position)
-                    }
+                    seekToWatchPosition()
+                    exoPlayer.prepare()
                     exoPlayer.play()
                     exoPlayerView.useController = true
                     initializePlayerNotification(requireContext())
@@ -481,10 +514,30 @@ class PlayerFragment : Fragment() {
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
                     initAutoPlay()
+                    val watchHistoryEnabled =
+                        PreferenceHelper.getBoolean(requireContext(), "Watch_history_toggle", true)
+                    if (watchHistoryEnabled) {
+                        PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
+                    }
                 }
             }
         }
         run()
+    }
+
+    private fun seekToWatchPosition() {
+        // seek to saved watch position if available
+        val watchPositions = PreferenceHelper.getWatchPositions(requireContext())
+        var position: Long? = null
+        watchPositions.forEach {
+            if (it.videoId == videoId) position = it.position
+        }
+        // support for time stamped links
+        val timeStamp: Long? = arguments?.getLong("timeStamp")
+        if (timeStamp != null && timeStamp != 0L) {
+            position = timeStamp * 1000
+        }
+        if (position != null) exoPlayer.seekTo(position!!)
     }
 
     // the function is working recursively
@@ -535,7 +588,7 @@ class PlayerFragment : Fragment() {
                 // if it's not a playlist then use the next related video
             } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
-                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")!!
+                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")
             }
         }
     }
@@ -638,20 +691,25 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializePlayerView(view: View, response: Streams) {
-        view.findViewById<TextView>(R.id.player_views_info).text =
+        binding.playerViewsInfo.text =
             context?.getString(R.string.views, response.views.formatShort()) +
             " • " + response.uploadDate
-        view.findViewById<TextView>(R.id.textLike).text = response.likes.formatShort()
-        view.findViewById<TextView>(R.id.textDislike).text = response.dislikes.formatShort()
-        val channelImage = view.findViewById<ImageView>(R.id.player_channelImage)
-        Picasso.get().load(response.uploaderAvatar).into(channelImage)
-        view.findViewById<TextView>(R.id.player_channelName).text = response.uploader
+        binding.textLike.text = response.likes.formatShort()
+        binding.textDislike.text = response.dislikes.formatShort()
+        Picasso.get().load(response.uploaderAvatar).into(binding.playerChannelImage)
+        binding.playerChannelName.text = response.uploader
 
-        view.findViewById<TextView>(R.id.title_textView).text = response.title
-        view.findViewById<TextView>(R.id.player_title).text = response.title
-        view.findViewById<TextView>(R.id.player_description).text = response.description
+        binding.titleTextView.text = response.title
+        binding.playerTitle.text = response.title
+        binding.playerDescription.text = response.description
 
-        view.findViewById<TextView>(R.id.exo_title).text = response.title
+        playerBinding.exoTitle.text = response.title
+
+        enableSeekbarPreview()
+        enableDoubleTapToSeek()
+
+        // init the chapters recyclerview
+        if (response.chapters != null) initializeChapters(response.chapters)
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -661,6 +719,22 @@ class PlayerFragment : Fragment() {
                         this@PlayerFragment::checkForSegments,
                         100
                     )
+                }
+            }
+
+            override fun onVideoSizeChanged(
+                videoSize: VideoSize
+            ) {
+                // Set new width/height of view
+                // height or width must be cast to float as int/int will give 0
+
+                // Redraw the player container with the new layout height
+                val params = binding.player.layoutParams
+                params.height = videoSize.height / videoSize.width * params.width
+                binding.player.layoutParams = params
+                binding.player.requestLayout()
+                (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    matchConstraintPercentHeight = (videoSize.height / videoSize.width).toFloat()
                 }
             }
 
@@ -690,38 +764,34 @@ class PlayerFragment : Fragment() {
                 if (playWhenReady && playbackState == Player.STATE_READY) {
                     // media actually playing
                     transitioning = false
-                    view.findViewById<ImageView>(R.id.play_imageView)
-                        .setImageResource(R.drawable.ic_pause)
+                    binding.playImageView.setImageResource(R.drawable.ic_pause)
                 } else if (playWhenReady) {
                     // might be idle (plays after prepare()),
                     // buffering (plays when data available)
                     // or ended (plays when seek away from end)
-                    view.findViewById<ImageView>(R.id.play_imageView)
-                        .setImageResource(R.drawable.ic_play)
+                    binding.playImageView.setImageResource(R.drawable.ic_play)
                 } else {
                     // player paused in any state
-                    view.findViewById<ImageView>(R.id.play_imageView)
-                        .setImageResource(R.drawable.ic_play)
+                    binding.playImageView.setImageResource(R.drawable.ic_play)
                 }
             }
         })
 
         // share button
-        view.findViewById<LinearLayout>(R.id.relPlayer_share).setOnClickListener {
+        binding.relPlayerShare.setOnClickListener {
             val shareDialog = ShareDialog(videoId!!, false)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
         // check if livestream
         if (response.duration!! > 0) {
             // download clicked
-            relDownloadVideo.setOnClickListener {
+            binding.relPlayerDownload.setOnClickListener {
                 if (!IS_DOWNLOAD_RUNNING) {
                     val newFragment = DownloadDialog()
                     val bundle = Bundle()
                     bundle.putString("video_id", videoId)
-                    bundle.putParcelable("streams", response)
                     newFragment.arguments = bundle
-                    newFragment.show(childFragmentManager, "Download")
+                    newFragment.show(childFragmentManager, "DownloadDialog")
                 } else {
                     Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
                         .show()
@@ -732,7 +802,7 @@ class PlayerFragment : Fragment() {
         }
 
         if (response.hls != null) {
-            view.findViewById<LinearLayout>(R.id.relPlayer_vlc).setOnClickListener {
+            binding.relPlayerVlc.setOnClickListener {
                 // start an intent with video as mimetype using the hls stream
                 val uri: Uri = Uri.parse(response.hls)
                 val intent = Intent()
@@ -749,14 +819,14 @@ class PlayerFragment : Fragment() {
         }
         if (relatedStreamsEnabled) {
             // only show related streams if enabled
-            relatedRecView.adapter = TrendingAdapter(
+            binding.relatedRecView.adapter = TrendingAdapter(
                 response.relatedStreams!!,
                 childFragmentManager
             )
         }
         // set video description
         val description = response.description!!
-        view.findViewById<TextView>(R.id.player_description).text =
+        binding.playerDescription.text =
             // detect whether the description is html formatted
             if (description.contains("<") && description.contains(">")) {
                 if (SDK_INT >= Build.VERSION_CODES.N) {
@@ -769,19 +839,18 @@ class PlayerFragment : Fragment() {
                 description
             }
 
-        view.findViewById<RelativeLayout>(R.id.player_channel).setOnClickListener {
+        binding.playerChannel.setOnClickListener {
             val activity = view.context as MainActivity
             val bundle = bundleOf("channel_id" to response.uploaderUrl)
-            activity.navController.navigate(R.id.channel, bundle)
-            activity.findViewById<MotionLayout>(R.id.mainMotionLayout).transitionToEnd()
-            view.findViewById<MotionLayout>(R.id.playerMotionLayout).transitionToEnd()
+            activity.navController.navigate(R.id.channelFragment, bundle)
+            activity.binding.mainMotionLayout.transitionToEnd()
+            binding.playerMotionLayout.transitionToEnd()
         }
         val token = PreferenceHelper.getToken(requireContext())
         if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
-            val subButton = view.findViewById<MaterialButton>(R.id.player_subscribe)
-            isSubscribed(subButton, channelId!!)
-            view.findViewById<LinearLayout>(R.id.save).setOnClickListener {
+            isSubscribed(binding.playerSubscribe, channelId!!)
+            binding.save.setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
@@ -791,14 +860,81 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun initializeChapters(chapters: List<ChapterSegment>) {
-        val chaptersRecView = view?.findViewById<RecyclerView>(R.id.chapters_recView)
+    private fun enableDoubleTapToSeek() {
+        val seekIncrement =
+            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
+        // enable rewind button
+        binding.rewindFL.setOnClickListener(
+            DoubleClickListener(
+                callback = object : DoubleClickListener.Callback {
+                    override fun doubleClicked() {
+                        binding.rewindBTN.visibility = View.VISIBLE
+                        exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.rewindBTN.visibility = View.INVISIBLE
+                        }, 700)
+                    }
+
+                    override fun singleClicked() {
+                        toggleController()
+                    }
+                }
+            )
+        )
+
+        // enable fast forward button
+        binding.forwardFL.setOnClickListener(
+            DoubleClickListener(
+                callback = object : DoubleClickListener.Callback {
+                    override fun doubleClicked() {
+                        binding.forwardBTN.visibility = View.VISIBLE
+                        exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.forwardBTN.visibility = View.INVISIBLE
+                        }, 700)
+                    }
+
+                    override fun singleClicked() {
+                        toggleController()
+                    }
+                }
+            )
+        )
+    }
+
+    // toggle the visibility of the player controller
+    private fun toggleController() {
+        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+        else exoPlayerView.showController()
+    }
+
+    // enable seek bar preview
+    private fun enableSeekbarPreview() {
+        playerBinding.exoProgress.addListener(object : TimeBar.OnScrubListener {
+            override fun onScrubStart(timeBar: TimeBar, position: Long) {
+                exoPlayer.pause()
+            }
+
+            override fun onScrubMove(timeBar: TimeBar, position: Long) {
+                exoPlayer.seekTo(position)
+            }
+
+            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                exoPlayer.play()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    exoPlayerView.hideController()
+                }, 200)
+            }
+        })
+    }
+
+    private fun initializeChapters(chapters: List<ChapterSegment>) {
         if (chapters.isNotEmpty()) {
-            chaptersRecView?.layoutManager =
+            binding.chaptersRecView.layoutManager =
                 LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-            chaptersRecView?.adapter = ChaptersAdapter(chapters, exoPlayer)
-            chaptersRecView?.visibility = View.VISIBLE
+            binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
+            binding.chaptersRecView.visibility = View.VISIBLE
         }
     }
 
@@ -816,7 +952,7 @@ class PlayerFragment : Fragment() {
         val videoSource: MediaSource =
             DefaultMediaSourceFactory(dataSourceFactory)
                 .createMediaSource(videoItem)
-        var audioSource: MediaSource =
+        val audioSource: MediaSource =
             ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(fromUri(audioUrl))
         val mergeSource: MediaSource =
@@ -829,15 +965,12 @@ class PlayerFragment : Fragment() {
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
-        val qualityText = view.findViewById<TextView>(R.id.quality_text)
-        val qualitySelect = view.findViewById<LinearLayout>(R.id.quality_linLayout)
-
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
 
         // append hls to list if available
         if (response.hls != null) {
-            videosNameArray += "HLS"
+            videosNameArray += getString(R.string.hls)
             videosUrlArray += response.hls.toUri()
         }
 
@@ -871,7 +1004,7 @@ class PlayerFragment : Fragment() {
                             val videoUri = videosUrlArray[index]
                             val audioUrl = getMostBitRate(response.audioStreams!!)
                             setMediaSource(subtitle, videoUri, audioUrl)
-                            qualityText.text = videosNameArray[index]
+                            playerBinding.qualityText.text = videosNameArray[index]
                             return@lit
                         } else if (response.hls != null) {
                             val mediaItem: MediaItem = MediaItem.Builder()
@@ -902,11 +1035,11 @@ class PlayerFragment : Fragment() {
                 val videoUri = videosUrlArray[0]
                 val audioUrl = getMostBitRate(response.audioStreams!!)
                 setMediaSource(subtitle, videoUri, audioUrl)
-                qualityText.text = videosNameArray[0]
+                playerBinding.qualityText.text = videosNameArray[0]
             }
         }
 
-        qualitySelect.setOnClickListener {
+        playerBinding.qualityLinLayout.setOnClickListener {
             // Dialog for quality selection
             val builder: MaterialAlertDialogBuilder? = activity?.let {
                 MaterialAlertDialogBuilder(it)
@@ -918,7 +1051,7 @@ class PlayerFragment : Fragment() {
                 ) { _, which ->
                     whichQuality = which
                     if (
-                        videosNameArray[which] == "HLS" ||
+                        videosNameArray[which] == getString(R.string.hls) ||
                         videosNameArray[which] == "LBRY HLS"
                     ) {
                         // no need to merge sources if using hls
@@ -933,7 +1066,7 @@ class PlayerFragment : Fragment() {
                         setMediaSource(subtitle, videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
-                    qualityText.text = videosNameArray[which]
+                    playerBinding.qualityText.text = videosNameArray[which]
                 }
             val dialog = builder.create()
             dialog.show()
@@ -969,7 +1102,7 @@ class PlayerFragment : Fragment() {
             // cache the last three minutes
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
-                DefaultLoadControl.DEFAULT_MIN_BUFFER_MS,
+                1000 * 10, // exo default is 50s
                 bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
@@ -1006,21 +1139,19 @@ class PlayerFragment : Fragment() {
 
         playerNotification.apply {
             setPlayer(exoPlayer)
-            setUseNextAction(false)
             setUsePreviousAction(false)
+            setUseStopAction(true)
             setMediaSessionToken(mediaSession.sessionToken)
         }
     }
 
     private fun lockPlayer(isLocked: Boolean) {
-        val visibility = if (isLocked) View.VISIBLE else View.INVISIBLE
-        exoPlayerView.findViewById<LinearLayout>(R.id.exo_top_bar_right).visibility = visibility
-        exoPlayerView.findViewById<ImageButton>(R.id.exo_play_pause).visibility = visibility
-        exoPlayerView.findViewById<Button>(R.id.exo_ffwd_with_amount).visibility = visibility
-        exoPlayerView.findViewById<Button>(R.id.exo_rew_with_amount).visibility = visibility
-        exoPlayerView.findViewById<FrameLayout>(R.id.exo_bottom_bar).visibility = visibility
-        exoPlayerView.findViewById<TextView>(R.id.exo_title).visibility =
-            if (isLocked && isFullScreen) View.VISIBLE else View.INVISIBLE
+        val visibility = if (isLocked) View.VISIBLE else View.GONE
+        playerBinding.exoTopBarRight.visibility = visibility
+        playerBinding.exoPlayPause.visibility = visibility
+        playerBinding.exoBottomBar.visibility = visibility
+        playerBinding.closeImageButton.visibility = visibility
+        playerBinding.exoTitle.visibility = visibility
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
@@ -1029,7 +1160,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.isSubscribed(
+                    RetrofitInstance.authApi.isSubscribed(
                         channel_id,
                         token
                     )
@@ -1069,7 +1200,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.subscribe(
+                    RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channel_id)
                     )
@@ -1092,7 +1223,7 @@ class PlayerFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.unsubscribe(
+                    RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channel_id)
                     )
@@ -1143,7 +1274,7 @@ class PlayerFragment : Fragment() {
                 return@launchWhenCreated
             }
             commentsAdapter = CommentsAdapter(videoId!!, commentsResponse.comments)
-            commentsRecView.adapter = commentsAdapter
+            binding.commentsRecView.adapter = commentsAdapter
             nextPage = commentsResponse.nextpage
             commentsLoaded = true
             isLoading = false
@@ -1176,37 +1307,35 @@ class PlayerFragment : Fragment() {
         if (isInPictureInPictureMode) {
             exoPlayerView.hideController()
             exoPlayerView.useController = false
-            with(motionLayout) {
+            binding.linLayout.visibility = View.GONE
+
+            with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                 enableTransition(R.id.yt_transition, false)
             }
-            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = true
-            view?.findViewById<LinearLayout>(R.id.top_bar)?.visibility = View.GONE
+            binding.mainContainer.isClickable = true
+
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             isFullScreen = false
         } else {
-            with(motionLayout) {
+            with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
                 enableTransition(R.id.yt_transition, true)
             }
-            exoPlayerView.showController()
+
             exoPlayerView.useController = true
-            view?.findViewById<ConstraintLayout>(R.id.main_container)?.isClickable = false
-            view?.findViewById<LinearLayout>(R.id.top_bar)?.visibility = View.VISIBLE
+            binding.linLayout.visibility = View.VISIBLE
+            binding.mainContainer.isClickable = false
         }
     }
 
     fun onUserLeaveHint() {
         val bounds = Rect()
-        val scrollView = view?.findViewById<ScrollView>(R.id.player_scrollView)
-        scrollView?.getHitRect(bounds)
+        binding.playerScrollView.getHitRect(bounds)
 
         if (SDK_INT >= Build.VERSION_CODES.O &&
-            exoPlayer.isPlaying && (
-                scrollView?.getLocalVisibleRect(bounds) == true ||
-                    isFullScreen
-                )
+            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || isFullScreen)
         ) {
             activity?.enterPictureInPictureMode(updatePipParams())
         }

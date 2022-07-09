@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Replaces the drawables of the default exoplayer controls (see https://github.com/google/ExoPlayer/blob/release-v2/library/ui/src/main/res/values/drawables.xml) -->
+<resources>
+
+    <drawable name="exo_styled_controls_play">@drawable/ic_play</drawable>
+    <drawable name="exo_styled_controls_pause">@drawable/ic_pause</drawable>
+
+</resources>

@@ -3,56 +3,42 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.fragments.Library
+import com.github.libretube.databinding.DialogCreatePlaylistBinding
+import com.github.libretube.fragments.LibraryFragment
 import com.github.libretube.obj.Playlists
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import retrofit2.HttpException
 import java.io.IOException
 
 class CreatePlaylistDialog : DialogFragment() {
     val TAG = "CreatePlaylistDialog"
     private var token: String = ""
+    private lateinit var binding: DialogCreatePlaylistBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = MaterialAlertDialogBuilder(it)
-            val inflater = requireActivity().layoutInflater
-            val view: View = inflater.inflate(R.layout.dialog_create_playlist, null)
+            binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
 
-            val typedValue = TypedValue()
-            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            view.findViewById<TextView>(R.id.title).text = appName
+            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            val cancelBtn = view.findViewById<Button>(R.id.cancel_button)
-            cancelBtn.setOnClickListener {
+            binding.cancelButton.setOnClickListener {
                 dismiss()
             }
 
             token = PreferenceHelper.getToken(requireContext())
 
-            val playlistName = view.findViewById<TextInputEditText>(R.id.playlist_name)
-            val createPlaylistBtn = view.findViewById<Button>(R.id.create_new_playlist)
-            createPlaylistBtn.setOnClickListener {
+            binding.createNewPlaylist.setOnClickListener {
                 // avoid creating the same playlist multiple times by spamming the button
-                createPlaylistBtn.setOnClickListener(null)
-                val listName = playlistName.text.toString()
+                binding.createNewPlaylist.setOnClickListener(null)
+                val listName = binding.playlistName.text.toString()
                 if (listName != "") {
                     createPlaylist(listName)
                 } else {
@@ -60,7 +46,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 }
             }
 
-            builder.setView(view)
+            builder.setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -69,7 +55,7 @@ class CreatePlaylistDialog : DialogFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.createPlaylist(token, Playlists(name = name))
+                    RetrofitInstance.authApi.createPlaylist(token, Playlists(name = name))
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -88,7 +74,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 }
                 // refresh the playlists in the library
                 try {
-                    val parent = parentFragment as Library
+                    val parent = parentFragment as LibraryFragment
                     parent.fetchPlaylists()
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())

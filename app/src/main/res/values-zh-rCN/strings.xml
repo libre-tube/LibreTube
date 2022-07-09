@@ -21,7 +21,7 @@
     <string name="cancel">取消</string>
     <string name="region">地区</string>
     <string name="dlcomplete">下载已完成。</string>
-    <string name="dlisinprogress">请等待直至所有下载完毕…</string>
+    <string name="dlisinprogress">另一个下载正在进行中，请等待其下载完成。</string>
     <string name="downloadfailed">下载失败。</string>
     <string name="vlc">在 VLC 中打开</string>
     <string name="vlcerror">无法在 VLC 中打开。也许没有安装它。</string>
@@ -95,7 +95,7 @@
     <string name="category_sponsor_description">有偿推广、有偿推荐和直接广告。不是自我宣传或无偿发自内心的赞美动机、创造者、网站和产品。</string>
     <string name="category_selfpromo">无偿/自我推广</string>
     <string name="category_selfpromo_description">除了无偿或自我宣传，与 \"赞助商 \"类似。这包括有关商品、捐赠或与谁合作的信息。</string>
-    <string name="sponsorblock">赞助板块</string>
+    <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">使用 https://sponsor.ajay.app 的 API</string>
     <string name="sponsorblock_state">开</string>
     <string name="category_sponsor">赞助商</string>
@@ -108,12 +108,12 @@
     <string name="color_yellow">黄</string>
     <string name="color_green">绿</string>
     <string name="oledTheme">黑</string>
-    <string name="material_you">Material 3</string>
+    <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">通知</string>
     <string name="enabled">开</string>
     <string name="disabled">关</string>
     <string name="app_icon">图标</string>
-    <string name="piped">管道</string>
+    <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">后台播放</string>
     <string name="update_available">版本 %1$s 可用</string>
@@ -142,7 +142,7 @@
     <string name="internal_storage">内部存储</string>
     <string name="playback_speed">默认播放速度</string>
     <string name="advanced">高级</string>
-    <string name="player">音频和视频</string>
+    <string name="player">播放器</string>
     <string name="appearance_summary">根据您自己的喜好调整应用程序。</string>
     <string name="advanced_summary">下载， 历史记录</string>
     <string name="no_replies">此评论没有人回复。</string>
@@ -160,8 +160,8 @@
     <string name="gradientIcon">渐变</string>
     <string name="torchIcon">时尚火炬</string>
     <string name="fireIcon">简约火焰</string>
-    <string name="instance_summary">管道，登录，订阅</string>
-    <string name="instance_api_url">URL或API</string>
+    <string name="instance_summary">Piped、登录、订阅</string>
+    <string name="instance_api_url">实例 API 的 URL</string>
     <string name="addInstance">添加实例</string>
     <string name="empty_instance">需要填写名称与实例URL或链接才能保存。</string>
     <string name="clear_customInstances">删除所有自定义实例</string>
@@ -171,7 +171,7 @@
     <string name="customInstance_summary">添加自定义实例（后果自负）</string>
     <string name="instance_name">实例名称</string>
     <string name="version">当前版本 %1$s</string>
-    <string name="about_summary">了解LibreTube 团队以及更多信息。</string>
+    <string name="about_summary">了解 LibreTube 团队以及更多信息。</string>
     <string name="show_chapters">显示章节</string>
     <string name="hide_chapters">隐藏章节</string>
     <string name="buffering_goal">预加载</string>
@@ -193,7 +193,7 @@
     <string name="quality">清晰度</string>
     <string name="behavior">布局</string>
     <string name="player_summary">清晰度和播放器行为</string>
-    <string name="seek_increment">寻求增量</string>
+    <string name="seek_increment">快进增量</string>
     <string name="piped_summary">Piped是YouTube的一个开源替代网络前端，提供我们使用的API。没有Piped，LibreTube就不会存在。衷心感谢他们的开发者!</string>
     <string name="pauseOnScreenOff">自动暂停</string>
     <string name="pauseOnScreenOff_summary">当屏幕关闭时暂停播放视频。</string>
@@ -207,4 +207,26 @@
     <string name="account">账户</string>
     <string name="restore">恢复</string>
     <string name="deleteAccount">删除账户</string>
+    <string name="watch_history">观看历史</string>
+    <string name="watch_positions_summary">记住观看位置并自动定位。</string>
+    <string name="watch_positions">记住观看位置</string>
+    <string name="auth_instance_summary">对认证指令(call)使用不同实例。</string>
+    <string name="auth_instances">选择认证实例</string>
+    <string name="auth_instance">认证实例</string>
+    <string name="hls">自动</string>
+    <string name="github">GitHub</string>
+    <string name="audio_video">音频和视频</string>
+    <string name="fullscreen_orientation">全屏方向</string>
+    <string name="aspect_ratio">视频长宽比</string>
+    <string name="auto_rotation">自动旋转</string>
+    <string name="landscape">横屏</string>
+    <string name="portrait">竖屏</string>
+    <string name="reddit">Reddit</string>
+    <string name="community">社区</string>
+    <string name="twitter">Twitter</string>
+    <string name="discord">Discord</string>
+    <string name="matrix">Matrix</string>
+    <string name="telegram">Telegram</string>
+    <string name="turnInternetOn">请打开 WiFi 或移动数据连接到互联网。</string>
+    <string name="open">打开…</string>
 </resources>

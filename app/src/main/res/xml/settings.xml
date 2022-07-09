@@ -6,7 +6,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_region"
-            app:defaultValue="US"
+            app:defaultValue="sys"
             app:entries="@array/regions"
             app:entryValues="@array/regionsValue"
             app:key="region"
@@ -45,10 +45,10 @@
             app:title="@string/sponsorblock" />
 
         <Preference
-            android:icon="@drawable/ic_video"
+            android:icon="@drawable/ic_player"
             app:key="player"
             app:summary="@string/player_summary"
-            app:title="@string/player" />
+            app:title="@string/audio_video" />
 
         <Preference
             android:icon="@drawable/ic_list"
@@ -69,8 +69,12 @@
         <Preference
             android:icon="@drawable/ic_info"
             app:key="about"
-            app:summary="@string/about_summary"
             app:title="@string/about" />
+
+        <Preference
+            android:icon="@drawable/ic_community"
+            app:key="community"
+            app:title="@string/community" />
 
     </PreferenceCategory>
 

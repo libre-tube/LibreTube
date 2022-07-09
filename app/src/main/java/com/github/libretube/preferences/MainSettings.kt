@@ -8,8 +8,8 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
-import com.github.libretube.isCurrentViewMainSettings
-import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.activities.isCurrentViewMainSettings
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.checkUpdate
 
@@ -38,35 +38,35 @@ class MainSettings : PreferenceFragmentCompat() {
         val instance = findPreference<Preference>("instance")
         instance?.setOnPreferenceClickListener {
             val newFragment = InstanceSettings()
-            navigateSettings(newFragment)
+            navigateToSettingsFragment(newFragment)
             true
         }
 
         val appearance = findPreference<Preference>("appearance")
         appearance?.setOnPreferenceClickListener {
             val newFragment = AppearanceSettings()
-            navigateSettings(newFragment)
+            navigateToSettingsFragment(newFragment)
             true
         }
 
         val sponsorBlock = findPreference<Preference>("sponsorblock")
         sponsorBlock?.setOnPreferenceClickListener {
             val newFragment = SponsorBlockSettings()
-            navigateSettings(newFragment)
+            navigateToSettingsFragment(newFragment)
             true
         }
 
         val player = findPreference<Preference>("player")
         player?.setOnPreferenceClickListener {
             val newFragment = PlayerSettings()
-            navigateSettings(newFragment)
+            navigateToSettingsFragment(newFragment)
             true
         }
 
         val advanced = findPreference<Preference>("advanced")
         advanced?.setOnPreferenceClickListener {
             val newFragment = AdvancedSettings()
-            navigateSettings(newFragment)
+            navigateToSettingsFragment(newFragment)
             true
         }
 
@@ -80,12 +80,19 @@ class MainSettings : PreferenceFragmentCompat() {
         val about = findPreference<Preference>("about")
         about?.setOnPreferenceClickListener {
             val newFragment = AboutFragment()
-            navigateSettings(newFragment)
+            navigateToSettingsFragment(newFragment)
+            true
+        }
+
+        val community = findPreference<Preference>("community")
+        community?.setOnPreferenceClickListener {
+            val newFragment = CommunityFragment()
+            navigateToSettingsFragment(newFragment)
             true
         }
     }
 
-    private fun navigateSettings(newFragment: Fragment) {
+    private fun navigateToSettingsFragment(newFragment: Fragment) {
         isCurrentViewMainSettings = false
         parentFragmentManager.beginTransaction()
             .replace(R.id.settings, newFragment)

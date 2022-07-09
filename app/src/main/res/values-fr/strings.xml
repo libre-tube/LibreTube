@@ -31,7 +31,7 @@
     <string name="already_logged_in">Vous êtes déjà connecté(e), vous pouvez vous déconnecter.</string>
     <string name="region">Région</string>
     <string name="login_register">Se connecter/s\'inscrire</string>
-    <string name="dlisinprogress">Veuillez attendre que tous les téléchargements soient terminés…</string>
+    <string name="dlisinprogress">Un autre téléchargement est en cours, veuillez attendre qu\'il soit terminé.</string>
     <string name="please_login">Vous devez d\'abord vous connecter ou vous inscrire à l\'aide du menu paramètre !</string>
     <string name="import_from_yt">Importer les abonnements depuis YouTube</string>
     <string name="server_error">Le serveur a rencontré un problème. Peut-être essayez une autre instance \?</string>
@@ -138,7 +138,7 @@
     <string name="no_update_available">Vous utilisez la dernière version.</string>
     <string name="playback_speed">Vitesse de lecture par défaut</string>
     <string name="advanced">Avancé</string>
-    <string name="player">Audio et vidéo</string>
+    <string name="player">Lecteur</string>
     <string name="appearance_summary">Ajustez l\'application à votre convenance.</string>
     <string name="live">En direct</string>
     <string name="no_replies">Ce commentaire n\'a pas de réponse.</string>
@@ -207,4 +207,24 @@
     <string name="deleteAccount">Supprimer le compte</string>
     <string name="account">Compte</string>
     <string name="restore">Restaurer</string>
+    <string name="watch_history">Regarder l’historique</string>
+    <string name="watch_positions">Se souvenir de la position</string>
+    <string name="watch_positions_summary">Se souvenir de l\'endroit que vous regardiez et le chercher automatiquement.</string>
+    <string name="auth_instance">Instance d\'authentification</string>
+    <string name="hls">Auto</string>
+    <string name="github">GitHub</string>
+    <string name="auth_instance_summary">Utilisez une instance différente pour les appels authentifiés.</string>
+    <string name="auth_instances">Choisissez une instance d\'authentification</string>
+    <string name="audio_video">Audio et vidéo</string>
+    <string name="fullscreen_orientation">Orientation du plein-écran</string>
+    <string name="auto_rotation">Rotation automatique</string>
+    <string name="landscape">Paysage</string>
+    <string name="portrait">Portrait</string>
+    <string name="aspect_ratio">Ratio d\'aspect vidéo</string>
+    <string name="matrix">Matrix</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
+    <string name="telegram">Telegram</string>
+    <string name="community">Communauté</string>
+    <string name="discord">Discord</string>
 </resources>

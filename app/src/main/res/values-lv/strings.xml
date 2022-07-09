@@ -3,7 +3,7 @@
     <string name="search_hint">Meklēt</string>
     <string name="logout">Izrakstīties</string>
     <string name="importsuccess">Abonēts</string>
-    <string name="dlisinprogress">Lūdzu pagaidiet, līdz visas lejupielādes ir pabeigtas…</string>
+    <string name="dlisinprogress">Vēl viens fails jau tiek lejupielādēts. Lūdzu pagaidiet, līdz visas lejupielādes ir pabeigtas.</string>
     <string name="server_error">Ar serveri ir problēma. Varbūt varat pamēģināt citu instanci\?</string>
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
@@ -207,4 +207,5 @@
     <string name="deleteAccount_summary">Izdzēst Piped kontu</string>
     <string name="restore">Atjaunot</string>
     <string name="account">Konts</string>
+    <string name="watch_history">Skatīšanās vēsture</string>
 </resources>

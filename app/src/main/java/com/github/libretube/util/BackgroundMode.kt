@@ -1,13 +1,14 @@
-package com.github.libretube
+package com.github.libretube.util
 
+import android.app.NotificationManager
 import android.content.Context
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
-import com.github.libretube.util.DescriptionAdapter
-import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.preferences.PreferenceHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
@@ -42,7 +43,7 @@ class BackgroundMode {
     /**
      * The [PlayerNotificationManager] to load the [mediaSession] content on it.
      */
-    private lateinit var playerNotification: PlayerNotificationManager
+    private var playerNotification: PlayerNotificationManager? = null
 
     /**
      * The [AudioAttributes] handle the audio focus of the [player]
@@ -63,7 +64,43 @@ class BackgroundMode {
                 .setAudioAttributes(audioAttributes, true)
                 .build()
         }
+
+        /**
+         * Listens for changed playbackStates (e.g. pause, end)
+         * Plays the next video when the current one ended
+         */
+        player!!.addListener(object : Player.Listener {
+            override fun onPlaybackStateChanged(@Player.State state: Int) {
+                val autoplay = PreferenceHelper.getBoolean(c, "autoplay", false)
+                if (state == Player.STATE_ENDED) {
+                    if (autoplay) playNextVideo(c)
+                }
+            }
+        })
         setMediaItem(c)
+    }
+
+    /**
+     * Plays the first related video to the current (used when the playback of the current video ended)
+     */
+    private fun playNextVideo(c: Context) {
+        if (response!!.relatedStreams!!.isNotEmpty()) {
+            val videoId = response!!
+                .relatedStreams!![0].url!!
+                .replace("/watch?v=", "")
+
+            // destroy old player and its notification
+            playerNotification = null
+            player = null
+
+            // kill old notification
+            val notificationManager = c.getSystemService(Context.NOTIFICATION_SERVICE)
+                as NotificationManager
+            notificationManager.cancel(1)
+
+            // play new video on background
+            playOnBackgroundMode(c, videoId)
+        }
     }
 
     /**
@@ -82,10 +119,12 @@ class BackgroundMode {
                 )
             )
             .build()
-        playerNotification.apply {
+        playerNotification?.apply {
             setPlayer(player)
-            setUsePreviousAction(false)
             setUseNextAction(false)
+            setUsePreviousAction(false)
+            setUseStopAction(true)
+            setColorized(true)
             setMediaSessionToken(mediaSession.sessionToken)
         }
     }
@@ -110,7 +149,11 @@ class BackgroundMode {
     /**
      * Gets the video data and prepares the [player].
      */
-    fun playOnBackgroundMode(c: Context, videoId: String, seekToPosition: Long) {
+    fun playOnBackgroundMode(
+        c: Context,
+        videoId: String,
+        seekToPosition: Long = 0
+    ) {
         runBlocking {
             val job = launch {
                 response = RetrofitInstance.api.getStreams(videoId)

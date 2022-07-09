@@ -3,17 +3,15 @@ package com.github.libretube.adapters
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.MainActivity
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
+import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -25,8 +23,10 @@ import java.io.IOException
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
     val TAG = "SubChannelAdapter"
+
     private var subscribed = true
     private var isLoading = false
+
     override fun getItemCount(): Int {
         return subscriptions.size
     }
@@ -34,34 +34,32 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
         SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.channel_subscription_row, parent, false)
-        return SubscriptionChannelViewHolder(cell)
+        val binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
+        return SubscriptionChannelViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
         val subscription = subscriptions[position]
-        holder.v.findViewById<TextView>(R.id.subscription_channel_name).text = subscription.name
-        val avatar = holder.v.findViewById<ImageView>(R.id.subscription_channel_image)
-        Picasso.get().load(subscription.avatar).into(avatar)
-        holder.v.setOnClickListener {
-            val activity = holder.v.context as MainActivity
-            val bundle = bundleOf("channel_id" to subscription.url)
-            activity.navController.navigate(R.id.channel, bundle)
-        }
-        val subscribeBtn = holder.v
-            .findViewById<com.google.android.material.button.MaterialButton>(
-                R.id.subscription_subscribe
-            )
-        subscribeBtn.setOnClickListener {
-            if (!isLoading) {
-                isLoading = true
-                val channelId = subscription.url?.replace("/channel/", "")!!
-                if (subscribed) {
-                    unsubscribe(holder.v.context, channelId)
-                    subscribeBtn.text = holder.v.context.getString(R.string.subscribe)
-                } else {
-                    subscribe(holder.v.context, channelId)
-                    subscribeBtn.text = holder.v.context.getString(R.string.unsubscribe)
+        holder.binding.apply {
+            subscriptionChannelName.text = subscription.name
+            Picasso.get().load(subscription.avatar).into(subscriptionChannelImage)
+            root.setOnClickListener {
+                val activity = root.context as MainActivity
+                val bundle = bundleOf("channel_id" to subscription.url)
+                activity.navController.navigate(R.id.channelFragment, bundle)
+            }
+            subscriptionSubscribe.setOnClickListener {
+                if (!isLoading) {
+                    isLoading = true
+                    val channelId = subscription.url?.replace("/channel/", "")!!
+                    if (subscribed) {
+                        unsubscribe(root.context, channelId)
+                        subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
+                    } else {
+                        subscribe(root.context, channelId)
+                        subscriptionSubscribe.text =
+                            root.context.getString(R.string.unsubscribe)
+                    }
                 }
             }
         }
@@ -72,7 +70,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     val token = PreferenceHelper.getToken(context)
-                    RetrofitInstance.api.subscribe(
+                    RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channelId)
                     )
@@ -94,7 +92,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
                     val token = PreferenceHelper.getToken(context)
-                    RetrofitInstance.api.unsubscribe(
+                    RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channelId)
                     )
@@ -112,7 +110,5 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     }
 }
 
-class SubscriptionChannelViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class SubscriptionChannelViewHolder(val binding: ChannelSubscriptionRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

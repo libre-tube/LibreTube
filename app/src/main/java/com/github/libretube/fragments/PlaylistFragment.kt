@@ -5,27 +5,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.ScrollView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.databinding.FragmentPlaylistBinding
+import com.github.libretube.dialogs.PlaylistOptionsDialog
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistFragment : Fragment() {
     private val TAG = "PlaylistFragment"
+    private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null
     var nextPage: String? = null
-    var playlistAdapter: PlaylistAdapter? = null
-    var isLoading = true
+    private var playlistAdapter: PlaylistAdapter? = null
+    private var isLoading = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -37,24 +37,22 @@ class PlaylistFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_playlist, container, false)
+    ): View {
+        binding = FragmentPlaylistBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         playlistId = playlistId!!.replace("/playlist?list=", "")
-        val recyclerView = view.findViewById<RecyclerView>(R.id.playlist_recView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.playlistRecView.layoutManager = LinearLayoutManager(context)
 
-        val progressBar = view.findViewById<ProgressBar>(R.id.playlist_progress)
-        progressBar.visibility = View.VISIBLE
-        fetchPlaylist(view)
+        binding.playlistProgress.visibility = View.VISIBLE
+        fetchPlaylist()
     }
 
-    private fun fetchPlaylist(view: View) {
+    private fun fetchPlaylist() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -70,16 +68,24 @@ class PlaylistFragment : Fragment() {
                 nextPage = response.nextpage
                 isLoading = false
                 runOnUiThread {
-                    view.findViewById<ProgressBar>(R.id.playlist_progress).visibility = View.GONE
-                    view.findViewById<TextView>(R.id.playlist_name).text = response.name
-                    view.findViewById<TextView>(R.id.playlist_uploader).text = response.uploader
-                    view.findViewById<TextView>(R.id.playlist_totVideos).text =
+                    binding.playlistProgress.visibility = View.GONE
+                    binding.playlistName.text = response.name
+                    binding.playlistUploader.text = response.uploader
+                    binding.playlistTotVideos.text =
                         getString(R.string.videoCount, response.videos.toString())
+
                     val user = PreferenceHelper.getUsername(requireContext())
-                    var isOwner = false
-                    if (response.uploaderUrl == null && response.uploader.equals(user, true)) {
-                        isOwner = true
+                    // check whether the user owns the playlist
+                    val isOwner = response.uploaderUrl == null &&
+                        response.uploader.equals(user, true)
+
+                    // show playlist options
+                    binding.optionsMenu.setOnClickListener {
+                        val optionsDialog =
+                            PlaylistOptionsDialog(playlistId!!, isOwner, requireContext())
+                        optionsDialog.show(childFragmentManager, "PlaylistOptionsDialog")
                     }
+
                     playlistAdapter = PlaylistAdapter(
                         response.relatedStreams!!.toMutableList(),
                         playlistId!!,
@@ -87,12 +93,11 @@ class PlaylistFragment : Fragment() {
                         requireActivity(),
                         childFragmentManager
                     )
-                    view.findViewById<RecyclerView>(R.id.playlist_recView).adapter = playlistAdapter
-                    val scrollView = view.findViewById<ScrollView>(R.id.playlist_scrollview)
-                    scrollView.viewTreeObserver
+                    binding.playlistRecView.adapter = playlistAdapter
+                    binding.playlistScrollview.viewTreeObserver
                         .addOnScrollChangedListener {
-                            if (scrollView.getChildAt(0).bottom
-                                == (scrollView.height + scrollView.scrollY)
+                            if (binding.playlistScrollview.getChildAt(0).bottom
+                                == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
                             ) {
                                 // scroll view is at bottom
                                 if (nextPage != null && !isLoading) {

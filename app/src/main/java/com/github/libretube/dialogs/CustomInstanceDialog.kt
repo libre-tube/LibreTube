@@ -2,45 +2,34 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.TypedValue
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
+import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.obj.CustomInstance
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import java.net.URL
 
 class CustomInstanceDialog : DialogFragment() {
     val TAG = "CustomInstanceDialog"
+    private lateinit var binding: DialogCustomInstanceBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = MaterialAlertDialogBuilder(it)
-            val inflater = requireActivity().layoutInflater
-            val view: View = inflater.inflate(R.layout.dialog_custom_instance, null)
+            binding = DialogCustomInstanceBinding.inflate(layoutInflater)
 
-            val instanceNameEditText = view.findViewById<TextInputEditText>(R.id.instanceName)
-            val instanceApiUrlEditText = view.findViewById<TextInputEditText>(R.id.instanceApiUrl)
-            val instanceFrontendUrlEditText = view
-                .findViewById<TextInputEditText>(R.id.instanceFrontendUrl)
-
-            val addInstanceButton = view.findViewById<Button>(R.id.addInstance)
-            val cancelButton = view.findViewById<Button>(R.id.cancel)
-            cancelButton.setOnClickListener {
+            binding.cancel.setOnClickListener {
                 dismiss()
             }
 
-            addInstanceButton.setOnClickListener {
+            binding.addInstance.setOnClickListener {
                 val customInstance = CustomInstance()
-                customInstance.name = instanceNameEditText.text.toString()
-                customInstance.apiUrl = instanceApiUrlEditText.text.toString()
-                customInstance.frontendUrl = instanceFrontendUrlEditText.text.toString()
+                customInstance.name = binding.instanceName.text.toString()
+                customInstance.apiUrl = binding.instanceApiUrl.text.toString()
+                customInstance.frontendUrl = binding.instanceFrontendUrl.text.toString()
 
                 if (
                     customInstance.name != "" &&
@@ -73,16 +62,9 @@ class CustomInstanceDialog : DialogFragment() {
                 }
             }
 
-            val typedValue = TypedValue()
-            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            view.findViewById<TextView>(R.id.title).text = appName
+            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            builder.setView(view)
+            builder.setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

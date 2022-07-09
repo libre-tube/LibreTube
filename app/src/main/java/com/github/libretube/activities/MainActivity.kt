@@ -1,57 +1,70 @@
-package com.github.libretube
+package com.github.libretube.activities
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.github.libretube.R
+import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.fragments.isFullScreen
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.ClosingService
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.color.DynamicColors
+import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
 
-    lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var toolbar: Toolbar
+    lateinit var binding: ActivityMainBinding
+
     lateinit var navController: NavController
+    private var startFragmentId = R.id.homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DynamicColors.applyToActivityIfAvailable(this)
+        /**
+         * apply dynamic colors if enabled
+         */
+        val materialColorsEnabled = PreferenceHelper
+            .getString(this, "accent_color", "purple") == "my"
+        if (materialColorsEnabled) {
+            // apply dynamic colors to the current activity
+            DynamicColors.applyToActivityIfAvailable(this)
+            // apply dynamic colors to the all other activities
+            DynamicColors.applyToActivitiesIfAvailable(application)
+        }
+
+        // set the theme
+        ThemeHelper.updateTheme(this)
+        // set the language
+        LocaleHelper.updateLanguage(this)
+
         super.onCreate(savedInstanceState)
 
         // start service that gets called on closure
@@ -61,74 +74,89 @@ class MainActivity : AppCompatActivity() {
 
         RetrofitInstance.url =
             PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
-
-        ThemeHelper.updateTheme(this)
-        LocaleHelper.updateLanguage(this)
+        // set auth instance
+        RetrofitInstance.authUrl =
+            if (PreferenceHelper.getBoolean(this, "auth_instance_toggle", false)) {
+                PreferenceHelper.getString(
+                    this,
+                    "selectAuthInstance",
+                    "https://pipedapi.kavin.rocks/"
+                )!!
+            } else {
+                RetrofitInstance.url
+            }
 
         // show noInternet Activity if no internet available on app startup
-        if (!isNetworkAvailable(this)) {
-            setContentView(R.layout.activity_nointernet)
-            findViewById<Button>(R.id.retry_button).setOnClickListener {
-                recreate()
-            }
-            findViewById<ImageView>(R.id.noInternet_settingsImageView).setOnClickListener {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-            }
+        if (!ConnectionHelper.isNetworkAvailable(this)) {
+            val noInternetIntent = Intent(this, NoInternetActivity::class.java)
+            startActivity(noInternetIntent)
         } else {
-            setContentView(R.layout.activity_main)
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
-            bottomNavigationView = findViewById(R.id.bottomNav)
             navController = findNavController(R.id.fragment)
-            bottomNavigationView.setupWithNavController(navController)
+            binding.bottomNav.setupWithNavController(navController)
+
+            // gets the surface color of the bottom navigation view
+            val color = SurfaceColors.getColorForElevation(this, 10F)
+
+            // sets the navigation bar color to the previously calculated color
+            window.navigationBarColor = color
 
             // hide the trending page if enabled
             val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
-            if (hideTrendingPage) bottomNavigationView.menu.findItem(R.id.home2).isVisible = false
+            if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
+                false
 
-            // navigate to the default start tab
-            when (PreferenceHelper.getString(this, "default_tab", "home")) {
-                "home" -> navController.navigate(R.id.home2)
-                "subscriptions" -> navController.navigate(R.id.subscriptions)
-                "library" -> navController.navigate(R.id.library)
+            // save start tab fragment id
+            startFragmentId = when (PreferenceHelper.getString(this, "default_tab", "home")) {
+                "home" -> R.id.homeFragment
+                "subscriptions" -> R.id.subscriptionsFragment
+                "library" -> R.id.libraryFragment
+                else -> R.id.homeFragment
             }
 
-            bottomNavigationView.setOnItemSelectedListener {
+            // set default tab as start fragment
+            navController.graph.setStartDestination(startFragmentId)
+
+            // navigate to the default fragment
+            navController.navigate(startFragmentId)
+
+            binding.bottomNav.setOnItemSelectedListener {
+                // clear backstack if it's the start fragment
+                if (startFragmentId == it.itemId) navController.backQueue.clear()
+                // set menu item on click listeners
                 when (it.itemId) {
-                    R.id.home2 -> {
-                        navController.backQueue.clear()
-                        navController.navigate(R.id.home2)
+                    R.id.homeFragment -> {
+                        navController.navigate(R.id.homeFragment)
                     }
-                    R.id.subscriptions -> {
-                        // navController.backQueue.clear()
-                        navController.navigate(R.id.subscriptions)
+                    R.id.subscriptionsFragment -> {
+                        navController.navigate(R.id.subscriptionsFragment)
                     }
-                    R.id.library -> {
-                        // navController.backQueue.clear()
-                        navController.navigate(R.id.library)
+                    R.id.libraryFragment -> {
+                        navController.navigate(R.id.libraryFragment)
                     }
                 }
                 false
             }
 
-            toolbar = findViewById(R.id.toolbar)
-            val typedValue = TypedValue()
-            this.theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            toolbar.title = appName
+            /**
+             * don't remove this line
+             * this prevents reselected items at the bottomNav to be duplicated in the backstack
+             */
+            binding.bottomNav.setOnItemReselectedListener {}
 
-            toolbar.setNavigationOnClickListener {
+            binding.toolbar.title = ThemeHelper.getStyledAppName(this)
+
+            binding.toolbar.setNavigationOnClickListener {
                 // settings activity stuff
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
             }
 
-            toolbar.setOnMenuItemClickListener {
+            binding.toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_search -> {
                         navController.navigate(R.id.searchFragment)
@@ -136,28 +164,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 false
             }
-        }
-    }
-
-    private fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val nw = connectivityManager.activeNetwork ?: return false
-            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
-            return when {
-                // WiFi
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                // Mobile
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                // Ethernet
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                // Bluetooth
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
-                else -> false
-            }
-        } else {
-            return connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
     }
 
@@ -183,7 +189,7 @@ class MainActivity : AppCompatActivity() {
             channel = channel!!.replace("/c/", "")
             channel = channel.replace("/user/", "")
             val bundle = bundleOf("channel_id" to channel)
-            navController.navigate(R.id.channel, bundle)
+            navController.navigate(R.id.channelFragment, bundle)
         } else if (data.path!!.contains("/playlist")) {
             Log.i(TAG, "URI Type: Playlist")
             var playlist = data.query!!
@@ -266,32 +272,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        try {
-            val mainMotionLayout = findViewById<MotionLayout>(R.id.mainMotionLayout)
-            if (mainMotionLayout.progress == 0.toFloat()) {
-                mainMotionLayout.transitionToEnd()
-                findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
-                val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-                motionLayout.transitionToEnd()
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                with(motionLayout) {
-                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                    enableTransition(R.id.yt_transition, true)
-                }
-                findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-                isFullScreen = false
-            } else {
-                navController.popBackStack()
-            }
-        } catch (e: Exception) {
-            // try catch to prevent nointernet activity to crash
+        if (binding.mainMotionLayout.progress == 0F) {
             try {
-                navController.popBackStack()
-                moveTaskToBack(true)
+                minimizePlayer()
             } catch (e: Exception) {
-                super.onBackPressed()
+                if (navController.currentDestination?.id == startFragmentId) {
+                    super.onBackPressed()
+                } else {
+                    navController.popBackStack()
+                }
             }
+        } else if (navController.currentDestination?.id == startFragmentId) {
+            super.onBackPressed()
+        } else {
+            navController.popBackStack()
         }
+    }
+
+    private fun minimizePlayer() {
+        binding.mainMotionLayout.transitionToEnd()
+        findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
+        val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+        motionLayout.transitionToEnd()
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        with(motionLayout) {
+            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+            enableTransition(R.id.yt_transition, true)
+        }
+        findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+        isFullScreen = false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -360,10 +369,6 @@ class MainActivity : AppCompatActivity() {
 
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
-}
-
-fun Activity.hideKeyboard() {
-    hideKeyboard(currentFocus ?: View(this))
 }
 
 fun Context.hideKeyboard(view: View) {

@@ -8,68 +8,79 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.github.libretube.AUTHORS_URL
-import com.github.libretube.CONTRIBUTING_URL
 import com.github.libretube.DONATE_URL
+import com.github.libretube.GITHUB_URL
 import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
 import com.github.libretube.WEBSITE_URL
+import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.databinding.FragmentAboutBinding
+import com.github.libretube.util.ThemeHelper.getThemeColor
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class AboutFragment : Fragment() {
+    private lateinit var binding: FragmentAboutBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
+    ): View {
+        binding = FragmentAboutBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val topBarText = activity?.findViewById<TextView>(R.id.topBar_textView)
-        topBarText?.text = getString(R.string.about)
 
-        val website = view.findViewById<LinearLayout>(R.id.website)
-        website.setOnClickListener {
+        val settingsActivity = activity as SettingsActivity
+        settingsActivity.changeTopBarText(getString(R.string.about))
+
+        binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)
         }
-        val authors = view.findViewById<LinearLayout>(R.id.authors)
-        authors.setOnClickListener {
-            openLinkFromHref(AUTHORS_URL)
+        binding.website.setOnLongClickListener {
+            val text = context?.getString(R.string.website_summary)!!
+            showSnackBar(text)
+            true
         }
-        val piped = view.findViewById<LinearLayout>(R.id.piped)
-        piped.setOnClickListener {
+
+        binding.piped.setOnClickListener {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
-        val donate = view.findViewById<LinearLayout>(R.id.donate)
-        donate.setOnClickListener {
+        binding.piped.setOnLongClickListener {
+            val text = context?.getString(R.string.piped_summary)!!
+            showSnackBar(text)
+            true
+        }
+
+        binding.donate.setOnClickListener {
             openLinkFromHref(DONATE_URL)
         }
-        val contributing = view.findViewById<LinearLayout>(R.id.contributing)
-        contributing.setOnClickListener {
-            openLinkFromHref(CONTRIBUTING_URL)
+        binding.donate.setOnLongClickListener {
+            val text = context?.getString(R.string.donate_summary)!!
+            showSnackBar(text)
+            true
         }
-        val license = view.findViewById<LinearLayout>(R.id.license)
-        license.setOnClickListener {
-            val licenseString = view.context.assets
-                .open("gpl3.html").bufferedReader().use {
-                    it.readText()
-                }
-            val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(licenseString, 1)
-            } else {
-                Html.fromHtml(licenseString)
-            }
 
-            MaterialAlertDialogBuilder(view.context!!)
-                .setPositiveButton(getString(R.string.okay)) { _, _ -> }
-                .setMessage(licenseHtml)
-                .create()
-                .show()
+        binding.github.setOnClickListener {
+            openLinkFromHref(GITHUB_URL)
+        }
+        binding.github.setOnLongClickListener {
+            val text = context?.getString(R.string.contributing_summary)!!
+            showSnackBar(text)
+            true
+        }
+
+        binding.license.setOnClickListener {
+            showLicense()
+        }
+        binding.license.setOnLongClickListener {
+            val text = context?.getString(R.string.license_summary)!!
+            showSnackBar(text)
+            true
         }
     }
 
@@ -77,5 +88,41 @@ class AboutFragment : Fragment() {
         val uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW).setData(uri)
         startActivity(intent)
+    }
+
+    private fun showSnackBar(text: String) {
+        val snackBar = Snackbar
+            .make(binding.root, text, Snackbar.LENGTH_LONG)
+
+        // set snackBar color
+        snackBar.setBackgroundTint(getThemeColor(requireContext(), R.attr.colorSurface))
+        snackBar.setTextColor(getThemeColor(requireContext(), R.attr.colorPrimary))
+
+        // prevent the text from being partially hidden
+        snackBar.setTextMaxLines(3)
+
+        snackBar.show()
+    }
+
+    private fun showLicense() {
+        val assets = view?.context?.assets
+        val licenseString = assets
+            ?.open("gpl3.html")
+            ?.bufferedReader()
+            .use {
+                it?.readText()
+            }
+
+        val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(licenseString.toString(), 1)
+        } else {
+            Html.fromHtml(licenseString.toString())
+        }
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setPositiveButton(getString(R.string.okay)) { _, _ -> }
+            .setMessage(licenseHtml)
+            .create()
+            .show()
     }
 }

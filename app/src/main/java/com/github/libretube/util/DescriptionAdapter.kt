@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.github.libretube.MainActivity
+import com.github.libretube.activities.MainActivity
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import java.net.URL
@@ -83,8 +83,8 @@ class DescriptionAdapter(
         return try {
             val resizedBitmap = Bitmap.createScaledBitmap(
                 bitmap,
-                1080,
-                1080,
+                bitmap.width,
+                bitmap.width,
                 false
             )
             resizedBitmap

@@ -1,25 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2020 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
+<?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <!-- 0dp dimensions are used to prevent this view from influencing the size of
-         the parent view if it uses "wrap_content". It is expanded to occupy the
-         entirety of the parent in code, after the parent's size has been
-         determined. See: https://github.com/google/ExoPlayer/issues/8726.
-    -->
 
     <View
         android:id="@id/exo_controls_background"
@@ -28,7 +9,7 @@
         android:background="@color/exo_black_opacity_60" />
 
     <LinearLayout
-        android:id="@+id/top_bar"
+        android:id="@+id/exo_top_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
         android:layout_gravity="top"
@@ -49,11 +30,10 @@
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:background="#00FFFFFF"
                 android:padding="@dimen/exo_icon_padding"
                 android:src="@drawable/ic_close"
-                android:visibility="gone"
                 app:tint="@android:color/white" />
 
             <ImageButton
@@ -110,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="@dimen/exo_icon_padding"
-                    android:text="HLS"
+                    android:text="@string/hls"
                     android:textColor="#FFFFFF" />
 
                 <ImageView
@@ -132,7 +112,6 @@
         android:layout_height="@dimen/exo_styled_bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
-        android:background="@color/exo_bottom_bar_background"
         android:layoutDirection="ltr">
 
         <LinearLayout
@@ -182,7 +161,8 @@
             <ImageButton
                 android:id="@+id/fullscreen"
                 style="@style/ExoStyledControls.Button.Bottom.FullScreen"
-                android:src="@drawable/ic_fullscreen" />
+                android:src="@drawable/ic_fullscreen"
+                app:tint="@android:color/white" />
 
         </LinearLayout>
 
@@ -190,7 +170,6 @@
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:layout_above="@id/exo_basic_controls"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -200,7 +179,6 @@
                 android:id="@id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@color/exo_bottom_bar_background"
                 app:bar_height="2dp"
                 app:played_color="?attr/colorOnSecondary"
                 app:scrubber_color="?attr/colorOnPrimary"
@@ -233,25 +211,11 @@
         android:gravity="center"
         android:padding="@dimen/exo_styled_controls_padding">
 
-        <Button
-            android:id="@id/exo_rew_with_amount"
-            style="@style/ExoStyledControls.Button.Center.RewWithAmount"
-            android:layout_marginRight="25dp"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
-
         <ImageButton
             android:id="@id/exo_play_pause"
             style="@style/ExoStyledControls.Button.Center.PlayPause"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
-
-        <Button
-            android:id="@id/exo_ffwd_with_amount"
-            style="@style/ExoStyledControls.Button.Center.FfwdWithAmount"
-            android:layout_marginLeft="25dp"
-            android:scaleX="1.1"
-            android:scaleY="1.1" />
+            android:background="?android:selectableItemBackgroundBorderless"
+            app:tint="@android:color/white" />
 
     </LinearLayout>
 

@@ -65,6 +65,7 @@
         <item>il.ax"</item>
     </string-array>
     <string-array name="regions">
+        <item>@string/systemDefault</item>
         <item>Afghanistan</item>
         <item>Albania</item>
         <item>Algeria</item>
@@ -260,6 +261,7 @@
         <item>Zimbabwe</item>
     </string-array>
     <string-array name="regionsValue">
+        <item>sys</item>
         <item>AF</item>
         <item>AL</item>
         <item>DZ</item>
@@ -572,7 +574,7 @@
     </string-array>
 
     <string-array name="defres">
-        <item>HLS</item>
+        <item>@string/hls</item>
         <item>1080p</item>
         <item>720p</item>
         <item>480p</item>
@@ -608,7 +610,7 @@
         <item>@string/birdIcon</item>
     </string-array>
     <string-array name="iconsValue">
-        <item>MainActivity</item>
+        <item>activities.MainActivity</item>
         <item>IconLegacy</item>
         <item>IconGradient</item>
         <item>IconFire</item>
@@ -692,6 +694,19 @@
         <item>10</item>
         <item>20</item>
         <item>30</item>
+    </string-array>
+
+    <string-array name="fullscreenOrientation">
+        <item>@string/aspect_ratio</item>
+        <item>@string/auto_rotation</item>
+        <item>@string/landscape</item>
+        <item>@string/portrait</item>
+    </string-array>
+    <string-array name="fullscreenOrientationValues">
+        <item>ratio</item>
+        <item>auto</item>
+        <item>landscape</item>
+        <item>portrait</item>
     </string-array>
 
 </resources>

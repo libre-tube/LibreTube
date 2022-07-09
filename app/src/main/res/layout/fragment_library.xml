@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Library">
+    tools:context=".fragments.LibraryFragment">
 
     <RelativeLayout
         android:id="@+id/loginOrRegister2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/boogh2"
+            android:id="@+id/boogh"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
@@ -22,18 +20,19 @@
             android:src="@drawable/ic_login" />
 
         <TextView
-            android:id="@+id/textLike2"
+            android:id="@+id/text_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/boogh2"
+            android:layout_below="@id/boogh"
             android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dp"
             android:gravity="center"
             android:text="@string/please_login"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <com.github.libretube.util.CustomSwipeToRefresh
+    <com.github.libretube.views.CustomSwipeToRefresh
         android:id="@+id/playlist_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -45,8 +44,34 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/showWatchHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_time_outlined" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/watch_history"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -62,7 +87,7 @@
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
-    </com.github.libretube.util.CustomSwipeToRefresh>
+    </com.github.libretube.views.CustomSwipeToRefresh>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_playlist"

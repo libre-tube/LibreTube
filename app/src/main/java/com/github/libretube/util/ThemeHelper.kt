@@ -5,9 +5,13 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.text.Spanned
+import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.text.HtmlCompat
 import com.github.libretube.R
+import com.github.libretube.preferences.PreferenceHelper
 
 object ThemeHelper {
 
@@ -18,7 +22,7 @@ object ThemeHelper {
 
     private fun updateAccentColor(context: Context) {
         when (PreferenceHelper.getString(context, "accent_color", "purple")) {
-            "my" -> context.setTheme(R.style.Theme_MY)
+            "my" -> context.setTheme(R.style.MaterialYou)
             "red" -> context.setTheme(R.style.Theme_Red)
             "blue" -> context.setTheme(R.style.Theme_Blue)
             "yellow" -> context.setTheme(R.style.Theme_Yellow)
@@ -68,5 +72,20 @@ object ThemeHelper {
         val intent = pm.getLaunchIntentForPackage(context.packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         context.startActivity(intent)
+    }
+
+    fun getThemeColor(context: Context, colorCode: Int): Int {
+        val value = TypedValue()
+        context.theme.resolveAttribute(colorCode, value, true)
+        return value.data
+    }
+
+    fun getStyledAppName(context: Context): Spanned {
+        val colorPrimary = getThemeColor(context, R.attr.colorPrimaryDark)
+        val hexColor = String.format("#%06X", (0xFFFFFF and colorPrimary))
+        return HtmlCompat.fromHtml(
+            "Libre<span  style='color:$hexColor';>Tube</span>",
+            HtmlCompat.FROM_HTML_MODE_COMPACT
+        )
     }
 }

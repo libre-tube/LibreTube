@@ -1,9 +1,9 @@
 package com.github.libretube.preferences
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
+import com.github.libretube.activities.SettingsActivity
 
 class PlayerSettings : PreferenceFragmentCompat() {
     val TAG = "PlayerSettings"
@@ -11,7 +11,7 @@ class PlayerSettings : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)
 
-        val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
-        topBarTextView?.text = getString(R.string.player)
+        val settingsActivity = activity as SettingsActivity
+        settingsActivity.changeTopBarText(getString(R.string.audio_video))
     }
 }

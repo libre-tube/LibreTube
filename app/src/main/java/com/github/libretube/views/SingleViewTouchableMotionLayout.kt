@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.views
 
 import android.content.Context
 import android.graphics.Rect

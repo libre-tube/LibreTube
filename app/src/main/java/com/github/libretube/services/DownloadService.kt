@@ -19,7 +19,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.R
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import java.io.File
 
 var IS_DOWNLOAD_RUNNING = false

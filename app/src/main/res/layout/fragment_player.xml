@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.libretube.util.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.libretube.views.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playerMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/player_scene"
-    tools:context=".PlayerFragment">
+    tools:context=".fragments.PlayerFragment">
 
     <ScrollView
         android:id="@+id/player_scrollView"
@@ -193,13 +193,13 @@
                             android:layout_width="24dp"
                             android:layout_height="25dp"
                             android:padding="2dp"
-                            android:src="@drawable/ic_vlc" />
+                            android:src="@drawable/ic_player" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="VLC" />
+                            android:text="@string/open" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -281,7 +281,10 @@
                     style="@style/Widget.Material3.CardView.Elevated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
                     app:cardCornerRadius="18dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -319,14 +322,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/comments_toggle"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:nestedScrollingEnabled="false"
                     android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/player_recView"
+                    android:id="@+id/related_rec_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/comments_recView"
@@ -347,21 +349,59 @@
         android:layout_height="0dp"
         android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.35"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.libretube.util.CustomExoPlayerView
+    <com.github.libretube.views.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#000000"
-        android:scaleType="centerCrop"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
-        app:show_buffering="always" />
+        app:show_buffering="when_playing">
+
+        <FrameLayout
+            android:id="@+id/forwardFL"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginVertical="50dp">
+
+            <ImageButton
+                android:id="@+id/forwardBTN"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:src="@drawable/ic_forward"
+                android:visibility="invisible"
+                app:tint="@android:color/white" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/rewindFL"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginVertical="50dp">
+
+            <ImageButton
+                android:id="@+id/rewindBTN"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:src="@drawable/ic_rewind"
+                android:visibility="invisible"
+                app:tint="@android:color/white" />
+
+        </FrameLayout>
+
+    </com.github.libretube.views.CustomExoPlayerView>
 
     <ImageView
         android:id="@+id/close_imageView"
@@ -402,4 +442,4 @@
         app:layout_constraintStart_toEndOf="@+id/player"
         app:layout_constraintTop_toTopOf="@+id/play_imageView" />
 
-</com.github.libretube.util.SingleViewTouchableMotionLayout>
+</com.github.libretube.views.SingleViewTouchableMotionLayout>

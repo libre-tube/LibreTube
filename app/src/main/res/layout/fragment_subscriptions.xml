@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Subscriptions">
+    tools:context=".fragments.SubscriptionsFragment">
 
     <ProgressBar
         android:id="@+id/sub_progress"
@@ -33,13 +33,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/boogh"
             android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dp"
             android:gravity="center"
             android:text="@string/please_login"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <com.github.libretube.util.CustomSwipeToRefresh
+    <com.github.libretube.views.CustomSwipeToRefresh
         android:id="@+id/sub_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -101,5 +102,5 @@
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
-    </com.github.libretube.util.CustomSwipeToRefresh>
+    </com.github.libretube.views.CustomSwipeToRefresh>
 </RelativeLayout>

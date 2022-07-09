@@ -1,32 +1,33 @@
 package com.github.libretube.preferences
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.preference.ListPreference
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.github.libretube.R
-import com.github.libretube.requireMainActivityRestart
+import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.util.ThemeHelper
+import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : PreferenceFragmentCompat() {
     private val TAG = "AppearanceSettings"
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 
-        val topBarTextView = activity?.findViewById<TextView>(R.id.topBar_textView)
-        topBarTextView?.text = getString(R.string.appearance)
+        val settingsActivity = activity as SettingsActivity
+        settingsActivity.changeTopBarText(getString(R.string.appearance))
 
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
-            ThemeHelper.restartMainActivity(requireContext())
+            activity?.recreate()
             true
         }
 
-        val accentColor = findPreference<Preference>("accent_color")
-        accentColor?.setOnPreferenceChangeListener { _, _ ->
+        val accentColor = findPreference<ListPreference>("accent_color")
+        updateAccentColorValues(accentColor!!)
+        accentColor.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
             activity?.recreate()
             true
@@ -48,6 +49,19 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         hideTrending?.setOnPreferenceChangeListener { _, _ ->
             requireMainActivityRestart = true
             true
+        }
+    }
+
+    // remove material you from accent color option if not available
+    private fun updateAccentColorValues(pref: ListPreference) {
+        val dynamicColorsAvailable = DynamicColors.isDynamicColorAvailable()
+        if (!dynamicColorsAvailable) {
+            val entries = pref.entries.toMutableList()
+            entries -= entries[0]
+            pref.entries = entries.toTypedArray()
+            val values = pref.entryValues.toMutableList()
+            values -= values[0]
+            pref.entryValues = values.toTypedArray()
         }
     }
 }

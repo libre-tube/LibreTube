@@ -169,7 +169,7 @@
     <string name="contributing">Contribución</string>
     <string name="donate">Donar</string>
     <string name="advanced">Avanzado</string>
-    <string name="player">Audio y vídeo</string>
+    <string name="player">Reproductor</string>
     <string name="appearance_summary">Ajuste la aplicación a su gusto.</string>
     <string name="playback_speed">Velocidad de reproducción predeterminada</string>
     <string name="live">En vivo</string>
@@ -207,4 +207,24 @@
     <string name="restore">Restaurar</string>
     <string name="deleteAccount_summary">Elimina su cuenta Piped</string>
     <string name="deleteAccount">Eliminar cuenta</string>
+    <string name="watch_history">Historial de visualizaciones</string>
+    <string name="watch_positions">Recordar posición</string>
+    <string name="watch_positions_summary">Recuerda la posición de visualización y se desplaza automáticamente hacia ella.</string>
+    <string name="auth_instance">Instancia de autenticación</string>
+    <string name="auth_instance_summary">Utilice una instancia diferente para las llamadas autenticadas.</string>
+    <string name="auth_instances">Elija una instancia de autenticación</string>
+    <string name="hls">Automática</string>
+    <string name="github">GitHub</string>
+    <string name="audio_video">Audio y vídeo</string>
+    <string name="fullscreen_orientation">Orientación de pantalla completa</string>
+    <string name="landscape">Horizontal</string>
+    <string name="portrait">Vertical</string>
+    <string name="aspect_ratio">Relación de aspecto del vídeo</string>
+    <string name="auto_rotation">Rotación automática</string>
+    <string name="matrix">Matrix</string>
+    <string name="telegram">Telegram</string>
+    <string name="reddit">Reddit</string>
+    <string name="community">Comunidad</string>
+    <string name="discord">Discord</string>
+    <string name="twitter">Twitter</string>
 </resources>

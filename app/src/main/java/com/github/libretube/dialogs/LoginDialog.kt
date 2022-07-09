@@ -3,77 +3,57 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.activities.requireMainActivityRestart
+import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.obj.Login
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
 class LoginDialog : DialogFragment() {
     private val TAG = "LoginDialog"
-    lateinit var username: EditText
-    lateinit var password: EditText
+    private lateinit var binding: DialogLoginBinding
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = MaterialAlertDialogBuilder(it)
             // Get the layout inflater
-            val inflater = requireActivity().layoutInflater
-            val token = PreferenceHelper.getToken(requireContext())
-            var view: View
-            Log.e("dafaq", token!!)
-            if (token != "") {
-                val user = PreferenceHelper.getUsername(requireContext())
-                view = inflater.inflate(R.layout.dialog_logout, null)
-                view.findViewById<TextView>(R.id.user).text =
-                    view.findViewById<TextView>(R.id.user).text.toString() + " (" + user + ")"
-                view.findViewById<Button>(R.id.logout).setOnClickListener {
-                    Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-                    PreferenceHelper.setToken(requireContext(), "")
-                    dialog?.dismiss()
+            binding = DialogLoginBinding.inflate(layoutInflater)
+
+            binding.login.setOnClickListener {
+                if (binding.username.text.toString() != "" && binding.password.text.toString() != "") {
+                    val login =
+                        Login(binding.username.text.toString(), binding.password.text.toString())
+                    login(login)
+                } else {
+                    Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                view = inflater.inflate(R.layout.dialog_login, null)
-                username = view.findViewById(R.id.username)
-                password = view.findViewById(R.id.password)
-                view.findViewById<Button>(R.id.login).setOnClickListener {
-                    if (username.text.toString() != "" && password.text.toString() != "") {
-                        val login = Login(username.text.toString(), password.text.toString())
-                        login(login)
-                    } else {
-                        Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                    }
-                }
-                view.findViewById<Button>(R.id.register).setOnClickListener {
-                    if (username.text.toString() != "" && password.text.toString() != "") {
-                        val login = Login(username.text.toString(), password.text.toString())
-                        register(login)
-                    } else {
-                        Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                    }
+            }
+            binding.register.setOnClickListener {
+                if (
+                    binding.username.text.toString() != "" &&
+                    binding.password.text.toString() != ""
+                ) {
+                    val login = Login(
+                        binding.username.text.toString(),
+                        binding.password.text.toString()
+                    )
+                    register(login)
+                } else {
+                    Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
                 }
             }
 
-            val typedValue = TypedValue()
-            this.requireActivity().theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true)
-            val hexColor = String.format("#%06X", (0xFFFFFF and typedValue.data))
-            val appName = HtmlCompat.fromHtml(
-                "Libre<span  style='color:$hexColor';>Tube</span>",
-                HtmlCompat.FROM_HTML_MODE_COMPACT
-            )
-            view.findViewById<TextView>(R.id.title).text = appName
+            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            builder.setView(view)
+            builder.setView(binding.root)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
@@ -82,7 +62,7 @@ class LoginDialog : DialogFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.login(login)
+                    RetrofitInstance.authApi.login(login)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -102,7 +82,9 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
                     PreferenceHelper.setToken(requireContext(), response.token!!)
                     PreferenceHelper.setUsername(requireContext(), login.username!!)
+                    requireMainActivityRestart = true
                     dialog?.dismiss()
+                    activity?.recreate()
                 }
             }
         }
@@ -113,7 +95,7 @@ class LoginDialog : DialogFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.register(login)
+                    RetrofitInstance.authApi.register(login)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")

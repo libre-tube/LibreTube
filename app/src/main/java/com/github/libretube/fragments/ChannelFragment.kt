@@ -6,18 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
+import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.obj.Subscribe
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.google.android.material.button.MaterialButton
@@ -26,19 +22,19 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class ChannelFragment : Fragment() {
-
-    private var channel_id: String? = null
     private val TAG = "ChannelFragment"
+    private lateinit var binding: FragmentChannelBinding
+
+    private var channelId: String? = null
     var nextPage: String? = null
-    var channelAdapter: ChannelAdapter? = null
-    var isLoading = true
-    var isSubscribed: Boolean = false
-    private var refreshLayout: SwipeRefreshLayout? = null
+    private var channelAdapter: ChannelAdapter? = null
+    private var isLoading = true
+    private var isSubscribed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            channel_id = it.getString("channel_id")
+            channelId = it.getString("channel_id")
         }
     }
 
@@ -46,43 +42,39 @@ class ChannelFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_channel, container, false)
+    ): View {
+        binding = FragmentChannelBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        channel_id = channel_id!!.replace("/channel/", "")
-        view.findViewById<TextView>(R.id.channel_name).text = channel_id
-        val recyclerView = view.findViewById<RecyclerView>(R.id.channel_recView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        refreshLayout = view.findViewById(R.id.channel_refresh)
+        channelId = channelId!!.replace("/channel/", "")
+        binding.channelName.text = channelId
+        binding.channelRecView.layoutManager = LinearLayoutManager(context)
 
         val refreshChannel = {
-            refreshLayout?.isRefreshing = true
-            fetchChannel(view)
-            val subButton = view.findViewById<MaterialButton>(R.id.channel_subscribe)
+            binding.channelRefresh.isRefreshing = true
+            fetchChannel()
             if (PreferenceHelper.getToken(requireContext()) != "") {
-                isSubscribed(subButton)
+                isSubscribed(binding.channelSubscribe)
             }
         }
         refreshChannel()
-        refreshLayout?.setOnRefreshListener {
+        binding.channelRefresh.setOnRefreshListener {
             refreshChannel()
         }
 
-        val scrollView = view.findViewById<ScrollView>(R.id.channel_scrollView)
-        scrollView.viewTreeObserver
+        binding.channelScrollView.viewTreeObserver
             .addOnScrollChangedListener {
-                if (scrollView.getChildAt(0).bottom
-                    == (scrollView.height + scrollView.scrollY)
+                if (binding.channelScrollView.getChildAt(0).bottom
+                    == (binding.channelScrollView.height + binding.channelScrollView.scrollY)
                 ) {
                     // scroll view is at bottom
                     if (nextPage != null && !isLoading) {
                         isLoading = true
-                        refreshLayout?.isRefreshing = true
+                        binding.channelRefresh.isRefreshing = true
                         fetchNextPage()
                     }
                 }
@@ -95,8 +87,8 @@ class ChannelFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.isSubscribed(
-                        channel_id!!,
+                    RetrofitInstance.authApi.isSubscribed(
+                        channelId!!,
                         token
                     )
                 } catch (e: IOException) {
@@ -135,9 +127,9 @@ class ChannelFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.subscribe(
+                    RetrofitInstance.authApi.subscribe(
                         token,
-                        Subscribe(channel_id)
+                        Subscribe(channelId)
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -158,9 +150,9 @@ class ChannelFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     val token = PreferenceHelper.getToken(requireContext())
-                    RetrofitInstance.api.unsubscribe(
+                    RetrofitInstance.authApi.unsubscribe(
                         token,
-                        Subscribe(channel_id)
+                        Subscribe(channelId)
                     )
                 } catch (e: IOException) {
                     println(e)
@@ -176,55 +168,52 @@ class ChannelFragment : Fragment() {
         run()
     }
 
-    private fun fetchChannel(view: View) {
+    private fun fetchChannel() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getChannel(channel_id!!)
+                    RetrofitInstance.api.getChannel(channelId!!)
                 } catch (e: IOException) {
-                    refreshLayout?.isRefreshing = false
+                    binding.channelRefresh.isRefreshing = false
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    refreshLayout?.isRefreshing = false
+                    binding.channelRefresh.isRefreshing = false
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
                 isLoading = false
-                refreshLayout?.isRefreshing = false
+                binding.channelRefresh.isRefreshing = false
                 runOnUiThread {
-                    view.findViewById<ScrollView>(R.id.channel_scrollView).visibility = View.VISIBLE
-                    val channelName = view.findViewById<TextView>(R.id.channel_name)
-                    channelName.text = response.name
+                    binding.channelScrollView.visibility = View.VISIBLE
+                    binding.channelName.text = response.name
                     if (response.verified) {
-                        channelName.setCompoundDrawablesWithIntrinsicBounds(
+                        binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
                             0,
                             0,
                             R.drawable.ic_verified,
                             0
                         )
                     }
-                    view.findViewById<TextView>(R.id.channel_subs).text = resources.getString(
+                    binding.channelSubs.text = resources.getString(
                         R.string.subscribers,
                         response.subscriberCount.formatShort()
                     )
-                    val channelDescription = view.findViewById<TextView>(R.id.channel_description)
                     if (response.description?.trim() == "") {
-                        channelDescription.visibility = View.GONE
+                        binding.channelDescription.visibility = View.GONE
                     } else {
-                        channelDescription.text = response.description?.trim()
+                        binding.channelDescription.text = response.description?.trim()
                     }
-                    val bannerImage = view.findViewById<ImageView>(R.id.channel_banner)
-                    val channelImage = view.findViewById<ImageView>(R.id.channel_image)
-                    Picasso.get().load(response.bannerUrl).into(bannerImage)
-                    Picasso.get().load(response.avatarUrl).into(channelImage)
+
+                    Picasso.get().load(response.bannerUrl).into(binding.channelBanner)
+                    Picasso.get().load(response.avatarUrl).into(binding.channelImage)
                     channelAdapter = ChannelAdapter(
                         response.relatedStreams!!.toMutableList(),
                         childFragmentManager
                     )
-                    view.findViewById<RecyclerView>(R.id.channel_recView).adapter = channelAdapter
+                    binding.channelRecView.adapter = channelAdapter
                 }
             }
         }
@@ -235,21 +224,21 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getChannelNextPage(channel_id!!, nextPage!!)
+                    RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
                 } catch (e: IOException) {
-                    refreshLayout?.isRefreshing = false
+                    binding.channelRefresh.isRefreshing = false
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    refreshLayout?.isRefreshing = false
+                    binding.channelRefresh.isRefreshing = false
                     Log.e(TAG, "HttpException, unexpected response," + e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
                 channelAdapter?.updateItems(response.relatedStreams!!)
                 isLoading = false
-                refreshLayout?.isRefreshing = false
+                binding.channelRefresh.isRefreshing = false
             }
         }
         run()
@@ -259,14 +248,5 @@ class ChannelFragment : Fragment() {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
-    }
-
-    override fun onDestroyView() {
-        val scrollView = view?.findViewById<ScrollView>(R.id.channel_scrollView)
-        scrollView?.viewTreeObserver?.removeOnScrollChangedListener {
-        }
-        channelAdapter = null
-        view?.findViewById<RecyclerView>(R.id.channel_recView)?.adapter = null
-        super.onDestroyView()
     }
 }

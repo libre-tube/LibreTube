@@ -1,12 +1,10 @@
 package com.github.libretube.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
+import com.github.libretube.databinding.SearchsuggestionRowBinding
 import com.github.libretube.fragments.SearchFragment
 
 class SearchSuggestionsAdapter(
@@ -16,28 +14,29 @@ class SearchSuggestionsAdapter(
 ) :
     RecyclerView.Adapter<SearchSuggestionsViewHolder>() {
 
+    private val TAG = "SearchSuggestionsAdapter"
+
     override fun getItemCount(): Int {
         return suggestionsList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchSuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cell = layoutInflater.inflate(R.layout.searchsuggestion_row, parent, false)
-        return SearchSuggestionsViewHolder(cell)
+        val binding = SearchsuggestionRowBinding.inflate(layoutInflater, parent, false)
+        return SearchSuggestionsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchSuggestionsViewHolder, position: Int) {
         val suggestion = suggestionsList[position]
-        val suggestionTextView = holder.v.findViewById<TextView>(R.id.suggestion_text)
-        suggestionTextView.text = suggestion
-        holder.v.setOnClickListener {
-            editText.setText(suggestion)
-            searchFragment.fetchSearch(editText.text.toString())
+        holder.binding.apply {
+            suggestionText.text = suggestion
+            root.setOnClickListener {
+                editText.setText(suggestion)
+                searchFragment.fetchSearch(editText.text.toString())
+            }
         }
     }
 }
 
-class SearchSuggestionsViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-    init {
-    }
-}
+class SearchSuggestionsViewHolder(val binding: SearchsuggestionRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

@@ -6,9 +6,11 @@
 
     <ImageView
         android:id="@+id/noInternet_settingsImageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="3dp"
         android:src="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
