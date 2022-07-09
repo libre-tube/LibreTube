@@ -227,4 +227,6 @@
     <string name="matrix">Matrix</string>
     <string name="telegram">Telegram</string>
     <string name="reddit">Reddit</string>
+    <string name="turnInternetOn">Connettiti a Internet attivando Wi-Fi o dati mobili.</string>
+    <string name="open">Apri …</string>
 </resources>

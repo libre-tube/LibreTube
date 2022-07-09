@@ -227,4 +227,6 @@
     <string name="telegram">تيليجرام</string>
     <string name="reddit">ريديت</string>
     <string name="twitter">تويتر</string>
+    <string name="turnInternetOn">يرجى الاتصال بالإنترنت عن طريق تشغيل WiFi أو بيانات الجوال.</string>
+    <string name="open">فتح …</string>
 </resources>

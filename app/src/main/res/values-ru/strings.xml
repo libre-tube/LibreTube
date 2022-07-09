@@ -28,7 +28,7 @@
     <string name="subscribeIsEmpty">Сначала подпишитесь на некоторые каналы.</string>
     <string name="cannotDownload">Невозможно скачать этот поток.</string>
     <string name="dlcomplete">Загрузка завершена.</string>
-    <string name="dlisinprogress">Пожалуйста, подождите, пока все загрузки завершаться.</string>
+    <string name="dlisinprogress">Пожалуйста, подождите, пока все загрузки завершатся.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
     <string name="vlcerror">Не удаётся открыть в VLC. Возможно, он не установлен.</string>
@@ -64,7 +64,7 @@
     <string name="import_from_yt_summary">Из YouTube или NewPipe</string>
     <string name="emptyPlaylistName">Название плейлиста не может быть пустым</string>
     <string name="comments">Комментарии</string>
-    <string name="noInternet">Отсутствует соединение с сетью</string>
+    <string name="noInternet">Сначала подключитесь к Интернету.</string>
     <string name="videoCount">%1$s видео</string>
     <string name="retry">Попробовать снова</string>
     <string name="settings">Настройки</string>
@@ -227,4 +227,6 @@
     <string name="matrix">Matrix</string>
     <string name="telegram">Telegram</string>
     <string name="twitter">Twitter</string>
+    <string name="turnInternetOn">Пожалуйста, подключитесь к Интернету, включив WiFi или мобильный интернет.</string>
+    <string name="open">Открыть …</string>
 </resources>
