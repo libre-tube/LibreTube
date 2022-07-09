@@ -90,7 +90,9 @@ import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.*
 import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 var isFullScreen = false
@@ -137,6 +139,7 @@ class PlayerFragment : Fragment() {
     private lateinit var title: String
     private lateinit var uploader: String
     private lateinit var thumbnailUrl: String
+    private lateinit var chapters: List<ChapterSegment>
     private val sponsorBlockPrefs = SponsorBlockPrefs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -335,7 +338,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
-        playerBinding.chapterName.visibility = View.VISIBLE
+        if (chapters.isNotEmpty()) playerBinding.chapterLL.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
         val fullscreenOrientationPref = PreferenceHelper
@@ -373,7 +376,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
-        playerBinding.chapterName.visibility = View.INVISIBLE
+        playerBinding.chapterLL.visibility = View.INVISIBLE
 
         scaleControls(1F)
 
@@ -712,7 +715,10 @@ class PlayerFragment : Fragment() {
         enableDoubleTapToSeek()
 
         // init the chapters recyclerview
-        if (response.chapters != null) initializeChapters(response.chapters)
+        if (response.chapters != null) {
+            chapters = response.chapters
+            initializeChapters()
+        }
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -938,7 +944,7 @@ class PlayerFragment : Fragment() {
         })
     }
 
-    private fun initializeChapters(chapters: List<ChapterSegment>) {
+    private fun initializeChapters() {
         if (chapters.isNotEmpty()) {
             // enable chapters in the video description
             binding.chaptersRecView.layoutManager =
@@ -955,8 +961,7 @@ class PlayerFragment : Fragment() {
             chapters.forEach {
                 titles += it.title!!
             }
-            playerBinding.chapterName.text = chapters[0].title
-            playerBinding.chapterName.setOnClickListener{
+            playerBinding.chapterLL.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.chapters)
                     .setItems(titles.toTypedArray()) { _, index ->
@@ -965,7 +970,29 @@ class PlayerFragment : Fragment() {
                     }
                     .show()
             }
+            setCurrentChapterName()
         }
+    }
+
+    // set the name of the video chapter in the exoPlayerView
+    private fun setCurrentChapterName() {
+        // call the function again in 100ms
+        exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
+
+        val currentPosition = exoPlayer.currentPosition
+        var chapterName: String? = null
+        val reversedChapters = chapters.toMutableList()
+
+        // reverse the chapters to start at the end
+        reversedChapters.reverse()
+        reversedChapters.forEach {
+            // check whether the chapter start is greater than the current player position
+            if (it.start!! * 1000 >= currentPosition) chapterName = it.title
+        }
+        Log.e(TAG, chapterName.toString())
+        // change the chapter name textView text to the chapterName
+        if (chapterName != null && chapterName != playerBinding.chapterName.text)
+            playerBinding.chapterName.text = chapterName
     }
 
     private fun setMediaSource(
