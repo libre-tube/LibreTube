@@ -227,4 +227,7 @@
     <string name="portrait">לאורך</string>
     <string name="aspect_ratio">יחס תצוגת וידאו</string>
     <string name="twitter">טוויטר</string>
+    <string name="turnInternetOn">נא להתחבר לאינטרנט על ידי הפעלת הרשת האלחוטית או הנתונים הסלולריים.</string>
+    <string name="open">פתיחה…</string>
+    <string name="chapters">פרקים</string>
 </resources>
