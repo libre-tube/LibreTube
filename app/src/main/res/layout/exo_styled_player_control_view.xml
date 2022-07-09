@@ -115,7 +115,6 @@
         android:layoutDirection="ltr">
 
         <LinearLayout
-            android:id="@id/exo_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
@@ -126,36 +125,46 @@
             android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
 
-            <TextView
-                android:id="@id/exo_position"
-                style="@style/ExoStyledControls.TimeText.Position" />
+            <LinearLayout
+                android:id="@id/exo_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <TextView style="@style/ExoStyledControls.TimeText.Separator" />
+                <TextView
+                    android:id="@id/exo_position"
+                    style="@style/ExoStyledControls.TimeText.Position" />
 
-            <TextView
-                android:id="@id/exo_duration"
-                style="@style/ExoStyledControls.TimeText.Duration" />
+                <TextView style="@style/ExoStyledControls.TimeText.Separator" />
+
+                <TextView
+                    android:id="@id/exo_duration"
+                    style="@style/ExoStyledControls.TimeText.Duration" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/chapterLL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:visibility="gone">
+                android:visibility="gone" >
 
                 <TextView
                     android:id="@+id/chapter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="2dp"
                     android:layout_marginStart="3dp"
+                    android:layout_marginTop="2dp"
                     android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>
@@ -212,18 +221,6 @@
         </LinearLayout>
 
     </FrameLayout>
-
-    <LinearLayout
-        android:id="@id/exo_minimal_controls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/exo_styled_minimal_controls_margin_bottom"
-        android:gravity="center_vertical"
-        android:layoutDirection="ltr"
-        android:orientation="horizontal">
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@id/exo_center_controls"
