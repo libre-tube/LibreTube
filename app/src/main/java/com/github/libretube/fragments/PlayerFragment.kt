@@ -340,9 +340,7 @@ class PlayerFragment : Fragment() {
         val fullscreenOrientationPref = PreferenceHelper
             .getString(requireContext(), "fullscreen_orientation", "ratio")
 
-        val scaleFactor = 1.3F
-        playerBinding.exoPlayPause.scaleX = scaleFactor
-        playerBinding.exoPlayPause.scaleY = scaleFactor
+        scaleControls(1.3F)
 
         val orientation = when (fullscreenOrientationPref) {
             "ratio" -> {
@@ -375,14 +373,17 @@ class PlayerFragment : Fragment() {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
 
-        val scaleFactor = 1F
-        playerBinding.exoPlayPause.scaleX = scaleFactor
-        playerBinding.exoPlayPause.scaleY = scaleFactor
+        scaleControls(1F)
 
         val mainActivity = activity as MainActivity
         mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
         isFullScreen = false
+    }
+
+    private fun scaleControls(scaleFactor: Float) {
+        playerBinding.exoPlayPause.scaleX = scaleFactor
+        playerBinding.exoPlayPause.scaleY = scaleFactor
     }
 
     private fun toggleComments() {
@@ -903,6 +904,12 @@ class PlayerFragment : Fragment() {
         )
     }
 
+    private fun disableDoubleTapToSeek() {
+        // disable fast forward and rewind by double tapping
+        binding.forwardFL.visibility = View.GONE
+        binding.rewindFL.visibility = View.GONE
+    }
+
     // toggle the visibility of the player controller
     private fun toggleController() {
         if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
@@ -1147,11 +1154,15 @@ class PlayerFragment : Fragment() {
 
     private fun lockPlayer(isLocked: Boolean) {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
+
         playerBinding.exoTopBarRight.visibility = visibility
         playerBinding.exoPlayPause.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility = visibility
+
+        // disable double tap to seek when the player is locked
+        if (isLocked) enableDoubleTapToSeek() else disableDoubleTapToSeek()
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
@@ -1305,28 +1316,29 @@ class PlayerFragment : Fragment() {
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
+            // hide and disable exoPlayer controls
             exoPlayerView.hideController()
             exoPlayerView.useController = false
+
+            // hide anything but the player
             binding.linLayout.visibility = View.GONE
+            binding.mainContainer.isClickable = true
 
             with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
                 enableTransition(R.id.yt_transition, false)
             }
-            binding.mainContainer.isClickable = true
 
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+
             isFullScreen = false
         } else {
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                enableTransition(R.id.yt_transition, true)
-            }
-
+            // enable exoPlayer controls again
             exoPlayerView.useController = true
-            binding.linLayout.visibility = View.VISIBLE
-            binding.mainContainer.isClickable = false
+
+            // switch back to portrait mode
+            unsetFullscreen()
         }
     }
 
