@@ -363,43 +363,58 @@
         app:layout_constraintTop_toTopOf="@id/main_container"
         app:show_buffering="when_playing">
 
-        <FrameLayout
-            android:id="@+id/forwardFL"
-            android:layout_width="wrap_content"
+        <!-- double tap to rewind/forward overlay -->
+        <LinearLayout
+            android:id="@+id/doubleTapOverlayLL"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|end"
             android:layout_marginVertical="50dp">
 
-            <ImageButton
-                android:id="@+id/forwardBTN"
-                android:layout_width="150dp"
+            <!-- double tap rewind btn -->
+            <FrameLayout
+                android:id="@+id/rewindFL"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:clickable="false"
-                android:src="@drawable/ic_forward"
-                android:visibility="invisible"
-                app:tint="@android:color/white" />
+                android:layout_weight=".40">
 
-        </FrameLayout>
+                <ImageButton
+                    android:id="@+id/rewindBTN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:src="@drawable/ic_rewind"
+                    android:visibility="invisible"
+                    app:tint="@android:color/white" />
 
-        <FrameLayout
-            android:id="@+id/rewindFL"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginVertical="50dp">
+            </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/rewindBTN"
-                android:layout_width="150dp"
+            <!-- place holder for the center controls -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:clickable="false"
-                android:src="@drawable/ic_rewind"
-                android:visibility="invisible"
-                app:tint="@android:color/white" />
+                android:layout_weight=".20" />
 
-        </FrameLayout>
+            <!-- double tap forward btn -->
+            <FrameLayout
+                android:id="@+id/forwardFL"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".40">
+
+                <ImageButton
+                    android:id="@+id/forwardBTN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:src="@drawable/ic_forward"
+                    android:visibility="invisible"
+                    app:tint="@android:color/white" />
+
+            </FrameLayout>
+
+        </LinearLayout>
 
     </com.github.libretube.views.CustomExoPlayerView>
 
