@@ -335,6 +335,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
+        playerBinding.chapterName.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
         val fullscreenOrientationPref = PreferenceHelper
@@ -372,6 +373,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
+        playerBinding.chapterName.visibility = View.INVISIBLE
 
         scaleControls(1F)
 
@@ -938,10 +940,31 @@ class PlayerFragment : Fragment() {
 
     private fun initializeChapters(chapters: List<ChapterSegment>) {
         if (chapters.isNotEmpty()) {
+            // enable chapters in the video description
             binding.chaptersRecView.layoutManager =
-                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
             binding.chaptersRecView.visibility = View.VISIBLE
+
+            // enable chapters in the player
+            val titles = mutableListOf<String>()
+            chapters.forEach {
+                titles += it.title!!
+            }
+            playerBinding.chapterName.text = chapters[0].title
+            playerBinding.chapterName.setOnClickListener{
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.chapters)
+                    .setItems(titles.toTypedArray()) { _, index ->
+                        val position = chapters[index].start!! * 1000
+                        exoPlayer.seekTo(position)
+                    }
+                    .show()
+            }
         }
     }
 

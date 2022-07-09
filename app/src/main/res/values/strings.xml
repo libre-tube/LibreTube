@@ -229,4 +229,5 @@
     <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Please connect to the internet by turning on WiFi or mobile data.</string>
     <string name="open">Open …</string>
+    <string name="chapters">Chapters</string>
 </resources>

@@ -27,7 +27,7 @@ class ChaptersAdapter(
             chapterTitle.text = chapter.title
 
             root.setOnClickListener {
-                val chapterStart = chapter.start!!.toLong() * 1000 // s -> ms
+                val chapterStart = chapter.start!! * 1000 // s -> ms
                 exoPlayer.seekTo(chapterStart)
             }
         }
