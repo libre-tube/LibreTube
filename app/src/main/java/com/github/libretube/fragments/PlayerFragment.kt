@@ -350,7 +350,6 @@ class PlayerFragment : Fragment() {
             "ratio" -> {
                 val videoSize = exoPlayer.videoSize
                 // probably a youtube shorts video
-                Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
                 if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 // a video with normal aspect ratio
                 else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -989,7 +988,6 @@ class PlayerFragment : Fragment() {
             // check whether the chapter start is greater than the current player position
             if (it.start!! * 1000 >= currentPosition) chapterName = it.title
         }
-        Log.e(TAG, chapterName.toString())
         // change the chapter name textView text to the chapterName
         if (chapterName != null && chapterName != playerBinding.chapterName.text) {
             playerBinding.chapterName.text = chapterName

@@ -106,87 +106,94 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@id/exo_bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/exo_styled_bottom_bar_height"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
-        android:layoutDirection="ltr">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@id/exo_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginBottom="10dp"
-            android:layoutDirection="ltr"
+            android:layout_marginBottom="-10dp"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
 
-            <TextView
-                android:id="@id/exo_position"
-                style="@style/ExoStyledControls.TimeText.Position" />
+            <LinearLayout
+                android:id="@id/exo_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp">
 
-            <TextView style="@style/ExoStyledControls.TimeText.Separator" />
+                <TextView
+                    android:id="@id/exo_position"
+                    style="@style/ExoStyledControls.TimeText.Position" />
 
-            <TextView
-                android:id="@id/exo_duration"
-                style="@style/ExoStyledControls.TimeText.Duration" />
+                <TextView style="@style/ExoStyledControls.TimeText.Separator" />
+
+                <TextView
+                    android:id="@id/exo_duration"
+                    style="@style/ExoStyledControls.TimeText.Duration" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/chapterLL"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:visibility="gone">
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/chapter_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="16sp" />
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@android:color/white" />
 
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="2dp"
                     android:layout_marginStart="3dp"
+                    android:layout_marginTop="2dp"
                     android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@id/exo_basic_controls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@id/exo_basic_controls"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginBottom="10dp"
-            android:layoutDirection="ltr">
+                <ImageButton
+                    android:id="@id/exo_repeat_toggle"
+                    style="@style/ExoStyledControls.Button.Bottom.RepeatToggle" />
 
-            <ImageButton
-                android:id="@id/exo_repeat_toggle"
-                style="@style/ExoStyledControls.Button.Bottom.RepeatToggle" />
+                <ImageButton
+                    android:id="@id/exo_subtitle"
+                    style="@style/ExoStyledControls.Button.Bottom.CC" />
 
-            <ImageButton
-                android:id="@id/exo_subtitle"
-                style="@style/ExoStyledControls.Button.Bottom.CC" />
+                <ImageButton
+                    android:id="@id/exo_settings"
+                    style="@style/ExoStyledControls.Button.Bottom.Settings" />
 
-            <ImageButton
-                android:id="@id/exo_settings"
-                style="@style/ExoStyledControls.Button.Bottom.Settings" />
+                <ImageButton
+                    android:id="@+id/fullscreen"
+                    style="@style/ExoStyledControls.Button.Bottom.FullScreen"
+                    android:src="@drawable/ic_fullscreen"
+                    app:tint="@android:color/white" />
 
-            <ImageButton
-                android:id="@+id/fullscreen"
-                style="@style/ExoStyledControls.Button.Bottom.FullScreen"
-                android:src="@drawable/ic_fullscreen"
-                app:tint="@android:color/white" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -210,18 +217,6 @@
                 app:scrubber_enabled_size="12dp" />
 
         </LinearLayout>
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@id/exo_minimal_controls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/exo_styled_minimal_controls_margin_bottom"
-        android:gravity="center_vertical"
-        android:layoutDirection="ltr"
-        android:orientation="horizontal">
 
     </LinearLayout>
 
