@@ -230,4 +230,5 @@
     <string name="turnInternetOn">נא להתחבר לאינטרנט על ידי הפעלת הרשת האלחוטית או הנתונים הסלולריים.</string>
     <string name="open">פתיחה…</string>
     <string name="chapters">פרקים</string>
+    <string name="change_playback_speed">מהירות נגינה</string>
 </resources>
