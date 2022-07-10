@@ -1033,20 +1033,27 @@ class PlayerFragment : Fragment() {
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
-        val currentPosition = exoPlayer.currentPosition
-        var chapterName: String? = null
-        val reversedChapters = chapters.toMutableList()
+        var chapterName = getCurrentChapterName()
 
-        // reverse the chapters to start at the end
-        reversedChapters.reverse()
-        reversedChapters.forEach {
-            // check whether the chapter start is greater than the current player position
-            if (it.start!! * 1000 >= currentPosition) chapterName = it.title
-        }
         // change the chapter name textView text to the chapterName
         if (chapterName != null && chapterName != playerBinding.chapterName.text) {
             playerBinding.chapterName.text = chapterName
         }
+    }
+
+    // get the name of the currently played chapter
+    private fun getCurrentChapterName(): String? {
+        val currentPosition = exoPlayer.currentPosition
+        var chapterName: String? = null
+
+        chapters.forEach {
+            // check whether the chapter start is greater than the current player position
+            if (currentPosition >= it.start!! * 1000) {
+                // save chapter title if found
+                chapterName = it.title
+            }
+        }
+        return chapterName
     }
 
     private fun setMediaSource(
