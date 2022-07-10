@@ -202,7 +202,22 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/save"
+                        android:id="@+id/relPlayer_background"
+                        style="@style/PlayerActionsLayout">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_headphones" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/audio" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/relPlayer_save"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
