@@ -6,6 +6,7 @@ import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -685,7 +686,6 @@ class PlayerFragment : Fragment() {
             setShowSubtitleButton(true)
             setShowNextButton(false)
             setShowPreviousButton(false)
-            setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
             // controllerShowTimeoutMs = 1500
             controllerHideOnTouch = true
             useController = false
@@ -807,6 +807,18 @@ class PlayerFragment : Fragment() {
                 }
             }
         })
+
+        // repeat toggle button
+        playerBinding.repeatToggle.setOnClickListener {
+            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
+                // turn off repeat mode
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+                playerBinding.repeatToggle.setColorFilter(Color.GRAY)
+            } else {
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+                playerBinding.repeatToggle.setColorFilter(Color.WHITE)
+            }
+        }
 
         // share button
         binding.relPlayerShare.setOnClickListener {
