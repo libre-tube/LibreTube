@@ -74,34 +74,31 @@
                 android:id="@+id/aspect_ratio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginHorizontal="5dp"
                 android:background="#00FFFFFF"
                 android:padding="@dimen/exo_icon_padding"
                 android:src="@drawable/ic_aspect_ratio" />
 
-            <LinearLayout
-                android:id="@+id/quality_linLayout"
+            <TextView
+                android:id="@+id/speed_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_gravity="center"
+                android:padding="@dimen/exo_icon_padding"
+                android:text="1x"
+                android:textColor="#FFFFFF" />
 
-                <TextView
-                    android:id="@+id/quality_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/exo_icon_padding"
-                    android:text="@string/hls"
-                    android:textColor="#FFFFFF" />
+            <TextView
+                android:id="@+id/quality_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_gravity="center"
+                android:padding="@dimen/exo_icon_padding"
+                android:text="@string/hls"
+                android:textColor="#FFFFFF" />
 
-                <ImageView
-                    android:id="@+id/quality_select"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/exo_icon_padding"
-                    android:src="@drawable/ic_arrow_down"
-                    app:tint="@android:color/white" />
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -182,10 +179,6 @@
                 <ImageButton
                     android:id="@id/exo_subtitle"
                     style="@style/ExoStyledControls.Button.Bottom.CC" />
-
-                <ImageButton
-                    android:id="@id/exo_settings"
-                    style="@style/ExoStyledControls.Button.Bottom.Settings" />
 
                 <ImageButton
                     android:id="@+id/fullscreen"
