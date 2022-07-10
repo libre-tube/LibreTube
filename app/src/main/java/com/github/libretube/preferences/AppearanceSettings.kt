@@ -52,6 +52,13 @@ class AppearanceSettings : PreferenceFragmentCompat() {
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
+
+        val labelVisibilityMode = findPreference<ListPreference>("label_visibility")
+        labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            true
+        }
     }
 
     // remove material you from accent color option if not available
