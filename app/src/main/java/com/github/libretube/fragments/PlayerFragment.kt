@@ -54,6 +54,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.IS_DOWNLOAD_RUNNING
+import com.github.libretube.util.BackgroundMode
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
@@ -825,6 +826,20 @@ class PlayerFragment : Fragment() {
             val shareDialog = ShareDialog(videoId!!, false)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
+
+        binding.relPlayerBackground.setOnClickListener {
+            // pause the current player
+            exoPlayer.pause()
+
+            // start the background mode
+            BackgroundMode
+                .getInstance()
+                .playOnBackgroundMode(
+                    requireContext(),
+                    videoId!!
+                )
+        }
+
         // check if livestream
         if (response.duration!! > 0) {
             // download clicked
@@ -893,7 +908,7 @@ class PlayerFragment : Fragment() {
         if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
             isSubscribed(binding.playerSubscribe, channelId!!)
-            binding.save.setOnClickListener {
+            binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
