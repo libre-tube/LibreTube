@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
-                android:background="#00FFFFFF"
+                android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/exo_icon_padding"
                 android:src="@drawable/ic_aspect_ratio" />
 
@@ -83,8 +83,9 @@
                 android:id="@+id/speed_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/exo_icon_padding"
                 android:text="1x"
                 android:textColor="#FFFFFF" />
@@ -93,8 +94,9 @@
                 android:id="@+id/quality_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/exo_icon_padding"
                 android:text="@string/hls"
                 android:textColor="#FFFFFF" />
@@ -114,7 +116,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-10dp"
+            android:layout_marginBottom="-5dp"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
@@ -125,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp">
+                android:layout_marginStart="5dp">
 
                 <TextView
                     android:id="@id/exo_position"
@@ -162,7 +164,6 @@
                     android:layout_height="15dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="3dp"
-                    android:layout_marginTop="2dp"
                     android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>
@@ -173,16 +174,18 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@id/exo_repeat_toggle"
-                    style="@style/ExoStyledControls.Button.Bottom.RepeatToggle" />
+                    android:id="@+id/repeat_toggle"
+                    style="@style/PlayerButton"
+                    android:src="@drawable/ic_repeat"
+                    app:tint="@android:color/darker_gray"/>
 
                 <ImageButton
                     android:id="@id/exo_subtitle"
-                    style="@style/ExoStyledControls.Button.Bottom.CC" />
+                    style="@style/PlayerButton" />
 
                 <ImageButton
                     android:id="@+id/fullscreen"
-                    style="@style/ExoStyledControls.Button.Bottom.FullScreen"
+                    style="@style/PlayerButton"
                     android:src="@drawable/ic_fullscreen"
                     app:tint="@android:color/white" />
 

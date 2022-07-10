@@ -6,6 +6,7 @@ import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -336,7 +337,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
-        if (chapters.isNotEmpty()) playerBinding.chapterLL.visibility = View.VISIBLE
+        playerBinding.chapterLL.isClickable = true
 
         val mainActivity = activity as MainActivity
         val fullscreenOrientationPref = PreferenceHelper
@@ -373,7 +374,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
-        playerBinding.chapterLL.visibility = View.INVISIBLE
+        playerBinding.chapterLL.isClickable = false
 
         scaleControls(1F)
 
@@ -685,7 +686,6 @@ class PlayerFragment : Fragment() {
             setShowSubtitleButton(true)
             setShowNextButton(false)
             setShowPreviousButton(false)
-            setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
             // controllerShowTimeoutMs = 1500
             controllerHideOnTouch = true
             useController = false
@@ -715,6 +715,8 @@ class PlayerFragment : Fragment() {
         if (response.chapters != null) {
             chapters = response.chapters
             initializeChapters()
+            // disabling chapterName click in portrait mode
+            playerBinding.chapterLL.isClickable = false
         }
 
         // set default playback speed
@@ -805,6 +807,18 @@ class PlayerFragment : Fragment() {
                 }
             }
         })
+
+        // repeat toggle button
+        playerBinding.repeatToggle.setOnClickListener {
+            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
+                // turn off repeat mode
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+                playerBinding.repeatToggle.setColorFilter(Color.GRAY)
+            } else {
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+                playerBinding.repeatToggle.setColorFilter(Color.WHITE)
+            }
+        }
 
         // share button
         binding.relPlayerShare.setOnClickListener {
@@ -976,11 +990,12 @@ class PlayerFragment : Fragment() {
             binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
             binding.chaptersRecView.visibility = View.VISIBLE
 
-            // enable chapters in the player
+            // enable the chapters dialog in the player
             val titles = mutableListOf<String>()
             chapters.forEach {
                 titles += it.title!!
             }
+            playerBinding.chapterLL.visibility = View.VISIBLE
             playerBinding.chapterLL.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.chapters)
@@ -1213,6 +1228,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    // lock the player
     private fun lockPlayer(isLocked: Boolean) {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
 

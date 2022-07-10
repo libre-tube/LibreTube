@@ -114,4 +114,14 @@
 
     </style>
 
+    <style name="PlayerButton">
+
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+
+    </style>
+
 </resources>
