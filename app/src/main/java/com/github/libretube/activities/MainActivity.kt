@@ -153,12 +153,6 @@ class MainActivity : AppCompatActivity() {
                 false
             }
 
-            /**
-             * don't remove this line
-             * this prevents reselected items at the bottomNav to be duplicated in the backstack
-             */
-            binding.bottomNav.setOnItemReselectedListener {}
-
             binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
             binding.toolbar.setNavigationOnClickListener {
