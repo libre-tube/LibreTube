@@ -231,4 +231,6 @@
     <string name="open">Open …</string>
     <string name="chapters">Chapters</string>
     <string name="change_playback_speed">Playback speed</string>
+    <string name="require_restart">Restart required</string>
+    <string name="require_restart_message">This change requires an app restart. Do you want to restart the app now? Otherwise the changes will be applied on the next app restart.</string>
 </resources>

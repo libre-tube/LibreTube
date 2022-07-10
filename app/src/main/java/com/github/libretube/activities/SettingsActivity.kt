@@ -1,10 +1,8 @@
 package com.github.libretube.activities
 
-import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.preferences.MainSettings
@@ -12,7 +10,6 @@ import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
 
 var isCurrentViewMainSettings = true
-var requireMainActivityRestart = false
 
 class SettingsActivity : AppCompatActivity() {
     val TAG = "SettingsActivity"
@@ -50,17 +47,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (isCurrentViewMainSettings) {
-            if (requireMainActivityRestart) {
-                requireMainActivityRestart = false
-                // kill player notification
-                val nManager =
-                    this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-                nManager.cancelAll()
-                ThemeHelper.restartMainActivity(this)
-                ActivityCompat.finishAffinity(this)
-            } else {
-                super.onBackPressed()
-            }
+            super.onBackPressed()
             finishAndRemoveTask()
         } else {
             isCurrentViewMainSettings = true

@@ -21,11 +21,11 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
+import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.RetrofitInstance
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -119,7 +119,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
         // fetchInstance()
         initCustomInstances(instance!!)
         instance.setOnPreferenceChangeListener { _, newValue ->
-            requireMainActivityRestart = true
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             RetrofitInstance.url = newValue.toString()
             if (!PreferenceHelper.getBoolean(requireContext(), "auth_instance_toggle", false)) {
                 RetrofitInstance.authUrl = newValue.toString()
@@ -136,22 +137,24 @@ class InstanceSettings : PreferenceFragmentCompat() {
             authInstance.isVisible = false
         }
         authInstance.setOnPreferenceChangeListener { _, newValue ->
-            requireMainActivityRestart = true
             // save new auth url
             RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
         val authInstanceToggle = findPreference<SwitchPreference>("auth_instance_toggle")
         authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
-            requireMainActivityRestart = true
             authInstance.isVisible = newValue == true
             logout()
             // either use new auth url or the normal api url if auth instance disabled
             RetrofitInstance.authUrl = if (newValue == false) RetrofitInstance.url
             else authInstance.value
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
