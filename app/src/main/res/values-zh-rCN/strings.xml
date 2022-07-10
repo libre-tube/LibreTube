@@ -231,4 +231,6 @@
     <string name="open">打开…</string>
     <string name="chapters">章节</string>
     <string name="change_playback_speed">播放速度</string>
+    <string name="require_restart">需要重启</string>
+    <string name="require_restart_message">此更改需要重新启动应用程序。 你想现在重新启动应用程序吗？ 否则，更改将在下一次应用重启时应用。</string>
 </resources>
