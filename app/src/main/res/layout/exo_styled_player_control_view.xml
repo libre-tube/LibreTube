@@ -83,8 +83,8 @@
                 android:id="@+id/speed_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
                 android:padding="@dimen/exo_icon_padding"
                 android:text="1x"
                 android:textColor="#FFFFFF" />
@@ -93,8 +93,8 @@
                 android:id="@+id/quality_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
                 android:padding="@dimen/exo_icon_padding"
                 android:text="@string/hls"
                 android:textColor="#FFFFFF" />
@@ -162,7 +162,6 @@
                     android:layout_height="15dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="3dp"
-                    android:layout_marginTop="2dp"
                     android:src="@drawable/ic_arrow_right" />
 
             </LinearLayout>

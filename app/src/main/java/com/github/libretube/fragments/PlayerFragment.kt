@@ -336,7 +336,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
-        if (chapters.isNotEmpty()) playerBinding.chapterLL.visibility = View.VISIBLE
+        playerBinding.chapterLL.isClickable = true
 
         val mainActivity = activity as MainActivity
         val fullscreenOrientationPref = PreferenceHelper
@@ -373,7 +373,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
-        playerBinding.chapterLL.visibility = View.INVISIBLE
+        playerBinding.chapterLL.isClickable = false
 
         scaleControls(1F)
 
@@ -715,6 +715,8 @@ class PlayerFragment : Fragment() {
         if (response.chapters != null) {
             chapters = response.chapters
             initializeChapters()
+            // disabling chapterName click in portrait mode
+            playerBinding.chapterLL.isClickable = false
         }
 
         // set default playback speed
@@ -976,11 +978,12 @@ class PlayerFragment : Fragment() {
             binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
             binding.chaptersRecView.visibility = View.VISIBLE
 
-            // enable chapters in the player
+            // enable the chapters dialog in the player
             val titles = mutableListOf<String>()
             chapters.forEach {
                 titles += it.title!!
             }
+            playerBinding.chapterLL.visibility = View.VISIBLE
             playerBinding.chapterLL.setOnClickListener {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.chapters)
@@ -1213,6 +1216,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    // lock the player
     private fun lockPlayer(isLocked: Boolean) {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
 
