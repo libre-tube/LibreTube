@@ -30,7 +30,7 @@
                 android:id="@+id/close_imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:background="#00FFFFFF"
                 android:padding="@dimen/exo_icon_padding"
                 android:src="@drawable/ic_close"
