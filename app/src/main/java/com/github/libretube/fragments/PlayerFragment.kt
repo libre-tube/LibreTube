@@ -90,9 +90,7 @@ import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.*
 import java.util.concurrent.Executors
-import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 var isFullScreen = false
@@ -719,6 +717,29 @@ class PlayerFragment : Fragment() {
             initializeChapters()
         }
 
+        // set default playback speed
+        val playbackSpeed =
+            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")!!
+        val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
+        val playbackSpeedValues =
+            context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
+        exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
+        val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
+        playerBinding.speedText.text = playbackSpeeds[speedIndex]
+
+        // change playback speed button
+        playerBinding.speedText.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.change_playback_speed)
+                .setItems(playbackSpeeds) { _, index ->
+                    // set the new playback speed
+                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
+                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
+                    playerBinding.speedText.text = playbackSpeeds[index]
+                }
+                .show()
+        }
+
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -1130,13 +1151,8 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
-        val playbackSpeed =
-            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")?.toFloat()
-        // multiply by thousand: s -> ms
         val bufferingGoal =
             PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
-        val seekIncrement =
-            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
@@ -1168,13 +1184,9 @@ class PlayerFragment : Fragment() {
         exoPlayer = ExoPlayer.Builder(view.context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
-            .setSeekBackIncrementMs(seekIncrement)
-            .setSeekForwardIncrementMs(seekIncrement)
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
-
-        exoPlayer.setPlaybackSpeed(playbackSpeed!!)
     }
 
     private fun initializePlayerNotification(c: Context) {
