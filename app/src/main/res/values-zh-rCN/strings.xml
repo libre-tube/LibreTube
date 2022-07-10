@@ -229,4 +229,5 @@
     <string name="telegram">Telegram</string>
     <string name="turnInternetOn">请打开 WiFi 或移动数据连接到互联网。</string>
     <string name="open">打开…</string>
+    <string name="chapters">章节</string>
 </resources>
