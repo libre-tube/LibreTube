@@ -52,6 +52,15 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
+            android:icon="@drawable/ic_label"
+            app:defaultValue="always"
+            app:entries="@array/labelVisibility"
+            app:entryValues="@array/labelVisibilityValues"
+            app:key="label_visibility"
+            app:title="@string/navLabelVisibility"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
             android:icon="@drawable/ic_grid"
             app:defaultValue="@integer/grid_items"
             app:entries="@array/grid"

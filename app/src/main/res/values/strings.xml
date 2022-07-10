@@ -233,4 +233,8 @@
     <string name="change_playback_speed">Playback speed</string>
     <string name="require_restart">Restart required</string>
     <string name="require_restart_message">This change requires an app restart. Do you want to restart the app now? Otherwise the changes will be applied on the next app restart.</string>
+    <string name="navLabelVisibility">Navbar label visibility</string>
+    <string name="always">Always</string>
+    <string name="selected">Selected</string>
+    <string name="never">Never</string>
 </resources>

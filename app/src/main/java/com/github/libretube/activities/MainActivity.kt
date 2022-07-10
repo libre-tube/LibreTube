@@ -38,6 +38,7 @@ import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
 import com.google.android.material.elevation.SurfaceColors
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
@@ -123,6 +124,16 @@ class MainActivity : AppCompatActivity() {
 
             // navigate to the default fragment
             navController.navigate(startFragmentId)
+
+            val labelVisibilityMode = when (
+                PreferenceHelper.getString(this, "label_visibility", "always")
+            ) {
+                "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
+                "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
+                "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
+                else -> NavigationBarView.LABEL_VISIBILITY_AUTO
+            }
+            binding.bottomNav.labelVisibilityMode = labelVisibilityMode
 
             binding.bottomNav.setOnItemSelectedListener {
                 // clear backstack if it's the start fragment
