@@ -374,7 +374,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
-        playerBinding.chapterLL.isClickable = false
+        playerBinding.chapterLL.isClickable = true
 
         scaleControls(1F)
 
@@ -716,7 +716,7 @@ class PlayerFragment : Fragment() {
             chapters = response.chapters
             initializeChapters()
             // disabling chapterName click in portrait mode
-            playerBinding.chapterLL.isClickable = false
+            playerBinding.chapterLL.isClickable = true
         }
 
         // set default playback speed
