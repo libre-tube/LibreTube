@@ -1032,8 +1032,8 @@ class PlayerFragment : Fragment() {
 
         for (vid in response.videoStreams!!) {
             // append quality to list if it has the preferred format (e.g. MPEG)
-            if (vid.format.equals(videoFormatPreference)) { // preferred format
-                videosNameArray += vid.quality!!
+            if (vid.format.equals(videoFormatPreference) && vid.url != null) { // preferred format
+                videosNameArray += vid.quality.toString()
                 videosUrlArray += vid.url!!.toUri()
             } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format)
                 videosNameArray += "LBRY MP4"
