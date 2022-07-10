@@ -6,7 +6,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.activities.requireMainActivityRestart
+import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
 
@@ -20,16 +20,16 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val themeToggle = findPreference<ListPreference>("theme_togglee")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
-            requireMainActivityRestart = true
-            activity?.recreate()
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
         val accentColor = findPreference<ListPreference>("accent_color")
         updateAccentColorValues(accentColor!!)
         accentColor.setOnPreferenceChangeListener { _, _ ->
-            requireMainActivityRestart = true
-            activity?.recreate()
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
@@ -41,13 +41,15 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val gridColumns = findPreference<ListPreference>("grid")
         gridColumns?.setOnPreferenceChangeListener { _, _ ->
-            requireMainActivityRestart = true
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
         val hideTrending = findPreference<SwitchPreference>("hide_trending_page")
         hideTrending?.setOnPreferenceChangeListener { _, _ ->
-            requireMainActivityRestart = true
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
     }

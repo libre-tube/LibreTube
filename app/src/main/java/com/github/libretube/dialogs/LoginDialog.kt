@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.obj.Login
 import com.github.libretube.preferences.PreferenceHelper
@@ -82,9 +81,9 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
                     PreferenceHelper.setToken(requireContext(), response.token!!)
                     PreferenceHelper.setUsername(requireContext(), login.username!!)
-                    requireMainActivityRestart = true
+                    val restartDialog = RequireRestartDialog()
+                    restartDialog.show(parentFragmentManager, "RequireRestartDialog")
                     dialog?.dismiss()
-                    activity?.recreate()
                 }
             }
         }

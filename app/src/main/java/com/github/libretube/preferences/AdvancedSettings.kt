@@ -5,7 +5,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.activities.requireMainActivityRestart
+import com.github.libretube.dialogs.RequireRestartDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AdvancedSettings : PreferenceFragmentCompat() {
@@ -48,8 +48,8 @@ class AdvancedSettings : PreferenceFragmentCompat() {
                 // clear login token
                 PreferenceHelper.setToken(requireContext(), "")
 
-                requireMainActivityRestart = true
-                activity?.recreate()
+                val restartDialog = RequireRestartDialog()
+                restartDialog.show(childFragmentManager, "RequireRestartDialog")
             }
             .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
             .setTitle(R.string.reset)
