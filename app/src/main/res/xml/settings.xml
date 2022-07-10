@@ -45,7 +45,7 @@
             app:title="@string/sponsorblock" />
 
         <Preference
-            android:icon="@drawable/ic_player"
+            android:icon="@drawable/ic_movie"
             app:key="player"
             app:summary="@string/player_summary"
             app:title="@string/audio_video" />

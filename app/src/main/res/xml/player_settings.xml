@@ -14,7 +14,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            android:icon="@drawable/ic_player"
+            android:icon="@drawable/ic_videocam"
             app:defaultValue="WEBM"
             app:entries="@array/playerVideoFormats"
             app:entryValues="@array/playerVideoFormats"
@@ -70,7 +70,7 @@
             app:title="@string/pauseOnScreenOff" />
 
         <ListPreference
-            android:icon="@drawable/ic_fullscreen"
+            android:icon="@drawable/ic_flip"
             app:defaultValue="ratio"
             app:entries="@array/fullscreenOrientation"
             app:entryValues="@array/fullscreenOrientationValues"
