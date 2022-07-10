@@ -1095,7 +1095,7 @@ class PlayerFragment : Fragment() {
             }
         }
 
-        playerBinding.qualityLinLayout.setOnClickListener {
+        playerBinding.qualityText.setOnClickListener {
             // Dialog for quality selection
             val builder: MaterialAlertDialogBuilder? = activity?.let {
                 MaterialAlertDialogBuilder(it)
