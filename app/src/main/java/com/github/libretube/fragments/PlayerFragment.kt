@@ -262,9 +262,7 @@ class PlayerFragment : Fragment() {
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
-            binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
-            binding.descLinLayout.visibility =
-                if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
+            toggleDescription()
         }
 
         binding.commentsToggle.setOnClickListener {
@@ -338,7 +336,6 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
-        playerBinding.chapterLL.isClickable = true
 
         val mainActivity = activity as MainActivity
         val fullscreenOrientationPref = PreferenceHelper
@@ -375,7 +372,6 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
-        playerBinding.chapterLL.isClickable = false
 
         scaleControls(1F)
 
@@ -388,6 +384,12 @@ class PlayerFragment : Fragment() {
     private fun scaleControls(scaleFactor: Float) {
         playerBinding.exoPlayPause.scaleX = scaleFactor
         playerBinding.exoPlayPause.scaleY = scaleFactor
+    }
+
+    private fun toggleDescription() {
+        binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
+        binding.descLinLayout.visibility =
+            if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
     }
 
     private fun toggleComments() {
@@ -716,8 +718,6 @@ class PlayerFragment : Fragment() {
         if (response.chapters != null) {
             chapters = response.chapters
             initializeChapters()
-            // disabling chapterName click in portrait mode
-            playerBinding.chapterLL.isClickable = false
         }
 
         // set default playback speed
@@ -1012,13 +1012,17 @@ class PlayerFragment : Fragment() {
             }
             playerBinding.chapterLL.visibility = View.VISIBLE
             playerBinding.chapterLL.setOnClickListener {
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle(R.string.chapters)
-                    .setItems(titles.toTypedArray()) { _, index ->
-                        val position = chapters[index].start!! * 1000
-                        exoPlayer.seekTo(position)
-                    }
-                    .show()
+                if (isFullScreen) {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.chapters)
+                        .setItems(titles.toTypedArray()) { _, index ->
+                            val position = chapters[index].start!! * 1000
+                            exoPlayer.seekTo(position)
+                        }
+                        .show()
+                } else {
+                    toggleDescription()
+                }
             }
             setCurrentChapterName()
         }
