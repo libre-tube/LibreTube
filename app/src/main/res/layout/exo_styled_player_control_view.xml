@@ -177,7 +177,7 @@
                     android:id="@+id/repeat_toggle"
                     style="@style/PlayerButton"
                     android:src="@drawable/ic_repeat"
-                    app:tint="@android:color/darker_gray"/>
+                    app:tint="@android:color/darker_gray" />
 
                 <ImageButton
                     android:id="@id/exo_subtitle"
