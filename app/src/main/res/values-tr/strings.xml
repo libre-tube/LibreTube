@@ -230,4 +230,5 @@
     <string name="open">Açık …</string>
     <string name="turnInternetOn">Lütfen, WiFi veya mobil verileri açarak internete bağlanın.</string>
     <string name="chapters">Bölümler</string>
+    <string name="change_playback_speed">Oynatma hızı</string>
 </resources>
