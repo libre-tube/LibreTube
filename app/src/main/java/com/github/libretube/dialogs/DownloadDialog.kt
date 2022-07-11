@@ -28,7 +28,6 @@ class DownloadDialog : DialogFragment() {
     private val TAG = "DownloadDialog"
     private lateinit var binding: DialogDownloadBinding
 
-    private lateinit var streams: Streams
     private lateinit var videoId: String
     private var duration = 0
 
@@ -86,7 +85,7 @@ class DownloadDialog : DialogFragment() {
     private fun fetchStreams() {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.api.getStreams(videoId!!)
+                RetrofitInstance.api.getStreams(videoId)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG, "IOException, you might not have internet connection")
@@ -102,8 +101,8 @@ class DownloadDialog : DialogFragment() {
     }
 
     private fun initDownloadOptions(streams: Streams) {
-        var vidName = arrayListOf<String>()
-        var vidUrl = arrayListOf<String>()
+        val vidName = arrayListOf<String>()
+        val vidUrl = arrayListOf<String>()
 
         // add empty selection
         vidName.add(getString(R.string.no_video))
@@ -116,8 +115,8 @@ class DownloadDialog : DialogFragment() {
             vidUrl.add(vid.url!!)
         }
 
-        var audioName = arrayListOf<String>()
-        var audioUrl = arrayListOf<String>()
+        val audioName = arrayListOf<String>()
+        val audioUrl = arrayListOf<String>()
 
         // add empty selection
         audioName.add(getString(R.string.no_audio))

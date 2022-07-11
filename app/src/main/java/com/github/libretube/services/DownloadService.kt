@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.R
+import com.github.libretube.obj.DownloadType
 import com.github.libretube.preferences.PreferenceHelper
 import java.io.File
 
@@ -26,17 +27,19 @@ var IS_DOWNLOAD_RUNNING = false
 
 class DownloadService : Service() {
     val TAG = "DownloadService"
+
+    private lateinit var notification: NotificationCompat.Builder
+
     private var downloadId: Long = -1
     private lateinit var videoId: String
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
     private lateinit var extension: String
     private var duration: Int = 0
+    private var downloadType: Int = 3
 
     private lateinit var audioDir: File
     private lateinit var videoDir: File
-    private lateinit var notification: NotificationCompat.Builder
-    private lateinit var downloadType: String
     private lateinit var libretubeDir: File
     private lateinit var tempDir: File
     override fun onCreate() {
@@ -50,11 +53,11 @@ class DownloadService : Service() {
         audioUrl = intent.getStringExtra("audioUrl")!!
         duration = intent.getIntExtra("duration", 1)
         extension = PreferenceHelper.getString(this, "video_format", ".mp4")!!
-        downloadType = if (audioUrl != "" && videoUrl != "") "mux"
-        else if (audioUrl != "") "audio"
-        else if (videoUrl != "") "video"
-        else "none"
-        if (downloadType != "none") {
+        downloadType = if (audioUrl != "" && videoUrl != "") DownloadType.MUX
+        else if (audioUrl != "") DownloadType.AUDIO
+        else if (videoUrl != "") DownloadType.VIDEO
+        else DownloadType.NONE
+        if (downloadType != DownloadType.NONE) {
             downloadNotification(intent)
             downloadManager()
         } else {
@@ -108,7 +111,7 @@ class DownloadService : Service() {
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
             )
             when (downloadType) {
-                "mux" -> {
+                DownloadType.MUX -> {
                     audioDir = File(tempDir, "$videoId-audio")
                     videoDir = File(tempDir, "$videoId-video")
                     downloadId = downloadManagerRequest(
@@ -118,7 +121,7 @@ class DownloadService : Service() {
                         videoDir
                     )
                 }
-                "video" -> {
+                DownloadType.VIDEO -> {
                     videoDir = File(libretubeDir, "$videoId-video")
                     downloadId = downloadManagerRequest(
                         getString(R.string.video),
@@ -127,7 +130,7 @@ class DownloadService : Service() {
                         videoDir
                     )
                 }
-                "audio" -> {
+                DownloadType.AUDIO -> {
                     audioDir = File(libretubeDir, "$videoId-audio")
                     downloadId = downloadManagerRequest(
                         getString(R.string.audio),
@@ -148,7 +151,7 @@ class DownloadService : Service() {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             // Checking if the received broadcast is for our enqueued download by matching download id
             if (downloadId == id) {
-                if (downloadType == "mux") {
+                if (downloadType == DownloadType.MUX) {
                     downloadManagerRequest(
                         getString(R.string.audio),
                         getString(R.string.downloading),

@@ -59,7 +59,7 @@ class ShareDialog(
         val instancePref = PreferenceHelper.getString(
             requireContext(),
             "selectInstance",
-            "https://pipedapi.kavin.rocks"
+            PIPED_FRONTEND_URL
         )
 
         // get the api urls of the other custom instances

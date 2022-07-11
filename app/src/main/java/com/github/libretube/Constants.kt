@@ -27,3 +27,8 @@ const val TWITTER_URL = "https://twitter.com/libretube"
  */
 const val PIPED_FRONTEND_URL = "https://piped.kavin.rocks"
 const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
+
+/**
+ * Retrofit Instance
+ */
+const val PIPED_API_URL = "https://pipedapi.kavin.rocks/"
