@@ -177,11 +177,13 @@ class SearchAdapter(
                 binding.searchSubButton.setOnClickListener {
                     if (!isSubscribed) {
                         subscribe(token, channelId)
-                        binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
+                        binding.searchSubButton.text =
+                            binding.root.context.getString(R.string.unsubscribe)
                         isSubscribed = true
                     } else {
                         unsubscribe(token, channelId)
-                        binding.searchSubButton.text = binding.root.context.getString(R.string.subscribe)
+                        binding.searchSubButton.text =
+                            binding.root.context.getString(R.string.subscribe)
                         isSubscribed = false
                     }
                 }
