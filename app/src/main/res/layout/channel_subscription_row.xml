@@ -33,9 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:backgroundTint="?attr/colorOnPrimary"
-        android:text="@string/unsubscribe"
-        android:textColor="@android:color/white"
-        android:textSize="11sp"
+        android:layout_centerVertical="true"
+        android:elevation="1dp"
+        android:text="@string/subscribe"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp"
         app:cornerRadius="20dp" />
 </RelativeLayout>

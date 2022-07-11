@@ -17,8 +17,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
@@ -68,17 +66,14 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     private fun subscribe(context: Context, channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(context)
                     RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channelId)
                     )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                 }
                 subscribed = true
                 isLoading = false
@@ -90,17 +85,14 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     private fun unsubscribe(context: Context, channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(context)
                     RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channelId)
                     )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                 }
                 subscribed = false
                 isLoading = false

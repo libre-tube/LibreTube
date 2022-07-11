@@ -279,7 +279,7 @@
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:cornerRadius="11dp" />
             </RelativeLayout>
 
