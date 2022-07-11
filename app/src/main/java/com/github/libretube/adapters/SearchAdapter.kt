@@ -3,6 +3,7 @@ package com.github.libretube.adapters
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -17,8 +18,15 @@ import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.SearchItem
+import com.github.libretube.obj.Subscribe
+import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class SearchAdapter(
     private val searchItems: MutableList<SearchItem>,
@@ -133,6 +141,76 @@ class SearchAdapter(
                 val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to item.url)
                 activity.navController.navigate(R.id.channelFragment, bundle)
+            }
+            val channelId = item.url?.replace("/channel/", "")!!
+            val token = PreferenceHelper.getToken(root.context)
+
+            // only show subscribe button if logged in
+            if (token != "") isSubscribed(channelId, token, binding)
+        }
+    }
+
+    private fun isSubscribed(channelId: String, token: String, binding: ChannelSearchRowBinding) {
+        var isSubscribed = false
+
+        // check whether the user subscribed to the channel
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = try {
+                RetrofitInstance.authApi.isSubscribed(
+                    channelId,
+                    token
+                )
+            } catch (e: Exception) {
+                return@launch
+            }
+
+            // if subscribed change text to unsubscribe
+            if (response.subscribed == true) {
+                isSubscribed = true
+                binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
+            }
+
+            // make sub button visible and set the on click listeners to (un)subscribe
+            if (response.subscribed != null) {
+                binding.searchSubButton.visibility = View.VISIBLE
+
+                binding.searchSubButton.setOnClickListener {
+                    if (!isSubscribed) {
+                        subscribe(token, channelId)
+                        binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
+                        isSubscribed = true
+                    } else {
+                        unsubscribe(token, channelId)
+                        binding.searchSubButton.text = binding.root.context.getString(R.string.subscribe)
+                        isSubscribed = false
+                    }
+                }
+            }
+        }
+    }
+
+    private fun subscribe(token: String, channelId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                RetrofitInstance.authApi.subscribe(
+                    token,
+                    Subscribe(channelId)
+                )
+            } catch (e: Exception) {
+                return@launch
+            }
+        }
+    }
+
+    private fun unsubscribe(token: String, channelId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                RetrofitInstance.authApi.unsubscribe(
+                    token,
+                    Subscribe(channelId)
+                )
+            } catch (e: IOException) {
+                return@launch
             }
         }
     }
