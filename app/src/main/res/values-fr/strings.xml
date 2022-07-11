@@ -229,4 +229,5 @@
     <string name="discord">Discord</string>
     <string name="open">Ouvrir …</string>
     <string name="turnInternetOn">Veuillez vous connecter à l\'internet en activant le WiFi ou les données mobiles.</string>
+    <string name="chapters">Chapitres</string>
 </resources>
