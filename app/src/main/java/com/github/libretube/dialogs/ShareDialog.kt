@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.PIPED_FRONTEND_URL
 import com.github.libretube.R
+import com.github.libretube.YOUTUBE_FRONTEND_URL
 import com.github.libretube.preferences.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -30,8 +32,8 @@ class ShareDialog(
                     shareOptions
                 ) { _, which ->
                     val host = when (which) {
-                        0 -> "https://piped.kavin.rocks"
-                        1 -> "https://youtube.com"
+                        0 -> PIPED_FRONTEND_URL
+                        1 -> YOUTUBE_FRONTEND_URL
                         // only available for custom instances
                         else -> instanceUrl
                     }
