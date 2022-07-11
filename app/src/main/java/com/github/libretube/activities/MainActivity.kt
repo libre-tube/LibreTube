@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.github.libretube.PIPED_API_URL
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
@@ -74,14 +75,14 @@ class MainActivity : AppCompatActivity() {
         CronetHelper.initCronet(this.applicationContext)
 
         RetrofitInstance.url =
-            PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
+            PreferenceHelper.getString(this, "selectInstance", PIPED_API_URL)!!
         // set auth instance
         RetrofitInstance.authUrl =
             if (PreferenceHelper.getBoolean(this, "auth_instance_toggle", false)) {
                 PreferenceHelper.getString(
                     this,
                     "selectAuthInstance",
-                    "https://pipedapi.kavin.rocks/"
+                    PIPED_API_URL
                 )!!
             } else {
                 RetrofitInstance.url

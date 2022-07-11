@@ -21,3 +21,14 @@ const val MATRIX_URL = "https://matrix.to/#/#LibreTube:matrix.org"
 const val DISCORD_URL = "https://discord.com/invite/Qc34xCj2GV"
 const val REDDIT_URL = "https://www.reddit.com/r/Libretube/"
 const val TWITTER_URL = "https://twitter.com/libretube"
+
+/**
+ * Share Dialog
+ */
+const val PIPED_FRONTEND_URL = "https://piped.kavin.rocks"
+const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
+
+/**
+ * Retrofit Instance
+ */
+const val PIPED_API_URL = "https://pipedapi.kavin.rocks/"
