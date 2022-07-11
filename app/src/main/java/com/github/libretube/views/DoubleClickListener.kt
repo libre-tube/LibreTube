@@ -9,26 +9,28 @@ class DoubleClickListener(
     private val callback: Callback
 ) : View.OnClickListener {
     private var lastClicked: Long = -1L
-    private var doubleClicked: Boolean = false
 
     override fun onClick(v: View?) {
         lastClicked = when {
             lastClicked == -1L -> {
-                doubleClicked = false
+                checkForSingleClick()
                 System.currentTimeMillis()
             }
             isDoubleClicked() -> {
-                doubleClicked = true
                 callback.doubleClicked()
                 -1L
             }
             else -> {
-                Handler(Looper.getMainLooper()).postDelayed({
-                    if (!doubleClicked) callback.singleClicked()
-                }, doubleClickTimeLimitMills)
+                checkForSingleClick()
                 System.currentTimeMillis()
             }
         }
+    }
+
+    private fun checkForSingleClick() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (lastClicked != -1L) callback.singleClicked()
+        }, doubleClickTimeLimitMills)
     }
 
     private fun getTimeDiff(from: Long, to: Long): Long {

@@ -44,7 +44,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/subscribe"
             android:textColor="?attr/colorPrimary"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

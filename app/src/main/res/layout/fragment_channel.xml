@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.github.libretube.views.CustomSwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/channel_refresh"
     android:layout_width="match_parent"
@@ -74,15 +75,16 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/channel_subscribe"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="?attr/colorOnPrimary"
-                    android:drawableStart="@drawable/ic_bell_small"
-                    android:drawableTint="@android:color/white"
+                    android:drawableLeft="@drawable/ic_bell_small"
+                    android:drawableTint="?android:attr/textColorPrimary"
+                    android:elevation="20dp"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="11sp" />
+                    android:textSize="12sp"
+                    app:cornerRadius="20dp" />
 
             </LinearLayout>
 
