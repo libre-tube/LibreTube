@@ -508,7 +508,7 @@ class PlayerFragment : Fragment() {
 
                 runOnUiThread {
                     // set media sources for the player
-                    setResolutionAndSubtitles(view, response)
+                    setResolutionAndSubtitles(response)
                     prepareExoPlayerView()
                     initializePlayerView(view, response)
                     seekToWatchPosition()
@@ -981,10 +981,15 @@ class PlayerFragment : Fragment() {
             }
 
             override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                exoPlayer.seekTo(position)
+                val minTimeDiff = 10 * 1000 // 10s
+                // get the difference between the new and the old position
+                val diff = abs(exoPlayer.currentPosition - position)
+                // seek only when the difference is greater than 10 seconds
+                if (diff >= minTimeDiff) exoPlayer.seekTo(position)
             }
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                exoPlayer.seekTo(position)
                 exoPlayer.play()
                 Handler(Looper.getMainLooper()).postDelayed({
                     exoPlayerView.hideController()
@@ -1033,7 +1038,7 @@ class PlayerFragment : Fragment() {
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
-        var chapterName = getCurrentChapterName()
+        val chapterName = getCurrentChapterName()
 
         // change the chapter name textView text to the chapterName
         if (chapterName != null && chapterName != playerBinding.chapterName.text) {
@@ -1078,7 +1083,7 @@ class PlayerFragment : Fragment() {
         exoPlayer.setMediaSource(mergeSource)
     }
 
-    private fun setResolutionAndSubtitles(view: View, response: Streams) {
+    private fun setResolutionAndSubtitles(response: Streams) {
         val videoFormatPreference =
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
@@ -1312,7 +1317,7 @@ class PlayerFragment : Fragment() {
     private fun subscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.subscribe(
                         token,
@@ -1335,7 +1340,7 @@ class PlayerFragment : Fragment() {
     private fun unsubscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.unsubscribe(
                         token,
