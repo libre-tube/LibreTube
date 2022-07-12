@@ -204,4 +204,22 @@
     <string name="auth_instances">Wählen Sie eine Autorisierungsinstanz</string>
     <string name="github">GitHub</string>
     <string name="hls">Auto</string>
+    <string name="turnInternetOn">Bitte stellen Sie eine Internetverbindung her, indem Sie Wi-Fi oder mobile Daten aktivieren.</string>
+    <string name="open">Öffnen …</string>
+    <string name="chapters">Kapitel</string>
+    <string name="change_playback_speed">Wiedergabegeschwindigkeit</string>
+    <string name="require_restart">Neustart der App erforderlich</string>
+    <string name="require_restart_message">Starten Sie die Anwendung neu\? Die Änderungen werden beim nächsten Start der Anwendung übernommen.</string>
+    <string name="audio_video">Audio und Video</string>
+    <string name="fullscreen_orientation">Ausrichtung im Vollbildmodus</string>
+    <string name="aspect_ratio">Video-Bildverhältnis</string>
+    <string name="auto_rotation">Automatische Drehung</string>
+    <string name="landscape">Landschaft</string>
+    <string name="portrait">Porträt</string>
+    <string name="community">Gemeinschaft</string>
+    <string name="discord">Discord</string>
+    <string name="matrix">Matrix</string>
+    <string name="telegram">Telegram</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
 </resources>
