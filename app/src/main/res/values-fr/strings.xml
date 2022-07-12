@@ -228,6 +228,9 @@
     <string name="community">Communauté</string>
     <string name="discord">Discord</string>
     <string name="open">Ouvrir …</string>
-    <string name="turnInternetOn">Veuillez vous connecter à l\'internet en activant le WiFi ou les données mobiles.</string>
+    <string name="turnInternetOn">Veuillez vous connecter à internet en activant le Wi-Fi ou les données mobiles.</string>
     <string name="chapters">Chapitres</string>
+    <string name="change_playback_speed">Vitesse de lecture</string>
+    <string name="require_restart_message">Redémarrer l\'application \? Les modifications seront appliquées au prochain démarrage de l\'application.</string>
+    <string name="require_restart">Redémarrage de l\'application requis</string>
 </resources>
