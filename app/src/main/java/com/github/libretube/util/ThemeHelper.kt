@@ -17,11 +17,17 @@ import com.google.android.material.color.DynamicColors
 object ThemeHelper {
 
     fun updateTheme(activity: AppCompatActivity) {
-        updateAccentColor(activity)
-        updateThemeMode(activity)
+        val themeMode = PreferenceHelper.getString(activity, "theme_toggle", "A")!!
+        val blackModeEnabled = themeMode == "O"
+
+        updateAccentColor(activity, blackModeEnabled)
+        updateThemeMode(themeMode)
     }
 
-    private fun updateAccentColor(activity: AppCompatActivity) {
+    private fun updateAccentColor(
+        activity: AppCompatActivity,
+        blackThemeEnabled: Boolean
+    ) {
         val theme = when (
             PreferenceHelper.getString(
                 activity,
@@ -31,14 +37,15 @@ object ThemeHelper {
         ) {
             "my" -> {
                 applyDynamicColors(activity)
-                R.style.MaterialYou
+                if (blackThemeEnabled) R.style.MaterialYou_Black
+                else R.style.MaterialYou
             }
-            "red" -> R.style.Theme_Red
-            "blue" -> R.style.Theme_Blue
-            "yellow" -> R.style.Theme_Yellow
-            "green" -> R.style.Theme_Green
-            "purple" -> R.style.Theme_Purple
-            else -> R.style.Theme_Purple
+            "red" -> if (blackThemeEnabled) R.style.Theme_Red_Black else R.style.Theme_Red
+            "blue" -> if (blackThemeEnabled) R.style.Theme_Blue_Black else R.style.Theme_Blue
+            "yellow" -> if (blackThemeEnabled) R.style.Theme_Yellow_Black else R.style.Theme_Yellow
+            "green" -> if (blackThemeEnabled) R.style.Theme_Green_Black else R.style.Theme_Green
+            "purple" -> if (blackThemeEnabled) R.style.Theme_Purple_Black else R.style.Theme_Purple
+            else -> if (blackThemeEnabled) R.style.Theme_Purple_Black else R.style.Theme_Purple
         }
         activity.setTheme(theme)
     }
@@ -50,16 +57,15 @@ object ThemeHelper {
         DynamicColors.applyToActivityIfAvailable(activity)
     }
 
-    private fun updateThemeMode(context: Context) {
-        when (PreferenceHelper.getString(context, "theme_togglee", "A")) {
-            "A" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            "L" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "D" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            "O" -> {
-                context.setTheme(R.style.Black)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
+    private fun updateThemeMode(themeMode: String) {
+        val mode = when (themeMode) {
+            "A" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            "L" -> AppCompatDelegate.MODE_NIGHT_NO
+            "D" -> AppCompatDelegate.MODE_NIGHT_YES
+            "O" -> AppCompatDelegate.MODE_NIGHT_YES
+            else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
+        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     fun changeIcon(context: Context, newLogoActivityAlias: String) {

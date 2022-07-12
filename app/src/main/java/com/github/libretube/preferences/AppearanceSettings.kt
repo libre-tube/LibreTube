@@ -18,7 +18,7 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.appearance))
 
-        val themeToggle = findPreference<ListPreference>("theme_togglee")
+        val themeToggle = findPreference<ListPreference>("theme_toggle")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
