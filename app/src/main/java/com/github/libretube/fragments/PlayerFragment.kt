@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.activities.hideKeyboard
@@ -94,9 +95,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-
-var isFullScreen = false
-var isMiniPlayerVisible = false
 
 class PlayerFragment : Fragment() {
 
@@ -208,11 +206,11 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
-                    isMiniPlayerVisible = true
+                    Globals.isMiniPlayerVisible = true
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
-                    isMiniPlayerVisible = false
+                    Globals.isMiniPlayerVisible = false
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
                 }
@@ -231,7 +229,7 @@ class PlayerFragment : Fragment() {
         binding.playerMotionLayout.transitionToStart()
 
         binding.closeImageView.setOnClickListener {
-            isMiniPlayerVisible = false
+            Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -240,7 +238,7 @@ class PlayerFragment : Fragment() {
                 .commit()
         }
         playerBinding.closeImageButton.setOnClickListener {
-            isMiniPlayerVisible = false
+            Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -273,7 +271,7 @@ class PlayerFragment : Fragment() {
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
-            if (!isFullScreen) {
+            if (!Globals.isFullScreen) {
                 // go to fullscreen mode
                 setFullscreen()
             } else {
@@ -358,7 +356,7 @@ class PlayerFragment : Fragment() {
         }
         mainActivity.requestedOrientation = orientation
 
-        isFullScreen = true
+        Globals.isFullScreen = true
     }
 
     private fun unsetFullscreen() {
@@ -378,7 +376,7 @@ class PlayerFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
-        isFullScreen = false
+        Globals.isFullScreen = false
     }
 
     private fun scaleControls(scaleFactor: Float) {
@@ -508,7 +506,7 @@ class PlayerFragment : Fragment() {
 
                 runOnUiThread {
                     // set media sources for the player
-                    setResolutionAndSubtitles(view, response)
+                    setResolutionAndSubtitles(response)
                     prepareExoPlayerView()
                     initializePlayerView(view, response)
                     seekToWatchPosition()
@@ -981,10 +979,15 @@ class PlayerFragment : Fragment() {
             }
 
             override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                exoPlayer.seekTo(position)
+                val minTimeDiff = 10 * 1000 // 10s
+                // get the difference between the new and the old position
+                val diff = abs(exoPlayer.currentPosition - position)
+                // seek only when the difference is greater than 10 seconds
+                if (diff >= minTimeDiff) exoPlayer.seekTo(position)
             }
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                exoPlayer.seekTo(position)
                 exoPlayer.play()
                 Handler(Looper.getMainLooper()).postDelayed({
                     exoPlayerView.hideController()
@@ -1012,7 +1015,7 @@ class PlayerFragment : Fragment() {
             }
             playerBinding.chapterLL.visibility = View.VISIBLE
             playerBinding.chapterLL.setOnClickListener {
-                if (isFullScreen) {
+                if (Globals.isFullScreen) {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle(R.string.chapters)
                         .setItems(titles.toTypedArray()) { _, index ->
@@ -1033,7 +1036,7 @@ class PlayerFragment : Fragment() {
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
-        var chapterName = getCurrentChapterName()
+        val chapterName = getCurrentChapterName()
 
         // change the chapter name textView text to the chapterName
         if (chapterName != null && chapterName != playerBinding.chapterName.text) {
@@ -1078,7 +1081,7 @@ class PlayerFragment : Fragment() {
         exoPlayer.setMediaSource(mergeSource)
     }
 
-    private fun setResolutionAndSubtitles(view: View, response: Streams) {
+    private fun setResolutionAndSubtitles(response: Streams) {
         val videoFormatPreference =
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
@@ -1312,7 +1315,7 @@ class PlayerFragment : Fragment() {
     private fun subscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.subscribe(
                         token,
@@ -1335,7 +1338,7 @@ class PlayerFragment : Fragment() {
     private fun unsubscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.unsubscribe(
                         token,
@@ -1435,7 +1438,7 @@ class PlayerFragment : Fragment() {
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
-            isFullScreen = false
+            Globals.isFullScreen = false
         } else {
             // enable exoPlayer controls again
             exoPlayerView.useController = true
@@ -1450,7 +1453,7 @@ class PlayerFragment : Fragment() {
         binding.playerScrollView.getHitRect(bounds)
 
         if (SDK_INT >= Build.VERSION_CODES.O &&
-            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || isFullScreen)
+            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.isFullScreen)
         ) {
             activity?.enterPictureInPictureMode(updatePipParams())
         }

@@ -15,7 +15,7 @@
 
     </style>
 
-    <style name="OLED">
+    <style name="Black">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -116,7 +116,7 @@
 
     <style name="PlayerButton">
 
-        <item name="android:padding">6dp</item>
+        <item name="android:padding">9dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_width">36dp</item>
         <item name="android:layout_gravity">center</item>

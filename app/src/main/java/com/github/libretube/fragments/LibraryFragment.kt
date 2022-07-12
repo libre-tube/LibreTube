@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.databinding.FragmentLibraryBinding
@@ -77,7 +78,7 @@ class LibraryFragment : Fragment() {
     override fun onResume() {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = if (isMiniPlayerVisible) 180 else 64
+        layoutParams.bottomMargin = if (Globals.isMiniPlayerVisible) 180 else 64
         binding.createPlaylist.layoutParams = layoutParams
         super.onResume()
     }

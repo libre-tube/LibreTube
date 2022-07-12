@@ -3,13 +3,12 @@ package com.github.libretube.activities
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.preferences.MainSettings
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
-
-var isCurrentViewMainSettings = true
 
 class SettingsActivity : AppCompatActivity() {
     val TAG = "SettingsActivity"
@@ -46,11 +45,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (isCurrentViewMainSettings) {
+        if (Globals.isCurrentViewMainSettings) {
             super.onBackPressed()
             finishAndRemoveTask()
         } else {
-            isCurrentViewMainSettings = true
+            Globals.isCurrentViewMainSettings = true
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.settings, MainSettings())

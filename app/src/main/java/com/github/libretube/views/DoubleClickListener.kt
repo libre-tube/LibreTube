@@ -5,7 +5,7 @@ import android.os.Looper
 import android.view.View
 
 class DoubleClickListener(
-    private val doubleClickTimeLimitMills: Long = 300,
+    private val doubleClickTimeLimitMills: Long = 200,
     private val callback: Callback
 ) : View.OnClickListener {
     private var lastClicked: Long = -1L
