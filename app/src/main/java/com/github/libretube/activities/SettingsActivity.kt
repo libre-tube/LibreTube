@@ -8,17 +8,15 @@ import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.preferences.MainSettings
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.color.DynamicColors
 
 class SettingsActivity : AppCompatActivity() {
     val TAG = "SettingsActivity"
     lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DynamicColors.applyToActivityIfAvailable(this)
         ThemeHelper.updateTheme(this)
 
-        // makes the preference dialogs use material dialogs
+        // apply the theme for the preference dialogs
         setTheme(R.style.MaterialAlertDialog)
 
         super.onCreate(savedInstanceState)
