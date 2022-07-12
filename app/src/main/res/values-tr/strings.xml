@@ -228,7 +228,9 @@
     <string name="community">Toplum</string>
     <string name="discord">Discord</string>
     <string name="open">Açık …</string>
-    <string name="turnInternetOn">Lütfen, WiFi veya mobil verileri açarak internete bağlanın.</string>
+    <string name="turnInternetOn">Lütfen Wi-Fi veya mobil veriyi açarak internete bağlanın.</string>
     <string name="chapters">Bölümler</string>
     <string name="change_playback_speed">Oynatma hızı</string>
+    <string name="require_restart_message">Uygulama yeniden başlatılsın mı\? Uygulamanın bir sonraki başlatılışında değişiklikler uygulanacaktır.</string>
+    <string name="require_restart">Uygulamanın yeniden başlatılması gerekiyor</string>
 </resources>
