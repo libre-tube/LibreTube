@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -39,7 +40,7 @@ class DownloadDialog : DialogFragment() {
             val builder = MaterialAlertDialogBuilder(it)
             binding = DialogDownloadBinding.inflate(layoutInflater)
 
-            fetchStreams()
+            fetchAvailableSources()
 
             // request storage permissions if not granted yet
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -82,7 +83,7 @@ class DownloadDialog : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun fetchStreams() {
+    private fun fetchAvailableSources() {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getStreams(videoId)
@@ -110,9 +111,11 @@ class DownloadDialog : DialogFragment() {
 
         // add all available video streams
         for (vid in streams.videoStreams!!) {
-            val name = vid.quality + " " + vid.format
-            vidName.add(name)
-            vidUrl.add(vid.url!!)
+            if (vid.url != null) {
+                val name = vid.quality + " " + vid.format
+                vidName.add(name)
+                vidUrl.add(vid.url!!)
+            }
         }
 
         val audioName = arrayListOf<String>()
@@ -124,11 +127,14 @@ class DownloadDialog : DialogFragment() {
 
         // add all available audio streams
         for (audio in streams.audioStreams!!) {
-            val name = audio.quality + " " + audio.format
-            audioName.add(name)
-            audioUrl.add(audio.url!!)
+            if (audio.url != null) {
+                val name = audio.quality + " " + audio.format
+                audioName.add(name)
+                audioUrl.add(audio.url!!)
+            }
         }
 
+        // initialize the video sources
         val videoArrayAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
@@ -136,8 +142,9 @@ class DownloadDialog : DialogFragment() {
         )
         videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.videoSpinner.adapter = videoArrayAdapter
-        binding.videoSpinner.setSelection(1)
+        if (binding.videoSpinner.size >= 1) binding.videoSpinner.setSelection(1)
 
+        // initialize the audio sources
         val audioArrayAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
@@ -145,7 +152,7 @@ class DownloadDialog : DialogFragment() {
         )
         audioArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.audioSpinner.adapter = audioArrayAdapter
-        binding.audioSpinner.setSelection(1)
+        if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
         binding.download.setOnClickListener {
             val selectedAudioUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
