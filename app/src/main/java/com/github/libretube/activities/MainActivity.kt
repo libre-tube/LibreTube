@@ -299,6 +299,8 @@ class MainActivity : AppCompatActivity() {
         binding.mainMotionLayout.transitionToEnd()
         findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
         val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+        // set the animation duration
+        motionLayout.setTransitionDuration(250)
         motionLayout.transitionToEnd()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         with(motionLayout) {
