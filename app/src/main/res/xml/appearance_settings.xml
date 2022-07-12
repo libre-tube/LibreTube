@@ -9,7 +9,7 @@
             app:defaultValue="A"
             app:entries="@array/themes"
             app:entryValues="@array/themesValue"
-            app:key="theme_togglee"
+            app:key="theme_toggle"
             app:title="@string/app_theme"
             app:useSimpleSummaryProvider="true" />
 
