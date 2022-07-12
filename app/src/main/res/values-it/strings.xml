@@ -229,4 +229,8 @@
     <string name="reddit">Reddit</string>
     <string name="turnInternetOn">Connettiti a Internet attivando Wi-Fi o dati mobili.</string>
     <string name="open">Apri …</string>
+    <string name="chapters">Capitoli</string>
+    <string name="change_playback_speed">Velocità di riproduzione</string>
+    <string name="require_restart">È necessario riavviare l\'app</string>
+    <string name="require_restart_message">Riavviare l\'applicazione\? Le modifiche saranno applicate al successivo avvio dell\'applicazione.</string>
 </resources>
