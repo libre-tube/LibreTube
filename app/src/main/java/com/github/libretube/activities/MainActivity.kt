@@ -25,11 +25,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.github.libretube.Globals
 import com.github.libretube.PIPED_API_URL
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
-import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.ConnectionHelper
@@ -308,7 +308,7 @@ class MainActivity : AppCompatActivity() {
             enableTransition(R.id.yt_transition, true)
         }
         findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-        isFullScreen = false
+        Globals.isFullScreen = false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
