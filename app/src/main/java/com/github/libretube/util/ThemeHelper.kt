@@ -12,23 +12,42 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import com.github.libretube.R
 import com.github.libretube.preferences.PreferenceHelper
+import com.google.android.material.color.DynamicColors
 
 object ThemeHelper {
 
-    fun updateTheme(context: Context) {
-        updateAccentColor(context)
-        updateThemeMode(context)
+    fun updateTheme(activity: AppCompatActivity) {
+        updateAccentColor(activity)
+        updateThemeMode(activity)
     }
 
-    private fun updateAccentColor(context: Context) {
-        when (PreferenceHelper.getString(context, "accent_color", "purple")) {
-            "my" -> context.setTheme(R.style.MaterialYou)
-            "red" -> context.setTheme(R.style.Theme_Red)
-            "blue" -> context.setTheme(R.style.Theme_Blue)
-            "yellow" -> context.setTheme(R.style.Theme_Yellow)
-            "green" -> context.setTheme(R.style.Theme_Green)
-            "purple" -> context.setTheme(R.style.Theme_Purple)
+    private fun updateAccentColor(activity: AppCompatActivity) {
+        val theme = when (
+            PreferenceHelper.getString(
+                activity,
+                "accent_color",
+                "purple"
+            )
+        ) {
+            "my" -> {
+                applyDynamicColors(activity)
+                R.style.MaterialYou
+            }
+            "red" -> R.style.Theme_Red
+            "blue" -> R.style.Theme_Blue
+            "yellow" -> R.style.Theme_Yellow
+            "green" -> R.style.Theme_Green
+            "purple" -> R.style.Theme_Purple
+            else -> R.style.Theme_Purple
         }
+        activity.setTheme(theme)
+    }
+
+    private fun applyDynamicColors(activity: AppCompatActivity) {
+        /**
+         * apply dynamic colors to the activity
+         */
+        DynamicColors.applyToActivityIfAvailable(activity)
     }
 
     private fun updateThemeMode(context: Context) {

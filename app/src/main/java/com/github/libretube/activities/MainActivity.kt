@@ -37,7 +37,6 @@ import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.color.DynamicColors
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.navigation.NavigationBarView
 
@@ -50,20 +49,9 @@ class MainActivity : AppCompatActivity() {
     private var startFragmentId = R.id.homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        /**
-         * apply dynamic colors if enabled
-         */
-        val materialColorsEnabled = PreferenceHelper
-            .getString(this, "accent_color", "purple") == "my"
-        if (materialColorsEnabled) {
-            // apply dynamic colors to the current activity
-            DynamicColors.applyToActivityIfAvailable(this)
-            // apply dynamic colors to the all other activities
-            DynamicColors.applyToActivitiesIfAvailable(application)
-        }
-
-        // set the theme
+        // set the app theme (e.g. Material You)
         ThemeHelper.updateTheme(this)
+
         // set the language
         LocaleHelper.updateLanguage(this)
 

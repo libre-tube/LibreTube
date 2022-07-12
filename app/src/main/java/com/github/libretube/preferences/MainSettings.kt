@@ -7,8 +7,8 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
+import com.github.libretube.Globals
 import com.github.libretube.R
-import com.github.libretube.activities.isCurrentViewMainSettings
 import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.checkUpdate
@@ -94,7 +94,7 @@ class MainSettings : PreferenceFragmentCompat() {
     }
 
     private fun navigateToSettingsFragment(newFragment: Fragment) {
-        isCurrentViewMainSettings = false
+        Globals.isCurrentViewMainSettings = false
         parentFragmentManager.beginTransaction()
             .replace(R.id.settings, newFragment)
             .commitNow()
