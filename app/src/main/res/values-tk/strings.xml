@@ -1,2 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="startpage">Esasy</string>
+    <string name="subscribe">Ýazyl</string>
+    <string name="loggedout">Hasapdan çykyldy.</string>
+    <string name="already_logged_in">Siz eýýäm hasaba girdiňiz. Siz hasapdan cykyp bilersiňiz.</string>
+    <string name="subscriptions">Abunalar</string>
+    <string name="library">Kitaphana</string>
+    <string name="yes">Hawa</string>
+    <string name="choose_quality_dialog">Hil</string>
+    <string name="search_hint">Gözle</string>
+    <string name="videos">Wideo</string>
+    <string name="unsubscribe">Çykmak</string>
+    <string name="share">Paýlaş</string>
+    <string name="download">Göçürip al</string>
+    <string name="save">Belle</string>
+    <string name="username">Ulanyjy ady</string>
+    <string name="password">Kod</string>
+    <string name="login">Girmek</string>
+    <string name="register">Hasaba al</string>
+    <string name="logout">Hasapdan çyk</string>
+    <string name="cancel">Ýatyr</string>
+    <string name="loggedIn">Hasaba girildi.</string>
+    <string name="registered">Hasaba alyndy. Siz indi kanallara ýazylyp bilersiňiz.</string>
+    <string name="login_first">Ilki hasaba giriň we täzeden synanyşyp görüň.</string>
+</resources>
