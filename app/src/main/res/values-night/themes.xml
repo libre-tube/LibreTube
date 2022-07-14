@@ -8,6 +8,13 @@
 
     </style>
 
+    <style name="MaterialYou.Black" parent="MaterialYou">
+
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
+
+    </style>
+
     <style name="Theme.Red" parent="Theme.Material3.Dark.NoActionBar">
 
         <item name="colorPrimary">@color/red_dark_accentLight</item>
@@ -23,6 +30,13 @@
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+
+    </style>
+
+    <style name="Theme.Red.Black" parent="Theme.Red">
+
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
 
     </style>
 
@@ -44,6 +58,13 @@
 
     </style>
 
+    <style name="Theme.Blue.Black" parent="Theme.Blue">
+
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
+
+    </style>
+
     <style name="Theme.Yellow" parent="Theme.Material3.Dark.NoActionBar">
 
         <item name="colorPrimary">@color/yellow_dark_accentLight</item>
@@ -59,6 +80,13 @@
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+
+    </style>
+
+    <style name="Theme.Yellow.Black" parent="Theme.Yellow">
+
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
 
     </style>
 
@@ -80,6 +108,13 @@
 
     </style>
 
+    <style name="Theme.Green.Black" parent="Theme.Green">
+
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
+
+    </style>
+
     <style name="Theme.Purple" parent="Theme.Material3.Dark.NoActionBar">
 
         <item name="colorPrimary">@color/purple_dark_accentLight</item>
@@ -95,6 +130,13 @@
         <item name="android:statusBarColor" tools:targetApi="m">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+
+    </style>
+
+    <style name="Theme.Purple.Black" parent="Theme.Purple">
+
+        <item name="android:colorBackground">@android:color/black</item>
+        <item name="colorSurface">@android:color/black</item>
 
     </style>
 

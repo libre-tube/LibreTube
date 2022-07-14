@@ -9,7 +9,7 @@
             app:defaultValue="A"
             app:entries="@array/themes"
             app:entryValues="@array/themesValue"
-            app:key="theme_togglee"
+            app:key="theme_toggle"
             app:title="@string/app_theme"
             app:useSimpleSummaryProvider="true" />
 
@@ -49,6 +49,15 @@
             app:defaultValue="false"
             app:key="hide_trending_page"
             app:title="@string/hideTrendingPage"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_label"
+            app:defaultValue="always"
+            app:entries="@array/labelVisibility"
+            app:entryValues="@array/labelVisibilityValues"
+            app:key="label_visibility"
+            app:title="@string/navLabelVisibility"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference

@@ -229,4 +229,14 @@
     <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Please connect to the internet by turning on WiFi or mobile data.</string>
     <string name="open">Open …</string>
+    <string name="chapters">Chapters</string>
+    <string name="change_playback_speed">Playback speed</string>
+    <string name="require_restart">Restart required</string>
+    <string name="require_restart_message">This change requires an app restart. Do you want to restart the app now? Otherwise the changes will be applied on the next app restart.</string>
+    <string name="navLabelVisibility">Navbar label visibility</string>
+    <string name="always">Always</string>
+    <string name="selected">Selected</string>
+    <string name="never">Never</string>
+    <string name="autoRotatePlayer">Auto fullscreen</string>
+    <string name="autoRotatePlayer_summary">Automatically switch to player fullscreen when the device gets turned.</string>
 </resources>

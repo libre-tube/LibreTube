@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.activities.requireMainActivityRestart
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.obj.DeleteUserRequest
 import com.github.libretube.preferences.PreferenceHelper
@@ -55,10 +54,10 @@ class DeleteAccountDialog : DialogFragment() {
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
-                requireMainActivityRestart = true
                 Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
                 logout()
-                dialog?.dismiss()
+                val restartDialog = RequireRestartDialog()
+                restartDialog.show(childFragmentManager, "RequireRestartDialog")
             }
         }
         run()

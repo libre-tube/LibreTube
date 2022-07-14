@@ -7,9 +7,9 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
+import com.github.libretube.Globals
 import com.github.libretube.R
-import com.github.libretube.activities.isCurrentViewMainSettings
-import com.github.libretube.activities.requireMainActivityRestart
+import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.checkUpdate
 
@@ -25,7 +25,8 @@ class MainSettings : PreferenceFragmentCompat() {
 
         val region = findPreference<Preference>("region")
         region?.setOnPreferenceChangeListener { _, _ ->
-            requireMainActivityRestart = true
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
@@ -93,7 +94,7 @@ class MainSettings : PreferenceFragmentCompat() {
     }
 
     private fun navigateToSettingsFragment(newFragment: Fragment) {
-        isCurrentViewMainSettings = false
+        Globals.isCurrentViewMainSettings = false
         parentFragmentManager.beginTransaction()
             .replace(R.id.settings, newFragment)
             .commitNow()

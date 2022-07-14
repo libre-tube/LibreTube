@@ -227,4 +227,7 @@
     <string name="community">Comunidad</string>
     <string name="discord">Discord</string>
     <string name="twitter">Twitter</string>
+    <string name="turnInternetOn">Por favor, conéctese a Internet activando el WiFi o los datos móviles.</string>
+    <string name="open">Abrir…</string>
+    <string name="chapters">Capítulos</string>
 </resources>

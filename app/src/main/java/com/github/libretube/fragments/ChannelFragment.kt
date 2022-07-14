@@ -16,7 +16,6 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
-import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
@@ -58,7 +57,7 @@ class ChannelFragment : Fragment() {
             binding.channelRefresh.isRefreshing = true
             fetchChannel()
             if (PreferenceHelper.getToken(requireContext()) != "") {
-                isSubscribed(binding.channelSubscribe)
+                isSubscribed()
             }
         }
         refreshChannel()
@@ -81,7 +80,7 @@ class ChannelFragment : Fragment() {
             }
     }
 
-    private fun isSubscribed(button: MaterialButton) {
+    private fun isSubscribed() {
         @SuppressLint("ResourceAsColor")
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -91,28 +90,26 @@ class ChannelFragment : Fragment() {
                         channelId!!,
                         token
                     )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                     return@launchWhenCreated
                 }
 
                 runOnUiThread {
                     if (response.subscribed == true) {
                         isSubscribed = true
-                        button.text = getString(R.string.unsubscribe)
+                        binding.channelSubscribe.text = getString(R.string.unsubscribe)
                     }
                     if (response.subscribed != null) {
-                        button.setOnClickListener {
-                            if (isSubscribed) {
-                                unsubscribe()
-                                button.text = getString(R.string.subscribe)
-                            } else {
-                                subscribe()
-                                button.text = getString(R.string.unsubscribe)
+                        binding.channelSubscribe.apply {
+                            setOnClickListener {
+                                text = if (isSubscribed) {
+                                    unsubscribe()
+                                    getString(R.string.subscribe)
+                                } else {
+                                    subscribe()
+                                    getString(R.string.unsubscribe)
+                                }
                             }
                         }
                     }
@@ -125,19 +122,14 @@ class ChannelFragment : Fragment() {
     private fun subscribe() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channelId)
                     )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response$e")
-                    return@launchWhenCreated
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                 }
                 isSubscribed = true
             }
@@ -148,19 +140,14 @@ class ChannelFragment : Fragment() {
     private fun unsubscribe() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channelId)
                     )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    return@launchWhenCreated
+                } catch (e: Exception) {
+                    Log.e(TAG, e.toString())
                 }
                 isSubscribed = false
             }

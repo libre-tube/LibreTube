@@ -6,6 +6,8 @@ import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -31,6 +33,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.activities.hideKeyboard
@@ -53,6 +56,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.IS_DOWNLOAD_RUNNING
+import com.github.libretube.util.BackgroundMode
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
@@ -92,9 +96,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
-
-var isFullScreen = false
-var isMiniPlayerVisible = false
 
 class PlayerFragment : Fragment() {
 
@@ -137,7 +138,10 @@ class PlayerFragment : Fragment() {
     private lateinit var title: String
     private lateinit var uploader: String
     private lateinit var thumbnailUrl: String
+    private lateinit var chapters: List<ChapterSegment>
     private val sponsorBlockPrefs = SponsorBlockPrefs()
+
+    private var autoRotationEnabled = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,6 +165,34 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
+
+        // save whether auto rotation is enabled
+        autoRotationEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "auto_fullscreen",
+            false
+        )
+        val mainActivity = activity as MainActivity
+        if (autoRotationEnabled) {
+            // enable auto rotation
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+            onConfigurationChanged(resources.configuration)
+        } else {
+            // go to portrait mode
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
+
+        // save whether related streams and autoplay are enabled
+        autoplay = PreferenceHelper.getBoolean(
+            requireContext(),
+            "autoplay",
+            false
+        )
+        relatedStreamsEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "related_streams_toggle",
+            true
+        )
 
         setSponsorBlockPrefs()
         createExoPlayer(view)
@@ -205,11 +237,11 @@ class PlayerFragment : Fragment() {
                 val mainMotionLayout =
                     mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
-                    isMiniPlayerVisible = true
+                    Globals.isMiniPlayerVisible = true
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
-                    isMiniPlayerVisible = false
+                    Globals.isMiniPlayerVisible = false
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
                 }
@@ -228,19 +260,17 @@ class PlayerFragment : Fragment() {
         binding.playerMotionLayout.transitionToStart()
 
         binding.closeImageView.setOnClickListener {
-            isMiniPlayerVisible = false
+            Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
         }
         playerBinding.closeImageButton.setOnClickListener {
-            isMiniPlayerVisible = false
+            Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -259,9 +289,7 @@ class PlayerFragment : Fragment() {
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
-            binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
-            binding.descLinLayout.visibility =
-                if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
+            toggleDescription()
         }
 
         binding.commentsToggle.setOnClickListener {
@@ -269,10 +297,12 @@ class PlayerFragment : Fragment() {
         }
 
         // FullScreen button trigger
+        // hide fullscreen button if auto rotation enabled
+        playerBinding.fullscreen.visibility = if (autoRotationEnabled) View.GONE else View.VISIBLE
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
-            if (!isFullScreen) {
+            if (!Globals.isFullScreen) {
                 // go to fullscreen mode
                 setFullscreen()
             } else {
@@ -340,27 +370,27 @@ class PlayerFragment : Fragment() {
         val fullscreenOrientationPref = PreferenceHelper
             .getString(requireContext(), "fullscreen_orientation", "ratio")
 
-        val scaleFactor = 1.3F
-        playerBinding.exoPlayPause.scaleX = scaleFactor
-        playerBinding.exoPlayPause.scaleY = scaleFactor
+        scaleControls(1.3F)
 
-        val orientation = when (fullscreenOrientationPref) {
-            "ratio" -> {
-                val videoSize = exoPlayer.videoSize
-                // probably a youtube shorts video
-                Log.e(TAG, videoSize.height.toString() + " " + videoSize.width.toString())
-                if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                // a video with normal aspect ratio
-                else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+        if (!autoRotationEnabled) {
+            // different orientations of the video are only available when auto rotation is disabled
+            val orientation = when (fullscreenOrientationPref) {
+                "ratio" -> {
+                    val videoSize = exoPlayer.videoSize
+                    // probably a youtube shorts video
+                    if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                    // a video with normal aspect ratio
+                    else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                }
+                "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
+                "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
             }
-            "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
-            "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-            "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-            else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+            mainActivity.requestedOrientation = orientation
         }
-        mainActivity.requestedOrientation = orientation
 
-        isFullScreen = true
+        Globals.isFullScreen = true
     }
 
     private fun unsetFullscreen() {
@@ -375,14 +405,26 @@ class PlayerFragment : Fragment() {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
 
-        val scaleFactor = 1F
+        scaleControls(1F)
+
+        if (!autoRotationEnabled) {
+            // switch back to portrait mode if auto rotation disabled
+            val mainActivity = activity as MainActivity
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
+
+        Globals.isFullScreen = false
+    }
+
+    private fun scaleControls(scaleFactor: Float) {
         playerBinding.exoPlayPause.scaleX = scaleFactor
         playerBinding.exoPlayPause.scaleY = scaleFactor
+    }
 
-        val mainActivity = activity as MainActivity
-        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-
-        isFullScreen = false
+    private fun toggleDescription() {
+        binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
+        binding.descLinLayout.visibility =
+            if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
     }
 
     private fun toggleComments() {
@@ -492,16 +534,12 @@ class PlayerFragment : Fragment() {
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
 
-                // save whether related streams and autoplay are enabled
-                autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
-                relatedStreamsEnabled =
-                    PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
 
                 runOnUiThread {
                     // set media sources for the player
-                    setResolutionAndSubtitles(view, response)
+                    setResolutionAndSubtitles(response)
                     prepareExoPlayerView()
                     initializePlayerView(view, response)
                     seekToWatchPosition()
@@ -682,7 +720,6 @@ class PlayerFragment : Fragment() {
             setShowSubtitleButton(true)
             setShowNextButton(false)
             setShowPreviousButton(false)
-            setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL)
             // controllerShowTimeoutMs = 1500
             controllerHideOnTouch = true
             useController = false
@@ -709,7 +746,33 @@ class PlayerFragment : Fragment() {
         enableDoubleTapToSeek()
 
         // init the chapters recyclerview
-        if (response.chapters != null) initializeChapters(response.chapters)
+        if (response.chapters != null) {
+            chapters = response.chapters
+            initializeChapters()
+        }
+
+        // set default playback speed
+        val playbackSpeed =
+            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")!!
+        val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
+        val playbackSpeedValues =
+            context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
+        exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
+        val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
+        playerBinding.speedText.text = playbackSpeeds[speedIndex]
+
+        // change playback speed button
+        playerBinding.speedText.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.change_playback_speed)
+                .setItems(playbackSpeeds) { _, index ->
+                    // set the new playback speed
+                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
+                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
+                    playerBinding.speedText.text = playbackSpeeds[index]
+                }
+                .show()
+        }
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -777,11 +840,37 @@ class PlayerFragment : Fragment() {
             }
         })
 
+        // repeat toggle button
+        playerBinding.repeatToggle.setOnClickListener {
+            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
+                // turn off repeat mode
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+                playerBinding.repeatToggle.setColorFilter(Color.GRAY)
+            } else {
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+                playerBinding.repeatToggle.setColorFilter(Color.WHITE)
+            }
+        }
+
         // share button
         binding.relPlayerShare.setOnClickListener {
             val shareDialog = ShareDialog(videoId!!, false)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
+
+        binding.relPlayerBackground.setOnClickListener {
+            // pause the current player
+            exoPlayer.pause()
+
+            // start the background mode
+            BackgroundMode
+                .getInstance()
+                .playOnBackgroundMode(
+                    requireContext(),
+                    videoId!!
+                )
+        }
+
         // check if livestream
         if (response.duration!! > 0) {
             // download clicked
@@ -850,7 +939,7 @@ class PlayerFragment : Fragment() {
         if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
             isSubscribed(binding.playerSubscribe, channelId!!)
-            binding.save.setOnClickListener {
+            binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
@@ -903,6 +992,12 @@ class PlayerFragment : Fragment() {
         )
     }
 
+    private fun disableDoubleTapToSeek() {
+        // disable fast forward and rewind by double tapping
+        binding.forwardFL.visibility = View.GONE
+        binding.rewindFL.visibility = View.GONE
+    }
+
     // toggle the visibility of the player controller
     private fun toggleController() {
         if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
@@ -917,10 +1012,15 @@ class PlayerFragment : Fragment() {
             }
 
             override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                exoPlayer.seekTo(position)
+                val minTimeDiff = 10 * 1000 // 10s
+                // get the difference between the new and the old position
+                val diff = abs(exoPlayer.currentPosition - position)
+                // seek only when the difference is greater than 10 seconds
+                if (diff >= minTimeDiff) exoPlayer.seekTo(position)
             }
 
             override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
+                exoPlayer.seekTo(position)
                 exoPlayer.play()
                 Handler(Looper.getMainLooper()).postDelayed({
                     exoPlayerView.hideController()
@@ -929,13 +1029,67 @@ class PlayerFragment : Fragment() {
         })
     }
 
-    private fun initializeChapters(chapters: List<ChapterSegment>) {
+    private fun initializeChapters() {
         if (chapters.isNotEmpty()) {
+            // enable chapters in the video description
             binding.chaptersRecView.layoutManager =
-                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
             binding.chaptersRecView.visibility = View.VISIBLE
+
+            // enable the chapters dialog in the player
+            val titles = mutableListOf<String>()
+            chapters.forEach {
+                titles += it.title!!
+            }
+            playerBinding.chapterLL.visibility = View.VISIBLE
+            playerBinding.chapterLL.setOnClickListener {
+                if (Globals.isFullScreen) {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.chapters)
+                        .setItems(titles.toTypedArray()) { _, index ->
+                            val position = chapters[index].start!! * 1000
+                            exoPlayer.seekTo(position)
+                        }
+                        .show()
+                } else {
+                    toggleDescription()
+                }
+            }
+            setCurrentChapterName()
         }
+    }
+
+    // set the name of the video chapter in the exoPlayerView
+    private fun setCurrentChapterName() {
+        // call the function again in 100ms
+        exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
+
+        val chapterName = getCurrentChapterName()
+
+        // change the chapter name textView text to the chapterName
+        if (chapterName != null && chapterName != playerBinding.chapterName.text) {
+            playerBinding.chapterName.text = chapterName
+        }
+    }
+
+    // get the name of the currently played chapter
+    private fun getCurrentChapterName(): String? {
+        val currentPosition = exoPlayer.currentPosition
+        var chapterName: String? = null
+
+        chapters.forEach {
+            // check whether the chapter start is greater than the current player position
+            if (currentPosition >= it.start!! * 1000) {
+                // save chapter title if found
+                chapterName = it.title
+            }
+        }
+        return chapterName
     }
 
     private fun setMediaSource(
@@ -960,7 +1114,7 @@ class PlayerFragment : Fragment() {
         exoPlayer.setMediaSource(mergeSource)
     }
 
-    private fun setResolutionAndSubtitles(view: View, response: Streams) {
+    private fun setResolutionAndSubtitles(response: Streams) {
         val videoFormatPreference =
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
         val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
@@ -976,8 +1130,8 @@ class PlayerFragment : Fragment() {
 
         for (vid in response.videoStreams!!) {
             // append quality to list if it has the preferred format (e.g. MPEG)
-            if (vid.format.equals(videoFormatPreference)) { // preferred format
-                videosNameArray += vid.quality!!
+            if (vid.format.equals(videoFormatPreference) && vid.url != null) { // preferred format
+                videosNameArray += vid.quality.toString()
                 videosUrlArray += vid.url!!.toUri()
             } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format)
                 videosNameArray += "LBRY MP4"
@@ -1039,7 +1193,7 @@ class PlayerFragment : Fragment() {
             }
         }
 
-        playerBinding.qualityLinLayout.setOnClickListener {
+        playerBinding.qualityText.setOnClickListener {
             // Dialog for quality selection
             val builder: MaterialAlertDialogBuilder? = activity?.let {
                 MaterialAlertDialogBuilder(it)
@@ -1074,13 +1228,8 @@ class PlayerFragment : Fragment() {
     }
 
     private fun createExoPlayer(view: View) {
-        val playbackSpeed =
-            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")?.toFloat()
-        // multiply by thousand: s -> ms
         val bufferingGoal =
             PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
-        val seekIncrement =
-            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
@@ -1112,13 +1261,9 @@ class PlayerFragment : Fragment() {
         exoPlayer = ExoPlayer.Builder(view.context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
-            .setSeekBackIncrementMs(seekIncrement)
-            .setSeekForwardIncrementMs(seekIncrement)
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
-
-        exoPlayer.setPlaybackSpeed(playbackSpeed!!)
     }
 
     private fun initializePlayerNotification(c: Context) {
@@ -1145,13 +1290,18 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    // lock the player
     private fun lockPlayer(isLocked: Boolean) {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
+
         playerBinding.exoTopBarRight.visibility = visibility
         playerBinding.exoPlayPause.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility = visibility
+
+        // disable double tap to seek when the player is locked
+        if (isLocked) enableDoubleTapToSeek() else disableDoubleTapToSeek()
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
@@ -1198,7 +1348,7 @@ class PlayerFragment : Fragment() {
     private fun subscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.subscribe(
                         token,
@@ -1221,7 +1371,7 @@ class PlayerFragment : Fragment() {
     private fun unsubscribe(channel_id: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                try {
                     val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.unsubscribe(
                         token,
@@ -1305,28 +1455,19 @@ class PlayerFragment : Fragment() {
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
+            // hide and disable exoPlayer controls
             exoPlayerView.hideController()
             exoPlayerView.useController = false
-            binding.linLayout.visibility = View.GONE
 
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                enableTransition(R.id.yt_transition, false)
-            }
-            binding.mainContainer.isClickable = true
+            unsetFullscreen()
 
-            val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-            isFullScreen = false
+            Globals.isFullScreen = false
         } else {
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                enableTransition(R.id.yt_transition, true)
-            }
-
+            // enable exoPlayer controls again
             exoPlayerView.useController = true
-            binding.linLayout.visibility = View.VISIBLE
-            binding.mainContainer.isClickable = false
+
+            // switch back to portrait mode
+            unsetFullscreen()
         }
     }
 
@@ -1335,7 +1476,7 @@ class PlayerFragment : Fragment() {
         binding.playerScrollView.getHitRect(bounds)
 
         if (SDK_INT >= Build.VERSION_CODES.O &&
-            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || isFullScreen)
+            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.isFullScreen)
         ) {
             activity?.enterPictureInPictureMode(updatePipParams())
         }
@@ -1344,4 +1485,19 @@ class PlayerFragment : Fragment() {
     private fun updatePipParams() = PictureInPictureParams.Builder()
         .setActions(emptyList())
         .build()
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if (autoRotationEnabled) {
+            val orientation = newConfig.orientation
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                // go to fullscreen mode
+                setFullscreen()
+            } else {
+                // exit fullscreen if not landscape
+                unsetFullscreen()
+            }
+        }
+    }
 }

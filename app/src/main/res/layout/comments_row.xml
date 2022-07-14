@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -23,8 +24,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/commentor_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_marginEnd="16dp"
                 app:srcCompat="@mipmap/ic_launcher" />
 
@@ -52,7 +53,7 @@
                         android:id="@+id/verified_imageView"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_verified" />
@@ -61,7 +62,7 @@
                         android:id="@+id/pinned_imageView"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="4dp"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_pinned" />
@@ -85,7 +86,7 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         app:srcCompat="@drawable/ic_thumb_up" />
 
                     <TextView
@@ -98,7 +99,7 @@
                         android:id="@+id/hearted_imageView"
                         android:layout_width="14dp"
                         android:layout_height="14dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="3dp"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_hearted" />
@@ -110,6 +111,7 @@
             android:id="@+id/replies_recView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:background="@null"
             android:nestedScrollingEnabled="false" />
 

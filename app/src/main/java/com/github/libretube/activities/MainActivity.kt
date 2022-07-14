@@ -3,7 +3,6 @@ package com.github.libretube.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
@@ -25,10 +24,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.github.libretube.Globals
+import com.github.libretube.PIPED_API_URL
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
-import com.github.libretube.fragments.isFullScreen
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.ConnectionHelper
@@ -36,8 +36,8 @@ import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.color.DynamicColors
 import com.google.android.material.elevation.SurfaceColors
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity"
@@ -48,20 +48,9 @@ class MainActivity : AppCompatActivity() {
     private var startFragmentId = R.id.homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        /**
-         * apply dynamic colors if enabled
-         */
-        val materialColorsEnabled = PreferenceHelper
-            .getString(this, "accent_color", "purple") == "my"
-        if (materialColorsEnabled) {
-            // apply dynamic colors to the current activity
-            DynamicColors.applyToActivityIfAvailable(this)
-            // apply dynamic colors to the all other activities
-            DynamicColors.applyToActivitiesIfAvailable(application)
-        }
-
-        // set the theme
+        // set the app theme (e.g. Material You)
         ThemeHelper.updateTheme(this)
+
         // set the language
         LocaleHelper.updateLanguage(this)
 
@@ -73,14 +62,14 @@ class MainActivity : AppCompatActivity() {
         CronetHelper.initCronet(this.applicationContext)
 
         RetrofitInstance.url =
-            PreferenceHelper.getString(this, "selectInstance", "https://pipedapi.kavin.rocks/")!!
+            PreferenceHelper.getString(this, "selectInstance", PIPED_API_URL)!!
         // set auth instance
         RetrofitInstance.authUrl =
             if (PreferenceHelper.getBoolean(this, "auth_instance_toggle", false)) {
                 PreferenceHelper.getString(
                     this,
                     "selectAuthInstance",
-                    "https://pipedapi.kavin.rocks/"
+                    PIPED_API_URL
                 )!!
             } else {
                 RetrofitInstance.url
@@ -93,8 +82,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
-
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
             navController = findNavController(R.id.fragment)
             binding.bottomNav.setupWithNavController(navController)
@@ -124,6 +111,16 @@ class MainActivity : AppCompatActivity() {
             // navigate to the default fragment
             navController.navigate(startFragmentId)
 
+            val labelVisibilityMode = when (
+                PreferenceHelper.getString(this, "label_visibility", "always")
+            ) {
+                "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
+                "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
+                "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
+                else -> NavigationBarView.LABEL_VISIBILITY_AUTO
+            }
+            binding.bottomNav.labelVisibilityMode = labelVisibilityMode
+
             binding.bottomNav.setOnItemSelectedListener {
                 // clear backstack if it's the start fragment
                 if (startFragmentId == it.itemId) navController.backQueue.clear()
@@ -141,12 +138,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 false
             }
-
-            /**
-             * don't remove this line
-             * this prevents reselected items at the bottomNav to be duplicated in the backstack
-             */
-            binding.bottomNav.setOnItemReselectedListener {}
 
             binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
@@ -293,14 +284,15 @@ class MainActivity : AppCompatActivity() {
         binding.mainMotionLayout.transitionToEnd()
         findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
         val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
+        // set the animation duration
+        motionLayout.setTransitionDuration(250)
         motionLayout.transitionToEnd()
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         with(motionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
             enableTransition(R.id.yt_transition, true)
         }
         findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-        isFullScreen = false
+        Globals.isFullScreen = false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

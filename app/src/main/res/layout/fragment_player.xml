@@ -49,7 +49,7 @@
                     android:id="@+id/player_description_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
@@ -73,7 +73,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     android:layout_marginTop="2dp">
 
                     <ImageView
@@ -93,7 +93,7 @@
                         android:layout_width="12dp"
                         android:layout_height="12dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:rotation="180"
                         android:src="@drawable/ic_like" />
 
@@ -119,7 +119,6 @@
                     android:id="@+id/chapters_recView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/comments_toggle"
                     android:layout_marginHorizontal="3dp"
                     android:layout_marginTop="20dp"
                     android:nestedScrollingEnabled="false"
@@ -193,7 +192,7 @@
                             android:layout_width="24dp"
                             android:layout_height="25dp"
                             android:padding="2dp"
-                            android:src="@drawable/ic_player" />
+                            android:src="@drawable/ic_videocam" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -203,7 +202,22 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/save"
+                        android:id="@+id/relPlayer_background"
+                        style="@style/PlayerActionsLayout">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_headphones" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/audio" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/relPlayer_save"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -245,7 +259,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_toStartOf="@+id/player_subscribe"
                     android:layout_toEndOf="@+id/player_channelImage"
                     android:ellipsize="end"
@@ -265,7 +279,7 @@
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:cornerRadius="11dp" />
             </RelativeLayout>
 
@@ -297,7 +311,7 @@
                             android:id="@+id/commentsToggle_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
                             android:text="@string/comments"
                             android:textSize="17sp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -307,7 +321,7 @@
                             android:id="@+id/commentsToggle_imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="3dp"
+                            android:layout_marginEnd="3dp"
                             android:src="@drawable/ic_arrow_up_down"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -357,49 +371,64 @@
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@id/main_container"
         app:layout_constraintStart_toStartOf="@id/main_container"
         app:layout_constraintTop_toTopOf="@id/main_container"
         app:show_buffering="when_playing">
 
-        <FrameLayout
-            android:id="@+id/forwardFL"
-            android:layout_width="wrap_content"
+        <!-- double tap to rewind/forward overlay -->
+        <LinearLayout
+            android:id="@+id/doubleTapOverlayLL"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|end"
             android:layout_marginVertical="50dp">
 
-            <ImageButton
-                android:id="@+id/forwardBTN"
-                android:layout_width="150dp"
+            <!-- double tap rewind btn -->
+            <FrameLayout
+                android:id="@+id/rewindFL"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:clickable="false"
-                android:src="@drawable/ic_forward"
-                android:visibility="invisible"
-                app:tint="@android:color/white" />
+                android:layout_weight=".35">
 
-        </FrameLayout>
+                <ImageButton
+                    android:id="@+id/rewindBTN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:src="@drawable/ic_rewind"
+                    android:visibility="invisible"
+                    app:tint="@android:color/white" />
 
-        <FrameLayout
-            android:id="@+id/rewindFL"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginVertical="50dp">
+            </FrameLayout>
 
-            <ImageButton
-                android:id="@+id/rewindBTN"
-                android:layout_width="150dp"
+            <!-- place holder for the center controls -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="?android:selectableItemBackgroundBorderless"
-                android:clickable="false"
-                android:src="@drawable/ic_rewind"
-                android:visibility="invisible"
-                app:tint="@android:color/white" />
+                android:layout_weight=".30" />
 
-        </FrameLayout>
+            <!-- double tap forward btn -->
+            <FrameLayout
+                android:id="@+id/forwardFL"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".35">
+
+                <ImageButton
+                    android:id="@+id/forwardBTN"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:src="@drawable/ic_forward"
+                    android:visibility="invisible"
+                    app:tint="@android:color/white" />
+
+            </FrameLayout>
+
+        </LinearLayout>
 
     </com.github.libretube.views.CustomExoPlayerView>
 
