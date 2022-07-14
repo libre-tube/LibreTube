@@ -170,7 +170,7 @@ class PlayerFragment : Fragment() {
         autoRotationEnabled = PreferenceHelper.getBoolean(
             requireContext(),
             "auto_fullscreen",
-            true
+            false
         )
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
