@@ -3,7 +3,6 @@ package com.github.libretube.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
@@ -83,8 +82,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
-
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
             navController = findNavController(R.id.fragment)
             binding.bottomNav.setupWithNavController(navController)
@@ -290,7 +287,6 @@ class MainActivity : AppCompatActivity() {
         // set the animation duration
         motionLayout.setTransitionDuration(250)
         motionLayout.transitionToEnd()
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         with(motionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
             enableTransition(R.id.yt_transition, true)

@@ -6,6 +6,7 @@ import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
@@ -140,6 +141,8 @@ class PlayerFragment : Fragment() {
     private lateinit var chapters: List<ChapterSegment>
     private val sponsorBlockPrefs = SponsorBlockPrefs()
 
+    private var autoRotationEnabled = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -162,6 +165,34 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
+
+        // save whether auto rotation is enabled
+        autoRotationEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "auto_fullscreen",
+            true
+        )
+        val mainActivity = activity as MainActivity
+        if (autoRotationEnabled) {
+            // enable auto rotation
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+            onConfigurationChanged(resources.configuration)
+        } else {
+            // go to portrait mode
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
+
+        // save whether related streams and autoplay are enabled
+        autoplay = PreferenceHelper.getBoolean(
+            requireContext(),
+            "autoplay",
+            false
+        )
+        relatedStreamsEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "related_streams_toggle",
+            true
+        )
 
         setSponsorBlockPrefs()
         createExoPlayer(view)
@@ -232,7 +263,6 @@ class PlayerFragment : Fragment() {
             Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -241,7 +271,6 @@ class PlayerFragment : Fragment() {
             Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -268,6 +297,8 @@ class PlayerFragment : Fragment() {
         }
 
         // FullScreen button trigger
+        // hide fullscreen button if auto rotation enabled
+        playerBinding.fullscreen.visibility = if (autoRotationEnabled) View.GONE else View.VISIBLE
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
@@ -341,20 +372,23 @@ class PlayerFragment : Fragment() {
 
         scaleControls(1.3F)
 
-        val orientation = when (fullscreenOrientationPref) {
-            "ratio" -> {
-                val videoSize = exoPlayer.videoSize
-                // probably a youtube shorts video
-                if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                // a video with normal aspect ratio
-                else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+        if (!autoRotationEnabled) {
+            // different orientations of the video are only available when auto rotation is disabled
+            val orientation = when (fullscreenOrientationPref) {
+                "ratio" -> {
+                    val videoSize = exoPlayer.videoSize
+                    // probably a youtube shorts video
+                    if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                    // a video with normal aspect ratio
+                    else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                }
+                "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
+                "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
             }
-            "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
-            "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
-            "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-            else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+            mainActivity.requestedOrientation = orientation
         }
-        mainActivity.requestedOrientation = orientation
 
         Globals.isFullScreen = true
     }
@@ -373,8 +407,11 @@ class PlayerFragment : Fragment() {
 
         scaleControls(1F)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        if (!autoRotationEnabled) {
+            // switch back to portrait mode if auto rotation disabled
+            val mainActivity = activity as MainActivity
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
 
         Globals.isFullScreen = false
     }
@@ -497,10 +534,6 @@ class PlayerFragment : Fragment() {
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
 
-                // save whether related streams and autoplay are enabled
-                autoplay = PreferenceHelper.getBoolean(requireContext(), "autoplay", false)
-                relatedStreamsEnabled =
-                    PreferenceHelper.getBoolean(requireContext(), "related_streams_toggle", true)
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
 
@@ -1426,17 +1459,7 @@ class PlayerFragment : Fragment() {
             exoPlayerView.hideController()
             exoPlayerView.useController = false
 
-            // hide anything but the player
-            binding.linLayout.visibility = View.GONE
-            binding.mainContainer.isClickable = true
-
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
-                enableTransition(R.id.yt_transition, false)
-            }
-
-            val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+            unsetFullscreen()
 
             Globals.isFullScreen = false
         } else {
@@ -1462,4 +1485,19 @@ class PlayerFragment : Fragment() {
     private fun updatePipParams() = PictureInPictureParams.Builder()
         .setActions(emptyList())
         .build()
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if (autoRotationEnabled) {
+            val orientation = newConfig.orientation
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                // go to fullscreen mode
+                setFullscreen()
+            } else {
+                // exit fullscreen if not landscape
+                unsetFullscreen()
+            }
+        }
+    }
 }
