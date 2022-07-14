@@ -1196,9 +1196,10 @@ class PlayerFragment : Fragment() {
         val defRes = PreferenceHelper.getString(
             requireContext(),
             "default_resolution",
-            "auto"
+            "hls"
         )!!
-        if (defRes != "auto") {
+
+        if (defRes != "hls") {
             videosNameArray.forEachIndexed { index, pipedStream ->
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
@@ -1210,6 +1211,7 @@ class PlayerFragment : Fragment() {
                 }
             }
         }
+
         // if default resolution isn't set or available, use hls if available
         if (streams.hls != null) {
             val mediaItem: MediaItem = MediaItem.Builder()
