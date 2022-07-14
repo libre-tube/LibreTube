@@ -1303,7 +1303,8 @@ class PlayerFragment : Fragment() {
         playerBinding.exoPlayPause.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
-        playerBinding.exoTitle.visibility = visibility
+        playerBinding.exoTitle.visibility =
+            if (isLocked && Globals.isFullScreen) View.VISIBLE else View.INVISIBLE
 
         // disable double tap to seek when the player is locked
         if (isLocked) enableDoubleTapToSeek() else disableDoubleTapToSeek()

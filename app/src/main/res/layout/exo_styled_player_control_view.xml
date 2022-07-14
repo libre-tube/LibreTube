@@ -20,28 +20,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layoutDirection="ltr"
-            android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
+            android:layout_marginStart="5dp"
+            android:layoutDirection="ltr">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/close_imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:background="#00FFFFFF"
-                android:padding="@dimen/exo_icon_padding"
+                style="@style/PlayerControlTop"
                 android:src="@drawable/ic_close"
                 app:tint="@android:color/white" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/lock_player"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:padding="@dimen/exo_icon_padding"
+                style="@style/PlayerControlTop"
+                android:layout_marginStart="-5dp"
+                android:scaleX=".9"
+                android:scaleY=".9"
                 android:src="@drawable/ic_unlocked" />
 
         </LinearLayout>
@@ -64,42 +57,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layoutDirection="ltr"
-            android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
+            android:layout_marginEnd="10dp"
+            android:layoutDirection="ltr">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/aspect_ratio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/exo_icon_padding"
+                style="@style/PlayerControlTop"
+                android:layout_marginTop="-1dp"
+                android:scaleX=".9"
+                android:scaleY=".9"
                 android:src="@drawable/ic_aspect_ratio" />
 
             <TextView
                 android:id="@+id/speed_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/exo_icon_padding"
-                android:text="1x"
-                android:textColor="#FFFFFF" />
+                style="@style/PlayerControlTop"
+                android:text="1x" />
 
             <TextView
                 android:id="@+id/quality_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="@dimen/exo_icon_padding"
-                android:text="@string/hls"
-                android:textColor="#FFFFFF" />
+                style="@style/PlayerControlTop"
+                android:text="@string/hls" />
 
         </LinearLayout>
 
@@ -116,7 +93,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-5dp"
             android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
             android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
@@ -176,17 +152,17 @@
 
                 <ImageButton
                     android:id="@+id/repeat_toggle"
-                    style="@style/PlayerButton"
+                    style="@style/PlayerControlBottom"
                     android:src="@drawable/ic_repeat"
                     app:tint="@android:color/darker_gray" />
 
                 <ImageButton
                     android:id="@id/exo_subtitle"
-                    style="@style/PlayerButton" />
+                    style="@style/PlayerControlBottom" />
 
                 <ImageButton
                     android:id="@+id/fullscreen"
-                    style="@style/PlayerButton"
+                    style="@style/PlayerControlBottom"
                     android:src="@drawable/ic_fullscreen"
                     app:tint="@android:color/white" />
 
