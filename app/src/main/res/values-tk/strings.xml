@@ -23,4 +23,9 @@
     <string name="loggedIn">Hasaba girildi.</string>
     <string name="registered">Hasaba alyndy. Siz indi kanallara ýazylyp bilersiňiz.</string>
     <string name="login_first">Ilki hasaba giriň we täzeden synanyşyp görüň.</string>
+    <string name="instances">Salgylanmany seç</string>
+    <string name="customInstance">Emeli salgylanma</string>
+    <string name="region">Ýer</string>
+    <string name="login_register">Gir/hasaba al</string>
+    <string name="please_login">Ilki bilen sazlamalarda hasaba alynyň ýa-da giriň.</string>
 </resources>
