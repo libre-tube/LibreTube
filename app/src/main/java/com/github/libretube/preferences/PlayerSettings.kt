@@ -23,7 +23,7 @@ class PlayerSettings : PreferenceFragmentCompat() {
         playerOrientation?.isEnabled != PreferenceHelper.getBoolean(
             requireContext(),
             "auto_fullscreen",
-            true
+            false
         )
 
         autoRotateToFullscreen?.setOnPreferenceChangeListener { _, newValue ->

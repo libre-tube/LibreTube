@@ -74,12 +74,11 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
-            app:defaultValue="true"
+            app:defaultValue="false"
             app:key="auto_fullscreen"
             app:title="@string/autoRotatePlayer" />
 
         <ListPreference
-            android:enabled="false"
             android:icon="@drawable/ic_flip"
             app:defaultValue="ratio"
             app:entries="@array/fullscreenOrientation"
