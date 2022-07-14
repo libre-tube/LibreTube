@@ -8,7 +8,7 @@
 
     </style>
 
-    <style name="MaterialYou.Black" parent="MaterialYou">
+    <style name="MaterialYou.Pure" parent="MaterialYou">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -33,7 +33,7 @@
 
     </style>
 
-    <style name="Theme.Red.Black" parent="Theme.Red">
+    <style name="Theme.Red.Pure" parent="Theme.Red">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -58,7 +58,7 @@
 
     </style>
 
-    <style name="Theme.Blue.Black" parent="Theme.Blue">
+    <style name="Theme.Blue.Pure" parent="Theme.Blue">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -83,7 +83,7 @@
 
     </style>
 
-    <style name="Theme.Yellow.Black" parent="Theme.Yellow">
+    <style name="Theme.Yellow.Pure" parent="Theme.Yellow">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -108,7 +108,7 @@
 
     </style>
 
-    <style name="Theme.Green.Black" parent="Theme.Green">
+    <style name="Theme.Green.Pure" parent="Theme.Green">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -133,7 +133,7 @@
 
     </style>
 
-    <style name="Theme.Purple.Black" parent="Theme.Purple">
+    <style name="Theme.Purple.Pure" parent="Theme.Purple">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
