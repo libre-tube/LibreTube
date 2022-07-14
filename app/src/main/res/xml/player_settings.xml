@@ -60,16 +60,26 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_play_filled"
             android:summary="@string/autoplay_summary"
+            app:defaultValue="true"
             app:key="autoplay"
             app:title="@string/player_autoplay" />
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_pause_filled"
             android:summary="@string/pauseOnScreenOff_summary"
+            app:defaultValue="false"
             app:key="pause_screen_off"
             app:title="@string/pauseOnScreenOff" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_rotating_circle"
+            android:summary="@string/autoRotatePlayer_summary"
+            app:defaultValue="true"
+            app:key="auto_fullscreen"
+            app:title="@string/autoRotatePlayer" />
+
         <ListPreference
+            android:enabled="false"
             android:icon="@drawable/ic_flip"
             app:defaultValue="ratio"
             app:entries="@array/fullscreenOrientation"
