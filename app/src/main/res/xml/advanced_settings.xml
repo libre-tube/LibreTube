@@ -33,7 +33,7 @@
 
     <PreferenceCategory app:title="@string/search_history">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_history_filled"
             app:key="search_history_toggle"
@@ -48,13 +48,13 @@
 
     <PreferenceCategory app:title="@string/watch_history">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_time_outlined"
             app:key="watch_history_toggle"
             app:title="@string/watch_history" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_play_filled"
             app:key="watch_position_toggle"

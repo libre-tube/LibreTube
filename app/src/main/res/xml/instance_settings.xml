@@ -23,7 +23,7 @@
             app:key="clearCustomInstances"
             app:title="@string/clear_customInstances" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_auth"
             app:key="auth_instance_toggle"

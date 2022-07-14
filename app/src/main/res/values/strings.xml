@@ -239,4 +239,6 @@
     <string name="never">Never</string>
     <string name="autoRotatePlayer">Auto fullscreen</string>
     <string name="autoRotatePlayer_summary">Automatically switch to player fullscreen when the device gets turned.</string>
+    <string name="pure_theme">Pure theme</string>
+    <string name="pure_theme_summary">Pure white/black theme</string>
 </resources>

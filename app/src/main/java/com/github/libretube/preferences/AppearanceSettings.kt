@@ -3,7 +3,7 @@ package com.github.libretube.preferences
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
@@ -20,6 +20,13 @@ class AppearanceSettings : PreferenceFragmentCompat() {
 
         val themeToggle = findPreference<ListPreference>("theme_toggle")
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            true
+        }
+
+        val pureTheme = findPreference<SwitchPreferenceCompat>("pure_theme")
+        pureTheme?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
@@ -46,7 +53,7 @@ class AppearanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val hideTrending = findPreference<SwitchPreference>("hide_trending_page")
+        val hideTrending = findPreference<SwitchPreferenceCompat>("hide_trending_page")
         hideTrending?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")

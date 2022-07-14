@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.CustomInstanceDialog
@@ -146,7 +146,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val authInstanceToggle = findPreference<SwitchPreference>("auth_instance_toggle")
+        val authInstanceToggle = findPreference<SwitchPreferenceCompat>("auth_instance_toggle")
         authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
             authInstance.isVisible = newValue == true
             logout()

@@ -533,14 +533,12 @@
         <item>@string/systemDefault</item>
         <item>@string/lightTheme</item>
         <item>@string/darkTheme</item>
-        <item>@string/oledTheme</item>
     </string-array>
 
     <string-array name="themesValue">
         <item>A</item>
         <item>L</item>
         <item>D</item>
-        <item>O</item>
     </string-array>
 
     <string-array name="accents">
