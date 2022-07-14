@@ -104,14 +104,27 @@
 
     </style>
 
-    <style name="PlayerButton">
+    <style name="PlayerControlBottom">
 
         <item name="android:padding">9dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_width">36dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
 
     </style>
+
+    <style name="PlayerControlTop">
+
+        <item name="android:padding">9dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:textColor">@android:color/white</item>
+
+    </style>
+
+
 
 </resources>
