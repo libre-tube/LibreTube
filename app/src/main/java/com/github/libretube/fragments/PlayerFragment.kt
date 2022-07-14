@@ -6,6 +6,7 @@ import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
@@ -163,6 +164,9 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
 
+        val mainActivity = activity as MainActivity
+        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+        onConfigurationChanged(resources.configuration)
         setSponsorBlockPrefs()
         createExoPlayer(view)
         initializeTransitionLayout(view)
@@ -232,7 +236,6 @@ class PlayerFragment : Fragment() {
             Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -241,7 +244,6 @@ class PlayerFragment : Fragment() {
             Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
@@ -374,7 +376,7 @@ class PlayerFragment : Fragment() {
         scaleControls(1F)
 
         val mainActivity = activity as MainActivity
-        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
 
         Globals.isFullScreen = false
     }
@@ -1435,9 +1437,6 @@ class PlayerFragment : Fragment() {
                 enableTransition(R.id.yt_transition, false)
             }
 
-            val mainActivity = activity as MainActivity
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-
             Globals.isFullScreen = false
         } else {
             // enable exoPlayer controls again
@@ -1462,4 +1461,22 @@ class PlayerFragment : Fragment() {
     private fun updatePipParams() = PictureInPictureParams.Builder()
         .setActions(emptyList())
         .build()
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val orientation = newConfig.orientation
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // go to fullscreen mode
+            setFullscreen()
+        } else {
+            // leave fullscreen mode
+            val rotationPref = PreferenceHelper.getString(
+                requireContext(),
+                "fullscreen_orientation",
+                "ratio"
+            )
+            if (rotationPref!! != "portrait") unsetFullscreen()
+        }
+    }
 }
