@@ -2,8 +2,6 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 
 object ConnectionHelper {
     fun isNetworkAvailable(context: Context): Boolean {
@@ -32,7 +30,7 @@ object ConnectionHelper {
             return connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
          */
-        
+
         return connectivityManager.activeNetworkInfo?.isConnected ?: false
     }
 }
