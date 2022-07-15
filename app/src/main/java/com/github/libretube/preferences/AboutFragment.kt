@@ -81,6 +81,13 @@ class AboutFragment : Fragment() {
             showSnackBar(text)
             true
         }
+
+        binding.community.setOnClickListener {
+            val communityFragment = CommunityFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.settings, communityFragment)
+                .commitNow()
+        }
     }
 
     private fun openLinkFromHref(link: String) {

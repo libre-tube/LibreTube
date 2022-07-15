@@ -1,7 +1,6 @@
 package com.github.libretube.util
 
 import android.content.Context
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.widget.ImageView
 import com.github.libretube.Globals

@@ -17,7 +17,6 @@ import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 
 class SubscriptionAdapter(
     private val videoFeed: List<StreamItem>,

@@ -12,7 +12,6 @@ import com.github.libretube.databinding.RepliesRowBinding
 import com.github.libretube.obj.Comment
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 
 class RepliesAdapter(
     private val replies: MutableList<Comment>

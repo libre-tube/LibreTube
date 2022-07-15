@@ -17,7 +17,6 @@ import com.github.libretube.obj.CommentsPage
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

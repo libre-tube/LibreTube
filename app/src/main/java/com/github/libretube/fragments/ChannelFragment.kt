@@ -17,7 +17,6 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 import retrofit2.HttpException
 import java.io.IOException
 

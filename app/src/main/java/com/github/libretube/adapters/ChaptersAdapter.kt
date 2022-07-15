@@ -7,7 +7,6 @@ import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.util.ConnectionHelper
 import com.google.android.exoplayer2.ExoPlayer
-import com.squareup.picasso.Picasso
 
 class ChaptersAdapter(
     private val chapters: List<ChapterSegment>,

@@ -16,7 +16,6 @@ import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.util.ConnectionHelper
-import com.squareup.picasso.Picasso
 
 class WatchHistoryAdapter(
     private val watchHistory: MutableList<WatchHistoryItem>,
