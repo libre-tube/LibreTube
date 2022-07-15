@@ -275,7 +275,8 @@ class MainActivity : AppCompatActivity() {
                 minimizePlayer()
             } catch (e: Exception) {
                 if (navController.currentDestination?.id == startFragmentId) {
-                    super.onBackPressed()
+                    // close app
+                    moveTaskToBack(true)
                 } else {
                     navController.popBackStack()
                 }
