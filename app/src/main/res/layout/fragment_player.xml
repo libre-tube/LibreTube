@@ -379,7 +379,7 @@
             android:id="@+id/doubleTapOverlayLL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginVertical="50dp">
+            android:layout_marginVertical="60dp">
 
             <!-- double tap rewind btn -->
             <FrameLayout
