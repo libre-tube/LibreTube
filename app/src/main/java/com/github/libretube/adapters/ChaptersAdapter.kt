@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.obj.ChapterSegment
+import com.github.libretube.util.ConnectionHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.squareup.picasso.Picasso
 
@@ -23,7 +24,7 @@ class ChaptersAdapter(
     override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
         val chapter = chapters[position]
         holder.binding.apply {
-            Picasso.get().load(chapter.image).fit().centerCrop().into(chapterImage)
+            ConnectionHelper.loadImage(chapter.image, chapterImage)
             chapterTitle.text = chapter.title
 
             root.setOnClickListener {

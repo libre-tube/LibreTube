@@ -12,6 +12,7 @@ import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +41,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         val subscription = subscriptions[position]
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
-            Picasso.get().load(subscription.avatar).into(subscriptionChannelImage)
+            ConnectionHelper.loadImage(subscription.avatar, subscriptionChannelImage)
             root.setOnClickListener {
                 val activity = root.context as MainActivity
                 val bundle = bundleOf("channel_id" to subscription.url)

@@ -15,6 +15,7 @@ import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.WatchHistoryItem
+import com.github.libretube.util.ConnectionHelper
 import com.squareup.picasso.Picasso
 
 class WatchHistoryAdapter(
@@ -43,8 +44,8 @@ class WatchHistoryAdapter(
             channelName.text = video.uploader
             uploadDate.text = video.uploadDate
             thumbnailDuration.text = DateUtils.formatElapsedTime(video.duration?.toLong()!!)
-            Picasso.get().load(video.thumbnailUrl).into(thumbnail)
-            Picasso.get().load(video.uploaderAvatar).into(channelImage)
+            ConnectionHelper.loadImage(video.thumbnailUrl, thumbnail)
+            ConnectionHelper.loadImage(video.uploaderAvatar, channelImage)
 
             channelImage.setOnClickListener {
                 val activity = root.context as MainActivity

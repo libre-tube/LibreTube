@@ -23,8 +23,7 @@
         <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_height="match_parent" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

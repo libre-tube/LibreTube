@@ -14,6 +14,7 @@ import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.squareup.picasso.Picasso
@@ -194,8 +195,8 @@ class ChannelFragment : Fragment() {
                         binding.channelDescription.text = response.description?.trim()
                     }
 
-                    Picasso.get().load(response.bannerUrl).into(binding.channelBanner)
-                    Picasso.get().load(response.avatarUrl).into(binding.channelImage)
+                    ConnectionHelper.loadImage(response.bannerUrl, binding.channelBanner)
+                    ConnectionHelper.loadImage(response.avatarUrl, binding.channelImage)
                     channelAdapter = ChannelAdapter(
                         response.relatedStreams!!.toMutableList(),
                         childFragmentManager

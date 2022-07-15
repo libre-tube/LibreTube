@@ -70,6 +70,12 @@
 
     <PreferenceCategory>
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_data_saver"
+            android:summary="@string/data_saver_mode_summary"
+            app:key="data_saver_mode"
+            app:title="@string/data_saver_mode" />
+
         <Preference
             android:icon="@drawable/ic_reset"
             app:key="reset_settings"

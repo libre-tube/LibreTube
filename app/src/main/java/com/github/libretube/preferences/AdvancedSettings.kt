@@ -3,6 +3,7 @@ package com.github.libretube.preferences
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
@@ -29,6 +30,13 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         clearWatchHistory?.setOnPreferenceClickListener {
             PreferenceHelper.removePreference(requireContext(), "watch_history")
             PreferenceHelper.removePreference(requireContext(), "watch_positions")
+            true
+        }
+
+        val dataSaverMode = findPreference<SwitchPreferenceCompat>("data_saver_mode")
+        dataSaverMode?.setOnPreferenceChangeListener { _, _ ->
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 

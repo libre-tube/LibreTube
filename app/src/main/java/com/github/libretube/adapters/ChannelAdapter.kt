@@ -12,6 +12,7 @@ import com.github.libretube.databinding.VideoChannelRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.formatShort
 import com.squareup.picasso.Picasso
 
@@ -45,7 +46,7 @@ class ChannelAdapter(
                 DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             channelDuration.text =
                 DateUtils.formatElapsedTime(trending.duration!!)
-            Picasso.get().load(trending.thumbnail).into(channelThumbnail)
+            ConnectionHelper.loadImage(trending.thumbnail, channelThumbnail)
             root.setOnClickListener {
                 var bundle = Bundle()
                 bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))

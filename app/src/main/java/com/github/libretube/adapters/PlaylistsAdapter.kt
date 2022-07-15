@@ -12,6 +12,7 @@ import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.picasso.Picasso
@@ -45,7 +46,7 @@ class PlaylistsAdapter(
     override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
         val playlist = playlists[position]
         holder.binding.apply {
-            Picasso.get().load(playlist.thumbnail).into(playlistThumbnail)
+            ConnectionHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             // set imageview drawable as empty playlist if imageview empty
             if (playlistThumbnail.drawable == null) {
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)

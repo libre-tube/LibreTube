@@ -15,6 +15,7 @@ import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.formatShort
 import com.squareup.picasso.Picasso
 
@@ -63,12 +64,8 @@ class TrendingAdapter(
                 } catch (e: Exception) {
                 }
             }
-            if (trending.thumbnail!!.isNotEmpty()) {
-                Picasso.get().load(trending.thumbnail).into(thumbnail)
-            }
-            if (trending.uploaderAvatar!!.isNotEmpty()) {
-                Picasso.get().load(trending.uploaderAvatar).into(channelImage)
-            }
+            ConnectionHelper.loadImage(trending.thumbnail, thumbnail)
+            ConnectionHelper.loadImage(trending.uploaderAvatar, channelImage)
 
             root.setOnClickListener {
                 var bundle = Bundle()
