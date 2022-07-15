@@ -16,7 +16,7 @@ internal class CustomExoPlayerView(
 
     override fun hideController() {
         super.hideController()
-        binding.toggleOptions.animate().rotationX(0F).start()
+        binding.toggleOptions.animate().rotationX(0F).setDuration(1000).start()
         binding.advancedOptions.visibility = View.GONE
     }
 
