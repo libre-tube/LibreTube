@@ -140,6 +140,7 @@ class PlayerFragment : Fragment() {
     private lateinit var thumbnailUrl: String
     private lateinit var chapters: List<ChapterSegment>
     private val sponsorBlockPrefs = SponsorBlockPrefs()
+    private lateinit var subtitle: MutableList<SubtitleConfiguration>
 
     private var autoRotationEnabled = true
 
@@ -1093,7 +1094,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setMediaSource(
-        subtitle: MutableList<SubtitleConfiguration>,
         videoUri: Uri,
         audioUrl: String
     ) {
@@ -1117,7 +1117,6 @@ class PlayerFragment : Fragment() {
     private fun setResolutionAndSubtitles(response: Streams) {
         val videoFormatPreference =
             PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
-        val defres = PreferenceHelper.getString(requireContext(), "default_res", "")!!
 
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
@@ -1133,13 +1132,13 @@ class PlayerFragment : Fragment() {
             if (vid.format.equals(videoFormatPreference) && vid.url != null) { // preferred format
                 videosNameArray += vid.quality.toString()
                 videosUrlArray += vid.url!!.toUri()
-            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format)
+            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format
                 videosNameArray += "LBRY MP4"
                 videosUrlArray += vid.url!!.toUri()
             }
         }
         // create a list of subtitles
-        val subtitle = mutableListOf<SubtitleConfiguration>()
+        subtitle = mutableListOf<SubtitleConfiguration>()
         response.subtitles!!.forEach {
             subtitle.add(
                 SubtitleConfiguration.Builder(it.url!!.toUri())
@@ -1148,50 +1147,12 @@ class PlayerFragment : Fragment() {
                     .build()
             )
         }
-        // set resolution in the beginning
-        when {
-            // search for the default resolution in the videoNamesArray, select quality if found
-            defres != "" -> {
-                run lit@{
-                    videosNameArray.forEachIndexed { index, pipedStream ->
-                        if (pipedStream.contains(defres)) {
-                            val videoUri = videosUrlArray[index]
-                            val audioUrl = getMostBitRate(response.audioStreams!!)
-                            setMediaSource(subtitle, videoUri, audioUrl)
-                            playerBinding.qualityText.text = videosNameArray[index]
-                            return@lit
-                        } else if (response.hls != null) {
-                            val mediaItem: MediaItem = MediaItem.Builder()
-                                .setUri(response.hls)
-                                .setSubtitleConfigurations(subtitle)
-                                .build()
-                            exoPlayer.setMediaItem(mediaItem)
-                        } else {
-                            Toast.makeText(
-                                context,
-                                getString(R.string.unknown_error),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-                }
-            }
-            // if defres doesn't match use hls if available
-            response.hls != null -> {
-                val mediaItem: MediaItem = MediaItem.Builder()
-                    .setUri(response.hls)
-                    .setSubtitleConfigurations(subtitle)
-                    .build()
-                exoPlayer.setMediaItem(mediaItem)
-            }
-            // otherwise use the first list entry
-            else -> {
-                val videoUri = videosUrlArray[0]
-                val audioUrl = getMostBitRate(response.audioStreams!!)
-                setMediaSource(subtitle, videoUri, audioUrl)
-                playerBinding.qualityText.text = videosNameArray[0]
-            }
-        }
+        // set media source and resolution in the beginning
+        setStreamSource(
+            response,
+            videosNameArray,
+            videosUrlArray
+        )
 
         playerBinding.qualityText.setOnClickListener {
             // Dialog for quality selection
@@ -1217,13 +1178,57 @@ class PlayerFragment : Fragment() {
                     } else {
                         val videoUri = videosUrlArray[which]
                         val audioUrl = getMostBitRate(response.audioStreams!!)
-                        setMediaSource(subtitle, videoUri, audioUrl)
+                        setMediaSource(videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
                     playerBinding.qualityText.text = videosNameArray[which]
                 }
             val dialog = builder.create()
             dialog.show()
+        }
+    }
+
+    private fun setStreamSource(
+        streams: Streams,
+        videosNameArray: Array<CharSequence>,
+        videosUrlArray: Array<Uri>
+    ) {
+        val defRes = PreferenceHelper.getString(
+            requireContext(),
+            "default_resolution",
+            "hls"
+        )!!
+
+        if (defRes != "hls") {
+            videosNameArray.forEachIndexed { index, pipedStream ->
+                // search for quality preference in the available stream sources
+                if (pipedStream.contains(defRes)) {
+                    val videoUri = videosUrlArray[index]
+                    val audioUrl = getMostBitRate(streams.audioStreams!!)
+                    setMediaSource(videoUri, audioUrl)
+                    playerBinding.qualityText.text = videosNameArray[index]
+                    return
+                }
+            }
+        }
+
+        // if default resolution isn't set or available, use hls if available
+        if (streams.hls != null) {
+            val mediaItem: MediaItem = MediaItem.Builder()
+                .setUri(streams.hls)
+                .setSubtitleConfigurations(subtitle)
+                .build()
+            exoPlayer.setMediaItem(mediaItem)
+            playerBinding.qualityText.text = context?.getString(R.string.hls)
+            return
+        }
+
+        // if nothing found, use the first list entry
+        if (videosUrlArray.isNotEmpty()) {
+            val videoUri = videosUrlArray[0]
+            val audioUrl = getMostBitRate(streams.audioStreams!!)
+            setMediaSource(videoUri, audioUrl)
+            playerBinding.qualityText.text = videosNameArray[0]
         }
     }
 
@@ -1298,7 +1303,8 @@ class PlayerFragment : Fragment() {
         playerBinding.exoPlayPause.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
-        playerBinding.exoTitle.visibility = visibility
+        playerBinding.exoTitle.visibility =
+            if (isLocked && Globals.isFullScreen) View.VISIBLE else View.INVISIBLE
 
         // disable double tap to seek when the player is locked
         if (isLocked) enableDoubleTapToSeek() else disableDoubleTapToSeek()

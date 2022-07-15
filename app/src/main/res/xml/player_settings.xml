@@ -6,10 +6,10 @@
 
         <ListPreference
             android:icon="@drawable/ic_hd"
-            app:defaultValue=""
+            app:defaultValue="hls"
             app:entries="@array/defres"
             app:entryValues="@array/defresValue"
-            app:key="default_res"
+            app:key="default_resolution"
             app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 

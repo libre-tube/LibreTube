@@ -18,15 +18,15 @@ object ThemeHelper {
 
     fun updateTheme(activity: AppCompatActivity) {
         val themeMode = PreferenceHelper.getString(activity, "theme_toggle", "A")!!
-        val blackModeEnabled = themeMode == "O"
+        val pureThemeEnabled = PreferenceHelper.getBoolean(activity, "pure_theme", false)
 
-        updateAccentColor(activity, blackModeEnabled)
+        updateAccentColor(activity, pureThemeEnabled)
         updateThemeMode(themeMode)
     }
 
     private fun updateAccentColor(
         activity: AppCompatActivity,
-        blackThemeEnabled: Boolean
+        pureThemeEnabled: Boolean
     ) {
         val theme = when (
             PreferenceHelper.getString(
@@ -37,15 +37,16 @@ object ThemeHelper {
         ) {
             "my" -> {
                 applyDynamicColors(activity)
-                if (blackThemeEnabled) R.style.MaterialYou_Black
+                if (pureThemeEnabled) R.style.MaterialYou_Pure
                 else R.style.MaterialYou
             }
-            "red" -> if (blackThemeEnabled) R.style.Theme_Red_Black else R.style.Theme_Red
-            "blue" -> if (blackThemeEnabled) R.style.Theme_Blue_Black else R.style.Theme_Blue
-            "yellow" -> if (blackThemeEnabled) R.style.Theme_Yellow_Black else R.style.Theme_Yellow
-            "green" -> if (blackThemeEnabled) R.style.Theme_Green_Black else R.style.Theme_Green
-            "purple" -> if (blackThemeEnabled) R.style.Theme_Purple_Black else R.style.Theme_Purple
-            else -> if (blackThemeEnabled) R.style.Theme_Purple_Black else R.style.Theme_Purple
+            // set the theme, use the pure theme if enabled
+            "red" -> if (pureThemeEnabled) R.style.Theme_Red_Pure else R.style.Theme_Red
+            "blue" -> if (pureThemeEnabled) R.style.Theme_Blue_Pure else R.style.Theme_Blue
+            "yellow" -> if (pureThemeEnabled) R.style.Theme_Yellow_Pure else R.style.Theme_Yellow
+            "green" -> if (pureThemeEnabled) R.style.Theme_Green_Pure else R.style.Theme_Green
+            "purple" -> if (pureThemeEnabled) R.style.Theme_Purple_Pure else R.style.Theme_Purple
+            else -> if (pureThemeEnabled) R.style.Theme_Purple_Pure else R.style.Theme_Purple
         }
         activity.setTheme(theme)
     }
@@ -62,7 +63,6 @@ object ThemeHelper {
             "A" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             "L" -> AppCompatDelegate.MODE_NIGHT_NO
             "D" -> AppCompatDelegate.MODE_NIGHT_YES
-            "O" -> AppCompatDelegate.MODE_NIGHT_YES
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
         AppCompatDelegate.setDefaultNightMode(mode)

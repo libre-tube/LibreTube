@@ -533,14 +533,12 @@
         <item>@string/systemDefault</item>
         <item>@string/lightTheme</item>
         <item>@string/darkTheme</item>
-        <item>@string/oledTheme</item>
     </string-array>
 
     <string-array name="themesValue">
         <item>A</item>
         <item>L</item>
         <item>D</item>
-        <item>O</item>
     </string-array>
 
     <string-array name="accents">
@@ -583,7 +581,7 @@
         <item>144p</item>
     </string-array>
     <string-array name="defresValue">
-        <item></item>
+        <item>hls</item>
         <item>1080p</item>
         <item>720p</item>
         <item>480p</item>
