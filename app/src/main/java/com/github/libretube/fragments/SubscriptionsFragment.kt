@@ -72,7 +72,6 @@ class SubscriptionsFragment : Fragment() {
             var loadedSubbedChannels = false
 
             binding.toggleSubs.setOnClickListener {
-                binding.toggle.animate().rotationBy(180F).setDuration(100).start()
                 if (!binding.subChannels.isVisible) {
                     if (!loadedSubbedChannels) {
                         binding.subChannels.layoutManager = LinearLayoutManager(context)

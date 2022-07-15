@@ -16,7 +16,6 @@ import com.github.libretube.R
 import com.github.libretube.WEBSITE_URL
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.FragmentAboutBinding
-import com.github.libretube.util.ThemeHelper.getThemeColor
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -93,10 +92,6 @@ class AboutFragment : Fragment() {
     private fun showSnackBar(text: String) {
         val snackBar = Snackbar
             .make(binding.root, text, Snackbar.LENGTH_LONG)
-
-        // set snackBar color
-        snackBar.setBackgroundTint(getThemeColor(requireContext(), R.attr.colorSurface))
-        snackBar.setTextColor(getThemeColor(requireContext(), R.attr.colorPrimary))
 
         // prevent the text from being partially hidden
         snackBar.setTextMaxLines(3)

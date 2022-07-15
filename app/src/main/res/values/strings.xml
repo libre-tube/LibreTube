@@ -241,4 +241,5 @@
     <string name="autoRotatePlayer_summary">Automatically switch to player fullscreen when the device gets turned.</string>
     <string name="pure_theme">Pure theme</string>
     <string name="pure_theme_summary">Pure white/black theme</string>
+    <string name="no_player_found">No external player found. Please make sure you have one installed.</string>
 </resources>
