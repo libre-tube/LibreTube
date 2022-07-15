@@ -17,8 +17,8 @@ import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,7 +55,7 @@ class PlaylistAdapter(
             playlistTitle.text = streamItem.title
             playlistDescription.text = streamItem.uploaderName
             playlistDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
-            Picasso.get().load(streamItem.thumbnail).into(playlistThumbnail)
+            ConnectionHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
             root.setOnClickListener {
                 var bundle = Bundle()
                 bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))

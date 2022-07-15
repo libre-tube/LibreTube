@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/search_history">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_history_filled"
+            android:summary="@string/search_history_summary"
+            app:key="search_history_toggle"
+            app:title="@string/search_history" />
+
+        <Preference
+            android:icon="@drawable/ic_trash"
+            app:key="clear_history"
+            app:title="@string/clear_history" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/watch_history">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_time_outlined"
+            android:summary="@string/watch_history_summary"
+            app:key="watch_history_toggle"
+            app:title="@string/watch_history" />
+
+        <Preference
+            android:icon="@drawable/ic_trash"
+            app:key="clear_watch_history"
+            app:title="@string/clear_history" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/watch_positions_title">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_play_filled"
+            app:key="watch_position_toggle"
+            app:summary="@string/watch_positions_summary"
+            app:title="@string/watch_positions" />
+
+        <Preference
+            app:title="@string/reset_watch_positions"
+            android:icon="@drawable/ic_reset"
+            app:key="reset_watch_positions" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

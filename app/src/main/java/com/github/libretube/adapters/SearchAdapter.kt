@@ -20,9 +20,9 @@ import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.SearchItem
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -84,14 +84,14 @@ class SearchAdapter(
 
     private fun bindWatch(item: SearchItem, binding: VideoSearchRowBinding) {
         binding.apply {
-            Picasso.get().load(item.thumbnail).fit().centerCrop().into(searchThumbnail)
+            ConnectionHelper.loadImage(item.thumbnail, searchThumbnail)
             if (item.duration != -1L) {
                 searchThumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
             } else {
                 searchThumbnailDuration.text = root.context.getString(R.string.live)
                 searchThumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
             }
-            Picasso.get().load(item.uploaderAvatar).fit().centerCrop().into(searchChannelImage)
+            ConnectionHelper.loadImage(item.uploaderAvatar, searchChannelImage)
             searchDescription.text = item.title
             val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
             val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
@@ -131,7 +131,7 @@ class SearchAdapter(
 
     private fun bindChannel(item: SearchItem, binding: ChannelSearchRowBinding) {
         binding.apply {
-            Picasso.get().load(item.thumbnail).fit().centerCrop().into(searchChannelImage)
+            ConnectionHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
             searchViews.text = root.context.getString(
                 R.string.subscribers,
@@ -219,7 +219,7 @@ class SearchAdapter(
 
     private fun bindPlaylist(item: SearchItem, binding: PlaylistSearchRowBinding) {
         binding.apply {
-            Picasso.get().load(item.thumbnail).fit().centerCrop().into(searchThumbnail)
+            ConnectionHelper.loadImage(item.thumbnail, searchThumbnail)
             if (item.videos?.toInt() != -1) searchPlaylistNumber.text = item.videos.toString()
             searchDescription.text = item.name
             searchName.text = item.uploaderName

@@ -10,8 +10,8 @@ import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.RepliesRowBinding
 import com.github.libretube.obj.Comment
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 
 class RepliesAdapter(
     private val replies: MutableList<Comment>
@@ -44,7 +44,7 @@ class RepliesAdapter(
                 " • " + reply.commentedTime.toString()
             commentText.text =
                 reply.commentText.toString()
-            Picasso.get().load(reply.thumbnail).fit().centerCrop().into(commentorImage)
+            ConnectionHelper.loadImage(reply.thumbnail, commentorImage)
             likesTextView.text =
                 reply.likeCount?.toLong().formatShort()
             if (reply.verified == true) {

@@ -75,6 +75,13 @@ class MainActivity : AppCompatActivity() {
                 RetrofitInstance.url
             }
 
+        // save whether the data saver mode is enabled
+        Globals.dataSaverModeEnabled = PreferenceHelper.getBoolean(
+            this,
+            "data_saver_mode",
+            false
+        )
+
         // show noInternet Activity if no internet available on app startup
         if (!ConnectionHelper.isNetworkAvailable(this)) {
             val noInternetIntent = Intent(this, NoInternetActivity::class.java)
@@ -268,7 +275,8 @@ class MainActivity : AppCompatActivity() {
                 minimizePlayer()
             } catch (e: Exception) {
                 if (navController.currentDestination?.id == startFragmentId) {
-                    super.onBackPressed()
+                    // close app
+                    moveTaskToBack(true)
                 } else {
                     navController.popBackStack()
                 }

@@ -2,6 +2,9 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.widget.ImageView
+import com.github.libretube.Globals
+import com.squareup.picasso.Picasso
 
 object ConnectionHelper {
     fun isNetworkAvailable(context: Context): Boolean {
@@ -32,5 +35,13 @@ object ConnectionHelper {
          */
 
         return connectivityManager.activeNetworkInfo?.isConnected ?: false
+    }
+
+    // load an image from a url into an imageView
+    fun loadImage(url: String?, target: ImageView) {
+        // only load the image if the data saver mode is disabled
+        if (!Globals.dataSaverModeEnabled) {
+            Picasso.get().load(url).fit().centerCrop().into(target)
+        }
     }
 }

@@ -57,6 +57,7 @@ import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.BackgroundMode
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
@@ -87,7 +88,6 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -739,17 +739,19 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializePlayerView(view: View, response: Streams) {
-        binding.playerViewsInfo.text =
-            context?.getString(R.string.views, response.views.formatShort()) +
-            " • " + response.uploadDate
-        binding.textLike.text = response.likes.formatShort()
-        binding.textDislike.text = response.dislikes.formatShort()
-        Picasso.get().load(response.uploaderAvatar).into(binding.playerChannelImage)
-        binding.playerChannelName.text = response.uploader
+        binding.apply {
+            playerViewsInfo.text =
+                context?.getString(R.string.views, response.views.formatShort()) +
+                " • " + response.uploadDate
+            textLike.text = response.likes.formatShort()
+            textDislike.text = response.dislikes.formatShort()
+            ConnectionHelper.loadImage(response.uploaderAvatar, binding.playerChannelImage)
+            playerChannelName.text = response.uploader
 
-        binding.titleTextView.text = response.title
-        binding.playerTitle.text = response.title
-        binding.playerDescription.text = response.description
+            titleTextView.text = response.title
+            playerTitle.text = response.title
+            playerDescription.text = response.description
+        }
 
         playerBinding.exoTitle.text = response.title
 

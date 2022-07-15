@@ -64,6 +64,13 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
+        val history = findPreference<Preference>("history")
+        history?.setOnPreferenceClickListener {
+            val newFragment = HistorySettings()
+            navigateToSettingsFragment(newFragment)
+            true
+        }
+
         val advanced = findPreference<Preference>("advanced")
         advanced?.setOnPreferenceClickListener {
             val newFragment = AdvancedSettings()
@@ -81,13 +88,6 @@ class MainSettings : PreferenceFragmentCompat() {
         val about = findPreference<Preference>("about")
         about?.setOnPreferenceClickListener {
             val newFragment = AboutFragment()
-            navigateToSettingsFragment(newFragment)
-            true
-        }
-
-        val community = findPreference<Preference>("community")
-        community?.setOnPreferenceClickListener {
-            val newFragment = CommunityFragment()
             navigateToSettingsFragment(newFragment)
             true
         }
