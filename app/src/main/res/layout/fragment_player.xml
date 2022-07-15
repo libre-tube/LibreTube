@@ -185,7 +185,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/relPlayer_vlc"
+                        android:id="@+id/relPlayer_open"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView

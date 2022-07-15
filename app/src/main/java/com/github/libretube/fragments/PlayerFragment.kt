@@ -892,7 +892,7 @@ class PlayerFragment : Fragment() {
         }
 
         if (response.hls != null) {
-            binding.relPlayerVlc.setOnClickListener {
+            binding.relPlayerOpen.setOnClickListener {
                 // start an intent with video as mimetype using the hls stream
                 val uri: Uri = Uri.parse(response.hls)
                 val intent = Intent()
@@ -904,7 +904,11 @@ class PlayerFragment : Fragment() {
                 intent.putExtra("artist", uploader)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                startActivity(intent)
+                try {
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(context, R.string.no_player_found, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         if (relatedStreamsEnabled) {
