@@ -191,7 +191,7 @@
     <string name="video">Bideoa</string>
     <string name="downloading">Deskargatzen</string>
     <string name="hideTrendingPage">Ezkutatu joera-orria</string>
-    <string name="instance_frontend_url">Instantziaren frontenderako URLa</string>
+    <string name="instance_frontend_url">Instantziaren frontend-erako URL-a</string>
     <string name="quality">Kalitatea</string>
     <string name="behavior">Portaera</string>
     <string name="player_summary">Kalitatea eta erreprodukzioaen portaera</string>
@@ -227,4 +227,10 @@
     <string name="reddit">Reddit</string>
     <string name="telegram">Telegram</string>
     <string name="twitter">Twitter</string>
+    <string name="open">Ireki …</string>
+    <string name="chapters">Kapituluak</string>
+    <string name="change_playback_speed">Erreprodukzio abiadura</string>
+    <string name="require_restart">Aplikazioa berrabiarazi behar da</string>
+    <string name="turnInternetOn">Mesedez, konekta zaitez internetera.</string>
+    <string name="require_restart_message">Aplikazioa berrabiarazi\? Aldaketak aplikazioa berriro hastean aplikatuko dira.</string>
 </resources>
