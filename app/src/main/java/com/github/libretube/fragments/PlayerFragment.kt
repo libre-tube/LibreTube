@@ -276,6 +276,16 @@ class PlayerFragment : Fragment() {
                 .remove(this)
                 .commit()
         }
+        // show the advanced player options
+        playerBinding.toggleOptions.setOnClickListener {
+            if (playerBinding.advancedOptions.isVisible) {
+                playerBinding.toggleOptions.animate().rotationX(0F).setDuration(200).start()
+                playerBinding.advancedOptions.visibility = View.GONE
+            } else {
+                playerBinding.toggleOptions.animate().rotationX(180F).setDuration(200).start()
+                playerBinding.advancedOptions.visibility = View.VISIBLE
+            }
+        }
         binding.playImageView.setOnClickListener {
             paused = if (paused) {
                 binding.playImageView.setImageResource(R.drawable.ic_pause)

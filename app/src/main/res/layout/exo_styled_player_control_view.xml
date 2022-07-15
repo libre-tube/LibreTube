@@ -11,72 +11,104 @@
     <LinearLayout
         android:id="@+id/exo_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/exo_styled_bottom_bar_height"
+        android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginBottom="@dimen/exo_styled_bottom_bar_margin_top"
-        android:layoutDirection="ltr">
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        android:paddingStart="5dp"
+        android:paddingEnd="10dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
             android:layoutDirection="ltr">
 
-            <ImageView
-                android:id="@+id/close_imageButton"
-                style="@style/PlayerControlTop"
-                android:src="@drawable/ic_close"
-                app:tint="@android:color/white" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layoutDirection="ltr">
 
-            <ImageView
-                android:id="@+id/lock_player"
-                style="@style/PlayerControlTop"
-                android:layout_marginStart="-5dp"
-                android:scaleX=".9"
-                android:scaleY=".9"
-                android:src="@drawable/ic_unlocked" />
+                <ImageView
+                    android:id="@+id/close_imageButton"
+                    style="@style/PlayerControlTop"
+                    android:src="@drawable/ic_close"
+                    app:tint="@android:color/white" />
+
+                <ImageView
+                    android:id="@+id/lock_player"
+                    style="@style/PlayerControlTop"
+                    android:layout_marginStart="-5dp"
+                    android:scaleX=".9"
+                    android:scaleY=".9"
+                    android:src="@drawable/ic_unlocked" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/exo_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@+id/exo_top_bar_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layoutDirection="ltr">
+
+                <TextView
+                    android:id="@+id/speed_text"
+                    style="@style/PlayerControlTop"
+                    android:text="1x" />
+
+                <TextView
+                    android:id="@+id/quality_text"
+                    style="@style/PlayerControlTop"
+                    android:text="@string/hls" />
+
+                <ImageButton
+                    android:id="@+id/toggle_options"
+                    style="@style/PlayerControlTop"
+                    android:layout_marginTop="-.5dp"
+                    android:src="@drawable/ic_arrow_down"
+                    app:tint="@android:color/white" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/exo_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:visibility="invisible" />
-
         <LinearLayout
-            android:id="@+id/exo_top_bar_right"
+            android:id="@+id/advanced_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:layoutDirection="ltr">
+            android:layout_gravity="right"
+            android:layout_marginTop="-10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageButton
+                android:id="@id/exo_subtitle"
+                style="@style/PlayerControlBottom" />
+
+            <ImageButton
+                android:id="@+id/repeat_toggle"
+                style="@style/PlayerControlTop"
+                android:src="@drawable/ic_repeat"
+                app:tint="@android:color/darker_gray" />
 
             <ImageView
                 android:id="@+id/aspect_ratio_button"
                 style="@style/PlayerControlTop"
-                android:layout_marginTop="-1dp"
-                android:scaleX=".9"
-                android:scaleY=".9"
                 android:src="@drawable/ic_aspect_ratio" />
-
-            <TextView
-                android:id="@+id/speed_text"
-                style="@style/PlayerControlTop"
-                android:text="1x" />
-
-            <TextView
-                android:id="@+id/quality_text"
-                style="@style/PlayerControlTop"
-                android:text="@string/hls" />
 
         </LinearLayout>
 
@@ -151,18 +183,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/repeat_toggle"
-                    style="@style/PlayerControlBottom"
-                    android:src="@drawable/ic_repeat"
-                    app:tint="@android:color/darker_gray" />
-
-                <ImageButton
-                    android:id="@id/exo_subtitle"
-                    style="@style/PlayerControlBottom" />
-
-                <ImageButton
                     android:id="@+id/fullscreen"
                     style="@style/PlayerControlBottom"
+                    android:layout_marginEnd="5dp"
                     android:src="@drawable/ic_fullscreen"
                     app:tint="@android:color/white" />
 
