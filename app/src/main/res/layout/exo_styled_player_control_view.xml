@@ -96,8 +96,10 @@
             android:visibility="gone">
 
             <ImageButton
-                android:id="@id/exo_subtitle"
-                style="@style/PlayerControlBottom" />
+                android:id="@+id/captions"
+                style="@style/PlayerControlTop"
+                android:src="@drawable/ic_caption_outlined"
+                app:tint="@android:color/darker_gray" />
 
             <ImageButton
                 android:id="@+id/repeat_toggle"

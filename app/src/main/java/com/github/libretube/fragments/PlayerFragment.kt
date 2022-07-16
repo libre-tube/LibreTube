@@ -77,6 +77,7 @@ import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
@@ -122,6 +123,7 @@ class PlayerFragment : Fragment() {
     private var isLoading = true
     private lateinit var exoPlayerView: StyledPlayerView
     private lateinit var exoPlayer: ExoPlayer
+    private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var segmentData: Segments
     private var relatedStreamsEnabled = true
 
@@ -1165,7 +1167,9 @@ class PlayerFragment : Fragment() {
             }
         }
         // create a list of subtitles
-        subtitle = mutableListOf<SubtitleConfiguration>()
+        subtitle = mutableListOf()
+        val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
+        val subtitleCodesList = mutableListOf("")
         response.subtitles!!.forEach {
             subtitle.add(
                 SubtitleConfiguration.Builder(it.url!!.toUri())
@@ -1173,7 +1177,51 @@ class PlayerFragment : Fragment() {
                     .setLanguage(it.code) // The subtitle language (optional).
                     .build()
             )
+            subtitlesNamesList += it.name!!
+            subtitleCodesList += it.code!!
         }
+
+        // captions selection dialog
+        // hide caption selection view if no subtitles available
+        if (response.subtitles.isEmpty()) playerBinding.captions.visibility = View.GONE
+        playerBinding.captions.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.captions)
+                .setItems(subtitlesNamesList.toTypedArray()) { _, index ->
+                    val newParams = if (index != 0) {
+                        // caption selected
+
+                        // get the caption name and language
+                        val captionLanguage = subtitlesNamesList[index]
+                        val captionLanguageCode = subtitleCodesList[index]
+
+                        // update the icon
+                        playerBinding.captions.setImageResource(R.drawable.ic_caption)
+                        playerBinding.captions.setColorFilter(Color.WHITE)
+
+                        // select the new caption preference
+                        trackSelector.buildUponParameters()
+                            .setPreferredTextLanguages(
+                                captionLanguage,
+                                captionLanguageCode
+                            )
+                            .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+                    } else {
+                        // none selected
+                        playerBinding.captions.setImageResource(R.drawable.ic_caption_outlined)
+                        playerBinding.captions.setColorFilter(Color.GRAY)
+
+                        // disable captions
+                        trackSelector.buildUponParameters()
+                            .setPreferredTextLanguage("")
+                    }
+
+                    // set the new caption language
+                    trackSelector.setParameters(newParams)
+                }
+                .show()
+        }
+
         // set media source and resolution in the beginning
         setStreamSource(
             response,
@@ -1222,11 +1270,11 @@ class PlayerFragment : Fragment() {
     ) {
         val defRes = PreferenceHelper.getString(
             requireContext(),
-            "default_resolution",
-            "hls"
+            "default_res",
+            ""
         )!!
 
-        if (defRes != "hls") {
+        if (defRes != "") {
             videosNameArray.forEachIndexed { index, pipedStream ->
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
@@ -1290,9 +1338,12 @@ class PlayerFragment : Fragment() {
             )
             .build()
 
+        trackSelector = DefaultTrackSelector(requireContext())
+
         exoPlayer = ExoPlayer.Builder(view.context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
+            .setTrackSelector(trackSelector)
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)

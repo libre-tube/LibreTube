@@ -6,18 +6,20 @@ import com.github.libretube.obj.PipedStream
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 
 object PlayerHelper {
+    private val TAG = "PlayerHelper"
+
     // get the best bit rate from audio streams
     fun getMostBitRate(audios: List<PipedStream>): String {
         var bitrate = 0
-        var index = 0
-        for ((i, audio) in audios.withIndex()) {
-            val q = audio.quality!!.replace(" kbps", "").toInt()
+        var audioUrl = ""
+        audios.forEach {
+            val q = it.quality!!.replace(" kbps", "").toInt()
             if (q > bitrate) {
                 bitrate = q
-                index = i
+                audioUrl = it.url.toString()
             }
         }
-        return audios[index].url!!
+        return audioUrl
     }
 
     // get the system default caption style
