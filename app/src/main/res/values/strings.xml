@@ -250,4 +250,6 @@
     <string name="watch_positions_title">Watch positions</string>
     <string name="reset_watch_positions">Reset watch positions</string>
     <string name="system_caption_style">System caption style</string>
+    <string name="captions">Captions</string>
+    <string name="none">None</string>
 </resources>

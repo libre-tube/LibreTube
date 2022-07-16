@@ -581,7 +581,7 @@
         <item>144p</item>
     </string-array>
     <string-array name="defresValue">
-        <item>hls</item>
+        <item></item>
         <item>1080p</item>
         <item>720p</item>
         <item>480p</item>
