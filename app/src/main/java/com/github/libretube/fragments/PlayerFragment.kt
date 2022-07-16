@@ -23,11 +23,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -48,7 +46,6 @@ import com.github.libretube.dialogs.AddtoPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.obj.ChapterSegment
-import com.github.libretube.obj.PipedStream
 import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
@@ -62,6 +59,7 @@ import com.github.libretube.util.BackgroundMode
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.github.libretube.views.DoubleClickListener
@@ -350,6 +348,60 @@ class PlayerFragment : Fragment() {
 
             // change locked status
             isPlayerLocked = !isPlayerLocked
+        }
+
+        // set default playback speed
+        val playbackSpeed =
+            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")!!
+        val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
+        val playbackSpeedValues =
+            context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
+        exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
+        val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
+        playerBinding.speedText.text = playbackSpeeds[speedIndex]
+
+        // change playback speed button
+        playerBinding.speedText.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.change_playback_speed)
+                .setItems(playbackSpeeds) { _, index ->
+                    // set the new playback speed
+                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
+                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
+                    playerBinding.speedText.text = playbackSpeeds[index]
+                }
+                .show()
+        }
+
+        // repeat toggle button
+        playerBinding.repeatToggle.setOnClickListener {
+            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
+                // turn off repeat mode
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+                playerBinding.repeatToggle.setColorFilter(Color.GRAY)
+            } else {
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+                playerBinding.repeatToggle.setColorFilter(Color.WHITE)
+            }
+        }
+
+        // share button
+        binding.relPlayerShare.setOnClickListener {
+            val shareDialog = ShareDialog(videoId!!, false)
+            shareDialog.show(childFragmentManager, "ShareDialog")
+        }
+
+        binding.relPlayerBackground.setOnClickListener {
+            // pause the current player
+            exoPlayer.pause()
+
+            // start the background mode
+            BackgroundMode
+                .getInstance()
+                .playOnBackgroundMode(
+                    requireContext(),
+                    videoId!!
+                )
         }
 
         binding.playerScrollView.viewTreeObserver
@@ -745,7 +797,7 @@ class PlayerFragment : Fragment() {
         val useSystemCaptionStyle = PreferenceHelper.getBoolean(requireContext(), "system_caption_style", true)
         if (useSystemCaptionStyle) {
             // set the subtitle style
-            val captionStyle = getCaptionStyle()
+            val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
             exoPlayerView.subtitleView?.setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             exoPlayerView.subtitleView?.setStyle(captionStyle)
         }
@@ -775,29 +827,6 @@ class PlayerFragment : Fragment() {
         if (response.chapters != null) {
             chapters = response.chapters
             initializeChapters()
-        }
-
-        // set default playback speed
-        val playbackSpeed =
-            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")!!
-        val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
-        val playbackSpeedValues =
-            context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
-        exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
-        val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
-        playerBinding.speedText.text = playbackSpeeds[speedIndex]
-
-        // change playback speed button
-        playerBinding.speedText.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.change_playback_speed)
-                .setItems(playbackSpeeds) { _, index ->
-                    // set the new playback speed
-                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
-                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
-                    playerBinding.speedText.text = playbackSpeeds[index]
-                }
-                .show()
         }
 
         // Listener for play and pause icon change
@@ -865,37 +894,6 @@ class PlayerFragment : Fragment() {
                 }
             }
         })
-
-        // repeat toggle button
-        playerBinding.repeatToggle.setOnClickListener {
-            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
-                // turn off repeat mode
-                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
-                playerBinding.repeatToggle.setColorFilter(Color.GRAY)
-            } else {
-                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
-                playerBinding.repeatToggle.setColorFilter(Color.WHITE)
-            }
-        }
-
-        // share button
-        binding.relPlayerShare.setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!, false)
-            shareDialog.show(childFragmentManager, "ShareDialog")
-        }
-
-        binding.relPlayerBackground.setOnClickListener {
-            // pause the current player
-            exoPlayer.pause()
-
-            // start the background mode
-            BackgroundMode
-                .getInstance()
-                .playOnBackgroundMode(
-                    requireContext(),
-                    videoId!!
-                )
-        }
 
         // check if livestream
         if (response.duration!! > 0) {
@@ -1206,7 +1204,7 @@ class PlayerFragment : Fragment() {
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
                         val videoUri = videosUrlArray[which]
-                        val audioUrl = getMostBitRate(response.audioStreams!!)
+                        val audioUrl = PlayerHelper.getMostBitRate(response.audioStreams!!)
                         setMediaSource(videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
@@ -1233,7 +1231,7 @@ class PlayerFragment : Fragment() {
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
                     val videoUri = videosUrlArray[index]
-                    val audioUrl = getMostBitRate(streams.audioStreams!!)
+                    val audioUrl = PlayerHelper.getMostBitRate(streams.audioStreams!!)
                     setMediaSource(videoUri, audioUrl)
                     playerBinding.qualityText.text = videosNameArray[index]
                     return
@@ -1255,7 +1253,7 @@ class PlayerFragment : Fragment() {
         // if nothing found, use the first list entry
         if (videosUrlArray.isNotEmpty()) {
             val videoUri = videosUrlArray[0]
-            val audioUrl = getMostBitRate(streams.audioStreams!!)
+            val audioUrl = PlayerHelper.getMostBitRate(streams.audioStreams!!)
             setMediaSource(videoUri, audioUrl)
             playerBinding.qualityText.text = videosNameArray[0]
         }
@@ -1441,19 +1439,6 @@ class PlayerFragment : Fragment() {
         activity?.runOnUiThread(action)
     }
 
-    private fun getMostBitRate(audios: List<PipedStream>): String {
-        var bitrate = 0
-        var index = 0
-        for ((i, audio) in audios.withIndex()) {
-            val q = audio.quality!!.replace(" kbps", "").toInt()
-            if (q > bitrate) {
-                bitrate = q
-                index = i
-            }
-        }
-        return audios[index].url!!
-    }
-
     private fun fetchComments() {
         lifecycleScope.launchWhenCreated {
             val commentsResponse = try {
@@ -1541,15 +1526,5 @@ class PlayerFragment : Fragment() {
                 unsetFullscreen()
             }
         }
-    }
-
-    private fun getCaptionStyle(): CaptionStyleCompat {
-        val captioningManager = ContextCompat.getSystemService(
-            requireContext(),
-            CaptioningManager::class.java
-        )
-        return if (captioningManager == null || !captioningManager.isEnabled) {
-            CaptionStyleCompat.DEFAULT
-        } else CaptionStyleCompat.createFromCaptionStyle(captioningManager.userStyle)
     }
 }
