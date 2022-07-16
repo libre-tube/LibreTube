@@ -176,7 +176,7 @@ class PlayerFragment : Fragment() {
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
             // enable auto rotation
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
             onConfigurationChanged(resources.configuration)
         } else {
             // go to portrait mode
@@ -376,6 +376,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
+        playerBinding.closeImageButton.visibility = View.GONE
 
         val mainActivity = activity as MainActivity
         val fullscreenOrientationPref = PreferenceHelper
@@ -393,7 +394,7 @@ class PlayerFragment : Fragment() {
                     // a video with normal aspect ratio
                     else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
                 }
-                "auto" -> ActivityInfo.SCREEN_ORIENTATION_USER
+                "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
                 "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
                 "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
@@ -415,6 +416,7 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
+        playerBinding.closeImageButton.visibility = View.VISIBLE
 
         scaleControls(1F)
 
@@ -1320,7 +1322,16 @@ class PlayerFragment : Fragment() {
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility =
-            if (isLocked && Globals.isFullScreen) View.VISIBLE else View.INVISIBLE
+            if (isLocked &&
+                Globals.isFullScreen
+            ) View.VISIBLE else View.INVISIBLE
+
+        // hide the close image button
+        playerBinding.closeImageButton.visibility =
+            if (isLocked &&
+                !Globals.isFullScreen &&
+                autoRotationEnabled
+            ) View.VISIBLE else View.GONE
 
         // disable double tap to seek when the player is locked
         if (isLocked) enableDoubleTapToSeek() else disableDoubleTapToSeek()
@@ -1481,15 +1492,13 @@ class PlayerFragment : Fragment() {
             exoPlayerView.hideController()
             exoPlayerView.useController = false
 
+            // set portrait mode
             unsetFullscreen()
 
             Globals.isFullScreen = false
         } else {
             // enable exoPlayer controls again
             exoPlayerView.useController = true
-
-            // switch back to portrait mode
-            unsetFullscreen()
         }
     }
 
