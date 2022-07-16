@@ -8,9 +8,6 @@ object Globals {
     var isFullScreen = false
     var isMiniPlayerVisible = false
 
-    // for the settings
-    var isCurrentViewMainSettings = true
-
     // for the data saver mode
     var dataSaverModeEnabled = false
 }
