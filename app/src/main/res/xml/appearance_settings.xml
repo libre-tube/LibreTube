@@ -78,6 +78,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/player">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_caption"
+            app:key="system_caption_style"
+            app:title="@string/system_caption_style"
+            app:defaultValue="true" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory>
 
         <SwitchPreferenceCompat
