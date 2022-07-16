@@ -249,4 +249,5 @@
     <string name="history_summary">Watch and search history</string>
     <string name="watch_positions_title">Watch positions</string>
     <string name="reset_watch_positions">Reset watch positions</string>
+    <string name="system_caption_style">System caption style</string>
 </resources>

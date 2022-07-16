@@ -23,9 +23,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.CaptioningManager
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -78,6 +80,7 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.TimeBar
@@ -737,6 +740,14 @@ class PlayerFragment : Fragment() {
             controllerHideOnTouch = true
             useController = false
             player = exoPlayer
+        }
+
+        val useSystemCaptionStyle = PreferenceHelper.getBoolean(requireContext(), "system_caption_style", true)
+        if (useSystemCaptionStyle) {
+            // set the subtitle style
+            val captionStyle = getCaptionStyle()
+            exoPlayerView.subtitleView?.setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
+            exoPlayerView.subtitleView?.setStyle(captionStyle)
         }
     }
 
@@ -1530,5 +1541,15 @@ class PlayerFragment : Fragment() {
                 unsetFullscreen()
             }
         }
+    }
+
+    private fun getCaptionStyle(): CaptionStyleCompat {
+        val captioningManager = ContextCompat.getSystemService(
+            requireContext(),
+            CaptioningManager::class.java
+        )
+        return if (captioningManager == null || !captioningManager.isEnabled) {
+            CaptionStyleCompat.DEFAULT
+        } else CaptionStyleCompat.createFromCaptionStyle(captioningManager.userStyle)
     }
 }
