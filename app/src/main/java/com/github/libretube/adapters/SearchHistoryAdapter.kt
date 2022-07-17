@@ -34,7 +34,7 @@ class SearchHistoryAdapter(
 
             deleteHistory.setOnClickListener {
                 historyList = historyList - history
-                PreferenceHelper.saveHistory(context, historyList)
+                PreferenceHelper.saveHistory(historyList)
                 notifyDataSetChanged()
             }
 

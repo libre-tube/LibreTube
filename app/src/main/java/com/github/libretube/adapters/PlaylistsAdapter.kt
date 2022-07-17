@@ -57,7 +57,7 @@ class PlaylistsAdapter(
                 builder.setTitle(R.string.deletePlaylist)
                 builder.setMessage(R.string.areYouSure)
                 builder.setPositiveButton(R.string.yes) { _, _ ->
-                    val token = PreferenceHelper.getToken(root.context)
+                    val token = PreferenceHelper.getToken()
                     deletePlaylist(playlist.id!!, token, position)
                 }
                 builder.setNegativeButton(R.string.cancel) { _, _ ->

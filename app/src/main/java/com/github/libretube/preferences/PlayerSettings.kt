@@ -21,7 +21,6 @@ class PlayerSettings : PreferenceFragmentCompat() {
 
         // only show the player orientation option if auto fullscreen is disabled
         playerOrientation?.isEnabled != PreferenceHelper.getBoolean(
-            requireContext(),
             "auto_fullscreen",
             false
         )

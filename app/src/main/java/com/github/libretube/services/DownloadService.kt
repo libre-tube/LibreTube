@@ -52,7 +52,7 @@ class DownloadService : Service() {
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
         duration = intent.getIntExtra("duration", 1)
-        extension = PreferenceHelper.getString(this, "video_format", ".mp4")!!
+        extension = PreferenceHelper.getString("video_format", ".mp4")!!
         downloadType = if (audioUrl != "" && videoUrl != "") DownloadType.MUX
         else if (audioUrl != "") DownloadType.AUDIO
         else if (videoUrl != "") DownloadType.VIDEO
@@ -86,8 +86,8 @@ class DownloadService : Service() {
             Log.e(TAG, "Directory already have")
         }
 
-        val downloadLocationPref = PreferenceHelper.getString(this, "download_location", "")
-        val folderName = PreferenceHelper.getString(this, "download_folder", "LibreTube")
+        val downloadLocationPref = PreferenceHelper.getString("download_location", "")
+        val folderName = PreferenceHelper.getString("download_folder", "LibreTube")
 
         val location = when (downloadLocationPref) {
             "downloads" -> Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)

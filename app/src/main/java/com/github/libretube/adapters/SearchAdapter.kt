@@ -143,7 +143,7 @@ class SearchAdapter(
                 activity.navController.navigate(R.id.channelFragment, bundle)
             }
             val channelId = item.url?.replace("/channel/", "")!!
-            val token = PreferenceHelper.getToken(root.context)
+            val token = PreferenceHelper.getToken()
 
             // only show subscribe button if logged in
             if (token != "") isSubscribed(channelId, token, binding)

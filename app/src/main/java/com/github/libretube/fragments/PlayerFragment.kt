@@ -228,83 +228,70 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setUserPrefs() {
-        token = PreferenceHelper.getToken(requireContext())
+        token = PreferenceHelper.getToken()
 
         // save whether auto rotation is enabled
         autoRotationEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
             "auto_fullscreen",
             false
         )
 
         // save whether related streams and autoplay are enabled
         autoplayEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
             "autoplay",
             false
         )
         relatedStreamsEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
             "related_streams_toggle",
             true
         )
 
         playbackSpeed = PreferenceHelper.getString(
-            requireContext(),
             "playback_speed",
             "1F"
         )!!
 
         fullscreenOrientationPref = PreferenceHelper.getString(
-            requireContext(),
             "fullscreen_orientation",
             "ratio"
         )!!
 
         pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
             "pause_screen_off",
             false
         )
 
         watchPositionsEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
             "watch_positions_toggle",
             true
         )
 
         watchHistoryEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
             "watch_history_toggle",
             true
         )
 
         useSystemCaptionStyle = PreferenceHelper.getBoolean(
-            requireContext(),
             "system_caption_style",
             true
         )
 
         seekIncrement = PreferenceHelper.getString(
-            requireContext(),
             "seek_increment",
             "5"
         )?.toLong()!! * 1000
 
         videoFormatPreference = PreferenceHelper.getString(
-            requireContext(),
             "player_video_format",
             "WEBM"
         )!!
 
         defRes = PreferenceHelper.getString(
-            requireContext(),
             "default_res",
             ""
         )!!
 
         bufferingGoal = PreferenceHelper.getString(
-            requireContext(),
             "buffering_goal",
             "50"
         )?.toInt()!! * 1000
@@ -312,25 +299,25 @@ class PlayerFragment : Fragment() {
 
     private fun setSponsorBlockPrefs() {
         sponsorBlockPrefs.sponsorBlockEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "sb_enabled_key", true)
+            PreferenceHelper.getBoolean("sb_enabled_key", true)
         sponsorBlockPrefs.sponsorNotificationsEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "sb_notifications_key", true)
+            PreferenceHelper.getBoolean("sb_notifications_key", true)
         sponsorBlockPrefs.introEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "intro_category_key", false)
+            PreferenceHelper.getBoolean("intro_category_key", false)
         sponsorBlockPrefs.selfPromoEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "selfpromo_category_key", false)
+            PreferenceHelper.getBoolean("selfpromo_category_key", false)
         sponsorBlockPrefs.interactionEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "interaction_category_key", false)
+            PreferenceHelper.getBoolean("interaction_category_key", false)
         sponsorBlockPrefs.sponsorsEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "sponsors_category_key", true)
+            PreferenceHelper.getBoolean("sponsors_category_key", true)
         sponsorBlockPrefs.outroEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "outro_category_key", false)
+            PreferenceHelper.getBoolean("outro_category_key", false)
         sponsorBlockPrefs.fillerEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "filler_category_key", false)
+            PreferenceHelper.getBoolean("filler_category_key", false)
         sponsorBlockPrefs.musicOffTopicEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "music_offtopic_category_key", false)
+            PreferenceHelper.getBoolean("music_offtopic_category_key", false)
         sponsorBlockPrefs.previewEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "preview_category_key", false)
+            PreferenceHelper.getBoolean("preview_category_key", false)
     }
 
     private fun initializeTransitionLayout() {
@@ -668,13 +655,12 @@ class PlayerFragment : Fragment() {
     private fun saveWatchPosition() {
         if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
             PreferenceHelper.saveWatchPosition(
-                requireContext(),
                 videoId!!,
                 exoPlayer.currentPosition
             )
         } else if (watchPositionsEnabled) {
             // delete watch position if video has ended
-            PreferenceHelper.removeWatchPosition(requireContext(), videoId!!)
+            PreferenceHelper.removeWatchPosition(videoId!!)
         }
     }
 
@@ -739,7 +725,7 @@ class PlayerFragment : Fragment() {
                     // prepare for autoplay
                     initAutoPlay()
                     if (watchHistoryEnabled) {
-                        PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
+                        PreferenceHelper.addToWatchHistory(videoId!!, response)
                     }
                 }
             }
@@ -749,7 +735,7 @@ class PlayerFragment : Fragment() {
 
     private fun seekToWatchPosition() {
         // seek to saved watch position if available
-        val watchPositions = PreferenceHelper.getWatchPositions(requireContext())
+        val watchPositions = PreferenceHelper.getWatchPositions()
         var position: Long? = null
         watchPositions.forEach {
             if (it.videoId == videoId) position = it.position

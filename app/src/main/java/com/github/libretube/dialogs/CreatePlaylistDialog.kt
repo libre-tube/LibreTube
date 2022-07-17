@@ -33,7 +33,7 @@ class CreatePlaylistDialog : DialogFragment() {
                 dismiss()
             }
 
-            token = PreferenceHelper.getToken(requireContext())
+            token = PreferenceHelper.getToken()
 
             binding.createNewPlaylist.setOnClickListener {
                 // avoid creating the same playlist multiple times by spamming the button

@@ -41,7 +41,7 @@ class CustomInstanceDialog : DialogFragment() {
                         URL(customInstance.apiUrl).toURI()
                         URL(customInstance.frontendUrl).toURI()
 
-                        PreferenceHelper.saveCustomInstance(requireContext(), customInstance)
+                        PreferenceHelper.saveCustomInstance(customInstance)
                         activity?.recreate()
                         dismiss()
                     } catch (e: Exception) {

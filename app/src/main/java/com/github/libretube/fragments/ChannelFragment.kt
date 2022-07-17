@@ -56,7 +56,7 @@ class ChannelFragment : Fragment() {
         val refreshChannel = {
             binding.channelRefresh.isRefreshing = true
             fetchChannel()
-            if (PreferenceHelper.getToken(requireContext()) != "") {
+            if (PreferenceHelper.getToken() != "") {
                 isSubscribed()
             }
         }
@@ -85,7 +85,7 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val token = PreferenceHelper.getToken(requireContext())
+                    val token = PreferenceHelper.getToken()
                     RetrofitInstance.authApi.isSubscribed(
                         channelId!!,
                         token
@@ -123,7 +123,7 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 try {
-                    val token = PreferenceHelper.getToken(requireContext())
+                    val token = PreferenceHelper.getToken()
                     RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channelId)
@@ -141,7 +141,7 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 try {
-                    val token = PreferenceHelper.getToken(requireContext())
+                    val token = PreferenceHelper.getToken()
                     RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channelId)

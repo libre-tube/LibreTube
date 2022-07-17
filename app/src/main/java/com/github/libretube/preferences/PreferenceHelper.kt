@@ -14,93 +14,94 @@ import java.lang.reflect.Type
 object PreferenceHelper {
     private val TAG = "PreferenceHelper"
 
-    fun setString(context: Context, key: String?, value: String?) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    private lateinit var prefContext: Context
+    private lateinit var settings: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
+    /**
+     * set the context that is being used to access the shared preferences
+     */
+    fun setContext(context: Context) {
+        prefContext = context
+        settings = getDefaultSharedPreferences(prefContext)
+        editor = getDefaultSharedPreferencesEditor(prefContext)
+    }
+
+    fun setString(key: String?, value: String?) {
         editor.putString(key, value)
         editor.apply()
     }
 
-    fun setInt(context: Context, key: String?, value: Int) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun setInt(key: String?, value: Int) {
         editor.putInt(key, value)
         editor.apply()
     }
 
-    fun setLong(context: Context, key: String?, value: Long) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun setLong(key: String?, value: Long) {
         editor.putLong(key, value)
         editor.apply()
     }
 
-    fun setBoolean(context: Context, key: String?, value: Boolean) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun setBoolean(key: String?, value: Boolean) {
         editor.putBoolean(key, value)
         editor.apply()
     }
 
-    fun getString(context: Context, key: String?, defValue: String?): String? {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
+    fun getString(key: String?, defValue: String?): String? {
         return settings.getString(key, defValue)
     }
 
-    fun getInt(context: Context, key: String?, defValue: Int): Int {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
+    fun getInt(key: String?, defValue: Int): Int {
         return settings.getInt(key, defValue)
     }
 
-    fun getLong(context: Context, key: String?, defValue: Long): Long {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
+    fun getLong(key: String?, defValue: Long): Long {
         return settings.getLong(key, defValue)
     }
 
-    fun getBoolean(context: Context, key: String?, defValue: Boolean): Boolean {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
+    fun getBoolean(key: String?, defValue: Boolean): Boolean {
         return settings.getBoolean(key, defValue)
     }
 
-    fun clearPreferences(context: Context) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun clearPreferences() {
         editor.clear().apply()
     }
 
-    fun removePreference(context: Context, value: String?) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun removePreference(value: String?) {
         editor.remove(value).apply()
     }
 
-    fun getToken(context: Context): String {
-        val sharedPref = context.getSharedPreferences("token", Context.MODE_PRIVATE)
+    fun getToken(): String {
+        val sharedPref = prefContext.getSharedPreferences("token", Context.MODE_PRIVATE)
         return sharedPref?.getString("token", "")!!
     }
 
-    fun setToken(context: Context, newValue: String) {
-        val editor = context.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
+    fun setToken(newValue: String) {
+        val editor = prefContext.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
         editor.putString("token", newValue).apply()
     }
 
-    fun getUsername(context: Context): String {
-        val sharedPref = context.getSharedPreferences("username", Context.MODE_PRIVATE)
+    fun getUsername(): String {
+        val sharedPref = prefContext.getSharedPreferences("username", Context.MODE_PRIVATE)
         return sharedPref.getString("username", "")!!
     }
 
-    fun setUsername(context: Context, newValue: String) {
-        val editor = context.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
+    fun setUsername(newValue: String) {
+        val editor = prefContext.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
         editor.putString("username", newValue).apply()
     }
 
-    fun saveCustomInstance(context: Context, customInstance: CustomInstance) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun saveCustomInstance(customInstance: CustomInstance) {
         val gson = Gson()
 
-        val customInstancesList = getCustomInstances(context)
+        val customInstancesList = getCustomInstances()
         customInstancesList += customInstance
 
         val json = gson.toJson(customInstancesList)
         editor.putString("customInstances", json).apply()
     }
 
-    fun getCustomInstances(context: Context): ArrayList<CustomInstance> {
-        val settings = getDefaultSharedPreferences(context)
+    fun getCustomInstances(): ArrayList<CustomInstance> {
         val gson = Gson()
         val json: String = settings.getString("customInstances", "")!!
         val type: Type = object : TypeToken<List<CustomInstance?>?>() {}.type
@@ -111,9 +112,8 @@ object PreferenceHelper {
         }
     }
 
-    fun getHistory(context: Context): List<String> {
+    fun getHistory(): List<String> {
         return try {
-            val settings = getDefaultSharedPreferences(context)
             val set: Set<String> = settings.getStringSet("search_history", HashSet())!!
             set.toList()
         } catch (e: Exception) {
@@ -121,14 +121,12 @@ object PreferenceHelper {
         }
     }
 
-    fun saveHistory(context: Context, historyList: List<String>) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun saveHistory(historyList: List<String>) {
         val set: Set<String> = HashSet(historyList)
         editor.putStringSet("search_history", set).apply()
     }
 
-    fun addToWatchHistory(context: Context, videoId: String, streams: Streams) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun addToWatchHistory(videoId: String, streams: Streams) {
         val gson = Gson()
 
         val watchHistoryItem = WatchHistoryItem(
@@ -142,7 +140,7 @@ object PreferenceHelper {
             streams.duration
         )
 
-        val watchHistory = getWatchHistory(context)
+        val watchHistory = getWatchHistory()
 
         // delete entries that have the same videoId
         var indexToRemove: Int? = null
@@ -157,8 +155,7 @@ object PreferenceHelper {
         editor.putString("watch_history", json).apply()
     }
 
-    fun getWatchHistory(context: Context): ArrayList<WatchHistoryItem> {
-        val settings = getDefaultSharedPreferences(context)
+    fun getWatchHistory(): ArrayList<WatchHistoryItem> {
         val gson = Gson()
         val json: String = settings.getString("watch_history", "")!!
         val type: Type = object : TypeToken<List<WatchHistoryItem?>?>() {}.type
@@ -169,10 +166,8 @@ object PreferenceHelper {
         }
     }
 
-    fun saveWatchPosition(context: Context, videoId: String, position: Long) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-
-        val watchPositions = getWatchPositions(context)
+    fun saveWatchPosition(videoId: String, position: Long) {
+        val watchPositions = getWatchPositions()
         val watchPositionItem = WatchPosition(videoId, position)
 
         var indexToRemove: Int? = null
@@ -189,10 +184,8 @@ object PreferenceHelper {
         editor.putString("watch_positions", json).commit()
     }
 
-    fun removeWatchPosition(context: Context, videoId: String) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-
-        val watchPositions = getWatchPositions(context)
+    fun removeWatchPosition(videoId: String) {
+        val watchPositions = getWatchPositions()
 
         var indexToRemove: Int? = null
         watchPositions.forEachIndexed { index, item ->
@@ -206,11 +199,12 @@ object PreferenceHelper {
         editor.putString("watch_positions", json).commit()
     }
 
-    fun getWatchPositions(context: Context): ArrayList<WatchPosition> {
-        val settings = getDefaultSharedPreferences(context)
+    fun getWatchPositions(): ArrayList<WatchPosition> {
         val gson = Gson()
+
         val json: String = settings.getString("watch_positions", "")!!
         val type: Type = object : TypeToken<List<WatchPosition?>?>() {}.type
+
         return try {
             gson.fromJson(json, type)
         } catch (e: Exception) {

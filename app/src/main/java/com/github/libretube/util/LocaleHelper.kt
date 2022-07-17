@@ -9,7 +9,7 @@ import java.util.*
 object LocaleHelper {
 
     fun updateLanguage(context: Context) {
-        val languageName = PreferenceHelper.getString(context, "language", "sys")
+        val languageName = PreferenceHelper.getString("language", "sys")
         if (languageName == "sys") updateLocaleConf(context, Locale.getDefault())
         else if ("$languageName".length < 3) {
             val locale = Locale(languageName.toString())

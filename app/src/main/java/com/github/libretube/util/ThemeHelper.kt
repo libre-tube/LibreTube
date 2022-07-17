@@ -17,8 +17,8 @@ import com.google.android.material.color.DynamicColors
 object ThemeHelper {
 
     fun updateTheme(activity: AppCompatActivity) {
-        val themeMode = PreferenceHelper.getString(activity, "theme_toggle", "A")!!
-        val pureThemeEnabled = PreferenceHelper.getBoolean(activity, "pure_theme", false)
+        val themeMode = PreferenceHelper.getString("theme_toggle", "A")!!
+        val pureThemeEnabled = PreferenceHelper.getBoolean("pure_theme", false)
 
         updateAccentColor(activity, pureThemeEnabled)
         updateThemeMode(themeMode)
@@ -30,7 +30,6 @@ object ThemeHelper {
     ) {
         val theme = when (
             PreferenceHelper.getString(
-                activity,
                 "accent_color",
                 "purple"
             )

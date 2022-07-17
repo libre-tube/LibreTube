@@ -26,12 +26,12 @@ class WatchHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val watchHistory = PreferenceHelper.getWatchHistory(requireContext())
+        val watchHistory = PreferenceHelper.getWatchHistory()
         val watchHistoryAdapter = WatchHistoryAdapter(watchHistory, childFragmentManager)
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
 
         binding.clearHistory.setOnClickListener {
-            PreferenceHelper.removePreference(requireContext(), "watch_history")
+            PreferenceHelper.removePreference("watch_history")
             watchHistoryAdapter.clear()
         }
 

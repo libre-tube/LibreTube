@@ -256,7 +256,7 @@ class SearchFragment : Fragment() {
 
     private fun showHistory() {
         binding.searchRecycler.visibility = GONE
-        val historyList = PreferenceHelper.getHistory(requireContext())
+        val historyList = PreferenceHelper.getHistory()
         if (historyList.isNotEmpty()) {
             binding.historyRecycler.adapter =
                 SearchHistoryAdapter(
@@ -271,9 +271,9 @@ class SearchFragment : Fragment() {
 
     private fun addToHistory(query: String) {
         val searchHistoryEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "search_history_toggle", true)
+            PreferenceHelper.getBoolean("search_history_toggle", true)
         if (searchHistoryEnabled) {
-            var historyList = PreferenceHelper.getHistory(requireContext())
+            var historyList = PreferenceHelper.getHistory()
 
             if ((historyList.isNotEmpty() && historyList.contains(query)) || query == "") {
                 return
@@ -285,7 +285,7 @@ class SearchFragment : Fragment() {
                 historyList = historyList.takeLast(10)
             }
 
-            PreferenceHelper.saveHistory(requireContext(), historyList)
+            PreferenceHelper.saveHistory(historyList)
         }
     }
 }
