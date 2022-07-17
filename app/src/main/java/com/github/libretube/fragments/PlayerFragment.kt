@@ -107,47 +107,83 @@ class PlayerFragment : Fragment() {
     private lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
 
+    /**
+     * video information
+     */
     private var videoId: String? = null
     private var playlistId: String? = null
-    private var sId: Int = 0
-    private var eId: Int = 0
-    private var paused = false
-    private var whichQuality = 0
-    private var transitioning = false
-    private var autoplay = false
-    private var isZoomed: Boolean = false
-
     private var isSubscribed: Boolean = false
 
+    /**
+     * for the transition
+     */
+    private var sId: Int = 0
+    private var eId: Int = 0
+    private var transitioning = false
+
+    /**
+     * for the comments
+     */
     private var commentsAdapter: CommentsAdapter? = null
     private var commentsLoaded: Boolean? = false
     private var nextPage: String? = null
     private var isLoading = true
-    private lateinit var exoPlayerView: StyledPlayerView
+
+    /**
+     * for the player
+     */
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var segmentData: Segments
-    private var relatedStreamsEnabled = true
+    private lateinit var chapters: List<ChapterSegment>
 
+    /**
+     * for the player view
+     */
+    private lateinit var exoPlayerView: StyledPlayerView
+    private var isPlayerLocked: Boolean = false
+    private var subtitle = mutableListOf<SubtitleConfiguration>()
+
+    /**
+     * user preferences
+     */
+    private var token = ""
+    private var relatedStreamsEnabled = true
+    private var autoplayEnabled = false
+    private val sponsorBlockPrefs = SponsorBlockPrefs()
+    private var autoRotationEnabled = true
+    private var playbackSpeed = "1F"
+    private var pausePlayerOnScreenOffEnabled = false
+    private var fullscreenOrientationPref = "ratio"
+    private var watchHistoryEnabled = true
+    private var watchPositionsEnabled = true
+    private var useSystemCaptionStyle = true
+    private var seekIncrement = 5L
+    private var videoFormatPreference = "WEBM"
+    private var defRes = ""
+    private var bufferingGoal = 50000
+
+    /**
+     * for autoplay
+     */
     private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var nextStreamId: String? = null
     private var playlistStreamIds: MutableList<String> = arrayListOf()
     private var playlistNextPage: String? = null
 
-    private var isPlayerLocked: Boolean = false
-
+    /**
+     * for the player notification
+     */
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
 
+    /**
+     * for the media description of the notification
+     */
     private lateinit var title: String
     private lateinit var uploader: String
     private lateinit var thumbnailUrl: String
-    private lateinit var chapters: List<ChapterSegment>
-    private val sponsorBlockPrefs = SponsorBlockPrefs()
-    private lateinit var subtitle: MutableList<SubtitleConfiguration>
-
-    private var autoRotationEnabled = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -172,12 +208,8 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard()
 
-        // save whether auto rotation is enabled
-        autoRotationEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
-            "auto_fullscreen",
-            false
-        )
+        setUserPrefs()
+
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
             // enable auto rotation
@@ -188,8 +220,25 @@ class PlayerFragment : Fragment() {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 
+        setSponsorBlockPrefs()
+        createExoPlayer()
+        initializeTransitionLayout()
+        initializeOnClickActions()
+        playVideo()
+    }
+
+    private fun setUserPrefs() {
+        token = PreferenceHelper.getToken(requireContext())
+
+        // save whether auto rotation is enabled
+        autoRotationEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "auto_fullscreen",
+            false
+        )
+
         // save whether related streams and autoplay are enabled
-        autoplay = PreferenceHelper.getBoolean(
+        autoplayEnabled = PreferenceHelper.getBoolean(
             requireContext(),
             "autoplay",
             false
@@ -200,13 +249,91 @@ class PlayerFragment : Fragment() {
             true
         )
 
-        setSponsorBlockPrefs()
-        createExoPlayer(view)
-        initializeTransitionLayout(view)
-        playVideo(view)
+        playbackSpeed = PreferenceHelper.getString(
+            requireContext(),
+            "playback_speed",
+            "1F"
+        )!!
+
+        fullscreenOrientationPref = PreferenceHelper.getString(
+            requireContext(),
+            "fullscreen_orientation",
+            "ratio"
+        )!!
+
+        pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "pause_screen_off",
+            false
+        )
+
+        watchPositionsEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "watch_positions_toggle",
+            true
+        )
+
+        watchHistoryEnabled = PreferenceHelper.getBoolean(
+            requireContext(),
+            "watch_history_toggle",
+            true
+        )
+
+        useSystemCaptionStyle = PreferenceHelper.getBoolean(
+            requireContext(),
+            "system_caption_style",
+            true
+        )
+
+        seekIncrement = PreferenceHelper.getString(
+            requireContext(),
+            "seek_increment",
+            "5"
+        )?.toLong()!! * 1000
+
+        videoFormatPreference = PreferenceHelper.getString(
+            requireContext(),
+            "player_video_format",
+            "WEBM"
+        )!!
+
+        defRes = PreferenceHelper.getString(
+            requireContext(),
+            "default_res",
+            ""
+        )!!
+
+        bufferingGoal = PreferenceHelper.getString(
+            requireContext(),
+            "buffering_goal",
+            "50"
+        )?.toInt()!! * 1000
     }
 
-    private fun initializeTransitionLayout(view: View) {
+    private fun setSponsorBlockPrefs() {
+        sponsorBlockPrefs.sponsorBlockEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "sb_enabled_key", true)
+        sponsorBlockPrefs.sponsorNotificationsEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "sb_notifications_key", true)
+        sponsorBlockPrefs.introEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "intro_category_key", false)
+        sponsorBlockPrefs.selfPromoEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "selfpromo_category_key", false)
+        sponsorBlockPrefs.interactionEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "interaction_category_key", false)
+        sponsorBlockPrefs.sponsorsEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "sponsors_category_key", true)
+        sponsorBlockPrefs.outroEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "outro_category_key", false)
+        sponsorBlockPrefs.fillerEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "filler_category_key", false)
+        sponsorBlockPrefs.musicOffTopicEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "music_offtopic_category_key", false)
+        sponsorBlockPrefs.previewEnabled =
+            PreferenceHelper.getBoolean(requireContext(), "preview_category_key", false)
+    }
+
+    private fun initializeTransitionLayout() {
         videoId = videoId!!.replace("/watch?v=", "")
 
         val mainActivity = activity as MainActivity
@@ -264,7 +391,10 @@ class PlayerFragment : Fragment() {
 
         binding.playerMotionLayout.progress = 1.toFloat()
         binding.playerMotionLayout.transitionToStart()
+    }
 
+    // actions that don't depend on video information
+    private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
             Globals.isMiniPlayerVisible = false
             binding.playerMotionLayout.transitionToEnd()
@@ -292,14 +422,14 @@ class PlayerFragment : Fragment() {
             }
         }
         binding.playImageView.setOnClickListener {
-            paused = if (paused) {
+            if (!exoPlayer.isPlaying) {
+                // start or go on playing
                 binding.playImageView.setImageResource(R.drawable.ic_pause)
                 exoPlayer.play()
-                false
             } else {
+                // pause the video
                 binding.playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
-                true
             }
         }
 
@@ -329,12 +459,11 @@ class PlayerFragment : Fragment() {
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
         playerBinding.aspectRatioButton.setOnClickListener {
+            val isZoomed = exoPlayerView.resizeMode != AspectRatioFrameLayout.RESIZE_MODE_FIT
             if (isZoomed) {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-                isZoomed = false
             } else {
                 exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-                isZoomed = true
             }
         }
 
@@ -355,8 +484,6 @@ class PlayerFragment : Fragment() {
         }
 
         // set default playback speed
-        val playbackSpeed =
-            PreferenceHelper.getString(requireContext(), "playback_speed", "1F")!!
         val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
         val playbackSpeedValues =
             context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
@@ -418,11 +545,11 @@ class PlayerFragment : Fragment() {
                 }
             }
 
-        binding.commentsRecView.layoutManager = LinearLayoutManager(view.context)
+        binding.commentsRecView.layoutManager = LinearLayoutManager(view?.context)
         binding.commentsRecView.setItemViewCacheSize(20)
 
         binding.relatedRecView.layoutManager =
-            GridLayoutManager(view.context, resources.getInteger(R.integer.grid_items))
+            GridLayoutManager(view?.context, resources.getInteger(R.integer.grid_items))
     }
 
     private fun setFullscreen() {
@@ -437,12 +564,9 @@ class PlayerFragment : Fragment() {
         playerBinding.exoTitle.visibility = View.VISIBLE
         playerBinding.closeImageButton.visibility = View.GONE
 
-        val mainActivity = activity as MainActivity
-        val fullscreenOrientationPref = PreferenceHelper
-            .getString(requireContext(), "fullscreen_orientation", "ratio")
-
         scaleControls(1.3F)
 
+        val mainActivity = activity as MainActivity
         if (!autoRotationEnabled) {
             // different orientations of the video are only available when auto rotation is disabled
             val orientation = when (fullscreenOrientationPref) {
@@ -508,12 +632,7 @@ class PlayerFragment : Fragment() {
     }
 
     override fun onPause() {
-        // pause the player if the screen is turned off
-        val pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
-            "pause_screen_off",
-            false
-        )
+        // pauses the player if the screen is turned off
 
         // check whether the screen is on
         val pm = context?.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -547,11 +666,6 @@ class PlayerFragment : Fragment() {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        val watchPositionsEnabled = PreferenceHelper.getBoolean(
-            requireContext(),
-            "watch_positions_toggle",
-            true
-        )
         if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
             PreferenceHelper.saveWatchPosition(
                 requireContext(),
@@ -586,7 +700,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun playVideo(view: View) {
+    private fun playVideo() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -613,7 +727,7 @@ class PlayerFragment : Fragment() {
                     // set media sources for the player
                     setResolutionAndSubtitles(response)
                     prepareExoPlayerView()
-                    initializePlayerView(view, response)
+                    initializePlayerView(response)
                     seekToWatchPosition()
                     exoPlayer.prepare()
                     exoPlayer.play()
@@ -624,8 +738,6 @@ class PlayerFragment : Fragment() {
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
                     initAutoPlay()
-                    val watchHistoryEnabled =
-                        PreferenceHelper.getBoolean(requireContext(), "Watch_history_toggle", true)
                     if (watchHistoryEnabled) {
                         PreferenceHelper.addToWatchHistory(requireContext(), videoId!!, response)
                     }
@@ -653,7 +765,7 @@ class PlayerFragment : Fragment() {
     // the function is working recursively
     private fun initAutoPlay() {
         // save related streams for autoplay
-        if (autoplay) {
+        if (autoplayEnabled) {
             // if it's a playlist use the next video
             if (playlistId != null) {
                 lateinit var playlist: Playlist // var for saving the list in
@@ -710,31 +822,8 @@ class PlayerFragment : Fragment() {
         if (videoId != nextStreamId) {
             // save the id of the next stream as videoId and load the next video
             videoId = nextStreamId
-            playVideo(view!!)
+            playVideo()
         }
-    }
-
-    private fun setSponsorBlockPrefs() {
-        sponsorBlockPrefs.sponsorBlockEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "sb_enabled_key", true)
-        sponsorBlockPrefs.sponsorNotificationsEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "sb_notifications_key", true)
-        sponsorBlockPrefs.introEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "intro_category_key", false)
-        sponsorBlockPrefs.selfPromoEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "selfpromo_category_key", false)
-        sponsorBlockPrefs.interactionEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "interaction_category_key", false)
-        sponsorBlockPrefs.sponsorsEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "sponsors_category_key", true)
-        sponsorBlockPrefs.outroEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "outro_category_key", false)
-        sponsorBlockPrefs.fillerEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "filler_category_key", false)
-        sponsorBlockPrefs.musicOffTopicEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "music_offtopic_category_key", false)
-        sponsorBlockPrefs.previewEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "preview_category_key", false)
     }
 
     private fun fetchSponsorBlockSegments() {
@@ -798,7 +887,6 @@ class PlayerFragment : Fragment() {
             player = exoPlayer
         }
 
-        val useSystemCaptionStyle = PreferenceHelper.getBoolean(requireContext(), "system_caption_style", true)
         if (useSystemCaptionStyle) {
             // set the subtitle style
             val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
@@ -807,7 +895,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun initializePlayerView(view: View, response: Streams) {
+    private fun initializePlayerView(response: Streams) {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
@@ -876,11 +964,11 @@ class PlayerFragment : Fragment() {
                     playbackState == Player.STATE_ENDED &&
                     nextStreamId != null &&
                     !transitioning &&
-                    autoplay
+                    autoplayEnabled
                 ) {
                     transitioning = true
                     // check whether autoplay is enabled
-                    if (autoplay) playNextVideo()
+                    if (autoplayEnabled) playNextVideo()
                 }
 
                 if (playWhenReady && playbackState == Player.STATE_READY) {
@@ -961,13 +1049,12 @@ class PlayerFragment : Fragment() {
             }
 
         binding.playerChannel.setOnClickListener {
-            val activity = view.context as MainActivity
+            val activity = view?.context as MainActivity
             val bundle = bundleOf("channel_id" to response.uploaderUrl)
             activity.navController.navigate(R.id.channelFragment, bundle)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }
-        val token = PreferenceHelper.getToken(requireContext())
         if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
             isSubscribed(binding.playerSubscribe, channelId!!)
@@ -982,9 +1069,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun enableDoubleTapToSeek() {
-        val seekIncrement =
-            PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
-
         val hideDoubleTapOverlayDelay = 700L
 
         // enable rewind button
@@ -1171,9 +1255,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setResolutionAndSubtitles(response: Streams) {
-        val videoFormatPreference =
-            PreferenceHelper.getString(requireContext(), "player_video_format", "WEBM")
-
         var videosNameArray: Array<CharSequence> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
 
@@ -1264,7 +1345,6 @@ class PlayerFragment : Fragment() {
                 .setItems(
                     videosNameArray
                 ) { _, which ->
-                    whichQuality = which
                     if (
                         videosNameArray[which] == getString(R.string.hls) ||
                         videosNameArray[which] == "LBRY HLS"
@@ -1293,12 +1373,6 @@ class PlayerFragment : Fragment() {
         videosNameArray: Array<CharSequence>,
         videosUrlArray: Array<Uri>
     ) {
-        val defRes = PreferenceHelper.getString(
-            requireContext(),
-            "default_res",
-            ""
-        )!!
-
         if (defRes != "") {
             videosNameArray.forEachIndexed { index, pipedStream ->
                 // search for quality preference in the available stream sources
@@ -1332,10 +1406,7 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun createExoPlayer(view: View) {
-        val bufferingGoal =
-            PreferenceHelper.getString(requireContext(), "buffering_goal", "50")?.toInt()!! * 1000
-
+    private fun createExoPlayer() {
         val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
         val cronetDataSourceFactory: CronetDataSource.Factory =
             CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
@@ -1365,7 +1436,7 @@ class PlayerFragment : Fragment() {
 
         trackSelector = DefaultTrackSelector(requireContext())
 
-        exoPlayer = ExoPlayer.Builder(view.context)
+        exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
             .setTrackSelector(trackSelector)
@@ -1426,7 +1497,6 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.isSubscribed(
                         channel_id,
                         token
@@ -1466,7 +1536,6 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 try {
-                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.subscribe(
                         token,
                         Subscribe(channel_id)
@@ -1489,7 +1558,6 @@ class PlayerFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 try {
-                    val token = PreferenceHelper.getToken(requireContext())
                     RetrofitInstance.authApi.unsubscribe(
                         token,
                         Subscribe(channel_id)
