@@ -1222,9 +1222,8 @@ class PlayerFragment : Fragment() {
                         val captionLanguage = subtitlesNamesList[index]
                         val captionLanguageCode = subtitleCodesList[index]
 
-                        // update the icon
+                        // update the icon of the captions button
                         playerBinding.captions.setImageResource(R.drawable.ic_caption)
-                        playerBinding.captions.setColorFilter(Color.WHITE)
 
                         // select the new caption preference
                         trackSelector.buildUponParameters()
@@ -1236,7 +1235,6 @@ class PlayerFragment : Fragment() {
                     } else {
                         // none selected
                         playerBinding.captions.setImageResource(R.drawable.ic_caption_outlined)
-                        playerBinding.captions.setColorFilter(Color.GRAY)
 
                         // disable captions
                         trackSelector.buildUponParameters()
@@ -1416,8 +1414,7 @@ class PlayerFragment : Fragment() {
         // hide the close image button
         playerBinding.closeImageButton.visibility =
             if (isLocked &&
-                !Globals.isFullScreen &&
-                autoRotationEnabled
+                !(Globals.isFullScreen && !autoRotationEnabled)
             ) View.VISIBLE else View.GONE
 
         // disable double tap to seek when the player is locked
@@ -1569,10 +1566,22 @@ class PlayerFragment : Fragment() {
             // set portrait mode
             unsetFullscreen()
 
+            with(binding.playerMotionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
+                enableTransition(R.id.yt_transition, false)
+            }
+            binding.linLayout.visibility = View.GONE
+
             Globals.isFullScreen = false
         } else {
             // enable exoPlayer controls again
             exoPlayerView.useController = true
+
+            with(binding.playerMotionLayout) {
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                enableTransition(R.id.yt_transition, true)
+            }
+            binding.linLayout.visibility = View.VISIBLE
         }
     }
 
@@ -1581,7 +1590,7 @@ class PlayerFragment : Fragment() {
         binding.playerScrollView.getHitRect(bounds)
 
         if (SDK_INT >= Build.VERSION_CODES.O &&
-            exoPlayer.isPlaying && (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.isFullScreen)
+            (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.isFullScreen)
         ) {
             activity?.enterPictureInPictureMode(updatePipParams())
         }
