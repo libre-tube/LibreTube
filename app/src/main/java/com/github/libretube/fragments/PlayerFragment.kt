@@ -984,6 +984,7 @@ class PlayerFragment : Fragment() {
     private fun enableDoubleTapToSeek() {
         val seekIncrement =
             PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
+
         val hideDoubleTapOverlayDelay = 700L
 
         // enable rewind button
@@ -991,11 +992,14 @@ class PlayerFragment : Fragment() {
             context,
             object : SimpleOnGestureListener() {
                 override fun onDoubleTap(e: MotionEvent): Boolean {
-                    binding.rewindBTN.visibility = View.VISIBLE
                     exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        binding.rewindBTN.visibility = View.INVISIBLE
-                    }, hideDoubleTapOverlayDelay)
+
+                    // show the rewind button
+                    binding.rewindBTN.apply {
+                        visibility = View.VISIBLE
+                        removeCallbacks(hideRewindButtonRunnable)
+                        postDelayed(hideRewindButtonRunnable, hideDoubleTapOverlayDelay)
+                    }
                     return super.onDoubleTap(e)
                 }
 
@@ -1017,12 +1021,15 @@ class PlayerFragment : Fragment() {
             context,
             object : SimpleOnGestureListener() {
                 override fun onDoubleTap(e: MotionEvent): Boolean {
-                    binding.forwardBTN.visibility = View.VISIBLE
                     exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        binding.forwardBTN.visibility = View.INVISIBLE
-                    }, hideDoubleTapOverlayDelay)
-                    return super.onSingleTapConfirmed(e)
+
+                    // show the forward button
+                    binding.forwardBTN.apply {
+                        visibility = View.VISIBLE
+                        removeCallbacks(hideForwardButtonRunnable)
+                        postDelayed(hideForwardButtonRunnable, hideDoubleTapOverlayDelay)
+                    }
+                    return super.onDoubleTap(e)
                 }
 
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
@@ -1038,6 +1045,9 @@ class PlayerFragment : Fragment() {
             true
         }
     }
+
+    private val hideForwardButtonRunnable = Runnable { binding.forwardBTN.visibility = View.GONE }
+    private val hideRewindButtonRunnable = Runnable { binding.rewindBTN.visibility = View.GONE }
 
     private fun disableDoubleTapToSeek() {
         // disable fast forward and rewind by double tapping
