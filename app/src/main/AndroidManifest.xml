@@ -22,10 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Purple">
         <activity
-            android:name=".activities.Player"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
-        <activity
             android:name=".activities.NoInternetActivity"
             android:label="@string/noInternet" />
         <activity
