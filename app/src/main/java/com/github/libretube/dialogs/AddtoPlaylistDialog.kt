@@ -32,7 +32,7 @@ class AddtoPlaylistDialog : DialogFragment() {
             // Get the layout inflater
             binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
 
-            token = PreferenceHelper.getToken(requireContext())
+            token = PreferenceHelper.getToken()
 
             if (token != "") fetchPlaylists()
 

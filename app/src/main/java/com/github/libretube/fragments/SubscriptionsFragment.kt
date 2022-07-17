@@ -47,7 +47,7 @@ class SubscriptionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        token = PreferenceHelper.getToken(requireContext())
+        token = PreferenceHelper.getToken()
 
         if (token != "") {
             binding.loginOrRegister.visibility = View.GONE
@@ -56,7 +56,6 @@ class SubscriptionsFragment : Fragment() {
             binding.subProgress.visibility = View.VISIBLE
 
             val grid = PreferenceHelper.getString(
-                requireContext(),
                 "grid",
                 resources.getInteger(R.integer.grid_items).toString()
             )!!

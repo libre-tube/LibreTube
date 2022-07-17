@@ -74,7 +74,7 @@ class PlaylistFragment : Fragment() {
                     binding.playlistTotVideos.text =
                         getString(R.string.videoCount, response.videos.toString())
 
-                    val user = PreferenceHelper.getUsername(requireContext())
+                    val user = PreferenceHelper.getUsername()
                     // check whether the user owns the playlist
                     val isOwner = response.uploaderUrl == null &&
                         response.uploader.equals(user, true)

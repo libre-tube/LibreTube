@@ -80,7 +80,7 @@ class PlaylistAdapter(
             if (isOwner) {
                 deletePlaylist.visibility = View.VISIBLE
                 deletePlaylist.setOnClickListener {
-                    val token = PreferenceHelper.getToken(root.context)
+                    val token = PreferenceHelper.getToken()
                     removeFromPlaylist(token, position)
                 }
             }

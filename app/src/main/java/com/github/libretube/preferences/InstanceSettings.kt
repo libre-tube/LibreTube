@@ -122,7 +122,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             RetrofitInstance.url = newValue.toString()
-            if (!PreferenceHelper.getBoolean(requireContext(), "auth_instance_toggle", false)) {
+            if (!PreferenceHelper.getBoolean("auth_instance_toggle", false)) {
                 RetrofitInstance.authUrl = newValue.toString()
                 logout()
             }
@@ -133,7 +133,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val authInstance = findPreference<ListPreference>("selectAuthInstance")
         initCustomInstances(authInstance!!)
         // hide auth instance if option deselected
-        if (!PreferenceHelper.getBoolean(requireContext(), "auth_instance_toggle", false)) {
+        if (!PreferenceHelper.getBoolean("auth_instance_toggle", false)) {
             authInstance.isVisible = false
         }
         authInstance.setOnPreferenceChangeListener { _, newValue ->
@@ -167,14 +167,14 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
         clearCustomInstances?.setOnPreferenceClickListener {
-            PreferenceHelper.removePreference(requireContext(), "customInstances")
+            PreferenceHelper.removePreference("customInstances")
             val intent = Intent(context, SettingsActivity::class.java)
             startActivity(intent)
             true
         }
 
         val login = findPreference<Preference>("login_register")
-        val token = PreferenceHelper.getToken(requireContext())
+        val token = PreferenceHelper.getToken()
         if (token != "") login?.setTitle(R.string.logout)
         login?.setOnPreferenceClickListener {
             if (token == "") {
@@ -190,7 +190,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val deleteAccount = findPreference<Preference>("delete_account")
         deleteAccount?.setOnPreferenceClickListener {
-            val token = PreferenceHelper.getToken(requireContext())
+            val token = PreferenceHelper.getToken()
             if (token != "") {
                 val newFragment = DeleteAccountDialog()
                 newFragment.show(childFragmentManager, "DeleteAccountDialog")
@@ -208,7 +208,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun initCustomInstances(instancePref: ListPreference) {
-        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
+        val customInstances = PreferenceHelper.getCustomInstances()
 
         var instanceNames = resources.getStringArray(R.array.instances)
         var instanceValues = resources.getStringArray(R.array.instancesValue)
@@ -232,7 +232,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun logout() {
-        PreferenceHelper.setToken(requireContext(), "")
+        PreferenceHelper.setToken("")
         Toast.makeText(context, getString(R.string.loggedout), Toast.LENGTH_SHORT).show()
     }
 
@@ -286,7 +286,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun importSubscriptions() {
-        val token = PreferenceHelper.getToken(requireContext())
+        val token = PreferenceHelper.getToken()
         // check StorageAccess
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Log.d("myz", "" + Build.VERSION.SDK_INT)
@@ -339,7 +339,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    val token = PreferenceHelper.getToken(requireContext())
+                    val token = PreferenceHelper.getToken()
                     RetrofitInstance.authApi.importSubscriptions(
                         false,
                         token,

@@ -71,7 +71,7 @@ class BackgroundMode {
          */
         player!!.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
-                val autoplay = PreferenceHelper.getBoolean(c, "autoplay", false)
+                val autoplay = PreferenceHelper.getBoolean("autoplay", false)
                 if (state == Player.STATE_ENDED) {
                     if (autoplay) playNextVideo(c)
                 }

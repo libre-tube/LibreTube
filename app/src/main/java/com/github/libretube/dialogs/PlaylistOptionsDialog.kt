@@ -51,7 +51,7 @@ class PlaylistOptionsDialog(
                 when (optionsList[which]) {
                     // Clone the playlist to the users Piped account
                     context?.getString(R.string.clonePlaylist) -> {
-                        val token = PreferenceHelper.getToken(requireContext())
+                        val token = PreferenceHelper.getToken()
                         if (token != "") {
                             importPlaylist(token, playlistId)
                         } else {
@@ -69,7 +69,7 @@ class PlaylistOptionsDialog(
                         shareDialog.show(parentFragmentManager, "ShareDialog")
                     }
                     context?.getString(R.string.deletePlaylist) -> {
-                        val token = PreferenceHelper.getToken(requireContext())
+                        val token = PreferenceHelper.getToken()
                         deletePlaylist(playlistId, token)
                     }
                 }

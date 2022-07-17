@@ -62,12 +62,11 @@ class MainActivity : AppCompatActivity() {
         CronetHelper.initCronet(this.applicationContext)
 
         RetrofitInstance.url =
-            PreferenceHelper.getString(this, "selectInstance", PIPED_API_URL)!!
+            PreferenceHelper.getString("selectInstance", PIPED_API_URL)!!
         // set auth instance
         RetrofitInstance.authUrl =
-            if (PreferenceHelper.getBoolean(this, "auth_instance_toggle", false)) {
+            if (PreferenceHelper.getBoolean("auth_instance_toggle", false)) {
                 PreferenceHelper.getString(
-                    this,
                     "selectAuthInstance",
                     PIPED_API_URL
                 )!!
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
         // save whether the data saver mode is enabled
         Globals.dataSaverModeEnabled = PreferenceHelper.getBoolean(
-            this,
             "data_saver_mode",
             false
         )
@@ -100,12 +98,12 @@ class MainActivity : AppCompatActivity() {
             window.navigationBarColor = color
 
             // hide the trending page if enabled
-            val hideTrendingPage = PreferenceHelper.getBoolean(this, "hide_trending_page", false)
+            val hideTrendingPage = PreferenceHelper.getBoolean("hide_trending_page", false)
             if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
                 false
 
             // save start tab fragment id
-            startFragmentId = when (PreferenceHelper.getString(this, "default_tab", "home")) {
+            startFragmentId = when (PreferenceHelper.getString("default_tab", "home")) {
                 "home" -> R.id.homeFragment
                 "subscriptions" -> R.id.subscriptionsFragment
                 "library" -> R.id.libraryFragment
@@ -119,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(startFragmentId)
 
             val labelVisibilityMode = when (
-                PreferenceHelper.getString(this, "label_visibility", "always")
+                PreferenceHelper.getString("label_visibility", "always")
             ) {
                 "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
                 "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED

@@ -57,13 +57,12 @@ class ShareDialog(
     // get the frontend url if it's a custom instance
     private fun getCustomInstanceFrontendUrl(): String {
         val instancePref = PreferenceHelper.getString(
-            requireContext(),
             "selectInstance",
             PIPED_FRONTEND_URL
         )
 
         // get the api urls of the other custom instances
-        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
+        val customInstances = PreferenceHelper.getCustomInstances()
 
         // return the custom instance frontend url if available
         customInstances.forEach { instance ->

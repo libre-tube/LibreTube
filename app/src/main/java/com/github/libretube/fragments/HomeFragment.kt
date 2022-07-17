@@ -41,12 +41,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val grid = PreferenceHelper.getString(
-            requireContext(),
             "grid",
             resources.getInteger(R.integer.grid_items).toString()
         )!!
 
-        val regionPref = PreferenceHelper.getString(requireContext(), "region", "sys")!!
+        val regionPref = PreferenceHelper.getString("region", "sys")!!
 
         // get the system default country if auto region selected
         region = if (regionPref == "sys") {

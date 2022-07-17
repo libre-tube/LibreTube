@@ -17,8 +17,8 @@ import com.google.android.material.color.DynamicColors
 object ThemeHelper {
 
     fun updateTheme(activity: AppCompatActivity) {
-        val themeMode = PreferenceHelper.getString(activity, "theme_toggle", "A")!!
-        val pureThemeEnabled = PreferenceHelper.getBoolean(activity, "pure_theme", false)
+        val themeMode = PreferenceHelper.getString("theme_toggle", "A")!!
+        val pureThemeEnabled = PreferenceHelper.getBoolean("pure_theme", false)
 
         updateAccentColor(activity, pureThemeEnabled)
         updateThemeMode(themeMode)
@@ -30,7 +30,6 @@ object ThemeHelper {
     ) {
         val theme = when (
             PreferenceHelper.getString(
-                activity,
                 "accent_color",
                 "purple"
             )
@@ -72,15 +71,25 @@ object ThemeHelper {
         val activityAliases = context.resources.getStringArray(R.array.iconsValue)
         // Disable Old Icon(s)
         for (activityAlias in activityAliases) {
+            val activityClass = "com.github.libretube." +
+                if (activityAlias == activityAliases[0]) "activities.MainActivity" // default icon/activity
+                else activityAlias
+
+            // remove old icons
             context.packageManager.setComponentEnabledSetting(
-                ComponentName(context.packageName, "com.github.libretube.$activityAlias"),
+                ComponentName(context.packageName, activityClass),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP
             )
         }
+
+        // set the class name for the activity alias
+        val newLogoActivityClass = "com.github.libretube." +
+            if (newLogoActivityAlias == activityAliases[0]) "activities.MainActivity" // default icon/activity
+            else newLogoActivityAlias
         // Enable New Icon
         context.packageManager.setComponentEnabledSetting(
-            ComponentName(context.packageName, "com.github.libretube.$newLogoActivityAlias"),
+            ComponentName(context.packageName, newLogoActivityClass),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP
         )

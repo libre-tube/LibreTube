@@ -45,7 +45,7 @@ class DeleteAccountDialog : DialogFragment() {
     private fun deleteAccount(password: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val token = PreferenceHelper.getToken(requireContext())
+                val token = PreferenceHelper.getToken()
 
                 try {
                     RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
@@ -64,6 +64,6 @@ class DeleteAccountDialog : DialogFragment() {
     }
 
     private fun logout() {
-        PreferenceHelper.setToken(requireContext(), "")
+        PreferenceHelper.setToken("")
     }
 }

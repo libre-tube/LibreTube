@@ -4,12 +4,21 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.github.libretube.preferences.PreferenceHelper
 
 class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        /**
+         * initialize the needed [NotificationChannel]s for DownloadService and BackgroundMode
+         */
         initializeNotificationChannels()
+
+        /**
+         * set the applicationContext as context for the [PreferenceHelper]
+         */
+        PreferenceHelper.setContext(applicationContext)
     }
 
     /**
@@ -45,10 +54,5 @@ class MyApp : Application() {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
-    }
-
-    companion object {
-        @JvmField
-        var seekTo: Long? = 0
     }
 }

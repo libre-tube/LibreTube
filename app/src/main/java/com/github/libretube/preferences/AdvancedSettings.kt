@@ -36,10 +36,10 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         MaterialAlertDialogBuilder(requireContext())
             .setPositiveButton(R.string.reset) { _, _ ->
                 // clear default preferences
-                PreferenceHelper.clearPreferences(requireContext())
+                PreferenceHelper.clearPreferences()
 
                 // clear login token
-                PreferenceHelper.setToken(requireContext(), "")
+                PreferenceHelper.setToken("")
 
                 val restartDialog = RequireRestartDialog()
                 restartDialog.show(childFragmentManager, "RequireRestartDialog")
