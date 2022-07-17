@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -71,7 +72,7 @@ class BackgroundMode {
          */
         player!!.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
-                val autoplay = PreferenceHelper.getBoolean("autoplay", false)
+                val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, false)
                 if (state == Player.STATE_ENDED) {
                     if (autoplay) playNextVideo(c)
                 }

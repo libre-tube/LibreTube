@@ -18,14 +18,14 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.advanced))
 
-        val dataSaverMode = findPreference<SwitchPreferenceCompat>("data_saver_mode")
+        val dataSaverMode = findPreference<SwitchPreferenceCompat>(PreferenceKeys.DATA_SAVER_MODE)
         dataSaverMode?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
-        val resetSettings = findPreference<Preference>("reset_settings")
+        val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
         resetSettings?.setOnPreferenceClickListener {
             showResetDialog()
             true

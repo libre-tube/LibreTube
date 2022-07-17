@@ -18,6 +18,7 @@ import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -56,7 +57,7 @@ class SubscriptionsFragment : Fragment() {
             binding.subProgress.visibility = View.VISIBLE
 
             val grid = PreferenceHelper.getString(
-                "grid",
+                PreferenceKeys.GRID_COLUMNS,
                 resources.getInteger(R.integer.grid_items).toString()
             )!!
             binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())

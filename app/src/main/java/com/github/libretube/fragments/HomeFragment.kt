@@ -13,6 +13,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
@@ -41,11 +42,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val grid = PreferenceHelper.getString(
-            "grid",
+            PreferenceKeys.GRID_COLUMNS,
             resources.getInteger(R.integer.grid_items).toString()
         )!!
 
-        val regionPref = PreferenceHelper.getString("region", "sys")!!
+        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")!!
 
         // get the system default country if auto region selected
         region = if (regionPref == "sys") {

@@ -21,6 +21,7 @@ import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.R
 import com.github.libretube.obj.DownloadType
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import java.io.File
 
 var IS_DOWNLOAD_RUNNING = false
@@ -52,7 +53,7 @@ class DownloadService : Service() {
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
         duration = intent.getIntExtra("duration", 1)
-        extension = PreferenceHelper.getString("video_format", ".mp4")!!
+        extension = PreferenceHelper.getString(PreferenceKeys.DOWNLOAD_VIDEO_FORMAT, ".mp4")!!
         downloadType = if (audioUrl != "" && videoUrl != "") DownloadType.MUX
         else if (audioUrl != "") DownloadType.AUDIO
         else if (videoUrl != "") DownloadType.VIDEO
@@ -86,8 +87,8 @@ class DownloadService : Service() {
             Log.e(TAG, "Directory already have")
         }
 
-        val downloadLocationPref = PreferenceHelper.getString("download_location", "")
-        val folderName = PreferenceHelper.getString("download_folder", "LibreTube")
+        val downloadLocationPref = PreferenceHelper.getString(PreferenceKeys.DOWNLOAD_LOCATION, "")
+        val folderName = PreferenceHelper.getString(PreferenceKeys.DOWNLOAD_FOLDER, "LibreTube")
 
         val location = when (downloadLocationPref) {
             "downloads" -> Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)
