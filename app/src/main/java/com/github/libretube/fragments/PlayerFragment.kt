@@ -445,13 +445,17 @@ class PlayerFragment : Fragment() {
         }
 
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
+        val aspectRatioModes = arrayOf(
+            AspectRatioFrameLayout.RESIZE_MODE_FIT,
+            AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
+            AspectRatioFrameLayout.RESIZE_MODE_FILL
+        )
         playerBinding.aspectRatioButton.setOnClickListener {
-            val isZoomed = exoPlayerView.resizeMode != AspectRatioFrameLayout.RESIZE_MODE_FIT
-            if (isZoomed) {
-                exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-            } else {
-                exoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-            }
+            val index = aspectRatioModes.indexOf(exoPlayerView.resizeMode)
+            val newAspectRatioMode =
+                if (index + 1 < aspectRatioModes.size) aspectRatioModes[index + 1]
+                else aspectRatioModes[0]
+            exoPlayerView.resizeMode = newAspectRatioMode
         }
 
         // lock and unlock the player
