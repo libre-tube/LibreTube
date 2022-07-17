@@ -15,6 +15,7 @@
         android:layout_gravity="top"
         android:animateLayoutChanges="true"
         android:orientation="vertical"
+        android:paddingTop="5dp"
         android:paddingStart="5dp"
         android:paddingEnd="10dp">
 
@@ -90,8 +91,9 @@
             android:id="@+id/advanced_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="-10dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="-12dp"
             android:orientation="horizontal"
             android:visibility="gone">
 

@@ -1079,7 +1079,7 @@ class PlayerFragment : Fragment() {
                 }
 
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    toggleController()
+                    binding.player.performClick()
                     return super.onSingleTapConfirmed(e)
                 }
             }
@@ -1108,7 +1108,7 @@ class PlayerFragment : Fragment() {
                 }
 
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    toggleController()
+                    binding.player.performClick()
                     return super.onSingleTapConfirmed(e)
                 }
             }
@@ -1128,12 +1128,6 @@ class PlayerFragment : Fragment() {
         // disable fast forward and rewind by double tapping
         binding.forwardFL.visibility = View.GONE
         binding.rewindFL.visibility = View.GONE
-    }
-
-    // toggle the visibility of the player controller
-    private fun toggleController() {
-        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
-        else exoPlayerView.showController()
     }
 
     // enable seek bar preview

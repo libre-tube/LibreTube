@@ -169,92 +169,93 @@ class MainActivity : AppCompatActivity() {
         val intentData: Uri? = intent?.data
         // check whether an URI got submitted over the intent data
         if (intentData != null && intentData.host != null && intentData.path != null) {
-            Log.d("intentData", "${intentData.host} ${intentData.path} ")
+            Log.d(TAG, "intentData: ${intentData.host} ${intentData.path} ")
             // load the URI of the submitted link (e.g. video)
             loadIntentData(intentData)
         }
     }
 
     private fun loadIntentData(data: Uri) {
-        // channel
-        if (data.path!!.contains("/channel/") ||
+        if (data.path!!.contains("/channel/")
+        ) {
+            val channelId = data.path!!
+                .replace("/channel/", "")
+
+            loadChannel(channelId = channelId)
+        } else if (
             data.path!!.contains("/c/") ||
             data.path!!.contains("/user/")
         ) {
-            Log.i(TAG, "URI Type: Channel")
-            var channel = data.path
-            channel = channel!!.replace("/c/", "")
-            channel = channel.replace("/user/", "")
-            val bundle = bundleOf("channel_id" to channel)
-            navController.navigate(R.id.channelFragment, bundle)
-        } else if (data.path!!.contains("/playlist")) {
-            Log.i(TAG, "URI Type: Playlist")
-            var playlist = data.query!!
-            if (playlist.contains("&")) {
-                val playlists = playlist.split("&")
-                for (v in playlists) {
+            val channelName = data.path!!
+                .replace("/c/", "")
+                .replace("/user/", "")
+
+            loadChannel(channelName = channelName)
+        } else if (
+            data.path!!.contains("/playlist")
+        ) {
+            var playlistId = data.query!!
+            if (playlistId.contains("&")) {
+                for (v in playlistId.split("&")) {
                     if (v.contains("list=")) {
-                        playlist = v
+                        playlistId = v.replace("list=", "")
                         break
                     }
                 }
             }
-            playlist = playlist.replace("list=", "")
-            val bundle = bundleOf("playlist_id" to playlist)
-            navController.navigate(R.id.playlistFragment, bundle)
-        } else if (data.path!!.contains("/shorts/") ||
+
+            loadPlaylist(playlistId)
+        } else if (
+            data.path!!.contains("/shorts/") ||
             data.path!!.contains("/embed/") ||
             data.path!!.contains("/v/")
         ) {
-            Log.i(TAG, "URI Type: Video")
-            val watch = data.path!!
+            val videoId = data.path!!
                 .replace("/shorts/", "")
                 .replace("/v/", "")
                 .replace("/embed/", "")
-            val bundle = Bundle()
-            bundle.putString("videoId", watch)
-            // for time stamped links
-            if (data.query != null && data.query?.contains("t=")!!) {
-                val timeStamp = data.query.toString().split("t=")[1]
-                bundle.putLong("timeStamp", timeStamp.toLong())
-            }
-            loadWatch(bundle)
+
+            loadVideo(videoId, data.query)
         } else if (data.path!!.contains("/watch") && data.query != null) {
-            Log.d("dafaq", data.query!!)
-            var watch = data.query!!
-            if (watch.contains("&")) {
-                val watches = watch.split("&")
+            var videoId = data.query!!
+
+            if (videoId.contains("&")) {
+                val watches = videoId.split("&")
                 for (v in watches) {
                     if (v.contains("v=")) {
-                        watch = v
+                        videoId = v.replace("v=", "")
                         break
                     }
                 }
+            } else {
+                videoId = videoId
+                    .replace("v=", "")
             }
-            val bundle = Bundle()
-            bundle.putString("videoId", watch.replace("v=", ""))
-            // for time stamped links
-            if (data.query != null && data.query?.contains("t=")!!) {
-                val timeStamp = data.query.toString().split("t=")[1]
-                bundle.putLong("timeStamp", timeStamp.toLong())
-            }
-            loadWatch(bundle)
+
+            loadVideo(videoId, data.query)
         } else {
-            val watch = data.path!!.replace("/", "")
-            val bundle = Bundle()
-            bundle.putString("videoId", watch)
-            // for time stamped links
-            if (data.query != null && data.query?.contains("t=")!!) {
-                val timeStamp = data.query.toString().split("t=")[1]
-                bundle.putLong("timeStamp", timeStamp.toLong())
-            }
-            loadWatch(bundle)
+            val videoId = data.path!!.replace("/", "")
+
+            loadVideo(videoId, data.query)
         }
     }
 
-    private fun loadWatch(bundle: Bundle) {
+    private fun loadVideo(videoId: String, query: String?) {
+        Log.i(TAG, "URI type: Video")
+
+        val bundle = Bundle()
+        Log.e(TAG, videoId)
+
+        // for time stamped links
+        if (query != null && query.contains("t=")) {
+            val timeStamp = query.toString().split("t=")[1]
+            bundle.putLong("timeStamp", timeStamp.toLong())
+        }
+
+        bundle.putString("videoId", videoId)
         val frag = PlayerFragment()
         frag.arguments = bundle
+
         supportFragmentManager.beginTransaction()
             .remove(PlayerFragment())
             .commit()
@@ -266,6 +267,24 @@ class MainActivity : AppCompatActivity() {
             motionLayout.transitionToEnd()
             motionLayout.transitionToStart()
         }, 100)
+    }
+
+    private fun loadChannel(
+        channelId: String? = null,
+        channelName: String? = null
+    ) {
+        Log.i(TAG, "Uri Type: Channel")
+
+        val bundle = if (channelId != null) bundleOf("channel_id" to channelId)
+        else bundleOf("channel_name" to channelName)
+        navController.navigate(R.id.channelFragment, bundle)
+    }
+
+    private fun loadPlaylist(playlistId: String) {
+        Log.i(TAG, "Uri Type: Playlist")
+
+        val bundle = bundleOf("playlist_id" to playlistId)
+        navController.navigate(R.id.playlistFragment, bundle)
     }
 
     override fun onBackPressed() {
