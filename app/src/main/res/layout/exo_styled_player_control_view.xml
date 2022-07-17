@@ -32,15 +32,15 @@
                 <ImageView
                     android:id="@+id/close_imageButton"
                     style="@style/PlayerControlTop"
+                    android:layout_marginEnd="-10dp"
                     android:src="@drawable/ic_close"
                     app:tint="@android:color/white" />
 
                 <ImageView
                     android:id="@+id/lock_player"
                     style="@style/PlayerControlTop"
-                    android:layout_marginStart="-5dp"
-                    android:scaleX=".9"
-                    android:scaleY=".9"
+                    android:scaleX=".8"
+                    android:scaleY=".8"
                     android:src="@drawable/ic_unlocked" />
 
             </LinearLayout>
@@ -99,7 +99,7 @@
                 android:id="@+id/captions"
                 style="@style/PlayerControlTop"
                 android:src="@drawable/ic_caption_outlined"
-                app:tint="@android:color/darker_gray" />
+                app:tint="@android:color/white" />
 
             <ImageButton
                 android:id="@+id/repeat_toggle"
@@ -121,16 +121,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="@dimen/exo_styled_bottom_bar_margin_top"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingLeft="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingEnd="@dimen/exo_styled_bottom_bar_time_padding"
-            android:paddingRight="@dimen/exo_styled_bottom_bar_time_padding">
+            android:paddingStart="10dp"
+            android:paddingEnd="15dp" >
 
             <LinearLayout
                 android:id="@id/exo_time"
@@ -187,7 +185,6 @@
                 <ImageButton
                     android:id="@+id/fullscreen"
                     style="@style/PlayerControlBottom"
-                    android:layout_marginEnd="5dp"
                     android:src="@drawable/ic_fullscreen"
                     app:tint="@android:color/white" />
 
@@ -226,7 +223,7 @@
         android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:gravity="center"
-        android:padding="@dimen/exo_styled_controls_padding">
+        android:padding="20dp">
 
         <ImageButton
             android:id="@id/exo_play_pause"
