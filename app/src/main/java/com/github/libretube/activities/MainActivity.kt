@@ -30,6 +30,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
@@ -62,12 +63,12 @@ class MainActivity : AppCompatActivity() {
         CronetHelper.initCronet(this.applicationContext)
 
         RetrofitInstance.url =
-            PreferenceHelper.getString("selectInstance", PIPED_API_URL)!!
+            PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)!!
         // set auth instance
         RetrofitInstance.authUrl =
-            if (PreferenceHelper.getBoolean("auth_instance_toggle", false)) {
+            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
                 PreferenceHelper.getString(
-                    "selectAuthInstance",
+                    PreferenceKeys.AUTH_INSTANCE,
                     PIPED_API_URL
                 )!!
             } else {
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         // save whether the data saver mode is enabled
         Globals.dataSaverModeEnabled = PreferenceHelper.getBoolean(
-            "data_saver_mode",
+            PreferenceKeys.DATA_SAVER_MODE,
             false
         )
 
@@ -98,12 +99,12 @@ class MainActivity : AppCompatActivity() {
             window.navigationBarColor = color
 
             // hide the trending page if enabled
-            val hideTrendingPage = PreferenceHelper.getBoolean("hide_trending_page", false)
+            val hideTrendingPage = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_TRENDING_PAGE, false)
             if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
                 false
 
             // save start tab fragment id
-            startFragmentId = when (PreferenceHelper.getString("default_tab", "home")) {
+            startFragmentId = when (PreferenceHelper.getString(PreferenceKeys.DEFAULT_TAB, "home")) {
                 "home" -> R.id.homeFragment
                 "subscriptions" -> R.id.subscriptionsFragment
                 "library" -> R.id.libraryFragment
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(startFragmentId)
 
             val labelVisibilityMode = when (
-                PreferenceHelper.getString("label_visibility", "always")
+                PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "always")
             ) {
                 "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
                 "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED

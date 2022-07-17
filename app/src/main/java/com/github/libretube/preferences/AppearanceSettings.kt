@@ -18,21 +18,21 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.appearance))
 
-        val themeToggle = findPreference<ListPreference>("theme_toggle")
+        val themeToggle = findPreference<ListPreference>(PreferenceKeys.THEME_MODE)
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
-        val pureTheme = findPreference<SwitchPreferenceCompat>("pure_theme")
+        val pureTheme = findPreference<SwitchPreferenceCompat>(PreferenceKeys.PURE_THEME)
         pureTheme?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
-        val accentColor = findPreference<ListPreference>("accent_color")
+        val accentColor = findPreference<ListPreference>(PreferenceKeys.ACCENT_COLOR)
         updateAccentColorValues(accentColor!!)
         accentColor.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
@@ -40,27 +40,27 @@ class AppearanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val iconChange = findPreference<ListPreference>("icon_change")
+        val iconChange = findPreference<ListPreference>(PreferenceKeys.APP_ICON)
         iconChange?.setOnPreferenceChangeListener { _, newValue ->
             ThemeHelper.changeIcon(requireContext(), newValue.toString())
             true
         }
 
-        val gridColumns = findPreference<ListPreference>("grid")
+        val gridColumns = findPreference<ListPreference>(PreferenceKeys.GRID_COLUMNS)
         gridColumns?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
-        val hideTrending = findPreference<SwitchPreferenceCompat>("hide_trending_page")
+        val hideTrending = findPreference<SwitchPreferenceCompat>(PreferenceKeys.HIDE_TRENDING_PAGE)
         hideTrending?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
-        val labelVisibilityMode = findPreference<ListPreference>("label_visibility")
+        val labelVisibilityMode = findPreference<ListPreference>(PreferenceKeys.LABEL_VISIBILITY)
         labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")

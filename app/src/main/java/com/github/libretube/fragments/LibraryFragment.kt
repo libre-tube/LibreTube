@@ -16,6 +16,7 @@ import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.dialogs.CreatePlaylistDialog
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -48,7 +49,7 @@ class LibraryFragment : Fragment() {
 
         // hide watch history button of history disabled
         val watchHistoryEnabled =
-            PreferenceHelper.getBoolean("watch_history_toggle", true)
+            PreferenceHelper.getBoolean(PreferenceKeys.WATCH_HISTORY_TOGGLE, true)
         if (!watchHistoryEnabled) {
             binding.showWatchHistory.visibility = View.GONE
         } else {

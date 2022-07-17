@@ -57,6 +57,7 @@ import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.BackgroundMode
 import com.github.libretube.util.ConnectionHelper
@@ -232,67 +233,67 @@ class PlayerFragment : Fragment() {
 
         // save whether auto rotation is enabled
         autoRotationEnabled = PreferenceHelper.getBoolean(
-            "auto_fullscreen",
+            PreferenceKeys.AUTO_FULLSCREEN,
             false
         )
 
         // save whether related streams and autoplay are enabled
         autoplayEnabled = PreferenceHelper.getBoolean(
-            "autoplay",
+            PreferenceKeys.AUTO_PLAY,
             false
         )
         relatedStreamsEnabled = PreferenceHelper.getBoolean(
-            "related_streams_toggle",
+            PreferenceKeys.RELATED_STREAMS,
             true
         )
 
         playbackSpeed = PreferenceHelper.getString(
-            "playback_speed",
+            PreferenceKeys.PLAYBACK_SPEED,
             "1F"
         )!!
 
         fullscreenOrientationPref = PreferenceHelper.getString(
-            "fullscreen_orientation",
+            PreferenceKeys.FULLSCREEN_ORIENTATION,
             "ratio"
         )!!
 
         pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
-            "pause_screen_off",
+            PreferenceKeys.PAUSE_ON_SCREEN_OFF,
             false
         )
 
         watchPositionsEnabled = PreferenceHelper.getBoolean(
-            "watch_positions_toggle",
+            PreferenceKeys.WATCH_POSITION_TOGGLE,
             true
         )
 
         watchHistoryEnabled = PreferenceHelper.getBoolean(
-            "watch_history_toggle",
+            PreferenceKeys.WATCH_HISTORY_TOGGLE,
             true
         )
 
         useSystemCaptionStyle = PreferenceHelper.getBoolean(
-            "system_caption_style",
+            PreferenceKeys.SYSTEM_CAPTION_STYLE,
             true
         )
 
         seekIncrement = PreferenceHelper.getString(
-            "seek_increment",
+            PreferenceKeys.SEEK_INCREMENT,
             "5"
         )?.toLong()!! * 1000
 
         videoFormatPreference = PreferenceHelper.getString(
-            "player_video_format",
+            PreferenceKeys.PLAYER_VIDEO_FORMAT,
             "WEBM"
         )!!
 
         defRes = PreferenceHelper.getString(
-            "default_res",
+            PreferenceKeys.DEFAULT_RESOLUTION,
             ""
         )!!
 
         bufferingGoal = PreferenceHelper.getString(
-            "buffering_goal",
+            PreferenceKeys.BUFFERING_GOAL,
             "50"
         )?.toInt()!! * 1000
     }

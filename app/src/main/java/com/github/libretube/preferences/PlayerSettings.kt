@@ -16,12 +16,12 @@ class PlayerSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.audio_video))
 
-        val playerOrientation = findPreference<ListPreference>("fullscreen_orientation")
-        val autoRotateToFullscreen = findPreference<SwitchPreferenceCompat>("auto_fullscreen")
+        val playerOrientation = findPreference<ListPreference>(PreferenceKeys.FULLSCREEN_ORIENTATION)
+        val autoRotateToFullscreen = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_FULLSCREEN)
 
         // only show the player orientation option if auto fullscreen is disabled
         playerOrientation?.isEnabled != PreferenceHelper.getBoolean(
-            "auto_fullscreen",
+            PreferenceKeys.AUTO_FULLSCREEN,
             false
         )
 

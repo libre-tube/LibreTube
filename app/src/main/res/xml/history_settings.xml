@@ -13,7 +13,7 @@
 
         <Preference
             android:icon="@drawable/ic_trash"
-            app:key="clear_history"
+            app:key="clear_search_history"
             app:title="@string/clear_history" />
 
     </PreferenceCategory>

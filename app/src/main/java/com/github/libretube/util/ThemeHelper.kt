@@ -12,13 +12,14 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import com.github.libretube.R
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.google.android.material.color.DynamicColors
 
 object ThemeHelper {
 
     fun updateTheme(activity: AppCompatActivity) {
-        val themeMode = PreferenceHelper.getString("theme_toggle", "A")!!
-        val pureThemeEnabled = PreferenceHelper.getBoolean("pure_theme", false)
+        val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")!!
+        val pureThemeEnabled = PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)
 
         updateAccentColor(activity, pureThemeEnabled)
         updateThemeMode(themeMode)
@@ -30,7 +31,7 @@ object ThemeHelper {
     ) {
         val theme = when (
             PreferenceHelper.getString(
-                "accent_color",
+                PreferenceKeys.ACCENT_COLOR,
                 "purple"
             )
         ) {

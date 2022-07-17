@@ -115,14 +115,14 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.instance))
 
-        val instance = findPreference<ListPreference>("selectInstance")
+        val instance = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)
         // fetchInstance()
         initCustomInstances(instance!!)
         instance.setOnPreferenceChangeListener { _, newValue ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
             RetrofitInstance.url = newValue.toString()
-            if (!PreferenceHelper.getBoolean("auth_instance_toggle", false)) {
+            if (!PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
                 RetrofitInstance.authUrl = newValue.toString()
                 logout()
             }
@@ -130,10 +130,10 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val authInstance = findPreference<ListPreference>("selectAuthInstance")
+        val authInstance = findPreference<ListPreference>(PreferenceKeys.AUTH_INSTANCE)
         initCustomInstances(authInstance!!)
         // hide auth instance if option deselected
-        if (!PreferenceHelper.getBoolean("auth_instance_toggle", false)) {
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
             authInstance.isVisible = false
         }
         authInstance.setOnPreferenceChangeListener { _, newValue ->
@@ -146,7 +146,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val authInstanceToggle = findPreference<SwitchPreferenceCompat>("auth_instance_toggle")
+        val authInstanceToggle = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)
         authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
             authInstance.isVisible = newValue == true
             logout()
@@ -158,14 +158,14 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val customInstance = findPreference<Preference>("customInstance")
+        val customInstance = findPreference<Preference>(PreferenceKeys.CUSTOM_INSTANCE)
         customInstance?.setOnPreferenceClickListener {
             val newFragment = CustomInstanceDialog()
             newFragment.show(childFragmentManager, "CustomInstanceDialog")
             true
         }
 
-        val clearCustomInstances = findPreference<Preference>("clearCustomInstances")
+        val clearCustomInstances = findPreference<Preference>(PreferenceKeys.CLEAR_CUSTOM_INSTANCES)
         clearCustomInstances?.setOnPreferenceClickListener {
             PreferenceHelper.removePreference("customInstances")
             val intent = Intent(context, SettingsActivity::class.java)
@@ -173,7 +173,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val login = findPreference<Preference>("login_register")
+        val login = findPreference<Preference>(PreferenceKeys.LOGIN_REGISTER)
         val token = PreferenceHelper.getToken()
         if (token != "") login?.setTitle(R.string.logout)
         login?.setOnPreferenceClickListener {
@@ -188,7 +188,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val deleteAccount = findPreference<Preference>("delete_account")
+        val deleteAccount = findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)
         deleteAccount?.setOnPreferenceClickListener {
             val token = PreferenceHelper.getToken()
             if (token != "") {
@@ -200,7 +200,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val importFromYt = findPreference<Preference>("import_from_yt")
+        val importFromYt = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
         importFromYt?.setOnPreferenceClickListener {
             importSubscriptions()
             true

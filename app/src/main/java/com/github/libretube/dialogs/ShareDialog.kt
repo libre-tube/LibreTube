@@ -8,6 +8,7 @@ import com.github.libretube.PIPED_FRONTEND_URL
 import com.github.libretube.R
 import com.github.libretube.YOUTUBE_FRONTEND_URL
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
@@ -57,7 +58,7 @@ class ShareDialog(
     // get the frontend url if it's a custom instance
     private fun getCustomInstanceFrontendUrl(): String {
         val instancePref = PreferenceHelper.getString(
-            "selectInstance",
+            PreferenceKeys.FETCH_INSTANCE,
             PIPED_FRONTEND_URL
         )
 
