@@ -20,7 +20,10 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
 import android.util.Log
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -62,7 +65,6 @@ import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
-import com.github.libretube.views.DoubleClickListener
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -983,44 +985,69 @@ class PlayerFragment : Fragment() {
         val seekIncrement =
             PreferenceHelper.getString(requireContext(), "seek_increment", "5")?.toLong()!! * 1000
 
+        val hideDoubleTapOverlayDelay = 700L
+
         // enable rewind button
-        binding.rewindFL.setOnClickListener(
-            DoubleClickListener(
-                callback = object : DoubleClickListener.Callback {
-                    override fun doubleClicked() {
-                        binding.rewindBTN.visibility = View.VISIBLE
-                        exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            binding.rewindBTN.visibility = View.INVISIBLE
-                        }, 700)
-                    }
+        val rewindGestureDetector = GestureDetector(
+            context,
+            object : SimpleOnGestureListener() {
+                override fun onDoubleTap(e: MotionEvent): Boolean {
+                    exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
 
-                    override fun singleClicked() {
-                        toggleController()
+                    // show the rewind button
+                    binding.rewindBTN.apply {
+                        visibility = View.VISIBLE
+                        removeCallbacks(hideRewindButtonRunnable)
+                        postDelayed(hideRewindButtonRunnable, hideDoubleTapOverlayDelay)
                     }
+                    return super.onDoubleTap(e)
                 }
-            )
+
+                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                    toggleController()
+                    return super.onSingleTapConfirmed(e)
+                }
+            }
         )
 
-        // enable fast forward button
-        binding.forwardFL.setOnClickListener(
-            DoubleClickListener(
-                callback = object : DoubleClickListener.Callback {
-                    override fun doubleClicked() {
-                        binding.forwardBTN.visibility = View.VISIBLE
-                        exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            binding.forwardBTN.visibility = View.INVISIBLE
-                        }, 700)
-                    }
+        binding.rewindFL.setOnTouchListener { view, event ->
+            rewindGestureDetector.onTouchEvent(event)
+            view.performClick()
+            true
+        }
 
-                    override fun singleClicked() {
-                        toggleController()
+        // enable forward button
+        val forwardGestureDetector = GestureDetector(
+            context,
+            object : SimpleOnGestureListener() {
+                override fun onDoubleTap(e: MotionEvent): Boolean {
+                    exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
+
+                    // show the forward button
+                    binding.forwardBTN.apply {
+                        visibility = View.VISIBLE
+                        removeCallbacks(hideForwardButtonRunnable)
+                        postDelayed(hideForwardButtonRunnable, hideDoubleTapOverlayDelay)
                     }
+                    return super.onDoubleTap(e)
                 }
-            )
+
+                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                    toggleController()
+                    return super.onSingleTapConfirmed(e)
+                }
+            }
         )
+
+        binding.forwardFL.setOnTouchListener { view, event ->
+            forwardGestureDetector.onTouchEvent(event)
+            view.performClick()
+            true
+        }
     }
+
+    private val hideForwardButtonRunnable = Runnable { binding.forwardBTN.visibility = View.GONE }
+    private val hideRewindButtonRunnable = Runnable { binding.rewindBTN.visibility = View.GONE }
 
     private fun disableDoubleTapToSeek() {
         // disable fast forward and rewind by double tapping
