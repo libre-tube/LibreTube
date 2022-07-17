@@ -25,6 +25,8 @@ class ChannelFragment : Fragment() {
     private lateinit var binding: FragmentChannelBinding
 
     private var channelId: String? = null
+    private var channelName: String? = null
+
     var nextPage: String? = null
     private var channelAdapter: ChannelAdapter? = null
     private var isLoading = true
@@ -33,7 +35,10 @@ class ChannelFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            channelId = it.getString("channel_id")
+            channelId = it.getString("channel_id")?.replace("/channel/", "")
+            channelName = it.getString("channel_name")
+                ?.replace("/c/", "")
+                ?.replace("/user/", "")
         }
     }
 
@@ -49,7 +54,6 @@ class ChannelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        channelId = channelId!!.replace("/channel/", "")
         binding.channelName.text = channelId
         binding.channelRecView.layoutManager = LinearLayoutManager(context)
 
@@ -159,7 +163,8 @@ class ChannelFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getChannel(channelId!!)
+                    if (channelId != null) RetrofitInstance.api.getChannel(channelId!!)
+                    else RetrofitInstance.api.getChannelByName(channelName!!)
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
                     println(e)
@@ -196,6 +201,8 @@ class ChannelFragment : Fragment() {
 
                     ConnectionHelper.loadImage(response.bannerUrl, binding.channelBanner)
                     ConnectionHelper.loadImage(response.avatarUrl, binding.channelImage)
+
+                    // recyclerview of the videos by the channel
                     channelAdapter = ChannelAdapter(
                         response.relatedStreams!!.toMutableList(),
                         childFragmentManager

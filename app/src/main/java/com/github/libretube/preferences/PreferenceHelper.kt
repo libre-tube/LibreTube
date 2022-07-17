@@ -24,7 +24,7 @@ object PreferenceHelper {
     fun setContext(context: Context) {
         prefContext = context
         settings = getDefaultSharedPreferences(prefContext)
-        editor = getDefaultSharedPreferencesEditor(prefContext)
+        editor = settings.edit()
     }
 
     fun setString(key: String?, value: String?) {
@@ -214,9 +214,5 @@ object PreferenceHelper {
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
-    }
-
-    private fun getDefaultSharedPreferencesEditor(context: Context): SharedPreferences.Editor {
-        return getDefaultSharedPreferences(context).edit()
     }
 }
