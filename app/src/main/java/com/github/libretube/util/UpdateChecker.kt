@@ -1,17 +1,16 @@
 package com.github.libretube.util
 
-import android.util.Log
 import com.github.libretube.GITHUB_API_URL
 import com.github.libretube.obj.VersionInfo
-import org.json.JSONArray
-import org.json.JSONObject
+import com.github.libretube.update.UpdateInfo
+import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 fun checkUpdate(): VersionInfo? {
-    var versionInfo: VersionInfo? = VersionInfo("", "")
+    var versionInfo: VersionInfo? = null
     // run http request as thread to make it async
     val thread = Thread {
         // otherwise crashes without internet
@@ -39,25 +38,11 @@ fun getUpdateInfo(): VersionInfo? {
     while (br.readLine().also { line = it } != null) json.append(line)
 
     // Parse and return the json data
-    val jsonRoot = JSONObject(json.toString())
-    if (jsonRoot.has("tag_name") &&
-        jsonRoot.has("html_url") &&
-        jsonRoot.has("assets")
-    ) {
-        val updateUrl = jsonRoot.getString("html_url")
-        val jsonAssets: JSONArray = jsonRoot.getJSONArray("assets")
+    val gson = Gson()
+    val updateInfo = gson.fromJson(json.toString(), UpdateInfo::class.java)
 
-        for (i in 0 until jsonAssets.length()) {
-            val jsonAsset = jsonAssets.getJSONObject(i)
-            if (jsonAsset.has("name")) {
-                val name = jsonAsset.getString("name")
-                if (name.endsWith(".apk")) {
-                    val tagName = jsonRoot.getString("name")
-                    Log.i("VersionInfo", "Latest version: $tagName")
-                    return VersionInfo(updateUrl, tagName)
-                }
-            }
-        }
-    }
-    return null
+    return VersionInfo(
+        updateInfo.html_url,
+        updateInfo.name
+    )
 }

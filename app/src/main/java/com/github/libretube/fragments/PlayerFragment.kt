@@ -250,7 +250,7 @@ class PlayerFragment : Fragment() {
         playbackSpeed = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
-        )!!
+        )!!.replace("F", "") // due to old way to handle it (with float)
 
         fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
@@ -1061,21 +1061,17 @@ class PlayerFragment : Fragment() {
     }
 
     private fun enableDoubleTapToSeek() {
-        val hideDoubleTapOverlayDelay = 700L
+        // set seek increment text
+        val seekIncrementText = (seekIncrement / 1000).toString()
+        binding.rewindTV.text = seekIncrementText
+        binding.forwardTV.text = seekIncrementText
 
         // enable rewind button
         val rewindGestureDetector = GestureDetector(
             context,
             object : SimpleOnGestureListener() {
                 override fun onDoubleTap(e: MotionEvent): Boolean {
-                    exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
-
-                    // show the rewind button
-                    binding.rewindBTN.apply {
-                        visibility = View.VISIBLE
-                        removeCallbacks(hideRewindButtonRunnable)
-                        postDelayed(hideRewindButtonRunnable, hideDoubleTapOverlayDelay)
-                    }
+                    rewind()
                     return super.onDoubleTap(e)
                 }
 
@@ -1097,14 +1093,7 @@ class PlayerFragment : Fragment() {
             context,
             object : SimpleOnGestureListener() {
                 override fun onDoubleTap(e: MotionEvent): Boolean {
-                    exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
-
-                    // show the forward button
-                    binding.forwardBTN.apply {
-                        visibility = View.VISIBLE
-                        removeCallbacks(hideForwardButtonRunnable)
-                        postDelayed(hideForwardButtonRunnable, hideDoubleTapOverlayDelay)
-                    }
+                    forward()
                     return super.onDoubleTap(e)
                 }
 
@@ -1122,8 +1111,64 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private val hideForwardButtonRunnable = Runnable { binding.forwardBTN.visibility = View.GONE }
-    private val hideRewindButtonRunnable = Runnable { binding.rewindBTN.visibility = View.GONE }
+    private fun rewind() {
+        exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
+
+        // show the rewind button
+        binding.rewindBTN.apply {
+            visibility = View.VISIBLE
+            // clear previous animation
+            animate().rotation(0F).setDuration(0).start()
+            // start new animation
+            animate()
+                .rotation(-30F)
+                .setDuration(100)
+                .withEndAction {
+                    // reset the animation when finished
+                    animate().rotation(0F).setDuration(100).start()
+                }
+                .start()
+
+            removeCallbacks(hideRewindButtonRunnable)
+            // start callback to hide the button
+            postDelayed(hideRewindButtonRunnable, 700)
+        }
+    }
+
+    private fun forward() {
+        exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
+
+        // show the forward button
+        binding.forwardBTN.apply {
+            visibility = View.VISIBLE
+            // clear previous animation
+            animate().rotation(0F).setDuration(0).start()
+            // start new animation
+            animate()
+                .rotation(30F)
+                .setDuration(100)
+                .withEndAction {
+                    // reset the animation when finished
+                    animate().rotation(0F).setDuration(100).start()
+                }
+                .start()
+
+            // start callback to hide the button
+            removeCallbacks(hideForwardButtonRunnable)
+            postDelayed(hideForwardButtonRunnable, 700)
+        }
+    }
+
+    private val hideForwardButtonRunnable = Runnable {
+        binding.forwardBTN.apply {
+            visibility = View.GONE
+        }
+    }
+    private val hideRewindButtonRunnable = Runnable {
+        binding.rewindBTN.apply {
+            visibility = View.GONE
+        }
+    }
 
     // enable seek bar preview
     private fun enableSeekbarPreview() {
