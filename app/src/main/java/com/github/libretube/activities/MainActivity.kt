@@ -202,6 +202,8 @@ class MainActivity : AppCompatActivity() {
                         break
                     }
                 }
+            } else {
+                playlistId = playlistId.replace("list=", "")
             }
 
             loadPlaylist(playlistId)

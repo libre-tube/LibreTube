@@ -31,7 +31,7 @@ class UpdateAvailableDialog(
     }
 }
 
-class NoUpdateAvailableDialog() : DialogFragment() {
+class NoUpdateAvailableDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {

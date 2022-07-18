@@ -638,14 +638,14 @@
         <item>4x</item>
     </string-array>
     <string-array name="playbackSpeedValues">
-        <item>0.25F</item>
-        <item>0.5F</item>
-        <item>0.75F</item>
-        <item>1F</item>
-        <item>1.25F</item>
-        <item>1.5F</item>
-        <item>2F</item>
-        <item>4F</item>
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>1</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>4</item>
     </string-array>
 
     <string-array name="downloadLocation">

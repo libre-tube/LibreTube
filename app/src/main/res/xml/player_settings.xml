@@ -28,7 +28,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_speed"
-            app:defaultValue="1F"
+            app:defaultValue="1"
             app:entries="@array/playbackSpeed"
             app:entryValues="@array/playbackSpeedValues"
             app:key="playback_speed"
