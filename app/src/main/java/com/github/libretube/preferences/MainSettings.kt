@@ -8,9 +8,15 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
+import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
+import com.github.libretube.dialogs.UpdateAvailableDialog
 import com.github.libretube.util.ThemeHelper
 import com.github.libretube.util.checkUpdate
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainSettings : PreferenceFragmentCompat() {
     val TAG = "SettingsFragment"
@@ -78,9 +84,35 @@ class MainSettings : PreferenceFragmentCompat() {
         }
 
         val update = findPreference<Preference>("update")
-        update?.title = getString(R.string.version, BuildConfig.VERSION_NAME)
+
+        // set the version of the update preference
+        val versionString = if (BuildConfig.DEBUG) "${BuildConfig.VERSION_NAME} Debug"
+        else getString(R.string.version, BuildConfig.VERSION_NAME)
+        update?.title = versionString
+
         update?.setOnPreferenceClickListener {
-            checkUpdate(childFragmentManager)
+            CoroutineScope(Dispatchers.IO).launch {
+                // check for update
+                val versionInfo = checkUpdate()
+                if (versionInfo?.tagName != "" && BuildConfig.VERSION_NAME != versionInfo?.tagName) {
+                    // show the UpdateAvailableDialog if there's an update available
+                    val updateAvailableDialog = UpdateAvailableDialog(
+                        versionInfo!!.tagName,
+                        versionInfo.updateUrl
+                    )
+                    updateAvailableDialog.show(childFragmentManager, "UpdateAvailableDialog")
+                } else {
+                    // otherwise show the no update available snackBar
+                    val settingsActivity = activity as SettingsActivity
+                    val snackBar = Snackbar
+                        .make(
+                            settingsActivity.binding.root,
+                            R.string.app_uptodate,
+                            Snackbar.LENGTH_SHORT
+                        )
+                    snackBar.show()
+                }
+            }
             true
         }
 

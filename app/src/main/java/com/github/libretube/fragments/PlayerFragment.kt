@@ -249,7 +249,7 @@ class PlayerFragment : Fragment() {
 
         playbackSpeed = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
-            "1F"
+            "1"
         )!!
 
         fullscreenOrientationPref = PreferenceHelper.getString(
@@ -480,6 +480,7 @@ class PlayerFragment : Fragment() {
         val playbackSpeedValues =
             context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
         exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
+        Log.e(TAG, playbackSpeed)
         val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
         playerBinding.speedText.text = playbackSpeeds[speedIndex]
 
@@ -1124,12 +1125,6 @@ class PlayerFragment : Fragment() {
     private val hideForwardButtonRunnable = Runnable { binding.forwardBTN.visibility = View.GONE }
     private val hideRewindButtonRunnable = Runnable { binding.rewindBTN.visibility = View.GONE }
 
-    private fun disableDoubleTapToSeek() {
-        // disable fast forward and rewind by double tapping
-        binding.forwardFL.visibility = View.GONE
-        binding.rewindFL.visibility = View.GONE
-    }
-
     // enable seek bar preview
     private fun enableSeekbarPreview() {
         playerBinding.exoProgress.addListener(object : TimeBar.OnScrubListener {
@@ -1456,6 +1451,7 @@ class PlayerFragment : Fragment() {
 
     // lock the player
     private fun lockPlayer(isLocked: Boolean) {
+        // isLocked is the current (old) state of the player lock
         val visibility = if (isLocked) View.VISIBLE else View.GONE
 
         playerBinding.exoTopBarRight.visibility = visibility
@@ -1474,7 +1470,15 @@ class PlayerFragment : Fragment() {
             ) View.VISIBLE else View.GONE
 
         // disable double tap to seek when the player is locked
-        if (isLocked) enableDoubleTapToSeek() else disableDoubleTapToSeek()
+        if (isLocked) {
+            // enable fast forward and rewind by double tapping
+            binding.forwardFL.visibility = View.VISIBLE
+            binding.rewindFL.visibility = View.VISIBLE
+        } else {
+            // disable fast forward and rewind by double tapping
+            binding.forwardFL.visibility = View.GONE
+            binding.rewindFL.visibility = View.GONE
+        }
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
