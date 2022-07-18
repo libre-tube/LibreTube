@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="library">Biblioteca</string>
+    <string name="yes">Sí</string>
+    <string name="search_hint">Cerca</string>
+    <string name="videos">Vídeos</string>
+    <string name="share">Comparteix</string>
+    <string name="save">Desa</string>
+    <string name="username">Nom d\'usuari</string>
+    <string name="password">Contrasenya</string>
+    <string name="subscribe">Subscriure\'s</string>
+    <string name="unsubscribe">Cancel·la la subscripció</string>
+    <string name="startpage">Inici</string>
+    <string name="subscriptions">Subscripcions</string>
+    <string name="download">Descarrega</string>
+</resources>
