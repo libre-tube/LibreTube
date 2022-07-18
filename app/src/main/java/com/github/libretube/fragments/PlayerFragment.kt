@@ -1,6 +1,5 @@
 package com.github.libretube.fragments
 
-import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PictureInPictureParams
 import android.content.Context
@@ -1526,7 +1525,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun isSubscribed(button: MaterialButton, channel_id: String) {
-        @SuppressLint("ResourceAsColor")
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
