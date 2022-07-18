@@ -10,9 +10,9 @@ import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
-import com.github.libretube.dialogs.UpdateAvailableDialog
+import com.github.libretube.dialogs.UpdateDialog
+import com.github.libretube.update.checkUpdate
 import com.github.libretube.util.ThemeHelper
-import com.github.libretube.util.checkUpdate
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -93,13 +93,10 @@ class MainSettings : PreferenceFragmentCompat() {
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update
-                val versionInfo = checkUpdate()
-                if (versionInfo?.tagName != "" && BuildConfig.VERSION_NAME != versionInfo?.tagName) {
+                val updateInfo = checkUpdate()
+                if (updateInfo?.name != "" && BuildConfig.VERSION_NAME != updateInfo?.name) {
                     // show the UpdateAvailableDialog if there's an update available
-                    val updateAvailableDialog = UpdateAvailableDialog(
-                        versionInfo!!.tagName,
-                        versionInfo.updateUrl
-                    )
+                    val updateAvailableDialog = UpdateDialog(updateInfo!!)
                     updateAvailableDialog.show(childFragmentManager, "UpdateAvailableDialog")
                 } else {
                     // otherwise show the no update available snackBar

@@ -4,6 +4,8 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import android.os.StrictMode
+import android.os.StrictMode.VmPolicy
 import com.github.libretube.preferences.PreferenceHelper
 
 class MyApp : Application() {
@@ -19,6 +21,12 @@ class MyApp : Application() {
          * set the applicationContext as context for the [PreferenceHelper]
          */
         PreferenceHelper.setContext(applicationContext)
+
+        /**
+         * bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
+         */
+        val builder = VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
     }
 
     /**

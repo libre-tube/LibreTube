@@ -164,7 +164,10 @@ class DownloadService : Service() {
                     onDestroy()
                 }
             } else {
-                muxDownloadedMedia()
+                try {
+                    muxDownloadedMedia()
+                } catch (e: Exception) {
+                }
             }
         }
     }
