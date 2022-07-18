@@ -79,7 +79,7 @@ class LibraryFragment : Fragment() {
     override fun onResume() {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = if (Globals.isMiniPlayerVisible) 180 else 64
+        layoutParams.bottomMargin = if (Globals.MINI_PLAYER_VISIBLE) 180 else 64
         binding.createPlaylist.layoutParams = layoutParams
         super.onResume()
     }

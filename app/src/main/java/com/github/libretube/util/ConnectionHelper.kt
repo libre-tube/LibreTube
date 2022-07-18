@@ -40,7 +40,7 @@ object ConnectionHelper {
     // load an image from a url into an imageView
     fun loadImage(url: String?, target: ImageView) {
         // only load the image if the data saver mode is disabled
-        if (!Globals.dataSaverModeEnabled) {
+        if (!Globals.DATA_SAVER_MODE_ENABLED) {
             Picasso.get().load(url).fit().centerCrop().into(target)
         }
     }

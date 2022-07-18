@@ -1,24 +1,20 @@
 package com.github.libretube.dialogs
 
-import android.Manifest
 import android.app.Dialog
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
+import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -36,45 +32,12 @@ class DownloadDialog : DialogFragment() {
         return activity?.let {
             videoId = arguments?.getString("video_id")!!
 
-            val mainActivity = activity as MainActivity
             val builder = MaterialAlertDialogBuilder(it)
             binding = DialogDownloadBinding.inflate(layoutInflater)
 
             fetchAvailableSources()
 
-            // request storage permissions if not granted yet
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Log.d("myz", "" + Build.VERSION.SDK_INT)
-                if (!Environment.isExternalStorageManager()) {
-                    ActivityCompat.requestPermissions(
-                        mainActivity,
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                        ),
-                        1
-                    ) // permission request code is just an int
-                }
-            } else {
-                if (ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED ||
-                    ActivityCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        mainActivity,
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ),
-                        1
-                    )
-                }
-            }
+            PermissionHelper.requestReadWrite(activity as AppCompatActivity)
 
             binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
