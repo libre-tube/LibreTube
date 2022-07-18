@@ -5,9 +5,12 @@ package com.github.libretube
  */
 object Globals {
     // for the player fragment
-    var isFullScreen = false
-    var isMiniPlayerVisible = false
+    var IS_FULL_SCREEN = false
+    var MINI_PLAYER_VISIBLE = false
 
     // for the data saver mode
-    var dataSaverModeEnabled = false
+    var DATA_SAVER_MODE_ENABLED = false
+
+    // for downloads
+    var IS_DOWNLOAD_RUNNING = false
 }

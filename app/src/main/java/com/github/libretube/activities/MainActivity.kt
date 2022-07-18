@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         // save whether the data saver mode is enabled
-        Globals.dataSaverModeEnabled = PreferenceHelper.getBoolean(
+        Globals.DATA_SAVER_MODE_ENABLED = PreferenceHelper.getBoolean(
             PreferenceKeys.DATA_SAVER_MODE,
             false
         )
@@ -320,7 +320,7 @@ class MainActivity : AppCompatActivity() {
             enableTransition(R.id.yt_transition, true)
         }
         findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-        Globals.isFullScreen = false
+        Globals.IS_FULL_SCREEN = false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

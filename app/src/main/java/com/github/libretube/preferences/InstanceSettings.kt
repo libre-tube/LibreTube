@@ -1,18 +1,14 @@
 package com.github.libretube.preferences
 
-import android.Manifest
 import android.content.ContentResolver
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
@@ -26,6 +22,7 @@ import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.dialogs.RequireRestartDialog
+import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -288,51 +285,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
     private fun importSubscriptions() {
         val token = PreferenceHelper.getToken()
         // check StorageAccess
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Log.d("myz", "" + Build.VERSION.SDK_INT)
-            if (ContextCompat.checkSelfPermission(
-                    this.requireContext(),
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this.requireActivity(),
-                    arrayOf(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                    ),
-                    1
-                ) // permission request code is just an int
-            } else if (token != "") {
-                MainSettings.getContent.launch("*/*")
-            } else {
-                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            if (ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this.requireActivity(),
-                    arrayOf(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ),
-                    1
-                )
-            } else if (token != "") {
-                MainSettings.getContent.launch("*/*")
-            } else {
-                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-            }
-        }
+        PermissionHelper.requestReadWrite(activity as AppCompatActivity)
     }
 
     private fun subscribe(channels: List<String>) {

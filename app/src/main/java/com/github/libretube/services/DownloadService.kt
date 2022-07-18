@@ -18,13 +18,12 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.obj.DownloadType
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import java.io.File
-
-var IS_DOWNLOAD_RUNNING = false
 
 class DownloadService : Service() {
     val TAG = "DownloadService"
@@ -45,7 +44,7 @@ class DownloadService : Service() {
     private lateinit var tempDir: File
     override fun onCreate() {
         super.onCreate()
-        IS_DOWNLOAD_RUNNING = true
+        Globals.IS_DOWNLOAD_RUNNING = true
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -164,7 +163,10 @@ class DownloadService : Service() {
                     onDestroy()
                 }
             } else {
-                muxDownloadedMedia()
+                try {
+                    muxDownloadedMedia()
+                } catch (e: Exception) {
+                }
             }
         }
     }
@@ -280,7 +282,7 @@ class DownloadService : Service() {
         } catch (e: Exception) {
         }
 
-        IS_DOWNLOAD_RUNNING = false
+        Globals.IS_DOWNLOAD_RUNNING = false
         Log.d(TAG, "dl finished!")
         stopForeground(true)
         stopService(Intent(this@DownloadService, DownloadService::class.java))

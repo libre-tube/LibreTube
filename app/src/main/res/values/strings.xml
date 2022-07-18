@@ -252,4 +252,5 @@
     <string name="system_caption_style">System caption style</string>
     <string name="captions">Captions</string>
     <string name="none">None</string>
+    <string name="update_now">Do you want to update the app now?</string>
 </resources>
