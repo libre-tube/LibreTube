@@ -6,10 +6,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.services.UpdateService
 import com.github.libretube.update.UpdateInfo
+import com.github.libretube.util.PermissionHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UpdateDialog(
@@ -28,6 +30,7 @@ class UpdateDialog(
                     val downloadUrl = getDownloadUrl(updateInfo)
                     Log.i("downloadUrl", downloadUrl.toString())
                     if (downloadUrl != null) {
+                        PermissionHelper.requestReadWrite(activity as AppCompatActivity)
                         val intent = Intent(context, UpdateService::class.java)
                         intent.putExtra("downloadUrl", downloadUrl)
                         context?.startService(intent)
@@ -44,8 +47,8 @@ class UpdateDialog(
     private fun getDownloadUrl(updateInfo: UpdateInfo): String? {
         val supportedArchitectures = Build.SUPPORTED_ABIS
         supportedArchitectures.forEach { arch ->
-            updateInfo.assets.forEach {
-                if (it.browser_download_url.contains(arch)) return it.browser_download_url
+            updateInfo.assets.forEach { asset ->
+                if (asset.name.contains(arch)) return asset.browser_download_url
             }
         }
         return null

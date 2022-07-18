@@ -1,11 +1,11 @@
 package com.github.libretube.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +62,10 @@ class ChannelFragment : Fragment() {
             fetchChannel()
             if (PreferenceHelper.getToken() != "") {
                 isSubscribed()
+            } else {
+                binding.channelSubscribe.setOnClickListener {
+                    Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         refreshChannel()
@@ -85,7 +89,6 @@ class ChannelFragment : Fragment() {
     }
 
     private fun isSubscribed() {
-        @SuppressLint("ResourceAsColor")
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -104,16 +107,15 @@ class ChannelFragment : Fragment() {
                         isSubscribed = true
                         binding.channelSubscribe.text = getString(R.string.unsubscribe)
                     }
-                    if (response.subscribed != null) {
-                        binding.channelSubscribe.apply {
-                            setOnClickListener {
-                                text = if (isSubscribed) {
-                                    unsubscribe()
-                                    getString(R.string.subscribe)
-                                } else {
-                                    subscribe()
-                                    getString(R.string.unsubscribe)
-                                }
+
+                    binding.channelSubscribe.setOnClickListener {
+                        if (response.subscribed != null) {
+                            binding.channelSubscribe.text = if (isSubscribed) {
+                                unsubscribe()
+                                getString(R.string.subscribe)
+                            } else {
+                                subscribe()
+                                getString(R.string.unsubscribe)
                             }
                         }
                     }

@@ -1,5 +1,8 @@
 package com.github.libretube.update
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class UpdateInfo(
     val assets: List<Asset>,
     val assets_url: String,

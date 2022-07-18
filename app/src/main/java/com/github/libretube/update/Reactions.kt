@@ -1,5 +1,8 @@
 package com.github.libretube.update
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Reactions(
     val confused: Int,
     val eyes: Int,

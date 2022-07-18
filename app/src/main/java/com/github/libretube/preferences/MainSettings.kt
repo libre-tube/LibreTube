@@ -93,7 +93,7 @@ class MainSettings : PreferenceFragmentCompat() {
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update
-                val updateInfo = UpdateChecker.checkUpdate()
+                val updateInfo = UpdateChecker.getLatestReleaseInfo()
                 if (updateInfo?.name != "" && BuildConfig.VERSION_NAME != updateInfo?.name) {
                     // show the UpdateAvailableDialog if there's an update available
                     val updateAvailableDialog = UpdateDialog(updateInfo!!)

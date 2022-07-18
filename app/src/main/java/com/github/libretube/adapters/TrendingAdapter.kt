@@ -82,7 +82,7 @@ class TrendingAdapter(
             root.setOnLongClickListener {
                 val videoId = trending.url!!.replace("/watch?v=", "")
                 VideoOptionsDialog(videoId, root.context)
-                    .show(childFragmentManager, VideoOptionsDialog.TAG)
+                    .show(childFragmentManager, "VideoOptionsDialog")
                 true
             }
         }

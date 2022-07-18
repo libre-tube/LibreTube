@@ -2,13 +2,10 @@ package com.github.libretube.update
 
 import com.github.libretube.GITHUB_API_URL
 import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.net.URL
-import javax.net.ssl.HttpsURLConnection
 
 object UpdateChecker {
-    fun checkUpdate(): UpdateInfo? {
+    fun getLatestReleaseInfo(): UpdateInfo? {
         var versionInfo: UpdateInfo? = null
         // run http request as thread to make it async
         val thread = Thread {
@@ -26,19 +23,13 @@ object UpdateChecker {
         return versionInfo
     }
 
-    fun getUpdateInfo(): UpdateInfo? {
-        val latest = URL(GITHUB_API_URL)
-        val json = StringBuilder()
-        val urlConnection: HttpsURLConnection?
-        urlConnection = latest.openConnection() as HttpsURLConnection
-
-        // read json
-        val br = BufferedReader(InputStreamReader(urlConnection.inputStream))
-        var line: String?
-        while (br.readLine().also { line = it } != null) json.append(line)
+    private fun getUpdateInfo(): UpdateInfo? {
+        // get the github API response
+        val latestVersionApiUrl = URL(GITHUB_API_URL)
+        val json = latestVersionApiUrl.readText()
 
         // Parse and return the json data
         val gson = Gson()
-        return gson.fromJson(json.toString(), UpdateInfo::class.java)
+        return gson.fromJson(json, UpdateInfo::class.java)
     }
 }

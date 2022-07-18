@@ -1,5 +1,8 @@
 package com.github.libretube.update
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Author(
     val avatar_url: String,
     val events_url: String,

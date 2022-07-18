@@ -17,6 +17,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * Needs the [videoId] to load the content from the right video.
  */
 class VideoOptionsDialog(private val videoId: String, context: Context) : DialogFragment() {
+    private val TAG = "VideoOptionsDialog"
+
     /**
      * List that stores the different menu options. In the future could be add more options here.
      */
@@ -70,9 +72,5 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                 }
             }
             .show()
-    }
-
-    companion object {
-        const val TAG = "VideoOptionsDialog"
     }
 }
