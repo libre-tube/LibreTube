@@ -58,7 +58,6 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.services.IS_DOWNLOAD_RUNNING
 import com.github.libretube.util.BackgroundMode
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper

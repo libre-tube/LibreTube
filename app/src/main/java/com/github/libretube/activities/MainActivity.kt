@@ -99,17 +99,19 @@ class MainActivity : AppCompatActivity() {
             window.navigationBarColor = color
 
             // hide the trending page if enabled
-            val hideTrendingPage = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_TRENDING_PAGE, false)
+            val hideTrendingPage =
+                PreferenceHelper.getBoolean(PreferenceKeys.HIDE_TRENDING_PAGE, false)
             if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
                 false
 
             // save start tab fragment id
-            startFragmentId = when (PreferenceHelper.getString(PreferenceKeys.DEFAULT_TAB, "home")) {
-                "home" -> R.id.homeFragment
-                "subscriptions" -> R.id.subscriptionsFragment
-                "library" -> R.id.libraryFragment
-                else -> R.id.homeFragment
-            }
+            startFragmentId =
+                when (PreferenceHelper.getString(PreferenceKeys.DEFAULT_TAB, "home")) {
+                    "home" -> R.id.homeFragment
+                    "subscriptions" -> R.id.subscriptionsFragment
+                    "library" -> R.id.libraryFragment
+                    else -> R.id.homeFragment
+                }
 
             // set default tab as start fragment
             navController.graph.setStartDestination(startFragmentId)

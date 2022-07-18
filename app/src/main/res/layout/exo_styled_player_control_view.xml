@@ -15,8 +15,8 @@
         android:layout_gravity="top"
         android:animateLayoutChanges="true"
         android:orientation="vertical"
-        android:paddingTop="5dp"
         android:paddingStart="5dp"
+        android:paddingTop="5dp"
         android:paddingEnd="10dp">
 
         <LinearLayout
@@ -92,8 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="3dp"
             android:layout_marginTop="-12dp"
+            android:layout_marginEnd="3dp"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -130,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:paddingEnd="15dp" >
+            android:paddingEnd="15dp">
 
             <LinearLayout
                 android:id="@id/exo_time"

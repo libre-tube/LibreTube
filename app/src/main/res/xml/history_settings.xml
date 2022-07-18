@@ -44,9 +44,9 @@
             app:title="@string/watch_positions" />
 
         <Preference
-            app:title="@string/reset_watch_positions"
             android:icon="@drawable/ic_reset"
-            app:key="reset_watch_positions" />
+            app:key="reset_watch_positions"
+            app:title="@string/reset_watch_positions" />
 
     </PreferenceCategory>
 
