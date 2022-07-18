@@ -24,7 +24,8 @@ object PlayerHelper {
 
     // get the system default caption style
     fun getCaptionStyle(context: Context): CaptionStyleCompat {
-        val captioningManager = context.getSystemService(Context.CAPTIONING_SERVICE) as CaptioningManager
+        val captioningManager =
+            context.getSystemService(Context.CAPTIONING_SERVICE) as CaptioningManager
         return if (!captioningManager.isEnabled) {
             // system captions are disabled, using android default captions style
             CaptionStyleCompat.DEFAULT

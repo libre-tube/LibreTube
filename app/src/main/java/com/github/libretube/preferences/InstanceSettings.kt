@@ -143,7 +143,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val authInstanceToggle = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)
+        val authInstanceToggle =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)
         authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
             authInstance.isVisible = newValue == true
             logout()

@@ -80,12 +80,12 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_bell_small"
                     android:drawableTint="?android:attr/textColorPrimary"
+                    android:stateListAnimator="@null"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="12sp"
-                    android:stateListAnimator="@null"
-                    app:elevation="20dp"
-                    app:cornerRadius="20dp" />
+                    app:cornerRadius="20dp"
+                    app:elevation="20dp" />
 
             </LinearLayout>
 

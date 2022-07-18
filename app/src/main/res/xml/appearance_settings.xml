@@ -82,9 +82,9 @@
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_caption"
+            app:defaultValue="true"
             app:key="system_caption_style"
-            app:title="@string/system_caption_style"
-            app:defaultValue="true" />
+            app:title="@string/system_caption_style" />
 
     </PreferenceCategory>
 
