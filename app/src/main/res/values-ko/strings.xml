@@ -142,7 +142,7 @@
     <string name="playback_speed">기본 재생 속도</string>
     <string name="advanced">고급</string>
     <string name="player">오디오 및 비디오</string>
-    <string name="advanced_summary">다운로드, 기록</string>
+    <string name="advanced_summary">다운로드, 재설정</string>
     <string name="live">실시간</string>
     <string name="download_folder">이름</string>
     <string name="sdcard">SD 카드</string>
@@ -206,7 +206,7 @@
     <string name="restore">복원</string>
     <string name="watch_history">시청 기록</string>
     <string name="watch_positions">위치 기억</string>
-    <string name="watch_positions_summary">시청 위치를 기억하고 자동으로 찾습니다.</string>
+    <string name="watch_positions_summary">마지막 시청 위치 복원</string>
     <string name="auth_instance">인증 인스턴스</string>
     <string name="auth_instance_summary">인증된 호출에 다른 인스턴스를 사용합니다.</string>
     <string name="hls">자동</string>
@@ -215,8 +215,19 @@
     <string name="auto_rotation">자동 회전</string>
     <string name="auth_instances">인증 인스턴스 선택</string>
     <string name="fullscreen_orientation">전체 화면 방향</string>
-    <string name="turnInternetOn">Wi-Fi 또는 모바일 데이터를 켜서 인터넷에 연결하십시오.</string>
+    <string name="turnInternetOn">WiFi 또는 모바일 데이터를 켜서 인터넷에 연결하십시오.</string>
     <string name="change_playback_speed">재생 속도</string>
-    <string name="require_restart">앱 다시 시작 필요</string>
-    <string name="require_restart_message">앱을 다시 시작하시겠습니까\? 변경 사항은 다음에 앱을 시작할 때 적용됩니다.</string>
+    <string name="require_restart">재시작 필요</string>
+    <string name="require_restart_message">이 변경은 앱을 다시 시작해야 합니다. 지금 앱을 다시 시작하시겠습니까\? 그렇지 않으면 다음에 앱을 다시 시작할 때 변경 사항이 적용됩니다.</string>
+    <string name="update_now">지금 앱을 업데이트하시겠습니까\?</string>
+    <string name="autoRotatePlayer_summary">기기가 켜지면 자동으로 플레이어 전체 화면으로 전환합니다.</string>
+    <string name="autoRotatePlayer">자동 전체화면</string>
+    <string name="data_saver_mode">데이터 세이버 모드</string>
+    <string name="search_history_summary">검색 쿼리를 로컬에 저장</string>
+    <string name="history_summary">시청 및 검색 기록</string>
+    <string name="pure_theme_summary">순수한 흰색/검은색 테마</string>
+    <string name="no_player_found">외부 플레이어를 찾을 수 없습니다. 하나가 설치되어 있는지 확인하십시오.</string>
+    <string name="data_saver_mode_summary">데이터를 저장하기 위해 썸네일 및 기타 이미지를 로드하지 마십시오.</string>
+    <string name="watch_history_summary">시청한 비디오를 로컬에서 추적</string>
+    <string name="pure_theme">순수한 테마</string>
 </resources>
