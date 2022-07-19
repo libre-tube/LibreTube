@@ -1078,7 +1078,7 @@ class PlayerFragment : Fragment() {
                 }
 
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    binding.player.performClick()
+                    toggleController()
                     return super.onSingleTapConfirmed(e)
                 }
             }
@@ -1100,7 +1100,7 @@ class PlayerFragment : Fragment() {
                 }
 
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    binding.player.performClick()
+                    toggleController()
                     return super.onSingleTapConfirmed(e)
                 }
             }
@@ -1170,6 +1170,11 @@ class PlayerFragment : Fragment() {
         doubleTapOverlayBinding.rewindBTN.apply {
             visibility = View.GONE
         }
+    }
+
+    private fun toggleController() {
+        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
+        else exoPlayerView.showController()
     }
 
     // enable seek bar preview

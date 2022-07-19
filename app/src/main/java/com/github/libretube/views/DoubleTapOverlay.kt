@@ -10,7 +10,7 @@ class DoubleTapOverlay(
     context: Context,
     attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs) {
-    lateinit var binding: DoubleTapOverlayBinding
+    var binding: DoubleTapOverlayBinding
 
     init {
         val layoutInflater = LayoutInflater.from(context)

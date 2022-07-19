@@ -377,12 +377,10 @@
         <com.github.libretube.views.DoubleTapOverlay
             android:id="@+id/doubleTapOverlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="@id/main_container"
-            app:layout_constraintStart_toStartOf="@id/main_container"
-            app:layout_constraintTop_toTopOf="@id/main_container" />
+            android:layout_height="match_parent" />
 
     </com.github.libretube.views.CustomExoPlayerView>
+
 
 
     <ImageView
