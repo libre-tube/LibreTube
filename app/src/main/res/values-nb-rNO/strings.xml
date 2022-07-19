@@ -215,4 +215,22 @@
     <string name="auth_instance">Instans for identitetsbekreftelse</string>
     <string name="auth_instance_summary">Bruk en annen instans for identitetsbekreftede kall.</string>
     <string name="watch_positions_summary">Husk visningsposisjon og begynn derfra.</string>
+    <string name="chapters">Kapitler</string>
+    <string name="require_restart">Omstart kreves</string>
+    <string name="turnInternetOn">Koble til Internett ved å skru på Wi-Fi eller mobildata</string>
+    <string name="require_restart_message">Start programmet på ny nå\? Endringene trer i kraft neste gang du starter programmet.</string>
+    <string name="open">Åpne …</string>
+    <string name="change_playback_speed">Avspillingshastighet</string>
+    <string name="audio_video">Lyd og bilde</string>
+    <string name="fullscreen_orientation">Fullskjerm</string>
+    <string name="aspect_ratio">Video-sideretning</string>
+    <string name="auto_rotation">Automatisk</string>
+    <string name="landscape">Liggende</string>
+    <string name="portrait">Stående</string>
+    <string name="community">Gemenskap</string>
+    <string name="discord">Discord</string>
+    <string name="matrix">Matrix</string>
+    <string name="telegram">Telegram</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
 </resources>

@@ -227,6 +227,10 @@
     <string name="matrix">Matrix</string>
     <string name="telegram">Telegram</string>
     <string name="twitter">Twitter</string>
-    <string name="turnInternetOn">Пожалуйста, подключитесь к Интернету, включив WiFi или мобильный интернет.</string>
+    <string name="turnInternetOn">Пожалуйста, подключитесь к Интернету, включив Wi-Fi или мобильный интернет.</string>
     <string name="open">Открыть …</string>
+    <string name="chapters">Эпизоды</string>
+    <string name="change_playback_speed">Скорость воспроизведения</string>
+    <string name="require_restart">Требуется перезапуск приложения</string>
+    <string name="require_restart_message">Перезапустить приложение\? Изменения будут применены при следующем запуске приложения.</string>
 </resources>

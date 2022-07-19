@@ -227,7 +227,10 @@
     <string name="community">Comunidad</string>
     <string name="discord">Discord</string>
     <string name="twitter">Twitter</string>
-    <string name="turnInternetOn">Por favor, conéctese a Internet activando el WiFi o los datos móviles.</string>
+    <string name="turnInternetOn">Por favor, conéctese a Internet activando el Wi-Fi o los datos móviles.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
+    <string name="require_restart_message">¿Reiniciar la aplicación\? Los cambios se aplicarán la próxima vez que se inicie la aplicación.</string>
+    <string name="change_playback_speed">Velocidad de reproducción</string>
+    <string name="require_restart">Es necesario reiniciar la aplicación</string>
 </resources>

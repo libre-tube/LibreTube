@@ -231,4 +231,6 @@
     <string name="open">פתיחה…</string>
     <string name="chapters">פרקים</string>
     <string name="change_playback_speed">מהירות נגינה</string>
+    <string name="require_restart">נדרשת הפעלה מחדש</string>
+    <string name="require_restart_message">השינוי הזה דורש את הפעלת היישום מחדש. לעשות זאת כעת\? אחרת, השינויים לא יחולו עד להפעלה הבאה מחדש.</string>
 </resources>

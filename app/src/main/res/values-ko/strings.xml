@@ -215,4 +215,8 @@
     <string name="auto_rotation">자동 회전</string>
     <string name="auth_instances">인증 인스턴스 선택</string>
     <string name="fullscreen_orientation">전체 화면 방향</string>
+    <string name="turnInternetOn">Wi-Fi 또는 모바일 데이터를 켜서 인터넷에 연결하십시오.</string>
+    <string name="change_playback_speed">재생 속도</string>
+    <string name="require_restart">앱 다시 시작 필요</string>
+    <string name="require_restart_message">앱을 다시 시작하시겠습니까\? 변경 사항은 다음에 앱을 시작할 때 적용됩니다.</string>
 </resources>

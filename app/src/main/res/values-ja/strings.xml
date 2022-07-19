@@ -25,7 +25,7 @@
     <string name="clear_history">履歴を削除</string>
     <string name="music_songs">YT Musicの曲</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app/ からのAPIを使用</string>
-    <string name="sponsorblock_state">有効</string>
+    <string name="sponsorblock_state">オン</string>
     <string name="category_selfpromo">無償/自己プロモーション</string>
     <string name="category_interaction">インタラクションリマインダ (チャンネル登録)</string>
     <string name="category_intro">インターミッション/イントロアニメーション</string>
@@ -60,7 +60,7 @@
     <string name="already_logged_in">すでにログイン済みです。ログアウトしてください。</string>
     <string name="login_register">ログイン/新規登録</string>
     <string name="cannotDownload">この動画をダウンロードできませんでした。</string>
-    <string name="vlcerror">VLCで開けませんでした。インストールされていますか？</string>
+    <string name="vlcerror">VLCで開くことができません。インストールされていない可能性があります。</string>
     <string name="app_theme">テーマ</string>
     <string name="server_error">サーバーに問題があります。ほかのインスタンスを試しますか？</string>
     <string name="empty">ユーザー名とパスワードを入力する必要があります。</string>
@@ -79,7 +79,7 @@
     <string name="darkTheme">ダークテーマ</string>
     <string name="subscribers">登録者 %1$s人</string>
     <string name="settings">設定</string>
-    <string name="noInternet">インターネット接続なし</string>
+    <string name="noInternet">インターネットに接続してください。</string>
     <string name="music_videos">YT Musicの動画</string>
     <string name="location">位置</string>
     <string name="retry">再試行</string>
@@ -110,4 +110,7 @@
     <string name="color_yellow">黄</string>
     <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">通知</string>
+    <string name="require_restart">アプリの再起動が必要です</string>
+    <string name="update">新しいバージョンを探しています。</string>
+    <string name="update_summary">クリックして、アプリが最新かどうかを確認します。</string>
 </resources>

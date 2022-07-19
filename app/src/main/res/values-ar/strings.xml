@@ -229,4 +229,8 @@
     <string name="twitter">تويتر</string>
     <string name="turnInternetOn">يرجى الاتصال بالإنترنت عن طريق تشغيل WiFi أو بيانات الجوال.</string>
     <string name="open">فتح …</string>
+    <string name="chapters">الفصول</string>
+    <string name="change_playback_speed">سرعة التشغيل</string>
+    <string name="require_restart_message">إعادة تشغيل التطبيق؟ سيتم تطبيق التغييرات في المرة القادمة التي يتم فيها تشغيل التطبيق.</string>
+    <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
 </resources>
