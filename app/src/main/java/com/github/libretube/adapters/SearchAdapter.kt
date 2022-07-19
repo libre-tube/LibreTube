@@ -1,26 +1,22 @@
 package com.github.libretube.adapters
 
-import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.ChannelSearchRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoSearchRowBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
-import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.SearchItem
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import kotlinx.coroutines.CoroutineScope
@@ -103,17 +99,7 @@ class SearchAdapter(
                 }
             searchChannelName.text = item.uploaderName
             root.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("videoId", item.url!!.replace("/watch?v=", ""))
-                val frag = PlayerFragment()
-                frag.arguments = bundle
-                val activity = root.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .remove(PlayerFragment())
-                    .commit()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, frag)
-                    .commitNow()
+                NavigationHelper.navigateVideo(root.context, item.url)
             }
             root.setOnLongClickListener {
                 val videoId = item.url!!.replace("/watch?v=", "")
@@ -122,9 +108,7 @@ class SearchAdapter(
                 true
             }
             searchChannelImage.setOnClickListener {
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("channel_id" to item.uploaderUrl)
-                activity.navController.navigate(R.id.channelFragment, bundle)
+                NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
         }
     }
@@ -138,9 +122,7 @@ class SearchAdapter(
                 item.subscribers.formatShort()
             ) + " • " + root.context.getString(R.string.videoCount, item.videos.toString())
             root.setOnClickListener {
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("channel_id" to item.url)
-                activity.navController.navigate(R.id.channelFragment, bundle)
+                NavigationHelper.navigateChannel(root.context, item.url)
             }
             val channelId = item.url?.replace("/channel/", "")!!
             val token = PreferenceHelper.getToken()
@@ -228,10 +210,7 @@ class SearchAdapter(
                     root.context.getString(R.string.videoCount, item.videos.toString())
             }
             root.setOnClickListener {
-                // playlist clicked
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("playlist_id" to item.url)
-                activity.navController.navigate(R.id.playlistFragment, bundle)
+                NavigationHelper.navigatePlaylist(root.context, item.url)
             }
             root.setOnLongClickListener {
                 val playlistId = item.url!!.replace("/playlist?list=", "")

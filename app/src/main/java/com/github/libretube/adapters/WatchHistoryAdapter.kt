@@ -1,21 +1,15 @@
 package com.github.libretube.adapters
 
-import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
-import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 
 class WatchHistoryAdapter(
     private val watchHistory: MutableList<WatchHistoryItem>,
@@ -47,33 +41,11 @@ class WatchHistoryAdapter(
             ConnectionHelper.loadImage(video.uploaderAvatar, channelImage)
 
             channelImage.setOnClickListener {
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("channel_id" to video.uploaderUrl)
-                activity.navController.navigate(R.id.channelFragment, bundle)
-                try {
-                    val mainMotionLayout =
-                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
-                    if (mainMotionLayout.progress == 0.toFloat()) {
-                        mainMotionLayout.transitionToEnd()
-                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            .transitionToEnd()
-                    }
-                } catch (e: Exception) {
-                }
+                NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }
 
             root.setOnClickListener {
-                var bundle = Bundle()
-                bundle.putString("videoId", video.videoId)
-                var frag = PlayerFragment()
-                frag.arguments = bundle
-                val activity = root.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .remove(PlayerFragment())
-                    .commit()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, frag)
-                    .commitNow()
+                NavigationHelper.navigateVideo(root.context, video.videoId)
             }
             root.setOnLongClickListener {
                 VideoOptionsDialog(video.videoId!!, root.context)

@@ -1,23 +1,20 @@
 package com.github.libretube.adapters
 
 import android.app.Activity
-import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
-import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,18 +54,7 @@ class PlaylistAdapter(
             playlistDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
             ConnectionHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
             root.setOnClickListener {
-                var bundle = Bundle()
-                bundle.putString("videoId", streamItem.url!!.replace("/watch?v=", ""))
-                bundle.putString("playlistId", playlistId)
-                var frag = PlayerFragment()
-                frag.arguments = bundle
-                val activity = root.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .remove(PlayerFragment())
-                    .commit()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, frag)
-                    .commitNow()
+                NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
             root.setOnLongClickListener {
                 val videoId = streamItem.url!!.replace("/watch?v=", "")

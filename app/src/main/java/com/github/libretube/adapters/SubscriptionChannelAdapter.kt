@@ -4,15 +4,14 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.obj.Subscription
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,9 +41,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
             subscriptionChannelName.text = subscription.name
             ConnectionHelper.loadImage(subscription.avatar, subscriptionChannelImage)
             root.setOnClickListener {
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("channel_id" to subscription.url)
-                activity.navController.navigate(R.id.channelFragment, bundle)
+                NavigationHelper.navigateChannel(root.context, subscription.url)
             }
             subscriptionSubscribe.setOnClickListener {
                 if (!isLoading) {
