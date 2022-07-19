@@ -42,6 +42,7 @@ import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddtoPlaylistDialog
@@ -105,6 +106,7 @@ class PlayerFragment : Fragment() {
     private val TAG = "PlayerFragment"
     private lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
+    private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
 
     /**
      * video information
@@ -199,6 +201,8 @@ class PlayerFragment : Fragment() {
     ): View {
         binding = FragmentPlayerBinding.inflate(layoutInflater, container, false)
         playerBinding = binding.player.binding
+        doubleTapOverlayBinding = binding.doubleTapOverlay.binding
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -1061,8 +1065,8 @@ class PlayerFragment : Fragment() {
     private fun enableDoubleTapToSeek() {
         // set seek increment text
         val seekIncrementText = (seekIncrement / 1000).toString()
-        binding.rewindTV.text = seekIncrementText
-        binding.forwardTV.text = seekIncrementText
+        doubleTapOverlayBinding.rewindTV.text = seekIncrementText
+        doubleTapOverlayBinding.forwardTV.text = seekIncrementText
 
         // enable rewind button
         val rewindGestureDetector = GestureDetector(
@@ -1080,7 +1084,7 @@ class PlayerFragment : Fragment() {
             }
         )
 
-        binding.rewindFL.setOnTouchListener { view, event ->
+        doubleTapOverlayBinding.rewindFL.setOnTouchListener { view, event ->
             rewindGestureDetector.onTouchEvent(event)
             view.performClick()
             true
@@ -1102,7 +1106,7 @@ class PlayerFragment : Fragment() {
             }
         )
 
-        binding.forwardFL.setOnTouchListener { view, event ->
+        doubleTapOverlayBinding.forwardFL.setOnTouchListener { view, event ->
             forwardGestureDetector.onTouchEvent(event)
             view.performClick()
             true
@@ -1113,7 +1117,7 @@ class PlayerFragment : Fragment() {
         exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
 
         // show the rewind button
-        binding.rewindBTN.apply {
+        doubleTapOverlayBinding.rewindBTN.apply {
             visibility = View.VISIBLE
             // clear previous animation
             animate().rotation(0F).setDuration(0).start()
@@ -1137,7 +1141,7 @@ class PlayerFragment : Fragment() {
         exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
 
         // show the forward button
-        binding.forwardBTN.apply {
+        doubleTapOverlayBinding.forwardBTN.apply {
             visibility = View.VISIBLE
             // clear previous animation
             animate().rotation(0F).setDuration(0).start()
@@ -1158,12 +1162,12 @@ class PlayerFragment : Fragment() {
     }
 
     private val hideForwardButtonRunnable = Runnable {
-        binding.forwardBTN.apply {
+        doubleTapOverlayBinding.forwardBTN.apply {
             visibility = View.GONE
         }
     }
     private val hideRewindButtonRunnable = Runnable {
-        binding.rewindBTN.apply {
+        doubleTapOverlayBinding.rewindBTN.apply {
             visibility = View.GONE
         }
     }
@@ -1515,12 +1519,10 @@ class PlayerFragment : Fragment() {
         // disable double tap to seek when the player is locked
         if (isLocked) {
             // enable fast forward and rewind by double tapping
-            binding.forwardFL.visibility = View.VISIBLE
-            binding.rewindFL.visibility = View.VISIBLE
+            binding.doubleTapOverlay.visibility = View.VISIBLE
         } else {
             // disable fast forward and rewind by double tapping
-            binding.forwardFL.visibility = View.GONE
-            binding.rewindFL.visibility = View.GONE
+            binding.doubleTapOverlay.visibility = View.GONE
         }
     }
 

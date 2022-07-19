@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="65dp"
+    android:baselineAligned="false">
+
+    <!-- double tap rewind btn -->
+    <FrameLayout
+        android:id="@+id/rewindFL"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".40">
+
+        <FrameLayout
+            android:id="@+id/rewindBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_rewind"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/rewindTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <!-- place holder for the center controls -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".20" />
+
+    <!-- double tap forward btn -->
+    <FrameLayout
+        android:id="@+id/forwardFL"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".40">
+
+        <FrameLayout
+            android:id="@+id/forwardBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="30dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_forward"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/forwardTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
