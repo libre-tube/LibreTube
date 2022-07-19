@@ -103,11 +103,11 @@
     <string name="license">Lizenz</string>
     <string name="color_accent">Akzente</string>
     <string name="color_red">Ruhendes Rot</string>
-    <string name="color_blue">Pixelblau</string>
+    <string name="color_blue">Glückseliges Blau</string>
     <string name="color_yellow">Gelb</string>
     <string name="color_green">Groovy grün</string>
     <string name="color_purple">Angenehmes Lila</string>
-    <string name="oledTheme">Schwarzes Farbschema</string>
+    <string name="oledTheme">Schwarz</string>
     <string name="material_you">Mystic Material 3</string>
     <string name="sponsorblock_notifications">Benachrichtigungen</string>
     <string name="enabled">Ein</string>
@@ -118,7 +118,7 @@
     <string name="playOnBackground">Im Hintergrund abspielen</string>
     <string name="update_available">Version %1$s ist verfügbar</string>
     <string name="update_available_text">Gehe zu den Veröffentlichungen auf GitHub, um sie herunterzuladen\?</string>
-    <string name="advanced_summary">Player, Herunterladen, Verlauf</string>
+    <string name="advanced_summary">Herunterladen, Zurücksetzen</string>
     <string name="appearance">Aussehen</string>
     <string name="app_behavior">Verhalten</string>
     <string name="downloads">Datenübertagungen</string>
@@ -142,7 +142,7 @@
     <string name="live">Live</string>
     <string name="no_replies">Dieser Kommentar hat keine Antworten.</string>
     <string name="authors">Autoren</string>
-    <string name="authors_summary">Lernen Sie das Team LibreTube und all seine Mitwirkenden kennen, die helfen, die Anwendung zu verbessern.</string>
+    <string name="authors_summary">Lernen Sie alle Mitwirkenden, welche in der Entwicklung und der Verbesserung der Anwendung involviert sind, kennen.</string>
     <string name="contributing">Beitragen</string>
     <string name="download_folder">Name</string>
     <string name="download_folder_summary">Der Name des Ordners, in dem die heruntergeladenen Medien gespeichert sind.</string>
@@ -222,4 +222,9 @@
     <string name="telegram">Telegram</string>
     <string name="reddit">Reddit</string>
     <string name="twitter">Twitter</string>
+    <string name="legacyIcon">Verlorenes Vermächtnis</string>
+    <string name="category_filler">Füllungstangente/Witze</string>
+    <string name="none">Keine</string>
+    <string name="update_now">Wollen Sie die Anwendung jetzt aktualisieren\?</string>
+    <string name="category_filler_description">Für tangentiale Szenen, die nur als Füllmaterial oder Humor hinzugefügt wurden, müssen nicht den Hauptinhalt des Videos verstehen.</string>
 </resources>
