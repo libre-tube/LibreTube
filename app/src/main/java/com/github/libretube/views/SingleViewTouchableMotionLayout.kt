@@ -26,7 +26,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private val transitionListenerList = mutableListOf<TransitionListener?>()
 
     init {
-        addTransitionListener(object : MotionLayout.TransitionListener {
+        addTransitionListener(object : TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
@@ -50,7 +50,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             }
         })
 
-        super.setTransitionListener(object : MotionLayout.TransitionListener {
+        super.setTransitionListener(object : TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
