@@ -206,7 +206,7 @@ class SearchAdapter(
             searchDescription.text = item.name
             searchName.text = item.uploaderName
             if (item.videos?.toInt() != -1) {
-                searchPlaylistNumber.text =
+                searchPlaylistVideos.text =
                     root.context.getString(R.string.videoCount, item.videos.toString())
             }
             root.setOnClickListener {

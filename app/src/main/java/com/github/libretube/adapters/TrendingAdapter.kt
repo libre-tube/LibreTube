@@ -50,7 +50,7 @@ class TrendingAdapter(
             ConnectionHelper.loadImage(trending.uploaderAvatar, channelImage)
 
             root.setOnClickListener {
-                NavigationHelper.navigateChannel(root.context, trending.url)
+                NavigationHelper.navigateVideo(root.context, trending.url)
             }
             root.setOnLongClickListener {
                 val videoId = trending.url!!.replace("/watch?v=", "")
