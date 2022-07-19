@@ -12,14 +12,15 @@ object LocaleHelper {
     fun updateLanguage(context: Context) {
         val languageName = PreferenceHelper.getString(PreferenceKeys.LANGUAGE, "sys")
         if (languageName == "sys") updateLocaleConf(context, Locale.getDefault())
-        else if ("$languageName".length < 3) {
-            val locale = Locale(languageName.toString())
-            updateLocaleConf(context, locale)
-        } else if ("$languageName".length > 3) {
+        else if (languageName?.contains("-") == true) {
+            val languageParts = languageName.split("-")
             val locale = Locale(
-                languageName?.substring(0, 2).toString(),
-                languageName?.substring(4, 6).toString()
+                languageParts[0],
+                languageParts[1]
             )
+            updateLocaleConf(context, locale)
+        } else {
+            val locale = Locale(languageName.toString())
             updateLocaleConf(context, locale)
         }
     }

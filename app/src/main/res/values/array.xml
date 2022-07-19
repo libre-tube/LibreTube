@@ -462,10 +462,13 @@
         <item>Arabic</item>
         <item>Azerbaijani</item>
         <item>Basque</item>
+        <item>Catalan</item>
         <item>Chinese (simplified)</item>
+        <item>Chinese (traditional)</item>
         <item>Czech</item>
         <item>Danish</item>
         <item>English</item>
+        <item>Filipino</item>
         <item>Finnish</item>
         <item>French</item>
         <item>German</item>
@@ -486,10 +489,14 @@
         <item>Polish</item>
         <item>Portuguese</item>
         <item>Portuguese (Brazil)</item>
+        <item>Romanian</item>
         <item>Russian</item>
+        <item>Slovak</item>
         <item>Sorani</item>
         <item>Spanish</item>
+        <item>Thai</item>
         <item>Turkish</item>
+        <item>Turkmen</item>
         <item>Ukrainian</item>
     </string-array>
 
@@ -498,10 +505,13 @@
         <item>ar</item>
         <item>az</item>
         <item>eu</item>
-        <item>zh</item>
+        <item>ca</item>
+        <item>zh-Hans</item>
+        <item>zh-Hant</item>
         <item>cs</item>
         <item>da</item>
         <item>en</item>
+        <item>fil</item>
         <item>fi</item>
         <item>fr</item>
         <item>de</item>
@@ -522,10 +532,14 @@
         <item>pl</item>
         <item>pt</item>
         <item>pt-rBR</item>
+        <item>ro</item>
         <item>ru</item>
+        <item>sk</item>
         <item>ckb</item>
         <item>es</item>
+        <item>th</item>
         <item>tr</item>
+        <item>tk</item>
         <item>uk</item>
     </string-array>
 
