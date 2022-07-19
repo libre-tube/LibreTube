@@ -4,15 +4,14 @@ import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -65,10 +64,7 @@ class PlaylistsAdapter(
                 builder.show()
             }
             root.setOnClickListener {
-                // playlists clicked
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("playlist_id" to playlist.id)
-                activity.navController.navigate(R.id.playlistFragment, bundle)
+                NavigationHelper.navigatePlaylist(root.context, playlist.id)
             }
         }
     }

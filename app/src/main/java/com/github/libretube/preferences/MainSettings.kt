@@ -12,7 +12,6 @@ import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.dialogs.UpdateDialog
 import com.github.libretube.update.UpdateChecker
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +36,8 @@ class MainSettings : PreferenceFragmentCompat() {
 
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->
-            ThemeHelper.restartMainActivity(requireContext())
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             true
         }
 
