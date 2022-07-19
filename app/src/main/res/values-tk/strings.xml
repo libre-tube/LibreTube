@@ -12,7 +12,7 @@
     <string name="videos">Wideo</string>
     <string name="unsubscribe">Abunalykdan çyk</string>
     <string name="share">Paýlaş</string>
-    <string name="download">Göçürip al</string>
+    <string name="download">Ýükle</string>
     <string name="save">Belle</string>
     <string name="username">Ulanyjy ady</string>
     <string name="password">Kod</string>
@@ -100,9 +100,9 @@
     <string name="aspect_ratio">Wideonyň öleçeglerine görä</string>
     <string name="subscribeIsEmpty">Ilki bilen käbir kanallara ýazylyň.</string>
     <string name="cannotDownload">Bu wideony göçürip alyp bolmaýar.</string>
-    <string name="dlcomplete">Göçürip alyndy.</string>
+    <string name="dlcomplete">Ýükleme gutardy.</string>
     <string name="importsuccess">Abuna ýazyldyňyz</string>
-    <string name="downloadfailed">Göçürip alma şowly bolmady.</string>
+    <string name="downloadfailed">Ýükleme şowsuz boldy.</string>
     <string name="vlcerror">VLC-de açyp bolmaýar. Gurulmadyk bolmagy mümkin.</string>
     <string name="import_from_yt">Abuna ýazylyşlary getir</string>
     <string name="import_from_yt_summary">YouTube ýa-da NewPipe-dan</string>
@@ -164,4 +164,15 @@
     <string name="noInternet">Ilki bilen internete birikdiriň.</string>
     <string name="retry">Täzeden synanyş</string>
     <string name="reset_message">Siz barladyňyzmy\? Bu sizi hasapdan çykarar we ähli sazlamalary täzelär!</string>
+    <string name="auto_rotation">Awtomatiki aýlaw</string>
+    <string name="landscape">Landşaft</string>
+    <string name="portrait">Portret</string>
+    <string name="community">Jemgyýet</string>
+    <string name="discord">Discord</string>
+    <string name="turnInternetOn">Wi-Fi ýa-da ykjam maglumatlary açyp, internete birikmegiňizi haýyş edýäris.</string>
+    <string name="open">Aç …</string>
+    <string name="chapters">Baplar</string>
+    <string name="change_playback_speed">Wideo tizligi</string>
+    <string name="require_restart">Programmany täzeden açmak zerurly</string>
+    <string name="require_restart_message">Programma täzeden açylsynmy\? Üýtgeşmeler indiki gezek programma başlanda güýje girer.</string>
 </resources>
