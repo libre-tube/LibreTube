@@ -231,7 +231,7 @@
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
     <string name="change_playback_speed">سرعة التشغيل</string>
-    <string name="require_restart_message">يتطلب هذا التغيير إعادة تشغيل التطبيق. هل تريد إعادة تشغيل التطبيق الآن؟ وإلا سيتم تطبيق التغييرات عند إعادة تشغيل التطبيق التالية.</string>
+    <string name="require_restart_message">قد لا يتم تطبيق هذه التغييرات دون إعادة تشغيل التطبيق. هل تريد إعادة تشغيل التطبيق الآن؟</string>
     <string name="require_restart">إعادة التشغيل مطلوبة</string>
     <string name="navLabelVisibility">رؤية ملصق شريط التنقل</string>
     <string name="always">دائماً</string>
@@ -253,4 +253,6 @@
     <string name="data_saver_mode_summary">لا تقم بتحميل الصور المصغرة والصور الأخرى لحفظ البيانات.</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
     <string name="update_now">هل تريد تحديث التطبيق الآن؟</string>
+    <string name="seekbar_preview">شريط المعاينة</string>
+    <string name="seekbar_preview_summary">قم بمعاينة الفيديو بالبحث عن الموضع عند السحب على شريط التقدم.</string>
 </resources>

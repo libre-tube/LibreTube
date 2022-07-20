@@ -231,7 +231,7 @@
     <string name="turnInternetOn">Zəhmət olmasa ,WiFi və ya mobil datanı yandırmaqla internetə qoşulun.</string>
     <string name="chapters">Bölmələr</string>
     <string name="change_playback_speed">Oynatma sürəti</string>
-    <string name="require_restart_message">Bu dəyişiklik tətbiqin yenidən başladılmasını tələb edir. Tətbiqi indi yenidən başlatmaq istəyirsiniz\? Əks halda, dəyişikliklər növbəti tətbiqin yenidən başladılması zamanı tətbiq olunacaq.</string>
+    <string name="require_restart_message">Bu dəyişikliklər tətbiq yenidən başladılmasa tətbiq olunmaya bilər. Tətbiqi indi yenidən başlatmaq istəyirsiniz\?</string>
     <string name="require_restart">Yenidən başlatmaq tələb olunur</string>
     <string name="data_saver_mode_summary">Datanı saxlamaq üçün miniatürlər və digər şəkilləri yükləməyin.</string>
     <string name="history_summary">Baxış və axtarış tarixçəsi</string>
@@ -253,4 +253,6 @@
     <string name="none">Heç biri</string>
     <string name="watch_positions_title">Baxış mövqeləri</string>
     <string name="update_now">Tətbiqi indi yeniləmək istəyirsiniz\?</string>
+    <string name="seekbar_preview">Axtarış çubuğu önizləməsi</string>
+    <string name="seekbar_preview_summary">Axtarış çubuğunu ovuşdurarkən mövqeyi axtararaq videonu önizləmə.</string>
 </resources>

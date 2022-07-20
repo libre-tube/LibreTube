@@ -232,7 +232,7 @@
     <string name="chapters">章节</string>
     <string name="change_playback_speed">播放速度</string>
     <string name="require_restart">需要重启</string>
-    <string name="require_restart_message">此更改需要重新启动应用程序。 你想现在重新启动应用程序吗？ 否则，更改将在下一次应用重启时应用。</string>
+    <string name="require_restart_message">不重新启动应用就无法应用这些更改。 你想现在重新启动应用吗？</string>
     <string name="navLabelVisibility">导航栏标签可见性</string>
     <string name="always">始终</string>
     <string name="selected">已选</string>
@@ -253,4 +253,6 @@
     <string name="none">无</string>
     <string name="update_now">你要立即更新应用吗？</string>
     <string name="data_saver_mode_summary">不加载缩略图和其他图像来节约流量。</string>
+    <string name="seekbar_preview">拖动条预览</string>
+    <string name="seekbar_preview_summary">滑动拖动条时定位来预览视频。</string>
 </resources>
