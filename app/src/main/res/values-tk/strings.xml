@@ -76,7 +76,7 @@
     <string name="audio">Ses</string>
     <string name="video">Wideo</string>
     <string name="downloading">Ýüklenýär</string>
-    <string name="player_autoplay">Awto</string>
+    <string name="player_autoplay">Awtomatiki başlat</string>
     <string name="quality">Hil</string>
     <string name="behavior">Häsiýet</string>
     <string name="player_summary">Hil we pleýeriň häsiýeti</string>
@@ -175,4 +175,12 @@
     <string name="change_playback_speed">Wideo tizligi</string>
     <string name="require_restart">Programmany täzeden açmak zerurly</string>
     <string name="require_restart_message">Programma täzeden açylsynmy\? Üýtgeşmeler indiki gezek programma başlanda güýje girer.</string>
+    <string name="history_summary">Görülen we gözlenenler barada bellikler</string>
+    <string name="search_history_summary">Gözleg talaplaryny ýerli derejede saklaň</string>
+    <string name="watch_history_summary">Görülen wideolary ýerli derejede saklaň</string>
+    <string name="reset_watch_positions">Soňky görülen ýerleri poz</string>
+    <string name="data_saver_mode">Maglumat tygşytlaýjy tertibi</string>
+    <string name="data_saver_mode_summary">Internet maglumatlary azaltmak üçin suratlary ýüklemäň.</string>
+    <string name="autoRotatePlayer">Awtomatiki doly ekran</string>
+    <string name="autoRotatePlayer_summary">Enjam öwrülende pleýeriň doly ekranyna awtomatiki geçiň.</string>
 </resources>
