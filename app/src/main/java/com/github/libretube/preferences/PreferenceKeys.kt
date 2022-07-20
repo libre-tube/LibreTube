@@ -9,6 +9,7 @@ object PreferenceKeys {
      */
     const val LANGUAGE = "language"
     const val REGION = "region"
+    const val AUTO_ROTATION = "auto_rotation"
 
     /**
      * Appearance

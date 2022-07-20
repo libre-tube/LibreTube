@@ -3,6 +3,7 @@ package com.github.libretube.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
+    var autoRotationEnabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
@@ -56,6 +58,12 @@ class MainActivity : AppCompatActivity() {
         LocaleHelper.updateLanguage(this)
 
         super.onCreate(savedInstanceState)
+
+        autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
+
+        // enable auto rotation if turned on
+        requestedOrientation = if (autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
+        else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
         // start service that gets called on closure
         startService(Intent(this, ClosingService::class.java))
@@ -323,6 +331,8 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
         Globals.IS_FULL_SCREEN = false
+        requestedOrientation = if (autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
+        else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

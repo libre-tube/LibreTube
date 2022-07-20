@@ -2,29 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/location">
+    <PreferenceCategory>
 
-        <ListPreference
-            android:icon="@drawable/ic_region"
-            app:defaultValue="sys"
-            app:entries="@array/regions"
-            app:entryValues="@array/regionsValue"
-            app:key="region"
-            app:title="@string/region"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            android:icon="@drawable/ic_translate"
-            app:defaultValue="sys"
-            app:entries="@array/languages"
-            app:entryValues="@array/languagesValue"
-            app:key="language"
-            app:title="@string/changeLanguage"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/customization">
+        <Preference
+            android:icon="@drawable/ic_settings"
+            app:key="general"
+            android:summary="@string/general_summary"
+            app:title="@string/general" />
 
         <Preference
             android:icon="@drawable/ic_server"

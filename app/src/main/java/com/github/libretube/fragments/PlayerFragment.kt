@@ -563,7 +563,6 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.GONE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
-        playerBinding.closeImageButton.visibility = View.GONE
 
         scaleControls(1.3F)
 
@@ -585,6 +584,7 @@ class PlayerFragment : Fragment() {
             }
             mainActivity.requestedOrientation = orientation
         }
+        binding.player.setDoubleTapOverlayLayoutParams(90)
 
         Globals.IS_FULL_SCREEN = true
     }
@@ -600,7 +600,6 @@ class PlayerFragment : Fragment() {
         binding.linLayout.visibility = View.VISIBLE
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
-        playerBinding.closeImageButton.visibility = View.VISIBLE
 
         scaleControls(1F)
 
@@ -667,6 +666,8 @@ class PlayerFragment : Fragment() {
             ) as NotificationManager
             notificationManager.cancel(1)
             exoPlayer.release()
+            activity?.requestedOrientation = if ((activity as MainActivity).autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
+            else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         } catch (e: Exception) {
         }
     }
@@ -1526,12 +1527,6 @@ class PlayerFragment : Fragment() {
             if (isLocked &&
                 Globals.IS_FULL_SCREEN
             ) View.VISIBLE else View.INVISIBLE
-
-        // hide the close image button
-        playerBinding.closeImageButton.visibility =
-            if (isLocked &&
-                !(Globals.IS_FULL_SCREEN && !autoRotationEnabled)
-            ) View.VISIBLE else View.GONE
 
         // disable double tap to seek when the player is locked
         if (isLocked) {
