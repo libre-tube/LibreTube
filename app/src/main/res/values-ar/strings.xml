@@ -181,7 +181,7 @@
     <string name="playback_speed">سرعة التشغيل الافتراضية</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك.</string>
     <string name="authors_summary">تعرف على كل من يشارك في تطوير التطبيق وتحسينه.</string>
-    <string name="advanced_summary">التنزيلات والتاريخ</string>
+    <string name="advanced_summary">التنزيلات ، إعادة التعيين</string>
     <string name="customInstance_summary">إضافة مثيل مخصص (على مسؤوليتك الخاصة)</string>
     <string name="movies_directory">مجلد الأفلام</string>
     <string name="shareTo">مشاركة عنوان URL إلى</string>
@@ -209,7 +209,7 @@
     <string name="deleteAccount_summary">حذف حساب Piped الخاص بك</string>
     <string name="watch_history">سجل المشاهدة</string>
     <string name="watch_positions">تذكر مكان التوقف</string>
-    <string name="watch_positions_summary">تذكر مكان التوقف وابحث عنه تلقائيا.</string>
+    <string name="watch_positions_summary">استعادة آخر موضع مشاهدة</string>
     <string name="auth_instance">مصادقة المثيل</string>
     <string name="auth_instance_summary">استخدم مثيلا مختلفا للمكالمات المصادق عليها.</string>
     <string name="auth_instances">اختر مثيل المصادقة</string>
@@ -231,6 +231,26 @@
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
     <string name="change_playback_speed">سرعة التشغيل</string>
-    <string name="require_restart_message">إعادة تشغيل التطبيق؟ سيتم تطبيق التغييرات في المرة القادمة التي يتم فيها تشغيل التطبيق.</string>
-    <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
+    <string name="require_restart_message">يتطلب هذا التغيير إعادة تشغيل التطبيق. هل تريد إعادة تشغيل التطبيق الآن؟ وإلا سيتم تطبيق التغييرات عند إعادة تشغيل التطبيق التالية.</string>
+    <string name="require_restart">إعادة التشغيل مطلوبة</string>
+    <string name="navLabelVisibility">رؤية ملصق شريط التنقل</string>
+    <string name="always">دائماً</string>
+    <string name="selected">المحدد</string>
+    <string name="never">أبداً</string>
+    <string name="autoRotatePlayer">ملء الشاشة تلقائيا</string>
+    <string name="autoRotatePlayer_summary">قم بالتبديل تلقائيا إلى مشغل ملء الشاشة عند تدوير الجهاز.</string>
+    <string name="pure_theme">نسق نقي</string>
+    <string name="pure_theme_summary">نسق أبيض/أسود نقي</string>
+    <string name="no_player_found">لم يتم العثور على مشغل خارجي. يرجى التأكد من تثبيته.</string>
+    <string name="data_saver_mode">وضع توفير البيانات</string>
+    <string name="search_history_summary">تخزين سجل البحث محليا</string>
+    <string name="watch_history_summary">تتبع مقاطع الفيديو التي تمت مشاهدتها محليا</string>
+    <string name="watch_positions_title">اماكن المشاهدة</string>
+    <string name="reset_watch_positions">إعادة ضبط مواقع المراقبة</string>
+    <string name="system_caption_style">نمط التسمية التوضيحية للنظام</string>
+    <string name="captions">التسميات التوضيحيه</string>
+    <string name="none">لاشيء</string>
+    <string name="data_saver_mode_summary">لا تقم بتحميل الصور المصغرة والصور الأخرى لحفظ البيانات.</string>
+    <string name="history_summary">سجل المشاهدة والبحث</string>
+    <string name="update_now">هل تريد تحديث التطبيق الآن؟</string>
 </resources>
