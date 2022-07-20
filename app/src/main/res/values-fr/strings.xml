@@ -121,7 +121,7 @@
     <string name="donate_summary">Si vous aimez l\'application et appréciez notre travail, nous serions heureux de votre don.</string>
     <string name="contributing">Contribution</string>
     <string name="donate">Faire un don</string>
-    <string name="advanced_summary">Téléchargements, historique</string>
+    <string name="advanced_summary">Téléchargements, réinitialisation</string>
     <string name="video_format_summary">Conversion des fichiers si on télécharge à la fois de l\'audio et de la vidéo.</string>
     <string name="download_directory_summary">Où sont stockés les médias téléchargés.</string>
     <string name="license_summary">La GPLv3+ est une licence libre copylefté. Utilisez, étudiez, modifiez et partagez ; avec tous.</string>
@@ -209,7 +209,7 @@
     <string name="restore">Restaurer</string>
     <string name="watch_history">Regarder l’historique</string>
     <string name="watch_positions">Se souvenir de la position</string>
-    <string name="watch_positions_summary">Se souvenir de l\'endroit que vous regardiez et le chercher automatiquement.</string>
+    <string name="watch_positions_summary">Rétablir la dernière position de visionnage</string>
     <string name="auth_instance">Instance d\'authentification</string>
     <string name="hls">Auto</string>
     <string name="github">GitHub</string>
@@ -231,6 +231,26 @@
     <string name="turnInternetOn">Veuillez vous connecter à internet en activant le Wi-Fi ou les données mobiles.</string>
     <string name="chapters">Chapitres</string>
     <string name="change_playback_speed">Vitesse de lecture</string>
-    <string name="require_restart_message">Redémarrer l\'application \? Les modifications seront appliquées au prochain démarrage de l\'application.</string>
-    <string name="require_restart">Redémarrage de l\'application requis</string>
+    <string name="require_restart_message">Ce changement nécessite un redémarrage de l\'application. Voulez-vous redémarrer l\'application maintenant \? Sinon, les changements seront appliqués au prochain redémarrage de l\'application.</string>
+    <string name="require_restart">Redémarrage nécessaire</string>
+    <string name="navLabelVisibility">Visibilité de l\'étiquette de la barre de navigation</string>
+    <string name="always">Toujours</string>
+    <string name="autoRotatePlayer">Plein écran automatique</string>
+    <string name="autoRotatePlayer_summary">Passage automatique en plein écran du lecteur lorsque l\'appareil est retourné.</string>
+    <string name="pure_theme">Thème pur</string>
+    <string name="no_player_found">Aucun lecteur externe n\'a été trouvé. Veuillez vous assurer que vous en avez installé un.</string>
+    <string name="data_saver_mode">Mode économie de données</string>
+    <string name="search_history_summary">Stocker les requêtes de recherche localement</string>
+    <string name="watch_history_summary">Garder la trace des vidéos regardées localement</string>
+    <string name="history_summary">Historique de visionnage et de recherche</string>
+    <string name="watch_positions_title">Positions de visionnage</string>
+    <string name="reset_watch_positions">Réinitialiser les positions de visionnage</string>
+    <string name="system_caption_style">Style des légendes du système</string>
+    <string name="captions">Légendes</string>
+    <string name="none">Aucun</string>
+    <string name="selected">Sélectionné</string>
+    <string name="data_saver_mode_summary">Ne pas charger les miniatures et autres images pour économiser des données.</string>
+    <string name="update_now">Voulez-vous mettre à jour l\'application maintenant \?</string>
+    <string name="never">Jamais</string>
+    <string name="pure_theme_summary">Thème blanc/noir pur</string>
 </resources>
