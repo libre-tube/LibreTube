@@ -102,14 +102,16 @@ object ThemeHelper {
         val nManager = context
             .getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
         nManager.cancelAll()
-        // restart to MainActivity
+        // start a new Intent of the app
         val pm: PackageManager = context.packageManager
         val intent = pm.getLaunchIntentForPackage(context.packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         context.startActivity(intent)
+        // kill the old application
+        android.os.Process.killProcess(android.os.Process.myPid())
     }
 
-    fun getThemeColor(context: Context, colorCode: Int): Int {
+    private fun getThemeColor(context: Context, colorCode: Int): Int {
         val value = TypedValue()
         context.theme.resolveAttribute(colorCode, value, true)
         return value.data

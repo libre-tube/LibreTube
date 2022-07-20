@@ -19,7 +19,7 @@ internal class CustomExoPlayerView(
     init {
         setControllerVisibilityListener {
             // hide the advanced options
-            binding.toggleOptions.animate().rotationX(0F).setDuration(0).start()
+            binding.toggleOptions.animate().rotation(0F).setDuration(250).start()
             binding.advancedOptions.visibility = View.GONE
         }
     }
