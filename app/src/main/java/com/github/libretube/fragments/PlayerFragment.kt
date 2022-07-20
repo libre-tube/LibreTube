@@ -404,10 +404,10 @@ class PlayerFragment : Fragment() {
         // show the advanced player options
         playerBinding.toggleOptions.setOnClickListener {
             if (playerBinding.advancedOptions.isVisible) {
-                playerBinding.toggleOptions.animate().rotationX(0F).setDuration(200).start()
+                playerBinding.toggleOptions.animate().rotation(0F).setDuration(250).start()
                 playerBinding.advancedOptions.visibility = View.GONE
             } else {
-                playerBinding.toggleOptions.animate().rotationX(180F).setDuration(200).start()
+                playerBinding.toggleOptions.animate().rotation(180F).setDuration(250).start()
                 playerBinding.advancedOptions.visibility = View.VISIBLE
             }
         }
@@ -613,9 +613,15 @@ class PlayerFragment : Fragment() {
     }
 
     private fun toggleDescription() {
-        binding.playerDescriptionArrow.animate().rotationBy(180F).setDuration(250).start()
-        binding.descLinLayout.visibility =
-            if (binding.descLinLayout.isVisible) View.GONE else View.VISIBLE
+        if (binding.descLinLayout.isVisible) {
+            // hide the description and chapters
+            binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
+            binding.descLinLayout.visibility = View.GONE
+        } else {
+            // show the description and chapters
+            binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
+            binding.descLinLayout.visibility = View.VISIBLE
+        }
     }
 
     private fun toggleComments() {
