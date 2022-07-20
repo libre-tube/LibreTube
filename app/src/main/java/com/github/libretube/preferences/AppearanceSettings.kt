@@ -53,13 +53,6 @@ class AppearanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val hideTrending = findPreference<SwitchPreferenceCompat>(PreferenceKeys.HIDE_TRENDING_PAGE)
-        hideTrending?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            true
-        }
-
         val labelVisibilityMode = findPreference<ListPreference>(PreferenceKeys.LABEL_VISIBILITY)
         labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()

@@ -3,13 +3,11 @@ package com.github.libretube.preferences
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
-import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.dialogs.UpdateDialog
 import com.github.libretube.update.UpdateChecker
 import com.google.android.material.snackbar.Snackbar
@@ -27,17 +25,10 @@ class MainSettings : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
 
-        val region = findPreference<Preference>("region")
-        region?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            true
-        }
-
-        val language = findPreference<ListPreference>("language")
-        language?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+        val general = findPreference<Preference>("general")
+        general?.setOnPreferenceClickListener {
+            val newFragment = GeneralSettings()
+            navigateToSettingsFragment(newFragment)
             true
         }
 
@@ -90,6 +81,7 @@ class MainSettings : PreferenceFragmentCompat() {
         else getString(R.string.version, BuildConfig.VERSION_NAME)
         update?.title = versionString
 
+        // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update

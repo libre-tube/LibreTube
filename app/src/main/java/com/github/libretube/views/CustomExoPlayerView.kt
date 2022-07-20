@@ -35,7 +35,7 @@ internal class CustomExoPlayerView(
     }
 
     // set the top and bottom margin of the double tap overlay
-    private fun setDoubleTapOverlayLayoutParams(margin: Int) {
+    fun setDoubleTapOverlayLayoutParams(margin: Int) {
         val dpMargin = resources?.displayMetrics?.density!!.toInt() * margin
         val doubleTapOverlay = binding.root.findViewById<DoubleTapOverlay>(R.id.doubleTapOverlay)
         val params = doubleTapOverlay.layoutParams as MarginLayoutParams
