@@ -255,4 +255,6 @@
     <string name="data_saver_mode_summary">不加载缩略图和其他图像来节约流量。</string>
     <string name="seekbar_preview">拖动条预览</string>
     <string name="seekbar_preview_summary">滑动拖动条时定位来预览视频。</string>
+    <string name="general">常规</string>
+    <string name="general_summary">语言、区域</string>
 </resources>
