@@ -51,6 +51,7 @@ object PreferenceKeys {
     const val PLAYER_VIDEO_FORMAT = "player_video_format"
     const val DEFAULT_RESOLUTION = "default_res"
     const val BUFFERING_GOAL = "buffering_goal"
+    const val SEEKBAR_PREVIEW = "seekbar_preview"
 
     /**
      * Download
