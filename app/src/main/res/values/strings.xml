@@ -232,7 +232,7 @@
     <string name="chapters">Chapters</string>
     <string name="change_playback_speed">Playback speed</string>
     <string name="require_restart">Restart required</string>
-    <string name="require_restart_message">This change requires an app restart. Do you want to restart the app now? Otherwise the changes will be applied on the next app restart.</string>
+    <string name="require_restart_message">These changes might not be applied without restarting the app. Do you want to restart the app now?</string>
     <string name="navLabelVisibility">Navbar label visibility</string>
     <string name="always">Always</string>
     <string name="selected">Selected</string>
@@ -253,4 +253,6 @@
     <string name="captions">Captions</string>
     <string name="none">None</string>
     <string name="update_now">Do you want to update the app now?</string>
+    <string name="seekbar_preview">Seekbar preview</string>
+    <string name="seekbar_preview_summary">Preview the video by seeking to the position when scrubbing the seekbar.</string>
 </resources>

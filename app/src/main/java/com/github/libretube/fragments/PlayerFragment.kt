@@ -163,6 +163,7 @@ class PlayerFragment : Fragment() {
     private var videoFormatPreference = "WEBM"
     private var defRes = ""
     private var bufferingGoal = 50000
+    private var seekBarPreview = false
 
     /**
      * for autoplay
@@ -298,6 +299,11 @@ class PlayerFragment : Fragment() {
             PreferenceKeys.BUFFERING_GOAL,
             "50"
         )?.toInt()!! * 1000
+
+        seekBarPreview = PreferenceHelper.getBoolean(
+            PreferenceKeys.SEEKBAR_PREVIEW,
+            false
+        )
     }
 
     private fun setSponsorBlockPrefs() {
@@ -912,7 +918,7 @@ class PlayerFragment : Fragment() {
 
         playerBinding.exoTitle.text = response.title
 
-        enableSeekbarPreview()
+        if (seekBarPreview) enableSeekbarPreview()
         enableDoubleTapToSeek()
 
         // init the chapters recyclerview
