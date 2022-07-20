@@ -132,7 +132,7 @@
     <string name="no_update_available">זאת הגרסה העדכנית ביותר.</string>
     <string name="donate_summary">אפשר להעניק בהתאם לערך שהוא מעניק לך. צוות LibreTube קטן מהתרומה או הסיוע שלך.</string>
     <string name="update">איתור גרסה חדשה</string>
-    <string name="advanced_summary">הורדות, היסטוריה</string>
+    <string name="advanced_summary">הורדות, איפוס</string>
     <string name="app_uptodate">היישומון עדכני.</string>
     <string name="playback_speed">מהירות נגינה כברירת מחדל</string>
     <string name="advanced">מתקדם</string>
@@ -209,7 +209,7 @@
     <string name="deleteAccount_summary">מחיקת חשבון ה־Piped</string>
     <string name="watch_history">היסטוריית צפייה</string>
     <string name="watch_positions">שמירת המיקום</string>
-    <string name="watch_positions_summary">לזכור את מיקום הצפייה ולקפוץ אליו אוטומטית.</string>
+    <string name="watch_positions_summary">שחזור נקודת הצפייה האחרונה</string>
     <string name="auth_instance">עותק אימות</string>
     <string name="auth_instance_summary">להשתמש בעותק אחר לשיחות מאומתות.</string>
     <string name="auth_instances">בחירת עותק אימות</string>
@@ -232,5 +232,27 @@
     <string name="chapters">פרקים</string>
     <string name="change_playback_speed">מהירות נגינה</string>
     <string name="require_restart">נדרשת הפעלה מחדש</string>
-    <string name="require_restart_message">השינוי הזה דורש את הפעלת היישום מחדש. לעשות זאת כעת\? אחרת, השינויים לא יחולו עד להפעלה הבאה מחדש.</string>
+    <string name="require_restart_message">השינויים האלו לא יחולו עד להפעלת היישומון מחדש. להפעיל אותו מחדש כעת\?</string>
+    <string name="always">תמיד</string>
+    <string name="selected">נבחר</string>
+    <string name="never">לעולם לא</string>
+    <string name="autoRotatePlayer">מסך מלא אוטומטית</string>
+    <string name="navLabelVisibility">חשיפת תוויות סרגל ניווט</string>
+    <string name="autoRotatePlayer_summary">להעביר את הנגן למסך מלא אוטומטית עם סיבוב המכשיר.</string>
+    <string name="pure_theme">ערכת עיצוב טהורה</string>
+    <string name="pure_theme_summary">ערכת עיצוב טהורה לבנה/שחורה</string>
+    <string name="no_player_found">לא נמצא נגן חיצוני. נא לוודא שמותקן אצלך אחד כזה.</string>
+    <string name="data_saver_mode">מצב חיסכון בתעבורה</string>
+    <string name="search_history_summary">לאחסן את שאילתות החיפוש מקומית</string>
+    <string name="watch_history_summary">לעקוב אחר סרטונים בהם צפית באופן מקומי</string>
+    <string name="history_summary">לעקוב ולחפש בהיסטוריה</string>
+    <string name="watch_positions_title">מיקומי נגינה</string>
+    <string name="reset_watch_positions">איפוס נקודות צפייה</string>
+    <string name="system_caption_style">סגנון כתוביות מערכת</string>
+    <string name="captions">כתוביות</string>
+    <string name="none">ללא</string>
+    <string name="seekbar_preview">תצוגה מקדימה בסרגל הנגינה</string>
+    <string name="seekbar_preview_summary">להציג תצוגה מקדימה מהסרטון במיקום המבוקש בעת מעבר על סרגל הנגינה.</string>
+    <string name="update_now">לעדכן את היישומון כעת\?</string>
+    <string name="data_saver_mode_summary">לא לטעון תמונות ממוזערות ותמונות אחרות כדי לחסוך בתעבורה.</string>
 </resources>
