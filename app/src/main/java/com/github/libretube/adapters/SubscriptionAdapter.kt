@@ -19,8 +19,17 @@ class SubscriptionAdapter(
 ) : RecyclerView.Adapter<SubscriptionViewHolder>() {
     private val TAG = "SubscriptionAdapter"
 
+    var i = 0
     override fun getItemCount(): Int {
-        return videoFeed.size
+        return i
+    }
+
+    fun updateItems() {
+        i += 10
+        if (i > videoFeed.size) {
+            i = videoFeed.size
+        }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {

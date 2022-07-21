@@ -94,18 +94,33 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_channels"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:visibility="gone" />
+                    android:descendantFocusability="blocksDescendants">
+                    
+                    <androidx.recyclerview.widget.RecyclerView
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_feed"
+                        android:visibility="gone"
+                        android:id="@+id/sub_channels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
+                    android:descendantFocusability="blocksDescendants">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_feed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false" />
+
+                </RelativeLayout>
             </LinearLayout>
         </ScrollView>
     </com.github.libretube.views.CustomSwipeToRefresh>

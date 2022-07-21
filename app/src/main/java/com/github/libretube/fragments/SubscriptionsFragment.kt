@@ -85,6 +85,20 @@ class SubscriptionsFragment : Fragment() {
                     binding.subFeed.visibility = View.VISIBLE
                 }
             }
+
+            binding.scrollviewSub.viewTreeObserver
+                .addOnScrollChangedListener {
+                    if (binding.scrollviewSub.getChildAt(0).bottom
+                        == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
+                    ) {
+                        // scroll view is at bottom
+                        if (isLoaded) {
+                            binding.subRefresh.isRefreshing = true
+                            subscriptionAdapter?.updateItems()
+                            binding.subRefresh.isRefreshing = false
+                        }
+                    }
+                }
         } else {
             binding.subRefresh.isEnabled = false
         }
@@ -108,6 +122,7 @@ class SubscriptionsFragment : Fragment() {
                 if (response.isNotEmpty()) {
                     subscriptionAdapter = SubscriptionAdapter(response, childFragmentManager)
                     feedRecView.adapter = subscriptionAdapter
+                    subscriptionAdapter?.updateItems()
                 } else {
                     runOnUiThread {
                         with(binding.boogh) {
