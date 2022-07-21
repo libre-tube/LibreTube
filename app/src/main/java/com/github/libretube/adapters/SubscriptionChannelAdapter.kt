@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -48,19 +47,19 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                     isLoading = true
                     val channelId = subscription.url?.replace("/channel/", "")!!
                     if (subscribed) {
-                        unsubscribe(root.context, channelId)
-                        subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
+                        unsubscribe(channelId)
+                        subscriptionSubscribe.text = root.context.getString(R.string.unsubscribe)
                     } else {
-                        subscribe(root.context, channelId)
+                        subscribe(channelId)
                         subscriptionSubscribe.text =
-                            root.context.getString(R.string.unsubscribe)
+                            root.context.getString(R.string.subscribe)
                     }
                 }
             }
         }
     }
 
-    private fun subscribe(context: Context, channelId: String) {
+    private fun subscribe(channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -79,7 +78,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
         run()
     }
 
-    private fun unsubscribe(context: Context, channelId: String) {
+    private fun unsubscribe(channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
