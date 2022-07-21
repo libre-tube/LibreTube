@@ -3,8 +3,8 @@ package com.github.libretube.util
 import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.ImageView
+import coil.load
 import com.github.libretube.Globals
-import com.squareup.picasso.Picasso
 
 object ConnectionHelper {
     fun isNetworkAvailable(context: Context): Boolean {
@@ -41,7 +41,7 @@ object ConnectionHelper {
     fun loadImage(url: String?, target: ImageView) {
         // only load the image if the data saver mode is disabled
         if (!Globals.DATA_SAVER_MODE_ENABLED) {
-            Picasso.get().load(url).fit().centerCrop().into(target)
+            target.load(url)
         }
     }
 }

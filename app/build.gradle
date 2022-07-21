@@ -79,7 +79,6 @@ dependencies {
     implementation(libs.exoplayer.extension.cronet) { exclude group: 'com.google.android.gms' }
     implementation libs.exoplayer.extension.mediasession
 
-    implementation libs.square.picasso
     implementation libs.square.retrofit
     implementation libs.square.retrofit.converterJackson
     // Do not update jackson annotations! It does not supports < API 26.
@@ -90,5 +89,6 @@ dependencies {
     coreLibraryDesugaring libs.desugaring
     implementation libs.cronet.embedded
     implementation libs.cronet.okhttp
+    implementation libs.coil
     implementation libs.gson
 }
