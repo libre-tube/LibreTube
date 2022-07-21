@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -35,8 +36,12 @@ import java.util.zip.ZipInputStream
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
 
+    companion object {
+        lateinit var getContent: ActivityResultLauncher<String>
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        MainSettings.getContent =
+        getContent =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                 if (uri != null) {
                     try {
@@ -285,8 +290,14 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
     private fun importSubscriptions() {
         val token = PreferenceHelper.getToken()
-        // check StorageAccess
-        PermissionHelper.requestReadWrite(activity as AppCompatActivity)
+        if (token != "") {
+            // check StorageAccess
+            val accessGranted = PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
+            if (accessGranted) getContent.launch("*/*")
+            else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
+        } else {
+            Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun subscribe(channels: List<String>) {
