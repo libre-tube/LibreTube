@@ -254,4 +254,7 @@
     <string name="captions">Субтитры</string>
     <string name="general">Общие</string>
     <string name="general_summary">Язык, регион</string>
+    <string name="watch_history_summary">Сохранять история просмотров локально</string>
+    <string name="seekbar_preview">Предпросмотр поисковой панели</string>
+    <string name="seekbar_preview_summary">Предпросмотр видео осуществляется путем поиска позиции при очистке панели поиска.</string>
 </resources>
