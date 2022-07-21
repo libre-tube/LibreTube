@@ -255,4 +255,6 @@
     <string name="history_summary">Istorija pregleda i pretraga</string>
     <string name="system_caption_style">Sistemski stil naslova</string>
     <string name="update_now">Da li želite da ažurirate aplikaciju sada\?</string>
+    <string name="general">Opšte</string>
+    <string name="general_summary">Jezik, region</string>
 </resources>
