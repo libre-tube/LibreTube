@@ -1,6 +1,7 @@
 package com.github.libretube.preferences
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
@@ -86,9 +87,10 @@ class MainSettings : PreferenceFragmentCompat() {
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update
                 val updateInfo = UpdateChecker.getLatestReleaseInfo()
-                if (updateInfo?.name != "" && BuildConfig.VERSION_NAME != updateInfo?.name) {
+                Log.e(TAG, updateInfo?.name.toString())
+                if (updateInfo?.name != null && BuildConfig.VERSION_NAME != updateInfo?.name) {
                     // show the UpdateAvailableDialog if there's an update available
-                    val updateAvailableDialog = UpdateDialog(updateInfo!!)
+                    val updateAvailableDialog = UpdateDialog(updateInfo)
                     updateAvailableDialog.show(childFragmentManager, "UpdateAvailableDialog")
                 } else {
                     // otherwise show the no update available snackBar
