@@ -16,6 +16,12 @@
 
 </div>
 
+## 📔 About
+
+YouTube has an extremely invasive privacy policy which relies on using user data in unethical ways. They store a lot of your personal data - ranging from ideas, music taste, content, political opinions, and much more than you think.
+
+The project is aimed to improve the users privacy by being independent from Google and bypassing their data collection. Therefore the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Googles data collection and includes some other additional features.
+
 ## 📱 Screenshots
 
 <div style="width:100%; display:flex; justify-content:space-between;">
