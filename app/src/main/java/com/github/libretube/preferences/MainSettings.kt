@@ -2,7 +2,6 @@ package com.github.libretube.preferences
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -18,10 +17,6 @@ import kotlinx.coroutines.launch
 
 class MainSettings : PreferenceFragmentCompat() {
     val TAG = "SettingsFragment"
-
-    companion object {
-        lateinit var getContent: ActivityResultLauncher<String>
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)

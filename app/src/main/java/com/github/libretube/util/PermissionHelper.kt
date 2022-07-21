@@ -4,15 +4,13 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 
 object PermissionHelper {
-    fun requestReadWrite(activity: AppCompatActivity) {
+    fun requestReadWrite(activity: AppCompatActivity): Boolean {
         // request storage permissions if not granted yet
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Log.d("myz", "" + Build.VERSION.SDK_INT)
             if (!Environment.isExternalStorageManager()) {
                 ActivityCompat.requestPermissions(
                     activity,
@@ -22,6 +20,7 @@ object PermissionHelper {
                     ),
                     1
                 ) // permission request code is just an int
+                return false
             }
         } else {
             if (ActivityCompat.checkSelfPermission(
@@ -41,7 +40,29 @@ object PermissionHelper {
                     ),
                     1
                 )
+                return false
             }
+        }
+        return true
+    }
+
+    fun isStoragePermissionGranted(activity: AppCompatActivity): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                true
+            } else {
+                ActivityCompat.requestPermissions(
+                    activity,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
+                false
+            }
+        } else {
+            // permission is automatically granted on sdk < 23 upon installation
+            true
         }
     }
 }
