@@ -231,7 +231,7 @@
     <string name="turnInternetOn">Lütfen, WiFi veya mobil verileri açarak internete bağlanın.</string>
     <string name="chapters">Bölümler</string>
     <string name="change_playback_speed">Oynatma hızı</string>
-    <string name="require_restart_message">Bu değişiklik, uygulamanın yeniden başlatılmasını gerektirir. Uygulamayı şimdi yeniden başlatmak istiyor musunuz\? Aksi takdirde, değişiklikler bir sonraki uygulama yeniden başlatıldığında uygulanacaktır.</string>
+    <string name="require_restart_message">Bu değişiklikler, uygulamayı yeniden başlatmadan uygulanamayabilir. Uygulamayı şimdi yeniden başlatmak istiyor musunuz\?</string>
     <string name="require_restart">Yeniden başlatma gerekiyor</string>
     <string name="captions">Altyazılar</string>
     <string name="system_caption_style">Sistem altyazı stili</string>
@@ -253,4 +253,8 @@
     <string name="watch_history_summary">İzlenen videoları yerel olarak takip edin</string>
     <string name="history_summary">İzleme ve arama geçmişi</string>
     <string name="watch_positions_title">İzleme pozisyonları</string>
+    <string name="seekbar_preview">Arama çubuğu önizlemesi</string>
+    <string name="seekbar_preview_summary">Arama çubuğunu fırçalarken konumu arayarak videoyu önizleyin.</string>
+    <string name="general_summary">Dil, bölge</string>
+    <string name="general">Genel</string>
 </resources>
