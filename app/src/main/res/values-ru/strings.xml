@@ -141,7 +141,7 @@
     <string name="instance_summary">Piped, логин, подписки</string>
     <string name="version">Версия %1$s</string>
     <string name="about_summary">Познакомьтесь с командой LibreTube и узнайте, как все это происходит.</string>
-    <string name="category_filler">Тангенс наполнения/шутки</string>
+    <string name="category_filler">Филлер/шутки</string>
     <string name="category_music_offtopic">Музыка: Немузыкальная секция</string>
     <string name="category_preview">Предварительный просмотр/Повтор</string>
     <string name="category_preview_description">Для сегментов, подробно описывающих предстоящий контент в этом или будущих видео этой серии, но не предоставляющих дополнительную информацию. Если он включает в себя клипы, которые появляются только здесь, скорее всего, это неправильная категория.</string>
@@ -159,7 +159,7 @@
     <string name="instance_api_url">URL-адрес API экземпляра</string>
     <string name="buffering_goal_summary">Макс. количество секунд видео для буферизации.</string>
     <string name="clear_customInstances">Очистить пользовательские экземпляры</string>
-    <string name="related_streams_summary">Показывать связанные потоки с тем, что вы смотрите.</string>
+    <string name="related_streams_summary">Показывать связанные потоки рядом с тем, что вы смотрите.</string>
     <string name="invalid_url">Пожалуйста, введите рабочий URL</string>
     <string name="buffering_goal">Предзагрузка</string>
     <string name="downloads">Загрузки</string>
@@ -211,7 +211,7 @@
     <string name="watch_positions">Запоминать позицию</string>
     <string name="auth_instance">Сервер аутентификации</string>
     <string name="auth_instance_summary">Использует другой сервер для аутентификации аккаунта.</string>
-    <string name="hls">Автоматически</string>
+    <string name="hls">Авто</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Аудио и видео</string>
     <string name="fullscreen_orientation">В полный экран</string>
@@ -232,7 +232,7 @@
     <string name="chapters">Эпизоды</string>
     <string name="change_playback_speed">Скорость воспроизведения</string>
     <string name="require_restart">Требуется перезапуск</string>
-    <string name="require_restart_message">Это изменение требует перезапуска. Перезапустить приложение\? Изменения будут применены при следующем запуске приложения.</string>
+    <string name="require_restart_message">Эти изменения могут быть неприменимы без перезапуска приложения. Вы хотите перезапустить приложение сейчас\?</string>
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
@@ -252,4 +252,9 @@
     <string name="reset_watch_positions">Сбросить позиции просмотра</string>
     <string name="update_now">Вы хотите обновить приложение сейчас\?</string>
     <string name="captions">Субтитры</string>
+    <string name="general">Общие</string>
+    <string name="general_summary">Язык, регион</string>
+    <string name="watch_history_summary">Сохранять история просмотров локально</string>
+    <string name="seekbar_preview">Предпросмотр поисковой панели</string>
+    <string name="seekbar_preview_summary">Предпросмотр видео осуществляется путем поиска позиции при очистке панели поиска.</string>
 </resources>
