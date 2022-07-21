@@ -1,0 +1,9 @@
+Player refactor:
+- Double Tap to seek forward/backward
+- Ongoing chapter names of video chapters
+- Rewrite of the option dialogs
+- Use system default caption style
+
+Navbar label visibility option
+In-app updates (only when installed from GitHub)
+Community section in the settings
