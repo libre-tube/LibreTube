@@ -78,11 +78,11 @@ class SubscriptionsFragment : Fragment() {
                         fetchChannels(binding.subChannels)
                         loadedSubbedChannels = true
                     }
-                    binding.subChannels.visibility = View.VISIBLE
-                    binding.subFeed.visibility = View.GONE
+                    binding.subChannelsContainer.visibility = View.VISIBLE
+                    binding.subFeedContainer.visibility = View.GONE
                 } else {
-                    binding.subChannels.visibility = View.GONE
-                    binding.subFeed.visibility = View.VISIBLE
+                    binding.subChannelsContainer.visibility = View.GONE
+                    binding.subFeedContainer.visibility = View.VISIBLE
                 }
             }
 

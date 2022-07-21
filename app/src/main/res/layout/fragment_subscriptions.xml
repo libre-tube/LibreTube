@@ -95,13 +95,13 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <RelativeLayout
+                    android:id="@+id/sub_channels_container"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:descendantFocusability="blocksDescendants">
                     
                     <androidx.recyclerview.widget.RecyclerView
-
-                        android:visibility="gone"
                         android:id="@+id/sub_channels"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -110,6 +110,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/sub_feed_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:descendantFocusability="blocksDescendants">
