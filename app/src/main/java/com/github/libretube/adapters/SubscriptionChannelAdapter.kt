@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     val TAG = "SubChannelAdapter"
 
     private var subscribed = true
-    private var isLoading = false
 
     override fun getItemCount(): Int {
         return subscriptions.size
@@ -44,23 +42,22 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }
             subscriptionSubscribe.setOnClickListener {
-                if (!isLoading) {
-                    isLoading = true
-                    val channelId = subscription.url?.replace("/channel/", "")!!
-                    if (subscribed) {
-                        unsubscribe(root.context, channelId)
-                        subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
-                    } else {
-                        subscribe(root.context, channelId)
-                        subscriptionSubscribe.text =
-                            root.context.getString(R.string.unsubscribe)
-                    }
+                val channelId = subscription.url?.replace("/channel/", "")!!
+                if (subscribed) {
+                    subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
+                    unsubscribe(channelId)
+                    subscribed = false
+                } else {
+                    subscriptionSubscribe.text =
+                        root.context.getString(R.string.unsubscribe)
+                    subscribe(channelId)
+                    subscribed = true
                 }
             }
         }
     }
 
-    private fun subscribe(context: Context, channelId: String) {
+    private fun subscribe(channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -72,14 +69,12 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())
                 }
-                subscribed = true
-                isLoading = false
             }
         }
         run()
     }
 
-    private fun unsubscribe(context: Context, channelId: String) {
+    private fun unsubscribe(channelId: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -91,8 +86,6 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                 } catch (e: Exception) {
                     Log.e(TAG, e.toString())
                 }
-                subscribed = false
-                isLoading = false
             }
         }
         run()

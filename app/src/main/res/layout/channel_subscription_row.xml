@@ -35,7 +35,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:stateListAnimator="@null"
-        android:text="@string/subscribe"
+        android:text="@string/unsubscribe"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="12sp"
         app:cornerRadius="20dp"

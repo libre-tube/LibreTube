@@ -72,17 +72,17 @@ class SubscriptionsFragment : Fragment() {
             var loadedSubbedChannels = false
 
             binding.toggleSubs.setOnClickListener {
-                if (!binding.subChannels.isVisible) {
+                if (!binding.subChannelsContainer.isVisible) {
                     if (!loadedSubbedChannels) {
                         binding.subChannels.layoutManager = LinearLayoutManager(context)
                         fetchChannels(binding.subChannels)
                         loadedSubbedChannels = true
                     }
-                    binding.subChannels.visibility = View.VISIBLE
-                    binding.subFeed.visibility = View.GONE
+                    binding.subChannelsContainer.visibility = View.VISIBLE
+                    binding.subFeedContainer.visibility = View.GONE
                 } else {
-                    binding.subChannels.visibility = View.GONE
-                    binding.subFeed.visibility = View.VISIBLE
+                    binding.subChannelsContainer.visibility = View.GONE
+                    binding.subFeedContainer.visibility = View.VISIBLE
                 }
             }
 
