@@ -1,7 +1,7 @@
 package com.github.libretube.update
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.GITHUB_API_URL
-import com.google.gson.Gson
 import java.net.URL
 
 object UpdateChecker {
@@ -29,7 +29,7 @@ object UpdateChecker {
         val json = latestVersionApiUrl.readText()
 
         // Parse and return the json data
-        val gson = Gson()
-        return gson.fromJson(json, UpdateInfo::class.java)
+        val mapper = ObjectMapper()
+        return mapper.readValue(json, UpdateInfo::class.java)
     }
 }
