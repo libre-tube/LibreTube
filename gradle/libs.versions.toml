@@ -7,7 +7,6 @@ legacySupport = "1.0.0"
 preference = "1.2.0"
 extJunit = "1.1.3"
 espresso = "3.4.0"
-picasso = "2.8"
 circleimageview = "3.1.0"
 exoplayer = "2.17.1"
 multidex = "2.0.1"
@@ -17,6 +16,7 @@ mobileffmpeg = "4.5.1.LTS"
 desugaring = "1.1.5"
 cronetEmbedded = "101.4951.41"
 cronetOkHttp = "0.1.0"
+coil = "2.1.0"
 leakcanary = "2.8.1"
 gson = "2.9.0"
 
@@ -30,7 +30,6 @@ androidx-legacySupport = { group = "androidx.legacy", name = "legacy-support-v4"
 androidx-preference = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
 androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
-square-picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
@@ -43,5 +42,6 @@ desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.r
 exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
 cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 cronet-okhttp = { group = "com.google.net.cronet", name = "cronet-okhttp", version.ref = "cronetOkHttp" }
+coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }
 square-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 gson = { group = "com.google.code.gson", name="gson", version.ref = "gson"}
