@@ -90,5 +90,4 @@ dependencies {
     implementation libs.cronet.embedded
     implementation libs.cronet.okhttp
     implementation libs.coil
-    implementation libs.gson
 }

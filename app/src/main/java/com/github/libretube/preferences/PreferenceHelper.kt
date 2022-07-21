@@ -3,13 +3,11 @@ package com.github.libretube.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.obj.WatchPosition
-import com.google.common.reflect.TypeToken
-import com.google.gson.Gson
-import java.lang.reflect.Type
 
 object PreferenceHelper {
     private val TAG = "PreferenceHelper"
@@ -92,21 +90,25 @@ object PreferenceHelper {
     }
 
     fun saveCustomInstance(customInstance: CustomInstance) {
-        val gson = Gson()
+        val mapper = ObjectMapper()
 
         val customInstancesList = getCustomInstances()
         customInstancesList += customInstance
 
-        val json = gson.toJson(customInstancesList)
+        val json = mapper.writeValueAsString(customInstancesList)
         editor.putString("customInstances", json).apply()
     }
 
     fun getCustomInstances(): ArrayList<CustomInstance> {
-        val gson = Gson()
+        val mapper = ObjectMapper()
+
         val json: String = settings.getString("customInstances", "")!!
-        val type: Type = object : TypeToken<List<CustomInstance?>?>() {}.type
+        val type = mapper.typeFactory.constructCollectionType(
+            List::class.java,
+            CustomInstance::class.java
+        )
         return try {
-            gson.fromJson(json, type)
+            mapper.readValue(json, type)
         } catch (e: Exception) {
             arrayListOf()
         }
@@ -127,7 +129,7 @@ object PreferenceHelper {
     }
 
     fun addToWatchHistory(videoId: String, streams: Streams) {
-        val gson = Gson()
+        val mapper = ObjectMapper()
 
         val watchHistoryItem = WatchHistoryItem(
             videoId,
@@ -151,16 +153,21 @@ object PreferenceHelper {
 
         watchHistory += watchHistoryItem
 
-        val json = gson.toJson(watchHistory)
+        val json = mapper.writeValueAsString(watchHistory)
         editor.putString("watch_history", json).apply()
     }
 
     fun getWatchHistory(): ArrayList<WatchHistoryItem> {
-        val gson = Gson()
+        val mapper = ObjectMapper()
+
         val json: String = settings.getString("watch_history", "")!!
-        val type: Type = object : TypeToken<List<WatchHistoryItem?>?>() {}.type
+        val type = mapper.typeFactory.constructCollectionType(
+            List::class.java,
+            WatchHistoryItem::class.java
+        )
+
         return try {
-            gson.fromJson(json, type)
+            mapper.readValue(json, type)
         } catch (e: Exception) {
             arrayListOf()
         }
@@ -179,8 +186,8 @@ object PreferenceHelper {
 
         watchPositions += watchPositionItem
 
-        val gson = Gson()
-        val json = gson.toJson(watchPositions)
+        val mapper = ObjectMapper()
+        val json = mapper.writeValueAsString(watchPositions)
         editor.putString("watch_positions", json).commit()
     }
 
@@ -194,19 +201,22 @@ object PreferenceHelper {
 
         if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
 
-        val gson = Gson()
-        val json = gson.toJson(watchPositions)
+        val mapper = ObjectMapper()
+        val json = mapper.writeValueAsString(watchPositions)
         editor.putString("watch_positions", json).commit()
     }
 
     fun getWatchPositions(): ArrayList<WatchPosition> {
-        val gson = Gson()
+        val mapper = ObjectMapper()
 
         val json: String = settings.getString("watch_positions", "")!!
-        val type: Type = object : TypeToken<List<WatchPosition?>?>() {}.type
+        val type = mapper.typeFactory.constructCollectionType(
+            List::class.java,
+            WatchPosition::class.java
+        )
 
         return try {
-            gson.fromJson(json, type)
+            mapper.readValue(json, type)
         } catch (e: Exception) {
             arrayListOf()
         }
