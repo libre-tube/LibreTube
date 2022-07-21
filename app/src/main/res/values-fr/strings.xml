@@ -231,7 +231,7 @@
     <string name="turnInternetOn">Veuillez vous connecter à internet en activant le Wi-Fi ou les données mobiles.</string>
     <string name="chapters">Chapitres</string>
     <string name="change_playback_speed">Vitesse de lecture</string>
-    <string name="require_restart_message">Ce changement nécessite un redémarrage de l\'application. Voulez-vous redémarrer l\'application maintenant \? Sinon, les changements seront appliqués au prochain redémarrage de l\'application.</string>
+    <string name="require_restart_message">Ces changements peuvent ne pas être appliqués sans redémarrer l\'application. Voulez-vous redémarrer l\'application maintenant \?</string>
     <string name="require_restart">Redémarrage nécessaire</string>
     <string name="navLabelVisibility">Visibilité de l\'étiquette de la barre de navigation</string>
     <string name="always">Toujours</string>
@@ -253,4 +253,8 @@
     <string name="update_now">Voulez-vous mettre à jour l\'application maintenant \?</string>
     <string name="never">Jamais</string>
     <string name="pure_theme_summary">Thème blanc/noir pur</string>
+    <string name="seekbar_preview">Aperçu de la barre de recherche</string>
+    <string name="seekbar_preview_summary">Prévisualisez la vidéo en recherchant la position lors de la scrutation de la barre de recherche.</string>
+    <string name="general_summary">Langue, région</string>
+    <string name="general">Général</string>
 </resources>
