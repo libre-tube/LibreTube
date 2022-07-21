@@ -66,7 +66,9 @@ class BackgroundMode : Service() {
             val seekToPosition = intent.getLongExtra("seekToPosition", 0L)
             playOnBackgroundMode(this, videoId, seekToPosition)
         } catch (e: Exception) {
-            stopService(intent)
+            try {
+                stopService(intent)
+            } catch (e: Exception) {}
         }
         return super.onStartCommand(intent, flags, startId)
     }
