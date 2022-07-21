@@ -20,6 +20,7 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -60,9 +61,13 @@ class BackgroundMode : Service() {
      * Initializes the [player] with the [MediaItem].
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val videoId = intent?.getStringExtra("videoId")!!
-        val seekToPosition = intent.getLongExtra("seekToPosition", 0L)
-        playOnBackgroundMode(this, videoId, seekToPosition)
+        try {
+            val videoId = intent?.getStringExtra("videoId")!!
+            val seekToPosition = intent.getLongExtra("seekToPosition", 0L)
+            playOnBackgroundMode(this, videoId, seekToPosition)
+        } catch (e: Exception) {
+            stopService(intent)
+        }
         return super.onStartCommand(intent, flags, startId)
     }
 
