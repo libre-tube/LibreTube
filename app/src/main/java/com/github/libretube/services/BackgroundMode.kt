@@ -1,11 +1,16 @@
-package com.github.libretube.util
+package com.github.libretube.services
 
 import android.app.NotificationManager
+import android.app.Service
 import android.content.Context
+import android.content.Intent
+import android.os.IBinder
 import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.RetrofitInstance
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -17,9 +22,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 /**
- * Loads the selected video audio in background mode with a notification area.
+ * Loads the selected videos audio in background mode with a notification area.
  */
-class BackgroundMode {
+class BackgroundMode : Service() {
     /**
      * The response that gets when called the Api.
      */
@@ -53,6 +58,43 @@ class BackgroundMode {
 
     /**
      * Initializes the [player] with the [MediaItem].
+     */
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val videoId = intent?.getStringExtra("videoId")!!
+        val seekToPosition = intent.getLongExtra("seekToPosition", 0L)
+        playOnBackgroundMode(this, videoId, seekToPosition)
+        return super.onStartCommand(intent, flags, startId)
+    }
+
+    /**
+     * Gets the video data and prepares the [player].
+     */
+    private fun playOnBackgroundMode(
+        c: Context,
+        videoId: String,
+        seekToPosition: Long = 0
+    ) {
+        runBlocking {
+            val job = launch {
+                response = RetrofitInstance.api.getStreams(videoId)
+            }
+            // Wait until the job is done, to load correctly later in the player
+            job.join()
+
+            initializePlayer(c)
+            initializePlayerNotification(c)
+
+            player?.apply {
+                playWhenReady = playWhenReadyPlayer
+                prepare()
+            }
+
+            if (seekToPosition != 0L) player?.seekTo(seekToPosition)
+        }
+    }
+
+    /**
+     * create the player
      */
     private fun initializePlayer(c: Context) {
         audioAttributes = AudioAttributes.Builder()
@@ -147,42 +189,7 @@ class BackgroundMode {
         mediaSessionConnector.setPlayer(player)
     }
 
-    /**
-     * Gets the video data and prepares the [player].
-     */
-    fun playOnBackgroundMode(
-        c: Context,
-        videoId: String,
-        seekToPosition: Long = 0
-    ) {
-        runBlocking {
-            val job = launch {
-                response = RetrofitInstance.api.getStreams(videoId)
-            }
-            // Wait until the job is done, to load correctly later in the player
-            job.join()
-
-            initializePlayer(c)
-            initializePlayerNotification(c)
-
-            player?.apply {
-                playWhenReady = playWhenReadyPlayer
-                prepare()
-            }
-
-            if (!seekToPosition.equals(0)) player?.seekTo(seekToPosition)
-        }
-    }
-
-    /**
-     * Creates a singleton of this class, to not create a new [player] every time.
-     */
-    companion object {
-        private var INSTANCE: BackgroundMode? = null
-
-        fun getInstance(): BackgroundMode {
-            if (INSTANCE == null) INSTANCE = BackgroundMode()
-            return INSTANCE!!
-        }
+    override fun onBind(p0: Intent?): IBinder? {
+        TODO("Not yet implemented")
     }
 }

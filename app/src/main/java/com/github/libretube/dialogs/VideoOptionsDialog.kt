@@ -2,13 +2,15 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.BackgroundMode
+import com.github.libretube.services.BackgroundMode
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -43,13 +45,16 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     optionsList
                 )
             ) { _, which ->
-                // For now, this checks the position of the option with the position that is in the
-                // list. I don't like it, but we will do like this for now.
                 when (optionsList[which]) {
-                    // This for example will be the "Background mode" option
+                    // Start the background mode
                     context?.getString(R.string.playOnBackground) -> {
-                        BackgroundMode.getInstance()
-                            .playOnBackgroundMode(requireContext(), videoId)
+                        if (Globals.backgroundModeIntent != null) {
+                            activity?.stopService(Globals.backgroundModeIntent)
+                        }
+                        val intent = Intent(context, BackgroundMode::class.java)
+                        intent.putExtra("videoId", videoId)
+                        Globals.backgroundModeIntent = intent
+                        activity?.startService(intent)
                     }
                     // Add Video to Playlist Dialog
                     context?.getString(R.string.addToPlaylist) -> {

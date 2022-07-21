@@ -1,5 +1,7 @@
 package com.github.libretube
 
+import android.content.Intent
+
 /**
  * Global variables can be stored here
  */
@@ -13,4 +15,7 @@ object Globals {
 
     // for downloads
     var IS_DOWNLOAD_RUNNING = false
+
+    // background mode intent
+    var backgroundModeIntent: Intent? = null
 }
