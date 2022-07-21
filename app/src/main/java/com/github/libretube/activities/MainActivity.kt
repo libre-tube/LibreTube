@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import coil.ImageLoader
 import com.github.libretube.Globals
 import com.github.libretube.PIPED_API_URL
 import com.github.libretube.R
@@ -69,6 +70,9 @@ class MainActivity : AppCompatActivity() {
         startService(Intent(this, ClosingService::class.java))
 
         CronetHelper.initCronet(this.applicationContext)
+        ConnectionHelper.imageLoader = ImageLoader.Builder(this.applicationContext)
+            .callFactory(CronetHelper.callFactory)
+            .build()
 
         RetrofitInstance.url =
             PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)!!
