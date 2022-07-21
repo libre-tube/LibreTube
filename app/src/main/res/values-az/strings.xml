@@ -255,4 +255,6 @@
     <string name="update_now">Tətbiqi indi yeniləmək istəyirsiniz\?</string>
     <string name="seekbar_preview">Axtarış çubuğu önizləməsi</string>
     <string name="seekbar_preview_summary">Axtarış çubuğunu ovuşdurarkən mövqeyi axtararaq videonu önizləmə.</string>
+    <string name="general_summary">Dil, məkan</string>
+    <string name="general">Ümumi</string>
 </resources>
