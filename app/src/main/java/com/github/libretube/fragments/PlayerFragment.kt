@@ -628,6 +628,11 @@ class PlayerFragment : Fragment() {
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
             binding.descLinLayout.visibility = View.VISIBLE
         }
+        if (chapters.isNotEmpty()) {
+            // scroll to the current chapter in the chapterRecView in the description
+            val layoutManager = binding.chaptersRecView.layoutManager as LinearLayoutManager
+            layoutManager.scrollToPositionWithOffset(getCurrentChapterIndex(), 0)
+        }
     }
 
     private fun toggleComments() {
@@ -1256,27 +1261,28 @@ class PlayerFragment : Fragment() {
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
-        val chapterName = getCurrentChapterName()
+        val chapterIndex = getCurrentChapterIndex()
+        val chapterName = chapters[chapterIndex].title
 
         // change the chapter name textView text to the chapterName
-        if (chapterName != null && chapterName != playerBinding.chapterName.text) {
+        if (chapterName != playerBinding.chapterName.text) {
             playerBinding.chapterName.text = chapterName
         }
     }
 
     // get the name of the currently played chapter
-    private fun getCurrentChapterName(): String? {
+    private fun getCurrentChapterIndex(): Int {
         val currentPosition = exoPlayer.currentPosition
-        var chapterName: String? = null
+        var chapterIndex: Int? = null
 
-        chapters.forEach {
+        chapters.forEachIndexed { index, chapter ->
             // check whether the chapter start is greater than the current player position
-            if (currentPosition >= it.start!! * 1000) {
+            if (currentPosition >= chapter.start!! * 1000) {
                 // save chapter title if found
-                chapterName = it.title
+                chapterIndex = index
             }
         }
-        return chapterName
+        return chapterIndex!!
     }
 
     private fun setMediaSource(
