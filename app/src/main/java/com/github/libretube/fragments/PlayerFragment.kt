@@ -628,10 +628,14 @@ class PlayerFragment : Fragment() {
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
             binding.descLinLayout.visibility = View.VISIBLE
         }
-        if (chapters.isNotEmpty()) {
+        if (this::chapters.isInitialized && chapters.isNotEmpty()) {
+            val chapterIndex = getCurrentChapterIndex()
             // scroll to the current chapter in the chapterRecView in the description
             val layoutManager = binding.chaptersRecView.layoutManager as LinearLayoutManager
-            layoutManager.scrollToPositionWithOffset(getCurrentChapterIndex(), 0)
+            layoutManager.scrollToPositionWithOffset(chapterIndex, 0)
+            // set selected
+            val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
+            chaptersAdapter.updateSelectedPosition(chapterIndex)
         }
     }
 
@@ -1267,6 +1271,9 @@ class PlayerFragment : Fragment() {
         // change the chapter name textView text to the chapterName
         if (chapterName != playerBinding.chapterName.text) {
             playerBinding.chapterName.text = chapterName
+            // update the selected item
+            val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
+            chaptersAdapter.updateSelectedPosition(chapterIndex)
         }
     }
 

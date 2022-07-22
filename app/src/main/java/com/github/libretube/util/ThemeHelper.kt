@@ -111,7 +111,7 @@ object ThemeHelper {
         android.os.Process.killProcess(android.os.Process.myPid())
     }
 
-    private fun getThemeColor(context: Context, colorCode: Int): Int {
+    fun getThemeColor(context: Context, colorCode: Int): Int {
         val value = TypedValue()
         context.theme.resolveAttribute(colorCode, value, true)
         return value.data
