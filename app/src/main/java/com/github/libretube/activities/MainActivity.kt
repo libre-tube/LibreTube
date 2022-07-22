@@ -141,6 +141,8 @@ class MainActivity : AppCompatActivity() {
             }
             binding.bottomNav.labelVisibilityMode = labelVisibilityMode
 
+            binding.bottomNav.setOnApplyWindowInsetsListener(null)
+
             binding.bottomNav.setOnItemSelectedListener {
                 // clear backstack if it's the start fragment
                 if (startFragmentId == it.itemId) navController.backQueue.clear()
