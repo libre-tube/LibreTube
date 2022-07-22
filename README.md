@@ -79,3 +79,6 @@ If opening an issue without following the issue template, we will ignore the iss
 
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
 <a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
+<div align="right">
+  <b><a href="https://github.com/VedxP/LibreTube/tree/master#-about">↥ Move to top!</a></b>
+</div>
