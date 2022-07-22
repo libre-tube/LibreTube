@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
             }
             binding.bottomNav.labelVisibilityMode = labelVisibilityMode
 
-            binding.bottomNav.setOnItemSelectedListener {
+            NavigationBarView.OnItemSelectedListener {
                 // clear backstack if it's the start fragment
                 if (startFragmentId == it.itemId) navController.backQueue.clear()
                 // set menu item on click listeners
