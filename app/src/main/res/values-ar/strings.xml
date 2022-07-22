@@ -255,4 +255,6 @@
     <string name="update_now">هل تريد تحديث التطبيق الآن؟</string>
     <string name="seekbar_preview">شريط المعاينة</string>
     <string name="seekbar_preview_summary">قم بمعاينة الفيديو بالبحث عن الموضع عند السحب على شريط التقدم.</string>
+    <string name="general">عام</string>
+    <string name="general_summary">اللغة والمنطقة</string>
 </resources>
