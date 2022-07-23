@@ -13,9 +13,8 @@ object PlayerHelper {
         var bitrate = 0
         var audioUrl = ""
         audios.forEach {
-            val q = it.quality!!.replace(" kbps", "").toInt()
-            if (q > bitrate) {
-                bitrate = q
+            if (it.bitrate != null && it.bitrate!! > bitrate) {
+                bitrate = it.bitrate!!
                 audioUrl = it.url.toString()
             }
         }

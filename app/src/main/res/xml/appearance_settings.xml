@@ -43,22 +43,6 @@
     <PreferenceCategory app:title="@string/app_behavior">
 
         <ListPreference
-            android:icon="@drawable/ic_home"
-            app:defaultValue="home"
-            app:entries="@array/tabs"
-            app:entryValues="@array/tabsValue"
-            app:key="default_tab"
-            app:title="@string/defaultTab"
-            app:useSimpleSummaryProvider="true" />
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_trending"
-            app:defaultValue="false"
-            app:key="hide_trending_page"
-            app:title="@string/hideTrendingPage"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
             android:icon="@drawable/ic_label"
             app:defaultValue="always"
             app:entries="@array/labelVisibility"
@@ -85,6 +69,11 @@
             app:defaultValue="true"
             app:key="system_caption_style"
             app:title="@string/system_caption_style" />
+
+        <Preference
+            android:icon="@drawable/ic_settings"
+            app:key="caption_settings"
+            app:title="@string/caption_settings" />
 
     </PreferenceCategory>
 

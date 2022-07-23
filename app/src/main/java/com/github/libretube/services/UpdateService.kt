@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Environment
 import android.os.IBinder
+import com.github.libretube.R
 import java.io.File
 
 class UpdateService : Service() {
@@ -33,7 +34,7 @@ class UpdateService : Service() {
 
         val request: DownloadManager.Request =
             DownloadManager.Request(Uri.parse(downloadUrl))
-                .setTitle("Downloading APK ...")
+                .setTitle(getString(R.string.downloading_apk))
                 .setDescription("")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
                 .setDestinationUri(Uri.fromFile(file))
