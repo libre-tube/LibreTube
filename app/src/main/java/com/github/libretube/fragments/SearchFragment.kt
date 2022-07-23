@@ -66,6 +66,7 @@ class SearchFragment : Fragment() {
 
         binding.clearSearchImageView.setOnClickListener {
             binding.autoCompleteTextView.text.clear()
+            showHistory()
         }
 
         binding.filterMenuImageView.setOnClickListener {

@@ -1,11 +1,15 @@
 package com.github.libretube.services
 
+import android.app.Notification
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 import android.support.v4.media.session.MediaSessionCompat
+import com.github.libretube.R
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
@@ -20,7 +24,6 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.lang.Exception
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -57,27 +60,44 @@ class BackgroundMode : Service() {
      */
     private lateinit var audioAttributes: AudioAttributes
 
+    override fun onCreate() {
+        super.onCreate()
+        if (Build.VERSION.SDK_INT >= 26) {
+            val channelId = "background service"
+            val channel = NotificationChannel(
+                channelId,
+                "BackgroundPlay Service",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+            val notification: Notification = Notification.Builder(this, channelId)
+                .setContentTitle(getString(R.string.app_name))
+                .setContentText(getString(R.string.playingOnBackground)).build()
+            startForeground(1, notification)
+        }
+    }
+
     /**
      * Initializes the [player] with the [MediaItem].
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        try {
-            val videoId = intent?.getStringExtra("videoId")!!
-            val seekToPosition = intent.getLongExtra("seekToPosition", 0L)
-            playOnBackgroundMode(this, videoId, seekToPosition)
-        } catch (e: Exception) {
-            try {
-                stopService(intent)
-            } catch (e: Exception) {}
-        }
+        // destroy the old player
+        destroyPlayer()
+
+        // get the intent arguments
+        val videoId = intent?.getStringExtra("videoId")!!
+        val position = intent.getLongExtra("position", 0L)
+
+        // play the audio in the background
+        playAudio(videoId, position)
         return super.onStartCommand(intent, flags, startId)
     }
 
     /**
      * Gets the video data and prepares the [player].
      */
-    private fun playOnBackgroundMode(
-        c: Context,
+    private fun playAudio(
         videoId: String,
         seekToPosition: Long = 0
     ) {
@@ -88,14 +108,15 @@ class BackgroundMode : Service() {
             // Wait until the job is done, to load correctly later in the player
             job.join()
 
-            initializePlayer(c)
-            initializePlayerNotification(c)
+            initializePlayer()
+            initializePlayerNotification()
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
                 prepare()
             }
 
+            // seek to the previous position if available
             if (seekToPosition != 0L) player?.seekTo(seekToPosition)
         }
     }
@@ -103,14 +124,14 @@ class BackgroundMode : Service() {
     /**
      * create the player
      */
-    private fun initializePlayer(c: Context) {
+    private fun initializePlayer() {
         audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MUSIC)
             .build()
 
         if (player == null) {
-            player = ExoPlayer.Builder(c)
+            player = ExoPlayer.Builder(this)
                 .setAudioAttributes(audioAttributes, true)
                 .build()
         }
@@ -123,49 +144,43 @@ class BackgroundMode : Service() {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
                 val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, false)
                 if (state == Player.STATE_ENDED) {
-                    if (autoplay) playNextVideo(c)
+                    if (autoplay) playNextVideo()
                 }
             }
         })
-        setMediaItem(c)
+        setMediaItem()
     }
 
     /**
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
-    private fun playNextVideo(c: Context) {
+    private fun playNextVideo() {
         if (response!!.relatedStreams!!.isNotEmpty()) {
             val videoId = response!!
                 .relatedStreams!![0].url!!
                 .replace("/watch?v=", "")
 
-            // destroy old player and its notification
-            playerNotification = null
-            player = null
-
-            // kill old notification
-            val notificationManager = c.getSystemService(Context.NOTIFICATION_SERVICE)
-                as NotificationManager
-            notificationManager.cancel(1)
+            // destroy previous notification and player
+            destroyPlayer()
 
             // play new video on background
-            playOnBackgroundMode(c, videoId)
+            playAudio(videoId)
         }
     }
 
     /**
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
-    private fun initializePlayerNotification(c: Context) {
+    private fun initializePlayerNotification() {
         playerNotification = PlayerNotificationManager
-            .Builder(c, 1, "background_mode")
+            .Builder(this, 1, "background_mode")
             // set the description of the notification
             .setMediaDescriptionAdapter(
                 DescriptionAdapter(
                     response?.title!!,
                     response?.uploader!!,
                     response?.thumbnailUrl!!,
-                    c
+                    this
                 )
             )
             .build()
@@ -183,17 +198,28 @@ class BackgroundMode : Service() {
      * Sets the [MediaItem] with the [response] into the [player]. Also creates a [MediaSessionConnector]
      * with the [mediaSession] and attach it to the [player].
      */
-    private fun setMediaItem(c: Context) {
+    private fun setMediaItem() {
         response?.let {
             val mediaItem = MediaItem.Builder().setUri(it.hls!!).build()
             player?.setMediaItem(mediaItem)
         }
 
-        mediaSession = MediaSessionCompat(c, this.javaClass.name)
+        mediaSession = MediaSessionCompat(this, this.javaClass.name)
         mediaSession.isActive = true
 
         mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(player)
+    }
+
+    private fun destroyPlayer() {
+        // clear old player and its notification
+        playerNotification = null
+        player = null
+
+        // kill old notification
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
+            as NotificationManager
+        notificationManager.cancel(1)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
