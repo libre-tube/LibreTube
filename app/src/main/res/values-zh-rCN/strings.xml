@@ -257,4 +257,5 @@
     <string name="seekbar_preview_summary">滑动拖动条时定位来预览视频。</string>
     <string name="general">常规</string>
     <string name="general_summary">语言、区域</string>
+    <string name="playingOnBackground">后台播放中…</string>
 </resources>
