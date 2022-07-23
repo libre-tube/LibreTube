@@ -230,4 +230,8 @@
     <string name="data_saver_mode_summary">데이터를 저장하기 위해 썸네일 및 기타 이미지를 로드하지 마십시오.</string>
     <string name="watch_history_summary">시청한 비디오를 로컬에서 추적</string>
     <string name="pure_theme">순수한 테마</string>
+    <string name="watch_positions_title">시청 위치</string>
+    <string name="reset_watch_positions">시청 위치 재설정</string>
+    <string name="system_caption_style">시스템 캡션 스타일</string>
+    <string name="captions">캡션</string>
 </resources>

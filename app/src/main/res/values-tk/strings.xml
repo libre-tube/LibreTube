@@ -124,8 +124,8 @@
     <string name="fail">Şowsuz :(</string>
     <string name="about">Biz barada</string>
     <string name="changeLanguage">Dil</string>
-    <string name="systemLanguage">Ulgam</string>
-    <string name="systemDefault">Ulgam</string>
+    <string name="systemLanguage">Enjam</string>
+    <string name="systemDefault">Enjam</string>
     <string name="lightTheme">Ýagty</string>
     <string name="darkTheme">Garaňky</string>
     <string name="subscribers">%1$s abonentler</string>

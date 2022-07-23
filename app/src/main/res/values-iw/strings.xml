@@ -255,4 +255,6 @@
     <string name="seekbar_preview_summary">להציג תצוגה מקדימה מהסרטון במיקום המבוקש בעת מעבר על סרגל הנגינה.</string>
     <string name="update_now">לעדכן את היישומון כעת\?</string>
     <string name="data_saver_mode_summary">לא לטעון תמונות ממוזערות ותמונות אחרות כדי לחסוך בתעבורה.</string>
+    <string name="general">כללי</string>
+    <string name="general_summary">שפה, אזור</string>
 </resources>
