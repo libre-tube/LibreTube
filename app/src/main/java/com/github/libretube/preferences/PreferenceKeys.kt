@@ -48,6 +48,7 @@ object PreferenceKeys {
     const val WATCH_HISTORY_TOGGLE = "watch_history_toggle"
     const val SEARCH_HISTORY_TOGGLE = "search_history_toggle"
     const val SYSTEM_CAPTION_STYLE = "system_caption_style"
+    const val CAPTION_SETTINGS = "caption_settings"
     const val SEEK_INCREMENT = "seek_increment"
     const val PLAYER_VIDEO_FORMAT = "player_video_format"
     const val DEFAULT_RESOLUTION = "default_res"

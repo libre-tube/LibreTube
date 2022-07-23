@@ -188,7 +188,7 @@
     <string name="no_video">No video</string>
     <string name="audio">Audio</string>
     <string name="video">Video</string>
-    <string name="downloading">Downloading</string>
+    <string name="downloading">Downloading …</string>
     <string name="player_autoplay">Autoplay</string>
     <string name="hideTrendingPage">Hide trending page</string>
     <string name="instance_frontend_url">URL to instance frontend</string>
@@ -258,4 +258,6 @@
     <string name="general">General</string>
     <string name="general_summary">Language, region</string>
     <string name="playingOnBackground">Playing on background …</string>
+    <string name="caption_settings">Caption settings</string>
+    <string name="downloading_apk">Downloading Apk …</string>
 </resources>

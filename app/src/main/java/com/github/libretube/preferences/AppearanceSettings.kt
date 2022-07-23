@@ -1,7 +1,12 @@
 package com.github.libretube.preferences
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
@@ -57,6 +62,25 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
             restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            true
+        }
+
+        val systemCaptionStyle = findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
+        val captionSettings = findPreference<Preference>(PreferenceKeys.CAPTION_SETTINGS)
+
+        captionSettings?.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
+        systemCaptionStyle?.setOnPreferenceChangeListener { _, newValue ->
+            captionSettings?.isVisible = newValue as Boolean
+            true
+        }
+
+        captionSettings?.setOnPreferenceClickListener {
+            try {
+                val captionSettingsIntent = Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+                startActivity(captionSettingsIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
+            }
             true
         }
     }
