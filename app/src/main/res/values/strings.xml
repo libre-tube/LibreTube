@@ -257,4 +257,5 @@
     <string name="seekbar_preview_summary">Preview the video by seeking to the position when scrubbing the seekbar.</string>
     <string name="general">General</string>
     <string name="general_summary">Language, region</string>
+    <string name="playingOnBackground">Playing on background …</string>
 </resources>

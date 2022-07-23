@@ -2,15 +2,13 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.services.BackgroundMode
+import com.github.libretube.util.BackgroundHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -48,13 +46,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                 when (optionsList[which]) {
                     // Start the background mode
                     context?.getString(R.string.playOnBackground) -> {
-                        if (Globals.backgroundModeIntent != null) {
-                            activity?.stopService(Globals.backgroundModeIntent)
-                        }
-                        val intent = Intent(context, BackgroundMode::class.java)
-                        intent.putExtra("videoId", videoId)
-                        Globals.backgroundModeIntent = intent
-                        activity?.startService(intent)
+                        BackgroundHelper.playOnBackground(requireContext(), videoId)
                     }
                     // Add Video to Playlist Dialog
                     context?.getString(R.string.addToPlaylist) -> {

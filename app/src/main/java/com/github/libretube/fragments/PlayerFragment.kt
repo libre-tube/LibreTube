@@ -58,7 +58,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.services.BackgroundMode
+import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
@@ -528,13 +528,7 @@ class PlayerFragment : Fragment() {
             exoPlayer.pause()
 
             // start the background mode
-            if (Globals.backgroundModeIntent != null) {
-                activity?.stopService(Globals.backgroundModeIntent)
-            }
-            val intent = Intent(context, BackgroundMode::class.java)
-            intent.putExtra("videoId", videoId)
-            Globals.backgroundModeIntent = intent
-            activity?.startService(intent)
+            BackgroundHelper.playOnBackground(requireContext(), videoId!!)
         }
 
         binding.playerScrollView.viewTreeObserver
