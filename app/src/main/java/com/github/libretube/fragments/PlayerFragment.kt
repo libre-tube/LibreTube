@@ -38,7 +38,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
-import com.github.libretube.activities.hideKeyboard
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
@@ -65,6 +64,7 @@ import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
+import com.github.libretube.util.hideKeyboard
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
