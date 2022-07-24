@@ -186,7 +186,7 @@
     <string name="buffering_goal">Ön yükləmə</string>
     <string name="player_autoplay">Avto-oynatma</string>
     <string name="no_video">Video yoxdur</string>
-    <string name="downloading">Endirilir</string>
+    <string name="downloading">Endirilir …</string>
     <string name="video">Video</string>
     <string name="no_audio">Səs yoxdur</string>
     <string name="audio">Səs</string>
@@ -258,4 +258,6 @@
     <string name="general_summary">Dil, məkan</string>
     <string name="general">Ümumi</string>
     <string name="playingOnBackground">Arxa fonda oynadılır…</string>
+    <string name="caption_settings">Altyazı tənzimləmələri</string>
+    <string name="downloading_apk">Apk endirilir …</string>
 </resources>
