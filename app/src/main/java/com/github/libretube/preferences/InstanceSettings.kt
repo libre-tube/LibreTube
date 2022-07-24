@@ -4,7 +4,6 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -211,75 +210,48 @@ class InstanceSettings : PreferenceFragmentCompat() {
     }
 
     private fun initCustomInstances(instancePref: ListPreference) {
-        val customInstances = PreferenceHelper.getCustomInstances()
+        lifecycleScope.launchWhenCreated {
+            val customInstances = PreferenceHelper.getCustomInstances()
 
-        var instanceNames = resources.getStringArray(R.array.instances)
-        var instanceValues = resources.getStringArray(R.array.instancesValue)
-        customInstances.forEach { instance ->
-            instanceNames += instance.name
-            instanceValues += instance.apiUrl
-        }
+            var instanceNames = arrayListOf<String>()
+            var instanceValues = arrayListOf<String>()
 
-        // add custom instances to the list preference
-        instancePref.entries = instanceNames
-        instancePref.entryValues = instanceValues
-        instancePref.summaryProvider =
-            Preference.SummaryProvider<ListPreference> { preference ->
-                val text = preference.entry
-                if (TextUtils.isEmpty(text)) {
-                    "kavin.rocks (Official)"
-                } else {
-                    text
+            // fetch official public instances
+
+            val response = try {
+                RetrofitInstance.api.getInstances("https://instances.tokhmi.xyz/")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emptyList()
+            }
+
+            response.forEach {
+                if (it.name != null && it.api_url != null) {
+                    instanceNames += it.name!!
+                    instanceValues += it.api_url!!
                 }
             }
+
+            customInstances.forEach { instance ->
+                instanceNames += instance.name
+                instanceValues += instance.apiUrl
+            }
+
+            runOnUiThread {
+                // add custom instances to the list preference
+                instancePref.entries = instanceNames.toTypedArray()
+                instancePref.entryValues = instanceValues.toTypedArray()
+                instancePref.summaryProvider =
+                    Preference.SummaryProvider<ListPreference> { preference ->
+                        preference.entry
+                    }
+            }
+        }
     }
 
     private fun logout() {
         PreferenceHelper.setToken("")
         Toast.makeText(context, getString(R.string.loggedout), Toast.LENGTH_SHORT).show()
-    }
-
-    private fun fetchInstance() {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getInstances("https://instances.tokhmi.xyz/")
-            } catch (e: IOException) {
-                println(e)
-                Log.e("settings", "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e("settings", "HttpException, unexpected response $e")
-                return@launchWhenCreated
-            } catch (e: Exception) {
-                Log.e("settings", e.toString())
-                return@launchWhenCreated
-            }
-            val listEntries: MutableList<String> = ArrayList()
-            val listEntryValues: MutableList<String> = ArrayList()
-            for (item in response) {
-                listEntries.add(item.name!!)
-                listEntryValues.add(item.api_url!!)
-            }
-
-            // add custom instances to the list
-
-            val entries = listEntries.toTypedArray<CharSequence>()
-            val entryValues = listEntryValues.toTypedArray<CharSequence>()
-            runOnUiThread {
-                val instance = findPreference<ListPreference>("selectInstance")
-                instance?.entries = entries
-                instance?.entryValues = entryValues
-                instance?.summaryProvider =
-                    Preference.SummaryProvider<ListPreference> { preference ->
-                        val text = preference.entry
-                        if (TextUtils.isEmpty(text)) {
-                            "kavin.rocks (Official)"
-                        } else {
-                            text
-                        }
-                    }
-            }
-        }
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

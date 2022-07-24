@@ -16,7 +16,7 @@ data class SearchItem(
     var uploadedDate: String? = null,
     var duration: Long? = null,
     var views: Long? = null,
-    var uploaderVerified: Boolean?  = null,
+    var uploaderVerified: Boolean? = null,
     // Channel and Playlist attributes
     var name: String? = null,
     var description: String? = null,

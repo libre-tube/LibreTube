@@ -1,6 +1,5 @@
 package com.github.libretube.update
 
-import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.GITHUB_API_URL
 import java.net.URL

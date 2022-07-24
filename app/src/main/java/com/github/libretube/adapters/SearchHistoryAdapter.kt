@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText

@@ -6,5 +6,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 data class ChapterSegment(
     var title: String? = null,
     var image: String? = null,
-    var start: Long?  = null
+    var start: Long? = null
 )
