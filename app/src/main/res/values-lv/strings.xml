@@ -191,7 +191,7 @@
     <string name="no_video">Nav video</string>
     <string name="audio">Audio</string>
     <string name="video">Video</string>
-    <string name="downloading">Lejupielādē</string>
+    <string name="downloading">Lejupielādē…</string>
     <string name="hideTrendingPage">Paslēpt tendenču lapu</string>
     <string name="instance_frontend_url">URL instances frontend</string>
     <string name="quality">Kvalitāte</string>
@@ -257,4 +257,11 @@
     <string name="pure_theme">Tīrais motīvs</string>
     <string name="system_caption_style">Sistēmas subtitru dizains</string>
     <string name="update_now">Vai vēlaties atjaunināt aplikāciju tagad\?</string>
+    <string name="playingOnBackground">Atskaņo fonā…</string>
+    <string name="caption_settings">Subtitru iestatījumi</string>
+    <string name="downloading_apk">Lejupielādē APK…</string>
+    <string name="playerAudioQuality">Audio kvalitāte</string>
+    <string name="worst_quality">Sliktākā kvalitāte</string>
+    <string name="playerAudioFormat">Atskaņotāja audio formāts</string>
+    <string name="best_quality">Augstākā kvalitāte</string>
 </resources>
