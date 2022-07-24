@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ChapterSegment(
-    var title: String?,
-    var image: String?,
-    var start: Long?
-) {
-    constructor() : this("", "", -1)
-}
+    var title: String? = null,
+    var image: String? = null,
+    var start: Long?  = null
+)

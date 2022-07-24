@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Segment(
-    val actionType: String?,
-    val category: String?,
-    val segment: List<Float>?
-) {
-    constructor() : this("", "", arrayListOf())
-}
+    val actionType: String? = null,
+    val category: String? = null,
+    val segment: List<Float>? = arrayListOf()
+)

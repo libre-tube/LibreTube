@@ -10,7 +10,6 @@ import com.github.libretube.fragments.SearchFragment
 import com.github.libretube.preferences.PreferenceHelper
 
 class SearchHistoryAdapter(
-    private val context: Context,
     private var historyList: List<String>,
     private val editText: EditText,
     private val searchFragment: SearchFragment
@@ -28,19 +27,19 @@ class SearchHistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
-        val history = historyList[position]
+        val historyQuery = historyList[position]
         holder.binding.apply {
-            historyText.text = history
+            historyText.text = historyQuery
 
             deleteHistory.setOnClickListener {
-                historyList = historyList - history
-                PreferenceHelper.saveHistory(historyList)
+                historyList = historyList - historyQuery
+                PreferenceHelper.removeFromSearchHistory(historyQuery)
                 notifyDataSetChanged()
             }
 
             root.setOnClickListener {
-                editText.setText(history)
-                searchFragment.fetchSearch(history)
+                editText.setText(historyQuery)
+                searchFragment.fetchSearch(historyQuery)
             }
         }
     }

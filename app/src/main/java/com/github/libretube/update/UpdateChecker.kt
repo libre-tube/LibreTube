@@ -1,5 +1,6 @@
 package com.github.libretube.update
 
+import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.GITHUB_API_URL
 import java.net.URL
@@ -10,6 +11,7 @@ object UpdateChecker {
         // run http request as thread to make it async
         val thread = Thread {
             // otherwise crashes without internet
+            versionInfo = getUpdateInfo()
             try {
                 versionInfo = getUpdateInfo()
             } catch (e: Exception) {
