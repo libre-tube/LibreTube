@@ -188,7 +188,7 @@
     <string name="no_audio">ללא שמע</string>
     <string name="audio">שמע</string>
     <string name="video">וידאו</string>
-    <string name="downloading">מתבצעת הורדה</string>
+    <string name="downloading">מתבצעת הורדה…</string>
     <string name="player_autoplay">נגינה אוטומטית</string>
     <string name="hideTrendingPage">הסתרת עמוד המובילים</string>
     <string name="instance_frontend_url">כתובת למנשק המשתמש של העותק</string>
@@ -257,4 +257,7 @@
     <string name="data_saver_mode_summary">לא לטעון תמונות ממוזערות ותמונות אחרות כדי לחסוך בתעבורה.</string>
     <string name="general">כללי</string>
     <string name="general_summary">שפה, אזור</string>
+    <string name="playingOnBackground">מתגנן ברקע…</string>
+    <string name="downloading_apk">Apk מתקבל…</string>
+    <string name="caption_settings">הגדרות כתוביות</string>
 </resources>
