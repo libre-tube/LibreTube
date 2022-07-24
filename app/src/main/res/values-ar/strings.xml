@@ -260,4 +260,8 @@
     <string name="playingOnBackground">جارٍ التشغيل في الخلفية …</string>
     <string name="caption_settings">إعدادات التسميات التوضيحية</string>
     <string name="downloading_apk">تحميل APK …</string>
+    <string name="playerAudioFormat">تنسيق الصوت للمشغل</string>
+    <string name="playerAudioQuality">جودة الصوت</string>
+    <string name="best_quality">أفضل جودة</string>
+    <string name="worst_quality">أسوأ جودة</string>
 </resources>
