@@ -690,9 +690,14 @@
         <item>450</item>
     </string-array>
 
-    <string-array name="playerVideoFormats">
+    <string-array name="playerVideoFormat">
         <item>WEBM</item>
         <item>MPEG_4</item>
+    </string-array>
+
+    <string-array name="playerVideoFormatValues">
+        <item>webm</item>
+        <item>mpeg</item>
     </string-array>
 
     <string-array name="seekIncrement">
@@ -731,6 +736,28 @@
         <item>always</item>
         <item>selected</item>
         <item>never</item>
+    </string-array>
+
+    <string-array name="playerAudioFormat">
+        <item>@string/all</item>
+        <item>OPUS</item>
+        <item>M4A</item>
+    </string-array>
+
+    <string-array name="playerAudioFormatValues">
+        <item>all</item>
+        <item>webm</item>
+        <item>mp4</item>
+    </string-array>
+
+    <string-array name="audioQuality">
+        <item>@string/best_quality</item>
+        <item>@string/worst_quality</item>
+    </string-array>
+
+    <string-array name="audioQualityValues">
+        <item>best</item>
+        <item>worst</item>
     </string-array>
 
 </resources>

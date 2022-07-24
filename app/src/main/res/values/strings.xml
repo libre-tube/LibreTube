@@ -260,4 +260,8 @@
     <string name="playingOnBackground">Playing on background …</string>
     <string name="caption_settings">Caption settings</string>
     <string name="downloading_apk">Downloading Apk …</string>
+    <string name="playerAudioFormat">Audio format for player</string>
+    <string name="playerAudioQuality">Audio quality</string>
+    <string name="best_quality">Best quality</string>
+    <string name="worst_quality">Worst quality</string>
 </resources>
