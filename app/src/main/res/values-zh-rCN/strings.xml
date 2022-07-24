@@ -260,4 +260,8 @@
     <string name="playingOnBackground">后台播放中…</string>
     <string name="caption_settings">字幕设置</string>
     <string name="downloading_apk">APK 下载中…</string>
+    <string name="playerAudioFormat">播放器音频格式</string>
+    <string name="playerAudioQuality">音频质量</string>
+    <string name="best_quality">最佳</string>
+    <string name="worst_quality">最差</string>
 </resources>
