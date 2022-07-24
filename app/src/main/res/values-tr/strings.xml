@@ -188,7 +188,7 @@
     <string name="no_video">Video yok</string>
     <string name="audio">Ses</string>
     <string name="video">Video</string>
-    <string name="downloading">İndiriliyor</string>
+    <string name="downloading">İndiriliyor …</string>
     <string name="player_autoplay">Oto.oynat</string>
     <string name="hideTrendingPage">Trend sayfasını gizle</string>
     <string name="quality">Kalite</string>
@@ -258,4 +258,6 @@
     <string name="general_summary">Dil, bölge</string>
     <string name="general">Genel</string>
     <string name="playingOnBackground">Arka planda oynatılıyor…</string>
+    <string name="caption_settings">Altyazı ayarları</string>
+    <string name="downloading_apk">Apk indiriliyor …</string>
 </resources>
