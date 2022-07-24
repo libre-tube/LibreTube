@@ -189,7 +189,7 @@
     <string name="no_video">لا يوجد فيديو</string>
     <string name="audio">صوت</string>
     <string name="video">فيديو</string>
-    <string name="downloading">قيد التحميل</string>
+    <string name="downloading">جاري التحميل …</string>
     <string name="hideTrendingPage">إخفاء صفحة المحتوى الشائع</string>
     <string name="instance_frontend_url">عنوان URL لمثيل الواجهة الأمامية</string>
     <string name="quality">الجودة</string>
@@ -257,4 +257,7 @@
     <string name="seekbar_preview_summary">قم بمعاينة الفيديو بالبحث عن الموضع عند السحب على شريط التقدم.</string>
     <string name="general">عام</string>
     <string name="general_summary">اللغة والمنطقة</string>
+    <string name="playingOnBackground">جارٍ التشغيل في الخلفية …</string>
+    <string name="caption_settings">إعدادات التسميات التوضيحية</string>
+    <string name="downloading_apk">تحميل APK …</string>
 </resources>

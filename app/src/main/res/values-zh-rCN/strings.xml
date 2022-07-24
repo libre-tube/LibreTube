@@ -186,7 +186,7 @@
     <string name="category_music_offtopic">音乐：非音乐部分</string>
     <string name="audio">音频</string>
     <string name="video">视频</string>
-    <string name="downloading">下载中</string>
+    <string name="downloading">下载中…</string>
     <string name="player_autoplay">自动播放</string>
     <string name="hideTrendingPage">隐藏热门页面</string>
     <string name="instance_frontend_url">实例前端的URL</string>
@@ -257,4 +257,7 @@
     <string name="seekbar_preview_summary">滑动拖动条时定位来预览视频。</string>
     <string name="general">常规</string>
     <string name="general_summary">语言、区域</string>
+    <string name="playingOnBackground">后台播放中…</string>
+    <string name="caption_settings">字幕设置</string>
+    <string name="downloading_apk">APK 下载中…</string>
 </resources>

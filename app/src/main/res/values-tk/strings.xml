@@ -25,7 +25,7 @@
     <string name="login_first">Ilki hasaba giriň we täzeden synanyşyp görüň.</string>
     <string name="instances">Salgylanmany seç</string>
     <string name="customInstance">Emeli salgylanma</string>
-    <string name="region">Ýer</string>
+    <string name="region">Sebit</string>
     <string name="login_register">Gir/hasaba al</string>
     <string name="please_login">Ilki bilen sazlamalarda hasaba alynyň ýa-da giriň.</string>
     <string name="license">Ygtyýarnama</string>
@@ -183,4 +183,6 @@
     <string name="data_saver_mode_summary">Internet maglumatlary azaltmak üçin suratlary ýüklemäň.</string>
     <string name="autoRotatePlayer">Awtomatiki doly ekran</string>
     <string name="autoRotatePlayer_summary">Enjam öwrülende pleýeriň doly ekranyna awtomatiki geçiň.</string>
+    <string name="general">Umumy</string>
+    <string name="general_summary">Dil, sebit</string>
 </resources>

@@ -186,7 +186,7 @@
     <string name="buffering_goal">Ön yükləmə</string>
     <string name="player_autoplay">Avto-oynatma</string>
     <string name="no_video">Video yoxdur</string>
-    <string name="downloading">Endirilir</string>
+    <string name="downloading">Endirilir …</string>
     <string name="video">Video</string>
     <string name="no_audio">Səs yoxdur</string>
     <string name="audio">Səs</string>
@@ -235,7 +235,7 @@
     <string name="require_restart">Yenidən başlatmaq tələb olunur</string>
     <string name="data_saver_mode_summary">Datanı saxlamaq üçün miniatürlər və digər şəkilləri yükləməyin.</string>
     <string name="history_summary">Baxış və axtarış tarixçəsi</string>
-    <string name="navLabelVisibility">Navbar etiketinin görünməsi</string>
+    <string name="navLabelVisibility">Naviqasiya etiketinin görünməsi</string>
     <string name="always">Həmişə</string>
     <string name="selected">Seçildi</string>
     <string name="never">Heç vaxt</string>
@@ -257,4 +257,7 @@
     <string name="seekbar_preview_summary">Axtarış çubuğunu ovuşdurarkən mövqeyi axtararaq videonu önizləmə.</string>
     <string name="general_summary">Dil, məkan</string>
     <string name="general">Ümumi</string>
+    <string name="playingOnBackground">Arxa fonda oynadılır…</string>
+    <string name="caption_settings">Altyazı tənzimləmələri</string>
+    <string name="downloading_apk">Apk endirilir …</string>
 </resources>

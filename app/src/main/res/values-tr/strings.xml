@@ -188,7 +188,7 @@
     <string name="no_video">Video yok</string>
     <string name="audio">Ses</string>
     <string name="video">Video</string>
-    <string name="downloading">İndiriliyor</string>
+    <string name="downloading">İndiriliyor …</string>
     <string name="player_autoplay">Oto.oynat</string>
     <string name="hideTrendingPage">Trend sayfasını gizle</string>
     <string name="quality">Kalite</string>
@@ -239,7 +239,7 @@
     <string name="reset_watch_positions">İzleme konumlarını sıfırla</string>
     <string name="data_saver_mode_summary">Verileri kaydetmek için küçük resimleri ve diğer resimleri yüklemeyin.</string>
     <string name="update_now">Uygulamayı şimdi güncellemek istiyor musunuz\?</string>
-    <string name="navLabelVisibility">Navbar etiket görünürlüğü</string>
+    <string name="navLabelVisibility">Navigasyon etiket görünürlüğü</string>
     <string name="always">Hep</string>
     <string name="selected">Seçildi</string>
     <string name="never">Hiçbir zaman</string>
@@ -257,4 +257,7 @@
     <string name="seekbar_preview_summary">Arama çubuğunu fırçalarken konumu arayarak videoyu önizleyin.</string>
     <string name="general_summary">Dil, bölge</string>
     <string name="general">Genel</string>
+    <string name="playingOnBackground">Arka planda oynatılıyor…</string>
+    <string name="caption_settings">Altyazı ayarları</string>
+    <string name="downloading_apk">Apk indiriliyor …</string>
 </resources>
