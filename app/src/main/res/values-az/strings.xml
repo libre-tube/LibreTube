@@ -260,4 +260,8 @@
     <string name="playingOnBackground">Arxa fonda oynadılır…</string>
     <string name="caption_settings">Altyazı tənzimləmələri</string>
     <string name="downloading_apk">Apk endirilir …</string>
+    <string name="playerAudioFormat">Oynadıcı üçün səs formatı</string>
+    <string name="playerAudioQuality">Səs keyfiyyəti</string>
+    <string name="best_quality">Ən yaxşı keyfiyyət</string>
+    <string name="worst_quality">Ən pis keyfiyyət</string>
 </resources>
