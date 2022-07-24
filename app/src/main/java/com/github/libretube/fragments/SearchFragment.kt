@@ -150,7 +150,7 @@ class SearchFragment : Fragment() {
         binding.autoCompleteTextView.setOnEditorActionListener(
             OnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    hideKeyboard()
+                    view?.let { context?.hideKeyboard(it) }
                     binding.searchRecycler.visibility = VISIBLE
                     binding.historyRecycler.visibility = GONE
                     fetchSearch(binding.autoCompleteTextView.text.toString())
@@ -190,7 +190,7 @@ class SearchFragment : Fragment() {
         }
         lifecycleScope.launchWhenCreated {
             isFetchingSearch = true
-            hideKeyboard()
+            view?.let { context?.hideKeyboard(it) }
             val response = try {
                 RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
             } catch (e: IOException) {
@@ -253,16 +253,15 @@ class SearchFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        hideKeyboard()
+        view?.let { context?.hideKeyboard(it) }
     }
 
     private fun showHistory() {
         binding.searchRecycler.visibility = GONE
-        val historyList = PreferenceHelper.getHistory()
+        val historyList = PreferenceHelper.getSearchHistory()
         if (historyList.isNotEmpty()) {
             binding.historyRecycler.adapter =
                 SearchHistoryAdapter(
-                    requireContext(),
                     historyList,
                     binding.autoCompleteTextView,
                     this
@@ -274,20 +273,8 @@ class SearchFragment : Fragment() {
     private fun addToHistory(query: String) {
         val searchHistoryEnabled =
             PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
-        if (searchHistoryEnabled) {
-            var historyList = PreferenceHelper.getHistory()
-
-            if ((historyList.isNotEmpty() && historyList.contains(query)) || query == "") {
-                return
-            } else {
-                historyList = historyList + query
-            }
-
-            if (historyList.size > 10) {
-                historyList = historyList.takeLast(10)
-            }
-
-            PreferenceHelper.saveHistory(historyList)
+        if (searchHistoryEnabled && query != "") {
+            PreferenceHelper.saveToSearchHistory(query)
         }
     }
 }

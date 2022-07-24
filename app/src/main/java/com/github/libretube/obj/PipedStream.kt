@@ -4,20 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class PipedStream(
-    var url: String?,
-    var format: String?,
-    var quality: String?,
-    var mimeType: String?,
-    var codec: String?,
-    var videoOnly: Boolean?,
-    var bitrate: Int?,
-    var initStart: Int?,
-    var initEnd: Int?,
-    var indexStart: Int?,
-    var indexEnd: Int?,
-    var width: Int?,
-    var height: Int?,
-    var fps: Int?
-) {
-    constructor() : this("", "", "", "", "", null, -1, -1, -1, -1, -1, -1, -1, -1)
-}
+    var url: String? = null,
+    var format: String? = null,
+    var quality: String? = null,
+    var mimeType: String? = null,
+    var codec: String? = null,
+    var videoOnly: Boolean? = null,
+    var bitrate: Int? = null,
+    var initStart: Int? = null,
+    var initEnd: Int? = null,
+    var indexStart: Int? = null,
+    var indexEnd: Int? = null,
+    var width: Int? = null,
+    var height: Int? = null,
+    var fps: Int? = null
+)

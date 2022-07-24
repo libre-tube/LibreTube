@@ -114,17 +114,41 @@ object PreferenceHelper {
         }
     }
 
-    fun getHistory(): List<String> {
+    fun getSearchHistory(): List<String> {
         return try {
-            val set: Set<String> = settings.getStringSet("search_history", HashSet())!!
+            val set: Set<String> = settings.getStringSet("search_history", LinkedHashSet())!!
             set.toList()
         } catch (e: Exception) {
             emptyList()
         }
     }
 
-    fun saveHistory(historyList: List<String>) {
-        val set: Set<String> = HashSet(historyList)
+    fun saveToSearchHistory(query: String) {
+        var historyList = getSearchHistory().toMutableList()
+
+        if ((historyList.contains(query))) {
+            // remove from history list if already contained
+            historyList -= query
+        }
+
+        // append new query to history
+        historyList.add(0, query)
+
+        if (historyList.size > 10) {
+            historyList.removeAt(historyList.size - 1)
+        }
+
+        updateSearchHistory(historyList)
+    }
+
+    fun removeFromSearchHistory(query: String) {
+        val historyList = getSearchHistory().toMutableList()
+        historyList -= query
+        updateSearchHistory(historyList)
+    }
+
+    private fun updateSearchHistory(historyList: List<String>) {
+        val set: Set<String> = LinkedHashSet(historyList)
         editor.putStringSet("search_history", set).apply()
     }
 
