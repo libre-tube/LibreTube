@@ -14,12 +14,30 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
+            android:icon="@drawable/ic_headphones"
+            app:defaultValue="best"
+            app:entries="@array/audioQuality"
+            app:entryValues="@array/audioQualityValues"
+            app:key="player_audio_quality"
+            app:title="@string/playerAudioQuality"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
             android:icon="@drawable/ic_videocam"
-            app:defaultValue="WEBM"
-            app:entries="@array/playerVideoFormats"
-            app:entryValues="@array/playerVideoFormats"
+            app:defaultValue="webm"
+            app:entries="@array/playerVideoFormat"
+            app:entryValues="@array/playerVideoFormatValues"
             app:key="player_video_format"
             app:title="@string/playerVideoFormat"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_music"
+            app:defaultValue="all"
+            app:entries="@array/playerAudioFormat"
+            app:entryValues="@array/playerAudioFormatValues"
+            app:key="player_audio_format"
+            app:title="@string/playerAudioFormat"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>

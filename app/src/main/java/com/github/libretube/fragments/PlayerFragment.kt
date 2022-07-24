@@ -160,7 +160,7 @@ class PlayerFragment : Fragment() {
     private var watchPositionsEnabled = true
     private var useSystemCaptionStyle = true
     private var seekIncrement = 5L
-    private var videoFormatPreference = "WEBM"
+    private var videoFormatPreference = "webm"
     private var defRes = ""
     private var bufferingGoal = 50000
     private var seekBarPreview = false
@@ -287,7 +287,7 @@ class PlayerFragment : Fragment() {
 
         videoFormatPreference = PreferenceHelper.getString(
             PreferenceKeys.PLAYER_VIDEO_FORMAT,
-            "WEBM"
+            "webm"
         )!!
 
         defRes = PreferenceHelper.getString(
@@ -1319,7 +1319,8 @@ class PlayerFragment : Fragment() {
 
         for (vid in response.videoStreams!!) {
             // append quality to list if it has the preferred format (e.g. MPEG)
-            if (vid.format.equals(videoFormatPreference) && vid.url != null) { // preferred format
+            val preferredMimeType = "video/$videoFormatPreference"
+            if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
                 videosNameArray += vid.quality.toString()
                 videosUrlArray += vid.url!!.toUri()
             } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format
@@ -1410,7 +1411,7 @@ class PlayerFragment : Fragment() {
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
                         val videoUri = videosUrlArray[which]
-                        val audioUrl = PlayerHelper.getMostBitRate(response.audioStreams!!)
+                        val audioUrl = PlayerHelper.getAudioSource(response.audioStreams!!)
                         setMediaSource(videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
@@ -1431,7 +1432,7 @@ class PlayerFragment : Fragment() {
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
                     val videoUri = videosUrlArray[index]
-                    val audioUrl = PlayerHelper.getMostBitRate(streams.audioStreams!!)
+                    val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
                     setMediaSource(videoUri, audioUrl)
                     playerBinding.qualityText.text = videosNameArray[index]
                     return
@@ -1453,7 +1454,7 @@ class PlayerFragment : Fragment() {
         // if nothing found, use the first list entry
         if (videosUrlArray.isNotEmpty()) {
             val videoUri = videosUrlArray[0]
-            val audioUrl = PlayerHelper.getMostBitRate(streams.audioStreams!!)
+            val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
             setMediaSource(videoUri, audioUrl)
             playerBinding.qualityText.text = videosNameArray[0]
         }
