@@ -260,4 +260,8 @@
     <string name="playingOnBackground">Arka planda oynatılıyor…</string>
     <string name="caption_settings">Altyazı ayarları</string>
     <string name="downloading_apk">Apk indiriliyor …</string>
+    <string name="playerAudioFormat">Oynatıcı için ses formatı</string>
+    <string name="playerAudioQuality">Ses kalitesi</string>
+    <string name="best_quality">En iyi kalite</string>
+    <string name="worst_quality">En kötü kalite</string>
 </resources>

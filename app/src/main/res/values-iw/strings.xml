@@ -260,4 +260,8 @@
     <string name="playingOnBackground">מתגנן ברקע…</string>
     <string name="downloading_apk">Apk מתקבל…</string>
     <string name="caption_settings">הגדרות כתוביות</string>
+    <string name="playerAudioFormat">תצורת שמע לנגן</string>
+    <string name="playerAudioQuality">איכות שמע</string>
+    <string name="best_quality">האיכות המיטבית</string>
+    <string name="worst_quality">האיכות הנחותה ביותר</string>
 </resources>

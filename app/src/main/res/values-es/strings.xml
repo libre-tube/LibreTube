@@ -186,7 +186,7 @@
     <string name="category_music_offtopic_description">Sólo para su uso en vídeos musicales. Debe abarcar partes del vídeo que no formen parte de las mezclas oficiales. Al final, el vídeo debe parecerse lo más posible a la versión de Spotify o a cualquier otra versión mezclada, o reducir las conversaciones u otras distracciones.</string>
     <string name="player_autoplay">Reproducción automática</string>
     <string name="no_video">Sin vídeo</string>
-    <string name="downloading">Descargando</string>
+    <string name="downloading">Descargando…</string>
     <string name="hideTrendingPage">Ocultar página de tendencias</string>
     <string name="instance_frontend_url">URL de la interfaz de la instancia</string>
     <string name="no_audio">Sin audio</string>
@@ -230,7 +230,7 @@
     <string name="turnInternetOn">Por favor, conéctese a internet activando el wifi o los datos móviles.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
-    <string name="require_restart_message">Este cambio requiere un reinicio de la aplicación. ¿Quiere reiniciar la aplicación ahora\? De lo contrario, los cambios se aplicarán en el próximo reinicio de la aplicación.</string>
+    <string name="require_restart_message">Es posible que estos cambios no se apliquen sin reiniciar la aplicación. ¿Quieres reiniciar la aplicación ahora\?</string>
     <string name="change_playback_speed">Velocidad de reproducción</string>
     <string name="require_restart">Es necesario reiniciar</string>
     <string name="selected">Seleccionado</string>
@@ -253,4 +253,5 @@
     <string name="captions">Subtítulos</string>
     <string name="none">Ninguno</string>
     <string name="update_now">¿Quiere actualizar la aplicación ahora\?</string>
+    <string name="seekbar_preview">Vista previa de la barra de desplazamiento</string>
 </resources>
