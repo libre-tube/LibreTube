@@ -219,4 +219,10 @@
     <string name="seek_increment">Incremento de avanço/recuo</string>
     <string name="autoplay_summary">Reproduzir vídeos seguintes automaticamente.</string>
     <string name="downloading">A descarregar…</string>
+    <string name="empty_instance">Preencha o nome e a URL da API.</string>
+    <string name="category_music_offtopic">Música:Seção não musical</string>
+    <string name="category_music_offtopic_description">Apenas para uso em vídeos musicais. Deve cobrir partes do vídeo e não parte de mixes oficiais. No final, o vídeo deve se assemelhar ao Spotify ou a qualquer outra versão mista o mais próximo possível, ou reduzir a conversa ou outras distrações.</string>
+    <string name="category_preview">Pré-visualização/Recapitalização</string>
+    <string name="invalid_url">Por favor, digite uma URL que funcione</string>
+    <string name="version">Versão %1$s</string>
 </resources>
