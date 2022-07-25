@@ -95,7 +95,7 @@
     <string name="music_songs">Песни из YT Music</string>
     <string name="music_videos">Видео из YT Music</string>
     <string name="music_albums">Альбомы из YT Music</string>
-    <string name="category_intro">Антракт/вступительная анимация</string>
+    <string name="category_intro">Пауза/вступительная анимация</string>
     <string name="category_intro_description">Интервал без фактического контента. Это может быть пауза, статичный кадр, повторяющаяся анимация. Не должно использоваться для переходов, содержащих информацию.</string>
     <string name="category_outro_description">Титры или когда появляются конечные заставки. Не для выводов с информацией.</string>
     <string name="category_selfpromo">Неоплачиваемая/Самореклама</string>
@@ -186,7 +186,7 @@
     <string name="playerVideoFormat">Формат видео для плеера</string>
     <string name="audio">Аудио</string>
     <string name="video">Видео</string>
-    <string name="downloading">Загрузка</string>
+    <string name="downloading">Загрузка…</string>
     <string name="player_autoplay">Автовоспроизведение</string>
     <string name="hideTrendingPage">Скрыть вкладку \"тренды\"</string>
     <string name="no_video">Нет видео</string>
@@ -257,4 +257,7 @@
     <string name="watch_history_summary">Сохранять история просмотров локально</string>
     <string name="seekbar_preview">Предпросмотр поисковой панели</string>
     <string name="seekbar_preview_summary">Предпросмотр видео осуществляется путем поиска позиции при очистке панели поиска.</string>
+    <string name="caption_settings">Настройки субтитров</string>
+    <string name="downloading_apk">Скачивание Apk…</string>
+    <string name="playerAudioQuality">Качество звука</string>
 </resources>
