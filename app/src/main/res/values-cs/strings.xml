@@ -226,7 +226,7 @@
     <string name="deleteAccount_summary">Odstranit účet Piped</string>
     <string name="no_audio">Žádný zvuk</string>
     <string name="audio">Zvuk</string>
-    <string name="downloading">Stahování</string>
+    <string name="downloading">Stahování …</string>
     <string name="player_autoplay">Automatické přehrávání</string>
     <string name="instance_frontend_url">URL frontendu instance</string>
     <string name="no_video">Žádné video</string>
@@ -257,4 +257,11 @@
     <string name="pauseOnScreenOff_summary">Pozastavit přehrávač při vypnutí obrazovky.</string>
     <string name="autoplay_summary">Automaticky přehrát další video po skončení aktuálního.</string>
     <string name="clonePlaylist">Duplikovat playlist</string>
+    <string name="playingOnBackground">Přehrávání na pozadí …</string>
+    <string name="downloading_apk">Stahování souboru APK …</string>
+    <string name="caption_settings">Nastavení titulků</string>
+    <string name="playerAudioFormat">Formát zvuku pro přehrávač</string>
+    <string name="playerAudioQuality">Kvalita zvuku</string>
+    <string name="best_quality">Nejlepší kvalita</string>
+    <string name="worst_quality">Nejhorší kvalita</string>
 </resources>
