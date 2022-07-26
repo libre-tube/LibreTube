@@ -56,7 +56,9 @@ class PlaylistFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.api.getPlaylist(playlistId!!)
+                    // load locally stored playlists with the auth api
+                    if (isPipedPlaylist()) RetrofitInstance.authApi.getPlaylist(playlistId!!)
+                    else RetrofitInstance.api.getPlaylist(playlistId!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -118,6 +120,8 @@ class PlaylistFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
+                    // load locally stored playlists with the auth api
+                    if (isPipedPlaylist()) RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
                     RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
@@ -133,6 +137,11 @@ class PlaylistFragment : Fragment() {
             }
         }
         run()
+    }
+
+    private fun isPipedPlaylist(): Boolean {
+        val regex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+        return playlistId?.contains(regex) == true
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
