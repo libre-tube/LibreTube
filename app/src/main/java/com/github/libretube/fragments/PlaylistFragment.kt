@@ -22,6 +22,7 @@ class PlaylistFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null
+    private var isOwner: Boolean = false
     var nextPage: String? = null
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
@@ -78,7 +79,7 @@ class PlaylistFragment : Fragment() {
 
                     val user = PreferenceHelper.getUsername()
                     // check whether the user owns the playlist
-                    val isOwner = response.uploaderUrl == null &&
+                    isOwner = response.uploaderUrl == null &&
                         response.uploader.equals(user, true)
 
                     // show playlist options
@@ -141,7 +142,7 @@ class PlaylistFragment : Fragment() {
 
     private fun isPipedPlaylist(): Boolean {
         val regex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
-        return playlistId?.contains(regex) == true
+        return playlistId?.contains(regex) == true || isOwner
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
