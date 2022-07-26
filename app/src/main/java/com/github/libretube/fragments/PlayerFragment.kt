@@ -166,6 +166,7 @@ class PlayerFragment : Fragment() {
     private var defRes = ""
     private var bufferingGoal = 50000
     private var seekBarPreview = false
+    private var defaultSubtitle = ""
 
     /**
      * for autoplay
@@ -255,12 +256,12 @@ class PlayerFragment : Fragment() {
         playbackSpeed = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
-        )!!.replace("F", "") // due to old way to handle it (with float)
+        ).replace("F", "") // due to old way to handle it (with float)
 
         fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
             "ratio"
-        )!!
+        )
 
         pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.PAUSE_ON_SCREEN_OFF,
@@ -285,27 +286,36 @@ class PlayerFragment : Fragment() {
         seekIncrement = PreferenceHelper.getString(
             PreferenceKeys.SEEK_INCREMENT,
             "5"
-        )?.toLong()!! * 1000
+        ).toLong() * 1000
 
         videoFormatPreference = PreferenceHelper.getString(
             PreferenceKeys.PLAYER_VIDEO_FORMAT,
             "webm"
-        )!!
+        )
 
         defRes = PreferenceHelper.getString(
             PreferenceKeys.DEFAULT_RESOLUTION,
             ""
-        )!!
+        )
 
         bufferingGoal = PreferenceHelper.getString(
             PreferenceKeys.BUFFERING_GOAL,
             "50"
-        )?.toInt()!! * 1000
+        ).toInt() * 1000
 
         seekBarPreview = PreferenceHelper.getBoolean(
             PreferenceKeys.SEEKBAR_PREVIEW,
             false
         )
+
+        defaultSubtitle = PreferenceHelper.getString(
+            PreferenceKeys.DEFAULT_SUBTITLE,
+            ""
+        )
+
+        if (defaultSubtitle.contains("-")) {
+            defaultSubtitle = defaultSubtitle.split("-")[0]
+        }
     }
 
     private fun setSponsorBlockPrefs() {
@@ -1490,7 +1500,10 @@ class PlayerFragment : Fragment() {
             )
             .build()
 
+        // set the subtitle if default subtitle selected
         trackSelector = DefaultTrackSelector(requireContext())
+        if (defaultSubtitle != "") trackSelector.buildUponParameters()
+            .setPreferredTextLanguage(defaultSubtitle)
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))

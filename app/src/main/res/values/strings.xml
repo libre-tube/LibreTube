@@ -264,4 +264,5 @@
     <string name="playerAudioQuality">Audio quality</string>
     <string name="best_quality">Best quality</string>
     <string name="worst_quality">Worst quality</string>
+    <string name="default_subtitle_language">Default subtitle language</string>
 </resources>
