@@ -264,4 +264,5 @@
     <string name="playerAudioQuality">جودة الصوت</string>
     <string name="best_quality">أفضل جودة</string>
     <string name="worst_quality">أسوأ جودة</string>
+    <string name="default_subtitle_language">لغة الترجمة الافتراضية</string>
 </resources>
