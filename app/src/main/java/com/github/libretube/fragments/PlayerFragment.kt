@@ -1,5 +1,6 @@
 package com.github.libretube.fragments
 
+import android.app.ActivityManager
 import android.app.NotificationManager
 import android.app.PictureInPictureParams
 import android.content.Context
@@ -57,6 +58,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.services.BackgroundMode
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
@@ -1708,14 +1710,29 @@ class PlayerFragment : Fragment() {
     }
 
     fun onUserLeaveHint() {
+        if (SDK_INT >= Build.VERSION_CODES.O && shouldStartPiP()) {
+            activity?.enterPictureInPictureMode(updatePipParams())
+        }
+    }
+
+    private fun shouldStartPiP(): Boolean {
         val bounds = Rect()
         binding.playerScrollView.getHitRect(bounds)
 
-        if (SDK_INT >= Build.VERSION_CODES.O &&
-            (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.IS_FULL_SCREEN)
-        ) {
-            activity?.enterPictureInPictureMode(updatePipParams())
+        val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
+
+        return (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.IS_FULL_SCREEN) &&
+            (exoPlayer.isPlaying || !backgroundModeRunning)
+    }
+
+    private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
+        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
         }
+        return false
     }
 
     private fun updatePipParams() = PictureInPictureParams.Builder()
