@@ -45,8 +45,8 @@ object PreferenceHelper {
         editor.apply()
     }
 
-    fun getString(key: String?, defValue: String?): String? {
-        return settings.getString(key, defValue)
+    fun getString(key: String?, defValue: String?): String {
+        return settings.getString(key, defValue)!!
     }
 
     fun getInt(key: String?, defValue: Int): Int {
@@ -124,7 +124,7 @@ object PreferenceHelper {
     }
 
     fun saveToSearchHistory(query: String) {
-        var historyList = getSearchHistory().toMutableList()
+        val historyList = getSearchHistory().toMutableList()
 
         if ((historyList.contains(query))) {
             // remove from history list if already contained

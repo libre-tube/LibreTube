@@ -56,6 +56,7 @@ object PreferenceKeys {
     const val SEEKBAR_PREVIEW = "seekbar_preview"
     const val PLAYER_AUDIO_FORMAT = "player_audio_format"
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
+    const val DEFAULT_SUBTITLE = "default_subtitle"
 
     /**
      * Download
