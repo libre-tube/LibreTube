@@ -264,4 +264,5 @@
     <string name="playerAudioQuality">Səs keyfiyyəti</string>
     <string name="best_quality">Ən yaxşı keyfiyyət</string>
     <string name="worst_quality">Ən pis keyfiyyət</string>
+    <string name="default_subtitle_language">Defolt altyazı dili</string>
 </resources>
