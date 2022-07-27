@@ -60,7 +60,7 @@ import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
-import com.github.libretube.util.OnCustomEventListener
+import com.github.libretube.util.OnDoubleTapEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
@@ -90,7 +90,6 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -113,6 +112,7 @@ class PlayerFragment : Fragment() {
      */
     private var videoId: String? = null
     private var playlistId: String? = null
+    private var channelId: String? = null
     private var isSubscribed: Boolean = false
 
     /**
@@ -740,6 +740,7 @@ class PlayerFragment : Fragment() {
                 title = response.title!!
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
+                channelId = response.uploaderUrl?.replace("/channel/", "")
 
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
@@ -1078,13 +1079,17 @@ class PlayerFragment : Fragment() {
         }
         if (token != "") {
             val channelId = response.uploaderUrl?.replace("/channel/", "")
-            isSubscribed(binding.playerSubscribe, channelId!!)
+            isSubscribed()
             binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
                 newFragment.arguments = bundle
                 newFragment.show(childFragmentManager, "AddToPlaylist")
+            }
+        } else {
+            binding.relPlayerSave.setOnClickListener {
+                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -1095,7 +1100,7 @@ class PlayerFragment : Fragment() {
         doubleTapOverlayBinding.rewindTV.text = seekIncrementText
         doubleTapOverlayBinding.forwardTV.text = seekIncrementText
         binding.player.setOnDoubleTapListener(
-            object : OnCustomEventListener {
+            object : OnDoubleTapEventListener {
                 override fun onEvent(x: Float) {
                     val width = exoPlayerView.width
                     when {
@@ -1527,12 +1532,12 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun isSubscribed(button: MaterialButton, channel_id: String) {
+    private fun isSubscribed() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.authApi.isSubscribed(
-                        channel_id,
+                        channelId!!,
                         token
                     )
                 } catch (e: IOException) {
@@ -1547,18 +1552,21 @@ class PlayerFragment : Fragment() {
                 runOnUiThread {
                     if (response.subscribed == true) {
                         isSubscribed = true
-                        button.text = getString(R.string.unsubscribe)
+                        binding.playerSubscribe.text = getString(R.string.unsubscribe)
                     }
                     if (response.subscribed != null) {
-                        button.setOnClickListener {
+                        binding.playerSubscribe.setOnClickListener {
                             if (isSubscribed) {
-                                unsubscribe(channel_id)
-                                button.text = getString(R.string.subscribe)
+                                unsubscribe(channelId!!)
+                                binding.playerSubscribe.text = getString(R.string.subscribe)
                             } else {
-                                subscribe(channel_id)
-                                button.text = getString(R.string.unsubscribe)
+                                subscribe(channelId!!)
+                                binding.playerSubscribe.text = getString(R.string.unsubscribe)
                             }
                         }
+                    } else {
+                        Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -1566,13 +1574,13 @@ class PlayerFragment : Fragment() {
         run()
     }
 
-    private fun subscribe(channel_id: String) {
+    private fun subscribe(channelId: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 try {
                     RetrofitInstance.authApi.subscribe(
                         token,
-                        Subscribe(channel_id)
+                        Subscribe(channelId)
                     )
                 } catch (e: IOException) {
                     println(e)

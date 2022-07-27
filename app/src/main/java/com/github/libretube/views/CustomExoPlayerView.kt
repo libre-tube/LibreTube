@@ -8,7 +8,7 @@ import android.view.View
 import com.github.libretube.R
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.util.DoubleTapListener
-import com.github.libretube.util.OnCustomEventListener
+import com.github.libretube.util.OnDoubleTapEventListener
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 @SuppressLint("ClickableViewAccessibility")
@@ -19,19 +19,18 @@ internal class CustomExoPlayerView(
     val TAG = "CustomExoPlayerView"
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
 
-    var doubleTapListener: OnCustomEventListener? = null
+    private var doubleTapListener: OnDoubleTapEventListener? = null
 
-    var lastToggled: Long? = null
-    var xPos = 0F
+    // the x-position of where the user clicked
+    private var xPos = 0F
 
     fun setOnDoubleTapListener(
-        eventListener: OnCustomEventListener?
+        eventListener: OnDoubleTapEventListener?
     ) {
         doubleTapListener = eventListener
     }
 
     private fun toggleController() {
-        lastToggled = System.currentTimeMillis()
         if (isControllerFullyVisible) hideController() else showController()
     }
 
@@ -51,6 +50,7 @@ internal class CustomExoPlayerView(
             binding.toggleOptions.animate().rotation(0F).setDuration(250).start()
             binding.advancedOptions.visibility = View.GONE
         }
+        // set the double click listener for rewind/forward
         setOnClickListener(doubleTouchListener)
     }
 
@@ -75,7 +75,9 @@ internal class CustomExoPlayerView(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        // save the x position of the touch event
         xPos = event.x
+        // listen for a double touch
         doubleTouchListener.onClick(this)
         return false
     }

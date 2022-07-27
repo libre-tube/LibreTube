@@ -142,9 +142,18 @@ class BackgroundMode : Service() {
          */
         player!!.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
-                val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, false)
-                if (state == Player.STATE_ENDED) {
-                    if (autoplay) playNextVideo()
+                when (state) {
+                    Player.STATE_ENDED -> {
+                        val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
+                        if (autoplay) playNextVideo()
+                    }
+                    Player.STATE_IDLE -> {
+                        // called when the user pressed stop in the notification
+                        // stop the service from being in the foreground and remove the notification
+                        stopForeground(true)
+                        // destroy the service
+                        stopSelf()
+                    }
                 }
             }
         })
