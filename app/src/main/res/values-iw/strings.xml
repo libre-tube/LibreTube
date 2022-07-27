@@ -264,4 +264,5 @@
     <string name="playerAudioQuality">איכות שמע</string>
     <string name="best_quality">האיכות המיטבית</string>
     <string name="worst_quality">האיכות הנחותה ביותר</string>
+    <string name="default_subtitle_language">שפת הכתוביות כברירת מחדל</string>
 </resources>

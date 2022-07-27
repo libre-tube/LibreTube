@@ -189,7 +189,7 @@
     <string name="no_video">Sans vidéo</string>
     <string name="audio">Audio</string>
     <string name="video">Vidéo</string>
-    <string name="downloading">Téléchargement</string>
+    <string name="downloading">Téléchargement…</string>
     <string name="hideTrendingPage">Masquer la page des tendances</string>
     <string name="instance_frontend_url">URL vers l\'interface de l\'instance</string>
     <string name="quality">Qualité</string>
@@ -257,4 +257,11 @@
     <string name="seekbar_preview_summary">Prévisualisez la vidéo en recherchant la position lors de la scrutation de la barre de recherche.</string>
     <string name="general_summary">Langue, région</string>
     <string name="general">Général</string>
+    <string name="playerAudioQuality">Qualité audio</string>
+    <string name="best_quality">Meilleure qualité</string>
+    <string name="worst_quality">Pire qualité</string>
+    <string name="playingOnBackground">Lecture en arrière-plan…</string>
+    <string name="caption_settings">Paramètres des légendes</string>
+    <string name="downloading_apk">Téléchargement de l\'APK…</string>
+    <string name="playerAudioFormat">Format audio pour le lecteur</string>
 </resources>
