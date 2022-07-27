@@ -8,7 +8,6 @@ import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PlayerSettings : PreferenceFragmentCompat() {
     val TAG = "PlayerSettings"
@@ -51,8 +50,9 @@ class PlayerSettings : PreferenceFragmentCompat() {
         }
         defaultSubtitle?.entries = localeNames.toTypedArray()
         defaultSubtitle?.entryValues = localeCodes.toTypedArray()
-        defaultSubtitle?.summaryProvider = Preference.SummaryProvider<ListPreference> { preference ->
-            preference.entry
-        }
+        defaultSubtitle?.summaryProvider =
+            Preference.SummaryProvider<ListPreference> { preference ->
+                preference.entry
+            }
     }
 }

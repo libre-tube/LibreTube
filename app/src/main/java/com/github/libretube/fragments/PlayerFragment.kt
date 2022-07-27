@@ -202,6 +202,7 @@ class PlayerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPlayerBinding.inflate(layoutInflater, container, false)
+        exoPlayerView = binding.player
         playerBinding = binding.player.binding
         doubleTapOverlayBinding = binding.doubleTapOverlay.binding
 
@@ -214,6 +215,8 @@ class PlayerFragment : Fragment() {
         context?.hideKeyboard(view)
 
         setUserPrefs()
+
+        if (autoplayEnabled == true) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
 
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
@@ -345,8 +348,6 @@ class PlayerFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.binding.container.visibility = View.VISIBLE
 
-        exoPlayerView = binding.player
-
         binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
@@ -425,6 +426,16 @@ class PlayerFragment : Fragment() {
             } else {
                 playerBinding.toggleOptions.animate().rotation(180F).setDuration(250).start()
                 playerBinding.advancedOptions.visibility = View.VISIBLE
+            }
+        }
+        // autoplay toggle button
+        playerBinding.autoplayLL.setOnClickListener {
+            autoplayEnabled = if (autoplayEnabled) {
+                playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_off)
+                false
+            } else {
+                playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
+                true
             }
         }
         binding.playImageView.setOnClickListener {
@@ -680,8 +691,9 @@ class PlayerFragment : Fragment() {
             ) as NotificationManager
             notificationManager.cancel(1)
             exoPlayer.release()
-            activity?.requestedOrientation = if ((activity as MainActivity).autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
-            else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+            activity?.requestedOrientation =
+                if ((activity as MainActivity).autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
+                else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         } catch (e: Exception) {
         }
     }

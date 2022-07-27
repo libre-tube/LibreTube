@@ -122,7 +122,10 @@ class PlaylistFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    if (isPipedPlaylist()) RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
+                    if (isPipedPlaylist()) RetrofitInstance.authApi.getPlaylistNextPage(
+                        playlistId!!,
+                        nextPage!!
+                    )
                     RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)

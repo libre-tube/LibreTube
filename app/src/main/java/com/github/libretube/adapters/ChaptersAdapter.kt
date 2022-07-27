@@ -31,7 +31,8 @@ class ChaptersAdapter(
 
             if (selectedPosition == position) {
                 // get the color for highlighted controls
-                val color = ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+                val color =
+                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
                 chapterLL.setBackgroundColor(color)
             } else chapterLL.setBackgroundColor(Color.TRANSPARENT)
             root.setOnClickListener {

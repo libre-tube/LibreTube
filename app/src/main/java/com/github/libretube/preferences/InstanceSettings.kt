@@ -264,7 +264,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
         val token = PreferenceHelper.getToken()
         if (token != "") {
             // check StorageAccess
-            val accessGranted = PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
+            val accessGranted =
+                PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
             if (accessGranted) getContent.launch("*/*")
             else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
         } else {
