@@ -7,8 +7,11 @@ import android.view.MotionEvent
 import android.view.View
 import com.github.libretube.R
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.util.DoubleTapListener
+import com.github.libretube.util.OnCustomEventListener
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
+@SuppressLint("ClickableViewAccessibility")
 internal class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
@@ -16,12 +19,39 @@ internal class CustomExoPlayerView(
     val TAG = "CustomExoPlayerView"
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
 
+    var doubleTapListener: OnCustomEventListener? = null
+
+    var lastToggled: Long? = null
+    var xPos = 0F
+
+    fun setOnDoubleTapListener(
+        eventListener: OnCustomEventListener?
+    ) {
+        doubleTapListener = eventListener
+    }
+
+    private fun toggleController() {
+        lastToggled = System.currentTimeMillis()
+        if (isControllerFullyVisible) hideController() else showController()
+    }
+
+    val doubleTouchListener = object : DoubleTapListener() {
+        override fun onDoubleClick() {
+            doubleTapListener?.onEvent(xPos)
+        }
+
+        override fun onSingleClick() {
+            toggleController()
+        }
+    }
+
     init {
         setControllerVisibilityListener {
             // hide the advanced options
             binding.toggleOptions.animate().rotation(0F).setDuration(250).start()
             binding.advancedOptions.visibility = View.GONE
         }
+        setOnClickListener(doubleTouchListener)
     }
 
     override fun hideController() {
@@ -44,17 +74,9 @@ internal class CustomExoPlayerView(
         doubleTapOverlay.layoutParams = params
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                if (isControllerFullyVisible) {
-                    hideController()
-                } else {
-                    showController()
-                }
-            }
-        }
+        xPos = event.x
+        doubleTouchListener.onClick(this)
         return false
     }
 }

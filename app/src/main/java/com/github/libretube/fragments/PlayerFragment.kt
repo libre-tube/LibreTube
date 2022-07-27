@@ -20,10 +20,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
 import android.util.Log
-import android.view.GestureDetector
-import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -63,6 +60,7 @@ import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.OnCustomEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
@@ -1096,50 +1094,17 @@ class PlayerFragment : Fragment() {
         val seekIncrementText = (seekIncrement / 1000).toString()
         doubleTapOverlayBinding.rewindTV.text = seekIncrementText
         doubleTapOverlayBinding.forwardTV.text = seekIncrementText
-
-        // enable rewind button
-        val rewindGestureDetector = GestureDetector(
-            context,
-            object : SimpleOnGestureListener() {
-                override fun onDoubleTap(e: MotionEvent): Boolean {
-                    rewind()
-                    return super.onDoubleTap(e)
-                }
-
-                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    toggleController()
-                    return super.onSingleTapConfirmed(e)
+        binding.player.setOnDoubleTapListener(
+            object : OnCustomEventListener {
+                override fun onEvent(x: Float) {
+                    val width = exoPlayerView.width
+                    when {
+                        width * 0.45 > x -> rewind()
+                        width * 0.55 < x -> forward()
+                    }
                 }
             }
         )
-
-        doubleTapOverlayBinding.rewindFL.setOnTouchListener { view, event ->
-            rewindGestureDetector.onTouchEvent(event)
-            view.performClick()
-            true
-        }
-
-        // enable forward button
-        val forwardGestureDetector = GestureDetector(
-            context,
-            object : SimpleOnGestureListener() {
-                override fun onDoubleTap(e: MotionEvent): Boolean {
-                    forward()
-                    return super.onDoubleTap(e)
-                }
-
-                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    toggleController()
-                    return super.onSingleTapConfirmed(e)
-                }
-            }
-        )
-
-        doubleTapOverlayBinding.forwardFL.setOnTouchListener { view, event ->
-            forwardGestureDetector.onTouchEvent(event)
-            view.performClick()
-            true
-        }
     }
 
     private fun rewind() {
@@ -1555,10 +1520,10 @@ class PlayerFragment : Fragment() {
         // disable double tap to seek when the player is locked
         if (isLocked) {
             // enable fast forward and rewind by double tapping
-            binding.doubleTapOverlay.visibility = View.VISIBLE
+            enableDoubleTapToSeek()
         } else {
             // disable fast forward and rewind by double tapping
-            binding.doubleTapOverlay.visibility = View.GONE
+            binding.player.setOnDoubleTapListener(null)
         }
     }
 
