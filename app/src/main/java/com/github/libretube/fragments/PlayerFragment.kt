@@ -1099,8 +1099,8 @@ class PlayerFragment : Fragment() {
                 override fun onEvent(x: Float) {
                     val width = exoPlayerView.width
                     when {
-                        width * 0.45 > x -> rewind()
-                        width * 0.55 < x -> forward()
+                        width * 0.5 > x -> rewind()
+                        width * 0.5 < x -> forward()
                     }
                 }
             }
