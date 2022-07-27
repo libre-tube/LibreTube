@@ -264,4 +264,5 @@
     <string name="playerAudioQuality">Ses kalitesi</string>
     <string name="best_quality">En iyi kalite</string>
     <string name="worst_quality">En kötü kalite</string>
+    <string name="default_subtitle_language">Varsayılan altyazı dili</string>
 </resources>
