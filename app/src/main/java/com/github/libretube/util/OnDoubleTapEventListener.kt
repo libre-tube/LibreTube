@@ -1,5 +1,5 @@
 package com.github.libretube.util
 
-interface OnCustomEventListener {
+interface OnDoubleTapEventListener {
     fun onEvent(x: Float)
 }
