@@ -1520,10 +1520,10 @@ class PlayerFragment : Fragment() {
         // disable double tap to seek when the player is locked
         if (isLocked) {
             // enable fast forward and rewind by double tapping
-            binding.doubleTapOverlay.visibility = View.VISIBLE
+            enableDoubleTapToSeek()
         } else {
             // disable fast forward and rewind by double tapping
-            binding.doubleTapOverlay.visibility = View.GONE
+            binding.player.setOnDoubleTapListener(null)
         }
     }
 

@@ -3,11 +3,8 @@ package com.github.libretube.views
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import com.github.libretube.R
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.util.DoubleTapListener
@@ -28,7 +25,7 @@ internal class CustomExoPlayerView(
     var xPos = 0F
 
     fun setOnDoubleTapListener(
-        eventListener: OnCustomEventListener
+        eventListener: OnCustomEventListener?
     ) {
         doubleTapListener = eventListener
     }
