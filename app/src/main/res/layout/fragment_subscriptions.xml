@@ -96,11 +96,11 @@
 
                 <RelativeLayout
                     android:id="@+id/sub_channels_container"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants">
-                    
+                    android:descendantFocusability="blocksDescendants"
+                    android:visibility="gone">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/sub_channels"
                         android:layout_width="match_parent"

@@ -6,8 +6,8 @@
 
         <Preference
             android:icon="@drawable/ic_settings"
-            app:key="general"
             android:summary="@string/general_summary"
+            app:key="general"
             app:title="@string/general" />
 
         <Preference

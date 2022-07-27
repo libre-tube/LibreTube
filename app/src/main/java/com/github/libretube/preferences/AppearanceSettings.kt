@@ -65,10 +65,12 @@ class AppearanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val systemCaptionStyle = findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
+        val systemCaptionStyle =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
         val captionSettings = findPreference<Preference>(PreferenceKeys.CAPTION_SETTINGS)
 
-        captionSettings?.isVisible = PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
+        captionSettings?.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
         systemCaptionStyle?.setOnPreferenceChangeListener { _, newValue ->
             captionSettings?.isVisible = newValue as Boolean
             true

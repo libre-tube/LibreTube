@@ -284,7 +284,8 @@
             android:enabled="true"
             android:exported="false" />
 
-        <service android:name=".services.BackgroundMode"
+        <service
+            android:name=".services.BackgroundMode"
             android:enabled="true"
             android:exported="false" />
     </application>
