@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.databinding.ChannelSearchRowBinding
+import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
-import com.github.libretube.databinding.VideoSearchRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.SearchItem
@@ -45,10 +45,10 @@ class SearchAdapter(
 
         return when (viewType) {
             0 -> SearchViewHolder(
-                VideoSearchRowBinding.inflate(layoutInflater, parent, false)
+                VideoRowBinding.inflate(layoutInflater, parent, false)
             )
             1 -> SearchViewHolder(
-                ChannelSearchRowBinding.inflate(layoutInflater, parent, false)
+                ChannelRowBinding.inflate(layoutInflater, parent, false)
             )
             2 -> SearchViewHolder(
                 PlaylistSearchRowBinding.inflate(layoutInflater, parent, false)
@@ -78,26 +78,26 @@ class SearchAdapter(
         }
     }
 
-    private fun bindWatch(item: SearchItem, binding: VideoSearchRowBinding) {
+    private fun bindWatch(item: SearchItem, binding: VideoRowBinding) {
         binding.apply {
-            ConnectionHelper.loadImage(item.thumbnail, searchThumbnail)
+            ConnectionHelper.loadImage(item.thumbnail, thumbnail)
             if (item.duration != -1L) {
-                searchThumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
+                thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
             } else {
-                searchThumbnailDuration.text = root.context.getString(R.string.live)
-                searchThumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
+                thumbnailDuration.text = root.context.getString(R.string.live)
+                thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
             }
-            ConnectionHelper.loadImage(item.uploaderAvatar, searchChannelImage)
-            searchDescription.text = item.title
+            ConnectionHelper.loadImage(item.uploaderAvatar, channelImage)
+            videoTitle.text = item.title
             val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
             val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
-            searchViews.text =
+            videoInfo.text =
                 if (viewsString != "" && uploadDate != "") {
                     "$viewsString • $uploadDate"
                 } else {
                     viewsString + uploadDate
                 }
-            searchChannelName.text = item.uploaderName
+            channelName.text = item.uploaderName
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
@@ -107,13 +107,13 @@ class SearchAdapter(
                     .show(childFragmentManager, "VideoOptionsDialog")
                 true
             }
-            searchChannelImage.setOnClickListener {
+            channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
         }
     }
 
-    private fun bindChannel(item: SearchItem, binding: ChannelSearchRowBinding) {
+    private fun bindChannel(item: SearchItem, binding: ChannelRowBinding) {
         binding.apply {
             ConnectionHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
@@ -132,7 +132,7 @@ class SearchAdapter(
         }
     }
 
-    private fun isSubscribed(channelId: String, token: String, binding: ChannelSearchRowBinding) {
+    private fun isSubscribed(channelId: String, token: String, binding: ChannelRowBinding) {
         var isSubscribed = false
 
         // check whether the user subscribed to the channel
@@ -223,15 +223,15 @@ class SearchAdapter(
 }
 
 class SearchViewHolder : RecyclerView.ViewHolder {
-    var videoRowBinding: VideoSearchRowBinding? = null
-    var channelRowBinding: ChannelSearchRowBinding? = null
+    var videoRowBinding: VideoRowBinding? = null
+    var channelRowBinding: ChannelRowBinding? = null
     var playlistRowBinding: PlaylistSearchRowBinding? = null
 
-    constructor(binding: VideoSearchRowBinding) : super(binding.root) {
+    constructor(binding: VideoRowBinding) : super(binding.root) {
         videoRowBinding = binding
     }
 
-    constructor(binding: ChannelSearchRowBinding) : super(binding.root) {
+    constructor(binding: ChannelRowBinding) : super(binding.root) {
         channelRowBinding = binding
     }
 

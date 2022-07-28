@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.adapters.SubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
+import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
@@ -29,7 +29,7 @@ class SubscriptionsFragment : Fragment() {
 
     lateinit var token: String
     private var isLoaded = false
-    private var subscriptionAdapter: SubscriptionAdapter? = null
+    private var subscriptionAdapter: TrendingAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class SubscriptionsFragment : Fragment() {
             val grid = PreferenceHelper.getString(
                 PreferenceKeys.GRID_COLUMNS,
                 resources.getInteger(R.integer.grid_items).toString()
-            )!!
+            )
             binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
             fetchFeed(binding.subFeed, binding.subProgress)
 
@@ -85,20 +85,6 @@ class SubscriptionsFragment : Fragment() {
                     binding.subFeedContainer.visibility = View.VISIBLE
                 }
             }
-
-            binding.scrollviewSub.viewTreeObserver
-                .addOnScrollChangedListener {
-                    if (binding.scrollviewSub.getChildAt(0).bottom
-                        == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
-                    ) {
-                        // scroll view is at bottom
-                        if (isLoaded) {
-                            binding.subRefresh.isRefreshing = true
-                            subscriptionAdapter?.updateItems()
-                            binding.subRefresh.isRefreshing = false
-                        }
-                    }
-                }
         } else {
             binding.subRefresh.isEnabled = false
         }
@@ -120,9 +106,8 @@ class SubscriptionsFragment : Fragment() {
                     binding.subRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
-                    subscriptionAdapter = SubscriptionAdapter(response, childFragmentManager)
+                    subscriptionAdapter = TrendingAdapter(response, childFragmentManager)
                     feedRecView.adapter = subscriptionAdapter
-                    subscriptionAdapter?.updateItems()
                 } else {
                     runOnUiThread {
                         with(binding.boogh) {

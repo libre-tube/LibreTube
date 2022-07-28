@@ -14,23 +14,23 @@ import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 
 class TrendingAdapter(
-    private val videoFeed: List<StreamItem>,
+    private val streamItems: List<StreamItem>,
     private val childFragmentManager: FragmentManager
-) : RecyclerView.Adapter<TrendingViewHolder>() {
-    private val TAG = "TrendingAdapter"
+) : RecyclerView.Adapter<SubscriptionViewHolder>() {
+    private val TAG = "SubscriptionAdapter"
 
     override fun getItemCount(): Int {
-        return videoFeed.size
+        return streamItems.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
-        return TrendingViewHolder(binding)
+        return SubscriptionViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
-        val trending = videoFeed[position]
+    override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
+        val trending = streamItems[position]
         holder.binding.apply {
             textViewTitle.text = trending.title
             textViewChannel.text =
@@ -48,7 +48,6 @@ class TrendingAdapter(
             }
             ConnectionHelper.loadImage(trending.thumbnail, thumbnail)
             ConnectionHelper.loadImage(trending.uploaderAvatar, channelImage)
-
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, trending.url)
             }
@@ -62,4 +61,5 @@ class TrendingAdapter(
     }
 }
 
-class TrendingViewHolder(val binding: TrendingRowBinding) : RecyclerView.ViewHolder(binding.root)
+class SubscriptionViewHolder(val binding: TrendingRowBinding) :
+    RecyclerView.ViewHolder(binding.root)
