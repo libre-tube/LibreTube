@@ -6,62 +6,105 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Constraints
-import androidx.work.CoroutineWorker
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
+import com.github.libretube.preferences.PreferenceKeys
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
-import java.util.stream.Stream
 
 object NotificationHelper {
     fun enqueueWork(
         context: Context
     ) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val myWorkBuilder = PeriodicWorkRequest.Builder(
-            NotificationWorker::class.java,
-            1,
-            TimeUnit.SECONDS
+        PreferenceHelper.setContext(context)
+        val notificationsEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.NOTIFICATION_ENABLED,
+            true
         )
-            .setConstraints(constraints)
 
-        val myWork = myWorkBuilder.build()
-        WorkManager.getInstance(context)
-            .enqueueUniquePeriodicWork(
-                "NotificationService",
-                ExistingPeriodicWorkPolicy.REPLACE,
-                myWork
+        val checkingFrequency = PreferenceHelper.getString(
+            PreferenceKeys.CHECKING_FREQUENCY,
+            "60"
+        ).toLong()
+
+        val uniqueWorkName = "NotificationService"
+
+        if (notificationsEnabled) {
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+
+            val myWorkBuilder = PeriodicWorkRequest.Builder(
+                NotificationWorker::class.java,
+                checkingFrequency,
+                TimeUnit.MINUTES
             )
+                .setConstraints(constraints)
+
+            val myWork = myWorkBuilder.build()
+            WorkManager.getInstance(context)
+                .enqueueUniquePeriodicWork(
+                    uniqueWorkName,
+                    ExistingPeriodicWorkPolicy.REPLACE,
+                    myWork
+                )
+        } else {
+            WorkManager.getInstance(context)
+                .cancelUniqueWork(uniqueWorkName)
+        }
     }
 
+    /**
+     * check whether new streams are available in subscriptions
+     */
     fun checkForNewStreams(context: Context) {
         val token = PreferenceHelper.getToken()
-        var response: List<StreamItem>
         runBlocking {
             val task = async {
                 RetrofitInstance.authApi.getFeed(token)
             }
-            response = task.await()
-      }
-        createNotification(
-            context,
-            response[0].title.toString(),
-            response[0].uploaderName.toString()
-        )
+            val videoFeed = task.await()
+            val lastSeenStreamId = PreferenceHelper.getLatestVideoId()
+            val latestFeedStreamId = videoFeed[0].url?.replace("/watch?v=", "")
+            // first time notifications enabled
+            if (lastSeenStreamId == "") PreferenceHelper.setLatestVideoId(lastSeenStreamId)
+            else if (lastSeenStreamId != latestFeedStreamId) {
+                // get the index of the last user-seen video
+                var newStreamIndex = -1
+                videoFeed.forEachIndexed { index, stream ->
+                    if (stream.url?.replace("/watch?v=", "") == lastSeenStreamId) {
+                        newStreamIndex = index
+                    }
+                }
+                val (title, description) = when (newStreamIndex) {
+                    // only one new stream available
+                    1 -> {
+                        Pair(videoFeed[0].title, videoFeed[0].uploaderName)
+                    }
+                    else -> {
+                        Pair(
+                            // return the amount of new streams as title
+                            context.getString(
+                                R.string.new_streams_count,
+                                newStreamIndex.toString()
+                            ),
+                            // return the first few uploader as description
+                            context.getString(
+                                R.string.new_streams_by,
+                                videoFeed[0].uploaderName + ", " + videoFeed[1].uploaderName + ", " + videoFeed[2].uploaderName
+                            )
+                        )
+                    }
+                }
+                createNotification(context, title!!, description!!)
+            }
+        }
     }
 
     fun createNotification(context: Context, title: String, description: String) {
@@ -82,7 +125,5 @@ object NotificationHelper {
             // notificationId is a unique int for each notification that you must define
             notify(2, builder.build())
         }
-
     }
-
 }

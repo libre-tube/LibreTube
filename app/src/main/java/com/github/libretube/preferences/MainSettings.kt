@@ -62,6 +62,13 @@ class MainSettings : PreferenceFragmentCompat() {
             true
         }
 
+        val notifications = findPreference<Preference>("notifications")
+        notifications?.setOnPreferenceClickListener {
+            val newFragment = NotificationSettings()
+            navigateToSettingsFragment(newFragment)
+            true
+        }
+
         val advanced = findPreference<Preference>("advanced")
         advanced?.setOnPreferenceClickListener {
             val newFragment = AdvancedSettings()

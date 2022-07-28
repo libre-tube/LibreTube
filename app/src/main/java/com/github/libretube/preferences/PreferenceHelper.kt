@@ -246,6 +246,14 @@ object PreferenceHelper {
         }
     }
 
+    fun setLatestVideoId(videoId: String) {
+        setString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
+    }
+
+    fun getLatestVideoId(): String {
+        return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
+    }
+
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }

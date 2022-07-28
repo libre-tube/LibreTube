@@ -6,16 +6,8 @@ import android.app.NotificationManager
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.NotificationHelper
-import com.github.libretube.util.NotificationWorker
-import java.util.concurrent.TimeUnit
-
 
 class MyApp : Application() {
     override fun onCreate() {

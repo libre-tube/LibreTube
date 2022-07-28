@@ -265,4 +265,10 @@
     <string name="best_quality">Best quality</string>
     <string name="worst_quality">Worst quality</string>
     <string name="default_subtitle_language">Default subtitle language</string>
+    <string name="notifications">Notifications</string>
+    <string name="notify_new_streams">New streams notifications</string>
+    <string name="notify_new_streams_summary">Notify when new streams from subscriptions are available</string>
+    <string name="checking_frequency">Checking frequency</string>
+    <string name="new_streams_count">%1$s new streams are available</string>
+    <string name="new_streams_by">New streams by %1$s …</string>
 </resources>
