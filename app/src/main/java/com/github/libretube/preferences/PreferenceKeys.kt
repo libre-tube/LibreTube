@@ -66,6 +66,12 @@ object PreferenceKeys {
     const val DOWNLOAD_FOLDER = "download_folder"
 
     /**
+     * Notifications
+     */
+    const val NOTIFICATION_ENABLED = "notification_toggle"
+    const val NOTIFICATION_DELAY = "notifcation_delay"
+
+    /**
      * Advanced
      */
     const val DATA_SAVER_MODE = "data_saver_mode"

@@ -38,7 +38,7 @@ class MyApp : Application() {
         StrictMode.setVmPolicy(builder.build())
 
         /**
-         * initialize the notification
+         * initialize the notification listener in the background
          */
         NotificationHelper.enqueueWork(this)
     }
