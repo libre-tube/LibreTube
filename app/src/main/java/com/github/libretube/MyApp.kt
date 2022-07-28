@@ -6,7 +6,16 @@ import android.app.NotificationManager
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.NotificationHelper
+import com.github.libretube.util.NotificationWorker
+import java.util.concurrent.TimeUnit
+
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -27,6 +36,11 @@ class MyApp : Application() {
          */
         val builder = VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
+
+        /**
+         * initialize the notification
+         */
+        NotificationHelper.enqueueWork(this)
     }
 
     /**
@@ -36,7 +50,7 @@ class MyApp : Application() {
         createNotificationChannel(
             "download_service",
             "Download Service",
-            "DownloadService",
+            "Shows a notification when downloading media.",
             NotificationManager.IMPORTANCE_NONE
         )
         createNotificationChannel(
@@ -44,6 +58,12 @@ class MyApp : Application() {
             "Background Mode",
             "Shows a notification with buttons to control the audio player",
             NotificationManager.IMPORTANCE_LOW
+        )
+        createNotificationChannel(
+            "notification_worker",
+            "Notification Worker",
+            "Shows a notification when new streams are available.",
+            NotificationManager.IMPORTANCE_DEFAULT
         )
     }
 

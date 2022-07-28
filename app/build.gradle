@@ -68,6 +68,7 @@ dependencies {
     implementation libs.androidx.navigation.fragment
     implementation libs.androidx.navigation.ui
     implementation libs.androidx.preference
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
 
     androidTestImplementation libs.androidx.test.junit
     androidTestImplementation libs.androidx.test.espressoCore
