@@ -1,17 +1,13 @@
 package com.github.libretube.adapters
 
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.WatchHistoryItem
-import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.setWatchProgressLength
