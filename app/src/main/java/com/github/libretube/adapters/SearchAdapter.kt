@@ -19,6 +19,7 @@ import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
+import com.github.libretube.util.setWatchProgressLength
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -101,8 +102,8 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
+            val videoId = item.url!!.replace("/watch?v=", "")
             root.setOnLongClickListener {
-                val videoId = item.url!!.replace("/watch?v=", "")
                 VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, "VideoOptionsDialog")
                 true
@@ -110,6 +111,7 @@ class SearchAdapter(
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
+            watchProgress.setWatchProgressLength(videoId, item.duration!!)
         }
     }
 
