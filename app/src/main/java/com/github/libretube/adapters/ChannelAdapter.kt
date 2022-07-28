@@ -2,7 +2,6 @@ package com.github.libretube.adapters
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +36,6 @@ class ChannelAdapter(
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.binding.apply {
-            channelImage.visibility = View.GONE
-            channelName.visibility = View.GONE
             videoTitle.text = trending.title
             videoInfo.text =
                 trending.views.formatShort() + " • " +
