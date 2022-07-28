@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.WatchHistoryRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.util.ConnectionHelper
@@ -26,7 +26,7 @@ class WatchHistoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
+        val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return WatchHistoryViewHolder(binding)
     }
 
@@ -35,7 +35,7 @@ class WatchHistoryAdapter(
         holder.binding.apply {
             videoTitle.text = video.title
             channelName.text = video.uploader
-            uploadDate.text = video.uploadDate
+            videoInfo.text = video.uploadDate
             thumbnailDuration.text = DateUtils.formatElapsedTime(video.duration?.toLong()!!)
             ConnectionHelper.loadImage(video.thumbnailUrl, thumbnail)
             ConnectionHelper.loadImage(video.uploaderAvatar, channelImage)
@@ -60,5 +60,5 @@ class WatchHistoryAdapter(
     }
 }
 
-class WatchHistoryViewHolder(val binding: WatchHistoryRowBinding) :
+class WatchHistoryViewHolder(val binding: VideoRowBinding) :
     RecyclerView.ViewHolder(binding.root)
