@@ -66,6 +66,7 @@ class SearchFragment : Fragment() {
 
         binding.clearSearchImageView.setOnClickListener {
             binding.autoCompleteTextView.text.clear()
+            binding.historyRecycler.visibility = View.GONE
             showHistory()
         }
 
