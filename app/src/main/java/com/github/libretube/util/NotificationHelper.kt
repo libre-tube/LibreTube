@@ -42,8 +42,8 @@ object NotificationHelper {
 
             val myWorkBuilder = PeriodicWorkRequest.Builder(
                 NotificationWorker::class.java,
-                1,
-                TimeUnit.SECONDS
+                checkingFrequency,
+                TimeUnit.MINUTES
             )
                 .setConstraints(constraints)
 
@@ -70,6 +70,7 @@ object NotificationHelper {
             val task = async {
                 RetrofitInstance.authApi.getFeed(token)
             }
+            // fetch the users feed
             val videoFeed = try {
                 task.await()
             } catch (e: Exception) {
@@ -87,6 +88,7 @@ object NotificationHelper {
                         newStreamIndex = index
                     }
                 }
+                if (newStreamIndex == -1) return@runBlocking
                 val (title, description) = when (newStreamIndex) {
                     // only one new stream available
                     1 -> {
