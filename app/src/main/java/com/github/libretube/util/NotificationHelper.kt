@@ -22,6 +22,7 @@ object NotificationHelper {
     fun enqueueWork(
         context: Context
     ) {
+        // get the notification preferences
         PreferenceHelper.setContext(context)
         val notificationsEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.NOTIFICATION_ENABLED,
@@ -36,23 +37,27 @@ object NotificationHelper {
         val uniqueWorkName = "NotificationService"
 
         if (notificationsEnabled) {
+            // requirements for the work
+            // here: network needed to run the task
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()
 
-            val myWorkBuilder = PeriodicWorkRequest.Builder(
+            // create the worker
+            val notificationWorker = PeriodicWorkRequest.Builder(
                 NotificationWorker::class.java,
                 checkingFrequency,
                 TimeUnit.MINUTES
             )
                 .setConstraints(constraints)
+                .build()
 
-            val myWork = myWorkBuilder.build()
+            // enqueue the task
             WorkManager.getInstance(context)
                 .enqueueUniquePeriodicWork(
                     uniqueWorkName,
                     ExistingPeriodicWorkPolicy.REPLACE,
-                    myWork
+                    notificationWorker
                 )
         } else {
             WorkManager.getInstance(context)
@@ -76,8 +81,10 @@ object NotificationHelper {
             } catch (e: Exception) {
                 return@runBlocking
             }
+
             val lastSeenStreamId = PreferenceHelper.getLatestVideoId()
             val latestFeedStreamId = videoFeed[0].url?.replace("/watch?v=", "")
+
             // first time notifications enabled
             if (lastSeenStreamId == "") PreferenceHelper.setLatestVideoId(lastSeenStreamId)
             else if (lastSeenStreamId != latestFeedStreamId) {
@@ -109,6 +116,8 @@ object NotificationHelper {
                         )
                     }
                 }
+                // save the id of the last recent video for the next time it's running
+                PreferenceHelper.setLatestVideoId(videoFeed[0].url?.replace("/watch?v=", "")!!)
                 createNotification(context, title!!, description!!)
             }
         }
