@@ -16,6 +16,7 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.setWatchProgressLength
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,13 +52,13 @@ class PlaylistAdapter(
         holder.binding.apply {
             playlistTitle.text = streamItem.title
             playlistDescription.text = streamItem.uploaderName
-            playlistDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
+            thumbnailDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
             ConnectionHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
+            val videoId = streamItem.url!!.replace("/watch?v=", "")
             root.setOnLongClickListener {
-                val videoId = streamItem.url!!.replace("/watch?v=", "")
                 VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, "VideoOptionsDialog")
                 true
@@ -70,6 +71,7 @@ class PlaylistAdapter(
                     removeFromPlaylist(token, position)
                 }
             }
+            watchProgress.setWatchProgressLength(videoId, streamItem.duration!!)
         }
     }
 
