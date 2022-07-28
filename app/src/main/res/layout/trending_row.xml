@@ -73,22 +73,22 @@
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="Title"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
         app:layout_constraintStart_toEndOf="@+id/channel_image"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard" />
+        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
+        tools:text="Title" />
 
     <TextView
         android:id="@+id/textView_channel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
-        android:text="Channel Name"
         app:layout_constraintEnd_toEndOf="@+id/textView_title"
         app:layout_constraintStart_toStartOf="@+id/textView_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView_title" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_title"
+        tools:text="Channel Name" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/channel_image"
