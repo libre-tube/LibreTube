@@ -7,7 +7,9 @@ import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.NotificationHelper
+import com.github.libretube.util.RetrofitInstance
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -30,9 +32,32 @@ class MyApp : Application() {
         StrictMode.setVmPolicy(builder.build())
 
         /**
+         * set the api and the auth api url
+         */
+        setRetrofitApiUrls()
+
+        /**
          * initialize the notification listener in the background
          */
         NotificationHelper.enqueueWork(this)
+    }
+
+    /**
+     * set the api urls needed for the [RetrofitInstance]
+     */
+    private fun setRetrofitApiUrls() {
+        RetrofitInstance.url =
+            PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
+        // set auth instance
+        RetrofitInstance.authUrl =
+            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
+                PreferenceHelper.getString(
+                    PreferenceKeys.AUTH_INSTANCE,
+                    PIPED_API_URL
+                )
+            } else {
+                RetrofitInstance.url
+            }
     }
 
     /**

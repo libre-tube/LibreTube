@@ -1,7 +1,6 @@
 package com.github.libretube.util
 
 import android.content.Context
-import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
@@ -9,9 +8,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) : Wo
     private val TAG = "NotificationWorker"
 
     override fun doWork(): Result {
-        Log.e(TAG, "working")
-        NotificationHelper.checkForNewStreams(applicationContext)
         NotificationHelper.enqueueWork(applicationContext)
+        NotificationHelper.checkForNewStreams(applicationContext)
         return Result.success()
     }
 }

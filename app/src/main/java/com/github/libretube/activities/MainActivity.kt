@@ -23,7 +23,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import coil.ImageLoader
 import com.github.libretube.Globals
-import com.github.libretube.PIPED_API_URL
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
@@ -33,7 +32,6 @@ import com.github.libretube.services.ClosingService
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.navigation.NavigationBarView
@@ -69,19 +67,6 @@ class MainActivity : AppCompatActivity() {
         ConnectionHelper.imageLoader = ImageLoader.Builder(this.applicationContext)
             .callFactory(CronetHelper.callFactory)
             .build()
-
-        RetrofitInstance.url =
-            PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)!!
-        // set auth instance
-        RetrofitInstance.authUrl =
-            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
-                PreferenceHelper.getString(
-                    PreferenceKeys.AUTH_INSTANCE,
-                    PIPED_API_URL
-                )!!
-            } else {
-                RetrofitInstance.url
-            }
 
         // save whether the data saver mode is enabled
         Globals.DATA_SAVER_MODE_ENABLED = PreferenceHelper.getBoolean(

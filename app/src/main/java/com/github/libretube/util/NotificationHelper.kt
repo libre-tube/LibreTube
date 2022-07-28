@@ -42,8 +42,8 @@ object NotificationHelper {
 
             val myWorkBuilder = PeriodicWorkRequest.Builder(
                 NotificationWorker::class.java,
-                checkingFrequency,
-                TimeUnit.MINUTES
+                1,
+                TimeUnit.SECONDS
             )
                 .setConstraints(constraints)
 
@@ -65,11 +65,16 @@ object NotificationHelper {
      */
     fun checkForNewStreams(context: Context) {
         val token = PreferenceHelper.getToken()
+        if (token == "") return
         runBlocking {
             val task = async {
                 RetrofitInstance.authApi.getFeed(token)
             }
-            val videoFeed = task.await()
+            val videoFeed = try {
+                task.await()
+            } catch (e: Exception) {
+                return@runBlocking
+            }
             val lastSeenStreamId = PreferenceHelper.getLatestVideoId()
             val latestFeedStreamId = videoFeed[0].url?.replace("/watch?v=", "")
             // first time notifications enabled
@@ -107,6 +112,9 @@ object NotificationHelper {
         }
     }
 
+    /**
+     * Notification that is created when new streams are found
+     */
     fun createNotification(context: Context, title: String, description: String) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
