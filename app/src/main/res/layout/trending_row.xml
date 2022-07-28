@@ -48,7 +48,6 @@
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="2dp"
                     android:textColor="@color/duration_text_color"
-                    android:textSize="11sp"
                     tools:text="05:36" />
 
             </androidx.cardview.widget.CardView>
