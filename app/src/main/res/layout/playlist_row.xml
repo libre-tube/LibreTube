@@ -80,20 +80,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/delete_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Playlist Name" />
 
     <TextView
         android:id="@+id/playlist_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/delete_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_search_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
+        app:layout_constraintTop_toBottomOf="@+id/playlist_title"
+        tools:text="Description" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/delete_playlist"

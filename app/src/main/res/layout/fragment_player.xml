@@ -41,8 +41,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
-                    android:text="Video Title"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:text="Video Title" />
 
 
                 <ImageView
@@ -68,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="10M views    2 days ago " />
+                    tools:text="10M views    2 days ago " />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:text="4.2K" />
+                        tools:text="4.2K" />
 
                     <ImageView
                         android:layout_width="12dp"
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:text="1.3K" />
+                        tools:text="1.3K" />
 
                 </LinearLayout>
 
@@ -275,7 +275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:drawableLeft="@drawable/ic_bell"
+                    android:drawableStart="@drawable/ic_bell"
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
