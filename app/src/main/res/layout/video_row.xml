@@ -35,29 +35,42 @@
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="3dp"
-            app:cardBackgroundColor="@color/duration_background_color"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="0dp">
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/thumbnail_duration"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="6dp"
-                android:paddingTop="2dp"
-                android:paddingEnd="6dp"
-                android:paddingBottom="2dp"
-                android:textColor="@color/duration_text_color"
-                android:textSize="11sp"
-                tools:text="05:36" />
+                android:layout_gravity="end"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardBackgroundColor="@color/duration_background_color"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
 
-        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/thumbnail_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:textColor="@color/duration_text_color"
+                    android:textSize="11sp"
+                    tools:text="05:36" />
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/watch_progress"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_gravity="bottom"
+                android:background="@android:color/holo_red_dark" />
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

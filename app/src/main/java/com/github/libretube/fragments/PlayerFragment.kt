@@ -853,6 +853,7 @@ class PlayerFragment : Fragment() {
     private fun playNextVideo() {
         // check whether there is a new video in the queue
         // by making sure that the next and the current video aren't the same
+        saveWatchPosition()
         if (videoId != nextStreamId) {
             // save the id of the next stream as videoId and load the next video
             videoId = nextStreamId

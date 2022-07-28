@@ -10,6 +10,7 @@ import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.setWatchProgressLength
 
 class WatchHistoryAdapter(
     private val watchHistory: MutableList<WatchHistoryItem>,
@@ -52,6 +53,8 @@ class WatchHistoryAdapter(
                     .show(childFragmentManager, "VideoOptionsDialog")
                 true
             }
+
+            watchProgress.setWatchProgressLength(video.videoId!!, video.duration.toLong())
         }
     }
 
