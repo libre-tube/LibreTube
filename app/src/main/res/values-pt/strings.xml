@@ -221,7 +221,6 @@
     <string name="downloading">A descarregar…</string>
     <string name="empty_instance">Preencha o nome e a URL da API.</string>
     <string name="category_music_offtopic">Música: Secção não musical</string>
-    <string name="category_music_offtopic_description"></string>
     <string name="category_preview">Pré-visualização/Recapitalização</string>
     <string name="invalid_url">Por favor, digite uma URL que funcione</string>
     <string name="version">Versão %1$s</string>
