@@ -15,6 +15,7 @@ object PreferenceHelper {
     private lateinit var prefContext: Context
     private lateinit var settings: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+    val mapper = ObjectMapper()
 
     /**
      * set the context that is being used to access the shared preferences
@@ -62,8 +63,6 @@ object PreferenceHelper {
     }
 
     fun saveCustomInstance(customInstance: CustomInstance) {
-        val mapper = ObjectMapper()
-
         val customInstancesList = getCustomInstances()
         customInstancesList += customInstance
 
@@ -72,8 +71,6 @@ object PreferenceHelper {
     }
 
     fun getCustomInstances(): ArrayList<CustomInstance> {
-        val mapper = ObjectMapper()
-
         val json: String = settings.getString("customInstances", "")!!
         val type = mapper.typeFactory.constructCollectionType(
             List::class.java,
@@ -163,8 +160,6 @@ object PreferenceHelper {
     }
 
     fun getWatchHistory(): ArrayList<WatchHistoryItem> {
-        val mapper = ObjectMapper()
-
         val json: String = settings.getString("watch_history", "")!!
         val type = mapper.typeFactory.constructCollectionType(
             List::class.java,
@@ -191,7 +186,6 @@ object PreferenceHelper {
 
         watchPositions += watchPositionItem
 
-        val mapper = ObjectMapper()
         val json = mapper.writeValueAsString(watchPositions)
         editor.putString("watch_positions", json).commit()
     }
@@ -206,14 +200,11 @@ object PreferenceHelper {
 
         if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
 
-        val mapper = ObjectMapper()
         val json = mapper.writeValueAsString(watchPositions)
         editor.putString("watch_positions", json).commit()
     }
 
     fun getWatchPositions(): ArrayList<WatchPosition> {
-        val mapper = ObjectMapper()
-
         val json: String = settings.getString("watch_positions", "")!!
         val type = mapper.typeFactory.constructCollectionType(
             List::class.java,
@@ -225,6 +216,14 @@ object PreferenceHelper {
         } catch (e: Exception) {
             arrayListOf()
         }
+    }
+
+    fun setLatestVideoId(videoId: String) {
+        setString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
+    }
+
+    fun getLatestVideoId(): String {
+        return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {

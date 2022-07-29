@@ -66,6 +66,13 @@ object PreferenceKeys {
     const val DOWNLOAD_FOLDER = "download_folder"
 
     /**
+     * Notifications
+     */
+    const val NOTIFICATION_ENABLED = "notification_toggle"
+    const val CHECKING_FREQUENCY = "checking_frequency"
+    const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
+
+    /**
      * Advanced
      */
     const val DATA_SAVER_MODE = "data_saver_mode"

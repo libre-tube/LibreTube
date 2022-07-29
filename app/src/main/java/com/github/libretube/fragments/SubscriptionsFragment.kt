@@ -158,6 +158,8 @@ class SubscriptionsFragment : Fragment() {
                     binding.subRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
+                    // save the last recent video to the prefs for the notification worker
+                    PreferenceHelper.setLatestVideoId(response[0].url.toString().replace("/watch?v=", ""))
                     channelRecView.adapter = SubscriptionChannelAdapter(response.toMutableList())
                 } else {
                     Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()

@@ -760,4 +760,22 @@
         <item>worst</item>
     </string-array>
 
+    <string-array name="checkingFrequency">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+        <item>2 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+    </string-array>
+
+    <string-array name="checkingFrequencyValues">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>360</item>
+        <item>720</item>
+    </string-array>
+
 </resources>
