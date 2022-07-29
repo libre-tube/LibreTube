@@ -600,7 +600,6 @@ class PlayerFragment : Fragment() {
             }
             mainActivity.requestedOrientation = orientation
         }
-        binding.player.setDoubleTapOverlayLayoutParams(90)
 
         Globals.IS_FULL_SCREEN = true
     }

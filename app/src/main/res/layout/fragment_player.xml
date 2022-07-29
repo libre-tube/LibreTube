@@ -377,7 +377,9 @@
         <com.github.libretube.views.DoubleTapOverlay
             android:id="@+id/doubleTapOverlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
 
     </com.github.libretube.views.CustomExoPlayerView>
 

@@ -54,26 +54,6 @@ internal class CustomExoPlayerView(
         setOnClickListener(doubleTouchListener)
     }
 
-    override fun hideController() {
-        super.hideController()
-        setDoubleTapOverlayLayoutParams(0)
-    }
-
-    override fun showController() {
-        setDoubleTapOverlayLayoutParams(90)
-        super.showController()
-    }
-
-    // set the top and bottom margin of the double tap overlay
-    fun setDoubleTapOverlayLayoutParams(margin: Int) {
-        val dpMargin = resources?.displayMetrics?.density!!.toInt() * margin
-        val doubleTapOverlay = binding.root.findViewById<DoubleTapOverlay>(R.id.doubleTapOverlay)
-        val params = doubleTapOverlay.layoutParams as MarginLayoutParams
-        params.topMargin = dpMargin
-        params.bottomMargin = dpMargin
-        doubleTapOverlay.layoutParams = params
-    }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         // save the x position of the touch event
         xPos = event.x
