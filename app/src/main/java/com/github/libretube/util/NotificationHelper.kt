@@ -36,7 +36,8 @@ object NotificationHelper {
 
         val uniqueWorkName = "NotificationService"
 
-        if (notificationsEnabled) {
+        // schedule the work manager request if logged in and notifications enabled
+        if (notificationsEnabled && PreferenceHelper.getToken() != "") {
             // requirements for the work
             // here: network needed to run the task
             val constraints = Constraints.Builder()
@@ -60,6 +61,7 @@ object NotificationHelper {
                     notificationWorker
                 )
         } else {
+            // cancel the work if notifications are disabled or the user is not logged in
             WorkManager.getInstance(context)
                 .cancelUniqueWork(uniqueWorkName)
         }
@@ -68,9 +70,10 @@ object NotificationHelper {
     /**
      * check whether new streams are available in subscriptions
      */
-    fun checkForNewStreams(context: Context) {
+    fun checkForNewStreams(context: Context): Boolean {
+        var result = true
+
         val token = PreferenceHelper.getToken()
-        if (token == "") return
         runBlocking {
             val task = async {
                 RetrofitInstance.authApi.getFeed(token)
@@ -79,6 +82,7 @@ object NotificationHelper {
             val videoFeed = try {
                 task.await()
             } catch (e: Exception) {
+                result = false
                 return@runBlocking
             }
 
@@ -121,6 +125,8 @@ object NotificationHelper {
                 createNotification(context, title!!, description!!)
             }
         }
+        // return whether the work succeeded
+        return result
     }
 
     /**
