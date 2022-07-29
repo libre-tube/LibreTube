@@ -51,13 +51,6 @@ class AppearanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val gridColumns = findPreference<ListPreference>(PreferenceKeys.GRID_COLUMNS)
-        gridColumns?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            true
-        }
-
         val labelVisibilityMode = findPreference<ListPreference>(PreferenceKeys.LABEL_VISIBILITY)
         labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
