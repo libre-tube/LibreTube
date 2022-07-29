@@ -2,7 +2,6 @@ package com.github.libretube.preferences
 
 import android.os.Bundle
 import androidx.preference.ListPreference
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
@@ -17,13 +16,6 @@ class GeneralSettings : PreferenceFragmentCompat() {
 
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.general))
-
-        val region = findPreference<Preference>("region")
-        region?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            true
-        }
 
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->

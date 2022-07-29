@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.WatchHistoryItem
+import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.setWatchProgressLength
@@ -19,15 +20,9 @@ class WatchHistoryAdapter(
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
     private val TAG = "WatchHistoryAdapter"
 
-    fun clear() {
-        val size = watchHistory.size
-        watchHistory.clear()
-        notifyItemRangeRemoved(0, size)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
+        val binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
         return WatchHistoryViewHolder(binding)
     }
 
@@ -43,6 +38,12 @@ class WatchHistoryAdapter(
 
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
+            }
+
+            deleteBTN.setOnClickListener {
+                PreferenceHelper.removeFromWatchHistory(video.videoId!!)
+                watchHistory.removeAt(position)
+                notifyItemRemoved(position)
             }
 
             root.setOnClickListener {
@@ -63,5 +64,5 @@ class WatchHistoryAdapter(
     }
 }
 
-class WatchHistoryViewHolder(val binding: VideoRowBinding) :
+class WatchHistoryViewHolder(val binding: WatchHistoryRowBinding) :
     RecyclerView.ViewHolder(binding.root)

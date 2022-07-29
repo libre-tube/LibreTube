@@ -2,28 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
     android:background="?android:attr/selectableItemBackground">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/thumbnailcard"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".45" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/thumbnail_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="10dp"
         app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:strokeWidth="0dp">
 
         <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,6 +58,7 @@
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="2dp"
                     android:textColor="@color/duration_text_color"
+                    android:textSize="11sp"
                     tools:text="05:36" />
 
             </androidx.cardview.widget.CardView>
@@ -55,49 +66,64 @@
             <View
                 android:id="@+id/watch_progress"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="4dp"
                 android:layout_gravity="bottom"
                 android:background="@android:color/holo_red_dark" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
-
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/textView_title"
+        android:id="@+id/video_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
-        app:layout_constraintStart_toEndOf="@+id/channel_image"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
-        tools:text="Title" />
+        app:layout_constraintEnd_toStartOf="@id/deleteBTN"
+        app:layout_constraintStart_toEndOf="@id/thumbnail_card"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_channel"
+        android:id="@+id/video_info"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView_title"
-        app:layout_constraintStart_toStartOf="@+id/textView_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView_title"
-        tools:text="Channel Name" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@id/deleteBTN"
+        app:layout_constraintStart_toEndOf="@id/thumbnail_card"
+        app:layout_constraintTop_toBottomOf="@id/video_title" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/channel_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/video_info" />
+
+    <TextView
+        android:id="@+id/channel_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/channel_image"
+        app:layout_constraintTop_toBottomOf="@id/video_info" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/deleteBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

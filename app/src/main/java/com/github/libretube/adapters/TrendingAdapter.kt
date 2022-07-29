@@ -16,12 +16,24 @@ import com.github.libretube.util.setWatchProgressLength
 
 class TrendingAdapter(
     private val streamItems: List<StreamItem>,
-    private val childFragmentManager: FragmentManager
+    private val childFragmentManager: FragmentManager,
+    private val showAllAtOne: Boolean = true
 ) : RecyclerView.Adapter<SubscriptionViewHolder>() {
-    private val TAG = "SubscriptionAdapter"
+    private val TAG = "TrendingAdapter"
+
+    var index = 10
 
     override fun getItemCount(): Int {
-        return streamItems.size
+        return if (showAllAtOne) streamItems.size
+        else index
+    }
+
+    fun updateItems() {
+        index += 10
+        if (index > streamItems.size) {
+            index = streamItems.size
+        }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {

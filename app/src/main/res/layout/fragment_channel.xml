@@ -39,8 +39,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -57,9 +57,9 @@
                             android:drawablePadding="3dip"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="Channel Name"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Channel Name" />
 
                     </LinearLayout>
 
@@ -78,14 +78,15 @@
                     style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_bell_small"
+                    android:drawableStart="@drawable/ic_bell_small"
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:stateListAnimator="@null"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="12sp"
                     app:cornerRadius="20dp"
-                    app:elevation="20dp" />
+                    app:elevation="20dp"
+                    tools:targetApi="m" />
 
             </LinearLayout>
 
@@ -96,8 +97,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
-                android:autoLink="web"
-                android:text="" />
+                android:autoLink="web" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

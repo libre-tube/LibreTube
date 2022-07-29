@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/selectableItemBackground"
     android:backgroundTint="@android:color/transparent"
     app:strokeWidth="0dp">
@@ -23,12 +24,12 @@
 
         <TextView
             android:id="@+id/chapter_title"
+            tools:text="Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="Title"
             android:textSize="13sp" />
 
     </LinearLayout>

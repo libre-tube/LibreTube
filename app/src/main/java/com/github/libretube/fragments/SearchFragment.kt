@@ -66,6 +66,7 @@ class SearchFragment : Fragment() {
 
         binding.clearSearchImageView.setOnClickListener {
             binding.autoCompleteTextView.text.clear()
+            binding.historyRecycler.adapter = null
             showHistory()
         }
 
@@ -128,7 +129,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s!! != "") {
+                if (s.toString() != "") {
                     binding.searchRecycler.adapter = null
 
                     binding.searchRecycler.viewTreeObserver
@@ -143,14 +144,15 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s!!.isEmpty()) {
+                    binding.historyRecycler.adapter = null
                     showHistory()
                 }
             }
         })
         binding.autoCompleteTextView.setOnEditorActionListener(
-            OnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    view?.let { context?.hideKeyboard(it) }
+            OnEditorActionListener { textView, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH && textView.text.toString() != "") {
+                    view.let { context?.hideKeyboard(it) }
                     binding.searchRecycler.visibility = VISIBLE
                     binding.historyRecycler.visibility = GONE
                     fetchSearch(binding.autoCompleteTextView.text.toString())

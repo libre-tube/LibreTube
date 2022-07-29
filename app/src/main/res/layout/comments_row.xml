@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground">
@@ -45,9 +46,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="Author and Time"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="Author and Time" />
 
                     <ImageView
                         android:id="@+id/verified_imageView"
@@ -74,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:autoLink="web"
-                    android:text="Comment Text" />
+                    tools:text="Comment Text" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,7 +94,7 @@
                         android:id="@+id/likes_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="LikeCount" />
+                        tools:text="LikeCount" />
 
                     <ImageView
                         android:id="@+id/hearted_imageView"

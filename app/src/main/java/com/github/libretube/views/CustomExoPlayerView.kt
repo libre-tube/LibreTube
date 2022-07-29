@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.github.libretube.R
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.OnDoubleTapEventListener
@@ -52,26 +51,6 @@ internal class CustomExoPlayerView(
         }
         // set the double click listener for rewind/forward
         setOnClickListener(doubleTouchListener)
-    }
-
-    override fun hideController() {
-        super.hideController()
-        setDoubleTapOverlayLayoutParams(0)
-    }
-
-    override fun showController() {
-        setDoubleTapOverlayLayoutParams(90)
-        super.showController()
-    }
-
-    // set the top and bottom margin of the double tap overlay
-    fun setDoubleTapOverlayLayoutParams(margin: Int) {
-        val dpMargin = resources?.displayMetrics?.density!!.toInt() * margin
-        val doubleTapOverlay = binding.root.findViewById<DoubleTapOverlay>(R.id.doubleTapOverlay)
-        val params = doubleTapOverlay.layoutParams as MarginLayoutParams
-        params.topMargin = dpMargin
-        params.bottomMargin = dpMargin
-        doubleTapOverlay.layoutParams = params
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

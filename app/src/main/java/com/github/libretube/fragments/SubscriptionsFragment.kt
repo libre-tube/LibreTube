@@ -85,6 +85,20 @@ class SubscriptionsFragment : Fragment() {
                     binding.subFeedContainer.visibility = View.VISIBLE
                 }
             }
+
+            binding.scrollviewSub.viewTreeObserver
+                .addOnScrollChangedListener {
+                    if (binding.scrollviewSub.getChildAt(0).bottom
+                        == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
+                    ) {
+                        // scroll view is at bottom
+                        if (isLoaded) {
+                            binding.subRefresh.isRefreshing = true
+                            subscriptionAdapter?.updateItems()
+                            binding.subRefresh.isRefreshing = false
+                        }
+                    }
+                }
         } else {
             binding.subRefresh.isEnabled = false
         }
@@ -106,7 +120,7 @@ class SubscriptionsFragment : Fragment() {
                     binding.subRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
-                    subscriptionAdapter = TrendingAdapter(response, childFragmentManager)
+                    subscriptionAdapter = TrendingAdapter(response, childFragmentManager, false)
                     feedRecView.adapter = subscriptionAdapter
                 } else {
                     runOnUiThread {

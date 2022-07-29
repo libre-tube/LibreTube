@@ -26,36 +26,8 @@ object PreferenceHelper {
         editor = settings.edit()
     }
 
-    fun setString(key: String?, value: String?) {
-        editor.putString(key, value)
-        editor.apply()
-    }
-
-    fun setInt(key: String?, value: Int) {
-        editor.putInt(key, value)
-        editor.apply()
-    }
-
-    fun setLong(key: String?, value: Long) {
-        editor.putLong(key, value)
-        editor.apply()
-    }
-
-    fun setBoolean(key: String?, value: Boolean) {
-        editor.putBoolean(key, value)
-        editor.apply()
-    }
-
     fun getString(key: String?, defValue: String?): String {
         return settings.getString(key, defValue)!!
-    }
-
-    fun getInt(key: String?, defValue: Int): Int {
-        return settings.getInt(key, defValue)
-    }
-
-    fun getLong(key: String?, defValue: Long): Long {
-        return settings.getLong(key, defValue)
     }
 
     fun getBoolean(key: String?, defValue: Boolean): Boolean {
@@ -150,6 +122,8 @@ object PreferenceHelper {
     }
 
     fun addToWatchHistory(videoId: String, streams: Streams) {
+        removeFromWatchHistory(videoId)
+
         val watchHistoryItem = WatchHistoryItem(
             videoId,
             streams.title,
@@ -161,19 +135,28 @@ object PreferenceHelper {
             streams.duration
         )
 
+        val mapper = ObjectMapper()
         val watchHistory = getWatchHistory()
-
-        // delete entries that have the same videoId
-        var indexToRemove: Int? = null
-        watchHistory.forEachIndexed { index, item ->
-            if (item.videoId == videoId) indexToRemove = index
-        }
-        if (indexToRemove != null) watchHistory.removeAt(indexToRemove!!)
 
         watchHistory += watchHistoryItem
 
         val json = mapper.writeValueAsString(watchHistory)
         editor.putString("watch_history", json).apply()
+    }
+
+    fun removeFromWatchHistory(videoId: String) {
+        val mapper = ObjectMapper()
+        val watchHistory = getWatchHistory()
+
+        var indexToRemove: Int? = null
+        watchHistory.forEachIndexed { index, item ->
+            if (item.videoId == videoId) indexToRemove = index
+        }
+        if (indexToRemove != null) {
+            watchHistory.removeAt(indexToRemove!!)
+            val json = mapper.writeValueAsString(watchHistory)
+            editor.putString("watch_history", json).commit()
+        }
     }
 
     fun getWatchHistory(): ArrayList<WatchHistoryItem> {

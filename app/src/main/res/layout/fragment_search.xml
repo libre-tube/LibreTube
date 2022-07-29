@@ -37,8 +37,8 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@android:color/transparent"
                     app:hintEnabled="false">
 
@@ -59,9 +59,9 @@
                     android:id="@+id/clearSearch_imageView"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
                     android:src="@drawable/ic_close" />
 
             </RelativeLayout>
@@ -71,259 +71,11 @@
             android:id="@+id/filterMenu_imageView"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentRight="true"
             android:layout_marginTop="25dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_weight="0"
             android:src="@drawable/ic_filter" />
     </LinearLayout>
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tv_genres"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="25dp"-->
-    <!--        android:text="Explore different genres"-->
-    <!--        android:textSize="16sp"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField" />-->
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/genres"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginLeft="10dp"-->
-    <!--        android:layout_marginTop="30dp"-->
-    <!--        android:layout_marginRight="10dp"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/tv_genres">-->
-
-    <!--        <com.google.android.material.card.MaterialCardView-->
-    <!--            android:id="@+id/btn_trending"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:layout_marginRight="20dp"-->
-    <!--            android:layout_weight=".5"-->
-    <!--            android:background="@android:color/transparent"-->
-    <!--            app:cardBackgroundColor="@android:color/transparent"-->
-    <!--            app:strokeWidth="0dp">-->
-
-    <!--            <RelativeLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:orientation="horizontal">-->
-
-    <!--                <ImageView-->
-    <!--                    android:id="@+id/iv_ic"-->
-    <!--                    android:layout_width="25dp"-->
-    <!--                    android:layout_height="25dp"-->
-    <!--                    android:layout_alignParentLeft="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginStart="5dp"-->
-    <!--                    android:layout_marginTop="5dp"-->
-    <!--                    android:layout_marginEnd="5dp"-->
-    <!--                    android:layout_marginBottom="5dp"-->
-    <!--                    android:src="@drawable/ic_hot" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginLeft="7dp"-->
-    <!--                    android:layout_toRightOf="@id/iv_ic"-->
-    <!--                    android:text="@string/trending"-->
-    <!--                    android:textSize="16sp" />-->
-
-    <!--                <ImageView-->
-    <!--                    android:layout_width="10dp"-->
-    <!--                    android:layout_height="10dp"-->
-    <!--                    android:layout_alignParentRight="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:src="@drawable/ic_arrow" />-->
-
-    <!--            </RelativeLayout>-->
-
-
-    <!--        </com.google.android.material.card.MaterialCardView>-->
-
-    <!--        <com.google.android.material.card.MaterialCardView-->
-    <!--            android:id="@+id/btn_live"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginLeft="30dp"-->
-    <!--            android:layout_marginRight="20dp"-->
-    <!--            android:layout_weight=".5"-->
-    <!--            android:background="@android:color/transparent"-->
-    <!--            app:cardBackgroundColor="@android:color/transparent"-->
-    <!--            app:strokeWidth="0dp">-->
-
-    <!--            <RelativeLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:orientation="horizontal">-->
-
-    <!--                <ImageView-->
-    <!--                    android:id="@+id/iv_ic2"-->
-    <!--                    android:layout_width="25dp"-->
-    <!--                    android:layout_height="25dp"-->
-    <!--                    android:layout_alignParentLeft="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginStart="5dp"-->
-    <!--                    android:layout_marginTop="5dp"-->
-    <!--                    android:layout_marginEnd="5dp"-->
-    <!--                    android:layout_marginBottom="5dp"-->
-    <!--                    android:src="@drawable/ic_live" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginLeft="7dp"-->
-    <!--                    android:layout_toRightOf="@id/iv_ic2"-->
-    <!--                    android:text="@string/live"-->
-    <!--                    android:textSize="16sp" />-->
-
-    <!--                <ImageView-->
-    <!--                    android:layout_width="10dp"-->
-    <!--                    android:layout_height="10dp"-->
-    <!--                    android:layout_alignParentRight="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:src="@drawable/ic_arrow" />-->
-
-    <!--            </RelativeLayout>-->
-
-
-    <!--        </com.google.android.material.card.MaterialCardView>-->
-
-    <!--    </LinearLayout>-->
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/genres2"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginLeft="10dp"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:layout_marginRight="10dp"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/genres">-->
-
-    <!--        <com.google.android.material.card.MaterialCardView-->
-    <!--            android:id="@+id/btn_music"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:layout_marginRight="20dp"-->
-    <!--            android:layout_weight=".5"-->
-    <!--            android:background="@android:color/transparent"-->
-    <!--            app:cardBackgroundColor="@android:color/transparent"-->
-    <!--            app:strokeWidth="0dp">-->
-
-    <!--            <RelativeLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:orientation="horizontal">-->
-
-    <!--                <ImageView-->
-    <!--                    android:id="@+id/iv_ic3"-->
-    <!--                    android:layout_width="25dp"-->
-    <!--                    android:layout_height="25dp"-->
-    <!--                    android:layout_alignParentLeft="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginStart="5dp"-->
-    <!--                    android:layout_marginTop="5dp"-->
-    <!--                    android:layout_marginEnd="5dp"-->
-    <!--                    android:layout_marginBottom="5dp"-->
-    <!--                    android:src="@drawable/ic_music" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginLeft="7dp"-->
-    <!--                    android:layout_toRightOf="@id/iv_ic3"-->
-    <!--                    android:text="@string/music"-->
-    <!--                    android:textSize="16sp" />-->
-
-    <!--                <ImageView-->
-    <!--                    android:layout_width="10dp"-->
-    <!--                    android:layout_height="10dp"-->
-    <!--                    android:layout_alignParentRight="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:src="@drawable/ic_arrow" />-->
-
-    <!--            </RelativeLayout>-->
-
-
-    <!--        </com.google.android.material.card.MaterialCardView>-->
-
-    <!--        <com.google.android.material.card.MaterialCardView-->
-    <!--            android:id="@+id/btn_films"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginLeft="30dp"-->
-    <!--            android:layout_marginRight="20dp"-->
-    <!--            android:layout_weight=".5"-->
-    <!--            android:background="@android:color/transparent"-->
-    <!--            app:cardBackgroundColor="@android:color/transparent"-->
-    <!--            app:strokeWidth="0dp">-->
-
-    <!--            <RelativeLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:orientation="horizontal">-->
-
-    <!--                <ImageView-->
-    <!--                    android:id="@+id/iv_ic4"-->
-    <!--                    android:layout_width="25dp"-->
-    <!--                    android:layout_height="25dp"-->
-    <!--                    android:layout_alignParentLeft="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginStart="5dp"-->
-    <!--                    android:layout_marginTop="5dp"-->
-    <!--                    android:layout_marginEnd="5dp"-->
-    <!--                    android:layout_marginBottom="5dp"-->
-    <!--                    android:src="@drawable/ic_film" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:layout_marginLeft="7dp"-->
-    <!--                    android:layout_toRightOf="@id/iv_ic4"-->
-    <!--                    android:text="@string/film"-->
-    <!--                    android:textSize="16sp" />-->
-
-    <!--                <ImageView-->
-    <!--                    android:layout_width="10dp"-->
-    <!--                    android:layout_height="10dp"-->
-    <!--                    android:layout_alignParentRight="true"-->
-    <!--                    android:layout_centerVertical="true"-->
-    <!--                    android:src="@drawable/ic_arrow" />-->
-
-    <!--            </RelativeLayout>-->
-
-
-    <!--        </com.google.android.material.card.MaterialCardView>-->
-
-    <!--    </LinearLayout>-->
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tv_history"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="25dp"-->
-    <!--        android:text="@string/history"-->
-    <!--        android:textSize="14sp"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"-->
-    <!--        android:visibility="gone"/>-->
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler"
