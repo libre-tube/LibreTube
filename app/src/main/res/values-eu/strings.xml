@@ -189,7 +189,7 @@
     <string name="no_audio">Audiorik gabe</string>
     <string name="audio">Audioa</string>
     <string name="video">Bideoa</string>
-    <string name="downloading">Deskargatzen</string>
+    <string name="downloading">Deskargatzen …</string>
     <string name="hideTrendingPage">Ezkutatu joera-orria</string>
     <string name="instance_frontend_url">Instantziaren frontend-erako URL-a</string>
     <string name="quality">Kalitatea</string>
@@ -255,4 +255,14 @@
     <string name="watch_history_summary">Gailuan ikusitako bideoen jarraipena egitea</string>
     <string name="watch_positions_title">Bistaratzeen posizioak</string>
     <string name="captions">Azpitituluak</string>
+    <string name="best_quality">Kalitaterik onena</string>
+    <string name="worst_quality">Kalitaterik txarrena</string>
+    <string name="default_subtitle_language">Azpitituluen hizkuntza lehenetsia</string>
+    <string name="playerAudioFormat">Erreproduzitzailearen audio formatua</string>
+    <string name="playerAudioQuality">Audioaren kalitatea</string>
+    <string name="general">Orokorra</string>
+    <string name="general_summary">Hizkuntza, eskualdea</string>
+    <string name="playingOnBackground">Atzeko planoan erreproduzitzen…</string>
+    <string name="caption_settings">Azpitituluen ezarpenak</string>
+    <string name="downloading_apk">Apk deskargatzen …</string>
 </resources>

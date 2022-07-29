@@ -167,7 +167,7 @@
     <string name="clear_customInstances">删除所有自定义实例</string>
     <string name="invalid_url">请输入有效的URL</string>
     <string name="related_streams">相关内容</string>
-    <string name="related_streams_summary">在您正在观看的内容旁边显示相关的内容。</string>
+    <string name="related_streams_summary">在您正在观看的内容旁边显示相关音视频流。</string>
     <string name="customInstance_summary">添加自定义实例（后果自负）</string>
     <string name="instance_name">实例名称</string>
     <string name="version">当前版本 %1$s</string>
@@ -265,4 +265,12 @@
     <string name="best_quality">最佳</string>
     <string name="worst_quality">最差</string>
     <string name="default_subtitle_language">默认字幕语言</string>
+    <string name="irreversible">你确定吗？此操作无法撤销！</string>
+    <string name="history_empty">历史记录为空。</string>
+    <string name="notify_new_streams_summary">当订阅有新音视频流可用时发出通知</string>
+    <string name="checking_frequency">检查频率</string>
+    <string name="notifications">通知</string>
+    <string name="new_streams_count">%1$s 个新音视频流可用</string>
+    <string name="notify_new_streams">新音视频流通知</string>
+    <string name="new_streams_by">%1$s 的新音视频流…</string>
 </resources>
