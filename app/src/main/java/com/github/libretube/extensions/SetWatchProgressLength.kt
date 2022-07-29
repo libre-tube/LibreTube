@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.LinearLayout
 import com.github.libretube.preferences.PreferenceHelper
 
 /**
@@ -17,7 +18,8 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
                 this@setWatchProgressLength.getViewTreeObserver().removeOnGlobalLayoutListener(this)
                 positions.forEach {
                     if (it.videoId == videoId) {
-                        newWidth = (width * (it.position / (duration))) / 1000
+                        val fullWidth = (parent as LinearLayout).width
+                        newWidth = (fullWidth * (it.position / (duration))) / 1000
                         return@forEach
                     }
                 }
@@ -27,6 +29,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
                         width = newWidth!!.toInt()
                     }
                     view.layoutParams = lp
+                    view.visibility = View.VISIBLE
                 } else {
                     view.visibility = View.GONE
                 }

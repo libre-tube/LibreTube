@@ -27,7 +27,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.reset)
             .setMessage(R.string.reset_message)
-            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
+            .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.reset) { _, _ ->
                 // clear default preferences
                 PreferenceHelper.clearPreferences()

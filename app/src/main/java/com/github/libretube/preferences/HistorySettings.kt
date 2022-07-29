@@ -41,7 +41,7 @@ class HistorySettings : PreferenceFragmentCompat() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(title)
             .setMessage(R.string.irreversible)
-            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
+            .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.okay) { _, _ ->
                 // clear the selected preference preferences
                 PreferenceHelper.removePreference(preferenceKey)

@@ -54,10 +54,8 @@
 
             <View
                 android:id="@+id/watch_progress"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_gravity="bottom"
-                android:background="@android:color/holo_red_dark" />
+                style="@style/WatchProgress"
+                android:layout_height="5dp" />
 
         </LinearLayout>
 

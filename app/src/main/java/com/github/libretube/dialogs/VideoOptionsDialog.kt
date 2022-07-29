@@ -33,9 +33,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
      */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
-            .setNegativeButton(R.string.cancel) { dialog, _ ->
-                dialog.dismiss()
-            }
+            .setNegativeButton(R.string.cancel, null)
             .setAdapter(
                 ArrayAdapter(
                     requireContext(),
