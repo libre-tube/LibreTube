@@ -13,6 +13,7 @@ import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
+import com.github.libretube.util.toID
 
 class TrendingAdapter(
     private val streamItems: List<StreamItem>,
@@ -64,7 +65,7 @@ class TrendingAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, trending.url)
             }
-            val videoId = trending.url!!.replace("/watch?v=", "")
+            val videoId = trending.url!!.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, "VideoOptionsDialog")

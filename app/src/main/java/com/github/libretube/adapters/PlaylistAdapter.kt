@@ -17,6 +17,7 @@ import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.setWatchProgressLength
+import com.github.libretube.util.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +58,7 @@ class PlaylistAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
-            val videoId = streamItem.url!!.replace("/watch?v=", "")
+            val videoId = streamItem.url.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, "VideoOptionsDialog")

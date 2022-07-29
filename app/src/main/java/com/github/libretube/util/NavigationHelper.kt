@@ -31,7 +31,7 @@ object NavigationHelper {
     fun navigateVideo(context: Context, videoId: String?, playlistId: String? = null) {
         if (videoId != null) {
             val bundle = Bundle()
-            bundle.putString("videoId", videoId.replace("/watch?v=", ""))
+            bundle.putString("videoId", videoId.toID())
             if (playlistId != null) bundle.putString("playlistId", playlistId)
             val frag = PlayerFragment()
             frag.arguments = bundle

@@ -20,6 +20,7 @@ import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
+import com.github.libretube.util.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -102,7 +103,7 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
-            val videoId = item.url!!.replace("/watch?v=", "")
+            val videoId = item.url.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId, root.context)
                     .show(childFragmentManager, "VideoOptionsDialog")
@@ -126,7 +127,7 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
-            val channelId = item.url?.replace("/channel/", "")!!
+            val channelId = item.url.toID()
             val token = PreferenceHelper.getToken()
 
             // only show subscribe button if logged in
@@ -215,7 +216,7 @@ class SearchAdapter(
                 NavigationHelper.navigatePlaylist(root.context, item.url)
             }
             root.setOnLongClickListener {
-                val playlistId = item.url!!.replace("/playlist?list=", "")
+                val playlistId = item.url!!.toID()
                 PlaylistOptionsDialog(playlistId, false, root.context)
                     .show(childFragmentManager, "PlaylistOptionsDialog")
                 true

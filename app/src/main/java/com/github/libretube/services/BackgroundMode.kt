@@ -15,6 +15,7 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.toID
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -166,8 +167,7 @@ class BackgroundMode : Service() {
     private fun playNextVideo() {
         if (response!!.relatedStreams!!.isNotEmpty()) {
             val videoId = response!!
-                .relatedStreams!![0].url!!
-                .replace("/watch?v=", "")
+                .relatedStreams!![0].url.toID()
 
             // destroy previous notification and player
             destroyPlayer()

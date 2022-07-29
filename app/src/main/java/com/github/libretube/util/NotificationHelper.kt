@@ -83,7 +83,7 @@ object NotificationHelper {
             }
 
             val lastSeenStreamId = PreferenceHelper.getLatestVideoId()
-            val latestFeedStreamId = videoFeed[0].url?.replace("/watch?v=", "")
+            val latestFeedStreamId = videoFeed[0].url.toID()
 
             // first time notifications enabled
             if (lastSeenStreamId == "") PreferenceHelper.setLatestVideoId(lastSeenStreamId)
@@ -91,7 +91,7 @@ object NotificationHelper {
                 // get the index of the last user-seen video
                 var newStreamIndex = -1
                 videoFeed.forEachIndexed { index, stream ->
-                    if (stream.url?.replace("/watch?v=", "") == lastSeenStreamId) {
+                    if (stream.url?.toID() == lastSeenStreamId) {
                         newStreamIndex = index
                     }
                 }
@@ -117,7 +117,7 @@ object NotificationHelper {
                     }
                 }
                 // save the id of the last recent video for the next time it's running
-                PreferenceHelper.setLatestVideoId(videoFeed[0].url?.replace("/watch?v=", "")!!)
+                PreferenceHelper.setLatestVideoId(videoFeed[0].url.toID())
                 createNotification(context, title!!, description!!)
             }
         }

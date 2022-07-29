@@ -14,6 +14,7 @@ import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.toID
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -46,7 +47,7 @@ class PlaylistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        playlistId = playlistId!!.replace("/playlist?list=", "")
+        playlistId = playlistId!!.toID()
         binding.playlistRecView.layoutManager = LinearLayoutManager(context)
 
         binding.playlistProgress.visibility = View.VISIBLE
