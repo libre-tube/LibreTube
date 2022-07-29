@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.TextView.GONE
 import android.widget.TextView.OnEditorActionListener
 import android.widget.TextView.VISIBLE
@@ -128,7 +127,7 @@ class SearchFragment : Fragment() {
                                 fetchNextSearchItems(binding.autoCompleteTextView.text.toString())
                             }
                         }
-                    fetchSuggestions(s.toString(), binding.autoCompleteTextView)
+                    fetchSuggestions(s.toString())
                 }
             }
 
@@ -153,7 +152,7 @@ class SearchFragment : Fragment() {
         )
     }
 
-    private fun fetchSuggestions(query: String, autoTextView: EditText) {
+    private fun fetchSuggestions(query: String) {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 binding.searchRecycler.visibility = GONE
@@ -168,9 +167,16 @@ class SearchFragment : Fragment() {
                     Log.e(TAG, "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
-                val suggestionsAdapter =
-                    SearchSuggestionsAdapter(response, autoTextView, this@SearchFragment)
-                binding.historyRecycler.adapter = suggestionsAdapter
+                // only load the suggestions if the input field didn't get cleared yet
+                if (binding.autoCompleteTextView.text.toString() != "") {
+                    val suggestionsAdapter =
+                        SearchSuggestionsAdapter(
+                            response,
+                            binding.autoCompleteTextView,
+                            this@SearchFragment
+                        )
+                    binding.historyRecycler.adapter = suggestionsAdapter
+                }
             }
         }
         if (!isFetchingSearch) run()
