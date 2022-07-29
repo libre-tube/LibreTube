@@ -21,6 +21,7 @@ import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -192,7 +193,7 @@ class PlayerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            videoId = it.getString("videoId")
+            videoId = it.getString("videoId").toID()
             playlistId = it.getString("playlistId")
         }
     }
@@ -344,8 +345,6 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeTransitionLayout() {
-        videoId = videoId.toID()
-
         val mainActivity = activity as MainActivity
         mainActivity.binding.container.visibility = View.VISIBLE
 
@@ -399,6 +398,17 @@ class PlayerFragment : Fragment() {
 
         binding.playerMotionLayout.progress = 1.toFloat()
         binding.playerMotionLayout.transitionToStart()
+
+        // quitting miniPlayer on single click
+        binding.titleTextView.setOnTouchListener { view, motionEvent ->
+            view.onTouchEvent(motionEvent)
+            if (motionEvent.action == MotionEvent.ACTION_UP) view.performClick()
+            binding.root.onTouchEvent(motionEvent)
+        }
+        binding.titleTextView.setOnClickListener {
+            binding.playerMotionLayout.setTransitionDuration(300)
+            binding.playerMotionLayout.transitionToStart()
+        }
     }
 
     // actions that don't depend on video information
@@ -941,6 +951,7 @@ class PlayerFragment : Fragment() {
             playerChannelName.text = response.uploader
 
             titleTextView.text = response.title
+
             playerTitle.text = response.title
             playerDescription.text = response.description
         }
