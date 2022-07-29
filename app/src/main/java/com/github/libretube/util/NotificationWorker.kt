@@ -11,10 +11,9 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) : Wo
     private val TAG = "NotificationWorker"
 
     override fun doWork(): Result {
-        // schedule the next task of the worker
-        NotificationHelper.enqueueWork(applicationContext)
         // check whether there are new streams and notify if there are some
-        NotificationHelper.checkForNewStreams(applicationContext)
-        return Result.success()
+        val result = NotificationHelper.checkForNewStreams(applicationContext)
+        // return success if the API request succeeded
+        return if (result) Result.success() else Result.retry()
     }
 }
