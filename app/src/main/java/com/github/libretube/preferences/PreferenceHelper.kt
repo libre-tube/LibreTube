@@ -16,7 +16,7 @@ object PreferenceHelper {
     private lateinit var prefContext: Context
     private lateinit var settings: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-    val mapper = ObjectMapper()
+    private val mapper = ObjectMapper()
 
     /**
      * set the context that is being used to access the shared preferences
@@ -136,7 +136,6 @@ object PreferenceHelper {
             streams.duration
         )
 
-        val mapper = ObjectMapper()
         val watchHistory = getWatchHistory()
 
         watchHistory += watchHistoryItem
@@ -146,7 +145,6 @@ object PreferenceHelper {
     }
 
     fun removeFromWatchHistory(videoId: String) {
-        val mapper = ObjectMapper()
         val watchHistory = getWatchHistory()
 
         var indexToRemove: Int? = null
@@ -220,7 +218,7 @@ object PreferenceHelper {
     }
 
     fun setLatestVideoId(videoId: String) {
-        setString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
+        editor.putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
     }
 
     fun getLatestVideoId(): String {

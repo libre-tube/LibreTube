@@ -810,7 +810,7 @@ class PlayerFragment : Fragment() {
                         playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
                         // save the playlist urls in the array
                         playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url?.toID()
+                            playlistStreamIds += video.url.toID()
                         }
                         // save playlistNextPage for usage if video is not contained
                         playlistNextPage = playlist.nextpage
