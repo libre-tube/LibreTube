@@ -274,4 +274,10 @@
     <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
     <string name="history_empty">التاريخ فارغ.</string>
     <string name="most_recent">الأحدث</string>
+    <string name="least_recent">الاحدث</string>
+    <string name="sort">فرز</string>
+    <string name="least_views">أقل عدد من المشاهدات</string>
+    <string name="channel_name_za">اسم القناة (Z-A)</string>
+    <string name="most_views">معظم المشاهدات</string>
+    <string name="channel_name_az">اسم القناة (من الألف إلى الياء)</string>
 </resources>
