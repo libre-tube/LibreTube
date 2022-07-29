@@ -36,7 +36,6 @@ class SearchFragment : Fragment() {
     private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
 
-    private var selectedFilter = 0
     private var apiSearchFilter = "all"
     private var nextPage: String? = null
 
@@ -62,8 +61,6 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var tempSelectedItem = 0
-
         binding.clearSearchImageView.setOnClickListener {
             binding.autoCompleteTextView.text.clear()
             binding.historyRecycler.adapter = null
@@ -84,14 +81,8 @@ class SearchFragment : Fragment() {
 
             MaterialAlertDialogBuilder(view.context)
                 .setTitle(getString(R.string.choose_filter))
-                .setSingleChoiceItems(filterOptions, selectedFilter) { _, id ->
-                    tempSelectedItem = id
-                }
-                .setPositiveButton(
-                    getString(R.string.okay)
-                ) { _, _ ->
-                    selectedFilter = tempSelectedItem
-                    apiSearchFilter = when (selectedFilter) {
+                .setItems(filterOptions) { _, id ->
+                    apiSearchFilter = when (id) {
                         0 -> "all"
                         1 -> "videos"
                         2 -> "channels"
@@ -105,7 +96,6 @@ class SearchFragment : Fragment() {
                     fetchSearch(binding.autoCompleteTextView.text.toString())
                 }
                 .setNegativeButton(getString(R.string.cancel), null)
-                .create()
                 .show()
         }
 

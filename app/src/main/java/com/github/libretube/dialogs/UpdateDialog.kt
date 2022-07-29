@@ -23,9 +23,7 @@ class UpdateDialog(
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(context?.getString(R.string.update_available, updateInfo.name))
                 .setMessage(context?.getString(R.string.update_now))
-                .setNegativeButton(context?.getString(R.string.cancel)) { _, _ ->
-                    dismiss()
-                }
+                .setNegativeButton(R.string.cancel, null)
                 .setPositiveButton(context?.getString(R.string.okay)) { _, _ ->
                     val downloadUrl = getDownloadUrl(updateInfo)
                     Log.i("downloadUrl", downloadUrl.toString())

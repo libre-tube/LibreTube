@@ -40,5 +40,5 @@
         android:textSize="12sp"
         app:cornerRadius="20dp"
         app:elevation="20dp"
-        tools:text="@string/unsubscribe" />
+        android:text="@string/unsubscribe" />
 </RelativeLayout>

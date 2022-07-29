@@ -109,19 +109,37 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:id="@+id/sub_feed_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/sub_feed"
+                    <TextView
+                        android:id="@+id/sortTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:drawablePadding="5dp"
+                        android:paddingHorizontal="10dp"
+                        android:text="@string/most_recent"
+                        android:textSize="16sp"
+                        app:drawableEndCompat="@drawable/ic_arrow_downward" />
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:nestedScrollingEnabled="false" />
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants">
 
-                </RelativeLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/sub_feed"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:nestedScrollingEnabled="false" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </com.github.libretube.views.CustomSwipeToRefresh>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:width="22dp"
     android:height="24dp"
-    android:tint="?android:attr/colorControlNormal"
+    android:tint="?attr/colorControlNormal"
     android:viewportWidth="18"
     android:viewportHeight="20"
     tools:ignore="VectorRaster">

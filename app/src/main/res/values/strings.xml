@@ -273,4 +273,11 @@
     <string name="new_streams_by">New streams by %1$s …</string>
     <string name="irreversible">Are you sure? This can\'t be undone!</string>
     <string name="history_empty">History is empty.</string>
+    <string name="most_recent">Most recent</string>
+    <string name="least_recent">Least recent</string>
+    <string name="most_views">Most views</string>
+    <string name="least_views">Least views</string>
+    <string name="channel_name_az">Channel Name (A-Z)</string>
+    <string name="channel_name_za">Channel Name (Z-A)</string>
+    <string name="sort">Sort</string>
 </resources>
