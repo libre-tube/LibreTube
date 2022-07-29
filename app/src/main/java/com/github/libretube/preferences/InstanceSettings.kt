@@ -21,7 +21,6 @@ import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
-import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
 import org.json.JSONObject
@@ -120,14 +119,13 @@ class InstanceSettings : PreferenceFragmentCompat() {
         // fetchInstance()
         initCustomInstances(instance!!)
         instance.setOnPreferenceChangeListener { _, newValue ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
             RetrofitInstance.url = newValue.toString()
             if (!PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
                 RetrofitInstance.authUrl = newValue.toString()
                 logout()
             }
             RetrofitInstance.lazyMgr.reset()
+            activity?.recreate()
             true
         }
 
@@ -142,8 +140,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
             RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            activity?.recreate()
             true
         }
 
@@ -155,8 +152,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
             // either use new auth url or the normal api url if auth instance disabled
             RetrofitInstance.authUrl = if (newValue == false) RetrofitInstance.url
             else authInstance.value
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            RetrofitInstance.lazyMgr.reset()
+            activity?.recreate()
             true
         }
 
