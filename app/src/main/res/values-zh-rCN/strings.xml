@@ -265,4 +265,5 @@
     <string name="best_quality">最佳</string>
     <string name="worst_quality">最差</string>
     <string name="default_subtitle_language">默认字幕语言</string>
+    <string name="irreversible">你确定吗？此操作无法撤销！</string>
 </resources>
