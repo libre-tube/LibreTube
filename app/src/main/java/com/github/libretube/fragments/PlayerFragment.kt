@@ -65,6 +65,7 @@ import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.hideKeyboard
+import com.github.libretube.util.toID
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -343,7 +344,7 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializeTransitionLayout() {
-        videoId = videoId!!.replace("/watch?v=", "")
+        videoId = videoId.toID()
 
         val mainActivity = activity as MainActivity
         mainActivity.binding.container.visibility = View.VISIBLE
@@ -751,7 +752,7 @@ class PlayerFragment : Fragment() {
                 title = response.title!!
                 uploader = response.uploader!!
                 thumbnailUrl = response.thumbnailUrl!!
-                channelId = response.uploaderUrl?.replace("/channel/", "")
+                channelId = response.uploaderUrl.toID()
 
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
@@ -809,7 +810,7 @@ class PlayerFragment : Fragment() {
                         playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
                         // save the playlist urls in the array
                         playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url?.replace("/watch?v=", "")!!
+                            playlistStreamIds += video.url?.toID()
                         }
                         // save playlistNextPage for usage if video is not contained
                         playlistNextPage = playlist.nextpage
@@ -830,7 +831,7 @@ class PlayerFragment : Fragment() {
                         RetrofitInstance.api.getPlaylistNextPage(playlistId!!, playlistNextPage!!)
                         // append all the playlist item urls to the array
                         playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url?.replace("/watch?v=", "")!!
+                            playlistStreamIds += video.url.toID()
                         }
                         // save playlistNextPage for usage if video is not contained
                         playlistNextPage = playlist.nextpage
@@ -843,7 +844,7 @@ class PlayerFragment : Fragment() {
                 // if it's not a playlist then use the next related video
             } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
-                nextStreamId = relatedStreams!![0].url!!.replace("/watch?v=", "")
+                nextStreamId = relatedStreams!![0].url.toID()
             }
         }
     }
@@ -1090,7 +1091,7 @@ class PlayerFragment : Fragment() {
             binding.playerMotionLayout.transitionToEnd()
         }
         if (token != "") {
-            val channelId = response.uploaderUrl?.replace("/channel/", "")
+            val channelId = response.uploaderUrl?.toID()
             isSubscribed()
             binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()

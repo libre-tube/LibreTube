@@ -12,6 +12,7 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,7 +43,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }
             subscriptionSubscribe.setOnClickListener {
-                val channelId = subscription.url?.replace("/channel/", "")!!
+                val channelId = subscription.url.toID()
                 if (subscribed) {
                     subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
                     unsubscribe(channelId)

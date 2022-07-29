@@ -17,6 +17,7 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
+import com.github.libretube.util.toID
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -35,7 +36,7 @@ class ChannelFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            channelId = it.getString("channel_id")?.replace("/channel/", "")
+            channelId = it.getString("channel_id").toID()
             channelName = it.getString("channel_name")
                 ?.replace("/c/", "")
                 ?.replace("/user/", "")

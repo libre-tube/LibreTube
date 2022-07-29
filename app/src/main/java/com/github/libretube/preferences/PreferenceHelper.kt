@@ -8,6 +8,7 @@ import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.obj.WatchPosition
+import com.github.libretube.util.toID
 
 object PreferenceHelper {
     private val TAG = "PreferenceHelper"
@@ -129,7 +130,7 @@ object PreferenceHelper {
             streams.title,
             streams.uploadDate,
             streams.uploader,
-            streams.uploaderUrl?.replace("/channel/", ""),
+            streams.uploaderUrl.toID(),
             streams.uploaderAvatar,
             streams.thumbnailUrl,
             streams.duration

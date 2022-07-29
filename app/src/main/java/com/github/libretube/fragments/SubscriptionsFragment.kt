@@ -20,6 +20,7 @@ import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.toID
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -159,7 +160,7 @@ class SubscriptionsFragment : Fragment() {
                 }
                 if (response.isNotEmpty()) {
                     // save the last recent video to the prefs for the notification worker
-                    PreferenceHelper.setLatestVideoId(response[0].url.toString().replace("/watch?v=", ""))
+                    PreferenceHelper.setLatestVideoId(response[0].url.toID())
                     channelRecView.adapter = SubscriptionChannelAdapter(response.toMutableList())
                 } else {
                     Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
