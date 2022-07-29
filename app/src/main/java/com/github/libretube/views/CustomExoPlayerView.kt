@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.github.libretube.R
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.OnDoubleTapEventListener
