@@ -273,4 +273,11 @@
     <string name="new_streams_count">%1$s 个新音视频流可用</string>
     <string name="notify_new_streams">新音视频流通知</string>
     <string name="new_streams_by">%1$s 的新音视频流…</string>
+    <string name="least_recent">最久</string>
+    <string name="most_views">最多观看</string>
+    <string name="least_views">最少观看</string>
+    <string name="channel_name_az">频道名（A-Z）</string>
+    <string name="channel_name_za">频道名（Z-A）</string>
+    <string name="sort">排序</string>
+    <string name="most_recent">最近发布</string>
 </resources>
