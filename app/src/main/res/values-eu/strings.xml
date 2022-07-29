@@ -27,7 +27,7 @@
     <string name="please_login">Lehenengo ezarpenetan saioa hasi edo erregistratu mesedez.</string>
     <string name="importsuccess">Harpidetuta</string>
     <string name="subscribeIsEmpty">Lehenengo kanalen batean harpidetu mesedez.</string>
-    <string name="cannotDownload">Ezin da deskargatu jario hau.</string>
+    <string name="cannotDownload">Ezin da deskargatu korronte hau.</string>
     <string name="dlcomplete">Deskargatuta.</string>
     <string name="dlisinprogress">Beste deskarga bat abian dago, itxaron bukatu arte mesedez.</string>
     <string name="downloadfailed">Ezin izan da deskargatu.</string>
@@ -65,7 +65,7 @@
     <string name="comments">Iruzkinak</string>
     <string name="channels">Kanalak</string>
     <string name="okay">Ados</string>
-    <string name="clear_history">Ezabatu historiala</string>
+    <string name="clear_history">Ezabatu historia</string>
     <string name="music_songs">YT Musika kantak</string>
     <string name="music_videos">YT Musika bideoak</string>
     <string name="music_albums">YT Musika albumak</string>
@@ -139,8 +139,8 @@
     <string name="systemLanguage">Sistema</string>
     <string name="retry">Saiatu berriro</string>
     <string name="all">Dena</string>
-    <string name="history">Historiala</string>
-    <string name="search_history">Bilaketen historiala</string>
+    <string name="history">Historia</string>
+    <string name="search_history">Bilaketen historia</string>
     <string name="playlists">Erreprodukzio zerrendak</string>
     <string name="category_sponsor">Babeslea</string>
     <string name="segment_skipped">Alde batera utzitako zatiak</string>
@@ -172,7 +172,7 @@
     <string name="version">%1$s bertsioa</string>
     <string name="about_summary">Ezagutu LibreTubeko taldea eta nola gertatzen den dena.</string>
     <string name="related_streams">Erlazionatutako edukia</string>
-    <string name="related_streams_summary">Erakutsi ikusten duzunarekin erlazionatutako fluxuak.</string>
+    <string name="related_streams_summary">Erakutsi ikusten duzunarekin erlazionatutako korronteak.</string>
     <string name="show_chapters">Erakutsi kapituluak</string>
     <string name="hide_chapters">Ezkutatu kapituluak</string>
     <string name="category_music_offtopic">Musika: Musikarik gabeko atala</string>
@@ -207,7 +207,7 @@
     <string name="deleteAccount_summary">Ezabatu zure Piped kontua</string>
     <string name="account">Kontua</string>
     <string name="restore">Berreskuratu</string>
-    <string name="watch_history">Ikusitakoen historiala</string>
+    <string name="watch_history">Ikusitakoen historia</string>
     <string name="watch_positions">Gogoratu posizioa</string>
     <string name="watch_positions_summary">Berrezarri azken erreprodukzioaren kokapena</string>
     <string name="auth_instance_summary">Dei autentifikatuetarako erabili beste instantzia bat.</string>
@@ -245,7 +245,7 @@
     <string name="data_saver_mode">Datuak aurrezteko modua</string>
     <string name="data_saver_mode_summary">Ez kargatu miniaturarik, ez bestelako irudirik datuak aurrezteko.</string>
     <string name="search_history_summary">Gailuan biltegiratu bilaketa-kontsultak</string>
-    <string name="history_summary">Bistaratze eta bilaketaren historiala</string>
+    <string name="history_summary">Bistaratze eta bilaketaren historia</string>
     <string name="reset_watch_positions">Berrezarri bistaratzeen posizioak</string>
     <string name="system_caption_style">Sistemaren azpitituluen estiloa</string>
     <string name="none">Bat ere ez</string>
@@ -265,4 +265,12 @@
     <string name="playingOnBackground">Atzeko planoan erreproduzitzen…</string>
     <string name="caption_settings">Azpitituluen ezarpenak</string>
     <string name="downloading_apk">Apk deskargatzen …</string>
+    <string name="notify_new_streams">Korronte berrien jakinarazpenak</string>
+    <string name="checking_frequency">Maiztasuna egiaztatzea</string>
+    <string name="new_streams_count">%1$s korronte berri daude eskuragarri</string>
+    <string name="new_streams_by">%1$s-ren korronte berriak…</string>
+    <string name="notifications">Jakinarazpenak</string>
+    <string name="history_empty">Historia hutsik dago.</string>
+    <string name="irreversible">Ziur al zaude\? Hau ezin da desegin!</string>
+    <string name="notify_new_streams_summary">Jakinarazi harpidetzetako korronte berriak daudenean</string>
 </resources>
