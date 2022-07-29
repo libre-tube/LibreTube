@@ -27,12 +27,12 @@ class WatchHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val watchHistory = PreferenceHelper.getWatchHistory()
-        val watchHistoryAdapter = WatchHistoryAdapter(watchHistory, childFragmentManager)
-        binding.watchHistoryRecView.adapter = watchHistoryAdapter
 
-        binding.clearHistory.setOnClickListener {
-            PreferenceHelper.removePreference("watch_history")
-            watchHistoryAdapter.clear()
+        if (watchHistory.isNotEmpty()) {
+            val watchHistoryAdapter = WatchHistoryAdapter(watchHistory, childFragmentManager)
+            binding.watchHistoryRecView.adapter = watchHistoryAdapter
+            binding.historyEmpty.visibility = View.GONE
+            binding.watchHistoryRecView.visibility = View.VISIBLE
         }
 
         // reverse order
