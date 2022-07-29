@@ -264,7 +264,6 @@
                     android:layout_toEndOf="@+id/player_channelImage"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text=""
                     android:textSize="15sp" />
 
 

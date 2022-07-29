@@ -266,4 +266,5 @@
     <string name="worst_quality">Worst quality</string>
     <string name="default_subtitle_language">Default subtitle language</string>
     <string name="irreversible">Are you sure? This can\'t be undone!</string>
+    <string name="history_empty">History is empty.</string>
 </resources>
