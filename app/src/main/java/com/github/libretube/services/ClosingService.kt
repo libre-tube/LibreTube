@@ -5,8 +5,8 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import androidx.annotation.Nullable
+import com.github.libretube.PLAYER_NOTIFICATION_ID
 
 class ClosingService : Service() {
     private val TAG = "ClosingService"
@@ -20,10 +20,9 @@ class ClosingService : Service() {
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
 
-        // destroy all notifications (especially the player notification)
+        // destroy the player notification when the app gets destroyed
         val nManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nManager.cancelAll()
-        Log.e(TAG, "closed")
+        nManager.cancel(PLAYER_NOTIFICATION_ID)
 
         // Destroy the service
         stopSelf()
