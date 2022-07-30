@@ -118,6 +118,7 @@ class PlayerFragment : Fragment() {
     private var playlistId: String? = null
     private var channelId: String? = null
     private var isSubscribed: Boolean = false
+    private var isLive = false
 
     /**
      * for the transition
@@ -522,7 +523,6 @@ class PlayerFragment : Fragment() {
         val playbackSpeedValues =
             context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
         exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
-        Log.e(TAG, playbackSpeed)
         val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
         playerBinding.speedText.text = playbackSpeeds[speedIndex]
 
@@ -769,6 +769,12 @@ class PlayerFragment : Fragment() {
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
 
+                // duration that's not greater than 0 indicates that the video is live
+                if (!(response.duration!! > 0)) {
+                    isLive = true
+                    handleLiveVideo()
+                }
+
                 runOnUiThread {
                     // set media sources for the player
                     setResolutionAndSubtitles(response)
@@ -791,6 +797,11 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    private fun handleLiveVideo() {
+        playerBinding.exoTime.visibility = View.GONE
+        playerBinding.liveLL.visibility = View.VISIBLE
     }
 
     private fun seekToWatchPosition() {

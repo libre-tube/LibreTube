@@ -186,6 +186,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/liveLL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/liveDiff"
+                    style="@style/ExoStyledControls.TimeText.Position"
+                    android:visibility="gone"/>
+
+                <TextView style="@style/ExoStyledControls.TimeText.Separator"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/liveIndicator"
+                    android:text="@string/live"
+                    style="@style/ExoStyledControls.TimeText.Duration" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/chapterLL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
