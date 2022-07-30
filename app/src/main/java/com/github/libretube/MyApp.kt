@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.NotificationHelper
@@ -39,7 +40,7 @@ class MyApp : Application() {
         /**
          * initialize the notification listener in the background
          */
-        NotificationHelper.enqueueWork(this)
+        NotificationHelper.enqueueWork(this, ExistingPeriodicWorkPolicy.KEEP)
     }
 
     /**
@@ -65,19 +66,19 @@ class MyApp : Application() {
      */
     private fun initializeNotificationChannels() {
         createNotificationChannel(
-            "download_service",
+            DOWNLOAD_CHANNEL_ID,
             "Download Service",
             "Shows a notification when downloading media.",
             NotificationManager.IMPORTANCE_NONE
         )
         createNotificationChannel(
-            "background_mode",
+            BACKGROUND_CHANNEL_ID,
             "Background Mode",
             "Shows a notification with buttons to control the audio player",
             NotificationManager.IMPORTANCE_LOW
         )
         createNotificationChannel(
-            "notification_worker",
+            PUSH_CHANNEL_ID,
             "Notification Worker",
             "Shows a notification when new streams are available.",
             NotificationManager.IMPORTANCE_DEFAULT

@@ -18,6 +18,10 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.arthenica.ffmpegkit.FFmpegKit
+import com.github.libretube.DOWNLOAD_CHANNEL_ID
+import com.github.libretube.DOWNLOAD_FAILURE_NOTIFICATION_ID
+import com.github.libretube.DOWNLOAD_PENDING_NOTIFICATION_ID
+import com.github.libretube.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.obj.DownloadType
@@ -199,7 +203,7 @@ class DownloadService : Service() {
         }
         // Creating a notification and setting its various attributes
         notification =
-            NotificationCompat.Builder(this@DownloadService, "download_service")
+            NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_download)
                 .setContentTitle("LibreTube")
                 .setContentText(getString(R.string.downloading))
@@ -209,31 +213,31 @@ class DownloadService : Service() {
                 .setProgress(100, 0, true)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
-        startForeground(2, notification.build())
+        startForeground(DOWNLOAD_PENDING_NOTIFICATION_ID, notification.build())
     }
 
     private fun downloadFailedNotification() {
-        val builder = NotificationCompat.Builder(this@DownloadService, "download_service")
+        val builder = NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.downloadfailed))
             .setContentText(getString(R.string.fail))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
-            notify(3, builder.build())
+            notify(DOWNLOAD_FAILURE_NOTIFICATION_ID, builder.build())
         }
     }
 
     private fun downloadSucceededNotification() {
         Log.i(TAG, "Download succeeded")
-        val builder = NotificationCompat.Builder(this@DownloadService, "download_service")
+        val builder = NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.success))
             .setContentText(getString(R.string.fail))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
-            notify(4, builder.build())
+            notify(DOWNLOAD_SUCCESS_NOTIFICATION_ID, builder.build())
         }
     }
 
@@ -267,12 +271,6 @@ class DownloadService : Service() {
         ) {
             // CALLED WHEN SESSION GENERATES STATISTICS
             Log.e(TAG + "stat", it.time.toString())
-            /*val progress = it.time/(10*duration!!)
-            if (progress<1){
-                notification
-                    .setProgress(progressMax, progress.toInt(), false)
-                service.notify(1,notification.build())
-            }*/
         }
     }
 

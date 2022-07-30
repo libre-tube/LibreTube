@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.util.NotificationHelper
@@ -19,14 +20,22 @@ class NotificationSettings : PreferenceFragmentCompat() {
 
         val notificationsEnabled = findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_ENABLED)
         notificationsEnabled?.setOnPreferenceChangeListener { _, _ ->
-            NotificationHelper.enqueueWork(requireContext())
+            updateNotificationPrefs()
             true
         }
 
         val checkingFrequency = findPreference<ListPreference>(PreferenceKeys.CHECKING_FREQUENCY)
         checkingFrequency?.setOnPreferenceChangeListener { _, _ ->
-            NotificationHelper.enqueueWork(requireContext())
+            updateNotificationPrefs()
             true
         }
+    }
+
+    private fun updateNotificationPrefs() {
+        // replace the previous queued work request
+        NotificationHelper.enqueueWork(
+            requireContext(),
+            ExistingPeriodicWorkPolicy.REPLACE
+        )
     }
 }
