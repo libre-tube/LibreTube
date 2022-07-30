@@ -20,7 +20,8 @@ import java.util.concurrent.TimeUnit
 
 object NotificationHelper {
     fun enqueueWork(
-        context: Context
+        context: Context,
+        existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy
     ) {
         // get the notification preferences
         PreferenceHelper.setContext(context)
@@ -57,7 +58,7 @@ object NotificationHelper {
             WorkManager.getInstance(context)
                 .enqueueUniquePeriodicWork(
                     uniqueWorkName,
-                    ExistingPeriodicWorkPolicy.REPLACE,
+                    existingPeriodicWorkPolicy,
                     notificationWorker
                 )
         } else {

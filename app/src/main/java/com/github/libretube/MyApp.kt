@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.NotificationHelper
@@ -39,7 +40,7 @@ class MyApp : Application() {
         /**
          * initialize the notification listener in the background
          */
-        NotificationHelper.enqueueWork(this)
+        NotificationHelper.enqueueWork(this, ExistingPeriodicWorkPolicy.KEEP)
     }
 
     /**
