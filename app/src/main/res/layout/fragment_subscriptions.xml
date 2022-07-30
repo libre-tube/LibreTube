@@ -122,6 +122,7 @@
                         android:layout_gravity="end"
                         android:drawablePadding="5dp"
                         android:paddingHorizontal="10dp"
+                        android:layout_marginBottom="5dp"
                         android:text="@string/most_recent"
                         android:textSize="16sp"
                         app:drawableEndCompat="@drawable/ic_arrow_downward" />
