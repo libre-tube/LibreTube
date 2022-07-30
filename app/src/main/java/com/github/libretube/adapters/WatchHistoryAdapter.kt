@@ -43,7 +43,7 @@ class WatchHistoryAdapter(
             deleteBTN.setOnClickListener {
                 PreferenceHelper.removeFromWatchHistory(video.videoId!!)
                 watchHistory.removeAt(position)
-                notifyItemRemoved(position)
+                notifyDataSetChanged()
             }
 
             root.setOnClickListener {

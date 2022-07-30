@@ -3,6 +3,7 @@ package com.github.libretube.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.Streams
@@ -86,8 +87,9 @@ object PreferenceHelper {
 
     fun getSearchHistory(): List<String> {
         return try {
-            val set: Set<String> = settings.getStringSet("search_history", LinkedHashSet())!!
-            set.toList()
+            val json = settings.getString("search_history", "")!!
+            val type = object : TypeReference<List<String>>(){}
+            return mapper.readValue(json, type)
         } catch (e: Exception) {
             emptyList()
         }
@@ -118,8 +120,8 @@ object PreferenceHelper {
     }
 
     private fun updateSearchHistory(historyList: List<String>) {
-        val set: Set<String> = LinkedHashSet(historyList)
-        editor.putStringSet("search_history", set).apply()
+        val json = mapper.writeValueAsString(historyList)
+        editor.putString("search_history", json).apply()
     }
 
     fun addToWatchHistory(videoId: String, streams: Streams) {
