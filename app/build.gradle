@@ -21,6 +21,17 @@ android {
         viewBinding true
     }
 
+    applicationVariants.all { variant ->
+        // use the date as version for debug builds
+        if (variant.name == 'debug') {
+            variant.outputs.each { output ->
+                def date = getDate()
+                output.versionCodeOverride = date
+                output.versionNameOverride = date
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -91,4 +102,10 @@ dependencies {
     implementation libs.cronet.embedded
     implementation libs.cronet.okhttp
     implementation libs.coil
+}
+
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHH')
+    return Integer.parseInt(formattedDate)
 }
