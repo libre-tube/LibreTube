@@ -265,4 +265,19 @@
     <string name="best_quality">أفضل جودة</string>
     <string name="worst_quality">أسوأ جودة</string>
     <string name="default_subtitle_language">لغة الترجمة الافتراضية</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="notify_new_streams">إشعارات أحداث البث الجديدة</string>
+    <string name="notify_new_streams_summary">اشعار عند تتوفر بث جديد من الاشتراكات</string>
+    <string name="checking_frequency">تردد البحث</string>
+    <string name="new_streams_count">%1$s محتوى بث جديد متاح</string>
+    <string name="new_streams_by">بث جديد من قبل %1$s …</string>
+    <string name="irreversible">هل أنت متأكد؟ هذا لا يمكن التراجع عنه!</string>
+    <string name="history_empty">التاريخ فارغ.</string>
+    <string name="most_recent">الأحدث</string>
+    <string name="least_recent">الاحدث</string>
+    <string name="sort">فرز</string>
+    <string name="least_views">أقل عدد من المشاهدات</string>
+    <string name="channel_name_za">اسم القناة (Z-A)</string>
+    <string name="most_views">معظم المشاهدات</string>
+    <string name="channel_name_az">اسم القناة (من الألف إلى الياء)</string>
 </resources>
