@@ -19,7 +19,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
                 positions.forEach {
                     if (it.videoId == videoId) {
                         val fullWidth = (parent as LinearLayout).width
-                        newWidth = (fullWidth * (it.position / (duration))) / 1000
+                        if (duration != 0L) newWidth = (fullWidth * (it.position / (duration))) / 1000
                         return@forEach
                     }
                 }
