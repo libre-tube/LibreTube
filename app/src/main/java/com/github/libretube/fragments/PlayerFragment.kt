@@ -770,12 +770,6 @@ class PlayerFragment : Fragment() {
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
 
-                // duration that's not greater than 0 indicates that the video is live
-                if (!(response.duration!! > 0)) {
-                    isLive = true
-                    handleLiveVideo()
-                }
-
                 runOnUiThread {
                     // set media sources for the player
                     setResolutionAndSubtitles(response)
@@ -800,21 +794,14 @@ class PlayerFragment : Fragment() {
         run()
     }
 
-    private fun handleLiveVideo() {
-        playerBinding.exoTime.visibility = View.GONE
-        playerBinding.liveLL.visibility = View.VISIBLE
-        refreshLiveStatus()
-    }
-
     private fun refreshLiveStatus() {
         // switch back to normal speed when on the end of live stream
-        Log.e(exoPlayer.duration.toString(), exoPlayer.currentPosition.toString())
-        if (isLive && (exoPlayer.duration - exoPlayer.currentPosition < 10000)) {
+        if (exoPlayer.duration - exoPlayer.currentPosition < 7000) {
             exoPlayer.setPlaybackSpeed(1F)
             playerBinding.speedText.text = "1x"
             playerBinding.liveSeparator.visibility = View.GONE
             playerBinding.liveDiff.text = ""
-        } else if (isLive) {
+        } else {
             Log.e(TAG, "changing the time")
             // live stream but not watching at the end/live position
             playerBinding.liveSeparator.visibility = View.VISIBLE
@@ -977,6 +964,15 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    private fun handleLiveVideo() {
+        playerBinding.exoTime.visibility = View.GONE
+        playerBinding.liveLL.visibility = View.VISIBLE
+        playerBinding.liveIndicator.setOnClickListener {
+            exoPlayer.seekTo(exoPlayer.duration - 1000)
+        }
+        refreshLiveStatus()
+    }
+
     private fun initializePlayerView(response: Streams) {
         binding.apply {
             playerViewsInfo.text =
@@ -992,6 +988,12 @@ class PlayerFragment : Fragment() {
 
             playerTitle.text = response.title
             playerDescription.text = response.description
+        }
+
+        // duration that's not greater than 0 indicates that the video is live
+        if (!(response.duration!! > 0)) {
+            isLive = true
+            handleLiveVideo()
         }
 
         playerBinding.exoTitle.text = response.title
