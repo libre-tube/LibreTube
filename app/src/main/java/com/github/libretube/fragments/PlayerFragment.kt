@@ -803,6 +803,29 @@ class PlayerFragment : Fragment() {
     private fun handleLiveVideo() {
         playerBinding.exoTime.visibility = View.GONE
         playerBinding.liveLL.visibility = View.VISIBLE
+        refreshLiveStatus()
+    }
+
+    private fun refreshLiveStatus() {
+        // switch back to normal speed when on the end of live stream
+        Log.e(exoPlayer.duration.toString(), exoPlayer.currentPosition.toString())
+        if (isLive && (exoPlayer.duration - exoPlayer.currentPosition < 10000)) {
+            exoPlayer.setPlaybackSpeed(1F)
+            playerBinding.speedText.text = "1x"
+            playerBinding.liveSeparator.visibility = View.GONE
+            playerBinding.liveDiff.text = ""
+        } else if (isLive) {
+            Log.e(TAG, "changing the time")
+            // live stream but not watching at the end/live position
+            playerBinding.liveSeparator.visibility = View.VISIBLE
+            val diffText = DateUtils.formatElapsedTime(
+                (exoPlayer.duration - exoPlayer.currentPosition) / 1000
+            )
+            playerBinding.liveDiff.text = "-$diffText"
+        }
+        // call it again
+        Handler(Looper.getMainLooper())
+            .postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
     private fun seekToWatchPosition() {
@@ -1020,22 +1043,8 @@ class PlayerFragment : Fragment() {
                         !playWhenReady
                     )
 
-                // switch back to normal speed when on the end of live stream
-                Log.e(exoPlayer.duration.toString(), exoPlayer.currentPosition.toString())
-                if (isLive && (exoPlayer.duration - exoPlayer.currentPosition < 10000)) {
-                    exoPlayer.setPlaybackSpeed(1F)
-                    playerBinding.speedText.text = "1x"
-                    playerBinding.liveSeparator.visibility = View.GONE
-                    playerBinding.liveDiff.text = ""
-                } else if (isLive) {
-                    Log.e(TAG, "changing the time")
-                    // live stream but not watching at the end/live position
-                    playerBinding.liveSeparator.visibility = View.VISIBLE
-                    val diffText = DateUtils.formatElapsedTime((exoPlayer.duration - exoPlayer.currentPosition) / 1000)
-                    playerBinding.liveDiff.text = "-$diffText"
-                }
                 // check if video has ended, next video is available and autoplay is enabled.
-                else if (
+                if (
                     playbackState == Player.STATE_ENDED &&
                     nextStreamId != null &&
                     !transitioning &&
