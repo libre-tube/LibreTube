@@ -49,7 +49,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/search_hint"
                         android:imeOptions="actionSearch"
-                        android:inputType="text"
+                        android:inputType="textFilter|textNoSuggestions"
                         android:maxLines="1"
                         android:padding="12dp" />
 
