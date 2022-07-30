@@ -957,7 +957,8 @@ class PlayerFragment : Fragment() {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
-                " • " + response.uploadDate
+                if (!isLive) " • " + response.uploadDate else ""
+
             textLike.text = response.likes.formatShort()
             textDislike.text = response.dislikes.formatShort()
             ConnectionHelper.loadImage(response.uploaderAvatar, binding.playerChannelImage)
@@ -1018,8 +1019,13 @@ class PlayerFragment : Fragment() {
                         !playWhenReady
                     )
 
+                // switch back to normal speed when on the end of live stream
+                if (isLive && (exoPlayer.duration - exoPlayer.duration < 0.5)) {
+                    exoPlayer.setPlaybackSpeed(1F)
+                    playerBinding.speedText.text = "1x"
+                }
                 // check if video has ended, next video is available and autoplay is enabled.
-                if (
+                else if (
                     playbackState == Player.STATE_ENDED &&
                     nextStreamId != null &&
                     !transitioning &&
