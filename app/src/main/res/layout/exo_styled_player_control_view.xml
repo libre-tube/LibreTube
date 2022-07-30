@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
@@ -175,13 +176,42 @@
 
                 <TextView
                     android:id="@id/exo_position"
-                    style="@style/ExoStyledControls.TimeText.Position" />
+                    style="@style/TimeString" />
 
-                <TextView style="@style/ExoStyledControls.TimeText.Separator" />
+                <TextView
+                    android:text="  •  "
+                    style="@style/TimeString"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@id/exo_duration"
-                    style="@style/ExoStyledControls.TimeText.Duration" />
+                    style="@style/TimeString" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/liveLL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/liveDiff"
+                    style="@style/TimeString" />
+
+                <TextView
+                    android:id="@+id/liveSeparator"
+                    style="@style/TimeString"
+                    android:text="  •  "
+                    android:visibility="gone"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/liveIndicator"
+                    android:text="@string/live"
+                    style="@style/TimeString" />
 
             </LinearLayout>
 

@@ -19,6 +19,7 @@ import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.TextUtils
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -118,6 +119,7 @@ class PlayerFragment : Fragment() {
     private var playlistId: String? = null
     private var channelId: String? = null
     private var isSubscribed: Boolean = false
+    private var isLive = false
 
     /**
      * for the transition
@@ -522,7 +524,6 @@ class PlayerFragment : Fragment() {
         val playbackSpeedValues =
             context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
         exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
-        Log.e(TAG, playbackSpeed)
         val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
         playerBinding.speedText.text = playbackSpeeds[speedIndex]
 
@@ -769,6 +770,12 @@ class PlayerFragment : Fragment() {
                 // save related streams for autoplay
                 relatedStreams = response.relatedStreams
 
+                // duration that's not greater than 0 indicates that the video is live
+                if (!(response.duration!! > 0)) {
+                    isLive = true
+                    handleLiveVideo()
+                }
+
                 runOnUiThread {
                     // set media sources for the player
                     setResolutionAndSubtitles(response)
@@ -791,6 +798,34 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    private fun handleLiveVideo() {
+        playerBinding.exoTime.visibility = View.GONE
+        playerBinding.liveLL.visibility = View.VISIBLE
+        refreshLiveStatus()
+    }
+
+    private fun refreshLiveStatus() {
+        // switch back to normal speed when on the end of live stream
+        Log.e(exoPlayer.duration.toString(), exoPlayer.currentPosition.toString())
+        if (isLive && (exoPlayer.duration - exoPlayer.currentPosition < 10000)) {
+            exoPlayer.setPlaybackSpeed(1F)
+            playerBinding.speedText.text = "1x"
+            playerBinding.liveSeparator.visibility = View.GONE
+            playerBinding.liveDiff.text = ""
+        } else if (isLive) {
+            Log.e(TAG, "changing the time")
+            // live stream but not watching at the end/live position
+            playerBinding.liveSeparator.visibility = View.VISIBLE
+            val diffText = DateUtils.formatElapsedTime(
+                (exoPlayer.duration - exoPlayer.currentPosition) / 1000
+            )
+            playerBinding.liveDiff.text = "-$diffText"
+        }
+        // call it again
+        Handler(Looper.getMainLooper())
+            .postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
     private fun seekToWatchPosition() {
@@ -946,7 +981,8 @@ class PlayerFragment : Fragment() {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
-                " • " + response.uploadDate
+                if (!isLive) " • " + response.uploadDate else ""
+
             textLike.text = response.likes.formatShort()
             textDislike.text = response.dislikes.formatShort()
             ConnectionHelper.loadImage(response.uploaderAvatar, binding.playerChannelImage)

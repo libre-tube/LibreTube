@@ -1,3 +1,5 @@
+import java.time.Instant
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -25,9 +27,8 @@ android {
         // use the date as version for debug builds
         if (variant.name == 'debug') {
             variant.outputs.each { output ->
-                def date = getDate()
-                output.versionCodeOverride = date
-                output.versionNameOverride = date
+                output.versionCodeOverride = getUnixTime()
+                output.versionNameOverride = getUnixTime()
             }
         }
     }
@@ -104,8 +105,6 @@ dependencies {
     implementation libs.coil
 }
 
-static def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMddHH')
-    return Integer.parseInt(formattedDate)
+static def getUnixTime() {
+    return Instant.now().getEpochSecond()
 }
