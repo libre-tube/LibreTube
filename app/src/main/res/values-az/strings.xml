@@ -265,4 +265,19 @@
     <string name="best_quality">Ən yaxşı keyfiyyət</string>
     <string name="worst_quality">Ən pis keyfiyyət</string>
     <string name="default_subtitle_language">Defolt altyazı dili</string>
+    <string name="notifications">Bildirişlər</string>
+    <string name="notify_new_streams">Yeni yayım bildirişləri</string>
+    <string name="notify_new_streams_summary">Abunəliklərdən yeni yayımlar buraxıldıqda bildirin</string>
+    <string name="checking_frequency">Yoxlama tezliyi</string>
+    <string name="new_streams_count">%1$s yeni yayım mövcuddur</string>
+    <string name="irreversible">Siz əminsiniz\? Bu geri qaytarıla bilməz!</string>
+    <string name="most_recent">Ən yeni</string>
+    <string name="least_recent">Ən köhnə</string>
+    <string name="most_views">Ən çox baxılan</string>
+    <string name="least_views">Ən az baxılan</string>
+    <string name="channel_name_az">Kanal Adı (A-Z)</string>
+    <string name="channel_name_za">Kanal Adı (Z-A)</string>
+    <string name="sort">Növ</string>
+    <string name="new_streams_by">%1$s tərəfindən yeni yayımlar…</string>
+    <string name="history_empty">Tarixçə boşdur.</string>
 </resources>
