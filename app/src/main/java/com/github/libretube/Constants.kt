@@ -36,11 +36,11 @@ const val PIPED_API_URL = "https://pipedapi.kavin.rocks/"
 /**
  * Notification IDs
  */
-const val PLAYER_NOTIFICATION_ID = 0
-const val PUSH_NOTIFICATION_ID = 1
-const val DOWNLOAD_PENDING_NOTIFICATION_ID = 2
-const val DOWNLOAD_FAILURE_NOTIFICATION_ID = 3
-const val DOWNLOAD_SUCCESS_NOTIFICATION_ID = 4
+const val PLAYER_NOTIFICATION_ID = 1
+const val PUSH_NOTIFICATION_ID = 2
+const val DOWNLOAD_PENDING_NOTIFICATION_ID = 3
+const val DOWNLOAD_FAILURE_NOTIFICATION_ID = 4
+const val DOWNLOAD_SUCCESS_NOTIFICATION_ID = 5
 
 /**
  * Notification Channel IDs
