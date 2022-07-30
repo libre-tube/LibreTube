@@ -265,4 +265,19 @@
     <string name="best_quality">En iyi kalite</string>
     <string name="worst_quality">En kötü kalite</string>
     <string name="default_subtitle_language">Varsayılan altyazı dili</string>
+    <string name="checking_frequency">Kontrol sıklığı</string>
+    <string name="new_streams_count">%1$s yeni akış mevcut</string>
+    <string name="new_streams_by">%1$s tarafından yeni akışlar…</string>
+    <string name="least_views">En az görüntüleme</string>
+    <string name="channel_name_az">Kanal Adı (A-Z)</string>
+    <string name="sort">Çeşit</string>
+    <string name="most_views">En çok görüntüleme</string>
+    <string name="history_empty">Geçmiş boş.</string>
+    <string name="notify_new_streams">Yeni akış bildirimleri</string>
+    <string name="irreversible">Emin misin\? Bu geri alınamaz!</string>
+    <string name="notifications">Bildirimler</string>
+    <string name="most_recent">En yeni</string>
+    <string name="least_recent">En eski</string>
+    <string name="notify_new_streams_summary">Aboneliklerden yeni akışlar mevcut olduğunda bildir</string>
+    <string name="channel_name_za">Kanal Adı (Z-A)</string>
 </resources>
