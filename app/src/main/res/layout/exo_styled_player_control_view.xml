@@ -195,16 +195,17 @@
 
                 <TextView
                     android:id="@+id/liveDiff"
-                    style="@style/ExoStyledControls.TimeText.Position"
-                    android:visibility="gone"/>
+                    style="@style/ExoStyledControls.TimeText.Duration" />
 
-                <TextView style="@style/ExoStyledControls.TimeText.Separator"
+                <TextView
+                    android:id="@+id/liveSeparator"
+                    style="@style/ExoStyledControls.TimeText.Separator"
                     android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/liveIndicator"
                     android:text="@string/live"
-                    style="@style/ExoStyledControls.TimeText.Duration" />
+                    style="@style/ExoStyledControls.TimeText.Position" />
 
             </LinearLayout>
 
