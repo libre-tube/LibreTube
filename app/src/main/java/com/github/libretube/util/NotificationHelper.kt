@@ -10,6 +10,8 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.github.libretube.PUSH_CHANNEL_ID
+import com.github.libretube.PUSH_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.preferences.PreferenceHelper
@@ -137,9 +139,14 @@ object NotificationHelper {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
 
-        val builder = NotificationCompat.Builder(context, "notification_worker")
+        val builder = NotificationCompat.Builder(context, PUSH_CHANNEL_ID)
             .setContentTitle(title)
             .setSmallIcon(R.drawable.ic_bell)
             .setContentText(description)
@@ -149,7 +156,7 @@ object NotificationHelper {
             .setAutoCancel(true)
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define
-            notify(2, builder.build())
+            notify(PUSH_NOTIFICATION_ID, builder.build())
         }
     }
 }

@@ -9,6 +9,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.support.v4.media.session.MediaSessionCompat
+import com.github.libretube.BACKGROUND_CHANNEL_ID
+import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
@@ -182,7 +184,7 @@ class BackgroundMode : Service() {
      */
     private fun initializePlayerNotification() {
         playerNotification = PlayerNotificationManager
-            .Builder(this, 1, "background_mode")
+            .Builder(this, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             // set the description of the notification
             .setMediaDescriptionAdapter(
                 DescriptionAdapter(

@@ -34,7 +34,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.Globals
+import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
@@ -1518,7 +1520,7 @@ class PlayerFragment : Fragment() {
         mediaSessionConnector.setPlayer(exoPlayer)
 
         playerNotification = PlayerNotificationManager
-            .Builder(c, 1, "background_mode")
+            .Builder(c, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             .setMediaDescriptionAdapter(
                 DescriptionAdapter(title, uploader, thumbnailUrl, requireContext())
             )
