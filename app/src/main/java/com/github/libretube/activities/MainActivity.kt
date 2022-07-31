@@ -17,6 +17,7 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
     var autoRotationEnabled = false
+    lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
@@ -133,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                 // clear backstack if it's the start fragment
                 if (startFragmentId == it.itemId) navController.backQueue.clear()
                 // set menu item on click listeners
+                removeSearchFocus()
                 when (it.itemId) {
                     R.id.homeFragment -> {
                         navController.navigate(R.id.homeFragment)
@@ -151,10 +154,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeSearchFocus() {
+        searchView.setQuery("", false)
+        searchView.clearFocus()
+        searchView.onActionViewCollapsed()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action_bar, menu)
-        return true
+
+        // stuff for the search in the topBar
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
+        searchView.setMaxWidth(Integer.MAX_VALUE)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val bundle = Bundle()
+                bundle.putString("query", query)
+                navController.navigate(R.id.searchResultFragment, bundle)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val bundle = Bundle()
+                bundle.putString("query", newText)
+                navController.navigate(R.id.searchFragment, bundle)
+                return true
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -311,6 +341,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        // remove focus from search
+        removeSearchFocus()
+
         if (binding.mainMotionLayout.progress == 0F) {
             try {
                 minimizePlayer()
