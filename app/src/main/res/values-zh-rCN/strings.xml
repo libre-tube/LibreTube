@@ -284,4 +284,6 @@
     <string name="required_network">所需网络类型</string>
     <string name="network_metered">计费网络</string>
     <string name="network_wifi">仅 WiFi</string>
+    <string name="translate">翻译</string>
+    <string name="translate_summary">帮忙把应用翻译到你说的语言</string>
 </resources>
