@@ -284,4 +284,6 @@
     <string name="network_all">All networks</string>
     <string name="network_metered">Metered</string>
     <string name="network_wifi">WiFi only</string>
+    <string name="translate">Translate</string>
+    <string name="translate_summary">Help by translating the app to the language you speak</string>
 </resources>

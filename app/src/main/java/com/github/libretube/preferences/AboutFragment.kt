@@ -13,6 +13,7 @@ import com.github.libretube.DONATE_URL
 import com.github.libretube.GITHUB_URL
 import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
+import com.github.libretube.WEBLATE_URL
 import com.github.libretube.WEBSITE_URL
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.databinding.FragmentAboutBinding
@@ -51,6 +52,15 @@ class AboutFragment : Fragment() {
         }
         binding.piped.setOnLongClickListener {
             val text = context?.getString(R.string.piped_summary)!!
+            showSnackBar(text)
+            true
+        }
+
+        binding.translate.setOnClickListener {
+            openLinkFromHref(WEBLATE_URL)
+        }
+        binding.translate.setOnLongClickListener {
+            val text = context?.getString(R.string.translate_summary)!!
             showSnackBar(text)
             true
         }

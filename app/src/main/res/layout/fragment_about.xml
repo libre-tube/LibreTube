@@ -82,6 +82,24 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/translate"
+            style="@style/AboutCard">
+
+            <LinearLayout style="@style/AboutItem">
+
+                <ImageView
+                    style="@style/AboutImageView"
+                    android:src="@drawable/ic_weblate" />
+
+                <TextView
+                    style="@style/AboutTextView"
+                    android:text="@string/translate" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/donate"
             style="@style/AboutCard">
 
