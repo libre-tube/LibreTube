@@ -13,7 +13,6 @@ import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.databinding.FragmentSearchResultBinding
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.hideKeyboard
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -24,6 +23,7 @@ class SearchResultFragment : Fragment() {
     private lateinit var nextPage: String
     private var query: String = ""
 
+    private lateinit var searchAdapter: SearchAdapter
     private var apiSearchFilter: String = "all"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,36 +43,24 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.filterMenuImageView.setOnClickListener {
-            val filterOptions = arrayOf(
-                getString(R.string.all),
-                getString(R.string.videos),
-                getString(R.string.channels),
-                getString(R.string.playlists),
-                getString(R.string.music_songs),
-                getString(R.string.music_videos),
-                getString(R.string.music_albums),
-                getString(R.string.music_playlists)
-            )
-
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(getString(R.string.choose_filter))
-                .setItems(filterOptions) { _, id ->
-                    apiSearchFilter = when (id) {
-                        0 -> "all"
-                        1 -> "videos"
-                        2 -> "channels"
-                        3 -> "playlists"
-                        4 -> "music_songs"
-                        5 -> "music_videos"
-                        6 -> "music_albums"
-                        7 -> "music_playlists"
-                        else -> "all"
-                    }
-                }
-                .setNegativeButton(getString(R.string.cancel), null)
-                .show()
+        // filter options
+        binding.filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
+            apiSearchFilter = when (
+                binding.filterChipGroup.checkedChipId
+            ) {
+                R.id.chip_all -> "all"
+                R.id.chip_videos -> "videos"
+                R.id.chip_channels -> "channels"
+                R.id.chip_playlists -> "playlists"
+                R.id.chip_music_songs -> "music_songs"
+                R.id.chip_music_videos -> "music_videos"
+                R.id.chip_music_albums -> "music_albums"
+                R.id.chip_music_playlists -> "music_playlists"
+                else -> throw IllegalArgumentException("Filter out of range")
+            }
+            fetchSearch()
         }
+
         fetchSearch()
 
         binding.searchRecycler.viewTreeObserver
@@ -99,7 +87,8 @@ class SearchResultFragment : Fragment() {
             runOnUiThread {
                 if (response.items?.isNotEmpty() == true) {
                     binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
-                    binding.searchRecycler.adapter = SearchAdapter(response.items, childFragmentManager)
+                    searchAdapter = SearchAdapter(response.items, childFragmentManager)
+                    binding.searchRecycler.adapter = searchAdapter
                 }
             }
             nextPage = response.nextpage!!
@@ -123,8 +112,10 @@ class SearchResultFragment : Fragment() {
                 return@launchWhenCreated
             }
             nextPage = response.nextpage!!
-            with(binding.searchRecycler.adapter as SearchAdapter) {
-                if (response.items?.isNotEmpty() == true) this.updateItems(response.items)
+            kotlin.runCatching {
+                if (response.items?.isNotEmpty() == true) {
+                    searchAdapter.updateItems(response.items.toMutableList())
+                }
             }
         }
     }

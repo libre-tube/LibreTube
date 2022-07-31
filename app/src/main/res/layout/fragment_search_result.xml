@@ -1,18 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.SearchFragment">
 
-    <ImageView
-        android:id="@+id/filterMenu_imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_filter" />
+    <HorizontalScrollView
+        android:id="@+id/filter_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filter_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                style="@style/Chip"
+                android:text="@string/all" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_videos"
+                style="@style/Chip"
+                android:text="@string/videos" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_channels"
+                style="@style/Chip"
+                android:text="@string/channels" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_playlists"
+                style="@style/Chip"
+                android:text="@string/playlists" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_music_songs"
+                style="@style/Chip"
+                android:text="@string/music_songs" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_music_videos"
+                style="@style/Chip"
+                android:text="@string/music_videos" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_music_albums"
+                style="@style/Chip"
+                android:text="@string/music_albums" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_music_playlists"
+                style="@style/Chip"
+                android:text="@string/music_playlists" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler"
