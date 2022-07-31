@@ -70,6 +70,7 @@ object PreferenceKeys {
      */
     const val NOTIFICATION_ENABLED = "notification_toggle"
     const val CHECKING_FREQUENCY = "checking_frequency"
+    const val REQUIRED_NETWORK = "required_network"
     const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
 
     /**

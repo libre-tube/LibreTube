@@ -41,10 +41,20 @@ object NotificationHelper {
 
         // schedule the work manager request if logged in and notifications enabled
         if (notificationsEnabled && PreferenceHelper.getToken() != "") {
+            // required network type for the work
+            val networkType = when (
+                PreferenceHelper.getString(PreferenceKeys.REQUIRED_NETWORK, "all")
+            ) {
+                "all" -> NetworkType.CONNECTED
+                "wifi" -> NetworkType.UNMETERED
+                "metered" -> NetworkType.METERED
+                else -> NetworkType.CONNECTED
+            }
+
             // requirements for the work
             // here: network needed to run the task
             val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiredNetworkType(networkType)
                 .build()
 
             // create the worker

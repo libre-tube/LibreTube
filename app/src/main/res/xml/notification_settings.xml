@@ -20,6 +20,15 @@
             app:title="@string/checking_frequency"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            android:icon="@drawable/ic_signal"
+            app:defaultValue="all"
+            app:entries="@array/requiredNetwork"
+            app:entryValues="@array/requiredNetworkValues"
+            app:key="required_network"
+            app:title="@string/required_network"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

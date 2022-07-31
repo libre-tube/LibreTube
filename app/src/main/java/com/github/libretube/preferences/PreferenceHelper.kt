@@ -88,7 +88,7 @@ object PreferenceHelper {
     fun getSearchHistory(): List<String> {
         return try {
             val json = settings.getString("search_history", "")!!
-            val type = object : TypeReference<List<String>>(){}
+            val type = object : TypeReference<List<String>>() {}
             return mapper.readValue(json, type)
         } catch (e: Exception) {
             emptyList()
