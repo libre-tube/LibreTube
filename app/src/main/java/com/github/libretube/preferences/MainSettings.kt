@@ -116,13 +116,6 @@ class MainSettings : PreferenceFragmentCompat() {
             }
             true
         }
-
-        val about = findPreference<Preference>("about")
-        about?.setOnPreferenceClickListener {
-            val newFragment = AboutFragment()
-            navigateToSettingsFragment(newFragment)
-            true
-        }
     }
 
     private fun navigateToSettingsFragment(newFragment: Fragment) {

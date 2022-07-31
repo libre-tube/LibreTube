@@ -1,48 +1,35 @@
-package com.github.libretube.preferences
+package com.github.libretube.activities
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.DONATE_URL
 import com.github.libretube.GITHUB_URL
 import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
 import com.github.libretube.WEBLATE_URL
 import com.github.libretube.WEBSITE_URL
-import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.databinding.FragmentAboutBinding
+import com.github.libretube.databinding.ActivityAboutBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-class AboutFragment : Fragment() {
-    private lateinit var binding: FragmentAboutBinding
+class AboutActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAboutBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAboutBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.about))
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)
         }
         binding.website.setOnLongClickListener {
-            val text = context?.getString(R.string.website_summary)!!
+            val text = getString(R.string.website_summary)
             showSnackBar(text)
             true
         }
@@ -51,7 +38,7 @@ class AboutFragment : Fragment() {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
         binding.piped.setOnLongClickListener {
-            val text = context?.getString(R.string.piped_summary)!!
+            val text = getString(R.string.piped_summary)
             showSnackBar(text)
             true
         }
@@ -60,7 +47,7 @@ class AboutFragment : Fragment() {
             openLinkFromHref(WEBLATE_URL)
         }
         binding.translate.setOnLongClickListener {
-            val text = context?.getString(R.string.translate_summary)!!
+            val text = getString(R.string.translate_summary)
             showSnackBar(text)
             true
         }
@@ -69,7 +56,7 @@ class AboutFragment : Fragment() {
             openLinkFromHref(DONATE_URL)
         }
         binding.donate.setOnLongClickListener {
-            val text = context?.getString(R.string.donate_summary)!!
+            val text = getString(R.string.donate_summary)
             showSnackBar(text)
             true
         }
@@ -78,7 +65,7 @@ class AboutFragment : Fragment() {
             openLinkFromHref(GITHUB_URL)
         }
         binding.github.setOnLongClickListener {
-            val text = context?.getString(R.string.contributing_summary)!!
+            val text = getString(R.string.contributing_summary)
             showSnackBar(text)
             true
         }
@@ -87,16 +74,9 @@ class AboutFragment : Fragment() {
             showLicense()
         }
         binding.license.setOnLongClickListener {
-            val text = context?.getString(R.string.license_summary)!!
+            val text = getString(R.string.license_summary)
             showSnackBar(text)
             true
-        }
-
-        binding.community.setOnClickListener {
-            val communityFragment = CommunityFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.settings, communityFragment)
-                .commitNow()
         }
     }
 
@@ -117,7 +97,6 @@ class AboutFragment : Fragment() {
     }
 
     private fun showLicense() {
-        val assets = view?.context?.assets
         val licenseString = assets
             ?.open("gpl3.html")
             ?.bufferedReader()
@@ -131,7 +110,7 @@ class AboutFragment : Fragment() {
             Html.fromHtml(licenseString.toString())
         }
 
-        MaterialAlertDialogBuilder(requireContext())
+        MaterialAlertDialogBuilder(this)
             .setPositiveButton(getString(R.string.okay)) { _, _ -> }
             .setMessage(licenseHtml)
             .create()

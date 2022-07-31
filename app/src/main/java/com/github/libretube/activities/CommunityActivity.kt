@@ -1,38 +1,24 @@
-package com.github.libretube.preferences
+package com.github.libretube.activities
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.DISCORD_URL
 import com.github.libretube.MATRIX_URL
-import com.github.libretube.R
 import com.github.libretube.REDDIT_URL
 import com.github.libretube.TELEGRAM_URL
 import com.github.libretube.TWITTER_URL
-import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.databinding.FragmentCommunityBinding
+import com.github.libretube.databinding.ActivityCommunityBinding
 
-class CommunityFragment : Fragment() {
-    private lateinit var binding: FragmentCommunityBinding
+class CommunityActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCommunityBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCommunityBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.community))
+        binding = ActivityCommunityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.telegram.setOnClickListener {
             openLinkFromHref(TELEGRAM_URL)

@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
-import com.github.libretube.preferences.AboutFragment
-import com.github.libretube.preferences.CommunityFragment
 import com.github.libretube.preferences.MainSettings
 import com.github.libretube.util.ThemeHelper
 
@@ -50,12 +48,6 @@ class SettingsActivity : AppCompatActivity() {
             is MainSettings -> {
                 super.onBackPressed()
                 finishAndRemoveTask()
-            }
-            is CommunityFragment -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.settings, AboutFragment())
-                    .commit()
             }
             else -> {
                 supportFragmentManager
