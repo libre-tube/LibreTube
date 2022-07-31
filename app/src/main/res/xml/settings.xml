@@ -2,8 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory>
-
         <Preference
             android:icon="@drawable/ic_settings"
             android:summary="@string/general_summary"
@@ -52,8 +50,6 @@
             app:summary="@string/advanced_summary"
             app:title="@string/advanced" />
 
-    </PreferenceCategory>
-
     <PreferenceCategory>
 
         <Preference
@@ -62,10 +58,6 @@
             app:summary="@string/update_summary"
             app:title="App version" />
 
-        <Preference
-            android:icon="@drawable/ic_info"
-            app:key="about"
-            app:title="@string/about" />
 
     </PreferenceCategory>
 

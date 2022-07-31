@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -82,6 +84,9 @@ class MainActivity : AppCompatActivity() {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
+            // set the action bar for the activity
+            setSupportActionBar(binding.toolbar)
+
             navController = findNavController(R.id.fragment)
             binding.bottomNav.setupWithNavController(navController)
 
@@ -143,21 +148,40 @@ class MainActivity : AppCompatActivity() {
             }
 
             binding.toolbar.title = ThemeHelper.getStyledAppName(this)
+        }
+    }
 
-            binding.toolbar.setNavigationOnClickListener {
-                // settings activity stuff
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-            }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.action_bar, menu)
+        return true
+    }
 
-            binding.toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.action_search -> {
-                        navController.navigate(R.id.searchFragment)
-                    }
-                }
-                false
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_search -> {
+                navController.navigate(R.id.searchFragment)
+                true
             }
+            R.id.action_settings -> {
+                val settingsIntent = Intent(this, SettingsActivity::class.java)
+                startActivity(settingsIntent)
+                true
+            }
+            R.id.action_about -> {
+                val aboutIntent = Intent(this, AboutActivity::class.java)
+                startActivity(aboutIntent)
+                true
+            }
+            R.id.action_community -> {
+                val communityIntent = Intent(this, CommunityActivity::class.java)
+                startActivity(communityIntent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
