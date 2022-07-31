@@ -284,4 +284,6 @@
     <string name="network_all">جميع الشبكات</string>
     <string name="network_metered">مقننة</string>
     <string name="network_wifi">واي فاي فقط</string>
+    <string name="translate">ترجمة</string>
+    <string name="translate_summary">تقديم المساعدة عن طريق ترجمة التطبيق إلى اللغة التي تتحدثها</string>
 </resources>
