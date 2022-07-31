@@ -265,4 +265,23 @@
     <string name="best_quality">האיכות המיטבית</string>
     <string name="worst_quality">האיכות הנחותה ביותר</string>
     <string name="default_subtitle_language">שפת הכתוביות כברירת מחדל</string>
+    <string name="irreversible">להמשיך\? אי אפשר לבטל את זה!</string>
+    <string name="channel_name_az">שם הערוץ (א-ת)</string>
+    <string name="channel_name_za">שם הערוץ (ת-א)</string>
+    <string name="sort">מיון</string>
+    <string name="notify_new_streams">התראות על תזרימים חדשים</string>
+    <string name="notify_new_streams_summary">להודיע כאשר קיימים תזרימים מהמינויים</string>
+    <string name="new_streams_count">%1$s תזרימים חדשים זמינים</string>
+    <string name="notifications">התראות</string>
+    <string name="checking_frequency">תדירות בדיקה</string>
+    <string name="new_streams_by">תזרימים חדשים מאת %1$s…</string>
+    <string name="history_empty">ההיסטוריה ריקה.</string>
+    <string name="most_recent">האחרונים</string>
+    <string name="least_recent">הכי פחות אחרונים</string>
+    <string name="most_views">הכי הרבה צפיות</string>
+    <string name="least_views">הכי פחות צפיות</string>
+    <string name="required_network">סוג הרשת הנדרש</string>
+    <string name="network_all">כל הרשתות</string>
+    <string name="network_metered">מוגבלת</string>
+    <string name="network_wifi">אלחוטי בלבד</string>
 </resources>
