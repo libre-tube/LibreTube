@@ -1021,6 +1021,12 @@ class PlayerFragment : Fragment() {
             override fun onVideoSizeChanged(
                 videoSize: VideoSize
             ) {
+                // show the resolution in the video resolution text view
+                if (playerBinding.qualityText.text == context?.getString(R.string.hls)) {
+                    playerBinding.qualityText.text =
+                        "${context?.getString(R.string.hls)} (${videoSize.height}p)"
+                }
+
                 // Set new width/height of view
                 // height or width must be cast to float as int/int will give 0
 
