@@ -280,4 +280,8 @@
     <string name="channel_name_za">频道名（Z-A）</string>
     <string name="sort">排序</string>
     <string name="most_recent">最近发布</string>
+    <string name="network_all">所有网络</string>
+    <string name="required_network">所需网络类型</string>
+    <string name="network_metered">计费网络</string>
+    <string name="network_wifi">仅 WiFi</string>
 </resources>
