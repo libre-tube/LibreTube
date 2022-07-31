@@ -167,6 +167,7 @@ class MainActivity : AppCompatActivity() {
         // stuff for the search in the topBar
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem.actionView as SearchView
+        searchView.setMaxWidth(Integer.MAX_VALUE)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
