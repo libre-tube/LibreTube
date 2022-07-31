@@ -21,7 +21,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
-import androidx.fragment.app.replace
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -30,7 +29,6 @@ import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
-import com.github.libretube.fragments.SearchFragment
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
     var autoRotationEnabled = false
-    private var searchFragment: SearchFragment? = null
+    lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
@@ -137,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                 // clear backstack if it's the start fragment
                 if (startFragmentId == it.itemId) navController.backQueue.clear()
                 // set menu item on click listeners
+                removeSearchFocus()
                 when (it.itemId) {
                     R.id.homeFragment -> {
                         navController.navigate(R.id.homeFragment)
@@ -155,13 +154,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeSearchFocus() {
+        searchView.setQuery("", false)
+        searchView.clearFocus()
+        searchView.onActionViewCollapsed()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action_bar, menu)
-        val searchItem = menu.findItem(R.id.action_search)
 
         // stuff for the search in the topBar
-        val searchView = searchItem.actionView as SearchView
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val bundle = Bundle()
@@ -185,6 +191,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
+            R.id.action_search -> {
+                navController.navigate(R.id.searchFragment)
+                true
+            }
             R.id.action_settings -> {
                 val settingsIntent = Intent(this, SettingsActivity::class.java)
                 startActivity(settingsIntent)
@@ -201,14 +211,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun addToHistory(query: String) {
-        val searchHistoryEnabled =
-            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
-        if (searchHistoryEnabled && query != "") {
-            PreferenceHelper.saveToSearchHistory(query)
         }
     }
 
@@ -338,6 +340,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        // remove focus from search
+        removeSearchFocus()
+
         if (binding.mainMotionLayout.progress == 0F) {
             try {
                 minimizePlayer()

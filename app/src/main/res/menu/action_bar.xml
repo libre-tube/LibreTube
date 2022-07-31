@@ -7,7 +7,8 @@
         android:icon="@drawable/ic_search"
         android:title="@string/search_hint"
         app:showAsAction="ifRoom"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:focusableInTouchMode="true" />
 
     <item
         android:id="@+id/action_settings"

@@ -2,12 +2,14 @@ package com.github.libretube.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SearchhistoryRowBinding
 import com.github.libretube.preferences.PreferenceHelper
 
 class SearchHistoryAdapter(
-    private var historyList: List<String>
+    private var historyList: List<String>,
+    private val searchView: SearchView
 ) :
     RecyclerView.Adapter<SearchHistoryViewHolder>() {
 
@@ -33,6 +35,7 @@ class SearchHistoryAdapter(
             }
 
             root.setOnClickListener {
+                searchView.setQuery(historyQuery, true)
             }
         }
     }

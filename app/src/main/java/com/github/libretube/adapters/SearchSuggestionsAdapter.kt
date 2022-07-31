@@ -2,11 +2,13 @@ package com.github.libretube.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SearchsuggestionRowBinding
 
 class SearchSuggestionsAdapter(
-    private var suggestionsList: List<String>
+    private var suggestionsList: List<String>,
+    private val searchView: SearchView
 ) :
     RecyclerView.Adapter<SearchSuggestionsViewHolder>() {
 
@@ -27,6 +29,7 @@ class SearchSuggestionsAdapter(
         holder.binding.apply {
             suggestionText.text = suggestion
             root.setOnClickListener {
+                searchView.setQuery(suggestion, true)
             }
         }
     }

@@ -10,8 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
+import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.databinding.FragmentSearchBinding
+import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -39,8 +43,21 @@ class SearchFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // fetch the search
-        fetchSuggestions(query!!)
+        // add the query to the history
+        if (query != null) addToHistory(query!!)
+
+        binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext())
+        // fetch the search or history
+        if (query == null || query == "") showHistory()
+        else fetchSuggestions(query!!)
+    }
+
+    private fun addToHistory(query: String) {
+        val searchHistoryEnabled =
+            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
+        if (searchHistoryEnabled && query != "") {
+            PreferenceHelper.saveToSearchHistory(query)
+        }
     }
 
     private fun fetchSuggestions(query: String) {
@@ -59,15 +76,26 @@ class SearchFragment() : Fragment() {
                 // only load the suggestions if the input field didn't get cleared yet
                 val suggestionsAdapter =
                     SearchSuggestionsAdapter(
-                        response
+                        response,
+                        (activity as MainActivity).searchView
                     )
                 runOnUiThread {
-                    binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext())
                     binding.suggestionsRecycler.adapter = suggestionsAdapter
                 }
             }
         }
         run()
+    }
+
+    private fun showHistory() {
+        val historyList = PreferenceHelper.getSearchHistory()
+        if (historyList.isNotEmpty()) {
+            binding.suggestionsRecycler.adapter =
+                SearchHistoryAdapter(
+                    historyList,
+                    (activity as MainActivity).searchView
+                )
+        }
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
