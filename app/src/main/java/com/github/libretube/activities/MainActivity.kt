@@ -17,9 +17,11 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
+import androidx.fragment.app.replace
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -28,6 +30,7 @@ import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.fragments.PlayerFragment
+import com.github.libretube.fragments.SearchFragment
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
     var autoRotationEnabled = false
+    private var searchFragment: SearchFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // set the app theme (e.g. Material You)
@@ -154,7 +158,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action_bar, menu)
-        return true
+        val searchItem = menu.findItem(R.id.action_search)
+
+        // stuff for the search in the topBar
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val bundle = Bundle()
+                bundle.putString("query", query)
+                navController.navigate(R.id.searchResultFragment, bundle)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val bundle = Bundle()
+                bundle.putString("query", newText)
+                navController.navigate(R.id.searchFragment, bundle)
+                return true
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -162,10 +185,6 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_search -> {
-                navController.navigate(R.id.searchFragment)
-                true
-            }
             R.id.action_settings -> {
                 val settingsIntent = Intent(this, SettingsActivity::class.java)
                 startActivity(settingsIntent)
@@ -182,6 +201,14 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun addToHistory(query: String) {
+        val searchHistoryEnabled =
+            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
+        if (searchHistoryEnabled && query != "") {
+            PreferenceHelper.saveToSearchHistory(query)
         }
     }
 
