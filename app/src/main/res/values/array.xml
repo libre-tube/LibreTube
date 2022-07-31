@@ -796,4 +796,16 @@
         <item>channel_name_za</item>
     </string-array>
 
+    <string-array name="requiredNetwork">
+        <item>@string/network_all</item>
+        <item>@string/network_wifi</item>
+        <item>@string/network_metered</item>
+    </string-array>
+
+    <string-array name="requiredNetworkValues">
+        <item>all</item>
+        <item>wifi</item>
+        <item>metered</item>
+    </string-array>
+
 </resources>
