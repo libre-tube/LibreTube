@@ -9,6 +9,7 @@ import android.os.StrictMode.VmPolicy
 import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.NotificationHelper
 import com.github.libretube.util.RetrofitInstance
 
@@ -41,6 +42,12 @@ class MyApp : Application() {
          * initialize the notification listener in the background
          */
         NotificationHelper.enqueueWork(this, ExistingPeriodicWorkPolicy.KEEP)
+
+        /**
+         * Handler for uncaught exceptions
+         */
+        val exceptionHandler = ExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler(exceptionHandler)
     }
 
     /**

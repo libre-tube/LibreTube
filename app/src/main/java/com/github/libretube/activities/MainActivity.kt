@@ -28,6 +28,7 @@ import coil.ImageLoader
 import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
+import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
@@ -152,6 +153,12 @@ class MainActivity : AppCompatActivity() {
 
             binding.toolbar.title = ThemeHelper.getStyledAppName(this)
         }
+
+        /**
+         * handle error logs
+         */
+        val log = PreferenceHelper.getErrorLog()
+        if (log != "") ErrorDialog().show(supportFragmentManager, null)
     }
 
     private fun removeSearchFocus() {
