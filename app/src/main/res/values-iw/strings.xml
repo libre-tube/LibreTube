@@ -284,4 +284,6 @@
     <string name="network_all">כל הרשתות</string>
     <string name="network_metered">מוגבלת</string>
     <string name="network_wifi">אלחוטי בלבד</string>
+    <string name="translate">תרגום</string>
+    <string name="translate_summary">אפשר לסייע על ידי תרגום היישום לשפה שלך</string>
 </resources>
