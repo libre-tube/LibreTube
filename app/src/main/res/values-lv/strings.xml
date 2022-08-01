@@ -264,4 +264,27 @@
     <string name="worst_quality">Sliktākā kvalitāte</string>
     <string name="playerAudioFormat">Atskaņotāja audio formāts</string>
     <string name="best_quality">Augstākā kvalitāte</string>
+    <string name="default_subtitle_language">Noklusējuma subtitru valoda</string>
+    <string name="notifications">Notifikācijas</string>
+    <string name="notify_new_streams">Jaunu tiešraižu notifikācijas</string>
+    <string name="notify_new_streams_summary">Nosūtīt notifikāciju, kad ir pieejamas jaunas tiešraides no abonētajiem kanāliem</string>
+    <string name="new_streams_count">%1$s jaunas tiešraides ir pieejamas</string>
+    <string name="new_streams_by">Jaunas tiešraides no %1$s…</string>
+    <string name="irreversible">Vai esat pārliecināts\? Šī darbība ir neatgriezeniska.</string>
+    <string name="most_recent">Jaunākie</string>
+    <string name="least_recent">Vecākie</string>
+    <string name="most_views">Skatītākie</string>
+    <string name="channel_name_az">Kanāla nosaukums (A-Z)</string>
+    <string name="channel_name_za">Kanāla nosaukums (Z-A)</string>
+    <string name="sort">Filtrēt</string>
+    <string name="network_metered">Ierobežots</string>
+    <string name="no_search_result">Nav rezultātu.</string>
+    <string name="least_views">Neskatītākie</string>
+    <string name="history_empty">Vēsture ir tukša.</string>
+    <string name="required_network">Nepieciešamais tīkla tips</string>
+    <string name="network_all">Visi tīkli</string>
+    <string name="network_wifi">Tikai WiFi</string>
+    <string name="translate">Tulkot</string>
+    <string name="translate_summary">Palīdziet, iztulkojot lietotni valodā, kurā runājat</string>
+    <string name="checking_frequency">Pārbaudīšanas biežums</string>
 </resources>
