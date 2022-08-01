@@ -280,4 +280,11 @@
     <string name="channel_name_az">Nom de chaine (A-Z)</string>
     <string name="irreversible">Êtes-vous sûr(e) \? Ça ne peut pas être annulé !</string>
     <string name="history_empty">L\'historique est vide.</string>
+    <string name="notify_new_streams">Nouvelles notifications de flux</string>
+    <string name="notify_new_streams_summary">Notifie quand de nouveaux flux des souscriptions sont disponibles</string>
+    <string name="network_metered">Mesure</string>
+    <string name="no_search_result">Aucun résultat trouvé.</string>
+    <string name="new_streams_by">Nouveaux stream par %1$s…</string>
+    <string name="required_network">Type de réseau nécessaire</string>
+    <string name="checking_frequency">Fréquence de vérification</string>
 </resources>
