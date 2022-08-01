@@ -83,7 +83,7 @@ class ChannelFragment : Fragment() {
                     if (nextPage != null && !isLoading) {
                         isLoading = true
                         binding.channelRefresh.isRefreshing = true
-                        fetchNextPage()
+                        fetchChannelNextPage()
                     }
                 }
             }
@@ -217,7 +217,7 @@ class ChannelFragment : Fragment() {
         run()
     }
 
-    private fun fetchNextPage() {
+    private fun fetchChannelNextPage() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {

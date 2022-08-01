@@ -25,8 +25,9 @@ class ChannelAdapter(
     }
 
     fun updateItems(newItems: List<StreamItem>) {
+        val feedSize = videoFeed.size
         videoFeed.addAll(newItems)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(feedSize, newItems.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {

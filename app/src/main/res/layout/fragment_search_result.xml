@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            app:checkedChip="@id/chip_all"
             app:selectionRequired="true"
             app:singleLine="true"
             app:singleSelection="true">
