@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/selectableItemBackground"
     android:backgroundTint="@android:color/transparent"
     app:strokeWidth="0dp">
@@ -24,13 +24,13 @@
 
         <TextView
             android:id="@+id/chapter_title"
-            tools:text="Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            tools:text="Title" />
 
     </LinearLayout>
 

@@ -376,9 +376,9 @@
         <com.github.libretube.views.DoubleTapOverlay
             android:id="@+id/doubleTapOverlay"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
+            android:gravity="center" />
 
     </com.github.libretube.views.CustomExoPlayerView>
 
@@ -411,12 +411,12 @@
         android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="12dp"
         android:alpha="0"
         android:ellipsize="end"
         android:maxLines="1"
+        android:paddingVertical="15dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"

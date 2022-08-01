@@ -563,7 +563,11 @@ class PlayerFragment : Fragment() {
             exoPlayer.pause()
 
             // start the background mode
-            BackgroundHelper.playOnBackground(requireContext(), videoId!!, exoPlayer.currentPosition)
+            BackgroundHelper.playOnBackground(
+                requireContext(),
+                videoId!!,
+                exoPlayer.currentPosition
+            )
         }
 
         binding.playerScrollView.viewTreeObserver

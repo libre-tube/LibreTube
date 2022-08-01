@@ -15,7 +15,6 @@ import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
@@ -43,21 +42,10 @@ class SearchFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // add the query to the history
-        if (query != null) addToHistory(query!!)
-
         binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext())
         // fetch the search or history
         if (query == null || query == "") showHistory()
         else fetchSuggestions(query!!)
-    }
-
-    private fun addToHistory(query: String) {
-        val searchHistoryEnabled =
-            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
-        if (searchHistoryEnabled && query != "") {
-            PreferenceHelper.saveToSearchHistory(query)
-        }
     }
 
     private fun fetchSuggestions(query: String) {
@@ -95,6 +83,9 @@ class SearchFragment() : Fragment() {
                     historyList,
                     (activity as MainActivity).searchView
                 )
+        } else {
+            binding.suggestionsRecycler.visibility = View.GONE
+            binding.historyEmpty.visibility = View.VISIBLE
         }
     }
 
