@@ -29,7 +29,7 @@
     <string name="unknown_error">Erro de rede.</string>
     <string name="error">Algo deu errado.</string>
     <string name="empty">Você precisa colocar um nome de usuário e senha.</string>
-    <string name="notgmail">Isto é para uma conta LibreTube.</string>
+    <string name="notgmail">Isso é para uma conta Piped.</string>
     <string name="defres">Resolução de vídeo padrão</string>
     <string name="grid">Colunas de grade</string>
     <string name="emptyList">Não há nada aqui.</string>
@@ -43,7 +43,7 @@
     <string name="about">Sobre</string>
     <string name="choose_quality_dialog">Qualidade</string>
     <string name="subscribe">Inscrever-se</string>
-    <string name="dlisinprogress">Aguarde até que todos os downloads sejam concluídos…</string>
+    <string name="dlisinprogress">Já existe um download em progresso, por favor espere até finalizar.</string>
     <string name="username">Nome do usuário</string>
     <string name="registered">Registrado com sucesso! Agora você pode se inscrever nos canais que deseja.</string>
     <string name="login_first">Por favor, faça o login e tente novamente.</string>
@@ -88,7 +88,7 @@
     <string name="music_albums">Álbuns do YT Music</string>
     <string name="music_playlists">Playlists do YT Music</string>
     <string name="segment_skipped">Segmento ignorado</string>
-    <string name="sponsorblock_state">Habilitado</string>
+    <string name="sponsorblock_state">Ativado</string>
     <string name="category_segments">Segmentos</string>
     <string name="category_sponsor">Patrocinador</string>
     <string name="category_sponsor_description">Promoção paga, referências pagas e anúncios diretos. Não para autopromoção ou mensagens genuínas gratuitas para causas, criadores, sites e produtos.</string>
