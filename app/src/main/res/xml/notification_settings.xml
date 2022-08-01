@@ -6,10 +6,10 @@
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_notification"
+            android:summary="@string/notify_new_streams_summary"
             app:defaultValue="true"
             app:key="notification_toggle"
-            app:title="@string/notify_new_streams"
-            android:summary="@string/notify_new_streams_summary"/>
+            app:title="@string/notify_new_streams" />
 
         <ListPreference
             android:icon="@drawable/ic_time"

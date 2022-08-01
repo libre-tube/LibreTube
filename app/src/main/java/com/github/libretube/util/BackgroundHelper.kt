@@ -8,7 +8,7 @@ object BackgroundHelper {
     fun playOnBackground(
         context: Context,
         videoId: String,
-        position: Int? = null
+        position: Long? = null
     ) {
         val intent = Intent(context, BackgroundMode::class.java)
         intent.putExtra("videoId", videoId)

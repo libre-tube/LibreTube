@@ -7,7 +7,8 @@ import androidx.work.WorkerParameters
 /**
  * The notification worker which checks for new streams in a certain frequency
  */
-class NotificationWorker(appContext: Context, parameters: WorkerParameters) : Worker(appContext, parameters) {
+class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
+    Worker(appContext, parameters) {
     private val TAG = "NotificationWorker"
 
     override fun doWork(): Result {

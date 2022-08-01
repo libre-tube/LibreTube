@@ -18,7 +18,8 @@ class NotificationSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.notifications))
 
-        val notificationsEnabled = findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_ENABLED)
+        val notificationsEnabled =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_ENABLED)
         notificationsEnabled?.setOnPreferenceChangeListener { _, _ ->
             updateNotificationPrefs()
             true

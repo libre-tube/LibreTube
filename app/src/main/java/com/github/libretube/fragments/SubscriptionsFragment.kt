@@ -197,7 +197,8 @@ class SubscriptionsFragment : Fragment() {
                     binding.subRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
-                    binding.subChannels.adapter = SubscriptionChannelAdapter(response.toMutableList())
+                    binding.subChannels.adapter =
+                        SubscriptionChannelAdapter(response.toMutableList())
                 } else {
                     Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
                 }

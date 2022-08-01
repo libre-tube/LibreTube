@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.databinding.FragmentSearchResultBinding
+import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.hideKeyboard
 import retrofit2.HttpException
@@ -42,6 +44,9 @@ class SearchResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // add the query to the history
+        addToHistory(query)
 
         // filter options
         binding.filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
@@ -89,6 +94,9 @@ class SearchResultFragment : Fragment() {
                     binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
                     searchAdapter = SearchAdapter(response.items, childFragmentManager)
                     binding.searchRecycler.adapter = searchAdapter
+                } else {
+                    binding.searchContainer.visibility = View.GONE
+                    binding.noSearchResult.visibility = View.VISIBLE
                 }
             }
             nextPage = response.nextpage!!
@@ -117,6 +125,14 @@ class SearchResultFragment : Fragment() {
                     searchAdapter.updateItems(response.items.toMutableList())
                 }
             }
+        }
+    }
+
+    private fun addToHistory(query: String) {
+        val searchHistoryEnabled =
+            PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
+        if (searchHistoryEnabled && query != "") {
+            PreferenceHelper.saveToSearchHistory(query)
         }
     }
 

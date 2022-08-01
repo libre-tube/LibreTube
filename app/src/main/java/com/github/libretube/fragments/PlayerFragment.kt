@@ -563,7 +563,11 @@ class PlayerFragment : Fragment() {
             exoPlayer.pause()
 
             // start the background mode
-            BackgroundHelper.playOnBackground(requireContext(), videoId!!)
+            BackgroundHelper.playOnBackground(
+                requireContext(),
+                videoId!!,
+                exoPlayer.currentPosition
+            )
         }
 
         binding.playerScrollView.viewTreeObserver
@@ -1080,7 +1084,7 @@ class PlayerFragment : Fragment() {
         })
 
         // check if livestream
-        if (response.duration!! > 0) {
+        if (response.duration > 0) {
             // download clicked
             binding.relPlayerDownload.setOnClickListener {
                 if (!Globals.IS_DOWNLOAD_RUNNING) {
@@ -1148,7 +1152,6 @@ class PlayerFragment : Fragment() {
             binding.playerMotionLayout.transitionToEnd()
         }
         if (token != "") {
-            val channelId = response.uploaderUrl?.toID()
             isSubscribed()
             binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddtoPlaylistDialog()
@@ -1239,11 +1242,6 @@ class PlayerFragment : Fragment() {
         doubleTapOverlayBinding.rewindBTN.apply {
             visibility = View.GONE
         }
-    }
-
-    private fun toggleController() {
-        if (exoPlayerView.isControllerFullyVisible) exoPlayerView.hideController()
-        else exoPlayerView.showController()
     }
 
     // enable seek bar preview

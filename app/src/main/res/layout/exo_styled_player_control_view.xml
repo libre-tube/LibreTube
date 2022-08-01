@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <View
         android:id="@id/exo_controls_background"
@@ -172,15 +172,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp">
+                android:layout_marginStart="10dp">
 
                 <TextView
                     android:id="@id/exo_position"
                     style="@style/TimeString" />
 
                 <TextView
-                    android:text="  •  "
                     style="@style/TimeString"
+                    android:text="  •  "
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -194,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="10dp"
                 android:visibility="gone">
 
                 <TextView
@@ -210,8 +210,8 @@
 
                 <TextView
                     android:id="@+id/liveIndicator"
-                    android:text="@string/live"
-                    style="@style/TimeString" />
+                    style="@style/TimeString"
+                    android:text="@string/live" />
 
             </LinearLayout>
 

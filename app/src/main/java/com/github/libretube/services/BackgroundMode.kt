@@ -66,10 +66,10 @@ class BackgroundMode : Service() {
     override fun onCreate() {
         super.onCreate()
         if (Build.VERSION.SDK_INT >= 26) {
-            val channelId = "background service"
+            val channelId = BACKGROUND_CHANNEL_ID
             val channel = NotificationChannel(
                 channelId,
-                "BackgroundPlay Service",
+                "Background Service",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -77,7 +77,7 @@ class BackgroundMode : Service() {
             val notification: Notification = Notification.Builder(this, channelId)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.playingOnBackground)).build()
-            startForeground(1, notification)
+            startForeground(PLAYER_NOTIFICATION_ID, notification)
         }
     }
 
