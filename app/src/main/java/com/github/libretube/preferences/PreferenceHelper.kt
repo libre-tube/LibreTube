@@ -227,6 +227,14 @@ object PreferenceHelper {
         return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
     }
 
+    fun saveErrorLog(log: String) {
+        editor.putString(PreferenceKeys.ERROR_LOG, log).commit()
+    }
+
+    fun getErrorLog(): String {
+        return getString(PreferenceKeys.ERROR_LOG, "")
+    }
+
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
