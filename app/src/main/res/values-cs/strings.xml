@@ -286,4 +286,5 @@
     <string name="channel_name_za">Název kanálu (Z-A)</string>
     <string name="network_all">Všechny sítě</string>
     <string name="network_metered">Měřené</string>
+    <string name="no_search_result">Nenalezeny žádné výsledky.</string>
 </resources>
