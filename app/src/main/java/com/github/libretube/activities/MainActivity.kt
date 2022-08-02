@@ -191,6 +191,11 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        searchView.setOnCloseListener {
+            onBackPressed()
+            true
+        }
         return super.onCreateOptionsMenu(menu)
     }
 

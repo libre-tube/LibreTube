@@ -7,15 +7,21 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.support.v4.media.session.MediaSessionCompat
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
+import com.github.libretube.obj.Segment
+import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.toID
 import com.google.android.exoplayer2.C
@@ -25,6 +31,8 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -32,6 +40,11 @@ import kotlinx.coroutines.runBlocking
  * Loads the selected videos audio in background mode with a notification area.
  */
 class BackgroundMode : Service() {
+    /**
+     * VideoId of the video
+     */
+    private lateinit var videoId: String
+
     /**
      * The response that gets when called the Api.
      */
@@ -63,8 +76,16 @@ class BackgroundMode : Service() {
      */
     private lateinit var audioAttributes: AudioAttributes
 
+    /**
+     * SponsorBlock Segment data
+     */
+    private var segmentData: Segments? = null
+
     override fun onCreate() {
         super.onCreate()
+        /**
+         * setting the required notification for running as a foreground service
+         */
         if (Build.VERSION.SDK_INT >= 26) {
             val channelId = BACKGROUND_CHANNEL_ID
             val channel = NotificationChannel(
@@ -89,7 +110,7 @@ class BackgroundMode : Service() {
         destroyPlayer()
 
         // get the intent arguments
-        val videoId = intent?.getStringExtra("videoId")!!
+        videoId = intent?.getStringExtra("videoId")!!
         val position = intent.getLongExtra("position", 0L)
 
         // play the audio in the background
@@ -121,6 +142,8 @@ class BackgroundMode : Service() {
 
             // seek to the previous position if available
             if (seekToPosition != 0L) player?.seekTo(seekToPosition)
+
+            fetchSponsorBlockSegments()
         }
     }
 
@@ -175,6 +198,8 @@ class BackgroundMode : Service() {
             destroyPlayer()
 
             // play new video on background
+            this.videoId = videoId
+            this.segmentData = null
             playAudio(videoId)
         }
     }
@@ -220,6 +245,43 @@ class BackgroundMode : Service() {
 
         mediaSessionConnector = MediaSessionConnector(mediaSession)
         mediaSessionConnector.setPlayer(player)
+    }
+
+    /**
+     * fetch the segments for SponsorBlock
+     */
+    private fun fetchSponsorBlockSegments() {
+        CoroutineScope(Dispatchers.IO).launch {
+            kotlin.runCatching {
+                val categories = PlayerHelper.getSponsorBlockCategories()
+                if (categories.size > 0) {
+                    segmentData =
+                        RetrofitInstance.api.getSegments(
+                            videoId,
+                            ObjectMapper().writeValueAsString(categories)
+                        )
+                    checkForSegments()
+                }
+            }
+        }
+    }
+
+    /**
+     * check for SponsorBlock segments
+     */
+    private fun checkForSegments() {
+        Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
+
+        if (segmentData == null || segmentData!!.segments.isEmpty()) return
+
+        segmentData!!.segments.forEach { segment: Segment ->
+            val segmentStart = (segment.segment!![0] * 1000f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000f).toLong()
+            val currentPosition = player?.currentPosition
+            if (currentPosition in segmentStart until segmentEnd) {
+                player?.seekTo(segmentEnd)
+            }
+        }
     }
 
     private fun destroyPlayer() {
