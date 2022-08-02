@@ -268,7 +268,7 @@
     <string name="new_streams_by">Nye streams fra %1$s …</string>
     <string name="history_empty">Historikken er tom.</string>
     <string name="least_views">Færreste visninger</string>
-    <string name="channel_name_az">Kanalnavn (A-Z)</string>
+    <string name="channel_name_az">Kanalnavn (A-Å)</string>
     <string name="sort">Sortér</string>
     <string name="checking_frequency">Kontrolfrekvens</string>
     <string name="most_recent">Seneste</string>
@@ -279,7 +279,7 @@
     <string name="least_recent">Ældste</string>
     <string name="new_streams_count">%1$s nye streams er tilgængelige</string>
     <string name="most_views">Fleste visninger</string>
-    <string name="channel_name_za">Kanalnavn (Z-A)</string>
+    <string name="channel_name_za">Kanalnavn (Å-A)</string>
     <string name="network_all">Alle netværk</string>
     <string name="network_metered">Forbrugsbaseret</string>
     <string name="translate">Oversæt</string>
