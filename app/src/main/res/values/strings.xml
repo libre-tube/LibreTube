@@ -287,4 +287,6 @@
     <string name="translate">Translate</string>
     <string name="translate_summary">Help by translating the app to the language you speak</string>
     <string name="no_search_result">No results found.</string>
+    <string name="error_occurred">Error occurred</string>
+    <string name="copied">Copied</string>
 </resources>
