@@ -68,44 +68,31 @@ class PlaylistAdapter(
             if (isOwner) {
                 deletePlaylist.visibility = View.VISIBLE
                 deletePlaylist.setOnClickListener {
-                    val token = PreferenceHelper.getToken()
-                    removeFromPlaylist(token, position)
+                    removeFromPlaylist(position)
                 }
             }
             watchProgress.setWatchProgressLength(videoId, streamItem.duration!!)
         }
     }
 
-    private fun removeFromPlaylist(token: String, position: Int) {
-        fun run() {
-            CoroutineScope(Dispatchers.IO).launch {
-                val response = try {
-                    RetrofitInstance.authApi.removeFromPlaylist(
-                        token,
-                        PlaylistId(playlistId = playlistId, index = position)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launch
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    return@launch
-                } finally {
-                }
-                try {
-                    if (response.message == "ok") {
-                        Log.d(TAG, "deleted!")
-                        videoFeed.removeAt(position)
-                        // FIXME: This needs to run on UI thread?
-                        activity.runOnUiThread { notifyDataSetChanged() }
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
-                }
+    fun removeFromPlaylist(position: Int) {
+        videoFeed.removeAt(position)
+        activity.runOnUiThread { notifyDataSetChanged() }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                RetrofitInstance.authApi.removeFromPlaylist(
+                    PreferenceHelper.getToken(),
+                    PlaylistId(playlistId = playlistId, index = position)
+                )
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG, "IOException, you might not have internet connection")
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                return@launch
             }
         }
-        run()
     }
 }
 
