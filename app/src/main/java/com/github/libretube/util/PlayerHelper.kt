@@ -68,4 +68,68 @@ object PlayerHelper {
             CaptionStyleCompat.createFromCaptionStyle(captioningManager.userStyle)
         }
     }
+
+    /**
+     * get the categories for sponsorBlock
+     */
+    fun getSponsorBlockCategories(): ArrayList<String> {
+        val categories: ArrayList<String> = arrayListOf()
+        if (PreferenceHelper.getBoolean(
+                "intro_category_key",
+                false
+            )
+        ) {
+            categories.add("intro")
+        }
+        if (PreferenceHelper.getBoolean(
+                "selfpromo_category_key",
+                false
+            )
+        ) {
+            categories.add("selfpromo")
+        }
+        if (PreferenceHelper.getBoolean(
+                "interaction_category_key",
+                false
+            )
+        ) {
+            categories.add("interaction")
+        }
+        if (PreferenceHelper.getBoolean(
+                "sponsors_category_key",
+                true
+            )
+        ) {
+            categories.add("sponsor")
+        }
+        if (PreferenceHelper.getBoolean(
+                "outro_category_key",
+                false
+            )
+        ) {
+            categories.add("outro")
+        }
+        if (PreferenceHelper.getBoolean(
+                "filler_category_key",
+                false
+            )
+        ) {
+            categories.add("filler")
+        }
+        if (PreferenceHelper.getBoolean(
+                "music_offtopic_category_key",
+                false
+            )
+        ) {
+            categories.add("music_offtopic")
+        }
+        if (PreferenceHelper.getBoolean(
+                "preview_category_key",
+                false
+            )
+        ) {
+            categories.add("preview")
+        }
+        return categories
+    }
 }

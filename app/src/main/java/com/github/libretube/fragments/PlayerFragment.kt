@@ -18,7 +18,6 @@ import android.os.Looper
 import android.os.PowerManager
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
-import android.text.TextUtils
 import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,6 +34,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.Globals
 import com.github.libretube.PLAYER_NOTIFICATION_ID
@@ -53,7 +53,6 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
-import com.github.libretube.obj.SponsorBlockPrefs
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.Subscribe
@@ -157,7 +156,6 @@ class PlayerFragment : Fragment() {
     private var token = ""
     private var relatedStreamsEnabled = true
     private var autoplayEnabled = false
-    private val sponsorBlockPrefs = SponsorBlockPrefs()
     private var autoRotationEnabled = true
     private var playbackSpeed = "1F"
     private var pausePlayerOnScreenOffEnabled = false
@@ -171,6 +169,8 @@ class PlayerFragment : Fragment() {
     private var bufferingGoal = 50000
     private var seekBarPreview = false
     private var defaultSubtitle = ""
+    private var sponsorBlockEnabled = true
+    private var sponsorBlockNotifications = true
 
     /**
      * for autoplay
@@ -234,7 +234,6 @@ class PlayerFragment : Fragment() {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 
-        setSponsorBlockPrefs()
         createExoPlayer()
         initializeTransitionLayout()
         initializeOnClickActions()
@@ -315,6 +314,16 @@ class PlayerFragment : Fragment() {
             false
         )
 
+        sponsorBlockEnabled = PreferenceHelper.getBoolean(
+            "sb_enabled_key",
+            true
+        )
+
+        sponsorBlockNotifications = PreferenceHelper.getBoolean(
+            "sb_notifications_key",
+            true
+        )
+
         defaultSubtitle = PreferenceHelper.getString(
             PreferenceKeys.DEFAULT_SUBTITLE,
             ""
@@ -323,29 +332,6 @@ class PlayerFragment : Fragment() {
         if (defaultSubtitle.contains("-")) {
             defaultSubtitle = defaultSubtitle.split("-")[0]
         }
-    }
-
-    private fun setSponsorBlockPrefs() {
-        sponsorBlockPrefs.sponsorBlockEnabled =
-            PreferenceHelper.getBoolean("sb_enabled_key", true)
-        sponsorBlockPrefs.sponsorNotificationsEnabled =
-            PreferenceHelper.getBoolean("sb_notifications_key", true)
-        sponsorBlockPrefs.introEnabled =
-            PreferenceHelper.getBoolean("intro_category_key", false)
-        sponsorBlockPrefs.selfPromoEnabled =
-            PreferenceHelper.getBoolean("selfpromo_category_key", false)
-        sponsorBlockPrefs.interactionEnabled =
-            PreferenceHelper.getBoolean("interaction_category_key", false)
-        sponsorBlockPrefs.sponsorsEnabled =
-            PreferenceHelper.getBoolean("sponsors_category_key", true)
-        sponsorBlockPrefs.outroEnabled =
-            PreferenceHelper.getBoolean("outro_category_key", false)
-        sponsorBlockPrefs.fillerEnabled =
-            PreferenceHelper.getBoolean("filler_category_key", false)
-        sponsorBlockPrefs.musicOffTopicEnabled =
-            PreferenceHelper.getBoolean("music_offtopic_category_key", false)
-        sponsorBlockPrefs.previewEnabled =
-            PreferenceHelper.getBoolean("preview_category_key", false)
     }
 
     private fun initializeTransitionLayout() {
@@ -729,7 +715,7 @@ class PlayerFragment : Fragment() {
     }
 
     private fun checkForSegments() {
-        if (!exoPlayer.isPlaying || !sponsorBlockPrefs.sponsorBlockEnabled) return
+        if (!exoPlayer.isPlaying || !sponsorBlockEnabled) return
 
         exoPlayerView.postDelayed(this::checkForSegments, 100)
 
@@ -742,7 +728,7 @@ class PlayerFragment : Fragment() {
             val segmentEnd = (segment.segment[1] * 1000.0f).toLong()
             val currentPosition = exoPlayer.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
-                if (sponsorBlockPrefs.sponsorNotificationsEnabled) {
+                if (sponsorBlockNotifications) {
                     Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
                 }
                 exoPlayer.seekTo(segmentEnd)
@@ -784,7 +770,7 @@ class PlayerFragment : Fragment() {
                     exoPlayer.play()
                     exoPlayerView.useController = true
                     initializePlayerNotification(requireContext())
-                    fetchSponsorBlockSegments()
+                    if (sponsorBlockEnabled) fetchSponsorBlockSegments()
                     // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
@@ -796,6 +782,24 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    /**
+     * fetch the segments for SponsorBlock
+     */
+    private fun fetchSponsorBlockSegments() {
+        CoroutineScope(Dispatchers.IO).launch {
+            kotlin.runCatching {
+                val categories = PlayerHelper.getSponsorBlockCategories()
+                if (categories.size > 0) {
+                    segmentData =
+                        RetrofitInstance.api.getSegments(
+                            videoId!!,
+                            ObjectMapper().writeValueAsString(categories)
+                        )
+                }
+            }
+        }
     }
 
     private fun refreshLiveStatus() {
@@ -899,56 +903,6 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun fetchSponsorBlockSegments() {
-        fun run() {
-            lifecycleScope.launch(Dispatchers.IO) {
-                if (sponsorBlockPrefs.sponsorBlockEnabled) {
-                    val categories: ArrayList<String> = arrayListOf()
-                    if (sponsorBlockPrefs.introEnabled) {
-                        categories.add("intro")
-                    }
-                    if (sponsorBlockPrefs.selfPromoEnabled) {
-                        categories.add("selfpromo")
-                    }
-                    if (sponsorBlockPrefs.interactionEnabled) {
-                        categories.add("interaction")
-                    }
-                    if (sponsorBlockPrefs.sponsorsEnabled) {
-                        categories.add("sponsor")
-                    }
-                    if (sponsorBlockPrefs.outroEnabled) {
-                        categories.add("outro")
-                    }
-                    if (sponsorBlockPrefs.fillerEnabled) {
-                        categories.add("filler")
-                    }
-                    if (sponsorBlockPrefs.musicOffTopicEnabled) {
-                        categories.add("music_offtopic")
-                    }
-                    if (sponsorBlockPrefs.previewEnabled) {
-                        categories.add("preview")
-                    }
-                    if (categories.size > 0) {
-                        segmentData = try {
-                            RetrofitInstance.api.getSegments(
-                                videoId!!,
-                                "[\"" + TextUtils.join("\",\"", categories) + "\"]"
-                            )
-                        } catch (e: IOException) {
-                            println(e)
-                            Log.e(TAG, "IOException, you might not have internet connection")
-                            return@launch
-                        } catch (e: HttpException) {
-                            Log.e(TAG, "HttpException, unexpected response")
-                            return@launch
-                        }
-                    }
-                }
-            }
-        }
-        run()
-    }
-
     private fun prepareExoPlayerView() {
         exoPlayerView.apply {
             setShowSubtitleButton(true)
@@ -1014,8 +968,8 @@ class PlayerFragment : Fragment() {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
-                if (isPlaying && sponsorBlockPrefs.sponsorBlockEnabled) {
-                    exoPlayerView.postDelayed(
+                if (isPlaying && sponsorBlockEnabled) {
+                    Handler(Looper.getMainLooper()).postDelayed(
                         this@PlayerFragment::checkForSegments,
                         100
                     )
