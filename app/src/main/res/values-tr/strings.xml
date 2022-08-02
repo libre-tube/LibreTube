@@ -287,4 +287,6 @@
     <string name="required_network">Gerekli ağ türü</string>
     <string name="network_all">Tüm ağlar</string>
     <string name="network_metered">Ölçülen</string>
+    <string name="error_occurred">Hata oluştu</string>
+    <string name="copied">Kopyalandı</string>
 </resources>
