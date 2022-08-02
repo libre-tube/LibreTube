@@ -1,17 +1,14 @@
 package com.github.libretube.util
 
-import android.util.Log
 import com.github.libretube.preferences.PreferenceHelper
-import kotlin.system.exitProcess
 
-class ExceptionHandler : Thread.UncaughtExceptionHandler {
+class ExceptionHandler(
+    private val defaultExceptionHandler: Thread.UncaughtExceptionHandler?
+) : Thread.UncaughtExceptionHandler {
     override fun uncaughtException(thread: Thread, exc: Throwable) {
-        Log.e("bnyro", exc.stackTraceToString())
-        // sav ethe error log
+        // save the error log
         PreferenceHelper.saveErrorLog(exc.stackTraceToString())
-        // finish the app
-        System.exit(0)
-        android.os.Process.killProcess(android.os.Process.myPid())
-        exitProcess(0)
+        // throw the exception with the default exception handler to make the app crash
+        defaultExceptionHandler?.uncaughtException(thread, exc)
     }
 }

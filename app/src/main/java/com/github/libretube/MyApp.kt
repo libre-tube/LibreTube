@@ -46,7 +46,8 @@ class MyApp : Application() {
         /**
          * Handler for uncaught exceptions
          */
-        val exceptionHandler = ExceptionHandler()
+        val defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
+        val exceptionHandler = ExceptionHandler(defaultExceptionHandler)
         Thread.setDefaultUncaughtExceptionHandler(exceptionHandler)
     }
 
