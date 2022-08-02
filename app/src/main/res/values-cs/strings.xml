@@ -287,4 +287,6 @@
     <string name="network_all">Všechny sítě</string>
     <string name="network_metered">Měřené</string>
     <string name="no_search_result">Nenalezeny žádné výsledky.</string>
+    <string name="error_occurred">Vyskytla se chyba</string>
+    <string name="copied">Zkopírováno</string>
 </resources>
