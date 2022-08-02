@@ -72,7 +72,7 @@
             app:title="@string/buffering_goal" />
 
         <ListPreference
-            android:defaultValue="none"
+            android:defaultValue=""
             android:icon="@drawable/ic_caption"
             app:key="default_subtitle"
             app:title="@string/default_subtitle_language" />

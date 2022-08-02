@@ -168,7 +168,7 @@ class PlayerFragment : Fragment() {
     private var defRes = ""
     private var bufferingGoal = 50000
     private var seekBarPreview = false
-    private var defaultSubtitle = ""
+    private var defaultSubtitleCode = ""
     private var sponsorBlockEnabled = true
     private var sponsorBlockNotifications = true
 
@@ -324,13 +324,13 @@ class PlayerFragment : Fragment() {
             true
         )
 
-        defaultSubtitle = PreferenceHelper.getString(
+        defaultSubtitleCode = PreferenceHelper.getString(
             PreferenceKeys.DEFAULT_SUBTITLE,
             ""
         )
 
-        if (defaultSubtitle.contains("-")) {
-            defaultSubtitle = defaultSubtitle.split("-")[0]
+        if (defaultSubtitleCode.contains("-")) {
+            defaultSubtitleCode = defaultSubtitleCode.split("-")[0]
         }
     }
 
@@ -1347,6 +1347,15 @@ class PlayerFragment : Fragment() {
             subtitleCodesList += it.code!!
         }
 
+        // set the default subtitle if available
+        if (defaultSubtitleCode != "" && subtitleCodesList.contains(defaultSubtitleCode)) {
+            val newParams = trackSelector.buildUponParameters()
+                .setPreferredTextLanguage(defaultSubtitleCode)
+                .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+            trackSelector.setParameters(newParams)
+            playerBinding.captions.setImageResource(R.drawable.ic_caption)
+        }
+
         // captions selection dialog
         // hide caption selection view if no subtitles available
         if (response.subtitles.isEmpty()) playerBinding.captions.visibility = View.GONE
@@ -1492,10 +1501,8 @@ class PlayerFragment : Fragment() {
             )
             .build()
 
-        // set the subtitle if default subtitle selected
+        // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
-        if (defaultSubtitle != "") trackSelector.buildUponParameters()
-            .setPreferredTextLanguage(defaultSubtitle)
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
