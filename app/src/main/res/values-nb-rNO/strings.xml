@@ -243,4 +243,24 @@
     <string name="data_saver_mode">Datasparingsmodus</string>
     <string name="general_summary">Språk, region</string>
     <string name="search_history_summary">Lagre søkespørringer lokalt</string>
+    <string name="notifications">Merknader</string>
+    <string name="new_streams_count">%1$s nye strømmer tilgjengelig</string>
+    <string name="new_streams_by">Nye strømmer av %1$s …</string>
+    <string name="most_recent">Nyligst</string>
+    <string name="least_recent">Eldst</string>
+    <string name="most_views">Flest visninger</string>
+    <string name="least_views">Færrest visninger</string>
+    <string name="channel_name_az">Kanalnavn (A-Å)</string>
+    <string name="channel_name_za">Kanalnavn (Å-A)</string>
+    <string name="translate">Oversett</string>
+    <string name="network_metered">Kvotebasert</string>
+    <string name="history_empty">Historikken er tom.</string>
+    <string name="network_wifi">Kun Wi-Fi</string>
+    <string name="required_network">Påkrevd nettverkstype</string>
+    <string name="network_all">Alle nettverk</string>
+    <string name="downloading_apk">Laster ned APK …</string>
+    <string name="playerAudioFormat">Lydformat for avspiller</string>
+    <string name="playerAudioQuality">Lydkvalitet</string>
+    <string name="best_quality">Best</string>
+    <string name="worst_quality">Verst</string>
 </resources>
