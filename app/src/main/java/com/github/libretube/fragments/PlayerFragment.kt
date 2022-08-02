@@ -717,15 +717,15 @@ class PlayerFragment : Fragment() {
     private fun checkForSegments() {
         if (!exoPlayer.isPlaying || !sponsorBlockEnabled) return
 
-        exoPlayerView.postDelayed(this::checkForSegments, 100)
+        Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
 
         if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) {
             return
         }
 
         segmentData.segments.forEach { segment: Segment ->
-            val segmentStart = (segment.segment!![0] * 1000.0f).toLong()
-            val segmentEnd = (segment.segment[1] * 1000.0f).toLong()
+            val segmentStart = (segment.segment!![0] * 1000f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = exoPlayer.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
                 if (sponsorBlockNotifications) {
