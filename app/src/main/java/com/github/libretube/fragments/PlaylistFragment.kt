@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.databinding.FragmentPlaylistBinding
@@ -112,6 +114,35 @@ class PlaylistFragment : Fragment() {
                                 // scroll view is not at bottom
                             }
                         }
+
+                    /**
+                     * listener for swiping to the left or right
+                     */
+                    if (isOwner) {
+                        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
+                            0,
+                            ItemTouchHelper.RIGHT
+                        ) {
+                            override fun onMove(
+                                recyclerView: RecyclerView,
+                                viewHolder: RecyclerView.ViewHolder,
+                                target: RecyclerView.ViewHolder
+                            ): Boolean {
+                                return false
+                            }
+
+                            override fun onSwiped(
+                                viewHolder: RecyclerView.ViewHolder,
+                                direction: Int
+                            ) {
+                                val position = viewHolder.absoluteAdapterPosition
+                                playlistAdapter!!.removeFromPlaylist(position)
+                            }
+                        }
+
+                        val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+                        itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
+                    }
                 }
             }
         }
