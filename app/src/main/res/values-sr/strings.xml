@@ -244,7 +244,7 @@
     <string name="torchIcon">Бакља</string>
     <string name="deleteAccount_summary">Обриши свој Piped налог</string>
     <string name="account">Налог</string>
-    <string name="downloading">Преузимања</string>
+    <string name="downloading">Преузимања…</string>
     <string name="player_autoplay">Аутоплеј</string>
     <string name="reset_message">Да ли сте сигурни\? Ово ће вас одјавити и ресетовати сва ваша подешавања!</string>
     <string name="audio_video">Аудио и видео</string>
