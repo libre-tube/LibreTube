@@ -287,4 +287,6 @@
     <string name="translate">תרגום</string>
     <string name="translate_summary">אפשר לסייע על ידי תרגום היישום לשפה שלך</string>
     <string name="no_search_result">לא נמצאו תוצאות.</string>
+    <string name="copied">הועתק</string>
+    <string name="error_occurred">אירעה שגיאה</string>
 </resources>
