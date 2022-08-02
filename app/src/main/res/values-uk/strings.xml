@@ -167,4 +167,22 @@
     <string name="app_behavior">Поведінка</string>
     <string name="download_directory">Завантажити до</string>
     <string name="donate">Пожертвувати</string>
+    <string name="instance_summary">Piped, логін, підписки</string>
+    <string name="quality">Якість</string>
+    <string name="behavior">Поведінка</string>
+    <string name="piped_summary">Piped — це альтернативний веб-фронтенд з відкритим вихідним кодом для YouTube, який забезпечує API, який ми використовуємо. Без Piped LibreTube не існував би. Величезне спасибі його розробникам!</string>
+    <string name="version">Версія %1$s</string>
+    <string name="about_summary">Познайомтеся з командою LibreTube і тим, як це все відбувається.</string>
+    <string name="show_chapters">Показати розділи</string>
+    <string name="hide_chapters">Приховати розділи</string>
+    <string name="empty_instance">Заповніть ім\'я та URL-адресу API.</string>
+    <string name="invalid_url">Будь ласка, введіть URL-адресу, яка працює</string>
+    <string name="related_streams">Пов\'язаний вміст</string>
+    <string name="related_streams_summary">Показувати пов\'язані трансляції поруч із тими, що ви дивитеся.</string>
+    <string name="buffering_goal">Попереднє завантаження</string>
+    <string name="buffering_goal_summary">Макс. кількість секунд відео для буферизації.</string>
+    <string name="no_video">Немає відео</string>
+    <string name="video">Відео</string>
+    <string name="player_autoplay">Автоматичне відтворення</string>
+    <string name="downloading">Завантаження…</string>
 </resources>

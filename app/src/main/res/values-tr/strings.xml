@@ -280,4 +280,11 @@
     <string name="least_recent">En eski</string>
     <string name="notify_new_streams_summary">Aboneliklerden yeni akışlar mevcut olduğunda bildir</string>
     <string name="channel_name_za">Kanal Adı (Z-A)</string>
+    <string name="translate">Çevirmek</string>
+    <string name="translate_summary">Uygulamayı konuştuğunuz dile çevirerek yardım edin</string>
+    <string name="no_search_result">Sonuç bulunamadı.</string>
+    <string name="network_wifi">Yalnızca WiFi</string>
+    <string name="required_network">Gerekli ağ türü</string>
+    <string name="network_all">Tüm ağlar</string>
+    <string name="network_metered">Ölçülen</string>
 </resources>

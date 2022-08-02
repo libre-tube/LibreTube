@@ -264,4 +264,27 @@
     <string name="caption_settings">Paramètres des légendes</string>
     <string name="downloading_apk">Téléchargement de l\'APK…</string>
     <string name="playerAudioFormat">Format audio pour le lecteur</string>
+    <string name="new_streams_count">%1$s nouveaux flux sont disponibles</string>
+    <string name="default_subtitle_language">Langue des sous-titres par défaut</string>
+    <string name="notifications">Notifications</string>
+    <string name="sort">Tri</string>
+    <string name="least_recent">Plus anciens</string>
+    <string name="most_views">Plus vus</string>
+    <string name="least_views">Moins vus</string>
+    <string name="translate">Traduire</string>
+    <string name="translate_summary">Aidez-nous en traduisant l\'application dans la langue que vous parlez</string>
+    <string name="most_recent">Plus récents</string>
+    <string name="network_all">Tous les réseaux</string>
+    <string name="channel_name_za">Nom de chaine (Z-A)</string>
+    <string name="network_wifi">WiFi uniquement</string>
+    <string name="channel_name_az">Nom de chaine (A-Z)</string>
+    <string name="irreversible">Êtes-vous sûr(e) \? Ça ne peut pas être annulé !</string>
+    <string name="history_empty">L\'historique est vide.</string>
+    <string name="notify_new_streams">Nouvelles notifications de flux</string>
+    <string name="notify_new_streams_summary">Notifie quand de nouveaux flux des souscriptions sont disponibles</string>
+    <string name="network_metered">Mesure</string>
+    <string name="no_search_result">Aucun résultat trouvé.</string>
+    <string name="new_streams_by">Nouveaux stream par %1$s…</string>
+    <string name="required_network">Type de réseau nécessaire</string>
+    <string name="checking_frequency">Fréquence de vérification</string>
 </resources>

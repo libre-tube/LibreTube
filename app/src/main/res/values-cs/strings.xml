@@ -265,4 +265,26 @@
     <string name="best_quality">Nejlepší kvalita</string>
     <string name="worst_quality">Nejhorší kvalita</string>
     <string name="default_subtitle_language">Výchozí jazyk titulků</string>
+    <string name="notifications">Upozornění</string>
+    <string name="notify_new_streams">Upozornění na nové streamy</string>
+    <string name="notify_new_streams_summary">Upozornění na nové streamy z odběrů</string>
+    <string name="checking_frequency">Frekvence kontroly</string>
+    <string name="new_streams_by">Nové streamy od %1$s…</string>
+    <string name="most_recent">Nejnovější</string>
+    <string name="least_recent">Nejstarší</string>
+    <string name="most_views">Nejvíce zhlédnutí</string>
+    <string name="translate">Přeložit</string>
+    <string name="least_views">Nejméně zhlédnutí</string>
+    <string name="required_network">Požadovaný typ sítě</string>
+    <string name="translate_summary">Pomozte překladem aplikace do jazyka, kterým mluvíte</string>
+    <string name="new_streams_count">K dispozici je %1$s nových streamů</string>
+    <string name="history_empty">Historie je prázdná.</string>
+    <string name="channel_name_az">Název kanálu (A-Z)</string>
+    <string name="sort">Seřadit</string>
+    <string name="network_wifi">Pouze WiFi</string>
+    <string name="irreversible">Opravdu\? Tohle se nedá vrátit!</string>
+    <string name="channel_name_za">Název kanálu (Z-A)</string>
+    <string name="network_all">Všechny sítě</string>
+    <string name="network_metered">Měřené</string>
+    <string name="no_search_result">Nenalezeny žádné výsledky.</string>
 </resources>

@@ -280,4 +280,11 @@
     <string name="sort">Növ</string>
     <string name="new_streams_by">%1$s tərəfindən yeni yayımlar…</string>
     <string name="history_empty">Tarixçə boşdur.</string>
+    <string name="required_network">Tələb olunan şəbəkə növü</string>
+    <string name="network_all">Bütün şəbəkələr</string>
+    <string name="network_wifi">Yalnız WiFi</string>
+    <string name="translate">Tərcümə etmək</string>
+    <string name="translate_summary">Tətbiqi danışdığınız dilə tərcümə edərək kömək edin</string>
+    <string name="network_metered">Ölçülmüş</string>
+    <string name="no_search_result">Heç bir nəticə tapılmadı.</string>
 </resources>
