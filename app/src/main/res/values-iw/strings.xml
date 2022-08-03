@@ -289,4 +289,6 @@
     <string name="no_search_result">לא נמצאו תוצאות.</string>
     <string name="copied">הועתק</string>
     <string name="error_occurred">אירעה שגיאה</string>
+    <string name="share_with_time">שיתוף עם קוד זמני</string>
+    <string name="downloadsucceeded">ההורדה הצליחה</string>
 </resources>
