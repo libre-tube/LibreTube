@@ -235,6 +235,21 @@ object PreferenceHelper {
         return getString(PreferenceKeys.ERROR_LOG, "")
     }
 
+    fun getLocalSubscriptions(): List<String> {
+        val json = settings.getString(PreferenceKeys.LOCAL_SUBSCRIPTIONS, "")
+        return try {
+            val type = object : TypeReference<List<String>>() {}
+            mapper.readValue(json, type)
+        } catch (e: Exception) {
+            listOf()
+        }
+    }
+
+    fun setLocalSubscriptions(channels: List<String>) {
+        val json = mapper.writeValueAsString(channels)
+        editor.putString(PreferenceKeys.LOCAL_SUBSCRIPTIONS, json).commit()
+    }
+
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }

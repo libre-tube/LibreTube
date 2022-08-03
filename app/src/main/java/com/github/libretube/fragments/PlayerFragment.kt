@@ -55,7 +55,6 @@ import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
-import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
@@ -66,6 +65,7 @@ import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.OnDoubleTapEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.hideKeyboard
 import com.github.libretube.util.toID
@@ -117,7 +117,7 @@ class PlayerFragment : Fragment() {
     private var videoId: String? = null
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var isSubscribed: Boolean = false
+    private var isSubscribed: Boolean? = false
     private var isLive = false
 
     /**
@@ -1564,84 +1564,24 @@ class PlayerFragment : Fragment() {
     private fun isSubscribed() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.isSubscribed(
-                        channelId!!,
-                        token
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    return@launchWhenCreated
-                }
+                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+
+                if (isSubscribed == null) return@launchWhenCreated
 
                 runOnUiThread {
-                    if (response.subscribed == true) {
-                        isSubscribed = true
+                    if (isSubscribed == true) {
                         binding.playerSubscribe.text = getString(R.string.unsubscribe)
                     }
-                    if (response.subscribed != null) {
-                        binding.playerSubscribe.setOnClickListener {
-                            if (isSubscribed) {
-                                unsubscribe(channelId!!)
-                                binding.playerSubscribe.text = getString(R.string.subscribe)
-                            } else {
-                                subscribe(channelId!!)
-                                binding.playerSubscribe.text = getString(R.string.unsubscribe)
-                            }
+                    binding.playerSubscribe.setOnClickListener {
+                        if (isSubscribed == true) {
+                            SubscriptionHelper.unsubscribe(channelId!!)
+                            binding.playerSubscribe.text = getString(R.string.subscribe)
+                        } else {
+                            SubscriptionHelper.subscribe(channelId!!)
+                            binding.playerSubscribe.text = getString(R.string.unsubscribe)
                         }
-                    } else {
-                        Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT)
-                            .show()
                     }
                 }
-            }
-        }
-        run()
-    }
-
-    private fun subscribe(channelId: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    RetrofitInstance.authApi.subscribe(
-                        token,
-                        Subscribe(channelId)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response$e")
-                    return@launchWhenCreated
-                }
-                isSubscribed = true
-            }
-        }
-        run()
-    }
-
-    private fun unsubscribe(channel_id: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    RetrofitInstance.authApi.unsubscribe(
-                        token,
-                        Subscribe(channel_id)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    return@launchWhenCreated
-                }
-                isSubscribed = false
             }
         }
         run()

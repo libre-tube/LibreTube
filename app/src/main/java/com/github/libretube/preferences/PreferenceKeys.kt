@@ -61,7 +61,6 @@ object PreferenceKeys {
     /**
      * Download
      */
-    const val DOWNLOAD_VIDEO_FORMAT = "video_format"
     const val DOWNLOAD_LOCATION = "download_location"
     const val DOWNLOAD_FOLDER = "download_folder"
 
@@ -86,4 +85,9 @@ object PreferenceKeys {
      * Error logs
      */
     const val ERROR_LOG = "error_log"
+
+    /**
+     * Data
+     */
+    const val LOCAL_SUBSCRIPTIONS = "local_subscriptions"
 }

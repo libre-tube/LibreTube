@@ -15,10 +15,11 @@
         android:visibility="gone" />
 
     <RelativeLayout
-        android:id="@+id/loginOrRegister"
+        android:id="@+id/emptyFeed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/boogh"
@@ -26,7 +27,7 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_login" />
+            android:src="@drawable/ic_list" />
 
         <TextView
             android:id="@+id/textLike"
@@ -36,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="10dp"
             android:gravity="center"
-            android:text="@string/please_login"
+            android:text="@string/emptyList"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>

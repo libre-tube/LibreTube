@@ -19,6 +19,7 @@ import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.toID
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
@@ -53,63 +54,57 @@ class SubscriptionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         token = PreferenceHelper.getToken()
 
-        if (token != "") {
-            binding.loginOrRegister.visibility = View.GONE
-            binding.subRefresh.isEnabled = true
+        binding.subRefresh.isEnabled = true
 
-            binding.subProgress.visibility = View.VISIBLE
+        binding.subProgress.visibility = View.VISIBLE
 
-            val grid = PreferenceHelper.getString(
-                PreferenceKeys.GRID_COLUMNS,
-                resources.getInteger(R.integer.grid_items).toString()
-            )
-            binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
+        val grid = PreferenceHelper.getString(
+            PreferenceKeys.GRID_COLUMNS,
+            resources.getInteger(R.integer.grid_items).toString()
+        )
+        binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
+        fetchFeed()
+
+        binding.subRefresh.setOnRefreshListener {
+            fetchChannels()
             fetchFeed()
-
-            binding.subRefresh.setOnRefreshListener {
-                fetchChannels()
-                fetchFeed()
-            }
-
-            binding.sortTV.setOnClickListener {
-                showSortDialog()
-            }
-
-            binding.toggleSubs.visibility = View.VISIBLE
-            var loadedSubbedChannels = false
-
-            binding.toggleSubs.setOnClickListener {
-                if (!binding.subChannelsContainer.isVisible) {
-                    if (!loadedSubbedChannels) {
-                        binding.subChannels.layoutManager = LinearLayoutManager(context)
-                        fetchChannels()
-                        loadedSubbedChannels = true
-                    }
-                    binding.subChannelsContainer.visibility = View.VISIBLE
-                    binding.subFeedContainer.visibility = View.GONE
-                } else {
-                    binding.subChannelsContainer.visibility = View.GONE
-                    binding.subFeedContainer.visibility = View.VISIBLE
-                }
-            }
-
-            binding.scrollviewSub.viewTreeObserver
-                .addOnScrollChangedListener {
-                    if (binding.scrollviewSub.getChildAt(0).bottom
-                        == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
-                    ) {
-                        // scroll view is at bottom
-                        if (isLoaded) {
-                            binding.subRefresh.isRefreshing = true
-                            subscriptionAdapter?.updateItems()
-                            binding.subRefresh.isRefreshing = false
-                        }
-                    }
-                }
-        } else {
-            binding.subRefresh.isEnabled = false
-            binding.subFeedContainer.visibility = View.GONE
         }
+
+        binding.sortTV.setOnClickListener {
+            showSortDialog()
+        }
+
+        binding.toggleSubs.visibility = View.VISIBLE
+        var loadedSubbedChannels = false
+
+        binding.toggleSubs.setOnClickListener {
+            if (!binding.subChannelsContainer.isVisible) {
+                if (!loadedSubbedChannels) {
+                    binding.subChannels.layoutManager = LinearLayoutManager(context)
+                    fetchChannels()
+                    loadedSubbedChannels = true
+                }
+                binding.subChannelsContainer.visibility = View.VISIBLE
+                binding.subFeedContainer.visibility = View.GONE
+            } else {
+                binding.subChannelsContainer.visibility = View.GONE
+                binding.subFeedContainer.visibility = View.VISIBLE
+            }
+        }
+
+        binding.scrollviewSub.viewTreeObserver
+            .addOnScrollChangedListener {
+                if (binding.scrollviewSub.getChildAt(0).bottom
+                    == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
+                ) {
+                    // scroll view is at bottom
+                    if (isLoaded) {
+                        binding.subRefresh.isRefreshing = true
+                        subscriptionAdapter?.updateItems()
+                        binding.subRefresh.isRefreshing = false
+                    }
+                }
+            }
     }
 
     private fun showSortDialog() {
@@ -130,7 +125,10 @@ class SubscriptionsFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 feed = try {
-                    RetrofitInstance.authApi.getFeed(token)
+                    if (token != "") RetrofitInstance.authApi.getFeed(token)
+                    else RetrofitInstance.authApi.getUnauthenticatedFeed(
+                        SubscriptionHelper.getFormattedLocalSubscriptions()
+                    )
                 } catch (e: IOException) {
                     Log.e(TAG, e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -148,15 +146,7 @@ class SubscriptionsFragment : Fragment() {
                     showFeed()
                 } else {
                     runOnUiThread {
-                        with(binding.boogh) {
-                            visibility = View.VISIBLE
-                            setImageResource(R.drawable.ic_list)
-                        }
-                        with(binding.textLike) {
-                            visibility = View.VISIBLE
-                            text = getString(R.string.emptyList)
-                        }
-                        binding.loginOrRegister.visibility = View.VISIBLE
+                        binding.emptyFeed.visibility = View.VISIBLE
                     }
                 }
                 binding.subProgress.visibility = View.GONE
@@ -185,7 +175,10 @@ class SubscriptionsFragment : Fragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.authApi.subscriptions(token)
+                    if (token != "") RetrofitInstance.authApi.subscriptions(token)
+                    else RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                        SubscriptionHelper.getFormattedLocalSubscriptions()
+                    )
                 } catch (e: IOException) {
                     Log.e(TAG, e.toString())
                     Log.e(TAG, "IOException, you might not have internet connection")
