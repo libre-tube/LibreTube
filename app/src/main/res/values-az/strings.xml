@@ -290,4 +290,5 @@
     <string name="copied">Kopyalandı</string>
     <string name="error_occurred">Xəta baş verdi</string>
     <string name="downloadsucceeded">Endirmə uğurlu oldu</string>
+    <string name="share_with_time">Vaxt kodu ilə paylaşın</string>
 </resources>
