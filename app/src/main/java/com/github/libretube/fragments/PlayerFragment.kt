@@ -53,7 +53,6 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
@@ -119,6 +118,7 @@ class PlayerFragment : Fragment() {
     private var channelId: String? = null
     private var isSubscribed: Boolean? = false
     private var isLive = false
+    private lateinit var streams: Streams
 
     /**
      * for the transition
@@ -175,7 +175,6 @@ class PlayerFragment : Fragment() {
     /**
      * for autoplay
      */
-    private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var nextStreamId: String? = null
     private var playlistStreamIds: MutableList<String> = arrayListOf()
     private var playlistNextPage: String? = null
@@ -186,13 +185,6 @@ class PlayerFragment : Fragment() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
-
-    /**
-     * for the media description of the notification
-     */
-    private lateinit var title: String
-    private lateinit var uploader: String
-    private lateinit var thumbnailUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -739,7 +731,7 @@ class PlayerFragment : Fragment() {
     private fun playVideo() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                streams = try {
                     RetrofitInstance.api.getStreams(videoId!!)
                 } catch (e: IOException) {
                     println(e)
@@ -751,21 +743,13 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
-                // for the notification description adapter
-                title = response.title!!
-                uploader = response.uploader!!
-                thumbnailUrl = response.thumbnailUrl!!
-                channelId = response.uploaderUrl.toID()
-
-                // save related streams for autoplay
-                relatedStreams = response.relatedStreams
 
                 runOnUiThread {
                     // set media sources for the player
-                    setResolutionAndSubtitles(response)
+                    setResolutionAndSubtitles(streams)
                     prepareExoPlayerView()
-                    initializePlayerView(response)
-                    seekToWatchPosition()
+                    initializePlayerView(streams)
+                    if (!isLive) seekToWatchPosition()
                     exoPlayer.prepare()
                     exoPlayer.play()
                     exoPlayerView.useController = true
@@ -776,7 +760,7 @@ class PlayerFragment : Fragment() {
                     // prepare for autoplay
                     initAutoPlay()
                     if (watchHistoryEnabled) {
-                        PreferenceHelper.addToWatchHistory(videoId!!, response)
+                        PreferenceHelper.addToWatchHistory(videoId!!, streams)
                     }
                 }
             }
@@ -828,7 +812,10 @@ class PlayerFragment : Fragment() {
         val watchPositions = PreferenceHelper.getWatchPositions()
         var position: Long? = null
         watchPositions.forEach {
-            if (it.videoId == videoId) position = it.position
+            if (it.videoId == videoId &&
+                // don't seek to the position if it's the end, autoplay would skip it immediately
+                streams.duration!! - it.position / 1000 > 2
+            ) position = it.position
         }
         // support for time stamped links
         val timeStamp: Long? = arguments?.getLong("timeStamp")
@@ -884,9 +871,9 @@ class PlayerFragment : Fragment() {
                 // else: the video must be the last video of the playlist so nothing happens
 
                 // if it's not a playlist then use the next related video
-            } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
+            } else if (streams.relatedStreams != null && streams.relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
-                nextStreamId = relatedStreams!![0].url.toID()
+                nextStreamId = streams.relatedStreams!![0].url.toID()
             }
         }
     }
@@ -896,6 +883,9 @@ class PlayerFragment : Fragment() {
         // check whether there is a new video in the queue
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
+        // forces the comments to reload for the new video
+        commentsLoaded = false
+        binding.commentsRecView.adapter = null
         if (videoId != nextStreamId) {
             // save the id of the next stream as videoId and load the next video
             videoId = nextStreamId
@@ -1064,9 +1054,9 @@ class PlayerFragment : Fragment() {
 
                 intent.action = Intent.ACTION_VIEW
                 intent.setDataAndType(uri, "video/*")
-                intent.putExtra(Intent.EXTRA_TITLE, title)
-                intent.putExtra("title", title)
-                intent.putExtra("artist", uploader)
+                intent.putExtra(Intent.EXTRA_TITLE, streams.title)
+                intent.putExtra("title", streams.title)
+                intent.putExtra("artist", streams.uploader)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
                 try {
@@ -1525,7 +1515,12 @@ class PlayerFragment : Fragment() {
         playerNotification = PlayerNotificationManager
             .Builder(c, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(title, uploader, thumbnailUrl, requireContext())
+                DescriptionAdapter(
+                    streams.title!!,
+                    streams.uploader!!,
+                    streams.thumbnailUrl!!,
+                    requireContext()
+                )
             )
             .build()
 
