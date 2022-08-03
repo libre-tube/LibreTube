@@ -5,17 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.databinding.FragmentChannelBinding
-import com.github.libretube.obj.Subscribe
-import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.toID
 import retrofit2.HttpException
@@ -31,7 +29,7 @@ class ChannelFragment : Fragment() {
     var nextPage: String? = null
     private var channelAdapter: ChannelAdapter? = null
     private var isLoading = true
-    private var isSubscribed: Boolean = false
+    private var isSubscribed: Boolean? = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,13 +59,7 @@ class ChannelFragment : Fragment() {
         val refreshChannel = {
             binding.channelRefresh.isRefreshing = true
             fetchChannel()
-            if (PreferenceHelper.getToken() != "") {
-                isSubscribed()
-            } else {
-                binding.channelSubscribe.setOnClickListener {
-                    Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-                }
-            }
+            isSubscribed()
         }
         refreshChannel()
         binding.channelRefresh.setOnRefreshListener {
@@ -90,76 +82,28 @@ class ChannelFragment : Fragment() {
     }
 
     private fun isSubscribed() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    val token = PreferenceHelper.getToken()
-                    RetrofitInstance.authApi.isSubscribed(
-                        channelId!!,
-                        token
-                    )
-                } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
-                    return@launchWhenCreated
+        lifecycleScope.launchWhenCreated {
+            isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+            if (isSubscribed == null) return@launchWhenCreated
+
+            runOnUiThread {
+                if (isSubscribed == true) {
+                    binding.channelSubscribe.text = getString(R.string.unsubscribe)
                 }
 
-                runOnUiThread {
-                    if (response.subscribed == true) {
+                binding.channelSubscribe.setOnClickListener {
+                    binding.channelSubscribe.text = if (isSubscribed == true) {
+                        SubscriptionHelper.unsubscribe(channelId!!)
+                        isSubscribed = false
+                        getString(R.string.subscribe)
+                    } else {
+                        SubscriptionHelper.subscribe(channelId!!)
                         isSubscribed = true
-                        binding.channelSubscribe.text = getString(R.string.unsubscribe)
-                    }
-
-                    binding.channelSubscribe.setOnClickListener {
-                        if (response.subscribed != null) {
-                            binding.channelSubscribe.text = if (isSubscribed) {
-                                unsubscribe()
-                                getString(R.string.subscribe)
-                            } else {
-                                subscribe()
-                                getString(R.string.unsubscribe)
-                            }
-                        }
+                        getString(R.string.unsubscribe)
                     }
                 }
             }
         }
-        run()
-    }
-
-    private fun subscribe() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    val token = PreferenceHelper.getToken()
-                    RetrofitInstance.authApi.subscribe(
-                        token,
-                        Subscribe(channelId)
-                    )
-                } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
-                }
-                isSubscribed = true
-            }
-        }
-        run()
-    }
-
-    private fun unsubscribe() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    val token = PreferenceHelper.getToken()
-                    RetrofitInstance.authApi.unsubscribe(
-                        token,
-                        Subscribe(channelId)
-                    )
-                } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
-                }
-                isSubscribed = false
-            }
-        }
-        run()
     }
 
     private fun fetchChannel() {
