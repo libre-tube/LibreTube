@@ -289,4 +289,5 @@
     <string name="no_search_result">Heç bir nəticə tapılmadı.</string>
     <string name="copied">Kopyalandı</string>
     <string name="error_occurred">Xəta baş verdi</string>
+    <string name="downloadsucceeded">Endirmə uğurlu oldu</string>
 </resources>
