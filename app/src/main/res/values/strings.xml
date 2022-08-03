@@ -290,4 +290,5 @@
     <string name="error_occurred">Error occurred</string>
     <string name="copied">Copied</string>
     <string name="downloadsucceeded">Download succeeded</string>
+    <string name="share_with_time">Share with time code</string>
 </resources>

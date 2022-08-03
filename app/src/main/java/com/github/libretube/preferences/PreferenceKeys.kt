@@ -80,6 +80,7 @@ object PreferenceKeys {
     const val CLEAR_SEARCH_HISTORY = "clear_search_history"
     const val CLEAR_WATCH_HISTORY = "clear_watch_history"
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
+    const val SHARE_WITH_TIME_CODE = "share_with_time_code"
 
     /**
      * Error logs

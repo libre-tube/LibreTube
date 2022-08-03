@@ -22,6 +22,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/share">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:icon="@drawable/ic_time"
+            app:key="share_with_time_code"
+            app:title="@string/share_with_time" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/advanced">
 
         <SwitchPreferenceCompat

@@ -540,7 +540,7 @@ class PlayerFragment : Fragment() {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!, false)
+            val shareDialog = ShareDialog(videoId!!, false, exoPlayer.currentPosition)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
 
