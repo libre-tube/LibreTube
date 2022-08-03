@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -13,6 +12,28 @@
         android:gravity="center"
         android:text="@string/app_name"
         android:textSize="20sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:checkedButton="@id/video_radio"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/video_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/video" />
+
+        <RadioButton
+            android:id="@+id/audio_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/audio" />
+
+    </RadioGroup>
 
     <Spinner
         android:id="@+id/video_spinner"
@@ -24,12 +45,13 @@
         android:id="@+id/audio_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/download"
         style="@style/CustomDialogButton"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/download" />
 
 </LinearLayout>

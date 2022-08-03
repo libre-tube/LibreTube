@@ -289,4 +289,5 @@
     <string name="no_search_result">No results found.</string>
     <string name="error_occurred">Error occurred</string>
     <string name="copied">Copied</string>
+    <string name="downloadsucceeded">Download succeeded</string>
 </resources>

@@ -1278,7 +1278,7 @@ class PlayerFragment : Fragment() {
     // get the name of the currently played chapter
     private fun getCurrentChapterIndex(): Int {
         val currentPosition = exoPlayer.currentPosition
-        var chapterIndex: Int? = null
+        var chapterIndex = 0
 
         chapters.forEachIndexed { index, chapter ->
             // check whether the chapter start is greater than the current player position
@@ -1287,7 +1287,7 @@ class PlayerFragment : Fragment() {
                 chapterIndex = index
             }
         }
-        return chapterIndex!!
+        return chapterIndex
     }
 
     private fun setMediaSource(

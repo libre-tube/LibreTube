@@ -97,8 +97,6 @@ dependencies {
     // Do not update jackson annotations! It does not supports < API 26.
     implementation libs.jacksonAnnotations
 
-    implementation libs.mobileffmpeg
-
     coreLibraryDesugaring libs.desugaring
     implementation libs.cronet.embedded
     implementation libs.cronet.okhttp
