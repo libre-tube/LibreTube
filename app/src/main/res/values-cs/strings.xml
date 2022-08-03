@@ -289,4 +289,6 @@
     <string name="no_search_result">Nenalezeny žádné výsledky.</string>
     <string name="error_occurred">Vyskytla se chyba</string>
     <string name="copied">Zkopírováno</string>
+    <string name="downloadsucceeded">Stahování bylo úspěšné</string>
+    <string name="share_with_time">Sdílet s časovou známkou</string>
 </resources>
