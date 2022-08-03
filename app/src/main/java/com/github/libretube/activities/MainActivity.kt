@@ -193,8 +193,10 @@ class MainActivity : AppCompatActivity() {
         })
 
         searchView.setOnCloseListener {
-            onBackPressed()
-            true
+            if (navController.currentDestination?.id == R.id.searchFragment) {
+                onBackPressed()
+            }
+            false
         }
         return super.onCreateOptionsMenu(menu)
     }
