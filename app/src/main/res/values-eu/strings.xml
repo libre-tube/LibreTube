@@ -287,4 +287,8 @@
     <string name="network_all">Sare guztiak</string>
     <string name="translate">Itzuli</string>
     <string name="translate_summary">Lagundu aplikazioa hitz egiten duzun hizkuntzara itzultzen</string>
+    <string name="copied">Kopiatuta</string>
+    <string name="downloadsucceeded">Deskarga egina</string>
+    <string name="share_with_time">Partekatu denbora kodearekin</string>
+    <string name="error_occurred">Akatsa gertatu da</string>
 </resources>
