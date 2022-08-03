@@ -17,7 +17,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.arthenica.ffmpegkit.FFmpegKit
 import com.github.libretube.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.DOWNLOAD_PENDING_NOTIFICATION_ID
@@ -35,11 +34,9 @@ class DownloadService : Service() {
     private lateinit var notification: NotificationCompat.Builder
 
     private var downloadId: Long = -1
-    private lateinit var videoId: String
+    private lateinit var videoName: String
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
-    private lateinit var extension: String
-    private var duration: Int = 0
     private var downloadType: Int = 3
 
     private lateinit var audioDir: File
@@ -52,13 +49,11 @@ class DownloadService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        videoId = intent?.getStringExtra("videoId")!!
+        videoName = intent?.getStringExtra("videoName")!!
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
-        duration = intent.getIntExtra("duration", 1)
-        extension = PreferenceHelper.getString(PreferenceKeys.DOWNLOAD_VIDEO_FORMAT, ".mp4")!!
-        downloadType = if (audioUrl != "" && videoUrl != "") DownloadType.MUX
-        else if (audioUrl != "") DownloadType.AUDIO
+
+        downloadType = if (audioUrl != "") DownloadType.AUDIO
         else if (videoUrl != "") DownloadType.VIDEO
         else DownloadType.NONE
         if (downloadType != DownloadType.NONE) {
@@ -115,18 +110,8 @@ class DownloadService : Service() {
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
             )
             when (downloadType) {
-                DownloadType.MUX -> {
-                    audioDir = File(tempDir, "$videoId-audio")
-                    videoDir = File(tempDir, "$videoId-video")
-                    downloadId = downloadManagerRequest(
-                        getString(R.string.video),
-                        getString(R.string.downloading),
-                        videoUrl,
-                        videoDir
-                    )
-                }
                 DownloadType.VIDEO -> {
-                    videoDir = File(libretubeDir, "$videoId-video")
+                    videoDir = File(libretubeDir, videoName)
                     downloadId = downloadManagerRequest(
                         getString(R.string.video),
                         getString(R.string.downloading),
@@ -135,7 +120,7 @@ class DownloadService : Service() {
                     )
                 }
                 DownloadType.AUDIO -> {
-                    audioDir = File(libretubeDir, "$videoId-audio")
+                    audioDir = File(libretubeDir, videoName)
                     downloadId = downloadManagerRequest(
                         getString(R.string.audio),
                         getString(R.string.downloading),
@@ -146,6 +131,7 @@ class DownloadService : Service() {
             }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "download error $e")
+            downloadFailedNotification()
         }
     }
 
@@ -165,11 +151,6 @@ class DownloadService : Service() {
                 } else {
                     downloadSucceededNotification()
                     onDestroy()
-                }
-            } else {
-                try {
-                    muxDownloadedMedia()
-                } catch (e: Exception) {
                 }
             }
         }
@@ -233,44 +214,11 @@ class DownloadService : Service() {
         val builder = NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.success))
-            .setContentText(getString(R.string.fail))
+            .setContentText(getString(R.string.downloadsucceeded))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
             notify(DOWNLOAD_SUCCESS_NOTIFICATION_ID, builder.build())
-        }
-    }
-
-    private fun muxDownloadedMedia() {
-        val command = "-y -i $videoDir -i $audioDir -c copy $libretubeDir/${videoId}$extension"
-        notification.setContentTitle("Muxing")
-        FFmpegKit.executeAsync(
-            command,
-            { session ->
-                val state = session.state
-                val returnCode = session.returnCode
-                // CALLED WHEN SESSION IS EXECUTED
-                Log.d(
-                    TAG,
-                    String.format(
-                        "FFmpeg process exited with state %s and rc %s.%s",
-                        state,
-                        returnCode,
-                        session.failStackTrace
-                    )
-                )
-                tempDir.deleteRecursively()
-                if (returnCode.toString() != "0") downloadFailedNotification()
-                else downloadSucceededNotification()
-                onDestroy()
-            },
-            {
-                // CALLED WHEN SESSION PRINTS LOGS
-                Log.e(TAG, it.message.toString())
-            }
-        ) {
-            // CALLED WHEN SESSION GENERATES STATISTICS
-            Log.e(TAG + "stat", it.time.toString())
         }
     }
 

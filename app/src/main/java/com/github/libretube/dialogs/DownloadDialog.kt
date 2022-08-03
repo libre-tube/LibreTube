@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,16 @@ class DownloadDialog : DialogFragment() {
             PermissionHelper.requestReadWrite(activity as AppCompatActivity)
 
             binding.title.text = ThemeHelper.getStyledAppName(requireContext())
+
+            binding.audioRadio.setOnClickListener {
+                binding.videoSpinner.visibility = View.GONE
+                binding.audioSpinner.visibility = View.VISIBLE
+            }
+
+            binding.videoRadio.setOnClickListener {
+                binding.audioSpinner.visibility = View.GONE
+                binding.videoSpinner.visibility = View.VISIBLE
+            }
 
             builder.setView(binding.root)
             builder.create()
@@ -118,14 +129,15 @@ class DownloadDialog : DialogFragment() {
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
         binding.download.setOnClickListener {
-            val selectedAudioUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
-            val selectedVideoUrl = vidUrl[binding.videoSpinner.selectedItemPosition]
+            val selectedAudioUrl =
+                if (binding.audioRadio.isChecked) audioUrl[binding.audioSpinner.selectedItemPosition] else ""
+            val selectedVideoUrl =
+                if (binding.videoRadio.isChecked) vidUrl[binding.videoSpinner.selectedItemPosition] else ""
 
             val intent = Intent(context, DownloadService::class.java)
-            intent.putExtra("videoId", videoId)
+            intent.putExtra("videoName", streams.title)
             intent.putExtra("videoUrl", selectedVideoUrl)
             intent.putExtra("audioUrl", selectedAudioUrl)
-            intent.putExtra("duration", duration)
             context?.startService(intent)
             dismiss()
         }
