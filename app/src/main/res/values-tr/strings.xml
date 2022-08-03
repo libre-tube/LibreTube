@@ -289,4 +289,6 @@
     <string name="network_metered">Ölçülen</string>
     <string name="error_occurred">Hata oluştu</string>
     <string name="copied">Kopyalandı</string>
+    <string name="share_with_time">Zaman koduyla paylaşın</string>
+    <string name="downloadsucceeded">İndirme başarılı</string>
 </resources>
