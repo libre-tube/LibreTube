@@ -13,7 +13,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
     private val id: String,
-    private val isPlaylist: Boolean
+    private val isPlaylist: Boolean,
+    private val position: Long = 0L
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -39,7 +40,14 @@ class ShareDialog(
                         else -> instanceUrl
                     }
                     val path = if (!isPlaylist) "/watch?v=$id" else "/playlist?list=$id"
-                    val url = "$host$path"
+                    var url = "$host$path"
+                    if (PreferenceHelper.getBoolean(
+                            PreferenceKeys.SHARE_WITH_TIME_CODE,
+                            true
+                        )
+                    ) {
+                        url += "?t=$position"
+                    }
 
                     val intent = Intent()
                     intent.apply {
