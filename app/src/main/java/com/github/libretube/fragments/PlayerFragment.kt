@@ -53,9 +53,7 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
-import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Streams
-import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
@@ -66,6 +64,7 @@ import com.github.libretube.util.DescriptionAdapter
 import com.github.libretube.util.OnDoubleTapEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.hideKeyboard
 import com.github.libretube.util.toID
@@ -117,8 +116,9 @@ class PlayerFragment : Fragment() {
     private var videoId: String? = null
     private var playlistId: String? = null
     private var channelId: String? = null
-    private var isSubscribed: Boolean = false
+    private var isSubscribed: Boolean? = false
     private var isLive = false
+    private lateinit var streams: Streams
 
     /**
      * for the transition
@@ -175,7 +175,6 @@ class PlayerFragment : Fragment() {
     /**
      * for autoplay
      */
-    private var relatedStreams: List<StreamItem>? = arrayListOf()
     private var nextStreamId: String? = null
     private var playlistStreamIds: MutableList<String> = arrayListOf()
     private var playlistNextPage: String? = null
@@ -186,13 +185,6 @@ class PlayerFragment : Fragment() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
     private lateinit var playerNotification: PlayerNotificationManager
-
-    /**
-     * for the media description of the notification
-     */
-    private lateinit var title: String
-    private lateinit var uploader: String
-    private lateinit var thumbnailUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -540,7 +532,7 @@ class PlayerFragment : Fragment() {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!, false)
+            val shareDialog = ShareDialog(videoId!!, false, exoPlayer.currentPosition)
             shareDialog.show(childFragmentManager, "ShareDialog")
         }
 
@@ -739,7 +731,7 @@ class PlayerFragment : Fragment() {
     private fun playVideo() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
+                streams = try {
                     RetrofitInstance.api.getStreams(videoId!!)
                 } catch (e: IOException) {
                     println(e)
@@ -751,21 +743,13 @@ class PlayerFragment : Fragment() {
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
-                // for the notification description adapter
-                title = response.title!!
-                uploader = response.uploader!!
-                thumbnailUrl = response.thumbnailUrl!!
-                channelId = response.uploaderUrl.toID()
-
-                // save related streams for autoplay
-                relatedStreams = response.relatedStreams
 
                 runOnUiThread {
                     // set media sources for the player
-                    setResolutionAndSubtitles(response)
+                    setResolutionAndSubtitles(streams)
                     prepareExoPlayerView()
-                    initializePlayerView(response)
-                    seekToWatchPosition()
+                    initializePlayerView(streams)
+                    if (!isLive) seekToWatchPosition()
                     exoPlayer.prepare()
                     exoPlayer.play()
                     exoPlayerView.useController = true
@@ -776,7 +760,7 @@ class PlayerFragment : Fragment() {
                     // prepare for autoplay
                     initAutoPlay()
                     if (watchHistoryEnabled) {
-                        PreferenceHelper.addToWatchHistory(videoId!!, response)
+                        PreferenceHelper.addToWatchHistory(videoId!!, streams)
                     }
                 }
             }
@@ -828,7 +812,10 @@ class PlayerFragment : Fragment() {
         val watchPositions = PreferenceHelper.getWatchPositions()
         var position: Long? = null
         watchPositions.forEach {
-            if (it.videoId == videoId) position = it.position
+            if (it.videoId == videoId &&
+                // don't seek to the position if it's the end, autoplay would skip it immediately
+                streams.duration!! - it.position / 1000 > 2
+            ) position = it.position
         }
         // support for time stamped links
         val timeStamp: Long? = arguments?.getLong("timeStamp")
@@ -884,9 +871,9 @@ class PlayerFragment : Fragment() {
                 // else: the video must be the last video of the playlist so nothing happens
 
                 // if it's not a playlist then use the next related video
-            } else if (relatedStreams != null && relatedStreams!!.isNotEmpty()) {
+            } else if (streams.relatedStreams != null && streams.relatedStreams!!.isNotEmpty()) {
                 // save next video from related streams for autoplay
-                nextStreamId = relatedStreams!![0].url.toID()
+                nextStreamId = streams.relatedStreams!![0].url.toID()
             }
         }
     }
@@ -896,6 +883,9 @@ class PlayerFragment : Fragment() {
         // check whether there is a new video in the queue
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
+        // forces the comments to reload for the new video
+        commentsLoaded = false
+        binding.commentsRecView.adapter = null
         if (videoId != nextStreamId) {
             // save the id of the next stream as videoId and load the next video
             videoId = nextStreamId
@@ -1064,9 +1054,9 @@ class PlayerFragment : Fragment() {
 
                 intent.action = Intent.ACTION_VIEW
                 intent.setDataAndType(uri, "video/*")
-                intent.putExtra(Intent.EXTRA_TITLE, title)
-                intent.putExtra("title", title)
-                intent.putExtra("artist", uploader)
+                intent.putExtra(Intent.EXTRA_TITLE, streams.title)
+                intent.putExtra("title", streams.title)
+                intent.putExtra("artist", streams.uploader)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
                 try {
@@ -1278,7 +1268,7 @@ class PlayerFragment : Fragment() {
     // get the name of the currently played chapter
     private fun getCurrentChapterIndex(): Int {
         val currentPosition = exoPlayer.currentPosition
-        var chapterIndex: Int? = null
+        var chapterIndex = 0
 
         chapters.forEachIndexed { index, chapter ->
             // check whether the chapter start is greater than the current player position
@@ -1287,7 +1277,7 @@ class PlayerFragment : Fragment() {
                 chapterIndex = index
             }
         }
-        return chapterIndex!!
+        return chapterIndex
     }
 
     private fun setMediaSource(
@@ -1525,7 +1515,12 @@ class PlayerFragment : Fragment() {
         playerNotification = PlayerNotificationManager
             .Builder(c, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(title, uploader, thumbnailUrl, requireContext())
+                DescriptionAdapter(
+                    streams.title!!,
+                    streams.uploader!!,
+                    streams.thumbnailUrl!!,
+                    requireContext()
+                )
             )
             .build()
 
@@ -1564,84 +1559,24 @@ class PlayerFragment : Fragment() {
     private fun isSubscribed() {
         fun run() {
             lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.isSubscribed(
-                        channelId!!,
-                        token
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    return@launchWhenCreated
-                }
+                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+
+                if (isSubscribed == null) return@launchWhenCreated
 
                 runOnUiThread {
-                    if (response.subscribed == true) {
-                        isSubscribed = true
+                    if (isSubscribed == true) {
                         binding.playerSubscribe.text = getString(R.string.unsubscribe)
                     }
-                    if (response.subscribed != null) {
-                        binding.playerSubscribe.setOnClickListener {
-                            if (isSubscribed) {
-                                unsubscribe(channelId!!)
-                                binding.playerSubscribe.text = getString(R.string.subscribe)
-                            } else {
-                                subscribe(channelId!!)
-                                binding.playerSubscribe.text = getString(R.string.unsubscribe)
-                            }
+                    binding.playerSubscribe.setOnClickListener {
+                        if (isSubscribed == true) {
+                            SubscriptionHelper.unsubscribe(channelId!!)
+                            binding.playerSubscribe.text = getString(R.string.subscribe)
+                        } else {
+                            SubscriptionHelper.subscribe(channelId!!)
+                            binding.playerSubscribe.text = getString(R.string.unsubscribe)
                         }
-                    } else {
-                        Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT)
-                            .show()
                     }
                 }
-            }
-        }
-        run()
-    }
-
-    private fun subscribe(channelId: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    RetrofitInstance.authApi.subscribe(
-                        token,
-                        Subscribe(channelId)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response$e")
-                    return@launchWhenCreated
-                }
-                isSubscribed = true
-            }
-        }
-        run()
-    }
-
-    private fun unsubscribe(channel_id: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    RetrofitInstance.authApi.unsubscribe(
-                        token,
-                        Subscribe(channel_id)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    return@launchWhenCreated
-                }
-                isSubscribed = false
             }
         }
         run()

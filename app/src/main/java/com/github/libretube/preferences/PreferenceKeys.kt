@@ -61,7 +61,6 @@ object PreferenceKeys {
     /**
      * Download
      */
-    const val DOWNLOAD_VIDEO_FORMAT = "video_format"
     const val DOWNLOAD_LOCATION = "download_location"
     const val DOWNLOAD_FOLDER = "download_folder"
 
@@ -81,9 +80,15 @@ object PreferenceKeys {
     const val CLEAR_SEARCH_HISTORY = "clear_search_history"
     const val CLEAR_WATCH_HISTORY = "clear_watch_history"
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
+    const val SHARE_WITH_TIME_CODE = "share_with_time_code"
 
     /**
      * Error logs
      */
     const val ERROR_LOG = "error_log"
+
+    /**
+     * Data
+     */
+    const val LOCAL_SUBSCRIPTIONS = "local_subscriptions"
 }

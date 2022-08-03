@@ -13,18 +13,15 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.SearchItem
-import com.github.libretube.obj.Subscribe
-import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
 import com.github.libretube.util.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 class SearchAdapter(
     private val searchItems: MutableList<SearchItem>,
@@ -128,76 +125,37 @@ class SearchAdapter(
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
             val channelId = item.url.toID()
-            val token = PreferenceHelper.getToken()
 
-            // only show subscribe button if logged in
-            if (token != "") isSubscribed(channelId, token, binding)
+            isSubscribed(channelId, binding)
         }
     }
 
-    private fun isSubscribed(channelId: String, token: String, binding: ChannelRowBinding) {
-        var isSubscribed = false
-
+    private fun isSubscribed(channelId: String, binding: ChannelRowBinding) {
         // check whether the user subscribed to the channel
         CoroutineScope(Dispatchers.Main).launch {
-            val response = try {
-                RetrofitInstance.authApi.isSubscribed(
-                    channelId,
-                    token
-                )
-            } catch (e: Exception) {
-                return@launch
-            }
+            var isSubscribed = SubscriptionHelper.isSubscribed(channelId)
 
             // if subscribed change text to unsubscribe
-            if (response.subscribed == true) {
-                isSubscribed = true
+            if (isSubscribed == true) {
                 binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
             }
 
             // make sub button visible and set the on click listeners to (un)subscribe
-            if (response.subscribed != null) {
-                binding.searchSubButton.visibility = View.VISIBLE
+            if (isSubscribed == null) return@launch
+            binding.searchSubButton.visibility = View.VISIBLE
 
-                binding.searchSubButton.setOnClickListener {
-                    if (!isSubscribed) {
-                        subscribe(token, channelId)
-                        binding.searchSubButton.text =
-                            binding.root.context.getString(R.string.unsubscribe)
-                        isSubscribed = true
-                    } else {
-                        unsubscribe(token, channelId)
-                        binding.searchSubButton.text =
-                            binding.root.context.getString(R.string.subscribe)
-                        isSubscribed = false
-                    }
+            binding.searchSubButton.setOnClickListener {
+                if (isSubscribed == false) {
+                    SubscriptionHelper.subscribe(channelId)
+                    binding.searchSubButton.text =
+                        binding.root.context.getString(R.string.unsubscribe)
+                    isSubscribed = true
+                } else {
+                    SubscriptionHelper.unsubscribe(channelId)
+                    binding.searchSubButton.text =
+                        binding.root.context.getString(R.string.subscribe)
+                    isSubscribed = false
                 }
-            }
-        }
-    }
-
-    private fun subscribe(token: String, channelId: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                RetrofitInstance.authApi.subscribe(
-                    token,
-                    Subscribe(channelId)
-                )
-            } catch (e: Exception) {
-                return@launch
-            }
-        }
-    }
-
-    private fun unsubscribe(token: String, channelId: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                RetrofitInstance.authApi.unsubscribe(
-                    token,
-                    Subscribe(channelId)
-                )
-            } catch (e: IOException) {
-                return@launch
             }
         }
     }
