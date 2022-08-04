@@ -290,4 +290,5 @@
     <string name="seekbar_preview_summary">Vis bilde av videoen der framdriftsindikatoren trekkes.</string>
     <string name="playingOnBackground">Spiller i bakgrunnen …</string>
     <string name="caption_settings">Undertekstinnstillinger</string>
+    <string name="navLabelVisibility">Synlighet for navigeringsfeltets etikett</string>
 </resources>
