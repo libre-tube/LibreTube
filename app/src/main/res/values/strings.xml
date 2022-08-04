@@ -210,8 +210,8 @@
     <string name="watch_history">Watch History</string>
     <string name="watch_positions">Remember position</string>
     <string name="watch_positions_summary">Continue from last playback position</string>
-    <string name="auth_instance">Log in elsewhere</string>
-    <string name="auth_instance_summary">Uses a different instance.</string>
+    <string name="auth_instance">Authentication instance</string>
+    <string name="auth_instance_summary">Use a different instance for authenticated calls.</string>
     <string name="auth_instances">Choose an auth instance</string>
     <string name="hls">Auto</string>
     <string name="github">GitHub</string>
@@ -266,7 +266,7 @@
     <string name="worst_quality">Worst</string>
     <string name="default_subtitle_language">Subtitle language</string>
     <string name="notifications">Notifications</string>
-    <string name="notify_new_streams">Livestream notifications</string>
+    <string name="notify_new_streams">Notifications for new streams</string>
     <string name="notify_new_streams_summary">Notifications about fresh content from creators you follow.</string>
     <string name="checking_frequency">Checking every …</string>
     <string name="new_streams_count">%1$s new streams available</string>
