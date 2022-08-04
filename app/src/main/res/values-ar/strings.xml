@@ -286,4 +286,7 @@
     <string name="network_wifi">واي فاي فقط</string>
     <string name="translate">ترجمة</string>
     <string name="translate_summary">تقديم المساعدة عن طريق ترجمة التطبيق إلى اللغة التي تتحدثها</string>
+    <string name="no_search_result">لا توجد نتائج.</string>
+    <string name="error_occurred">حدث خطأ</string>
+    <string name="copied">تم النسخ</string>
 </resources>

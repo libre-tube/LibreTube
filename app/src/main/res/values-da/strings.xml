@@ -198,7 +198,7 @@
     <string name="require_restart_message">Disse ændringer anvendes muligvis ikke uden at genstarte appen. Vil du genstarte appen nu\?</string>
     <string name="require_restart">Genstart påkrævet</string>
     <string name="turnInternetOn">Opret forbindelse til internettet ved at slå WiFi eller mobildata til.</string>
-    <string name="watch_history">Set historik</string>
+    <string name="watch_history">Se historik</string>
     <string name="watch_positions">Husk position</string>
     <string name="auth_instance">Godkendelsesinstans</string>
     <string name="auth_instance_summary">Brug en anden instans til godkendte opkald.</string>
@@ -208,7 +208,7 @@
     <string name="category_filler_description">Til tangentielle scener tilføjet kun til fyldstof eller humor, der ikke er påkrævet for at forstå videoens hovedindhold.</string>
     <string name="buffering_goal_summary">Maks. antal sekunder af video som buffer.</string>
     <string name="audio_video">Lyd og video</string>
-    <string name="fullscreen_orientation">Orientering i fuld skærm</string>
+    <string name="fullscreen_orientation">Fuld skærm orientering</string>
     <string name="aspect_ratio">Videoformatforhold</string>
     <string name="auto_rotation">Automatisk rotation</string>
     <string name="landscape">Landskab</string>
@@ -268,7 +268,7 @@
     <string name="new_streams_by">Nye streams fra %1$s …</string>
     <string name="history_empty">Historikken er tom.</string>
     <string name="least_views">Færreste visninger</string>
-    <string name="channel_name_az">Kanalnavn (A-Z)</string>
+    <string name="channel_name_az">Kanalnavn (A-Å)</string>
     <string name="sort">Sortér</string>
     <string name="checking_frequency">Kontrolfrekvens</string>
     <string name="most_recent">Seneste</string>
@@ -279,7 +279,7 @@
     <string name="least_recent">Ældste</string>
     <string name="new_streams_count">%1$s nye streams er tilgængelige</string>
     <string name="most_views">Fleste visninger</string>
-    <string name="channel_name_za">Kanalnavn (Z-A)</string>
+    <string name="channel_name_za">Kanalnavn (Å-A)</string>
     <string name="network_all">Alle netværk</string>
     <string name="network_metered">Forbrugsbaseret</string>
     <string name="translate">Oversæt</string>
@@ -287,4 +287,6 @@
     <string name="no_search_result">Ingen resultater fundet.</string>
     <string name="network_wifi">Kun WiFi</string>
     <string name="required_network">Påkrævet netværkstype</string>
+    <string name="error_occurred">Der skete en fejl</string>
+    <string name="copied">Kopieret</string>
 </resources>

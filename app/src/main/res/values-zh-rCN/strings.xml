@@ -287,4 +287,8 @@
     <string name="translate">翻译</string>
     <string name="translate_summary">帮忙把应用翻译到你说的语言</string>
     <string name="no_search_result">未找到结果。</string>
+    <string name="error_occurred">出错了</string>
+    <string name="copied">已复制</string>
+    <string name="downloadsucceeded">下载成功</string>
+    <string name="share_with_time">用时间码分享</string>
 </resources>
