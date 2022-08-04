@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instances">选择实例</string>
+    <string name="instances">选择…</string>
     <string name="password">密码</string>
     <string name="defaultTab">默认标签页</string>
     <string name="download">下载</string>
