@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
     var autoRotationEnabled = false
+
     lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,12 +177,13 @@ class MainActivity : AppCompatActivity() {
         // stuff for the search in the topBar
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem.actionView as SearchView
-        searchView.setMaxWidth(Integer.MAX_VALUE)
+        searchView.maxWidth = Integer.MAX_VALUE
 
-        val searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         searchView.setOnSearchClickListener {
             if (navController.currentDestination?.id != R.id.searchResultFragment) {
+                searchViewModel.setQuery(null)
                 navController.navigate(R.id.searchFragment)
             }
         }
@@ -208,6 +210,7 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setOnCloseListener {
             if (navController.currentDestination?.id == R.id.searchFragment) {
+                searchViewModel.setQuery(null)
                 onBackPressed()
             }
             false
