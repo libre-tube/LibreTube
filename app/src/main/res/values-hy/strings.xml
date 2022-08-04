@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="library">Դարան</string>
+    <string name="choose_quality_dialog">Որակ</string>
+    <string name="videos">Տեսանյութեր</string>
+    <string name="subscribe">Հետևել</string>
+    <string name="share">Տարածել</string>
+    <string name="save">Պահպանել</string>
+    <string name="login">Մուտք գործել</string>
+    <string name="register">Գրանցվել</string>
+    <string name="logout">Դուրս գալ</string>
+    <string name="cancel">Չեղարկել</string>
+    <string name="loggedout">Դուրս եկած։</string>
+    <string name="instances">Ընտրել․․․</string>
+    <string name="app_theme">Թեմա</string>
+    <string name="cannotDownload">Հնարավոր չէ ներբեռնել:</string>
+    <string name="dlcomplete">Ներբռնումն ավարտվեց:</string>
+    <string name="downloadfailed">Ներբեռնել չհաջողվեց:</string>
+    <string name="vlc">Բացել VLC-ում</string>
+    <string name="vlcerror">Չհաջողվեց բացել VLC-ին: Հնարավոր է այն տեղադրված չէ:</string>
+    <string name="import_from_yt">Ներմուծել բաժանորդագրություններ</string>
+    <string name="import_from_yt_summary">YouTube-ից կամ NewPipe-ից</string>
+    <string name="server_error">Սերվերի հետ խնդիր կա: Փորձե՞լ այլ նմուշ:</string>
+    <string name="unknown_error">Ցանցի սխալ:</string>
+    <string name="defres">Տեսանյութի չափը</string>
+    <string name="grid">Ցանց սյունակներ</string>
+    <string name="emptyList">Այստեղ ոչինչ չկա:</string>
+    <string name="deletePlaylist">Ջնջեել երգացանկը</string>
+    <string name="about">Մասին</string>
+    <string name="changeLanguage">Լեզու</string>
+    <string name="systemLanguage">Համակարգ</string>
+    <string name="systemDefault">Համակարգ</string>
+    <string name="lightTheme">Բաց</string>
+    <string name="darkTheme">Մուգ</string>
+    <string name="subscribers">%1$s հետևորդ</string>
+    <string name="settings">Կարգվորումներ</string>
+    <string name="location">Գտնվելու վայրը</string>
+    <string name="instance">Նմուշ</string>
+    <string name="website">Կայք</string>
+    <string name="videoCount">%1$s տեսանյութ</string>
+    <string name="noInternet">Սկզբից միացեք համացանցին:</string>
+    <string name="startpage">Գլխավոր</string>
+    <string name="yes">Այո</string>
+    <string name="unsubscribe">Չհետևել</string>
+    <string name="download">Ներբեռնել</string>
+    <string name="search_hint">Որոնել</string>
+    <string name="loggedIn">Մուտք գործած։</string>
+    <string name="region">Տարածաշրջան</string>
+    <string name="username">Օգտանուն</string>
+    <string name="password">Գաղտնաբառ</string>
+    <string name="dlisinprogress">Մեկ այլ ներբեռնում արդեն ընթացքի մեջ է, սպասեք մինչ այն ավարտվի:</string>
+    <string name="error">Ինչ-որ բան սխալ է:</string>
+    <string name="notgmail">Սա Piped հաշվի համար է:</string>
+</resources>
