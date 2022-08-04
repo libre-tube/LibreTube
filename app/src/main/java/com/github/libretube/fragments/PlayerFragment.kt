@@ -115,7 +115,6 @@ class PlayerFragment : Fragment() {
      */
     private var videoId: String? = null
     private var playlistId: String? = null
-    private var channelId: String? = null
     private var isSubscribed: Boolean? = false
     private var isLive = false
     private lateinit var streams: Streams
@@ -1558,8 +1557,9 @@ class PlayerFragment : Fragment() {
 
     private fun isSubscribed() {
         fun run() {
+            val channelId = streams.uploaderUrl.toID()
             lifecycleScope.launchWhenCreated {
-                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+                isSubscribed = SubscriptionHelper.isSubscribed(channelId)
 
                 if (isSubscribed == null) return@launchWhenCreated
 
@@ -1569,10 +1569,10 @@ class PlayerFragment : Fragment() {
                     }
                     binding.playerSubscribe.setOnClickListener {
                         if (isSubscribed == true) {
-                            SubscriptionHelper.unsubscribe(channelId!!)
+                            SubscriptionHelper.unsubscribe(channelId)
                             binding.playerSubscribe.text = getString(R.string.subscribe)
                         } else {
-                            SubscriptionHelper.subscribe(channelId!!)
+                            SubscriptionHelper.subscribe(channelId)
                             binding.playerSubscribe.text = getString(R.string.unsubscribe)
                         }
                     }
