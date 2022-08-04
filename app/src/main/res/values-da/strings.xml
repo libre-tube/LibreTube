@@ -289,4 +289,6 @@
     <string name="required_network">Påkrævet netværkstype</string>
     <string name="error_occurred">Der skete en fejl</string>
     <string name="copied">Kopieret</string>
+    <string name="share_with_time">Del med tidskode</string>
+    <string name="downloadsucceeded">Download lykkedes</string>
 </resources>

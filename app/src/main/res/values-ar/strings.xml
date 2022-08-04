@@ -289,4 +289,6 @@
     <string name="no_search_result">لا توجد نتائج.</string>
     <string name="error_occurred">حدث خطأ</string>
     <string name="copied">تم النسخ</string>
+    <string name="share_with_time">المشاركة باستخدام رمز الوقت</string>
+    <string name="downloadsucceeded">نجح التنزيل</string>
 </resources>
