@@ -144,7 +144,7 @@
     <string name="advanced">高级</string>
     <string name="player">播放器</string>
     <string name="appearance_summary">根据您自己的喜好调整应用程序。</string>
-    <string name="advanced_summary">下载， 重置</string>
+    <string name="advanced_summary">下载；重置</string>
     <string name="no_replies">此评论没有人回复。</string>
     <string name="music_directory">音乐文件夹</string>
     <string name="movies_directory">电影文件夹</string>
@@ -235,7 +235,7 @@
     <string name="require_restart_message">不重新启动应用就无法应用这些更改。 你想现在重新启动应用吗？</string>
     <string name="navLabelVisibility">导航栏标签可见性</string>
     <string name="always">始终</string>
-    <string name="selected">已选</string>
+    <string name="selected">仅选中</string>
     <string name="never">从不</string>
     <string name="autoRotatePlayer">自动全屏</string>
     <string name="autoRotatePlayer_summary">设备转动时自动切换到播放器全屏。</string>
