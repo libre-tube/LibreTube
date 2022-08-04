@@ -22,7 +22,7 @@ class SearchResultFragment : Fragment() {
     private val TAG = "SearchResultFragment"
     private lateinit var binding: FragmentSearchResultBinding
 
-    private lateinit var nextPage: String
+    private var nextPage: String? = null
     private var query: String = ""
 
     private lateinit var searchAdapter: SearchAdapter
@@ -71,7 +71,7 @@ class SearchResultFragment : Fragment() {
         binding.searchRecycler.viewTreeObserver
             .addOnScrollChangedListener {
                 if (!binding.searchRecycler.canScrollVertically(1)) {
-                    fetchNextSearchItems()
+                    if (nextPage != null) fetchNextSearchItems()
                 }
             }
     }
@@ -99,7 +99,7 @@ class SearchResultFragment : Fragment() {
                     binding.noSearchResult.visibility = View.VISIBLE
                 }
             }
-            nextPage = response.nextpage!!
+            nextPage = response.nextpage
         }
     }
 
@@ -109,7 +109,7 @@ class SearchResultFragment : Fragment() {
                 RetrofitInstance.api.getSearchResultsNextPage(
                     query,
                     apiSearchFilter,
-                    nextPage
+                    nextPage!!
                 )
             } catch (e: IOException) {
                 println(e)
