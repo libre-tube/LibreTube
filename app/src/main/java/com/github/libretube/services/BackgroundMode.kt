@@ -292,7 +292,7 @@ class BackgroundMode : Service() {
         // kill old notification
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
             as NotificationManager
-        notificationManager.cancel(1)
+        notificationManager.cancel(PLAYER_NOTIFICATION_ID)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
