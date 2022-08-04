@@ -240,7 +240,7 @@
     <string name="autoRotatePlayer">Auto-fullscreen</string>
     <string name="autoRotatePlayer_summary">Fullscreen playback when the device gets turned.</string>
     <string name="pure_theme">Pure theme</string>
-    <string name="pure_theme_summary">Only black and white</string>
+    <string name="pure_theme_summary">Pure white/black theme</string>
     <string name="no_player_found">No external player found. Please make sure you have one installed.</string>
     <string name="data_saver_mode">Data-saver mode</string>
     <string name="data_saver_mode_summary">Skip thumbnails and other images.</string>
@@ -252,7 +252,7 @@
     <string name="system_caption_style">System caption style</string>
     <string name="captions">Captions</string>
     <string name="none">None</string>
-    <string name="update_now">Install the new LibreTube now?</string>
+    <string name="update_now">Install the new LibreTube version now?</string>
     <string name="seekbar_preview">Video preview</string>
     <string name="seekbar_preview_summary">Show a snapshot when dragging the playback indicator.</string>
     <string name="general">General</string>
@@ -267,7 +267,7 @@
     <string name="default_subtitle_language">Subtitle language</string>
     <string name="notifications">Notifications</string>
     <string name="notify_new_streams">Livestream notifications</string>
-    <string name="notify_new_streams_summary">Look for new subscribed streams</string>
+    <string name="notify_new_streams_summary">Notifications about fresh content from creators you follow.</string>
     <string name="checking_frequency">Checking every …</string>
     <string name="new_streams_count">%1$s new streams available</string>
     <string name="new_streams_by">New streams by %1$s…</string>
