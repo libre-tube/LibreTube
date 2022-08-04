@@ -1571,9 +1571,11 @@ class PlayerFragment : Fragment() {
                         if (isSubscribed == true) {
                             SubscriptionHelper.unsubscribe(channelId)
                             binding.playerSubscribe.text = getString(R.string.subscribe)
+                            isSubscribed = false
                         } else {
                             SubscriptionHelper.subscribe(channelId)
                             binding.playerSubscribe.text = getString(R.string.unsubscribe)
+                            isSubscribed = true
                         }
                     }
                 }
