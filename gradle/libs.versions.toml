@@ -1,5 +1,6 @@
 [versions]
 appcompat = "1.4.1"
+lifecycle = "2.5.1"
 constraintlayout = "2.1.3"
 material = "1.6.0"
 navigation = "2.4.2"
@@ -45,3 +46,6 @@ cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", versio
 cronet-okhttp = { group = "com.google.net.cronet", name = "cronet-okhttp", version.ref = "cronetOkHttp" }
 coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }
 square-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }

@@ -21,6 +21,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -30,6 +31,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.fragments.PlayerFragment
+import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
@@ -48,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
     var autoRotationEnabled = false
+
     lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -174,7 +177,16 @@ class MainActivity : AppCompatActivity() {
         // stuff for the search in the topBar
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem.actionView as SearchView
-        searchView.setMaxWidth(Integer.MAX_VALUE)
+        searchView.maxWidth = Integer.MAX_VALUE
+
+        val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+
+        searchView.setOnSearchClickListener {
+            if (navController.currentDestination?.id != R.id.searchResultFragment) {
+                searchViewModel.setQuery(null)
+                navController.navigate(R.id.searchFragment)
+            }
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -185,15 +197,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val bundle = Bundle()
-                bundle.putString("query", newText)
-                navController.navigate(R.id.searchFragment, bundle)
+                if (navController.currentDestination?.id != R.id.searchFragment) {
+                    val bundle = Bundle()
+                    bundle.putString("query", newText)
+                    navController.navigate(R.id.searchFragment, bundle)
+                } else {
+                    searchViewModel.setQuery(newText)
+                }
                 return true
             }
         })
 
         searchView.setOnCloseListener {
             if (navController.currentDestination?.id == R.id.searchFragment) {
+                searchViewModel.setQuery(null)
                 onBackPressed()
             }
             false
@@ -206,10 +223,6 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_search -> {
-                navController.navigate(R.id.searchFragment)
-                true
-            }
             R.id.action_settings -> {
                 val settingsIntent = Intent(this, SettingsActivity::class.java)
                 startActivity(settingsIntent)
@@ -357,6 +370,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // remove focus from search
         removeSearchFocus()
+        navController.popBackStack(R.id.searchFragment, false)
 
         if (binding.mainMotionLayout.progress == 0F) {
             try {

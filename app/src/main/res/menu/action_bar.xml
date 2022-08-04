@@ -16,13 +16,13 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_about"
-        android:title="@string/about"
+        android:id="@+id/action_community"
+        android:title="@string/community"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_community"
-        android:title="@string/community"
+        android:id="@+id/action_about"
+        android:title="@string/about"
         app:showAsAction="never" />
 
 </menu>

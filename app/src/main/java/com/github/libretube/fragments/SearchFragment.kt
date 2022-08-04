@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.databinding.FragmentSearchBinding
+import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
@@ -22,6 +22,7 @@ import java.io.IOException
 class SearchFragment() : Fragment() {
     private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
+    private val viewModel: SearchViewModel by activityViewModels()
 
     private var query: String? = null
 
@@ -43,9 +44,19 @@ class SearchFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext())
+
+        // waiting for the query to change
+        viewModel.searchQuery.observe(viewLifecycleOwner) {
+            showData(it)
+        }
+    }
+
+    private fun showData(query: String?) {
         // fetch the search or history
+        binding.historyEmpty.visibility = View.GONE
+        binding.suggestionsRecycler.visibility = View.VISIBLE
         if (query == null || query == "") showHistory()
-        else fetchSuggestions(query!!)
+        else fetchSuggestions(query)
     }
 
     private fun fetchSuggestions(query: String) {
@@ -68,7 +79,9 @@ class SearchFragment() : Fragment() {
                         (activity as MainActivity).searchView
                     )
                 runOnUiThread {
-                    binding.suggestionsRecycler.adapter = suggestionsAdapter
+                    if (viewModel.searchQuery.value != "") {
+                        binding.suggestionsRecycler.adapter = suggestionsAdapter
+                    }
                 }
             }
         }
@@ -93,11 +106,5 @@ class SearchFragment() : Fragment() {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
-    }
-
-    override fun onDestroy() {
-        // remove the backstack entries
-        findNavController().popBackStack(R.id.searchFragment, true)
-        super.onDestroy()
     }
 }
