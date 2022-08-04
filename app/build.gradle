@@ -3,6 +3,7 @@ import java.time.Instant
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -101,6 +102,10 @@ dependencies {
     implementation libs.cronet.embedded
     implementation libs.cronet.okhttp
     implementation libs.coil
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 }
 
 static def getUnixTime() {
