@@ -13,4 +13,7 @@ object Globals {
 
     // for downloads
     var IS_DOWNLOAD_RUNNING = false
+
+    // for playlists
+    var SELECTED_PLAYLIST_ID: String? = null
 }

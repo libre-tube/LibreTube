@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.obj.PlaylistId
@@ -18,7 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
-class AddtoPlaylistDialog : DialogFragment() {
+class AddToPlaylistDialog : DialogFragment() {
     private val TAG = "AddToPlaylistDialog"
     private lateinit var binding: DialogAddtoplaylistBinding
 
@@ -59,24 +60,29 @@ class AddtoPlaylistDialog : DialogFragment() {
                     return@launchWhenCreated
                 }
                 if (response.isNotEmpty()) {
-                    var names = emptyList<String>().toMutableList()
-                    for (playlist in response) {
-                        names.add(playlist.name!!)
-                    }
+                    val names = response.map { it.name }
                     val arrayAdapter =
                         ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
                     arrayAdapter.setDropDownViewResource(
                         android.R.layout.simple_spinner_dropdown_item
                     )
                     binding.playlistsSpinner.adapter = arrayAdapter
+                    if (Globals.SELECTED_PLAYLIST_ID != null) {
+                        var selectionIndex = 0
+                        response.forEachIndexed { index, playlist ->
+                            if (playlist.id == Globals.SELECTED_PLAYLIST_ID) selectionIndex = index
+                        }
+                        binding.playlistsSpinner.setSelection(selectionIndex)
+                    }
                     runOnUiThread {
                         binding.addToPlaylist.setOnClickListener {
+                            val index = binding.playlistsSpinner.selectedItemPosition
+                            Globals.SELECTED_PLAYLIST_ID = response[index].id!!
                             addToPlaylist(
-                                response[binding.playlistsSpinner.selectedItemPosition].id!!
+                                response[index].id!!
                             )
                         }
                     }
-                } else {
                 }
             }
         }

@@ -50,7 +50,7 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     context?.getString(R.string.addToPlaylist) -> {
                         val token = PreferenceHelper.getToken()
                         if (token != "") {
-                            val newFragment = AddtoPlaylistDialog()
+                            val newFragment = AddToPlaylistDialog()
                             val bundle = Bundle()
                             bundle.putString("videoId", videoId)
                             newFragment.arguments = bundle
