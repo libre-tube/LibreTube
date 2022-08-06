@@ -44,11 +44,13 @@ class PlaylistsAdapter(
     override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
         val playlist = playlists[position]
         holder.binding.apply {
-            ConnectionHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             // set imageview drawable as empty playlist if imageview empty
-            if (playlistThumbnail.drawable == null) {
+            Log.e(TAG, playlist.thumbnail.toString())
+            if (playlist.thumbnail!!.split("/").size <= 4) {
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)
                 playlistThumbnail.setBackgroundColor(R.attr.colorSurface)
+            } else {
+                ConnectionHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             }
             playlistTitle.text = playlist.name
             deletePlaylist.setOnClickListener {
@@ -56,8 +58,8 @@ class PlaylistsAdapter(
                 builder.setTitle(R.string.deletePlaylist)
                 builder.setMessage(R.string.areYouSure)
                 builder.setPositiveButton(R.string.yes) { _, _ ->
-                    val token = PreferenceHelper.getToken()
-                    deletePlaylist(playlist.id!!, token, position)
+                    PreferenceHelper.getToken()
+                    deletePlaylist(playlist.id!!, position)
                 }
                 builder.setNegativeButton(R.string.cancel, null)
                 builder.show()
@@ -68,11 +70,14 @@ class PlaylistsAdapter(
         }
     }
 
-    private fun deletePlaylist(id: String, token: String, position: Int) {
+    private fun deletePlaylist(id: String, position: Int) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
                 val response = try {
-                    RetrofitInstance.authApi.deletePlaylist(token, PlaylistId(id))
+                    RetrofitInstance.authApi.deletePlaylist(
+                        PreferenceHelper.getToken(),
+                        PlaylistId(id)
+                    )
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -83,9 +88,7 @@ class PlaylistsAdapter(
                 }
                 try {
                     if (response.message == "ok") {
-                        Log.d(TAG, "deleted!")
                         playlists.removeAt(position)
-                        // FIXME: This needs to run on UI thread?
                         activity.runOnUiThread { notifyDataSetChanged() }
                     }
                 } catch (e: Exception) {
