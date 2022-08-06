@@ -1,10 +1,8 @@
 package com.github.libretube.preferences
 
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,17 +22,19 @@ import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
-import java.io.IOException
-import java.io.InputStream
-import java.util.zip.ZipEntry
-import java.util.zip.ZipInputStream
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
+    private lateinit var getContent: ActivityResultLauncher<String>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        getContent =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                ImportHelper(requireActivity() as AppCompatActivity).importSubscriptions(uri)
+            }
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
@@ -128,7 +128,13 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
         importFromYt?.setOnPreferenceClickListener {
-            importSubscriptions()
+            // check StorageAccess
+            val accessGranted =
+                PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
+            // import subscriptions
+            if (accessGranted) getContent.launch("*/*")
+            // request permissions if not granted
+            else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
             true
         }
     }
@@ -182,18 +188,5 @@ class InstanceSettings : PreferenceFragmentCompat() {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
-    }
-
-    private fun importSubscriptions() {
-        val token = PreferenceHelper.getToken()
-        if (token != "") {
-            // check StorageAccess
-            val accessGranted =
-                PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
-            if (accessGranted) ImportHelper(requireActivity() as AppCompatActivity).importSubscriptions()
-            else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
-        } else {
-            Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-        }
     }
 }

@@ -65,21 +65,24 @@ object SubscriptionHelper {
         }
     }
 
-    suspend fun importSubscriptions(channels: List<String>) {
+    suspend fun importSubscriptions(newChannels: List<String>) {
         if (PreferenceHelper.getToken() != "") {
-            val response = try {
+            try {
                 val token = PreferenceHelper.getToken()
                 RetrofitInstance.authApi.importSubscriptions(
                     false,
                     token,
-                    channels
+                    newChannels
                 )
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         } else {
-            val newChannels = PreferenceHelper.getLocalSubscriptions().toMutableList() + channels
-            PreferenceHelper.setLocalSubscriptions(newChannels)
+            val channels = PreferenceHelper.getLocalSubscriptions().toMutableList()
+            newChannels.forEach {
+                if (!channels.contains(it)) channels += it
+            }
+            PreferenceHelper.setLocalSubscriptions(channels)
         }
     }
 
