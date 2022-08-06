@@ -291,4 +291,5 @@
     <string name="copied">Kopieret</string>
     <string name="share_with_time">Del med starttidspunkt</string>
     <string name="downloadsucceeded">Downloadet</string>
+    <string name="export_subscriptions">Eksportér abonnementer</string>
 </resources>
