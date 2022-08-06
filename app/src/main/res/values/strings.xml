@@ -291,4 +291,5 @@
     <string name="copied">Copied</string>
     <string name="downloadsucceeded">Downloaded</string>
     <string name="share_with_time">Share with start time</string>
+    <string name="export_subscriptions">Export Subscriptions</string>
 </resources>
