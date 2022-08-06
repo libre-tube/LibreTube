@@ -37,7 +37,7 @@
     <string name="share">共有</string>
     <string name="videos">動画</string>
     <string name="login_first">ログインしてから再試行してください。</string>
-    <string name="customInstance">カスタムインスタンス</string>
+    <string name="customInstance">カスタム</string>
     <string name="dlisinprogress">他のダウンロードが進行中です。完了するまでお待ちください。</string>
     <string name="error">エラーが発生しました。</string>
     <string name="subscriptions">登録チャンネル</string>
@@ -51,7 +51,7 @@
     <string name="cancel">キャンセル</string>
     <string name="loggedIn">ログインしました。</string>
     <string name="download">ダウンロード</string>
-    <string name="instances">インスタンスを選択</string>
+    <string name="instances">選択…</string>
     <string name="downloadfailed">ダウンロードに失敗しました。</string>
     <string name="unknown_error">ネットワークにエラーが発生しました。</string>
     <string name="createPlaylist">プレイリストを作成</string>
@@ -65,7 +65,7 @@
     <string name="server_error">サーバーに問題があります。ほかのインスタンスを試しますか？</string>
     <string name="empty">ユーザー名とパスワードを入力する必要があります。</string>
     <string name="import_from_yt">登録チャンネルをインポート</string>
-    <string name="defres">動画のデフォルト画質</string>
+    <string name="defres">動画の画質</string>
     <string name="grid">グリッドのカラム数</string>
     <string name="deletePlaylist">プレイリストを削除</string>
     <string name="areYouSure">このプレイリストを削除しますか？</string>
@@ -150,7 +150,7 @@
     <string name="download_directory_summary">ダウンロードされたメディアを保存する場所。</string>
     <string name="donate_summary">可能なら、あなたにとって価値のあるものを贈ってください。LibreTubeチームは、あなたの寄付や援助よりも小さな存在です。</string>
     <string name="instance_summary">Piped、ログイン、チャンネル登録</string>
-    <string name="customInstance_summary">カスタムインスタンスを追加（自己責任）</string>
+    <string name="customInstance_summary">追加…</string>
     <string name="invalid_url">有効なURLを入力してください</string>
     <string name="version">バージョン %1$s</string>
     <string name="about_summary">LibreTubeチームと出来事について知る。</string>
@@ -213,7 +213,7 @@
     <string name="contributing">貢献する</string>
     <string name="contributing_summary">アイディアの提供、翻訳、デザイン変更、コードの記述や整理など。すればするほど便利になります。</string>
     <string name="donate">寄付</string>
-    <string name="playback_speed">デフォルトの再生速度</string>
+    <string name="playback_speed">再生速度</string>
     <string name="advanced">詳細</string>
     <string name="player">プレイヤー</string>
     <string name="appearance_summary">あなたに合わせてアプリをカスタマイズしてください。</string>
