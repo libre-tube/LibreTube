@@ -291,4 +291,5 @@
     <string name="copied">Zkopírováno</string>
     <string name="downloadsucceeded">Stáhnuto</string>
     <string name="share_with_time">Sdílet s počátečním časem</string>
+    <string name="export_subscriptions">Exportovat odběry</string>
 </resources>
