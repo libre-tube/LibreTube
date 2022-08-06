@@ -152,7 +152,7 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val exportSubscriptions = findPreference<Preference>(PreferenceKeys.EXPORT_SUBS)
         exportSubscriptions?.setOnPreferenceClickListener {
-            createFile.launch("application/json")
+            createFile.launch("subscriptions.json")
             true
         }
     }
