@@ -291,4 +291,5 @@
     <string name="copied">已复制</string>
     <string name="downloadsucceeded">已下载</string>
     <string name="share_with_time">用开始时间共享</string>
+    <string name="export_subscriptions">导出订阅</string>
 </resources>
