@@ -25,13 +25,25 @@ import com.github.libretube.util.RetrofitInstance
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
+
+    /**
+     * result listeners for importing and exporting subscriptions
+     */
     private lateinit var getContent: ActivityResultLauncher<String>
+    private lateinit var createFile: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent =
-            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-                ImportHelper(requireActivity() as AppCompatActivity).importSubscriptions(uri)
+            registerForActivityResult(
+                ActivityResultContracts.GetContent()
+            ) { uri: Uri? ->
+                ImportHelper(requireActivity()).importSubscriptions(uri)
             }
+        createFile = registerForActivityResult(
+            ActivityResultContracts.CreateDocument()
+        ) { uri: Uri? ->
+            ImportHelper(requireActivity()).exportSubscriptions(uri)
+        }
 
         super.onCreate(savedInstanceState)
     }
@@ -126,8 +138,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
             true
         }
 
-        val importFromYt = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
-        importFromYt?.setOnPreferenceClickListener {
+        val importSubscriptions = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
+        importSubscriptions?.setOnPreferenceClickListener {
             // check StorageAccess
             val accessGranted =
                 PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
@@ -135,6 +147,12 @@ class InstanceSettings : PreferenceFragmentCompat() {
             if (accessGranted) getContent.launch("*/*")
             // request permissions if not granted
             else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
+            true
+        }
+
+        val exportSubscriptions = findPreference<Preference>(PreferenceKeys.EXPORT_SUBS)
+        exportSubscriptions?.setOnPreferenceClickListener {
+            createFile.launch("subscriptions.json")
             true
         }
     }

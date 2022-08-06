@@ -89,7 +89,10 @@ object NotificationHelper {
         val token = PreferenceHelper.getToken()
         runBlocking {
             val task = async {
-                RetrofitInstance.authApi.getFeed(token)
+                if (token != "") RetrofitInstance.authApi.getFeed(token)
+                else RetrofitInstance.authApi.getUnauthenticatedFeed(
+                    SubscriptionHelper.getFormattedLocalSubscriptions()
+                )
             }
             // fetch the users feed
             val videoFeed = try {

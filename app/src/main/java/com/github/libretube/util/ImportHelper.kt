@@ -1,23 +1,27 @@
 package com.github.libretube.util
 
+import android.app.Activity
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
+import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
+import com.github.libretube.preferences.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.BufferedReader
+import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
 class ImportHelper(
-    private val activity: AppCompatActivity
+    private val activity: Activity
 ) {
     private val TAG = "ImportHelper"
 
@@ -86,5 +90,44 @@ class ImportHelper(
             }
         }
         return stringBuilder.toString()
+    }
+
+    /**
+     * write the text to the document
+     */
+    fun exportSubscriptions(uri: Uri?) {
+        if (uri == null) return
+        try {
+            val mapper = ObjectMapper()
+            val token = PreferenceHelper.getToken()
+            runBlocking {
+                val subs = if (token != "") RetrofitInstance.authApi.subscriptions(token)
+                else RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                    SubscriptionHelper.getFormattedLocalSubscriptions()
+                )
+                val newPipeChannels = mutableListOf<NewPipeSubscription>()
+                subs.forEach {
+                    newPipeChannels += NewPipeSubscription(
+                        name = it.name,
+                        service_id = 0,
+                        url = "https://www.youtube.com" + it.url
+                    )
+                }
+
+                val newPipeSubscriptions = NewPipeSubscriptions(
+                    subscriptions = newPipeChannels
+                )
+
+                val data = mapper.writeValueAsBytes(newPipeSubscriptions)
+
+                activity.contentResolver.openFileDescriptor(uri, "w")?.use {
+                    FileOutputStream(it.fileDescriptor).use { fileOutputStream ->
+                        fileOutputStream.write(data)
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
