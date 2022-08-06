@@ -1,10 +1,8 @@
 package com.github.libretube.preferences
 
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,91 +19,20 @@ import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
+import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
-import org.json.JSONObject
-import org.json.JSONTokener
-import retrofit2.HttpException
-import java.io.IOException
-import java.io.InputStream
-import java.util.zip.ZipEntry
-import java.util.zip.ZipInputStream
 
 class InstanceSettings : PreferenceFragmentCompat() {
     val TAG = "InstanceSettings"
-
-    companion object {
-        lateinit var getContent: ActivityResultLauncher<String>
-    }
+    private lateinit var getContent: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getContent =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-                if (uri != null) {
-                    try {
-                        // Open a specific media item using ParcelFileDescriptor.
-                        val resolver: ContentResolver =
-                            requireActivity()
-                                .contentResolver
-
-                        // "rw" for read-and-write;
-                        // "rwt" for truncating or overwriting existing file contents.
-                        // val readOnlyMode = "r"
-                        // uri - I have got from onActivityResult
-                        val type = resolver.getType(uri)
-
-                        var inputStream: InputStream? = resolver.openInputStream(uri)
-                        val channels = ArrayList<String>()
-                        if (type == "application/json") {
-                            val json = inputStream?.bufferedReader()?.readLines()?.get(0)
-                            val jsonObject = JSONTokener(json).nextValue() as JSONObject
-                            Log.e(TAG, jsonObject.getJSONArray("subscriptions").toString())
-                            for (
-                            i in 0 until jsonObject.getJSONArray("subscriptions")
-                                .length()
-                            ) {
-                                var url =
-                                    jsonObject.getJSONArray("subscriptions").getJSONObject(i)
-                                        .getString("url")
-                                url = url.replace("https://www.youtube.com/channel/", "")
-                                Log.e(TAG, url)
-                                channels.add(url)
-                            }
-                        } else {
-                            if (type == "application/zip") {
-                                val zis = ZipInputStream(inputStream)
-                                var entry: ZipEntry? = zis.nextEntry
-                                while (entry != null) {
-                                    if (entry.name.endsWith(".csv")) {
-                                        inputStream = zis
-                                        break
-                                    }
-                                    entry = zis.nextEntry
-                                }
-                            }
-
-                            inputStream?.bufferedReader()?.readLines()?.forEach {
-                                if (it.isNotBlank()) {
-                                    val channelId = it.substringBefore(",")
-                                    if (channelId.length == 24) {
-                                        channels.add(channelId)
-                                    }
-                                }
-                            }
-                        }
-                        inputStream?.close()
-
-                        subscribe(channels)
-                    } catch (e: Exception) {
-                        Log.e(TAG, e.toString())
-                        Toast.makeText(
-                            context,
-                            R.string.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+                ImportHelper(requireActivity() as AppCompatActivity).importSubscriptions(uri)
             }
+
         super.onCreate(savedInstanceState)
     }
 
@@ -201,7 +128,13 @@ class InstanceSettings : PreferenceFragmentCompat() {
 
         val importFromYt = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
         importFromYt?.setOnPreferenceClickListener {
-            importSubscriptions()
+            // check StorageAccess
+            val accessGranted =
+                PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
+            // import subscriptions
+            if (accessGranted) getContent.launch("*/*")
+            // request permissions if not granted
+            else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
             true
         }
     }
@@ -210,8 +143,8 @@ class InstanceSettings : PreferenceFragmentCompat() {
         lifecycleScope.launchWhenCreated {
             val customInstances = PreferenceHelper.getCustomInstances()
 
-            var instanceNames = arrayListOf<String>()
-            var instanceValues = arrayListOf<String>()
+            val instanceNames = arrayListOf<String>()
+            val instanceValues = arrayListOf<String>()
 
             // fetch official public instances
 
@@ -255,47 +188,5 @@ class InstanceSettings : PreferenceFragmentCompat() {
         this ?: return
         if (!isAdded) return // Fragment not attached to an Activity
         activity?.runOnUiThread(action)
-    }
-
-    private fun importSubscriptions() {
-        val token = PreferenceHelper.getToken()
-        if (token != "") {
-            // check StorageAccess
-            val accessGranted =
-                PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
-            if (accessGranted) getContent.launch("*/*")
-            else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
-        } else {
-            Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun subscribe(channels: List<String>) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    val token = PreferenceHelper.getToken()
-                    RetrofitInstance.authApi.importSubscriptions(
-                        false,
-                        token,
-                        channels
-                    )
-                } catch (e: IOException) {
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response$e")
-                    return@launchWhenCreated
-                }
-                if (response.message == "ok") {
-                    Toast.makeText(
-                        context,
-                        R.string.importsuccess,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-        run()
     }
 }
