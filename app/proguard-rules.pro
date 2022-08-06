@@ -24,4 +24,4 @@
 -keep class com.github.libretube.obj.** { *; }
 
 # prevents android from removing it
--keep class com.github.libretube.update.** { <fields>; }
+-keep class com.github.libretube.update.** { *; }
