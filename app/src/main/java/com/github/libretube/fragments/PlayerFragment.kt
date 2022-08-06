@@ -46,7 +46,7 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
-import com.github.libretube.dialogs.AddtoPlaylistDialog
+import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.obj.ChapterSegment
@@ -1097,7 +1097,7 @@ class PlayerFragment : Fragment() {
         if (token != "") {
             isSubscribed()
             binding.relPlayerSave.setOnClickListener {
-                val newFragment = AddtoPlaylistDialog()
+                val newFragment = AddToPlaylistDialog()
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
                 newFragment.arguments = bundle
