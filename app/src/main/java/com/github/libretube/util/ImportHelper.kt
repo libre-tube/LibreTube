@@ -110,7 +110,7 @@ class ImportHelper(
                     newPipeChannels += NewPipeSubscription(
                         name = it.name,
                         service_id = 0,
-                        url = "https://youtube.com" + it.url
+                        url = "https://www.youtube.com" + it.url
                     )
                 }
 
