@@ -15,8 +15,6 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
     val TAG = "SubChannelAdapter"
 
-    private var subscribed = true
-
     override fun getItemCount(): Int {
         return subscriptions.size
     }
@@ -30,6 +28,8 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
 
     override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
         val subscription = subscriptions[position]
+        var subscribed = true
+
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
             ConnectionHelper.loadImage(subscription.avatar, subscriptionChannelImage)
