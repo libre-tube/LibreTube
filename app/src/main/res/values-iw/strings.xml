@@ -10,8 +10,8 @@
     <string name="cancel">ביטול</string>
     <string name="loggedIn">נכנסת.</string>
     <string name="loggedout">יצאת.</string>
-    <string name="instances">בחירת עותק</string>
-    <string name="customInstance">עותק אחר</string>
+    <string name="instances">בחירה…</string>
+    <string name="customInstance">אחר</string>
     <string name="login_register">כניסה/הרשמה</string>
     <string name="subscribeIsEmpty">עליך להירשם לכמה ערוצים תחילה.</string>
     <string name="import_from_yt_summary">מ־YouTube או NewPipe</string>
@@ -105,7 +105,7 @@
     <string name="location">מקום</string>
     <string name="already_logged_in">כבר נכנסת. אפשר גם לצאת מהחשבון שלך.</string>
     <string name="unknown_error">שגיאת רשת.</string>
-    <string name="defres">רזולוציית ברירת המחדל לסרטונים</string>
+    <string name="defres">רזולוציית סרטונים</string>
     <string name="deletePlaylist">מחיקת רשימת נגינה</string>
     <string name="areYouSure">למחוק את רשימת הנגינה\?</string>
     <string name="playlistCreated">נוצרה רשימת נגינה.</string>
@@ -132,9 +132,9 @@
     <string name="no_update_available">זאת הגרסה העדכנית ביותר.</string>
     <string name="donate_summary">אפשר להעניק בהתאם לערך שהוא מעניק לך. צוות LibreTube קטן מהתרומה או הסיוע שלך.</string>
     <string name="update">איתור גרסה חדשה</string>
-    <string name="advanced_summary">הורדות, איפוס</string>
+    <string name="advanced_summary">הורדות ואיפוס</string>
     <string name="app_uptodate">היישומון עדכני.</string>
-    <string name="playback_speed">מהירות נגינה כברירת מחדל</string>
+    <string name="playback_speed">מהירות נגינה</string>
     <string name="advanced">מתקדם</string>
     <string name="appearance_summary">התאמת היישומון לטעמך.</string>
     <string name="category_intro_description">פרק זמן ללא תוכן ממשי. יכולה להיות השהייה, תמונה ללא תזוזה, הנפשה מחזורית. אסור להשתמש בזה למעברונים שמכילים מידע.</string>
@@ -160,8 +160,8 @@
     <string name="flameIcon">להבה מעופפת</string>
     <string name="birdIcon">ציפור מוגברת</string>
     <string name="torchIcon">לפיד בוער</string>
-    <string name="instance_summary">Piped, כניסה, מינויים</string>
-    <string name="customInstance_summary">הוספת עותק משלך (על אחריותך)</string>
+    <string name="instance_summary">Piped, כניסה ומינויים</string>
+    <string name="customInstance_summary">הוספה…</string>
     <string name="instance_name">שם העותק</string>
     <string name="empty_instance">יש למלא את השם ואת כתובת ה־API.</string>
     <string name="invalid_url">נא למלא כתובת שעובדת</string>
@@ -172,7 +172,7 @@
     <string name="clear_customInstances">מחיקת עותקים אחרים</string>
     <string name="shapedIcon">צורה טיפשית</string>
     <string name="related_streams">תוכן קשור</string>
-    <string name="related_streams_summary">הצגת תזרימים שקשורים לצד הסרטון שמתנגן.</string>
+    <string name="related_streams_summary">הצגת תזרימים דומים לצד הסרטון שמתנגן.</string>
     <string name="show_chapters">הצגת פרקים</string>
     <string name="hide_chapters">הסתרת פרקים</string>
     <string name="category_filler">בדיחות/משיקים למילוי</string>

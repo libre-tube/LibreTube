@@ -243,4 +243,10 @@
     <string name="data_saver_mode">Datensparmodus</string>
     <string name="data_saver_mode_summary">Keine Miniaturansichten und andere Bilder laden, um Daten zu sparen.</string>
     <string name="search_history_summary">Suchanfragen lokal speichern</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="checking_frequency">Überprüfe alle …</string>
+    <string name="reset_watch_positions">Zurücksetzen</string>
+    <string name="general">Allgemein</string>
+    <string name="general_summary">Sprache und Region</string>
+    <string name="best_quality">Beste Qualität</string>
 </resources>
