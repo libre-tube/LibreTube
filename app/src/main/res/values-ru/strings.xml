@@ -291,4 +291,5 @@
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
     <string name="best_quality">Лучшее</string>
     <string name="worst_quality">Худшее</string>
+    <string name="export_subscriptions">Экспорт подписок</string>
 </resources>
