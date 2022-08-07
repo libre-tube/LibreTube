@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -154,5 +155,17 @@ class NowPlayingNotification(
             setColorized(true)
             setMediaSessionToken(mediaSession.sessionToken)
         }
+    }
+
+    fun destroy() {
+        mediaSession.isActive = false
+        mediaSession.release()
+        mediaSessionConnector.setPlayer(null)
+        playerNotification?.setPlayer(null)
+        val notificationManager = context.getSystemService(
+            Context.NOTIFICATION_SERVICE
+        ) as NotificationManager
+        notificationManager.cancel(PLAYER_NOTIFICATION_ID)
+        player.release()
     }
 }

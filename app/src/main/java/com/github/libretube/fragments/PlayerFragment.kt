@@ -1,7 +1,6 @@
 package com.github.libretube.fragments
 
 import android.app.ActivityManager
-import android.app.NotificationManager
 import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
@@ -16,7 +15,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
-import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.format.DateUtils
 import android.util.Log
@@ -35,9 +33,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.Globals
-import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
@@ -60,7 +56,7 @@ import com.github.libretube.services.BackgroundMode
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
-import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OnDoubleTapEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
@@ -77,7 +73,6 @@ import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
@@ -85,7 +80,6 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
-import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.upstream.DataSource
@@ -181,9 +175,7 @@ class PlayerFragment : Fragment() {
     /**
      * for the player notification
      */
-    private lateinit var mediaSession: MediaSessionCompat
-    private lateinit var mediaSessionConnector: MediaSessionConnector
-    private lateinit var playerNotification: PlayerNotificationManager
+    private lateinit var nowPlayingNotification: NowPlayingNotification
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -676,15 +668,7 @@ class PlayerFragment : Fragment() {
         super.onDestroy()
         try {
             saveWatchPosition()
-            mediaSession.isActive = false
-            mediaSession.release()
-            mediaSessionConnector.setPlayer(null)
-            playerNotification.setPlayer(null)
-            val notificationManager = context?.getSystemService(
-                Context.NOTIFICATION_SERVICE
-            ) as NotificationManager
-            notificationManager.cancel(1)
-            exoPlayer.release()
+            nowPlayingNotification.destroy()
             activity?.requestedOrientation =
                 if ((activity as MainActivity).autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
                 else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -752,7 +736,7 @@ class PlayerFragment : Fragment() {
                     exoPlayer.prepare()
                     exoPlayer.play()
                     exoPlayerView.useController = true
-                    initializePlayerNotification(requireContext())
+                    initializePlayerNotification()
                     if (sponsorBlockEnabled) fetchSponsorBlockSegments()
                     // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
@@ -1502,33 +1486,14 @@ class PlayerFragment : Fragment() {
         exoPlayer.setAudioAttributes(audioAttributes, true)
     }
 
-    private fun initializePlayerNotification(c: Context) {
-        mediaSession = MediaSessionCompat(c, this.javaClass.name)
-        mediaSession.apply {
-            isActive = true
+    /**
+     * show the [NowPlayingNotification] for the current video
+     */
+    private fun initializePlayerNotification() {
+        if (!this::nowPlayingNotification.isInitialized) {
+            nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer)
         }
-
-        mediaSessionConnector = MediaSessionConnector(mediaSession)
-        mediaSessionConnector.setPlayer(exoPlayer)
-
-        playerNotification = PlayerNotificationManager
-            .Builder(c, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
-            .setMediaDescriptionAdapter(
-                DescriptionAdapter(
-                    streams.title!!,
-                    streams.uploader!!,
-                    streams.thumbnailUrl!!,
-                    requireContext()
-                )
-            )
-            .build()
-
-        playerNotification.apply {
-            setPlayer(exoPlayer)
-            setUsePreviousAction(false)
-            setUseStopAction(true)
-            setMediaSessionToken(mediaSession.sessionToken)
-        }
+        nowPlayingNotification.updatePlayerNotification(streams)
     }
 
     // lock the player
