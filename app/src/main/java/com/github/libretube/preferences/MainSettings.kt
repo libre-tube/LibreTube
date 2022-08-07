@@ -3,18 +3,18 @@ package com.github.libretube.preferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.UpdateDialog
 import com.github.libretube.update.UpdateChecker
+import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainSettings : PreferenceFragmentCompat() {
+class MainSettings : MaterialPreferenceFragment() {
     val TAG = "SettingsFragment"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

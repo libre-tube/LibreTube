@@ -7,15 +7,15 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.ThemeHelper
+import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.color.DynamicColors
 
-class AppearanceSettings : PreferenceFragmentCompat() {
+class AppearanceSettings : MaterialPreferenceFragment() {
     private val TAG = "AppearanceSettings"
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)

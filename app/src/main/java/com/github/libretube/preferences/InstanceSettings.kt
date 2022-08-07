@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
@@ -22,8 +21,9 @@ import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.views.MaterialPreferenceFragment
 
-class InstanceSettings : PreferenceFragmentCompat() {
+class InstanceSettings : MaterialPreferenceFragment() {
     val TAG = "InstanceSettings"
 
     /**
