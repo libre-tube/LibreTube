@@ -46,13 +46,13 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.obj.ChapterSegment
-import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
+import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
@@ -169,8 +169,7 @@ class PlayerFragment : Fragment() {
      * for autoplay
      */
     private var nextStreamId: String? = null
-    private var playlistStreamIds: MutableList<String> = arrayListOf()
-    private var playlistNextPage: String? = null
+    private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
      * for the player notification
@@ -741,7 +740,7 @@ class PlayerFragment : Fragment() {
                     // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
-                    initAutoPlay()
+                    if (autoplayEnabled) setNextStream()
                     if (watchHistoryEnabled) {
                         PreferenceHelper.addToWatchHistory(videoId!!, streams)
                     }
@@ -749,6 +748,20 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    /**
+     * set the videoId of the next stream for autoplay
+     */
+    private fun setNextStream() {
+        nextStreamId = streams.relatedStreams!![0].url.toID()
+        if (playlistId == null) return
+        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
+        // search for the next videoId in the playlist
+        lifecycleScope.launchWhenCreated {
+            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId!!)
+            if (nextId != null) nextStreamId = nextId
+        }
     }
 
     /**
@@ -806,59 +819,6 @@ class PlayerFragment : Fragment() {
             position = timeStamp * 1000
         }
         if (position != null) exoPlayer.seekTo(position!!)
-    }
-
-    // the function is working recursively
-    private fun initAutoPlay() {
-        // save related streams for autoplay
-        if (autoplayEnabled) {
-            // if it's a playlist use the next video
-            if (playlistId != null) {
-                lateinit var playlist: Playlist // var for saving the list in
-                // runs only the first time when starting a video from a playlist
-                if (playlistStreamIds.isEmpty()) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        // fetch the playlists videos
-                        playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
-                        // save the playlist urls in the array
-                        playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url.toID()
-                        }
-                        // save playlistNextPage for usage if video is not contained
-                        playlistNextPage = playlist.nextpage
-                        // restart the function after videos are loaded
-                        initAutoPlay()
-                    }
-                }
-                // if the playlists contain the video, then save the next video as next stream
-                else if (playlistStreamIds.contains(videoId)) {
-                    val index = playlistStreamIds.indexOf(videoId)
-                    // check whether there's a next video
-                    if (index + 1 <= playlistStreamIds.size) {
-                        nextStreamId = playlistStreamIds[index + 1]
-                    }
-                    // fetch the next page of the playlist if the video isn't contained
-                } else if (playlistNextPage != null) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, playlistNextPage!!)
-                        // append all the playlist item urls to the array
-                        playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url.toID()
-                        }
-                        // save playlistNextPage for usage if video is not contained
-                        playlistNextPage = playlist.nextpage
-                        // restart the function after videos are loaded
-                        initAutoPlay()
-                    }
-                }
-                // else: the video must be the last video of the playlist so nothing happens
-
-                // if it's not a playlist then use the next related video
-            } else if (streams.relatedStreams != null && streams.relatedStreams!!.isNotEmpty()) {
-                // save next video from related streams for autoplay
-                nextStreamId = streams.relatedStreams!![0].url.toID()
-            }
-        }
     }
 
     // used for autoplay and skipping to next video
