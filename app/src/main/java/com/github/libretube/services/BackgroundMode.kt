@@ -3,11 +3,8 @@ package com.github.libretube.services
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -17,13 +14,12 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.toID
@@ -33,12 +29,10 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
-import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.net.URL
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -71,11 +65,6 @@ class BackgroundMode : Service() {
     private lateinit var mediaSessionConnector: MediaSessionConnector
 
     /**
-     * The [PlayerNotificationManager] to load the [mediaSession] content on it.
-     */
-    private var playerNotification: PlayerNotificationManager? = null
-
-    /**
      * The [AudioAttributes] handle the audio focus of the [player]
      */
     private lateinit var audioAttributes: AudioAttributes
@@ -84,6 +73,11 @@ class BackgroundMode : Service() {
      * SponsorBlock Segment data
      */
     private var segmentData: Segments? = null
+
+    /**
+     * Notification for the player
+     */
+    private lateinit var nowPlayingNotification: NowPlayingNotification
 
     override fun onCreate() {
         super.onCreate()
@@ -134,7 +128,11 @@ class BackgroundMode : Service() {
             job.join()
 
             initializePlayer()
-            initializePlayerNotification()
+            setMediaItem()
+
+            // create the notification
+            nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
+            nowPlayingNotification.initializePlayerNotification(mediaSession, response!!)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
@@ -184,7 +182,6 @@ class BackgroundMode : Service() {
                 }
             }
         })
-        setMediaItem()
     }
 
     /**
@@ -199,106 +196,6 @@ class BackgroundMode : Service() {
             this.videoId = videoId
             this.segmentData = null
             playAudio(videoId)
-        }
-    }
-
-    /**
-     * The [DescriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
-     * Basic example [here](https://github.com/AnthonyMarkD/AudioPlayerSampleTest)
-     */
-    inner class DescriptionAdapter() :
-        PlayerNotificationManager.MediaDescriptionAdapter {
-        /**
-         * sets the title of the notification
-         */
-        override fun getCurrentContentTitle(player: Player): CharSequence {
-            // return controller.metadata.description.title.toString()
-            return response?.title!!
-        }
-
-        /**
-         * overrides the action when clicking the notification
-         */
-        override fun createCurrentContentIntent(player: Player): PendingIntent? {
-            //  return controller.sessionActivity
-            /**
-             *  starts a new MainActivity Intent when the player notification is clicked
-             *  it doesn't start a completely new MainActivity because the MainActivity's launchMode
-             *  is set to "singleTop" in the AndroidManifest (important!!!)
-             *  that's the only way to launch back into the previous activity (e.g. the player view
-             */
-            val intent = Intent(this@BackgroundMode, MainActivity::class.java)
-            return PendingIntent.getActivity(this@BackgroundMode, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        }
-
-        /**
-         * the description of the notification (below the title)
-         */
-        override fun getCurrentContentText(player: Player): CharSequence? {
-            // return controller.metadata.description.subtitle.toString()
-            return response?.uploader
-        }
-
-        /**
-         * return the icon/thumbnail of the video
-         */
-        override fun getCurrentLargeIcon(
-            player: Player,
-            callback: PlayerNotificationManager.BitmapCallback
-        ): Bitmap? {
-            lateinit var bitmap: Bitmap
-
-            /**
-             * running on a new thread to prevent a NetworkMainThreadException
-             */
-            val thread = Thread {
-                try {
-                    /**
-                     * try to GET the thumbnail from the URL
-                     */
-                    val inputStream = URL(response?.thumbnailUrl).openStream()
-                    bitmap = BitmapFactory.decodeStream(inputStream)
-                } catch (ex: java.lang.Exception) {
-                    ex.printStackTrace()
-                }
-            }
-            thread.start()
-            thread.join()
-            /**
-             * returns the scaled bitmap if it got fetched successfully
-             */
-            return try {
-                val resizedBitmap = Bitmap.createScaledBitmap(
-                    bitmap,
-                    bitmap.width,
-                    bitmap.width,
-                    false
-                )
-                resizedBitmap
-            } catch (e: Exception) {
-                null
-            }
-        }
-    }
-
-    /**
-     * Initializes the [playerNotification] attached to the [player] and shows it.
-     */
-    private fun initializePlayerNotification() {
-        playerNotification = PlayerNotificationManager
-            .Builder(this, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
-            // set the description of the notification
-            .setMediaDescriptionAdapter(
-                DescriptionAdapter()
-            )
-            .build()
-        playerNotification?.apply {
-            setPlayer(player)
-            setUseNextAction(false)
-            setUsePreviousAction(false)
-            setUseStopAction(true)
-            setColorized(true)
-            setMediaSessionToken(mediaSession.sessionToken)
         }
     }
 
