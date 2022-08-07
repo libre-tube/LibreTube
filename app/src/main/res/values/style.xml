@@ -15,13 +15,6 @@
 
     </style>
 
-    <style name="MaterialAlertDialog">
-
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
-        <item name="dialogCornerRadius">28dp</item>
-
-    </style>
-
     <style name="AboutCard" parent="Widget.Material3.CardView.Elevated">
 
         <item name="android:layout_marginLeft">10dp</item>

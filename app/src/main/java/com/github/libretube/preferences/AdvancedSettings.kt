@@ -2,12 +2,12 @@ package com.github.libretube.preferences
 
 import android.os.Bundle
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class AdvancedSettings : PreferenceFragmentCompat() {
+class AdvancedSettings : MaterialPreferenceFragment() {
     val TAG = "AdvancedSettings"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

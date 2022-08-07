@@ -15,9 +15,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeHelper.updateTheme(this)
 
-        // apply the theme for the preference dialogs
-        setTheme(R.style.MaterialAlertDialog)
-
         super.onCreate(savedInstanceState)
 
         binding = ActivitySettingsBinding.inflate(layoutInflater)
