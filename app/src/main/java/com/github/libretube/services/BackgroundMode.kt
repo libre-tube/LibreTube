@@ -68,11 +68,11 @@ class BackgroundMode : Service() {
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
+    /**
+     * Setting the required [notification] for running as a foreground service
+     */
     override fun onCreate() {
         super.onCreate()
-        /**
-         * setting the required notification for running as a foreground service
-         */
         if (Build.VERSION.SDK_INT >= 26) {
             val channelId = BACKGROUND_CHANNEL_ID
             val channel = NotificationChannel(
@@ -169,11 +169,7 @@ class BackgroundMode : Service() {
                         if (autoplay) playNextVideo()
                     }
                     Player.STATE_IDLE -> {
-                        // called when the user pressed stop in the notification
-                        // stop the service from being in the foreground and remove the notification
-                        stopForeground(true)
-                        // destroy the service
-                        stopSelf()
+                        onDestroy()
                     }
                 }
             }
@@ -241,6 +237,19 @@ class BackgroundMode : Service() {
                 player?.seekTo(segmentEnd)
             }
         }
+    }
+
+    /**
+     * destroy the [BackgroundMode] foreground service
+     */
+    override fun onDestroy() {
+        // called when the user pressed stop in the notification
+        // stop the service from being in the foreground and remove the notification
+        stopForeground(true)
+        // destroy the service
+        stopSelf()
+        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroy()
+        super.onDestroy()
     }
 
     override fun onBind(p0: Intent?): IBinder? {

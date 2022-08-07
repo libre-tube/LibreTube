@@ -117,6 +117,9 @@ class NowPlayingNotification(
         }
     }
 
+    /**
+     * Creates a [MediaSessionCompat] amd a [MediaSessionConnector] for the player
+     */
     private fun createMediaSession() {
         if (this::mediaSession.isInitialized) return
         mediaSession = MediaSessionCompat(context, this.javaClass.name)
@@ -127,7 +130,7 @@ class NowPlayingNotification(
     }
 
     /**
-     * Initializes the [playerNotification] attached to the [player] and shows it.
+     * Updates or creates the [playerNotification]
      */
     fun updatePlayerNotification(
         streams: Streams
@@ -139,6 +142,9 @@ class NowPlayingNotification(
         }
     }
 
+    /**
+     * Initializes the [playerNotification] attached to the [player] and shows it.
+     */
     private fun createNotification() {
         playerNotification = PlayerNotificationManager
             .Builder(context, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
@@ -157,6 +163,9 @@ class NowPlayingNotification(
         }
     }
 
+    /**
+     * Destroy the [NowPlayingNotification]
+     */
     fun destroy() {
         mediaSession.isActive = false
         mediaSession.release()
