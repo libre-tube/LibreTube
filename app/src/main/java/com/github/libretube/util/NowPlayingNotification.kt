@@ -12,6 +12,7 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import java.net.URL
 
@@ -22,13 +23,19 @@ class NowPlayingNotification(
     private var streams: Streams? = null
 
     /**
+     * The [MediaSessionCompat] for the [streams].
+     */
+    private lateinit var mediaSession: MediaSessionCompat
+
+    /**
+     * The [MediaSessionConnector] to connect with the [mediaSession] and implement it with the [player].
+     */
+    private lateinit var mediaSessionConnector: MediaSessionConnector
+
+    /**
      * The [PlayerNotificationManager] to load the [mediaSession] content on it.
      */
     private var playerNotification: PlayerNotificationManager? = null
-
-    private fun setStreams(streams: Streams) {
-        this.streams = streams
-    }
 
     /**
      * The [DescriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
@@ -109,14 +116,29 @@ class NowPlayingNotification(
         }
     }
 
+    private fun createMediaSession() {
+        if (this::mediaSession.isInitialized) return
+        mediaSession = MediaSessionCompat(context, this.javaClass.name)
+        mediaSession.isActive = true
+
+        mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setPlayer(player)
+    }
+
     /**
      * Initializes the [playerNotification] attached to the [player] and shows it.
      */
-    fun initializePlayerNotification(
-        mediaSession: MediaSessionCompat,
+    fun updatePlayerNotification(
         streams: Streams
     ) {
         this.streams = streams
+        if (playerNotification == null) {
+            createMediaSession()
+            createNotification()
+        }
+    }
+
+    private fun createNotification() {
         playerNotification = PlayerNotificationManager
             .Builder(context, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             // set the description of the notification

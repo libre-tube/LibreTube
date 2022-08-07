@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.support.v4.media.session.MediaSessionCompat
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.PLAYER_NOTIFICATION_ID
@@ -55,16 +54,6 @@ class BackgroundMode : Service() {
     private var playWhenReadyPlayer = true
 
     /**
-     * The [MediaSessionCompat] for the [response].
-     */
-    private lateinit var mediaSession: MediaSessionCompat
-
-    /**
-     * The [MediaSessionConnector] to connect with the [mediaSession] and implement it with the [player].
-     */
-    private lateinit var mediaSessionConnector: MediaSessionConnector
-
-    /**
      * The [AudioAttributes] handle the audio focus of the [player]
      */
     private lateinit var audioAttributes: AudioAttributes
@@ -104,12 +93,17 @@ class BackgroundMode : Service() {
      * Initializes the [player] with the [MediaItem].
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // get the intent arguments
-        videoId = intent?.getStringExtra("videoId")!!
-        val position = intent.getLongExtra("position", 0L)
+        try {
+            // get the intent arguments
+            videoId = intent?.getStringExtra("videoId")!!
+            val position = intent.getLongExtra("position", 0L)
 
-        // play the audio in the background
-        playAudio(videoId, position)
+            // play the audio in the background
+            playAudio(videoId, position)
+        } catch (e: Exception) {
+            stopForeground(true)
+            stopSelf()
+        }
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -131,8 +125,10 @@ class BackgroundMode : Service() {
             setMediaItem()
 
             // create the notification
-            nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
-            nowPlayingNotification.initializePlayerNotification(mediaSession, response!!)
+            if (!this@BackgroundMode::nowPlayingNotification.isInitialized) {
+                nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
+            }
+            nowPlayingNotification.updatePlayerNotification(response!!)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
@@ -208,12 +204,6 @@ class BackgroundMode : Service() {
             val mediaItem = MediaItem.Builder().setUri(it.hls!!).build()
             player?.setMediaItem(mediaItem)
         }
-
-        mediaSession = MediaSessionCompat(this, this.javaClass.name)
-        mediaSession.isActive = true
-
-        mediaSessionConnector = MediaSessionConnector(mediaSession)
-        mediaSessionConnector.setPlayer(player)
     }
 
     /**
