@@ -1,7 +1,6 @@
 package com.github.libretube.fragments
 
 import android.app.ActivityManager
-import android.app.NotificationManager
 import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.Intent
@@ -16,7 +15,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
-import android.support.v4.media.session.MediaSessionCompat
 import android.text.Html
 import android.text.format.DateUtils
 import android.util.Log
@@ -35,9 +33,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.Globals
-import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
@@ -50,17 +46,17 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.obj.ChapterSegment
-import com.github.libretube.obj.Playlist
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
+import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
-import com.github.libretube.util.DescriptionAdapter
+import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.OnDoubleTapEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
@@ -77,7 +73,6 @@ import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
@@ -85,7 +80,6 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
-import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.upstream.DataSource
@@ -175,15 +169,12 @@ class PlayerFragment : Fragment() {
      * for autoplay
      */
     private var nextStreamId: String? = null
-    private var playlistStreamIds: MutableList<String> = arrayListOf()
-    private var playlistNextPage: String? = null
+    private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
      * for the player notification
      */
-    private lateinit var mediaSession: MediaSessionCompat
-    private lateinit var mediaSessionConnector: MediaSessionConnector
-    private lateinit var playerNotification: PlayerNotificationManager
+    private lateinit var nowPlayingNotification: NowPlayingNotification
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -676,15 +667,7 @@ class PlayerFragment : Fragment() {
         super.onDestroy()
         try {
             saveWatchPosition()
-            mediaSession.isActive = false
-            mediaSession.release()
-            mediaSessionConnector.setPlayer(null)
-            playerNotification.setPlayer(null)
-            val notificationManager = context?.getSystemService(
-                Context.NOTIFICATION_SERVICE
-            ) as NotificationManager
-            notificationManager.cancel(1)
-            exoPlayer.release()
+            nowPlayingNotification.destroy()
             activity?.requestedOrientation =
                 if ((activity as MainActivity).autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
                 else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -752,12 +735,12 @@ class PlayerFragment : Fragment() {
                     exoPlayer.prepare()
                     exoPlayer.play()
                     exoPlayerView.useController = true
-                    initializePlayerNotification(requireContext())
+                    initializePlayerNotification()
                     if (sponsorBlockEnabled) fetchSponsorBlockSegments()
                     // show comments if related streams disabled
                     if (!relatedStreamsEnabled) toggleComments()
                     // prepare for autoplay
-                    initAutoPlay()
+                    if (autoplayEnabled) setNextStream()
                     if (watchHistoryEnabled) {
                         PreferenceHelper.addToWatchHistory(videoId!!, streams)
                     }
@@ -765,6 +748,20 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
+    }
+
+    /**
+     * set the videoId of the next stream for autoplay
+     */
+    private fun setNextStream() {
+        nextStreamId = streams.relatedStreams!![0].url.toID()
+        if (playlistId == null) return
+        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
+        // search for the next videoId in the playlist
+        lifecycleScope.launchWhenCreated {
+            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId!!)
+            if (nextId != null) nextStreamId = nextId
+        }
     }
 
     /**
@@ -822,59 +819,6 @@ class PlayerFragment : Fragment() {
             position = timeStamp * 1000
         }
         if (position != null) exoPlayer.seekTo(position!!)
-    }
-
-    // the function is working recursively
-    private fun initAutoPlay() {
-        // save related streams for autoplay
-        if (autoplayEnabled) {
-            // if it's a playlist use the next video
-            if (playlistId != null) {
-                lateinit var playlist: Playlist // var for saving the list in
-                // runs only the first time when starting a video from a playlist
-                if (playlistStreamIds.isEmpty()) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        // fetch the playlists videos
-                        playlist = RetrofitInstance.api.getPlaylist(playlistId!!)
-                        // save the playlist urls in the array
-                        playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url.toID()
-                        }
-                        // save playlistNextPage for usage if video is not contained
-                        playlistNextPage = playlist.nextpage
-                        // restart the function after videos are loaded
-                        initAutoPlay()
-                    }
-                }
-                // if the playlists contain the video, then save the next video as next stream
-                else if (playlistStreamIds.contains(videoId)) {
-                    val index = playlistStreamIds.indexOf(videoId)
-                    // check whether there's a next video
-                    if (index + 1 <= playlistStreamIds.size) {
-                        nextStreamId = playlistStreamIds[index + 1]
-                    }
-                    // fetch the next page of the playlist if the video isn't contained
-                } else if (playlistNextPage != null) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        RetrofitInstance.api.getPlaylistNextPage(playlistId!!, playlistNextPage!!)
-                        // append all the playlist item urls to the array
-                        playlist.relatedStreams?.forEach { video ->
-                            playlistStreamIds += video.url.toID()
-                        }
-                        // save playlistNextPage for usage if video is not contained
-                        playlistNextPage = playlist.nextpage
-                        // restart the function after videos are loaded
-                        initAutoPlay()
-                    }
-                }
-                // else: the video must be the last video of the playlist so nothing happens
-
-                // if it's not a playlist then use the next related video
-            } else if (streams.relatedStreams != null && streams.relatedStreams!!.isNotEmpty()) {
-                // save next video from related streams for autoplay
-                nextStreamId = streams.relatedStreams!![0].url.toID()
-            }
-        }
     }
 
     // used for autoplay and skipping to next video
@@ -1502,33 +1446,14 @@ class PlayerFragment : Fragment() {
         exoPlayer.setAudioAttributes(audioAttributes, true)
     }
 
-    private fun initializePlayerNotification(c: Context) {
-        mediaSession = MediaSessionCompat(c, this.javaClass.name)
-        mediaSession.apply {
-            isActive = true
+    /**
+     * show the [NowPlayingNotification] for the current video
+     */
+    private fun initializePlayerNotification() {
+        if (!this::nowPlayingNotification.isInitialized) {
+            nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer)
         }
-
-        mediaSessionConnector = MediaSessionConnector(mediaSession)
-        mediaSessionConnector.setPlayer(exoPlayer)
-
-        playerNotification = PlayerNotificationManager
-            .Builder(c, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
-            .setMediaDescriptionAdapter(
-                DescriptionAdapter(
-                    streams.title!!,
-                    streams.uploader!!,
-                    streams.thumbnailUrl!!,
-                    requireContext()
-                )
-            )
-            .build()
-
-        playerNotification.apply {
-            setPlayer(exoPlayer)
-            setUsePreviousAction(false)
-            setUseStopAction(true)
-            setMediaSessionToken(mediaSession.sessionToken)
-        }
+        nowPlayingNotification.updatePlayerNotification(streams)
     }
 
     // lock the player
