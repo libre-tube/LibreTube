@@ -13,7 +13,7 @@
     <string name="unknown_error">Bağlantı hatası.</string>
     <string name="empty">Kullanıcı adı ve parola girmelisiniz.</string>
     <string name="notgmail">Bu, Piped hesabı içindir.</string>
-    <string name="defres">Varsayılan video çözünürlüğü</string>
+    <string name="defres">Video çözünürlüğü</string>
     <string name="deletePlaylist">Oynatma listesini sil</string>
     <string name="createPlaylist">Oynatma listesi oluştur</string>
     <string name="fail">Başarısız oldu :(</string>
@@ -134,7 +134,7 @@
     <string name="update_summary">Uygulamanın güncel olup-olmadığını öğrenmek için tıklayın.</string>
     <string name="app_uptodate">En son sürümü çalıştırıyor.</string>
     <string name="no_update_available">En son sürümü çalıştırıyorsunuz.</string>
-    <string name="playback_speed">Varsayılan oynatma hızı</string>
+    <string name="playback_speed">Oynatma hızı</string>
     <string name="advanced">Gelişmiş</string>
     <string name="player">Oynatıcı</string>
     <string name="appearance_summary">Uygulamayı zevkinize göre ayarlayın.</string>
@@ -163,7 +163,7 @@
     <string name="flameIcon">Uçan alev</string>
     <string name="instance_summary">Piped, giriş, abonelikler</string>
     <string name="addInstance">Sunucu Ekle</string>
-    <string name="clear_customInstances">Özel sunucuları temizle</string>
+    <string name="clear_customInstances">Eklenenleri temizle</string>
     <string name="instance_api_url">Sunucu API\'sinin URL\'si</string>
     <string name="customInstance_summary">Özel bir sunucu ekleyin (kendi sorumluluğunuzdadır)</string>
     <string name="empty_instance">Adı ve API URL\'sini girin.</string>
@@ -180,7 +180,7 @@
     <string name="category_preview">Önizleme/Özet</string>
     <string name="category_preview_description">Bu veya serisindeki gelecekteki videolarda gelecek içeriği detaylandıran, ancak ek bilgi sağlamayan bölümler için. Yalnızca burada görünen klipleri içeriyorsa, bu büyük olasılıkla yanlış kategoridir.</string>
     <string name="related_streams">İlgili içerik</string>
-    <string name="related_streams_summary">İlgili akışları izlediklerinizle yan yana gösterin.</string>
+    <string name="related_streams_summary">İzlediklerinizin yanında benzer akışlarıı gösterir.</string>
     <string name="buffering_goal">Ön yükleme</string>
     <string name="buffering_goal_summary">Maks. arabelleğe alınacak videonun saniye miktarı.</string>
     <string name="playerVideoFormat">Oynatıcı için video formatı</string>
@@ -197,7 +197,7 @@
     <string name="piped_summary">Piped, kullandığımız API\'yi sağlayan YouTube için açık kaynaklı alternatif bir internet ön yüzüdür. Piped olmasaydı LibreTube olmazdı. Geliştiricilerine çok teşekkürler!</string>
     <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
     <string name="seek_increment">Aramayı artırın</string>
-    <string name="pauseOnScreenOff">Oto.duraklama</string>
+    <string name="pauseOnScreenOff">Otomatik duraklatma</string>
     <string name="pauseOnScreenOff_summary">Ekran kapatıldığında oynatıcıyı duraklatın.</string>
     <string name="autoplay_summary">Akım bittiğinde sonraki videoyu otomatik olarak oynatın.</string>
     <string name="clonePlaylist">Oynatma listesini klonla</string>
