@@ -3,9 +3,11 @@ package com.github.libretube.services
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -15,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
@@ -35,6 +38,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.net.URL
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -106,9 +110,6 @@ class BackgroundMode : Service() {
      * Initializes the [player] with the [MediaItem].
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // destroy the old player
-        destroyPlayer()
-
         // get the intent arguments
         videoId = intent?.getStringExtra("videoId")!!
         val position = intent.getLongExtra("position", 0L)
@@ -194,13 +195,89 @@ class BackgroundMode : Service() {
             val videoId = response!!
                 .relatedStreams!![0].url.toID()
 
-            // destroy previous notification and player
-            destroyPlayer()
-
             // play new video on background
             this.videoId = videoId
             this.segmentData = null
             playAudio(videoId)
+        }
+    }
+
+    /**
+     * The [DescriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
+     * Basic example [here](https://github.com/AnthonyMarkD/AudioPlayerSampleTest)
+     */
+    inner class DescriptionAdapter() :
+        PlayerNotificationManager.MediaDescriptionAdapter {
+        /**
+         * sets the title of the notification
+         */
+        override fun getCurrentContentTitle(player: Player): CharSequence {
+            // return controller.metadata.description.title.toString()
+            return response?.title!!
+        }
+
+        /**
+         * overrides the action when clicking the notification
+         */
+        override fun createCurrentContentIntent(player: Player): PendingIntent? {
+            //  return controller.sessionActivity
+            /**
+             *  starts a new MainActivity Intent when the player notification is clicked
+             *  it doesn't start a completely new MainActivity because the MainActivity's launchMode
+             *  is set to "singleTop" in the AndroidManifest (important!!!)
+             *  that's the only way to launch back into the previous activity (e.g. the player view
+             */
+            val intent = Intent(this@BackgroundMode, MainActivity::class.java)
+            return PendingIntent.getActivity(this@BackgroundMode, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        }
+
+        /**
+         * the description of the notification (below the title)
+         */
+        override fun getCurrentContentText(player: Player): CharSequence? {
+            // return controller.metadata.description.subtitle.toString()
+            return response?.uploader
+        }
+
+        /**
+         * return the icon/thumbnail of the video
+         */
+        override fun getCurrentLargeIcon(
+            player: Player,
+            callback: PlayerNotificationManager.BitmapCallback
+        ): Bitmap? {
+            lateinit var bitmap: Bitmap
+
+            /**
+             * running on a new thread to prevent a NetworkMainThreadException
+             */
+            val thread = Thread {
+                try {
+                    /**
+                     * try to GET the thumbnail from the URL
+                     */
+                    val inputStream = URL(response?.thumbnailUrl).openStream()
+                    bitmap = BitmapFactory.decodeStream(inputStream)
+                } catch (ex: java.lang.Exception) {
+                    ex.printStackTrace()
+                }
+            }
+            thread.start()
+            thread.join()
+            /**
+             * returns the scaled bitmap if it got fetched successfully
+             */
+            return try {
+                val resizedBitmap = Bitmap.createScaledBitmap(
+                    bitmap,
+                    bitmap.width,
+                    bitmap.width,
+                    false
+                )
+                resizedBitmap
+            } catch (e: Exception) {
+                null
+            }
         }
     }
 
@@ -212,12 +289,7 @@ class BackgroundMode : Service() {
             .Builder(this, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             // set the description of the notification
             .setMediaDescriptionAdapter(
-                DescriptionAdapter(
-                    response?.title!!,
-                    response?.uploader!!,
-                    response?.thumbnailUrl!!,
-                    this
-                )
+                DescriptionAdapter()
             )
             .build()
         playerNotification?.apply {
@@ -282,17 +354,6 @@ class BackgroundMode : Service() {
                 player?.seekTo(segmentEnd)
             }
         }
-    }
-
-    private fun destroyPlayer() {
-        // clear old player and its notification
-        playerNotification = null
-        player = null
-
-        // kill old notification
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
-            as NotificationManager
-        notificationManager.cancel(PLAYER_NOTIFICATION_ID)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
