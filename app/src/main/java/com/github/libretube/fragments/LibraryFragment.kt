@@ -109,6 +109,7 @@ class LibraryFragment : Fragment() {
                     }
                     val playlistsAdapter = PlaylistsAdapter(
                         response.toMutableList(),
+                        childFragmentManager,
                         requireActivity()
                     )
                     binding.playlistRecView.adapter = playlistsAdapter

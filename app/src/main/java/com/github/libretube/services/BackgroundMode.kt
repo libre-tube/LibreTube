@@ -205,6 +205,7 @@ class BackgroundMode : Service() {
             nextStreamId = streams?.relatedStreams!![0].url.toID()
         }
 
+        return
         if (playlistId == null) return
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist

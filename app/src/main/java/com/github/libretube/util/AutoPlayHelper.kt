@@ -17,14 +17,15 @@ class AutoPlayHelper(
             val index = playlistStreamIds.indexOf(currentVideoId)
             // check whether there's a next video
             return if (index + 1 < playlistStreamIds.size) playlistStreamIds[index + 1]
+            else if (playlistNextPage == null) null
             else getNextPlaylistVideoId(currentVideoId)
         } else if (playlistStreamIds.isEmpty() || playlistNextPage != null) {
             // fetch the next page of the playlist
             return withContext(Dispatchers.IO) {
                 // fetch the playlists or its nextPage's videos
                 val playlist =
-                    if (playlistNextPage == null) RetrofitInstance.api.getPlaylist(playlistId)
-                    else RetrofitInstance.api.getPlaylistNextPage(playlistId, playlistNextPage!!)
+                    if (playlistNextPage == null) RetrofitInstance.authApi.getPlaylist(playlistId)
+                    else RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage!!)
                 // save the playlist urls to the list
                 playlistStreamIds += playlist.relatedStreams!!.map { it.url.toID() }
                 // save playlistNextPage for usage if video is not contained
