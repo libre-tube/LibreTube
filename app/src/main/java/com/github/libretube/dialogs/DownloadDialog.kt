@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -38,7 +37,7 @@ class DownloadDialog : DialogFragment() {
 
             fetchAvailableSources()
 
-            PermissionHelper.requestReadWrite(activity as AppCompatActivity)
+            PermissionHelper.requestReadWrite(requireActivity())
 
             binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 

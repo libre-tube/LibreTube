@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Environment
 import android.os.IBinder
+import android.widget.Toast
 import com.github.libretube.R
 import java.io.File
 
@@ -64,7 +65,15 @@ class UpdateService : Service() {
                     Uri.fromFile(file),
                     downloadManager.getMimeTypeForDownloadedFile(downloadId)
                 )
-                startActivity(installIntent)
+                try {
+                    startActivity(installIntent)
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        context,
+                        R.string.downloadsucceeded,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

@@ -289,7 +289,7 @@
     <string name="no_search_result">No results.</string>
     <string name="error_occurred">Error</string>
     <string name="copied">Copied</string>
-    <string name="downloadsucceeded">Downloaded</string>
+    <string name="downloadsucceeded">Download succeeded</string>
     <string name="share_with_time">Share with start time</string>
     <string name="export_subscriptions">Export Subscriptions</string>
 </resources>

@@ -100,7 +100,7 @@ object ThemeHelper {
     fun restartMainActivity(context: Context) {
         // kill player notification
         val nManager = context
-            .getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
+            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         nManager.cancelAll()
         // start a new Intent of the app
         val pm: PackageManager = context.packageManager

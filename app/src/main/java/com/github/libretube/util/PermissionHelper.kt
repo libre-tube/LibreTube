@@ -1,14 +1,14 @@
 package com.github.libretube.util
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 
 object PermissionHelper {
-    fun requestReadWrite(activity: AppCompatActivity): Boolean {
+    fun requestReadWrite(activity: Activity): Boolean {
         // request storage permissions if not granted yet
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
@@ -46,7 +46,7 @@ object PermissionHelper {
         return true
     }
 
-    fun isStoragePermissionGranted(activity: AppCompatActivity): Boolean {
+    fun isStoragePermissionGranted(activity: Activity): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED

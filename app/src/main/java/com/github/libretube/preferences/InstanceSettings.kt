@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
@@ -142,11 +141,11 @@ class InstanceSettings : MaterialPreferenceFragment() {
         importSubscriptions?.setOnPreferenceClickListener {
             // check StorageAccess
             val accessGranted =
-                PermissionHelper.isStoragePermissionGranted(activity as AppCompatActivity)
+                PermissionHelper.isStoragePermissionGranted(requireActivity())
             // import subscriptions
             if (accessGranted) getContent.launch("*/*")
             // request permissions if not granted
-            else PermissionHelper.requestReadWrite(activity as AppCompatActivity)
+            else PermissionHelper.requestReadWrite(requireActivity())
             true
         }
 
