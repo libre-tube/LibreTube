@@ -55,7 +55,10 @@ class VideoOptionsDialog(
                             val bundle = Bundle()
                             bundle.putString("videoId", videoId)
                             newFragment.arguments = bundle
-                            newFragment.show(parentFragmentManager, AddToPlaylistDialog::class.java.name)
+                            newFragment.show(
+                                parentFragmentManager,
+                                AddToPlaylistDialog::class.java.name
+                            )
                         } else {
                             Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                         }

@@ -5,12 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.databinding.FragmentChannelBinding
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.SubscriptionHelper
@@ -19,7 +19,7 @@ import com.github.libretube.util.toID
 import retrofit2.HttpException
 import java.io.IOException
 
-class ChannelFragment : Fragment() {
+class ChannelFragment : BaseFragment() {
     private val TAG = "ChannelFragment"
     private lateinit var binding: FragmentChannelBinding
 
@@ -183,11 +183,5 @@ class ChannelFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

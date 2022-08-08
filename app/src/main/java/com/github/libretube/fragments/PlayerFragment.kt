@@ -28,7 +28,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +44,7 @@ import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
@@ -88,6 +88,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,9 +96,8 @@ import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
-import kotlin.math.abs
 
-class PlayerFragment : Fragment() {
+class PlayerFragment : BaseFragment() {
 
     private val TAG = "PlayerFragment"
     private lateinit var binding: FragmentPlayerBinding
@@ -1507,12 +1507,6 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 
     private fun fetchComments() {
