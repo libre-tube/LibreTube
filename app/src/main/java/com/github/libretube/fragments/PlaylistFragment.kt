@@ -88,7 +88,7 @@ class PlaylistFragment : Fragment() {
                     // show playlist options
                     binding.optionsMenu.setOnClickListener {
                         val optionsDialog =
-                            PlaylistOptionsDialog(playlistId!!, isOwner, requireContext())
+                            PlaylistOptionsDialog(playlistId!!, isOwner)
                         optionsDialog.show(childFragmentManager, "PlaylistOptionsDialog")
                     }
 

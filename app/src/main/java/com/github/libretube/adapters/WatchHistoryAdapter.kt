@@ -50,7 +50,7 @@ class WatchHistoryAdapter(
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
             root.setOnLongClickListener {
-                VideoOptionsDialog(video.videoId!!, root.context)
+                VideoOptionsDialog(video.videoId!!)
                     .show(childFragmentManager, "VideoOptionsDialog")
                 true
             }

@@ -18,6 +18,7 @@ import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
@@ -43,9 +44,14 @@ class BackgroundMode : Service() {
     private lateinit var videoId: String
 
     /**
+     *PlaylistId for autoplay
+     */
+    private var playlistId: String? = null
+
+    /**
      * The response that gets when called the Api.
      */
-    private var response: Streams? = null
+    private var streams: Streams? = null
 
     /**
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
@@ -64,9 +70,19 @@ class BackgroundMode : Service() {
     private var segmentData: Segments? = null
 
     /**
-     * Notification for the player
+     * [Notification] for the player
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
+
+    /**
+     * The [videoId] of the next stream for autoplay
+     */
+    private lateinit var nextStreamId: String
+
+    /**
+     * Helper for finding the next video in the playlist
+     */
+    private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
      * Setting the required [notification] for running as a foreground service
@@ -96,7 +112,11 @@ class BackgroundMode : Service() {
         try {
             // get the intent arguments
             videoId = intent?.getStringExtra("videoId")!!
+            playlistId = intent.getStringExtra("playlistId")
             val position = intent.getLongExtra("position", 0L)
+
+            // initialize the playlist autoPlay Helper
+            if (playlistId != null) autoPlayHelper = AutoPlayHelper(playlistId!!)
 
             // play the audio in the background
             playAudio(videoId, position)
@@ -116,7 +136,7 @@ class BackgroundMode : Service() {
     ) {
         runBlocking {
             val job = launch {
-                response = RetrofitInstance.api.getStreams(videoId)
+                streams = RetrofitInstance.api.getStreams(videoId)
             }
             // Wait until the job is done, to load correctly later in the player
             job.join()
@@ -128,7 +148,7 @@ class BackgroundMode : Service() {
             if (!this@BackgroundMode::nowPlayingNotification.isInitialized) {
                 nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
             }
-            nowPlayingNotification.updatePlayerNotification(response!!)
+            nowPlayingNotification.updatePlayerNotification(streams!!)
 
             player?.apply {
                 playWhenReady = playWhenReadyPlayer
@@ -139,6 +159,8 @@ class BackgroundMode : Service() {
             if (seekToPosition != 0L) player?.seekTo(seekToPosition)
 
             fetchSponsorBlockSegments()
+
+            setNextStream()
         }
     }
 
@@ -146,16 +168,15 @@ class BackgroundMode : Service() {
      * create the player
      */
     private fun initializePlayer() {
+        if (player != null) return
+
         audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MUSIC)
             .build()
-
-        if (player == null) {
-            player = ExoPlayer.Builder(this)
-                .setAudioAttributes(audioAttributes, true)
-                .build()
-        }
+        player = ExoPlayer.Builder(this)
+            .setAudioAttributes(audioAttributes, true)
+            .build()
 
         /**
          * Listens for changed playbackStates (e.g. pause, end)
@@ -177,26 +198,40 @@ class BackgroundMode : Service() {
     }
 
     /**
-     * Plays the first related video to the current (used when the playback of the current video ended)
+     * set the videoId of the next stream for autoplay
      */
-    private fun playNextVideo() {
-        if (response!!.relatedStreams!!.isNotEmpty()) {
-            val videoId = response!!
-                .relatedStreams!![0].url.toID()
+    private fun setNextStream() {
+        if (streams!!.relatedStreams!!.isNotEmpty()) {
+            nextStreamId = streams?.relatedStreams!![0].url.toID()
+        }
 
-            // play new video on background
-            this.videoId = videoId
-            this.segmentData = null
-            playAudio(videoId)
+        if (playlistId == null) return
+        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
+        // search for the next videoId in the playlist
+        CoroutineScope(Dispatchers.IO).launch {
+            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId)
+            if (nextId != null) nextStreamId = nextId
         }
     }
 
     /**
-     * Sets the [MediaItem] with the [response] into the [player]. Also creates a [MediaSessionConnector]
+     * Plays the first related video to the current (used when the playback of the current video ended)
+     */
+    private fun playNextVideo() {
+        if (!this::nextStreamId.isInitialized || nextStreamId == videoId) return
+
+        // play new video on background
+        this.videoId = nextStreamId
+        this.segmentData = null
+        playAudio(videoId)
+    }
+
+    /**
+     * Sets the [MediaItem] with the [streams] into the [player]. Also creates a [MediaSessionConnector]
      * with the [mediaSession] and attach it to the [player].
      */
     private fun setMediaItem() {
-        response?.let {
+        streams?.let {
             val mediaItem = MediaItem.Builder().setUri(it.hls!!).build()
             player?.setMediaItem(mediaItem)
         }
