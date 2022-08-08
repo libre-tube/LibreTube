@@ -1,7 +1,6 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -16,22 +15,24 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  *
  * Needs the [videoId] to load the content from the right video.
  */
-class VideoOptionsDialog(private val videoId: String, context: Context) : DialogFragment() {
+class VideoOptionsDialog(
+    private val videoId: String
+) : DialogFragment() {
     private val TAG = "VideoOptionsDialog"
-
-    /**
-     * List that stores the different menu options. In the future could be add more options here.
-     */
-    private val optionsList = listOf(
-        context.getString(R.string.playOnBackground),
-        context.getString(R.string.addToPlaylist),
-        context.getString(R.string.share)
-    )
 
     /**
      * Dialog that returns a [MaterialAlertDialogBuilder] showing a menu of options.
      */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        /**
+         * List that stores the different menu options. In the future could be add more options here.
+         */
+        val optionsList = listOf(
+            context?.getString(R.string.playOnBackground),
+            context?.getString(R.string.addToPlaylist),
+            context?.getString(R.string.share)
+        )
+
         return MaterialAlertDialogBuilder(requireContext())
             .setNegativeButton(R.string.cancel, null)
             .setAdapter(

@@ -20,17 +20,17 @@ import java.io.IOException
 
 class PlaylistOptionsDialog(
     private val playlistId: String,
-    private val isOwner: Boolean,
-    context: Context
+    private val isOwner: Boolean
 ) : DialogFragment() {
     val TAG = "PlaylistOptionsDialog"
 
-    private var optionsList = listOf(
-        context.getString(R.string.clonePlaylist),
-        context.getString(R.string.share)
-    )
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // options for the dialog
+        var optionsList = listOf(
+            context?.getString(R.string.clonePlaylist),
+            context?.getString(R.string.share)
+        )
+
         if (isOwner) {
             optionsList = optionsList +
                 context?.getString(R.string.deletePlaylist)!! -

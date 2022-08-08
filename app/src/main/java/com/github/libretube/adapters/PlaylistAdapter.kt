@@ -60,7 +60,7 @@ class PlaylistAdapter(
             }
             val videoId = streamItem.url.toID()
             root.setOnLongClickListener {
-                VideoOptionsDialog(videoId, root.context)
+                VideoOptionsDialog(videoId)
                     .show(childFragmentManager, "VideoOptionsDialog")
                 true
             }
