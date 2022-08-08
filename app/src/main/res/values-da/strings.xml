@@ -292,4 +292,6 @@
     <string name="share_with_time">Del med starttidspunkt</string>
     <string name="downloadsucceeded">Download lykkedes</string>
     <string name="export_subscriptions">Eksportér abonnementer</string>
+    <string name="skip_buttons">Spring over knapper</string>
+    <string name="skip_buttons_summary">Vis knapper for at springe til næste eller forrige video.</string>
 </resources>
