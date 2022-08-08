@@ -67,7 +67,7 @@ class PlaylistsAdapter(
                 builder.show()
             }
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, playlist.id)
+                NavigationHelper.navigatePlaylist(root.context, playlist.id, true)
             }
 
             root.setOnLongClickListener {

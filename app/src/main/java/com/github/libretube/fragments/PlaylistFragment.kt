@@ -14,7 +14,6 @@ import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.extensions.BaseFragment
-import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.toID
 import retrofit2.HttpException
@@ -26,7 +25,7 @@ class PlaylistFragment : BaseFragment() {
 
     private var playlistId: String? = null
     private var isOwner: Boolean = false
-    var nextPage: String? = null
+    private var nextPage: String? = null
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
 
@@ -34,6 +33,7 @@ class PlaylistFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             playlistId = it.getString("playlist_id")
+            isOwner = it.getBoolean("isOwner")
         }
     }
 
@@ -61,7 +61,8 @@ class PlaylistFragment : BaseFragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    RetrofitInstance.authApi.getPlaylist(playlistId!!)
+                    if (isOwner) RetrofitInstance.authApi.getPlaylist(playlistId!!)
+                    else RetrofitInstance.api.getPlaylist(playlistId!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -75,13 +76,9 @@ class PlaylistFragment : BaseFragment() {
                 runOnUiThread {
                     binding.playlistProgress.visibility = View.GONE
                     binding.playlistName.text = response.name
-                    binding.playlistUploader.text = response.uploader
-                    binding.playlistTotVideos.text =
+                    binding.uploader.text = response.uploader
+                    binding.videoCount.text =
                         getString(R.string.videoCount, response.videos.toString())
-
-                    val user = PreferenceHelper.getUsername()
-                    // check whether the user owns the playlist
-                    isOwner = response.uploaderUrl == null && response.uploader.equals(user, true)
 
                     // show playlist options
                     binding.optionsMenu.setOnClickListener {
@@ -100,6 +97,16 @@ class PlaylistFragment : BaseFragment() {
                         requireActivity(),
                         childFragmentManager
                     )
+
+                    // listen for playlist items to become deleted
+                    playlistAdapter!!.registerAdapterDataObserver(object :
+                            RecyclerView.AdapterDataObserver() {
+                            override fun onChanged() {
+                                binding.videoCount.text =
+                                    getString(R.string.videoCount, playlistAdapter!!.itemCount.toString())
+                            }
+                        })
+
                     binding.playlistRecView.adapter = playlistAdapter
                     binding.playlistScrollview.viewTreeObserver
                         .addOnScrollChangedListener {
@@ -111,8 +118,6 @@ class PlaylistFragment : BaseFragment() {
                                     isLoading = true
                                     fetchNextPage()
                                 }
-                            } else {
-                                // scroll view is not at bottom
                             }
                         }
 
@@ -155,7 +160,10 @@ class PlaylistFragment : BaseFragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    RetrofitInstance.authApi.getPlaylistNextPage(
+                    if (isOwner) RetrofitInstance.authApi.getPlaylistNextPage(
+                        playlistId!!,
+                        nextPage!!
+                    ) else RetrofitInstance.api.getPlaylistNextPage(
                         playlistId!!,
                         nextPage!!
                     )
