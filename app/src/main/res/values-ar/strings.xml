@@ -290,6 +290,8 @@
     <string name="error_occurred">خطأ</string>
     <string name="copied">تم النسخ</string>
     <string name="share_with_time">المشاركة مع وقت البدء</string>
-    <string name="downloadsucceeded">تم التحميل</string>
+    <string name="downloadsucceeded">نجح التحميل</string>
     <string name="export_subscriptions">تصدير الاشتراكات</string>
+    <string name="skip_buttons">أزرار التخطي</string>
+    <string name="skip_buttons_summary">إظهار الأزرار للتخطي إلى الفيديو التالي أو السابق.</string>
 </resources>
