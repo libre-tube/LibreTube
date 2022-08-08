@@ -164,6 +164,7 @@ class PlayerFragment : BaseFragment() {
     private var defaultSubtitleCode = ""
     private var sponsorBlockEnabled = true
     private var sponsorBlockNotifications = true
+    private var skipButtonsEnabled = false
 
     /**
      * for autoplay
@@ -175,6 +176,11 @@ class PlayerFragment : BaseFragment() {
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
+
+    /**
+     * history of played videos in the current lifecycle
+     */
+    val videoIds = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -204,7 +210,7 @@ class PlayerFragment : BaseFragment() {
 
         setUserPrefs()
 
-        if (autoplayEnabled == true) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
+        if (autoplayEnabled) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
 
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
@@ -314,6 +320,11 @@ class PlayerFragment : BaseFragment() {
         if (defaultSubtitleCode.contains("-")) {
             defaultSubtitleCode = defaultSubtitleCode.split("-")[0]
         }
+
+        skipButtonsEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.SKIP_BUTTONS,
+            false
+        )
     }
 
     private fun initializeTransitionLayout() {
@@ -566,8 +577,6 @@ class PlayerFragment : BaseFragment() {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
 
-        scaleControls(1.3F)
-
         val mainActivity = activity as MainActivity
         if (!autoRotationEnabled) {
             // different orientations of the video are only available when auto rotation is disabled
@@ -602,8 +611,6 @@ class PlayerFragment : BaseFragment() {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
 
-        scaleControls(1F)
-
         if (!autoRotationEnabled) {
             // switch back to portrait mode if auto rotation disabled
             val mainActivity = activity as MainActivity
@@ -611,11 +618,6 @@ class PlayerFragment : BaseFragment() {
         }
 
         Globals.IS_FULL_SCREEN = false
-    }
-
-    private fun scaleControls(scaleFactor: Float) {
-        playerBinding.exoPlayPause.scaleX = scaleFactor
-        playerBinding.exoPlayPause.scaleY = scaleFactor
     }
 
     private fun toggleDescription() {
@@ -746,6 +748,7 @@ class PlayerFragment : BaseFragment() {
                     }
                 }
             }
+            videoIds += videoId!!
         }
         run()
     }
@@ -754,7 +757,18 @@ class PlayerFragment : BaseFragment() {
      * set the videoId of the next stream for autoplay
      */
     private fun setNextStream() {
-        nextStreamId = streams.relatedStreams!![0].url.toID()
+        // don't play a video if it got played before already
+        var index = 0
+        while (nextStreamId == null || nextStreamId == videoId!! ||
+            (
+                videoIds.contains(nextStreamId) &&
+                    videoIds.indexOf(videoId) > videoIds.indexOf(nextStreamId)
+                )
+        ) {
+            nextStreamId = streams.relatedStreams!![index].url.toID()
+            if (index + 1 < streams.relatedStreams!!.size) index += 1
+            else break
+        }
         if (playlistId == null) return
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist
@@ -823,17 +837,16 @@ class PlayerFragment : BaseFragment() {
 
     // used for autoplay and skipping to next video
     private fun playNextVideo() {
+        if (nextStreamId == null) return
         // check whether there is a new video in the queue
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
         // forces the comments to reload for the new video
         commentsLoaded = false
         binding.commentsRecView.adapter = null
-        if (videoId != nextStreamId) {
-            // save the id of the next stream as videoId and load the next video
-            videoId = nextStreamId
-            playVideo()
-        }
+        // save the id of the next stream as videoId and load the next video
+        videoId = nextStreamId
+        playVideo()
     }
 
     private fun prepareExoPlayerView() {
@@ -882,7 +895,7 @@ class PlayerFragment : BaseFragment() {
         }
 
         // duration that's not greater than 0 indicates that the video is live
-        if (!(response.duration!! > 0)) {
+        if (response.duration!! <= 0) {
             isLive = true
             handleLiveVideo()
         }
@@ -1051,6 +1064,22 @@ class PlayerFragment : BaseFragment() {
             binding.relPlayerSave.setOnClickListener {
                 Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // next and previous buttons
+        playerBinding.skipPrev.visibility = if (
+            skipButtonsEnabled && videoIds.indexOf(videoId!!) != 0
+        ) View.VISIBLE else View.INVISIBLE
+        playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
+
+        playerBinding.skipPrev.setOnClickListener {
+            val index = videoIds.indexOf(videoId!!) - 1
+            videoId = videoIds[index]
+            playVideo()
+        }
+
+        playerBinding.skipNext.setOnClickListener {
+            playNextVideo()
         }
     }
 

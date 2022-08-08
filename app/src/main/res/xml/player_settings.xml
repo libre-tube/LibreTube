@@ -77,6 +77,13 @@
             app:key="default_subtitle"
             app:title="@string/default_subtitle_language" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_next"
+            android:summary="@string/skip_buttons_summary"
+            app:key="skip_buttons"
+            app:title="@string/skip_buttons" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/behavior">

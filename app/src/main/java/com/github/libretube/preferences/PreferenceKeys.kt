@@ -58,6 +58,7 @@ object PreferenceKeys {
     const val PLAYER_AUDIO_FORMAT = "player_audio_format"
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
     const val DEFAULT_SUBTITLE = "default_subtitle"
+    const val SKIP_BUTTONS = "skip_buttons"
 
     /**
      * Download
