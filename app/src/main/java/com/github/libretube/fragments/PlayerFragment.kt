@@ -177,6 +177,11 @@ class PlayerFragment : BaseFragment() {
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
+    /**
+     * history of played videos in the current lifecycle
+     */
+    val videoIds = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -752,6 +757,7 @@ class PlayerFragment : BaseFragment() {
                     }
                 }
             }
+            videoIds += videoId!!
         }
         run()
     }
@@ -1060,10 +1066,18 @@ class PlayerFragment : BaseFragment() {
         }
 
         // next and previous buttons
-        playerBinding.next.visiblity = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
-        playerBinding.next.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
+        playerBinding.skipPrev.visibility = if (
+            skipButtonsEnabled && videoIds.indexOf(videoId!!) != 0
+        ) View.VISIBLE else View.INVISIBLE
+        playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
-        playerBinding.next.setOnClickListener {
+        playerBinding.skipPrev.setOnClickListener {
+            val index = videoIds.indexOf(videoId!!) - 1
+            videoId = videoIds[index]
+            playVideo()
+        }
+
+        playerBinding.skipNext.setOnClickListener {
             playNextVideo()
         }
     }
