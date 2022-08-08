@@ -27,6 +27,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -226,6 +227,18 @@ class PlayerFragment : BaseFragment() {
         initializeTransitionLayout()
         initializeOnClickActions()
         playVideo()
+
+        showBottomBar()
+    }
+
+    /**
+     * somehow the bottom bar is invisible on low screen resolutions, this fixes it
+     */
+    private fun showBottomBar() {
+        if (this::playerBinding.isInitialized && !isPlayerLocked) {
+            playerBinding.exoBottomBar.visibility = View.VISIBLE
+        }
+        Handler(Looper.getMainLooper()).postDelayed(this::showBottomBar, 100)
     }
 
     private fun setUserPrefs() {
@@ -1491,7 +1504,7 @@ class PlayerFragment : BaseFragment() {
         val visibility = if (isLocked) View.VISIBLE else View.GONE
 
         playerBinding.exoTopBarRight.visibility = visibility
-        playerBinding.exoPlayPause.visibility = visibility
+        playerBinding.exoCenterControls.visibility = visibility
         playerBinding.exoBottomBar.visibility = visibility
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility =
