@@ -4,9 +4,11 @@ import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.PlaylistsRowBinding
+import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
@@ -22,6 +24,7 @@ import java.io.IOException
 
 class PlaylistsAdapter(
     private val playlists: MutableList<Playlists>,
+    private val childFragmentManager: FragmentManager,
     private val activity: Activity
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
     val TAG = "PlaylistsAdapter"
@@ -66,6 +69,18 @@ class PlaylistsAdapter(
             }
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(root.context, playlist.id)
+            }
+
+            root.setOnLongClickListener {
+                val playlistOptionsDialog = PlaylistOptionsDialog(
+                    playlistId = playlist.id!!,
+                    isOwner = true
+                )
+                playlistOptionsDialog.show(
+                    childFragmentManager,
+                    PlaylistOptionsDialog::class.java.name
+                )
+                true
             }
         }
     }

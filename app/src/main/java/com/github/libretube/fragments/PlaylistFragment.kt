@@ -61,8 +61,7 @@ class PlaylistFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    if (isPipedPlaylist()) RetrofitInstance.authApi.getPlaylist(playlistId!!)
-                    else RetrofitInstance.api.getPlaylist(playlistId!!)
+                    RetrofitInstance.authApi.getPlaylist(playlistId!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -82,8 +81,7 @@ class PlaylistFragment : Fragment() {
 
                     val user = PreferenceHelper.getUsername()
                     // check whether the user owns the playlist
-                    isOwner = response.uploaderUrl == null &&
-                        response.uploader.equals(user, true)
+                    isOwner = response.uploaderUrl == null && response.uploader.equals(user, true)
 
                     // show playlist options
                     binding.optionsMenu.setOnClickListener {
@@ -121,7 +119,7 @@ class PlaylistFragment : Fragment() {
                     if (isOwner) {
                         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                             0,
-                            ItemTouchHelper.RIGHT
+                            ItemTouchHelper.LEFT
                         ) {
                             override fun onMove(
                                 recyclerView: RecyclerView,
@@ -154,11 +152,10 @@ class PlaylistFragment : Fragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    if (isPipedPlaylist()) RetrofitInstance.authApi.getPlaylistNextPage(
+                    RetrofitInstance.authApi.getPlaylistNextPage(
                         playlistId!!,
                         nextPage!!
                     )
-                    RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG, "IOException, you might not have internet connection")
@@ -173,11 +170,6 @@ class PlaylistFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun isPipedPlaylist(): Boolean {
-        val regex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
-        return playlistId?.contains(regex) == true || isOwner
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {
