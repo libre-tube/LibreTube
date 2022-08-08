@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.DONATE_URL
 import com.github.libretube.GITHUB_URL
 import com.github.libretube.PIPED_GITHUB_URL
@@ -13,10 +12,11 @@ import com.github.libretube.R
 import com.github.libretube.WEBLATE_URL
 import com.github.libretube.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
+import com.github.libretube.extensions.BaseActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : BaseActivity() {
     private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

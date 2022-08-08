@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +14,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
@@ -25,7 +25,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
-class SubscriptionsFragment : Fragment() {
+class SubscriptionsFragment : BaseFragment() {
     val TAG = "SubFragment"
     private lateinit var binding: FragmentSubscriptionsBinding
 
@@ -198,11 +198,5 @@ class SubscriptionsFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

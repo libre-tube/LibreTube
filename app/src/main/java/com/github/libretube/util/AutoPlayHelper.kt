@@ -25,7 +25,10 @@ class AutoPlayHelper(
                 // fetch the playlists or its nextPage's videos
                 val playlist =
                     if (playlistNextPage == null) RetrofitInstance.authApi.getPlaylist(playlistId)
-                    else RetrofitInstance.authApi.getPlaylistNextPage(playlistId, playlistNextPage!!)
+                    else RetrofitInstance.authApi.getPlaylistNextPage(
+                        playlistId,
+                        playlistNextPage!!
+                    )
                 // save the playlist urls to the list
                 playlistStreamIds += playlist.relatedStreams!!.map { it.url.toID() }
                 // save playlistNextPage for usage if video is not contained

@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.PLAYER_NOTIFICATION_ID
@@ -205,7 +206,6 @@ class BackgroundMode : Service() {
             nextStreamId = streams?.relatedStreams!![0].url.toID()
         }
 
-        return
         if (playlistId == null) return
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist
@@ -270,6 +270,18 @@ class BackgroundMode : Service() {
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
+                if (PreferenceHelper.getBoolean(
+                        "sb_notifications_key",
+                        true
+                    )
+                ) {
+                    try {
+                        Toast.makeText(this, R.string.segment_skipped, Toast.LENGTH_SHORT)
+                            .show()
+                    } catch (e: Exception) {
+                        // Do nothing.
+                    }
+                }
                 player?.seekTo(segmentEnd)
             }
         }

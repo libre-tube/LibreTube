@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.adapters.WatchHistoryAdapter
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.preferences.PreferenceHelper
 
-class WatchHistoryFragment : Fragment() {
+class WatchHistoryFragment : BaseFragment() {
     private val TAG = "WatchHistoryFragment"
     private lateinit var binding: FragmentWatchHistoryBinding
 

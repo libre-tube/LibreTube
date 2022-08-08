@@ -55,8 +55,9 @@ class PlaylistOptionsDialog(
                     // play the playlist in the background
                     context?.getString(R.string.playOnBackground) -> {
                         runBlocking {
-                            val playlist = if (isOwner) RetrofitInstance.authApi.getPlaylist(playlistId)
-                            else RetrofitInstance.api.getPlaylist(playlistId)
+                            val playlist =
+                                if (isOwner) RetrofitInstance.authApi.getPlaylist(playlistId)
+                                else RetrofitInstance.api.getPlaylist(playlistId)
                             BackgroundHelper.playOnBackground(
                                 context = requireContext(),
                                 videoId = playlist.relatedStreams!![0].url.toID(),
@@ -81,7 +82,7 @@ class PlaylistOptionsDialog(
                     context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(playlistId, true)
                         // using parentFragmentManager, childFragmentManager doesn't work here
-                        shareDialog.show(parentFragmentManager, "ShareDialog")
+                        shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                     }
                     context?.getString(R.string.deletePlaylist) -> {
                         val token = PreferenceHelper.getToken()

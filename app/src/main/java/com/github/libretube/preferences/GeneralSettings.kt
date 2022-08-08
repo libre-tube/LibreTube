@@ -20,21 +20,21 @@ class GeneralSettings : MaterialPreferenceFragment() {
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
         val autoRotation = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_ROTATION)
         autoRotation?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
         val hideTrending = findPreference<SwitchPreferenceCompat>(PreferenceKeys.HIDE_TRENDING_PAGE)
         hideTrending?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
     }

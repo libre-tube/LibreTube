@@ -103,7 +103,7 @@ class SearchAdapter(
             val videoId = item.url.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId)
-                    .show(childFragmentManager, "VideoOptionsDialog")
+                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
                 true
             }
             channelImage.setOnClickListener {
@@ -176,7 +176,7 @@ class SearchAdapter(
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()
                 PlaylistOptionsDialog(playlistId, false)
-                    .show(childFragmentManager, "PlaylistOptionsDialog")
+                    .show(childFragmentManager, PlaylistOptionsDialog::class.java.name)
                 true
             }
         }

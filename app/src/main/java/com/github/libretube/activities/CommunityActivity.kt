@@ -3,15 +3,15 @@ package com.github.libretube.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.DISCORD_URL
 import com.github.libretube.MATRIX_URL
 import com.github.libretube.REDDIT_URL
 import com.github.libretube.TELEGRAM_URL
 import com.github.libretube.TWITTER_URL
 import com.github.libretube.databinding.ActivityCommunityBinding
+import com.github.libretube.extensions.BaseActivity
 
-class CommunityActivity : AppCompatActivity() {
+class CommunityActivity : BaseActivity() {
     private lateinit var binding: ActivityCommunityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

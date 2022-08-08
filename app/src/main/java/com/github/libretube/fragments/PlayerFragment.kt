@@ -28,7 +28,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +44,7 @@ import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
@@ -97,7 +97,7 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
-class PlayerFragment : Fragment() {
+class PlayerFragment : BaseFragment() {
 
     private val TAG = "PlayerFragment"
     private lateinit var binding: FragmentPlayerBinding
@@ -523,7 +523,7 @@ class PlayerFragment : Fragment() {
         // share button
         binding.relPlayerShare.setOnClickListener {
             val shareDialog = ShareDialog(videoId!!, false, exoPlayer.currentPosition)
-            shareDialog.show(childFragmentManager, "ShareDialog")
+            shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
         binding.relPlayerBackground.setOnClickListener {
@@ -979,7 +979,7 @@ class PlayerFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putString("video_id", videoId)
                     newFragment.arguments = bundle
-                    newFragment.show(childFragmentManager, "DownloadDialog")
+                    newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
                 } else {
                     Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
                         .show()
@@ -1045,7 +1045,7 @@ class PlayerFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
                 newFragment.arguments = bundle
-                newFragment.show(childFragmentManager, "AddToPlaylist")
+                newFragment.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
             }
         } else {
             binding.relPlayerSave.setOnClickListener {
@@ -1507,12 +1507,6 @@ class PlayerFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 
     private fun fetchComments() {

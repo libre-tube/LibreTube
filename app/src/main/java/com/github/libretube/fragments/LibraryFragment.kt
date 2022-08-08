@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,13 +14,14 @@ import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.dialogs.CreatePlaylistDialog
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
-class LibraryFragment : Fragment() {
+class LibraryFragment : BaseFragment() {
 
     private val TAG = "LibraryFragment"
     lateinit var token: String
@@ -68,7 +68,7 @@ class LibraryFragment : Fragment() {
             }
             binding.createPlaylist.setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
-                newFragment.show(childFragmentManager, "Create Playlist")
+                newFragment.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
             }
         } else {
             binding.playlistRefresh.isEnabled = false
@@ -128,11 +128,5 @@ class LibraryFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

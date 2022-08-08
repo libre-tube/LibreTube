@@ -5,12 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.databinding.FragmentSearchResultBinding
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
@@ -18,7 +18,7 @@ import com.github.libretube.util.hideKeyboard
 import retrofit2.HttpException
 import java.io.IOException
 
-class SearchResultFragment : Fragment() {
+class SearchResultFragment : BaseFragment() {
     private val TAG = "SearchResultFragment"
     private lateinit var binding: FragmentSearchResultBinding
 
@@ -134,11 +134,5 @@ class SearchResultFragment : Fragment() {
         if (searchHistoryEnabled && query != "") {
             PreferenceHelper.saveToSearchHistory(query)
         }
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

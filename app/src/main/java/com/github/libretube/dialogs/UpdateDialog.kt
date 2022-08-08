@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.services.UpdateService
@@ -28,7 +27,7 @@ class UpdateDialog(
                     val downloadUrl = getDownloadUrl(updateInfo)
                     Log.i("downloadUrl", downloadUrl.toString())
                     if (downloadUrl != null) {
-                        PermissionHelper.requestReadWrite(activity as AppCompatActivity)
+                        PermissionHelper.requestReadWrite(requireActivity())
                         val intent = Intent(context, UpdateService::class.java)
                         intent.putExtra("downloadUrl", downloadUrl)
                         context?.startService(intent)
