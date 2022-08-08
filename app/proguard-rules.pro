@@ -25,3 +25,6 @@
 
 # prevents android from removing it
 -keep class com.github.libretube.update.** { *; }
+
+# prevents obfuscation in debug logs
+-dontobfuscate
