@@ -17,6 +17,7 @@ class AutoPlayHelper(
             val index = playlistStreamIds.indexOf(currentVideoId)
             // check whether there's a next video
             return if (index + 1 < playlistStreamIds.size) playlistStreamIds[index + 1]
+            else if (playlistNextPage == null) null
             else getNextPlaylistVideoId(currentVideoId)
         } else if (playlistStreamIds.isEmpty() || playlistNextPage != null) {
             // fetch the next page of the playlist
