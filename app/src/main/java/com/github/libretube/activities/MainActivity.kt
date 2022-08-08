@@ -16,7 +16,6 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +29,7 @@ import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
+import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
@@ -42,7 +42,7 @@ import com.github.libretube.util.ThemeHelper
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.navigation.NavigationBarView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     val TAG = "MainActivity"
 
     lateinit var binding: ActivityMainBinding
@@ -54,9 +54,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // set the app theme (e.g. Material You)
-        ThemeHelper.updateTheme(this)
-
         // set the language
         LocaleHelper.updateLanguage(this)
 
