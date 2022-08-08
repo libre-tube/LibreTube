@@ -291,10 +291,26 @@
         android:gravity="center"
         android:padding="20dp">
 
+        <ImageView
+            android:id="@+id/skip_prev"
+            style="@style/PlayerControlCenter"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_prev"
+            android:visibility="invisible"
+            app:tint="@android:color/white" />
+
         <ImageButton
             android:id="@id/exo_play_pause"
             style="@style/ExoStyledControls.Button.Center.PlayPause"
             android:background="?android:selectableItemBackgroundBorderless"
+            app:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/skip_next"
+            style="@style/PlayerControlCenter"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_next"
+            android:visibility="invisible"
             app:tint="@android:color/white" />
 
     </LinearLayout>

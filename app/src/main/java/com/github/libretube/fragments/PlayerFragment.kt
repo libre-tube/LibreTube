@@ -164,6 +164,7 @@ class PlayerFragment : BaseFragment() {
     private var defaultSubtitleCode = ""
     private var sponsorBlockEnabled = true
     private var sponsorBlockNotifications = true
+    private var skipButtonsEnabled = false
 
     /**
      * for autoplay
@@ -204,7 +205,7 @@ class PlayerFragment : BaseFragment() {
 
         setUserPrefs()
 
-        if (autoplayEnabled == true) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
+        if (autoplayEnabled) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
 
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
@@ -314,6 +315,11 @@ class PlayerFragment : BaseFragment() {
         if (defaultSubtitleCode.contains("-")) {
             defaultSubtitleCode = defaultSubtitleCode.split("-")[0]
         }
+
+        skipButtonsEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.SKIP_BUTTONS,
+            false
+        )
     }
 
     private fun initializeTransitionLayout() {
@@ -882,7 +888,7 @@ class PlayerFragment : BaseFragment() {
         }
 
         // duration that's not greater than 0 indicates that the video is live
-        if (!(response.duration!! > 0)) {
+        if (response.duration!! <= 0) {
             isLive = true
             handleLiveVideo()
         }
@@ -1051,6 +1057,14 @@ class PlayerFragment : BaseFragment() {
             binding.relPlayerSave.setOnClickListener {
                 Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // next and previous buttons
+        playerBinding.next.visiblity = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
+        playerBinding.next.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
+
+        playerBinding.next.setOnClickListener {
+            playNextVideo()
         }
     }
 

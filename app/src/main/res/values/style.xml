@@ -107,6 +107,14 @@
 
     </style>
 
+    <style name="PlayerControlCenter">
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:backgroundTint">@android:color/white</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
     <style name="PlayerControlTop">
 
         <item name="android:padding">9dp</item>
