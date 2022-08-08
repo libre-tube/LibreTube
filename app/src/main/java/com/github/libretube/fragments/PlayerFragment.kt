@@ -523,7 +523,7 @@ class PlayerFragment : Fragment() {
         // share button
         binding.relPlayerShare.setOnClickListener {
             val shareDialog = ShareDialog(videoId!!, false, exoPlayer.currentPosition)
-            shareDialog.show(childFragmentManager, "ShareDialog")
+            shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
         binding.relPlayerBackground.setOnClickListener {
@@ -979,7 +979,7 @@ class PlayerFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putString("video_id", videoId)
                     newFragment.arguments = bundle
-                    newFragment.show(childFragmentManager, "DownloadDialog")
+                    newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
                 } else {
                     Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
                         .show()
@@ -1045,7 +1045,7 @@ class PlayerFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("videoId", videoId)
                 newFragment.arguments = bundle
-                newFragment.show(childFragmentManager, "AddToPlaylist")
+                newFragment.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
             }
         } else {
             binding.relPlayerSave.setOnClickListener {

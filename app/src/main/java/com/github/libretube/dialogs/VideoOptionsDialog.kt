@@ -55,7 +55,7 @@ class VideoOptionsDialog(
                             val bundle = Bundle()
                             bundle.putString("videoId", videoId)
                             newFragment.arguments = bundle
-                            newFragment.show(parentFragmentManager, "AddToPlaylist")
+                            newFragment.show(parentFragmentManager, AddToPlaylistDialog::class.java.name)
                         } else {
                             Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                         }
@@ -63,7 +63,7 @@ class VideoOptionsDialog(
                     context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(videoId, false)
                         // using parentFragmentManager is important here
-                        shareDialog.show(parentFragmentManager, "ShareDialog")
+                        shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                     }
                 }
             }

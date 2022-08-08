@@ -81,7 +81,7 @@ class PlaylistOptionsDialog(
                     context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(playlistId, true)
                         // using parentFragmentManager, childFragmentManager doesn't work here
-                        shareDialog.show(parentFragmentManager, "ShareDialog")
+                        shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                     }
                     context?.getString(R.string.deletePlaylist) -> {
                         val token = PreferenceHelper.getToken()

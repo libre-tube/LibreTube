@@ -101,7 +101,7 @@ class MainSettings : MaterialPreferenceFragment() {
                 } else if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
                     val updateAvailableDialog = UpdateDialog(updateInfo)
-                    updateAvailableDialog.show(childFragmentManager, "UpdateAvailableDialog")
+                    updateAvailableDialog.show(childFragmentManager, UpdateDialog::class.java.name)
                 } else {
                     // otherwise show the no update available snackBar
                     val settingsActivity = activity as SettingsActivity

@@ -99,7 +99,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
         val customInstance = findPreference<Preference>(PreferenceKeys.CUSTOM_INSTANCE)
         customInstance?.setOnPreferenceClickListener {
             val newFragment = CustomInstanceDialog()
-            newFragment.show(childFragmentManager, "CustomInstanceDialog")
+            newFragment.show(childFragmentManager, CustomInstanceDialog::class.java.name)
             true
         }
 
@@ -117,10 +117,10 @@ class InstanceSettings : MaterialPreferenceFragment() {
         login?.setOnPreferenceClickListener {
             if (token == "") {
                 val newFragment = LoginDialog()
-                newFragment.show(childFragmentManager, "Login")
+                newFragment.show(childFragmentManager, LoginDialog::class.java.name)
             } else {
                 val newFragment = LogoutDialog()
-                newFragment.show(childFragmentManager, "Logout")
+                newFragment.show(childFragmentManager, LogoutDialog::class.java.name)
             }
 
             true
@@ -131,7 +131,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
             val token = PreferenceHelper.getToken()
             if (token != "") {
                 val newFragment = DeleteAccountDialog()
-                newFragment.show(childFragmentManager, "DeleteAccountDialog")
+                newFragment.show(childFragmentManager, DeleteAccountDialog::class.java.name)
             } else {
                 Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
             }

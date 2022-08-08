@@ -87,7 +87,7 @@ class PlaylistFragment : Fragment() {
                     binding.optionsMenu.setOnClickListener {
                         val optionsDialog =
                             PlaylistOptionsDialog(playlistId!!, isOwner)
-                        optionsDialog.show(childFragmentManager, "PlaylistOptionsDialog")
+                        optionsDialog.show(childFragmentManager, PlaylistOptionsDialog::class.java.name)
                     }
 
                     playlistAdapter = PlaylistAdapter(

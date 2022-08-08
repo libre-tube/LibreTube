@@ -68,7 +68,7 @@ class LibraryFragment : Fragment() {
             }
             binding.createPlaylist.setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
-                newFragment.show(childFragmentManager, "Create Playlist")
+                newFragment.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
             }
         } else {
             binding.playlistRefresh.isEnabled = false

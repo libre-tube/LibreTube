@@ -52,7 +52,7 @@ class ChannelAdapter(
             val videoId = trending.url.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId)
-                    .show(childFragmentManager, "VideoOptionsDialog")
+                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
                 true
             }
             watchProgress.setWatchProgressLength(videoId, trending.duration!!)

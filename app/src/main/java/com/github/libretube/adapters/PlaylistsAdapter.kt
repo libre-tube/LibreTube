@@ -48,7 +48,6 @@ class PlaylistsAdapter(
         val playlist = playlists[position]
         holder.binding.apply {
             // set imageview drawable as empty playlist if imageview empty
-            Log.e(TAG, playlist.thumbnail.toString())
             if (playlist.thumbnail!!.split("/").size <= 4) {
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)
                 playlistThumbnail.setBackgroundColor(R.attr.colorSurface)
