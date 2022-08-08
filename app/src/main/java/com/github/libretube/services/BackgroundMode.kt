@@ -112,11 +112,11 @@ class BackgroundMode : Service() {
         try {
             // get the intent arguments
             videoId = intent?.getStringExtra("videoId")!!
-            playlistId = intent.getStringExtra(playlistId)
+            playlistId = intent.getStringExtra("playlistId")
             val position = intent.getLongExtra("position", 0L)
 
             // initialize the playlist autoPlay Helper
-            autoPlayHelper = AutoPlayHelper(playlistId!!)
+            if (playlistId != null) autoPlayHelper = AutoPlayHelper(playlistId!!)
 
             // play the audio in the background
             playAudio(videoId, position)
@@ -159,6 +159,8 @@ class BackgroundMode : Service() {
             if (seekToPosition != 0L) player?.seekTo(seekToPosition)
 
             fetchSponsorBlockSegments()
+
+            setNextStream()
         }
     }
 
@@ -216,7 +218,7 @@ class BackgroundMode : Service() {
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
     private fun playNextVideo() {
-        if (nextStreamId == videoId || !this::nextStreamId.isInitialized) return
+        if (!this::nextStreamId.isInitialized || nextStreamId == videoId) return
 
         // play new video on background
         this.videoId = nextStreamId
