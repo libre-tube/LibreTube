@@ -10,7 +10,10 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.fragments.PlayerFragment
 
 object NavigationHelper {
-    fun navigateChannel(context: Context, channelId: String?) {
+    fun navigateChannel(
+        context: Context,
+        channelId: String?
+    ) {
         if (channelId != null) {
             val activity = context as MainActivity
             val bundle = bundleOf("channel_id" to channelId)
@@ -28,7 +31,11 @@ object NavigationHelper {
         }
     }
 
-    fun navigateVideo(context: Context, videoId: String?, playlistId: String? = null) {
+    fun navigateVideo(
+        context: Context,
+        videoId: String?,
+        playlistId: String? = null
+    ) {
         if (videoId != null) {
             val bundle = Bundle()
             bundle.putString("videoId", videoId.toID())
@@ -45,10 +52,16 @@ object NavigationHelper {
         }
     }
 
-    fun navigatePlaylist(context: Context, playlistId: String?) {
+    fun navigatePlaylist(
+        context: Context,
+        playlistId: String?,
+        isOwner: Boolean
+    ) {
         if (playlistId != null) {
             val activity = context as MainActivity
-            val bundle = bundleOf("playlist_id" to playlistId)
+            val bundle = Bundle()
+            bundle.putString("playlist_id", playlistId)
+            bundle.putBoolean("isOwner", isOwner)
             activity.navController.navigate(R.id.playlistFragment, bundle)
         }
     }

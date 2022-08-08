@@ -171,7 +171,7 @@ class SearchAdapter(
                     root.context.getString(R.string.videoCount, item.videos.toString())
             }
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, item.url)
+                NavigationHelper.navigatePlaylist(root.context, item.url, false)
             }
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()

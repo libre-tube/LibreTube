@@ -15,52 +15,48 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.BufferedReader
 import java.io.FileOutputStream
-import java.io.InputStream
 import java.io.InputStreamReader
-import java.util.zip.ZipEntry
-import java.util.zip.ZipInputStream
 
 class ImportHelper(
     private val activity: Activity
 ) {
     private val TAG = "ImportHelper"
 
+    /**
+     * Import subscriptions by a file uri
+     */
     fun importSubscriptions(uri: Uri?) {
         if (uri == null) return
         try {
-            val type = activity.contentResolver.getType(uri)
-
-            var inputStream: InputStream? = activity.contentResolver.openInputStream(uri)
             var channels = ArrayList<String>()
-            if (type == "application/json") {
+            val fileType = activity.contentResolver.getType(uri)
+
+            if (fileType == "application/json") {
+                // NewPipe subscriptions format
                 val mapper = ObjectMapper()
-                val json = readTextFromUri(uri)
+                val json = readRawTextFromUri(uri)
+
                 val subscriptions = mapper.readValue(json, NewPipeSubscriptions::class.java)
                 channels = subscriptions.subscriptions?.map {
                     it.url?.replace("https://www.youtube.com/channel/", "")!!
                 } as ArrayList<String>
-            } else if (type == "application/zip") {
-                val zis = ZipInputStream(inputStream)
-                var entry: ZipEntry? = zis.nextEntry
-
-                while (entry != null) {
-                    if (entry.name.endsWith(".csv")) {
-                        inputStream = zis
-                        break
+            } else if (
+                fileType == "text/csv" ||
+                fileType == "text/comma-separated-values"
+            ) {
+                // import subscriptions from Google/YouTube Takeout
+                val inputStream = activity.contentResolver.openInputStream(uri)
+                BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                    var line: String? = reader.readLine()
+                    while (line != null) {
+                        val channelId = line.substringBefore(",")
+                        if (channelId.length == 24) channels.add(channelId)
+                        line = reader.readLine()
                     }
-                    entry = zis.nextEntry
-                    inputStream?.bufferedReader()?.readLines()?.forEach {
-                        if (it.isNotBlank()) {
-                            val channelId = it.substringBefore(",")
-                            if (channelId.length == 24) {
-                                channels.add(channelId)
-                            }
-                        }
-                    }
-                    inputStream?.close()
                 }
+                inputStream?.close()
             } else {
-                throw IllegalArgumentException("unsupported type")
+                throw IllegalArgumentException("Unsupported file type")
             }
 
             CoroutineScope(Dispatchers.IO).launch {
@@ -78,7 +74,7 @@ class ImportHelper(
         }
     }
 
-    private fun readTextFromUri(uri: Uri): String {
+    private fun readRawTextFromUri(uri: Uri): String {
         val stringBuilder = StringBuilder()
         activity.contentResolver.openInputStream(uri)?.use { inputStream ->
             BufferedReader(InputStreamReader(inputStream)).use { reader ->
