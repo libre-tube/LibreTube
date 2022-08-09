@@ -294,4 +294,6 @@
     <string name="export_subscriptions">导出订阅</string>
     <string name="skip_buttons_summary">显示按钮跳到下一个或上一个视频。</string>
     <string name="skip_buttons">跳跃按钮</string>
+    <string name="history_size">最大历史记录大小</string>
+    <string name="unlimited">无限制</string>
 </resources>
