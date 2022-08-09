@@ -54,7 +54,6 @@ object PreferenceKeys {
     const val PLAYER_VIDEO_FORMAT = "player_video_format"
     const val DEFAULT_RESOLUTION = "default_res"
     const val BUFFERING_GOAL = "buffering_goal"
-    const val SEEKBAR_PREVIEW = "seekbar_preview"
     const val PLAYER_AUDIO_FORMAT = "player_audio_format"
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
     const val DEFAULT_SUBTITLE = "default_subtitle"
@@ -83,6 +82,11 @@ object PreferenceKeys {
     const val CLEAR_WATCH_HISTORY = "clear_watch_history"
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
+
+    /**
+     * History
+     */
+    const val WATCH_HISTORY_SIZE = "watch_history_size"
 
     /**
      * Error logs

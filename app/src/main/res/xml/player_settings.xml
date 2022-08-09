@@ -103,13 +103,6 @@
             app:title="@string/pauseOnScreenOff" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_visibility"
-            android:summary="@string/seekbar_preview_summary"
-            android:title="@string/seekbar_preview"
-            app:key="seekbar_preview" />
-
-        <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
             app:defaultValue="false"

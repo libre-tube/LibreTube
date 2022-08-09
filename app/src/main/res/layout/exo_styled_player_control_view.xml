@@ -70,7 +70,8 @@
                 <TextView
                     android:id="@+id/speed_text"
                     style="@style/PlayerControlTop"
-                    android:text="1x" />
+                    android:text="1x"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/quality_text"
@@ -80,7 +81,7 @@
                 <ImageButton
                     android:id="@+id/toggle_options"
                     style="@style/PlayerControlTop"
-                    android:layout_marginTop="-.5dp"
+                    android:layout_marginTop="-1dp"
                     android:src="@drawable/ic_arrow_down"
                     app:tint="@android:color/white" />
 
@@ -165,7 +166,7 @@
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:paddingStart="10dp"
-            android:paddingEnd="15dp">
+            android:paddingEnd="20dp">
 
             <LinearLayout
                 android:id="@id/exo_time"
@@ -176,16 +177,20 @@
 
                 <TextView
                     android:id="@id/exo_position"
-                    style="@style/TimeString" />
+                    style="@style/TimeString"
+                    tools:text="05:20" />
 
                 <TextView
                     style="@style/TimeString"
                     android:text="  •  "
+                    android:textColor="#B3FFFFFF"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@id/exo_duration"
-                    style="@style/TimeString" />
+                    style="@style/TimeString"
+                    android:textColor="#B3FFFFFF"
+                    tools:text="12:15" />
 
             </LinearLayout>
 
@@ -264,6 +269,7 @@
             android:layout_height="15dp"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp">
 

@@ -82,7 +82,6 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
@@ -161,7 +160,6 @@ class PlayerFragment : BaseFragment() {
     private var videoFormatPreference = "webm"
     private var defRes = ""
     private var bufferingGoal = 50000
-    private var seekBarPreview = false
     private var defaultSubtitleCode = ""
     private var sponsorBlockEnabled = true
     private var sponsorBlockNotifications = true
@@ -309,11 +307,6 @@ class PlayerFragment : BaseFragment() {
             PreferenceKeys.BUFFERING_GOAL,
             "50"
         ).toInt() * 1000
-
-        seekBarPreview = PreferenceHelper.getBoolean(
-            PreferenceKeys.SEEKBAR_PREVIEW,
-            false
-        )
 
         sponsorBlockEnabled = PreferenceHelper.getBoolean(
             "sb_enabled_key",
@@ -599,12 +592,12 @@ class PlayerFragment : BaseFragment() {
                     // probably a youtube shorts video
                     if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                     // a video with normal aspect ratio
-                    else ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                    else ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                 }
                 "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
-                "landscape" -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                "landscape" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                 "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
+                else -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
             }
             mainActivity.requestedOrientation = orientation
         }
@@ -915,7 +908,6 @@ class PlayerFragment : BaseFragment() {
 
         playerBinding.exoTitle.text = response.title
 
-        if (seekBarPreview) enableSeekbarPreview()
         enableDoubleTapToSeek()
 
         // init the chapters recyclerview
@@ -1171,31 +1163,6 @@ class PlayerFragment : BaseFragment() {
         doubleTapOverlayBinding.rewindBTN.apply {
             visibility = View.GONE
         }
-    }
-
-    // enable seek bar preview
-    private fun enableSeekbarPreview() {
-        playerBinding.exoProgress.addListener(object : TimeBar.OnScrubListener {
-            override fun onScrubStart(timeBar: TimeBar, position: Long) {
-                exoPlayer.pause()
-            }
-
-            override fun onScrubMove(timeBar: TimeBar, position: Long) {
-                val minTimeDiff = 10 * 1000 // 10s
-                // get the difference between the new and the old position
-                val diff = abs(exoPlayer.currentPosition - position)
-                // seek only when the difference is greater than 10 seconds
-                if (diff >= minTimeDiff) exoPlayer.seekTo(position)
-            }
-
-            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
-                exoPlayer.seekTo(position)
-                exoPlayer.play()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    exoPlayerView.hideController()
-                }, 200)
-            }
-        })
     }
 
     private fun initializeChapters() {
