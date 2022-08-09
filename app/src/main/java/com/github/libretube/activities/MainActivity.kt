@@ -66,7 +66,11 @@ class MainActivity : BaseActivity() {
         else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
 
         // start service that gets called on closure
-        startService(Intent(this, ClosingService::class.java))
+        try {
+            startService(Intent(this, ClosingService::class.java))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         CronetHelper.initCronet(this.applicationContext)
         ConnectionHelper.imageLoader = ImageLoader.Builder(this.applicationContext)

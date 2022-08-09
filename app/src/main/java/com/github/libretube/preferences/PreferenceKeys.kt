@@ -54,7 +54,6 @@ object PreferenceKeys {
     const val PLAYER_VIDEO_FORMAT = "player_video_format"
     const val DEFAULT_RESOLUTION = "default_res"
     const val BUFFERING_GOAL = "buffering_goal"
-    const val SEEKBAR_PREVIEW = "seekbar_preview"
     const val PLAYER_AUDIO_FORMAT = "player_audio_format"
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
     const val DEFAULT_SUBTITLE = "default_subtitle"
