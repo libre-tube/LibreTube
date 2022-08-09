@@ -86,7 +86,7 @@
     <string name="search_history">Arama Geçmişi</string>
     <string name="sponsorblock_summary">https://sponsor.ajay.app API\'sini kullanır</string>
     <string name="category_segments">Bölümler</string>
-    <string name="category_sponsor">Bağışçı</string>
+    <string name="category_sponsor">Sponsor</string>
     <string name="segment_skipped">Bölüm atlandı</string>
     <string name="category_sponsor_description">Ücretli promosyon, yönlendirmeler ve doğrudan reklamlar. Kendi reklamını yapmak veya amaçlara, yaratıcılara, internet sitelerine ve ürünlere ücretsiz hakiki duyurular için değil.</string>
     <string name="category_selfpromo">Ödenmemiş/Kendi Reklamı</string>
@@ -127,7 +127,7 @@
     <string name="download_directory_summary">İndirilen medyanın depolandığı yer.</string>
     <string name="contributing">Katkı</string>
     <string name="license_summary">GPLv3+, telif hakkıyla korunan bir bedava lisansdır. Kullanın, inceleyin, değiştirin ve paylaşın;herkesle.</string>
-    <string name="donate">Bağış Yapın</string>
+    <string name="donate">Bağış</string>
     <string name="donate_summary">Yapabiliyorsan, bunun senin için değeri ne ise onu ver.LibreTube ekipi, bağışınız veya yardımınızdan daha küçüktür.</string>
     <string name="website_summary">Uygulama ve özellikleri hakkında daha fazla bilgi için internet sitesini ziyaret edin.</string>
     <string name="contributing_summary">Fikirler, çeviriler, tasarım değişiklikleri sağlayın, kodu temizleyin ve yazın. Ne kadar çok yapılırsa o kadar iyi olur!</string>
@@ -280,7 +280,7 @@
     <string name="least_recent">En eski</string>
     <string name="notify_new_streams_summary">Aboneliklerden yeni akışlar mevcut olduğunda bildir</string>
     <string name="channel_name_za">Kanal Adı (Z-A)</string>
-    <string name="translate">Çevirmek</string>
+    <string name="translate">Çeviri</string>
     <string name="translate_summary">Uygulamayı konuştuğunuz dile çevirerek yardım edin</string>
     <string name="no_search_result">Sonuç bulunamadı.</string>
     <string name="network_wifi">Yalnızca WiFi</string>
