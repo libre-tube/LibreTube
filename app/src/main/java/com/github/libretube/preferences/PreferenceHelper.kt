@@ -142,6 +142,12 @@ object PreferenceHelper {
 
         watchHistory += watchHistoryItem
 
+        // remove oldest item when the watch history is longer than the pref
+        val maxWatchHistorySize = getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
+        if (maxWatchHistorySize != "unlimited" && watchHistory.size > maxWatchHistorySize.toInt()) {
+            watchHistory.removeAt(0)
+        }
+
         val json = mapper.writeValueAsString(watchHistory)
         editor.putString("watch_history", json).apply()
     }

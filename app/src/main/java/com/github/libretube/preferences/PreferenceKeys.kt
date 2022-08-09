@@ -84,6 +84,11 @@ object PreferenceKeys {
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
 
     /**
+     * History
+     */
+    const val WATCH_HISTORY_SIZE = "watch_history_size"
+
+    /**
      * Error logs
      */
     const val ERROR_LOG = "error_log"

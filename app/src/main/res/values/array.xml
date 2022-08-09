@@ -649,6 +649,7 @@
         <item>1.25x</item>
         <item>1.5x</item>
         <item>2x</item>
+        <item>3x</item>
         <item>4x</item>
     </string-array>
     <string-array name="playbackSpeedValues">
@@ -659,6 +660,7 @@
         <item>1.25</item>
         <item>1.5</item>
         <item>2</item>
+        <item>3</item>
         <item>4</item>
     </string-array>
 
@@ -806,6 +808,24 @@
         <item>all</item>
         <item>wifi</item>
         <item>metered</item>
+    </string-array>
+
+    <string-array name="historySize">
+        <item>20</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>@string/unlimited</item>
+    </string-array>
+
+    <string-array name="historySizeValues">
+        <item>20</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>unlimited</item>
     </string-array>
 
 </resources>
