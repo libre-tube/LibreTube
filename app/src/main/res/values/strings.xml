@@ -296,4 +296,5 @@
     <string name="skip_buttons_summary">Show buttons to skip to the next or previous video.</string>
     <string name="history_size">Maximum history size</string>
     <string name="unlimited">Unlimited</string>
+    <string name="background_mode">Background mode</string>
 </resources>

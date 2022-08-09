@@ -159,6 +159,13 @@ class BackgroundMode : Service() {
             // seek to the previous position if available
             if (seekToPosition != 0L) player?.seekTo(seekToPosition)
 
+            // set the playback speed
+            val playbackSpeed = PreferenceHelper.getString(
+                PreferenceKeys.BACKGROUND_PLAYBACK_SPEED,
+                "1"
+            ).toFloat()
+            player?.setPlaybackSpeed(playbackSpeed)
+
             fetchSponsorBlockSegments()
 
             setNextStream()
@@ -301,6 +308,6 @@ class BackgroundMode : Service() {
     }
 
     override fun onBind(p0: Intent?): IBinder? {
-        TODO("Not yet implemented")
+        return null
     }
 }
