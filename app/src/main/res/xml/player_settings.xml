@@ -120,4 +120,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/background_mode">
+
+        <ListPreference
+            android:icon="@drawable/ic_speed"
+            app:defaultValue="1"
+            app:entries="@array/playbackSpeed"
+            app:entryValues="@array/playbackSpeedValues"
+            app:key="background_playback_speed"
+            app:title="@string/playback_speed"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

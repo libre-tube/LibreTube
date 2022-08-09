@@ -60,6 +60,11 @@ object PreferenceKeys {
     const val SKIP_BUTTONS = "skip_buttons"
 
     /**
+     * Background mode
+     */
+    const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
+
+    /**
      * Download
      */
     const val DOWNLOAD_LOCATION = "download_location"
