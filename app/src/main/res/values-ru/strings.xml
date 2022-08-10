@@ -292,4 +292,9 @@
     <string name="best_quality">Лучшее</string>
     <string name="worst_quality">Худшее</string>
     <string name="export_subscriptions">Экспорт подписок</string>
+    <string name="skip_buttons">Кнопки пропуска</string>
+    <string name="background_mode">Фоновый режим</string>
+    <string name="history_size">Максимальный размер истории</string>
+    <string name="unlimited">Неограниченно</string>
+    <string name="skip_buttons_summary">Показывать кнопки для перехода к следующему или предыдущему видео.</string>
 </resources>
