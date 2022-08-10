@@ -10,6 +10,7 @@ object PreferenceKeys {
     const val LANGUAGE = "language"
     const val REGION = "region"
     const val AUTO_ROTATION = "auto_rotation"
+    const val BREAK_REMINDER = "break_reminder"
 
     /**
      * Appearance

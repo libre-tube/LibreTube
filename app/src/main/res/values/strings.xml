@@ -298,4 +298,8 @@
     <string name="unlimited">Unlimited</string>
     <string name="background_mode">Background mode</string>
     <string name="add_to_queue">Add to queue</string>
+    <string name="misc">Misc</string>
+    <string name="break_reminder">Break reminder</string>
+    <string name="take_a_break">Time to take a break</string>
+    <string name="already_spent_time">You already spent %1$s minutes in the app, time to take a break.</string>
 </resources>
