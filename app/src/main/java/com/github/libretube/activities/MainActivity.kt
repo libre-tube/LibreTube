@@ -16,6 +16,7 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +40,7 @@ import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.ThemeHelper
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.navigation.NavigationBarView
 
@@ -163,6 +165,40 @@ class MainActivity : BaseActivity() {
          */
         val log = PreferenceHelper.getErrorLog()
         if (log != "") ErrorDialog().show(supportFragmentManager, null)
+
+        setupBreakReminder()
+    }
+
+    /**
+     * Show a break reminder when watched too long
+     */
+    private fun setupBreakReminder() {
+        val breakReminderPref = PreferenceHelper.getString(
+            PreferenceKeys.BREAK_REMINDER,
+            "disabled"
+        )
+        if (breakReminderPref == "disabled") return
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                try {
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(getString(R.string.share_with_time))
+                        .setMessage(
+                            getString(
+                                R.string.already_spent_time,
+                                breakReminderPref
+                            )
+                        )
+                        .setPositiveButton(R.string.okay, null)
+                        .show()
+                } catch (e: Exception) {
+                    kotlin.runCatching {
+                        Toast.makeText(this, R.string.take_a_break, Toast.LENGTH_LONG).show()
+                    }
+                }
+            },
+            breakReminderPref.toLong() * 60 * 1000
+        )
     }
 
     private fun removeSearchFocus() {

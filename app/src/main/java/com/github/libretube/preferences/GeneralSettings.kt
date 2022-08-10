@@ -37,5 +37,12 @@ class GeneralSettings : MaterialPreferenceFragment() {
             restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
+
+        val breakReminder = findPreference<ListPreference>(PreferenceKeys.BREAK_REMINDER)
+        breakReminder?.setOnPreferenceChangeListener { _, _ ->
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            true
+        }
     }
 }
