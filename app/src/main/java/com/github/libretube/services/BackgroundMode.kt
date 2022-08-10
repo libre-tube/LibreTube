@@ -12,6 +12,7 @@ import android.os.Looper
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
+import com.github.libretube.Globals
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.obj.Segment
@@ -78,7 +79,7 @@ class BackgroundMode : Service() {
     /**
      * The [videoId] of the next stream for autoplay
      */
-    private lateinit var nextStreamId: String
+    private var nextStreamId: String? = null
 
     /**
      * Helper for finding the next video in the playlist
@@ -111,6 +112,9 @@ class BackgroundMode : Service() {
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
+            // clear the playing queue
+            Globals.playingQueue.clear()
+
             // get the intent arguments
             videoId = intent?.getStringExtra("videoId")!!
             playlistId = intent.getStringExtra("playlistId")
@@ -135,6 +139,8 @@ class BackgroundMode : Service() {
         videoId: String,
         seekToPosition: Long = 0
     ) {
+        // append the video to the playing queue
+        Globals.playingQueue += videoId
         runBlocking {
             val job = launch {
                 streams = RetrofitInstance.api.getStreams(videoId)
@@ -217,8 +223,7 @@ class BackgroundMode : Service() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist
         CoroutineScope(Dispatchers.IO).launch {
-            val nextId = autoPlayHelper.getNextVideoId(videoId)
-            if (nextId != null) nextStreamId = nextId
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId, streams!!.relatedStreams!!)
         }
     }
 
@@ -226,10 +231,10 @@ class BackgroundMode : Service() {
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
     private fun playNextVideo() {
-        if (!this::nextStreamId.isInitialized || nextStreamId == videoId) return
+        if (nextStreamId == null || nextStreamId == videoId) return
 
         // play new video on background
-        this.videoId = nextStreamId
+        this.videoId = nextStreamId!!
         this.segmentData = null
         playAudio(videoId)
     }

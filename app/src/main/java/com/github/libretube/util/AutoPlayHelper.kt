@@ -17,9 +17,9 @@ class AutoPlayHelper(
         currentVideoId: String,
         relatedStreams: List<StreamItem>
     ): String? {
-        val currentVideoIndex = Globals.videoIds.indexOf(currentVideoId)
-        return if (Globals.videoIds.size > currentVideoIndex + 1) {
-            Globals.videoIds[currentVideoIndex + 1]
+        val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
+        return if (Globals.playingQueue.size > currentVideoIndex + 1) {
+            Globals.playingQueue[currentVideoIndex + 1]
         } else if (playlistId == null) getNextTrendingVideoId(
             currentVideoId,
             relatedStreams
@@ -36,8 +36,8 @@ class AutoPlayHelper(
         var nextStreamId: String? = null
         while (nextStreamId == null ||
             (
-                Globals.videoIds.contains(nextStreamId) &&
-                    Globals.videoIds.indexOf(videoId) > Globals.videoIds.indexOf(
+                Globals.playingQueue.contains(nextStreamId) &&
+                    Globals.playingQueue.indexOf(videoId) > Globals.playingQueue.indexOf(
                         nextStreamId
                     )
                 )

@@ -201,6 +201,9 @@ class PlayerFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
 
+        // clear the playing queue
+        Globals.playingQueue.clear()
+
         setUserPrefs()
 
         if (autoplayEnabled) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
@@ -748,7 +751,7 @@ class PlayerFragment : BaseFragment() {
                     }
                 }
             }
-            Globals.videoIds += videoId!!
+            Globals.playingQueue += videoId!!
         }
         run()
     }
@@ -1053,13 +1056,13 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && Globals.videoIds.indexOf(videoId!!) != 0
+            skipButtonsEnabled && Globals.playingQueue.indexOf(videoId!!) != 0
         ) View.VISIBLE else View.INVISIBLE
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            val index = Globals.videoIds.indexOf(videoId!!) - 1
-            videoId = Globals.videoIds[index]
+            val index = Globals.playingQueue.indexOf(videoId!!) - 1
+            videoId = Globals.playingQueue[index]
             playVideo()
         }
 

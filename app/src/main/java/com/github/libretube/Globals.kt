@@ -18,5 +18,5 @@ object Globals {
     var SELECTED_PLAYLIST_ID: String? = null
 
     // history of played videos in the current lifecycle
-    val videoIds = mutableListOf<String>()
+    val playingQueue = mutableListOf<String>()
 }

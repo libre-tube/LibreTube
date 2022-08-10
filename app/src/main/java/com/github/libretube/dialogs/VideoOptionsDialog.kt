@@ -83,7 +83,7 @@ class VideoOptionsDialog(
                         shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                     }
                     context?.getString(R.string.add_to_queue) -> {
-                        Globals.videoIds += videoId
+                        Globals.playingQueue += videoId
                     }
                 }
             }
