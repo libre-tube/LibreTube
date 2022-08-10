@@ -739,7 +739,8 @@ class PlayerFragment : BaseFragment() {
                 if (!isLive) seekToWatchPosition()
                 exoPlayer.prepare()
                 exoPlayer.play()
-                exoPlayerView.useController = true
+                // show controllers when not in picture in picture mode
+                if (!activity?.isInPictureInPictureMode!!) exoPlayerView.useController = true
                 initializePlayerNotification()
                 if (sponsorBlockEnabled) fetchSponsorBlockSegments()
                 // show comments if related streams disabled
