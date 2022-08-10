@@ -1,10 +1,14 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.Globals
+import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.BackgroundHelper
@@ -27,11 +31,21 @@ class VideoOptionsDialog(
         /**
          * List that stores the different menu options. In the future could be add more options here.
          */
-        val optionsList = listOf(
+        val optionsList = mutableListOf(
             context?.getString(R.string.playOnBackground),
             context?.getString(R.string.addToPlaylist),
             context?.getString(R.string.share)
         )
+
+        /**
+         * Check whether the player is running by observing the notification
+         */
+        val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.activeNotifications.forEach {
+            if (it.id == PLAYER_NOTIFICATION_ID) {
+                optionsList += context?.getString(R.string.add_to_queue)
+            }
+        }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setNegativeButton(R.string.cancel, null)
@@ -67,6 +81,9 @@ class VideoOptionsDialog(
                         val shareDialog = ShareDialog(videoId, false)
                         // using parentFragmentManager is important here
                         shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
+                    }
+                    context?.getString(R.string.add_to_queue) -> {
+                        Globals.playingQueue += videoId
                     }
                 }
             }

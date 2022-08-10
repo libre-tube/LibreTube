@@ -297,4 +297,5 @@
     <string name="history_size">Maximum history size</string>
     <string name="unlimited">Unlimited</string>
     <string name="background_mode">Background mode</string>
+    <string name="add_to_queue">Add to queue</string>
 </resources>

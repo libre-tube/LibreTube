@@ -12,6 +12,7 @@ import android.os.Looper
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.BACKGROUND_CHANNEL_ID
+import com.github.libretube.Globals
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.obj.Segment
@@ -29,7 +30,6 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -78,7 +78,7 @@ class BackgroundMode : Service() {
     /**
      * The [videoId] of the next stream for autoplay
      */
-    private lateinit var nextStreamId: String
+    private var nextStreamId: String? = null
 
     /**
      * Helper for finding the next video in the playlist
@@ -86,7 +86,12 @@ class BackgroundMode : Service() {
     private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
-     * Setting the required [notification] for running as a foreground service
+     * Autoplay Preference
+     */
+    private val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
+
+    /**
+     * Setting the required [Notification] for running as a foreground service
      */
     override fun onCreate() {
         super.onCreate()
@@ -111,6 +116,9 @@ class BackgroundMode : Service() {
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
+            // clear the playing queue
+            Globals.playingQueue.clear()
+
             // get the intent arguments
             videoId = intent?.getStringExtra("videoId")!!
             playlistId = intent.getStringExtra("playlistId")
@@ -135,6 +143,8 @@ class BackgroundMode : Service() {
         videoId: String,
         seekToPosition: Long = 0
     ) {
+        // append the video to the playing queue
+        Globals.playingQueue += videoId
         runBlocking {
             val job = launch {
                 streams = RetrofitInstance.api.getStreams(videoId)
@@ -168,7 +178,7 @@ class BackgroundMode : Service() {
 
             fetchSponsorBlockSegments()
 
-            setNextStream()
+            if (autoplay) setNextStream()
         }
     }
 
@@ -194,7 +204,6 @@ class BackgroundMode : Service() {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
-                        val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
                         if (autoplay) playNextVideo()
                     }
                     Player.STATE_IDLE -> {
@@ -217,8 +226,7 @@ class BackgroundMode : Service() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist
         CoroutineScope(Dispatchers.IO).launch {
-            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId)
-            if (nextId != null) nextStreamId = nextId
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId, streams!!.relatedStreams!!)
         }
     }
 
@@ -226,17 +234,18 @@ class BackgroundMode : Service() {
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
     private fun playNextVideo() {
-        if (!this::nextStreamId.isInitialized || nextStreamId == videoId) return
+        if (nextStreamId == null || nextStreamId == videoId) return
+        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId)
+        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
 
         // play new video on background
-        this.videoId = nextStreamId
+        this.videoId = nextStreamId!!
         this.segmentData = null
         playAudio(videoId)
     }
 
     /**
-     * Sets the [MediaItem] with the [streams] into the [player]. Also creates a [MediaSessionConnector]
-     * with the [mediaSession] and attach it to the [player].
+     * Sets the [MediaItem] with the [streams] into the [player]
      */
     private fun setMediaItem() {
         streams?.let {

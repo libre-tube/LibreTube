@@ -27,7 +27,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
-import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -176,11 +175,6 @@ class PlayerFragment : BaseFragment() {
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
-    /**
-     * history of played videos in the current lifecycle
-     */
-    val videoIds = mutableListOf<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -206,6 +200,9 @@ class PlayerFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
+
+        // clear the playing queue
+        Globals.playingQueue.clear()
 
         setUserPrefs()
 
@@ -719,68 +716,49 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                streams = try {
-                    RetrofitInstance.api.getStreams(videoId!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-
-                runOnUiThread {
-                    // set media sources for the player
-                    setResolutionAndSubtitles(streams)
-                    prepareExoPlayerView()
-                    initializePlayerView(streams)
-                    if (!isLive) seekToWatchPosition()
-                    exoPlayer.prepare()
-                    exoPlayer.play()
-                    exoPlayerView.useController = true
-                    initializePlayerNotification()
-                    if (sponsorBlockEnabled) fetchSponsorBlockSegments()
-                    // show comments if related streams disabled
-                    if (!relatedStreamsEnabled) toggleComments()
-                    // prepare for autoplay
-                    if (autoplayEnabled) setNextStream()
-                    if (watchHistoryEnabled) {
-                        PreferenceHelper.addToWatchHistory(videoId!!, streams)
-                    }
-                }
+        Globals.playingQueue += videoId!!
+        lifecycleScope.launchWhenCreated {
+            streams = try {
+                RetrofitInstance.api.getStreams(videoId!!)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG, "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
             }
-            videoIds += videoId!!
+
+            runOnUiThread {
+                // set media sources for the player
+                setResolutionAndSubtitles(streams)
+                prepareExoPlayerView()
+                initializePlayerView(streams)
+                if (!isLive) seekToWatchPosition()
+                exoPlayer.prepare()
+                exoPlayer.play()
+                exoPlayerView.useController = true
+                initializePlayerNotification()
+                if (sponsorBlockEnabled) fetchSponsorBlockSegments()
+                // show comments if related streams disabled
+                if (!relatedStreamsEnabled) toggleComments()
+                // prepare for autoplay
+                if (autoplayEnabled) setNextStream()
+                if (watchHistoryEnabled) PreferenceHelper.addToWatchHistory(videoId!!, streams)
+            }
         }
-        run()
     }
 
     /**
      * set the videoId of the next stream for autoplay
      */
     private fun setNextStream() {
-        // don't play a video if it got played before already
-        var index = 0
-        while (nextStreamId == null || nextStreamId == videoId!! ||
-            (
-                videoIds.contains(nextStreamId) &&
-                    videoIds.indexOf(videoId) > videoIds.indexOf(nextStreamId)
-                )
-        ) {
-            nextStreamId = streams.relatedStreams!![index].url.toID()
-            if (index + 1 < streams.relatedStreams!!.size) index += 1
-            else break
-        }
-        if (playlistId == null) return
-        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
+        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
         // search for the next videoId in the playlist
         lifecycleScope.launchWhenCreated {
-            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId!!)
-            if (nextId != null) nextStreamId = nextId
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams!!)
         }
     }
 
@@ -845,6 +823,8 @@ class PlayerFragment : BaseFragment() {
     private fun playNextVideo() {
         if (nextStreamId == null) return
         // check whether there is a new video in the queue
+        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId!!)
+        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
         // forces the comments to reload for the new video
@@ -1073,13 +1053,13 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && videoIds.indexOf(videoId!!) != 0
+            skipButtonsEnabled && Globals.playingQueue.indexOf(videoId!!) != 0
         ) View.VISIBLE else View.INVISIBLE
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            val index = videoIds.indexOf(videoId!!) - 1
-            videoId = videoIds[index]
+            val index = Globals.playingQueue.indexOf(videoId!!) - 1
+            videoId = Globals.playingQueue[index]
             playVideo()
         }
 
