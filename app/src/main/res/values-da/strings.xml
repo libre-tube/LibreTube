@@ -297,4 +297,9 @@
     <string name="unlimited">Ubegrænset</string>
     <string name="history_size">Maksimal historiestørrelse</string>
     <string name="background_mode">Baggrundstilstand</string>
+    <string name="add_to_queue">Tilføj til kø</string>
+    <string name="misc">Diverse</string>
+    <string name="take_a_break">Tid til at tage en pause</string>
+    <string name="break_reminder">Pause påmindelse</string>
+    <string name="already_spent_time">Du har allerede brugt %1$s minutter i appen, tid til at tage en pause.</string>
 </resources>
