@@ -217,7 +217,7 @@ class BackgroundMode : Service() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist
         CoroutineScope(Dispatchers.IO).launch {
-            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId)
+            val nextId = autoPlayHelper.getNextVideoId(videoId)
             if (nextId != null) nextStreamId = nextId
         }
     }

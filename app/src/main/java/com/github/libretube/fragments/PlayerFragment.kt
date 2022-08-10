@@ -27,7 +27,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
-import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -175,11 +174,6 @@ class PlayerFragment : BaseFragment() {
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
-
-    /**
-     * history of played videos in the current lifecycle
-     */
-    val videoIds = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -754,7 +748,7 @@ class PlayerFragment : BaseFragment() {
                     }
                 }
             }
-            videoIds += videoId!!
+            Globals.videoIds += videoId!!
         }
         run()
     }
@@ -763,24 +757,10 @@ class PlayerFragment : BaseFragment() {
      * set the videoId of the next stream for autoplay
      */
     private fun setNextStream() {
-        // don't play a video if it got played before already
-        var index = 0
-        while (nextStreamId == null || nextStreamId == videoId!! ||
-            (
-                videoIds.contains(nextStreamId) &&
-                    videoIds.indexOf(videoId) > videoIds.indexOf(nextStreamId)
-                )
-        ) {
-            nextStreamId = streams.relatedStreams!![index].url.toID()
-            if (index + 1 < streams.relatedStreams!!.size) index += 1
-            else break
-        }
-        if (playlistId == null) return
-        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
+        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
         // search for the next videoId in the playlist
         lifecycleScope.launchWhenCreated {
-            val nextId = autoPlayHelper.getNextPlaylistVideoId(videoId!!)
-            if (nextId != null) nextStreamId = nextId
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams!!)
         }
     }
 
@@ -1073,13 +1053,13 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && videoIds.indexOf(videoId!!) != 0
+            skipButtonsEnabled && Globals.videoIds.indexOf(videoId!!) != 0
         ) View.VISIBLE else View.INVISIBLE
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            val index = videoIds.indexOf(videoId!!) - 1
-            videoId = videoIds[index]
+            val index = Globals.videoIds.indexOf(videoId!!) - 1
+            videoId = Globals.videoIds[index]
             playVideo()
         }
 

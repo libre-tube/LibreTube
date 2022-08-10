@@ -1,17 +1,55 @@
 package com.github.libretube.util
 
+import com.github.libretube.Globals
+import com.github.libretube.obj.StreamItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class AutoPlayHelper(
-    private val playlistId: String
+    private val playlistId: String?
 ) {
     private val TAG = "AutoPlayHelper"
 
     private val playlistStreamIds = mutableListOf<String>()
     private var playlistNextPage: String? = null
 
-    suspend fun getNextPlaylistVideoId(currentVideoId: String): String? {
+    suspend fun getNextVideoId(
+        currentVideoId: String,
+        relatedStreams: List<StreamItem>
+    ): String? {
+        val currentVideoIndex = Globals.videoIds.indexOf(currentVideoId)
+        return if (Globals.videoIds.size > currentVideoIndex + 1) {
+            Globals.videoIds[currentVideoIndex + 1]
+        } else if (playlistId == null) getNextTrendingVideoId(
+            currentVideoId,
+            relatedStreams
+        ) else {
+            getNextPlaylistVideoId(
+                currentVideoId
+            )
+        }
+    }
+
+    private fun getNextTrendingVideoId(videoId: String, relatedStreams: List<StreamItem>): String? {
+        // don't play a video if it got played before already
+        var index = 0
+        var nextStreamId: String? = null
+        while (nextStreamId == null ||
+            (
+                Globals.videoIds.contains(nextStreamId) &&
+                    Globals.videoIds.indexOf(videoId) > Globals.videoIds.indexOf(
+                        nextStreamId
+                    )
+                )
+        ) {
+            nextStreamId = relatedStreams[index].url.toID()
+            if (index + 1 < relatedStreams.size) index += 1
+            else break
+        }
+        return nextStreamId
+    }
+
+    private suspend fun getNextPlaylistVideoId(currentVideoId: String): String? {
         // if the playlists contain the video, then save the next video as next stream
         if (playlistStreamIds.contains(currentVideoId)) {
             val index = playlistStreamIds.indexOf(currentVideoId)
@@ -24,9 +62,9 @@ class AutoPlayHelper(
             return withContext(Dispatchers.IO) {
                 // fetch the playlists or its nextPage's videos
                 val playlist =
-                    if (playlistNextPage == null) RetrofitInstance.authApi.getPlaylist(playlistId)
+                    if (playlistNextPage == null) RetrofitInstance.authApi.getPlaylist(playlistId!!)
                     else RetrofitInstance.authApi.getPlaylistNextPage(
-                        playlistId,
+                        playlistId!!,
                         playlistNextPage!!
                     )
                 // save the playlist urls to the list
