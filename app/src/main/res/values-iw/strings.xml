@@ -297,4 +297,9 @@
     <string name="background_mode">מצב רקע</string>
     <string name="history_size">גודל ההיסטוריה המרבי</string>
     <string name="unlimited">לא מוגבל</string>
+    <string name="add_to_queue">הוספה לתור</string>
+    <string name="already_spent_time">כבר השקעת ביישומון %1$s דקות, הגיע הזמן לצאת להפסקה.</string>
+    <string name="misc">שונות</string>
+    <string name="break_reminder">תזכורת הפסקה</string>
+    <string name="take_a_break">הגיע הזמן להפסקה</string>
 </resources>
