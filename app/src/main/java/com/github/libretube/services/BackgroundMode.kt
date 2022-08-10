@@ -30,7 +30,6 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -87,7 +86,12 @@ class BackgroundMode : Service() {
     private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
-     * Setting the required [notification] for running as a foreground service
+     * Autoplay Preference
+     */
+    private val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
+
+    /**
+     * Setting the required [Notification] for running as a foreground service
      */
     override fun onCreate() {
         super.onCreate()
@@ -174,7 +178,7 @@ class BackgroundMode : Service() {
 
             fetchSponsorBlockSegments()
 
-            setNextStream()
+            if (autoplay) setNextStream()
         }
     }
 
@@ -200,7 +204,6 @@ class BackgroundMode : Service() {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
-                        val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
                         if (autoplay) playNextVideo()
                     }
                     Player.STATE_IDLE -> {
@@ -232,6 +235,8 @@ class BackgroundMode : Service() {
      */
     private fun playNextVideo() {
         if (nextStreamId == null || nextStreamId == videoId) return
+        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId)
+        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
 
         // play new video on background
         this.videoId = nextStreamId!!
@@ -240,8 +245,7 @@ class BackgroundMode : Service() {
     }
 
     /**
-     * Sets the [MediaItem] with the [streams] into the [player]. Also creates a [MediaSessionConnector]
-     * with the [mediaSession] and attach it to the [player].
+     * Sets the [MediaItem] with the [streams] into the [player]
      */
     private fun setMediaItem() {
         streams?.let {

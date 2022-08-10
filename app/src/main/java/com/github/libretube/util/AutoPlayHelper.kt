@@ -17,17 +17,15 @@ class AutoPlayHelper(
         currentVideoId: String,
         relatedStreams: List<StreamItem>
     ): String? {
-        val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
-        return if (Globals.playingQueue.size > currentVideoIndex + 1) {
+        return if (Globals.playingQueue.last() != currentVideoId) {
+            val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
             Globals.playingQueue[currentVideoIndex + 1]
         } else if (playlistId == null) getNextTrendingVideoId(
             currentVideoId,
             relatedStreams
-        ) else {
-            getNextPlaylistVideoId(
-                currentVideoId
-            )
-        }
+        ) else getNextPlaylistVideoId(
+            currentVideoId
+        )
     }
 
     private fun getNextTrendingVideoId(videoId: String, relatedStreams: List<StreamItem>): String? {
@@ -76,5 +74,14 @@ class AutoPlayHelper(
         }
         // return null when no nextPage is found
         return null
+    }
+
+    fun getNextPlayingQueueVideoId(
+        currentVideoId: String
+    ): String? {
+        return if (Globals.playingQueue.last() != currentVideoId) {
+            val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
+            Globals.playingQueue[currentVideoIndex + 1]
+        } else null
     }
 }

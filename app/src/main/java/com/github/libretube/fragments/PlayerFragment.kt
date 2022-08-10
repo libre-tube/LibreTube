@@ -716,44 +716,39 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                streams = try {
-                    RetrofitInstance.api.getStreams(videoId!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-
-                runOnUiThread {
-                    // set media sources for the player
-                    setResolutionAndSubtitles(streams)
-                    prepareExoPlayerView()
-                    initializePlayerView(streams)
-                    if (!isLive) seekToWatchPosition()
-                    exoPlayer.prepare()
-                    exoPlayer.play()
-                    exoPlayerView.useController = true
-                    initializePlayerNotification()
-                    if (sponsorBlockEnabled) fetchSponsorBlockSegments()
-                    // show comments if related streams disabled
-                    if (!relatedStreamsEnabled) toggleComments()
-                    // prepare for autoplay
-                    if (autoplayEnabled) setNextStream()
-                    if (watchHistoryEnabled) {
-                        PreferenceHelper.addToWatchHistory(videoId!!, streams)
-                    }
-                }
+        Globals.playingQueue += videoId!!
+        lifecycleScope.launchWhenCreated {
+            streams = try {
+                RetrofitInstance.api.getStreams(videoId!!)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG, "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
             }
-            Globals.playingQueue += videoId!!
+
+            runOnUiThread {
+                // set media sources for the player
+                setResolutionAndSubtitles(streams)
+                prepareExoPlayerView()
+                initializePlayerView(streams)
+                if (!isLive) seekToWatchPosition()
+                exoPlayer.prepare()
+                exoPlayer.play()
+                exoPlayerView.useController = true
+                initializePlayerNotification()
+                if (sponsorBlockEnabled) fetchSponsorBlockSegments()
+                // show comments if related streams disabled
+                if (!relatedStreamsEnabled) toggleComments()
+                // prepare for autoplay
+                if (autoplayEnabled) setNextStream()
+                if (watchHistoryEnabled) PreferenceHelper.addToWatchHistory(videoId!!, streams)
+            }
         }
-        run()
     }
 
     /**
@@ -828,6 +823,8 @@ class PlayerFragment : BaseFragment() {
     private fun playNextVideo() {
         if (nextStreamId == null) return
         // check whether there is a new video in the queue
+        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId!!)
+        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
         // forces the comments to reload for the new video
