@@ -302,4 +302,5 @@
     <string name="break_reminder">تذكير الاستراحة</string>
     <string name="take_a_break">حان الوقت لأخذ قسط من الراحة</string>
     <string name="already_spent_time">لقد قضيت بالفعل دقائق %1$s في التطبيق ، والوقت الكافي لأخذ قسط من الراحة.</string>
+    <string name="yt_shorts">الفديوهات القصيرة</string>
 </resources>
