@@ -297,4 +297,9 @@
     <string name="background_mode">Režim na pozadí</string>
     <string name="skip_buttons_summary">Zobrazit tlačítka k přeskočení na další nebo předchozí video.</string>
     <string name="unlimited">Neomezená</string>
+    <string name="add_to_queue">Přidat do fronty</string>
+    <string name="misc">Různé</string>
+    <string name="break_reminder">Připominka přestávky</string>
+    <string name="take_a_break">Čas na přestávku</string>
+    <string name="already_spent_time">V aplikaci jste strávili již %1$s minut, dejte si chvíli pauzu.</string>
 </resources>
