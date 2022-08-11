@@ -296,10 +296,11 @@
     <string name="unlimited">Mugagabea</string>
     <string name="background_mode">Atzeko planoko modua</string>
     <string name="add_to_queue">Gehitu ilarara</string>
-    <string name="misc">Misc</string>
+    <string name="misc">Anitza</string>
     <string name="take_a_break">Atsedena hartzeko ordua</string>
     <string name="export_subscriptions">Harpidetzak esportatu</string>
     <string name="skip_buttons_summary">Erakutsi botoiak hurrengo edo aurreko bideora joateko.</string>
     <string name="break_reminder">Atsedenaren abisua</string>
     <string name="already_spent_time">Dagoeneko %1$s minutu eman dituzu aplikazioan, atseden hartzeko ordua da.</string>
+    <string name="yt_shorts">Motzak</string>
 </resources>
