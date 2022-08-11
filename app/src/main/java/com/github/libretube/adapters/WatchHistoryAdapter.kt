@@ -1,12 +1,12 @@
 package com.github.libretube.adapters
 
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
@@ -32,7 +32,7 @@ class WatchHistoryAdapter(
             videoTitle.text = video.title
             channelName.text = video.uploader
             videoInfo.text = video.uploadDate
-            thumbnailDuration.text = DateUtils.formatElapsedTime(video.duration?.toLong()!!)
+            thumbnailDuration.setFormattedDuration(video.duration!!)
             ConnectionHelper.loadImage(video.thumbnailUrl, thumbnail)
             ConnectionHelper.loadImage(video.uploaderAvatar, channelImage)
 
@@ -55,7 +55,7 @@ class WatchHistoryAdapter(
                 true
             }
 
-            watchProgress.setWatchProgressLength(video.videoId!!, video.duration.toLong())
+            watchProgress.setWatchProgressLength(video.videoId!!, video.duration)
         }
     }
 

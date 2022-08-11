@@ -302,4 +302,5 @@
     <string name="break_reminder">Break reminder</string>
     <string name="take_a_break">Time to take a break</string>
     <string name="already_spent_time">You already spent %1$s minutes in the app, time to take a break.</string>
+    <string name="yt_shorts">Shorts</string>
 </resources>
