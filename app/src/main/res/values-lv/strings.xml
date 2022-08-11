@@ -55,7 +55,7 @@
     <string name="changeLanguage">Valoda</string>
     <string name="systemLanguage">Sistēmas</string>
     <string name="systemDefault">Sistēmas</string>
-    <string name="subscribers">%1$s abonementi</string>
+    <string name="subscribers">%1$s abonenti</string>
     <string name="choose_quality_dialog">Kvalitāte</string>
     <string name="subscribeIsEmpty">Vispirms abonējiet dažus kanālus.</string>
     <string name="success">Izdarīts.</string>
@@ -179,7 +179,7 @@
     <string name="version">V %1$s</string>
     <string name="about_summary">Iepazīstieties ar visiem, kas ir iesaistīti aplikācijas veidošanā un uzlabošanā.</string>
     <string name="related_streams">Saistīts saturs</string>
-    <string name="related_streams_summary">Rādīt līdzīgas tiešraides blakus tam, ko jūs skatāties.</string>
+    <string name="related_streams_summary">Rādīt līdzīgu saturu blakus tam, ko jūs skatāties.</string>
     <string name="buffering_goal">Iepriekš ielādēt</string>
     <string name="buffering_goal_summary">Maksimālais ilgums sekundēs, cik tālu video tiek iepriekš ielādēts.</string>
     <string name="playerVideoFormat">Atskaņotāja video formāts</string>
@@ -266,7 +266,7 @@
     <string name="best_quality">Augstākā</string>
     <string name="default_subtitle_language">Subtitru valoda</string>
     <string name="notifications">Notifikācijas</string>
-    <string name="notify_new_streams">Jauna satura notifikācijas</string>
+    <string name="notify_new_streams">Notifikācijas jaunam saturam</string>
     <string name="notify_new_streams_summary">Sūtīt notifikācijas par jaunu saturu no veidotājiem, kuriem jūs sekojat.</string>
     <string name="new_streams_count">Pieejami %1$s jauni vienumi</string>
     <string name="new_streams_by">Jauns saturs no %1$s…</string>
@@ -292,4 +292,9 @@
     <string name="downloadsucceeded">Lejupielāde veiksmīga</string>
     <string name="export_subscriptions">Eksportēt abonementus</string>
     <string name="share_with_time">Kopīgot ar sākšanas laiku</string>
+    <string name="skip_buttons">Izlaišanas pogas</string>
+    <string name="skip_buttons_summary">Rādīt pogas, kas ļauj doties uz nākamo vai iepriekšējo video</string>
+    <string name="history_size">Maksimālais vēstures izmērs</string>
+    <string name="background_mode">Fona režīms</string>
+    <string name="unlimited">Neierobežots</string>
 </resources>

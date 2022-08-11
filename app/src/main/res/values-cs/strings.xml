@@ -289,7 +289,12 @@
     <string name="no_search_result">Žádné výsledky.</string>
     <string name="error_occurred">Chyba</string>
     <string name="copied">Zkopírováno</string>
-    <string name="downloadsucceeded">Stáhnuto</string>
+    <string name="downloadsucceeded">Stahování bylo úspěšné</string>
     <string name="share_with_time">Sdílet s počátečním časem</string>
     <string name="export_subscriptions">Exportovat odběry</string>
+    <string name="skip_buttons">Tlačítka přeskočení</string>
+    <string name="history_size">Maximální velikost historie</string>
+    <string name="background_mode">Režim na pozadí</string>
+    <string name="skip_buttons_summary">Zobrazit tlačítka k přeskočení na další nebo předchozí video.</string>
+    <string name="unlimited">Neomezená</string>
 </resources>
