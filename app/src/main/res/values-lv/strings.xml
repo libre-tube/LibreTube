@@ -297,4 +297,10 @@
     <string name="history_size">Maksimālais vēstures izmērs</string>
     <string name="background_mode">Fona režīms</string>
     <string name="unlimited">Neierobežots</string>
+    <string name="add_to_queue">Pievienot rindai</string>
+    <string name="misc">Citi</string>
+    <string name="take_a_break">Laiks pārtraukumam</string>
+    <string name="yt_shorts">Shorts</string>
+    <string name="already_spent_time">Jūs jau lietojat šo lietotni %1$s minūtes, laiks pārtraukumam.</string>
+    <string name="break_reminder">Pārtraukuma atgādinājums</string>
 </resources>
