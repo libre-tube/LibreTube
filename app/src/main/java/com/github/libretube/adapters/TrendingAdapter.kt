@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
@@ -49,12 +49,7 @@ class TrendingAdapter(
                 trending.uploaderName + " • " +
                 trending.views.formatShort() + " • " +
                 DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-            if (trending.duration != -1L) {
-                thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
-            } else {
-                thumbnailDuration.text = root.context.getString(R.string.live)
-                thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
-            }
+            thumbnailDuration.setFormattedDuration(trending.duration!!)
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, trending.uploaderUrl)
             }

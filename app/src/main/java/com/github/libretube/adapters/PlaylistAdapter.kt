@@ -1,7 +1,6 @@
 package com.github.libretube.adapters
 
 import android.app.Activity
-import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
@@ -53,7 +53,7 @@ class PlaylistAdapter(
         holder.binding.apply {
             playlistTitle.text = streamItem.title
             playlistDescription.text = streamItem.uploaderName
-            thumbnailDuration.text = DateUtils.formatElapsedTime(streamItem.duration!!)
+            thumbnailDuration.setFormattedDuration(streamItem.duration!!)
             ConnectionHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)

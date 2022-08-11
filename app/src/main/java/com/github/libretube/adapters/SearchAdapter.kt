@@ -1,6 +1,5 @@
 package com.github.libretube.adapters
 
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.SearchItem
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
@@ -80,12 +80,7 @@ class SearchAdapter(
     private fun bindWatch(item: SearchItem, binding: VideoRowBinding) {
         binding.apply {
             ConnectionHelper.loadImage(item.thumbnail, thumbnail)
-            if (item.duration != -1L) {
-                thumbnailDuration.text = DateUtils.formatElapsedTime(item.duration!!)
-            } else {
-                thumbnailDuration.text = root.context.getString(R.string.live)
-                thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
-            }
+            thumbnailDuration.setFormattedDuration(item.duration!!)
             ConnectionHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
             val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""

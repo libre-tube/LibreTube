@@ -8,5 +8,5 @@ data class WatchHistoryItem(
     val uploaderUrl: String? = null,
     val uploaderAvatar: String? = null,
     val thumbnailUrl: String? = null,
-    val duration: Int? = null
+    val duration: Long? = null
 )
