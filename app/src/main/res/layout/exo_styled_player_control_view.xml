@@ -183,13 +183,11 @@
                 <TextView
                     style="@style/TimeString"
                     android:text="  •  "
-                    android:textColor="#B3FFFFFF"
                     tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@id/exo_duration"
                     style="@style/TimeString"
-                    android:textColor="#B3FFFFFF"
                     tools:text="12:15" />
 
             </LinearLayout>
@@ -204,11 +202,14 @@
 
                 <TextView
                     android:id="@+id/liveDiff"
-                    style="@style/TimeString" />
+                    style="@style/TimeString"
+                    tools:text="05:10" />
 
                 <TextView
                     android:id="@+id/liveSeparator"
                     style="@style/TimeString"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingHorizontal="0dp"
                     android:text="  •  "
                     android:visibility="gone"
                     tools:ignore="HardcodedText" />
