@@ -1544,12 +1544,12 @@ class PlayerFragment : BaseFragment() {
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
+            // set portrait mode
+            unsetFullscreen()
+
             // hide and disable exoPlayer controls
             exoPlayerView.hideController()
             exoPlayerView.useController = false
-
-            // set portrait mode
-            unsetFullscreen()
 
             with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
