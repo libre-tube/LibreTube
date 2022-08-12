@@ -217,7 +217,7 @@
     <string name="hls">Avtomatik</string>
     <string name="audio_video">Səs və video</string>
     <string name="fullscreen_orientation">Tam ekran istiqaməti</string>
-    <string name="aspect_ratio">Videolar üçün aspekt nisbəti</string>
+    <string name="aspect_ratio">Video aspekt nisbəti</string>
     <string name="auto_rotation">Avtomatik-fırlatma</string>
     <string name="portrait">Portret</string>
     <string name="landscape">Landşaft</string>
@@ -303,4 +303,6 @@
     <string name="take_a_break">Fasilə vermək vaxtıdır</string>
     <string name="break_reminder">Fasilə xatırlatma</string>
     <string name="already_spent_time">Siz artıq tətbiqdə %1$s dəqiqə sərf etmisiniz, fasilə vermək vaxtıdır.</string>
+    <string name="no_subtitles_available">Altyazı yoxdur</string>
+    <string name="repeat_mode">Təkrarlama Rejimi</string>
 </resources>
