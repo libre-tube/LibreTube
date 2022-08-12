@@ -159,11 +159,18 @@ object PreferenceHelper {
         watchHistory.forEachIndexed { index, item ->
             if (item.videoId == videoId) indexToRemove = index
         }
-        if (indexToRemove != null) {
-            watchHistory.removeAt(indexToRemove!!)
-            val json = mapper.writeValueAsString(watchHistory)
-            editor.putString("watch_history", json).commit()
-        }
+        if (indexToRemove == null) return
+        watchHistory.removeAt(indexToRemove!!)
+        val json = mapper.writeValueAsString(watchHistory)
+        editor.putString("watch_history", json).commit()
+    }
+
+    fun removeFromWatchHistory(position: Int) {
+        val watchHistory = getWatchHistory()
+        watchHistory.removeAt(position)
+
+        val json = mapper.writeValueAsString(watchHistory)
+        editor.putString("watch_history", json).commit()
     }
 
     fun getWatchHistory(): ArrayList<WatchHistoryItem> {

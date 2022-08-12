@@ -270,7 +270,6 @@
             android:layout_height="15dp"
             android:layout_gravity="bottom"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp">
 
