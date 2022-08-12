@@ -416,7 +416,10 @@ class PlayerFragment : BaseFragment() {
         }
 
         override fun onCaptionClicked() {
-            if (streams.subtitles == null || streams.subtitles!!.isEmpty()) {
+            if (!this@PlayerFragment::streams.isInitialized ||
+                streams.subtitles == null ||
+                streams.subtitles!!.isEmpty()
+            ) {
                 Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
                 return
             }
@@ -460,7 +463,7 @@ class PlayerFragment : BaseFragment() {
 
         override fun onQualityClicked() {
             // get the available resolutions
-            val (videosNameArray, videosUrlArray) = getAvailableResolutions(streams)
+            val (videosNameArray, videosUrlArray) = getAvailableResolutions()
 
             // Dialog for quality selection
             val lastPosition = exoPlayer.currentPosition
@@ -827,7 +830,7 @@ class PlayerFragment : BaseFragment() {
 
             runOnUiThread {
                 // set media sources for the player
-                setResolutionAndSubtitles(streams)
+                setResolutionAndSubtitles()
                 prepareExoPlayerView()
                 initializePlayerView(streams)
                 if (!isLive) seekToWatchPosition()
@@ -1321,14 +1324,16 @@ class PlayerFragment : BaseFragment() {
         exoPlayer.setMediaSource(mergeSource)
     }
 
-    private fun getAvailableResolutions(streams: Streams): Pair<Array<String>, Array<Uri>> {
+    private fun getAvailableResolutions(): Pair<Array<String>, Array<Uri>> {
+        if (!this::streams.isInitialized) return Pair(arrayOf(), arrayOf())
+
         var videosNameArray: Array<String> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
 
         // append hls to list if available
         if (streams.hls != null) {
             videosNameArray += getString(R.string.hls)
-            videosUrlArray += streams.hls.toUri()
+            videosUrlArray += streams.hls!!.toUri()
         }
 
         for (vid in streams.videoStreams!!) {
@@ -1345,15 +1350,15 @@ class PlayerFragment : BaseFragment() {
         return Pair(videosNameArray, videosUrlArray)
     }
 
-    private fun setResolutionAndSubtitles(response: Streams) {
+    private fun setResolutionAndSubtitles() {
         // get the available resolutions
-        val (videosNameArray, videosUrlArray) = getAvailableResolutions(response)
+        val (videosNameArray, videosUrlArray) = getAvailableResolutions()
 
         // create a list of subtitles
         subtitle = mutableListOf()
         val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
         val subtitleCodesList = mutableListOf("")
-        response.subtitles!!.forEach {
+        streams.subtitles!!.forEach {
             subtitle.add(
                 SubtitleConfiguration.Builder(it.url!!.toUri())
                     .setMimeType(it.mimeType!!) // The correct MIME type (required).
@@ -1374,7 +1379,7 @@ class PlayerFragment : BaseFragment() {
 
         // set media source and resolution in the beginning
         setStreamSource(
-            response,
+            streams,
             videosNameArray,
             videosUrlArray
         )
