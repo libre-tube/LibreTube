@@ -18,7 +18,7 @@ import com.google.android.material.color.DynamicColors
 object ThemeHelper {
 
     fun updateTheme(activity: AppCompatActivity) {
-        val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")!!
+        val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
         val pureThemeEnabled = PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)
 
         updateAccentColor(activity, pureThemeEnabled)
@@ -37,8 +37,8 @@ object ThemeHelper {
         ) {
             "my" -> {
                 applyDynamicColors(activity)
-                if (pureThemeEnabled) R.style.MaterialYou_Pure
-                else R.style.MaterialYou
+                if (pureThemeEnabled) R.style.BaseTheme_Pure
+                else R.style.BaseTheme
             }
             // set the theme, use the pure theme if enabled
             "red" -> if (pureThemeEnabled) R.style.Theme_Red_Pure else R.style.Theme_Red
