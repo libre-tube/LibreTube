@@ -136,7 +136,7 @@
     <string name="playback_speed">Oynatma sürəti</string>
     <string name="advanced">Qabaqcıl</string>
     <string name="player">Oynadıcı</string>
-    <string name="appearance_summary">Tətbiqi öz zövqünüzə uyğunlaşdırın.</string>
+    <string name="appearance_summary">Tətbiqi zövqünüzə uyğunlaşdırın.</string>
     <string name="advanced_summary">Endirmələr və sıfırlama</string>
     <string name="update_summary">Tətbiqin güncəl olub-olmadığını öyrənmək üçün klikləyin.</string>
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
@@ -184,7 +184,7 @@
     <string name="playerVideoFormat">Oynadıcı üçün video formatı</string>
     <string name="buffering_goal_summary">Maks. bufer üçün video saniyələrin miqdarı.</string>
     <string name="buffering_goal">Ön yükləmə</string>
-    <string name="player_autoplay">Avto-oynatma</string>
+    <string name="player_autoplay">Avtomatik oynatma</string>
     <string name="no_video">Video yoxdur</string>
     <string name="downloading">Endirilir…</string>
     <string name="video">Video</string>
@@ -198,7 +198,7 @@
     <string name="piped_summary">Piped, istifadə etdiyimiz API\' ni təmin edən YouTube üçün pulsuz alternativ veb interfeysidir. Onsuz LibreTube mövcud olmazdı. Onların tərtibatçılarına böyük təşəkkürlər!</string>
     <string name="instance_frontend_url">Server üçün URL</string>
     <string name="autoplay_summary">Cari videodan sonra növbəti videonu avtomatik oynadın.</string>
-    <string name="pauseOnScreenOff">Avto-fasilə</string>
+    <string name="pauseOnScreenOff">Avtomatik dayandırma</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandırın.</string>
     <string name="clonePlaylist">Pleylisti klonlayın</string>
     <string name="reset">İlkin tənzimləmələri bərpa edin</string>
@@ -208,7 +208,7 @@
     <string name="deleteAccount">Hesabı silin</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
     <string name="watch_history">Baxış Tarixçəsi</string>
-    <string name="watch_positions">Mövqeyi xatırlayın</string>
+    <string name="watch_positions">Mövqe xatırladıcı</string>
     <string name="watch_positions_summary">Son oynatma mövqeyindən davam edin</string>
     <string name="auth_instances">Təsdiqləmə serveri seçin</string>
     <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli serverdən istifadə edin.</string>
@@ -299,10 +299,15 @@
     <string name="background_mode">Arxa plan rejimi</string>
     <string name="add_to_queue">Növbəyə əlavə edin</string>
     <string name="misc">Müxtəlif</string>
-    <string name="yt_shorts">Şort</string>
+    <string name="yt_shorts">Qısa</string>
     <string name="take_a_break">Fasilə vermək vaxtıdır</string>
-    <string name="break_reminder">Fasilə xatırlatma</string>
+    <string name="break_reminder">Fasilə xatırladıcı</string>
     <string name="already_spent_time">Siz artıq tətbiqdə %1$s dəqiqə sərf etmisiniz, fasilə vermək vaxtıdır.</string>
     <string name="no_subtitles_available">Altyazı yoxdur</string>
     <string name="repeat_mode">Təkrarlama Rejimi</string>
+    <string name="resize_mode_fill">Doldur</string>
+    <string name="resize_mode_zoom">Yaxınlaşdırın</string>
+    <string name="resize_mode_fit">Dart</string>
+    <string name="repeat_mode_none">Heç biri</string>
+    <string name="repeat_mode_current">Cari</string>
 </resources>
