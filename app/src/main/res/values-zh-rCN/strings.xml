@@ -303,4 +303,11 @@
     <string name="break_reminder">休息提醒</string>
     <string name="misc">杂项</string>
     <string name="yt_shorts">短视频</string>
+    <string name="no_subtitles_available">无字幕可用</string>
+    <string name="repeat_mode">重复模式</string>
+    <string name="resize_mode_fill">填充</string>
+    <string name="resize_mode_zoom">缩放</string>
+    <string name="repeat_mode_none">无</string>
+    <string name="repeat_mode_current">当前</string>
+    <string name="resize_mode_fit">适应</string>
 </resources>
