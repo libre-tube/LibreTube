@@ -20,6 +20,12 @@ class WatchHistoryAdapter(
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
     private val TAG = "WatchHistoryAdapter"
 
+    fun removeFromWatchHistory(position: Int) {
+        PreferenceHelper.removeFromWatchHistory(position)
+        watchHistory.removeAt(position)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
@@ -41,9 +47,7 @@ class WatchHistoryAdapter(
             }
 
             deleteBTN.setOnClickListener {
-                PreferenceHelper.removeFromWatchHistory(video.videoId!!)
-                watchHistory.removeAt(position)
-                notifyDataSetChanged()
+                removeFromWatchHistory(position)
             }
 
             root.setOnClickListener {
