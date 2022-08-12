@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="8dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="7dp"
+    android:paddingVertical="10dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/quality"
         style="@style/BottomSheetItem"
-        android:drawableStart="@drawable/ic_hd"
-        android:text="@string/quality" />
+        android:text="@string/quality"
+        app:drawableStartCompat="@drawable/ic_hd" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/playbackSpeed"
         style="@style/BottomSheetItem"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/ic_speed"
-        android:text="@string/playback_speed" />
+        android:text="@string/playback_speed"
+        app:drawableStartCompat="@drawable/ic_speed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/captions"
         style="@style/BottomSheetItem"
-        android:drawableStart="@drawable/ic_caption"
-        android:text="@string/captions" />
+        android:text="@string/captions"
+        app:drawableStartCompat="@drawable/ic_caption" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/autoplay"
         style="@style/BottomSheetItem"
-        android:drawableStart="@drawable/ic_play"
-        android:text="@string/player_autoplay" />
+        android:text="@string/player_autoplay"
+        app:drawableStartCompat="@drawable/ic_play" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/repeatMode"
         style="@style/BottomSheetItem"
-        android:drawableStart="@drawable/ic_repeat"
-        android:text="@string/repeat_mode" />
+        android:text="@string/repeat_mode"
+        app:drawableStartCompat="@drawable/ic_repeat" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/aspectRatio"
         style="@style/BottomSheetItem"
-        android:drawableStart="@drawable/ic_aspect_ratio"
-        android:text="@string/aspect_ratio" />
+        android:text="@string/aspect_ratio"
+        app:drawableStartCompat="@drawable/ic_aspect_ratio" />
 </LinearLayout>
