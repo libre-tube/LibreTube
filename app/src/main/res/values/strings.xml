@@ -217,7 +217,7 @@
     <string name="github">GitHub</string>
     <string name="audio_video">Audio and video</string>
     <string name="fullscreen_orientation">Fullscreen orientation</string>
-    <string name="aspect_ratio">Aspect ratio for videos</string>
+    <string name="aspect_ratio">Video aspect ratio</string>
     <string name="auto_rotation">Auto-rotation</string>
     <string name="landscape">Landscape</string>
     <string name="portrait">Portrait</string>
@@ -305,4 +305,9 @@
     <string name="yt_shorts">Shorts</string>
     <string name="no_subtitles_available">No subtitles available</string>
     <string name="repeat_mode">Repeat Mode</string>
+    <string name="resize_mode_fit">Fit</string>
+    <string name="resize_mode_fill">Fill</string>
+    <string name="resize_mode_zoom">Zoom</string>
+    <string name="repeat_mode_none">None</string>
+    <string name="repeat_mode_current">Current</string>
 </resources>

@@ -398,8 +398,21 @@ class PlayerFragment : BaseFragment() {
 
     private val playerOptionsInterface = object : PlayerOptionsInterface {
         override fun onAutoplayClicked() {
-            // toggle autoplay
-            autoplayEnabled = !autoplayEnabled
+            // autoplay options dialog
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.player_autoplay)
+                .setItems(
+                    arrayOf(
+                        context?.getString(R.string.enabled),
+                        context?.getString(R.string.disabled)
+                    )
+                ) { _, index ->
+                    when (index) {
+                        0 -> autoplayEnabled = true
+                        1 -> autoplayEnabled = false
+                    }
+                }
+                .show()
         }
 
         override fun onCaptionClicked() {
@@ -494,26 +507,43 @@ class PlayerFragment : BaseFragment() {
 
         override fun onAspectRatioClicked() {
             // switching between original aspect ratio (black bars) and zoomed to fill device screen
+            val aspectRatioModeNames = arrayOf(
+                context?.getString(R.string.resize_mode_fit),
+                context?.getString(R.string.resize_mode_zoom),
+                context?.getString(R.string.resize_mode_fill)
+            )
+
             val aspectRatioModes = arrayOf(
                 AspectRatioFrameLayout.RESIZE_MODE_FIT,
                 AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
                 AspectRatioFrameLayout.RESIZE_MODE_FILL
             )
-            val index = aspectRatioModes.indexOf(exoPlayerView.resizeMode)
-            val newAspectRatioMode =
-                if (index + 1 < aspectRatioModes.size) aspectRatioModes[index + 1]
-                else aspectRatioModes[0]
-            exoPlayerView.resizeMode = newAspectRatioMode
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.aspect_ratio)
+                .setItems(aspectRatioModeNames) { _, index ->
+                    exoPlayerView.resizeMode = aspectRatioModes[index]
+                }
+                .show()
         }
 
         override fun onRepeatModeClicked() {
-            // repeat toggle button
-            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
-                // turn off repeat mode
-                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
-            } else {
-                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
-            }
+            val repeatModeNames = arrayOf(
+                context?.getString(R.string.repeat_mode_none),
+                context?.getString(R.string.repeat_mode_current)
+            )
+
+            val repeatModes = arrayOf(
+                RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL,
+                RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+            )
+            // repeat mode options dialog
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.repeat_mode)
+                .setItems(repeatModeNames) { _, index ->
+                    exoPlayer.repeatMode = repeatModes[index]
+                }
+                .show()
         }
     }
 
