@@ -214,7 +214,6 @@ class MainActivity : BaseActivity() {
         // stuff for the search in the topBar
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem.actionView as SearchView
-        searchView.maxWidth = Integer.MAX_VALUE
 
         val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
@@ -244,6 +243,22 @@ class MainActivity : BaseActivity() {
                 return true
             }
         })
+
+        searchItem.setOnActionExpandListener(
+            object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                    return true
+                }
+
+                override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                    val currentFragmentId = navController.currentDestination?.id
+                    if (currentFragmentId == R.id.searchFragment || currentFragmentId == R.id.searchResultFragment) {
+                        onBackPressed()
+                    }
+                    return true
+                }
+            }
+        )
 
         searchView.setOnCloseListener {
             if (navController.currentDestination?.id == R.id.searchFragment) {
