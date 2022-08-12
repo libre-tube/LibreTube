@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="8dp"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quality"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_hd"
+        android:text="@string/quality" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/playbackSpeed"
+        style="@style/BottomSheetItem"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_speed"
+        android:text="@string/playback_speed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/captions"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_caption"
+        android:text="@string/captions" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/autoplay"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_play"
+        android:text="@string/player_autoplay" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/repeatMode"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_repeat"
+        android:text="@string/repeat_mode" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/aspectRatio"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_aspect_ratio"
+        android:text="@string/aspect_ratio" />
+</LinearLayout>

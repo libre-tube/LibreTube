@@ -67,85 +67,12 @@
                 android:layout_gravity="center"
                 android:layoutDirection="ltr">
 
-                <TextView
-                    android:id="@+id/speed_text"
-                    style="@style/PlayerControlTop"
-                    android:text="1x"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/quality_text"
-                    style="@style/PlayerControlTop"
-                    android:text="@string/hls" />
-
                 <ImageButton
                     android:id="@+id/toggle_options"
                     style="@style/PlayerControlTop"
                     android:layout_marginTop="-1dp"
                     android:src="@drawable/ic_arrow_down"
                     app:tint="@android:color/white" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/advanced_options"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginHorizontal="3dp"
-            android:layout_marginTop="-12dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/autoplayLL"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="1.5dp"
-                    android:text="@string/player_autoplay"
-                    android:textColor="@android:color/white" />
-
-                <ImageView
-                    android:id="@+id/autoplayIV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_toggle_off" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/captions"
-                    style="@style/PlayerControlTop"
-                    android:src="@drawable/ic_caption_outlined"
-                    app:tint="@android:color/white" />
-
-                <ImageButton
-                    android:id="@+id/repeat_toggle"
-                    style="@style/PlayerControlTop"
-                    android:src="@drawable/ic_repeat"
-                    app:tint="@android:color/darker_gray" />
-
-                <ImageView
-                    android:id="@+id/aspect_ratio_button"
-                    style="@style/PlayerControlTop"
-                    android:src="@drawable/ic_aspect_ratio" />
 
             </LinearLayout>
 

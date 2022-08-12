@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -45,6 +44,8 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.interfaces.DoubleTapInterface
+import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
@@ -57,13 +58,13 @@ import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.OnDoubleTapEventListener
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.hideKeyboard
 import com.github.libretube.util.toID
+import com.github.libretube.views.BottomSheetFragment
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -205,8 +206,6 @@ class PlayerFragment : BaseFragment() {
         Globals.playingQueue.clear()
 
         setUserPrefs()
-
-        if (autoplayEnabled) playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
 
         val mainActivity = activity as MainActivity
         if (autoRotationEnabled) {
@@ -397,6 +396,127 @@ class PlayerFragment : BaseFragment() {
         }
     }
 
+    private val playerOptionsInterface = object : PlayerOptionsInterface {
+        override fun onAutoplayClicked() {
+            // toggle autoplay
+            autoplayEnabled = !autoplayEnabled
+        }
+
+        override fun onCaptionClicked() {
+            if (streams.subtitles == null || streams.subtitles!!.isEmpty()) {
+                Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
+            val subtitleCodesList = mutableListOf("")
+            streams.subtitles!!.forEach {
+                subtitlesNamesList += it.name!!
+                subtitleCodesList += it.code!!
+            }
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.captions)
+                .setItems(subtitlesNamesList.toTypedArray()) { _, index ->
+                    val newParams = if (index != 0) {
+                        // caption selected
+
+                        // get the caption name and language
+                        val captionLanguage = subtitlesNamesList[index]
+                        val captionLanguageCode = subtitleCodesList[index]
+
+                        // select the new caption preference
+                        trackSelector.buildUponParameters()
+                            .setPreferredTextLanguages(
+                                captionLanguage,
+                                captionLanguageCode
+                            )
+                            .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+                    } else {
+                        // none selected
+                        // disable captions
+                        trackSelector.buildUponParameters()
+                            .setPreferredTextLanguage("")
+                    }
+
+                    // set the new caption language
+                    trackSelector.setParameters(newParams)
+                }
+                .show()
+        }
+
+        override fun onQualityClicked() {
+            // get the available resolutions
+            val (videosNameArray, videosUrlArray) = getAvailableResolutions(streams)
+
+            // Dialog for quality selection
+            val lastPosition = exoPlayer.currentPosition
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.choose_quality_dialog)
+                .setItems(
+                    videosNameArray
+                ) { _, which ->
+                    if (
+                        videosNameArray[which] == getString(R.string.hls) ||
+                        videosNameArray[which] == "LBRY HLS"
+                    ) {
+                        // no need to merge sources if using hls
+                        val mediaItem: MediaItem = MediaItem.Builder()
+                            .setUri(videosUrlArray[which])
+                            .setSubtitleConfigurations(subtitle)
+                            .build()
+                        exoPlayer.setMediaItem(mediaItem)
+                    } else {
+                        val videoUri = videosUrlArray[which]
+                        val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
+                        setMediaSource(videoUri, audioUrl)
+                    }
+                    exoPlayer.seekTo(lastPosition)
+                }
+                .show()
+        }
+
+        override fun onPlaybackSpeedClicked() {
+            val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
+            val playbackSpeedValues =
+                context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
+
+            // change playback speed dialog
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.change_playback_speed)
+                .setItems(playbackSpeeds) { _, index ->
+                    // set the new playback speed
+                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
+                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
+                }
+                .show()
+        }
+
+        override fun onAspectRatioClicked() {
+            // switching between original aspect ratio (black bars) and zoomed to fill device screen
+            val aspectRatioModes = arrayOf(
+                AspectRatioFrameLayout.RESIZE_MODE_FIT,
+                AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
+                AspectRatioFrameLayout.RESIZE_MODE_FILL
+            )
+            val index = aspectRatioModes.indexOf(exoPlayerView.resizeMode)
+            val newAspectRatioMode =
+                if (index + 1 < aspectRatioModes.size) aspectRatioModes[index + 1]
+                else aspectRatioModes[0]
+            exoPlayerView.resizeMode = newAspectRatioMode
+        }
+
+        override fun onRepeatModeClicked() {
+            // repeat toggle button
+            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
+                // turn off repeat mode
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+            } else {
+                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+            }
+        }
+    }
+
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
@@ -417,24 +537,12 @@ class PlayerFragment : BaseFragment() {
         }
         // show the advanced player options
         playerBinding.toggleOptions.setOnClickListener {
-            if (playerBinding.advancedOptions.isVisible) {
-                playerBinding.toggleOptions.animate().rotation(0F).setDuration(250).start()
-                playerBinding.advancedOptions.visibility = View.GONE
-            } else {
-                playerBinding.toggleOptions.animate().rotation(180F).setDuration(250).start()
-                playerBinding.advancedOptions.visibility = View.VISIBLE
+            val bottomSheetFragment = BottomSheetFragment().apply {
+                setOnClickListeners(playerOptionsInterface)
             }
+            bottomSheetFragment.show(childFragmentManager, null)
         }
-        // autoplay toggle button
-        playerBinding.autoplayLL.setOnClickListener {
-            autoplayEnabled = if (autoplayEnabled) {
-                playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_off)
-                false
-            } else {
-                playerBinding.autoplayIV.setImageResource(R.drawable.ic_toggle_on)
-                true
-            }
-        }
+
         binding.playImageView.setOnClickListener {
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
@@ -471,20 +579,6 @@ class PlayerFragment : BaseFragment() {
             }
         }
 
-        // switching between original aspect ratio (black bars) and zoomed to fill device screen
-        val aspectRatioModes = arrayOf(
-            AspectRatioFrameLayout.RESIZE_MODE_FIT,
-            AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
-            AspectRatioFrameLayout.RESIZE_MODE_FILL
-        )
-        playerBinding.aspectRatioButton.setOnClickListener {
-            val index = aspectRatioModes.indexOf(exoPlayerView.resizeMode)
-            val newAspectRatioMode =
-                if (index + 1 < aspectRatioModes.size) aspectRatioModes[index + 1]
-                else aspectRatioModes[0]
-            exoPlayerView.resizeMode = newAspectRatioMode
-        }
-
         // lock and unlock the player
         playerBinding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
@@ -502,37 +596,7 @@ class PlayerFragment : BaseFragment() {
         }
 
         // set default playback speed
-        val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
-        val playbackSpeedValues =
-            context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
         exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
-        val speedIndex = playbackSpeedValues.indexOf(playbackSpeed)
-        playerBinding.speedText.text = playbackSpeeds[speedIndex]
-
-        // change playback speed button
-        playerBinding.speedText.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.change_playback_speed)
-                .setItems(playbackSpeeds) { _, index ->
-                    // set the new playback speed
-                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
-                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
-                    playerBinding.speedText.text = playbackSpeeds[index]
-                }
-                .show()
-        }
-
-        // repeat toggle button
-        playerBinding.repeatToggle.setOnClickListener {
-            if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL) {
-                // turn off repeat mode
-                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
-                playerBinding.repeatToggle.setColorFilter(Color.GRAY)
-            } else {
-                exoPlayer.repeatMode = RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
-                playerBinding.repeatToggle.setColorFilter(Color.WHITE)
-            }
-        }
 
         // share button
         binding.relPlayerShare.setOnClickListener {
@@ -785,7 +849,6 @@ class PlayerFragment : BaseFragment() {
         // switch back to normal speed when on the end of live stream
         if (exoPlayer.duration - exoPlayer.currentPosition < 7000) {
             exoPlayer.setPlaybackSpeed(1F)
-            playerBinding.speedText.text = "1x"
             playerBinding.liveSeparator.visibility = View.GONE
             playerBinding.liveDiff.text = ""
         } else {
@@ -911,12 +974,6 @@ class PlayerFragment : BaseFragment() {
             override fun onVideoSizeChanged(
                 videoSize: VideoSize
             ) {
-                // show the resolution in the video resolution text view
-                if (playerBinding.qualityText.text == context?.getString(R.string.hls)) {
-                    playerBinding.qualityText.text =
-                        "${context?.getString(R.string.hls)} (${videoSize.height}p)"
-                }
-
                 // Set new width/height of view
                 // height or width must be cast to float as int/int will give 0
 
@@ -1075,7 +1132,7 @@ class PlayerFragment : BaseFragment() {
         doubleTapOverlayBinding.rewindTV.text = seekIncrementText
         doubleTapOverlayBinding.forwardTV.text = seekIncrementText
         binding.player.setOnDoubleTapListener(
-            object : OnDoubleTapEventListener {
+            object : DoubleTapInterface {
                 override fun onEvent(x: Float) {
                     val width = exoPlayerView.width
                     when {
@@ -1234,17 +1291,17 @@ class PlayerFragment : BaseFragment() {
         exoPlayer.setMediaSource(mergeSource)
     }
 
-    private fun setResolutionAndSubtitles(response: Streams) {
-        var videosNameArray: Array<CharSequence> = arrayOf()
+    private fun getAvailableResolutions(streams: Streams): Pair<Array<String>, Array<Uri>> {
+        var videosNameArray: Array<String> = arrayOf()
         var videosUrlArray: Array<Uri> = arrayOf()
 
         // append hls to list if available
-        if (response.hls != null) {
+        if (streams.hls != null) {
             videosNameArray += getString(R.string.hls)
-            videosUrlArray += response.hls.toUri()
+            videosUrlArray += streams.hls.toUri()
         }
 
-        for (vid in response.videoStreams!!) {
+        for (vid in streams.videoStreams!!) {
             // append quality to list if it has the preferred format (e.g. MPEG)
             val preferredMimeType = "video/$videoFormatPreference"
             if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
@@ -1255,6 +1312,13 @@ class PlayerFragment : BaseFragment() {
                 videosUrlArray += vid.url!!.toUri()
             }
         }
+        return Pair(videosNameArray, videosUrlArray)
+    }
+
+    private fun setResolutionAndSubtitles(response: Streams) {
+        // get the available resolutions
+        val (videosNameArray, videosUrlArray) = getAvailableResolutions(response)
+
         // create a list of subtitles
         subtitle = mutableListOf()
         val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
@@ -1276,46 +1340,6 @@ class PlayerFragment : BaseFragment() {
                 .setPreferredTextLanguage(defaultSubtitleCode)
                 .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
             trackSelector.setParameters(newParams)
-            playerBinding.captions.setImageResource(R.drawable.ic_caption)
-        }
-
-        // captions selection dialog
-        // hide caption selection view if no subtitles available
-        if (response.subtitles.isEmpty()) playerBinding.captions.visibility = View.GONE
-        playerBinding.captions.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.captions)
-                .setItems(subtitlesNamesList.toTypedArray()) { _, index ->
-                    val newParams = if (index != 0) {
-                        // caption selected
-
-                        // get the caption name and language
-                        val captionLanguage = subtitlesNamesList[index]
-                        val captionLanguageCode = subtitleCodesList[index]
-
-                        // update the icon of the captions button
-                        playerBinding.captions.setImageResource(R.drawable.ic_caption)
-
-                        // select the new caption preference
-                        trackSelector.buildUponParameters()
-                            .setPreferredTextLanguages(
-                                captionLanguage,
-                                captionLanguageCode
-                            )
-                            .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-                    } else {
-                        // none selected
-                        playerBinding.captions.setImageResource(R.drawable.ic_caption_outlined)
-
-                        // disable captions
-                        trackSelector.buildUponParameters()
-                            .setPreferredTextLanguage("")
-                    }
-
-                    // set the new caption language
-                    trackSelector.setParameters(newParams)
-                }
-                .show()
         }
 
         // set media source and resolution in the beginning
@@ -1324,43 +1348,11 @@ class PlayerFragment : BaseFragment() {
             videosNameArray,
             videosUrlArray
         )
-
-        playerBinding.qualityText.setOnClickListener {
-            // Dialog for quality selection
-            val builder: MaterialAlertDialogBuilder? = activity?.let {
-                MaterialAlertDialogBuilder(it)
-            }
-            val lastPosition = exoPlayer.currentPosition
-            builder!!.setTitle(R.string.choose_quality_dialog)
-                .setItems(
-                    videosNameArray
-                ) { _, which ->
-                    if (
-                        videosNameArray[which] == getString(R.string.hls) ||
-                        videosNameArray[which] == "LBRY HLS"
-                    ) {
-                        // no need to merge sources if using hls
-                        val mediaItem: MediaItem = MediaItem.Builder()
-                            .setUri(videosUrlArray[which])
-                            .setSubtitleConfigurations(subtitle)
-                            .build()
-                        exoPlayer.setMediaItem(mediaItem)
-                    } else {
-                        val videoUri = videosUrlArray[which]
-                        val audioUrl = PlayerHelper.getAudioSource(response.audioStreams!!)
-                        setMediaSource(videoUri, audioUrl)
-                    }
-                    exoPlayer.seekTo(lastPosition)
-                    playerBinding.qualityText.text = videosNameArray[which]
-                }
-            val dialog = builder.create()
-            dialog.show()
-        }
     }
 
     private fun setStreamSource(
         streams: Streams,
-        videosNameArray: Array<CharSequence>,
+        videosNameArray: Array<String>,
         videosUrlArray: Array<Uri>
     ) {
         if (defRes != "") {
@@ -1370,7 +1362,6 @@ class PlayerFragment : BaseFragment() {
                     val videoUri = videosUrlArray[index]
                     val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
                     setMediaSource(videoUri, audioUrl)
-                    playerBinding.qualityText.text = videosNameArray[index]
                     return
                 }
             }
@@ -1383,7 +1374,6 @@ class PlayerFragment : BaseFragment() {
                 .setSubtitleConfigurations(subtitle)
                 .build()
             exoPlayer.setMediaItem(mediaItem)
-            playerBinding.qualityText.text = context?.getString(R.string.hls)
             return
         }
 
@@ -1392,7 +1382,6 @@ class PlayerFragment : BaseFragment() {
             val videoUri = videosUrlArray[0]
             val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
             setMediaSource(videoUri, audioUrl)
-            playerBinding.qualityText.text = videosNameArray[0]
         }
     }
 
