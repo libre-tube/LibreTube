@@ -50,13 +50,14 @@ class AdvancedSettings : MaterialPreferenceFragment() {
         val backupSettings = findPreference<Preference>(PreferenceKeys.BACKUP_SETTINGS)
         backupSettings?.setOnPreferenceClickListener {
             createFile.launch("preferences.xml")
-            activity?.recreate()
             true
         }
 
         val restoreSettings = findPreference<Preference>(PreferenceKeys.RESTORE_SETTINGS)
         restoreSettings?.setOnPreferenceClickListener {
             getContent.launch("*/*")
+            // reset the token
+            PreferenceHelper.setToken("")
             activity?.recreate()
             true
         }
