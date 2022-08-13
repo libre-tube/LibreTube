@@ -21,7 +21,7 @@ class AdvancedSettings : MaterialPreferenceFragment() {
     private lateinit var createFile: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-         getContent =
+        getContent =
             registerForActivityResult(
                 ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
