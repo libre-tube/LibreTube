@@ -15,8 +15,19 @@ object PreferenceHelper {
     private val TAG = "PreferenceHelper"
 
     private lateinit var prefContext: Context
+
+    /**
+     * for normal preferences
+     */
     private lateinit var settings: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+
+    /**
+     * For sensitive data (like token)
+     */
+    private lateinit var authSettings: SharedPreferences
+    private lateinit var authEditor: SharedPreferences.Editor
+
     private val mapper = ObjectMapper()
 
     /**
@@ -24,8 +35,12 @@ object PreferenceHelper {
      */
     fun setContext(context: Context) {
         prefContext = context
+
         settings = getDefaultSharedPreferences(prefContext)
         editor = settings.edit()
+
+        authSettings = getAuthenticationPreferences(context)
+        authEditor = authSettings.edit()
     }
 
     fun getString(key: String?, defValue: String?): String {
@@ -45,23 +60,19 @@ object PreferenceHelper {
     }
 
     fun getToken(): String {
-        val sharedPref = prefContext.getSharedPreferences("token", Context.MODE_PRIVATE)
-        return sharedPref?.getString("token", "")!!
+        return authSettings.getString(PreferenceKeys.TOKEN, "")!!
     }
 
     fun setToken(newValue: String) {
-        val editor = prefContext.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
-        editor.putString("token", newValue).apply()
+        authEditor.putString(PreferenceKeys.TOKEN, newValue).apply()
     }
 
     fun getUsername(): String {
-        val sharedPref = prefContext.getSharedPreferences("username", Context.MODE_PRIVATE)
-        return sharedPref.getString("username", "")!!
+        return authSettings.getString(PreferenceKeys.USERNAME, "")!!
     }
 
     fun setUsername(newValue: String) {
-        val editor = prefContext.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
-        editor.putString("username", newValue).apply()
+        authEditor.putString(PreferenceKeys.USERNAME, newValue).apply()
     }
 
     fun saveCustomInstance(customInstance: CustomInstance) {
@@ -265,5 +276,9 @@ object PreferenceHelper {
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
+    }
+
+    private fun getAuthenticationPreferences(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PreferenceKeys.AUTH_PREF_FILE, Context.MODE_PRIVATE)
     }
 }

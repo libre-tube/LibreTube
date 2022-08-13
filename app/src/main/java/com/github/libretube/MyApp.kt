@@ -3,6 +3,7 @@ package com.github.libretube
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
@@ -49,6 +50,11 @@ class MyApp : Application() {
         val defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         val exceptionHandler = ExceptionHandler(defaultExceptionHandler)
         Thread.setDefaultUncaughtExceptionHandler(exceptionHandler)
+
+        /**
+         * legacy preference file migration
+         */
+        prefFileMigration()
     }
 
     /**
@@ -93,6 +99,9 @@ class MyApp : Application() {
         )
     }
 
+    /**
+     * Creates a [NotificationChannel]
+     */
     private fun createNotificationChannel(
         id: String,
         name: String,
@@ -107,6 +116,24 @@ class MyApp : Application() {
             // Register the channel in the system
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    /**
+     * Migration from old preference files to new one
+     */
+    private fun prefFileMigration() {
+        val legacyUserPrefs = getSharedPreferences("username", Context.MODE_PRIVATE)
+        val username = legacyUserPrefs.getString("username", "")!!
+        if (username != "") {
+            PreferenceHelper.setUsername(username)
+            legacyUserPrefs.edit().putString("username", "")
+        }
+        val legacyTokenPrefs = getSharedPreferences("token", Context.MODE_PRIVATE)
+        val token = legacyUserPrefs.getString("token", "")!!
+        if (token != "") {
+            PreferenceHelper.setToken(token)
+            legacyTokenPrefs.edit().putString("token", "")
         }
     }
 }
