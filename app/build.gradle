@@ -75,7 +75,7 @@ android {
 dependencies {
     //debugImplementation libs.square.leakcanary
 
-    kapt "androidx.room:room-compiler:2.4.3"
+    kapt libs.room.compiler
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.constraintlayout
