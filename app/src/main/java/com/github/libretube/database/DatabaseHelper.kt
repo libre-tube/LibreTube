@@ -3,6 +3,8 @@ package com.github.libretube.database
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.obj.WatchPosition
+import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.toID
 
 object DatabaseHelper {
@@ -19,6 +21,15 @@ object DatabaseHelper {
         )
         Thread {
             DatabaseHolder.database.watchHistoryDao().insertAll(watchHistoryItem)
+            val maxHistorySize = PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
+            if (maxHistorySize == "unlimited") return@Thread
+
+            // delete the first watch history entry if the limit is reached
+            val watchHistory = DatabaseHolder.database.watchHistoryDao().getAll()
+            if (watchHistory.size > maxHistorySize.toInt()) {
+                DatabaseHolder.database.watchHistoryDao()
+                    .delete(watchHistory.first())
+            }
         }.start()
     }
 
