@@ -46,7 +46,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_speed"
-            app:defaultValue="1"
+            app:defaultValue="1.0"
             app:entries="@array/playbackSpeed"
             app:entryValues="@array/playbackSpeedValues"
             app:key="playback_speed"
@@ -96,6 +96,12 @@
             app:title="@string/player_autoplay" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_window"
+            app:key="picture_in_picture"
+            app:title="@string/picture_in_picture" />
+
+        <SwitchPreferenceCompat
             android:icon="@drawable/ic_pause_filled"
             android:summary="@string/pauseOnScreenOff_summary"
             app:defaultValue="false"
@@ -124,7 +130,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_speed"
-            app:defaultValue="1"
+            app:defaultValue="1.0"
             app:entries="@array/playbackSpeed"
             app:entryValues="@array/playbackSpeedValues"
             app:key="background_playback_speed"

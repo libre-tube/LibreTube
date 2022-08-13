@@ -1629,6 +1629,13 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun shouldStartPiP(): Boolean {
+        val pipEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.PICTURE_IN_PICTURE,
+            true
+        )
+
+        if (!pipEnabled) return false
+
         val bounds = Rect()
         binding.playerScrollView.getHitRect(bounds)
 
