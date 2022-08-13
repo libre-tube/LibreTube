@@ -221,7 +221,7 @@
     <string name="auth_instances">Izvēlēties autentificēto instanci</string>
     <string name="hls">Automātiska</string>
     <string name="github">GitHub</string>
-    <string name="aspect_ratio">Noteikt no video malu attiecības</string>
+    <string name="aspect_ratio">Video malu attiecība</string>
     <string name="auto_rotation">Noteikt no ierīces orientācijas</string>
     <string name="audio_video">Audio un video</string>
     <string name="fullscreen_orientation">Pilnekrāna orientācija</string>
@@ -303,4 +303,11 @@
     <string name="yt_shorts">Shorts</string>
     <string name="already_spent_time">Jūs jau lietojat šo lietotni %1$s minūtes, laiks pārtraukumam.</string>
     <string name="break_reminder">Pārtraukuma atgādinājums</string>
+    <string name="resize_mode_fill">Piepildīt</string>
+    <string name="no_subtitles_available">Subtitri nav pieejami</string>
+    <string name="resize_mode_zoom">Pietuvināt</string>
+    <string name="repeat_mode">Atkārtošanas režīms</string>
+    <string name="resize_mode_fit">Ietilpināt</string>
+    <string name="repeat_mode_none">Izslēgts</string>
+    <string name="repeat_mode_current">Atkārtot pašreizējo</string>
 </resources>
