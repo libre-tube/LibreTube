@@ -4,15 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.github.libretube.R
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetFragment : BottomSheetDialogFragment() {
+/**
+ * Bottom Sheet including all the player options
+ */
+class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
+    private val TAG = this::class.java.name.toString()
+
     lateinit var binding: BottomSheetBinding
     private lateinit var playerOptionsInterface: PlayerOptionsInterface
+
+    /**
+     * current values
+     */
+    var currentPlaybackSpeed: String? = null
+    var currentAutoplayMode: String? = null
+    var currentRepeatMode: String? = null
+    var currentQuality: String? = null
+    var currentAspectRatio: String? = null
+    var currentCaptions: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +55,22 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /**
+         * update the text if a value is selected
+         */
+
+        binding.autoplay.updateText(currentAutoplayMode)
+
+        binding.captions.updateText(currentCaptions)
+
+        binding.playbackSpeed.updateText(currentPlaybackSpeed)
+
+        binding.quality.updateText(currentQuality)
+
+        binding.repeatMode.updateText(currentRepeatMode)
+
+        binding.aspectRatio.updateText(currentAspectRatio)
 
         binding.aspectRatio.setOnClickListener {
             playerOptionsInterface.onAspectRatioClicked()
@@ -68,5 +101,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             playerOptionsInterface.onRepeatModeClicked()
             this.dismiss()
         }
+    }
+
+    private fun TextView.updateText(currentValue: String?) {
+        if (currentValue == null) return
+        this.text = "${this.text} ($currentValue)"
     }
 }
