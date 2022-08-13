@@ -5,6 +5,13 @@ package com.github.libretube.preferences
  */
 object PreferenceKeys {
     /**
+     * Authentication
+     */
+    const val AUTH_PREF_FILE = "auth"
+    const val TOKEN = "token"
+    const val USERNAME = "username"
+
+    /**
      * General
      */
     const val LANGUAGE = "language"
