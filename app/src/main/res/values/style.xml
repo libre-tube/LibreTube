@@ -15,13 +15,6 @@
 
     </style>
 
-    <style name="MaterialAlertDialog">
-
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
-        <item name="dialogCornerRadius">28dp</item>
-
-    </style>
-
     <style name="AboutCard" parent="Widget.Material3.CardView.Elevated">
 
         <item name="android:layout_marginLeft">10dp</item>
@@ -114,6 +107,14 @@
 
     </style>
 
+    <style name="PlayerControlCenter">
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:backgroundTint">@android:color/white</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
     <style name="PlayerControlTop">
 
         <item name="android:padding">9dp</item>
@@ -125,5 +126,46 @@
 
     </style>
 
+    <style name="WatchProgress">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@android:color/holo_red_dark</item>
+        <item name="android:visibility">gone</item>
+
+    </style>
+
+    <style name="TimeString">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="paddingStart">5dp</item>
+        <item name="paddingEnd">5dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Chip" parent="Widget.Material3.Chip.Suggestion">
+
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="chipCornerRadius">20dp</item>
+
+    </style>
+
+    <style name="BottomSheetItem">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="background">?attr/selectableItemBackground</item>
+
+    </style>
 
 </resources>

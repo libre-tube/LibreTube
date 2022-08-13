@@ -1,19 +1,18 @@
 package com.github.libretube.adapters
 
-import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
-import com.github.libretube.databinding.VideoChannelRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
-import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
+import com.github.libretube.util.setWatchProgressLength
+import com.github.libretube.util.toID
 
 class ChannelAdapter(
     private val videoFeed: MutableList<StreamItem>,
@@ -26,47 +25,39 @@ class ChannelAdapter(
     }
 
     fun updateItems(newItems: List<StreamItem>) {
+        val feedSize = videoFeed.size
         videoFeed.addAll(newItems)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(feedSize, newItems.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = VideoChannelRowBinding.inflate(layoutInflater, parent, false)
+        val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return ChannelViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val trending = videoFeed[position]
         holder.binding.apply {
-            channelDescription.text = trending.title
-            channelViews.text =
+            videoTitle.text = trending.title
+            videoInfo.text =
                 trending.views.formatShort() + " • " +
                 DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-            channelDuration.text =
+            thumbnailDuration.text =
                 DateUtils.formatElapsedTime(trending.duration!!)
-            Picasso.get().load(trending.thumbnail).into(channelThumbnail)
+            ConnectionHelper.loadImage(trending.thumbnail, thumbnail)
             root.setOnClickListener {
-                var bundle = Bundle()
-                bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
-                var frag = PlayerFragment()
-                frag.arguments = bundle
-                val activity = root.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .remove(PlayerFragment())
-                    .commit()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, frag)
-                    .commitNow()
+                NavigationHelper.navigateVideo(root.context, trending.url)
             }
+            val videoId = trending.url.toID()
             root.setOnLongClickListener {
-                val videoId = trending.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, root.context)
-                    .show(childFragmentManager, VideoOptionsDialog.TAG)
+                VideoOptionsDialog(videoId)
+                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
                 true
             }
+            watchProgress.setWatchProgressLength(videoId, trending.duration!!)
         }
     }
 }
 
-class ChannelViewHolder(val binding: VideoChannelRowBinding) : RecyclerView.ViewHolder(binding.root)
+class ChannelViewHolder(val binding: VideoRowBinding) : RecyclerView.ViewHolder(binding.root)

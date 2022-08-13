@@ -3,176 +3,192 @@ package com.github.libretube.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.Streams
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.obj.WatchPosition
-import com.google.common.reflect.TypeToken
-import com.google.gson.Gson
-import java.lang.reflect.Type
+import com.github.libretube.util.toID
 
 object PreferenceHelper {
     private val TAG = "PreferenceHelper"
 
-    fun setString(context: Context, key: String?, value: String?) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        editor.putString(key, value)
-        editor.apply()
+    private lateinit var prefContext: Context
+    private lateinit var settings: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private val mapper = ObjectMapper()
+
+    /**
+     * set the context that is being used to access the shared preferences
+     */
+    fun setContext(context: Context) {
+        prefContext = context
+        settings = getDefaultSharedPreferences(prefContext)
+        editor = settings.edit()
     }
 
-    fun setInt(context: Context, key: String?, value: Int) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        editor.putInt(key, value)
-        editor.apply()
+    fun getString(key: String?, defValue: String?): String {
+        return settings.getString(key, defValue)!!
     }
 
-    fun setLong(context: Context, key: String?, value: Long) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        editor.putLong(key, value)
-        editor.apply()
-    }
-
-    fun setBoolean(context: Context, key: String?, value: Boolean) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        editor.putBoolean(key, value)
-        editor.apply()
-    }
-
-    fun getString(context: Context, key: String?, defValue: String?): String? {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
-        return settings.getString(key, defValue)
-    }
-
-    fun getInt(context: Context, key: String?, defValue: Int): Int {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
-        return settings.getInt(key, defValue)
-    }
-
-    fun getLong(context: Context, key: String?, defValue: Long): Long {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
-        return settings.getLong(key, defValue)
-    }
-
-    fun getBoolean(context: Context, key: String?, defValue: Boolean): Boolean {
-        val settings: SharedPreferences = getDefaultSharedPreferences(context)
+    fun getBoolean(key: String?, defValue: Boolean): Boolean {
         return settings.getBoolean(key, defValue)
     }
 
-    fun clearPreferences(context: Context) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun clearPreferences() {
         editor.clear().apply()
     }
 
-    fun removePreference(context: Context, value: String?) {
-        val editor = getDefaultSharedPreferencesEditor(context)
+    fun removePreference(value: String?) {
         editor.remove(value).apply()
     }
 
-    fun getToken(context: Context): String {
-        val sharedPref = context.getSharedPreferences("token", Context.MODE_PRIVATE)
+    fun getToken(): String {
+        val sharedPref = prefContext.getSharedPreferences("token", Context.MODE_PRIVATE)
         return sharedPref?.getString("token", "")!!
     }
 
-    fun setToken(context: Context, newValue: String) {
-        val editor = context.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
+    fun setToken(newValue: String) {
+        val editor = prefContext.getSharedPreferences("token", Context.MODE_PRIVATE).edit()
         editor.putString("token", newValue).apply()
     }
 
-    fun getUsername(context: Context): String {
-        val sharedPref = context.getSharedPreferences("username", Context.MODE_PRIVATE)
+    fun getUsername(): String {
+        val sharedPref = prefContext.getSharedPreferences("username", Context.MODE_PRIVATE)
         return sharedPref.getString("username", "")!!
     }
 
-    fun setUsername(context: Context, newValue: String) {
-        val editor = context.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
+    fun setUsername(newValue: String) {
+        val editor = prefContext.getSharedPreferences("username", Context.MODE_PRIVATE).edit()
         editor.putString("username", newValue).apply()
     }
 
-    fun saveCustomInstance(context: Context, customInstance: CustomInstance) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        val gson = Gson()
-
-        val customInstancesList = getCustomInstances(context)
+    fun saveCustomInstance(customInstance: CustomInstance) {
+        val customInstancesList = getCustomInstances()
         customInstancesList += customInstance
 
-        val json = gson.toJson(customInstancesList)
+        val json = mapper.writeValueAsString(customInstancesList)
         editor.putString("customInstances", json).apply()
     }
 
-    fun getCustomInstances(context: Context): ArrayList<CustomInstance> {
-        val settings = getDefaultSharedPreferences(context)
-        val gson = Gson()
+    fun getCustomInstances(): ArrayList<CustomInstance> {
         val json: String = settings.getString("customInstances", "")!!
-        val type: Type = object : TypeToken<List<CustomInstance?>?>() {}.type
+        val type = mapper.typeFactory.constructCollectionType(
+            List::class.java,
+            CustomInstance::class.java
+        )
         return try {
-            gson.fromJson(json, type)
+            mapper.readValue(json, type)
         } catch (e: Exception) {
             arrayListOf()
         }
     }
 
-    fun getHistory(context: Context): List<String> {
+    fun getSearchHistory(): List<String> {
         return try {
-            val settings = getDefaultSharedPreferences(context)
-            val set: Set<String> = settings.getStringSet("search_history", HashSet())!!
-            set.toList()
+            val json = settings.getString("search_history", "")!!
+            val type = object : TypeReference<List<String>>() {}
+            return mapper.readValue(json, type)
         } catch (e: Exception) {
             emptyList()
         }
     }
 
-    fun saveHistory(context: Context, historyList: List<String>) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        val set: Set<String> = HashSet(historyList)
-        editor.putStringSet("search_history", set).apply()
+    fun saveToSearchHistory(query: String) {
+        val historyList = getSearchHistory().toMutableList()
+
+        if ((historyList.contains(query))) {
+            // remove from history list if already contained
+            historyList -= query
+        }
+
+        // append new query to history
+        historyList.add(0, query)
+
+        if (historyList.size > 10) {
+            historyList.removeAt(historyList.size - 1)
+        }
+
+        updateSearchHistory(historyList)
     }
 
-    fun addToWatchHistory(context: Context, videoId: String, streams: Streams) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-        val gson = Gson()
+    fun removeFromSearchHistory(query: String) {
+        val historyList = getSearchHistory().toMutableList()
+        historyList -= query
+        updateSearchHistory(historyList)
+    }
+
+    private fun updateSearchHistory(historyList: List<String>) {
+        val json = mapper.writeValueAsString(historyList)
+        editor.putString("search_history", json).apply()
+    }
+
+    fun addToWatchHistory(videoId: String, streams: Streams) {
+        removeFromWatchHistory(videoId)
 
         val watchHistoryItem = WatchHistoryItem(
             videoId,
             streams.title,
             streams.uploadDate,
             streams.uploader,
-            streams.uploaderUrl?.replace("/channel/", ""),
+            streams.uploaderUrl.toID(),
             streams.uploaderAvatar,
             streams.thumbnailUrl,
             streams.duration
         )
 
-        val watchHistory = getWatchHistory(context)
+        val watchHistory = getWatchHistory()
 
-        // delete entries that have the same videoId
+        watchHistory += watchHistoryItem
+
+        // remove oldest item when the watch history is longer than the pref
+        val maxWatchHistorySize = getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
+        if (maxWatchHistorySize != "unlimited" && watchHistory.size > maxWatchHistorySize.toInt()) {
+            watchHistory.removeAt(0)
+        }
+
+        val json = mapper.writeValueAsString(watchHistory)
+        editor.putString("watch_history", json).apply()
+    }
+
+    fun removeFromWatchHistory(videoId: String) {
+        val watchHistory = getWatchHistory()
+
         var indexToRemove: Int? = null
         watchHistory.forEachIndexed { index, item ->
             if (item.videoId == videoId) indexToRemove = index
         }
-        if (indexToRemove != null) watchHistory.removeAt(indexToRemove!!)
-
-        watchHistory += watchHistoryItem
-
-        val json = gson.toJson(watchHistory)
-        editor.putString("watch_history", json).apply()
+        if (indexToRemove == null) return
+        watchHistory.removeAt(indexToRemove!!)
+        val json = mapper.writeValueAsString(watchHistory)
+        editor.putString("watch_history", json).commit()
     }
 
-    fun getWatchHistory(context: Context): ArrayList<WatchHistoryItem> {
-        val settings = getDefaultSharedPreferences(context)
-        val gson = Gson()
+    fun removeFromWatchHistory(position: Int) {
+        val watchHistory = getWatchHistory()
+        watchHistory.removeAt(position)
+
+        val json = mapper.writeValueAsString(watchHistory)
+        editor.putString("watch_history", json).commit()
+    }
+
+    fun getWatchHistory(): ArrayList<WatchHistoryItem> {
         val json: String = settings.getString("watch_history", "")!!
-        val type: Type = object : TypeToken<List<WatchHistoryItem?>?>() {}.type
+        val type = mapper.typeFactory.constructCollectionType(
+            List::class.java,
+            WatchHistoryItem::class.java
+        )
+
         return try {
-            gson.fromJson(json, type)
+            mapper.readValue(json, type)
         } catch (e: Exception) {
             arrayListOf()
         }
     }
 
-    fun saveWatchPosition(context: Context, videoId: String, position: Long) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-
-        val watchPositions = getWatchPositions(context)
+    fun saveWatchPosition(videoId: String, position: Long) {
+        val watchPositions = getWatchPositions()
         val watchPositionItem = WatchPosition(videoId, position)
 
         var indexToRemove: Int? = null
@@ -184,15 +200,12 @@ object PreferenceHelper {
 
         watchPositions += watchPositionItem
 
-        val gson = Gson()
-        val json = gson.toJson(watchPositions)
+        val json = mapper.writeValueAsString(watchPositions)
         editor.putString("watch_positions", json).commit()
     }
 
-    fun removeWatchPosition(context: Context, videoId: String) {
-        val editor = getDefaultSharedPreferencesEditor(context)
-
-        val watchPositions = getWatchPositions(context)
+    fun removeWatchPosition(videoId: String) {
+        val watchPositions = getWatchPositions()
 
         var indexToRemove: Int? = null
         watchPositions.forEachIndexed { index, item ->
@@ -201,28 +214,56 @@ object PreferenceHelper {
 
         if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
 
-        val gson = Gson()
-        val json = gson.toJson(watchPositions)
+        val json = mapper.writeValueAsString(watchPositions)
         editor.putString("watch_positions", json).commit()
     }
 
-    fun getWatchPositions(context: Context): ArrayList<WatchPosition> {
-        val settings = getDefaultSharedPreferences(context)
-        val gson = Gson()
+    fun getWatchPositions(): ArrayList<WatchPosition> {
         val json: String = settings.getString("watch_positions", "")!!
-        val type: Type = object : TypeToken<List<WatchPosition?>?>() {}.type
+        val type = mapper.typeFactory.constructCollectionType(
+            List::class.java,
+            WatchPosition::class.java
+        )
+
         return try {
-            gson.fromJson(json, type)
+            mapper.readValue(json, type)
         } catch (e: Exception) {
             arrayListOf()
         }
     }
 
-    private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun setLatestVideoId(videoId: String) {
+        editor.putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
     }
 
-    private fun getDefaultSharedPreferencesEditor(context: Context): SharedPreferences.Editor {
-        return getDefaultSharedPreferences(context).edit()
+    fun getLatestVideoId(): String {
+        return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
+    }
+
+    fun saveErrorLog(log: String) {
+        editor.putString(PreferenceKeys.ERROR_LOG, log).commit()
+    }
+
+    fun getErrorLog(): String {
+        return getString(PreferenceKeys.ERROR_LOG, "")
+    }
+
+    fun getLocalSubscriptions(): List<String> {
+        val json = settings.getString(PreferenceKeys.LOCAL_SUBSCRIPTIONS, "")
+        return try {
+            val type = object : TypeReference<List<String>>() {}
+            mapper.readValue(json, type)
+        } catch (e: Exception) {
+            listOf()
+        }
+    }
+
+    fun setLocalSubscriptions(channels: List<String>) {
+        val json = mapper.writeValueAsString(channels)
+        editor.putString(PreferenceKeys.LOCAL_SUBSCRIPTIONS, json).commit()
+    }
+
+    private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(context)
     }
 }

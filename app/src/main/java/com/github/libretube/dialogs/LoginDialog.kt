@@ -79,11 +79,10 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 } else if (response.token != null) {
                     Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
-                    PreferenceHelper.setToken(requireContext(), response.token!!)
-                    PreferenceHelper.setUsername(requireContext(), login.username!!)
-                    val restartDialog = RequireRestartDialog()
-                    restartDialog.show(parentFragmentManager, "RequireRestartDialog")
+                    PreferenceHelper.setToken(response.token!!)
+                    PreferenceHelper.setUsername(login.username!!)
                     dialog?.dismiss()
+                    activity?.recreate()
                 }
             }
         }
@@ -112,8 +111,8 @@ class LoginDialog : DialogFragment() {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                 } else if (response.token != null) {
                     Toast.makeText(context, R.string.registered, Toast.LENGTH_SHORT).show()
-                    PreferenceHelper.setToken(requireContext(), response.token!!)
-                    PreferenceHelper.setUsername(requireContext(), login.username!!)
+                    PreferenceHelper.setToken(response.token!!)
+                    PreferenceHelper.setUsername(login.username!!)
                     dialog?.dismiss()
                 }
             }

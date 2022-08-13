@@ -6,21 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.dialogs.CreatePlaylistDialog
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
-class LibraryFragment : Fragment() {
+class LibraryFragment : BaseFragment() {
 
     private val TAG = "LibraryFragment"
     lateinit var token: String
@@ -43,12 +45,12 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.playlistRecView.layoutManager = LinearLayoutManager(view.context)
-        token = PreferenceHelper.getToken(requireContext())
+        binding.playlistRecView.layoutManager = LinearLayoutManager(requireContext())
+        token = PreferenceHelper.getToken()
 
         // hide watch history button of history disabled
         val watchHistoryEnabled =
-            PreferenceHelper.getBoolean(requireContext(), "watch_history_toggle", true)
+            PreferenceHelper.getBoolean(PreferenceKeys.WATCH_HISTORY_TOGGLE, true)
         if (!watchHistoryEnabled) {
             binding.showWatchHistory.visibility = View.GONE
         } else {
@@ -58,8 +60,7 @@ class LibraryFragment : Fragment() {
         }
 
         if (token != "") {
-            binding.boogh.visibility = View.GONE
-            binding.textLike.visibility = View.GONE
+            binding.loginOrRegister.visibility = View.GONE
             fetchPlaylists()
             binding.playlistRefresh.isEnabled = true
             binding.playlistRefresh.setOnRefreshListener {
@@ -67,7 +68,7 @@ class LibraryFragment : Fragment() {
             }
             binding.createPlaylist.setOnClickListener {
                 val newFragment = CreatePlaylistDialog()
-                newFragment.show(childFragmentManager, "Create Playlist")
+                newFragment.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
             }
         } else {
             binding.playlistRefresh.isEnabled = false
@@ -78,7 +79,7 @@ class LibraryFragment : Fragment() {
     override fun onResume() {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = if (Globals.isMiniPlayerVisible) 180 else 64
+        layoutParams.bottomMargin = if (Globals.MINI_PLAYER_VISIBLE) 180 else 64
         binding.createPlaylist.layoutParams = layoutParams
         super.onResume()
     }
@@ -102,35 +103,36 @@ class LibraryFragment : Fragment() {
                     binding.playlistRefresh.isRefreshing = false
                 }
                 if (response.isNotEmpty()) {
-                    runOnUiThread {
-                        binding.boogh.visibility = View.GONE
-                        binding.textLike.visibility = View.GONE
-                    }
+                    binding.loginOrRegister.visibility = View.GONE
+
                     val playlistsAdapter = PlaylistsAdapter(
                         response.toMutableList(),
+                        childFragmentManager,
                         requireActivity()
                     )
+
+                    // listen for playlists to become deleted
+                    playlistsAdapter.registerAdapterDataObserver(object :
+                            RecyclerView.AdapterDataObserver() {
+                            override fun onChanged() {
+                                Log.e(TAG, playlistsAdapter.itemCount.toString())
+                                if (playlistsAdapter.itemCount == 0) {
+                                    binding.loginOrRegister.visibility = View.VISIBLE
+                                }
+                                super.onChanged()
+                            }
+                        })
+
                     binding.playlistRecView.adapter = playlistsAdapter
                 } else {
                     runOnUiThread {
-                        binding.boogh.apply {
-                            visibility = View.VISIBLE
-                            setImageResource(R.drawable.ic_list)
-                        }
-                        binding.textLike.apply {
-                            visibility = View.VISIBLE
-                            text = getString(R.string.emptyList)
-                        }
+                        binding.loginOrRegister.visibility = View.VISIBLE
+                        binding.boogh.setImageResource(R.drawable.ic_list)
+                        binding.textLike.text = getString(R.string.emptyList)
                     }
                 }
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

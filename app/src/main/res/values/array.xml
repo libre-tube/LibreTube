@@ -462,10 +462,13 @@
         <item>Arabic</item>
         <item>Azerbaijani</item>
         <item>Basque</item>
+        <item>Catalan</item>
         <item>Chinese (simplified)</item>
+        <item>Chinese (traditional)</item>
         <item>Czech</item>
         <item>Danish</item>
         <item>English</item>
+        <item>Filipino</item>
         <item>Finnish</item>
         <item>French</item>
         <item>German</item>
@@ -486,10 +489,14 @@
         <item>Polish</item>
         <item>Portuguese</item>
         <item>Portuguese (Brazil)</item>
+        <item>Romanian</item>
         <item>Russian</item>
+        <item>Slovak</item>
         <item>Sorani</item>
         <item>Spanish</item>
+        <item>Thai</item>
         <item>Turkish</item>
+        <item>Turkmen</item>
         <item>Ukrainian</item>
     </string-array>
 
@@ -498,10 +505,13 @@
         <item>ar</item>
         <item>az</item>
         <item>eu</item>
-        <item>zh</item>
+        <item>ca</item>
+        <item>zh-Hans</item>
+        <item>zh-Hant</item>
         <item>cs</item>
         <item>da</item>
         <item>en</item>
+        <item>fil</item>
         <item>fi</item>
         <item>fr</item>
         <item>de</item>
@@ -522,10 +532,14 @@
         <item>pl</item>
         <item>pt</item>
         <item>pt-rBR</item>
+        <item>ro</item>
         <item>ru</item>
+        <item>sk</item>
         <item>ckb</item>
         <item>es</item>
+        <item>th</item>
         <item>tr</item>
+        <item>tk</item>
         <item>uk</item>
     </string-array>
 
@@ -581,7 +595,7 @@
         <item>144p</item>
     </string-array>
     <string-array name="defresValue">
-        <item>hls</item>
+        <item></item>
         <item>1080p</item>
         <item>720p</item>
         <item>480p</item>
@@ -608,7 +622,7 @@
         <item>@string/birdIcon</item>
     </string-array>
     <string-array name="iconsValue">
-        <item>activities.MainActivity</item>
+        <item>MainActivity</item>
         <item>IconLegacy</item>
         <item>IconGradient</item>
         <item>IconFire</item>
@@ -635,17 +649,19 @@
         <item>1.25x</item>
         <item>1.5x</item>
         <item>2x</item>
+        <item>3x</item>
         <item>4x</item>
     </string-array>
     <string-array name="playbackSpeedValues">
-        <item>0.25F</item>
-        <item>0.5F</item>
-        <item>0.75F</item>
-        <item>1F</item>
-        <item>1.25F</item>
-        <item>1.5F</item>
-        <item>2F</item>
-        <item>4F</item>
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>1</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 
     <string-array name="downloadLocation">
@@ -676,9 +692,14 @@
         <item>450</item>
     </string-array>
 
-    <string-array name="playerVideoFormats">
+    <string-array name="playerVideoFormat">
         <item>WEBM</item>
         <item>MPEG_4</item>
+    </string-array>
+
+    <string-array name="playerVideoFormatValues">
+        <item>webm</item>
+        <item>mpeg</item>
     </string-array>
 
     <string-array name="seekIncrement">
@@ -717,6 +738,112 @@
         <item>always</item>
         <item>selected</item>
         <item>never</item>
+    </string-array>
+
+    <string-array name="playerAudioFormat">
+        <item>@string/all</item>
+        <item>OPUS</item>
+        <item>M4A</item>
+    </string-array>
+
+    <string-array name="playerAudioFormatValues">
+        <item>all</item>
+        <item>webm</item>
+        <item>mp4</item>
+    </string-array>
+
+    <string-array name="audioQuality">
+        <item>@string/best_quality</item>
+        <item>@string/worst_quality</item>
+    </string-array>
+
+    <string-array name="audioQualityValues">
+        <item>best</item>
+        <item>worst</item>
+    </string-array>
+
+    <string-array name="checkingFrequency">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+        <item>2 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+    </string-array>
+
+    <string-array name="checkingFrequencyValues">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>360</item>
+        <item>720</item>
+    </string-array>
+
+    <string-array name="sortOptions">
+        <item>@string/most_recent</item>
+        <item>@string/least_recent</item>
+        <item>@string/most_views</item>
+        <item>@string/least_views</item>
+        <item>@string/channel_name_az</item>
+        <item>@string/channel_name_za</item>
+    </string-array>
+
+    <string-array name="sortOptionsValues">
+        <item>most_recent</item>
+        <item>least_recent</item>
+        <item>most_views</item>
+        <item>least_views</item>
+        <item>channel_name_az</item>
+        <item>channel_name_za</item>
+    </string-array>
+
+    <string-array name="requiredNetwork">
+        <item>@string/network_all</item>
+        <item>@string/network_wifi</item>
+        <item>@string/network_metered</item>
+    </string-array>
+
+    <string-array name="requiredNetworkValues">
+        <item>all</item>
+        <item>wifi</item>
+        <item>metered</item>
+    </string-array>
+
+    <string-array name="historySize">
+        <item>20</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>@string/unlimited</item>
+    </string-array>
+
+    <string-array name="historySizeValues">
+        <item>20</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>unlimited</item>
+    </string-array>
+
+    <string-array name="breakReminder">
+        <item>@string/disabled</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>60 min</item>
+        <item>90 min</item>
+        <item>120 min</item>
+    </string-array>
+
+    <string-array name="breakReminderValues">
+        <item>disabled</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+        <item>120</item>
     </string-array>
 
 </resources>

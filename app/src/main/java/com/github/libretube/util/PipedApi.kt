@@ -66,6 +66,9 @@ interface PipedApi {
     @GET("channel/{channelId}")
     suspend fun getChannel(@Path("channelId") channelId: String): Channel
 
+    @GET("user/{name}")
+    suspend fun getChannelByName(@Path("name") channelName: String): Channel
+
     @GET("nextpage/channel/{channelId}")
     suspend fun getChannelNextPage(
         @Path("channelId") channelId: String,
@@ -96,6 +99,9 @@ interface PipedApi {
     @GET("feed")
     suspend fun getFeed(@Query("authToken") token: String?): List<StreamItem>
 
+    @GET("feed/unauthenticated")
+    suspend fun getUnauthenticatedFeed(@Query("channels") channels: String): List<StreamItem>
+
     @GET("subscribed")
     suspend fun isSubscribed(
         @Query("channelId") channelId: String,
@@ -104,6 +110,9 @@ interface PipedApi {
 
     @GET("subscriptions")
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
+
+    @GET("subscriptions/unauthenticated")
+    suspend fun unauthenticatedSubscriptions(@Query("channels") channels: String): List<Subscription>
 
     @POST("subscribe")
     suspend fun subscribe(

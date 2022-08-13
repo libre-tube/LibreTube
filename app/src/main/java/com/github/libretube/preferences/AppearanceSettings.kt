@@ -1,16 +1,21 @@
 package com.github.libretube.preferences
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.preference.ListPreference
-import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.ThemeHelper
+import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.color.DynamicColors
 
-class AppearanceSettings : PreferenceFragmentCompat() {
+class AppearanceSettings : MaterialPreferenceFragment() {
     private val TAG = "AppearanceSettings"
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
@@ -18,52 +23,59 @@ class AppearanceSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.appearance))
 
-        val themeToggle = findPreference<ListPreference>("theme_toggle")
+        val themeToggle = findPreference<ListPreference>(PreferenceKeys.THEME_MODE)
         themeToggle?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
-        val pureTheme = findPreference<SwitchPreferenceCompat>("pure_theme")
+        val pureTheme = findPreference<SwitchPreferenceCompat>(PreferenceKeys.PURE_THEME)
         pureTheme?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
-        val accentColor = findPreference<ListPreference>("accent_color")
+        val accentColor = findPreference<ListPreference>(PreferenceKeys.ACCENT_COLOR)
         updateAccentColorValues(accentColor!!)
         accentColor.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
-        val iconChange = findPreference<ListPreference>("icon_change")
+        val iconChange = findPreference<ListPreference>(PreferenceKeys.APP_ICON)
         iconChange?.setOnPreferenceChangeListener { _, newValue ->
             ThemeHelper.changeIcon(requireContext(), newValue.toString())
             true
         }
 
-        val gridColumns = findPreference<ListPreference>("grid")
-        gridColumns?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            true
-        }
-
-        val hideTrending = findPreference<SwitchPreferenceCompat>("hide_trending_page")
-        hideTrending?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            true
-        }
-
-        val labelVisibilityMode = findPreference<ListPreference>("label_visibility")
+        val labelVisibilityMode = findPreference<ListPreference>(PreferenceKeys.LABEL_VISIBILITY)
         labelVisibilityMode?.setOnPreferenceChangeListener { _, _ ->
             val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, "RequireRestartDialog")
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            true
+        }
+
+        val systemCaptionStyle =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
+        val captionSettings = findPreference<Preference>(PreferenceKeys.CAPTION_SETTINGS)
+
+        captionSettings?.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
+        systemCaptionStyle?.setOnPreferenceChangeListener { _, newValue ->
+            captionSettings?.isVisible = newValue as Boolean
+            true
+        }
+
+        captionSettings?.setOnPreferenceClickListener {
+            try {
+                val captionSettingsIntent = Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+                startActivity(captionSettingsIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
+            }
             true
         }
     }

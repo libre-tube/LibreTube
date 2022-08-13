@@ -1,6 +1,9 @@
+import java.time.Instant
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -10,8 +13,8 @@ android {
         applicationId 'com.github.libretube'
         minSdk 21
         targetSdk 31
-        versionCode 13
-        versionName '0.3.3'
+        versionCode 16
+        versionName '0.4.2'
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         resValue "string", "app_name", "LibreTube"
@@ -19,6 +22,16 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    applicationVariants.all { variant ->
+        // use the date as version for debug builds
+        if (variant.name == 'debug') {
+            variant.outputs.each { output ->
+                output.versionCodeOverride = getUnixTime()
+                output.versionNameOverride = getUnixTime()
+            }
+        }
     }
 
     buildTypes {
@@ -68,6 +81,7 @@ dependencies {
     implementation libs.androidx.navigation.fragment
     implementation libs.androidx.navigation.ui
     implementation libs.androidx.preference
+    implementation libs.androidx.work.runtime
 
     androidTestImplementation libs.androidx.test.junit
     androidTestImplementation libs.androidx.test.espressoCore
@@ -79,15 +93,21 @@ dependencies {
     implementation(libs.exoplayer.extension.cronet) { exclude group: 'com.google.android.gms' }
     implementation libs.exoplayer.extension.mediasession
 
-    implementation libs.square.picasso
     implementation libs.square.retrofit
     implementation libs.square.retrofit.converterJackson
     // Do not update jackson annotations! It does not supports < API 26.
     implementation libs.jacksonAnnotations
 
-    implementation libs.mobileffmpeg
-
     coreLibraryDesugaring libs.desugaring
     implementation libs.cronet.embedded
-    implementation libs.gson
+    implementation libs.cronet.okhttp
+    implementation libs.coil
+
+    implementation libs.lifecycle.viewmodel
+    implementation libs.lifecycle.runtime
+    implementation libs.lifecycle.livedata
+}
+
+static def getUnixTime() {
+    return Instant.now().getEpochSecond()
 }

@@ -2,18 +2,17 @@ package com.github.libretube.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
+import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.snackbar.Snackbar
 
-class NoInternetActivity : AppCompatActivity() {
+class NoInternetActivity : BaseActivity() {
     private lateinit var binding: ActivityNointernetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeHelper.updateTheme(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityNointernetBinding.inflate(layoutInflater)

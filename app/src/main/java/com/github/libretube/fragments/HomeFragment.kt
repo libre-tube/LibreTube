@@ -6,19 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     private val TAG = "HomeFragment"
     private lateinit var binding: FragmentHomeBinding
     private lateinit var region: String
@@ -41,12 +42,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val grid = PreferenceHelper.getString(
-            requireContext(),
-            "grid",
+            PreferenceKeys.GRID_COLUMNS,
             resources.getInteger(R.integer.grid_items).toString()
         )!!
 
-        val regionPref = PreferenceHelper.getString(requireContext(), "region", "sys")!!
+        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")!!
 
         // get the system default country if auto region selected
         region = if (regionPref == "sys") {
@@ -87,11 +87,5 @@ class HomeFragment : Fragment() {
             }
         }
         run()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

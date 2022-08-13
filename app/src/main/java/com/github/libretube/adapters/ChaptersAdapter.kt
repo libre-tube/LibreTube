@@ -1,18 +1,21 @@
 package com.github.libretube.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.obj.ChapterSegment
+import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ThemeHelper
 import com.google.android.exoplayer2.ExoPlayer
-import com.squareup.picasso.Picasso
 
 class ChaptersAdapter(
     private val chapters: List<ChapterSegment>,
     private val exoPlayer: ExoPlayer
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     val TAG = "ChaptersAdapter"
+    private var selectedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChaptersViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -23,14 +26,28 @@ class ChaptersAdapter(
     override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
         val chapter = chapters[position]
         holder.binding.apply {
-            Picasso.get().load(chapter.image).fit().centerCrop().into(chapterImage)
+            ConnectionHelper.loadImage(chapter.image, chapterImage)
             chapterTitle.text = chapter.title
 
+            if (selectedPosition == position) {
+                // get the color for highlighted controls
+                val color =
+                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+                chapterLL.setBackgroundColor(color)
+            } else chapterLL.setBackgroundColor(Color.TRANSPARENT)
             root.setOnClickListener {
+                updateSelectedPosition(position)
                 val chapterStart = chapter.start!! * 1000 // s -> ms
                 exoPlayer.seekTo(chapterStart)
             }
         }
+    }
+
+    fun updateSelectedPosition(newPosition: Int) {
+        val oldPosition = selectedPosition
+        selectedPosition = newPosition
+        notifyItemChanged(oldPosition)
+        notifyItemChanged(newPosition)
     }
 
     override fun getItemCount(): Int {

@@ -7,6 +7,4 @@ data class CommentsPage(
     val comments: MutableList<Comment> = arrayListOf(),
     val disabled: Boolean? = null,
     val nextpage: String? = ""
-) {
-    constructor() : this(arrayListOf(), null, "")
-}
+)

@@ -6,20 +6,38 @@
 
         <ListPreference
             android:icon="@drawable/ic_hd"
-            app:defaultValue="hls"
+            app:defaultValue=""
             app:entries="@array/defres"
             app:entryValues="@array/defresValue"
-            app:key="default_resolution"
+            app:key="default_res"
             app:title="@string/defres"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
+            android:icon="@drawable/ic_headphones"
+            app:defaultValue="best"
+            app:entries="@array/audioQuality"
+            app:entryValues="@array/audioQualityValues"
+            app:key="player_audio_quality"
+            app:title="@string/playerAudioQuality"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
             android:icon="@drawable/ic_videocam"
-            app:defaultValue="WEBM"
-            app:entries="@array/playerVideoFormats"
-            app:entryValues="@array/playerVideoFormats"
+            app:defaultValue="webm"
+            app:entries="@array/playerVideoFormat"
+            app:entryValues="@array/playerVideoFormatValues"
             app:key="player_video_format"
             app:title="@string/playerVideoFormat"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_music"
+            app:defaultValue="all"
+            app:entries="@array/playerAudioFormat"
+            app:entryValues="@array/playerAudioFormatValues"
+            app:key="player_audio_format"
+            app:title="@string/playerAudioFormat"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -28,7 +46,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_speed"
-            app:defaultValue="1F"
+            app:defaultValue="1"
             app:entries="@array/playbackSpeed"
             app:entryValues="@array/playbackSpeedValues"
             app:key="playback_speed"
@@ -52,6 +70,19 @@
             app:key="buffering_goal"
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />
+
+        <ListPreference
+            android:defaultValue=""
+            android:icon="@drawable/ic_caption"
+            app:key="default_subtitle"
+            app:title="@string/default_subtitle_language" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_next"
+            android:summary="@string/skip_buttons_summary"
+            app:key="skip_buttons"
+            app:title="@string/skip_buttons" />
 
     </PreferenceCategory>
 
@@ -85,6 +116,19 @@
             app:entryValues="@array/fullscreenOrientationValues"
             app:key="fullscreen_orientation"
             app:title="@string/fullscreen_orientation"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/background_mode">
+
+        <ListPreference
+            android:icon="@drawable/ic_speed"
+            app:defaultValue="1"
+            app:entries="@array/playbackSpeed"
+            app:entryValues="@array/playbackSpeedValues"
+            app:key="background_playback_speed"
+            app:title="@string/playback_speed"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>

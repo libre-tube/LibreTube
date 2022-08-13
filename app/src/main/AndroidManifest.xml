@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,7 +8,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
@@ -20,17 +23,25 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Purple">
-        <activity
-            android:name=".activities.Player"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
+        android:theme="@style/Theme.Purple.Pure"
+        tools:targetApi="n">
+
         <activity
             android:name=".activities.NoInternetActivity"
             android:label="@string/noInternet" />
+
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/settings" />
+
+        <activity
+            android:name=".activities.AboutActivity"
+            android:label="@string/settings" />
+
+        <activity
+            android:name=".activities.CommunityActivity"
+            android:label="@string/settings" />
+
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
@@ -281,8 +292,17 @@
         <service
             android:name=".services.ClosingService"
             android:enabled="true"
-            android:exported="false"
-            android:stopWithTask="false" />
+            android:exported="false" />
+
+        <service
+            android:name=".services.UpdateService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name=".services.BackgroundMode"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

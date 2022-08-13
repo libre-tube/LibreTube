@@ -1,14 +1,17 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
+import android.app.NotificationManager
 import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.github.libretube.Globals
+import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.BackgroundMode
+import com.github.libretube.util.BackgroundHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -16,24 +19,36 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  *
  * Needs the [videoId] to load the content from the right video.
  */
-class VideoOptionsDialog(private val videoId: String, context: Context) : DialogFragment() {
-    /**
-     * List that stores the different menu options. In the future could be add more options here.
-     */
-    private val optionsList = listOf(
-        context.getString(R.string.playOnBackground),
-        context.getString(R.string.addToPlaylist),
-        context.getString(R.string.share)
-    )
+class VideoOptionsDialog(
+    private val videoId: String
+) : DialogFragment() {
+    private val TAG = "VideoOptionsDialog"
 
     /**
      * Dialog that returns a [MaterialAlertDialogBuilder] showing a menu of options.
      */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
-            .setNegativeButton(R.string.cancel) { dialog, _ ->
-                dialog.dismiss()
+        /**
+         * List that stores the different menu options. In the future could be add more options here.
+         */
+        val optionsList = mutableListOf(
+            context?.getString(R.string.playOnBackground),
+            context?.getString(R.string.addToPlaylist),
+            context?.getString(R.string.share)
+        )
+
+        /**
+         * Check whether the player is running by observing the notification
+         */
+        val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.activeNotifications.forEach {
+            if (it.id == PLAYER_NOTIFICATION_ID) {
+                optionsList += context?.getString(R.string.add_to_queue)
             }
+        }
+
+        return MaterialAlertDialogBuilder(requireContext())
+            .setNegativeButton(R.string.cancel, null)
             .setAdapter(
                 ArrayAdapter(
                     requireContext(),
@@ -41,23 +56,23 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     optionsList
                 )
             ) { _, which ->
-                // For now, this checks the position of the option with the position that is in the
-                // list. I don't like it, but we will do like this for now.
                 when (optionsList[which]) {
-                    // This for example will be the "Background mode" option
+                    // Start the background mode
                     context?.getString(R.string.playOnBackground) -> {
-                        BackgroundMode.getInstance()
-                            .playOnBackgroundMode(requireContext(), videoId)
+                        BackgroundHelper.playOnBackground(requireContext(), videoId)
                     }
                     // Add Video to Playlist Dialog
                     context?.getString(R.string.addToPlaylist) -> {
-                        val token = PreferenceHelper.getToken(requireContext())
+                        val token = PreferenceHelper.getToken()
                         if (token != "") {
-                            val newFragment = AddtoPlaylistDialog()
+                            val newFragment = AddToPlaylistDialog()
                             val bundle = Bundle()
                             bundle.putString("videoId", videoId)
                             newFragment.arguments = bundle
-                            newFragment.show(parentFragmentManager, "AddToPlaylist")
+                            newFragment.show(
+                                parentFragmentManager,
+                                AddToPlaylistDialog::class.java.name
+                            )
                         } else {
                             Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                         }
@@ -65,14 +80,13 @@ class VideoOptionsDialog(private val videoId: String, context: Context) : Dialog
                     context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(videoId, false)
                         // using parentFragmentManager is important here
-                        shareDialog.show(parentFragmentManager, "ShareDialog")
+                        shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
+                    }
+                    context?.getString(R.string.add_to_queue) -> {
+                        Globals.playingQueue += videoId
                     }
                 }
             }
             .show()
-    }
-
-    companion object {
-        const val TAG = "VideoOptionsDialog"
     }
 }

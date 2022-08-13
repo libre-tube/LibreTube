@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,10 +15,11 @@
         android:visibility="gone" />
 
     <RelativeLayout
-        android:id="@+id/loginOrRegister"
+        android:id="@+id/emptyFeed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/boogh"
@@ -25,7 +27,7 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_login" />
+            android:src="@drawable/ic_list" />
 
         <TextView
             android:id="@+id/textLike"
@@ -35,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="10dp"
             android:gravity="center"
-            android:text="@string/please_login"
+            android:text="@string/emptyList"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -53,53 +55,93 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/toggle_subs"
+                    style="@style/Widget.Material3.CardView.Elevated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:visibility="gone">
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="20dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/subscriptions" />
+                        android:layout_margin="8dp">
 
-                    <ImageView
-                        android:id="@+id/toggle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_arrow_down" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:text="@string/subscriptions"
+                            android:textSize="17sp" />
 
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="3dp"
+                            android:src="@drawable/ic_arrow_up_down" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <RelativeLayout
+                    android:id="@+id/sub_channels_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants">
+                    android:descendantFocusability="blocksDescendants"
+                    android:visibility="gone">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/sub_channels"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/sub_feed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:nestedScrollingEnabled="false" />
+
                 </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/sub_feed_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/sortTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginBottom="5dp"
+                        android:drawablePadding="5dp"
+                        android:paddingHorizontal="10dp"
+                        android:text="@string/most_recent"
+                        android:textSize="16sp"
+                        app:drawableEndCompat="@drawable/ic_arrow_downward" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="blocksDescendants">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/sub_feed"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:nestedScrollingEnabled="false" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </com.github.libretube.views.CustomSwipeToRefresh>

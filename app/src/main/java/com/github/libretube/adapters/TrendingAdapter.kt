@@ -1,96 +1,73 @@
 package com.github.libretube.adapters
 
-import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
-import com.github.libretube.fragments.PlayerFragment
+import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
+import com.github.libretube.util.setWatchProgressLength
+import com.github.libretube.util.toID
 
 class TrendingAdapter(
-    private val videoFeed: List<StreamItem>,
-    private val childFragmentManager: FragmentManager
-) : RecyclerView.Adapter<TrendingViewHolder>() {
+    private val streamItems: List<StreamItem>,
+    private val childFragmentManager: FragmentManager,
+    private val showAllAtOne: Boolean = true
+) : RecyclerView.Adapter<SubscriptionViewHolder>() {
     private val TAG = "TrendingAdapter"
 
+    var index = 10
+
     override fun getItemCount(): Int {
-        return videoFeed.size
+        return if (showAllAtOne) streamItems.size
+        else if (index >= streamItems.size) streamItems.size - 1
+        else index
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
+    fun updateItems() {
+        index += 10
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = TrendingRowBinding.inflate(layoutInflater, parent, false)
-        return TrendingViewHolder(binding)
+        return SubscriptionViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
-        val trending = videoFeed[position]
+    override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
+        val trending = streamItems[position]
         holder.binding.apply {
             textViewTitle.text = trending.title
             textViewChannel.text =
                 trending.uploaderName + " • " +
                 trending.views.formatShort() + " • " +
                 DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
-            if (trending.duration != -1L) {
-                thumbnailDuration.text = DateUtils.formatElapsedTime(trending.duration!!)
-            } else {
-                thumbnailDuration.text = root.context.getString(R.string.live)
-                thumbnailDuration.setBackgroundColor(R.attr.colorPrimaryDark)
-            }
+            thumbnailDuration.setFormattedDuration(trending.duration!!)
             channelImage.setOnClickListener {
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("channel_id" to trending.uploaderUrl)
-                activity.navController.navigate(R.id.channelFragment, bundle)
-                try {
-                    val mainMotionLayout =
-                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
-                    if (mainMotionLayout.progress == 0.toFloat()) {
-                        mainMotionLayout.transitionToEnd()
-                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            .transitionToEnd()
-                    }
-                } catch (e: Exception) {
-                }
+                NavigationHelper.navigateChannel(root.context, trending.uploaderUrl)
             }
-            if (trending.thumbnail!!.isNotEmpty()) {
-                Picasso.get().load(trending.thumbnail).into(thumbnail)
-            }
-            if (trending.uploaderAvatar!!.isNotEmpty()) {
-                Picasso.get().load(trending.uploaderAvatar).into(channelImage)
-            }
-
+            ConnectionHelper.loadImage(trending.thumbnail, thumbnail)
+            ConnectionHelper.loadImage(trending.uploaderAvatar, channelImage)
             root.setOnClickListener {
-                var bundle = Bundle()
-                bundle.putString("videoId", trending.url!!.replace("/watch?v=", ""))
-                var frag = PlayerFragment()
-                frag.arguments = bundle
-                val activity = root.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .remove(PlayerFragment())
-                    .commit()
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, frag)
-                    .commitNow()
+                NavigationHelper.navigateVideo(root.context, trending.url)
             }
+            val videoId = trending.url!!.toID()
             root.setOnLongClickListener {
-                val videoId = trending.url!!.replace("/watch?v=", "")
-                VideoOptionsDialog(videoId, root.context)
-                    .show(childFragmentManager, VideoOptionsDialog.TAG)
+                VideoOptionsDialog(videoId)
+                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
                 true
             }
+            watchProgress.setWatchProgressLength(videoId, trending.duration!!)
         }
     }
 }
 
-class TrendingViewHolder(val binding: TrendingRowBinding) : RecyclerView.ViewHolder(binding.root)
+class SubscriptionViewHolder(val binding: TrendingRowBinding) :
+    RecyclerView.ViewHolder(binding.root)

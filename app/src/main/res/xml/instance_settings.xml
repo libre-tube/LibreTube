@@ -59,10 +59,15 @@
     <PreferenceCategory app:title="@string/restore">
 
         <Preference
-            android:icon="@drawable/ic_upload"
+            android:icon="@drawable/ic_download_filled"
             android:summary="@string/import_from_yt_summary"
             app:key="import_from_yt"
             app:title="@string/import_from_yt" />
+
+        <Preference
+            android:icon="@drawable/ic_upload"
+            app:key="export_subs"
+            app:title="@string/export_subscriptions" />
 
     </PreferenceCategory>
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/location">
+
+        <ListPreference
+            android:icon="@drawable/ic_region"
+            app:defaultValue="sys"
+            app:entries="@array/regions"
+            app:entryValues="@array/regionsValue"
+            app:key="region"
+            app:title="@string/region"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_translate"
+            app:defaultValue="sys"
+            app:entries="@array/languages"
+            app:entryValues="@array/languagesValue"
+            app:key="language"
+            app:title="@string/changeLanguage"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/customization">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_screen_rotation"
+            app:key="auto_rotation"
+            app:title="@string/auto_rotation" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_list"
+            app:key="related_streams_toggle"
+            app:summary="@string/related_streams_summary"
+            app:title="@string/related_streams" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/behavior">
+
+        <ListPreference
+            android:icon="@drawable/ic_home"
+            app:defaultValue="home"
+            app:entries="@array/tabs"
+            app:entryValues="@array/tabsValue"
+            app:key="default_tab"
+            app:title="@string/defaultTab"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_trending"
+            app:defaultValue="false"
+            app:key="hide_trending_page"
+            app:title="@string/hideTrendingPage"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/misc">
+
+        <ListPreference
+            android:icon="@drawable/ic_time"
+            app:defaultValue="disabled"
+            app:entries="@array/breakReminder"
+            app:entryValues="@array/breakReminderValues"
+            app:key="break_reminder"
+            app:title="@string/break_reminder"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

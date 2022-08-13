@@ -4,8 +4,25 @@
 
     <item
         android:id="@+id/action_search"
+        android:focusableInTouchMode="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search_hint"
-        app:showAsAction="always" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_community"
+        android:title="@string/community"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about"
+        app:showAsAction="never" />
 
 </menu>

@@ -2,13 +2,12 @@ package com.github.libretube.preferences
 
 import android.os.Bundle
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.dialogs.RequireRestartDialog
+import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class AdvancedSettings : PreferenceFragmentCompat() {
+class AdvancedSettings : MaterialPreferenceFragment() {
     val TAG = "AdvancedSettings"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -17,22 +16,7 @@ class AdvancedSettings : PreferenceFragmentCompat() {
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.advanced))
 
-        // clear search history
-        val clearHistory = findPreference<Preference>("clear_history")
-        clearHistory?.setOnPreferenceClickListener {
-            PreferenceHelper.removePreference(requireContext(), "search_history")
-            true
-        }
-
-        // clear watch history and positions
-        val clearWatchHistory = findPreference<Preference>("clear_watch_history")
-        clearWatchHistory?.setOnPreferenceClickListener {
-            PreferenceHelper.removePreference(requireContext(), "watch_history")
-            PreferenceHelper.removePreference(requireContext(), "watch_positions")
-            true
-        }
-
-        val resetSettings = findPreference<Preference>("reset_settings")
+        val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
         resetSettings?.setOnPreferenceClickListener {
             showResetDialog()
             true
@@ -41,19 +25,18 @@ class AdvancedSettings : PreferenceFragmentCompat() {
 
     private fun showResetDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setPositiveButton(R.string.reset) { _, _ ->
-                // clear default preferences
-                PreferenceHelper.clearPreferences(requireContext())
-
-                // clear login token
-                PreferenceHelper.setToken(requireContext(), "")
-
-                val restartDialog = RequireRestartDialog()
-                restartDialog.show(childFragmentManager, "RequireRestartDialog")
-            }
-            .setNegativeButton(getString(R.string.cancel)) { _, _ -> }
             .setTitle(R.string.reset)
             .setMessage(R.string.reset_message)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.reset) { _, _ ->
+                // clear default preferences
+                PreferenceHelper.clearPreferences()
+
+                // clear login token
+                PreferenceHelper.setToken("")
+
+                activity?.recreate()
+            }
             .show()
     }
 }

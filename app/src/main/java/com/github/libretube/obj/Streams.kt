@@ -15,7 +15,7 @@ data class Streams(
     val dash: String?,
     val lbryId: String?,
     val uploaderVerified: Boolean?,
-    val duration: Int?,
+    val duration: Long?,
     val views: Long?,
     val likes: Long?,
     val dislikes: Long?,

@@ -10,6 +10,7 @@ object RetrofitInstance {
     val api: PipedApi by resettableLazy(lazyMgr) {
         Retrofit.Builder()
             .baseUrl(url)
+            .callFactory(CronetHelper.callFactory)
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
             .create(PipedApi::class.java)
@@ -17,6 +18,7 @@ object RetrofitInstance {
     val authApi: PipedApi by resettableLazy(lazyMgr) {
         Retrofit.Builder()
             .baseUrl(authUrl)
+            .callFactory(CronetHelper.callFactory)
             .addConverterFactory(JacksonConverterFactory.create())
             .build()
             .create(PipedApi::class.java)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/notifications">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_notification"
+            android:summary="@string/notify_new_streams_summary"
+            app:defaultValue="true"
+            app:key="notification_toggle"
+            app:title="@string/notify_new_streams" />
+
+        <ListPreference
+            android:icon="@drawable/ic_time"
+            app:defaultValue="60"
+            app:entries="@array/checkingFrequency"
+            app:entryValues="@array/checkingFrequencyValues"
+            app:key="checking_frequency"
+            app:title="@string/checking_frequency"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_signal"
+            app:defaultValue="all"
+            app:entries="@array/requiredNetwork"
+            app:entryValues="@array/requiredNetworkValues"
+            app:key="required_network"
+            app:title="@string/required_network"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

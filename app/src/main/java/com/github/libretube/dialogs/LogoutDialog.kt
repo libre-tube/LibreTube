@@ -19,13 +19,13 @@ class LogoutDialog : DialogFragment() {
             val builder = MaterialAlertDialogBuilder(it)
             binding = DialogLogoutBinding.inflate(layoutInflater)
 
-            val user = PreferenceHelper.getUsername(requireContext())
+            val user = PreferenceHelper.getUsername()
 
             binding.user.text =
                 binding.user.text.toString() + " (" + user + ")"
             binding.logout.setOnClickListener {
                 Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-                PreferenceHelper.setToken(requireContext(), "")
+                PreferenceHelper.setToken("")
                 dialog?.dismiss()
                 activity?.recreate()
             }

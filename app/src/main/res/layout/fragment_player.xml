@@ -41,8 +41,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
-                    android:text="Video Title"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:text="Video Title" />
 
 
                 <ImageView
@@ -68,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="10M views    2 days ago " />
+                    tools:text="10M views    2 days ago " />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:text="4.2K" />
+                        tools:text="4.2K" />
 
                     <ImageView
                         android:layout_width="12dp"
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:text="1.3K" />
+                        tools:text="1.3K" />
 
                 </LinearLayout>
 
@@ -185,14 +185,14 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/relPlayer_vlc"
+                        android:id="@+id/relPlayer_open"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="25dp"
                             android:padding="2dp"
-                            android:src="@drawable/ic_videocam" />
+                            android:src="@drawable/ic_open" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -264,8 +264,7 @@
                     android:layout_toEndOf="@+id/player_channelImage"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text=""
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
 
                 <com.google.android.material.button.MaterialButton
@@ -275,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:drawableLeft="@drawable/ic_bell"
+                    android:drawableStart="@drawable/ic_bell"
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
@@ -301,7 +300,7 @@
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="18dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
@@ -309,25 +308,22 @@
 
                         <TextView
                             android:id="@+id/commentsToggle_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
+                            android:layout_weight="1"
                             android:text="@string/comments"
-                            android:textSize="17sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="17sp" />
 
                         <ImageView
                             android:id="@+id/commentsToggle_imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginEnd="3dp"
-                            android:src="@drawable/ic_arrow_up_down"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:src="@drawable/ic_arrow_up_down" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -377,60 +373,15 @@
         app:layout_constraintTop_toTopOf="@id/main_container"
         app:show_buffering="when_playing">
 
-        <!-- double tap to rewind/forward overlay -->
-        <LinearLayout
-            android:id="@+id/doubleTapOverlayLL"
+        <com.github.libretube.views.DoubleTapOverlay
+            android:id="@+id/doubleTapOverlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="50dp">
-
-            <!-- double tap rewind btn -->
-            <FrameLayout
-                android:id="@+id/rewindFL"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".35">
-
-                <ImageButton
-                    android:id="@+id/rewindBTN"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?android:selectableItemBackgroundBorderless"
-                    android:clickable="false"
-                    android:src="@drawable/ic_rewind"
-                    android:visibility="invisible"
-                    app:tint="@android:color/white" />
-
-            </FrameLayout>
-
-            <!-- place holder for the center controls -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".30" />
-
-            <!-- double tap forward btn -->
-            <FrameLayout
-                android:id="@+id/forwardFL"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".35">
-
-                <ImageButton
-                    android:id="@+id/forwardBTN"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?android:selectableItemBackgroundBorderless"
-                    android:clickable="false"
-                    android:src="@drawable/ic_forward"
-                    android:visibility="invisible"
-                    app:tint="@android:color/white" />
-
-            </FrameLayout>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
 
     </com.github.libretube.views.CustomExoPlayerView>
+
 
     <ImageView
         android:id="@+id/close_imageView"
@@ -460,11 +411,12 @@
         android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="12dp"
         android:alpha="0"
         android:ellipsize="end"
         android:maxLines="1"
+        android:paddingVertical="15dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/play_imageView"
         app:layout_constraintEnd_toStartOf="@+id/play_imageView"

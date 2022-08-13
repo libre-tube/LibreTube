@@ -5,15 +5,6 @@
     <PreferenceCategory app:title="@string/downloads">
 
         <ListPreference
-            app:defaultValue=".mp4"
-            app:entries="@array/videoFormats"
-            app:entryValues="@array/videoFormatsValues"
-            app:icon="@drawable/ic_videocam"
-            app:key="video_format"
-            app:summary="@string/video_format_summary"
-            app:title="@string/video_format" />
-
-        <ListPreference
             android:defaultValue="downloads"
             android:entries="@array/downloadLocation"
             android:entryValues="@array/downloadLocationValues"
@@ -31,44 +22,23 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/search_history">
+    <PreferenceCategory app:title="@string/share">
 
         <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_history_filled"
-            app:key="search_history_toggle"
-            app:title="@string/search_history" />
-
-        <Preference
-            android:icon="@drawable/ic_trash"
-            app:key="clear_history"
-            app:title="@string/clear_history" />
+            app:defaultValue="true"
+            app:icon="@drawable/ic_time"
+            app:key="share_with_time_code"
+            app:title="@string/share_with_time" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/watch_history">
+    <PreferenceCategory app:title="@string/advanced">
 
         <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_time_outlined"
-            app:key="watch_history_toggle"
-            app:title="@string/watch_history" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_play_filled"
-            app:key="watch_position_toggle"
-            app:summary="@string/watch_positions_summary"
-            app:title="@string/watch_positions" />
-
-        <Preference
-            android:icon="@drawable/ic_trash"
-            app:key="clear_watch_history"
-            app:title="@string/clear_history" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory>
+            android:icon="@drawable/ic_data_saver"
+            android:summary="@string/data_saver_mode_summary"
+            app:key="data_saver_mode"
+            app:title="@string/data_saver_mode" />
 
         <Preference
             android:icon="@drawable/ic_reset"

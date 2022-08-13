@@ -35,29 +35,39 @@
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="3dp"
-            app:cardBackgroundColor="@color/duration_background_color"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="0dp">
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/thumbnail_duration"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="6dp"
-                android:paddingTop="2dp"
-                android:paddingEnd="6dp"
-                android:paddingBottom="2dp"
-                android:textColor="@color/duration_text_color"
-                android:textSize="11sp"
-                tools:text="05:36" />
+                android:layout_gravity="end"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardBackgroundColor="@color/duration_background_color"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
 
-        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/thumbnail_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:textColor="@color/duration_text_color"
+                    android:textSize="11sp"
+                    tools:text="05:36" />
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/watch_progress"
+                style="@style/WatchProgress" />
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -68,16 +78,16 @@
         android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteBTN"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/upload_date"
+        android:id="@+id/video_info"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteBTN"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toBottomOf="@id/video_title" />
 
@@ -88,7 +98,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/upload_date" />
+        app:layout_constraintTop_toBottomOf="@id/video_info" />
 
     <TextView
         android:id="@+id/channel_name"
@@ -100,7 +110,17 @@
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/channel_image"
-        app:layout_constraintTop_toBottomOf="@id/upload_date" />
+        app:layout_constraintTop_toBottomOf="@id/video_info" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/deleteBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

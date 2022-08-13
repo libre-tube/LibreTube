@@ -18,7 +18,7 @@ class RequireRestartDialog : DialogFragment() {
                     activity?.recreate()
                     ThemeHelper.restartMainActivity(requireContext())
                 }
-                .setNegativeButton(R.string.cancel) { _, _ -> }
+                .setNegativeButton(R.string.cancel, null)
                 .create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

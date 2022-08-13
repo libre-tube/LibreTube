@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="100dp"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
     android:background="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:paddingHorizontal="5dp">
+    android:backgroundTint="@android:color/transparent"
+    app:strokeWidth="0dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/chapter_image"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:src="@mipmap/ic_launcher"
-        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+    <LinearLayout
+        android:id="@+id/chapterLL"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp">
 
-    <TextView
-        android:id="@+id/chapter_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:text="Title"
-        android:textSize="13sp" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/chapter_image"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:src="@mipmap/ic_launcher"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/chapter_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="13sp"
+            tools:text="Title" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -66,6 +66,7 @@
             motion:layout_constraintBottom_toBottomOf="@id/main_container"
             motion:layout_constraintStart_toStartOf="@id/main_container"
             motion:layout_constraintTop_toTopOf="@id/main_container" />
+        <Constraint android:id="@+id/doubleTapOverlay" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

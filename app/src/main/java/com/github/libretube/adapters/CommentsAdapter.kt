@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
+import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,7 +51,7 @@ class CommentsAdapter(
                 " • " + comment.commentedTime.toString()
             commentText.text =
                 comment.commentText.toString()
-            Picasso.get().load(comment.thumbnail).fit().centerCrop().into(commentorImage)
+            ConnectionHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text =
                 comment.likeCount?.toLong().formatShort()
             if (comment.verified == true) {
@@ -66,19 +64,7 @@ class CommentsAdapter(
                 heartedImageView.visibility = View.VISIBLE
             }
             commentorImage.setOnClickListener {
-                val activity = root.context as MainActivity
-                val bundle = bundleOf("channel_id" to comment.commentorUrl)
-                activity.navController.navigate(R.id.channelFragment, bundle)
-                try {
-                    val mainMotionLayout =
-                        activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
-                    if (mainMotionLayout.progress == 0.toFloat()) {
-                        mainMotionLayout.transitionToEnd()
-                        activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
-                            .transitionToEnd()
-                    }
-                } catch (e: Exception) {
-                }
+                NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
             }
             repliesRecView.layoutManager = LinearLayoutManager(root.context)
             val repliesAdapter = RepliesAdapter(CommentsPage().comments)

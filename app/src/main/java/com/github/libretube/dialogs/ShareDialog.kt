@@ -8,11 +8,13 @@ import com.github.libretube.PIPED_FRONTEND_URL
 import com.github.libretube.R
 import com.github.libretube.YOUTUBE_FRONTEND_URL
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
     private val id: String,
-    private val isPlaylist: Boolean
+    private val isPlaylist: Boolean,
+    private val position: Long = 0L
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -38,7 +40,14 @@ class ShareDialog(
                         else -> instanceUrl
                     }
                     val path = if (!isPlaylist) "/watch?v=$id" else "/playlist?list=$id"
-                    val url = "$host$path"
+                    var url = "$host$path"
+                    if (PreferenceHelper.getBoolean(
+                            PreferenceKeys.SHARE_WITH_TIME_CODE,
+                            true
+                        )
+                    ) {
+                        url += "?t=$position"
+                    }
 
                     val intent = Intent()
                     intent.apply {
@@ -57,13 +66,12 @@ class ShareDialog(
     // get the frontend url if it's a custom instance
     private fun getCustomInstanceFrontendUrl(): String {
         val instancePref = PreferenceHelper.getString(
-            requireContext(),
-            "selectInstance",
+            PreferenceKeys.FETCH_INSTANCE,
             PIPED_FRONTEND_URL
         )
 
         // get the api urls of the other custom instances
-        val customInstances = PreferenceHelper.getCustomInstances(requireContext())
+        val customInstances = PreferenceHelper.getCustomInstances()
 
         // return the custom instance frontend url if available
         customInstances.forEach { instance ->
