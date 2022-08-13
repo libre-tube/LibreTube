@@ -37,6 +37,7 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.database.DatabaseHelper
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -88,7 +89,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.bottom_sheet.repeatMode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -878,7 +878,7 @@ class PlayerFragment : BaseFragment() {
                 if (!relatedStreamsEnabled) toggleComments()
                 // prepare for autoplay
                 if (autoplayEnabled) setNextStream()
-                if (watchHistoryEnabled) PreferenceHelper.addToWatchHistory(videoId!!, streams)
+                if (watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
             }
         }
     }

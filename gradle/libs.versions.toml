@@ -20,6 +20,7 @@ cronetEmbedded = "101.4951.41"
 cronetOkHttp = "0.1.0"
 coil = "2.1.0"
 leakcanary = "2.8.1"
+room = "2.4.3"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -49,3 +50,4 @@ square-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-andr
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
+room = { group = "androidx.room", name="room-runtime", version.ref = "room" }

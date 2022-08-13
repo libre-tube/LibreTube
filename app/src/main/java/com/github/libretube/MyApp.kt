@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import androidx.work.ExistingPeriodicWorkPolicy
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.ExceptionHandler
@@ -19,14 +20,19 @@ class MyApp : Application() {
         super.onCreate()
 
         /**
-         * initialize the needed [NotificationChannel]s for DownloadService and BackgroundMode
+         * Initialize the needed [NotificationChannel]s for DownloadService and BackgroundMode
          */
         initializeNotificationChannels()
 
         /**
-         * set the applicationContext as context for the [PreferenceHelper]
+         * Set the applicationContext as context for the [PreferenceHelper]
          */
         PreferenceHelper.setContext(applicationContext)
+
+        /**
+         * Initialize the [DatabaseHolder]
+         */
+        DatabaseHolder.initializeDatabase(this)
 
         /**
          * bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
@@ -35,12 +41,12 @@ class MyApp : Application() {
         StrictMode.setVmPolicy(builder.build())
 
         /**
-         * set the api and the auth api url
+         * Set the api and the auth api url
          */
         setRetrofitApiUrls()
 
         /**
-         * initialize the notification listener in the background
+         * Initialize the notification listener in the background
          */
         NotificationHelper.enqueueWork(this, ExistingPeriodicWorkPolicy.KEEP)
 
@@ -52,13 +58,13 @@ class MyApp : Application() {
         Thread.setDefaultUncaughtExceptionHandler(exceptionHandler)
 
         /**
-         * legacy preference file migration
+         * Legacy preference file migration
          */
         prefFileMigration()
     }
 
     /**
-     * set the api urls needed for the [RetrofitInstance]
+     * Set the api urls needed for the [RetrofitInstance]
      */
     private fun setRetrofitApiUrls() {
         RetrofitInstance.url =
