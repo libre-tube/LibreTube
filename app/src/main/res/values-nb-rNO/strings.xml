@@ -305,4 +305,5 @@
     <string name="break_reminder">Pausepåminnelse</string>
     <string name="already_spent_time">Du har allerede brukt %1$s min. i programmet. På tide med en pause.</string>
     <string name="take_a_break">På tide å ta en pause</string>
+    <string name="picture_in_picture">Bilde-i-bilde</string>
 </resources>
