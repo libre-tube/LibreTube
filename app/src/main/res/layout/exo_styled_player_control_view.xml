@@ -105,7 +105,8 @@
                 <TextView
                     android:id="@id/exo_position"
                     style="@style/TimeString"
-                    tools:text="05:20" />
+                    android:text="00:00"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     style="@style/TimeString"
@@ -115,7 +116,8 @@
                 <TextView
                     android:id="@id/exo_duration"
                     style="@style/TimeString"
-                    tools:text="12:15" />
+                    android:text="00:00"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 

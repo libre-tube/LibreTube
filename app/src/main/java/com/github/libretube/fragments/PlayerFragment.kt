@@ -64,7 +64,7 @@ import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.hideKeyboard
 import com.github.libretube.util.toID
-import com.github.libretube.views.BottomSheetFragment
+import com.github.libretube.views.PlayerOptionsBottomSheet
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -88,6 +88,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.bottom_sheet.repeatMode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -219,7 +220,7 @@ class PlayerFragment : BaseFragment() {
 
         createExoPlayer()
         initializeTransitionLayout()
-        initializeOnClickActions()
+        initializeOnClickActions(requireContext())
         playVideo()
 
         showBottomBar()
@@ -443,10 +444,7 @@ class PlayerFragment : BaseFragment() {
 
                         // select the new caption preference
                         trackSelector.buildUponParameters()
-                            .setPreferredTextLanguages(
-                                captionLanguage,
-                                captionLanguageCode
-                            )
+                            .setPreferredTextLanguage(captionLanguageCode)
                             .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
                     } else {
                         // none selected
@@ -551,7 +549,7 @@ class PlayerFragment : BaseFragment() {
     }
 
     // actions that don't depend on video information
-    private fun initializeOnClickActions() {
+    private fun initializeOnClickActions(context: Context) {
         binding.closeImageView.setOnClickListener {
             Globals.MINI_PLAYER_VISIBLE = false
             binding.playerMotionLayout.transitionToEnd()
@@ -570,8 +568,38 @@ class PlayerFragment : BaseFragment() {
         }
         // show the advanced player options
         playerBinding.toggleOptions.setOnClickListener {
-            val bottomSheetFragment = BottomSheetFragment().apply {
+            val bottomSheetFragment = PlayerOptionsBottomSheet().apply {
                 setOnClickListeners(playerOptionsInterface)
+                // set the auto play mode
+                currentAutoplayMode = if (autoplayEnabled) context.getString(R.string.enabled)
+                else context.getString(R.string.disabled)
+                // set the current caption language
+                currentCaptions = if (trackSelector.parameters.preferredTextLanguages.isNotEmpty()) {
+                    trackSelector.parameters.preferredTextLanguages[0]
+                } else context.getString(R.string.none)
+                // set the playback speed
+                val playbackSpeeds = context.resources.getStringArray(R.array.playbackSpeed)
+                val playbackSpeedValues = context.resources.getStringArray(R.array.playbackSpeedValues)
+                val playbackSpeed = exoPlayer.playbackParameters.speed.toString()
+                currentPlaybackSpeed = playbackSpeeds[playbackSpeedValues.indexOf(playbackSpeed)]
+                // set the quality text
+                val isAdaptive = exoPlayer.videoFormat?.codecs != null
+                val quality = exoPlayer.videoSize.height
+                if (quality != 0) {
+                    currentQuality =
+                        if (isAdaptive) "${context.getString(R.string.hls)} • ${quality}p"
+                        else "${quality}p"
+                }
+                // set the repeat mode
+                currentRepeatMode = if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                    context.getString(R.string.repeat_mode_none)
+                } else context.getString(R.string.repeat_mode_current)
+                // set the aspect ratio mode
+                currentAspectRatio = when (exoPlayerView.resizeMode) {
+                    AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
+                    AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                    else -> context.getString(R.string.resize_mode_zoom)
+                }
             }
             bottomSheetFragment.show(childFragmentManager, null)
         }
