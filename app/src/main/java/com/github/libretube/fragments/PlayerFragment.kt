@@ -165,6 +165,7 @@ class PlayerFragment : BaseFragment() {
     private var sponsorBlockEnabled = true
     private var sponsorBlockNotifications = true
     private var skipButtonsEnabled = false
+    private var pipEnabled = true
 
     /**
      * for autoplay
@@ -327,6 +328,11 @@ class PlayerFragment : BaseFragment() {
         skipButtonsEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.SKIP_BUTTONS,
             false
+        )
+
+        pipEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.PICTURE_IN_PICTURE,
+            true
         )
     }
 
@@ -1629,11 +1635,6 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun shouldStartPiP(): Boolean {
-        val pipEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.PICTURE_IN_PICTURE,
-            true
-        )
-
         if (!pipEnabled) return false
 
         val bounds = Rect()
