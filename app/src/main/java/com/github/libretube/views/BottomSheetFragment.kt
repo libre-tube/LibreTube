@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.interfaces.PlayerOptionsInterface
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: BottomSheetBinding
+    lateinit var binding: BottomSheetBinding
     private lateinit var playerOptionsInterface: PlayerOptionsInterface
 
     override fun onCreateView(
@@ -17,6 +19,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // expand the bottom sheet on creation
+        dialog!!.setOnShowListener { dialog ->
+            val d = dialog as BottomSheetDialog
+            val bottomSheetInternal =
+                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!
+            BottomSheetBehavior.from(bottomSheetInternal).state =
+                BottomSheetBehavior.STATE_EXPANDED
+        }
+
         binding = BottomSheetBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
