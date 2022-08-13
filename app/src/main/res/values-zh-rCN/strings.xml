@@ -310,4 +310,6 @@
     <string name="repeat_mode_none">无</string>
     <string name="repeat_mode_current">当前</string>
     <string name="resize_mode_fit">适应</string>
+    <string name="backup_restore">备份和恢复</string>
+    <string name="backup">备份</string>
 </resources>
