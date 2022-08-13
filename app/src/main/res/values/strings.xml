@@ -310,4 +310,6 @@
     <string name="resize_mode_zoom">Zoom</string>
     <string name="repeat_mode_none">None</string>
     <string name="repeat_mode_current">Current</string>
+    <string name="backup_restore">Backup &amp; restore</string>
+    <string name="backup">Backup</string>
 </resources>
