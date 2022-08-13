@@ -16,6 +16,8 @@ object DatabaseHelper {
             streams.thumbnailUrl,
             streams.duration
         )
-        DatabaseHolder.database.watchHistoryDao().insertAll(watchHistoryItem)
+        Thread {
+            DatabaseHolder.database.watchHistoryDao().insertAll(watchHistoryItem)
+        }.start()
     }
 }

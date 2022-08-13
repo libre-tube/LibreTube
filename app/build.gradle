@@ -4,6 +4,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -73,6 +74,8 @@ android {
 
 dependencies {
     //debugImplementation libs.square.leakcanary
+
+    kapt "androidx.room:room-compiler:2.4.3"
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.constraintlayout

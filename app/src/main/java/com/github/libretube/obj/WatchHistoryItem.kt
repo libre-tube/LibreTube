@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "watchHistoryItem")
 data class WatchHistoryItem(
-    @PrimaryKey val videoId: String? = null,
+    @PrimaryKey val videoId: String = "",
     @ColumnInfo val title: String? = null,
     @ColumnInfo val uploadDate: String? = null,
     @ColumnInfo val uploader: String? = null,
