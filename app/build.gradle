@@ -4,6 +4,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -74,6 +75,8 @@ android {
 dependencies {
     //debugImplementation libs.square.leakcanary
 
+    kapt libs.room.compiler
+
     implementation libs.androidx.appcompat
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.legacySupport
@@ -106,6 +109,8 @@ dependencies {
     implementation libs.lifecycle.viewmodel
     implementation libs.lifecycle.runtime
     implementation libs.lifecycle.livedata
+
+    implementation libs.room
 }
 
 static def getUnixTime() {

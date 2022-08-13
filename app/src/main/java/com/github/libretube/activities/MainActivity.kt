@@ -89,76 +89,78 @@ class MainActivity : BaseActivity() {
         if (!ConnectionHelper.isNetworkAvailable(this)) {
             val noInternetIntent = Intent(this, NoInternetActivity::class.java)
             startActivity(noInternetIntent)
-        } else {
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            // set the action bar for the activity
-            setSupportActionBar(binding.toolbar)
-
-            navController = findNavController(R.id.fragment)
-            binding.bottomNav.setupWithNavController(navController)
-
-            // gets the surface color of the bottom navigation view
-            val color = SurfaceColors.getColorForElevation(this, 10F)
-
-            // sets the navigation bar color to the previously calculated color
-            window.navigationBarColor = color
-
-            // hide the trending page if enabled
-            val hideTrendingPage =
-                PreferenceHelper.getBoolean(PreferenceKeys.HIDE_TRENDING_PAGE, false)
-            if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
-                false
-
-            // save start tab fragment id
-            startFragmentId =
-                when (PreferenceHelper.getString(PreferenceKeys.DEFAULT_TAB, "home")) {
-                    "home" -> R.id.homeFragment
-                    "subscriptions" -> R.id.subscriptionsFragment
-                    "library" -> R.id.libraryFragment
-                    else -> R.id.homeFragment
-                }
-
-            // set default tab as start fragment
-            navController.graph.setStartDestination(startFragmentId)
-
-            // navigate to the default fragment
-            navController.navigate(startFragmentId)
-
-            val labelVisibilityMode = when (
-                PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "always")
-            ) {
-                "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
-                "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
-                "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
-                else -> NavigationBarView.LABEL_VISIBILITY_AUTO
-            }
-            binding.bottomNav.labelVisibilityMode = labelVisibilityMode
-
-            binding.bottomNav.setOnApplyWindowInsetsListener(null)
-
-            binding.bottomNav.setOnItemSelectedListener {
-                // clear backstack if it's the start fragment
-                if (startFragmentId == it.itemId) navController.backQueue.clear()
-                // set menu item on click listeners
-                removeSearchFocus()
-                when (it.itemId) {
-                    R.id.homeFragment -> {
-                        navController.navigate(R.id.homeFragment)
-                    }
-                    R.id.subscriptionsFragment -> {
-                        navController.navigate(R.id.subscriptionsFragment)
-                    }
-                    R.id.libraryFragment -> {
-                        navController.navigate(R.id.libraryFragment)
-                    }
-                }
-                false
-            }
-
-            binding.toolbar.title = ThemeHelper.getStyledAppName(this)
+            finish()
+            return
         }
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // set the action bar for the activity
+        setSupportActionBar(binding.toolbar)
+
+        navController = findNavController(R.id.fragment)
+        binding.bottomNav.setupWithNavController(navController)
+
+        // gets the surface color of the bottom navigation view
+        val color = SurfaceColors.getColorForElevation(this, 10F)
+
+        // sets the navigation bar color to the previously calculated color
+        window.navigationBarColor = color
+
+        // hide the trending page if enabled
+        val hideTrendingPage =
+            PreferenceHelper.getBoolean(PreferenceKeys.HIDE_TRENDING_PAGE, false)
+        if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
+            false
+
+        // save start tab fragment id
+        startFragmentId =
+            when (PreferenceHelper.getString(PreferenceKeys.DEFAULT_TAB, "home")) {
+                "home" -> R.id.homeFragment
+                "subscriptions" -> R.id.subscriptionsFragment
+                "library" -> R.id.libraryFragment
+                else -> R.id.homeFragment
+            }
+
+        // set default tab as start fragment
+        navController.graph.setStartDestination(startFragmentId)
+
+        // navigate to the default fragment
+        navController.navigate(startFragmentId)
+
+        val labelVisibilityMode = when (
+            PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "always")
+        ) {
+            "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
+            "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
+            "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
+            else -> NavigationBarView.LABEL_VISIBILITY_AUTO
+        }
+        binding.bottomNav.labelVisibilityMode = labelVisibilityMode
+
+        binding.bottomNav.setOnApplyWindowInsetsListener(null)
+
+        binding.bottomNav.setOnItemSelectedListener {
+            // clear backstack if it's the start fragment
+            if (startFragmentId == it.itemId) navController.backQueue.clear()
+            // set menu item on click listeners
+            removeSearchFocus()
+            when (it.itemId) {
+                R.id.homeFragment -> {
+                    navController.navigate(R.id.homeFragment)
+                }
+                R.id.subscriptionsFragment -> {
+                    navController.navigate(R.id.subscriptionsFragment)
+                }
+                R.id.libraryFragment -> {
+                    navController.navigate(R.id.libraryFragment)
+                }
+            }
+            false
+        }
+
+        binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
         /**
          * handle error logs

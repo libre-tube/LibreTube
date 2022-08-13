@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.database.DatabaseHelper
 import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.WatchHistoryItem
-import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.setWatchProgressLength
@@ -21,7 +21,7 @@ class WatchHistoryAdapter(
     private val TAG = "WatchHistoryAdapter"
 
     fun removeFromWatchHistory(position: Int) {
-        PreferenceHelper.removeFromWatchHistory(position)
+        DatabaseHelper.removeFromWatchHistory(position)
         watchHistory.removeAt(position)
         notifyDataSetChanged()
     }
@@ -54,12 +54,12 @@ class WatchHistoryAdapter(
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
             root.setOnLongClickListener {
-                VideoOptionsDialog(video.videoId!!)
+                VideoOptionsDialog(video.videoId)
                     .show(childFragmentManager, VideoOptionsDialog::class.java.name)
                 true
             }
 
-            watchProgress.setWatchProgressLength(video.videoId!!, video.duration)
+            watchProgress.setWatchProgressLength(video.videoId, video.duration)
         }
     }
 

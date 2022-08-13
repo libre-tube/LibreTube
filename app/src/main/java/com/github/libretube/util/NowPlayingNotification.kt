@@ -10,6 +10,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import com.github.libretube.BACKGROUND_CHANNEL_ID
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.activities.MainActivity
+import com.github.libretube.extensions.await
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
@@ -87,7 +88,7 @@ class NowPlayingNotification(
             /**
              * running on a new thread to prevent a NetworkMainThreadException
              */
-            val thread = Thread {
+            Thread {
                 try {
                     /**
                      * try to GET the thumbnail from the URL
@@ -97,9 +98,7 @@ class NowPlayingNotification(
                 } catch (ex: java.lang.Exception) {
                     ex.printStackTrace()
                 }
-            }
-            thread.start()
-            thread.join()
+            }.await()
             /**
              * returns the scaled bitmap if it got fetched successfully
              */

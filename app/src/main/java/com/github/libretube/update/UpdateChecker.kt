@@ -2,6 +2,7 @@ package com.github.libretube.update
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.GITHUB_API_URL
+import com.github.libretube.extensions.await
 import java.net.URL
 
 object UpdateChecker {
@@ -15,10 +16,7 @@ object UpdateChecker {
                 versionInfo = getUpdateInfo()
             } catch (e: Exception) {
             }
-        }
-        thread.start()
-        // wait for the thread to finish
-        thread.join()
+        }.await()
 
         // return the information about the latest version
         return versionInfo

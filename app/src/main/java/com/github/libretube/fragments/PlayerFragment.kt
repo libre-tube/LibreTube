@@ -37,6 +37,8 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.database.DatabaseHelper
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -44,6 +46,7 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.await
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.ChapterSegment
@@ -88,7 +91,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.bottom_sheet.repeatMode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -444,8 +446,7 @@ class PlayerFragment : BaseFragment() {
                     val newParams = if (index != 0) {
                         // caption selected
 
-                        // get the caption name and language
-                        val captionLanguage = subtitlesNamesList[index]
+                        // get the caption language code
                         val captionLanguageCode = subtitleCodesList[index]
 
                         // select the new caption preference
@@ -814,13 +815,13 @@ class PlayerFragment : BaseFragment() {
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
         if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
-            PreferenceHelper.saveWatchPosition(
+            DatabaseHelper.saveWatchPosition(
                 videoId!!,
                 exoPlayer.currentPosition
             )
         } else if (watchPositionsEnabled) {
             // delete watch position if video has ended
-            PreferenceHelper.removeWatchPosition(videoId!!)
+            DatabaseHelper.removeWatchPosition(videoId!!)
         }
     }
 
@@ -878,7 +879,7 @@ class PlayerFragment : BaseFragment() {
                 if (!relatedStreamsEnabled) toggleComments()
                 // prepare for autoplay
                 if (autoplayEnabled) setNextStream()
-                if (watchHistoryEnabled) PreferenceHelper.addToWatchHistory(videoId!!, streams)
+                if (watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
             }
         }
     }
@@ -934,14 +935,14 @@ class PlayerFragment : BaseFragment() {
 
     private fun seekToWatchPosition() {
         // seek to saved watch position if available
-        val watchPositions = PreferenceHelper.getWatchPositions()
         var position: Long? = null
-        watchPositions.forEach {
-            if (it.videoId == videoId &&
-                // don't seek to the position if it's the end, autoplay would skip it immediately
-                streams.duration!! - it.position / 1000 > 2
-            ) position = it.position
-        }
+        Thread {
+            try {
+                position = DatabaseHolder.database.watchPositionDao().findById(videoId!!).position
+            } catch (e: Exception) {
+                position = null
+            }
+        }.await()
         // support for time stamped links
         val timeStamp: Long? = arguments?.getLong("timeStamp")
         if (timeStamp != null && timeStamp != 0L) {

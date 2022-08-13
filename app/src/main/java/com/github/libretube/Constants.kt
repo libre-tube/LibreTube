@@ -49,3 +49,8 @@ const val DOWNLOAD_SUCCESS_NOTIFICATION_ID = 5
 const val DOWNLOAD_CHANNEL_ID = "download_service"
 const val BACKGROUND_CHANNEL_ID = "background_mode"
 const val PUSH_CHANNEL_ID = "notification_worker"
+
+/**
+ * Database
+ */
+const val DATABASE_NAME = "LibreTubeDatabase"

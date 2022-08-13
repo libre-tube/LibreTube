@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.WatchHistoryAdapter
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.extensions.BaseFragment
-import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.extensions.await
+import com.github.libretube.obj.WatchHistoryItem
 
 class WatchHistoryFragment : BaseFragment() {
     private val TAG = "WatchHistoryFragment"
@@ -28,7 +30,11 @@ class WatchHistoryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val watchHistory = PreferenceHelper.getWatchHistory()
+        var watchHistory = listOf<WatchHistoryItem>()
+
+        Thread {
+            watchHistory = DatabaseHolder.database.watchHistoryDao().getAll()
+        }.await()
 
         if (watchHistory.isEmpty()) return
 
@@ -39,7 +45,7 @@ class WatchHistoryFragment : BaseFragment() {
         }
 
         val watchHistoryAdapter = WatchHistoryAdapter(
-            watchHistory,
+            watchHistory.toMutableList(),
             childFragmentManager
         )
 

@@ -9,8 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.SearchAdapter
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentSearchResultBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.await
+import com.github.libretube.obj.SearchHistoryItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.RetrofitInstance
@@ -132,7 +135,13 @@ class SearchResultFragment : BaseFragment() {
         val searchHistoryEnabled =
             PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
         if (searchHistoryEnabled && query != "") {
-            PreferenceHelper.saveToSearchHistory(query)
+            Thread {
+                DatabaseHolder.database.searchHistoryDao().insertAll(
+                    SearchHistoryItem(
+                        query = query
+                    )
+                )
+            }.await()
         }
     }
 }

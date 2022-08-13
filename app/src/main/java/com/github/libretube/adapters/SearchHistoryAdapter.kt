@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.SearchhistoryRowBinding
-import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.obj.SearchHistoryItem
 
 class SearchHistoryAdapter(
     private var historyList: List<String>,
@@ -29,8 +30,12 @@ class SearchHistoryAdapter(
             historyText.text = historyQuery
 
             deleteHistory.setOnClickListener {
-                historyList = historyList - historyQuery
-                PreferenceHelper.removeFromSearchHistory(historyQuery)
+                historyList -= historyQuery
+                Thread {
+                    DatabaseHolder.database.searchHistoryDao().delete(
+                        SearchHistoryItem(query = historyQuery)
+                    )
+                }.start()
                 notifyDataSetChanged()
             }
 

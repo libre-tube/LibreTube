@@ -7,6 +7,9 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.PIPED_FRONTEND_URL
 import com.github.libretube.R
 import com.github.libretube.YOUTUBE_FRONTEND_URL
+import com.github.libretube.database.DatabaseHolder
+import com.github.libretube.extensions.await
+import com.github.libretube.obj.CustomInstance
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -71,7 +74,10 @@ class ShareDialog(
         )
 
         // get the api urls of the other custom instances
-        val customInstances = PreferenceHelper.getCustomInstances()
+        var customInstances = listOf<CustomInstance>()
+        Thread {
+            customInstances = DatabaseHolder.database.customInstanceDao().getAll()
+        }.await()
 
         // return the custom instance frontend url if available
         customInstances.forEach { instance ->
