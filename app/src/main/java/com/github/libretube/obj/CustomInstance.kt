@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "customInstance")
 class CustomInstance(
-    @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    @ColumnInfo var name: String = "",
+    @PrimaryKey var name: String = "",
     @ColumnInfo var apiUrl: String = "",
     @ColumnInfo var frontendUrl: String = ""
 )

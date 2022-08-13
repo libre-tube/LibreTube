@@ -14,7 +14,7 @@ import com.github.libretube.obj.WatchPosition
         SearchHistoryItem::class,
         CustomInstance::class
     ],
-    version = 5
+    version = 6
 )
 abstract class AppDatabase : RoomDatabase() {
     /**

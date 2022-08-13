@@ -53,7 +53,6 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
-import com.github.libretube.obj.WatchPosition
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
@@ -936,17 +935,14 @@ class PlayerFragment : BaseFragment() {
 
     private fun seekToWatchPosition() {
         // seek to saved watch position if available
-        var watchPositions = listOf<WatchPosition>()
-        Thread {
-            watchPositions = DatabaseHolder.database.watchPositionDao().getAll()
-        }.await()
         var position: Long? = null
-        watchPositions.forEach {
-            if (it.videoId == videoId &&
-                // don't seek to the position if it's the end, autoplay would skip it immediately
-                streams.duration!! - it.position / 1000 > 2
-            ) position = it.position
-        }
+        Thread {
+            try {
+                position = DatabaseHolder.database.watchPositionDao().findById(videoId!!).position
+            } catch (e: Exception) {
+                position = null
+            }
+        }.await()
         // support for time stamped links
         val timeStamp: Long? = arguments?.getLong("timeStamp")
         if (timeStamp != null && timeStamp != 0L) {

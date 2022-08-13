@@ -5,42 +5,36 @@ import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.extensions.await
-import com.github.libretube.obj.WatchPosition
 
 /**
  * shows the already watched time under the video
  */
 fun View?.setWatchProgressLength(videoId: String, duration: Long) {
     val view = this!!
-    var positions = listOf<WatchPosition>()
-    var newWidth: Long? = null
+    var progress: Long? = null
 
     Thread {
-        positions = DatabaseHolder.database.watchPositionDao().getAll()
+        try {
+            progress = DatabaseHolder.database.watchPositionDao().findById(videoId).position
+        } catch (e: Exception) {
+            progress = null
+        }
     }.await()
 
     view.getViewTreeObserver()
         .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 this@setWatchProgressLength.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-                positions.forEach {
-                    if (it.videoId == videoId) {
-                        val fullWidth = (parent as LinearLayout).width
-                        if (duration != 0L) newWidth =
-                            (fullWidth * (it.position / (duration))) / 1000
-                        return@forEach
-                    }
-                }
-                if (newWidth != null) {
-                    val lp = view.layoutParams
-                    lp.apply {
-                        width = newWidth!!.toInt()
-                    }
-                    view.layoutParams = lp
-                    view.visibility = View.VISIBLE
-                } else {
+                if (progress == null) {
                     view.visibility = View.GONE
+                    return
                 }
+                val fullWidth = (parent as LinearLayout).width
+                val newWidth = (fullWidth * (progress!! / (duration))) / 1000
+                val lp = view.layoutParams
+                lp.width = newWidth.toInt()
+                view.layoutParams = lp
+                view.visibility = View.VISIBLE
             }
         })
 }

@@ -26,10 +26,11 @@ class CustomInstanceDialog : DialogFragment() {
             }
 
             binding.addInstance.setOnClickListener {
-                val customInstance = CustomInstance()
-                customInstance.name = binding.instanceName.text.toString()
-                customInstance.apiUrl = binding.instanceApiUrl.text.toString()
-                customInstance.frontendUrl = binding.instanceFrontendUrl.text.toString()
+                val customInstance = CustomInstance(
+                    name = binding.instanceName.text.toString(),
+                    apiUrl = binding.instanceApiUrl.text.toString(),
+                    frontendUrl = binding.instanceFrontendUrl.text.toString()
+                )
 
                 if (
                     customInstance.name != "" &&
