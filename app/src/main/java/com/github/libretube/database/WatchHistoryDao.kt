@@ -20,4 +20,7 @@ interface WatchHistoryDao {
 
     @Delete
     fun delete(watchHistoryItem: WatchHistoryItem)
+
+    @Query("DELETE FROM watchHistoryItem")
+    fun deleteAll()
 }

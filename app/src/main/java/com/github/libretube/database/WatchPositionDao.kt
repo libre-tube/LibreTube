@@ -20,4 +20,7 @@ interface WatchPositionDao {
 
     @Delete
     fun delete(watchPosition: WatchPosition)
+
+    @Query("DELETE FROM watchPosition")
+    fun deleteAll()
 }

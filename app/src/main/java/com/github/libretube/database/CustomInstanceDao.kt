@@ -17,4 +17,7 @@ interface CustomInstanceDao {
 
     @Delete
     fun delete(customInstance: CustomInstance)
+
+    @Query("DELETE FROM customInstance")
+    fun deleteAll()
 }

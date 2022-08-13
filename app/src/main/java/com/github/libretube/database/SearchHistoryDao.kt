@@ -17,4 +17,7 @@ interface SearchHistoryDao {
 
     @Delete
     fun delete(searchHistoryItem: SearchHistoryItem)
+
+    @Query("DELETE FROM searchHistoryItem")
+    fun deleteAll()
 }

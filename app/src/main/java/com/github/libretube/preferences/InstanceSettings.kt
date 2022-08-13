@@ -18,6 +18,7 @@ import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
+import com.github.libretube.extensions.await
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
@@ -106,9 +107,10 @@ class InstanceSettings : MaterialPreferenceFragment() {
 
         val clearCustomInstances = findPreference<Preference>(PreferenceKeys.CLEAR_CUSTOM_INSTANCES)
         clearCustomInstances?.setOnPreferenceClickListener {
-            PreferenceHelper.removePreference("customInstances")
-            val intent = Intent(context, SettingsActivity::class.java)
-            startActivity(intent)
+            Thread {
+                DatabaseHolder.database.customInstanceDao().deleteAll()
+            }.await()
+            activity?.recreate()
             true
         }
 
@@ -162,10 +164,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
             var customInstances = listOf<CustomInstance>()
             Thread {
                 customInstances = DatabaseHolder.database.customInstanceDao().getAll()
-            }.apply {
-                start()
-                join()
-            }
+            }.await()
 
             val instanceNames = arrayListOf<String>()
             val instanceValues = arrayListOf<String>()
