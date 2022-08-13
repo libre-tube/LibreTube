@@ -76,7 +76,7 @@
     <string name="category_intro_description">Интервал без стварног садржаја. Може бити пауза, статични фраме, понављајућа анимација. Не би требало да се користи за прелази који садрже информације.</string>
     <string name="category_outro">Картице и кредитације на крају</string>
     <string name="category_outro_description">Информације на крају. Није за закључке са информацијама.</string>
-    <string name="category_filler">Тангента пунила/Шале</string>
+    <string name="category_filler">Филер/Шале</string>
     <string name="category_music_offtopic">Музика: Немузичка секција</string>
     <string name="category_preview">Преглед/Рекапитулација</string>
     <string name="category_preview_description">За сегменте са детаљима о предстојећем садржају у овом или у будућим видео снимцима у његовој серији, али без додатних информација. Ако садржи исечке који се појављују само овде, ово је врло вероватно погрешна категорија.</string>
@@ -164,7 +164,7 @@
     <string name="hls">Аутоматски</string>
     <string name="github">GitHub</string>
     <string name="fullscreen_orientation">Оријентације приказа преко целог екрана</string>
-    <string name="aspect_ratio">Према оријентацији видео снимка</string>
+    <string name="aspect_ratio">Оријентација видео снимка</string>
     <string name="auto_rotation">Аутоматска ротација</string>
     <string name="landscape">Хоризонтално</string>
     <string name="portrait">Вертикално</string>
@@ -220,7 +220,7 @@
     <string name="comments">Коментари</string>
     <string name="okay">Ок</string>
     <string name="history">Историја</string>
-    <string name="category_filler_description">За тангенцијалне сцене које се додају само за попуњавање садржаја или хумор који није битан за разумевање главног садржаја видео снимка.</string>
+    <string name="category_filler_description">За празне сцене које су додате само да би се попунио садржај или хумор који није потребан за разумевање главног садржаја видеа.</string>
     <string name="donate">Донирајте</string>
     <string name="category_music_offtopic_description">Само за употребу у музичким спотовима. Требало би да покрива део видеа а не део званичних миксева. На крају, видео треба да личи на Spotify снимак или било коју другу миксовану верзију, или да смањи разговор или друге сметње.</string>
     <string name="oledTheme">Црна</string>
@@ -297,4 +297,17 @@
     <string name="history_size">Максимална величина историје</string>
     <string name="background_mode">Позадински режим</string>
     <string name="unlimited">Неограничено</string>
+    <string name="add_to_queue">Додај у ред</string>
+    <string name="misc">Остало</string>
+    <string name="break_reminder">Подсетник за паузу</string>
+    <string name="take_a_break">Време је за паузу</string>
+    <string name="already_spent_time">Провели сте %1$s минута у апликацији, време је за паузу.</string>
+    <string name="yt_shorts">Кратки снимци</string>
+    <string name="repeat_mode">Понављање</string>
+    <string name="resize_mode_zoom">Увећај</string>
+    <string name="repeat_mode_none">Ниједан</string>
+    <string name="repeat_mode_current">Тренутни</string>
+    <string name="resize_mode_fit">Уклопи</string>
+    <string name="no_subtitles_available">Нема доступних титлова</string>
+    <string name="resize_mode_fill">Попуни</string>
 </resources>
