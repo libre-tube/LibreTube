@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.obj.CustomInstance
 
 object PreferenceHelper {
     private val TAG = "PreferenceHelper"
@@ -69,27 +68,6 @@ object PreferenceHelper {
 
     fun setUsername(newValue: String) {
         authEditor.putString(PreferenceKeys.USERNAME, newValue).apply()
-    }
-
-    fun saveCustomInstance(customInstance: CustomInstance) {
-        val customInstancesList = getCustomInstances()
-        customInstancesList += customInstance
-
-        val json = mapper.writeValueAsString(customInstancesList)
-        editor.putString("customInstances", json).apply()
-    }
-
-    fun getCustomInstances(): ArrayList<CustomInstance> {
-        val json: String = settings.getString("customInstances", "")!!
-        val type = mapper.typeFactory.constructCollectionType(
-            List::class.java,
-            CustomInstance::class.java
-        )
-        return try {
-            mapper.readValue(json, type)
-        } catch (e: Exception) {
-            arrayListOf()
-        }
     }
 
     fun getSearchHistory(): List<String> {

@@ -13,10 +13,12 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
 import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
+import com.github.libretube.obj.CustomInstance
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.RetrofitInstance
@@ -157,7 +159,13 @@ class InstanceSettings : MaterialPreferenceFragment() {
 
     private fun initCustomInstances(instancePref: ListPreference) {
         lifecycleScope.launchWhenCreated {
-            val customInstances = PreferenceHelper.getCustomInstances()
+            var customInstances = listOf<CustomInstance>()
+            Thread {
+                customInstances = DatabaseHolder.database.customInstanceDao().getAll()
+            }.apply {
+                start()
+                join()
+            }
 
             val instanceNames = arrayListOf<String>()
             val instanceValues = arrayListOf<String>()

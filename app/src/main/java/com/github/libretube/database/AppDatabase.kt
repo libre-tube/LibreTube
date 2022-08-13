@@ -2,15 +2,17 @@ package com.github.libretube.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.github.libretube.obj.CustomInstance
 import com.github.libretube.obj.WatchHistoryItem
 import com.github.libretube.obj.WatchPosition
 
 @Database(
     entities = [
         WatchHistoryItem::class,
-        WatchPosition::class
+        WatchPosition::class,
+        CustomInstance::class
     ],
-    version = 2
+    version = 3
 )
 abstract class AppDatabase : RoomDatabase() {
     /**
@@ -22,4 +24,9 @@ abstract class AppDatabase : RoomDatabase() {
      * Watch Positions
      */
     abstract fun watchPositionDao(): WatchPositionDao
+
+    /**
+     * Custom Instances
+     */
+    abstract fun customInstanceDao(): CustomInstanceDao
 }
