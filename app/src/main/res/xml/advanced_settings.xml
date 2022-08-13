@@ -47,4 +47,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/backup_restore">
+
+        <Preference
+            app:title="@string/backup"
+            app:key="backup_settings" />
+
+        <Preference
+            app:title="@string/restore"
+            app:key="restore_settings" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

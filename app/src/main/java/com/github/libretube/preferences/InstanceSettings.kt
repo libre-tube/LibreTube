@@ -127,8 +127,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
 
         val deleteAccount = findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)
         deleteAccount?.setOnPreferenceClickListener {
-            val token = PreferenceHelper.getToken()
-            if (token != "") {
+            if (PreferenceHelper.getToken() != "") {
                 val newFragment = DeleteAccountDialog()
                 newFragment.show(childFragmentManager, DeleteAccountDialog::class.java.name)
             } else {
