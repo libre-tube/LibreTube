@@ -209,7 +209,7 @@
     <string name="buffering_goal_summary">Maks. antal sekunder af video som buffer.</string>
     <string name="audio_video">Lyd og video</string>
     <string name="fullscreen_orientation">Fuld skærm orientering</string>
-    <string name="aspect_ratio">Størrelsesforhold for videoer</string>
+    <string name="aspect_ratio">Videoformatforhold</string>
     <string name="auto_rotation">Automatisk rotation</string>
     <string name="landscape">Landskab</string>
     <string name="portrait">Portræt</string>
@@ -297,4 +297,17 @@
     <string name="unlimited">Ubegrænset</string>
     <string name="history_size">Maksimal historiestørrelse</string>
     <string name="background_mode">Baggrundstilstand</string>
+    <string name="add_to_queue">Tilføj til kø</string>
+    <string name="misc">Diverse</string>
+    <string name="take_a_break">Tid til at tage en pause</string>
+    <string name="break_reminder">Pause påmindelse</string>
+    <string name="already_spent_time">Du har allerede brugt %1$s minutter i appen, tid til at tage en pause.</string>
+    <string name="yt_shorts">Shorts</string>
+    <string name="no_subtitles_available">Ingen tilgængelige undertekster</string>
+    <string name="repeat_mode">Gentagelse Tilstand</string>
+    <string name="repeat_mode_none">Ingen</string>
+    <string name="resize_mode_fit">Tilpas</string>
+    <string name="repeat_mode_current">Nuværende</string>
+    <string name="resize_mode_fill">Udfyld</string>
+    <string name="resize_mode_zoom">Zoom</string>
 </resources>

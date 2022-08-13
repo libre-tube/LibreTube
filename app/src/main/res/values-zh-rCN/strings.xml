@@ -297,4 +297,19 @@
     <string name="history_size">最大历史记录大小</string>
     <string name="unlimited">无限制</string>
     <string name="background_mode">后台模式</string>
+    <string name="take_a_break">是时候休息一下了</string>
+    <string name="already_spent_time">你已经花了 %1$s 分钟在应用上，该休息一下了。</string>
+    <string name="add_to_queue">添加到队列</string>
+    <string name="break_reminder">休息提醒</string>
+    <string name="misc">杂项</string>
+    <string name="yt_shorts">短视频</string>
+    <string name="no_subtitles_available">无字幕可用</string>
+    <string name="repeat_mode">重复模式</string>
+    <string name="resize_mode_fill">填充</string>
+    <string name="resize_mode_zoom">缩放</string>
+    <string name="repeat_mode_none">无</string>
+    <string name="repeat_mode_current">当前</string>
+    <string name="resize_mode_fit">适应</string>
+    <string name="backup_restore">备份和恢复</string>
+    <string name="backup">备份</string>
 </resources>
