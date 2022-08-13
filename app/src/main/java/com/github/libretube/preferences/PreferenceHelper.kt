@@ -6,10 +6,6 @@ import androidx.preference.PreferenceManager
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.obj.CustomInstance
-import com.github.libretube.obj.Streams
-import com.github.libretube.obj.WatchHistoryItem
-import com.github.libretube.obj.WatchPosition
-import com.github.libretube.util.toID
 
 object PreferenceHelper {
     private val TAG = "PreferenceHelper"
@@ -133,114 +129,6 @@ object PreferenceHelper {
     private fun updateSearchHistory(historyList: List<String>) {
         val json = mapper.writeValueAsString(historyList)
         editor.putString("search_history", json).apply()
-    }
-
-    fun addToWatchHistory(videoId: String, streams: Streams) {
-        removeFromWatchHistory(videoId)
-
-        val watchHistoryItem = WatchHistoryItem(
-            videoId,
-            streams.title,
-            streams.uploadDate,
-            streams.uploader,
-            streams.uploaderUrl.toID(),
-            streams.uploaderAvatar,
-            streams.thumbnailUrl,
-            streams.duration
-        )
-
-        val watchHistory = getWatchHistory()
-
-        watchHistory += watchHistoryItem
-
-        // remove oldest item when the watch history is longer than the pref
-        val maxWatchHistorySize = getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
-        if (maxWatchHistorySize != "unlimited" && watchHistory.size > maxWatchHistorySize.toInt()) {
-            watchHistory.removeAt(0)
-        }
-
-        val json = mapper.writeValueAsString(watchHistory)
-        editor.putString("watch_history", json).apply()
-    }
-
-    fun removeFromWatchHistory(videoId: String) {
-        val watchHistory = getWatchHistory()
-
-        var indexToRemove: Int? = null
-        watchHistory.forEachIndexed { index, item ->
-            if (item.videoId == videoId) indexToRemove = index
-        }
-        if (indexToRemove == null) return
-        watchHistory.removeAt(indexToRemove!!)
-        val json = mapper.writeValueAsString(watchHistory)
-        editor.putString("watch_history", json).commit()
-    }
-
-    fun removeFromWatchHistory(position: Int) {
-        val watchHistory = getWatchHistory()
-        watchHistory.removeAt(position)
-
-        val json = mapper.writeValueAsString(watchHistory)
-        editor.putString("watch_history", json).commit()
-    }
-
-    fun getWatchHistory(): ArrayList<WatchHistoryItem> {
-        val json: String = settings.getString("watch_history", "")!!
-        val type = mapper.typeFactory.constructCollectionType(
-            List::class.java,
-            WatchHistoryItem::class.java
-        )
-
-        return try {
-            mapper.readValue(json, type)
-        } catch (e: Exception) {
-            arrayListOf()
-        }
-    }
-
-    fun saveWatchPosition(videoId: String, position: Long) {
-        val watchPositions = getWatchPositions()
-        val watchPositionItem = WatchPosition(videoId, position)
-
-        var indexToRemove: Int? = null
-        watchPositions.forEachIndexed { index, item ->
-            if (item.videoId == videoId) indexToRemove = index
-        }
-
-        if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
-
-        watchPositions += watchPositionItem
-
-        val json = mapper.writeValueAsString(watchPositions)
-        editor.putString("watch_positions", json).commit()
-    }
-
-    fun removeWatchPosition(videoId: String) {
-        val watchPositions = getWatchPositions()
-
-        var indexToRemove: Int? = null
-        watchPositions.forEachIndexed { index, item ->
-            if (item.videoId == videoId) indexToRemove = index
-        }
-
-        if (indexToRemove != null) watchPositions.removeAt(indexToRemove!!)
-
-        val json = mapper.writeValueAsString(watchPositions)
-        editor.putString("watch_positions", json).commit()
-    }
-
-    fun getWatchPositions(): ArrayList<WatchPosition> {
-        val json: String = settings.getString("watch_positions", "")!!
-        val type = mapper.typeFactory.constructCollectionType(
-            List::class.java,
-            WatchPosition::class.java
-        )
-
-        return try {
-            mapper.readValue(json, type)
-        } catch (e: Exception) {
-            arrayListOf()
-        }
     }
 
     fun setLatestVideoId(videoId: String) {

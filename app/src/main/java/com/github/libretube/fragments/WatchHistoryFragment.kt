@@ -12,7 +12,6 @@ import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.obj.WatchHistoryItem
-import kotlinx.coroutines.runBlocking
 
 class WatchHistoryFragment : BaseFragment() {
     private val TAG = "WatchHistoryFragment"

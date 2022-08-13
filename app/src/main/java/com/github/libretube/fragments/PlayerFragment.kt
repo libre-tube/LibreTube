@@ -38,6 +38,7 @@ import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.database.DatabaseHelper
+import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -51,6 +52,7 @@ import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
+import com.github.libretube.obj.WatchPosition
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
@@ -444,8 +446,7 @@ class PlayerFragment : BaseFragment() {
                     val newParams = if (index != 0) {
                         // caption selected
 
-                        // get the caption name and language
-                        val captionLanguage = subtitlesNamesList[index]
+                        // get the caption language code
                         val captionLanguageCode = subtitleCodesList[index]
 
                         // select the new caption preference
@@ -814,13 +815,13 @@ class PlayerFragment : BaseFragment() {
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
         if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
-            PreferenceHelper.saveWatchPosition(
+            DatabaseHelper.saveWatchPosition(
                 videoId!!,
                 exoPlayer.currentPosition
             )
         } else if (watchPositionsEnabled) {
             // delete watch position if video has ended
-            PreferenceHelper.removeWatchPosition(videoId!!)
+            DatabaseHelper.removeWatchPosition(videoId!!)
         }
     }
 
@@ -934,7 +935,12 @@ class PlayerFragment : BaseFragment() {
 
     private fun seekToWatchPosition() {
         // seek to saved watch position if available
-        val watchPositions = PreferenceHelper.getWatchPositions()
+        var watchPositions = listOf<WatchPosition>()
+        val thread = Thread {
+            watchPositions = DatabaseHolder.database.watchPositionDao().getAll()
+        }
+        thread.start()
+        thread.join()
         var position: Long? = null
         watchPositions.forEach {
             if (it.videoId == videoId &&

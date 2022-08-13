@@ -1,6 +1,11 @@
 package com.github.libretube.obj
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "watchPosition")
 data class WatchPosition(
-    val videoId: String = "",
-    val position: Long = 0L
+    @PrimaryKey val videoId: String = "",
+    @ColumnInfo val position: Long = 0L
 )
