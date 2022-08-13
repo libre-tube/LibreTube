@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.github.libretube.database.DatabaseHolder
+import com.github.libretube.extensions.await
 import com.github.libretube.obj.WatchPosition
 
 /**
@@ -14,11 +15,9 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
     var positions = listOf<WatchPosition>()
     var newWidth: Long? = null
 
-    val thread = Thread {
+    Thread {
         positions = DatabaseHolder.database.watchPositionDao().getAll()
-    }
-    thread.start()
-    thread.join()
+    }.await()
 
     view.getViewTreeObserver()
         .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {

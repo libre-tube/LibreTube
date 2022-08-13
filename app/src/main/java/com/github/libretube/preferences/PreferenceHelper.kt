@@ -70,45 +70,6 @@ object PreferenceHelper {
         authEditor.putString(PreferenceKeys.USERNAME, newValue).apply()
     }
 
-    fun getSearchHistory(): List<String> {
-        return try {
-            val json = settings.getString("search_history", "")!!
-            val type = object : TypeReference<List<String>>() {}
-            return mapper.readValue(json, type)
-        } catch (e: Exception) {
-            emptyList()
-        }
-    }
-
-    fun saveToSearchHistory(query: String) {
-        val historyList = getSearchHistory().toMutableList()
-
-        if ((historyList.contains(query))) {
-            // remove from history list if already contained
-            historyList -= query
-        }
-
-        // append new query to history
-        historyList.add(0, query)
-
-        if (historyList.size > 10) {
-            historyList.removeAt(historyList.size - 1)
-        }
-
-        updateSearchHistory(historyList)
-    }
-
-    fun removeFromSearchHistory(query: String) {
-        val historyList = getSearchHistory().toMutableList()
-        historyList -= query
-        updateSearchHistory(historyList)
-    }
-
-    private fun updateSearchHistory(historyList: List<String>) {
-        val json = mapper.writeValueAsString(historyList)
-        editor.putString("search_history", json).apply()
-    }
-
     fun setLatestVideoId(videoId: String) {
         editor.putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
     }

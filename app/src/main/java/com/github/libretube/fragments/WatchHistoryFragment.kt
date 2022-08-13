@@ -11,6 +11,7 @@ import com.github.libretube.adapters.WatchHistoryAdapter
 import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.await
 import com.github.libretube.obj.WatchHistoryItem
 
 class WatchHistoryFragment : BaseFragment() {
@@ -31,11 +32,9 @@ class WatchHistoryFragment : BaseFragment() {
 
         var watchHistory = listOf<WatchHistoryItem>()
 
-        val thread = Thread {
+        Thread {
             watchHistory = DatabaseHolder.database.watchHistoryDao().getAll()
-        }
-        thread.start()
-        thread.join()
+        }.await()
 
         if (watchHistory.isEmpty()) return
 

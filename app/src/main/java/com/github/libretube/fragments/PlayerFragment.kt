@@ -46,6 +46,7 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.await
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.ChapterSegment
@@ -936,11 +937,9 @@ class PlayerFragment : BaseFragment() {
     private fun seekToWatchPosition() {
         // seek to saved watch position if available
         var watchPositions = listOf<WatchPosition>()
-        val thread = Thread {
+        Thread {
             watchPositions = DatabaseHolder.database.watchPositionDao().getAll()
-        }
-        thread.start()
-        thread.join()
+        }.await()
         var position: Long? = null
         watchPositions.forEach {
             if (it.videoId == videoId &&
