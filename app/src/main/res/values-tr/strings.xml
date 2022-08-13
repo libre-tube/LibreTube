@@ -305,4 +305,5 @@
     <string name="backup_restore">Yedekle ve geri yükle</string>
     <string name="backup">Yedekle</string>
     <string name="export_subscriptions">Abonelikleri Dışa Aktar</string>
+    <string name="picture_in_picture">Resim içinde resim</string>
 </resources>
