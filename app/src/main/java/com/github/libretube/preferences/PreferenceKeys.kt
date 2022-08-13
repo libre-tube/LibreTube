@@ -59,6 +59,7 @@ object PreferenceKeys {
     const val PLAYER_AUDIO_QUALITY = "player_audio_quality"
     const val DEFAULT_SUBTITLE = "default_subtitle"
     const val SKIP_BUTTONS = "skip_buttons"
+    const val PICTURE_IN_PICTURE = "picture_in_picture"
 
     /**
      * Background mode
