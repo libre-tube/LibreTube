@@ -306,4 +306,5 @@
     <string name="backup">Yedekle</string>
     <string name="export_subscriptions">Abonelikleri Dışa Aktar</string>
     <string name="picture_in_picture">Resim içinde resim</string>
+    <string name="player_resize_mode">Yeniden boyutlandırma modu</string>
 </resources>
