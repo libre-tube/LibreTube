@@ -303,7 +303,7 @@
     <string name="backup_restore">שחזור וגיבוי</string>
     <string name="backup">גיבוי</string>
     <string name="picture_in_picture">תמונה בתוך תמונה</string>
-    <string name="resize_mode_fit">התאם</string>
+    <string name="resize_mode_fit">התאמה</string>
     <string name="repeat_mode">מצב חזרה</string>
-    <string name="resize_mode_zoom">זום</string>
+    <string name="resize_mode_zoom">תקריב</string>
 </resources>
