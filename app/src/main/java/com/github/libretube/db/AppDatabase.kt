@@ -22,10 +22,7 @@ import com.github.libretube.db.obj.WatchPosition
         CustomInstance::class,
         LocalSubscription::class
     ],
-    version = 7,
-    autoMigrations = [
-        AutoMigration(from = 7, to = 8)
-    ]
+    version = 7
 )
 abstract class AppDatabase : RoomDatabase() {
     /**

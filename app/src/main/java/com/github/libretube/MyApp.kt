@@ -7,13 +7,19 @@ import android.content.Context
 import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import androidx.preference.PreferenceManager
 import androidx.work.ExistingPeriodicWorkPolicy
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.NotificationHelper
+import java.lang.Exception
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -61,6 +67,11 @@ class MyApp : Application() {
          * Legacy preference file migration
          */
         prefFileMigration()
+
+        /**
+         * Database Migration
+         */
+        databaseMigration()
     }
 
     /**
@@ -141,5 +152,42 @@ class MyApp : Application() {
             PreferenceHelper.setToken(token)
             legacyTokenPrefs.edit().putString("token", "")
         }
+    }
+
+    /**
+     * Migration from the preferences to the database
+     */
+    private fun databaseMigration() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val mapper = ObjectMapper()
+
+        Thread {
+            val legacyWatchHistory = prefs.getString("watch_history", "")
+            if (legacyWatchHistory != "") {
+                try {
+                    val type = object : TypeReference<List<WatchHistoryItem>>() {}
+                    val watchHistoryItems = mapper.readValue(legacyWatchHistory, type)
+                    DatabaseHolder.db.watchHistoryDao().insertAll(
+                        *watchHistoryItems.toTypedArray()
+                    )
+                } catch (e: Exception) {}
+                prefs.edit().putString("watch_history", "").commit()
+            }
+            val legacyWatchPositions = prefs.getString("watch_positions", "")
+            if (legacyWatchPositions != "") {
+                try {
+                    val type = object : TypeReference<List<WatchPosition>>() {}
+                    val watchPositions = mapper.readValue(legacyWatchPositions, type)
+                    DatabaseHolder.db.watchPositionDao().insertAll(
+                        *watchPositions.toTypedArray()
+                    )
+                } catch (e: Exception) {}
+                prefs.edit().remove("watch_positions").commit()
+            }
+            prefs.edit()
+                .remove("custom_instances")
+                .remove("local_subscriptions")
+                .commit()
+        }.start()
     }
 }

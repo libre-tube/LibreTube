@@ -108,9 +108,4 @@ object PreferenceKeys {
      * Error logs
      */
     const val ERROR_LOG = "error_log"
-
-    /**
-     * Data
-     */
-    const val LOCAL_SUBSCRIPTIONS = "local_subscriptions"
 }
