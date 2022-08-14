@@ -9,7 +9,6 @@ import androidx.annotation.Nullable
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 
 class ClosingService : Service() {
-    private val TAG = "ClosingService"
 
     @Nullable
     override fun onBind(intent: Intent?): IBinder? {

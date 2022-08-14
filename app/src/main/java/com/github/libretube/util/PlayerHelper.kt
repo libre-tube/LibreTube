@@ -8,8 +8,6 @@ import com.github.libretube.preferences.PreferenceKeys
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 
 object PlayerHelper {
-    private val TAG = "PlayerHelper"
-
     // get the audio source following the users preferences
     fun getAudioSource(audios: List<PipedStream>): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")

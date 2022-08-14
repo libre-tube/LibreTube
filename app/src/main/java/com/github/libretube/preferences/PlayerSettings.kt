@@ -10,7 +10,6 @@ import com.github.libretube.views.MaterialPreferenceFragment
 import java.util.*
 
 class PlayerSettings : MaterialPreferenceFragment() {
-    val TAG = "PlayerSettings"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)

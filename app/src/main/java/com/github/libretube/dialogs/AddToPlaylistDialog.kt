@@ -10,17 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.Globals
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
 class AddToPlaylistDialog : DialogFragment() {
-    private val TAG = "AddToPlaylistDialog"
     private lateinit var binding: DialogAddtoplaylistBinding
 
     private lateinit var videoId: String
@@ -51,11 +51,11 @@ class AddToPlaylistDialog : DialogFragment() {
                     RetrofitInstance.authApi.playlists(token)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
@@ -96,11 +96,11 @@ class AddToPlaylistDialog : DialogFragment() {
                     RetrofitInstance.authApi.addToPlaylist(token, PlaylistId(playlistId, videoId))
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }

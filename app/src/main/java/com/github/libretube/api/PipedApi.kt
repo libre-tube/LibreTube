@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.api
 
 import com.github.libretube.obj.Channel
 import com.github.libretube.obj.CommentsPage

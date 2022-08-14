@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.api
 
 import android.content.Context
 import com.google.net.cronet.okhttptransport.CronetCallFactory
@@ -10,10 +10,10 @@ class CronetHelper {
         lateinit var callFactory: CronetCallFactory
 
         fun initCronet(context: Context) {
-            this.engine = CronetEngine.Builder(context)
+            engine = CronetEngine.Builder(context)
                 .enableBrotli(true)
                 .build()
-            callFactory = CronetCallFactory.newBuilder(this.engine)
+            callFactory = CronetCallFactory.newBuilder(engine)
                 .build()
         }
 

@@ -11,7 +11,6 @@ import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LogoutDialog : DialogFragment() {
-    private val TAG = "LogoutDialog"
     private lateinit var binding: DialogLogoutBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

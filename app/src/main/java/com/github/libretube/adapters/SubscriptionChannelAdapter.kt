@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.obj.Subscription
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.toID
 
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
-    val TAG = "SubChannelAdapter"
 
     override fun getItemCount(): Int {
         return subscriptions.size

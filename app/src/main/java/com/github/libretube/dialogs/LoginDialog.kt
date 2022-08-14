@@ -7,17 +7,17 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogLoginBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Login
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
 class LoginDialog : DialogFragment() {
-    private val TAG = "LoginDialog"
     private lateinit var binding: DialogLoginBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -64,15 +64,15 @@ class LoginDialog : DialogFragment() {
                     RetrofitInstance.authApi.login(login)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?$e")
+                    Log.e(TAG(), "dafaq?$e")
                     return@launchWhenCreated
                 }
                 if (response.error != null) {
@@ -96,15 +96,15 @@ class LoginDialog : DialogFragment() {
                     RetrofitInstance.authApi.register(login)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: Exception) {
-                    Log.e(TAG, "dafaq?$e")
+                    Log.e(TAG(), "dafaq?$e")
                     return@launchWhenCreated
                 }
                 if (response.error != null) {

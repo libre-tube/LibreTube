@@ -10,7 +10,6 @@ import com.github.libretube.util.NotificationHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 
 class NotificationSettings : MaterialPreferenceFragment() {
-    val TAG = "SettingsFragment"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.notification_settings, rootKey)

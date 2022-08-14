@@ -6,6 +6,9 @@ import android.util.Log
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
 import com.github.libretube.preferences.PreferenceHelper
@@ -20,7 +23,6 @@ import java.io.InputStreamReader
 class ImportHelper(
     private val activity: Activity
 ) {
-    private val TAG = "ImportHelper"
 
     /**
      * Import subscriptions by a file uri
@@ -65,7 +67,7 @@ class ImportHelper(
 
             Toast.makeText(activity, R.string.importsuccess, Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
-            Log.e(TAG, e.toString())
+            Log.e(TAG(), e.toString())
             Toast.makeText(
                 activity,
                 R.string.error,

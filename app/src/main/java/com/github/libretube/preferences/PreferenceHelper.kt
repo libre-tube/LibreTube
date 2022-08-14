@@ -7,10 +7,6 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 
 object PreferenceHelper {
-    private val TAG = "PreferenceHelper"
-
-    private lateinit var prefContext: Context
-
     /**
      * for normal preferences
      */
@@ -29,9 +25,7 @@ object PreferenceHelper {
      * set the context that is being used to access the shared preferences
      */
     fun setContext(context: Context) {
-        prefContext = context
-
-        settings = getDefaultSharedPreferences(prefContext)
+        settings = getDefaultSharedPreferences(context)
         editor = settings.edit()
 
         authSettings = getAuthenticationPreferences(context)

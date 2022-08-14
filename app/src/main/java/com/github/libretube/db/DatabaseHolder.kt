@@ -1,14 +1,14 @@
-package com.github.libretube.database
+package com.github.libretube.db
 
 import android.content.Context
 import androidx.room.Room
 import com.github.libretube.DATABASE_NAME
 
 object DatabaseHolder {
-    lateinit var database: AppDatabase
+    lateinit var db: AppDatabase
 
     fun initializeDatabase(context: Context) {
-        database = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             DATABASE_NAME

@@ -9,7 +9,6 @@ import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.views.MaterialPreferenceFragment
 
 class GeneralSettings : MaterialPreferenceFragment() {
-    val TAG = "SettingsFragment"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.general_settings, rootKey)

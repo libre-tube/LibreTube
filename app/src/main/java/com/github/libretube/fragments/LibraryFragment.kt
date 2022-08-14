@@ -13,18 +13,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.dialogs.CreatePlaylistDialog
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
 class LibraryFragment : BaseFragment() {
 
-    private val TAG = "LibraryFragment"
     lateinit var token: String
     private lateinit var binding: FragmentLibraryBinding
 
@@ -92,11 +92,11 @@ class LibraryFragment : BaseFragment() {
                     RetrofitInstance.authApi.playlists(token)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } finally {
@@ -115,7 +115,7 @@ class LibraryFragment : BaseFragment() {
                     playlistsAdapter.registerAdapterDataObserver(object :
                             RecyclerView.AdapterDataObserver() {
                             override fun onChanged() {
-                                Log.e(TAG, playlistsAdapter.itemCount.toString())
+                                Log.e(TAG(), playlistsAdapter.itemCount.toString())
                                 if (playlistsAdapter.itemCount == 0) {
                                     binding.loginOrRegister.visibility = View.VISIBLE
                                 }

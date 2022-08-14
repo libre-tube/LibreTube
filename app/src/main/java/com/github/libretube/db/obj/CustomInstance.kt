@@ -1,4 +1,4 @@
-package com.github.libretube.obj
+package com.github.libretube.db.obj
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -8,12 +8,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.CommentsRowBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.formatShort
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,6 @@ class CommentsAdapter(
     private val videoId: String,
     private val comments: MutableList<Comment>
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
-    private val TAG = "CommentsAdapter"
 
     private var isLoading = false
     private var nextpage = ""
@@ -97,9 +97,9 @@ class CommentsAdapter(
                     repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId, nextPage)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response," + e.response())
+                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
                 }
                 repliesAdapter.updateItems(repliesPage.comments)
                 isLoading = false

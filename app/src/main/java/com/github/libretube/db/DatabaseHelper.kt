@@ -1,8 +1,8 @@
-package com.github.libretube.database
+package com.github.libretube.db
 
+import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.obj.Streams
-import com.github.libretube.obj.WatchHistoryItem
-import com.github.libretube.obj.WatchPosition
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.toID
@@ -20,14 +20,15 @@ object DatabaseHelper {
             streams.duration
         )
         Thread {
-            DatabaseHolder.database.watchHistoryDao().insertAll(watchHistoryItem)
-            val maxHistorySize = PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
+            DatabaseHolder.db.watchHistoryDao().insertAll(watchHistoryItem)
+            val maxHistorySize =
+                PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
             if (maxHistorySize == "unlimited") return@Thread
 
             // delete the first watch history entry if the limit is reached
-            val watchHistory = DatabaseHolder.database.watchHistoryDao().getAll()
+            val watchHistory = DatabaseHolder.db.watchHistoryDao().getAll()
             if (watchHistory.size > maxHistorySize.toInt()) {
-                DatabaseHolder.database.watchHistoryDao()
+                DatabaseHolder.db.watchHistoryDao()
                     .delete(watchHistory.first())
             }
         }.start()
@@ -35,8 +36,8 @@ object DatabaseHelper {
 
     fun removeFromWatchHistory(index: Int) {
         Thread {
-            DatabaseHolder.database.watchHistoryDao().delete(
-                DatabaseHolder.database.watchHistoryDao().getAll()[index]
+            DatabaseHolder.db.watchHistoryDao().delete(
+                DatabaseHolder.db.watchHistoryDao().getAll()[index]
             )
         }.start()
     }
@@ -47,14 +48,14 @@ object DatabaseHelper {
             position
         )
         Thread {
-            DatabaseHolder.database.watchPositionDao().insertAll(watchPosition)
+            DatabaseHolder.db.watchPositionDao().insertAll(watchPosition)
         }.start()
     }
 
     fun removeWatchPosition(videoId: String) {
         Thread {
-            DatabaseHolder.database.watchPositionDao().delete(
-                DatabaseHolder.database.watchPositionDao().findById(videoId)
+            DatabaseHolder.db.watchPositionDao().delete(
+                DatabaseHolder.db.watchPositionDao().findById(videoId)
             )
         }.start()
     }

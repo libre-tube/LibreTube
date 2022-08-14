@@ -1,6 +1,7 @@
 package com.github.libretube.util
 
 import com.github.libretube.Globals
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.obj.StreamItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -8,7 +9,6 @@ import kotlinx.coroutines.withContext
 class AutoPlayHelper(
     private val playlistId: String?
 ) {
-    private val TAG = "AutoPlayHelper"
 
     private val playlistStreamIds = mutableListOf<String>()
     private var playlistNextPage: String? = null
