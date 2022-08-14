@@ -219,7 +219,7 @@
     <string name="reddit">Reddit</string>
     <string name="auto_rotation">הטיה אוטומטית</string>
     <string name="portrait">לאורך</string>
-    <string name="aspect_ratio">יחס תצוגה לסרטונים</string>
+    <string name="aspect_ratio">יחס רוחב-גובה של וידאו</string>
     <string name="twitter">טוויטר</string>
     <string name="turnInternetOn">נא להפעיל את הרשת האלחוטית או החיבור הסלולרי כדי להתחבר לאינטרנט.</string>
     <string name="open">פתיחה…</string>
@@ -296,4 +296,14 @@
     <string name="break_reminder">תזכורת הפסקה</string>
     <string name="take_a_break">הגיע הזמן להפסקה</string>
     <string name="yt_shorts">קצרים</string>
+    <string name="no_subtitles_available">אין כתוביות זמינות</string>
+    <string name="resize_mode_fill">למלא</string>
+    <string name="repeat_mode_none">ללא</string>
+    <string name="repeat_mode_current">נוכחי</string>
+    <string name="backup_restore">שחזור וגיבוי</string>
+    <string name="backup">גיבוי</string>
+    <string name="picture_in_picture">תמונה בתוך תמונה</string>
+    <string name="resize_mode_fit">התאם</string>
+    <string name="repeat_mode">מצב חזרה</string>
+    <string name="resize_mode_zoom">זום</string>
 </resources>
