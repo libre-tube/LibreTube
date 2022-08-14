@@ -67,6 +67,7 @@ object PreferenceKeys {
     const val DEFAULT_SUBTITLE = "default_subtitle"
     const val SKIP_BUTTONS = "skip_buttons"
     const val PICTURE_IN_PICTURE = "picture_in_picture"
+    const val PLAYER_RESIZE_MODE = "player_resize_mode"
 
     /**
      * Background mode

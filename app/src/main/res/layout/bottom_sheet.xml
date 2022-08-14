@@ -39,8 +39,8 @@
         app:drawableStartCompat="@drawable/ic_repeat" />
 
     <TextView
-        android:id="@+id/aspectRatio"
+        android:id="@+id/resizeMode"
         style="@style/BottomSheetItem"
-        android:text="@string/aspect_ratio"
+        android:text="@string/player_resize_mode"
         app:drawableStartCompat="@drawable/ic_aspect_ratio" />
 </LinearLayout>

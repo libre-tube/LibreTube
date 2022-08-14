@@ -92,7 +92,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -100,6 +99,7 @@ import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class PlayerFragment : BaseFragment() {
 
@@ -168,6 +168,7 @@ class PlayerFragment : BaseFragment() {
     private var sponsorBlockNotifications = true
     private var skipButtonsEnabled = false
     private var pipEnabled = true
+    private var resizeModePref = "fit"
 
     /**
      * for autoplay
@@ -335,6 +336,11 @@ class PlayerFragment : BaseFragment() {
         pipEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.PICTURE_IN_PICTURE,
             true
+        )
+
+        resizeModePref = PreferenceHelper.getString(
+            PreferenceKeys.PLAYER_RESIZE_MODE,
+            "fit"
         )
     }
 
@@ -513,13 +519,9 @@ class PlayerFragment : BaseFragment() {
                 .show()
         }
 
-        override fun onAspectRatioClicked() {
+        override fun onResizeModeClicked() {
             // switching between original aspect ratio (black bars) and zoomed to fill device screen
-            val aspectRatioModeNames = arrayOf(
-                context?.getString(R.string.resize_mode_fit),
-                context?.getString(R.string.resize_mode_zoom),
-                context?.getString(R.string.resize_mode_fill)
-            )
+            val aspectRatioModeNames = context?.resources?.getStringArray(R.array.resizeMode)
 
             val aspectRatioModes = arrayOf(
                 AspectRatioFrameLayout.RESIZE_MODE_FIT,
@@ -605,7 +607,7 @@ class PlayerFragment : BaseFragment() {
                         context.getString(R.string.repeat_mode_none)
                     } else context.getString(R.string.repeat_mode_current)
                 // set the aspect ratio mode
-                currentAspectRatio = when (exoPlayerView.resizeMode) {
+                currentResizeMode = when (exoPlayerView.resizeMode) {
                     AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
                     AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
                     else -> context.getString(R.string.resize_mode_zoom)
@@ -979,6 +981,11 @@ class PlayerFragment : BaseFragment() {
             controllerHideOnTouch = true
             useController = false
             player = exoPlayer
+            resizeMode = when (resizeModePref) {
+                "fill" -> AspectRatioFrameLayout.RESIZE_MODE_FILL
+                "zoom" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                else -> AspectRatioFrameLayout.RESIZE_MODE_FIT
+            }
         }
 
         if (useSystemCaptionStyle) {

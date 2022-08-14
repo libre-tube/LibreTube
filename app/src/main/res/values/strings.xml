@@ -313,4 +313,5 @@
     <string name="backup_restore">Backup &amp; restore</string>
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Picture in Picture</string>
+    <string name="player_resize_mode">Resize mode</string>
 </resources>
