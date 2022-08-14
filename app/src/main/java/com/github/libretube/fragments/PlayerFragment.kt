@@ -40,11 +40,11 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.database.DatabaseHelper
-import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
+import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
@@ -941,7 +941,7 @@ class PlayerFragment : BaseFragment() {
         var position: Long? = null
         Thread {
             try {
-                position = DatabaseHolder.database.watchPositionDao().findById(videoId!!).position
+                position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
             } catch (e: Exception) {
                 position = null
             }

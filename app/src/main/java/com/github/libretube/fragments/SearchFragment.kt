@@ -12,8 +12,8 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentSearchBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
@@ -92,7 +92,7 @@ class SearchFragment() : BaseFragment() {
     private fun showHistory() {
         var historyList = listOf<String>()
         Thread {
-            val history = DatabaseHolder.database.searchHistoryDao().getAll()
+            val history = DatabaseHolder.db.searchHistoryDao().getAll()
             historyList = history.map { it.query }
         }.await()
         if (historyList.isNotEmpty()) {

@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.SearchAdapter
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentSearchResultBinding
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
-import com.github.libretube.obj.SearchHistoryItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.hideKeyboard
@@ -136,7 +136,7 @@ class SearchResultFragment : BaseFragment() {
             PreferenceHelper.getBoolean(PreferenceKeys.SEARCH_HISTORY_TOGGLE, true)
         if (searchHistoryEnabled && query != "") {
             Thread {
-                DatabaseHolder.database.searchHistoryDao().insertAll(
+                DatabaseHolder.db.searchHistoryDao().insertAll(
                     SearchHistoryItem(
                         query = query
                     )

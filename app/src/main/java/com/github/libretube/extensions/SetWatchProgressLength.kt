@@ -3,7 +3,7 @@ package com.github.libretube.util
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
-import com.github.libretube.database.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.await
 
 /**
@@ -15,7 +15,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
 
     Thread {
         try {
-            progress = DatabaseHolder.database.watchPositionDao().findById(videoId).position
+            progress = DatabaseHolder.db.watchPositionDao().findById(videoId).position
         } catch (e: Exception) {
             progress = null
         }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
-import com.github.libretube.database.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -20,7 +20,7 @@ class HistorySettings : MaterialPreferenceFragment() {
         val clearHistory = findPreference<Preference>(PreferenceKeys.CLEAR_SEARCH_HISTORY)
         clearHistory?.setOnPreferenceClickListener {
             showClearDialog(R.string.clear_history) {
-                DatabaseHolder.database.searchHistoryDao().deleteAll()
+                DatabaseHolder.db.searchHistoryDao().deleteAll()
             }
             true
         }
@@ -29,7 +29,7 @@ class HistorySettings : MaterialPreferenceFragment() {
         val clearWatchHistory = findPreference<Preference>(PreferenceKeys.CLEAR_WATCH_HISTORY)
         clearWatchHistory?.setOnPreferenceClickListener {
             showClearDialog(R.string.clear_history) {
-                DatabaseHolder.database.watchHistoryDao().deleteAll()
+                DatabaseHolder.db.watchHistoryDao().deleteAll()
             }
             true
         }
@@ -38,7 +38,7 @@ class HistorySettings : MaterialPreferenceFragment() {
         val clearWatchPositions = findPreference<Preference>(PreferenceKeys.CLEAR_WATCH_POSITIONS)
         clearWatchPositions?.setOnPreferenceClickListener {
             showClearDialog(R.string.reset_watch_positions) {
-                DatabaseHolder.database.watchPositionDao().deleteAll()
+                DatabaseHolder.db.watchPositionDao().deleteAll()
             }
             true
         }

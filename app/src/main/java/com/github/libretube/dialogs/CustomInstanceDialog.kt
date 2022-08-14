@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
-import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.DialogCustomInstanceBinding
-import com.github.libretube.obj.CustomInstance
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.net.URL
@@ -42,7 +42,7 @@ class CustomInstanceDialog : DialogFragment() {
                         URL(customInstance.frontendUrl).toURI()
 
                         Thread {
-                            DatabaseHolder.database.customInstanceDao().insertAll(customInstance)
+                            DatabaseHolder.db.customInstanceDao().insertAll(customInstance)
                         }.start()
 
                         activity?.recreate()
