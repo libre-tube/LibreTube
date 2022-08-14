@@ -63,7 +63,7 @@
 
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_gravity">end</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:padding">8dp</item>
 
@@ -73,16 +73,10 @@
 
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="hintEnabled">false</item>
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-
-        <item name="boxCornerRadiusBottomStart">15dp</item>
-        <item name="boxCornerRadiusBottomEnd">15dp</item>
-        <item name="boxCornerRadiusTopEnd">15dp</item>
-        <item name="boxCornerRadiusTopStart">15dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
 
     </style>
 

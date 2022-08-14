@@ -846,4 +846,16 @@
         <item>120</item>
     </string-array>
 
+    <string-array name="resizeMode">
+        <item>@string/resize_mode_fit</item>
+        <item>@string/resize_mode_zoom</item>
+        <item>@string/resize_mode_fill</item>
+    </string-array>
+
+    <string-array name="resizeModeValues">
+        <item>fit</item>
+        <item>zoom</item>
+        <item>fill</item>
+    </string-array>
+
 </resources>

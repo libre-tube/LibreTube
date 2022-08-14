@@ -13,8 +13,8 @@ import com.github.libretube.WEBLATE_URL
 import com.github.libretube.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.extensions.showSnackBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 
 class AboutActivity : BaseActivity() {
     private lateinit var binding: ActivityAboutBinding
@@ -29,8 +29,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(WEBSITE_URL)
         }
         binding.website.setOnLongClickListener {
-            val text = getString(R.string.website_summary)
-            showSnackBar(text)
+            binding.root.showSnackBar(R.string.website_summary)
             true
         }
 
@@ -38,8 +37,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
         binding.piped.setOnLongClickListener {
-            val text = getString(R.string.piped_summary)
-            showSnackBar(text)
+            binding.root.showSnackBar(R.string.piped_summary)
             true
         }
 
@@ -47,8 +45,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(WEBLATE_URL)
         }
         binding.translate.setOnLongClickListener {
-            val text = getString(R.string.translate_summary)
-            showSnackBar(text)
+            binding.root.showSnackBar(R.string.translate_summary)
             true
         }
 
@@ -56,8 +53,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(DONATE_URL)
         }
         binding.donate.setOnLongClickListener {
-            val text = getString(R.string.donate_summary)
-            showSnackBar(text)
+            binding.root.showSnackBar(R.string.donate_summary)
             true
         }
 
@@ -65,8 +61,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(GITHUB_URL)
         }
         binding.github.setOnLongClickListener {
-            val text = getString(R.string.contributing_summary)
-            showSnackBar(text)
+            binding.root.showSnackBar(R.string.contributing_summary)
             true
         }
 
@@ -74,8 +69,7 @@ class AboutActivity : BaseActivity() {
             showLicense()
         }
         binding.license.setOnLongClickListener {
-            val text = getString(R.string.license_summary)
-            showSnackBar(text)
+            binding.root.showSnackBar(R.string.license_summary)
             true
         }
     }
@@ -84,16 +78,6 @@ class AboutActivity : BaseActivity() {
         val uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW).setData(uri)
         startActivity(intent)
-    }
-
-    private fun showSnackBar(text: String) {
-        val snackBar = Snackbar
-            .make(binding.root, text, Snackbar.LENGTH_LONG)
-
-        // prevent the text from being partially hidden
-        snackBar.setTextMaxLines(3)
-
-        snackBar.show()
     }
 
     private fun showLicense() {

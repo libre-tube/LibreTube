@@ -25,7 +25,7 @@ class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
     var currentAutoplayMode: String? = null
     var currentRepeatMode: String? = null
     var currentQuality: String? = null
-    var currentAspectRatio: String? = null
+    var currentResizeMode: String? = null
     var currentCaptions: String? = null
 
     override fun onCreateView(
@@ -67,10 +67,10 @@ class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
 
         binding.repeatMode.updateText(currentRepeatMode)
 
-        binding.aspectRatio.updateText(currentAspectRatio)
+        binding.resizeMode.updateText(currentResizeMode)
 
-        binding.aspectRatio.setOnClickListener {
-            playerOptionsInterface.onAspectRatioClicked()
+        binding.resizeMode.setOnClickListener {
+            playerOptionsInterface.onResizeModeClicked()
             this.dismiss()
         }
 

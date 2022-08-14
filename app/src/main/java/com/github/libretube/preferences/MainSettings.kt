@@ -7,9 +7,10 @@ import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.UpdateDialog
+import com.github.libretube.extensions.showSnackBar
 import com.github.libretube.update.UpdateChecker
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.views.MaterialPreferenceFragment
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -85,32 +86,25 @@ class MainSettings : MaterialPreferenceFragment() {
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
+                if (!ConnectionHelper.isNetworkAvailable(requireContext())) {
+                    (activity as SettingsActivity).binding.root.showSnackBar(R.string.unknown_error)
+                    return@launch
+                }
                 // check for update
                 val updateInfo = UpdateChecker.getLatestReleaseInfo()
                 if (updateInfo?.name == null) {
                     // request failed
-                    val settingsActivity = activity as SettingsActivity
-                    val snackBar = Snackbar
-                        .make(
-                            settingsActivity.binding.root,
-                            R.string.unknown_error,
-                            Snackbar.LENGTH_SHORT
-                        )
-                    snackBar.show()
+                    (activity as SettingsActivity).binding.root.showSnackBar(R.string.unknown_error)
                 } else if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
                     val updateAvailableDialog = UpdateDialog(updateInfo)
-                    updateAvailableDialog.show(childFragmentManager, UpdateDialog::class.java.name)
+                    updateAvailableDialog.show(
+                        childFragmentManager,
+                        UpdateDialog::class.java.name
+                    )
                 } else {
                     // otherwise show the no update available snackBar
-                    val settingsActivity = activity as SettingsActivity
-                    val snackBar = Snackbar
-                        .make(
-                            settingsActivity.binding.root,
-                            R.string.app_uptodate,
-                            Snackbar.LENGTH_SHORT
-                        )
-                    snackBar.show()
+                    (activity as SettingsActivity).binding.root.showSnackBar(R.string.app_uptodate)
                 }
             }
             true

@@ -77,6 +77,15 @@
             app:key="default_subtitle"
             app:title="@string/default_subtitle_language" />
 
+        <ListPreference
+            android:defaultValue="fit"
+            android:entries="@array/resizeMode"
+            android:entryValues="@array/resizeModeValues"
+            android:icon="@drawable/ic_zoom"
+            app:key="player_resize_mode"
+            app:title="@string/player_resize_mode"
+            app:useSimpleSummaryProvider="true" />
+
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_next"

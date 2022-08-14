@@ -10,7 +10,7 @@ interface PlayerOptionsInterface {
 
     fun onPlaybackSpeedClicked()
 
-    fun onAspectRatioClicked()
+    fun onResizeModeClicked()
 
     fun onRepeatModeClicked()
 }
