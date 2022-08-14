@@ -13,7 +13,6 @@ import com.github.libretube.util.formatShort
 class RepliesAdapter(
     private val replies: MutableList<Comment>
 ) : RecyclerView.Adapter<RepliesViewHolder>() {
-    private val TAG = "RepliesAdapter"
 
     fun clear() {
         val size: Int = replies.size

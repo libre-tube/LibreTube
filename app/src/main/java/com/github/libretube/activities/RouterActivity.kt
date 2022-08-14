@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import com.github.libretube.R
 import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.extensions.TAG
 import com.github.libretube.util.ThemeHelper
 
 class RouterActivity : BaseActivity() {
-    val TAG = "RouterActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.getStringExtra(Intent.EXTRA_TEXT) != null && checkHost(intent)) {
@@ -31,12 +31,12 @@ class RouterActivity : BaseActivity() {
         val hostsList = resources.getStringArray(R.array.shareHostsList)
         val intentDataUri: Uri = Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT))
         val intentDataHost = intentDataUri.host
-        Log.d(TAG, "$intentDataHost")
+        Log.d(TAG(), "$intentDataHost")
         return hostsList.contains(intentDataHost)
     }
 
     private fun handleSendText(uri: Uri) {
-        Log.i(TAG, uri.toString())
+        Log.i(TAG(), uri.toString())
         val pm: PackageManager = this.packageManager
         val intent = pm.getLaunchIntentForPackage(this.packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK

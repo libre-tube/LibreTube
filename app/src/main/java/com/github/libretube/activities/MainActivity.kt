@@ -28,16 +28,17 @@ import androidx.navigation.ui.setupWithNavController
 import coil.ImageLoader
 import com.github.libretube.Globals
 import com.github.libretube.R
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.extensions.TAG
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.ConnectionHelper
-import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -45,7 +46,6 @@ import com.google.android.material.elevation.SurfaceColors
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : BaseActivity() {
-    val TAG = "MainActivity"
 
     lateinit var binding: ActivityMainBinding
 
@@ -301,7 +301,7 @@ class MainActivity : BaseActivity() {
         val intentData: Uri? = intent?.data
         // check whether an URI got submitted over the intent data
         if (intentData != null && intentData.host != null && intentData.path != null) {
-            Log.d(TAG, "intentData: ${intentData.host} ${intentData.path} ")
+            Log.d(TAG(), "intentData: ${intentData.host} ${intentData.path} ")
             // load the URI of the submitted link (e.g. video)
             loadIntentData(intentData)
         }
@@ -375,10 +375,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadVideo(videoId: String, query: String?) {
-        Log.i(TAG, "URI type: Video")
+        Log.i(TAG(), "URI type: Video")
 
         val bundle = Bundle()
-        Log.e(TAG, videoId)
+        Log.e(TAG(), videoId)
 
         // for time stamped links
         if (query != null && query.contains("t=")) {
@@ -407,7 +407,7 @@ class MainActivity : BaseActivity() {
         channelId: String? = null,
         channelName: String? = null
     ) {
-        Log.i(TAG, "Uri Type: Channel")
+        Log.i(TAG(), "Uri Type: Channel")
 
         val bundle = if (channelId != null) bundleOf("channel_id" to channelId)
         else bundleOf("channel_name" to channelName)
@@ -415,7 +415,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadPlaylist(playlistId: String) {
-        Log.i(TAG, "Uri Type: Playlist")
+        Log.i(TAG(), "Uri Type: Playlist")
 
         val bundle = bundleOf("playlist_id" to playlistId)
         navController.navigate(R.id.playlistFragment, bundle)
@@ -497,7 +497,10 @@ class MainActivity : BaseActivity() {
                 )
         }
 
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
     private fun unsetFullscreen() {

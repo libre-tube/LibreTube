@@ -7,7 +7,6 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 
 object PreferenceHelper {
-    private val TAG = "PreferenceHelper"
 
     private lateinit var prefContext: Context
 

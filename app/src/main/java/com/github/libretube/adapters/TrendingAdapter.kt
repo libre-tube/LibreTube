@@ -20,7 +20,6 @@ class TrendingAdapter(
     private val childFragmentManager: FragmentManager,
     private val showAllAtOne: Boolean = true
 ) : RecyclerView.Adapter<SubscriptionViewHolder>() {
-    private val TAG = "TrendingAdapter"
 
     var index = 10
 

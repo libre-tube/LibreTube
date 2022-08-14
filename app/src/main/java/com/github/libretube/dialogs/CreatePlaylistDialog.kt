@@ -7,18 +7,18 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.fragments.LibraryFragment
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
 class CreatePlaylistDialog : DialogFragment() {
-    val TAG = "CreatePlaylistDialog"
     private var token: String = ""
     private lateinit var binding: DialogCreatePlaylistBinding
 
@@ -58,15 +58,15 @@ class CreatePlaylistDialog : DialogFragment() {
                     RetrofitInstance.authApi.createPlaylist(token, Playlists(name = name))
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response $e")
+                    Log.e(TAG(), "HttpException, unexpected response $e")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }
-                if (response != null) {
+                if (response.playlistId != null) {
                     Toast.makeText(context, R.string.playlistCreated, Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, getString(R.string.unknown_error), Toast.LENGTH_SHORT)
@@ -77,7 +77,7 @@ class CreatePlaylistDialog : DialogFragment() {
                     val parent = parentFragment as LibraryFragment
                     parent.fetchPlaylists()
                 } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
+                    Log.e(TAG(), e.toString())
                 }
                 dismiss()
             }

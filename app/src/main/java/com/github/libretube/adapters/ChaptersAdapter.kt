@@ -14,7 +14,6 @@ class ChaptersAdapter(
     private val chapters: List<ChapterSegment>,
     private val exoPlayer: ExoPlayer
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
-    val TAG = "ChaptersAdapter"
     private var selectedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChaptersViewHolder {

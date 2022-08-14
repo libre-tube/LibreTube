@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.extensions.BaseFragment
-import com.github.libretube.util.RetrofitInstance
+import com.github.libretube.extensions.TAG
 import com.github.libretube.util.toID
 import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistFragment : BaseFragment() {
-    private val TAG = "PlaylistFragment"
     private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null
@@ -65,10 +65,10 @@ class PlaylistFragment : BaseFragment() {
                     else RetrofitInstance.api.getPlaylist(playlistId!!)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
@@ -103,7 +103,10 @@ class PlaylistFragment : BaseFragment() {
                             RecyclerView.AdapterDataObserver() {
                             override fun onChanged() {
                                 binding.videoCount.text =
-                                    getString(R.string.videoCount, playlistAdapter!!.itemCount.toString())
+                                    getString(
+                                        R.string.videoCount,
+                                        playlistAdapter!!.itemCount.toString()
+                                    )
                             }
                         })
 
@@ -169,10 +172,10 @@ class PlaylistFragment : BaseFragment() {
                     )
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response," + e.response())
+                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage

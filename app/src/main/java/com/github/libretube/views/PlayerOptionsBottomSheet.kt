@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.github.libretube.R
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -16,8 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  * Bottom Sheet including all the player options
  */
 class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
-    private val TAG = this::class.java.name.toString()
-
     lateinit var binding: BottomSheetBinding
     private lateinit var playerOptionsInterface: PlayerOptionsInterface
 

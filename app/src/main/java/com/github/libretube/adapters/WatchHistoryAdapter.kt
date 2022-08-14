@@ -18,7 +18,6 @@ class WatchHistoryAdapter(
     private val childFragmentManager: FragmentManager
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
-    private val TAG = "WatchHistoryAdapter"
 
     fun removeFromWatchHistory(position: Int) {
         DatabaseHelper.removeFromWatchHistory(position)

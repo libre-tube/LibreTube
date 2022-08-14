@@ -9,18 +9,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.util.ConnectionHelper
-import com.github.libretube.util.RetrofitInstance
-import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.toID
 import retrofit2.HttpException
 import java.io.IOException
 
 class ChannelFragment : BaseFragment() {
-    private val TAG = "ChannelFragment"
     private lateinit var binding: FragmentChannelBinding
 
     private var channelId: String? = null
@@ -115,11 +115,11 @@ class ChannelFragment : BaseFragment() {
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     binding.channelRefresh.isRefreshing = false
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
@@ -169,11 +169,11 @@ class ChannelFragment : BaseFragment() {
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
                     binding.channelRefresh.isRefreshing = false
-                    Log.e(TAG, "HttpException, unexpected response," + e.response())
+                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage

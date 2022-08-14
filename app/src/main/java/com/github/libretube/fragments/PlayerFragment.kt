@@ -37,6 +37,9 @@ import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
 import com.github.libretube.adapters.CommentsAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.api.CronetHelper
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.database.DatabaseHelper
 import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -46,6 +49,7 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
@@ -59,11 +63,8 @@ import com.github.libretube.services.BackgroundMode
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ConnectionHelper
-import com.github.libretube.util.CronetHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.RetrofitInstance
-import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.hideKeyboard
 import com.github.libretube.util.toID
@@ -102,7 +103,6 @@ import kotlin.math.abs
 
 class PlayerFragment : BaseFragment() {
 
-    private val TAG = "PlayerFragment"
     private lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
@@ -581,12 +581,14 @@ class PlayerFragment : BaseFragment() {
                 currentAutoplayMode = if (autoplayEnabled) context.getString(R.string.enabled)
                 else context.getString(R.string.disabled)
                 // set the current caption language
-                currentCaptions = if (trackSelector.parameters.preferredTextLanguages.isNotEmpty()) {
-                    trackSelector.parameters.preferredTextLanguages[0]
-                } else context.getString(R.string.none)
+                currentCaptions =
+                    if (trackSelector.parameters.preferredTextLanguages.isNotEmpty()) {
+                        trackSelector.parameters.preferredTextLanguages[0]
+                    } else context.getString(R.string.none)
                 // set the playback speed
                 val playbackSpeeds = context.resources.getStringArray(R.array.playbackSpeed)
-                val playbackSpeedValues = context.resources.getStringArray(R.array.playbackSpeedValues)
+                val playbackSpeedValues =
+                    context.resources.getStringArray(R.array.playbackSpeedValues)
                 val playbackSpeed = exoPlayer.playbackParameters.speed.toString()
                 currentPlaybackSpeed = playbackSpeeds[playbackSpeedValues.indexOf(playbackSpeed)]
                 // set the quality text
@@ -598,9 +600,10 @@ class PlayerFragment : BaseFragment() {
                         else "${quality}p"
                 }
                 // set the repeat mode
-                currentRepeatMode = if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                    context.getString(R.string.repeat_mode_none)
-                } else context.getString(R.string.repeat_mode_current)
+                currentRepeatMode =
+                    if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                        context.getString(R.string.repeat_mode_none)
+                    } else context.getString(R.string.repeat_mode_current)
                 // set the aspect ratio mode
                 currentAspectRatio = when (exoPlayerView.resizeMode) {
                     AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
@@ -854,11 +857,11 @@ class PlayerFragment : BaseFragment() {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
+                Log.e(TAG(), "IOException, you might not have internet connection")
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
+                Log.e(TAG(), "HttpException, unexpected response")
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
@@ -920,7 +923,7 @@ class PlayerFragment : BaseFragment() {
             playerBinding.liveSeparator.visibility = View.GONE
             playerBinding.liveDiff.text = ""
         } else {
-            Log.e(TAG, "changing the time")
+            Log.e(TAG(), "changing the time")
             // live stream but not watching at the end/live position
             playerBinding.liveSeparator.visibility = View.VISIBLE
             val diffText = DateUtils.formatElapsedTime(
@@ -1564,11 +1567,11 @@ class PlayerFragment : BaseFragment() {
                 RetrofitInstance.api.getComments(videoId!!)
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
+                Log.e(TAG(), "IOException, you might not have internet connection")
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
+                Log.e(TAG(), "HttpException, unexpected response")
                 return@launchWhenCreated
             }
             commentsAdapter = CommentsAdapter(videoId!!, commentsResponse.comments)
@@ -1587,10 +1590,10 @@ class PlayerFragment : BaseFragment() {
                     RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response," + e.response())
+                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage

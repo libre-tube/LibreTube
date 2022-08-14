@@ -21,7 +21,8 @@ object DatabaseHelper {
         )
         Thread {
             DatabaseHolder.database.watchHistoryDao().insertAll(watchHistoryItem)
-            val maxHistorySize = PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
+            val maxHistorySize =
+                PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
             if (maxHistorySize == "unlimited") return@Thread
 
             // delete the first watch history entry if the limit is reached

@@ -6,7 +6,6 @@ import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.views.MaterialPreferenceFragment
 
 class SponsorBlockSettings : MaterialPreferenceFragment() {
-    private val TAG = "SponsorBlockSettings"
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.sponsorblock_settings, rootKey)

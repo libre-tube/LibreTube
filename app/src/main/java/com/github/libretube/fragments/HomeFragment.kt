@@ -10,17 +10,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
 class HomeFragment : BaseFragment() {
-    private val TAG = "HomeFragment"
     private lateinit var binding: FragmentHomeBinding
     private lateinit var region: String
 
@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment() {
         val grid = PreferenceHelper.getString(
             PreferenceKeys.GRID_COLUMNS,
             resources.getInteger(R.integer.grid_items).toString()
-        )!!
+        )
 
         val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")!!
 
@@ -70,11 +70,11 @@ class HomeFragment : BaseFragment() {
                     RetrofitInstance.api.getTrending(region)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 } finally {

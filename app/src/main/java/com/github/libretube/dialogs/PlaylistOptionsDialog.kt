@@ -7,10 +7,11 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.toID
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +25,6 @@ class PlaylistOptionsDialog(
     private val playlistId: String,
     private val isOwner: Boolean
 ) : DialogFragment() {
-    val TAG = "PlaylistOptionsDialog"
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // options for the dialog
@@ -104,7 +104,7 @@ class PlaylistOptionsDialog(
                 } catch (e: HttpException) {
                     return@launch
                 }
-                Log.e(TAG, response.toString())
+                Log.e(TAG(), response.toString())
             }
         }
         run()
@@ -113,14 +113,14 @@ class PlaylistOptionsDialog(
     private fun deletePlaylist(id: String, token: String) {
         fun run() {
             CoroutineScope(Dispatchers.IO).launch {
-                val response = try {
+                try {
                     RetrofitInstance.authApi.deletePlaylist(token, PlaylistId(id))
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launch
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launch
                 }
             }

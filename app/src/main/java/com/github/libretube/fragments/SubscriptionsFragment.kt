@@ -13,20 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.RetrofitInstance
-import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.toID
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
 class SubscriptionsFragment : BaseFragment() {
-    val TAG = "SubFragment"
     private lateinit var binding: FragmentSubscriptionsBinding
 
     lateinit var token: String
@@ -130,11 +130,11 @@ class SubscriptionsFragment : BaseFragment() {
                         SubscriptionHelper.getFormattedLocalSubscriptions()
                     )
                 } catch (e: IOException) {
-                    Log.e(TAG, e.toString())
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), e.toString())
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launchWhenCreated
                 } finally {
                     binding.subRefresh.isRefreshing = false
@@ -180,11 +180,11 @@ class SubscriptionsFragment : BaseFragment() {
                         SubscriptionHelper.getFormattedLocalSubscriptions()
                     )
                 } catch (e: IOException) {
-                    Log.e(TAG, e.toString())
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), e.toString())
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launchWhenCreated
                 } finally {
                     binding.subRefresh.isRefreshing = false

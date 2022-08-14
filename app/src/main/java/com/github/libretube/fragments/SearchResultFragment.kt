@@ -9,20 +9,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.SearchAdapter
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentSearchResultBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.obj.SearchHistoryItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.hideKeyboard
 import retrofit2.HttpException
 import java.io.IOException
 
 class SearchResultFragment : BaseFragment() {
-    private val TAG = "SearchResultFragment"
     private lateinit var binding: FragmentSearchResultBinding
 
     private var nextPage: String? = null
@@ -86,10 +86,10 @@ class SearchResultFragment : BaseFragment() {
                 RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection $e")
+                Log.e(TAG(), "IOException, you might not have internet connection $e")
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
+                Log.e(TAG(), "HttpException, unexpected response")
                 return@launchWhenCreated
             }
             runOnUiThread {
@@ -116,10 +116,10 @@ class SearchResultFragment : BaseFragment() {
                 )
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
+                Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response," + e.response())
+                Log.e(TAG(), "HttpException, unexpected response," + e.response())
                 return@launchWhenCreated
             }
             nextPage = response.nextpage!!

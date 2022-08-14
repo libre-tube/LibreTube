@@ -7,15 +7,15 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogDeleteAccountBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.DeleteUserRequest
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DeleteAccountDialog : DialogFragment() {
-    private val TAG = "DeleteAccountDialog"
     private lateinit var binding: DialogDeleteAccountBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -50,7 +50,7 @@ class DeleteAccountDialog : DialogFragment() {
                 try {
                     RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
                 } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
+                    Log.e(TAG(), e.toString())
                     Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                     return@launchWhenCreated
                 }

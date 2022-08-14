@@ -13,7 +13,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.net.URL
 
 class CustomInstanceDialog : DialogFragment() {
-    val TAG = "CustomInstanceDialog"
     private lateinit var binding: DialogCustomInstanceBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

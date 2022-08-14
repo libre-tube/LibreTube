@@ -16,7 +16,6 @@ import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : MaterialPreferenceFragment() {
-    private val TAG = "AppearanceSettings"
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 

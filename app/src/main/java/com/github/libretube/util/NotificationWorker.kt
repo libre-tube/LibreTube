@@ -9,7 +9,6 @@ import androidx.work.WorkerParameters
  */
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     Worker(appContext, parameters) {
-    private val TAG = "NotificationWorker"
 
     override fun doWork(): Result {
         // check whether there are new streams and notify if there are some

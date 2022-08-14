@@ -12,7 +12,6 @@ import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AdvancedSettings : MaterialPreferenceFragment() {
-    val TAG = "AdvancedSettings"
 
     /**
      * result listeners for importing and exporting subscriptions

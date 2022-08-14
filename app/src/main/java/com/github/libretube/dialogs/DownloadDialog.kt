@@ -11,18 +11,18 @@ import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogDownloadBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
 import com.github.libretube.util.PermissionHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
 class DownloadDialog : DialogFragment() {
-    private val TAG = "DownloadDialog"
     private lateinit var binding: DialogDownloadBinding
 
     private lateinit var videoId: String
@@ -62,11 +62,11 @@ class DownloadDialog : DialogFragment() {
                 RetrofitInstance.api.getStreams(videoId)
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
+                Log.e(TAG(), "IOException, you might not have internet connection")
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
+                Log.e(TAG(), "HttpException, unexpected response")
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }

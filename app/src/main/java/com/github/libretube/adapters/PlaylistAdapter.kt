@@ -7,15 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.util.setWatchProgressLength
 import com.github.libretube.util.toID
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +32,6 @@ class PlaylistAdapter(
     private val activity: Activity,
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
-    private val TAG = "PlaylistAdapter"
 
     override fun getItemCount(): Int {
         return videoFeed.size
@@ -86,10 +86,10 @@ class PlaylistAdapter(
                 )
             } catch (e: IOException) {
                 println(e)
-                Log.e(TAG, "IOException, you might not have internet connection")
+                Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launch
             } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
+                Log.e(TAG(), "HttpException, unexpected response")
                 return@launch
             }
         }

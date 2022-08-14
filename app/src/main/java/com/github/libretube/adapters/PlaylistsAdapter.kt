@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.RetrofitInstance
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,6 @@ class PlaylistsAdapter(
     private val childFragmentManager: FragmentManager,
     private val activity: Activity
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
-    val TAG = "PlaylistsAdapter"
 
     override fun getItemCount(): Int {
         return playlists.size
@@ -94,10 +94,10 @@ class PlaylistsAdapter(
                     )
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launch
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launch
                 }
                 try {
@@ -106,7 +106,7 @@ class PlaylistsAdapter(
                         activity.runOnUiThread { notifyDataSetChanged() }
                     }
                 } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
+                    Log.e(TAG(), e.toString())
                 }
             }
         }

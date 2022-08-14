@@ -23,13 +23,13 @@ import com.github.libretube.DOWNLOAD_PENDING_NOTIFICATION_ID
 import com.github.libretube.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.Globals
 import com.github.libretube.R
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.DownloadType
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import java.io.File
 
 class DownloadService : Service() {
-    val TAG = "DownloadService"
 
     private lateinit var notification: NotificationCompat.Builder
 
@@ -78,11 +78,11 @@ class DownloadService : Service() {
         )
         if (!tempDir.exists()) {
             tempDir.mkdirs()
-            Log.e(TAG, "Directory make")
+            Log.e(TAG(), "Directory make")
         } else {
             tempDir.deleteRecursively()
             tempDir.mkdirs()
-            Log.e(TAG, "Directory already have")
+            Log.e(TAG(), "Directory already have")
         }
 
         val downloadLocationPref = PreferenceHelper.getString(PreferenceKeys.DOWNLOAD_LOCATION, "")
@@ -101,7 +101,7 @@ class DownloadService : Service() {
             folderName
         )
         if (!libretubeDir.exists()) libretubeDir.mkdirs()
-        Log.i(TAG, libretubeDir.toString())
+        Log.i(TAG(), libretubeDir.toString())
 
         // start download
         try {
@@ -130,7 +130,7 @@ class DownloadService : Service() {
                 }
             }
         } catch (e: IllegalArgumentException) {
-            Log.e(TAG, "download error $e")
+            Log.e(TAG(), "download error $e")
             downloadFailedNotification()
         }
     }
@@ -210,7 +210,7 @@ class DownloadService : Service() {
     }
 
     private fun downloadSucceededNotification() {
-        Log.i(TAG, "Download succeeded")
+        Log.i(TAG(), "Download succeeded")
         val builder = NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.success))
@@ -229,7 +229,7 @@ class DownloadService : Service() {
         }
 
         Globals.IS_DOWNLOAD_RUNNING = false
-        Log.d(TAG, "dl finished!")
+        Log.d(TAG(), "dl finished!")
         stopForeground(true)
         stopService(Intent(this@DownloadService, DownloadService::class.java))
         super.onDestroy()

@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.models.SearchViewModel
-import com.github.libretube.util.RetrofitInstance
 import retrofit2.HttpException
 import java.io.IOException
 
 class SearchFragment() : BaseFragment() {
-    private val TAG = "SearchFragment"
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by activityViewModels()
 
@@ -67,10 +67,10 @@ class SearchFragment() : BaseFragment() {
                     RetrofitInstance.api.getSuggestions(query)
                 } catch (e: IOException) {
                     println(e)
-                    Log.e(TAG, "IOException, you might not have internet connection")
+                    Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(TAG, "HttpException, unexpected response")
+                    Log.e(TAG(), "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
                 // only load the suggestions if the input field didn't get cleared yet
@@ -93,7 +93,7 @@ class SearchFragment() : BaseFragment() {
         var historyList = listOf<String>()
         Thread {
             val history = DatabaseHolder.database.searchHistoryDao().getAll()
-            historyList = history.map { it.query!! }
+            historyList = history.map { it.query }
         }.await()
         if (historyList.isNotEmpty()) {
             binding.suggestionsRecycler.adapter =

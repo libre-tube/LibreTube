@@ -7,7 +7,6 @@ import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.preferences.MainSettings
 
 class SettingsActivity : BaseActivity() {
-    val TAG = "SettingsActivity"
     lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

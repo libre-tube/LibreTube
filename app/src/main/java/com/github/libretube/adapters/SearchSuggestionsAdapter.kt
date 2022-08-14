@@ -12,8 +12,6 @@ class SearchSuggestionsAdapter(
 ) :
     RecyclerView.Adapter<SearchSuggestionsViewHolder>() {
 
-    private val TAG = "SearchSuggestionsAdapter"
-
     override fun getItemCount(): Int {
         return suggestionsList.size
     }

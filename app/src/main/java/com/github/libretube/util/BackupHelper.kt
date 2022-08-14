@@ -16,7 +16,6 @@ import java.io.ObjectOutputStream
 class BackupHelper(
     private val context: Context
 ) {
-    private val TAG = this::class.java.name
 
     /**
      * Backup the default shared preferences to a file
@@ -25,7 +24,8 @@ class BackupHelper(
         if (uri == null) return
         var output: ObjectOutputStream? = null
         try {
-            val fileDescriptor = context.contentResolver.openFileDescriptor(uri, "w")?.fileDescriptor
+            val fileDescriptor =
+                context.contentResolver.openFileDescriptor(uri, "w")?.fileDescriptor
             output = ObjectOutputStream(FileOutputStream(fileDescriptor))
             val pref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             // write all preference objects to the output file
@@ -53,7 +53,8 @@ class BackupHelper(
         if (uri == null) return
         var input: ObjectInputStream? = null
         try {
-            val fileDescriptor = context.contentResolver.openFileDescriptor(uri, "r")?.fileDescriptor
+            val fileDescriptor =
+                context.contentResolver.openFileDescriptor(uri, "r")?.fileDescriptor
             input = ObjectInputStream(FileInputStream(fileDescriptor))
             val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
 

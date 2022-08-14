@@ -1,6 +1,7 @@
-package com.github.libretube.util
+package com.github.libretube.api
 
 import android.util.Log
+import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
@@ -8,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object SubscriptionHelper {
-    val TAG = "SubscriptionHelper"
 
     fun subscribe(channelId: String) {
         if (PreferenceHelper.getToken() != "") {
@@ -19,7 +19,7 @@ object SubscriptionHelper {
                         Subscribe(channelId)
                     )
                 } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
+                    Log.e(TAG(), e.toString())
                 }
             }
         } else {
@@ -38,7 +38,7 @@ object SubscriptionHelper {
                         Subscribe(channelId)
                     )
                 } catch (e: Exception) {
-                    Log.e(TAG, e.toString())
+                    Log.e(TAG(), e.toString())
                 }
             }
         } else {
@@ -56,7 +56,7 @@ object SubscriptionHelper {
                     PreferenceHelper.getToken()
                 )
             } catch (e: Exception) {
-                Log.e(TAG, e.toString())
+                Log.e(TAG(), e.toString())
                 return null
             }
             return isSubscribed.subscribed

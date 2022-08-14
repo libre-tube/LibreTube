@@ -51,13 +51,13 @@
 
         <Preference
             android:icon="@drawable/ic_backup"
-            app:title="@string/backup"
-            app:key="backup_settings" />
+            app:key="backup_settings"
+            app:title="@string/backup" />
 
         <Preference
             android:icon="@drawable/ic_restore"
-            app:title="@string/restore"
-            app:key="restore_settings" />
+            app:key="restore_settings"
+            app:title="@string/restore" />
 
     </PreferenceCategory>
 

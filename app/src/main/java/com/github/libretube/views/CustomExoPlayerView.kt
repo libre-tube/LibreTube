@@ -14,7 +14,6 @@ internal class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
 ) : StyledPlayerView(context, attributeSet) {
-    val TAG = "CustomExoPlayerView"
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
 
     private var doubleTapListener: DoubleTapInterface? = null

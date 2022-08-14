@@ -15,7 +15,6 @@ import com.github.libretube.extensions.await
 import com.github.libretube.obj.WatchHistoryItem
 
 class WatchHistoryFragment : BaseFragment() {
-    private val TAG = "WatchHistoryFragment"
     private lateinit var binding: FragmentWatchHistoryBinding
 
     override fun onCreateView(

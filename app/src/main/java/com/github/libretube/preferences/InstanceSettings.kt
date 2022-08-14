@@ -12,6 +12,7 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.database.DatabaseHolder
 import com.github.libretube.dialogs.CustomInstanceDialog
 import com.github.libretube.dialogs.DeleteAccountDialog
@@ -21,11 +22,9 @@ import com.github.libretube.extensions.await
 import com.github.libretube.obj.CustomInstance
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
-import com.github.libretube.util.RetrofitInstance
 import com.github.libretube.views.MaterialPreferenceFragment
 
 class InstanceSettings : MaterialPreferenceFragment() {
-    val TAG = "InstanceSettings"
 
     /**
      * result listeners for importing and exporting subscriptions

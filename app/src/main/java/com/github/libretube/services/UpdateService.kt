@@ -14,7 +14,6 @@ import com.github.libretube.R
 import java.io.File
 
 class UpdateService : Service() {
-    private val TAG = "UpdateService"
     private lateinit var downloadUrl: String
     private var downloadId: Long = -1
     private lateinit var file: File

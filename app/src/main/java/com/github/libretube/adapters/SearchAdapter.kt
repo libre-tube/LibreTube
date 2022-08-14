@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
@@ -15,7 +16,6 @@ import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.SearchItem
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.SubscriptionHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
 import com.github.libretube.util.toID
