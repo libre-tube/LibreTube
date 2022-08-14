@@ -5,9 +5,9 @@ import android.os.Bundle
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
 import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.extensions.showSnackBar
 import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.snackbar.Snackbar
 
 class NoInternetActivity : BaseActivity() {
     private lateinit var binding: ActivityNointernetBinding
@@ -21,9 +21,7 @@ class NoInternetActivity : BaseActivity() {
             if (ConnectionHelper.isNetworkAvailable(this)) {
                 ThemeHelper.restartMainActivity(this)
             } else {
-                val snackBar = Snackbar
-                    .make(binding.root, R.string.turnInternetOn, Snackbar.LENGTH_LONG)
-                snackBar.show()
+                binding.root.showSnackBar(R.string.turnInternetOn)
             }
         }
         binding.noInternetSettingsImageView.setOnClickListener {
