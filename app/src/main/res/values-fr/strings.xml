@@ -214,7 +214,7 @@
     <string name="auto_rotation">Rotation automatique</string>
     <string name="landscape">Paysage</string>
     <string name="portrait">Portrait</string>
-    <string name="aspect_ratio">Ratio d\'aspect des vidéos</string>
+    <string name="aspect_ratio">Rapport d\'aspect vidéo</string>
     <string name="matrix">Matrix</string>
     <string name="reddit">Reddit</string>
     <string name="twitter">Twitter</string>
