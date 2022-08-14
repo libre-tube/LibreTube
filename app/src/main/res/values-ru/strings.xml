@@ -301,4 +301,10 @@
     <string name="backup_restore">Резервное копирование и восстановление</string>
     <string name="backup">Резервное копирование</string>
     <string name="picture_in_picture">Картина в картине</string>
+    <string name="resize_mode_fit">Поместиться</string>
+    <string name="resize_mode_fill">Наполнять</string>
+    <string name="resize_mode_zoom">Увеличить</string>
+    <string name="repeat_mode_none">Никто</string>
+    <string name="repeat_mode_current">Текущий</string>
+    <string name="player_resize_mode">Режим изменения размера</string>
 </resources>
