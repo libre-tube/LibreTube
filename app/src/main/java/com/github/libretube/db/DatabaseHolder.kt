@@ -13,7 +13,6 @@ object DatabaseHolder {
             AppDatabase::class.java,
             DATABASE_NAME
         )
-            .fallbackToDestructiveMigration()
             .build()
     }
 }

@@ -1,7 +1,10 @@
 package com.github.libretube.api
 
 import android.util.Log
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.await
 import com.github.libretube.obj.Subscribe
 import com.github.libretube.preferences.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
@@ -23,9 +26,11 @@ object SubscriptionHelper {
                 }
             }
         } else {
-            val channels = PreferenceHelper.getLocalSubscriptions().toMutableList()
-            channels.add(channelId)
-            PreferenceHelper.setLocalSubscriptions(channels)
+            Thread {
+                DatabaseHolder.db.localSubscriptionDao().insertAll(
+                    LocalSubscription(channelId)
+                )
+            }.start()
         }
     }
 
@@ -42,9 +47,11 @@ object SubscriptionHelper {
                 }
             }
         } else {
-            val channels = PreferenceHelper.getLocalSubscriptions().toMutableList()
-            channels.remove(channelId)
-            PreferenceHelper.setLocalSubscriptions(channels)
+            Thread {
+                DatabaseHolder.db.localSubscriptionDao().delete(
+                    LocalSubscription(channelId)
+                )
+            }.start()
         }
     }
 
@@ -61,7 +68,11 @@ object SubscriptionHelper {
             }
             return isSubscribed.subscribed
         } else {
-            return PreferenceHelper.getLocalSubscriptions().contains(channelId)
+            var isSubscribed = false
+            Thread {
+                isSubscribed = DatabaseHolder.db.localSubscriptionDao().includes(channelId)
+            }.await()
+            return isSubscribed
         }
     }
 
@@ -78,15 +89,28 @@ object SubscriptionHelper {
                 e.printStackTrace()
             }
         } else {
-            val channels = PreferenceHelper.getLocalSubscriptions().toMutableList()
+            val newLocalSubscriptions = mutableListOf<LocalSubscription>()
             newChannels.forEach {
-                if (!channels.contains(it)) channels += it
+                newLocalSubscriptions += LocalSubscription(channelId = it)
             }
-            PreferenceHelper.setLocalSubscriptions(channels)
+            Thread {
+                DatabaseHolder.db.localSubscriptionDao().insertAll(
+                    *newChannels.map { LocalSubscription(it) }.toTypedArray()
+                )
+            }.start()
         }
     }
 
+    fun getLocalSubscriptions(): List<LocalSubscription> {
+        var localSubscriptions = listOf<LocalSubscription>()
+        Thread {
+            localSubscriptions = DatabaseHolder.db.localSubscriptionDao().getAll()
+        }.await()
+        return localSubscriptions
+    }
+
     fun getFormattedLocalSubscriptions(): String {
-        return PreferenceHelper.getLocalSubscriptions().joinToString(",")
+        val localSubscriptions = getLocalSubscriptions()
+        return localSubscriptions.map { it.channelId }.joinToString(",")
     }
 }
