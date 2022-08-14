@@ -303,4 +303,8 @@
     <string name="repeat_mode">Režim opakování</string>
     <string name="resize_mode_fill">Vyplnit</string>
     <string name="resize_mode_zoom">Přiblížit</string>
+    <string name="backup_restore">Záloha a obnovení</string>
+    <string name="backup">Záloha</string>
+    <string name="picture_in_picture">Obraz v obraze</string>
+    <string name="player_resize_mode">Režim změny velikosti</string>
 </resources>
