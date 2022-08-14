@@ -306,4 +306,5 @@
     <string name="backup_restore">Backup og gendannelse</string>
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Billede i Billede</string>
+    <string name="player_resize_mode">Tilpas størrelse tilstand</string>
 </resources>
