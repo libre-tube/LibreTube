@@ -3,7 +3,6 @@ package com.github.libretube.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 
 object PreferenceHelper {
@@ -78,21 +77,6 @@ object PreferenceHelper {
 
     fun getErrorLog(): String {
         return getString(PreferenceKeys.ERROR_LOG, "")
-    }
-
-    fun getLocalSubscriptions(): List<String> {
-        val json = settings.getString(PreferenceKeys.LOCAL_SUBSCRIPTIONS, "")
-        return try {
-            val type = object : TypeReference<List<String>>() {}
-            mapper.readValue(json, type)
-        } catch (e: Exception) {
-            listOf()
-        }
-    }
-
-    fun setLocalSubscriptions(channels: List<String>) {
-        val json = mapper.writeValueAsString(channels)
-        editor.putString(PreferenceKeys.LOCAL_SUBSCRIPTIONS, json).commit()
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
