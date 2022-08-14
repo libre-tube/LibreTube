@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -14,33 +13,33 @@
         android:text="@string/app_name"
         android:textSize="20sp" />
 
-    <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/CustomDialogTextInputLayout"
+        android:hint="@string/username">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/username"
-            android:inputType="text"
-            android:padding="12dp" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout style="@style/CustomDialogTextInputLayout">
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/CustomDialogTextInputLayout"
+        android:hint="@string/password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="12dp" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         android:orientation="horizontal">
 
         <Button
@@ -51,7 +50,7 @@
         <Button
             android:id="@+id/login"
             style="@style/CustomDialogButton"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/login" />
 
     </LinearLayout>

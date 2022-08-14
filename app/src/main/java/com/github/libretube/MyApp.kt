@@ -19,7 +19,6 @@ import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.NotificationHelper
-import java.lang.Exception
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -170,7 +169,8 @@ class MyApp : Application() {
                     DatabaseHolder.db.watchHistoryDao().insertAll(
                         *watchHistoryItems.toTypedArray()
                     )
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
                 prefs.edit().putString("watch_history", "").commit()
             }
             val legacyWatchPositions = prefs.getString("watch_positions", "")
@@ -181,7 +181,8 @@ class MyApp : Application() {
                     DatabaseHolder.db.watchPositionDao().insertAll(
                         *watchPositions.toTypedArray()
                     )
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
                 prefs.edit().remove("watch_positions").commit()
             }
             prefs.edit()

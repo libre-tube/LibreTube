@@ -1,7 +1,7 @@
 package com.github.libretube.util
 
-import java.util.*
 import kotlin.reflect.KProperty
+import java.util.*
 
 class ResettableLazyManager {
     // we synchronize to make sure the timing of a reset() call and new inits do not collide
