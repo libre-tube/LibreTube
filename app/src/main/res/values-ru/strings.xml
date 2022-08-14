@@ -296,4 +296,9 @@
     <string name="add_to_queue">Добавить в очередь</string>
     <string name="break_reminder">Напоминание о перерыве</string>
     <string name="take_a_break">Время сделать перерыв</string>
+    <string name="no_subtitles_available">Субтитры отсутствуют</string>
+    <string name="repeat_mode">Повтор</string>
+    <string name="backup_restore">Резервное копирование и восстановление</string>
+    <string name="backup">Резервное копирование</string>
+    <string name="picture_in_picture">Картина в картине</string>
 </resources>
