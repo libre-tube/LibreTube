@@ -40,6 +40,15 @@
             app:key="data_saver_mode"
             app:title="@string/data_saver_mode" />
 
+        <ListPreference
+            android:entries="@array/cacheSize"
+            android:entryValues="@array/cacheSizeValues"
+            android:icon="@drawable/ic_cache"
+            app:defaultValue="128"
+            app:key="image_cache_size"
+            app:title="@string/maximum_image_cache"
+            app:useSimpleSummaryProvider="true" />
+
         <Preference
             android:icon="@drawable/ic_reset"
             app:key="reset_settings"

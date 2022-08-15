@@ -68,8 +68,12 @@ class LibraryFragment : BaseFragment() {
         }
 
         if (token != "") {
+            binding.boogh.setImageResource(R.drawable.ic_list)
+            binding.textLike.text = getString(R.string.emptyList)
+
             binding.loginOrRegister.visibility = View.GONE
             fetchPlaylists()
+
             binding.playlistRefresh.isEnabled = true
             binding.playlistRefresh.setOnRefreshListener {
                 fetchPlaylists()
@@ -123,7 +127,6 @@ class LibraryFragment : BaseFragment() {
                     playlistsAdapter.registerAdapterDataObserver(object :
                             RecyclerView.AdapterDataObserver() {
                             override fun onChanged() {
-                                Log.e(TAG(), playlistsAdapter.itemCount.toString())
                                 if (playlistsAdapter.itemCount == 0) {
                                     binding.loginOrRegister.visibility = View.VISIBLE
                                 }
@@ -135,8 +138,6 @@ class LibraryFragment : BaseFragment() {
                 } else {
                     runOnUiThread {
                         binding.loginOrRegister.visibility = View.VISIBLE
-                        binding.boogh.setImageResource(R.drawable.ic_list)
-                        binding.textLike.text = getString(R.string.emptyList)
                     }
                 }
             }

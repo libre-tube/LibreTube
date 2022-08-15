@@ -3,11 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playlist"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_marginBottom="16dp"
-    android:background="?android:attr/selectableItemBackground">
+    style="@style/ItemRow">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

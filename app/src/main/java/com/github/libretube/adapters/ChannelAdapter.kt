@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.StreamItem
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
@@ -45,7 +45,7 @@ class ChannelAdapter(
                 DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             thumbnailDuration.text =
                 DateUtils.formatElapsedTime(trending.duration!!)
-            ConnectionHelper.loadImage(trending.thumbnail, thumbnail)
+            ImageHelper.loadImage(trending.thumbnail, thumbnail)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, trending.url)
             }

@@ -14,7 +14,7 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.toID
 import retrofit2.HttpException
@@ -146,8 +146,8 @@ class ChannelFragment : BaseFragment() {
                         binding.channelDescription.text = response.description?.trim()
                     }
 
-                    ConnectionHelper.loadImage(response.bannerUrl, binding.channelBanner)
-                    ConnectionHelper.loadImage(response.avatarUrl, binding.channelImage)
+                    ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
+                    ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
 
                     // recyclerview of the videos by the channel
                     channelAdapter = ChannelAdapter(

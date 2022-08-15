@@ -9,7 +9,6 @@ import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import androidx.preference.PreferenceManager
 import androidx.work.ExistingPeriodicWorkPolicy
-import coil.ImageLoader
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.api.CronetHelper
@@ -19,8 +18,8 @@ import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.ExceptionHandler
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NotificationHelper
 
 class MyApp : Application() {
@@ -93,9 +92,7 @@ class MyApp : Application() {
                 RetrofitInstance.url
             }
         CronetHelper.initCronet(this)
-        ConnectionHelper.imageLoader = ImageLoader.Builder(this)
-            .callFactory(CronetHelper.callFactory)
-            .build()
+        ImageHelper.initializeImageLoader(this)
     }
 
     /**

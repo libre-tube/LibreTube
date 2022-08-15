@@ -4,10 +4,12 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.util.BackupHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -39,6 +41,12 @@ class AdvancedSettings : MaterialPreferenceFragment() {
 
         val settingsActivity = activity as SettingsActivity
         settingsActivity.changeTopBarText(getString(R.string.advanced))
+
+        val maxImageCache = findPreference<ListPreference>(PreferenceKeys.MAX_IMAGE_CACHE)
+        maxImageCache?.setOnPreferenceChangeListener { _, _ ->
+            ImageHelper.initializeImageLoader(requireContext())
+            true
+        }
 
         val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
         resetSettings?.setOnPreferenceClickListener {

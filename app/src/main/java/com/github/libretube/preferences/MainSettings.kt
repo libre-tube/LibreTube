@@ -9,7 +9,7 @@ import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.dialogs.UpdateDialog
 import com.github.libretube.extensions.showSnackBar
 import com.github.libretube.update.UpdateChecker
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.NetworkHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +86,7 @@ class MainSettings : MaterialPreferenceFragment() {
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                if (!ConnectionHelper.isNetworkAvailable(requireContext())) {
+                if (!NetworkHelper.isNetworkAvailable(requireContext())) {
                     (activity as SettingsActivity).binding.root.showSnackBar(R.string.unknown_error)
                     return@launch
                 }

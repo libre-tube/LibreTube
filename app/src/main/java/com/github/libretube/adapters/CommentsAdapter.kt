@@ -13,7 +13,7 @@ import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 import kotlinx.coroutines.CoroutineScope
@@ -51,7 +51,7 @@ class CommentsAdapter(
                 " • " + comment.commentedTime.toString()
             commentText.text =
                 comment.commentText.toString()
-            ConnectionHelper.loadImage(comment.thumbnail, commentorImage)
+            ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text =
                 comment.likeCount?.toLong().formatShort()
             if (comment.verified == true) {

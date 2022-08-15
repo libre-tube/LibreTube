@@ -72,7 +72,8 @@ class AddToPlaylistDialog : DialogFragment() {
                     if (viewModel.lastSelectedPlaylistId != null) {
                         var selectionIndex = 0
                         response.forEachIndexed { index, playlist ->
-                            if (playlist.id == viewModel.lastSelectedPlaylistId) selectionIndex = index
+                            if (playlist.id == viewModel.lastSelectedPlaylistId) selectionIndex =
+                                index
                         }
                         binding.playlistsSpinner.setSelection(selectionIndex)
                     }

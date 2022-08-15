@@ -65,7 +65,7 @@ import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.formatShort
@@ -1017,7 +1017,7 @@ class PlayerFragment : BaseFragment() {
 
             textLike.text = response.likes.formatShort()
             textDislike.text = response.dislikes.formatShort()
-            ConnectionHelper.loadImage(response.uploaderAvatar, binding.playerChannelImage)
+            ImageHelper.loadImage(response.uploaderAvatar, binding.playerChannelImage)
             playerChannelName.text = response.uploader
 
             titleTextView.text = response.title

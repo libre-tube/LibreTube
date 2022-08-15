@@ -9,7 +9,7 @@ import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.StreamItem
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
@@ -52,8 +52,8 @@ class TrendingAdapter(
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, trending.uploaderUrl)
             }
-            ConnectionHelper.loadImage(trending.thumbnail, thumbnail)
-            ConnectionHelper.loadImage(trending.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(trending.thumbnail, thumbnail)
+            ImageHelper.loadImage(trending.uploaderAvatar, channelImage)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, trending.url)
             }

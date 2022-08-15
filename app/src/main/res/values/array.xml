@@ -858,4 +858,22 @@
         <item>fill</item>
     </string-array>
 
+    <string-array name="cacheSize">
+        <item>16MB</item>
+        <item>32MB</item>
+        <item>64MB</item>
+        <item>128MB</item>
+        <item>256MB</item>
+        <item>512MB</item>
+    </string-array>
+
+    <string-array name="cacheSizeValues">
+        <item>16</item>
+        <item>32</item>
+        <item>64</item>
+        <item>128</item>
+        <item>256</item>
+        <item>512</item>
+    </string-array>
+
 </resources>
