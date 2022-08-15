@@ -25,15 +25,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import coil.ImageLoader
-import com.github.libretube.Globals
 import com.github.libretube.R
-import com.github.libretube.api.CronetHelper
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.TAG
 import com.github.libretube.fragments.PlayerFragment
+import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
@@ -73,17 +71,6 @@ class MainActivity : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        CronetHelper.initCronet(this.applicationContext)
-        ConnectionHelper.imageLoader = ImageLoader.Builder(this.applicationContext)
-            .callFactory(CronetHelper.callFactory)
-            .build()
-
-        // save whether the data saver mode is enabled
-        Globals.DATA_SAVER_MODE_ENABLED = PreferenceHelper.getBoolean(
-            PreferenceKeys.DATA_SAVER_MODE,
-            false
-        )
 
         // show noInternet Activity if no internet available on app startup
         if (!ConnectionHelper.isNetworkAvailable(this)) {
@@ -456,7 +443,8 @@ class MainActivity : BaseActivity() {
             enableTransition(R.id.yt_transition, true)
         }
         findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
-        Globals.IS_FULL_SCREEN = false
+        val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
+        playerViewModel.isFullscreen.value = false
         requestedOrientation = if (autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
         else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
     }

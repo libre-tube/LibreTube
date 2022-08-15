@@ -5,9 +5,12 @@ import android.net.ConnectivityManager
 import android.widget.ImageView
 import coil.ImageLoader
 import coil.load
-import com.github.libretube.Globals
+import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
 
 object ConnectionHelper {
+    lateinit var imageLoader: ImageLoader
+
     fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -38,13 +41,13 @@ object ConnectionHelper {
         return connectivityManager.activeNetworkInfo?.isConnected ?: false
     }
 
-    lateinit var imageLoader: ImageLoader
-
     // load an image from a url into an imageView
     fun loadImage(url: String?, target: ImageView) {
         // only load the image if the data saver mode is disabled
-        if (!Globals.DATA_SAVER_MODE_ENABLED) {
-            target.load(url, imageLoader)
-        }
+        val dataSaverModeEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.DATA_SAVER_MODE,
+            false
+        )
+        if (!dataSaverModeEnabled) target.load(url, imageLoader)
     }
 }

@@ -28,6 +28,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,6 +55,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
+import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
@@ -107,6 +109,7 @@ class PlayerFragment : BaseFragment() {
     private lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
+    private val viewModel: PlayerViewModel by activityViewModels()
 
     /**
      * video information
@@ -378,11 +381,11 @@ class PlayerFragment : BaseFragment() {
                 val mainMotionLayout =
                     mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
-                    Globals.MINI_PLAYER_VISIBLE = true
+                    viewModel.isMiniPlayerVisible.value = true
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
                 } else if (currentId == sId) {
-                    Globals.MINI_PLAYER_VISIBLE = false
+                    viewModel.isMiniPlayerVisible.value = false
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
                 }
@@ -561,7 +564,7 @@ class PlayerFragment : BaseFragment() {
     // actions that don't depend on video information
     private fun initializeOnClickActions(context: Context) {
         binding.closeImageView.setOnClickListener {
-            Globals.MINI_PLAYER_VISIBLE = false
+            viewModel.isMiniPlayerVisible.value = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.supportFragmentManager.beginTransaction()
@@ -569,7 +572,7 @@ class PlayerFragment : BaseFragment() {
                 .commit()
         }
         playerBinding.closeImageButton.setOnClickListener {
-            Globals.MINI_PLAYER_VISIBLE = false
+            viewModel.isFullscreen.value = false
             binding.playerMotionLayout.transitionToEnd()
             val mainActivity = activity as MainActivity
             mainActivity.supportFragmentManager.beginTransaction()
@@ -644,7 +647,7 @@ class PlayerFragment : BaseFragment() {
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
-            if (!Globals.IS_FULL_SCREEN) {
+            if (viewModel.isFullscreen.value == false) {
                 // go to fullscreen mode
                 setFullscreen()
             } else {
@@ -737,7 +740,7 @@ class PlayerFragment : BaseFragment() {
             mainActivity.requestedOrientation = orientation
         }
 
-        Globals.IS_FULL_SCREEN = true
+        viewModel.isFullscreen.value = true
     }
 
     private fun unsetFullscreen() {
@@ -758,7 +761,7 @@ class PlayerFragment : BaseFragment() {
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 
-        Globals.IS_FULL_SCREEN = false
+        viewModel.isFullscreen.value = false
     }
 
     private fun toggleDescription() {
@@ -1301,7 +1304,7 @@ class PlayerFragment : BaseFragment() {
             }
             playerBinding.chapterLL.visibility = View.VISIBLE
             playerBinding.chapterLL.setOnClickListener {
-                if (Globals.IS_FULL_SCREEN) {
+                if (viewModel.isFullscreen.value!!) {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle(R.string.chapters)
                         .setItems(titles.toTypedArray()) { _, index ->
@@ -1527,7 +1530,7 @@ class PlayerFragment : BaseFragment() {
         playerBinding.closeImageButton.visibility = visibility
         playerBinding.exoTitle.visibility =
             if (isLocked &&
-                Globals.IS_FULL_SCREEN
+                viewModel.isFullscreen.value == true
             ) View.VISIBLE else View.INVISIBLE
 
         // disable double tap to seek when the player is locked
@@ -1627,7 +1630,7 @@ class PlayerFragment : BaseFragment() {
             }
             binding.linLayout.visibility = View.GONE
 
-            Globals.IS_FULL_SCREEN = false
+            viewModel.isFullscreen.value = false
         } else {
             // enable exoPlayer controls again
             exoPlayerView.useController = true
@@ -1654,8 +1657,10 @@ class PlayerFragment : BaseFragment() {
 
         val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
 
-        return (binding.playerScrollView.getLocalVisibleRect(bounds) || Globals.IS_FULL_SCREEN) &&
-            (exoPlayer.isPlaying || !backgroundModeRunning)
+        return (
+            binding.playerScrollView.getLocalVisibleRect(bounds) ||
+                viewModel.isFullscreen.value == true
+            ) && (exoPlayer.isPlaying || !backgroundModeRunning)
     }
 
     private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {

@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistsAdapter
 import com.github.libretube.api.RetrofitInstance
@@ -18,6 +18,7 @@ import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.dialogs.CreatePlaylistDialog
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
+import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import retrofit2.HttpException
@@ -27,6 +28,7 @@ class LibraryFragment : BaseFragment() {
 
     lateinit var token: String
     private lateinit var binding: FragmentLibraryBinding
+    val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,12 @@ class LibraryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // listen for the mini player state changing
+        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+            updateFABMargin()
+        }
+
         binding.playlistRecView.layoutManager = LinearLayoutManager(requireContext())
         token = PreferenceHelper.getToken()
 
@@ -76,12 +84,12 @@ class LibraryFragment : BaseFragment() {
         }
     }
 
-    override fun onResume() {
+    fun updateFABMargin() {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
+        val bottomMargin = if (playerViewModel.isMiniPlayerVisible.value == true) 180 else 64
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = if (Globals.MINI_PLAYER_VISIBLE) 180 else 64
+        layoutParams.bottomMargin = bottomMargin
         binding.createPlaylist.layoutParams = layoutParams
-        super.onResume()
     }
 
     fun fetchPlaylists() {
