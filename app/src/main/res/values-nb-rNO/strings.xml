@@ -170,7 +170,7 @@
     <string name="about_summary">Bli kjent med LibreTube-laget og alt som skjer.</string>
     <string name="empty_instance">Fyll inn navnet og API-nettadressen.</string>
     <string name="version">V %1$s</string>
-    <string name="clear_customInstances">Tøm egendefinerte instanser</string>
+    <string name="clear_customInstances">Tøm tillagte</string>
     <string name="related_streams">Relatert innhold</string>
     <string name="related_streams_summary">Vis videoer relatert til det du ser.</string>
     <string name="show_chapters">Vis kapitler</string>
@@ -292,4 +292,24 @@
     <string name="caption_settings">Undertekstinnstillinger</string>
     <string name="navLabelVisibility">Synlighet for navigeringsfeltets etikett</string>
     <string name="export_subscriptions">Eksporter abonnementer</string>
+    <string name="skip_buttons">Knapper for sporveksling</string>
+    <string name="skip_buttons_summary">Vis knapper for å hoppe til neste eller forrige video.</string>
+    <string name="history_size">Maks. historikkstørrelse</string>
+    <string name="unlimited">Ubegrenset</string>
+    <string name="background_mode">Bakgrunnsmodus</string>
+    <string name="add_to_queue">Legg til i kø</string>
+    <string name="misc">Ymse</string>
+    <string name="yt_shorts">Kortklipp</string>
+    <string name="no_subtitles_available">Ingen tilgjengelige undertekster</string>
+    <string name="backup">Sikkerhetskopier</string>
+    <string name="resize_mode_zoom">Forstørr</string>
+    <string name="repeat_mode_none">Ingen</string>
+    <string name="repeat_mode_current">Nåværende</string>
+    <string name="backup_restore">Sikkerhetskopiering og gjenoppretting</string>
+    <string name="repeat_mode">Gjentagelsesmodus</string>
+    <string name="resize_mode_fit">Tilpass</string>
+    <string name="resize_mode_fill">Fyll</string>
+    <string name="break_reminder">Pausepåminnelse</string>
+    <string name="already_spent_time">Du har allerede brukt %1$s min. i programmet. På tide med en pause.</string>
+    <string name="take_a_break">På tide å ta en pause</string>
 </resources>

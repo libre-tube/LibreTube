@@ -185,7 +185,7 @@
     <string name="buffering_goal">Předběžné načítání</string>
     <string name="buffering_goal_summary">Maximální počet sekund videa ve vyrovnávací paměti.</string>
     <string name="audio_video">Zvuk a video</string>
-    <string name="aspect_ratio">Poměr stran videí</string>
+    <string name="aspect_ratio">Poměr stran videa</string>
     <string name="fullscreen_orientation">Orientace na celou obrazovku</string>
     <string name="auto_rotation">Automatické otáčení</string>
     <string name="landscape">Na šířku</string>
@@ -289,7 +289,25 @@
     <string name="no_search_result">Žádné výsledky.</string>
     <string name="error_occurred">Chyba</string>
     <string name="copied">Zkopírováno</string>
-    <string name="downloadsucceeded">Stáhnuto</string>
+    <string name="downloadsucceeded">Stahování bylo úspěšné</string>
     <string name="share_with_time">Sdílet s počátečním časem</string>
     <string name="export_subscriptions">Exportovat odběry</string>
+    <string name="skip_buttons">Tlačítka přeskočení</string>
+    <string name="history_size">Maximální velikost historie</string>
+    <string name="background_mode">Režim na pozadí</string>
+    <string name="skip_buttons_summary">Zobrazit tlačítka k přeskočení na další nebo předchozí video.</string>
+    <string name="unlimited">Neomezená</string>
+    <string name="add_to_queue">Přidat do fronty</string>
+    <string name="misc">Různé</string>
+    <string name="break_reminder">Připominka přestávky</string>
+    <string name="take_a_break">Čas na přestávku</string>
+    <string name="already_spent_time">V aplikaci jste strávili již %1$s minut, dejte si chvíli pauzu.</string>
+    <string name="yt_shorts">Shorts</string>
+    <string name="repeat_mode_current">Současný</string>
+    <string name="repeat_mode_none">Žádný</string>
+    <string name="resize_mode_fit">Vejít se</string>
+    <string name="no_subtitles_available">Nejsou dostupné žádné titulky</string>
+    <string name="repeat_mode">Režim opakování</string>
+    <string name="resize_mode_fill">Vyplnit</string>
+    <string name="resize_mode_zoom">Přiblížit</string>
 </resources>

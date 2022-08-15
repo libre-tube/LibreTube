@@ -285,10 +285,22 @@
     <string name="network_wifi">Только по Wi-Fi</string>
     <string name="translate">Перевод</string>
     <string name="translate_summary">Помогите перевести приложение</string>
-    <string name="downloadsucceeded">Загружено</string>
+    <string name="downloadsucceeded">Загружено успешно</string>
     <string name="share_with_time">Поделиться со временем начала</string>
     <string name="playingOnBackground">Воспроизведение в фоне…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
     <string name="best_quality">Лучшее</string>
     <string name="worst_quality">Худшее</string>
+    <string name="export_subscriptions">Экспорт подписок</string>
+    <string name="skip_buttons">Кнопки пропуска</string>
+    <string name="background_mode">Фоновый режим</string>
+    <string name="history_size">Максимальный размер истории</string>
+    <string name="unlimited">Неограниченно</string>
+    <string name="skip_buttons_summary">Показывать кнопки для перехода к следующему или предыдущему видео.</string>
+    <string name="yt_shorts">Shorts</string>
+    <string name="misc">Прочее</string>
+    <string name="already_spent_time">Вы уже провели %1$s минут в приложении, пора сделать перерыв.</string>
+    <string name="add_to_queue">Добавить в очередь</string>
+    <string name="break_reminder">Напоминание о перерыве</string>
+    <string name="take_a_break">Время сделать перерыв</string>
 </resources>

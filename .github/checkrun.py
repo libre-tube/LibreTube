@@ -10,4 +10,8 @@ message = data['commit']['message']
 if "\n\n" in message:
     if message.split("\n\n",1)[-1].split()[0] == "[SILENT]":
         system('killall -9 python')
+    else:
+        print("Silence not found")
+else:
+    print("Empty Description")
         
