@@ -31,9 +31,9 @@
     <string name="server_error">सर्वर में समस्या है। शायद कोई और इंस्टेंस चुनकर प्रयास करें\?</string>
     <string name="error">कुछ गलत हो गया!</string>
     <string name="empty">उपयोगकर्ता नाम और पासवर्ड खाली नहीं हो सकता!</string>
-    <string name="notgmail">यह जीमेल अकाउंट आपका नहीं है!</string>
-    <string name="defres">डिफ़ॉल्ट वीडियो रेजोल्यूशन</string>
-    <string name="grid">ग्रिड कॉलम चुनें</string>
+    <string name="notgmail">हे Piped अकाउंटसाठी आहे.</string>
+    <string name="defres">वीडियो रेजोल्यूशन</string>
+    <string name="grid">ग्रिड कॉलम</string>
     <string name="emptyList">यहाँ कुछ भी नहीं है!</string>
     <string name="deletePlaylist">प्लेलिस्ट डिलीट करें</string>
     <string name="areYouSure">क्या आप वाकई इस प्लेलिस्ट को हटाना चाहते हैं\?</string>
@@ -55,4 +55,5 @@
     <string name="subscriptions">सदस्यता</string>
     <string name="library">लायब्ररी</string>
     <string name="videos">वीडियो</string>
+    <string name="import_from_yt_summary">YouTube किंवा NewPipe वरून</string>
 </resources>
