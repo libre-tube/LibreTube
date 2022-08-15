@@ -1,5 +1,6 @@
 package com.github.libretube.db
 
+import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.obj.Streams
@@ -57,6 +58,20 @@ object DatabaseHelper {
             DatabaseHolder.db.watchPositionDao().delete(
                 DatabaseHolder.db.watchPositionDao().findById(videoId)
             )
+        }.start()
+    }
+
+    fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
+        Thread {
+            DatabaseHolder.db.searchHistoryDao().insertAll(searchHistoryItem)
+            val maxHistorySize = 20
+
+            // delete the first watch history entry if the limit is reached
+            val searchHistory = DatabaseHolder.db.searchHistoryDao().getAll()
+            if (searchHistory.size > maxHistorySize) {
+                DatabaseHolder.db.searchHistoryDao()
+                    .delete(searchHistory.first())
+            }
         }.start()
     }
 }
