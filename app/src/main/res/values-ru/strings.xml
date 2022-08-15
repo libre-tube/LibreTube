@@ -132,7 +132,6 @@
     <string name="gradientIcon">Гладкий градиент</string>
     <string name="update_available_text">Перейти к релизам на GitHub, чтобы загрузить его\?</string>
     <string name="app_behavior">Поведение</string>
-    <string name="authors_summary">Познакомьтесь со всеми, кто участвует в разработке и улучшении приложения.</string>
     <string name="download_folder_summary">Имя папки, в которой хранятся загруженные медиафайлы.</string>
     <string name="birdIcon">Прикольная птица</string>
     <string name="fireIcon">Огненный огонь</string>
@@ -167,12 +166,8 @@
     <string name="video_format_summary">Преобразование файлов, если и аудио, и видео загружены.</string>
     <string name="download_directory">Скачать в</string>
     <string name="download_directory_summary">Где хранятся загруженные медиафайлы.</string>
-    <string name="contributing_summary">Предлагайте идеи, переводы, изменения дизайна, очищайте и пишите код. Чем больше сделано, тем лучше!</string>
-    <string name="license_summary">GPLv3+ — это свободная лицензия с авторским левом. Использовать, изучать, изменять и делиться; со всеми.</string>
     <string name="donate">Пожертвовать</string>
-    <string name="website_summary">Посетите веб-сайт для дополнительной информации о приложении и его функциях.</string>
     <string name="contributing">Внести вклад</string>
-    <string name="donate_summary">Дайте то, что это стоит для вас, если вы можете. Команда LibreTube меньше, чем ваше пожертвование или помощь.</string>
     <string name="update">Найти новую версию</string>
     <string name="update_summary">Нажмите, чтобы узнать, обновлено ли приложение.</string>
     <string name="app_uptodate">Используется последняя версия.</string>
@@ -192,7 +187,6 @@
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
     <string name="reset">Восстановить настройки по-умолчанию</string>
-    <string name="piped_summary">Piped — это свободный альтернативный веб-интерфейс для YouTube, предоставляющий API, который мы используем. Без него не существовало бы LibreTube. Огромное спасибо его разработчикам!</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">URL-адрес экземпляра</string>
     <string name="quality">Качество</string>
@@ -284,7 +278,6 @@
     <string name="network_all">Любые сети</string>
     <string name="network_wifi">Только по Wi-Fi</string>
     <string name="translate">Перевод</string>
-    <string name="translate_summary">Помогите перевести приложение</string>
     <string name="downloadsucceeded">Загружено успешно</string>
     <string name="share_with_time">Поделиться со временем начала</string>
     <string name="playingOnBackground">Воспроизведение в фоне…</string>

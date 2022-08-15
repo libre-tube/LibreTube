@@ -124,8 +124,6 @@
     <string name="music_directory">مجلد الموسيقى</string>
     <string name="views">%1$s مشاهدة</string>
     <string name="defaultIcon">الإفتراضي</string>
-    <string name="website_summary">قم بزيارة الموقع لمزيد من المعلومات حول التطبيق ومميزاته.</string>
-    <string name="contributing_summary">تقديم الأفكار والترجمات وتغييرات التصميم وتنظيف وكتابة التعليمات البرمجية. كلما تم القيام بالمزيد كلما كان ذلك أفضل!</string>
     <string name="update">ابحث عن الإصدار الجديد</string>
     <string name="update_summary">انقر لمعرفة ما إذا كان التطبيق محدثا أم لا.</string>
     <string name="app_uptodate">يتم حاليا تشغيل أحدث إصدار.</string>
@@ -176,11 +174,8 @@
     <string name="download_directory_summary">حيث يتم تخزين الوسائط التي تم تنزيلها.</string>
     <string name="advanced">متقدم</string>
     <string name="player">المشغل</string>
-    <string name="license_summary">GPLv3+ هو ترخيص حر متروك للحقوق. الاستخدام والدراسة والتغيير والمشاركة؛ مع الجميع.</string>
-    <string name="donate_summary">أعط ما يستحقه هذا لك ، إذا استطعت. فريق LibreTube أصغر من تبرعك أو مساعدتك.</string>
     <string name="playback_speed">سرعة التشغيل</string>
     <string name="appearance_summary">اضبط التطبيق حسب رغبتك.</string>
-    <string name="authors_summary">تعرف على كل من يشارك في تطوير التطبيق وتحسينه.</string>
     <string name="advanced_summary">التنزيلات وإعادة التعيين</string>
     <string name="customInstance_summary">أضف…</string>
     <string name="movies_directory">مجلد الأفلام</string>
@@ -196,7 +191,6 @@
     <string name="behavior">السلوك</string>
     <string name="player_summary">الجودة وسلوك المشغل</string>
     <string name="seek_increment">معدل التقديم</string>
-    <string name="piped_summary">Piped هي واجهة ويب بديلة مجانية ل YouTube توفر واجهة برمجة التطبيقات التي نستخدمها. بدونها ، لن يكون LibreTube موجودا. شكرا جزيلا لمطوريهم!</string>
     <string name="pauseOnScreenOff">الإيقاف المؤقت التلقائي</string>
     <string name="autoplay_summary">التشغيل التلقائي للفيديو التالي بعد الفيديو الحالي.</string>
     <string name="pauseOnScreenOff_summary">أوقف التشغيل مؤقتا عند إيقاف تشغيل الشاشة.</string>
@@ -285,7 +279,6 @@
     <string name="network_metered">مقننة</string>
     <string name="network_wifi">واي فاي فقط</string>
     <string name="translate">الترجمة</string>
-    <string name="translate_summary">المساعدة في ترجمة التطبيق</string>
     <string name="no_search_result">لا توجد نتائج.</string>
     <string name="error_occurred">خطأ</string>
     <string name="copied">تم النسخ</string>

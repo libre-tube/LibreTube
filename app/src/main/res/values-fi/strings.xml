@@ -139,9 +139,6 @@
     <string name="app_behavior">Käytös</string>
     <string name="download_directory">Lataa kohteeseen</string>
     <string name="download_directory_summary">Sijainti, minne ladattu media tallennetaan.</string>
-    <string name="website_summary">Vieraile sivustolla saadaksesi lisää tietoa sovelluksesta ja sen ominaisuuksista.</string>
-    <string name="license_summary">GPLv3+ on copyleft-lisenssi. Käytä, opi, muuta ja jaa; kaikkien kanssa.</string>
-    <string name="contributing_summary">Tuota ideoita, käännöksiä, design muutoksia, puhdista ja kirjoita koodia. Mitä enemmän tulee tehtyä, sen paremmaksi se tulee!</string>
     <string name="torchIcon">Trendikäs soihtu</string>
     <string name="fireIcon">Muodikas tuli</string>
     <string name="empty_instance">Täydennä nimi ja ohjelmointirajapinnan linkki.</string>
@@ -155,7 +152,6 @@
     <string name="license">Lisenssi</string>
     <string name="color_red">Levollinen punainen</string>
     <string name="color_blue">Autuas sininen</string>
-    <string name="donate_summary">Anna sen verran, miten arvokas tämä on sinulle, jos voit. LibreTuben tiimi on pienempi kuin sinun lahjoitus tai apu.</string>
     <string name="update">Etsi uutta versiota</string>
     <string name="playback_speed">Oletustoistonopeus</string>
     <string name="category_music_offtopic_description">Käyttö ainoastaan musiikki videoissa. Sen tulisi kattaa videon osat, jotka eivät ole osa virallisia mixejä. Videon tulee muistuttaa Spotifytä tai mitä tahansa muuta mixattua versiota mahdollisimman paljon tai vähentää puhumista tai muita häiriötekijöitä.</string>
@@ -175,7 +171,6 @@
     <string name="instance_name">Instanssin nimi</string>
     <string name="addInstance">Lisää instanssi</string>
     <string name="version">Versio %1$s</string>
-    <string name="authors_summary">Tutustu kaikkiin, jotka ovat mukana kehittämässä ja parantamassa sovellusta.</string>
     <string name="gradientIcon">Lipevä liukuväri</string>
     <string name="birdIcon">Tehostettu lintu</string>
     <string name="instance_api_url">Linkki instanssin ohjelmointirajapintaan</string>
@@ -202,7 +197,6 @@
     <string name="behavior">Käytös</string>
     <string name="player_summary">Laatu ja soittimen käytös</string>
     <string name="seek_increment">Etsi lisäystä</string>
-    <string name="piped_summary">Piped on avoimen lähdekoodin vaihtoehtoinen web-käyttöliittymä YouTubelle, joka tarjoaa rajapinnan, jota käytämme. Ilman Pipediä, LibreTubea ei olisi. Suuret kiitokset sen kehittäjille!</string>
     <string name="pauseOnScreenOff_summary">Pysäytä soitin, kun näyttö on pois päältä.</string>
     <string name="pauseOnScreenOff">Automaattinen tauko</string>
     <string name="autoplay_summary">Automaattisesti toistaa seuraavan videon kun nykyinen on päättynyt.</string>

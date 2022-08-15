@@ -117,16 +117,12 @@
     <string name="playOnBackground">Reproduzir em segundo plano</string>
     <string name="disabled">Desligado</string>
     <string name="authors">Autores</string>
-    <string name="authors_summary">Conheça todos os envolvidos no desenvolvimento e aprimoramento do app.</string>
     <string name="internal_storage">Armazenamento interno</string>
     <string name="sdcard">Cartão SD</string>
     <string name="defaultIcon">Padrão</string>
     <string name="views">%1$s visualizações</string>
     <string name="update_available_text">Ir para lançamentos no GitHub para baixá-lo\?</string>
     <string name="download_directory_summary">Onde a mídia baixada é armazenada.</string>
-    <string name="license_summary">A GPLv3+ é uma licença livre com copyleft. Use, estude, mude e compartilhe; com tudo.</string>
-    <string name="donate_summary">Dê o que isso vale para você, se puder. O Team LibreTube é menor do que sua doação ou ajuda.</string>
-    <string name="contributing_summary">Forneça ideias, traduções, alterações de design, limpe e escreva código. Quanto mais for feito, melhor fica!</string>
     <string name="app_uptodate">Executando a versão mais recente.</string>
     <string name="no_update_available">Você está executando a versão mais recente.</string>
     <string name="fireIcon">Fogo na moda</string>
@@ -144,7 +140,6 @@
     <string name="downloads">Downloads</string>
     <string name="video_format">Formato de vídeo</string>
     <string name="video_format_summary">Conversão de arquivos se o áudio e o vídeo forem baixados.</string>
-    <string name="website_summary">Visite o site para obter mais informações sobre o aplicativo e seus recursos.</string>
     <string name="update">Procure uma nova versão</string>
     <string name="update_summary">Clique para saber se o aplicativo está atualizado.</string>
     <string name="playback_speed">Velocidade de reprodução padrão</string>
@@ -220,7 +215,6 @@
     <string name="least_recent">Menos recente</string>
     <string name="required_network">Tipo de rede necessária</string>
     <string name="network_metered">Medido</string>
-    <string name="translate_summary">Ajude traduzindo o app para o seu idioma</string>
     <string name="most_recent">Mais recente</string>
     <string name="network_all">Todas as redes</string>
     <string name="no_search_result">Nenhum resultado encontrado.</string>
@@ -274,7 +268,6 @@
     <string name="quality">Qualidade</string>
     <string name="behavior">Comportamento</string>
     <string name="seek_increment">Buscar incremento</string>
-    <string name="piped_summary">Piped é uma alternativa open-source de interface web para o YouTube que provê a API que utilizamos, sem o Piped o LibreTube não existiria, muito obrigado ao seus desenvolvedores!</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausar quando a tela é desligada.</string>
     <string name="autoplay_summary">Reproduzir automaticamente o próximo vídeo assim que o atual termina.</string>

@@ -111,10 +111,7 @@
     <string name="downloads">下載</string>
     <string name="video_format">影片格式</string>
     <string name="download_directory_summary">儲存下載影音的位置。</string>
-    <string name="website_summary">前往網站查看APP的更多功能介紹。</string>
     <string name="contributing">貢獻</string>
-    <string name="contributing_summary">提供點子，協助翻譯，變更設計，貢獻程式。越多人參與，成果會更好！</string>
-    <string name="license_summary">GPLv3是著作傳的自由授權條款。使用者可自由使用、研究、修改、分享程式。</string>
     <string name="donate">捐贈</string>
     <string name="update_summary">按這裡檢查APP是否為最新版本。</string>
     <string name="app_uptodate">現在是最新版本。</string>
@@ -123,7 +120,6 @@
     <string name="live">直播</string>
     <string name="no_replies">此留言無任何回覆。</string>
     <string name="authors">作者</string>
-    <string name="authors_summary">認識LibreTube的團隊和貢獻者，協助改善APP。</string>
     <string name="download_folder">名稱</string>
     <string name="download_folder_summary">儲存下載影音的目錄名稱。</string>
     <string name="internal_storage">內部儲存空間</string>
@@ -178,7 +174,6 @@
     <string name="video_format_summary">影片和音訊都下載完成後進行轉檔。</string>
     <string name="download_directory">下載到</string>
     <string name="update">檢查新版本</string>
-    <string name="donate_summary">自由捐獻，不計數量。您的捐獻將厚澤小小的LibreTube團隊。</string>
     <string name="no_update_available">你的APP是最新版本。</string>
     <string name="appearance_summary">自訂你喜愛的APP。</string>
     <string name="advanced">進階</string>

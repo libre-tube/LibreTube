@@ -1,5 +1,8 @@
 package com.github.libretube.activities
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -7,14 +10,16 @@ import android.os.Bundle
 import android.text.Html
 import com.github.libretube.DONATE_URL
 import com.github.libretube.GITHUB_URL
+import com.github.libretube.LICENSE_URL
 import com.github.libretube.PIPED_GITHUB_URL
 import com.github.libretube.R
 import com.github.libretube.WEBLATE_URL
 import com.github.libretube.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.extensions.BaseActivity
-import com.github.libretube.extensions.showSnackBar
+import com.github.libretube.extensions.getStyledSnackBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class AboutActivity : BaseActivity() {
     private lateinit var binding: ActivityAboutBinding
@@ -29,7 +34,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(WEBSITE_URL)
         }
         binding.website.setOnLongClickListener {
-            binding.root.showSnackBar(R.string.website_summary)
+            onLongClick(WEBSITE_URL)
             true
         }
 
@@ -37,7 +42,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(PIPED_GITHUB_URL)
         }
         binding.piped.setOnLongClickListener {
-            binding.root.showSnackBar(R.string.piped_summary)
+            onLongClick(PIPED_GITHUB_URL)
             true
         }
 
@@ -45,7 +50,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(WEBLATE_URL)
         }
         binding.translate.setOnLongClickListener {
-            binding.root.showSnackBar(R.string.translate_summary)
+            onLongClick(WEBLATE_URL)
             true
         }
 
@@ -53,7 +58,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(DONATE_URL)
         }
         binding.donate.setOnLongClickListener {
-            binding.root.showSnackBar(R.string.donate_summary)
+            onLongClick(DONATE_URL)
             true
         }
 
@@ -61,7 +66,7 @@ class AboutActivity : BaseActivity() {
             openLinkFromHref(GITHUB_URL)
         }
         binding.github.setOnLongClickListener {
-            binding.root.showSnackBar(R.string.contributing_summary)
+            onLongClick(GITHUB_URL)
             true
         }
 
@@ -69,7 +74,7 @@ class AboutActivity : BaseActivity() {
             showLicense()
         }
         binding.license.setOnLongClickListener {
-            binding.root.showSnackBar(R.string.license_summary)
+            onLongClick(LICENSE_URL)
             true
         }
     }
@@ -78,6 +83,21 @@ class AboutActivity : BaseActivity() {
         val uri = Uri.parse(link)
         val intent = Intent(Intent.ACTION_VIEW).setData(uri)
         startActivity(intent)
+    }
+
+    private fun onLongClick(href: String) {
+        // copy the link to the clipboard
+        val clipboard: ClipboardManager =
+            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText(getString(R.string.copied), href)
+        clipboard.setPrimaryClip(clip)
+        // show the snackBar with open action
+        val snackBar = binding.root.getStyledSnackBar(R.string.copied_to_clipboard)
+        snackBar.setAction(R.string.open_copied) {
+            openLinkFromHref(href)
+        }
+        snackBar.animationMode = Snackbar.ANIMATION_MODE_FADE
+        snackBar.show()
     }
 
     private fun showLicense() {

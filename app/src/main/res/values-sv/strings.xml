@@ -59,7 +59,6 @@
     <string name="video_format">Videoformat</string>
     <string name="download_directory">Ladda ner till …</string>
     <string name="contributing">Bidra</string>
-    <string name="license_summary">GPLv3+ är en gemenfrihetlig licens. Använd, studera, ändra och del; med alla.</string>
     <string name="flameIcon">Flygande flamma</string>
     <string name="birdIcon">Framhävd fågel</string>
     <string name="music_directory">Musik-mapp</string>
@@ -78,7 +77,6 @@
     <string name="defaultIcon">Förval</string>
     <string name="fireIcon">Fashionabel flamma</string>
     <string name="appearance_summary">Justera programmet till din smak.</string>
-    <string name="contributing_summary">Kom med idéer, omsättningar, designändringar, rens och skriv kod. Desto mer som görs, desto bättre blir det.</string>
     <string name="donate">Donera</string>
     <string name="search_hint">Sök</string>
     <string name="customInstance">Tillpassad instans</string>
@@ -140,13 +138,11 @@
     <string name="appearance">Utseende</string>
     <string name="app_behavior">Beteende</string>
     <string name="download_directory_summary">Där nerladdad media lagras.</string>
-    <string name="website_summary">Besöka nätsidan for mer info om programmet och dess funktioner.</string>
     <string name="update_summary">Klicka for att ta reda på om programmet är uppdaterad.</string>
     <string name="update">Kolla om det finns någon ny version</string>
     <string name="playback_speed">Förvald avspelningshastighet</string>
     <string name="player">Spelare</string>
     <string name="download_folder_summary">Namnet på mappen nerladdad media lagras i.</string>
-    <string name="authors_summary">Lär känna LibreTube-teamet och alla medarbetare som har hjälpts till att förbättra programmet.</string>
     <string name="downloads_directory">Nerladdningsmapp</string>
     <string name="shapedIcon">Friskt formad</string>
     <string name="torchIcon">Försvarsvänlig fackla</string>
@@ -172,7 +168,6 @@
     <string name="advanced_summary">Spelare, nerladdningar, historik</string>
     <string name="version">Version %1$s</string>
     <string name="customInstance_summary">Lägg till en tillpassad instans (på egen risk)</string>
-    <string name="donate_summary">Ge det detta är värt for dig, om du kan. LibreTube-teamet är mindre än din donation eller hjälp.</string>
     <string name="show_chapters">Visa kapitel</string>
     <string name="hide_chapters">Dölj kapitel</string>
     <string name="category_filler">Tangentiella avledningar/skämt</string>

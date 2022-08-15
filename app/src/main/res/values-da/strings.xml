@@ -75,9 +75,7 @@
     <string name="download_directory">Download til</string>
     <string name="download_directory_summary">Hvor downloadede medier bliver gemt.</string>
     <string name="contributing">Bidrager</string>
-    <string name="contributing_summary">Foreslå idéer, oversættelser, designændringer, rengør og skriv kode. Desto mere der bliver gjort, desto bedre bliver det!</string>
     <string name="video_format_summary">Konvertering af filer hvis både lyd og video er downloadet.</string>
-    <string name="donate_summary">Giv hvad det er værd for dig, hvis du kan. Team LibreTube er mindre end din donation eller hjælp.</string>
     <string name="no_update_available">Du kører den seneste version.</string>
     <string name="playback_speed">Afspilningshastighed</string>
     <string name="advanced">Avanceret</string>
@@ -87,7 +85,6 @@
     <string name="authors">Forfattere</string>
     <string name="download_folder">Navn</string>
     <string name="internal_storage">Internt lager</string>
-    <string name="authors_summary">Lær alle at kende, der er involveret i at udvikle og forbedre appen.</string>
     <string name="download_folder_summary">Navnet på mappen downloadede medier er gemt i.</string>
     <string name="movies_directory">Film mappe</string>
     <string name="shareTo">Del URL til</string>
@@ -152,7 +149,6 @@
     <string name="legacyIcon">Tabt arv</string>
     <string name="color_yellow">Gallisk gul</string>
     <string name="color_green">Gesten grøn</string>
-    <string name="website_summary">Besøg hjemmesiden for mere information om appen og dens funktioner.</string>
     <string name="category_sponsor_description">Betalt promovering, betalte henvisninger, og direkte reklamer. Ikke for selvpromovering, eller reelle shoutouts af tiltag, kreatører, hjemmesider og produkter.</string>
     <string name="category_interaction">Interaktionspåmindelse (synes godt om og abonner)</string>
     <string name="category_selfpromo">Ubetalt/Selvpromovering</string>
@@ -160,7 +156,6 @@
     <string name="category_interaction_description">Når der er en kort påmindelse om at synes godt om, abonnere eller følge midt i indhold. Hvis det er langt eller specifikt, skal det i stedet gå som selvpromovering.</string>
     <string name="category_outro">Slutinfo og rulletekst</string>
     <string name="category_outro_description">Info som kommer efter videons afslutning. Ikke for konklusioner med info.</string>
-    <string name="license_summary">GPLv3+ er en copylefted fri licens. Brug, studér, ændre og del; med alle.</string>
     <string name="instance_summary">Piped, login og abonnementer</string>
     <string name="customInstance_summary">Tilføj…</string>
     <string name="instance_name">Instansnavn</string>
@@ -255,7 +250,6 @@
     <string name="quality">Kvalitet</string>
     <string name="behavior">Adfærd</string>
     <string name="player_summary">Kvalitet og afspilleradfærd</string>
-    <string name="piped_summary">Piped er en fri alternativ web-frontend til YouTube, der tilbyder den API, vi bruger. Uden det ville LibreTube ikke eksistere. Stor tak til deres udviklere!</string>
     <string name="autoplay_summary">Afspil den næste video automatisk efter den aktuelle.</string>
     <string name="playingOnBackground">Afspiller i baggrunden…</string>
     <string name="clonePlaylist">Klon playliste</string>
@@ -283,7 +277,6 @@
     <string name="network_all">Alle</string>
     <string name="network_metered">Forbrugsbaseret</string>
     <string name="translate">Oversættelse</string>
-    <string name="translate_summary">Hjælp med at oversætte appen</string>
     <string name="no_search_result">Ingen resultater.</string>
     <string name="network_wifi">Kun på Wi-Fi</string>
     <string name="required_network">Påkrævet forbindelse</string>

@@ -125,15 +125,11 @@
     <string name="downloads">Downloads</string>
     <string name="no_replies">Deze commentaar heeft geen reacties.</string>
     <string name="authors">Auteurs</string>
-    <string name="authors_summary">Maak kennis met iedereen die betrokken is bij de ontwikkeling en verbetering van de app.</string>
     <string name="internal_storage">Interne opslag</string>
     <string name="sdcard">SD-kaart</string>
     <string name="views">%1$s weergaven</string>
     <string name="defaultIcon">Standaard</string>
     <string name="download_directory_summary">Waar gedownloade media wordt opgeslagen.</string>
-    <string name="contributing_summary">Bied ideeën, vertalingen, ontwerpwijzigingen, maak schoon en schrijf de code. Hoe meer er wordt gedaan, hoe beter het wordt!</string>
-    <string name="license_summary">De GPLv3+ is een auteursplichtelijk libre licentie. Gebruiken, bestuderen, veranderen en delen; met iedereen.</string>
-    <string name="donate_summary">Geef wat dit je waard is, als u kunt. Team LibreTube is kleiner dan uw donatie of hulp.</string>
     <string name="download_directory">Download naar</string>
     <string name="update">Zoek naar nieuwe versie</string>
     <string name="download_folder">Naam</string>
@@ -183,7 +179,6 @@
     <string name="buffering_goal">Voorladen</string>
     <string name="buffering_goal_summary">Max. aantal seconden video om te bufferen.</string>
     <string name="playerVideoFormat">Videoformaat voor speler</string>
-    <string name="website_summary">Bezoek de website voor meer info over de app en de functies.</string>
     <string name="contributing">Bijdragen</string>
     <string name="donate">Doneer</string>
     <string name="no_audio">Geen audio</string>
@@ -198,7 +193,6 @@
     <string name="behavior">Gedrag</string>
     <string name="player_summary">Kwaliteit en spelersgedrag</string>
     <string name="seek_increment">Zoek toename</string>
-    <string name="piped_summary">Piped is een open-bron alternatieve web-front-end voor YouTube en levert de API die wij gebruiken. Zonder Piped zou LibreTube niet bestaan. Enorm bedankt aan hun ontwikkelaars!</string>
     <string name="pauseOnScreenOff">Autopauze</string>
     <string name="pauseOnScreenOff_summary">Pauzeer de speler wanneer het scherm wordt uitgeschakeld.</string>
     <string name="autoplay_summary">Speel automatisch de volgende video af wanneer de huidige is afgelopen.</string>

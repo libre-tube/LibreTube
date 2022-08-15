@@ -119,14 +119,10 @@
     <string name="update_available">版本 %1$s 可用</string>
     <string name="update_available_text">是否前往GitHub下载最新版本？</string>
     <string name="download_directory_summary">选择下载视频（音频）的存储位置。</string>
-    <string name="website_summary">访问LibreTube的官方网站获取LibreTube应用了解更多信息。</string>
-    <string name="contributing_summary">提供想法、翻译、设计、更改、清理和编写代码。做得越多越好！</string>
     <string name="video_format_summary">如果同时下载了音频与视频，则转换成视频文件。</string>
     <string name="download_directory">下载到</string>
-    <string name="donate_summary">如果可以的话，把这对你有价值的东西给你。 LibreTube 团队比您的捐赠或帮助更小。</string>
     <string name="update">检测新版本</string>
     <string name="update_summary">单击检查应用是否是最新版。</string>
-    <string name="license_summary">LibreTube使用了GPLv3+许可证。你可以用来学习、研究和分享。</string>
     <string name="category_preview">预览/回放</string>
     <string name="video_format">视频格式</string>
     <string name="appearance">外观</string>
@@ -148,7 +144,6 @@
     <string name="no_replies">此评论没有人回复。</string>
     <string name="music_directory">音乐文件夹</string>
     <string name="movies_directory">电影文件夹</string>
-    <string name="authors_summary">了解参与开发和改进LibreTube的每个人。</string>
     <string name="app_uptodate">正在使用最新的版本。</string>
     <string name="no_update_available">您正在运行最新的版本。</string>
     <string name="live">直播</string>
@@ -194,7 +189,6 @@
     <string name="behavior">布局</string>
     <string name="player_summary">清晰度和播放器行为</string>
     <string name="seek_increment">快进增量</string>
-    <string name="piped_summary">Piped 是 YouTube 的一个自由替代网络前端，提供我们使用的 API。没有 Piped，LibreTube 就不会存在。衷心感谢 Piped 开发者！</string>
     <string name="pauseOnScreenOff">自动暂停</string>
     <string name="pauseOnScreenOff_summary">屏幕关闭时暂停播放。</string>
     <string name="autoplay_summary">当前的视频播完后，自动播放下一个视频。</string>
@@ -285,7 +279,6 @@
     <string name="network_metered">计费网络</string>
     <string name="network_wifi">仅 WiFi</string>
     <string name="translate">翻译</string>
-    <string name="translate_summary">帮忙翻译应用</string>
     <string name="no_search_result">无结果。</string>
     <string name="error_occurred">出错</string>
     <string name="copied">已复制</string>

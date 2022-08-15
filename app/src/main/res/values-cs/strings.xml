@@ -126,7 +126,6 @@
     <string name="turnInternetOn">Zapněte Wi-Fi nebo mobilní data pro připojení se k internetu.</string>
     <string name="require_restart_message">Restartovat aplikaci\?</string>
     <string name="authors">Autoři</string>
-    <string name="authors_summary">Poznejte všechny, kteří se podílejí na vývoji a vylepšování aplikace.</string>
     <string name="download_directory">Stáhnout do</string>
     <string name="download_directory_summary">Kam se ukládají stahovaná média.</string>
     <string name="internal_storage">Interní úložiště</string>
@@ -137,7 +136,6 @@
     <string name="views">%1$s zhlédnutí</string>
     <string name="defaultIcon">Výchozí</string>
     <string name="video_format_summary">Převod obou souborů při stažení zvuku i videa.</string>
-    <string name="donate_summary">Pokud můžete, darujte tolik, kolik si myslíte že je hodnota této aplikace. Tým LibreTube je menší než váš příspěvek nebo pomoc.</string>
     <string name="update">Najít novou verzi</string>
     <string name="update_summary">Klepněte pro zjištění, zda je aplikace aktuální.</string>
     <string name="app_uptodate">Používáte nejnovější verzi.</string>
@@ -202,10 +200,7 @@
     <string name="app_behavior">Chování</string>
     <string name="downloads">Stahování</string>
     <string name="video_format">Formát videa</string>
-    <string name="website_summary">Navštivte web pro další informace o aplikaci a jejích funkcích.</string>
     <string name="contributing">Přispívání</string>
-    <string name="contributing_summary">Poskytujte nápady, překlady, změny vzhledu, čistěte a pište kód. Čím více se toho udělá, tím lépe!</string>
-    <string name="license_summary">Licence GPLv3+ je copyleftovaná svobodná licence. Používejte, studujte, měňte a sdílejte; se všemi.</string>
     <string name="donate">Finančně přispět</string>
     <string name="advanced">Pokročilé</string>
     <string name="player">Přehrávač</string>
@@ -252,7 +247,6 @@
     <string name="system_caption_style">Systémový styl titulků</string>
     <string name="none">Žádné</string>
     <string name="seek_increment">Násobek hledání</string>
-    <string name="piped_summary">Piped je svobodný alternativní webový frontend pro YouTube, který poskytuje API, které používáme. Bez něj by LibreTube neexistoval. Jejich vývojářům patří obrovský dík!</string>
     <string name="pauseOnScreenOff">Automatické pozastavení</string>
     <string name="pauseOnScreenOff_summary">Pozastavit přehrávání při vypnutí obrazovky.</string>
     <string name="autoplay_summary">Automaticky přehrát další video po aktuálním.</string>
@@ -276,7 +270,6 @@
     <string name="translate">Překlad</string>
     <string name="least_views">Nejméně zhlédnutí</string>
     <string name="required_network">Požadované připojení</string>
-    <string name="translate_summary">Pomozte překládat aplikaci</string>
     <string name="new_streams_count">Je k dispozici %1$s nových videí</string>
     <string name="history_empty">Zatím žádná historie.</string>
     <string name="channel_name_az">Název kanálu (A-Z)</string>

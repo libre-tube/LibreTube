@@ -158,8 +158,6 @@
     <string name="video_format_summary">Konverzia súborov, ak sa sťahuje zvuk aj video.</string>
     <string name="download_folder_summary">Názov priečinka, do ktorého sa ukladajú stiahnuté médiá.</string>
     <string name="update_summary">Kliknutím zistíte, či je aplikácia aktuálna.</string>
-    <string name="website_summary">Ďalšie informácie o aplikácii a jej funkciách nájdete na webovej stránke.</string>
-    <string name="donate_summary">Ak môžete, dajte to, čo má pre vás cenu. Tím LibreTube je menší ako váš dar alebo pomoc.</string>
     <string name="shareTo">Zdieľať adresu URL s</string>
     <string name="instance_api_url">URL adresa API inštancie</string>
     <string name="clear_customInstances">Zmazať pridané</string>
@@ -177,10 +175,7 @@
     <string name="hide_chapters">Skryť kapitoly</string>
     <string name="category_interaction_description">Ak sa uprostred obsahu nachádza krátka pripomienka, aby ste sa prihlásili k odberu alebo sledovaniu. Ak je dlhý alebo o niečom konkrétnom, mal by byť namiesto toho sebapropagáciou.</string>
     <string name="buffering_goal">Cieľ vyrovnávacej pamäte</string>
-    <string name="license_summary">Licencia GPLv3+ je licencia typu copyleft libre. Používajte, študujte, meňte a zdieľajte; so všetkými.</string>
-    <string name="contributing_summary">Poskytovanie nápadov, prekladov, zmien dizajnu, čistenie a písanie kódu. Čím viac sa toho urobí, tým je to lepšie!</string>
     <string name="category_filler_description">Ide o vedľajšie scény pridané len ako výplň alebo humor, ktoré nie sú potrebné na pochopenie hlavného obsahu videa.</string>
-    <string name="authors_summary">Zoznámte sa s každým, kto je zapojený do vývoja a zlepšovania aplikácie.</string>
     <string name="category_music_offtopic_description">Len na použitie v hudobných videoklipoch. Mal by pokrývať časti videoklipu, ktoré nie sú súčasťou oficiálnych mixov. Nakoniec by sa video malo čo najviac podobať verzii mixu na Spotify alebo akejkoľvek inej verzii mixu, alebo by malo obmedziť hovorenie alebo iné rušivé prvky.</string>
     <string name="category_outro_description">Informácie po skončení. Nie pre závery s informáciami.</string>
     <string name="turnInternetOn">Prosím zapnite si wifi alebo mobilné dáta aby ste sa pripojili na internet.</string>
@@ -225,7 +220,6 @@
     <string name="required_network">Vyžaduje sa pripojenie</string>
     <string name="network_all">Všetky</string>
     <string name="translate">Preklad</string>
-    <string name="translate_summary">Pomôžte preložiť aplikáciu</string>
     <string name="no_search_result">Žiadne výsledky.</string>
     <string name="downloadsucceeded">Úspešne stiahnuté</string>
     <string name="share_with_time">Zdieľať s časom začiatku</string>

@@ -126,11 +126,7 @@
     <string name="download_directory">Buraya indir</string>
     <string name="download_directory_summary">İndirilen medyanın depolandığı yer.</string>
     <string name="contributing">Katkı</string>
-    <string name="license_summary">GPLv3+, telif hakkıyla korunan bir bedava lisansdır. Kullanın, inceleyin, değiştirin ve paylaşın;herkesle.</string>
     <string name="donate">Bağış</string>
-    <string name="donate_summary">Yapabiliyorsan, bunun senin için değeri ne ise onu ver.LibreTube ekipi, bağışınız veya yardımınızdan daha küçüktür.</string>
-    <string name="website_summary">Uygulama ve özellikleri hakkında daha fazla bilgi için internet sitesini ziyaret edin.</string>
-    <string name="contributing_summary">Fikirler, çeviriler, tasarım değişiklikleri sağlayın, kodu temizleyin ve yazın. Ne kadar çok yapılırsa o kadar iyi olur!</string>
     <string name="update_summary">Uygulamanın güncel olup-olmadığını öğrenmek için tıklayın.</string>
     <string name="app_uptodate">En son sürümü çalıştırıyor.</string>
     <string name="no_update_available">En son sürümü çalıştırıyorsunuz.</string>
@@ -143,7 +139,6 @@
     <string name="live">Canlı</string>
     <string name="no_replies">Bu yoruma cevap yok.</string>
     <string name="authors">Yazarlar</string>
-    <string name="authors_summary">Uygulamayı geliştirmeye ve iyileştirmeye dahil olan herkesi tanıyın.</string>
     <string name="internal_storage">Dahili depolama</string>
     <string name="download_folder_summary">İndirilen medyanın saklandığı klasörün adı.</string>
     <string name="movies_directory">Filmler klasörü</string>
@@ -194,7 +189,6 @@
     <string name="quality">Kalite</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Kalite ve oynatıcı davranışı</string>
-    <string name="piped_summary">Piped, kullandığımız API\'yi sağlayan, YouTube için ücretsiz alternatif veb arayüzüdür. LibreTube onsuz olmazdı. Geliştiricilerine çok teşekkürler!</string>
     <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
     <string name="seek_increment">Aramayı artırın</string>
     <string name="pauseOnScreenOff">Otomatik duraklatma</string>
@@ -281,7 +275,6 @@
     <string name="notify_new_streams_summary">Takip ettiğiniz içerik oluşturuculardan yeni içerik hakkında bildirimler.</string>
     <string name="channel_name_za">Kanal Adı (Z-A)</string>
     <string name="translate">Çeviri</string>
-    <string name="translate_summary">Uygulamayı çevirmeye yardımcı olun</string>
     <string name="no_search_result">Sonuç yok.</string>
     <string name="network_wifi">Yalnızca Wi-Fi\'de</string>
     <string name="required_network">Gerekli bağlantı</string>

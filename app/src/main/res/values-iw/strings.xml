@@ -65,9 +65,7 @@
     <string name="video_format">תצורת סרטונים</string>
     <string name="download_directory">הורדה אל</string>
     <string name="download_directory_summary">איפה יאוחסנו פריטי המדיה שבחרת להוריד.</string>
-    <string name="website_summary">כדאי לבקר באתר למידע נוסף על היישומון והיכולות שלו.</string>
     <string name="donate">תרומה</string>
-    <string name="license_summary">GPLv3+‎ הוא רישיון חופשי ומתירני. מותר להשתמש, לחקור, לערוך ולשתף, עם כולם.</string>
     <string name="update_summary">לחיצה כאן תבדוק אם היישומון עדכני.</string>
     <string name="player">נגן</string>
     <string name="library">ספרייה</string>
@@ -130,7 +128,6 @@
     <string name="video_format_summary">להמיר קבצים רק אם גם השמע והסרטון התקבלו.</string>
     <string name="contributing">תרומה</string>
     <string name="no_update_available">זאת הגרסה העדכנית ביותר.</string>
-    <string name="donate_summary">אפשר להעניק בהתאם לערך שהוא מעניק לך. צוות LibreTube קטן מהתרומה או הסיוע שלך.</string>
     <string name="update">איתור גרסה חדשה</string>
     <string name="advanced_summary">הורדות ואיפוס</string>
     <string name="app_uptodate">היישומון עדכני.</string>
@@ -138,11 +135,9 @@
     <string name="advanced">מתקדם</string>
     <string name="appearance_summary">התאמת היישומון לטעמך.</string>
     <string name="category_intro_description">פרק זמן ללא תוכן ממשי. יכולה להיות השהייה, תמונה ללא תזוזה, הנפשה מחזורית. אסור להשתמש בזה למעברונים שמכילים מידע.</string>
-    <string name="contributing_summary">אפשר לספק רעיונות, תרגומים, שינויים בעיצוב, ניקוי שינויים מעמיקים בקוד. ככל שיותר נעשה כך היישומון משתפר יותר!</string>
     <string name="category_selfpromo_description">דומה ל„נותן חסות” למעט קידום עצמי ללא תשלום. לרבות סעיפים על אביזרים ממותגים, תרומות או מידע על שיתופי פעולה.</string>
     <string name="category_intro">הפוגה/הנפשת הקדמה</string>
     <string name="authors">יוצרים</string>
-    <string name="authors_summary">כאן מופיעים כל מי שמעורב בפיתוח ושיפור היישומון.</string>
     <string name="no_replies">להערה זו אין תגובות.</string>
     <string name="download_folder_summary">שם התיקייה שבה תאוחסן מדיה שהורדה.</string>
     <string name="internal_storage">אחסון פנימי</string>
@@ -196,7 +191,6 @@
     <string name="quality">איכות</string>
     <string name="behavior">התנהגות</string>
     <string name="seek_increment">הגדלת קפיצה</string>
-    <string name="piped_summary">Piped הוא חלופה חופשית למנשק המשתמש של YouTube ומספק את ה־API בו אנו משתמשים. בלעדיו,‏ LibreTube לא היה קיים. אנו מודים למפתחים מקרב לב!</string>
     <string name="pauseOnScreenOff">השהיה אוטומטית</string>
     <string name="pauseOnScreenOff_summary">השהיית הניגון עם כיבוי המסך.</string>
     <string name="clonePlaylist">שכפול רשימת הנגינה</string>
@@ -285,7 +279,6 @@
     <string name="network_metered">מוגבלת</string>
     <string name="network_wifi">ברשת אלחוטית בלבד</string>
     <string name="translate">תרגום</string>
-    <string name="translate_summary">אפשר לסייע בתרגום היישומון</string>
     <string name="no_search_result">אין תוצאות.</string>
     <string name="copied">הועתק</string>
     <string name="error_occurred">שגיאה</string>

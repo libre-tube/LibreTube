@@ -126,14 +126,10 @@
     <string name="defaultIcon">Domyślna</string>
     <string name="download_directory">Zapisz w</string>
     <string name="download_directory_summary">Gdzie pobrany plik jest zapisany.</string>
-    <string name="contributing_summary">Dostarczaj pomysły, tłumaczenia, zmiany projektowe, czyść i pisz kod. Im więcej się zrobi, tym lepiej!</string>
-    <string name="license_summary">GPLv3+ jest wolną licencją typu copyleft. Używaj, studiuj, zmieniaj i dziel się; ze wszystkimi.</string>
-    <string name="donate_summary">Jeśli możesz, podaruj tyle, ile LibreTube jest dla Ciebie warte. Zespół LibreTube jest mniejszy niż Twój datek lub pomoc.</string>
     <string name="app_uptodate">Uruchomiona najnowsza wersja.</string>
     <string name="no_update_available">Używasz najnowszej wersji.</string>
     <string name="appearance_summary">Dostosuj aplikację do swoich potrzeb.</string>
     <string name="advanced_summary">Ustawienia wideo, pobrane i historia</string>
-    <string name="authors_summary">Poznaj wszystkich.</string>
     <string name="download_folder">Nazwa</string>
     <string name="download_folder_summary">Nazwa folderu, w którym zapisywane są pobrane treści.</string>
     <string name="downloads_directory">Folder pobranych</string>
@@ -146,7 +142,6 @@
     <string name="empty_instance">Wpisz nazwę i adres URL interfejsu API.</string>
     <string name="invalid_url">Wpisz działający adres</string>
     <string name="customInstance_summary">Dodaj niestandardową instancję (na własne ryzyko)</string>
-    <string name="website_summary">Odwiedź stronę internetową, aby uzyskać więcej informacji o aplikacji i jej funkcjach.</string>
     <string name="update">Sprawdź, czy dostępna jest nowsza wersja</string>
     <string name="update_summary">Kliknij, aby dowiedzieć się, czy aplikacja jest aktualna.</string>
     <string name="instance_name">Nazwa instancji</string>

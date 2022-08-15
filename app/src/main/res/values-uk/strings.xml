@@ -129,10 +129,7 @@
     <string name="update_available_text">Перейти до релізів на GitHub, щоб завантажити\?</string>
     <string name="downloads">Завантаження</string>
     <string name="video_format">Формат відео</string>
-    <string name="website_summary">Відвідайте сайт для більшої інформації про додаток та його функції.</string>
     <string name="contributing">Внесок</string>
-    <string name="contributing_summary">Надавайте ідеї, перекладайте, змінюйте дизайн, чистіть або змінюйте код. Чим більше зроблено, тим краще!</string>
-    <string name="license_summary">GPLv3+ - це ліцензія на копілефтовану лібре. Використовувати, вивчати, змінювати і ділитися; з усіма.</string>
     <string name="update">Шукати нову версію</string>
     <string name="update_summary">Натисніть для перевірки чи додаток оновлений.</string>
     <string name="app_uptodate">Це остання версія.</string>
@@ -147,8 +144,6 @@
     <string name="defaultIcon">По замовчуванню</string>
     <string name="download_directory_summary">Де зберігаються завантажені медіа.</string>
     <string name="video_format_summary">Перетворення файлів, якщо аудіо і відео завантажені.</string>
-    <string name="donate_summary">Дайте те, чого це варте для вас, якщо зможете. Команда LibreTube менша, ніж ваша пожертва чи допомога.</string>
-    <string name="authors_summary">Познайомтеся з усіма, хто бере участь у розробці та вдосконаленні програми.</string>
     <string name="legacyIcon">Втрачена популярність</string>
     <string name="no_update_available">Ви використовуєте останню версію.</string>
     <string name="gradientIcon">Градієнт Glib</string>
@@ -170,7 +165,6 @@
     <string name="instance_summary">Piped, логін, підписки</string>
     <string name="quality">Якість</string>
     <string name="behavior">Поведінка</string>
-    <string name="piped_summary">Piped — це альтернативний веб-фронтенд з відкритим вихідним кодом для YouTube, який забезпечує API, який ми використовуємо. Без Piped LibreTube не існував би. Величезне спасибі його розробникам!</string>
     <string name="version">Версія %1$s</string>
     <string name="about_summary">Познайомтеся з командою LibreTube і тим, як це все відбувається.</string>
     <string name="show_chapters">Показати розділи</string>

@@ -13,6 +13,7 @@ const val DONATE_URL = "https://github.com/libre-tube/LibreTube#donate"
 const val GITHUB_URL = "https://github.com/libre-tube/LibreTube"
 const val PIPED_GITHUB_URL = "https://github.com/TeamPiped/Piped"
 const val WEBLATE_URL = "https://hosted.weblate.org/projects/libretube/libretube/"
+const val LICENSE_URL = "https://gnu.org/"
 
 /**
  * Social media links for the community fragment

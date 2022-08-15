@@ -5,7 +5,7 @@ import android.widget.FrameLayout
 import com.github.libretube.R
 import com.google.android.material.snackbar.Snackbar
 
-fun View.showSnackBar(text: Int) {
+fun View.getStyledSnackBar(text: Int): Snackbar {
     val snackBar = Snackbar.make(this, text, Snackbar.LENGTH_SHORT)
     snackBar.setTextMaxLines(3)
     snackBar.animationMode = Snackbar.ANIMATION_MODE_SLIDE
@@ -22,5 +22,5 @@ fun View.showSnackBar(text: Int) {
     snackBar.view.layoutParams = params
 
     snackBar.view.background = resources.getDrawable(R.drawable.snackbar_shape, null)
-    snackBar.show()
+    return snackBar
 }

@@ -126,11 +126,7 @@
     <string name="video_format_summary">Konvertierung von Dateien, wenn sowohl Audio als auch Video heruntergeladen werden.</string>
     <string name="download_directory">Herunterladen auf</string>
     <string name="download_directory_summary">Der Ort, an dem deine heruntergeladenen Medien gespeichert werden.</string>
-    <string name="website_summary">Besuche die Website, um weitere Informationen über die Anwendung und ihre Funktionen zu erhalten.</string>
-    <string name="contributing_summary">Stellen Sie Ideen, Übersetzungen, Designänderungen bereit, bereinigen und schreiben Sie Code. Je mehr getan wird, desto besser wird es!</string>
-    <string name="license_summary">Die GPLv3+ ist eine Copylefted-Libre-Lizenz. Verwenden, studieren, ändern und teilen; mit allen.</string>
     <string name="donate">Spenden</string>
-    <string name="donate_summary">Geben Sie, was Ihnen das wert ist, wenn Sie können. Das Team LibreTube ist kleiner als Ihre Spende oder Hilfe.</string>
     <string name="update">Suche nach neuer Version</string>
     <string name="update_summary">Klicke hier, um herauszufinden, ob die Anwendung auf dem neuesten Stand ist.</string>
     <string name="app_uptodate">Es läuft die neueste Version.</string>
@@ -142,7 +138,6 @@
     <string name="live">Live</string>
     <string name="no_replies">Dieser Kommentar hat keine Antworten.</string>
     <string name="authors">Autoren</string>
-    <string name="authors_summary">Lernen Sie alle Mitwirkenden, welche in der Entwicklung und der Verbesserung der Anwendung involviert sind, kennen.</string>
     <string name="contributing">Beitragen</string>
     <string name="download_folder">Name</string>
     <string name="download_folder_summary">Der Name des Ordners, in dem die heruntergeladenen Medien gespeichert sind.</string>
@@ -195,7 +190,6 @@
     <string name="clonePlaylist">Wiedergabeliste klonen</string>
     <string name="watch_history">Wiedergabeverlauf</string>
     <string name="instance_frontend_url">URL zum Instanz-Frontend</string>
-    <string name="piped_summary">Piped ist ein alternatives quelloffenes Web-Frontend für YouTube, welches die von uns verwendete API bereitstellt. Ohne Piped würde LibreTube nicht existieren. Großen Dank an die Entwickler!</string>
     <string name="pauseOnScreenOff_summary">Den Player pausieren, wenn der Bildschirm ausgeschaltet ist.</string>
     <string name="autoplay_summary">Das nächste Video automatisch abspielen, wenn das aktuelle beendet ist.</string>
     <string name="watch_positions">Position merken</string>

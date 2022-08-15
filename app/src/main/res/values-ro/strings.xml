@@ -117,12 +117,8 @@
     <string name="update_available">Versiunea %1$s este disponibilă</string>
     <string name="appearance">Aspect</string>
     <string name="download_directory_summary">Unde sunt stocate fișierele media descărcate.</string>
-    <string name="website_summary">Vizitează site-ul web pentru mai multe informații despre aplicație și caracteristicile acesteia.</string>
     <string name="contributing">Contribuind</string>
-    <string name="contributing_summary">Oferă idei, traduceri, modificări de design, curăță și scrie cod. Cu cât se face mai mult, cu atât devine mai bine!</string>
-    <string name="license_summary">GPLv3+ este o licență libre cu copyleft. Utilizați, studiați, schimbați și împărtășiți; cu toti.</string>
     <string name="donate">Donează</string>
-    <string name="donate_summary">Oferă cât valorează asta pentru tine, dacă poți. Echipa LibreTube este mai mică decât donația sau ajutorul tău.</string>
     <string name="update">Căută pentru versiune nouă</string>
     <string name="update_summary">Fă clic pentru a afla dacă aplicația este actualizată.</string>
     <string name="app_uptodate">Rulează ultima versiune.</string>
@@ -133,7 +129,6 @@
     <string name="appearance_summary">Ajustează aplicația după cum dorești.</string>
     <string name="no_replies">Acest comentariu nu are răspunsuri.</string>
     <string name="authors">Autori</string>
-    <string name="authors_summary">Fă cunoștință cu echipa LibreTube și cu toți colaboratorii săi care ajută la îmbunătățirea aplicației.</string>
     <string name="download_folder">Nume</string>
     <string name="download_folder_summary">Numele folderului în care fișierele media descărcate sunt stocate.</string>
     <string name="internal_storage">Stocare internă</string>
