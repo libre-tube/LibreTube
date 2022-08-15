@@ -307,4 +307,5 @@
     <string name="backup">备份</string>
     <string name="picture_in_picture">画中画</string>
     <string name="player_resize_mode">调整大小模式</string>
+    <string name="maximum_image_cache">最大图片缓存尺寸</string>
 </resources>
