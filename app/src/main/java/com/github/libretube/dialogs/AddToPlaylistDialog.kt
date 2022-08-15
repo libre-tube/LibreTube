@@ -7,12 +7,13 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.models.PlaylistViewModel
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
@@ -22,6 +23,7 @@ import java.io.IOException
 
 class AddToPlaylistDialog : DialogFragment() {
     private lateinit var binding: DialogAddtoplaylistBinding
+    private val viewModel: PlaylistViewModel by activityViewModels()
 
     private lateinit var videoId: String
     private lateinit var token: String
@@ -67,17 +69,17 @@ class AddToPlaylistDialog : DialogFragment() {
                         android.R.layout.simple_spinner_dropdown_item
                     )
                     binding.playlistsSpinner.adapter = arrayAdapter
-                    if (Globals.SELECTED_PLAYLIST_ID != null) {
+                    if (viewModel.lastSelectedPlaylistId != null) {
                         var selectionIndex = 0
                         response.forEachIndexed { index, playlist ->
-                            if (playlist.id == Globals.SELECTED_PLAYLIST_ID) selectionIndex = index
+                            if (playlist.id == viewModel.lastSelectedPlaylistId) selectionIndex = index
                         }
                         binding.playlistsSpinner.setSelection(selectionIndex)
                     }
                     runOnUiThread {
                         binding.addToPlaylist.setOnClickListener {
                             val index = binding.playlistsSpinner.selectedItemPosition
-                            Globals.SELECTED_PLAYLIST_ID = response[index].id!!
+                            viewModel.lastSelectedPlaylistId = response[index].id!!
                             addToPlaylist(
                                 response[index].id!!
                             )

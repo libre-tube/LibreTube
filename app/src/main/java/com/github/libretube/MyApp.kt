@@ -9,14 +9,17 @@ import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import androidx.preference.PreferenceManager
 import androidx.work.ExistingPeriodicWorkPolicy
+import coil.ImageLoader
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.NotificationHelper
 
@@ -30,7 +33,7 @@ class MyApp : Application() {
         initializeNotificationChannels()
 
         /**
-         * Set the applicationContext as context for the [PreferenceHelper]
+         * Initialize the [PreferenceHelper]
          */
         PreferenceHelper.setContext(applicationContext)
 
@@ -40,7 +43,7 @@ class MyApp : Application() {
         DatabaseHolder.initializeDatabase(this)
 
         /**
-         * bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
+         * Bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
          */
         val builder = VmPolicy.Builder()
         StrictMode.setVmPolicy(builder.build())
@@ -48,7 +51,7 @@ class MyApp : Application() {
         /**
          * Set the api and the auth api url
          */
-        setRetrofitApiUrls()
+        initializeRetrofit()
 
         /**
          * Initialize the notification listener in the background
@@ -76,7 +79,7 @@ class MyApp : Application() {
     /**
      * Set the api urls needed for the [RetrofitInstance]
      */
-    private fun setRetrofitApiUrls() {
+    private fun initializeRetrofit() {
         RetrofitInstance.url =
             PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
         // set auth instance
@@ -89,6 +92,10 @@ class MyApp : Application() {
             } else {
                 RetrofitInstance.url
             }
+        CronetHelper.initCronet(this)
+        ConnectionHelper.imageLoader = ImageLoader.Builder(this)
+            .callFactory(CronetHelper.callFactory)
+            .build()
     }
 
     /**
