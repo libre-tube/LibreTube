@@ -219,7 +219,7 @@
     <string name="reddit">Reddit</string>
     <string name="auto_rotation">הטיה אוטומטית</string>
     <string name="portrait">לאורך</string>
-    <string name="aspect_ratio">יחס רוחב-גובה של וידאו</string>
+    <string name="aspect_ratio">יחס רוחב-גובה של סרטון</string>
     <string name="twitter">טוויטר</string>
     <string name="turnInternetOn">נא להפעיל את הרשת האלחוטית או החיבור הסלולרי כדי להתחבר לאינטרנט.</string>
     <string name="open">פתיחה…</string>
@@ -307,4 +307,5 @@
     <string name="repeat_mode">מצב חזרה</string>
     <string name="resize_mode_zoom">תקריב</string>
     <string name="player_resize_mode">מצב שינוי גודל</string>
+    <string name="maximum_image_cache">גודל מטמון התמונות המרבי</string>
 </resources>
