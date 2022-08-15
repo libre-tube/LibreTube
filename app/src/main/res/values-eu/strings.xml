@@ -111,7 +111,6 @@
     <string name="appearance_summary">Egokitu aplikazioa zure gustura</string>
     <string name="advanced_summary">Deskargak eta berrezartzea</string>
     <string name="no_replies">Iruzkin honek ez du erantzunik.</string>
-    <string name="authors_summary">Ezagutu aplikazioaren garapenean eta hobekuntzan parte hartzen duten guztiak.</string>
     <string name="download_folder">Izena</string>
     <string name="download_folder_summary">Deskargatutako multimediak gordetzen diren karpetaren izena</string>
     <string name="downloads_directory">Deskarga karpeta</string>
@@ -146,15 +145,11 @@
     <string name="segment_skipped">Alde batera utzitako zatiak</string>
     <string name="sponsorblock_state">Piztuta</string>
     <string name="category_segments">Segmentuak</string>
-    <string name="contributing_summary">Ideiak, itzulpenak, diseinu aldaketak, kode moldaketak... Zenbat eta gehiago egin orduan eta hobeto!</string>
     <string name="downloads">Deskargak</string>
     <string name="app_behavior">Portaera</string>
     <string name="appearance">Itxura</string>
-    <string name="website_summary">Bisitatu web gunea, aplikazioari eta haren ezaugarriei buruzko informazio gehiago izateko.</string>
     <string name="contributing">Lagundu</string>
-    <string name="donate_summary">Eman zuretzako balio duenaren arabera, ahal baduzu.</string>
     <string name="update">Bertsio berria bilatu</string>
-    <string name="license_summary">GPLv3+ copyleft libreko lizentzia bat da. Erabili, aztertu, aldatu eta partekatu nahi adina.</string>
     <string name="donate">Dohaintza</string>
     <string name="update_summary">Klik egin aplikazioa eguneratuta dagoen jakiteko.</string>
     <string name="live">Zuzenean</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Portaera</string>
     <string name="player_summary">Kalitatea eta erreprodukzioaen portaera</string>
     <string name="seek_increment">Joan-etorrien gehikuntza</string>
-    <string name="piped_summary">Piped web-frontend alternatibo libre bat da eta YouTube-k erabiltzen duen APIa eskaintzen du. Piped gabe, LibreTube ez litzateke existituko. Mila esker haien garatzaileei!</string>
     <string name="reset">Leheneratu lehenetsiak</string>
     <string name="reset_message">Ziur al zaude saioa amaitu eta zure ezarpen guztiak berrezarri nahi dituzula\?</string>
     <string name="pauseOnScreenOff_summary">Pantaila itzalita dagoenean, erreproduzitzailea gelditu.</string>
@@ -286,7 +280,6 @@
     <string name="required_network">Konexioa behar da</string>
     <string name="network_all">Guztiak</string>
     <string name="translate">Itzulpena</string>
-    <string name="translate_summary">Lagundu aplikazioa itzultzen</string>
     <string name="copied">Kopiatuta</string>
     <string name="downloadsucceeded">Deskarga egina</string>
     <string name="share_with_time">Partekatu hasierako orduarekin</string>

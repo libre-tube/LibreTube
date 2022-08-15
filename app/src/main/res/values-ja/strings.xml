@@ -122,8 +122,6 @@
     <string name="app_behavior">動作</string>
     <string name="update_available">バージョン%1$sが利用可能</string>
     <string name="chapters">チャプター</string>
-    <string name="authors_summary">アプリの開発と改良に関わるすべての人と知り合いになる。</string>
-    <string name="license_summary">GPLv3+はコピーレフトの自由なライセンスです。すべての人が、使用、研究、変更、そして共有できます。</string>
     <string name="birdIcon">小鳥</string>
     <string name="instance_name">インスタンス名</string>
     <string name="pauseOnScreenOff_summary">画面が消灯したら一時停止します。</string>
@@ -148,7 +146,6 @@
     <string name="app_icon">アイコン</string>
     <string name="disabled">オフ</string>
     <string name="download_directory_summary">ダウンロードされたメディアを保存する場所。</string>
-    <string name="donate_summary">可能なら、あなたにとって価値のあるものを贈ってください。LibreTubeチームは、あなたの寄付や援助よりも小さな存在です。</string>
     <string name="instance_summary">Piped、ログイン、チャンネル登録</string>
     <string name="customInstance_summary">追加…</string>
     <string name="invalid_url">有効なURLを入力してください</string>
@@ -209,9 +206,7 @@
     <string name="downloads">ダウンロード</string>
     <string name="video_format">動画の形式</string>
     <string name="video_format_summary">音声と動画の両方をダウンロードした場合のファイル形式の変換。</string>
-    <string name="website_summary">Webサイトにアクセスして、アプリの詳細や機能をもっと見る。</string>
     <string name="contributing">貢献する</string>
-    <string name="contributing_summary">アイディアの提供、翻訳、デザイン変更、コードの記述や整理など。すればするほど便利になります。</string>
     <string name="donate">寄付</string>
     <string name="playback_speed">再生速度</string>
     <string name="advanced">詳細</string>
@@ -254,7 +249,6 @@
     <string name="behavior">動作</string>
     <string name="player_summary">解像度とプレイヤーの動作</string>
     <string name="seek_increment">進む</string>
-    <string name="piped_summary">Pipedは、YouTubeに代わるオープンソースのWebフロントエンドで、私たちが使用するAPIを提供しています。Pipedがなければ、LibreTubeは存在しなかったでしょう。開発者たちに大感謝です！</string>
     <string name="pauseOnScreenOff">自動一時停止</string>
     <string name="playingOnBackground">バックグラウンドで再生中…</string>
     <string name="clonePlaylist">プレイリストを複製</string>

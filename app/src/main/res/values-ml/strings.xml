@@ -80,9 +80,7 @@
     <string name="video_format">വീഡിയോ ഫോർമാറ്റ്</string>
     <string name="update_available_text">ഒരു പുതിയ അപ്ഡേറ്റ് ലഭ്യമാണ്. GitHub-ലെ അപ്‌ഡേറ്റ് പേജിലേക്ക് റീഡയറക്‌ടുചെയ്യുന്നതിന് ശരി ക്ലിക്കുചെയ്യുക.</string>
     <string name="download_directory_summary">നിങ്ങളുടെ ഡൗൺലോഡ് ചെയ്ത മീഡിയ സംഭരിക്കുന്ന ലൊക്കേഷൻ.</string>
-    <string name="website_summary">ആപ്പിനെയും അതിന്റെ സവിശേഷതകളെയും കുറിച്ച് കൂടുതലറിയാൻ ഞങ്ങളുടെ വെബ്സൈറ്റ് സന്ദർശിക്കുക.</string>
     <string name="contributing">സംഭാവന ചെയ്യുന്നു</string>
-    <string name="donate_summary">നിങ്ങൾക്ക് ആപ്പ് ഇഷ്‌ടപ്പെടുകയും ഞങ്ങളുടെ പ്രവർത്തനത്തെ അഭിനന്ദിക്കുകയും ചെയ്യുന്നുവെങ്കിൽ, ഒരു സംഭാവനയിൽ ഞങ്ങൾ സന്തുഷ്ടരാണ്.</string>
     <string name="please_login">ദയവായി ആദ്യം ലോഗിൻ ചെയ്യുക അല്ലെങ്കിൽ ക്രമീകരണങ്ങളിൽ രജിസ്റ്റർ ചെയ്യുക.</string>
     <string name="playback_speed">ഡിഫോൾട്ട് പ്ലേബാക്ക് വേഗത</string>
     <string name="advanced">അഡ്വാൻസ്ഡ്</string>
@@ -142,11 +140,8 @@
     <string name="music_directory">സംഗീത ഡയറക്ടറി</string>
     <string name="movies_directory">സിനിമകളുടെ ഡയറക്ടറി</string>
     <string name="shareTo">യുആർഎൽ പങ്കിടുക:</string>
-    <string name="license_summary">The GNU General Public License എന്നത് സോഫ്‌റ്റ്‌വെയറിനും മറ്റ് തരത്തിലുള്ള വർക്കുകൾക്കുമുള്ള ഒരു സ്വതന്ത്ര, കോപ്പിലെഫ്റ്റ് ലൈസൻസാണ്.</string>
     <string name="category_intro_description">യഥാർത്ഥ ഉള്ളടക്കം ഇല്ലാത്ത ഒരു ഇടവേള. ഒരു ഇടവേള, സ്റ്റാറ്റിക് ഫ്രെയിം, ആവർത്തിക്കുന്ന ആനിമേഷൻ എന്നിവയായിരിക്കാം. വിവരങ്ങൾ അടങ്ങിയ പരിവർത്തനങ്ങൾക്ക് ഇത് ഉപയോഗിക്കരുത്.</string>
-    <string name="authors_summary">Team LibreTube-ന് പിന്നിൽ ആരാണ് മാജിക് ചെയ്യുന്നതെന്ന് കണ്ടെത്തുക.</string>
     <string name="video_format_summary">ഡൗൺലോഡ് ചെയ്‌ത വീഡിയോ ഫോർമാറ്റിലേക്ക് പരിവർത്തനം ചെയ്യപ്പെടും (ഓഡിയോയും വീഡിയോയും ഡൗൺലോഡ് ചെയ്‌താൽ മാത്രമേ ബാധകമാകൂ).</string>
-    <string name="contributing_summary">നിങ്ങൾക്ക് ആശയങ്ങൾ, വിവർത്തനങ്ങൾ, ഡിസൈൻ മാറ്റങ്ങൾ, കോഡ് ക്ലീനിംഗ് അല്ലെങ്കിൽ യഥാർത്ഥ ഹെവി കോഡ് മാറ്റങ്ങൾ എന്നിവ ഉണ്ടെങ്കിലും, സഹായം എപ്പോഴും സ്വാഗതം ചെയ്യുന്നു. കൂടുതൽ ചെയ്‌താൽ അത് മികച്ചതാകുന്നു!</string>
     <string name="piped">പൈപ്ഡ്</string>
     <string name="category_selfpromo_description">പണമടയ്ക്കാത്തതോ സ്വയം പ്രമോഷനോ ഒഴികെയുള്ള \"സ്‌പോൺസർ\" എന്നതിന് സമാനമാണ്. സംഭാവനകൾ, അല്ലെങ്കിൽ അവർ ആരുമായി സഹകരിച്ചു എന്നതിനെക്കുറിച്ചുള്ള വിവരങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള വിഭാഗങ്ങൾ ഇതിൽ ഉൾപ്പെടുന്നു.</string>
     <string name="gradientIcon">ഗ്രേഡിയന്റ്</string>

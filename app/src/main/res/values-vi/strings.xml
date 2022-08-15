@@ -155,13 +155,8 @@
     <string name="category_sponsor_description">Quảng cáo có trả tiền, giới thiệu có trả tiền và quảng cáo trực tiếp. Không phải để tự quảng cáo hoặc gửi lời cảm ơn miễn phí tới các hoạt động chính nghĩa / người sáng tạo / trang web / sản phẩm mà họ thích.</string>
     <string name="category_intro_description">Khoảng thời gian không có chứa nội dung của video. Có thể là tạm dừng, khung tĩnh, hoạt ảnh lặp lại. Không nên được sử dụng cho các phân cảnh chuyển có chứa thông tin.</string>
     <string name="category_music_offtopic_description">Chỉ sử dụng cho các video ca nhạc. Nó phải bao gồm các phần của video không phải là một phần của bản phối chính thức. Chung quy lại, video phải giống với Spotify hoặc bất kỳ phiên bản phối nào khác càng giống càng tốt, hoặc giảm nói chuyện hoặc các yếu tố gây xao nhãng khác.</string>
-    <string name="website_summary">Truy cập trang web để biết thêm thông tin về ứng dụng và các tính năng của nó.</string>
     <string name="download_directory_summary">Nơi mà những file phương tiện đã được tải xuống được lưu trữ.</string>
     <string name="download_directory">Tải xuống tới</string>
-    <string name="contributing_summary">Cung cấp ý tưởng, bản dịch, những thay đổi thiết kế, làm sạch và viết mã. Càng làm nhiều thì càng tốt!</string>
-    <string name="license_summary">GPLv3 + là một giấy phép viết tắt được copyleft. Sử dụng, nghiên cứu, thay đổi và chia sẻ; với tất cả.</string>
-    <string name="donate_summary">Hãy cho đi những gì xứng đáng với bạn, nếu bạn có thể. Team LibreTube nhỏ hơn khoản đóng góp hoặc trợ giúp của bạn.</string>
-    <string name="authors_summary">Tìm hiểu về mọi người tham gia vào dự án này.</string>
     <string name="sdcard">Thẻ SD</string>
     <string name="buffering_goal">Tải trước</string>
     <string name="hide_chapters">Ẩn chương</string>
@@ -198,7 +193,6 @@
     <string name="behavior">Hành vi</string>
     <string name="player_summary">Chất lượng và hành vi của trình phát</string>
     <string name="seek_increment">Tìm kiếm sự gia tăng</string>
-    <string name="piped_summary">Piped là một giao diện web thay thế mã nguồn mở cho YouTube, cung cấp API mà chúng tôi sử dụng. Nếu không có Piped, LibreTube sẽ không thể tồn tại. Cảm ơn rất nhiều đến các nhà phát triển của họ!</string>
     <string name="pauseOnScreenOff">Tự động dừng</string>
     <string name="pauseOnScreenOff_summary">Dừng trình phát khi màn hình tắt.</string>
     <string name="autoplay_summary">Tự động phát video tiếp theo khi video hiện tại kết thúc.</string>

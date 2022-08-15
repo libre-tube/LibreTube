@@ -125,8 +125,6 @@
     <string name="video_format_summary">Μετατροπή των αρχείων σε περίπτωση λήψης ήχου και βίντεο.</string>
     <string name="download_directory">Λήψη σε</string>
     <string name="download_directory_summary">Πού αποθηκεύονται τα ληφθέντα μέσα.</string>
-    <string name="website_summary">Επισκεφτείτε τον ιστότοπο για περισσότερες πληροφορίες σχετικά με την εφαρμογή και τις δυνατότητές της.</string>
-    <string name="license_summary">Η GPLv3+ είναι μια άδεια χρήσης που έχει κατοχυρωθεί με δικαιώματα πνευματικής ιδιοκτησίας. Χρήση, μελέτη, αλλαγή και κοινή χρήση. με όλα.</string>
     <string name="donate">Δωρεά</string>
     <string name="update">Αναζητήστε νέα έκδοση</string>
     <string name="update_summary">Πατήστε για να μάθετε αν η εφαρμογή είναι ενημερωμένη.</string>
@@ -135,13 +133,10 @@
     <string name="appearance_summary">Προσαρμόστε την εφαρμογή σύμφωνα με τις προτιμήσεις σας.</string>
     <string name="player">Αναπαραγωγέας</string>
     <string name="playback_speed">Προεπιλεγμένη ταχύτητα αναπαραγωγής</string>
-    <string name="contributing_summary">Παρέχετε ιδέες, μεταφράσεις, αλλαγές σχεδίασης, καθαρίστε και γράψτε κώδικα. Όσο περισσότερα γίνονται τόσο καλύτερη γίνεται η εφαρμογή!</string>
-    <string name="donate_summary">Δώστε ό,τι αξίζει για εσάς, αν μπορείτε. Η ομάδα του LibreTube είναι μικρότερη από τη δωρεά ή τη βοήθειά σας.</string>
     <string name="app_uptodate">Εκτελείται η τελευταία έκδοση.</string>
     <string name="advanced">Για προχωρημένους</string>
     <string name="advanced_summary">Λήψεις, ιστορικό</string>
     <string name="authors">Ομάδα</string>
-    <string name="authors_summary">Γνωρίστε όλους όσους συμμετέχουν στην ανάπτυξη και τη βελτίωση της εφαρμογής.</string>
     <string name="download_folder">Όνομα</string>
     <string name="internal_storage">Εσωτερικός χώρος αποθήκευσης</string>
     <string name="sdcard">Κάρτα SD</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Συμπεριφορά</string>
     <string name="player_summary">Ποιότητα και συμπεριφορά του αναπαραγωγέα</string>
     <string name="seek_increment">Προσαύξηση αναπήδησης</string>
-    <string name="piped_summary">Το Piped είναι μία εναλλακτική σελίδα ανοικτού κώδικα για το YouTube που παρέχει το API που χρησιμοποιούμε. Χωρίς το Piped, το LibreTube δεν θα υπήρχε. Τεράστιες ευχαριστίες στους προγραμματιστές του!</string>
     <string name="reset">Επαναφορά προεπιλογών</string>
     <string name="reset_message">Είστε σίγουρος/η; Αυτό θα σας αποσυνδέσει και θα επαναφέρει όλες τις ρυθμίσεις σας!</string>
     <string name="pauseOnScreenOff">Αυτόματη παύση</string>

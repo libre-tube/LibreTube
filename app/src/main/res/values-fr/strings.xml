@@ -116,15 +116,11 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Lire en arrière-plan</string>
-    <string name="contributing_summary">Que vous ayez des idées, des traductions, des modifications de conception, des nettoyages de code, ou de véritables changements de code lourds, l\'aide est toujours la bienvenue. Plus on en fait, mieux c\'est !</string>
-    <string name="website_summary">Visitez le site web pour plus d\'informations sur l\'application et ses fonctionnalités.</string>
-    <string name="donate_summary">Si vous aimez l\'application et appréciez notre travail, nous serions heureux de votre don.</string>
     <string name="contributing">Contribution</string>
     <string name="donate">Faire un don</string>
     <string name="advanced_summary">Téléchargements, et réinitialisation</string>
     <string name="video_format_summary">Conversion des fichiers si on télécharge à la fois de l\'audio et de la vidéo.</string>
     <string name="download_directory_summary">Où sont stockés les médias téléchargés.</string>
-    <string name="license_summary">La GPLv3+ est une licence libre copylefté. Utilisez, étudiez, modifiez et partagez ; avec tous.</string>
     <string name="update_available">La version %1$s est disponible</string>
     <string name="update_available_text">Allez sur releases sur GitHub pour le télécharger \?</string>
     <string name="appearance">Apparence</string>
@@ -143,7 +139,6 @@
     <string name="live">En direct</string>
     <string name="no_replies">Ce commentaire n\'a pas de réponse.</string>
     <string name="authors">Auteurs</string>
-    <string name="authors_summary">Apprenez à connaître toutes les personnes qui participent au développement et à l\'amélioration de l\'application.</string>
     <string name="sdcard">Carte SD</string>
     <string name="download_folder_summary">Le nom du dossier dans lequel le média téléchargé est stocké.</string>
     <string name="download_folder">Nom</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Comportement</string>
     <string name="player_summary">Qualité, et comportement du lecteur</string>
     <string name="seek_increment">Rechercher l\'incrément</string>
-    <string name="piped_summary">Piped est un front-end web alternatif libre pour YouTube qui fournit l\'API que nous utilisons. Sans lui, LibreTube n\'existerait pas. Un grand merci à leurs développeurs !</string>
     <string name="reset">Restaurer les valeurs par défaut</string>
     <string name="reset_message">Réinitialiser tous vos paramètres et vous déconnecter \?</string>
     <string name="pauseOnScreenOff">Pause automatique</string>
@@ -272,7 +266,6 @@
     <string name="most_views">Plus vus</string>
     <string name="least_views">Moins vus</string>
     <string name="translate">Traduction</string>
-    <string name="translate_summary">Aidez à traduire l\'application</string>
     <string name="most_recent">Plus récents</string>
     <string name="network_all">Tous</string>
     <string name="channel_name_za">Nom de chaine (Z-A)</string>

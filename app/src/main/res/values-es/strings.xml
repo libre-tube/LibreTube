@@ -123,13 +123,11 @@
     <string name="appearance">Apariencia</string>
     <string name="no_replies">Este comentario no tiene respuestas.</string>
     <string name="authors">Autores</string>
-    <string name="authors_summary">Conozca a todos los que están involucrados en el desarrollo y la mejora de la aplicación.</string>
     <string name="internal_storage">Almacenamiento interno</string>
     <string name="sdcard">Tarjeta SD</string>
     <string name="shareTo">Compartir con</string>
     <string name="defaultIcon">Predeterminado</string>
     <string name="download_directory_summary">Dónde se almacenan los medios descargados.</string>
-    <string name="donate_summary">Da lo que vale esto para ti, si puedes. El equipo LibreTube es más pequeño que tu donación o ayuda.</string>
     <string name="update">Ver si hay una nueva versión</string>
     <string name="update_summary">Toca para saber si la aplicación está actualizada.</string>
     <string name="app_uptodate">Ejecutando la última versión.</string>
@@ -149,9 +147,6 @@
     <string name="about_summary">Conoce al equipo de LibreTube y como sucede todo.</string>
     <string name="related_streams">Contenido relacionado</string>
     <string name="related_streams_summary">Mostrar transmisiones relacionadas con lo que ves.</string>
-    <string name="website_summary">Visita el sitio web para más información de la aplicación y sus características.</string>
-    <string name="contributing_summary">Aportar ideas, traducciones, cambios de diseño, limpiar y escribir código. ¡Cuanto más se haga, mejor será!</string>
-    <string name="license_summary">La GPLv3+ es una licencia libre con copyleft. Utiliza, estudia, cambia y comparte; con todos.</string>
     <string name="movies_directory">Carpeta de películas</string>
     <string name="no_update_available">Estás utilizando la última versión.</string>
     <string name="advanced_summary">Descargas, restablecimiento</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Comportamiento</string>
     <string name="player_summary">Calidad y comportamiento del reproductor</string>
     <string name="seek_increment">Incremento de desplazamiento</string>
-    <string name="piped_summary">Piped es una interfaz web alternativa de código abierto para YouTube que proporciona la API que usamos. Sin Piped, LibreTube no existiría. ¡Muchas gracias a sus desarrolladores!</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="pauseOnScreenOff_summary">Pausa el reproductor cuando se apaga la pantalla.</string>
     <string name="autoplay_summary">Reproduce automáticamente el siguiente vídeo cuando el actual haya terminado.</string>
@@ -279,7 +273,6 @@
     <string name="least_recent">Antiguo</string>
     <string name="required_network">Requiere conexión</string>
     <string name="network_all">Todos</string>
-    <string name="translate_summary">Ayuda a traducir la aplicación</string>
     <string name="downloading_apk">Descargando aplicación…</string>
     <string name="seekbar_preview_summary">Muestra una instantánea al arrastrar el indicador de reproducción.</string>
     <string name="notify_new_streams_summary">Notificaciones sobre contenido nuevo de los creadores que sigues.</string>

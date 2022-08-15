@@ -126,12 +126,8 @@
     <string name="app_behavior">Comportamento</string>
     <string name="download_directory">Scarica in</string>
     <string name="download_directory_summary">Dove vengono memorizzati i media scaricati.</string>
-    <string name="website_summary">Visita il sito per più informazioni sull\'app e le sue funzionalità.</string>
     <string name="contributing">Collabora</string>
-    <string name="contributing_summary">Fornisci idee, traduzioni, modifiche di design, pulizia e scrittura del codice. Più si fa, meglio è!</string>
-    <string name="license_summary">La GPLv3+ è una licenza libera copyleft. Utilizza, studia, cambia e condividi; con tutti.</string>
     <string name="donate">Dona</string>
-    <string name="donate_summary">Dai quello che questo vale per te, se puoi. Il team LibreTube è più piccolo della vostra donazione o aiuto.</string>
     <string name="update">Cerca una nuova versione</string>
     <string name="update_summary">Clicca qui per scoprire se l\'app è aggiornata.</string>
     <string name="app_uptodate">Versione più recente in esecuzione.</string>
@@ -143,7 +139,6 @@
     <string name="live">Dal vivo</string>
     <string name="authors">Autori</string>
     <string name="no_replies">Questo commento non ha risposte.</string>
-    <string name="authors_summary">Conosci tutti coloro che sono coinvolti nello sviluppo e nel miglioramento dell\'applicazione.</string>
     <string name="downloads_directory">Cartella degli scaricamenti</string>
     <string name="sdcard">Scheda SD</string>
     <string name="music_directory">Cartella musicale</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Comportamento</string>
     <string name="player_summary">Qualità, e comportamento lettore</string>
     <string name="seek_increment">Cerca incremento</string>
-    <string name="piped_summary">Piped è un\' alternativa web-frontend libre per YouTube che fornisce l\'API che usiamo. Senza di lei, LibreTube non esisterebbe. Un enorme grazie ai loro sviluppatori!</string>
     <string name="autoplay_summary">Riproduci automaticamente il video successivo quando quello corrente è finito.</string>
     <string name="pauseOnScreenOff">Pausa automatica</string>
     <string name="pauseOnScreenOff_summary">Metti in pausa il playback quando lo schermo è spento.</string>

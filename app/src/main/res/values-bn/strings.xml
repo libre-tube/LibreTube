@@ -83,14 +83,12 @@
     <string name="video_format_summary">ফাইল কনভার্সন যদি অডিও ও ভিডিও উভয়ই ডাউনলোড করা হয়।</string>
     <string name="download_directory">ডাউনলোড স্থান</string>
     <string name="download_directory_summary">যেখানে ডাউনলোড করা মিডিয়া সংরক্ষণ করা হয়।</string>
-    <string name="website_summary">অ্যাপ সম্পর্কে বিস্তারিত তথ্য ও ফিচার জানতে ওয়েবসাইটে প্রবেশ করুন।</string>
     <string name="donate">অনুদান প্রদান</string>
     <string name="update">নতুন সংস্করণ দেখুন</string>
     <string name="app_uptodate">অ্যাপটি হালনাগাদ করা হয়েছে।</string>
     <string name="playback_speed">ডিফল্ট প্লেব্যাক গতি</string>
     <string name="advanced">অগ্রবর্তী</string>
     <string name="appearance_summary">অ্যাপটি আপনার মনমতো সাজিয়ে তুলুন।</string>
-    <string name="authors_summary">অ্যাপটি নির্মাণ ও উন্নয়নে সহযোগী ব্যক্তিদের সম্পর্কে জানুন।</string>
     <string name="download_folder">নাম</string>
     <string name="authors">নির্মাতাগণ</string>
     <string name="download_folder_summary">ডাউনলোড ফোল্ডারের নাম ঠিক করুন।</string>
@@ -131,7 +129,6 @@
     <string name="player_summary">মান ও প্লেয়ার গতিবিধি</string>
     <string name="behavior">গতিবিধি</string>
     <string name="seek_increment">সন্ধান দ্রুতি</string>
-    <string name="piped_summary">পাইপড ইউটিউবের জন্য একটি ওপেন সোর্স বিকল্প ফ্রন্টইন্ড যা আমাদের ব্যবহৃত এপিআই ব্যবহার করে। পাইপড ব্যতীত লিবরাটিউবের অস্তিত্বই থাকতো না। উক্ত প্রজেক্টের ডেভেলপারদেরকে অসংখ্য ধন্যবাদ!</string>
     <string name="pauseOnScreenOff">অটোপজ</string>
     <string name="videos">ভিডিওগুলো</string>
     <string name="pauseOnScreenOff_summary">স্ক্রিন বন্ধ হওয়ার পর স্বয়ংক্রিয়ভাবে প্লেয়ার বন্ধ করুন।</string>
@@ -160,13 +157,10 @@
     <string name="category_music_offtopic_description">শুধুমাত্র মিউজিক ভিডিওর জন্য প্রযোজ্য। অফিসিয়াল মিক্সগুলোর অংশ এমন দৃশ্যগুলো এখানে অপ্রযোজ্য। স্পটিফাই বা অডিও ভার্সনের প্রতিফলন ঘটায় অথবা ন্যূনতম অপ্রয়োজনীয় অংশ থাকবে।</string>
     <string name="contributing">অবদানে</string>
     <string name="category_preview_description">ভিডিওর এই অংশে আসন্ন কন্টেন্ট অথবা একই সিরিজের অন্য ভিডিওতে পূর্বে আলোচনা করা হয়েছে এমন তথ্য এখানে থাকবে‌‌ যদি এখানে এমন তথ্য থাকে যা অন্য ভিডিও বা একই ভিডিওর অন্য কোথাও আলোচনা করা হয়নি, তবে ভিডিওর উক্ত অংশের জন্য ভুল ক্যাটাগরি নির্বাচন করা হয়েছে।</string>
-    <string name="contributing_summary">আইডিয়া, অনুবাদ, ডিজাইন এবং কোড ডেভেলপ করুন। যত সহায়তা, তত ভালো!</string>
     <string name="player">অডিও ও ভিডিও</string>
-    <string name="license_summary">GPLv3+ একটি কপিলেফট লিবরা লাইসেন্স। সবার সাথে ব্যবহার, অধ্যয়ন, পরিবর্তন ও শেয়ার করুন।</string>
     <string name="update_summary">অ্যাপটি হালনাগাদ করা হয়েছে কিনা জানতে ক্লিক করুন।</string>
     <string name="no_update_available">আপনি সর্বশেষ সংস্করণ ব্যবহার করছেন।</string>
     <string name="live">সরাসরি</string>
-    <string name="donate_summary">আপনি যা পারেন, তাই দিয়ে প্রজেক্টটিকে উৎসাহিত করুন। টিম লিবরাটিউব আপনার অনুদানের চেয়ে ছোট।</string>
     <string name="views">দর্শক সংখ্যা %1$s</string>
     <string name="torchIcon">ট্রেন্ডি টর্চ</string>
     <string name="shapedIcon">কিম্ভুতকিমাকার</string>

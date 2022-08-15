@@ -103,8 +103,6 @@
     <string name="app_behavior">رفتار</string>
     <string name="download_directory">دانلود در...</string>
     <string name="download_directory_summary">جایی که فایل دانلود شده ذخیره میشود.</string>
-    <string name="website_summary">برای اطلاعات بیشتر در مورد برنامه و ویژگی های آن به وب سایت مراجعه کنید.</string>
-    <string name="donate_summary">به اندازه ای که این برنامه را دوست دارید به ما کمک کنید. تیم ما کوچک است و هر مقدار کمکی مفید است.</string>
     <string name="update_available">نسخه %1$s موجود است</string>
     <string name="downloads">دانلودها</string>
     <string name="video_format">فرمت ویدئو</string>

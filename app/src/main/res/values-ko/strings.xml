@@ -120,7 +120,6 @@
     <string name="video_format_summary">오디오와 비디오가 모두 다운로드된 경우 파일 변환.</string>
     <string name="appearance_summary">원하는 대로 앱을 조정하세요.</string>
     <string name="no_replies">이 댓글에는 답글이 없습니다.</string>
-    <string name="authors_summary">앱 개발과 개선에 참여한 사람이 누구인지 알아보세요.</string>
     <string name="update_available">%1$s 버전 사용 가능</string>
     <string name="update_available_text">GitHub의 릴리스로 이동하여 다운로드하시겠습니까\?</string>
     <string name="app_behavior">동작</string>
@@ -129,12 +128,8 @@
     <string name="video_format">비디오 형식</string>
     <string name="download_directory">다운로드 위치</string>
     <string name="download_directory_summary">다운로드한 미디어가 저장되는 위치.</string>
-    <string name="website_summary">앱 및 기능에 대한 자세한 내용은 웹사이트를 방문하세요.</string>
     <string name="contributing">기여</string>
-    <string name="contributing_summary">아이디어, 번역, 디자인 변경, 정리 및 코드 작성을 제공합니다. 더 많이 할 수록 더 좋습니다!</string>
-    <string name="license_summary">GPLv3+는 카피레프트 libre 라이센스입니다. 사용, 연구, 변경 및 공유가 가능합니다.</string>
     <string name="donate">기부</string>
-    <string name="donate_summary">당신이 할 수 있다면 이것이 당신에게 가치가 있는 것을 주십시오. Team LibreTube는 기부 또는 도움보다 작습니다.</string>
     <string name="update">새 버전을 찾습니다</string>
     <string name="update_summary">앱이 최신 버전인지 확인하려면 클릭하세요.</string>
     <string name="app_uptodate">최신 버전을 실행 중입니다.</string>
@@ -195,7 +190,6 @@
     <string name="quality">품질</string>
     <string name="behavior">행동</string>
     <string name="player_summary">품질 및 플레이어 행동</string>
-    <string name="piped_summary">Piped는 이 앱이 사용하는, YouTube용 오픈소스 대안 웹 프로트엔드 API를 제공합니다. Piped 없이는 LibreTube가 존재하지 않습니다. 그들의 개발품에 매우 큰 감사를 보냅니다!</string>
     <string name="pauseOnScreenOff">자동 일시중지</string>
     <string name="pauseOnScreenOff_summary">화면이 꺼질 경우 동영상 재생을 일시중지합니다.</string>
     <string name="clonePlaylist">재생목록 복제</string>

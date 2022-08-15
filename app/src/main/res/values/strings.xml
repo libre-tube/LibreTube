@@ -131,12 +131,8 @@
     <string name="video_format_summary">Conversion of files if both audio and video are downloaded.</string>
     <string name="download_directory">Download to</string>
     <string name="download_directory_summary">Where downloaded media gets stored.</string>
-    <string name="website_summary">Visit the website for more info on the app and its features.</string>
     <string name="contributing">Contributing</string>
-    <string name="contributing_summary">Provide ideas, translations, design changes, clean and write code. The more is done the better it gets!</string>
-    <string name="license_summary">The GPLv3+ is a copylefted libre license. Use, study, change and share; with all.</string>
     <string name="donate">Donate</string>
-    <string name="donate_summary">Give what this is worth to you, if you can. Team LibreTube is smaller than your donation or help.</string>
     <string name="update">Look for new version</string>
     <string name="update_summary">Click to find out if the app is up to date.</string>
     <string name="app_uptodate">Running the latest version.</string>
@@ -149,7 +145,6 @@
     <string name="live">Live</string>
     <string name="no_replies">This comment has no replies.</string>
     <string name="authors">Authors</string>
-    <string name="authors_summary">Get to know everyone who is involved in developing and improving the app.</string>
     <string name="download_folder">Name</string>
     <string name="download_folder_summary">The name of the folder downloaded media is stored in.</string>
     <string name="internal_storage">Internal storage</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Behavior</string>
     <string name="player_summary">Quality, and player behavior</string>
     <string name="seek_increment">Seek increment</string>
-    <string name="piped_summary">Piped is a libre alternative web-frontend for YouTube provides the API we use. Without it, LibreTube wouldn\'t exist. Huge thanks to their devs!</string>
     <string name="pauseOnScreenOff">Auto-pause</string>
     <string name="pauseOnScreenOff_summary">Pause playback when the screen is turned off.</string>
     <string name="autoplay_summary">Auto-play the next video after the current one.</string>
@@ -285,7 +279,6 @@
     <string name="network_metered">Metered</string>
     <string name="network_wifi">Only on Wi-Fi</string>
     <string name="translate">Translation</string>
-    <string name="translate_summary">Help translate the app</string>
     <string name="no_search_result">No results.</string>
     <string name="error_occurred">Error</string>
     <string name="copied">Copied</string>

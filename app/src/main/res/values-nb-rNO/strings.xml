@@ -102,7 +102,6 @@
     <string name="video_format">Videoformat</string>
     <string name="live">Direkte</string>
     <string name="piped">Piped</string>
-    <string name="authors_summary">Bli kjent med alle.</string>
     <string name="search_history">Søkehistorikk</string>
     <string name="music_songs">YT Musikk-spor</string>
     <string name="music_videos">YT Musikk-videoer</string>
@@ -122,8 +121,6 @@
     <string name="download_directory">Last ned til …</string>
     <string name="material_you">Mystisk Materiell 3</string>
     <string name="download_directory_summary">Der nedlastet media lagres.</string>
-    <string name="contributing_summary">Send inn idéer, oversettelser, designendringer, rens og skriv kode. Desto mer som blir gjort, desto bedre blir det.</string>
-    <string name="license_summary">GPLv3+ er en gemenfrihetslig lisens. Bruk, studer, endre, og del; med alle.</string>
     <string name="update_summary">Klikk for å sjekke at du har siste versjon.</string>
     <string name="app_uptodate">Kjører siste versjon.</string>
     <string name="appearance_summary">Tilpass programmet til din smak.</string>
@@ -140,9 +137,7 @@
     <string name="category_outro_description">Info etter slutten av videoen. Ikke for oppsummeringer med info.</string>
     <string name="playOnBackground">Spill i bakgrunnen</string>
     <string name="update_available_text">Gå til utgivelser på GitHub for å laste ned\?</string>
-    <string name="website_summary">Besøk nettsiden for mer info om programmet og dets funksjoner.</string>
     <string name="update">Se etter ny versjon</string>
-    <string name="donate_summary">Gi det dette er verd for deg, hvis du kan. LibreTube-laget er mindre enn din donasjon eller hjelp.</string>
     <string name="download_folder_summary">Navnet på mappen nedlastet media lagres i.</string>
     <string name="downloads_directory">Nedlastningsmappe</string>
     <string name="birdIcon">Framhevet fugl</string>
@@ -196,7 +191,6 @@
     <string name="behavior">Oppførsel</string>
     <string name="player_summary">Kvalitet, og avspilleroppførsel</string>
     <string name="seek_increment">Blafringsmengde</string>
-    <string name="piped_summary">Piped er en fri alternativ grenseflate for YouTube som tilbyr API-et programmet bruker. Uten det ville ikke LibreTube eksistert. Stor takk til utviklerne deres.</string>
     <string name="reset_message">Tilbakestill alle innstillinger og logg ut\?</string>
     <string name="autoplay_summary">Spill neste video når nåværende er fullført.</string>
     <string name="reset">Gjenopprett forvalg</string>
@@ -269,7 +263,6 @@
     <string name="notify_new_streams_summary">Merknader om nytt innhold fra skapere du følger.</string>
     <string name="checking_frequency">Sjekker hvert …</string>
     <string name="sort">Sortering</string>
-    <string name="translate_summary">Bistå oversettelsen av programmet</string>
     <string name="no_search_result">Resultatløst.</string>
     <string name="copied">Kopiert</string>
     <string name="error_occurred">Feil</string>

@@ -111,8 +111,6 @@
     <string name="update_available_text">Deseja aceder a GitHub para a descarregar\?</string>
     <string name="app_icon">Ícone</string>
     <string name="playOnBackground">Reproduzir em segundo plano</string>
-    <string name="license_summary">A GPLv3+ é uma licença \'copylefted libre\'. Utilize, análise, altere e partilhe; com todos</string>
-    <string name="donate_summary">Pode doar o que quiser. A equipa LibreTube é menor do que o seu donativo ou ajuda.</string>
     <string name="update">Procurar atualizações</string>
     <string name="shareTo">Partilhar URL</string>
     <string name="music_directory">Pasta de músicas</string>
@@ -138,11 +136,8 @@
     <string name="appearance">Aparência</string>
     <string name="app_behavior">Comportamento</string>
     <string name="update_summary">Toque para descobrir se está a usar a versão mais recente.</string>
-    <string name="contributing_summary">Ideias, tradução, design e código. Quanto mais participar, melhor será a aplicação.</string>
-    <string name="website_summary">Visite o site para mais informações sobre a aplicação e as suas funcionalidades.</string>
     <string name="app_uptodate">A sua versão está atualizada.</string>
     <string name="no_replies">Este comentário não tem respostas.</string>
-    <string name="authors_summary">Conheça as pessoas que estão envolvidas neste projeto.</string>
     <string name="download_folder">Nome</string>
     <string name="download_folder_summary">O nome da pasta em que os ficheiros estão guardados.</string>
     <string name="downloads_directory">Pasta de descargas</string>
@@ -252,7 +247,6 @@
     <string name="channel_name_za">Nome do canal (Z-A)</string>
     <string name="sort">Ordenação</string>
     <string name="translate">Tradução</string>
-    <string name="translate_summary">Ajude a traduzir a aplicação</string>
     <string name="error_occurred">Erro</string>
     <string name="network_all">Todas</string>
     <string name="required_network">Requer uma ligação</string>

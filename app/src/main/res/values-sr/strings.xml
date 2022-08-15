@@ -102,10 +102,6 @@
     <string name="video_format">Видео формат</string>
     <string name="video_format_summary">Конверзија фајлова ако су и аудио и видео фајлови преузети.</string>
     <string name="download_directory_summary">Где сачувати преузете медијске фајлове.</string>
-    <string name="website_summary">Посетите веб сајт за више информација о апликацији и њеним могућностима.</string>
-    <string name="contributing_summary">Предложите идеју, превод, промену дизајна, очистите или напишите код. Што се више уради то је боље!</string>
-    <string name="license_summary">GPLv3+ је лиценца без копирања. Користи, проучавај, мењај и подели са свима.</string>
-    <string name="donate_summary">Ако можете, дајте колико мислите да ово вреди. Тим LibreTube је мањи од ваше донације или помоћи.</string>
     <string name="update">Потражите нову верзију</string>
     <string name="app_uptodate">Користите последњу верзију.</string>
     <string name="no_update_available">Користите последњу верзију.</string>
@@ -147,7 +143,6 @@
     <string name="behavior">Опште</string>
     <string name="player_summary">Квалитет, и општа подешавања плејера</string>
     <string name="seek_increment">Период премотавања</string>
-    <string name="piped_summary">Piped је алтернативни веб-фронтенд за YouTube који пружа API који ми користимо. Без Piped-а, LibreTube не би постојао. Велико хвала њиховим програмерима!</string>
     <string name="pauseOnScreenOff">Аутопауза</string>
     <string name="pauseOnScreenOff_summary">Паузирај репродукцију када се екран искључи.</string>
     <string name="autoplay_summary">Аутоматски пусти следећи видео након тренутног.</string>
@@ -233,7 +228,6 @@
     <string name="no_replies">Овај коментар нема одговора.</string>
     <string name="authors">Аутори</string>
     <string name="music_directory">Music фасцикла</string>
-    <string name="authors_summary">Упознајте све који су укључени у развој и побољшање апликације.</string>
     <string name="download_folder">Назив</string>
     <string name="movies_directory">Movie фасцикла</string>
     <string name="gradientIcon">Glib градијент</string>
@@ -269,7 +263,6 @@
     <string name="sort">Сортирање</string>
     <string name="translate">Преведи</string>
     <string name="no_search_result">Нема резултата.</string>
-    <string name="translate_summary">Помозите преводом апликације</string>
     <string name="network_metered">Мобилни подаци</string>
     <string name="notify_new_streams">Обавештења о новим стримовима</string>
     <string name="checking_frequency">Провера на сваких …</string>
