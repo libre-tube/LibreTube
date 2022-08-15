@@ -80,7 +80,7 @@
             android:id="@+id/search_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:layout_marginVertical="10dp" />
 
     </LinearLayout>
 
