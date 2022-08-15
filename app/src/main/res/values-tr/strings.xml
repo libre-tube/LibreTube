@@ -32,7 +32,7 @@
     <string name="login_first">Lütfen, giriş yapın ve tekrar deneyin.</string>
     <string name="region">Bölge</string>
     <string name="login_register">Giriş yap/kaydol</string>
-    <string name="please_login">Lütfen önce ayarlarda giriş yap veya kaydol.</string>
+    <string name="please_login">Lütfen, önce ayarlarda giriş yap veya kaydol.</string>
     <string name="importsuccess">Abone olundu</string>
     <string name="subscribeIsEmpty">Önce birkaç kanala abone olun.</string>
     <string name="cannotDownload">Bu görüntü indirilemiyor.</string>
@@ -117,7 +117,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arka planda oynat</string>
     <string name="update_available">%1$s Sürümü mevcut</string>
-    <string name="update_available_text">İndirmek için GitHub\'daki sürümlere git\?</string>
+    <string name="update_available_text">İndirmek için GitHub\'daki sürümlere geçilsin mi\?</string>
     <string name="appearance">Görünüm</string>
     <string name="app_behavior">Davranış</string>
     <string name="downloads">İndirilenler</string>
@@ -248,7 +248,7 @@
     <string name="history_summary">İzleme ve arama geçmişi</string>
     <string name="watch_positions_title">Kaydedilmiş oynatma konumları</string>
     <string name="seekbar_preview">Video ön izlemesi</string>
-    <string name="seekbar_preview_summary">Oynatma göstergesini sürüklerken bir anlık görüntü gösterin.</string>
+    <string name="seekbar_preview_summary">Oynatma göstergesini sürüklerken anlık görüntü gösterin.</string>
     <string name="general_summary">Dil ve bölge</string>
     <string name="general">Genel</string>
     <string name="playingOnBackground">Arka planda oynatılıyor…</string>
@@ -296,7 +296,7 @@
     <string name="already_spent_time">Uygulamada zaten %1$s dakika harcadınız, mola verme zamanı.</string>
     <string name="yt_shorts">Kısa</string>
     <string name="no_subtitles_available">Altyazı yok</string>
-    <string name="repeat_mode">Tekrar Modu</string>
+    <string name="repeat_mode">Tekrarlama Modu</string>
     <string name="resize_mode_zoom">Yakınlaştır</string>
     <string name="repeat_mode_none">Hiçbiri</string>
     <string name="resize_mode_fit">Sığdır</string>
