@@ -75,6 +75,15 @@ If opening an issue without following the issue template, we will ignore the iss
 
 **XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`
 
+## 🔒 Privacy Policy and Disclaimer
+
+The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent. 
+
+The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way accociated with YouTube, Google LLC or any of its affiliates and subsidaries.
+Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
+
+LibreTube is an open source software built for learning and research purposes.
+
 ## 🪞 Mirrors (read-only)
 
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
