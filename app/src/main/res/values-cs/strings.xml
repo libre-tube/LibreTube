@@ -307,4 +307,7 @@
     <string name="backup">Záloha</string>
     <string name="picture_in_picture">Obraz v obraze</string>
     <string name="player_resize_mode">Režim změny velikosti</string>
+    <string name="maximum_image_cache">Max. velikost mezipaměti obrázků</string>
+    <string name="copied_to_clipboard">Zkopírováno do schránky</string>
+    <string name="open_copied">Otevřít</string>
 </resources>
