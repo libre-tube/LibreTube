@@ -185,7 +185,7 @@
     <string name="video">Video</string>
     <string name="downloading">İndiriliyor…</string>
     <string name="player_autoplay">Oto.oynat</string>
-    <string name="hideTrendingPage">Trend sayfasını gizle</string>
+    <string name="hideTrendingPage">Ana sayfayı gizle</string>
     <string name="quality">Kalite</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Kalite ve oynatıcı davranışı</string>
@@ -307,4 +307,7 @@
     <string name="export_subscriptions">Abonelikleri Dışa Aktar</string>
     <string name="picture_in_picture">Resim içinde resim</string>
     <string name="player_resize_mode">Yeniden boyutlandırma modu</string>
+    <string name="maximum_image_cache">Maksimum resim önbellek boyutu</string>
+    <string name="open_copied">Açık</string>
+    <string name="copied_to_clipboard">Panoya kopyalandı</string>
 </resources>
