@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Rect
+import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -1646,7 +1647,7 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun shouldStartPiP(): Boolean {
-        if (!pipEnabled) return false
+        if (!pipEnabled || exoPlayer.playbackState == PlaybackState.STATE_PAUSED) return false
 
         val bounds = Rect()
         binding.playerScrollView.getHitRect(bounds)
