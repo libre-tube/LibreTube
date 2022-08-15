@@ -306,5 +306,5 @@
     <string name="resize_mode_fit">התאמה</string>
     <string name="repeat_mode">מצב חזרה</string>
     <string name="resize_mode_zoom">תקריב</string>
-    <string name="player_resize_mode">שינוי גודל מצב</string>
+    <string name="player_resize_mode">מצב שינוי גודל</string>
 </resources>
