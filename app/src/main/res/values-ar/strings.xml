@@ -306,4 +306,5 @@
     <string name="backup_restore">النسخ الاحتياطي والاسترداد</string>
     <string name="backup">نسخ احتياطي</string>
     <string name="picture_in_picture">صورة داخل صورة</string>
+    <string name="player_resize_mode">وضع تغيير الحجم</string>
 </resources>
