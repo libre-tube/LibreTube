@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.obj.ChapterSegment
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.exoplayer2.ExoPlayer
 
@@ -25,7 +25,7 @@ class ChaptersAdapter(
     override fun onBindViewHolder(holder: ChaptersViewHolder, position: Int) {
         val chapter = chapters[position]
         holder.binding.apply {
-            ConnectionHelper.loadImage(chapter.image, chapterImage)
+            ImageHelper.loadImage(chapter.image, chapterImage)
             chapterTitle.text = chapter.title
 
             if (selectedPosition == position) {

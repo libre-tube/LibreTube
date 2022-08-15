@@ -7,7 +7,7 @@ import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.obj.Subscription
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.toID
 
@@ -31,7 +31,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscrip
 
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
-            ConnectionHelper.loadImage(subscription.avatar, subscriptionChannelImage)
+            ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage)
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }

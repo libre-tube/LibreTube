@@ -36,8 +36,8 @@ import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
-import com.github.libretube.util.ConnectionHelper
 import com.github.libretube.util.LocaleHelper
+import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
@@ -73,7 +73,7 @@ class MainActivity : BaseActivity() {
         }
 
         // show noInternet Activity if no internet available on app startup
-        if (!ConnectionHelper.isNetworkAvailable(this)) {
+        if (!NetworkHelper.isNetworkAvailable(this)) {
             val noInternetIntent = Intent(this, NoInternetActivity::class.java)
             startActivity(noInternetIntent)
             finish()

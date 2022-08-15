@@ -314,4 +314,5 @@
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Picture in Picture</string>
     <string name="player_resize_mode">Resize mode</string>
+    <string name="maximum_image_cache">Max image cache size</string>
 </resources>

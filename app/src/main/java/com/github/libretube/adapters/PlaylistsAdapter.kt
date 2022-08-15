@@ -14,7 +14,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -52,7 +52,7 @@ class PlaylistsAdapter(
                 playlistThumbnail.setImageResource(R.drawable.ic_empty_playlist)
                 playlistThumbnail.setBackgroundColor(R.attr.colorSurface)
             } else {
-                ConnectionHelper.loadImage(playlist.thumbnail, playlistThumbnail)
+                ImageHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             }
             playlistTitle.text = playlist.name
             deletePlaylist.setOnClickListener {

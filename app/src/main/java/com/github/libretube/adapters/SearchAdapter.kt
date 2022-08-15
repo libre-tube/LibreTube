@@ -14,7 +14,7 @@ import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.SearchItem
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 import com.github.libretube.util.setWatchProgressLength
@@ -79,9 +79,9 @@ class SearchAdapter(
 
     private fun bindWatch(item: SearchItem, binding: VideoRowBinding) {
         binding.apply {
-            ConnectionHelper.loadImage(item.thumbnail, thumbnail)
+            ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration!!)
-            ConnectionHelper.loadImage(item.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
             val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
             val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
@@ -110,7 +110,7 @@ class SearchAdapter(
 
     private fun bindChannel(item: SearchItem, binding: ChannelRowBinding) {
         binding.apply {
-            ConnectionHelper.loadImage(item.thumbnail, searchChannelImage)
+            ImageHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
             searchViews.text = root.context.getString(
                 R.string.subscribers,
@@ -157,7 +157,7 @@ class SearchAdapter(
 
     private fun bindPlaylist(item: SearchItem, binding: PlaylistSearchRowBinding) {
         binding.apply {
-            ConnectionHelper.loadImage(item.thumbnail, searchThumbnail)
+            ImageHelper.loadImage(item.thumbnail, searchThumbnail)
             if (item.videos?.toInt() != -1) searchPlaylistNumber.text = item.videos.toString()
             searchDescription.text = item.name
             searchName.text = item.uploaderName

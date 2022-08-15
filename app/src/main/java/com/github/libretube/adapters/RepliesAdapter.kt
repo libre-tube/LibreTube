@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.RepliesRowBinding
 import com.github.libretube.obj.Comment
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.formatShort
 
@@ -40,7 +40,7 @@ class RepliesAdapter(
                 " • " + reply.commentedTime.toString()
             commentText.text =
                 reply.commentText.toString()
-            ConnectionHelper.loadImage(reply.thumbnail, commentorImage)
+            ImageHelper.loadImage(reply.thumbnail, commentorImage)
             likesTextView.text =
                 reply.likeCount?.toLong().formatShort()
             if (reply.verified == true) {

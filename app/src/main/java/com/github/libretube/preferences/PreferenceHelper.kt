@@ -39,6 +39,10 @@ object PreferenceHelper {
         return settings.getBoolean(key, defValue)
     }
 
+    fun getInt(key: String?, defValue: Int): Int {
+        return settings.getInt(key, defValue)
+    }
+
     fun clearPreferences() {
         editor.clear().apply()
     }

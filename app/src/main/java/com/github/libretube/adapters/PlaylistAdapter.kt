@@ -15,7 +15,7 @@ import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.setWatchProgressLength
 import com.github.libretube.util.toID
@@ -54,7 +54,7 @@ class PlaylistAdapter(
             playlistTitle.text = streamItem.title
             playlistDescription.text = streamItem.uploaderName
             thumbnailDuration.setFormattedDuration(streamItem.duration!!)
-            ConnectionHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
+            ImageHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }

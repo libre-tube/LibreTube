@@ -2,15 +2,11 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.widget.ImageView
-import coil.ImageLoader
-import coil.load
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
 
-object ConnectionHelper {
-    lateinit var imageLoader: ImageLoader
-
+object NetworkHelper {
+    /**
+     * Detect whether network is available
+     */
     fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -39,15 +35,5 @@ object ConnectionHelper {
          */
 
         return connectivityManager.activeNetworkInfo?.isConnected ?: false
-    }
-
-    // load an image from a url into an imageView
-    fun loadImage(url: String?, target: ImageView) {
-        // only load the image if the data saver mode is disabled
-        val dataSaverModeEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.DATA_SAVER_MODE,
-            false
-        )
-        if (!dataSaverModeEnabled) target.load(url, imageLoader)
     }
 }

@@ -9,7 +9,7 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.extensions.setFormattedDuration
-import com.github.libretube.util.ConnectionHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.setWatchProgressLength
 
@@ -38,8 +38,8 @@ class WatchHistoryAdapter(
             channelName.text = video.uploader
             videoInfo.text = video.uploadDate
             thumbnailDuration.setFormattedDuration(video.duration!!)
-            ConnectionHelper.loadImage(video.thumbnailUrl, thumbnail)
-            ConnectionHelper.loadImage(video.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
+            ImageHelper.loadImage(video.uploaderAvatar, channelImage)
 
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
