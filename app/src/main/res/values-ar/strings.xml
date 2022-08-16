@@ -307,4 +307,7 @@
     <string name="backup">نسخ احتياطي</string>
     <string name="picture_in_picture">صورة داخل صورة</string>
     <string name="player_resize_mode">وضع تغيير الحجم</string>
+    <string name="copied_to_clipboard">تم نسخها إلى الحافظة</string>
+    <string name="maximum_image_cache">الحد الأقصى لحجم ذاكرة التخزين المؤقت للصور</string>
+    <string name="open_copied">فتح</string>
 </resources>
