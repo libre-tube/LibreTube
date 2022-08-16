@@ -7,39 +7,34 @@ import android.view.View
 
 abstract class DoubleTapListener : View.OnClickListener {
 
+    private val maximumTimeDifference = 300L
+    private val handler = Handler(Looper.getMainLooper())
+
     private var isSingleEvent = false
-    private val doubleClickQualificationSpanInMillis: Long
-    private var timestampLastClick: Long
-    private val handler: Handler
-    private val runnable: Runnable
+    private var timeStampLastClick = 0L
+    private var timeStampLastDoubleClick = 0L
 
     override fun onClick(v: View?) {
-        if (SystemClock.elapsedRealtime() - timestampLastClick < doubleClickQualificationSpanInMillis) {
+        if (SystemClock.elapsedRealtime() - timeStampLastClick < maximumTimeDifference) {
             isSingleEvent = false
             handler.removeCallbacks(runnable)
+            timeStampLastDoubleClick = SystemClock.elapsedRealtime()
             onDoubleClick()
             return
         }
         isSingleEvent = true
-        handler.postDelayed(runnable, DEFAULT_QUALIFICATION_SPAN)
-        timestampLastClick = SystemClock.elapsedRealtime()
+        handler.removeCallbacks(runnable)
+        handler.postDelayed(runnable, maximumTimeDifference)
+        timeStampLastClick = SystemClock.elapsedRealtime()
     }
 
     abstract fun onDoubleClick()
     abstract fun onSingleClick()
 
-    companion object {
-        private const val DEFAULT_QUALIFICATION_SPAN: Long = 200
-    }
-
-    init {
-        doubleClickQualificationSpanInMillis = DEFAULT_QUALIFICATION_SPAN
-        timestampLastClick = 0
-        handler = Handler(Looper.getMainLooper())
-        runnable = Runnable {
-            if (isSingleEvent) {
-                onSingleClick()
-            }
-        }
+    private val runnable = Runnable {
+        if (!isSingleEvent ||
+            SystemClock.elapsedRealtime() - timeStampLastDoubleClick < maximumTimeDifference
+        ) return@Runnable
+        onSingleClick()
     }
 }

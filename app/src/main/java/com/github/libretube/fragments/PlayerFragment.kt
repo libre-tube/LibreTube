@@ -942,21 +942,22 @@ class PlayerFragment : BaseFragment() {
             .postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
+    // seek to saved watch position if available
     private fun seekToWatchPosition() {
-        // seek to saved watch position if available
+        // support for time stamped links
+        val timeStamp: Long? = arguments?.getLong("timeStamp")
+        if (timeStamp != null && timeStamp != 0L) {
+            exoPlayer.seekTo(timeStamp * 1000)
+            return
+        }
+        // browse the watch positions
         var position: Long? = null
         Thread {
             try {
                 position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
-            } catch (e: Exception) {
-                position = null
-            }
+                if (position!! < streams.duration!! * 0.9) position = null
+            } catch (e: Exception) {}
         }.await()
-        // support for time stamped links
-        val timeStamp: Long? = arguments?.getLong("timeStamp")
-        if (timeStamp != null && timeStamp != 0L) {
-            position = timeStamp * 1000
-        }
         if (position != null) exoPlayer.seekTo(position!!)
     }
 
