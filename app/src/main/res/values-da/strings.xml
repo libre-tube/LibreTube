@@ -303,4 +303,8 @@
     <string name="repeat_mode_current">Nuværende</string>
     <string name="resize_mode_fill">Udfyld</string>
     <string name="resize_mode_zoom">Zoom</string>
+    <string name="backup_restore">Backup og gendannelse</string>
+    <string name="backup">Backup</string>
+    <string name="picture_in_picture">Billede i Billede</string>
+    <string name="player_resize_mode">Tilpas størrelse tilstand</string>
 </resources>

@@ -53,8 +53,8 @@
     <string name="fail">Neizdevās :(</string>
     <string name="about">Par</string>
     <string name="changeLanguage">Valoda</string>
-    <string name="systemLanguage">Sistēmas</string>
-    <string name="systemDefault">Sistēmas</string>
+    <string name="systemLanguage">Sistēmas noklusējums</string>
+    <string name="systemDefault">Sistēmas noklusējums</string>
     <string name="subscribers">%1$s abonenti</string>
     <string name="choose_quality_dialog">Kvalitāte</string>
     <string name="subscribeIsEmpty">Vispirms abonējiet dažus kanālus.</string>
@@ -303,4 +303,7 @@
     <string name="resize_mode_fit">Ietilpināt</string>
     <string name="repeat_mode_none">Izslēgts</string>
     <string name="repeat_mode_current">Atkārtot pašreizējo</string>
+    <string name="picture_in_picture">Mini atskaņotājs</string>
+    <string name="backup">Dublēt</string>
+    <string name="backup_restore">Dublēt &amp; atjaunot</string>
 </resources>

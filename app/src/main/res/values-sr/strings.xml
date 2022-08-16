@@ -303,4 +303,7 @@
     <string name="resize_mode_fit">Уклопи</string>
     <string name="no_subtitles_available">Нема доступних титлова</string>
     <string name="resize_mode_fill">Попуни</string>
+    <string name="backup_restore">Прављење резервних копија и враћање</string>
+    <string name="backup">Резерна копија</string>
+    <string name="picture_in_picture">Слика у слици</string>
 </resources>

@@ -106,7 +106,7 @@
     <string name="material_you">Mistik Malzeme 3</string>
     <string name="color_green">Harika yeşil</string>
     <string name="color_purple">Keyifli mor</string>
-    <string name="color_yellow">Yeeting sarı</string>
+    <string name="color_yellow">Sarı</string>
     <string name="color_blue">Mutlu mavi</string>
     <string name="color_red">Rahatlatıcı kırmızı</string>
     <string name="sponsorblock_notifications">Bildirimler</string>
@@ -305,4 +305,6 @@
     <string name="backup_restore">Yedekle ve geri yükle</string>
     <string name="backup">Yedekle</string>
     <string name="export_subscriptions">Abonelikleri Dışa Aktar</string>
+    <string name="picture_in_picture">Resim içinde resim</string>
+    <string name="player_resize_mode">Yeniden boyutlandırma modu</string>
 </resources>

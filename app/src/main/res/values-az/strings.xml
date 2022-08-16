@@ -104,7 +104,7 @@
     <string name="color_accent">Vurğular</string>
     <string name="color_red">Rahatladıcı qırmızı</string>
     <string name="color_blue">Xoşbəxt mavi</string>
-    <string name="color_yellow">Yeeting sarı</string>
+    <string name="color_yellow">Ağlayan sarı</string>
     <string name="color_green">Möhtəşəm yaşıl</string>
     <string name="color_purple">Zövqlü bənövşəyi</string>
     <string name="oledTheme">Qara</string>
@@ -305,4 +305,6 @@
     <string name="repeat_mode_current">Cari</string>
     <string name="backup_restore">Yedəkləyin və bərpa edin</string>
     <string name="backup">Yedəkləmə</string>
+    <string name="picture_in_picture">Şəkil içində şəkil</string>
+    <string name="player_resize_mode">Ölçü dəyişdirmə rejimi</string>
 </resources>
