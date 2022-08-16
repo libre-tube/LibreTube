@@ -951,12 +951,14 @@ class PlayerFragment : BaseFragment() {
             return
         }
         // browse the watch positions
+        var position: Long? = null
         Thread {
             try {
-                val position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
-                if (position < streams.duration!! * 0.9) exoPlayer.seekTo(position)
+                position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
+                if (position!! < streams.duration!! * 0.9) position = null
             } catch (e: Exception) {}
-        }.start()
+        }.await()
+        if (position != null) exoPlayer.seekTo(position!!)
     }
 
     // used for autoplay and skipping to next video
