@@ -106,7 +106,7 @@
     <string name="material_you">Mistik Malzeme 3</string>
     <string name="color_green">Harika yeşil</string>
     <string name="color_purple">Keyifli mor</string>
-    <string name="color_yellow">Sarı</string>
+    <string name="color_yellow">Fışkıran sarı</string>
     <string name="color_blue">Mutlu mavi</string>
     <string name="color_red">Rahatlatıcı kırmızı</string>
     <string name="sponsorblock_notifications">Bildirimler</string>
@@ -233,8 +233,8 @@
     <string name="reset_watch_positions">Sıfırla</string>
     <string name="data_saver_mode_summary">Küçük resimleri ve diğer resimleri atlayın.</string>
     <string name="update_now">Yeni LibreTube sürümü şimdi yüklensin mi\?</string>
-    <string name="navLabelVisibility">Navigasyon etiket görünürlüğü</string>
-    <string name="always">Hep</string>
+    <string name="navLabelVisibility">Navigasyon çubuğundaki etiket görünürlüğü</string>
+    <string name="always">Her zaman</string>
     <string name="selected">Seçildi</string>
     <string name="never">Hiçbir zaman</string>
     <string name="autoRotatePlayer">Otomatik tam ekran</string>
