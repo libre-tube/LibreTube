@@ -68,7 +68,7 @@ object PreferenceHelper {
     }
 
     fun setLatestVideoId(videoId: String) {
-        editor.putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId)
+        editor.putString(PreferenceKeys.LAST_STREAM_VIDEO_ID, videoId).commit()
     }
 
     fun getLatestVideoId(): String {
