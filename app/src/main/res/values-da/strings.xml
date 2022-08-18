@@ -307,4 +307,7 @@
     <string name="backup">Backup</string>
     <string name="picture_in_picture">Billede i Billede</string>
     <string name="player_resize_mode">Tilpas størrelse tilstand</string>
+    <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
+    <string name="maximum_image_cache">Maks. billedcachestørrelse</string>
+    <string name="open_copied">Åben</string>
 </resources>

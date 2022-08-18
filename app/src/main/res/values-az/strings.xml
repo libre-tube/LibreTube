@@ -87,7 +87,7 @@
     <string name="playlistCreated">Pleylist yaradıldı.</string>
     <string name="playlistName">Pleylist adı</string>
     <string name="addToPlaylist">Pleylistə əlavə edin</string>
-    <string name="fail">Uğursuz :(</string>
+    <string name="fail">Uğursuz oldu :(</string>
     <string name="about">Haqqında</string>
     <string name="changeLanguage">Dil</string>
     <string name="systemLanguage">Sistem</string>
@@ -117,7 +117,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arxa fonda oynadın</string>
     <string name="update_available">%1$s Versiyası mövcuddur</string>
-    <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsin\?</string>
+    <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsinmi\?</string>
     <string name="appearance">Görünüş</string>
     <string name="app_behavior">Davranış</string>
     <string name="downloads">Endirmələr</string>
@@ -185,7 +185,7 @@
     <string name="video">Video</string>
     <string name="no_audio">Səs yoxdur</string>
     <string name="audio">Səs</string>
-    <string name="hideTrendingPage">Populyar səhifəsini gizlədin</string>
+    <string name="hideTrendingPage">Ev səhifəsini gizlədin</string>
     <string name="quality">Keyfiyyət</string>
     <string name="behavior">Davranış</string>
     <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
@@ -212,7 +212,7 @@
     <string name="audio_video">Səs və video</string>
     <string name="fullscreen_orientation">Tam ekran istiqaməti</string>
     <string name="aspect_ratio">Video aspekt nisbəti</string>
-    <string name="auto_rotation">Avtomatik-fırlatma</string>
+    <string name="auto_rotation">Avtomatik fırlatma</string>
     <string name="portrait">Portret</string>
     <string name="landscape">Landşaft</string>
     <string name="community">İctimaiyyət</string>
@@ -233,19 +233,19 @@
     <string name="always">Həmişə</string>
     <string name="selected">Seçilmiş</string>
     <string name="never">Heç vaxt</string>
-    <string name="autoRotatePlayer">Avtomatik-tam ekran</string>
+    <string name="autoRotatePlayer">Avtomatik tam ekran</string>
     <string name="pure_theme">Təmiz mövzu</string>
     <string name="pure_theme_summary">Təmiz ağ/qara mövzu</string>
     <string name="no_player_found">Xarici oynadıcı tapılmadı. Zəhmət olmasa, birinin quraşdırıldığından əmin olun.</string>
     <string name="data_saver_mode">Dataya qənaət rejimi</string>
     <string name="autoRotatePlayer_summary">Cihaz fırladıldıqda tam ekran oynatma.</string>
-    <string name="search_history_summary">Axtarışları yadda saxla</string>
+    <string name="search_history_summary">Axtarışları saxla</string>
     <string name="watch_history_summary">Yerli olaraq baxılmış videoları izləyin</string>
     <string name="reset_watch_positions">Sıfırlayın</string>
     <string name="system_caption_style">Sistem altyazı üsulu</string>
     <string name="captions">Altyazılar</string>
     <string name="none">Heç biri</string>
-    <string name="watch_positions_title">Yadda saxlanılmış oynatma mövqeləri</string>
+    <string name="watch_positions_title">Saxlanılmış oynatma mövqeləri</string>
     <string name="update_now">Yeni LibreTube versiyası indi quraşdırılsınmı\?</string>
     <string name="seekbar_preview">Video önizləməsi</string>
     <string name="seekbar_preview_summary">Oynatma göstəricisini sürükləyərkən fotoqrafiya göstərin.</string>
@@ -307,4 +307,7 @@
     <string name="backup">Yedəkləmə</string>
     <string name="picture_in_picture">Şəkil içində şəkil</string>
     <string name="player_resize_mode">Ölçü dəyişdirmə rejimi</string>
+    <string name="copied_to_clipboard">Buferə kopyalandı</string>
+    <string name="maximum_image_cache">Maksimum şəkil keşi ölçüsü</string>
+    <string name="open_copied">Açıq</string>
 </resources>

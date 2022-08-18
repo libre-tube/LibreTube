@@ -308,4 +308,6 @@
     <string name="resize_mode_zoom">תקריב</string>
     <string name="player_resize_mode">מצב שינוי גודל</string>
     <string name="maximum_image_cache">גודל מטמון התמונות המרבי</string>
+    <string name="copied_to_clipboard">הועתק ללוח גזירים</string>
+    <string name="open_copied">פתיחה</string>
 </resources>
