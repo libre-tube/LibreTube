@@ -14,8 +14,8 @@ android {
         applicationId 'com.github.libretube'
         minSdk 21
         targetSdk 31
-        versionCode 16
-        versionName '0.4.2'
+        versionCode 17
+        versionName '0.5.0'
         multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         resValue "string", "app_name", "LibreTube"
@@ -60,7 +60,7 @@ android {
             enable true
             reset()
             include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-            universalApk false
+            universalApk true
 
         }
     }
