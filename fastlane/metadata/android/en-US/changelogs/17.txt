@@ -1,0 +1,9 @@
+- Export Subscriptions by @Bnyro in https://github.com/libre-tube/LibreTube/pull/983
+- Playlist autoplay in background mode by @Bnyro in https://github.com/libre-tube/LibreTube/pull/994
+- Buttons to skip to previous or next video by @Bnyro in https://github.com/libre-tube/LibreTube/pull/998
+- Playing queue by @Bnyro in https://github.com/libre-tube/LibreTube/pull/1008
+- Break reminder by @Bnyro in https://github.com/libre-tube/LibreTube/pull/1011
+- Advanced Player Options refactor by @Bnyro in https://github.com/libre-tube/LibreTube/pull/1028
+- Backup & Restore Preferences by @Bnyro in https://github.com/libre-tube/LibreTube/pull/1038
+- Migrate all stored data to Room database by @Bnyro in https://github.com/libre-tube/LibreTube/pull/1055
+- Resize Mode Preference by @Bnyro in https://github.com/libre-tube/LibreTube/pull/1065
