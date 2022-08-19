@@ -39,12 +39,16 @@ class VideoOptionsDialog(
         /**
          * Check whether the player is running by observing the notification
          */
-        val notificationManager =
-            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.activeNotifications.forEach {
-            if (it.id == PLAYER_NOTIFICATION_ID) {
-                optionsList += context?.getString(R.string.add_to_queue)
+        try {
+            val notificationManager =
+                context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.activeNotifications.forEach {
+                if (it.id == PLAYER_NOTIFICATION_ID) {
+                    optionsList += context?.getString(R.string.add_to_queue)
+                }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
         return MaterialAlertDialogBuilder(requireContext())
