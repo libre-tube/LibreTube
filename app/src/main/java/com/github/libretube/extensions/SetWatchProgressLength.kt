@@ -25,7 +25,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
         .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 this@setWatchProgressLength.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-                if (progress == null) {
+                if (progress == null || duration == 0L) {
                     view.visibility = View.GONE
                     return
                 }
