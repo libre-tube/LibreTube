@@ -250,4 +250,5 @@
     <string name="history_summary">Wiedergabe- und Suchverlauf</string>
     <string name="captions">Untertitel</string>
     <string name="seek_increment">Vorspul-Länge</string>
+    <string name="watch_positions_title">Gemerkte Wiedergabepositionen</string>
 </resources>
