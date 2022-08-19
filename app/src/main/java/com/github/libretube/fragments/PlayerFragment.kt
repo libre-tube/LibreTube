@@ -880,14 +880,20 @@ class PlayerFragment : BaseFragment() {
                 if (!isLive) seekToWatchPosition()
                 exoPlayer.prepare()
                 exoPlayer.play()
-                // show controllers when not in picture in picture mode
-                if (!activity?.isInPictureInPictureMode!!) exoPlayerView.useController = true
+
+                if (SDK_INT >= Build.VERSION_CODES.O) {
+                    // show controllers when not in picture in picture mode
+                    if (!activity?.isInPictureInPictureMode!!) exoPlayerView.useController = true
+                }
+                // show the player notification
                 initializePlayerNotification()
                 if (sponsorBlockEnabled) fetchSponsorBlockSegments()
                 // show comments if related streams disabled
                 if (!relatedStreamsEnabled) toggleComments()
                 // prepare for autoplay
                 if (autoplayEnabled) setNextStream()
+
+                // add the video to the watch history
                 if (watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
             }
         }
