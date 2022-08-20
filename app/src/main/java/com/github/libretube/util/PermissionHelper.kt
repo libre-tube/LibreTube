@@ -8,8 +8,10 @@ import android.os.Environment
 import androidx.core.app.ActivityCompat
 
 object PermissionHelper {
+    /**
+     * request storage permissions if not granted yet
+     */
     fun requestReadWrite(activity: Activity): Boolean {
-        // request storage permissions if not granted yet
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
                 ActivityCompat.requestPermissions(

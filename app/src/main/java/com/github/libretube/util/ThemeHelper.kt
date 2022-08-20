@@ -17,6 +17,9 @@ import com.google.android.material.color.DynamicColors
 
 object ThemeHelper {
 
+    /**
+     * Set the theme, including accent color and night mode
+     */
     fun updateTheme(activity: AppCompatActivity) {
         val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
         val pureThemeEnabled = PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)
@@ -25,6 +28,9 @@ object ThemeHelper {
         updateThemeMode(themeMode)
     }
 
+    /**
+     * Update the accent color of the app
+     */
     private fun updateAccentColor(
         activity: AppCompatActivity,
         pureThemeEnabled: Boolean
@@ -51,13 +57,16 @@ object ThemeHelper {
         activity.setTheme(theme)
     }
 
+    /**
+     * apply dynamic colors to the activity
+     */
     private fun applyDynamicColors(activity: AppCompatActivity) {
-        /**
-         * apply dynamic colors to the activity
-         */
         DynamicColors.applyToActivityIfAvailable(activity)
     }
 
+    /**
+     * set the theme mode (light, dark, auto)
+     */
     private fun updateThemeMode(themeMode: String) {
         val mode = when (themeMode) {
             "A" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
@@ -68,6 +77,9 @@ object ThemeHelper {
         AppCompatDelegate.setDefaultNightMode(mode)
     }
 
+    /**
+     * change the app icon
+     */
     fun changeIcon(context: Context, newLogoActivityAlias: String) {
         val activityAliases = context.resources.getStringArray(R.array.iconsValue)
         // Disable Old Icon(s)
@@ -96,7 +108,9 @@ object ThemeHelper {
         )
     }
 
-    // Needed due to different MainActivity Aliases because of the app icons
+    /**
+     * Needed due to different MainActivity Aliases because of the app icons
+     */
     fun restartMainActivity(context: Context) {
         // kill player notification
         val nManager = context
@@ -111,12 +125,18 @@ object ThemeHelper {
         android.os.Process.killProcess(android.os.Process.myPid())
     }
 
+    /**
+     * Get a color by a resource code
+     */
     fun getThemeColor(context: Context, colorCode: Int): Int {
         val value = TypedValue()
         context.theme.resolveAttribute(colorCode, value, true)
         return value.data
     }
 
+    /**
+     * Get the styled app name
+     */
     fun getStyledAppName(context: Context): Spanned {
         val colorPrimary = getThemeColor(context, R.attr.colorPrimaryDark)
         val hexColor = String.format("#%06X", (0xFFFFFF and colorPrimary))

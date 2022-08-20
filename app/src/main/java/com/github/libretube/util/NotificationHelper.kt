@@ -10,6 +10,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.github.libretube.NOTIFICATION_WORK_NAME
 import com.github.libretube.PUSH_CHANNEL_ID
 import com.github.libretube.PUSH_NOTIFICATION_ID
 import com.github.libretube.R
@@ -23,6 +24,9 @@ import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 object NotificationHelper {
+    /**
+     * Enqueue the work manager task
+     */
     fun enqueueWork(
         context: Context,
         existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy
@@ -38,8 +42,6 @@ object NotificationHelper {
             PreferenceKeys.CHECKING_FREQUENCY,
             "60"
         ).toLong()
-
-        val uniqueWorkName = "NotificationService"
 
         // schedule the work manager request if logged in and notifications enabled
         if (notificationsEnabled && PreferenceHelper.getToken() != "") {
@@ -71,14 +73,14 @@ object NotificationHelper {
             // enqueue the task
             WorkManager.getInstance(context)
                 .enqueueUniquePeriodicWork(
-                    uniqueWorkName,
+                    NOTIFICATION_WORK_NAME,
                     existingPeriodicWorkPolicy,
                     notificationWorker
                 )
         } else {
             // cancel the work if notifications are disabled or the user is not logged in
             WorkManager.getInstance(context)
-                .cancelUniqueWork(uniqueWorkName)
+                .cancelUniqueWork(NOTIFICATION_WORK_NAME)
         }
     }
 
