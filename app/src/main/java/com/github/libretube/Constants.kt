@@ -55,3 +55,8 @@ const val PUSH_CHANNEL_ID = "notification_worker"
  * Database
  */
 const val DATABASE_NAME = "LibreTubeDatabase"
+
+/**
+ * New Streams notifications
+ */
+const val NOTIFICATION_WORK_NAME = "NotificationService"
