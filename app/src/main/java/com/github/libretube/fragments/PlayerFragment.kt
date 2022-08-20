@@ -29,6 +29,7 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -1638,6 +1639,12 @@ class PlayerFragment : BaseFragment() {
             binding.linLayout.visibility = View.GONE
 
             viewModel.isFullscreen.value = false
+        } else if (lifecycle.currentState == Lifecycle.State.CREATED) {
+            // close button got clicked in PiP mode
+            // destroying the fragment, player and notification
+            onDestroy()
+            // finish the activity
+            activity?.finishAndRemoveTask()
         } else {
             // enable exoPlayer controls again
             exoPlayerView.useController = true
