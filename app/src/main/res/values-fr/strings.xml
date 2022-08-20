@@ -272,7 +272,7 @@
     <string name="network_wifi">WiFi uniquement</string>
     <string name="channel_name_az">Nom de chaine (A-Z)</string>
     <string name="irreversible">Êtes-vous sûr(e) \? Ça ne peut pas être annulé !</string>
-    <string name="history_empty">Aucun historique</string>
+    <string name="history_empty">Aucun historique.</string>
     <string name="notify_new_streams">Notifications pour les nouveaux flux</string>
     <string name="notify_new_streams_summary">Notifications de nouveau contenu par les créateurs que vous suivez.</string>
     <string name="network_metered">Mesure</string>
@@ -307,4 +307,7 @@
     <string name="resize_mode_fill">Remplir</string>
     <string name="repeat_mode_current">Actuel</string>
     <string name="player_resize_mode">Mode de redimensionnement</string>
+    <string name="maximum_image_cache">Taille maximale du cache d\'images</string>
+    <string name="open_copied">Ouvrir</string>
+    <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
 </resources>
