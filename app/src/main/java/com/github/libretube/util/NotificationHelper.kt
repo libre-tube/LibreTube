@@ -165,7 +165,7 @@ object NotificationHelper {
 
         val builder = NotificationCompat.Builder(context, PUSH_CHANNEL_ID)
             .setContentTitle(title)
-            .setSmallIcon(R.drawable.ic_bell)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             // Set the intent that will fire when the user taps the notification

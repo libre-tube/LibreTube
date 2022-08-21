@@ -274,8 +274,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:drawableStart="@drawable/ic_bell"
-                    android:drawableTint="?android:attr/textColorPrimary"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="12sp"

@@ -907,7 +907,7 @@ class PlayerFragment : BaseFragment() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
         // search for the next videoId in the playlist
         lifecycleScope.launchWhenCreated {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams!!)
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams)
         }
     }
 
@@ -1294,42 +1294,44 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun initializeChapters() {
-        if (chapters.isNotEmpty()) {
-            // enable chapters in the video description
-            binding.chaptersRecView.layoutManager =
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-            binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
-            binding.chaptersRecView.visibility = View.VISIBLE
+        if (chapters.isEmpty()) return
+        // enable chapters in the video description
+        binding.chaptersRecView.layoutManager =
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
+        binding.chaptersRecView.visibility = View.VISIBLE
 
-            // enable the chapters dialog in the player
-            val titles = mutableListOf<String>()
-            chapters.forEach {
-                titles += it.title!!
-            }
-            playerBinding.chapterLL.visibility = View.VISIBLE
-            playerBinding.chapterLL.setOnClickListener {
-                if (viewModel.isFullscreen.value!!) {
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(R.string.chapters)
-                        .setItems(titles.toTypedArray()) { _, index ->
-                            val position = chapters[index].start!! * 1000
-                            exoPlayer.seekTo(position)
-                        }
-                        .show()
-                } else {
-                    toggleDescription()
-                }
-            }
-            setCurrentChapterName()
+        // enable the chapters dialog in the player
+        val titles = mutableListOf<String>()
+        chapters.forEach {
+            titles += it.title!!
         }
+        playerBinding.chapterLL.visibility = View.VISIBLE
+        playerBinding.chapterLL.setOnClickListener {
+            if (viewModel.isFullscreen.value!!) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.chapters)
+                    .setItems(titles.toTypedArray()) { _, index ->
+                        val position = chapters[index].start!! * 1000
+                        exoPlayer.seekTo(position)
+                    }
+                    .show()
+            } else {
+                toggleDescription()
+            }
+        }
+        setCurrentChapterName()
     }
 
     // set the name of the video chapter in the exoPlayerView
     private fun setCurrentChapterName() {
+        // return if chapters are ampty to avoid crashes
+        if (chapters.isEmpty()) return
+
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
