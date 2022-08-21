@@ -1121,10 +1121,7 @@ class PlayerFragment : BaseFragment() {
             // download clicked
             binding.relPlayerDownload.setOnClickListener {
                 if (!Globals.IS_DOWNLOAD_RUNNING) {
-                    val newFragment = DownloadDialog()
-                    val bundle = Bundle()
-                    bundle.putString("video_id", videoId)
-                    newFragment.arguments = bundle
+                    val newFragment = DownloadDialog(videoId!!)
                     newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
                 } else {
                     Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
@@ -1294,7 +1291,15 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun initializeChapters() {
-        if (chapters.isEmpty()) return
+        if (chapters.isEmpty()) {
+            binding.chaptersRecView.visibility = View.GONE
+            playerBinding.chapterLL.visibility = View.GONE
+            return
+        }
+        // show the chapter layouts
+        binding.chaptersRecView.visibility = View.VISIBLE
+        playerBinding.chapterLL.visibility = View.VISIBLE
+
         // enable chapters in the video description
         binding.chaptersRecView.layoutManager =
             LinearLayoutManager(
@@ -1303,21 +1308,20 @@ class PlayerFragment : BaseFragment() {
                 false
             )
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
-        binding.chaptersRecView.visibility = View.VISIBLE
 
         // enable the chapters dialog in the player
         val titles = mutableListOf<String>()
         chapters.forEach {
             titles += it.title!!
         }
-        playerBinding.chapterLL.visibility = View.VISIBLE
         playerBinding.chapterLL.setOnClickListener {
             if (viewModel.isFullscreen.value!!) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.chapters)
                     .setItems(titles.toTypedArray()) { _, index ->
-                        val position = chapters[index].start!! * 1000
-                        exoPlayer.seekTo(position)
+                        exoPlayer.seekTo(
+                            chapters[index].start!! * 1000
+                        )
                     }
                     .show()
             } else {
@@ -1329,14 +1333,14 @@ class PlayerFragment : BaseFragment() {
 
     // set the name of the video chapter in the exoPlayerView
     private fun setCurrentChapterName() {
-        // return if chapters are ampty to avoid crashes
+        // return if chapters are empty to avoid crashes
         if (chapters.isEmpty()) return
 
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
         val chapterIndex = getCurrentChapterIndex()
-        val chapterName = chapters[chapterIndex].title
+        val chapterName = chapters[chapterIndex].title?.trim()
 
         // change the chapter name textView text to the chapterName
         if (chapterName != playerBinding.chapterName.text) {

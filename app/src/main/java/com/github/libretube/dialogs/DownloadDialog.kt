@@ -22,16 +22,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
-class DownloadDialog : DialogFragment() {
+class DownloadDialog(
+    private val videoId: String
+) : DialogFragment() {
     private lateinit var binding: DialogDownloadBinding
-
-    private lateinit var videoId: String
-    private var duration = 0
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            videoId = arguments?.getString("video_id")!!
-
             val builder = MaterialAlertDialogBuilder(it)
             binding = DialogDownloadBinding.inflate(layoutInflater)
 
