@@ -907,7 +907,7 @@ class PlayerFragment : BaseFragment() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
         // search for the next videoId in the playlist
         lifecycleScope.launchWhenCreated {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams!!)
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams)
         }
     }
 

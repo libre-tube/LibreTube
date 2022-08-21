@@ -13,9 +13,12 @@ class AutoPlayHelper(
     private val playlistStreamIds = mutableListOf<String>()
     private var playlistNextPage: String? = null
 
+    /**
+     * get the id of the next video to be played
+     */
     suspend fun getNextVideoId(
         currentVideoId: String,
-        relatedStreams: List<StreamItem>
+        relatedStreams: List<StreamItem>?
     ): String? {
         return if (Globals.playingQueue.last() != currentVideoId) {
             val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
@@ -28,8 +31,15 @@ class AutoPlayHelper(
         )
     }
 
-    private fun getNextTrendingVideoId(videoId: String, relatedStreams: List<StreamItem>): String? {
+    /**
+     * get the id of the next related video
+     */
+    private fun getNextTrendingVideoId(
+        videoId: String,
+        relatedStreams: List<StreamItem>?
+    ): String? {
         // don't play a video if it got played before already
+        if (relatedStreams == null || relatedStreams.isEmpty()) return null
         var index = 0
         var nextStreamId: String? = null
         while (nextStreamId == null ||
@@ -47,6 +57,9 @@ class AutoPlayHelper(
         return nextStreamId
     }
 
+    /**
+     * get the videoId of the next video in a playlist
+     */
     private suspend fun getNextPlaylistVideoId(currentVideoId: String): String? {
         // if the playlists contain the video, then save the next video as next stream
         if (playlistStreamIds.contains(currentVideoId)) {
@@ -76,6 +89,9 @@ class AutoPlayHelper(
         return null
     }
 
+    /**
+     * get the videoId of the next video in the playing queue
+     */
     fun getNextPlayingQueueVideoId(
         currentVideoId: String
     ): String? {
