@@ -33,6 +33,7 @@ class VideoOptionsDialog(
         val optionsList = mutableListOf(
             context?.getString(R.string.playOnBackground),
             context?.getString(R.string.addToPlaylist),
+            context?.getString(R.string.download),
             context?.getString(R.string.share)
         )
 
@@ -80,6 +81,10 @@ class VideoOptionsDialog(
                         } else {
                             Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
                         }
+                    }
+                    context?.getString(R.string.download) -> {
+                        val downloadDialog = DownloadDialog(videoId)
+                        downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
                     }
                     context?.getString(R.string.share) -> {
                         val shareDialog = ShareDialog(videoId, false)
