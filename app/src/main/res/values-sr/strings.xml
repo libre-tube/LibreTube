@@ -25,8 +25,8 @@
     <string name="importsuccess">Праћења</string>
     <string name="cannotDownload">Није могуће преузети овај стрим.</string>
     <string name="dlcomplete">Преузимање је завршено.</string>
-    <string name="vlc">Отвори у VLC</string>
-    <string name="vlcerror">Није могуће отворити у VLC-у. Можда није инсталиран.</string>
+    <string name="vlc">Отвори у ВЛЦ</string>
+    <string name="vlcerror">Није могуће отворити у ВЛЦ-у. Можда није инсталиран.</string>
     <string name="import_from_yt">Увези претплате</string>
     <string name="import_from_yt_summary">Из YouTube-а или NewPipe-а</string>
     <string name="app_theme">Тема</string>
