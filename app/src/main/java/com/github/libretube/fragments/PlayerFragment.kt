@@ -1293,7 +1293,7 @@ class PlayerFragment : BaseFragment() {
     private fun initializeChapters() {
         if (chapters.isEmpty()) {
             binding.chaptersRecView.visibility = View.GONE
-            playerBinding.chapterLL.visibility = View.GONE
+            playerBinding.chapterLL.visibility = View.INVISIBLE
             return
         }
         // show the chapter layouts
