@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import com.github.libretube.services.BackgroundMode
 
 /**
@@ -21,6 +22,10 @@ object BackgroundHelper {
         if (position != null) intent.putExtra("position", position)
 
         // start the background mode as foreground service
-        context.startForegroundService(intent)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            context.startForegroundService(intent)
+        } else {
+            context.startService(intent)
+        }
     }
 }
