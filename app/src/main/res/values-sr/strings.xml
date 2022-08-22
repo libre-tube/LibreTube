@@ -25,8 +25,8 @@
     <string name="importsuccess">Праћења</string>
     <string name="cannotDownload">Није могуће преузети овај стрим.</string>
     <string name="dlcomplete">Преузимање је завршено.</string>
-    <string name="vlc">Отвори у VLC</string>
-    <string name="vlcerror">Није могуће отворити у VLC-у. Можда није инсталиран.</string>
+    <string name="vlc">Отвори у ВЛЦ</string>
+    <string name="vlcerror">Није могуће отворити у ВЛЦ-у. Можда није инсталиран.</string>
     <string name="import_from_yt">Увези претплате</string>
     <string name="import_from_yt_summary">Из YouTube-а или NewPipe-а</string>
     <string name="app_theme">Тема</string>
@@ -91,8 +91,8 @@
     <string name="app_icon">Иконица</string>
     <string name="enabled">Укључено</string>
     <string name="disabled">Искључено</string>
-    <string name="piped">Piped</string>
-    <string name="youtube">YouTube</string>
+    <string name="piped">Пипед</string>
+    <string name="youtube">YouTubе</string>
     <string name="playOnBackground">Пусти у позадини</string>
     <string name="update_available">Верзија %1$s је доступна</string>
     <string name="update_available_text">Ићи на издање на GitHub-у за преузимање\?</string>
@@ -242,7 +242,7 @@
     <string name="player_autoplay">Аутоплеј</string>
     <string name="reset_message">Ресетовати сва подешавања и одјавити се\?</string>
     <string name="audio_video">Аудио и видео</string>
-    <string name="discord">Discord</string>
+    <string name="discord">Дискорд</string>
     <string name="matrix">Matrix</string>
     <string name="change_playback_speed">Брзина репродукције</string>
     <string name="data_saver_mode_summary">Прескочи сличице и друге слике.</string>
@@ -306,4 +306,8 @@
     <string name="backup_restore">Прављење резервних копија и враћање</string>
     <string name="backup">Резерна копија</string>
     <string name="picture_in_picture">Слика у слици</string>
+    <string name="maximum_image_cache">Максимална величина кеша слике</string>
+    <string name="player_resize_mode">Режим промене величине</string>
+    <string name="copied_to_clipboard">Копирано у тастатуру</string>
+    <string name="open_copied">Отвори</string>
 </resources>

@@ -306,4 +306,8 @@
     <string name="picture_in_picture">Mini atskaņotājs</string>
     <string name="backup">Dublēt</string>
     <string name="backup_restore">Dublēt &amp; atjaunot</string>
+    <string name="open_copied">Atvērt</string>
+    <string name="copied_to_clipboard">Nokopēts starpliktuvē</string>
+    <string name="player_resize_mode">Izmēra mainīšanas režīms</string>
+    <string name="maximum_image_cache">Maksimālais attēlu kešatmiņas izmērs</string>
 </resources>
