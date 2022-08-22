@@ -12,7 +12,6 @@
 [<img src="https://libre-tube.github.io/images/fdrload.png" alt="Get it on F-Droid" width="30%">](https://f-droid.org/en/packages/com.github.libretube/)
 [<img src="https://libre-tube.github.io/images/izzyload.png" alt="Get it on IzzyOnDroid" width="30%">](https://apt.izzysoft.de/fdroid/index/apk/com.github.libretube)<br/>
 [<img src="https://libre-tube.github.io/images/ghload.png" alt="Get it on GitHub" width="30%">](https://github.com/libre-tube/LibreTube/releases/latest)
-[<img src="https://libre-tube.github.io/images/tgload.png" alt="Get it on GitHub" width="30%">](https://t.me/LibreTube)
 
 </div>
 
