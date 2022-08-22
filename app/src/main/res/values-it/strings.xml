@@ -119,7 +119,7 @@
     <string name="downloads">Scaricamenti</string>
     <string name="video_format_summary">Conversione dei file se entrambi audio e video vengono scaricati.</string>
     <string name="video_format">Formato video</string>
-    <string name="advanced_summary">Download, cronologia</string>
+    <string name="advanced_summary">Download e ripristino</string>
     <string name="update_available">La versione %1$s è disponibile</string>
     <string name="update_available_text">Andare ai rilasci su GitHub per scaricarlo\?</string>
     <string name="appearance">Aspetto</string>
@@ -184,7 +184,7 @@
     <string name="no_audio">Senza audio</string>
     <string name="no_video">Senza video</string>
     <string name="video">Con video</string>
-    <string name="downloading">Scaricando…</string>
+    <string name="downloading">Download in corso…</string>
     <string name="hideTrendingPage">Nascondi la pagina Tendenze</string>
     <string name="instance_frontend_url">URL dell\'istanza frontend</string>
     <string name="quality">Qualità</string>
@@ -227,7 +227,7 @@
     <string name="change_playback_speed">Velocità di riproduzione</string>
     <string name="require_restart">È necessario riavviare l\'app</string>
     <string name="require_restart_message">Riavviare l\'applicazione\?</string>
-    <string name="autoRotatePlayer">Auto/Schermo Intero</string>
+    <string name="autoRotatePlayer">Schermo intero automatico</string>
     <string name="data_saver_mode">Modalità risparmio dati</string>
     <string name="autoRotatePlayer_summary">Riproduzione a schermo intero quando il dispositivo viene girato.</string>
     <string name="always">Sempre</string>
@@ -248,7 +248,7 @@
     <string name="none">Nessuno</string>
     <string name="general">Generale</string>
     <string name="take_a_break">È il momento di prendere una pausa</string>
-    <string name="yt_shorts">Shorts</string>
+    <string name="yt_shorts">Short</string>
     <string name="add_to_queue">Aggiungi alla coda</string>
     <string name="notifications">Notifiche</string>
     <string name="notify_new_streams">Notifiche per nuove stream</string>
@@ -261,7 +261,7 @@
     <string name="channel_name_az">Nome canale (A-Z)</string>
     <string name="network_all">Tutto</string>
     <string name="network_wifi">Solo su Wi-Fi</string>
-    <string name="network_metered">Metered</string>
+    <string name="network_metered">A consumo</string>
     <string name="error_occurred">Errore</string>
     <string name="copied">Copiato</string>
     <string name="downloadsucceeded">Scaricato con successo</string>
@@ -307,4 +307,7 @@
     <string name="update_now">Installare la nuova versione di LibreTube ora\?</string>
     <string name="playerAudioFormat">Formato dell\'audio per il lettore</string>
     <string name="playerAudioQuality">Qualità audio</string>
+    <string name="history_empty">Cronologia vuota.</string>
+    <string name="repeat_mode_none">Disattivata</string>
+    <string name="misc">Varie</string>
 </resources>
