@@ -60,6 +60,12 @@ If creating a pull request, please make sure to format your code (preferred ktli
 
 If opening an issue without following the issue template, we will ignore the issue and force close it.
 
+### 📜️ Credits
+
+#### Icons
+
+- [Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)
+
 ### 📝 Translation
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages">
