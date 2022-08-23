@@ -125,7 +125,7 @@ class BackgroundMode : Service() {
             val position = intent.getLongExtra("position", 0L)
 
             // initialize the playlist autoPlay Helper
-            if (playlistId != null) autoPlayHelper = AutoPlayHelper(playlistId!!)
+            autoPlayHelper = AutoPlayHelper(playlistId)
 
             // play the audio in the background
             playAudio(videoId, position)
