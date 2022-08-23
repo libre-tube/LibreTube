@@ -39,8 +39,8 @@ class AdvancedSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.advanced_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.advanced))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.advanced))
 
         val maxImageCache = findPreference<ListPreference>(PreferenceKeys.MAX_IMAGE_CACHE)
         maxImageCache?.setOnPreferenceChangeListener { _, _ ->

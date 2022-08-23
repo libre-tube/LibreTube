@@ -14,8 +14,8 @@ class PlayerSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.audio_video))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.audio_video))
 
         val playerOrientation =
             findPreference<ListPreference>(PreferenceKeys.FULLSCREEN_ORIENTATION)

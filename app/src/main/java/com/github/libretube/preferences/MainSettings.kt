@@ -87,14 +87,14 @@ class MainSettings : MaterialPreferenceFragment() {
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 if (!NetworkHelper.isNetworkAvailable(requireContext())) {
-                    (activity as SettingsActivity).binding.root.getStyledSnackBar(R.string.unknown_error).show()
+                    (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.unknown_error)?.show()
                     return@launch
                 }
                 // check for update
                 val updateInfo = UpdateChecker.getLatestReleaseInfo()
                 if (updateInfo?.name == null) {
                     // request failed
-                    (activity as SettingsActivity).binding.root.getStyledSnackBar(R.string.unknown_error).show()
+                    (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.unknown_error)?.show()
                 } else if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
                     val updateAvailableDialog = UpdateDialog(updateInfo)
@@ -104,7 +104,7 @@ class MainSettings : MaterialPreferenceFragment() {
                     )
                 } else {
                     // otherwise show the no update available snackBar
-                    (activity as SettingsActivity).binding.root.getStyledSnackBar(R.string.app_uptodate).show()
+                    (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.app_uptodate)?.show()
                 }
             }
             true

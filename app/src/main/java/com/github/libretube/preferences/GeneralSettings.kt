@@ -13,8 +13,8 @@ class GeneralSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.general_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.general))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.general))
 
         val language = findPreference<ListPreference>("language")
         language?.setOnPreferenceChangeListener { _, _ ->

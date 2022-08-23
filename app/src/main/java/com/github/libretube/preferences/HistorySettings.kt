@@ -13,8 +13,8 @@ class HistorySettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.history_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.history))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.history))
 
         // clear search history
         val clearHistory = findPreference<Preference>(PreferenceKeys.CLEAR_SEARCH_HISTORY)
