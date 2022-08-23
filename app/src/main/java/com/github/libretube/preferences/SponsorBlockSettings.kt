@@ -10,7 +10,7 @@ class SponsorBlockSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.sponsorblock_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.sponsorblock))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.sponsorblock))
     }
 }

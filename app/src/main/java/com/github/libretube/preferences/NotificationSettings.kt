@@ -14,8 +14,8 @@ class NotificationSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.notification_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.notifications))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.notifications))
 
         val notificationsEnabled =
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_ENABLED)

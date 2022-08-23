@@ -19,8 +19,8 @@ class AppearanceSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.appearance))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.appearance))
 
         val themeToggle = findPreference<ListPreference>(PreferenceKeys.THEME_MODE)
         themeToggle?.setOnPreferenceChangeListener { _, _ ->

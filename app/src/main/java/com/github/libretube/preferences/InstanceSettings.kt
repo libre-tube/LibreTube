@@ -51,8 +51,8 @@ class InstanceSettings : MaterialPreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
 
-        val settingsActivity = activity as SettingsActivity
-        settingsActivity.changeTopBarText(getString(R.string.instance))
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.instance))
 
         val instance = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)
         // fetchInstance()
