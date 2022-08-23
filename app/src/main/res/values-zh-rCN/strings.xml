@@ -310,4 +310,5 @@
     <string name="maximum_image_cache">最大图片缓存尺寸</string>
     <string name="open_copied">打开</string>
     <string name="copied_to_clipboard">已复制到剪贴板</string>
+    <string name="break_reminder_time">使用多少分钟后提醒休息</string>
 </resources>
