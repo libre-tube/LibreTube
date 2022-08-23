@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import com.github.libretube.activities.MainActivity
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.util.DoubleTapListener
@@ -31,7 +32,7 @@ internal class CustomExoPlayerView(
         if (isControllerFullyVisible) hideController() else showController()
     }
 
-    val doubleTouchListener = object : DoubleTapListener() {
+    private val doubleTouchListener = object : DoubleTapListener() {
         override fun onDoubleClick() {
             doubleTapListener?.onEvent(xPos)
         }
@@ -44,6 +45,11 @@ internal class CustomExoPlayerView(
     init {
         // set the double click listener for rewind/forward
         setOnClickListener(doubleTouchListener)
+    }
+
+    override fun hideController() {
+        (context as? MainActivity)?.hideSystemBars()
+        super.hideController()
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
