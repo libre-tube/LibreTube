@@ -62,8 +62,11 @@ If opening an issue without following the issue template, we will ignore the iss
 
 ### 📜️ Credits
 
+- Readme Design and Banners by [XelXen](https://github.com/XelXen)
+
 #### Icons
 
+- [Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)
 - [Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)
 
 ### 📝 Translation
