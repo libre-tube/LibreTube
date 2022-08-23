@@ -17,6 +17,7 @@ object PreferenceKeys {
     const val LANGUAGE = "language"
     const val REGION = "region"
     const val AUTO_ROTATION = "auto_rotation"
+    const val BREAK_REMINDER_TOGGLE = "break_reminder_toggle"
     const val BREAK_REMINDER = "break_reminder"
 
     /**
@@ -92,7 +93,7 @@ object PreferenceKeys {
      * Advanced
      */
     const val DATA_SAVER_MODE = "data_saver_mode"
-    const val MAX_IMAGE_CACHE = ""
+    const val MAX_IMAGE_CACHE = "image_cache_size"
     const val RESET_SETTINGS = "reset_settings"
     const val CLEAR_SEARCH_HISTORY = "clear_search_history"
     const val CLEAR_WATCH_HISTORY = "clear_watch_history"

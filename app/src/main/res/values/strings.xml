@@ -310,4 +310,5 @@
     <string name="maximum_image_cache">Max image cache size</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="open_copied">Open</string>
+    <string name="break_reminder_time">Minutes before being reminded</string>
 </resources>

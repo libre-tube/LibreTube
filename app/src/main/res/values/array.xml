@@ -828,24 +828,6 @@
         <item>unlimited</item>
     </string-array>
 
-    <string-array name="breakReminder">
-        <item>@string/disabled</item>
-        <item>15 min</item>
-        <item>30 min</item>
-        <item>60 min</item>
-        <item>90 min</item>
-        <item>120 min</item>
-    </string-array>
-
-    <string-array name="breakReminderValues">
-        <item>disabled</item>
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>90</item>
-        <item>120</item>
-    </string-array>
-
     <string-array name="resizeMode">
         <item>@string/resize_mode_fit</item>
         <item>@string/resize_mode_zoom</item>
