@@ -310,4 +310,5 @@
     <string name="copied_to_clipboard">Buferə kopyalandı</string>
     <string name="maximum_image_cache">Maksimum şəkil keşi ölçüsü</string>
     <string name="open_copied">Açıq</string>
+    <string name="break_reminder_time">Xatırlatmadan əvvəl dəqiqələr</string>
 </resources>
