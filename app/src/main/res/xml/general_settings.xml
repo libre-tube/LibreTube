@@ -63,13 +63,18 @@
 
     <PreferenceCategory app:title="@string/misc">
 
-        <ListPreference
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_notification"
+            app:key="break_reminder_toggle"
+            app:title="@string/break_reminder" />
+
+        <EditTextPreference
+            android:enabled="false"
             android:icon="@drawable/ic_time"
-            app:defaultValue="disabled"
-            app:entries="@array/breakReminder"
-            app:entryValues="@array/breakReminderValues"
+            app:defaultValue="60"
             app:key="break_reminder"
-            app:title="@string/break_reminder"
+            app:title="@string/break_reminder_time"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>

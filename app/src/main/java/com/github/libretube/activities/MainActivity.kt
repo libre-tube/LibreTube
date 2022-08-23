@@ -162,11 +162,16 @@ class MainActivity : BaseActivity() {
      * Show a break reminder when watched too long
      */
     private fun setupBreakReminder() {
+        if (!PreferenceHelper.getBoolean(
+                PreferenceKeys.BREAK_REMINDER_TOGGLE,
+                false
+            )
+        ) return
         val breakReminderPref = PreferenceHelper.getString(
             PreferenceKeys.BREAK_REMINDER,
-            "disabled"
+            "0"
         )
-        if (breakReminderPref == "disabled") return
+        if (!breakReminderPref.all { Character.isDigit(it) }) return
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 try {

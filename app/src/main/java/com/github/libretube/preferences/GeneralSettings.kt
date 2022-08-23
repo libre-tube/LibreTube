@@ -1,6 +1,7 @@
 package com.github.libretube.preferences
 
 import android.os.Bundle
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
@@ -37,10 +38,15 @@ class GeneralSettings : MaterialPreferenceFragment() {
             true
         }
 
-        val breakReminder = findPreference<ListPreference>(PreferenceKeys.BREAK_REMINDER)
-        breakReminder?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+        val breakReminder = findPreference<SwitchPreferenceCompat>(PreferenceKeys.BREAK_REMINDER_TOGGLE)
+        val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.BREAK_REMINDER)
+        breakReminderTime?.isEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.BREAK_REMINDER_TOGGLE,
+            false
+        )
+
+        breakReminder?.setOnPreferenceChangeListener { _, newValue ->
+            breakReminderTime?.isEnabled = newValue as Boolean
             true
         }
     }

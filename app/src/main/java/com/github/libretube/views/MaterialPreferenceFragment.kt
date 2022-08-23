@@ -1,10 +1,15 @@
 package com.github.libretube.views
 
 import android.os.Bundle
+import android.util.Log
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
+import com.github.libretube.databinding.DialogTextPreferenceBinding
+import com.github.libretube.extensions.TAG
+import com.github.libretube.preferences.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -34,6 +39,24 @@ open class MaterialPreferenceFragment : PreferenceFragmentCompat() {
 
                         // dismiss the dialog
                         dialog.dismiss()
+                    }
+                    .setNegativeButton(R.string.cancel, null)
+                    .show()
+            }
+            is EditTextPreference -> {
+                val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
+                binding.input.setText(
+                    PreferenceHelper.getString(
+                        preference.key,
+                        ""
+                    )
+                )
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(preference.title)
+                    .setView(binding.root)
+                    .setPositiveButton(R.string.okay) { _, _ ->
+                        // save the new value
+                        preference.text = binding.input.text.toString()
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()
