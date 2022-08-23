@@ -159,6 +159,8 @@ class NowPlayingNotification(
             setUseStopAction(true)
             setColorized(true)
             setMediaSessionToken(mediaSession.sessionToken)
+            setUseFastForwardActionInCompactView(true)
+            setUseRewindActionInCompactView(true)
         }
     }
 
