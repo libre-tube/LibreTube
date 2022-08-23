@@ -171,7 +171,9 @@ class MainActivity : BaseActivity() {
             PreferenceKeys.BREAK_REMINDER,
             "0"
         )
-        if (!breakReminderPref.all { Character.isDigit(it) }) return
+        if (!breakReminderPref.all { Character.isDigit(it) } ||
+            breakReminderPref == "" || breakReminderPref == "0"
+        ) return
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 try {
