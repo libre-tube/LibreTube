@@ -310,4 +310,5 @@
     <string name="maximum_image_cache">Taille maximale du cache d\'images</string>
     <string name="open_copied">Ouvrir</string>
     <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
+    <string name="break_reminder_time">Quelques minutes avant d\'être rappelé</string>
 </resources>
