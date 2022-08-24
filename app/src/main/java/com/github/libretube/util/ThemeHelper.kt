@@ -43,8 +43,11 @@ object ThemeHelper {
         ) {
             "my" -> {
                 applyDynamicColors(activity)
-                if (pureThemeEnabled) R.style.BaseTheme_Pure
-                else R.style.BaseTheme
+                if (pureThemeEnabled) {
+                    R.style.BaseTheme_Pure
+                } else {
+                    R.style.BaseTheme
+                }
             }
             // set the theme, use the pure theme if enabled
             "red" -> if (pureThemeEnabled) R.style.Theme_Red_Pure else R.style.Theme_Red
@@ -85,8 +88,11 @@ object ThemeHelper {
         // Disable Old Icon(s)
         for (activityAlias in activityAliases) {
             val activityClass = "com.github.libretube." +
-                if (activityAlias == activityAliases[0]) "activities.MainActivity" // default icon/activity
-                else activityAlias
+                if (activityAlias == activityAliases[0]) {
+                    "activities.MainActivity" // default icon/activity
+                } else {
+                    activityAlias
+                }
 
             // remove old icons
             context.packageManager.setComponentEnabledSetting(
@@ -98,8 +104,11 @@ object ThemeHelper {
 
         // set the class name for the activity alias
         val newLogoActivityClass = "com.github.libretube." +
-            if (newLogoActivityAlias == activityAliases[0]) "activities.MainActivity" // default icon/activity
-            else newLogoActivityAlias
+            if (newLogoActivityAlias == activityAliases[0]) {
+                "activities.MainActivity" // default icon/activity
+            } else {
+                newLogoActivityAlias
+            }
         // Enable New Icon
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context.packageName, newLogoActivityClass),

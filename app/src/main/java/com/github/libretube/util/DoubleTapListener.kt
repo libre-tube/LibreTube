@@ -34,7 +34,9 @@ abstract class DoubleTapListener : View.OnClickListener {
     private val runnable = Runnable {
         if (!isSingleEvent ||
             SystemClock.elapsedRealtime() - timeStampLastDoubleClick < maximumTimeDifference
-        ) return@Runnable
+        ) {
+            return@Runnable
+        }
         onSingleClick()
     }
 }

@@ -61,8 +61,11 @@ class PlaylistFragment : BaseFragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    if (isOwner) RetrofitInstance.authApi.getPlaylist(playlistId!!)
-                    else RetrofitInstance.api.getPlaylist(playlistId!!)
+                    if (isOwner) {
+                        RetrofitInstance.authApi.getPlaylist(playlistId!!)
+                    } else {
+                        RetrofitInstance.api.getPlaylist(playlistId!!)
+                    }
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG(), "IOException, you might not have internet connection")
@@ -163,13 +166,17 @@ class PlaylistFragment : BaseFragment() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     // load locally stored playlists with the auth api
-                    if (isOwner) RetrofitInstance.authApi.getPlaylistNextPage(
-                        playlistId!!,
-                        nextPage!!
-                    ) else RetrofitInstance.api.getPlaylistNextPage(
-                        playlistId!!,
-                        nextPage!!
-                    )
+                    if (isOwner) {
+                        RetrofitInstance.authApi.getPlaylistNextPage(
+                            playlistId!!,
+                            nextPage!!
+                        )
+                    } else {
+                        RetrofitInstance.api.getPlaylistNextPage(
+                            playlistId!!,
+                            nextPage!!
+                        )
+                    }
                 } catch (e: IOException) {
                     println(e)
                     Log.e(TAG(), "IOException, you might not have internet connection")

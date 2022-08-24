@@ -24,9 +24,13 @@ class TrendingAdapter(
     var index = 10
 
     override fun getItemCount(): Int {
-        return if (showAllAtOne) streamItems.size
-        else if (index >= streamItems.size) streamItems.size - 1
-        else index
+        return if (showAllAtOne) {
+            streamItems.size
+        } else if (index >= streamItems.size) {
+            streamItems.size - 1
+        } else {
+            index
+        }
     }
 
     fun updateItems() {

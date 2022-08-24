@@ -79,8 +79,11 @@ class MainSettings : MaterialPreferenceFragment() {
         val update = findPreference<Preference>("update")
 
         // set the version of the update preference
-        val versionString = if (BuildConfig.DEBUG) "${BuildConfig.VERSION_NAME} Debug"
-        else getString(R.string.version, BuildConfig.VERSION_NAME)
+        val versionString = if (BuildConfig.DEBUG) {
+            "${BuildConfig.VERSION_NAME} Debug"
+        } else {
+            getString(R.string.version, BuildConfig.VERSION_NAME)
+        }
         update?.title = versionString
 
         // checking for update: yes -> dialog, no -> snackBar

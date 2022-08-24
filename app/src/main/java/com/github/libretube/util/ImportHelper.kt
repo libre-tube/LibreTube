@@ -99,10 +99,13 @@ class ImportHelper(
             val mapper = ObjectMapper()
             val token = PreferenceHelper.getToken()
             runBlocking {
-                val subs = if (token != "") RetrofitInstance.authApi.subscriptions(token)
-                else RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                    SubscriptionHelper.getFormattedLocalSubscriptions()
-                )
+                val subs = if (token != "") {
+                    RetrofitInstance.authApi.subscriptions(token)
+                } else {
+                    RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                        SubscriptionHelper.getFormattedLocalSubscriptions()
+                    )
+                }
                 val newPipeChannels = mutableListOf<NewPipeSubscription>()
                 subs.forEach {
                     newPipeChannels += NewPipeSubscription(

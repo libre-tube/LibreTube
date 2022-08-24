@@ -53,7 +53,9 @@ class HomeFragment : BaseFragment() {
             LocaleHelper
                 .getDetectedCountry(requireContext(), "UK")
                 .uppercase()
-        } else regionPref
+        } else {
+            regionPref
+        }
 
         binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
         fetchJson()

@@ -63,9 +63,11 @@ class SearchAdapter(
         val channelRowBinding = holder.channelRowBinding
         val playlistRowBinding = holder.playlistRowBinding
 
-        if (videoRowBinding != null) bindWatch(searchItem, videoRowBinding)
-        else if (channelRowBinding != null) bindChannel(searchItem, channelRowBinding)
-        else if (playlistRowBinding != null) bindPlaylist(searchItem, playlistRowBinding)
+        if (videoRowBinding != null) {
+            bindWatch(searchItem, videoRowBinding)
+        } else if (channelRowBinding != null) {
+            bindChannel(searchItem, channelRowBinding)
+        } else if (playlistRowBinding != null) bindPlaylist(searchItem, playlistRowBinding)
     }
 
     override fun getItemViewType(position: Int): Int {
