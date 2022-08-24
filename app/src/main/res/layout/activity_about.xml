@@ -6,10 +6,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/appIcon"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_gravity="center"
@@ -23,7 +24,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp"
-            android:text="LibreTube"
+            android:text="@string/app_name"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -130,6 +131,24 @@
                 <TextView
                     style="@style/AboutTextView"
                     android:text="@string/license" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/device"
+            style="@style/AboutCard">
+
+            <LinearLayout style="@style/AboutItem">
+
+                <ImageView
+                    style="@style/AboutImageView"
+                    android:src="@drawable/ic_device" />
+
+                <TextView
+                    style="@style/AboutTextView"
+                    android:text="@string/device_info" />
 
             </LinearLayout>
 
