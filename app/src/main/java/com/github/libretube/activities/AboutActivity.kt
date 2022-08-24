@@ -30,6 +30,17 @@ class AboutActivity : BaseActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.appIcon.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
         binding.website.setOnClickListener {
             openLinkFromHref(WEBSITE_URL)
         }
