@@ -89,8 +89,11 @@ class InstanceSettings : MaterialPreferenceFragment() {
             authInstance.isVisible = newValue == true
             logout()
             // either use new auth url or the normal api url if auth instance disabled
-            RetrofitInstance.authUrl = if (newValue == false) RetrofitInstance.url
-            else authInstance.value
+            RetrofitInstance.authUrl = if (newValue == false) {
+                RetrofitInstance.url
+            } else {
+                authInstance.value
+            }
             RetrofitInstance.lazyMgr.reset()
             activity?.recreate()
             true
@@ -144,9 +147,12 @@ class InstanceSettings : MaterialPreferenceFragment() {
             val accessGranted =
                 PermissionHelper.isStoragePermissionGranted(requireActivity())
             // import subscriptions
-            if (accessGranted) getContent.launch("*/*")
-            // request permissions if not granted
-            else PermissionHelper.requestReadWrite(requireActivity())
+            if (accessGranted) {
+                getContent.launch("*/*")
+            } // request permissions if not granted
+            else {
+                PermissionHelper.requestReadWrite(requireActivity())
+            }
             true
         }
 

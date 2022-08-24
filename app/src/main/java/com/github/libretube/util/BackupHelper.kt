@@ -66,11 +66,15 @@ class BackupHelper(
 
             // decide for each preference which type it is and save it to the preferences
             for ((key, value) in entries) {
-                if (value is Boolean) editor.putBoolean(key, value)
-                else if (value is Float) editor.putFloat(key, value)
-                else if (value is Int) editor.putInt(key, value)
-                else if (value is Long) editor.putLong(key, value)
-                else if (value is String) editor.putString(key, value)
+                if (value is Boolean) {
+                    editor.putBoolean(key, value)
+                } else if (value is Float) {
+                    editor.putFloat(key, value)
+                } else if (value is Int) {
+                    editor.putInt(key, value)
+                } else if (value is Long) {
+                    editor.putLong(key, value)
+                } else if (value is String) editor.putString(key, value)
             }
             editor.commit()
         } catch (e: Exception) {

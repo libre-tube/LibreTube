@@ -56,8 +56,11 @@ class SearchFragment() : BaseFragment() {
         // fetch the search or history
         binding.historyEmpty.visibility = View.GONE
         binding.suggestionsRecycler.visibility = View.VISIBLE
-        if (query == null || query == "") showHistory()
-        else fetchSuggestions(query)
+        if (query == null || query == "") {
+            showHistory()
+        } else {
+            fetchSuggestions(query)
+        }
     }
 
     private fun fetchSuggestions(query: String) {

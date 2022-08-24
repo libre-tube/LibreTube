@@ -53,9 +53,13 @@ class DownloadService : Service() {
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
 
-        downloadType = if (audioUrl != "") DownloadType.AUDIO
-        else if (videoUrl != "") DownloadType.VIDEO
-        else DownloadType.NONE
+        downloadType = if (audioUrl != "") {
+            DownloadType.AUDIO
+        } else if (videoUrl != "") {
+            DownloadType.VIDEO
+        } else {
+            DownloadType.NONE
+        }
         if (downloadType != DownloadType.NONE) {
             downloadNotification(intent)
             downloadManager()

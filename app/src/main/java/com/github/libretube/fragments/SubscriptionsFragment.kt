@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.adapters.LegacySubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.api.RetrofitInstance
@@ -125,10 +126,13 @@ class SubscriptionsFragment : BaseFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 feed = try {
-                    if (token != "") RetrofitInstance.authApi.getFeed(token)
-                    else RetrofitInstance.authApi.getUnauthenticatedFeed(
-                        SubscriptionHelper.getFormattedLocalSubscriptions()
-                    )
+                    if (token != "") {
+                        RetrofitInstance.authApi.getFeed(token)
+                    } else {
+                        RetrofitInstance.authApi.getUnauthenticatedFeed(
+                            SubscriptionHelper.getFormattedLocalSubscriptions()
+                        )
+                    }
                 } catch (e: IOException) {
                     Log.e(TAG(), e.toString())
                     Log.e(TAG(), "IOException, you might not have internet connection")
@@ -175,10 +179,13 @@ class SubscriptionsFragment : BaseFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    if (token != "") RetrofitInstance.authApi.subscriptions(token)
-                    else RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                        SubscriptionHelper.getFormattedLocalSubscriptions()
-                    )
+                    if (token != "") {
+                        RetrofitInstance.authApi.subscriptions(token)
+                    } else {
+                        RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                            SubscriptionHelper.getFormattedLocalSubscriptions()
+                        )
+                    }
                 } catch (e: IOException) {
                     Log.e(TAG(), e.toString())
                     Log.e(TAG(), "IOException, you might not have internet connection")
@@ -191,7 +198,22 @@ class SubscriptionsFragment : BaseFragment() {
                 }
                 if (response.isNotEmpty()) {
                     binding.subChannels.adapter =
-                        SubscriptionChannelAdapter(response.toMutableList())
+                        if (PreferenceHelper.getBoolean(
+                                PreferenceKeys.LEGACY_SUBSCRIPTIONS,
+                                false
+                            )
+                        ) {
+                            binding.subChannels.layoutManager = GridLayoutManager(
+                                context,
+                                PreferenceHelper.getString(
+                                    PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
+                                    "4"
+                                ).toInt()
+                            )
+                            LegacySubscriptionAdapter(response)
+                        } else {
+                            SubscriptionChannelAdapter(response.toMutableList())
+                        }
                 } else {
                     Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
                 }

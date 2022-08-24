@@ -33,7 +33,9 @@ class ChaptersAdapter(
                 val color =
                     ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
                 chapterLL.setBackgroundColor(color)
-            } else chapterLL.setBackgroundColor(Color.TRANSPARENT)
+            } else {
+                chapterLL.setBackgroundColor(Color.TRANSPARENT)
+            }
             root.setOnClickListener {
                 updateSelectedPosition(position)
                 val chapterStart = chapter.start!! * 1000 // s -> ms

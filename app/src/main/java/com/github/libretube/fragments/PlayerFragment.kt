@@ -585,13 +585,18 @@ class PlayerFragment : BaseFragment() {
             val bottomSheetFragment = PlayerOptionsBottomSheet().apply {
                 setOnClickListeners(playerOptionsInterface)
                 // set the auto play mode
-                currentAutoplayMode = if (autoplayEnabled) context.getString(R.string.enabled)
-                else context.getString(R.string.disabled)
+                currentAutoplayMode = if (autoplayEnabled) {
+                    context.getString(R.string.enabled)
+                } else {
+                    context.getString(R.string.disabled)
+                }
                 // set the current caption language
                 currentCaptions =
                     if (trackSelector.parameters.preferredTextLanguages.isNotEmpty()) {
                         trackSelector.parameters.preferredTextLanguages[0]
-                    } else context.getString(R.string.none)
+                    } else {
+                        context.getString(R.string.none)
+                    }
                 // set the playback speed
                 val playbackSpeeds = context.resources.getStringArray(R.array.playbackSpeed)
                 val playbackSpeedValues =
@@ -603,14 +608,19 @@ class PlayerFragment : BaseFragment() {
                 val quality = exoPlayer.videoSize.height
                 if (quality != 0) {
                     currentQuality =
-                        if (isAdaptive) "${context.getString(R.string.hls)} • ${quality}p"
-                        else "${quality}p"
+                        if (isAdaptive) {
+                            "${context.getString(R.string.hls)} • ${quality}p"
+                        } else {
+                            "${quality}p"
+                        }
                 }
                 // set the repeat mode
                 currentRepeatMode =
                     if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
                         context.getString(R.string.repeat_mode_none)
-                    } else context.getString(R.string.repeat_mode_current)
+                    } else {
+                        context.getString(R.string.repeat_mode_current)
+                    }
                 // set the aspect ratio mode
                 currentResizeMode = when (exoPlayerView.resizeMode) {
                     AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
@@ -729,9 +739,12 @@ class PlayerFragment : BaseFragment() {
                 "ratio" -> {
                     val videoSize = exoPlayer.videoSize
                     // probably a youtube shorts video
-                    if (videoSize.height > videoSize.width) ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                    // a video with normal aspect ratio
-                    else ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                    if (videoSize.height > videoSize.width) {
+                        ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                    } // a video with normal aspect ratio
+                    else {
+                        ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                    }
                 }
                 "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
                 "landscape" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
@@ -816,8 +829,11 @@ class PlayerFragment : BaseFragment() {
             saveWatchPosition()
             nowPlayingNotification.destroy()
             activity?.requestedOrientation =
-                if ((activity as MainActivity).autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
-                else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                if ((activity as MainActivity).autoRotationEnabled) {
+                    ActivityInfo.SCREEN_ORIENTATION_USER
+                } else {
+                    ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                }
         } catch (e: Exception) {
         }
     }
@@ -1199,7 +1215,11 @@ class PlayerFragment : BaseFragment() {
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
             skipButtonsEnabled && Globals.playingQueue.indexOf(videoId!!) != 0
-        ) View.VISIBLE else View.INVISIBLE
+        ) {
+            View.VISIBLE
+        } else {
+            View.INVISIBLE
+        }
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
@@ -1545,7 +1565,11 @@ class PlayerFragment : BaseFragment() {
         playerBinding.exoTitle.visibility =
             if (isLocked &&
                 viewModel.isFullscreen.value == true
-            ) View.VISIBLE else View.INVISIBLE
+            ) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
 
         // disable double tap to seek when the player is locked
         if (isLocked) {

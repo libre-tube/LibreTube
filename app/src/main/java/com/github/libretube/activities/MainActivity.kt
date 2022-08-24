@@ -62,8 +62,11 @@ class MainActivity : BaseActivity() {
         autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
         // enable auto rotation if turned on
-        requestedOrientation = if (autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
-        else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        requestedOrientation = if (autoRotationEnabled) {
+            ActivityInfo.SCREEN_ORIENTATION_USER
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
 
         // start service that gets called on closure
         try {
@@ -98,8 +101,10 @@ class MainActivity : BaseActivity() {
         // hide the trending page if enabled
         val hideTrendingPage =
             PreferenceHelper.getBoolean(PreferenceKeys.HIDE_TRENDING_PAGE, false)
-        if (hideTrendingPage) binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
-            false
+        if (hideTrendingPage) {
+            binding.bottomNav.menu.findItem(R.id.homeFragment).isVisible =
+                false
+        }
 
         // save start tab fragment id
         startFragmentId =
@@ -166,14 +171,18 @@ class MainActivity : BaseActivity() {
                 PreferenceKeys.BREAK_REMINDER_TOGGLE,
                 false
             )
-        ) return
+        ) {
+            return
+        }
         val breakReminderPref = PreferenceHelper.getString(
             PreferenceKeys.BREAK_REMINDER,
             "0"
         )
         if (!breakReminderPref.all { Character.isDigit(it) } ||
             breakReminderPref == "" || breakReminderPref == "0"
-        ) return
+        ) {
+            return
+        }
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 try {
@@ -403,8 +412,11 @@ class MainActivity : BaseActivity() {
     ) {
         Log.i(TAG(), "Uri Type: Channel")
 
-        val bundle = if (channelId != null) bundleOf("channel_id" to channelId)
-        else bundleOf("channel_name" to channelName)
+        val bundle = if (channelId != null) {
+            bundleOf("channel_id" to channelId)
+        } else {
+            bundleOf("channel_name" to channelName)
+        }
         navController.navigate(R.id.channelFragment, bundle)
     }
 
@@ -452,8 +464,11 @@ class MainActivity : BaseActivity() {
         findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
         val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
         playerViewModel.isFullscreen.value = false
-        requestedOrientation = if (autoRotationEnabled) ActivityInfo.SCREEN_ORIENTATION_USER
-        else ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        requestedOrientation = if (autoRotationEnabled) {
+            ActivityInfo.SCREEN_ORIENTATION_USER
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

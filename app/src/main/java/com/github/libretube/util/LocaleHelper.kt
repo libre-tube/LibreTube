@@ -11,8 +11,9 @@ object LocaleHelper {
 
     fun updateLanguage(context: Context) {
         val languageName = PreferenceHelper.getString(PreferenceKeys.LANGUAGE, "sys")
-        if (languageName == "sys") updateLocaleConf(context, Locale.getDefault())
-        else if (languageName?.contains("-") == true) {
+        if (languageName == "sys") {
+            updateLocaleConf(context, Locale.getDefault())
+        } else if (languageName?.contains("-") == true) {
             val languageParts = languageName.split("-")
             val locale = Locale(
                 languageParts[0],

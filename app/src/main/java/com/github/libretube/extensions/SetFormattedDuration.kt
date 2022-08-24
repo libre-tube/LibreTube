@@ -8,7 +8,10 @@ fun TextView?.setFormattedDuration(duration: Long) {
     val text = if (duration < 0L) {
         this!!.setBackgroundColor(R.attr.colorPrimaryDark)
         this.context.getString(R.string.live)
-    } else if (duration == 0L) this!!.context.getString(R.string.yt_shorts)
-    else DateUtils.formatElapsedTime(duration)
+    } else if (duration == 0L) {
+        this!!.context.getString(R.string.yt_shorts)
+    } else {
+        DateUtils.formatElapsedTime(duration)
+    }
     this!!.text = text
 }

@@ -110,8 +110,11 @@ class ChannelFragment : BaseFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    if (channelId != null) RetrofitInstance.api.getChannel(channelId!!)
-                    else RetrofitInstance.api.getChannelByName(channelName!!)
+                    if (channelId != null) {
+                        RetrofitInstance.api.getChannel(channelId!!)
+                    } else {
+                        RetrofitInstance.api.getChannelByName(channelName!!)
+                    }
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
                     println(e)

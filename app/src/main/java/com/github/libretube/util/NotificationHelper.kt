@@ -93,10 +93,13 @@ object NotificationHelper {
         val token = PreferenceHelper.getToken()
         runBlocking {
             val task = async {
-                if (token != "") RetrofitInstance.authApi.getFeed(token)
-                else RetrofitInstance.authApi.getUnauthenticatedFeed(
-                    SubscriptionHelper.getFormattedLocalSubscriptions()
-                )
+                if (token != "") {
+                    RetrofitInstance.authApi.getFeed(token)
+                } else {
+                    RetrofitInstance.authApi.getUnauthenticatedFeed(
+                        SubscriptionHelper.getFormattedLocalSubscriptions()
+                    )
+                }
             }
             // fetch the users feed
             val videoFeed = try {
@@ -110,8 +113,9 @@ object NotificationHelper {
             val latestFeedStreamId = videoFeed[0].url.toID()
 
             // first time notifications enabled
-            if (lastSeenStreamId == "") PreferenceHelper.setLatestVideoId(lastSeenStreamId)
-            else if (lastSeenStreamId != latestFeedStreamId) {
+            if (lastSeenStreamId == "") {
+                PreferenceHelper.setLatestVideoId(lastSeenStreamId)
+            } else if (lastSeenStreamId != latestFeedStreamId) {
                 // get the index of the last user-seen video
                 var newStreamIndex = -1
                 videoFeed.forEachIndexed { index, stream ->
