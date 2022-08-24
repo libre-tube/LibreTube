@@ -136,6 +136,24 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/device"
+            style="@style/AboutCard">
+
+            <LinearLayout style="@style/AboutItem">
+
+                <ImageView
+                    style="@style/AboutImageView"
+                    android:src="@drawable/ic_device" />
+
+                <TextView
+                    style="@style/AboutTextView"
+                    android:text="@string/device_info" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
 </ScrollView>

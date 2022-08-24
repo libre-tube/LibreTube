@@ -88,6 +88,10 @@ class AboutActivity : BaseActivity() {
             onLongClick(LICENSE_URL)
             true
         }
+
+        binding.device.setOnClickListener {
+            showDeviceInfo()
+        }
     }
 
     private fun openLinkFromHref(link: String) {
@@ -129,6 +133,22 @@ class AboutActivity : BaseActivity() {
             .setPositiveButton(getString(R.string.okay)) { _, _ -> }
             .setMessage(licenseHtml)
             .create()
+            .show()
+    }
+
+    private fun showDeviceInfo() {
+        val text = "Manufacturer: ${Build.MANUFACTURER}\n" +
+            "Model: ${Build.MODEL}\n" +
+            "SDK: ${Build.VERSION.SDK_INT}\n" +
+            "Board: ${Build.BOARD}\n" +
+            "OS: Android ${Build.VERSION.RELEASE}\n" +
+            "Arch: ${Build.SUPPORTED_ABIS[0]}\n" +
+            "Product: ${Build.PRODUCT}"
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.device_info)
+            .setMessage(text)
+            .setPositiveButton(R.string.okay, null)
             .show()
     }
 }

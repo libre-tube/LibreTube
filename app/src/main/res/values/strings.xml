@@ -312,4 +312,5 @@
     <string name="open_copied">Open</string>
     <string name="break_reminder_time">Minutes before being reminded</string>
     <string name="legacy_subscriptions">Legacy subscriptions view</string>
+    <string name="device_info">Device Info</string>
 </resources>
