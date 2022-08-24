@@ -310,4 +310,5 @@
     <string name="maximum_image_cache">Max. velikost mezipaměti obrázků</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="open_copied">Otevřít</string>
+    <string name="break_reminder_time">Minuty před připomenutím</string>
 </resources>
