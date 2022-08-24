@@ -311,4 +311,6 @@
     <string name="copied_to_clipboard">הועתק ללוח גזירים</string>
     <string name="open_copied">פתיחה</string>
     <string name="break_reminder_time">דקות לפני התזכורת</string>
+    <string name="legacy_subscriptions">תצוגת מינויים מיושנת</string>
+    <string name="device_info">פרטי מכשיר</string>
 </resources>
