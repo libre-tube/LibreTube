@@ -55,7 +55,11 @@ class MyApp : Application() {
         /**
          * Initialize the notification listener in the background
          */
-        NotificationHelper.enqueueWork(this, ExistingPeriodicWorkPolicy.KEEP)
+        NotificationHelper(this).enqueueWork(
+            existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP
+        )
+
+        NotificationHelper(this).checkForNewStreams()
 
         /**
          * Handler for uncaught exceptions
