@@ -59,8 +59,6 @@ class MyApp : Application() {
             existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP
         )
 
-        NotificationHelper(this).checkForNewStreams()
-
         /**
          * Handler for uncaught exceptions
          */
