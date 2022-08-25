@@ -8,7 +8,7 @@
 
     </style>
 
-    <style name="BaseTheme.Pure" parent="BaseTheme">
+    <style name="StartupTheme" parent="BaseTheme">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>
@@ -29,13 +29,6 @@
 
     </style>
 
-    <style name="Theme.Red.Pure" parent="Theme.Red">
-
-        <item name="android:colorBackground">@android:color/black</item>
-        <item name="colorSurface">@android:color/black</item>
-
-    </style>
-
     <style name="Theme.Blue" parent="BaseTheme">
 
         <item name="colorPrimary">@color/blue_dark_accentLight</item>
@@ -47,13 +40,6 @@
         <item name="colorSecondaryContainer">@color/blue_dark_accentDark</item>
         <item name="android:colorBackground">@color/blue_dark_background</item>
         <item name="colorOnBackground">@color/blue_dark_background</item>
-
-    </style>
-
-    <style name="Theme.Blue.Pure" parent="Theme.Blue">
-
-        <item name="android:colorBackground">@android:color/black</item>
-        <item name="colorSurface">@android:color/black</item>
 
     </style>
 
@@ -71,13 +57,6 @@
 
     </style>
 
-    <style name="Theme.Yellow.Pure" parent="Theme.Yellow">
-
-        <item name="android:colorBackground">@android:color/black</item>
-        <item name="colorSurface">@android:color/black</item>
-
-    </style>
-
     <style name="Theme.Green" parent="BaseTheme">
 
         <item name="colorPrimary">@color/green_dark_accentLight</item>
@@ -89,13 +68,6 @@
         <item name="colorSecondaryContainer">@color/green_dark_accentDark</item>
         <item name="android:colorBackground">@color/green_dark_background</item>
         <item name="colorOnBackground">@color/green_dark_background</item>
-
-    </style>
-
-    <style name="Theme.Green.Pure" parent="Theme.Green">
-
-        <item name="android:colorBackground">@android:color/black</item>
-        <item name="colorSurface">@android:color/black</item>
 
     </style>
 
@@ -113,7 +85,7 @@
 
     </style>
 
-    <style name="Theme.Purple.Pure" parent="Theme.Purple">
+    <style name="Pure">
 
         <item name="android:colorBackground">@android:color/black</item>
         <item name="colorSurface">@android:color/black</item>

@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.app.Activity
 import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
@@ -22,10 +23,10 @@ object ThemeHelper {
      */
     fun updateTheme(activity: AppCompatActivity) {
         val themeMode = PreferenceHelper.getString(PreferenceKeys.THEME_MODE, "A")
-        val pureThemeEnabled = PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)
 
-        updateAccentColor(activity, pureThemeEnabled)
+        updateAccentColor(activity)
         applyDynamicColorsIfEnabled(activity)
+        applyPureThemeIfEnabled(activity)
         updateThemeMode(themeMode)
     }
 
@@ -33,8 +34,7 @@ object ThemeHelper {
      * Update the accent color of the app
      */
     private fun updateAccentColor(
-        activity: AppCompatActivity,
-        pureThemeEnabled: Boolean
+        activity: AppCompatActivity
     ) {
         val theme = when (
             PreferenceHelper.getString(
@@ -43,13 +43,13 @@ object ThemeHelper {
             )
         ) {
             // set the accent color, use the pure black/white theme if enabled
-            "my" -> if (pureThemeEnabled) R.style.BaseTheme_Pure else R.style.BaseTheme
-            "red" -> if (pureThemeEnabled) R.style.Theme_Red_Pure else R.style.Theme_Red
-            "blue" -> if (pureThemeEnabled) R.style.Theme_Blue_Pure else R.style.Theme_Blue
-            "yellow" -> if (pureThemeEnabled) R.style.Theme_Yellow_Pure else R.style.Theme_Yellow
-            "green" -> if (pureThemeEnabled) R.style.Theme_Green_Pure else R.style.Theme_Green
-            "purple" -> if (pureThemeEnabled) R.style.Theme_Purple_Pure else R.style.Theme_Purple
-            else -> if (pureThemeEnabled) R.style.Theme_Purple_Pure else R.style.Theme_Purple
+            "my" -> R.style.BaseTheme
+            "red" -> R.style.Theme_Red
+            "blue" -> R.style.Theme_Blue
+            "yellow" -> R.style.Theme_Yellow
+            "green" -> R.style.Theme_Green
+            "purple" -> R.style.Theme_Purple
+            else -> R.style.Theme_Purple
         }
         activity.setTheme(theme)
     }
@@ -63,7 +63,20 @@ object ThemeHelper {
                 PreferenceKeys.ACCENT_COLOR,
                 "purple"
             ) == "my"
-        ) DynamicColors.applyToActivityIfAvailable(activity)
+        ) {
+            DynamicColors.applyToActivityIfAvailable(activity)
+        }
+    }
+
+    /**
+     * apply the pure black/white theme
+     */
+    private fun applyPureThemeIfEnabled(activity: Activity) {
+        val pureThemeEnabled = PreferenceHelper.getBoolean(
+            PreferenceKeys.PURE_THEME,
+            false
+        )
+        if (pureThemeEnabled) activity.theme.applyStyle(R.style.Pure, true)
     }
 
     /**
