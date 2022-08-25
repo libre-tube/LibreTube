@@ -311,4 +311,6 @@
     <string name="open_copied">Açık</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="break_reminder_time">Hatırlatmadan önce dakikalar</string>
+    <string name="device_info">Cihaz Bilgisi</string>
+    <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
 </resources>
