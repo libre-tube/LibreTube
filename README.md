@@ -75,14 +75,6 @@ If opening an issue without following the issue template, we will ignore the iss
 <img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
 </a>
 
-### 💰 Donate
-
-[![Support us on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dlibretubeteam%26type%3Dpatrons&style=for-the-badge)](https://patreon.com/libretubeteam)
-
-**BTC:** `bc1q0hk2smc74ej8fxupfrp05wk867e54e2zztnxfc`
-
-**XMR:** `44txdmy4E5bDzMYQJh1ZSoHbrp1sWfpGa2FYg26L2ya8EaRejPsh42yVrYhepW9P4YWvrqmTZvms35z5FDgqy1xcVewk18d`
-
 ## 🔒 Privacy Policy and Disclaimer
 
 The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent. 
