@@ -310,4 +310,7 @@
     <string name="copied_to_clipboard">تم نسخها إلى الحافظة</string>
     <string name="maximum_image_cache">الحد الأقصى لحجم ذاكرة التخزين المؤقت للصور</string>
     <string name="open_copied">فتح</string>
+    <string name="break_reminder_time">دقائق قبل التذكير</string>
+    <string name="legacy_subscriptions">طريقة عرض الاشتراكات القديمة</string>
+    <string name="device_info">معلومات الجهاز</string>
 </resources>
