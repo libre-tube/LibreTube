@@ -16,10 +16,10 @@ object ImageHelper {
      * Initialize the image loader
      */
     fun initializeImageLoader(context: Context) {
-        val maxImageCacheSize = PreferenceHelper.getInt(
+        val maxImageCacheSize = PreferenceHelper.getString(
             PreferenceKeys.MAX_IMAGE_CACHE,
-            128
-        )
+            "128"
+        ).toInt()
 
         val diskCache = DiskCache.Builder()
             .directory(context.filesDir.resolve("coil"))

@@ -38,7 +38,8 @@ class GeneralSettings : MaterialPreferenceFragment() {
             true
         }
 
-        val breakReminder = findPreference<SwitchPreferenceCompat>(PreferenceKeys.BREAK_REMINDER_TOGGLE)
+        val breakReminder =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.BREAK_REMINDER_TOGGLE)
         val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.BREAK_REMINDER)
         breakReminderTime?.isEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.BREAK_REMINDER_TOGGLE,
