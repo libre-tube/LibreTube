@@ -25,6 +25,7 @@ object ThemeHelper {
         val pureThemeEnabled = PreferenceHelper.getBoolean(PreferenceKeys.PURE_THEME, false)
 
         updateAccentColor(activity, pureThemeEnabled)
+        applyDynamicColorsIfEnabled(activity)
         updateThemeMode(themeMode)
     }
 
@@ -41,15 +42,8 @@ object ThemeHelper {
                 "purple"
             )
         ) {
-            "my" -> {
-                applyDynamicColors(activity)
-                if (pureThemeEnabled) {
-                    R.style.BaseTheme_Pure
-                } else {
-                    R.style.BaseTheme
-                }
-            }
-            // set the theme, use the pure theme if enabled
+            // set the accent color, use the pure black/white theme if enabled
+            "my" -> if (pureThemeEnabled) R.style.BaseTheme_Pure else R.style.BaseTheme
             "red" -> if (pureThemeEnabled) R.style.Theme_Red_Pure else R.style.Theme_Red
             "blue" -> if (pureThemeEnabled) R.style.Theme_Blue_Pure else R.style.Theme_Blue
             "yellow" -> if (pureThemeEnabled) R.style.Theme_Yellow_Pure else R.style.Theme_Yellow
@@ -63,8 +57,13 @@ object ThemeHelper {
     /**
      * apply dynamic colors to the activity
      */
-    private fun applyDynamicColors(activity: AppCompatActivity) {
-        DynamicColors.applyToActivityIfAvailable(activity)
+    private fun applyDynamicColorsIfEnabled(activity: AppCompatActivity) {
+        if (
+            PreferenceHelper.getString(
+                PreferenceKeys.ACCENT_COLOR,
+                "purple"
+            ) == "my"
+        ) DynamicColors.applyToActivityIfAvailable(activity)
     }
 
     /**
