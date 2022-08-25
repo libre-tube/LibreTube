@@ -32,7 +32,7 @@ object PreferenceHelper {
     }
 
     fun putString(key: String?, value: String) {
-        editor.putString(key, value)
+        editor.putString(key, value).commit()
     }
 
     fun getString(key: String?, defValue: String?): String {
