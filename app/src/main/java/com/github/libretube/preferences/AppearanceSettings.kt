@@ -78,8 +78,10 @@ class AppearanceSettings : MaterialPreferenceFragment() {
             true
         }
 
-        val legacySubscriptionView = findPreference<SwitchPreferenceCompat>(PreferenceKeys.LEGACY_SUBSCRIPTIONS)
-        val legacySubscriptionColumns = findPreference<ListPreference>(PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS)
+        val legacySubscriptionView =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.LEGACY_SUBSCRIPTIONS)
+        val legacySubscriptionColumns =
+            findPreference<ListPreference>(PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS)
         legacySubscriptionColumns?.isVisible = legacySubscriptionView?.isChecked!!
         legacySubscriptionView.setOnPreferenceChangeListener { _, newValue ->
             legacySubscriptionColumns?.isVisible = newValue as Boolean

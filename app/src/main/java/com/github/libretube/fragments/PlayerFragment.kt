@@ -979,7 +979,8 @@ class PlayerFragment : BaseFragment() {
             try {
                 position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
                 if (position!! < streams.duration!! * 0.9) position = null
-            } catch (e: Exception) {}
+            } catch (e: Exception) {
+            }
         }.await()
         if (position != null) exoPlayer.seekTo(position!!)
     }
