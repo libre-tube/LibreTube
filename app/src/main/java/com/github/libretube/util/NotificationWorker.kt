@@ -12,7 +12,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
     override fun doWork(): Result {
         // check whether there are new streams and notify if there are some
-        val result = NotificationHelper.checkForNewStreams(applicationContext)
+        val result = NotificationHelper(applicationContext)
+            .checkForNewStreams()
         // return success if the API request succeeded
         return if (result) Result.success() else Result.retry()
     }

@@ -33,9 +33,9 @@ class NotificationSettings : MaterialPreferenceFragment() {
 
     private fun updateNotificationPrefs() {
         // replace the previous queued work request
-        NotificationHelper.enqueueWork(
-            requireContext(),
-            ExistingPeriodicWorkPolicy.REPLACE
-        )
+        NotificationHelper(requireContext())
+            .enqueueWork(
+                existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.REPLACE
+            )
     }
 }
