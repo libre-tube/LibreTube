@@ -36,7 +36,6 @@ import com.github.libretube.models.SearchViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
-import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -54,9 +53,6 @@ class MainActivity : BaseActivity() {
     lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // set the language
-        LocaleHelper.updateLanguage(this)
-
         super.onCreate(savedInstanceState)
 
         autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
