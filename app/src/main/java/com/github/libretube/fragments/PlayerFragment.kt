@@ -43,6 +43,7 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -509,17 +510,17 @@ class PlayerFragment : BaseFragment() {
         }
 
         override fun onPlaybackSpeedClicked() {
-            val playbackSpeeds = context?.resources?.getStringArray(R.array.playbackSpeed)!!
-            val playbackSpeedValues =
-                context?.resources?.getStringArray(R.array.playbackSpeedValues)!!
-
+            val playbackSpeedBinding = DialogSliderBinding.inflate(layoutInflater)
+            playbackSpeedBinding.slider.value = exoPlayer.playbackParameters.speed
             // change playback speed dialog
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_playback_speed)
-                .setItems(playbackSpeeds) { _, index ->
-                    // set the new playback speed
-                    val newPlaybackSpeed = playbackSpeedValues[index].toFloat()
-                    exoPlayer.setPlaybackSpeed(newPlaybackSpeed)
+                .setView(playbackSpeedBinding.root)
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.okay) { _, _ ->
+                    exoPlayer.setPlaybackSpeed(
+                        playbackSpeedBinding.slider.value
+                    )
                 }
                 .show()
         }
@@ -598,11 +599,7 @@ class PlayerFragment : BaseFragment() {
                         context.getString(R.string.none)
                     }
                 // set the playback speed
-                val playbackSpeeds = context.resources.getStringArray(R.array.playbackSpeed)
-                val playbackSpeedValues =
-                    context.resources.getStringArray(R.array.playbackSpeedValues)
-                val playbackSpeed = exoPlayer.playbackParameters.speed.toString()
-                currentPlaybackSpeed = playbackSpeeds[playbackSpeedValues.indexOf(playbackSpeed)]
+                currentPlaybackSpeed = "${exoPlayer.playbackParameters.speed}x"
                 // set the quality text
                 val isAdaptive = exoPlayer.videoFormat?.codecs != null
                 val quality = exoPlayer.videoSize.height

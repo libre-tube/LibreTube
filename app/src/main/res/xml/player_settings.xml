@@ -44,14 +44,11 @@
 
     <PreferenceCategory app:title="@string/player">
 
-        <ListPreference
+        <com.github.libretube.extensions.SliderPreference
             android:icon="@drawable/ic_speed"
             app:defaultValue="1.0"
-            app:entries="@array/playbackSpeed"
-            app:entryValues="@array/playbackSpeedValues"
             app:key="playback_speed"
-            app:title="@string/playback_speed"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/playback_speed" />
 
         <ListPreference
             android:icon="@drawable/ic_skip"
@@ -137,14 +134,11 @@
 
     <PreferenceCategory app:title="@string/background_mode">
 
-        <ListPreference
+        <com.github.libretube.extensions.SliderPreference
             android:icon="@drawable/ic_speed"
             app:defaultValue="1.0"
-            app:entries="@array/playbackSpeed"
-            app:entryValues="@array/playbackSpeedValues"
             app:key="background_playback_speed"
-            app:title="@string/playback_speed"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/playback_speed" />
 
     </PreferenceCategory>
 
