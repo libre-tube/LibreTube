@@ -134,8 +134,11 @@ class SubscriptionsFragment : BaseFragment() {
             else -> feed
         }
 
-        binding.subFeedContainer.visibility = if (viewModel.videoFeed.value!!.isEmpty()) View.GONE else View.VISIBLE
-        binding.emptyFeed.visibility = if (viewModel.videoFeed.value!!.isEmpty()) View.VISIBLE else View.GONE
+        binding.subChannelsContainer.visibility = View.GONE
+        binding.subFeedContainer.visibility =
+            if (viewModel.videoFeed.value!!.isEmpty()) View.GONE else View.VISIBLE
+        binding.emptyFeed.visibility =
+            if (viewModel.videoFeed.value!!.isEmpty()) View.VISIBLE else View.GONE
 
         binding.subProgress.visibility = View.GONE
         subscriptionAdapter = TrendingAdapter(sortedFeed, childFragmentManager, false)
@@ -169,6 +172,7 @@ class SubscriptionsFragment : BaseFragment() {
             viewModel.subscriptions.value!!.toMutableList()
         )
 
+        binding.subFeedContainer.visibility = View.GONE
         binding.subChannelsContainer.visibility =
             if (viewModel.subscriptions.value!!.isEmpty()) View.GONE else View.VISIBLE
         binding.emptyFeed.visibility =
@@ -176,6 +180,6 @@ class SubscriptionsFragment : BaseFragment() {
     }
 
     private fun isShowingFeed(): Boolean {
-        return binding.subFeedContainer.isVisible
+        return !binding.subChannelsContainer.isVisible
     }
 }
