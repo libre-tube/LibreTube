@@ -28,7 +28,7 @@ class LibraryFragment : BaseFragment() {
 
     lateinit var token: String
     private lateinit var binding: FragmentLibraryBinding
-    val playerViewModel: PlayerViewModel by activityViewModels()
+    private val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +88,7 @@ class LibraryFragment : BaseFragment() {
         }
     }
 
-    fun updateFABMargin() {
+    private fun updateFABMargin() {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
         val bottomMargin = if (playerViewModel.isMiniPlayerVisible.value == true) 180 else 64
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams

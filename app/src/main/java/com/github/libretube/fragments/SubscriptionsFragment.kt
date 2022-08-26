@@ -1,46 +1,30 @@
 package com.github.libretube.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.LegacySubscriptionAdapter
 import com.github.libretube.adapters.SubscriptionChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.extensions.BaseFragment
-import com.github.libretube.extensions.TAG
-import com.github.libretube.obj.StreamItem
+import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.toID
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
-import java.io.IOException
 
 class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
+    private val viewModel: SubscriptionsViewModel by activityViewModels()
 
-    lateinit var token: String
-    private var isLoaded = false
     private var subscriptionAdapter: TrendingAdapter? = null
-    private var feed: List<StreamItem> = listOf()
     private var sortOrder = "most_recent"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +37,6 @@ class SubscriptionsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        token = PreferenceHelper.getToken()
 
         binding.subRefresh.isEnabled = true
 
@@ -63,12 +46,22 @@ class SubscriptionsFragment : BaseFragment() {
             PreferenceKeys.GRID_COLUMNS,
             resources.getInteger(R.integer.grid_items).toString()
         )
+
         binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
-        fetchFeed()
+
+        if (viewModel.videoFeed.value == null) viewModel.fetchFeed()
+
+        viewModel.videoFeed.observe(viewLifecycleOwner) {
+            if (it != null) showFeed()
+        }
+
+        viewModel.subscriptions.observe(viewLifecycleOwner) {
+            if (it != null) showSubscriptions()
+        }
 
         binding.subRefresh.setOnRefreshListener {
-            fetchChannels()
-            fetchFeed()
+            viewModel.fetchSubscriptions()
+            viewModel.fetchFeed()
         }
 
         binding.sortTV.setOnClickListener {
@@ -76,14 +69,14 @@ class SubscriptionsFragment : BaseFragment() {
         }
 
         binding.toggleSubs.visibility = View.VISIBLE
-        var loadedSubbedChannels = false
 
         binding.toggleSubs.setOnClickListener {
             if (!binding.subChannelsContainer.isVisible) {
-                if (!loadedSubbedChannels) {
-                    binding.subChannels.layoutManager = LinearLayoutManager(context)
-                    fetchChannels()
-                    loadedSubbedChannels = true
+                binding.subChannels.layoutManager = LinearLayoutManager(context)
+                if (viewModel.subscriptions.value == null) {
+                    viewModel.fetchSubscriptions()
+                } else {
+                    showSubscriptions()
                 }
                 binding.subChannelsContainer.visibility = View.VISIBLE
                 binding.subFeedContainer.visibility = View.GONE
@@ -99,11 +92,10 @@ class SubscriptionsFragment : BaseFragment() {
                     == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
                 ) {
                     // scroll view is at bottom
-                    if (isLoaded) {
-                        binding.subRefresh.isRefreshing = true
-                        subscriptionAdapter?.updateItems()
-                        binding.subRefresh.isRefreshing = false
-                    }
+                    if (viewModel.videoFeed.value == null) return@addOnScrollChangedListener
+                    binding.subRefresh.isRefreshing = true
+                    subscriptionAdapter?.updateItems()
+                    binding.subRefresh.isRefreshing = false
                 }
             }
     }
@@ -122,45 +114,9 @@ class SubscriptionsFragment : BaseFragment() {
             .show()
     }
 
-    private fun fetchFeed() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                feed = try {
-                    if (token != "") {
-                        RetrofitInstance.authApi.getFeed(token)
-                    } else {
-                        RetrofitInstance.authApi.getUnauthenticatedFeed(
-                            SubscriptionHelper.getFormattedLocalSubscriptions()
-                        )
-                    }
-                } catch (e: IOException) {
-                    Log.e(TAG(), e.toString())
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launchWhenCreated
-                } finally {
-                    binding.subRefresh.isRefreshing = false
-                }
-                if (feed.isNotEmpty()) {
-                    // save the last recent video to the prefs for the notification worker
-                    PreferenceHelper.setLatestVideoId(feed[0].url.toID())
-                    // show the feed
-                    showFeed()
-                } else {
-                    runOnUiThread {
-                        binding.emptyFeed.visibility = View.VISIBLE
-                    }
-                }
-                binding.subProgress.visibility = View.GONE
-                isLoaded = true
-            }
-        }
-        run()
-    }
-
     private fun showFeed() {
+        binding.subRefresh.isRefreshing = false
+        val feed = viewModel.videoFeed.value!!
         // sort the feed
         val sortedFeed = when (sortOrder) {
             "most_recent" -> feed
@@ -171,54 +127,33 @@ class SubscriptionsFragment : BaseFragment() {
             "channel_name_za" -> feed.sortedBy { it.uploaderName }.reversed()
             else -> feed
         }
+        binding.subProgress.visibility = View.GONE
         subscriptionAdapter = TrendingAdapter(sortedFeed, childFragmentManager, false)
         binding.subFeed.adapter = subscriptionAdapter
     }
 
-    private fun fetchChannels() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    if (token != "") {
-                        RetrofitInstance.authApi.subscriptions(token)
-                    } else {
-                        RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                            SubscriptionHelper.getFormattedLocalSubscriptions()
-                        )
-                    }
-                } catch (e: IOException) {
-                    Log.e(TAG(), e.toString())
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launchWhenCreated
-                } finally {
-                    binding.subRefresh.isRefreshing = false
-                }
-                if (response.isNotEmpty()) {
-                    binding.subChannels.adapter =
-                        if (PreferenceHelper.getBoolean(
-                                PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-                                false
-                            )
-                        ) {
-                            binding.subChannels.layoutManager = GridLayoutManager(
-                                context,
-                                PreferenceHelper.getString(
-                                    PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
-                                    "4"
-                                ).toInt()
-                            )
-                            LegacySubscriptionAdapter(response)
-                        } else {
-                            SubscriptionChannelAdapter(response.toMutableList())
-                        }
-                } else {
-                    Toast.makeText(context, R.string.subscribeIsEmpty, Toast.LENGTH_SHORT).show()
-                }
+    private fun showSubscriptions() {
+        binding.subRefresh.isRefreshing = false
+        binding.subChannels.adapter =
+            if (PreferenceHelper.getBoolean(
+                    PreferenceKeys.LEGACY_SUBSCRIPTIONS,
+                    false
+                )
+            ) {
+                binding.subChannels.layoutManager = GridLayoutManager(
+                    context,
+                    PreferenceHelper.getString(
+                        PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
+                        "4"
+                    ).toInt()
+                )
+                LegacySubscriptionAdapter(
+                    viewModel.subscriptions.value!!
+                )
+            } else {
+                SubscriptionChannelAdapter(
+                    viewModel.subscriptions.value!!.toMutableList()
+                )
             }
-        }
-        run()
     }
 }
