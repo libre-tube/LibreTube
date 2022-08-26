@@ -14,25 +14,23 @@ class LogoutDialog : DialogFragment() {
     private lateinit var binding: DialogLogoutBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = MaterialAlertDialogBuilder(it)
-            binding = DialogLogoutBinding.inflate(layoutInflater)
+        binding = DialogLogoutBinding.inflate(layoutInflater)
 
-            val user = PreferenceHelper.getUsername()
+        val user = PreferenceHelper.getUsername()
 
-            binding.user.text =
-                binding.user.text.toString() + " (" + user + ")"
-            binding.logout.setOnClickListener {
-                Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
-                PreferenceHelper.setToken("")
-                dialog?.dismiss()
-                activity?.recreate()
-            }
+        binding.user.text =
+            binding.user.text.toString() + " (" + user + ")"
+        binding.logout.setOnClickListener {
+            Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
+            PreferenceHelper.setToken("")
+            dialog?.dismiss()
+            activity?.recreate()
+        }
 
-            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
+        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        return MaterialAlertDialogBuilder(requireContext())
+            .setView(binding.root)
+            .show()
     }
 }

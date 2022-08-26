@@ -21,40 +21,37 @@ class LoginDialog : DialogFragment() {
     private lateinit var binding: DialogLoginBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = MaterialAlertDialogBuilder(it)
-            // Get the layout inflater
-            binding = DialogLoginBinding.inflate(layoutInflater)
+        binding = DialogLoginBinding.inflate(layoutInflater)
 
-            binding.login.setOnClickListener {
-                if (binding.username.text.toString() != "" && binding.password.text.toString() != "") {
-                    val login =
-                        Login(binding.username.text.toString(), binding.password.text.toString())
-                    login(login)
-                } else {
-                    Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                }
+        binding.login.setOnClickListener {
+            if (binding.username.text.toString() != "" && binding.password.text.toString() != "") {
+                val login =
+                    Login(binding.username.text.toString(), binding.password.text.toString())
+                login(login)
+            } else {
+                Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
-            binding.register.setOnClickListener {
-                if (
-                    binding.username.text.toString() != "" &&
-                    binding.password.text.toString() != ""
-                ) {
-                    val login = Login(
-                        binding.username.text.toString(),
-                        binding.password.text.toString()
-                    )
-                    register(login)
-                } else {
-                    Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                }
+        }
+        binding.register.setOnClickListener {
+            if (
+                binding.username.text.toString() != "" &&
+                binding.password.text.toString() != ""
+            ) {
+                val login = Login(
+                    binding.username.text.toString(),
+                    binding.password.text.toString()
+                )
+                register(login)
+            } else {
+                Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
+        }
 
-            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
+        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        return MaterialAlertDialogBuilder(requireContext())
+            .setView(binding.root)
+            .show()
     }
 
     private fun login(login: Login) {
