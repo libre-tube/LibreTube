@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -25,7 +26,10 @@ import java.util.concurrent.TimeUnit
 class NotificationHelper(
     private val context: Context
 ) {
-    private var notificationId = 1
+    val NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    // the id where notification channels start
+    private var notificationId = NotificationManager.activeNotifications.size + 5
 
     /**
      * Enqueue the work manager task
@@ -34,7 +38,7 @@ class NotificationHelper(
         existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy
     ) {
         // get the notification preferences
-        PreferenceHelper.setContext(context)
+        PreferenceHelper.initialize(context)
         val notificationsEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.NOTIFICATION_ENABLED,
             true
@@ -90,7 +94,7 @@ class NotificationHelper(
      * check whether new streams are available in subscriptions
      */
     fun checkForNewStreams(): Boolean {
-        var result = true
+        var success = true
 
         val token = PreferenceHelper.getToken()
         runBlocking {
@@ -107,7 +111,7 @@ class NotificationHelper(
             val videoFeed = try {
                 task.await()
             } catch (e: Exception) {
-                result = false
+                success = false
                 return@runBlocking
             }
 
@@ -135,9 +139,10 @@ class NotificationHelper(
             val channelGroups = newVideos.groupBy { it.uploaderUrl }
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
-                createGroupSummaryNotification(
+                createNotification(
                     group = streams[0].uploaderUrl.toID(),
-                    uploaderName = streams[0].uploaderName.toString()
+                    title = streams[0].uploaderName.toString(),
+                    isSummary = true
                 )
 
                 streams.forEach { streamItem ->
@@ -149,9 +154,11 @@ class NotificationHelper(
                     )
                 }
             }
+            // save the latest streams that got notified about
+            PreferenceHelper.setLatestVideoId(videoFeed[0].url.toID())
         }
         // return whether the work succeeded
-        return result
+        return success
     }
 
     /**
@@ -159,8 +166,9 @@ class NotificationHelper(
      */
     private fun createNotification(
         title: String,
-        description: String,
-        group: String
+        group: String,
+        description: String? = null,
+        isSummary: Boolean = false
     ) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -174,33 +182,22 @@ class NotificationHelper(
 
         val builder = NotificationCompat.Builder(context, PUSH_CHANNEL_ID)
             .setContentTitle(title)
-            .setContentText(description)
             .setGroup(group)
             .setSmallIcon(R.drawable.ic_notification)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             // Set the intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+
+        if (isSummary) {
+            builder.setGroupSummary(true)
+        } else {
+            builder.setContentText(description)
+        }
+
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define
             notify(notificationId, builder.build())
-        }
-    }
-
-    private fun createGroupSummaryNotification(
-        uploaderName: String,
-        group: String
-    ) {
-        val summaryNotification = NotificationCompat.Builder(context, PUSH_CHANNEL_ID)
-            .setContentTitle(uploaderName)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setGroup(group)
-            .setGroupSummary(true)
-            .build()
-
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(notificationId, summaryNotification)
         }
     }
 }
