@@ -108,7 +108,7 @@
     <string name="color_green">Pěkná zelená</string>
     <string name="color_purple">Příjemná fialová</string>
     <string name="oledTheme">Černý</string>
-    <string name="material_you">Mystický Material 3</string>
+    <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Upozornění</string>
     <string name="enabled">Zap</string>
     <string name="disabled">Vyp</string>
@@ -283,7 +283,7 @@
     <string name="error_occurred">Chyba</string>
     <string name="copied">Zkopírováno</string>
     <string name="downloadsucceeded">Stahování bylo úspěšné</string>
-    <string name="share_with_time">Sdílet s počátečním časem</string>
+    <string name="share_with_time">Sdílet s časovou značkou</string>
     <string name="export_subscriptions">Exportovat odběry</string>
     <string name="skip_buttons">Tlačítka přeskočení</string>
     <string name="history_size">Maximální velikost historie</string>

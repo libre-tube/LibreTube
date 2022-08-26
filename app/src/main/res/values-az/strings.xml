@@ -108,7 +108,7 @@
     <string name="color_green">Möhtəşəm yaşıl</string>
     <string name="color_purple">Zövqlü bənövşəyi</string>
     <string name="oledTheme">Qara</string>
-    <string name="material_you">Mistik Material 3</string>
+    <string name="material_you">Öz Dizaynı</string>
     <string name="sponsorblock_notifications">Bildirişlər</string>
     <string name="enabled">Açıq</string>
     <string name="disabled">Bağlı</string>
@@ -283,7 +283,7 @@
     <string name="copied">Kopyalandı</string>
     <string name="error_occurred">Xəta</string>
     <string name="downloadsucceeded">Uğurla endirildi</string>
-    <string name="share_with_time">Başlama vaxtı ilə paylaşın</string>
+    <string name="share_with_time">Vaxt kodu ilə paylaşın</string>
     <string name="export_subscriptions">Abunəlikləri ixrac edin</string>
     <string name="skip_buttons">Düymələri keçin</string>
     <string name="skip_buttons_summary">Növbəti və ya əvvəlki videoya keçmək üçün düymələri göstərin.</string>

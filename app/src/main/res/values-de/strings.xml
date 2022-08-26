@@ -251,4 +251,10 @@
     <string name="captions">Untertitel</string>
     <string name="seek_increment">Vorspul-Länge</string>
     <string name="watch_positions_title">Gemerkte Wiedergabepositionen</string>
+    <string name="gradientIcon">Glatter Verlauf</string>
+    <string name="playingOnBackground">Spielt im Hintergrund…</string>
+    <string name="playerAudioQuality">Audio Qualität</string>
+    <string name="worst_quality">Schlechte Qualität</string>
+    <string name="system_caption_style">System Untertitel</string>
+    <string name="playerAudioFormat">Audioformat für Player</string>
 </resources>

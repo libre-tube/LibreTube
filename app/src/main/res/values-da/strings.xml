@@ -137,7 +137,7 @@
     <string name="oledTheme">Sort</string>
     <string name="enabled">På</string>
     <string name="color_purple">Lemfældig lilla</string>
-    <string name="material_you">Mystisk Materiel 3</string>
+    <string name="material_you">Material You</string>
     <string name="update_summary">Klik for at finde ud af, om appen er opdateret.</string>
     <string name="piped">Piped</string>
     <string name="app_uptodate">Kører den seneste version.</string>
@@ -310,4 +310,7 @@
     <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
     <string name="maximum_image_cache">Maks. billedcachestørrelse</string>
     <string name="open_copied">Åben</string>
+    <string name="break_reminder_time">Minutter før påmindelse</string>
+    <string name="legacy_subscriptions">Ældre abonnementsvisning</string>
+    <string name="device_info">Enhedsoplysninger</string>
 </resources>
