@@ -981,7 +981,8 @@ class PlayerFragment : BaseFragment() {
         Thread {
             try {
                 position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
-                if (position!! < streams.duration!! * 0.9) position = null
+                // position is almost the end of the video => don't seek, start from beginning
+                if (position!! > streams.duration!! * 1000 * 0.9) position = null
             } catch (e: Exception) {
             }
         }.await()
