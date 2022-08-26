@@ -604,8 +604,10 @@ class PlayerFragment : BaseFragment() {
                         context.getString(R.string.none)
                     }
                 // set the playback speed
-                currentPlaybackSpeed = "${exoPlayer.playbackParameters.speed.toString()
-                    .replace(".0", "")}x"
+                currentPlaybackSpeed = "${
+                exoPlayer.playbackParameters.speed.toString()
+                    .replace(".0", "")
+                }x"
                 // set the quality text
                 val isAdaptive = exoPlayer.videoFormat?.codecs != null
                 val quality = exoPlayer.videoSize.height

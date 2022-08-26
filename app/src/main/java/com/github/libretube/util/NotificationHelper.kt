@@ -26,7 +26,8 @@ import java.util.concurrent.TimeUnit
 class NotificationHelper(
     private val context: Context
 ) {
-    val NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    val NotificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     // the id where notification channels start
     private var notificationId = NotificationManager.activeNotifications.size + 5

@@ -163,14 +163,18 @@ class SubscriptionsFragment : BaseFragment() {
                     "4"
                 ).toInt()
             )
-        } else LinearLayoutManager(context)
+        } else {
+            LinearLayoutManager(context)
+        }
 
         // set the adapter of the subscribed channels
         binding.subChannels.adapter = if (legacySubscriptions) {
             LegacySubscriptionAdapter(viewModel.subscriptions.value!!)
-        } else SubscriptionChannelAdapter(
-            viewModel.subscriptions.value!!.toMutableList()
-        )
+        } else {
+            SubscriptionChannelAdapter(
+                viewModel.subscriptions.value!!.toMutableList()
+            )
+        }
 
         binding.subFeedContainer.visibility = View.GONE
         binding.subChannelsContainer.visibility =
