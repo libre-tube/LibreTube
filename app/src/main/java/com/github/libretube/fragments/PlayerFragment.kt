@@ -1201,8 +1201,11 @@ class PlayerFragment : BaseFragment() {
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
         }
+
+        // update the subscribed state
+        isSubscribed()
+
         if (token != "") {
-            isSubscribed()
             binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddToPlaylistDialog()
                 val bundle = Bundle()
