@@ -37,6 +37,13 @@ class VideoOptionsDialog(
             context?.getString(R.string.share)
         )
 
+        // remove the add to playlist option if not logged in
+        if (PreferenceHelper.getToken() == "") {
+            optionsList.remove(
+                context?.getString(R.string.addToPlaylist)
+
+            )
+        }
         /**
          * Check whether the player is running by observing the notification
          */
