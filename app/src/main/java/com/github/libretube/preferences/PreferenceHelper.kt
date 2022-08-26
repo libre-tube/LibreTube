@@ -23,7 +23,7 @@ object PreferenceHelper {
     /**
      * set the context that is being used to access the shared preferences
      */
-    fun setContext(context: Context) {
+    fun initialize(context: Context) {
         settings = getDefaultSharedPreferences(context)
         editor = settings.edit()
 

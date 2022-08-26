@@ -34,7 +34,7 @@ class MyApp : Application() {
         /**
          * Initialize the [PreferenceHelper]
          */
-        PreferenceHelper.setContext(applicationContext)
+        PreferenceHelper.initialize(applicationContext)
 
         /**
          * Initialize the [DatabaseHolder]
