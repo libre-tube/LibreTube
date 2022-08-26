@@ -19,27 +19,25 @@ class DeleteAccountDialog : DialogFragment() {
     private lateinit var binding: DialogDeleteAccountBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = MaterialAlertDialogBuilder(it)
-            binding = DialogDeleteAccountBinding.inflate(layoutInflater)
+        binding = DialogDeleteAccountBinding.inflate(layoutInflater)
 
-            binding.cancelButton.setOnClickListener {
-                dialog?.dismiss()
+        binding.cancelButton.setOnClickListener {
+            dialog?.dismiss()
+        }
+
+        binding.deleteAccountConfirm.setOnClickListener {
+            if (binding.deletePassword.text.toString() != "") {
+                deleteAccount(binding.deletePassword.text.toString())
+            } else {
+                Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
+        }
 
-            binding.deleteAccountConfirm.setOnClickListener {
-                if (binding.deletePassword.text.toString() != "") {
-                    deleteAccount(binding.deletePassword.text.toString())
-                } else {
-                    Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
-                }
-            }
+        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
-
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        return MaterialAlertDialogBuilder(requireContext())
+            .setView(binding.root)
+            .show()
     }
 
     private fun deleteAccount(password: String) {

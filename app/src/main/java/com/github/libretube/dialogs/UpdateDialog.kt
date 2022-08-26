@@ -18,27 +18,25 @@ class UpdateDialog(
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(context?.getString(R.string.update_available, updateInfo.name))
-                .setMessage(context?.getString(R.string.update_now))
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(context?.getString(R.string.okay)) { _, _ ->
-                    val downloadUrl = getDownloadUrl(updateInfo)
-                    Log.i("downloadUrl", downloadUrl.toString())
-                    if (downloadUrl != null) {
-                        PermissionHelper.requestReadWrite(requireActivity())
-                        val intent = Intent(context, UpdateService::class.java)
-                        intent.putExtra("downloadUrl", downloadUrl)
-                        context?.startService(intent)
-                    } else {
-                        val uri = Uri.parse(updateInfo.html_url)
-                        val intent = Intent(Intent.ACTION_VIEW).setData(uri)
-                        startActivity(intent)
-                    }
+        return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(context?.getString(R.string.update_available, updateInfo.name))
+            .setMessage(context?.getString(R.string.update_now))
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(context?.getString(R.string.okay)) { _, _ ->
+                val downloadUrl = getDownloadUrl(updateInfo)
+                Log.i("downloadUrl", downloadUrl.toString())
+                if (downloadUrl != null) {
+                    PermissionHelper.requestReadWrite(requireActivity())
+                    val intent = Intent(context, UpdateService::class.java)
+                    intent.putExtra("downloadUrl", downloadUrl)
+                    context?.startService(intent)
+                } else {
+                    val uri = Uri.parse(updateInfo.html_url)
+                    val intent = Intent(Intent.ACTION_VIEW).setData(uri)
+                    startActivity(intent)
                 }
-                .create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+            }
+            .show()
     }
 
     private fun getDownloadUrl(updateInfo: UpdateInfo): String? {

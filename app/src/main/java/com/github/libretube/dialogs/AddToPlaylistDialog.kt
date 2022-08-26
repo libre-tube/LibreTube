@@ -29,21 +29,17 @@ class AddToPlaylistDialog : DialogFragment() {
     private lateinit var token: String
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            videoId = arguments?.getString("videoId")!!
-            val builder = MaterialAlertDialogBuilder(it)
-            // Get the layout inflater
-            binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
+        videoId = arguments?.getString("videoId")!!
+        binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
+        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            token = PreferenceHelper.getToken()
+        token = PreferenceHelper.getToken()
 
-            if (token != "") fetchPlaylists()
+        if (token != "") fetchPlaylists()
 
-            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
-
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        return MaterialAlertDialogBuilder(requireContext())
+            .setView(binding.root)
+            .show()
     }
 
     private fun fetchPlaylists() {

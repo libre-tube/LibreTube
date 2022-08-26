@@ -28,29 +28,27 @@ class DownloadDialog(
     private lateinit var binding: DialogDownloadBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = MaterialAlertDialogBuilder(it)
-            binding = DialogDownloadBinding.inflate(layoutInflater)
+        binding = DialogDownloadBinding.inflate(layoutInflater)
 
-            fetchAvailableSources()
+        fetchAvailableSources()
 
-            PermissionHelper.requestReadWrite(requireActivity())
+        PermissionHelper.requestReadWrite(requireActivity())
 
-            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
+        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            binding.audioRadio.setOnClickListener {
-                binding.videoSpinner.visibility = View.GONE
-                binding.audioSpinner.visibility = View.VISIBLE
-            }
+        binding.audioRadio.setOnClickListener {
+            binding.videoSpinner.visibility = View.GONE
+            binding.audioSpinner.visibility = View.VISIBLE
+        }
 
-            binding.videoRadio.setOnClickListener {
-                binding.audioSpinner.visibility = View.GONE
-                binding.videoSpinner.visibility = View.VISIBLE
-            }
+        binding.videoRadio.setOnClickListener {
+            binding.audioSpinner.visibility = View.GONE
+            binding.videoSpinner.visibility = View.VISIBLE
+        }
 
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        return MaterialAlertDialogBuilder(requireContext())
+            .setView(binding.root)
+            .show()
     }
 
     private fun fetchAvailableSources() {

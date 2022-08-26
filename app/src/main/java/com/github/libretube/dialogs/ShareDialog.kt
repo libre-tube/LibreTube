@@ -21,49 +21,47 @@ class ShareDialog(
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            var shareOptions = arrayOf(
-                getString(R.string.piped),
-                getString(R.string.youtube)
-            )
-            val instanceUrl = getCustomInstanceFrontendUrl()
+        var shareOptions = arrayOf(
+            getString(R.string.piped),
+            getString(R.string.youtube)
+        )
+        val instanceUrl = getCustomInstanceFrontendUrl()
 
-            // add instanceUrl option if custom instance frontend url available
-            if (instanceUrl != "") shareOptions += getString(R.string.instance)
+        // add instanceUrl option if custom instance frontend url available
+        if (instanceUrl != "") shareOptions += getString(R.string.instance)
 
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(context?.getString(R.string.share))
-                .setItems(
-                    shareOptions
-                ) { _, which ->
-                    val host = when (which) {
-                        0 -> PIPED_FRONTEND_URL
-                        1 -> YOUTUBE_FRONTEND_URL
-                        // only available for custom instances
-                        else -> instanceUrl
-                    }
-                    val path = if (!isPlaylist) "/watch?v=$id" else "/playlist?list=$id"
-                    var url = "$host$path"
-                    if (PreferenceHelper.getBoolean(
-                            PreferenceKeys.SHARE_WITH_TIME_CODE,
-                            true
-                        )
-                    ) {
-                        url += "?t=$position"
-                    }
-
-                    val intent = Intent()
-                    intent.apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, url)
-                        type = "text/plain"
-                    }
-                    context?.startActivity(
-                        Intent.createChooser(intent, context?.getString(R.string.shareTo))
-                    )
+        return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(context?.getString(R.string.share))
+            .setItems(
+                shareOptions
+            ) { _, which ->
+                val host = when (which) {
+                    0 -> PIPED_FRONTEND_URL
+                    1 -> YOUTUBE_FRONTEND_URL
+                    // only available for custom instances
+                    else -> instanceUrl
                 }
-                .show()
-        } ?: throw IllegalStateException("Activity cannot be null")
+                val path = if (!isPlaylist) "/watch?v=$id" else "/playlist?list=$id"
+                var url = "$host$path"
+                if (PreferenceHelper.getBoolean(
+                        PreferenceKeys.SHARE_WITH_TIME_CODE,
+                        true
+                    )
+                ) {
+                    url += "?t=$position"
+                }
+
+                val intent = Intent()
+                intent.apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, url)
+                    type = "text/plain"
+                }
+                context?.startActivity(
+                    Intent.createChooser(intent, context?.getString(R.string.shareTo))
+                )
+            }
+            .show()
     }
 
     // get the frontend url if it's a custom instance

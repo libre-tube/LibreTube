@@ -23,32 +23,30 @@ class CreatePlaylistDialog : DialogFragment() {
     private lateinit var binding: DialogCreatePlaylistBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = MaterialAlertDialogBuilder(it)
-            binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
+        binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
 
-            binding.title.text = ThemeHelper.getStyledAppName(requireContext())
+        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-            binding.cancelButton.setOnClickListener {
-                dismiss()
+        binding.cancelButton.setOnClickListener {
+            dismiss()
+        }
+
+        token = PreferenceHelper.getToken()
+
+        binding.createNewPlaylist.setOnClickListener {
+            // avoid creating the same playlist multiple times by spamming the button
+            binding.createNewPlaylist.setOnClickListener(null)
+            val listName = binding.playlistName.text.toString()
+            if (listName != "") {
+                createPlaylist(listName)
+            } else {
+                Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_LONG).show()
             }
+        }
 
-            token = PreferenceHelper.getToken()
-
-            binding.createNewPlaylist.setOnClickListener {
-                // avoid creating the same playlist multiple times by spamming the button
-                binding.createNewPlaylist.setOnClickListener(null)
-                val listName = binding.playlistName.text.toString()
-                if (listName != "") {
-                    createPlaylist(listName)
-                } else {
-                    Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_LONG).show()
-                }
-            }
-
-            builder.setView(binding.root)
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        return MaterialAlertDialogBuilder(requireContext())
+            .setView(binding.root)
+            .show()
     }
 
     private fun createPlaylist(name: String) {
