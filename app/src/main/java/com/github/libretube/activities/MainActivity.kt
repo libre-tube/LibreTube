@@ -202,7 +202,10 @@ class MainActivity : BaseActivity() {
         )
     }
 
-    private fun removeSearchFocus() {
+    /**
+     * Remove the focus of the search view in the toolbar
+     */
+    fun removeSearchFocus() {
         searchView.setQuery("", false)
         searchView.clearFocus()
         searchView.onActionViewCollapsed()

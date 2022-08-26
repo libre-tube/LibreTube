@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.SearchHistoryAdapter
 import com.github.libretube.adapters.SearchSuggestionsAdapter
@@ -18,6 +20,7 @@ import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.models.SearchViewModel
+import kotlinx.android.synthetic.main.activity_main.toolbar
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -108,5 +111,15 @@ class SearchFragment() : BaseFragment() {
             binding.suggestionsRecycler.visibility = View.GONE
             binding.historyEmpty.visibility = View.VISIBLE
         }
+    }
+
+    override fun onStop() {
+        if (findNavController().currentDestination?.id != R.id.searchResultFragment) {
+            // remove the search focus
+            (activity as MainActivity)
+                .toolbar.menu
+                .findItem(R.id.action_search).collapseActionView()
+        }
+        super.onStop()
     }
 }
