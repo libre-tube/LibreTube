@@ -11,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:stepSize="0.25"
         android:value="1"
-        android:valueFrom="0.25"
+        android:valueFrom="0"
         android:valueTo="5" />
 
 </LinearLayout>

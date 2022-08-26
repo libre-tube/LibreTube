@@ -189,8 +189,11 @@ class NotificationHelper(
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        if (isSummary) builder.setGroupSummary(true)
-        else builder.setContentText(description)
+        if (isSummary) {
+            builder.setGroupSummary(true)
+        } else {
+            builder.setContentText(description)
+        }
 
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define

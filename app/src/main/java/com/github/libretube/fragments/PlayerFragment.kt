@@ -55,6 +55,7 @@ import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
+import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
@@ -64,6 +65,7 @@ import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.preferences.PreferenceRanges
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
@@ -511,6 +513,9 @@ class PlayerFragment : BaseFragment() {
 
         override fun onPlaybackSpeedClicked() {
             val playbackSpeedBinding = DialogSliderBinding.inflate(layoutInflater)
+            playbackSpeedBinding.slider.setSliderRangeAndValue(
+                PreferenceRanges.playbackSpeed
+            )
             playbackSpeedBinding.slider.value = exoPlayer.playbackParameters.speed
             // change playback speed dialog
             MaterialAlertDialogBuilder(requireContext())

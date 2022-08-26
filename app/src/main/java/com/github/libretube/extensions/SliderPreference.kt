@@ -7,6 +7,8 @@ import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.preferences.PreferenceRanges
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -19,13 +21,25 @@ class SliderPreference(
     context,
     attributeSet
 ) {
+    private lateinit var sliderBinding: DialogSliderBinding
+
     override fun onClick() {
-        val sliderBinding = DialogSliderBinding.inflate(
+        sliderBinding = DialogSliderBinding.inflate(
             LayoutInflater.from(context)
         )
+        val range = when (key) {
+            PreferenceKeys.PLAYBACK_SPEED -> PreferenceRanges.playbackSpeed
+            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED -> PreferenceRanges.playbackSpeed
+            else -> null
+        }
+
+        if (range == null) return
+
+        sliderBinding.slider.setSliderRangeAndValue(range)
+
         sliderBinding.slider.value = PreferenceHelper.getString(
             key,
-            "1.0"
+            range.defaultValue.toString()
         ).toFloat()
 
         MaterialAlertDialogBuilder(context)
