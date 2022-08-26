@@ -52,11 +52,15 @@ class SubscriptionsFragment : BaseFragment() {
         if (viewModel.videoFeed.value == null) viewModel.fetchFeed()
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
-            if (it != null) showFeed()
+            if (!isShowingFeed()) return@observe
+            if (it == null) return@observe
+            showFeed()
         }
 
         viewModel.subscriptions.observe(viewLifecycleOwner) {
-            if (it != null) showSubscriptions()
+            if (isShowingFeed()) return@observe
+            if (it == null) return@observe
+            showSubscriptions()
         }
 
         binding.subRefresh.setOnRefreshListener {
@@ -71,8 +75,7 @@ class SubscriptionsFragment : BaseFragment() {
         binding.toggleSubs.visibility = View.VISIBLE
 
         binding.toggleSubs.setOnClickListener {
-            if (!binding.subChannelsContainer.isVisible) {
-                binding.subChannels.layoutManager = LinearLayoutManager(context)
+            if (isShowingFeed()) {
                 if (viewModel.subscriptions.value == null) {
                     viewModel.fetchSubscriptions()
                 } else {
@@ -81,6 +84,7 @@ class SubscriptionsFragment : BaseFragment() {
                 binding.subChannelsContainer.visibility = View.VISIBLE
                 binding.subFeedContainer.visibility = View.GONE
             } else {
+                showFeed()
                 binding.subChannelsContainer.visibility = View.GONE
                 binding.subFeedContainer.visibility = View.VISIBLE
             }
@@ -115,6 +119,8 @@ class SubscriptionsFragment : BaseFragment() {
     }
 
     private fun showFeed() {
+        if (viewModel.videoFeed.value == null) return
+
         binding.subRefresh.isRefreshing = false
         val feed = viewModel.videoFeed.value!!
         // sort the feed
@@ -127,33 +133,49 @@ class SubscriptionsFragment : BaseFragment() {
             "channel_name_za" -> feed.sortedBy { it.uploaderName }.reversed()
             else -> feed
         }
+
+        binding.subFeedContainer.visibility = if (viewModel.videoFeed.value!!.isEmpty()) View.GONE else View.VISIBLE
+        binding.emptyFeed.visibility = if (viewModel.videoFeed.value!!.isEmpty()) View.VISIBLE else View.GONE
+
         binding.subProgress.visibility = View.GONE
         subscriptionAdapter = TrendingAdapter(sortedFeed, childFragmentManager, false)
         binding.subFeed.adapter = subscriptionAdapter
     }
 
     private fun showSubscriptions() {
+        if (viewModel.subscriptions.value == null) return
+
         binding.subRefresh.isRefreshing = false
-        binding.subChannels.adapter =
-            if (PreferenceHelper.getBoolean(
-                    PreferenceKeys.LEGACY_SUBSCRIPTIONS,
-                    false
-                )
-            ) {
-                binding.subChannels.layoutManager = GridLayoutManager(
-                    context,
-                    PreferenceHelper.getString(
-                        PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
-                        "4"
-                    ).toInt()
-                )
-                LegacySubscriptionAdapter(
-                    viewModel.subscriptions.value!!
-                )
-            } else {
-                SubscriptionChannelAdapter(
-                    viewModel.subscriptions.value!!.toMutableList()
-                )
-            }
+
+        val legacySubscriptions = PreferenceHelper.getBoolean(
+            PreferenceKeys.LEGACY_SUBSCRIPTIONS,
+            false
+        )
+
+        binding.subChannels.layoutManager = if (legacySubscriptions) {
+            GridLayoutManager(
+                context,
+                PreferenceHelper.getString(
+                    PreferenceKeys.LEGACY_SUBSCRIPTIONS_COLUMNS,
+                    "4"
+                ).toInt()
+            )
+        } else LinearLayoutManager(context)
+
+        // set the adapter of the subscribed channels
+        binding.subChannels.adapter = if (legacySubscriptions) {
+            LegacySubscriptionAdapter(viewModel.subscriptions.value!!)
+        } else SubscriptionChannelAdapter(
+            viewModel.subscriptions.value!!.toMutableList()
+        )
+
+        binding.subChannelsContainer.visibility =
+            if (viewModel.subscriptions.value!!.isEmpty()) View.GONE else View.VISIBLE
+        binding.emptyFeed.visibility =
+            if (viewModel.subscriptions.value!!.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    private fun isShowingFeed(): Boolean {
+        return binding.subFeedContainer.isVisible
     }
 }
