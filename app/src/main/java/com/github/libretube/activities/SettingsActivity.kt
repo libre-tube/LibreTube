@@ -1,6 +1,7 @@
 package com.github.libretube.activities
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
 import com.github.libretube.extensions.BaseActivity
@@ -26,23 +27,27 @@ class SettingsActivity : BaseActivity() {
                 .replace(R.id.settings, MainSettings())
                 .commit()
         }
-    }
 
-    override fun onBackPressed() {
-        when (supportFragmentManager.findFragmentById(R.id.settings)) {
-            is MainSettings -> {
-                @Suppress("DEPRECATION")
-                super.onBackPressed()
-                finishAndRemoveTask()
+        // new way of dealing with back presses instead of onBackPressed()
+        onBackPressedDispatcher.addCallback(
+            this, // lifecycle owner
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    when (supportFragmentManager.findFragmentById(R.id.settings)) {
+                        is MainSettings -> {
+                            finishAndRemoveTask()
+                        }
+                        else -> {
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(R.id.settings, MainSettings())
+                                .commit()
+                            changeTopBarText(getString(R.string.settings))
+                        }
+                    }
+                }
             }
-            else -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.settings, MainSettings())
-                    .commit()
-                changeTopBarText(getString(R.string.settings))
-            }
-        }
+        )
     }
 
     fun changeTopBarText(text: String) {
