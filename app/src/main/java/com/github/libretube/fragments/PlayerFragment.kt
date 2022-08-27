@@ -1136,6 +1136,14 @@ class PlayerFragment : BaseFragment() {
                     // player paused in any state
                     binding.playImageView.setImageResource(R.drawable.ic_play)
                 }
+
+                if (SDK_INT >= Build.VERSION_CODES.O) {
+                    // listen for the stop button in the notification
+                    if (playbackState == PlaybackState.STATE_STOPPED) {
+                        // finish PiP by finishing the activity
+                        activity?.finish()
+                    }
+                }
             }
         })
 
