@@ -1,5 +1,6 @@
 package com.github.libretube.fragments
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.PictureInPictureParams
 import android.content.Context
@@ -211,6 +212,7 @@ class PlayerFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
@@ -352,6 +354,7 @@ class PlayerFragment : BaseFragment() {
         )
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
         val mainActivity = activity as MainActivity
         mainActivity.binding.container.visibility = View.VISIBLE
@@ -408,6 +411,7 @@ class PlayerFragment : BaseFragment() {
         binding.playerMotionLayout.transitionToStart()
 
         // quitting miniPlayer on single click
+
         binding.titleTextView.setOnTouchListener { view, motionEvent ->
             view.onTouchEvent(motionEvent)
             if (motionEvent.action == MotionEvent.ACTION_UP) view.performClick()
@@ -762,6 +766,7 @@ class PlayerFragment : BaseFragment() {
         viewModel.isFullscreen.value = true
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     private fun unsetFullscreen() {
         // leave fullscreen mode
         with(binding.playerMotionLayout) {
@@ -950,6 +955,7 @@ class PlayerFragment : BaseFragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun refreshLiveStatus() {
         // switch back to normal speed when on the end of live stream
         if (exoPlayer.duration - exoPlayer.currentPosition < 7000) {
@@ -1040,6 +1046,7 @@ class PlayerFragment : BaseFragment() {
         refreshLiveStatus()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initializePlayerView(response: Streams) {
         binding.apply {
             playerViewsInfo.text =
@@ -1698,7 +1705,11 @@ class PlayerFragment : BaseFragment() {
 
     fun onUserLeaveHint() {
         if (SDK_INT >= Build.VERSION_CODES.O && shouldStartPiP()) {
-            activity?.enterPictureInPictureMode(updatePipParams())
+            activity?.enterPictureInPictureMode(
+                PictureInPictureParams.Builder()
+                    .setActions(emptyList())
+                    .build()
+            )
         }
     }
 
@@ -1726,10 +1737,6 @@ class PlayerFragment : BaseFragment() {
         }
         return false
     }
-
-    private fun updatePipParams() = PictureInPictureParams.Builder()
-        .setActions(emptyList())
-        .build()
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
