@@ -17,6 +17,7 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -157,6 +158,32 @@ class MainActivity : BaseActivity() {
         if (log != "") ErrorDialog().show(supportFragmentManager, null)
 
         setupBreakReminder()
+
+        // new way of handling back presses
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // remove focus from search
+                removeSearchFocus()
+                navController.popBackStack(R.id.searchFragment, false)
+
+                if (binding.mainMotionLayout.progress == 0F) {
+                    try {
+                        minimizePlayer()
+                    } catch (e: Exception) {
+                        if (navController.currentDestination?.id == startFragmentId) {
+                            // close app
+                            moveTaskToBack(true)
+                        } else {
+                            navController.popBackStack()
+                        }
+                    }
+                } else if (navController.currentDestination?.id == startFragmentId) {
+                    moveTaskToBack(true)
+                } else {
+                    navController.popBackStack()
+                }
+            }
+        })
     }
 
     /**
@@ -257,8 +284,11 @@ class MainActivity : BaseActivity() {
                 override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
                     val currentFragmentId = navController.currentDestination?.id
                     if (currentFragmentId == R.id.searchFragment || currentFragmentId == R.id.searchResultFragment) {
-                        @Suppress("DEPRECATION")
-                        onBackPressed()
+                        try {
+                            onBackPressedDispatcher.onBackPressed()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
                     return true
                 }
@@ -268,7 +298,7 @@ class MainActivity : BaseActivity() {
         searchView.setOnCloseListener {
             if (navController.currentDestination?.id == R.id.searchFragment) {
                 searchViewModel.setQuery(null)
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
             false
         }
@@ -427,30 +457,6 @@ class MainActivity : BaseActivity() {
         navController.navigate(R.id.playlistFragment, bundle)
     }
 
-    override fun onBackPressed() {
-        // remove focus from search
-        removeSearchFocus()
-        navController.popBackStack(R.id.searchFragment, false)
-
-        if (binding.mainMotionLayout.progress == 0F) {
-            try {
-                minimizePlayer()
-            } catch (e: Exception) {
-                if (navController.currentDestination?.id == startFragmentId) {
-                    // close app
-                    moveTaskToBack(true)
-                } else {
-                    navController.popBackStack()
-                }
-            }
-        } else if (navController.currentDestination?.id == startFragmentId) {
-            @Suppress("DEPRECATION")
-            super.onBackPressed()
-        } else {
-            navController.popBackStack()
-        }
-    }
-
     private fun minimizePlayer() {
         binding.mainMotionLayout.transitionToEnd()
         findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
@@ -528,7 +534,9 @@ class MainActivity : BaseActivity() {
             window.setDecorFitsSystemWindows(true)
             window.insetsController?.apply {
                 show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
+                }
             }
         } else {
             @Suppress("DEPRECATION")
