@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toID
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.obj.Subscription
 import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.util.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

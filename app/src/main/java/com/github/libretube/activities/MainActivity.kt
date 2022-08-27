@@ -205,7 +205,7 @@ class MainActivity : BaseActivity() {
     /**
      * Remove the focus of the search view in the toolbar
      */
-    fun removeSearchFocus() {
+    private fun removeSearchFocus() {
         searchView.setQuery("", false)
         searchView.clearFocus()
         searchView.onActionViewCollapsed()
@@ -250,13 +250,14 @@ class MainActivity : BaseActivity() {
 
         searchItem.setOnActionExpandListener(
             object : MenuItem.OnActionExpandListener {
-                override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
                     return true
                 }
 
-                override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
                     val currentFragmentId = navController.currentDestination?.id
                     if (currentFragmentId == R.id.searchFragment || currentFragmentId == R.id.searchResultFragment) {
+                        @Suppress("DEPRECATION")
                         onBackPressed()
                     }
                     return true
@@ -443,6 +444,7 @@ class MainActivity : BaseActivity() {
                 }
             }
         } else if (navController.currentDestination?.id == startFragmentId) {
+            @Suppress("DEPRECATION")
             super.onBackPressed()
         } else {
             navController.popBackStack()
@@ -494,7 +496,7 @@ class MainActivity : BaseActivity() {
                 hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        } else {
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -528,7 +530,7 @@ class MainActivity : BaseActivity() {
                 show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        } else {
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
@@ -554,7 +556,7 @@ class MainActivity : BaseActivity() {
     /**
      * show the status bar
      */
-    fun showSystemBars() {
+    private fun showSystemBars() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.show(WindowInsets.Type.statusBars())
         } else {

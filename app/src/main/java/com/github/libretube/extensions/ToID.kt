@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.extensions
 
 /**
  * format a Piped route to an ID

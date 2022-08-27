@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.api
 
 import java.util.*
 import kotlin.reflect.KProperty

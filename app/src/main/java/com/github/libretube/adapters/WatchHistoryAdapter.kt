@@ -9,9 +9,9 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.extensions.setFormattedDuration
+import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.setWatchProgressLength
 
 class WatchHistoryAdapter(
     private val watchHistory: MutableList<WatchHistoryItem>,

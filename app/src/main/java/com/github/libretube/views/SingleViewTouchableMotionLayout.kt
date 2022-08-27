@@ -1,5 +1,6 @@
 package com.github.libretube.views
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
@@ -89,13 +90,14 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private val gestureDetector = GestureDetector(
         context,
         object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
                 transitionToEnd()
                 return false
             }
         }
     )
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         // gestureDetector.onTouchEvent(event)
         when (event.actionMasked) {

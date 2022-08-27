@@ -3,17 +3,16 @@ import java.time.Instant
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId 'com.github.libretube'
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 17
         versionName '0.5.0'
         multiDexEnabled true
@@ -75,8 +74,7 @@ android {
 dependencies {
     //debugImplementation libs.square.leakcanary
 
-    kapt libs.room.compiler
-
+    /* Android Core */
     implementation libs.androidx.appcompat
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.legacySupport
@@ -86,30 +84,37 @@ dependencies {
     implementation libs.androidx.preference
     implementation libs.androidx.work.runtime
 
+    /* Android Lifecycle */
+    implementation libs.lifecycle.viewmodel
+    implementation libs.lifecycle.runtime
+    implementation libs.lifecycle.livedata
+
+    /* Testing */
     androidTestImplementation libs.androidx.test.junit
     androidTestImplementation libs.androidx.test.espressoCore
 
+    /* Design */
+    implementation libs.material
     implementation libs.circleimageview
 
-    implementation libs.material
+    /* ExoPlayer */
     implementation libs.exoplayer
     implementation(libs.exoplayer.extension.cronet) { exclude group: 'com.google.android.gms' }
     implementation libs.exoplayer.extension.mediasession
 
+    /* Retrofit and Jackson */
     implementation libs.square.retrofit
     implementation libs.square.retrofit.converterJackson
-    // Do not update jackson annotations! It does not supports < API 26.
     implementation libs.jacksonAnnotations
 
+    /* Cronet and Coil */
     coreLibraryDesugaring libs.desugaring
     implementation libs.cronet.embedded
     implementation libs.cronet.okhttp
     implementation libs.coil
 
-    implementation libs.lifecycle.viewmodel
-    implementation libs.lifecycle.runtime
-    implementation libs.lifecycle.livedata
-
+    /* Room */
+    kapt libs.room.compiler
     implementation libs.room
 }
 

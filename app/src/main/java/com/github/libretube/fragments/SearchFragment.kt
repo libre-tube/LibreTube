@@ -20,11 +20,10 @@ import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.models.SearchViewModel
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import retrofit2.HttpException
 import java.io.IOException
 
-class SearchFragment() : BaseFragment() {
+class SearchFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by activityViewModels()
 
@@ -117,7 +116,7 @@ class SearchFragment() : BaseFragment() {
         if (findNavController().currentDestination?.id != R.id.searchResultFragment) {
             // remove the search focus
             (activity as MainActivity)
-                .toolbar.menu
+                .binding.toolbar.menu
                 .findItem(R.id.action_search).collapseActionView()
         }
         super.onStop()

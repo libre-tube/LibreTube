@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.libretube.R
@@ -29,7 +30,7 @@ class AdvancedSettings : MaterialPreferenceFragment() {
                 BackupHelper(requireContext()).restoreSharedPreferences(uri)
             }
         createFile = registerForActivityResult(
-            ActivityResultContracts.CreateDocument()
+            CreateDocument("application/json")
         ) { uri: Uri? ->
             BackupHelper(requireContext()).backupSharedPreferences(uri)
         }

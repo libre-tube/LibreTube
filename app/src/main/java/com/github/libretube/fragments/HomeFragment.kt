@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment() {
             resources.getInteger(R.integer.grid_items).toString()
         )
 
-        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")!!
+        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
 
         // get the system default country if auto region selected
         region = if (regionPref == "sys") {
