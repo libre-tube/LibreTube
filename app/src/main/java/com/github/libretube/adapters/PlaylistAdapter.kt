@@ -17,8 +17,8 @@ import com.github.libretube.obj.StreamItem
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.setWatchProgressLength
-import com.github.libretube.util.toID
+import com.github.libretube.extensions.setWatchProgressLength
+import com.github.libretube.extensions.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

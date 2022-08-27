@@ -16,7 +16,7 @@ import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
-import com.github.libretube.util.toID
+import com.github.libretube.extensions.toID
 import retrofit2.HttpException
 import java.io.IOException
 

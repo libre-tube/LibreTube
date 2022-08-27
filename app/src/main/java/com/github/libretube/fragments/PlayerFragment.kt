@@ -72,9 +72,9 @@ import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.formatShort
-import com.github.libretube.util.hideKeyboard
-import com.github.libretube.util.toID
+import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.extensions.toID
 import com.github.libretube.views.PlayerOptionsBottomSheet
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl

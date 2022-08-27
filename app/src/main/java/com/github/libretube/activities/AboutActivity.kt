@@ -123,6 +123,7 @@ class AboutActivity : BaseActivity() {
                 it?.readText()
             }
 
+        @Suppress("DEPRECATION")
         val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(licenseString.toString(), 1)
         } else {

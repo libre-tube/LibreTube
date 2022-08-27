@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.api
 
 import java.util.*
 import kotlin.reflect.KProperty
@@ -47,7 +47,7 @@ class ResettableLazy<PROPTYPE>(val manager: ResettableLazyManager, val init: () 
 }
 
 fun <PROPTYPE> resettableLazy(manager: ResettableLazyManager, init: () -> PROPTYPE):
-    ResettableLazy<PROPTYPE> {
+        ResettableLazy<PROPTYPE> {
     return ResettableLazy(manager, init)
 }
 

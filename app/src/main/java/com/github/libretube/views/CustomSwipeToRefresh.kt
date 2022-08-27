@@ -26,6 +26,6 @@ class CustomSwipeToRefresh(context: Context?, attrs: AttributeSet?) :
     }
 
     init {
-        mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
+        mTouchSlop = ViewConfiguration.get(this.context).scaledTouchSlop
     }
 }

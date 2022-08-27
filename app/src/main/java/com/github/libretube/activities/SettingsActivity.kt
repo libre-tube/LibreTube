@@ -31,6 +31,7 @@ class SettingsActivity : BaseActivity() {
     override fun onBackPressed() {
         when (supportFragmentManager.findFragmentById(R.id.settings)) {
             is MainSettings -> {
+                @Suppress("DEPRECATION")
                 super.onBackPressed()
                 finishAndRemoveTask()
             }

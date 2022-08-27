@@ -3,17 +3,16 @@ import java.time.Instant
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId 'com.github.libretube'
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 17
         versionName '0.5.0'
         multiDexEnabled true

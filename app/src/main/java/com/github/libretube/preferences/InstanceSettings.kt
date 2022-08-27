@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
@@ -40,7 +41,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
                 ImportHelper(requireActivity()).importSubscriptions(uri)
             }
         createFile = registerForActivityResult(
-            ActivityResultContracts.CreateDocument()
+            CreateDocument("application/json")
         ) { uri: Uri? ->
             ImportHelper(requireActivity()).exportSubscriptions(uri)
         }

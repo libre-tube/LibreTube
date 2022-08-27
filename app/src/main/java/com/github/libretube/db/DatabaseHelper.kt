@@ -6,7 +6,7 @@ import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.obj.Streams
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.toID
+import com.github.libretube.extensions.toID
 
 object DatabaseHelper {
     fun addToWatchHistory(videoId: String, streams: Streams) {

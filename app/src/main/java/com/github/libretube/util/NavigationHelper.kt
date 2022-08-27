@@ -7,6 +7,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
+import com.github.libretube.extensions.toID
 import com.github.libretube.fragments.PlayerFragment
 
 object NavigationHelper {

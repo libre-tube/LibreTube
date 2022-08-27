@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.extensions
 
 import android.view.View
 import android.view.ViewTreeObserver

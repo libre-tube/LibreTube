@@ -15,8 +15,8 @@ import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.formatShort
-import com.github.libretube.util.toID
+import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.toID
 import retrofit2.HttpException
 import java.io.IOException
 

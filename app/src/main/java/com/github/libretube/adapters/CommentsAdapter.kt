@@ -15,7 +15,7 @@ import com.github.libretube.obj.Comment
 import com.github.libretube.obj.CommentsPage
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.formatShort
+import com.github.libretube.extensions.formatShort
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

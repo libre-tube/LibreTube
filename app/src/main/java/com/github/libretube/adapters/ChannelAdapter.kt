@@ -10,9 +10,9 @@ import com.github.libretube.dialogs.VideoOptionsDialog
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.formatShort
-import com.github.libretube.util.setWatchProgressLength
-import com.github.libretube.util.toID
+import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.setWatchProgressLength
+import com.github.libretube.extensions.toID
 
 class ChannelAdapter(
     private val videoFeed: MutableList<StreamItem>,

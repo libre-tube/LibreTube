@@ -16,6 +16,7 @@ import com.github.libretube.Globals
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.extensions.toID
 import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
@@ -24,7 +25,6 @@ import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.toID
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -130,8 +130,7 @@ class BackgroundMode : Service() {
             // play the audio in the background
             playAudio(videoId, position)
         } catch (e: Exception) {
-            stopForeground(true)
-            stopSelf()
+            onDestroy()
         }
         return super.onStartCommand(intent, flags, startId)
     }
@@ -209,6 +208,8 @@ class BackgroundMode : Service() {
                     Player.STATE_IDLE -> {
                         onDestroy()
                     }
+                    Player.STATE_BUFFERING -> {}
+                    Player.STATE_READY -> {}
                 }
             }
         })
@@ -309,7 +310,12 @@ class BackgroundMode : Service() {
     override fun onDestroy() {
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification
-        stopForeground(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE)
+        } else {
+            @Suppress("DEPRECATION")
+            stopForeground(true)
+        }
         // destroy the service
         stopSelf()
         if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroy()

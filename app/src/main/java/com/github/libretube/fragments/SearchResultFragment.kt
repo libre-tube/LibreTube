@@ -17,10 +17,9 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.preferences.PreferenceKeys
-import com.github.libretube.util.hideKeyboard
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -149,7 +148,7 @@ class SearchResultFragment : BaseFragment() {
         if (findNavController().currentDestination?.id != R.id.searchFragment) {
             // remove the search focus
             (activity as MainActivity)
-                .toolbar.menu
+                .binding.toolbar.menu
                 .findItem(R.id.action_search).collapseActionView()
         }
         super.onStop()
