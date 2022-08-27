@@ -1137,7 +1137,7 @@ class PlayerFragment : BaseFragment() {
                     binding.playImageView.setImageResource(R.drawable.ic_play)
                 }
 
-                if (SDK_INT >= Build.VERSION_CODES.O) {
+                if (SDK_INT >= Build.VERSION_CODES.O && activity?.isInPictureInPictureMode!!) {
                     // listen for the stop button in the notification
                     if (playbackState == PlaybackState.STATE_STOPPED) {
                         // finish PiP by finishing the activity
