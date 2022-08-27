@@ -55,7 +55,10 @@ import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
+import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.setSliderRangeAndValue
+import com.github.libretube.extensions.toID
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
@@ -72,9 +75,6 @@ import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
-import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.toID
 import com.github.libretube.views.PlayerOptionsBottomSheet
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl

@@ -4,7 +4,6 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.extensions.await
 
 /**
  * shows the already watched time under the video

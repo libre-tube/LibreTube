@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
+import com.github.libretube.extensions.toID
 import com.github.libretube.obj.Subscription
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.extensions.toID
 
 class SubscriptionChannelAdapter(private val subscriptions: MutableList<Subscription>) :
     RecyclerView.Adapter<SubscriptionChannelViewHolder>() {

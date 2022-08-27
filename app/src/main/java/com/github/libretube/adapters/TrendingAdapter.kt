@@ -7,13 +7,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
+import com.github.libretube.extensions.setWatchProgressLength
+import com.github.libretube.extensions.toID
 import com.github.libretube.obj.StreamItem
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.setWatchProgressLength
-import com.github.libretube.extensions.toID
 
 class TrendingAdapter(
     private val streamItems: List<StreamItem>,
