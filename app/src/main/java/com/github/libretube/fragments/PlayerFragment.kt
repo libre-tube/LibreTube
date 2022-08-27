@@ -1100,18 +1100,14 @@ class PlayerFragment : BaseFragment() {
                 }
             }
 
-            @Deprecated(message = "Deprecated", level = DeprecationLevel.HIDDEN)
-            override fun onPlayerStateChanged(
-                playWhenReady: Boolean,
-                playbackState: Int
-            ) {
+            override fun onPlaybackStateChanged(playbackState: Int) {
                 exoPlayerView.keepScreenOn = !(
                     playbackState == Player.STATE_IDLE ||
-                        playbackState == Player.STATE_ENDED ||
-                        !playWhenReady
+                        playbackState == Player.STATE_ENDED
                     )
 
                 // check if video has ended, next video is available and autoplay is enabled.
+                @Suppress("DEPRECATION")
                 if (
                     playbackState == Player.STATE_ENDED &&
                     nextStreamId != null &&
@@ -1123,27 +1119,21 @@ class PlayerFragment : BaseFragment() {
                     if (autoplayEnabled) playNextVideo()
                 }
 
-                if (playWhenReady && playbackState == Player.STATE_READY) {
+                if (playbackState == Player.STATE_READY) {
                     // media actually playing
                     transitioning = false
                     binding.playImageView.setImageResource(R.drawable.ic_pause)
-                } else if (playWhenReady) {
-                    // might be idle (plays after prepare()),
-                    // buffering (plays when data available)
-                    // or ended (plays when seek away from end)
-                    binding.playImageView.setImageResource(R.drawable.ic_play)
                 } else {
                     // player paused in any state
                     binding.playImageView.setImageResource(R.drawable.ic_play)
                 }
 
-                if (SDK_INT >= Build.VERSION_CODES.O && activity?.isInPictureInPictureMode!!) {
-                    // listen for the stop button in the notification
-                    if (playbackState == PlaybackState.STATE_STOPPED) {
-                        // finish PiP by finishing the activity
-                        activity?.finish()
-                    }
+                // listen for the stop button in the notification
+                if (playbackState == PlaybackState.STATE_STOPPED) {
+                    // finish PiP by finishing the activity
+                    activity?.finish()
                 }
+                super.onPlaybackStateChanged(playbackState)
             }
         })
 
@@ -1199,6 +1189,7 @@ class PlayerFragment : BaseFragment() {
                     Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
                         .trim()
                 } else {
+                    @Suppress("DEPRECATION")
                     Html.fromHtml(description).trim()
                 }
             } else {
