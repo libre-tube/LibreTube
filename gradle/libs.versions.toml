@@ -1,9 +1,9 @@
 [versions]
-appcompat = "1.4.1"
+appcompat = "1.5.0"
 lifecycle = "2.5.1"
-constraintlayout = "2.1.3"
+constraintlayout = "2.1.4"
 material = "1.6.0"
-navigation = "2.4.2"
+navigation = "2.5.1"
 legacySupport = "1.0.0"
 preference = "1.2.0"
 extJunit = "1.1.3"
@@ -14,11 +14,10 @@ exoplayer = "2.17.1"
 multidex = "2.0.1"
 retrofit = "2.9.0"
 jacksonAnnotations = "2.13.3"
-mobileffmpeg = "4.5.1.LTS"
 desugaring = "1.1.5"
 cronetEmbedded = "101.4951.41"
 cronetOkHttp = "0.1.0"
-coil = "2.1.0"
+coil = "2.2.0"
 leakcanary = "2.8.1"
 room = "2.4.3"
 
@@ -40,7 +39,6 @@ androidx-multidex = { group = "androidx.multidex", name = "multidex", version.re
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 square-retrofit-converterJackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
 jacksonAnnotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jacksonAnnotations" }
-mobileffmpeg = { group = "com.arthenica", name = "ffmpeg-kit-min", version.ref = "mobileffmpeg" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
 exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
 cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
