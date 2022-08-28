@@ -271,12 +271,12 @@
     <string name="required_network">Connessione richiesta</string>
     <string name="translate">Traduzione</string>
     <string name="no_search_result">Nessun risultato.</string>
-    <string name="share_with_time">Condividi con tempo d\'inizio</string>
+    <string name="share_with_time">Condividi con marca temporale</string>
     <string name="background_mode">Modalità background</string>
     <string name="no_subtitles_available">Nessun sottotitolo disponibile</string>
     <string name="repeat_mode">Modalità Repeat</string>
     <string name="resize_mode_fit">Adatta</string>
-    <string name="backup_restore">Backup e ripristina</string>
+    <string name="backup_restore">Backup e ripristino</string>
     <string name="backup">Backup</string>
     <string name="playingOnBackground">Riproduzione in background…</string>
     <string name="seekbar_preview_summary">Mostra l\'anteprima quando si sposta l\'indicatore di riproduzione.</string>
@@ -310,4 +310,6 @@
     <string name="history_empty">Cronologia vuota.</string>
     <string name="repeat_mode_none">Disattivata</string>
     <string name="misc">Varie</string>
+    <string name="break_reminder_time">Minuti prima dell\'avviso</string>
+    <string name="device_info">Info sul dispositivo</string>
 </resources>
