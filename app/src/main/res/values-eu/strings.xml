@@ -89,7 +89,7 @@
     <string name="color_green">Berdea</string>
     <string name="color_purple">Morea</string>
     <string name="oledTheme">Beltza</string>
-    <string name="material_you">Material mistikoa</string>
+    <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">Jakinarazpenak</string>
     <string name="app_icon">Ikonoa</string>
     <string name="enabled">Piztuta</string>
@@ -282,7 +282,7 @@
     <string name="translate">Itzulpena</string>
     <string name="copied">Kopiatuta</string>
     <string name="downloadsucceeded">Deskarga egina</string>
-    <string name="share_with_time">Partekatu hasierako orduarekin</string>
+    <string name="share_with_time">Partekatu denbora kodearekin</string>
     <string name="error_occurred">Akatsa</string>
     <string name="skip_buttons">Botoiak kendu</string>
     <string name="history_size">Historiaren gehienezko tamaina</string>
@@ -296,4 +296,21 @@
     <string name="break_reminder">Atsedenaren abisua</string>
     <string name="already_spent_time">Dagoeneko %1$s minutu eman dituzu aplikazioan, atseden hartzeko ordua da.</string>
     <string name="yt_shorts">Motzak</string>
+    <string name="break_reminder_time">Gogorarazi minutu batzuk lehenago</string>
+    <string name="legacy_subscriptions">Harpidetza zaharren ikuspegia</string>
+    <string name="device_info">Gailuaren informazioa</string>
+    <string name="no_subtitles_available">Ez dago azpititulurik erabilgarri</string>
+    <string name="repeat_mode">Errepikatze modua</string>
+    <string name="resize_mode_fit">Egokitu</string>
+    <string name="resize_mode_fill">Bete</string>
+    <string name="resize_mode_zoom">Zoom</string>
+    <string name="repeat_mode_none">Bat ere ez</string>
+    <string name="repeat_mode_current">Unekoa</string>
+    <string name="backup_restore">Babeskopia eta leheneratzea</string>
+    <string name="backup">Babeskopia</string>
+    <string name="player_resize_mode">Tamaina aldatzeko modua</string>
+    <string name="maximum_image_cache">Irudi katxearen gehienezko tamaina</string>
+    <string name="copied_to_clipboard">Arbelean kopiatu da</string>
+    <string name="open_copied">Ireki</string>
+    <string name="picture_in_picture">Irudia irudian</string>
 </resources>

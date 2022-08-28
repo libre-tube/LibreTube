@@ -282,7 +282,7 @@
     <string name="no_search_result">لا توجد نتائج.</string>
     <string name="error_occurred">خطأ</string>
     <string name="copied">تم النسخ</string>
-    <string name="share_with_time">المشاركة مع وقت البدء</string>
+    <string name="share_with_time">شارك مع رمز الوقت</string>
     <string name="downloadsucceeded">نجح التحميل</string>
     <string name="export_subscriptions">تصدير الاشتراكات</string>
     <string name="skip_buttons">أزرار التخطي</string>
