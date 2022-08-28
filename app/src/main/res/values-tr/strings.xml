@@ -188,7 +188,7 @@
     <string name="hideTrendingPage">Ana sayfayı gizle</string>
     <string name="quality">Kalite</string>
     <string name="behavior">Davranış</string>
-    <string name="player_summary">Kalite ve oynatıcı davranışı</string>
+    <string name="player_summary">Varsayılan ayarlar ve davranış</string>
     <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
     <string name="seek_increment">Aramayı artırın</string>
     <string name="pauseOnScreenOff">Otomatik duraklatma</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">Hatırlatmadan önce dakikalar</string>
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
+    <string name="audio_video_summary">Kalite ve biçim</string>
 </resources>
