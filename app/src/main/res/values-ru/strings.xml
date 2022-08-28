@@ -108,7 +108,7 @@
     <string name="color_green">Заводной зелёный</string>
     <string name="color_purple">Приятный пурпур</string>
     <string name="oledTheme">Черная</string>
-    <string name="material_you">Мистический Material 3</string>
+    <string name="material_you">Material You</string>
     <string name="app_icon">Значок</string>
     <string name="sponsorblock_notifications">Уведомления</string>
     <string name="enabled">Вкл</string>
@@ -279,7 +279,7 @@
     <string name="network_wifi">Только по Wi-Fi</string>
     <string name="translate">Перевод</string>
     <string name="downloadsucceeded">Загружено успешно</string>
-    <string name="share_with_time">Поделиться со временем начала</string>
+    <string name="share_with_time">Поделиться с тайм-кодом</string>
     <string name="playingOnBackground">Воспроизведение в фоне…</string>
     <string name="playerAudioFormat">Аудио формат для проигрывателя</string>
     <string name="best_quality">Лучшее</string>
@@ -310,4 +310,5 @@
     <string name="maximum_image_cache">Макс. размер кэша изображений</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="open_copied">Открыть</string>
+    <string name="device_info">Информация об устройстве</string>
 </resources>
