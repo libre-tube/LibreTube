@@ -2,46 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/quality">
-
-        <ListPreference
-            android:icon="@drawable/ic_hd"
-            app:defaultValue=""
-            app:entries="@array/defres"
-            app:entryValues="@array/defresValue"
-            app:key="default_res"
-            app:title="@string/defres"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            android:icon="@drawable/ic_headphones"
-            app:defaultValue="best"
-            app:entries="@array/audioQuality"
-            app:entryValues="@array/audioQualityValues"
-            app:key="player_audio_quality"
-            app:title="@string/playerAudioQuality"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            android:icon="@drawable/ic_videocam"
-            app:defaultValue="webm"
-            app:entries="@array/playerVideoFormat"
-            app:entryValues="@array/playerVideoFormatValues"
-            app:key="player_video_format"
-            app:title="@string/playerVideoFormat"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            android:icon="@drawable/ic_music"
-            app:defaultValue="all"
-            app:entries="@array/playerAudioFormat"
-            app:entryValues="@array/playerAudioFormatValues"
-            app:key="player_audio_format"
-            app:title="@string/playerAudioFormat"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/player">
 
         <com.github.libretube.extensions.SliderPreference
@@ -129,16 +89,6 @@
             app:key="fullscreen_orientation"
             app:title="@string/fullscreen_orientation"
             app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/background_mode">
-
-        <com.github.libretube.extensions.SliderPreference
-            android:icon="@drawable/ic_speed"
-            app:defaultValue="1.0"
-            app:key="background_playback_speed"
-            app:title="@string/playback_speed" />
 
     </PreferenceCategory>
 

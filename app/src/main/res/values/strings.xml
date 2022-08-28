@@ -189,7 +189,7 @@
     <string name="instance_frontend_url">URL to instance frontend</string>
     <string name="quality">Quality</string>
     <string name="behavior">Behavior</string>
-    <string name="player_summary">Quality, and player behavior</string>
+    <string name="player_summary">Defaults and behavior</string>
     <string name="seek_increment">Seek increment</string>
     <string name="pauseOnScreenOff">Auto-pause</string>
     <string name="pauseOnScreenOff_summary">Pause playback when the screen is turned off.</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">Minutes before being reminded</string>
     <string name="legacy_subscriptions">Legacy subscriptions view</string>
     <string name="device_info">Device Info</string>
+    <string name="audio_video_summary">Quality and format</string>
 </resources>

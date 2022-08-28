@@ -55,6 +55,13 @@ class MainSettings : MaterialPreferenceFragment() {
             true
         }
 
+        val audioVideo = findPreference<Preference>("audio_video")
+        audioVideo?.setOnPreferenceClickListener {
+            val newFragment = AudioVideoSettings()
+            navigateToSettingsFragment(newFragment)
+            true
+        }
+
         val history = findPreference<Preference>("history")
         history?.setOnPreferenceClickListener {
             val newFragment = HistorySettings()
