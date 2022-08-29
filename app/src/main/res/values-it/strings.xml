@@ -189,7 +189,7 @@
     <string name="instance_frontend_url">URL dell\'istanza frontend</string>
     <string name="quality">Qualità</string>
     <string name="behavior">Comportamento</string>
-    <string name="player_summary">Qualità, e comportamento lettore</string>
+    <string name="player_summary">Predefiniti e comportamento</string>
     <string name="seek_increment">Cerca incremento</string>
     <string name="autoplay_summary">Riproduci automaticamente il video successivo quando quello corrente è finito.</string>
     <string name="pauseOnScreenOff">Pausa automatica</string>
@@ -312,4 +312,5 @@
     <string name="misc">Varie</string>
     <string name="break_reminder_time">Minuti prima dell\'avviso</string>
     <string name="device_info">Info sul dispositivo</string>
+    <string name="audio_video_summary">Qualità e formato</string>
 </resources>
