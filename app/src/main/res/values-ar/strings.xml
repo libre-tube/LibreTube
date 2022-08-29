@@ -189,7 +189,7 @@
     <string name="instance_frontend_url">عنوان URL لمثيل الواجهة الأمامية</string>
     <string name="quality">الجودة</string>
     <string name="behavior">السلوك</string>
-    <string name="player_summary">الجودة وسلوك المشغل</string>
+    <string name="player_summary">الإعدادات الافتراضية والسلوك</string>
     <string name="seek_increment">معدل التقديم</string>
     <string name="pauseOnScreenOff">الإيقاف المؤقت التلقائي</string>
     <string name="autoplay_summary">التشغيل التلقائي للفيديو التالي بعد الفيديو الحالي.</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">دقائق قبل التذكير</string>
     <string name="legacy_subscriptions">طريقة عرض الاشتراكات القديمة</string>
     <string name="device_info">معلومات الجهاز</string>
+    <string name="audio_video_summary">الجودة والشكل</string>
 </resources>
