@@ -101,7 +101,7 @@
     <string name="color_green">Zaļš</string>
     <string name="color_purple">Violets</string>
     <string name="oledTheme">Melns</string>
-    <string name="material_you">Material 3</string>
+    <string name="material_you">Material You</string>
     <string name="category_outro">Beigu ekrāns un titri</string>
     <string name="category_intro_description">Šeit ietilpst brīži bez reāla satura, piemēram, pārtraukumi, statisks kadri, atkārtotas animācijas. Brīži, kuros ietilpst kaut kāda informācija, neskaitās.</string>
     <string name="settings">Iestatījumi</string>
@@ -191,7 +191,7 @@
     <string name="instance_frontend_url">URL instances frontend</string>
     <string name="quality">Kvalitāte</string>
     <string name="behavior">Uzvedība</string>
-    <string name="player_summary">Kvalitāte un atskaņotāja uzvedība</string>
+    <string name="player_summary">Noklusējumi un uzvedība</string>
     <string name="seek_increment">Patīšanas iedaļa</string>
     <string name="pauseOnScreenOff">Automātiski iepauzēt</string>
     <string name="pauseOnScreenOff_summary">Pārtraukt atskaņošanu, kad ekrāns tiek izslēgts.</string>
@@ -310,4 +310,8 @@
     <string name="copied_to_clipboard">Nokopēts starpliktuvē</string>
     <string name="player_resize_mode">Izmēra mainīšanas režīms</string>
     <string name="maximum_image_cache">Maksimālais attēlu kešatmiņas izmērs</string>
+    <string name="break_reminder_time">Minūtes pirms atgādinājuma</string>
+    <string name="legacy_subscriptions">Vecais abonementu skats</string>
+    <string name="device_info">Ierīces informācija</string>
+    <string name="audio_video_summary">Kvalitāte un formāts</string>
 </resources>
