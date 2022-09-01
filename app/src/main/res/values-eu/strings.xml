@@ -284,7 +284,7 @@
     <string name="downloadsucceeded">Deskarga egina</string>
     <string name="share_with_time">Partekatu denbora kodearekin</string>
     <string name="error_occurred">Akatsa</string>
-    <string name="skip_buttons">Botoiak kendu</string>
+    <string name="skip_buttons">Omititzeko botoiak</string>
     <string name="history_size">Historiaren gehienezko tamaina</string>
     <string name="unlimited">Mugagabea</string>
     <string name="background_mode">Atzeko planoko modua</string>
