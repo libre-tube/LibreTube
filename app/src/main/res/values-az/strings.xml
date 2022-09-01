@@ -188,7 +188,7 @@
     <string name="hideTrendingPage">Ev səhifəsini gizlədin</string>
     <string name="quality">Keyfiyyət</string>
     <string name="behavior">Davranış</string>
-    <string name="player_summary">Keyfiyyət və oynadıcı davranışı</string>
+    <string name="player_summary">Defolt tənzimləmələr və davranış</string>
     <string name="seek_increment">Axtarışı artırın</string>
     <string name="instance_frontend_url">Server üçün URL</string>
     <string name="autoplay_summary">Cari videodan sonra növbəti videonu avtomatik oynadın.</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">Xatırlatmadan əvvəl dəqiqələr</string>
     <string name="legacy_subscriptions">Köhnə abunəliklər görünüşü</string>
     <string name="device_info">Cihaz Məlumatı</string>
+    <string name="audio_video_summary">Keyfiyyət və format</string>
 </resources>

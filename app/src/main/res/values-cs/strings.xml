@@ -217,7 +217,7 @@
     <string name="restore">Obnovit</string>
     <string name="torchIcon">Módní svítilna</string>
     <string name="behavior">Chování</string>
-    <string name="player_summary">Kvalita a chování přehrávače</string>
+    <string name="player_summary">Výchozí hodnoty a chování</string>
     <string name="deleteAccount_summary">Odstranit účet Piped</string>
     <string name="no_audio">Žádný zvuk</string>
     <string name="audio">Zvuk</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">Minuty před připomenutím</string>
     <string name="legacy_subscriptions">Staré zobrazení odběrů</string>
     <string name="device_info">Informace o zařízení</string>
+    <string name="audio_video_summary">Kvalita a formát</string>
 </resources>

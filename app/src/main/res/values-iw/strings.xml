@@ -187,7 +187,7 @@
     <string name="player_autoplay">נגינה אוטומטית</string>
     <string name="hideTrendingPage">הסתרת עמוד המובילים</string>
     <string name="instance_frontend_url">כתובת למנשק המשתמש של העותק</string>
-    <string name="player_summary">איכות והתנהגות הנגן</string>
+    <string name="player_summary">ברירות מחדל והתנהגות</string>
     <string name="quality">איכות</string>
     <string name="behavior">התנהגות</string>
     <string name="seek_increment">הגדלת קפיצה</string>
@@ -282,7 +282,7 @@
     <string name="no_search_result">אין תוצאות.</string>
     <string name="copied">הועתק</string>
     <string name="error_occurred">שגיאה</string>
-    <string name="share_with_time">שיתוף עם זמן התחלה</string>
+    <string name="share_with_time">שיתוף עם קוד זמן</string>
     <string name="downloadsucceeded">ההורדה הצליחה</string>
     <string name="export_subscriptions">ייצוא מינויים</string>
     <string name="skip_buttons">כפתורי דילוג</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">דקות לפני התזכורת</string>
     <string name="legacy_subscriptions">תצוגת מינויים מיושנת</string>
     <string name="device_info">פרטי מכשיר</string>
+    <string name="audio_video_summary">איכות ותצורה</string>
 </resources>
