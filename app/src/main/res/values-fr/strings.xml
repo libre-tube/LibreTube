@@ -189,7 +189,7 @@
     <string name="instance_frontend_url">URL vers l\'interface de l\'instance</string>
     <string name="quality">Qualité</string>
     <string name="behavior">Comportement</string>
-    <string name="player_summary">Qualité, et comportement du lecteur</string>
+    <string name="player_summary">Choix par défaut et comportement</string>
     <string name="seek_increment">Rechercher l\'incrément</string>
     <string name="reset">Restaurer les valeurs par défaut</string>
     <string name="reset_message">Réinitialiser tous vos paramètres et vous déconnecter \?</string>
@@ -282,7 +282,7 @@
     <string name="checking_frequency">Vérifier tous les…</string>
     <string name="copied">Copié</string>
     <string name="error_occurred">Erreur</string>
-    <string name="share_with_time">Partager avec le moment du début</string>
+    <string name="share_with_time">Partager avec l\'horodatage</string>
     <string name="downloadsucceeded">Téléchargement réussi</string>
     <string name="export_subscriptions">Exporter les souscriptions</string>
     <string name="skip_buttons">Boutons pour passer</string>
@@ -311,4 +311,7 @@
     <string name="open_copied">Ouvrir</string>
     <string name="copied_to_clipboard">Copié dans le presse-papiers</string>
     <string name="break_reminder_time">Quelques minutes avant d\'être rappelé</string>
+    <string name="legacy_subscriptions">Ancienne vue des souscriptions</string>
+    <string name="device_info">Infos de l\'appareil</string>
+    <string name="audio_video_summary">Qualité et format</string>
 </resources>
