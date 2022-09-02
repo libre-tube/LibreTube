@@ -108,7 +108,7 @@
     <string name="color_blue">Azul</string>
     <string name="color_purple">Púrpura</string>
     <string name="oledTheme">Negro</string>
-    <string name="material_you">Material You</string>
+    <string name="material_you">Tu Material</string>
     <string name="app_icon">Icono</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -261,7 +261,7 @@
     <string name="network_wifi">Solo con wifi</string>
     <string name="translate">Traducción</string>
     <string name="no_search_result">Sin resultados.</string>
-    <string name="playingOnBackground">"Reproducir  en segundo plano"</string>
+    <string name="playingOnBackground">Reproduciendo en segundo plano…</string>
     <string name="caption_settings">Subtítulos</string>
     <string name="best_quality">Mejor</string>
     <string name="worst_quality">Peor</string>
