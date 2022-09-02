@@ -187,7 +187,7 @@
     <string name="instance_frontend_url">实例前端的URL</string>
     <string name="quality">清晰度</string>
     <string name="behavior">布局</string>
-    <string name="player_summary">清晰度和播放器行为</string>
+    <string name="player_summary">默认和行为</string>
     <string name="seek_increment">快进增量</string>
     <string name="pauseOnScreenOff">自动暂停</string>
     <string name="pauseOnScreenOff_summary">屏幕关闭时暂停播放。</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">使用多少分钟后提醒休息</string>
     <string name="legacy_subscriptions">旧版订阅视图</string>
     <string name="device_info">设备信息</string>
+    <string name="audio_video_summary">清晰度和格式</string>
 </resources>
