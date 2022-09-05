@@ -55,7 +55,7 @@ class ShareDialog(
                 var url = "$host$path"
 
                 if (binding != null && binding!!.timeCodeSwitch.isChecked) {
-                    url += "?t=$position"
+                    url += "&t=$position"
                 }
 
                 val intent = Intent()
