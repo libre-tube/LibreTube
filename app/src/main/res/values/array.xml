@@ -11,6 +11,7 @@
         <item>shimul.me</item>
         <item>jae.fi</item>
         <item>privacy.com.de</item>
+        <item>adminForge.de</item>
     </string-array>
     <string-array name="instancesValue">
         <item>https://pipedapi.kavin.rocks/</item>
@@ -23,6 +24,7 @@
         <item>https://api-piped.shimul.me/</item>
         <item>https://api.yt.jae.fi/</item>
         <item>https://piped-api.privacy.com.de/</item>
+        <item>https://pipedapi.adminforge.de/</item>
     </string-array>
     <string-array name="shareHostsList">
         <item>youtube.com"</item>
@@ -63,6 +65,7 @@
         <item>piped.silkky.cloud"</item>
         <item>piped.mint.lgbt"</item>
         <item>il.ax"</item>
+        <item>piped.adminforge.de"</item>
     </string-array>
     <string-array name="regions">
         <item>@string/systemDefault</item>
