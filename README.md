@@ -52,6 +52,14 @@ The project is aimed to improve the users privacy by being independent from Goog
 | Subtitles         | ✅  |
 | Comments          | ✅  |
 
+# Differences to NewPipe
+
+With NewPipe, the extraction is done locally on your phone and all the requests sent towards YouTube/Google are done directly from the network you're connected to and doesn't use a middleman server in between. Therefore Google can still access information such as the users IP address, besides that subscriptions can only be stored locally.
+
+LibreTube takes this one step further and proxies all requests via Piped (which uses the NewPipeExtractor). This prevents Google servers from accessing your IP address or any other personal data. Apart from that Piped allows syncing your subscriptions between LibreTube and Piped which can be used on desktop too. If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself, therefore fixes usually arrive faster than in NewPipe.
+
+While LibreTube only supports YouTube, NewPipe also allows using other platforms like SoundCloud and media.ccc.de. Both are great clients for watching YouTube videos, it depends on the individuals use case which one fits the own needs better.
+ 
 ## 😇 Contributing
 
 Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done, the better it gets!
