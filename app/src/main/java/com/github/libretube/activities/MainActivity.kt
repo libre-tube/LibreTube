@@ -162,8 +162,6 @@ class MainActivity : BaseActivity() {
         // new way of handling back presses
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // remove focus from search
-                removeSearchFocus()
                 navController.popBackStack(R.id.searchFragment, false)
 
                 if (binding.mainMotionLayout.progress == 0F) {
@@ -260,6 +258,7 @@ class MainActivity : BaseActivity() {
                 val bundle = Bundle()
                 bundle.putString("query", query)
                 navController.navigate(R.id.searchResultFragment, bundle)
+                searchViewModel.setQuery("")
                 return true
             }
 
@@ -284,24 +283,12 @@ class MainActivity : BaseActivity() {
                 override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
                     val currentFragmentId = navController.currentDestination?.id
                     if (currentFragmentId == R.id.searchFragment || currentFragmentId == R.id.searchResultFragment) {
-                        try {
-                            onBackPressedDispatcher.onBackPressed()
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+                        navController.popBackStack()
                     }
                     return true
                 }
             }
         )
-
-        searchView.setOnCloseListener {
-            if (navController.currentDestination?.id == R.id.searchFragment) {
-                searchViewModel.setQuery(null)
-                onBackPressedDispatcher.onBackPressed()
-            }
-            false
-        }
         return super.onCreateOptionsMenu(menu)
     }
 
