@@ -53,14 +53,8 @@ class HomeFragment : BaseFragment() {
             LocaleHelper
                 .getDetectedCountry(requireContext(), "UK")
                 .uppercase()
-        }
-        else {
+        } else {
             regionPref
-        }
-
-        // Iran has no trending videos to show!
-        if (region == "IR"){
-            region = "US"
         }
 
         binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
@@ -91,9 +85,6 @@ class HomeFragment : BaseFragment() {
                 runOnUiThread {
                     binding.progressBar.visibility = View.GONE
                     binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
-                    if (response.isEmpty()){
-                        Toast.makeText(context, "No videos found! Change your region and try again!", Toast.LENGTH_SHORT).show()
-                    }
                 }
             }
         }
