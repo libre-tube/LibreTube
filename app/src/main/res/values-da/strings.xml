@@ -249,7 +249,7 @@
     <string name="instance_frontend_url">URL til frontendinstans</string>
     <string name="quality">Kvalitet</string>
     <string name="behavior">Adfærd</string>
-    <string name="player_summary">Kvalitet og afspilleradfærd</string>
+    <string name="player_summary">Standarder og adfærd</string>
     <string name="autoplay_summary">Afspil den næste video automatisk efter den aktuelle.</string>
     <string name="playingOnBackground">Afspiller i baggrunden…</string>
     <string name="clonePlaylist">Klon playliste</string>
@@ -282,7 +282,7 @@
     <string name="required_network">Påkrævet forbindelse</string>
     <string name="error_occurred">Fejl</string>
     <string name="copied">Kopieret</string>
-    <string name="share_with_time">Del med starttidspunkt</string>
+    <string name="share_with_time">Del med tidskode</string>
     <string name="downloadsucceeded">Download lykkedes</string>
     <string name="export_subscriptions">Eksportér abonnementer</string>
     <string name="skip_buttons">Spring over knapper</string>
@@ -313,4 +313,5 @@
     <string name="break_reminder_time">Minutter før påmindelse</string>
     <string name="legacy_subscriptions">Ældre abonnementsvisning</string>
     <string name="device_info">Enhedsoplysninger</string>
+    <string name="audio_video_summary">Kvalitet og format</string>
 </resources>
