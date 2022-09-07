@@ -280,4 +280,17 @@
     <string name="backup">Sichern</string>
     <string name="picture_in_picture">Bild in Bild</string>
     <string name="open_copied">Öffnen</string>
+    <string name="most_views">Meiste Aufrufe</string>
+    <string name="channel_name_az">Kanalnamen (A-Z)</string>
+    <string name="channel_name_za">Kanalnamen (Z-A)</string>
+    <string name="error_occurred">Fehler :(</string>
+    <string name="network_metered">Mobiles Internet</string>
+    <string name="copied">Kopiert!</string>
+    <string name="break_reminder">Pausenerinnerung</string>
+    <string name="least_views">Wenigste Aufrufe</string>
+    <string name="required_network">Internetverbindung erforderlich</string>
+    <string name="downloadsucceeded">Download erfolgreich</string>
+    <string name="unlimited">Unbegrenzt</string>
+    <string name="background_mode">Hintergrundmodus</string>
+    <string name="take_a_break">Zeit eine Pause zu machen</string>
 </resources>
