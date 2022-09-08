@@ -325,7 +325,7 @@ class MainActivity : BaseActivity() {
             intent?.getStringExtra(IntentData.channelName) != null -> navController.navigate(
                 R.id.channelFragment,
                 bundleOf(
-                    IntentData.channelId to intent?.getStringExtra(IntentData.channelName)
+                    IntentData.channelName to intent?.getStringExtra(IntentData.channelName)
                 )
             )
             intent?.getStringExtra(IntentData.playlistId) != null -> navController.navigate(
