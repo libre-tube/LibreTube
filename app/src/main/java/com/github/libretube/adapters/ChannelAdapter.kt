@@ -49,7 +49,7 @@ class ChannelAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, trending.url)
             }
-            val videoId = trending.url.toID()
+            val videoId = trending.url!!.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId)
                     .show(childFragmentManager, VideoOptionsDialog::class.java.name)

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.dialogs.PlaylistOptionsDialog
 import com.github.libretube.extensions.BaseFragment
@@ -32,7 +33,7 @@ class PlaylistFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            playlistId = it.getString("playlist_id")
+            playlistId = it.getString(IntentData.playlistId)
             isOwner = it.getBoolean("isOwner")
         }
     }

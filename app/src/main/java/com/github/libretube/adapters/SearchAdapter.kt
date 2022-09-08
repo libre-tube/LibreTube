@@ -97,7 +97,7 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
-            val videoId = item.url.toID()
+            val videoId = item.url!!.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId)
                     .show(childFragmentManager, VideoOptionsDialog::class.java.name)
@@ -121,7 +121,7 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
-            val channelId = item.url.toID()
+            val channelId = item.url!!.toID()
 
             isSubscribed(channelId, binding)
         }

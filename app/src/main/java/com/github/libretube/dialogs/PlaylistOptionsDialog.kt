@@ -63,7 +63,7 @@ class PlaylistOptionsDialog(
                                 }
                             BackgroundHelper.playOnBackground(
                                 context = requireContext(),
-                                videoId = playlist.relatedStreams!![0].url.toID(),
+                                videoId = playlist.relatedStreams!![0].url!!.toID(),
                                 playlistId = playlistId
                             )
                         }

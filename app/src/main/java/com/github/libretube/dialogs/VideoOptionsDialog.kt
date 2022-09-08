@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.Globals
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
@@ -79,7 +80,7 @@ class VideoOptionsDialog(
                         if (token != "") {
                             val newFragment = AddToPlaylistDialog()
                             val bundle = Bundle()
-                            bundle.putString("videoId", videoId)
+                            bundle.putString(IntentData.videoId, videoId)
                             newFragment.arguments = bundle
                             newFragment.show(
                                 parentFragmentManager,

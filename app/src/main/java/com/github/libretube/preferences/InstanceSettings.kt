@@ -179,7 +179,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
             // fetch official public instances
 
             val response = try {
-                RetrofitInstance.api.getInstances("https://instances.tokhmi.xyz/")
+                RetrofitInstance.externalApi.getInstances()
             } catch (e: Exception) {
                 e.printStackTrace()
                 emptyList()

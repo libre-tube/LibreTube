@@ -33,7 +33,7 @@ class LegacySubscriptionAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(
                     root.context,
-                    subscription.url.toID()
+                    subscription.url!!.toID()
                 )
             }
         }

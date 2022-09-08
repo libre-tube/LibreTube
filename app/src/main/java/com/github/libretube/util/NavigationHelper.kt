@@ -7,6 +7,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
+import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toID
 import com.github.libretube.fragments.PlayerFragment
 
@@ -17,7 +18,7 @@ object NavigationHelper {
     ) {
         if (channelId != null) {
             val activity = context as MainActivity
-            val bundle = bundleOf("channel_id" to channelId)
+            val bundle = bundleOf(IntentData.channelId to channelId)
             activity.navController.navigate(R.id.channelFragment, bundle)
             try {
                 val mainMotionLayout =
@@ -39,8 +40,8 @@ object NavigationHelper {
     ) {
         if (videoId != null) {
             val bundle = Bundle()
-            bundle.putString("videoId", videoId.toID())
-            if (playlistId != null) bundle.putString("playlistId", playlistId)
+            bundle.putString(IntentData.videoId, videoId.toID())
+            if (playlistId != null) bundle.putString(IntentData.playlistId, playlistId)
             val frag = PlayerFragment()
             frag.arguments = bundle
             val activity = context as AppCompatActivity
@@ -61,7 +62,7 @@ object NavigationHelper {
         if (playlistId != null) {
             val activity = context as MainActivity
             val bundle = Bundle()
-            bundle.putString("playlist_id", playlistId)
+            bundle.putString(IntentData.playlistId, playlistId)
             bundle.putBoolean("isOwner", isOwner)
             activity.navController.navigate(R.id.playlistFragment, bundle)
         }

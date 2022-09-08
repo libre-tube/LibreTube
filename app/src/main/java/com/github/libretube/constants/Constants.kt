@@ -34,6 +34,7 @@ const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
  * Retrofit Instance
  */
 const val PIPED_API_URL = "https://pipedapi.kavin.rocks/"
+const val PIPED_INSTANCES_URL = "https://piped-instances.kavin.rocks/"
 
 /**
  * Notification IDs

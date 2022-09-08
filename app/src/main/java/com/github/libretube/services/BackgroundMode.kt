@@ -15,6 +15,7 @@ import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
@@ -120,9 +121,9 @@ class BackgroundMode : Service() {
             Globals.playingQueue.clear()
 
             // get the intent arguments
-            videoId = intent?.getStringExtra("videoId")!!
-            playlistId = intent.getStringExtra("playlistId")
-            val position = intent.getLongExtra("position", 0L)
+            videoId = intent?.getStringExtra(IntentData.videoId)!!
+            playlistId = intent.getStringExtra(IntentData.playlistId)
+            val position = intent.getLongExtra(IntentData.position, 0L)
 
             // initialize the playlist autoPlay Helper
             autoPlayHelper = AutoPlayHelper(playlistId)
@@ -220,7 +221,7 @@ class BackgroundMode : Service() {
      */
     private fun setNextStream() {
         if (streams!!.relatedStreams!!.isNotEmpty()) {
-            nextStreamId = streams?.relatedStreams!![0].url.toID()
+            nextStreamId = streams?.relatedStreams!![0].url!!.toID()
         }
 
         if (playlistId == null) return

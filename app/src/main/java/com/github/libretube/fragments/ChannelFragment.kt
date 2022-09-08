@@ -11,6 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
@@ -34,10 +35,11 @@ class ChannelFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            channelId = it.getString("channel_id").toID()
-            channelName = it.getString("channel_name")
+            channelId = it.getString(IntentData.channelId)?.toID()
+            channelName = it.getString(IntentData.channelName)
                 ?.replace("/c/", "")
                 ?.replace("/user/", "")
+            Log.e(TAG(), channelName.toString())
         }
     }
 
@@ -59,7 +61,6 @@ class ChannelFragment : BaseFragment() {
         val refreshChannel = {
             binding.channelRefresh.isRefreshing = true
             fetchChannel()
-            isSubscribed()
         }
         refreshChannel()
         binding.channelRefresh.setOnRefreshListener {
@@ -81,31 +82,6 @@ class ChannelFragment : BaseFragment() {
             }
     }
 
-    private fun isSubscribed() {
-        lifecycleScope.launchWhenCreated {
-            isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
-            if (isSubscribed == null) return@launchWhenCreated
-
-            runOnUiThread {
-                if (isSubscribed == true) {
-                    binding.channelSubscribe.text = getString(R.string.unsubscribe)
-                }
-
-                binding.channelSubscribe.setOnClickListener {
-                    binding.channelSubscribe.text = if (isSubscribed == true) {
-                        SubscriptionHelper.unsubscribe(channelId!!)
-                        isSubscribed = false
-                        getString(R.string.subscribe)
-                    } else {
-                        SubscriptionHelper.subscribe(channelId!!)
-                        isSubscribed = true
-                        getString(R.string.unsubscribe)
-                    }
-                }
-            }
-        }
-    }
-
     private fun fetchChannel() {
         fun run() {
             lifecycleScope.launchWhenCreated {
@@ -125,9 +101,35 @@ class ChannelFragment : BaseFragment() {
                     Log.e(TAG(), "HttpException, unexpected response")
                     return@launchWhenCreated
                 }
+                // needed if the channel gets loaded by the ID
+                channelId = response.id
+
+                // fetch and update the subscription status
+                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+                if (isSubscribed == null) return@launchWhenCreated
+
+                runOnUiThread {
+                    if (isSubscribed == true) {
+                        binding.channelSubscribe.text = getString(R.string.unsubscribe)
+                    }
+
+                    binding.channelSubscribe.setOnClickListener {
+                        binding.channelSubscribe.text = if (isSubscribed == true) {
+                            SubscriptionHelper.unsubscribe(channelId!!)
+                            isSubscribed = false
+                            getString(R.string.subscribe)
+                        } else {
+                            SubscriptionHelper.subscribe(channelId!!)
+                            isSubscribed = true
+                            getString(R.string.unsubscribe)
+                        }
+                    }
+                }
+
                 nextPage = response.nextpage
                 isLoading = false
                 binding.channelRefresh.isRefreshing = false
+
                 runOnUiThread {
                     binding.channelScrollView.visibility = View.VISIBLE
                     binding.channelName.text = response.name
