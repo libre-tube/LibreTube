@@ -23,10 +23,10 @@ import com.github.libretube.DOWNLOAD_PENDING_NOTIFICATION_ID
 import com.github.libretube.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.Globals
 import com.github.libretube.R
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.DownloadType
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.PreferenceHelper
 import java.io.File
 
 class DownloadService : Service() {

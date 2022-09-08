@@ -10,8 +10,8 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.Globals
 import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
-import com.github.libretube.preferences.PreferenceHelper
 import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**

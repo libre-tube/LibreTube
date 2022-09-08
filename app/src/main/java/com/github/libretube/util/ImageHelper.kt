@@ -6,8 +6,7 @@ import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.load
 import com.github.libretube.api.CronetHelper
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.constants.PreferenceKeys
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader

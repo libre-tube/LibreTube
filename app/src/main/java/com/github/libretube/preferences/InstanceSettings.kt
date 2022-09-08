@@ -14,6 +14,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.dialogs.CustomInstanceDialog
@@ -23,6 +24,7 @@ import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.extensions.await
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PermissionHelper
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 
 class InstanceSettings : MaterialPreferenceFragment() {

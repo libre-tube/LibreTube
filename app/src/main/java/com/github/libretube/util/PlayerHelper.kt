@@ -3,8 +3,7 @@ package com.github.libretube.util
 import android.content.Context
 import android.view.accessibility.CaptioningManager
 import com.github.libretube.obj.PipedStream
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.constants.PreferenceKeys
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 
 object PlayerHelper {
