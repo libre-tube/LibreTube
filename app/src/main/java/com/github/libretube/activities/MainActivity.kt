@@ -3,12 +3,10 @@ package com.github.libretube.activities
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -27,11 +25,11 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.extensions.BaseActivity
-import com.github.libretube.extensions.TAG
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.SearchViewModel
@@ -316,95 +314,30 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        val intentData: Uri? = intent?.data
-        // check whether an URI got submitted over the intent data
-        if (intentData != null && intentData.host != null && intentData.path != null) {
-            Log.d(TAG(), "intentData: ${intentData.host} ${intentData.path} ")
-            // load the URI of the submitted link (e.g. video)
-            loadIntentData(intentData)
+        // check whether an URI got submitted over the intent data and load it
+        when {
+            intent?.getStringExtra(IntentData.channelId) != null -> loadChannel(
+                channelId = intent?.getStringExtra(IntentData.channelId)
+            )
+            intent?.getStringExtra(IntentData.userId) != null -> loadChannel(
+                channelName = intent?.getStringExtra(IntentData.userId)
+            )
+            intent?.getStringExtra(IntentData.playlistId) != null -> loadPlaylist(
+                intent?.getStringExtra(IntentData.playlistId)!!
+            )
+            intent?.getStringExtra(IntentData.videoId) != null -> loadVideo(
+                videoId = intent?.getStringExtra(IntentData.videoId)!!,
+                timeStamp = intent?.getLongExtra(IntentData.timeStamp, 0L)
+            )
         }
     }
 
-    private fun loadIntentData(data: Uri) {
-        if (data.path!!.contains("/channel/")
-        ) {
-            val channelId = data.path!!
-                .replace("/channel/", "")
-
-            loadChannel(channelId = channelId)
-        } else if (
-            data.path!!.contains("/c/") ||
-            data.path!!.contains("/user/")
-        ) {
-            val channelName = data.path!!
-                .replace("/c/", "")
-                .replace("/user/", "")
-
-            loadChannel(channelName = channelName)
-        } else if (
-            data.path!!.contains("/playlist")
-        ) {
-            var playlistId = data.query!!
-            if (playlistId.contains("&")) {
-                for (v in playlistId.split("&")) {
-                    if (v.contains("list=")) {
-                        playlistId = v.replace("list=", "")
-                        break
-                    }
-                }
-            } else {
-                playlistId = playlistId.replace("list=", "")
-            }
-
-            loadPlaylist(playlistId)
-        } else if (
-            data.path!!.contains("/shorts/") ||
-            data.path!!.contains("/embed/") ||
-            data.path!!.contains("/v/")
-        ) {
-            val videoId = data.path!!
-                .replace("/shorts/", "")
-                .replace("/v/", "")
-                .replace("/embed/", "")
-
-            loadVideo(videoId, data.query)
-        } else if (data.path!!.contains("/watch") && data.query != null) {
-            var videoId = data.query!!
-
-            if (videoId.contains("&")) {
-                val watches = videoId.split("&")
-                for (v in watches) {
-                    if (v.contains("v=")) {
-                        videoId = v.replace("v=", "")
-                        break
-                    }
-                }
-            } else {
-                videoId = videoId
-                    .replace("v=", "")
-            }
-
-            loadVideo(videoId, data.query)
-        } else {
-            val videoId = data.path!!.replace("/", "")
-
-            loadVideo(videoId, data.query)
-        }
-    }
-
-    private fun loadVideo(videoId: String, query: String?) {
-        Log.i(TAG(), "URI type: Video")
-
+    private fun loadVideo(videoId: String, timeStamp: Long?) {
         val bundle = Bundle()
-        Log.e(TAG(), videoId)
-
-        // for time stamped links
-        if (query != null && query.contains("t=")) {
-            val timeStamp = query.toString().split("t=")[1]
-            bundle.putLong("timeStamp", timeStamp.toLong())
-        }
 
         bundle.putString("videoId", videoId)
+        if (timeStamp != null) bundle.putLong("timeStamp", timeStamp)
+
         val frag = PlayerFragment()
         frag.arguments = bundle
 
@@ -425,8 +358,6 @@ class MainActivity : BaseActivity() {
         channelId: String? = null,
         channelName: String? = null
     ) {
-        Log.i(TAG(), "Uri Type: Channel")
-
         val bundle = if (channelId != null) {
             bundleOf("channel_id" to channelId)
         } else {
@@ -436,8 +367,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadPlaylist(playlistId: String) {
-        Log.i(TAG(), "Uri Type: Playlist")
-
         val bundle = bundleOf("playlist_id" to playlistId)
         navController.navigate(R.id.playlistFragment, bundle)
     }

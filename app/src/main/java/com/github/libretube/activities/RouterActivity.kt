@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import com.github.libretube.R
+import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.ThemeHelper
@@ -35,13 +36,87 @@ class RouterActivity : BaseActivity() {
         return hostsList.contains(intentDataHost)
     }
 
+    /**
+     * Resolve the uri and return a bundle with the arguments
+     */
+    private fun resolveType(intent: Intent, uri: Uri): Intent {
+        when {
+            uri.path!!.contains("/channel/") -> {
+                val channelId = uri.path!!
+                    .replace("/channel/", "")
+
+                intent.putExtra(IntentData.channelId, channelId)
+            }
+            uri.path!!.contains("/c/") || uri.path!!.contains("/user/") -> {
+                val channelName = uri.path!!
+                    .replace("/c/", "")
+                    .replace("/user/", "")
+
+                intent.putExtra(IntentData.userId, channelName)
+            }
+            uri.path!!.contains("/playlist") -> {
+                var playlistId = uri.query!!
+                if (playlistId.contains("&")) {
+                    for (v in playlistId.split("&")) {
+                        if (v.contains("list=")) {
+                            playlistId = v.replace("list=", "")
+                            break
+                        }
+                    }
+                } else {
+                    playlistId = playlistId.replace("list=", "")
+                }
+
+                intent.putExtra(IntentData.playlistId, playlistId)
+            }
+            uri.path!!.contains("/shorts/") ||
+                uri.path!!.contains("/embed/") ||
+                uri.path!!.contains("/v/")
+            -> {
+                val videoId = uri.path!!
+                    .replace("/shorts/", "")
+                    .replace("/v/", "")
+                    .replace("/embed/", "")
+
+                intent.putExtra(IntentData.videoId, videoId)
+            }
+            uri.path!!.contains("/watch") && uri.query != null -> {
+                var videoId = uri.query!!
+
+                if (videoId.contains("&")) {
+                    val watches = videoId.split("&")
+                    for (v in watches) {
+                        if (v.contains("v=")) {
+                            videoId = v.replace("v=", "")
+                            break
+                        }
+                    }
+                } else {
+                    videoId = videoId
+                        .replace("v=", "")
+                }
+
+                intent.putExtra(IntentData.videoId, videoId)
+            } else -> {
+                val timeStamp = uri.getQueryParameter("t")
+                val videoId = uri.path!!.replace("/", "")
+
+                intent.putExtra(IntentData.videoId, videoId)
+                if (timeStamp != null) intent.putExtra(IntentData.timeStamp, timeStamp.toLong())
+            }
+        }
+        return intent
+    }
+
     private fun handleSendText(uri: Uri) {
         Log.i(TAG(), uri.toString())
+
         val pm: PackageManager = this.packageManager
         val intent = pm.getLaunchIntentForPackage(this.packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent?.data = uri
-        this.startActivity(intent)
+        this.startActivity(
+            resolveType(intent!!, uri)
+        )
         this.finishAndRemoveTask()
     }
 }
