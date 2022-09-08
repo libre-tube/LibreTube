@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.Globals
-import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.R
+import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

@@ -4,10 +4,10 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.R
-import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
+import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.CustomInstance

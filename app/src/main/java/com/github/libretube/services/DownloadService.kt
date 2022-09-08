@@ -17,12 +17,12 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.github.libretube.Globals
+import com.github.libretube.R
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_PENDING_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
-import com.github.libretube.Globals
-import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.DownloadType
