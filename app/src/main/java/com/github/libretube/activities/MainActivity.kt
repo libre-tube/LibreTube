@@ -167,15 +167,13 @@ class MainActivity : BaseActivity() {
                 if (binding.mainMotionLayout.progress == 0F) {
                     try {
                         minimizePlayer()
+                        return
                     } catch (e: Exception) {
-                        if (navController.currentDestination?.id == startFragmentId) {
-                            // close app
-                            moveTaskToBack(true)
-                        } else {
-                            navController.popBackStack()
-                        }
+                        // current fragment isn't the player fragment
                     }
-                } else if (navController.currentDestination?.id == startFragmentId) {
+                }
+
+                if (navController.currentDestination?.id == startFragmentId) {
                     moveTaskToBack(true)
                 } else {
                     navController.popBackStack()

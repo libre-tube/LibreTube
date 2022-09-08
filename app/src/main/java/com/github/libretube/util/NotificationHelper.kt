@@ -17,8 +17,8 @@ import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.extensions.toID
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.toID
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
