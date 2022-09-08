@@ -55,17 +55,7 @@ class RouterActivity : BaseActivity() {
                 intent.putExtra(IntentData.channelName, channelName)
             }
             uri.path!!.contains("/playlist") -> {
-                var playlistId = uri.query!!
-                if (playlistId.contains("&")) {
-                    for (v in playlistId.split("&")) {
-                        if (v.contains("list=")) {
-                            playlistId = v.replace("list=", "")
-                            break
-                        }
-                    }
-                } else {
-                    playlistId = playlistId.replace("list=", "")
-                }
+                val playlistId = uri.getQueryParameter("list")
 
                 intent.putExtra(IntentData.playlistId, playlistId)
             }
@@ -81,20 +71,7 @@ class RouterActivity : BaseActivity() {
                 intent.putExtra(IntentData.videoId, videoId)
             }
             uri.path!!.contains("/watch") && uri.query != null -> {
-                var videoId = uri.query!!
-
-                if (videoId.contains("&")) {
-                    val watches = videoId.split("&")
-                    for (v in watches) {
-                        if (v.contains("v=")) {
-                            videoId = v.replace("v=", "")
-                            break
-                        }
-                    }
-                } else {
-                    videoId = videoId
-                        .replace("v=", "")
-                }
+                val videoId = uri.getQueryParameter("v")
 
                 intent.putExtra(IntentData.videoId, videoId)
             }
