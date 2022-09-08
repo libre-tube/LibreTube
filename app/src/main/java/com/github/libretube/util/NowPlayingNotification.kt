@@ -7,9 +7,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v4.media.session.MediaSessionCompat
-import com.github.libretube.BACKGROUND_CHANNEL_ID
-import com.github.libretube.PLAYER_NOTIFICATION_ID
 import com.github.libretube.activities.MainActivity
+import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
+import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.extensions.await
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer

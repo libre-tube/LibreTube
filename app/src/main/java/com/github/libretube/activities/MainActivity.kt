@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.github.libretube.R
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.extensions.BaseActivity
@@ -34,10 +35,9 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.SearchViewModel
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.NetworkHelper
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
@@ -167,15 +167,13 @@ class MainActivity : BaseActivity() {
                 if (binding.mainMotionLayout.progress == 0F) {
                     try {
                         minimizePlayer()
+                        return
                     } catch (e: Exception) {
-                        if (navController.currentDestination?.id == startFragmentId) {
-                            // close app
-                            moveTaskToBack(true)
-                        } else {
-                            navController.popBackStack()
-                        }
+                        // current fragment isn't the player fragment
                     }
-                } else if (navController.currentDestination?.id == startFragmentId) {
+                }
+
+                if (navController.currentDestination?.id == startFragmentId) {
                     moveTaskToBack(true)
                 } else {
                     navController.popBackStack()

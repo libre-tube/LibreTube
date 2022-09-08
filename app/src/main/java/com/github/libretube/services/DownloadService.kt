@@ -17,16 +17,16 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.github.libretube.DOWNLOAD_CHANNEL_ID
-import com.github.libretube.DOWNLOAD_FAILURE_NOTIFICATION_ID
-import com.github.libretube.DOWNLOAD_PENDING_NOTIFICATION_ID
-import com.github.libretube.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.Globals
 import com.github.libretube.R
+import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
+import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
+import com.github.libretube.constants.DOWNLOAD_PENDING_NOTIFICATION_ID
+import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.DownloadType
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.PreferenceHelper
 import java.io.File
 
 class DownloadService : Service() {
@@ -180,8 +180,7 @@ class DownloadService : Service() {
     }
 
     private fun downloadNotification(intent: Intent) {
-        var pendingIntent: PendingIntent? = null
-        pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
         } else {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
@@ -234,7 +233,14 @@ class DownloadService : Service() {
 
         Globals.IS_DOWNLOAD_RUNNING = false
         Log.d(TAG(), "dl finished!")
-        stopForeground(true)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE)
+        } else {
+            @Suppress("DEPRECATION")
+            stopForeground(true)
+        }
+
         stopService(Intent(this@DownloadService, DownloadService::class.java))
         super.onDestroy()
     }

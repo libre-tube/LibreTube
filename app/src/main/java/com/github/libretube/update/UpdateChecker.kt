@@ -1,7 +1,7 @@
 package com.github.libretube.update
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.GITHUB_API_URL
+import com.github.libretube.constants.GITHUB_API_URL
 import com.github.libretube.extensions.await
 import java.net.URL
 
@@ -9,7 +9,7 @@ object UpdateChecker {
     fun getLatestReleaseInfo(): UpdateInfo? {
         var versionInfo: UpdateInfo? = null
         // run http request as thread to make it async
-        val thread = Thread {
+        Thread {
             // otherwise crashes without internet
             versionInfo = getUpdateInfo()
             try {

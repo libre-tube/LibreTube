@@ -6,6 +6,7 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.util.NotificationHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 

@@ -11,7 +11,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Login
-import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException

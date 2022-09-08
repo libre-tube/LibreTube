@@ -3,8 +3,7 @@ package com.github.libretube.util
 import android.content.Context
 import android.os.Build
 import android.telephony.TelephonyManager
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.constants.PreferenceKeys
 import java.util.*
 
 object LocaleHelper {

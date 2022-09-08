@@ -6,7 +6,7 @@ import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.obj.Subscribe
-import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

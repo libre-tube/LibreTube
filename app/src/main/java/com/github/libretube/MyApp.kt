@@ -13,14 +13,14 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
 import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NotificationHelper
+import com.github.libretube.util.PreferenceHelper
 
 class MyApp : Application() {
     override fun onCreate() {

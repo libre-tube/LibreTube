@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import com.github.libretube.R
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.constants.PreferenceKeys
 import com.google.android.material.color.DynamicColors
 
 object ThemeHelper {

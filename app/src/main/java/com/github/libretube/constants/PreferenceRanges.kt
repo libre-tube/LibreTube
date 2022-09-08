@@ -1,4 +1,4 @@
-package com.github.libretube.preferences
+package com.github.libretube.constants
 
 import com.github.libretube.obj.SliderRange
 

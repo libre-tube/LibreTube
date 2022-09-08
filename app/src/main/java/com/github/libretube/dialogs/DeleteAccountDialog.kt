@@ -11,7 +11,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogDeleteAccountBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.DeleteUserRequest
-import com.github.libretube.preferences.PreferenceHelper
+import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

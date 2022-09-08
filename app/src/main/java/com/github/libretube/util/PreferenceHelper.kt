@@ -1,9 +1,10 @@
-package com.github.libretube.preferences
+package com.github.libretube.util
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.libretube.constants.PreferenceKeys
 
 object PreferenceHelper {
     /**

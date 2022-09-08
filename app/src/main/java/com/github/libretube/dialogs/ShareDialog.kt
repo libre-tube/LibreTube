@@ -4,15 +4,15 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import com.github.libretube.PIPED_FRONTEND_URL
 import com.github.libretube.R
-import com.github.libretube.YOUTUBE_FRONTEND_URL
+import com.github.libretube.constants.PIPED_FRONTEND_URL
+import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.extensions.await
-import com.github.libretube.preferences.PreferenceHelper
-import com.github.libretube.preferences.PreferenceKeys
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
