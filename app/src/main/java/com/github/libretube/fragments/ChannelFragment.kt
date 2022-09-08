@@ -11,6 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
@@ -34,8 +35,8 @@ class ChannelFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            channelId = it.getString("channel_id").toID()
-            channelName = it.getString("channel_name")
+            channelId = it.getString(IntentData.channelId)?.toID()
+            channelName = it.getString(IntentData.channelName)
                 ?.replace("/c/", "")
                 ?.replace("/user/", "")
         }

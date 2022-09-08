@@ -316,14 +316,23 @@ class MainActivity : BaseActivity() {
         super.onStart()
         // check whether an URI got submitted over the intent data and load it
         when {
-            intent?.getStringExtra(IntentData.channelId) != null -> loadChannel(
-                channelId = intent?.getStringExtra(IntentData.channelId)
+            intent?.getStringExtra(IntentData.channelId) != null -> navController.navigate(
+                R.id.channelFragment,
+                bundleOf(
+                    IntentData.channelName to intent?.getStringExtra(IntentData.channelId)!!
+                )
             )
-            intent?.getStringExtra(IntentData.userId) != null -> loadChannel(
-                channelName = intent?.getStringExtra(IntentData.userId)
+            intent?.getStringExtra(IntentData.channelName) != null -> navController.navigate(
+                R.id.channelFragment,
+                bundleOf(
+                    IntentData.channelId to intent?.getStringExtra(IntentData.channelName)
+                )
             )
-            intent?.getStringExtra(IntentData.playlistId) != null -> loadPlaylist(
-                intent?.getStringExtra(IntentData.playlistId)!!
+            intent?.getStringExtra(IntentData.playlistId) != null -> navController.navigate(
+                R.id.playlistFragment,
+                bundleOf(
+                    IntentData.playlistId to intent?.getStringExtra(IntentData.playlistId)!!
+                )
             )
             intent?.getStringExtra(IntentData.videoId) != null -> loadVideo(
                 videoId = intent?.getStringExtra(IntentData.videoId)!!,
@@ -335,8 +344,8 @@ class MainActivity : BaseActivity() {
     private fun loadVideo(videoId: String, timeStamp: Long?) {
         val bundle = Bundle()
 
-        bundle.putString("videoId", videoId)
-        if (timeStamp != null) bundle.putLong("timeStamp", timeStamp)
+        bundle.putString(IntentData.videoId, videoId)
+        if (timeStamp != null) bundle.putLong(IntentData.timeStamp, timeStamp)
 
         val frag = PlayerFragment()
         frag.arguments = bundle
@@ -352,23 +361,6 @@ class MainActivity : BaseActivity() {
             motionLayout.transitionToEnd()
             motionLayout.transitionToStart()
         }, 100)
-    }
-
-    private fun loadChannel(
-        channelId: String? = null,
-        channelName: String? = null
-    ) {
-        val bundle = if (channelId != null) {
-            bundleOf("channel_id" to channelId)
-        } else {
-            bundleOf("channel_name" to channelName)
-        }
-        navController.navigate(R.id.channelFragment, bundle)
-    }
-
-    private fun loadPlaylist(playlistId: String) {
-        val bundle = bundleOf("playlist_id" to playlistId)
-        navController.navigate(R.id.playlistFragment, bundle)
     }
 
     private fun minimizePlayer() {

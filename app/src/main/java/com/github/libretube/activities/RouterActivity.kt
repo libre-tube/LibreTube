@@ -52,7 +52,7 @@ class RouterActivity : BaseActivity() {
                     .replace("/c/", "")
                     .replace("/user/", "")
 
-                intent.putExtra(IntentData.userId, channelName)
+                intent.putExtra(IntentData.channelName, channelName)
             }
             uri.path!!.contains("/playlist") -> {
                 var playlistId = uri.query!!

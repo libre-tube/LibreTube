@@ -35,18 +35,12 @@
         android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
         tools:layout="@layout/fragment_channel">
-        <argument
-            android:name="channel_id"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
         android:name="com.github.libretube.fragments.PlaylistFragment"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist">
-        <argument
-            android:name="playlist_id"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/watchHistoryFragment"

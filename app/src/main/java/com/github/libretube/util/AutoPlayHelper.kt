@@ -55,7 +55,7 @@ class AutoPlayHelper(
                     )
                 )
         ) {
-            nextStreamId = relatedStreams[index].url.toID()
+            nextStreamId = relatedStreams[index].url!!.toID()
             if (index + 1 < relatedStreams.size) {
                 index += 1
             } else {
@@ -94,7 +94,7 @@ class AutoPlayHelper(
                         )
                     }
                 // save the playlist urls to the list
-                playlistStreamIds += playlist.relatedStreams!!.map { it.url.toID() }
+                playlistStreamIds += playlist.relatedStreams!!.map { it.url!!.toID() }
                 // save playlistNextPage for usage if video is not contained
                 playlistNextPage = playlist.nextpage
                 return@withContext getNextPlaylistVideoId(currentVideoId)

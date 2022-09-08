@@ -44,6 +44,7 @@ import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.PreferenceRanges
 import com.github.libretube.databinding.DialogSliderBinding
@@ -193,8 +194,8 @@ class PlayerFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            videoId = it.getString("videoId").toID()
-            playlistId = it.getString("playlistId")
+            videoId = it.getString(IntentData.videoId)!!.toID()
+            playlistId = it.getString(IntentData.playlistId)
         }
     }
 
@@ -979,7 +980,7 @@ class PlayerFragment : BaseFragment() {
     // seek to saved watch position if available
     private fun seekToWatchPosition() {
         // support for time stamped links
-        val timeStamp: Long? = arguments?.getLong("timeStamp")
+        val timeStamp: Long? = arguments?.getLong(IntentData.timeStamp)
         if (timeStamp != null && timeStamp != 0L) {
             exoPlayer.seekTo(timeStamp * 1000)
             return
@@ -1205,7 +1206,7 @@ class PlayerFragment : BaseFragment() {
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
-            val bundle = bundleOf("channel_id" to response.uploaderUrl)
+            val bundle = bundleOf(IntentData.channelId to response.uploaderUrl)
             activity.navController.navigate(R.id.channelFragment, bundle)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
@@ -1218,7 +1219,7 @@ class PlayerFragment : BaseFragment() {
             binding.relPlayerSave.setOnClickListener {
                 val newFragment = AddToPlaylistDialog()
                 val bundle = Bundle()
-                bundle.putString("videoId", videoId)
+                bundle.putString(IntentData.videoId, videoId)
                 newFragment.arguments = bundle
                 newFragment.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
             }
@@ -1599,7 +1600,7 @@ class PlayerFragment : BaseFragment() {
 
     private fun isSubscribed() {
         fun run() {
-            val channelId = streams.uploaderUrl.toID()
+            val channelId = streams.uploaderUrl!!.toID()
             lifecycleScope.launchWhenCreated {
                 isSubscribed = SubscriptionHelper.isSubscribed(channelId)
 
