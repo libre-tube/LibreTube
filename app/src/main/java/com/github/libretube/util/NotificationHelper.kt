@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Constraints
@@ -30,7 +31,11 @@ class NotificationHelper(
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     // the id where notification channels start
-    private var notificationId = NotificationManager.activeNotifications.size + 5
+    private var notificationId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        NotificationManager.activeNotifications.size + 5
+    } else {
+        5
+    }
 
     /**
      * Enqueue the work manager task
@@ -117,7 +122,7 @@ class NotificationHelper(
             }
 
             val lastSeenStreamId = PreferenceHelper.getLatestVideoId()
-            val latestFeedStreamId = videoFeed[0].url.toID()
+            val latestFeedStreamId = videoFeed[0].url!!.toID()
 
             // first time notifications enabled or no new video available
             if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
@@ -126,7 +131,7 @@ class NotificationHelper(
             }
 
             // filter the new videos out
-            val lastSeenStreamItem = videoFeed.filter { it.url.toID() == lastSeenStreamId }
+            val lastSeenStreamItem = videoFeed.filter { it.url!!.toID() == lastSeenStreamId }
 
             // previous video not found
             if (lastSeenStreamItem.isEmpty()) return@runBlocking
@@ -141,7 +146,7 @@ class NotificationHelper(
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
                 createNotification(
-                    group = streams[0].uploaderUrl.toID(),
+                    group = streams[0].uploaderUrl!!.toID(),
                     title = streams[0].uploaderName.toString(),
                     isSummary = true
                 )
@@ -151,12 +156,12 @@ class NotificationHelper(
                     createNotification(
                         title = streamItem.title.toString(),
                         description = streamItem.uploaderName.toString(),
-                        group = streamItem.uploaderUrl.toID()
+                        group = streamItem.uploaderUrl!!.toID()
                     )
                 }
             }
             // save the latest streams that got notified about
-            PreferenceHelper.setLatestVideoId(videoFeed[0].url.toID())
+            PreferenceHelper.setLatestVideoId(videoFeed[0].url!!.toID())
         }
         // return whether the work succeeded
         return success

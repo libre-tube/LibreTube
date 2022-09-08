@@ -158,6 +158,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
         <item name="background">?attr/selectableItemBackground</item>
 
     </style>
@@ -172,6 +174,13 @@
         <item name="android:paddingBottom">8dp</item>
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:orientation">horizontal</item>
+
+    </style>
+
+    <!-- Uses Material Switches instead of the old ones -->
+    <style name="Preference.SwitchPreferenceCompat.Material3" parent="@style/Preference.SwitchPreferenceCompat.Material">
+
+        <item name="widgetLayout">@layout/view_preference_switch</item>
 
     </style>
 

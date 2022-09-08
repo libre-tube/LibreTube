@@ -58,7 +58,7 @@ class PlaylistAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
-            val videoId = streamItem.url.toID()
+            val videoId = streamItem.url!!.toID()
             root.setOnLongClickListener {
                 VideoOptionsDialog(videoId)
                     .show(childFragmentManager, VideoOptionsDialog::class.java.name)

@@ -87,7 +87,7 @@ class ShareDialog(
 
         // return the custom instance frontend url if available
         customInstances.forEach { instance ->
-            if (instance.apiUrl == instancePref) return instance.apiUrl
+            if (instance.apiUrl == instancePref) return instance.frontendUrl
         }
         return ""
     }

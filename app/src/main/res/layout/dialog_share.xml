@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:text="@string/share_with_time" />
 
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/timeCodeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

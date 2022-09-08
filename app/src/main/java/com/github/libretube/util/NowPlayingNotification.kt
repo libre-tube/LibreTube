@@ -5,18 +5,17 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.support.v4.media.session.MediaSessionCompat
+import coil.request.ImageRequest
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.extensions.await
 import com.github.libretube.obj.Streams
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import java.net.URL
 
 class NowPlayingNotification(
     private val context: Context,
@@ -43,7 +42,7 @@ class NowPlayingNotification(
      * The [DescriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
      * Basic example [here](https://github.com/AnthonyMarkD/AudioPlayerSampleTest)
      */
-    inner class DescriptionAdapter() :
+    inner class DescriptionAdapter :
         PlayerNotificationManager.MediaDescriptionAdapter {
         /**
          * sets the title of the notification
@@ -83,36 +82,25 @@ class NowPlayingNotification(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? {
-            lateinit var bitmap: Bitmap
+            var resizedBitmap: Bitmap? = null
 
-            /**
-             * running on a new thread to prevent a NetworkMainThreadException
-             */
-            Thread {
-                try {
-                    /**
-                     * try to GET the thumbnail from the URL
-                     */
-                    val inputStream = URL(streams?.thumbnailUrl).openStream()
-                    bitmap = BitmapFactory.decodeStream(inputStream)
-                } catch (ex: java.lang.Exception) {
-                    ex.printStackTrace()
+            val request = ImageRequest.Builder(context)
+                .data(streams?.thumbnailUrl)
+                .target { result ->
+                    val bitmap = (result as BitmapDrawable).bitmap
+                    resizedBitmap = Bitmap.createScaledBitmap(
+                        bitmap,
+                        bitmap.width,
+                        bitmap.width,
+                        false
+                    )
                 }
-            }.await()
-            /**
-             * returns the scaled bitmap if it got fetched successfully
-             */
-            return try {
-                val resizedBitmap = Bitmap.createScaledBitmap(
-                    bitmap,
-                    bitmap.width,
-                    bitmap.width,
-                    false
-                )
-                resizedBitmap
-            } catch (e: Exception) {
-                null
-            }
+                .build()
+
+            ImageHelper.imageLoader.enqueue(request)
+
+            // returns the scaled bitmap if it got fetched successfully
+            return resizedBitmap
         }
     }
 

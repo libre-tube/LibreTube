@@ -6,6 +6,10 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
+        <item name="switchPreferenceCompatStyle">
+            @style/Preference.SwitchPreferenceCompat.Material3
+        </item>
+
     </style>
 
     <style name="StartupTheme" parent="BaseTheme">
