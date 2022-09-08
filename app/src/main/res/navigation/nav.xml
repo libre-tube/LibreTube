@@ -34,14 +34,12 @@
         android:id="@+id/channelFragment"
         android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
-        tools:layout="@layout/fragment_channel">
-    </fragment>
+        tools:layout="@layout/fragment_channel"></fragment>
     <fragment
         android:id="@+id/playlistFragment"
         android:name="com.github.libretube.fragments.PlaylistFragment"
         android:label="fragment_playlist"
-        tools:layout="@layout/fragment_playlist">
-    </fragment>
+        tools:layout="@layout/fragment_playlist"></fragment>
     <fragment
         android:id="@+id/watchHistoryFragment"
         android:name="com.github.libretube.fragments.WatchHistoryFragment"
