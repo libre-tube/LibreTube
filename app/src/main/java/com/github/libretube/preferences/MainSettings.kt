@@ -6,9 +6,9 @@ import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.dialogs.UpdateDialog
 import com.github.libretube.extensions.getStyledSnackBar
-import com.github.libretube.update.UpdateChecker
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 import kotlinx.coroutines.CoroutineScope
@@ -102,8 +102,12 @@ class MainSettings : MaterialPreferenceFragment() {
                     return@launch
                 }
                 // check for update
-                val updateInfo = UpdateChecker.getLatestReleaseInfo()
-                if (updateInfo?.name == null) {
+                val updateInfo = try {
+                    RetrofitInstance.externalApi.getUpdateInfo()
+                } catch (e: Exception) {
+                    return@launch
+                }
+                if (updateInfo.name == null) {
                     // request failed
                     (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.unknown_error)
                         ?.show()

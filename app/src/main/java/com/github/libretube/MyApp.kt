@@ -16,9 +16,7 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
-import com.github.libretube.constants.PIPED_API_URL
 import com.github.libretube.constants.PUSH_CHANNEL_ID
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
@@ -55,7 +53,9 @@ class MyApp : Application() {
         /**
          * Set the api and the auth api url
          */
-        initializeRetrofit()
+        RetrofitInstance.initialize()
+        CronetHelper.initCronet(this)
+        ImageHelper.initializeImageLoader(this)
 
         /**
          * Initialize the notification listener in the background
@@ -80,26 +80,6 @@ class MyApp : Application() {
          * Database Migration
          */
         databaseMigration()
-    }
-
-    /**
-     * Set the api urls needed for the [RetrofitInstance]
-     */
-    private fun initializeRetrofit() {
-        RetrofitInstance.url =
-            PreferenceHelper.getString(PreferenceKeys.FETCH_INSTANCE, PIPED_API_URL)
-        // set auth instance
-        RetrofitInstance.authUrl =
-            if (PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
-                PreferenceHelper.getString(
-                    PreferenceKeys.AUTH_INSTANCE,
-                    PIPED_API_URL
-                )
-            } else {
-                RetrofitInstance.url
-            }
-        CronetHelper.initCronet(this)
-        ImageHelper.initializeImageLoader(this)
     }
 
     /**

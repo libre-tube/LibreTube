@@ -3,7 +3,6 @@ package com.github.libretube.api
 import com.github.libretube.obj.Channel
 import com.github.libretube.obj.CommentsPage
 import com.github.libretube.obj.DeleteUserRequest
-import com.github.libretube.obj.Instances
 import com.github.libretube.obj.Login
 import com.github.libretube.obj.Message
 import com.github.libretube.obj.Playlist
@@ -23,7 +22,6 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 interface PipedApi {
     @GET("trending")
@@ -165,8 +163,4 @@ interface PipedApi {
         @Header("Authorization") token: String,
         @Body playlistId: PlaylistId
     ): Message
-
-    // only for fetching servers list
-    @GET
-    suspend fun getInstances(@Url url: String): List<Instances>
 }
