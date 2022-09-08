@@ -1,5 +1,6 @@
 package com.github.libretube
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -13,6 +14,10 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
+import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
+import com.github.libretube.constants.PIPED_API_URL
+import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
@@ -100,6 +105,7 @@ class MyApp : Application() {
     /**
      * Initializes the required [NotificationChannel]s for the app.
      */
+    @SuppressLint("InlinedApi")
     private fun initializeNotificationChannels() {
         createNotificationChannel(
             DOWNLOAD_CHANNEL_ID,
@@ -149,13 +155,13 @@ class MyApp : Application() {
         val username = legacyUserPrefs.getString("username", "")!!
         if (username != "") {
             PreferenceHelper.setUsername(username)
-            legacyUserPrefs.edit().putString("username", "")
+            legacyUserPrefs.edit().putString("username", "").apply()
         }
         val legacyTokenPrefs = getSharedPreferences("token", Context.MODE_PRIVATE)
         val token = legacyUserPrefs.getString("token", "")!!
         if (token != "") {
             PreferenceHelper.setToken(token)
-            legacyTokenPrefs.edit().putString("token", "")
+            legacyTokenPrefs.edit().putString("token", "").apply()
         }
     }
 
@@ -177,7 +183,7 @@ class MyApp : Application() {
                     )
                 } catch (e: Exception) {
                 }
-                prefs.edit().putString("watch_history", "").commit()
+                prefs.edit().putString("watch_history", "").apply()
             }
             val legacyWatchPositions = prefs.getString("watch_positions", "")
             if (legacyWatchPositions != "") {
@@ -189,12 +195,12 @@ class MyApp : Application() {
                     )
                 } catch (e: Exception) {
                 }
-                prefs.edit().remove("watch_positions").commit()
+                prefs.edit().remove("watch_positions").apply()
             }
             prefs.edit()
                 .remove("custom_instances")
                 .remove("local_subscriptions")
-                .commit()
+                .apply()
         }.start()
     }
 }
