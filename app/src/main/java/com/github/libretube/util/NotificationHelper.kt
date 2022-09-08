@@ -11,8 +11,8 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import com.github.libretube.NOTIFICATION_WORK_NAME
-import com.github.libretube.PUSH_CHANNEL_ID
+import com.github.libretube.constants.NOTIFICATION_WORK_NAME
+import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.api.RetrofitInstance

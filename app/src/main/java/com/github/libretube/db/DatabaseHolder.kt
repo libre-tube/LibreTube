@@ -2,7 +2,7 @@ package com.github.libretube.db
 
 import android.content.Context
 import androidx.room.Room
-import com.github.libretube.DATABASE_NAME
+import com.github.libretube.constants.DATABASE_NAME
 
 object DatabaseHolder {
     lateinit var db: AppDatabase

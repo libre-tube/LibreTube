@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import androidx.annotation.Nullable
-import com.github.libretube.PLAYER_NOTIFICATION_ID
+import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 
 class ClosingService : Service() {
 

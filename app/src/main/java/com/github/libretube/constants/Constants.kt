@@ -1,4 +1,4 @@
-package com.github.libretube
+package com.github.libretube.constants
 
 /**
  * API link for the update checker
