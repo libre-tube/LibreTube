@@ -15,7 +15,7 @@ object DatabaseHelper {
             streams.title,
             streams.uploadDate,
             streams.uploader,
-            streams.uploaderUrl.toID(),
+            streams.uploaderUrl!!.toID(),
             streams.uploaderAvatar,
             streams.thumbnailUrl,
             streams.duration
