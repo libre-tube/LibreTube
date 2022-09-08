@@ -1,0 +1,8 @@
+Add option for the legacy subscriptions view by @Bnyro in #1134
+Add device info dialog by @Bnyro in #1136
+better split screen support by @Bnyro in #1152
+Grouped notifications by @Bnyro in #1162
+Continuous playback speed slider by @Bnyro in #1163
+Toggle for sharing with time code by @Bnyro in #1168
+Better break reminder pref by @Bnyro in #1128
+Load feed in background by @Bnyro in #1176
