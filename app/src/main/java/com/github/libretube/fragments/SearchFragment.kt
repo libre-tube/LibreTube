@@ -46,7 +46,10 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.suggestionsRecycler.layoutManager = LinearLayoutManager(requireContext()).apply {
+            reverseLayout = true
+            stackFromEnd = true
+        }
 
         // waiting for the query to change
         viewModel.searchQuery.observe(viewLifecycleOwner) {
