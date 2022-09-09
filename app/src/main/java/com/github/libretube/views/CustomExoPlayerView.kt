@@ -227,7 +227,7 @@ internal class CustomExoPlayerView(
         player?.seekTo((player?.currentPosition ?: 0L) - seekIncrement)
 
         // show the rewind button
-        doubleTapOverlayBinding?.rewindBTN.run {
+        doubleTapOverlayBinding?.rewindBTN.apply {
             this!!.visibility = View.VISIBLE
             // clear previous animation
             this.animate().rotation(0F).setDuration(0).start()
@@ -252,9 +252,9 @@ internal class CustomExoPlayerView(
 
         // show the forward button
         doubleTapOverlayBinding?.forwardBTN.apply {
-            visibility = View.VISIBLE
+            this!!.visibility = View.VISIBLE
             // clear previous animation
-            this!!.animate().rotation(0F).setDuration(0).start()
+            this.animate().rotation(0F).setDuration(0).start()
             // start new animation
             this.animate()
                 .rotation(30F)
