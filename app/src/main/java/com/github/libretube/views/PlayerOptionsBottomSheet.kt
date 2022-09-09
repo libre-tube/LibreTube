@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.github.libretube.databinding.BottomSheetBinding
+import com.github.libretube.interfaces.OnlinePlayerOptionsInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
     lateinit var binding: BottomSheetBinding
     private lateinit var playerOptionsInterface: PlayerOptionsInterface
+    private var onlinePlayerOptionsInterface: OnlinePlayerOptionsInterface? = null
 
     /**
      * current values
@@ -46,12 +48,21 @@ class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    fun setOnClickListeners(playerOptionsInterface: PlayerOptionsInterface) {
+    fun setOnClickListeners(
+        playerOptionsInterface: PlayerOptionsInterface,
+        onlinePlayerOptionsInterface: OnlinePlayerOptionsInterface?
+    ) {
         this.playerOptionsInterface = playerOptionsInterface
+        this.onlinePlayerOptionsInterface = onlinePlayerOptionsInterface
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (onlinePlayerOptionsInterface == null) {
+            binding.captions.visibility = View.GONE
+            binding.quality.visibility = View.GONE
+        }
 
         /**
          * update the text if a value is selected
@@ -75,7 +86,7 @@ class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.quality.setOnClickListener {
-            playerOptionsInterface.onQualityClicked()
+            onlinePlayerOptionsInterface?.onQualityClicked()
             this.dismiss()
         }
 
@@ -85,7 +96,7 @@ class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.captions.setOnClickListener {
-            playerOptionsInterface.onCaptionClicked()
+            onlinePlayerOptionsInterface?.onCaptionClicked()
             this.dismiss()
         }
 
