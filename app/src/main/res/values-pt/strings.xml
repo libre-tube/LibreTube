@@ -210,7 +210,7 @@
     <string name="hideTrendingPage">Ocultar tendências</string>
     <string name="instance_frontend_url">URL para a instância</string>
     <string name="quality">Qualidade</string>
-    <string name="player_summary">Qualidade e comportamento</string>
+    <string name="player_summary">Predefinições e comportamento</string>
     <string name="seek_increment">Incremento de avanço/recuo</string>
     <string name="autoplay_summary">Reproduzir vídeos seguintes automaticamente.</string>
     <string name="downloading">A descarregar…</string>
@@ -277,7 +277,7 @@
     <string name="playerAudioQuality">Qualidade de som</string>
     <string name="best_quality">Melhor</string>
     <string name="worst_quality">Pior</string>
-    <string name="share_with_time">Partilhar com posição de reprodução</string>
+    <string name="share_with_time">Partilhar com posição temporal</string>
     <string name="downloadsucceeded">Descarregado com sucesso</string>
     <string name="export_subscriptions">Exportar subscrições</string>
     <string name="history_size">Tamanho do histórico</string>
@@ -305,4 +305,9 @@
     <string name="maximum_image_cache">Máximo de imagens em cache</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="open_copied">Abrir</string>
+    <string name="legacy_subscriptions">Vista de subscrições (antiga)</string>
+    <string name="device_info">Informação do dispositivo</string>
+    <string name="audio_video_summary">Qualidade e formato</string>
+    <string name="delete">Eliminar</string>
+    <string name="break_reminder_time">Minutos antes de ser lembrado</string>
 </resources>
