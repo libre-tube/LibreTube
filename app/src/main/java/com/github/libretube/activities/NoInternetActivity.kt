@@ -33,7 +33,7 @@ class NoInternetActivity : BaseActivity() {
 
         binding.downloads.setOnClickListener {
             supportFragmentManager.beginTransaction()
-                .add(R.id.noInternet_container, DownloadsFragment())
+                .replace(R.id.noInternet_container, DownloadsFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -44,6 +44,14 @@ class NoInternetActivity : BaseActivity() {
             this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
+                    supportFragmentManager.fragments.forEach {
+                        if (it is DownloadsFragment) {
+                            supportFragmentManager.beginTransaction()
+                                .remove(it)
+                                .commit()
+                            return
+                        }
+                    }
                     finishAffinity()
                 }
             }
