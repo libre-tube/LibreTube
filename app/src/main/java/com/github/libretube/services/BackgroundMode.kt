@@ -190,9 +190,10 @@ class BackgroundMode : Service() {
 
         audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
-            .setContentType(C.CONTENT_TYPE_MUSIC)
+            .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
             .build()
         player = ExoPlayer.Builder(this)
+            .setHandleAudioBecomingNoisy(true)
             .setAudioAttributes(audioAttributes, true)
             .build()
 

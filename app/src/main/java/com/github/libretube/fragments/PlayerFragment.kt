@@ -1315,6 +1315,7 @@ class PlayerFragment : BaseFragment() {
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)
             .setTrackSelector(trackSelector)
+            .setHandleAudioBecomingNoisy(true)
             .build()
 
         exoPlayer.setAudioAttributes(audioAttributes, true)
