@@ -46,6 +46,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
     private fun initializePlayer() {
         player = ExoPlayer.Builder(this)
+            .setHandleAudioBecomingNoisy(true)
             .build()
 
         playerView = binding.player
