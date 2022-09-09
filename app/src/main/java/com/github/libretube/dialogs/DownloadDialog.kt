@@ -16,7 +16,6 @@ import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
-import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
@@ -31,8 +30,6 @@ class DownloadDialog(
         binding = DialogDownloadBinding.inflate(layoutInflater)
 
         fetchAvailableSources()
-
-        PermissionHelper.requestReadWrite(requireActivity())
 
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 

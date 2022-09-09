@@ -23,7 +23,6 @@ import com.github.libretube.dialogs.LoginDialog
 import com.github.libretube.dialogs.LogoutDialog
 import com.github.libretube.extensions.await
 import com.github.libretube.util.ImportHelper
-import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.MaterialPreferenceFragment
 
@@ -147,15 +146,7 @@ class InstanceSettings : MaterialPreferenceFragment() {
         val importSubscriptions = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
         importSubscriptions?.setOnPreferenceClickListener {
             // check StorageAccess
-            val accessGranted =
-                PermissionHelper.isStoragePermissionGranted(requireActivity())
-            // import subscriptions
-            if (accessGranted) {
-                getContent.launch("*/*")
-            } // request permissions if not granted
-            else {
-                PermissionHelper.requestReadWrite(requireActivity())
-            }
+            getContent.launch("*/*")
             true
         }
 
