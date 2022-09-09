@@ -17,21 +17,21 @@ import com.github.libretube.R
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
+import com.github.libretube.constants.DownloadType
 import com.github.libretube.extensions.TAG
-import com.github.libretube.obj.DownloadType
 import java.io.File
 
 class DownloadService : Service() {
 
-    private lateinit var notification: NotificationCompat.Builder
-
-    private var downloadId: Long = -1
     private lateinit var videoName: String
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
     private var downloadType: Int = 3
 
-    private lateinit var downloadDir: File
+    private lateinit var videoDownloadDir: File
+    private lateinit var audioDownloadDir: File
+    private var videoDownloadId: Long? = null
+    private var audioDownloadId: Long? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -43,13 +43,13 @@ class DownloadService : Service() {
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
 
-        downloadType = if (audioUrl != "") {
-            DownloadType.AUDIO
-        } else if (videoUrl != "") {
-            DownloadType.VIDEO
-        } else {
-            DownloadType.NONE
+        downloadType = when {
+            videoUrl != "" && audioUrl != "" -> DownloadType.AUDIO_VIDEO
+            audioUrl != "" -> DownloadType.AUDIO
+            videoUrl != "" -> DownloadType.VIDEO
+            else -> DownloadType.NONE
         }
+
         if (downloadType != DownloadType.NONE) {
             downloadManager()
         } else {
@@ -64,12 +64,19 @@ class DownloadService : Service() {
     }
 
     private fun downloadManager() {
-        downloadDir = File(
+        videoDownloadDir = File(
             this.getExternalFilesDir(null),
             "video"
         )
 
-        if (!downloadDir.exists()) downloadDir.mkdirs()
+        if (!videoDownloadDir.exists()) videoDownloadDir.mkdirs()
+
+        audioDownloadDir = File(
+            this.getExternalFilesDir(null),
+            "audio"
+        )
+
+        if (!audioDownloadDir.exists()) audioDownloadDir.mkdirs()
 
         // start download
         try {
@@ -77,27 +84,25 @@ class DownloadService : Service() {
                 onDownloadComplete,
                 IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
             )
-            when (downloadType) {
-                DownloadType.VIDEO -> {
-                    downloadId = downloadManagerRequest(
-                        getString(R.string.video),
-                        getString(R.string.downloading),
-                        videoUrl,
-                        Uri.fromFile(
-                            File(downloadDir, videoName)
-                        )
+            if (downloadType in listOf(DownloadType.VIDEO, DownloadType.AUDIO_VIDEO)) {
+                videoDownloadId = downloadManagerRequest(
+                    getString(R.string.video),
+                    getString(R.string.downloading),
+                    videoUrl,
+                    Uri.fromFile(
+                        File(videoDownloadDir, videoName)
                     )
-                }
-                DownloadType.AUDIO -> {
-                    downloadId = downloadManagerRequest(
-                        getString(R.string.audio),
-                        getString(R.string.downloading),
-                        audioUrl,
-                        Uri.fromFile(
-                            File(downloadDir, videoName)
-                        )
+                )
+            }
+            if (downloadType in listOf(DownloadType.AUDIO, DownloadType.AUDIO_VIDEO)) {
+                audioDownloadId = downloadManagerRequest(
+                    getString(R.string.audio),
+                    getString(R.string.downloading),
+                    audioUrl,
+                    Uri.fromFile(
+                        File(audioDownloadDir, videoName)
                     )
-                }
+                )
             }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), "download error $e")
@@ -110,7 +115,12 @@ class DownloadService : Service() {
             // Fetching the download id received with the broadcast
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             // Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadId != id) return
+            when (id) {
+                videoDownloadId -> videoDownloadId = null
+                audioDownloadId -> audioDownloadId = null
+            }
+
+            if (audioDownloadId != null || videoDownloadId != null) return
 
             downloadSucceededNotification()
             onDestroy()
@@ -129,7 +139,8 @@ class DownloadService : Service() {
                 .setDescription(descriptionText) // Description of the Download Notification
                 .setDestinationUri(destination)
                 .setAllowedOverMetered(true) // Set if download is allowed on Mobile network
-                .setAllowedOverRoaming(true) //
+                .setAllowedOverRoaming(true)
+
         val downloadManager: DownloadManager =
             applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         return downloadManager.enqueue(request)
@@ -141,6 +152,7 @@ class DownloadService : Service() {
             .setContentTitle(resources.getString(R.string.downloadfailed))
             .setContentText(getString(R.string.fail))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
             notify(DOWNLOAD_FAILURE_NOTIFICATION_ID, builder.build())
@@ -154,6 +166,7 @@ class DownloadService : Service() {
             .setContentTitle(resources.getString(R.string.success))
             .setContentText(getString(R.string.downloadsucceeded))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+
         with(NotificationManagerCompat.from(this@DownloadService)) {
             // notificationId is a unique int for each notification that you must define
             notify(DOWNLOAD_SUCCESS_NOTIFICATION_ID, builder.build())
@@ -167,7 +180,6 @@ class DownloadService : Service() {
         }
 
         Globals.IS_DOWNLOAD_RUNNING = false
-        Log.d(TAG(), "dl finished!")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             stopForeground(STOP_FOREGROUND_REMOVE)

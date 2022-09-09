@@ -25,7 +25,7 @@ import com.github.libretube.constants.DOWNLOAD_PENDING_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
-import com.github.libretube.obj.DownloadType
+import com.github.libretube.constants.DownloadType
 import com.github.libretube.util.PreferenceHelper
 import java.io.File
 
@@ -145,7 +145,7 @@ class LegacyDownloadService : Service() {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             // Checking if the received broadcast is for our enqueued download by matching download id
             if (downloadId == id) {
-                if (downloadType == DownloadType.MUX) {
+                if (downloadType == DownloadType.AUDIO_VIDEO) {
                     downloadManagerRequest(
                         getString(R.string.audio),
                         getString(R.string.downloading),
