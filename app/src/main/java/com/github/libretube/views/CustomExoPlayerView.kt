@@ -42,7 +42,7 @@ internal class CustomExoPlayerView(
     private var doubleTapListener: DoubleTapInterface? = null
     private var onlinePlayerOptionsInterface: OnlinePlayerOptionsInterface? = null
     private lateinit var childFragmentManager: FragmentManager
-    private lateinit var trackSelector: TrackSelector
+    private var trackSelector: TrackSelector? = null
 
     private val runnableHandler = Handler(Looper.getMainLooper())
 
@@ -154,8 +154,8 @@ internal class CustomExoPlayerView(
                 }
                 // set the current caption language
                 currentCaptions =
-                    if (trackSelector.parameters.preferredTextLanguages.isNotEmpty()) {
-                        trackSelector.parameters.preferredTextLanguages[0]
+                    if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                        trackSelector!!.parameters.preferredTextLanguages[0]
                     } else {
                         context?.getString(R.string.none)
                     }

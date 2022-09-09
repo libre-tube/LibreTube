@@ -399,7 +399,7 @@ class PlayerFragment : BaseFragment() {
         }
     }
 
-    private val playerViewInterface = object : OnlinePlayerOptionsInterface {
+    private val onlinePlayerOptionsInterface = object : OnlinePlayerOptionsInterface {
         override fun onCaptionClicked() {
             if (!this@PlayerFragment::streams.isInitialized ||
                 streams.subtitles == null ||
@@ -883,7 +883,7 @@ class PlayerFragment : BaseFragment() {
         // initialize the player view actions
         binding.player.initialize(
             childFragmentManager,
-            playerViewInterface,
+            onlinePlayerOptionsInterface,
             doubleTapOverlayBinding,
             trackSelector
         )
