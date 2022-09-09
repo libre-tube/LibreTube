@@ -85,9 +85,9 @@ internal class CustomExoPlayerView(
 
     fun initialize(
         childFragmentManager: FragmentManager,
-        playerViewInterface: OnlinePlayerOptionsInterface,
+        playerViewInterface: OnlinePlayerOptionsInterface?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
-        trackSelector: TrackSelector
+        trackSelector: TrackSelector?
     ) {
         this.childFragmentManager = childFragmentManager
         this.onlinePlayerOptionsInterface = playerViewInterface

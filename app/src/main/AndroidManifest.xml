@@ -43,6 +43,10 @@
             android:label="@string/settings" />
 
         <activity
+            android:name=".activities.OfflinePlayerActivity"
+            android:label="@string/player" />
+
+        <activity
             android:name=".activities.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"

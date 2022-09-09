@@ -1,12 +1,13 @@
 package com.github.libretube.adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.activities.OfflinePlayerActivity
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DownloadedMediaRowBinding
-import com.github.libretube.extensions.TAG
 import java.io.File
 
 class DownloadsAdapter(
@@ -27,6 +28,12 @@ class DownloadsAdapter(
         holder.binding.apply {
             fileName.text = file.name
             fileSize.text = "${file.length() / (1024 * 1024)} MiB"
+            root.setOnClickListener {
+                val intent = Intent(root.context, OfflinePlayerActivity::class.java).also {
+                    it.putExtra(IntentData.fileName, file.name)
+                }
+                root.context.startActivity(intent)
+            }
         }
     }
 

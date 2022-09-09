@@ -1,7 +1,6 @@
 package com.github.libretube.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.adapters.DownloadsAdapter
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.extensions.BaseFragment
-import com.github.libretube.extensions.TAG
 import java.io.File
 
 class DownloadsFragment : BaseFragment() {
