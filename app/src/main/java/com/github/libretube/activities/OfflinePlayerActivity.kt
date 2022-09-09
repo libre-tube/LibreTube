@@ -15,7 +15,10 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.BaseActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.MergingMediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.FileDataSource
 import java.io.File
 
 class OfflinePlayerActivity : BaseActivity() {
@@ -65,39 +68,64 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     private fun playVideo() {
-        val downloadDir = File(
+        val videoDownloadDir = File(
             getExternalFilesDir(null),
             "video"
         )
 
-        val file = File(
-            downloadDir,
+        val videoFile = File(
+            videoDownloadDir,
             fileName
         )
 
+        val audioDownloadDir = File(
+            getExternalFilesDir(null),
+            "audio"
+        )
+        val audioFile = File(
+            audioDownloadDir,
+            fileName
+        )
+
+        val videoUri = if (videoFile.exists()) Uri.fromFile(videoFile) else null
+        val audioUri = if (audioFile.exists()) Uri.fromFile(audioFile) else null
+
         setMediaSource(
-            Uri.fromFile(file)
+            videoUri,
+            audioUri
         )
 
         player.prepare()
         player.play()
     }
 
-    private fun setMediaSource(uri: Uri) {
-        val mediaItem = MediaItem
-            .fromUri(uri)
+    private fun setMediaSource(videoUri: Uri?, audioUri: Uri?) {
+        when {
+            videoUri != null && audioUri != null -> {
+                val videoSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
+                    .createMediaSource(
+                        MediaItem.fromUri(videoUri)
+                    )
 
-        player.setMediaItem(mediaItem)
+                val audioSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
+                    .createMediaSource(
+                        MediaItem.fromUri(audioUri)
+                    )
 
-        /*
-        val audioSource: MediaSource =
-            ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(MediaItem.fromUri(audioUrl))
-        val mergeSource: MediaSource =
-            MergingMediaSource(videoSource, audioSource)
-        player.setMediaSource(mergeSource)
+                val mediaSource = MergingMediaSource(
+                    audioSource,
+                    videoSource
+                )
 
-         */
+                player.setMediaSource(mediaSource)
+            }
+            videoUri != null -> player.setMediaItem(
+                MediaItem.fromUri(videoUri)
+            )
+            audioUri != null -> player.setMediaItem(
+                MediaItem.fromUri(audioUri)
+            )
+        }
     }
 
     private fun hideSystemBars() {
