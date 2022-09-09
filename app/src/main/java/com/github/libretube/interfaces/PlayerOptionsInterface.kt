@@ -4,10 +4,6 @@ interface PlayerOptionsInterface {
 
     fun onAutoplayClicked()
 
-    fun onCaptionClicked()
-
-    fun onQualityClicked()
-
     fun onPlaybackSpeedClicked()
 
     fun onResizeModeClicked()

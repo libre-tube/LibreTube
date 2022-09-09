@@ -60,7 +60,7 @@ import com.github.libretube.extensions.await
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.toID
-import com.github.libretube.interfaces.PlayerViewInterface
+import com.github.libretube.interfaces.OnlinePlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
@@ -399,7 +399,7 @@ class PlayerFragment : BaseFragment() {
         }
     }
 
-    private val playerViewInterface = object : PlayerViewInterface {
+    private val playerViewInterface = object : OnlinePlayerOptionsInterface {
         override fun onCaptionClicked() {
             if (!this@PlayerFragment::streams.isInitialized ||
                 streams.subtitles == null ||

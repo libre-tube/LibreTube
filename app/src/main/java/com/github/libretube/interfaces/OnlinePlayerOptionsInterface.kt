@@ -1,6 +1,6 @@
 package com.github.libretube.interfaces
 
-interface PlayerViewInterface {
+interface OnlinePlayerOptionsInterface {
     fun onCaptionClicked()
 
     fun onQualityClicked()

@@ -2,6 +2,8 @@ package com.github.libretube.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -16,8 +18,8 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.interfaces.DoubleTapInterface
+import com.github.libretube.interfaces.OnlinePlayerOptionsInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
-import com.github.libretube.interfaces.PlayerViewInterface
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -34,11 +36,15 @@ internal class CustomExoPlayerView(
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
 
+    /**
+     * Objects from the parent fragment
+     */
     private var doubleTapListener: DoubleTapInterface? = null
-    private var playerViewInterface: PlayerViewInterface? = null
+    private var onlinePlayerOptionsInterface: OnlinePlayerOptionsInterface? = null
     private lateinit var childFragmentManager: FragmentManager
-
     private lateinit var trackSelector: TrackSelector
+
+    private val runnableHandler = Handler(Looper.getMainLooper())
 
     // the x-position of where the user clicked
     private var xPos = 0F
@@ -79,12 +85,12 @@ internal class CustomExoPlayerView(
 
     fun initialize(
         childFragmentManager: FragmentManager,
-        playerViewInterface: PlayerViewInterface,
+        playerViewInterface: OnlinePlayerOptionsInterface,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         trackSelector: TrackSelector
     ) {
         this.childFragmentManager = childFragmentManager
-        this.playerViewInterface = playerViewInterface
+        this.onlinePlayerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
 
@@ -99,8 +105,11 @@ internal class CustomExoPlayerView(
         binding.lockPlayer.setOnClickListener {
             // change the locked/unlocked icon
             binding.lockPlayer.setImageResource(
-                if (!isPlayerLocked) R.drawable.ic_locked
-                else R.drawable.ic_unlocked
+                if (!isPlayerLocked) {
+                    R.drawable.ic_locked
+                } else {
+                    R.drawable.ic_unlocked
+                }
             )
 
             // show/hide all the controls
@@ -133,7 +142,10 @@ internal class CustomExoPlayerView(
     private fun initializeAdvancedOptions() {
         binding.toggleOptions.setOnClickListener {
             val bottomSheetFragment = PlayerOptionsBottomSheet().apply {
-                setOnClickListeners(playerOptionsInterface)
+                setOnClickListeners(
+                    playerOptionsInterface,
+                    onlinePlayerOptionsInterface
+                )
                 // set the auto play mode
                 currentAutoplayMode = if (autoplayEnabled) {
                     context?.getString(R.string.enabled)
@@ -215,12 +227,12 @@ internal class CustomExoPlayerView(
         player?.seekTo((player?.currentPosition ?: 0L) - seekIncrement)
 
         // show the rewind button
-        doubleTapOverlayBinding?.rewindBTN.apply {
-            visibility = View.VISIBLE
+        doubleTapOverlayBinding?.rewindBTN.run {
+            this!!.visibility = View.VISIBLE
             // clear previous animation
-            animate().rotation(0F).setDuration(0).start()
+            this.animate().rotation(0F).setDuration(0).start()
             // start new animation
-            animate()
+            this.animate()
                 .rotation(-30F)
                 .setDuration(100)
                 .withEndAction {
@@ -229,9 +241,9 @@ internal class CustomExoPlayerView(
                 }
                 .start()
 
-            removeCallbacks(hideRewindButtonRunnable)
+            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             // start callback to hide the button
-            postDelayed(hideRewindButtonRunnable, 700)
+            runnableHandler.postDelayed(hideRewindButtonRunnable, 700)
         }
     }
 
@@ -242,9 +254,9 @@ internal class CustomExoPlayerView(
         doubleTapOverlayBinding?.forwardBTN.apply {
             visibility = View.VISIBLE
             // clear previous animation
-            animate().rotation(0F).setDuration(0).start()
+            this!!.animate().rotation(0F).setDuration(0).start()
             // start new animation
-            animate()
+            this.animate()
                 .rotation(30F)
                 .setDuration(100)
                 .withEndAction {
@@ -254,19 +266,19 @@ internal class CustomExoPlayerView(
                 .start()
 
             // start callback to hide the button
-            removeCallbacks(hideForwardButtonRunnable)
-            postDelayed(hideForwardButtonRunnable, 700)
+            runnableHandler.removeCallbacks(hideForwardButtonRunnable)
+            runnableHandler.postDelayed(hideForwardButtonRunnable, 700)
         }
     }
 
     private val hideForwardButtonRunnable = Runnable {
         doubleTapOverlayBinding?.forwardBTN.apply {
-            visibility = View.GONE
+            this!!.visibility = View.GONE
         }
     }
     private val hideRewindButtonRunnable = Runnable {
         doubleTapOverlayBinding?.rewindBTN.apply {
-            visibility = View.GONE
+            this!!.visibility = View.GONE
         }
     }
 
@@ -287,14 +299,6 @@ internal class CustomExoPlayerView(
                     }
                 }
                 .show()
-        }
-
-        override fun onCaptionClicked() {
-            playerViewInterface?.onCaptionClicked()
-        }
-
-        override fun onQualityClicked() {
-            playerViewInterface?.onQualityClicked()
         }
 
         override fun onPlaybackSpeedClicked() {
