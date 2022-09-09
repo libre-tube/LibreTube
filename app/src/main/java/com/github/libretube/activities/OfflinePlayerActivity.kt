@@ -9,19 +9,13 @@ import android.view.WindowManager
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.github.libretube.BuildConfig
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.BaseActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
 import java.io.File
 
 class OfflinePlayerActivity : BaseActivity() {
@@ -90,18 +84,10 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     private fun setMediaSource(uri: Uri) {
-        val userAgent = Util.getUserAgent(applicationContext, BuildConfig.APPLICATION_ID)
+        val mediaItem = MediaItem
+            .fromUri(uri)
 
-        val dataSourceFactory: DataSource.Factory =
-            DefaultDataSourceFactory(applicationContext, userAgent)
-
-        val videoItem: MediaItem = MediaItem.Builder()
-            .setUri(uri)
-            .build()
-
-        val videoSource: MediaSource =
-            DefaultMediaSourceFactory(dataSourceFactory)
-                .createMediaSource(videoItem)
+        player.setMediaItem(mediaItem)
 
         /*
         val audioSource: MediaSource =
@@ -112,8 +98,6 @@ class OfflinePlayerActivity : BaseActivity() {
         player.setMediaSource(mergeSource)
 
          */
-
-        player.setMediaSource(videoSource)
     }
 
     private fun hideSystemBars() {
@@ -139,5 +123,10 @@ class OfflinePlayerActivity : BaseActivity() {
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+    }
+
+    override fun onDestroy() {
+        player.release()
+        super.onDestroy()
     }
 }
