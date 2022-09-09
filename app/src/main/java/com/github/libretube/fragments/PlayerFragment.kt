@@ -46,8 +46,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.PreferenceRanges
-import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -61,10 +59,8 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.extensions.toID
-import com.github.libretube.interfaces.DoubleTapInterface
-import com.github.libretube.interfaces.PlayerOptionsInterface
+import com.github.libretube.interfaces.PlayerViewInterface
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.obj.ChapterSegment
 import com.github.libretube.obj.Segment
@@ -77,7 +73,6 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.views.PlayerOptionsBottomSheet
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -92,13 +87,11 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -153,7 +146,6 @@ class PlayerFragment : BaseFragment() {
      * for the player view
      */
     private lateinit var exoPlayerView: StyledPlayerView
-    private var isPlayerLocked: Boolean = false
     private var subtitle = mutableListOf<SubtitleConfiguration>()
 
     /**
@@ -161,7 +153,6 @@ class PlayerFragment : BaseFragment() {
      */
     private var token = ""
     private var relatedStreamsEnabled = true
-    private var autoplayEnabled = false
     private var autoRotationEnabled = true
     private var playbackSpeed = "1F"
     private var pausePlayerOnScreenOffEnabled = false
@@ -169,7 +160,6 @@ class PlayerFragment : BaseFragment() {
     private var watchHistoryEnabled = true
     private var watchPositionsEnabled = true
     private var useSystemCaptionStyle = true
-    private var seekIncrement = 5L
     private var videoFormatPreference = "webm"
     private var defRes = ""
     private var bufferingGoal = 50000
@@ -178,7 +168,6 @@ class PlayerFragment : BaseFragment() {
     private var sponsorBlockNotifications = true
     private var skipButtonsEnabled = false
     private var pipEnabled = true
-    private var resizeModePref = "fit"
 
     /**
      * for autoplay
@@ -245,7 +234,7 @@ class PlayerFragment : BaseFragment() {
      * somehow the bottom bar is invisible on low screen resolutions, this fixes it
      */
     private fun showBottomBar() {
-        if (this::playerBinding.isInitialized && !isPlayerLocked) {
+        if (this::playerBinding.isInitialized && !binding.player.isPlayerLocked) {
             playerBinding.exoBottomBar.visibility = View.VISIBLE
         }
         Handler(Looper.getMainLooper()).postDelayed(this::showBottomBar, 100)
@@ -260,11 +249,7 @@ class PlayerFragment : BaseFragment() {
             false
         )
 
-        // save whether related streams and autoplay are enabled
-        autoplayEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.AUTO_PLAY,
-            false
-        )
+        // save whether related streams are enabled
         relatedStreamsEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.RELATED_STREAMS,
             true
@@ -299,11 +284,6 @@ class PlayerFragment : BaseFragment() {
             PreferenceKeys.SYSTEM_CAPTION_STYLE,
             true
         )
-
-        seekIncrement = PreferenceHelper.getString(
-            PreferenceKeys.SEEK_INCREMENT,
-            "5"
-        ).toLong() * 1000
 
         videoFormatPreference = PreferenceHelper.getString(
             PreferenceKeys.PLAYER_VIDEO_FORMAT,
@@ -347,11 +327,6 @@ class PlayerFragment : BaseFragment() {
         pipEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.PICTURE_IN_PICTURE,
             true
-        )
-
-        resizeModePref = PreferenceHelper.getString(
-            PreferenceKeys.PLAYER_RESIZE_MODE,
-            "fit"
         )
     }
 
@@ -424,25 +399,7 @@ class PlayerFragment : BaseFragment() {
         }
     }
 
-    private val playerOptionsInterface = object : PlayerOptionsInterface {
-        override fun onAutoplayClicked() {
-            // autoplay options dialog
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.player_autoplay)
-                .setItems(
-                    arrayOf(
-                        context?.getString(R.string.enabled),
-                        context?.getString(R.string.disabled)
-                    )
-                ) { _, index ->
-                    when (index) {
-                        0 -> autoplayEnabled = true
-                        1 -> autoplayEnabled = false
-                    }
-                }
-                .show()
-        }
-
+    private val playerViewInterface = object : PlayerViewInterface {
         override fun onCaptionClicked() {
             if (!this@PlayerFragment::streams.isInitialized ||
                 streams.subtitles == null ||
@@ -515,62 +472,6 @@ class PlayerFragment : BaseFragment() {
                 }
                 .show()
         }
-
-        override fun onPlaybackSpeedClicked() {
-            val playbackSpeedBinding = DialogSliderBinding.inflate(layoutInflater)
-            playbackSpeedBinding.slider.setSliderRangeAndValue(
-                PreferenceRanges.playbackSpeed
-            )
-            playbackSpeedBinding.slider.value = exoPlayer.playbackParameters.speed
-            // change playback speed dialog
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.change_playback_speed)
-                .setView(playbackSpeedBinding.root)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.okay) { _, _ ->
-                    exoPlayer.setPlaybackSpeed(
-                        playbackSpeedBinding.slider.value
-                    )
-                }
-                .show()
-        }
-
-        override fun onResizeModeClicked() {
-            // switching between original aspect ratio (black bars) and zoomed to fill device screen
-            val aspectRatioModeNames = context?.resources?.getStringArray(R.array.resizeMode)
-
-            val aspectRatioModes = arrayOf(
-                AspectRatioFrameLayout.RESIZE_MODE_FIT,
-                AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
-                AspectRatioFrameLayout.RESIZE_MODE_FILL
-            )
-
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.aspect_ratio)
-                .setItems(aspectRatioModeNames) { _, index ->
-                    exoPlayerView.resizeMode = aspectRatioModes[index]
-                }
-                .show()
-        }
-
-        override fun onRepeatModeClicked() {
-            val repeatModeNames = arrayOf(
-                context?.getString(R.string.repeat_mode_none),
-                context?.getString(R.string.repeat_mode_current)
-            )
-
-            val repeatModes = arrayOf(
-                RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL,
-                RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
-            )
-            // repeat mode options dialog
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.repeat_mode)
-                .setItems(repeatModeNames) { _, index ->
-                    exoPlayer.repeatMode = repeatModes[index]
-                }
-                .show()
-        }
     }
 
     // actions that don't depend on video information
@@ -590,55 +491,6 @@ class PlayerFragment : BaseFragment() {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
-        }
-        // show the advanced player options
-        playerBinding.toggleOptions.setOnClickListener {
-            val bottomSheetFragment = PlayerOptionsBottomSheet().apply {
-                setOnClickListeners(playerOptionsInterface)
-                // set the auto play mode
-                currentAutoplayMode = if (autoplayEnabled) {
-                    context.getString(R.string.enabled)
-                } else {
-                    context.getString(R.string.disabled)
-                }
-                // set the current caption language
-                currentCaptions =
-                    if (trackSelector.parameters.preferredTextLanguages.isNotEmpty()) {
-                        trackSelector.parameters.preferredTextLanguages[0]
-                    } else {
-                        context.getString(R.string.none)
-                    }
-                // set the playback speed
-                currentPlaybackSpeed = "${
-                exoPlayer.playbackParameters.speed.toString()
-                    .replace(".0", "")
-                }x"
-                // set the quality text
-                val isAdaptive = exoPlayer.videoFormat?.codecs != null
-                val quality = exoPlayer.videoSize.height
-                if (quality != 0) {
-                    currentQuality =
-                        if (isAdaptive) {
-                            "${context.getString(R.string.hls)} • ${quality}p"
-                        } else {
-                            "${quality}p"
-                        }
-                }
-                // set the repeat mode
-                currentRepeatMode =
-                    if (exoPlayer.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                        context.getString(R.string.repeat_mode_none)
-                    } else {
-                        context.getString(R.string.repeat_mode_current)
-                    }
-                // set the aspect ratio mode
-                currentResizeMode = when (exoPlayerView.resizeMode) {
-                    AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
-                    AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
-                    else -> context.getString(R.string.resize_mode_zoom)
-                }
-            }
-            bottomSheetFragment.show(childFragmentManager, null)
         }
 
         binding.playImageView.setOnClickListener {
@@ -675,22 +527,6 @@ class PlayerFragment : BaseFragment() {
                 // exit fullscreen mode
                 unsetFullscreen()
             }
-        }
-
-        // lock and unlock the player
-        playerBinding.lockPlayer.setOnClickListener {
-            // change the locked/unlocked icon
-            if (!isPlayerLocked) {
-                playerBinding.lockPlayer.setImageResource(R.drawable.ic_locked)
-            } else {
-                playerBinding.lockPlayer.setImageResource(R.drawable.ic_unlocked)
-            }
-
-            // show/hide all the controls
-            lockPlayer(isPlayerLocked)
-
-            // change locked status
-            isPlayerLocked = !isPlayerLocked
         }
 
         // set default playback speed
@@ -919,7 +755,7 @@ class PlayerFragment : BaseFragment() {
                 // show comments if related streams disabled
                 if (!relatedStreamsEnabled) toggleComments()
                 // prepare for autoplay
-                if (autoplayEnabled) setNextStream()
+                if (binding.player.autoplayEnabled) setNextStream()
 
                 // add the video to the watch history
                 if (watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
@@ -1023,11 +859,6 @@ class PlayerFragment : BaseFragment() {
             controllerHideOnTouch = true
             useController = false
             player = exoPlayer
-            resizeMode = when (resizeModePref) {
-                "fill" -> AspectRatioFrameLayout.RESIZE_MODE_FILL
-                "zoom" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-                else -> AspectRatioFrameLayout.RESIZE_MODE_FIT
-            }
         }
 
         if (useSystemCaptionStyle) {
@@ -1049,6 +880,14 @@ class PlayerFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initializePlayerView(response: Streams) {
+        // initialize the player view actions
+        binding.player.initialize(
+            childFragmentManager,
+            playerViewInterface,
+            doubleTapOverlayBinding,
+            trackSelector
+        )
+
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
@@ -1072,8 +911,6 @@ class PlayerFragment : BaseFragment() {
         }
 
         playerBinding.exoTitle.text = response.title
-
-        enableDoubleTapToSeek()
 
         // init the chapters recyclerview
         if (response.chapters != null) {
@@ -1120,11 +957,11 @@ class PlayerFragment : BaseFragment() {
                     playbackState == Player.STATE_ENDED &&
                     nextStreamId != null &&
                     !transitioning &&
-                    autoplayEnabled
+                    binding.player.autoplayEnabled
                 ) {
                     transitioning = true
                     // check whether autoplay is enabled
-                    if (autoplayEnabled) playNextVideo()
+                    if (binding.player.autoplayEnabled) playNextVideo()
                 }
 
                 if (playbackState == Player.STATE_READY) {
@@ -1247,83 +1084,6 @@ class PlayerFragment : BaseFragment() {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
-        }
-    }
-
-    private fun enableDoubleTapToSeek() {
-        // set seek increment text
-        val seekIncrementText = (seekIncrement / 1000).toString()
-        doubleTapOverlayBinding.rewindTV.text = seekIncrementText
-        doubleTapOverlayBinding.forwardTV.text = seekIncrementText
-        binding.player.setOnDoubleTapListener(
-            object : DoubleTapInterface {
-                override fun onEvent(x: Float) {
-                    val width = exoPlayerView.width
-                    when {
-                        width * 0.5 > x -> rewind()
-                        width * 0.5 < x -> forward()
-                    }
-                }
-            }
-        )
-    }
-
-    private fun rewind() {
-        exoPlayer.seekTo(exoPlayer.currentPosition - seekIncrement)
-
-        // show the rewind button
-        doubleTapOverlayBinding.rewindBTN.apply {
-            visibility = View.VISIBLE
-            // clear previous animation
-            animate().rotation(0F).setDuration(0).start()
-            // start new animation
-            animate()
-                .rotation(-30F)
-                .setDuration(100)
-                .withEndAction {
-                    // reset the animation when finished
-                    animate().rotation(0F).setDuration(100).start()
-                }
-                .start()
-
-            removeCallbacks(hideRewindButtonRunnable)
-            // start callback to hide the button
-            postDelayed(hideRewindButtonRunnable, 700)
-        }
-    }
-
-    private fun forward() {
-        exoPlayer.seekTo(exoPlayer.currentPosition + seekIncrement)
-
-        // show the forward button
-        doubleTapOverlayBinding.forwardBTN.apply {
-            visibility = View.VISIBLE
-            // clear previous animation
-            animate().rotation(0F).setDuration(0).start()
-            // start new animation
-            animate()
-                .rotation(30F)
-                .setDuration(100)
-                .withEndAction {
-                    // reset the animation when finished
-                    animate().rotation(0F).setDuration(100).start()
-                }
-                .start()
-
-            // start callback to hide the button
-            removeCallbacks(hideForwardButtonRunnable)
-            postDelayed(hideForwardButtonRunnable, 700)
-        }
-    }
-
-    private val hideForwardButtonRunnable = Runnable {
-        doubleTapOverlayBinding.forwardBTN.apply {
-            visibility = View.GONE
-        }
-    }
-    private val hideRewindButtonRunnable = Runnable {
-        doubleTapOverlayBinding.rewindBTN.apply {
-            visibility = View.GONE
         }
     }
 
@@ -1533,7 +1293,7 @@ class PlayerFragment : BaseFragment() {
         // handles the audio focus
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
-            .setContentType(C.CONTENT_TYPE_MOVIE)
+            .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
             .build()
 
         // handles the duration of media to retain in the buffer prior to the current playback position (for fast backward seeking)
@@ -1568,34 +1328,6 @@ class PlayerFragment : BaseFragment() {
             nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer)
         }
         nowPlayingNotification.updatePlayerNotification(streams)
-    }
-
-    // lock the player
-    private fun lockPlayer(isLocked: Boolean) {
-        // isLocked is the current (old) state of the player lock
-        val visibility = if (isLocked) View.VISIBLE else View.GONE
-
-        playerBinding.exoTopBarRight.visibility = visibility
-        playerBinding.exoCenterControls.visibility = visibility
-        playerBinding.exoBottomBar.visibility = visibility
-        playerBinding.closeImageButton.visibility = visibility
-        playerBinding.exoTitle.visibility =
-            if (isLocked &&
-                viewModel.isFullscreen.value == true
-            ) {
-                View.VISIBLE
-            } else {
-                View.INVISIBLE
-            }
-
-        // disable double tap to seek when the player is locked
-        if (isLocked) {
-            // enable fast forward and rewind by double tapping
-            enableDoubleTapToSeek()
-        } else {
-            // disable fast forward and rewind by double tapping
-            binding.player.setOnDoubleTapListener(null)
-        }
     }
 
     private fun isSubscribed() {
