@@ -314,4 +314,5 @@
     <string name="legacy_subscriptions">Legacy subscriptions view</string>
     <string name="device_info">Device Info</string>
     <string name="audio_video_summary">Quality and format</string>
+    <string name="delete">Delete</string>
 </resources>

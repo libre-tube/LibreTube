@@ -32,7 +32,7 @@ class DownloadsFragment : BaseFragment() {
 
         binding.downloads.layoutManager = LinearLayoutManager(context)
         binding.downloads.adapter = DownloadsAdapter(
-            downloadDir.listFiles()?.toList() ?: listOf()
+            downloadDir.listFiles()?.toMutableList() ?: mutableListOf()
         )
     }
 }
