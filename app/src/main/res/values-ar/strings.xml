@@ -314,4 +314,5 @@
     <string name="legacy_subscriptions">طريقة عرض الاشتراكات القديمة</string>
     <string name="device_info">معلومات الجهاز</string>
     <string name="audio_video_summary">الجودة والشكل</string>
+    <string name="delete">حذف</string>
 </resources>
