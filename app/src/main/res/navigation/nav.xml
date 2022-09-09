@@ -34,15 +34,20 @@
         android:id="@+id/channelFragment"
         android:name="com.github.libretube.fragments.ChannelFragment"
         android:label="channel"
-        tools:layout="@layout/fragment_channel"></fragment>
+        tools:layout="@layout/fragment_channel" />
     <fragment
         android:id="@+id/playlistFragment"
         android:name="com.github.libretube.fragments.PlaylistFragment"
         android:label="fragment_playlist"
-        tools:layout="@layout/fragment_playlist"></fragment>
+        tools:layout="@layout/fragment_playlist" />
     <fragment
         android:id="@+id/watchHistoryFragment"
         android:name="com.github.libretube.fragments.WatchHistoryFragment"
         android:label="@string/watch_history"
         tools:layout="@layout/fragment_watch_history" />
+    <fragment
+        android:id="@+id/downloadsFragment"
+        android:name="com.github.libretube.fragments.DownloadsFragment"
+        android:label="@string/downloads"
+        tools:layout="@layout/fragment_downloads" />
 </navigation>

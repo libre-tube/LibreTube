@@ -30,12 +30,6 @@ class LibraryFragment : BaseFragment() {
     private lateinit var binding: FragmentLibraryBinding
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,6 +59,10 @@ class LibraryFragment : BaseFragment() {
             binding.showWatchHistory.setOnClickListener {
                 findNavController().navigate(R.id.watchHistoryFragment)
             }
+        }
+
+        binding.downloads.setOnClickListener {
+            findNavController().navigate(R.id.downloadsFragment)
         }
 
         if (token != "") {

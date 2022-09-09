@@ -1,10 +1,12 @@
 package com.github.libretube.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.DownloadedMediaRowBinding
+import com.github.libretube.extensions.TAG
 import java.io.File
 
 class DownloadsAdapter(
