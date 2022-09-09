@@ -2,7 +2,6 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
