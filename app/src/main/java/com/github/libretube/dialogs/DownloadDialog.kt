@@ -16,7 +16,6 @@ import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.DownloadService
-import com.github.libretube.util.PermissionHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
@@ -31,8 +30,6 @@ class DownloadDialog(
         binding = DialogDownloadBinding.inflate(layoutInflater)
 
         fetchAvailableSources()
-
-        PermissionHelper.requestReadWrite(requireActivity())
 
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
@@ -71,18 +68,18 @@ class DownloadDialog(
 
     private fun initDownloadOptions(streams: Streams) {
         val vidName = arrayListOf<String>()
-        val vidUrl = arrayListOf<String>()
+        val videoUrl = arrayListOf<String>()
 
         // add empty selection
         vidName.add(getString(R.string.no_video))
-        vidUrl.add("")
+        videoUrl.add("")
 
         // add all available video streams
         for (vid in streams.videoStreams!!) {
             if (vid.url != null) {
                 val name = vid.quality + " " + vid.format
                 vidName.add(name)
-                vidUrl.add(vid.url!!)
+                videoUrl.add(vid.url!!)
             }
         }
 
@@ -111,6 +108,7 @@ class DownloadDialog(
         videoArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.videoSpinner.adapter = videoArrayAdapter
         if (binding.videoSpinner.size >= 1) binding.videoSpinner.setSelection(1)
+        if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
         // initialize the audio sources
         val audioArrayAdapter = ArrayAdapter(
@@ -123,15 +121,12 @@ class DownloadDialog(
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
         binding.download.setOnClickListener {
-            val selectedAudioUrl =
-                if (binding.audioRadio.isChecked) audioUrl[binding.audioSpinner.selectedItemPosition] else ""
-            val selectedVideoUrl =
-                if (binding.videoRadio.isChecked) vidUrl[binding.videoSpinner.selectedItemPosition] else ""
-
             val intent = Intent(context, DownloadService::class.java)
+
             intent.putExtra("videoName", streams.title)
-            intent.putExtra("videoUrl", selectedVideoUrl)
-            intent.putExtra("audioUrl", selectedAudioUrl)
+            intent.putExtra("videoUrl", videoUrl[binding.videoSpinner.selectedItemPosition])
+            intent.putExtra("audioUrl", audioUrl[binding.audioSpinner.selectedItemPosition])
+
             context?.startService(intent)
             dismiss()
         }

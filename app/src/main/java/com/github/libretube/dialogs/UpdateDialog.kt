@@ -10,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.services.UpdateService
 import com.github.libretube.update.UpdateInfo
-import com.github.libretube.util.PermissionHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UpdateDialog(
@@ -26,7 +25,6 @@ class UpdateDialog(
                 val downloadUrl = getDownloadUrl(updateInfo)
                 Log.i("downloadUrl", downloadUrl.toString())
                 if (downloadUrl != null) {
-                    PermissionHelper.requestReadWrite(requireActivity())
                     val intent = Intent(context, UpdateService::class.java)
                     intent.putExtra("downloadUrl", downloadUrl)
                     context?.startService(intent)

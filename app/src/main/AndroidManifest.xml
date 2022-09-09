@@ -5,12 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
@@ -41,6 +36,10 @@
         <activity
             android:name=".activities.CommunityActivity"
             android:label="@string/settings" />
+
+        <activity
+            android:name=".activities.OfflinePlayerActivity"
+            android:label="@string/player" />
 
         <activity
             android:name=".activities.MainActivity"

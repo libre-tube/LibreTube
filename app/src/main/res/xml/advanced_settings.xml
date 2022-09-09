@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--
     <PreferenceCategory app:title="@string/downloads">
 
         <ListPreference
@@ -31,6 +32,7 @@
             app:title="@string/share_with_time" />
 
     </PreferenceCategory>
+    -->
 
     <PreferenceCategory app:title="@string/advanced">
 

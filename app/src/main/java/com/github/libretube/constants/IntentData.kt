@@ -7,4 +7,5 @@ object IntentData {
     const val playlistId = "playlistId"
     const val timeStamp = "timeStamp"
     const val position = "position"
+    const val fileName = "fileName"
 }
