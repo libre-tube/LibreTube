@@ -2,6 +2,7 @@ package com.github.libretube.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
 import com.github.libretube.extensions.BaseActivity
@@ -29,10 +30,14 @@ class NoInternetActivity : BaseActivity() {
             startActivity(intent)
         }
         setContentView(binding.root)
-    }
 
-    override fun onBackPressed() {
-        finishAffinity()
-        super.onBackPressed()
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    finishAffinity()
+                }
+            }
+        )
     }
 }
