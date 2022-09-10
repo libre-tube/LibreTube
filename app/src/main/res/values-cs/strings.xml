@@ -314,4 +314,7 @@
     <string name="legacy_subscriptions">Staré zobrazení odběrů</string>
     <string name="device_info">Informace o zařízení</string>
     <string name="audio_video_summary">Kvalita a formát</string>
+    <string name="delete">Odstranit</string>
+    <string name="trending_layout">Alternativní rozložení trendů</string>
+    <string name="renamePlaylist">Přejmenovat playlist</string>
 </resources>
