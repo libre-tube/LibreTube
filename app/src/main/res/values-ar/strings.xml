@@ -315,4 +315,6 @@
     <string name="device_info">معلومات الجهاز</string>
     <string name="audio_video_summary">الجودة والشكل</string>
     <string name="delete">حذف</string>
+    <string name="trending_layout">تنسيق بديل للمتصدرة</string>
+    <string name="renamePlaylist">إعادة تسمية قائمة التشغيل</string>
 </resources>
