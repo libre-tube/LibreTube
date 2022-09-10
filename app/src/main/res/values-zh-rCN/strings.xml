@@ -183,7 +183,7 @@
     <string name="video">视频</string>
     <string name="downloading">下载中…</string>
     <string name="player_autoplay">自动播放</string>
-    <string name="hideTrendingPage">隐藏热门页面</string>
+    <string name="hideTrendingPage">隐藏“时下流行”页面</string>
     <string name="instance_frontend_url">实例前端的URL</string>
     <string name="quality">清晰度</string>
     <string name="behavior">布局</string>
@@ -315,4 +315,5 @@
     <string name="device_info">设备信息</string>
     <string name="audio_video_summary">清晰度和格式</string>
     <string name="delete">删除</string>
+    <string name="trending_layout">备选“时下流行”页面布局</string>
 </resources>
