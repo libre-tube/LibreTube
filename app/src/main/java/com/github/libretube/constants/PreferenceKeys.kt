@@ -79,12 +79,6 @@ object PreferenceKeys {
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
 
     /**
-     * Download
-     */
-    const val DOWNLOAD_LOCATION = "download_location"
-    const val DOWNLOAD_FOLDER = "download_folder"
-
-    /**
      * Notifications
      */
     const val NOTIFICATION_ENABLED = "notification_toggle"
