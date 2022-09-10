@@ -19,7 +19,6 @@ import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.BottomSheet
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
@@ -112,7 +111,8 @@ class SubscriptionsFragment : BaseFragment() {
         val items = mutableListOf<BottomSheetItem>()
         sortOptions.forEach {
             items += BottomSheetItem(
-                it, R.drawable.ic_arrow_down
+                it,
+                R.drawable.ic_arrow_down
             )
         }
 

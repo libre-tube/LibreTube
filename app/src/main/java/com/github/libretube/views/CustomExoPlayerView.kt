@@ -99,7 +99,7 @@ internal class CustomExoPlayerView(
 
         enableDoubleTapToSeek()
 
-        initializeAdvancedOptions()
+        initializeAdvancedOptions(context)
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
@@ -139,50 +139,58 @@ internal class CustomExoPlayerView(
         return false
     }
 
-    private fun initializeAdvancedOptions() {
+    private fun initializeAdvancedOptions(context: Context) {
         binding.toggleOptions.setOnClickListener {
             val bottomSheetFragment = BottomSheet().apply {
                 val items = listOf(
                     BottomSheetItem(
-                        context?.getString(R.string.player_autoplay) + if (autoplayEnabled) {
-                            context?.getString(R.string.enabled)
+                        context.getString(R.string.player_autoplay),
+                        R.drawable.ic_play,
+                        if (autoplayEnabled) {
+                            context.getString(R.string.enabled)
                         } else {
-                            context?.getString(R.string.disabled)
-                        },
-                        R.drawable.ic_play
+                            context.getString(R.string.disabled)
+                        }
                     ),
                     BottomSheetItem(
-                        context?.getString(R.string.playback_speed) + "${
-                        player?.playbackParameters?.speed.toString()
+                        context.getString(R.string.playback_speed),
+                        R.drawable.ic_speed,
+                        "${player?.playbackParameters?.speed
+                            .toString()
                             .replace(".0", "")
-                        }x",
-                        R.drawable.ic_speed
+                        }x"
                     ),
                     BottomSheetItem(
-                        context?.getString(R.string.repeat_mode) + if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                            context?.getString(R.string.repeat_mode_none)
+                        context.getString(R.string.repeat_mode),
+                        R.drawable.ic_repeat,
+                        if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                            context.getString(R.string.repeat_mode_none)
                         } else {
-                            context?.getString(R.string.repeat_mode_current)
-                        },
-                        R.drawable.ic_repeat
+                            context.getString(R.string.repeat_mode_current)
+                        }
                     ),
                     BottomSheetItem(
-                        context?.getString(R.string.player_resize_mode) + when (resizeMode) {
-                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context?.getString(R.string.resize_mode_fit)
-                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context?.getString(R.string.resize_mode_fill)
-                            else -> context?.getString(R.string.resize_mode_zoom)
-                        },
-                        R.drawable.ic_aspect_ratio
+                        context.getString(R.string.player_resize_mode),
+                        R.drawable.ic_aspect_ratio,
+                        when (resizeMode) {
+                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
+                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                            else -> context.getString(R.string.resize_mode_zoom)
+                        }
                     ),
                     BottomSheetItem(
-                        context?.getString(R.string.quality) + "${player?.videoSize?.height}p",
-                        R.drawable.ic_hd
+                        context.getString(R.string.quality),
+                        R.drawable.ic_hd,
+                        "${player?.videoSize?.height}p"
                     ),
                     BottomSheetItem(
-                        context?.getString(R.string.captions) + if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                        context.getString(R.string.captions),
+                        R.drawable.ic_caption,
+                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
                             trackSelector!!.parameters.preferredTextLanguages[0]
-                        } else context?.getString(R.string.none),
-                        R.drawable.ic_caption
+                        } else {
+                            context.getString(R.string.none)
+                        }
                     )
                 )
                 setItems(items) { index ->
@@ -192,7 +200,7 @@ internal class CustomExoPlayerView(
                         2 -> onRepeatModeClicked()
                         3 -> onResizeModeClicked()
                         4 -> playerOptionsInterface?.onQualityClicked()
-                        5 -> playerOptionsInterface?.onQualityClicked()
+                        5 -> playerOptionsInterface?.onCaptionClicked()
                     }
                 }
             }
@@ -359,8 +367,9 @@ internal class CustomExoPlayerView(
         )
 
         val repeatModes = arrayOf(
-            RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL,
-            RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
+            RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE,
+            RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+
         )
         // repeat mode options dialog
         MaterialAlertDialogBuilder(context)
