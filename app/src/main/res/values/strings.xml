@@ -316,4 +316,5 @@
     <string name="audio_video_summary">Quality and format</string>
     <string name="delete">Delete</string>
     <string name="trending_layout">Alternative trending layout</string>
+    <string name="renamePlaylist">Rename playlist</string>
 </resources>

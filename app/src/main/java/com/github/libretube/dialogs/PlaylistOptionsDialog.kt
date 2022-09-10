@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.PlaylistId
@@ -36,6 +37,7 @@ class PlaylistOptionsDialog(
 
         if (isOwner) {
             optionsList = optionsList +
+                context?.getString(R.string.renamePlaylist)!! +
                 context?.getString(R.string.deletePlaylist)!! -
                 context?.getString(R.string.clonePlaylist)!!
         }
@@ -88,8 +90,21 @@ class PlaylistOptionsDialog(
                         shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                     }
                     context?.getString(R.string.deletePlaylist) -> {
-                        val token = PreferenceHelper.getToken()
-                        deletePlaylist(playlistId, token)
+                        deletePlaylist(
+                            playlistId
+                        )
+                    }
+                    context?.getString(R.string.renamePlaylist) -> {
+                        val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
+                        binding.input.hint = context?.getString(R.string.playlistName)
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(R.string.renamePlaylist)
+                            .setView(binding.root)
+                            .setPositiveButton(R.string.okay) { _, _ ->
+                                renamePlaylist(playlistId, binding.input.text.toString())
+                            }
+                            .setNegativeButton(R.string.cancel, null)
+                            .show()
                     }
                 }
             }
@@ -113,21 +128,32 @@ class PlaylistOptionsDialog(
         run()
     }
 
-    private fun deletePlaylist(id: String, token: String) {
-        fun run() {
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    RetrofitInstance.authApi.deletePlaylist(token, PlaylistId(id))
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launch
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launch
-                }
+    private fun renamePlaylist(id: String, newName: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                RetrofitInstance.authApi.renamePlaylist(
+                    PreferenceHelper.getToken(),
+                    PlaylistId(
+                        playlistId = id,
+                        newName = newName
+                    )
+                )
+            } catch (e: Exception) {
+                return@launch
             }
         }
-        run()
+    }
+
+    private fun deletePlaylist(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                RetrofitInstance.authApi.deletePlaylist(
+                    PreferenceHelper.getToken(),
+                    PlaylistId(id)
+                )
+            } catch (e: Exception) {
+                return@launch
+            }
+        }
     }
 }
