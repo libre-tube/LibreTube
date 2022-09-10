@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.adapters.DownloadsAdapter
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.extensions.BaseFragment
-import java.io.File
+import com.github.libretube.util.DownloadHelper
 
 class DownloadsFragment : BaseFragment() {
     private lateinit var binding: FragmentDownloadsBinding
@@ -25,14 +25,9 @@ class DownloadsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val downloadDir = File(
-            context?.getExternalFilesDir(null),
-            "video"
-        )
+        val files = DownloadHelper.getDownloadedFiles(requireContext())
 
         binding.downloads.layoutManager = LinearLayoutManager(context)
-        binding.downloads.adapter = DownloadsAdapter(
-            downloadDir.listFiles()?.toMutableList() ?: mutableListOf()
-        )
+        binding.downloads.adapter = DownloadsAdapter(files)
     }
 }
