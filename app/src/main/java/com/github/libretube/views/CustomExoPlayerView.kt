@@ -142,7 +142,7 @@ internal class CustomExoPlayerView(
     private fun initializeAdvancedOptions(context: Context) {
         binding.toggleOptions.setOnClickListener {
             val bottomSheetFragment = BottomSheet().apply {
-                val items = listOf(
+                val items = mutableListOf(
                     BottomSheetItem(
                         context.getString(R.string.player_autoplay),
                         R.drawable.ic_play,
@@ -151,14 +151,6 @@ internal class CustomExoPlayerView(
                         } else {
                             context.getString(R.string.disabled)
                         }
-                    ),
-                    BottomSheetItem(
-                        context.getString(R.string.playback_speed),
-                        R.drawable.ic_speed,
-                        "${player?.playbackParameters?.speed
-                            .toString()
-                            .replace(".0", "")
-                        }x"
                     ),
                     BottomSheetItem(
                         context.getString(R.string.repeat_mode),
@@ -179,26 +171,42 @@ internal class CustomExoPlayerView(
                         }
                     ),
                     BottomSheetItem(
-                        context.getString(R.string.quality),
-                        R.drawable.ic_hd,
-                        "${player?.videoSize?.height}p"
-                    ),
-                    BottomSheetItem(
-                        context.getString(R.string.captions),
-                        R.drawable.ic_caption,
-                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                            trackSelector!!.parameters.preferredTextLanguages[0]
-                        } else {
-                            context.getString(R.string.none)
-                        }
+                        context.getString(R.string.playback_speed),
+                        R.drawable.ic_speed,
+                        "${player?.playbackParameters?.speed
+                            .toString()
+                            .replace(".0", "")
+                        }x"
                     )
                 )
+
+                if (playerOptionsInterface != null) {
+                    items.add(
+                        BottomSheetItem(
+                            context.getString(R.string.quality),
+                            R.drawable.ic_hd,
+                            "${player?.videoSize?.height}p"
+                        )
+                    )
+                    items.add(
+                        BottomSheetItem(
+                            context.getString(R.string.captions),
+                            R.drawable.ic_caption,
+                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                                trackSelector!!.parameters.preferredTextLanguages[0]
+                            } else {
+                                context.getString(R.string.none)
+                            }
+                        )
+                    )
+                }
+
                 setItems(items) { index ->
                     when (index) {
                         0 -> onAutoplayClicked()
-                        1 -> onPlaybackSpeedClicked()
-                        2 -> onRepeatModeClicked()
-                        3 -> onResizeModeClicked()
+                        1 -> onRepeatModeClicked()
+                        2 -> onResizeModeClicked()
+                        3 -> onPlaybackSpeedClicked()
                         4 -> playerOptionsInterface?.onQualityClicked()
                         5 -> playerOptionsInterface?.onCaptionClicked()
                     }
