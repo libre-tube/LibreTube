@@ -133,13 +133,10 @@ class InstanceSettings : MaterialPreferenceFragment() {
         }
 
         val deleteAccount = findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)
+        deleteAccount?.isEnabled = PreferenceHelper.getToken() != ""
         deleteAccount?.setOnPreferenceClickListener {
-            if (PreferenceHelper.getToken() != "") {
-                val newFragment = DeleteAccountDialog()
-                newFragment.show(childFragmentManager, DeleteAccountDialog::class.java.name)
-            } else {
-                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-            }
+            val newFragment = DeleteAccountDialog()
+            newFragment.show(childFragmentManager, DeleteAccountDialog::class.java.name)
             true
         }
 

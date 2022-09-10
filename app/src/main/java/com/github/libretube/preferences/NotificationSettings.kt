@@ -20,13 +20,24 @@ class NotificationSettings : MaterialPreferenceFragment() {
 
         val notificationsEnabled =
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_ENABLED)
-        notificationsEnabled?.setOnPreferenceChangeListener { _, _ ->
+        val checkingFrequency = findPreference<ListPreference>(PreferenceKeys.CHECKING_FREQUENCY)
+        val requiredNetwork = findPreference<ListPreference>(PreferenceKeys.REQUIRED_NETWORK)
+
+        notificationsEnabled?.setOnPreferenceChangeListener { _, newValue ->
+            checkingFrequency?.isEnabled = newValue as Boolean
+            requiredNetwork?.isEnabled = newValue
             updateNotificationPrefs()
             true
         }
 
-        val checkingFrequency = findPreference<ListPreference>(PreferenceKeys.CHECKING_FREQUENCY)
+        checkingFrequency?.isEnabled = notificationsEnabled!!.isChecked
         checkingFrequency?.setOnPreferenceChangeListener { _, _ ->
+            updateNotificationPrefs()
+            true
+        }
+
+        requiredNetwork?.isEnabled = notificationsEnabled.isChecked
+        requiredNetwork?.setOnPreferenceChangeListener { _, _ ->
             updateNotificationPrefs()
             true
         }
