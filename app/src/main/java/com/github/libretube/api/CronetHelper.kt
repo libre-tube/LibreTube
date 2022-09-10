@@ -11,8 +11,12 @@ class CronetHelper {
 
         fun initCronet(context: Context) {
             engine = CronetEngine.Builder(context)
+                .enableHttp2(true)
+                .enableQuic(true)
                 .enableBrotli(true)
+                .enableHttpCache(CronetEngine.Builder.HTTP_CACHE_IN_MEMORY, 1024L * 1024L) // 1MiB
                 .build()
+
             callFactory = CronetCallFactory.newBuilder(engine)
                 .build()
         }
