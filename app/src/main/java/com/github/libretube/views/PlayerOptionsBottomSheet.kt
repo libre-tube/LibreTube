@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.github.libretube.databinding.BottomSheetBinding
+import com.github.libretube.databinding.PlayerOptionsBottomSheetBinding
 import com.github.libretube.interfaces.OnlinePlayerOptionsInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  * Bottom Sheet including all the player options
  */
 class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
-    lateinit var binding: BottomSheetBinding
+    lateinit var binding: PlayerOptionsBottomSheetBinding
     private lateinit var playerOptionsInterface: PlayerOptionsInterface
     private var onlinePlayerOptionsInterface: OnlinePlayerOptionsInterface? = null
 
@@ -44,7 +44,7 @@ class PlayerOptionsBottomSheet : BottomSheetDialogFragment() {
                 BottomSheetBehavior.STATE_EXPANDED
         }
 
-        binding = BottomSheetBinding.inflate(layoutInflater, container, false)
+        binding = PlayerOptionsBottomSheetBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

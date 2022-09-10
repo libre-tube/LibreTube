@@ -16,7 +16,9 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.models.SubscriptionsViewModel
+import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.views.BottomSheet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SubscriptionsFragment : BaseFragment() {
@@ -107,15 +109,22 @@ class SubscriptionsFragment : BaseFragment() {
     private fun showSortDialog() {
         val sortOptions = resources.getStringArray(R.array.sortOptions)
         val sortOptionValues = resources.getStringArray(R.array.sortOptionsValues)
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.sort)
-            .setItems(sortOptions) { _, index ->
+        val items = mutableListOf<BottomSheetItem>()
+        sortOptions.forEach {
+            items += BottomSheetItem(
+                it, R.drawable.ic_arrow_down
+            )
+        }
+
+        val bottomSheet = BottomSheet().apply {
+            setItems(items) { index ->
                 binding.sortTV.text = sortOptions[index]
                 sortOrder = sortOptionValues[index]
                 showFeed()
             }
-            .setNegativeButton(R.string.cancel, null)
-            .show()
+        }
+
+        bottomSheet.show(childFragmentManager, null)
     }
 
     private fun showFeed() {
