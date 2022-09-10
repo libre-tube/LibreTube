@@ -13,6 +13,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.util.DownloadHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MergingMediaSource
@@ -69,20 +70,13 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     private fun playVideo() {
-        val videoDownloadDir = File(
-            getExternalFilesDir(null),
-            "video"
-        )
-
+        val videoDownloadDir = DownloadHelper.getVideoDir(this)
         val videoFile = File(
             videoDownloadDir,
             fileName
         )
 
-        val audioDownloadDir = File(
-            getExternalFilesDir(null),
-            "audio"
-        )
+        val audioDownloadDir = DownloadHelper.getAudioDir(this)
         val audioFile = File(
             audioDownloadDir,
             fileName
@@ -129,6 +123,7 @@ class OfflinePlayerActivity : BaseActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun hideSystemBars() {
         window?.decorView?.systemUiVisibility = (
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE

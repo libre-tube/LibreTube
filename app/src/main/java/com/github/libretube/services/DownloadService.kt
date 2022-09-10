@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
-import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -19,6 +18,7 @@ import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.constants.DownloadType
 import com.github.libretube.extensions.TAG
+import com.github.libretube.util.DownloadHelper
 import java.io.File
 
 class DownloadService : Service() {
@@ -28,8 +28,6 @@ class DownloadService : Service() {
     private lateinit var audioUrl: String
     private var downloadType: Int = 3
 
-    private lateinit var videoDownloadDir: File
-    private lateinit var audioDownloadDir: File
     private var videoDownloadId: Long? = null
     private var audioDownloadId: Long? = null
 
@@ -64,19 +62,14 @@ class DownloadService : Service() {
     }
 
     private fun downloadManager() {
-        videoDownloadDir = File(
-            this.getExternalFilesDir(null),
-            "video"
-        )
+        // initialize and create the directories to download into
 
-        if (!videoDownloadDir.exists()) videoDownloadDir.mkdirs()
+        val videoDownloadDir = DownloadHelper.getVideoDir(this)
+        val audioDownloadDir = DownloadHelper.getAudioDir(this)
 
-        audioDownloadDir = File(
-            this.getExternalFilesDir(null),
-            "audio"
-        )
-
-        if (!audioDownloadDir.exists()) audioDownloadDir.mkdirs()
+        listOf(videoDownloadDir, audioDownloadDir).forEach {
+            if (!it.exists()) it.mkdir()
+        }
 
         // start download
         try {
@@ -113,9 +106,13 @@ class DownloadService : Service() {
     private val onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             // Fetching the download id received with the broadcast
-            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             // Checking if the received broadcast is for our enqueued download by matching download id
-            when (id) {
+            when (
+                intent.getLongExtra(
+                    DownloadManager.EXTRA_DOWNLOAD_ID,
+                    -1
+                )
+            ) {
                 videoDownloadId -> videoDownloadId = null
                 audioDownloadId -> audioDownloadId = null
             }
@@ -147,13 +144,13 @@ class DownloadService : Service() {
     }
 
     private fun downloadFailedNotification() {
-        val builder = NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
+        val builder = NotificationCompat.Builder(this, DOWNLOAD_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.downloadfailed))
             .setContentText(getString(R.string.fail))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        with(NotificationManagerCompat.from(this@DownloadService)) {
+        with(NotificationManagerCompat.from(this)) {
             // notificationId is a unique int for each notification that you must define
             notify(DOWNLOAD_FAILURE_NOTIFICATION_ID, builder.build())
         }
@@ -161,13 +158,13 @@ class DownloadService : Service() {
 
     private fun downloadSucceededNotification() {
         Log.i(TAG(), "Download succeeded")
-        val builder = NotificationCompat.Builder(this@DownloadService, DOWNLOAD_CHANNEL_ID)
+        val builder = NotificationCompat.Builder(this, DOWNLOAD_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(resources.getString(R.string.success))
             .setContentText(getString(R.string.downloadsucceeded))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        with(NotificationManagerCompat.from(this@DownloadService)) {
+        with(NotificationManagerCompat.from(this)) {
             // notificationId is a unique int for each notification that you must define
             notify(DOWNLOAD_SUCCESS_NOTIFICATION_ID, builder.build())
         }
@@ -181,14 +178,7 @@ class DownloadService : Service() {
 
         Globals.IS_DOWNLOAD_RUNNING = false
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            stopForeground(STOP_FOREGROUND_REMOVE)
-        } else {
-            @Suppress("DEPRECATION")
-            stopForeground(true)
-        }
-
-        stopService(Intent(this@DownloadService, DownloadService::class.java))
+        stopService(Intent(this, DownloadService::class.java))
         super.onDestroy()
     }
 }
