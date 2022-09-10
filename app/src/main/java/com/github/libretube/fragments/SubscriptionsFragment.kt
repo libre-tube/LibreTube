@@ -110,10 +110,7 @@ class SubscriptionsFragment : BaseFragment() {
         val sortOptionValues = resources.getStringArray(R.array.sortOptionsValues)
         val items = mutableListOf<BottomSheetItem>()
         sortOptions.forEach {
-            items += BottomSheetItem(
-                it,
-                R.drawable.ic_arrow_down
-            )
+            items += BottomSheetItem(it)
         }
 
         val bottomSheet = BottomSheet().apply {

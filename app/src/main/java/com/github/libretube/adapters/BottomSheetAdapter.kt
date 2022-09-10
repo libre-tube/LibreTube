@@ -1,6 +1,7 @@
 package com.github.libretube.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.BottomSheetItemBinding
@@ -23,7 +24,7 @@ class BottomSheetAdapter(
         val item = items[position]
         holder.binding.apply {
             title.text = if (item.currentValue != null) "${item.title} (${item.currentValue})" else item.title
-            drawable.setImageResource(item.drawable)
+            if (item.drawable != null) drawable.setImageResource(item.drawable) else drawable.visibility = View.GONE
 
             root.setOnClickListener {
                 listener.invoke(position)
