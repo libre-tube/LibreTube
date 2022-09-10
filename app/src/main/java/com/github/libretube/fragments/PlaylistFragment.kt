@@ -58,108 +58,105 @@ class PlaylistFragment : BaseFragment() {
     }
 
     private fun fetchPlaylist() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    // load locally stored playlists with the auth api
-                    if (isOwner) {
-                        RetrofitInstance.authApi.getPlaylist(playlistId!!)
-                    } else {
-                        RetrofitInstance.api.getPlaylist(playlistId!!)
-                    }
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launchWhenCreated
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                // load locally stored playlists with the auth api
+                if (isOwner) {
+                    RetrofitInstance.authApi.getPlaylist(playlistId!!)
+                } else {
+                    RetrofitInstance.api.getPlaylist(playlistId!!)
                 }
-                nextPage = response.nextpage
-                isLoading = false
-                runOnUiThread {
-                    binding.playlistProgress.visibility = View.GONE
-                    binding.playlistName.text = response.name
-                    binding.uploader.text = response.uploader
-                    binding.videoCount.text =
-                        getString(R.string.videoCount, response.videos.toString())
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                return@launchWhenCreated
+            }
+            nextPage = response.nextpage
+            isLoading = false
+            runOnUiThread {
+                binding.playlistProgress.visibility = View.GONE
+                binding.playlistName.text = response.name
+                binding.uploader.text = response.uploader
+                binding.videoCount.text =
+                    getString(R.string.videoCount, response.videos.toString())
 
-                    // show playlist options
-                    binding.optionsMenu.setOnClickListener {
-                        val optionsDialog =
-                            PlaylistOptionsDialog(playlistId!!, isOwner)
-                        optionsDialog.show(
-                            childFragmentManager,
-                            PlaylistOptionsDialog::class.java.name
-                        )
-                    }
-
-                    playlistAdapter = PlaylistAdapter(
-                        response.relatedStreams!!.toMutableList(),
-                        playlistId!!,
-                        isOwner,
-                        requireActivity(),
-                        childFragmentManager
+                // show playlist options
+                binding.optionsMenu.setOnClickListener {
+                    val optionsDialog =
+                        PlaylistOptionsDialog(playlistId!!, isOwner)
+                    optionsDialog.show(
+                        childFragmentManager,
+                        PlaylistOptionsDialog::class.java.name
                     )
+                }
 
-                    // listen for playlist items to become deleted
-                    playlistAdapter!!.registerAdapterDataObserver(object :
-                            RecyclerView.AdapterDataObserver() {
-                            override fun onChanged() {
-                                binding.videoCount.text =
-                                    getString(
-                                        R.string.videoCount,
-                                        playlistAdapter!!.itemCount.toString()
-                                    )
-                            }
-                        })
+                playlistAdapter = PlaylistAdapter(
+                    response.relatedStreams!!.toMutableList(),
+                    playlistId!!,
+                    isOwner,
+                    requireActivity(),
+                    childFragmentManager
+                )
 
-                    binding.playlistRecView.adapter = playlistAdapter
-                    binding.playlistScrollview.viewTreeObserver
-                        .addOnScrollChangedListener {
-                            if (binding.playlistScrollview.getChildAt(0).bottom
-                                == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
-                            ) {
-                                // scroll view is at bottom
-                                if (nextPage != null && !isLoading) {
-                                    isLoading = true
-                                    fetchNextPage()
-                                }
-                            }
+                // listen for playlist items to become deleted
+                playlistAdapter!!.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
+                        override fun onChanged() {
+                            binding.videoCount.text =
+                                getString(
+                                    R.string.videoCount,
+                                    playlistAdapter!!.itemCount.toString()
+                                )
                         }
+                    })
 
-                    /**
-                     * listener for swiping to the left or right
-                     */
-                    if (isOwner) {
-                        val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
-                            0,
-                            ItemTouchHelper.LEFT
+                binding.playlistRecView.adapter = playlistAdapter
+                binding.playlistScrollview.viewTreeObserver
+                    .addOnScrollChangedListener {
+                        if (binding.playlistScrollview.getChildAt(0).bottom
+                            == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
                         ) {
-                            override fun onMove(
-                                recyclerView: RecyclerView,
-                                viewHolder: RecyclerView.ViewHolder,
-                                target: RecyclerView.ViewHolder
-                            ): Boolean {
-                                return false
-                            }
-
-                            override fun onSwiped(
-                                viewHolder: RecyclerView.ViewHolder,
-                                direction: Int
-                            ) {
-                                val position = viewHolder.absoluteAdapterPosition
-                                playlistAdapter!!.removeFromPlaylist(position)
+                            // scroll view is at bottom
+                            if (nextPage != null && !isLoading) {
+                                isLoading = true
+                                fetchNextPage()
                             }
                         }
-
-                        val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
-                        itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
                     }
+
+                /**
+                 * listener for swiping to the left or right
+                 */
+                if (isOwner) {
+                    val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
+                        0,
+                        ItemTouchHelper.LEFT
+                    ) {
+                        override fun onMove(
+                            recyclerView: RecyclerView,
+                            viewHolder: RecyclerView.ViewHolder,
+                            target: RecyclerView.ViewHolder
+                        ): Boolean {
+                            return false
+                        }
+
+                        override fun onSwiped(
+                            viewHolder: RecyclerView.ViewHolder,
+                            direction: Int
+                        ) {
+                            val position = viewHolder.absoluteAdapterPosition
+                            playlistAdapter!!.removeFromPlaylist(position)
+                        }
+                    }
+
+                    val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
+                    itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
                 }
             }
         }
-        run()
     }
 
     private fun fetchNextPage() {

@@ -44,51 +44,48 @@ class AddToPlaylistDialog : DialogFragment() {
     }
 
     private fun fetchPlaylists() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.playlists(token)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                if (response.isNotEmpty()) {
-                    val names = response.map { it.name }
-                    val arrayAdapter =
-                        ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
-                    arrayAdapter.setDropDownViewResource(
-                        android.R.layout.simple_spinner_dropdown_item
-                    )
-                    binding.playlistsSpinner.adapter = arrayAdapter
-                    if (viewModel.lastSelectedPlaylistId != null) {
-                        var selectionIndex = 0
-                        response.forEachIndexed { index, playlist ->
-                            if (playlist.id == viewModel.lastSelectedPlaylistId) {
-                                selectionIndex =
-                                    index
-                            }
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.authApi.playlists(token)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            }
+            if (response.isNotEmpty()) {
+                val names = response.map { it.name }
+                val arrayAdapter =
+                    ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
+                arrayAdapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item
+                )
+                binding.playlistsSpinner.adapter = arrayAdapter
+                if (viewModel.lastSelectedPlaylistId != null) {
+                    var selectionIndex = 0
+                    response.forEachIndexed { index, playlist ->
+                        if (playlist.id == viewModel.lastSelectedPlaylistId) {
+                            selectionIndex =
+                                index
                         }
-                        binding.playlistsSpinner.setSelection(selectionIndex)
                     }
-                    runOnUiThread {
-                        binding.addToPlaylist.setOnClickListener {
-                            val index = binding.playlistsSpinner.selectedItemPosition
-                            viewModel.lastSelectedPlaylistId = response[index].id!!
-                            addToPlaylist(
-                                response[index].id!!
-                            )
-                        }
+                    binding.playlistsSpinner.setSelection(selectionIndex)
+                }
+                runOnUiThread {
+                    binding.addToPlaylist.setOnClickListener {
+                        val index = binding.playlistsSpinner.selectedItemPosition
+                        viewModel.lastSelectedPlaylistId = response[index].id!!
+                        addToPlaylist(
+                            response[index].id!!
+                        )
                     }
                 }
             }
         }
-        run()
     }
 
     private fun addToPlaylist(playlistId: String) {

@@ -69,32 +69,29 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun fetchSuggestions(query: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.api.getSuggestions(query)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launchWhenCreated
-                }
-                // only load the suggestions if the input field didn't get cleared yet
-                val suggestionsAdapter =
-                    SearchSuggestionsAdapter(
-                        response,
-                        (activity as MainActivity).searchView
-                    )
-                runOnUiThread {
-                    if (viewModel.searchQuery.value != "") {
-                        binding.suggestionsRecycler.adapter = suggestionsAdapter
-                    }
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.api.getSuggestions(query)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                return@launchWhenCreated
+            }
+            // only load the suggestions if the input field didn't get cleared yet
+            val suggestionsAdapter =
+                SearchSuggestionsAdapter(
+                    response,
+                    (activity as MainActivity).searchView
+                )
+            runOnUiThread {
+                if (viewModel.searchQuery.value != "") {
+                    binding.suggestionsRecycler.adapter = suggestionsAdapter
                 }
             }
         }
-        run()
     }
 
     private fun showHistory() {

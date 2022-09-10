@@ -83,87 +83,84 @@ class ChannelFragment : BaseFragment() {
     }
 
     private fun fetchChannel() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    if (channelId != null) {
-                        RetrofitInstance.api.getChannel(channelId!!)
-                    } else {
-                        RetrofitInstance.api.getChannelByName(channelName!!)
-                    }
-                } catch (e: IOException) {
-                    binding.channelRefresh.isRefreshing = false
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    binding.channelRefresh.isRefreshing = false
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launchWhenCreated
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                if (channelId != null) {
+                    RetrofitInstance.api.getChannel(channelId!!)
+                } else {
+                    RetrofitInstance.api.getChannelByName(channelName!!)
                 }
-                // needed if the channel gets loaded by the ID
-                channelId = response.id
-
-                // fetch and update the subscription status
-                isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
-                if (isSubscribed == null) return@launchWhenCreated
-
-                runOnUiThread {
-                    if (isSubscribed == true) {
-                        binding.channelSubscribe.text = getString(R.string.unsubscribe)
-                    }
-
-                    binding.channelSubscribe.setOnClickListener {
-                        binding.channelSubscribe.text = if (isSubscribed == true) {
-                            SubscriptionHelper.unsubscribe(channelId!!)
-                            isSubscribed = false
-                            getString(R.string.subscribe)
-                        } else {
-                            SubscriptionHelper.subscribe(channelId!!)
-                            isSubscribed = true
-                            getString(R.string.unsubscribe)
-                        }
-                    }
-                }
-
-                nextPage = response.nextpage
-                isLoading = false
+            } catch (e: IOException) {
                 binding.channelRefresh.isRefreshing = false
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                binding.channelRefresh.isRefreshing = false
+                Log.e(TAG(), "HttpException, unexpected response")
+                return@launchWhenCreated
+            }
+            // needed if the channel gets loaded by the ID
+            channelId = response.id
 
-                runOnUiThread {
-                    binding.channelScrollView.visibility = View.VISIBLE
-                    binding.channelName.text = response.name
-                    if (response.verified) {
-                        binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
-                            0,
-                            0,
-                            R.drawable.ic_verified,
-                            0
-                        )
-                    }
-                    binding.channelSubs.text = resources.getString(
-                        R.string.subscribers,
-                        response.subscriberCount.formatShort()
-                    )
-                    if (response.description?.trim() == "") {
-                        binding.channelDescription.visibility = View.GONE
+            // fetch and update the subscription status
+            isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
+            if (isSubscribed == null) return@launchWhenCreated
+
+            runOnUiThread {
+                if (isSubscribed == true) {
+                    binding.channelSubscribe.text = getString(R.string.unsubscribe)
+                }
+
+                binding.channelSubscribe.setOnClickListener {
+                    binding.channelSubscribe.text = if (isSubscribed == true) {
+                        SubscriptionHelper.unsubscribe(channelId!!)
+                        isSubscribed = false
+                        getString(R.string.subscribe)
                     } else {
-                        binding.channelDescription.text = response.description?.trim()
+                        SubscriptionHelper.subscribe(channelId!!)
+                        isSubscribed = true
+                        getString(R.string.unsubscribe)
                     }
-
-                    ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-                    ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
-
-                    // recyclerview of the videos by the channel
-                    channelAdapter = ChannelAdapter(
-                        response.relatedStreams!!.toMutableList(),
-                        childFragmentManager
-                    )
-                    binding.channelRecView.adapter = channelAdapter
                 }
             }
+
+            nextPage = response.nextpage
+            isLoading = false
+            binding.channelRefresh.isRefreshing = false
+
+            runOnUiThread {
+                binding.channelScrollView.visibility = View.VISIBLE
+                binding.channelName.text = response.name
+                if (response.verified) {
+                    binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_verified,
+                        0
+                    )
+                }
+                binding.channelSubs.text = resources.getString(
+                    R.string.subscribers,
+                    response.subscriberCount.formatShort()
+                )
+                if (response.description?.trim() == "") {
+                    binding.channelDescription.visibility = View.GONE
+                } else {
+                    binding.channelDescription.text = response.description?.trim()
+                }
+
+                ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
+                ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
+
+                // recyclerview of the videos by the channel
+                channelAdapter = ChannelAdapter(
+                    response.relatedStreams!!.toMutableList(),
+                    childFragmentManager
+                )
+                binding.channelRecView.adapter = channelAdapter
+            }
         }
-        run()
     }
 
     private fun fetchChannelNextPage() {

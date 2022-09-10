@@ -55,35 +55,32 @@ class LoginDialog : DialogFragment() {
     }
 
     private fun login(login: Login) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.login(login)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: Exception) {
-                    Log.e(TAG(), "dafaq?$e")
-                    return@launchWhenCreated
-                }
-                if (response.error != null) {
-                    Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                } else if (response.token != null) {
-                    Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
-                    PreferenceHelper.setToken(response.token!!)
-                    PreferenceHelper.setUsername(login.username!!)
-                    dialog?.dismiss()
-                    activity?.recreate()
-                }
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.authApi.login(login)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: Exception) {
+                Log.e(TAG(), "dafaq?$e")
+                return@launchWhenCreated
+            }
+            if (response.error != null) {
+                Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
+            } else if (response.token != null) {
+                Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
+                PreferenceHelper.setToken(response.token!!)
+                PreferenceHelper.setUsername(login.username!!)
+                dialog?.dismiss()
+                activity?.recreate()
             }
         }
-        run()
     }
 
     private fun register(login: Login) {

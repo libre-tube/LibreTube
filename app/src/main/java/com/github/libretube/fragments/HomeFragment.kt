@@ -62,50 +62,47 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun fetchTrending() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.api.getTrending(region)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } finally {
-                    binding.homeRefresh.isRefreshing = false
-                }
-                runOnUiThread {
-                    binding.progressBar.visibility = View.GONE
-                    if (
-                        PreferenceHelper.getBoolean(
-                            PreferenceKeys.ALTERNATIVE_TRENDING_LAYOUT,
-                            false
-                        )
-                    ) {
-                        binding.recview.layoutManager = LinearLayoutManager(context)
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.api.getTrending(region)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } finally {
+                binding.homeRefresh.isRefreshing = false
+            }
+            runOnUiThread {
+                binding.progressBar.visibility = View.GONE
+                if (
+                    PreferenceHelper.getBoolean(
+                        PreferenceKeys.ALTERNATIVE_TRENDING_LAYOUT,
+                        false
+                    )
+                ) {
+                    binding.recview.layoutManager = LinearLayoutManager(context)
 
-                        binding.recview.adapter = ChannelAdapter(
-                            response.toMutableList(),
-                            childFragmentManager
-                        )
-                    } else {
-                        binding.recview.layoutManager = GridLayoutManager(
-                            context,
-                            PreferenceHelper.getString(
-                                PreferenceKeys.GRID_COLUMNS,
-                                resources.getInteger(R.integer.grid_items).toString()
-                            ).toInt()
-                        )
+                    binding.recview.adapter = ChannelAdapter(
+                        response.toMutableList(),
+                        childFragmentManager
+                    )
+                } else {
+                    binding.recview.layoutManager = GridLayoutManager(
+                        context,
+                        PreferenceHelper.getString(
+                            PreferenceKeys.GRID_COLUMNS,
+                            resources.getInteger(R.integer.grid_items).toString()
+                        ).toInt()
+                    )
 
-                        binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
-                    }
+                    binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
                 }
             }
         }
-        run()
     }
 }

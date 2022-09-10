@@ -41,24 +41,21 @@ class DeleteAccountDialog : DialogFragment() {
     }
 
     private fun deleteAccount(password: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val token = PreferenceHelper.getToken()
+        lifecycleScope.launchWhenCreated {
+            val token = PreferenceHelper.getToken()
 
-                try {
-                    RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
-                logout()
-                val restartDialog = RequireRestartDialog()
-                restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            try {
+                RetrofitInstance.authApi.deleteAccount(token, DeleteUserRequest(password))
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
             }
+            Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
+            logout()
+            val restartDialog = RequireRestartDialog()
+            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
         }
-        run()
     }
 
     private fun logout() {

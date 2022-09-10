@@ -85,32 +85,29 @@ class PlaylistsAdapter(
     }
 
     private fun deletePlaylist(id: String, position: Int) {
-        fun run() {
-            CoroutineScope(Dispatchers.IO).launch {
-                val response = try {
-                    RetrofitInstance.authApi.deletePlaylist(
-                        PreferenceHelper.getToken(),
-                        PlaylistId(id)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launch
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    return@launch
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = try {
+                RetrofitInstance.authApi.deletePlaylist(
+                    PreferenceHelper.getToken(),
+                    PlaylistId(id)
+                )
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                return@launch
+            }
+            try {
+                if (response.message == "ok") {
+                    playlists.removeAt(position)
+                    activity.runOnUiThread { notifyDataSetChanged() }
                 }
-                try {
-                    if (response.message == "ok") {
-                        playlists.removeAt(position)
-                        activity.runOnUiThread { notifyDataSetChanged() }
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                }
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
             }
         }
-        run()
     }
 }
 
