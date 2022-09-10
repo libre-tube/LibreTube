@@ -1332,32 +1332,29 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun isSubscribed() {
-        fun run() {
-            val channelId = streams.uploaderUrl!!.toID()
-            lifecycleScope.launchWhenCreated {
-                isSubscribed = SubscriptionHelper.isSubscribed(channelId)
+        val channelId = streams.uploaderUrl!!.toID()
+        lifecycleScope.launchWhenCreated {
+            isSubscribed = SubscriptionHelper.isSubscribed(channelId)
 
-                if (isSubscribed == null) return@launchWhenCreated
+            if (isSubscribed == null) return@launchWhenCreated
 
-                runOnUiThread {
+            runOnUiThread {
+                if (isSubscribed == true) {
+                    binding.playerSubscribe.text = getString(R.string.unsubscribe)
+                }
+                binding.playerSubscribe.setOnClickListener {
                     if (isSubscribed == true) {
+                        SubscriptionHelper.unsubscribe(channelId)
+                        binding.playerSubscribe.text = getString(R.string.subscribe)
+                        isSubscribed = false
+                    } else {
+                        SubscriptionHelper.subscribe(channelId)
                         binding.playerSubscribe.text = getString(R.string.unsubscribe)
-                    }
-                    binding.playerSubscribe.setOnClickListener {
-                        if (isSubscribed == true) {
-                            SubscriptionHelper.unsubscribe(channelId)
-                            binding.playerSubscribe.text = getString(R.string.subscribe)
-                            isSubscribed = false
-                        } else {
-                            SubscriptionHelper.subscribe(channelId)
-                            binding.playerSubscribe.text = getString(R.string.unsubscribe)
-                            isSubscribed = true
-                        }
+                        isSubscribed = true
                     }
                 }
             }
         }
-        run()
     }
 
     private fun fetchComments() {

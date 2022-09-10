@@ -50,36 +50,33 @@ class CreatePlaylistDialog : DialogFragment() {
     }
 
     private fun createPlaylist(name: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.createPlaylist(token, Playlists(name = name))
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response $e")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                if (response.playlistId != null) {
-                    Toast.makeText(context, R.string.playlistCreated, Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, getString(R.string.unknown_error), Toast.LENGTH_SHORT)
-                        .show()
-                }
-                // refresh the playlists in the library
-                try {
-                    val parent = parentFragment as LibraryFragment
-                    parent.fetchPlaylists()
-                } catch (e: Exception) {
-                    Log.e(TAG(), e.toString())
-                }
-                dismiss()
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.authApi.createPlaylist(token, Playlists(name = name))
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response $e")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
             }
+            if (response.playlistId != null) {
+                Toast.makeText(context, R.string.playlistCreated, Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, getString(R.string.unknown_error), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            // refresh the playlists in the library
+            try {
+                val parent = parentFragment as LibraryFragment
+                parent.fetchPlaylists()
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+            }
+            dismiss()
         }
-        run()
     }
 }

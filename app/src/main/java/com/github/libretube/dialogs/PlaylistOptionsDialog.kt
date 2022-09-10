@@ -101,6 +101,14 @@ class PlaylistOptionsDialog(
                             .setTitle(R.string.renamePlaylist)
                             .setView(binding.root)
                             .setPositiveButton(R.string.okay) { _, _ ->
+                                if (binding.input.text.toString() == "") {
+                                    Toast.makeText(
+                                        context,
+                                        R.string.emptyPlaylistName,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    return@setPositiveButton
+                                }
                                 renamePlaylist(playlistId, binding.input.text.toString())
                             }
                             .setNegativeButton(R.string.cancel, null)
@@ -112,20 +120,17 @@ class PlaylistOptionsDialog(
     }
 
     private fun importPlaylist(token: String, playlistId: String) {
-        fun run() {
-            CoroutineScope(Dispatchers.IO).launch {
-                val response = try {
-                    RetrofitInstance.authApi.importPlaylist(token, PlaylistId(playlistId))
-                } catch (e: IOException) {
-                    println(e)
-                    return@launch
-                } catch (e: HttpException) {
-                    return@launch
-                }
-                Log.e(TAG(), response.toString())
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = try {
+                RetrofitInstance.authApi.importPlaylist(token, PlaylistId(playlistId))
+            } catch (e: IOException) {
+                println(e)
+                return@launch
+            } catch (e: HttpException) {
+                return@launch
             }
+            Log.e(TAG(), response.toString())
         }
-        run()
     }
 
     private fun renamePlaylist(id: String, newName: String) {

@@ -95,51 +95,48 @@ class LibraryFragment : BaseFragment() {
     }
 
     fun fetchPlaylists() {
-        fun run() {
-            binding.playlistRefresh.isRefreshing = true
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.playlists(token)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } finally {
-                    binding.playlistRefresh.isRefreshing = false
-                }
-                if (response.isNotEmpty()) {
-                    binding.loginOrRegister.visibility = View.GONE
+        binding.playlistRefresh.isRefreshing = true
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.authApi.playlists(token)
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
+            } finally {
+                binding.playlistRefresh.isRefreshing = false
+            }
+            if (response.isNotEmpty()) {
+                binding.loginOrRegister.visibility = View.GONE
 
-                    val playlistsAdapter = PlaylistsAdapter(
-                        response.toMutableList(),
-                        childFragmentManager,
-                        requireActivity()
-                    )
+                val playlistsAdapter = PlaylistsAdapter(
+                    response.toMutableList(),
+                    childFragmentManager,
+                    requireActivity()
+                )
 
-                    // listen for playlists to become deleted
-                    playlistsAdapter.registerAdapterDataObserver(object :
-                            RecyclerView.AdapterDataObserver() {
-                            override fun onChanged() {
-                                if (playlistsAdapter.itemCount == 0) {
-                                    binding.loginOrRegister.visibility = View.VISIBLE
-                                }
-                                super.onChanged()
+                // listen for playlists to become deleted
+                playlistsAdapter.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
+                        override fun onChanged() {
+                            if (playlistsAdapter.itemCount == 0) {
+                                binding.loginOrRegister.visibility = View.VISIBLE
                             }
-                        })
+                            super.onChanged()
+                        }
+                    })
 
-                    binding.playlistRecView.adapter = playlistsAdapter
-                } else {
-                    runOnUiThread {
-                        binding.loginOrRegister.visibility = View.VISIBLE
-                    }
+                binding.playlistRecView.adapter = playlistsAdapter
+            } else {
+                runOnUiThread {
+                    binding.loginOrRegister.visibility = View.VISIBLE
                 }
             }
         }
-        run()
     }
 }
