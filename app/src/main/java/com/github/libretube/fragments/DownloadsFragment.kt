@@ -27,6 +27,11 @@ class DownloadsFragment : BaseFragment() {
 
         val files = DownloadHelper.getDownloadedFiles(requireContext())
 
+        if (files.isEmpty()) return
+
+        binding.downloadsEmpty.visibility = View.GONE
+        binding.downloads.visibility = View.VISIBLE
+
         binding.downloads.layoutManager = LinearLayoutManager(context)
         binding.downloads.adapter = DownloadsAdapter(files)
     }
