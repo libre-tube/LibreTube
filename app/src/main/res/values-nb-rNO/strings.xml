@@ -306,4 +306,15 @@
     <string name="already_spent_time">Du har allerede brukt %1$s min. i programmet. På tide med en pause.</string>
     <string name="take_a_break">På tide å ta en pause</string>
     <string name="picture_in_picture">Bilde-i-bilde</string>
+    <string name="device_info">Enhetsinfo</string>
+    <string name="player_resize_mode">Modus for endring av størrelse</string>
+    <string name="audio_video_summary">Kvalitet og format</string>
+    <string name="delete">Slett</string>
+    <string name="maximum_image_cache">Maks. bildehurtiglagringsstørrelse</string>
+    <string name="copied_to_clipboard">Kopiert til utklippstavlen</string>
+    <string name="open_copied">Åpne</string>
+    <string name="break_reminder_time">Minutter før ny påminnelse</string>
+    <string name="legacy_subscriptions">Visning for eldre abonnementer</string>
+    <string name="trending_layout">Alternativ «På vei opp»-visning</string>
+    <string name="renamePlaylist">Gi spillelisten nytt navn</string>
 </resources>
