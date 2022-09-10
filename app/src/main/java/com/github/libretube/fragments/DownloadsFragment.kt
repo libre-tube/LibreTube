@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.DownloadsAdapter
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.extensions.BaseFragment
@@ -34,5 +36,17 @@ class DownloadsFragment : BaseFragment() {
 
         binding.downloads.layoutManager = LinearLayoutManager(context)
         binding.downloads.adapter = DownloadsAdapter(files)
+
+        binding.downloads.adapter?.registerAdapterDataObserver(
+            object : RecyclerView.AdapterDataObserver() {
+                override fun onChanged() {
+                    if (binding.downloads.size == 0) {
+                        binding.downloads.visibility = View.GONE
+                        binding.downloadsEmpty.visibility = View.VISIBLE
+                    }
+                    super.onChanged()
+                }
+            }
+        )
     }
 }
