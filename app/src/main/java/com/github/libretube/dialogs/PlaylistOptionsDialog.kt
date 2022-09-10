@@ -2,6 +2,7 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -97,6 +98,8 @@ class PlaylistOptionsDialog(
                     context?.getString(R.string.renamePlaylist) -> {
                         val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
                         binding.input.hint = context?.getString(R.string.playlistName)
+                        binding.input.inputType = InputType.TYPE_CLASS_TEXT
+
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle(R.string.renamePlaylist)
                             .setView(binding.root)
