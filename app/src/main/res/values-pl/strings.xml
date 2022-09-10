@@ -92,7 +92,7 @@
     <string name="settings">Ustawienia</string>
     <string name="instance">Instancja</string>
     <string name="customization">Dostosowywanie</string>
-    <string name="website">Strona Internetowa</string>
+    <string name="website">Strona domowa</string>
     <string name="videoCount">%1$s filmy</string>
     <string name="noInternet">Wpierw połącz się z internetem.</string>
     <string name="retry">Spróbuj ponownie</string>
@@ -315,4 +315,6 @@
     <string name="background_mode">Działanie w tle</string>
     <string name="share_with_time">Udostępnij z uwzględnieniem czasu</string>
     <string name="break_reminder_time">Minuty przed przypomnieniem</string>
+    <string name="trending_layout">Alternatywny układ „na czasie”</string>
+    <string name="renamePlaylist">Zmień nazwę listy odtwarzania</string>
 </resources>
