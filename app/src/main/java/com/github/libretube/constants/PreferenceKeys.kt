@@ -33,6 +33,7 @@ object PreferenceKeys {
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
+    const val ALTERNATIVE_TRENDING_LAYOUT = "trending_layout"
 
     /**
      * Instance

@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.adapters.ChannelAdapter
 import com.github.libretube.adapters.TrendingAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
@@ -41,11 +43,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val grid = PreferenceHelper.getString(
-            PreferenceKeys.GRID_COLUMNS,
-            resources.getInteger(R.integer.grid_items).toString()
-        )
-
         val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
 
         // get the system default country if auto region selected
@@ -57,15 +54,14 @@ class HomeFragment : BaseFragment() {
             regionPref
         }
 
-        binding.recview.layoutManager = GridLayoutManager(view.context, grid.toInt())
-        fetchJson()
+        fetchTrending()
         binding.homeRefresh.isEnabled = true
         binding.homeRefresh.setOnRefreshListener {
-            fetchJson()
+            fetchTrending()
         }
     }
 
-    private fun fetchJson() {
+    private fun fetchTrending() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
@@ -84,7 +80,29 @@ class HomeFragment : BaseFragment() {
                 }
                 runOnUiThread {
                     binding.progressBar.visibility = View.GONE
-                    binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
+                    if (
+                        PreferenceHelper.getBoolean(
+                            PreferenceKeys.ALTERNATIVE_TRENDING_LAYOUT,
+                            false
+                        )
+                    ) {
+                        binding.recview.layoutManager = LinearLayoutManager(context)
+
+                        binding.recview.adapter = ChannelAdapter(
+                            response.toMutableList(),
+                            childFragmentManager
+                        )
+                    } else {
+                        binding.recview.layoutManager = GridLayoutManager(
+                            context,
+                            PreferenceHelper.getString(
+                                PreferenceKeys.GRID_COLUMNS,
+                                resources.getInteger(R.integer.grid_items).toString()
+                            ).toInt()
+                        )
+
+                        binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
+                    }
                 }
             }
         }
