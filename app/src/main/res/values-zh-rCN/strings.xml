@@ -314,4 +314,5 @@
     <string name="legacy_subscriptions">旧版订阅视图</string>
     <string name="device_info">设备信息</string>
     <string name="audio_video_summary">清晰度和格式</string>
+    <string name="delete">删除</string>
 </resources>

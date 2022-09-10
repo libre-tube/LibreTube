@@ -314,4 +314,5 @@
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
+    <string name="delete">Sil</string>
 </resources>
