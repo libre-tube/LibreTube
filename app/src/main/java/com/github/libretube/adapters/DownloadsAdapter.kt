@@ -9,11 +9,12 @@ import com.github.libretube.R
 import com.github.libretube.activities.OfflinePlayerActivity
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DownloadedMediaRowBinding
+import com.github.libretube.obj.DownloadedFile
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
 class DownloadsAdapter(
-    private val files: MutableList<File>
+    private val files: MutableList<DownloadedFile>
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = DownloadedMediaRowBinding.inflate(
@@ -29,7 +30,7 @@ class DownloadsAdapter(
         val file = files[position]
         holder.binding.apply {
             fileName.text = file.name
-            fileSize.text = "${file.length() / (1024 * 1024)} MiB"
+            fileSize.text = "${file.size / (1024 * 1024)} MiB"
 
             root.setOnClickListener {
                 val intent = Intent(root.context, OfflinePlayerActivity::class.java).also {
