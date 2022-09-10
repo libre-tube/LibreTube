@@ -94,6 +94,12 @@
             app:key="legacy_subscriptions_columns"
             app:title="@string/grid" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_trending"
+            app:defaultValue="false"
+            app:key="trending_layout"
+            app:title="@string/trending_layout" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

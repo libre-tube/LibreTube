@@ -315,4 +315,5 @@
     <string name="device_info">Device Info</string>
     <string name="audio_video_summary">Quality and format</string>
     <string name="delete">Delete</string>
+    <string name="trending_layout">Alternative trending layout</string>
 </resources>

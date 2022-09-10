@@ -33,6 +33,7 @@ object PreferenceKeys {
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
+    const val ALTERNATIVE_TRENDING_LAYOUT = "trending_layout"
 
     /**
      * Instance
@@ -76,12 +77,6 @@ object PreferenceKeys {
      * Background mode
      */
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
-
-    /**
-     * Download
-     */
-    const val DOWNLOAD_LOCATION = "download_location"
-    const val DOWNLOAD_FOLDER = "download_folder"
 
     /**
      * Notifications

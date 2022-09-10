@@ -2,38 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--
-    <PreferenceCategory app:title="@string/downloads">
-
-        <ListPreference
-            android:defaultValue="downloads"
-            android:entries="@array/downloadLocation"
-            android:entryValues="@array/downloadLocationValues"
-            app:icon="@drawable/ic_download_filled"
-            app:key="download_location"
-            app:summary="@string/download_directory_summary"
-            app:title="@string/download_directory" />
-
-        <EditTextPreference
-            android:defaultValue="LibreTube"
-            app:icon="@drawable/ic_folder"
-            app:key="download_folder"
-            app:summary="@string/download_folder_summary"
-            app:title="@string/download_folder" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/share">
-
-        <SwitchPreferenceCompat
-            app:defaultValue="true"
-            app:icon="@drawable/ic_time"
-            app:key="share_with_time_code"
-            app:title="@string/share_with_time" />
-
-    </PreferenceCategory>
-    -->
-
     <PreferenceCategory app:title="@string/advanced">
 
         <SwitchPreferenceCompat
