@@ -18,8 +18,8 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.interfaces.DoubleTapInterface
-import com.github.libretube.interfaces.OnlinePlayerOptionsInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
+import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -40,7 +40,7 @@ internal class CustomExoPlayerView(
      * Objects from the parent fragment
      */
     private var doubleTapListener: DoubleTapInterface? = null
-    private var onlinePlayerOptionsInterface: OnlinePlayerOptionsInterface? = null
+    private var playerOptionsInterface: PlayerOptionsInterface? = null
     private lateinit var childFragmentManager: FragmentManager
     private var trackSelector: TrackSelector? = null
 
@@ -85,12 +85,12 @@ internal class CustomExoPlayerView(
 
     fun initialize(
         childFragmentManager: FragmentManager,
-        playerViewInterface: OnlinePlayerOptionsInterface?,
+        playerViewInterface: PlayerOptionsInterface?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         trackSelector: TrackSelector?
     ) {
         this.childFragmentManager = childFragmentManager
-        this.onlinePlayerOptionsInterface = playerViewInterface
+        this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
 
@@ -99,7 +99,7 @@ internal class CustomExoPlayerView(
 
         enableDoubleTapToSeek()
 
-        initializeAdvancedOptions()
+        initializeAdvancedOptions(context)
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
@@ -139,48 +139,77 @@ internal class CustomExoPlayerView(
         return false
     }
 
-    private fun initializeAdvancedOptions() {
+    private fun initializeAdvancedOptions(context: Context) {
         binding.toggleOptions.setOnClickListener {
-            val bottomSheetFragment = PlayerOptionsBottomSheet().apply {
-                setOnClickListeners(
-                    playerOptionsInterface,
-                    onlinePlayerOptionsInterface
+            val bottomSheetFragment = BottomSheet().apply {
+                val items = mutableListOf(
+                    BottomSheetItem(
+                        context.getString(R.string.player_autoplay),
+                        R.drawable.ic_play,
+                        if (autoplayEnabled) {
+                            context.getString(R.string.enabled)
+                        } else {
+                            context.getString(R.string.disabled)
+                        }
+                    ),
+                    BottomSheetItem(
+                        context.getString(R.string.repeat_mode),
+                        R.drawable.ic_repeat,
+                        if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                            context.getString(R.string.repeat_mode_none)
+                        } else {
+                            context.getString(R.string.repeat_mode_current)
+                        }
+                    ),
+                    BottomSheetItem(
+                        context.getString(R.string.player_resize_mode),
+                        R.drawable.ic_aspect_ratio,
+                        when (resizeMode) {
+                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
+                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                            else -> context.getString(R.string.resize_mode_zoom)
+                        }
+                    ),
+                    BottomSheetItem(
+                        context.getString(R.string.playback_speed),
+                        R.drawable.ic_speed,
+                        "${player?.playbackParameters?.speed
+                            .toString()
+                            .replace(".0", "")
+                        }x"
+                    )
                 )
-                // set the auto play mode
-                currentAutoplayMode = if (autoplayEnabled) {
-                    context?.getString(R.string.enabled)
-                } else {
-                    context?.getString(R.string.disabled)
+
+                if (playerOptionsInterface != null) {
+                    items.add(
+                        BottomSheetItem(
+                            context.getString(R.string.quality),
+                            R.drawable.ic_hd,
+                            "${player?.videoSize?.height}p"
+                        )
+                    )
+                    items.add(
+                        BottomSheetItem(
+                            context.getString(R.string.captions),
+                            R.drawable.ic_caption,
+                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                                trackSelector!!.parameters.preferredTextLanguages[0]
+                            } else {
+                                context.getString(R.string.none)
+                            }
+                        )
+                    )
                 }
-                // set the current caption language
-                currentCaptions =
-                    if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                        trackSelector!!.parameters.preferredTextLanguages[0]
-                    } else {
-                        context?.getString(R.string.none)
+
+                setItems(items) { index ->
+                    when (index) {
+                        0 -> onAutoplayClicked()
+                        1 -> onRepeatModeClicked()
+                        2 -> onResizeModeClicked()
+                        3 -> onPlaybackSpeedClicked()
+                        4 -> playerOptionsInterface?.onQualityClicked()
+                        5 -> playerOptionsInterface?.onCaptionClicked()
                     }
-                // set the playback speed
-                currentPlaybackSpeed = "${
-                player?.playbackParameters?.speed.toString()
-                    .replace(".0", "")
-                }x"
-                // set the quality text
-                val quality = player?.videoSize?.height
-                if (quality != 0) {
-                    currentQuality = "${quality}p"
-                }
-                // set the repeat mode
-                currentRepeatMode =
-                    if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                        context?.getString(R.string.repeat_mode_none)
-                    } else {
-                        context?.getString(R.string.repeat_mode_current)
-                    }
-                // set the aspect ratio mode
-                currentResizeMode = when (resizeMode) {
-                    AspectRatioFrameLayout.RESIZE_MODE_FIT -> context?.getString(R.string.resize_mode_fit)
-                    AspectRatioFrameLayout.RESIZE_MODE_FILL -> context?.getString(R.string.resize_mode_fill)
-                    else -> context?.getString(R.string.resize_mode_zoom)
                 }
             }
             bottomSheetFragment.show(childFragmentManager, null)
@@ -282,81 +311,80 @@ internal class CustomExoPlayerView(
         }
     }
 
-    private val playerOptionsInterface = object : PlayerOptionsInterface {
-        override fun onAutoplayClicked() {
-            // autoplay options dialog
-            MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.player_autoplay)
-                .setItems(
-                    arrayOf(
-                        context.getString(R.string.enabled),
-                        context.getString(R.string.disabled)
-                    )
-                ) { _, index ->
-                    when (index) {
-                        0 -> autoplayEnabled = true
-                        1 -> autoplayEnabled = false
-                    }
+    fun onAutoplayClicked() {
+        // autoplay options dialog
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.player_autoplay)
+            .setItems(
+                arrayOf(
+                    context.getString(R.string.enabled),
+                    context.getString(R.string.disabled)
+                )
+            ) { _, index ->
+                when (index) {
+                    0 -> autoplayEnabled = true
+                    1 -> autoplayEnabled = false
                 }
-                .show()
-        }
+            }
+            .show()
+    }
 
-        override fun onPlaybackSpeedClicked() {
-            val playbackSpeedBinding = DialogSliderBinding.inflate(
-                LayoutInflater.from(context)
-            )
-            playbackSpeedBinding.slider.setSliderRangeAndValue(
-                PreferenceRanges.playbackSpeed
-            )
-            playbackSpeedBinding.slider.value = player?.playbackParameters?.speed ?: 1f
-            // change playback speed dialog
-            MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.change_playback_speed)
-                .setView(playbackSpeedBinding.root)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.okay) { _, _ ->
-                    player?.setPlaybackSpeed(
-                        playbackSpeedBinding.slider.value
-                    )
-                }
-                .show()
-        }
+    fun onPlaybackSpeedClicked() {
+        val playbackSpeedBinding = DialogSliderBinding.inflate(
+            LayoutInflater.from(context)
+        )
+        playbackSpeedBinding.slider.setSliderRangeAndValue(
+            PreferenceRanges.playbackSpeed
+        )
+        playbackSpeedBinding.slider.value = player?.playbackParameters?.speed ?: 1f
+        // change playback speed dialog
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.change_playback_speed)
+            .setView(playbackSpeedBinding.root)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.okay) { _, _ ->
+                player?.setPlaybackSpeed(
+                    playbackSpeedBinding.slider.value
+                )
+            }
+            .show()
+    }
 
-        override fun onResizeModeClicked() {
-            // switching between original aspect ratio (black bars) and zoomed to fill device screen
-            val aspectRatioModeNames = context.resources?.getStringArray(R.array.resizeMode)
+    fun onResizeModeClicked() {
+        // switching between original aspect ratio (black bars) and zoomed to fill device screen
+        val aspectRatioModeNames = context.resources?.getStringArray(R.array.resizeMode)
 
-            val aspectRatioModes = arrayOf(
-                AspectRatioFrameLayout.RESIZE_MODE_FIT,
-                AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
-                AspectRatioFrameLayout.RESIZE_MODE_FILL
-            )
+        val aspectRatioModes = arrayOf(
+            AspectRatioFrameLayout.RESIZE_MODE_FIT,
+            AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
+            AspectRatioFrameLayout.RESIZE_MODE_FILL
+        )
 
-            MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.aspect_ratio)
-                .setItems(aspectRatioModeNames) { _, index ->
-                    resizeMode = aspectRatioModes[index]
-                }
-                .show()
-        }
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.aspect_ratio)
+            .setItems(aspectRatioModeNames) { _, index ->
+                resizeMode = aspectRatioModes[index]
+            }
+            .show()
+    }
 
-        override fun onRepeatModeClicked() {
-            val repeatModeNames = arrayOf(
-                context.getString(R.string.repeat_mode_none),
-                context.getString(R.string.repeat_mode_current)
-            )
+    fun onRepeatModeClicked() {
+        val repeatModeNames = arrayOf(
+            context.getString(R.string.repeat_mode_none),
+            context.getString(R.string.repeat_mode_current)
+        )
 
-            val repeatModes = arrayOf(
-                RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL,
-                RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
-            )
-            // repeat mode options dialog
-            MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.repeat_mode)
-                .setItems(repeatModeNames) { _, index ->
-                    player?.repeatMode = repeatModes[index]
-                }
-                .show()
-        }
+        val repeatModes = arrayOf(
+            RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE,
+            RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
+
+        )
+        // repeat mode options dialog
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.repeat_mode)
+            .setItems(repeatModeNames) { _, index ->
+                player?.repeatMode = repeatModes[index]
+            }
+            .show()
     }
 }
