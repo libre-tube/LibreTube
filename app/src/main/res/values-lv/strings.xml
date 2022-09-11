@@ -314,4 +314,7 @@
     <string name="legacy_subscriptions">Vecais abonementu skats</string>
     <string name="device_info">Ierīces informācija</string>
     <string name="audio_video_summary">Kvalitāte un formāts</string>
+    <string name="delete">Dzēst</string>
+    <string name="trending_layout">Citādāks tendenču izkārtojums</string>
+    <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
 </resources>
