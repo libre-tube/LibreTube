@@ -10,7 +10,7 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
-import com.github.libretube.sheets.PlaylistOptionsDialog
+import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
@@ -172,8 +172,8 @@ class SearchAdapter(
             }
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()
-                PlaylistOptionsDialog(playlistId, false)
-                    .show(childFragmentManager, PlaylistOptionsDialog::class.java.name)
+                PlaylistOptionsBottomSheet(playlistId, false)
+                    .show(childFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
                 true
             }
         }
