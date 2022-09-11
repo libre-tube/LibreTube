@@ -48,4 +48,12 @@ class BottomSheet : BottomSheetDialogFragment() {
             dialog?.dismiss()
         }
     }
+
+    fun setSimpleItems(titles: List<String>, listener: (index: Int) -> Unit) {
+        this.items = titles.map { BottomSheetItem(it) }
+        this.listener = { index ->
+            listener.invoke(index)
+            dialog?.dismiss()
+        }
+    }
 }

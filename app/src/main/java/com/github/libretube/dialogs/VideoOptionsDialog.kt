@@ -3,6 +3,7 @@ package com.github.libretube.dialogs
 import android.app.Dialog
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -51,9 +52,11 @@ class VideoOptionsDialog(
         try {
             val notificationManager =
                 context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.activeNotifications.forEach {
-                if (it.id == PLAYER_NOTIFICATION_ID) {
-                    optionsList += context?.getString(R.string.add_to_queue)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                notificationManager.activeNotifications.forEach {
+                    if (it.id == PLAYER_NOTIFICATION_ID) {
+                        optionsList += context?.getString(R.string.add_to_queue)
+                    }
                 }
             }
         } catch (e: Exception) {
