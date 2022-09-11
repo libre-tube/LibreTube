@@ -111,7 +111,7 @@
     <string name="appearance_summary">Egokitu aplikazioa zure gustura.</string>
     <string name="advanced_summary">Deskargak eta berrezartzea</string>
     <string name="no_replies">Iruzkin honek ez du erantzunik.</string>
-    <string name="download_folder">Izena</string>
+    <string name="download_folder">Karpetaren izena</string>
     <string name="download_folder_summary">Deskargatutako multimediak gordetzen diren karpetaren izena.</string>
     <string name="downloads_directory">Deskarga karpeta</string>
     <string name="sdcard">SD txartela</string>
@@ -191,7 +191,7 @@
     <string name="behavior">Portaera</string>
     <string name="player_summary">Lehenetsiak eta portaera</string>
     <string name="seek_increment">Joan-etorrien gehikuntza</string>
-    <string name="reset">Leheneratu lehenetsiak</string>
+    <string name="reset">Ezabatu datu guztiak</string>
     <string name="reset_message">Ziur al zaude saioa amaitu eta zure ezarpen guztiak berrezarri nahi dituzula\?</string>
     <string name="pauseOnScreenOff_summary">Pantaila itzalita dagoenean, erreproduzitzailea gelditu.</string>
     <string name="autoplay_summary">Erreproduzitu automatikoki hurrengo bideoa unekoa amaitzen denean.</string>
@@ -240,7 +240,7 @@
     <string name="data_saver_mode_summary">Ez kargatu miniaturarik, ez bestelako irudirik.</string>
     <string name="search_history_summary">Gogoratu bilaketak</string>
     <string name="history_summary">Bistaratze eta bilaketaren historia</string>
-    <string name="reset_watch_positions">Berrezarri</string>
+    <string name="reset_watch_positions">Ezabatu posizioa</string>
     <string name="system_caption_style">Sistemaren azpitituluen estiloa</string>
     <string name="none">Bat ere ez</string>
     <string name="update_now">Libretube bertsio berria instalatu nahi duzu orain\?</string>
@@ -277,7 +277,7 @@
     <string name="network_metered">Neurtua</string>
     <string name="network_wifi">WiFi-arekin bakarrik</string>
     <string name="no_search_result">Ez dago emaitzarik.</string>
-    <string name="required_network">Konexioa behar da</string>
+    <string name="required_network">Konexioa</string>
     <string name="network_all">Guztiak</string>
     <string name="translate">Itzulpena</string>
     <string name="copied">Kopiatuta</string>
