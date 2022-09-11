@@ -226,7 +226,7 @@
     <string name="player_autoplay">Autoodtwarzanie</string>
     <string name="instance_frontend_url">Link do front-endu instancji</string>
     <string name="quality">Jakość</string>
-    <string name="hideTrendingPage">Ukryj kartę na czasie</string>
+    <string name="hideTrendingPage">Ukryj kartę „Główna”</string>
     <string name="behavior">Zachowanie</string>
     <string name="pauseOnScreenOff">Wstrzymaj odtwarzanie</string>
     <string name="clonePlaylist">Sklonuj listę odtwarzania</string>
@@ -282,7 +282,7 @@
     <string name="backup">Wykonaj kopię zapasową</string>
     <string name="picture_in_picture">Obraz w obrazie</string>
     <string name="player_resize_mode">Tryb zmiany rozmiaru</string>
-    <string name="maximum_image_cache">Maksymalny rozmiar pamięci podręcznej obrazów</string>
+    <string name="maximum_image_cache">Maks. rozmiar pamięci podręcznej obrazów</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="open_copied">Otwórz</string>
     <string name="turnInternetOn">Proszę włączyć Wi-Fi lub dane komórkowe, aby połączyć się z Internetem.</string>
@@ -315,6 +315,8 @@
     <string name="background_mode">Działanie w tle</string>
     <string name="share_with_time">Udostępnij z uwzględnieniem czasu</string>
     <string name="break_reminder_time">Minuty przed przypomnieniem</string>
-    <string name="trending_layout">Alternatywny układ „na czasie”</string>
+    <string name="trending_layout">Alternatywny układ głównej karty</string>
     <string name="renamePlaylist">Zmień nazwę listy odtwarzania</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="mobile_data">Dane mobilne</string>
 </resources>
