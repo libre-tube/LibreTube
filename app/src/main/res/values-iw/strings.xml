@@ -315,4 +315,6 @@
     <string name="device_info">פרטי מכשיר</string>
     <string name="audio_video_summary">איכות ותצורה</string>
     <string name="delete">מחיקה</string>
+    <string name="trending_layout">פריסת מובילים חלופית</string>
+    <string name="renamePlaylist">שינוי שם רשימת נגינה</string>
 </resources>
