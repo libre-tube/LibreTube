@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheet : BottomSheetDialogFragment() {
+open class BottomSheet : BottomSheetDialogFragment() {
     private lateinit var items: List<BottomSheetItem>
     private lateinit var listener: (index: Int) -> Unit
     private lateinit var binding: BottomSheetBinding
@@ -43,6 +43,14 @@ class BottomSheet : BottomSheetDialogFragment() {
 
     fun setItems(items: List<BottomSheetItem>, listener: (index: Int) -> Unit) {
         this.items = items
+        this.listener = { index ->
+            listener.invoke(index)
+            dialog?.dismiss()
+        }
+    }
+
+    fun setSimpleItems(titles: List<String>, listener: (index: Int) -> Unit) {
+        this.items = titles.map { BottomSheetItem(it) }
         this.listener = { index ->
             listener.invoke(index)
             dialog?.dismiss()

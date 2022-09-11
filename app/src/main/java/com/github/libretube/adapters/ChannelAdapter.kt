@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.VideoRowBinding
-import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
@@ -51,8 +51,8 @@ class ChannelAdapter(
             }
             val videoId = trending.url!!.toID()
             root.setOnLongClickListener {
-                VideoOptionsDialog(videoId)
-                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
+                VideoOptionsBottomSheet(videoId)
+                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
             watchProgress.setWatchProgressLength(videoId, trending.duration!!)

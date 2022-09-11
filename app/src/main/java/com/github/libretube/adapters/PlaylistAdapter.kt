@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.PlaylistRowBinding
-import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
@@ -60,8 +60,8 @@ class PlaylistAdapter(
             }
             val videoId = streamItem.url!!.toID()
             root.setOnLongClickListener {
-                VideoOptionsDialog(videoId)
-                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
+                VideoOptionsBottomSheet(videoId)
+                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 

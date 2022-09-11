@@ -108,13 +108,9 @@ class SubscriptionsFragment : BaseFragment() {
     private fun showSortDialog() {
         val sortOptions = resources.getStringArray(R.array.sortOptions)
         val sortOptionValues = resources.getStringArray(R.array.sortOptionsValues)
-        val items = mutableListOf<BottomSheetItem>()
-        sortOptions.forEach {
-            items += BottomSheetItem(it)
-        }
 
         val bottomSheet = BottomSheet().apply {
-            setItems(items) { index ->
+            setSimpleItems(sortOptions.toList()) { index ->
                 binding.sortTV.text = sortOptions[index]
                 sortOrder = sortOptionValues[index]
                 showFeed()
