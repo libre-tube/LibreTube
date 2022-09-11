@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.adapters.BottomSheetAdapter
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.obj.BottomSheetItem
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 open class BottomSheet : BottomSheetDialogFragment() {
@@ -22,14 +20,6 @@ open class BottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        dialog!!.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
-                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!
-            BottomSheetBehavior.from(bottomSheetInternal).state =
-                BottomSheetBehavior.STATE_EXPANDED
-        }
-
         binding = BottomSheetBinding.inflate(layoutInflater)
         return binding.root
     }

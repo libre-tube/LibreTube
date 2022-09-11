@@ -14,10 +14,10 @@ import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
-import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import retrofit2.HttpException
 import java.io.IOException
 

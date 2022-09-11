@@ -10,13 +10,13 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
-import com.github.libretube.sheets.PlaylistOptionsBottomSheet
-import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.SearchItem
+import com.github.libretube.sheets.PlaylistOptionsBottomSheet
+import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import kotlinx.coroutines.CoroutineScope

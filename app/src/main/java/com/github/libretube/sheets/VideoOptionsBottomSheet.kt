@@ -26,7 +26,6 @@ class VideoOptionsBottomSheet(
 ) : BottomSheet() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
             context?.getString(R.string.playOnBackground)!!,

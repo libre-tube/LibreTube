@@ -16,7 +16,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.models.SubscriptionsViewModel
-import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.BottomSheet
 
