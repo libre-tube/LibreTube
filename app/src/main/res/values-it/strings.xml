@@ -313,4 +313,7 @@
     <string name="break_reminder_time">Minuti prima dell\'avviso</string>
     <string name="device_info">Info sul dispositivo</string>
     <string name="audio_video_summary">Qualità e formato</string>
+    <string name="delete">Elimina</string>
+    <string name="trending_layout">Layout tendenze alternativo</string>
+    <string name="renamePlaylist">Rinomina la playlist</string>
 </resources>
