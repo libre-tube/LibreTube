@@ -3,7 +3,6 @@ package com.github.libretube.extensions
 import android.text.format.DateUtils
 import android.widget.TextView
 import com.github.libretube.R
-import com.github.libretube.util.ThemeHelper
 
 fun TextView.setFormattedDuration(duration: Long) {
     val text = if (duration < 0L) {
