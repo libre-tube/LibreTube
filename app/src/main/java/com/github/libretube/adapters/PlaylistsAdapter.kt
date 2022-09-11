@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.PlaylistsRowBinding
-import com.github.libretube.dialogs.PlaylistOptionsDialog
+import com.github.libretube.sheets.PlaylistOptionsDialog
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.PlaylistId
 import com.github.libretube.obj.Playlists

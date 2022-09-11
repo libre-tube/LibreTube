@@ -10,8 +10,8 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
-import com.github.libretube.dialogs.PlaylistOptionsDialog
-import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.sheets.PlaylistOptionsDialog
+import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
@@ -99,8 +99,8 @@ class SearchAdapter(
             }
             val videoId = item.url!!.toID()
             root.setOnLongClickListener {
-                VideoOptionsDialog(videoId)
-                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
+                VideoOptionsBottomSheet(videoId)
+                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
             channelImage.setOnClickListener {

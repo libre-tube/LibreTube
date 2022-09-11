@@ -1,4 +1,4 @@
-package com.github.libretube.dialogs
+package com.github.libretube.sheets
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogTextPreferenceBinding
+import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.PlaylistId

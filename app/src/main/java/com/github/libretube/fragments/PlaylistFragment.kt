@@ -14,7 +14,7 @@ import com.github.libretube.adapters.PlaylistAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
-import com.github.libretube.dialogs.PlaylistOptionsDialog
+import com.github.libretube.sheets.PlaylistOptionsDialog
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID

@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheet : BottomSheetDialogFragment() {
+open class BottomSheet : BottomSheetDialogFragment() {
     private lateinit var items: List<BottomSheetItem>
     private lateinit var listener: (index: Int) -> Unit
     private lateinit var binding: BottomSheetBinding

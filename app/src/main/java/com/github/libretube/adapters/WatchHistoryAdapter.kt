@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.WatchHistoryItem
-import com.github.libretube.dialogs.VideoOptionsDialog
+import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.util.ImageHelper
@@ -53,8 +53,8 @@ class WatchHistoryAdapter(
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
             root.setOnLongClickListener {
-                VideoOptionsDialog(video.videoId)
-                    .show(childFragmentManager, VideoOptionsDialog::class.java.name)
+                VideoOptionsBottomSheet(video.videoId)
+                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 
