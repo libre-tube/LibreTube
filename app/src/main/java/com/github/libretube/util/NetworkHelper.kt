@@ -2,6 +2,8 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 
 object NetworkHelper {
     /**
@@ -26,7 +28,7 @@ object NetworkHelper {
                 // Bluetooth
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
                 // VPN
-                actNw.hasCapability(NetworkCapabilities.TRANSPORT_VPN) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> true
                 else -> false
             }
         } else {
@@ -34,6 +36,26 @@ object NetworkHelper {
         }
          */
 
+        @Suppress("DEPRECATION")
         return connectivityManager.activeNetworkInfo?.isConnected ?: false
+    }
+
+    /**
+     * Detect whether the current network is mobile data
+     * @param context Context of the application
+     * @return isNetworkMobile
+     */
+    @Suppress("DEPRECATION")
+    fun isNetworkMobile(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(
+                connectivityManager.activeNetwork ?: return false
+            )
+            return networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ?: false
+        } else {
+            val activeNetwork = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+            return activeNetwork != null && activeNetwork.isConnected
+        }
     }
 }
