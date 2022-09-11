@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/quality">
+    <PreferenceCategory app:title="@string/wifi">
 
         <ListPreference
             android:icon="@drawable/ic_hd"
@@ -21,6 +21,32 @@
             app:key="player_audio_quality"
             app:title="@string/playerAudioQuality"
             app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/mobile_data">
+
+        <ListPreference
+            android:icon="@drawable/ic_hd"
+            app:defaultValue=""
+            app:entries="@array/defres"
+            app:entryValues="@array/defresValue"
+            app:key="default_res_mobile"
+            app:title="@string/defres"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:icon="@drawable/ic_headphones"
+            app:defaultValue="best"
+            app:entries="@array/audioQuality"
+            app:entryValues="@array/audioQualityValues"
+            app:key="player_audio_quality_mobile"
+            app:title="@string/playerAudioQuality"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/quality">
 
         <ListPreference
             android:icon="@drawable/ic_videocam"

@@ -70,6 +70,7 @@ import com.github.libretube.services.BackgroundMode
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PreferenceHelper
@@ -224,7 +225,7 @@ class PlayerFragment : BaseFragment() {
 
         createExoPlayer()
         initializeTransitionLayout()
-        initializeOnClickActions(requireContext())
+        initializeOnClickActions()
         playVideo()
 
         showBottomBar()
@@ -290,10 +291,17 @@ class PlayerFragment : BaseFragment() {
             "webm"
         )
 
-        defRes = PreferenceHelper.getString(
-            PreferenceKeys.DEFAULT_RESOLUTION,
-            ""
-        )
+        defRes = if (NetworkHelper.isNetworkMobile(requireContext())) {
+            PreferenceHelper.getString(
+                PreferenceKeys.DEFAULT_RESOLUTION_MOBILE,
+                ""
+            )
+        } else {
+            PreferenceHelper.getString(
+                PreferenceKeys.DEFAULT_RESOLUTION,
+                ""
+            )
+        }
 
         bufferingGoal = PreferenceHelper.getString(
             PreferenceKeys.BUFFERING_GOAL,
@@ -465,7 +473,7 @@ class PlayerFragment : BaseFragment() {
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
                         val videoUri = videosUrlArray[which]
-                        val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
+                        val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
                         setMediaSource(videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
@@ -475,7 +483,7 @@ class PlayerFragment : BaseFragment() {
     }
 
     // actions that don't depend on video information
-    private fun initializeOnClickActions(context: Context) {
+    private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
             viewModel.isMiniPlayerVisible.value = false
             binding.playerMotionLayout.transitionToEnd()
@@ -1255,7 +1263,7 @@ class PlayerFragment : BaseFragment() {
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
                     val videoUri = videosUrlArray[index]
-                    val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
+                    val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
                     setMediaSource(videoUri, audioUrl)
                     return
                 }
@@ -1275,7 +1283,7 @@ class PlayerFragment : BaseFragment() {
         // if nothing found, use the first list entry
         if (videosUrlArray.isNotEmpty()) {
             val videoUri = videosUrlArray[0]
-            val audioUrl = PlayerHelper.getAudioSource(streams.audioStreams!!)
+            val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
             setMediaSource(videoUri, audioUrl)
         }
     }

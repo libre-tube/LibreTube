@@ -8,9 +8,15 @@ import com.google.android.exoplayer2.ui.CaptionStyleCompat
 
 object PlayerHelper {
     // get the audio source following the users preferences
-    fun getAudioSource(audios: List<PipedStream>): String {
+    fun getAudioSource(context: Context, audios: List<PipedStream>): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
-        val audioQuality = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_QUALITY, "best")
+        val audioQuality = if (
+            NetworkHelper.isNetworkMobile(context)
+        ) {
+            PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE, "best")
+        } else {
+            PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_QUALITY, "best")
+        }
 
         val mutableAudios = audios.toMutableList()
         if (audioFormat != "all") {
