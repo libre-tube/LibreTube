@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.TrendingRowBinding
-import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.StreamItem
+import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
