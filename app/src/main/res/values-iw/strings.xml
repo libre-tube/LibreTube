@@ -317,4 +317,6 @@
     <string name="delete">מחיקה</string>
     <string name="trending_layout">פריסת מובילים חלופית</string>
     <string name="renamePlaylist">שינוי שם רשימת נגינה</string>
+    <string name="mobile_data">גלישה סלולרית</string>
+    <string name="wifi">רשת אלחוטית</string>
 </resources>
