@@ -121,7 +121,7 @@ class NotificationHelper(
                 return@runBlocking
             }
 
-            val lastSeenStreamId = PreferenceHelper.getLatestVideoId()
+            val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
             val latestFeedStreamId = videoFeed[0].url!!.toID()
 
             // first time notifications enabled or no new video available
