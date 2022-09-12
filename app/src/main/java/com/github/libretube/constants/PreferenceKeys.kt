@@ -34,6 +34,7 @@ object PreferenceKeys {
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
     const val ALTERNATIVE_TRENDING_LAYOUT = "trending_layout"
+    const val NEW_VIDEOS_BADGE = "new_videos_badge"
 
     /**
      * Instance

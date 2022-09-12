@@ -234,11 +234,16 @@ class MainActivity : BaseActivity() {
      * Initialize the notification badge showing the amount of new videos
      */
     private fun setupSubscriptionsBadge() {
+        if (!PreferenceHelper.getBoolean(
+                PreferenceKeys.NEW_VIDEOS_BADGE,
+                false
+        )) return
+
         val subscriptionsViewModel = ViewModelProvider(this)[SubscriptionsViewModel::class.java]
         subscriptionsViewModel.fetchSubscriptions()
 
-        val lastSeenVideoId = PreferenceHelper.getLastSeenVideoId()
         subscriptionsViewModel.videoFeed.observe(this) {
+            val lastSeenVideoId = PreferenceHelper.getLastSeenVideoId()
             val lastSeenVideoIndex = subscriptionsViewModel.videoFeed.value?.indexOfFirst {
                 lastSeenVideoId == it.url?.toID()
             } ?: return@observe
