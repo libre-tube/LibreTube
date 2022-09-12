@@ -48,7 +48,8 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:screenOrientation="user"
-            android:supportsPictureInPicture="true">
+            android:supportsPictureInPicture="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -65,7 +66,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_gradient_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -82,7 +84,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_fire_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -99,7 +102,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_flame_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -116,7 +120,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_shaped_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -133,7 +138,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_torch_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -150,7 +156,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_legacy_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -167,7 +174,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_bird_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity">
+            android:targetActivity=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

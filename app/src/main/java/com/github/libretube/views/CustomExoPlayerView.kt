@@ -56,7 +56,7 @@ internal class CustomExoPlayerView(
      */
     var autoplayEnabled = PreferenceHelper.getBoolean(
         PreferenceKeys.AUTO_PLAY,
-        false
+        true
     )
 
     private val seekIncrement = PreferenceHelper.getString(
