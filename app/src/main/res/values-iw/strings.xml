@@ -319,4 +319,6 @@
     <string name="renamePlaylist">שינוי שם רשימת נגינה</string>
     <string name="mobile_data">גלישה סלולרית</string>
     <string name="wifi">רשת אלחוטית</string>
+    <string name="new_videos_badge">מחוון לסרטונים חדשים</string>
+    <string name="new_videos_badge_summary">להציג עיטור עם כמות הסרטונים החדשים אם יש כאלה.</string>
 </resources>
