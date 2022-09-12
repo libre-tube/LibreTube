@@ -30,9 +30,11 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.dialogs.ErrorDialog
 import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.extensions.toID
 import com.github.libretube.fragments.PlayerFragment
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.SearchViewModel
+import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.services.ClosingService
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.PreferenceHelper
@@ -138,6 +140,7 @@ class MainActivity : BaseActivity() {
                     navController.navigate(R.id.homeFragment)
                 }
                 R.id.subscriptionsFragment -> {
+                    binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
                     navController.navigate(R.id.subscriptionsFragment)
                 }
                 R.id.libraryFragment -> {
@@ -156,6 +159,8 @@ class MainActivity : BaseActivity() {
         if (log != "") ErrorDialog().show(supportFragmentManager, null)
 
         setupBreakReminder()
+
+        setupSubscriptionsBadge()
 
         // new way of handling back presses
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
@@ -221,6 +226,31 @@ class MainActivity : BaseActivity() {
             },
             breakReminderPref.toLong() * 60 * 1000
         )
+    }
+
+    /**
+     * Initialize the notification badge showing the amount of new videos
+     */
+    private fun setupSubscriptionsBadge() {
+        if (!PreferenceHelper.getBoolean(
+                PreferenceKeys.NEW_VIDEOS_BADGE,
+                false
+            )
+        ) {
+            return
+        }
+
+        val subscriptionsViewModel = ViewModelProvider(this)[SubscriptionsViewModel::class.java]
+        subscriptionsViewModel.fetchSubscriptions()
+
+        subscriptionsViewModel.videoFeed.observe(this) {
+            val lastSeenVideoId = PreferenceHelper.getLastSeenVideoId()
+            val lastSeenVideoIndex = subscriptionsViewModel.videoFeed.value?.indexOfFirst {
+                lastSeenVideoId == it.url?.toID()
+            } ?: return@observe
+            if (lastSeenVideoIndex < 1) return@observe
+            binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).number = lastSeenVideoIndex
+        }
     }
 
     /**

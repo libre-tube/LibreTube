@@ -24,6 +24,12 @@
             app:key="reset_settings"
             app:title="@string/reset" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_badge"
+            android:summary="@string/new_videos_badge_summary"
+            app:key="new_videos_badge"
+            app:title="@string/new_videos_badge" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/backup_restore">
