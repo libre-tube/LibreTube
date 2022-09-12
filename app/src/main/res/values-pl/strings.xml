@@ -319,4 +319,6 @@
     <string name="renamePlaylist">Zmień nazwę listy odtwarzania</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dane mobilne</string>
+    <string name="new_videos_badge">Oznaczenie nowych filmów</string>
+    <string name="new_videos_badge_summary">Wyświetlaj plakietkę z ilością nowych filmów.</string>
 </resources>
