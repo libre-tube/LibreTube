@@ -753,9 +753,11 @@ class PlayerFragment : BaseFragment() {
                 exoPlayer.prepare()
                 exoPlayer.play()
 
-                if (SDK_INT >= Build.VERSION_CODES.O) {
+                if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
-                    if (!activity?.isInPictureInPictureMode!!) exoPlayerView.useController = true
+                    if (!(SDK_INT >= Build.VERSION_CODES.O && activity?.isInPictureInPictureMode!!)) {
+                        exoPlayerView.useController = true
+                    }
                 }
                 // show the player notification
                 initializePlayerNotification()
