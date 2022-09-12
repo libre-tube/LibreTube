@@ -16,7 +16,7 @@
     <string name="share">اشتراک گذاری</string>
     <string name="download">دانلود</string>
     <string name="register">ثبت نام</string>
-    <string name="customInstance">اضافه کردن یک نمونه سفارشی</string>
+    <string name="customInstance">سفارشی</string>
     <string name="please_login">لطفا ابتدا در تنظیمات وارد شوید یا ثبت نام کنید!</string>
     <string name="importsuccess">با موفقیت مشترک شدید!</string>
     <string name="subscribeIsEmpty">ابتدا در برخی از کانال‌ها مشترک شوید!</string>
@@ -24,9 +24,9 @@
     <string name="downloadfailed">دانلود شکست خورد!</string>
     <string name="vlc">باز کردن در VLC</string>
     <string name="unknown_error">خطای شبکه!</string>
-    <string name="instances">یک نمونه را انتخاب کنید</string>
-    <string name="login_first">خواهشا وارد شوید و دوباره امتحان کنید!</string>
-    <string name="region">یک منطقه را انتخاب کنید</string>
+    <string name="instances">انتخاب</string>
+    <string name="login_first">لطفا وارد شوید و دوباره امتحان کنید!</string>
+    <string name="region">منطقه</string>
     <string name="login_register">ورود/ثبت‌نام</string>
     <string name="app_theme">پوسته</string>
     <string name="import_from_yt">وارد کردن اشتراک‌ها</string>
