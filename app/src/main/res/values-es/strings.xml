@@ -17,7 +17,7 @@
     <string name="yes">Sí</string>
     <string name="registered">Registrado. Ahora puede suscribirse a los canales.</string>
     <string name="already_logged_in">Ya ha iniciado sesión. Puede salir de su cuenta.</string>
-    <string name="instances">Elige…</string>
+    <string name="instances">Elegir…</string>
     <string name="customInstance">Personalizada</string>
     <string name="login_register">Iniciar sesión/registrarse</string>
     <string name="please_login">Por favor, inicie sesión o regístrese primero en los ajustes.</string>
@@ -314,4 +314,11 @@
     <string name="copied_to_clipboard">Copiado en el portapapeles</string>
     <string name="open_copied">Abrir</string>
     <string name="audio_video_summary">Calidad y formato</string>
+    <string name="new_videos_badge_summary">Muestra una notificación con la cantidad de videos nuevos si hay algunos.</string>
+    <string name="new_videos_badge">Indicador para nuevos vídeos</string>
+    <string name="delete">Borrar</string>
+    <string name="trending_layout">Diseño de tendencias alternativo</string>
+    <string name="renamePlaylist">Cambiar el nombre de la lista de reproducción</string>
+    <string name="wifi">Conexión WiFi</string>
+    <string name="mobile_data">Datos móviles</string>
 </resources>

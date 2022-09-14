@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="choose_quality_dialog">انتخاب کیفیت:</string>
+    <string name="choose_quality_dialog">کیفیت:</string>
     <string name="subscribe">مشترک شدن</string>
     <string name="save">ذخیره</string>
     <string name="username">نام کاربری</string>
@@ -16,7 +16,7 @@
     <string name="share">اشتراک گذاری</string>
     <string name="download">دانلود</string>
     <string name="register">ثبت نام</string>
-    <string name="customInstance">اضافه کردن یک نمونه سفارشی</string>
+    <string name="customInstance">سفارشی</string>
     <string name="please_login">لطفا ابتدا در تنظیمات وارد شوید یا ثبت نام کنید!</string>
     <string name="importsuccess">با موفقیت مشترک شدید!</string>
     <string name="subscribeIsEmpty">ابتدا در برخی از کانال‌ها مشترک شوید!</string>
@@ -24,9 +24,9 @@
     <string name="downloadfailed">دانلود شکست خورد!</string>
     <string name="vlc">باز کردن در VLC</string>
     <string name="unknown_error">خطای شبکه!</string>
-    <string name="instances">یک نمونه را انتخاب کنید</string>
-    <string name="login_first">خواهشا وارد شوید و دوباره امتحان کنید!</string>
-    <string name="region">یک منطقه را انتخاب کنید</string>
+    <string name="instances">انتخاب</string>
+    <string name="login_first">لطفا وارد شوید و دوباره امتحان کنید!</string>
+    <string name="region">منطقه</string>
     <string name="login_register">ورود/ثبت‌نام</string>
     <string name="app_theme">پوسته</string>
     <string name="import_from_yt">وارد کردن اشتراک‌ها</string>
@@ -36,26 +36,26 @@
     <string name="cannotDownload">این ویدئو را نمی‌توان دانلود کرد!</string>
     <string name="server_error">سرور دچار مشکل شده. شاید بهترست نمونه دیگری را امتحان کنید؟</string>
     <string name="error">مشکلی پیش آمده!</string>
-    <string name="notgmail">این حساب جیمیل شما نیست!</string>
-    <string name="defres">کیفیت پیشفرض ویدیو</string>
+    <string name="notgmail">این مربوط به حساب پایپ است</string>
+    <string name="defres">ابعاد ویدئو</string>
     <string name="empty">نام‌کاربری و رمز‌عبور نمی‌تواند خالی باشد!</string>
     <string name="emptyList">هیچی اینجا نیست!</string>
     <string name="vlcerror">نمی توانید در VLC ویدئو را ببینید. لطفا مطمئن شوید که برنامه VLC را نصب کرده باشید</string>
     <string name="grid">انتخاب تعداد ستون ها</string>
-    <string name="deletePlaylist">حذف پلی لیست</string>
-    <string name="areYouSure">آیا از حذف این پلی لیست مطمئن هستید؟</string>
-    <string name="createPlaylist">ساخت فهرست پخش</string>
-    <string name="playlistCreated">فهرست پخش ساخته شد!</string>
+    <string name="deletePlaylist">حذف لیست پخش</string>
+    <string name="areYouSure">"لیست پخش حذف  شود؟"</string>
+    <string name="createPlaylist">ساخت لیست پخش</string>
+    <string name="playlistCreated">فهرست پخش ساخته شد</string>
     <string name="playlistName">نام فهرست پخش</string>
     <string name="addToPlaylist">افزودن به فهرست پخش</string>
-    <string name="success">انجام شد!</string>
+    <string name="success">انجام شد.</string>
     <string name="fail">ناموفق :(</string>
     <string name="about">درباره ما</string>
     <string name="emptyPlaylistName">نام فهرست پخش نمی‌تواند خالی باشه</string>
     <string name="import_from_yt_summary">از یوتوب یا نیوپایپ</string>
     <string name="startpage">خانه</string>
     <string name="library">کتابخانه</string>
-    <string name="changeLanguage">تغییر زبان</string>
+    <string name="changeLanguage">زبان</string>
     <string name="systemDefault">پیشفرض سیستم</string>
     <string name="lightTheme">پوسته روشن</string>
     <string name="darkTheme">پوسته تیره</string>
@@ -63,7 +63,7 @@
     <string name="videos">ویدیو ها</string>
     <string name="subscriptions">اشتراک ها</string>
     <string name="systemLanguage">زبان سیستم</string>
-    <string name="history">سابقه</string>
+    <string name="history">تاریخچه</string>
     <string name="search_history">تاریخچه جستجو</string>
     <string name="channels">کانال‌ها</string>
     <string name="all">همه</string>
@@ -71,15 +71,15 @@
     <string name="clear_history">پاک کردن تاریخچه</string>
     <string name="settings">تنظیمات</string>
     <string name="instance">نمونه</string>
-    <string name="customization">شخصی‌سازی</string>
+    <string name="customization">تنظیمات</string>
     <string name="website">وب‌سایت</string>
     <string name="videoCount">%1$s ویدیوها</string>
-    <string name="noInternet">اینترنت متصل نیست</string>
-    <string name="retry">دوباره امتحان کنید</string>
+    <string name="noInternet">ابتدا به اینترنت متصل شوید</string>
+    <string name="retry">تلاش مجدد</string>
     <string name="comments">نظرات</string>
     <string name="defaultTab">زبانه پیش فرض</string>
     <string name="sponsorblock">اسپانسربلاک</string>
-    <string name="sponsorblock_state">فعال شده</string>
+    <string name="sponsorblock_state">فعال</string>
     <string name="category_sponsor">اسپانسر</string>
     <string name="location">مکان</string>
     <string name="playlists">فهرست پخش</string>
@@ -88,7 +88,7 @@
     <string name="youtube">یوتیوب</string>
     <string name="music_playlists">پلی لیست های یوتیوب موزیک</string>
     <string name="segment_skipped">بخش رد شده</string>
-    <string name="category_segments">بخش</string>
+    <string name="category_segments">بخش ها</string>
     <string name="category_interaction">یادآوری تعامل (لایک و اشتراک)</string>
     <string name="color_accent">لهجه</string>
     <string name="color_blue">ابی شاد</string>
@@ -107,4 +107,9 @@
     <string name="downloads">دانلودها</string>
     <string name="video_format">فرمت ویدئو</string>
     <string name="contributing">کمک کردن</string>
+    <string name="choose_filter">انتخاب فیلتر جستجو</string>
+    <string name="music_songs">آهنگ های موسیقی یوتیوب</string>
+    <string name="music_videos">آهنگ های موسیقی یوتیوب</string>
+    <string name="category_intro">وقفه / انیمیشن ورودی</string>
+    <string name="sponsorblock_summary">استفاده از https://sponsor.ajay.app API</string>
 </resources>

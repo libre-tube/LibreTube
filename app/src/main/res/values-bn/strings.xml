@@ -67,7 +67,7 @@
     <string name="category_interaction">মিথস্ক্রিয়া রিমাইন্ডার (লাইক ও সাবস্ক্রাইব)</string>
     <string name="category_outro">ইতিকথা ও কৃতিত্ব</string>
     <string name="category_outro_description">ভিডিওর সমাপ্তিতে উল্লেখ করা হয়েছে এমন অংশ। প্রয়োজনীয় তথ্য আছে এমন উপসংহারের জন্য অপ্রযোজ্য।</string>
-    <string name="material_you">মিস্টিক ম্যাটেরিয়াল ৩</string>
+    <string name="material_you">ম্যাটেরিয়াল ইউ</string>
     <string name="app_icon">আইকন</string>
     <string name="enabled">চালু</string>
     <string name="disabled">বন্ধ</string>
@@ -126,7 +126,7 @@
     <string name="hideTrendingPage">ট্রেন্ডিং পৃষ্ঠা আড়াল করুন</string>
     <string name="instance_frontend_url">ইনস্ট্যান্স ফ্রন্টইন্ডের লিংক</string>
     <string name="quality">মান</string>
-    <string name="player_summary">মান ও প্লেয়ার গতিবিধি</string>
+    <string name="player_summary">ডিফল্ট এবং আচরণগুলো</string>
     <string name="behavior">গতিবিধি</string>
     <string name="seek_increment">সন্ধান দ্রুতি</string>
     <string name="pauseOnScreenOff">অটোপজ</string>
@@ -225,4 +225,16 @@
     <string name="change_playback_speed">প্লে-ব্যাকের গতি</string>
     <string name="selected">বাছাইকৃত</string>
     <string name="require_restart_message">অ্যাপ রিস্টার্ট করুন\?</string>
+    <string name="chapters">চ্যাপ্টার</string>
+    <string name="require_restart">অ্যাপের রিস্টার্ট প্রয়োজন</string>
+    <string name="auth_instance">অথেন্টিকেশন ইন্সটেন্স</string>
+    <string name="fullscreen_orientation">ফুলস্ক্রিন অরিয়েন্টেশন</string>
+    <string name="aspect_ratio">ভিডিওর আনুমানিক অনুপাত</string>
+    <string name="autoRotatePlayer">অটো-ফুলস্ক্রিন</string>
+    <string name="pure_theme">পিওর থিম</string>
+    <string name="pure_theme_summary">পিওর সাদা/কালো থিম</string>
+    <string name="no_player_found">কোনো এক্সটার্নাল প্লেয়ার পাওয়া গেলো না। দয়া করে নিশ্চিত হোন যে একটি অন্তত ইন্সটল করা আছে।</string>
+    <string name="data_saver_mode">ডেটা-সেভার মোড</string>
+    <string name="data_saver_mode_summary">থাম্বনেইল ও অনান্য ছবি লোড করবেন না।</string>
+    <string name="search_history_summary">সার্চগুলো মনে রাখুন</string>
 </resources>

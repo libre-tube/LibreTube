@@ -39,8 +39,8 @@
     <string name="import_from_yt_summary">從Youtube或NewPipe</string>
     <string name="app_theme">主題</string>
     <string name="empty">必須輸入使用者名稱和密碼。</string>
-    <string name="notgmail">此為LibreTube帳號。</string>
-    <string name="defres">預設影片解析度</string>
+    <string name="notgmail">此是 Piped 帳號。</string>
+    <string name="defres">影片解析度</string>
     <string name="grid">格線佈局</string>
     <string name="emptyList">空空如也。</string>
     <string name="deletePlaylist">刪除播放清單</string>
@@ -161,7 +161,7 @@
     <string name="changeLanguage">語言</string>
     <string name="register">註冊</string>
     <string name="server_error">伺服器出了點問題。換個實體試試？</string>
-    <string name="dlisinprogress">請等待所有下載完成…</string>
+    <string name="dlisinprogress">有其他下載正在進行，請等待所有下載完成…</string>
     <string name="systemLanguage">系統</string>
     <string name="okay">好</string>
     <string name="location">位置</string>

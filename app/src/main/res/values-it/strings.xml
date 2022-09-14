@@ -316,4 +316,8 @@
     <string name="delete">Elimina</string>
     <string name="trending_layout">Layout tendenze alternativo</string>
     <string name="renamePlaylist">Rinomina la playlist</string>
+    <string name="new_videos_badge">Indicatore per i nuovi video</string>
+    <string name="new_videos_badge_summary">Mostra un badge con il numero dei nuovi video, se ce ne sono.</string>
+    <string name="wifi">WiFi</string>
+    <string name="mobile_data">Dati mobili</string>
 </resources>

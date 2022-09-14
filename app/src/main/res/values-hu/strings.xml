@@ -20,7 +20,7 @@
     <string name="server_error">Probláma van a szerverrel. Megpróbálja egy másik példánnyal\?</string>
     <string name="unknown_error">Hálózati hiba.</string>
     <string name="empty">Meg kell adnia egy felhasználónevet és jelszót.</string>
-    <string name="defres">Videó felbontás</string>
+    <string name="defres">Videófelbontás</string>
     <string name="deletePlaylist">Lejátszási lista törlése</string>
     <string name="createPlaylist">Lejátszási lista létrehozása</string>
     <string name="playlistCreated">Lejátszási lista létrehozva.</string>
@@ -88,13 +88,13 @@
     <string name="defaultTab">Alapértelmezett lap</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="category_sponsor">Szponzor</string>
-    <string name="category_sponsor_description">Fizetett promóciók, fizetett ajánlások és közvetlen hirdetések. Nem önreklámozásra vagy ingyenes, őszinte, nyilvános elismerés az általuk kedvelt ügyek, alkotók, honlapok, termékek számára.</string>
+    <string name="category_sponsor_description">Fizetett promóciók, fizetett ajánlások és közvetlen hirdetések. Nem önreklámozás, vagy ingyenes elismerés ügyek, alkotók, honlapok, vagy termékek számára.</string>
     <string name="category_selfpromo">Nem fizetett/önpromóció</string>
-    <string name="category_selfpromo_description">Hasonló a szponzorhoz, kivéve a nem fizetett- vagy önpromóciót. Ide tartoznak az árucikkekről, adományokról szóló részek, vagy információk arról, hogy kivel működtek együtt.</string>
+    <string name="category_selfpromo_description">Hasonló a szponzorhoz, kivéve, hogy nem fizetett vagy önpromóció. Ide tartoznak az árucikkekről, adományokról szóló részek, vagy információk arról, hogy kivel működtek együtt.</string>
     <string name="category_interaction">Interakció emlékeztető (például feliratkozás)</string>
     <string name="category_interaction_description">Amikor a tartalom közepén egy rövid emlékeztető van a lájkolásról, követésről vagy feliratkozásról. Ha hosszú vagy valami konkrét dologról szól, akkor inkább az inkább önpromóció.</string>
     <string name="category_intro">Szünet/bevezető animáció</string>
-    <string name="category_intro_description">Egy tényleges tartalom nélküli rész. Lehet szünet, statikus képkocka, ismétlődő animáció. Ezt nem szabad információt tartalmazó átmenetekhez használni.</string>
+    <string name="category_intro_description">Egy tényleges tartalom nélküli rész. Lehet szünet, statikus képkocka, ismétlődő animáció. Nem szabad információt tartalmazó átmenetekhez használni.</string>
     <string name="category_outro">Végső kártyák és köszönet</string>
     <string name="category_outro_description">Köszönetnyilvánítás vagy a videóvégi kártyák megjelenése. Nem a videó összefoglalása, vagy információ.</string>
     <string name="license">Licenc</string>
@@ -167,7 +167,7 @@
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz.</string>
     <string name="category_filler_description">A felesleges jelenetekhez, amelyek csak időkitöltésre lettek hozzáadva, illetve olyan humorhoz amely nem szükséges a videó fő témájának a megértéséhez.</string>
     <string name="category_music_offtopic_description">Kizárólag zenei videókban való felhasználásra. A videó olyan részeit kell lefednie, amelyek nem részei a hivatalos mixeknek. Végül a videónak a lehető legjobban kell hasonlítania a Spotify vagy bármely más mix változathoz, vagy csökkenteni kell a beszédet vagy más zavaró elemeket.</string>
-    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szegmensek esetében, de nem nyújtanak további információkat. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy ez nem a megfelelő kategória.</string>
+    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szegmensek esetében, amelyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy ez nem a megfelelő kategória.</string>
     <string name="background_mode">Háttér mód</string>
     <string name="audio_video">Hang és videó</string>
     <string name="fullscreen_orientation">Teljes képernyős helyzet</string>
@@ -314,4 +314,7 @@
     <string name="history_summary">Megtekintési és keresési előzmények</string>
     <string name="repeat_mode">Ismétlés mód</string>
     <string name="system_caption_style">Rendszer feliratok stílusa</string>
+    <string name="trending_layout">Alternatív felkapott elrendezés</string>
+    <string name="wifi">WiFi</string>
+    <string name="mobile_data">Mobiladat</string>
 </resources>

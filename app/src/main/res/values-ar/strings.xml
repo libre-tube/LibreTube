@@ -317,4 +317,8 @@
     <string name="delete">حذف</string>
     <string name="trending_layout">تنسيق بديل للمتصدرة</string>
     <string name="renamePlaylist">إعادة تسمية قائمة التشغيل</string>
+    <string name="wifi">واي فاي</string>
+    <string name="mobile_data">البيانات الخليوية</string>
+    <string name="new_videos_badge">مؤشر لمقاطع الفيديو الجديدة</string>
+    <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها.</string>
 </resources>
