@@ -34,7 +34,6 @@ import com.google.android.exoplayer2.audio.AudioAttributes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -91,6 +90,8 @@ class BackgroundMode : Service() {
      */
     private val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
 
+    private val handler = Handler(Looper.getMainLooper())
+
     /**
      * Setting the required [Notification] for running as a foreground service
      */
@@ -129,7 +130,7 @@ class BackgroundMode : Service() {
             autoPlayHelper = AutoPlayHelper(playlistId)
 
             // play the audio in the background
-            playAudio(videoId, position)
+            loadAudio(videoId, position)
         } catch (e: Exception) {
             onDestroy()
         }
@@ -139,47 +140,55 @@ class BackgroundMode : Service() {
     /**
      * Gets the video data and prepares the [player].
      */
-    private fun playAudio(
+    private fun loadAudio(
         videoId: String,
         seekToPosition: Long = 0
     ) {
         // append the video to the playing queue
         Globals.playingQueue += videoId
-        runBlocking {
-            val job = launch {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
                 streams = RetrofitInstance.api.getStreams(videoId)
-            }
-            // Wait until the job is done, to load correctly later in the player
-            job.join()
-
-            initializePlayer()
-            setMediaItem()
-
-            // create the notification
-            if (!this@BackgroundMode::nowPlayingNotification.isInitialized) {
-                nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
-            }
-            nowPlayingNotification.updatePlayerNotification(streams!!)
-
-            player?.apply {
-                playWhenReady = playWhenReadyPlayer
-                prepare()
+            } catch (e: Exception) {
+                return@launch
             }
 
-            // seek to the previous position if available
-            if (seekToPosition != 0L) player?.seekTo(seekToPosition)
-
-            // set the playback speed
-            val playbackSpeed = PreferenceHelper.getString(
-                PreferenceKeys.BACKGROUND_PLAYBACK_SPEED,
-                "1"
-            ).toFloat()
-            player?.setPlaybackSpeed(playbackSpeed)
-
-            fetchSponsorBlockSegments()
-
-            if (autoplay) setNextStream()
+            handler.post {
+                playAudio(seekToPosition)
+            }
         }
+    }
+
+    private fun playAudio(
+        seekToPosition: Long
+    ) {
+        initializePlayer()
+        setMediaItem()
+
+        // create the notification
+        if (!this@BackgroundMode::nowPlayingNotification.isInitialized) {
+            nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
+        }
+        nowPlayingNotification.updatePlayerNotification(streams!!)
+
+        player?.apply {
+            playWhenReady = playWhenReadyPlayer
+            prepare()
+        }
+
+        // seek to the previous position if available
+        if (seekToPosition != 0L) player?.seekTo(seekToPosition)
+
+        // set the playback speed
+        val playbackSpeed = PreferenceHelper.getString(
+            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED,
+            "1"
+        ).toFloat()
+        player?.setPlaybackSpeed(playbackSpeed)
+
+        fetchSponsorBlockSegments()
+
+        if (autoplay) setNextStream()
     }
 
     /**
@@ -244,7 +253,7 @@ class BackgroundMode : Service() {
         // play new video on background
         this.videoId = nextStreamId!!
         this.segmentData = null
-        playAudio(videoId)
+        loadAudio(videoId)
     }
 
     /**
@@ -252,7 +261,19 @@ class BackgroundMode : Service() {
      */
     private fun setMediaItem() {
         streams?.let {
-            val mediaItem = MediaItem.Builder().setUri(it.hls!!).build()
+            val uri = if (streams!!.hls != null) {
+                streams!!.hls
+            } else if (streams!!.audioStreams!!.isNotEmpty()) {
+                PlayerHelper.getAudioSource(
+                    this,
+                    streams!!.audioStreams!!
+                )
+            } else {
+                return
+            }
+            val mediaItem = MediaItem.Builder()
+                .setUri(uri)
+                .build()
             player?.setMediaItem(mediaItem)
         }
     }
