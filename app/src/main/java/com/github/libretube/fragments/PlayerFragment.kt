@@ -357,7 +357,6 @@ class PlayerFragment : BaseFragment() {
                 endId: Int,
                 progress: Float
             ) {
-                val mainActivity = activity as MainActivity
                 val mainMotionLayout =
                     mainActivity.binding.mainMotionLayout
                 mainMotionLayout.progress = abs(progress)
@@ -368,7 +367,6 @@ class PlayerFragment : BaseFragment() {
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 println(currentId)
-                val mainActivity = activity as MainActivity
                 val mainMotionLayout =
                     mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
