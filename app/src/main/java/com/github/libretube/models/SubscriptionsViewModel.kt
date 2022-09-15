@@ -13,10 +13,12 @@ import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
 class SubscriptionsViewModel : ViewModel() {
+    var errorResponse = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
     var videoFeed = MutableLiveData<List<StreamItem>?>().apply {
         value = null
     }
@@ -37,12 +39,9 @@ class SubscriptionsViewModel : ViewModel() {
                         SubscriptionHelper.getFormattedLocalSubscriptions()
                     )
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
+                errorResponse.postValue(true)
                 Log.e(TAG(), e.toString())
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launch
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
                 return@launch
             }
             this@SubscriptionsViewModel.videoFeed.postValue(videoFeed)
@@ -65,12 +64,9 @@ class SubscriptionsViewModel : ViewModel() {
                         SubscriptionHelper.getFormattedLocalSubscriptions()
                     )
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
+                errorResponse.postValue(true)
                 Log.e(TAG(), e.toString())
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launch
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
                 return@launch
             }
             this@SubscriptionsViewModel.subscriptions.postValue(subscriptions)

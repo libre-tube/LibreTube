@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -50,6 +51,11 @@ class SubscriptionsFragment : BaseFragment() {
         binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
 
         if (viewModel.videoFeed.value == null) viewModel.fetchFeed()
+
+        // listen for error responses
+        viewModel.errorResponse.observe(viewLifecycleOwner) {
+            if (it) Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+        }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
             if (!isShowingFeed()) return@observe
