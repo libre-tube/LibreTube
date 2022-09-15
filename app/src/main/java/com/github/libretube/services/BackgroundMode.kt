@@ -201,7 +201,7 @@ class BackgroundMode : Service() {
          * Listens for changed playbackStates (e.g. pause, end)
          * Plays the next video when the current one ended
          */
-        player!!.addListener(object : Player.Listener {
+        player?.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(@Player.State state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
