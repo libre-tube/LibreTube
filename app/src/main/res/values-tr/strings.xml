@@ -320,4 +320,5 @@
     <string name="trending_layout">Alternatif ana sayfa düzeni</string>
     <string name="renamePlaylist">Oynatma listesini yeniden adlandır</string>
     <string name="mobile_data">Mobil veri</string>
+    <string name="wifi">Wi-Fi</string>
 </resources>
