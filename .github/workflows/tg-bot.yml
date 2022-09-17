@@ -28,7 +28,7 @@ jobs:
 
       - name: Download packages
         run: |
-          cd .github
+          cd ~
           python pkg.py
           cd ..
 
