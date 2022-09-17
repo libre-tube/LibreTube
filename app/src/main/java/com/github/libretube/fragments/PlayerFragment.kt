@@ -767,6 +767,9 @@ class PlayerFragment : BaseFragment() {
             }
 
             runOnUiThread {
+                // hide the button to skip SponsorBlock segments manually
+                binding.sbSkipBtn.visibility = View.GONE
+
                 // set media sources for the player
                 setResolutionAndSubtitles()
                 prepareExoPlayerView()
