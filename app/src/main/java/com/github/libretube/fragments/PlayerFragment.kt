@@ -722,12 +722,14 @@ class PlayerFragment : BaseFragment() {
             val segmentStart = (segment.segment!![0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
 
+            // show the button to manually skip the segment
             if (currentPosition in segmentStart until segmentEnd) {
                 if (skipSegmentsManually) {
                     binding.sbSkipBtn.visibility = View.VISIBLE
                     binding.sbSkipBtn.setOnClickListener {
                         exoPlayer.seekTo(segmentEnd)
                     }
+                    return
                 }
 
                 if (sponsorBlockNotifications) {
@@ -739,6 +741,7 @@ class PlayerFragment : BaseFragment() {
                         ).show()
                 }
 
+                // skip the segment automatically
                 exoPlayer.seekTo(segmentEnd)
                 return
             }
