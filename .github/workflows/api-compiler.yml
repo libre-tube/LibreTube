@@ -21,10 +21,10 @@ jobs:
             chmod 755 .github/compiler.sh
             .github/compiler.sh
 
-      - name: Binary Archive
+      - name: Upload to Archive
         run: |
-          git clone https://github.com/LibreTubeAlpha/Telegram-BotAPI bot-api
-          rm -rf bot-api/*
+          git clone https://github.com/LibreTubeAlpha/Archive bot-api
+          rm -rf bot-api/exec
           mv ~/telegram-bot-api/bin/telegram-bot-api bot-api/exec
           cd bot-api
           git add -f *

@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: gradle/wrapper-validation-action@v1
       - uses: actions/setup-python@v3
         with:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
@@ -27,28 +26,19 @@ jobs:
           python checkrun.py
           cd ..
 
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: "temurin"
-          cache: "gradle"
-
-      - name: Patch and Compile
+      - name: Download packages
         run: |
           cd .github
-          python patch.py
+          python pkg.py
           cd ..
-          ./gradlew assembleDebug
 
       - name: Telegram Bot
         continue-on-error: true
         run: |
-          mv ./app/build/outputs/apk/debug/*.apk .github/
-          cd .github
+          cd ~
           curl https://libre-tube.github.io/images/LibreAlpha.png --output alpha.png
-          curl https://raw.githubusercontent.com/LibreTubeAlpha/Telegram-BotAPI/main/exec --output ~/bot-api
-          chmod 755 ~/bot-api
+          curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/exec --output ~/bot-api
+          chmod 755 ./bot-api
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
           echo "TG_POST_ID = '${{ secrets.TG_POST_ID }}'" >> tgconfig.py
