@@ -29,8 +29,8 @@ jobs:
       - name: Download packages
         run: |
           cd ~
+          mv .github/pkg.py .
           python pkg.py
-          cd ..
 
       - name: Telegram Bot
         continue-on-error: true
