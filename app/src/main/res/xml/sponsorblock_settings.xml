@@ -16,6 +16,12 @@
         app:key="sb_notifications_key"
         app:title="@string/sponsorblock_notifications" />
 
+    <SwitchPreferenceCompat
+        android:summary="@string/sb_skip_manual_summary"
+        app:defaultValue="false"
+        app:key="sb_skip_manually_key"
+        app:title="@string/sb_skip_manual" />
+
     <PreferenceCategory app:title="@string/category_segments">
 
         <SwitchPreferenceCompat

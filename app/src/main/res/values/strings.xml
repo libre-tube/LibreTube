@@ -321,4 +321,7 @@
     <string name="mobile_data">Mobile data</string>
     <string name="new_videos_badge">Indicator for new videos</string>
     <string name="new_videos_badge_summary">Show a badge with the amount of new videos if there are some.</string>
+    <string name="skip_segment">Skip segment</string>
+    <string name="sb_skip_manual">Skip manually</string>
+    <string name="sb_skip_manual_summary">Don\'t skip segments automatically, always prompt before.</string>
 </resources>

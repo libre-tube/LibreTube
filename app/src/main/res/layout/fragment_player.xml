@@ -378,8 +378,34 @@
             android:layout_gravity="center"
             android:gravity="center" />
 
-    </com.github.libretube.views.CustomExoPlayerView>
+        <LinearLayout
+            android:id="@+id/sb_skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="60dp"
+            android:background="@android:color/black"
+            android:padding="10dp"
+            android:visibility="gone">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skip_segment"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/ic_next"
+                app:tint="@android:color/white" />
+
+        </LinearLayout>
+
+    </com.github.libretube.views.CustomExoPlayerView>
 
     <ImageView
         android:id="@+id/close_imageView"
