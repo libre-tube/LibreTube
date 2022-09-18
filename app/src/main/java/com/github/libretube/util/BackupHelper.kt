@@ -4,6 +4,10 @@ import android.content.Context
 import android.net.Uri
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.query
+import com.github.libretube.obj.BackupFile
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
@@ -62,6 +66,56 @@ class BackupHelper(private val context: Context) {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    /**
+     * Backup the database
+     */
+    fun advancedBackup(uri: Uri?, backupFile: BackupFile) {
+        if (uri == null) return
+        try {
+            context.contentResolver.openFileDescriptor(uri, "w")?.use {
+                FileOutputStream(it.fileDescriptor).use { fileOutputStream ->
+                    fileOutputStream.write(
+                        ObjectMapper().writeValueAsBytes(backupFile)
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * Restore a database backup
+     */
+    fun restoreAdvancedBackup(uri: Uri?) {
+        if (uri == null) return
+
+        val mapper = ObjectMapper()
+        val json = context.contentResolver.openInputStream(uri)?.use {
+            it.bufferedReader().use { reader -> reader.readText() }
+        }.orEmpty()
+
+        val backupFile = mapper.readValue(json, BackupFile::class.java)
+
+        query {
+            DatabaseHolder.db.watchHistoryDao().insertAll(
+                *backupFile.watchHistory?.toTypedArray().orEmpty()
+            )
+            DatabaseHolder.db.searchHistoryDao().insertAll(
+                *backupFile.searchHistory?.toTypedArray().orEmpty()
+            )
+            DatabaseHolder.db.watchPositionDao().insertAll(
+                *backupFile.watchPositions?.toTypedArray().orEmpty()
+            )
+            DatabaseHolder.db.localSubscriptionDao().insertAll(
+                *backupFile.localSubscriptions?.toTypedArray().orEmpty()
+            )
+            DatabaseHolder.db.customInstanceDao().insertAll(
+                *backupFile.customInstances?.toTypedArray().orEmpty()
+            )
         }
     }
 }
