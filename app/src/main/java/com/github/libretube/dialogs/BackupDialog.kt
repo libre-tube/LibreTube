@@ -2,7 +2,6 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
