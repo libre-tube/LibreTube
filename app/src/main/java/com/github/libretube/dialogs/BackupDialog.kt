@@ -32,9 +32,10 @@ class BackupDialog(
 
         binding = DialogBackupBinding.inflate(layoutInflater)
         binding.backupOptionsRecycler.layoutManager = LinearLayoutManager(context)
-        binding.backupOptionsRecycler.adapter = BackupOptionsAdapter(backupOptions) { position, isChecked ->
-            selected[position] = isChecked
-        }
+        binding.backupOptionsRecycler.adapter =
+            BackupOptionsAdapter(backupOptions) { position, isChecked ->
+                selected[position] = isChecked
+            }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.backup)

@@ -477,7 +477,8 @@ class PlayerFragment : BaseFragment() {
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
                         val videoUri = videosUrlArray[which]
-                        val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
+                        val audioUrl =
+                            PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
                         setMediaSource(videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
@@ -1290,7 +1291,8 @@ class PlayerFragment : BaseFragment() {
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
                     val videoUri = videosUrlArray[index]
-                    val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
+                    val audioUrl =
+                        PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
                     setMediaSource(videoUri, audioUrl)
                     return
                 }
