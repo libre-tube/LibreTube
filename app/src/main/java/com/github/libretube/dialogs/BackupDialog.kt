@@ -77,7 +77,7 @@ class BackupDialog() : DialogFragment() {
                     }
                 }.await()
 
-                createBackupFile.launch("application/json")
+                createBackupFile.launch("libretube_backup.json")
             }
             .create()
     }
