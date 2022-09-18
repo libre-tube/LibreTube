@@ -11,6 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.adapters.BackupOptionsAdapter
 import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.await
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.util.BackupHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -37,7 +38,7 @@ class BackupDialog() : DialogFragment() {
             R.string.watch_positions,
             R.string.search_history,
             R.string.local_subscriptions,
-            R.string.customInstance
+            R.string.backup_customInstances
         )
 
         val selected = mutableListOf(false, false, false, false, false)
@@ -53,11 +54,28 @@ class BackupDialog() : DialogFragment() {
             .setView(binding.root)
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.backup) { _, _ ->
-                if (selected[0]) backupFile.watchHistory = DatabaseHolder.db.watchHistoryDao().getAll()
-                if (selected[1]) backupFile.watchPositions = DatabaseHolder.db.watchPositionDao().getAll()
-                if (selected[2]) backupFile.searchHistory = DatabaseHolder.db.searchHistoryDao().getAll()
-                if (selected[3]) backupFile.localSubscriptions = DatabaseHolder.db.localSubscriptionDao().getAll()
-                if (selected[4]) backupFile.customInstances = DatabaseHolder.db.customInstanceDao().getAll()
+                Thread {
+                    if (selected[0]) {
+                        backupFile.watchHistory =
+                            DatabaseHolder.db.watchHistoryDao().getAll()
+                    }
+                    if (selected[1]) {
+                        backupFile.watchPositions =
+                            DatabaseHolder.db.watchPositionDao().getAll()
+                    }
+                    if (selected[2]) {
+                        backupFile.searchHistory =
+                            DatabaseHolder.db.searchHistoryDao().getAll()
+                    }
+                    if (selected[3]) {
+                        backupFile.localSubscriptions =
+                            DatabaseHolder.db.localSubscriptionDao().getAll()
+                    }
+                    if (selected[4]) {
+                        backupFile.customInstances =
+                            DatabaseHolder.db.customInstanceDao().getAll()
+                    }
+                }.await()
 
                 createBackupFile.launch("application/json")
             }
