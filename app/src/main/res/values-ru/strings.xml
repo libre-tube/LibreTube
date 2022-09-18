@@ -333,4 +333,5 @@
     <string name="preferences">Настройки</string>
     <string name="local_subscriptions">Локальные подписки</string>
     <string name="backup_customInstances">Пользовательские настройки</string>
+    <string name="save_feed">Загружать подписки в фоне</string>
 </resources>
