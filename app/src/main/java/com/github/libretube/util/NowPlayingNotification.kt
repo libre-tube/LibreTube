@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
 import com.github.libretube.activities.MainActivity
@@ -82,16 +83,17 @@ class NowPlayingNotification(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? {
+            var bitmap: Bitmap? = null
             var resizedBitmap: Bitmap? = null
 
             val request = ImageRequest.Builder(context)
                 .data(streams?.thumbnailUrl)
                 .target { result ->
-                    val bitmap = (result as BitmapDrawable).bitmap
+                    bitmap = (result as BitmapDrawable).bitmap
                     resizedBitmap = Bitmap.createScaledBitmap(
-                        bitmap,
-                        bitmap.width,
-                        bitmap.width,
+                        bitmap!!,
+                        bitmap!!.width,
+                        bitmap!!.width,
                         false
                     )
                 }
@@ -100,7 +102,7 @@ class NowPlayingNotification(
             ImageHelper.imageLoader.enqueue(request)
 
             // returns the scaled bitmap if it got fetched successfully
-            return resizedBitmap
+            return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) resizedBitmap else bitmap
         }
     }
 
