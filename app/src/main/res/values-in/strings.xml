@@ -320,5 +320,17 @@
     <string name="trending_layout">Tata letak tren alternatif</string>
     <string name="renamePlaylist">Ubah nama daftar putar</string>
     <string name="mobile_data">Data seluler</string>
-    <string name="wifi">WiFi</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="skip_segment">Lewati segmen</string>
+    <string name="sb_skip_manual">Lewati secara manual</string>
+    <string name="sb_skip_manual_summary">Jangan lewati segmen secara otomatis, selalu tanya sebelumnya.</string>
+    <string name="local_subscriptions">Langganan lokal</string>
+    <string name="backup_customInstances">Instansi Kustom</string>
+    <string name="download_channel_name">Layanan Unduhan</string>
+    <string name="download_channel_description">Menampilkan sebuah notifikasi ketika mengunduh media.</string>
+    <string name="preferences">Preferensi</string>
+    <string name="push_channel_name">Pekerja Notifikasi</string>
+    <string name="background_channel_name">Mode Latar Belakang</string>
+    <string name="background_channel_description">Menampilkan sebuah notifikasi dengan tombol untuk mengatur pemain audio.</string>
+    <string name="push_channel_description">Menampilkan sebuah notifikasi ketika saluran baru telah tersedia.</string>
 </resources>
