@@ -7,7 +7,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
+import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import com.github.libretube.R
 import com.github.libretube.constants.DONATE_URL
 import com.github.libretube.constants.GITHUB_URL
@@ -116,19 +117,10 @@ class AboutActivity : BaseActivity() {
     }
 
     private fun showLicense() {
-        val licenseString = assets
-            ?.open("gpl3.html")
-            ?.bufferedReader()
-            .use {
-                it?.readText()
-            }
-
-        @Suppress("DEPRECATION")
-        val licenseHtml = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(licenseString.toString(), 1)
-        } else {
-            Html.fromHtml(licenseString.toString())
-        }
+        val licenseHtml = assets.open("gpl3.html")
+            .bufferedReader()
+            .use { it.readText() }
+            .parseAsHtml(HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH)
 
         MaterialAlertDialogBuilder(this)
             .setPositiveButton(getString(R.string.okay)) { _, _ -> }

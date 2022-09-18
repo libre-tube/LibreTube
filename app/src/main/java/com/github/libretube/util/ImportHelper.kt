@@ -15,49 +15,39 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.BufferedReader
 import java.io.FileOutputStream
-import java.io.InputStreamReader
 
-class ImportHelper(
-    private val activity: Activity
-) {
-
+class ImportHelper(private val activity: Activity) {
     /**
      * Import subscriptions by a file uri
      */
     fun importSubscriptions(uri: Uri?) {
         if (uri == null) return
         try {
-            var channels = ArrayList<String>()
-            val fileType = activity.contentResolver.getType(uri)
+            val channels = when (activity.contentResolver.getType(uri)) {
+                "application/json" -> {
+                    // NewPipe subscriptions format
+                    val mapper = ObjectMapper()
+                    val json = activity.contentResolver.openInputStream(uri)?.use {
+                        it.bufferedReader().use { reader -> reader.readText() }
+                    }.orEmpty()
 
-            if (fileType == "application/json") {
-                // NewPipe subscriptions format
-                val mapper = ObjectMapper()
-                val json = readRawTextFromUri(uri)
-
-                val subscriptions = mapper.readValue(json, NewPipeSubscriptions::class.java)
-                channels = subscriptions.subscriptions?.map {
-                    it.url?.replace("https://www.youtube.com/channel/", "")!!
-                } as ArrayList<String>
-            } else if (
-                fileType == "text/csv" ||
-                fileType == "text/comma-separated-values"
-            ) {
-                // import subscriptions from Google/YouTube Takeout
-                val inputStream = activity.contentResolver.openInputStream(uri)
-                BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                    var line: String? = reader.readLine()
-                    while (line != null) {
-                        val channelId = line.substringBefore(",")
-                        if (channelId.length == 24) channels.add(channelId)
-                        line = reader.readLine()
+                    val subscriptions = mapper.readValue(json, NewPipeSubscriptions::class.java)
+                    subscriptions.subscriptions.orEmpty().map {
+                        it.url!!.replace("https://www.youtube.com/channel/", "")
                     }
                 }
-                inputStream?.close()
-            } else {
-                throw IllegalArgumentException("Unsupported file type")
+                "text/csv", "text/comma-separated-values" -> {
+                    // import subscriptions from Google/YouTube Takeout
+                    activity.contentResolver.openInputStream(uri)?.use {
+                        it.bufferedReader().useLines { lines ->
+                            lines.map { line -> line.substringBefore(",") }
+                                .filter { channelId -> channelId.length == 24 }
+                                .toList()
+                        }
+                    }.orEmpty()
+                }
+                else -> throw IllegalArgumentException("Unsupported file type")
             }
 
             CoroutineScope(Dispatchers.IO).launch {
@@ -73,20 +63,6 @@ class ImportHelper(
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
-
-    private fun readRawTextFromUri(uri: Uri): String {
-        val stringBuilder = StringBuilder()
-        activity.contentResolver.openInputStream(uri)?.use { inputStream ->
-            BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                var line: String? = reader.readLine()
-                while (line != null) {
-                    stringBuilder.append(line)
-                    line = reader.readLine()
-                }
-            }
-        }
-        return stringBuilder.toString()
     }
 
     /**
