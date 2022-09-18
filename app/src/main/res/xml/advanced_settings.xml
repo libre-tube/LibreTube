@@ -30,6 +30,12 @@
             app:key="new_videos_badge"
             app:title="@string/new_videos_badge" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_loading"
+            android:summary="@string/save_feed_summary"
+            app:key="save_feed"
+            app:title="@string/save_feed" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/preferences">

@@ -25,7 +25,7 @@ class PlayerSettings : MaterialPreferenceFragment() {
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_FULLSCREEN)
 
         // only show the player orientation option if auto fullscreen is disabled
-        playerOrientation?.isEnabled != PreferenceHelper.getBoolean(
+        playerOrientation?.isEnabled = !PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_FULLSCREEN,
             false
         )
