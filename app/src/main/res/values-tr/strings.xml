@@ -315,4 +315,10 @@
     <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
     <string name="delete">Sil</string>
+    <string name="new_videos_badge">Yeni videolar için gösterge</string>
+    <string name="new_videos_badge_summary">Varsa, yeni videoların miktarını içeren bir rozet gösterin.</string>
+    <string name="trending_layout">Alternatif ana sayfa düzeni</string>
+    <string name="renamePlaylist">Oynatma listesini yeniden adlandır</string>
+    <string name="mobile_data">Mobil veri</string>
+    <string name="wifi">Wi-Fi</string>
 </resources>
