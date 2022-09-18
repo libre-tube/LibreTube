@@ -3,7 +3,7 @@ package com.github.libretube.extensions
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 
 /**
  * shows the already watched time under the video
@@ -14,7 +14,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
 
     Thread {
         try {
-            progress = DatabaseHolder.db.watchPositionDao().findById(videoId).position
+            progress = Database.watchPositionDao().findById(videoId).position
         } catch (e: Exception) {
             progress = null
         }

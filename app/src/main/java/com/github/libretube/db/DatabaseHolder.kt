@@ -4,16 +4,18 @@ import android.content.Context
 import androidx.room.Room
 import com.github.libretube.constants.DATABASE_NAME
 
-object DatabaseHolder {
-    lateinit var db: AppDatabase
-
+class DatabaseHolder {
     fun initializeDatabase(context: Context) {
-        db = Room.databaseBuilder(
+        Database = Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             DATABASE_NAME
         )
             .fallbackToDestructiveMigration()
             .build()
+    }
+
+    companion object {
+        lateinit var Database: AppDatabase
     }
 }

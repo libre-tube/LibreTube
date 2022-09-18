@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.adapters.BackupOptionsAdapter
 import com.github.libretube.databinding.DialogBackupBinding
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.await
 import com.github.libretube.obj.BackupFile
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -45,23 +45,23 @@ class BackupDialog(
                 Thread {
                     if (selected[0]) {
                         backupFile.watchHistory =
-                            DatabaseHolder.db.watchHistoryDao().getAll()
+                            Database.watchHistoryDao().getAll()
                     }
                     if (selected[1]) {
                         backupFile.watchPositions =
-                            DatabaseHolder.db.watchPositionDao().getAll()
+                            Database.watchPositionDao().getAll()
                     }
                     if (selected[2]) {
                         backupFile.searchHistory =
-                            DatabaseHolder.db.searchHistoryDao().getAll()
+                            Database.searchHistoryDao().getAll()
                     }
                     if (selected[3]) {
                         backupFile.localSubscriptions =
-                            DatabaseHolder.db.localSubscriptionDao().getAll()
+                            Database.localSubscriptionDao().getAll()
                     }
                     if (selected[4]) {
                         backupFile.customInstances =
-                            DatabaseHolder.db.customInstanceDao().getAll()
+                            Database.customInstanceDao().getAll()
                     }
                 }.await()
 
