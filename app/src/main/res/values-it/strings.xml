@@ -318,6 +318,11 @@
     <string name="renamePlaylist">Rinomina la playlist</string>
     <string name="new_videos_badge">Indicatore per i nuovi video</string>
     <string name="new_videos_badge_summary">Mostra un badge con il numero dei nuovi video, se ce ne sono.</string>
-    <string name="wifi">WiFi</string>
+    <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dati mobili</string>
+    <string name="skip_segment">Salta il segmento</string>
+    <string name="sb_skip_manual">Salta manualmente</string>
+    <string name="sb_skip_manual_summary">Non saltare i segmenti automaticamente, chiedi sempre prima.</string>
+    <string name="background_channel_description">Mostra una notifica con i pulsanti per controllare il lettore audio.</string>
+    <string name="download_channel_description">Mostra una notifica quando si scaricano i media.</string>
 </resources>
