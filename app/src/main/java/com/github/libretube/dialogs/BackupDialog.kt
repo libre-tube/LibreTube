@@ -1,10 +1,8 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -13,24 +11,14 @@ import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.await
 import com.github.libretube.obj.BackupFile
-import com.github.libretube.util.BackupHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class BackupDialog() : DialogFragment() {
+class BackupDialog(
+    private val createBackupFile: (BackupFile) -> Unit
+) : DialogFragment() {
     private lateinit var binding: DialogBackupBinding
-    private lateinit var createBackupFile: ActivityResultLauncher<String>
 
     val backupFile = BackupFile()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        createBackupFile = registerForActivityResult(
-            ActivityResultContracts.CreateDocument("application/json")
-        ) { uri: Uri? ->
-            BackupHelper(requireContext()).advancedBackup(uri, backupFile)
-        }
-
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val backupOptions = listOf(
@@ -77,7 +65,7 @@ class BackupDialog() : DialogFragment() {
                     }
                 }.await()
 
-                createBackupFile.launch("libretube_backup.json")
+                createBackupFile(backupFile)
             }
             .create()
     }

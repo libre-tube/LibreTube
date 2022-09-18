@@ -2,10 +2,12 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
 import java.io.FileInputStream

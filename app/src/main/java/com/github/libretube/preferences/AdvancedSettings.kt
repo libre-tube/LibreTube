@@ -11,6 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.dialogs.BackupDialog
+import com.github.libretube.obj.BackupFile
 import com.github.libretube.util.BackupHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.PreferenceHelper
@@ -25,6 +26,8 @@ class AdvancedSettings : MaterialPreferenceFragment() {
 
     // backup and restore database
     private lateinit var getBackupFile: ActivityResultLauncher<String>
+    private lateinit var createBackupFile: ActivityResultLauncher<String>
+    private var backupFile = BackupFile()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getPrefFile =
@@ -45,6 +48,13 @@ class AdvancedSettings : MaterialPreferenceFragment() {
             ) { uri: Uri? ->
                 BackupHelper(requireContext()).restoreAdvancedBackup(uri)
             }
+
+        createBackupFile = registerForActivityResult(
+            CreateDocument("application/json")
+        ) { uri: Uri? ->
+            BackupHelper(requireContext()).advancedBackup(uri, backupFile)
+        }
+
         super.onCreate(savedInstanceState)
     }
 
@@ -83,7 +93,10 @@ class AdvancedSettings : MaterialPreferenceFragment() {
 
         val advancesBackup = findPreference<Preference>("backup")
         advancesBackup?.setOnPreferenceClickListener {
-            BackupDialog()
+            BackupDialog {
+                backupFile = it
+                createBackupFile.launch("backup.json")
+            }
                 .show(childFragmentManager, null)
             true
         }
