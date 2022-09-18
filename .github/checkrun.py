@@ -5,7 +5,7 @@ f = open('commit.json')
 data = load(f)
 f.close()
 
-message = data['commit']['message']
+data = data['commit']['message']
 
 if "\n\n" in message:
     if message.split("\n\n",1)[-1].split()[0] == "[SILENT]":

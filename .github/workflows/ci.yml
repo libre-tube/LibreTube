@@ -21,14 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
       - name: Check for Execution Orders
         run: |
           cd .github
-          touch sign.txt
           curl https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }} > commit.json
           python checkrun.py
-          python sign.py
           cd ..
 
       - name: Set up JDK 11
@@ -53,16 +55,30 @@ jobs:
           ./gradlew assembleDebug
 
       - name: Upload to Archive
+        continue-on-error: true
         run: |
           git clone https://github.com/LibreTubeAlpha/Archive archive
-          rm -rf archive/*.apk archive/sign.txt
+          rm -rf archive/*.apk
           mv app/build/outputs/apk/debug/*.apk archive/
-          mv .github/sign.txt archive/
           cd archive
           git add -f *
           git commit -m "WORKFLOW: ALPHA BUILDS"
           git push -u
-          cd ..
+      
+      - name: Telegram Bot
+        continue-on-error: true
+        run: |
+          cd archive
+          curl https://libre-tube.github.io/images/LibreAlpha.png --output alpha.png
+          curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/exec --output bot-api
+          chmod 755 ./bot-api
+          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
+          echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
+          echo "TG_POST_ID = '${{ secrets.TG_POST_ID }}'" >> tgconfig.py
+          echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
+          python -m pip install --upgrade pip
+          pip install python-telegram-bot
+          python tg.py
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
