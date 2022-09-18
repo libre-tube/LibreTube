@@ -30,13 +30,14 @@ class SearchHistoryAdapter(
             historyText.text = historyQuery
 
             deleteHistory.setOnClickListener {
+                val itemIndex = historyList.indexOf(historyQuery)
                 historyList -= historyQuery
                 Thread {
                     Database.searchHistoryDao().delete(
                         SearchHistoryItem(query = historyQuery)
                     )
                 }.start()
-                notifyDataSetChanged()
+                notifyItemRemoved(itemIndex)
             }
 
             root.setOnClickListener {
