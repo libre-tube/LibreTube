@@ -9,7 +9,7 @@ import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.extensions.await
 import com.github.libretube.util.PreferenceHelper
@@ -82,7 +82,7 @@ class ShareDialog(
         // get the api urls of the other custom instances
         var customInstances = listOf<CustomInstance>()
         Thread {
-            customInstances = DatabaseHolder.db.customInstanceDao().getAll()
+            customInstances = Database.customInstanceDao().getAll()
         }.await()
 
         // return the custom instance frontend url if available

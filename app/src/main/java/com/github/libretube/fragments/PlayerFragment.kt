@@ -50,7 +50,7 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
@@ -477,7 +477,8 @@ class PlayerFragment : BaseFragment() {
                         exoPlayer.setMediaItem(mediaItem)
                     } else {
                         val videoUri = videosUrlArray[which]
-                        val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
+                        val audioUrl =
+                            PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
                         setMediaSource(videoUri, audioUrl)
                     }
                     exoPlayer.seekTo(lastPosition)
@@ -860,10 +861,11 @@ class PlayerFragment : BaseFragment() {
         var position: Long? = null
         Thread {
             try {
-                position = DatabaseHolder.db.watchPositionDao().findById(videoId!!).position
+                position = Database.watchPositionDao().findById(videoId!!).position
                 // position is almost the end of the video => don't seek, start from beginning
                 if (position!! > streams.duration!! * 1000 * 0.9) position = null
             } catch (e: Exception) {
+                e.printStackTrace()
             }
         }.await()
         if (position != null) exoPlayer.seekTo(position!!)
@@ -1290,7 +1292,8 @@ class PlayerFragment : BaseFragment() {
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defRes)) {
                     val videoUri = videosUrlArray[index]
-                    val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
+                    val audioUrl =
+                        PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
                     setMediaSource(videoUri, audioUrl)
                     return
                 }

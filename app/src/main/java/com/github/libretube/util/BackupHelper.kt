@@ -5,7 +5,7 @@ import android.net.Uri
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
 import java.io.FileInputStream
@@ -101,19 +101,19 @@ class BackupHelper(private val context: Context) {
         val backupFile = mapper.readValue(json, BackupFile::class.java)
 
         query {
-            DatabaseHolder.db.watchHistoryDao().insertAll(
+            Database.watchHistoryDao().insertAll(
                 *backupFile.watchHistory?.toTypedArray().orEmpty()
             )
-            DatabaseHolder.db.searchHistoryDao().insertAll(
+            Database.searchHistoryDao().insertAll(
                 *backupFile.searchHistory?.toTypedArray().orEmpty()
             )
-            DatabaseHolder.db.watchPositionDao().insertAll(
+            Database.watchPositionDao().insertAll(
                 *backupFile.watchPositions?.toTypedArray().orEmpty()
             )
-            DatabaseHolder.db.localSubscriptionDao().insertAll(
+            Database.localSubscriptionDao().insertAll(
                 *backupFile.localSubscriptions?.toTypedArray().orEmpty()
             )
-            DatabaseHolder.db.customInstanceDao().insertAll(
+            Database.customInstanceDao().insertAll(
                 *backupFile.customInstances?.toTypedArray().orEmpty()
             )
         }

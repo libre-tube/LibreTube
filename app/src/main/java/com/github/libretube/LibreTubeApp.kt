@@ -34,7 +34,7 @@ class LibreTubeApp : Application() {
         /**
          * Initialize the [DatabaseHolder]
          */
-        DatabaseHolder.initializeDatabase(this)
+        DatabaseHolder().initializeDatabase(this)
 
         /**
          * Bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed

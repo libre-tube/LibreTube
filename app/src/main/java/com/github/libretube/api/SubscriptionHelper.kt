@@ -1,7 +1,7 @@
 package com.github.libretube.api
 
 import android.util.Log
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
@@ -27,7 +27,7 @@ object SubscriptionHelper {
             }
         } else {
             Thread {
-                DatabaseHolder.db.localSubscriptionDao().insertAll(
+                Database.localSubscriptionDao().insertAll(
                     LocalSubscription(channelId)
                 )
             }.start()
@@ -48,7 +48,7 @@ object SubscriptionHelper {
             }
         } else {
             Thread {
-                DatabaseHolder.db.localSubscriptionDao().delete(
+                Database.localSubscriptionDao().delete(
                     LocalSubscription(channelId)
                 )
             }.start()
@@ -70,7 +70,7 @@ object SubscriptionHelper {
         } else {
             var isSubscribed = false
             Thread {
-                isSubscribed = DatabaseHolder.db.localSubscriptionDao().includes(channelId)
+                isSubscribed = Database.localSubscriptionDao().includes(channelId)
             }.await()
             return isSubscribed
         }
@@ -94,7 +94,7 @@ object SubscriptionHelper {
                 newLocalSubscriptions += LocalSubscription(channelId = it)
             }
             Thread {
-                DatabaseHolder.db.localSubscriptionDao().insertAll(
+                Database.localSubscriptionDao().insertAll(
                     *newChannels.map { LocalSubscription(it) }.toTypedArray()
                 )
             }.start()
@@ -104,7 +104,7 @@ object SubscriptionHelper {
     fun getLocalSubscriptions(): List<LocalSubscription> {
         var localSubscriptions = listOf<LocalSubscription>()
         Thread {
-            localSubscriptions = DatabaseHolder.db.localSubscriptionDao().getAll()
+            localSubscriptions = Database.localSubscriptionDao().getAll()
         }.await()
         return localSubscriptions
     }

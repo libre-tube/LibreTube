@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.adapters.WatchHistoryAdapter
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.await
@@ -32,7 +32,7 @@ class WatchHistoryFragment : BaseFragment() {
         var watchHistory = listOf<WatchHistoryItem>()
 
         Thread {
-            watchHistory = DatabaseHolder.db.watchHistoryDao().getAll()
+            watchHistory = Database.watchHistoryDao().getAll()
         }.await()
 
         if (watchHistory.isEmpty()) return

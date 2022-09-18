@@ -38,8 +38,9 @@ class PlaylistAdapter(
     }
 
     fun updateItems(newItems: List<StreamItem>) {
+        val oldSize = videoFeed.size
         videoFeed.addAll(newItems)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(oldSize, videoFeed.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {

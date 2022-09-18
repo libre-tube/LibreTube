@@ -173,7 +173,8 @@ internal class CustomExoPlayerView(
                     BottomSheetItem(
                         context.getString(R.string.playback_speed),
                         R.drawable.ic_speed,
-                        "${player?.playbackParameters?.speed
+                        "${
+                        player?.playbackParameters?.speed
                             .toString()
                             .replace(".0", "")
                         }x"

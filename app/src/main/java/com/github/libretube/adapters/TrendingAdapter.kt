@@ -34,8 +34,9 @@ class TrendingAdapter(
     }
 
     fun updateItems() {
+        val oldSize = index
         index += 10
-        notifyDataSetChanged()
+        notifyItemRangeInserted(oldSize, index)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {

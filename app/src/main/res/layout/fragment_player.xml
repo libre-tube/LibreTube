@@ -385,8 +385,8 @@
             android:layout_marginEnd="-10dp"
             android:layout_marginBottom="60dp"
             android:paddingEnd="10dp"
-            app:strokeWidth="1dp"
             app:cardBackgroundColor="#88000000"
+            app:strokeWidth="1dp"
             tools:ignore="RtlSymmetry">
 
             <LinearLayout

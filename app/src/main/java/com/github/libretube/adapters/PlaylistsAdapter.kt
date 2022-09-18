@@ -34,8 +34,9 @@ class PlaylistsAdapter(
     }
 
     fun updateItems(newItems: List<Playlists>) {
+        val oldSize = playlists.size
         playlists.addAll(newItems)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(oldSize, playlists.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsViewHolder {
@@ -102,7 +103,9 @@ class PlaylistsAdapter(
             try {
                 if (response.message == "ok") {
                     playlists.removeAt(position)
-                    activity.runOnUiThread { notifyDataSetChanged() }
+                    activity.runOnUiThread {
+                        notifyItemRemoved(position)
+                    }
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())

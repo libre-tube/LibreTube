@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SearchhistoryRowBinding
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 
 class SearchHistoryAdapter(
@@ -30,13 +30,14 @@ class SearchHistoryAdapter(
             historyText.text = historyQuery
 
             deleteHistory.setOnClickListener {
+                val itemIndex = historyList.indexOf(historyQuery)
                 historyList -= historyQuery
                 Thread {
-                    DatabaseHolder.db.searchHistoryDao().delete(
+                    Database.searchHistoryDao().delete(
                         SearchHistoryItem(query = historyQuery)
                     )
                 }.start()
-                notifyDataSetChanged()
+                notifyItemRemoved(itemIndex)
             }
 
             root.setOnClickListener {
