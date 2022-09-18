@@ -1,5 +1,6 @@
 import os
 from json import load
+import time
 
 data = load(open('commit.json'))
 while True:
@@ -9,6 +10,8 @@ while True:
     print(data['sha'][0:7])
     if f == data['sha'][0:7]:
         break
+    else:
+        time.sleep(10)
 
 os.system("curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/latestBuild/app-x86-debug.apk --output app-x86-debug.apk")
 print("Build [x86] Downloaded")
