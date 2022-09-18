@@ -314,4 +314,11 @@
     <string name="legacy_subscriptions">Köhnə abunəliklər görünüşü</string>
     <string name="device_info">Cihaz Məlumatı</string>
     <string name="audio_video_summary">Keyfiyyət və format</string>
+    <string name="new_videos_badge">Yeni videolar üçün göstərici</string>
+    <string name="new_videos_badge_summary">Yeni videolar varsa, onların sayı ilə nişan göstərin.</string>
+    <string name="delete">Sil</string>
+    <string name="trending_layout">Alternativ ev səhifəsi tərtibatı</string>
+    <string name="renamePlaylist">Pleylistin adını dəyişin</string>
+    <string name="mobile_data">Mobil data</string>
+    <string name="wifi">Wi-Fi</string>
 </resources>

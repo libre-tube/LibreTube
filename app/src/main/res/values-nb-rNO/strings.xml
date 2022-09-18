@@ -317,4 +317,7 @@
     <string name="legacy_subscriptions">Visning for eldre abonnementer</string>
     <string name="trending_layout">Alternativ «På vei opp»-visning</string>
     <string name="renamePlaylist">Gi spillelisten nytt navn</string>
+    <string name="new_videos_badge">Indikator for nye videoer</string>
+    <string name="new_videos_badge_summary">Vis et skilt med evt. antall nye videoer.</string>
+    <string name="mobile_data">Mobildata</string>
 </resources>

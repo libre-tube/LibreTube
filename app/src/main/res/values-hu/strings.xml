@@ -15,8 +15,8 @@
     <string name="cannotDownload">Nem lehetséges ezt a streamet letölteni.</string>
     <string name="downloadfailed">Sikertelen letöltés.</string>
     <string name="vlc">Megnyitás VLC-ben</string>
-    <string name="vlcerror">A megnyitás VLC-ben sikertelen, lehet, hogy nincs telepítve.</string>
-    <string name="import_from_yt">Feliratkozások imporálása</string>
+    <string name="vlcerror">Nem sikerült megnyitni VLC-ben. Lehetséges, hogy nincs telepítve.</string>
+    <string name="import_from_yt">Feliratkozások importálása</string>
     <string name="server_error">Probláma van a szerverrel. Megpróbálja egy másik példánnyal\?</string>
     <string name="unknown_error">Hálózati hiba.</string>
     <string name="empty">Meg kell adnia egy felhasználónevet és jelszót.</string>
@@ -25,7 +25,7 @@
     <string name="createPlaylist">Lejátszási lista létrehozása</string>
     <string name="playlistCreated">Lejátszási lista létrehozva.</string>
     <string name="addToPlaylist">Hozzáadás lejátszási listához</string>
-    <string name="success">Sikeres.</string>
+    <string name="success">Kész.</string>
     <string name="yes">Igen</string>
     <string name="logout">Kijelentkezés</string>
     <string name="subscribe">Feliratkozás</string>
@@ -112,7 +112,7 @@
     <string name="customization">Testreszabás</string>
     <string name="instance">Példány</string>
     <string name="website">Weboldal</string>
-    <string name="open">Megnyitás…</string>
+    <string name="open">Megnyitás</string>
     <string name="reset">Alapértelmezések visszaállítása</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -132,7 +132,7 @@
     <string name="internal_storage">Belső tárhely</string>
     <string name="sdcard">SD-kártya</string>
     <string name="shareTo">URL megosztása ide</string>
-    <string name="playOnBackground">Lejátszás a háttérben</string>
+    <string name="playOnBackground">Lejátszás háttérben</string>
     <string name="views">%1$s megtekintés</string>
     <string name="defaultIcon">Alapértelmezett</string>
     <string name="download_directory">Letöltés ide</string>
@@ -167,7 +167,7 @@
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz.</string>
     <string name="category_filler_description">A felesleges jelenetekhez, amelyek csak időkitöltésre lettek hozzáadva, illetve olyan humorhoz amely nem szükséges a videó fő témájának a megértéséhez.</string>
     <string name="category_music_offtopic_description">Kizárólag zenei videókban való felhasználásra. A videó olyan részeit kell lefednie, amelyek nem részei a hivatalos mixeknek. Végül a videónak a lehető legjobban kell hasonlítania a Spotify vagy bármely más mix változathoz, vagy csökkenteni kell a beszédet vagy más zavaró elemeket.</string>
-    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szegmensek esetében, amelyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy ez nem a megfelelő kategória.</string>
+    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szegmensek esetében, amelyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória.</string>
     <string name="background_mode">Háttér mód</string>
     <string name="audio_video">Hang és videó</string>
     <string name="fullscreen_orientation">Teljes képernyős helyzet</string>
@@ -224,7 +224,7 @@
     <string name="turnInternetOn">Kérjük, az internethez való csatlakozáshoz kapcsolja be a wifit vagy a mobiladat-kapcsolatot.</string>
     <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez.</string>
-    <string name="seek_increment">Pörgetés időköze</string>
+    <string name="seek_increment">Léptetés időköze</string>
     <string name="require_restart_message">Újraindítja az alkalmazást\?</string>
     <string name="pure_theme_summary">Tiszta fehér/fekete téma</string>
     <string name="data_saver_mode">Adattakarékos üzemmód</string>
@@ -268,7 +268,7 @@
     <string name="none">Egyik sem</string>
     <string name="update_now">Telepíti az új LibreTube verziót most\?</string>
     <string name="watch_history_summary">A megtekintett videók nyomon követése helyben</string>
-    <string name="watch_positions_title">Lejátszási pozíciók megjegyzése</string>
+    <string name="watch_positions_title">Lejátszási pozíció megjegyzése</string>
     <string name="captions">Feliratok</string>
     <string name="general">Általános</string>
     <string name="pauseOnScreenOff">Automatikus szüneteltetés</string>
@@ -289,7 +289,7 @@
     <string name="update_summary">Kattintson, hogy megtekintse, hogy naprakész-e az alkalmazás.</string>
     <string name="translate">Fordítás</string>
     <string name="authors">Szerzők</string>
-    <string name="download_folder_summary">A mappa neve, amelyben a letöltött média van tárolva.</string>
+    <string name="download_folder_summary">A mappa neve, amelyben a letöltött média lesz tárolva.</string>
     <string name="downloads_directory">Letöltések mappa</string>
     <string name="movies_directory">Filmek mappa</string>
     <string name="music_directory">Zenék mappa</string>
@@ -304,7 +304,7 @@
     <string name="no_video">Nincs videó</string>
     <string name="selected">Kiválasztott</string>
     <string name="never">Soha</string>
-    <string name="required_network">Kapcsolat szükséges</string>
+    <string name="required_network">Szükséges kapcsolat</string>
     <string name="misc">Vegyes</string>
     <string name="player_resize_mode">Átméretezés mód</string>
     <string name="addInstance">Példány hozzáadása</string>
@@ -317,4 +317,8 @@
     <string name="trending_layout">Alternatív felkapott elrendezés</string>
     <string name="wifi">WiFi</string>
     <string name="mobile_data">Mobiladat</string>
+    <string name="new_videos_badge">Indikátor az új videókhoz</string>
+    <string name="new_videos_badge_summary">Jelvény megjelenítése az új videók számával, ha több van.</string>
+    <string name="delete">Törlés</string>
+    <string name="renamePlaylist">Lejátszási lista átnevezése</string>
 </resources>
