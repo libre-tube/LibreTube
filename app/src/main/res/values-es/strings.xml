@@ -319,6 +319,15 @@
     <string name="delete">Borrar</string>
     <string name="trending_layout">Diseño de tendencias alternativo</string>
     <string name="renamePlaylist">Cambiar el nombre de la lista de reproducción</string>
-    <string name="wifi">Conexión WiFi</string>
+    <string name="wifi">Wifi</string>
     <string name="mobile_data">Datos móviles</string>
+    <string name="sb_skip_manual">Salto manual</string>
+    <string name="download_channel_name">Servicio de descarga</string>
+    <string name="skip_segment">Saltar segmento</string>
+    <string name="download_channel_description">Muestra una notificación cuando se descargan medios.</string>
+    <string name="background_channel_name">Modo de fondo</string>
+    <string name="push_channel_name">Trabajador de notificación</string>
+    <string name="sb_skip_manual_summary">No omita segmentos automáticamente, siempre pregunte antes.</string>
+    <string name="push_channel_description">Muestra una notificación cuando haya nuevos flujos disponibles.</string>
+    <string name="background_channel_description">Mostrar una notificación con botones para controlar el reproductor de audio.</string>
 </resources>
