@@ -165,8 +165,6 @@ class MainActivity : BaseActivity() {
         // new way of handling back presses
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                navController.popBackStack(R.id.searchFragment, false)
-
                 if (binding.mainMotionLayout.progress == 0F) {
                     try {
                         minimizePlayer()
