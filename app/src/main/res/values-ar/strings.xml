@@ -321,4 +321,18 @@
     <string name="mobile_data">البيانات الخليوية</string>
     <string name="new_videos_badge">مؤشر لمقاطع الفيديو الجديدة</string>
     <string name="new_videos_badge_summary">اعرض شارة تحتوي على عدد مقاطع الفيديو الجديدة إذا كان هناك بعضها.</string>
+    <string name="skip_segment">تخطي الجزء</string>
+    <string name="sb_skip_manual">تخطي يدويًا</string>
+    <string name="sb_skip_manual_summary">لا تتخطى الاجزاء تلقائيًا ، بل قم دائمًا بالمطالبة بها من قبل.</string>
+    <string name="download_channel_name">تحميل الخدمة</string>
+    <string name="download_channel_description">يعرض إشعارا عند تنزيل الوسائط.</string>
+    <string name="local_subscriptions">الاشتراكات المحلية</string>
+    <string name="preferences">التفضيلات</string>
+    <string name="backup_customInstances">مثيلات مخصصة</string>
+    <string name="background_channel_name">وضع الخلفية</string>
+    <string name="background_channel_description">يعرض إشعارا يحتوي على أزرار للتحكم في مشغل الصوت.</string>
+    <string name="push_channel_name">عامل الإخطار</string>
+    <string name="push_channel_description">يظهر إشعارًا عند توفر تدفقات جديدة.</string>
+    <string name="save_feed">تحميل التغذية في الخلفية</string>
+    <string name="save_feed_summary">قم بتحميل خلاصة الاشتراك في الخلفية وامنعها من التحديث التلقائي.</string>
 </resources>
