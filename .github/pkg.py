@@ -5,6 +5,8 @@ data = load(open('commit.json'))
 while True:
     os.system('curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/sign.txt --output sign.txt')
     f = open('sign.txt')
+    print(f)
+    print(data['sha'][0:7])
     if f == data['sha'][0:7]:
         break
 
