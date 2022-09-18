@@ -1,7 +1,10 @@
 package com.github.libretube.dialogs
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -9,10 +12,24 @@ import com.github.libretube.adapters.BackupOptionsAdapter
 import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.obj.BackupFile
+import com.github.libretube.util.BackupHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class BackupDialog() : DialogFragment() {
     private lateinit var binding: DialogBackupBinding
+    private lateinit var createBackupFile: ActivityResultLauncher<String>
+
+    val backupFile = BackupFile()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        createBackupFile = registerForActivityResult(
+            ActivityResultContracts.CreateDocument("application/json")
+        ) { uri: Uri? ->
+            BackupHelper(requireContext()).advancedBackup(uri, backupFile)
+        }
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val backupOptions = listOf(
@@ -24,8 +41,6 @@ class BackupDialog() : DialogFragment() {
         )
 
         val selected = mutableListOf(false, false, false, false, false)
-
-        val backupFile = BackupFile()
 
         binding = DialogBackupBinding.inflate(layoutInflater)
         binding.backupOptionsRecycler.layoutManager = LinearLayoutManager(context)
@@ -43,6 +58,8 @@ class BackupDialog() : DialogFragment() {
                 if (selected[2]) backupFile.searchHistory = DatabaseHolder.db.searchHistoryDao().getAll()
                 if (selected[3]) backupFile.localSubscriptions = DatabaseHolder.db.localSubscriptionDao().getAll()
                 if (selected[4]) backupFile.customInstances = DatabaseHolder.db.customInstanceDao().getAll()
+
+                createBackupFile.launch("application/json")
             }
             .create()
     }
