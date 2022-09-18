@@ -79,6 +79,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install python-telegram-bot
           mv ../.github/tg.py .
+          mv ../.github/commit.json .
           python tg.py
 
       - name: Upload APK
