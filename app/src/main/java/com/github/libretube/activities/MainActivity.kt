@@ -289,6 +289,13 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                // prevent malicious navigation when the search view is getting collapsed
+                if (navController.currentDestination?.id == R.id.searchResultFragment &&
+                    (newText == null || newText == "")
+                ) {
+                    return false
+                }
+
                 if (navController.currentDestination?.id != R.id.searchFragment) {
                     val bundle = Bundle()
                     bundle.putString("query", newText)
@@ -296,6 +303,7 @@ class MainActivity : BaseActivity() {
                 } else {
                     searchViewModel.setQuery(newText)
                 }
+
                 return true
             }
         })
