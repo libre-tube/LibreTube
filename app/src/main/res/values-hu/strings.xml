@@ -109,7 +109,7 @@
     <string name="sponsorblock_notifications">Értesítések</string>
     <string name="enabled">Be</string>
     <string name="disabled">Ki</string>
-    <string name="customization">Testreszabás</string>
+    <string name="customization">Beállítások</string>
     <string name="instance">Példány</string>
     <string name="website">Weboldal</string>
     <string name="open">Megnyitás</string>
@@ -161,7 +161,7 @@
     <string name="download_directory_summary">Ahol a letöltött média lesz tárolva.</string>
     <string name="category_filler">Időkitöltés/viccek</string>
     <string name="category_preview">Előnézet/visszatekintés</string>
-    <string name="update_available_text">Ugrás a GitHubon a kiadásokra a hogy letöltse\?</string>
+    <string name="update_available_text">A letöltéshez ellátogasson a kiadásokra a GitHubon\?</string>
     <string name="watch_history">Megtekintési előzmények</string>
     <string name="skip_buttons">Kihagyás gombok</string>
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz.</string>
@@ -315,10 +315,12 @@
     <string name="repeat_mode">Ismétlés mód</string>
     <string name="system_caption_style">Rendszer feliratok stílusa</string>
     <string name="trending_layout">Alternatív felkapott elrendezés</string>
-    <string name="wifi">WiFi</string>
+    <string name="wifi">Wifi</string>
     <string name="mobile_data">Mobiladat</string>
     <string name="new_videos_badge">Indikátor az új videókhoz</string>
     <string name="new_videos_badge_summary">Jelvény megjelenítése az új videók számával, ha több van.</string>
     <string name="delete">Törlés</string>
     <string name="renamePlaylist">Lejátszási lista átnevezése</string>
+    <string name="local_subscriptions">Helyi feliratkozások</string>
+    <string name="preferences">Beállítások</string>
 </resources>
