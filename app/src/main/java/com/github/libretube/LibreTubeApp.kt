@@ -68,24 +68,35 @@ class LibreTubeApp : Application() {
      * Initializes the required notification channels for the app.
      */
     private fun initializeNotificationChannels() {
-        val downloadChannel = NotificationChannelCompat.Builder(DOWNLOAD_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_NONE)
+        val downloadChannel = NotificationChannelCompat.Builder(
+            DOWNLOAD_CHANNEL_ID,
+            NotificationManagerCompat.IMPORTANCE_NONE
+        )
             .setName(getString(R.string.download_channel_name))
             .setDescription(getString(R.string.download_channel_description))
             .build()
-        val backgroundChannel = NotificationChannelCompat.Builder(BACKGROUND_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_LOW)
+        val backgroundChannel = NotificationChannelCompat.Builder(
+            BACKGROUND_CHANNEL_ID,
+            NotificationManagerCompat.IMPORTANCE_LOW
+        )
             .setName(getString(R.string.background_channel_name))
             .setDescription(getString(R.string.background_channel_description))
             .build()
-        val pushChannel = NotificationChannelCompat.Builder(PUSH_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_DEFAULT)
+        val pushChannel = NotificationChannelCompat.Builder(
+            PUSH_CHANNEL_ID,
+            NotificationManagerCompat.IMPORTANCE_DEFAULT
+        )
             .setName(getString(R.string.push_channel_name))
             .setDescription(getString(R.string.push_channel_description))
             .build()
 
         val notificationManager = NotificationManagerCompat.from(this)
-        notificationManager.createNotificationChannelsCompat(listOf(downloadChannel,
-            backgroundChannel, pushChannel))
+        notificationManager.createNotificationChannelsCompat(
+            listOf(
+                downloadChannel,
+                backgroundChannel,
+                pushChannel
+            )
+        )
     }
 }
