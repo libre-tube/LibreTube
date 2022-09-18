@@ -321,4 +321,15 @@
     <string name="mobile_data">Mobile data</string>
     <string name="new_videos_badge">Indicator for new videos</string>
     <string name="new_videos_badge_summary">Show a badge with the amount of new videos if there are some.</string>
+    <string name="skip_segment">Skip segment</string>
+    <string name="sb_skip_manual">Skip manually</string>
+    <string name="sb_skip_manual_summary">Don\'t skip segments automatically, always prompt before.</string>
+
+    <!-- Notification channel strings -->
+    <string name="download_channel_name">Download Service</string>
+    <string name="download_channel_description">Shows a notification when downloading media.</string>
+    <string name="background_channel_name">Background Mode</string>
+    <string name="background_channel_description">Shows a notification with buttons to control the audio player.</string>
+    <string name="push_channel_name">Notification Worker</string>
+    <string name="push_channel_description">Shows a notification when new streams are available.</string>
 </resources>

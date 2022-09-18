@@ -1,12 +1,10 @@
 package com.github.libretube
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import androidx.core.app.NotificationChannelCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
@@ -19,12 +17,12 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NotificationHelper
 import com.github.libretube.util.PreferenceHelper
 
-class MyApp : Application() {
+class LibreTubeApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
         /**
-         * Initialize the needed [NotificationChannel]s for DownloadService and BackgroundMode
+         * Initialize the needed notification channels for DownloadService and BackgroundMode
          */
         initializeNotificationChannels()
 
@@ -67,47 +65,38 @@ class MyApp : Application() {
     }
 
     /**
-     * Initializes the required [NotificationChannel]s for the app.
+     * Initializes the required notification channels for the app.
      */
-    @SuppressLint("InlinedApi")
     private fun initializeNotificationChannels() {
-        createNotificationChannel(
+        val downloadChannel = NotificationChannelCompat.Builder(
             DOWNLOAD_CHANNEL_ID,
-            "Download Service",
-            "Shows a notification when downloading media.",
-            NotificationManager.IMPORTANCE_NONE
+            NotificationManagerCompat.IMPORTANCE_NONE
         )
-        createNotificationChannel(
+            .setName(getString(R.string.download_channel_name))
+            .setDescription(getString(R.string.download_channel_description))
+            .build()
+        val backgroundChannel = NotificationChannelCompat.Builder(
             BACKGROUND_CHANNEL_ID,
-            "Background Mode",
-            "Shows a notification with buttons to control the audio player",
-            NotificationManager.IMPORTANCE_LOW
+            NotificationManagerCompat.IMPORTANCE_LOW
         )
-        createNotificationChannel(
+            .setName(getString(R.string.background_channel_name))
+            .setDescription(getString(R.string.background_channel_description))
+            .build()
+        val pushChannel = NotificationChannelCompat.Builder(
             PUSH_CHANNEL_ID,
-            "Notification Worker",
-            "Shows a notification when new streams are available.",
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManagerCompat.IMPORTANCE_DEFAULT
         )
-    }
+            .setName(getString(R.string.push_channel_name))
+            .setDescription(getString(R.string.push_channel_description))
+            .build()
 
-    /**
-     * Creates a [NotificationChannel]
-     */
-    private fun createNotificationChannel(
-        id: String,
-        name: String,
-        descriptionText: String,
-        importance: Int
-    ) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(id, name, importance)
-            channel.description = descriptionText
-            // Register the channel in the system
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
+        val notificationManager = NotificationManagerCompat.from(this)
+        notificationManager.createNotificationChannelsCompat(
+            listOf(
+                downloadChannel,
+                backgroundChannel,
+                pushChannel
+            )
+        )
     }
 }

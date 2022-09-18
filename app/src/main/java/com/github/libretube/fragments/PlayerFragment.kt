@@ -169,6 +169,7 @@ class PlayerFragment : BaseFragment() {
     private var sponsorBlockNotifications = true
     private var skipButtonsEnabled = false
     private var pipEnabled = true
+    private var skipSegmentsManually = false
 
     /**
      * for autoplay
@@ -335,6 +336,11 @@ class PlayerFragment : BaseFragment() {
         pipEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.PICTURE_IN_PICTURE,
             true
+        )
+
+        skipSegmentsManually = PreferenceHelper.getBoolean(
+            PreferenceKeys.SB_SKIP_MANUALLY,
+            false
         )
     }
 
@@ -709,21 +715,39 @@ class PlayerFragment : BaseFragment() {
 
         Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
 
-        if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) {
-            return
-        }
+        if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) return
 
+        val currentPosition = exoPlayer.currentPosition
         segmentData.segments.forEach { segment: Segment ->
             val segmentStart = (segment.segment!![0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
-            val currentPosition = exoPlayer.currentPosition
+
+            // show the button to manually skip the segment
             if (currentPosition in segmentStart until segmentEnd) {
-                if (sponsorBlockNotifications) {
-                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
+                if (skipSegmentsManually) {
+                    binding.sbSkipBtn.visibility = View.VISIBLE
+                    binding.sbSkipBtn.setOnClickListener {
+                        exoPlayer.seekTo(segmentEnd)
+                    }
+                    return
                 }
+
+                if (sponsorBlockNotifications) {
+                    Toast
+                        .makeText(
+                            context,
+                            R.string.segment_skipped,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                }
+
+                // skip the segment automatically
                 exoPlayer.seekTo(segmentEnd)
+                return
             }
         }
+
+        if (skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
     }
 
     private fun playVideo() {
@@ -743,6 +767,9 @@ class PlayerFragment : BaseFragment() {
             }
 
             runOnUiThread {
+                // hide the button to skip SponsorBlock segments manually
+                binding.sbSkipBtn.visibility = View.GONE
+
                 // set media sources for the player
                 setResolutionAndSubtitles()
                 prepareExoPlayerView()

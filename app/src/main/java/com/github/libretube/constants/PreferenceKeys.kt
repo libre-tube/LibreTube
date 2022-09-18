@@ -75,6 +75,7 @@ object PreferenceKeys {
     const val SKIP_BUTTONS = "skip_buttons"
     const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
+    const val SB_SKIP_MANUALLY = "sb_skip_manually_key"
 
     /**
      * Background mode
