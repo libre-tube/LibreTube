@@ -334,4 +334,5 @@
     <string name="local_subscriptions">Локальные подписки</string>
     <string name="backup_customInstances">Пользовательские настройки</string>
     <string name="save_feed">Загружать подписки в фоне</string>
+    <string name="save_feed_summary">Обновлять страницу \"Подписки\" в фоне вместо принудительного полного обновления.</string>
 </resources>
