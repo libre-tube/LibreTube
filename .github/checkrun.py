@@ -14,4 +14,3 @@ if "\n\n" in message:
         print("Silence not found")
 else:
     print("Empty Description")
-        

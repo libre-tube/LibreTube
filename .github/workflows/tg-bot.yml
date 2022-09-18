@@ -22,22 +22,24 @@ jobs:
       - name: Check for Execution Orders
         run: |
           cd .github
+          mv checkrun.py ~
+          cd ~
           curl https://api.github.com/repos/${{ github.repository }}/commits/${{ github.sha }} > commit.json
           python checkrun.py
           cd ..
 
       - name: Download packages
         run: |
-          cd ~
-          mv .github/pkg.py .
+          cd .github
           python pkg.py
+          cd ..
 
       - name: Telegram Bot
         continue-on-error: true
         run: |
-          cd ~
+          cd .github
           curl https://libre-tube.github.io/images/LibreAlpha.png --output alpha.png
-          curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/exec --output ~/bot-api
+          curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/exec --output bot-api
           chmod 755 ./bot-api
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
