@@ -39,6 +39,11 @@ class SubscriptionsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val loadFeedInBackground = PreferenceHelper.getBoolean(
+            PreferenceKeys.SAVE_FEED,
+            false
+        )
+
         binding.subRefresh.isEnabled = true
 
         binding.subProgress.visibility = View.VISIBLE
@@ -50,7 +55,10 @@ class SubscriptionsFragment : BaseFragment() {
 
         binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
 
-        if (viewModel.videoFeed.value == null) viewModel.fetchFeed()
+        if (viewModel.videoFeed.value == null || !loadFeedInBackground) {
+            viewModel.videoFeed.value = null
+            viewModel.fetchFeed()
+        }
 
         // listen for error responses
         viewModel.errorResponse.observe(viewLifecycleOwner) {

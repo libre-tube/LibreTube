@@ -19,6 +19,7 @@ object PreferenceKeys {
     const val AUTO_ROTATION = "auto_rotation"
     const val BREAK_REMINDER_TOGGLE = "break_reminder_toggle"
     const val BREAK_REMINDER = "break_reminder"
+    const val SAVE_FEED = "save_feed"
 
     /**
      * Appearance
