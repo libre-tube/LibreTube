@@ -35,7 +35,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
@@ -67,12 +66,14 @@ import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.BackgroundMode
+import com.github.libretube.services.DownloadService
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
@@ -210,7 +211,7 @@ class PlayerFragment : BaseFragment() {
         context?.hideKeyboard(view)
 
         // clear the playing queue
-        Globals.playingQueue.clear()
+        PlayingQueue.clear()
 
         setUserPrefs()
 
@@ -752,7 +753,7 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
-        Globals.playingQueue += videoId!!
+        PlayingQueue.add(videoId!!)
         lifecycleScope.launchWhenCreated {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
@@ -1023,7 +1024,7 @@ class PlayerFragment : BaseFragment() {
         if (response.duration > 0) {
             // download clicked
             binding.relPlayerDownload.setOnClickListener {
-                if (!Globals.IS_DOWNLOAD_RUNNING) {
+                if (!DownloadService.IS_DOWNLOAD_RUNNING) {
                     val newFragment = DownloadDialog(videoId!!)
                     newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
                 } else {
@@ -1105,7 +1106,7 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && Globals.playingQueue.indexOf(videoId!!) != 0
+            skipButtonsEnabled && PlayingQueue.queue.indexOf(videoId!!) != 0
         ) {
             View.VISIBLE
         } else {
@@ -1114,8 +1115,8 @@ class PlayerFragment : BaseFragment() {
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            val index = Globals.playingQueue.indexOf(videoId!!) - 1
-            videoId = Globals.playingQueue[index]
+            val index = PlayingQueue.queue.indexOf(videoId!!) - 1
+            videoId = PlayingQueue.queue[index]
             playVideo()
         }
 

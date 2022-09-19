@@ -11,7 +11,6 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
@@ -34,7 +33,7 @@ class DownloadService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        Globals.IS_DOWNLOAD_RUNNING = true
+        IS_DOWNLOAD_RUNNING = true
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -175,11 +174,16 @@ class DownloadService : Service() {
         try {
             unregisterReceiver(onDownloadComplete)
         } catch (e: Exception) {
+            e.printStackTrace()
         }
 
-        Globals.IS_DOWNLOAD_RUNNING = false
+        IS_DOWNLOAD_RUNNING = false
 
         stopService(Intent(this, DownloadService::class.java))
         super.onDestroy()
+    }
+
+    companion object {
+        var IS_DOWNLOAD_RUNNING = false
     }
 }

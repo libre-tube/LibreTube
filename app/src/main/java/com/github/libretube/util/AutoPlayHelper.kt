@@ -1,6 +1,5 @@
 package com.github.libretube.util
 
-import com.github.libretube.Globals
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.StreamItem
@@ -21,9 +20,9 @@ class AutoPlayHelper(
         currentVideoId: String,
         relatedStreams: List<StreamItem>?
     ): String? {
-        return if (Globals.playingQueue.last() != currentVideoId) {
-            val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
-            Globals.playingQueue[currentVideoIndex + 1]
+        return if (PlayingQueue.queue.last() != currentVideoId) {
+            val currentVideoIndex = PlayingQueue.queue.indexOf(currentVideoId)
+            PlayingQueue.queue[currentVideoIndex + 1]
         } else if (playlistId == null) {
             getNextTrendingVideoId(
                 currentVideoId,
@@ -49,8 +48,8 @@ class AutoPlayHelper(
         var nextStreamId: String? = null
         while (nextStreamId == null ||
             (
-                Globals.playingQueue.contains(nextStreamId) &&
-                    Globals.playingQueue.indexOf(videoId) > Globals.playingQueue.indexOf(
+                PlayingQueue.queue.contains(nextStreamId) &&
+                    PlayingQueue.queue.indexOf(videoId) > PlayingQueue.queue.indexOf(
                         nextStreamId
                     )
                 )
@@ -110,9 +109,9 @@ class AutoPlayHelper(
     fun getNextPlayingQueueVideoId(
         currentVideoId: String
     ): String? {
-        return if (Globals.playingQueue.last() != currentVideoId) {
-            val currentVideoIndex = Globals.playingQueue.indexOf(currentVideoId)
-            Globals.playingQueue[currentVideoIndex + 1]
+        return if (PlayingQueue.queue.last() != currentVideoId) {
+            val currentVideoIndex = PlayingQueue.queue.indexOf(currentVideoId)
+            PlayingQueue.queue[currentVideoIndex + 1]
         } else {
             null
         }

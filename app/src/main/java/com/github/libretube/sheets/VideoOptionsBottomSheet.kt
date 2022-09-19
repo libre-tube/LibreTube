@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
@@ -13,6 +12,7 @@ import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.BottomSheet
 
@@ -90,7 +90,7 @@ class VideoOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 context?.getString(R.string.add_to_queue) -> {
-                    Globals.playingQueue += videoId
+                    PlayingQueue.add(videoId)
                 }
             }
         }
