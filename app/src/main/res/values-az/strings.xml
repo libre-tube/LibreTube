@@ -321,4 +321,18 @@
     <string name="renamePlaylist">Pleylistin adını dəyişin</string>
     <string name="mobile_data">Mobil data</string>
     <string name="wifi">Wi-Fi</string>
+    <string name="skip_segment">Seqmenti ötür</string>
+    <string name="sb_skip_manual">Əl ilə keçin</string>
+    <string name="sb_skip_manual_summary">Seqmentləri avtomatik olaraq ötürməyin, həmişə əvvəlcə icazə istəyin.</string>
+    <string name="local_subscriptions">Yerli abunəlikər</string>
+    <string name="preferences">Üstünlüklər</string>
+    <string name="backup_customInstances">Fərdi Serverlər</string>
+    <string name="save_feed">Axını arxa fonda yükləyin</string>
+    <string name="save_feed_summary">Abunəlik axınını arxa planda yükləyin və onun avtomatik yenilənməsinin qarşısını alın.</string>
+    <string name="download_channel_name">Endirmə Xidməti</string>
+    <string name="download_channel_description">Media yüklənilərkən bildiriş göstərir.</string>
+    <string name="background_channel_name">Arxa Fon rejimi</string>
+    <string name="push_channel_name">Bildiriş İşçisi</string>
+    <string name="push_channel_description">Yeni yayımlar mövcud olduqda bildiriş göstərir.</string>
+    <string name="background_channel_description">Səs oynadıcını idarə etmək üçün düymələri olan bildiriş göstərir.</string>
 </resources>

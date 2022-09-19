@@ -321,4 +321,18 @@
     <string name="mobile_data">Dane mobilne</string>
     <string name="new_videos_badge">Oznaczenie nowych filmów</string>
     <string name="new_videos_badge_summary">Wyświetlaj plakietkę z ilością nowych filmów.</string>
+    <string name="skip_segment">Pomiń segment</string>
+    <string name="sb_skip_manual">Pomiń ręcznie</string>
+    <string name="sb_skip_manual_summary">Nie pomijaj segmentów automatycznie, zawsze informuj przed ich pominięciem.</string>
+    <string name="local_subscriptions">Lokalne subskrypcje</string>
+    <string name="preferences">Ustawienia</string>
+    <string name="backup_customInstances">Instancje niestandardowe</string>
+    <string name="download_channel_name">Usługa pobierania</string>
+    <string name="background_channel_name">Tryb w tle</string>
+    <string name="background_channel_description">Pokazuje powiadomienie z przyciskami do sterowania odtwarzaczem audio.</string>
+    <string name="push_channel_description">Pokazuje powiadomienie, gdy dostępne są nowe filmy.</string>
+    <string name="push_channel_name">Powiadomienie Push</string>
+    <string name="download_channel_description">Pokazuje powiadomienie podczas pobierania mediów.</string>
+    <string name="save_feed_summary">Załaduj kanał subskrypcji w tle i zapobiegnij jego automatycznemu odświeżaniu.</string>
+    <string name="save_feed">Ładowanie kanału w tle</string>
 </resources>

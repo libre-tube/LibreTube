@@ -330,4 +330,9 @@
     <string name="sb_skip_manual_summary">Nepřeskakovat segmenty automaticky, vždy se předtím zeptat.</string>
     <string name="download_channel_description">Zobrazí oznámení při stahování médií.</string>
     <string name="push_channel_description">Zobrazí oznámení, když jsou k dispozici nové videa.</string>
+    <string name="local_subscriptions">Lokální odběry</string>
+    <string name="preferences">Předvolby</string>
+    <string name="backup_customInstances">Vlastní instance</string>
+    <string name="save_feed">Načítat zdroj v pozadí</string>
+    <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho automatickému obnovování.</string>
 </resources>

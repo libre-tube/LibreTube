@@ -321,4 +321,18 @@
     <string name="renamePlaylist">Oynatma listesini yeniden adlandır</string>
     <string name="mobile_data">Mobil veri</string>
     <string name="wifi">Wi-Fi</string>
+    <string name="skip_segment">Segmenti atla</string>
+    <string name="sb_skip_manual">Manuel olarak atla</string>
+    <string name="sb_skip_manual_summary">Segmentleri otomatik olarak atlamayın, her zaman önce izin isteyin.</string>
+    <string name="local_subscriptions">Yerel abonelikler</string>
+    <string name="preferences">Tercihler</string>
+    <string name="backup_customInstances">Özel Sunucular</string>
+    <string name="background_channel_name">Arka Plan Modu</string>
+    <string name="background_channel_description">Müzik çaları kontrol etmek için düğmeleri olan bir bildirim gösterir.</string>
+    <string name="save_feed">Akışı arka planda yükle</string>
+    <string name="save_feed_summary">Abonelik akışını arka planda yükleyin ve otomatik olarak yenilenmesini önleyin.</string>
+    <string name="download_channel_name">İndirme Hizmeti</string>
+    <string name="download_channel_description">Medya indirirken bildirim gösterir.</string>
+    <string name="push_channel_name">Bildirim Çalışanı</string>
+    <string name="push_channel_description">Yeni akışlar mevcut olduğunda bir bildirim gösterir.</string>
 </resources>
