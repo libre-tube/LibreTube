@@ -335,4 +335,5 @@
     <string name="preferences">选项</string>
     <string name="save_feed">后台加载订阅源</string>
     <string name="save_feed_summary">后台加载订阅源并防止其自动刷新。</string>
+    <string name="play_next">播放下一个</string>
 </resources>
