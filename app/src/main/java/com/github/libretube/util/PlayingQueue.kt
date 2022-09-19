@@ -51,4 +51,6 @@ object PlayingQueue {
         currentVideoId = videoId
         if (!contains(videoId)) add(videoId)
     }
+
+    fun isNotEmpty() = queue.isNotEmpty()
 }

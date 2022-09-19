@@ -333,6 +333,9 @@ class BackgroundMode : Service() {
      * destroy the [BackgroundMode] foreground service
      */
     override fun onDestroy() {
+        // clear the playing queue
+        PlayingQueue.clear()
+
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

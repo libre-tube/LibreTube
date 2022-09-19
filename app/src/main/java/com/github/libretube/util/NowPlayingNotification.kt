@@ -166,6 +166,7 @@ class NowPlayingNotification(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
         notificationManager.cancel(PLAYER_NOTIFICATION_ID)
+        player.stop()
         player.release()
     }
 }

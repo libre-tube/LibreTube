@@ -1,13 +1,9 @@
 package com.github.libretube.sheets
 
-import android.app.NotificationManager
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
@@ -44,18 +40,9 @@ class VideoOptionsBottomSheet(
         /**
          * Check whether the player is running by observing the notification
          */
-        try {
-            val notificationManager =
-                context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                notificationManager.activeNotifications.forEach {
-                    if (it.id == PLAYER_NOTIFICATION_ID) {
-                        optionsList += context?.getString(R.string.add_to_queue)!!
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        if (PlayingQueue.isNotEmpty()) {
+            optionsList += context?.getString(R.string.play_next)!!
+            optionsList += context?.getString(R.string.add_to_queue)!!
         }
 
         setSimpleItems(optionsList) { which ->

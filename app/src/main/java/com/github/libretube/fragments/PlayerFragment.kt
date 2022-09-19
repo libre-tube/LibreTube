@@ -687,6 +687,9 @@ class PlayerFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
+            // clear the playing queue
+            PlayingQueue.clear()
+
             saveWatchPosition()
             nowPlayingNotification.destroy()
             activity?.requestedOrientation =
