@@ -757,8 +757,9 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
-        PlayingQueue.updateCurrent(videoId!!)
         lifecycleScope.launchWhenCreated {
+            PlayingQueue.updateCurrent(videoId!!)
+
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
@@ -866,8 +867,7 @@ class PlayerFragment : BaseFragment() {
         var position: Long? = null
         Thread {
             try {
-                val watchPosition = Database.watchPositionDao().findById(videoId!!)
-                position = if (watchPosition != null) watchPosition.position else null
+                position = Database.watchPositionDao().findById(videoId!!)?.position
                 // position is almost the end of the video => don't seek, start from beginning
                 if (position!! > streams.duration!! * 1000 * 0.9) position = null
             } catch (e: Exception) {

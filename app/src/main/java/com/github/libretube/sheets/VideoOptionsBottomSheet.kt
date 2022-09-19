@@ -37,8 +37,9 @@ class VideoOptionsBottomSheet(
 
             )
         }
+
         /**
-         * Check whether the player is running by observing the notification
+         * Check whether the player is running and add queue options
          */
         if (PlayingQueue.isNotEmpty()) {
             optionsList += context?.getString(R.string.play_next)!!

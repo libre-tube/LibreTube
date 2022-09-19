@@ -32,15 +32,13 @@ object PlayingQueue {
         }
     }
 
-    fun getPrev(): String {
-        return queue[
-            queue.indexOf(currentVideoId) - 1
-        ]
+    fun getPrev(): String? {
+        val index = queue.indexOf(currentVideoId)
+        return if (index > 0) queue[index - 1] else null
     }
 
     fun hasPrev(): Boolean {
-        val currentIndex = queue.indexOf(currentVideoId)
-        return queue.size > currentIndex + 1
+        return queue.indexOf(currentVideoId) > 0
     }
 
     fun contains(videoId: String): Boolean {
@@ -53,7 +51,7 @@ object PlayingQueue {
 
     fun updateCurrent(videoId: String) {
         currentVideoId = videoId
-        if (!contains(videoId)) add(videoId)
+        queue.add(videoId)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
