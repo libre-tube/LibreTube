@@ -14,7 +14,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
 
     Thread {
         try {
-            progress = Database.watchPositionDao().findById(videoId).position
+            progress = Database.watchPositionDao().findById(videoId)?.position
         } catch (e: Exception) {
             progress = null
         }

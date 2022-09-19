@@ -56,9 +56,9 @@ object DatabaseHelper {
 
     fun removeWatchPosition(videoId: String) {
         Thread {
-            Database.watchPositionDao().delete(
-                Database.watchPositionDao().findById(videoId)
-            )
+            Database.watchPositionDao().findById(videoId)?.let {
+                Database.watchPositionDao().delete(it)
+            }
         }.start()
     }
 

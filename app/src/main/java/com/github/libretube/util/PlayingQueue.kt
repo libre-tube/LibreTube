@@ -1,8 +1,5 @@
 package com.github.libretube.util
 
-import android.util.Log
-import com.github.libretube.extensions.TAG
-
 object PlayingQueue {
     private val queue = mutableListOf<String>()
     private var currentVideoId: String? = null
@@ -12,20 +9,23 @@ object PlayingQueue {
     }
 
     fun add(videoId: String) {
+        if (currentVideoId == videoId) return
+        if (queue.contains(videoId)) queue.remove(videoId)
         queue.add(videoId)
     }
 
-    fun playNext(nextVideoId: String) {
+    fun playNext(videoId: String) {
+        if (currentVideoId == videoId) return
+        if (queue.contains(videoId)) queue.remove(videoId)
         queue.add(
-            queue.indexOf(currentVideoId),
-            nextVideoId
+            queue.indexOf(currentVideoId) + 1,
+            videoId
         )
     }
 
     fun getNext(): String? {
         val currentIndex = queue.indexOf(currentVideoId)
-        Log.e(TAG(), queue.toString())
-        return if (currentIndex > queue.size) {
+        return if (currentIndex >= queue.size) {
             null
         } else {
             queue[currentIndex + 1]
@@ -40,7 +40,7 @@ object PlayingQueue {
 
     fun hasPrev(): Boolean {
         val currentIndex = queue.indexOf(currentVideoId)
-        return currentIndex >= 1
+        return queue.size > currentIndex + 1
     }
 
     fun contains(videoId: String): Boolean {
