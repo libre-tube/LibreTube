@@ -89,6 +89,9 @@ class VideoOptionsBottomSheet(
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
+                context?.getString(R.string.play_next) -> {
+                    PlayingQueue.playNext(videoId)
+                }
                 context?.getString(R.string.add_to_queue) -> {
                     PlayingQueue.add(videoId)
                 }
