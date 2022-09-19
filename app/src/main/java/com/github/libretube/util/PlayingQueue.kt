@@ -1,5 +1,8 @@
 package com.github.libretube.util
 
+import android.util.Log
+import com.github.libretube.extensions.TAG
+
 object PlayingQueue {
     private val queue = mutableListOf<String>()
     private var currentVideoId: String? = null
@@ -21,6 +24,7 @@ object PlayingQueue {
 
     fun getNext(): String? {
         val currentIndex = queue.indexOf(currentVideoId)
+        Log.e(TAG(), queue.toString())
         return if (currentIndex > queue.size) {
             null
         } else {
