@@ -13,7 +13,7 @@ interface WatchPositionDao {
     fun getAll(): List<WatchPosition>
 
     @Query("SELECT * FROM watchPosition WHERE videoId LIKE :videoId LIMIT 1")
-    fun findById(videoId: String): WatchPosition
+    fun findById(videoId: String): WatchPosition?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg watchPositions: WatchPosition)

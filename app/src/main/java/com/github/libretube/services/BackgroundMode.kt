@@ -11,7 +11,6 @@ import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
@@ -25,6 +24,7 @@ import com.github.libretube.obj.Streams
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -119,7 +119,7 @@ class BackgroundMode : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
             // clear the playing queue
-            Globals.playingQueue.clear()
+            PlayingQueue.clear()
 
             // get the intent arguments
             videoId = intent?.getStringExtra(IntentData.videoId)!!
@@ -145,7 +145,7 @@ class BackgroundMode : Service() {
         seekToPosition: Long = 0
     ) {
         // append the video to the playing queue
-        Globals.playingQueue += videoId
+        PlayingQueue.add(videoId)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 streams = RetrofitInstance.api.getStreams(videoId)
@@ -162,6 +162,8 @@ class BackgroundMode : Service() {
     private fun playAudio(
         seekToPosition: Long
     ) {
+        PlayingQueue.updateCurrent(videoId)
+
         initializePlayer()
         setMediaItem()
 
@@ -247,7 +249,7 @@ class BackgroundMode : Service() {
      */
     private fun playNextVideo() {
         if (nextStreamId == null || nextStreamId == videoId) return
-        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId)
+        val nextQueueVideo = PlayingQueue.getNext()
         if (nextQueueVideo != null) nextStreamId = nextQueueVideo
 
         // play new video on background
@@ -331,6 +333,9 @@ class BackgroundMode : Service() {
      * destroy the [BackgroundMode] foreground service
      */
     override fun onDestroy() {
+        // clear the playing queue
+        PlayingQueue.clear()
+
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

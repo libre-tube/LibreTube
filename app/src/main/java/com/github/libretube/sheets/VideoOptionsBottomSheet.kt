@@ -1,18 +1,14 @@
 package com.github.libretube.sheets
 
-import android.app.NotificationManager
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.dialogs.AddToPlaylistDialog
 import com.github.libretube.dialogs.DownloadDialog
 import com.github.libretube.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.BottomSheet
 
@@ -41,21 +37,13 @@ class VideoOptionsBottomSheet(
 
             )
         }
+
         /**
-         * Check whether the player is running by observing the notification
+         * Check whether the player is running and add queue options
          */
-        try {
-            val notificationManager =
-                context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                notificationManager.activeNotifications.forEach {
-                    if (it.id == PLAYER_NOTIFICATION_ID) {
-                        optionsList += context?.getString(R.string.add_to_queue)!!
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        if (PlayingQueue.isNotEmpty()) {
+            optionsList += context?.getString(R.string.play_next)!!
+            optionsList += context?.getString(R.string.add_to_queue)!!
         }
 
         setSimpleItems(optionsList) { which ->
@@ -89,8 +77,11 @@ class VideoOptionsBottomSheet(
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
+                context?.getString(R.string.play_next) -> {
+                    PlayingQueue.playNext(videoId)
+                }
                 context?.getString(R.string.add_to_queue) -> {
-                    Globals.playingQueue += videoId
+                    PlayingQueue.add(videoId)
                 }
             }
         }

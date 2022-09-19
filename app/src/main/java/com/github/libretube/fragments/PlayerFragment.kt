@@ -35,7 +35,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.libretube.Globals
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
 import com.github.libretube.adapters.ChaptersAdapter
@@ -67,12 +66,14 @@ import com.github.libretube.obj.Segment
 import com.github.libretube.obj.Segments
 import com.github.libretube.obj.Streams
 import com.github.libretube.services.BackgroundMode
+import com.github.libretube.services.DownloadService
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
@@ -210,7 +211,7 @@ class PlayerFragment : BaseFragment() {
         context?.hideKeyboard(view)
 
         // clear the playing queue
-        Globals.playingQueue.clear()
+        PlayingQueue.clear()
 
         setUserPrefs()
 
@@ -686,6 +687,9 @@ class PlayerFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         try {
+            // clear the playing queue
+            PlayingQueue.clear()
+
             saveWatchPosition()
             nowPlayingNotification.destroy()
             activity?.requestedOrientation =
@@ -695,6 +699,7 @@ class PlayerFragment : BaseFragment() {
                     ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -752,8 +757,9 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
-        Globals.playingQueue += videoId!!
         lifecycleScope.launchWhenCreated {
+            PlayingQueue.updateCurrent(videoId!!)
+
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
@@ -861,7 +867,7 @@ class PlayerFragment : BaseFragment() {
         var position: Long? = null
         Thread {
             try {
-                position = Database.watchPositionDao().findById(videoId!!).position
+                position = Database.watchPositionDao().findById(videoId!!)?.position
                 // position is almost the end of the video => don't seek, start from beginning
                 if (position!! > streams.duration!! * 1000 * 0.9) position = null
             } catch (e: Exception) {
@@ -875,7 +881,7 @@ class PlayerFragment : BaseFragment() {
     private fun playNextVideo() {
         if (nextStreamId == null) return
         // check whether there is a new video in the queue
-        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId!!)
+        val nextQueueVideo = PlayingQueue.getNext()
         if (nextQueueVideo != null) nextStreamId = nextQueueVideo
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
@@ -1023,7 +1029,7 @@ class PlayerFragment : BaseFragment() {
         if (response.duration > 0) {
             // download clicked
             binding.relPlayerDownload.setOnClickListener {
-                if (!Globals.IS_DOWNLOAD_RUNNING) {
+                if (!DownloadService.IS_DOWNLOAD_RUNNING) {
                     val newFragment = DownloadDialog(videoId!!)
                     newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
                 } else {
@@ -1105,7 +1111,7 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && Globals.playingQueue.indexOf(videoId!!) != 0
+            skipButtonsEnabled && PlayingQueue.hasPrev()
         ) {
             View.VISIBLE
         } else {
@@ -1114,8 +1120,7 @@ class PlayerFragment : BaseFragment() {
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            val index = Globals.playingQueue.indexOf(videoId!!) - 1
-            videoId = Globals.playingQueue[index]
+            videoId = PlayingQueue.getPrev()
             playVideo()
         }
 
