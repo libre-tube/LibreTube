@@ -68,7 +68,7 @@
     <string name="videoCount">%1$s vídeos</string>
     <string name="location">Localização</string>
     <string name="instance">Instância</string>
-    <string name="website">Sítio Web</string>
+    <string name="website">Site</string>
     <string name="comments">Comentários</string>
     <string name="noInternet">Conecte-se à Internet primeiro.</string>
     <string name="retry">Tente novamente</string>
@@ -280,4 +280,14 @@
     <string name="playerAudioQuality">Qualidade de áudio</string>
     <string name="best_quality">Melhor qualidade</string>
     <string name="worst_quality">Pior qualidade</string>
+    <string name="trending_layout">Layout alternativo de trending</string>
+    <string name="save_feed">Carregar feed em segundo plano</string>
+    <string name="save_feed_summary">Carregue o feed de assinatura em segundo plano e evite que ele seja atualizado automaticamente</string>
+    <string name="new_videos_badge">Indicador para novos vídeos</string>
+    <string name="new_videos_badge_summary">Mostre um selo com a quantidade de novos vídeos, se houver.</string>
+    <string name="backup_restore">Backup e Restauração</string>
+    <string name="preferences">Preferencias</string>
+    <string name="mobile_data">Dados móveis</string>
+    <string name="sb_skip_manual">Pular manualmente</string>
+    <string name="sb_skip_manual_summary">Não pular propaganda automaticamente, sempre avisar antes.</string>
 </resources>
