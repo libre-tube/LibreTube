@@ -325,4 +325,7 @@
     <string name="sb_skip_manual_summary">Non saltare i segmenti automaticamente, chiedi sempre prima.</string>
     <string name="background_channel_description">Mostra una notifica con i pulsanti per controllare il lettore audio.</string>
     <string name="download_channel_description">Mostra una notifica quando si scaricano i media.</string>
+    <string name="local_subscriptions">Iscrizioni locali</string>
+    <string name="preferences">Preferenze</string>
+    <string name="backup_customInstances">Istanze personalizzate</string>
 </resources>
