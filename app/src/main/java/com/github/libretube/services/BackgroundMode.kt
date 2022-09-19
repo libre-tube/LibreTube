@@ -162,6 +162,8 @@ class BackgroundMode : Service() {
     private fun playAudio(
         seekToPosition: Long
     ) {
+        PlayingQueue.updateCurrent(videoId)
+
         initializePlayer()
         setMediaItem()
 
@@ -247,7 +249,7 @@ class BackgroundMode : Service() {
      */
     private fun playNextVideo() {
         if (nextStreamId == null || nextStreamId == videoId) return
-        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId)
+        val nextQueueVideo = PlayingQueue.getNext()
         if (nextQueueVideo != null) nextStreamId = nextQueueVideo
 
         // play new video on background

@@ -20,12 +20,8 @@ class AutoPlayHelper(
         currentVideoId: String,
         relatedStreams: List<StreamItem>?
     ): String? {
-        return if (PlayingQueue.queue.last() != currentVideoId) {
-            val currentVideoIndex = PlayingQueue.queue.indexOf(currentVideoId)
-            PlayingQueue.queue[currentVideoIndex + 1]
-        } else if (playlistId == null) {
+        return if (playlistId == null) {
             getNextTrendingVideoId(
-                currentVideoId,
                 relatedStreams
             )
         } else {
@@ -39,21 +35,13 @@ class AutoPlayHelper(
      * get the id of the next related video
      */
     private fun getNextTrendingVideoId(
-        videoId: String,
         relatedStreams: List<StreamItem>?
     ): String? {
         // don't play a video if it got played before already
         if (relatedStreams == null || relatedStreams.isEmpty()) return null
         var index = 0
         var nextStreamId: String? = null
-        while (nextStreamId == null ||
-            (
-                PlayingQueue.queue.contains(nextStreamId) &&
-                    PlayingQueue.queue.indexOf(videoId) > PlayingQueue.queue.indexOf(
-                        nextStreamId
-                    )
-                )
-        ) {
+        while (nextStreamId == null || PlayingQueue.containsBefore(nextStreamId)) {
             nextStreamId = relatedStreams[index].url!!.toID()
             if (index + 1 < relatedStreams.size) {
                 index += 1
@@ -101,19 +89,5 @@ class AutoPlayHelper(
         }
         // return null when no nextPage is found
         return null
-    }
-
-    /**
-     * get the videoId of the next video in the playing queue
-     */
-    fun getNextPlayingQueueVideoId(
-        currentVideoId: String
-    ): String? {
-        return if (PlayingQueue.queue.last() != currentVideoId) {
-            val currentVideoIndex = PlayingQueue.queue.indexOf(currentVideoId)
-            PlayingQueue.queue[currentVideoIndex + 1]
-        } else {
-            null
-        }
     }
 }

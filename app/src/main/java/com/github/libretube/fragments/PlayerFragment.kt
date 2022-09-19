@@ -696,6 +696,7 @@ class PlayerFragment : BaseFragment() {
                     ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
                 }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -753,7 +754,7 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
-        PlayingQueue.add(videoId!!)
+        PlayingQueue.updateCurrent(videoId!!)
         lifecycleScope.launchWhenCreated {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
@@ -876,7 +877,7 @@ class PlayerFragment : BaseFragment() {
     private fun playNextVideo() {
         if (nextStreamId == null) return
         // check whether there is a new video in the queue
-        val nextQueueVideo = autoPlayHelper.getNextPlayingQueueVideoId(videoId!!)
+        val nextQueueVideo = PlayingQueue.getNext()
         if (nextQueueVideo != null) nextStreamId = nextQueueVideo
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
@@ -1106,7 +1107,7 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && PlayingQueue.queue.indexOf(videoId!!) != 0
+            skipButtonsEnabled && PlayingQueue.hasPrev()
         ) {
             View.VISIBLE
         } else {
@@ -1115,8 +1116,7 @@ class PlayerFragment : BaseFragment() {
         playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            val index = PlayingQueue.queue.indexOf(videoId!!) - 1
-            videoId = PlayingQueue.queue[index]
+            videoId = PlayingQueue.getPrev()
             playVideo()
         }
 
