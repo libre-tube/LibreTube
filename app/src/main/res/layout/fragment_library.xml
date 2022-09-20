@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.LibraryFragment">
+    tools:context=".ui.fragments.LibraryFragment">
 
     <RelativeLayout
         android:id="@+id/loginOrRegister"
@@ -32,7 +32,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <com.github.libretube.views.CustomSwipeToRefresh
+    <com.github.libretube.ui.views.CustomSwipeToRefresh
         android:id="@+id/playlist_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -113,7 +113,7 @@
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
-    </com.github.libretube.views.CustomSwipeToRefresh>
+    </com.github.libretube.ui.views.CustomSwipeToRefresh>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_playlist"

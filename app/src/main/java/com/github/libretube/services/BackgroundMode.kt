@@ -18,9 +18,9 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
-import com.github.libretube.obj.Segment
-import com.github.libretube.obj.Segments
-import com.github.libretube.obj.Streams
+import com.github.libretube.api.obj.Segment
+import com.github.libretube.api.obj.Segments
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -52,7 +52,7 @@ class BackgroundMode : Service() {
     /**
      * The response that gets when called the Api.
      */
-    private var streams: Streams? = null
+    private var streams: com.github.libretube.api.obj.Streams? = null
 
     /**
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
@@ -68,7 +68,7 @@ class BackgroundMode : Service() {
     /**
      * SponsorBlock Segment data
      */
-    private var segmentData: Segments? = null
+    private var segmentData: com.github.libretube.api.obj.Segments? = null
 
     /**
      * [Notification] for the player
@@ -307,7 +307,7 @@ class BackgroundMode : Service() {
 
         if (segmentData == null || segmentData!!.segments.isEmpty()) return
 
-        segmentData!!.segments.forEach { segment: Segment ->
+        segmentData!!.segments.forEach { segment: com.github.libretube.api.obj.Segment ->
             val segmentStart = (segment.segment!![0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition

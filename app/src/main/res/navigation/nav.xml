@@ -7,47 +7,47 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.github.libretube.fragments.HomeFragment"
+        android:name="com.github.libretube.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/subscriptionsFragment"
-        android:name="com.github.libretube.fragments.SubscriptionsFragment"
+        android:name="com.github.libretube.ui.fragments.SubscriptionsFragment"
         android:label="fragment_subscriptions"
         tools:layout="@layout/fragment_subscriptions" />
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.github.libretube.fragments.LibraryFragment"
+        android:name="com.github.libretube.ui.fragments.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.github.libretube.fragments.SearchFragment"
+        android:name="com.github.libretube.ui.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.github.libretube.fragments.SearchResultFragment"
+        android:name="com.github.libretube.ui.fragments.SearchResultFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search_result" />
     <fragment
         android:id="@+id/channelFragment"
-        android:name="com.github.libretube.fragments.ChannelFragment"
+        android:name="com.github.libretube.ui.fragments.ChannelFragment"
         android:label="channel"
         tools:layout="@layout/fragment_channel" />
     <fragment
         android:id="@+id/playlistFragment"
-        android:name="com.github.libretube.fragments.PlaylistFragment"
+        android:name="com.github.libretube.ui.fragments.PlaylistFragment"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist" />
     <fragment
         android:id="@+id/watchHistoryFragment"
-        android:name="com.github.libretube.fragments.WatchHistoryFragment"
+        android:name="com.github.libretube.ui.fragments.WatchHistoryFragment"
         android:label="@string/watch_history"
         tools:layout="@layout/fragment_watch_history" />
     <fragment
         android:id="@+id/downloadsFragment"
-        android:name="com.github.libretube.fragments.DownloadsFragment"
+        android:name="com.github.libretube.ui.fragments.DownloadsFragment"
         android:label="@string/downloads"
         tools:layout="@layout/fragment_downloads" />
 </navigation>

@@ -5,7 +5,7 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
-import com.github.libretube.obj.Subscribe
+import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ object SubscriptionHelper {
                 try {
                     RetrofitInstance.authApi.subscribe(
                         PreferenceHelper.getToken(),
-                        Subscribe(channelId)
+                        com.github.libretube.api.obj.Subscribe(channelId)
                     )
                 } catch (e: Exception) {
                     Log.e(TAG(), e.toString())
@@ -40,7 +40,7 @@ object SubscriptionHelper {
                 try {
                     RetrofitInstance.authApi.unsubscribe(
                         PreferenceHelper.getToken(),
-                        Subscribe(channelId)
+                        com.github.libretube.api.obj.Subscribe(channelId)
                     )
                 } catch (e: Exception) {
                     Log.e(TAG(), e.toString())

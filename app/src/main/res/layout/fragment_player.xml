@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.libretube.views.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.github.libretube.ui.views.SingleViewTouchableMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playerMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/player_scene"
-    tools:context=".fragments.PlayerFragment">
+    tools:context=".ui.fragments.PlayerFragment">
 
     <ScrollView
         android:id="@+id/player_scrollView"
@@ -361,7 +361,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.libretube.views.CustomExoPlayerView
+    <com.github.libretube.ui.views.CustomExoPlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -371,7 +371,7 @@
         app:layout_constraintTop_toTopOf="@id/main_container"
         app:show_buffering="when_playing">
 
-        <com.github.libretube.views.DoubleTapOverlay
+        <com.github.libretube.ui.views.DoubleTapOverlay
             android:id="@+id/doubleTapOverlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -415,7 +415,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-    </com.github.libretube.views.CustomExoPlayerView>
+    </com.github.libretube.ui.views.CustomExoPlayerView>
 
     <ImageView
         android:id="@+id/close_imageView"
@@ -457,4 +457,4 @@
         app:layout_constraintStart_toEndOf="@+id/player"
         app:layout_constraintTop_toTopOf="@+id/play_imageView" />
 
-</com.github.libretube.views.SingleViewTouchableMotionLayout>
+</com.github.libretube.ui.views.SingleViewTouchableMotionLayout>

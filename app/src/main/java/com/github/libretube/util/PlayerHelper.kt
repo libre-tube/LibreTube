@@ -3,12 +3,12 @@ package com.github.libretube.util
 import android.content.Context
 import android.view.accessibility.CaptioningManager
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.obj.PipedStream
+import com.github.libretube.api.obj.PipedStream
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 
 object PlayerHelper {
     // get the audio source following the users preferences
-    fun getAudioSource(context: Context, audios: List<PipedStream>): String {
+    fun getAudioSource(context: Context, audios: List<com.github.libretube.api.obj.PipedStream>): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
         val audioQuality = if (
             NetworkHelper.isNetworkMobile(context)
@@ -34,7 +34,7 @@ object PlayerHelper {
     }
 
     // get the best bit rate from audio streams
-    private fun getMostBitRate(audios: List<PipedStream>): String {
+    private fun getMostBitRate(audios: List<com.github.libretube.api.obj.PipedStream>): String {
         var bitrate = 0
         var audioUrl = ""
         audios.forEach {
@@ -47,7 +47,7 @@ object PlayerHelper {
     }
 
     // get the best bit rate from audio streams
-    private fun getLeastBitRate(audios: List<PipedStream>): String {
+    private fun getLeastBitRate(audios: List<com.github.libretube.api.obj.PipedStream>): String {
         var bitrate = 1000000000
         var audioUrl = ""
         audios.forEach {

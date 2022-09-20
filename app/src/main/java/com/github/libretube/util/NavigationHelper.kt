@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.github.libretube.R
-import com.github.libretube.activities.MainActivity
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.toID
-import com.github.libretube.fragments.PlayerFragment
+import com.github.libretube.ui.fragments.PlayerFragment
 
 object NavigationHelper {
     fun navigateChannel(

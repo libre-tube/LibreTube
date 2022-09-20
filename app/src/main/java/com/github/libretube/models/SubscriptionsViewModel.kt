@@ -7,8 +7,8 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.obj.StreamItem
-import com.github.libretube.obj.Subscription
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,11 +19,11 @@ class SubscriptionsViewModel : ViewModel() {
         value = false
     }
 
-    var videoFeed = MutableLiveData<List<StreamItem>?>().apply {
+    var videoFeed = MutableLiveData<List<com.github.libretube.api.obj.StreamItem>?>().apply {
         value = null
     }
 
-    var subscriptions = MutableLiveData<List<Subscription>?>().apply {
+    var subscriptions = MutableLiveData<List<com.github.libretube.api.obj.Subscription>?>().apply {
         value = null
     }
 
