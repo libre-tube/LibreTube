@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.await
+import com.github.libretube.ui.adapters.WatchHistoryAdapter
 
 class WatchHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentWatchHistoryBinding

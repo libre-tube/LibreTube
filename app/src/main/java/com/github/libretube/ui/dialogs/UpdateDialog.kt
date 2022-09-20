@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
-import com.github.libretube.services.UpdateService
 import com.github.libretube.obj.update.UpdateInfo
+import com.github.libretube.services.UpdateService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class UpdateDialog(

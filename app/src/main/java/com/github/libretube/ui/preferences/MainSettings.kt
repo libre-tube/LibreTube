@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.ui.dialogs.UpdateDialog
 import com.github.libretube.extensions.getStyledSnackBar
-import com.github.libretube.util.NetworkHelper
+import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.dialogs.UpdateDialog
 import com.github.libretube.ui.views.MaterialPreferenceFragment
+import com.github.libretube.util.NetworkHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

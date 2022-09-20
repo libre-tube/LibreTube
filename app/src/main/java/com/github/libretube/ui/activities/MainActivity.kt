@@ -25,14 +25,14 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
-import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.toID
-import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.SearchViewModel
 import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.services.ClosingService
+import com.github.libretube.ui.dialogs.ErrorDialog
+import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.PreferenceHelper

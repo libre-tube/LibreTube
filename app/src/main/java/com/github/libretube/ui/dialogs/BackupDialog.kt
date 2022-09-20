@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.ui.adapters.BackupOptionsAdapter
 import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.await
 import com.github.libretube.obj.BackupFile
+import com.github.libretube.ui.adapters.BackupOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class BackupDialog(

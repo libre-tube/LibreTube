@@ -5,10 +5,10 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.views.MaterialPreferenceFragment
+import com.github.libretube.util.PreferenceHelper
 import java.util.*
 
 class PlayerSettings : MaterialPreferenceFragment() {

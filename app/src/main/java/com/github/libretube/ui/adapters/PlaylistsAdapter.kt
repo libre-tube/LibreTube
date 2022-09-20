@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.databinding.PlaylistsRowBinding
-import com.github.libretube.extensions.TAG
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.Playlists
+import com.github.libretube.databinding.PlaylistsRowBinding
+import com.github.libretube.extensions.TAG
 import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper

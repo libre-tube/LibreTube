@@ -12,19 +12,19 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.CustomInstance
+import com.github.libretube.extensions.await
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
-import com.github.libretube.extensions.await
+import com.github.libretube.ui.views.MaterialPreferenceFragment
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.ui.views.MaterialPreferenceFragment
 
 class InstanceSettings : MaterialPreferenceFragment() {
 

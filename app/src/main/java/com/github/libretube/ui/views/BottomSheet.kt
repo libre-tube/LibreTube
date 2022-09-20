@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.ui.adapters.BottomSheetAdapter
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.ui.adapters.BottomSheetAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 open class BottomSheet : BottomSheetDialogFragment() {

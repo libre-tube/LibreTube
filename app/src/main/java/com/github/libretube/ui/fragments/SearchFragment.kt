@@ -10,9 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.adapters.SearchHistoryAdapter
-import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
@@ -20,6 +17,9 @@ import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.models.SearchViewModel
+import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.adapters.SearchHistoryAdapter
+import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
 import retrofit2.HttpException
 import java.io.IOException
 

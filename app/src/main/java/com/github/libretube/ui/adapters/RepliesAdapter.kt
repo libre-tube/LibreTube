@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.api.obj.Comment
 import com.github.libretube.databinding.RepliesRowBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.api.obj.Comment
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 

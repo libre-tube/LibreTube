@@ -8,10 +8,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Playlists
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.fragments.LibraryFragment
-import com.github.libretube.api.obj.Playlists
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -52,7 +52,8 @@ class CreatePlaylistDialog : DialogFragment() {
     private fun createPlaylist(name: String) {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.authApi.createPlaylist(token,
+                RetrofitInstance.authApi.createPlaylist(
+                    token,
                     com.github.libretube.api.obj.Playlists(name = name)
                 )
             } catch (e: IOException) {

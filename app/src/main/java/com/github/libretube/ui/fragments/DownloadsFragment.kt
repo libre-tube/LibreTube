@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.extensions.BaseFragment
+import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.util.DownloadHelper
 
 class DownloadsFragment : BaseFragment() {

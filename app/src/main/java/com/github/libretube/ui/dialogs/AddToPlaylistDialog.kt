@@ -11,11 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.models.PlaylistViewModel
-import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -92,7 +92,8 @@ class AddToPlaylistDialog : DialogFragment() {
         fun run() {
             lifecycleScope.launchWhenCreated {
                 val response = try {
-                    RetrofitInstance.authApi.addToPlaylist(token,
+                    RetrofitInstance.authApi.addToPlaylist(
+                        token,
                         com.github.libretube.api.obj.PlaylistId(playlistId, videoId)
                     )
                 } catch (e: IOException) {

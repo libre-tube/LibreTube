@@ -3,9 +3,9 @@ package com.github.libretube.ui.preferences
 import android.os.Bundle
 import androidx.preference.Preference
 import com.github.libretube.R
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

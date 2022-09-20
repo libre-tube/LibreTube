@@ -36,10 +36,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
-import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.adapters.ChaptersAdapter
-import com.github.libretube.ui.adapters.CommentsAdapter
-import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
@@ -50,9 +46,6 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.ui.dialogs.AddToPlaylistDialog
-import com.github.libretube.ui.dialogs.DownloadDialog
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
@@ -63,6 +56,13 @@ import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
+import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.adapters.ChaptersAdapter
+import com.github.libretube.ui.adapters.CommentsAdapter
+import com.github.libretube.ui.adapters.TrendingAdapter
+import com.github.libretube.ui.dialogs.AddToPlaylistDialog
+import com.github.libretube.ui.dialogs.DownloadDialog
+import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper

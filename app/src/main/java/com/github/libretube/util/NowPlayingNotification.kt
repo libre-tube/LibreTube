@@ -9,9 +9,9 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector

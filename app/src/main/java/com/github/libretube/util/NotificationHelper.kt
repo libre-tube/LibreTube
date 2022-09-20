@@ -13,13 +13,13 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.github.libretube.R
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.NOTIFICATION_WORK_NAME
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.activities.MainActivity
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit

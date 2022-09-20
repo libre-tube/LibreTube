@@ -9,8 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchResultBinding
@@ -19,6 +17,8 @@ import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.util.PreferenceHelper
 import retrofit2.HttpException
 import java.io.IOException

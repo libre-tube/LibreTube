@@ -6,14 +6,14 @@ import android.util.Log
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.DialogTextPreferenceBinding
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.api.obj.PlaylistId
+import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.ui.views.BottomSheet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -114,7 +114,8 @@ class PlaylistOptionsBottomSheet(
     private fun importPlaylist(token: String, playlistId: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = try {
-                RetrofitInstance.authApi.importPlaylist(token,
+                RetrofitInstance.authApi.importPlaylist(
+                    token,
                     com.github.libretube.api.obj.PlaylistId(playlistId)
                 )
             } catch (e: IOException) {

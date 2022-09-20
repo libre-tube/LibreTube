@@ -1,11 +1,11 @@
 package com.github.libretube.api
 
 import android.util.Log
+import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
-import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -3,9 +3,9 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.LegacySubscriptionChannelBinding
 import com.github.libretube.extensions.toID
-import com.github.libretube.api.obj.Subscription
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 

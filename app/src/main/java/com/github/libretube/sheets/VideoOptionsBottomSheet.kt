@@ -7,10 +7,10 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.ui.views.BottomSheet
 
 /**
  * Dialog with different options for a selected video.

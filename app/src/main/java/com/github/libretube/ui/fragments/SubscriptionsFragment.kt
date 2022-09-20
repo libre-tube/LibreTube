@@ -10,15 +10,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
-import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
-import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.models.SubscriptionsViewModel
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
+import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
+import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.ui.views.BottomSheet
+import com.github.libretube.util.PreferenceHelper
 
 class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding

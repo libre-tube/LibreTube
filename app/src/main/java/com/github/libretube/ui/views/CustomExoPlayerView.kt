@@ -10,7 +10,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.PreferenceRanges
 import com.github.libretube.databinding.DialogSliderBinding
@@ -20,6 +19,7 @@ import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.interfaces.DoubleTapInterface
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -174,9 +174,9 @@ internal class CustomExoPlayerView(
                         context.getString(R.string.playback_speed),
                         R.drawable.ic_speed,
                         "${
-                            player?.playbackParameters?.speed
-                                .toString()
-                                .replace(".0", "")
+                        player?.playbackParameters?.speed
+                            .toString()
+                            .replace(".0", "")
                         }x"
                     )
                 )

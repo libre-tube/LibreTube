@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.extensions.toID
-import com.github.libretube.api.obj.Subscription
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
@@ -19,7 +19,7 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.gith
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            SubscriptionChannelViewHolder {
+        SubscriptionChannelViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ChannelSubscriptionRowBinding.inflate(layoutInflater, parent, false)
         return SubscriptionChannelViewHolder(binding)
