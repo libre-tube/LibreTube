@@ -328,4 +328,5 @@
     <string name="local_subscriptions">Iscrizioni locali</string>
     <string name="preferences">Preferenze</string>
     <string name="backup_customInstances">Istanze personalizzate</string>
+    <string name="play_next">Riproduci il successivo</string>
 </resources>
