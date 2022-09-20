@@ -35,8 +35,8 @@ open class MaterialPreferenceFragment : PreferenceFragmentCompat() {
                         preference.value = newValue
                         preference.callChangeListener(newValue)
 
-                        // dismiss the dialog
-                        dialog.dismiss()
+                        // invoke the on change listeners
+                        preference.callChangeListener(preference.value)
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()
@@ -55,6 +55,9 @@ open class MaterialPreferenceFragment : PreferenceFragmentCompat() {
                     .setPositiveButton(R.string.okay) { _, _ ->
                         // save the new value
                         preference.text = binding.input.text.toString()
+
+                        // invoke the on change listeners
+                        preference.callChangeListener(preference.text)
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()
