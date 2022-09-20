@@ -333,4 +333,7 @@
     <string name="background_channel_name">Mode Latar Belakang</string>
     <string name="background_channel_description">Menampilkan sebuah notifikasi dengan tombol untuk mengatur pemain audio.</string>
     <string name="push_channel_description">Menampilkan sebuah notifikasi ketika saluran baru telah tersedia.</string>
+    <string name="save_feed">Muat umpan di latar belakang</string>
+    <string name="save_feed_summary">Muat umpan langganan di latar belakang dan cegah dari memuat secara otomatis.</string>
+    <string name="play_next">Main berikutnya</string>
 </resources>

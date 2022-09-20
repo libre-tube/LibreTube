@@ -335,4 +335,5 @@
     <string name="backup_customInstances">Vlastní instance</string>
     <string name="save_feed">Načítat zdroj v pozadí</string>
     <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho automatickému obnovování.</string>
+    <string name="play_next">Přehrát jako další</string>
 </resources>
