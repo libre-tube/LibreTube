@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_selector"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="0dp"
+    tools:gravity="start|center_vertical">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkbox"
+        style="@style/Widget.Material3.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center_vertical" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:singleLine="true"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="18sp"
+        tools:text="Item" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/drag_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:clickable="false"
+        android:focusable="false"
+        android:padding="16dp"
+        android:tintMode="src_in"
+        app:srcCompat="@drawable/ic_drag"
+        app:tint="?attr/colorControlNormal"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
