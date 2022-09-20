@@ -9,10 +9,9 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
-import com.github.libretube.activities.MainActivity
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.obj.Streams
+import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
@@ -22,7 +21,7 @@ class NowPlayingNotification(
     private val context: Context,
     private val player: ExoPlayer
 ) {
-    private var streams: Streams? = null
+    private var streams: com.github.libretube.api.obj.Streams? = null
 
     /**
      * The [MediaSessionCompat] for the [streams].
@@ -122,7 +121,7 @@ class NowPlayingNotification(
      * Updates or creates the [playerNotification]
      */
     fun updatePlayerNotification(
-        streams: Streams
+        streams: com.github.libretube.api.obj.Streams
     ) {
         this.streams = streams
         if (playerNotification == null) {

@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.dialogs.AddToPlaylistDialog
-import com.github.libretube.dialogs.DownloadDialog
-import com.github.libretube.dialogs.ShareDialog
+import com.github.libretube.ui.dialogs.AddToPlaylistDialog
+import com.github.libretube.ui.dialogs.DownloadDialog
+import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.views.BottomSheet
 
 /**
  * Dialog with different options for a selected video.

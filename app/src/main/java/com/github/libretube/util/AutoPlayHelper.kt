@@ -1,8 +1,8 @@
 package com.github.libretube.util
 
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.toID
-import com.github.libretube.obj.StreamItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,7 +18,7 @@ class AutoPlayHelper(
      */
     suspend fun getNextVideoId(
         currentVideoId: String,
-        relatedStreams: List<StreamItem>?
+        relatedStreams: List<com.github.libretube.api.obj.StreamItem>?
     ): String? {
         return if (playlistId == null) {
             getNextTrendingVideoId(
@@ -35,7 +35,7 @@ class AutoPlayHelper(
      * get the id of the next related video
      */
     private fun getNextTrendingVideoId(
-        relatedStreams: List<StreamItem>?
+        relatedStreams: List<com.github.libretube.api.obj.StreamItem>?
     ): String? {
         // don't play a video if it got played before already
         if (relatedStreams == null || relatedStreams.isEmpty()) return null

@@ -22,27 +22,27 @@
         tools:targetApi="n">
 
         <activity
-            android:name=".activities.NoInternetActivity"
+            android:name=".ui.activities.NoInternetActivity"
             android:label="@string/noInternet" />
 
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".ui.activities.SettingsActivity"
             android:label="@string/settings" />
 
         <activity
-            android:name=".activities.AboutActivity"
+            android:name=".ui.activities.AboutActivity"
             android:label="@string/settings" />
 
         <activity
-            android:name=".activities.CommunityActivity"
+            android:name=".ui.activities.CommunityActivity"
             android:label="@string/settings" />
 
         <activity
-            android:name=".activities.OfflinePlayerActivity"
+            android:name=".ui.activities.OfflinePlayerActivity"
             android:label="@string/player" />
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -66,7 +66,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_gradient_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,7 +84,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_fire_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,7 +102,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_flame_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -120,7 +120,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_shaped_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -138,7 +138,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_torch_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -156,7 +156,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_legacy_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -174,7 +174,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_bird_round"
             android:supportsPictureInPicture="true"
-            android:targetActivity=".activities.MainActivity"
+            android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -183,7 +183,7 @@
         </activity-alias>
 
         <activity
-            android:name=".activities.RouterActivity"
+            android:name=".ui.activities.RouterActivity"
             android:exported="true"
             android:launchMode="singleInstance">
             <intent-filter>
