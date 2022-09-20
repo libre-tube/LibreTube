@@ -13,12 +13,9 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -394,24 +391,34 @@ class MainActivity : BaseActivity() {
             .replace(R.id.container, frag)
             .commitNow()
         Handler(Looper.getMainLooper()).postDelayed({
-            val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-            motionLayout.transitionToEnd()
-            motionLayout.transitionToStart()
+            supportFragmentManager.fragments.forEach { fragment ->
+                (fragment as? PlayerFragment)
+                    ?.binding?.playerMotionLayout?.apply {
+                        transitionToEnd()
+                        transitionToStart()
+                    }
+            }
         }, 100)
     }
 
     private fun minimizePlayer() {
         binding.mainMotionLayout.transitionToEnd()
-        findViewById<ConstraintLayout>(R.id.main_container).isClickable = false
-        val motionLayout = findViewById<MotionLayout>(R.id.playerMotionLayout)
-        // set the animation duration
-        motionLayout.setTransitionDuration(250)
-        motionLayout.transitionToEnd()
-        with(motionLayout) {
-            getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-            enableTransition(R.id.yt_transition, true)
+        supportFragmentManager.fragments.forEach { fragment ->
+            (fragment as? PlayerFragment)?.binding?.apply {
+                mainContainer.isClickable = false
+                linLayout.visibility = View.VISIBLE
+            }
         }
-        findViewById<LinearLayout>(R.id.linLayout).visibility = View.VISIBLE
+        supportFragmentManager.fragments.forEach { fragment ->
+            (fragment as? PlayerFragment)?.binding?.playerMotionLayout?.apply {
+                // set the animation duration
+                setTransitionDuration(250)
+                transitionToEnd()
+                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                enableTransition(R.id.yt_transition, true)
+            }
+        }
+
         val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
         playerViewModel.isFullscreen.value = false
         requestedOrientation = if (autoRotationEnabled) {
