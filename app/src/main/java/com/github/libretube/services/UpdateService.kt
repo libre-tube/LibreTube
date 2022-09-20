@@ -58,12 +58,15 @@ class UpdateService : Service() {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             if (downloadId == id) {
                 // install the apk after download finished
-                val installIntent = Intent(Intent.ACTION_VIEW)
-                installIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                installIntent.setDataAndType(
-                    Uri.fromFile(file),
-                    downloadManager.getMimeTypeForDownloadedFile(downloadId)
-                )
+                val installIntent = Intent(Intent.ACTION_VIEW).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    setDataAndType(
+                        Uri.fromFile(file),
+                        downloadManager.getMimeTypeForDownloadedFile(downloadId)
+                    )
+                }
+
                 try {
                     startActivity(installIntent)
                 } catch (e: Exception) {
