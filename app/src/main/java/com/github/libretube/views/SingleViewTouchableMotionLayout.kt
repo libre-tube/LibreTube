@@ -10,12 +10,6 @@ import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.github.libretube.R
 
-/**
- *
- * Created by Arman Chatikyan on 05 Sep 2018
- *
- */
-
 class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeSet? = null) :
     MotionLayout(context, attributeSet) {
 

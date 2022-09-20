@@ -3,7 +3,6 @@ package com.github.libretube.util
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.activities.MainActivity
@@ -21,14 +20,14 @@ object NavigationHelper {
             val bundle = bundleOf(IntentData.channelId to channelId)
             activity.navController.navigate(R.id.channelFragment, bundle)
             try {
-                val mainMotionLayout =
-                    activity.findViewById<MotionLayout>(R.id.mainMotionLayout)
-                if (mainMotionLayout.progress == 0.toFloat()) {
-                    mainMotionLayout.transitionToEnd()
-                    activity.findViewById<MotionLayout>(R.id.playerMotionLayout)
-                        .transitionToEnd()
+                if (activity.binding.mainMotionLayout.progress == 0.toFloat()) {
+                    activity.binding.mainMotionLayout.transitionToEnd()
+                    activity.supportFragmentManager.fragments.forEach {
+                        (it as PlayerFragment?)?.binding?.playerMotionLayout?.transitionToEnd()
+                    }
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

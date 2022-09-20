@@ -107,7 +107,7 @@ import kotlin.math.abs
 
 class PlayerFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentPlayerBinding
+    lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
     private val viewModel: PlayerViewModel by activityViewModels()
