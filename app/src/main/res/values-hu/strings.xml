@@ -323,4 +323,8 @@
     <string name="renamePlaylist">Lejátszási lista átnevezése</string>
     <string name="local_subscriptions">Helyi feliratkozások</string>
     <string name="preferences">Beállítások</string>
+    <string name="backup_customInstances">Egyéni példányok</string>
+    <string name="play_next">Lejátszás következőként</string>
+    <string name="download_channel_name">Letöltő szolgáltatás</string>
+    <string name="background_channel_name">Háttér mód</string>
 </resources>
