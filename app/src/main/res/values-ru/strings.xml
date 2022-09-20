@@ -336,4 +336,6 @@
     <string name="save_feed">Загружать подписки в фоне</string>
     <string name="save_feed_summary">Обновлять страницу \"Подписки\" в фоне вместо принудительного полного обновления.</string>
     <string name="play_next">Проиграть следующий</string>
+    <string name="navigation_bar">Панель навигации</string>
+    <string name="select_at_least_one">Выберите как минимум один</string>
 </resources>
