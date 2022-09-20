@@ -63,7 +63,6 @@ class NavBarOptionsDialog : DialogFragment() {
             .setTitle(R.string.navigation_bar)
             .setView(binding.root)
             .setPositiveButton(R.string.okay) { _, _ ->
-                Log.e("options", adapter.items.toString())
                 NavBarHelper.setNavBarItems(adapter.items)
             }
             .setNegativeButton(R.string.cancel, null)

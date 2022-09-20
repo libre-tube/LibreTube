@@ -33,12 +33,12 @@ import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.SearchViewModel
 import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.services.ClosingService
+import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
-import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : BaseActivity() {
 
@@ -93,29 +93,13 @@ class MainActivity : BaseActivity() {
         window.navigationBarColor = color
 
         // save start tab fragment id
-        startFragmentId =
-            when (PreferenceHelper.getString(PreferenceKeys.DEFAULT_TAB, "home")) {
-                "home" -> R.id.homeFragment
-                "subscriptions" -> R.id.subscriptionsFragment
-                "library" -> R.id.libraryFragment
-                else -> R.id.homeFragment
-            }
+        startFragmentId = NavBarHelper.applyNavBarStyle(binding.bottomNav)
 
         // set default tab as start fragment
         navController.graph.setStartDestination(startFragmentId)
 
         // navigate to the default fragment
         navController.navigate(startFragmentId)
-
-        val labelVisibilityMode = when (
-            PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "always")
-        ) {
-            "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
-            "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED
-            "never" -> NavigationBarView.LABEL_VISIBILITY_UNLABELED
-            else -> NavigationBarView.LABEL_VISIBILITY_AUTO
-        }
-        binding.bottomNav.labelVisibilityMode = labelVisibilityMode
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
