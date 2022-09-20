@@ -1,19 +1,33 @@
 package com.github.libretube.util
 
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.navBarItems
-import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.NavBarItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 object NavBarHelper {
     val preferenceKey = "nav_bar_items"
+
+    val defaultNavBarItems = listOf(
+        NavBarItem(
+            R.id.homeFragment,
+            R.string.startpage
+        ),
+        NavBarItem(
+            R.id.subscriptionsFragment,
+            R.string.subscriptions
+        ),
+        NavBarItem(
+            R.id.libraryFragment,
+            R.string.library
+        )
+    )
+
     val mapper = ObjectMapper()
 
     fun getNavBarItems(): List<NavBarItem> {
@@ -27,7 +41,7 @@ object NavBarHelper {
                 type
             )
         } catch (e: Exception) {
-            return navBarItems
+            return defaultNavBarItems
         }
     }
 

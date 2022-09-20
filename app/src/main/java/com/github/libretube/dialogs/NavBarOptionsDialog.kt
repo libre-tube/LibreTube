@@ -2,7 +2,6 @@ package com.github.libretube.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,6 +63,8 @@ class NavBarOptionsDialog : DialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.okay) { _, _ ->
                 NavBarHelper.setNavBarItems(adapter.items)
+                RequireRestartDialog()
+                    .show(requireParentFragment().childFragmentManager, null)
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
