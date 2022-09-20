@@ -20,6 +20,7 @@ object PreferenceKeys {
     const val BREAK_REMINDER_TOGGLE = "break_reminder_toggle"
     const val BREAK_REMINDER = "break_reminder"
     const val SAVE_FEED = "save_feed"
+    const val NAVBAR_ITEMS = "nav_bar_items"
 
     /**
      * Appearance
@@ -30,7 +31,6 @@ object PreferenceKeys {
     const val GRID_COLUMNS = "grid"
     const val DEFAULT_TAB = "default_tab"
     const val LABEL_VISIBILITY = "label_visibility"
-    const val HIDE_TRENDING_PAGE = "hide_trending_page"
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"

@@ -3,10 +3,12 @@ package com.github.libretube.preferences
 import android.os.Bundle
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.activities.SettingsActivity
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.dialogs.NavBarOptionsDialog
 import com.github.libretube.dialogs.RequireRestartDialog
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.views.MaterialPreferenceFragment
@@ -33,10 +35,12 @@ class GeneralSettings : MaterialPreferenceFragment() {
             true
         }
 
-        val hideTrending = findPreference<SwitchPreferenceCompat>(PreferenceKeys.HIDE_TRENDING_PAGE)
-        hideTrending?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+        val navBarOptions = findPreference<Preference>(PreferenceKeys.NAVBAR_ITEMS)
+        navBarOptions?.setOnPreferenceClickListener {
+            NavBarOptionsDialog().show(
+                childFragmentManager,
+                null
+            )
             true
         }
 
