@@ -57,13 +57,9 @@ jobs:
       - name: Upload to Archive
         continue-on-error: true
         run: |
-          git clone https://github.com/LibreTubeAlpha/Archive archive
-          rm -rf archive/*.apk
-          mv app/build/outputs/apk/debug/*.apk archive/
-          cd archive
-          git add -f *
-          git commit -m "WORKFLOW: ALPHA BUILDS"
-          git push -u
+          mv .github/uploader.py .
+          echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
+          python uploader.py
       
       - name: Telegram Bot
         continue-on-error: true
@@ -72,7 +68,8 @@ jobs:
           curl https://libre-tube.github.io/images/LibreAlpha.png --output alpha.png
           curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/exec --output bot-api
           chmod 755 ./bot-api
-          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" > tgconfig.py
+          mv ../tgconfig.py .
+          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
           echo "TG_POST_ID = '${{ secrets.TG_POST_ID }}'" >> tgconfig.py
           echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
