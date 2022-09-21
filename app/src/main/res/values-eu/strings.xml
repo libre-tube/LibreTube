@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cancel">Ezeztatu</string>
+    <string name="cancel">Utzi</string>
     <string name="startpage">Hasiera</string>
     <string name="subscriptions">Harpidetzak</string>
     <string name="library">Liburutegia</string>
@@ -44,7 +44,7 @@
     <string name="grid">Lauki-sare zutabea</string>
     <string name="emptyList">Ezer hemen.</string>
     <string name="deletePlaylist">Ezabatu erreprodukzio zerrenda</string>
-    <string name="areYouSure">Erreprodukzio zerrenda ezabatu\?</string>
+    <string name="areYouSure">Erreprodukzio zerrenda ezabatu nahi duzu\?</string>
     <string name="playlistCreated">Erreprodukzio zerrenda sortua.</string>
     <string name="playlistName">Erreprodukzio zerrendaren izena</string>
     <string name="addToPlaylist">Gehitu erreprodukzio zerrendara</string>
@@ -96,14 +96,14 @@
     <string name="disabled">Itzalita</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
-    <string name="playOnBackground">Abiarazi atzeko planoan</string>
+    <string name="playOnBackground">Erreproduzitu atzeko planoan</string>
     <string name="update_available">%1$s bertsioa eskuragarri dago</string>
     <string name="update_available_text">GitHub-era joan deskargatzeko\?</string>
     <string name="category_outro">Amaierako txartelak eta kredituak</string>
     <string name="video_format">Bideo formatua</string>
     <string name="video_format_summary">Audioa eta bideoa deskargatzen badira, fitxategi bihurtzea.</string>
     <string name="download_directory">Deskargatu hona</string>
-    <string name="download_directory_summary">Deskargatutako multimedia gordetzen den lekua</string>
+    <string name="download_directory_summary">Deskargatutako multimedia gordetzen den lekua.</string>
     <string name="app_uptodate">Azken bertsioa da hau.</string>
     <string name="no_update_available">Azken bertsioa erabiltzen ari zara.</string>
     <string name="advanced">Aurreratua</string>
@@ -131,9 +131,9 @@
     <string name="unsubscribe">Kendu harpidetza</string>
     <string name="loggedout">Saioa itxita.</string>
     <string name="empty">Erabiltzaile izena eta pasahitza sartu behar dituzu.</string>
-    <string name="createPlaylist">Erreprodukzio zerrenda sortu</string>
+    <string name="createPlaylist">Sortu erreprodukzio zerrenda</string>
     <string name="choose_filter">Hautatu bilaketa filtroa</string>
-    <string name="emptyPlaylistName">Erreprodukzio zerrendak ezin du hutsik egon</string>
+    <string name="emptyPlaylistName">Erreprodukzio zerrendaren izenak ezin du hutsik egon</string>
     <string name="fail">Akatsa :(</string>
     <string name="systemLanguage">Sistema</string>
     <string name="retry">Saiatu berriro</string>
@@ -142,9 +142,9 @@
     <string name="search_history">Bilaketen historia</string>
     <string name="playlists">Erreprodukzio zerrendak</string>
     <string name="category_sponsor">Babeslea</string>
-    <string name="segment_skipped">Alde batera utzitako zatiak</string>
+    <string name="segment_skipped">Saltatutako zatiak</string>
     <string name="sponsorblock_state">Piztuta</string>
-    <string name="category_segments">Segmentuak</string>
+    <string name="category_segments">Zatiak</string>
     <string name="downloads">Deskargak</string>
     <string name="app_behavior">Portaera</string>
     <string name="appearance">Itxura</string>
@@ -153,7 +153,7 @@
     <string name="donate">Dohaintza</string>
     <string name="update_summary">Klik egin aplikazioa eguneratuta dagoen jakiteko.</string>
     <string name="live">Zuzenean</string>
-    <string name="playback_speed">Erreprodukzio-abiadura</string>
+    <string name="playback_speed">Erreprodukzio abiadura</string>
     <string name="authors">Egileak</string>
     <string name="internal_storage">Barne biltegiratzea</string>
     <string name="customInstance_summary">Gehitu…</string>
@@ -172,7 +172,7 @@
     <string name="hide_chapters">Ezkutatu kapituluak</string>
     <string name="category_music_offtopic">Musika: Musikarik gabeko atala</string>
     <string name="category_preview">Aurrebista</string>
-    <string name="category_preview_description">Serie honetan edo etorkizunean agertuko dena erakusten duten segmentuetarako, baina ez dute informazio gehigarririk ematen. Hemen bakarrik agertzen diren klipak baditu, oso litekeena da kategoria okerra izatea.</string>
+    <string name="category_preview_description">Serie honetan edo etorkizunean agertuko dena erakusten duten zatietarako, baina ez dute informazio gehigarririk ematen. Hemen bakarrik agertzen diren klipak baditu, oso litekeena da kategoria okerra izatea.</string>
     <string name="buffering_goal_summary">Bideoak aurrez kargatzen diren segundo kopuru maximoa.</string>
     <string name="category_filler">Betegarria/Txisteak</string>
     <string name="category_filler_description">Bideoaren eduki nagusia ulertzeko beharrezkoak ez diren betegarrirako edo umorerako soilik gehitutako eszenak dira.</string>
@@ -196,7 +196,7 @@
     <string name="pauseOnScreenOff_summary">Pantaila itzalita dagoenean, erreproduzitzailea gelditu.</string>
     <string name="autoplay_summary">Erreproduzitu automatikoki hurrengo bideoa unekoa amaitzen denean.</string>
     <string name="pauseOnScreenOff">Automatikoki gelditzea</string>
-    <string name="clonePlaylist">Klonatu erreprodukzio-zerrenda</string>
+    <string name="clonePlaylist">Klonatu erreprodukzio zerrenda</string>
     <string name="deleteAccount">Ezabatu kontua</string>
     <string name="deleteAccount_summary">Ezabatu zure Piped kontua</string>
     <string name="account">Kontua</string>
@@ -245,7 +245,7 @@
     <string name="none">Bat ere ez</string>
     <string name="update_now">Libretube bertsio berria instalatu nahi duzu orain\?</string>
     <string name="seekbar_preview">Bideoaren aurrebista</string>
-    <string name="seekbar_preview_summary">Aurreikusi bideoa erreprodukzio-barran arrastatzean.</string>
+    <string name="seekbar_preview_summary">Aurreikusi bideoa erreprodukzio barra arrastatzean.</string>
     <string name="watch_history_summary">Gailuan ikusitako bideoen jarraipena egitea</string>
     <string name="watch_positions_title">Gogoratu erreprodukzioen posizioak</string>
     <string name="captions">Azpitituluak</string>
@@ -296,7 +296,7 @@
     <string name="break_reminder">Atsedenaren abisua</string>
     <string name="already_spent_time">Dagoeneko %1$s minutu eman dituzu aplikazioan, atseden hartzeko ordua da.</string>
     <string name="yt_shorts">Motzak</string>
-    <string name="break_reminder_time">Gogorarazi minutu batzuk lehenago</string>
+    <string name="break_reminder_time">Gogorarazi ondorengo minutuak igarotzean</string>
     <string name="legacy_subscriptions">Harpidetza zaharren ikuspegia</string>
     <string name="device_info">Gailuaren informazioa</string>
     <string name="no_subtitles_available">Ez dago azpititulurik erabilgarri</string>
@@ -314,4 +314,28 @@
     <string name="open_copied">Ireki</string>
     <string name="picture_in_picture">Irudia irudian</string>
     <string name="audio_video_summary">Kalitatea ea formatua</string>
+    <string name="new_videos_badge">Bideo berrien adierazlea</string>
+    <string name="new_videos_badge_summary">Erakutsi bereizgarri bat bideo berrien kopuruarekin, baldin badaude.</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="skip_segment">Saltatu zatia</string>
+    <string name="sb_skip_manual">Saltatu eskuz</string>
+    <string name="sb_skip_manual_summary">Ez saltatu segmentuak automatikoki, galdetu beti aurretik.</string>
+    <string name="download_channel_name">Deskarga zerbitzua</string>
+    <string name="download_channel_description">Multimedia deskargatzean jakinarazpen bat erakusten du.</string>
+    <string name="background_channel_name">Atzeko planoko modua</string>
+    <string name="background_channel_description">Audio-erreproduzitzailea maneiatzeko botoiekin jakinarazpen bat erakusten du.</string>
+    <string name="push_channel_name">Jakinarazpenen egilea</string>
+    <string name="local_subscriptions">Tokiko harpidetzak</string>
+    <string name="preferences">Hobespenak</string>
+    <string name="backup_customInstances">Instantzia pertsonalizatuak</string>
+    <string name="save_feed">Kargatu jarioa atzeko planoan</string>
+    <string name="save_feed_summary">Kargatu harpidetzako jarioa atzeko planoan eta saihestu automatikoki freskatzea.</string>
+    <string name="play_next">Erreproduzitu hurrengoa</string>
+    <string name="navigation_bar">Nabigazio-barra</string>
+    <string name="push_channel_description">Erakutsi jakinarazpen bat korronte berriak erabilgarri daudenean.</string>
+    <string name="select_at_least_one">Hautatu elementu bat gutxienez</string>
+    <string name="delete">Ezabatu</string>
+    <string name="trending_layout">Joera alternatiboaren diseinua</string>
+    <string name="renamePlaylist">Berrizendatu erreprodukzio zerrenda</string>
+    <string name="mobile_data">Datu mugikorrak</string>
 </resources>
