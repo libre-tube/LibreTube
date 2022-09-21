@@ -58,7 +58,7 @@ jobs:
         continue-on-error: true
         run: |
           mv .github/uploader.py .
-          echo "GH_REPO = '${{ env.GITHUB_REPOSITORY }}'" > tgconfig.py
+          echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
           python uploader.py
       
       - name: Telegram Bot

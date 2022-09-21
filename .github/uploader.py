@@ -1,7 +1,7 @@
 from os import system as run
 import tgconfig
 
-if GH_REPO.lower() == "libre-tube/libretube":
+if tgconfig.GH_REPO.lower() == "libre-tube/libretube":
     run("git clone https://github.com/LibreTubeAlpha/Archive archive")
     run("rm -rf archive/*.apk")
     run("mv app/build/outputs/apk/debug/*.apk archive/")
