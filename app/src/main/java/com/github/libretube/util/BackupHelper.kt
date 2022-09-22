@@ -8,69 +8,15 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
-import java.io.FileInputStream
+import com.github.libretube.obj.PreferenceItem
 import java.io.FileOutputStream
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
 
 /**
  * Backup and restore the preferences
  */
 class BackupHelper(private val context: Context) {
     /**
-     * Backup the default shared preferences to a file
-     */
-    fun backupSharedPreferences(uri: Uri?) {
-        if (uri == null) return
-        try {
-            context.contentResolver.openFileDescriptor(uri, "w")?.use {
-                ObjectOutputStream(FileOutputStream(it.fileDescriptor)).use { output ->
-                    val pref = PreferenceManager.getDefaultSharedPreferences(context)
-                    // write all preference objects to the output file
-                    output.writeObject(pref.all)
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    /**
-     * restore the default shared preferences from a file
-     */
-    @Suppress("UNCHECKED_CAST")
-    fun restoreSharedPreferences(uri: Uri?) {
-        if (uri == null) return
-        try {
-            context.contentResolver.openFileDescriptor(uri, "r")?.use {
-                ObjectInputStream(FileInputStream(it.fileDescriptor)).use { input ->
-                    // map all the preference keys and their values
-                    val entries = input.readObject() as Map<String, *>
-                    PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
-                        // clear the previous settings
-                        clear()
-
-                        // decide for each preference which type it is and save it to the
-                        // preferences
-                        for ((key, value) in entries) {
-                            when (value) {
-                                is Boolean -> putBoolean(key, value)
-                                is Float -> putFloat(key, value)
-                                is Int -> putInt(key, value)
-                                is Long -> putLong(key, value)
-                                is String -> putString(key, value)
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    /**
-     * Backup the database
+     * Write a [BackupFile] containing the database content as well as the preferences
      */
     fun advancedBackup(uri: Uri?, backupFile: BackupFile) {
         if (uri == null) return
@@ -88,7 +34,7 @@ class BackupHelper(private val context: Context) {
     }
 
     /**
-     * Restore a database backup
+     * Restore data from a [BackupFile]
      */
     fun restoreAdvancedBackup(uri: Uri?) {
         if (uri == null) return
@@ -116,6 +62,30 @@ class BackupHelper(private val context: Context) {
             Database.customInstanceDao().insertAll(
                 *backupFile.customInstances?.toTypedArray().orEmpty()
             )
+
+            restorePreferences(backupFile.preferences)
+        }
+    }
+
+    /**
+     * Restore the shared preferences from a backup file
+     */
+    private fun restorePreferences(preferences: List<PreferenceItem>?) {
+        if (preferences == null) return
+        PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
+            // clear the previous settings
+            clear()
+
+            // decide for each preference which type it is and save it to the preferences
+            preferences.forEach {
+                when (it.value) {
+                    is Boolean -> putBoolean(it.key, it.value)
+                    is Float -> putFloat(it.key, it.value)
+                    is Int -> putInt(it.key, it.value)
+                    is Long -> putLong(it.key, it.value)
+                    is String -> putString(it.key, it.value)
+                }
+            }
         }
     }
 }

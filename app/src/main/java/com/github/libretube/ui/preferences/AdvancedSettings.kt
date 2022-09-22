@@ -20,28 +20,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AdvancedSettings : MaterialPreferenceFragment() {
 
-    // backup and restore prefs
-    private lateinit var getPrefFile: ActivityResultLauncher<String>
-    private lateinit var createPrefFile: ActivityResultLauncher<String>
-
     // backup and restore database
     private lateinit var getBackupFile: ActivityResultLauncher<String>
     private lateinit var createBackupFile: ActivityResultLauncher<String>
     private var backupFile = BackupFile()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getPrefFile =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) { uri: Uri? ->
-                BackupHelper(requireContext()).restoreSharedPreferences(uri)
-            }
-        createPrefFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri: Uri? ->
-            BackupHelper(requireContext()).backupSharedPreferences(uri)
-        }
-
         getBackupFile =
             registerForActivityResult(
                 ActivityResultContracts.GetContent()
@@ -73,21 +57,6 @@ class AdvancedSettings : MaterialPreferenceFragment() {
         val resetSettings = findPreference<Preference>(PreferenceKeys.RESET_SETTINGS)
         resetSettings?.setOnPreferenceClickListener {
             showResetDialog()
-            true
-        }
-
-        val backupSettings = findPreference<Preference>(PreferenceKeys.BACKUP_SETTINGS)
-        backupSettings?.setOnPreferenceClickListener {
-            createPrefFile.launch("preferences.xml")
-            true
-        }
-
-        val restoreSettings = findPreference<Preference>(PreferenceKeys.RESTORE_SETTINGS)
-        restoreSettings?.setOnPreferenceClickListener {
-            getPrefFile.launch("*/*")
-            // reset the token
-            PreferenceHelper.setToken("")
-            activity?.recreate()
             true
         }
 
