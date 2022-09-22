@@ -9,3 +9,7 @@ if tgconfig.GH_REPO.lower() == "libre-tube/libretube":
     run("git add -f *")
     run('git commit -m "WORKFLOW: ALPHA BUILDS"')
     run("git push -u")
+    run("cd ..")
+else:
+    run("mkdir archive")
+    run("mv app/build/outputs/apk/debug/*.apk archive/")
