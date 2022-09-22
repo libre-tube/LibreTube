@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -15,12 +14,12 @@ import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
-import java.io.IOException
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,

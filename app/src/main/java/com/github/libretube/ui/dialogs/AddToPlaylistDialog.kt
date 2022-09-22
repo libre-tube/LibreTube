@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
@@ -19,8 +18,8 @@ import com.github.libretube.models.PlaylistViewModel
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class AddToPlaylistDialog : DialogFragment() {
     private lateinit var binding: DialogAddtoplaylistBinding

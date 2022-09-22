@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.api.obj.SearchItem
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
@@ -110,7 +109,10 @@ class SearchAdapter(
         }
     }
 
-    private fun bindChannel(item: com.github.libretube.api.obj.SearchItem, binding: ChannelRowBinding) {
+    private fun bindChannel(
+        item: com.github.libretube.api.obj.SearchItem,
+        binding: ChannelRowBinding
+    ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
@@ -157,7 +159,10 @@ class SearchAdapter(
         }
     }
 
-    private fun bindPlaylist(item: com.github.libretube.api.obj.SearchItem, binding: PlaylistSearchRowBinding) {
+    private fun bindPlaylist(
+        item: com.github.libretube.api.obj.SearchItem,
+        binding: PlaylistSearchRowBinding
+    ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, searchThumbnail)
             if (item.videos?.toInt() != -1) searchPlaylistNumber.text = item.videos.toString()

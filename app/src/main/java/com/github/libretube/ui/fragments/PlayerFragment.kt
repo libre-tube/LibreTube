@@ -10,12 +10,8 @@ import android.content.res.Configuration
 import android.graphics.Rect
 import android.media.session.PlaybackState
 import android.net.Uri
-import android.os.Build
+import android.os.*
 import android.os.Build.VERSION.SDK_INT
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.PowerManager
 import android.text.Html
 import android.text.format.DateUtils
 import android.util.Log
@@ -58,21 +54,10 @@ import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.util.AutoPlayHelper
-import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NetworkHelper
-import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.DefaultLoadControl
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
+import com.github.libretube.util.*
+import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.MediaItem.fromUri
-import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
@@ -87,13 +72,13 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
+import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
-import java.io.IOException
-import java.util.concurrent.Executors
 import kotlin.math.abs
 
 class PlayerFragment : BaseFragment() {
@@ -863,7 +848,9 @@ class PlayerFragment : BaseFragment() {
             return
         }
         // position is almost the end of the video => don't seek, start from beginning
-        if (position != null && position < streams.duration!! * 1000 * 0.9) exoPlayer.seekTo(position)
+        if (position != null && position < streams.duration!! * 1000 * 0.9) exoPlayer.seekTo(
+            position
+        )
     }
 
     // used for autoplay and skipping to next video

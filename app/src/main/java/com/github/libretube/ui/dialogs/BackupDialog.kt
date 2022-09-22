@@ -7,18 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.extensions.await
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.adapters.BackupOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.runBlocking
 
 class BackupDialog(
     private val createBackupFile: (BackupFile) -> Unit
 ) : DialogFragment() {
     private lateinit var binding: DialogBackupBinding
 
-    val backupFile = BackupFile()
+    private val backupFile = BackupFile()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val backupOptions = listOf(
@@ -43,7 +41,7 @@ class BackupDialog(
             .setView(binding.root)
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.backup) { _, _ ->
-                runBlocking {
+                val thread = Thread {
                     if (selected[0]) {
                         backupFile.watchHistory =
                             Database.watchHistoryDao().getAll()
@@ -65,6 +63,8 @@ class BackupDialog(
                             Database.customInstanceDao().getAll()
                     }
                 }
+                thread.start()
+                thread.join()
 
                 createBackupFile(backupFile)
             }

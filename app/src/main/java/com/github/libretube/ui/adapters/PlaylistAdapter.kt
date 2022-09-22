@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.setFormattedDuration
@@ -19,11 +17,11 @@ import com.github.libretube.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.PreferenceHelper
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class PlaylistAdapter(
     private val videoFeed: MutableList<com.github.libretube.api.obj.StreamItem>,

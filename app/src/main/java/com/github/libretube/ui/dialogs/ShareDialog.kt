@@ -10,8 +10,6 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.db.obj.CustomInstance
-import com.github.libretube.extensions.await
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

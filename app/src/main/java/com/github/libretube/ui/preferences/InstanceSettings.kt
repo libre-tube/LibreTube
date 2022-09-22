@@ -15,10 +15,7 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.db.obj.CustomInstance
-import com.github.libretube.extensions.await
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.query
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog

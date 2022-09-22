@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.obj.Subscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.PreferenceHelper

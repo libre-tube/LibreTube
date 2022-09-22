@@ -1,7 +1,6 @@
 package com.github.libretube.util
 
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.toID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

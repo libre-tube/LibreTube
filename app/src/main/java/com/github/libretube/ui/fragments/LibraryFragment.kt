@@ -21,8 +21,8 @@ import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.util.PreferenceHelper
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class LibraryFragment : BaseFragment() {
 

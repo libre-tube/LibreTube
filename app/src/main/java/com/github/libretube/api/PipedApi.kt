@@ -1,27 +1,6 @@
 package com.github.libretube.api
 
-import com.github.libretube.api.obj.Channel
-import com.github.libretube.api.obj.CommentsPage
-import com.github.libretube.api.obj.DeleteUserRequest
-import com.github.libretube.api.obj.Login
-import com.github.libretube.api.obj.Message
-import com.github.libretube.api.obj.Playlist
-import com.github.libretube.api.obj.PlaylistId
-import com.github.libretube.api.obj.Playlists
-import com.github.libretube.api.obj.SearchResult
-import com.github.libretube.api.obj.Segments
-import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.api.obj.Streams
-import com.github.libretube.api.obj.Subscribe
-import com.github.libretube.api.obj.Subscribed
-import com.github.libretube.api.obj.Subscription
-import com.github.libretube.api.obj.Token
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface PipedApi {
     @GET("trending")

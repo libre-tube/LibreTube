@@ -19,8 +19,8 @@ import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding

@@ -1,10 +1,6 @@
 package com.github.libretube.obj
 
-import com.github.libretube.db.obj.CustomInstance
-import com.github.libretube.db.obj.LocalSubscription
-import com.github.libretube.db.obj.SearchHistoryItem
-import com.github.libretube.db.obj.WatchHistoryItem
-import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.db.obj.*
 
 data class BackupFile(
     var watchHistory: List<WatchHistoryItem>? = null,

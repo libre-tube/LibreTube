@@ -3,11 +3,7 @@ package com.github.libretube.ui.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.github.libretube.constants.DISCORD_URL
-import com.github.libretube.constants.MATRIX_URL
-import com.github.libretube.constants.REDDIT_URL
-import com.github.libretube.constants.TELEGRAM_URL
-import com.github.libretube.constants.TWITTER_URL
+import com.github.libretube.constants.*
 import com.github.libretube.databinding.ActivityCommunityBinding
 import com.github.libretube.extensions.BaseActivity
 

@@ -18,8 +18,8 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.util.ImageHelper
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class ChannelFragment : BaseFragment() {
     private lateinit var binding: FragmentChannelBinding

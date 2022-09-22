@@ -8,15 +8,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.Playlists
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.fragments.LibraryFragment
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class CreatePlaylistDialog : DialogFragment() {
     private var token: String = ""
