@@ -92,9 +92,9 @@
     <string name="category_sponsor_description">Promoción pagada, referencias pagadas y anuncios directos. No para la autopromoción o los agradecimientos genuinos y gratuitos a las causas, creadores, sitios web y productos.</string>
     <string name="sponsorblock_state">Activado</string>
     <string name="category_segments">Segmentos</string>
-    <string name="category_selfpromo_description">Similar a \"patrocinador\", excepto que no se paga o se hace autopromoción. Esto incluye secciones sobre mercancía, donaciones o información sobre con quién han colaborado.</string>
-    <string name="category_interaction">Recordatorio de interacción (me gusta y suscríbete)</string>
-    <string name="category_interaction_description">Cuando hay un breve recordatorio para dar me gusta, suscribirse o seguir en medio del contenido. Si es largo o se trata de algo específico, debería ser una autopromoción.</string>
+    <string name="category_selfpromo_description">Similar a \"patrocinador\" excepto por promoción no remunerada o propia. Esto incluye secciones sobre mercadería, donaciones o información sobre con quién colaboraron.</string>
+    <string name="category_interaction">Recordatorio de interacción (me gusta y suscribirse)</string>
+    <string name="category_interaction_description">Cuando hay un breve recordatorio para dar me gusta, suscribirse o seguir en medio del contenido. Si es largo o sobre algo específico, debería ser una autopromoción.</string>
     <string name="category_selfpromo">No remunerado/Autopromoción</string>
     <string name="category_intro">Intermedio/Animación de entrada</string>
     <string name="category_outro">Tarjetas finales y créditos</string>
@@ -110,7 +110,7 @@
     <string name="oledTheme">Negro</string>
     <string name="material_you">Tu Material</string>
     <string name="app_icon">Icono</string>
-    <string name="piped">Piped</string>
+    <string name="piped">Hilo</string>
     <string name="youtube">YouTube</string>
     <string name="sponsorblock_notifications">Notificaciones</string>
     <string name="enabled">Activado</string>
@@ -264,7 +264,7 @@
     <string name="playingOnBackground">Reproduciendo en segundo plano…</string>
     <string name="caption_settings">Subtítulos</string>
     <string name="best_quality">Mejor</string>
-    <string name="worst_quality">Peor</string>
+    <string name="worst_quality">Peor calidad</string>
     <string name="default_subtitle_language">Idioma subtítulo</string>
     <string name="notify_new_streams">Norificaciones para nuevos directos</string>
     <string name="checking_frequency">Comprobando todo …</string>
@@ -307,7 +307,7 @@
     <string name="add_to_queue">Añadir a la cola</string>
     <string name="misc">Miscelánea</string>
     <string name="break_reminder">Recordatorio de pausa</string>
-    <string name="yt_shorts">Shorts</string>
+    <string name="yt_shorts">Vídeos Cortos</string>
     <string name="no_subtitles_available">No hay subtítulos disponibles</string>
     <string name="player_resize_mode">Modo de redimensión</string>
     <string name="maximum_image_cache">Tamaño máximo de la caché de imágenes</string>
@@ -330,4 +330,12 @@
     <string name="sb_skip_manual_summary">No omita segmentos automáticamente, siempre pregunte antes.</string>
     <string name="push_channel_description">Muestra una notificación cuando haya nuevos flujos disponibles.</string>
     <string name="background_channel_description">Mostrar una notificación con botones para controlar el reproductor de audio.</string>
+    <string name="local_subscriptions">Suscripciones locales</string>
+    <string name="preferences">Preferencias</string>
+    <string name="backup_customInstances">Instancias personalizadas</string>
+    <string name="save_feed">Cargar los feed en segundo plano</string>
+    <string name="save_feed_summary">Cargar el feed de suscripción en segundo plano y evitar que se actualice automáticamente.</string>
+    <string name="play_next">Reproducir el siguiente</string>
+    <string name="navigation_bar">Barra de navegación</string>
+    <string name="select_at_least_one">Por favor, seleccione al menos un artículo</string>
 </resources>
