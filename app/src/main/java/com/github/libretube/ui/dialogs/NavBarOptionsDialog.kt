@@ -18,7 +18,7 @@ class NavBarOptionsDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogNavbarOptionsBinding.inflate(layoutInflater)
 
-        val options = NavBarHelper.getNavBarItems()
+        val options = NavBarHelper.getNavBarItems(requireContext())
 
         val adapter = NavBarOptionsAdapter(options.toMutableList())
 
