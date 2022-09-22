@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.Login
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.PreferenceHelper

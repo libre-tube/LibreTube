@@ -10,15 +10,14 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
  */
 fun View?.setWatchProgressLength(videoId: String, duration: Long) {
     val view = this!!
-    var progress: Long? = null
 
-    Thread {
-        try {
-            progress = Database.watchPositionDao().findById(videoId)?.position
-        } catch (e: Exception) {
-            progress = null
+    val progress = try {
+        awaitQuery {
+            Database.watchPositionDao().findById(videoId)?.position
         }
-    }.await()
+    } catch (e: Exception) {
+        return
+    }
 
     view.getViewTreeObserver()
         .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -29,7 +28,7 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long) {
                     return
                 }
                 val fullWidth = (parent as LinearLayout).width
-                val newWidth = (fullWidth * (progress!! / (duration))) / 1000
+                val newWidth = (fullWidth * (progress / duration)) / 1000
                 val lp = view.layoutParams
                 lp.width = newWidth.toInt()
                 view.layoutParams = lp

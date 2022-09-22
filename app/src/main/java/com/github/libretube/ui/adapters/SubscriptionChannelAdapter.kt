@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.ImageHelper

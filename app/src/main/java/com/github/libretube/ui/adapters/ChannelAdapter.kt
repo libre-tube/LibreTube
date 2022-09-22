@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setWatchProgressLength

@@ -5,6 +5,7 @@ import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.extensions.query
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.views.MaterialPreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -52,9 +53,7 @@ class HistorySettings : MaterialPreferenceFragment() {
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.okay) { _, _ ->
                 // clear the selected preference preferences
-                Thread {
-                    action()
-                }.start()
+                query(action)
             }
             .show()
     }

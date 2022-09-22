@@ -8,6 +8,7 @@ import com.github.libretube.R
 import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.CustomInstance
+import com.github.libretube.extensions.query
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.net.URL
@@ -39,9 +40,9 @@ class CustomInstanceDialog : DialogFragment() {
                     URL(customInstance.apiUrl).toURI()
                     URL(customInstance.frontendUrl).toURI()
 
-                    Thread {
+                    query {
                         Database.customInstanceDao().insertAll(customInstance)
-                    }.start()
+                    }
 
                     activity?.recreate()
                     dismiss()

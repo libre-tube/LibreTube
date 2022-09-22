@@ -2,13 +2,15 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.view.accessibility.CaptioningManager
-import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.constants.PreferenceKeys
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 
 object PlayerHelper {
     // get the audio source following the users preferences
-    fun getAudioSource(context: Context, audios: List<com.github.libretube.api.obj.PipedStream>): String {
+    fun getAudioSource(
+        context: Context,
+        audios: List<com.github.libretube.api.obj.PipedStream>
+    ): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
         val audioQuality = if (
             NetworkHelper.isNetworkMobile(context)

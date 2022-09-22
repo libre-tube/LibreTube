@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
