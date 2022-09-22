@@ -279,22 +279,6 @@ class MainActivity : BaseActivity() {
                 return true
             }
         })
-
-        searchItem.setOnActionExpandListener(
-            object : MenuItem.OnActionExpandListener {
-                override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
-                    return true
-                }
-
-                override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
-                    val currentFragmentId = navController.currentDestination?.id
-                    if (currentFragmentId == R.id.searchFragment || currentFragmentId == R.id.searchResultFragment) {
-                        navController.popBackStack()
-                    }
-                    return true
-                }
-            }
-        )
         return super.onCreateOptionsMenu(menu)
     }
 
