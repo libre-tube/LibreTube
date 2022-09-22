@@ -18,7 +18,7 @@ class SettingsActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.backImageButton.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         if (savedInstanceState == null) {
