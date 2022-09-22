@@ -28,7 +28,7 @@ class NavBarOptionsAdapter(
     override fun onBindViewHolder(holder: NavBarOptionsViewHolder, position: Int) {
         val item = items[position]
         holder.binding.apply {
-            title.text = root.context.getString(item.titleResource)
+            title.text = item.title
             checkbox.isChecked = item.isEnabled
             checkbox.setOnClickListener {
                 if (!checkbox.isChecked && getEnabledItemsCount() < 2) {

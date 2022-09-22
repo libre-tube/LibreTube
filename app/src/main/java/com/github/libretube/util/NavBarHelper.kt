@@ -1,7 +1,11 @@
 package com.github.libretube.util
 
+import android.content.Context
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.PopupMenu
+import androidx.core.view.forEach
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
@@ -11,26 +15,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
 object NavBarHelper {
-    val preferenceKey = "nav_bar_items"
+    private const val preferenceKey = "nav_bar_items"
 
-    val defaultNavBarItems = listOf(
-        NavBarItem(
-            R.id.homeFragment,
-            R.string.startpage
-        ),
-        NavBarItem(
-            R.id.subscriptionsFragment,
-            R.string.subscriptions
-        ),
-        NavBarItem(
-            R.id.libraryFragment,
-            R.string.library
-        )
-    )
+    private val mapper = ObjectMapper()
 
-    val mapper = ObjectMapper()
-
-    fun getNavBarItems(): List<NavBarItem> {
+    fun getNavBarItems(context: Context): List<NavBarItem> {
         return try {
             val type = object : TypeReference<List<NavBarItem>>() {}
             mapper.readValue(
@@ -41,6 +30,17 @@ object NavBarHelper {
                 type
             )
         } catch (e: Exception) {
+            val p = PopupMenu(context, null)
+            MenuInflater(context).inflate(R.menu.bottom_menu, p.menu)
+            val defaultNavBarItems = mutableListOf<NavBarItem>()
+            p.menu.forEach {
+                defaultNavBarItems.add(
+                    NavBarItem(
+                        it.itemId,
+                        it.title.toString()
+                    )
+                )
+            }
             return defaultNavBarItems
         }
     }
@@ -67,7 +67,7 @@ object NavBarHelper {
         }
         bottomNav.labelVisibilityMode = labelVisibilityMode
 
-        val navBarItems = getNavBarItems()
+        val navBarItems = getNavBarItems(bottomNav.context)
 
         val menuItems = mutableListOf<MenuItem>()
         // remove the old items
