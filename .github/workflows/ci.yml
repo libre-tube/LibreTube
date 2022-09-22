@@ -40,7 +40,7 @@ jobs:
           distribution: "temurin"
           cache: "gradle"
 
-      - name: Prepare for Compilation
+      - name: Git Configuraion
         run: |
           git config --global user.name "alefvanoon"
           git config --global user.email "53198048+alefvanoon@users.noreply.github.com"
