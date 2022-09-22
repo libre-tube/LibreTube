@@ -1026,9 +1026,9 @@ class PlayerFragment : BaseFragment() {
                 }
 
                 // listen for the stop button in the notification
-                if (playbackState == PlaybackState.STATE_STOPPED) {
+                if (playbackState == PlaybackState.STATE_STOPPED && SDK_INT >= Build.VERSION_CODES.O) {
                     // finish PiP by finishing the activity
-                    activity?.finish()
+                    if (activity?.isInPictureInPictureMode!!) activity?.finish()
                 }
                 super.onPlaybackStateChanged(playbackState)
             }
