@@ -8,7 +8,9 @@ import com.github.libretube.R
 import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.obj.BackupFile
+import com.github.libretube.obj.PreferenceItem
 import com.github.libretube.ui.adapters.BackupOptionsAdapter
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class BackupDialog(
@@ -24,10 +26,11 @@ class BackupDialog(
             R.string.watch_positions,
             R.string.search_history,
             R.string.local_subscriptions,
-            R.string.backup_customInstances
+            R.string.backup_customInstances,
+            R.string.preferences
         )
 
-        val selected = mutableListOf(false, false, false, false, false)
+        val selected = MutableList(backupOptions.size) { false }
 
         binding = DialogBackupBinding.inflate(layoutInflater)
         binding.backupOptionsRecycler.layoutManager = LinearLayoutManager(context)
@@ -61,6 +64,14 @@ class BackupDialog(
                     if (selected[4]) {
                         backupFile.customInstances =
                             Database.customInstanceDao().getAll()
+                    }
+                    if (selected[5]) {
+                        backupFile.preferences = PreferenceHelper.settings.all.map {
+                            PreferenceItem(
+                                it.key,
+                                it.value
+                            )
+                        }
                     }
                 }
                 thread.start()

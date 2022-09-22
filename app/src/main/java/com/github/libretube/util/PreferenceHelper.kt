@@ -3,14 +3,13 @@ package com.github.libretube.util
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.constants.PreferenceKeys
 
 object PreferenceHelper {
     /**
      * for normal preferences
      */
-    private lateinit var settings: SharedPreferences
+    lateinit var settings: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
     /**
@@ -18,8 +17,6 @@ object PreferenceHelper {
      */
     private lateinit var authSettings: SharedPreferences
     private lateinit var authEditor: SharedPreferences.Editor
-
-    private val mapper = ObjectMapper()
 
     /**
      * set the context that is being used to access the shared preferences
