@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -262,7 +263,11 @@ class MainActivity : BaseActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 // prevent malicious navigation when the search view is getting collapsed
-                if (navController.currentDestination?.id == R.id.searchResultFragment &&
+                if (navController.currentDestination?.id in listOf(
+                        R.id.searchResultFragment,
+                        R.id.channelFragment,
+                        R.id.playlistFragment
+                    ) &&
                     (newText == null || newText == "")
                 ) {
                     return false
