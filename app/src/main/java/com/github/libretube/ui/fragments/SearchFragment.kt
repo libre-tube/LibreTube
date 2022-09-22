@@ -20,8 +20,8 @@ import com.github.libretube.models.SearchViewModel
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchBinding

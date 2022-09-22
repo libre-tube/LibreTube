@@ -17,8 +17,8 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.services.DownloadService
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class DownloadDialog(
     private val videoId: String

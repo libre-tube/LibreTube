@@ -13,8 +13,8 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class LoginDialog : DialogFragment() {
     private lateinit var binding: DialogLoginBinding

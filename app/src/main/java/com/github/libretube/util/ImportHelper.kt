@@ -11,11 +11,11 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
-import java.io.FileOutputStream
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.FileOutputStream
 
 class ImportHelper(private val activity: Activity) {
     /**

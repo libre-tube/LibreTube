@@ -10,7 +10,12 @@ import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import com.github.libretube.R
-import com.github.libretube.constants.*
+import com.github.libretube.constants.DONATE_URL
+import com.github.libretube.constants.GITHUB_URL
+import com.github.libretube.constants.LICENSE_URL
+import com.github.libretube.constants.PIPED_GITHUB_URL
+import com.github.libretube.constants.WEBLATE_URL
+import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.getStyledSnackBar

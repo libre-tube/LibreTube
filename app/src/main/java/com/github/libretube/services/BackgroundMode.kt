@@ -21,7 +21,11 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.util.*
+import com.github.libretube.util.AutoPlayHelper
+import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem

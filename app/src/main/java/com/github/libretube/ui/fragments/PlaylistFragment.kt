@@ -18,8 +18,8 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.adapters.PlaylistAdapter
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class PlaylistFragment : BaseFragment() {
     private lateinit var binding: FragmentPlaylistBinding

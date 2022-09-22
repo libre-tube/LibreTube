@@ -2,8 +2,16 @@ package com.github.libretube.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.github.libretube.db.dao.*
-import com.github.libretube.db.obj.*
+import com.github.libretube.db.dao.CustomInstanceDao
+import com.github.libretube.db.dao.LocalSubscriptionDao
+import com.github.libretube.db.dao.SearchHistoryDao
+import com.github.libretube.db.dao.WatchHistoryDao
+import com.github.libretube.db.dao.WatchPositionDao
+import com.github.libretube.db.obj.CustomInstance
+import com.github.libretube.db.obj.LocalSubscription
+import com.github.libretube.db.obj.SearchHistoryItem
+import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.db.obj.WatchPosition
 
 @Database(
     entities = [

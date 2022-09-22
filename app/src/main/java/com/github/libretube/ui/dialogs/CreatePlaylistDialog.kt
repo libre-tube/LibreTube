@@ -14,8 +14,8 @@ import com.github.libretube.ui.fragments.LibraryFragment
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class CreatePlaylistDialog : DialogFragment() {
     private var token: String = ""

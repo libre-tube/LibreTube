@@ -15,11 +15,11 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
 
 class CommentsAdapter(
     private val videoId: String,
