@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
+import android.media.session.PlaybackState
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -20,6 +21,8 @@ import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -220,6 +223,14 @@ class BackgroundMode : Service() {
                     }
                     Player.STATE_IDLE -> {
                         onDestroy()
+                    }
+                    PlaybackState.STATE_PAUSED -> {
+                        query {
+                            DatabaseHelper.saveWatchPosition(
+                                videoId,
+                                player?.currentPosition ?: 0L
+                            )
+                        }
                     }
                     Player.STATE_BUFFERING -> {}
                     Player.STATE_READY -> {}
