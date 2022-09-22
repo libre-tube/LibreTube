@@ -6,6 +6,8 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
+import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,11 +28,11 @@ object SubscriptionHelper {
                 }
             }
         } else {
-            Thread {
+            query {
                 Database.localSubscriptionDao().insertAll(
                     LocalSubscription(channelId)
                 )
-            }.start()
+            }
         }
     }
 
@@ -47,11 +49,11 @@ object SubscriptionHelper {
                 }
             }
         } else {
-            Thread {
+            query {
                 Database.localSubscriptionDao().delete(
                     LocalSubscription(channelId)
                 )
-            }.start()
+            }
         }
     }
 
@@ -68,11 +70,9 @@ object SubscriptionHelper {
             }
             return isSubscribed.subscribed
         } else {
-            var isSubscribed = false
-            Thread {
-                isSubscribed = Database.localSubscriptionDao().includes(channelId)
-            }.await()
-            return isSubscribed
+            return awaitQuery {
+                Database.localSubscriptionDao().includes(channelId)
+            }
         }
     }
 
@@ -93,20 +93,18 @@ object SubscriptionHelper {
             newChannels.forEach {
                 newLocalSubscriptions += LocalSubscription(channelId = it)
             }
-            Thread {
+            query {
                 Database.localSubscriptionDao().insertAll(
                     *newChannels.map { LocalSubscription(it) }.toTypedArray()
                 )
-            }.start()
+            }
         }
     }
 
     fun getLocalSubscriptions(): List<LocalSubscription> {
-        var localSubscriptions = listOf<LocalSubscription>()
-        Thread {
-            localSubscriptions = Database.localSubscriptionDao().getAll()
-        }.await()
-        return localSubscriptions
+        return awaitQuery {
+            Database.localSubscriptionDao().getAll()
+        }
     }
 
     fun getFormattedLocalSubscriptions(): String {

@@ -46,13 +46,7 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.extensions.BaseFragment
-import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.await
-import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.extensions.query
-import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.*
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.services.BackgroundMode
@@ -861,17 +855,15 @@ class PlayerFragment : BaseFragment() {
             return
         }
         // browse the watch positions
-        var position: Long? = null
-        Thread {
-            try {
-                position = Database.watchPositionDao().findById(videoId!!)?.position
-                // position is almost the end of the video => don't seek, start from beginning
-                if (position!! > streams.duration!! * 1000 * 0.9) position = null
-            } catch (e: Exception) {
-                e.printStackTrace()
+        val position = try {
+            awaitQuery {
+                Database.watchPositionDao().findById(videoId!!)?.position
             }
-        }.await()
-        if (position != null) exoPlayer.seekTo(position!!)
+        } catch (e: Exception) {
+            return
+        }
+        // position is almost the end of the video => don't seek, start from beginning
+        if (position != null && position < streams.duration!! * 1000 * 0.9) exoPlayer.seekTo(position)
     }
 
     // used for autoplay and skipping to next video

@@ -6,11 +6,12 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.PreferenceHelper
 
 object DatabaseHelper {
-    fun addToWatchHistory(videoId: String, streams: com.github.libretube.api.obj.Streams) {
+    fun addToWatchHistory(videoId: String, streams: Streams) {
         val watchHistoryItem = WatchHistoryItem(
             videoId,
             streams.title,
@@ -21,11 +22,11 @@ object DatabaseHelper {
             streams.thumbnailUrl,
             streams.duration
         )
-        Thread {
+        query {
             Database.watchHistoryDao().insertAll(watchHistoryItem)
             val maxHistorySize =
                 PreferenceHelper.getString(PreferenceKeys.WATCH_HISTORY_SIZE, "unlimited")
-            if (maxHistorySize == "unlimited") return@Thread
+            if (maxHistorySize == "unlimited") return@query
 
             // delete the first watch history entry if the limit is reached
             val watchHistory = Database.watchHistoryDao().getAll()
@@ -33,15 +34,15 @@ object DatabaseHelper {
                 Database.watchHistoryDao()
                     .delete(watchHistory.first())
             }
-        }.start()
+        }
     }
 
     fun removeFromWatchHistory(index: Int) {
-        Thread {
+        query {
             Database.watchHistoryDao().delete(
                 Database.watchHistoryDao().getAll()[index]
             )
-        }.start()
+        }
     }
 
     fun saveWatchPosition(videoId: String, position: Long) {
@@ -49,21 +50,21 @@ object DatabaseHelper {
             videoId,
             position
         )
-        Thread {
+        query {
             Database.watchPositionDao().insertAll(watchPosition)
-        }.start()
+        }
     }
 
     fun removeWatchPosition(videoId: String) {
-        Thread {
+        query {
             Database.watchPositionDao().findById(videoId)?.let {
                 Database.watchPositionDao().delete(it)
             }
-        }.start()
+        }
     }
 
     fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
-        Thread {
+        query {
             Database.searchHistoryDao().insertAll(searchHistoryItem)
             val maxHistorySize = 20
 
@@ -73,6 +74,6 @@ object DatabaseHelper {
                 Database.searchHistoryDao()
                     .delete(searchHistory.first())
             }
-        }.start()
+        }
     }
 }

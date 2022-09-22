@@ -11,6 +11,7 @@ import com.github.libretube.extensions.await
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.adapters.BackupOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.runBlocking
 
 class BackupDialog(
     private val createBackupFile: (BackupFile) -> Unit
@@ -42,7 +43,7 @@ class BackupDialog(
             .setView(binding.root)
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.backup) { _, _ ->
-                Thread {
+                runBlocking {
                     if (selected[0]) {
                         backupFile.watchHistory =
                             Database.watchHistoryDao().getAll()
@@ -63,7 +64,7 @@ class BackupDialog(
                         backupFile.customInstances =
                             Database.customInstanceDao().getAll()
                     }
-                }.await()
+                }
 
                 createBackupFile(backupFile)
             }

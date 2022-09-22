@@ -16,6 +16,7 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.models.SearchViewModel
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
@@ -95,11 +96,9 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun showHistory() {
-        var historyList = listOf<String>()
-        Thread {
-            val history = Database.searchHistoryDao().getAll()
-            historyList = history.map { it.query }
-        }.await()
+        val historyList = awaitQuery {
+            Database.searchHistoryDao().getAll().map { it.query }
+        }
         if (historyList.isNotEmpty()) {
             binding.suggestionsRecycler.adapter =
                 SearchHistoryAdapter(

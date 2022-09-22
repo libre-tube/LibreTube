@@ -12,6 +12,7 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.await
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 
 class WatchHistoryFragment : BaseFragment() {
@@ -29,11 +30,9 @@ class WatchHistoryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var watchHistory = listOf<WatchHistoryItem>()
-
-        Thread {
-            watchHistory = Database.watchHistoryDao().getAll()
-        }.await()
+        val watchHistory = awaitQuery {
+            Database.watchHistoryDao().getAll()
+        }
 
         if (watchHistory.isEmpty()) return
 
