@@ -51,6 +51,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.await
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.interfaces.PlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
@@ -1010,6 +1011,16 @@ class PlayerFragment : BaseFragment() {
                 } else {
                     // player paused in any state
                     binding.playImageView.setImageResource(R.drawable.ic_play)
+                }
+
+                // save the watch position when paused
+                if (playbackState == PlaybackState.STATE_PAUSED) {
+                    query {
+                        DatabaseHelper.saveWatchPosition(
+                            videoId!!,
+                            exoPlayer.currentPosition
+                        )
+                    }
                 }
 
                 // listen for the stop button in the notification
