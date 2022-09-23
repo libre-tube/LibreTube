@@ -1,0 +1,13 @@
+Sandboxed downloads by @Bnyro in #1243
+Pause when unplugging headphones by @Bnyro in #1245
+Alternative trending layout by @Bnyro in #1250
+Option to rename playlists by @Bnyro in #1254
+Bottom sheet for sorting, playlist and video options by @Bnyro in #1257
+Add quality settings for mobile data by @Bnyro in #1270
+Indicator for amount of new videos by @Bnyro in #1283
+Option to skip segments manually by @Bnyro in #1309
+Option to customize the order of navigation bar items by @Bnyro in #1333
+Unified backup settings by @Bnyro in #1321
+Use new MaterialSwitches by @Bnyro in #1237
+Use Kotlin extension functions. by @Isira-Seneviratne in #1318
+Use NotificationChannelCompat. by @Isira-Seneviratne in #1314
