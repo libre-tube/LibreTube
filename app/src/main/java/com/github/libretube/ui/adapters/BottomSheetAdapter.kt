@@ -35,16 +35,6 @@ class BottomSheetAdapter(
             root.setOnClickListener {
                 listener.invoke(position)
             }
-
-            // increase padding if there's no drawable
-            if (item.drawable == null) {
-                root.setPadding(
-                    root.paddingLeft * 2,
-                    root.paddingTop,
-                    root.paddingRight,
-                    root.paddingBottom
-                )
-            }
         }
     }
 

@@ -25,7 +25,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -78,6 +77,7 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.MediaItem.fromUri
+import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
@@ -91,7 +91,6 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import com.google.android.exoplayer2.video.VideoSize
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -971,22 +970,6 @@ class PlayerFragment : BaseFragment() {
                 }
             }
 
-            override fun onVideoSizeChanged(
-                videoSize: VideoSize
-            ) {
-                // Set new width/height of view
-                // height or width must be cast to float as int/int will give 0
-
-                // Redraw the player container with the new layout height
-                val params = binding.player.layoutParams
-                params.height = videoSize.height / videoSize.width * params.width
-                binding.player.layoutParams = params
-                binding.player.requestLayout()
-                (binding.mainContainer.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    matchConstraintPercentHeight = (videoSize.height / videoSize.width).toFloat()
-                }
-            }
-
             override fun onPlaybackStateChanged(playbackState: Int) {
                 exoPlayerView.keepScreenOn = !(
                     playbackState == Player.STATE_IDLE ||
@@ -1031,6 +1014,18 @@ class PlayerFragment : BaseFragment() {
                     if (activity?.isInPictureInPictureMode!!) activity?.finish()
                 }
                 super.onPlaybackStateChanged(playbackState)
+            }
+
+            /**
+             * Catch player errors to prevent the app from stopping
+             */
+            override fun onPlayerError(error: PlaybackException) {
+                Toast.makeText(
+                    context,
+                    error.localizedMessage,
+                    Toast.LENGTH_LONG
+                ).show()
+                super.onPlayerError(error)
             }
         })
 

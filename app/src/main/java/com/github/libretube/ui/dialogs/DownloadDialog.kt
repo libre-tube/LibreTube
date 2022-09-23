@@ -34,11 +34,9 @@ class DownloadDialog(
 
         binding.audioRadio.setOnClickListener {
             binding.videoSpinner.visibility = View.GONE
-            binding.audioSpinner.visibility = View.VISIBLE
         }
 
         binding.videoRadio.setOnClickListener {
-            binding.audioSpinner.visibility = View.GONE
             binding.videoSpinner.visibility = View.VISIBLE
         }
 

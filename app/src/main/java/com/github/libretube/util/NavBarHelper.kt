@@ -58,7 +58,7 @@ object NavBarHelper {
      */
     fun applyNavBarStyle(bottomNav: BottomNavigationView): Int {
         val labelVisibilityMode = when (
-            PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "always")
+            PreferenceHelper.getString(PreferenceKeys.LABEL_VISIBILITY, "selected")
         ) {
             "always" -> NavigationBarView.LABEL_VISIBILITY_LABELED
             "selected" -> NavigationBarView.LABEL_VISIBILITY_SELECTED

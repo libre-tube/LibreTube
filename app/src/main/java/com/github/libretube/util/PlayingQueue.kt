@@ -4,17 +4,13 @@ object PlayingQueue {
     private val queue = mutableListOf<String>()
     private var currentVideoId: String? = null
 
-    fun clear() {
-        queue.clear()
-    }
-
     fun add(videoId: String) {
         if (currentVideoId == videoId) return
         if (queue.contains(videoId)) queue.remove(videoId)
         queue.add(videoId)
     }
 
-    fun playNext(videoId: String) {
+    fun addAsNext(videoId: String) {
         if (currentVideoId == videoId) return
         if (queue.contains(videoId)) queue.remove(videoId)
         queue.add(
@@ -24,11 +20,10 @@ object PlayingQueue {
     }
 
     fun getNext(): String? {
-        val currentIndex = queue.indexOf(currentVideoId)
-        return if (currentIndex >= queue.size) {
+        return try {
+            queue[currentIndex() + 1]
+        } catch (e: Exception) {
             null
-        } else {
-            queue[currentIndex + 1]
         }
     }
 
@@ -41,18 +36,20 @@ object PlayingQueue {
         return queue.indexOf(currentVideoId) > 0
     }
 
-    fun contains(videoId: String): Boolean {
-        return queue.contains(videoId)
-    }
-
-    fun containsBefore(videoId: String): Boolean {
-        return queue.contains(videoId) && queue.indexOf(videoId) < queue.indexOf(currentVideoId)
-    }
-
     fun updateCurrent(videoId: String) {
         currentVideoId = videoId
         queue.add(videoId)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
+
+    fun clear() = queue.clear()
+
+    fun currentIndex() = queue.indexOf(currentVideoId)
+
+    fun contains(videoId: String) = queue.contains(videoId)
+
+    fun containsBeforeCurrent(videoId: String): Boolean {
+        return queue.contains(videoId) && queue.indexOf(videoId) < currentIndex()
+    }
 }
