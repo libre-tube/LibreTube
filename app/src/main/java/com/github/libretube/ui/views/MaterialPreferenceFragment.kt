@@ -36,7 +36,10 @@ open class MaterialPreferenceFragment : PreferenceFragmentCompat() {
                         preference.callChangeListener(newValue)
 
                         // invoke the on change listeners
-                        preference.callChangeListener(preference.value)
+                        if (preference.callChangeListener(newValue)) {
+                            preference.value = newValue
+                        }
+                        dialog.dismiss()
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()
@@ -52,14 +55,13 @@ open class MaterialPreferenceFragment : PreferenceFragmentCompat() {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(preference.title)
                     .setView(binding.root)
-                    .setPositiveButton(R.string.okay) { _, _ ->
-                        // save the new value
-                        preference.text = binding.input.text.toString()
-
-                        // invoke the on change listeners
-                        preference.callChangeListener(preference.text)
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        val newValue = binding.input.text.toString()
+                        if (preference.callChangeListener(newValue)) {
+                            preference.text = newValue
+                        }
                     }
-                    .setNegativeButton(R.string.cancel, null)
+                    .setNegativeButton(android.R.string.cancel, null)
                     .show()
             }
             /**
