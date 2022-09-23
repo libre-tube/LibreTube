@@ -9,7 +9,7 @@
         style="@style/Widget.Material3.BottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="10dp"
+        android:paddingBottom="20dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
