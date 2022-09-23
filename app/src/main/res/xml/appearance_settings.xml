@@ -44,7 +44,7 @@
 
         <ListPreference
             android:icon="@drawable/ic_label"
-            app:defaultValue="always"
+            app:defaultValue="selected"
             app:entries="@array/labelVisibility"
             app:entryValues="@array/labelVisibilityValues"
             app:key="label_visibility"
