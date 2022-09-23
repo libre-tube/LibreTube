@@ -40,7 +40,7 @@ class AutoPlayHelper(
         if (relatedStreams == null || relatedStreams.isEmpty()) return null
         var index = 0
         var nextStreamId: String? = null
-        while (nextStreamId == null || PlayingQueue.containsBefore(nextStreamId)) {
+        while (nextStreamId == null || PlayingQueue.containsBeforeCurrent(nextStreamId)) {
             nextStreamId = relatedStreams[index].url!!.toID()
             if (index + 1 < relatedStreams.size) {
                 index += 1
