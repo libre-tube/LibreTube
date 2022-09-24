@@ -10,6 +10,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DownloadedMediaRowBinding
 import com.github.libretube.obj.DownloadedFile
 import com.github.libretube.ui.activities.OfflinePlayerActivity
+import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
@@ -74,7 +75,3 @@ class DownloadsAdapter(
         return files.size
     }
 }
-
-class DownloadsViewHolder(
-    val binding: DownloadedMediaRowBinding
-) : RecyclerView.ViewHolder(binding.root)

@@ -8,6 +8,7 @@ import com.github.libretube.databinding.SearchhistoryRowBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.query
+import com.github.libretube.ui.viewholders.SearchHistoryViewHolder
 
 class SearchHistoryAdapter(
     private var historyList: List<String>,
@@ -47,6 +48,3 @@ class SearchHistoryAdapter(
         }
     }
 }
-
-class SearchHistoryViewHolder(val binding: SearchhistoryRowBinding) :
-    RecyclerView.ViewHolder(binding.root)

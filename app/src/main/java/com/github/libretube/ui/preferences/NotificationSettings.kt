@@ -7,10 +7,10 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.SettingsActivity
-import com.github.libretube.ui.views.MaterialPreferenceFragment
+import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.util.NotificationHelper
 
-class NotificationSettings : MaterialPreferenceFragment() {
+class NotificationSettings : BasePreferenceFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.notification_settings, rootKey)

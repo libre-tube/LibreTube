@@ -4,7 +4,7 @@
 
     <PreferenceCategory app:title="@string/player">
 
-        <com.github.libretube.extensions.SliderPreference
+        <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_speed"
             app:defaultValue="1.0"
             app:key="playback_speed"

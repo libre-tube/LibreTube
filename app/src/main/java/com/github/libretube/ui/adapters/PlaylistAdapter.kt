@@ -14,6 +14,7 @@ import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
 import com.github.libretube.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.viewholders.PlaylistViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.PreferenceHelper
@@ -97,5 +98,3 @@ class PlaylistAdapter(
         }
     }
 }
-
-class PlaylistViewHolder(val binding: PlaylistRowBinding) : RecyclerView.ViewHolder(binding.root)

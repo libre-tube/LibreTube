@@ -14,11 +14,11 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSearchResultBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
-import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchAdapter
+import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.PreferenceHelper
 import retrofit2.HttpException
 import java.io.IOException

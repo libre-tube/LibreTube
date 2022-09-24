@@ -9,7 +9,7 @@ import com.github.libretube.constants.REDDIT_URL
 import com.github.libretube.constants.TELEGRAM_URL
 import com.github.libretube.constants.TWITTER_URL
 import com.github.libretube.databinding.ActivityCommunityBinding
-import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.ui.base.BaseActivity
 
 class CommunityActivity : BaseActivity() {
     private lateinit var binding: ActivityCommunityBinding

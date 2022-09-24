@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.SearchsuggestionRowBinding
+import com.github.libretube.ui.viewholders.SearchSuggestionsViewHolder
 
 class SearchSuggestionsAdapter(
     private var suggestionsList: List<String>,
@@ -32,6 +33,3 @@ class SearchSuggestionsAdapter(
         }
     }
 }
-
-class SearchSuggestionsViewHolder(val binding: SearchsuggestionRowBinding) :
-    RecyclerView.ViewHolder(binding.root)

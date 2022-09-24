@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
-import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.DownloadHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem

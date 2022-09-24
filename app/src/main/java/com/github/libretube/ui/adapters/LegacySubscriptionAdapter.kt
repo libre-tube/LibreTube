@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.LegacySubscriptionChannelBinding
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.viewholders.LegacySubscriptionViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
@@ -42,7 +43,3 @@ class LegacySubscriptionAdapter(
         return subscriptions.size
     }
 }
-
-class LegacySubscriptionViewHolder(
-    val binding: LegacySubscriptionChannelBinding
-) : RecyclerView.ViewHolder(binding.root)

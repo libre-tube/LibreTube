@@ -11,14 +11,14 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
-import com.github.libretube.ui.views.MaterialPreferenceFragment
 import com.github.libretube.util.BackupHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class AdvancedSettings : MaterialPreferenceFragment() {
+class AdvancedSettings : BasePreferenceFragment() {
 
     // backup and restore database
     private lateinit var getBackupFile: ActivityResultLauncher<String>

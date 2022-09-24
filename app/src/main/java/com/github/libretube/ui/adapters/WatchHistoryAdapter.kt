@@ -10,6 +10,7 @@ import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
@@ -66,6 +67,3 @@ class WatchHistoryAdapter(
         return watchHistory.size
     }
 }
-
-class WatchHistoryViewHolder(val binding: WatchHistoryRowBinding) :
-    RecyclerView.ViewHolder(binding.root)

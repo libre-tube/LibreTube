@@ -17,15 +17,15 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
-import com.github.libretube.ui.views.MaterialPreferenceFragment
 import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PreferenceHelper
 
-class InstanceSettings : MaterialPreferenceFragment() {
+class InstanceSettings : BasePreferenceFragment() {
 
     /**
      * result listeners for importing and exporting subscriptions

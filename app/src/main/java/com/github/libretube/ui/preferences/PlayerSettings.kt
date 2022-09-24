@@ -7,11 +7,11 @@ import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.SettingsActivity
-import com.github.libretube.ui.views.MaterialPreferenceFragment
+import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.util.PreferenceHelper
 import java.util.*
 
-class PlayerSettings : MaterialPreferenceFragment() {
+class PlayerSettings : BasePreferenceFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.player_settings, rootKey)

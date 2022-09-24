@@ -15,10 +15,10 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
-import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.TAG
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.ui.adapters.PlaylistsAdapter
+import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.util.PreferenceHelper
 import retrofit2.HttpException
