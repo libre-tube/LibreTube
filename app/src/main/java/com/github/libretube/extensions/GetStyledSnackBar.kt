@@ -2,6 +2,7 @@ package com.github.libretube.extensions
 
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.content.res.ResourcesCompat
 import com.github.libretube.R
 import com.google.android.material.snackbar.Snackbar
 
@@ -21,6 +22,6 @@ fun View.getStyledSnackBar(text: Int): Snackbar {
     )
     snackBar.view.layoutParams = params
 
-    snackBar.view.background = resources.getDrawable(R.drawable.snackbar_shape, null)
+    snackBar.view.background = ResourcesCompat.getDrawable(resources, R.drawable.snackbar_shape, null)
     return snackBar
 }
