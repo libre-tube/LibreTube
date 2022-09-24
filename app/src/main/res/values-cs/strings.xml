@@ -336,4 +336,6 @@
     <string name="save_feed">Načítat zdroj v pozadí</string>
     <string name="save_feed_summary">Načítat zdroj odběrů v pozadí a zabránit jeho automatickému obnovování.</string>
     <string name="play_next">Přehrát jako další</string>
+    <string name="navigation_bar">Navigační lišta</string>
+    <string name="select_at_least_one">Vyberte prosím alespoň jednu položku</string>
 </resources>
