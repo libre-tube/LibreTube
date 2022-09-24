@@ -7,6 +7,7 @@ import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
@@ -50,6 +51,3 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.gith
         }
     }
 }
-
-class SubscriptionChannelViewHolder(val binding: ChannelSubscriptionRowBinding) :
-    RecyclerView.ViewHolder(binding.root)

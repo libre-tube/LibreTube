@@ -1,11 +1,13 @@
 package com.github.libretube.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.RepliesRowBinding
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.ui.viewholders.RepliesViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
@@ -31,6 +33,7 @@ class RepliesAdapter(
         return RepliesViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RepliesViewHolder, position: Int) {
         holder.binding.apply {
             val reply = replies[position]
@@ -61,5 +64,3 @@ class RepliesAdapter(
         return replies.size
     }
 }
-
-class RepliesViewHolder(val binding: RepliesRowBinding) : RecyclerView.ViewHolder(binding.root)

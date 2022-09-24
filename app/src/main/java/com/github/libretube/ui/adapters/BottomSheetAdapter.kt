@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.BottomSheetItemBinding
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.ui.viewholders.BottomSheetViewHolder
 
 class BottomSheetAdapter(
     private val items: List<BottomSheetItem>,
@@ -42,7 +43,3 @@ class BottomSheetAdapter(
         return items.size
     }
 }
-
-class BottomSheetViewHolder(
-    val binding: BottomSheetItemBinding
-) : RecyclerView.ViewHolder(binding.root)

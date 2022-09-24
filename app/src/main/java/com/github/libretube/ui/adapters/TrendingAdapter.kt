@@ -1,5 +1,6 @@
 package com.github.libretube.ui.adapters
 
+import android.annotation.SuppressLint
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
 import com.github.libretube.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.viewholders.SubscriptionViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
@@ -44,6 +46,7 @@ class TrendingAdapter(
         return SubscriptionViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
         val trending = streamItems[position]
         holder.binding.apply {
@@ -71,6 +74,3 @@ class TrendingAdapter(
         }
     }
 }
-
-class SubscriptionViewHolder(val binding: TrendingRowBinding) :
-    RecyclerView.ViewHolder(binding.root)

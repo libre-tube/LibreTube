@@ -1,5 +1,6 @@
 package com.github.libretube.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.SearchItem
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
@@ -16,6 +18,7 @@ import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
 import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import kotlinx.coroutines.CoroutineScope
@@ -23,12 +26,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SearchAdapter(
-    private val searchItems: MutableList<com.github.libretube.api.obj.SearchItem>,
+    private val searchItems: MutableList<SearchItem>,
     private val childFragmentManager: FragmentManager
 ) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
-    fun updateItems(newItems: List<com.github.libretube.api.obj.SearchItem>) {
+    fun updateItems(newItems: List<SearchItem>) {
         val searchItemsSize = searchItems.size
         searchItems.addAll(newItems)
         notifyItemRangeInserted(searchItemsSize, newItems.size)
@@ -78,7 +81,7 @@ class SearchAdapter(
         }
     }
 
-    private fun bindWatch(item: com.github.libretube.api.obj.SearchItem, binding: VideoRowBinding) {
+    private fun bindWatch(item: SearchItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration!!)
@@ -109,8 +112,9 @@ class SearchAdapter(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindChannel(
-        item: com.github.libretube.api.obj.SearchItem,
+        item: SearchItem,
         binding: ChannelRowBinding
     ) {
         binding.apply {
@@ -160,7 +164,7 @@ class SearchAdapter(
     }
 
     private fun bindPlaylist(
-        item: com.github.libretube.api.obj.SearchItem,
+        item: SearchItem,
         binding: PlaylistSearchRowBinding
     ) {
         binding.apply {
@@ -182,23 +186,5 @@ class SearchAdapter(
                 true
             }
         }
-    }
-}
-
-class SearchViewHolder : RecyclerView.ViewHolder {
-    var videoRowBinding: VideoRowBinding? = null
-    var channelRowBinding: ChannelRowBinding? = null
-    var playlistRowBinding: PlaylistSearchRowBinding? = null
-
-    constructor(binding: VideoRowBinding) : super(binding.root) {
-        videoRowBinding = binding
-    }
-
-    constructor(binding: ChannelRowBinding) : super(binding.root) {
-        channelRowBinding = binding
-    }
-
-    constructor(binding: PlaylistSearchRowBinding) : super(binding.root) {
-        playlistRowBinding = binding
     }
 }

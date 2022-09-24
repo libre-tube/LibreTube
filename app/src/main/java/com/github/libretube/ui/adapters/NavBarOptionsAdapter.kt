@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.NavOptionsItemBinding
 import com.github.libretube.obj.NavBarItem
+import com.github.libretube.ui.viewholders.NavBarOptionsViewHolder
 
 class NavBarOptionsAdapter(
     val items: MutableList<NavBarItem>
@@ -49,7 +50,3 @@ class NavBarOptionsAdapter(
         return items.filter { it.isEnabled }.size
     }
 }
-
-class NavBarOptionsViewHolder(
-    val binding: NavOptionsItemBinding
-) : RecyclerView.ViewHolder(binding.root)
