@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivitySettingsBinding
-import com.github.libretube.extensions.BaseActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.preferences.MainSettings
 
 class SettingsActivity : BaseActivity() {

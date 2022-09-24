@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.extensions.BaseFragment
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
+import com.github.libretube.ui.base.BaseFragment
 
 class WatchHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentWatchHistoryBinding

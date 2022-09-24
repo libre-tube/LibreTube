@@ -1,4 +1,4 @@
-package com.github.libretube.extensions
+package com.github.libretube.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,6 +8,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.PreferenceRanges
 import com.github.libretube.databinding.DialogSliderBinding
+import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

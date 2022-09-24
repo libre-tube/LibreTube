@@ -1,4 +1,4 @@
-package com.github.libretube.extensions
+package com.github.libretube.ui.base
 
 import androidx.fragment.app.Fragment
 

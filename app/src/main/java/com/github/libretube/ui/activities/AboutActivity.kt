@@ -16,8 +16,8 @@ import com.github.libretube.constants.PIPED_GITHUB_URL
 import com.github.libretube.constants.WEBLATE_URL
 import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
-import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.getStyledSnackBar
+import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 

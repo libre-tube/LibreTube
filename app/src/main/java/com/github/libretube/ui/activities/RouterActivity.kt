@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
-import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.TAG
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.ThemeHelper
 
 class RouterActivity : BaseActivity() {

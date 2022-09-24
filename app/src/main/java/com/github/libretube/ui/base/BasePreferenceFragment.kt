@@ -1,4 +1,4 @@
-package com.github.libretube.ui.views
+package com.github.libretube.ui.base
 
 import android.os.Bundle
 import androidx.preference.EditTextPreference
@@ -13,7 +13,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 /**
  * PreferenceFragmentCompat using the [MaterialAlertDialogBuilder] instead of the old dialog builder
  */
-open class MaterialPreferenceFragment : PreferenceFragmentCompat() {
+open class BasePreferenceFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {}
 
     override fun onDisplayPreferenceDialog(preference: Preference) {

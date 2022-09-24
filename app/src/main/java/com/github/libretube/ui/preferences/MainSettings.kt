@@ -8,14 +8,14 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.extensions.getStyledSnackBar
 import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.UpdateDialog
-import com.github.libretube.ui.views.MaterialPreferenceFragment
 import com.github.libretube.util.NetworkHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainSettings : MaterialPreferenceFragment() {
+class MainSettings : BasePreferenceFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)

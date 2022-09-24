@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
-import com.github.libretube.extensions.BaseActivity
 import com.github.libretube.extensions.getStyledSnackBar
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.ThemeHelper
