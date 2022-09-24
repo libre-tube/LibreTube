@@ -1,11 +1,13 @@
 package com.github.libretube.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,8 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.getStyledSnackBar
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.ui.base.BaseFragment
@@ -79,6 +83,26 @@ class HomeFragment : BaseFragment() {
             }
             runOnUiThread {
                 binding.progressBar.visibility = View.GONE
+
+                // show a [SnackBar] if there are no trending videos available
+                if (response.isEmpty()) {
+                    binding.root.getStyledSnackBar(
+                        R.string.change_region
+                    )
+                        .setAction(
+                            R.string.settings
+                        ) {
+                            startActivity(
+                                Intent(
+                                    context,
+                                    SettingsActivity::class.java
+                                )
+                            )
+                        }
+                        .show()
+                    return@runOnUiThread
+                }
+
                 if (
                     PreferenceHelper.getBoolean(
                         PreferenceKeys.ALTERNATIVE_TRENDING_LAYOUT,

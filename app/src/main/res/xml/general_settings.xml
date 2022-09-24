@@ -7,11 +7,8 @@
         <ListPreference
             android:icon="@drawable/ic_region"
             app:defaultValue="sys"
-            app:entries="@array/regions"
-            app:entryValues="@array/regionsValue"
             app:key="region"
-            app:title="@string/region"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/region" />
 
         <ListPreference
             android:icon="@drawable/ic_translate"

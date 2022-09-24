@@ -11,6 +11,7 @@ import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
+import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
 
 class GeneralSettings : BasePreferenceFragment() {
@@ -27,6 +28,9 @@ class GeneralSettings : BasePreferenceFragment() {
             restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
+
+        val region = findPreference<ListPreference>("region")
+        region?.let { setupRegionPref(it) }
 
         val autoRotation = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_ROTATION)
         autoRotation?.setOnPreferenceChangeListener { _, _ ->
@@ -55,6 +59,23 @@ class GeneralSettings : BasePreferenceFragment() {
         breakReminder?.setOnPreferenceChangeListener { _, newValue ->
             breakReminderTime?.isEnabled = newValue as Boolean
             true
+        }
+    }
+
+    private fun setupRegionPref(preference: ListPreference) {
+        val countries = LocaleHelper.getAvailableCountries()
+        val countryNames = countries.map { it.name }
+            .toMutableList()
+        countryNames.add(0, requireContext().getString(R.string.systemLanguage))
+
+        val countryCodes = countries.map { it.code }
+            .toMutableList()
+        countryCodes.add(0, "sys")
+
+        preference.entries = countryNames.toTypedArray()
+        preference.entryValues = countryCodes.toTypedArray()
+        preference.summaryProvider = Preference.SummaryProvider<ListPreference> {
+            it.entry
         }
     }
 }
