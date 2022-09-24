@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIcon="?homeAsUpIndicator"
         app:title="@string/settings" />
 
     <FrameLayout
