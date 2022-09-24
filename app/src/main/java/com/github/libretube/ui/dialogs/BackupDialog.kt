@@ -3,25 +3,20 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
-import com.github.libretube.databinding.DialogBackupBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
-import com.github.libretube.ui.adapters.BackupOptionsAdapter
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class BackupDialog(
     private val createBackupFile: (BackupFile) -> Unit
 ) : DialogFragment() {
-    private lateinit var binding: DialogBackupBinding
-
     private val backupFile = BackupFile()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val backupOptions = listOf(
+        val backupOptionNames = listOf(
             R.string.watch_history,
             R.string.watch_positions,
             R.string.search_history,
@@ -30,18 +25,15 @@ class BackupDialog(
             R.string.preferences
         )
 
-        val selected = MutableList(backupOptions.size) { false }
+        val backupItems = backupOptionNames.map { context?.getString(it)!! }.toTypedArray()
 
-        binding = DialogBackupBinding.inflate(layoutInflater)
-        binding.backupOptionsRecycler.layoutManager = LinearLayoutManager(context)
-        binding.backupOptionsRecycler.adapter =
-            BackupOptionsAdapter(backupOptions) { position, isChecked ->
-                selected[position] = isChecked
-            }
+        val selected = BooleanArray(backupOptionNames.size) { false }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.backup)
-            .setView(binding.root)
+            .setMultiChoiceItems(backupItems, selected) { _, index, newValue ->
+                selected[index] = newValue
+            }
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.backup) { _, _ ->
                 val thread = Thread {
