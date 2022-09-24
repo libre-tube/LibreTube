@@ -59,6 +59,10 @@ jobs:
         run: |
           mv .github/uploader.py .
           echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
+          git clone https://github.com/LibreTubeAlpha/Archive archive
+          rm -rf archive/*.apk
+          mv app/build/outputs/apk/debug/*.apk archive/
+          cd archive
           python uploader.py
       
       - name: Telegram Bot
@@ -66,8 +70,7 @@ jobs:
         run: |
           cd archive
           curl https://libre-tube.github.io/images/LibreAlpha.png --output alpha.png
-          curl https://raw.githubusercontent.com/LibreTubeAlpha/Archive/main/exec --output bot-api
-          chmod 755 ./bot-api
+          chmod 755 ./exec
           mv ../tgconfig.py .
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
