@@ -329,4 +329,11 @@
     <string name="preferences">Preferenze</string>
     <string name="backup_customInstances">Istanze personalizzate</string>
     <string name="play_next">Riproduci il successivo</string>
+    <string name="background_channel_name">Modalità in background</string>
+    <string name="download_channel_name">Servizio di Download</string>
+    <string name="push_channel_name">Operatore di notifica</string>
+    <string name="push_channel_description">Mostra una notifica quando sono disponibili nuove stream.</string>
+    <string name="save_feed">Carica feed in background</string>
+    <string name="save_feed_summary">Carica il feed delle iscrizioni in background e impedisci che venga aggiornato automaticamente.</string>
+    <string name="legacy_subscriptions">Visualizzazione iscrizioni legacy</string>
 </resources>
