@@ -8,6 +8,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
+import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
 import java.util.*
 
@@ -36,24 +37,24 @@ class PlayerSettings : BasePreferenceFragment() {
         }
 
         val defaultSubtitle = findPreference<ListPreference>(PreferenceKeys.DEFAULT_SUBTITLE)
-        val locales: Array<Locale> = Locale.getAvailableLocales()
-        val localeNames = ArrayList<String>()
-        val localeCodes = ArrayList<String>()
+        defaultSubtitle?.let { setupSubtitlePref(it) }
+    }
 
-        localeNames.add(context?.getString(R.string.none)!!)
-        localeCodes.add("")
+    private fun setupSubtitlePref(preference: ListPreference) {
+        val locales = LocaleHelper.getAvailableLocales()
+        val localeNames = locales.map { it.name }
+            .toMutableList()
+        localeNames.add(0, requireContext().getString(R.string.none))
 
-        locales.forEach {
-            if (!localeNames.contains(it.getDisplayLanguage())) {
-                localeNames.add(it.getDisplayLanguage())
-                localeCodes.add(it.language)
-            }
-        }
-        defaultSubtitle?.entries = localeNames.toTypedArray()
-        defaultSubtitle?.entryValues = localeCodes.toTypedArray()
-        defaultSubtitle?.summaryProvider =
-            Preference.SummaryProvider<ListPreference> { preference ->
-                preference.entry
+        val localeCodes = locales.map { it.code }
+            .toMutableList()
+        localeCodes.add(0, "")
+
+        preference.entries = localeNames.toTypedArray()
+        preference.entryValues = localeCodes.toTypedArray()
+        preference.summaryProvider =
+            Preference.SummaryProvider<ListPreference> {
+                it.entry
             }
     }
 }

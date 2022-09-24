@@ -336,4 +336,6 @@
     <string name="save_feed">后台加载订阅源</string>
     <string name="save_feed_summary">后台加载订阅源并防止其自动刷新。</string>
     <string name="play_next">播放下一个</string>
+    <string name="select_at_least_one">请选择至少一个项目</string>
+    <string name="navigation_bar">导航栏</string>
 </resources>

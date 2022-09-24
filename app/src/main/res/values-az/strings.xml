@@ -336,4 +336,6 @@
     <string name="push_channel_description">Yeni yayımlar mövcud olduqda bildiriş göstərir.</string>
     <string name="background_channel_description">Səs oynadıcını idarə etmək üçün düymələri olan bildiriş göstərir.</string>
     <string name="play_next">Növbəti oynadın</string>
+    <string name="navigation_bar">Naviqasiya paneli</string>
+    <string name="select_at_least_one">Ən azı bir element seçin</string>
 </resources>

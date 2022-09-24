@@ -335,4 +335,7 @@
     <string name="download_channel_description">Medya indirirken bildirim gösterir.</string>
     <string name="push_channel_name">Bildirim Çalışanı</string>
     <string name="push_channel_description">Yeni akışlar mevcut olduğunda bir bildirim gösterir.</string>
+    <string name="play_next">Sonrakini oynat</string>
+    <string name="navigation_bar">Gezinme çubuğu</string>
+    <string name="select_at_least_one">Lütfen en az bir öge seçin</string>
 </resources>

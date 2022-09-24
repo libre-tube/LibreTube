@@ -30,11 +30,11 @@
     <string name="logout">Wyloguj się</string>
     <string name="import_from_yt">Importuj subskrypcje</string>
     <string name="app_theme">Motyw aplikacji</string>
-    <string name="server_error">Serwer napotkał problem. Spróbuj może użyć innej instancji\?</string>
+    <string name="server_error">Serwer napotkał problem. Spróbuj użyć innej instancji.</string>
     <string name="unknown_error">Błąd sieci.</string>
     <string name="error">Coś poszło nie tak.</string>
     <string name="notgmail">To jest dla konta Piped.</string>
-    <string name="defres">Jakość wideo</string>
+    <string name="defres">Rozdzielczość wideo</string>
     <string name="grid">Zagęszczenie siatki filmów</string>
     <string name="emptyList">Tu jeszcze nic nie ma.</string>
     <string name="deletePlaylist">Usuń listę odtwarzania</string>
@@ -48,7 +48,7 @@
     <string name="cannotDownload">Nie można pobrać tego wideo.</string>
     <string name="vlc">Otwórz w VLC</string>
     <string name="empty">Nazwa użytkownika i hasło nie mogą być puste.</string>
-    <string name="vlcerror">Nie można otworzyć w VLC. Może nie być zainstalowana.</string>
+    <string name="vlcerror">Nie można otworzyć w VLC. Może nie być zainstalowany.</string>
     <string name="areYouSure">Na pewno chcesz usunąć tę listę odtwarzania\?</string>
     <string name="addToPlaylist">Dodaj do listy odtwarzania</string>
     <string name="emptyPlaylistName">Nazwa listy odtwarzania nie może być pusta</string>
@@ -109,7 +109,7 @@
     <string name="app_icon">Ikona aplikacji</string>
     <string name="youtube">YouTube</string>
     <string name="music_songs">YT Music (Muzyka)</string>
-    <string name="music_videos">YT Wideoklip</string>
+    <string name="music_videos">YT Music (Wideo)</string>
     <string name="music_albums">YT Music (Albumy)</string>
     <string name="music_playlists">YT Music (Listy odtwarzania)</string>
     <string name="playOnBackground">Odtwarzanie w tle</string>
@@ -335,4 +335,7 @@
     <string name="download_channel_description">Pokazuje powiadomienie podczas pobierania mediów.</string>
     <string name="save_feed_summary">Załaduj kanał subskrypcji w tle i zapobiegnij jego automatycznemu odświeżaniu.</string>
     <string name="save_feed">Ładowanie kanału w tle</string>
+    <string name="play_next">Odtwórz następne</string>
+    <string name="navigation_bar">Pasek nawigacyjny</string>
+    <string name="select_at_least_one">Proszę wybrać co najmniej jedną pozycję</string>
 </resources>
