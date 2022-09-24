@@ -100,7 +100,7 @@ object ThemeHelper {
         for (activityAlias in activityAliases) {
             val activityClass = "com.github.libretube." +
                 if (activityAlias == activityAliases[0]) {
-                    "activities.MainActivity" // default icon/activity
+                    "ui.activities.MainActivity" // default icon/activity
                 } else {
                     activityAlias
                 }
@@ -116,7 +116,7 @@ object ThemeHelper {
         // set the class name for the activity alias
         val newLogoActivityClass = "com.github.libretube." +
             if (newLogoActivityAlias == activityAliases[0]) {
-                "activities.MainActivity" // default icon/activity
+                "ui.activities.MainActivity" // default icon/activity
             } else {
                 newLogoActivityAlias
             }
