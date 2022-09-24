@@ -17,7 +17,7 @@ class SettingsActivity : BaseActivity() {
 
         setContentView(binding.root)
 
-        binding.backImageButton.setOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
@@ -51,6 +51,6 @@ class SettingsActivity : BaseActivity() {
     }
 
     fun changeTopBarText(text: String) {
-        if (this::binding.isInitialized) binding.topBarTextView.text = text
+        if (this::binding.isInitialized) binding.toolbar.title = text
     }
 }

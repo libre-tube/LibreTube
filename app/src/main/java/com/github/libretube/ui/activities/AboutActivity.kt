@@ -66,14 +66,6 @@ class AboutActivity : BaseActivity() {
             true
         }
 
-        binding.donate.setOnClickListener {
-            openLinkFromHref(DONATE_URL)
-        }
-        binding.donate.setOnLongClickListener {
-            onLongClick(DONATE_URL)
-            true
-        }
-
         binding.github.setOnClickListener {
             openLinkFromHref(GITHUB_URL)
         }

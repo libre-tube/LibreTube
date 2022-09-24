@@ -1,37 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp">
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="@string/settings" />
 
-        <ImageButton
-            android:id="@+id/back_imageButton"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginLeft="15dp"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_arrow_back" />
-
-        <TextView
-            android:id="@+id/topBar_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
-            android:text="@string/settings"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" />
+
 </LinearLayout>
