@@ -10,7 +10,6 @@ import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import com.github.libretube.R
-import com.github.libretube.constants.DONATE_URL
 import com.github.libretube.constants.GITHUB_URL
 import com.github.libretube.constants.LICENSE_URL
 import com.github.libretube.constants.PIPED_GITHUB_URL
@@ -30,6 +29,10 @@ class AboutActivity : BaseActivity() {
 
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         binding.appIcon.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
@@ -63,14 +66,6 @@ class AboutActivity : BaseActivity() {
         }
         binding.translate.setOnLongClickListener {
             onLongClick(WEBLATE_URL)
-            true
-        }
-
-        binding.donate.setOnClickListener {
-            openLinkFromHref(DONATE_URL)
-        }
-        binding.donate.setOnLongClickListener {
-            onLongClick(DONATE_URL)
             true
         }
 

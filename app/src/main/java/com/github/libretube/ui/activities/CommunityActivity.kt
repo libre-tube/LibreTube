@@ -20,6 +20,10 @@ class CommunityActivity : BaseActivity() {
         binding = ActivityCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         binding.telegram.setOnClickListener {
             openLinkFromHref(TELEGRAM_URL)
         }
