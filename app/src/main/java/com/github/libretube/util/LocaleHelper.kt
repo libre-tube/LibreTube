@@ -103,4 +103,21 @@ object LocaleHelper {
         countries.sortBy { it.name }
         return countries
     }
+
+    fun getAvailableLocales(): List<Country> {
+        val availableLocales: Array<Locale> = Locale.getAvailableLocales()
+        val locales = mutableListOf<Country>()
+
+        availableLocales.forEach { locale ->
+            if (locales.filter { it.code == locale.language }.isEmpty()) {
+                locales.add(
+                    Country(
+                        locale.displayLanguage,
+                        locale.language
+                    )
+                )
+            }
+        }
+        return locales
+    }
 }
