@@ -6,11 +6,11 @@ import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.extensions.getStyledSnackBar
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.UpdateDialog
 import com.github.libretube.util.NetworkHelper
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -97,8 +97,14 @@ class MainSettings : BasePreferenceFragment() {
         update?.setOnPreferenceClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 if (!NetworkHelper.isNetworkAvailable(requireContext())) {
-                    (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.unknown_error)
-                        ?.show()
+                    (activity as? SettingsActivity)?.binding?.let {
+                        Snackbar.make(
+                            it.root,
+                            R.string.unknown_error,
+                            Snackbar.LENGTH_SHORT
+                        )
+                            .show()
+                    }
                     return@launch
                 }
                 // check for update
@@ -109,8 +115,14 @@ class MainSettings : BasePreferenceFragment() {
                 }
                 if (updateInfo.name == null) {
                     // request failed
-                    (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.unknown_error)
-                        ?.show()
+                    (activity as? SettingsActivity)?.binding?.let {
+                        Snackbar.make(
+                            it.root,
+                            R.string.unknown_error,
+                            Snackbar.LENGTH_SHORT
+                        )
+                            .show()
+                    }
                 } else if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
                     val updateAvailableDialog = UpdateDialog(updateInfo)
@@ -120,8 +132,14 @@ class MainSettings : BasePreferenceFragment() {
                     )
                 } else {
                     // otherwise show the no update available snackBar
-                    (activity as? SettingsActivity)?.binding?.root?.getStyledSnackBar(R.string.app_uptodate)
-                        ?.show()
+                    (activity as? SettingsActivity)?.binding?.let {
+                        Snackbar.make(
+                            it.root,
+                            R.string.unknown_error,
+                            Snackbar.LENGTH_SHORT
+                        )
+                            .show()
+                    }
                 }
             }
             true

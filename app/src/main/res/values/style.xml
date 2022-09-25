@@ -171,4 +171,12 @@
 
     </style>
 
+    <style name="snackBarStyle" parent="@style/Widget.Material3.Snackbar">
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.ExtraLarge</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="maxLines">2</item>
+        <item name="animationMode">slide</item>
+    </style>
+
 </resources>
