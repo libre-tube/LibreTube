@@ -16,7 +16,6 @@ import com.github.libretube.constants.PIPED_GITHUB_URL
 import com.github.libretube.constants.WEBLATE_URL
 import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
-import com.github.libretube.extensions.getStyledSnackBar
 import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -103,12 +102,16 @@ class AboutActivity : BaseActivity() {
         val clip = ClipData.newPlainText(getString(R.string.copied), href)
         clipboard.setPrimaryClip(clip)
         // show the snackBar with open action
-        val snackBar = binding.root.getStyledSnackBar(R.string.copied_to_clipboard)
-        snackBar.setAction(R.string.open_copied) {
-            openLinkFromHref(href)
-        }
-        snackBar.animationMode = Snackbar.ANIMATION_MODE_FADE
-        snackBar.show()
+        Snackbar.make(
+            binding.root,
+            R.string.copied_to_clipboard,
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(R.string.open_copied) {
+                openLinkFromHref(href)
+            }
+            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+            .show()
     }
 
     private fun showLicense() {

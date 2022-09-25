@@ -11,6 +11,8 @@
             @style/Preference.SwitchPreferenceCompat.Material3
         </item>
 
+        <item name="snackbarStyle">@style/snackBarStyle</item>
+
     </style>
 
     <style name="StartupTheme" parent="BaseTheme">
