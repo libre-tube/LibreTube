@@ -165,11 +165,13 @@ class InstanceSettings : BasePreferenceFragment() {
             // fetch official public instances
 
             val response = try {
-                RetrofitInstance.externalApi.getInstances()
+                RetrofitInstance.externalApi.getInstances().toMutableList()
             } catch (e: Exception) {
                 e.printStackTrace()
-                emptyList()
+                mutableListOf()
             }
+
+            response.sortBy { it.name }
 
             response.forEach {
                 if (it.name != null && it.api_url != null) {
