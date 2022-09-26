@@ -38,15 +38,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/behavior">
-
-        <Preference
-            android:icon="@drawable/ic_home"
-            app:key="nav_bar_items"
-            app:title="@string/navigation_bar" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/misc">
 
         <SwitchPreferenceCompat

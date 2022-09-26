@@ -38,6 +38,12 @@
             app:title="@string/app_icon"
             app:useSimpleSummaryProvider="true" />
 
+        <Preference
+            android:icon="@drawable/ic_home"
+            app:key="nav_bar_items"
+            app:title="@string/navigation_bar" />
+
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/app_behavior">
