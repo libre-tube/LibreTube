@@ -77,6 +77,7 @@ object PreferenceKeys {
     const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val SB_SKIP_MANUALLY = "sb_skip_manually_key"
+    const val LIMIT_HLS = "limit_hls"
 
     /**
      * Background mode
@@ -101,8 +102,6 @@ object PreferenceKeys {
     const val CLEAR_WATCH_HISTORY = "clear_watch_history"
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
-    const val BACKUP_SETTINGS = "backup_settings"
-    const val RESTORE_SETTINGS = "restore_settings"
 
     /**
      * History
