@@ -1,10 +1,8 @@
 package com.github.libretube.util
 
 import android.app.Activity
-import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.text.Spanned
 import android.util.TypedValue
@@ -126,23 +124,6 @@ object ThemeHelper {
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP
         )
-    }
-
-    /**
-     * Needed due to different MainActivity Aliases because of the app icons
-     */
-    fun restartMainActivity(context: Context) {
-        // kill player notification
-        val nManager = context
-            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nManager.cancelAll()
-        // start a new Intent of the app
-        val pm: PackageManager = context.packageManager
-        val intent = pm.getLaunchIntentForPackage(context.packageName)
-        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        context.startActivity(intent)
-        // kill the old application
-        android.os.Process.killProcess(android.os.Process.myPid())
     }
 
     /**

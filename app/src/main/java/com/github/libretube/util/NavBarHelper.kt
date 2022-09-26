@@ -90,6 +90,6 @@ object NavBarHelper {
                 ).icon = menuItem.icon
             }
         }
-        return navBarItems[0].id
+        return navBarItems.filter { it.isEnabled }[0].id
     }
 }
