@@ -5,13 +5,27 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/startpage" />
+
     <item
         android:id="@+id/subscriptionsFragment"
         android:icon="@drawable/ic_subscriptions"
         android:title="@string/subscriptions" />
+
     <item
         android:id="@+id/libraryFragment"
         android:icon="@drawable/ic_library"
         android:title="@string/library" />
+
+    <item
+        android:id="@+id/downloadsFragment"
+        android:icon="@drawable/ic_download_filled"
+        android:title="@string/downloads"
+        android:enabled="false" />
+
+    <item
+        android:id="@+id/watchHistoryFragment"
+        android:icon="@drawable/ic_history_filled"
+        android:title="@string/history"
+        android:enabled="false" />
 
 </menu>

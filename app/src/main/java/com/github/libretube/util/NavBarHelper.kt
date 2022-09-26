@@ -37,7 +37,8 @@ object NavBarHelper {
                 defaultNavBarItems.add(
                     NavBarItem(
                         it.itemId,
-                        it.title.toString()
+                        it.title.toString(),
+                        it.isEnabled
                     )
                 )
             }
