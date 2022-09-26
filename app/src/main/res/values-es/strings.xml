@@ -98,7 +98,7 @@
     <string name="category_selfpromo">No remunerado/Autopromoción</string>
     <string name="category_intro">Intermedio/Animación de entrada</string>
     <string name="category_outro">Tarjetas finales y créditos</string>
-    <string name="category_outro_description">Información después del final. No para conclusiones con información.</string>
+    <string name="category_outro_description">Información después del final. No para conclusiones con info.</string>
     <string name="category_intro_description">Un intervalo sin contenido real. Puede ser una pausa, un fotograma estático, una animación que se repite. No debe utilizarse para transiciones que contengan información.</string>
     <string name="license">Licencia</string>
     <string name="color_red">Rojo</string>
@@ -338,4 +338,5 @@
     <string name="play_next">Reproducir el siguiente</string>
     <string name="navigation_bar">Barra de navegación</string>
     <string name="select_at_least_one">Por favor, seleccione al menos un artículo</string>
+    <string name="change_region">Las tendencias parecen no estar disponibles para la región actual. Seleccione otro en la configuración.</string>
 </resources>

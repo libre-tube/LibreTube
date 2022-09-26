@@ -338,4 +338,5 @@
     <string name="play_next">Přehrát jako další</string>
     <string name="navigation_bar">Navigační lišta</string>
     <string name="select_at_least_one">Vyberte prosím alespoň jednu položku</string>
+    <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>
 </resources>

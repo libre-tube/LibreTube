@@ -338,4 +338,5 @@
     <string name="play_next">Проиграть следующий</string>
     <string name="navigation_bar">Панель навигации</string>
     <string name="select_at_least_one">Выберите как минимум один</string>
+    <string name="change_region">Похоже, что тренды не доступны в текущем регионе. Выберите другой регион в настройках.</string>
 </resources>

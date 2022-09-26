@@ -338,4 +338,5 @@
     <string name="play_next">Növbəti oynadın</string>
     <string name="navigation_bar">Naviqasiya paneli</string>
     <string name="select_at_least_one">Ən azı bir element seçin</string>
+    <string name="change_region">Trend\'in cari region üçün əlçatan olmadığı görünür.Tənzimləmələrdə başqasını seçin.</string>
 </resources>
