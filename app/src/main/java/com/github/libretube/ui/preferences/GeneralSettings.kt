@@ -39,15 +39,6 @@ class GeneralSettings : BasePreferenceFragment() {
             true
         }
 
-        val navBarOptions = findPreference<Preference>(PreferenceKeys.NAVBAR_ITEMS)
-        navBarOptions?.setOnPreferenceClickListener {
-            NavBarOptionsDialog().show(
-                childFragmentManager,
-                null
-            )
-            true
-        }
-
         val breakReminder =
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.BREAK_REMINDER_TOGGLE)
         val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.BREAK_REMINDER)

@@ -37,7 +37,8 @@ object NavBarHelper {
                 defaultNavBarItems.add(
                     NavBarItem(
                         it.itemId,
-                        it.title.toString()
+                        it.title.toString(),
+                        it.isEnabled
                     )
                 )
             }
@@ -90,6 +91,6 @@ object NavBarHelper {
                 ).icon = menuItem.icon
             }
         }
-        return navBarItems[0].id
+        return navBarItems.filter { it.isEnabled }[0].id
     }
 }
