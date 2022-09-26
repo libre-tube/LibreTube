@@ -66,6 +66,12 @@
             app:title="@string/playerAudioFormat"
             app:useSimpleSummaryProvider="true" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_play_filled"
+            android:title="@string/limit_hls"
+            app:key="limit_hls" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/background_mode">
