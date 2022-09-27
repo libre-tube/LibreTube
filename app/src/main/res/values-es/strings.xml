@@ -97,8 +97,8 @@
     <string name="category_interaction_description">Cuando hay un breve recordatorio para dar me gusta, suscribirse o seguir en medio del contenido. Si es largo o sobre algo específico, debería ser una autopromoción.</string>
     <string name="category_selfpromo">No remunerado/Autopromoción</string>
     <string name="category_intro">Intermedio/Animación de entrada</string>
-    <string name="category_outro">Tarjetas finales y créditos</string>
-    <string name="category_outro_description">Información después del final. No para conclusiones con info.</string>
+    <string name="category_outro">Fin de las tarjetas y los créditos</string>
+    <string name="category_outro_description">Información después del final. No para conclusiones con información.</string>
     <string name="category_intro_description">Un intervalo sin contenido real. Puede ser una pausa, un fotograma estático, una animación que se repite. No debe utilizarse para transiciones que contengan información.</string>
     <string name="license">Licencia</string>
     <string name="color_red">Rojo</string>
@@ -127,7 +127,7 @@
     <string name="sdcard">Tarjeta SD</string>
     <string name="shareTo">Compartir con</string>
     <string name="defaultIcon">Predeterminado</string>
-    <string name="download_directory_summary">Dónde se almacenan los medios descargados.</string>
+    <string name="download_directory_summary">Dónde se almacenan los archivos descargados.</string>
     <string name="update">Ver si hay una nueva versión</string>
     <string name="update_summary">Toca para saber si la aplicación está actualizada.</string>
     <string name="app_uptodate">Ejecutando la última versión.</string>
@@ -140,10 +140,10 @@
     <string name="instance_summary">Piped, sesión, y suscripciones</string>
     <string name="instance_name">Nombre de la instancia</string>
     <string name="instance_api_url">URL de la API de la instancia</string>
-    <string name="empty_instance">Introduzca el nombre y la URL de la API.</string>
+    <string name="empty_instance">Rellene el nombre y la URL de la API.</string>
     <string name="clear_customInstances">Eliminar añadidas</string>
-    <string name="invalid_url">Por favor, introduzca una URL que funcione</string>
-    <string name="version">V %1$s</string>
+    <string name="invalid_url">Por favor, introduce una URL que funcione</string>
+    <string name="version">Versión %1$s</string>
     <string name="about_summary">Conoce al equipo de LibreTube y como sucede todo.</string>
     <string name="related_streams">Contenido relacionado</string>
     <string name="related_streams_summary">Mostrar transmisiones similares a lo que ves.</string>
@@ -158,14 +158,14 @@
     <string name="torchIcon">Antorcha</string>
     <string name="customInstance_summary">Añadir…</string>
     <string name="downloads">Descargas</string>
-    <string name="video_format">Formato de vídeo</string>
-    <string name="video_format_summary">Conversión de archivos si se descargan tanto el audio como el vídeo.</string>
+    <string name="video_format">Formato del vídeo</string>
+    <string name="video_format_summary">Conversión de archivos si se descargan tanto audio como vídeo.</string>
     <string name="download_directory">Directorio de descargas</string>
     <string name="contributing">Contribución</string>
     <string name="donate">Donar</string>
     <string name="advanced">Avanzado</string>
     <string name="player">Reproductor</string>
-    <string name="appearance_summary">Ajuste la aplicación a su gusto.</string>
+    <string name="appearance_summary">Ajusta la aplicación a tu gusto.</string>
     <string name="playback_speed">Velocidad de reproducción</string>
     <string name="live">En vivo</string>
     <string name="show_chapters">Mostrar capítulos</string>
@@ -221,7 +221,7 @@
     <string name="community">Comunidad</string>
     <string name="discord">Discord</string>
     <string name="twitter">Twitter</string>
-    <string name="turnInternetOn">Por favor, active el Wi-Fi o los datos móviles para conectarse a Internet.</string>
+    <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
     <string name="require_restart_message">¿Reiniciar la aplicación\?</string>
@@ -273,13 +273,13 @@
     <string name="least_recent">Antiguo</string>
     <string name="required_network">Requiere conexión</string>
     <string name="network_all">Todos</string>
-    <string name="downloading_apk">Descargando aplicación…</string>
+    <string name="downloading_apk">Descargando APK…</string>
     <string name="seekbar_preview_summary">Muestra una instantánea al arrastrar el indicador de reproducción.</string>
     <string name="notify_new_streams_summary">Notificaciones sobre contenido nuevo de los creadores que sigues.</string>
     <string name="general">General</string>
     <string name="general_summary">Idioma y región</string>
     <string name="playerAudioFormat">Formato de audio para el reproductor</string>
-    <string name="playerAudioQuality">Calidad audio</string>
+    <string name="playerAudioQuality">Calidad del audio</string>
     <string name="already_spent_time">Ya has pasado %1$s minutos en la aplicación, es hora de tomar un descanso.</string>
     <string name="resize_mode_zoom">Ampliar</string>
     <string name="repeat_mode">Modo en bucle</string>
@@ -338,5 +338,6 @@
     <string name="play_next">Reproducir el siguiente</string>
     <string name="navigation_bar">Barra de navegación</string>
     <string name="select_at_least_one">Por favor, seleccione al menos un artículo</string>
-    <string name="change_region">Las tendencias parecen no estar disponibles para la región actual. Seleccione otro en la configuración.</string>
+    <string name="change_region">Las tendencias parecen no estar disponibles para la región actual. Seleccione otras en la configuración.</string>
+    <string name="limit_hls">Limitar HLS a 1080p</string>
 </resources>
