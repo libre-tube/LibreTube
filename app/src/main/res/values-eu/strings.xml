@@ -338,4 +338,6 @@
     <string name="trending_layout">Joera alternatiboaren diseinua</string>
     <string name="renamePlaylist">Berrizendatu erreprodukzio zerrenda</string>
     <string name="mobile_data">Datu mugikorrak</string>
+    <string name="change_region">Badirudi \'Joerak\' ez dagoela eskuragarri eskualde honetan. Mesedez, hautatu beste bat ezarpenetan.</string>
+    <string name="limit_hls">Mugatu HLS 1080p-ra</string>
 </resources>

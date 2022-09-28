@@ -339,4 +339,5 @@
     <string name="navigation_bar">شريط التنقل</string>
     <string name="select_at_least_one">يرجى اختيار عنصر واحد على الأقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
+    <string name="limit_hls">الحد من HLS إلى 1080p</string>
 </resources>
