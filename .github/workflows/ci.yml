@@ -69,7 +69,7 @@ jobs:
         continue-on-error: true
         run: |
           cd archive
-          curl https://libre-tube.github.io/images/LibreAlpha.png --output alpha.png
+          curl https://libre-tube.github.io/images/Alpha.png --output alpha.png
           chmod 755 ./exec
           mv ../tgconfig.py .
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
