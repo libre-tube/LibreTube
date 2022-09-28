@@ -11,6 +11,7 @@ import com.github.libretube.databinding.DownloadedMediaRowBinding
 import com.github.libretube.obj.DownloadedFile
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
+import com.github.libretube.util.DownloadHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
@@ -49,15 +50,19 @@ class DownloadsAdapter(
                     ) { _, index ->
                         when (index) {
                             0 -> {
-                                val downloadDir = File(
-                                    root.context.getExternalFilesDir(null),
-                                    "video"
-                                )
+                                val audioDir = DownloadHelper.getAudioDir(root.context)
+                                val videoDir = DownloadHelper.getVideoDir(root.context)
 
-                                File(
-                                    downloadDir,
-                                    file.name
-                                ).delete()
+                                listOf(audioDir, videoDir).forEach {
+                                    val f = File(it, file.name)
+                                    if (f.exists()) {
+                                        try {
+                                            f.delete()
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+                                        }
+                                    }
+                                }
 
                                 files.removeAt(position)
                                 notifyItemRemoved(position)

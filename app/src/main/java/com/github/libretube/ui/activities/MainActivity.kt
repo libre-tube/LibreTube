@@ -106,20 +106,15 @@ class MainActivity : BaseActivity() {
         binding.bottomNav.setOnItemSelectedListener {
             // clear backstack if it's the start fragment
             if (startFragmentId == it.itemId) navController.backQueue.clear()
-            // set menu item on click listeners
-            removeSearchFocus()
-            when (it.itemId) {
-                R.id.homeFragment -> {
-                    navController.navigate(R.id.homeFragment)
-                }
-                R.id.subscriptionsFragment -> {
-                    binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
-                    navController.navigate(R.id.subscriptionsFragment)
-                }
-                R.id.libraryFragment -> {
-                    navController.navigate(R.id.libraryFragment)
-                }
+
+            if (it.itemId == R.id.subscriptionsFragment) {
+                binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
             }
+
+            removeSearchFocus()
+
+            // navigate to the selected fragment
+            navController.navigate(it.itemId)
             false
         }
 

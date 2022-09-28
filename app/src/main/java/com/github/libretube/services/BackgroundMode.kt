@@ -29,6 +29,7 @@ import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import kotlinx.coroutines.CoroutineScope
@@ -213,7 +214,7 @@ class BackgroundMode : Service() {
          * Plays the next video when the current one ended
          */
         player?.addListener(object : Player.Listener {
-            override fun onPlaybackStateChanged(@Player.State state: Int) {
+            override fun onPlaybackStateChanged(state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
                         if (autoplay) playNextVideo()
@@ -221,6 +222,8 @@ class BackgroundMode : Service() {
                     Player.STATE_IDLE -> {
                         onDestroy()
                     }
+                    Player.STATE_BUFFERING -> {}
+                    Player.STATE_READY -> {}
                     PlaybackState.STATE_PAUSED -> {
                         query {
                             DatabaseHelper.saveWatchPosition(
@@ -229,8 +232,17 @@ class BackgroundMode : Service() {
                             )
                         }
                     }
-                    Player.STATE_BUFFERING -> {}
-                    Player.STATE_READY -> {}
+                }
+            }
+
+            override fun onPlayerError(error: PlaybackException) {
+                // show a toast on errors
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(
+                        this@BackgroundMode.applicationContext,
+                        error.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

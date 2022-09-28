@@ -338,4 +338,5 @@
     <string name="play_next">播放下一个</string>
     <string name="select_at_least_one">请选择至少一个项目</string>
     <string name="navigation_bar">导航栏</string>
+    <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>
 </resources>

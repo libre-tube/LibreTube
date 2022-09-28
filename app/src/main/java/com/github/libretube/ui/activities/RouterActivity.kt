@@ -9,7 +9,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.util.NavigationHelper
 
 class RouterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class RouterActivity : BaseActivity() {
             handleSendText(uri!!)
         } else {
             // start app as normal if URI not in host list
-            ThemeHelper.restartMainActivity(this)
+            NavigationHelper.restartMainActivity(this)
         }
     }
 

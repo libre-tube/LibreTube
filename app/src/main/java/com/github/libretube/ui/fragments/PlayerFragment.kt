@@ -1358,6 +1358,18 @@ class PlayerFragment : BaseFragment() {
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
+        // limit hls to full hd
+        if (
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.LIMIT_HLS,
+                false
+            )
+        ) {
+            val newParams = trackSelector.buildUponParameters()
+                .setMaxVideoSize(1920, 1080)
+            trackSelector.setParameters(newParams)
+        }
+
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
             .setLoadControl(loadControl)

@@ -338,4 +338,5 @@
     <string name="play_next">Odtwórz następne</string>
     <string name="navigation_bar">Pasek nawigacyjny</string>
     <string name="select_at_least_one">Proszę wybrać co najmniej jedną pozycję</string>
+    <string name="change_region">Filmy na czasie wydają się być niedostępne dla bieżącego regionu. Proszę wybrać inny w ustawieniach.</string>
 </resources>

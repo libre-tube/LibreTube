@@ -16,13 +16,13 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.getStyledSnackBar
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -86,8 +86,10 @@ class HomeFragment : BaseFragment() {
 
                 // show a [SnackBar] if there are no trending videos available
                 if (response.isEmpty()) {
-                    binding.root.getStyledSnackBar(
-                        R.string.change_region
+                    Snackbar.make(
+                        binding.root,
+                        R.string.change_region,
+                        Snackbar.LENGTH_LONG
                     )
                         .setAction(
                             R.string.settings
