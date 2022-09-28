@@ -6,7 +6,7 @@ from os import system
 from time import sleep as wait
 
 def deploy():
-    system(f'./bot-api --local --api-id={TG_API_ID} --api-hash={TG_API_HASH}')
+    system(f'./exec --local --api-id={TG_API_ID} --api-hash={TG_API_HASH}')
 
 def bot():
     wait(10)
