@@ -27,6 +27,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.util.RepeatModeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlin.math.roundToInt
 
 @SuppressLint("ClickableViewAccessibility")
 internal class CustomExoPlayerView(
@@ -61,8 +62,10 @@ internal class CustomExoPlayerView(
 
     private val seekIncrement = PreferenceHelper.getString(
         PreferenceKeys.SEEK_INCREMENT,
-        "5"
-    ).toLong() * 1000
+        "10.0"
+    ).toFloat()
+        .roundToInt()
+        .toLong() * 1000
 
     private var resizeModePref = PreferenceHelper.getString(
         PreferenceKeys.PLAYER_RESIZE_MODE,
