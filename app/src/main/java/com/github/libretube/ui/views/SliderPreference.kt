@@ -5,10 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.preference.Preference
 import com.github.libretube.R
-import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.PreferenceRanges
 import com.github.libretube.databinding.DialogSliderBinding
-import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -24,25 +21,27 @@ class SliderPreference(
 ) {
     private lateinit var sliderBinding: DialogSliderBinding
 
+    val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.SliderPreference)
+
     override fun onClick() {
+        val defValue = typedArray.getFloat(R.styleable.SliderPreference_defValue, 1.0f)
+        val valueFrom = typedArray.getFloat(R.styleable.SliderPreference_valueFrom, 1.0f)
+        val valueTo = typedArray.getFloat(R.styleable.SliderPreference_valueTo, 10.0f)
+        val stepSize = typedArray.getFloat(R.styleable.SliderPreference_stepSize, 1.0f)
+
         sliderBinding = DialogSliderBinding.inflate(
             LayoutInflater.from(context)
         )
-        val range = when (key) {
-            PreferenceKeys.PLAYBACK_SPEED -> PreferenceRanges.playbackSpeed
-            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED -> PreferenceRanges.playbackSpeed
-            PreferenceKeys.SEEK_INCREMENT -> PreferenceRanges.seekIncrement
-            else -> null
+
+        sliderBinding.slider.apply {
+            value = PreferenceHelper.getString(
+                key,
+                defValue.toString()
+            ).toFloat()
+            this.valueFrom = valueFrom
+            this.valueTo = valueTo
+            this.stepSize = stepSize
         }
-
-        if (range == null) return
-
-        sliderBinding.slider.setSliderRangeAndValue(range)
-
-        sliderBinding.slider.value = PreferenceHelper.getString(
-            key,
-            range.defaultValue.toString()
-        ).toFloat()
 
         MaterialAlertDialogBuilder(context)
             .setTitle(title)

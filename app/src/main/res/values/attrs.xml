@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SliderPreference">
+        <attr name="valueFrom" format="float" />
+        <attr name="valueTo" format="float" />
+        <attr name="stepSize" format="float" />
+        <attr name="defValue" format="float" />
+    </declare-styleable>
+
+</resources>

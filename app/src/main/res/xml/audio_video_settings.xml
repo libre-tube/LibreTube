@@ -78,9 +78,12 @@
 
         <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_speed"
-            app:defaultValue="1.0"
+            app:defValue="1.0"
             app:key="background_playback_speed"
-            app:title="@string/playback_speed" />
+            app:stepSize="0.25"
+            app:title="@string/playback_speed"
+            app:valueFrom="0.25"
+            app:valueTo="4.0" />
 
     </PreferenceCategory>
 

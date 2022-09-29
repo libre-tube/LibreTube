@@ -11,11 +11,9 @@ import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.PreferenceRanges
 import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
-import com.github.libretube.extensions.setSliderRangeAndValue
 import com.github.libretube.models.interfaces.DoubleTapInterface
 import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.BottomSheetItem
@@ -337,10 +335,12 @@ internal class CustomExoPlayerView(
         val playbackSpeedBinding = DialogSliderBinding.inflate(
             LayoutInflater.from(context)
         )
-        playbackSpeedBinding.slider.setSliderRangeAndValue(
-            PreferenceRanges.playbackSpeed
-        )
-        playbackSpeedBinding.slider.value = player?.playbackParameters?.speed ?: 1f
+        playbackSpeedBinding.slider.apply {
+            valueFrom = 0.25f
+            valueTo = 4.0f
+            stepSize = 0.25f
+            value = player?.playbackParameters?.speed ?: 1f
+        }
         // change playback speed dialog
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.change_playback_speed)
