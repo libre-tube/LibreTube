@@ -16,8 +16,8 @@ import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.setSliderRangeAndValue
-import com.github.libretube.interfaces.DoubleTapInterface
-import com.github.libretube.interfaces.PlayerOptionsInterface
+import com.github.libretube.models.interfaces.DoubleTapInterface
+import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DoubleTapListener

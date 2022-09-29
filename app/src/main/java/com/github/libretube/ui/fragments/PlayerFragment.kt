@@ -51,7 +51,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.interfaces.PlayerOptionsInterface
+import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService

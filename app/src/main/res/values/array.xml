@@ -330,6 +330,7 @@
         <item>2 hours</item>
         <item>6 hours</item>
         <item>12 hours</item>
+        <item>1 day</item>
     </string-array>
 
     <string-array name="checkingFrequencyValues">
@@ -339,6 +340,7 @@
         <item>120</item>
         <item>360</item>
         <item>720</item>
+        <item>1440</item>
     </string-array>
 
     <string-array name="sortOptions">
