@@ -10,14 +10,11 @@
             app:key="playback_speed"
             app:title="@string/playback_speed" />
 
-        <ListPreference
+        <com.github.libretube.ui.views.SliderPreference
             android:icon="@drawable/ic_skip"
             app:defaultValue="5"
-            app:entries="@array/seekIncrement"
-            app:entryValues="@array/seekIncrementValues"
             app:key="seek_increment"
-            app:title="@string/seek_increment"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/seek_increment" />
 
         <ListPreference
             android:icon="@drawable/ic_time"

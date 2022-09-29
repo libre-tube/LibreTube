@@ -12,4 +12,11 @@ object PreferenceRanges {
         0.25f,
         1.0f
     )
+
+    val seekIncrement = SliderRange(
+        5f,
+        60f,
+        5f,
+        10f
+    )
 }

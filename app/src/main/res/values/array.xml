@@ -263,19 +263,6 @@
         <item>mpeg</item>
     </string-array>
 
-    <string-array name="seekIncrement">
-        <item>5s</item>
-        <item>10s</item>
-        <item>20s</item>
-        <item>30s</item>
-    </string-array>
-    <string-array name="seekIncrementValues">
-        <item>5</item>
-        <item>10</item>
-        <item>20</item>
-        <item>30</item>
-    </string-array>
-
     <string-array name="fullscreenOrientation">
         <item>@string/aspect_ratio</item>
         <item>@string/auto_rotation</item>
