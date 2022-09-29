@@ -31,6 +31,7 @@ class SliderPreference(
         val range = when (key) {
             PreferenceKeys.PLAYBACK_SPEED -> PreferenceRanges.playbackSpeed
             PreferenceKeys.BACKGROUND_PLAYBACK_SPEED -> PreferenceRanges.playbackSpeed
+            PreferenceKeys.SEEK_INCREMENT -> PreferenceRanges.seekIncrement
             else -> null
         }
 
