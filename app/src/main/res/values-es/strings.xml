@@ -85,7 +85,7 @@
     <string name="music_albums">Álbumes musicales de YT</string>
     <string name="music_playlists">Playlists de música de YT</string>
     <string name="defaultTab">Pestaña predeterminada</string>
-    <string name="sponsorblock">SponsorBlock</string>
+    <string name="sponsorblock">Bloqueo de Patrocinadores</string>
     <string name="sponsorblock_summary">Utiliza la API de https://sponsor.ajay.app</string>
     <string name="segment_skipped">Segmento omitido</string>
     <string name="category_sponsor">Patrocinador</string>
