@@ -35,7 +35,7 @@
     <string name="already_logged_in">Уже ввійшли. Вам необхідно спершу вийти з аккаунту.</string>
     <string name="login_first">Будь ласка, ввійдіть і спробуйте ще раз.</string>
     <string name="instances">Виберіть сервер…</string>
-    <string name="customInstance">Інший сервер</string>
+    <string name="customInstance">Користувацький</string>
     <string name="region">Регіон</string>
     <string name="login_register">Вхід/реєстрація</string>
     <string name="please_login">Будь ласка, спочатку увійдіть або зареєструйтесь в налаштуваннях</string>
@@ -43,7 +43,7 @@
     <string name="importsuccess">Підписки додано</string>
     <string name="cannotDownload">Неможливо завантажити цей стрім.</string>
     <string name="dlcomplete">Завантаження завершене.</string>
-    <string name="dlisinprogress">Будь ласка, зачекайте поки воно завершиться…</string>
+    <string name="dlisinprogress">Наразі триває завантаження, зачекайте, доки воно завершиться.</string>
     <string name="vlc">Відкрити у VLC</string>
     <string name="vlcerror">Неможливо відкрити у VLC. Ймовірно воно не інстальоване.</string>
     <string name="import_from_yt">Імпорт підписок</string>
@@ -100,7 +100,7 @@
     <string name="category_sponsor">Спонсор</string>
     <string name="category_sponsor_description">Платні промоції, платні реферали та пряма реклама. Не для самореклами або чесних відгуків про творців, вебсайти та продукти які їм подобаються.</string>
     <string name="category_selfpromo">Неоплачена/Само промоція</string>
-    <string name="category_interaction">Нагадування про взаємодію (лайк і підписка)</string>
+    <string name="category_interaction">Нагадування про взаємодію (вподобайка і підписка)</string>
     <string name="category_interaction_description">Там де є коротке нагадування про те, щоб поставити лайк, підписатися або слідувати посеред контенту. Якщо це є довгим або про щось специфічне, воно тоді має бути само-промоцією.</string>
     <string name="category_intro">Антракт/Вступна Анімація</string>
     <string name="category_intro_description">Певний Інтервал без самого контенту. Може бути паузою, статичне зображення, повторювальна анімація. Не слід використовувати для переходів, що містять інформацію.</string>
@@ -189,7 +189,7 @@
     <string name="restore">Відновити</string>
     <string name="change_playback_speed">Швидкість відтворення</string>
     <string name="require_restart_message">Перезапустити додаток\?</string>
-    <string name="player_summary">Якість і поведінка програвача</string>
+    <string name="player_summary">Налаштування і поведінка програвача</string>
     <string name="pauseOnScreenOff">Автопауза</string>
     <string name="pauseOnScreenOff_summary">Призупиняти відтворення при вимкненні екрану.</string>
     <string name="autoplay_summary">Автоматично відтворювати наступне відео після поточного.</string>
@@ -234,4 +234,6 @@
     <string name="hideTrendingPage">Сховати сторінку трендів</string>
     <string name="seek_increment">Крок перемотки</string>
     <string name="clonePlaylist">Клонувати список відтворення</string>
+    <string name="copied">Скорійовано</string>
+    <string name="downloadsucceeded">Завантажено успішно</string>
 </resources>
