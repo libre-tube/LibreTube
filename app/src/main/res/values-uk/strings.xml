@@ -189,7 +189,7 @@
     <string name="restore">Відновити</string>
     <string name="change_playback_speed">Швидкість відтворення</string>
     <string name="require_restart_message">Перезапустити додаток\?</string>
-    <string name="player_summary">Якість, поведінка відтворювача</string>
+    <string name="player_summary">Якість і поведінка програвача</string>
     <string name="pauseOnScreenOff">Автопауза</string>
     <string name="pauseOnScreenOff_summary">Призупиняти відтворення при вимкненні екрану.</string>
     <string name="autoplay_summary">Автоматично відтворювати наступне відео після поточного.</string>
@@ -213,7 +213,7 @@
     <string name="reddit">Reddit</string>
     <string name="twitter">Twitter</string>
     <string name="instance_name">Ім\'я екземпляра</string>
-    <string name="playerVideoFormat">Формат відео відтворювача</string>
+    <string name="playerVideoFormat">Формат відео для програвача</string>
     <string name="auth_instance">Сервер аутентифікації</string>
     <string name="auth_instance_summary">Використовувати інший сервер для аутентифікації.</string>
     <string name="aspect_ratio">Співвідношення сторін</string>
