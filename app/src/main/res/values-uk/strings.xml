@@ -158,7 +158,7 @@
     <string name="shapedIcon">Безглуздої форми</string>
     <string name="category_music_offtopic_description">Тільки для використання в музичних кліпах. Він повинен охоплювати частини відео, а не частину офіційних міксів. Зрештою, відео має максимально нагадувати Spotify або будь-яку іншу змішану версію, або зменшувати розмови чи інші відволікання.</string>
     <string name="category_preview_description">Для сегментів, що деталізують майбутній вміст у цьому або майбутньому відео у своїй серії, але не надають додаткової інформації. Якщо він включає в себе кліпи, які тільки з\'являються тут, це, швидше за все, неправильна категорія.</string>
-    <string name="appearance">Вид</string>
+    <string name="appearance">Вигляд</string>
     <string name="app_behavior">Поведінка</string>
     <string name="download_directory">Завантажити до</string>
     <string name="donate">Підтримати</string>
