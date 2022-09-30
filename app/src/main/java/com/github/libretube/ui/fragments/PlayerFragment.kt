@@ -166,6 +166,7 @@ class PlayerFragment : BaseFragment() {
     private var sponsorBlockNotifications = true
     private var skipButtonsEnabled = false
     private var pipEnabled = true
+    private var videoShownInExternalPlayer = false
     private var skipSegmentsManually = false
 
     /**
@@ -664,6 +665,13 @@ class PlayerFragment : BaseFragment() {
         if (!commentsLoaded!!) fetchComments()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        // Assuming the video is not playing in external player when returning to app
+        videoShownInExternalPlayer = false
+    }
+
     override fun onPause() {
         // pauses the player if the screen is turned off
 
@@ -1047,6 +1055,9 @@ class PlayerFragment : BaseFragment() {
 
         if (response.hls != null) {
             binding.relPlayerOpen.setOnClickListener {
+                // Do not start picture in picture when playing in external player
+                videoShownInExternalPlayer = true
+
                 // start an intent with video as mimetype using the hls stream
                 val uri: Uri = Uri.parse(response.hls)
                 val intent = Intent()
@@ -1504,7 +1515,11 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun shouldStartPiP(): Boolean {
-        if (!pipEnabled || exoPlayer.playbackState == PlaybackState.STATE_PAUSED) return false
+        if (!pipEnabled ||
+            exoPlayer.playbackState == PlaybackState.STATE_PAUSED ||
+            videoShownInExternalPlayer) {
+            return false
+        }
 
         val bounds = Rect()
         binding.playerScrollView.getHitRect(bounds)
