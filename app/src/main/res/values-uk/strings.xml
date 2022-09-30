@@ -139,13 +139,13 @@
     <string name="advanced_summary">Завантаження, історія</string>
     <string name="live">Пряма трансляція</string>
     <string name="advanced">Розширене</string>
-    <string name="sdcard">SD карта</string>
+    <string name="sdcard">SD-карта</string>
     <string name="views">%1$s переглядів</string>
     <string name="defaultIcon">По замовчуванню</string>
     <string name="download_directory_summary">Де зберігаються завантажені медіа.</string>
     <string name="video_format_summary">Перетворення файлів, якщо аудіо і відео завантажені.</string>
     <string name="legacyIcon">Втрачена популярність</string>
-    <string name="no_update_available">Ви використовуєте останню версію.</string>
+    <string name="no_update_available">Ви користуєтесь найновішою версією.</string>
     <string name="gradientIcon">Градієнт Glib</string>
     <string name="flameIcon">Літаючий вогонь</string>
     <string name="birdIcon">Посилений птах</string>
@@ -161,7 +161,7 @@
     <string name="appearance">Вид</string>
     <string name="app_behavior">Поведінка</string>
     <string name="download_directory">Завантажити до</string>
-    <string name="donate">Пожертвувати</string>
+    <string name="donate">Підтримати</string>
     <string name="instance_summary">Piped, логін, підписки</string>
     <string name="quality">Якість</string>
     <string name="behavior">Поведінка</string>
