@@ -40,7 +40,7 @@
     <string name="login_register">Вхід/реєстрація</string>
     <string name="please_login">Будь ласка, спочатку увійдіть або зареєструйтесь в налаштуваннях</string>
     <string name="subscribeIsEmpty">Спочатку підпишіться на якісь канали.</string>
-    <string name="importsuccess">Підписки додано</string>
+    <string name="importsuccess">Підписаний</string>
     <string name="cannotDownload">Неможливо завантажити цей стрім.</string>
     <string name="dlcomplete">Завантаження завершене.</string>
     <string name="dlisinprogress">Наразі триває завантаження, зачекайте, доки воно завершиться.</string>
@@ -142,8 +142,8 @@
     <string name="sdcard">SD-карта</string>
     <string name="views">%1$s переглядів</string>
     <string name="defaultIcon">По замовчуванню</string>
-    <string name="download_directory_summary">Де зберігаються завантажені медіа.</string>
-    <string name="video_format_summary">Перетворення файлів, якщо аудіо і відео завантажені.</string>
+    <string name="download_directory_summary">Тека, у яку буде зберігатися увесь завантажений матеріал.</string>
+    <string name="video_format_summary">Формат, у який будуть конвертовані завантажені відео (застосовується лише за умови, якщо і аудіо, і відео будуть завантажені).</string>
     <string name="legacyIcon">Втрачена популярність</string>
     <string name="no_update_available">Ви користуєтесь найновішою версією.</string>
     <string name="gradientIcon">Градієнт Glib</string>
