@@ -334,6 +334,9 @@
     <string name="select_at_least_one">Please select at least one item</string>
     <string name="change_region">Trending seems to be unavailable for the current region. Please select another in the settings.</string>
     <string name="limit_hls">Limit HLS to 1080p</string>
+    <string name="progressive_load_interval">Progressive load interval size</string>
+    <string name="progressive_load_interval_summary">A lower value may speed up initial video loading.</string>
+    <string name="default_load_interval">Default</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
