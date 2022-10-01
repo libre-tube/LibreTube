@@ -167,6 +167,7 @@ class PlayerFragment : BaseFragment() {
     private var skipButtonsEnabled = false
     private var pipEnabled = true
     private var skipSegmentsManually = false
+    private var progressiveLoadingIntervalSize = "64"
 
     /**
      * for autoplay
@@ -339,6 +340,11 @@ class PlayerFragment : BaseFragment() {
             PreferenceKeys.SB_SKIP_MANUALLY,
             false
         )
+
+        progressiveLoadingIntervalSize = PreferenceHelper.getString(
+            PreferenceKeys.PROGRESSIVE_LOADING_INTERVAL_SIZE,
+            "64"
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -467,7 +473,7 @@ class PlayerFragment : BaseFragment() {
                         videosNameArray[which] == "LBRY HLS"
                     ) {
                         // set the progressive media source
-                        setProgressiveMediaSource(videosUrlArray[which])
+                        setHLSMediaSource(videosUrlArray[which])
                     } else {
                         val videoUri = videosUrlArray[which]
                         val audioUrl =
@@ -1192,7 +1198,7 @@ class PlayerFragment : BaseFragment() {
 
     /**
      * Get the name of the currently played chapter
-      */
+     */
     private fun getCurrentChapterIndex(): Int {
         val currentPosition = exoPlayer.currentPosition
         var chapterIndex = 0
@@ -1211,24 +1217,35 @@ class PlayerFragment : BaseFragment() {
         videoUri: Uri,
         audioUrl: String
     ) {
+        val checkIntervalSize = when (progressiveLoadingIntervalSize) {
+            "default" -> ProgressiveMediaSource.DEFAULT_LOADING_CHECK_INTERVAL_BYTES
+            else -> progressiveLoadingIntervalSize.toInt() * 1024
+        }
+
         val dataSourceFactory: DataSource.Factory =
             DefaultHttpDataSource.Factory()
+
         val videoItem: MediaItem = MediaItem.Builder()
             .setUri(videoUri)
             .setSubtitleConfigurations(subtitle)
             .build()
+
         val videoSource: MediaSource =
-            DefaultMediaSourceFactory(dataSourceFactory)
+            ProgressiveMediaSource.Factory(dataSourceFactory)
+                .setContinueLoadingCheckIntervalBytes(checkIntervalSize)
                 .createMediaSource(videoItem)
+
         val audioSource: MediaSource =
             ProgressiveMediaSource.Factory(dataSourceFactory)
+                .setContinueLoadingCheckIntervalBytes(checkIntervalSize)
                 .createMediaSource(fromUri(audioUrl))
+
         val mergeSource: MediaSource =
             MergingMediaSource(videoSource, audioSource)
         exoPlayer.setMediaSource(mergeSource)
     }
 
-    private fun setProgressiveMediaSource(uri: Uri) {
+    private fun setHLSMediaSource(uri: Uri) {
         val mediaItem: MediaItem = MediaItem.Builder()
             .setUri(uri)
             .setSubtitleConfigurations(subtitle)
@@ -1317,7 +1334,7 @@ class PlayerFragment : BaseFragment() {
 
         // if default resolution isn't set or available, use hls if available
         if (streams.hls != null) {
-            setProgressiveMediaSource(Uri.parse(streams.hls))
+            setHLSMediaSource(Uri.parse(streams.hls))
             return
         }
 

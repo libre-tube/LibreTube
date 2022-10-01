@@ -72,6 +72,15 @@
             android:title="@string/limit_hls"
             app:key="limit_hls" />
 
+        <ListPreference
+            android:icon="@drawable/ic_loading"
+            app:defaultValue="64"
+            app:entries="@array/loadingInterval"
+            app:entryValues="@array/loadingIntervalValues"
+            app:key="progressive_loading_interval"
+            app:summary="@string/progressive_load_interval_summary"
+            app:title="@string/progressive_load_interval" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/background_mode">

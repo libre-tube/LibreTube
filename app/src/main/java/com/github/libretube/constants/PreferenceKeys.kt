@@ -78,6 +78,7 @@ object PreferenceKeys {
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val SB_SKIP_MANUALLY = "sb_skip_manually_key"
     const val LIMIT_HLS = "limit_hls"
+    const val PROGRESSIVE_LOADING_INTERVAL_SIZE = "progressive_loading_interval"
 
     /**
      * Background mode
