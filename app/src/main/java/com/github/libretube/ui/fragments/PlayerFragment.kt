@@ -1517,7 +1517,8 @@ class PlayerFragment : BaseFragment() {
     private fun shouldStartPiP(): Boolean {
         if (!pipEnabled ||
             exoPlayer.playbackState == PlaybackState.STATE_PAUSED ||
-            videoShownInExternalPlayer) {
+            videoShownInExternalPlayer
+        ) {
             return false
         }
 
