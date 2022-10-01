@@ -152,7 +152,6 @@ class PlayerFragment : BaseFragment() {
     private var token = ""
     private var relatedStreamsEnabled = true
     private var autoRotationEnabled = true
-    private var playbackSpeed = "1F"
     private var pausePlayerOnScreenOffEnabled = false
     private var fullscreenOrientationPref = "ratio"
     private var watchHistoryEnabled = true
@@ -255,11 +254,6 @@ class PlayerFragment : BaseFragment() {
             PreferenceKeys.RELATED_STREAMS,
             true
         )
-
-        playbackSpeed = PreferenceHelper.getString(
-            PreferenceKeys.PLAYBACK_SPEED,
-            "1"
-        ).replace("F", "") // due to old way to handle it (with float)
 
         fullscreenOrientationPref = PreferenceHelper.getString(
             PreferenceKeys.FULLSCREEN_ORIENTATION,
@@ -541,9 +535,6 @@ class PlayerFragment : BaseFragment() {
                 unsetFullscreen()
             }
         }
-
-        // set default playback speed
-        exoPlayer.setPlaybackSpeed(playbackSpeed.toFloat())
 
         // share button
         binding.relPlayerShare.setOnClickListener {

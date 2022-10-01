@@ -16,8 +16,8 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
-import com.github.libretube.sheets.PlaylistOptionsBottomSheet
-import com.github.libretube.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
+import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper

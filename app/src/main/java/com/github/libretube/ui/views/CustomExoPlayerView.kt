@@ -5,21 +5,21 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.models.interfaces.DoubleTapInterface
 import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.sheets.PlaybackSpeedSheet
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.PreferenceHelper
+import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -57,6 +57,11 @@ internal class CustomExoPlayerView(
         PreferenceKeys.AUTO_PLAY,
         true
     )
+
+    val playbackSpeed = PreferenceHelper.getString(
+        PreferenceKeys.PLAYBACK_SPEED,
+        "1"
+    ).replace("F", "")
 
     private val seekIncrement = PreferenceHelper.getString(
         PreferenceKeys.SEEK_INCREMENT,
@@ -101,6 +106,11 @@ internal class CustomExoPlayerView(
         enableDoubleTapToSeek()
 
         initializeAdvancedOptions(context)
+
+        player?.playbackParameters = PlaybackParameters(
+            playbackSpeed.toFloat(),
+            1.0f
+        )
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
@@ -332,26 +342,12 @@ internal class CustomExoPlayerView(
     }
 
     fun onPlaybackSpeedClicked() {
-        val playbackSpeedBinding = DialogSliderBinding.inflate(
-            LayoutInflater.from(context)
-        )
-        playbackSpeedBinding.slider.apply {
-            valueFrom = 0.25f
-            valueTo = 4.0f
-            stepSize = 0.25f
-            value = player?.playbackParameters?.speed ?: 1f
-        }
-        // change playback speed dialog
-        MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.change_playback_speed)
-            .setView(playbackSpeedBinding.root)
-            .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.okay) { _, _ ->
-                player?.setPlaybackSpeed(
-                    playbackSpeedBinding.slider.value
-                )
-            }
-            .show()
+        PlaybackSpeedSheet { speed, pitch ->
+            player?.playbackParameters = PlaybackParameters(
+                speed,
+                pitch
+            )
+        }.show(childFragmentManager, null)
     }
 
     fun onResizeModeClicked() {

@@ -1,4 +1,4 @@
-package com.github.libretube.sheets
+package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import android.text.InputType

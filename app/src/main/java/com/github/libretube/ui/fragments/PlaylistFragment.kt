@@ -15,9 +15,9 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import retrofit2.HttpException
 import java.io.IOException
 

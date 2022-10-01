@@ -10,7 +10,7 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
-import com.github.libretube.sheets.VideoOptionsBottomSheet
+import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.ChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
