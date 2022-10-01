@@ -35,7 +35,7 @@
     <string name="dlisinprogress">Another download is already in progress, please wait until it\'s finished.</string>
     <string name="downloadfailed">Download failed.</string>
     <string name="vlc">Open in VLC</string>
-    <string name="vlcerror">Can\'t open in VLC. It might not be installed.</string>
+    <string name="vlcerror">Couldn\'t open in VLC, It might not be installed.</string>
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
     <string name="app_theme">Theme</string>
@@ -334,7 +334,6 @@
     <string name="select_at_least_one">Please select at least one item</string>
     <string name="change_region">Trending seems to be unavailable for the current region. Please select another in the settings.</string>
     <string name="limit_hls">Limit HLS to 1080p</string>
-
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
