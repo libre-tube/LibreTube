@@ -466,12 +466,8 @@ class PlayerFragment : BaseFragment() {
                         videosNameArray[which] == getString(R.string.hls) ||
                         videosNameArray[which] == "LBRY HLS"
                     ) {
-                        // no need to merge sources if using hls
-                        val mediaItem: MediaItem = MediaItem.Builder()
-                            .setUri(videosUrlArray[which])
-                            .setSubtitleConfigurations(subtitle)
-                            .build()
-                        exoPlayer.setMediaItem(mediaItem)
+                        // set the progressive media source
+                        setProgressiveMediaSource(videosUrlArray[which])
                     } else {
                         val videoUri = videosUrlArray[which]
                         val audioUrl =
@@ -1194,7 +1190,9 @@ class PlayerFragment : BaseFragment() {
         }
     }
 
-    // get the name of the currently played chapter
+    /**
+     * Get the name of the currently played chapter
+      */
     private fun getCurrentChapterIndex(): Int {
         val currentPosition = exoPlayer.currentPosition
         var chapterIndex = 0
@@ -1228,6 +1226,14 @@ class PlayerFragment : BaseFragment() {
         val mergeSource: MediaSource =
             MergingMediaSource(videoSource, audioSource)
         exoPlayer.setMediaSource(mergeSource)
+    }
+
+    private fun setProgressiveMediaSource(uri: Uri) {
+        val mediaItem: MediaItem = MediaItem.Builder()
+            .setUri(uri)
+            .setSubtitleConfigurations(subtitle)
+            .build()
+        exoPlayer.setMediaItem(mediaItem)
     }
 
     private fun getAvailableResolutions(): Pair<Array<String>, Array<Uri>> {
@@ -1311,11 +1317,7 @@ class PlayerFragment : BaseFragment() {
 
         // if default resolution isn't set or available, use hls if available
         if (streams.hls != null) {
-            val mediaItem: MediaItem = MediaItem.Builder()
-                .setUri(streams.hls)
-                .setSubtitleConfigurations(subtitle)
-                .build()
-            exoPlayer.setMediaItem(mediaItem)
+            setProgressiveMediaSource(Uri.parse(streams.hls))
             return
         }
 
