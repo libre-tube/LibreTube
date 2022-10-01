@@ -206,7 +206,7 @@
     <string name="require_restart_message">Möchten Sie die App jetzt neu starten\?</string>
     <string name="audio_video">Audio und Video</string>
     <string name="fullscreen_orientation">Ausrichtung im Vollbildmodus</string>
-    <string name="aspect_ratio">Video-Bildverhältnis</string>
+    <string name="aspect_ratio">Video-Seitenverhältnis</string>
     <string name="auto_rotation">Automatische Drehung</string>
     <string name="landscape">Landschaft</string>
     <string name="portrait">Porträt</string>
@@ -293,4 +293,5 @@
     <string name="unlimited">Unbegrenzt</string>
     <string name="background_mode">Hintergrundmodus</string>
     <string name="take_a_break">Zeit eine Pause zu machen</string>
+    <string name="sort">Sortierung</string>
 </resources>

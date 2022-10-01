@@ -321,4 +321,23 @@
     <string name="renamePlaylist">Renommer la liste de lecture</string>
     <string name="wifi">WiFi</string>
     <string name="mobile_data">Données mobiles</string>
+    <string name="skip_segment">Sauter le segment</string>
+    <string name="sb_skip_manual">Passer manuellement</string>
+    <string name="sb_skip_manual_summary">Ne pas passer les segments automatiquement, toujours demander avant.</string>
+    <string name="backup_customInstances">Instances personnalisées</string>
+    <string name="local_subscriptions">Abonnements locaux</string>
+    <string name="preferences">Préférences</string>
+    <string name="background_channel_description">Affiche une notification avec des boutons pour contrôler le lecteur audio.</string>
+    <string name="push_channel_name">Préposé à la notification</string>
+    <string name="save_feed">Charger le flux en arrière-plan</string>
+    <string name="save_feed_summary">Charger le flux d\'abonnement en arrière-plan et empêcher son rafraîchissement automatique.</string>
+    <string name="play_next">Jouer la suite</string>
+    <string name="navigation_bar">Barre de navigation</string>
+    <string name="select_at_least_one">Veuillez sélectionner au moins un élément</string>
+    <string name="download_channel_name">Service de téléchargement</string>
+    <string name="download_channel_description">Affiche une notification lors du téléchargement de médias.</string>
+    <string name="change_region">Populaires semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
+    <string name="background_channel_name">Mode arrière-plan</string>
+    <string name="limit_hls">Limiter le HLS à 1080p</string>
+    <string name="push_channel_description">Affiche une notification lorsque de nouveaux flux sont disponibles.</string>
 </resources>
