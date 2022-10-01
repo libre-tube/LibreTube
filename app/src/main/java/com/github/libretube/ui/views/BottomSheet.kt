@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.obj.BottomSheetItem
@@ -31,7 +32,7 @@ open class BottomSheet : BottomSheetDialogFragment() {
         binding.optionsRecycler.adapter = BottomSheetAdapter(items, listener)
     }
 
-    fun setItems(items: List<BottomSheetItem>, listener: (index: Int) -> Unit) {
+    fun setItems(items: List<BottomSheetItem>, listener: (index: Int) -> Unit) = apply {
         this.items = items
         this.listener = { index ->
             listener.invoke(index)
@@ -39,11 +40,16 @@ open class BottomSheet : BottomSheetDialogFragment() {
         }
     }
 
-    fun setSimpleItems(titles: List<String>, listener: (index: Int) -> Unit) {
+    fun setSimpleItems(titles: List<String>, listener: (index: Int) -> Unit) = apply {
         this.items = titles.map { BottomSheetItem(it) }
         this.listener = { index ->
             listener.invoke(index)
             dialog?.dismiss()
         }
     }
+
+    fun show(fragmentManager: FragmentManager) = show(
+        fragmentManager,
+        null
+    )
 }

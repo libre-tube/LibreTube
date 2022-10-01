@@ -24,7 +24,6 @@ import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.util.RepeatModeUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.math.roundToInt
 
 @SuppressLint("ClickableViewAccessibility")
@@ -58,7 +57,7 @@ internal class CustomExoPlayerView(
         true
     )
 
-    val playbackSpeed = PreferenceHelper.getString(
+    private val playbackSpeed = PreferenceHelper.getString(
         PreferenceKeys.PLAYBACK_SPEED,
         "1"
     ).replace("F", "")
@@ -323,68 +322,66 @@ internal class CustomExoPlayerView(
         }
     }
 
-    fun onAutoplayClicked() {
+    private fun onAutoplayClicked() {
         // autoplay options dialog
-        MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.player_autoplay)
-            .setItems(
-                arrayOf(
+        BottomSheet()
+            .setSimpleItems(
+                listOf(
                     context.getString(R.string.enabled),
                     context.getString(R.string.disabled)
                 )
-            ) { _, index ->
+            ) { index ->
                 when (index) {
                     0 -> autoplayEnabled = true
                     1 -> autoplayEnabled = false
                 }
             }
-            .show()
+            .show(childFragmentManager)
     }
 
-    fun onPlaybackSpeedClicked() {
+    private fun onPlaybackSpeedClicked() {
         PlaybackSpeedSheet { speed, pitch ->
             player?.playbackParameters = PlaybackParameters(
                 speed,
                 pitch
             )
-        }.show(childFragmentManager, null)
+        }.show(childFragmentManager)
     }
 
-    fun onResizeModeClicked() {
+    private fun onResizeModeClicked() {
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
         val aspectRatioModeNames = context.resources?.getStringArray(R.array.resizeMode)
+            ?.toList().orEmpty()
 
-        val aspectRatioModes = arrayOf(
+        val aspectRatioModes = listOf(
             AspectRatioFrameLayout.RESIZE_MODE_FIT,
             AspectRatioFrameLayout.RESIZE_MODE_ZOOM,
             AspectRatioFrameLayout.RESIZE_MODE_FILL
         )
 
-        MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.aspect_ratio)
-            .setItems(aspectRatioModeNames) { _, index ->
+        BottomSheet()
+            .setSimpleItems(aspectRatioModeNames) { index ->
                 resizeMode = aspectRatioModes[index]
             }
-            .show()
+            .show(childFragmentManager)
     }
 
-    fun onRepeatModeClicked() {
-        val repeatModeNames = arrayOf(
+    private fun onRepeatModeClicked() {
+        val repeatModeNames = listOf(
             context.getString(R.string.repeat_mode_none),
             context.getString(R.string.repeat_mode_current)
         )
 
-        val repeatModes = arrayOf(
+        val repeatModes = listOf(
             RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE,
             RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
 
         )
         // repeat mode options dialog
-        MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.repeat_mode)
-            .setItems(repeatModeNames) { _, index ->
+        BottomSheet()
+            .setSimpleItems(repeatModeNames) { index ->
                 player?.repeatMode = repeatModes[index]
             }
-            .show()
+            .show(childFragmentManager)
     }
 }
