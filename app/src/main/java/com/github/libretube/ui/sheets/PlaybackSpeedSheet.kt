@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -32,4 +33,9 @@ class PlaybackSpeedSheet(
             onChange.invoke(binding.speed.value, value)
         }
     }
+
+    fun show(fragmentManager: FragmentManager) = show(
+        fragmentManager,
+        null
+    )
 }

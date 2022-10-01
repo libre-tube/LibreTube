@@ -63,6 +63,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
@@ -426,9 +427,8 @@ class PlayerFragment : BaseFragment() {
                 subtitleCodesList += it.code!!
             }
 
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.captions)
-                .setItems(subtitlesNamesList.toTypedArray()) { _, index ->
+            BottomSheet()
+                .setSimpleItems(subtitlesNamesList) { index ->
                     val newParams = if (index != 0) {
                         // caption selected
 
@@ -449,7 +449,7 @@ class PlayerFragment : BaseFragment() {
                     // set the new caption language
                     trackSelector.setParameters(newParams)
                 }
-                .show()
+                .show(childFragmentManager)
         }
 
         override fun onQualityClicked() {
@@ -458,11 +458,10 @@ class PlayerFragment : BaseFragment() {
 
             // Dialog for quality selection
             val lastPosition = exoPlayer.currentPosition
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.choose_quality_dialog)
-                .setItems(
-                    videosNameArray
-                ) { _, which ->
+            BottomSheet()
+                .setSimpleItems(
+                    videosNameArray.toList()
+                ) { which ->
                     if (
                         videosNameArray[which] == getString(R.string.hls) ||
                         videosNameArray[which] == "LBRY HLS"
@@ -477,7 +476,7 @@ class PlayerFragment : BaseFragment() {
                     }
                     exoPlayer.seekTo(lastPosition)
                 }
-                .show()
+                .show(childFragmentManager)
         }
     }
 
