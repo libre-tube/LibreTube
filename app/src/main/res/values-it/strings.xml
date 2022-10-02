@@ -22,7 +22,7 @@
     <string name="dlcomplete">Scaricamento completato.</string>
     <string name="downloadfailed">Scaricamento fallito.</string>
     <string name="vlc">Apri in VLC</string>
-    <string name="vlcerror">Non si può aprire in VLC. Potrebbe non essere installato.</string>
+    <string name="vlcerror">Impossibile aprire in VLC, potrebbe non essere installato.</string>
     <string name="import_from_yt">Importa iscrizioni</string>
     <string name="app_theme">Tema dell\'app</string>
     <string name="error">Qualcosa è andato storto.</string>
@@ -340,4 +340,7 @@
     <string name="select_at_least_one">Seleziona almeno un elemento</string>
     <string name="change_region">La Tendenza sembra non essere disponibile per la regione attuale. Selezionane un\'altra nelle impostazioni.</string>
     <string name="limit_hls">Limita HLS a 1080p</string>
+    <string name="default_load_interval">Predefinito</string>
+    <string name="playback_pitch">Tono</string>
+    <string name="progressive_load_interval_summary">Un valore inferiore può accelerare il caricamento iniziale del video.</string>
 </resources>

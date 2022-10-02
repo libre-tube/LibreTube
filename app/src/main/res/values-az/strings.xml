@@ -69,7 +69,7 @@
     <string name="dlisinprogress">Başqa bir endirmə artıq davam edir, zəhmət olmasa, tamamlanana qədər gözləyin.</string>
     <string name="downloadfailed">Endirmək alınmadı.</string>
     <string name="vlc">VLC\'də Açın</string>
-    <string name="vlcerror">VLC\'də açmaq mümkün deyil. O, quraşdırılmamış ola bilər.</string>
+    <string name="vlcerror">VLC\'də açmaq mümkün olmadı, O, quraşdırılmamış ola bilər.</string>
     <string name="import_from_yt">Abunəlikləri idxal edin</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Mövzu</string>
@@ -340,4 +340,7 @@
     <string name="select_at_least_one">Ən azı bir element seçin</string>
     <string name="change_region">Trend\'in cari region üçün əlçatan olmadığı görünür.Tənzimləmələrdə başqasını seçin.</string>
     <string name="limit_hls">HLS\'ni 1080p ilə məhdudlaşdırın</string>
+    <string name="default_load_interval">Defolt</string>
+    <string name="progressive_load_interval">Qabaqcıl yükləmə intervalının ölçüsü</string>
+    <string name="progressive_load_interval_summary">Daha aşağı dəyər ilkin video yükləməni sürətləndirə bilər.</string>
 </resources>
