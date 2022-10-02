@@ -338,4 +338,5 @@
     <string name="play_next">לנגן את הבא</string>
     <string name="navigation_bar">סרגל ניווט</string>
     <string name="select_at_least_one">נא לבחור פריט אחד לפחות</string>
+    <string name="playback_pitch">גובה צליל</string>
 </resources>
