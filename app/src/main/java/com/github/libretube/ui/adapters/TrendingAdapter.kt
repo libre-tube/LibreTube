@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
@@ -15,6 +16,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SubscriptionViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import org.chromium.base.ContextUtils.getApplicationContext
 
 class TrendingAdapter(
     private val streamItems: List<com.github.libretube.api.obj.StreamItem>,
@@ -53,8 +55,9 @@ class TrendingAdapter(
             textViewTitle.text = trending.title
             textViewChannel.text =
                 trending.uploaderName + " • " +
-                trending.views.formatShort() + " • " +
-                DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+                trending.views.formatShort() + " " +
+                getApplicationContext().resources.getString(R.string.views_placeholder) +
+                " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             thumbnailDuration.setFormattedDuration(trending.duration!!)
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, trending.uploaderUrl)

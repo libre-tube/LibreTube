@@ -153,6 +153,7 @@
     <string name="music_directory">Music folder</string>
     <string name="movies_directory">Movie folder</string>
     <string name="shareTo">Share URL to</string>
+    <string name="views_placeholder">views</string>
     <string name="views">%1$s views</string>
     <string name="defaultIcon">Default</string>
     <string name="legacyIcon">Lost legacy</string>
@@ -170,7 +171,7 @@
     <string name="empty_instance">Fill in the name and the API URL.</string>
     <string name="clear_customInstances">Clear added</string>
     <string name="invalid_url">Please enter a URL that works</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Version %1$s</string>
     <string name="about_summary">Get to know team LibreTube and how it all happens.</string>
     <string name="related_streams">Related content</string>
     <string name="related_streams_summary">Show similar streams alongside what you watch.</string>
@@ -226,7 +227,7 @@
     <string name="chapters">Chapters</string>
     <string name="change_playback_speed">Playback speed</string>
     <string name="require_restart">App restart required</string>
-    <string name="require_restart_message">Restart the app ?</string>
+    <string name="require_restart_message">This change requires the app to be restarted. Press \'Ok\' to restart now.</string>
     <string name="navLabelVisibility">Navbar label visibility</string>
     <string name="always">Always</string>
     <string name="selected">Selected</string>
@@ -314,7 +315,7 @@
     <string name="legacy_subscriptions">Legacy subscriptions view</string>
     <string name="device_info">Device Info</string>
     <string name="audio_video_summary">Quality and format</string>
-    <string name="delete">Delete</string>
+    <string name="delete">Delete from downloads</string>
     <string name="trending_layout">Alternative trending layout</string>
     <string name="renamePlaylist">Rename playlist</string>
     <string name="wifi">Wi-Fi</string>

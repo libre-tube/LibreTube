@@ -63,13 +63,11 @@
                     style="@style/Widget.Material3.CardView.Elevated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="14dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
-                    android:visibility="gone"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="20dp">
+                    app:cardCornerRadius="18dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
