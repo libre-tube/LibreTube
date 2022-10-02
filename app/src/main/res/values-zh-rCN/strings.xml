@@ -340,4 +340,8 @@
     <string name="navigation_bar">导航栏</string>
     <string name="change_region">“时下流行”似乎对当前地区不可用。请在设置中另选一个地区。</string>
     <string name="limit_hls">限制 HLS 到 1080P</string>
+    <string name="progressive_load_interval_summary">较低的值可加速初始视频加载。</string>
+    <string name="default_load_interval">默认</string>
+    <string name="playback_pitch">时间伸缩</string>
+    <string name="progressive_load_interval">渐进加载间隔大小</string>
 </resources>
