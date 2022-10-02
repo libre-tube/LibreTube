@@ -53,7 +53,7 @@ class TrendingAdapter(
             textViewTitle.text = trending.title
             textViewChannel.text =
                 trending.uploaderName + " • " +
-                trending.views.formatShort() + " • " +
+                trending.views.formatShort() + " views • " +
                 DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             thumbnailDuration.setFormattedDuration(trending.duration!!)
             channelImage.setOnClickListener {
