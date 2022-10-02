@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setWatchProgressLength
@@ -16,8 +17,9 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
 class ChannelAdapter(
-    private val videoFeed: MutableList<com.github.libretube.api.obj.StreamItem>,
-    private val childFragmentManager: FragmentManager
+    private val videoFeed: MutableList<StreamItem>,
+    private val childFragmentManager: FragmentManager,
+    private val showChannelInfo: Boolean = false
 ) :
     RecyclerView.Adapter<ChannelViewHolder>() {
 
@@ -25,7 +27,7 @@ class ChannelAdapter(
         return videoFeed.size
     }
 
-    fun updateItems(newItems: List<com.github.libretube.api.obj.StreamItem>) {
+    fun updateItems(newItems: List<StreamItem>) {
         val feedSize = videoFeed.size
         videoFeed.addAll(newItems)
         notifyItemRangeInserted(feedSize, newItems.size)
@@ -39,25 +41,36 @@ class ChannelAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
-        val trending = videoFeed[position]
+        val video = videoFeed[position]
         holder.binding.apply {
-            videoTitle.text = trending.title
+            videoTitle.text = video.title
+
             videoInfo.text =
-                trending.views.formatShort() + " • " +
-                DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+                video.views.formatShort() + " • " +
+                DateUtils.getRelativeTimeSpanString(video.uploaded!!)
+
             thumbnailDuration.text =
-                DateUtils.formatElapsedTime(trending.duration!!)
-            ImageHelper.loadImage(trending.thumbnail, thumbnail)
-            root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, trending.url)
+                DateUtils.formatElapsedTime(video.duration!!)
+
+            ImageHelper.loadImage(video.thumbnail, thumbnail)
+
+            if (showChannelInfo) {
+                ImageHelper.loadImage(video.uploaderAvatar, channelImage)
+                channelName.text = video.uploaderName
             }
-            val videoId = trending.url!!.toID()
+
+            root.setOnClickListener {
+                NavigationHelper.navigateVideo(root.context, video.url)
+            }
+
+            val videoId = video.url!!.toID()
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(videoId)
                     .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
-            watchProgress.setWatchProgressLength(videoId, trending.duration!!)
+
+            watchProgress.setWatchProgressLength(videoId, video.duration!!)
         }
     }
 }

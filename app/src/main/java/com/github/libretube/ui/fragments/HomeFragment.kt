@@ -115,7 +115,8 @@ class HomeFragment : BaseFragment() {
 
                     binding.recview.adapter = ChannelAdapter(
                         response.toMutableList(),
-                        childFragmentManager
+                        childFragmentManager,
+                        true
                     )
                 } else {
                     binding.recview.layoutManager = GridLayoutManager(
