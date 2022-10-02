@@ -22,7 +22,7 @@
     <string name="downloadfailed">Stahování se nezdařilo.</string>
     <string name="app_theme">Motiv aplikace</string>
     <string name="server_error">Server zaznamenal problém. Možná zkuste jinou instanci.</string>
-    <string name="vlcerror">Nelze otevřít ve VLC. Možná není nainstalováno.</string>
+    <string name="vlcerror">Nepodařilo se otevřít ve VLC, možná není nainstalováno.</string>
     <string name="unknown_error">Chyba sítě.</string>
     <string name="grid">Sloupce mřížky</string>
     <string name="emptyList">Nic tu není.</string>
@@ -340,4 +340,8 @@
     <string name="select_at_least_one">Vyberte prosím alespoň jednu položku</string>
     <string name="change_region">Zdá se, že trendy nejsou pro aktuální oblast k dispozici. V nastavení prosím vyberte jinou.</string>
     <string name="limit_hls">Omezit HLS na 1080p</string>
+    <string name="progressive_load_interval">Velikost intervalu progresivního načítání</string>
+    <string name="progressive_load_interval_summary">Nižší hodnota může urychlit počáteční načítání videa.</string>
+    <string name="default_load_interval">Výchozí</string>
+    <string name="playback_pitch">Výška</string>
 </resources>
