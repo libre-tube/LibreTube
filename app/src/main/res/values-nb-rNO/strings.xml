@@ -336,4 +336,9 @@
     <string name="background_channel_description">Viser en merknad uten knapper for å kontrollere lydspilleren.</string>
     <string name="push_channel_description">Viser en merknad når nye strømmer er tilgjengelige.</string>
     <string name="wifi">Wi-Fi</string>
+    <string name="navigation_bar">Navigasjonsfelt</string>
+    <string name="select_at_least_one">Velg minst ett element</string>
+    <string name="views_placeholder">visninger</string>
+    <string name="default_load_interval">Forvalg</string>
+    <string name="limit_hls">Begrens HLS til 1080p</string>
 </resources>
