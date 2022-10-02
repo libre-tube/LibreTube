@@ -153,6 +153,7 @@
     <string name="music_directory">Music folder</string>
     <string name="movies_directory">Movie folder</string>
     <string name="shareTo">Share URL to</string>
+    <string name="views_placeholder">views</string>
     <string name="views">%1$s views</string>
     <string name="defaultIcon">Default</string>
     <string name="legacyIcon">Lost legacy</string>
