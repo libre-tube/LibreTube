@@ -184,6 +184,8 @@
 
     <string-array name="defres">
         <item>@string/hls</item>
+        <item>2160p</item>
+        <item>1440p</item>
         <item>1080p</item>
         <item>720p</item>
         <item>480p</item>
@@ -193,6 +195,8 @@
     </string-array>
     <string-array name="defresValue">
         <item />
+        <item>2160p</item>
+        <item>1440p</item>
         <item>1080p</item>
         <item>720p</item>
         <item>480p</item>
