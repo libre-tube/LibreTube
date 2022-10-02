@@ -56,8 +56,8 @@ class TrendingAdapter(
             textViewChannel.text =
                 trending.uploaderName + " • " +
                 trending.views.formatShort() + " " +
-                        getApplicationContext().resources.getString(R.string.views_placeholder) +
-                        " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
+                getApplicationContext().resources.getString(R.string.views_placeholder) +
+                " • " + DateUtils.getRelativeTimeSpanString(trending.uploaded!!)
             thumbnailDuration.setFormattedDuration(trending.duration!!)
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, trending.uploaderUrl)
