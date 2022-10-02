@@ -164,7 +164,7 @@
     <string name="empty_instance">Adı ve API URL\'sini girin.</string>
     <string name="instance_name">Sunucu adı</string>
     <string name="invalid_url">Lütfen, çalışan bir URL girin</string>
-    <string name="version">S %1$s</string>
+    <string name="version">Sürüm %1$s</string>
     <string name="about_summary">LibreTube ekibini tanıyın ve tüm bunların nasıl gerçekleştiğini öğrenin.</string>
     <string name="show_chapters">Bölümleri göster</string>
     <string name="hide_chapters">Bölümleri gizle</string>
@@ -225,7 +225,7 @@
     <string name="turnInternetOn">İnternete bağlanmak için lütfen Wi-Fi veya mobil verileri açın.</string>
     <string name="chapters">Bölümler</string>
     <string name="change_playback_speed">Oynatma hızı</string>
-    <string name="require_restart_message">Uygulama yeniden başlatılsın mı\?</string>
+    <string name="require_restart_message">Bu değişiklik, uygulamanın yeniden başlatılmasını gerektirir. Şimdi yeniden başlatmak için \'Tamam\'a basın.</string>
     <string name="require_restart">Uygulamanın yeniden başlatılması gerekiyor</string>
     <string name="captions">Altyazılar</string>
     <string name="system_caption_style">Sistem altyazı stili</string>
@@ -314,7 +314,7 @@
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
-    <string name="delete">Sil</string>
+    <string name="delete">İndirilenlerden sil</string>
     <string name="new_videos_badge">Yeni videolar için gösterge</string>
     <string name="new_videos_badge_summary">Varsa, yeni videoların miktarını içeren bir rozet gösterin.</string>
     <string name="trending_layout">Alternatif ana sayfa düzeni</string>
@@ -343,4 +343,5 @@
     <string name="progressive_load_interval">Aşamalı yükleme aralığı boyutu</string>
     <string name="default_load_interval">Varsayılan</string>
     <string name="progressive_load_interval_summary">Daha düşük bir değer, ilk video yüklemesini hızlandırabilir.</string>
+    <string name="views_placeholder">görüntüleme</string>
 </resources>
