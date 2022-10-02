@@ -31,7 +31,7 @@
     <string name="dlisinprogress">Пожалуйста, подождите, пока все загрузки завершатся.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
-    <string name="vlcerror">Не удаётся открыть в VLC. Возможно, он не установлен.</string>
+    <string name="vlcerror">Не удаётся открыть в VLC, возможно, он не установлен.</string>
     <string name="import_from_yt">Импорт подписок</string>
     <string name="app_theme">Тема</string>
     <string name="server_error">На сервере возникла проблема. Попробовать другой экземпляр\?</string>
@@ -340,4 +340,8 @@
     <string name="select_at_least_one">Выберите как минимум один</string>
     <string name="change_region">Похоже, что тренды не доступны в текущем регионе. Выберите другой регион в настройках.</string>
     <string name="limit_hls">Ограничить HLS до 1080p</string>
+    <string name="progressive_load_interval">Прогрессивный размер интервала загрузки</string>
+    <string name="progressive_load_interval_summary">Меньшие значения могут увеличить начальную скорость загрузки видео.</string>
+    <string name="default_load_interval">По умолчанию</string>
+    <string name="playback_pitch">Скорость</string>
 </resources>
