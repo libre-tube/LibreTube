@@ -164,7 +164,7 @@
     <string name="instance_summary">Piped, giriş və abunəliklər</string>
     <string name="empty_instance">Adı və API URL\'ni daxil edin.</string>
     <string name="clear_customInstances">Əlavələri silin</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Versiya %1$s</string>
     <string name="about_summary">LibreTube komandasını tanıyın və hər şeyin necə baş verdiyini öyrənin.</string>
     <string name="related_streams">Əlaqədar məzmun</string>
     <string name="related_streams_summary">Baxdığınızla yanaşı oxşar yayımları göstərin.</string>
@@ -225,7 +225,7 @@
     <string name="turnInternetOn">İnternetə qoşulmaq üçün Wi-Fi və ya mobil datanı yandırın.</string>
     <string name="chapters">Bölmələr</string>
     <string name="change_playback_speed">Oynatma sürəti</string>
-    <string name="require_restart_message">Tətbiq yenidən başladılsın \?</string>
+    <string name="require_restart_message">Bu dəyişiklik tətbiqin yenidən başladılmasını tələb edir. İndi yenidən başlatmaq üçün \"Oldu\" düyməsini basın.</string>
     <string name="require_restart">Tətbiqi yenidən başlatmaq tələb olunur</string>
     <string name="data_saver_mode_summary">Miniatürləri və digər şəkilləri ötürün.</string>
     <string name="history_summary">Baxış və axtarış tarixçəsi</string>
@@ -316,7 +316,7 @@
     <string name="audio_video_summary">Keyfiyyət və format</string>
     <string name="new_videos_badge">Yeni videolar üçün göstərici</string>
     <string name="new_videos_badge_summary">Yeni videolar varsa, onların sayı ilə nişan göstərin.</string>
-    <string name="delete">Sil</string>
+    <string name="delete">Endirmələrdən silin</string>
     <string name="trending_layout">Alternativ ev səhifəsi tərtibatı</string>
     <string name="renamePlaylist">Pleylistin adını dəyişin</string>
     <string name="mobile_data">Mobil data</string>
@@ -343,4 +343,5 @@
     <string name="default_load_interval">Defolt</string>
     <string name="progressive_load_interval">Qabaqcıl yükləmə intervalının ölçüsü</string>
     <string name="progressive_load_interval_summary">Daha aşağı dəyər ilkin video yükləməni sürətləndirə bilər.</string>
+    <string name="views_placeholder">baxış</string>
 </resources>
