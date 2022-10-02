@@ -224,7 +224,7 @@
     <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
-    <string name="require_restart_message">¿Reiniciar la aplicación\?</string>
+    <string name="require_restart_message">Este cambio requiere que se reinicie la aplicación. Presione \'Ok\' para reiniciar ahora.</string>
     <string name="change_playback_speed">Velocidad de reproducción</string>
     <string name="require_restart">Es necesario reiniciar la aplicación</string>
     <string name="selected">Seleccionado</string>
@@ -316,7 +316,7 @@
     <string name="audio_video_summary">Calidad y formato</string>
     <string name="new_videos_badge_summary">Muestra una notificación con la cantidad de videos nuevos si hay algunos.</string>
     <string name="new_videos_badge">Indicador para nuevos vídeos</string>
-    <string name="delete">Borrar</string>
+    <string name="delete">Eliminar de las descargas</string>
     <string name="trending_layout">Diseño de tendencias alternativo</string>
     <string name="renamePlaylist">Cambiar el nombre de la lista de reproducción</string>
     <string name="wifi">Wifi</string>
@@ -344,4 +344,5 @@
     <string name="playback_pitch">Tono</string>
     <string name="progressive_load_interval">Tamaño del intervalo de la carga progresiva</string>
     <string name="progressive_load_interval_summary">Un valor más bajo puede acelerar la carga inicial del vídeo.</string>
+    <string name="views_placeholder">vistas</string>
 </resources>
