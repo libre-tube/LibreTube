@@ -188,7 +188,7 @@
     <string name="account">Обліковий запис</string>
     <string name="restore">Відновити</string>
     <string name="change_playback_speed">Швидкість відтворення</string>
-    <string name="require_restart_message">Перезапустити додаток\?</string>
+    <string name="require_restart_message">Ця зміна вимагає перезапуску застосунку. Натисніть «ГАРАЗД», щоб перезапустити зараз.</string>
     <string name="player_summary">Налаштування і поведінка програвача</string>
     <string name="pauseOnScreenOff">Автопауза</string>
     <string name="pauseOnScreenOff_summary">Призупиняти відтворення при вимкненні екрану.</string>
@@ -257,7 +257,7 @@
     <string name="no_subtitles_available">Субтитри відсутні</string>
     <string name="yt_shorts">Shorts</string>
     <string name="backup">Резервне копіювання</string>
-    <string name="delete">Видалити</string>
+    <string name="delete">Видалити із завантажень</string>
     <string name="required_network">Необхідне з\'єднання</string>
     <string name="network_metered">Лімітоване</string>
     <string name="already_spent_time">Ви вже провели %1$s хвилин у застосунку, час зробити перерву.</string>
@@ -344,4 +344,5 @@
     <string name="trending_layout">Альтернативний вигляд трендів</string>
     <string name="renamePlaylist">Перейменувати добірку</string>
     <string name="mobile_data">Мобільні дані</string>
+    <string name="views_placeholder">погляди</string>
 </resources>
