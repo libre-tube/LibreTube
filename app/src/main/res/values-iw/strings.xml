@@ -226,7 +226,7 @@
     <string name="chapters">פרקים</string>
     <string name="change_playback_speed">מהירות נגינה</string>
     <string name="require_restart">נדרשת הפעלה מחדש של היישומון</string>
-    <string name="require_restart_message">להפעיל את היישומון מחדש\?</string>
+    <string name="require_restart_message">שינוי זה דורש את הפעלת היישום מחדש. נא ללחוץ על ‚אישור’ כדי להפעיל אותו מחדש כעת.</string>
     <string name="always">תמיד</string>
     <string name="selected">נבחר</string>
     <string name="never">לעולם לא</string>
@@ -314,7 +314,7 @@
     <string name="legacy_subscriptions">תצוגת מינויים מיושנת</string>
     <string name="device_info">פרטי מכשיר</string>
     <string name="audio_video_summary">איכות ותצורה</string>
-    <string name="delete">מחיקה</string>
+    <string name="delete">מחיקה מההורדות</string>
     <string name="trending_layout">פריסת מובילים חלופית</string>
     <string name="renamePlaylist">שינוי שם רשימת נגינה</string>
     <string name="mobile_data">גלישה סלולרית</string>
@@ -339,4 +339,10 @@
     <string name="navigation_bar">סרגל ניווט</string>
     <string name="select_at_least_one">נא לבחור פריט אחד לפחות</string>
     <string name="playback_pitch">גובה צליל</string>
+    <string name="default_load_interval">ברירת מחדל</string>
+    <string name="limit_hls">הגבלת שידור חי ל־1080p</string>
+    <string name="views_placeholder">צפיות</string>
+    <string name="progressive_load_interval_summary">ערך נמוך יותר עשוי להאיץ את טעינת הסרטון הראשונית.</string>
+    <string name="progressive_load_interval">גודל מרווח טעינה במקטעים</string>
+    <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>
 </resources>
