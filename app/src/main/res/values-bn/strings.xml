@@ -170,7 +170,7 @@
     <string name="about_summary">টিম লিবরাটিউবের সদস্যদের ও তাদের কাজ সম্পর্কে জানুন।</string>
     <string name="autoplay_summary">ভিডিও শেষ হওয়ার পর স্বয়ংক্রিয়ভাবে নতুন ভিডিও চালু করুন।</string>
     <string name="reset_message">সব সেটিংস রিসেট এবং লগ-আউট করুন\?</string>
-    <string name="vlcerror">ভিএলসি অ্যাপে প্রদর্শন করা যাচ্ছে না। সম্ভবত অ্যাপটি ইনস্টল করা হয়নি।</string>
+    <string name="vlcerror">ভিএলসি অ্যাপে প্রদর্শন করা যাচ্ছে না, সম্ভবত অ্যাপটি ইনস্টল করা নেই।</string>
     <string name="notgmail">এটি একটি পাইপড অ্যাকাউন্টের জন্য।</string>
     <string name="noInternet">প্রথমে ইন্টারনেট চালু করুন।</string>
     <string name="yes">হ্যাঁ</string>
@@ -224,7 +224,7 @@
     <string name="matrix">ম্যাট্রিক্স</string>
     <string name="change_playback_speed">প্লে-ব্যাকের গতি</string>
     <string name="selected">বাছাইকৃত</string>
-    <string name="require_restart_message">অ্যাপ রিস্টার্ট করুন\?</string>
+    <string name="require_restart_message">এই চেঞ্জটি কার্যকর করতে হলে রিস্টার্ট হওয়া প্রয়োজন। অ্যাপ রিস্টার্ট করুন\?</string>
     <string name="chapters">চ্যাপ্টার</string>
     <string name="require_restart">অ্যাপের রিস্টার্ট প্রয়োজন</string>
     <string name="auth_instance">অথেন্টিকেশন ইন্সটেন্স</string>
@@ -302,4 +302,25 @@
     <string name="new_streams_count">%1$sটি নতুন স্ট্রিম আছে</string>
     <string name="resize_mode_zoom">জুম</string>
     <string name="share_with_time">টাইমকোডের সাথে শেয়ার করুন</string>
+    <string name="new_videos_badge">নতুন ভিডিওর জন্য ইন্ডিকেটর</string>
+    <string name="new_streams_by">%1$s এর নতুন স্ট্রিমগুলো…</string>
+    <string name="delete">ডাউনলোডস থেকে মুছুন</string>
+    <string name="mobile_data">মোবাইল ডেটা</string>
+    <string name="local_subscriptions">লোকাল সাবস্ক্রিপশন</string>
+    <string name="seekbar_preview_summary">প্লেব্যাক ইন্ডিকেটর টানার সময় স্ন্যাপশট দেখান।</string>
+    <string name="views_placeholder">ভিউস</string>
+    <string name="player_resize_mode">রিসাইজ মোড</string>
+    <string name="break_reminder_time">মনে করানোর আগের সময়</string>
+    <string name="sb_skip_manual">ম্যানুয়ালি স্কিপ করুন</string>
+    <string name="trending_layout">বিকল্প জনপ্রিয় লেয়াউট</string>
+    <string name="skip_segment">অংশটি স্কিপ করুন</string>
+    <string name="legacy_subscriptions">ঐতিহ্যবাহী সাবস্ক্রিপশন ভিউ</string>
+    <string name="device_info">ডিভাইসের তথ্য</string>
+    <string name="break_reminder">ব্রেক রিমাইন্ডার</string>
+    <string name="yt_shorts">শর্টস</string>
+    <string name="maximum_image_cache">সর্বোচ্চ ছবির ক্যাশ সাইজ</string>
+    <string name="copied_to_clipboard">ক্লিপবোর্ডে কপি করা হয়েছে</string>
+    <string name="open_copied">খুলুন</string>
+    <string name="audio_video_summary">মান এবং ফর্ম্যাট</string>
+    <string name="renamePlaylist">প্লেলিস্ট পুনঃনামকরণ</string>
 </resources>
