@@ -138,7 +138,7 @@
     <string name="torchIcon">Модный факел</string>
     <string name="flameIcon">Порхающее пламя</string>
     <string name="instance_summary">Аккаунт Piped и подписки</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Версия %1$s</string>
     <string name="about_summary">Познакомьтесь с командой LibreTube и узнайте, как все это происходит.</string>
     <string name="category_filler">Филлер/шутки</string>
     <string name="category_music_offtopic">Музыка: Немузыкальная секция</string>
@@ -226,7 +226,7 @@
     <string name="chapters">Эпизоды</string>
     <string name="change_playback_speed">Скорость воспроизведения</string>
     <string name="require_restart">Требуется перезапуск</string>
-    <string name="require_restart_message">Перезапустить приложение\?</string>
+    <string name="require_restart_message">Это изменение требует перезапуска приложения. Нажмите \'Ок\' для перезапуска.</string>
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
@@ -325,7 +325,7 @@
     <string name="break_reminder_time">Минут до напоминания</string>
     <string name="legacy_subscriptions">Старый вид отображения подписок</string>
     <string name="audio_video_summary">Качество и формат</string>
-    <string name="delete">Удалить</string>
+    <string name="delete">Удалить из загрузок</string>
     <string name="trending_layout">Альтернативный вид трендов</string>
     <string name="renamePlaylist">Переименовать плейлист</string>
     <string name="wifi">WiFi</string>
@@ -344,4 +344,5 @@
     <string name="progressive_load_interval_summary">Меньшие значения могут увеличить начальную скорость загрузки видео.</string>
     <string name="default_load_interval">По умолчанию</string>
     <string name="playback_pitch">Скорость</string>
+    <string name="views_placeholder">просмотров</string>
 </resources>

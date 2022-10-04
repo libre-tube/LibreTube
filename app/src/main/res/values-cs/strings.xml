@@ -124,7 +124,7 @@
     <string name="change_playback_speed">Rychlost přehrávání</string>
     <string name="require_restart">Je vyžadován restart aplikace</string>
     <string name="turnInternetOn">Zapněte Wi-Fi nebo mobilní data pro připojení se k internetu.</string>
-    <string name="require_restart_message">Restartovat aplikaci\?</string>
+    <string name="require_restart_message">Tato změna vyžaduje restartování aplikace. Stisknutím tlačítka ‚Ok‘ aplikaci restartujete.</string>
     <string name="authors">Autoři</string>
     <string name="download_directory">Stáhnout do</string>
     <string name="download_directory_summary">Kam se ukládají stahovaná média.</string>
@@ -150,7 +150,7 @@
     <string name="birdIcon">Posílený pták</string>
     <string name="instance_summary">Piped, přihlášení a odběry</string>
     <string name="customInstance_summary">Přidat…</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Verze %1$s</string>
     <string name="category_filler">Výplň/vtipy</string>
     <string name="category_music_offtopic">Hudba: nehudební sekce</string>
     <string name="category_preview">Náhled/shrnutí</string>
@@ -314,7 +314,7 @@
     <string name="legacy_subscriptions">Staré zobrazení odběrů</string>
     <string name="device_info">Informace o zařízení</string>
     <string name="audio_video_summary">Kvalita a formát</string>
-    <string name="delete">Odstranit</string>
+    <string name="delete">Odstranit ze stažených</string>
     <string name="trending_layout">Alternativní rozložení trendů</string>
     <string name="renamePlaylist">Přejmenovat playlist</string>
     <string name="new_videos_badge">Značka u nových videí</string>
@@ -344,4 +344,5 @@
     <string name="progressive_load_interval_summary">Nižší hodnota může urychlit počáteční načítání videa.</string>
     <string name="default_load_interval">Výchozí</string>
     <string name="playback_pitch">Výška</string>
+    <string name="views_placeholder">zhlédnutí</string>
 </resources>

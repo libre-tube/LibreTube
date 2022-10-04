@@ -165,7 +165,7 @@
     <string name="related_streams_summary">在您观看的内容旁边显示相似音视频流。</string>
     <string name="customInstance_summary">添加…</string>
     <string name="instance_name">实例名称</string>
-    <string name="version">当前版本 %1$s</string>
+    <string name="version">版本 %1$s</string>
     <string name="about_summary">了解 LibreTube 团队以及更多信息。</string>
     <string name="show_chapters">显示章节</string>
     <string name="hide_chapters">隐藏章节</string>
@@ -226,7 +226,7 @@
     <string name="chapters">章节</string>
     <string name="change_playback_speed">播放速度</string>
     <string name="require_restart">需要重启应用</string>
-    <string name="require_restart_message">重新启动应用吗？</string>
+    <string name="require_restart_message">此更改需要重新启动应用。 现在按“确定”重新启动。</string>
     <string name="navLabelVisibility">导航栏标签可见性</string>
     <string name="always">始终</string>
     <string name="selected">仅选中</string>
@@ -314,7 +314,7 @@
     <string name="legacy_subscriptions">旧版订阅视图</string>
     <string name="device_info">设备信息</string>
     <string name="audio_video_summary">清晰度和格式</string>
-    <string name="delete">删除</string>
+    <string name="delete">从下载删除</string>
     <string name="trending_layout">备选“时下流行”页面布局</string>
     <string name="renamePlaylist">重命名播放列表</string>
     <string name="mobile_data">移动数据</string>
@@ -344,4 +344,5 @@
     <string name="default_load_interval">默认</string>
     <string name="playback_pitch">时间伸缩</string>
     <string name="progressive_load_interval">渐进加载间隔大小</string>
+    <string name="views_placeholder">观看</string>
 </resources>

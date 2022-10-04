@@ -164,7 +164,7 @@
     <string name="empty_instance">Complétez le nom et l\'URL de l\'API.</string>
     <string name="shapedIcon">Forme idiote</string>
     <string name="gradientIcon">Dégradé désinvolte</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Version %1$s</string>
     <string name="about_summary">Découvrez l\'équipe LibreTube et comment tout cela se passe.</string>
     <string name="related_streams">Contenus connexes</string>
     <string name="related_streams_summary">Affichez des flux similaires à côté de ce que vous regardez.</string>
@@ -225,7 +225,7 @@
     <string name="turnInternetOn">Veuillez activer le Wi-Fi ou les données mobiles pour vous connecter à internet.</string>
     <string name="chapters">Chapitres</string>
     <string name="change_playback_speed">Vitesse de lecture</string>
-    <string name="require_restart_message">Redémarrer l\'application \?</string>
+    <string name="require_restart_message">Cette modification nécessite le redémarrage de l\'application. Appuyez sur « OK » pour redémarrer maintenant.</string>
     <string name="require_restart">Redémarrage nécessaire de l\'application</string>
     <string name="navLabelVisibility">Visibilité de l\'étiquette de la barre de navigation</string>
     <string name="always">Toujours</string>
@@ -316,7 +316,7 @@
     <string name="audio_video_summary">Qualité et format</string>
     <string name="new_videos_badge">Indicateur de nouvelles vidéos</string>
     <string name="new_videos_badge_summary">Afficher un badge avec le nombre de nouvelles vidéos s\'il y en a.</string>
-    <string name="delete">Supprimer</string>
+    <string name="delete">Supprimer des téléchargements</string>
     <string name="trending_layout">Disposition alternative des tendances</string>
     <string name="renamePlaylist">Renommer la liste de lecture</string>
     <string name="wifi">WiFi</string>
@@ -336,8 +336,13 @@
     <string name="select_at_least_one">Veuillez sélectionner au moins un élément</string>
     <string name="download_channel_name">Service de téléchargement</string>
     <string name="download_channel_description">Affiche une notification lors du téléchargement de médias.</string>
-    <string name="change_region">Populaires semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
+    <string name="change_region">La section Populaires semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
     <string name="background_channel_name">Mode arrière-plan</string>
     <string name="limit_hls">Limiter le HLS à 1080p</string>
     <string name="push_channel_description">Affiche une notification lorsque de nouveaux flux sont disponibles.</string>
+    <string name="views_placeholder">vues</string>
+    <string name="progressive_load_interval">Taille de l\'intervalle de charge progressive</string>
+    <string name="progressive_load_interval_summary">Une valeur inférieure peut accélérer le chargement initial de la vidéo.</string>
+    <string name="default_load_interval">Par défaut</string>
+    <string name="playback_pitch">Ton</string>
 </resources>

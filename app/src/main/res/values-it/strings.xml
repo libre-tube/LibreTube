@@ -164,7 +164,7 @@
     <string name="customInstance_summary">Aggiungi…</string>
     <string name="instance_api_url">URL API dell\'istanza</string>
     <string name="invalid_url">Si prega di inserire un URL che funzioni</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Versione %1$s</string>
     <string name="about_summary">Conosci il team LibreTube e come tutto accade.</string>
     <string name="related_streams_summary">Mostra stream simili a fianco di ciò che guardi.</string>
     <string name="related_streams">Contenuti correlati</string>
@@ -226,7 +226,7 @@
     <string name="chapters">Capitoli</string>
     <string name="change_playback_speed">Velocità di riproduzione</string>
     <string name="require_restart">È necessario riavviare l\'app</string>
-    <string name="require_restart_message">Riavviare l\'applicazione\?</string>
+    <string name="require_restart_message">Questa modifica richiede il riavvio dell\'applicazione. Premi \"Ok\" per ravviare adesso.</string>
     <string name="autoRotatePlayer">Schermo intero automatico</string>
     <string name="data_saver_mode">Modalità risparmio dati</string>
     <string name="autoRotatePlayer_summary">Riproduzione a schermo intero quando il dispositivo viene girato.</string>
@@ -313,7 +313,7 @@
     <string name="break_reminder_time">Minuti prima dell\'avviso</string>
     <string name="device_info">Info sul dispositivo</string>
     <string name="audio_video_summary">Qualità e formato</string>
-    <string name="delete">Elimina</string>
+    <string name="delete">Elimina dagli scaricamenti</string>
     <string name="trending_layout">Layout tendenze alternativo</string>
     <string name="renamePlaylist">Rinomina la playlist</string>
     <string name="new_videos_badge">Indicatore per i nuovi video</string>
@@ -343,4 +343,5 @@
     <string name="default_load_interval">Predefinito</string>
     <string name="playback_pitch">Tono</string>
     <string name="progressive_load_interval_summary">Un valore inferiore può accelerare il caricamento iniziale del video.</string>
+    <string name="views_placeholder">visualizzazioni</string>
 </resources>
