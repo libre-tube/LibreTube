@@ -19,7 +19,7 @@
     <string name="login">Masuk</string>
     <string name="videos">Video</string>
     <string name="downloadfailed">Unduhan Gagal.</string>
-    <string name="vlcerror">Tidak bisa dibuka di VLC. Apl mungkin tidak diinstal.</string>
+    <string name="vlcerror">Tidak bisa dibuka di VLC, mungkin tidak diinstal.</string>
     <string name="import_from_yt">Impor langganan</string>
     <string name="notgmail">Ini untuk akun Piped Anda.</string>
     <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun anda.</string>
@@ -171,7 +171,7 @@
     <string name="empty_instance">Isi nama dan URL API.</string>
     <string name="network_all">Semua</string>
     <string name="network_metered">Terbatas</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Versi %1$s</string>
     <string name="error_occurred">Kesalahan</string>
     <string name="copied">Disalin</string>
     <string name="break_reminder_time">Menit sebelum diingatkan</string>
@@ -182,7 +182,7 @@
     <string name="pauseOnScreenOff_summary">Jeda pemutaran ketika layar dimatikan.</string>
     <string name="autoplay_summary">Mainkan video berikut secara otomatis setelah video saat ini.</string>
     <string name="reset_message">Atur ulang semua pengaturan dan keluar\?</string>
-    <string name="require_restart_message">Mulai ulang aplikasi\?</string>
+    <string name="require_restart_message">Perubahan ini harus memulai ulang aplikasi. Tekan \'Ok\' untuk memulai ulang sekarang.</string>
     <string name="search_history_summary">Ingat penelusuran</string>
     <string name="watch_positions_title">Posisi pemainan diingat</string>
     <string name="reset_watch_positions">Atur ulang</string>
@@ -314,7 +314,7 @@
     <string name="player_summary">Bawaan dan perilaku</string>
     <string name="audio_video_summary">Kualitas dan format</string>
     <string name="downloading">Mengunduh…</string>
-    <string name="delete">Hapus</string>
+    <string name="delete">Hapus dari unduhan</string>
     <string name="playerAudioFormat">Format audio untuk pemain</string>
     <string name="playerAudioQuality">Kualitas audio</string>
     <string name="trending_layout">Tata letak tren alternatif</string>
@@ -340,4 +340,9 @@
     <string name="select_at_least_one">Mohon pilih setidaknya satu item</string>
     <string name="change_region">Sedang Tren sepertinya tidak tersedia untuk wilayah saat ini. Pilih yang lain di pengaturan.</string>
     <string name="limit_hls">Batasi HLS ke 1080p</string>
+    <string name="views_placeholder">tampilan</string>
+    <string name="progressive_load_interval">Ukuran interval muatan progresif</string>
+    <string name="playback_pitch">Nada</string>
+    <string name="progressive_load_interval_summary">Nilai yang rendah dapat mempercepat pemuatan video awal.</string>
+    <string name="default_load_interval">Bawaan</string>
 </resources>
