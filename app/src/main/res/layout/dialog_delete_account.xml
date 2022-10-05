@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -15,6 +16,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/CustomDialogTextInputLayout"
+        app:passwordToggleEnabled="true"
         android:hint="@string/password">
 
         <com.google.android.material.textfield.TextInputEditText
