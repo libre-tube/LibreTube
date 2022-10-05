@@ -103,7 +103,7 @@
     <string name="license">Lisans</string>
     <string name="color_accent">Vurgular</string>
     <string name="oledTheme">Siyah</string>
-    <string name="material_you">Kendi Tasarımı</string>
+    <string name="material_you">Material You</string>
     <string name="color_green">Harika yeşil</string>
     <string name="color_purple">Keyifli mor</string>
     <string name="color_yellow">Fışkıran sarı</string>
@@ -127,7 +127,7 @@
     <string name="download_directory_summary">İndirilen medyanın depolandığı yer.</string>
     <string name="contributing">Katkı</string>
     <string name="donate">Bağış</string>
-    <string name="update_summary">Uygulamanın güncel olup-olmadığını öğrenmek için tıklayın.</string>
+    <string name="update_summary">Uygulamanın güncel olup olmadığını öğrenmek için tıklayın.</string>
     <string name="app_uptodate">En son sürümü çalıştırıyor.</string>
     <string name="no_update_available">En son sürümü çalıştırıyorsunuz.</string>
     <string name="playback_speed">Oynatma hızı</string>
@@ -151,7 +151,7 @@
     <string name="gradientIcon">Pergar eğilimi</string>
     <string name="fireIcon">Moda ateş</string>
     <string name="torchIcon">Şık fener</string>
-    <string name="birdIcon">Güçlendirilmiş kuş</string>
+    <string name="birdIcon">Hızlandırılmış kuş</string>
     <string name="legacyIcon">Kayıp miras</string>
     <string name="views">%1$s görüntüleme</string>
     <string name="shapedIcon">Aptal şekilli</string>
@@ -190,7 +190,7 @@
     <string name="behavior">Davranış</string>
     <string name="player_summary">Varsayılan ayarlar ve davranış</string>
     <string name="instance_frontend_url">Sunucu ön ucuna giden URL</string>
-    <string name="seek_increment">Aramayı artırın</string>
+    <string name="seek_increment">Arama artışı</string>
     <string name="pauseOnScreenOff">Otomatik duraklatma</string>
     <string name="pauseOnScreenOff_summary">Ekran kapatılmışken oynatmayı duraklatır.</string>
     <string name="autoplay_summary">Geçerli videodan sonraki videoyu otomatik olarak oynatın.</string>
@@ -221,7 +221,7 @@
     <string name="twitter">Twitter</string>
     <string name="community">Topluluk</string>
     <string name="discord">Discord</string>
-    <string name="open">Açık…</string>
+    <string name="open">Açın…</string>
     <string name="turnInternetOn">İnternete bağlanmak için lütfen Wi-Fi veya mobil verileri açın.</string>
     <string name="chapters">Bölümler</string>
     <string name="change_playback_speed">Oynatma hızı</string>
@@ -231,7 +231,7 @@
     <string name="system_caption_style">Sistem altyazı stili</string>
     <string name="none">Hiçbiri</string>
     <string name="reset_watch_positions">Sıfırla</string>
-    <string name="data_saver_mode_summary">Küçük resimleri ve diğer resimleri atlayın.</string>
+    <string name="data_saver_mode_summary">Küçük resimleri ve diğer resimleri gösterme.</string>
     <string name="update_now">Yeni LibreTube sürümü şimdi yüklensin mi\?</string>
     <string name="navLabelVisibility">Navigasyon çubuğundaki etiket görünürlüğü</string>
     <string name="always">Her zaman</string>
@@ -243,7 +243,7 @@
     <string name="pure_theme_summary">Temiz beyaz/siyah tema</string>
     <string name="no_player_found">Harici oynatıcı bulunamadı. Lütfen, bir tane yüklediğinizden emin olun.</string>
     <string name="data_saver_mode">Veri tasarrufu modu</string>
-    <string name="search_history_summary">Aramaları kaydet</string>
+    <string name="search_history_summary">Kaydedilen aramalar</string>
     <string name="watch_history_summary">İzlenen videoları yerel olarak takip edin</string>
     <string name="history_summary">İzleme ve arama geçmişi</string>
     <string name="watch_positions_title">Kaydedilmiş oynatma konumları</string>
@@ -259,7 +259,7 @@
     <string name="best_quality">En iyi</string>
     <string name="worst_quality">En kötü</string>
     <string name="default_subtitle_language">Altyazı dili</string>
-    <string name="checking_frequency">Her kontrol…</string>
+    <string name="checking_frequency">Zaman zaman kontrol ediliyor …</string>
     <string name="new_streams_count">%1$s yeni akış mevcut</string>
     <string name="new_streams_by">%1$s tarafından yeni akışlar…</string>
     <string name="least_views">En az görüntüleme</string>
@@ -284,7 +284,7 @@
     <string name="copied">Kopyalandı</string>
     <string name="share_with_time">Zaman koduyla paylaşın</string>
     <string name="downloadsucceeded">İndirme başarılı</string>
-    <string name="skip_buttons">Düğmeleri atla</string>
+    <string name="skip_buttons">Atlama düğmeleri</string>
     <string name="skip_buttons_summary">Sonraki veya önceki videoya atlamak için düğmeleri göster.</string>
     <string name="history_size">Maksimum geçmiş boyutu</string>
     <string name="unlimited">Sınırsız</string>
@@ -310,7 +310,7 @@
     <string name="maximum_image_cache">Maksimum resim önbellek boyutu</string>
     <string name="open_copied">Açık</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
-    <string name="break_reminder_time">Hatırlatmadan önce dakikalar</string>
+    <string name="break_reminder_time">Hatırlatmadan önce dakika</string>
     <string name="device_info">Cihaz Bilgisi</string>
     <string name="legacy_subscriptions">Eski abonelikler görünümü</string>
     <string name="audio_video_summary">Kalite ve biçim</string>
@@ -330,7 +330,7 @@
     <string name="background_channel_name">Arka Plan Modu</string>
     <string name="background_channel_description">Müzik çaları kontrol etmek için düğmeleri olan bir bildirim gösterir.</string>
     <string name="save_feed">Akışı arka planda yükle</string>
-    <string name="save_feed_summary">Abonelik akışını arka planda yükleyin ve otomatik olarak yenilenmesini önleyin.</string>
+    <string name="save_feed_summary">Abonelik akışının arka planda yüklenmesini ve otomatik olarak yenilenmesini önleyin.</string>
     <string name="download_channel_name">İndirme Hizmeti</string>
     <string name="download_channel_description">Medya indirirken bildirim gösterir.</string>
     <string name="push_channel_name">Bildirim Çalışanı</string>
@@ -340,8 +340,9 @@
     <string name="select_at_least_one">Lütfen en az bir öge seçin</string>
     <string name="change_region">Trendler mevcut bölge için kullanılamıyor gibi görünüyor. Lütfen ayarlarda başka bir tane seçin.</string>
     <string name="limit_hls">HLS\'yi 1080p ile sınırlayın</string>
-    <string name="progressive_load_interval">Aşamalı yükleme aralığı boyutu</string>
+    <string name="progressive_load_interval">Yükselen yükleme aralığı boyutu</string>
     <string name="default_load_interval">Varsayılan</string>
     <string name="progressive_load_interval_summary">Daha düşük bir değer, ilk video yüklemesini hızlandırabilir.</string>
     <string name="views_placeholder">görüntüleme</string>
+    <string name="playback_pitch">Ses yüksekliği</string>
 </resources>
