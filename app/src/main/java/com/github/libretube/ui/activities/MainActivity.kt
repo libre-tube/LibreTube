@@ -1,5 +1,6 @@
 package com.github.libretube.ui.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -387,15 +388,13 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("SwitchIntDef")
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        val orientation = newConfig.orientation
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            println("Portrait")
-            unsetFullscreen()
-        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            println("Landscape")
-            setFullscreen()
+
+        when (newConfig.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> unsetFullscreen()
+            Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
         }
     }
 

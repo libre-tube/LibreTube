@@ -1558,12 +1558,11 @@ class PlayerFragment : BaseFragment() {
 
         if (autoRotationEnabled) {
             val orientation = newConfig.orientation
-            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            when (orientation) {
                 // go to fullscreen mode
-                setFullscreen()
-            } else {
+                Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
                 // exit fullscreen if not landscape
-                unsetFullscreen()
+                else -> unsetFullscreen()
             }
         }
     }

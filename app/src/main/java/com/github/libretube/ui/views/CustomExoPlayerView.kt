@@ -2,6 +2,7 @@ package com.github.libretube.ui.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
@@ -383,5 +384,20 @@ internal class CustomExoPlayerView(
                 player?.repeatMode = repeatModes[index]
             }
             .show(childFragmentManager)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+
+        val offsetFactor: Float = when (newConfig?.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> 2F
+            else -> 1F / 2F
+        }
+
+        binding.progressBar.let {
+            val params = it.layoutParams as MarginLayoutParams
+            params.bottomMargin = (params.bottomMargin * offsetFactor).toInt()
+            it.layoutParams = params
+        }
     }
 }
