@@ -24,6 +24,7 @@ class WatchHistoryAdapter(
         DatabaseHelper.removeFromWatchHistory(position)
         watchHistory.removeAt(position)
         notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {

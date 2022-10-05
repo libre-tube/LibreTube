@@ -104,6 +104,7 @@ class PlaylistsAdapter(
                     playlists.removeAt(position)
                     activity.runOnUiThread {
                         notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, itemCount)
                     }
                 }
             } catch (e: Exception) {

@@ -66,6 +66,7 @@ class DownloadsAdapter(
 
                                 files.removeAt(position)
                                 notifyItemRemoved(position)
+                                notifyItemRangeChanged(position, itemCount)
                             }
                         }
                     }
