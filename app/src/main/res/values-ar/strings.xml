@@ -29,7 +29,7 @@
     <string name="importsuccess">مشترك</string>
     <string name="dlcomplete">اكتمل التنزيل.</string>
     <string name="downloadfailed">فشل التنزيل.</string>
-    <string name="vlcerror">لا يمكن فتحه في VLC. قد لا يكون مثبتا.</string>
+    <string name="vlcerror">تعذر الفتح في VLC ، ربما لم يتم تثبيته.</string>
     <string name="import_from_yt">استيراد الاشتراكات</string>
     <string name="app_theme">سمة التطبيق</string>
     <string name="empty">لا يمكن أن يكون اسم المستخدم وكلمة المرور فارغين.</string>
@@ -225,7 +225,7 @@
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
     <string name="change_playback_speed">سرعة التشغيل</string>
-    <string name="require_restart_message">إعادة تشغيل التطبيق؟</string>
+    <string name="require_restart_message">يتطلب هذا التغيير إعادة تشغيل التطبيق. اضغط على \"موافق\" لإعادة التشغيل الآن.</string>
     <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
     <string name="navLabelVisibility">رؤية ملصق شريط التنقل</string>
     <string name="always">دائماً</string>
@@ -314,7 +314,7 @@
     <string name="legacy_subscriptions">طريقة عرض الاشتراكات القديمة</string>
     <string name="device_info">معلومات الجهاز</string>
     <string name="audio_video_summary">الجودة والشكل</string>
-    <string name="delete">حذف</string>
+    <string name="delete">حذف من التنزيلات</string>
     <string name="trending_layout">تنسيق بديل للمتصدرة</string>
     <string name="renamePlaylist">إعادة تسمية قائمة التشغيل</string>
     <string name="wifi">واي فاي</string>
@@ -340,4 +340,11 @@
     <string name="select_at_least_one">يرجى اختيار عنصر واحد على الأقل</string>
     <string name="change_region">المتصدرة يبدو أنها غير متاحة في المنطقة الحالية . الرجاء اختيار آخر في الإعداد .</string>
     <string name="limit_hls">الحد من HLS إلى 1080p</string>
+    <string name="views_placeholder">المشاهدات</string>
+    <string name="progressive_load_interval">حجم الفاصل الزمني للتحميل التدريجي</string>
+    <string name="default_load_interval">الإفتراضي</string>
+    <string name="playback_pitch">الحدة</string>
+    <string name="filename">اسم الملف</string>
+    <string name="invalid_filename">اسم الملف غير صالح!</string>
+    <string name="progressive_load_interval_summary">قد تؤدي القيمة الأقل إلى تسريع تحميل الفيديو الأولي.</string>
 </resources>
