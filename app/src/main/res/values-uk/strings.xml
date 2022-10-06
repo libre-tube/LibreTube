@@ -347,4 +347,8 @@
     <string name="views_placeholder">погляди</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
+    <string name="recentlyUpdated">Нещодавно оновлені</string>
+    <string name="recentlyUpdatedReversed">Нещодавно оновлені (зворотний порядок)</string>
+    <string name="playlistNameReversed">Назва добірки (у зворотному порядку)</string>
+    <string name="playlists_order">Порядок добірок</string>
 </resources>
