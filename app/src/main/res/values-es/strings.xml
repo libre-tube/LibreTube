@@ -3,7 +3,7 @@
     <string name="save">Guardar</string>
     <string name="download">Descargar</string>
     <string name="subscribe">Suscribirse</string>
-    <string name="unsubscribe">Desuscribirse</string>
+    <string name="unsubscribe">Cancelar la suscripción</string>
     <string name="share">Compartir</string>
     <string name="username">Nombre de usuario</string>
     <string name="password">Contraseña</string>
@@ -16,15 +16,15 @@
     <string name="loggedIn">Conectado.</string>
     <string name="yes">Sí</string>
     <string name="registered">Registrado. Ahora puede suscribirse a los canales.</string>
-    <string name="already_logged_in">Ya ha iniciado sesión. Puede salir de su cuenta.</string>
+    <string name="already_logged_in">Ya ha iniciado sesión. Puede cerrar sesión en su cuenta.</string>
     <string name="instances">Elegir…</string>
     <string name="customInstance">Personalizada</string>
     <string name="login_register">Iniciar sesión/registrarse</string>
-    <string name="please_login">Por favor, inicie sesión o regístrese primero en los ajustes.</string>
+    <string name="please_login">Por favor, identifíquese o regístrese primero en la configuración.</string>
     <string name="importsuccess">Suscrito</string>
     <string name="subscribeIsEmpty">Suscríbase primero a algunos canales.</string>
     <string name="loggedout">Desconectado.</string>
-    <string name="login_first">Por favor, conéctese e inténtelo de nuevo.</string>
+    <string name="login_first">Por favor inicie sesión e intente de nuevo.</string>
     <string name="region">Región</string>
     <string name="cannotDownload">No se puede descargar esta transmisión.</string>
     <string name="dlcomplete">Descarga completada.</string>
