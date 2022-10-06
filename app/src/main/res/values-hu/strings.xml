@@ -332,4 +332,5 @@
     <string name="navigation_bar">Navigációs sáv</string>
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="select_at_least_one">Válasszon ki legalább egy elemet</string>
+    <string name="views_placeholder">megtekintés</string>
 </resources>

@@ -345,4 +345,6 @@
     <string name="default_load_interval">Výchozí</string>
     <string name="playback_pitch">Výška</string>
     <string name="views_placeholder">zhlédnutí</string>
+    <string name="invalid_filename">Nesprávný název souboru!</string>
+    <string name="filename">Název souboru</string>
 </resources>
