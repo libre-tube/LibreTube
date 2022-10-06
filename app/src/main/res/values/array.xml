@@ -343,15 +343,6 @@
         <item>@string/channel_name_za</item>
     </string-array>
 
-    <string-array name="sortOptionsValues">
-        <item>most_recent</item>
-        <item>least_recent</item>
-        <item>most_views</item>
-        <item>least_views</item>
-        <item>channel_name_az</item>
-        <item>channel_name_za</item>
-    </string-array>
-
     <string-array name="requiredNetwork">
         <item>@string/network_all</item>
         <item>@string/network_wifi</item>

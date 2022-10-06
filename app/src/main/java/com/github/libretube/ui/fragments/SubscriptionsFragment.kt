@@ -25,7 +25,7 @@ class SubscriptionsFragment : BaseFragment() {
     private val viewModel: SubscriptionsViewModel by activityViewModels()
 
     private var subscriptionAdapter: TrendingAdapter? = null
-    private var sortOrder = "most_recent"
+    private var sortOrder = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -120,12 +120,11 @@ class SubscriptionsFragment : BaseFragment() {
 
     private fun showSortDialog() {
         val sortOptions = resources.getStringArray(R.array.sortOptions)
-        val sortOptionValues = resources.getStringArray(R.array.sortOptionsValues)
 
         val bottomSheet = BottomSheet().apply {
             setSimpleItems(sortOptions.toList()) { index ->
                 binding.sortTV.text = sortOptions[index]
-                sortOrder = sortOptionValues[index]
+                sortOrder = index
                 showFeed()
             }
         }
@@ -140,12 +139,12 @@ class SubscriptionsFragment : BaseFragment() {
         val feed = viewModel.videoFeed.value!!
         // sort the feed
         val sortedFeed = when (sortOrder) {
-            "most_recent" -> feed
-            "least_recent" -> feed.reversed()
-            "most_views" -> feed.sortedBy { it.views }.reversed()
-            "least_views" -> feed.sortedBy { it.views }
-            "channel_name_az" -> feed.sortedBy { it.uploaderName }
-            "channel_name_za" -> feed.sortedBy { it.uploaderName }.reversed()
+            0 -> feed
+            1 -> feed.reversed()
+            2 -> feed.sortedBy { it.views }.reversed()
+            3 -> feed.sortedBy { it.views }
+            4 -> feed.sortedBy { it.uploaderName }
+            5 -> feed.sortedBy { it.uploaderName }.reversed()
             else -> feed
         }
 
