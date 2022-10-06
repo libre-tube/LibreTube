@@ -104,8 +104,20 @@
                         android:layout_marginTop="3dp"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_hearted" />
+
+                    <ImageView
+                        android:id="@+id/comments_available"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="3dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_comment" />
+
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

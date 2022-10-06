@@ -1,5 +1,6 @@
 package com.github.libretube.ui.adapters
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,17 +44,16 @@ class CommentsAdapter(
         return CommentsViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CommentsViewHolder, position: Int) {
         val comment = comments[position]
         holder.binding.apply {
-            commentInfos.text =
-                comment.author.toString() +
-                " • " + comment.commentedTime.toString()
-            commentText.text =
-                comment.commentText.toString()
+            commentInfos.text = comment.author.toString() + " • " + comment.commentedTime.toString()
+            commentText.text = comment.commentText.toString()
+
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
-            likesTextView.text =
-                comment.likeCount?.toLong().formatShort()
+            likesTextView.text = comment.likeCount?.toLong().formatShort()
+
             if (comment.verified == true) {
                 verifiedImageView.visibility = View.VISIBLE
             }
@@ -63,23 +63,29 @@ class CommentsAdapter(
             if (comment.hearted == true) {
                 heartedImageView.visibility = View.VISIBLE
             }
+
+            if (comment.repliesPage != null) {
+                commentsAvailable.visibility = View.VISIBLE
+            }
+
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
             }
+
             repliesRecView.layoutManager = LinearLayoutManager(root.context)
             val repliesAdapter = RepliesAdapter(CommentsPage().comments)
             repliesRecView.adapter = repliesAdapter
             root.setOnClickListener {
-                if (repliesAdapter.itemCount == 0) {
-                    if (comment.repliesPage != null) {
+                when {
+                    repliesAdapter.itemCount.equals(0) && comment.repliesPage != null -> {
                         nextpage = comment.repliesPage
                         fetchReplies(nextpage, repliesAdapter)
-                    } else {
+                    }
+                    repliesAdapter.itemCount.equals(0) -> {
                         Toast.makeText(root.context, R.string.no_replies, Toast.LENGTH_SHORT)
                             .show()
                     }
-                } else {
-                    repliesAdapter.clear()
+                    else -> repliesAdapter.clear()
                 }
             }
         }
