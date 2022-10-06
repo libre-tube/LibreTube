@@ -15,7 +15,10 @@
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/CustomDialogTextInputLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/filename">
 
         <com.google.android.material.textfield.TextInputEditText
