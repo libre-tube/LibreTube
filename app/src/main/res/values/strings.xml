@@ -338,6 +338,8 @@
     <string name="progressive_load_interval_summary">A lower value may speed up initial video loading.</string>
     <string name="default_load_interval">Default</string>
     <string name="playback_pitch">Pitch</string>
+    <string name="filename">Filename</string>
+    <string name="invalid_filename">Invalid filename!</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
