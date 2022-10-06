@@ -29,13 +29,13 @@ object PreferenceKeys {
     const val PURE_THEME = "pure_theme"
     const val ACCENT_COLOR = "accent_color"
     const val GRID_COLUMNS = "grid"
-    const val DEFAULT_TAB = "default_tab"
     const val LABEL_VISIBILITY = "label_visibility"
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
     const val ALTERNATIVE_TRENDING_LAYOUT = "trending_layout"
     const val NEW_VIDEOS_BADGE = "new_videos_badge"
+    const val PLAYLISTS_ORDER = "playlists_order"
 
     /**
      * Instance

@@ -421,4 +421,18 @@
         <item>default</item>
     </string-array>
 
+    <string-array name="playlistSortingOptions">
+        <item>@string/recentlyUpdated</item>
+        <item>@string/recentlyUpdatedReversed</item>
+        <item>@string/playlistName</item>
+        <item>@string/playlistNameReversed</item>
+    </string-array>
+
+    <string-array name="playlistSortingOptionsValues">
+        <item>recent</item>
+        <item>recent_reversed</item>
+        <item>name</item>
+        <item>name_reversed</item>
+    </string-array>
+
 </resources>

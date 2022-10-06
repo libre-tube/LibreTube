@@ -340,6 +340,10 @@
     <string name="playback_pitch">Pitch</string>
     <string name="filename">Filename</string>
     <string name="invalid_filename">Invalid filename!</string>
+    <string name="playlists_order">Playlists order</string>
+    <string name="playlistNameReversed">Playlist name (reversed)</string>
+    <string name="recentlyUpdated">Recently updated</string>
+    <string name="recentlyUpdatedReversed">Recently updated (reversed)</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

@@ -93,7 +93,8 @@
         <item name="colorSecondary">@color/yellow_md_theme_dark_secondary</item>
         <item name="colorOnSecondary">@color/yellow_md_theme_dark_onSecondary</item>
         <item name="colorSecondaryContainer">@color/yellow_md_theme_dark_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/yellow_md_theme_dark_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/yellow_md_theme_dark_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/yellow_md_theme_dark_tertiary</item>
         <item name="colorOnTertiary">@color/yellow_md_theme_dark_onTertiary</item>
         <item name="colorTertiaryContainer">@color/yellow_md_theme_dark_tertiaryContainer</item>
@@ -124,7 +125,8 @@
         <item name="colorSecondary">@color/green_md_theme_dark_secondary</item>
         <item name="colorOnSecondary">@color/green_md_theme_dark_onSecondary</item>
         <item name="colorSecondaryContainer">@color/green_md_theme_dark_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/green_md_theme_dark_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/green_md_theme_dark_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/green_md_theme_dark_tertiary</item>
         <item name="colorOnTertiary">@color/green_md_theme_dark_onTertiary</item>
         <item name="colorTertiaryContainer">@color/green_md_theme_dark_tertiaryContainer</item>
@@ -155,7 +157,8 @@
         <item name="colorSecondary">@color/purple_md_theme_dark_secondary</item>
         <item name="colorOnSecondary">@color/purple_md_theme_dark_onSecondary</item>
         <item name="colorSecondaryContainer">@color/purple_md_theme_dark_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/purple_md_theme_dark_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/purple_md_theme_dark_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/purple_md_theme_dark_tertiary</item>
         <item name="colorOnTertiary">@color/purple_md_theme_dark_onTertiary</item>
         <item name="colorTertiaryContainer">@color/purple_md_theme_dark_tertiaryContainer</item>

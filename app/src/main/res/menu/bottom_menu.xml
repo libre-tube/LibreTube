@@ -18,14 +18,14 @@
 
     <item
         android:id="@+id/downloadsFragment"
+        android:enabled="false"
         android:icon="@drawable/ic_download_filled"
-        android:title="@string/downloads"
-        android:enabled="false" />
+        android:title="@string/downloads" />
 
     <item
         android:id="@+id/watchHistoryFragment"
+        android:enabled="false"
         android:icon="@drawable/ic_history_filled"
-        android:title="@string/history"
-        android:enabled="false" />
+        android:title="@string/history" />
 
 </menu>

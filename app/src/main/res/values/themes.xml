@@ -62,7 +62,8 @@
         <item name="colorSecondary">@color/blue_md_theme_light_secondary</item>
         <item name="colorOnSecondary">@color/blue_md_theme_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/blue_md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/blue_md_theme_light_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/blue_md_theme_light_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/blue_md_theme_light_tertiary</item>
         <item name="colorOnTertiary">@color/blue_md_theme_light_onTertiary</item>
         <item name="colorTertiaryContainer">@color/blue_md_theme_light_tertiaryContainer</item>
@@ -93,11 +94,13 @@
         <item name="colorSecondary">@color/yellow_md_theme_light_secondary</item>
         <item name="colorOnSecondary">@color/yellow_md_theme_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/yellow_md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/yellow_md_theme_light_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/yellow_md_theme_light_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/yellow_md_theme_light_tertiary</item>
         <item name="colorOnTertiary">@color/yellow_md_theme_light_onTertiary</item>
         <item name="colorTertiaryContainer">@color/yellow_md_theme_light_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/yellow_md_theme_light_onTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/yellow_md_theme_light_onTertiaryContainer
+        </item>
         <item name="colorError">@color/yellow_md_theme_light_error</item>
         <item name="colorErrorContainer">@color/yellow_md_theme_light_errorContainer</item>
         <item name="colorOnError">@color/yellow_md_theme_light_onError</item>
@@ -124,7 +127,8 @@
         <item name="colorSecondary">@color/green_md_theme_light_secondary</item>
         <item name="colorOnSecondary">@color/green_md_theme_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/green_md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/green_md_theme_light_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/green_md_theme_light_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/green_md_theme_light_tertiary</item>
         <item name="colorOnTertiary">@color/green_md_theme_light_onTertiary</item>
         <item name="colorTertiaryContainer">@color/green_md_theme_light_tertiaryContainer</item>
@@ -155,11 +159,13 @@
         <item name="colorSecondary">@color/purple_md_theme_light_secondary</item>
         <item name="colorOnSecondary">@color/purple_md_theme_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/purple_md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/purple_md_theme_light_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/purple_md_theme_light_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/purple_md_theme_light_tertiary</item>
         <item name="colorOnTertiary">@color/purple_md_theme_light_onTertiary</item>
         <item name="colorTertiaryContainer">@color/purple_md_theme_light_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/purple_md_theme_light_onTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/purple_md_theme_light_onTertiaryContainer
+        </item>
         <item name="colorError">@color/purple_md_theme_light_error</item>
         <item name="colorErrorContainer">@color/purple_md_theme_light_errorContainer</item>
         <item name="colorOnError">@color/purple_md_theme_light_onError</item>
