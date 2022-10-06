@@ -21,7 +21,14 @@ YouTube has an extremely invasive privacy policy which relies on using user data
 
 The project is aimed to improve the users privacy by being independent from Google and bypassing their data collection. Therefore the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Googles data collection and includes some other additional features.
 
-> **⚠️ WARNING: This is a beta version, therefore you may encounter bugs. If you do, open an issue via our GitHub repository.**
+> **Warning**
+<br>The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
+
+<table><td>
+<a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
+</td>
+<td><a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=enhancement&template=feature-request.yml">🤩 Request Feature</a>
+</td></table>
 
 ## 📱 Screenshots
 
@@ -75,7 +82,7 @@ If opening an issue without following the issue template, we will ignore the iss
 <img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
 </a>
 
-## Differences to NewPipe
+## Differences from NewPipe
 
 With NewPipe, the extraction is done locally on your phone and all the requests sent towards YouTube/Google are done directly from the network you're connected to and doesn't use a middleman server in between. Therefore Google can still access information such as the users IP address, besides that subscriptions can only be stored locally.
 
@@ -97,5 +104,7 @@ LibreTube is an open source software built for learning and research purposes.
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
 <a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
 <div align="right">
-  <b><a href="https://github.com/libre-tube/LibreTube#-about">↥ Back to top</a></b>
+<table><td>
+<a href="start-of-content">↥ Scroll to top</a>
+</td></table>
 </div>
