@@ -345,4 +345,6 @@
     <string name="playback_pitch">时间伸缩</string>
     <string name="progressive_load_interval">渐进加载间隔大小</string>
     <string name="views_placeholder">观看</string>
+    <string name="filename">文件名</string>
+    <string name="invalid_filename">无效的文件名！</string>
 </resources>
