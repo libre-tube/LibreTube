@@ -97,7 +97,7 @@ class LibraryFragment : BaseFragment() {
     fun fetchPlaylists() {
         binding.playlistRefresh.isRefreshing = true
         lifecycleScope.launchWhenCreated {
-            val response = try {
+            var playlists = try {
                 RetrofitInstance.authApi.playlists(token)
             } catch (e: IOException) {
                 println(e)
@@ -111,11 +111,24 @@ class LibraryFragment : BaseFragment() {
             } finally {
                 binding.playlistRefresh.isRefreshing = false
             }
-            if (response.isNotEmpty()) {
+            if (playlists.isNotEmpty()) {
                 binding.loginOrRegister.visibility = View.GONE
 
+                playlists = when (
+                    PreferenceHelper.getString(
+                        PreferenceKeys.PLAYLISTS_ORDER,
+                        "recent"
+                    )
+                ) {
+                    "recent" -> playlists
+                    "recent_reversed" -> playlists.reversed()
+                    "name" -> playlists.sortedBy { it.name }
+                    "name_reversed" -> playlists.sortedBy { it.name }.reversed()
+                    else -> playlists
+                }
+
                 val playlistsAdapter = PlaylistsAdapter(
-                    response.toMutableList(),
+                    playlists.toMutableList(),
                     childFragmentManager,
                     requireActivity()
                 )

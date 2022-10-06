@@ -343,15 +343,6 @@
         <item>@string/channel_name_za</item>
     </string-array>
 
-    <string-array name="sortOptionsValues">
-        <item>most_recent</item>
-        <item>least_recent</item>
-        <item>most_views</item>
-        <item>least_views</item>
-        <item>channel_name_az</item>
-        <item>channel_name_za</item>
-    </string-array>
-
     <string-array name="requiredNetwork">
         <item>@string/network_all</item>
         <item>@string/network_wifi</item>
@@ -428,6 +419,20 @@
         <item>128</item>
         <item>256</item>
         <item>default</item>
+    </string-array>
+
+    <string-array name="playlistSortingOptions">
+        <item>@string/recentlyUpdated</item>
+        <item>@string/recentlyUpdatedReversed</item>
+        <item>@string/playlistName</item>
+        <item>@string/playlistNameReversed</item>
+    </string-array>
+
+    <string-array name="playlistSortingOptionsValues">
+        <item>recent</item>
+        <item>recent_reversed</item>
+        <item>name</item>
+        <item>name_reversed</item>
     </string-array>
 
 </resources>

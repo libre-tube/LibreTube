@@ -10,7 +10,6 @@ import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
-import java.util.*
 
 class PlayerSettings : BasePreferenceFragment() {
 
