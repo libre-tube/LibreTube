@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.services.DownloadService
@@ -63,7 +64,9 @@ class DownloadDialog(
         }
     }
 
-    private fun initDownloadOptions(streams: com.github.libretube.api.obj.Streams) {
+    private fun initDownloadOptions(streams: Streams) {
+        binding.fileName.setText(streams.title.toString())
+
         val vidName = arrayListOf<String>()
         val videoUrl = arrayListOf<String>()
 
@@ -118,9 +121,14 @@ class DownloadDialog(
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
         binding.download.setOnClickListener {
+            if (binding.fileName.text.toString().length < 1) {
+                Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val intent = Intent(context, DownloadService::class.java)
 
-            intent.putExtra("videoName", streams.title)
+            intent.putExtra("videoName", binding.fileName.text.toString())
             intent.putExtra("videoUrl", videoUrl[binding.videoSpinner.selectedItemPosition])
             intent.putExtra("audioUrl", audioUrl[binding.audioSpinner.selectedItemPosition])
 
