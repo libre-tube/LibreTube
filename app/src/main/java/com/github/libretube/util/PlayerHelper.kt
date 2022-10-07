@@ -6,6 +6,7 @@ import android.view.accessibility.CaptioningManager
 import com.github.libretube.constants.PreferenceKeys
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.video.VideoSize
+import kotlin.math.roundToInt
 
 object PlayerHelper {
     // get the audio source following the users preferences
@@ -257,6 +258,32 @@ object PlayerHelper {
         get() = PreferenceHelper.getString(
             PreferenceKeys.PROGRESSIVE_LOADING_INTERVAL_SIZE,
             "64"
+        )
+
+    val autoPlayEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTO_PLAY,
+            true
+        )
+
+    val seekIncrement: Long
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.SEEK_INCREMENT,
+            "10.0"
+        ).toFloat()
+            .roundToInt()
+            .toLong() * 1000
+
+    val playbackSpeed: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.PLAYBACK_SPEED,
+            "1"
+        ).replace("F", "")
+
+    val resizeModePref: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.PLAYER_RESIZE_MODE,
+            "fit"
         )
 
     fun getDefaultResolution(context: Context): String {

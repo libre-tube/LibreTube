@@ -13,13 +13,11 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MergingMediaSource
@@ -165,13 +163,7 @@ class OfflinePlayerActivity : BaseActivity() {
     override fun onUserLeaveHint() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
 
-        if (!PreferenceHelper.getBoolean(
-                PreferenceKeys.PICTURE_IN_PICTURE,
-                true
-            )
-        ) {
-            return
-        }
+        if (!PlayerHelper.pipEnabled) return
 
         if (player.playbackState == PlaybackState.STATE_PAUSED) return
 
