@@ -21,8 +21,7 @@ YouTube has an extremely invasive privacy policy which relies on using user data
 
 The project is aimed to improve the users privacy by being independent from Google and bypassing their data collection. Therefore the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Googles data collection and includes some other additional features.
 
-> **Warning**
-> <br>The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
+> **Warning** > <br>The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
 
 <table><td>
 <a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
