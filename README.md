@@ -27,7 +27,7 @@ Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped),
 > The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
 
 <table><td>
-<a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
+<a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Bug</a>
 </td>
 <td><a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=enhancement&template=feature-request.yml">⭐ Request Feature</a>
 </td></table>
