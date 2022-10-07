@@ -67,7 +67,6 @@ import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
@@ -150,24 +149,8 @@ class PlayerFragment : BaseFragment() {
     /**
      * user preferences
      */
-    private var token = ""
-    private var relatedStreamsEnabled = true
-    private var autoRotationEnabled = true
-    private var pausePlayerOnScreenOffEnabled = false
-    private var watchHistoryEnabled = true
-    private var watchPositionsEnabled = true
-    private var useSystemCaptionStyle = true
-    private var videoFormatPreference = "webm"
-    private var defRes = ""
-    private var bufferingGoal = 50000
-    private var defaultSubtitleCode = ""
-    private var sponsorBlockEnabled = true
-    private var sponsorBlockNotifications = true
-    private var skipButtonsEnabled = false
-    private var pipEnabled = true
+    private var token = PreferenceHelper.getToken()
     private var videoShownInExternalPlayer = false
-    private var skipSegmentsManually = false
-    private var progressiveLoadingIntervalSize = "64"
 
     /**
      * for autoplay
@@ -213,7 +196,7 @@ class PlayerFragment : BaseFragment() {
         setUserPrefs()
 
         val mainActivity = activity as MainActivity
-        if (autoRotationEnabled) {
+        if (PlayerHelper.autoRotationEnabled) {
             // enable auto rotation
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
             onConfigurationChanged(resources.configuration)
@@ -244,97 +227,8 @@ class PlayerFragment : BaseFragment() {
         token = PreferenceHelper.getToken()
 
         // save whether auto rotation is enabled
-        autoRotationEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.AUTO_FULLSCREEN,
-            false
-        )
 
         // save whether related streams are enabled
-        relatedStreamsEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.RELATED_STREAMS,
-            true
-        )
-
-        pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.PAUSE_ON_SCREEN_OFF,
-            false
-        )
-
-        watchPositionsEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.WATCH_POSITION_TOGGLE,
-            true
-        )
-
-        watchHistoryEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.WATCH_HISTORY_TOGGLE,
-            true
-        )
-
-        useSystemCaptionStyle = PreferenceHelper.getBoolean(
-            PreferenceKeys.SYSTEM_CAPTION_STYLE,
-            true
-        )
-
-        videoFormatPreference = PreferenceHelper.getString(
-            PreferenceKeys.PLAYER_VIDEO_FORMAT,
-            "webm"
-        )
-
-        defRes = if (NetworkHelper.isNetworkMobile(requireContext())) {
-            PreferenceHelper.getString(
-                PreferenceKeys.DEFAULT_RESOLUTION_MOBILE,
-                ""
-            )
-        } else {
-            PreferenceHelper.getString(
-                PreferenceKeys.DEFAULT_RESOLUTION,
-                ""
-            )
-        }
-
-        bufferingGoal = PreferenceHelper.getString(
-            PreferenceKeys.BUFFERING_GOAL,
-            "50"
-        ).toInt() * 1000
-
-        sponsorBlockEnabled = PreferenceHelper.getBoolean(
-            "sb_enabled_key",
-            true
-        )
-
-        sponsorBlockNotifications = PreferenceHelper.getBoolean(
-            "sb_notifications_key",
-            true
-        )
-
-        defaultSubtitleCode = PreferenceHelper.getString(
-            PreferenceKeys.DEFAULT_SUBTITLE,
-            ""
-        )
-
-        if (defaultSubtitleCode.contains("-")) {
-            defaultSubtitleCode = defaultSubtitleCode.split("-")[0]
-        }
-
-        skipButtonsEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.SKIP_BUTTONS,
-            false
-        )
-
-        pipEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.PICTURE_IN_PICTURE,
-            true
-        )
-
-        skipSegmentsManually = PreferenceHelper.getBoolean(
-            PreferenceKeys.SB_SKIP_MANUALLY,
-            false
-        )
-
-        progressiveLoadingIntervalSize = PreferenceHelper.getString(
-            PreferenceKeys.PROGRESSIVE_LOADING_INTERVAL_SIZE,
-            "64"
-        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -516,7 +410,7 @@ class PlayerFragment : BaseFragment() {
 
         // FullScreen button trigger
         // hide fullscreen button if auto rotation enabled
-        playerBinding.fullscreen.visibility = if (autoRotationEnabled) View.GONE else View.VISIBLE
+        playerBinding.fullscreen.visibility = if (PlayerHelper.autoRotationEnabled) View.GONE else View.VISIBLE
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
@@ -576,7 +470,7 @@ class PlayerFragment : BaseFragment() {
         playerBinding.exoTitle.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
-        if (!autoRotationEnabled) {
+        if (!PlayerHelper.autoRotationEnabled) {
             // different orientations of the video are only available when auto rotation is disabled
             val orientation = PlayerHelper.getOrientation(exoPlayer.videoSize)
             mainActivity.requestedOrientation = orientation
@@ -598,7 +492,7 @@ class PlayerFragment : BaseFragment() {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen)
         playerBinding.exoTitle.visibility = View.INVISIBLE
 
-        if (!autoRotationEnabled) {
+        if (!PlayerHelper.autoRotationEnabled) {
             // switch back to portrait mode if auto rotation disabled
             val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
@@ -652,7 +546,7 @@ class PlayerFragment : BaseFragment() {
 
         // pause player if screen off and setting enabled
         if (
-            this::exoPlayer.isInitialized && !isScreenOn && pausePlayerOnScreenOffEnabled
+            this::exoPlayer.isInitialized && !isScreenOn && PlayerHelper.pausePlayerOnScreenOffEnabled
         ) {
             exoPlayer.pause()
         }
@@ -680,19 +574,19 @@ class PlayerFragment : BaseFragment() {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
+        if (PlayerHelper.watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
             DatabaseHelper.saveWatchPosition(
                 videoId!!,
                 exoPlayer.currentPosition
             )
-        } else if (watchPositionsEnabled) {
+        } else if (PlayerHelper.watchPositionsEnabled) {
             // delete watch position if video has ended
             DatabaseHelper.removeWatchPosition(videoId!!)
         }
     }
 
     private fun checkForSegments() {
-        if (!exoPlayer.isPlaying || !sponsorBlockEnabled) return
+        if (!exoPlayer.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
         Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
 
@@ -705,7 +599,7 @@ class PlayerFragment : BaseFragment() {
 
             // show the button to manually skip the segment
             if (currentPosition in segmentStart until segmentEnd) {
-                if (skipSegmentsManually) {
+                if (PlayerHelper.skipSegmentsManually) {
                     binding.sbSkipBtn.visibility = View.VISIBLE
                     binding.sbSkipBtn.setOnClickListener {
                         exoPlayer.seekTo(segmentEnd)
@@ -713,7 +607,7 @@ class PlayerFragment : BaseFragment() {
                     return
                 }
 
-                if (sponsorBlockNotifications) {
+                if (PlayerHelper.sponsorBlockNotifications) {
                     Toast
                         .makeText(
                             context,
@@ -728,7 +622,7 @@ class PlayerFragment : BaseFragment() {
             }
         }
 
-        if (skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
+        if (PlayerHelper.skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
     }
 
     private fun playVideo() {
@@ -768,14 +662,14 @@ class PlayerFragment : BaseFragment() {
                 }
                 // show the player notification
                 initializePlayerNotification()
-                if (sponsorBlockEnabled) fetchSponsorBlockSegments()
+                if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
                 // show comments if related streams disabled
-                if (!relatedStreamsEnabled) toggleComments()
+                if (!PlayerHelper.relatedStreamsEnabled) toggleComments()
                 // prepare for autoplay
                 if (binding.player.autoplayEnabled) setNextStream()
 
                 // add the video to the watch history
-                if (watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
+                if (PlayerHelper.watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
             }
         }
     }
@@ -881,7 +775,7 @@ class PlayerFragment : BaseFragment() {
             player = exoPlayer
         }
 
-        if (useSystemCaptionStyle) {
+        if (PlayerHelper.useSystemCaptionStyle) {
             // set the subtitle style
             val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
             exoPlayerView.subtitleView?.setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
@@ -943,7 +837,7 @@ class PlayerFragment : BaseFragment() {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
-                if (isPlaying && sponsorBlockEnabled) {
+                if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                     Handler(Looper.getMainLooper()).postDelayed(
                         this@PlayerFragment::checkForSegments,
                         100
@@ -1049,7 +943,7 @@ class PlayerFragment : BaseFragment() {
                 }
             }
         }
-        if (relatedStreamsEnabled) {
+        if (PlayerHelper.relatedStreamsEnabled) {
             // only show related streams if enabled
             binding.relatedRecView.adapter = TrendingAdapter(
                 response.relatedStreams!!,
@@ -1099,13 +993,13 @@ class PlayerFragment : BaseFragment() {
 
         // next and previous buttons
         playerBinding.skipPrev.visibility = if (
-            skipButtonsEnabled && PlayingQueue.hasPrev()
+            PlayerHelper.skipButtonsEnabled && PlayingQueue.hasPrev()
         ) {
             View.VISIBLE
         } else {
             View.INVISIBLE
         }
-        playerBinding.skipNext.visibility = if (skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
+        playerBinding.skipNext.visibility = if (PlayerHelper.skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
             videoId = PlayingQueue.getPrev()
@@ -1199,9 +1093,9 @@ class PlayerFragment : BaseFragment() {
         videoUri: Uri,
         audioUrl: String
     ) {
-        val checkIntervalSize = when (progressiveLoadingIntervalSize) {
+        val checkIntervalSize = when (PlayerHelper.progressiveLoadingIntervalSize) {
             "default" -> ProgressiveMediaSource.DEFAULT_LOADING_CHECK_INTERVAL_BYTES
-            else -> progressiveLoadingIntervalSize.toInt() * 1024
+            else -> PlayerHelper.progressiveLoadingIntervalSize.toInt() * 1024
         }
 
         val dataSourceFactory: DataSource.Factory =
@@ -1249,7 +1143,7 @@ class PlayerFragment : BaseFragment() {
 
         for (vid in streams.videoStreams!!) {
             // append quality to list if it has the preferred format (e.g. MPEG)
-            val preferredMimeType = "video/$videoFormatPreference"
+            val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
             if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
                 videosNameArray += vid.quality.toString()
                 videosUrlArray += vid.url!!.toUri()
@@ -1281,9 +1175,9 @@ class PlayerFragment : BaseFragment() {
         }
 
         // set the default subtitle if available
-        if (defaultSubtitleCode != "" && subtitleCodesList.contains(defaultSubtitleCode)) {
+        if (PlayerHelper.defaultSubtitleCode != "" && subtitleCodesList.contains(PlayerHelper.defaultSubtitleCode)) {
             val newParams = trackSelector.buildUponParameters()
-                .setPreferredTextLanguage(defaultSubtitleCode)
+                .setPreferredTextLanguage(PlayerHelper.defaultSubtitleCode)
                 .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
             trackSelector.setParameters(newParams)
         }
@@ -1301,10 +1195,11 @@ class PlayerFragment : BaseFragment() {
         videosNameArray: Array<String>,
         videosUrlArray: Array<Uri>
     ) {
-        if (defRes != "") {
+        val defaultResolution = PlayerHelper.getDefaultResolution(requireContext())
+        if (defaultResolution != "") {
             videosNameArray.forEachIndexed { index, pipedStream ->
                 // search for quality preference in the available stream sources
-                if (pipedStream.contains(defRes)) {
+                if (pipedStream.contains(defaultResolution)) {
                     val videoUri = videosUrlArray[index]
                     val audioUrl =
                         PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
@@ -1350,7 +1245,7 @@ class PlayerFragment : BaseFragment() {
             .setBackBuffer(1000 * 60 * 3, true)
             .setBufferDurationsMs(
                 1000 * 10, // exo default is 50s
-                bufferingGoal,
+                PlayerHelper.bufferingGoal,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
@@ -1505,7 +1400,7 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun shouldStartPiP(): Boolean {
-        if (!pipEnabled ||
+        if (!PlayerHelper.pipEnabled ||
             exoPlayer.playbackState == PlaybackState.STATE_PAUSED ||
             videoShownInExternalPlayer
         ) {
@@ -1537,14 +1432,12 @@ class PlayerFragment : BaseFragment() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
-        if (autoRotationEnabled) {
-            val orientation = newConfig.orientation
-            when (orientation) {
-                // go to fullscreen mode
-                Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
-                // exit fullscreen if not landscape
-                else -> unsetFullscreen()
-            }
+        if (!PlayerHelper.autoRotationEnabled) return
+        when (newConfig.orientation) {
+            // go to fullscreen mode
+            Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
+            // exit fullscreen if not landscape
+            else -> unsetFullscreen()
         }
     }
 }

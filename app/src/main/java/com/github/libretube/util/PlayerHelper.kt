@@ -162,4 +162,114 @@ object PlayerHelper {
             else -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
         }
     }
+
+    val autoRotationEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.AUTO_FULLSCREEN,
+            false
+        )
+
+    val relatedStreamsEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.RELATED_STREAMS,
+            true
+        )
+
+    val pausePlayerOnScreenOffEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PAUSE_ON_SCREEN_OFF,
+            false
+        )
+
+    val watchPositionsEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.WATCH_POSITION_TOGGLE,
+            true
+        )
+
+    val watchHistoryEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.WATCH_HISTORY_TOGGLE,
+            true
+        )
+
+    val useSystemCaptionStyle: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SYSTEM_CAPTION_STYLE,
+            true
+        )
+
+    val videoFormatPreference: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.PLAYER_VIDEO_FORMAT,
+            "webm"
+        )
+
+    val bufferingGoal: Int
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.BUFFERING_GOAL,
+            "50"
+        ).toInt() * 1000
+
+    val sponsorBlockEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            "sb_enabled_key",
+            true
+        )
+
+    val sponsorBlockNotifications: Boolean
+        get() = PreferenceHelper.getBoolean(
+            "sb_notifications_key",
+            true
+        )
+
+    val defaultSubtitleCode: String
+        get() {
+            val code = PreferenceHelper.getString(
+                PreferenceKeys.DEFAULT_SUBTITLE,
+                ""
+            )
+
+            if (code.contains("-")) {
+                return code.split("-")[0]
+            }
+            return code
+        }
+
+    val skipButtonsEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SKIP_BUTTONS,
+            false
+        )
+
+    val pipEnabled: Boolean get() = PreferenceHelper.getBoolean(
+        PreferenceKeys.PICTURE_IN_PICTURE,
+        true
+    )
+
+    val skipSegmentsManually: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SB_SKIP_MANUALLY,
+            false
+        )
+
+    val progressiveLoadingIntervalSize: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.PROGRESSIVE_LOADING_INTERVAL_SIZE,
+            "64"
+        )
+
+    fun getDefaultResolution(context: Context): String {
+        return if (NetworkHelper.isNetworkMobile(context)) {
+            PreferenceHelper.getString(
+                PreferenceKeys.DEFAULT_RESOLUTION_MOBILE,
+                ""
+            )
+        } else {
+            PreferenceHelper.getString(
+                PreferenceKeys.DEFAULT_RESOLUTION,
+                ""
+            )
+        }
+    }
 }
