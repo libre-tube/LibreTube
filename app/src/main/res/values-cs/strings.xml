@@ -347,4 +347,8 @@
     <string name="views_placeholder">zhlédnutí</string>
     <string name="invalid_filename">Nesprávný název souboru!</string>
     <string name="filename">Název souboru</string>
+    <string name="playlists_order">Pořadí playlistů</string>
+    <string name="playlistNameReversed">Název playlistu (obráceně)</string>
+    <string name="recentlyUpdated">Nedávno aktualizované</string>
+    <string name="recentlyUpdatedReversed">Nedávno aktualizované (obráceně)</string>
 </resources>
