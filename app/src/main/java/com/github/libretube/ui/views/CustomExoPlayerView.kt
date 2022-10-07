@@ -10,7 +10,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.models.interfaces.DoubleTapInterface
@@ -19,13 +18,12 @@ import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.sheets.PlaybackSpeedSheet
 import com.github.libretube.util.DoubleTapListener
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.PlayerHelper
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.util.RepeatModeUtil
-import kotlin.math.roundToInt
 
 @SuppressLint("ClickableViewAccessibility")
 internal class CustomExoPlayerView(
@@ -53,27 +51,9 @@ internal class CustomExoPlayerView(
     /**
      * Preferences
      */
-    var autoplayEnabled = PreferenceHelper.getBoolean(
-        PreferenceKeys.AUTO_PLAY,
-        true
-    )
+    var autoplayEnabled = PlayerHelper.autoPlayEnabled
 
-    private val playbackSpeed = PreferenceHelper.getString(
-        PreferenceKeys.PLAYBACK_SPEED,
-        "1"
-    ).replace("F", "")
-
-    private val seekIncrement = PreferenceHelper.getString(
-        PreferenceKeys.SEEK_INCREMENT,
-        "10.0"
-    ).toFloat()
-        .roundToInt()
-        .toLong() * 1000
-
-    private var resizeModePref = PreferenceHelper.getString(
-        PreferenceKeys.PLAYER_RESIZE_MODE,
-        "fit"
-    )
+    private var resizeModePref = PlayerHelper.resizeModePref
 
     private fun toggleController() {
         if (isControllerFullyVisible) hideController() else showController()
@@ -108,7 +88,7 @@ internal class CustomExoPlayerView(
         initializeAdvancedOptions(context)
 
         player?.playbackParameters = PlaybackParameters(
-            playbackSpeed.toFloat(),
+            PlayerHelper.playbackSpeed.toFloat(),
             1.0f
         )
 
@@ -250,7 +230,7 @@ internal class CustomExoPlayerView(
 
     private fun enableDoubleTapToSeek() {
         // set seek increment text
-        val seekIncrementText = (seekIncrement / 1000).toString()
+        val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
         doubleTapOverlayBinding?.rewindTV?.text = seekIncrementText
         doubleTapOverlayBinding?.forwardTV?.text = seekIncrementText
         doubleTapListener =
@@ -265,7 +245,7 @@ internal class CustomExoPlayerView(
     }
 
     private fun rewind() {
-        player?.seekTo((player?.currentPosition ?: 0L) - seekIncrement)
+        player?.seekTo((player?.currentPosition ?: 0L) - PlayerHelper.seekIncrement)
 
         // show the rewind button
         doubleTapOverlayBinding?.rewindBTN.apply {
@@ -289,7 +269,7 @@ internal class CustomExoPlayerView(
     }
 
     private fun forward() {
-        player?.seekTo(player!!.currentPosition + seekIncrement)
+        player?.seekTo(player!!.currentPosition + PlayerHelper.seekIncrement)
 
         // show the forward button
         doubleTapOverlayBinding?.forwardBTN.apply {

@@ -1,8 +1,11 @@
 package com.github.libretube.ui.activities
 
+import android.app.PictureInPictureParams
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.media.session.PlaybackState
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -14,6 +17,7 @@ import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.PlayerHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.MergingMediaSource
@@ -43,6 +47,8 @@ class OfflinePlayerActivity : BaseActivity() {
 
         initializePlayer()
         playVideo()
+
+        requestedOrientation = PlayerHelper.getOrientation(player.videoSize)
     }
 
     private fun initializePlayer() {
@@ -152,5 +158,21 @@ class OfflinePlayerActivity : BaseActivity() {
     override fun onDestroy() {
         player.release()
         super.onDestroy()
+    }
+
+    override fun onUserLeaveHint() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+
+        if (!PlayerHelper.pipEnabled) return
+
+        if (player.playbackState == PlaybackState.STATE_PAUSED) return
+
+        enterPictureInPictureMode(
+            PictureInPictureParams.Builder()
+                .setActions(emptyList())
+                .build()
+        )
+
+        super.onUserLeaveHint()
     }
 }

@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
-import android.media.session.PlaybackState
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -18,8 +17,6 @@ import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -89,8 +86,6 @@ class BackgroundMode : Service() {
     /**
      * Autoplay Preference
      */
-    private val autoplay = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_PLAY, true)
-
     private val handler = Handler(Looper.getMainLooper())
 
     /**
@@ -191,7 +186,7 @@ class BackgroundMode : Service() {
 
         fetchSponsorBlockSegments()
 
-        if (autoplay) setNextStream()
+        if (PlayerHelper.autoPlayEnabled) setNextStream()
     }
 
     /**
@@ -217,21 +212,13 @@ class BackgroundMode : Service() {
             override fun onPlaybackStateChanged(state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
-                        if (autoplay) playNextVideo()
+                        if (PlayerHelper.autoPlayEnabled) playNextVideo()
                     }
                     Player.STATE_IDLE -> {
                         onDestroy()
                     }
                     Player.STATE_BUFFERING -> {}
                     Player.STATE_READY -> {}
-                    PlaybackState.STATE_PAUSED -> {
-                        query {
-                            DatabaseHelper.saveWatchPosition(
-                                videoId,
-                                player?.currentPosition ?: 0L
-                            )
-                        }
-                    }
                 }
             }
 
@@ -332,11 +319,7 @@ class BackgroundMode : Service() {
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
-                if (PreferenceHelper.getBoolean(
-                        "sb_notifications_key",
-                        true
-                    )
-                ) {
+                if (PlayerHelper.sponsorBlockNotifications) {
                     try {
                         Toast.makeText(this, R.string.segment_skipped, Toast.LENGTH_SHORT)
                             .show()

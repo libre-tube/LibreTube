@@ -39,6 +39,8 @@
 
         <activity
             android:name=".ui.activities.OfflinePlayerActivity"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:label="@string/player" />
 
         <activity
