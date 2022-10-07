@@ -22,7 +22,7 @@ YouTube has an extremely invasive privacy policy which relies on using user data
 The project is aimed to improve the users privacy by being independent from Google and bypassing their data collection. Therefore the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Googles data collection and includes some other additional features.
 
 > **Warning**
-<br>The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
+> <br>The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
 
 <table><td>
 <a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
@@ -92,7 +92,7 @@ While LibreTube only supports YouTube, NewPipe also allows using other platforms
 
 ## 🔒 Privacy Policy and Disclaimer
 
-The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent. 
+The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent.
 
 The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way accociated with YouTube, Google LLC or any of its affiliates and subsidaries.
 Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
@@ -103,6 +103,7 @@ LibreTube is an open source software built for learning and research purposes.
 
 <a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
 <a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
+
 <div align="right">
 <table><td>
 <a href="#start-of-content">↥ Scroll to top</a>
