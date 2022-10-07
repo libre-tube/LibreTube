@@ -1,13 +1,21 @@
 package com.github.libretube.util
 
 import android.content.Context
+import android.os.Build
+import com.github.libretube.BuildConfig
 import com.github.libretube.constants.DownloadType
 import com.github.libretube.obj.DownloadedFile
 import java.io.File
 
 object DownloadHelper {
     private fun getOfflineStorageDir(context: Context): File {
-        return context.getExternalFilesDir(null)!!
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return context.filesDir
+
+        return try {
+            context.getExternalFilesDir(null)!!
+        } catch (e: Exception) {
+            context.filesDir
+        }
     }
 
     fun getVideoDir(context: Context): File {
