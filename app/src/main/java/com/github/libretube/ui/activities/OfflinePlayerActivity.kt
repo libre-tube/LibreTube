@@ -18,6 +18,7 @@ import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -48,6 +49,8 @@ class OfflinePlayerActivity : BaseActivity() {
 
         initializePlayer()
         playVideo()
+
+        requestedOrientation = PlayerHelper.getOrientation(player.videoSize)
     }
 
     private fun initializePlayer() {

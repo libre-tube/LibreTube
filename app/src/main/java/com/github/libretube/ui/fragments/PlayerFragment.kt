@@ -154,7 +154,6 @@ class PlayerFragment : BaseFragment() {
     private var relatedStreamsEnabled = true
     private var autoRotationEnabled = true
     private var pausePlayerOnScreenOffEnabled = false
-    private var fullscreenOrientationPref = "ratio"
     private var watchHistoryEnabled = true
     private var watchPositionsEnabled = true
     private var useSystemCaptionStyle = true
@@ -254,11 +253,6 @@ class PlayerFragment : BaseFragment() {
         relatedStreamsEnabled = PreferenceHelper.getBoolean(
             PreferenceKeys.RELATED_STREAMS,
             true
-        )
-
-        fullscreenOrientationPref = PreferenceHelper.getString(
-            PreferenceKeys.FULLSCREEN_ORIENTATION,
-            "ratio"
         )
 
         pausePlayerOnScreenOffEnabled = PreferenceHelper.getBoolean(
@@ -584,22 +578,7 @@ class PlayerFragment : BaseFragment() {
         val mainActivity = activity as MainActivity
         if (!autoRotationEnabled) {
             // different orientations of the video are only available when auto rotation is disabled
-            val orientation = when (fullscreenOrientationPref) {
-                "ratio" -> {
-                    val videoSize = exoPlayer.videoSize
-                    // probably a youtube shorts video
-                    if (videoSize.height > videoSize.width) {
-                        ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                    } // a video with normal aspect ratio
-                    else {
-                        ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-                    }
-                }
-                "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
-                "landscape" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-                "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-                else -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-            }
+            val orientation = PlayerHelper.getOrientation(exoPlayer.videoSize)
             mainActivity.requestedOrientation = orientation
         }
 

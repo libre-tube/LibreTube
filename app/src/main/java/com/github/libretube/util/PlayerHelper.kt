@@ -1,9 +1,11 @@
 package com.github.libretube.util
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.view.accessibility.CaptioningManager
 import com.github.libretube.constants.PreferenceKeys
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
+import com.google.android.exoplayer2.video.VideoSize
 
 object PlayerHelper {
     // get the audio source following the users preferences
@@ -136,5 +138,28 @@ object PlayerHelper {
             categories.add("preview")
         }
         return categories
+    }
+
+    fun getOrientation(videoSize: VideoSize): Int {
+        val fullscreenOrientationPref = PreferenceHelper.getString(
+            PreferenceKeys.FULLSCREEN_ORIENTATION,
+            "ratio"
+        )
+
+        return when (fullscreenOrientationPref) {
+            "ratio" -> {
+                // probably a youtube shorts video
+                if (videoSize.height > videoSize.width) {
+                    ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+                } // a video with normal aspect ratio
+                else {
+                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                }
+            }
+            "auto" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR
+            "landscape" -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+            "portrait" -> ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+            else -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        }
     }
 }
