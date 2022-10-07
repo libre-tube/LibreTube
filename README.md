@@ -29,7 +29,7 @@ The project is still in beta, therefore you may encounter bugs. If you do so, pl
 <table><td>
 <a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
 </td>
-<td><a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=enhancement&template=feature-request.yml">🤩 Request Feature</a>
+<td><a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=enhancement&template=feature-request.yml">⭐ Request Feature</a>
 </td></table>
 
 ## 📱 Screenshots
