@@ -24,7 +24,7 @@ This project is aimed at improving the users' privacy by being independent from 
 Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Google's data collection and includes some other additional features.
 
 > **Warning** <br>
-The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
+> The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
 
 <table><td>
 <a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
@@ -68,7 +68,7 @@ Whether you have ideas, translations, design changes, code cleaning or really he
 If creating a pull request, please make sure to format your code (preferred ktlint) before.
 
 > **Note** <br>
-Any issue avoiding the issue template will be ignored and forced to be closed.
+> Any issue avoiding the issue template will be ignored and forced to be closed.
 
 ### 📜️ Credits
 
