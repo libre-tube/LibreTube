@@ -17,11 +17,14 @@
 
 ## 📔 About
 
-YouTube has an extremely invasive privacy policy which relies on using user data in unethical ways. They store a lot of your personal data - ranging from ideas, music taste, content, political opinions, and much more than you think.
+YouTube has an extremely invasive [privacy policy](https://support.google.com/youtube/answer/10364219) which relies on using user data in unethical ways. They store a lot of your personal data - ranging from ideas, music taste, content, political opinions, and much more than you think.
 
-The project is aimed to improve the users privacy by being independent from Google and bypassing their data collection. Therefore the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Googles data collection and includes some other additional features.
+This project is aimed at improving the users' privacy by being independent from Google and bypassing their data collection.
 
-> **Warning** > <br>The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
+Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Google's data collection and includes some other additional features.
+
+> **Warning** <br>
+The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
 
 <table><td>
 <a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Issue</a>
@@ -60,11 +63,12 @@ The project is aimed to improve the users privacy by being independent from Goog
 
 ## 😇 Contributing
 
-Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more is done, the better it gets!
+Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets!
 
 If creating a pull request, please make sure to format your code (preferred ktlint) before.
 
-If opening an issue without following the issue template, we will ignore the issue and force close it.
+> **Note** <br>
+Any issue avoiding the issue template will be ignored and forced to be closed.
 
 ### 📜️ Credits
 
@@ -83,17 +87,21 @@ If opening an issue without following the issue template, we will ignore the iss
 
 ## Differences from NewPipe
 
-With NewPipe, the extraction is done locally on your phone and all the requests sent towards YouTube/Google are done directly from the network you're connected to and doesn't use a middleman server in between. Therefore Google can still access information such as the users IP address, besides that subscriptions can only be stored locally.
+With NewPipe, the extraction is done locally on your phone, and all the requests sent towards YouTube/Google are done directly from the network you're connected to, which doesn't use a middleman server in between. Therefore, Google can still access information such as the user's IP address. Aside from that, subscriptions can only be stored locally.
 
-LibreTube takes this one step further and proxies all requests via Piped (which uses the NewPipeExtractor). This prevents Google servers from accessing your IP address or any other personal data. Apart from that Piped allows syncing your subscriptions between LibreTube and Piped which can be used on desktop too. If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself, therefore fixes usually arrive faster than in NewPipe.
+LibreTube takes this one step further and proxies all requests via Piped (which uses the NewPipeExtractor). This prevents Google servers from accessing your IP address or any other personal data.<br>
+Apart from that, Piped allows syncing your subscriptions between LibreTube and Piped, which can be used on desktop too.
 
-While LibreTube only supports YouTube, NewPipe also allows using other platforms like SoundCloud and media.ccc.de. Both are great clients for watching YouTube videos, it depends on the individuals use case which one fits the own needs better.
+If the NewPipeExtractor breaks, it only requires an update of Piped and not LibreTube itself. Therefore, fixes usually arrive faster than in NewPipe.
+
+While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
+Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
 
 ## 🔒 Privacy Policy and Disclaimer
 
 The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent.
 
-The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way accociated with YouTube, Google LLC or any of its affiliates and subsidaries.
+The LibreTube project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way associated with YouTube, Google LLC, or any of its affiliates or subsidaries.<br>
 Any trademark, service mark, trade name, or other intellectual property rights used are owned by the respective owners.
 
 LibreTube is an open source software built for learning and research purposes.
