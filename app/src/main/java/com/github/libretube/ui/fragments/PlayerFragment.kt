@@ -943,6 +943,8 @@ class PlayerFragment : BaseFragment() {
 
             playerTitle.text = response.title
             playerDescription.text = response.description
+
+            playerChannelSubCount.text = context?.getString(R.string.subscribers, response.uploaderSubscriberCount?.formatShort())
         }
 
         // duration that's not greater than 0 indicates that the video is live
