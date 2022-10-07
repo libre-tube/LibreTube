@@ -74,18 +74,18 @@ If creating a pull request, please make sure to format your code (preferred ktli
 
 - Readme Design and Banners by [XelXen](https://github.com/XelXen)
 
-#### Icons
+##### Icons
 
 - [Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)
 - [Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)
 
-### 📝 Translation
+## 📝 Translation
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages">
 <img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
 </a>
 
-## Differences from NewPipe
+## 🌗 Differences from NewPipe
 
 With NewPipe, the extraction is done locally on your phone, and all the requests sent towards YouTube/Google are done directly from the network you're connected to, which doesn't use a middleman server in between. Therefore, Google can still access information such as the user's IP address. Aside from that, subscriptions can only be stored locally.
 
