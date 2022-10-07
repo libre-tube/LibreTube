@@ -105,6 +105,6 @@ LibreTube is an open source software built for learning and research purposes.
 <a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
 <div align="right">
 <table><td>
-<a href="start-of-content">↥ Scroll to top</a>
+<a href="#start-of-content">↥ Scroll to top</a>
 </td></table>
 </div>
