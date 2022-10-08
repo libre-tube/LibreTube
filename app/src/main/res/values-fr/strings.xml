@@ -328,13 +328,13 @@
     <string name="local_subscriptions">Abonnements locaux</string>
     <string name="preferences">Préférences</string>
     <string name="background_channel_description">Affiche une notification avec des boutons pour contrôler le lecteur audio.</string>
-    <string name="push_channel_name">Préposé à la notification</string>
+    <string name="push_channel_name">Agent de notification</string>
     <string name="save_feed">Charger le flux en arrière-plan</string>
     <string name="save_feed_summary">Charger le flux d\'abonnement en arrière-plan et empêcher son rafraîchissement automatique.</string>
     <string name="play_next">Jouer la suite</string>
     <string name="navigation_bar">Barre de navigation</string>
     <string name="select_at_least_one">Veuillez sélectionner au moins un élément</string>
-    <string name="download_channel_name">Service de téléchargement</string>
+    <string name="download_channel_name">Service de Téléchargement</string>
     <string name="download_channel_description">Affiche une notification lors du téléchargement de médias.</string>
     <string name="change_region">La section Populaires semble être indisponible pour la région actuelle. Veuillez en sélectionner une autre dans les paramètres.</string>
     <string name="background_channel_name">Mode arrière-plan</string>
@@ -345,4 +345,10 @@
     <string name="progressive_load_interval_summary">Une valeur inférieure peut accélérer le chargement initial de la vidéo.</string>
     <string name="default_load_interval">Par défaut</string>
     <string name="playback_pitch">Ton</string>
+    <string name="filename">Nom du fichier</string>
+    <string name="invalid_filename">Nom de fichier invalide !</string>
+    <string name="playlists_order">Ordre des listes de lecture</string>
+    <string name="recentlyUpdated">Récemment mise à jour</string>
+    <string name="playlistNameReversed">Nom de la liste de lecture (inversé)</string>
+    <string name="recentlyUpdatedReversed">Récemment mise à jour (inversé)</string>
 </resources>
