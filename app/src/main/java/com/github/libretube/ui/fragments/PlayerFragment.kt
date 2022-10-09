@@ -40,6 +40,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
@@ -425,7 +426,7 @@ class PlayerFragment : BaseFragment() {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!, false, exoPlayer.currentPosition / 1000)
+            val shareDialog = ShareDialog(videoId!!, ShareObjectType.VIDEO, exoPlayer.currentPosition / 1000)
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 

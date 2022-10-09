@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -74,7 +75,7 @@ class PlaylistOptionsBottomSheet(
                 }
                 // share the playlist
                 context?.getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(playlistId, true)
+                    val shareDialog = ShareDialog(playlistId, ShareObjectType.PLAYLIST)
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }

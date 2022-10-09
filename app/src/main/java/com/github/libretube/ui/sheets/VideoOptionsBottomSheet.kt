@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -73,7 +74,7 @@ class VideoOptionsBottomSheet(
                     downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
                 context?.getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(videoId, false)
+                    val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO)
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }

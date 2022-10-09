@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.os.Build
-import com.github.libretube.BuildConfig
 import com.github.libretube.constants.DownloadType
 import com.github.libretube.obj.DownloadedFile
 import java.io.File

@@ -11,12 +11,14 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.ImageHelper
 import retrofit2.HttpException
 import java.io.IOException
@@ -122,6 +124,11 @@ class ChannelFragment : BaseFragment() {
                         isSubscribed = true
                         getString(R.string.unsubscribe)
                     }
+                }
+
+                binding.channelShare.setOnClickListener {
+                    val shareDialog = ShareDialog(response.name!!, ShareObjectType.CHANNEL)
+                    shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
             }
 
