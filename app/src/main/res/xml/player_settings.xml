@@ -8,9 +8,9 @@
             android:icon="@drawable/ic_speed"
             app:defValue="1.0"
             app:key="playback_speed"
-            app:stepSize="0.25"
+            app:stepSize="0.1"
             app:title="@string/playback_speed"
-            app:valueFrom="0.25"
+            app:valueFrom="0.2"
             app:valueTo="4.0" />
 
         <com.github.libretube.ui.views.SliderPreference

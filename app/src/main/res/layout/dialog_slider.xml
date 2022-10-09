@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
-        android:stepSize="0.25"
+        android:stepSize="0.1"
         android:value="1"
         android:valueFrom="0"
         android:valueTo="5" />
