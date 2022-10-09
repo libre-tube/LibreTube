@@ -126,7 +126,7 @@ class ChannelFragment : BaseFragment() {
                 }
 
                 binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(response.name!!, false,  true)
+                    val shareDialog = ShareDialog(response.name!!, false, true)
                     shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
             }
