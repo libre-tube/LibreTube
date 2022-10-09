@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
@@ -15,6 +16,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.ChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import org.chromium.base.ContextUtils
 
 class ChannelAdapter(
     private val videoFeed: MutableList<StreamItem>,
@@ -46,8 +48,9 @@ class ChannelAdapter(
             videoTitle.text = video.title
 
             videoInfo.text =
-                video.views.formatShort() + " • " +
-                DateUtils.getRelativeTimeSpanString(video.uploaded!!)
+                video.views.formatShort() + " " +
+                ContextUtils.getApplicationContext().resources.getString(R.string.views_placeholder) +
+                " • " + DateUtils.getRelativeTimeSpanString(video.uploaded!!)
 
             thumbnailDuration.text =
                 DateUtils.formatElapsedTime(video.duration!!)
