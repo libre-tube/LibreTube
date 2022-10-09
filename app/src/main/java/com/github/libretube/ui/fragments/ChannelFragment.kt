@@ -11,6 +11,7 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
@@ -126,7 +127,7 @@ class ChannelFragment : BaseFragment() {
                 }
 
                 binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(response.name!!, false, true)
+                    val shareDialog = ShareDialog(response.name!!, ShareObjectType.CHANNEL)
                     shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
             }

@@ -49,7 +49,7 @@ class ChannelAdapter(
 
             videoInfo.text =
                 video.views.formatShort() + " " +
-                ContextUtils.getApplicationContext().resources.getString(R.string.views_placeholder) +
+                root.context.getString(R.string.views_placeholder) +
                 " • " + DateUtils.getRelativeTimeSpanString(video.uploaded!!)
 
             thumbnailDuration.text =

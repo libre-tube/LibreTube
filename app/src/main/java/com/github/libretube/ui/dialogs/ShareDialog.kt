@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
@@ -16,8 +17,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
     private val id: String,
-    private val isPlaylist: Boolean,
-    private val isChannel: Boolean,
+    private val shareObjectType: Int,
     private val position: Long? = null
 ) : DialogFragment() {
     private var binding: DialogShareBinding? = null
@@ -51,14 +51,10 @@ class ShareDialog(
                     // only available for custom instances
                     else -> instanceUrl
                 }
-                var path = if (!isChannel) {
-                    if (!isPlaylist) {
-                        "/watch?v=$id"
-                    } else {
-                        "/playlist?list=$id"
-                    }
-                } else {
-                    "/c/$id"
+                var path = when (shareObjectType) {
+                    ShareObjectType.VIDEO -> "/watch?v=$id"
+                    ShareObjectType.PLAYLIST -> "/playlist?list=$id"
+                    else -> "/c/$id"
                 }
                 var url = "$host$path"
 
