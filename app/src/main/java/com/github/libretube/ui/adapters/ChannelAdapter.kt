@@ -16,7 +16,6 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.ChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import org.chromium.base.ContextUtils
 
 class ChannelAdapter(
     private val videoFeed: MutableList<StreamItem>,
