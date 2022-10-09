@@ -94,14 +94,14 @@
     <string name="category_sponsor_description">Promoção paga, referências pagas e anúncios diretos. Não para autopromoção ou mensagens genuínas gratuitas para causas, criadores, sites e produtos.</string>
     <string name="category_intro">Interrupção/Introdução</string>
     <string name="category_intro_description">Um intervalo sem conteúdo real. Pode ser uma pausa, quadro estático, animação repetida. Não deve ser usado para transições contendo informações.</string>
-    <string name="category_outro">Lista de vídeos e Créditos finais</string>
+    <string name="category_outro">Catálogo final e créditos</string>
     <string name="license">Licença</string>
     <string name="category_selfpromo">Não paga/Auto-promoção</string>
     <string name="category_selfpromo_description">Semelhante a \"patrocinador\", exceto para promoção não paga ou autopromoção. Isso inclui seções sobre mercadorias, doações ou informações sobre com quem eles colaboraram.</string>
     <string name="category_interaction">Lembrete de interação (curtir e se inscrever)</string>
     <string name="category_interaction_description">Quando há um pequeno lembrete para curtir, se inscrever ou seguir no meio do conteúdo. Se for longo ou sobre algo específico, deve ser autopromoção.</string>
     <string name="category_outro_description">Informações após o final. Não para conclusões com informações.</string>
-    <string name="color_accent">Tonalidades</string>
+    <string name="color_accent">Realces</string>
     <string name="color_red">Vermelho relaxante</string>
     <string name="color_blue">Azul alegre</string>
     <string name="color_yellow">Amarelo empolgante</string>
