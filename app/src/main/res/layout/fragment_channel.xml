@@ -74,12 +74,29 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/channel_share"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTint="?android:attr/textColorPrimary"
+                    android:stateListAnimator="@null"
+                    android:layout_marginEnd="10dp"
+                    app:icon="@drawable/ic_share"
+                    android:text="@string/share"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="12sp"
+                    app:cornerRadius="20dp"
+                    app:elevation="20dp"
+                    tools:targetApi="m" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/channel_subscribe"
                     style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableTint="?android:attr/textColorPrimary"
                     android:stateListAnimator="@null"
+                    app:icon="@drawable/ic_add"
                     android:text="@string/subscribe"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="12sp"

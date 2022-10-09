@@ -74,7 +74,7 @@ class PlaylistOptionsBottomSheet(
                 }
                 // share the playlist
                 context?.getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(playlistId, true)
+                    val shareDialog = ShareDialog(playlistId, true, false)
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }

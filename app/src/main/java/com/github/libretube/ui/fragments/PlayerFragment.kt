@@ -425,7 +425,7 @@ class PlayerFragment : BaseFragment() {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!, false, exoPlayer.currentPosition / 1000)
+            val shareDialog = ShareDialog(videoId!!, false, false,exoPlayer.currentPosition / 1000)
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 

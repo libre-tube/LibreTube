@@ -73,7 +73,7 @@ class VideoOptionsBottomSheet(
                     downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
                 context?.getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(videoId, false)
+                    val shareDialog = ShareDialog(videoId, false, false)
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }

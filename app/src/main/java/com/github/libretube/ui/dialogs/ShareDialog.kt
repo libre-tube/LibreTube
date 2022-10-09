@@ -17,6 +17,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class ShareDialog(
     private val id: String,
     private val isPlaylist: Boolean,
+    private val isChannel: Boolean,
     private val position: Long? = null
 ) : DialogFragment() {
     private var binding: DialogShareBinding? = null
@@ -50,7 +51,15 @@ class ShareDialog(
                     // only available for custom instances
                     else -> instanceUrl
                 }
-                val path = if (!isPlaylist) "/watch?v=$id" else "/playlist?list=$id"
+                var path = if (!isChannel) {
+                    if (!isPlaylist) {
+                        "/watch?v=$id"
+                    } else {
+                        "/playlist?list=$id"
+                    }
+                } else {
+                    "/c/$id"
+                }
                 var url = "$host$path"
 
                 if (binding != null && binding!!.timeCodeSwitch.isChecked) {
