@@ -9,26 +9,30 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp">
 
         <TextView
             android:id="@+id/fileName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp" />
+            android:layout_marginVertical="2dp"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/uploaderName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/videoInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -36,6 +40,7 @@
     <TextView
         android:id="@+id/fileSize"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </LinearLayout>

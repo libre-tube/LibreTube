@@ -2,7 +2,6 @@ package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +37,9 @@ class DownloadsAdapter(
 
             file.metadata?.let {
                 uploaderName.text = it.uploader
-                it.views.formatShort() + " " +
-                        root.context.getString(R.string.views_placeholder) +
-                        " • " + it.uploadDate
+                videoInfo.text = it.views.formatShort() + " " +
+                    root.context.getString(R.string.views_placeholder) +
+                    " • " + it.uploadDate
             }
 
             root.setOnClickListener {
