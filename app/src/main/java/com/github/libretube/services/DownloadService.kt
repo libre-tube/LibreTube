@@ -17,7 +17,6 @@ import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
 import com.github.libretube.constants.DownloadType
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.sanitize
 import com.github.libretube.util.DownloadHelper
 import java.io.File
 
@@ -37,7 +36,7 @@ class DownloadService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        videoName = intent?.getStringExtra("videoName")!!.sanitize()
+        videoName = intent?.getStringExtra("videoName")!!
         videoUrl = intent.getStringExtra("videoUrl")!!
         audioUrl = intent.getStringExtra("audioUrl")!!
 
@@ -66,10 +65,6 @@ class DownloadService : Service() {
 
         val videoDownloadDir = DownloadHelper.getVideoDir(this)
         val audioDownloadDir = DownloadHelper.getAudioDir(this)
-
-        listOf(videoDownloadDir, audioDownloadDir).forEach {
-            if (!it.exists()) it.mkdir()
-        }
 
         // start download
         try {

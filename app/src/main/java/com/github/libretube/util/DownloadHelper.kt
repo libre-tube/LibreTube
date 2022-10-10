@@ -3,6 +3,7 @@ package com.github.libretube.util
 import android.content.Context
 import android.os.Build
 import com.github.libretube.constants.DownloadType
+import com.github.libretube.extensions.createDir
 import com.github.libretube.obj.DownloadedFile
 import java.io.File
 
@@ -21,14 +22,21 @@ object DownloadHelper {
         return File(
             getOfflineStorageDir(context),
             "video"
-        )
+        ).createDir()
     }
 
     fun getAudioDir(context: Context): File {
         return File(
             getOfflineStorageDir(context),
             "audio"
-        )
+        ).createDir()
+    }
+
+    fun getMetadataDir(context: Context): File {
+        return File(
+            getOfflineStorageDir(context),
+            "metadata"
+        ).createDir()
     }
 
     fun getDownloadedFiles(context: Context): MutableList<DownloadedFile> {
