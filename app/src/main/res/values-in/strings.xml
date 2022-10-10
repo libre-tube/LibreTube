@@ -345,4 +345,10 @@
     <string name="playback_pitch">Nada</string>
     <string name="progressive_load_interval_summary">Nilai yang rendah dapat mempercepat pemuatan video awal.</string>
     <string name="default_load_interval">Bawaan</string>
+    <string name="filename">Nama file</string>
+    <string name="invalid_filename">Nama file tidak absah!</string>
+    <string name="playlists_order">Urutan daftar main</string>
+    <string name="playlistNameReversed">Nama daftar main (dibalik)</string>
+    <string name="recentlyUpdated">Diperbarui baru-baru ini</string>
+    <string name="recentlyUpdatedReversed">Diperbarui baru-baru ini (dibalik)</string>
 </resources>
