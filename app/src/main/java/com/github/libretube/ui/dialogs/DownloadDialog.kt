@@ -15,7 +15,9 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.sanitize
 import com.github.libretube.services.DownloadService
+import com.github.libretube.util.MetadataHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
@@ -126,11 +128,32 @@ class DownloadDialog(
                 return@setOnClickListener
             }
 
+            val vidUrl = videoUrl[binding.videoSpinner.selectedItemPosition]
+            val audUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
+
+            if (audUrl == "" && vidUrl == "") return@setOnClickListener
+
+            val fileName = binding.fileName.text.toString().sanitize()
+
+            val metadataHelper = MetadataHelper(requireContext())
+            metadataHelper.createMetadata(fileName, streams)
+
+            Log.e("meta", metadataHelper.getMetadata(fileName).toString())
+
             val intent = Intent(context, DownloadService::class.java)
 
-            intent.putExtra("videoName", binding.fileName.text.toString())
-            intent.putExtra("videoUrl", videoUrl[binding.videoSpinner.selectedItemPosition])
-            intent.putExtra("audioUrl", audioUrl[binding.audioSpinner.selectedItemPosition])
+            intent.putExtra(
+                "videoName",
+                fileName
+            )
+            intent.putExtra(
+                "videoUrl",
+                vidUrl
+            )
+            intent.putExtra(
+                "audioUrl",
+                audUrl
+            )
 
             context?.startService(intent)
             dismiss()

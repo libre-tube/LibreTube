@@ -11,6 +11,7 @@ import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.MetadataHelper
 
 class DownloadsFragment : BaseFragment() {
     private lateinit var binding: FragmentDownloadsBinding
@@ -30,6 +31,13 @@ class DownloadsFragment : BaseFragment() {
         val files = DownloadHelper.getDownloadedFiles(requireContext())
 
         if (files.isEmpty()) return
+
+        val metadataHelper = MetadataHelper(requireContext())
+        files.forEach {
+            metadataHelper.getMetadata(it.name)?.let { streams ->
+                it.metadata = streams
+            }
+        }
 
         binding.downloadsEmpty.visibility = View.GONE
         binding.downloads.visibility = View.VISIBLE

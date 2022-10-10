@@ -2,12 +2,14 @@ package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DownloadedMediaRowBinding
+import com.github.libretube.extensions.formatShort
 import com.github.libretube.obj.DownloadedFile
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
@@ -33,6 +35,13 @@ class DownloadsAdapter(
         holder.binding.apply {
             fileName.text = file.name
             fileSize.text = "${file.size / (1024 * 1024)} MiB"
+
+            file.metadata?.let {
+                uploaderName.text = it.uploader
+                it.views.formatShort() + " " +
+                        root.context.getString(R.string.views_placeholder) +
+                        " • " + it.uploadDate
+            }
 
             root.setOnClickListener {
                 val intent = Intent(root.context, OfflinePlayerActivity::class.java).also {
