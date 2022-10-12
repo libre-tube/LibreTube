@@ -219,7 +219,7 @@
     <string name="telegram">Telegram</string>
     <string name="reddit">Reddit</string>
     <string name="community">Comunidad</string>
-    <string name="discord">Discord</string>
+    <string name="discord">Discord (Servicio de mensajería instantánea)</string>
     <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>

@@ -345,4 +345,7 @@
     <string name="default_load_interval">По умолчанию</string>
     <string name="playback_pitch">Скорость</string>
     <string name="views_placeholder">просмотров</string>
+    <string name="filename">Имя файла</string>
+    <string name="invalid_filename">Неверное имя файла!</string>
+    <string name="playlists_order">Порядок плейлистов</string>
 </resources>
