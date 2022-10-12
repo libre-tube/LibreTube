@@ -15,6 +15,7 @@ import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.ui.viewholders.CommentsViewHolder
+import com.github.libretube.util.ClipboardHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import kotlinx.coroutines.CoroutineScope
@@ -30,7 +31,7 @@ class CommentsAdapter(
 
     private var isLoading = false
     private var nextpage = ""
-    private var repliesPage = com.github.libretube.api.obj.CommentsPage()
+    private var repliesPage = CommentsPage()
 
     fun updateItems(newItems: List<com.github.libretube.api.obj.Comment>) {
         val commentsSize = comments.size
@@ -87,6 +88,12 @@ class CommentsAdapter(
                     }
                     else -> repliesAdapter.clear()
                 }
+            }
+
+            root.setOnLongClickListener {
+                ClipboardHelper(root.context).save(comment.commentText.toString())
+                Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
+                true
             }
         }
     }
