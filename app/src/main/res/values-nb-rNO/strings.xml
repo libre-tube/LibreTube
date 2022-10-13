@@ -341,4 +341,6 @@
     <string name="views_placeholder">visninger</string>
     <string name="default_load_interval">Forvalg</string>
     <string name="limit_hls">Begrens HLS til 1080p</string>
+    <string name="filename">Filnavn</string>
+    <string name="recentlyUpdated">Nylig oppdatert</string>
 </resources>

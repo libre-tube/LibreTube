@@ -108,7 +108,7 @@
     <string name="color_accent">アクセントカラー</string>
     <string name="color_red">赤</string>
     <string name="color_yellow">黄</string>
-    <string name="material_you">Material 3</string>
+    <string name="material_you">Material You</string>
     <string name="sponsorblock_notifications">通知</string>
     <string name="require_restart">再起動が必要です</string>
     <string name="update">新しいバージョンを探す</string>
@@ -116,7 +116,7 @@
     <string name="turnInternetOn">WiFiまたはモバイルデータ通信ををオンにして、インターネットに接続してください。</string>
     <string name="open">開く…</string>
     <string name="reset">デフォルトの設定に戻す</string>
-    <string name="reset_message">本当にリセットしますか？ログアウトされ、すべての設定がリセットされます。</string>
+    <string name="reset_message">全ての設定をリセットし、ログアウトしますか？</string>
     <string name="default_subtitle_language">デフォルトの字幕言語</string>
     <string name="download_folder">ファイル名</string>
     <string name="app_behavior">動作</string>
@@ -124,8 +124,8 @@
     <string name="chapters">チャプター</string>
     <string name="birdIcon">小鳥</string>
     <string name="instance_name">インスタンス名</string>
-    <string name="pauseOnScreenOff_summary">画面が消灯したら一時停止します。</string>
-    <string name="autoplay_summary">再生している動画が終了したら自動で次の動画を再生します。</string>
+    <string name="pauseOnScreenOff_summary">画面が消えた際に一時停止します。</string>
+    <string name="autoplay_summary">再生している動画が終了したら次の動画を自動再生します。</string>
     <string name="account">アカウント</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -177,7 +177,7 @@
     <string name="instance_api_url">インスタンスAPIのURL</string>
     <string name="addInstance">インスタンスを追加</string>
     <string name="empty_instance">インスタンス名とAPIアドレスを入力してください。</string>
-    <string name="clear_customInstances">カスタムインスタンスを削除</string>
+    <string name="clear_customInstances">追加されたインスタンスを削除</string>
     <string name="watch_history">視聴履歴</string>
     <string name="watch_positions">位置を記憶</string>
     <string name="auth_instance">認証インスタンス</string>
@@ -219,7 +219,7 @@
     <string name="video">映像</string>
     <string name="player_autoplay">自動再生</string>
     <string name="data_saver_mode_summary">通信料を節約するためにサムネイルとその他の画像を読み込みません。</string>
-    <string name="watch_positions_summary">最後に再生していた位置に戻します</string>
+    <string name="watch_positions_summary">最後の再生位置から続きを見る</string>
     <string name="navLabelVisibility">ナビゲーションバーのラベルの表示</string>
     <string name="always">常に表示</string>
     <string name="selected">選択中のみ</string>
@@ -259,4 +259,5 @@
     <string name="playerAudioQuality">音声の品質</string>
     <string name="best_quality">最高</string>
     <string name="worst_quality">最低</string>
+    <string name="views_placeholder">回視聴</string>
 </resources>

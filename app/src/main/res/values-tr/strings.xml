@@ -345,4 +345,10 @@
     <string name="progressive_load_interval_summary">Daha düşük bir değer, ilk video yüklemesini hızlandırabilir.</string>
     <string name="views_placeholder">görüntüleme</string>
     <string name="playback_pitch">Ses yüksekliği</string>
+    <string name="playlists_order">Oynatma listesi sırası</string>
+    <string name="playlistNameReversed">Oynatma listesi adı (ters)</string>
+    <string name="recentlyUpdated">Son güncellenen</string>
+    <string name="filename">Dosya adı</string>
+    <string name="invalid_filename">Geçersiz dosya adı!</string>
+    <string name="recentlyUpdatedReversed">Son güncellenen (ters)</string>
 </resources>

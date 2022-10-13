@@ -345,4 +345,10 @@
     <string name="progressive_load_interval_summary">ערך נמוך יותר עשוי להאיץ את טעינת הסרטון הראשונית.</string>
     <string name="progressive_load_interval">גודל מרווח טעינה במקטעים</string>
     <string name="change_region">כנראה שהמובילים לא זמינים לאזור הנוכחי. נא לבחור באזור אחר בהגדרות.</string>
+    <string name="filename">שם קובץ</string>
+    <string name="invalid_filename">שם הקובץ שגוי!</string>
+    <string name="playlists_order">סדר רשימות הנגינה</string>
+    <string name="playlistNameReversed">שם רשימת הנגינה (הפוך)</string>
+    <string name="recentlyUpdated">עודכנו לאחרונה</string>
+    <string name="recentlyUpdatedReversed">עודכנו לאחרונה (הפוך)</string>
 </resources>

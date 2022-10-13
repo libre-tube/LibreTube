@@ -345,4 +345,10 @@
     <string name="player_resize_mode">Skalierungsmodus</string>
     <string name="maximum_image_cache">Maximale Bild-Cache-Größe</string>
     <string name="renamePlaylist">Playlist umbenennen</string>
+    <string name="filename">Dateiname</string>
+    <string name="invalid_filename">Ungültiger Dateiname!</string>
+    <string name="playlists_order">Reihenfolge der Wiedergabelisten</string>
+    <string name="playlistNameReversed">Wiedergabelistenname (umgekehrt)</string>
+    <string name="recentlyUpdated">Kürzlich aktualisiert</string>
+    <string name="recentlyUpdatedReversed">Kürzlich aktualisiert (umgekehrt)</string>
 </resources>

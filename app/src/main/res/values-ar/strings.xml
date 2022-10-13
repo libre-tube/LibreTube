@@ -347,4 +347,8 @@
     <string name="filename">اسم الملف</string>
     <string name="invalid_filename">اسم الملف غير صالح!</string>
     <string name="progressive_load_interval_summary">قد تؤدي القيمة الأقل إلى تسريع تحميل الفيديو الأولي.</string>
+    <string name="playlists_order">ترتيب قوائم التشغيل</string>
+    <string name="playlistNameReversed">اسم قائمة التشغيل (معكوس)</string>
+    <string name="recentlyUpdated">تم التحديث مؤخرا</string>
+    <string name="recentlyUpdatedReversed">تم تحديثه مؤخرًا (معكوس)</string>
 </resources>
