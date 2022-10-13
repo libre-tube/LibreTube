@@ -22,8 +22,6 @@ import com.github.libretube.util.NavigationHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
 class CommentsAdapter(
     private val videoId: String,
@@ -32,8 +30,7 @@ class CommentsAdapter(
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
 
     private var isLoading = false
-    private var nextpage = ""
-    private var repliesPage = CommentsPage()
+    private lateinit var repliesPage: CommentsPage
 
     fun clear() {
         val size: Int = comments.size
@@ -68,33 +65,46 @@ class CommentsAdapter(
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount?.toLong().formatShort()
 
-            if (comment.verified == true) {
-                verifiedImageView.visibility = View.VISIBLE
-            }
-            if (comment.pinned == true) {
-                pinnedImageView.visibility = View.VISIBLE
-            }
-            if (comment.hearted == true) {
-                heartedImageView.visibility = View.VISIBLE
-            }
-
-            if (comment.repliesPage != null) {
-                commentsAvailable.visibility = View.VISIBLE
-            }
+            if (comment.verified == true) verifiedImageView.visibility = View.VISIBLE
+            if (comment.pinned == true) pinnedImageView.visibility = View.VISIBLE
+            if (comment.hearted == true) heartedImageView.visibility = View.VISIBLE
+            if (comment.repliesPage != null) commentsAvailable.visibility = View.VISIBLE
 
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
             }
 
             repliesRecView.layoutManager = LinearLayoutManager(root.context)
-            val repliesAdapter = CommentsAdapter(videoId, CommentsPage().comments, true)
+            lateinit var repliesAdapter: CommentsAdapter
+            repliesAdapter = CommentsAdapter(
+                videoId,
+                mutableListOf(),
+                true
+            )
             repliesRecView.adapter = repliesAdapter
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
                     when {
                         repliesAdapter.itemCount.equals(0) -> {
-                            nextpage = comment.repliesPage
-                            fetchReplies(nextpage, repliesAdapter)
+                            fetchReplies(comment.repliesPage) {
+                                repliesAdapter.updateItems(it.comments)
+                                if (repliesPage.nextpage == null) {
+                                    showMore.visibility = View.GONE
+                                    return@fetchReplies
+                                }
+                                showMore.visibility = View.VISIBLE
+                                showMore.setOnClickListener {
+                                    if (repliesPage.nextpage == null) {
+                                        it.visibility = View.GONE
+                                        return@setOnClickListener
+                                    }
+                                    fetchReplies(
+                                        repliesPage.nextpage!!
+                                    ) {
+                                        repliesAdapter.updateItems(repliesPage.comments)
+                                    }
+                                }
+                            }
                         }
                         else -> repliesAdapter.clear()
                     }
@@ -106,6 +116,8 @@ class CommentsAdapter(
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
             }
+
+            // if (isRepliesAdapter && comments)
         }
     }
 
@@ -113,19 +125,17 @@ class CommentsAdapter(
         return comments.size
     }
 
-    private fun fetchReplies(nextPage: String, repliesAdapter: CommentsAdapter) {
+    private fun fetchReplies(nextPage: String, onFinished: (CommentsPage) -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
             if (isLoading) return@launch
             isLoading = true
-            try {
-                repliesPage = RetrofitInstance.api.getCommentsNextPage(videoId, nextPage)
-            } catch (e: IOException) {
-                println(e)
+            repliesPage = try {
+                RetrofitInstance.api.getCommentsNextPage(videoId, nextPage)
+            } catch (e: Exception) {
                 Log.e(TAG(), "IOException, you might not have internet connection")
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response," + e.response())
+                return@launch
             }
-            repliesAdapter.updateItems(repliesPage.comments)
+            onFinished.invoke(repliesPage)
             isLoading = false
         }
     }
