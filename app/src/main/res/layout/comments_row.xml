@@ -127,5 +127,19 @@
             android:background="@null"
             android:nestedScrollingEnabled="false" />
 
+        <com.google.android.material.button.MaterialButton
+            android:visibility="gone"
+            android:id="@+id/show_more"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="8dp"
+            android:stateListAnimator="@null"
+            android:text="@string/show_more"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="12sp"
+            app:cornerRadius="20dp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
