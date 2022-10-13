@@ -22,6 +22,7 @@ import com.github.libretube.util.NavigationHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CommentsAdapter(
     private val videoId: String,
@@ -126,7 +127,7 @@ class CommentsAdapter(
     }
 
     private fun fetchReplies(nextPage: String, onFinished: (CommentsPage) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             if (isLoading) return@launch
             isLoading = true
             repliesPage = try {
@@ -135,7 +136,9 @@ class CommentsAdapter(
                 Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launch
             }
-            onFinished.invoke(repliesPage)
+            withContext(Dispatchers.Main) {
+                onFinished.invoke(repliesPage)
+            }
             isLoading = false
         }
     }
