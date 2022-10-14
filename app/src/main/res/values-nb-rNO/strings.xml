@@ -343,4 +343,12 @@
     <string name="limit_hls">Begrens HLS til 1080p</string>
     <string name="filename">Filnavn</string>
     <string name="recentlyUpdated">Nylig oppdatert</string>
+    <string name="playlistNameReversed">Spillelistenavn (invertert)</string>
+    <string name="recentlyUpdatedReversed">Nylig oppdatert (invertert)</string>
+    <string name="playback_pitch">Tonehøyde</string>
+    <string name="progressive_load_interval">Intervallstørrelse for progressiv innlasting</string>
+    <string name="progressive_load_interval_summary">En lavere verdi kan gjøre opprinnelig videoinnlasting raskere.</string>
+    <string name="change_region">På vei opp ser ut til å være utilgjengelig for nåværende region. Velg en annen i innstillingene.</string>
+    <string name="invalid_filename">Ugyldig filnavn</string>
+    <string name="playlists_order">Spillelisterekkefølge</string>
 </resources>
