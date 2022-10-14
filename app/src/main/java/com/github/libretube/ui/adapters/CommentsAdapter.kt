@@ -117,8 +117,6 @@ class CommentsAdapter(
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
             }
-
-            // if (isRepliesAdapter && comments)
         }
     }
 

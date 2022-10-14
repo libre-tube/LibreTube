@@ -32,9 +32,9 @@ class ShareDialog(
         // add instanceUrl option if custom instance frontend url available
         if (instanceUrl != "") shareOptions += getString(R.string.instance)
 
-        if (position != null) {
+        if (shareObjectType == ShareObjectType.VIDEO && position != null) {
             binding = DialogShareBinding.inflate(layoutInflater)
-            binding!!.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
+            binding?.timeCodeSwitch?.isChecked = PreferenceHelper.getBoolean(
                 PreferenceKeys.SHARE_WITH_TIME_CODE,
                 true
             )
@@ -51,14 +51,14 @@ class ShareDialog(
                     // only available for custom instances
                     else -> instanceUrl
                 }
-                var path = when (shareObjectType) {
+                val path = when (shareObjectType) {
                     ShareObjectType.VIDEO -> "/watch?v=$id"
                     ShareObjectType.PLAYLIST -> "/playlist?list=$id"
-                    else -> "/c/$id"
+                    else -> "/channel/$id"
                 }
                 var url = "$host$path"
 
-                if (binding != null && binding!!.timeCodeSwitch.isChecked) {
+                if (shareObjectType == ShareObjectType.VIDEO && binding!!.timeCodeSwitch.isChecked) {
                     url += "&t=$position"
                 }
 
