@@ -346,6 +346,7 @@
     <string name="recentlyUpdated">Recently updated</string>
     <string name="recentlyUpdatedReversed">Recently updated (reversed)</string>
     <string name="show_more">Show more</string>
+    <string name="time_code">Time code</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

@@ -3,6 +3,7 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.PIPED_FRONTEND_URL
@@ -33,11 +34,7 @@ class ShareDialog(
         if (instanceUrl != "") shareOptions += getString(R.string.instance)
 
         if (shareObjectType == ShareObjectType.VIDEO && position != null) {
-            binding = DialogShareBinding.inflate(layoutInflater)
-            binding?.timeCodeSwitch?.isChecked = PreferenceHelper.getBoolean(
-                PreferenceKeys.SHARE_WITH_TIME_CODE,
-                true
-            )
+            setupTimeStampBinding()
         }
 
         return MaterialAlertDialogBuilder(requireContext())
@@ -59,7 +56,7 @@ class ShareDialog(
                 var url = "$host$path"
 
                 if (shareObjectType == ShareObjectType.VIDEO && binding!!.timeCodeSwitch.isChecked) {
-                    url += "&t=$position"
+                    url += "&t=${binding!!.timeStamp.text}"
                 }
 
                 val intent = Intent()
@@ -74,6 +71,19 @@ class ShareDialog(
             }
             .setView(binding?.root)
             .show()
+    }
+
+    private fun setupTimeStampBinding() {
+        binding = DialogShareBinding.inflate(layoutInflater)
+        binding!!.timeCodeSwitch.isChecked = PreferenceHelper.getBoolean(
+            PreferenceKeys.SHARE_WITH_TIME_CODE,
+            true
+        )
+        binding!!.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            binding!!.timeStampLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
+        }
+        binding!!.timeStamp.setText(position.toString())
+        if (binding!!.timeCodeSwitch.isChecked) binding!!.timeStampLayout.visibility = View.VISIBLE
     }
 
     // get the frontend url if it's a custom instance
