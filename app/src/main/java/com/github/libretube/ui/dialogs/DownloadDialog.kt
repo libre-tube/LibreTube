@@ -17,6 +17,7 @@ import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.sanitize
 import com.github.libretube.services.DownloadService
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.MetadataHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -137,8 +138,13 @@ class DownloadDialog(
 
             val metadataHelper = MetadataHelper(requireContext())
             metadataHelper.createMetadata(fileName, streams)
-
-            Log.e("meta", metadataHelper.getMetadata(fileName).toString())
+            streams.thumbnailUrl?.let { thumbnailUrl ->
+                ImageHelper.downloadImage(
+                    requireContext(),
+                    thumbnailUrl,
+                    fileName
+                )
+            }
 
             val intent = Intent(context, DownloadService::class.java)
 
