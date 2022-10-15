@@ -11,6 +11,7 @@ import com.github.libretube.databinding.FragmentDownloadsBinding
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.MetadataHelper
 
 class DownloadsFragment : BaseFragment() {
@@ -36,6 +37,9 @@ class DownloadsFragment : BaseFragment() {
         files.forEach {
             metadataHelper.getMetadata(it.name)?.let { streams ->
                 it.metadata = streams
+            }
+            ImageHelper.getDownloadedImage(requireContext(), it.name)?.let { bitmap ->
+                it.thumbnail = bitmap
             }
         }
 

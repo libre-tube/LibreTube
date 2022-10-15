@@ -42,6 +42,8 @@ class DownloadsAdapter(
                     " • " + it.uploadDate
             }
 
+            thumbnailImage.setImageBitmap(file.thumbnail)
+
             root.setOnClickListener {
                 val intent = Intent(root.context, OfflinePlayerActivity::class.java).also {
                     it.putExtra(IntentData.fileName, file.name)

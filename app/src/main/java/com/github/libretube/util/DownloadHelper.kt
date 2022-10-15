@@ -39,6 +39,13 @@ object DownloadHelper {
         ).createDir()
     }
 
+    fun getThumbnailDir(context: Context): File {
+        return File(
+            getOfflineStorageDir(context),
+            "thumbnail"
+        ).createDir()
+    }
+
     fun getDownloadedFiles(context: Context): MutableList<DownloadedFile> {
         val videoFiles = getVideoDir(context).listFiles()
         val audioFiles = getAudioDir(context).listFiles()?.toMutableList()
