@@ -16,6 +16,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toDp
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
@@ -44,7 +45,7 @@ class LibraryFragment : BaseFragment() {
 
         // listen for the mini player state changing
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
-            updateFABMargin()
+            updateFABMargin(it)
         }
 
         binding.playlistRecView.layoutManager = LinearLayoutManager(requireContext())
@@ -86,11 +87,11 @@ class LibraryFragment : BaseFragment() {
         }
     }
 
-    private fun updateFABMargin() {
+    private fun updateFABMargin(isMiniPlayerVisible: Boolean) {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
-        val bottomMargin = if (playerViewModel.isMiniPlayerVisible.value == true) 180 else 64
+        val bottomMargin = if (isMiniPlayerVisible) 64 else 16
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = bottomMargin
+        layoutParams.bottomMargin = bottomMargin.toDp(resources).toInt()
         binding.createPlaylist.layoutParams = layoutParams
     }
 

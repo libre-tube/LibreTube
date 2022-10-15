@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.extensions.toDp
 import com.github.libretube.models.interfaces.DoubleTapInterface
 import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.obj.BottomSheetItem
@@ -369,14 +370,14 @@ internal class CustomExoPlayerView(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
 
-        val offsetFactor: Float = when (newConfig?.orientation) {
-            Configuration.ORIENTATION_LANDSCAPE -> 2F
-            else -> 1F / 2F
+        val offset = when (newConfig?.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> 20.toDp(resources)
+            else -> 10.toDp(resources)
         }
 
         binding.progressBar.let {
             val params = it.layoutParams as MarginLayoutParams
-            params.bottomMargin = (params.bottomMargin * offsetFactor).toInt()
+            params.bottomMargin = offset.toInt()
             it.layoutParams = params
         }
     }
