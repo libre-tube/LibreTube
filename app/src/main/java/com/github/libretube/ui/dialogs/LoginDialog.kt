@@ -79,8 +79,9 @@ class LoginDialog : DialogFragment() {
                 Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
                 PreferenceHelper.setToken(response.token!!)
                 PreferenceHelper.setUsername(login.username!!)
-                dialog?.dismiss()
+
                 activity?.recreate()
+                dialog?.dismiss()
             }
         }
     }
