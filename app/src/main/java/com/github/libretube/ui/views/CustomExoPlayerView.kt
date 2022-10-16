@@ -322,12 +322,7 @@ internal class CustomExoPlayerView(
     }
 
     private fun onPlaybackSpeedClicked() {
-        PlaybackSpeedSheet { speed, pitch ->
-            player?.playbackParameters = PlaybackParameters(
-                speed,
-                pitch
-            )
-        }.show(childFragmentManager)
+        player?.let { PlaybackSpeedSheet(it).show(childFragmentManager) }
     }
 
     private fun onResizeModeClicked() {
