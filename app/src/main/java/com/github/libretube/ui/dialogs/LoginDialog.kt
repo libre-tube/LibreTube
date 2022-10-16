@@ -92,13 +92,8 @@ class LoginDialog : DialogFragment() {
             PreferenceHelper.setToken(response.token!!)
             PreferenceHelper.setUsername(login.username!!)
 
-            activity?.recreate()
             dialog?.dismiss()
+            activity?.recreate()
         }
-    }
-
-    private fun finish() {
-        activity?.recreate()
-        dialog?.dismiss()
     }
 }
