@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -309,29 +310,30 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         // check whether an URI got submitted over the intent data and load it
-        when {
-            intent?.getStringExtra(IntentData.channelId) != null -> navController.navigate(
+        loadIntentData()
+    }
+
+    private fun loadIntentData() {
+        intent?.getStringExtra(IntentData.channelId)?.let {
+            navController.navigate(
                 R.id.channelFragment,
-                bundleOf(
-                    IntentData.channelName to intent?.getStringExtra(IntentData.channelId)!!
-                )
+                bundleOf(IntentData.channelName to it)
             )
-            intent?.getStringExtra(IntentData.channelName) != null -> navController.navigate(
+        }
+        intent?.getStringExtra(IntentData.channelName)?.let {
+            navController.navigate(
                 R.id.channelFragment,
-                bundleOf(
-                    IntentData.channelName to intent?.getStringExtra(IntentData.channelName)
-                )
+                bundleOf(IntentData.channelName to it)
             )
-            intent?.getStringExtra(IntentData.playlistId) != null -> navController.navigate(
+        }
+        intent?.getStringExtra(IntentData.playlistId)?.let {
+            navController.navigate(
                 R.id.playlistFragment,
-                bundleOf(
-                    IntentData.playlistId to intent?.getStringExtra(IntentData.playlistId)!!
-                )
+                bundleOf(IntentData.playlistId to it)
             )
-            intent?.getStringExtra(IntentData.videoId) != null -> loadVideo(
-                videoId = intent?.getStringExtra(IntentData.videoId)!!,
-                timeStamp = intent?.getLongExtra(IntentData.timeStamp, 0L)
-            )
+        }
+        intent?.getStringExtra(IntentData.videoId)?.let {
+            loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
         }
     }
 
@@ -488,5 +490,12 @@ class MainActivity : BaseActivity() {
         supportFragmentManager.fragments.forEach { fragment ->
             (fragment as? PlayerFragment)?.onUserLeaveHint()
         }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        this.intent = intent
+        loadIntentData()
+        Log.e("videoId", intent?.getStringExtra(IntentData.videoId).toString())
     }
 }
