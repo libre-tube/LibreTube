@@ -351,4 +351,6 @@
     <string name="recentlyUpdated">最近更新</string>
     <string name="recentlyUpdatedReversed">最近更新（倒序）</string>
     <string name="playlistNameReversed">播放列表名称（倒序）</string>
+    <string name="show_more">显示更多</string>
+    <string name="time_code">时间码</string>
 </resources>
