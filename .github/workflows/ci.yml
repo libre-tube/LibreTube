@@ -63,7 +63,7 @@ jobs:
           rm -rf archive/*.apk
           mv app/build/outputs/apk/debug/*.apk archive/
           cd archive
-          python uploader.py
+          python ../uploader.py
       
       - name: Telegram Bot
         continue-on-error: true
