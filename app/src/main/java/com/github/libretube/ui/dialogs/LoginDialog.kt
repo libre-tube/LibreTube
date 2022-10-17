@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Login
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.PreferenceHelper
@@ -23,27 +24,22 @@ class LoginDialog : DialogFragment() {
         binding = DialogLoginBinding.inflate(layoutInflater)
 
         binding.login.setOnClickListener {
-            if (binding.username.text.toString() != "" && binding.password.text.toString() != "") {
-                val login =
-                    com.github.libretube.api.obj.Login(
-                        binding.username.text.toString(),
-                        binding.password.text.toString()
-                    )
-                login(login)
+            if (isInsertionValid()) {
+                signIn(
+                    binding.username.text.toString(),
+                    binding.password.text.toString()
+                )
             } else {
                 Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
         }
         binding.register.setOnClickListener {
-            if (
-                binding.username.text.toString() != "" &&
-                binding.password.text.toString() != ""
-            ) {
-                val login = com.github.libretube.api.obj.Login(
+            if (isInsertionValid()) {
+                signIn(
                     binding.username.text.toString(),
-                    binding.password.text.toString()
+                    binding.password.text.toString(),
+                    true
                 )
-                register(login)
             } else {
                 Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
@@ -56,12 +52,20 @@ class LoginDialog : DialogFragment() {
             .show()
     }
 
-    private fun login(login: com.github.libretube.api.obj.Login) {
+    private fun isInsertionValid(): Boolean {
+        return binding.username.text.toString() != "" && binding.password.text.toString() != ""
+    }
+
+    private fun signIn(username: String, password: String, createNewAccount: Boolean = false) {
+        val login = Login(username, password)
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.authApi.login(login)
+                if (createNewAccount) {
+                    RetrofitInstance.authApi.register(login)
+                } else {
+                    RetrofitInstance.authApi.login(login)
+                }
             } catch (e: IOException) {
-                println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
@@ -70,49 +74,26 @@ class LoginDialog : DialogFragment() {
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             } catch (e: Exception) {
-                Log.e(TAG(), "dafaq?$e")
                 return@launchWhenCreated
             }
+
             if (response.error != null) {
                 Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-            } else if (response.token != null) {
-                Toast.makeText(context, R.string.loggedIn, Toast.LENGTH_SHORT).show()
-                PreferenceHelper.setToken(response.token!!)
-                PreferenceHelper.setUsername(login.username!!)
-                dialog?.dismiss()
-                activity?.recreate()
+                return@launchWhenCreated
             }
-        }
-    }
+            if (response.token == null) return@launchWhenCreated
 
-    private fun register(login: com.github.libretube.api.obj.Login) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.register(login)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: Exception) {
-                    Log.e(TAG(), "dafaq?$e")
-                    return@launchWhenCreated
-                }
-                if (response.error != null) {
-                    Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
-                } else if (response.token != null) {
-                    Toast.makeText(context, R.string.registered, Toast.LENGTH_SHORT).show()
-                    PreferenceHelper.setToken(response.token!!)
-                    PreferenceHelper.setUsername(login.username!!)
-                    dialog?.dismiss()
-                }
-            }
+            Toast.makeText(
+                context,
+                if (createNewAccount) R.string.registered else R.string.loggedIn,
+                Toast.LENGTH_SHORT
+            ).show()
+
+            PreferenceHelper.setToken(response.token!!)
+            PreferenceHelper.setUsername(login.username!!)
+
+            dialog?.dismiss()
+            activity?.recreate()
         }
-        run()
     }
 }

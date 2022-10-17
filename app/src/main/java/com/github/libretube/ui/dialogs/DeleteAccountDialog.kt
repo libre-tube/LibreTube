@@ -54,13 +54,10 @@ class DeleteAccountDialog : DialogFragment() {
                 return@launchWhenCreated
             }
             Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
-            logout()
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
-        }
-    }
 
-    private fun logout() {
-        PreferenceHelper.setToken("")
+            PreferenceHelper.setToken("")
+            activity?.recreate()
+            dialog?.dismiss()
+        }
     }
 }
