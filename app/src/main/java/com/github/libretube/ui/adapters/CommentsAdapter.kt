@@ -64,12 +64,13 @@ class CommentsAdapter(
             commentText.text = comment.commentText.toString()
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
-            likesTextView.text = comment.likeCount?.toLong().formatShort()
+            likesTextView.text = comment.likeCount.formatShort()
 
             if (comment.verified == true) verifiedImageView.visibility = View.VISIBLE
             if (comment.pinned == true) pinnedImageView.visibility = View.VISIBLE
             if (comment.hearted == true) heartedImageView.visibility = View.VISIBLE
-            if (comment.repliesPage != null) commentsAvailable.visibility = View.VISIBLE
+            if (comment.repliesPage != null) repliesAvailable.visibility = View.VISIBLE
+            if ((comment.replyCount ?: -1L) > 0L) repliesCount.text = comment.replyCount?.formatShort()
 
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)

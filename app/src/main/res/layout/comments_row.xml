@@ -87,13 +87,13 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginEnd="6dp"
                         app:srcCompat="@drawable/ic_thumb_up" />
 
                     <TextView
                         android:id="@+id/likes_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
                         tools:text="LikeCount" />
 
                     <ImageView
@@ -106,13 +106,20 @@
                         app:srcCompat="@drawable/ic_hearted" />
 
                     <ImageView
-                        android:id="@+id/comments_available"
+                        android:id="@+id/replies_available"
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="3dp"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_comment" />
+
+                    <TextView
+                        android:id="@+id/replies_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        tools:text="LikeCount" />
 
                 </LinearLayout>
 
@@ -128,7 +135,6 @@
             android:nestedScrollingEnabled="false" />
 
         <com.google.android.material.button.MaterialButton
-            android:visibility="gone"
             android:id="@+id/show_more"
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
@@ -139,6 +145,7 @@
             android:text="@string/show_more"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="12sp"
+            android:visibility="gone"
             app:cornerRadius="20dp" />
 
     </LinearLayout>

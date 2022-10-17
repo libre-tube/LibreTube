@@ -11,8 +11,9 @@ data class Comment(
     val commentorUrl: String? = null,
     val repliesPage: String? = null,
     val hearted: Boolean? = null,
-    val likeCount: Int? = null,
+    val likeCount: Long? = null,
     val pinned: Boolean? = null,
     val thumbnail: String? = null,
-    val verified: Boolean? = null
+    val verified: Boolean? = null,
+    val replyCount: Long? = null
 )
