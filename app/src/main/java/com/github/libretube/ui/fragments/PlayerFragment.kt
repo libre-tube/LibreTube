@@ -1282,9 +1282,9 @@ class PlayerFragment : BaseFragment() {
      */
     private fun initializePlayerNotification() {
         if (!this::nowPlayingNotification.isInitialized) {
-            nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer)
+            nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer, false)
         }
-        nowPlayingNotification.updatePlayerNotification(streams)
+        nowPlayingNotification.updatePlayerNotification(videoId!!, streams)
     }
 
     private fun isSubscribed() {

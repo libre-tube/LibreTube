@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -9,7 +10,9 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
@@ -19,9 +22,11 @@ import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
 class NowPlayingNotification(
     private val context: Context,
-    private val player: ExoPlayer
+    private val player: ExoPlayer,
+    private val isBackgroundPlayerNotification: Boolean
 ) {
-    private var streams: com.github.libretube.api.obj.Streams? = null
+    private var videoId: String? = null
+    private var streams: Streams? = null
 
     /**
      * The [MediaSessionCompat] for the [streams].
@@ -48,30 +53,35 @@ class NowPlayingNotification(
          * sets the title of the notification
          */
         override fun getCurrentContentTitle(player: Player): CharSequence {
-            // return controller.metadata.description.title.toString()
             return streams?.title!!
         }
 
         /**
          * overrides the action when clicking the notification
          */
+        @SuppressLint("UnspecifiedImmutableFlag")
         override fun createCurrentContentIntent(player: Player): PendingIntent? {
-            //  return controller.sessionActivity
-            /**
-             *  starts a new MainActivity Intent when the player notification is clicked
-             *  it doesn't start a completely new MainActivity because the MainActivity's launchMode
-             *  is set to "singleTop" in the AndroidManifest (important!!!)
-             *  that's the only way to launch back into the previous activity (e.g. the player view
-             */
-            val intent = Intent(context, MainActivity::class.java)
-            return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+            // starts a new MainActivity Intent when the player notification is clicked
+            // it doesn't start a completely new MainActivity because the MainActivity's launchMode
+            // is set to "singleTop" in the AndroidManifest (important!!!)
+            //  that's the only way to launch back into the previous activity (e.g. the player view
+            val intent = Intent(context, MainActivity::class.java).apply {
+                if (isBackgroundPlayerNotification) {
+                    putExtra(IntentData.videoId, videoId)
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                }
+            }
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+            } else {
+                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
         }
 
         /**
          * the description of the notification (below the title)
          */
         override fun getCurrentContentText(player: Player): CharSequence? {
-            // return controller.metadata.description.subtitle.toString()
             return streams?.uploader
         }
 
@@ -121,9 +131,12 @@ class NowPlayingNotification(
      * Updates or creates the [playerNotification]
      */
     fun updatePlayerNotification(
-        streams: com.github.libretube.api.obj.Streams
+        videoId: String,
+        streams: Streams
     ) {
+        this.videoId = videoId
         this.streams = streams
+
         if (playerNotification == null) {
             createMediaSession()
             createNotification()
@@ -161,10 +174,12 @@ class NowPlayingNotification(
         mediaSession.release()
         mediaSessionConnector.setPlayer(null)
         playerNotification?.setPlayer(null)
+
         val notificationManager = context.getSystemService(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
         notificationManager.cancel(PLAYER_NOTIFICATION_ID)
+
         player.stop()
         player.release()
     }

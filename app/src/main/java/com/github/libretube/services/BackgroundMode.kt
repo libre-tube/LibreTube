@@ -9,14 +9,20 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Segments
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -50,7 +56,7 @@ class BackgroundMode : Service() {
     /**
      * The response that gets when called the Api.
      */
-    private var streams: com.github.libretube.api.obj.Streams? = null
+    private var streams: Streams? = null
 
     /**
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
@@ -66,7 +72,7 @@ class BackgroundMode : Service() {
     /**
      * SponsorBlock Segment data
      */
-    private var segmentData: com.github.libretube.api.obj.Segments? = null
+    private var segmentData: Segments? = null
 
     /**
      * [Notification] for the player
@@ -127,10 +133,17 @@ class BackgroundMode : Service() {
 
             // play the audio in the background
             loadAudio(videoId, position)
+
+            updateWatchPosition()
         } catch (e: Exception) {
             onDestroy()
         }
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    private fun updateWatchPosition() {
+        player?.currentPosition?.let { DatabaseHelper.saveWatchPosition(videoId, it) }
+        handler.postDelayed(this::updateWatchPosition, 500)
     }
 
     /**
@@ -165,9 +178,9 @@ class BackgroundMode : Service() {
 
         // create the notification
         if (!this@BackgroundMode::nowPlayingNotification.isInitialized) {
-            nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!)
+            nowPlayingNotification = NowPlayingNotification(this@BackgroundMode, player!!, true)
         }
-        nowPlayingNotification.updatePlayerNotification(streams!!)
+        nowPlayingNotification.updatePlayerNotification(videoId, streams!!)
 
         player?.apply {
             playWhenReady = playWhenReadyPlayer
@@ -175,7 +188,23 @@ class BackgroundMode : Service() {
         }
 
         // seek to the previous position if available
-        if (seekToPosition != 0L) player?.seekTo(seekToPosition)
+        if (seekToPosition != 0L) {
+            player?.seekTo(seekToPosition)
+        } else if (PlayerHelper.watchPositionsEnabled) {
+            try {
+                val watchPosition = awaitQuery {
+                    DatabaseHolder.Database.watchPositionDao().findById(videoId)
+                }
+                Log.e("position", watchPosition.toString())
+                streams?.duration?.let {
+                    if (watchPosition != null && watchPosition.position < it * 1000 * 0.9) {
+                        player?.seekTo(watchPosition.position)
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
         // set the playback speed
         val playbackSpeed = PreferenceHelper.getString(
