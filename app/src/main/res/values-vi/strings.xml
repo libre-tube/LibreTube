@@ -142,7 +142,7 @@
     <string name="music_directory">Thư mục nhạc</string>
     <string name="movies_directory">Thư mục phim</string>
     <string name="addInstance">Thêm sever</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Phiên bản %1$s</string>
     <string name="buffering_goal_summary">Số giây video được tải trước ở mức tối đa.</string>
     <string name="login">Đăng nhập</string>
     <string name="registered">Đã đăng kí. Giờ bạn có thể đăng kí kênh.</string>
@@ -335,4 +335,5 @@
     <string name="trending_layout">Bố cục xu hướng thay thế</string>
     <string name="renamePlaylist">Đổi tên playlist</string>
     <string name="mobile_data">Dữ liệu di động</string>
+    <string name="views_placeholder">lượt xem</string>
 </resources>

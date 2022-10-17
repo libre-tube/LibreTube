@@ -73,7 +73,7 @@
     <string name="import_from_yt">Abunəlikləri idxal edin</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Mövzu</string>
-    <string name="server_error">Serverdə problem var. Başqasını cəhd edə bilərsiniz\?</string>
+    <string name="server_error">Serverdə problem var. Başqa bir nümunə cəhd edilsin\?</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">Siz istifadəçi adı və şifrə daxil etməlisiniz.</string>
@@ -98,7 +98,7 @@
     <string name="videoCount">%1$s video</string>
     <string name="settings">Tənzimləmələr</string>
     <string name="location">Məkan</string>
-    <string name="instance">Server</string>
+    <string name="instance">Nümunə</string>
     <string name="customization">Tənzimləmələr</string>
     <string name="website">Veb Sayt</string>
     <string name="color_accent">Vurğular</string>
@@ -156,9 +156,9 @@
     <string name="flameIcon">Alovlanıb yanan</string>
     <string name="birdIcon">Sürətləndirilmiş quş</string>
     <string name="torchIcon">Dəbli fənər</string>
-    <string name="instance_name">Server adı</string>
-    <string name="instance_api_url">Server API URL\'si</string>
-    <string name="addInstance">Server Əlavə Edin</string>
+    <string name="instance_name">Nümunə adı</string>
+    <string name="instance_api_url">Nümunə API\'si üçün URL</string>
+    <string name="addInstance">Nümunə Əlavə edin</string>
     <string name="invalid_url">Zəhmət olmasa, işləyən URL\'ni daxil edin</string>
     <string name="customInstance_summary">Əlavə edin…</string>
     <string name="instance_summary">Piped, giriş və abunəliklər</string>
@@ -190,7 +190,7 @@
     <string name="behavior">Davranış</string>
     <string name="player_summary">Defolt tənzimləmələr və davranış</string>
     <string name="seek_increment">Axtarış artımı</string>
-    <string name="instance_frontend_url">Server üçün URL</string>
+    <string name="instance_frontend_url">Nümunə üçün URL</string>
     <string name="autoplay_summary">Cari videodan sonra növbəti videonu avtomatik oynadın.</string>
     <string name="pauseOnScreenOff">Avtomatik dayandırma</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandırın.</string>
@@ -203,10 +203,10 @@
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
     <string name="watch_history">Baxış Tarixçəsi</string>
     <string name="watch_positions">Mövqe xatırladıcı</string>
-    <string name="watch_positions_summary">Son oynatma mövqeyindən davam edin</string>
-    <string name="auth_instances">Təsdiqləyici serveri seçin</string>
-    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli serverdən istifadə edin.</string>
-    <string name="auth_instance">Təsdiqləyici server</string>
+    <string name="watch_positions_summary">Son oynatma mövqeyindən davam etdir</string>
+    <string name="auth_instances">Təsdiqləyici nümunəni seçin</string>
+    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli nümunədən istifadə edin.</string>
+    <string name="auth_instance">Təsdiqləyici nümunə</string>
     <string name="github">GitHub</string>
     <string name="hls">Avtomatik</string>
     <string name="audio_video">Səs və video</string>
@@ -227,7 +227,7 @@
     <string name="change_playback_speed">Oynatma sürəti</string>
     <string name="require_restart_message">Bu dəyişiklik tətbiqin yenidən başladılmasını tələb edir. İndi yenidən başlatmaq üçün \"Oldu\" düyməsini basın.</string>
     <string name="require_restart">Tətbiqi yenidən başlatmaq tələb olunur</string>
-    <string name="data_saver_mode_summary">Miniatürləri və digər şəkilləri göstərmə.</string>
+    <string name="data_saver_mode_summary">Miniatürləri və digər şəkilləri ötür.</string>
     <string name="history_summary">Baxış və axtarış tarixçəsi</string>
     <string name="navLabelVisibility">Naviqasiya etiketinin görünməsi</string>
     <string name="always">Həmişə</string>
@@ -241,7 +241,7 @@
     <string name="autoRotatePlayer_summary">Cihaz fırladıldıqda tam ekran oynatma.</string>
     <string name="search_history_summary">Saxlanılan axtarışlar</string>
     <string name="watch_history_summary">Yerli olaraq baxılmış videoları izləyin</string>
-    <string name="reset_watch_positions">Sıfırlayın</string>
+    <string name="reset_watch_positions">Sıfırla</string>
     <string name="system_caption_style">Sistem altyazı üsulu</string>
     <string name="captions">Altyazılar</string>
     <string name="none">Heç biri</string>
@@ -256,7 +256,7 @@
     <string name="downloading_apk">APK Endirilir…</string>
     <string name="playerAudioFormat">Oynadıcı üçün səs formatı</string>
     <string name="playerAudioQuality">Səs keyfiyyəti</string>
-    <string name="best_quality">Ən yaxşısı</string>
+    <string name="best_quality">Ən yaxşı</string>
     <string name="worst_quality">Ən pis</string>
     <string name="default_subtitle_language">Altyazı dili</string>
     <string name="notifications">Bildirişlər</string>
@@ -273,7 +273,7 @@
     <string name="channel_name_za">Kanal Adı (Z-A)</string>
     <string name="sort">Çeşidləmə</string>
     <string name="new_streams_by">%1$s tərəfindən yeni yayımlar…</string>
-    <string name="history_empty">Hələ tarixçə boşdur.</string>
+    <string name="history_empty">Hələ ki, tarixçə boşdur.</string>
     <string name="required_network">Tələb olunan bağlantı</string>
     <string name="network_all">Hamısı</string>
     <string name="network_wifi">Yalnız Wi-Fi\'da</string>
@@ -286,7 +286,7 @@
     <string name="share_with_time">Vaxt kodu ilə paylaşım</string>
     <string name="export_subscriptions">Abunəlikləri ixrac edin</string>
     <string name="skip_buttons">Ötürücü düymələr</string>
-    <string name="skip_buttons_summary">Növbəti və ya əvvəlki videoya keçmək üçün düymələri göstərin.</string>
+    <string name="skip_buttons_summary">Növbəti və ya əvvəlki videoya ötürmək üçün düymələri göstərin.</string>
     <string name="history_size">Maksimum tarixçə ölçüsü</string>
     <string name="unlimited">Limitsiz</string>
     <string name="background_mode">Arxa plan rejimi</string>
@@ -300,7 +300,7 @@
     <string name="repeat_mode">Təkrarlama Rejimi</string>
     <string name="resize_mode_fill">Doldur</string>
     <string name="resize_mode_zoom">Yaxınlaşdır</string>
-    <string name="resize_mode_fit">Dart</string>
+    <string name="resize_mode_fit">Uyğunlaşdır</string>
     <string name="repeat_mode_none">Heç biri</string>
     <string name="repeat_mode_current">Cari</string>
     <string name="backup_restore">Yedəkləyin və bərpa edin</string>
@@ -326,7 +326,7 @@
     <string name="sb_skip_manual_summary">Seqmentləri avtomatik olaraq ötürməyin, həmişə əvvəlcə icazə istəyin.</string>
     <string name="local_subscriptions">Yerli abunəlikər</string>
     <string name="preferences">Tənzimləmələr</string>
-    <string name="backup_customInstances">Fərdi Serverlər</string>
+    <string name="backup_customInstances">Fərdi Nümunələr</string>
     <string name="save_feed">Axını arxa fonda yüklə</string>
     <string name="save_feed_summary">Abunəlik axınının arxa planda yüklənilməsinin və avtomatik yenilənməsinin qarşısını al.</string>
     <string name="download_channel_name">Endirmə Xidməti</string>
