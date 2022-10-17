@@ -351,4 +351,6 @@
     <string name="recentlyUpdatedReversed">Нещодавно оновлені (зворотний порядок)</string>
     <string name="playlistNameReversed">Назва добірки (у зворотному порядку)</string>
     <string name="playlists_order">Порядок добірок</string>
+    <string name="show_more">Показати більше</string>
+    <string name="time_code">Часовий код</string>
 </resources>
