@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
@@ -20,6 +21,8 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -185,7 +188,23 @@ class BackgroundMode : Service() {
         }
 
         // seek to the previous position if available
-        if (seekToPosition != 0L) player?.seekTo(seekToPosition)
+        if (seekToPosition != 0L) {
+            player?.seekTo(seekToPosition)
+        } else if (PlayerHelper.watchPositionsEnabled) {
+            try {
+                val watchPosition = awaitQuery {
+                    DatabaseHolder.Database.watchPositionDao().findById(videoId)
+                }
+                Log.e("position", watchPosition.toString())
+                streams?.duration?.let {
+                    if (watchPosition != null && watchPosition.position < it * 1000 * 0.9) {
+                        player?.seekTo(watchPosition.position)
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
         // set the playback speed
         val playbackSpeed = PreferenceHelper.getString(

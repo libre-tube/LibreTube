@@ -496,6 +496,5 @@ class MainActivity : BaseActivity() {
         super.onNewIntent(intent)
         this.intent = intent
         loadIntentData()
-        Log.e("videoId", intent?.getStringExtra(IntentData.videoId).toString())
     }
 }
