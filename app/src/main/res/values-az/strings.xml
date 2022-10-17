@@ -303,8 +303,8 @@
     <string name="resize_mode_fit">Uyğunlaşdır</string>
     <string name="repeat_mode_none">Heç biri</string>
     <string name="repeat_mode_current">Cari</string>
-    <string name="backup_restore">Yedəkləyin və bərpa edin</string>
-    <string name="backup">Yedəkləmə</string>
+    <string name="backup_restore">Nüsxələyin və bərpa edin</string>
+    <string name="backup">Nüsxələ</string>
     <string name="picture_in_picture">Şəkil içində Şəkil</string>
     <string name="player_resize_mode">Ölçü dəyişdirmə rejimi</string>
     <string name="copied_to_clipboard">Buferə kopyalandı</string>
@@ -351,4 +351,6 @@
     <string name="playlists_order">Pleylist sırası</string>
     <string name="recentlyUpdated">Bu yaxınlarda yeniləndi</string>
     <string name="recentlyUpdatedReversed">Bu yaxınlarda yeniləndi (tərs çevrildi)</string>
+    <string name="show_more">Daha çox göstər</string>
+    <string name="time_code">Vaxt kodu</string>
 </resources>
