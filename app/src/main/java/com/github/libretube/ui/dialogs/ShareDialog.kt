@@ -55,7 +55,7 @@ class ShareDialog(
                 }
                 var url = "$host$path"
 
-                if (shareObjectType == ShareObjectType.VIDEO && binding!!.timeCodeSwitch.isChecked) {
+                if (shareObjectType == ShareObjectType.VIDEO && position != null && binding!!.timeCodeSwitch.isChecked) {
                     url += "&t=${binding!!.timeStamp.text}"
                 }
 
