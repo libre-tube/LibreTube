@@ -351,4 +351,6 @@
     <string name="playlistNameReversed">اسم قائمة التشغيل (معكوس)</string>
     <string name="recentlyUpdated">تم التحديث مؤخرا</string>
     <string name="recentlyUpdatedReversed">تم تحديثه مؤخرًا (معكوس)</string>
+    <string name="show_more">اظهار المزيد</string>
+    <string name="time_code">رمز التوقيت</string>
 </resources>

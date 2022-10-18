@@ -351,4 +351,6 @@
     <string name="playlistNameReversed">Nama daftar main (dibalik)</string>
     <string name="recentlyUpdated">Diperbarui baru-baru ini</string>
     <string name="recentlyUpdatedReversed">Diperbarui baru-baru ini (dibalik)</string>
+    <string name="show_more">Tampilkan lebih banyak</string>
+    <string name="time_code">Kode waktu</string>
 </resources>

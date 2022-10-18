@@ -351,4 +351,6 @@
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
     <string name="recentlyUpdated">Nedávno aktualizované</string>
     <string name="recentlyUpdatedReversed">Nedávno aktualizované (obráceně)</string>
+    <string name="time_code">Časové razítko</string>
+    <string name="show_more">Zobrazit více</string>
 </resources>
