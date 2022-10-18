@@ -351,4 +351,6 @@
     <string name="playlistNameReversed">שם רשימת הנגינה (הפוך)</string>
     <string name="recentlyUpdated">עודכנו לאחרונה</string>
     <string name="recentlyUpdatedReversed">עודכנו לאחרונה (הפוך)</string>
+    <string name="show_more">להציג עוד</string>
+    <string name="time_code">קוד זמן</string>
 </resources>
