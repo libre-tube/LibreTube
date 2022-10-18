@@ -1,7 +1,10 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -11,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
@@ -18,6 +22,9 @@ import com.github.libretube.models.PlaylistViewModel
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -78,9 +85,8 @@ class AddToPlaylistDialog : DialogFragment() {
                     binding.addToPlaylist.setOnClickListener {
                         val index = binding.playlistsSpinner.selectedItemPosition
                         viewModel.lastSelectedPlaylistId = response[index].id!!
-                        addToPlaylist(
-                            response[index].id!!
-                        )
+                        addToPlaylist(response[index].id!!)
+                        dialog?.dismiss()
                     }
                 }
             }
@@ -88,32 +94,38 @@ class AddToPlaylistDialog : DialogFragment() {
     }
 
     private fun addToPlaylist(playlistId: String) {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    RetrofitInstance.authApi.addToPlaylist(
-                        token,
-                        com.github.libretube.api.obj.PlaylistId(playlistId, videoId)
-                    )
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response")
-                    Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                    return@launchWhenCreated
-                }
-                if (response.message == "ok") {
-                    Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
-                    dialog?.dismiss()
-                } else {
-                    Toast.makeText(context, R.string.fail, Toast.LENGTH_SHORT).show()
-                }
+        val appContext = context?.applicationContext ?: return
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = try {
+                RetrofitInstance.authApi.addToPlaylist(
+                    token,
+                    PlaylistId(playlistId, videoId)
+                )
+            } catch (e: IOException) {
+                println(e)
+                Log.e(TAG(), "IOException, you might not have internet connection")
+                toastFromMainThread(appContext, R.string.unknown_error)
+                return@launch
+            } catch (e: HttpException) {
+                Log.e(TAG(), "HttpException, unexpected response")
+                toastFromMainThread(appContext, R.string.server_error)
+                return@launch
             }
+            toastFromMainThread(
+                appContext,
+                if (response.message == "ok") R.string.added_to_playlist else R.string.fail
+            )
         }
-        run()
+    }
+
+    private fun toastFromMainThread(context: Context, stringId: Int) {
+        Handler(Looper.getMainLooper()).post {
+            Toast.makeText(
+                context,
+                stringId,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     private fun Fragment?.runOnUiThread(action: () -> Unit) {

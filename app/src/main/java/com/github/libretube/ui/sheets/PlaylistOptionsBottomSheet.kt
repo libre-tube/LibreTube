@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
@@ -116,7 +117,7 @@ class PlaylistOptionsBottomSheet(
             val response = try {
                 RetrofitInstance.authApi.importPlaylist(
                     token,
-                    com.github.libretube.api.obj.PlaylistId(playlistId)
+                    PlaylistId(playlistId)
                 )
             } catch (e: IOException) {
                 println(e)
@@ -133,7 +134,7 @@ class PlaylistOptionsBottomSheet(
             try {
                 RetrofitInstance.authApi.renamePlaylist(
                     PreferenceHelper.getToken(),
-                    com.github.libretube.api.obj.PlaylistId(
+                    PlaylistId(
                         playlistId = id,
                         newName = newName
                     )
@@ -149,7 +150,7 @@ class PlaylistOptionsBottomSheet(
             try {
                 RetrofitInstance.authApi.deletePlaylist(
                     PreferenceHelper.getToken(),
-                    com.github.libretube.api.obj.PlaylistId(id)
+                    PlaylistId(id)
                 )
             } catch (e: Exception) {
                 return@launch
