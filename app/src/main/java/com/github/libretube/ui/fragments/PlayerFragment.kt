@@ -561,7 +561,7 @@ class PlayerFragment : BaseFragment() {
             PlayingQueue.clear()
 
             saveWatchPosition()
-            nowPlayingNotification.destroy()
+            nowPlayingNotification.destroySelfAndPlayer()
             activity?.requestedOrientation =
                 if ((activity as MainActivity).autoRotationEnabled) {
                     ActivityInfo.SCREEN_ORIENTATION_USER

@@ -169,7 +169,7 @@ class NowPlayingNotification(
     /**
      * Destroy the [NowPlayingNotification]
      */
-    fun destroy() {
+    fun destroySelfAndPlayer() {
         mediaSession.isActive = false
         mediaSession.release()
         mediaSessionConnector.setPlayer(null)
