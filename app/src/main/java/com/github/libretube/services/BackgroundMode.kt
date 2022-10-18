@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.Segments
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
@@ -343,7 +344,7 @@ class BackgroundMode : Service() {
 
         if (segmentData == null || segmentData!!.segments.isEmpty()) return
 
-        segmentData!!.segments.forEach { segment: com.github.libretube.api.obj.Segment ->
+        segmentData!!.segments.forEach { segment: Segment ->
             val segmentStart = (segment.segment!![0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition
@@ -368,6 +369,8 @@ class BackgroundMode : Service() {
         // clear the playing queue
         PlayingQueue.clear()
 
+        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
+
         // called when the user pressed stop in the notification
         // stop the service from being in the foreground and remove the notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -378,7 +381,7 @@ class BackgroundMode : Service() {
         }
         // destroy the service
         stopSelf()
-        if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroy()
+
         super.onDestroy()
     }
 
