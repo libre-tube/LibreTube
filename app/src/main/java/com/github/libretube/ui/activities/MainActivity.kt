@@ -399,7 +399,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun setFullscreen() {
+    fun setFullscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
@@ -451,36 +451,6 @@ class MainActivity : BaseActivity() {
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-        }
-    }
-
-    /**
-     * hide the status bar
-     */
-    fun hideSystemBars() {
-        if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE) return
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            @Suppress("DEPRECATION")
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-    }
-
-    /**
-     * show the status bar
-     */
-    private fun showSystemBars() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.show(WindowInsets.Type.statusBars())
-        } else {
-            @Suppress("DEPRECATION")
-            window.clearFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
         }
     }
 
