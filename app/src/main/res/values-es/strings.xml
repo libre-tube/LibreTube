@@ -351,4 +351,6 @@
     <string name="playlists_order">Orden de las listas de reproducción</string>
     <string name="playlistNameReversed">Nombre de la lista de reproducción (invertido)</string>
     <string name="recentlyUpdatedReversed">Actualizado recientemente (invertido)</string>
+    <string name="show_more">Mostrar más</string>
+    <string name="time_code">código de tiempo</string>
 </resources>
