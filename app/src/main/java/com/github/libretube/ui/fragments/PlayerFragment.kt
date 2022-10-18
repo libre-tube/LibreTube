@@ -896,12 +896,12 @@ class PlayerFragment : BaseFragment() {
              * Catch player errors to prevent the app from stopping
              */
             override fun onPlayerError(error: PlaybackException) {
-                Toast.makeText(
-                    context,
-                    error.localizedMessage,
-                    Toast.LENGTH_LONG
-                ).show()
                 super.onPlayerError(error)
+                try {
+                    exoPlayer.play()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         })
 
