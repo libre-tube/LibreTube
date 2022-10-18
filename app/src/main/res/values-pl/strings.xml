@@ -6,7 +6,7 @@
     <string name="download">Pobierz</string>
     <string name="choose_quality_dialog">Jakość</string>
     <string name="search_hint">Szukaj</string>
-    <string name="subscribe">Subskrybuj</string>
+    <string name="subscribe">SUBSKRYBUJ</string>
     <string name="unsubscribe">ODSUBSKRYBUJ</string>
     <string name="share">Udostępnij</string>
     <string name="save">Zapisz</string>
@@ -174,14 +174,14 @@
     <string name="buffering_goal">Wstępne ładowanie</string>
     <string name="buffering_goal_summary">Maks. liczba sekund filmu do zbuforowania.</string>
     <string name="playerVideoFormat">Format wideo odtwarzacza</string>
-    <string name="open">Otwórz…</string>
+    <string name="open">Otwórz w…</string>
     <string name="reset">Przywróć domyślne</string>
     <string name="reset_message">Zresetować wszystkie ustawienia i wylogować się\?</string>
     <string name="deleteAccount">Usuń konto</string>
     <string name="deleteAccount_summary">Usuń konto Piped</string>
     <string name="account">Konto</string>
     <string name="restore">Przywróć kopię zapasową</string>
-    <string name="require_restart_message">Zrestartować aplikację\?</string>
+    <string name="require_restart_message">Ta zmiana wymaga restartu aplikacji. Naciśnij „OK”, aby teraz ponownie uruchomić.</string>
     <string name="notifications">Powiadomienia</string>
     <string name="notify_new_streams">Powiadomienia o nowych filmach</string>
     <string name="notify_new_streams_summary">Powiadomienia o świeżych treściach od twórców, których śledzisz.</string>
@@ -221,7 +221,7 @@
     <string name="flameIcon">Latający płomień</string>
     <string name="no_audio">Brak dźwięku</string>
     <string name="no_video">Bez obrazu</string>
-    <string name="audio">Dźwięk</string>
+    <string name="audio">W tle</string>
     <string name="video">Obraz</string>
     <string name="player_autoplay">Autoodtwarzanie</string>
     <string name="instance_frontend_url">Link do front-endu instancji</string>
@@ -296,7 +296,7 @@
     <string name="seek_increment">Wielkość skoku przy przewijaniu</string>
     <string name="player_summary">Domyślne ustawienia i zachowanie</string>
     <string name="audio_video_summary">Jakość i format</string>
-    <string name="delete">Usuń</string>
+    <string name="delete">Usuń z pobranych</string>
     <string name="playerAudioFormat">Format dźwięku dla odtwarzacza</string>
     <string name="playerAudioQuality">Jakość dźwięku</string>
     <string name="best_quality">Najlepsza</string>
@@ -339,4 +339,18 @@
     <string name="navigation_bar">Pasek nawigacyjny</string>
     <string name="select_at_least_one">Proszę wybrać co najmniej jedną pozycję</string>
     <string name="change_region">Filmy na czasie wydają się być niedostępne dla bieżącego regionu. Proszę wybrać inny w ustawieniach.</string>
+    <string name="show_more">Pokaż więcej</string>
+    <string name="time_code">Kod czasowy</string>
+    <string name="playback_pitch">Skok</string>
+    <string name="views_placeholder">wyświetleń</string>
+    <string name="progressive_load_interval">Wstępne wczytywanie wideo</string>
+    <string name="default_load_interval">Domyślny</string>
+    <string name="filename">Nazwa pliku</string>
+    <string name="invalid_filename">Nieprawidłowa nazwa pliku!</string>
+    <string name="playlists_order">Kolejność list odtwarzania</string>
+    <string name="recentlyUpdated">Ostatnio zaktualizowane</string>
+    <string name="recentlyUpdatedReversed">Ostatnio zaktualizowane (odwrotnie)</string>
+    <string name="playlistNameReversed">Nazwa listy odtwarzania (odwrotnie)</string>
+    <string name="limit_hls">Ogranicz HLS do 1080p</string>
+    <string name="progressive_load_interval_summary">Niższa wartość może przyspieszyć początkowe ładowanie wideo.</string>
 </resources>
