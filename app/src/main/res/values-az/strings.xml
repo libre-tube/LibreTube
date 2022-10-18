@@ -353,4 +353,5 @@
     <string name="recentlyUpdatedReversed">Bu yaxınlarda yeniləndi (tərs çevrildi)</string>
     <string name="show_more">Daha çox göstər</string>
     <string name="time_code">Vaxt kodu</string>
+    <string name="added_to_playlist">Pleylistə əlavə edildi</string>
 </resources>
