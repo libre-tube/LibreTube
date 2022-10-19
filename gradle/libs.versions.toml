@@ -18,7 +18,7 @@ desugaring = "1.2.2"
 cronetEmbedded = "106.5249.126"
 cronetOkHttp = "0.1.0"
 coil = "2.2.2"
-leakcanary = "2.8.1"
+leakcanary = "2.9.1"
 room = "2.4.3"
 
 [libraries]
