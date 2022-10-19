@@ -353,4 +353,5 @@
     <string name="recentlyUpdatedReversed">Actualizado recientemente (invertido)</string>
     <string name="show_more">Mostrar más</string>
     <string name="time_code">código de tiempo</string>
+    <string name="added_to_playlist">Se ha añadido a la lista de reproducción</string>
 </resources>
