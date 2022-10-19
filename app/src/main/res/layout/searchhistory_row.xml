@@ -31,7 +31,7 @@
         android:id="@+id/delete_history"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="5dp"
         android:src="@drawable/ic_close"
         app:layout_constraintEnd_toEndOf="parent"

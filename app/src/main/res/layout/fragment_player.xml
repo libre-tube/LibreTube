@@ -244,7 +244,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="15dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/rounded_ripple"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
