@@ -42,7 +42,6 @@ class ChannelFragment : BaseFragment() {
             channelName = it.getString(IntentData.channelName)
                 ?.replace("/c/", "")
                 ?.replace("/user/", "")
-            Log.e(TAG(), channelName.toString())
         }
     }
 
