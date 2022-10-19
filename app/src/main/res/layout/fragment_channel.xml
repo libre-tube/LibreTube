@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -53,7 +54,7 @@
                             android:id="@+id/channel_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left"
+                            android:layout_gravity="start"
                             android:drawablePadding="3dip"
                             android:ellipsize="end"
                             android:maxLines="1"
@@ -106,11 +107,14 @@
             <TextView
                 android:id="@+id/channel_description"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_ripple"
+                android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
-                android:autoLink="web" />
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:maxLines="2" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
