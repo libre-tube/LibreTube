@@ -74,13 +74,15 @@ class RouterActivity : BaseActivity() {
                 val videoId = uri.getQueryParameter("v")
 
                 intent.putExtra(IntentData.videoId, videoId)
-                uri.getQueryParameter("t")?.let { intent.putExtra(IntentData.timeStamp, it.toLong()) }
+                uri.getQueryParameter("t")
+                    ?.let { intent.putExtra(IntentData.timeStamp, it.toLong()) }
             }
             else -> {
                 val videoId = uri.path!!.replace("/", "")
 
                 intent.putExtra(IntentData.videoId, videoId)
-                uri.getQueryParameter("t")?.let { intent.putExtra(IntentData.timeStamp, it.toLong()) }
+                uri.getQueryParameter("t")
+                    ?.let { intent.putExtra(IntentData.timeStamp, it.toLong()) }
             }
         }
         return intent

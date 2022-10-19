@@ -83,6 +83,7 @@ object ImageHelper {
             )
         )
     }
+
     private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {
         context.contentResolver.openFileDescriptor(imagePath, "w")?.use {
             FileOutputStream(it.fileDescriptor).use { fos ->

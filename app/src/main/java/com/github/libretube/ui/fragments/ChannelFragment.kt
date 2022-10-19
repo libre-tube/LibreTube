@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -29,7 +30,7 @@ class ChannelFragment : BaseFragment() {
     private var channelId: String? = null
     private var channelName: String? = null
 
-    var nextPage: String? = null
+    private var nextPage: String? = null
     private var channelAdapter: ChannelAdapter? = null
     private var isLoading = true
     private var isSubscribed: Boolean? = false
@@ -41,7 +42,6 @@ class ChannelFragment : BaseFragment() {
             channelName = it.getString(IntentData.channelName)
                 ?.replace("/c/", "")
                 ?.replace("/user/", "")
-            Log.e(TAG(), channelName.toString())
         }
     }
 
@@ -57,7 +57,6 @@ class ChannelFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.channelName.text = channelId
         binding.channelRecView.layoutManager = LinearLayoutManager(context)
 
         val refreshChannel = {
@@ -94,7 +93,6 @@ class ChannelFragment : BaseFragment() {
                 }
             } catch (e: IOException) {
                 binding.channelRefresh.isRefreshing = false
-                println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launchWhenCreated
             } catch (e: HttpException) {
@@ -155,6 +153,12 @@ class ChannelFragment : BaseFragment() {
                     binding.channelDescription.visibility = View.GONE
                 } else {
                     binding.channelDescription.text = response.description?.trim()
+                }
+
+                binding.channelDescription.setOnClickListener {
+                    (it as TextView).apply {
+                        it.maxLines = if (it.maxLines == Int.MAX_VALUE) 2 else Int.MAX_VALUE
+                    }
                 }
 
                 ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
