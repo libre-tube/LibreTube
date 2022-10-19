@@ -411,7 +411,8 @@ class PlayerFragment : BaseFragment() {
 
         // FullScreen button trigger
         // hide fullscreen button if auto rotation enabled
-        playerBinding.fullscreen.visibility = if (PlayerHelper.autoRotationEnabled) View.GONE else View.VISIBLE
+        playerBinding.fullscreen.visibility =
+            if (PlayerHelper.autoRotationEnabled) View.GONE else View.VISIBLE
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
@@ -426,7 +427,8 @@ class PlayerFragment : BaseFragment() {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            val shareDialog = ShareDialog(videoId!!, ShareObjectType.VIDEO, exoPlayer.currentPosition / 1000)
+            val shareDialog =
+                ShareDialog(videoId!!, ShareObjectType.VIDEO, exoPlayer.currentPosition / 1000)
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
@@ -670,7 +672,12 @@ class PlayerFragment : BaseFragment() {
                 if (binding.player.autoplayEnabled) setNextStream()
 
                 // add the video to the watch history
-                if (PlayerHelper.watchHistoryEnabled) DatabaseHelper.addToWatchHistory(videoId!!, streams)
+                if (PlayerHelper.watchHistoryEnabled) {
+                    DatabaseHelper.addToWatchHistory(
+                        videoId!!,
+                        streams
+                    )
+                }
             }
         }
     }
@@ -818,7 +825,10 @@ class PlayerFragment : BaseFragment() {
             playerTitle.text = response.title
             playerDescription.text = response.description
 
-            playerChannelSubCount.text = context?.getString(R.string.subscribers, response.uploaderSubscriberCount?.formatShort())
+            playerChannelSubCount.text = context?.getString(
+                R.string.subscribers,
+                response.uploaderSubscriberCount?.formatShort()
+            )
         }
 
         // duration that's not greater than 0 indicates that the video is live
@@ -1000,7 +1010,8 @@ class PlayerFragment : BaseFragment() {
         } else {
             View.INVISIBLE
         }
-        playerBinding.skipNext.visibility = if (PlayerHelper.skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
+        playerBinding.skipNext.visibility =
+            if (PlayerHelper.skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
             videoId = PlayingQueue.getPrev()

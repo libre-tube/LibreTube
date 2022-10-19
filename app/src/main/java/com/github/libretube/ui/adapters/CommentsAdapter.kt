@@ -70,7 +70,10 @@ class CommentsAdapter(
             if (comment.pinned == true) pinnedImageView.visibility = View.VISIBLE
             if (comment.hearted == true) heartedImageView.visibility = View.VISIBLE
             if (comment.repliesPage != null) repliesAvailable.visibility = View.VISIBLE
-            if ((comment.replyCount ?: -1L) > 0L) repliesCount.text = comment.replyCount?.formatShort()
+            if ((comment.replyCount ?: -1L) > 0L) {
+                repliesCount.text =
+                    comment.replyCount?.formatShort()
+            }
 
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)

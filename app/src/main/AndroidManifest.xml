@@ -40,9 +40,9 @@
 
         <activity
             android:name=".ui.activities.OfflinePlayerActivity"
-            android:supportsPictureInPicture="true"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
-            android:label="@string/player" />
+            android:label="@string/player"
+            android:supportsPictureInPicture="true" />
 
         <activity
             android:name=".ui.activities.MainActivity"

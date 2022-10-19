@@ -27,8 +27,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -107,12 +107,12 @@
             <TextView
                 android:id="@+id/channel_description"
                 android:layout_width="wrap_content"
-                android:background="@drawable/rounded_ripple"
                 android:layout_height="18dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
                 android:autoLink="web"
+                android:background="@drawable/rounded_ripple"
                 android:ellipsize="end"
                 android:maxLines="2" />
 

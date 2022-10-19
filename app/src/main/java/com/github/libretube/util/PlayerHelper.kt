@@ -243,10 +243,11 @@ object PlayerHelper {
             false
         )
 
-    val pipEnabled: Boolean get() = PreferenceHelper.getBoolean(
-        PreferenceKeys.PICTURE_IN_PICTURE,
-        true
-    )
+    val pipEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PICTURE_IN_PICTURE,
+            true
+        )
 
     val skipSegmentsManually: Boolean
         get() = PreferenceHelper.getBoolean(

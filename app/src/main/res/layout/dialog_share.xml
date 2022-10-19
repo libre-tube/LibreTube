@@ -28,14 +28,14 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:visibility="gone"
         android:id="@+id/timeStampLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="25dp"
-        android:hint="@string/time_code">
+        android:hint="@string/time_code"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/timeStamp"

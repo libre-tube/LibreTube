@@ -10,10 +10,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/subscription_channel_image"
-        android:layout_marginStart="8dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/subscription_channel_name"
@@ -34,10 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
         android:stateListAnimator="@null"
         android:text="@string/unsubscribe"
         android:textColor="?android:attr/textColorPrimary"
-        android:layout_marginEnd="8dp"
         android:textSize="12sp"
-        app:cornerRadius="20dp"/>
+        app:cornerRadius="20dp" />
 </RelativeLayout>

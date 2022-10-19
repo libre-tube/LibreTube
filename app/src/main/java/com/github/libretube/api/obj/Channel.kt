@@ -12,5 +12,5 @@ data class Channel(
     var nextpage: String? = null,
     var subscriberCount: Long = 0,
     var verified: Boolean = false,
-    var relatedStreams: List<com.github.libretube.api.obj.StreamItem>? = null
+    var relatedStreams: List<StreamItem>? = null
 )
