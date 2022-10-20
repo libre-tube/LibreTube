@@ -323,4 +323,8 @@
     <string name="open_copied">খুলুন</string>
     <string name="audio_video_summary">মান এবং ফর্ম্যাট</string>
     <string name="renamePlaylist">প্লেলিস্ট পুনঃনামকরণ</string>
+    <string name="sb_skip_manual_summary">সরাসরি সেগমেন্ট স্কিপ না করে প্রমট দেখান।</string>
+    <string name="network_metered">Metered</string>
+    <string name="new_videos_badge_summary">নতুন ভিডিওর সংখ্যাসহ ব্যাজ দেখান।</string>
+    <string name="preferences">পছন্দসমূহ</string>
 </resources>
