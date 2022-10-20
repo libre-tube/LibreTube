@@ -140,7 +140,7 @@
     <string name="fireIcon">Divatos tűz</string>
     <string name="torchIcon">Trendi fáklya</string>
     <string name="network_metered">Forgalmi díjas</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Verzió: %1$s</string>
     <string name="about_summary">Ismerje meg a LibreTube csapatát és azt, hogy hogyan történik mindez.</string>
     <string name="error_occurred">Hiba</string>
     <string name="copied">Másolva</string>
@@ -225,7 +225,7 @@
     <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez.</string>
     <string name="seek_increment">Léptetés időköze</string>
-    <string name="require_restart_message">Újraindítja az alkalmazást\?</string>
+    <string name="require_restart_message">Ehhez a módosításhoz az alkalmazás újraindítása szükséges. Nyomja meg az \'Ok\' gombot az újraindításhoz.</string>
     <string name="pure_theme_summary">Tiszta fehér/fekete téma</string>
     <string name="data_saver_mode">Adattakarékos üzemmód</string>
     <string name="seekbar_preview">Videó előnézet</string>
@@ -319,7 +319,7 @@
     <string name="mobile_data">Mobiladat</string>
     <string name="new_videos_badge">Indikátor az új videókhoz</string>
     <string name="new_videos_badge_summary">Jelvény megjelenítése az új videók számával, ha több van.</string>
-    <string name="delete">Törlés</string>
+    <string name="delete">Törlés a letöltésekből</string>
     <string name="renamePlaylist">Lejátszási lista átnevezése</string>
     <string name="local_subscriptions">Helyi feliratkozások</string>
     <string name="preferences">Beállítások</string>
@@ -333,4 +333,25 @@
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="select_at_least_one">Válasszon ki legalább egy elemet</string>
     <string name="views_placeholder">megtekintés</string>
+    <string name="progressive_load_interval_summary">Egy alacsonyabb érték lehet, hogy felgyorsítja a kezdeti videóbetöltést.</string>
+    <string name="save_feed_summary">A feliratkozott videók folyamának betöltése a háttérben, és annak megakadályozása, hogy automatikusan frissüljön.</string>
+    <string name="background_channel_description">Megjelenít egy értesítést a hanglejátszó vezérlésére szolgáló gombokkal.</string>
+    <string name="skip_segment">Szegmens kihagyása</string>
+    <string name="sb_skip_manual">Manuális kihagyás</string>
+    <string name="sb_skip_manual_summary">Ne hagyja ki a szegmenseket automatikusan, mindig kérdezzen előtte.</string>
+    <string name="default_load_interval">Alapértelmezett</string>
+    <string name="playback_pitch">Hangmagasság</string>
+    <string name="progressive_load_interval">Progresszív betöltési intervallum mérete</string>
+    <string name="save_feed">Videófolyam betöltése a háttérben</string>
+    <string name="change_region">A felkapott úgy tűnik, hogy nem elérhető a jelenlegi régió számára. Válasszon egy másikat a beállításokban.</string>
+    <string name="added_to_playlist">Hozzáadva a lejátszási listához</string>
+    <string name="limit_hls">HLS korlátozása 1080p-re</string>
+    <string name="invalid_filename">Érvénytelen fájlnév!</string>
+    <string name="filename">Fájlnév</string>
+    <string name="playlistNameReversed">Lejátszási lista neve (fordítva)</string>
+    <string name="playlists_order">Lejátszási lista sorrend</string>
+    <string name="recentlyUpdated">Mostanában frissített</string>
+    <string name="recentlyUpdatedReversed">Mostanában frissített (fordítva)</string>
+    <string name="show_more">Több megjelenítése</string>
+    <string name="time_code">Időpont</string>
 </resources>
