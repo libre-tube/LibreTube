@@ -353,4 +353,5 @@
     <string name="playlistNameReversed">播放列表名称（倒序）</string>
     <string name="show_more">显示更多</string>
     <string name="time_code">时间码</string>
+    <string name="added_to_playlist">已添加到播放列表</string>
 </resources>

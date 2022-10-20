@@ -152,13 +152,13 @@
     <string name="least_recent">Paling lama</string>
     <string name="most_recent">Paling baru</string>
     <string name="most_views">Paling banyak tampilan</string>
-    <string name="least_views">Paling sedikit tampilan</string>
+    <string name="least_views">Paling sedikit tontonan</string>
     <string name="channel_name_az">Nama Saluran (A-Z)</string>
     <string name="channel_name_za">Nama Saluran (Z-A)</string>
     <string name="authors">Pembuat</string>
     <string name="internal_storage">Penyimpanan internal</string>
     <string name="sdcard">Kartu SD</string>
-    <string name="views">%1$s tampilan</string>
+    <string name="views">%1$s tontonan</string>
     <string name="defaultIcon">Bawaan</string>
     <string name="torchIcon">Obor kece</string>
     <string name="shapedIcon">Berbentuk aneh</string>
@@ -353,4 +353,5 @@
     <string name="recentlyUpdatedReversed">Diperbarui baru-baru ini (dibalik)</string>
     <string name="show_more">Tampilkan lebih banyak</string>
     <string name="time_code">Kode waktu</string>
+    <string name="added_to_playlist">Ditambahkan ke daftar putar</string>
 </resources>

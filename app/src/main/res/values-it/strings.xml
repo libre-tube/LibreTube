@@ -350,4 +350,6 @@
     <string name="playlistNameReversed">Nome della playlist (invertito)</string>
     <string name="recentlyUpdated">Aggiornato di recente</string>
     <string name="recentlyUpdatedReversed">Aggiornato di recente (invertito)</string>
+    <string name="added_to_playlist">Aggiunto alla playlist</string>
+    <string name="show_more">Mostra di più</string>
 </resources>

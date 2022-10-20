@@ -353,4 +353,5 @@
     <string name="recentlyUpdatedReversed">تم تحديثه مؤخرًا (معكوس)</string>
     <string name="show_more">اظهار المزيد</string>
     <string name="time_code">رمز التوقيت</string>
+    <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
 </resources>
