@@ -348,4 +348,10 @@
     <string name="filename">Имя файла</string>
     <string name="invalid_filename">Неверное имя файла!</string>
     <string name="playlists_order">Порядок плейлистов</string>
+    <string name="added_to_playlist">Добавлено в плейлист</string>
+    <string name="playlistNameReversed">Название плейлиста (перевернутое)</string>
+    <string name="recentlyUpdated">Недавно обновленный</string>
+    <string name="recentlyUpdatedReversed">Недавно обновлено (перевернутое)</string>
+    <string name="show_more">Показать больше</string>
+    <string name="time_code">Временной код</string>
 </resources>
