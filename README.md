@@ -85,7 +85,7 @@ If creating a pull request, please make sure to format your code (preferred ktli
 <img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
 </a>
 
-## 🌗 Differences from NewPipe
+## 🌗 Differences to NewPipe
 
 With NewPipe, the extraction is done locally on your phone, and all the requests sent towards YouTube/Google are done directly from the network you're connected to, which doesn't use a middleman server in between. Therefore, Google can still access information such as the user's IP address. Aside from that, subscriptions can only be stored locally.
 
