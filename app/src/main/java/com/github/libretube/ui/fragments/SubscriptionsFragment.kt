@@ -62,7 +62,10 @@ class SubscriptionsFragment : BaseFragment() {
 
         // listen for error responses
         viewModel.errorResponse.observe(viewLifecycleOwner) {
-            if (it) Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+            if (it) {
+                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+                viewModel.errorResponse.value = false
+            }
         }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {
