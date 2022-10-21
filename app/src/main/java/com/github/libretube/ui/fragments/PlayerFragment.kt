@@ -1153,7 +1153,22 @@ class PlayerFragment : BaseFragment() {
             videosUrlArray += streams.hls!!.toUri()
         }
 
-        for (vid in streams.videoStreams!!) {
+        val videoStreams = try {
+            // attempt to sort the qualities, catch if there was an error ih parsing
+            streams.videoStreams?.sortedBy {
+                it.quality
+                    .toString()
+                    .split("p")
+                    .first()
+                    .replace("p", "")
+                    .toLong()
+            }?.reversed()
+                .orEmpty()
+        } catch (_: Exception) {
+            streams.videoStreams.orEmpty()
+        }
+
+        for (vid in videoStreams) {
             // append quality to list if it has the preferred format (e.g. MPEG)
             val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
             if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
