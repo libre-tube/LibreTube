@@ -353,4 +353,5 @@
     <string name="recentlyUpdatedReversed">Nedávno aktualizované (obráceně)</string>
     <string name="time_code">Časové razítko</string>
     <string name="show_more">Zobrazit více</string>
+    <string name="added_to_playlist">Přidáno do playlistu</string>
 </resources>
