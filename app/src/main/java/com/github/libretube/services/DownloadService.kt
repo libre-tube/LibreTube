@@ -1,6 +1,7 @@
 package com.github.libretube.services
 
 import android.app.DownloadManager
+import android.app.DownloadManager.Request.VISIBILITY_HIDDEN
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -77,16 +78,18 @@ class DownloadService : Service() {
                     videoName,
                     getString(R.string.downloading),
                     videoUrl,
+                    false,
                     Uri.fromFile(
                         File(videoDownloadDir, videoName)
                     )
                 )
             }
-            else if (downloadType in listOf(DownloadType.AUDIO, DownloadType.AUDIO_VIDEO)) {
+            if (downloadType in listOf(DownloadType.AUDIO, DownloadType.AUDIO_VIDEO)) {
                 audioDownloadId = downloadManagerRequest(
                     videoName,
                     getString(R.string.downloading),
                     audioUrl,
+                    true,
                     Uri.fromFile(
                         File(audioDownloadDir, videoName)
                     )
@@ -123,6 +126,7 @@ class DownloadService : Service() {
         title: String,
         descriptionText: String,
         url: String,
+        isAudio: Boolean,
         destination: Uri
     ): Long {
         val request: DownloadManager.Request =
@@ -132,6 +136,9 @@ class DownloadService : Service() {
                 .setDestinationUri(destination)
                 .setAllowedOverMetered(true) // Set if download is allowed on Mobile network
                 .setAllowedOverRoaming(true)
+        if (isAudio) {
+            request.setNotificationVisibility(VISIBILITY_HIDDEN)
+        }
 
         val downloadManager: DownloadManager =
             applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
