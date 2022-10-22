@@ -5,12 +5,15 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
+import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
@@ -131,6 +134,19 @@ class NowPlayingNotification(
         mediaSession.isActive = true
 
         mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
+            override fun getMediaDescription(
+                player: Player,
+                windowIndex: Int
+            ): MediaDescriptionCompat {
+                return MediaDescriptionCompat.Builder().apply {
+                    setTitle(streams?.title!!)
+                    setSubtitle(streams?.uploader)
+                    setIconBitmap(BitmapFactory.decodeResource(
+                        Resources.getSystem(), R.drawable.ic_launcher_monochrome))
+                }.build()
+            }
+        })
         mediaSessionConnector.setPlayer(player)
     }
 
@@ -171,19 +187,6 @@ class NowPlayingNotification(
             setUseFastForwardActionInCompactView(true)
             setUseRewindActionInCompactView(true)
         }
-        mediaSessionConnector = MediaSessionConnector(mediaSession)
-        mediaSessionConnector.setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
-            override fun getMediaDescription(
-                player: Player,
-                windowIndex: Int
-            ): MediaDescriptionCompat {
-                return MediaDescriptionCompat.Builder().apply {
-                    setTitle(streams?.title!!)
-                    setSubtitle(streams?.uploader)
-                }.build()
-            }
-        })
-        mediaSessionConnector.setPlayer(player)
     }
 
     /**
