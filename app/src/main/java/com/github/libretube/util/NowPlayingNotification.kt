@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
 import com.github.libretube.api.obj.Streams
@@ -18,6 +19,7 @@ import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
+import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
 class NowPlayingNotification(
@@ -169,6 +171,19 @@ class NowPlayingNotification(
             setUseFastForwardActionInCompactView(true)
             setUseRewindActionInCompactView(true)
         }
+        mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
+            override fun getMediaDescription(
+                player: Player,
+                windowIndex: Int
+            ): MediaDescriptionCompat {
+                return MediaDescriptionCompat.Builder().apply {
+                    setTitle(streams?.title!!)
+                    setSubtitle(streams?.uploader)
+                }.build()
+            }
+        })
+        mediaSessionConnector.setPlayer(player)
     }
 
     /**
