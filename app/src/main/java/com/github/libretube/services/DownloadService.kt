@@ -26,7 +26,7 @@ class DownloadService : Service() {
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
     private var downloadType: Int = 3
-    
+
     private var videoDownloadId: Long? = null
     private var audioDownloadId: Long? = null
 
