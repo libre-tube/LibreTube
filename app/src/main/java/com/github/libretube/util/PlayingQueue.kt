@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.util.Log
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
@@ -32,6 +33,7 @@ object PlayingQueue {
 
     fun getNext(): String? {
         return try {
+            Log.e("new video", queue[currentIndex() + 1].toString())
             queue[currentIndex() + 1].url?.toID()
         } catch (e: Exception) {
             null
@@ -60,7 +62,15 @@ object PlayingQueue {
 
     fun size() = queue.size
 
-    fun currentIndex() = queue.indexOf(currentStream)
+    fun currentIndex(): Int {
+        return try {
+            queue.indexOf(
+                queue.first { it.url?.toID() == currentStream?.url?.toID() }
+            )
+        } catch (e: Exception) {
+            0
+        }
+    }
 
     fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
 
