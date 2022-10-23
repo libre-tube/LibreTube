@@ -59,11 +59,13 @@ object PlayingQueue {
 
     fun size() = queue.size
 
-    private fun currentIndex() = queue.indexOf(currentStream)
+    fun currentIndex() = queue.indexOf(currentStream)
 
     fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
 
     fun getStreams() = queue
+
+    fun remove(index: Int) = queue.removeAt(index)
 
     private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?) {
         var playlistNextPage: String? = nextPage
