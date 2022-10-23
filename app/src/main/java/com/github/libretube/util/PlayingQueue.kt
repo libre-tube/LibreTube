@@ -1,6 +1,5 @@
 package com.github.libretube.util
 
-import android.util.Log
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
