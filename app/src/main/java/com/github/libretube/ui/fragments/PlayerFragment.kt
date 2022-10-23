@@ -757,15 +757,19 @@ class PlayerFragment : BaseFragment() {
 
     // used for autoplay and skipping to next video
     private fun playNextVideo() {
-        val nextVideo = PlayingQueue.getNext()
+        val nextVideoId = PlayingQueue.getNext()
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
-        // forces the comments to reload for the new video
-        commentsLoaded = false
-        binding.commentsRecView.adapter = null
+
         // save the id of the next stream as videoId and load the next video
-        videoId = nextVideo
-        playVideo()
+        if (nextVideoId != null) {
+            videoId = nextVideoId
+
+            // forces the comments to reload for the new video
+            commentsLoaded = false
+            binding.commentsRecView.adapter = null
+            playVideo()
+        }
     }
 
     private fun prepareExoPlayerView() {
