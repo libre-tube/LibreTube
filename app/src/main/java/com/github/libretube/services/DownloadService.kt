@@ -26,6 +26,7 @@ class DownloadService : Service() {
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
     private var downloadType: Int = 3
+    
     private var videoDownloadId: Long? = null
     private var audioDownloadId: Long? = null
 
@@ -73,7 +74,7 @@ class DownloadService : Service() {
             )
             if (downloadType in listOf(DownloadType.VIDEO, DownloadType.AUDIO_VIDEO)) {
                 videoDownloadId = downloadManagerRequest(
-                    "[Video] $videoName",
+                    "[${getString(R.string.video)}] $videoName",
                     getString(R.string.downloading),
                     videoUrl,
                     Uri.fromFile(
@@ -83,7 +84,7 @@ class DownloadService : Service() {
             }
             if (downloadType in listOf(DownloadType.AUDIO, DownloadType.AUDIO_VIDEO)) {
                 audioDownloadId = downloadManagerRequest(
-                    "[Audio] $videoName",
+                    "[${getString(R.string.audio)}] $videoName",
                     getString(R.string.downloading),
                     audioUrl,
                     Uri.fromFile(
