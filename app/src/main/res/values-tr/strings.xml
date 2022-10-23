@@ -49,7 +49,7 @@
     <string name="vlcerror">VLC\'de açılamadı, kurulmamış olabilir.</string>
     <string name="instances">Seç…</string>
     <string name="customInstance">Özel</string>
-    <string name="server_error">Sunucuyla ilgili bir sorun var. Başka bir örnek deneyelim mi\?</string>
+    <string name="server_error">Sunucuyla ilgili bir sorun var. Başka bir örnek denensin mi\?</string>
     <string name="grid">Ağ sütunları</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
@@ -148,7 +148,7 @@
     <string name="sdcard">Hafıza kartı</string>
     <string name="music_directory">Müzik klasörü</string>
     <string name="defaultIcon">Varsayılan</string>
-    <string name="gradientIcon">Pergar eğilimi</string>
+    <string name="gradientIcon">Akıcı değişim</string>
     <string name="fireIcon">Moda ateş</string>
     <string name="torchIcon">Şık fener</string>
     <string name="birdIcon">Hızlandırılmış kuş</string>
@@ -233,9 +233,9 @@
     <string name="reset_watch_positions">Sıfırla</string>
     <string name="data_saver_mode_summary">Küçük resimleri ve diğer resimleri gösterme.</string>
     <string name="update_now">Yeni LibreTube sürümü şimdi yüklensin mi\?</string>
-    <string name="navLabelVisibility">Navigasyon çubuğundaki etiket görünürlüğü</string>
+    <string name="navLabelVisibility">Gezinme çubuğundaki etiket görünürlüğü</string>
     <string name="always">Her zaman</string>
-    <string name="selected">Seçildi</string>
+    <string name="selected">Seçilen</string>
     <string name="never">Hiçbir zaman</string>
     <string name="autoRotatePlayer">Otomatik tam ekran</string>
     <string name="autoRotatePlayer_summary">Cihaz döndüğünde tam ekran oynatma.</string>
@@ -354,4 +354,6 @@
     <string name="time_code">Zaman kodu</string>
     <string name="show_more">Daha fazla göster</string>
     <string name="added_to_playlist">Oynatma listesine eklendi</string>
+    <string name="queue">Sıra</string>
+    <string name="playing_queue">Oynatma sırası</string>
 </resources>

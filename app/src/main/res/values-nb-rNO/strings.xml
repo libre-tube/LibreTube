@@ -351,4 +351,9 @@
     <string name="change_region">På vei opp ser ut til å være utilgjengelig for nåværende region. Velg en annen i innstillingene.</string>
     <string name="invalid_filename">Ugyldig filnavn</string>
     <string name="playlists_order">Spillelisterekkefølge</string>
+    <string name="playing_queue">Spillekø</string>
+    <string name="queue">Kø</string>
+    <string name="added_to_playlist">Lagt til på spillelisten</string>
+    <string name="show_more">Vis mer</string>
+    <string name="time_code">Tidskode</string>
 </resources>
