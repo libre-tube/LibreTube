@@ -311,10 +311,7 @@ class MainActivity : BaseActivity() {
                 true
             }
             R.id.action_queue -> {
-                Log.e("open queue", "open queue")
-                supportFragmentManager.let {
-                    PlayingQueueSheet().show(it, null)
-                }
+                PlayingQueueSheet().show(supportFragmentManager, null)
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -404,7 +404,8 @@ class PlayerFragment : BaseFragment() {
             toggleComments()
         }
 
-        binding.queueToggle.setOnClickListener {
+        playerBinding.queueToggle.visibility = View.VISIBLE
+       playerBinding.queueToggle.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager, null)
         }
 
