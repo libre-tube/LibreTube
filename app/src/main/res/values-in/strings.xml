@@ -354,4 +354,6 @@
     <string name="show_more">Tampilkan lebih banyak</string>
     <string name="time_code">Kode waktu</string>
     <string name="added_to_playlist">Ditambahkan ke daftar putar</string>
+    <string name="playing_queue">Antrean main</string>
+    <string name="queue">Antrean</string>
 </resources>
