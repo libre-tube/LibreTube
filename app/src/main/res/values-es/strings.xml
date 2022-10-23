@@ -354,4 +354,6 @@
     <string name="show_more">Mostrar más</string>
     <string name="time_code">código de tiempo</string>
     <string name="added_to_playlist">Se ha añadido a la lista de reproducción</string>
+    <string name="queue">Cola</string>
+    <string name="playing_queue">Cola de la reproducción</string>
 </resources>
