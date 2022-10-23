@@ -34,9 +34,10 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textSize="16sp"
+            android:textStyle="bold"
             tools:text="I am Hardstyle - Episode 111" />
 
         <TextView
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             tools:text="Brennan Heart" />
 
     </LinearLayout>
