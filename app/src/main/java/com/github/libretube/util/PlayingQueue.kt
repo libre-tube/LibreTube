@@ -1,58 +1,63 @@
 package com.github.libretube.util
 
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.extensions.toID
 
 object PlayingQueue {
-    private val queue = mutableListOf<String>()
-    private var currentVideoId: String? = null
-    var streams: List<StreamItem> = listOf()
+    private val queue = mutableListOf<StreamItem>()
+    private var currentStream: StreamItem? = null
 
-    fun add(videoId: String) {
-        if (currentVideoId == videoId) return
-        if (queue.contains(videoId)) queue.remove(videoId)
-        queue.add(videoId)
+    fun add(vararg streamItem: StreamItem) {
+        streamItem.forEach {
+            if (currentStream != it) {
+                if (queue.contains(it)) queue.remove(it)
+                queue.add(it)
+            }
+        }
     }
 
-    fun addAsNext(videoId: String) {
-        if (currentVideoId == videoId) return
-        if (queue.contains(videoId)) queue.remove(videoId)
+    fun addAsNext(streamItem: StreamItem) {
+        if (currentStream == streamItem) return
+        if (queue.contains(streamItem)) queue.remove(streamItem)
         queue.add(
-            queue.indexOf(currentVideoId) + 1,
-            videoId
+            currentIndex() + 1,
+            streamItem
         )
     }
 
     fun getNext(): String? {
         return try {
-            queue[currentIndex() + 1]
+            queue[currentIndex() + 1].url?.toID()
         } catch (e: Exception) {
             null
         }
     }
 
     fun getPrev(): String? {
-        val index = queue.indexOf(currentVideoId)
-        return if (index > 0) queue[index - 1] else null
+        val index = queue.indexOf(currentStream)
+        return if (index > 0) queue[index - 1].url?.toID() else null
     }
 
     fun hasPrev(): Boolean {
-        return queue.indexOf(currentVideoId) > 0
+        return queue.indexOf(currentStream) > 0
     }
 
-    fun updateCurrent(videoId: String) {
-        currentVideoId = videoId
-        queue.add(videoId)
+    fun updateCurrent(streamItem: StreamItem) {
+        currentStream = streamItem
+        queue.add(streamItem)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
 
+    fun isEmpty() = queue.isEmpty()
+
     fun clear() = queue.clear()
 
-    fun currentIndex() = queue.indexOf(currentVideoId)
+    fun size() = queue.size
 
-    fun contains(videoId: String) = queue.contains(videoId)
+    private fun currentIndex() = queue.indexOf(currentStream)
 
-    fun containsBeforeCurrent(videoId: String): Boolean {
-        return queue.contains(videoId) && queue.indexOf(videoId) < currentIndex()
-    }
+    fun contains(streamItem: StreamItem) = queue.contains(streamItem)
+
+    fun getStreams() = queue
 }

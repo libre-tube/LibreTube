@@ -25,6 +25,7 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -146,7 +147,9 @@ class BackgroundMode : Service() {
     }
 
     private fun updateWatchPosition() {
-        player?.currentPosition?.let { DatabaseHelper.saveWatchPosition(videoId, it) }
+        player?.currentPosition?.let {
+            DatabaseHelper.saveWatchPosition(videoId, it)
+        }
         handler.postDelayed(this::updateWatchPosition, 500)
     }
 
@@ -158,13 +161,15 @@ class BackgroundMode : Service() {
         seekToPosition: Long = 0
     ) {
         // append the video to the playing queue
-        PlayingQueue.add(videoId)
+        PlayingQueue.add(streams.toStreamItem(videoId))
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 streams = RetrofitInstance.api.getStreams(videoId)
             } catch (e: Exception) {
                 return@launch
             }
+
+            PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
 
             handler.post {
                 playAudio(seekToPosition)
@@ -175,8 +180,6 @@ class BackgroundMode : Service() {
     private fun playAudio(
         seekToPosition: Long
     ) {
-        PlayingQueue.updateCurrent(videoId)
-
         initializePlayer()
         setMediaItem()
 
@@ -280,7 +283,7 @@ class BackgroundMode : Service() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
         // search for the next videoId in the playlist
         CoroutineScope(Dispatchers.IO).launch {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId, streams!!.relatedStreams!!)
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId)
         }
     }
 

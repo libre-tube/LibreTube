@@ -81,8 +81,6 @@ class HomeFragment : BaseFragment() {
             } finally {
                 binding.homeRefresh.isRefreshing = false
             }
-            // TODO() REMOVE TESTING
-            PlayingQueue.streams = response
             runOnUiThread {
                 binding.progressBar.visibility = View.GONE
 

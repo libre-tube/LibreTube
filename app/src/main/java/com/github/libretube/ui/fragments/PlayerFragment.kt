@@ -52,6 +52,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.services.BackgroundMode
@@ -635,8 +636,6 @@ class PlayerFragment : BaseFragment() {
 
     private fun playVideo() {
         lifecycleScope.launchWhenCreated {
-            PlayingQueue.updateCurrent(videoId!!)
-
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
@@ -649,6 +648,12 @@ class PlayerFragment : BaseFragment() {
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
+
+            PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+
+            if (PlayingQueue.size() <= 1) PlayingQueue.add(
+                *streams.relatedStreams.orEmpty().toTypedArray()
+            )
 
             runOnUiThread {
                 // hide the button to skip SponsorBlock segments manually
@@ -694,7 +699,7 @@ class PlayerFragment : BaseFragment() {
         if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
         // search for the next videoId in the playlist
         lifecycleScope.launchWhenCreated {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams)
+            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!)
         }
     }
 

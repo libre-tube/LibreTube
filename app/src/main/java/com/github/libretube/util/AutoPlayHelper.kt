@@ -16,39 +16,15 @@ class AutoPlayHelper(
      * get the id of the next video to be played
      */
     suspend fun getNextVideoId(
-        currentVideoId: String,
-        relatedStreams: List<com.github.libretube.api.obj.StreamItem>?
+        currentVideoId: String
     ): String? {
         return if (playlistId == null) {
-            getNextTrendingVideoId(
-                relatedStreams
-            )
+            null
         } else {
             getNextPlaylistVideoId(
                 currentVideoId
             )
         }
-    }
-
-    /**
-     * get the id of the next related video
-     */
-    private fun getNextTrendingVideoId(
-        relatedStreams: List<com.github.libretube.api.obj.StreamItem>?
-    ): String? {
-        // don't play a video if it got played before already
-        if (relatedStreams == null || relatedStreams.isEmpty()) return null
-        var index = 0
-        var nextStreamId: String? = null
-        while (nextStreamId == null || PlayingQueue.containsBeforeCurrent(nextStreamId)) {
-            nextStreamId = relatedStreams[index].url!!.toID()
-            if (index + 1 < relatedStreams.size) {
-                index += 1
-            } else {
-                break
-            }
-        }
-        return nextStreamId
     }
 
     /**

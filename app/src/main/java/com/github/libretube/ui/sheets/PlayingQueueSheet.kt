@@ -27,7 +27,7 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         binding.optionsRecycler.adapter = PlayingQueueAdapter(
-            PlayingQueue.streams
+            PlayingQueue.getStreams()
         )
     }
 }
