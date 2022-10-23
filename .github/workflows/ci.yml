@@ -54,6 +54,18 @@ jobs:
           cd ..
           ./gradlew assembleDebug
 
+      - name: Sign Apk
+        continue-on-error: true
+        id: sign_apk
+        uses: ilharp/sign-android-release@v1
+        with:
+          releaseDir: app/build/outputs/apk/debug
+          signingKey: ${{ secrets.ANDROID_SIGNING_KEY }}
+          keyAlias: ${{ secrets.ANDROID_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+
       - name: Upload to Archive
         continue-on-error: true
         run: |
@@ -61,7 +73,7 @@ jobs:
           echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
           git clone https://github.com/LibreTubeAlpha/Archive archive
           rm -rf archive/*.apk
-          mv app/build/outputs/apk/debug/*.apk archive/
+          mv app/build/outputs/apk/debug/*-signed.apk archive/
           cd archive
           python ../uploader.py
       
@@ -86,4 +98,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: archive/*.apk
+          path: archive/*-signed.apk
+

@@ -52,6 +52,7 @@ import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.interfaces.PlayerOptionsInterface
 import com.github.libretube.services.BackgroundMode
@@ -64,8 +65,8 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.views.BottomSheet
-import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -152,12 +153,6 @@ class PlayerFragment : BaseFragment() {
      */
     private var token = PreferenceHelper.getToken()
     private var videoShownInExternalPlayer = false
-
-    /**
-     * for autoplay
-     */
-    private var nextStreamId: String? = null
-    private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
      * for the player notification
@@ -409,6 +404,11 @@ class PlayerFragment : BaseFragment() {
             toggleComments()
         }
 
+        playerBinding.queueToggle.visibility = View.VISIBLE
+        playerBinding.queueToggle.setOnClickListener {
+            PlayingQueueSheet().show(childFragmentManager, null)
+        }
+
         // FullScreen button trigger
         // hide fullscreen button if auto rotation enabled
         playerBinding.fullscreen.visibility =
@@ -630,8 +630,6 @@ class PlayerFragment : BaseFragment() {
 
     private fun playVideo() {
         lifecycleScope.launchWhenCreated {
-            PlayingQueue.updateCurrent(videoId!!)
-
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
             } catch (e: IOException) {
@@ -643,6 +641,21 @@ class PlayerFragment : BaseFragment() {
                 Log.e(TAG(), "HttpException, unexpected response")
                 Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
+            }
+
+            if (PlayingQueue.isEmpty()) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (playlistId != null) {
+                        PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
+                    } else {
+                        PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+                        PlayingQueue.add(
+                            *streams.relatedStreams.orEmpty().toTypedArray()
+                        )
+                    }
+                }
+            } else {
+                PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
             }
 
             runOnUiThread {
@@ -668,8 +681,6 @@ class PlayerFragment : BaseFragment() {
                 if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
                 // show comments if related streams disabled
                 if (!PlayerHelper.relatedStreamsEnabled) toggleComments()
-                // prepare for autoplay
-                if (binding.player.autoplayEnabled) setNextStream()
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
@@ -679,17 +690,6 @@ class PlayerFragment : BaseFragment() {
                     )
                 }
             }
-        }
-    }
-
-    /**
-     * set the videoId of the next stream for autoplay
-     */
-    private fun setNextStream() {
-        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
-        // search for the next videoId in the playlist
-        lifecycleScope.launchWhenCreated {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!, streams.relatedStreams)
         }
     }
 
@@ -758,18 +758,19 @@ class PlayerFragment : BaseFragment() {
 
     // used for autoplay and skipping to next video
     private fun playNextVideo() {
-        if (nextStreamId == null) return
-        // check whether there is a new video in the queue
-        val nextQueueVideo = PlayingQueue.getNext()
-        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
+        val nextVideoId = PlayingQueue.getNext()
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
-        // forces the comments to reload for the new video
-        commentsLoaded = false
-        binding.commentsRecView.adapter = null
+
         // save the id of the next stream as videoId and load the next video
-        videoId = nextStreamId
-        playVideo()
+        if (nextVideoId != null) {
+            videoId = nextVideoId
+
+            // forces the comments to reload for the new video
+            commentsLoaded = false
+            binding.commentsRecView.adapter = null
+            playVideo()
+        }
     }
 
     private fun prepareExoPlayerView() {
@@ -866,7 +867,6 @@ class PlayerFragment : BaseFragment() {
                 @Suppress("DEPRECATION")
                 if (
                     playbackState == Player.STATE_ENDED &&
-                    nextStreamId != null &&
                     !transitioning &&
                     binding.player.autoplayEnabled
                 ) {

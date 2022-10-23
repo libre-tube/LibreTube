@@ -354,4 +354,6 @@
     <string name="show_more">Показати більше</string>
     <string name="time_code">Часовий код</string>
     <string name="added_to_playlist">Додано в добірку</string>
+    <string name="playing_queue">Черга відтворення</string>
+    <string name="queue">Черга</string>
 </resources>

@@ -354,4 +354,6 @@
     <string name="show_more">显示更多</string>
     <string name="time_code">时间码</string>
     <string name="added_to_playlist">已添加到播放列表</string>
+    <string name="playing_queue">播放队列</string>
+    <string name="queue">队列</string>
 </resources>
