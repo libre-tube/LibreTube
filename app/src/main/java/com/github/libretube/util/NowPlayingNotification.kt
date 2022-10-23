@@ -1,15 +1,22 @@
 package com.github.libretube.util
 
+import android.R.attr.data
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.os.Bundle
+import android.support.v4.media.MediaDescriptionCompat
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
+import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
@@ -18,6 +25,7 @@ import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
+import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
 class NowPlayingNotification(
@@ -129,6 +137,27 @@ class NowPlayingNotification(
         mediaSession.isActive = true
 
         mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
+            override fun getMediaDescription(
+                player: Player,
+                windowIndex: Int
+            ): MediaDescriptionCompat {
+                return MediaDescriptionCompat.Builder().apply {
+                    setTitle(streams?.title!!)
+                    setSubtitle(streams?.uploader)
+                    val extras = Bundle()
+                    val appIcon = BitmapFactory.decodeResource(
+                        Resources.getSystem(),
+                        R.drawable.ic_launcher_monochrome
+                    )
+                    extras.putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
+                    extras.putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
+                    extras.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
+                    setIconBitmap(appIcon)
+                    setExtras(extras)
+                }.build()
+            }
+        })
         mediaSessionConnector.setPlayer(player)
     }
 
