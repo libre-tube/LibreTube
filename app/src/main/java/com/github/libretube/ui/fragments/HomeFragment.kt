@@ -20,6 +20,7 @@ import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.ui.adapters.TrendingAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.LocaleHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
@@ -80,6 +81,8 @@ class HomeFragment : BaseFragment() {
             } finally {
                 binding.homeRefresh.isRefreshing = false
             }
+            // TODO() REMOVE TESTING
+            PlayingQueue.streams = response
             runOnUiThread {
                 binding.progressBar.visibility = View.GONE
 

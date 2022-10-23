@@ -1,8 +1,11 @@
 package com.github.libretube.util
 
+import com.github.libretube.api.obj.StreamItem
+
 object PlayingQueue {
     private val queue = mutableListOf<String>()
     private var currentVideoId: String? = null
+    var streams: List<StreamItem> = listOf()
 
     fun add(videoId: String) {
         if (currentVideoId == videoId) return

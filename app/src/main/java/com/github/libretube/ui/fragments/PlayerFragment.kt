@@ -64,6 +64,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
@@ -407,6 +408,10 @@ class PlayerFragment : BaseFragment() {
 
         binding.commentsToggle.setOnClickListener {
             toggleComments()
+        }
+
+        binding.queueToggle.setOnClickListener {
+            PlayingQueueSheet().show(childFragmentManager, null)
         }
 
         // FullScreen button trigger
