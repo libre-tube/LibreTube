@@ -4,14 +4,12 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.QueueRowBinding
 import com.github.libretube.ui.viewholders.PlayingQueueViewHolder
 import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.PlayingQueue
 
-class PlayingQueueAdapter(
-    private val items: List<StreamItem>
-) : RecyclerView.Adapter<PlayingQueueViewHolder>() {
+class PlayingQueueAdapter() : RecyclerView.Adapter<PlayingQueueViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayingQueueViewHolder {
         val binding = QueueRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -22,16 +20,18 @@ class PlayingQueueAdapter(
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return PlayingQueue.size()
     }
 
     override fun onBindViewHolder(holder: PlayingQueueViewHolder, position: Int) {
-        val streamItem = items[position]
+        val streamItem = PlayingQueue.getStreams()[position]
         holder.binding.apply {
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             title.text = streamItem.title
             uploader.text = streamItem.uploaderName
-            duration.text = streamItem.duration?.let { DateUtils.formatElapsedTime(it) }
+            duration.text = streamItem.duration?.let {
+                DateUtils.formatElapsedTime(it)
+            }
         }
     }
 }

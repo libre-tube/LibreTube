@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
-import com.github.libretube.util.PlayingQueue
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlayingQueueSheet : BottomSheetDialogFragment() {
@@ -26,8 +25,6 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
-        binding.optionsRecycler.adapter = PlayingQueueAdapter(
-            PlayingQueue.getStreams()
-        )
+        binding.optionsRecycler.adapter = PlayingQueueAdapter()
     }
 }

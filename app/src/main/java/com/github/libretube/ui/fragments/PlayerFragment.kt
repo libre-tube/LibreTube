@@ -67,7 +67,6 @@ import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.views.BottomSheet
-import com.github.libretube.util.AutoPlayHelper
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -154,12 +153,6 @@ class PlayerFragment : BaseFragment() {
      */
     private var token = PreferenceHelper.getToken()
     private var videoShownInExternalPlayer = false
-
-    /**
-     * for autoplay
-     */
-    private var nextStreamId: String? = null
-    private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
      * for the player notification
@@ -649,11 +642,20 @@ class PlayerFragment : BaseFragment() {
                 return@launchWhenCreated
             }
 
-            PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
-
-            if (PlayingQueue.size() <= 1) PlayingQueue.add(
-                *streams.relatedStreams.orEmpty().toTypedArray()
-            )
+            if (PlayingQueue.size() == 0) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (playlistId != null) {
+                        PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
+                    } else {
+                        PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+                        PlayingQueue.add(
+                            *streams.relatedStreams.orEmpty().toTypedArray()
+                        )
+                    }
+                }
+            } else {
+                PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+            }
 
             runOnUiThread {
                 // hide the button to skip SponsorBlock segments manually
@@ -678,8 +680,6 @@ class PlayerFragment : BaseFragment() {
                 if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
                 // show comments if related streams disabled
                 if (!PlayerHelper.relatedStreamsEnabled) toggleComments()
-                // prepare for autoplay
-                if (binding.player.autoplayEnabled) setNextStream()
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
@@ -689,17 +689,6 @@ class PlayerFragment : BaseFragment() {
                     )
                 }
             }
-        }
-    }
-
-    /**
-     * set the videoId of the next stream for autoplay
-     */
-    private fun setNextStream() {
-        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId)
-        // search for the next videoId in the playlist
-        lifecycleScope.launchWhenCreated {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId!!)
         }
     }
 
@@ -768,17 +757,14 @@ class PlayerFragment : BaseFragment() {
 
     // used for autoplay and skipping to next video
     private fun playNextVideo() {
-        if (nextStreamId == null) return
-        // check whether there is a new video in the queue
-        val nextQueueVideo = PlayingQueue.getNext()
-        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
+        val nextVideo = PlayingQueue.getNext()
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
         // forces the comments to reload for the new video
         commentsLoaded = false
         binding.commentsRecView.adapter = null
         // save the id of the next stream as videoId and load the next video
-        videoId = nextStreamId
+        videoId = nextVideo
         playVideo()
     }
 
@@ -876,7 +862,6 @@ class PlayerFragment : BaseFragment() {
                 @Suppress("DEPRECATION")
                 if (
                     playbackState == Player.STATE_ENDED &&
-                    nextStreamId != null &&
                     !transitioning &&
                     binding.player.autoplayEnabled
                 ) {
