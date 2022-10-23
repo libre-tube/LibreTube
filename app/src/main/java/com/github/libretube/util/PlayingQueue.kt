@@ -33,7 +33,6 @@ object PlayingQueue {
 
     fun getNext(): String? {
         return try {
-            Log.e("new video", queue[currentIndex() + 1].toString())
             queue[currentIndex() + 1].url?.toID()
         } catch (e: Exception) {
             null
