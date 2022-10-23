@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.R.attr.data
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,7 +11,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.os.Bundle
 import android.support.v4.media.MediaDescriptionCompat
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
 import com.github.libretube.R
@@ -142,8 +145,16 @@ class NowPlayingNotification(
                 return MediaDescriptionCompat.Builder().apply {
                     setTitle(streams?.title!!)
                     setSubtitle(streams?.uploader)
-                    setIconBitmap(BitmapFactory.decodeResource(
-                        Resources.getSystem(), R.drawable.ic_launcher_monochrome))
+                    val extras = Bundle()
+                    val appIcon = BitmapFactory.decodeResource(
+                        Resources.getSystem(),
+                        R.drawable.ic_launcher_monochrome
+                    )
+                    extras.putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
+                    extras.putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
+                    extras.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
+                    setIconBitmap(appIcon)
+                    setExtras(extras)
                 }.build()
             }
         })
