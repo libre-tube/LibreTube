@@ -354,4 +354,6 @@
     <string name="show_more">Daha çox göstər</string>
     <string name="time_code">Vaxt kodu</string>
     <string name="added_to_playlist">Pleylistə əlavə edildi</string>
+    <string name="playing_queue">Oynatma növbəsi</string>
+    <string name="queue">Növbə</string>
 </resources>
