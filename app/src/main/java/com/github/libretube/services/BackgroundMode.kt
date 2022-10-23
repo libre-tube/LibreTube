@@ -24,8 +24,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.toID
-import com.github.libretube.util.AutoPlayHelper
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
@@ -81,16 +80,6 @@ class BackgroundMode : Service() {
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
     /**
-     * The [videoId] of the next stream for autoplay
-     */
-    private var nextStreamId: String? = null
-
-    /**
-     * Helper for finding the next video in the playlist
-     */
-    private lateinit var autoPlayHelper: AutoPlayHelper
-
-    /**
      * Autoplay Preference
      */
     private val handler = Handler(Looper.getMainLooper())
@@ -132,9 +121,6 @@ class BackgroundMode : Service() {
             playlistId = intent.getStringExtra(IntentData.playlistId)
             val position = intent.getLongExtra(IntentData.position, 0L)
 
-            // initialize the playlist autoPlay Helper
-            autoPlayHelper = AutoPlayHelper(playlistId)
-
             // play the audio in the background
             loadAudio(videoId, position)
 
@@ -146,7 +132,9 @@ class BackgroundMode : Service() {
     }
 
     private fun updateWatchPosition() {
-        player?.currentPosition?.let { DatabaseHelper.saveWatchPosition(videoId, it) }
+        player?.currentPosition?.let {
+            DatabaseHelper.saveWatchPosition(videoId, it)
+        }
         handler.postDelayed(this::updateWatchPosition, 500)
     }
 
@@ -157,13 +145,22 @@ class BackgroundMode : Service() {
         videoId: String,
         seekToPosition: Long = 0
     ) {
-        // append the video to the playing queue
-        PlayingQueue.add(videoId)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 streams = RetrofitInstance.api.getStreams(videoId)
             } catch (e: Exception) {
                 return@launch
+            }
+
+            // add the playlist video to the queue
+            if (playlistId != null && PlayingQueue.isEmpty()) {
+                streams?.toStreamItem(videoId)
+                    ?.let { PlayingQueue.insertPlaylist(playlistId!!, it) }
+            } else {
+                streams?.toStreamItem(videoId)?.let { PlayingQueue.updateCurrent(it) }
+                streams?.relatedStreams?.toTypedArray()?.let {
+                    PlayingQueue.add(*it)
+                }
             }
 
             handler.post {
@@ -175,8 +172,6 @@ class BackgroundMode : Service() {
     private fun playAudio(
         seekToPosition: Long
     ) {
-        PlayingQueue.updateCurrent(videoId)
-
         initializePlayer()
         setMediaItem()
 
@@ -218,8 +213,6 @@ class BackgroundMode : Service() {
         player?.setPlaybackSpeed(playbackSpeed)
 
         fetchSponsorBlockSegments()
-
-        if (PlayerHelper.autoPlayEnabled) setNextStream()
     }
 
     /**
@@ -269,31 +262,15 @@ class BackgroundMode : Service() {
     }
 
     /**
-     * set the videoId of the next stream for autoplay
-     */
-    private fun setNextStream() {
-        if (streams!!.relatedStreams!!.isNotEmpty()) {
-            nextStreamId = streams?.relatedStreams!![0].url!!.toID()
-        }
-
-        if (playlistId == null) return
-        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
-        // search for the next videoId in the playlist
-        CoroutineScope(Dispatchers.IO).launch {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId, streams!!.relatedStreams!!)
-        }
-    }
-
-    /**
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
     private fun playNextVideo() {
-        if (nextStreamId == null || nextStreamId == videoId) return
-        val nextQueueVideo = PlayingQueue.getNext()
-        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
+        val nextVideo = PlayingQueue.getNext()
 
         // play new video on background
-        this.videoId = nextStreamId!!
+        if (nextVideo != null) {
+            this.videoId = nextVideo
+        }
         this.segmentData = null
         loadAudio(videoId)
     }

@@ -3,8 +3,10 @@ package com.github.libretube.ui.sheets
 import android.os.Bundle
 import android.widget.Toast
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.ShareObjectType
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -12,6 +14,9 @@ import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Dialog with different options for a selected video.
@@ -79,10 +84,28 @@ class VideoOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 context?.getString(R.string.play_next) -> {
-                    PlayingQueue.addAsNext(videoId)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            PlayingQueue.addAsNext(
+                                RetrofitInstance.api.getStreams(videoId)
+                                    .toStreamItem(videoId)
+                            )
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
                 }
                 context?.getString(R.string.add_to_queue) -> {
-                    PlayingQueue.add(videoId)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            PlayingQueue.add(
+                                RetrofitInstance.api.getStreams(videoId)
+                                    .toStreamItem(videoId)
+                            )
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
                 }
             }
         }
