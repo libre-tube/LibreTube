@@ -8,8 +8,9 @@ import com.github.libretube.databinding.QueueRowBinding
 import com.github.libretube.ui.viewholders.PlayingQueueViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.ThemeHelper
 
-class PlayingQueueAdapter() : RecyclerView.Adapter<PlayingQueueViewHolder>() {
+class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayingQueueViewHolder {
         val binding = QueueRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -31,6 +32,11 @@ class PlayingQueueAdapter() : RecyclerView.Adapter<PlayingQueueViewHolder>() {
             uploader.text = streamItem.uploaderName
             duration.text = streamItem.duration?.let {
                 DateUtils.formatElapsedTime(it)
+            }
+            if (PlayingQueue.currentIndex() == position) {
+                root.setBackgroundColor(
+                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+                )
             }
         }
     }

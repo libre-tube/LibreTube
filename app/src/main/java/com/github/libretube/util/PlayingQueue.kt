@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.extensions.move
 import com.github.libretube.extensions.toID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -66,6 +67,8 @@ object PlayingQueue {
     fun getStreams() = queue
 
     fun remove(index: Int) = queue.removeAt(index)
+
+    fun move(from: Int, to: Int) = queue.move(from, to)
 
     private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?) {
         var playlistNextPage: String? = nextPage
