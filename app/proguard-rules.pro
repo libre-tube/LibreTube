@@ -16,15 +16,16 @@
 # debugging stack traces.
 -keepattributes SourceFile,LineNumberTable
 
+# prevents obfuscation in debug logs
+-dontobfuscate
+
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
 #uncomment for debug
 #-keepnames class **
+
+# Keep data classes used for Retrofit
 -keep class com.github.libretube.obj.** { *; }
-
-# prevents android from removing it
--keep class com.github.libretube.obj.**.** { *; }
-
-# prevents obfuscation in debug logs
--dontobfuscate
+-keep class com.github.libretube.obj.update.** { *; }
