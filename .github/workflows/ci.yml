@@ -55,6 +55,7 @@ jobs:
           ./gradlew assembleDebug
 
       - name: Sign Apk
+        continue-on-error: true
         id: sign_apk
         uses: ilharp/sign-android-release@v1
         with:
