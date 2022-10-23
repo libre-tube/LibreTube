@@ -145,8 +145,6 @@ class BackgroundMode : Service() {
         videoId: String,
         seekToPosition: Long = 0
     ) {
-        // append the video to the playing queue
-        PlayingQueue.add(streams.toStreamItem(videoId))
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 streams = RetrofitInstance.api.getStreams(videoId)
@@ -156,9 +154,13 @@ class BackgroundMode : Service() {
 
             // add the playlist video to the queue
             if (playlistId != null && PlayingQueue.isEmpty()) {
-                PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId))
+                streams?.toStreamItem(videoId)
+                    ?.let { PlayingQueue.insertPlaylist(playlistId!!, it) }
             } else {
-                PlayingQueue.updateCurrent(streams.toStreamItem(videoId))
+                streams?.toStreamItem(videoId)?.let { PlayingQueue.updateCurrent(it) }
+                streams?.relatedStreams?.toTypedArray()?.let {
+                    PlayingQueue.add(*it)
+                }
             }
 
             handler.post {

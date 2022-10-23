@@ -3,8 +3,7 @@ package com.github.libretube.extensions
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 
-fun Streams?.toStreamItem(videoId: String): StreamItem {
-    if (this == null) return StreamItem()
+fun Streams.toStreamItem(videoId: String): StreamItem {
     return StreamItem(
         url = videoId,
         title = title,

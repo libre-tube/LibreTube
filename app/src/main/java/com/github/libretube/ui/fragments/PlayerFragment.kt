@@ -405,7 +405,7 @@ class PlayerFragment : BaseFragment() {
         }
 
         playerBinding.queueToggle.visibility = View.VISIBLE
-       playerBinding.queueToggle.setOnClickListener {
+        playerBinding.queueToggle.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager, null)
         }
 
@@ -643,7 +643,7 @@ class PlayerFragment : BaseFragment() {
                 return@launchWhenCreated
             }
 
-            if (PlayingQueue.size() == 0) {
+            if (PlayingQueue.isEmpty()) {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (playlistId != null) {
                         PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
