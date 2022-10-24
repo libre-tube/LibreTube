@@ -48,7 +48,7 @@ class DownloadService : Service() {
         }
 
         if (downloadType != DownloadType.NONE) {
-            downloadManager(videoName)
+            downloadManager()
         } else {
             onDestroy()
         }
@@ -60,7 +60,7 @@ class DownloadService : Service() {
         TODO("Not yet implemented")
     }
 
-    private fun downloadManager(videoName: String) {
+    private fun downloadManager() {
         // initialize and create the directories to download into
 
         val videoDownloadDir = DownloadHelper.getVideoDir(this)
