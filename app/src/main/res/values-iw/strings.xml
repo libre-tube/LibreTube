@@ -354,4 +354,6 @@
     <string name="show_more">להציג עוד</string>
     <string name="time_code">קוד זמן</string>
     <string name="added_to_playlist">נוסף לרשימת נגינה</string>
+    <string name="queue">תור</string>
+    <string name="playing_queue">תור נגינה</string>
 </resources>
