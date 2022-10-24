@@ -354,4 +354,6 @@
     <string name="show_more">اظهار المزيد</string>
     <string name="time_code">رمز التوقيت</string>
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
+    <string name="playing_queue">تشغيل قائمة الانتظار</string>
+    <string name="queue">الانتظار</string>
 </resources>
