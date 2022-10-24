@@ -74,7 +74,7 @@ class DownloadService : Service() {
             )
             if (downloadType in listOf(DownloadType.VIDEO, DownloadType.AUDIO_VIDEO)) {
                 videoDownloadId = downloadManagerRequest(
-                    getString(R.string.video),
+                    "[${getString(R.string.video)}] $videoName",
                     getString(R.string.downloading),
                     videoUrl,
                     Uri.fromFile(
@@ -84,7 +84,7 @@ class DownloadService : Service() {
             }
             if (downloadType in listOf(DownloadType.AUDIO, DownloadType.AUDIO_VIDEO)) {
                 audioDownloadId = downloadManagerRequest(
-                    getString(R.string.audio),
+                    "[${getString(R.string.audio)}] $videoName",
                     getString(R.string.downloading),
                     audioUrl,
                     Uri.fromFile(
