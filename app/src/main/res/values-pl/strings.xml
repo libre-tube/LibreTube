@@ -354,4 +354,6 @@
     <string name="limit_hls">Ogranicz HLS do 1080p</string>
     <string name="progressive_load_interval_summary">Niższa wartość może przyspieszyć początkowe ładowanie wideo.</string>
     <string name="added_to_playlist">Dodano do listy odtwarzania</string>
+    <string name="playing_queue">Odtwarzana kolejka</string>
+    <string name="queue">Kolejka</string>
 </resources>
