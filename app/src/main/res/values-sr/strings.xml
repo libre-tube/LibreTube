@@ -351,4 +351,9 @@
     <string name="progressive_load_interval_summary">Нижа вредност може убрзати почетно учитавање видео записа.</string>
     <string name="legacy_subscriptions">Застарели приказ претплата</string>
     <string name="audio_video_summary">Квалитет и формат</string>
+    <string name="playing_queue">Редослед репродукције</string>
+    <string name="added_to_playlist">Додато на плејлисту</string>
+    <string name="queue">Редослед</string>
+    <string name="show_more">Прикажи више</string>
+    <string name="time_code">Временски код</string>
 </resources>
