@@ -111,7 +111,10 @@ class CommentsAdapter(
                                 }
                             }
                         }
-                        else -> repliesAdapter.clear()
+                        else -> {
+                            repliesAdapter.clear()
+                            showMore.visibility = View.GONE
+                        }
                     }
                 }
             }
