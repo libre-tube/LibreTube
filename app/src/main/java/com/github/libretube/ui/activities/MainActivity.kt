@@ -178,7 +178,7 @@ class MainActivity : BaseActivity() {
             {
                 try {
                     MaterialAlertDialogBuilder(this)
-                        .setTitle(getString(R.string.share_with_time))
+                        .setTitle(getString(R.string.take_a_break))
                         .setMessage(
                             getString(
                                 R.string.already_spent_time,
