@@ -134,7 +134,7 @@
     <string name="contributing">Contributing</string>
     <string name="donate">Donate</string>
     <string name="update">Look for new version</string>
-    <string name="update_summary">Click to find out if the app is up to date.</string>
+    <string name="update_summary">Check for update</string>
     <string name="app_uptodate">Running the latest version.</string>
     <string name="no_update_available">You are running the latest version.</string>
     <string name="playback_speed">Playback speed</string>
