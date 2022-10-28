@@ -70,7 +70,7 @@
     <string name="download_directory_summary">Kur saugoma atsisiųsta medija.</string>
     <string name="donate">Paaukoti</string>
     <string name="update">Ieškoti naujos versijos</string>
-    <string name="update_summary">Spustelėkite, kad sužinotumėte, ar programėlė atnaujinta.</string>
+    <string name="update_summary">Tikrinti, ar yra atnaujinimų</string>
     <string name="app_uptodate">Įdiegta naujausia versija.</string>
     <string name="no_update_available">Naudojate naujausią versiją.</string>
     <string name="playback_speed">Atkūrimo greitis</string>
@@ -356,4 +356,6 @@
     <string name="category_preview_description">Segmentams, kuriuose išsamiai nupasakojamas būsimas šio ar būsimų serijos vaizdo įrašų turinys, bet nepateikiama papildomos informacijos. Jei joje yra klipų, kurie rodomi tik čia, labai tikėtina, kad tai netinkama kategorija.</string>
     <string name="color_purple">Viliojanti violetinė</string>
     <string name="aspect_ratio">Vaizdo įrašo rezoliucija</string>
+    <string name="sb_markers">Žymekliai</string>
+    <string name="sb_markers_summary">Žymėti segmentus laiko juostoje.</string>
 </resources>
