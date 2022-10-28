@@ -33,13 +33,17 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
 
         binding.shuffle.setOnClickListener {
             val streams = PlayingQueue.getStreams()
-            streams.subList(PlayingQueue.currentIndex(), PlayingQueue.size()).shuffle()
-            adapter.notifyItemRangeChanged(0, PlayingQueue.size())
+            val size =  PlayingQueue.size()
+            streams.subList(PlayingQueue.currentIndex(), size).shuffle()
+            adapter.notifyItemRangeChanged(0, size)
         }
 
         binding.clear.setOnClickListener {
             val streams = PlayingQueue.getStreams()
-            streams.subList(PlayingQueue.currentIndex(), PlayingQueue.size()).clear()
+            val currentIndex = PlayingQueue.currentIndex()
+            val size = PlayingQueue.size()
+            streams.subList(currentIndex, size).clear()
+            adapter.notifyItemRangeRemoved(currentIndex + 1, size)
         }
 
         binding.bottomControls.setOnClickListener {
