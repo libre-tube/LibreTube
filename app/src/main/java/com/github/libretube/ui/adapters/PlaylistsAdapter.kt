@@ -73,7 +73,8 @@ class PlaylistsAdapter(
             root.setOnLongClickListener {
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
-                    isOwner = true
+                    playlistName = playlist.name!!,
+                    isOwner = true,
                 )
                 playlistOptionsDialog.show(
                     childFragmentManager,
