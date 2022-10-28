@@ -77,6 +77,7 @@ object PreferenceKeys {
     const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val SB_SKIP_MANUALLY = "sb_skip_manually_key"
+    const val SB_SHOW_MARKERS = "sb_show_markers"
     const val LIMIT_HLS = "limit_hls"
     const val PROGRESSIVE_LOADING_INTERVAL_SIZE = "progressive_loading_interval"
 

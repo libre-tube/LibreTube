@@ -209,7 +209,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp">
 
-            <com.google.android.exoplayer2.ui.DefaultTimeBar
+            <com.github.libretube.ui.views.MarkableTimeBar
                 android:id="@id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
