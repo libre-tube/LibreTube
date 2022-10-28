@@ -7,6 +7,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.extensions.toStreamItem
+import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -24,9 +25,10 @@ import kotlinx.coroutines.launch
  * Needs the [videoId] to load the content from the right video.
  */
 class VideoOptionsBottomSheet(
-    private val videoId: String
+    private val videoId: String,
+    private val videoName: String
 ) : BottomSheet() {
-
+    private val shareData = ShareData(currentVideo = videoName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
@@ -79,7 +81,7 @@ class VideoOptionsBottomSheet(
                     downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
                 context?.getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO)
+                    val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO, shareData)
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
