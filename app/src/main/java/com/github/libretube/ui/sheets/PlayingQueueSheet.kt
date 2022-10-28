@@ -1,5 +1,6 @@
 package com.github.libretube.ui.sheets
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,17 +35,27 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
 
         binding.shuffle.setOnClickListener {
             val streams = PlayingQueue.getStreams()
-            val size = PlayingQueue.size()
-            streams.subList(PlayingQueue.currentIndex(), size).shuffle()
-            adapter.notifyItemRangeChanged(0, size)
+            val currentIndex = PlayingQueue.currentIndex()
+            val current = streams[currentIndex]
+
+            streams.shuffle()
+            streams.remove(current)
+            streams.add(currentIndex, current)
+            PlayingQueue.setStreams(streams)
+
+            adapter.notifyDataSetChanged()
         }
 
         binding.clear.setOnClickListener {
             val streams = PlayingQueue.getStreams()
-            val currentIndex = PlayingQueue.currentIndex()
-            val size = PlayingQueue.size()
-            streams.subList(currentIndex, size).clear()
-            adapter.notifyItemRangeRemoved(currentIndex + 1, size)
+            val index = PlayingQueue.currentIndex()
+
+            while (index >= PlayingQueue.size()) {
+                streams.removeAt(index)
+            }
+
+            PlayingQueue.setStreams(streams)
+            adapter.notifyDataSetChanged()
         }
 
         binding.bottomControls.setOnClickListener {

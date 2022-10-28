@@ -33,6 +33,7 @@
                 android:id="@+id/bottom_controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:background="@drawable/rounded_ripple"
                 android:padding="10dp">
 
@@ -41,11 +42,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
                     android:src="@drawable/ic_shuffle" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
                     android:rotation="180"
@@ -56,6 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
                     android:src="@drawable/ic_close" />
 
             </LinearLayout>
