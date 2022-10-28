@@ -38,6 +38,8 @@ import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.ShareObjectType
@@ -139,8 +141,8 @@ class PlayerFragment : BaseFragment() {
      */
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
-    private lateinit var segmentData: com.github.libretube.api.obj.Segments
-    private lateinit var chapters: List<com.github.libretube.api.obj.ChapterSegment>
+    private lateinit var segmentData: SegmentData
+    private lateinit var chapters: List<ChapterSegment>
 
     /**
      * for the player view
@@ -598,7 +600,7 @@ class PlayerFragment : BaseFragment() {
 
         val currentPosition = exoPlayer.currentPosition
         segmentData.segments.forEach { segment: com.github.libretube.api.obj.Segment ->
-            val segmentStart = (segment.segment!![0] * 1000f).toLong()
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
 
             // show the button to manually skip the segment
