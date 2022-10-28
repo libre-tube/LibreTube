@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.BottomSheetBinding
+import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlayingQueueSheet : BottomSheetDialogFragment() {
-    private lateinit var binding: BottomSheetBinding
+    private lateinit var binding: QueueBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = BottomSheetBinding.inflate(layoutInflater)
+        binding = QueueBottomSheetBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -30,6 +30,21 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter = PlayingQueueAdapter()
         binding.optionsRecycler.adapter = adapter
+
+        binding.shuffle.setOnClickListener {
+            val streams = PlayingQueue.getStreams()
+            streams.subList(PlayingQueue.currentIndex(), PlayingQueue.size()).shuffle()
+            adapter.notifyItemRangeChanged(0, PlayingQueue.size())
+        }
+
+        binding.clear.setOnClickListener {
+            val streams = PlayingQueue.getStreams()
+            streams.subList(PlayingQueue.currentIndex(), PlayingQueue.size()).clear()
+        }
+
+        binding.bottomControls.setOnClickListener {
+            dialog?.dismiss()
+        }
 
         val callback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
