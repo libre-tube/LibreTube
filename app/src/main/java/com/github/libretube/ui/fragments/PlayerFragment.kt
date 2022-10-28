@@ -706,6 +706,7 @@ class PlayerFragment : BaseFragment() {
                             videoId!!,
                             ObjectMapper().writeValueAsString(categories)
                         )
+                    playerBinding.exoProgress.setSegments(segmentData.segments)
                 }
             }
         }
@@ -783,6 +784,8 @@ class PlayerFragment : BaseFragment() {
             useController = false
             player = exoPlayer
         }
+
+        playerBinding.exoProgress.setPlayer(exoPlayer)
 
         if (PlayerHelper.useSystemCaptionStyle) {
             // set the subtitle style
