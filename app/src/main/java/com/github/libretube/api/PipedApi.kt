@@ -9,7 +9,7 @@ import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.SearchResult
-import com.github.libretube.api.obj.Segments
+import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subscribe
@@ -36,7 +36,7 @@ interface PipedApi {
     suspend fun getSegments(
         @Path("videoId") videoId: String,
         @Query("category") category: String
-    ): Segments
+    ): SegmentData
 
     @GET("nextpage/comments/{videoId}")
     suspend fun getCommentsNextPage(
@@ -48,7 +48,7 @@ interface PipedApi {
     suspend fun getSearchResults(
         @Query("q") searchQuery: String,
         @Query("filter") filter: String
-    ): com.github.libretube.api.obj.SearchResult
+    ): SearchResult
 
     @GET("nextpage/search")
     suspend fun getSearchResultsNextPage(

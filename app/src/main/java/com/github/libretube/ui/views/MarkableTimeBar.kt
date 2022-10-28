@@ -43,7 +43,7 @@ class MarkableTimeBar(
         segments.forEach {
             canvas.drawRect(
                 Rect(
-                    (it.segment!!.first() + HORIZONTAL_OFFSET).toLength(),
+                    (it.segment.first() + HORIZONTAL_OFFSET).toLength(),
                     marginY,
                     (it.segment.last() + HORIZONTAL_OFFSET).toLength(),
                     canvas.height - marginY - 1
@@ -56,7 +56,7 @@ class MarkableTimeBar(
         canvas.restore()
     }
 
-    private fun Float.toLength(): Int {
+    private fun Double.toLength(): Int {
         return (this * 1000 / player!!.duration * length).toInt()
     }
 
