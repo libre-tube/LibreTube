@@ -13,12 +13,14 @@ import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.obj.ShareData
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
     private val id: String,
     private val shareObjectType: Int,
+    private val shareData: ShareData,
     private val position: Long? = null
 ) : DialogFragment() {
     private var binding: DialogShareBinding? = null
@@ -29,7 +31,7 @@ class ShareDialog(
             getString(R.string.youtube)
         )
         val instanceUrl = getCustomInstanceFrontendUrl()
-
+        val shareableTitle = getShareableTitle(shareData)
         // add instanceUrl option if custom instance frontend url available
         if (instanceUrl != "") shareOptions += getString(R.string.instance)
 
@@ -63,6 +65,7 @@ class ShareDialog(
                 intent.apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, url)
+                    putExtra(Intent.EXTRA_SUBJECT, shareableTitle)
                     type = "text/plain"
                 }
                 context?.startActivity(
@@ -101,6 +104,16 @@ class ShareDialog(
         // return the custom instance frontend url if available
         customInstances.forEach { instance ->
             if (instance.apiUrl == instancePref) return instance.frontendUrl
+        }
+        return ""
+    }
+    private fun getShareableTitle(shareData: ShareData): String {
+        if (shareData.currentChannel != null) {
+            return shareData.currentChannel
+        } else if (shareData.currentPlaylist != null) {
+            return shareData.currentPlaylist
+        } else if (shareData.currentVideo != null) {
+            return shareData.currentVideo
         }
         return ""
     }
