@@ -2,13 +2,14 @@ package com.github.libretube.ui.views
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
+import com.github.libretube.R
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.ThemeHelper
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.DefaultTimeBar
 
@@ -37,7 +38,7 @@ class MarkableTimeBar(
         canvas.save()
         length = canvas.width - 2 * HORIZONTAL_OFFSET
 
-        val marginY = canvas.height / 2 - 3
+        val marginY = canvas.height / 2 - PROGRESS_HEIGHT / 2
 
         segments.forEach {
             canvas.drawRect(
@@ -45,10 +46,10 @@ class MarkableTimeBar(
                     (it.segment!!.first() + HORIZONTAL_OFFSET).toLength(),
                     marginY,
                     (it.segment.last() + HORIZONTAL_OFFSET).toLength(),
-                    canvas.height - marginY
+                    canvas.height - marginY - 1
                 ),
                 Paint().apply {
-                    color = Color.RED
+                    color = ThemeHelper.getThemeColor(context, R.attr.colorError)
                 }
             )
         }
@@ -56,11 +57,7 @@ class MarkableTimeBar(
     }
 
     private fun Float.toLength(): Int {
-        val position = (this * 1000 / player!!.duration * length).toInt()
-        return maxOf(
-            minOf(position, length - HORIZONTAL_OFFSET),
-            HORIZONTAL_OFFSET
-        )
+        return (this * 1000 / player!!.duration * length).toInt()
     }
 
     fun setSegments(segments: List<Segment>) {
@@ -76,6 +73,7 @@ class MarkableTimeBar(
     }
 
     companion object {
-        const val HORIZONTAL_OFFSET = 8
+        const val HORIZONTAL_OFFSET = 10
+        const val PROGRESS_HEIGHT = 6
     }
 }
