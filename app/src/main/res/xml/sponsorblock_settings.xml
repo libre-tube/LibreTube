@@ -22,6 +22,12 @@
         app:key="sb_skip_manually_key"
         app:title="@string/sb_skip_manual" />
 
+    <SwitchPreferenceCompat
+        android:summary="@string/sb_markers_summary"
+        app:defaultValue="false"
+        app:key="sb_show_markers"
+        app:title="@string/sb_markers" />
+
     <PreferenceCategory app:title="@string/category_segments">
 
         <SwitchPreferenceCompat

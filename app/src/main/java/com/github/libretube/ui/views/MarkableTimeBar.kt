@@ -7,6 +7,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import com.github.libretube.api.obj.Segment
+import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.DefaultTimeBar
 
@@ -30,6 +32,8 @@ class MarkableTimeBar(
     private fun drawSegments(canvas: Canvas) {
         if (player == null) return
 
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, false)) return
+
         canvas.save()
         length = canvas.width - 2 * HORIZONTAL_OFFSET
 
@@ -38,9 +42,9 @@ class MarkableTimeBar(
         segments.forEach {
             canvas.drawRect(
                 Rect(
-                    it.segment!!.first().toLength() + HORIZONTAL_OFFSET,
+                    (it.segment!!.first() + HORIZONTAL_OFFSET).toLength(),
                     marginY,
-                    it.segment.last().toLength(),
+                    (it.segment.last() + HORIZONTAL_OFFSET).toLength(),
                     canvas.height - marginY
                 ),
                 Paint().apply {
