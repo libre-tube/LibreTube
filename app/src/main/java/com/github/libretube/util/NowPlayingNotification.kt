@@ -1,6 +1,5 @@
 package com.github.libretube.util
 
-import android.R.attr.data
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
