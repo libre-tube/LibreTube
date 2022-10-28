@@ -11,7 +11,7 @@
     <string name="loggedout">Kijelentkezve.</string>
     <string name="instances">Válasszon…</string>
     <string name="login_register">Bejelentkezés/regisztráció</string>
-    <string name="please_login">Kérjük, először a beállításokban lépjen be vagy regisztráljon!</string>
+    <string name="please_login">Először a beállításokban lépjen be vagy regisztráljon!</string>
     <string name="cannotDownload">Nem lehetséges ezt a streamet letölteni.</string>
     <string name="downloadfailed">Sikertelen letöltés.</string>
     <string name="vlc">Megnyitás VLC-ben</string>
@@ -35,11 +35,11 @@
     <string name="login">Bejelentkezés</string>
     <string name="register">Regisztráció</string>
     <string name="password">Jelszó</string>
-    <string name="login_first">Kérjük, lépjen be és próbálja újra!</string>
+    <string name="login_first">Lépjen be és próbálja újra!</string>
     <string name="areYouSure">Biztosan törölni szeretné a lejátszási listát\?</string>
     <string name="app_theme">Téma</string>
     <string name="emptyList">Itt nincs semmi.</string>
-    <string name="dlisinprogress">Egy másik letöltés már folyamatban van, kérjük, várjon amíg befejeződik.</string>
+    <string name="dlisinprogress">Egy másik letöltés már folyamatban van, várjon amíg befejeződik.</string>
     <string name="customInstance">Egyéni</string>
     <string name="dlcomplete">A letöltés kész.</string>
     <string name="importsuccess">Sikeres feliratkozás</string>
@@ -221,7 +221,7 @@
     <string name="auth_instance">Hitelesítési példány</string>
     <string name="auth_instance_summary">Használjon másik példányt a hitelesített hívásokhoz.</string>
     <string name="watch_positions">Pozíció megjegyzése</string>
-    <string name="turnInternetOn">Kérjük, az internethez való csatlakozáshoz kapcsolja be a wifit vagy a mobiladat-kapcsolatot.</string>
+    <string name="turnInternetOn">Az internethez való csatlakozáshoz kapcsolja be a wifit vagy a mobiladat-kapcsolatot.</string>
     <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez.</string>
     <string name="seek_increment">Léptetés időköze</string>
@@ -309,7 +309,7 @@
     <string name="player_resize_mode">Átméretezés mód</string>
     <string name="addInstance">Példány hozzáadása</string>
     <string name="clear_customInstances">Hozzáadott törlése</string>
-    <string name="invalid_url">Kérjük, adjon meg egy működő URL-t</string>
+    <string name="invalid_url">Adjon meg egy működő URL-t</string>
     <string name="auth_instances">Hitelesítési példány kiválasztása</string>
     <string name="history_summary">Megtekintési és keresési előzmények</string>
     <string name="repeat_mode">Ismétlés mód</string>
@@ -354,4 +354,6 @@
     <string name="recentlyUpdatedReversed">Mostanában frissített (fordítva)</string>
     <string name="show_more">Több megjelenítése</string>
     <string name="time_code">Időpont</string>
+    <string name="playing_queue">Lejátszási sor</string>
+    <string name="queue">Sor</string>
 </resources>
