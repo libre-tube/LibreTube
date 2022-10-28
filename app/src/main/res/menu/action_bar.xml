@@ -30,7 +30,7 @@
     <item
         android:id="@+id/action_queue"
         android:title="@string/queue"
-        app:showAsAction="never"
-        android:visible="false" />
+        android:visible="false"
+        app:showAsAction="never" />
 
 </menu>
