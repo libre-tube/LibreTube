@@ -33,7 +33,7 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
 
         binding.shuffle.setOnClickListener {
             val streams = PlayingQueue.getStreams()
-            val size =  PlayingQueue.size()
+            val size = PlayingQueue.size()
             streams.subList(PlayingQueue.currentIndex(), size).shuffle()
             adapter.notifyItemRangeChanged(0, size)
         }
