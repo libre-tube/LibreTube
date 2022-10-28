@@ -350,6 +350,8 @@
     <string name="added_to_playlist">Added to playlist</string>
     <string name="playing_queue">Playing queue</string>
     <string name="queue">Queue</string>
+    <string name="sb_markers">TimeBar Markers</string>
+    <string name="sb_markers_summary">Mark the segments on the time bar.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

@@ -10,12 +10,13 @@ import com.github.libretube.api.obj.Segment
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.DefaultTimeBar
 
+/**
+ * TimeBar that can be marked with SponsorBlock Segments
+ */
 class MarkableTimeBar(
     context: Context,
     attributeSet: AttributeSet? = null
 ) : DefaultTimeBar(context, attributeSet) {
-
-    private val HORIZONTAL_OFFSET = 5
 
     private var segments: List<Segment> = listOf(Segment(segment = listOf(1f, 10f)), Segment(segment = listOf(20f, 30f)))
     private var player: Player? = null
@@ -30,14 +31,14 @@ class MarkableTimeBar(
         if (player == null) return
 
         canvas.save()
-        length = canvas.width
+        length = canvas.width - 2 * HORIZONTAL_OFFSET
 
         val marginY = canvas.height / 2 - 3
 
         segments.forEach {
             canvas.drawRect(
                 Rect(
-                    it.segment!!.first().toLength(),
+                    it.segment!!.first().toLength() + HORIZONTAL_OFFSET,
                     marginY,
                     it.segment.last().toLength(),
                     canvas.height - marginY
@@ -62,7 +63,15 @@ class MarkableTimeBar(
         this.segments = segments
     }
 
+    fun clearSegments() {
+        segments = listOf()
+    }
+
     fun setPlayer(player: Player) {
         this.player = player
+    }
+
+    companion object {
+        const val HORIZONTAL_OFFSET = 8
     }
 }

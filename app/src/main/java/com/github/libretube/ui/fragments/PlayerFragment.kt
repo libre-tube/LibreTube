@@ -629,6 +629,8 @@ class PlayerFragment : BaseFragment() {
     }
 
     private fun playVideo() {
+        playerBinding.exoProgress.clearSegments()
+
         lifecycleScope.launchWhenCreated {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
