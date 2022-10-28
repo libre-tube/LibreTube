@@ -68,8 +68,9 @@ class TrendingAdapter(
                 NavigationHelper.navigateVideo(root.context, trending.url)
             }
             val videoId = trending.url!!.toID()
+            val videoName = trending.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId)
+                VideoOptionsBottomSheet(videoId, videoName)
                     .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
