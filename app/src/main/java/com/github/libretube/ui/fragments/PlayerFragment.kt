@@ -440,7 +440,8 @@ class PlayerFragment : BaseFragment() {
             BackgroundHelper.playOnBackground(
                 requireContext(),
                 videoId!!,
-                exoPlayer.currentPosition
+                exoPlayer.currentPosition,
+                playlistId
             )
         }
 
