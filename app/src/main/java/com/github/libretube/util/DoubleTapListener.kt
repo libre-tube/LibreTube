@@ -3,7 +3,6 @@ package com.github.libretube.util
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import android.util.Log
 import android.view.View
 
 abstract class DoubleTapListener : View.OnClickListener {

@@ -50,7 +50,8 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
             val currentIndex = PlayingQueue.currentIndex()
 
             val streams = PlayingQueue.getStreams().filterIndexed {
-                    position, _ -> position <= currentIndex
+                    position, _ ->
+                position <= currentIndex
             }
 
             PlayingQueue.setStreams(streams)

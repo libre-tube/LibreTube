@@ -38,8 +38,11 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
                 DateUtils.formatElapsedTime(streamItem.duration ?: 0)
 
             root.setBackgroundColor(
-                if (currentIndex == position) ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-                else Color.TRANSPARENT
+                if (currentIndex == position) {
+                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
+                } else {
+                    Color.TRANSPARENT
+                }
             )
         }
     }
