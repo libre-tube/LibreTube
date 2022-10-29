@@ -358,4 +358,5 @@
     <string name="queue">Черга</string>
     <string name="sb_markers">Маркери</string>
     <string name="sb_markers_summary">Позначте відтинки на панелі часу.</string>
+    <string name="livestreams">Трансляції наживо</string>
 </resources>
