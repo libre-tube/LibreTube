@@ -100,8 +100,9 @@ class SearchAdapter(
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
             val videoId = item.url!!.toID()
+            val videoName = item.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId)
+                VideoOptionsBottomSheet(videoId, videoName)
                     .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
@@ -181,7 +182,8 @@ class SearchAdapter(
             }
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()
-                PlaylistOptionsBottomSheet(playlistId, false)
+                val playlistName = item.name!!
+                PlaylistOptionsBottomSheet(playlistId, playlistName, false)
                     .show(childFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
                 true
             }

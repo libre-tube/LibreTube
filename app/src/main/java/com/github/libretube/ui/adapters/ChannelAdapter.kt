@@ -66,8 +66,9 @@ class ChannelAdapter(
             }
 
             val videoId = video.url!!.toID()
+            val videoName = video.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId)
+                VideoOptionsBottomSheet(videoId, videoName)
                     .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }

@@ -25,6 +25,7 @@ class PlaylistFragment : BaseFragment() {
     private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null
+    private var playlistName: String? = null
     private var isOwner: Boolean = false
     private var nextPage: String? = null
     private var playlistAdapter: PlaylistAdapter? = null
@@ -75,6 +76,7 @@ class PlaylistFragment : BaseFragment() {
                 return@launchWhenCreated
             }
             nextPage = response.nextpage
+            playlistName = response.name
             isLoading = false
             runOnUiThread {
                 binding.playlistProgress.visibility = View.GONE
@@ -86,7 +88,7 @@ class PlaylistFragment : BaseFragment() {
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
                     val optionsDialog =
-                        PlaylistOptionsBottomSheet(playlistId!!, isOwner)
+                        PlaylistOptionsBottomSheet(playlistId!!, playlistName!!, isOwner)
                     optionsDialog.show(
                         childFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name

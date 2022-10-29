@@ -73,6 +73,7 @@ class PlaylistsAdapter(
             root.setOnLongClickListener {
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
+                    playlistName = playlist.name!!,
                     isOwner = true
                 )
                 playlistOptionsDialog.show(

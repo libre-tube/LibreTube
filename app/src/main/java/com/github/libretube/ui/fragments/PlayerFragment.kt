@@ -57,6 +57,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.models.interfaces.OnlinePlayerOptions
+import com.github.libretube.obj.ShareData
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
@@ -160,6 +161,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
+
+    private lateinit var shareData: ShareData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -360,7 +363,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // share button
         binding.relPlayerShare.setOnClickListener {
             val shareDialog =
-                ShareDialog(videoId!!, ShareObjectType.VIDEO, exoPlayer.currentPosition / 1000)
+                ShareDialog(
+                    videoId!!,
+                    ShareObjectType.VIDEO,
+                    shareData,
+                    exoPlayer.currentPosition / 1000
+                )
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
 
@@ -762,6 +770,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             titleTextView.text = response.title
 
             playerTitle.text = response.title
+            shareData = ShareData(currentVideo = response.title)
             playerDescription.text = response.description
 
             playerChannelSubCount.text = context?.getString(

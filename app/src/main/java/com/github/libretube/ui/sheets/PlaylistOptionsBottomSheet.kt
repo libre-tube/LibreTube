@@ -11,6 +11,7 @@ import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
@@ -25,9 +26,10 @@ import java.io.IOException
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
+    private val playlistName: String,
     private val isOwner: Boolean
 ) : BottomSheet() {
-
+    private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
         var optionsList = listOf(
@@ -76,7 +78,7 @@ class PlaylistOptionsBottomSheet(
                 }
                 // share the playlist
                 context?.getString(R.string.share) -> {
-                    val shareDialog = ShareDialog(playlistId, ShareObjectType.PLAYLIST)
+                    val shareDialog = ShareDialog(playlistId, ShareObjectType.PLAYLIST, shareData)
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
