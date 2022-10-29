@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
+import com.github.libretube.extensions.round
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -31,11 +32,11 @@ class PlaybackSpeedSheet(
         binding.pitch.value = player.playbackParameters.pitch
 
         binding.speed.addOnChangeListener { _, value, _ ->
-            onChange(value, binding.pitch.value)
+            onChange(value, binding.pitch.value.round(2))
         }
 
         binding.pitch.addOnChangeListener { _, value, _ ->
-            onChange(binding.speed.value, value)
+            onChange(binding.speed.value.round(2), value)
         }
     }
 

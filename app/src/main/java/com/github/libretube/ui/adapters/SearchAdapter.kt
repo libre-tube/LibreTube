@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.api.obj.SearchItem
+import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.VideoRowBinding
@@ -26,12 +26,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SearchAdapter(
-    private val searchItems: MutableList<SearchItem>,
+    private val searchItems: MutableList<ContentItem>,
     private val childFragmentManager: FragmentManager
 ) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
-    fun updateItems(newItems: List<SearchItem>) {
+    fun updateItems(newItems: List<ContentItem>) {
         val searchItemsSize = searchItems.size
         searchItems.addAll(newItems)
         notifyItemRangeInserted(searchItemsSize, newItems.size)
@@ -81,7 +81,7 @@ class SearchAdapter(
         }
     }
 
-    private fun bindWatch(item: SearchItem, binding: VideoRowBinding) {
+    private fun bindWatch(item: ContentItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration!!)
@@ -115,7 +115,7 @@ class SearchAdapter(
 
     @SuppressLint("SetTextI18n")
     private fun bindChannel(
-        item: SearchItem,
+        item: ContentItem,
         binding: ChannelRowBinding
     ) {
         binding.apply {
@@ -165,7 +165,7 @@ class SearchAdapter(
     }
 
     private fun bindPlaylist(
-        item: SearchItem,
+        item: ContentItem,
         binding: PlaylistSearchRowBinding
     ) {
         binding.apply {

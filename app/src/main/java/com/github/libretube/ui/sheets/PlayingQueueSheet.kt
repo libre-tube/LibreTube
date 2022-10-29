@@ -1,5 +1,6 @@
 package com.github.libretube.ui.sheets
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,29 +8,59 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.BottomSheetBinding
+import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlayingQueueSheet : BottomSheetDialogFragment() {
-    private lateinit var binding: BottomSheetBinding
+    private lateinit var binding: QueueBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = BottomSheetBinding.inflate(layoutInflater)
+        binding = QueueBottomSheetBinding.inflate(layoutInflater)
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.optionsRecycler.layoutManager = LinearLayoutManager(context)
         val adapter = PlayingQueueAdapter()
         binding.optionsRecycler.adapter = adapter
+
+        binding.shuffle.setOnClickListener {
+            val streams = PlayingQueue.getStreams()
+            val currentIndex = PlayingQueue.currentIndex()
+            val current = streams[currentIndex]
+
+            streams.shuffle()
+            streams.remove(current)
+            streams.add(currentIndex, current)
+            PlayingQueue.setStreams(streams)
+
+            adapter.notifyDataSetChanged()
+        }
+
+        binding.clear.setOnClickListener {
+            val streams = PlayingQueue.getStreams()
+            val index = PlayingQueue.currentIndex()
+
+            while (index >= PlayingQueue.size()) {
+                streams.removeAt(index)
+            }
+
+            PlayingQueue.setStreams(streams)
+            adapter.notifyDataSetChanged()
+        }
+
+        binding.bottomControls.setOnClickListener {
+            dialog?.dismiss()
+        }
 
         val callback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,

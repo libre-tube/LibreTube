@@ -354,4 +354,6 @@
     <string name="time_code">Časové razítko</string>
     <string name="show_more">Zobrazit více</string>
     <string name="added_to_playlist">Přidáno do playlistu</string>
+    <string name="queue">Fronta</string>
+    <string name="playing_queue">Přehrávání fronty</string>
 </resources>

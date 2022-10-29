@@ -35,6 +35,7 @@ object LocaleHelper {
         val dm = res.displayMetrics
         val conf = res.configuration
         conf.setLocale(locale)
+        @Suppress("DEPRECATION")
         res.updateConfiguration(conf, dm)
     }
 

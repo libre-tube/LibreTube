@@ -3,40 +3,49 @@ package com.github.libretube.util
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 
 abstract class DoubleTapListener : View.OnClickListener {
 
-    private val maximumTimeDifference = 300L
     private val handler = Handler(Looper.getMainLooper())
 
-    private var isSingleEvent = false
-    private var timeStampLastClick = 0L
-    private var timeStampLastDoubleClick = 0L
-
-    override fun onClick(v: View?) {
-        if (SystemClock.elapsedRealtime() - timeStampLastClick < maximumTimeDifference) {
-            isSingleEvent = false
-            handler.removeCallbacks(runnable)
-            timeStampLastDoubleClick = SystemClock.elapsedRealtime()
-            onDoubleClick()
-            return
-        }
-        isSingleEvent = true
-        handler.removeCallbacks(runnable)
-        handler.postDelayed(runnable, maximumTimeDifference)
-        timeStampLastClick = SystemClock.elapsedRealtime()
-    }
+    private var lastClick = 0L
+    private var lastDoubleClick = 0L
 
     abstract fun onDoubleClick()
     abstract fun onSingleClick()
 
-    private val runnable = Runnable {
-        if (!isSingleEvent ||
-            SystemClock.elapsedRealtime() - timeStampLastDoubleClick < maximumTimeDifference
-        ) {
-            return@Runnable
+    override fun onClick(v: View?) {
+        if (isSecondClick()) {
+            handler.removeCallbacks(runnable)
+            lastDoubleClick = elapsedTime()
+            onDoubleClick()
+        } else {
+            if (recentDoubleClick()) return
+            handler.removeCallbacks(runnable)
+            handler.postDelayed(runnable, MAX_TIME_DIFF)
+            lastClick = elapsedTime()
         }
+    }
+
+    private val runnable = Runnable {
+        if (isSecondClick()) return@Runnable
+        Log.e("single", "single")
         onSingleClick()
+    }
+
+    private fun isSecondClick(): Boolean {
+        return elapsedTime() - lastClick < MAX_TIME_DIFF
+    }
+
+    private fun recentDoubleClick(): Boolean {
+        return elapsedTime() - lastDoubleClick < MAX_TIME_DIFF
+    }
+
+    fun elapsedTime() = SystemClock.elapsedRealtime()
+
+    companion object {
+        private const val MAX_TIME_DIFF = 400L
     }
 }

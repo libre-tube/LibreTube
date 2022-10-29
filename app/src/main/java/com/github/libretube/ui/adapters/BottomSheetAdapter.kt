@@ -34,6 +34,7 @@ class BottomSheetAdapter(
             }
 
             root.setOnClickListener {
+                item.onClick.invoke()
                 listener.invoke(position)
             }
         }

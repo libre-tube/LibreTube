@@ -81,15 +81,12 @@ jobs:
         continue-on-error: true
         run: |
           cd archive
-          curl https://libre-tube.github.io/images/Alpha.png --output alpha.png
-          chmod 755 ./exec
           mv ../tgconfig.py .
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
           echo "TG_POST_ID = '${{ secrets.TG_POST_ID }}'" >> tgconfig.py
           echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
-          python -m pip install --upgrade pip
-          pip install python-telegram-bot
+          python -m pip install --upgrade pip TgCrypto Pyrogram
           mv ../.github/tg.py .
           mv ../.github/commit.json .
           python tg.py

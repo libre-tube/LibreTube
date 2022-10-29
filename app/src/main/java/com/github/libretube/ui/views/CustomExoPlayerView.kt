@@ -14,7 +14,8 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.toDp
 import com.github.libretube.models.interfaces.DoubleTapInterface
-import com.github.libretube.models.interfaces.PlayerOptionsInterface
+import com.github.libretube.models.interfaces.OnlinePlayerOptions
+import com.github.libretube.models.interfaces.PlayerOptions
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.sheets.PlaybackSpeedSheet
@@ -30,7 +31,7 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 internal class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
-) : StyledPlayerView(context, attributeSet) {
+) : StyledPlayerView(context, attributeSet), PlayerOptions {
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
 
@@ -38,7 +39,7 @@ internal class CustomExoPlayerView(
      * Objects from the parent fragment
      */
     private var doubleTapListener: DoubleTapInterface? = null
-    private var playerOptionsInterface: PlayerOptionsInterface? = null
+    private var playerOptionsInterface: OnlinePlayerOptions? = null
     private lateinit var childFragmentManager: FragmentManager
     private var trackSelector: TrackSelector? = null
 
@@ -72,7 +73,7 @@ internal class CustomExoPlayerView(
 
     fun initialize(
         childFragmentManager: FragmentManager,
-        playerViewInterface: PlayerOptionsInterface?,
+        playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         trackSelector: TrackSelector?
     ) {
@@ -136,78 +137,79 @@ internal class CustomExoPlayerView(
 
     private fun initializeAdvancedOptions(context: Context) {
         binding.toggleOptions.setOnClickListener {
-            val bottomSheetFragment = BottomSheet().apply {
-                val items = mutableListOf(
-                    BottomSheetItem(
-                        context.getString(R.string.player_autoplay),
-                        R.drawable.ic_play,
-                        if (autoplayEnabled) {
-                            context.getString(R.string.enabled)
-                        } else {
-                            context.getString(R.string.disabled)
-                        }
-                    ),
-                    BottomSheetItem(
-                        context.getString(R.string.repeat_mode),
-                        R.drawable.ic_repeat,
-                        if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                            context.getString(R.string.repeat_mode_none)
-                        } else {
-                            context.getString(R.string.repeat_mode_current)
-                        }
-                    ),
-                    BottomSheetItem(
-                        context.getString(R.string.player_resize_mode),
-                        R.drawable.ic_aspect_ratio,
-                        when (resizeMode) {
-                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
-                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
-                            else -> context.getString(R.string.resize_mode_zoom)
-                        }
-                    ),
-                    BottomSheetItem(
-                        context.getString(R.string.playback_speed),
-                        R.drawable.ic_speed,
-                        "${
-                        player?.playbackParameters?.speed
-                            .toString()
-                            .replace(".0", "")
-                        }x"
-                    )
-                )
-
-                if (playerOptionsInterface != null) {
-                    items.add(
-                        BottomSheetItem(
-                            context.getString(R.string.quality),
-                            R.drawable.ic_hd,
-                            "${player?.videoSize?.height}p"
-                        )
-                    )
-                    items.add(
-                        BottomSheetItem(
-                            context.getString(R.string.captions),
-                            R.drawable.ic_caption,
-                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                                trackSelector!!.parameters.preferredTextLanguages[0]
-                            } else {
-                                context.getString(R.string.none)
-                            }
-                        )
-                    )
-                }
-
-                setItems(items) { index ->
-                    when (index) {
-                        0 -> onAutoplayClicked()
-                        1 -> onRepeatModeClicked()
-                        2 -> onResizeModeClicked()
-                        3 -> onPlaybackSpeedClicked()
-                        4 -> playerOptionsInterface?.onQualityClicked()
-                        5 -> playerOptionsInterface?.onCaptionClicked()
+            val items = mutableListOf(
+                BottomSheetItem(
+                    context.getString(R.string.player_autoplay),
+                    R.drawable.ic_play,
+                    if (autoplayEnabled) {
+                        context.getString(R.string.enabled)
+                    } else {
+                        context.getString(R.string.disabled)
                     }
+                ) {
+                    onAutoplayClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.repeat_mode),
+                    R.drawable.ic_repeat,
+                    if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                        context.getString(R.string.repeat_mode_none)
+                    } else {
+                        context.getString(R.string.repeat_mode_current)
+                    }
+                ) {
+                    onRepeatModeClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.player_resize_mode),
+                    R.drawable.ic_aspect_ratio,
+                    when (resizeMode) {
+                        AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
+                        AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                        else -> context.getString(R.string.resize_mode_zoom)
+                    }
+                ) {
+                    onResizeModeClicked()
+                },
+                BottomSheetItem(
+                    context.getString(R.string.playback_speed),
+                    R.drawable.ic_speed,
+                    "${
+                    player?.playbackParameters?.speed
+                        .toString()
+                        .replace(".0", "")
+                    }x"
+                ) {
+                    onPlaybackSpeedClicked()
                 }
+            )
+
+            if (playerOptionsInterface != null) {
+                items.add(
+                    BottomSheetItem(
+                        context.getString(R.string.quality),
+                        R.drawable.ic_hd,
+                        "${player?.videoSize?.height}p"
+                    ) {
+                        playerOptionsInterface?.onQualityClicked()
+                    }
+                )
+                items.add(
+                    BottomSheetItem(
+                        context.getString(R.string.captions),
+                        R.drawable.ic_caption,
+                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                            trackSelector!!.parameters.preferredTextLanguages[0]
+                        } else {
+                            context.getString(R.string.none)
+                        }
+                    ) {
+                        playerOptionsInterface?.onCaptionsClicked()
+                    }
+                )
             }
+
+            val bottomSheetFragment = BottomSheet().setItems(items, null)
             bottomSheetFragment.show(childFragmentManager, null)
         }
     }
@@ -307,7 +309,7 @@ internal class CustomExoPlayerView(
         }
     }
 
-    private fun onAutoplayClicked() {
+    override fun onAutoplayClicked() {
         // autoplay options dialog
         BottomSheet()
             .setSimpleItems(
@@ -324,11 +326,11 @@ internal class CustomExoPlayerView(
             .show(childFragmentManager)
     }
 
-    private fun onPlaybackSpeedClicked() {
+    override fun onPlaybackSpeedClicked() {
         player?.let { PlaybackSpeedSheet(it).show(childFragmentManager) }
     }
 
-    private fun onResizeModeClicked() {
+    override fun onResizeModeClicked() {
         // switching between original aspect ratio (black bars) and zoomed to fill device screen
         val aspectRatioModeNames = context.resources?.getStringArray(R.array.resizeMode)
             ?.toList().orEmpty()
@@ -346,7 +348,7 @@ internal class CustomExoPlayerView(
             .show(childFragmentManager)
     }
 
-    private fun onRepeatModeClicked() {
+    override fun onRepeatModeClicked() {
         val repeatModeNames = listOf(
             context.getString(R.string.repeat_mode_none),
             context.getString(R.string.repeat_mode_current)

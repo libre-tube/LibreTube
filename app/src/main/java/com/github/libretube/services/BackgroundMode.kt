@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.Segments
+import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
@@ -72,7 +72,7 @@ class BackgroundMode : Service() {
     /**
      * SponsorBlock Segment data
      */
-    private var segmentData: Segments? = null
+    private var segmentData: SegmentData? = null
 
     /**
      * [Notification] for the player
@@ -325,7 +325,7 @@ class BackgroundMode : Service() {
         if (segmentData == null || segmentData!!.segments.isEmpty()) return
 
         segmentData!!.segments.forEach { segment: Segment ->
-            val segmentStart = (segment.segment!![0] * 1000f).toLong()
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {

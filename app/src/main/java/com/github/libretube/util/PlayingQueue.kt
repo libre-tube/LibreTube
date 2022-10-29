@@ -74,6 +74,11 @@ object PlayingQueue {
 
     fun getStreams() = queue
 
+    fun setStreams(streams: List<StreamItem>) {
+        queue.clear()
+        queue.addAll(streams)
+    }
+
     fun remove(index: Int) = queue.removeAt(index)
 
     fun move(from: Int, to: Int) = queue.move(from, to)

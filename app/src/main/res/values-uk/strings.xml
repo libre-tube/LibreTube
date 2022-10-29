@@ -131,7 +131,7 @@
     <string name="video_format">Формат відео</string>
     <string name="contributing">Внесок</string>
     <string name="update">Шукати нову версію</string>
-    <string name="update_summary">Натисніть для перевірки чи додаток оновлений.</string>
+    <string name="update_summary">Перевірити наявність оновлень</string>
     <string name="app_uptodate">Це остання версія.</string>
     <string name="playback_speed">Швидкість відтворення</string>
     <string name="player">Програвач</string>
@@ -356,4 +356,6 @@
     <string name="added_to_playlist">Додано в добірку</string>
     <string name="playing_queue">Черга відтворення</string>
     <string name="queue">Черга</string>
+    <string name="sb_markers">Маркери</string>
+    <string name="sb_markers_summary">Позначте відтинки на панелі часу.</string>
 </resources>
