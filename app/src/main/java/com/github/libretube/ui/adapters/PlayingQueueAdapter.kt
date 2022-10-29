@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.ThemeHelper
 
 class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
+    private val currentIndex = PlayingQueue.currentIndex()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayingQueueViewHolder {
         val binding = QueueRowBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -34,11 +37,13 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
             videoInfo.text = streamItem.uploaderName + "  •  " +
                 DateUtils.formatElapsedTime(streamItem.duration ?: 0)
 
-            if (PlayingQueue.currentIndex() == position) {
-                root.setBackgroundColor(
+            root.setBackgroundColor(
+                if (currentIndex == position) {
                     ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-                )
-            }
+                } else {
+                    Color.TRANSPARENT
+                }
+            )
         }
     }
 }
