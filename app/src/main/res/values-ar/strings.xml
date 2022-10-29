@@ -358,4 +358,7 @@
     <string name="queue">الانتظار</string>
     <string name="sb_markers">العلامات</string>
     <string name="sb_markers_summary">وضع علامة على الأجزاء في شريط الوقت.</string>
+    <string name="livestreams">البث المباشر</string>
+    <string name="defaultIconLight">الافتراضي ابيض</string>
+    <string name="alternative_videos_layout">اتجاهات فيديو بديلة</string>
 </resources>
