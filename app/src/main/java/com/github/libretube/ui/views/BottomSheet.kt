@@ -32,18 +32,18 @@ open class BottomSheet : BottomSheetDialogFragment() {
         binding.optionsRecycler.adapter = BottomSheetAdapter(items, listener)
     }
 
-    fun setItems(items: List<BottomSheetItem>, listener: (index: Int) -> Unit) = apply {
+    fun setItems(items: List<BottomSheetItem>, listener: ((index: Int) -> Unit)?) = apply {
         this.items = items
         this.listener = { index ->
-            listener.invoke(index)
+            listener?.invoke(index)
             dialog?.dismiss()
         }
     }
 
-    fun setSimpleItems(titles: List<String>, listener: (index: Int) -> Unit) = apply {
+    fun setSimpleItems(titles: List<String>, listener: ((index: Int) -> Unit)?) = apply {
         this.items = titles.map { BottomSheetItem(it) }
         this.listener = { index ->
-            listener.invoke(index)
+            listener?.invoke(index)
             dialog?.dismiss()
         }
     }
