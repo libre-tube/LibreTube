@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.FragmentChannelBinding
@@ -18,9 +20,14 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.ChannelAdapter
+import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.ImageHelper
+import com.google.android.material.chip.Chip
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -34,6 +41,10 @@ class ChannelFragment : BaseFragment() {
     private var channelAdapter: ChannelAdapter? = null
     private var isLoading = true
     private var isSubscribed: Boolean? = false
+
+    private var onScrollEnd: () -> Unit = {}
+
+    val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,11 +84,10 @@ class ChannelFragment : BaseFragment() {
                 if (binding.channelScrollView.getChildAt(0).bottom
                     == (binding.channelScrollView.height + binding.channelScrollView.scrollY)
                 ) {
-                    // scroll view is at bottom
-                    if (nextPage != null && !isLoading) {
-                        isLoading = true
-                        binding.channelRefresh.isRefreshing = true
-                        fetchChannelNextPage()
+                    try {
+                        onScrollEnd.invoke()
+                    } catch (e: Exception) {
+                        Log.e("tabs failed", e.toString())
                     }
                 }
             }
@@ -102,6 +112,14 @@ class ChannelFragment : BaseFragment() {
             }
             // needed if the channel gets loaded by the ID
             channelId = response.id
+
+            onScrollEnd = {
+                if (nextPage != null && !isLoading) {
+                    isLoading = true
+                    binding.channelRefresh.isRefreshing = true
+                    fetchChannelNextPage()
+                }
+            }
 
             // fetch and update the subscription status
             isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
@@ -166,10 +184,73 @@ class ChannelFragment : BaseFragment() {
 
                 // recyclerview of the videos by the channel
                 channelAdapter = ChannelAdapter(
-                    response.relatedStreams!!.toMutableList(),
+                    response.relatedStreams.orEmpty().toMutableList(),
                     childFragmentManager
                 )
                 binding.channelRecView.adapter = channelAdapter
+            }
+
+            binding.videos.setOnClickListener {
+                binding.channelRecView.adapter = channelAdapter
+            }
+
+            response.tabs?.firstOrNull { it.name == "Playlists" }?.let {
+                setupTab(binding.playlists, it)
+            }
+
+            response.tabs?.firstOrNull { it.name == "Channels" }?.let {
+                setupTab(binding.channels, it)
+            }
+
+            response.tabs?.firstOrNull { it.name == "Livestreams" }?.let {
+                setupTab(binding.livestreams, it)
+            }
+
+            response.tabs?.firstOrNull { it.name == "Shorts" }?.let {
+                setupTab(binding.shorts, it)
+            }
+        }
+    }
+
+    private fun setupTab(chip: Chip, tab: ChannelTab) {
+        chip.visibility = View.VISIBLE
+        chip.setOnClickListener {
+            binding.tabChips.children.forEach {
+                if (it != chip) (it as Chip).isChecked = false
+            }
+            scope.launch {
+                val response = try {
+                    RetrofitInstance.api.getChannelTab(tab.data!!)
+                } catch (e: Exception) {
+                    return@launch
+                }
+
+                val adapter = SearchAdapter(
+                    response.content.toMutableList(),
+                    childFragmentManager
+                )
+
+                runOnUiThread {
+                    binding.channelRecView.adapter = adapter
+                }
+
+                onScrollEnd = {
+                    if (response.nextpage != null) {
+                        scope.launch {
+                            val newContent = try {
+                                RetrofitInstance.api.getChannelTab(tab.data, response.nextpage)
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                null
+                            }
+                            runOnUiThread {
+                                newContent?.content?.let {
+                                    adapter.updateItems(it)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ package com.github.libretube.api.obj
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class SearchItem(
+data class ContentItem(
     var url: String? = null,
     var thumbnail: String? = null,
     var uploaderName: String? = null,

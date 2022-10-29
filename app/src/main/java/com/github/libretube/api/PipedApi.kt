@@ -1,6 +1,7 @@
 package com.github.libretube.api
 
 import com.github.libretube.api.obj.Channel
+import com.github.libretube.api.obj.ChannelTabResponse
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.api.obj.DeleteUserRequest
 import com.github.libretube.api.obj.Login
@@ -62,6 +63,12 @@ interface PipedApi {
 
     @GET("channel/{channelId}")
     suspend fun getChannel(@Path("channelId") channelId: String): Channel
+
+    @GET("channels/tabs")
+    suspend fun getChannelTab(
+        @Query("data") data: String,
+        @Query("nextpage") nextPage: String? = null
+    ): ChannelTabResponse
 
     @GET("user/{name}")
     suspend fun getChannelByName(@Path("name") channelName: String): Channel
