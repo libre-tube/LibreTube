@@ -56,7 +56,7 @@ import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.models.PlayerViewModel
-import com.github.libretube.models.interfaces.PlayerOptionsInterface
+import com.github.libretube.models.interfaces.OnlinePlayerOptions
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
@@ -105,7 +105,7 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
-class PlayerFragment : BaseFragment(), PlayerOptionsInterface {
+class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
@@ -1319,7 +1319,7 @@ class PlayerFragment : BaseFragment(), PlayerOptionsInterface {
         }
     }
 
-    override fun onCaptionClicked() {
+    override fun onCaptionsClicked() {
         if (!this@PlayerFragment::streams.isInitialized ||
             streams.subtitles == null ||
             streams.subtitles!!.isEmpty()
