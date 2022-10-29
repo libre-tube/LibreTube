@@ -105,7 +105,7 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
-class PlayerFragment : BaseFragment() {
+class PlayerFragment : BaseFragment(), PlayerOptionsInterface {
 
     lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
@@ -293,76 +293,6 @@ class PlayerFragment : BaseFragment() {
         binding.titleTextView.setOnClickListener {
             binding.playerMotionLayout.setTransitionDuration(300)
             binding.playerMotionLayout.transitionToStart()
-        }
-    }
-
-    private val onlinePlayerOptionsInterface = object : PlayerOptionsInterface {
-        override fun onCaptionClicked() {
-            if (!this@PlayerFragment::streams.isInitialized ||
-                streams.subtitles == null ||
-                streams.subtitles!!.isEmpty()
-            ) {
-                Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
-                return
-            }
-
-            val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
-            val subtitleCodesList = mutableListOf("")
-            streams.subtitles!!.forEach {
-                subtitlesNamesList += it.name!!
-                subtitleCodesList += it.code!!
-            }
-
-            BottomSheet()
-                .setSimpleItems(subtitlesNamesList) { index ->
-                    val newParams = if (index != 0) {
-                        // caption selected
-
-                        // get the caption language code
-                        val captionLanguageCode = subtitleCodesList[index]
-
-                        // select the new caption preference
-                        trackSelector.buildUponParameters()
-                            .setPreferredTextLanguage(captionLanguageCode)
-                            .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-                    } else {
-                        // none selected
-                        // disable captions
-                        trackSelector.buildUponParameters()
-                            .setPreferredTextLanguage("")
-                    }
-
-                    // set the new caption language
-                    trackSelector.setParameters(newParams)
-                }
-                .show(childFragmentManager)
-        }
-
-        override fun onQualityClicked() {
-            // get the available resolutions
-            val (videosNameArray, videosUrlArray) = getAvailableResolutions()
-
-            // Dialog for quality selection
-            val lastPosition = exoPlayer.currentPosition
-            BottomSheet()
-                .setSimpleItems(
-                    videosNameArray.toList()
-                ) { which ->
-                    if (
-                        videosNameArray[which] == getString(R.string.hls) ||
-                        videosNameArray[which] == "LBRY HLS"
-                    ) {
-                        // set the progressive media source
-                        setHLSMediaSource(videosUrlArray[which])
-                    } else {
-                        val videoUri = videosUrlArray[which]
-                        val audioUrl =
-                            PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
-                        setMediaSource(videoUri, audioUrl)
-                    }
-                    exoPlayer.seekTo(lastPosition)
-                }
-                .show(childFragmentManager)
         }
     }
 
@@ -814,7 +744,7 @@ class PlayerFragment : BaseFragment() {
         // initialize the player view actions
         binding.player.initialize(
             childFragmentManager,
-            onlinePlayerOptionsInterface,
+            this,
             doubleTapOverlayBinding,
             trackSelector
         )
@@ -1387,6 +1317,74 @@ class PlayerFragment : BaseFragment() {
                 isLoading = false
             }
         }
+    }
+
+    override fun onCaptionClicked() {
+        if (!this@PlayerFragment::streams.isInitialized ||
+            streams.subtitles == null ||
+            streams.subtitles!!.isEmpty()
+        ) {
+            Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
+        val subtitleCodesList = mutableListOf("")
+        streams.subtitles!!.forEach {
+            subtitlesNamesList += it.name!!
+            subtitleCodesList += it.code!!
+        }
+
+        BottomSheet()
+            .setSimpleItems(subtitlesNamesList) { index ->
+                val newParams = if (index != 0) {
+                    // caption selected
+
+                    // get the caption language code
+                    val captionLanguageCode = subtitleCodesList[index]
+
+                    // select the new caption preference
+                    trackSelector.buildUponParameters()
+                        .setPreferredTextLanguage(captionLanguageCode)
+                        .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+                } else {
+                    // none selected
+                    // disable captions
+                    trackSelector.buildUponParameters()
+                        .setPreferredTextLanguage("")
+                }
+
+                // set the new caption language
+                trackSelector.setParameters(newParams)
+            }
+            .show(childFragmentManager)
+    }
+
+    override fun onQualityClicked() {
+        // get the available resolutions
+        val (videosNameArray, videosUrlArray) = getAvailableResolutions()
+
+        // Dialog for quality selection
+        val lastPosition = exoPlayer.currentPosition
+        BottomSheet()
+            .setSimpleItems(
+                videosNameArray.toList()
+            ) { which ->
+                if (
+                    videosNameArray[which] == getString(R.string.hls) ||
+                    videosNameArray[which] == "LBRY HLS"
+                ) {
+                    // set the progressive media source
+                    setHLSMediaSource(videosUrlArray[which])
+                } else {
+                    val videoUri = videosUrlArray[which]
+                    val audioUrl =
+                        PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
+                    setMediaSource(videoUri, audioUrl)
+                }
+                exoPlayer.seekTo(lastPosition)
+            }
+            .show(childFragmentManager)
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
