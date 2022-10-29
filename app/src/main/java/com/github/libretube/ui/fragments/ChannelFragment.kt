@@ -44,7 +44,7 @@ class ChannelFragment : BaseFragment() {
 
     private var onScrollEnd: () -> Unit = {}
 
-    val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,11 +115,7 @@ class ChannelFragment : BaseFragment() {
             val shareData = ShareData(currentChannel = response.name)
 
             onScrollEnd = {
-                if (nextPage != null && !isLoading) {
-                    isLoading = true
-                    binding.channelRefresh.isRefreshing = true
-                    fetchChannelNextPage()
-                }
+                fetchChannelNextPage()
             }
 
             // fetch and update the subscription status
@@ -197,6 +193,12 @@ class ChannelFragment : BaseFragment() {
 
             binding.videos.setOnClickListener {
                 binding.channelRecView.adapter = channelAdapter
+                onScrollEnd = {
+                    fetchChannelNextPage()
+                }
+                binding.tabChips.children.forEach { child ->
+                    if (child != it) (child as Chip).isChecked = false
+                }
             }
 
             response.tabs?.firstOrNull { it.name == "Playlists" }?.let {
@@ -239,20 +241,11 @@ class ChannelFragment : BaseFragment() {
                     binding.channelRecView.adapter = adapter
                 }
 
+                var tabNextPage = response.nextpage
                 onScrollEnd = {
-                    if (response.nextpage != null) {
-                        scope.launch {
-                            val newContent = try {
-                                RetrofitInstance.api.getChannelTab(tab.data, response.nextpage)
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                null
-                            }
-                            runOnUiThread {
-                                newContent?.content?.let {
-                                    adapter.updateItems(it)
-                                }
-                            }
+                    tabNextPage?.let {
+                        fetchTabNextPage(it, tab, adapter) { nextPage ->
+                            tabNextPage = nextPage
                         }
                     }
                 }
@@ -262,12 +255,15 @@ class ChannelFragment : BaseFragment() {
 
     private fun fetchChannelNextPage() {
         fun run() {
+            if (nextPage == null || isLoading) return
+            isLoading = true
+            binding.channelRefresh.isRefreshing = true
+
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
-                    println(e)
                     Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
@@ -282,5 +278,27 @@ class ChannelFragment : BaseFragment() {
             }
         }
         run()
+    }
+
+    private fun fetchTabNextPage(
+        nextPage: String,
+        tab: ChannelTab,
+        adapter: SearchAdapter,
+        onNewNextPage: (String?) -> Unit
+    ) {
+        scope.launch {
+            val newContent = try {
+                RetrofitInstance.api.getChannelTab(tab.data ?: "", nextPage)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+            onNewNextPage.invoke(newContent?.nextpage)
+            runOnUiThread {
+                newContent?.content?.let {
+                    adapter.updateItems(it)
+                }
+            }
+        }
     }
 }
