@@ -74,7 +74,7 @@ class PlaylistsAdapter(
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
                     playlistName = playlist.name!!,
-                    isOwner = true,
+                    isOwner = true
                 )
                 playlistOptionsDialog.show(
                     childFragmentManager,
