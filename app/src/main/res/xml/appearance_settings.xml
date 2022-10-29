@@ -106,6 +106,14 @@
             app:key="trending_layout"
             app:title="@string/trending_layout" />
 
+        <ListPreference
+            android:defaultValue="recent"
+            android:entries="@array/playlistSortingOptions"
+            android:entryValues="@array/playlistSortingOptionsValues"
+            android:icon="@drawable/ic_filter"
+            app:key="playlists_order"
+            app:title="@string/playlists_order" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
