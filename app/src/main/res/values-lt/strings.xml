@@ -358,4 +358,5 @@
     <string name="aspect_ratio">Vaizdo įrašo rezoliucija</string>
     <string name="sb_markers">Žymekliai</string>
     <string name="sb_markers_summary">Žymėti segmentus laiko juostoje.</string>
+    <string name="livestreams">Tiesioginės transliacijos</string>
 </resources>
