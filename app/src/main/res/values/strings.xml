@@ -353,6 +353,7 @@
     <string name="sb_markers">Markers</string>
     <string name="sb_markers_summary">Mark the segments on the time bar.</string>
     <string name="livestreams">Livestreams</string>
+    <string name="alternative_videos_layout">Alternative videos layout</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

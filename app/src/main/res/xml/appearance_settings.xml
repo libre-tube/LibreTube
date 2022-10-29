@@ -103,8 +103,8 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_trending"
             app:defaultValue="false"
-            app:key="trending_layout"
-            app:title="@string/trending_layout" />
+            app:key="alternative_videos_layout"
+            app:title="@string/alternative_videos_layout" />
 
         <ListPreference
             android:defaultValue="recent"

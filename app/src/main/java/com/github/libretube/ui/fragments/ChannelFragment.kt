@@ -20,8 +20,8 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.ShareData
-import com.github.libretube.ui.adapters.ChannelAdapter
 import com.github.libretube.ui.adapters.SearchAdapter
+import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.ImageHelper
@@ -38,7 +38,7 @@ class ChannelFragment : BaseFragment() {
     private var channelId: String? = null
     private var channelName: String? = null
     private var nextPage: String? = null
-    private var channelAdapter: ChannelAdapter? = null
+    private var channelAdapter: VideosAdapter? = null
     private var isLoading = true
     private var isSubscribed: Boolean? = false
 
@@ -184,9 +184,10 @@ class ChannelFragment : BaseFragment() {
                 ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
 
                 // recyclerview of the videos by the channel
-                channelAdapter = ChannelAdapter(
+                channelAdapter = VideosAdapter(
                     response.relatedStreams.orEmpty().toMutableList(),
-                    childFragmentManager
+                    childFragmentManager,
+                    forceType = VideosAdapter.FORCE_CHANNEL
                 )
                 binding.channelRecView.adapter = channelAdapter
             }
@@ -272,7 +273,7 @@ class ChannelFragment : BaseFragment() {
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
-                channelAdapter?.updateItems(response.relatedStreams!!)
+                channelAdapter?.insertItems(response.relatedStreams.orEmpty())
                 isLoading = false
                 binding.channelRefresh.isRefreshing = false
             }
