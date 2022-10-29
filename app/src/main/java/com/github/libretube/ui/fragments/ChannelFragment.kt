@@ -171,6 +171,14 @@ class ChannelFragment : BaseFragment() {
                 )
                 binding.channelRecView.adapter = channelAdapter
             }
+
+            response.tabs?.forEach {
+                try {
+                    RetrofitInstance.api.getChannelTab(it.data!!).toString()
+                } catch (e: Exception) {
+                    Log.e("error", e.toString())
+                }
+            }
         }
     }
 
