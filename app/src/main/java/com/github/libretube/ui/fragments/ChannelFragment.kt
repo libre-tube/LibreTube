@@ -30,7 +30,6 @@ class ChannelFragment : BaseFragment() {
 
     private var channelId: String? = null
     private var channelName: String? = null
-    private lateinit var shareData: ShareData
     private var nextPage: String? = null
     private var channelAdapter: ChannelAdapter? = null
     private var isLoading = true
@@ -103,7 +102,7 @@ class ChannelFragment : BaseFragment() {
             }
             // needed if the channel gets loaded by the ID
             channelId = response.id
-            shareData = ShareData(currentChannel = response.name)
+            val shareData = ShareData(currentChannel = response.name)
             // fetch and update the subscription status
             isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
             if (isSubscribed == null) return@launchWhenCreated
@@ -126,7 +125,11 @@ class ChannelFragment : BaseFragment() {
                 }
 
                 binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(response.id!!.toID(), ShareObjectType.CHANNEL, shareData)
+                    val shareDialog = ShareDialog(
+                        response.id!!.toID(),
+                        ShareObjectType.CHANNEL,
+                        shareData
+                    )
                     shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
             }
