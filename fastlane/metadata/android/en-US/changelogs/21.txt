@@ -1,0 +1,9 @@
+* New playing queue ft. shuffing  playlists and more
+* Support for channel tabs (e.g. playlists)
+* Option to show SponsorBlock markers
+* Show the comment reply count
+* Added metadata to lockscreen
+* Sharing video or channel via email
+* Light App Icon Version ft. @XelXen by
+* Alternative subscriptions layout
+* Option to customize the share time code
