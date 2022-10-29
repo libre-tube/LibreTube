@@ -34,11 +34,11 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
         binding.optionsRecycler.adapter = adapter
 
         binding.shuffle.setOnClickListener {
-            val streams = PlayingQueue.getStreams()
+            var streams = PlayingQueue.getStreams()
             val currentIndex = PlayingQueue.currentIndex()
             val current = streams[currentIndex]
 
-            streams.shuffle()
+            streams = streams.shuffled().toMutableList()
             streams.remove(current)
             streams.add(currentIndex, current)
             PlayingQueue.setStreams(streams)
@@ -47,11 +47,10 @@ class PlayingQueueSheet : BottomSheetDialogFragment() {
         }
 
         binding.clear.setOnClickListener {
-            val streams = PlayingQueue.getStreams()
-            val index = PlayingQueue.currentIndex()
+            val currentIndex = PlayingQueue.currentIndex()
 
-            while (index >= PlayingQueue.size()) {
-                streams.removeAt(index)
+            val streams = PlayingQueue.getStreams().filterIndexed {
+                    position, _ -> position <= currentIndex
             }
 
             PlayingQueue.setStreams(streams)

@@ -31,7 +31,6 @@ abstract class DoubleTapListener : View.OnClickListener {
 
     private val runnable = Runnable {
         if (isSecondClick()) return@Runnable
-        Log.e("single", "single")
         onSingleClick()
     }
 
