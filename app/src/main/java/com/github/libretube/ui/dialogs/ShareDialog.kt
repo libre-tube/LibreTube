@@ -108,12 +108,16 @@ class ShareDialog(
         return ""
     }
     private fun getShareableTitle(shareData: ShareData): String {
-        if (shareData.currentChannel != null) {
-            return shareData.currentChannel
-        } else if (shareData.currentPlaylist != null) {
-            return shareData.currentPlaylist
-        } else if (shareData.currentVideo != null) {
-            return shareData.currentVideo
+        shareData.apply {
+            currentChannel?.let {
+                return it
+            }
+            currentVideo?.let {
+                return it
+            }
+            currentPlaylist?.let {
+                return it
+            }
         }
         return ""
     }
