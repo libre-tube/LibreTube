@@ -356,4 +356,6 @@
     <string name="added_to_playlist">Lagt til på spillelisten</string>
     <string name="show_more">Vis mer</string>
     <string name="time_code">Tidskode</string>
+    <string name="sb_markers">Markører</string>
+    <string name="sb_markers_summary">Marker segmenter i forløpsindikatoren.</string>
 </resources>

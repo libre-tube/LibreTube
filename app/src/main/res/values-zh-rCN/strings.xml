@@ -122,7 +122,7 @@
     <string name="video_format_summary">如果同时下载了音频与视频，则转换成视频文件。</string>
     <string name="download_directory">下载到</string>
     <string name="update">检测新版本</string>
-    <string name="update_summary">单击检查应用是否是最新版。</string>
+    <string name="update_summary">检查更新</string>
     <string name="category_preview">预览/回放</string>
     <string name="video_format">视频格式</string>
     <string name="appearance">外观</string>
@@ -356,4 +356,6 @@
     <string name="added_to_playlist">已添加到播放列表</string>
     <string name="playing_queue">播放队列</string>
     <string name="queue">队列</string>
+    <string name="sb_markers">标记</string>
+    <string name="sb_markers_summary">在时间栏上标记段。</string>
 </resources>

@@ -125,7 +125,7 @@
     <string name="views">%1$s مشاهدة</string>
     <string name="defaultIcon">الإفتراضي</string>
     <string name="update">ابحث عن الإصدار الجديد</string>
-    <string name="update_summary">انقر لمعرفة ما إذا كان التطبيق محدثا أم لا.</string>
+    <string name="update_summary">التحقق من وجود تحديث</string>
     <string name="app_uptodate">يتم حاليا تشغيل أحدث إصدار.</string>
     <string name="no_update_available">انت تقوم الان بتشغيل أحدث إصدار.</string>
     <string name="download_folder">الاسم</string>
@@ -356,4 +356,6 @@
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
     <string name="playing_queue">تشغيل قائمة الانتظار</string>
     <string name="queue">الانتظار</string>
+    <string name="sb_markers">العلامات</string>
+    <string name="sb_markers_summary">وضع علامة على الأجزاء في شريط الوقت.</string>
 </resources>
