@@ -112,7 +112,7 @@
     <string name="app_icon">Ícone</string>
     <string name="sponsorblock_notifications">Notificações</string>
     <string name="enabled">Habilitado</string>
-    <string name="piped">Canalizado</string>
+    <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Reproduzir em segundo plano</string>
     <string name="disabled">Desabilitado</string>
@@ -359,4 +359,5 @@
     <string name="sb_markers_summary">Marque os segmentos na barra de tempo.</string>
     <string name="show_more">Mostrar mais</string>
     <string name="time_code">Código de tempo</string>
+    <string name="alternative_videos_layout">Layout de vídeos alternativos</string>
 </resources>
