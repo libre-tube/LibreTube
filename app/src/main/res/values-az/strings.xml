@@ -358,4 +358,5 @@
     <string name="queue">Növbə</string>
     <string name="sb_markers">Göstəricilər</string>
     <string name="sb_markers_summary">Zaman çubuğunda seqmentləri göstər.</string>
+    <string name="livestreams">Canlı yayımlar</string>
 </resources>
