@@ -129,7 +129,7 @@
     <string name="defaultIcon">Predeterminado</string>
     <string name="download_directory_summary">Dónde se almacenan los archivos descargados.</string>
     <string name="update">Ver si hay una nueva versión</string>
-    <string name="update_summary">Toca para saber si la aplicación está actualizada.</string>
+    <string name="update_summary">Buscar actualizaciones</string>
     <string name="app_uptodate">Ejecutando la última versión.</string>
     <string name="download_folder">Nombre</string>
     <string name="downloads_directory">Carpeta de descargas</string>
@@ -356,4 +356,7 @@
     <string name="added_to_playlist">Se ha añadido a la lista de reproducción</string>
     <string name="queue">Cola</string>
     <string name="playing_queue">Cola de la reproducción</string>
+    <string name="sb_markers">Marcadores</string>
+    <string name="sb_markers_summary">Marque los segmentos en la barra de tiempo.</string>
+    <string name="livestreams">Retrasmisiones en directo</string>
 </resources>

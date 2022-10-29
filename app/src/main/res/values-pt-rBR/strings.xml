@@ -79,7 +79,7 @@
     <string name="choose_filter">Escolher filtro de pesquisa</string>
     <string name="clear_history">Limpar histórico</string>
     <string name="all">Todos</string>
-    <string name="playlists">Listas de reprodução</string>
+    <string name="playlists">Playlists</string>
     <string name="music_songs">Músicas do YT Music</string>
     <string name="okay">OK</string>
     <string name="history">Histórico</string>
@@ -141,7 +141,7 @@
     <string name="video_format">Formato de vídeo</string>
     <string name="video_format_summary">Conversão de arquivos se o áudio e o vídeo forem baixados.</string>
     <string name="update">Procure uma nova versão</string>
-    <string name="update_summary">Clique para saber se o aplicativo está atualizado.</string>
+    <string name="update_summary">Verificar por atualizações</string>
     <string name="playback_speed">Velocidade de reprodução</string>
     <string name="advanced">Avançado</string>
     <string name="player">Reprodutor</string>
@@ -272,7 +272,7 @@
     <string name="pauseOnScreenOff_summary">Pausar quando a tela é desligada.</string>
     <string name="autoplay_summary">Reproduzir o próximo vídeo assim que o atual termina.</string>
     <string name="playingOnBackground">Reproduzindo em segundo plano …</string>
-    <string name="clonePlaylist">Clonar lista de reprodução</string>
+    <string name="clonePlaylist">Clonar playlist</string>
     <string name="downloading">Baixando…</string>
     <string name="caption_settings">Legendas</string>
     <string name="downloading_apk">Baixando APK…</string>
@@ -351,4 +351,12 @@
     <string name="trending_layout">Layout de tendências alternativa</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dados móveis</string>
+    <string name="playing_queue">Fila de reprodução</string>
+    <string name="queue">Fila</string>
+    <string name="added_to_playlist">Adicionado à playlist</string>
+    <string name="sb_markers">Marcadores</string>
+    <string name="livestreams">Transmissões ao vivo</string>
+    <string name="sb_markers_summary">Marque os segmentos na barra de tempo.</string>
+    <string name="show_more">Mostrar mais</string>
+    <string name="time_code">Código de tempo</string>
 </resources>

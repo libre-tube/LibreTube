@@ -358,4 +358,5 @@
     <string name="queue">队列</string>
     <string name="sb_markers">标记</string>
     <string name="sb_markers_summary">在时间栏上标记段。</string>
+    <string name="livestreams">直播</string>
 </resources>
