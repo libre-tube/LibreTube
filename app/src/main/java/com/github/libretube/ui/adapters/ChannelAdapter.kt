@@ -3,6 +3,7 @@ package com.github.libretube.ui.adapters
 import android.annotation.SuppressLint
 import android.text.format.DateUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,16 +44,24 @@ class ChannelAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
         val video = videoFeed[position]
+
+        // hide the item if there was an extractor error
+        if (video.title == null) {
+            holder.itemView.visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+            return
+        }
+
         holder.binding.apply {
             videoTitle.text = video.title
 
             videoInfo.text =
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                " • " + DateUtils.getRelativeTimeSpanString(video.uploaded!!)
+                " • " + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
 
             thumbnailDuration.text =
-                DateUtils.formatElapsedTime(video.duration!!)
+                video.duration?.let { DateUtils.formatElapsedTime(it) }
 
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
@@ -65,15 +74,19 @@ class ChannelAdapter(
                 NavigationHelper.navigateVideo(root.context, video.url)
             }
 
-            val videoId = video.url!!.toID()
-            val videoName = video.title!!
+            val videoId = video.url?.toID()
+            val videoName = video.title
             root.setOnLongClickListener {
+                if (videoId == null || videoName == null) return@setOnLongClickListener true
                 VideoOptionsBottomSheet(videoId, videoName)
                     .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+
                 true
             }
 
-            watchProgress.setWatchProgressLength(videoId, video.duration!!)
+            if (videoId != null) {
+                watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
+            }
         }
     }
 }

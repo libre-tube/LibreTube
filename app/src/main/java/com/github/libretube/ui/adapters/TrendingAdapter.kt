@@ -50,31 +50,33 @@ class TrendingAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
-        val trending = streamItems[position]
+        val video = streamItems[position]
 
-        if (trending.title == null) {
+        // hide the item if there was an extractor error
+        if (video.title == null) {
             holder.itemView.visibility = View.GONE
+            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
             return
         }
 
         holder.binding.apply {
-            textViewTitle.text = trending.title
+            textViewTitle.text = video.title
             textViewChannel.text =
-                trending.uploaderName + " • " +
-                trending.views.formatShort() + " " +
+                video.uploaderName + " • " +
+                video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                " • " + trending.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
-            trending.duration?.let { thumbnailDuration.setFormattedDuration(it) }
+                " • " + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
+            video.duration?.let { thumbnailDuration.setFormattedDuration(it) }
             channelImage.setOnClickListener {
-                NavigationHelper.navigateChannel(root.context, trending.uploaderUrl)
+                NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }
-            ImageHelper.loadImage(trending.thumbnail, thumbnail)
-            ImageHelper.loadImage(trending.uploaderAvatar, channelImage)
+            ImageHelper.loadImage(video.thumbnail, thumbnail)
+            ImageHelper.loadImage(video.uploaderAvatar, channelImage)
             root.setOnClickListener {
-                NavigationHelper.navigateVideo(root.context, trending.url)
+                NavigationHelper.navigateVideo(root.context, video.url)
             }
-            val videoId = trending.url?.toID()
-            val videoName = trending.title
+            val videoId = video.url?.toID()
+            val videoName = video.title
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
 
@@ -84,7 +86,7 @@ class TrendingAdapter(
                 true
             }
             if (videoId != null) {
-                watchProgress.setWatchProgressLength(videoId, trending.duration ?: 0L)
+                watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
             }
         }
     }
