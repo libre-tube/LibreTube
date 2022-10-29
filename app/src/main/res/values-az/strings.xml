@@ -134,7 +134,7 @@
     <string name="player">Oynadıcı</string>
     <string name="appearance_summary">Tətbiqi zövqünüzə uyğunlaşdırın.</string>
     <string name="advanced_summary">Endirmələr və sıfırlama</string>
-    <string name="update_summary">Tətbiqin güncəl olduğunu öyrənmək üçün klikləyin.</string>
+    <string name="update_summary">Yeniləməni yoxla</string>
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
     <string name="authors">Müəlliflər</string>
@@ -356,4 +356,6 @@
     <string name="added_to_playlist">Pleylistə əlavə edildi</string>
     <string name="playing_queue">Oynatma növbəsi</string>
     <string name="queue">Növbə</string>
+    <string name="sb_markers">Göstəricilər</string>
+    <string name="sb_markers_summary">Zaman çubuğunda seqmentləri göstər.</string>
 </resources>
