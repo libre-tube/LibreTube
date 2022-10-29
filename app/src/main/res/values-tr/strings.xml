@@ -358,4 +358,5 @@
     <string name="playing_queue">Oynatma sırası</string>
     <string name="sb_markers">İşaretçiler</string>
     <string name="sb_markers_summary">Segmentleri zaman çubuğunda işaretleyin.</string>
+    <string name="livestreams">Canlı yayınlar</string>
 </resources>
