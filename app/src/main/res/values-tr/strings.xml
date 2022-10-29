@@ -127,7 +127,7 @@
     <string name="download_directory_summary">İndirilen medyanın depolandığı yer.</string>
     <string name="contributing">Katkı</string>
     <string name="donate">Bağış</string>
-    <string name="update_summary">Uygulamanın güncel olup olmadığını öğrenmek için tıklayın.</string>
+    <string name="update_summary">Güncellemeleri kontrol et</string>
     <string name="app_uptodate">En son sürümü çalıştırıyor.</string>
     <string name="no_update_available">En son sürümü çalıştırıyorsunuz.</string>
     <string name="playback_speed">Oynatma hızı</string>
@@ -356,4 +356,6 @@
     <string name="added_to_playlist">Oynatma listesine eklendi</string>
     <string name="queue">Sıra</string>
     <string name="playing_queue">Oynatma sırası</string>
+    <string name="sb_markers">İşaretçiler</string>
+    <string name="sb_markers_summary">Segmentleri zaman çubuğunda işaretleyin.</string>
 </resources>
