@@ -68,7 +68,7 @@
     <string name="videoCount">%1$s vídeos</string>
     <string name="location">Localização</string>
     <string name="instance">Instância</string>
-    <string name="website">Sítio Web</string>
+    <string name="website">Website</string>
     <string name="comments">Comentários</string>
     <string name="noInternet">Conecte-se à Internet primeiro.</string>
     <string name="retry">Tente novamente</string>
@@ -360,4 +360,5 @@
     <string name="show_more">Mostrar mais</string>
     <string name="time_code">Código de tempo</string>
     <string name="alternative_videos_layout">Layout de vídeos alternativos</string>
+    <string name="defaultIconLight">Claro padrão</string>
 </resources>
