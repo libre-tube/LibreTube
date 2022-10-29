@@ -216,7 +216,7 @@ class ChannelFragment : BaseFragment() {
         chip.visibility = View.VISIBLE
         chip.setOnClickListener {
             binding.tabChips.children.forEach {
-                if (it != chip) it.isSelected = false
+                if (it != chip) (it as Chip).isChecked = false
             }
             scope.launch {
                 val response = try {
@@ -243,7 +243,11 @@ class ChannelFragment : BaseFragment() {
                                 e.printStackTrace()
                                 null
                             }
-                            newContent?.content?.let { adapter.updateItems(it) }
+                            runOnUiThread {
+                                newContent?.content?.let {
+                                    adapter.updateItems(it)
+                                }
+                            }
                         }
                     }
                 }
