@@ -214,6 +214,7 @@
 
     <string-array name="icons">
         <item>@string/defaultIcon</item>
+        <item>@string/defaultIconLight</item>
         <item>@string/legacyIcon</item>
         <item>@string/gradientIcon</item>
         <item>@string/fireIcon</item>
@@ -224,6 +225,7 @@
     </string-array>
     <string-array name="iconsValue">
         <item>MainActivity</item>
+        <item>DefaultLight</item>
         <item>IconLegacy</item>
         <item>IconGradient</item>
         <item>IconFire</item>

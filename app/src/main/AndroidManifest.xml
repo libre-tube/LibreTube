@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:installLocation="auto">
 
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -20,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/StartupTheme"
-        tools:targetApi="n">
+        tools:targetApi="n"
+        android:banner="@mipmap/ic_launcher">
 
         <activity
             android:name=".ui.activities.NoInternetActivity"
@@ -70,6 +78,26 @@
             android:icon="@mipmap/ic_gradient"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_gradient_round"
+            android:supportsPictureInPicture="true"
+            android:targetActivity=".ui.activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".DefaultLight"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:enabled="false"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:icon="@mipmap/ic_launcher_light"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_light_round"
             android:supportsPictureInPicture="true"
             android:targetActivity=".ui.activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
