@@ -15,16 +15,17 @@ import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
-import com.github.libretube.ui.adapters.TrendingAdapter
+import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.views.BottomSheet
+import com.github.libretube.util.LayoutHelper
 import com.github.libretube.util.PreferenceHelper
 
 class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
     private val viewModel: SubscriptionsViewModel by activityViewModels()
 
-    private var subscriptionAdapter: TrendingAdapter? = null
+    private var subscriptionAdapter: VideosAdapter? = null
     private var sortOrder = 0
 
     override fun onCreateView(
@@ -48,12 +49,7 @@ class SubscriptionsFragment : BaseFragment() {
 
         binding.subProgress.visibility = View.VISIBLE
 
-        val grid = PreferenceHelper.getString(
-            PreferenceKeys.GRID_COLUMNS,
-            resources.getInteger(R.integer.grid_items).toString()
-        )
-
-        binding.subFeed.layoutManager = GridLayoutManager(view.context, grid.toInt())
+        binding.subFeed.layoutManager = LayoutHelper.getVideoLayout(requireContext())
 
         if (viewModel.videoFeed.value == null || !loadFeedInBackground) {
             viewModel.videoFeed.value = null
@@ -158,7 +154,11 @@ class SubscriptionsFragment : BaseFragment() {
             if (viewModel.videoFeed.value!!.isEmpty()) View.VISIBLE else View.GONE
 
         binding.subProgress.visibility = View.GONE
-        subscriptionAdapter = TrendingAdapter(sortedFeed, childFragmentManager, false)
+        subscriptionAdapter = VideosAdapter(
+            sortedFeed.toMutableList(),
+            childFragmentManager,
+            showAllAtOnce = false
+        )
         binding.subFeed.adapter = subscriptionAdapter
     }
 

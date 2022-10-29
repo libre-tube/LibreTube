@@ -63,7 +63,7 @@ import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.adapters.CommentsAdapter
-import com.github.libretube.ui.adapters.TrendingAdapter
+import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
@@ -903,9 +903,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
         if (PlayerHelper.relatedStreamsEnabled) {
             // only show related streams if enabled
-            binding.relatedRecView.adapter = TrendingAdapter(
-                response.relatedStreams!!,
-                childFragmentManager
+            binding.relatedRecView.adapter = VideosAdapter(
+                response.relatedStreams.orEmpty().toMutableList(),
+                childFragmentManager,
+                forceType = VideosAdapter.FORCE_TRENDING
             )
         }
         // set video description
