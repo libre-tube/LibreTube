@@ -96,7 +96,7 @@ class MainActivity : BaseActivity() {
         window.navigationBarColor = color
 
         // save start tab fragment id and apply navbar style
-        startFragmentId =  try {
+        startFragmentId = try {
             NavBarHelper.applyNavBarStyle(binding.bottomNav)
         } catch (e: Exception) {
             R.id.homeFragment
