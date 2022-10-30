@@ -137,7 +137,7 @@
     <string name="defaultIcon">Výchozí</string>
     <string name="video_format_summary">Převod obou souborů při stažení zvuku i videa.</string>
     <string name="update">Najít novou verzi</string>
-    <string name="update_summary">Klepněte pro zjištění, zda je aplikace aktuální.</string>
+    <string name="update_summary">Vyhledat aktualizace</string>
     <string name="app_uptodate">Používáte nejnovější verzi.</string>
     <string name="legacyIcon">Ztracená minulost</string>
     <string name="no_update_available">Používáte poslední verzi aplikace.</string>
@@ -356,4 +356,9 @@
     <string name="added_to_playlist">Přidáno do playlistu</string>
     <string name="queue">Fronta</string>
     <string name="playing_queue">Přehrávání fronty</string>
+    <string name="livestreams">Živé přenosy</string>
+    <string name="alternative_videos_layout">Alternativní rozvržení videí</string>
+    <string name="sb_markers">Značky</string>
+    <string name="sb_markers_summary">Označte si úseky na časové liště.</string>
+    <string name="defaultIconLight">Výchozí světlá</string>
 </resources>
