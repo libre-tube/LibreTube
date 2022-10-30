@@ -20,7 +20,7 @@ object PreferenceKeys {
     const val BREAK_REMINDER_TOGGLE = "break_reminder_toggle"
     const val BREAK_REMINDER = "break_reminder"
     const val SAVE_FEED = "save_feed"
-    const val NAVBAR_ITEMS = "nav_bar_items"
+    const val NAVBAR_ITEMS = "navbar_items"
 
     /**
      * Appearance

@@ -40,9 +40,8 @@
 
         <Preference
             android:icon="@drawable/ic_home"
-            app:key="nav_bar_items"
+            app:key="navbar_items"
             app:title="@string/navigation_bar" />
-
 
     </PreferenceCategory>
 
