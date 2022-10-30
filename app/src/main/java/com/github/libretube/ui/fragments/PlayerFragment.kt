@@ -255,6 +255,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     mainActivity.binding.mainMotionLayout
                 mainMotionLayout.progress = abs(progress)
                 exoPlayerView.hideController()
+                exoPlayerView.useController = false
                 eId = endId
                 sId = startId
             }

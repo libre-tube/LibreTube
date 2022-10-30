@@ -95,8 +95,12 @@ class MainActivity : BaseActivity() {
         // sets the navigation bar color to the previously calculated color
         window.navigationBarColor = color
 
-        // save start tab fragment id
-        startFragmentId = NavBarHelper.applyNavBarStyle(binding.bottomNav)
+        // save start tab fragment id and apply navbar style
+        startFragmentId =  try {
+            NavBarHelper.applyNavBarStyle(binding.bottomNav)
+        } catch (e: Exception) {
+            R.id.homeFragment
+        }
 
         // set default tab as start fragment
         navController.graph.setStartDestination(startFragmentId)

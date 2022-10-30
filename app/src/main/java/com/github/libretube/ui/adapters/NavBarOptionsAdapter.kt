@@ -1,16 +1,16 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.NavOptionsItemBinding
-import com.github.libretube.obj.NavBarItem
 import com.github.libretube.ui.viewholders.NavBarOptionsViewHolder
 
 class NavBarOptionsAdapter(
-    val items: MutableList<NavBarItem>
+    val items: MutableList<MenuItem>
 ) : RecyclerView.Adapter<NavBarOptionsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NavBarOptionsViewHolder {
@@ -30,9 +30,9 @@ class NavBarOptionsAdapter(
         val item = items[position]
         holder.binding.apply {
             title.text = item.title
-            checkbox.isChecked = item.isEnabled
+            checkbox.isChecked = item.isVisible
             checkbox.setOnClickListener {
-                if (!checkbox.isChecked && getEnabledItemsCount() < 2) {
+                if (!checkbox.isChecked && getVisibleItemsCount() < 2) {
                     checkbox.isChecked = true
                     Toast.makeText(
                         root.context,
@@ -41,12 +41,12 @@ class NavBarOptionsAdapter(
                     ).show()
                     return@setOnClickListener
                 }
-                items[position].isEnabled = checkbox.isChecked
+                items[position].isVisible = checkbox.isChecked
             }
         }
     }
 
-    private fun getEnabledItemsCount(): Int {
-        return items.filter { it.isEnabled }.size
+    private fun getVisibleItemsCount(): Int {
+        return items.filter { it.isVisible }.size
     }
 }
