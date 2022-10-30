@@ -359,4 +359,6 @@
     <string name="sb_markers">Marcadores</string>
     <string name="sb_markers_summary">Marque los segmentos en la barra de tiempo.</string>
     <string name="livestreams">Retrasmisiones en directo</string>
+    <string name="alternative_videos_layout">Diseño alternativo para los videos</string>
+    <string name="defaultIconLight">Claro por defecto</string>
 </resources>
