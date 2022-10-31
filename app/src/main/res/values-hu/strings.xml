@@ -35,7 +35,7 @@
     <string name="login">Bejelentkezés</string>
     <string name="register">Regisztráció</string>
     <string name="password">Jelszó</string>
-    <string name="login_first">Lépjen be és próbálja újra!</string>
+    <string name="login_first">Lépjen be és próbálja újra.</string>
     <string name="areYouSure">Biztosan törölni szeretné a lejátszási listát\?</string>
     <string name="app_theme">Téma</string>
     <string name="emptyList">Itt nincs semmi.</string>
@@ -109,7 +109,7 @@
     <string name="sponsorblock_notifications">Értesítések</string>
     <string name="enabled">Be</string>
     <string name="disabled">Ki</string>
-    <string name="customization">Beállítások</string>
+    <string name="customization">Kiigazítások</string>
     <string name="instance">Példány</string>
     <string name="website">Weboldal</string>
     <string name="open">Megnyitás</string>
@@ -286,7 +286,7 @@
     <string name="app_icon">Ikon</string>
     <string name="downloads">Letöltések</string>
     <string name="network_wifi">Csak wifin</string>
-    <string name="update_summary">Kattintson, hogy megtekintse, hogy naprakész-e az alkalmazás.</string>
+    <string name="update_summary">Frissítések ellenőrzése.</string>
     <string name="translate">Fordítás</string>
     <string name="authors">Szerzők</string>
     <string name="download_folder_summary">A mappa neve, amelyben a letöltött média lesz tárolva.</string>
@@ -334,8 +334,8 @@
     <string name="select_at_least_one">Válasszon ki legalább egy elemet</string>
     <string name="views_placeholder">megtekintés</string>
     <string name="progressive_load_interval_summary">Egy alacsonyabb érték lehet, hogy felgyorsítja a kezdeti videóbetöltést.</string>
-    <string name="save_feed_summary">A feliratkozott videók folyamának betöltése a háttérben, és annak megakadályozása, hogy automatikusan frissüljön.</string>
-    <string name="background_channel_description">Megjelenít egy értesítést a hanglejátszó vezérlésére szolgáló gombokkal.</string>
+    <string name="save_feed_summary">Töltse be az előfizetési hírcsatornát a háttérben, és akadályozza meg az automatikus frissítést.</string>
+    <string name="background_channel_description">Megjelenít egy értesítést a lejátszó vezérlésére szolgáló gombokkal.</string>
     <string name="skip_segment">Szegmens kihagyása</string>
     <string name="sb_skip_manual">Manuális kihagyás</string>
     <string name="sb_skip_manual_summary">Ne hagyja ki a szegmenseket automatikusan, mindig kérdezzen előtte.</string>
@@ -353,7 +353,12 @@
     <string name="recentlyUpdated">Mostanában frissített</string>
     <string name="recentlyUpdatedReversed">Mostanában frissített (fordítva)</string>
     <string name="show_more">Több megjelenítése</string>
-    <string name="time_code">Időpont</string>
+    <string name="time_code">Időkód</string>
     <string name="playing_queue">Lejátszási sor</string>
     <string name="queue">Sor</string>
+    <string name="sb_markers">Jelölők</string>
+    <string name="sb_markers_summary">Jelölje meg a szakaszokat az idősávon.</string>
+    <string name="livestreams">Élő közvetítések</string>
+    <string name="alternative_videos_layout">Videók alternatív elrendezése</string>
+    <string name="defaultIconLight">Alapért. világos</string>
 </resources>
