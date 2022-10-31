@@ -149,10 +149,12 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
+                    android:weightSum="5"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -163,11 +165,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/share" />
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="8sp"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="@string/share"
+                            tools:targetApi="o" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_download"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -178,7 +186,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="8sp"
                             android:gravity="center"
                             android:maxLines="1"
                             android:text="@string/download"
@@ -187,6 +196,7 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_open"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -198,12 +208,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="8sp"
                             android:gravity="center"
-                            android:text="@string/open" />
+                            android:maxLines="1"
+                            android:text="@string/open"
+                            tools:targetApi="o" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_background"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -214,11 +229,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/audio" />
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="8sp"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="@string/audio"
+                            tools:targetApi="o" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_save"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -229,7 +250,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/save" />
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="8sp"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="@string/save"
+                            tools:targetApi="o" />
                     </LinearLayout>
 
                 </LinearLayout>
