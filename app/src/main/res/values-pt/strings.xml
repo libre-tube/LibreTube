@@ -87,7 +87,7 @@
     <string name="music_songs">Músicas no YT</string>
     <string name="music_videos">Videos de música no YT</string>
     <string name="music_albums">Álbuns de música no YT</string>
-    <string name="category_sponsor_description">Promoções e referências pagas e anúncios diretos. Não para autopromoção nem para comunicações acerca de causas, criações, sites e produtos.</string>
+    <string name="category_sponsor_description">Promoções, referências pagas e anúncios diretos. Não para autopromoção nem para comunicações acerca de causas, criações, sites e produtos.</string>
     <string name="music_playlists">Listas de música no YT</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Utiliza a API https://sponsor.ajay.app</string>
