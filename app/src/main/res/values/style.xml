@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="roundedImageViewRounded">
 
@@ -89,6 +89,13 @@
         <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>
 
+    </style>
+
+    <style name="PlayerActionsText">
+        <item name="android:autoSizeTextType" tools:targetApi="o">uniform</item>
+        <item name="android:autoSizeMinTextSize" tools:targetApi="o">10sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:gravity">bottom</item>
     </style>
 
     <style name="PlayerControlBottom">
