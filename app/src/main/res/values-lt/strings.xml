@@ -359,4 +359,6 @@
     <string name="sb_markers">Žymekliai</string>
     <string name="sb_markers_summary">Žymėti segmentus laiko juostoje.</string>
     <string name="livestreams">Tiesioginės transliacijos</string>
+    <string name="alternative_videos_layout">Alternatyvus vaizdo įrašų išdėstymas</string>
+    <string name="defaultIconLight">Numatytoji šviesi</string>
 </resources>

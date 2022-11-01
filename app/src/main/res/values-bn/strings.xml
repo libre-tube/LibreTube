@@ -158,7 +158,7 @@
     <string name="contributing">অবদানে</string>
     <string name="category_preview_description">ভিডিওর এই অংশে আসন্ন কন্টেন্ট অথবা একই সিরিজের অন্য ভিডিওতে পূর্বে আলোচনা করা হয়েছে এমন তথ্য এখানে থাকবে‌‌ যদি এখানে এমন তথ্য থাকে যা অন্য ভিডিও বা একই ভিডিওর অন্য কোথাও আলোচনা করা হয়নি, তবে ভিডিওর উক্ত অংশের জন্য ভুল ক্যাটাগরি নির্বাচন করা হয়েছে।</string>
     <string name="player">প্লেয়ার</string>
-    <string name="update_summary">অ্যাপটি হালনাগাদ করা হয়েছে কিনা জানতে ক্লিক করুন।</string>
+    <string name="update_summary">আপডেট চেক করুন</string>
     <string name="no_update_available">আপনি সর্বশেষ সংস্করণ ব্যবহার করছেন।</string>
     <string name="live">সরাসরি</string>
     <string name="views">দর্শক সংখ্যা %1$s</string>
@@ -354,4 +354,11 @@
     <string name="recentlyUpdatedReversed">সম্প্রতি আপডেট করা হয়েছে (উল্টো)</string>
     <string name="show_more">আরো দেখান</string>
     <string name="time_code">সময় কোড</string>
+    <string name="playing_queue">কিউ</string>
+    <string name="queue">কিউ</string>
+    <string name="sb_markers">মার্কারস</string>
+    <string name="sb_markers_summary">সেগমেন্টগুলোকে টাইমবারে চিহ্নিত করুন।</string>
+    <string name="livestreams">লাইভস্ট্রিমগুলো</string>
+    <string name="alternative_videos_layout">বিকল্প ভিডিও লেয়াউট</string>
+    <string name="defaultIconLight">ডিফল্ট লাইট</string>
 </resources>

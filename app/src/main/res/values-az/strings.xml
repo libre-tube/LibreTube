@@ -359,4 +359,6 @@
     <string name="sb_markers">Göstəricilər</string>
     <string name="sb_markers_summary">Zaman çubuğunda seqmentləri göstər.</string>
     <string name="livestreams">Canlı yayımlar</string>
+    <string name="alternative_videos_layout">Alternativ video tərtibatı</string>
+    <string name="defaultIconLight">Defolt işıqlı</string>
 </resources>

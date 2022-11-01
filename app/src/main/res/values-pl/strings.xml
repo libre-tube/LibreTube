@@ -35,7 +35,7 @@
     <string name="error">Coś poszło nie tak.</string>
     <string name="notgmail">To jest dla konta Piped.</string>
     <string name="defres">Rozdzielczość wideo</string>
-    <string name="grid">Zagęszczenie siatki filmów</string>
+    <string name="grid">Kolumny siatki</string>
     <string name="emptyList">Tu jeszcze nic nie ma.</string>
     <string name="deletePlaylist">Usuń listę odtwarzania</string>
     <string name="createPlaylist">Utwórz nową listę odtwarzania</string>
@@ -128,7 +128,7 @@
     <string name="download_directory_summary">Miejsce przechowywania pobranych mediów.</string>
     <string name="app_uptodate">Uruchomiona jest najnowsza wersja.</string>
     <string name="no_update_available">Używasz najnowszej wersji.</string>
-    <string name="appearance_summary">Dostosuj aplikację do swoich potrzeb.</string>
+    <string name="appearance_summary">Dostosuj aplikację do swoich potrzeb</string>
     <string name="advanced_summary">Pobieranie i resetowanie</string>
     <string name="download_folder">Nazwa</string>
     <string name="download_folder_summary">Nazwa folderu, w którym przechowywane są pobrane media.</string>
@@ -143,7 +143,7 @@
     <string name="invalid_url">Proszę podać poprawny adres URL</string>
     <string name="customInstance_summary">Dodaj…</string>
     <string name="update">Sprawdź, czy dostępna jest nowsza wersja</string>
-    <string name="update_summary">Kliknij, aby dowiedzieć się, czy aplikacja jest aktualna.</string>
+    <string name="update_summary">Sprawdź czy jest nowa wersja</string>
     <string name="instance_name">Nazwa instancji</string>
     <string name="clear_customInstances">Wyczyść niestandardowe instancje</string>
     <string name="version">Wersja %1$s</string>
@@ -181,7 +181,7 @@
     <string name="deleteAccount_summary">Usuń konto Piped</string>
     <string name="account">Konto</string>
     <string name="restore">Przywróć kopię zapasową</string>
-    <string name="require_restart_message">Ta zmiana wymaga restartu aplikacji. Naciśnij „OK”, aby teraz ponownie uruchomić.</string>
+    <string name="require_restart_message">Naciśnij „OK”, aby zastosować zmiany. Aplikacja zostanie zrestartowana.</string>
     <string name="notifications">Powiadomienia</string>
     <string name="notify_new_streams">Powiadomienia o nowych filmach</string>
     <string name="notify_new_streams_summary">Powiadomienia o świeżych treściach od twórców, których śledzisz.</string>
@@ -193,7 +193,7 @@
     <string name="translate">Tłumaczenie</string>
     <string name="error_occurred">Błąd</string>
     <string name="copied">Skopiowano</string>
-    <string name="legacy_subscriptions">Widok starszych subskrypcji</string>
+    <string name="legacy_subscriptions">Starszy widok subskrybcji</string>
     <string name="device_info">Informacje o urządzeniu</string>
     <string name="downloading">Pobieranie…</string>
     <string name="autoplay_summary">Automatyczne odtwarzanie następnego filmu.</string>
@@ -210,7 +210,7 @@
     <string name="downloadsucceeded">Pobieranie ukończone</string>
     <string name="skip_buttons">Przyciski pomijania</string>
     <string name="skip_buttons_summary">Pokaż przyciski umożliwiające przejście do następnego lub poprzedniego filmu.</string>
-    <string name="watch_positions">Zapamiętaj pozycję</string>
+    <string name="watch_positions">Zapamiętane pozycje</string>
     <string name="watch_positions_summary">Kontynuuj odtwarzanie od ostatniej pozycji</string>
     <string name="hls">Auto</string>
     <string name="github">GitHub</string>
@@ -246,7 +246,7 @@
     <string name="no_player_found">Nie znaleziono zewnętrznego odtwarzacza. Upewnij się, że masz takowy zainstalowany.</string>
     <string name="data_saver_mode">Tryb oszczędzania danych</string>
     <string name="data_saver_mode_summary">Pomiń miniatury i inne obrazy.</string>
-    <string name="search_history_summary">Zapamiętaj wyszukiwania</string>
+    <string name="search_history_summary">Zapamiętane wyszukiwania</string>
     <string name="watch_history_summary">Przechowuj historię obejrzanych filmów lokalnie</string>
     <string name="history_summary">Historia oglądania i wyszukiwania</string>
     <string name="watch_positions_title">Zapamiętane pozycje odtwarzania</string>
@@ -356,4 +356,9 @@
     <string name="added_to_playlist">Dodano do listy odtwarzania</string>
     <string name="playing_queue">Odtwarzana kolejka</string>
     <string name="queue">Kolejka</string>
+    <string name="sb_markers">Oznaczenia</string>
+    <string name="livestreams">Na żywo</string>
+    <string name="alternative_videos_layout">Alternatywny układ filmów</string>
+    <string name="defaultIconLight">Jasna (domyślnie)</string>
+    <string name="sb_markers_summary">Oznacz segmenty na pasku czasu.</string>
 </resources>

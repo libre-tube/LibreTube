@@ -66,7 +66,7 @@
     <string name="download_directory">הורדה אל</string>
     <string name="download_directory_summary">איפה יאוחסנו פריטי המדיה שבחרת להוריד.</string>
     <string name="donate">תרומה</string>
-    <string name="update_summary">לחיצה כאן תבדוק אם היישומון עדכני.</string>
+    <string name="update_summary">איתור עדכונים</string>
     <string name="player">נגן</string>
     <string name="library">ספרייה</string>
     <string name="password">סיסמה</string>
@@ -356,4 +356,9 @@
     <string name="added_to_playlist">נוסף לרשימת נגינה</string>
     <string name="queue">תור</string>
     <string name="playing_queue">תור נגינה</string>
+    <string name="sb_markers">סמנים</string>
+    <string name="sb_markers_summary">סימון המקטעים בציר הזמן.</string>
+    <string name="livestreams">שידורים חיים</string>
+    <string name="alternative_videos_layout">פריסת סרטונים חלופית</string>
+    <string name="defaultIconLight">בהיר כברירת מחדל</string>
 </resources>

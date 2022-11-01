@@ -129,7 +129,7 @@
     <string name="contributing">Collabora</string>
     <string name="donate">Dona</string>
     <string name="update">Cerca una nuova versione</string>
-    <string name="update_summary">Clicca qui per scoprire se l\'app è aggiornata.</string>
+    <string name="update_summary">Cerca aggiornamenti</string>
     <string name="app_uptodate">Versione più recente in esecuzione.</string>
     <string name="no_update_available">Stai eseguendo l\'ultima versione.</string>
     <string name="playback_speed">Velocità di riproduzione</string>
@@ -352,4 +352,13 @@
     <string name="recentlyUpdatedReversed">Aggiornato di recente (invertito)</string>
     <string name="added_to_playlist">Aggiunto alla playlist</string>
     <string name="show_more">Mostra di più</string>
+    <string name="playing_queue">Coda di riproduzione</string>
+    <string name="queue">Coda</string>
+    <string name="sb_markers">Marcatori</string>
+    <string name="sb_markers_summary">Segna i segmenti sulla barra del tempo.</string>
+    <string name="livestreams">Trasmissioni in diretta</string>
+    <string name="alternative_videos_layout">Layout alternativo per i video</string>
+    <string name="defaultIconLight">Luce predefinita</string>
+    <string name="progressive_load_interval">Dimensione dell\'intervallo di carico progressivo</string>
+    <string name="time_code">Codice temporale</string>
 </resources>

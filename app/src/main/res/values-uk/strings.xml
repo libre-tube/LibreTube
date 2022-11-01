@@ -359,4 +359,6 @@
     <string name="sb_markers">Маркери</string>
     <string name="sb_markers_summary">Позначте відтинки на панелі часу.</string>
     <string name="livestreams">Трансляції наживо</string>
+    <string name="alternative_videos_layout">Альтернативні макети відео</string>
+    <string name="defaultIconLight">Типове світло</string>
 </resources>

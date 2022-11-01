@@ -359,4 +359,6 @@
     <string name="sb_markers">İşaretçiler</string>
     <string name="sb_markers_summary">Segmentleri zaman çubuğunda işaretleyin.</string>
     <string name="livestreams">Canlı yayınlar</string>
+    <string name="alternative_videos_layout">Alternatif video düzeni</string>
+    <string name="defaultIconLight">Varsayılan ışık</string>
 </resources>
