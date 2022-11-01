@@ -165,12 +165,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMinTextSize="8sp"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/share"
-                            tools:targetApi="o" />
+                            style="@style/PlayerActionsText"
+                            android:text="@string/share" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -186,12 +182,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMinTextSize="8sp"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/download"
-                            tools:targetApi="o" />
+                            style="@style/PlayerActionsText"
+                            android:text="@string/download" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -208,12 +200,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMinTextSize="8sp"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/open"
-                            tools:targetApi="o" />
+                            style="@style/PlayerActionsText"
+                            android:text="@string/open" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -229,12 +217,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMinTextSize="8sp"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/audio"
-                            tools:targetApi="o" />
+                            style="@style/PlayerActionsText"
+                            android:text="@string/audio" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -250,12 +234,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMinTextSize="8sp"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/save"
-                            tools:targetApi="o" />
+                            style="@style/PlayerActionsText"
+                            android:text="@string/save" />
                     </LinearLayout>
 
                 </LinearLayout>
