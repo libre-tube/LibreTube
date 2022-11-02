@@ -149,10 +149,12 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
+                    android:weightSum="5"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -163,11 +165,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            style="@style/PlayerActionsText"
                             android:text="@string/share" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_download"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -178,15 +182,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/download"
-                            tools:targetApi="o" />
+                            style="@style/PlayerActionsText"
+                            android:text="@string/download" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_open"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -198,12 +200,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            style="@style/PlayerActionsText"
                             android:text="@string/open" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_background"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -214,11 +217,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            style="@style/PlayerActionsText"
                             android:text="@string/audio" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_save"
+                        android:layout_weight="1"
                         style="@style/PlayerActionsLayout">
 
                         <ImageView
@@ -229,6 +234,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            style="@style/PlayerActionsText"
                             android:text="@string/save" />
                     </LinearLayout>
 
