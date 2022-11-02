@@ -114,9 +114,9 @@
     <string name="birdIcon">শক্তিশালী পাখি</string>
     <string name="show_chapters">অধ্যায়গুলো প্রদর্শন করুন</string>
     <string name="hide_chapters">অধ্যায়গুলো আড়াল করুন</string>
-    <string name="buffering_goal">প্রিলোড করা হচ্ছে</string>
+    <string name="buffering_goal">প্রিলোডিং</string>
     <string name="playerVideoFormat">প্লেয়ারের জন্য ভিডিও ফরম্যাট</string>
-    <string name="buffering_goal_summary">ভিডিও বাফারিংএর জন্য সর্বোচ্চ সময় (সেকেন্ডে)।</string>
+    <string name="buffering_goal_summary">ভিডিও বাফারিংয়ের জন্য সর্বোচ্চ সময় (সেকেন্ডে)।</string>
     <string name="no_audio">কোনো অডিও নেই</string>
     <string name="no_video">কোনো ভিডিও নেই</string>
     <string name="audio">অডিও</string>
