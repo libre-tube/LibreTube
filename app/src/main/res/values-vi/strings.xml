@@ -117,7 +117,7 @@
     <string name="category_outro">Màn hình kết thúc và credits</string>
     <string name="color_purple">Màu tím dễ chịu</string>
     <string name="update">Tìm kiếm phiên bản mới</string>
-    <string name="update_summary">Nhấp vào để xem ứng dụng ở trên máy có phải là bản mới nhất không.</string>
+    <string name="update_summary">Kiểm tra cập nhật mới</string>
     <string name="app_uptodate">Đang chạy phiên bản mới nhất.</string>
     <string name="no_update_available">Bạn đang sử dụng phiên bản mới nhất của ứng dụng.</string>
     <string name="download_folder_summary">Tên của thư mục phương tiện đã tải xuống được lưu trữ trong.</string>
@@ -220,7 +220,7 @@
     <string name="channel_name_az">Tên kênh (A-Z)</string>
     <string name="channel_name_za">Tên kênh (Z-A)</string>
     <string name="sort">Sắp xếp</string>
-    <string name="require_restart_message">Khởi động lại ứng dụng\?</string>
+    <string name="require_restart_message">Thay đổi này yêu cầu khởi động lại ứng dụng. Nhấn \'Ok\' để khởi động lại ngay bậy giờ.</string>
     <string name="seekbar_preview_summary">Hiển thị ảnh chụp nhanh khi kéo chỉ báo phát lại.</string>
     <string name="general_summary">Ngôn ngữ và vùng</string>
     <string name="seekbar_preview">Xem trước video</string>
@@ -331,9 +331,13 @@
     <string name="player_resize_mode">Chế độ thay đổi kích thước</string>
     <string name="copied_to_clipboard">Sao chép vào clipboard</string>
     <string name="audio_video_summary">Chất lượng và định dạng</string>
-    <string name="delete">Xóa</string>
+    <string name="delete">Xóa khỏi tải xuống</string>
     <string name="trending_layout">Bố cục xu hướng thay thế</string>
     <string name="renamePlaylist">Đổi tên playlist</string>
     <string name="mobile_data">Dữ liệu di động</string>
     <string name="views_placeholder">lượt xem</string>
+    <string name="play_next">Tiếp theo</string>
+    <string name="navigation_bar">Thanh điều hướng</string>
+    <string name="limit_hls">Đặt giới hạn HLS thành 1080p</string>
+    <string name="change_region">Thịnh hành có vẻ không hỗ trợ ở vùng này. Hãy chọn một vùng khác ở cài đặt.</string>
 </resources>
