@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="unsubscribe">ଅଣଅନୁସରଣ</string>
+    <string name="library">ପାଠାଗାର</string>
+    <string name="yes">ହଁ</string>
+    <string name="choose_quality_dialog">ଗୁଣବତ୍ତା</string>
+    <string name="videos">ଭିଡିଓ</string>
+    <string name="subscribe">ଅନୁସରଣ କରନ୍ତୁ</string>
+    <string name="share">ପଠାନ୍ତୁ</string>
+    <string name="download">ସଞ୍ଚୟ କରନ୍ତୁ</string>
+    <string name="save">ସଞ୍ଚୟ</string>
+    <string name="username">ବ୍ୟବହରକାରୀଙ୍କର ନାମ</string>
+    <string name="password">ପାଶୱାର୍ଡ</string>
+    <string name="register">ପଞ୍ଜିକରଣ</string>
+    <string name="logout">ଲଗ୍ ଆଉଟ୍</string>
+    <string name="startpage">ଗୃହ</string>
+    <string name="search_hint">ସନ୍ଧାନ</string>
+    <string name="login">ଲଗ୍ ଇନ୍</string>
+</resources>
