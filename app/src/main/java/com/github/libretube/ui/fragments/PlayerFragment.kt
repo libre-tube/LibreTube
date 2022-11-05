@@ -68,8 +68,8 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
@@ -1345,7 +1345,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             subtitleCodesList += it.code!!
         }
 
-        BottomSheet()
+        BaseBottomSheet()
             .setSimpleItems(subtitlesNamesList) { index ->
                 val newParams = if (index != 0) {
                     // caption selected
@@ -1376,7 +1376,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // Dialog for quality selection
         val lastPosition = exoPlayer.currentPosition
-        BottomSheet()
+        BaseBottomSheet()
             .setSimpleItems(
                 videosNameArray.toList()
             ) { which ->

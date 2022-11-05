@@ -17,7 +17,7 @@ import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.ui.views.BottomSheet
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.util.LayoutHelper
 import com.github.libretube.util.PreferenceHelper
 
@@ -120,7 +120,7 @@ class SubscriptionsFragment : BaseFragment() {
     private fun showSortDialog() {
         val sortOptions = resources.getStringArray(R.array.sortOptions)
 
-        val bottomSheet = BottomSheet().apply {
+        val bottomSheet = BaseBottomSheet().apply {
             setSimpleItems(sortOptions.toList()) { index ->
                 binding.sortTV.text = sortOptions[index]
                 sortOrder = index

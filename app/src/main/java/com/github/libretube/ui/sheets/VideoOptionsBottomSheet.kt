@@ -11,7 +11,6 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
@@ -27,7 +26,7 @@ import kotlinx.coroutines.launch
 class VideoOptionsBottomSheet(
     private val videoId: String,
     private val videoName: String
-) : BottomSheet() {
+) : BaseBottomSheet() {
     private val shareData = ShareData(currentVideo = videoName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // List that stores the different menu options. In the future could be add more options here.
