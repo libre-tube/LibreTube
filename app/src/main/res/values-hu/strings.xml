@@ -363,4 +363,6 @@
     <string name="defaultIconLight">Alapért. világos</string>
     <string name="playlistCloned">Lejátszási lista klónozva</string>
     <string name="confirm_unsubscribing">Leiratkozás megerősítése</string>
+    <string name="confirm_unsubscribe">Biztosan le szeretne iratkozni erről: %1$s\?</string>
+    <string name="confirm_unsubscribing_summary">Megerősítő párbeszédpanel megjelenítése leiratkozás előtt.</string>
 </resources>
