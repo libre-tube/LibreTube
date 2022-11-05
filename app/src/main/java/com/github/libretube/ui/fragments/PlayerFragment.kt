@@ -906,8 +906,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             // only show related streams if enabled
             binding.relatedRecView.adapter = VideosAdapter(
                 response.relatedStreams.orEmpty().toMutableList(),
-                childFragmentManager,
-                forceType = VideosAdapter.FORCE_TRENDING
+                childFragmentManager
             )
         }
         // set video description
