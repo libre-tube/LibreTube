@@ -356,6 +356,9 @@
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
     <string name="playlistCloned">Playlist cloned</string>
+    <string name="confirm_unsubscribe">Are you sure you want to unsubscribe %1$s?</string>
+    <string name="confirm_unsubscribing">Confirm unsubscribing</string>
+    <string name="confirm_unsubscribing_summary">Show a confirmation dialog before unsubscribing.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

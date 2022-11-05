@@ -38,13 +38,14 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.gith
             subscriptionSubscribe.setOnClickListener {
                 val channelId = subscription.url!!.toID()
                 if (subscribed) {
-                    subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
-                    SubscriptionHelper.unsubscribe(channelId)
-                    subscribed = false
+
+                    SubscriptionHelper.handleUnsubscribe(root.context, channelId, subscription.name ?: "") {
+                        subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
+                        subscribed = false
+                    }
                 } else {
-                    subscriptionSubscribe.text =
-                        root.context.getString(R.string.unsubscribe)
                     SubscriptionHelper.subscribe(channelId)
+                    subscriptionSubscribe.text = root.context.getString(R.string.unsubscribe)
                     subscribed = true
                 }
             }

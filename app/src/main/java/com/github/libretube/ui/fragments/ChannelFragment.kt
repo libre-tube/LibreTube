@@ -112,6 +112,7 @@ class ChannelFragment : BaseFragment() {
             }
             // needed if the channel gets loaded by the ID
             channelId = response.id
+            channelName = response.name
             val shareData = ShareData(currentChannel = response.name)
 
             onScrollEnd = {
@@ -128,14 +129,15 @@ class ChannelFragment : BaseFragment() {
                 }
 
                 binding.channelSubscribe.setOnClickListener {
-                    binding.channelSubscribe.text = if (isSubscribed == true) {
-                        SubscriptionHelper.unsubscribe(channelId!!)
-                        isSubscribed = false
-                        getString(R.string.subscribe)
+                    if (isSubscribed == true) {
+                        SubscriptionHelper.handleUnsubscribe(requireContext(), channelId!!, channelName) {
+                            isSubscribed = false
+                            binding.channelSubscribe.text = getString(R.string.subscribe)
+                        }
                     } else {
                         SubscriptionHelper.subscribe(channelId!!)
                         isSubscribed = true
-                        getString(R.string.unsubscribe)
+                        binding.channelSubscribe.text =  getString(R.string.unsubscribe)
                     }
                 }
 

@@ -1267,9 +1267,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
                 binding.playerSubscribe.setOnClickListener {
                     if (isSubscribed == true) {
-                        SubscriptionHelper.unsubscribe(channelId)
-                        binding.playerSubscribe.text = getString(R.string.subscribe)
-                        isSubscribed = false
+                        SubscriptionHelper.handleUnsubscribe(requireContext(), channelId, streams.uploader) {
+                            binding.playerSubscribe.text = getString(R.string.subscribe)
+                            isSubscribed = false
+                        }
                     } else {
                         SubscriptionHelper.subscribe(channelId)
                         binding.playerSubscribe.text = getString(R.string.unsubscribe)
