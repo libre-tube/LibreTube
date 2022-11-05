@@ -116,10 +116,9 @@
     <string name="clear_history">ଇତିହାସ ଖାଲି କରନ୍ତୁ</string>
     <string name="history">ଇତିହାସ</string>
     <string name="defaultTab">ଡିଫଲ୍ଟ ଟେବ</string>
-    <string name="sponsorblock_summary">ଏହା ବ୍ୟବହାର କରେ
-\nhttps://sponsor.ajay.app</string>
+    <string name="sponsorblock_summary">ଏହା ବ୍ୟବହାର କରେhttps://sponsor.ajay.app</string>
     <string name="category_intro">ଅନ୍ତରାଳ</string>
-    <string name="category_intro_description">ଅନ୍ତରାଳ ପରି</string>
+    <string name="category_intro_description">ଅନ୍ତରାଳ ପରି ।</string>
     <string name="category_sponsor">ସ୍ପନ୍ସର୍</string>
     <string name="category_sponsor_description">ଏହା ପେଇଡ ପ୍ରମୋସଂ, ପେଇଡ ରାଇଫରାଳ ଅଟେ ।</string>
     <string name="category_selfpromo_description">ସ୍ପନ୍ସର୍ ଭଳି ।</string>
@@ -351,4 +350,15 @@
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
     <string name="picture_in_picture">ଛବିରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
+    <string name="subscriptions">ପାସନ୍ଦିତା ଗୁଡ଼ିକ</string>
+    <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
+    <string name="alternative_videos_layout">ବିକଳ୍ପ ଭିଡିଓ ଲେଆଉଟ୍</string>
+    <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>
+    <string name="download_channel_name">ଡାଉନଲୋଡ୍ ସେବା</string>
+    <string name="download_channel_description">ମିଡିଆ ଡାଉନଲୋଡ୍ କରିବା ସମୟରେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ |</string>
+    <string name="background_channel_name">ପୃଷ୍ଠଭୂମି ଧାରା</string>
+    <string name="background_channel_description">ଅଡିଓ ପ୍ଲେୟାରକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ବଟନ୍ ସହିତ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ |</string>
+    <string name="push_channel_name">ବିଜ୍ଞପ୍ତି କର୍ମୀ</string>
+    <string name="push_channel_description">ନୂତନ ଷ୍ଟ୍ରିମ୍ ଉପଲବ୍ଧ ହେଲେ ଏକ ବିଜ୍ଞପ୍ତି ଦେଖାଏ |</string>
+    <string name="sb_markers_summary">ଟାଇମ୍ ବାର୍ ରେ ସେଗମେଣ୍ଟଗୁଡିକ ଚିହ୍ନିତ କରନ୍ତୁ |</string>
 </resources>
