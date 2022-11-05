@@ -36,6 +36,12 @@
             app:key="save_feed"
             app:title="@string/save_feed" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_check"
+            android:summary="@string/confirm_unsubscribing_summary"
+            app:key="confirm_unsubscribing"
+            app:title="@string/confirm_unsubscribing" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/backup_restore">

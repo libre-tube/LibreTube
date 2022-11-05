@@ -863,20 +863,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
         })
 
-        // check if livestream
-        if (response.duration > 0) {
-            // download clicked
-            binding.relPlayerDownload.setOnClickListener {
-                if (!DownloadService.IS_DOWNLOAD_RUNNING) {
-                    val newFragment = DownloadDialog(videoId!!)
-                    newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
-                } else {
-                    Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
-                        .show()
-                }
+        binding.relPlayerDownload.setOnClickListener {
+            if (response.duration <= 0) {
+                Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
+            } else if (!DownloadService.IS_DOWNLOAD_RUNNING) {
+                val newFragment = DownloadDialog(videoId!!)
+                newFragment.show(childFragmentManager, DownloadDialog::class.java.name)
+            } else {
+                Toast.makeText(context, R.string.dlisinprogress, Toast.LENGTH_SHORT)
+                    .show()
             }
-        } else {
-            Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
         }
 
         if (response.hls != null) {
@@ -1271,9 +1267,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
                 binding.playerSubscribe.setOnClickListener {
                     if (isSubscribed == true) {
-                        SubscriptionHelper.unsubscribe(channelId)
-                        binding.playerSubscribe.text = getString(R.string.subscribe)
-                        isSubscribed = false
+                        SubscriptionHelper.handleUnsubscribe(requireContext(), channelId, streams.uploader) {
+                            binding.playerSubscribe.text = getString(R.string.subscribe)
+                            isSubscribed = false
+                        }
                     } else {
                         SubscriptionHelper.subscribe(channelId)
                         binding.playerSubscribe.text = getString(R.string.unsubscribe)
