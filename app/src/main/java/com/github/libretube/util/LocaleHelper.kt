@@ -21,7 +21,7 @@ object LocaleHelper {
             )
             updateLocaleConf(context, locale)
         } else {
-            val locale = Locale(languageName.toString())
+            val locale = Locale(languageName)
             updateLocaleConf(context, locale)
         }
     }
@@ -41,15 +41,15 @@ object LocaleHelper {
 
     fun getDetectedCountry(context: Context, defaultCountryIsoCode: String): String {
         detectSIMCountry(context)?.let {
-            return it
+            if (it != "") return it
         }
 
         detectNetworkCountry(context)?.let {
-            return it
+            if (it != "") return it
         }
 
         detectLocaleCountry(context)?.let {
-            return it
+            if (it != "") return it
         }
 
         return defaultCountryIsoCode
