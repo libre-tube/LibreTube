@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -128,13 +129,13 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
-            val channelId = item.url!!.toID()
 
-            isSubscribed(channelId, binding)
+            isSubscribed(root.context, item, binding)
         }
     }
 
-    private fun isSubscribed(channelId: String, binding: ChannelRowBinding) {
+    private fun isSubscribed(context: Context, streamItem: ContentItem, binding: ChannelRowBinding) {
+        val channelId = streamItem.url!!.toID()
         // check whether the user subscribed to the channel
         CoroutineScope(Dispatchers.Main).launch {
             var isSubscribed = SubscriptionHelper.isSubscribed(channelId)
@@ -151,14 +152,13 @@ class SearchAdapter(
             binding.searchSubButton.setOnClickListener {
                 if (isSubscribed == false) {
                     SubscriptionHelper.subscribe(channelId)
-                    binding.searchSubButton.text =
-                        binding.root.context.getString(R.string.unsubscribe)
+                    binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
                     isSubscribed = true
                 } else {
-                    SubscriptionHelper.unsubscribe(channelId)
-                    binding.searchSubButton.text =
-                        binding.root.context.getString(R.string.subscribe)
-                    isSubscribed = false
+                    SubscriptionHelper.handleUnsubscribe(context, channelId, streamItem.uploaderName) {
+                        binding.searchSubButton.text = binding.root.context.getString(R.string.subscribe)
+                        isSubscribed = false
+                    }
                 }
             }
         }
