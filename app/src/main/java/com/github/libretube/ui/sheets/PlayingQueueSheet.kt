@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
 import com.github.libretube.util.PlayingQueue
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class PlayingQueueSheet : BottomSheetDialogFragment() {
+class PlayingQueueSheet : ExpandedBottomSheet() {
     private lateinit var binding: QueueBottomSheetBinding
 
     override fun onCreateView(
