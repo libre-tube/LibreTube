@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="register">Kaydol</string>
-    <string name="already_logged_in">Zaten girmişsiniz, dilerseniz hesabınızdan çıkabilirsiniz.</string>
+    <string name="already_logged_in">Zaten oturum açılmış, dilerseniz hesabınızdan çıkabilirsiniz.</string>
     <string name="download">İndir</string>
     <string name="password">Parola</string>
     <string name="unsubscribe">Abonelikten çık</string>

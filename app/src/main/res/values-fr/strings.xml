@@ -129,7 +129,7 @@
     <string name="video_format">Format vidéo</string>
     <string name="download_directory">Télécharger vers</string>
     <string name="update">Rechercher une nouvelle version</string>
-    <string name="update_summary">Cliquez pour savoir si l\'application est à jour.</string>
+    <string name="update_summary">Vérifier la mise à jour</string>
     <string name="app_uptodate">Exécution de la dernière version.</string>
     <string name="no_update_available">Vous utilisez la dernière version.</string>
     <string name="playback_speed">Vitesse de lecture</string>
@@ -345,10 +345,20 @@
     <string name="progressive_load_interval_summary">Une valeur inférieure peut accélérer le chargement initial de la vidéo.</string>
     <string name="default_load_interval">Par défaut</string>
     <string name="playback_pitch">Ton</string>
-    <string name="filename">Nom du fichier</string>
+    <string name="filename">Nom de fichier</string>
     <string name="invalid_filename">Nom de fichier invalide !</string>
     <string name="playlists_order">Ordre des listes de lecture</string>
     <string name="recentlyUpdated">Récemment mise à jour</string>
     <string name="playlistNameReversed">Nom de la liste de lecture (inversé)</string>
     <string name="recentlyUpdatedReversed">Récemment mise à jour (inversé)</string>
+    <string name="playing_queue">Lecture de la file d\'attente</string>
+    <string name="queue">File d\'attente</string>
+    <string name="added_to_playlist">Ajouté à la playlist</string>
+    <string name="sb_markers">Marqueurs</string>
+    <string name="sb_markers_summary">Marquez les segments sur la barre de temps.</string>
+    <string name="alternative_videos_layout">Disposition alternative des vidéos</string>
+    <string name="defaultIconLight">Par défaut clair</string>
+    <string name="show_more">Voir plus</string>
+    <string name="time_code">Code temporel</string>
+    <string name="livestreams">Diffusions en direct</string>
 </resources>
