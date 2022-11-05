@@ -51,8 +51,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/video_count"
                 android:layout_centerInParent="true"
-                android:layout_marginStart="5dp"
-                app:srcCompat="@drawable/ic_playlist" />
+                android:paddingStart="5dp"
+                app:srcCompat="@drawable/ic_playlist"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
