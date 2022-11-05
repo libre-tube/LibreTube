@@ -13,7 +13,6 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.ui.views.BottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -28,7 +27,7 @@ class PlaylistOptionsBottomSheet(
     private val playlistId: String,
     private val playlistName: String,
     private val isOwner: Boolean
-) : BottomSheet() {
+) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog

@@ -18,6 +18,7 @@ import com.github.libretube.models.interfaces.OnlinePlayerOptions
 import com.github.libretube.models.interfaces.PlayerOptions
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackSpeedSheet
 import com.github.libretube.util.DoubleTapListener
 import com.github.libretube.util.PlayerHelper
@@ -209,7 +210,7 @@ internal class CustomExoPlayerView(
                 )
             }
 
-            val bottomSheetFragment = BottomSheet().setItems(items, null)
+            val bottomSheetFragment = BaseBottomSheet().setItems(items, null)
             bottomSheetFragment.show(childFragmentManager, null)
         }
     }
@@ -311,7 +312,7 @@ internal class CustomExoPlayerView(
 
     override fun onAutoplayClicked() {
         // autoplay options dialog
-        BottomSheet()
+        BaseBottomSheet()
             .setSimpleItems(
                 listOf(
                     context.getString(R.string.enabled),
@@ -341,7 +342,7 @@ internal class CustomExoPlayerView(
             AspectRatioFrameLayout.RESIZE_MODE_FILL
         )
 
-        BottomSheet()
+        BaseBottomSheet()
             .setSimpleItems(aspectRatioModeNames) { index ->
                 resizeMode = aspectRatioModes[index]
             }
@@ -360,7 +361,7 @@ internal class CustomExoPlayerView(
 
         )
         // repeat mode options dialog
-        BottomSheet()
+        BaseBottomSheet()
             .setSimpleItems(repeatModeNames) { index ->
                 player?.repeatMode = repeatModes[index]
             }
