@@ -10,7 +10,7 @@ import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.databinding.ChannelRowBinding
-import com.github.libretube.databinding.PlaylistSearchRowBinding
+import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
@@ -52,7 +52,7 @@ class SearchAdapter(
                 ChannelRowBinding.inflate(layoutInflater, parent, false)
             )
             2 -> SearchViewHolder(
-                PlaylistSearchRowBinding.inflate(layoutInflater, parent, false)
+                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
             )
             else -> throw IllegalArgumentException("Invalid type")
         }
@@ -166,20 +166,17 @@ class SearchAdapter(
 
     private fun bindPlaylist(
         item: ContentItem,
-        binding: PlaylistSearchRowBinding
+        binding: PlaylistsRowBinding
     ) {
         binding.apply {
-            ImageHelper.loadImage(item.thumbnail, searchThumbnail)
-            if (item.videos?.toInt() != -1) searchPlaylistNumber.text = item.videos.toString()
-            searchDescription.text = item.name
-            searchName.text = item.uploaderName
-            if (item.videos?.toInt() != -1) {
-                searchPlaylistVideos.text =
-                    root.context.getString(R.string.videoCount, item.videos.toString())
-            }
+            ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
+            if (item.videos?.toInt() != -1) videoCount.text = item.videos.toString()
+            playlistDescription.text = item.name
+            playlistTitle.text = item.uploaderName
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(root.context, item.url, false)
             }
+            deletePlaylist.visibility = View.GONE
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()
                 val playlistName = item.name!!

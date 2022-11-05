@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.PlaylistId
+import com.github.libretube.api.obj.Playlists
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -23,16 +25,15 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistsAdapter(
-    private val playlists: MutableList<com.github.libretube.api.obj.Playlists>,
-    private val childFragmentManager: FragmentManager,
-    private val activity: Activity
+    private val playlists: MutableList<Playlists>,
+    private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
 
     override fun getItemCount(): Int {
         return playlists.size
     }
 
-    fun updateItems(newItems: List<com.github.libretube.api.obj.Playlists>) {
+    fun updateItems(newItems: List<Playlists>) {
         val oldSize = playlists.size
         playlists.addAll(newItems)
         notifyItemRangeInserted(oldSize, playlists.size)
@@ -55,13 +56,16 @@ class PlaylistsAdapter(
                 ImageHelper.loadImage(playlist.thumbnail, playlistThumbnail)
             }
             playlistTitle.text = playlist.name
+
+            videoCount.text = playlist.videos.toString()
+
             deletePlaylist.setOnClickListener {
                 val builder = MaterialAlertDialogBuilder(root.context)
                 builder.setTitle(R.string.deletePlaylist)
                 builder.setMessage(R.string.areYouSure)
                 builder.setPositiveButton(R.string.yes) { _, _ ->
                     PreferenceHelper.getToken()
-                    deletePlaylist(playlist.id!!, position)
+                    deletePlaylist(root.context as Activity, playlist.id!!, position)
                 }
                 builder.setNegativeButton(R.string.cancel, null)
                 builder.show()
@@ -85,12 +89,12 @@ class PlaylistsAdapter(
         }
     }
 
-    private fun deletePlaylist(id: String, position: Int) {
+    private fun deletePlaylist(activity: Activity, id: String, position: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = try {
                 RetrofitInstance.authApi.deletePlaylist(
                     PreferenceHelper.getToken(),
-                    com.github.libretube.api.obj.PlaylistId(id)
+                    PlaylistId(id)
                 )
             } catch (e: IOException) {
                 println(e)
