@@ -2,15 +2,14 @@ package com.github.libretube.ui.sheets
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.DialogTextPreferenceBinding
-import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
@@ -114,6 +113,7 @@ class PlaylistOptionsBottomSheet(
     }
 
     private fun importPlaylist(token: String, playlistId: String) {
+        val appContext = context?.applicationContext
         CoroutineScope(Dispatchers.IO).launch {
             val response = try {
                 RetrofitInstance.authApi.importPlaylist(
@@ -126,7 +126,7 @@ class PlaylistOptionsBottomSheet(
             } catch (e: HttpException) {
                 return@launch
             }
-            Log.e(TAG(), response.toString())
+            appContext?.toastFromMainThread(if (response.playlistId != null) R.string.playlistCloned else R.string.server_error)
         }
     }
 

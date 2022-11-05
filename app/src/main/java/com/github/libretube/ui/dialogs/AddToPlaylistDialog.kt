@@ -1,10 +1,7 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -18,6 +15,7 @@ import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.models.PlaylistViewModel
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
@@ -104,27 +102,16 @@ class AddToPlaylistDialog : DialogFragment() {
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
-                toastFromMainThread(appContext, R.string.unknown_error)
+                appContext.toastFromMainThread(R.string.unknown_error)
                 return@launch
             } catch (e: HttpException) {
                 Log.e(TAG(), "HttpException, unexpected response")
-                toastFromMainThread(appContext, R.string.server_error)
+                appContext.toastFromMainThread(R.string.server_error)
                 return@launch
             }
-            toastFromMainThread(
-                appContext,
+            appContext.toastFromMainThread(
                 if (response.message == "ok") R.string.added_to_playlist else R.string.fail
             )
-        }
-    }
-
-    private fun toastFromMainThread(context: Context, stringId: Int) {
-        Handler(Looper.getMainLooper()).post {
-            Toast.makeText(
-                context,
-                stringId,
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
