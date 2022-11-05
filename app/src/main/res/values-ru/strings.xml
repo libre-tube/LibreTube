@@ -169,7 +169,7 @@
     <string name="donate">Пожертвовать</string>
     <string name="contributing">Внести вклад</string>
     <string name="update">Найти новую версию</string>
-    <string name="update_summary">Нажмите, чтобы узнать, обновлено ли приложение.</string>
+    <string name="update_summary">Проверить обновления</string>
     <string name="app_uptodate">Используется последняя версия.</string>
     <string name="no_update_available">Вы используете последнюю версию.</string>
     <string name="playback_speed">Скорость воспроизведения</string>
@@ -354,4 +354,11 @@
     <string name="recentlyUpdatedReversed">Недавно обновлено (перевернутое)</string>
     <string name="show_more">Показать больше</string>
     <string name="time_code">Временной код</string>
+    <string name="playing_queue">Очередь воспроизведения</string>
+    <string name="queue">Очередь</string>
+    <string name="sb_markers">Маркеры</string>
+    <string name="sb_markers_summary">Пометить отрывок на шкале времени</string>
+    <string name="livestreams">Прямые трансляции</string>
+    <string name="alternative_videos_layout">Альтернативное размещение видео</string>
+    <string name="defaultIconLight">Светлый по умолчанию</string>
 </resources>

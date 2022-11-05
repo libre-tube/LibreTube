@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="registered">Sikeres regisztráció! Mostantól feliratkozhatsz csatornákra.</string>
-    <string name="already_logged_in">Már be van jelentkezve, ha szeretne, kijelentkezhet a fiókjából.</string>
+    <string name="already_logged_in">Már be van jelentkezve. Kijelentkezhet a fiókjából.</string>
     <string name="search_hint">Keresés</string>
     <string name="unsubscribe">Leiratkozás</string>
     <string name="share">Megosztás</string>
@@ -12,7 +12,7 @@
     <string name="instances">Válasszon…</string>
     <string name="login_register">Bejelentkezés/regisztráció</string>
     <string name="please_login">Először a beállításokban lépjen be vagy regisztráljon!</string>
-    <string name="cannotDownload">Nem lehetséges ezt a streamet letölteni.</string>
+    <string name="cannotDownload">Nem lehetséges ezt a közvetítést letölteni.</string>
     <string name="downloadfailed">Sikertelen letöltés.</string>
     <string name="vlc">Megnyitás VLC-ben</string>
     <string name="vlcerror">Nem sikerült megnyitni VLC-ben. Lehetséges, hogy nincs telepítve.</string>
@@ -79,9 +79,9 @@
     <string name="clear_history">Előzmények törlése</string>
     <string name="music_songs">YT Music zenék</string>
     <string name="sponsorblock_summary">A https://sponsor.ajay.app API-t használja</string>
-    <string name="segment_skipped">Kihagyott szegmens</string>
+    <string name="segment_skipped">Kihagyott szakasz</string>
     <string name="sponsorblock_state">Be</string>
-    <string name="category_segments">Szegmensek</string>
+    <string name="category_segments">Szakaszok</string>
     <string name="music_videos">YT Music videók</string>
     <string name="music_albums">YT Music albumok</string>
     <string name="music_playlists">YT Music lejátszási listák</string>
@@ -91,8 +91,8 @@
     <string name="category_sponsor_description">Fizetett promóciók, fizetett ajánlások és közvetlen hirdetések. Nem önreklámozás, vagy ingyenes elismerés ügyek, alkotók, honlapok, vagy termékek számára.</string>
     <string name="category_selfpromo">Nem fizetett/önpromóció</string>
     <string name="category_selfpromo_description">Hasonló a szponzorhoz, kivéve, hogy nem fizetett vagy önpromóció. Ide tartoznak az árucikkekről, adományokról szóló részek, vagy információk arról, hogy kivel működtek együtt.</string>
-    <string name="category_interaction">Interakció emlékeztető (például feliratkozás)</string>
-    <string name="category_interaction_description">Amikor a tartalom közepén egy rövid emlékeztető van a lájkolásról, követésről vagy feliratkozásról. Ha hosszú vagy valami konkrét dologról szól, akkor inkább az inkább önpromóció.</string>
+    <string name="category_interaction">Interakció emlékeztető (lájk és feliratkozás)</string>
+    <string name="category_interaction_description">Amikor a tartalom közepén egy rövid emlékeztető van a lájkolásról, követésről vagy feliratkozásról. Ha hosszú vagy valami konkrét dologról szól, akkor az inkább önpromóció.</string>
     <string name="category_intro">Szünet/bevezető animáció</string>
     <string name="category_intro_description">Egy tényleges tartalom nélküli rész. Lehet szünet, statikus képkocka, ismétlődő animáció. Nem szabad információt tartalmazó átmenetekhez használni.</string>
     <string name="category_outro">Végső kártyák és köszönet</string>
@@ -152,7 +152,7 @@
     <string name="default_subtitle_language">Felirat nyelve</string>
     <string name="seekbar_preview_summary">Pillanatkép megjelenítése a lejátszásjelző húzásakor.</string>
     <string name="playingOnBackground">Lejátszás a háttérben…</string>
-    <string name="notify_new_streams">Értesítések az új streamekről</string>
+    <string name="notify_new_streams">Értesítések az új közvetítésekről</string>
     <string name="notify_new_streams_summary">Értesítések az Ön által követett alkotók friss tartalmairól.</string>
     <string name="share_with_time">Megosztás időponttal</string>
     <string name="category_music_offtopic">Zene: nem zenés rész</string>
@@ -167,7 +167,7 @@
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz.</string>
     <string name="category_filler_description">A felesleges jelenetekhez, amelyek csak időkitöltésre lettek hozzáadva, illetve olyan humorhoz amely nem szükséges a videó fő témájának a megértéséhez.</string>
     <string name="category_music_offtopic_description">Kizárólag zenei videókban való felhasználásra. A videó olyan részeit kell lefednie, amelyek nem részei a hivatalos mixeknek. Végül a videónak a lehető legjobban kell hasonlítania a Spotify vagy bármely más mix változathoz, vagy csökkenteni kell a beszédet vagy más zavaró elemeket.</string>
-    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szegmensek esetében, amelyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória.</string>
+    <string name="category_preview_description">A sorozat ezen vagy jövőbeli videóinak közelgő tartalmát részletező szakaszok esetében, amelyek nem nyújtanak további információt. Ha olyan klipeket tartalmaz, amelyek csak itt jelennek meg, akkor nagyon valószínű, hogy nem ez a megfelelő kategória.</string>
     <string name="background_mode">Háttér mód</string>
     <string name="audio_video">Hang és videó</string>
     <string name="fullscreen_orientation">Teljes képernyős helyzet</string>
@@ -212,7 +212,7 @@
     <string name="customInstance_summary">Hozzáadás…</string>
     <string name="instance_name">Példány neve</string>
     <string name="instance_api_url">URL a példány API-hoz</string>
-    <string name="related_streams_summary">Mutasson hasonló streameket a nézett műsorok mellett.</string>
+    <string name="related_streams_summary">Mutasson hasonló közvetítéseket a jelenleg nézett mellett.</string>
     <string name="playerVideoFormat">Videóformátum a lejátszóhoz</string>
     <string name="hideTrendingPage">Felkapott oldal elrejtése</string>
     <string name="instance_frontend_url">URL a példány frontendjéhez</string>
@@ -233,8 +233,8 @@
     <string name="history_empty">Nincsenek még előzmények.</string>
     <string name="autoRotatePlayer_summary">Teljes képernyős lejátszás, amikor az eszközt elforgatják.</string>
     <string name="data_saver_mode_summary">Bélyegképek és egyéb képek kihagyása.</string>
-    <string name="new_streams_count">%1$s új stream érhető el</string>
-    <string name="new_streams_by">Új streamek tőle: %1$s…</string>
+    <string name="new_streams_count">%1$s új közvetítés érhető el</string>
+    <string name="new_streams_by">Új közvetítések tőle: %1$s…</string>
     <string name="no_player_found">Nem található külső lejátszó. Kérjük, győződjön meg, hogy van telepítve.</string>
     <string name="no_search_result">Nincs eredmény.</string>
     <string name="downloadsucceeded">Sikeres letöltés</string>
@@ -328,7 +328,7 @@
     <string name="download_channel_name">Letöltő szolgáltatás</string>
     <string name="background_channel_name">Háttér mód</string>
     <string name="push_channel_name">Értesítés dolgozó</string>
-    <string name="push_channel_description">Értesítés megjelenítése, amikor új streamek elérhetők.</string>
+    <string name="push_channel_description">Értesítés megjelenítése, amikor új közvetítések elérhetők.</string>
     <string name="navigation_bar">Navigációs sáv</string>
     <string name="download_channel_description">Értesítés megjelenítése média letöltésekor.</string>
     <string name="select_at_least_one">Válasszon ki legalább egy elemet</string>
@@ -336,9 +336,9 @@
     <string name="progressive_load_interval_summary">Egy alacsonyabb érték lehet, hogy felgyorsítja a kezdeti videóbetöltést.</string>
     <string name="save_feed_summary">Töltse be az előfizetési hírcsatornát a háttérben, és akadályozza meg az automatikus frissítést.</string>
     <string name="background_channel_description">Megjelenít egy értesítést a lejátszó vezérlésére szolgáló gombokkal.</string>
-    <string name="skip_segment">Szegmens kihagyása</string>
+    <string name="skip_segment">Szakasz kihagyása</string>
     <string name="sb_skip_manual">Manuális kihagyás</string>
-    <string name="sb_skip_manual_summary">Ne hagyja ki a szegmenseket automatikusan, mindig kérdezzen előtte.</string>
+    <string name="sb_skip_manual_summary">Ne hagyja ki a szakaszokat automatikusan, mindig kérdezzen előtte.</string>
     <string name="default_load_interval">Alapértelmezett</string>
     <string name="playback_pitch">Hangmagasság</string>
     <string name="progressive_load_interval">Progresszív betöltési intervallum mérete</string>
@@ -357,7 +357,7 @@
     <string name="playing_queue">Lejátszási sor</string>
     <string name="queue">Sor</string>
     <string name="sb_markers">Jelölők</string>
-    <string name="sb_markers_summary">Jelölje meg a szakaszokat az idősávon.</string>
+    <string name="sb_markers_summary">Szakaszok megjelölése az idősávon.</string>
     <string name="livestreams">Élő közvetítések</string>
     <string name="alternative_videos_layout">Videók alternatív elrendezése</string>
     <string name="defaultIconLight">Alapért. világos</string>
