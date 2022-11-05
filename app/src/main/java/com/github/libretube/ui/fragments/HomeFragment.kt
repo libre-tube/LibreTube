@@ -27,12 +27,6 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var region: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
