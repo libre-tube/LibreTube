@@ -361,4 +361,8 @@
     <string name="livestreams">直播</string>
     <string name="alternative_videos_layout">备选视频布局</string>
     <string name="defaultIconLight">默认浅色</string>
+    <string name="playlistCloned">已复制播放列表</string>
+    <string name="confirm_unsubscribing">确认取消订阅</string>
+    <string name="confirm_unsubscribing_summary">取消订阅前显示确认对话框。</string>
+    <string name="confirm_unsubscribe">你确定要取消订阅 %1$s 吗？</string>
 </resources>
