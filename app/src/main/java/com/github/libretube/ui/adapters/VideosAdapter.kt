@@ -124,6 +124,10 @@ class VideosAdapter(
             if (forceType != FORCE_CHANNEL) {
                 ImageHelper.loadImage(video.uploaderAvatar, channelImage)
                 channelName.text = video.uploaderName
+
+                channelImage.setOnClickListener {
+                    NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
+                }
             }
 
             root.setOnClickListener {
