@@ -137,7 +137,7 @@ class ChannelFragment : BaseFragment() {
                     } else {
                         SubscriptionHelper.subscribe(channelId!!)
                         isSubscribed = true
-                        binding.channelSubscribe.text =  getString(R.string.unsubscribe)
+                        binding.channelSubscribe.text = getString(R.string.unsubscribe)
                     }
                 }
 
