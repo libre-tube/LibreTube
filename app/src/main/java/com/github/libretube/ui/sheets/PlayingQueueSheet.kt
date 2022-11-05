@@ -73,6 +73,9 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
                 val from = viewHolder.absoluteAdapterPosition
                 val to = target.absoluteAdapterPosition
 
+                val currentPosition = PlayingQueue.currentIndex()
+                if (to <= currentPosition) return false
+
                 adapter.notifyItemMoved(from, to)
                 PlayingQueue.move(from, to)
                 return true
