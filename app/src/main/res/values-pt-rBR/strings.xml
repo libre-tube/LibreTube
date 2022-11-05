@@ -361,4 +361,5 @@
     <string name="time_code">Código de tempo</string>
     <string name="alternative_videos_layout">Layout de vídeos alternativos</string>
     <string name="defaultIconLight">Claro padrão</string>
+    <string name="playlistCloned">Playlist clonada</string>
 </resources>
