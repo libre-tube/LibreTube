@@ -17,6 +17,8 @@ import com.github.libretube.util.BackupHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.time.LocalDate
+import java.time.LocalTime
 
 class AdvancedSettings : BasePreferenceFragment() {
 
@@ -64,7 +66,7 @@ class AdvancedSettings : BasePreferenceFragment() {
         advancesBackup?.setOnPreferenceClickListener {
             BackupDialog {
                 backupFile = it
-                createBackupFile.launch("backup.json")
+                createBackupFile.launch(getBackupFileName())
             }
                 .show(childFragmentManager, null)
             true
@@ -92,5 +94,10 @@ class AdvancedSettings : BasePreferenceFragment() {
                 activity?.recreate()
             }
             .show()
+    }
+
+    private fun getBackupFileName(): String {
+        val time = LocalTime.now().toString().split(".").firstOrNull()
+        return "libretube-backup-${LocalDate.now()}-$time.json"
     }
 }
