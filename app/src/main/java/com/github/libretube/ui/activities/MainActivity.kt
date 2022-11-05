@@ -156,6 +156,8 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
+
+        loadIntentData()
     }
 
     /**
@@ -319,12 +321,6 @@ class MainActivity : BaseActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // check whether an URI got submitted over the intent data and load it
-        loadIntentData()
     }
 
     private fun loadIntentData() {
