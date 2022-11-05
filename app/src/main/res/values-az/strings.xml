@@ -361,4 +361,7 @@
     <string name="livestreams">Canlı yayımlar</string>
     <string name="alternative_videos_layout">Alternativ video tərtibatı</string>
     <string name="defaultIconLight">Defolt işıqlı</string>
+    <string name="playlistCloned">Pleylist klonlandı</string>
+    <string name="confirm_unsubscribe">%1$s abunəliyini ləğv etmək istədiyinizə əminsiniz\?</string>
+    <string name="confirm_unsubscribing">Abunəliyin ləğvini təsdiqlə</string>
 </resources>
