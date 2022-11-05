@@ -108,6 +108,17 @@ class MainActivity : BaseActivity() {
         // navigate to the default fragment
         navController.navigate(startFragmentId)
 
+        // open appropriate fragment from shortcut
+        when (intent.extras?.getString("fragmentToOpen")) {
+            "subscriptions" ->
+                navController.navigate(R.id.subscriptionsFragment)
+            "library" ->
+                navController.navigate(R.id.libraryFragment)
+            else -> {
+                return
+            }
+        }
+
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
         binding.bottomNav.setOnItemSelectedListener {
