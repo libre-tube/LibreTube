@@ -124,12 +124,15 @@
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/tab_chips"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:checkedChip="@+id/videos"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/videos"
+                        android:id="@id/videos"
                         style="@style/channelChip"
-                        android:checked="true"
                         android:text="@string/videos"
                         android:visibility="visible" />
 

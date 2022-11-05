@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -25,7 +24,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.ImageHelper
-import com.google.android.material.chip.Chip
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -74,7 +72,9 @@ class ChannelFragment : BaseFragment() {
             binding.channelRefresh.isRefreshing = true
             fetchChannel()
         }
+
         refreshChannel()
+
         binding.channelRefresh.setOnRefreshListener {
             refreshChannel()
         }
@@ -192,62 +192,77 @@ class ChannelFragment : BaseFragment() {
                 binding.channelRecView.adapter = channelAdapter
             }
 
-            binding.videos.setOnClickListener {
+            setupTabs(response.tabs)
+        }
+    }
+
+    private fun setupTabs(tabs: List<ChannelTab>?) {
+        tabs?.firstOrNull { it.name == "Playlists" }?.let {
+            binding.playlists.visibility = View.VISIBLE
+        }
+
+        tabs?.firstOrNull { it.name == "Channels" }?.let {
+            binding.playlists.visibility = View.VISIBLE
+        }
+
+        tabs?.firstOrNull { it.name == "Livestreams" }?.let {
+            binding.playlists.visibility = View.VISIBLE
+        }
+
+        tabs?.firstOrNull { it.name == "Shorts" }?.let {
+            binding.playlists.visibility = View.VISIBLE
+        }
+
+        binding.tabChips.setOnCheckedStateChangeListener { _, _ ->
+            reactToTabChange(tabs)
+        }
+    }
+
+    private fun reactToTabChange(tabs: List<ChannelTab>?) {
+        when (binding.tabChips.checkedChipId) {
+            binding.videos.id -> {
                 binding.channelRecView.adapter = channelAdapter
                 onScrollEnd = {
                     fetchChannelNextPage()
                 }
-                binding.tabChips.children.forEach { child ->
-                    if (child != it) (child as Chip).isChecked = false
-                }
             }
-
-            response.tabs?.firstOrNull { it.name == "Playlists" }?.let {
-                setupTab(binding.playlists, it)
+            binding.channels.id -> {
+                tabs?.first { it.name == "Channels" }?.let { loadTab(it) }
             }
-
-            response.tabs?.firstOrNull { it.name == "Channels" }?.let {
-                setupTab(binding.channels, it)
+            binding.playlists.id -> {
+                tabs?.first { it.name == "Playlists" }?.let { loadTab(it) }
             }
-
-            response.tabs?.firstOrNull { it.name == "Livestreams" }?.let {
-                setupTab(binding.livestreams, it)
+            binding.livestreams.id -> {
+                tabs?.first { it.name == "Livestreams" }?.let { loadTab(it) }
             }
-
-            response.tabs?.firstOrNull { it.name == "Shorts" }?.let {
-                setupTab(binding.shorts, it)
+            binding.shorts.id -> {
+                tabs?.first { it.name == "Shorts" }?.let { loadTab(it) }
             }
         }
     }
 
-    private fun setupTab(chip: Chip, tab: ChannelTab) {
-        chip.visibility = View.VISIBLE
-        chip.setOnClickListener {
-            binding.tabChips.children.forEach {
-                if (it != chip) (it as Chip).isChecked = false
+    private fun loadTab(tab: ChannelTab) {
+        scope.launch {
+            val response = try {
+                RetrofitInstance.api.getChannelTab(tab.data!!)
+            } catch (e: Exception) {
+                return@launch
             }
-            scope.launch {
-                val response = try {
-                    RetrofitInstance.api.getChannelTab(tab.data!!)
-                } catch (e: Exception) {
-                    return@launch
-                }
 
-                val adapter = SearchAdapter(
-                    response.content.toMutableList(),
-                    childFragmentManager
-                )
+            val adapter = SearchAdapter(
+                response.content.toMutableList(),
+                childFragmentManager
+            )
 
-                runOnUiThread {
-                    binding.channelRecView.adapter = adapter
-                }
+            runOnUiThread {
+                binding.channelRecView.adapter = adapter
+            }
 
-                var tabNextPage = response.nextpage
-                onScrollEnd = {
-                    tabNextPage?.let {
-                        fetchTabNextPage(it, tab, adapter) { nextPage ->
-                            tabNextPage = nextPage
-                        }
+            var tabNextPage = response.nextpage
+            onScrollEnd = {
+                tabNextPage?.let {
+                    fetchTabNextPage(it, tab, adapter) { nextPage ->
+                        tabNextPage = nextPage
                     }
                 }
             }
