@@ -16,4 +16,14 @@
     <string name="startpage">ଗୃହ</string>
     <string name="search_hint">ସନ୍ଧାନ</string>
     <string name="login">ଲଗ୍ ଇନ୍</string>
+    <string name="cancel">ବରଖାସ୍ତ</string>
+    <string name="loggedout">ସଂଶ୍ଳିଷ୍ଟ ନାହାନ୍ତି ।</string>
+    <string name="loggedIn">ସଂଶ୍ଳିଷ୍ଟ ଅଛନ୍ତି ।</string>
+    <string name="already_logged_in">ଆଗରୁ ସଂଶ୍ଳିଷ୍ଟ ଅଛନ୍ତି। ଆପଣ ଅଣ ସଂଶ୍ଳିଷ୍ଟ ହୋଇପାରନ୍ତି।</string>
+    <string name="instances">ଚୟନ କରନ୍ତୁ…</string>
+    <string name="customInstance">କଷ୍ଟମ</string>
+    <string name="region">ଜାଗା</string>
+    <string name="login_register">ସଂଶ୍ଳିଷ୍ଟ/ପଞ୍ଜିକରଣ</string>
+    <string name="registered">ପଞ୍ଜୀକୃତ । ଏବେ ଆପଣ ନୂଆ ଧାରାବାହିକ କୁ ଅନୁସରଣ କରିପାରିବେ ।</string>
+    <string name="login_first">ଦୟା କରି ସଂଶ୍ଳିଷ୍ଟ ହୁଅନ୍ତୁ ଏବଂ ଆଉଥରେ ଚେଷ୍ଟା କରନ୍ତୁ ।</string>
 </resources>
