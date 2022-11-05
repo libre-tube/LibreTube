@@ -361,4 +361,6 @@
     <string name="livestreams">Élő közvetítések</string>
     <string name="alternative_videos_layout">Videók alternatív elrendezése</string>
     <string name="defaultIconLight">Alapért. világos</string>
+    <string name="playlistCloned">Lejátszási lista klónozva</string>
+    <string name="confirm_unsubscribing">Leiratkozás megerősítése</string>
 </resources>
