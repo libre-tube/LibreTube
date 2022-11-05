@@ -355,6 +355,7 @@
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternative videos layout</string>
     <string name="defaultIconLight">Default light</string>
+    <string name="playlistCloned">Playlist cloned</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

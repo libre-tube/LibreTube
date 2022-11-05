@@ -141,7 +141,7 @@ interface PipedApi {
     suspend fun importPlaylist(
         @Header("Authorization") token: String,
         @Body playlistId: PlaylistId
-    ): Message
+    ): PlaylistId
 
     @GET("user/playlists")
     suspend fun playlists(@Header("Authorization") token: String): List<Playlists>
