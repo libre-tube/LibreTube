@@ -2,7 +2,6 @@ package com.github.libretube.ui.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.ChannelRowBinding
-import com.github.libretube.databinding.PlaylistSearchRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 
