@@ -345,6 +345,12 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.videoId)?.let {
             loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
         }
+        when (intent?.getStringExtra("fragmentToOpen")) {
+            "subscriptions" ->
+                navController.navigate(R.id.subscriptionsFragment)
+            "library" ->
+                navController.navigate(R.id.libraryFragment)
+        }
     }
 
     private fun loadVideo(videoId: String, timeStamp: Long?) {

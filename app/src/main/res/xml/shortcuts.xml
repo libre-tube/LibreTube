@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="25">
+    <shortcut
+        android:shortcutId="home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:shortcutShortLabel="@string/startpage">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.github.libretube"
+            android:targetClass="com.github.libretube.ui.activities.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="subscriptions"
+        android:enabled="true"
+        android:icon="@drawable/ic_subscriptions"
+        android:shortcutShortLabel="@string/subscriptions">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.github.libretube"
+            android:targetClass="com.github.libretube.ui.activities.MainActivity">
+            <extra android:name="fragmentToOpen" android:value="subscriptions" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="library"
+        android:enabled="true"
+        android:icon="@drawable/ic_library"
+        android:shortcutShortLabel="@string/library">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.github.libretube"
+            android:targetClass="com.github.libretube.ui.activities.MainActivity">
+            <extra android:name="fragmentToOpen" android:value="library" />
+        </intent>
+    </shortcut>
+</shortcuts>
