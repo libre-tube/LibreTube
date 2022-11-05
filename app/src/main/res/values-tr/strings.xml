@@ -194,7 +194,7 @@
     <string name="pauseOnScreenOff">Otomatik duraklatma</string>
     <string name="pauseOnScreenOff_summary">Ekran kapatılmışken oynatmayı duraklatır.</string>
     <string name="autoplay_summary">Geçerli videodan sonraki videoyu otomatik olarak oynatın.</string>
-    <string name="clonePlaylist">Oynatma listesini klonla</string>
+    <string name="clonePlaylist">Oynatma listesini kopyala</string>
     <string name="reset">Varsayılanlara sıfırla</string>
     <string name="reset_message">Tüm ayarlar sıfırlansın ve oturum kapatılsın mı\?</string>
     <string name="deleteAccount_summary">Piped hesabınızı silin</string>
@@ -356,9 +356,13 @@
     <string name="added_to_playlist">Oynatma listesine eklendi</string>
     <string name="queue">Sıra</string>
     <string name="playing_queue">Oynatma sırası</string>
-    <string name="sb_markers">İşaretçiler</string>
+    <string name="sb_markers">İşaretleyiciler</string>
     <string name="sb_markers_summary">Segmentleri zaman çubuğunda işaretleyin.</string>
     <string name="livestreams">Canlı yayınlar</string>
     <string name="alternative_videos_layout">Alternatif video düzeni</string>
     <string name="defaultIconLight">Varsayılan ışık</string>
+    <string name="playlistCloned">Oynatma listesi kopyalandı</string>
+    <string name="confirm_unsubscribing">Abonelikten çıkmayı onayla</string>
+    <string name="confirm_unsubscribe">%1$s aboneliğinden çıkmak istediğinizden emin misiniz\?</string>
+    <string name="confirm_unsubscribing_summary">Abonelikten çıkmadan önce bir onay iletişim kutusu göster.</string>
 </resources>
