@@ -21,7 +21,7 @@
     <string name="instances">Wybierz instancję…</string>
     <string name="customInstance">Niestandardowa instancja</string>
     <string name="login_register">Zaloguj się lub zarejestruj</string>
-    <string name="please_login">Proszę najpierw zalogować się lub zarejestrować w ustawieniach.</string>
+    <string name="please_login">Zaloguj się lub zarejestruj w ustawieniach.</string>
     <string name="importsuccess">Subskrypcje zostały zaimportowane</string>
     <string name="subscribeIsEmpty">Najpierw zasubskrybuj kilka kanałów.</string>
     <string name="dlcomplete">Pobieranie ukończone.</string>
@@ -37,10 +37,10 @@
     <string name="defres">Rozdzielczość wideo</string>
     <string name="grid">Kolumny siatki</string>
     <string name="emptyList">Tu jeszcze nic nie ma.</string>
-    <string name="deletePlaylist">Usuń listę odtwarzania</string>
-    <string name="createPlaylist">Utwórz nową listę odtwarzania</string>
-    <string name="playlistCreated">Utworzono listę odtwarzania.</string>
-    <string name="playlistName">Nazwa listy odtwarzania</string>
+    <string name="deletePlaylist">Usuń playlistę</string>
+    <string name="createPlaylist">Utwórz playlistę</string>
+    <string name="playlistCreated">Utworzono playlistę.</string>
+    <string name="playlistName">Nazwa playlisty</string>
     <string name="success">Gotowe.</string>
     <string name="fail">Nie powiodło się :(</string>
     <string name="about">O LibreTube</string>
@@ -49,9 +49,9 @@
     <string name="vlc">Otwórz w VLC</string>
     <string name="empty">Nazwa użytkownika i hasło nie mogą być puste.</string>
     <string name="vlcerror">Nie można otworzyć w VLC. Może nie być zainstalowany.</string>
-    <string name="areYouSure">Na pewno chcesz usunąć tę listę odtwarzania\?</string>
-    <string name="addToPlaylist">Dodaj do listy odtwarzania</string>
-    <string name="emptyPlaylistName">Nazwa listy odtwarzania nie może być pusta</string>
+    <string name="areYouSure">Usunąć tę playlistę\?</string>
+    <string name="addToPlaylist">Dodaj do playlisty</string>
+    <string name="emptyPlaylistName">Nazwa playlisty nie może być pusta</string>
     <string name="import_from_yt_summary">Z YouTube lub NewPipe</string>
     <string name="videos">Filmy</string>
     <string name="changeLanguage">Język</string>
@@ -69,7 +69,7 @@
     <string name="choose_filter">Wybierz filtr wyszukiwania</string>
     <string name="channels">Kanały</string>
     <string name="all">Wszystkie</string>
-    <string name="playlists">Listy odtwarzania</string>
+    <string name="playlists">Playlisty</string>
     <string name="okay">OK</string>
     <string name="history">Historia</string>
     <string name="search_history">Historia wyszukiwania</string>
@@ -111,7 +111,7 @@
     <string name="music_songs">YT Music (Muzyka)</string>
     <string name="music_videos">YT Music (Wideo)</string>
     <string name="music_albums">YT Music (Albumy)</string>
-    <string name="music_playlists">YT Music (Listy odtwarzania)</string>
+    <string name="music_playlists">YT Music (Playlisty)</string>
     <string name="playOnBackground">Odtwarzanie w tle</string>
     <string name="piped">Piped</string>
     <string name="enabled">Włączono</string>
@@ -229,7 +229,7 @@
     <string name="hideTrendingPage">Ukryj kartę „Główna”</string>
     <string name="behavior">Zachowanie</string>
     <string name="pauseOnScreenOff">Wstrzymaj odtwarzanie</string>
-    <string name="clonePlaylist">Sklonuj listę odtwarzania</string>
+    <string name="clonePlaylist">Sklonuj playlistę</string>
     <string name="watch_history">Historia oglądania</string>
     <string name="auth_instance">Instancja uwierzytelniająca</string>
     <string name="auth_instance_summary">Użyj innej instancji dla potwierdzeń autoryzacyjnych.</string>
@@ -316,7 +316,7 @@
     <string name="share_with_time">Udostępnij z uwzględnieniem czasu</string>
     <string name="break_reminder_time">Minuty przed przypomnieniem</string>
     <string name="trending_layout">Alternatywny układ głównej karty</string>
-    <string name="renamePlaylist">Zmień nazwę listy odtwarzania</string>
+    <string name="renamePlaylist">Zmień nazwę playlisty</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dane mobilne</string>
     <string name="new_videos_badge">Oznaczenie nowych filmów</string>
@@ -347,13 +347,13 @@
     <string name="default_load_interval">Domyślny</string>
     <string name="filename">Nazwa pliku</string>
     <string name="invalid_filename">Nieprawidłowa nazwa pliku!</string>
-    <string name="playlists_order">Kolejność list odtwarzania</string>
+    <string name="playlists_order">Kolejność playlist</string>
     <string name="recentlyUpdated">Ostatnio zaktualizowane</string>
     <string name="recentlyUpdatedReversed">Ostatnio zaktualizowane (odwrotnie)</string>
-    <string name="playlistNameReversed">Nazwa listy odtwarzania (odwrotnie)</string>
+    <string name="playlistNameReversed">Nazwa playlisty (odwrotnie)</string>
     <string name="limit_hls">Ogranicz HLS do 1080p</string>
     <string name="progressive_load_interval_summary">Niższa wartość może przyspieszyć początkowe ładowanie wideo.</string>
-    <string name="added_to_playlist">Dodano do listy odtwarzania</string>
+    <string name="added_to_playlist">Dodano do playlisty</string>
     <string name="playing_queue">Odtwarzana kolejka</string>
     <string name="queue">Kolejka</string>
     <string name="sb_markers">Oznaczenia</string>
@@ -361,4 +361,8 @@
     <string name="alternative_videos_layout">Alternatywny układ filmów</string>
     <string name="defaultIconLight">Jasna (domyślnie)</string>
     <string name="sb_markers_summary">Oznacz segmenty na pasku czasu.</string>
+    <string name="playlistCloned">Sklonowano playlistę</string>
+    <string name="confirm_unsubscribing">Potwierdzenie odsubskrybowania</string>
+    <string name="confirm_unsubscribing_summary">Pokaż okno potwierdzenia przed odsubskrybowaniem.</string>
+    <string name="confirm_unsubscribe">Odsubskrybować %1$s\?</string>
 </resources>
