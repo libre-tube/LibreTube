@@ -9,7 +9,7 @@
         android:shortcutShortLabel="@string/startpage">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.github.libretube.debug"
+            android:targetPackage="com.github.libretube"
             android:targetClass="com.github.libretube.ui.activities.MainActivity" />
     </shortcut>
     <shortcut
@@ -19,9 +19,9 @@
         android:shortcutShortLabel="@string/subscriptions">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.github.libretube.debug"
+            android:targetPackage="com.github.libretube"
             android:targetClass="com.github.libretube.ui.activities.MainActivity">
-            <extra android:name="fragmentToOpen" android:value="subscriptions"/>
+            <extra android:name="fragmentToOpen" android:value="subscriptions" />
         </intent>
     </shortcut>
     <shortcut
@@ -31,9 +31,9 @@
         android:shortcutShortLabel="@string/library">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.github.libretube.debug"
+            android:targetPackage="com.github.libretube"
             android:targetClass="com.github.libretube.ui.activities.MainActivity">
-            <extra android:name="fragmentToOpen" android:value="library"/>
+            <extra android:name="fragmentToOpen" android:value="library" />
         </intent>
     </shortcut>
 </shortcuts>

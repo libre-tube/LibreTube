@@ -108,17 +108,6 @@ class MainActivity : BaseActivity() {
         // navigate to the default fragment
         navController.navigate(startFragmentId)
 
-        // open appropriate fragment from shortcut
-        when (intent.extras?.getString("fragmentToOpen")) {
-            "subscriptions" ->
-                navController.navigate(R.id.subscriptionsFragment)
-            "library" ->
-                navController.navigate(R.id.libraryFragment)
-            else -> {
-                return
-            }
-        }
-
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
         binding.bottomNav.setOnItemSelectedListener {
@@ -359,6 +348,12 @@ class MainActivity : BaseActivity() {
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
             loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
+        }
+        when (intent?.getStringExtra("fragmentToOpen")) {
+            "subscriptions" ->
+                navController.navigate(R.id.subscriptionsFragment)
+            "library" ->
+                navController.navigate(R.id.libraryFragment)
         }
     }
 
