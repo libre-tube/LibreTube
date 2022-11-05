@@ -9,11 +9,10 @@ import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.extensions.round
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlaybackSpeedSheet(
     private val player: Player
-) : BottomSheetDialogFragment() {
+) : ExpandedBottomSheet() {
     private lateinit var binding: PlaybackBottomSheetBinding
 
     override fun onCreateView(
