@@ -31,18 +31,28 @@ class PlaybackSpeedSheet(
         binding.pitch.value = player.playbackParameters.pitch
 
         binding.speed.addOnChangeListener { _, value, _ ->
-            onChange(value, binding.pitch.value.round(2))
+            onChange()
         }
 
         binding.pitch.addOnChangeListener { _, value, _ ->
-            onChange(binding.speed.value.round(2), value)
+            onChange()
+        }
+
+        binding.resetSpeed.setOnClickListener {
+            binding.speed.value = 1f
+            onChange()
+        }
+
+        binding.resetPitch.setOnClickListener {
+            binding.pitch.value = 1f
+            onChange()
         }
     }
 
-    private fun onChange(speed: Float, pitch: Float) {
+    private fun onChange() {
         player.playbackParameters = PlaybackParameters(
-            speed,
-            pitch
+            binding.speed.value.round(2),
+            binding.pitch.value.round(2)
         )
     }
 
