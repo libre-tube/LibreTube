@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.graphics.Color
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,15 +28,15 @@ class ChaptersAdapter(
         holder.binding.apply {
             ImageHelper.loadImage(chapter.image, chapterImage)
             chapterTitle.text = chapter.title
+            timeStamp.text = chapter.start?.let { DateUtils.formatElapsedTime(it) }
 
-            if (selectedPosition == position) {
-                // get the color for highlighted controls
-                val color =
-                    ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
-                chapterLL.setBackgroundColor(color)
+            val color = if (selectedPosition == position) {
+                ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
             } else {
-                chapterLL.setBackgroundColor(Color.TRANSPARENT)
+                Color.TRANSPARENT
             }
+            chapterLL.setBackgroundColor(color)
+
             root.setOnClickListener {
                 updateSelectedPosition(position)
                 val chapterStart = chapter.start!! * 1000 // s -> ms

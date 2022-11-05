@@ -991,10 +991,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
 
         // enable the chapters dialog in the player
-        val titles = mutableListOf<String>()
-        chapters.forEach {
-            titles += it.title!!
-        }
+        val titles = chapters.map { "${it.title} (${it.start?.let { DateUtils.formatElapsedTime(it) }})" }
         playerBinding.chapterLL.setOnClickListener {
             if (viewModel.isFullscreen.value!!) {
                 MaterialAlertDialogBuilder(requireContext())
