@@ -13,8 +13,8 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.FragmentChannelBinding
+import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID

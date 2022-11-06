@@ -6,8 +6,8 @@ import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
-import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.DialogTextPreferenceBinding
+import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ShareData

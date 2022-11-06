@@ -8,10 +8,10 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.obj.ShareData
 import com.github.libretube.util.PreferenceHelper
@@ -19,7 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(
     private val id: String,
-    private val shareObjectType: Int,
+    private val shareObjectType: ShareObjectType,
     private val shareData: ShareData,
     private val position: Long? = null
 ) : DialogFragment() {

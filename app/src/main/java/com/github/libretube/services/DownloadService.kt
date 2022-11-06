@@ -15,7 +15,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
-import com.github.libretube.constants.DownloadType
+import com.github.libretube.enums.DownloadType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.DownloadHelper
 import java.io.File
@@ -25,7 +25,7 @@ class DownloadService : Service() {
     private lateinit var videoName: String
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
-    private var downloadType: Int = 3
+    private var downloadType: DownloadType = DownloadType.NONE
 
     private var videoDownloadId: Long? = null
     private var audioDownloadId: Long? = null
