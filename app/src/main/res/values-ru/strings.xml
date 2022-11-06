@@ -357,8 +357,12 @@
     <string name="playing_queue">Очередь воспроизведения</string>
     <string name="queue">Очередь</string>
     <string name="sb_markers">Маркеры</string>
-    <string name="sb_markers_summary">Пометить отрывок на шкале времени</string>
+    <string name="sb_markers_summary">Пометить сегменты на шкале времени.</string>
     <string name="livestreams">Прямые трансляции</string>
     <string name="alternative_videos_layout">Альтернативное размещение видео</string>
     <string name="defaultIconLight">Светлый по умолчанию</string>
+    <string name="playlistCloned">Плейлист клонирован</string>
+    <string name="confirm_unsubscribe">Вы уверены, что хотите отписаться от %1$s\?</string>
+    <string name="confirm_unsubscribing">Подтверждать отписку</string>
+    <string name="confirm_unsubscribing_summary">Спрашивать подтверждение перед отпиской.</string>
 </resources>
