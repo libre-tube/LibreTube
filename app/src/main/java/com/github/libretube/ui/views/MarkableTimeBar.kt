@@ -38,7 +38,7 @@ class MarkableTimeBar(
         canvas.save()
         length = canvas.width - 2 * HORIZONTAL_OFFSET
 
-        val marginY = canvas.height / 2 - PROGRESS_HEIGHT / 2
+        val marginY = canvas.height / 2 - PROGRESS_BAR_HEIGHT / 2
 
         segments.forEach {
             canvas.drawRect(
@@ -46,7 +46,7 @@ class MarkableTimeBar(
                     (it.segment.first() + HORIZONTAL_OFFSET).toLength(),
                     marginY,
                     (it.segment.last() + HORIZONTAL_OFFSET).toLength(),
-                    canvas.height - marginY - 1
+                    canvas.height - marginY
                 ),
                 Paint().apply {
                     color = ThemeHelper.getThemeColor(context, R.attr.colorError)
@@ -74,6 +74,6 @@ class MarkableTimeBar(
 
     companion object {
         const val HORIZONTAL_OFFSET = 10
-        const val PROGRESS_HEIGHT = 6
+        const val PROGRESS_BAR_HEIGHT = 4
     }
 }
