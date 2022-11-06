@@ -63,14 +63,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:maxLines="1"
                         android:text="@string/app_name"
                         android:textSize="12sp" />
 
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    style="@style/ElevatedIconButton"
                     android:id="@+id/channel_share"
+                    style="@style/ElevatedIconButton"
                     app:icon="@drawable/ic_share"
                     tools:targetApi="m" />
 

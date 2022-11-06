@@ -130,17 +130,20 @@ class ChannelFragment : BaseFragment() {
                 }
 
                 channelId?.let { binding.notificationBell.setupNotificationBell(it) }
+                if (isSubscribed == false) binding.notificationBell.visibility = View.GONE
 
                 binding.channelSubscribe.setOnClickListener {
                     if (isSubscribed == true) {
                         SubscriptionHelper.handleUnsubscribe(requireContext(), channelId!!, channelName) {
                             isSubscribed = false
                             binding.channelSubscribe.text = getString(R.string.subscribe)
+                            binding.notificationBell.visibility = View.GONE
                         }
                     } else {
                         SubscriptionHelper.subscribe(channelId!!)
                         isSubscribed = true
                         binding.channelSubscribe.text = getString(R.string.unsubscribe)
+                        binding.notificationBell.visibility = View.VISIBLE
                     }
                 }
 

@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
@@ -30,7 +31,7 @@ class SubscriptionChannelAdapter(
 
     override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
         val subscription = subscriptions[position]
-        var subscribed = true
+        var isSubscribed = true
 
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
@@ -43,15 +44,17 @@ class SubscriptionChannelAdapter(
             }
             subscriptionSubscribe.setOnClickListener {
                 val channelId = subscription.url!!.toID()
-                if (subscribed) {
+                if (isSubscribed) {
                     SubscriptionHelper.handleUnsubscribe(root.context, channelId, subscription.name ?: "") {
                         subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
-                        subscribed = false
+                        notificationBell.visibility = View.GONE
+                        isSubscribed = false
                     }
                 } else {
                     SubscriptionHelper.subscribe(channelId)
                     subscriptionSubscribe.text = root.context.getString(R.string.unsubscribe)
-                    subscribed = true
+                    notificationBell.visibility = View.VISIBLE
+                    isSubscribed = true
                 }
             }
         }
