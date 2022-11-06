@@ -15,11 +15,11 @@ import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.models.SearchViewModel
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.models.SearchViewModel
 import retrofit2.HttpException
 import java.io.IOException
 

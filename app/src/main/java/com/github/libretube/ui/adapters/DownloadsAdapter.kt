@@ -13,6 +13,7 @@ import com.github.libretube.obj.DownloadedFile
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
@@ -39,7 +40,7 @@ class DownloadsAdapter(
                 uploaderName.text = it.uploader
                 videoInfo.text = it.views.formatShort() + " " +
                     root.context.getString(R.string.views_placeholder) +
-                    " • " + it.uploadDate
+                    TextUtils.SEPARATOR + it.uploadDate
             }
 
             thumbnailImage.setImageBitmap(file.thumbnail)

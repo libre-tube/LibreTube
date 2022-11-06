@@ -21,6 +21,7 @@ import com.github.libretube.ui.viewholders.VideosViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.TextUtils
 
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
@@ -79,10 +80,10 @@ class VideosAdapter(
         holder.trendingRowBinding?.apply {
             textViewTitle.text = video.title
             textViewChannel.text =
-                video.uploaderName + " • " +
+                video.uploaderName + TextUtils.SEPARATOR +
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                " • " + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
+                TextUtils.SEPARATOR + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
             video.duration?.let { thumbnailDuration.setFormattedDuration(it) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
@@ -114,7 +115,7 @@ class VideosAdapter(
             videoInfo.text =
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                " • " + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
+                TextUtils.SEPARATOR + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
 
             thumbnailDuration.text =
                 video.duration?.let { DateUtils.formatElapsedTime(it) }

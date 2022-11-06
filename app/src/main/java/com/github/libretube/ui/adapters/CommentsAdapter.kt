@@ -20,6 +20,7 @@ import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.ClipboardHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.TextUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ class CommentsAdapter(
                 root.scaleY = 0.9f
             }
 
-            commentInfos.text = comment.author.toString() + " • " + comment.commentedTime.toString()
+            commentInfos.text = comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
             commentText.text = comment.commentText.toString()
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)

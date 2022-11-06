@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.ui.interfaces
 
 import android.os.Handler
 import android.os.Looper

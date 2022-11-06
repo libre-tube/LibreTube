@@ -21,6 +21,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.TextUtils
 
 class SearchAdapter(
     private val searchItems: MutableList<ContentItem>,
@@ -121,7 +122,7 @@ class SearchAdapter(
             searchViews.text = root.context.getString(
                 R.string.subscribers,
                 item.subscribers.formatShort()
-            ) + " • " + root.context.getString(R.string.videoCount, item.videos.toString())
+            ) + TextUtils.SEPARATOR + root.context.getString(R.string.videoCount, item.videos.toString())
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
@@ -137,8 +138,8 @@ class SearchAdapter(
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
             if (item.videos?.toInt() != -1) videoCount.text = item.videos.toString()
-            playlistDescription.text = item.name
-            playlistTitle.text = item.uploaderName
+            playlistTitle.text = item.name
+            playlistDescription.text = item.uploaderName
             root.setOnClickListener {
                 NavigationHelper.navigatePlaylist(root.context, item.url, false)
             }

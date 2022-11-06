@@ -1,4 +1,4 @@
-package com.github.libretube.models
+package com.github.libretube.ui.models
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

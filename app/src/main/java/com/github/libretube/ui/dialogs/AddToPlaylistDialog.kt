@@ -16,7 +16,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainThread
-import com.github.libretube.models.PlaylistViewModel
+import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
