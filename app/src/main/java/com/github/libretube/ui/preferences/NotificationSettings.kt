@@ -45,8 +45,9 @@ class NotificationSettings : BasePreferenceFragment() {
 
     private fun updateNotificationPrefs() {
         // replace the previous queued work request
-        NotificationHelper(requireContext())
+        NotificationHelper
             .enqueueWork(
+                context = requireContext(),
                 existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.REPLACE
             )
     }

@@ -1,18 +1,22 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
+import com.github.libretube.extensions.setupNotificationBell
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
-class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.github.libretube.api.obj.Subscription>) :
-    RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
+class SubscriptionChannelAdapter(
+    private val subscriptions: MutableList<Subscription>
+) : RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
 
     override fun getItemCount(): Int {
         return subscriptions.size
@@ -27,25 +31,30 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.gith
 
     override fun onBindViewHolder(holder: SubscriptionChannelViewHolder, position: Int) {
         val subscription = subscriptions[position]
-        var subscribed = true
+        var isSubscribed = true
 
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
             ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage)
+
+            subscription.url?.toID()?.let { notificationBell.setupNotificationBell(it) }
+
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }
             subscriptionSubscribe.setOnClickListener {
                 val channelId = subscription.url!!.toID()
-                if (subscribed) {
+                if (isSubscribed) {
                     SubscriptionHelper.handleUnsubscribe(root.context, channelId, subscription.name ?: "") {
                         subscriptionSubscribe.text = root.context.getString(R.string.subscribe)
-                        subscribed = false
+                        notificationBell.visibility = View.GONE
+                        isSubscribed = false
                     }
                 } else {
                     SubscriptionHelper.subscribe(channelId)
                     subscriptionSubscribe.text = root.context.getString(R.string.unsubscribe)
-                    subscribed = true
+                    notificationBell.visibility = View.VISIBLE
+                    isSubscribed = true
                 }
             }
         }

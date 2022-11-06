@@ -52,7 +52,8 @@ class LibreTubeApp : Application() {
         /**
          * Initialize the notification listener in the background
          */
-        NotificationHelper(this).enqueueWork(
+        NotificationHelper.enqueueWork(
+            context = this,
             existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP
         )
 

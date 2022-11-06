@@ -30,11 +30,11 @@ class PlaybackSpeedSheet(
         binding.speed.value = player.playbackParameters.speed
         binding.pitch.value = player.playbackParameters.pitch
 
-        binding.speed.addOnChangeListener { _, value, _ ->
+        binding.speed.addOnChangeListener { _, _, _ ->
             onChange()
         }
 
-        binding.pitch.addOnChangeListener { _, value, _ ->
+        binding.pitch.addOnChangeListener { _, _, _ ->
             onChange()
         }
 
