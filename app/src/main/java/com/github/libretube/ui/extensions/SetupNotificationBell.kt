@@ -1,4 +1,4 @@
-package com.github.libretube.extensions
+package com.github.libretube.ui.extensions
 
 import android.util.Log
 import com.github.libretube.R
