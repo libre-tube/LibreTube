@@ -358,4 +358,12 @@
     <string name="time_code">Tidskode</string>
     <string name="sb_markers">Markører</string>
     <string name="sb_markers_summary">Marker segmenter i forløpsindikatoren.</string>
+    <string name="playlistCloned">Spilleliste klonet</string>
+    <string name="confirm_unsubscribe">Opphev abonnement på %1$s\?</string>
+    <string name="confirm_unsubscribing_summary">Vis bekreftelsesdialog før opphevelse av abonnement</string>
+    <string name="play_all">Spill alle</string>
+    <string name="confirm_unsubscribing">Bekreft opphevelse av abonnement</string>
+    <string name="livestreams">Sanntidsstrømmer</string>
+    <string name="alternative_videos_layout">Alternativ tilpasning av videoer</string>
+    <string name="defaultIconLight">Forvalgt lys</string>
 </resources>
