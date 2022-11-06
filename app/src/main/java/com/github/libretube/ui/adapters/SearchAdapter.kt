@@ -1,14 +1,12 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
@@ -16,15 +14,13 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.setFormattedDuration
 import com.github.libretube.extensions.setWatchProgressLength
+import com.github.libretube.extensions.setupSubscriptionButton
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SearchAdapter(
     private val searchItems: MutableList<ContentItem>,
@@ -130,37 +126,7 @@ class SearchAdapter(
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
 
-            isSubscribed(root.context, item, binding)
-        }
-    }
-
-    private fun isSubscribed(context: Context, streamItem: ContentItem, binding: ChannelRowBinding) {
-        val channelId = streamItem.url!!.toID()
-        // check whether the user subscribed to the channel
-        CoroutineScope(Dispatchers.Main).launch {
-            var isSubscribed = SubscriptionHelper.isSubscribed(channelId)
-
-            // if subscribed change text to unsubscribe
-            if (isSubscribed == true) {
-                binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
-            }
-
-            // make sub button visible and set the on click listeners to (un)subscribe
-            if (isSubscribed == null) return@launch
-            binding.searchSubButton.visibility = View.VISIBLE
-
-            binding.searchSubButton.setOnClickListener {
-                if (isSubscribed == false) {
-                    SubscriptionHelper.subscribe(channelId)
-                    binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
-                    isSubscribed = true
-                } else {
-                    SubscriptionHelper.handleUnsubscribe(context, channelId, streamItem.uploaderName) {
-                        binding.searchSubButton.text = binding.root.context.getString(R.string.subscribe)
-                        isSubscribed = false
-                    }
-                }
-            }
+            binding.searchSubButton.setupSubscriptionButton(item.url?.toID(), item.name?.toID())
         }
     }
 

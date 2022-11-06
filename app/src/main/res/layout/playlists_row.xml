@@ -32,30 +32,31 @@
             android:layout_height="match_parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:background="#CC000000">
+            android:background="#CC000000"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/video_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:textColor="#ECE4E4" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/video_count"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:paddingStart="5dp"
                 app:srcCompat="@drawable/ic_playlist"
                 tools:ignore="RtlSymmetry" />
 
-        </RelativeLayout>
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -63,6 +64,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         app:layout_constraintEnd_toStartOf="@+id/delete_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toTopOf="parent" />

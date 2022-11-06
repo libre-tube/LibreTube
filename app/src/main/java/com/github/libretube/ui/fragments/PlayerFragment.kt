@@ -37,7 +37,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.constants.IntentData
@@ -53,6 +52,7 @@ import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.query
+import com.github.libretube.extensions.setupSubscriptionButton
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.models.PlayerViewModel
@@ -118,7 +118,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private var videoId: String? = null
     private var playlistId: String? = null
-    private var isSubscribed: Boolean? = false
     private var isLive = false
     private lateinit var streams: com.github.libretube.api.obj.Streams
 
@@ -935,7 +934,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // update the subscribed state
-        isSubscribed()
+        binding.playerSubscribe.setupSubscriptionButton(streams.uploaderUrl?.toID(), streams.uploader)
 
         if (token != "") {
             binding.relPlayerSave.setOnClickListener {
@@ -1259,33 +1258,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer, false)
         }
         nowPlayingNotification.updatePlayerNotification(videoId!!, streams)
-    }
-
-    private fun isSubscribed() {
-        val channelId = streams.uploaderUrl!!.toID()
-        lifecycleScope.launchWhenCreated {
-            isSubscribed = SubscriptionHelper.isSubscribed(channelId)
-
-            if (isSubscribed == null) return@launchWhenCreated
-
-            runOnUiThread {
-                if (isSubscribed == true) {
-                    binding.playerSubscribe.text = getString(R.string.unsubscribe)
-                }
-                binding.playerSubscribe.setOnClickListener {
-                    if (isSubscribed == true) {
-                        SubscriptionHelper.handleUnsubscribe(requireContext(), channelId, streams.uploader) {
-                            binding.playerSubscribe.text = getString(R.string.subscribe)
-                            isSubscribed = false
-                        }
-                    } else {
-                        SubscriptionHelper.subscribe(channelId)
-                        binding.playerSubscribe.text = getString(R.string.unsubscribe)
-                        isSubscribed = true
-                    }
-                }
-            }
-        }
     }
 
     private fun fetchComments() {
