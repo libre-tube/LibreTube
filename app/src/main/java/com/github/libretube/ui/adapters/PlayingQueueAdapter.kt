@@ -13,7 +13,6 @@ import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.ThemeHelper
 
 class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
-    private val currentIndex = PlayingQueue.currentIndex()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayingQueueViewHolder {
         val binding = QueueRowBinding.inflate(
@@ -37,6 +36,7 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
             videoInfo.text = streamItem.uploaderName + "  •  " +
                 DateUtils.formatElapsedTime(streamItem.duration ?: 0)
 
+            val currentIndex = PlayingQueue.currentIndex()
             root.setBackgroundColor(
                 if (currentIndex == position) {
                     ThemeHelper.getThemeColor(root.context, android.R.attr.colorControlHighlight)
@@ -44,6 +44,13 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
                     Color.TRANSPARENT
                 }
             )
+
+            root.setOnClickListener {
+                val oldIndex = PlayingQueue.currentIndex()
+                PlayingQueue.onQueueItemSelected(position)
+                notifyItemChanged(oldIndex)
+                notifyItemChanged(position)
+            }
         }
     }
 }

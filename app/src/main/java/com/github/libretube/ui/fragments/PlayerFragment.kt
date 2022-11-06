@@ -503,6 +503,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         try {
             // clear the playing queue
             PlayingQueue.clear()
+            PlayingQueue.removeOnQueueTapListener()
 
             saveWatchPosition()
             nowPlayingNotification.destroySelfAndPlayer()
@@ -600,6 +601,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
             } else {
                 PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
+            }
+
+            PlayingQueue.setOnQueueTapListener { streamItem ->
+                streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
             runOnUiThread {
@@ -702,8 +707,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     // used for autoplay and skipping to next video
-    private fun playNextVideo() {
-        val nextVideoId = PlayingQueue.getNext()
+    private fun playNextVideo(nextId: String? = null) {
+        val nextVideoId = nextId ?: PlayingQueue.getNext()
         // by making sure that the next and the current video aren't the same
         saveWatchPosition()
 
@@ -987,7 +992,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.chaptersRecView.adapter = ChaptersAdapter(chapters, exoPlayer)
 
         // enable the chapters dialog in the player
-        val titles = chapters.map { "${it.title} (${it.start?.let { DateUtils.formatElapsedTime(it) }})" }
+        val titles = chapters.map { chapter ->
+            "${chapter.title} (${chapter.start?.let { DateUtils.formatElapsedTime(it) }})"
+        }
         playerBinding.chapterLL.setOnClickListener {
             if (viewModel.isFullscreen.value!!) {
                 MaterialAlertDialogBuilder(requireContext())
