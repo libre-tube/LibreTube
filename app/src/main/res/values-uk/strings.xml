@@ -361,4 +361,8 @@
     <string name="livestreams">Трансляції наживо</string>
     <string name="alternative_videos_layout">Альтернативні макети відео</string>
     <string name="defaultIconLight">Типове світло</string>
+    <string name="playlistCloned">Добірку клоновано</string>
+    <string name="confirm_unsubscribe">Ви впевнені, що хочете відписатися від %1$s\?</string>
+    <string name="confirm_unsubscribing">Підтвердити відписку</string>
+    <string name="confirm_unsubscribing_summary">Показувати діалогове вікно підтвердження перед відпискою.</string>
 </resources>
