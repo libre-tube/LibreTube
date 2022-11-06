@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.util.Log
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 object PlayingQueue {
     private val queue = mutableListOf<StreamItem>()
     private var currentStream: StreamItem? = null
+    private var onQueueTapListener: (StreamItem) -> Unit = {}
 
     fun add(vararg streamItem: StreamItem) {
         streamItem.forEach {
@@ -115,5 +117,23 @@ object PlayingQueue {
                 e.printStackTrace()
             }
         }
+    }
+
+    fun onQueueItemSelected(index: Int) {
+        try {
+            val streamItem = queue[index]
+            updateCurrent(streamItem)
+            onQueueTapListener.invoke(streamItem)
+        } catch (e: Exception) {
+            Log.e("Queue on tap", "lifecycle already ended")
+        }
+    }
+
+    fun setOnQueueTapListener(listener: (StreamItem) -> Unit) {
+        onQueueTapListener = listener
+    }
+
+    fun removeOnQueueTapListener() {
+        onQueueTapListener = {}
     }
 }

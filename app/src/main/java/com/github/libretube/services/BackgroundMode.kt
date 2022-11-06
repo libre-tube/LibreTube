@@ -24,6 +24,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -123,6 +124,10 @@ class BackgroundMode : Service() {
 
             // play the audio in the background
             loadAudio(videoId, position)
+
+            PlayingQueue.setOnQueueTapListener { streamItem ->
+                streamItem.url?.toID()?.let { playNextVideo(it) }
+            }
 
             updateWatchPosition()
         } catch (e: Exception) {
@@ -264,8 +269,8 @@ class BackgroundMode : Service() {
     /**
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
-    private fun playNextVideo() {
-        val nextVideo = PlayingQueue.getNext()
+    private fun playNextVideo(nextId: String? = null) {
+        val nextVideo = nextId ?: PlayingQueue.getNext()
 
         // play new video on background
         if (nextVideo != null) {

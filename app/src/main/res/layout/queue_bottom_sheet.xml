@@ -51,7 +51,6 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
-                    android:rotation="180"
                     android:src="@drawable/ic_arrow_down" />
 
                 <ImageView
