@@ -365,4 +365,5 @@
     <string name="confirm_unsubscribe">%1$s abunəliyini ləğv etmək istədiyinizə əminsiniz\?</string>
     <string name="confirm_unsubscribing">Abunəliyin ləğvini təsdiqlə</string>
     <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqunu göstər.</string>
+    <string name="play_all">Hamısını oynat</string>
 </resources>
