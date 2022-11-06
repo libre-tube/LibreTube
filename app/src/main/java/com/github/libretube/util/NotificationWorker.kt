@@ -24,12 +24,12 @@ import kotlinx.coroutines.runBlocking
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     Worker(appContext, parameters) {
 
-    val NotificationManager =
+    private val notificationManager =
         appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     // the id where notification channels start
     private var notificationId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        NotificationManager.activeNotifications.size + 5
+        notificationManager.activeNotifications.size + 5
     } else {
         5
     }
@@ -44,7 +44,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     /**
      * check whether new streams are available in subscriptions
      */
-    fun checkForNewStreams(): Boolean {
+    private fun checkForNewStreams(): Boolean {
         var success = true
 
         val token = PreferenceHelper.getToken()
@@ -86,8 +86,16 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 index < lastStreamIndex
             }
 
+            // hide for notifications unsubscribed channels
+            val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
+            val filteredVideos = newVideos.filter {
+                channelsToIgnore.none { channelId ->
+                    channelId == it.uploaderUrl?.toID()
+                }
+            }
+
             // group the new streams by the uploader
-            val channelGroups = newVideos.groupBy { it.uploaderUrl }
+            val channelGroups = filteredVideos.groupBy { it.uploaderUrl }
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
                 createNotification(

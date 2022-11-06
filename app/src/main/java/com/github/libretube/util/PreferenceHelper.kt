@@ -85,6 +85,23 @@ object PreferenceHelper {
         return getString(PreferenceKeys.ERROR_LOG, "")
     }
 
+    fun getIgnorableNotificationChannels(): List<String> {
+        return getString(PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS, "").split(",")
+    }
+
+    fun isChannelNotificationIgnorable(channelId: String): Boolean {
+        return getIgnorableNotificationChannels().any { it == channelId }
+    }
+
+    fun toggleIgnorableNotificationChannel(channelId: String) {
+        val ignorableChannels = getIgnorableNotificationChannels().toMutableList()
+        if (ignorableChannels.contains(channelId)) ignorableChannels.remove(channelId) else ignorableChannels.add(channelId)
+        editor.putString(
+            PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS,
+            ignorableChannels.joinToString(",")
+        )
+    }
+
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
