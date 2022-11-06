@@ -85,14 +85,14 @@
                     app:icon="@drawable/ic_playlist" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/shuffle"
+                    android:id="@+id/share"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
-                    android:text="@string/shuffle"
-                    app:icon="@drawable/ic_shuffle" />
+                    android:text="@string/share"
+                    app:icon="@drawable/ic_share_outlined" />
 
             </LinearLayout>
 

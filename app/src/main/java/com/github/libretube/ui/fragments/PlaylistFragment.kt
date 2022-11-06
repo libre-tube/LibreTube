@@ -14,10 +14,13 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
+import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -99,9 +102,17 @@ class PlaylistFragment : BaseFragment() {
                 binding.playAll.setOnClickListener {
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        response.relatedStreams?.first()?.toID(),
+                        response.relatedStreams?.first()?.url?.toID(),
                         playlistId
                     )
+                }
+
+                binding.share.setOnClickListener {
+                    ShareDialog(
+                        playlistId!!,
+                        ShareObjectType.PLAYLIST,
+                        ShareData(currentPlaylist = response.name)
+                    ).show(childFragmentManager, null)
                 }
 
                 playlistAdapter = PlaylistAdapter(

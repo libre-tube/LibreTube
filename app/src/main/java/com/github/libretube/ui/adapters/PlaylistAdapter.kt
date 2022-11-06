@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.setFormattedDuration
@@ -86,7 +87,7 @@ class PlaylistAdapter(
             try {
                 RetrofitInstance.authApi.removeFromPlaylist(
                     PreferenceHelper.getToken(),
-                    com.github.libretube.api.obj.PlaylistId(
+                    PlaylistId(
                         playlistId = playlistId,
                         index = position
                     )
