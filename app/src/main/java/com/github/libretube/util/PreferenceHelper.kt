@@ -99,7 +99,7 @@ object PreferenceHelper {
         editor.putString(
             PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS,
             ignorableChannels.joinToString(",")
-        )
+        ).apply()
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {

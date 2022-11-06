@@ -17,6 +17,7 @@ import com.github.libretube.databinding.FragmentChannelBinding
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.setupNotificationBell
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.SearchAdapter
@@ -127,6 +128,8 @@ class ChannelFragment : BaseFragment() {
                 if (isSubscribed == true) {
                     binding.channelSubscribe.text = getString(R.string.unsubscribe)
                 }
+
+                channelId?.let { binding.notificationBell.setupNotificationBell(it) }
 
                 binding.channelSubscribe.setOnClickListener {
                     if (isSubscribed == true) {

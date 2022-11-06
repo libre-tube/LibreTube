@@ -5,14 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
+import com.github.libretube.extensions.setupNotificationBell
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
-class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.github.libretube.api.obj.Subscription>) :
-    RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
+class SubscriptionChannelAdapter(
+    private val subscriptions: MutableList<Subscription>
+) : RecyclerView.Adapter<SubscriptionChannelViewHolder>() {
 
     override fun getItemCount(): Int {
         return subscriptions.size
@@ -32,6 +35,9 @@ class SubscriptionChannelAdapter(private val subscriptions: MutableList<com.gith
         holder.binding.apply {
             subscriptionChannelName.text = subscription.name
             ImageHelper.loadImage(subscription.avatar, subscriptionChannelImage)
+
+            subscription.url?.toID()?.let { notificationBell.setupNotificationBell(it) }
+
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }

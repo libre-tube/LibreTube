@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,32 +12,38 @@
         android:id="@+id/subscription_channel_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/subscription_channel_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/subscription_channel_image"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="16sp"
         tools:text="Channel Name" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/notification_bell"
+        style="@style/ElevatedIconButton"
+        android:layout_gravity="center"
+        app:icon="@drawable/ic_notification"
+        tools:targetApi="m" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/subscription_subscribe"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:layout_marginEnd="8dp"
         android:stateListAnimator="@null"
         android:text="@string/unsubscribe"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="12sp"
         app:cornerRadius="20dp" />
-</RelativeLayout>
+</LinearLayout>

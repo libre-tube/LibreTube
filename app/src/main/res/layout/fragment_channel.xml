@@ -45,24 +45,18 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/channel_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3.5dp">
-
-                        <TextView
-                            android:id="@+id/channel_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:drawablePadding="3dip"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            tools:text="Channel Name" />
-
-                    </LinearLayout>
+                        android:layout_gravity="start"
+                        android:layout_marginTop="3.5dp"
+                        android:drawablePadding="3dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Channel Name" />
 
                     <TextView
                         android:id="@+id/channel_subs"
@@ -75,17 +69,15 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    style="@style/ElevatedIconButton"
                     android:id="@+id/channel_share"
-                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:drawableTint="?android:attr/textColorPrimary"
-                    android:paddingHorizontal="15dp"
-                    android:stateListAnimator="@null"
-                    app:cornerRadius="20dp"
-                    app:elevation="20dp"
                     app:icon="@drawable/ic_share"
+                    tools:targetApi="m" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/notification_bell"
+                    style="@style/ElevatedIconButton"
+                    app:icon="@drawable/ic_notification"
                     tools:targetApi="m" />
 
                 <com.google.android.material.button.MaterialButton
