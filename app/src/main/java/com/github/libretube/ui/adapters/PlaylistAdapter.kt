@@ -1,6 +1,7 @@
 package com.github.libretube.ui.adapters
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,6 @@ class PlaylistAdapter(
     private val videoFeed: MutableList<com.github.libretube.api.obj.StreamItem>,
     private val playlistId: String,
     private val isOwner: Boolean,
-    private val activity: Activity,
     private val childFragmentManager: FragmentManager
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
@@ -69,16 +69,19 @@ class PlaylistAdapter(
             if (isOwner) {
                 deletePlaylist.visibility = View.VISIBLE
                 deletePlaylist.setOnClickListener {
-                    removeFromPlaylist(position)
+                    removeFromPlaylist(root.context, position)
                 }
             }
             watchProgress.setWatchProgressLength(videoId, streamItem.duration!!)
         }
     }
 
-    fun removeFromPlaylist(position: Int) {
+    fun removeFromPlaylist(context: Context, position: Int) {
         videoFeed.removeAt(position)
-        activity.runOnUiThread { notifyDataSetChanged() }
+        (context as Activity).runOnUiThread {
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
+        }
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 RetrofitInstance.authApi.removeFromPlaylist(

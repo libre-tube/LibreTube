@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
+import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.NavigationHelper
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -58,6 +61,7 @@ class PlaylistFragment : BaseFragment() {
         fetchPlaylist()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun fetchPlaylist() {
         lifecycleScope.launchWhenCreated {
             val response = try {
@@ -79,27 +83,31 @@ class PlaylistFragment : BaseFragment() {
             playlistName = response.name
             isLoading = false
             runOnUiThread {
+                ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
                 binding.playlistProgress.visibility = View.GONE
                 binding.playlistName.text = response.name
-                binding.uploader.text = response.uploader
-                binding.videoCount.text =
-                    getString(R.string.videoCount, response.videos.toString())
+                binding.playlistInfo.text = response.uploader + " • " + getString(R.string.videoCount, response.videos.toString())
 
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
-                    val optionsDialog =
-                        PlaylistOptionsBottomSheet(playlistId!!, playlistName!!, isOwner)
-                    optionsDialog.show(
+                    PlaylistOptionsBottomSheet(playlistId!!, playlistName!!, isOwner).show(
                         childFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name
                     )
                 }
 
+                binding.playAll.setOnClickListener {
+                    NavigationHelper.navigateVideo(
+                        requireContext(),
+                        response.relatedStreams?.first()?.toID(),
+                        playlistId
+                    )
+                }
+
                 playlistAdapter = PlaylistAdapter(
-                    response.relatedStreams!!.toMutableList(),
+                    response.relatedStreams.orEmpty().toMutableList(),
                     playlistId!!,
                     isOwner,
-                    requireActivity(),
                     childFragmentManager
                 )
 
@@ -107,11 +115,11 @@ class PlaylistFragment : BaseFragment() {
                 playlistAdapter!!.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onChanged() {
-                            binding.videoCount.text =
-                                getString(
-                                    R.string.videoCount,
-                                    playlistAdapter!!.itemCount.toString()
-                                )
+                            binding.playlistInfo.text =
+                                binding.playlistInfo.text.split(" • ").first() + " • " + getString(
+                                R.string.videoCount,
+                                playlistAdapter!!.itemCount.toString()
+                            )
                         }
                     })
 
@@ -150,7 +158,7 @@ class PlaylistFragment : BaseFragment() {
                             direction: Int
                         ) {
                             val position = viewHolder.absoluteAdapterPosition
-                            playlistAdapter!!.removeFromPlaylist(position)
+                            playlistAdapter!!.removeFromPlaylist(requireContext(), position)
                         }
                     }
 

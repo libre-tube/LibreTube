@@ -195,12 +195,12 @@
 
     </style>
 
-    <style name="ElevatedIconButton" parent="@style/Widget.Material3.Button.IconButton.Filled.Tonal">
+    <style name="ElevatedIconButton" parent="@style/Widget.Material3.Button.IconButton">
 
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingStart">15dp</item>
-        <item name="android:paddingEnd">15dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="cardCornerRadius">25dp</item>
         <item name="android:drawableTint" tools:targetApi="m">?android:attr/textColorPrimary</item>
