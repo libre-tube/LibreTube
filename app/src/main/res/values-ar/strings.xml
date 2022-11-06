@@ -361,4 +361,8 @@
     <string name="livestreams">البث المباشر</string>
     <string name="defaultIconLight">الافتراضي ابيض</string>
     <string name="alternative_videos_layout">اتجاهات فيديو بديلة</string>
+    <string name="playlistCloned">تم استنساخ قائمة التشغيل</string>
+    <string name="confirm_unsubscribe">هل أنت متأكد من أنك تريد إلغاء الاشتراك %1$s؟</string>
+    <string name="confirm_unsubscribing">تأكيد إلغاء الاشتراك</string>
+    <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك.</string>
 </resources>
