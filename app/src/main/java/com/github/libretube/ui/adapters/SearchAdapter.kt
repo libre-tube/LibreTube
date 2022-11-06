@@ -12,10 +12,10 @@ import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.setFormattedDuration
-import com.github.libretube.extensions.setWatchProgressLength
-import com.github.libretube.extensions.setupSubscriptionButton
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.extensions.setFormattedDuration
+import com.github.libretube.ui.extensions.setWatchProgressLength
+import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder

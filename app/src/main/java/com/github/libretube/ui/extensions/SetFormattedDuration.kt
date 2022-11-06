@@ -1,4 +1,4 @@
-package com.github.libretube.extensions
+package com.github.libretube.ui.extensions
 
 import android.text.format.DateUtils
 import android.widget.TextView

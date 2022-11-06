@@ -13,9 +13,9 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.setFormattedDuration
-import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.extensions.setFormattedDuration
+import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideosViewHolder
 import com.github.libretube.util.ImageHelper

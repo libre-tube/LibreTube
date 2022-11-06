@@ -1,4 +1,4 @@
-package com.github.libretube.extensions
+package com.github.libretube.ui.extensions
 
 import android.view.View
 import android.widget.TextView
@@ -22,12 +22,14 @@ fun TextView.setupSubscriptionButton(
 
     CoroutineScope(Dispatchers.IO).launch {
         subscribed = isSubscribed ?: SubscriptionHelper.isSubscribed(channelId)
-        if (subscribed == true) {
-            withContext(Dispatchers.Main) {
+
+        withContext(Dispatchers.Main) {
+            if (subscribed == true) {
                 this@setupSubscriptionButton.text = context.getString(R.string.unsubscribe)
+            } else {
+                notificationBell?.visibility = View.GONE
             }
-        } else {
-            notificationBell?.visibility = View.GONE
+            this@setupSubscriptionButton.visibility = View.VISIBLE
         }
     }
 
