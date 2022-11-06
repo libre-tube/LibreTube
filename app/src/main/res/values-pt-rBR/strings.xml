@@ -361,4 +361,8 @@
     <string name="time_code">Código de tempo</string>
     <string name="alternative_videos_layout">Layout de vídeos alternativos</string>
     <string name="defaultIconLight">Claro padrão</string>
+    <string name="playlistCloned">Playlist clonada</string>
+    <string name="confirm_unsubscribing">Confirmar cancelamento de inscrição</string>
+    <string name="confirm_unsubscribing_summary">Mostrar uma caixa de diálogo de confirmação antes de cancelar a inscrição.</string>
+    <string name="confirm_unsubscribe">Tem certeza de que deseja cancelar a inscrição de %1$s\?</string>
 </resources>
