@@ -75,6 +75,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/delete_playlist"
         app:layout_constraintStart_toEndOf="@+id/card_playlist_thumbnail"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />

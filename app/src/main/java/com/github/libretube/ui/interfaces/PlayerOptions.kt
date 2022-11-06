@@ -1,4 +1,4 @@
-package com.github.libretube.models.interfaces
+package com.github.libretube.ui.interfaces
 
 interface PlayerOptions {
     fun onAutoplayClicked()

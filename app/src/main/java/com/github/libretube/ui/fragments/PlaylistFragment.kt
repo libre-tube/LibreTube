@@ -24,6 +24,7 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.TextUtils
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -89,7 +90,7 @@ class PlaylistFragment : BaseFragment() {
                 ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
                 binding.playlistProgress.visibility = View.GONE
                 binding.playlistName.text = response.name
-                binding.playlistInfo.text = response.uploader + " • " + getString(R.string.videoCount, response.videos.toString())
+                binding.playlistInfo.text = response.uploader + TextUtils.SEPARATOR + getString(R.string.videoCount, response.videos.toString())
 
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
@@ -127,7 +128,7 @@ class PlaylistFragment : BaseFragment() {
                         RecyclerView.AdapterDataObserver() {
                         override fun onChanged() {
                             binding.playlistInfo.text =
-                                binding.playlistInfo.text.split(" • ").first() + " • " + getString(
+                                binding.playlistInfo.text.split(TextUtils.SEPARATOR).first() + TextUtils.SEPARATOR + getString(
                                 R.string.videoCount,
                                 playlistAdapter!!.itemCount.toString()
                             )

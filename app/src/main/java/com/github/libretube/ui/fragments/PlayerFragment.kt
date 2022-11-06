@@ -55,8 +55,6 @@ import com.github.libretube.extensions.query
 import com.github.libretube.extensions.setupSubscriptionButton
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
-import com.github.libretube.models.PlayerViewModel
-import com.github.libretube.models.interfaces.OnlinePlayerOptions
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
@@ -68,6 +66,8 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.interfaces.OnlinePlayerOptions
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.BackgroundHelper
@@ -76,6 +76,7 @@ import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.TextUtils
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -765,7 +766,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
-                if (!isLive) " • " + response.uploadDate else ""
+                if (!isLive) TextUtils.SEPARATOR + response.uploadDate else ""
 
             textLike.text = response.likes.formatShort()
             textDislike.text = response.dislikes.formatShort()
