@@ -365,4 +365,5 @@
     <string name="confirm_unsubscribe">Ви впевнені, що хочете відписатися від %1$s\?</string>
     <string name="confirm_unsubscribing">Підтвердити відписку</string>
     <string name="confirm_unsubscribing_summary">Показувати діалогове вікно підтвердження перед відпискою.</string>
+    <string name="play_all">Відтворити все</string>
 </resources>
