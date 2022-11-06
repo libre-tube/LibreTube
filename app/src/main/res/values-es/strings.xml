@@ -361,4 +361,9 @@
     <string name="livestreams">Retrasmisiones en directo</string>
     <string name="alternative_videos_layout">Diseño alternativo para los videos</string>
     <string name="defaultIconLight">Claro por defecto</string>
+    <string name="confirm_unsubscribe">¿Seguro que quieres darte de baja de %1$s\?</string>
+    <string name="confirm_unsubscribing">Confirmar la cancelación de la suscripción</string>
+    <string name="confirm_unsubscribing_summary">Mostrar una notificación para confirmar la cancelación de la suscripción.</string>
+    <string name="playlistCloned">Lista de reproducción clonada</string>
+    <string name="play_all">Reproducir todo</string>
 </resources>
