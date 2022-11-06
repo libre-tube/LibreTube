@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -71,8 +72,7 @@ class CommentsAdapter(
             if (comment.hearted == true) heartedImageView.visibility = View.VISIBLE
             if (comment.repliesPage != null) repliesAvailable.visibility = View.VISIBLE
             if ((comment.replyCount ?: -1L) > 0L) {
-                repliesCount.text =
-                    comment.replyCount?.formatShort()
+                repliesCount.text = comment.replyCount?.formatShort()
             }
 
             commentorImage.setOnClickListener {
@@ -89,33 +89,7 @@ class CommentsAdapter(
             repliesRecView.adapter = repliesAdapter
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
-                    when {
-                        repliesAdapter.itemCount.equals(0) -> {
-                            fetchReplies(comment.repliesPage) {
-                                repliesAdapter.updateItems(it.comments)
-                                if (repliesPage.nextpage == null) {
-                                    showMore.visibility = View.GONE
-                                    return@fetchReplies
-                                }
-                                showMore.visibility = View.VISIBLE
-                                showMore.setOnClickListener {
-                                    if (repliesPage.nextpage == null) {
-                                        it.visibility = View.GONE
-                                        return@setOnClickListener
-                                    }
-                                    fetchReplies(
-                                        repliesPage.nextpage!!
-                                    ) {
-                                        repliesAdapter.updateItems(repliesPage.comments)
-                                    }
-                                }
-                            }
-                        }
-                        else -> {
-                            repliesAdapter.clear()
-                            showMore.visibility = View.GONE
-                        }
-                    }
+                    showMoreReplies(comment.repliesPage, showMore, repliesAdapter)
                 }
             }
 
@@ -123,6 +97,36 @@ class CommentsAdapter(
                 ClipboardHelper(root.context).save(comment.commentText.toString())
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
+            }
+        }
+    }
+
+    private fun showMoreReplies(nextPage: String, showMoreBtn: Button, repliesAdapter: CommentsAdapter) {
+        when {
+            repliesAdapter.itemCount.equals(0) -> {
+                fetchReplies(nextPage) {
+                    repliesAdapter.updateItems(it.comments)
+                    if (repliesPage.nextpage == null) {
+                        showMoreBtn.visibility = View.GONE
+                        return@fetchReplies
+                    }
+                    showMoreBtn.visibility = View.VISIBLE
+                    showMoreBtn.setOnClickListener {
+                        if (repliesPage.nextpage == null) {
+                            it.visibility = View.GONE
+                            return@setOnClickListener
+                        }
+                        fetchReplies(
+                            repliesPage.nextpage!!
+                        ) {
+                            repliesAdapter.updateItems(repliesPage.comments)
+                        }
+                    }
+                }
+            }
+            else -> {
+                repliesAdapter.clear()
+                showMoreBtn.visibility = View.GONE
             }
         }
     }
