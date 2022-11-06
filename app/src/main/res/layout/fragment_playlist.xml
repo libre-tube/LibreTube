@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,11 +24,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingHorizontal="15dp"
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:id="@+id/playlist_name"
@@ -48,17 +61,40 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/uploader"
+                android:id="@+id/playlistInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="8dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/video_count"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp" />
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/play_all"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/play_all"
+                    app:icon="@drawable/ic_playlist" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/share"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/share"
+                    app:icon="@drawable/ic_share_outlined" />
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

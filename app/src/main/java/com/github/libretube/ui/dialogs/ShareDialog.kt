@@ -20,8 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class ShareDialog(
     private val id: String,
     private val shareObjectType: ShareObjectType,
-    private val shareData: ShareData,
-    private val position: Long? = null
+    private val shareData: ShareData
 ) : DialogFragment() {
     private var binding: DialogShareBinding? = null
 
@@ -35,7 +34,7 @@ class ShareDialog(
         // add instanceUrl option if custom instance frontend url available
         if (instanceUrl != "") shareOptions += getString(R.string.instance)
 
-        if (shareObjectType == ShareObjectType.VIDEO && position != null) {
+        if (shareObjectType == ShareObjectType.VIDEO) {
             setupTimeStampBinding()
         }
 
@@ -57,7 +56,7 @@ class ShareDialog(
                 }
                 var url = "$host$path"
 
-                if (shareObjectType == ShareObjectType.VIDEO && position != null && binding!!.timeCodeSwitch.isChecked) {
+                if (shareObjectType == ShareObjectType.VIDEO && binding!!.timeCodeSwitch.isChecked) {
                     url += "&t=${binding!!.timeStamp.text}"
                 }
 
@@ -85,7 +84,7 @@ class ShareDialog(
         binding!!.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding!!.timeStampLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
-        binding!!.timeStamp.setText(position.toString())
+        binding!!.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
         if (binding!!.timeCodeSwitch.isChecked) binding!!.timeStampLayout.visibility = View.VISIBLE
     }
 
