@@ -365,4 +365,5 @@
     <string name="confirm_unsubscribing">Confirmar cancelamento de inscrição</string>
     <string name="confirm_unsubscribing_summary">Mostrar uma caixa de diálogo de confirmação antes de cancelar a inscrição.</string>
     <string name="confirm_unsubscribe">Tem certeza de que deseja cancelar a inscrição de %1$s\?</string>
+    <string name="play_all">Reproduzir tudo</string>
 </resources>
