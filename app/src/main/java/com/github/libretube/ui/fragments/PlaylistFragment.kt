@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -90,6 +91,11 @@ class PlaylistFragment : BaseFragment() {
                 ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
                 binding.playlistProgress.visibility = View.GONE
                 binding.playlistName.text = response.name
+
+                binding.playlistName.setOnClickListener {
+                    binding.playlistName.maxLines = if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
+                }
+
                 binding.playlistInfo.text = response.uploader + TextUtils.SEPARATOR + getString(R.string.videoCount, response.videos.toString())
 
                 // show playlist options
