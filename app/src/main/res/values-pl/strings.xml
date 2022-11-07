@@ -365,4 +365,5 @@
     <string name="confirm_unsubscribing">Potwierdzenie odsubskrybowania</string>
     <string name="confirm_unsubscribing_summary">Pokaż okno potwierdzenia przed odsubskrybowaniem.</string>
     <string name="confirm_unsubscribe">Odsubskrybować %1$s\?</string>
+    <string name="play_all">Odtwórz wszystko</string>
 </resources>
