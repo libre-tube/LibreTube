@@ -361,4 +361,9 @@
     <string name="livestreams">Siaran Langsung</string>
     <string name="alternative_videos_layout">Tata letak video alternatif</string>
     <string name="defaultIconLight">Terang bawaan</string>
+    <string name="playlistCloned">Daftar luter digandakan</string>
+    <string name="confirm_unsubscribing">Konfirmasi membatalkan langganan</string>
+    <string name="confirm_unsubscribing_summary">Tampilkan sebuah dialog konfirmasi sebelum membatalkan langganan.</string>
+    <string name="confirm_unsubscribe">Apakah Anda yakin ingin membatalkan langganan ke %1$s\?</string>
+    <string name="play_all">Mainkan semua</string>
 </resources>
