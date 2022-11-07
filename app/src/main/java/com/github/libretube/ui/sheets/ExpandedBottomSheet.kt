@@ -1,6 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.app.Dialog
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -12,6 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 open class ExpandedBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return dialog
 
         dialog.setOnShowListener {
             (it as BottomSheetDialog).let { d ->
