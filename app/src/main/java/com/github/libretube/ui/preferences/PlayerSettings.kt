@@ -40,7 +40,7 @@ class PlayerSettings : BasePreferenceFragment() {
     }
 
     private fun setupSubtitlePref(preference: ListPreference) {
-        val locales = LocaleHelper.getAvailableLocales()
+        val locales = LocaleHelper.getAvailableLocales().sortedBy { it.name }
         val localeNames = locales.map { it.name }
             .toMutableList()
         localeNames.add(0, requireContext().getString(R.string.none))
