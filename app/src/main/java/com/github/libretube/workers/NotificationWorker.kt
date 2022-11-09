@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.workers
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -15,6 +15,7 @@ import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 

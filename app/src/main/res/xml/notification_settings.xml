@@ -31,4 +31,22 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/time">
+
+        <SwitchPreferenceCompat
+            app:title="@string/notification_time"
+            android:summary="@string/notification_time_summary"
+            app:key="notification_time"
+            />
+
+        <com.github.libretube.ui.views.TimePickerPreference
+            app:key="notification_start_time"
+            app:title="@string/start_time" />
+
+        <com.github.libretube.ui.views.TimePickerPreference
+            app:key="notification_end_time"
+            app:title="@string/end_time" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

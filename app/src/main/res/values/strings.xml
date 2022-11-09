@@ -360,6 +360,11 @@
     <string name="confirm_unsubscribing">Confirm unsubscribing</string>
     <string name="confirm_unsubscribing_summary">Show a confirmation dialog before unsubscribing.</string>
     <string name="play_all">Play all</string>
+    <string name="time">Time</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="notification_time">Notification time</string>
+    <string name="notification_time_summary">Time span in which notifications are allowed to show.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
