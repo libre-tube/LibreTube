@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing">Підтвердити відписку</string>
     <string name="confirm_unsubscribing_summary">Показувати діалогове вікно підтвердження перед відпискою.</string>
     <string name="play_all">Відтворити все</string>
+    <string name="notification_time_summary">Проміжок часу, впродовж якого дозволено показувати сповіщення.</string>
+    <string name="end_time">Час завершення</string>
+    <string name="time">Час</string>
+    <string name="start_time">Час початку</string>
+    <string name="notification_time">Час сповіщення</string>
 </resources>
