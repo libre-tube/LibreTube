@@ -8,6 +8,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
+import com.github.libretube.ui.views.TimePickerPreference
 import com.github.libretube.util.NotificationHelper
 
 class NotificationSettings : BasePreferenceFragment() {
@@ -39,6 +40,19 @@ class NotificationSettings : BasePreferenceFragment() {
         requiredNetwork?.isEnabled = notificationsEnabled.isChecked
         requiredNetwork?.setOnPreferenceChangeListener { _, _ ->
             updateNotificationPrefs()
+            true
+        }
+
+        val notificationTime = findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_TIME_ENABLED)
+        val notificationStartTime = findPreference<TimePickerPreference>(PreferenceKeys.NOTIFICATION_START_TIME)
+        val notificationEndTime = findPreference<TimePickerPreference>(PreferenceKeys.NOTIFICATION_END_TIME)
+        listOf(notificationStartTime, notificationEndTime).forEach {
+            it?.isEnabled = notificationTime?.isChecked == true
+        }
+        notificationTime?.setOnPreferenceChangeListener { _, newValue ->
+            listOf(notificationStartTime, notificationEndTime).forEach {
+                it?.isEnabled = newValue as Boolean
+            }
             true
         }
     }

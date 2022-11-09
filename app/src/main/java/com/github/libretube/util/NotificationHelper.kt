@@ -8,6 +8,7 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.github.libretube.constants.NOTIFICATION_WORK_NAME
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.workers.NotificationWorker
 import java.util.concurrent.TimeUnit
 
 object NotificationHelper {
