@@ -361,4 +361,9 @@
     <string name="livestreams">Tiesioginės transliacijos</string>
     <string name="alternative_videos_layout">Alternatyvus vaizdo įrašų išdėstymas</string>
     <string name="defaultIconLight">Numatytoji šviesi</string>
+    <string name="playlistCloned">Grojaraštis klonuotas</string>
+    <string name="confirm_unsubscribe">Ar tikrai norite atšaukti %1$s prenumeratą\?</string>
+    <string name="confirm_unsubscribing">Patvirtinkite prenumeratos atšaukimą</string>
+    <string name="confirm_unsubscribing_summary">Rodyti patvirtinimo dialogo langą prieš atšaukiant prenumeratą.</string>
+    <string name="play_all">Groti viską</string>
 </resources>

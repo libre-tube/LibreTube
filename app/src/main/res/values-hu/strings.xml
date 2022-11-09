@@ -365,4 +365,5 @@
     <string name="confirm_unsubscribing">Leiratkozás megerősítése</string>
     <string name="confirm_unsubscribe">Biztosan le szeretne iratkozni erről: %1$s\?</string>
     <string name="confirm_unsubscribing_summary">Megerősítő párbeszédpanel megjelenítése leiratkozás előtt.</string>
+    <string name="play_all">Összes lejátszása</string>
 </resources>

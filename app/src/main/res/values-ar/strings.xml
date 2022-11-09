@@ -365,4 +365,5 @@
     <string name="confirm_unsubscribe">هل أنت متأكد من أنك تريد إلغاء الاشتراك %1$s؟</string>
     <string name="confirm_unsubscribing">تأكيد إلغاء الاشتراك</string>
     <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك.</string>
+    <string name="play_all">تشغيل الكل</string>
 </resources>
