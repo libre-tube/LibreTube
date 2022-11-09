@@ -13,11 +13,14 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PUSH_CHANNEL_ID
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.views.TimePickerPreference
 import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import java.time.LocalTime
 
 /**
  * The notification worker which checks for new streams in a certain frequency
@@ -36,10 +39,41 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     }
 
     override fun doWork(): Result {
+        if (!checkTime()) Result.success()
         // check whether there are new streams and notify if there are some
         val result = checkForNewStreams()
         // return success if the API request succeeded
         return if (result) Result.success() else Result.retry()
+    }
+
+    /**
+     * Determine whether the time is valid to notify
+     */
+    private fun checkTime(): Boolean {
+        if (!PreferenceHelper.getBoolean(
+                PreferenceKeys.NOTIFICATION_TIME_ENABLED,
+                false
+            )
+        ) {
+            return true
+        }
+
+        val start = getTimePickerPref(PreferenceKeys.NOTIFICATION_START_TIME)
+        val end = getTimePickerPref(PreferenceKeys.NOTIFICATION_END_TIME)
+
+        val currentTime = LocalTime.now()
+        val isOverNight = start > end
+
+        val startValid = if (isOverNight) start > currentTime else start < currentTime
+        val endValid = if (isOverNight) end < currentTime else start > currentTime
+
+        return (startValid && endValid)
+    }
+
+    private fun getTimePickerPref(key: String): LocalTime {
+        return LocalTime.parse(
+            PreferenceHelper.getString(key, TimePickerPreference.DEFAULT_VALUE)
+        )
     }
 
     /**

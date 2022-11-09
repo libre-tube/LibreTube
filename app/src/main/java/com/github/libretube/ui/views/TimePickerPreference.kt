@@ -1,6 +1,5 @@
 package com.github.libretube.ui.views
 
-import android.app.Activity
 import android.content.Context
 import android.text.format.DateFormat.is24HourFormat
 import android.util.AttributeSet
@@ -17,7 +16,7 @@ class TimePickerPreference(
 ) : Preference(context, attributeSet) {
     override fun getSummary(): CharSequence {
         val prefStr = PreferenceHelper.getString(key, "")
-        return if (prefStr != "") prefStr else "00:00"
+        return if (prefStr != "") prefStr else DEFAULT_VALUE
     }
 
     override fun onClick() {
@@ -61,5 +60,6 @@ class TimePickerPreference(
 
     companion object {
         const val SEPARATOR = ":"
+        const val DEFAULT_VALUE = "12:00"
     }
 }
