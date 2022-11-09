@@ -365,4 +365,10 @@
     <string name="confirm_unsubscribe">Êtes-vous sûr·e de vouloir vous désabonner de %1$s \?</string>
     <string name="confirm_unsubscribing">Confirmer le désabonnement</string>
     <string name="confirm_unsubscribing_summary">Afficher une boîte de dialogue de confirmation avant de se désabonner.</string>
+    <string name="play_all">Tout lire</string>
+    <string name="time">Temps</string>
+    <string name="start_time">Heure de début</string>
+    <string name="end_time">Heure de fin</string>
+    <string name="notification_time">Délai de notification</string>
+    <string name="notification_time_summary">Durée pendant laquelle les notifications sont autorisées à s\'afficher.</string>
 </resources>
