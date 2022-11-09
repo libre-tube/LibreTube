@@ -286,7 +286,7 @@
     <string name="app_icon">Ikon</string>
     <string name="downloads">Letöltések</string>
     <string name="network_wifi">Csak wifin</string>
-    <string name="update_summary">Frissítések ellenőrzése.</string>
+    <string name="update_summary">Frissítések ellenőrzése</string>
     <string name="translate">Fordítás</string>
     <string name="authors">Szerzők</string>
     <string name="download_folder_summary">A mappa neve, amelyben a letöltött média lesz tárolva.</string>
@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribe">Biztosan le szeretne iratkozni erről: %1$s\?</string>
     <string name="confirm_unsubscribing_summary">Megerősítő párbeszédpanel megjelenítése leiratkozás előtt.</string>
     <string name="play_all">Összes lejátszása</string>
+    <string name="time">Idő</string>
+    <string name="start_time">Kezdési idő</string>
+    <string name="end_time">Befejezési idő</string>
+    <string name="notification_time">Értesítési idő</string>
+    <string name="notification_time_summary">Időtartam ami alatt az értesítések megjelenhetnek.</string>
 </resources>
