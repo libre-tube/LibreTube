@@ -361,4 +361,9 @@
     <string name="livestreams">লাইভস্ট্রিমগুলো</string>
     <string name="alternative_videos_layout">বিকল্প ভিডিও লেয়াউট</string>
     <string name="defaultIconLight">ডিফল্ট লাইট</string>
+    <string name="confirm_unsubscribe">আপনি কি নিশ্চিতভাবে %1$s চ্যানেলটিকে আনসাবস্ক্রাইব করতে চান\?</string>
+    <string name="confirm_unsubscribing">আনসাবস্ক্রাইব নিশ্চিতকরণ</string>
+    <string name="play_all">সবগুলোতে চালান</string>
+    <string name="playlistCloned">প্লেলিস্ট ক্লোন করা হয়েছে</string>
+    <string name="confirm_unsubscribing_summary">আনসাবস্ক্রাইব করার আগে একটি ডায়লগ দেখান।</string>
 </resources>
