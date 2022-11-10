@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing">Conferma l\'annullamento dell\'iscrizione</string>
     <string name="play_all">Riproduci tutti</string>
     <string name="confirm_unsubscribing_summary">Mostra una finestra di conferma prima di annullare l\'iscrizione.</string>
+    <string name="start_time">Ora di inizio</string>
+    <string name="notification_time">Tempo di notifica</string>
+    <string name="time">Tempo</string>
+    <string name="end_time">Ora di fine</string>
+    <string name="notification_time_summary">L\'intervallo di tempo in cui le notifiche possono essere visualizzate.</string>
 </resources>

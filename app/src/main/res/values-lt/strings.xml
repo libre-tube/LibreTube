@@ -104,8 +104,8 @@
     <string name="instance_frontend_url">URL į perdavimo šaltinio sąsają</string>
     <string name="quality">Kokybė</string>
     <string name="pauseOnScreenOff">Automatinis pristabdymas</string>
-    <string name="pauseOnScreenOff_summary">Pristabdykite atkūrimą, kai ekranas išjungtas.</string>
-    <string name="autoplay_summary">Automatiškai paleiskite kitą vaizdo įrašą po dabartinio.</string>
+    <string name="pauseOnScreenOff_summary">Pristabdyti atkūrimą, kai ekranas išjungtas.</string>
+    <string name="autoplay_summary">Automatiškai paleisti kitą vaizdo įrašą po dabartinio.</string>
     <string name="reset">Atkurti numatytuosius nustatymus</string>
     <string name="account">Paskyra</string>
     <string name="watch_positions_summary">Tęsti nuo paskutinės buvusios atkūrimo pozicijos</string>
@@ -133,8 +133,8 @@
     <string name="watch_history_summary">Kaupti peržiūrėtų video istorija vietoje</string>
     <string name="history_summary">Žiūrėjimo ir paieškos istorija</string>
     <string name="reset_watch_positions">Atstatyti</string>
-    <string name="system_caption_style">Sistemos antraštės stilius</string>
-    <string name="captions">Antraštės</string>
+    <string name="system_caption_style">Sistemos subtitrų stilius</string>
+    <string name="captions">Subtitrai</string>
     <string name="update_now">Įdiegti naują LibreTube versiją dabar\?</string>
     <string name="downloading_apk">Atsisiunčiamas APK…</string>
     <string name="playerAudioFormat">Grotuvo garso formatas</string>
@@ -278,7 +278,7 @@
     <string name="restore">Atkurti</string>
     <string name="auth_instance_summary">Naudokite kitą perdavimo šaltinį autentifikavimo užklausoms.</string>
     <string name="auth_instances">Pasirinkite autentifikavimo perdavimo šaltinį</string>
-    <string name="autoRotatePlayer_summary">Atkūrimas per visą ekraną, kai įrenginys pasukamas.</string>
+    <string name="autoRotatePlayer_summary">Atkūrti per visą ekraną, kai įrenginys pasukamas.</string>
     <string name="landscape">Gulsčias</string>
     <string name="change_playback_speed">Atkūrimo greitis</string>
     <string name="general_summary">Kalba ir regionas</string>
@@ -328,15 +328,15 @@
     <string name="buffering_goal_summary">Didžiausias užkrauto vaizdo įrašo sekundžių skaičius atmintyje.</string>
     <string name="player_summary">Numatytieji nustatymai ir elgsena</string>
     <string name="seek_increment">Prasukimo žingsnio dydis</string>
-    <string name="hls">Automatinis</string>
+    <string name="hls">Automatinė</string>
     <string name="fullscreen_orientation">Viso ekrano padėtis</string>
     <string name="selected">Pasirinktinė</string>
     <string name="pure_theme">Juodai balta tema</string>
-    <string name="pure_theme_summary">Gryna juodai balta tema</string>
-    <string name="watch_positions_title">Paskutinė peržiūros vieta atsiminta</string>
+    <string name="pure_theme_summary">Sodri juodai balta tema</string>
+    <string name="watch_positions_title">Įsimintos paskutinės peržiūros vietos</string>
     <string name="none">Jokios</string>
     <string name="seekbar_preview_summary">Rodyti momentinę nuotrauką, kai velkate atkūrimo indikatorių.</string>
-    <string name="caption_settings">Antraštės</string>
+    <string name="caption_settings">Subtitrai</string>
     <string name="most_recent">Naujausia</string>
     <string name="network_metered">Apskaičiuojamų duomenų</string>
     <string name="required_network">Būtinas ryšys</string>
@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing">Patvirtinkite prenumeratos atšaukimą</string>
     <string name="confirm_unsubscribing_summary">Rodyti patvirtinimo dialogo langą prieš atšaukiant prenumeratą.</string>
     <string name="play_all">Groti viską</string>
+    <string name="start_time">Pradžios laikas</string>
+    <string name="notification_time_summary">Laiko tarpas, kurį leidžiama rodyti pranešimus.</string>
+    <string name="time">Laikas</string>
+    <string name="end_time">Pabaigos laikas</string>
+    <string name="notification_time">Pranešimo laikas</string>
 </resources>

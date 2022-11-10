@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribe">%1$s aboneliğinden çıkmak istediğinizden emin misiniz\?</string>
     <string name="confirm_unsubscribing_summary">Abonelikten çıkmadan önce bir onay iletişim kutusu göster.</string>
     <string name="play_all">Tümünü oynat</string>
+    <string name="time">Zaman</string>
+    <string name="start_time">Başlangıç zamanı</string>
+    <string name="end_time">Bitiş zamanı</string>
+    <string name="notification_time">Bildirim zamanı</string>
+    <string name="notification_time_summary">Bildirimlerin gösterilmesine izin verilen zaman aralığı.</string>
 </resources>
