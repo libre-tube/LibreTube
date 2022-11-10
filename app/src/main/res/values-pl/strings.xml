@@ -272,16 +272,16 @@
     <string name="already_spent_time">Spędziłeś/aś już %1$s min. w aplikacji, czas na przerwę.</string>
     <string name="yt_shorts">Krótkie wideo</string>
     <string name="no_subtitles_available">Brak dostępnych napisów</string>
-    <string name="repeat_mode">Tryb powtarzania</string>
+    <string name="repeat_mode">Zapętlanie</string>
     <string name="resize_mode_fit">Dopasuj</string>
     <string name="resize_mode_fill">Wypełnij</string>
-    <string name="resize_mode_zoom">Powiększenie</string>
+    <string name="resize_mode_zoom">Powiększ</string>
     <string name="repeat_mode_none">Brak</string>
     <string name="repeat_mode_current">Aktualny</string>
     <string name="backup_restore">Kopia zapasowa i przywracanie</string>
     <string name="backup">Wykonaj kopię zapasową</string>
     <string name="picture_in_picture">Obraz w obrazie</string>
-    <string name="player_resize_mode">Tryb zmiany rozmiaru</string>
+    <string name="player_resize_mode">Rozmiar obrazu</string>
     <string name="maximum_image_cache">Maks. rozmiar pamięci podręcznej obrazów</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="open_copied">Otwórz</string>
@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing_summary">Pokaż okno potwierdzenia przed odsubskrybowaniem.</string>
     <string name="confirm_unsubscribe">Odsubskrybować %1$s\?</string>
     <string name="play_all">Odtwórz wszystko</string>
+    <string name="time">Czas</string>
+    <string name="start_time">Początek</string>
+    <string name="end_time">Koniec</string>
+    <string name="notification_time">Ograniczenie powiadomień</string>
+    <string name="notification_time_summary">Ogranicz powiadomienia do zakresu czasu.</string>
 </resources>
