@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing">تأكيد إلغاء الاشتراك</string>
     <string name="confirm_unsubscribing_summary">إظهار مربع حوار تأكيد قبل إلغاء الاشتراك.</string>
     <string name="play_all">تشغيل الكل</string>
+    <string name="notification_time_summary">الفترة الزمنية التي يسمح فيها بعرض الإشعارات.</string>
+    <string name="time">الوقت</string>
+    <string name="end_time">وقت الانتهاء</string>
+    <string name="start_time">وقت البدء</string>
+    <string name="notification_time">وقت الإشعار</string>
 </resources>
