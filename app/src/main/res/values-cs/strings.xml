@@ -366,4 +366,9 @@
     <string name="playlistCloned">Playlist duplikován</string>
     <string name="play_all">Přehrát vše</string>
     <string name="confirm_unsubscribing">Potvrdit zrušení odběru</string>
+    <string name="time">Čas</string>
+    <string name="start_time">Počáteční čas</string>
+    <string name="notification_time">Čas oznámení</string>
+    <string name="end_time">Koncový čas</string>
+    <string name="notification_time_summary">Časový úsek, ve kterém se mohou zobrazovat oznámení.</string>
 </resources>
