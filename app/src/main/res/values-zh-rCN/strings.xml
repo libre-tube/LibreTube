@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing_summary">取消订阅前显示确认对话框。</string>
     <string name="confirm_unsubscribe">你确定要取消订阅 %1$s 吗？</string>
     <string name="play_all">播放全部</string>
+    <string name="time">时间</string>
+    <string name="start_time">开始时间</string>
+    <string name="end_time">结束时间</string>
+    <string name="notification_time">通知时间</string>
+    <string name="notification_time_summary">允许显示通知的时间跨度。</string>
 </resources>
