@@ -91,8 +91,8 @@
     <string name="version">Versija %1$s</string>
     <string name="about_summary">Susipažinkite su LibreTube komanda ir kaip visa tai veikia.</string>
     <string name="related_streams">Susijęs turinys</string>
-    <string name="show_chapters">Rodyti skyrius</string>
-    <string name="hide_chapters">Slėpti skyrius</string>
+    <string name="show_chapters">Rodyti skirsnius</string>
+    <string name="hide_chapters">Slėpti skirsnius</string>
     <string name="buffering_goal">Išankstinis įkėlimas</string>
     <string name="playerVideoFormat">Grotuvo vaizdo įrašų formatas</string>
     <string name="no_audio">Nėra garso</string>
@@ -120,7 +120,7 @@
     <string name="reddit">Reddit</string>
     <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Norėdami prisijungti prie interneto, įjunkite Wi-Fi arba mobiliuosius duomenis.</string>
-    <string name="chapters">Skyriai</string>
+    <string name="chapters">Skirsniai</string>
     <string name="require_restart">Būtina iš naujo paleisti programėlę</string>
     <string name="require_restart_message">Norint atlikti šį pakeitimą, programėlė turi būti paleista iš naujo. Paspauskite „Gerai“, kad paleistumėte iš naujo dabar.</string>
     <string name="navLabelVisibility">Naršymo juostos etiketės matomumas</string>
