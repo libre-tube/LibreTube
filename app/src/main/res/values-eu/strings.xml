@@ -360,4 +360,14 @@
     <string name="progressive_load_interval">Karga-tarte progresiboaren tamaina</string>
     <string name="show_more">Erakutsi gehiago</string>
     <string name="time_code">Denbora-kodea</string>
+    <string name="playlistCloned">Erreprodukzio-zerrenda klonatu da</string>
+    <string name="confirm_unsubscribe">Ziur al zaude %1$s harpidetza kendu nahi duzula\?</string>
+    <string name="confirm_unsubscribing">Baieztatu harpidetza kentzea</string>
+    <string name="confirm_unsubscribing_summary">Erakutsi berrespen-koadroa harpidetza kendu aurretik.</string>
+    <string name="play_all">Erreproduzitu dena</string>
+    <string name="start_time">Hasiera ordua</string>
+    <string name="end_time">Bukaera ordua</string>
+    <string name="notification_time">Jakinarazpen ordua</string>
+    <string name="notification_time_summary">Jakinarazpenak ager daitezkeen denbora tartea.</string>
+    <string name="time">Denbora</string>
 </resources>
