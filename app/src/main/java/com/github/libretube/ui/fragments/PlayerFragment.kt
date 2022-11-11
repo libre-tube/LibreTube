@@ -154,7 +154,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * user preferences
      */
-    private var token = PreferenceHelper.getToken()
+    private val token = PreferenceHelper.getToken()
     private var videoShownInExternalPlayer = false
 
     /**
@@ -186,7 +186,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         return binding.root
     }
 
-    @SuppressLint("SourceLockedOrientationActivity")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
@@ -194,17 +193,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // clear the playing queue
         PlayingQueue.clear()
 
-        setUserPrefs()
-
-        val mainActivity = activity as MainActivity
-        if (PlayerHelper.autoRotationEnabled) {
-            // enable auto rotation
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
-            onConfigurationChanged(resources.configuration)
-        } else {
-            // go to portrait mode
-            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        }
+        changeOrientationMode()
 
         createExoPlayer()
         initializeTransitionLayout()
@@ -222,14 +211,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             playerBinding.exoBottomBar.visibility = View.VISIBLE
         }
         Handler(Looper.getMainLooper()).postDelayed(this::showBottomBar, 100)
-    }
-
-    private fun setUserPrefs() {
-        token = PreferenceHelper.getToken()
-
-        // save whether auto rotation is enabled
-
-        // save whether related streams are enabled
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -268,10 +249,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = true
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
+                    (activity as MainActivity).requestOrientationChange()
                 } else if (currentId == sId) {
                     viewModel.isMiniPlayerVisible.value = false
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
+                    changeOrientationMode()
                 }
             }
 
@@ -1300,6 +1283,22 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 commentsAdapter?.updateItems(response.comments)
                 isLoading = false
             }
+        }
+    }
+
+    /**
+     * Use the sensor mode if auto fullscreen is enabled
+     */
+    @SuppressLint("SourceLockedOrientationActivity")
+    private fun changeOrientationMode() {
+        val mainActivity = activity as MainActivity
+        if (PlayerHelper.autoRotationEnabled) {
+            // enable auto rotation
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+            onConfigurationChanged(resources.configuration)
+        } else {
+            // go to portrait mode
+            mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
     }
 
