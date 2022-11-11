@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing_summary">Mostrar uma caixa de diálogo de confirmação antes de cancelar a inscrição.</string>
     <string name="confirm_unsubscribe">Tem certeza de que deseja cancelar a inscrição de %1$s\?</string>
     <string name="play_all">Reproduzir tudo</string>
+    <string name="time">Tempo</string>
+    <string name="start_time">Tempo inicial</string>
+    <string name="end_time">Tempo final</string>
+    <string name="notification_time_summary">Período de tempo em que as notificações podem ser exibidas.</string>
+    <string name="notification_time">Tempo de notificação</string>
 </resources>
