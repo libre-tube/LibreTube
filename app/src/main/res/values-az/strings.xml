@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing">Abunəliyin ləğvini təsdiqlə</string>
     <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqunu göstər.</string>
     <string name="play_all">Hamısını oynat</string>
+    <string name="time">Vaxt</string>
+    <string name="start_time">Başlama vaxtı</string>
+    <string name="end_time">Bitmə vaxtı</string>
+    <string name="notification_time">Bildiriş vaxtı</string>
+    <string name="notification_time_summary">Bildirişlərin göstərilməsinə icazə verilən vaxt aralığı.</string>
 </resources>

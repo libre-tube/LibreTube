@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing_summary">Mostrar una notificación para confirmar la cancelación de la suscripción.</string>
     <string name="playlistCloned">Lista de reproducción clonada</string>
     <string name="play_all">Reproducir todo</string>
+    <string name="time">Tiempo</string>
+    <string name="start_time">Hora de inicio</string>
+    <string name="end_time">Hora de finalización</string>
+    <string name="notification_time">Hora de la notificación</string>
+    <string name="notification_time_summary">Periodo de tiempo en el que se permite mostrar las notificaciones.</string>
 </resources>
