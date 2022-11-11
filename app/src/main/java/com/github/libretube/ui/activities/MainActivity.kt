@@ -14,7 +14,6 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
@@ -35,12 +34,12 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.PlayingQueueSheet
+import com.github.libretube.ui.tools.BreakReminder
 import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {
@@ -49,14 +48,13 @@ class MainActivity : BaseActivity() {
 
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
-    var autoRotationEnabled = false
+
+    val autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
     lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
         // enable auto rotation if turned on
         requestOrientationChange()
@@ -129,7 +127,7 @@ class MainActivity : BaseActivity() {
         val log = PreferenceHelper.getErrorLog()
         if (log != "") ErrorDialog().show(supportFragmentManager, null)
 
-        setupBreakReminder()
+        BreakReminder.setupBreakReminder(applicationContext)
 
         setupSubscriptionsBadge()
 
@@ -165,49 +163,6 @@ class MainActivity : BaseActivity() {
         } else {
             ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
-    }
-
-    /**
-     * Show a break reminder when watched too long
-     */
-    private fun setupBreakReminder() {
-        if (!PreferenceHelper.getBoolean(
-                PreferenceKeys.BREAK_REMINDER_TOGGLE,
-                false
-            )
-        ) {
-            return
-        }
-        val breakReminderPref = PreferenceHelper.getString(
-            PreferenceKeys.BREAK_REMINDER,
-            "0"
-        )
-        if (!breakReminderPref.all { Character.isDigit(it) } ||
-            breakReminderPref == "" || breakReminderPref == "0"
-        ) {
-            return
-        }
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                try {
-                    MaterialAlertDialogBuilder(this)
-                        .setTitle(getString(R.string.take_a_break))
-                        .setMessage(
-                            getString(
-                                R.string.already_spent_time,
-                                breakReminderPref
-                            )
-                        )
-                        .setPositiveButton(R.string.okay, null)
-                        .show()
-                } catch (e: Exception) {
-                    kotlin.runCatching {
-                        Toast.makeText(this, R.string.take_a_break, Toast.LENGTH_LONG).show()
-                    }
-                }
-            },
-            breakReminderPref.toLong() * 60 * 1000
-        )
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {

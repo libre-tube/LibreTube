@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
@@ -20,8 +18,6 @@ import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SearchViewModel
-import retrofit2.HttpException
-import java.io.IOException
 
 class SearchFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchBinding
@@ -72,12 +68,9 @@ class SearchFragment : BaseFragment() {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 RetrofitInstance.api.getSuggestions(query)
-            } catch (e: IOException) {
+            } catch (e: Exception) {
                 println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
+                Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
             // only load the suggestions if the input field didn't get cleared yet
@@ -108,15 +101,5 @@ class SearchFragment : BaseFragment() {
             binding.suggestionsRecycler.visibility = View.GONE
             binding.historyEmpty.visibility = View.VISIBLE
         }
-    }
-
-    override fun onStop() {
-        if (findNavController().currentDestination?.id != R.id.searchResultFragment) {
-            // remove the search focus
-            (activity as MainActivity)
-                .binding.toolbar.menu
-                .findItem(R.id.action_search).collapseActionView()
-        }
-        super.onStop()
     }
 }
