@@ -59,11 +59,7 @@ class MainActivity : BaseActivity() {
         autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
         // enable auto rotation if turned on
-        requestedOrientation = if (autoRotationEnabled) {
-            ActivityInfo.SCREEN_ORIENTATION_USER
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        }
+        requestOrientationChange()
 
         // start service that gets called on closure
         try {
@@ -158,6 +154,17 @@ class MainActivity : BaseActivity() {
         })
 
         loadIntentData()
+    }
+
+    /**
+     * Rotate according to the preference
+     */
+    fun requestOrientationChange() {
+        requestedOrientation = if (autoRotationEnabled) {
+            ActivityInfo.SCREEN_ORIENTATION_USER
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
+        }
     }
 
     /**
