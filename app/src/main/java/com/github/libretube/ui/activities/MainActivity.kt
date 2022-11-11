@@ -353,6 +353,8 @@ class MainActivity : BaseActivity() {
             loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
         }
         when (intent?.getStringExtra("fragmentToOpen")) {
+            "home" ->
+                navController.navigate(R.id.homeFragment)
             "subscriptions" ->
                 navController.navigate(R.id.subscriptionsFragment)
             "library" ->
@@ -383,7 +385,7 @@ class MainActivity : BaseActivity() {
                         transitionToStart()
                     }
             }
-        }, 100)
+        }, 300)
     }
 
     private fun minimizePlayer() {
