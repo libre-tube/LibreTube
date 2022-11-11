@@ -149,7 +149,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * for the player view
      */
     private lateinit var exoPlayerView: StyledPlayerView
-    private var subtitle = mutableListOf<SubtitleConfiguration>()
+    private var subtitles = mutableListOf<SubtitleConfiguration>()
 
     /**
      * user preferences
@@ -1046,7 +1046,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         val videoItem: MediaItem = MediaItem.Builder()
             .setUri(videoUri)
-            .setSubtitleConfigurations(subtitle)
+            .setSubtitleConfigurations(subtitles)
             .build()
 
         val videoSource: MediaSource =
@@ -1067,7 +1067,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun setHLSMediaSource(uri: Uri) {
         val mediaItem: MediaItem = MediaItem.Builder()
             .setUri(uri)
-            .setSubtitleConfigurations(subtitle)
+            .setSubtitleConfigurations(subtitles)
             .build()
         exoPlayer.setMediaItem(mediaItem)
     }
@@ -1118,11 +1118,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         val (videosNameArray, videosUrlArray) = getAvailableResolutions()
 
         // create a list of subtitles
-        subtitle = mutableListOf()
+        subtitles = mutableListOf()
         val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
         val subtitleCodesList = mutableListOf("")
-        streams.subtitles!!.forEach {
-            subtitle.add(
+        streams.subtitles.orEmpty().forEach {
+            subtitles.add(
                 SubtitleConfiguration.Builder(it.url!!.toUri())
                     .setMimeType(it.mimeType!!) // The correct MIME type (required).
                     .setLanguage(it.code) // The subtitle language (optional).
@@ -1133,12 +1133,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // set the default subtitle if available
+        val newParams = trackSelector.buildUponParameters()
         if (PlayerHelper.defaultSubtitleCode != "" && subtitleCodesList.contains(PlayerHelper.defaultSubtitleCode)) {
-            val newParams = trackSelector.buildUponParameters()
+            newParams
                 .setPreferredTextLanguage(PlayerHelper.defaultSubtitleCode)
                 .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-            trackSelector.setParameters(newParams)
+        } else {
+            newParams.setPreferredTextLanguage(null)
         }
+
+        trackSelector.setParameters(newParams)
 
         // set media source and resolution in the beginning
         setStreamSource(
@@ -1334,7 +1338,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     // none selected
                     // disable captions
                     trackSelector.buildUponParameters()
-                        .setPreferredTextLanguage("")
+                        .setPreferredTextLanguage(null)
                 }
 
                 // set the new caption language
