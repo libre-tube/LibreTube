@@ -72,6 +72,7 @@ object ImageHelper {
             DownloadHelper.getDownloadDir(context, DownloadHelper.THUMBNAIL_DIR),
             fileName
         )
+        if (!file.exists()) return null
         return getImage(context, Uri.fromFile(file))
     }
 
