@@ -63,8 +63,8 @@ class DownloadService : Service() {
     private fun downloadManager() {
         // initialize and create the directories to download into
 
-        val videoDownloadDir = DownloadHelper.getVideoDir(this)
-        val audioDownloadDir = DownloadHelper.getAudioDir(this)
+        val videoDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.VIDEO_DIR)
+        val audioDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.AUDIO_DIR)
 
         // start download
         try {

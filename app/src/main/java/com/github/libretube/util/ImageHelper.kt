@@ -56,16 +56,11 @@ object ImageHelper {
             .data(url)
             .target { result ->
                 val bitmap = (result as BitmapDrawable).bitmap
-                saveImage(
-                    context,
-                    bitmap,
-                    Uri.fromFile(
-                        File(
-                            DownloadHelper.getThumbnailDir(context),
-                            fileName
-                        )
-                    )
+                val file = File(
+                    DownloadHelper.getDownloadDir(context, DownloadHelper.THUMBNAIL_DIR),
+                    fileName
                 )
+                saveImage(context, bitmap, Uri.fromFile(file))
             }
             .build()
 
@@ -73,15 +68,11 @@ object ImageHelper {
     }
 
     fun getDownloadedImage(context: Context, fileName: String): Bitmap? {
-        return getImage(
-            context,
-            Uri.fromFile(
-                File(
-                    DownloadHelper.getThumbnailDir(context),
-                    fileName
-                )
-            )
+        val file = File(
+            DownloadHelper.getDownloadDir(context, DownloadHelper.THUMBNAIL_DIR),
+            fileName
         )
+        return getImage(context, Uri.fromFile(file))
     }
 
     private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {

@@ -11,7 +11,7 @@ class MetadataHelper(
     private val context: Context
 ) {
     private val mapper = ObjectMapper()
-    private val metadataDir = DownloadHelper.getMetadataDir(context)
+    private val metadataDir = DownloadHelper.getDownloadDir(context, DownloadHelper.METADATA_DIR)
 
     fun createMetadata(fileName: String, streams: Streams) {
         val targetFile = File(metadataDir, fileName)
