@@ -33,9 +33,9 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/channel_image"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -47,7 +47,7 @@
 
                     <TextView
                         android:id="@+id/channel_name"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_marginTop="3.5dp"

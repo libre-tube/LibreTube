@@ -104,7 +104,7 @@ class SearchAdapter(
                     .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
-            channelImage.setOnClickListener {
+            channelContainer.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
             watchProgress.setWatchProgressLength(videoId, item.duration!!)

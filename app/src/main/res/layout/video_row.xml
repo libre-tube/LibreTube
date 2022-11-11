@@ -89,6 +89,7 @@
         app:layout_constraintTop_toBottomOf="@id/video_title" />
 
     <LinearLayout
+        android:id="@+id/channel_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
