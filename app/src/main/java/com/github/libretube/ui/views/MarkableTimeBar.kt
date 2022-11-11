@@ -44,12 +44,12 @@ class MarkableTimeBar(
             canvas.drawRect(
                 Rect(
                     (it.segment.first() + HORIZONTAL_OFFSET).toLength(),
-                    marginY,
+                    marginY - 1,
                     (it.segment.last() + HORIZONTAL_OFFSET).toLength(),
                     canvas.height - marginY
                 ),
                 Paint().apply {
-                    color = ThemeHelper.getThemeColor(context, R.attr.colorError)
+                    color = ThemeHelper.getThemeColor(context, R.attr.colorOnSecondary)
                 }
             )
         }
