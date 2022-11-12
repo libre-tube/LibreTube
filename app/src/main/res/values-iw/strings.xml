@@ -231,7 +231,7 @@
     <string name="selected">נבחר</string>
     <string name="never">לעולם לא</string>
     <string name="autoRotatePlayer">מסך מלא אוטומטית</string>
-    <string name="navLabelVisibility">חשיפת תוויות סרגל ניווט</string>
+    <string name="navLabelVisibility">חשיפת תוויות</string>
     <string name="autoRotatePlayer_summary">לנגן במסך מלא כאשר המכשיר נוטה.</string>
     <string name="pure_theme">ערכת עיצוב טהורה</string>
     <string name="pure_theme_summary">ערכת עיצוב טהורה לבנה/שחורה</string>
@@ -352,7 +352,7 @@
     <string name="recentlyUpdated">עודכנו לאחרונה</string>
     <string name="recentlyUpdatedReversed">עודכנו לאחרונה (הפוך)</string>
     <string name="show_more">להציג עוד</string>
-    <string name="time_code">קוד זמן</string>
+    <string name="time_code">קוד זמן (שניות)</string>
     <string name="added_to_playlist">נוסף לרשימת נגינה</string>
     <string name="queue">תור</string>
     <string name="playing_queue">תור נגינה</string>
@@ -361,4 +361,19 @@
     <string name="livestreams">שידורים חיים</string>
     <string name="alternative_videos_layout">פריסת סרטונים חלופית</string>
     <string name="defaultIconLight">בהיר כברירת מחדל</string>
+    <string name="playlistCloned">רשימת הנגינה שוכפלה</string>
+    <string name="confirm_unsubscribe">לבטל את המינוי על %1$s\?</string>
+    <string name="confirm_unsubscribing">אישור הסרת מינוי</string>
+    <string name="confirm_unsubscribing_summary">הצגת חלונית אישור בטרם הסרת ההרשמה.</string>
+    <string name="time">זמן</string>
+    <string name="start_time">זמן התחלה</string>
+    <string name="end_time">זמן סיום</string>
+    <string name="notification_time">זמן התראה</string>
+    <string name="notification_time_summary">חלון זמן שבו מותר להתראות להופיע.</string>
+    <string name="play_all">לנגן הכול</string>
+    <string name="alternative_trending_layout">פריסת מובילים חלופית</string>
+    <string name="alternative_player_layout_summary">להציג את הסרטונים הקשורים כשורה צריך לתגובות במקום מתחת.</string>
+    <string name="navbar_order">סדר</string>
+    <string name="layout">פריסה</string>
+    <string name="alternative_player_layout">פריסת נגן חלופית</string>
 </resources>
