@@ -90,6 +90,7 @@ import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.text.Cue.TEXT_SIZE_TYPE_ABSOLUTE
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -717,11 +718,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.exoProgress.setPlayer(exoPlayer)
 
-        if (PlayerHelper.useSystemCaptionStyle) {
-            // set the subtitle style
-            val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
-            exoPlayerView.subtitleView?.setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
-            exoPlayerView.subtitleView?.setStyle(captionStyle)
+        applyCaptionStyle()
+    }
+
+    private fun applyCaptionStyle() {
+        val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
+        exoPlayerView.subtitleView?.apply {
+            setApplyEmbeddedFontSizes(false)
+            setFixedTextSize(TEXT_SIZE_TYPE_ABSOLUTE, 18F)
+            if (!PlayerHelper.useSystemCaptionStyle) return
+            setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
+            setStyle(captionStyle)
         }
     }
 
