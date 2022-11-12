@@ -303,8 +303,7 @@
                 android:id="@+id/alternativeTrendingRec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:visibility="gone" />
+                android:layout_marginHorizontal="12dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/comments_toggle"

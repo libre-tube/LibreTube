@@ -368,6 +368,8 @@
     <string name="alternative_trending_layout">Alternative trending layout</string>
     <string name="navbar_order">Order</string>
     <string name="layout">Layout</string>
+    <string name="alternative_player_layout">Alternative player layout</string>
+    <string name="alternative_player_layout_summary">Show the related videos as a row above the comments instead of below.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

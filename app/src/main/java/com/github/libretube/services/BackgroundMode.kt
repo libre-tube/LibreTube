@@ -307,16 +307,15 @@ class BackgroundMode : Service() {
      */
     private fun fetchSponsorBlockSegments() {
         CoroutineScope(Dispatchers.IO).launch {
-            kotlin.runCatching {
+            runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
-                if (categories.size > 0) {
-                    segmentData =
-                        RetrofitInstance.api.getSegments(
-                            videoId,
-                            ObjectMapper().writeValueAsString(categories)
-                        )
-                    checkForSegments()
-                }
+                if (categories.isEmpty()) return@runCatching
+                segmentData =
+                    RetrofitInstance.api.getSegments(
+                        videoId,
+                        ObjectMapper().writeValueAsString(categories)
+                    )
+                checkForSegments()
             }
         }
     }
