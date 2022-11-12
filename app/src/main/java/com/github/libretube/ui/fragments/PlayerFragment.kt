@@ -31,7 +31,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
@@ -382,8 +381,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.commentsRecView.layoutManager = LinearLayoutManager(view?.context)
         binding.commentsRecView.setItemViewCacheSize(20)
 
-        binding.relatedRecView.layoutManager =
-            GridLayoutManager(view?.context, resources.getInteger(R.integer.grid_items))
+        binding.relatedRecView.layoutManager = VideosAdapter.getLayout(requireContext())
     }
 
     private fun setFullscreen() {
