@@ -190,15 +190,15 @@ class ChannelFragment : BaseFragment() {
         }
 
         tabs?.firstOrNull { it.name == "Channels" }?.let {
-            binding.playlists.visibility = View.VISIBLE
+            binding.channels.visibility = View.VISIBLE
         }
 
         tabs?.firstOrNull { it.name == "Livestreams" }?.let {
-            binding.playlists.visibility = View.VISIBLE
+            binding.livestreams.visibility = View.VISIBLE
         }
 
         tabs?.firstOrNull { it.name == "Shorts" }?.let {
-            binding.playlists.visibility = View.VISIBLE
+            binding.shorts.visibility = View.VISIBLE
         }
 
         binding.tabChips.setOnCheckedStateChangeListener { _, _ ->
