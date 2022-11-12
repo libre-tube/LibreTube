@@ -816,13 +816,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     if (binding.player.autoplayEnabled) playNextVideo()
                 }
 
-                if (playbackState == Player.STATE_READY) {
-                    // media actually playing
-                    transitioning = false
-                    binding.playImageView.setImageResource(R.drawable.ic_pause)
-                } else {
-                    // player paused in any state
-                    binding.playImageView.setImageResource(R.drawable.ic_play)
+                when (playbackState) {
+                    Player.STATE_READY -> {
+                        // media actually playing
+                        transitioning = false
+                        binding.playImageView.setImageResource(R.drawable.ic_pause)
+                    }
+                    Player.STATE_ENDED -> {
+                        // video has finished
+                        binding.playImageView.setImageResource(R.drawable.ic_restart)
+                    }
+                    else -> {
+                        // player in any other state
+                        binding.playImageView.setImageResource(R.drawable.ic_play)
+                    }
                 }
 
                 // save the watch position when paused
