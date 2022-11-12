@@ -187,7 +187,7 @@
     <string name="playlistNameReversed">Grojaraščio pavadinimas (atvirkštinis)</string>
     <string name="recentlyUpdated">Neseniai atnaujinta</string>
     <string name="show_more">Rodyti daugiau</string>
-    <string name="time_code">Laiko kodas</string>
+    <string name="time_code">Laiko kodas (sekundėmis)</string>
     <string name="added_to_playlist">Pridėti į grojaraštį</string>
     <string name="playing_queue">Grojimo eilė</string>
     <string name="queue">Eilė</string>
