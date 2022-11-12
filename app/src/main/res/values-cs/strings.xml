@@ -206,7 +206,7 @@
     <string name="player">Přehrávač</string>
     <string name="appearance_summary">Upravte si aplikaci podle svých představ.</string>
     <string name="live">Živě</string>
-    <string name="navLabelVisibility">Viditelnost navigační lišty</string>
+    <string name="navLabelVisibility">Viditelnost štítků</string>
     <string name="always">Vždy</string>
     <string name="seekbar_preview">Náhled videa</string>
     <string name="seekbar_preview_summary">Zobrazit náhled při přesunu indikátoru přehrávání.</string>
@@ -351,7 +351,7 @@
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
     <string name="recentlyUpdated">Nedávno aktualizované</string>
     <string name="recentlyUpdatedReversed">Nedávno aktualizované (obráceně)</string>
-    <string name="time_code">Časové razítko</string>
+    <string name="time_code">Časové razítko (sekundy)</string>
     <string name="show_more">Zobrazit více</string>
     <string name="added_to_playlist">Přidáno do playlistu</string>
     <string name="queue">Fronta</string>
@@ -371,4 +371,9 @@
     <string name="notification_time">Čas oznámení</string>
     <string name="end_time">Koncový čas</string>
     <string name="notification_time_summary">Časový úsek, ve kterém se mohou zobrazovat oznámení.</string>
+    <string name="navbar_order">Pořadí</string>
+    <string name="alternative_player_layout_summary">Zobrazit související videa jako řádek nad komentáři místo pod nimi.</string>
+    <string name="alternative_trending_layout">Alternativní rozložení trendů</string>
+    <string name="layout">Rozložení</string>
+    <string name="alternative_player_layout">Alternativní rozložení přehrávače</string>
 </resources>
