@@ -308,7 +308,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 binding.playImageView.setImageResource(R.drawable.ic_pause)
                 if (exoPlayer.playbackState == Player.STATE_ENDED) {
                     // restart video if finished
-                    exoPlayer.seekTo(0);
+                    exoPlayer.seekTo(0)
                 }
                 exoPlayer.play()
             } else {
