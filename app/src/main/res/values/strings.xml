@@ -228,7 +228,7 @@
     <string name="change_playback_speed">Playback speed</string>
     <string name="require_restart">App restart required</string>
     <string name="require_restart_message">This change requires the app to be restarted. Press \'Ok\' to restart now.</string>
-    <string name="navLabelVisibility">Navbar label visibility</string>
+    <string name="navLabelVisibility">Label visibility</string>
     <string name="always">Always</string>
     <string name="selected">Selected</string>
     <string name="never">Never</string>
@@ -365,6 +365,9 @@
     <string name="end_time">End time</string>
     <string name="notification_time">Notification time</string>
     <string name="notification_time_summary">Time span in which notifications are allowed to show.</string>
+    <string name="alternative_trending_layout">Alternative trending layout</string>
+    <string name="navbar_order">Order</string>
+    <string name="layout">Layout</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

@@ -38,14 +38,14 @@
             app:title="@string/app_icon"
             app:useSimpleSummaryProvider="true" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/navigation_bar">
+
         <Preference
             android:icon="@drawable/ic_home"
             app:key="navbar_items"
-            app:title="@string/navigation_bar" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/app_behavior">
+            app:title="@string/navbar_order" />
 
         <ListPreference
             android:icon="@drawable/ic_label"
@@ -56,33 +56,9 @@
             app:title="@string/navLabelVisibility"
             app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
-            android:icon="@drawable/ic_grid"
-            app:defaultValue="@integer/grid_items"
-            app:entries="@array/grid"
-            app:entryValues="@array/grid"
-            app:key="grid"
-            app:title="@string/grid"
-            app:useSimpleSummaryProvider="true" />
-
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/player">
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_caption"
-            app:defaultValue="true"
-            app:key="system_caption_style"
-            app:title="@string/system_caption_style" />
-
-        <Preference
-            android:icon="@drawable/ic_settings"
-            app:key="caption_settings"
-            app:title="@string/caption_settings" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/misc">
+    <PreferenceCategory app:title="@string/layout">
 
         <SwitchPreferenceCompat
             app:defaultValue="false"
@@ -104,6 +80,19 @@
             app:defaultValue="false"
             app:key="alternative_videos_layout"
             app:title="@string/alternative_videos_layout" />
+
+        <ListPreference
+            android:icon="@drawable/ic_grid"
+            app:defaultValue="@integer/grid_items"
+            app:entries="@array/grid"
+            app:entryValues="@array/grid"
+            app:key="grid"
+            app:title="@string/grid"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/misc">
 
         <ListPreference
             android:defaultValue="recent"

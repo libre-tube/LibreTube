@@ -38,6 +38,7 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.SegmentData
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -120,7 +121,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var videoId: String? = null
     private var playlistId: String? = null
     private var isLive = false
-    private lateinit var streams: com.github.libretube.api.obj.Streams
+    private lateinit var streams: Streams
 
     /**
      * for the transition
@@ -383,6 +384,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.commentsRecView.setItemViewCacheSize(20)
 
         binding.relatedRecView.layoutManager = VideosAdapter.getLayout(requireContext())
+
+        binding.alternativeTrendingRec.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
     }
 
     private fun setFullscreen() {
@@ -896,6 +903,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.relatedRecView.adapter = VideosAdapter(
                 response.relatedStreams.orEmpty().toMutableList(),
                 childFragmentManager
+            )
+
+            binding.alternativeTrendingRec.adapter = VideosAdapter(
+                response.relatedStreams.orEmpty().toMutableList(),
+                childFragmentManager,
+                forceMode = VideosAdapter.Companion.ForceMode.RELATED
             )
         }
         // set video description

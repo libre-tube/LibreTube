@@ -1,10 +1,6 @@
 package com.github.libretube.ui.preferences
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
-import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
@@ -14,7 +10,6 @@ import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
-import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.color.DynamicColors
 
@@ -66,27 +61,6 @@ class AppearanceSettings : BasePreferenceFragment() {
                 childFragmentManager,
                 null
             )
-            true
-        }
-
-        val systemCaptionStyle =
-            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
-        val captionSettings = findPreference<Preference>(PreferenceKeys.CAPTION_SETTINGS)
-
-        captionSettings?.isVisible =
-            PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
-        systemCaptionStyle?.setOnPreferenceChangeListener { _, newValue ->
-            captionSettings?.isVisible = newValue as Boolean
-            true
-        }
-
-        captionSettings?.setOnPreferenceClickListener {
-            try {
-                val captionSettingsIntent = Intent(Settings.ACTION_CAPTIONING_SETTINGS)
-                startActivity(captionSettingsIntent)
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
-            }
             true
         }
 
