@@ -366,4 +366,9 @@
     <string name="confirm_unsubscribing_summary">Tampilkan sebuah dialog konfirmasi sebelum membatalkan langganan.</string>
     <string name="confirm_unsubscribe">Apakah Anda yakin ingin membatalkan langganan ke %1$s\?</string>
     <string name="play_all">Mainkan semua</string>
+    <string name="time">Waktu</string>
+    <string name="start_time">Waktu mulai</string>
+    <string name="end_time">Waktu akhir</string>
+    <string name="notification_time">Waktu pemberitahuan</string>
+    <string name="notification_time_summary">Rentang waktu di mana notifikasi diizinkan untuk ditampilkan.</string>
 </resources>
