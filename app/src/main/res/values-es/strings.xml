@@ -230,7 +230,7 @@
     <string name="selected">Seleccionado</string>
     <string name="search_history_summary">Recordar las búsquedas</string>
     <string name="reset_watch_positions">Restablecer</string>
-    <string name="navLabelVisibility">Visibilidad de la etiqueta de la barra de navegación</string>
+    <string name="navLabelVisibility">Visibilidad de la etiqueta</string>
     <string name="always">Siempre</string>
     <string name="never">Nunca</string>
     <string name="autoRotatePlayer">Pantalla completa automática</string>
@@ -352,7 +352,7 @@
     <string name="playlistNameReversed">Nombre de la lista de reproducción (invertido)</string>
     <string name="recentlyUpdatedReversed">Actualizado recientemente (invertido)</string>
     <string name="show_more">Mostrar más</string>
-    <string name="time_code">código de tiempo</string>
+    <string name="time_code">Código de tiempo (segundos)</string>
     <string name="added_to_playlist">Se ha añadido a la lista de reproducción</string>
     <string name="queue">Cola</string>
     <string name="playing_queue">Cola de la reproducción</string>
@@ -371,4 +371,9 @@
     <string name="end_time">Hora de finalización</string>
     <string name="notification_time">Hora de la notificación</string>
     <string name="notification_time_summary">Periodo de tiempo en el que se permite mostrar las notificaciones.</string>
+    <string name="alternative_player_layout_summary">Muestre los videos relacionados como una fila encima de los comentarios en lugar de debajo.</string>
+    <string name="alternative_trending_layout">Diseño de tendencias alternativas</string>
+    <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
+    <string name="navbar_order">Ordenar</string>
+    <string name="layout">Diseño</string>
 </resources>
