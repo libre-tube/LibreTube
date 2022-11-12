@@ -177,7 +177,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         val builder = NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_ID)
             .setContentTitle(title)
             .setGroup(group)
-            .setSmallIcon(R.drawable.ic_notification)
+            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             // Set the intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
