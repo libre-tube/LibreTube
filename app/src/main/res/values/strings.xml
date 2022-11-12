@@ -346,7 +346,7 @@
     <string name="recentlyUpdated">Recently updated</string>
     <string name="recentlyUpdatedReversed">Recently updated (reversed)</string>
     <string name="show_more">Show more</string>
-    <string name="time_code">Time code</string>
+    <string name="time_code">Time code (seconds)</string>
     <string name="added_to_playlist">Added to playlist</string>
     <string name="playing_queue">Playing queue</string>
     <string name="queue">Queue</string>

@@ -52,6 +52,7 @@ class MainActivity : BaseActivity() {
     val autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
     lateinit var searchView: SearchView
+    lateinit var searchItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -202,6 +203,8 @@ class MainActivity : BaseActivity() {
     private fun removeSearchFocus() {
         searchView.setQuery("", false)
         searchView.clearFocus()
+        searchView.isIconified = true
+        searchItem.collapseActionView()
         searchView.onActionViewCollapsed()
     }
 
@@ -211,6 +214,7 @@ class MainActivity : BaseActivity() {
 
         // stuff for the search in the topBar
         val searchItem = menu.findItem(R.id.action_search)
+        this.searchItem = searchItem
         searchView = searchItem.actionView as SearchView
 
         val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
