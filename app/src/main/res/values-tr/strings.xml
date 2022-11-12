@@ -351,7 +351,7 @@
     <string name="filename">Dosya adı</string>
     <string name="invalid_filename">Geçersiz dosya adı!</string>
     <string name="recentlyUpdatedReversed">Son güncellenen (ters)</string>
-    <string name="time_code">Zaman kodu</string>
+    <string name="time_code">Zaman kodu (saniye)</string>
     <string name="show_more">Daha fazla göster</string>
     <string name="added_to_playlist">Oynatma listesine eklendi</string>
     <string name="queue">Sıra</string>
