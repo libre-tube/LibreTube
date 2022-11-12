@@ -331,7 +331,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // FullScreen button trigger
         // hide fullscreen button if auto rotation enabled
         playerBinding.fullscreen.visibility =
-            if (PlayerHelper.autoRotationEnabled) View.GONE else View.VISIBLE
+            if (PlayerHelper.autoRotationEnabled) View.INVISIBLE else View.VISIBLE
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
             exoPlayerView.hideController()
