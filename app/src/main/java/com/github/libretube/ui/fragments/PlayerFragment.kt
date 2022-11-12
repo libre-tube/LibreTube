@@ -27,6 +27,7 @@ import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -38,6 +39,8 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.SegmentData
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -120,7 +123,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var videoId: String? = null
     private var playlistId: String? = null
     private var isLive = false
-    private lateinit var streams: com.github.libretube.api.obj.Streams
+    private lateinit var streams: Streams
 
     /**
      * for the transition
@@ -133,7 +136,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * for the comments
      */
     private var commentsAdapter: CommentsAdapter? = null
-    private var commentsLoaded: Boolean? = false
     private var nextPage: String? = null
     private var isLoading = true
 
@@ -383,6 +385,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.commentsRecView.setItemViewCacheSize(20)
 
         binding.relatedRecView.layoutManager = VideosAdapter.getLayout(requireContext())
+
+        binding.alternativeTrendingRec.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
     }
 
     private fun setFullscreen() {
@@ -450,11 +458,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun toggleComments() {
-        binding.commentsRecView.visibility =
-            if (binding.commentsRecView.isVisible) View.GONE else View.VISIBLE
-        binding.relatedRecView.visibility =
-            if (binding.relatedRecView.isVisible) View.GONE else View.VISIBLE
-        if (!commentsLoaded!!) fetchComments()
+        if (binding.commentsRecView.isVisible) {
+            binding.commentsRecView.visibility = View.GONE
+            binding.relatedRecView.visibility = View.VISIBLE
+        } else {
+            binding.commentsRecView.visibility = View.VISIBLE
+            binding.relatedRecView.visibility = View.GONE
+            if (binding.commentsRecView.isEmpty()) fetchComments()
+        }
     }
 
     override fun onStart() {
@@ -610,15 +621,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 // show the player notification
                 initializePlayerNotification()
                 if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
-                // show comments if related streams disabled
-                if (!PlayerHelper.relatedStreamsEnabled) toggleComments()
+
+                // show comments if related streams are disabled or the alternative related streams layout is chosen
+                if (!PlayerHelper.relatedStreamsEnabled || PlayerHelper.alternativeVideoLayout) toggleComments()
 
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
-                    DatabaseHelper.addToWatchHistory(
-                        videoId!!,
-                        streams
-                    )
+                    DatabaseHelper.addToWatchHistory(videoId!!, streams)
                 }
             }
         }
@@ -629,16 +638,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private fun fetchSponsorBlockSegments() {
         CoroutineScope(Dispatchers.IO).launch {
-            kotlin.runCatching {
+            runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
-                if (categories.size > 0) {
-                    segmentData =
-                        RetrofitInstance.api.getSegments(
-                            videoId!!,
-                            ObjectMapper().writeValueAsString(categories)
-                        )
-                    playerBinding.exoProgress.setSegments(segmentData.segments)
-                }
+                if (categories.isEmpty()) return@runCatching
+                segmentData =
+                    RetrofitInstance.api.getSegments(
+                        videoId!!,
+                        ObjectMapper().writeValueAsString(categories)
+                    )
+                playerBinding.exoProgress.setSegments(segmentData.segments)
             }
         }
     }
@@ -699,7 +707,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             videoId = nextVideoId
 
             // forces the comments to reload for the new video
-            commentsLoaded = false
             binding.commentsRecView.adapter = null
             playVideo()
         }
@@ -742,7 +749,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initializePlayerView(response: com.github.libretube.api.obj.Streams) {
+    private fun initializePlayerView(response: Streams) {
         // initialize the player view actions
         binding.player.initialize(
             childFragmentManager,
@@ -891,13 +898,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
             }
         }
-        if (PlayerHelper.relatedStreamsEnabled) {
-            // only show related streams if enabled
-            binding.relatedRecView.adapter = VideosAdapter(
-                response.relatedStreams.orEmpty().toMutableList(),
-                childFragmentManager
-            )
-        }
+        initializeRelatedVideos(response.relatedStreams)
         // set video description
         val description = response.description!!
         binding.playerDescription.text =
@@ -957,6 +958,23 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
+        }
+    }
+
+    private fun initializeRelatedVideos(relatedStreams: List<StreamItem>?) {
+        if (!PlayerHelper.relatedStreamsEnabled) return
+
+        if (PlayerHelper.alternativeVideoLayout) {
+            binding.alternativeTrendingRec.adapter = VideosAdapter(
+                relatedStreams.orEmpty().toMutableList(),
+                childFragmentManager,
+                forceMode = VideosAdapter.Companion.ForceMode.RELATED
+            )
+        } else {
+            binding.relatedRecView.adapter = VideosAdapter(
+                relatedStreams.orEmpty().toMutableList(),
+                childFragmentManager
+            )
         }
     }
 
@@ -1158,7 +1176,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun setStreamSource(
-        streams: com.github.libretube.api.obj.Streams,
+        streams: Streams,
         videosNameArray: Array<String>,
         videosUrlArray: Array<Uri>
     ) {
@@ -1269,7 +1287,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             commentsAdapter = CommentsAdapter(videoId!!, commentsResponse.comments)
             binding.commentsRecView.adapter = commentsAdapter
             nextPage = commentsResponse.nextpage
-            commentsLoaded = true
             isLoading = false
         }
     }

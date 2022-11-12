@@ -17,6 +17,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.extensions.toDp
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -59,7 +60,7 @@ class VideosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when {
-            forceMode == ForceMode.TRENDING -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
+            forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED) -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
             forceMode == ForceMode.CHANNEL -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
             PreferenceHelper.getBoolean(
                 PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
@@ -82,6 +83,12 @@ class VideosAdapter(
 
         // Trending layout
         holder.trendingRowBinding?.apply {
+            if (forceMode == ForceMode.RELATED) {
+                val params = root.layoutParams
+                params.width = (180).toDp(root.context.resources).toInt()
+                root.layoutParams = params
+            }
+
             textViewTitle.text = video.title
             textViewChannel.text =
                 video.uploaderName + TextUtils.SEPARATOR +
@@ -160,7 +167,8 @@ class VideosAdapter(
             NONE,
             TRENDING,
             ROW,
-            CHANNEL
+            CHANNEL,
+            RELATED
         }
 
         fun getLayout(context: Context): LayoutManager {

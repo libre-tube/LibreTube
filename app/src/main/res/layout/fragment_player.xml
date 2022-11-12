@@ -5,8 +5,7 @@
     android:id="@+id/playerMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/player_scene"
-    tools:context=".ui.fragments.PlayerFragment">
+    app:layoutDescription="@xml/player_scene">
 
     <ScrollView
         android:id="@+id/player_scrollView"
@@ -147,13 +146,13 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:weightSum="5"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="5">
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
-                        android:layout_weight="1"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -161,16 +160,16 @@
                             android:src="@drawable/ic_share" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/PlayerActionsText"
                             android:text="@string/share" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_download"
-                        android:layout_weight="1"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -178,16 +177,16 @@
                             android:src="@drawable/ic_download" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/PlayerActionsText"
                             android:text="@string/download" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_open"
-                        android:layout_weight="1"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -196,16 +195,16 @@
                             android:src="@drawable/ic_open" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/PlayerActionsText"
                             android:text="@string/open" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_background"
-                        android:layout_weight="1"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -213,16 +212,16 @@
                             android:src="@drawable/ic_headphones" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/PlayerActionsText"
                             android:text="@string/audio" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_save"
-                        android:layout_weight="1"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -230,9 +229,9 @@
                             android:src="@drawable/ic_save" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/PlayerActionsText"
                             android:text="@string/save" />
                     </LinearLayout>
 
@@ -299,6 +298,12 @@
                     android:textSize="12sp"
                     app:cornerRadius="11dp" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/alternativeTrendingRec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/comments_toggle"

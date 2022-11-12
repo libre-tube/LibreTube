@@ -287,6 +287,12 @@ object PlayerHelper {
             "fit"
         )
 
+    val alternativeVideoLayout: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.ALTERNATIVE_PLAYER_LAYOUT,
+            false
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(

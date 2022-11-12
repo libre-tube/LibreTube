@@ -1,6 +1,10 @@
 package com.github.libretube.ui.preferences
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
@@ -37,6 +41,27 @@ class PlayerSettings : BasePreferenceFragment() {
 
         val defaultSubtitle = findPreference<ListPreference>(PreferenceKeys.DEFAULT_SUBTITLE)
         defaultSubtitle?.let { setupSubtitlePref(it) }
+
+        val systemCaptionStyle =
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SYSTEM_CAPTION_STYLE)
+        val captionSettings = findPreference<Preference>(PreferenceKeys.CAPTION_SETTINGS)
+
+        captionSettings?.isVisible =
+            PreferenceHelper.getBoolean(PreferenceKeys.SYSTEM_CAPTION_STYLE, true)
+        systemCaptionStyle?.setOnPreferenceChangeListener { _, newValue ->
+            captionSettings?.isVisible = newValue as Boolean
+            true
+        }
+
+        captionSettings?.setOnPreferenceClickListener {
+            try {
+                val captionSettingsIntent = Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+                startActivity(captionSettingsIntent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
     }
 
     private fun setupSubtitlePref(preference: ListPreference) {
