@@ -175,7 +175,7 @@ class ChannelFragment : BaseFragment() {
                 channelAdapter = VideosAdapter(
                     response.relatedStreams.orEmpty().toMutableList(),
                     childFragmentManager,
-                    forceType = VideosAdapter.FORCE_CHANNEL
+                    forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
                 )
                 binding.channelRecView.adapter = channelAdapter
             }

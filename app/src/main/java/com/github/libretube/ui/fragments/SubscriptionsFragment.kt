@@ -18,7 +18,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
-import com.github.libretube.util.LayoutHelper
 import com.github.libretube.util.PreferenceHelper
 
 class SubscriptionsFragment : BaseFragment() {
@@ -49,7 +48,7 @@ class SubscriptionsFragment : BaseFragment() {
 
         binding.subProgress.visibility = View.VISIBLE
 
-        binding.subFeed.layoutManager = LayoutHelper.getVideoLayout(requireContext())
+        binding.subFeed.layoutManager = VideosAdapter.getLayout(requireContext())
 
         if (viewModel.videoFeed.value == null || !loadFeedInBackground) {
             viewModel.videoFeed.value = null

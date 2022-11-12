@@ -16,7 +16,6 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.util.LayoutHelper
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.snackbar.Snackbar
@@ -101,7 +100,7 @@ class HomeFragment : BaseFragment() {
                     childFragmentManager
                 )
 
-                binding.recview.layoutManager = LayoutHelper.getVideoLayout(requireContext())
+                binding.recview.layoutManager = VideosAdapter.getLayout(requireContext())
             }
         }
     }

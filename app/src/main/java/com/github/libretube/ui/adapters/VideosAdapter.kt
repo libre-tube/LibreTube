@@ -1,12 +1,16 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
@@ -27,7 +31,7 @@ class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
     private val childFragmentManager: FragmentManager,
     private val showAllAtOnce: Boolean = true,
-    private val forceType: Int = FORCE_NONE
+    private val forceMode: ForceMode = ForceMode.NONE
 ) : RecyclerView.Adapter<VideosViewHolder>() {
 
     var index = 10
@@ -55,8 +59,8 @@ class VideosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when {
-            forceType == FORCE_TRENDING -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
-            forceType == FORCE_CHANNEL -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
+            forceMode == ForceMode.TRENDING -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
+            forceMode == ForceMode.CHANNEL -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
             PreferenceHelper.getBoolean(
                 PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
                 false
@@ -122,7 +126,7 @@ class VideosAdapter(
 
             ImageHelper.loadImage(video.thumbnail, thumbnail)
 
-            if (forceType != FORCE_CHANNEL) {
+            if (forceMode != ForceMode.CHANNEL) {
                 ImageHelper.loadImage(video.uploaderAvatar, channelImage)
                 channelName.text = video.uploaderName
 
@@ -152,9 +156,29 @@ class VideosAdapter(
     }
 
     companion object {
-        const val FORCE_NONE = 0
-        const val FORCE_TRENDING = 1
-        const val FORCE_NORMAL = 2
-        const val FORCE_CHANNEL = 3
+        enum class ForceMode {
+            NONE,
+            TRENDING,
+            ROW,
+            CHANNEL
+        }
+
+        fun getLayout(context: Context): LayoutManager {
+            return if (PreferenceHelper.getBoolean(
+                    PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
+                    false
+                )
+            ) {
+                LinearLayoutManager(context)
+            } else {
+                GridLayoutManager(
+                    context,
+                    PreferenceHelper.getString(
+                        PreferenceKeys.GRID_COLUMNS,
+                        context.resources.getInteger(R.integer.grid_items).toString()
+                    ).toInt()
+                )
+            }
+        }
     }
 }
