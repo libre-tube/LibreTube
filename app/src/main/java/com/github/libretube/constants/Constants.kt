@@ -26,7 +26,7 @@ const val TWITTER_URL = "https://twitter.com/libretube"
 /**
  * Share Dialog
  */
-const val PIPED_FRONTEND_URL = "https://piped.kavin.rocks"
+const val PIPED_FRONTEND_URL = "https://piped.video"
 const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
 
 /**
