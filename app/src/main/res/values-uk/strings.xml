@@ -224,7 +224,7 @@
     <string name="autoRotatePlayer_summary">Поноекранний режим при обертанні пристрою.</string>
     <string name="watch_positions_summary">Продовжувати з останньої позиції відео</string>
     <string name="require_restart">Додатку потрібен перезапуск</string>
-    <string name="navLabelVisibility">Видимість панелі навігації</string>
+    <string name="navLabelVisibility">Видимість міток</string>
     <string name="always">Завжди</string>
     <string name="selected">Вибране</string>
     <string name="never">Ніколи</string>
@@ -352,7 +352,7 @@
     <string name="playlistNameReversed">Назва добірки (у зворотному порядку)</string>
     <string name="playlists_order">Порядок добірок</string>
     <string name="show_more">Показати більше</string>
-    <string name="time_code">Часовий код</string>
+    <string name="time_code">Часовий код (секунд)</string>
     <string name="added_to_playlist">Додано в добірку</string>
     <string name="playing_queue">Черга відтворення</string>
     <string name="queue">Черга</string>
@@ -371,4 +371,9 @@
     <string name="time">Час</string>
     <string name="start_time">Час початку</string>
     <string name="notification_time">Час сповіщення</string>
+    <string name="navbar_order">Порядок</string>
+    <string name="alternative_player_layout_summary">Показувати пов\'язані відео рядком над коментарями, а не під ними.</string>
+    <string name="alternative_trending_layout">Альтернативний вигляд трендів</string>
+    <string name="layout">Вигляд</string>
+    <string name="alternative_player_layout">Альтернативний вигляд програвача</string>
 </resources>

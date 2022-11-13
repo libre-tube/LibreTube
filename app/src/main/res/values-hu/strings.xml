@@ -359,7 +359,7 @@
     <string name="sb_markers">Jelölők</string>
     <string name="sb_markers_summary">Szakaszok megjelölése az idősávon.</string>
     <string name="livestreams">Élő közvetítések</string>
-    <string name="alternative_videos_layout">Videók alternatív elrendezése</string>
+    <string name="alternative_videos_layout">Alternatív videók elrendezés</string>
     <string name="defaultIconLight">Alapért. világos</string>
     <string name="playlistCloned">Lejátszási lista klónozva</string>
     <string name="confirm_unsubscribing">Leiratkozás megerősítése</string>
@@ -371,4 +371,9 @@
     <string name="end_time">Befejezési idő</string>
     <string name="notification_time">Értesítési idő</string>
     <string name="notification_time_summary">Időtartam ami alatt az értesítések megjelenhetnek.</string>
+    <string name="layout">Elrendezés</string>
+    <string name="alternative_trending_layout">Alternatív felkapott elrendezés</string>
+    <string name="alternative_player_layout">Alternatív lejátszó elrendezés</string>
+    <string name="navbar_order">Rendezés</string>
+    <string name="alternative_player_layout_summary">A kapcsolódó videók megjelenítése egy sorban a hozzászólások felett, nem pedig alattuk.</string>
 </resources>

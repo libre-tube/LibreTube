@@ -227,7 +227,7 @@
     <string name="change_playback_speed">播放速度</string>
     <string name="require_restart">需要重启应用</string>
     <string name="require_restart_message">此更改需要重新启动应用。 现在按“确定”重新启动。</string>
-    <string name="navLabelVisibility">导航栏标签可见性</string>
+    <string name="navLabelVisibility">标签可见性</string>
     <string name="always">始终</string>
     <string name="selected">仅选中</string>
     <string name="never">从不</string>
@@ -352,7 +352,7 @@
     <string name="recentlyUpdatedReversed">最近更新（倒序）</string>
     <string name="playlistNameReversed">播放列表名称（倒序）</string>
     <string name="show_more">显示更多</string>
-    <string name="time_code">时间码</string>
+    <string name="time_code">时间码（秒）</string>
     <string name="added_to_playlist">已添加到播放列表</string>
     <string name="playing_queue">播放队列</string>
     <string name="queue">队列</string>
@@ -371,4 +371,9 @@
     <string name="end_time">结束时间</string>
     <string name="notification_time">通知时间</string>
     <string name="notification_time_summary">允许显示通知的时间跨度。</string>
+    <string name="navbar_order">顺序</string>
+    <string name="layout">布局</string>
+    <string name="alternative_player_layout">备选的播放器布局</string>
+    <string name="alternative_player_layout_summary">将相关视频显示为评论上方而不是下方的一行。</string>
+    <string name="alternative_trending_layout">备选的“时下流行”布局</string>
 </resources>
