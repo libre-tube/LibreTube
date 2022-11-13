@@ -225,7 +225,7 @@
     <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez.</string>
     <string name="seek_increment">Léptetés időköze</string>
-    <string name="require_restart_message">Ehhez a módosításhoz az alkalmazás újraindítása szükséges. Nyomja meg az \'Ok\' gombot az újraindításhoz.</string>
+    <string name="require_restart_message">Ehhez a módosításhoz az alkalmazás újraindítása szükséges. Nyomja meg az \'OK\' gombot az újraindításhoz.</string>
     <string name="pure_theme_summary">Tiszta fehér/fekete téma</string>
     <string name="data_saver_mode">Adattakarékos üzemmód</string>
     <string name="seekbar_preview">Videó előnézet</string>
@@ -262,7 +262,7 @@
     <string name="autoRotatePlayer">Automatikus teljes képernyő</string>
     <string name="pure_theme">Tiszta téma</string>
     <string name="watch_positions_summary">Folytatás az utolsó lejátszási pozícióból</string>
-    <string name="navLabelVisibility">Navigációs sáv címke láthatósága</string>
+    <string name="navLabelVisibility">Címke láthatósága</string>
     <string name="search_history_summary">Keresések megjegyzése</string>
     <string name="reset_watch_positions">Visszaállítás</string>
     <string name="none">Egyik sem</string>
@@ -353,7 +353,7 @@
     <string name="recentlyUpdated">Mostanában frissített</string>
     <string name="recentlyUpdatedReversed">Mostanában frissített (fordítva)</string>
     <string name="show_more">Több megjelenítése</string>
-    <string name="time_code">Időkód</string>
+    <string name="time_code">Időkód (másodperc)</string>
     <string name="playing_queue">Lejátszási sor</string>
     <string name="queue">Sor</string>
     <string name="sb_markers">Jelölők</string>
@@ -374,6 +374,6 @@
     <string name="layout">Elrendezés</string>
     <string name="alternative_trending_layout">Alternatív felkapott elrendezés</string>
     <string name="alternative_player_layout">Alternatív lejátszó elrendezés</string>
-    <string name="navbar_order">Rendezés</string>
+    <string name="navbar_order">Sorrend</string>
     <string name="alternative_player_layout_summary">A kapcsolódó videók megjelenítése egy sorban a hozzászólások felett, nem pedig alattuk.</string>
 </resources>
