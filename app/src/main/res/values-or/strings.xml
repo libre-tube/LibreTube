@@ -241,7 +241,7 @@
     <string name="playlistNameReversed">ପ୍ଲେଲିଷ୍ଟ ନାମ ଓଲଟା</string>
     <string name="recentlyUpdatedReversed">ସମ୍ପ୍ରତି ଅପଡେଟ୍ ହୋଇଛି (ଓଲଟା)</string>
     <string name="show_more">ଅଧିକ ଦେଖାନ୍ତୁ</string>
-    <string name="time_code">ଟାଇମ୍ କୋଡ୍</string>
+    <string name="time_code">ଟାଇମ୍ କୋଡ୍ (ସେକେଣ୍ଡରେ)</string>
     <string name="playing_queue">ଧାଡି ଖେଳିବା</string>
     <string name="queue">ଧାଡ଼ି</string>
     <string name="sb_markers">ମାର୍କର ଗୁଡ଼ିକ</string>
@@ -306,7 +306,7 @@
     <string name="chapters">ଅଧ୍ୟାୟ ଗୁଡ଼ିକ</string>
     <string name="require_restart_message">ଓକେ ଚିପନ୍ତୁ।</string>
     <string name="playerAudioQuality">ସ୍ୱର ଗୁଣବତ୍ତା</string>
-    <string name="navLabelVisibility">ନାଭବାର୍ ଲେବଲ୍ ଦୃଶ୍ୟମାନତା</string>
+    <string name="navLabelVisibility">ଲେବଲ୍ ଭିଜିବିଲିଟି</string>
     <string name="autoRotatePlayer">ଅଟୋ-ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="search_history_summary">ସନ୍ଧାନଗୁଡିକ ମନେରଖ</string>
     <string name="no_player_found">କୌଣସି ବାହ୍ୟ ଖେଳାଳି ମିଳିଲା ନାହିଁ । ଦୟାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ ଆପଣଙ୍କର ଗୋଟିଏ ସଂସ୍ଥାପିତ ହୋଇଛି ।</string>
@@ -371,4 +371,9 @@
     <string name="time">ସମୟ</string>
     <string name="notification_time_summary">ସମୟ ସୀମା ଯେଉଁଥିରେ ବିଜ୍ଞପ୍ତି ଦେଖାଇବାକୁ ଅନୁମତି ଦିଆଯାଇଛି ।</string>
     <string name="start_time">ଆରମ୍ଭ ସମୟ</string>
+    <string name="navbar_order">ସଜାନ୍ତୁ</string>
+    <string name="layout">ଲେଆଉଟ୍</string>
+    <string name="alternative_player_layout">ବିକଳ୍ପ ପ୍ଲେୟାର୍ ଲେଆଉଟ୍</string>
+    <string name="alternative_player_layout_summary">ନିମ୍ନୋକ୍ତ ମନ୍ତବ୍ୟଗୁଡିକ ଉପରେ ସଂପୃକ୍ତ ଭିଡିଓଗୁଡିକ ଧାଡି ଭାବରେ ଦେଖାନ୍ତୁ ।</string>
+    <string name="alternative_trending_layout">ବିକଳ୍ପ ଟ୍ରେଣ୍ଡିଂ ଲେଆଉଟ୍</string>
 </resources>
