@@ -227,7 +227,7 @@
     <string name="change_playback_speed">سرعة التشغيل</string>
     <string name="require_restart_message">يتطلب هذا التغيير إعادة تشغيل التطبيق. اضغط على \"موافق\" لإعادة التشغيل الآن.</string>
     <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
-    <string name="navLabelVisibility">رؤية ملصق شريط التنقل</string>
+    <string name="navLabelVisibility">رؤية الملصق</string>
     <string name="always">دائماً</string>
     <string name="selected">المحدد</string>
     <string name="never">أبداً</string>
@@ -352,7 +352,7 @@
     <string name="recentlyUpdated">تم التحديث مؤخرا</string>
     <string name="recentlyUpdatedReversed">تم تحديثه مؤخرًا (معكوس)</string>
     <string name="show_more">اظهار المزيد</string>
-    <string name="time_code">رمز التوقيت</string>
+    <string name="time_code">رمز الوقت (بالثواني)</string>
     <string name="added_to_playlist">تمت الإضافة إلى قائمة التشغيل</string>
     <string name="playing_queue">تشغيل قائمة الانتظار</string>
     <string name="queue">الانتظار</string>
@@ -371,4 +371,9 @@
     <string name="end_time">وقت الانتهاء</string>
     <string name="start_time">وقت البدء</string>
     <string name="notification_time">وقت الإشعار</string>
+    <string name="alternative_trending_layout">تخطيط الاتجاه البديل</string>
+    <string name="navbar_order">ترتيب</string>
+    <string name="layout">التَخطِيط</string>
+    <string name="alternative_player_layout">تخطيط المشغل البديل</string>
+    <string name="alternative_player_layout_summary">وتظهر أشرطة الفيديو ذات الصلة كصف أعلى من التعليقات بدلا من التعليقات الواردة أدناه.</string>
 </resources>
