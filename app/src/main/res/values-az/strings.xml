@@ -372,7 +372,7 @@
     <string name="notification_time">Bildiriş vaxtı</string>
     <string name="notification_time_summary">Bildirişlərin göstərilməsinə icazə verilən vaxt aralığı.</string>
     <string name="alternative_trending_layout">Alternativ trend tərtibatı</string>
-    <string name="navbar_order">Qayda</string>
+    <string name="navbar_order">Nizam</string>
     <string name="layout">Tərtibat</string>
     <string name="alternative_player_layout">Alternativ oynadıcı tərtibatı</string>
     <string name="alternative_player_layout_summary">Əlaqədar videoları aşağıda deyil, şərhlərin üstündə cərgə kimi göstər.</string>
