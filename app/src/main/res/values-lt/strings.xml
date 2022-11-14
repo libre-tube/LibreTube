@@ -123,7 +123,7 @@
     <string name="chapters">Skirsniai</string>
     <string name="require_restart">Būtina iš naujo paleisti programėlę</string>
     <string name="require_restart_message">Norint atlikti šį pakeitimą, programėlė turi būti paleista iš naujo. Paspauskite „Gerai“, kad paleistumėte iš naujo dabar.</string>
-    <string name="navLabelVisibility">Naršymo juostos etiketės matomumas</string>
+    <string name="navLabelVisibility">Etiketės matomumas</string>
     <string name="open">Atidaryti…</string>
     <string name="never">Niekada</string>
     <string name="autoRotatePlayer">Automatinis viso ekrano režimas</string>
@@ -330,11 +330,11 @@
     <string name="seek_increment">Prasukimo žingsnio dydis</string>
     <string name="hls">Automatinė</string>
     <string name="fullscreen_orientation">Viso ekrano padėtis</string>
-    <string name="selected">Pasirinktinė</string>
+    <string name="selected">Pasirinktinis</string>
     <string name="pure_theme">Juodai balta tema</string>
     <string name="pure_theme_summary">Sodri juodai balta tema</string>
     <string name="watch_positions_title">Įsimintos paskutinės peržiūros vietos</string>
-    <string name="none">Jokios</string>
+    <string name="none">Jokie</string>
     <string name="seekbar_preview_summary">Rodyti momentinę nuotrauką, kai velkate atkūrimo indikatorių.</string>
     <string name="caption_settings">Subtitrai</string>
     <string name="most_recent">Naujausia</string>
@@ -371,4 +371,9 @@
     <string name="time">Laikas</string>
     <string name="end_time">Pabaigos laikas</string>
     <string name="notification_time">Pranešimo laikas</string>
+    <string name="navbar_order">Rikiavimas</string>
+    <string name="layout">Išdėstymas</string>
+    <string name="alternative_player_layout_summary">Rodyti susijusius vaizdo įrašus kaip eilutę virš komentarų, o ne kaip įprasta po jais.</string>
+    <string name="alternative_trending_layout">Alternatyvus tendencijų išdėstymas</string>
+    <string name="alternative_player_layout">Alternatyvus grotuvo išdėstymas</string>
 </resources>
