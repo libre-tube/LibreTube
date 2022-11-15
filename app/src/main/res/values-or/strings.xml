@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="unsubscribe">ଅଣଅନୁସରଣ</string>
+    <string name="unsubscribe">ସଦସ୍ୟତା ରଦ୍ଦ କରନ୍ତୁ</string>
     <string name="library">ପାଠାଗାର</string>
     <string name="yes">ହଁ</string>
     <string name="choose_quality_dialog">ଗୁଣବତ୍ତା</string>
     <string name="videos">ଭିଡିଓ</string>
-    <string name="subscribe">ଅନୁସରଣ କରନ୍ତୁ</string>
+    <string name="subscribe">ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ</string>
     <string name="share">ଅଂଶୀଦାର କରନ୍ତୁ</string>
-    <string name="download">ସଞ୍ଚୟ କରନ୍ତୁ</string>
-    <string name="save">ସଞ୍ଚୟ</string>
+    <string name="download">ଡାନଲୋଡ୍୍</string>
+    <string name="save">ତାଲିକା ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="username">ବ୍ୟବହରକାରୀଙ୍କର ନାମ</string>
     <string name="password">ପାଶୱାର୍ଡ</string>
     <string name="register">ପଞ୍ଜିକରଣ</string>
@@ -29,10 +29,10 @@
     <string name="contributing">ଭାଗୀଦାର</string>
     <string name="donate">ଦାନ କର</string>
     <string name="importsuccess">ସଦସ୍ୟତା</string>
-    <string name="cannotDownload">ଏହି ଷ୍ଟ୍ରିମ୍ ଟି ସଞ୍ଚୟ କରିହେବ ନାହିଁ।</string>
+    <string name="cannotDownload">ଏହି ଷ୍ଟ୍ରିମ୍ ଟି ଡାଉନଲୋଡ୍ କରିହେବ ନାହିଁ।</string>
     <string name="dlcomplete">Sanchay ପ୍ରକ୍ରିୟା ପୂର୍ଣ୍ଣ ହେଲା ।</string>
     <string name="downloadfailed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା ।</string>
-    <string name="vlc">ଭିଏଲ୍ସି ରେ ଖୋଲନ୍ତୁ</string>
+    <string name="vlc">ଏଥିରେ ଖୋଲନ୍ତୁ</string>
     <string name="vlcerror">ଭିଏଲ୍ସି ରେ ଖୋଲିହେବ ନାହିଁ, ଆଗେ ତାହା ଇନ୍ସ୍ତାଲ କରନ୍ତୁ ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
     <string name="app_theme">ଥିମ୍</string>
@@ -82,8 +82,8 @@
     <string name="disabled">ଅଫ</string>
     <string name="piped">ପାଇପ୍ ହେଲା</string>
     <string name="youtube">ୟୁଟିଉବ</string>
-    <string name="playOnBackground">ପଛରେ ପ୍ଲେ କରନ୍ତୁ</string>
-    <string name="update_available_text">ରିଲିଜ୍ ରୁ ଡାଉନଲଡ୍ କରିବେ କି \?</string>
+    <string name="playOnBackground">ପୃଷ୍ଠଭୂମି ରେ ପ୍ଲେ କରନ୍ତୁ</string>
+    <string name="update_available_text">ରିଲିଜ୍ ରୁ ଡାନଲୋଡ୍୍ କରିବେ କି \?</string>
     <string name="appearance">ରୂପ</string>
     <string name="video_format">ଭିଡିଓ ଫର୍ମାଟ</string>
     <string name="video_format_summary">ଡାଉନଲୋଡ ପରେ ଭିଡିଓ ଓ ସ୍ଵର ମିଶିବ ।</string>
@@ -91,7 +91,7 @@
     <string name="download_directory_summary">କେଉଁଠାରେ ରହିବ ।</string>
     <string name="playlistCreated">ପ୍ଲେଲିଷ୍ଟ ଯୋଡାଗଲା ।</string>
     <string name="please_login">ଦୟା କରି ସେଟିଂ ରେ ଲଗ୍ ଇନ୍ କରନ୍ତୁ କିମ୍ବା ପଞ୍ଜୀକୃତ କରନ୍ତୁ ।</string>
-    <string name="subscribeIsEmpty">କିଛି ଧାରାବାହିକ କୁ ପ୍ରଥମେ ଅନୁସରଣ କରନ୍ତୁ ।</string>
+    <string name="subscribeIsEmpty">କିଛି ଧାରାବାହିକ ରେ ପ୍ରଥମେ ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ ।</string>
     <string name="dlisinprogress">ଆଉ ଗୋଟିଏ ଡାଉନଲୋଡ ପ୍ରକ୍ରିୟାରତ ।ଦୟା କରି ଅପେକ୍ଷା କରନ୍ତୁ ।</string>
     <string name="import_from_yt">ପସନ୍ଦିତ ଗୁଡ଼ିକୁ ଆମଦାନୀ କରନ୍ତୁ</string>
     <string name="server_error">ଏହି ସର୍ଭର ରେ କିଛି ସମସ୍ୟା ଅଛି । ଆଉ ଗୋଟିଏ ଇଂସ୍ତନ୍ସ କୁ ଚେଷ୍ଟା କରିବେ \?</string>
@@ -222,7 +222,7 @@
     <string name="notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
     <string name="notify_new_streams">ନୂତନ ଷ୍ଟ୍ରିମ୍ ପାଇଁ ବିଜ୍ଞପ୍ତି</string>
     <string name="irreversible">ଆପଣ ନିଶ୍ଚିତ କି!</string>
-    <string name="history_empty">ଏବେଯାଏଁ ଇତିହାସ କିଛି ନାହିଁ ।</string>
+    <string name="history_empty">ବର୍ତ୍ତମାନ ସୁଦ୍ଧା କୌଣସି ଇତିହାସ ନାହିଁ ।</string>
     <string name="copied">କପି ହୋଇଛି</string>
     <string name="downloadsucceeded">ଡାଉନଲୋଡ୍ ସଫଳ</string>
     <string name="skip_buttons">ଏଡ଼ାଇବା ବଟନ୍</string>
@@ -329,15 +329,15 @@
     <string name="network_all">ସମସ୍ତ</string>
     <string name="checking_frequency">ପ୍ରତ୍ୟେକ ଯାଞ୍ଚ କରୁଛନ୍ତି…</string>
     <string name="least_views">କମ୍ ଦୃଶ୍ୟ</string>
-    <string name="channel_name_za">ଓଲଟା ସଯାନ୍ତୁ ଚେନେଲ୍ ନାମ</string>
+    <string name="channel_name_za">ଓଲଟା ସଜାନ୍ତୁ ଚେନେଲ୍ ନାମ</string>
     <string name="most_recent">ନୂତନ</string>
     <string name="most_views">ଅଧିକ ଥର ଦେଖାଯାଇଥିବା</string>
     <string name="new_streams_count">%1$s ନୂତନ ଷ୍ଟ୍ରିମ୍ ଉପଲବ୍ଧ</string>
     <string name="network_metered">ମିଟର</string>
     <string name="network_wifi">କେବଳ ୱାଇଫାଇ ରେ</string>
-    <string name="channel_name_az">ଚନ୍ନେଲ ନାମ</string>
+    <string name="channel_name_az">ଚ୍ୟାନ୍ନେଲ ନାମ</string>
     <string name="export_subscriptions">ସଦସ୍ୟତା ରପ୍ତାନି କରନ୍ତୁ</string>
-    <string name="sort">ସଯାନ୍ତୁ</string>
+    <string name="sort">ସଜାନ୍ତୁ</string>
     <string name="translate">ଅନୁବାଦ</string>
     <string name="error_occurred">ଭୁଲ୍</string>
     <string name="share_with_time">ସମୟ କୋଡ୍ ସହିତ ଅଂଶୀଦାର କରନ୍ତୁ</string>
@@ -350,7 +350,7 @@
     <string name="add_to_queue">ଧାଡିରେ ଯୋଡନ୍ତୁ</string>
     <string name="picture_in_picture">ଛବିରେ ଛବି</string>
     <string name="backup_restore">ନକଲ ଓ ସଂରକ୍ଷଣ</string>
-    <string name="subscriptions">ପାସନ୍ଦିତା ଗୁଡ଼ିକ</string>
+    <string name="subscriptions">ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
     <string name="livestreams">ସିଧପ୍ରସାରଣ ଷ୍ଟ୍ରୀମ ଗୁଡ଼ିକ</string>
     <string name="alternative_videos_layout">ବିକଳ୍ପ ଭିଡିଓ ଲେଆଉଟ୍</string>
     <string name="defaultIconLight">ଡିଫଲ୍ଟ ଉଜ୍ଜଳ</string>

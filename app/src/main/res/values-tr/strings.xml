@@ -233,7 +233,7 @@
     <string name="reset_watch_positions">Sıfırla</string>
     <string name="data_saver_mode_summary">Küçük resimleri ve diğer resimleri gösterme.</string>
     <string name="update_now">Yeni LibreTube sürümü şimdi yüklensin mi\?</string>
-    <string name="navLabelVisibility">Gezinme çubuğundaki etiket görünürlüğü</string>
+    <string name="navLabelVisibility">Etiket görünürlüğü</string>
     <string name="always">Her zaman</string>
     <string name="selected">Seçilen</string>
     <string name="never">Hiçbir zaman</string>
@@ -371,4 +371,8 @@
     <string name="end_time">Bitiş zamanı</string>
     <string name="notification_time">Bildirim zamanı</string>
     <string name="notification_time_summary">Bildirimlerin gösterilmesine izin verilen zaman aralığı.</string>
+    <string name="alternative_trending_layout">Alternatif trend düzeni</string>
+    <string name="layout">Düzen</string>
+    <string name="alternative_player_layout">Alternatif oynatıcı düzeni</string>
+    <string name="alternative_player_layout_summary">İlgili videoları, yorumların altında değil, üstünde bir satır olarak göster.</string>
 </resources>

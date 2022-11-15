@@ -220,7 +220,7 @@
     <string name="player_autoplay">自動再生</string>
     <string name="data_saver_mode_summary">サムネイルとその他の画像を読み込みません。</string>
     <string name="watch_positions_summary">最後の再生位置から続きを見る</string>
-    <string name="navLabelVisibility">ナビゲーションバーのラベルの表示</string>
+    <string name="navLabelVisibility">ラベルの表示</string>
     <string name="always">常に表示</string>
     <string name="selected">選択中のみ</string>
     <string name="never">表示しない</string>
@@ -369,6 +369,11 @@
     <string name="repeat_mode_current">現在</string>
     <string name="audio_video_summary">画質とフォーマット</string>
     <string name="show_more">もっと見る</string>
-    <string name="time_code">タイムコード</string>
+    <string name="time_code">タイムコード (秒)</string>
     <string name="download_channel_description">メディアのダウンロード中に通知を表示します。</string>
+    <string name="navbar_order">並べ替え</string>
+    <string name="layout">レイアウト</string>
+    <string name="alternative_trending_layout">トレンドの代替レイアウト</string>
+    <string name="alternative_player_layout">代替プレイヤーレイアウト</string>
+    <string name="alternative_player_layout_summary">関連動画をコメントの下ではなく上に並べて表示します。</string>
 </resources>

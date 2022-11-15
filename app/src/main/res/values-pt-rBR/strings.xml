@@ -244,7 +244,7 @@
     <string name="video">Vídeo</string>
     <string name="player_autoplay">Reprodução automática</string>
     <string name="turnInternetOn">Por favor, conecte-se à internet ligando o WiFi ou os dados móveis.</string>
-    <string name="navLabelVisibility">Visibilidade do rótulo da barra de navegação</string>
+    <string name="navLabelVisibility">Visibilidade do Rótulo da barra de navegação</string>
     <string name="never">Nunca</string>
     <string name="autoRotatePlayer_summary">Mudar a reprodução para tela cheia automaticamente quando o dispositivo for girado.</string>
     <string name="pure_theme">Tema puro</string>
@@ -358,7 +358,7 @@
     <string name="livestreams">Transmissões ao vivo</string>
     <string name="sb_markers_summary">Marque os segmentos na barra de tempo.</string>
     <string name="show_more">Mostrar mais</string>
-    <string name="time_code">Código de tempo</string>
+    <string name="time_code">Código de tempo (segundos)</string>
     <string name="alternative_videos_layout">Layout de vídeos alternativos</string>
     <string name="defaultIconLight">Claro padrão</string>
     <string name="playlistCloned">Playlist clonada</string>
@@ -371,4 +371,9 @@
     <string name="end_time">Tempo final</string>
     <string name="notification_time_summary">Período de tempo em que as notificações podem ser exibidas.</string>
     <string name="notification_time">Tempo de notificação</string>
+    <string name="alternative_trending_layout">Layout de tendência alternativo</string>
+    <string name="navbar_order">Ordem</string>
+    <string name="layout">Layout</string>
+    <string name="alternative_player_layout">Layout alternativo do player</string>
+    <string name="alternative_player_layout_summary">Mostre os vídeos relacionados como uma linha acima dos comentários em vez de abaixo.</string>
 </resources>
