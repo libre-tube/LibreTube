@@ -236,7 +236,7 @@
     <string name="pure_theme">纯色主题</string>
     <string name="pure_theme_summary">纯白/黑主题</string>
     <string name="no_player_found">未找到外部播放器。 请确保你安装了一个。</string>
-    <string name="data_saver_mode">节流模式</string>
+    <string name="data_saver_mode">省流量模式</string>
     <string name="search_history_summary">记忆搜索</string>
     <string name="watch_history_summary">本地跟踪已观看的视频</string>
     <string name="history_summary">观看和搜索记录</string>
