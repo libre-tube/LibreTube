@@ -32,7 +32,7 @@
     <string name="cannotDownload">ଏହି ଷ୍ଟ୍ରିମ୍ ଟି ଡାଉନଲୋଡ୍ କରିହେବ ନାହିଁ।</string>
     <string name="dlcomplete">Sanchay ପ୍ରକ୍ରିୟା ପୂର୍ଣ୍ଣ ହେଲା ।</string>
     <string name="downloadfailed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା ।</string>
-    <string name="vlc">ଭିଏଲ୍ସି ରେ ଖୋଲନ୍ତୁ</string>
+    <string name="vlc">ଏଥିରେ ଖୋଲନ୍ତୁ</string>
     <string name="vlcerror">ଭିଏଲ୍ସି ରେ ଖୋଲିହେବ ନାହିଁ, ଆଗେ ତାହା ଇନ୍ସ୍ତାଲ କରନ୍ତୁ ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
     <string name="app_theme">ଥିମ୍</string>
