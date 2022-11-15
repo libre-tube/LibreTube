@@ -6,7 +6,7 @@
     <string name="choose_quality_dialog">ଗୁଣବତ୍ତା</string>
     <string name="videos">ଭିଡିଓ</string>
     <string name="subscribe">ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ</string>
-    <string name="share">ଅଂଶୀଦାର କରନ୍ତୁ</string>
+    <string name="share">ଅଂଶୀଦାର</string>
     <string name="download">ଡାନଲୋଡ୍୍</string>
     <string name="save">ତାଲିକା ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="username">ବ୍ୟବହରକାରୀଙ୍କର ନାମ</string>
@@ -93,7 +93,7 @@
     <string name="please_login">ଦୟା କରି ସେଟିଂ ରେ ଲଗ୍ ଇନ୍ କରନ୍ତୁ କିମ୍ବା ପଞ୍ଜୀକୃତ କରନ୍ତୁ ।</string>
     <string name="subscribeIsEmpty">କିଛି ଧାରାବାହିକ ରେ ପ୍ରଥମେ ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ ।</string>
     <string name="dlisinprogress">ଆଉ ଗୋଟିଏ ଡାଉନଲୋଡ ପ୍ରକ୍ରିୟାରତ ।ଦୟା କରି ଅପେକ୍ଷା କରନ୍ତୁ ।</string>
-    <string name="import_from_yt">ପସନ୍ଦିତ ଗୁଡ଼ିକୁ ଆମଦାନୀ କରନ୍ତୁ</string>
+    <string name="import_from_yt">ସଦସ୍ୟତା ଗୁଡ଼ିକୁ ଆମଦାନୀ କରନ୍ତୁ</string>
     <string name="server_error">ଏହି ସର୍ଭର ରେ କିଛି ସମସ୍ୟା ଅଛି । ଆଉ ଗୋଟିଏ ଇଂସ୍ତନ୍ସ କୁ ଚେଷ୍ଟା କରିବେ \?</string>
     <string name="empty">ଆପଣଙ୍କୁ ନିଜର ପଞ୍ଜୀକୃତ ନାମ ଓ ପାସ୍ ୱାର୍ଡ ଦେବାକୁ ହେବ ।</string>
     <string name="areYouSure">ପ୍ଲେଲିଷ୍ଟ ଡିଲିଟ କରିବେ କି \?</string>
