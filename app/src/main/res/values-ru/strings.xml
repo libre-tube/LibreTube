@@ -194,7 +194,7 @@
     <string name="player_summary">Настройки и поведение плеера</string>
     <string name="seek_increment">Шаг перемотки</string>
     <string name="pauseOnScreenOff">Автопауза</string>
-    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение, когда экран выключен.</string>
+    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение, когда экран выключен</string>
     <string name="autoplay_summary">Автоматически воспроизводить следующее видео после текущего.</string>
     <string name="clonePlaylist">Клонировать плейлист</string>
     <string name="deleteAccount">Удалить аккаунт</string>
@@ -371,9 +371,9 @@
     <string name="end_time">Время окончания</string>
     <string name="notification_time">Время уведомления</string>
     <string name="notification_time_summary">Временной интервал, в течение которого разрешено показывать уведомления.</string>
-    <string name="navbar_order">Порядок</string>
+    <string name="navbar_order">Порядок навигации</string>
     <string name="alternative_trending_layout">Альтернативный трендовый макет</string>
-    <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними.</string>
+    <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними</string>
     <string name="layout">Макет</string>
     <string name="alternative_player_layout">Альтернативный макет плеера</string>
 </resources>
