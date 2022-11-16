@@ -1166,7 +1166,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun setStreamSource(streams: Streams) {
-        val defaultResolution = PlayerHelper.getDefaultResolution(requireContext())
+        val defaultResolution = PlayerHelper.getDefaultResolution(requireContext()).replace("p", "")
         if (defaultResolution != "") {
             val params = trackSelector.buildUponParameters()
                 .setMaxVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
