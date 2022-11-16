@@ -18,6 +18,7 @@ import android.os.Looper
 import android.os.PowerManager
 import android.text.Html
 import android.text.format.DateUtils
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -75,6 +76,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.DashHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -102,6 +104,7 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -771,7 +774,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
-                if (!isLive) TextUtils.SEPARATOR + response.uploadDate else ""
+                    if (!isLive) TextUtils.SEPARATOR + response.uploadDate else ""
 
             textLike.text = response.likes.formatShort()
             textDislike.text = response.dislikes.formatShort()
@@ -941,7 +944,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // update the subscribed state
-        binding.playerSubscribe.setupSubscriptionButton(streams.uploaderUrl?.toID(), streams.uploader)
+        binding.playerSubscribe.setupSubscriptionButton(
+            streams.uploaderUrl?.toID(),
+            streams.uploader
+        )
 
         if (token != "") {
             binding.relPlayerSave.setOnClickListener {
@@ -1072,41 +1078,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         return chapterIndex
     }
 
-    private fun setMediaSource(
-        videoUrl: String,
-        audioUrl: String
-    ) {
-        val checkIntervalSize = when (PlayerHelper.progressiveLoadingIntervalSize) {
-            "default" -> ProgressiveMediaSource.DEFAULT_LOADING_CHECK_INTERVAL_BYTES
-            else -> PlayerHelper.progressiveLoadingIntervalSize.toInt() * 1024
-        }
-
-        val dataSourceFactory: DataSource.Factory =
-            DefaultHttpDataSource.Factory()
-
-        val videoItem: MediaItem = MediaItem.Builder()
-            .setUri(videoUrl.toUri())
-            .setSubtitleConfigurations(subtitles)
-            .build()
-
-        val videoSource: MediaSource =
-            ProgressiveMediaSource.Factory(dataSourceFactory)
-                .setContinueLoadingCheckIntervalBytes(checkIntervalSize)
-                .createMediaSource(videoItem)
-
-        val audioSource: MediaSource =
-            ProgressiveMediaSource.Factory(dataSourceFactory)
-                .setContinueLoadingCheckIntervalBytes(checkIntervalSize)
-                .createMediaSource(fromUri(audioUrl))
-
-        val mergeSource: MediaSource =
-            MergingMediaSource(videoSource, audioSource)
-        exoPlayer.setMediaSource(mergeSource)
-    }
-
-    private fun setHLSMediaSource(uri: Uri) {
+    private fun setMediaSource(uri: Uri, mimeType: String) {
         val mediaItem: MediaItem = MediaItem.Builder()
             .setUri(uri)
+            .setMimeType(mimeType)
             .setSubtitleConfigurations(subtitles)
             .build()
         exoPlayer.setMediaItem(mediaItem)
@@ -1187,41 +1162,24 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // set media source and resolution in the beginning
         setStreamSource(
             streams,
-            videosNameArray,
-            videosUrlArray
         )
     }
 
     private fun setStreamSource(
-        streams: Streams,
-        videosNameArray: Array<String>,
-        videosUrlArray: Array<String>
+        streams: Streams
     ) {
         val defaultResolution = PlayerHelper.getDefaultResolution(requireContext())
         if (defaultResolution != "") {
-            videosNameArray.forEachIndexed { index, pipedStream ->
-                // search for quality preference in the available stream sources
-                if (pipedStream.contains(defaultResolution)) {
-                    selectedVideoSourceUrl = videosUrlArray[index]
-                    selectedAudioSourceUrl = selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
-                    setMediaSource(selectedAudioSourceUrl!!, selectedVideoSourceUrl!!)
-                    return
-                }
-            }
+            // TODO: Fix this, we need to set it from the player!
         }
 
-        // if default resolution isn't set or available, use hls if available
-        if (streams.hls != null) {
-            setHLSMediaSource(Uri.parse(streams.hls))
-            return
-        }
+        val manifest = DashHelper.createManifest(streams)
 
-        // if nothing found, use the first list entry
-        if (videosUrlArray.isNotEmpty()) {
-            val videoUri = videosUrlArray[0]
-            val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
-            setMediaSource(videoUri, audioUrl)
-        }
+        // encode to base64
+        val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
+        val mediaItem = "data:application/dash+xml;charset=utf-8;base64,${encoded}"
+
+        this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
     }
 
     private fun getAudioSource(audioStreams: List<PipedStream>?): String {
@@ -1409,11 +1367,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     videosNameArray[which] == "LBRY HLS"
                 ) {
                     // set the progressive media source
-                    setHLSMediaSource(videosUrlArray[which].toUri())
+                    setMediaSource(videosUrlArray[which], MimeTypes.APPLICATION_M3U8)
                 } else {
-                    selectedVideoSourceUrl = videosUrlArray[which]
-                    selectedAudioSourceUrl = selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
-                    setMediaSource(selectedVideoSourceUrl!!, selectedAudioSourceUrl!!)
+                    // TODO: Fix this
                 }
                 exoPlayer.seekTo(lastPosition)
             }
