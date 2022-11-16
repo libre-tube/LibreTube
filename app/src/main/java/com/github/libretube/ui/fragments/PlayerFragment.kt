@@ -1367,7 +1367,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     videosNameArray[which] == "LBRY HLS"
                 ) {
                     // set the progressive media source
-                    setMediaSource(videosUrlArray[which], MimeTypes.APPLICATION_M3U8)
+                    setMediaSource(videosUrlArray[which].toUri(), MimeTypes.APPLICATION_M3U8)
                 } else {
                     // TODO: Fix this
                 }
@@ -1388,9 +1388,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         BaseBottomSheet()
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
-                selectedAudioSourceUrl = PlayerHelper.getAudioSource(requireContext(), audioStreams)
-                selectedVideoSourceUrl = selectedVideoSourceUrl ?: streams.videoStreams!!.first().url!!
-                setMediaSource(selectedAudioSourceUrl!!, selectedVideoSourceUrl!!)
+                // TODO: Fix this
             }
             .show(childFragmentManager)
     }
