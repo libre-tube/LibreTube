@@ -15,11 +15,11 @@
     <string name="register">Qeydiyyatdan keç</string>
     <string name="logout">Çıx</string>
     <string name="cancel">İmtina</string>
-    <string name="loggedIn">Daxil oldunuz.</string>
+    <string name="loggedIn">Daxil olundu.</string>
     <string name="loggedout">Çıxıldı.</string>
-    <string name="registered">Qeydiyyatdan keçibsiniz.İndi kanallara abunə ola bilərsiniz.</string>
-    <string name="already_logged_in">Artıq daxil olmusunuz.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
-    <string name="login_first">Zəhmət olmasa, daxil ol və yenidən cəhd et.</string>
+    <string name="registered">Qeydiyyatdan keçilib. İndi kanallara abunə ola bilərsiniz.</string>
+    <string name="already_logged_in">Artıq daxil olunub.İstəsəniz hesabınızdan çıxa bilərsiniz.</string>
+    <string name="login_first">Zəhmət olmasa, daxil ol və təkrar cəhd et.</string>
     <string name="startpage">Ev</string>
     <string name="subscriptions">Abunəliklər</string>
     <string name="library">Kitabxana</string>
