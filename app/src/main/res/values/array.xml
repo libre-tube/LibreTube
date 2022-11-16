@@ -188,7 +188,7 @@
     </string-array>
 
     <string-array name="defres">
-        <item>@string/hls</item>
+        <item>@string/auto_quality</item>
         <item>2160p</item>
         <item>1440p</item>
         <item>1080p</item>

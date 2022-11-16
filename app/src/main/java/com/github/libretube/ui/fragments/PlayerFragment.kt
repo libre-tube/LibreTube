@@ -1084,16 +1084,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         val resolutions = mutableListOf<VideoResolution>()
 
-        // append hls to list if available
-        if (streams.hls != null) {
-            resolutions.add(
-                VideoResolution(
-                    name = getString(R.string.hls),
-                    adaptiveSourceUrl = streams.hls!!
-                )
-            )
-        }
-
         val videoStreams = try {
             // attempt to sort the qualities, catch if there was an error ih parsing
             streams.videoStreams?.sortedBy {
@@ -1129,6 +1119,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 )
             }
         }
+
+        if (resolutions.isEmpty()) {
+            return listOf(
+                VideoResolution(getString(R.string.hls), adaptiveSourceUrl = streams.hls)
+            )
+        }
+
+        resolutions.add(0, VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
+
         return resolutions
     }
 
@@ -1175,13 +1174,21 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             trackSelector.setParameters(params)
         }
 
-        val manifest = DashHelper.createManifest(streams)
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
+            streams.videoStreams.orEmpty().isNotEmpty()
+        ) {
+            val manifest = DashHelper.createManifest(streams)
 
-        // encode to base64
-        val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
-        val mediaItem = "data:application/dash+xml;charset=utf-8;base64,$encoded"
+            // encode to base64
+            val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
+            val mediaItem = "data:application/dash+xml;charset=utf-8;base64,$encoded"
 
-        this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
+            this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
+        } else if (streams.hls != null) {
+            setMediaSource(streams.hls.toUri(), MimeTypes.APPLICATION_M3U8)
+        } else {
+            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun createExoPlayer() {
@@ -1355,24 +1362,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         val resolutions = getAvailableResolutions()
 
         // Dialog for quality selection
-        val lastPosition = exoPlayer.currentPosition
         BaseBottomSheet()
             .setSimpleItems(
                 resolutions.map { it.name }
             ) { which ->
-                if (
-                    resolutions[which].adaptiveSourceUrl != null
-                ) {
-                    // set the progressive media source
-                    setMediaSource(resolutions[which].adaptiveSourceUrl!!.toUri(), MimeTypes.APPLICATION_M3U8)
-                } else {
-                    val resolution = resolutions[which].resolution!!
-                    val params = trackSelector.buildUponParameters()
-                        .setMaxVideoSize(Int.MAX_VALUE, resolution)
-                        .setMinVideoSize(Int.MAX_VALUE, resolution)
-                    trackSelector.setParameters(params)
-                }
-                exoPlayer.seekTo(lastPosition)
+                val resolution = resolutions[which].resolution!!
+
+                val params = trackSelector.buildUponParameters()
+                    .setMaxVideoSize(Int.MAX_VALUE, resolution)
+                    .setMinVideoSize(Int.MAX_VALUE, resolution)
+                trackSelector.setParameters(params)
             }
             .show(childFragmentManager)
     }
