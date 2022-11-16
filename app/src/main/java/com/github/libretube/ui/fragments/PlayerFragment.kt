@@ -18,6 +18,7 @@ import android.os.Looper
 import android.os.PowerManager
 import android.text.Html
 import android.text.format.DateUtils
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -59,6 +60,7 @@ import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.obj.ShareData
+import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
@@ -75,6 +77,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.DashHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -86,22 +89,17 @@ import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
-import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.text.Cue.TEXT_SIZE_TYPE_ABSOLUTE
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -168,9 +166,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
     private lateinit var shareData: ShareData
-
-    private var selectedAudioSourceUrl: String? = null
-    private var selectedVideoSourceUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -941,7 +936,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // update the subscribed state
-        binding.playerSubscribe.setupSubscriptionButton(streams.uploaderUrl?.toID(), streams.uploader)
+        binding.playerSubscribe.setupSubscriptionButton(
+            streams.uploaderUrl?.toID(),
+            streams.uploader
+        )
 
         if (token != "") {
             binding.relPlayerSave.setOnClickListener {
@@ -1072,67 +1070,24 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         return chapterIndex
     }
 
-    private fun setMediaSource(
-        videoUrl: String,
-        audioUrl: String
-    ) {
-        val checkIntervalSize = when (PlayerHelper.progressiveLoadingIntervalSize) {
-            "default" -> ProgressiveMediaSource.DEFAULT_LOADING_CHECK_INTERVAL_BYTES
-            else -> PlayerHelper.progressiveLoadingIntervalSize.toInt() * 1024
-        }
-
-        val dataSourceFactory: DataSource.Factory =
-            DefaultHttpDataSource.Factory()
-
-        val videoItem: MediaItem = MediaItem.Builder()
-            .setUri(videoUrl.toUri())
-            .setSubtitleConfigurations(subtitles)
-            .build()
-
-        val videoSource: MediaSource =
-            ProgressiveMediaSource.Factory(dataSourceFactory)
-                .setContinueLoadingCheckIntervalBytes(checkIntervalSize)
-                .createMediaSource(videoItem)
-
-        val audioSource: MediaSource =
-            ProgressiveMediaSource.Factory(dataSourceFactory)
-                .setContinueLoadingCheckIntervalBytes(checkIntervalSize)
-                .createMediaSource(fromUri(audioUrl))
-
-        val mergeSource: MediaSource =
-            MergingMediaSource(videoSource, audioSource)
-        exoPlayer.setMediaSource(mergeSource)
-    }
-
-    private fun setHLSMediaSource(uri: Uri) {
+    private fun setMediaSource(uri: Uri, mimeType: String) {
         val mediaItem: MediaItem = MediaItem.Builder()
             .setUri(uri)
+            .setMimeType(mimeType)
             .setSubtitleConfigurations(subtitles)
             .build()
         exoPlayer.setMediaItem(mediaItem)
     }
 
-    private fun getAvailableResolutions(): Pair<Array<String>, Array<String>> {
-        if (!this::streams.isInitialized) return Pair(arrayOf(), arrayOf())
+    private fun getAvailableResolutions(): List<VideoResolution> {
+        if (!this::streams.isInitialized) return listOf()
 
-        var videosNameArray: Array<String> = arrayOf()
-        var videosUrlArray: Array<String> = arrayOf()
-
-        // append hls to list if available
-        if (streams.hls != null) {
-            videosNameArray += getString(R.string.hls)
-            videosUrlArray += streams.hls!!
-        }
+        val resolutions = mutableListOf<VideoResolution>()
 
         val videoStreams = try {
             // attempt to sort the qualities, catch if there was an error ih parsing
             streams.videoStreams?.sortedBy {
-                it.quality
-                    .toString()
-                    .split("p")
-                    .first()
-                    .replace("p", "")
-                    .toLong()
+                it.quality?.toLong() ?: 0L
             }?.reversed()
                 .orEmpty()
         } catch (_: Exception) {
@@ -1142,21 +1097,44 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         for (vid in videoStreams) {
             // append quality to list if it has the preferred format (e.g. MPEG)
             val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
-            if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
-                videosNameArray += vid.quality.toString()
-                videosUrlArray += vid.url!!
-            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format
-                videosNameArray += "LBRY MP4"
-                videosUrlArray += vid.url!!
+            if (vid.url != null && vid.mimeType == preferredMimeType) {
+                // avoid duplicated resolutions
+                if (resolutions.any {
+                    it.resolution == vid.quality.toString().split("p").first().toInt()
+                }
+                ) {
+                    continue
+                }
+
+                resolutions.add(
+                    VideoResolution(
+                        name = vid.quality!!,
+                        resolution = vid.quality.toString().split("p").first().toInt()
+                    )
+                )
+            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) {
+                resolutions.add(
+                    VideoResolution(
+                        name = "LBRY MP4",
+                        adaptiveSourceUrl = vid.url,
+                        resolution = Int.MAX_VALUE
+                    )
+                )
             }
         }
-        return Pair(videosNameArray, videosUrlArray)
+
+        if (resolutions.isEmpty()) {
+            return listOf(
+                VideoResolution(getString(R.string.hls), adaptiveSourceUrl = streams.hls)
+            )
+        }
+
+        resolutions.add(0, VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
+
+        return resolutions
     }
 
     private fun setResolutionAndSubtitles() {
-        // get the available resolutions
-        val (videosNameArray, videosUrlArray) = getAvailableResolutions()
-
         // create a list of subtitles
         subtitles = mutableListOf()
         val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
@@ -1186,51 +1164,34 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // set media source and resolution in the beginning
         setStreamSource(
-            streams,
-            videosNameArray,
-            videosUrlArray
+            streams
         )
     }
 
-    private fun setStreamSource(
-        streams: Streams,
-        videosNameArray: Array<String>,
-        videosUrlArray: Array<String>
-    ) {
-        val defaultResolution = PlayerHelper.getDefaultResolution(requireContext())
+    private fun setStreamSource(streams: Streams) {
+        val defaultResolution = PlayerHelper.getDefaultResolution(requireContext()).replace("p", "")
         if (defaultResolution != "") {
-            videosNameArray.forEachIndexed { index, pipedStream ->
-                // search for quality preference in the available stream sources
-                if (pipedStream.contains(defaultResolution)) {
-                    selectedVideoSourceUrl = videosUrlArray[index]
-                    selectedAudioSourceUrl = selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
-                    setMediaSource(selectedAudioSourceUrl!!, selectedVideoSourceUrl!!)
-                    return
-                }
-            }
+            val params = trackSelector.buildUponParameters()
+                .setMaxVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
+                .setMinVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
+            trackSelector.setParameters(params)
         }
 
-        // if default resolution isn't set or available, use hls if available
-        if (streams.hls != null) {
-            setHLSMediaSource(Uri.parse(streams.hls))
-            return
-        }
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
+            streams.videoStreams.orEmpty().isNotEmpty()
+        ) {
+            val manifest = DashHelper.createManifest(streams)
 
-        // if nothing found, use the first list entry
-        if (videosUrlArray.isNotEmpty()) {
-            val videoUri = videosUrlArray[0]
-            val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
-            setMediaSource(videoUri, audioUrl)
-        }
-    }
+            // encode to base64
+            val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
+            val mediaItem = "data:application/dash+xml;charset=utf-8;base64,$encoded"
 
-    private fun getAudioSource(audioStreams: List<PipedStream>?): String {
-        val appLanguage = Locale.getDefault().language.lowercase().substring(0, 2)
-        val filteredStreams = audioStreams.orEmpty().filter { it.audioTrackId?.contains(appLanguage) ?: false }
-        return PlayerHelper.getAudioSource(
-            requireContext(),
-            filteredStreams.ifEmpty { audioStreams!! }
-        )
+            this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
+        } else if (streams.hls != null) {
+            setMediaSource(streams.hls.toUri(), MimeTypes.APPLICATION_M3U8)
+        } else {
+            Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun createExoPlayer() {
@@ -1264,17 +1225,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
-        // limit hls to full hd
-        if (
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.LIMIT_HLS,
-                false
-            )
-        ) {
-            val newParams = trackSelector.buildUponParameters()
-                .setMaxVideoSize(1920, 1080)
-            trackSelector.setParameters(newParams)
-        }
+        val params = trackSelector.buildUponParameters().setPreferredAudioLanguage(
+            Locale.getDefault().language.lowercase().substring(0, 2)
+        )
+        trackSelector.setParameters(params)
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
@@ -1396,26 +1350,19 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     override fun onQualityClicked() {
         // get the available resolutions
-        val (videosNameArray, videosUrlArray) = getAvailableResolutions()
+        val resolutions = getAvailableResolutions()
 
         // Dialog for quality selection
-        val lastPosition = exoPlayer.currentPosition
         BaseBottomSheet()
             .setSimpleItems(
-                videosNameArray.toList()
+                resolutions.map { it.name }
             ) { which ->
-                if (
-                    videosNameArray[which] == getString(R.string.hls) ||
-                    videosNameArray[which] == "LBRY HLS"
-                ) {
-                    // set the progressive media source
-                    setHLSMediaSource(videosUrlArray[which].toUri())
-                } else {
-                    selectedVideoSourceUrl = videosUrlArray[which]
-                    selectedAudioSourceUrl = selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
-                    setMediaSource(selectedVideoSourceUrl!!, selectedAudioSourceUrl!!)
-                }
-                exoPlayer.seekTo(lastPosition)
+                val resolution = resolutions[which].resolution!!
+
+                val params = trackSelector.buildUponParameters()
+                    .setMaxVideoSize(Int.MAX_VALUE, resolution)
+                    .setMinVideoSize(Int.MAX_VALUE, resolution)
+                trackSelector.setParameters(params)
             }
             .show(childFragmentManager)
     }
@@ -1432,9 +1379,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         BaseBottomSheet()
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
-                selectedAudioSourceUrl = PlayerHelper.getAudioSource(requireContext(), audioStreams)
-                selectedVideoSourceUrl = selectedVideoSourceUrl ?: streams.videoStreams!!.first().url!!
-                setMediaSource(selectedAudioSourceUrl!!, selectedVideoSourceUrl!!)
+                val lang = audioStreams.first().audioTrackId!!.substring(0, 2)
+                val newParams = trackSelector.buildUponParameters()
+                    .setPreferredAudioLanguage(lang)
+                trackSelector.setParameters(newParams)
             }
             .show(childFragmentManager)
     }

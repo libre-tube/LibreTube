@@ -103,6 +103,7 @@ dependencies {
     implementation libs.exoplayer
     implementation(libs.exoplayer.extension.cronet) { exclude group: 'com.google.android.gms' }
     implementation libs.exoplayer.extension.mediasession
+    implementation libs.exoplayer.dash
 
     /* Retrofit and Jackson */
     implementation libs.square.retrofit
