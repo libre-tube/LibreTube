@@ -376,4 +376,6 @@
     <string name="navbar_order">סדר</string>
     <string name="layout">פריסה</string>
     <string name="alternative_player_layout">פריסת נגן חלופית</string>
+    <string name="audio_track">רצועת שמע</string>
+    <string name="default_audio_track">ברירת מחדל</string>
 </resources>
