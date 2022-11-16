@@ -108,6 +108,7 @@ import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.*
 import java.util.concurrent.Executors
 import kotlin.math.abs
 
@@ -166,6 +167,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
     private lateinit var shareData: ShareData
+
+    private var selectedAudioSourceUrl: String? = null
+    private var selectedVideoSourceUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -1068,7 +1072,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun setMediaSource(
-        videoUri: Uri,
+        videoUrl: String,
         audioUrl: String
     ) {
         val checkIntervalSize = when (PlayerHelper.progressiveLoadingIntervalSize) {
@@ -1080,7 +1084,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             DefaultHttpDataSource.Factory()
 
         val videoItem: MediaItem = MediaItem.Builder()
-            .setUri(videoUri)
+            .setUri(videoUrl.toUri())
             .setSubtitleConfigurations(subtitles)
             .build()
 
@@ -1107,16 +1111,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         exoPlayer.setMediaItem(mediaItem)
     }
 
-    private fun getAvailableResolutions(): Pair<Array<String>, Array<Uri>> {
+    private fun getAvailableResolutions(): Pair<Array<String>, Array<String>> {
         if (!this::streams.isInitialized) return Pair(arrayOf(), arrayOf())
 
         var videosNameArray: Array<String> = arrayOf()
-        var videosUrlArray: Array<Uri> = arrayOf()
+        var videosUrlArray: Array<String> = arrayOf()
 
         // append hls to list if available
         if (streams.hls != null) {
             videosNameArray += getString(R.string.hls)
-            videosUrlArray += streams.hls!!.toUri()
+            videosUrlArray += streams.hls!!
         }
 
         val videoStreams = try {
@@ -1139,10 +1143,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
             if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
                 videosNameArray += vid.quality.toString()
-                videosUrlArray += vid.url!!.toUri()
+                videosUrlArray += vid.url!!
             } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format
                 videosNameArray += "LBRY MP4"
-                videosUrlArray += vid.url!!.toUri()
+                videosUrlArray += vid.url!!
             }
         }
         return Pair(videosNameArray, videosUrlArray)
@@ -1190,17 +1194,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun setStreamSource(
         streams: Streams,
         videosNameArray: Array<String>,
-        videosUrlArray: Array<Uri>
+        videosUrlArray: Array<String>
     ) {
         val defaultResolution = PlayerHelper.getDefaultResolution(requireContext())
         if (defaultResolution != "") {
             videosNameArray.forEachIndexed { index, pipedStream ->
                 // search for quality preference in the available stream sources
                 if (pipedStream.contains(defaultResolution)) {
-                    val videoUri = videosUrlArray[index]
-                    val audioUrl =
-                        PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
-                    setMediaSource(videoUri, audioUrl)
+                    selectedVideoSourceUrl = videosUrlArray[index]
+                    selectedAudioSourceUrl = selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
+                    setMediaSource(selectedAudioSourceUrl!!, selectedVideoSourceUrl!!)
                     return
                 }
             }
@@ -1218,6 +1221,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             val audioUrl = PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
             setMediaSource(videoUri, audioUrl)
         }
+    }
+
+    private fun getAudioSource(audioStreams: List<PipedStream>?): String {
+        val appLanguage = Locale.getDefault().language.lowercase().substring(0, 2)
+        val filteredStreams = audioStreams.orEmpty().filter { it.audioTrackId?.contains(appLanguage) ?: false }
+        return PlayerHelper.getAudioSource(
+            requireContext(),
+            filteredStreams.ifEmpty { audioStreams!! }
+        )
     }
 
     private fun createExoPlayer() {
@@ -1396,33 +1408,32 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     videosNameArray[which] == "LBRY HLS"
                 ) {
                     // set the progressive media source
-                    setHLSMediaSource(videosUrlArray[which])
+                    setHLSMediaSource(videosUrlArray[which].toUri())
                 } else {
-                    val videoUri = videosUrlArray[which]
-                    val audioUrl =
-                        PlayerHelper.getAudioSource(requireContext(), streams.audioStreams!!)
-                    setMediaSource(videoUri, audioUrl)
+                    selectedVideoSourceUrl = videosUrlArray[which]
+                    selectedAudioSourceUrl= selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
+                    setMediaSource(selectedVideoSourceUrl!!, selectedAudioSourceUrl!!)
                 }
                 exoPlayer.seekTo(lastPosition)
             }
             .show(childFragmentManager)
     }
 
-    fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String, List<PipedStream>> {
+    private fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String?, List<PipedStream>> {
         return audioStreams.orEmpty()
-            .filter { it.audioTrackName != null }
-            .groupBy { it.audioTrackName!! }
+            .groupBy { it.audioTrackName }
     }
 
     override fun onAudioStreamClicked() {
         val audioGroups = getAudioStreamGroups(streams.audioStreams)
-        val audioLanguages = audioGroups.map { it.key }
+        val audioLanguages = audioGroups.map { it.key ?: getString(R.string.default_audio_track) }
 
         BaseBottomSheet()
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
-                val audioUrl = PlayerHelper.getAudioSource(requireContext(), audioStreams)
-                setMediaSource(streams.videoStreams!!.first().url!!.toUri(), audioUrl)
+                selectedAudioSourceUrl = PlayerHelper.getAudioSource(requireContext(), audioStreams)
+                selectedVideoSourceUrl = selectedVideoSourceUrl ?: streams.videoStreams!!.first().url!!
+                setMediaSource(selectedAudioSourceUrl!!, selectedVideoSourceUrl!!)
             }
             .show(childFragmentManager)
     }

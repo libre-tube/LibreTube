@@ -198,7 +198,7 @@ internal class CustomExoPlayerView(
                 items.add(
                     BottomSheetItem(
                         context.getString(R.string.audio_track),
-                        R.drawable.ic_audio,
+                        R.drawable.ic_audio
                     ) {
                         playerOptionsInterface?.onAudioStreamClicked()
                     }
