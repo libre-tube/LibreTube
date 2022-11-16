@@ -282,7 +282,7 @@
     <string name="network_metered">Ölçülen</string>
     <string name="error_occurred">Hata</string>
     <string name="copied">Kopyalandı</string>
-    <string name="share_with_time">Zaman koduyla paylaşın</string>
+    <string name="share_with_time">Zaman koduyla paylaş</string>
     <string name="downloadsucceeded">İndirme başarılı</string>
     <string name="skip_buttons">Atlama düğmeleri</string>
     <string name="skip_buttons_summary">Sonraki veya önceki videoya atlamak için düğmeleri göster.</string>
