@@ -1407,6 +1407,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             .show(childFragmentManager)
     }
 
+    override fun onAudioStreamClicked() {
+        TODO("Not yet implemented")
+    }
+
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {

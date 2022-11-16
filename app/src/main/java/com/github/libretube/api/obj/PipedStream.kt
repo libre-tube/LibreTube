@@ -17,5 +17,7 @@ data class PipedStream(
     var indexEnd: Int? = null,
     var width: Int? = null,
     var height: Int? = null,
-    var fps: Int? = null
+    var fps: Int? = null,
+    val audioTrackName: String? = null,
+    val audioTrackId: String? = null
 )
