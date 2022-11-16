@@ -185,19 +185,19 @@ class ChannelFragment : BaseFragment() {
     }
 
     private fun setupTabs(tabs: List<ChannelTab>?) {
-        tabs?.firstOrNull { it.name == "Playlists" }?.let {
+        tabs?.firstOrNull { it.name == "playlists" }?.let {
             binding.playlists.visibility = View.VISIBLE
         }
 
-        tabs?.firstOrNull { it.name == "Channels" }?.let {
+        tabs?.firstOrNull { it.name == "channels" }?.let {
             binding.channels.visibility = View.VISIBLE
         }
 
-        tabs?.firstOrNull { it.name == "Livestreams" }?.let {
+        tabs?.firstOrNull { it.name == "livestreams" }?.let {
             binding.livestreams.visibility = View.VISIBLE
         }
 
-        tabs?.firstOrNull { it.name == "Shorts" }?.let {
+        tabs?.firstOrNull { it.name == "shorts" }?.let {
             binding.shorts.visibility = View.VISIBLE
         }
 
@@ -215,16 +215,16 @@ class ChannelFragment : BaseFragment() {
                 }
             }
             binding.channels.id -> {
-                tabs?.first { it.name == "Channels" }?.let { loadTab(it) }
+                tabs?.first { it.name == "channels" }?.let { loadTab(it) }
             }
             binding.playlists.id -> {
-                tabs?.first { it.name == "Playlists" }?.let { loadTab(it) }
+                tabs?.first { it.name == "playlists" }?.let { loadTab(it) }
             }
             binding.livestreams.id -> {
-                tabs?.first { it.name == "Livestreams" }?.let { loadTab(it) }
+                tabs?.first { it.name == "livestreams" }?.let { loadTab(it) }
             }
             binding.shorts.id -> {
-                tabs?.first { it.name == "Shorts" }?.let { loadTab(it) }
+                tabs?.first { it.name == "shorts" }?.let { loadTab(it) }
             }
         }
     }
