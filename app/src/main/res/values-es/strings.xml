@@ -207,7 +207,7 @@
     <string name="auth_instance">Instancia de autenticación</string>
     <string name="auth_instance_summary">Utilice una instancia diferente para las llamadas autenticadas.</string>
     <string name="auth_instances">Elija una instancia de autenticación</string>
-    <string name="hls">Automática</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Audio y vídeo</string>
     <string name="fullscreen_orientation">Orientación de pantalla completa</string>
@@ -376,4 +376,10 @@
     <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
     <string name="navbar_order">Ordenar</string>
     <string name="layout">Diseño</string>
+    <string name="audio_track">Pista de audio</string>
+    <string name="default_audio_track">Por defecto</string>
+    <string name="unsupported_file_format">¡Formato no soportado!</string>
+    <string name="auto_quality">Automatico</string>
+    <string name="hls_instead_of_dash_summary">Usar HLS en vez de DASH (podría ser lento, no recomendado)</string>
+    <string name="hls_instead_of_dash">Usar HLS</string>
 </resources>
