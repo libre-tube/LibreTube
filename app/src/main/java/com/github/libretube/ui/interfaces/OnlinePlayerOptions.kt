@@ -4,4 +4,6 @@ interface OnlinePlayerOptions {
     fun onCaptionsClicked()
 
     fun onQualityClicked()
+
+    fun onAudioStreamClicked()
 }

@@ -197,6 +197,14 @@ internal class CustomExoPlayerView(
                 )
                 items.add(
                     BottomSheetItem(
+                        context.getString(R.string.audio_track),
+                        R.drawable.ic_audio
+                    ) {
+                        playerOptionsInterface?.onAudioStreamClicked()
+                    }
+                )
+                items.add(
+                    BottomSheetItem(
                         context.getString(R.string.captions),
                         R.drawable.ic_caption,
                         if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
