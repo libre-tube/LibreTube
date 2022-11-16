@@ -376,4 +376,7 @@
     <string name="alternative_player_layout_summary">Rodyti susijusius vaizdo įrašus kaip eilutę virš komentarų, o ne kaip įprasta po jais.</string>
     <string name="alternative_trending_layout">Alternatyvus tendencijų išdėstymas</string>
     <string name="alternative_player_layout">Alternatyvus grotuvo išdėstymas</string>
+    <string name="audio_track">Garso takelis</string>
+    <string name="default_audio_track">Numatytasis</string>
+    <string name="unsupported_file_format">Nepalaikomas failo formatas!</string>
 </resources>
