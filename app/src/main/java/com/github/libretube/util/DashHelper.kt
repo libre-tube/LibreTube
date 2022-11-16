@@ -41,10 +41,10 @@ class DashHelper {
             val adapSetInfos = ArrayList<AdapSetInfo>()
 
             for (stream in streams.videoStreams!!) {
-
                 // ignore dual format streams
-                if (!stream.videoOnly!!)
+                if (!stream.videoOnly!!) {
                     continue
+                }
 
                 val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
                 if (adapSetInfo != null) {
