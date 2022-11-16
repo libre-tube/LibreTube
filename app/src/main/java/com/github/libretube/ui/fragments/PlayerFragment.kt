@@ -1102,7 +1102,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 if (resolutions.any {
                     it.resolution == vid.quality.toString().split("p").first().toInt()
                 }
-                ) continue
+                ) {
+                    continue
+                }
 
                 resolutions.add(
                     VideoResolution(
@@ -1227,18 +1229,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             Locale.getDefault().language.lowercase().substring(0, 2)
         )
         trackSelector.setParameters(params)
-
-        // limit hls to full hd
-        if (
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.LIMIT_HLS,
-                false
-            )
-        ) {
-            val newParams = trackSelector.buildUponParameters()
-                .setMaxVideoSize(1920, 1080)
-            trackSelector.setParameters(newParams)
-        }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
