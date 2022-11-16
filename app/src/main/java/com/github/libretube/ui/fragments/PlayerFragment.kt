@@ -38,6 +38,7 @@ import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
@@ -1407,8 +1408,23 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             .show(childFragmentManager)
     }
 
+    fun getAudioStreamGroups(audioStreams: List<PipedStream>?): Map<String, List<PipedStream>> {
+        return audioStreams.orEmpty()
+            .filter { it.audioTrackName != null }
+            .groupBy { it.audioTrackName!! }
+    }
+
     override fun onAudioStreamClicked() {
-        TODO("Not yet implemented")
+        val audioGroups = getAudioStreamGroups(streams.audioStreams)
+        val audioLanguages = audioGroups.map { it.key }
+
+        BaseBottomSheet()
+            .setSimpleItems(audioLanguages) { index ->
+                val audioStreams = audioGroups.values.elementAt(index)
+                val audioUrl = PlayerHelper.getAudioSource(requireContext(), audioStreams)
+                setMediaSource(streams.videoStreams!!.first().url!!.toUri(), audioUrl)
+            }
+            .show(childFragmentManager)
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
