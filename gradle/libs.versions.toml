@@ -41,6 +41,7 @@ square-retrofit-converterJackson = { group = "com.squareup.retrofit2", name = "c
 jacksonAnnotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jacksonAnnotations" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
 exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
+exoplayer-dash = { group = "com.google.android.exoplayer", name = "exoplayer-dash", version.ref = "exoplayer" }
 cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 cronet-okhttp = { group = "com.google.net.cronet", name = "cronet-okhttp", version.ref = "cronetOkHttp" }
 coil = { group = "io.coil-kt", name = "coil", version.ref="coil" }
