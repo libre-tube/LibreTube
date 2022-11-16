@@ -76,12 +76,6 @@
             android:title="@string/hls_instead_of_dash"
             app:key="use_hls" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_play_filled"
-            android:title="@string/limit_hls"
-            app:key="limit_hls" />
-
         <ListPreference
             android:icon="@drawable/ic_loading"
             app:defaultValue="64"
