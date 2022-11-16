@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -18,6 +19,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
@@ -44,6 +46,13 @@ class ChannelFragment : BaseFragment() {
     private var onScrollEnd: () -> Unit = {}
 
     private val scope = CoroutineScope(Dispatchers.IO)
+
+    val possibleTabs = listOf(
+        ChannelTabs.Channels,
+        ChannelTabs.Playlists,
+        ChannelTabs.Livestreams,
+        ChannelTabs.Shorts
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -180,59 +189,41 @@ class ChannelFragment : BaseFragment() {
                 binding.channelRecView.adapter = channelAdapter
             }
 
-            setupTabs(response.tabs)
+            response.tabs?.let { setupTabs(it) }
         }
     }
 
-    private fun setupTabs(tabs: List<ChannelTab>?) {
-        tabs?.firstOrNull { it.name == "playlists" }?.let {
-            binding.playlists.visibility = View.VISIBLE
-        }
-
-        tabs?.firstOrNull { it.name == "channels" }?.let {
-            binding.channels.visibility = View.VISIBLE
-        }
-
-        tabs?.firstOrNull { it.name == "livestreams" }?.let {
-            binding.livestreams.visibility = View.VISIBLE
-        }
-
-        tabs?.firstOrNull { it.name == "shorts" }?.let {
-            binding.shorts.visibility = View.VISIBLE
+    private fun setupTabs(tabs: List<ChannelTab>) {
+        binding.tabChips.children.forEach { chip ->
+            val resourceTab = possibleTabs.firstOrNull { it.chipId == chip.id }
+            resourceTab?.let { resTab ->
+                if (tabs.any { it.name == resTab.identifierName }) chip.visibility = View.VISIBLE
+            }
         }
 
         binding.tabChips.setOnCheckedStateChangeListener { _, _ ->
-            reactToTabChange(tabs)
-        }
-    }
-
-    private fun reactToTabChange(tabs: List<ChannelTab>?) {
-        when (binding.tabChips.checkedChipId) {
-            binding.videos.id -> {
-                binding.channelRecView.adapter = channelAdapter
-                onScrollEnd = {
-                    fetchChannelNextPage()
+            when (binding.tabChips.checkedChipId) {
+                binding.videos.id -> {
+                    binding.channelRecView.adapter = channelAdapter
+                    onScrollEnd = {
+                        fetchChannelNextPage()
+                    }
                 }
-            }
-            binding.channels.id -> {
-                tabs?.first { it.name == "channels" }?.let { loadTab(it) }
-            }
-            binding.playlists.id -> {
-                tabs?.first { it.name == "playlists" }?.let { loadTab(it) }
-            }
-            binding.livestreams.id -> {
-                tabs?.first { it.name == "livestreams" }?.let { loadTab(it) }
-            }
-            binding.shorts.id -> {
-                tabs?.first { it.name == "shorts" }?.let { loadTab(it) }
+                else -> {
+                    possibleTabs.first { binding.tabChips.checkedChipId == it.chipId }.let {
+                        val tab = tabs.first { tab -> tab.name == it.identifierName }
+                        loadTab(tab)
+                    }
+                }
             }
         }
     }
 
     private fun loadTab(tab: ChannelTab) {
         scope.launch {
+            tab.data ?: return@launch
             val response = try {
-                RetrofitInstance.api.getChannelTab(tab.data!!)
+                RetrofitInstance.api.getChannelTab(tab.data)
             } catch (e: Exception) {
                 return@launch
             }
