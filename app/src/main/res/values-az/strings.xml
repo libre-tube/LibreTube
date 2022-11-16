@@ -208,7 +208,7 @@
     <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli nümunədən istifadə edin.</string>
     <string name="auth_instance">Təsdiqləyici nümunə</string>
     <string name="github">GitHub</string>
-    <string name="hls">Avtomatik</string>
+    <string name="hls">HLS</string>
     <string name="audio_video">Səs və video</string>
     <string name="fullscreen_orientation">Tam ekran istiqaməti</string>
     <string name="aspect_ratio">Video görünüş nisbəti</string>
@@ -379,4 +379,7 @@
     <string name="audio_track">Səs treki</string>
     <string name="default_audio_track">Defolt</string>
     <string name="unsupported_file_format">Dəstəklənməyən fayl formatı!</string>
+    <string name="auto_quality">Avtomatik</string>
+    <string name="hls_instead_of_dash">HLS istifadə et</string>
+    <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmir)</string>
 </resources>
