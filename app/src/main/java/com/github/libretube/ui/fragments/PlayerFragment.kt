@@ -60,6 +60,7 @@ import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.obj.ShareData
+import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
@@ -165,9 +166,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
     private lateinit var shareData: ShareData
-
-    private var selectedAudioSourceUrl: String? = null
-    private var selectedVideoSourceUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -1081,16 +1079,19 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         exoPlayer.setMediaItem(mediaItem)
     }
 
-    private fun getAvailableResolutions(): Pair<Array<String>, Array<String>> {
-        if (!this::streams.isInitialized) return Pair(arrayOf(), arrayOf())
+    private fun getAvailableResolutions(): List<VideoResolution> {
+        if (!this::streams.isInitialized) return listOf()
 
-        var videosNameArray: Array<String> = arrayOf()
-        var videosUrlArray: Array<String> = arrayOf()
+        val resolutions = mutableListOf<VideoResolution>()
 
         // append hls to list if available
         if (streams.hls != null) {
-            videosNameArray += getString(R.string.hls)
-            videosUrlArray += streams.hls!!
+            resolutions.add(
+                VideoResolution(
+                    name = getString(R.string.hls),
+                    adaptiveSourceUrl = streams.hls!!
+                )
+            )
         }
 
         val videoStreams = try {
@@ -1112,20 +1113,26 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             // append quality to list if it has the preferred format (e.g. MPEG)
             val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
             if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
-                videosNameArray += vid.quality.toString()
-                videosUrlArray += vid.url!!
+                resolutions.add(
+                    VideoResolution(
+                        name = vid.quality!!,
+                        resolution = vid.quality.toString().split("p").first().toInt()
+                    )
+                )
             } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format
-                videosNameArray += "LBRY MP4"
-                videosUrlArray += vid.url!!
+                resolutions.add(
+                    VideoResolution(
+                        name = "LBRY MP4",
+                        adaptiveSourceUrl = vid.url,
+                        resolution = Int.MAX_VALUE
+                    )
+                )
             }
         }
-        return Pair(videosNameArray, videosUrlArray)
+        return resolutions
     }
 
     private fun setResolutionAndSubtitles() {
-        // get the available resolutions
-        val (videosNameArray, videosUrlArray) = getAvailableResolutions()
-
         // create a list of subtitles
         subtitles = mutableListOf()
         val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
@@ -1159,12 +1166,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         )
     }
 
-    private fun setStreamSource(
-        streams: Streams
-    ) {
+    private fun setStreamSource(streams: Streams) {
         val defaultResolution = PlayerHelper.getDefaultResolution(requireContext())
         if (defaultResolution != "") {
-            // TODO: Fix this, we need to set it from the player!
+            val params = trackSelector.buildUponParameters()
+                .setMaxVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
+                .setMinVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
+            trackSelector.setParameters(params)
         }
 
         val manifest = DashHelper.createManifest(streams)
@@ -1174,15 +1182,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         val mediaItem = "data:application/dash+xml;charset=utf-8;base64,$encoded"
 
         this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
-    }
-
-    private fun getAudioSource(audioStreams: List<PipedStream>?): String {
-        val appLanguage = Locale.getDefault().language.lowercase().substring(0, 2)
-        val filteredStreams = audioStreams.orEmpty().filter { it.audioTrackId?.contains(appLanguage) ?: false }
-        return PlayerHelper.getAudioSource(
-            requireContext(),
-            filteredStreams.ifEmpty { audioStreams!! }
-        )
     }
 
     private fun createExoPlayer() {
@@ -1215,6 +1214,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
+
+        val params = trackSelector.buildUponParameters().setPreferredAudioLanguage(
+            Locale.getDefault().language.lowercase().substring(0, 2)
+        )
+        trackSelector.setParameters(params)
 
         // limit hls to full hd
         if (
@@ -1348,22 +1352,25 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     override fun onQualityClicked() {
         // get the available resolutions
-        val (videosNameArray, videosUrlArray) = getAvailableResolutions()
+        val resolutions = getAvailableResolutions()
 
         // Dialog for quality selection
         val lastPosition = exoPlayer.currentPosition
         BaseBottomSheet()
             .setSimpleItems(
-                videosNameArray.toList()
+                resolutions.map { it.name }
             ) { which ->
                 if (
-                    videosNameArray[which] == getString(R.string.hls) ||
-                    videosNameArray[which] == "LBRY HLS"
+                    resolutions[which].adaptiveSourceUrl != null
                 ) {
                     // set the progressive media source
-                    setMediaSource(videosUrlArray[which].toUri(), MimeTypes.APPLICATION_M3U8)
+                    setMediaSource(resolutions[which].adaptiveSourceUrl!!.toUri(), MimeTypes.APPLICATION_M3U8)
                 } else {
-                    // TODO: Fix this
+                    val resolution = resolutions[which].resolution!!
+                    val params = trackSelector.buildUponParameters()
+                        .setMaxVideoSize(Int.MAX_VALUE, resolution)
+                        .setMinVideoSize(Int.MAX_VALUE, resolution)
+                    trackSelector.setParameters(params)
                 }
                 exoPlayer.seekTo(lastPosition)
             }
@@ -1382,7 +1389,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         BaseBottomSheet()
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
-                // TODO: Fix this
+                val lang = audioStreams.first().audioTrackId!!.substring(0, 2)
+                val newParams = trackSelector.buildUponParameters()
+                    .setPreferredAudioLanguage(lang)
+                trackSelector.setParameters(newParams)
             }
             .show(childFragmentManager)
     }
