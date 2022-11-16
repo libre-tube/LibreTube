@@ -33,7 +33,7 @@
     <string name="okay">Oldu</string>
     <string name="history">Tarixçə</string>
     <string name="search_history">Axtarış Tarixçəsi</string>
-    <string name="clear_history">Tarixçəni təmizləyin</string>
+    <string name="clear_history">Tarixçəni təmizlə</string>
     <string name="music_albums">YT Musiqi Albomları</string>
     <string name="music_songs">YT Musiqi Mahnıları</string>
     <string name="music_videos">YT Musiqi Videoları</string>
@@ -66,18 +66,18 @@
     <string name="subscribeIsEmpty">Əvvəlcə bəzi kanallara abunə ol.</string>
     <string name="cannotDownload">Bu yayımı endirmək mümkün deyil.</string>
     <string name="dlcomplete">Endirmə tamamlandı.</string>
-    <string name="dlisinprogress">Başqa bir endirmə artıq davam edir, zəhmət olmasa, tamamlanana qədər gözlə.</string>
+    <string name="dlisinprogress">Başqa endirmə artıq davam edir, zəhmət olmasa, bitənə qədər gözlə.</string>
     <string name="downloadfailed">Endirmək alınmadı.</string>
     <string name="vlc">VLC\'də Aç</string>
     <string name="vlcerror">VLC\'də açmaq mümkün olmadı, O, quraşdırılmamış ola bilər.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Mövzu</string>
-    <string name="server_error">Serverdə problem var. Başqa bir nümunə cəhd edilsin\?</string>
+    <string name="server_error">Serverdə problem var. Başqa nümunə cəhd edilsinmi\?</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
-    <string name="notgmail">Bu, Piped hesabı üçündür.</string>
+    <string name="notgmail">Bu Piped hesabı üçündür.</string>
     <string name="defres">Video keyfiyyəti</string>
     <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
@@ -99,7 +99,7 @@
     <string name="settings">Tənzimləmələr</string>
     <string name="location">Məkan</string>
     <string name="instance">Nümunə</string>
-    <string name="customization">Tənzimləmələr</string>
+    <string name="customization">Nizamlamalar</string>
     <string name="website">Veb Sayt</string>
     <string name="color_accent">Vurğular</string>
     <string name="color_red">Rahatladıcı qırmızı</string>
@@ -115,7 +115,7 @@
     <string name="app_icon">Nişan</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
-    <string name="playOnBackground">Arxa fonda oynat</string>
+    <string name="playOnBackground">Arxa planda oynat</string>
     <string name="update_available">%1$s Versiyası Mövcuddur</string>
     <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsinmi\?</string>
     <string name="appearance">Görünüş</string>
@@ -138,7 +138,7 @@
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
     <string name="authors">Müəlliflər</string>
-    <string name="no_replies">Bu şərhə cavab yoxdur.</string>
+    <string name="no_replies">Bu şərh cavabsızdır.</string>
     <string name="downloads_directory">Endirmə qovluğu</string>
     <string name="music_directory">Musiqi qovluğu</string>
     <string name="movies_directory">Film qovluğu</string>
@@ -367,8 +367,8 @@
     <string name="confirm_unsubscribing_summary">Abunəliyi ləğv etməzdən əvvəl təsdiqləmə dialoqunu göstər.</string>
     <string name="play_all">Hamısını oynat</string>
     <string name="time">Vaxt</string>
-    <string name="start_time">Başlama vaxtı</string>
-    <string name="end_time">Bitmə vaxtı</string>
+    <string name="start_time">Başlatma vaxtı</string>
+    <string name="end_time">Bitirmə vaxtı</string>
     <string name="notification_time">Bildiriş vaxtı</string>
     <string name="notification_time_summary">Bildirişlərin göstərilməsinə icazə verilən vaxt aralığı.</string>
     <string name="alternative_trending_layout">Alternativ trend tərtibatı</string>
@@ -376,4 +376,6 @@
     <string name="layout">Tərtibat</string>
     <string name="alternative_player_layout">Alternativ oynadıcı tərtibatı</string>
     <string name="alternative_player_layout_summary">Əlaqədar videoları aşağıda deyil, şərhlərin üstündə cərgə kimi göstər.</string>
+    <string name="audio_track">Səs trek</string>
+    <string name="default_audio_track">Defolt</string>
 </resources>
