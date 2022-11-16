@@ -328,7 +328,7 @@
     <string name="buffering_goal_summary">Didžiausias užkrauto vaizdo įrašo sekundžių skaičius atmintyje.</string>
     <string name="player_summary">Numatytieji nustatymai ir elgsena</string>
     <string name="seek_increment">Prasukimo žingsnio dydis</string>
-    <string name="hls">Automatinė</string>
+    <string name="hls">HLS</string>
     <string name="fullscreen_orientation">Viso ekrano padėtis</string>
     <string name="selected">Pasirinktinis</string>
     <string name="pure_theme">Juodai balta tema</string>
@@ -379,4 +379,7 @@
     <string name="audio_track">Garso takelis</string>
     <string name="default_audio_track">Numatytasis</string>
     <string name="unsupported_file_format">Nepalaikomas failo formatas!</string>
+    <string name="auto_quality">Automatinė</string>
+    <string name="hls_instead_of_dash">Naudoti HLS</string>
+    <string name="hls_instead_of_dash_summary">Vietoj DASH naudoti HLS (veiks lėčiau, nerekomenduojama)</string>
 </resources>
