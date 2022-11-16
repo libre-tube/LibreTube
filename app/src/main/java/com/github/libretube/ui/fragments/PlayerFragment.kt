@@ -39,6 +39,7 @@ import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.PipedStream
+import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
@@ -541,7 +542,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) return
 
         val currentPosition = exoPlayer.currentPosition
-        segmentData.segments.forEach { segment: com.github.libretube.api.obj.Segment ->
+        segmentData.segments.forEach { segment: Segment ->
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
 
@@ -1411,7 +1412,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     setHLSMediaSource(videosUrlArray[which].toUri())
                 } else {
                     selectedVideoSourceUrl = videosUrlArray[which]
-                    selectedAudioSourceUrl= selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
+                    selectedAudioSourceUrl = selectedAudioSourceUrl ?: getAudioSource(streams.audioStreams)
                     setMediaSource(selectedVideoSourceUrl!!, selectedAudioSourceUrl!!)
                 }
                 exoPlayer.seekTo(lastPosition)
