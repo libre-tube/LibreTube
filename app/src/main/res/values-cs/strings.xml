@@ -170,7 +170,7 @@
     <string name="auth_instance">Autentifikační instance</string>
     <string name="auth_instance_summary">Použít jinou instanci pro autentifikační volání.</string>
     <string name="auth_instances">Vyberte autent. instanci</string>
-    <string name="hls">Auto</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="category_filler_description">Pro výplňové scény přidané jen jako přídavek nebo humor, které nejsou vyžadovány pro pochopení hlavního obsahu videa.</string>
     <string name="category_music_offtopic_description">Použití pouze u hudebních videí. Mělo by pokrývat části videa, ne části oficiálních skladeb. Ve výsledku by mělo video připomínat verzi ze Spotify nebo jakoukoli jinou mixovanou verzi jak nejlépe je to možné, nebo omezit mluvení a další rušivé prvky.</string>
@@ -376,4 +376,10 @@
     <string name="alternative_trending_layout">Alternativní rozložení trendů</string>
     <string name="layout">Rozložení</string>
     <string name="alternative_player_layout">Alternativní rozložení přehrávače</string>
+    <string name="audio_track">Zvuková stopa</string>
+    <string name="default_audio_track">Výchozí</string>
+    <string name="unsupported_file_format">Nepodporovaný formát souboru!</string>
+    <string name="auto_quality">Auto</string>
+    <string name="hls_instead_of_dash">Použít HLS</string>
+    <string name="hls_instead_of_dash_summary">Použít HLS místo DASH (bude pomalejší, nedoporučuje se)</string>
 </resources>
