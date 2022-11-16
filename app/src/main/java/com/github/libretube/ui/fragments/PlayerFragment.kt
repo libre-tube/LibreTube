@@ -1087,12 +1087,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         val videoStreams = try {
             // attempt to sort the qualities, catch if there was an error ih parsing
             streams.videoStreams?.sortedBy {
-                it.quality
-                    .toString()
-                    .split("p")
-                    .first()
-                    .replace("p", "")
-                    .toLong()
+                it.quality?.toLong() ?: 0L
             }?.reversed()
                 .orEmpty()
         } catch (_: Exception) {
@@ -1102,14 +1097,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         for (vid in videoStreams) {
             // append quality to list if it has the preferred format (e.g. MPEG)
             val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
-            if (vid.url != null && vid.mimeType == preferredMimeType) { // preferred format
+            if (vid.url != null && vid.mimeType == preferredMimeType) {
+                // avoid duplicated resolutions
+                if (resolutions.any {
+                    it.resolution == vid.quality.toString().split("p").first().toInt()
+                }
+                ) continue
+
                 resolutions.add(
                     VideoResolution(
                         name = vid.quality!!,
                         resolution = vid.quality.toString().split("p").first().toInt()
                     )
                 )
-            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) { // LBRY MP4 format
+            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) {
                 resolutions.add(
                     VideoResolution(
                         name = "LBRY MP4",
