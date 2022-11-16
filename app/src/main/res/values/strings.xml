@@ -208,7 +208,7 @@
     <string name="auth_instance">Authentication instance</string>
     <string name="auth_instance_summary">Use a different instance for authenticated calls.</string>
     <string name="auth_instances">Choose an auth instance</string>
-    <string name="hls">Auto</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Audio and video</string>
     <string name="fullscreen_orientation">Fullscreen orientation</string>
@@ -372,6 +372,9 @@
     <string name="alternative_player_layout_summary">Show the related videos as a row above the comments instead of below.</string>
     <string name="audio_track">Audio track</string>
     <string name="default_audio_track">Default</string>
+    <string name="hls_instead_of_dash">Use HLS</string>
+    <string name="hls_instead_of_dash_summary">Use HLS instead of DASH (will be slower, not recommended)</string>
+    <string name="auto_quality">Auto</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
