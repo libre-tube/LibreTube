@@ -88,22 +88,16 @@ import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
-import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.text.Cue.TEXT_SIZE_TYPE_ABSOLUTE
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -774,7 +768,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, response.views.formatShort()) +
-                    if (!isLive) TextUtils.SEPARATOR + response.uploadDate else ""
+                if (!isLive) TextUtils.SEPARATOR + response.uploadDate else ""
 
             textLike.text = response.likes.formatShort()
             textDislike.text = response.dislikes.formatShort()
@@ -1161,7 +1155,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // set media source and resolution in the beginning
         setStreamSource(
-            streams,
+            streams
         )
     }
 
@@ -1177,7 +1171,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // encode to base64
         val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
-        val mediaItem = "data:application/dash+xml;charset=utf-8;base64,${encoded}"
+        val mediaItem = "data:application/dash+xml;charset=utf-8;base64,$encoded"
 
         this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
     }
