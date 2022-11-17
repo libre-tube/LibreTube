@@ -383,4 +383,5 @@
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmir)</string>
     <string name="limit_to_runtime">İş vaxtı məhdudiyyət</string>
+    <string name="open_queue_from_notification">Bildirişdən növbəni aç</string>
 </resources>
