@@ -24,7 +24,7 @@ class HomeModel : ViewModel() {
         runOrError(appContext) {
             if (trending.value.isNullOrEmpty()) {
                 trending.postValue(
-                    RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(20)
+                    RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
                 )
             }
         }

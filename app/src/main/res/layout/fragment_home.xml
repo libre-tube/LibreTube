@@ -37,13 +37,20 @@
                 style="@style/HomeCategoryTitle"
                 android:text="@string/trending" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/trendingRV"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:nestedScrollingEnabled="false"
-                android:visibility="gone" />
+                android:descendantFocusability="blocksDescendants">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/trendingRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/playlistsTV"
