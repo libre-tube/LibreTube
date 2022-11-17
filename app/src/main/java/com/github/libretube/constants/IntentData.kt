@@ -8,4 +8,5 @@ object IntentData {
     const val timeStamp = "timeStamp"
     const val position = "position"
     const val fileName = "fileName"
+    const val openQueueOnce = "openQueue"
 }

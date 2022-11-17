@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.extensions.round
 import com.google.android.exoplayer2.PlaybackParameters
@@ -55,9 +54,4 @@ class PlaybackSpeedSheet(
             binding.pitch.value.round(2)
         )
     }
-
-    fun show(fragmentManager: FragmentManager) = show(
-        fragmentManager,
-        null
-    )
 }
