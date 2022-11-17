@@ -8,13 +8,13 @@ import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.toDp
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.DoubleTapInterface
 import com.github.libretube.ui.interfaces.DoubleTapListener
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
@@ -41,7 +41,6 @@ internal class CustomExoPlayerView(
      */
     private var doubleTapListener: DoubleTapInterface? = null
     private var playerOptionsInterface: OnlinePlayerOptions? = null
-    private lateinit var childFragmentManager: FragmentManager
     private var trackSelector: TrackSelector? = null
 
     private val runnableHandler = Handler(Looper.getMainLooper())
@@ -58,6 +57,9 @@ internal class CustomExoPlayerView(
 
     private var resizeModePref = PlayerHelper.resizeModePref
 
+    private val supportFragmentManager
+        get() = (context as BaseActivity).supportFragmentManager
+
     private fun toggleController() {
         if (isControllerFullyVisible) hideController() else showController()
     }
@@ -73,12 +75,10 @@ internal class CustomExoPlayerView(
     }
 
     fun initialize(
-        childFragmentManager: FragmentManager,
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         trackSelector: TrackSelector?
     ) {
-        this.childFragmentManager = childFragmentManager
         this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
@@ -142,10 +142,12 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.player_autoplay),
                     R.drawable.ic_play,
-                    if (autoplayEnabled) {
-                        context.getString(R.string.enabled)
-                    } else {
-                        context.getString(R.string.disabled)
+                    {
+                        if (autoplayEnabled) {
+                            context.getString(R.string.enabled)
+                        } else {
+                            context.getString(R.string.disabled)
+                        }
                     }
                 ) {
                     onAutoplayClicked()
@@ -153,10 +155,12 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.repeat_mode),
                     R.drawable.ic_repeat,
-                    if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                        context.getString(R.string.repeat_mode_none)
-                    } else {
-                        context.getString(R.string.repeat_mode_current)
+                    {
+                        if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                            context.getString(R.string.repeat_mode_none)
+                        } else {
+                            context.getString(R.string.repeat_mode_current)
+                        }
                     }
                 ) {
                     onRepeatModeClicked()
@@ -164,10 +168,12 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.player_resize_mode),
                     R.drawable.ic_aspect_ratio,
-                    when (resizeMode) {
-                        AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
-                        AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
-                        else -> context.getString(R.string.resize_mode_zoom)
+                    {
+                        when (resizeMode) {
+                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
+                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                            else -> context.getString(R.string.resize_mode_zoom)
+                        }
                     }
                 ) {
                     onResizeModeClicked()
@@ -175,11 +181,13 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.playback_speed),
                     R.drawable.ic_speed,
-                    "${
-                    player?.playbackParameters?.speed
-                        .toString()
-                        .replace(".0", "")
-                    }x"
+                    {
+                        "${
+                        player?.playbackParameters?.speed
+                            .toString()
+                            .replace(".0", "")
+                        }x"
+                    }
                 ) {
                     onPlaybackSpeedClicked()
                 }
@@ -190,7 +198,7 @@ internal class CustomExoPlayerView(
                     BottomSheetItem(
                         context.getString(R.string.quality),
                         R.drawable.ic_hd,
-                        "${player?.videoSize?.height}p"
+                        { "${player?.videoSize?.height}p" }
                     ) {
                         playerOptionsInterface?.onQualityClicked()
                     }
@@ -198,7 +206,10 @@ internal class CustomExoPlayerView(
                 items.add(
                     BottomSheetItem(
                         context.getString(R.string.audio_track),
-                        R.drawable.ic_audio
+                        R.drawable.ic_audio,
+                        {
+                            trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
+                        }
                     ) {
                         playerOptionsInterface?.onAudioStreamClicked()
                     }
@@ -207,10 +218,12 @@ internal class CustomExoPlayerView(
                     BottomSheetItem(
                         context.getString(R.string.captions),
                         R.drawable.ic_caption,
-                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                            trackSelector!!.parameters.preferredTextLanguages[0]
-                        } else {
-                            context.getString(R.string.none)
+                        {
+                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                                trackSelector!!.parameters.preferredTextLanguages[0]
+                            } else {
+                                context.getString(R.string.none)
+                            }
                         }
                     ) {
                         playerOptionsInterface?.onCaptionsClicked()
@@ -219,7 +232,7 @@ internal class CustomExoPlayerView(
             }
 
             val bottomSheetFragment = BaseBottomSheet().setItems(items, null)
-            bottomSheetFragment.show(childFragmentManager, null)
+            bottomSheetFragment.show(supportFragmentManager, null)
         }
     }
 
@@ -332,11 +345,11 @@ internal class CustomExoPlayerView(
                     1 -> autoplayEnabled = false
                 }
             }
-            .show(childFragmentManager)
+            .show(supportFragmentManager)
     }
 
     override fun onPlaybackSpeedClicked() {
-        player?.let { PlaybackSpeedSheet(it).show(childFragmentManager) }
+        player?.let { PlaybackSpeedSheet(it).show(supportFragmentManager) }
     }
 
     override fun onResizeModeClicked() {
@@ -354,7 +367,7 @@ internal class CustomExoPlayerView(
             .setSimpleItems(aspectRatioModeNames) { index ->
                 resizeMode = aspectRatioModes[index]
             }
-            .show(childFragmentManager)
+            .show(supportFragmentManager)
     }
 
     override fun onRepeatModeClicked() {
@@ -373,7 +386,7 @@ internal class CustomExoPlayerView(
             .setSimpleItems(repeatModeNames) { index ->
                 player?.repeatMode = repeatModes[index]
             }
-            .show(childFragmentManager)
+            .show(supportFragmentManager)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {

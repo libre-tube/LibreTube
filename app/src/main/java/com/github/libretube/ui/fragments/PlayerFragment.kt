@@ -757,7 +757,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun initializePlayerView(response: Streams) {
         // initialize the player view actions
         binding.player.initialize(
-            childFragmentManager,
             this,
             doubleTapOverlayBinding,
             trackSelector
