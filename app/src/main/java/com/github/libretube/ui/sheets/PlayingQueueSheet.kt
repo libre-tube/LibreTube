@@ -61,6 +61,13 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             adapter.notifyDataSetChanged()
         }
 
+        binding.repeat.setOnClickListener {
+            PlayingQueue.repeatQueue = !PlayingQueue.repeatQueue
+            it.alpha = if (PlayingQueue.repeatQueue) 1f else 0.5f
+        }
+
+        binding.repeat.alpha = if (PlayingQueue.repeatQueue) 1f else 0.5f
+
         binding.bottomControls.setOnClickListener {
             dialog?.dismiss()
         }

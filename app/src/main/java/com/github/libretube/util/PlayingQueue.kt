@@ -13,6 +13,7 @@ object PlayingQueue {
     private val queue = mutableListOf<StreamItem>()
     private var currentStream: StreamItem? = null
     private var onQueueTapListener: (StreamItem) -> Unit = {}
+    var repeatQueue: Boolean = false
 
     fun add(vararg streamItem: StreamItem) {
         streamItem.forEach {
@@ -33,11 +34,13 @@ object PlayingQueue {
     }
 
     fun getNext(): String? {
-        return try {
-            queue[currentIndex() + 1].url?.toID()
+        try {
+            return queue[currentIndex() + 1].url?.toID()
         } catch (e: Exception) {
-            null
+            Log.e("queue ended", e.toString())
         }
+        if (repeatQueue) return queue.firstOrNull()?.url?.toID()
+        return null
     }
 
     fun getPrev(): String? {
@@ -133,7 +136,8 @@ object PlayingQueue {
         onQueueTapListener = listener
     }
 
-    fun removeOnQueueTapListener() {
+    fun resetToDefaults() {
+        repeatQueue = false
         onQueueTapListener = {}
     }
 }

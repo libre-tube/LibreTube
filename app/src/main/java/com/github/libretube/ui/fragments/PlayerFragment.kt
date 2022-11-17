@@ -501,7 +501,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         try {
             // clear the playing queue
             PlayingQueue.clear()
-            PlayingQueue.removeOnQueueTapListener()
+            PlayingQueue.resetToDefaults()
 
             saveWatchPosition()
             nowPlayingNotification.destroySelfAndPlayer()

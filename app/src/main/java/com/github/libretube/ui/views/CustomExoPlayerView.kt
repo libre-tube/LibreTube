@@ -22,7 +22,9 @@ import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackSpeedSheet
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayingQueue
 import com.google.android.exoplayer2.PlaybackParameters
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -373,18 +375,23 @@ internal class CustomExoPlayerView(
     override fun onRepeatModeClicked() {
         val repeatModeNames = listOf(
             context.getString(R.string.repeat_mode_none),
-            context.getString(R.string.repeat_mode_current)
-        )
-
-        val repeatModes = listOf(
-            RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE,
-            RepeatModeUtil.REPEAT_TOGGLE_MODE_ALL
-
+            context.getString(R.string.repeat_mode_current),
+            context.getString(R.string.all)
         )
         // repeat mode options dialog
         BaseBottomSheet()
             .setSimpleItems(repeatModeNames) { index ->
-                player?.repeatMode = repeatModes[index]
+                PlayingQueue.repeatQueue = when (index) {
+                    0 -> {
+                        player?.repeatMode = Player.REPEAT_MODE_OFF
+                        false
+                    }
+                    1 -> {
+                        player?.repeatMode = Player.REPEAT_MODE_ONE
+                        false
+                    }
+                    else -> true
+                }
             }
             .show(supportFragmentManager)
     }
