@@ -127,7 +127,7 @@
     <string name="gradientIcon">Gradien glib</string>
     <string name="instance_api_url">URL ke API instansi</string>
     <string name="player_autoplay">Mainkan secara otomatis</string>
-    <string name="hls">Otomatis</string>
+    <string name="hls">HLS</string>
     <string name="instance_summary">Piped, login, dan langganan</string>
     <string name="reset">Atur ulang ke bawaan</string>
     <string name="watch_history">Riwayat Tontonan</string>
@@ -379,4 +379,7 @@
     <string name="audio_track">Trek audio</string>
     <string name="default_audio_track">Bawaan</string>
     <string name="unsupported_file_format">Format berkas tidak didukung!</string>
+    <string name="hls_instead_of_dash">Gunakan HLS</string>
+    <string name="auto_quality">Otomatis</string>
+    <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH (akan lebih lambat, tidak disarankan)</string>
 </resources>
