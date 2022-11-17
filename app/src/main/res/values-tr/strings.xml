@@ -382,4 +382,6 @@
     <string name="auto_quality">Otomatik</string>
     <string name="hls_instead_of_dash">HLS\'yi kullan</string>
     <string name="hls_instead_of_dash_summary">DASH yerine HLS kullan (daha yavaş olacaktır, önerilmez)</string>
+    <string name="limit_to_runtime">Çalışma zamanı ile sınırla</string>
+    <string name="open_queue_from_notification">Bildirimden kuyruğu aç</string>
 </resources>
