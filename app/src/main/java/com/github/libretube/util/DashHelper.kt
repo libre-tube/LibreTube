@@ -69,7 +69,7 @@ object DashHelper {
             adapSetInfos.add(
                 AdapSetInfo(
                     stream.mimeType!!,
-                    null,
+                    stream.audioTrackId,
                     mutableListOf(stream)
                 )
             )

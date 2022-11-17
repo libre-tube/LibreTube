@@ -207,7 +207,7 @@
     <string name="auth_instance_summary">Doğrulanmış davetiyeler için farklı bir oluşum kullanın.</string>
     <string name="auth_instances">Yetkilendirme örneği seçin</string>
     <string name="auth_instance">Doğrulayıcı oluşum</string>
-    <string name="hls">Otomatik</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="fullscreen_orientation">Tam ekran yönü</string>
     <string name="aspect_ratio">Video en boy oranı</string>
@@ -282,7 +282,7 @@
     <string name="network_metered">Ölçülen</string>
     <string name="error_occurred">Hata</string>
     <string name="copied">Kopyalandı</string>
-    <string name="share_with_time">Zaman koduyla paylaşın</string>
+    <string name="share_with_time">Zaman koduyla paylaş</string>
     <string name="downloadsucceeded">İndirme başarılı</string>
     <string name="skip_buttons">Atlama düğmeleri</string>
     <string name="skip_buttons_summary">Sonraki veya önceki videoya atlamak için düğmeleri göster.</string>
@@ -375,4 +375,11 @@
     <string name="layout">Düzen</string>
     <string name="alternative_player_layout">Alternatif oynatıcı düzeni</string>
     <string name="alternative_player_layout_summary">İlgili videoları, yorumların altında değil, üstünde bir satır olarak göster.</string>
+    <string name="navbar_order">Sıra</string>
+    <string name="audio_track">Müzik parçası</string>
+    <string name="default_audio_track">Varsayılan</string>
+    <string name="unsupported_file_format">Desteklenmeyen dosya formatı!</string>
+    <string name="auto_quality">Otomatik</string>
+    <string name="hls_instead_of_dash">HLS\'yi kullan</string>
+    <string name="hls_instead_of_dash_summary">DASH yerine HLS kullan (daha yavaş olacaktır, önerilmez)</string>
 </resources>
