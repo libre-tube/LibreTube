@@ -177,7 +177,7 @@
     <string name="category_filler_description">For avsporinger som kun er lagt til for å fylle tid, eller være morsomme, og ikke er nødvendige for å forstå videoens hovedinnhold.</string>
     <string name="category_music_offtopic_description">Kun til bruk for musikkvideoer. Det bør dekke de delene av videoen som ikke er i den offisielle miksen. Til slutt skal videoen utgjøre det som finnes på Spotify eller annen mikset versjon så nært som mulig, eller redusere snakking og andre distraksjoner.</string>
     <string name="buffering_goal_summary">Maks. antall sekunders mellomlagring av videoer.</string>
-    <string name="category_preview_description">For segmenter som viser kommende innhold i serien, men ikke gir ytterligere info. Hvis dette inkluderer klipp som kun vises her er det antagelig ikke riktig kategori.</string>
+    <string name="category_preview_description">For segmenter som viser kommende innhold i serien, men ikke gir ytterligere info. Hvis dette inkluderer klipp som kun vises her er det antagelig feil kategori.</string>
     <string name="buffering_goal">Forhåndsinnlasting</string>
     <string name="downloading">Laster ned …</string>
     <string name="player_autoplay">Spill automatisk</string>
