@@ -225,7 +225,7 @@
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
     <string name="change_playback_speed">سرعة التشغيل</string>
-    <string name="require_restart_message">يتطلب هذا التغيير إعادة تشغيل التطبيق. اضغط على \"موافق\" لإعادة التشغيل الآن.</string>
+    <string name="require_restart_message">أعد تشغيل التطبيق لاستخدام التغييرات الجديدة.</string>
     <string name="require_restart">إعادة تشغيل التطبيق مطلوبة</string>
     <string name="navLabelVisibility">رؤية الملصق</string>
     <string name="always">دائماً</string>
@@ -382,4 +382,9 @@
     <string name="hls_instead_of_dash">استخدام HLS</string>
     <string name="hls_instead_of_dash_summary">استخدم HLS بدلا من DASH (سيكون أبطأ ، غير مستحسن)</string>
     <string name="auto_quality">تلقائي</string>
+    <string name="limit_to_runtime">الحد من وقت التشغيل</string>
+    <string name="trends">المتصدرة</string>
+    <string name="featured">متميز</string>
+    <string name="trending">ما هو الشائع الآن</string>
+    <string name="open_queue_from_notification">فتح قائمة الانتظار من الإشعار</string>
 </resources>
