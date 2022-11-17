@@ -9,6 +9,7 @@ import android.widget.ImageView
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.load
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
@@ -25,17 +26,24 @@ object ImageHelper {
     fun initializeImageLoader(context: Context) {
         val maxImageCacheSize = PreferenceHelper.getString(
             PreferenceKeys.MAX_IMAGE_CACHE,
-            "128"
-        ).toInt()
-
-        val diskCache = DiskCache.Builder()
-            .directory(context.filesDir.resolve("coil"))
-            .maxSizeBytes(maxImageCacheSize * 1024 * 1024L)
-            .build()
+            ""
+        )
 
         imageLoader = ImageLoader.Builder(context)
             .callFactory(CronetHelper.callFactory)
-            .diskCache(diskCache)
+            .apply {
+                when (maxImageCacheSize) {
+                    "" -> {
+                        memoryCachePolicy(CachePolicy.DISABLED)
+                    }
+                    else -> diskCache(
+                        DiskCache.Builder()
+                            .directory(context.filesDir.resolve("coil"))
+                            .maxSizeBytes(maxImageCacheSize.toInt() * 1024 * 1024L)
+                            .build()
+                    )
+                }
+            }
             .build()
     }
 

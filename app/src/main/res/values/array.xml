@@ -399,6 +399,7 @@
         <item>128MB</item>
         <item>256MB</item>
         <item>512MB</item>
+        <item>@string/limit_to_runtime</item>
     </string-array>
 
     <string-array name="cacheSizeValues">
@@ -408,6 +409,7 @@
         <item>128</item>
         <item>256</item>
         <item>512</item>
+        <item />
     </string-array>
 
     <string-array name="loadingInterval">
