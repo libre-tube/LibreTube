@@ -1079,6 +1079,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         exoPlayer.setMediaItem(mediaItem)
     }
 
+    private fun String?.qualityToInt(): Int {
+        this ?: return 0
+        return this.toString().split("p").first().toInt()
+    }
+
     private fun getAvailableResolutions(): List<VideoResolution> {
         if (!this::streams.isInitialized) return listOf()
 
@@ -1095,12 +1100,27 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         for (vid in videoStreams) {
+            if (resolutions.any {
+                it.resolution == vid.quality.qualityToInt()
+            } || vid.url == null
+            ) {
+                continue
+            }
+
+            resolutions.add(
+                VideoResolution(
+                    name = "${vid.quality.qualityToInt()}p",
+                    resolution = vid.quality.qualityToInt()
+                )
+            )
+
+            /*
             // append quality to list if it has the preferred format (e.g. MPEG)
             val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
             if (vid.url != null && vid.mimeType == preferredMimeType) {
                 // avoid duplicated resolutions
                 if (resolutions.any {
-                    it.resolution == vid.quality.toString().split("p").first().toInt()
+                    it.resolution == vid.quality.qualityToInt()
                 }
                 ) {
                     continue
@@ -1108,19 +1128,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
                 resolutions.add(
                     VideoResolution(
-                        name = vid.quality!!,
-                        resolution = vid.quality.toString().split("p").first().toInt()
+                        name = "${vid.quality.qualityToInt()}p",
+                        resolution = vid.quality.qualityToInt()
                     )
                 )
-            } else if (vid.quality.equals("LBRY") && vid.format.equals("MP4")) {
-                resolutions.add(
-                    VideoResolution(
-                        name = "LBRY MP4",
-                        adaptiveSourceUrl = vid.url,
-                        resolution = Int.MAX_VALUE
-                    )
-                )
-            }
+                }
+            */
         }
 
         if (resolutions.isEmpty()) {
@@ -1129,7 +1142,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             )
         }
 
-        resolutions.add(0, VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
+        resolutions.add(0, VideoResolution(getString(R.string.auto_quality), null))
 
         return resolutions
     }
@@ -1168,14 +1181,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         )
     }
 
+    private fun setPlayerResolution(resolution: Int?) {
+        val params = trackSelector.buildUponParameters()
+        when (resolution) {
+            null -> params.setMaxVideoSize(Int.MAX_VALUE, Int.MAX_VALUE).setMinVideoSize(0, 0)
+            else -> params.setMaxVideoSize(Int.MAX_VALUE, resolution).setMinVideoSize(Int.MIN_VALUE, resolution)
+        }
+        trackSelector.setParameters(params)
+    }
+
     private fun setStreamSource(streams: Streams) {
         val defaultResolution = PlayerHelper.getDefaultResolution(requireContext()).replace("p", "")
-        if (defaultResolution != "") {
-            val params = trackSelector.buildUponParameters()
-                .setMaxVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
-                .setMinVideoSize(Int.MAX_VALUE, defaultResolution.toInt())
-            trackSelector.setParameters(params)
-        }
+        if (defaultResolution != "") setPlayerResolution(defaultResolution.toInt())
 
         if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
             streams.videoStreams.orEmpty().isNotEmpty()
@@ -1357,12 +1374,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             .setSimpleItems(
                 resolutions.map { it.name }
             ) { which ->
-                val resolution = resolutions[which].resolution!!
-
-                val params = trackSelector.buildUponParameters()
-                    .setMaxVideoSize(Int.MAX_VALUE, resolution)
-                    .setMinVideoSize(Int.MAX_VALUE, resolution)
-                trackSelector.setParameters(params)
+                setPlayerResolution(resolutions[which].resolution)
             }
             .show(childFragmentManager)
     }
@@ -1379,7 +1391,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         BaseBottomSheet()
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
-                val lang = audioStreams.first().audioTrackId!!.substring(0, 2)
+                val lang = audioStreams.firstOrNull()?.audioTrackId?.substring(0, 2)
                 val newParams = trackSelector.buildUponParameters()
                     .setPreferredAudioLanguage(lang)
                 trackSelector.setParameters(newParams)
