@@ -378,6 +378,7 @@
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limit to runtime</string>
     <string name="open_queue_from_notification">Open queue from notification</string>
+    <string name="trends">Trends</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
