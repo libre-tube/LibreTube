@@ -10,21 +10,18 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentTrendsBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import java.io.IOException
 
 class TrendsFragment : BaseFragment() {
     private lateinit var binding: FragmentTrendsBinding
-    private lateinit var region: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,16 +34,6 @@ class TrendsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
-
-        // get the system default country if auto region selected
-        region = if (regionPref == "sys") {
-            LocaleHelper
-                .getDetectedCountry(requireContext(), "UK")
-                .uppercase()
-        } else {
-            regionPref
-        }
 
         fetchTrending()
         binding.homeRefresh.isEnabled = true
@@ -58,7 +45,9 @@ class TrendsFragment : BaseFragment() {
     private fun fetchTrending() {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.api.getTrending(region)
+                RetrofitInstance.api.getTrending(
+                    LocaleHelper.getTrendingRegion(requireContext())
+                )
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
