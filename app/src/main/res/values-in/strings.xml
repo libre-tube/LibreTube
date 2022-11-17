@@ -382,4 +382,9 @@
     <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>
     <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH (akan lebih lambat, tidak disarankan)</string>
+    <string name="limit_to_runtime">Batasi ke runtime</string>
+    <string name="trends">Tren</string>
+    <string name="featured">Unggulan</string>
+    <string name="trending">Apa yang sedang tren</string>
+    <string name="open_queue_from_notification">Buka antrean dari notifikasi</string>
 </resources>
