@@ -34,7 +34,7 @@ object ImageHelper {
             .apply {
                 when (maxImageCacheSize) {
                     "" -> {
-                        memoryCachePolicy(CachePolicy.DISABLED)
+                        diskCachePolicy(CachePolicy.DISABLED)
                     }
                     else -> diskCache(
                         DiskCache.Builder()
