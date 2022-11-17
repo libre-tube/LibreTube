@@ -48,12 +48,16 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         binding.clear.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
 
-            val streams = PlayingQueue.getStreams().filterIndexed {
-                    position, _ ->
+            val streams = PlayingQueue.getStreams().filterIndexed { position, _ ->
                 position <= currentIndex
             }
 
             PlayingQueue.setStreams(streams)
+            adapter.notifyDataSetChanged()
+        }
+
+        binding.reverse.setOnClickListener {
+            PlayingQueue.setStreams(PlayingQueue.getStreams().reversed())
             adapter.notifyDataSetChanged()
         }
 

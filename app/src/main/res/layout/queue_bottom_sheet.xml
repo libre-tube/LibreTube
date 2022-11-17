@@ -41,9 +41,19 @@
                     android:id="@+id/shuffle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="5dp"
                     android:src="@drawable/ic_shuffle" />
+
+                <ImageView
+                    android:id="@+id/reverse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_reverse" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -54,9 +64,19 @@
                     android:src="@drawable/ic_arrow_down" />
 
                 <ImageView
+                    android:id="@+id/repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_repeat" />
+
+                <ImageView
                     android:id="@+id/clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="5dp"
                     android:src="@drawable/ic_close" />
