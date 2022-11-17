@@ -314,6 +314,8 @@ class MainActivity : BaseActivity() {
         when (intent?.getStringExtra("fragmentToOpen")) {
             "home" ->
                 navController.navigate(R.id.homeFragment)
+            "trends" ->
+                navController.navigate(R.id.trendsFragment)
             "subscriptions" ->
                 navController.navigate(R.id.subscriptionsFragment)
             "library" ->

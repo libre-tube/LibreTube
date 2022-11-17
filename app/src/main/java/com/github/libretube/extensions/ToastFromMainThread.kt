@@ -14,3 +14,13 @@ fun Context.toastFromMainThread(stringId: Int) {
         ).show()
     }
 }
+
+fun Context.toastFromMainThread(text: String) {
+    Handler(Looper.getMainLooper()).post {
+        Toast.makeText(
+            this,
+            text,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+}

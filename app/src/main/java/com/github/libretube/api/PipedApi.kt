@@ -144,7 +144,7 @@ interface PipedApi {
     ): PlaylistId
 
     @GET("user/playlists")
-    suspend fun playlists(@Header("Authorization") token: String): List<Playlists>
+    suspend fun getUserPlaylists(@Header("Authorization") token: String): List<Playlists>
 
     @POST("user/playlists/rename")
     suspend fun renamePlaylist(

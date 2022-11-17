@@ -1,30 +1,28 @@
 package com.github.libretube.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
-import com.github.libretube.extensions.TAG
-import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.models.HomeModel
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.PreferenceHelper
-import com.google.android.material.snackbar.Snackbar
-import retrofit2.HttpException
-import java.io.IOException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var region: String
+    private val viewModel: HomeModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,71 +35,65 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
 
-        // get the system default country if auto region selected
-        region = if (regionPref == "sys") {
-            LocaleHelper
-                .getDetectedCountry(requireContext(), "UK")
-                .uppercase()
-        } else {
-            regionPref
+        binding.featuredTV.setOnClickListener {
+            findNavController().navigate(R.id.subscriptionsFragment)
         }
 
-        fetchTrending()
-        binding.homeRefresh.isEnabled = true
-        binding.homeRefresh.setOnRefreshListener {
-            fetchTrending()
+        binding.trendingTV.setOnClickListener {
+            findNavController().navigate(R.id.trendsFragment)
         }
-    }
 
-    private fun fetchTrending() {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getTrending(region)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } finally {
-                binding.homeRefresh.isRefreshing = false
-            }
-            runOnUiThread {
-                binding.progressBar.visibility = View.GONE
+        binding.playlistsTV.setOnClickListener {
+            findNavController().navigate(R.id.libraryFragment)
+        }
 
-                // show a [SnackBar] if there are no trending videos available
-                if (response.isEmpty()) {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.change_region,
-                        Snackbar.LENGTH_LONG
-                    )
-                        .setAction(
-                            R.string.settings
-                        ) {
-                            startActivity(
-                                Intent(
-                                    context,
-                                    SettingsActivity::class.java
-                                )
-                            )
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.fetchHome(requireContext(), LocaleHelper.getTrendingRegion(requireContext()))
+        }
+
+        viewModel.feed.observe(viewLifecycleOwner) {
+            binding.featuredTV.visibility = View.VISIBLE
+            binding.featuredRV.visibility = View.VISIBLE
+            binding.progress.visibility = View.GONE
+            binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.featuredRV.adapter = VideosAdapter(
+                it.toMutableList(),
+                childFragmentManager,
+                forceMode = VideosAdapter.Companion.ForceMode.RELATED
+            )
+        }
+
+        viewModel.trending.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) return@observe
+            binding.trendingTV.visibility = View.VISIBLE
+            binding.trendingRV.visibility = View.VISIBLE
+            binding.progress.visibility = View.GONE
+            binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
+            binding.trendingRV.adapter = VideosAdapter(
+                it.toMutableList(),
+                childFragmentManager,
+                forceMode = VideosAdapter.Companion.ForceMode.TRENDING
+            )
+        }
+
+        viewModel.playlists.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) return@observe
+            binding.playlistsRV.visibility = View.VISIBLE
+            binding.playlistsTV.visibility = View.VISIBLE
+            binding.progress.visibility = View.GONE
+            binding.playlistsRV.layoutManager = LinearLayoutManager(context)
+            binding.playlistsRV.adapter = PlaylistsAdapter(it.toMutableList(), childFragmentManager)
+            binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
+                    RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeRemoved(positionStart, itemCount)
+                        if (itemCount == 0) {
+                            binding.playlistsRV.visibility = View.GONE
+                            binding.playlistsTV.visibility = View.GONE
                         }
-                        .show()
-                    return@runOnUiThread
-                }
-
-                binding.recview.adapter = VideosAdapter(
-                    response.toMutableList(),
-                    childFragmentManager
-                )
-
-                binding.recview.layoutManager = VideosAdapter.getLayout(requireContext())
-            }
+                    }
+                })
         }
     }
 }
