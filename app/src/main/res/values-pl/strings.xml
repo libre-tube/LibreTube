@@ -6,8 +6,8 @@
     <string name="download">Pobierz</string>
     <string name="choose_quality_dialog">Jakość</string>
     <string name="search_hint">Szukaj</string>
-    <string name="subscribe">SUBSKRYBUJ</string>
-    <string name="unsubscribe">ODSUBSKRYBUJ</string>
+    <string name="subscribe">Subskrybuj</string>
+    <string name="unsubscribe">Odsubskrybuj</string>
     <string name="share">Udostępnij</string>
     <string name="save">Zapisz</string>
     <string name="username">Nazwa użytkownika</string>
@@ -33,7 +33,7 @@
     <string name="server_error">Serwer napotkał problem. Spróbuj użyć innej instancji.</string>
     <string name="unknown_error">Błąd sieci.</string>
     <string name="error">Coś poszło nie tak.</string>
-    <string name="notgmail">To jest dla konta Piped.</string>
+    <string name="notgmail">Dotyczy konta Piped.</string>
     <string name="defres">Rozdzielczość wideo</string>
     <string name="grid">Kolumny siatki</string>
     <string name="emptyList">Tu jeszcze nic nie ma.</string>
@@ -286,7 +286,7 @@
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="open_copied">Otwórz</string>
     <string name="turnInternetOn">Proszę włączyć Wi-Fi lub dane komórkowe, aby połączyć się z Internetem.</string>
-    <string name="navLabelVisibility">Widoczność etykiet paska nawigacji</string>
+    <string name="navLabelVisibility">Widoczność etykiet</string>
     <string name="always">Zawsze</string>
     <string name="selected">Wybrana karta</string>
     <string name="never">Nigdy</string>
@@ -340,7 +340,7 @@
     <string name="select_at_least_one">Proszę wybrać co najmniej jedną pozycję</string>
     <string name="change_region">Filmy na czasie wydają się być niedostępne dla bieżącego regionu. Proszę wybrać inny w ustawieniach.</string>
     <string name="show_more">Pokaż więcej</string>
-    <string name="time_code">Kod czasowy</string>
+    <string name="time_code">Kod czasowy (sekundy)</string>
     <string name="playback_pitch">Skok</string>
     <string name="views_placeholder">wyświetleń</string>
     <string name="progressive_load_interval">Wstępne wczytywanie wideo</string>
@@ -364,11 +364,19 @@
     <string name="playlistCloned">Sklonowano playlistę</string>
     <string name="confirm_unsubscribing">Potwierdzenie odsubskrybowania</string>
     <string name="confirm_unsubscribing_summary">Pokaż okno potwierdzenia przed odsubskrybowaniem.</string>
-    <string name="confirm_unsubscribe">Odsubskrybować %1$s\?</string>
+    <string name="confirm_unsubscribe">Czy na pewno chcesz odsubskrybować %1$s\?</string>
     <string name="play_all">Odtwórz wszystko</string>
     <string name="time">Czas</string>
     <string name="start_time">Początek</string>
     <string name="end_time">Koniec</string>
     <string name="notification_time">Ograniczenie powiadomień</string>
     <string name="notification_time_summary">Ogranicz powiadomienia do zakresu czasu.</string>
+    <string name="alternative_trending_layout">Alternatywny układ głównej karty</string>
+    <string name="layout">Układ</string>
+    <string name="navbar_order">Zarządzanie</string>
+    <string name="alternative_player_layout_summary">Pokaż powiązane filmiki w wierszu nad komentarzami.</string>
+    <string name="alternative_player_layout">Inny układ powiązanych filmów</string>
+    <string name="audio_track">Ścieżka dźwiękowa</string>
+    <string name="default_audio_track">Domyślna</string>
+    <string name="unsupported_file_format">Nieobsługowany typ pliku!</string>
 </resources>
