@@ -226,7 +226,7 @@
     <string name="chapters">章节</string>
     <string name="change_playback_speed">播放速度</string>
     <string name="require_restart">需要重启应用</string>
-    <string name="require_restart_message">此更改需要重新启动应用。 现在按“确定”重新启动。</string>
+    <string name="require_restart_message">重启应用使用新更改。</string>
     <string name="navLabelVisibility">标签可见性</string>
     <string name="always">始终</string>
     <string name="selected">仅选中</string>
@@ -382,4 +382,9 @@
     <string name="hls_instead_of_dash">使用 HLS</string>
     <string name="hls_instead_of_dash_summary">使用 HLS 而不是 DASH（会更慢，不推荐）</string>
     <string name="auto_quality">自动</string>
+    <string name="limit_to_runtime">限制运行时间</string>
+    <string name="trends">热门</string>
+    <string name="featured">精选</string>
+    <string name="trending">时下热门</string>
+    <string name="open_queue_from_notification">从通知打开队列</string>
 </resources>
