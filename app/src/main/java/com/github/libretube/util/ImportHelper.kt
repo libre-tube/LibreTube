@@ -36,7 +36,12 @@ class ImportHelper(
             }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), e.toString())
-            Toast.makeText(activity, R.string.unsupported_file_format, Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                activity,
+                activity.getString(R.string.unsupported_file_format) +
+                    " (${activity.contentResolver.getType(uri)}",
+                Toast.LENGTH_SHORT
+            ).show()
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             Toast.makeText(activity, R.string.server_error, Toast.LENGTH_SHORT).show()
@@ -47,8 +52,7 @@ class ImportHelper(
      * Get a list of channel IDs from a file [Uri]
      */
     private fun getChannelsFromUri(uri: Uri): List<String> {
-        val fileType = activity.contentResolver.getType(uri)
-        return when (fileType) {
+        return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json" -> {
                 // NewPipe subscriptions format
                 val mapper = ObjectMapper()
