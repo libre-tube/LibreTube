@@ -35,7 +35,7 @@
     <string name="dlisinprogress">Another download is already in progress, please wait until it\'s finished.</string>
     <string name="downloadfailed">Download failed.</string>
     <string name="vlc">Open in VLC</string>
-    <string name="vlcerror">Couldn\'t open in VLC, It might not be installed.</string>
+    <string name="vlcerror">Could not open in VLC. It might not be installed.</string>
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
     <string name="app_theme">Theme</string>
@@ -227,7 +227,7 @@
     <string name="chapters">Chapters</string>
     <string name="change_playback_speed">Playback speed</string>
     <string name="require_restart">App restart required</string>
-    <string name="require_restart_message">This change requires the app to be restarted. Press \'Ok\' to restart now.</string>
+    <string name="require_restart_message">Restart the app to use the new changes.</string>
     <string name="navLabelVisibility">Label visibility</string>
     <string name="always">Always</string>
     <string name="selected">Selected</string>
@@ -381,7 +381,6 @@
     <string name="trends">Trends</string>
     <string name="featured">Featured</string>
     <string name="trending">What\'s trending now</string>
-
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
