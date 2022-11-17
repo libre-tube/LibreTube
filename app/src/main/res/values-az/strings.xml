@@ -2,7 +2,7 @@
 <resources>
     <string name="yes">Bəli</string>
     <string name="choose_quality_dialog">Keyfiyyət</string>
-    <string name="search_hint">Axtar</string>
+    <string name="search_hint">Axtarış</string>
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Ol</string>
     <string name="unsubscribe">Abunəlikdən çıx</string>
@@ -78,7 +78,7 @@
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
     <string name="notgmail">Bu Piped hesabı üçündür.</string>
-    <string name="defres">Video keyfiyyəti</string>
+    <string name="defres">Video görmə imkanı</string>
     <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
     <string name="deletePlaylist">Pleylisti silin</string>
@@ -120,7 +120,7 @@
     <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsinmi\?</string>
     <string name="appearance">Görünüş</string>
     <string name="app_behavior">Davranış</string>
-    <string name="downloads">Endirmələr</string>
+    <string name="downloads">Endirilənlər</string>
     <string name="video_format">Video formatı</string>
     <string name="video_format_summary">Səs və video birlikdə endirilirsə, faylların dönüşdürülməsi.</string>
     <string name="download_directory">Bura endir</string>
@@ -133,7 +133,7 @@
     <string name="advanced">Qabaqcıl</string>
     <string name="player">Oynadıcı</string>
     <string name="appearance_summary">Tətbiqi zövqünüzə uyğunlaşdırın.</string>
-    <string name="advanced_summary">Endirmələr və sıfırla</string>
+    <string name="advanced_summary">Endirilənlər və sıfırla</string>
     <string name="update_summary">Yeniləməni yoxla</string>
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
@@ -192,7 +192,7 @@
     <string name="seek_increment">Axtarış artımı</string>
     <string name="instance_frontend_url">Nümunə üçün URL</string>
     <string name="autoplay_summary">Cari videodan sonra növbəti videonu avtomatik oynat.</string>
-    <string name="pauseOnScreenOff">Avtomatik dayandır</string>
+    <string name="pauseOnScreenOff">Avtomatik dayan</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır.</string>
     <string name="clonePlaylist">Pleylisti klonla</string>
     <string name="reset">İlkin tənzimləmələri bərpa et</string>
@@ -205,7 +205,7 @@
     <string name="watch_positions">Mövqe xatırladıcı</string>
     <string name="watch_positions_summary">Son oynatma mövqeyindən davam etdir</string>
     <string name="auth_instances">Təsdiqləyici nümunəni seç</string>
-    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli nümunədən istifadə edin.</string>
+    <string name="auth_instance_summary">Təsdiqlənmiş dəvətlər üçün fərqli nümunədən istifadə et.</string>
     <string name="auth_instance">Təsdiqləyici nümunə</string>
     <string name="github">GitHub</string>
     <string name="hls">HLS</string>
@@ -316,7 +316,7 @@
     <string name="audio_video_summary">Keyfiyyət və format</string>
     <string name="new_videos_badge">Yeni videolar üçün göstərici</string>
     <string name="new_videos_badge_summary">Yeni videolar varsa, sayı ilə nişan göstər.</string>
-    <string name="delete">Endirmələrdən sil</string>
+    <string name="delete">Endirilənlərdən sil</string>
     <string name="trending_layout">Alternativ ev səhifəsi tərtibatı</string>
     <string name="renamePlaylist">Pleylistin adını dəyiş</string>
     <string name="mobile_data">Mobil data</string>
@@ -341,7 +341,7 @@
     <string name="change_region">Trend\'in cari region üçün əlçatan olmadığı görünür.Lütfən, tənzimləmələrdə başqasını seç.</string>
     <string name="limit_hls">HLS\'ni 1080p ilə məhdudlaşdır</string>
     <string name="default_load_interval">Defolt</string>
-    <string name="progressive_load_interval">Qabaqcıl yükləmə intervalı ölçüsü</string>
+    <string name="progressive_load_interval">Qabaqcıl, yükləmə intervalı ölçüsü</string>
     <string name="progressive_load_interval_summary">Daha aşağı dəyər ilkin video yükləməni sürətləndirə bilər.</string>
     <string name="views_placeholder">baxış</string>
     <string name="playback_pitch">Səs ucalığı</string>
@@ -382,4 +382,5 @@
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmir)</string>
+    <string name="limit_to_runtime">İş vaxtı məhdudiyyət</string>
 </resources>

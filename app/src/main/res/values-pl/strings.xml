@@ -212,7 +212,7 @@
     <string name="skip_buttons_summary">Pokaż przyciski umożliwiające przejście do następnego lub poprzedniego filmu.</string>
     <string name="watch_positions">Zapamiętane pozycje</string>
     <string name="watch_positions_summary">Kontynuuj odtwarzanie od ostatniej pozycji</string>
-    <string name="hls">Auto</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="landscape">Pozioma</string>
     <string name="add_to_queue">Dodaj do kolejki</string>
@@ -379,4 +379,8 @@
     <string name="audio_track">Ścieżka dźwiękowa</string>
     <string name="default_audio_track">Domyślna</string>
     <string name="unsupported_file_format">Nieobsługowany typ pliku!</string>
+    <string name="hls_instead_of_dash">HTTP Live Streaming</string>
+    <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH (będzie wolniej, nie zalecane)</string>
+    <string name="auto_quality">Automatyczna</string>
+    <string name="limit_to_runtime">Ogranicz do czasu trwania</string>
 </resources>
