@@ -377,6 +377,7 @@
     <string name="hls_instead_of_dash_summary">Use HLS instead of DASH (will be slower, not recommended)</string>
     <string name="auto_quality">Auto</string>
     <string name="limit_to_runtime">Limit to runtime</string>
+    <string name="open_queue_from_notification">Open queue from notification</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

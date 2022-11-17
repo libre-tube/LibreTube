@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.obj.BottomSheetItem
@@ -46,11 +45,6 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
             dialog?.dismiss()
         }
     }
-
-    fun show(fragmentManager: FragmentManager) = show(
-        fragmentManager,
-        null
-    )
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)

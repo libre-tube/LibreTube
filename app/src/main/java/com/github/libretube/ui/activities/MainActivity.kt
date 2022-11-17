@@ -319,6 +319,10 @@ class MainActivity : BaseActivity() {
             "library" ->
                 navController.navigate(R.id.libraryFragment)
         }
+        if (intent?.getBooleanExtra(IntentData.openQueueOnce, false) == true) {
+            PlayingQueueSheet()
+                .show(supportFragmentManager)
+        }
     }
 
     private fun loadVideo(videoId: String, timeStamp: Long?) {

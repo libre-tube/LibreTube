@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,4 +28,9 @@ open class ExpandedBottomSheet : BottomSheetDialogFragment() {
 
         return dialog
     }
+
+    fun show(fragmentManager: FragmentManager) = show(
+        fragmentManager,
+        null
+    )
 }
