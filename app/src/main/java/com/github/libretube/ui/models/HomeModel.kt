@@ -7,6 +7,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,15 +22,26 @@ class HomeModel : ViewModel() {
         val token = PreferenceHelper.getToken()
         val appContext = context.applicationContext
         runOrError(appContext) {
-            trending.postValue(RetrofitInstance.api.getTrending(trendingRegion))
+            if (trending.value.isNullOrEmpty()) {
+                trending.postValue(
+                    RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(20)
+                )
+            }
         }
 
         runOrError(appContext) {
-            feed.postValue(RetrofitInstance.authApi.getFeed(token))
+            if (feed.value.isNullOrEmpty()) {
+                feed.postValue(
+                    RetrofitInstance.authApi.getFeed(token).withMaxSize(20)
+                )
+            }
         }
 
         runOrError(appContext) {
-            playlists.postValue(RetrofitInstance.authApi.getUserPlaylists(token))
+            if (token == "" || !playlists.value.isNullOrEmpty()) return@runOrError
+            playlists.postValue(
+                RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
+            )
         }
     }
 
