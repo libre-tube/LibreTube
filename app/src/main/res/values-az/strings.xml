@@ -69,7 +69,7 @@
     <string name="dlisinprogress">Başqa endirmə artıq davam edir, zəhmət olmasa, bitənə qədər gözlə.</string>
     <string name="downloadfailed">Endirmə alınmadı.</string>
     <string name="vlc">VLC\'də Aç</string>
-    <string name="vlcerror">VLC\'də açmaq mümkün olmadı, O, quraşdırılmamış ola bilər.</string>
+    <string name="vlcerror">VLC-də açmaq mümkün olmadı. O, quraşdırılmamış ola bilər.</string>
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Mövzu</string>
@@ -195,7 +195,7 @@
     <string name="pauseOnScreenOff">Avtomatik dayan</string>
     <string name="pauseOnScreenOff_summary">Ekran söndürüldükdə oynatmanı dayandır.</string>
     <string name="clonePlaylist">Pleylisti klonla</string>
-    <string name="reset">İlkin tənzimləmələri bərpa et</string>
+    <string name="reset">İlkin tənzimləmələri qaytar</string>
     <string name="reset_message">Bütün tənzimləmələr sıfırlansın və sistemdən çıxılsın\?</string>
     <string name="account">Hesab</string>
     <string name="restore">Bərpa Et</string>
@@ -225,7 +225,7 @@
     <string name="turnInternetOn">Lütfən, İnternetə qoşulmaq üçün Wi-Fi və ya mobil datanı yandır.</string>
     <string name="chapters">Bölmələr</string>
     <string name="change_playback_speed">Oynatma sürəti</string>
-    <string name="require_restart_message">Bu dəyişiklik tətbiqin yenidən başladılmasını tələb edir. İndi yenidən başlatmaq üçün \"Oldu\" düyməsinə bas.</string>
+    <string name="require_restart_message">Yeni dəyişikliklərdən faydalanmaq üçün tətbiqi yenidən başlat.</string>
     <string name="require_restart">Tətbiqi yenidən başlatmaq tələb olunur</string>
     <string name="data_saver_mode_summary">Miniatürləri və digər şəkilləri ötür.</string>
     <string name="history_summary">Baxış və axtarış tarixçəsi</string>
@@ -384,4 +384,7 @@
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmir)</string>
     <string name="limit_to_runtime">İş vaxtı məhdudiyyət</string>
     <string name="open_queue_from_notification">Bildirişdən növbəni aç</string>
+    <string name="trends">Trendlər</string>
+    <string name="featured">Seçilmiş</string>
+    <string name="trending">İndi nə trenddədir</string>
 </resources>
