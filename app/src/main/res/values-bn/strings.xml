@@ -211,7 +211,7 @@
     <string name="discord">ডিস্কর্ড</string>
     <string name="watch_history">দেখার ইতিহাস</string>
     <string name="watch_positions">পজিশন মনে রাখুন</string>
-    <string name="hls">স্বয়ংক্রিয়</string>
+    <string name="hls">HLS</string>
     <string name="auto_rotation">স্বয়ংক্রিয়-রোটেশন</string>
     <string name="landscape">ল্যান্ডস্কেপ</string>
     <string name="portrait">পোর্টেইট</string>
@@ -224,7 +224,7 @@
     <string name="matrix">ম্যাট্রিক্স</string>
     <string name="change_playback_speed">প্লে-ব্যাকের গতি</string>
     <string name="selected">বাছাইকৃত</string>
-    <string name="require_restart_message">এই চেঞ্জটি কার্যকর করতে হলে রিস্টার্ট হওয়া প্রয়োজন। অ্যাপ রিস্টার্ট করতে \'আচ্ছা\'তে চাপুন।</string>
+    <string name="require_restart_message">এই পরিবর্তনটি কার্যকর করতে হলে রিস্টার্ট করুন।</string>
     <string name="chapters">চ্যাপ্টার</string>
     <string name="require_restart">অ্যাপের রিস্টার্ট প্রয়োজন</string>
     <string name="auth_instance">অথেন্টিকেশন ইন্সটেন্স</string>
@@ -283,7 +283,7 @@
     <string name="backup_restore">ব্যাকআপ এবং পুনরুদ্ধার</string>
     <string name="backup">ব্যাকআপ</string>
     <string name="picture_in_picture">ছবির মধ্যে ছবি</string>
-    <string name="navLabelVisibility">নেভবার লেবেল ভিজিবিলিটি</string>
+    <string name="navLabelVisibility">লেবেল ভিজিবিলিটি</string>
     <string name="autoRotatePlayer_summary">ডিভাইস ঘোরালে ফুলস্ক্রিণ প্লেব্যাক।</string>
     <string name="watch_history_summary">দেখা ভিডিওগুলোতে ডিভাইসে ট্র্যাক রাখুন</string>
     <string name="history_summary">দেখা এবং সার্চ হিস্ট্রি</string>
@@ -353,7 +353,7 @@
     <string name="recentlyUpdated">সম্প্রতি আপডেট করা হয়েছে</string>
     <string name="recentlyUpdatedReversed">সম্প্রতি আপডেট করা হয়েছে (উল্টো)</string>
     <string name="show_more">আরো দেখান</string>
-    <string name="time_code">সময় কোড</string>
+    <string name="time_code">সময় কোড (সেকেন্ড)</string>
     <string name="playing_queue">কিউ</string>
     <string name="queue">কিউ</string>
     <string name="sb_markers">মার্কারস</string>
@@ -366,4 +366,23 @@
     <string name="play_all">সবগুলোতে চালান</string>
     <string name="playlistCloned">প্লেলিস্ট ক্লোন করা হয়েছে</string>
     <string name="confirm_unsubscribing_summary">আনসাবস্ক্রাইব করার আগে একটি ডায়লগ দেখান।</string>
+    <string name="time">সময়</string>
+    <string name="start_time">শুরুর সময়</string>
+    <string name="end_time">শেষ সময়</string>
+    <string name="notification_time">নোটিফিকেশনের সময়</string>
+    <string name="notification_time_summary">নোটিফিকেশনের জন্য অনুমোদিত সময়।</string>
+    <string name="alternative_trending_layout">বিকল্প জনপ্রিয় লেয়াউট</string>
+    <string name="layout">লেয়াউট</string>
+    <string name="alternative_player_layout">বিকল্প প্লেয়ার লেয়াউট</string>
+    <string name="audio_track">অডিও ট্র্যাক</string>
+    <string name="default_audio_track">ডিফল্ট</string>
+    <string name="unsupported_file_format">অসমর্থিত ফাইল ফর্ম্যাট!</string>
+    <string name="hls_instead_of_dash">HLS ব্যাবহার করুন</string>
+    <string name="hls_instead_of_dash_summary">DASH এর বদলে HLS ব্যাবহার করুন (ধীরগতিসম্পন্ন হতে পারে, সুপারিশকৃত নয়)</string>
+    <string name="auto_quality">স্বয়ংক্রিয়</string>
+    <string name="limit_to_runtime">রানটাইম লিমিট</string>
+    <string name="open_queue_from_notification">নোটিফিকেশন থেকে কিউ খুলুন</string>
+    <string name="trends">জনপ্রিয়গুলো</string>
+    <string name="featured">ফিচার্ড</string>
+    <string name="trending">এখন যা যা জনপ্রিয়</string>
 </resources>
