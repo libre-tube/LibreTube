@@ -194,7 +194,7 @@
     <string name="player_summary">Настройки и поведение плеера</string>
     <string name="seek_increment">Шаг перемотки</string>
     <string name="pauseOnScreenOff">Автопауза</string>
-    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение, когда экран выключен</string>
+    <string name="pauseOnScreenOff_summary">Останавливать воспроизведение, когда экран выключен.</string>
     <string name="autoplay_summary">Автоматически воспроизводить следующее видео после текущего.</string>
     <string name="clonePlaylist">Клонировать плейлист</string>
     <string name="deleteAccount">Удалить аккаунт</string>
@@ -205,7 +205,7 @@
     <string name="watch_positions">Запоминать позицию</string>
     <string name="auth_instance">Сервер аутентификации</string>
     <string name="auth_instance_summary">Использовать другой сервер для аутентификации аккаунта.</string>
-    <string name="hls">Авто</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="audio_video">Аудио и видео</string>
     <string name="fullscreen_orientation">Положение в полном экране</string>
@@ -373,7 +373,13 @@
     <string name="notification_time_summary">Временной интервал, в течение которого разрешено показывать уведомления.</string>
     <string name="navbar_order">Порядок навигации</string>
     <string name="alternative_trending_layout">Альтернативный трендовый макет</string>
-    <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними</string>
+    <string name="alternative_player_layout_summary">Показать связанные видео в виде ряда над комментариями, а не под ними.</string>
     <string name="layout">Макет</string>
     <string name="alternative_player_layout">Альтернативный макет плеера</string>
+    <string name="audio_track">Аудио трек</string>
+    <string name="default_audio_track">По умолчанию</string>
+    <string name="unsupported_file_format">Неподдерживаемый формат файла!</string>
+    <string name="hls_instead_of_dash">Использовать HLS</string>
+    <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
+    <string name="auto_quality">Авто</string>
 </resources>
