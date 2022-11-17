@@ -24,13 +24,13 @@ class BottomSheetAdapter(
     override fun onBindViewHolder(holder: BottomSheetViewHolder, position: Int) {
         val item = items[position]
         holder.binding.apply {
+            val current = item.getCurrent()
             title.text =
-                if (item.currentValue != null) "${item.title} (${item.currentValue})" else item.title
+                if (current != null) "${item.title} ($current)" else item.title
             if (item.drawable != null) {
                 drawable.setImageResource(item.drawable)
             } else {
-                drawable.visibility =
-                    View.GONE
+                drawable.visibility = View.GONE
             }
 
             root.setOnClickListener {

@@ -142,10 +142,12 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.player_autoplay),
                     R.drawable.ic_play,
-                    if (autoplayEnabled) {
-                        context.getString(R.string.enabled)
-                    } else {
-                        context.getString(R.string.disabled)
+                    {
+                        if (autoplayEnabled) {
+                            context.getString(R.string.enabled)
+                        } else {
+                            context.getString(R.string.disabled)
+                        }
                     }
                 ) {
                     onAutoplayClicked()
@@ -153,10 +155,12 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.repeat_mode),
                     R.drawable.ic_repeat,
-                    if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
-                        context.getString(R.string.repeat_mode_none)
-                    } else {
-                        context.getString(R.string.repeat_mode_current)
+                    {
+                        if (player?.repeatMode == RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE) {
+                            context.getString(R.string.repeat_mode_none)
+                        } else {
+                            context.getString(R.string.repeat_mode_current)
+                        }
                     }
                 ) {
                     onRepeatModeClicked()
@@ -164,10 +168,12 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.player_resize_mode),
                     R.drawable.ic_aspect_ratio,
-                    when (resizeMode) {
-                        AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
-                        AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
-                        else -> context.getString(R.string.resize_mode_zoom)
+                    {
+                        when (resizeMode) {
+                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
+                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                            else -> context.getString(R.string.resize_mode_zoom)
+                        }
                     }
                 ) {
                     onResizeModeClicked()
@@ -175,11 +181,13 @@ internal class CustomExoPlayerView(
                 BottomSheetItem(
                     context.getString(R.string.playback_speed),
                     R.drawable.ic_speed,
-                    "${
-                    player?.playbackParameters?.speed
-                        .toString()
-                        .replace(".0", "")
-                    }x"
+                    {
+                        "${
+                        player?.playbackParameters?.speed
+                            .toString()
+                            .replace(".0", "")
+                        }x"
+                    }
                 ) {
                     onPlaybackSpeedClicked()
                 }
@@ -190,7 +198,7 @@ internal class CustomExoPlayerView(
                     BottomSheetItem(
                         context.getString(R.string.quality),
                         R.drawable.ic_hd,
-                        "${player?.videoSize?.height}p"
+                        { "${player?.videoSize?.height}p" }
                     ) {
                         playerOptionsInterface?.onQualityClicked()
                     }
@@ -198,7 +206,10 @@ internal class CustomExoPlayerView(
                 items.add(
                     BottomSheetItem(
                         context.getString(R.string.audio_track),
-                        R.drawable.ic_audio
+                        R.drawable.ic_audio,
+                        {
+                            trackSelector?.parameters?.preferredAudioLanguages?.firstOrNull()
+                        }
                     ) {
                         playerOptionsInterface?.onAudioStreamClicked()
                     }
@@ -207,10 +218,12 @@ internal class CustomExoPlayerView(
                     BottomSheetItem(
                         context.getString(R.string.captions),
                         R.drawable.ic_caption,
-                        if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
-                            trackSelector!!.parameters.preferredTextLanguages[0]
-                        } else {
-                            context.getString(R.string.none)
+                        {
+                            if (trackSelector != null && trackSelector!!.parameters.preferredTextLanguages.isNotEmpty()) {
+                                trackSelector!!.parameters.preferredTextLanguages[0]
+                            } else {
+                                context.getString(R.string.none)
+                            }
                         }
                     ) {
                         playerOptionsInterface?.onCaptionsClicked()
