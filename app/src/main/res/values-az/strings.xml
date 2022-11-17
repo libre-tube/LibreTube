@@ -2,7 +2,7 @@
 <resources>
     <string name="yes">Bəli</string>
     <string name="choose_quality_dialog">Keyfiyyət</string>
-    <string name="search_hint">Axtar</string>
+    <string name="search_hint">Axtarış</string>
     <string name="videos">Videolar</string>
     <string name="subscribe">Abunə Ol</string>
     <string name="unsubscribe">Abunəlikdən çıx</string>
@@ -78,7 +78,7 @@
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
     <string name="notgmail">Bu Piped hesabı üçündür.</string>
-    <string name="defres">Video keyfiyyəti</string>
+    <string name="defres">Video görmə imkanı</string>
     <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
     <string name="deletePlaylist">Pleylisti silin</string>
@@ -382,4 +382,5 @@
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmir)</string>
+    <string name="limit_to_runtime">İş vaxtı məhdudiyyət</string>
 </resources>
