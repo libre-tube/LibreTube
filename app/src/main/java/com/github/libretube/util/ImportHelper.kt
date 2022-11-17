@@ -47,7 +47,8 @@ class ImportHelper(
      * Get a list of channel IDs from a file [Uri]
      */
     private fun getChannelsFromUri(uri: Uri): List<String> {
-        return when (activity.contentResolver.getType(uri)) {
+        val fileType = activity.contentResolver.getType(uri)
+        return when (fileType) {
             "application/json" -> {
                 // NewPipe subscriptions format
                 val mapper = ObjectMapper()
@@ -70,7 +71,7 @@ class ImportHelper(
                     }
                 }.orEmpty()
             }
-            else -> throw IllegalArgumentException("Unsupported file type")
+            else -> throw IllegalArgumentException("Unsupported file type: $fileType")
         }
     }
 
