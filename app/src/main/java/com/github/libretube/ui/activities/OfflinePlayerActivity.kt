@@ -68,7 +68,6 @@ class OfflinePlayerActivity : BaseActivity() {
         }
 
         binding.player.initialize(
-            supportFragmentManager,
             null,
             binding.doubleTapOverlay.binding,
             null

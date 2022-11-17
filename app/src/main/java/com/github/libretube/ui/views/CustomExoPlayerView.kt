@@ -8,13 +8,13 @@ import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import androidx.fragment.app.FragmentManager
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.extensions.toDp
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.DoubleTapInterface
 import com.github.libretube.ui.interfaces.DoubleTapListener
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
@@ -41,7 +41,6 @@ internal class CustomExoPlayerView(
      */
     private var doubleTapListener: DoubleTapInterface? = null
     private var playerOptionsInterface: OnlinePlayerOptions? = null
-    private lateinit var childFragmentManager: FragmentManager
     private var trackSelector: TrackSelector? = null
 
     private val runnableHandler = Handler(Looper.getMainLooper())
@@ -58,6 +57,9 @@ internal class CustomExoPlayerView(
 
     private var resizeModePref = PlayerHelper.resizeModePref
 
+    private val supportFragmentManager
+        get() = (context as BaseActivity).supportFragmentManager
+
     private fun toggleController() {
         if (isControllerFullyVisible) hideController() else showController()
     }
@@ -73,12 +75,10 @@ internal class CustomExoPlayerView(
     }
 
     fun initialize(
-        childFragmentManager: FragmentManager,
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         trackSelector: TrackSelector?
     ) {
-        this.childFragmentManager = childFragmentManager
         this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
@@ -219,7 +219,7 @@ internal class CustomExoPlayerView(
             }
 
             val bottomSheetFragment = BaseBottomSheet().setItems(items, null)
-            bottomSheetFragment.show(childFragmentManager, null)
+            bottomSheetFragment.show(supportFragmentManager, null)
         }
     }
 
@@ -332,11 +332,11 @@ internal class CustomExoPlayerView(
                     1 -> autoplayEnabled = false
                 }
             }
-            .show(childFragmentManager)
+            .show(supportFragmentManager)
     }
 
     override fun onPlaybackSpeedClicked() {
-        player?.let { PlaybackSpeedSheet(it).show(childFragmentManager) }
+        player?.let { PlaybackSpeedSheet(it).show(supportFragmentManager) }
     }
 
     override fun onResizeModeClicked() {
@@ -354,7 +354,7 @@ internal class CustomExoPlayerView(
             .setSimpleItems(aspectRatioModeNames) { index ->
                 resizeMode = aspectRatioModes[index]
             }
-            .show(childFragmentManager)
+            .show(supportFragmentManager)
     }
 
     override fun onRepeatModeClicked() {
@@ -373,7 +373,7 @@ internal class CustomExoPlayerView(
             .setSimpleItems(repeatModeNames) { index ->
                 player?.repeatMode = repeatModes[index]
             }
-            .show(childFragmentManager)
+            .show(supportFragmentManager)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
