@@ -10,6 +10,7 @@
         android:layout_gravity="center" />
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

@@ -1,28 +1,31 @@
 package com.github.libretube.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.ui.models.HomeModel
+import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.LocaleHelper
+import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,45 +52,66 @@ class HomeFragment : BaseFragment() {
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.fetchHome(requireContext(), LocaleHelper.getTrendingRegion(requireContext()))
+            fetchHome(requireContext(), LocaleHelper.getTrendingRegion(requireContext()))
+        }
+    }
+
+    private suspend fun fetchHome(context: Context, trendingRegion: String) {
+        val token = PreferenceHelper.getToken()
+        val appContext = context.applicationContext
+        runOrError(appContext) {
+            val feed = SubscriptionHelper.getFeed().withMaxSize(20)
+            runOnUiThread {
+                makeVisible(binding.featuredRV, binding.featuredTV)
+                binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.featuredRV.adapter = VideosAdapter(
+                    feed.toMutableList(),
+                    childFragmentManager,
+                    forceMode = VideosAdapter.Companion.ForceMode.RELATED
+                )
+            }
         }
 
-        viewModel.feed.observe(viewLifecycleOwner) {
-            makeVisible(binding.featuredRV, binding.featuredTV)
-            binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.featuredRV.adapter = VideosAdapter(
-                it.toMutableList(),
-                childFragmentManager,
-                forceMode = VideosAdapter.Companion.ForceMode.RELATED
-            )
+        runOrError(appContext) {
+            val trending = RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
+            runOnUiThread {
+                makeVisible(binding.trendingRV, binding.trendingTV)
+                binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
+                binding.trendingRV.adapter = VideosAdapter(
+                    trending.toMutableList(),
+                    childFragmentManager,
+                    forceMode = VideosAdapter.Companion.ForceMode.TRENDING
+                )
+            }
         }
 
-        viewModel.trending.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) return@observe
-            makeVisible(binding.trendingRV, binding.trendingTV)
-            binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
-            binding.trendingRV.adapter = VideosAdapter(
-                it.toMutableList(),
-                childFragmentManager,
-                forceMode = VideosAdapter.Companion.ForceMode.TRENDING
-            )
-        }
-
-        viewModel.playlists.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) return@observe
-            makeVisible(binding.playlistsRV, binding.playlistsTV)
-            binding.playlistsRV.layoutManager = LinearLayoutManager(context)
-            binding.playlistsRV.adapter = PlaylistsAdapter(it.toMutableList(), childFragmentManager)
-            binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
-                    RecyclerView.AdapterDataObserver() {
-                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                        super.onItemRangeRemoved(positionStart, itemCount)
-                        if (itemCount == 0) {
-                            binding.playlistsRV.visibility = View.GONE
-                            binding.playlistsTV.visibility = View.GONE
+        runOrError(appContext) {
+            val playlists = RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
+            runOnUiThread {
+                makeVisible(binding.playlistsRV, binding.playlistsTV)
+                binding.playlistsRV.layoutManager = LinearLayoutManager(context)
+                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), childFragmentManager)
+                binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                            super.onItemRangeRemoved(positionStart, itemCount)
+                            if (itemCount == 0) {
+                                binding.playlistsRV.visibility = View.GONE
+                                binding.playlistsTV.visibility = View.GONE
+                            }
                         }
-                    }
-                })
+                    })
+            }
+        }
+    }
+
+    private fun runOrError(context: Context, action: suspend () -> Unit) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                action.invoke()
+            } catch (e: Exception) {
+                e.localizedMessage?.let { context.toastFromMainThread(it) }
+            }
         }
     }
 
