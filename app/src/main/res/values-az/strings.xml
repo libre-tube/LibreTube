@@ -387,4 +387,6 @@
     <string name="trends">Trendlər</string>
     <string name="featured">Seçilmiş</string>
     <string name="trending">İndi nə trenddədir</string>
+    <string name="bookmarks">Əlfəcinlər</string>
+    <string name="bookmark">Əlfəcin</string>
 </resources>
