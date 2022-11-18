@@ -4,25 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.ui.models.HomeModel
+import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.LocaleHelper
+import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,52 +50,85 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.libraryFragment)
         }
 
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = true
+            lifecycleScope.launch(Dispatchers.IO) {
+                fetchHome(LocaleHelper.getTrendingRegion(requireContext()))
+            }
+        }
+
         lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.fetchHome(requireContext(), LocaleHelper.getTrendingRegion(requireContext()))
+            fetchHome(LocaleHelper.getTrendingRegion(requireContext()))
+        }
+    }
+
+    private suspend fun fetchHome(trendingRegion: String) {
+        val token = PreferenceHelper.getToken()
+        runOrError {
+            val feed = SubscriptionHelper.getFeed().withMaxSize(20)
+            if (feed.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.featuredRV, binding.featuredTV)
+                binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.featuredRV.adapter = VideosAdapter(
+                    feed.toMutableList(),
+                    childFragmentManager,
+                    forceMode = VideosAdapter.Companion.ForceMode.HOME
+                )
+            }
         }
 
-        viewModel.feed.observe(viewLifecycleOwner) {
-            binding.featuredTV.visibility = View.VISIBLE
-            binding.featuredRV.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
-            binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.featuredRV.adapter = VideosAdapter(
-                it.toMutableList(),
-                childFragmentManager,
-                forceMode = VideosAdapter.Companion.ForceMode.RELATED
-            )
+        runOrError {
+            val trending = RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
+            if (trending.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.trendingRV, binding.trendingTV)
+                binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
+                binding.trendingRV.adapter = VideosAdapter(
+                    trending.toMutableList(),
+                    childFragmentManager,
+                    forceMode = VideosAdapter.Companion.ForceMode.TRENDING
+                )
+            }
         }
 
-        viewModel.trending.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) return@observe
-            binding.trendingTV.visibility = View.VISIBLE
-            binding.trendingRV.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
-            binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
-            binding.trendingRV.adapter = VideosAdapter(
-                it.toMutableList(),
-                childFragmentManager,
-                forceMode = VideosAdapter.Companion.ForceMode.TRENDING
-            )
-        }
-
-        viewModel.playlists.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) return@observe
-            binding.playlistsRV.visibility = View.VISIBLE
-            binding.playlistsTV.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
-            binding.playlistsRV.layoutManager = LinearLayoutManager(context)
-            binding.playlistsRV.adapter = PlaylistsAdapter(it.toMutableList(), childFragmentManager)
-            binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
-                    RecyclerView.AdapterDataObserver() {
-                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                        super.onItemRangeRemoved(positionStart, itemCount)
-                        if (itemCount == 0) {
-                            binding.playlistsRV.visibility = View.GONE
-                            binding.playlistsTV.visibility = View.GONE
+        runOrError {
+            val playlists = RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
+            if (playlists.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.playlistsRV, binding.playlistsTV)
+                binding.playlistsRV.layoutManager = LinearLayoutManager(context)
+                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), childFragmentManager)
+                binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                            super.onItemRangeRemoved(positionStart, itemCount)
+                            if (itemCount == 0) {
+                                binding.playlistsRV.visibility = View.GONE
+                                binding.playlistsTV.visibility = View.GONE
+                            }
                         }
-                    }
-                })
+                    })
+            }
         }
+    }
+
+    private fun runOrError(action: suspend () -> Unit) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                action.invoke()
+            } catch (e: Exception) {
+                e.localizedMessage?.let { context?.toastFromMainThread(it) }
+            }
+        }
+    }
+
+    private fun makeVisible(vararg views: View) {
+        views.forEach {
+            it.visibility = View.VISIBLE
+        }
+        binding.progress.visibility = View.GONE
+        binding.scroll.visibility = View.VISIBLE
+        binding.refresh.isRefreshing = false
     }
 }

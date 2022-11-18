@@ -10,7 +10,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
@@ -82,16 +81,9 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private fun checkForNewStreams(): Boolean {
         var success = true
 
-        val token = PreferenceHelper.getToken()
         runBlocking {
             val task = async {
-                if (token != "") {
-                    RetrofitInstance.authApi.getFeed(token)
-                } else {
-                    RetrofitInstance.authApi.getUnauthenticatedFeed(
-                        SubscriptionHelper.getFormattedLocalSubscriptions()
-                    )
-                }
+                SubscriptionHelper.getFeed()
             }
             // fetch the users feed
             val videoFeed = try {
