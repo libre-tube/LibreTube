@@ -51,6 +51,7 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
@@ -519,13 +520,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
         if (PlayerHelper.watchPositionsEnabled && exoPlayer.currentPosition != exoPlayer.duration) {
-            DatabaseHelper.saveWatchPosition(
-                videoId!!,
-                exoPlayer.currentPosition
-            )
+            query {
+                Database.watchPositionDao().insertAll(WatchPosition(videoId!!, exoPlayer.currentPosition))
+            }
         } else if (PlayerHelper.watchPositionsEnabled) {
             // delete watch position if video has ended
-            DatabaseHelper.removeWatchPosition(videoId!!)
+            Database.watchPositionDao().deleteById(videoId!!)
         }
     }
 
@@ -846,10 +846,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 // save the watch position when paused
                 if (playbackState == PlaybackState.STATE_PAUSED) {
                     query {
-                        DatabaseHelper.saveWatchPosition(
-                            videoId!!,
-                            exoPlayer.currentPosition
-                        )
+                        Database.watchPositionDao().insertAll(WatchPosition(videoId!!, exoPlayer.currentPosition))
                     }
                 }
 

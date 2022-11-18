@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.WatchHistoryRowBinding
-import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
@@ -21,7 +21,7 @@ class WatchHistoryAdapter(
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
     fun removeFromWatchHistory(position: Int) {
-        DatabaseHelper.removeFromWatchHistory(position)
+        DatabaseHolder.Database.watchHistoryDao().delete(watchHistory[position])
         watchHistory.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, itemCount)
