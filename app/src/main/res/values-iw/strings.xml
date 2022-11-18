@@ -226,7 +226,7 @@
     <string name="chapters">פרקים</string>
     <string name="change_playback_speed">מהירות נגינה</string>
     <string name="require_restart">נדרשת הפעלה מחדש של היישומון</string>
-    <string name="require_restart_message">שינוי זה דורש את הפעלת היישום מחדש. נא ללחוץ על ‚אישור’ כדי להפעיל אותו מחדש כעת.</string>
+    <string name="require_restart_message">הפעלת היישום מחדש מאפשרת שימוש בשינויים החדשים.</string>
     <string name="always">תמיד</string>
     <string name="selected">נבחר</string>
     <string name="never">לעולם לא</string>
@@ -382,4 +382,9 @@
     <string name="auto_quality">אוטומטי</string>
     <string name="hls_instead_of_dash">להשתמש בתזרים</string>
     <string name="hls_instead_of_dash_summary">להשתמש בתזרים (HLS) במקום ב־DASH (אטי יותר, לא מומלץ)</string>
+    <string name="limit_to_runtime">הגבלה לזמן הריצה</string>
+    <string name="open_queue_from_notification">פתיחת תור מההתראות</string>
+    <string name="trends">מגמות</string>
+    <string name="featured">מובילים</string>
+    <string name="trending">מה מוביל כרגע</string>
 </resources>

@@ -24,7 +24,7 @@
     <string name="subscribeIsEmpty">Pirmiausia užsiprenumeruokite kuriuos nors kanalus.</string>
     <string name="login_first">Prisijunkite ir bandykite dar kartą.</string>
     <string name="error">Kažkas nutiko ne taip.</string>
-    <string name="vlcerror">Nepavyko atidaryti naudojant VLC, programėlė gali būti neįdiegta.</string>
+    <string name="vlcerror">Nepavyko atidaryti naudojant VLC. Ji gali būti neįdiegta.</string>
     <string name="notgmail">Tai skirta Piped paskyrai.</string>
     <string name="defres">Vaizdo įrašų raiška</string>
     <string name="grid">Tinklelio stulpeliai</string>
@@ -122,7 +122,7 @@
     <string name="turnInternetOn">Norėdami prisijungti prie interneto, įjunkite Wi-Fi arba mobiliuosius duomenis.</string>
     <string name="chapters">Skirsniai</string>
     <string name="require_restart">Būtina iš naujo paleisti programėlę</string>
-    <string name="require_restart_message">Norint atlikti šį pakeitimą, programėlė turi būti paleista iš naujo. Paspauskite „Gerai“, kad paleistumėte iš naujo dabar.</string>
+    <string name="require_restart_message">Iš naujo paleiskite programėlę, kad galėtumėte naudoti naujus pakeitimus.</string>
     <string name="navLabelVisibility">Etiketės matomumas</string>
     <string name="open">Atidaryti…</string>
     <string name="never">Niekada</string>
@@ -382,4 +382,9 @@
     <string name="auto_quality">Automatinė</string>
     <string name="hls_instead_of_dash">Naudoti HLS</string>
     <string name="hls_instead_of_dash_summary">Vietoj DASH naudoti HLS (veiks lėčiau, nerekomenduojama)</string>
+    <string name="limit_to_runtime">Veikimo laiko apribojimas</string>
+    <string name="trends">Tendencijos</string>
+    <string name="featured">Siūloma</string>
+    <string name="trending">Dabartinės tendencijos</string>
+    <string name="open_queue_from_notification">Atidaryti grojimo eilę iš pranešimo</string>
 </resources>

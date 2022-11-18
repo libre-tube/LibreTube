@@ -45,7 +45,7 @@
     <string name="dlcomplete">Завантаження завершене.</string>
     <string name="dlisinprogress">Наразі триває завантаження, зачекайте, доки воно завершиться.</string>
     <string name="vlc">Відкрити у VLC</string>
-    <string name="vlcerror">Не вдалося відкрити у VLC, можливо, його не встановлено.</string>
+    <string name="vlcerror">Не вдалося відкрити у VLC. Можливо, його не встановлено.</string>
     <string name="import_from_yt">Імпорт підписок</string>
     <string name="import_from_yt_summary">З YouTube або NewPipe</string>
     <string name="app_theme">Тема</string>
@@ -188,7 +188,7 @@
     <string name="account">Обліковий запис</string>
     <string name="restore">Відновити</string>
     <string name="change_playback_speed">Швидкість відтворення</string>
-    <string name="require_restart_message">Ця зміна вимагає перезапуску застосунку. Натисніть «ГАРАЗД», щоб перезапустити зараз.</string>
+    <string name="require_restart_message">Перезапустіть застосунок для застосування змін.</string>
     <string name="player_summary">Налаштування і поведінка програвача</string>
     <string name="pauseOnScreenOff">Автопауза</string>
     <string name="pauseOnScreenOff_summary">Призупиняти відтворення при вимкненні екрану.</string>
@@ -382,4 +382,9 @@
     <string name="hls_instead_of_dash">Використовувати HLS</string>
     <string name="hls_instead_of_dash_summary">Використовувати HLS замість DASH (працюватиме повільніше, не рекомендується)</string>
     <string name="auto_quality">Авто</string>
+    <string name="limit_to_runtime">Обмеження часом роботи</string>
+    <string name="open_queue_from_notification">Відкрити чергу зі сповіщення</string>
+    <string name="featured">Популярні</string>
+    <string name="trending">Що зараз у тренді</string>
+    <string name="trends">Тренди</string>
 </resources>

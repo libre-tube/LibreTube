@@ -33,7 +33,7 @@
     <string name="dlcomplete">Sanchay ପ୍ରକ୍ରିୟା ପୂର୍ଣ୍ଣ ହେଲା ।</string>
     <string name="downloadfailed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା ।</string>
     <string name="vlc">ଏଥିରେ ଖୋଲନ୍ତୁ</string>
-    <string name="vlcerror">ଭିଏଲ୍ସି ରେ ଖୋଲିହେବ ନାହିଁ, ଆଗେ ତାହା ଇନ୍ସ୍ତାଲ କରନ୍ତୁ ।</string>
+    <string name="vlcerror">ଭିଏଲ୍ସି ରେ ଖୋଲିହେବ ନାହିଁ। ତାହା ଇନ୍ସ୍ତାଲ ହୋଇନଥାଇପାରେ ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
     <string name="app_theme">ଥିମ୍</string>
     <string name="unknown_error">ନେଟୱର୍କ ଏରର ।</string>
@@ -304,7 +304,7 @@
     <string name="open">ଖୋଲନ୍ତୁ…</string>
     <string name="legacy_subscriptions">ପୁରୁଣା ସଦସ୍ୟତା ଦୃଶ୍ୟ</string>
     <string name="chapters">ଅଧ୍ୟାୟ ଗୁଡ଼ିକ</string>
-    <string name="require_restart_message">ଓକେ ଚିପନ୍ତୁ।</string>
+    <string name="require_restart_message">ନୂତନ ପରିବର୍ତ୍ତନଗୁଡିକ ବ୍ୟବହାର କରିବାକୁ ଆପ୍ ପୁନଃଆରମ୍ଭ କରନ୍ତୁ ।</string>
     <string name="playerAudioQuality">ସ୍ୱର ଗୁଣବତ୍ତା</string>
     <string name="navLabelVisibility">ଲେବଲ୍ ଭିଜିବିଲିଟି</string>
     <string name="autoRotatePlayer">ଅଟୋ-ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
@@ -382,4 +382,9 @@
     <string name="hls_instead_of_dash">HLS ବ୍ୟବହାର କରନ୍ତୁ</string>
     <string name="hls_instead_of_dash_summary">DASH ପରିବର୍ତ୍ତେ HLS ବ୍ୟବହାର କରନ୍ତୁ (ଧୀର ହେବ, ସୁପାରିଶ ହେବ ନାହିଁ)</string>
     <string name="auto_quality">ସ୍ଵତଃ</string>
+    <string name="limit_to_runtime">ଚାଲିବା ସମୟ ପର୍ଯ୍ୟନ୍ତ ସୀମିତ କରନ୍ତୁ</string>
+    <string name="trends">ଧାରା</string>
+    <string name="featured">ବିଶିଷ୍ଟ</string>
+    <string name="trending">ବର୍ତ୍ତମାନ କ’ଣ ଟ୍ରେଣ୍ଡ୍ ହେଉଛି</string>
+    <string name="open_queue_from_notification">ବିଜ୍ଞପ୍ତିରୁ ଧାଡି ଖୋଲନ୍ତୁ</string>
 </resources>

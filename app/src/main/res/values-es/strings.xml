@@ -30,7 +30,7 @@
     <string name="dlcomplete">Descarga completada.</string>
     <string name="downloadfailed">Error de descarga.</string>
     <string name="vlc">Abrir en VLC</string>
-    <string name="vlcerror">No se pudo abrir en VLC, es posible que no esté instalado.</string>
+    <string name="vlcerror">No se pudo abrir en VLC. Es posible que no esté instalado.</string>
     <string name="import_from_yt">Importar suscripciones</string>
     <string name="app_theme">Tema</string>
     <string name="error">Algo salió mal.</string>
@@ -224,7 +224,7 @@
     <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
-    <string name="require_restart_message">Este cambio requiere que se reinicie la aplicación. Presione \'Ok\' para reiniciar ahora.</string>
+    <string name="require_restart_message">Reinicie la aplicación para utilizar los nuevos cambios.</string>
     <string name="change_playback_speed">Velocidad de reproducción</string>
     <string name="require_restart">Es necesario reiniciar la aplicación</string>
     <string name="selected">Seleccionado</string>
@@ -382,4 +382,9 @@
     <string name="auto_quality">Automatico</string>
     <string name="hls_instead_of_dash_summary">Usar HLS en vez de DASH (podría ser lento, no recomendado)</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
+    <string name="limit_to_runtime">Limitar al tiempo de ejecución</string>
+    <string name="trends">Tendencias</string>
+    <string name="featured">Destacado</string>
+    <string name="trending">Lo que está de moda ahora</string>
+    <string name="open_queue_from_notification">Abrir la cola desde la notificación</string>
 </resources>
