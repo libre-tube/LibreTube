@@ -385,6 +385,5 @@
     <string name="limit_to_runtime">Futás idejére való korlátozás</string>
     <string name="open_queue_from_notification">Lejátszási sor megnyitása értesítésből</string>
     <string name="trending">Ami most felkapott</string>
-    <string name="trends"></string>
     <string name="featured">Kiemelt</string>
 </resources>
