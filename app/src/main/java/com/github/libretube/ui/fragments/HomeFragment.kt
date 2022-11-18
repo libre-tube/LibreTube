@@ -13,7 +13,10 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentHomeBinding
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.ui.adapters.PlaylistBookmarksAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
@@ -109,6 +112,18 @@ class HomeFragment : BaseFragment() {
                             }
                         }
                     })
+            }
+        }
+
+        runOrError {
+            val bookmarkedPlaylists = awaitQuery {
+                DatabaseHolder.Database.playlistBookmarkDao().getAll()
+            }
+            if (bookmarkedPlaylists.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.bookmarksRV, binding.bookmarksRV)
+                binding.playlistsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.playlistsRV.adapter = PlaylistBookmarksAdapter(bookmarkedPlaylists)
             }
         }
     }

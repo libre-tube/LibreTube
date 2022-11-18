@@ -14,13 +14,14 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
-import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -37,6 +38,7 @@ class PlaylistFragment : BaseFragment() {
     private var nextPage: String? = null
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
+    private var isBookmarked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,11 +64,24 @@ class PlaylistFragment : BaseFragment() {
         binding.playlistRecView.layoutManager = LinearLayoutManager(context)
 
         binding.playlistProgress.visibility = View.VISIBLE
+
+        isBookmarked = awaitQuery {
+            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
+        }
+        updateBookmarkRes()
+
         fetchPlaylist()
+    }
+
+    private fun updateBookmarkRes() {
+        binding.bookmark.setIconResource(
+            if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
+        )
     }
 
     @SuppressLint("SetTextI18n")
     private fun fetchPlaylist() {
+        binding.playlistScrollview.visibility = View.GONE
         lifecycleScope.launchWhenCreated {
             val response = try {
                 // load locally stored playlists with the auth api
@@ -83,6 +98,7 @@ class PlaylistFragment : BaseFragment() {
                 Log.e(TAG(), "HttpException, unexpected response")
                 return@launchWhenCreated
             }
+            binding.playlistScrollview.visibility = View.VISIBLE
             nextPage = response.nextpage
             playlistName = response.name
             isLoading = false
@@ -114,12 +130,27 @@ class PlaylistFragment : BaseFragment() {
                     )
                 }
 
-                binding.share.setOnClickListener {
-                    ShareDialog(
-                        playlistId!!,
-                        ShareObjectType.PLAYLIST,
-                        ShareData(currentPlaylist = response.name)
-                    ).show(childFragmentManager, null)
+                binding.bookmark.setOnClickListener {
+                    query {
+                        if (isBookmarked) {
+                            DatabaseHolder.Database.playlistBookmarkDao().delete(
+                                DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId!!)
+                            )
+                        } else {
+                            DatabaseHolder.Database.playlistBookmarkDao().insertAll(
+                                PlaylistBookmark(
+                                    playlistId = playlistId!!,
+                                    playlistName = response.name,
+                                    thumbnailUrl = response.thumbnailUrl,
+                                    uploader = response.uploader,
+                                    uploaderAvatar = response.uploaderAvatar,
+                                    uploaderUrl = response.uploaderUrl
+                                )
+                            )
+                        }
+                    }
+                    isBookmarked = !isBookmarked
+                    updateBookmarkRes()
                 }
 
                 playlistAdapter = PlaylistAdapter(

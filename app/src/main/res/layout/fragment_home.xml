@@ -60,6 +60,18 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/bookmarksTV"
+                    style="@style/HomeCategoryTitle"
+                    android:text="@string/playlists" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bookmarksRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/playlistsTV"
                     style="@style/HomeCategoryTitle"
                     android:text="@string/playlists" />
