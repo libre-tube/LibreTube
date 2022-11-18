@@ -95,11 +95,12 @@ class PlaylistFragment : BaseFragment() {
                     binding.playlistName.maxLines = if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
                 }
 
-                binding.playlistInfo.text = response.uploader + TextUtils.SEPARATOR + getString(R.string.videoCount, response.videos.toString())
+                binding.playlistInfo.text = (if (response.uploader != null) response.uploader + TextUtils.SEPARATOR else "") +
+                    getString(R.string.videoCount, response.videos.toString())
 
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
-                    PlaylistOptionsBottomSheet(playlistId!!, playlistName!!, isOwner).show(
+                    PlaylistOptionsBottomSheet(playlistId!!, playlistName ?: "", isOwner).show(
                         childFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name
                     )
