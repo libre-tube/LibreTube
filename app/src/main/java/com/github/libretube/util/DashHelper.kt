@@ -45,6 +45,11 @@ object DashHelper {
                 continue
             }
 
+            // ignore streams which might be OTF
+            if (stream.indexEnd!! <= 0) {
+                continue
+            }
+
             val adapSetInfo = adapSetInfos.find { it.mimeType == stream.mimeType }
             if (adapSetInfo != null) {
                 adapSetInfo.formats.add(stream)
