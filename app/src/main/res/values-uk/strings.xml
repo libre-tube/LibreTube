@@ -387,4 +387,6 @@
     <string name="featured">Популярні</string>
     <string name="trending">Що зараз у тренді</string>
     <string name="trends">Тренди</string>
+    <string name="bookmarks">Закладки</string>
+    <string name="bookmark">Закладка</string>
 </resources>
