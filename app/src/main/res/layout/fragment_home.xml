@@ -62,7 +62,7 @@
                 <TextView
                     android:id="@+id/bookmarksTV"
                     style="@style/HomeCategoryTitle"
-                    android:text="@string/playlists" />
+                    android:text="@string/bookmarks" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/bookmarksRV"

@@ -130,7 +130,11 @@ class PlaylistFragment : BaseFragment() {
                     )
                 }
 
+                if (isOwner) binding.bookmark.visibility = View.GONE
+
                 binding.bookmark.setOnClickListener {
+                    isBookmarked = !isBookmarked
+                    updateBookmarkRes()
                     query {
                         if (isBookmarked) {
                             DatabaseHolder.Database.playlistBookmarkDao().delete(
@@ -149,8 +153,6 @@ class PlaylistFragment : BaseFragment() {
                             )
                         }
                     }
-                    isBookmarked = !isBookmarked
-                    updateBookmarkRes()
                 }
 
                 playlistAdapter = PlaylistAdapter(
