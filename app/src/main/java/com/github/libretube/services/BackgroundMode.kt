@@ -21,9 +21,11 @@ import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.util.NowPlayingNotification
@@ -138,7 +140,9 @@ class BackgroundMode : Service() {
 
     private fun updateWatchPosition() {
         player?.currentPosition?.let {
-            DatabaseHelper.saveWatchPosition(videoId, it)
+            query {
+                Database.watchPositionDao().insertAll(WatchPosition(videoId, it))
+            }
         }
         handler.postDelayed(this::updateWatchPosition, 500)
     }

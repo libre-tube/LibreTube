@@ -21,6 +21,9 @@ interface WatchPositionDao {
     @Delete
     fun delete(watchPosition: WatchPosition)
 
+    @Query("DELETE FROM watchHistoryItem WHERE videoId = :videoId")
+    fun deleteById(videoId: String)
+
     @Query("DELETE FROM watchPosition")
     fun deleteAll()
 }

@@ -21,6 +21,9 @@ interface PlaylistBookmarkDao {
     @Delete
     fun delete(playlistBookmark: PlaylistBookmark)
 
+    @Query("DELETE FROM playlistBookmark WHERE playlistId = :playlistId")
+    fun deleteById(playlistId: String)
+
     @Query("SELECT EXISTS(SELECT * FROM playlistBookmark WHERE playlistId= :playlistId)")
     fun includes(playlistId: String): Boolean
 

@@ -137,9 +137,7 @@ class PlaylistFragment : BaseFragment() {
                     updateBookmarkRes()
                     query {
                         if (!isBookmarked) {
-                            DatabaseHolder.Database.playlistBookmarkDao().delete(
-                                DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId!!)
-                            )
+                            DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId!!)
                         } else {
                             DatabaseHolder.Database.playlistBookmarkDao().insertAll(
                                 PlaylistBookmark(
