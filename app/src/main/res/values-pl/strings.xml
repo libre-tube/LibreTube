@@ -383,4 +383,8 @@
     <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH (będzie wolniej, nie zalecane)</string>
     <string name="auto_quality">Automatyczna</string>
     <string name="limit_to_runtime">Ogranicz do czasu trwania</string>
+    <string name="trends">Na czasie</string>
+    <string name="featured">Polecane</string>
+    <string name="trending">Aktualnie na czasie</string>
+    <string name="open_queue_from_notification">Otwórz kolejkę z powiadomienia</string>
 </resources>
