@@ -136,7 +136,7 @@ class PlaylistFragment : BaseFragment() {
                     isBookmarked = !isBookmarked
                     updateBookmarkRes()
                     query {
-                        if (isBookmarked) {
+                        if (!isBookmarked) {
                             DatabaseHolder.Database.playlistBookmarkDao().delete(
                                 DatabaseHolder.Database.playlistBookmarkDao().findById(playlistId!!)
                             )
