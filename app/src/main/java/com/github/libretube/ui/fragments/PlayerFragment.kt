@@ -1193,13 +1193,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
             streams.videoStreams.orEmpty().isNotEmpty()
         ) {
-            val manifest = DashHelper.createManifest(streams)
+            val uri = let {
+                streams.dash?.toUri()
 
-            // encode to base64
-            val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
-            val mediaItem = "data:application/dash+xml;charset=utf-8;base64,$encoded"
+                val manifest = DashHelper.createManifest(streams)
 
-            this.setMediaSource(mediaItem.toUri(), MimeTypes.APPLICATION_MPD)
+                // encode to base64
+                val encoded = Base64.encodeToString(manifest.toByteArray(), Base64.DEFAULT)
+
+                "data:application/dash+xml;charset=utf-8;base64,$encoded".toUri()
+            }
+
+            this.setMediaSource(uri, MimeTypes.APPLICATION_MPD)
         } else if (streams.hls != null) {
             setMediaSource(streams.hls.toUri(), MimeTypes.APPLICATION_M3U8)
         } else {
