@@ -3,7 +3,6 @@ package com.github.libretube.ui.models
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription

@@ -1,6 +1,5 @@
 package com.github.libretube.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,29 +50,37 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.libraryFragment)
         }
 
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = true
+            lifecycleScope.launch(Dispatchers.IO) {
+                fetchHome(LocaleHelper.getTrendingRegion(requireContext()))
+            }
+        }
+
         lifecycleScope.launch(Dispatchers.IO) {
-            fetchHome(requireContext(), LocaleHelper.getTrendingRegion(requireContext()))
+            fetchHome(LocaleHelper.getTrendingRegion(requireContext()))
         }
     }
 
-    private suspend fun fetchHome(context: Context, trendingRegion: String) {
+    private suspend fun fetchHome(trendingRegion: String) {
         val token = PreferenceHelper.getToken()
-        val appContext = context.applicationContext
-        runOrError(appContext) {
+        runOrError {
             val feed = SubscriptionHelper.getFeed().withMaxSize(20)
+            if (feed.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.featuredRV, binding.featuredTV)
                 binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 binding.featuredRV.adapter = VideosAdapter(
                     feed.toMutableList(),
                     childFragmentManager,
-                    forceMode = VideosAdapter.Companion.ForceMode.RELATED
+                    forceMode = VideosAdapter.Companion.ForceMode.HOME
                 )
             }
         }
 
-        runOrError(appContext) {
+        runOrError {
             val trending = RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
+            if (trending.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.trendingRV, binding.trendingTV)
                 binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
@@ -85,8 +92,9 @@ class HomeFragment : BaseFragment() {
             }
         }
 
-        runOrError(appContext) {
+        runOrError {
             val playlists = RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
+            if (playlists.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.playlistsRV, binding.playlistsTV)
                 binding.playlistsRV.layoutManager = LinearLayoutManager(context)
@@ -105,12 +113,12 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun runOrError(context: Context, action: suspend () -> Unit) {
+    private fun runOrError(action: suspend () -> Unit) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 action.invoke()
             } catch (e: Exception) {
-                e.localizedMessage?.let { context.toastFromMainThread(it) }
+                e.localizedMessage?.let { context?.toastFromMainThread(it) }
             }
         }
     }
@@ -120,5 +128,7 @@ class HomeFragment : BaseFragment() {
             it.visibility = View.VISIBLE
         }
         binding.progress.visibility = View.GONE
+        binding.scroll.visibility = View.VISIBLE
+        binding.refresh.isRefreshing = false
     }
 }

@@ -60,7 +60,7 @@ class VideosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when {
-            forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED) -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
+            forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED, ForceMode.HOME) -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
             forceMode == ForceMode.CHANNEL -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
             PreferenceHelper.getBoolean(
                 PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
@@ -83,11 +83,14 @@ class VideosAdapter(
 
         // Trending layout
         holder.trendingRowBinding?.apply {
-            if (forceMode == ForceMode.RELATED) {
-                val params = root.layoutParams
-                params.width = (180).toDp(root.context.resources).toInt()
-                root.layoutParams = params
+            // set a fixed width for better visuals
+            val params = root.layoutParams
+            when (forceMode) {
+                ForceMode.RELATED -> params.width = (180).toDp(root.context.resources).toInt()
+                ForceMode.HOME -> params.width = (250).toDp(root.context.resources).toInt()
+                else -> {}
             }
+            root.layoutParams = params
 
             textViewTitle.text = video.title
             textViewChannel.text =
@@ -168,7 +171,8 @@ class VideosAdapter(
             TRENDING,
             ROW,
             CHANNEL,
-            RELATED
+            RELATED,
+            HOME
         }
 
         fun getLayout(context: Context): LayoutManager {
