@@ -381,6 +381,9 @@
     <string name="trends">Trends</string>
     <string name="featured">Featured</string>
     <string name="trending">What\'s trending now</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="bookmark">Bookmark</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

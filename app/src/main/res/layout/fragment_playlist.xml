@@ -88,14 +88,14 @@
                     app:icon="@drawable/ic_playlist" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/share"
+                    android:id="@+id/bookmark"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
-                    android:text="@string/share"
-                    app:icon="@drawable/ic_share_outlined" />
+                    android:text="@string/bookmark"
+                    app:icon="@drawable/ic_bookmark_outlined" />
 
             </LinearLayout>
 
