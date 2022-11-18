@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.PreferenceHelper
@@ -17,26 +19,18 @@ class SubscriptionsViewModel : ViewModel() {
         value = false
     }
 
-    var videoFeed = MutableLiveData<List<com.github.libretube.api.obj.StreamItem>?>().apply {
+    var videoFeed = MutableLiveData<List<StreamItem>?>().apply {
         value = null
     }
 
-    var subscriptions = MutableLiveData<List<com.github.libretube.api.obj.Subscription>?>().apply {
+    var subscriptions = MutableLiveData<List<Subscription>?>().apply {
         value = null
     }
 
     fun fetchFeed() {
         CoroutineScope(Dispatchers.IO).launch {
             val videoFeed = try {
-                if (PreferenceHelper.getToken() != "") {
-                    RetrofitInstance.authApi.getFeed(
-                        PreferenceHelper.getToken()
-                    )
-                } else {
-                    RetrofitInstance.authApi.getUnauthenticatedFeed(
-                        SubscriptionHelper.getFormattedLocalSubscriptions()
-                    )
-                }
+                SubscriptionHelper.getFeed()
             } catch (e: Exception) {
                 errorResponse.postValue(true)
                 Log.e(TAG(), e.toString())
@@ -53,15 +47,7 @@ class SubscriptionsViewModel : ViewModel() {
     fun fetchSubscriptions() {
         CoroutineScope(Dispatchers.IO).launch {
             val subscriptions = try {
-                if (PreferenceHelper.getToken() != "") {
-                    RetrofitInstance.authApi.subscriptions(
-                        PreferenceHelper.getToken()
-                    )
-                } else {
-                    RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                        SubscriptionHelper.getFormattedLocalSubscriptions()
-                    )
-                }
+                SubscriptionHelper.getSubscriptions()
             } catch (e: Exception) {
                 errorResponse.postValue(true)
                 Log.e(TAG(), e.toString())

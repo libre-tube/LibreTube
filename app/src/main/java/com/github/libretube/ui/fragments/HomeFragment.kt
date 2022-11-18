@@ -53,9 +53,7 @@ class HomeFragment : BaseFragment() {
         }
 
         viewModel.feed.observe(viewLifecycleOwner) {
-            binding.featuredTV.visibility = View.VISIBLE
-            binding.featuredRV.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
+            makeVisible(binding.featuredRV, binding.featuredTV)
             binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.featuredRV.adapter = VideosAdapter(
                 it.toMutableList(),
@@ -66,9 +64,7 @@ class HomeFragment : BaseFragment() {
 
         viewModel.trending.observe(viewLifecycleOwner) {
             if (it.isEmpty()) return@observe
-            binding.trendingTV.visibility = View.VISIBLE
-            binding.trendingRV.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
+            makeVisible(binding.trendingRV, binding.trendingTV)
             binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
             binding.trendingRV.adapter = VideosAdapter(
                 it.toMutableList(),
@@ -79,9 +75,7 @@ class HomeFragment : BaseFragment() {
 
         viewModel.playlists.observe(viewLifecycleOwner) {
             if (it.isEmpty()) return@observe
-            binding.playlistsRV.visibility = View.VISIBLE
-            binding.playlistsTV.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
+            makeVisible(binding.playlistsRV, binding.playlistsTV)
             binding.playlistsRV.layoutManager = LinearLayoutManager(context)
             binding.playlistsRV.adapter = PlaylistsAdapter(it.toMutableList(), childFragmentManager)
             binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
@@ -95,5 +89,12 @@ class HomeFragment : BaseFragment() {
                     }
                 })
         }
+    }
+
+    private fun makeVisible(vararg views: View) {
+        views.forEach {
+            it.visibility = View.VISIBLE
+        }
+        binding.progress.visibility = View.GONE
     }
 }

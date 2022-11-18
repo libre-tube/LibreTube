@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.toastFromMainThread
@@ -18,27 +19,25 @@ class HomeModel : ViewModel() {
     var trending = MutableLiveData<List<StreamItem>>()
     val playlists = MutableLiveData<List<Playlists>>()
 
-    suspend fun fetchHome(context: Context, trendingRegion: String) {
+    suspend fun fetchHome(context: Context, trendingRegion: String, forceReload: Boolean = false) {
         val token = PreferenceHelper.getToken()
         val appContext = context.applicationContext
         runOrError(appContext) {
-            if (trending.value.isNullOrEmpty()) {
-                trending.postValue(
-                    RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
-                )
-            }
+            if (!feed.value.isNullOrEmpty() && !forceReload) return@runOrError
+            feed.postValue(
+                SubscriptionHelper.getFeed().withMaxSize(20)
+            )
         }
 
         runOrError(appContext) {
-            if (feed.value.isNullOrEmpty()) {
-                feed.postValue(
-                    RetrofitInstance.authApi.getFeed(token).withMaxSize(20)
-                )
-            }
+            if (!trending.value.isNullOrEmpty() && !forceReload) return@runOrError
+            trending.postValue(
+                RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
+            )
         }
 
         runOrError(appContext) {
-            if (token == "" || !playlists.value.isNullOrEmpty()) return@runOrError
+            if ((token == "" || playlists.value.isNullOrEmpty()) && !forceReload) return@runOrError
             playlists.postValue(
                 RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
             )

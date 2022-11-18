@@ -3,6 +3,8 @@ package com.github.libretube.api
 import android.content.Context
 import android.util.Log
 import com.github.libretube.R
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.LocalSubscription
@@ -130,5 +132,29 @@ object SubscriptionHelper {
     fun getFormattedLocalSubscriptions(): String {
         val localSubscriptions = getLocalSubscriptions()
         return localSubscriptions.joinToString(",") { it.channelId }
+    }
+
+    suspend fun getSubscriptions(): List<Subscription> {
+        return if (PreferenceHelper.getToken() != "") {
+            RetrofitInstance.authApi.subscriptions(
+                PreferenceHelper.getToken()
+            )
+        } else {
+            RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                getFormattedLocalSubscriptions()
+            )
+        }
+    }
+
+    suspend fun getFeed(): List<StreamItem> {
+        return if (PreferenceHelper.getToken() != "") {
+            RetrofitInstance.authApi.getFeed(
+                PreferenceHelper.getToken()
+            )
+        } else {
+            RetrofitInstance.authApi.getUnauthenticatedFeed(
+                getFormattedLocalSubscriptions()
+            )
+        }
     }
 }
