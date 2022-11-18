@@ -387,4 +387,6 @@
     <string name="featured">Siūloma</string>
     <string name="trending">Dabartinės tendencijos</string>
     <string name="open_queue_from_notification">Atidaryti grojimo eilę iš pranešimo</string>
+    <string name="bookmarks">Žymos</string>
+    <string name="bookmark">Pridėti prie žymų</string>
 </resources>
