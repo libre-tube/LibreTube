@@ -8,16 +8,18 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Playlists
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.ui.fragments.LibraryFragment
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.HttpException
 import java.io.IOException
 
-class CreatePlaylistDialog : DialogFragment() {
+class CreatePlaylistDialog(
+    private val onSuccess: () -> Unit = {}
+) : DialogFragment() {
     private var token: String = ""
     private lateinit var binding: DialogCreatePlaylistBinding
 
@@ -53,7 +55,7 @@ class CreatePlaylistDialog : DialogFragment() {
             val response = try {
                 RetrofitInstance.authApi.createPlaylist(
                     token,
-                    com.github.libretube.api.obj.Playlists(name = name)
+                    Playlists(name = name)
                 )
             } catch (e: IOException) {
                 println(e)
@@ -73,8 +75,7 @@ class CreatePlaylistDialog : DialogFragment() {
             }
             // refresh the playlists in the library
             try {
-                val parent = parentFragment as LibraryFragment
-                parent.fetchPlaylists()
+                onSuccess.invoke()
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
             }

@@ -82,7 +82,9 @@ class LibraryFragment : BaseFragment() {
                 fetchPlaylists()
             }
             binding.createPlaylist.setOnClickListener {
-                val newFragment = CreatePlaylistDialog()
+                val newFragment = CreatePlaylistDialog {
+                    fetchPlaylists()
+                }
                 newFragment.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
             }
         } else {
