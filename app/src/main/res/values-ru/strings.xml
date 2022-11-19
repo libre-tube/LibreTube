@@ -31,7 +31,7 @@
     <string name="dlisinprogress">Пожалуйста, подождите, пока все загрузки завершатся.</string>
     <string name="downloadfailed">Загрузка не удалась.</string>
     <string name="vlc">Открыть в VLC</string>
-    <string name="vlcerror">Не удаётся открыть в VLC, возможно, он не установлен.</string>
+    <string name="vlcerror">Не удалось открыть в VLC. Возможно, он не установлен.</string>
     <string name="import_from_yt">Импорт подписок</string>
     <string name="app_theme">Тема</string>
     <string name="server_error">На сервере возникла проблема. Попробовать другой экземпляр\?</string>
@@ -226,7 +226,7 @@
     <string name="chapters">Эпизоды</string>
     <string name="change_playback_speed">Скорость воспроизведения</string>
     <string name="require_restart">Требуется перезапуск</string>
-    <string name="require_restart_message">Это изменение требует перезапуска приложения. Нажмите \'Ок\' для перезапуска.</string>
+    <string name="require_restart_message">Перезапустите приложения для применения изменений.</string>
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
@@ -382,4 +382,6 @@
     <string name="hls_instead_of_dash">Использовать HLS</string>
     <string name="hls_instead_of_dash_summary">Использовать HLS вместо DASH (будет медленнее, не рекомендуется)</string>
     <string name="auto_quality">Авто</string>
+    <string name="trends">Тренды</string>
+    <string name="bookmarks">Закладки</string>
 </resources>

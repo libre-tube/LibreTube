@@ -387,4 +387,6 @@
     <string name="trends">מגמות</string>
     <string name="featured">מובילים</string>
     <string name="trending">מה מוביל כרגע</string>
+    <string name="bookmarks">סימניות</string>
+    <string name="bookmark">סימנייה</string>
 </resources>

@@ -19,7 +19,7 @@
     <string name="login">Masuk</string>
     <string name="videos">Video</string>
     <string name="downloadfailed">Unduhan Gagal.</string>
-    <string name="vlcerror">Tidak bisa dibuka di VLC, mungkin tidak diinstal.</string>
+    <string name="vlcerror">Tidak bisa membuka di VLC. Mungkin belum terpasang.</string>
     <string name="import_from_yt">Impor langganan</string>
     <string name="notgmail">Ini untuk akun Piped Anda.</string>
     <string name="already_logged_in">Anda sudah masuk, Anda dapat keluar dari akun anda.</string>
@@ -182,7 +182,7 @@
     <string name="pauseOnScreenOff_summary">Jeda pemutaran ketika layar dimatikan.</string>
     <string name="autoplay_summary">Mainkan video berikut secara otomatis setelah video saat ini.</string>
     <string name="reset_message">Atur ulang semua pengaturan dan keluar\?</string>
-    <string name="require_restart_message">Perubahan ini harus memulai ulang aplikasi. Tekan \'Ok\' untuk memulai ulang sekarang.</string>
+    <string name="require_restart_message">Mulai ulang aplikasi untuk menggunakan perubahan baru.</string>
     <string name="search_history_summary">Ingat penelusuran</string>
     <string name="watch_positions_title">Posisi pemainan diingat</string>
     <string name="reset_watch_positions">Atur ulang</string>
@@ -387,4 +387,6 @@
     <string name="featured">Unggulan</string>
     <string name="trending">Apa yang sedang tren</string>
     <string name="open_queue_from_notification">Buka antrean dari notifikasi</string>
+    <string name="bookmarks">Markah</string>
+    <string name="bookmark">Markah</string>
 </resources>

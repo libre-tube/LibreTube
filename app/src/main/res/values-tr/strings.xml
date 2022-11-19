@@ -46,7 +46,7 @@
     <string name="success">Bitti.</string>
     <string name="playlistName">Oynatma listesi adı</string>
     <string name="about">Hakkında</string>
-    <string name="vlcerror">VLC\'de açılamadı, kurulmamış olabilir.</string>
+    <string name="vlcerror">VLC\'de açılamadı. Kurulu olmayabilir.</string>
     <string name="instances">Seç…</string>
     <string name="customInstance">Özel</string>
     <string name="server_error">Sunucuyla ilgili bir sorun var. Başka bir örnek denensin mi\?</string>
@@ -225,7 +225,7 @@
     <string name="turnInternetOn">İnternete bağlanmak için lütfen Wi-Fi veya mobil verileri açın.</string>
     <string name="chapters">Bölümler</string>
     <string name="change_playback_speed">Oynatma hızı</string>
-    <string name="require_restart_message">Bu değişiklik, uygulamanın yeniden başlatılmasını gerektirir. Şimdi yeniden başlatmak için \'Tamam\'a basın.</string>
+    <string name="require_restart_message">Yeni değişiklikleri kullanmak için uygulamayı yeniden başlat.</string>
     <string name="require_restart">Uygulamanın yeniden başlatılması gerekiyor</string>
     <string name="captions">Altyazılar</string>
     <string name="system_caption_style">Sistem altyazı stili</string>
@@ -384,4 +384,9 @@
     <string name="hls_instead_of_dash_summary">DASH yerine HLS kullan (daha yavaş olacaktır, önerilmez)</string>
     <string name="limit_to_runtime">Çalışma zamanı ile sınırla</string>
     <string name="open_queue_from_notification">Bildirimden kuyruğu aç</string>
+    <string name="trends">Trendler</string>
+    <string name="featured">Öne Çıkanlar</string>
+    <string name="trending">Şu anda trend olan şey</string>
+    <string name="bookmarks">Yer imleri</string>
+    <string name="bookmark">Yer imi</string>
 </resources>

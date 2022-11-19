@@ -22,7 +22,7 @@
     <string name="downloadfailed">Stahování se nezdařilo.</string>
     <string name="app_theme">Motiv aplikace</string>
     <string name="server_error">Server zaznamenal problém. Možná zkuste jinou instanci.</string>
-    <string name="vlcerror">Nepodařilo se otevřít ve VLC, možná není nainstalováno.</string>
+    <string name="vlcerror">Nepodařilo se otevřít ve VLC. Možná není nainstalované.</string>
     <string name="unknown_error">Chyba sítě.</string>
     <string name="grid">Sloupce mřížky</string>
     <string name="emptyList">Nic tu není.</string>
@@ -124,7 +124,7 @@
     <string name="change_playback_speed">Rychlost přehrávání</string>
     <string name="require_restart">Je vyžadován restart aplikace</string>
     <string name="turnInternetOn">Zapněte Wi-Fi nebo mobilní data pro připojení se k internetu.</string>
-    <string name="require_restart_message">Tato změna vyžaduje restartování aplikace. Stisknutím tlačítka ‚Ok‘ aplikaci restartujete.</string>
+    <string name="require_restart_message">Restartujte aplikaci pro použití nových změn.</string>
     <string name="authors">Autoři</string>
     <string name="download_directory">Stáhnout do</string>
     <string name="download_directory_summary">Kam se ukládají stahovaná média.</string>
@@ -382,4 +382,11 @@
     <string name="auto_quality">Auto</string>
     <string name="hls_instead_of_dash">Použít HLS</string>
     <string name="hls_instead_of_dash_summary">Použít HLS místo DASH (bude pomalejší, nedoporučuje se)</string>
+    <string name="limit_to_runtime">Omezení doby běhu</string>
+    <string name="open_queue_from_notification">Otevření fronty z oznámení</string>
+    <string name="trends">Trendy</string>
+    <string name="featured">Doporučené</string>
+    <string name="trending">Co je právě v trendech</string>
+    <string name="bookmarks">Záložky</string>
+    <string name="bookmark">Záložka</string>
 </resources>
