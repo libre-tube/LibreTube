@@ -387,4 +387,6 @@
     <string name="featured">ବିଶିଷ୍ଟ</string>
     <string name="trending">ବର୍ତ୍ତମାନ କ’ଣ ଟ୍ରେଣ୍ଡ୍ ହେଉଛି</string>
     <string name="open_queue_from_notification">ବିଜ୍ଞପ୍ତିରୁ ଧାଡି ଖୋଲନ୍ତୁ</string>
+    <string name="bookmark">ବୁକ୍ ମାର୍କ୍</string>
+    <string name="bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକ</string>
 </resources>
