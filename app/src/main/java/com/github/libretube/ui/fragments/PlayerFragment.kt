@@ -352,13 +352,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
+            if (!this::streams.isInitialized) return@setOnClickListener
             val shareDialog =
                 ShareDialog(
                     videoId!!,
                     ShareObjectType.VIDEO,
                     ShareData(
                         currentVideo = streams.title,
-                        currentPosition = exoPlayer.currentPosition
+                        currentPosition = exoPlayer.currentPosition / 1000
                     )
                 )
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
