@@ -387,4 +387,8 @@
     <string name="featured">Destacado</string>
     <string name="trending">Lo que está de moda ahora</string>
     <string name="open_queue_from_notification">Abrir la cola desde la notificación</string>
+    <string name="bookmarks">Marcadores</string>
+    <string name="bookmark">Marcador</string>
+    <string name="bookmarks_empty">¡Aún no hay marcadores!</string>
+    <string name="clear_bookmarks">Borrar marcadores</string>
 </resources>
