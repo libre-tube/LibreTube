@@ -327,4 +327,23 @@
     <string name="mobile_data">Mobilie dati</string>
     <string name="wifi">Wi-Fi</string>
     <string name="new_videos_badge_summary">Parāda jauno video skaitu, ja tādi ir.</string>
+    <string name="navigation_bar">Navigācijas panelis</string>
+    <string name="select_at_least_one">Lūdzu, izvēlieties vismaz vienu vienumu</string>
+    <string name="backup_customInstances">Pašizveidotas instances</string>
+    <string name="progressive_load_interval">Progresīvs ielādēšanas intervāla izmērs</string>
+    <string name="progressive_load_interval_summary">Zemāka vērtība var paātrināt video sākuma ielādēšanu.</string>
+    <string name="default_load_interval">Noklusējuma</string>
+    <string name="playback_pitch">Augstums</string>
+    <string name="change_region">Izskatās, ka tendences nav pieejamas jūsu reģionā. Lūdzu, izvēlieties citu iestatījumos.</string>
+    <string name="limit_hls">Ierobežot HLS uz 1080p</string>
+    <string name="filename">Faila nosaukums</string>
+    <string name="invalid_filename">Nederīgs faila nosaukums!</string>
+    <string name="playlists_order">Atskaņošanas sarakstu secība</string>
+    <string name="playlistNameReversed">Atskaņošanas saraksta nosaukums (atpakaļgaitā)</string>
+    <string name="recentlyUpdated">Nesen atjaunināts</string>
+    <string name="recentlyUpdatedReversed">Nesen atjaunināts (atpakaļgaitā)</string>
+    <string name="show_more">Rādīt vairāk</string>
+    <string name="save_feed">Ielādēt plūsmu fonā</string>
+    <string name="save_feed_summary">Ielādē abonementu plūsmu fonā un neļauj tai automātiski atjaunoties.</string>
+    <string name="play_next">Atskaņot nākamo</string>
 </resources>
