@@ -193,7 +193,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         context?.hideKeyboard(view)
 
         // clear the playing queue
-        PlayingQueue.clear()
+        PlayingQueue.resetToDefaults()
 
         changeOrientationMode()
 
@@ -502,7 +502,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onDestroy()
         try {
             // clear the playing queue
-            PlayingQueue.clear()
             PlayingQueue.resetToDefaults()
 
             saveWatchPosition()
@@ -849,8 +848,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
                 // save the watch position when paused
                 if (playbackState == PlaybackState.STATE_PAUSED) {
+                    val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
                     query {
-                        Database.watchPositionDao().insertAll(WatchPosition(videoId!!, exoPlayer.currentPosition))
+                        Database.watchPositionDao().insertAll(watchPosition)
                     }
                 }
 
