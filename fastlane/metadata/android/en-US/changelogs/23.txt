@@ -1,0 +1,10 @@
+* Implement proper dash support
+   -> Way faster loading speed of videos
+   -> Faster times for seeking to an other playback position
+   -> Faster switching of qualities
+   
+* Option to change the audio language
+* New Home Page UI
+* Playlist bookmarks in the home page an library
+* Option to open queue from background notification
+* Queue: Reverse and repeat controls
