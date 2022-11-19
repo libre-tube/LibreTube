@@ -61,8 +61,6 @@ object PlayingQueue {
 
     fun isEmpty() = queue.isEmpty()
 
-    fun clear() = queue.clear()
-
     fun size() = queue.size
 
     fun currentIndex(): Int {
@@ -139,5 +137,6 @@ object PlayingQueue {
     fun resetToDefaults() {
         repeatQueue = false
         onQueueTapListener = {}
+        queue.clear()
     }
 }

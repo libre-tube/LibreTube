@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
@@ -21,7 +20,6 @@ import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.awaitQuery
@@ -117,7 +115,7 @@ class BackgroundMode : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
             // clear the playing queue
-            PlayingQueue.clear()
+            PlayingQueue.resetToDefaults()
 
             // get the intent arguments
             videoId = intent?.getStringExtra(IntentData.videoId)!!
@@ -201,9 +199,8 @@ class BackgroundMode : Service() {
         } else if (PlayerHelper.watchPositionsEnabled) {
             try {
                 val watchPosition = awaitQuery {
-                    DatabaseHolder.Database.watchPositionDao().findById(videoId)
+                    Database.watchPositionDao().findById(videoId)
                 }
-                Log.e("position", watchPosition.toString())
                 streams?.duration?.let {
                     if (watchPosition != null && watchPosition.position < it * 1000 * 0.9) {
                         player?.seekTo(watchPosition.position)
@@ -355,7 +352,7 @@ class BackgroundMode : Service() {
      */
     override fun onDestroy() {
         // clear the playing queue
-        PlayingQueue.clear()
+        PlayingQueue.resetToDefaults()
 
         if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
 

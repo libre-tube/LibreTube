@@ -213,17 +213,17 @@ class NowPlayingNotification(
      * Destroy the [NowPlayingNotification]
      */
     fun destroySelfAndPlayer() {
+        playerNotification?.setPlayer(null)
+
         mediaSession.isActive = false
         mediaSession.release()
-        mediaSessionConnector.setPlayer(null)
-        playerNotification?.setPlayer(null)
+
+        player.stop()
+        player.release()
 
         val notificationManager = context.getSystemService(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
         notificationManager.cancel(PLAYER_NOTIFICATION_ID)
-
-        player.stop()
-        player.release()
     }
 }
