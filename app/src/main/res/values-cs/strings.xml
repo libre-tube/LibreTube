@@ -389,4 +389,6 @@
     <string name="trending">Co je právě v trendech</string>
     <string name="bookmarks">Záložky</string>
     <string name="bookmark">Záložka</string>
+    <string name="clear_bookmarks">Vymazat záložky</string>
+    <string name="bookmarks_empty">Zatím žádné záložky!</string>
 </resources>
