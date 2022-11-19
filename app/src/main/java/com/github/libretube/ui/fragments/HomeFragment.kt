@@ -53,6 +53,10 @@ class HomeFragment : BaseFragment() {
             findNavController().navigate(R.id.libraryFragment)
         }
 
+        binding.bookmarksTV.setOnClickListener {
+            findNavController().navigate(R.id.bookmarksFragment)
+        }
+
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = true
             lifecycleScope.launch(Dispatchers.IO) {
@@ -123,7 +127,10 @@ class HomeFragment : BaseFragment() {
             runOnUiThread {
                 makeVisible(binding.bookmarksTV, binding.bookmarksRV)
                 binding.bookmarksRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(bookmarkedPlaylists)
+                binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
+                    bookmarkedPlaylists,
+                    PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
+                )
             }
         }
     }

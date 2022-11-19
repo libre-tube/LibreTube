@@ -384,6 +384,7 @@
     <string name="bookmarks">Bookmarks</string>
     <string name="bookmark">Bookmark</string>
     <string name="clear_bookmarks">Clear bookmarks</string>
+    <string name="bookmarks_empty">No bookmarks yet!</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
