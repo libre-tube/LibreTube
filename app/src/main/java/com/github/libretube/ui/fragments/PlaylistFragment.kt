@@ -123,9 +123,10 @@ class PlaylistFragment : BaseFragment() {
                 }
 
                 binding.playAll.setOnClickListener {
+                    if (response.relatedStreams.orEmpty().isEmpty()) return@setOnClickListener
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        response.relatedStreams?.first()?.url?.toID(),
+                        response.relatedStreams!!.first().url?.toID(),
                         playlistId
                     )
                 }
