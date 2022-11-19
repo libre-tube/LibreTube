@@ -2,11 +2,11 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.WatchHistoryRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
@@ -15,8 +15,7 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
 class WatchHistoryAdapter(
-    private val watchHistory: MutableList<WatchHistoryItem>,
-    private val childFragmentManager: FragmentManager
+    private val watchHistory: MutableList<WatchHistoryItem>
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
@@ -56,7 +55,7 @@ class WatchHistoryAdapter(
             }
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(video.videoId, video.title!!)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 

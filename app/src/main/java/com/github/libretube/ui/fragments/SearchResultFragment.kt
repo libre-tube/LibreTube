@@ -96,7 +96,7 @@ class SearchResultFragment : BaseFragment() {
             runOnUiThread {
                 if (response.items?.isNotEmpty() == true) {
                     binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
-                    searchAdapter = SearchAdapter(response.items, childFragmentManager)
+                    searchAdapter = SearchAdapter(response.items)
                     binding.searchRecycler.adapter = searchAdapter
                 } else {
                     binding.searchContainer.visibility = View.GONE

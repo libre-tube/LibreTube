@@ -157,8 +157,7 @@ class PlaylistFragment : BaseFragment() {
                 playlistAdapter = PlaylistAdapter(
                     response.relatedStreams.orEmpty().toMutableList(),
                     playlistId!!,
-                    isOwner,
-                    childFragmentManager
+                    isOwner
                 )
 
                 // listen for playlist items to become deleted

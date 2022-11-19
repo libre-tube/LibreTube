@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
@@ -14,6 +13,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
@@ -30,8 +30,7 @@ import java.io.IOException
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,
     private val playlistId: String,
-    private val isOwner: Boolean,
-    private val childFragmentManager: FragmentManager
+    private val isOwner: Boolean
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -64,7 +63,10 @@ class PlaylistAdapter(
             val videoName = streamItem.title!!
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show(
+                        (root.context as BaseActivity).supportFragmentManager,
+                        VideoOptionsBottomSheet::class.java.name
+                    )
                 true
             }
 

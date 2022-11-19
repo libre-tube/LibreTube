@@ -135,8 +135,7 @@ class LibraryFragment : BaseFragment() {
                 }
 
                 val playlistsAdapter = PlaylistsAdapter(
-                    playlists.toMutableList(),
-                    childFragmentManager
+                    playlists.toMutableList()
                 )
 
                 // listen for playlists to become deleted

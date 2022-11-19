@@ -6,7 +6,6 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +18,7 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toDp
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
@@ -30,7 +30,6 @@ import com.github.libretube.util.TextUtils
 
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
-    private val childFragmentManager: FragmentManager,
     private val showAllAtOnce: Boolean = true,
     private val forceMode: ForceMode = ForceMode.NONE
 ) : RecyclerView.Adapter<VideosViewHolder>() {
@@ -113,7 +112,7 @@ class VideosAdapter(
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
 
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
 
                 true
             }
@@ -154,7 +153,7 @@ class VideosAdapter(
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
 
                 true
             }

@@ -977,13 +977,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (PlayerHelper.alternativeVideoLayout) {
             binding.alternativeTrendingRec.adapter = VideosAdapter(
                 relatedStreams.orEmpty().toMutableList(),
-                childFragmentManager,
                 forceMode = VideosAdapter.Companion.ForceMode.RELATED
             )
         } else {
             binding.relatedRecView.adapter = VideosAdapter(
-                relatedStreams.orEmpty().toMutableList(),
-                childFragmentManager
+                relatedStreams.orEmpty().toMutableList()
             )
         }
     }

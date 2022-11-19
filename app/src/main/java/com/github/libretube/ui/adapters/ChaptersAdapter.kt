@@ -5,6 +5,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.ui.viewholders.ChaptersViewHolder
 import com.github.libretube.util.ImageHelper
@@ -12,7 +13,7 @@ import com.github.libretube.util.ThemeHelper
 import com.google.android.exoplayer2.ExoPlayer
 
 class ChaptersAdapter(
-    private val chapters: List<com.github.libretube.api.obj.ChapterSegment>,
+    private val chapters: List<ChapterSegment>,
     private val exoPlayer: ExoPlayer
 ) : RecyclerView.Adapter<ChaptersViewHolder>() {
     private var selectedPosition = 0
