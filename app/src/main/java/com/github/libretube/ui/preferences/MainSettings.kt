@@ -95,6 +95,7 @@ class MainSettings : BasePreferenceFragment() {
 
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
+            if (BuildConfig.DEBUG) return@setOnPreferenceClickListener true
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update
                 val updateInfo = try {
