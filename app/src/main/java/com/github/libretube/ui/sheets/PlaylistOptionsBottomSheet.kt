@@ -11,6 +11,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
@@ -81,9 +82,8 @@ class PlaylistOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 context?.getString(R.string.deletePlaylist) -> {
-                    deletePlaylist(
-                        playlistId
-                    )
+                    DeletePlaylistDialog(playlistId)
+                        .show(parentFragmentManager, null)
                 }
                 context?.getString(R.string.renamePlaylist) -> {
                     val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
@@ -139,19 +139,6 @@ class PlaylistOptionsBottomSheet(
                         playlistId = id,
                         newName = newName
                     )
-                )
-            } catch (e: Exception) {
-                return@launch
-            }
-        }
-    }
-
-    private fun deletePlaylist(id: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                RetrofitInstance.authApi.deletePlaylist(
-                    PreferenceHelper.getToken(),
-                    PlaylistId(id)
                 )
             } catch (e: Exception) {
                 return@launch
