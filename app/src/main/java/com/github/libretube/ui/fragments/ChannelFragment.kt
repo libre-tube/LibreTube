@@ -183,7 +183,6 @@ class ChannelFragment : BaseFragment() {
                 // recyclerview of the videos by the channel
                 channelAdapter = VideosAdapter(
                     response.relatedStreams.orEmpty().toMutableList(),
-                    childFragmentManager,
                     forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
                 )
                 binding.channelRecView.adapter = channelAdapter
@@ -229,8 +228,7 @@ class ChannelFragment : BaseFragment() {
             }
 
             val adapter = SearchAdapter(
-                response.content.toMutableList(),
-                childFragmentManager
+                response.content.toMutableList()
             )
 
             runOnUiThread {

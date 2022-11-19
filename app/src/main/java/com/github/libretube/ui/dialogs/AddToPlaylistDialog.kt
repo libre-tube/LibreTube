@@ -38,6 +38,14 @@ class AddToPlaylistDialog : DialogFragment() {
         binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
+        binding.createPlaylist.setOnClickListener {
+            parentFragment?.childFragmentManager?.let {
+                CreatePlaylistDialog {
+                    fetchPlaylists()
+                }.show(it, null)
+            }
+        }
+
         token = PreferenceHelper.getToken()
 
         if (token != "") fetchPlaylists()

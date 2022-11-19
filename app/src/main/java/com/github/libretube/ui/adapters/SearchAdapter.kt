@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.ContentItem
@@ -13,6 +12,7 @@ import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -24,8 +24,7 @@ import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.TextUtils
 
 class SearchAdapter(
-    private val searchItems: MutableList<ContentItem>,
-    private val childFragmentManager: FragmentManager
+    private val searchItems: MutableList<ContentItem>
 ) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
@@ -101,7 +100,7 @@ class SearchAdapter(
             val videoName = item.title!!
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
             channelContainer.setOnClickListener {
@@ -148,7 +147,7 @@ class SearchAdapter(
                 val playlistId = item.url!!.toID()
                 val playlistName = item.name!!
                 PlaylistOptionsBottomSheet(playlistId, playlistName, false)
-                    .show(childFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
+                    .show((root.context as BaseActivity).supportFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
                 true
             }
         }

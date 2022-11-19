@@ -41,8 +41,7 @@ class WatchHistoryFragment : BaseFragment() {
         }
 
         val watchHistoryAdapter = WatchHistoryAdapter(
-            watchHistory.toMutableList(),
-            childFragmentManager
+            watchHistory.toMutableList()
         )
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(

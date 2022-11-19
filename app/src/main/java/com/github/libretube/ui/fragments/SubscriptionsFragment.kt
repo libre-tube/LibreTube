@@ -155,7 +155,6 @@ class SubscriptionsFragment : BaseFragment() {
         binding.subProgress.visibility = View.GONE
         subscriptionAdapter = VideosAdapter(
             sortedFeed.toMutableList(),
-            childFragmentManager,
             showAllAtOnce = false
         )
         binding.subFeed.adapter = subscriptionAdapter

@@ -123,9 +123,10 @@ class PlaylistFragment : BaseFragment() {
                 }
 
                 binding.playAll.setOnClickListener {
+                    if (response.relatedStreams.orEmpty().isEmpty()) return@setOnClickListener
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        response.relatedStreams?.first()?.url?.toID(),
+                        response.relatedStreams!!.first().url?.toID(),
                         playlistId
                     )
                 }
@@ -156,8 +157,7 @@ class PlaylistFragment : BaseFragment() {
                 playlistAdapter = PlaylistAdapter(
                     response.relatedStreams.orEmpty().toMutableList(),
                     playlistId!!,
-                    isOwner,
-                    childFragmentManager
+                    isOwner
                 )
 
                 // listen for playlist items to become deleted

@@ -85,8 +85,7 @@ class TrendsFragment : BaseFragment() {
                 }
 
                 binding.recview.adapter = VideosAdapter(
-                    response.toMutableList(),
-                    childFragmentManager
+                    response.toMutableList()
                 )
 
                 binding.recview.layoutManager = VideosAdapter.getLayout(requireContext())

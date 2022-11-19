@@ -82,7 +82,9 @@ class LibraryFragment : BaseFragment() {
                 fetchPlaylists()
             }
             binding.createPlaylist.setOnClickListener {
-                val newFragment = CreatePlaylistDialog()
+                val newFragment = CreatePlaylistDialog {
+                    fetchPlaylists()
+                }
                 newFragment.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
             }
         } else {
@@ -133,8 +135,7 @@ class LibraryFragment : BaseFragment() {
                 }
 
                 val playlistsAdapter = PlaylistsAdapter(
-                    playlists.toMutableList(),
-                    childFragmentManager
+                    playlists.toMutableList()
                 )
 
                 // listen for playlists to become deleted

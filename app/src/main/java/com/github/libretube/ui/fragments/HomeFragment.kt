@@ -80,7 +80,6 @@ class HomeFragment : BaseFragment() {
                 binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 binding.featuredRV.adapter = VideosAdapter(
                     feed.toMutableList(),
-                    childFragmentManager,
                     forceMode = VideosAdapter.Companion.ForceMode.HOME
                 )
             }
@@ -96,7 +95,6 @@ class HomeFragment : BaseFragment() {
                 binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
                 binding.trendingRV.adapter = VideosAdapter(
                     trending.toMutableList(),
-                    childFragmentManager,
                     forceMode = VideosAdapter.Companion.ForceMode.TRENDING
                 )
             }
@@ -109,7 +107,7 @@ class HomeFragment : BaseFragment() {
             runOnUiThread {
                 makeVisible(binding.playlistsRV, binding.playlistsTV)
                 binding.playlistsRV.layoutManager = LinearLayoutManager(context)
-                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), childFragmentManager)
+                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList())
                 binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
