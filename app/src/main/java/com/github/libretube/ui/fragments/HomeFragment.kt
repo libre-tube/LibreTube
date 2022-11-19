@@ -1,6 +1,7 @@
 package com.github.libretube.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,16 +61,16 @@ class HomeFragment : BaseFragment() {
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = true
             lifecycleScope.launch(Dispatchers.IO) {
-                fetchHome(LocaleHelper.getTrendingRegion(requireContext()))
+                fetchHome()
             }
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            fetchHome(LocaleHelper.getTrendingRegion(requireContext()))
+            fetchHome()
         }
     }
 
-    private suspend fun fetchHome(trendingRegion: String) {
+    private suspend fun fetchHome() {
         val token = PreferenceHelper.getToken()
         runOrError {
             val feed = SubscriptionHelper.getFeed().withMaxSize(20)
@@ -86,7 +87,9 @@ class HomeFragment : BaseFragment() {
         }
 
         runOrError {
-            val trending = RetrofitInstance.api.getTrending(trendingRegion).withMaxSize(10)
+            val trending = RetrofitInstance.api.getTrending(
+                LocaleHelper.getTrendingRegion(requireContext())
+            ).withMaxSize(10)
             if (trending.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.trendingRV, binding.trendingTV)
@@ -100,6 +103,7 @@ class HomeFragment : BaseFragment() {
         }
 
         runOrError {
+            if (token == "") return@runOrError
             val playlists = RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
             if (playlists.isEmpty()) return@runOrError
             runOnUiThread {
@@ -141,6 +145,7 @@ class HomeFragment : BaseFragment() {
                 action.invoke()
             } catch (e: Exception) {
                 e.localizedMessage?.let { context?.toastFromMainThread(it) }
+                Log.e("fetching home tab", e.toString())
             }
         }
     }
