@@ -55,11 +55,15 @@ class LibraryFragment : BaseFragment() {
         val watchHistoryEnabled =
             PreferenceHelper.getBoolean(PreferenceKeys.WATCH_HISTORY_TOGGLE, true)
         if (!watchHistoryEnabled) {
-            binding.showWatchHistory.visibility = View.GONE
+            binding.watchHistory.visibility = View.GONE
         } else {
-            binding.showWatchHistory.setOnClickListener {
+            binding.watchHistory.setOnClickListener {
                 findNavController().navigate(R.id.watchHistoryFragment)
             }
+        }
+
+        binding.bookmarks.setOnClickListener {
+            findNavController().navigate(R.id.bookmarksFragment)
         }
 
         binding.downloads.setOnClickListener {

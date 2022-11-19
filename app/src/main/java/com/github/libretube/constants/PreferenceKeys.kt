@@ -111,6 +111,7 @@ object PreferenceKeys {
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
     const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
+    const val CLEAR_BOOKMARKS = "clear_bookmarks"
 
     /**
      * History

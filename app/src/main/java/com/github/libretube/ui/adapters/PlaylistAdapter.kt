@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -27,7 +28,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistAdapter(
-    private val videoFeed: MutableList<com.github.libretube.api.obj.StreamItem>,
+    private val videoFeed: MutableList<StreamItem>,
     private val playlistId: String,
     private val isOwner: Boolean,
     private val childFragmentManager: FragmentManager
@@ -37,7 +38,7 @@ class PlaylistAdapter(
         return videoFeed.size
     }
 
-    fun updateItems(newItems: List<com.github.libretube.api.obj.StreamItem>) {
+    fun updateItems(newItems: List<StreamItem>) {
         val oldSize = videoFeed.size
         videoFeed.addAll(newItems)
         notifyItemRangeInserted(oldSize, videoFeed.size)
