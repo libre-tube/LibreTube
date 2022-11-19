@@ -8,7 +8,7 @@
     <string name="password">Parole</string>
     <string name="cannotDownload">Nevar lejupielādēt.</string>
     <string name="import_from_yt_summary">No YouTube vai NewPipe</string>
-    <string name="vlcerror">Nevar atvērt ar VLC. Tas, iespējams, nav uzinstalēts.</string>
+    <string name="vlcerror">Nevarēja atvērt caur VLC. Iespējams, tas nav ieinstalēts.</string>
     <string name="unknown_error">Tīkla kļūda.</string>
     <string name="downloadfailed">Lejupielāde neizdevās.</string>
     <string name="defres">Video izšķirtspēja</string>
@@ -146,7 +146,7 @@
     <string name="video_format_summary">Formāts, uz kuru tiek pārvērsti faili, ja tiek lejupielādēts gan video, gan audio.</string>
     <string name="contributing">Ieguldīšana</string>
     <string name="donate">Ziedot</string>
-    <string name="update_summary">Nospiediet šeit, lai uzzinātu, vai aplikācija ir atjaunināta.</string>
+    <string name="update_summary">Pārbaudīt, vai ir pieejams atjauninājums</string>
     <string name="update">Gaidiet jauno versiju</string>
     <string name="app_uptodate">Šī ir jaunākā versija.</string>
     <string name="no_update_available">Šī ir jaunākā versija.</string>
@@ -171,7 +171,7 @@
     <string name="instance_name">Instances nosaukums</string>
     <string name="instance_api_url">Instances API URL</string>
     <string name="addInstance">Pievienot instanci</string>
-    <string name="version">V %1$s</string>
+    <string name="version">Versija %1$s</string>
     <string name="about_summary">Iepazīstieties ar visiem, kas ir iesaistīti aplikācijas veidošanā un uzlabošanā.</string>
     <string name="related_streams">Saistīts saturs</string>
     <string name="related_streams_summary">Rādīt līdzīgu saturu blakus tam, ko jūs skatāties.</string>
@@ -206,14 +206,14 @@
     <string name="open">Atvērt…</string>
     <string name="chapters">Nodaļas</string>
     <string name="require_restart">Nepieciešams restartēt aplikāciju</string>
-    <string name="require_restart_message">Šīs izmaiņas, iespējams, netiks veiktas bez aplikācijas restartēšanas. Vai vēlaties restartēt aplikāciju tagad\?</string>
+    <string name="require_restart_message">Restartējiet aplikāciju, lai veiktu jaunās izmaiņas.</string>
     <string name="auth_instance">Autentificētā instance</string>
     <string name="change_playback_speed">Atskaņošanas ātrums</string>
     <string name="watch_positions">Atcerēties skatīšanās vietu</string>
     <string name="watch_positions_summary">Atcerēties vietu, kurā pārtraucāt skatīties video, un automātiski uz to aiztīt.</string>
     <string name="auth_instance_summary">Lietojiet citu instanci priekš autentificētiem pieprasījumiem.</string>
     <string name="auth_instances">Izvēlēties autentificēto instanci</string>
-    <string name="hls">Automātiska</string>
+    <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="aspect_ratio">Video malu attiecība</string>
     <string name="auto_rotation">Noteikt no ierīces orientācijas</string>
@@ -314,7 +314,17 @@
     <string name="legacy_subscriptions">Vecais abonementu skats</string>
     <string name="device_info">Ierīces informācija</string>
     <string name="audio_video_summary">Kvalitāte un formāts</string>
-    <string name="delete">Dzēst</string>
+    <string name="delete">Dzēst no lejupielādēm</string>
     <string name="trending_layout">Citādāks tendenču izkārtojums</string>
     <string name="renamePlaylist">Pārsaukt atskaņošanas sarakstu</string>
+    <string name="new_videos_badge">Jauno video indikators</string>
+    <string name="views_placeholder">skatījumi</string>
+    <string name="skip_segment">Izlaist segmentu</string>
+    <string name="sb_skip_manual">Izlaist manuāli</string>
+    <string name="sb_skip_manual_summary">Neizlaiž segmentus automātiski, vienmēr vispirms pajautā.</string>
+    <string name="preferences">Iestatījumi</string>
+    <string name="local_subscriptions">Ierīcē glabātie abonementi</string>
+    <string name="mobile_data">Mobilie dati</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="new_videos_badge_summary">Parāda jauno video skaitu, ja tādi ir.</string>
 </resources>
