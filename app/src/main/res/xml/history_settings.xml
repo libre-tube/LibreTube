@@ -59,4 +59,13 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/bookmarks">
+
+        <PreferenceCategory
+            android:title="@string/clear_bookmarks"
+            app:icon="@drawable/ic_bookmark"
+            app:key="clear_bookmarks" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
