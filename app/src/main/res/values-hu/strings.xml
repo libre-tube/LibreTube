@@ -386,4 +386,8 @@
     <string name="open_queue_from_notification">Lejátszási sor megnyitása értesítésből</string>
     <string name="trending">Ami most felkapott</string>
     <string name="featured">Kiemelt</string>
+    <string name="bookmarks">Könyvjelzők</string>
+    <string name="bookmark">Könyvjelző</string>
+    <string name="bookmarks_empty">Nincsenek még könyvjelzők!</string>
+    <string name="clear_bookmarks">Könyvjelzők törlése</string>
 </resources>
