@@ -352,6 +352,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
+            if (!this::streams.isInitialized) return@setOnClickListener
             val shareDialog =
                 ShareDialog(
                     videoId!!,
