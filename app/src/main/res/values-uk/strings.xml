@@ -389,4 +389,6 @@
     <string name="trends">Тренди</string>
     <string name="bookmarks">Закладки</string>
     <string name="bookmark">Закладка</string>
+    <string name="clear_bookmarks">Очистити закладки</string>
+    <string name="bookmarks_empty">Ще немає закладок!</string>
 </resources>
