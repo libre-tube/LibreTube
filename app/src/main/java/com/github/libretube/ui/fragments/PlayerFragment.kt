@@ -166,8 +166,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
 
-    private lateinit var shareData: ShareData
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -354,12 +352,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // share button
         binding.relPlayerShare.setOnClickListener {
-            shareData.currentPosition = exoPlayer.currentPosition / 1000
             val shareDialog =
                 ShareDialog(
                     videoId!!,
                     ShareObjectType.VIDEO,
-                    shareData
+                    ShareData(
+                        currentVideo = streams.title,
+                        currentPosition = exoPlayer.currentPosition
+                    )
                 )
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
         }
@@ -775,7 +775,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             titleTextView.text = response.title
 
             playerTitle.text = response.title
-            shareData = ShareData(currentVideo = response.title)
             playerDescription.text = response.description
 
             playerChannelSubCount.text = context?.getString(
