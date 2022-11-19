@@ -389,4 +389,6 @@
     <string name="open_queue_from_notification">ବିଜ୍ଞପ୍ତିରୁ ଧାଡି ଖୋଲନ୍ତୁ</string>
     <string name="bookmark">ବୁକ୍ ମାର୍କ୍</string>
     <string name="bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକ</string>
+    <string name="bookmarks_empty">ଏବେ ଯାଏଁ କୌଣସି ବୁକ୍ ମାର୍କ୍ ନାହିଁ!</string>
+    <string name="clear_bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକୁ ଖାଲି କରନ୍ତୁ</string>
 </resources>
