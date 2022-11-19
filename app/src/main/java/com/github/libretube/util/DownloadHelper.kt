@@ -11,7 +11,7 @@ object DownloadHelper {
     const val METADATA_DIR = "metadata"
     const val THUMBNAIL_DIR = "thumbnail"
 
-    private fun getOfflineStorageDir(context: Context): File {
+    fun getOfflineStorageDir(context: Context): File {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return context.filesDir
 
         return try {

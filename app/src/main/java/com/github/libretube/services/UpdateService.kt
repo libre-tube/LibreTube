@@ -11,6 +11,7 @@ import android.os.Environment
 import android.os.IBinder
 import android.widget.Toast
 import com.github.libretube.R
+import com.github.libretube.util.DownloadHelper
 import java.io.File
 
 class UpdateService : Service() {
@@ -28,9 +29,7 @@ class UpdateService : Service() {
     }
 
     private fun downloadApk(downloadUrl: String) {
-        val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        // val dir = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-        file = File(dir, "release.apk")
+        file = File(getDownloadDirectory(), "release.apk")
 
         val request: DownloadManager.Request =
             DownloadManager.Request(Uri.parse(downloadUrl))
@@ -78,6 +77,12 @@ class UpdateService : Service() {
                 }
             }
         }
+    }
+
+    private fun getDownloadDirectory(): File {
+        val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        if (!downloadsDir.canWrite()) return DownloadHelper.getOfflineStorageDir(this)
+        return downloadsDir
     }
 
     override fun onDestroy() {
