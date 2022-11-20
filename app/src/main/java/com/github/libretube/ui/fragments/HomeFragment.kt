@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentHomeBinding
@@ -101,13 +102,12 @@ class HomeFragment : BaseFragment() {
         }
 
         runOrError {
-            if (token == "") return@runOrError
-            val playlists = RetrofitInstance.authApi.getUserPlaylists(token).withMaxSize(20)
+            val playlists = PlaylistsHelper.getPlaylists().withMaxSize(20)
             if (playlists.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.playlistsRV, binding.playlistsTV)
                 binding.playlistsRV.layoutManager = LinearLayoutManager(context)
-                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList())
+                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), PlaylistsHelper.getType())
                 binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {

@@ -25,9 +25,15 @@ interface LocalPlaylistsDao {
     @Delete
     fun deletePlaylist(playlist: LocalPlaylist)
 
+    @Query("DELETE FROM localPlaylist WHERE id = :playlistId")
+    fun deletePlaylistById(playlistId: String)
+
     @Insert
     fun addPlaylistVideo(playlistVideo: LocalPlaylistItem)
 
     @Delete
     fun removePlaylistVideo(playlistVideo: LocalPlaylistItem)
+
+    @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId")
+    fun deletePlaylistItemsByPlaylistId(playlistId: String)
 }

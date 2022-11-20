@@ -1,7 +1,7 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
@@ -13,7 +13,6 @@ import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,14 +36,6 @@ class VideoOptionsBottomSheet(
             context?.getString(R.string.share)!!
         )
 
-        // remove the add to playlist option if not logged in
-        if (PreferenceHelper.getToken() == "") {
-            optionsList.remove(
-                context?.getString(R.string.addToPlaylist)
-
-            )
-        }
-
         /**
          * Check whether the player is running and add queue options
          */
@@ -61,19 +52,12 @@ class VideoOptionsBottomSheet(
                 }
                 // Add Video to Playlist Dialog
                 context?.getString(R.string.addToPlaylist) -> {
-                    val token = PreferenceHelper.getToken()
-                    if (token != "") {
-                        val newFragment = AddToPlaylistDialog()
-                        val bundle = Bundle()
-                        bundle.putString(IntentData.videoId, videoId)
-                        newFragment.arguments = bundle
-                        newFragment.show(
-                            parentFragmentManager,
-                            AddToPlaylistDialog::class.java.name
-                        )
-                    } else {
-                        Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-                    }
+                    AddToPlaylistDialog().apply {
+                        arguments = bundleOf(IntentData.videoId to videoId)
+                    }.show(
+                        parentFragmentManager,
+                        AddToPlaylistDialog::class.java.name
+                    )
                 }
                 context?.getString(R.string.download) -> {
                     val downloadDialog = DownloadDialog(videoId)

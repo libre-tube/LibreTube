@@ -8,5 +8,5 @@ data class LocalPlaylist(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val thumbnailUrl: String
+    var thumbnailUrl: String
 )

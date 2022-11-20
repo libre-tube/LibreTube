@@ -7,6 +7,7 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.DialogTextPreferenceBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
@@ -25,8 +26,8 @@ import java.io.IOException
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
-    private val playlistName: String,
-    private val isOwner: Boolean
+    playlistName: String,
+    private val playlistType: PlaylistType
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +38,7 @@ class PlaylistOptionsBottomSheet(
             context?.getString(R.string.share)!!
         )
 
-        if (isOwner) {
+        if (playlistType != PlaylistType.PUBLIC) {
             optionsList = optionsList +
                 context?.getString(R.string.renamePlaylist)!! +
                 context?.getString(R.string.deletePlaylist)!! -
@@ -50,7 +51,7 @@ class PlaylistOptionsBottomSheet(
                 context?.getString(R.string.playOnBackground) -> {
                     runBlocking {
                         val playlist =
-                            if (isOwner) {
+                            if (playlistType == PlaylistType.OWNED) {
                                 RetrofitInstance.authApi.getPlaylist(playlistId)
                             } else {
                                 RetrofitInstance.api.getPlaylist(playlistId)
@@ -82,7 +83,7 @@ class PlaylistOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 context?.getString(R.string.deletePlaylist) -> {
-                    DeletePlaylistDialog(playlistId)
+                    DeletePlaylistDialog(playlistId, playlistType)
                         .show(parentFragmentManager, null)
                 }
                 context?.getString(R.string.renamePlaylist) -> {

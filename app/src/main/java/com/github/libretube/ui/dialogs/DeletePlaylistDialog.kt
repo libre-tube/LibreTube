@@ -7,7 +7,10 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -16,6 +19,7 @@ import kotlinx.coroutines.launch
 
 class DeletePlaylistDialog(
     private val playlistId: String,
+    private val playlistType: PlaylistType,
     private val onSuccess: () -> Unit = {}
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -31,6 +35,14 @@ class DeletePlaylistDialog(
     }
 
     private fun deletePlaylist() {
+        if (playlistType == PlaylistType.LOCAL) {
+            awaitQuery {
+                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
+                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
+            }
+            return
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
             val response = try {
                 RetrofitInstance.authApi.deletePlaylist(

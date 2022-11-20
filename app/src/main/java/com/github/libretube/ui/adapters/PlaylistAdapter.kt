@@ -11,6 +11,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.PlaylistRowBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.base.BaseActivity
@@ -30,7 +31,7 @@ import java.io.IOException
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,
     private val playlistId: String,
-    private val isOwner: Boolean
+    private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -70,7 +71,7 @@ class PlaylistAdapter(
                 true
             }
 
-            if (isOwner) {
+            if (playlistType != PlaylistType.PUBLIC) {
                 deletePlaylist.visibility = View.VISIBLE
                 deletePlaylist.setOnClickListener {
                     removeFromPlaylist(root.context, position)

@@ -11,17 +11,20 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.extensions.serializable
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -34,7 +37,7 @@ class PlaylistFragment : BaseFragment() {
 
     private var playlistId: String? = null
     private var playlistName: String? = null
-    private var isOwner: Boolean = false
+    private var playlistType: PlaylistType = PlaylistType.PUBLIC
     private var nextPage: String? = null
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
@@ -44,7 +47,7 @@ class PlaylistFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             playlistId = it.getString(IntentData.playlistId)
-            isOwner = it.getBoolean("isOwner")
+            playlistType = it.serializable(IntentData.playlistType)!!
         }
     }
 
@@ -84,12 +87,7 @@ class PlaylistFragment : BaseFragment() {
         binding.playlistScrollview.visibility = View.GONE
         lifecycleScope.launchWhenCreated {
             val response = try {
-                // load locally stored playlists with the auth api
-                if (isOwner) {
-                    RetrofitInstance.authApi.getPlaylist(playlistId!!)
-                } else {
-                    RetrofitInstance.api.getPlaylist(playlistId!!)
-                }
+                PlaylistsHelper.getPlaylist(playlistType, playlistId!!)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
@@ -116,7 +114,7 @@ class PlaylistFragment : BaseFragment() {
 
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
-                    PlaylistOptionsBottomSheet(playlistId!!, playlistName ?: "", isOwner).show(
+                    PlaylistOptionsBottomSheet(playlistId!!, playlistName ?: "", playlistType).show(
                         childFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name
                     )
@@ -131,7 +129,7 @@ class PlaylistFragment : BaseFragment() {
                     )
                 }
 
-                if (isOwner) binding.bookmark.visibility = View.GONE
+                if (playlistType != PlaylistType.PUBLIC) binding.bookmark.visibility = View.GONE
 
                 binding.bookmark.setOnClickListener {
                     isBookmarked = !isBookmarked
@@ -157,7 +155,7 @@ class PlaylistFragment : BaseFragment() {
                 playlistAdapter = PlaylistAdapter(
                     response.relatedStreams.orEmpty().toMutableList(),
                     playlistId!!,
-                    isOwner
+                    playlistType
                 )
 
                 // listen for playlist items to become deleted
@@ -189,7 +187,7 @@ class PlaylistFragment : BaseFragment() {
                 /**
                  * listener for swiping to the left or right
                  */
-                if (isOwner) {
+                if (playlistType != PlaylistType.PUBLIC) {
                     val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                         0,
                         ItemTouchHelper.LEFT
@@ -219,34 +217,27 @@ class PlaylistFragment : BaseFragment() {
     }
 
     private fun fetchNextPage() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    // load locally stored playlists with the auth api
-                    if (isOwner) {
-                        RetrofitInstance.authApi.getPlaylistNextPage(
-                            playlistId!!,
-                            nextPage!!
-                        )
-                    } else {
-                        RetrofitInstance.api.getPlaylistNextPage(
-                            playlistId!!,
-                            nextPage!!
-                        )
-                    }
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
-                    return@launchWhenCreated
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                // load locally stored playlists with the auth api
+                if (playlistType == PlaylistType.OWNED) {
+                    RetrofitInstance.authApi.getPlaylistNextPage(
+                        playlistId!!,
+                        nextPage!!
+                    )
+                } else {
+                    RetrofitInstance.api.getPlaylistNextPage(
+                        playlistId!!,
+                        nextPage!!
+                    )
                 }
-                nextPage = response.nextpage
-                playlistAdapter?.updateItems(response.relatedStreams!!)
-                isLoading = false
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                return@launchWhenCreated
             }
+            nextPage = response.nextpage
+            playlistAdapter?.updateItems(response.relatedStreams!!)
+            isLoading = false
         }
-        run()
     }
 }

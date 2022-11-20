@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlists
 import com.github.libretube.databinding.PlaylistsRowBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
@@ -14,7 +15,8 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
 class PlaylistsAdapter(
-    private val playlists: MutableList<Playlists>
+    private val playlists: MutableList<Playlists>,
+    private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistsViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -48,7 +50,7 @@ class PlaylistsAdapter(
             videoCount.text = playlist.videos.toString()
 
             deletePlaylist.setOnClickListener {
-                DeletePlaylistDialog(playlist.id!!) {
+                DeletePlaylistDialog(playlist.id!!, playlistType) {
                     playlists.removeAt(position)
                     (root.context as BaseActivity).runOnUiThread {
                         notifyItemRemoved(position)
@@ -60,14 +62,14 @@ class PlaylistsAdapter(
                 )
             }
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, playlist.id, true)
+                NavigationHelper.navigatePlaylist(root.context, playlist.id, playlistType)
             }
 
             root.setOnLongClickListener {
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
                     playlistName = playlist.name!!,
-                    isOwner = true
+                    playlistType = playlistType
                 )
                 playlistOptionsDialog.show(
                     (root.context as BaseActivity).supportFragmentManager,
