@@ -105,6 +105,10 @@ class MainActivity : BaseActivity() {
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
+        // Prevent adding duplicate entries into backstack on multiple
+        // click on bottom navigation item
+        binding.bottomNav.setOnItemReselectedListener { }
+
         binding.bottomNav.setOnItemSelectedListener {
             // clear backstack if it's the start fragment
             if (startFragmentId == it.itemId) navController.backQueue.clear()
@@ -115,8 +119,11 @@ class MainActivity : BaseActivity() {
 
             removeSearchFocus()
 
-            // navigate to the selected fragment
-            navController.navigate(it.itemId)
+            // navigate to the selected fragment, if the fragment already
+            // exists in backstack then pop up to that entry
+            if (!navController.popBackStack(it.itemId, false)) {
+                navController.navigate(it.itemId)
+            }
             false
         }
 
