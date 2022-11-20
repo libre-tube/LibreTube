@@ -109,7 +109,7 @@
     <string name="app_icon">Ikona aplikacji</string>
     <string name="youtube">YouTube</string>
     <string name="music_songs">YT Music (Muzyka)</string>
-    <string name="music_videos">YT Music (Wideo)</string>
+    <string name="music_videos">YT Music (Teledyski)</string>
     <string name="music_albums">YT Music (Albumy)</string>
     <string name="music_playlists">YT Music (Playlisty)</string>
     <string name="playOnBackground">Odtwarzanie w tle</string>
