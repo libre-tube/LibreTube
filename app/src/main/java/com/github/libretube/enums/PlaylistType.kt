@@ -1,7 +1,18 @@
 package com.github.libretube.enums
 
 enum class PlaylistType {
+    /**
+     * Local playlist
+     */
     LOCAL,
-    OWNED,
+
+    /**
+     * Piped playlist
+     */
+    PRIVATE,
+
+    /**
+     * YouTube playlist
+     */
     PUBLIC
 }

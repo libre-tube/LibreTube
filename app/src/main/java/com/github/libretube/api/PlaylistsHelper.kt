@@ -19,6 +19,8 @@ import retrofit2.HttpException
 import java.io.IOException
 
 object PlaylistsHelper {
+    private val pipedPlaylistRegex = "[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}".toRegex()
+
     val token get() = PreferenceHelper.getToken()
 
     private fun loggedIn() = token != ""
@@ -46,7 +48,7 @@ object PlaylistsHelper {
     suspend fun getPlaylist(playlistType: PlaylistType, playlistId: String): Playlist {
         // load locally stored playlists with the auth api
         return when (playlistType) {
-            PlaylistType.OWNED -> RetrofitInstance.authApi.getPlaylist(playlistId)
+            PlaylistType.PRIVATE -> RetrofitInstance.authApi.getPlaylist(playlistId)
             PlaylistType.PUBLIC -> RetrofitInstance.api.getPlaylist(playlistId)
             PlaylistType.LOCAL -> {
                 val relation = awaitQuery {
@@ -172,11 +174,13 @@ object PlaylistsHelper {
         )
     }
 
-    fun getType(): PlaylistType {
-        return if (PreferenceHelper.getToken() != "") {
-            PlaylistType.PUBLIC
-        } else {
-            PlaylistType.LOCAL
-        }
+    fun getPrivateType(): PlaylistType {
+        return if (loggedIn()) PlaylistType.PRIVATE else PlaylistType.LOCAL
+    }
+
+    fun getPrivateType(playlistId: String): PlaylistType {
+        if (playlistId.all { it.isDigit() }) return PlaylistType.LOCAL
+        if (playlistId.matches(pipedPlaylistRegex)) return PlaylistType.PRIVATE
+        return PlaylistType.PUBLIC
     }
 }

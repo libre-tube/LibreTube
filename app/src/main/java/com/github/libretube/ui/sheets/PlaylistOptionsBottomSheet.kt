@@ -51,7 +51,7 @@ class PlaylistOptionsBottomSheet(
                 context?.getString(R.string.playOnBackground) -> {
                     runBlocking {
                         val playlist =
-                            if (playlistType == PlaylistType.OWNED) {
+                            if (playlistType == PlaylistType.PRIVATE) {
                                 RetrofitInstance.authApi.getPlaylist(playlistId)
                             } else {
                                 RetrofitInstance.api.getPlaylist(playlistId)

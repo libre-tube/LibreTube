@@ -220,7 +220,7 @@ class PlaylistFragment : BaseFragment() {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 // load locally stored playlists with the auth api
-                if (playlistType == PlaylistType.OWNED) {
+                if (playlistType == PlaylistType.PRIVATE) {
                     RetrofitInstance.authApi.getPlaylistNextPage(
                         playlistId!!,
                         nextPage!!
