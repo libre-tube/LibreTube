@@ -3,6 +3,7 @@ package com.github.libretube
 import android.app.Application
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import android.util.Log
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -12,6 +13,10 @@ import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.LocalPlaylist
+import com.github.libretube.db.obj.LocalPlaylistItem
+import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NotificationHelper
@@ -35,6 +40,8 @@ class LibreTubeApp : Application() {
          * Initialize the [DatabaseHolder]
          */
         DatabaseHolder().initializeDatabase(this)
+
+        runDatabaseTests()
 
         /**
          * Bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
@@ -99,5 +106,24 @@ class LibreTubeApp : Application() {
                 pushChannel
             )
         )
+    }
+
+    private fun runDatabaseTests() {
+        awaitQuery {
+            val playlist = LocalPlaylist(
+                name = "TEstlist",
+                thumbnailUrl = "thumb"
+            )
+            DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist)
+            val playlistId = DatabaseHolder.Database.localPlaylistsDao().getAll().first().playlist.id
+            val video = LocalPlaylistItem(
+                videoId = "video",
+                playlistId = playlistId,
+                title = "awesomePlaylistTitle"
+            )
+            DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(video)
+            val lists = DatabaseHolder.Database.localPlaylistsDao().getAll()
+            Log.e("lists", lists.toString())
+        }
     }
 }
