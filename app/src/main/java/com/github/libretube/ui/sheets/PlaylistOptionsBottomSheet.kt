@@ -33,17 +33,16 @@ class PlaylistOptionsBottomSheet(
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
-        var optionsList = listOf(
-            context?.getString(R.string.playOnBackground)!!,
-            context?.getString(R.string.clonePlaylist)!!,
-            context?.getString(R.string.share)!!
+        val optionsList = mutableListOf(
+            context?.getString(R.string.playOnBackground)!!
         )
 
-        if (playlistType != PlaylistType.PUBLIC) {
-            optionsList = optionsList +
-                context?.getString(R.string.renamePlaylist)!! +
-                context?.getString(R.string.deletePlaylist)!! -
-                context?.getString(R.string.clonePlaylist)!!
+        if (playlistType == PlaylistType.PUBLIC) {
+            optionsList.add(context?.getString(R.string.share)!!)
+            optionsList.add(context?.getString(R.string.clonePlaylist)!!)
+        } else {
+            optionsList.add(context?.getString(R.string.renamePlaylist)!!)
+            optionsList.add(context?.getString(R.string.deletePlaylist)!!)
         }
 
         setSimpleItems(optionsList) { which ->
