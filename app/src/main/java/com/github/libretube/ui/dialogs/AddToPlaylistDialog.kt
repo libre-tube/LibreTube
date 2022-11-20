@@ -34,11 +34,9 @@ class AddToPlaylistDialog : DialogFragment() {
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         binding.createPlaylist.setOnClickListener {
-            parentFragment?.childFragmentManager?.let {
-                CreatePlaylistDialog {
-                    fetchPlaylists()
-                }.show(it, null)
-            }
+            CreatePlaylistDialog {
+                fetchPlaylists()
+            }.show(childFragmentManager, null)
         }
 
         fetchPlaylists()

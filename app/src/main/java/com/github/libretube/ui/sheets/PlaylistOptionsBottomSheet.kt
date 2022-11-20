@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.widget.Toast
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.DialogTextPreferenceBinding
@@ -103,7 +104,13 @@ class PlaylistOptionsBottomSheet(
                                 ).show()
                                 return@setPositiveButton
                             }
-                            renamePlaylist(playlistId, binding.input.text.toString())
+                            CoroutineScope(Dispatchers.IO).launch {
+                                try {
+                                    PlaylistsHelper.renamePlaylist(playlistId, binding.input.text.toString())
+                                } catch (e: Exception) {
+                                    return@launch
+                                }
+                            }
                         }
                         .setNegativeButton(R.string.cancel, null)
                         .show()
@@ -128,22 +135,6 @@ class PlaylistOptionsBottomSheet(
                 return@launch
             }
             appContext?.toastFromMainThread(if (response.playlistId != null) R.string.playlistCloned else R.string.server_error)
-        }
-    }
-
-    private fun renamePlaylist(id: String, newName: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                RetrofitInstance.authApi.renamePlaylist(
-                    PreferenceHelper.getToken(),
-                    PlaylistId(
-                        playlistId = id,
-                        newName = newName
-                    )
-                )
-            } catch (e: Exception) {
-                return@launch
-            }
         }
     }
 }

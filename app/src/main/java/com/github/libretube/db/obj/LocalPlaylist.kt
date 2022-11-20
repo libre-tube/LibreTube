@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class LocalPlaylist(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String,
+    var name: String,
     var thumbnailUrl: String
 )

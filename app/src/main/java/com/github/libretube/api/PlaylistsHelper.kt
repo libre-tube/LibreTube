@@ -21,8 +21,10 @@ import java.io.IOException
 object PlaylistsHelper {
     val token get() = PreferenceHelper.getToken()
 
+    private fun loggedIn() = token != ""
+
     suspend fun getPlaylists(): List<Playlists> {
-        if (token != "") return RetrofitInstance.authApi.getUserPlaylists(token)
+        if (loggedIn()) return RetrofitInstance.authApi.getUserPlaylists(token)
 
         val localPlaylists = awaitQuery {
             DatabaseHolder.Database.localPlaylistsDao().getAll()
@@ -61,7 +63,7 @@ object PlaylistsHelper {
     }
 
     suspend fun createPlaylist(playlistName: String, appContext: Context, onSuccess: () -> Unit) {
-        if (token == "") {
+        if (!loggedIn()) {
             awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().createPlaylist(
                     LocalPlaylist(
@@ -95,16 +97,22 @@ object PlaylistsHelper {
     }
 
     suspend fun addToPlaylist(playlistId: String, videoId: String): Boolean {
-        if (token == "") {
+        if (!loggedIn()) {
             val localPlaylistItem = RetrofitInstance.api.getStreams(videoId).toLocalPlaylistItem(playlistId, videoId)
             awaitQuery {
+                // avoid duplicated videos in a playlist
+                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByVideoId(playlistId, videoId)
+
+                // add the new video to the database
                 DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
                 val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
-                    .first { it.playlist.id.toString() == playlistId }.playlist
-                if (localPlaylist.thumbnailUrl == "") {
+                    .first { it.playlist.id.toString() == playlistId }
+
+                if (localPlaylist.playlist.thumbnailUrl == "") {
+                    // set the new playlist thumbnail URL
                     localPlaylistItem.thumbnailUrl?.let {
-                        localPlaylist.thumbnailUrl = it
-                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist)
+                        localPlaylist.playlist.thumbnailUrl = it
+                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist.playlist)
                     }
                 }
             }
@@ -115,6 +123,27 @@ object PlaylistsHelper {
             token,
             PlaylistId(playlistId, videoId)
         ).message == "ok"
+    }
+
+    suspend fun renamePlaylist(playlistId: String, newName: String) {
+        if (!loggedIn()) {
+            val playlist = awaitQuery {
+                DatabaseHolder.Database.localPlaylistsDao().getAll()
+            }.first { it.playlist.id.toString() == playlistId }.playlist
+            playlist.name = newName
+            awaitQuery {
+                DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
+            }
+            return
+        }
+
+        RetrofitInstance.authApi.renamePlaylist(
+            token,
+            PlaylistId(
+                playlistId = playlistId,
+                newName = newName
+            )
+        )
     }
 
     fun getType(): PlaylistType {

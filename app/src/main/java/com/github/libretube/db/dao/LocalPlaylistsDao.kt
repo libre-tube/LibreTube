@@ -36,4 +36,7 @@ interface LocalPlaylistsDao {
 
     @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId")
     fun deletePlaylistItemsByPlaylistId(playlistId: String)
+
+    @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId")
+    fun deletePlaylistItemsByVideoId(playlistId: String, videoId: String)
 }
