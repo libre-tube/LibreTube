@@ -17,6 +17,7 @@ import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -117,13 +118,17 @@ class MainActivity : BaseActivity() {
                 binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
             }
 
-            removeSearchFocus()
-
             // navigate to the selected fragment, if the fragment already
             // exists in backstack then pop up to that entry
             if (!navController.popBackStack(it.itemId, false)) {
                 navController.navigate(it.itemId)
             }
+
+            // Remove focus from search view when navigating to bottom view.
+            // Call only after navigate to destination, so it can be used in
+            // onMenuItemActionCollapse for backstack management
+            removeSearchFocus()
+
             false
         }
 
@@ -154,7 +159,9 @@ class MainActivity : BaseActivity() {
                 if (navController.currentDestination?.id == startFragmentId) {
                     moveTaskToBack(true)
                 } else {
-                    navController.popBackStack()
+                    navController.popBackStack(R.id.searchResultFragment, false) ||
+                        navController.popBackStack(R.id.searchFragment, true) ||
+                        navController.popBackStack()
                 }
             }
         })
@@ -226,23 +233,26 @@ class MainActivity : BaseActivity() {
 
         val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
-        searchView.setOnSearchClickListener {
-            if (navController.currentDestination?.id != R.id.searchResultFragment) {
-                searchViewModel.setQuery(null)
-                navController.navigate(R.id.searchFragment)
-            }
-        }
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val bundle = Bundle()
                 bundle.putString("query", query)
                 navController.navigate(R.id.searchResultFragment, bundle)
                 searchViewModel.setQuery("")
+                searchView.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                // Prevent navigation when search view is collapsed
+                if (searchView.isIconified ||
+                    binding.bottomNav.menu.children.any {
+                        it.itemId == navController.currentDestination?.id
+                    }
+                ) {
+                    return true
+                }
+
                 // prevent malicious navigation when the search view is getting collapsed
                 if (navController.currentDestination?.id in listOf(
                         R.id.searchResultFragment,
@@ -260,6 +270,35 @@ class MainActivity : BaseActivity() {
                     navController.navigate(R.id.searchFragment, bundle)
                 } else {
                     searchViewModel.setQuery(newText)
+                }
+
+                return true
+            }
+        })
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                if (navController.currentDestination?.id != R.id.searchResultFragment) {
+                    searchViewModel.setQuery(null)
+                    navController.navigate(R.id.searchFragment)
+                }
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                if (binding.mainMotionLayout.progress == 0F) {
+                    try {
+                        minimizePlayer()
+                    } catch (e: Exception) {
+                        // current fragment isn't the player fragment
+                    }
+                }
+                // Handover back press to `BackPressedDispatcher`
+                else if (binding.bottomNav.menu.children.none {
+                    it.itemId == navController.currentDestination?.id
+                }
+                ) {
+                    this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
 
                 return true
