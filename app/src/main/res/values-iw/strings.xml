@@ -389,4 +389,6 @@
     <string name="trending">מה מוביל כרגע</string>
     <string name="bookmarks">סימניות</string>
     <string name="bookmark">סימנייה</string>
+    <string name="clear_bookmarks">פינוי סימניות</string>
+    <string name="bookmarks_empty">אין סימניות עדיין!</string>
 </resources>
