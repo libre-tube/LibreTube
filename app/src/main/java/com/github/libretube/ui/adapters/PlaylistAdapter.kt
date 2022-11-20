@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.PlaylistRowBinding
 import com.github.libretube.enums.PlaylistType
@@ -22,11 +20,9 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistAdapter(
