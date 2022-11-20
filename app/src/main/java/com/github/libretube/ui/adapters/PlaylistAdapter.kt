@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.StreamItem
@@ -89,19 +90,9 @@ class PlaylistAdapter(
         }
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                RetrofitInstance.authApi.removeFromPlaylist(
-                    PreferenceHelper.getToken(),
-                    PlaylistId(
-                        playlistId = playlistId,
-                        index = position
-                    )
-                )
+                PlaylistsHelper.removeFromPlaylist(playlistId, position)
             } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launch
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
+                Log.e(TAG(), e.toString())
                 return@launch
             }
         }

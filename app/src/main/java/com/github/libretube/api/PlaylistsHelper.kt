@@ -146,6 +146,32 @@ object PlaylistsHelper {
         )
     }
 
+    suspend fun removeFromPlaylist(playlistId: String, index: Int) {
+        if (!loggedIn()) {
+            val transaction = awaitQuery {
+                DatabaseHolder.Database.localPlaylistsDao().getAll()
+            }.first { it.playlist.id.toString() == playlistId }
+            awaitQuery {
+                DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(transaction.videos[index])
+            }
+            if (transaction.videos.size > 1) return
+            // remove thumbnail if playlist now empty
+            awaitQuery {
+                transaction.playlist.thumbnailUrl = ""
+                DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+            }
+            return
+        }
+
+        RetrofitInstance.authApi.removeFromPlaylist(
+            PreferenceHelper.getToken(),
+            PlaylistId(
+                playlistId = playlistId,
+                index = index
+            )
+        )
+    }
+
     fun getType(): PlaylistType {
         return if (PreferenceHelper.getToken() != "") {
             PlaylistType.PUBLIC
