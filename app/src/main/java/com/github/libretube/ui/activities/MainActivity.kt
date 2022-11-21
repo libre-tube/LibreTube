@@ -143,12 +143,17 @@ class MainActivity : BaseActivity() {
                     }
                 }
 
-                if (navController.currentDestination?.id == startFragmentId) {
-                    moveTaskToBack(true)
-                } else {
-                    navController.popBackStack(R.id.searchResultFragment, false) ||
+                when (navController.currentDestination?.id) {
+                    startFragmentId -> {
+                        moveTaskToBack(true)
+                    }
+                    R.id.searchResultFragment -> {
                         navController.popBackStack(R.id.searchFragment, true) ||
+                            navController.popBackStack()
+                    }
+                    else -> {
                         navController.popBackStack()
+                    }
                 }
             }
         })
