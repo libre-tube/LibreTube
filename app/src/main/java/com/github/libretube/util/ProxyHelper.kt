@@ -6,6 +6,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URI
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
+import java.util.*
 
 object ProxyHelper {
     private fun getImageProxyUrl(): String? {
@@ -35,13 +38,14 @@ object ProxyHelper {
 
         runCatching {
             val originalUri = URI(url)
-            return URI(
-                originalUri.scheme.lowercase(),
-                proxyUrl,
+            val newUri = URI(
+                originalUri.scheme.lowercase(Locale.US),
+                URI(proxyUrl).authority,
                 originalUri.path,
                 originalUri.query,
                 originalUri.fragment
-            ).toString()
+            )
+            return URLDecoder.decode(newUri.toString(), StandardCharsets.UTF_8.toString())
         }
         return url
     }

@@ -38,7 +38,7 @@ object PlaylistsHelper {
                 Playlists(
                     id = it.playlist.id.toString(),
                     name = it.playlist.name,
-                    thumbnail = it.playlist.thumbnailUrl,
+                    thumbnail = ProxyHelper.rewriteUrl(it.playlist.thumbnailUrl),
                     videos = it.videos.size.toLong()
                 )
             )
