@@ -24,7 +24,8 @@ class IconsSheetAdapter : RecyclerView.Adapter<IconsSheetViewHolder>() {
 
     override fun onBindViewHolder(holder: IconsSheetViewHolder, position: Int) {
         val appIcon = availableIcons[position]
-        holder.binding.apply { iconIV.setImageResource(appIcon.iconResource)
+        holder.binding.apply {
+            iconIV.setImageResource(appIcon.iconResource)
             iconName.text = root.context.getString(appIcon.nameResource)
             root.setOnClickListener {
                 PreferenceHelper.putString(PreferenceKeys.APP_ICON, appIcon.activityAlias)
