@@ -269,6 +269,7 @@ class MainActivity : BaseActivity() {
                     searchViewModel.setQuery(null)
                     navController.navigate(R.id.searchFragment)
                 }
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
                 return true
             }
 
