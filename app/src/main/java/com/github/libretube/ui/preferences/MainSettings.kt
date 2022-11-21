@@ -1,6 +1,7 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.preference.Preference
@@ -95,7 +96,10 @@ class MainSettings : BasePreferenceFragment() {
 
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
-            if (BuildConfig.DEBUG) return@setOnPreferenceClickListener true
+            if (BuildConfig.DEBUG) {
+                Toast.makeText(context, "Updater is disabled for debug versions!", Toast.LENGTH_SHORT).show()
+                return@setOnPreferenceClickListener true
+            }
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update
                 val updateInfo = try {
