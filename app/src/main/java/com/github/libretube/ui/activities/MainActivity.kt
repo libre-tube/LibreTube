@@ -17,6 +17,7 @@ import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -105,18 +106,16 @@ class MainActivity : BaseActivity() {
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
-        binding.bottomNav.setOnItemSelectedListener {
-            // clear backstack if it's the start fragment
-            if (startFragmentId == it.itemId) navController.backQueue.clear()
-
-            if (it.itemId == R.id.subscriptionsFragment) {
-                binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
+        // Prevent duplicate entries into backstack, if selected item and current
+        // visible fragment is different, then navigate to selected item.
+        binding.bottomNav.setOnItemReselectedListener {
+            if (it.itemId != navController.currentDestination?.id) {
+                navigateToBottomSelectedItem(it)
             }
+        }
 
-            removeSearchFocus()
-
-            // navigate to the selected fragment
-            navController.navigate(it.itemId)
+        binding.bottomNav.setOnItemSelectedListener {
+            navigateToBottomSelectedItem(it)
             false
         }
 
@@ -144,10 +143,17 @@ class MainActivity : BaseActivity() {
                     }
                 }
 
-                if (navController.currentDestination?.id == startFragmentId) {
-                    moveTaskToBack(true)
-                } else {
-                    navController.popBackStack()
+                when (navController.currentDestination?.id) {
+                    startFragmentId -> {
+                        moveTaskToBack(true)
+                    }
+                    R.id.searchResultFragment -> {
+                        navController.popBackStack(R.id.searchFragment, true) ||
+                            navController.popBackStack()
+                    }
+                    else -> {
+                        navController.popBackStack()
+                    }
                 }
             }
         })
@@ -219,23 +225,26 @@ class MainActivity : BaseActivity() {
 
         val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
-        searchView.setOnSearchClickListener {
-            if (navController.currentDestination?.id != R.id.searchResultFragment) {
-                searchViewModel.setQuery(null)
-                navController.navigate(R.id.searchFragment)
-            }
-        }
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val bundle = Bundle()
                 bundle.putString("query", query)
                 navController.navigate(R.id.searchResultFragment, bundle)
                 searchViewModel.setQuery("")
+                searchView.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                // Prevent navigation when search view is collapsed
+                if (searchView.isIconified ||
+                    binding.bottomNav.menu.children.any {
+                        it.itemId == navController.currentDestination?.id
+                    }
+                ) {
+                    return true
+                }
+
                 // prevent malicious navigation when the search view is getting collapsed
                 if (navController.currentDestination?.id in listOf(
                         R.id.searchResultFragment,
@@ -253,6 +262,36 @@ class MainActivity : BaseActivity() {
                     navController.navigate(R.id.searchFragment, bundle)
                 } else {
                     searchViewModel.setQuery(newText)
+                }
+
+                return true
+            }
+        })
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                if (navController.currentDestination?.id != R.id.searchResultFragment) {
+                    searchViewModel.setQuery(null)
+                    navController.navigate(R.id.searchFragment)
+                }
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                if (binding.mainMotionLayout.progress == 0F) {
+                    try {
+                        minimizePlayer()
+                    } catch (e: Exception) {
+                        // current fragment isn't the player fragment
+                    }
+                }
+                // Handover back press to `BackPressedDispatcher`
+                else if (binding.bottomNav.menu.children.none {
+                    it.itemId == navController.currentDestination?.id
+                }
+                ) {
+                    this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
 
                 return true
@@ -448,6 +487,26 @@ class MainActivity : BaseActivity() {
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         }
+    }
+
+    private fun navigateToBottomSelectedItem(item: MenuItem) {
+        // clear backstack if it's the start fragment
+        if (startFragmentId == item.itemId) navController.backQueue.clear()
+
+        if (item.itemId == R.id.subscriptionsFragment) {
+            binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
+        }
+
+        // navigate to the selected fragment, if the fragment already
+        // exists in backstack then pop up to that entry
+        if (!navController.popBackStack(item.itemId, false)) {
+            navController.navigate(item.itemId)
+        }
+
+        // Remove focus from search view when navigating to bottom view.
+        // Call only after navigate to destination, so it can be used in
+        // onMenuItemActionCollapse for backstack management
+        removeSearchFocus()
     }
 
     override fun onUserLeaveHint() {
