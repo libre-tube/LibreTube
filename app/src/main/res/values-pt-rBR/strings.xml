@@ -387,4 +387,8 @@
     <string name="trends">Tendências</string>
     <string name="featured">Destaque</string>
     <string name="trending">O que está em alta agora</string>
+    <string name="bookmarks">Favoritos</string>
+    <string name="bookmark">Favorito</string>
+    <string name="clear_bookmarks">Limpar favoritos</string>
+    <string name="bookmarks_empty">Ainda não há favoritos!</string>
 </resources>

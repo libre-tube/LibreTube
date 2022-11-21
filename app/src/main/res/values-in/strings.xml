@@ -389,4 +389,6 @@
     <string name="open_queue_from_notification">Buka antrean dari notifikasi</string>
     <string name="bookmarks">Markah</string>
     <string name="bookmark">Markah</string>
+    <string name="clear_bookmarks">Hapus markah</string>
+    <string name="bookmarks_empty">Belum ada markah!</string>
 </resources>

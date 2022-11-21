@@ -109,7 +109,7 @@
     <string name="app_icon">Ikona aplikacji</string>
     <string name="youtube">YouTube</string>
     <string name="music_songs">YT Music (Muzyka)</string>
-    <string name="music_videos">YT Music (Wideo)</string>
+    <string name="music_videos">YT Music (Teledyski)</string>
     <string name="music_albums">YT Music (Albumy)</string>
     <string name="music_playlists">YT Music (Playlisty)</string>
     <string name="playOnBackground">Odtwarzanie w tle</string>
@@ -226,7 +226,7 @@
     <string name="player_autoplay">Autoodtwarzanie</string>
     <string name="instance_frontend_url">Link do front-endu instancji</string>
     <string name="quality">Jakość</string>
-    <string name="hideTrendingPage">Ukryj kartę „Główna”</string>
+    <string name="hideTrendingPage">Ukryj stronę „Na czasie”</string>
     <string name="behavior">Zachowanie</string>
     <string name="pauseOnScreenOff">Wstrzymaj odtwarzanie</string>
     <string name="clonePlaylist">Sklonuj playlistę</string>
@@ -247,7 +247,7 @@
     <string name="data_saver_mode">Tryb oszczędzania danych</string>
     <string name="data_saver_mode_summary">Pomiń miniatury i inne obrazy.</string>
     <string name="search_history_summary">Zapamiętane wyszukiwania</string>
-    <string name="watch_history_summary">Przechowuj historię obejrzanych filmów lokalnie</string>
+    <string name="watch_history_summary">Przechowuj lokalnie historię obejrzanych filmów</string>
     <string name="history_summary">Historia oglądania i wyszukiwania</string>
     <string name="watch_positions_title">Zapamiętane pozycje odtwarzania</string>
     <string name="reset_watch_positions">Zresetuj</string>
@@ -315,7 +315,7 @@
     <string name="background_mode">Działanie w tle</string>
     <string name="share_with_time">Udostępnij z uwzględnieniem czasu</string>
     <string name="break_reminder_time">Minuty przed przypomnieniem</string>
-    <string name="trending_layout">Alternatywny układ głównej karty</string>
+    <string name="trending_layout">Inny układ „Na czasie”</string>
     <string name="renamePlaylist">Zmień nazwę playlisty</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dane mobilne</string>
@@ -371,7 +371,7 @@
     <string name="end_time">Koniec</string>
     <string name="notification_time">Ograniczenie powiadomień</string>
     <string name="notification_time_summary">Ogranicz powiadomienia do zakresu czasu.</string>
-    <string name="alternative_trending_layout">Alternatywny układ głównej karty</string>
+    <string name="alternative_trending_layout">Inny układ „Na czasie”</string>
     <string name="layout">Układ</string>
     <string name="navbar_order">Zarządzanie</string>
     <string name="alternative_player_layout_summary">Pokaż powiązane filmiki w wierszu nad komentarzami.</string>
@@ -387,4 +387,8 @@
     <string name="featured">Polecane</string>
     <string name="trending">Aktualnie na czasie</string>
     <string name="open_queue_from_notification">Otwórz kolejkę z powiadomienia</string>
+    <string name="bookmarks">Zakładki</string>
+    <string name="bookmark">Zakładka</string>
+    <string name="clear_bookmarks">Usuń zakładki</string>
+    <string name="bookmarks_empty">Nie dodano zakładek.</string>
 </resources>

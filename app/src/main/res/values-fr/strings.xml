@@ -225,9 +225,9 @@
     <string name="turnInternetOn">Veuillez activer le Wi-Fi ou les données mobiles pour vous connecter à internet.</string>
     <string name="chapters">Chapitres</string>
     <string name="change_playback_speed">Vitesse de lecture</string>
-    <string name="require_restart_message">Cette modification nécessite le redémarrage de l\'application. Appuyez sur « OK » pour redémarrer maintenant.</string>
+    <string name="require_restart_message">Redémarrez l\'application pour utiliser les nouveaux changements.</string>
     <string name="require_restart">Redémarrage nécessaire de l\'application</string>
-    <string name="navLabelVisibility">Visibilité de l\'étiquette de la barre de navigation</string>
+    <string name="navLabelVisibility">Visibilité de l\'étiquette</string>
     <string name="always">Toujours</string>
     <string name="autoRotatePlayer">Plein écran automatique</string>
     <string name="autoRotatePlayer_summary">Passer en plein écran dès que l\'appareil est retourné.</string>
@@ -359,7 +359,7 @@
     <string name="alternative_videos_layout">Disposition alternative des vidéos</string>
     <string name="defaultIconLight">Par défaut clair</string>
     <string name="show_more">Voir plus</string>
-    <string name="time_code">Code temporel</string>
+    <string name="time_code">Code temporel (secondes)</string>
     <string name="livestreams">Diffusions en direct</string>
     <string name="playlistCloned">Liste de lecture clonée</string>
     <string name="confirm_unsubscribe">Êtes-vous sûr·e de vouloir vous désabonner de %1$s \?</string>
@@ -382,4 +382,13 @@
     <string name="hls_instead_of_dash">Utiliser HLS</string>
     <string name="hls_instead_of_dash_summary">Utiliser HLS à la place de DASH (sera plus lent, non recommandé)</string>
     <string name="auto_quality">Automatique</string>
+    <string name="limit_to_runtime">Limite d\'exécution</string>
+    <string name="open_queue_from_notification">Ouvrir une file d\'attente à partir d\'une notification</string>
+    <string name="featured">En vedette</string>
+    <string name="trends">Tendances</string>
+    <string name="trending">Les tendances du moment</string>
+    <string name="bookmarks">Marque-pages</string>
+    <string name="bookmark">Marque-page</string>
+    <string name="clear_bookmarks">Effacer les marque-pages</string>
+    <string name="bookmarks_empty">Aucun marque-page !</string>
 </resources>

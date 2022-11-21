@@ -186,7 +186,7 @@
     <string name="hideTrendingPage">Скрыть вкладку \"тренды\"</string>
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
-    <string name="reset">Восстановить настройки по-умолчанию</string>
+    <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">URL-адрес экземпляра</string>
     <string name="quality">Качество</string>
@@ -226,7 +226,7 @@
     <string name="chapters">Эпизоды</string>
     <string name="change_playback_speed">Скорость воспроизведения</string>
     <string name="require_restart">Требуется перезапуск</string>
-    <string name="require_restart_message">Перезапустите приложения для применения изменений.</string>
+    <string name="require_restart_message">Перезапустите приложение для применения изменений.</string>
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
@@ -273,7 +273,7 @@
     <string name="new_streams_by">Новые видео от %1$s…</string>
     <string name="notify_new_streams_summary">Уведомления о свежем контенте от авторов, на которых подписаны.</string>
     <string name="checking_frequency">Проверять каждые…</string>
-    <string name="history_empty">История пуста.</string>
+    <string name="history_empty">Истории пока нет.</string>
     <string name="required_network">Используемое подключение</string>
     <string name="network_all">Любые сети</string>
     <string name="network_wifi">Только по Wi-Fi</string>
@@ -384,4 +384,11 @@
     <string name="auto_quality">Авто</string>
     <string name="trends">Тренды</string>
     <string name="bookmarks">Закладки</string>
+    <string name="limit_to_runtime">Ограничение времени выполнения</string>
+    <string name="open_queue_from_notification">Открыть очередь из уведомления</string>
+    <string name="trending">Сейчас в тренде</string>
+    <string name="clear_bookmarks">Очистить закладки</string>
+    <string name="bookmarks_empty">Закладок пока нет!</string>
+    <string name="featured">Рекомендации</string>
+    <string name="bookmark">Закладка</string>
 </resources>
