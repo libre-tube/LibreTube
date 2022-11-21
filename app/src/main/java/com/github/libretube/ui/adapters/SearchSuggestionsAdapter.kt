@@ -30,6 +30,9 @@ class SearchSuggestionsAdapter(
             root.setOnClickListener {
                 searchView.setQuery(suggestion, true)
             }
+            arrow.setOnClickListener {
+                searchView.setQuery(suggestion, false)
+            }
         }
     }
 }
