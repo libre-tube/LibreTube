@@ -186,7 +186,7 @@
     <string name="hideTrendingPage">Скрыть вкладку \"тренды\"</string>
     <string name="no_video">Нет видео</string>
     <string name="no_audio">Нет звука</string>
-    <string name="reset">Восстановить настройки по-умолчанию</string>
+    <string name="reset">Восстановить настройки по умолчанию</string>
     <string name="reset_message">Сбросить все настройки и выйти из аккаунта\?</string>
     <string name="instance_frontend_url">URL-адрес экземпляра</string>
     <string name="quality">Качество</string>
@@ -226,7 +226,7 @@
     <string name="chapters">Эпизоды</string>
     <string name="change_playback_speed">Скорость воспроизведения</string>
     <string name="require_restart">Требуется перезапуск</string>
-    <string name="require_restart_message">Перезапустите приложения для применения изменений.</string>
+    <string name="require_restart_message">Перезапустите приложение для применения изменений.</string>
     <string name="never">Никогда</string>
     <string name="autoRotatePlayer">Автоматический полноэкранный режим</string>
     <string name="pure_theme">Чистая тема</string>
