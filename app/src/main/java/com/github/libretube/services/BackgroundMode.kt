@@ -131,7 +131,7 @@ class BackgroundMode : Service() {
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
-            updateWatchPosition()
+            if (PlayerHelper.watchPositionsEnabled) updateWatchPosition()
         } catch (e: Exception) {
             onDestroy()
         }
