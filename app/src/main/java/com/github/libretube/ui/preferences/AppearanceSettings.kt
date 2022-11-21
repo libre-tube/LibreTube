@@ -10,7 +10,7 @@ import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.ui.sheets.IconsBottomSheet
 import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : BasePreferenceFragment() {
@@ -42,9 +42,9 @@ class AppearanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val iconChange = findPreference<ListPreference>(PreferenceKeys.APP_ICON)
-        iconChange?.setOnPreferenceChangeListener { _, newValue ->
-            ThemeHelper.changeIcon(requireContext(), newValue.toString())
+        val iconChange = findPreference<Preference>(PreferenceKeys.APP_ICON)
+        iconChange?.setOnPreferenceClickListener {
+            IconsBottomSheet().show(childFragmentManager)
             true
         }
 
