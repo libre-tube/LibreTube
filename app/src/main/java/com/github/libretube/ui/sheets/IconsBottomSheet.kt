@@ -1,6 +1,5 @@
 package com.github.libretube.ui.sheets
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,7 @@ class IconsBottomSheet : ExpandedBottomSheet() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.optionsRecycler.layoutManager = GridLayoutManager(context, 2)
+        binding.optionsRecycler.layoutManager = GridLayoutManager(context, 3)
         binding.optionsRecycler.adapter = IconsSheetAdapter()
     }
 }

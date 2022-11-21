@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
     android:background="@drawable/rounded_ripple"
     android:orientation="vertical"
-    android:paddingVertical="5dp">
+    android:paddingVertical="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iconIV"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_gravity="center"
+        android:padding="10dp"
         tools:src="@mipmap/ic_gradient" />
 
     <TextView
@@ -20,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:textSize="11sp" />
 
 </LinearLayout>
