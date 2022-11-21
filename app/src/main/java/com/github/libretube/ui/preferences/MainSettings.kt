@@ -101,7 +101,7 @@ class MainSettings : BasePreferenceFragment() {
                 val updateInfo = try {
                     RetrofitInstance.externalApi.getUpdateInfo()
                 } catch (e: Exception) {
-                    showSnackBar(R.string.server_error)
+                    showSnackBar(R.string.unknown_error)
                     return@launch
                 }
 
