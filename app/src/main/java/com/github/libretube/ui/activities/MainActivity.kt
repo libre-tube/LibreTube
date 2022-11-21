@@ -106,29 +106,16 @@ class MainActivity : BaseActivity() {
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
-        // Prevent adding duplicate entries into backstack on multiple
-        // click on bottom navigation item
-        binding.bottomNav.setOnItemReselectedListener { }
+        // Prevent duplicate entries into backstack, if selected item and current
+        // visible fragment is different, then navigate to selected item.
+        binding.bottomNav.setOnItemReselectedListener {
+            if (it.itemId != navController.currentDestination?.id) {
+                navigateToBottomSelectedItem(it)
+            }
+        }
 
         binding.bottomNav.setOnItemSelectedListener {
-            // clear backstack if it's the start fragment
-            if (startFragmentId == it.itemId) navController.backQueue.clear()
-
-            if (it.itemId == R.id.subscriptionsFragment) {
-                binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
-            }
-
-            // navigate to the selected fragment, if the fragment already
-            // exists in backstack then pop up to that entry
-            if (!navController.popBackStack(it.itemId, false)) {
-                navController.navigate(it.itemId)
-            }
-
-            // Remove focus from search view when navigating to bottom view.
-            // Call only after navigate to destination, so it can be used in
-            // onMenuItemActionCollapse for backstack management
-            removeSearchFocus()
-
+            navigateToBottomSelectedItem(it)
             false
         }
 
@@ -494,6 +481,26 @@ class MainActivity : BaseActivity() {
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         }
+    }
+
+    private fun navigateToBottomSelectedItem(item: MenuItem) {
+        // clear backstack if it's the start fragment
+        if (startFragmentId == item.itemId) navController.backQueue.clear()
+
+        if (item.itemId == R.id.subscriptionsFragment) {
+            binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
+        }
+
+        // navigate to the selected fragment, if the fragment already
+        // exists in backstack then pop up to that entry
+        if (!navController.popBackStack(item.itemId, false)) {
+            navController.navigate(item.itemId)
+        }
+
+        // Remove focus from search view when navigating to bottom view.
+        // Call only after navigate to destination, so it can be used in
+        // onMenuItemActionCollapse for backstack management
+        removeSearchFocus()
     }
 
     override fun onUserLeaveHint() {
