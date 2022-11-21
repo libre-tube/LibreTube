@@ -501,11 +501,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
         try {
-            // clear the playing queue
-            PlayingQueue.resetToDefaults()
-
             saveWatchPosition()
+
+            // clear the playing queue and release the player
+            PlayingQueue.resetToDefaults()
             nowPlayingNotification.destroySelfAndPlayer()
+
             activity?.requestedOrientation =
                 if ((activity as MainActivity).autoRotationEnabled) {
                     ActivityInfo.SCREEN_ORIENTATION_USER
@@ -520,16 +521,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
         if (!PlayerHelper.watchPositionsEnabled) return
-        if (exoPlayer.currentPosition != exoPlayer.duration) {
-            val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
-            query {
-                Database.watchPositionDao().insertAll(watchPosition)
-            }
-        } else if (PlayerHelper.watchPositionsEnabled) {
-            // delete watch position if video has ended
-            query {
-                Database.watchPositionDao().deleteById(videoId!!)
-            }
+        Log.e(
+            "watchpositions",
+            PreferenceHelper.getBoolean(
+                PreferenceKeys.WATCH_POSITION_TOGGLE,
+                true
+            ).toString()
+        )
+        val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
+        query {
+            Database.watchPositionDao().insertAll(watchPosition)
         }
     }
 
