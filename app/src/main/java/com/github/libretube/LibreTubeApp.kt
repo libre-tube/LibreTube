@@ -16,6 +16,7 @@ import com.github.libretube.util.ExceptionHandler
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NotificationHelper
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.ProxyHelper
 
 class LibreTubeApp : Application() {
     override fun onCreate() {
@@ -56,6 +57,11 @@ class LibreTubeApp : Application() {
             context = this,
             existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.KEEP
         )
+
+        /**
+         * Fetch the image proxy URL for local playlists and the watch history
+         */
+        ProxyHelper.fetchProxyUrl()
 
         /**
          * Handler for uncaught exceptions

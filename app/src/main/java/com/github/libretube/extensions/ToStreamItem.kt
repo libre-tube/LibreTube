@@ -1,8 +1,10 @@
 package com.github.libretube.extensions
 
+import android.util.Log
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.db.obj.LocalPlaylistItem
+import com.github.libretube.util.ProxyHelper
 
 fun Streams.toStreamItem(videoId: String): StreamItem {
     return StreamItem(
@@ -22,13 +24,14 @@ fun Streams.toStreamItem(videoId: String): StreamItem {
 }
 
 fun LocalPlaylistItem.toStreamItem(): StreamItem {
+    Log.e("thumb", ProxyHelper.rewriteUrl(thumbnailUrl).toString())
     return StreamItem(
         url = videoId,
         title = title,
-        thumbnail = thumbnailUrl,
+        thumbnail = ProxyHelper.rewriteUrl(thumbnailUrl),
         uploaderName = uploader,
         uploaderUrl = uploaderUrl,
-        uploaderAvatar = uploaderAvatar,
+        uploaderAvatar = ProxyHelper.rewriteUrl(uploaderAvatar),
         uploadedDate = uploadDate,
         uploaded = null,
         duration = duration

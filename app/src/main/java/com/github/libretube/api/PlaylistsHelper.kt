@@ -15,6 +15,7 @@ import com.github.libretube.extensions.toLocalPlaylistItem
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.ProxyHelper
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -56,7 +57,7 @@ object PlaylistsHelper {
                 }.first { it.playlist.id.toString() == playlistId }
                 return Playlist(
                     name = relation.playlist.name,
-                    thumbnailUrl = relation.playlist.thumbnailUrl,
+                    thumbnailUrl = ProxyHelper.rewriteUrl(relation.playlist.thumbnailUrl),
                     videos = relation.videos.size,
                     relatedStreams = relation.videos.map { it.toStreamItem() }
                 )

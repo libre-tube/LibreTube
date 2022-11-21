@@ -10,6 +10,7 @@ object PreferenceKeys {
     const val AUTH_PREF_FILE = "auth"
     const val TOKEN = "token"
     const val USERNAME = "username"
+    const val IMAGE_PROXY_URL = "image_proxy_url"
 
     /**
      * General

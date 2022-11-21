@@ -33,8 +33,8 @@ object PreferenceHelper {
         editor.putString(key, value).commit()
     }
 
-    fun getString(key: String?, defValue: String?): String {
-        return settings.getString(key, defValue)!!
+    fun getString(key: String?, defValue: String): String {
+        return settings.getString(key, defValue) ?: defValue
     }
 
     fun getBoolean(key: String?, defValue: Boolean): Boolean {
@@ -47,10 +47,6 @@ object PreferenceHelper {
 
     fun clearPreferences() {
         editor.clear().apply()
-    }
-
-    fun removePreference(value: String?) {
-        editor.remove(value).apply()
     }
 
     fun getToken(): String {
