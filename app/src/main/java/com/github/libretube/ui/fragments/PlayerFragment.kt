@@ -1105,33 +1105,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 continue
             }
 
-            resolutions.add(
-                VideoResolution(
-                    name = "${vid.quality.qualityToInt()}p",
-                    resolution = vid.quality.qualityToInt()
-                )
-            )
-
-            /*
-            // append quality to list if it has the preferred format (e.g. MPEG)
-            val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
-            if (vid.url != null && vid.mimeType == preferredMimeType) {
-                // avoid duplicated resolutions
-                if (resolutions.any {
-                    it.resolution == vid.quality.qualityToInt()
-                }
-                ) {
-                    continue
-                }
-
+            runCatching {
                 resolutions.add(
                     VideoResolution(
                         name = "${vid.quality.qualityToInt()}p",
                         resolution = vid.quality.qualityToInt()
                     )
                 )
-                }
-            */
+            }
+
+            /*
+            // append quality to list if it has the preferred format (e.g. MPEG)
+            val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
+            if (vid.url != null && vid.mimeType == preferredMimeType)
+             */
         }
 
         if (resolutions.isEmpty()) {
