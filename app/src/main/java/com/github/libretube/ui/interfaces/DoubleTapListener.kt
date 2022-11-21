@@ -38,7 +38,7 @@ abstract class DoubleTapListener : View.OnClickListener {
     }
 
     private fun recentDoubleClick(): Boolean {
-        return elapsedTime() - lastDoubleClick < MAX_TIME_DIFF
+        return elapsedTime() - lastDoubleClick < MAX_TIME_DIFF / 2
     }
 
     fun elapsedTime() = SystemClock.elapsedRealtime()
