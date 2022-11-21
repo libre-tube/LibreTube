@@ -22,6 +22,7 @@ import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
@@ -53,6 +54,7 @@ class BackgroundMode : Service() {
      *PlaylistId for autoplay
      */
     private var playlistId: String? = null
+    private var playlistType: PlaylistType? = null
 
     /**
      * The response that gets when called the Api.
@@ -162,7 +164,9 @@ class BackgroundMode : Service() {
             // add the playlist video to the queue
             if (playlistId != null && PlayingQueue.isEmpty()) {
                 streams?.toStreamItem(videoId)
-                    ?.let { PlayingQueue.insertPlaylist(playlistId!!, it) }
+                    ?.let {
+                        PlayingQueue.insertPlaylist(playlistId!!, it)
+                    }
             } else {
                 streams?.toStreamItem(videoId)?.let { PlayingQueue.updateCurrent(it) }
                 streams?.relatedStreams?.toTypedArray()?.let {

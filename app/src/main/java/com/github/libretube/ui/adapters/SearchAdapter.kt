@@ -10,6 +10,7 @@ import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.databinding.ChannelRowBinding
 import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.base.BaseActivity
@@ -140,13 +141,13 @@ class SearchAdapter(
             playlistTitle.text = item.name
             playlistDescription.text = item.uploaderName
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, item.url, false)
+                NavigationHelper.navigatePlaylist(root.context, item.url, PlaylistType.PUBLIC)
             }
             deletePlaylist.visibility = View.GONE
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()
                 val playlistName = item.name!!
-                PlaylistOptionsBottomSheet(playlistId, playlistName, false)
+                PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
                     .show((root.context as BaseActivity).supportFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
                 true
             }

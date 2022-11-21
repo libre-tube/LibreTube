@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.PlaylistBookmarkRowBinding
 import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toDp
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistBookmarkViewHolder
@@ -39,14 +40,14 @@ class PlaylistBookmarkAdapter(
             uploaderName.text = bookmark.uploader
 
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, bookmark.playlistId, false)
+                NavigationHelper.navigatePlaylist(root.context, bookmark.playlistId, PlaylistType.PUBLIC)
             }
 
             root.setOnLongClickListener {
                 PlaylistOptionsBottomSheet(
                     playlistId = bookmark.playlistId,
                     playlistName = bookmark.playlistName ?: "",
-                    isOwner = false
+                    playlistType = PlaylistType.PUBLIC
                 ).show(
                     (root.context as AppCompatActivity).supportFragmentManager
                 )

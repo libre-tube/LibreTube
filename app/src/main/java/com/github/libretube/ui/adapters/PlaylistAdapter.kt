@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.PlaylistRowBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.base.BaseActivity
@@ -20,17 +20,15 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import java.io.IOException
 
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,
     private val playlistId: String,
-    private val isOwner: Boolean
+    private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -70,7 +68,7 @@ class PlaylistAdapter(
                 true
             }
 
-            if (isOwner) {
+            if (playlistType != PlaylistType.PUBLIC) {
                 deletePlaylist.visibility = View.VISIBLE
                 deletePlaylist.setOnClickListener {
                     removeFromPlaylist(root.context, position)
@@ -88,19 +86,9 @@ class PlaylistAdapter(
         }
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                RetrofitInstance.authApi.removeFromPlaylist(
-                    PreferenceHelper.getToken(),
-                    PlaylistId(
-                        playlistId = playlistId,
-                        index = position
-                    )
-                )
+                PlaylistsHelper.removeFromPlaylist(playlistId, position)
             } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launch
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
+                Log.e(TAG(), e.toString())
                 return@launch
             }
         }

@@ -1,6 +1,7 @@
 package com.github.libretube.util
 
 import android.util.Log
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
@@ -106,14 +107,16 @@ object PlayingQueue {
     fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitInstance.authApi.getPlaylist(playlistId)
+                val playlistType = PlaylistsHelper.getPrivateType(playlistId)
+                val playlist = PlaylistsHelper.getPlaylist(playlistType, playlistId)
                 add(
-                    *response.relatedStreams
+                    *playlist.relatedStreams
                         .orEmpty()
                         .toTypedArray()
                 )
                 updateCurrent(newCurrentStream)
-                fetchMoreFromPlaylist(playlistId, response.nextpage)
+                if (playlist.nextpage == null) return@launch
+                fetchMoreFromPlaylist(playlistId, playlist.nextpage)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

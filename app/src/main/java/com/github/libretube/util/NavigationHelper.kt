@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.fragments.PlayerFragment
@@ -59,14 +60,14 @@ object NavigationHelper {
     fun navigatePlaylist(
         context: Context,
         playlistId: String?,
-        isOwner: Boolean
+        playlistType: PlaylistType
     ) {
         if (playlistId == null) return
 
         val activity = context as MainActivity
         val bundle = Bundle()
         bundle.putString(IntentData.playlistId, playlistId)
-        bundle.putBoolean("isOwner", isOwner)
+        bundle.putSerializable(IntentData.playlistType, playlistType)
         activity.navController.navigate(R.id.playlistFragment, bundle)
     }
 

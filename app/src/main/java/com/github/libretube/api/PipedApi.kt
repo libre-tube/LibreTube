@@ -6,6 +6,7 @@ import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.api.obj.DeleteUserRequest
 import com.github.libretube.api.obj.Login
 import com.github.libretube.api.obj.Message
+import com.github.libretube.api.obj.PipedConfig
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.Playlists
@@ -24,6 +25,9 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PipedApi {
+    @GET("config")
+    suspend fun getConfig(): PipedConfig
+
     @GET("trending")
     suspend fun getTrending(@Query("region") region: String): List<StreamItem>
 

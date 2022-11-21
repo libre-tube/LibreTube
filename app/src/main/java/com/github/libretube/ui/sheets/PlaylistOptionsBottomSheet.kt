@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.text.InputType
 import android.widget.Toast
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.databinding.DialogTextPreferenceBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
@@ -25,23 +27,22 @@ import java.io.IOException
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
-    private val playlistName: String,
-    private val isOwner: Boolean
+    playlistName: String,
+    private val playlistType: PlaylistType
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
-        var optionsList = listOf(
-            context?.getString(R.string.playOnBackground)!!,
-            context?.getString(R.string.clonePlaylist)!!,
-            context?.getString(R.string.share)!!
+        val optionsList = mutableListOf(
+            context?.getString(R.string.playOnBackground)!!
         )
 
-        if (isOwner) {
-            optionsList = optionsList +
-                context?.getString(R.string.renamePlaylist)!! +
-                context?.getString(R.string.deletePlaylist)!! -
-                context?.getString(R.string.clonePlaylist)!!
+        if (playlistType == PlaylistType.PUBLIC) {
+            optionsList.add(context?.getString(R.string.share)!!)
+            optionsList.add(context?.getString(R.string.clonePlaylist)!!)
+        } else {
+            optionsList.add(context?.getString(R.string.renamePlaylist)!!)
+            optionsList.add(context?.getString(R.string.deletePlaylist)!!)
         }
 
         setSimpleItems(optionsList) { which ->
@@ -50,7 +51,7 @@ class PlaylistOptionsBottomSheet(
                 context?.getString(R.string.playOnBackground) -> {
                     runBlocking {
                         val playlist =
-                            if (isOwner) {
+                            if (playlistType == PlaylistType.PRIVATE) {
                                 RetrofitInstance.authApi.getPlaylist(playlistId)
                             } else {
                                 RetrofitInstance.api.getPlaylist(playlistId)
@@ -82,7 +83,7 @@ class PlaylistOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 context?.getString(R.string.deletePlaylist) -> {
-                    DeletePlaylistDialog(playlistId)
+                    DeletePlaylistDialog(playlistId, playlistType)
                         .show(parentFragmentManager, null)
                 }
                 context?.getString(R.string.renamePlaylist) -> {
@@ -102,7 +103,13 @@ class PlaylistOptionsBottomSheet(
                                 ).show()
                                 return@setPositiveButton
                             }
-                            renamePlaylist(playlistId, binding.input.text.toString())
+                            CoroutineScope(Dispatchers.IO).launch {
+                                try {
+                                    PlaylistsHelper.renamePlaylist(playlistId, binding.input.text.toString())
+                                } catch (e: Exception) {
+                                    return@launch
+                                }
+                            }
                         }
                         .setNegativeButton(R.string.cancel, null)
                         .show()
@@ -127,22 +134,6 @@ class PlaylistOptionsBottomSheet(
                 return@launch
             }
             appContext?.toastFromMainThread(if (response.playlistId != null) R.string.playlistCloned else R.string.server_error)
-        }
-    }
-
-    private fun renamePlaylist(id: String, newName: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                RetrofitInstance.authApi.renamePlaylist(
-                    PreferenceHelper.getToken(),
-                    PlaylistId(
-                        playlistId = id,
-                        newName = newName
-                    )
-                )
-            } catch (e: Exception) {
-                return@launch
-            }
         }
     }
 }
