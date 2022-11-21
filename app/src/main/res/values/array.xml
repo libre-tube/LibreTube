@@ -217,29 +217,6 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="icons">
-        <item>@string/defaultIcon</item>
-        <item>@string/defaultIconLight</item>
-        <item>@string/legacyIcon</item>
-        <item>@string/gradientIcon</item>
-        <item>@string/fireIcon</item>
-        <item>@string/torchIcon</item>
-        <item>@string/shapedIcon</item>
-        <item>@string/flameIcon</item>
-        <item>@string/birdIcon</item>
-    </string-array>
-    <string-array name="iconsValue">
-        <item>MainActivity</item>
-        <item>DefaultLight</item>
-        <item>IconLegacy</item>
-        <item>IconGradient</item>
-        <item>IconFire</item>
-        <item>IconTorch</item>
-        <item>IconShaped</item>
-        <item>IconFlame</item>
-        <item>IconBird</item>
-    </string-array>
-
     <string-array name="videoFormats">
         <item>MP4</item>
         <item>MKV</item>

@@ -7,10 +7,12 @@ import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.SettingsActivity
+import com.github.libretube.ui.adapters.IconsSheetAdapter
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.ui.sheets.IconsBottomSheet
+import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : BasePreferenceFragment() {
@@ -42,9 +44,13 @@ class AppearanceSettings : BasePreferenceFragment() {
             true
         }
 
-        val iconChange = findPreference<ListPreference>(PreferenceKeys.APP_ICON)
-        iconChange?.setOnPreferenceChangeListener { _, newValue ->
-            ThemeHelper.changeIcon(requireContext(), newValue.toString())
+        val changeIcon = findPreference<Preference>(PreferenceKeys.APP_ICON)
+        val iconPref = PreferenceHelper.getString(PreferenceKeys.APP_ICON, IconsSheetAdapter.Companion.AppIcon.Default.activityAlias)
+        IconsSheetAdapter.availableIcons.firstOrNull { it.activityAlias == iconPref }?.let {
+            changeIcon?.summary = getString(it.nameResource)
+        }
+        changeIcon?.setOnPreferenceClickListener {
+            IconsBottomSheet().show(childFragmentManager)
             true
         }
 

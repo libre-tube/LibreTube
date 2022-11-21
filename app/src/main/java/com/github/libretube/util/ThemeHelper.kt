@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.ui.adapters.IconsSheetAdapter
 import com.google.android.material.color.DynamicColors
 
 object ThemeHelper {
@@ -93,15 +94,9 @@ object ThemeHelper {
      * change the app icon
      */
     fun changeIcon(context: Context, newLogoActivityAlias: String) {
-        val activityAliases = context.resources.getStringArray(R.array.iconsValue)
         // Disable Old Icon(s)
-        for (activityAlias in activityAliases) {
-            val activityClass = "com.github.libretube." +
-                if (activityAlias == activityAliases[0]) {
-                    "ui.activities.MainActivity" // default icon/activity
-                } else {
-                    activityAlias
-                }
+        for (appIcon in IconsSheetAdapter.availableIcons) {
+            val activityClass = "com.github.libretube." + appIcon.activityAlias
 
             // remove old icons
             context.packageManager.setComponentEnabledSetting(
@@ -112,12 +107,7 @@ object ThemeHelper {
         }
 
         // set the class name for the activity alias
-        val newLogoActivityClass = "com.github.libretube." +
-            if (newLogoActivityAlias == activityAliases[0]) {
-                "ui.activities.MainActivity" // default icon/activity
-            } else {
-                newLogoActivityAlias
-            }
+        val newLogoActivityClass = "com.github.libretube." + newLogoActivityAlias
         // Enable New Icon
         context.packageManager.setComponentEnabledSetting(
             ComponentName(context.packageName, newLogoActivityClass),

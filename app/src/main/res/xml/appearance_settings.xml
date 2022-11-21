@@ -29,14 +29,10 @@
             app:title="@string/color_accent"
             app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
+        <Preference
             android:icon="@drawable/ic_frame"
-            app:defaultValue="MainActivity"
-            app:entries="@array/icons"
-            app:entryValues="@array/iconsValue"
             app:key="icon_change"
-            app:title="@string/app_icon"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/app_icon" />
 
     </PreferenceCategory>
 
