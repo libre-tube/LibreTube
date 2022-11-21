@@ -273,7 +273,7 @@
     <string name="new_streams_by">Новые видео от %1$s…</string>
     <string name="notify_new_streams_summary">Уведомления о свежем контенте от авторов, на которых подписаны.</string>
     <string name="checking_frequency">Проверять каждые…</string>
-    <string name="history_empty">История пуста</string>
+    <string name="history_empty">Истории пока нет.</string>
     <string name="required_network">Используемое подключение</string>
     <string name="network_all">Любые сети</string>
     <string name="network_wifi">Только по Wi-Fi</string>
@@ -388,7 +388,7 @@
     <string name="open_queue_from_notification">Открыть очередь из уведомления</string>
     <string name="trending">Сейчас в тренде</string>
     <string name="clear_bookmarks">Очистить закладки</string>
-    <string name="bookmarks_empty">Нет закладок</string>
+    <string name="bookmarks_empty">Закладок пока нет!</string>
     <string name="featured">Рекомендации</string>
     <string name="bookmark">Закладка</string>
 </resources>
