@@ -256,12 +256,6 @@ object PlayerHelper {
             false
         )
 
-    val progressiveLoadingIntervalSize: String
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.PROGRESSIVE_LOADING_INTERVAL_SIZE,
-            "64"
-        )
-
     val autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_PLAY,
