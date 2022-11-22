@@ -391,4 +391,5 @@
     <string name="bookmark">Закладка</string>
     <string name="clear_bookmarks">Очистити закладки</string>
     <string name="bookmarks_empty">Ще немає закладок!</string>
+    <string name="queue_insert_related_videos">Вставити пов\'язані відео</string>
 </resources>
