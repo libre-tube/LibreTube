@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
-import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainThread
@@ -22,14 +21,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AddToPlaylistDialog : DialogFragment() {
+class AddToPlaylistDialog(
+    private val videoId: String
+) : DialogFragment() {
     private lateinit var binding: DialogAddtoplaylistBinding
     private val viewModel: PlaylistViewModel by activityViewModels()
 
-    private lateinit var videoId: String
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        videoId = arguments?.getString(IntentData.videoId)!!
         binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
