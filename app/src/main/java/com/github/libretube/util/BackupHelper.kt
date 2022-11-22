@@ -48,19 +48,22 @@ class BackupHelper(private val context: Context) {
 
         query {
             Database.watchHistoryDao().insertAll(
-                *backupFile.watchHistory?.toTypedArray().orEmpty()
+                *backupFile.watchHistory.orEmpty().toTypedArray()
             )
             Database.searchHistoryDao().insertAll(
-                *backupFile.searchHistory?.toTypedArray().orEmpty()
+                *backupFile.searchHistory.orEmpty().toTypedArray()
             )
             Database.watchPositionDao().insertAll(
-                *backupFile.watchPositions?.toTypedArray().orEmpty()
+                *backupFile.watchPositions.orEmpty().toTypedArray()
             )
             Database.localSubscriptionDao().insertAll(
-                *backupFile.localSubscriptions?.toTypedArray().orEmpty()
+                *backupFile.localSubscriptions.orEmpty().toTypedArray()
             )
             Database.customInstanceDao().insertAll(
-                *backupFile.customInstances?.toTypedArray().orEmpty()
+                *backupFile.customInstances.orEmpty().toTypedArray()
+            )
+            Database.playlistBookmarkDao().insertAll(
+                *backupFile.playlistBookmarks.orEmpty().toTypedArray()
             )
 
             restorePreferences(backupFile.preferences)
