@@ -168,9 +168,11 @@ class BackgroundMode : Service() {
                         PlayingQueue.insertPlaylist(playlistId!!, it)
                     }
             } else {
-                streams?.toStreamItem(videoId)?.let { PlayingQueue.updateCurrent(it) }
+                streams?.toStreamItem(videoId)?.let {
+                    PlayingQueue.updateCurrent(it)
+                }
                 streams?.relatedStreams?.toTypedArray()?.let {
-                    PlayingQueue.add(*it)
+                    if (PlayerHelper.autoInsertRelatedVideos) PlayingQueue.add(*it)
                 }
             }
 
