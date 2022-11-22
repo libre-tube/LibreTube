@@ -942,18 +942,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             streams.uploader
         )
 
-        if (token != "") {
-            binding.relPlayerSave.setOnClickListener {
-                val newFragment = AddToPlaylistDialog()
-                val bundle = Bundle()
-                bundle.putString(IntentData.videoId, videoId)
-                newFragment.arguments = bundle
-                newFragment.show(childFragmentManager, AddToPlaylistDialog::class.java.name)
-            }
-        } else {
-            binding.relPlayerSave.setOnClickListener {
-                Toast.makeText(context, R.string.login_first, Toast.LENGTH_SHORT).show()
-            }
+        binding.relPlayerSave.setOnClickListener {
+            AddToPlaylistDialog(videoId!!).show(
+                childFragmentManager,
+                AddToPlaylistDialog::class.java.name
+            )
         }
 
         // next and previous buttons

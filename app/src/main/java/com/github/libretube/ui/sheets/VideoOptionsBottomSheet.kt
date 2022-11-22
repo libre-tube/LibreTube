@@ -1,10 +1,8 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.constants.IntentData
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.obj.ShareData
@@ -52,9 +50,7 @@ class VideoOptionsBottomSheet(
                 }
                 // Add Video to Playlist Dialog
                 context?.getString(R.string.addToPlaylist) -> {
-                    AddToPlaylistDialog().apply {
-                        arguments = bundleOf(IntentData.videoId to videoId)
-                    }.show(
+                    AddToPlaylistDialog(videoId).show(
                         parentFragmentManager,
                         AddToPlaylistDialog::class.java.name
                     )
