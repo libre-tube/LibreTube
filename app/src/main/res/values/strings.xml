@@ -385,6 +385,7 @@
     <string name="bookmark">Bookmark</string>
     <string name="clear_bookmarks">Clear bookmarks</string>
     <string name="bookmarks_empty">No bookmarks yet!</string>
+    <string name="queue_insert_related_videos">Insert related videos</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

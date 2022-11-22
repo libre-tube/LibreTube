@@ -597,9 +597,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
                     } else {
                         PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
-                        PlayingQueue.add(
-                            *streams.relatedStreams.orEmpty().toTypedArray()
-                        )
+                        if (PlayerHelper.autoInsertRelatedVideos) {
+                            PlayingQueue.add(
+                                *streams.relatedStreams.orEmpty().toTypedArray()
+                            )
+                        }
                     }
                 }
             } else {

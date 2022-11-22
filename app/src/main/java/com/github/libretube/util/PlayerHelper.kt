@@ -288,6 +288,12 @@ object PlayerHelper {
             false
         )
 
+    val autoInsertRelatedVideos: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,
+            true
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(
