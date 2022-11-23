@@ -391,4 +391,5 @@
     <string name="bookmark">סימנייה</string>
     <string name="clear_bookmarks">פינוי סימניות</string>
     <string name="bookmarks_empty">אין סימניות עדיין!</string>
+    <string name="queue_insert_related_videos">הוספת סרטונים קשורים</string>
 </resources>
