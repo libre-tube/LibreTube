@@ -15,7 +15,6 @@ import com.github.libretube.extensions.toDp
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
-import com.github.libretube.ui.interfaces.DoubleTapInterface
 import com.github.libretube.ui.interfaces.DoubleTapListener
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
@@ -41,7 +40,6 @@ internal class CustomExoPlayerView(
     /**
      * Objects from the parent fragment
      */
-    private var doubleTapListener: DoubleTapInterface? = null
     private var playerOptionsInterface: OnlinePlayerOptions? = null
     private var trackSelector: TrackSelector? = null
 
@@ -56,6 +54,7 @@ internal class CustomExoPlayerView(
      * Preferences
      */
     var autoplayEnabled = PlayerHelper.autoPlayEnabled
+    private var doubleTapAllowed = true
 
     private var resizeModePref = PlayerHelper.resizeModePref
 
@@ -68,7 +67,21 @@ internal class CustomExoPlayerView(
 
     private val doubleTouchListener = object : DoubleTapListener() {
         override fun onDoubleClick() {
-            doubleTapListener?.onEvent(xPos)
+            if (!doubleTapAllowed) return
+            val eventPositionPercentageX = xPos / width
+            when {
+                eventPositionPercentageX < 0.4 -> rewind()
+                eventPositionPercentageX > 0.6 -> forward()
+                else -> {
+                    player?.let { player ->
+                        if (player.isPlaying) {
+                            player.pause()
+                        } else {
+                            player.play()
+                        }
+                    }
+                }
+            }
         }
 
         override fun onSingleClick() {
@@ -248,14 +261,8 @@ internal class CustomExoPlayerView(
         binding.exoBottomBar.visibility = visibility
         binding.closeImageButton.visibility = visibility
 
-        // disable double tap to seek when the player is locked
-        if (isLocked) {
-            // enable fast forward and rewind by double tapping
-            enableDoubleTapToSeek()
-        } else {
-            // disable fast forward and rewind by double tapping
-            doubleTapListener = null
-        }
+        // disable double tap to seek if the player is locked
+        doubleTapAllowed = !isLocked
     }
 
     private fun enableDoubleTapToSeek() {
@@ -263,15 +270,6 @@ internal class CustomExoPlayerView(
         val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
         doubleTapOverlayBinding?.rewindTV?.text = seekIncrementText
         doubleTapOverlayBinding?.forwardTV?.text = seekIncrementText
-        doubleTapListener =
-            object : DoubleTapInterface {
-                override fun onEvent(x: Float) {
-                    when {
-                        width * 0.5 > x -> rewind()
-                        width * 0.5 < x -> forward()
-                    }
-                }
-            }
     }
 
     private fun rewind() {
