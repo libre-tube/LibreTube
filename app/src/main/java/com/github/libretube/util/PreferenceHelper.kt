@@ -29,8 +29,12 @@ object PreferenceHelper {
         authEditor = authSettings.edit()
     }
 
-    fun putString(key: String?, value: String) {
+    fun putString(key: String, value: String) {
         editor.putString(key, value).commit()
+    }
+
+    fun putBoolean(key: String, value: Boolean) {
+        editor.putBoolean(key, value).commit()
     }
 
     fun getString(key: String?, defValue: String): String {
