@@ -40,6 +40,10 @@ class BackupDialog(
             it.playlistBookmarks = Database.playlistBookmarkDao().getAll()
         })
 
+        object LocalPlaylists : BackupOption(R.string.local_playlists, onSelected = {
+            it.localPlaylists = Database.localPlaylistsDao().getAll()
+        })
+
         object Preferences : BackupOption(R.string.preferences, onSelected = {
             it.preferences = PreferenceHelper.settings.all.map {
                 PreferenceItem(it.key, it.value)
@@ -54,6 +58,7 @@ class BackupDialog(
             BackupOption.LocalSubscriptions,
             BackupOption.CustomInstances,
             BackupOption.PlaylistBookmarks,
+            BackupOption.LocalPlaylists,
             BackupOption.Preferences
         )
 

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class LocalPlaylistItem(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo val playlistId: Int,
+    @ColumnInfo var playlistId: Int,
     @ColumnInfo val videoId: String,
     @ColumnInfo val title: String? = null,
     @ColumnInfo val uploadDate: String? = null,
