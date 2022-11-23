@@ -196,7 +196,7 @@
     <string name="legacy_subscriptions">Starszy widok subskrybcji</string>
     <string name="device_info">Informacje o urządzeniu</string>
     <string name="downloading">Pobieranie…</string>
-    <string name="autoplay_summary">Automatyczne odtwarzanie następnego filmu.</string>
+    <string name="autoplay_summary">Odtwórz kolejny filmik po obejrzeniu bieżącego.</string>
     <string name="seekbar_preview">Podgląd wideo</string>
     <string name="seekbar_preview_summary">Pokaż ujęcie podczas przesuwania wskaźnika odtwarzania.</string>
     <string name="playingOnBackground">Odtwarzanie w tle…</string>
@@ -235,7 +235,7 @@
     <string name="auth_instance_summary">Użyj innej instancji do obsługi konta Piped.</string>
     <string name="auth_instances">Wybierz instancję autoryzacyjną</string>
     <string name="audio_video">Dźwięk i wideo</string>
-    <string name="fullscreen_orientation">Orientacja pełnoekranowa</string>
+    <string name="fullscreen_orientation">Wyświetlanie pełnoekranowe</string>
     <string name="portrait">Pionowa</string>
     <string name="community">Społeczność</string>
     <string name="discord">Discord</string>
@@ -291,7 +291,7 @@
     <string name="selected">Wybrana karta</string>
     <string name="never">Nigdy</string>
     <string name="autoRotatePlayer">Automatyczny pełny ekran</string>
-    <string name="autoRotatePlayer_summary">Odtwarzanie pełnoekranowe po obróceniu urządzenia.</string>
+    <string name="autoRotatePlayer_summary">Obróć urządzenie, aby odtwarzać na pełnym ekranie.</string>
     <string name="pure_theme">Czysty motyw</string>
     <string name="seek_increment">Wielkość skoku przy przewijaniu</string>
     <string name="player_summary">Domyślne ustawienia i zachowanie</string>
@@ -302,9 +302,9 @@
     <string name="best_quality">Najlepsza</string>
     <string name="worst_quality">Najgorsza</string>
     <string name="torchIcon">Modna lampka</string>
-    <string name="aspect_ratio">Format obrazu</string>
+    <string name="aspect_ratio">Użyj proporcji obrazu wideo</string>
     <string name="reddit">Reddit</string>
-    <string name="pauseOnScreenOff_summary">Wstrzymaj odtwarzanie, gdy ekran jest wyłączony.</string>
+    <string name="pauseOnScreenOff_summary">Zatrzymaj odtwarzanie, gdy ekran jest wyłączony.</string>
     <string name="unlimited">Bez limitu</string>
     <string name="auto_rotation">Automatyczne obracanie</string>
     <string name="telegram">Telegram</string>
@@ -391,4 +391,5 @@
     <string name="bookmark">Zakładka</string>
     <string name="clear_bookmarks">Usuń zakładki</string>
     <string name="bookmarks_empty">Nie dodano zakładek.</string>
+    <string name="queue_insert_related_videos">Wstaw powiązane filmy</string>
 </resources>
