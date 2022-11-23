@@ -66,6 +66,15 @@ class BackupHelper(private val context: Context) {
                 *backupFile.playlistBookmarks.orEmpty().toTypedArray()
             )
 
+            backupFile.localPlaylists?.forEach {
+                Database.localPlaylistsDao().createPlaylist(it.playlist)
+                val playlistId = Database.localPlaylistsDao().getAll().last().playlist.id
+                it.videos.forEach {
+                    it.playlistId = playlistId
+                    Database.localPlaylistsDao().addPlaylistVideo(it)
+                }
+            }
+
             restorePreferences(backupFile.preferences)
         }
     }
