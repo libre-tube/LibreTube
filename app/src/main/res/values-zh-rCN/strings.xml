@@ -391,4 +391,5 @@
     <string name="bookmark">加书签</string>
     <string name="clear_bookmarks">清除书签</string>
     <string name="bookmarks_empty">尚无书签！</string>
+    <string name="queue_insert_related_videos">插入相关视频</string>
 </resources>
