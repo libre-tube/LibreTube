@@ -391,4 +391,5 @@
     <string name="bookmark">Yer imi</string>
     <string name="clear_bookmarks">Yer imlerini temizle</string>
     <string name="bookmarks_empty">Henüz yer imi yok!</string>
+    <string name="queue_insert_related_videos">İlgili videoları ekle</string>
 </resources>

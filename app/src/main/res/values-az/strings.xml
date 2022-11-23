@@ -391,4 +391,5 @@
     <string name="bookmark">Əlfəcin</string>
     <string name="clear_bookmarks">Əlfəcinləri təmizlə</string>
     <string name="bookmarks_empty">Hələ əlfəcin yoxdur!</string>
+    <string name="queue_insert_related_videos">Əlaqədar videoları yerləşdir</string>
 </resources>

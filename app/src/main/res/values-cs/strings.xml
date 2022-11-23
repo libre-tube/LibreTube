@@ -391,4 +391,5 @@
     <string name="bookmark">Záložka</string>
     <string name="clear_bookmarks">Vymazat záložky</string>
     <string name="bookmarks_empty">Zatím žádné záložky!</string>
+    <string name="queue_insert_related_videos">Vložit související videa</string>
 </resources>

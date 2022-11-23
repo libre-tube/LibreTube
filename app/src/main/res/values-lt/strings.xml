@@ -391,4 +391,5 @@
     <string name="bookmark">Pridėti prie žymų</string>
     <string name="clear_bookmarks">Išvalyti žymes</string>
     <string name="bookmarks_empty">Dar nėra jokių žymų!</string>
+    <string name="queue_insert_related_videos">Įterpti susijusius vaizdo įrašus</string>
 </resources>

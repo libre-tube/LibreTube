@@ -80,7 +80,7 @@
     <string name="app_icon">ଆଇକନ</string>
     <string name="enabled">ଅନ୍</string>
     <string name="disabled">ଅଫ</string>
-    <string name="piped">ପାଇପ୍ ହେଲା</string>
+    <string name="piped">ପାଇପ୍</string>
     <string name="youtube">ୟୁଟିଉବ</string>
     <string name="playOnBackground">ପୃଷ୍ଠଭୂମି ରେ ପ୍ଲେ କରନ୍ତୁ</string>
     <string name="update_available_text">ରିଲିଜ୍ ରୁ ଡାନଲୋଡ୍୍ କରିବେ କି \?</string>
@@ -391,4 +391,5 @@
     <string name="bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକ</string>
     <string name="bookmarks_empty">ଏବେ ଯାଏଁ କୌଣସି ବୁକ୍ ମାର୍କ୍ ନାହିଁ!</string>
     <string name="clear_bookmarks">ବୁକ୍ ମାର୍କ୍ ଗୁଡ଼ିକୁ ଖାଲି କରନ୍ତୁ</string>
+    <string name="queue_insert_related_videos">ସମ୍ପର୍କୀୟ ଭିଡିଓ ଯୋଡ଼ନ୍ତୁ</string>
 </resources>
