@@ -83,6 +83,7 @@ class ShareDialog(
         )
         binding!!.timeCodeSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding!!.timeStampLayout.visibility = if (isChecked) View.VISIBLE else View.GONE
+            PreferenceHelper.putBoolean(PreferenceKeys.SHARE_WITH_TIME_CODE, isChecked)
         }
         binding!!.timeStamp.setText((shareData.currentPosition ?: 0L).toString())
         if (binding!!.timeCodeSwitch.isChecked) binding!!.timeStampLayout.visibility = View.VISIBLE
