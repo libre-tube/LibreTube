@@ -183,7 +183,7 @@
     <string name="restore">Przywróć kopię zapasową</string>
     <string name="require_restart_message">Naciśnij „OK”, aby zastosować zmiany. Aplikacja zostanie zrestartowana.</string>
     <string name="notifications">Powiadomienia</string>
-    <string name="notify_new_streams">Nowe treści</string>
+    <string name="notify_new_streams">Przypomnij o nowych treściach</string>
     <string name="notify_new_streams_summary">Informuj o nowych treściach od twórców, których śledzisz.</string>
     <string name="irreversible">Czy na pewno\? Tego nie da się cofnąć!</string>
     <string name="require_restart">Wymagany restart aplikacji</string>
@@ -210,11 +210,11 @@
     <string name="downloadsucceeded">Pobieranie ukończone</string>
     <string name="skip_buttons">Przyciski pomijania</string>
     <string name="skip_buttons_summary">Pokaż przyciski umożliwiające przejście do następnego lub poprzedniego filmu.</string>
-    <string name="watch_positions">Zapamiętane pozycje</string>
-    <string name="watch_positions_summary">Kontynuuj odtwarzanie od ostatniej pozycji</string>
+    <string name="watch_positions">Zapamiętaj pozycje</string>
+    <string name="watch_positions_summary">Kontynuuj odtwarzanie od ostatnio zapamiętanej pozycji</string>
     <string name="hls">HLS</string>
     <string name="github">GitHub</string>
-    <string name="landscape">Pozioma</string>
+    <string name="landscape">Wymuś tryb poziomy</string>
     <string name="add_to_queue">Dodaj do kolejki</string>
     <string name="misc">Różne</string>
     <string name="shapedIcon">Stos kart</string>
@@ -236,7 +236,7 @@
     <string name="auth_instances">Wybierz instancję autoryzacyjną</string>
     <string name="audio_video">Dźwięk i wideo</string>
     <string name="fullscreen_orientation">Wyświetlanie pełnoekranowe</string>
-    <string name="portrait">Pionowa</string>
+    <string name="portrait">Wymuś tryb pionowy</string>
     <string name="community">Społeczność</string>
     <string name="discord">Discord</string>
     <string name="matrix">Matrix</string>
@@ -246,7 +246,7 @@
     <string name="no_player_found">Nie znaleziono zewnętrznego odtwarzacza. Upewnij się, że masz takowy zainstalowany.</string>
     <string name="data_saver_mode">Tryb oszczędzania danych</string>
     <string name="data_saver_mode_summary">Pomiń miniatury i inne obrazy.</string>
-    <string name="search_history_summary">Zapamiętane wyszukiwania</string>
+    <string name="search_history_summary">Zapamiętaj wyszukiwania</string>
     <string name="watch_history_summary">Przechowuj lokalnie historię obejrzanych filmów</string>
     <string name="history_summary">Historia oglądania i wyszukiwania</string>
     <string name="watch_positions_title">Zapamiętane pozycje odtwarzania</string>
@@ -392,4 +392,5 @@
     <string name="clear_bookmarks">Usuń zakładki</string>
     <string name="bookmarks_empty">Nie dodano zakładek.</string>
     <string name="queue_insert_related_videos">Wstaw powiązane filmy</string>
+    <string name="local_playlists">Lokalne playlisty</string>
 </resources>
