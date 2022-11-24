@@ -4,18 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.toDp
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.ProxyHelper
 
 class WatchHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentWatchHistoryBinding
+
+    private val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +34,12 @@ class WatchHistoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+            binding.watchHistoryRecView.updatePadding(
+                bottom = if (it) (64).toDp(resources).toInt() else 0
+            )
+        }
 
         val watchHistory = awaitQuery {
             Database.watchHistoryDao().getAll()
