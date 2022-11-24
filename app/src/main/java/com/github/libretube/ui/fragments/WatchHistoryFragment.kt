@@ -12,6 +12,7 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.util.ProxyHelper
 
 class WatchHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentWatchHistoryBinding
@@ -34,6 +35,11 @@ class WatchHistoryFragment : BaseFragment() {
 
         if (watchHistory.isEmpty()) return
 
+        watchHistory.forEach {
+            it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
+            it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
+        }
+
         // reversed order
         binding.watchHistoryRecView.layoutManager = LinearLayoutManager(requireContext()).apply {
             reverseLayout = true
@@ -41,8 +47,7 @@ class WatchHistoryFragment : BaseFragment() {
         }
 
         val watchHistoryAdapter = WatchHistoryAdapter(
-            watchHistory.toMutableList(),
-            childFragmentManager
+            watchHistory.toMutableList()
         )
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(

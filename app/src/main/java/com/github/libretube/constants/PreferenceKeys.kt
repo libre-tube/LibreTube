@@ -10,6 +10,7 @@ object PreferenceKeys {
     const val AUTH_PREF_FILE = "auth"
     const val TOKEN = "token"
     const val USERNAME = "username"
+    const val IMAGE_PROXY_URL = "image_proxy_url"
 
     /**
      * General
@@ -20,7 +21,7 @@ object PreferenceKeys {
     const val BREAK_REMINDER_TOGGLE = "break_reminder_toggle"
     const val BREAK_REMINDER = "break_reminder"
     const val SAVE_FEED = "save_feed"
-    const val NAVBAR_ITEMS = "nav_bar_items"
+    const val NAVBAR_ITEMS = "navbar_items"
 
     /**
      * Appearance
@@ -33,7 +34,7 @@ object PreferenceKeys {
     const val APP_ICON = "icon_change"
     const val LEGACY_SUBSCRIPTIONS = "legacy_subscriptions"
     const val LEGACY_SUBSCRIPTIONS_COLUMNS = "legacy_subscriptions_columns"
-    const val ALTERNATIVE_TRENDING_LAYOUT = "trending_layout"
+    const val ALTERNATIVE_VIDEOS_LAYOUT = "alternative_videos_layout"
     const val NEW_VIDEOS_BADGE = "new_videos_badge"
     const val PLAYLISTS_ORDER = "playlists_order"
 
@@ -77,13 +78,16 @@ object PreferenceKeys {
     const val PICTURE_IN_PICTURE = "picture_in_picture"
     const val PLAYER_RESIZE_MODE = "player_resize_mode"
     const val SB_SKIP_MANUALLY = "sb_skip_manually_key"
-    const val LIMIT_HLS = "limit_hls"
-    const val PROGRESSIVE_LOADING_INTERVAL_SIZE = "progressive_loading_interval"
+    const val SB_SHOW_MARKERS = "sb_show_markers"
+    const val ALTERNATIVE_PLAYER_LAYOUT = "alternative_player_layout"
+    const val USE_HLS_OVER_DASH = "use_hls"
+    const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
 
     /**
      * Background mode
      */
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
+    const val NOTIFICATION_OPEN_QUEUE = "notification_open_queue"
 
     /**
      * Notifications
@@ -92,6 +96,10 @@ object PreferenceKeys {
     const val CHECKING_FREQUENCY = "checking_frequency"
     const val REQUIRED_NETWORK = "required_network"
     const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
+    const val IGNORED_NOTIFICATION_CHANNELS = "ignored_notification_channels"
+    const val NOTIFICATION_TIME_ENABLED = "notification_time"
+    const val NOTIFICATION_START_TIME = "notification_start_time"
+    const val NOTIFICATION_END_TIME = "notification_end_time"
 
     /**
      * Advanced
@@ -103,6 +111,8 @@ object PreferenceKeys {
     const val CLEAR_WATCH_HISTORY = "clear_watch_history"
     const val CLEAR_WATCH_POSITIONS = "clear_watch_positions"
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
+    const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
+    const val CLEAR_BOOKMARKS = "clear_bookmarks"
 
     /**
      * History

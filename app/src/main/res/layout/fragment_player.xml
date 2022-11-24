@@ -5,8 +5,7 @@
     android:id="@+id/playerMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/player_scene"
-    tools:context=".ui.fragments.PlayerFragment">
+    app:layoutDescription="@xml/player_scene">
 
     <ScrollView
         android:id="@+id/player_scrollView"
@@ -26,36 +25,34 @@
             android:animateLayoutChanges="true"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/player_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginVertical="8dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/player_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:maxLines="2"
                     android:textSize="18sp"
                     tools:text="Video Title" />
-
 
                 <ImageView
                     android:id="@+id/player_description_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
                     android:src="@drawable/ic_arrow_down" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,11 +146,13 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="5">
 
                     <LinearLayout
                         android:id="@+id/relPlayer_share"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -161,6 +160,7 @@
                             android:src="@drawable/ic_share" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/share" />
@@ -168,7 +168,8 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_download"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -176,18 +177,16 @@
                             android:src="@drawable/ic_download" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:autoSizeTextType="uniform"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:text="@string/download"
-                            tools:targetApi="o" />
+                            android:text="@string/download" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_open"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -196,15 +195,16 @@
                             android:src="@drawable/ic_open" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:text="@string/open" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/relPlayer_background"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -212,6 +212,7 @@
                             android:src="@drawable/ic_headphones" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/audio" />
@@ -219,7 +220,8 @@
 
                     <LinearLayout
                         android:id="@+id/relPlayer_save"
-                        style="@style/PlayerActionsLayout">
+                        style="@style/PlayerActionsLayout"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -227,6 +229,7 @@
                             android:src="@drawable/ic_save" />
 
                         <TextView
+                            style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/save" />
@@ -240,10 +243,8 @@
                 android:id="@+id/player_channel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="15dp"
                 android:background="@drawable/rounded_ripple"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
@@ -260,7 +261,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
+                    android:layoutDirection="locale"
                     android:orientation="vertical">
 
                     <TextView
@@ -268,7 +271,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:textSize="15sp" />
@@ -278,11 +280,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="5dp"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:textSize="11sp"
-                        tools:text="2.5M" />
+                        tools:text="2.5M subscribers" />
 
                 </LinearLayout>
 
@@ -298,6 +299,46 @@
                     app:cornerRadius="11dp" />
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/alternativeTrendingRec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/comments_toggle"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/commentsToggle_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/comments"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/commentsToggle_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="3dp"
+                        android:src="@drawable/ic_arrow_up_down" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -305,49 +346,10 @@
                 android:animateLayoutChanges="true"
                 android:descendantFocusability="blocksDescendants">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/comments_toggle"
-                    style="@style/Widget.Material3.CardView.Elevated"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="18dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/commentsToggle_textView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/comments"
-                            android:textSize="17sp" />
-
-                        <ImageView
-                            android:id="@+id/commentsToggle_imageView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="3dp"
-                            android:src="@drawable/ic_arrow_up_down" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/comments_recView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/comments_toggle"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:nestedScrollingEnabled="false"
@@ -357,7 +359,6 @@
                     android:id="@+id/related_rec_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/comments_recView"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"

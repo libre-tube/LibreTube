@@ -9,7 +9,6 @@ const val GITHUB_API_URL = "https://api.github.com/repos/libre-tube/LibreTube/re
  * Links for the about fragment
  */
 const val WEBSITE_URL = "https://libre-tube.github.io/"
-const val DONATE_URL = "https://github.com/libre-tube/LibreTube#donate"
 const val GITHUB_URL = "https://github.com/libre-tube/LibreTube"
 const val PIPED_GITHUB_URL = "https://github.com/TeamPiped/Piped"
 const val WEBLATE_URL = "https://hosted.weblate.org/projects/libretube/libretube/"
@@ -27,7 +26,7 @@ const val TWITTER_URL = "https://twitter.com/libretube"
 /**
  * Share Dialog
  */
-const val PIPED_FRONTEND_URL = "https://piped.kavin.rocks"
+const val PIPED_FRONTEND_URL = "https://piped.video"
 const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
 
 /**

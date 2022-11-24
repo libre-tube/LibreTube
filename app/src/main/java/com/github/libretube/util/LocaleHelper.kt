@@ -1,6 +1,8 @@
 package com.github.libretube.util
 
 import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Build
 import android.telephony.TelephonyManager
 import com.github.libretube.constants.PreferenceKeys
@@ -11,44 +13,48 @@ object LocaleHelper {
 
     fun updateLanguage(context: Context) {
         val languageName = PreferenceHelper.getString(PreferenceKeys.LANGUAGE, "sys")
-        if (languageName == "sys") {
-            updateLocaleConf(context, Locale.getDefault())
-        } else if (languageName.contains("-") == true) {
-            val languageParts = languageName.split("-")
-            val locale = Locale(
-                languageParts[0],
-                languageParts[1]
-            )
-            updateLocaleConf(context, locale)
-        } else {
-            val locale = Locale(languageName.toString())
-            updateLocaleConf(context, locale)
+        val locale = when {
+            languageName == "sys" -> Locale.getDefault()
+            languageName.contains("-") == true -> {
+                val languageParts = languageName.split("-")
+                Locale(
+                    languageParts[0],
+                    languageParts[1].replace("r", "")
+                )
+            }
+            else -> Locale(languageName)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) updateResources(context, locale)
+        updateResourcesLegacy(context, locale)
     }
 
-    private fun updateLocaleConf(context: Context, locale: Locale) {
-        // Change API Language
+    private fun updateResources(context: Context, locale: Locale) {
         Locale.setDefault(locale)
+        val configuration: Configuration = context.resources.configuration
+        configuration.setLocale(locale)
+        context.createConfigurationContext(configuration)
+    }
 
-        // Change App Language
-        val res = context.resources
-        val dm = res.displayMetrics
-        val conf = res.configuration
-        conf.setLocale(locale)
-        res.updateConfiguration(conf, dm)
+    @Suppress("DEPRECATION")
+    private fun updateResourcesLegacy(context: Context, locale: Locale) {
+        Locale.setDefault(locale)
+        val resources: Resources = context.resources
+        val configuration: Configuration = resources.getConfiguration()
+        configuration.locale = locale
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics())
     }
 
     fun getDetectedCountry(context: Context, defaultCountryIsoCode: String): String {
         detectSIMCountry(context)?.let {
-            return it
+            if (it != "") return it
         }
 
         detectNetworkCountry(context)?.let {
-            return it
+            if (it != "") return it
         }
 
         detectLocaleCountry(context)?.let {
-            return it
+            if (it != "") return it
         }
 
         return defaultCountryIsoCode
@@ -119,5 +125,17 @@ object LocaleHelper {
             }
         }
         return locales
+    }
+
+    fun getTrendingRegion(context: Context): String {
+        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
+
+        // get the system default country if auto region selected
+        return if (regionPref == "sys") {
+            getDetectedCountry(context, "UK")
+                .uppercase()
+        } else {
+            regionPref
+        }
     }
 }

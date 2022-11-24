@@ -4,34 +4,32 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.api.obj.SearchItem
+import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.databinding.ChannelRowBinding
-import com.github.libretube.databinding.PlaylistSearchRowBinding
+import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.databinding.VideoRowBinding
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.setFormattedDuration
-import com.github.libretube.extensions.setWatchProgressLength
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.setFormattedDuration
+import com.github.libretube.ui.extensions.setWatchProgressLength
+import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.github.libretube.util.TextUtils
 
 class SearchAdapter(
-    private val searchItems: MutableList<SearchItem>,
-    private val childFragmentManager: FragmentManager
+    private val searchItems: MutableList<ContentItem>
 ) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
-    fun updateItems(newItems: List<SearchItem>) {
+    fun updateItems(newItems: List<ContentItem>) {
         val searchItemsSize = searchItems.size
         searchItems.addAll(newItems)
         notifyItemRangeInserted(searchItemsSize, newItems.size)
@@ -52,7 +50,7 @@ class SearchAdapter(
                 ChannelRowBinding.inflate(layoutInflater, parent, false)
             )
             2 -> SearchViewHolder(
-                PlaylistSearchRowBinding.inflate(layoutInflater, parent, false)
+                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
             )
             else -> throw IllegalArgumentException("Invalid type")
         }
@@ -81,7 +79,7 @@ class SearchAdapter(
         }
     }
 
-    private fun bindWatch(item: SearchItem, binding: VideoRowBinding) {
+    private fun bindWatch(item: ContentItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
             thumbnailDuration.setFormattedDuration(item.duration!!)
@@ -100,12 +98,13 @@ class SearchAdapter(
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
             val videoId = item.url!!.toID()
+            val videoName = item.title!!
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(videoId)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                VideoOptionsBottomSheet(videoId, videoName)
+                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
-            channelImage.setOnClickListener {
+            channelContainer.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
             watchProgress.setWatchProgressLength(videoId, item.duration!!)
@@ -114,7 +113,7 @@ class SearchAdapter(
 
     @SuppressLint("SetTextI18n")
     private fun bindChannel(
-        item: SearchItem,
+        item: ContentItem,
         binding: ChannelRowBinding
     ) {
         binding.apply {
@@ -123,66 +122,33 @@ class SearchAdapter(
             searchViews.text = root.context.getString(
                 R.string.subscribers,
                 item.subscribers.formatShort()
-            ) + " • " + root.context.getString(R.string.videoCount, item.videos.toString())
+            ) + TextUtils.SEPARATOR + root.context.getString(R.string.videoCount, item.videos.toString())
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
-            val channelId = item.url!!.toID()
 
-            isSubscribed(channelId, binding)
-        }
-    }
-
-    private fun isSubscribed(channelId: String, binding: ChannelRowBinding) {
-        // check whether the user subscribed to the channel
-        CoroutineScope(Dispatchers.Main).launch {
-            var isSubscribed = SubscriptionHelper.isSubscribed(channelId)
-
-            // if subscribed change text to unsubscribe
-            if (isSubscribed == true) {
-                binding.searchSubButton.text = binding.root.context.getString(R.string.unsubscribe)
-            }
-
-            // make sub button visible and set the on click listeners to (un)subscribe
-            if (isSubscribed == null) return@launch
-            binding.searchSubButton.visibility = View.VISIBLE
-
-            binding.searchSubButton.setOnClickListener {
-                if (isSubscribed == false) {
-                    SubscriptionHelper.subscribe(channelId)
-                    binding.searchSubButton.text =
-                        binding.root.context.getString(R.string.unsubscribe)
-                    isSubscribed = true
-                } else {
-                    SubscriptionHelper.unsubscribe(channelId)
-                    binding.searchSubButton.text =
-                        binding.root.context.getString(R.string.subscribe)
-                    isSubscribed = false
-                }
-            }
+            binding.searchSubButton.setupSubscriptionButton(item.url?.toID(), item.name?.toID())
         }
     }
 
     private fun bindPlaylist(
-        item: SearchItem,
-        binding: PlaylistSearchRowBinding
+        item: ContentItem,
+        binding: PlaylistsRowBinding
     ) {
         binding.apply {
-            ImageHelper.loadImage(item.thumbnail, searchThumbnail)
-            if (item.videos?.toInt() != -1) searchPlaylistNumber.text = item.videos.toString()
-            searchDescription.text = item.name
-            searchName.text = item.uploaderName
-            if (item.videos?.toInt() != -1) {
-                searchPlaylistVideos.text =
-                    root.context.getString(R.string.videoCount, item.videos.toString())
-            }
+            ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
+            if (item.videos?.toInt() != -1) videoCount.text = item.videos.toString()
+            playlistTitle.text = item.name
+            playlistDescription.text = item.uploaderName
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, item.url, false)
+                NavigationHelper.navigatePlaylist(root.context, item.url, PlaylistType.PUBLIC)
             }
+            deletePlaylist.visibility = View.GONE
             root.setOnLongClickListener {
                 val playlistId = item.url!!.toID()
-                PlaylistOptionsBottomSheet(playlistId, false)
-                    .show(childFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
+                val playlistName = item.name!!
+                PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
+                    .show((root.context as BaseActivity).supportFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
                 true
             }
         }

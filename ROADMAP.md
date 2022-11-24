@@ -6,8 +6,7 @@ This represents the larger, bigger impact features and enhancements we have plan
 Feel free to help us if you have any knowledge concerning the following planned features or anything else you imagine.
 
 ## Planned
-- Support for local playlists
-- Various smaller features
+- Currently only various smaller features
 
 ## Not planned
 - Google/MicroG Login

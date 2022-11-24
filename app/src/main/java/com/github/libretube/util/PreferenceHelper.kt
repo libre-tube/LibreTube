@@ -29,12 +29,16 @@ object PreferenceHelper {
         authEditor = authSettings.edit()
     }
 
-    fun putString(key: String?, value: String) {
+    fun putString(key: String, value: String) {
         editor.putString(key, value).commit()
     }
 
-    fun getString(key: String?, defValue: String?): String {
-        return settings.getString(key, defValue)!!
+    fun putBoolean(key: String, value: Boolean) {
+        editor.putBoolean(key, value).commit()
+    }
+
+    fun getString(key: String?, defValue: String): String {
+        return settings.getString(key, defValue) ?: defValue
     }
 
     fun getBoolean(key: String?, defValue: Boolean): Boolean {
@@ -47,10 +51,6 @@ object PreferenceHelper {
 
     fun clearPreferences() {
         editor.clear().apply()
-    }
-
-    fun removePreference(value: String?) {
-        editor.remove(value).apply()
     }
 
     fun getToken(): String {
@@ -83,6 +83,23 @@ object PreferenceHelper {
 
     fun getErrorLog(): String {
         return getString(PreferenceKeys.ERROR_LOG, "")
+    }
+
+    fun getIgnorableNotificationChannels(): List<String> {
+        return getString(PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS, "").split(",")
+    }
+
+    fun isChannelNotificationIgnorable(channelId: String): Boolean {
+        return getIgnorableNotificationChannels().any { it == channelId }
+    }
+
+    fun toggleIgnorableNotificationChannel(channelId: String) {
+        val ignorableChannels = getIgnorableNotificationChannels().toMutableList()
+        if (ignorableChannels.contains(channelId)) ignorableChannels.remove(channelId) else ignorableChannels.add(channelId)
+        editor.putString(
+            PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS,
+            ignorableChannels.joinToString(",")
+        ).apply()
     }
 
     private fun getDefaultSharedPreferences(context: Context): SharedPreferences {

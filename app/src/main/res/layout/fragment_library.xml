@@ -7,9 +7,10 @@
     tools:context=".ui.fragments.LibraryFragment">
 
     <RelativeLayout
-        android:id="@+id/loginOrRegister"
+        android:id="@+id/nothing_here"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/boogh"
@@ -17,7 +18,7 @@
             android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_login" />
+            android:src="@drawable/ic_list" />
 
         <TextView
             android:id="@+id/text_like"
@@ -27,7 +28,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="10dp"
             android:gravity="center"
-            android:text="@string/please_login"
+            android:text="@string/emptyList"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -47,61 +48,49 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/showWatchHistory"
+                <TextView
+                    android:id="@+id/watch_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:drawablePadding="10dp"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp"
+                    android:text="@string/watch_history"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_time_outlined" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_time_outlined" />
+                <TextView
+                    android:id="@+id/bookmarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawablePadding="10dp"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp"
+                    android:text="@string/bookmarks"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_bookmark_outlined" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/watch_history"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     android:id="@+id/downloads"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:background="?attr/selectableItemBackground"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_download" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="@string/downloads"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+                    android:drawablePadding="10dp"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp"
+                    android:text="@string/downloads"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_download" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:descendantFocusability="blocksDescendants">
 
                     <androidx.recyclerview.widget.RecyclerView

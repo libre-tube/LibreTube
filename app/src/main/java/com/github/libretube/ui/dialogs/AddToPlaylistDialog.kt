@@ -1,10 +1,7 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -13,36 +10,34 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
-import com.github.libretube.constants.IntentData
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.models.PlaylistViewModel
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
-class AddToPlaylistDialog : DialogFragment() {
+class AddToPlaylistDialog(
+    private val videoId: String
+) : DialogFragment() {
     private lateinit var binding: DialogAddtoplaylistBinding
     private val viewModel: PlaylistViewModel by activityViewModels()
 
-    private lateinit var videoId: String
-    private lateinit var token: String
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        videoId = arguments?.getString(IntentData.videoId)!!
         binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
-        token = PreferenceHelper.getToken()
+        binding.createPlaylist.setOnClickListener {
+            CreatePlaylistDialog {
+                fetchPlaylists()
+            }.show(childFragmentManager, null)
+        }
 
-        if (token != "") fetchPlaylists()
+        fetchPlaylists()
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
@@ -52,15 +47,10 @@ class AddToPlaylistDialog : DialogFragment() {
     private fun fetchPlaylists() {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.authApi.playlists(token)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
+                PlaylistsHelper.getPlaylists()
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
             if (response.isNotEmpty()) {
@@ -75,8 +65,7 @@ class AddToPlaylistDialog : DialogFragment() {
                     var selectionIndex = 0
                     response.forEachIndexed { index, playlist ->
                         if (playlist.id == viewModel.lastSelectedPlaylistId) {
-                            selectionIndex =
-                                index
+                            selectionIndex = index
                         }
                     }
                     binding.playlistsSpinner.setSelection(selectionIndex)
@@ -96,35 +85,16 @@ class AddToPlaylistDialog : DialogFragment() {
     private fun addToPlaylist(playlistId: String) {
         val appContext = context?.applicationContext ?: return
         CoroutineScope(Dispatchers.IO).launch {
-            val response = try {
-                RetrofitInstance.authApi.addToPlaylist(
-                    token,
-                    PlaylistId(playlistId, videoId)
-                )
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                toastFromMainThread(appContext, R.string.unknown_error)
-                return@launch
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                toastFromMainThread(appContext, R.string.server_error)
+            val success = try {
+                PlaylistsHelper.addToPlaylist(playlistId, videoId)
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                appContext.toastFromMainThread(R.string.unknown_error)
                 return@launch
             }
-            toastFromMainThread(
-                appContext,
-                if (response.message == "ok") R.string.added_to_playlist else R.string.fail
+            appContext.toastFromMainThread(
+                if (success) R.string.added_to_playlist else R.string.fail
             )
-        }
-    }
-
-    private fun toastFromMainThread(context: Context, stringId: Int) {
-        Handler(Looper.getMainLooper()).post {
-            Toast.makeText(
-                context,
-                stringId,
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 

@@ -13,6 +13,7 @@ import com.github.libretube.obj.DownloadedFile
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
@@ -39,7 +40,7 @@ class DownloadsAdapter(
                 uploaderName.text = it.uploader
                 videoInfo.text = it.views.formatShort() + " " +
                     root.context.getString(R.string.views_placeholder) +
-                    " • " + it.uploadDate
+                    TextUtils.SEPARATOR + it.uploadDate
             }
 
             thumbnailImage.setImageBitmap(file.thumbnail)
@@ -60,8 +61,8 @@ class DownloadsAdapter(
                     ) { _, index ->
                         when (index) {
                             0 -> {
-                                val audioDir = DownloadHelper.getAudioDir(root.context)
-                                val videoDir = DownloadHelper.getVideoDir(root.context)
+                                val audioDir = DownloadHelper.getDownloadDir(root.context, DownloadHelper.AUDIO_DIR)
+                                val videoDir = DownloadHelper.getDownloadDir(root.context, DownloadHelper.VIDEO_DIR)
 
                                 listOf(audioDir, videoDir).forEach {
                                     val f = File(it, file.name)

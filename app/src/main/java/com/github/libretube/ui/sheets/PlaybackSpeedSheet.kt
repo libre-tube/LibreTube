@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
+import com.github.libretube.extensions.round
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlaybackSpeedSheet(
     private val player: Player
-) : BottomSheetDialogFragment() {
+) : ExpandedBottomSheet() {
     private lateinit var binding: PlaybackBottomSheetBinding
 
     override fun onCreateView(
@@ -30,24 +29,29 @@ class PlaybackSpeedSheet(
         binding.speed.value = player.playbackParameters.speed
         binding.pitch.value = player.playbackParameters.pitch
 
-        binding.speed.addOnChangeListener { _, value, _ ->
-            onChange(value, binding.pitch.value)
+        binding.speed.addOnChangeListener { _, _, _ ->
+            onChange()
         }
 
-        binding.pitch.addOnChangeListener { _, value, _ ->
-            onChange(binding.speed.value, value)
+        binding.pitch.addOnChangeListener { _, _, _ ->
+            onChange()
+        }
+
+        binding.resetSpeed.setOnClickListener {
+            binding.speed.value = 1f
+            onChange()
+        }
+
+        binding.resetPitch.setOnClickListener {
+            binding.pitch.value = 1f
+            onChange()
         }
     }
 
-    private fun onChange(speed: Float, pitch: Float) {
+    private fun onChange() {
         player.playbackParameters = PlaybackParameters(
-            speed,
-            pitch
+            binding.speed.value.round(2),
+            binding.pitch.value.round(2)
         )
     }
-
-    fun show(fragmentManager: FragmentManager) = show(
-        fragmentManager,
-        null
-    )
 }

@@ -83,29 +83,36 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/thumbnail_card"
         app:layout_constraintTop_toBottomOf="@id/video_title" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/channel_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/video_info" />
-
-    <TextView
-        android:id="@+id/channel_name"
+    <LinearLayout
+        android:id="@+id/channel_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:ellipsize="end"
-        android:maxLines="1"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/channel_image"
-        app:layout_constraintTop_toBottomOf="@id/video_info" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/video_info">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/channel_image"
+            android:layout_width="27dp"
+            android:layout_height="27dp" />
+
+        <TextView
+            android:id="@+id/channel_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

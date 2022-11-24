@@ -14,10 +14,10 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -27,18 +27,20 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.extensions.toID
-import com.github.libretube.models.PlayerViewModel
-import com.github.libretube.models.SearchViewModel
-import com.github.libretube.models.SubscriptionsViewModel
 import com.github.libretube.services.ClosingService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
 import com.github.libretube.ui.fragments.PlayerFragment
+import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.ui.models.SearchViewModel
+import com.github.libretube.ui.models.SubscriptionsViewModel
+import com.github.libretube.ui.sheets.PlayingQueueSheet
+import com.github.libretube.ui.tools.BreakReminder
 import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NetworkHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {
@@ -47,21 +49,17 @@ class MainActivity : BaseActivity() {
 
     lateinit var navController: NavController
     private var startFragmentId = R.id.homeFragment
-    var autoRotationEnabled = false
+
+    val autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
     lateinit var searchView: SearchView
+    lateinit var searchItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
-
         // enable auto rotation if turned on
-        requestedOrientation = if (autoRotationEnabled) {
-            ActivityInfo.SCREEN_ORIENTATION_USER
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
-        }
+        requestOrientationChange()
 
         // start service that gets called on closure
         try {
@@ -93,8 +91,12 @@ class MainActivity : BaseActivity() {
         // sets the navigation bar color to the previously calculated color
         window.navigationBarColor = color
 
-        // save start tab fragment id
-        startFragmentId = NavBarHelper.applyNavBarStyle(binding.bottomNav)
+        // save start tab fragment id and apply navbar style
+        startFragmentId = try {
+            NavBarHelper.applyNavBarStyle(binding.bottomNav)
+        } catch (e: Exception) {
+            R.id.homeFragment
+        }
 
         // set default tab as start fragment
         navController.graph.setStartDestination(startFragmentId)
@@ -104,18 +106,16 @@ class MainActivity : BaseActivity() {
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
 
-        binding.bottomNav.setOnItemSelectedListener {
-            // clear backstack if it's the start fragment
-            if (startFragmentId == it.itemId) navController.backQueue.clear()
-
-            if (it.itemId == R.id.subscriptionsFragment) {
-                binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
+        // Prevent duplicate entries into backstack, if selected item and current
+        // visible fragment is different, then navigate to selected item.
+        binding.bottomNav.setOnItemReselectedListener {
+            if (it.itemId != navController.currentDestination?.id) {
+                navigateToBottomSelectedItem(it)
             }
+        }
 
-            removeSearchFocus()
-
-            // navigate to the selected fragment
-            navController.navigate(it.itemId)
+        binding.bottomNav.setOnItemSelectedListener {
+            navigateToBottomSelectedItem(it)
             false
         }
 
@@ -127,7 +127,7 @@ class MainActivity : BaseActivity() {
         val log = PreferenceHelper.getErrorLog()
         if (log != "") ErrorDialog().show(supportFragmentManager, null)
 
-        setupBreakReminder()
+        BreakReminder.setupBreakReminder(applicationContext)
 
         setupSubscriptionsBadge()
 
@@ -143,56 +143,38 @@ class MainActivity : BaseActivity() {
                     }
                 }
 
-                if (navController.currentDestination?.id == startFragmentId) {
-                    moveTaskToBack(true)
-                } else {
-                    navController.popBackStack()
+                when (navController.currentDestination?.id) {
+                    startFragmentId -> {
+                        moveTaskToBack(true)
+                    }
+                    R.id.searchResultFragment -> {
+                        navController.popBackStack(R.id.searchFragment, true) ||
+                            navController.popBackStack()
+                    }
+                    else -> {
+                        navController.popBackStack()
+                    }
                 }
             }
         })
+
+        loadIntentData()
     }
 
     /**
-     * Show a break reminder when watched too long
+     * Rotate according to the preference
      */
-    private fun setupBreakReminder() {
-        if (!PreferenceHelper.getBoolean(
-                PreferenceKeys.BREAK_REMINDER_TOGGLE,
-                false
-            )
-        ) {
-            return
+    fun requestOrientationChange() {
+        requestedOrientation = if (autoRotationEnabled) {
+            ActivityInfo.SCREEN_ORIENTATION_USER
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
-        val breakReminderPref = PreferenceHelper.getString(
-            PreferenceKeys.BREAK_REMINDER,
-            "0"
-        )
-        if (!breakReminderPref.all { Character.isDigit(it) } ||
-            breakReminderPref == "" || breakReminderPref == "0"
-        ) {
-            return
-        }
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                try {
-                    MaterialAlertDialogBuilder(this)
-                        .setTitle(getString(R.string.share_with_time))
-                        .setMessage(
-                            getString(
-                                R.string.already_spent_time,
-                                breakReminderPref
-                            )
-                        )
-                        .setPositiveButton(R.string.okay, null)
-                        .show()
-                } catch (e: Exception) {
-                    kotlin.runCatching {
-                        Toast.makeText(this, R.string.take_a_break, Toast.LENGTH_LONG).show()
-                    }
-                }
-            },
-            breakReminderPref.toLong() * 60 * 1000
-        )
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_queue)?.isVisible = PlayingQueue.isNotEmpty()
+        return super.onPrepareOptionsMenu(menu)
     }
 
     /**
@@ -227,6 +209,8 @@ class MainActivity : BaseActivity() {
     private fun removeSearchFocus() {
         searchView.setQuery("", false)
         searchView.clearFocus()
+        searchView.isIconified = true
+        searchItem.collapseActionView()
         searchView.onActionViewCollapsed()
     }
 
@@ -236,16 +220,10 @@ class MainActivity : BaseActivity() {
 
         // stuff for the search in the topBar
         val searchItem = menu.findItem(R.id.action_search)
+        this.searchItem = searchItem
         searchView = searchItem.actionView as SearchView
 
         val searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-
-        searchView.setOnSearchClickListener {
-            if (navController.currentDestination?.id != R.id.searchResultFragment) {
-                searchViewModel.setQuery(null)
-                navController.navigate(R.id.searchFragment)
-            }
-        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -253,10 +231,20 @@ class MainActivity : BaseActivity() {
                 bundle.putString("query", query)
                 navController.navigate(R.id.searchResultFragment, bundle)
                 searchViewModel.setQuery("")
+                searchView.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                // Prevent navigation when search view is collapsed
+                if (searchView.isIconified ||
+                    binding.bottomNav.menu.children.any {
+                        it.itemId == navController.currentDestination?.id
+                    }
+                ) {
+                    return true
+                }
+
                 // prevent malicious navigation when the search view is getting collapsed
                 if (navController.currentDestination?.id in listOf(
                         R.id.searchResultFragment,
@@ -274,6 +262,36 @@ class MainActivity : BaseActivity() {
                     navController.navigate(R.id.searchFragment, bundle)
                 } else {
                     searchViewModel.setQuery(newText)
+                }
+
+                return true
+            }
+        })
+
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                if (navController.currentDestination?.id != R.id.searchResultFragment) {
+                    searchViewModel.setQuery(null)
+                    navController.navigate(R.id.searchFragment)
+                }
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                if (binding.mainMotionLayout.progress == 0F) {
+                    try {
+                        minimizePlayer()
+                    } catch (e: Exception) {
+                        // current fragment isn't the player fragment
+                    }
+                }
+                // Handover back press to `BackPressedDispatcher`
+                else if (binding.bottomNav.menu.children.none {
+                    it.itemId == navController.currentDestination?.id
+                }
+                ) {
+                    this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
 
                 return true
@@ -302,14 +320,12 @@ class MainActivity : BaseActivity() {
                 startActivity(communityIntent)
                 true
             }
+            R.id.action_queue -> {
+                PlayingQueueSheet().show(supportFragmentManager, null)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // check whether an URI got submitted over the intent data and load it
-        loadIntentData()
     }
 
     private fun loadIntentData() {
@@ -333,6 +349,20 @@ class MainActivity : BaseActivity() {
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
             loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
+        }
+        when (intent?.getStringExtra("fragmentToOpen")) {
+            "home" ->
+                navController.navigate(R.id.homeFragment)
+            "trends" ->
+                navController.navigate(R.id.trendsFragment)
+            "subscriptions" ->
+                navController.navigate(R.id.subscriptionsFragment)
+            "library" ->
+                navController.navigate(R.id.libraryFragment)
+        }
+        if (intent?.getBooleanExtra(IntentData.openQueueOnce, false) == true) {
+            PlayingQueueSheet()
+                .show(supportFragmentManager)
         }
     }
 
@@ -359,7 +389,7 @@ class MainActivity : BaseActivity() {
                         transitionToStart()
                     }
             }
-        }, 100)
+        }, 300)
     }
 
     private fun minimizePlayer() {
@@ -457,6 +487,26 @@ class MainActivity : BaseActivity() {
             window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         }
+    }
+
+    private fun navigateToBottomSelectedItem(item: MenuItem) {
+        // clear backstack if it's the start fragment
+        if (startFragmentId == item.itemId) navController.backQueue.clear()
+
+        if (item.itemId == R.id.subscriptionsFragment) {
+            binding.bottomNav.removeBadge(R.id.subscriptionsFragment)
+        }
+
+        // navigate to the selected fragment, if the fragment already
+        // exists in backstack then pop up to that entry
+        if (!navController.popBackStack(item.itemId, false)) {
+            navController.navigate(item.itemId)
+        }
+
+        // Remove focus from search view when navigating to bottom view.
+        // Call only after navigate to destination, so it can be used in
+        // onMenuItemActionCollapse for backstack management
+        removeSearchFocus()
     }
 
     override fun onUserLeaveHint() {

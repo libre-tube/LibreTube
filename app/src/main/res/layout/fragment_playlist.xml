@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,18 +24,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingHorizontal="15dp">
 
                 <TextView
                     android:id="@+id/playlist_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="24sp"
+                    android:background="@drawable/rounded_ripple"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -48,17 +64,40 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/uploader"
+                android:id="@+id/playlistInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="8dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/video_count"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp" />
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/play_all"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/play_all"
+                    app:icon="@drawable/ic_playlist" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bookmark"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/bookmark"
+                    app:icon="@drawable/ic_bookmark_outlined" />
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -69,7 +108,9 @@
                     android:id="@+id/playlist_recView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="64dp" />
             </RelativeLayout>
 
         </LinearLayout>

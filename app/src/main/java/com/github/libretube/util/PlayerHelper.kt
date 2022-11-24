@@ -3,6 +3,7 @@ package com.github.libretube.util
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.view.accessibility.CaptioningManager
+import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.constants.PreferenceKeys
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.video.VideoSize
@@ -12,7 +13,7 @@ object PlayerHelper {
     // get the audio source following the users preferences
     fun getAudioSource(
         context: Context,
-        audios: List<com.github.libretube.api.obj.PipedStream>
+        audios: List<PipedStream>
     ): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
         val audioQuality = if (
@@ -39,7 +40,7 @@ object PlayerHelper {
     }
 
     // get the best bit rate from audio streams
-    private fun getMostBitRate(audios: List<com.github.libretube.api.obj.PipedStream>): String {
+    private fun getMostBitRate(audios: List<PipedStream>): String {
         var bitrate = 0
         var audioUrl = ""
         audios.forEach {
@@ -52,7 +53,7 @@ object PlayerHelper {
     }
 
     // get the best bit rate from audio streams
-    private fun getLeastBitRate(audios: List<com.github.libretube.api.obj.PipedStream>): String {
+    private fun getLeastBitRate(audios: List<PipedStream>): String {
         var bitrate = 1000000000
         var audioUrl = ""
         audios.forEach {
@@ -255,12 +256,6 @@ object PlayerHelper {
             false
         )
 
-    val progressiveLoadingIntervalSize: String
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.PROGRESSIVE_LOADING_INTERVAL_SIZE,
-            "64"
-        )
-
     val autoPlayEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.AUTO_PLAY,
@@ -285,6 +280,18 @@ object PlayerHelper {
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYER_RESIZE_MODE,
             "fit"
+        )
+
+    val alternativeVideoLayout: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.ALTERNATIVE_PLAYER_LAYOUT,
+            false
+        )
+
+    val autoInsertRelatedVideos: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.QUEUE_AUTO_INSERT_RELATED,
+            true
         )
 
     fun getDefaultResolution(context: Context): String {

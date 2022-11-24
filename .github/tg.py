@@ -1,33 +1,34 @@
-import telegram
-from tgconfig import *
+import asyncio
 from json import load
-import multiprocessing
-from os import system
-from time import sleep as wait
+from os import listdir
 
-def deploy():
-    system(f'./exec --local --api-id={TG_API_ID} --api-hash={TG_API_HASH}')
+from pyrogram import Client
+from pyrogram.types import InputMediaDocument
+from tgconfig import *
 
-def bot():
-    wait(10)
-    f = open('commit.json')
+files = listdir()
+
+mediadocuments = [
+    InputMediaDocument(file) for file in files if file.endswith("signed.apk")
+]
+
+with open("commit.json") as f:
     data = load(f)
-    f.close()
 
-    bot = telegram.Bot(TG_TOKEN, base_url="http://0.0.0.0:8081/bot")
-    bot.send_photo(TG_POST_ID, open('alpha.png', 'rb'), f'''*Libretube {data['sha'][0:7]} // Alpha*
+caption = f"""**Libretube {data['sha'][0:7]} // Alpha**
 
-[{data['commit']['message']}]({data['html_url']})
+<a href="{data['html_url']}">{data['commit']['message']}</a>
 
 Signed-off-by: {data['commit']['author']['name']}
-''', parse_mode=telegram.ParseMode.MARKDOWN)
-    bot.send_media_group(TG_POST_ID, [telegram.InputMediaDocument(open('app-universal-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-x86-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-x86_64-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-armeabi-v7a-debug.apk', 'rb')), telegram.InputMediaDocument(open('app-arm64-v8a-debug.apk', 'rb'))])
-    system('killall -9 python')
-    
-if __name__ == '__main__':
-    multideploy = multiprocessing.Process(target=deploy)
-    multibot = multiprocessing.Process(target=bot)
-    multideploy.start()
-    multibot.start()
-    multideploy.join()
-    multibot.join()
+"""
+
+
+async def main():
+    async with Client("libretube", TG_API_ID, TG_API_HASH, bot_token=TG_TOKEN) as app:
+        await app.send_photo(
+            int(TG_POST_ID), "https://libre-tube.github.io/images/Alpha.png", caption
+        )
+        await app.send_media_group(int(TG_POST_ID), mediadocuments)
+
+
+asyncio.run(main())

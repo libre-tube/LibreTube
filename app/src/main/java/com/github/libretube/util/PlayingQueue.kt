@@ -1,55 +1,145 @@
 package com.github.libretube.util
 
-object PlayingQueue {
-    private val queue = mutableListOf<String>()
-    private var currentVideoId: String? = null
+import android.util.Log
+import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.extensions.move
+import com.github.libretube.extensions.toID
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-    fun add(videoId: String) {
-        if (currentVideoId == videoId) return
-        if (queue.contains(videoId)) queue.remove(videoId)
-        queue.add(videoId)
+object PlayingQueue {
+    private val queue = mutableListOf<StreamItem>()
+    private var currentStream: StreamItem? = null
+    private var onQueueTapListener: (StreamItem) -> Unit = {}
+    var repeatQueue: Boolean = false
+
+    fun add(vararg streamItem: StreamItem) {
+        streamItem.forEach {
+            if (currentStream != it) {
+                if (queue.contains(it)) queue.remove(it)
+                queue.add(it)
+            }
+        }
     }
 
-    fun addAsNext(videoId: String) {
-        if (currentVideoId == videoId) return
-        if (queue.contains(videoId)) queue.remove(videoId)
+    fun addAsNext(streamItem: StreamItem) {
+        if (currentStream == streamItem) return
+        if (queue.contains(streamItem)) queue.remove(streamItem)
         queue.add(
-            queue.indexOf(currentVideoId) + 1,
-            videoId
+            currentIndex() + 1,
+            streamItem
         )
     }
 
     fun getNext(): String? {
-        return try {
-            queue[currentIndex() + 1]
+        try {
+            return queue[currentIndex() + 1].url?.toID()
         } catch (e: Exception) {
-            null
+            Log.e("queue ended", e.toString())
         }
+        if (repeatQueue) return queue.firstOrNull()?.url?.toID()
+        return null
     }
 
     fun getPrev(): String? {
-        val index = queue.indexOf(currentVideoId)
-        return if (index > 0) queue[index - 1] else null
+        val index = queue.indexOf(currentStream)
+        return if (index > 0) queue[index - 1].url?.toID() else null
     }
 
     fun hasPrev(): Boolean {
-        return queue.indexOf(currentVideoId) > 0
+        return queue.indexOf(currentStream) > 0
     }
 
-    fun updateCurrent(videoId: String) {
-        currentVideoId = videoId
-        queue.add(videoId)
+    fun updateCurrent(streamItem: StreamItem) {
+        currentStream = streamItem
+        if (!contains(streamItem)) queue.add(streamItem)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
 
-    fun clear() = queue.clear()
+    fun isEmpty() = queue.isEmpty()
 
-    fun currentIndex() = queue.indexOf(currentVideoId)
+    fun size() = queue.size
 
-    fun contains(videoId: String) = queue.contains(videoId)
+    fun currentIndex(): Int {
+        return try {
+            queue.indexOf(
+                queue.first { it.url?.toID() == currentStream?.url?.toID() }
+            )
+        } catch (e: Exception) {
+            0
+        }
+    }
 
-    fun containsBeforeCurrent(videoId: String): Boolean {
-        return queue.contains(videoId) && queue.indexOf(videoId) < currentIndex()
+    fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
+
+    fun getStreams() = queue
+
+    fun setStreams(streams: List<StreamItem>) {
+        queue.clear()
+        queue.addAll(streams)
+    }
+
+    fun remove(index: Int) = queue.removeAt(index)
+
+    fun move(from: Int, to: Int) = queue.move(from, to)
+
+    private fun fetchMoreFromPlaylist(playlistId: String, nextPage: String?) {
+        var playlistNextPage: String? = nextPage
+        CoroutineScope(Dispatchers.IO).launch {
+            while (playlistNextPage != null) {
+                RetrofitInstance.authApi.getPlaylistNextPage(
+                    playlistId,
+                    playlistNextPage!!
+                ).apply {
+                    add(
+                        *this.relatedStreams.orEmpty().toTypedArray()
+                    )
+                    playlistNextPage = this.nextpage
+                }
+            }
+        }
+    }
+
+    fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val playlistType = PlaylistsHelper.getPrivateType(playlistId)
+                val playlist = PlaylistsHelper.getPlaylist(playlistType, playlistId)
+                add(
+                    *playlist.relatedStreams
+                        .orEmpty()
+                        .toTypedArray()
+                )
+                updateCurrent(newCurrentStream)
+                if (playlist.nextpage == null) return@launch
+                fetchMoreFromPlaylist(playlistId, playlist.nextpage)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun onQueueItemSelected(index: Int) {
+        try {
+            val streamItem = queue[index]
+            updateCurrent(streamItem)
+            onQueueTapListener.invoke(streamItem)
+        } catch (e: Exception) {
+            Log.e("Queue on tap", "lifecycle already ended")
+        }
+    }
+
+    fun setOnQueueTapListener(listener: (StreamItem) -> Unit) {
+        onQueueTapListener = listener
+    }
+
+    fun resetToDefaults() {
+        repeatQueue = false
+        onQueueTapListener = {}
+        queue.clear()
     }
 }

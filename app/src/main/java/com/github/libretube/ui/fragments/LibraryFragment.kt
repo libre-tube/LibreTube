@@ -12,18 +12,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
-import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toDp
-import com.github.libretube.models.PlayerViewModel
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PreferenceHelper
-import retrofit2.HttpException
-import java.io.IOException
 
 class LibraryFragment : BaseFragment() {
 
@@ -55,35 +53,31 @@ class LibraryFragment : BaseFragment() {
         val watchHistoryEnabled =
             PreferenceHelper.getBoolean(PreferenceKeys.WATCH_HISTORY_TOGGLE, true)
         if (!watchHistoryEnabled) {
-            binding.showWatchHistory.visibility = View.GONE
+            binding.watchHistory.visibility = View.GONE
         } else {
-            binding.showWatchHistory.setOnClickListener {
+            binding.watchHistory.setOnClickListener {
                 findNavController().navigate(R.id.watchHistoryFragment)
             }
+        }
+
+        binding.bookmarks.setOnClickListener {
+            findNavController().navigate(R.id.bookmarksFragment)
         }
 
         binding.downloads.setOnClickListener {
             findNavController().navigate(R.id.downloadsFragment)
         }
 
-        if (token != "") {
-            binding.boogh.setImageResource(R.drawable.ic_list)
-            binding.textLike.text = getString(R.string.emptyList)
+        fetchPlaylists()
 
-            binding.loginOrRegister.visibility = View.GONE
+        binding.playlistRefresh.isEnabled = true
+        binding.playlistRefresh.setOnRefreshListener {
             fetchPlaylists()
-
-            binding.playlistRefresh.isEnabled = true
-            binding.playlistRefresh.setOnRefreshListener {
+        }
+        binding.createPlaylist.setOnClickListener {
+            CreatePlaylistDialog {
                 fetchPlaylists()
-            }
-            binding.createPlaylist.setOnClickListener {
-                val newFragment = CreatePlaylistDialog()
-                newFragment.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
-            }
-        } else {
-            binding.playlistRefresh.isEnabled = false
-            binding.createPlaylist.visibility = View.GONE
+            }.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
     }
 
@@ -95,26 +89,19 @@ class LibraryFragment : BaseFragment() {
         binding.createPlaylist.layoutParams = layoutParams
     }
 
-    fun fetchPlaylists() {
+    private fun fetchPlaylists() {
         binding.playlistRefresh.isRefreshing = true
         lifecycleScope.launchWhenCreated {
             var playlists = try {
-                RetrofitInstance.authApi.playlists(token)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
+                PlaylistsHelper.getPlaylists()
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             } finally {
                 binding.playlistRefresh.isRefreshing = false
             }
             if (playlists.isNotEmpty()) {
-                binding.loginOrRegister.visibility = View.GONE
-
                 playlists = when (
                     PreferenceHelper.getString(
                         PreferenceKeys.PLAYLISTS_ORDER,
@@ -130,17 +117,14 @@ class LibraryFragment : BaseFragment() {
 
                 val playlistsAdapter = PlaylistsAdapter(
                     playlists.toMutableList(),
-                    childFragmentManager,
-                    requireActivity()
+                    PlaylistsHelper.getPrivateType()
                 )
 
                 // listen for playlists to become deleted
                 playlistsAdapter.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onChanged() {
-                            if (playlistsAdapter.itemCount == 0) {
-                                binding.loginOrRegister.visibility = View.VISIBLE
-                            }
+                            binding.nothingHere.visibility = if (playlistsAdapter.itemCount == 0) View.VISIBLE else View.GONE
                             super.onChanged()
                         }
                     })
@@ -148,7 +132,7 @@ class LibraryFragment : BaseFragment() {
                 binding.playlistRecView.adapter = playlistsAdapter
             } else {
                 runOnUiThread {
-                    binding.loginOrRegister.visibility = View.VISIBLE
+                    binding.nothingHere.visibility = View.VISIBLE
                 }
             }
         }

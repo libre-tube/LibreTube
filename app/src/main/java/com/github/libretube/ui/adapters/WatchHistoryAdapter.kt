@@ -2,26 +2,28 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.WatchHistoryRowBinding
-import com.github.libretube.db.DatabaseHelper
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
-import com.github.libretube.extensions.setFormattedDuration
-import com.github.libretube.extensions.setWatchProgressLength
+import com.github.libretube.extensions.query
+import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.setFormattedDuration
+import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.WatchHistoryViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 
 class WatchHistoryAdapter(
-    private val watchHistory: MutableList<WatchHistoryItem>,
-    private val childFragmentManager: FragmentManager
+    private val watchHistory: MutableList<WatchHistoryItem>
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
     fun removeFromWatchHistory(position: Int) {
-        DatabaseHelper.removeFromWatchHistory(position)
+        query {
+            DatabaseHolder.Database.watchHistoryDao().delete(watchHistory[position])
+        }
         watchHistory.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, itemCount)
@@ -55,8 +57,8 @@ class WatchHistoryAdapter(
                 NavigationHelper.navigateVideo(root.context, video.videoId)
             }
             root.setOnLongClickListener {
-                VideoOptionsBottomSheet(video.videoId)
-                    .show(childFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                VideoOptionsBottomSheet(video.videoId, video.title!!)
+                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
                 true
             }
 

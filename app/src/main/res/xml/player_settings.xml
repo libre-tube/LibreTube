@@ -55,6 +55,21 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/appearance">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_caption"
+            app:defaultValue="true"
+            app:key="system_caption_style"
+            app:title="@string/system_caption_style" />
+
+        <Preference
+            android:icon="@drawable/ic_settings"
+            app:key="caption_settings"
+            app:title="@string/caption_settings" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/behavior">
 
         <SwitchPreferenceCompat
@@ -92,6 +107,16 @@
             app:key="fullscreen_orientation"
             app:title="@string/fullscreen_orientation"
             app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/queue">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_list"
+            android:title="@string/queue_insert_related_videos"
+            app:key="queue_insert_related_videos" />
 
     </PreferenceCategory>
 

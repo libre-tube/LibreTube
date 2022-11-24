@@ -2,13 +2,16 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.os.Build
-import com.github.libretube.constants.DownloadType
-import com.github.libretube.extensions.createDir
 import com.github.libretube.obj.DownloadedFile
 import java.io.File
 
 object DownloadHelper {
-    private fun getOfflineStorageDir(context: Context): File {
+    const val VIDEO_DIR = "video"
+    const val AUDIO_DIR = "audio"
+    const val METADATA_DIR = "metadata"
+    const val THUMBNAIL_DIR = "thumbnail"
+
+    fun getOfflineStorageDir(context: Context): File {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return context.filesDir
 
         return try {
@@ -18,65 +21,35 @@ object DownloadHelper {
         }
     }
 
-    fun getVideoDir(context: Context): File {
+    fun getDownloadDir(context: Context, path: String): File {
         return File(
             getOfflineStorageDir(context),
-            "video"
-        ).createDir()
+            path
+        ).apply {
+            if (!this.exists()) this.mkdirs()
+        }
     }
 
-    fun getAudioDir(context: Context): File {
-        return File(
-            getOfflineStorageDir(context),
-            "audio"
-        ).createDir()
-    }
-
-    fun getMetadataDir(context: Context): File {
-        return File(
-            getOfflineStorageDir(context),
-            "metadata"
-        ).createDir()
-    }
-
-    fun getThumbnailDir(context: Context): File {
-        return File(
-            getOfflineStorageDir(context),
-            "thumbnail"
-        ).createDir()
+    private fun File.toDownloadedFile(): DownloadedFile {
+        return DownloadedFile(
+            name = this.name,
+            size = this.length()
+        )
     }
 
     fun getDownloadedFiles(context: Context): MutableList<DownloadedFile> {
-        val videoFiles = getVideoDir(context).listFiles()
-        val audioFiles = getAudioDir(context).listFiles()?.toMutableList()
+        val videoFiles = getDownloadDir(context, VIDEO_DIR).listFiles().orEmpty()
+        val audioFiles = getDownloadDir(context, AUDIO_DIR).listFiles().orEmpty().toMutableList()
 
         val files = mutableListOf<DownloadedFile>()
 
-        videoFiles?.forEach {
-            var type = DownloadType.VIDEO
-            audioFiles?.forEach { audioFile ->
-                if (audioFile.name == it.name) {
-                    type = DownloadType.AUDIO_VIDEO
-                    audioFiles.remove(audioFile)
-                }
-            }
-            files.add(
-                DownloadedFile(
-                    name = it.name,
-                    size = it.length(),
-                    type = type
-                )
-            )
+        videoFiles.forEach {
+            audioFiles.removeIf { audioFile -> audioFile.name == it.name }
+            files.add(it.toDownloadedFile())
         }
 
-        audioFiles?.forEach {
-            files.add(
-                DownloadedFile(
-                    name = it.name,
-                    size = it.length(),
-                    type = DownloadType.AUDIO
-                )
-            )
+        audioFiles.forEach {
+            files.add(it.toDownloadedFile())
         }
 
         return files

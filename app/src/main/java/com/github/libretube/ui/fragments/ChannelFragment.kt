@@ -6,21 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.api.obj.ChannelTab
 import com.github.libretube.constants.IntentData
-import com.github.libretube.constants.ShareObjectType
 import com.github.libretube.databinding.FragmentChannelBinding
+import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
-import com.github.libretube.ui.adapters.ChannelAdapter
+import com.github.libretube.obj.ChannelTabs
+import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.adapters.SearchAdapter
+import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.util.ImageHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -29,11 +38,21 @@ class ChannelFragment : BaseFragment() {
 
     private var channelId: String? = null
     private var channelName: String? = null
-
     private var nextPage: String? = null
-    private var channelAdapter: ChannelAdapter? = null
+    private var channelAdapter: VideosAdapter? = null
     private var isLoading = true
     private var isSubscribed: Boolean? = false
+
+    private var onScrollEnd: () -> Unit = {}
+
+    private val scope = CoroutineScope(Dispatchers.IO)
+
+    val possibleTabs = listOf(
+        ChannelTabs.Channels,
+        ChannelTabs.Playlists,
+        ChannelTabs.Livestreams,
+        ChannelTabs.Shorts
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +82,9 @@ class ChannelFragment : BaseFragment() {
             binding.channelRefresh.isRefreshing = true
             fetchChannel()
         }
+
         refreshChannel()
+
         binding.channelRefresh.setOnRefreshListener {
             refreshChannel()
         }
@@ -73,11 +94,10 @@ class ChannelFragment : BaseFragment() {
                 if (binding.channelScrollView.getChildAt(0).bottom
                     == (binding.channelScrollView.height + binding.channelScrollView.scrollY)
                 ) {
-                    // scroll view is at bottom
-                    if (nextPage != null && !isLoading) {
-                        isLoading = true
-                        binding.channelRefresh.isRefreshing = true
-                        fetchChannelNextPage()
+                    try {
+                        onScrollEnd.invoke()
+                    } catch (e: Exception) {
+                        Log.e("tabs failed", e.toString())
                     }
                 }
             }
@@ -102,30 +122,26 @@ class ChannelFragment : BaseFragment() {
             }
             // needed if the channel gets loaded by the ID
             channelId = response.id
+            channelName = response.name
+            val shareData = ShareData(currentChannel = response.name)
+
+            onScrollEnd = {
+                fetchChannelNextPage()
+            }
 
             // fetch and update the subscription status
             isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
             if (isSubscribed == null) return@launchWhenCreated
 
             runOnUiThread {
-                if (isSubscribed == true) {
-                    binding.channelSubscribe.text = getString(R.string.unsubscribe)
-                }
-
-                binding.channelSubscribe.setOnClickListener {
-                    binding.channelSubscribe.text = if (isSubscribed == true) {
-                        SubscriptionHelper.unsubscribe(channelId!!)
-                        isSubscribed = false
-                        getString(R.string.subscribe)
-                    } else {
-                        SubscriptionHelper.subscribe(channelId!!)
-                        isSubscribed = true
-                        getString(R.string.unsubscribe)
-                    }
-                }
+                binding.channelSubscribe.setupSubscriptionButton(channelId, channelName, binding.notificationBell)
 
                 binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(response.id!!.toID(), ShareObjectType.CHANNEL)
+                    val shareDialog = ShareDialog(
+                        response.id!!.toID(),
+                        ShareObjectType.CHANNEL,
+                        shareData
+                    )
                     shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
                 }
             }
@@ -165,23 +181,82 @@ class ChannelFragment : BaseFragment() {
                 ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
 
                 // recyclerview of the videos by the channel
-                channelAdapter = ChannelAdapter(
-                    response.relatedStreams!!.toMutableList(),
-                    childFragmentManager
+                channelAdapter = VideosAdapter(
+                    response.relatedStreams.orEmpty().toMutableList(),
+                    forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
                 )
                 binding.channelRecView.adapter = channelAdapter
+            }
+
+            response.tabs?.let { setupTabs(it) }
+        }
+    }
+
+    private fun setupTabs(tabs: List<ChannelTab>) {
+        binding.tabChips.children.forEach { chip ->
+            val resourceTab = possibleTabs.firstOrNull { it.chipId == chip.id }
+            resourceTab?.let { resTab ->
+                if (tabs.any { it.name == resTab.identifierName }) chip.visibility = View.VISIBLE
+            }
+        }
+
+        binding.tabChips.setOnCheckedStateChangeListener { _, _ ->
+            when (binding.tabChips.checkedChipId) {
+                binding.videos.id -> {
+                    binding.channelRecView.adapter = channelAdapter
+                    onScrollEnd = {
+                        fetchChannelNextPage()
+                    }
+                }
+                else -> {
+                    possibleTabs.first { binding.tabChips.checkedChipId == it.chipId }.let {
+                        val tab = tabs.first { tab -> tab.name == it.identifierName }
+                        loadTab(tab)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun loadTab(tab: ChannelTab) {
+        scope.launch {
+            tab.data ?: return@launch
+            val response = try {
+                RetrofitInstance.api.getChannelTab(tab.data)
+            } catch (e: Exception) {
+                return@launch
+            }
+
+            val adapter = SearchAdapter(
+                response.content.toMutableList()
+            )
+
+            runOnUiThread {
+                binding.channelRecView.adapter = adapter
+            }
+
+            var tabNextPage = response.nextpage
+            onScrollEnd = {
+                tabNextPage?.let {
+                    fetchTabNextPage(it, tab, adapter) { nextPage ->
+                        tabNextPage = nextPage
+                    }
+                }
             }
         }
     }
 
     private fun fetchChannelNextPage() {
         fun run() {
+            if (nextPage == null || isLoading) return
+            isLoading = true
+            binding.channelRefresh.isRefreshing = true
+
             lifecycleScope.launchWhenCreated {
                 val response = try {
                     RetrofitInstance.api.getChannelNextPage(channelId!!, nextPage!!)
                 } catch (e: IOException) {
                     binding.channelRefresh.isRefreshing = false
-                    println(e)
                     Log.e(TAG(), "IOException, you might not have internet connection")
                     return@launchWhenCreated
                 } catch (e: HttpException) {
@@ -190,11 +265,33 @@ class ChannelFragment : BaseFragment() {
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
-                channelAdapter?.updateItems(response.relatedStreams!!)
+                channelAdapter?.insertItems(response.relatedStreams.orEmpty())
                 isLoading = false
                 binding.channelRefresh.isRefreshing = false
             }
         }
         run()
+    }
+
+    private fun fetchTabNextPage(
+        nextPage: String,
+        tab: ChannelTab,
+        adapter: SearchAdapter,
+        onNewNextPage: (String?) -> Unit
+    ) {
+        scope.launch {
+            val newContent = try {
+                RetrofitInstance.api.getChannelTab(tab.data ?: "", nextPage)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+            onNewNextPage.invoke(newContent?.nextpage)
+            runOnUiThread {
+                newContent?.content?.let {
+                    adapter.updateItems(it)
+                }
+            }
+        }
     }
 }

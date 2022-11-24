@@ -6,7 +6,7 @@
     <string name="download">Lataa</string>
     <string name="loggedout">Kirjautunut ulos.</string>
     <string name="loggedIn">Kirjautunut sisään.</string>
-    <string name="instances">Valitse instanssi</string>
+    <string name="instances">Valitse esiintymä</string>
     <string name="region">Alue</string>
     <string name="subscribe">Tilaa</string>
     <string name="save">Tallenna</string>
@@ -35,7 +35,7 @@
     <string name="about">Tietoja</string>
     <string name="choose_quality_dialog">Laatu</string>
     <string name="share">Jaa</string>
-    <string name="customInstance">Mukautettu instanssi</string>
+    <string name="customInstance">Mukautettu esiintymä</string>
     <string name="subscribeIsEmpty">Tilaa ensin joitakin kanavia.</string>
     <string name="dlisinprogress">Toinen lataus on jo käynnissä, odota kunnes se on valmis.</string>
     <string name="cannotDownload">Ei voi ladata tätä videota.</string>
@@ -142,7 +142,7 @@
     <string name="torchIcon">Trendikäs soihtu</string>
     <string name="fireIcon">Muodikas tuli</string>
     <string name="empty_instance">Täydennä nimi ja ohjelmointirajapinnan linkki.</string>
-    <string name="clear_customInstances">Tyhjennä mukautetut instanssit</string>
+    <string name="clear_customInstances">Tyhjennä mukautetut esiintymät</string>
     <string name="music_albums">YT Music Albumit</string>
     <string name="show_chapters">Näytä osiot</string>
     <string name="hide_chapters">Piilota osiot</string>
@@ -153,11 +153,11 @@
     <string name="color_red">Levollinen punainen</string>
     <string name="color_blue">Autuas sininen</string>
     <string name="update">Etsi uutta versiota</string>
-    <string name="playback_speed">Oletustoistonopeus</string>
+    <string name="playback_speed">Toiston oletusnopeus</string>
     <string name="category_music_offtopic_description">Käyttö ainoastaan musiikki videoissa. Sen tulisi kattaa videon osat, jotka eivät ole osa virallisia mixejä. Videon tulee muistuttaa Spotifytä tai mitä tahansa muuta mixattua versiota mahdollisimman paljon tai vähentää puhumista tai muita häiriötekijöitä.</string>
     <string name="category_preview_description">Segmenteille, jotka tarkentavat tulevaa sisältöä tässä tai tulevissa videoissa, mutta eivät tarjoa lisää tietoa. Jos se sisältää klippejä, jotka esiintyvät tässä, tämä on todennäköisesti väärä kategoria.</string>
     <string name="color_yellow">Kellertävä keltainen</string>
-    <string name="update_summary">Paina selvittääksesi onko sovellus ajan tasalla.</string>
+    <string name="update_summary">Paina selvittääksesi, onko sovellus ajan tasalla.</string>
     <string name="player">Ääni ja video</string>
     <string name="download_folder">Nimi</string>
     <string name="download_folder_summary">Kansion nimi, minne ladattu media on tallennettu.</string>
@@ -167,7 +167,7 @@
     <string name="shapedIcon">Hölmösti muotoiltu</string>
     <string name="flameIcon">Lentävä liekki</string>
     <string name="instance_summary">Piped, kirjautuminen, tilaukset</string>
-    <string name="customInstance_summary">Lisää oma instanssi (omalla vastuulla)</string>
+    <string name="customInstance_summary">Lisää oma esiintymä (omalla vastuulla)</string>
     <string name="instance_name">Instanssin nimi</string>
     <string name="addInstance">Lisää instanssi</string>
     <string name="version">Versio %1$s</string>
@@ -177,7 +177,7 @@
     <string name="invalid_url">Anna toimiva linkki</string>
     <string name="about_summary">Tutustu LibreTuben tiimiin ja siihen, miten se kaikki tapahtuu.</string>
     <string name="related_streams">Asiaan liittyvä sisältö</string>
-    <string name="related_streams_summary">Näytä aiheeseen liittyviä streameja katsomasi ohella.</string>
+    <string name="related_streams_summary">Näytä samankaltaisia streameja katsomasi ohella.</string>
     <string name="category_filler_description">Epäolennaisille kohtauksille, jotka lisätty vain täytteeksi tai huumori, joka on tarpeetonta ymmärtääkseen videon pääsisällön.</string>
     <string name="playerVideoFormat">Video formaatti soittimelle</string>
     <string name="buffering_goal">Esikuormitus</string>
@@ -202,4 +202,5 @@
     <string name="autoplay_summary">Automaattisesti toistaa seuraavan videon kun nykyinen on päättynyt.</string>
     <string name="clonePlaylist">Kloonaa soittolista</string>
     <string name="watch_history">Katso historia</string>
+    <string name="views_placeholder">näyttökertaa</string>
 </resources>

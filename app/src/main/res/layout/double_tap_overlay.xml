@@ -34,7 +34,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:textColor="@android:color/white"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
         </FrameLayout>
 
@@ -75,7 +75,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:textColor="@android:color/white"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
         </FrameLayout>
 

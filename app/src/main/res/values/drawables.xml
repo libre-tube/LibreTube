@@ -3,5 +3,6 @@
 
     <drawable name="exo_styled_controls_play">@drawable/ic_play</drawable>
     <drawable name="exo_styled_controls_pause">@drawable/ic_pause</drawable>
+    <drawable name="exo_notification_small_icon">@drawable/ic_launcher_lockscreen</drawable>
 
 </resources>

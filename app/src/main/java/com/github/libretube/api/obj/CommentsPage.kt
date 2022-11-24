@@ -6,5 +6,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 data class CommentsPage(
     val comments: MutableList<Comment> = arrayListOf(),
     val disabled: Boolean? = null,
-    val nextpage: String? = ""
+    val nextpage: String? = null
 )

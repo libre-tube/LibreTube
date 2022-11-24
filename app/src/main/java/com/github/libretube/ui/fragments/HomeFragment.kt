@@ -1,39 +1,35 @@
 package com.github.libretube.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.databinding.FragmentHomeBinding
-import com.github.libretube.extensions.TAG
-import com.github.libretube.ui.activities.SettingsActivity
-import com.github.libretube.ui.adapters.ChannelAdapter
-import com.github.libretube.ui.adapters.TrendingAdapter
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
+import com.github.libretube.ui.adapters.PlaylistsAdapter
+import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
-import com.google.android.material.snackbar.Snackbar
-import retrofit2.HttpException
-import java.io.IOException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var region: String
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,89 +42,118 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val regionPref = PreferenceHelper.getString(PreferenceKeys.REGION, "sys")
 
-        // get the system default country if auto region selected
-        region = if (regionPref == "sys") {
-            LocaleHelper
-                .getDetectedCountry(requireContext(), "UK")
-                .uppercase()
-        } else {
-            regionPref
+        binding.featuredTV.setOnClickListener {
+            findNavController().navigate(R.id.subscriptionsFragment)
         }
 
-        fetchTrending()
-        binding.homeRefresh.isEnabled = true
-        binding.homeRefresh.setOnRefreshListener {
-            fetchTrending()
+        binding.trendingTV.setOnClickListener {
+            findNavController().navigate(R.id.trendsFragment)
+        }
+
+        binding.playlistsTV.setOnClickListener {
+            findNavController().navigate(R.id.libraryFragment)
+        }
+
+        binding.bookmarksTV.setOnClickListener {
+            findNavController().navigate(R.id.bookmarksFragment)
+        }
+
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = true
+            lifecycleScope.launch(Dispatchers.IO) {
+                fetchHome()
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            fetchHome()
         }
     }
 
-    private fun fetchTrending() {
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getTrending(region)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } finally {
-                binding.homeRefresh.isRefreshing = false
-            }
+    private suspend fun fetchHome() {
+        val token = PreferenceHelper.getToken()
+        runOrError {
+            val feed = SubscriptionHelper.getFeed().withMaxSize(20)
+            if (feed.isEmpty()) return@runOrError
             runOnUiThread {
-                binding.progressBar.visibility = View.GONE
-
-                // show a [SnackBar] if there are no trending videos available
-                if (response.isEmpty()) {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.change_region,
-                        Snackbar.LENGTH_LONG
-                    )
-                        .setAction(
-                            R.string.settings
-                        ) {
-                            startActivity(
-                                Intent(
-                                    context,
-                                    SettingsActivity::class.java
-                                )
-                            )
-                        }
-                        .show()
-                    return@runOnUiThread
-                }
-
-                if (
-                    PreferenceHelper.getBoolean(
-                        PreferenceKeys.ALTERNATIVE_TRENDING_LAYOUT,
-                        false
-                    )
-                ) {
-                    binding.recview.layoutManager = LinearLayoutManager(context)
-
-                    binding.recview.adapter = ChannelAdapter(
-                        response.toMutableList(),
-                        childFragmentManager,
-                        true
-                    )
-                } else {
-                    binding.recview.layoutManager = GridLayoutManager(
-                        context,
-                        PreferenceHelper.getString(
-                            PreferenceKeys.GRID_COLUMNS,
-                            resources.getInteger(R.integer.grid_items).toString()
-                        ).toInt()
-                    )
-
-                    binding.recview.adapter = TrendingAdapter(response, childFragmentManager)
-                }
+                makeVisible(binding.featuredRV, binding.featuredTV)
+                binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.featuredRV.adapter = VideosAdapter(
+                    feed.toMutableList(),
+                    forceMode = VideosAdapter.Companion.ForceMode.HOME
+                )
             }
         }
+
+        runOrError {
+            val trending = RetrofitInstance.api.getTrending(
+                LocaleHelper.getTrendingRegion(requireContext())
+            ).withMaxSize(10)
+            if (trending.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.trendingRV, binding.trendingTV)
+                binding.trendingRV.layoutManager = GridLayoutManager(context, 2)
+                binding.trendingRV.adapter = VideosAdapter(
+                    trending.toMutableList(),
+                    forceMode = VideosAdapter.Companion.ForceMode.TRENDING
+                )
+            }
+        }
+
+        runOrError {
+            val playlists = PlaylistsHelper.getPlaylists().withMaxSize(20)
+            if (playlists.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.playlistsRV, binding.playlistsTV)
+                binding.playlistsRV.layoutManager = LinearLayoutManager(context)
+                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), PlaylistsHelper.getPrivateType())
+                binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
+                        RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                            super.onItemRangeRemoved(positionStart, itemCount)
+                            if (itemCount == 0) {
+                                binding.playlistsRV.visibility = View.GONE
+                                binding.playlistsTV.visibility = View.GONE
+                            }
+                        }
+                    })
+            }
+        }
+
+        runOrError {
+            val bookmarkedPlaylists = awaitQuery {
+                DatabaseHolder.Database.playlistBookmarkDao().getAll()
+            }
+            if (bookmarkedPlaylists.isEmpty()) return@runOrError
+            runOnUiThread {
+                makeVisible(binding.bookmarksTV, binding.bookmarksRV)
+                binding.bookmarksRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
+                    bookmarkedPlaylists,
+                    PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME
+                )
+            }
+        }
+    }
+
+    private fun runOrError(action: suspend () -> Unit) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                action.invoke()
+            } catch (e: Exception) {
+                e.localizedMessage?.let { context?.toastFromMainThread(it) }
+                Log.e("fetching home tab", e.toString())
+            }
+        }
+    }
+
+    private fun makeVisible(vararg views: View) {
+        views.forEach {
+            it.visibility = View.VISIBLE
+        }
+        binding.progress.visibility = View.GONE
+        binding.scroll.visibility = View.VISIBLE
+        binding.refresh.isRefreshing = false
     }
 }

@@ -18,12 +18,7 @@
             app:key="image_cache_size"
             app:title="@string/maximum_image_cache"
             app:useSimpleSummaryProvider="true" />
-
-        <Preference
-            android:icon="@drawable/ic_reset"
-            app:key="reset_settings"
-            app:title="@string/reset" />
-
+        
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_badge"
             android:summary="@string/new_videos_badge_summary"
@@ -35,6 +30,12 @@
             android:summary="@string/save_feed_summary"
             app:key="save_feed"
             app:title="@string/save_feed" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_check"
+            android:summary="@string/confirm_unsubscribing_summary"
+            app:key="confirm_unsubscribing"
+            app:title="@string/confirm_unsubscribing" />
 
     </PreferenceCategory>
 
@@ -49,6 +50,15 @@
             android:icon="@drawable/ic_restore"
             app:key="restore"
             app:title="@string/restore" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/misc">
+
+        <Preference
+            android:icon="@drawable/ic_reset"
+            app:key="reset_settings"
+            app:title="@string/reset" />
 
     </PreferenceCategory>
 

@@ -9,23 +9,24 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.Segments
+import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.util.AutoPlayHelper
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
@@ -53,6 +54,7 @@ class BackgroundMode : Service() {
      *PlaylistId for autoplay
      */
     private var playlistId: String? = null
+    private var playlistType: PlaylistType? = null
 
     /**
      * The response that gets when called the Api.
@@ -73,22 +75,12 @@ class BackgroundMode : Service() {
     /**
      * SponsorBlock Segment data
      */
-    private var segmentData: Segments? = null
+    private var segmentData: SegmentData? = null
 
     /**
      * [Notification] for the player
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
-
-    /**
-     * The [videoId] of the next stream for autoplay
-     */
-    private var nextStreamId: String? = null
-
-    /**
-     * Helper for finding the next video in the playlist
-     */
-    private lateinit var autoPlayHelper: AutoPlayHelper
 
     /**
      * Autoplay Preference
@@ -100,18 +92,21 @@ class BackgroundMode : Service() {
      */
     override fun onCreate() {
         super.onCreate()
-        if (Build.VERSION.SDK_INT >= 26) {
-            val channelId = BACKGROUND_CHANNEL_ID
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                channelId,
+                BACKGROUND_CHANNEL_ID,
                 "Background Service",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-            val notification: Notification = Notification.Builder(this, channelId)
+
+            // see https://developer.android.com/reference/android/app/Service#startForeground(int,%20android.app.Notification)
+            val notification: Notification = Notification.Builder(this, BACKGROUND_CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.playingOnBackground)).build()
+                .setContentText(getString(R.string.playingOnBackground))
+                .build()
+
             startForeground(PLAYER_NOTIFICATION_ID, notification)
         }
     }
@@ -122,20 +117,21 @@ class BackgroundMode : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
             // clear the playing queue
-            PlayingQueue.clear()
+            PlayingQueue.resetToDefaults()
 
             // get the intent arguments
             videoId = intent?.getStringExtra(IntentData.videoId)!!
             playlistId = intent.getStringExtra(IntentData.playlistId)
             val position = intent.getLongExtra(IntentData.position, 0L)
 
-            // initialize the playlist autoPlay Helper
-            autoPlayHelper = AutoPlayHelper(playlistId)
-
             // play the audio in the background
             loadAudio(videoId, position)
 
-            updateWatchPosition()
+            PlayingQueue.setOnQueueTapListener { streamItem ->
+                streamItem.url?.toID()?.let { playNextVideo(it) }
+            }
+
+            if (PlayerHelper.watchPositionsEnabled) updateWatchPosition()
         } catch (e: Exception) {
             onDestroy()
         }
@@ -143,7 +139,11 @@ class BackgroundMode : Service() {
     }
 
     private fun updateWatchPosition() {
-        player?.currentPosition?.let { DatabaseHelper.saveWatchPosition(videoId, it) }
+        player?.currentPosition?.let {
+            query {
+                Database.watchPositionDao().insertAll(WatchPosition(videoId, it))
+            }
+        }
         handler.postDelayed(this::updateWatchPosition, 500)
     }
 
@@ -154,13 +154,26 @@ class BackgroundMode : Service() {
         videoId: String,
         seekToPosition: Long = 0
     ) {
-        // append the video to the playing queue
-        PlayingQueue.add(videoId)
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 streams = RetrofitInstance.api.getStreams(videoId)
             } catch (e: Exception) {
                 return@launch
+            }
+
+            // add the playlist video to the queue
+            if (playlistId != null && PlayingQueue.isEmpty()) {
+                streams?.toStreamItem(videoId)
+                    ?.let {
+                        PlayingQueue.insertPlaylist(playlistId!!, it)
+                    }
+            } else {
+                streams?.toStreamItem(videoId)?.let {
+                    PlayingQueue.updateCurrent(it)
+                }
+                streams?.relatedStreams?.toTypedArray()?.let {
+                    if (PlayerHelper.autoInsertRelatedVideos) PlayingQueue.add(*it)
+                }
             }
 
             handler.post {
@@ -172,8 +185,6 @@ class BackgroundMode : Service() {
     private fun playAudio(
         seekToPosition: Long
     ) {
-        PlayingQueue.updateCurrent(videoId)
-
         initializePlayer()
         setMediaItem()
 
@@ -194,9 +205,8 @@ class BackgroundMode : Service() {
         } else if (PlayerHelper.watchPositionsEnabled) {
             try {
                 val watchPosition = awaitQuery {
-                    DatabaseHolder.Database.watchPositionDao().findById(videoId)
+                    Database.watchPositionDao().findById(videoId)
                 }
-                Log.e("position", watchPosition.toString())
                 streams?.duration?.let {
                     if (watchPosition != null && watchPosition.position < it * 1000 * 0.9) {
                         player?.seekTo(watchPosition.position)
@@ -215,8 +225,6 @@ class BackgroundMode : Service() {
         player?.setPlaybackSpeed(playbackSpeed)
 
         fetchSponsorBlockSegments()
-
-        if (PlayerHelper.autoPlayEnabled) setNextStream()
     }
 
     /**
@@ -266,31 +274,15 @@ class BackgroundMode : Service() {
     }
 
     /**
-     * set the videoId of the next stream for autoplay
-     */
-    private fun setNextStream() {
-        if (streams!!.relatedStreams!!.isNotEmpty()) {
-            nextStreamId = streams?.relatedStreams!![0].url!!.toID()
-        }
-
-        if (playlistId == null) return
-        if (!this::autoPlayHelper.isInitialized) autoPlayHelper = AutoPlayHelper(playlistId!!)
-        // search for the next videoId in the playlist
-        CoroutineScope(Dispatchers.IO).launch {
-            nextStreamId = autoPlayHelper.getNextVideoId(videoId, streams!!.relatedStreams!!)
-        }
-    }
-
-    /**
      * Plays the first related video to the current (used when the playback of the current video ended)
      */
-    private fun playNextVideo() {
-        if (nextStreamId == null || nextStreamId == videoId) return
-        val nextQueueVideo = PlayingQueue.getNext()
-        if (nextQueueVideo != null) nextStreamId = nextQueueVideo
+    private fun playNextVideo(nextId: String? = null) {
+        val nextVideo = nextId ?: PlayingQueue.getNext()
 
         // play new video on background
-        this.videoId = nextStreamId!!
+        if (nextVideo != null) {
+            this.videoId = nextVideo
+        }
         this.segmentData = null
         loadAudio(videoId)
     }
@@ -322,16 +314,15 @@ class BackgroundMode : Service() {
      */
     private fun fetchSponsorBlockSegments() {
         CoroutineScope(Dispatchers.IO).launch {
-            kotlin.runCatching {
+            runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
-                if (categories.size > 0) {
-                    segmentData =
-                        RetrofitInstance.api.getSegments(
-                            videoId,
-                            ObjectMapper().writeValueAsString(categories)
-                        )
-                    checkForSegments()
-                }
+                if (categories.isEmpty()) return@runCatching
+                segmentData =
+                    RetrofitInstance.api.getSegments(
+                        videoId,
+                        ObjectMapper().writeValueAsString(categories)
+                    )
+                checkForSegments()
             }
         }
     }
@@ -345,7 +336,7 @@ class BackgroundMode : Service() {
         if (segmentData == null || segmentData!!.segments.isEmpty()) return
 
         segmentData!!.segments.forEach { segment: Segment ->
-            val segmentStart = (segment.segment!![0] * 1000f).toLong()
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
@@ -367,7 +358,7 @@ class BackgroundMode : Service() {
      */
     override fun onDestroy() {
         // clear the playing queue
-        PlayingQueue.clear()
+        PlayingQueue.resetToDefaults()
 
         if (this::nowPlayingNotification.isInitialized) nowPlayingNotification.destroySelfAndPlayer()
 

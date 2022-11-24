@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,14 +11,24 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.PlaylistBookmark
+import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.extensions.serializable
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
+import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.TextUtils
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -25,16 +36,18 @@ class PlaylistFragment : BaseFragment() {
     private lateinit var binding: FragmentPlaylistBinding
 
     private var playlistId: String? = null
-    private var isOwner: Boolean = false
+    private var playlistName: String? = null
+    private var playlistType: PlaylistType = PlaylistType.PUBLIC
     private var nextPage: String? = null
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
+    private var isBookmarked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             playlistId = it.getString(IntentData.playlistId)
-            isOwner = it.getBoolean("isOwner")
+            playlistType = it.serializable(IntentData.playlistType)!!
         }
     }
 
@@ -54,18 +67,27 @@ class PlaylistFragment : BaseFragment() {
         binding.playlistRecView.layoutManager = LinearLayoutManager(context)
 
         binding.playlistProgress.visibility = View.VISIBLE
+
+        isBookmarked = awaitQuery {
+            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
+        }
+        updateBookmarkRes()
+
         fetchPlaylist()
     }
 
+    private fun updateBookmarkRes() {
+        binding.bookmark.setIconResource(
+            if (isBookmarked) R.drawable.ic_bookmark else R.drawable.ic_bookmark_outlined
+        )
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun fetchPlaylist() {
+        binding.playlistScrollview.visibility = View.GONE
         lifecycleScope.launchWhenCreated {
             val response = try {
-                // load locally stored playlists with the auth api
-                if (isOwner) {
-                    RetrofitInstance.authApi.getPlaylist(playlistId!!)
-                } else {
-                    RetrofitInstance.api.getPlaylist(playlistId!!)
-                }
+                PlaylistsHelper.getPlaylist(playlistType, playlistId!!)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
@@ -74,42 +96,77 @@ class PlaylistFragment : BaseFragment() {
                 Log.e(TAG(), "HttpException, unexpected response")
                 return@launchWhenCreated
             }
+            binding.playlistScrollview.visibility = View.VISIBLE
             nextPage = response.nextpage
+            playlistName = response.name
             isLoading = false
             runOnUiThread {
+                ImageHelper.loadImage(response.thumbnailUrl, binding.thumbnail)
                 binding.playlistProgress.visibility = View.GONE
                 binding.playlistName.text = response.name
-                binding.uploader.text = response.uploader
-                binding.videoCount.text =
+
+                binding.playlistName.setOnClickListener {
+                    binding.playlistName.maxLines = if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
+                }
+
+                binding.playlistInfo.text = (if (response.uploader != null) response.uploader + TextUtils.SEPARATOR else "") +
                     getString(R.string.videoCount, response.videos.toString())
 
                 // show playlist options
                 binding.optionsMenu.setOnClickListener {
-                    val optionsDialog =
-                        PlaylistOptionsBottomSheet(playlistId!!, isOwner)
-                    optionsDialog.show(
+                    PlaylistOptionsBottomSheet(playlistId!!, playlistName ?: "", playlistType).show(
                         childFragmentManager,
                         PlaylistOptionsBottomSheet::class.java.name
                     )
                 }
 
+                binding.playAll.setOnClickListener {
+                    if (response.relatedStreams.orEmpty().isEmpty()) return@setOnClickListener
+                    NavigationHelper.navigateVideo(
+                        requireContext(),
+                        response.relatedStreams!!.first().url?.toID(),
+                        playlistId
+                    )
+                }
+
+                if (playlistType != PlaylistType.PUBLIC) binding.bookmark.visibility = View.GONE
+
+                binding.bookmark.setOnClickListener {
+                    isBookmarked = !isBookmarked
+                    updateBookmarkRes()
+                    query {
+                        if (!isBookmarked) {
+                            DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId!!)
+                        } else {
+                            DatabaseHolder.Database.playlistBookmarkDao().insertAll(
+                                PlaylistBookmark(
+                                    playlistId = playlistId!!,
+                                    playlistName = response.name,
+                                    thumbnailUrl = response.thumbnailUrl,
+                                    uploader = response.uploader,
+                                    uploaderAvatar = response.uploaderAvatar,
+                                    uploaderUrl = response.uploaderUrl
+                                )
+                            )
+                        }
+                    }
+                }
+
                 playlistAdapter = PlaylistAdapter(
-                    response.relatedStreams!!.toMutableList(),
+                    response.relatedStreams.orEmpty().toMutableList(),
                     playlistId!!,
-                    isOwner,
-                    requireActivity(),
-                    childFragmentManager
+                    playlistType
                 )
 
                 // listen for playlist items to become deleted
                 playlistAdapter!!.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onChanged() {
-                            binding.videoCount.text =
-                                getString(
-                                    R.string.videoCount,
-                                    playlistAdapter!!.itemCount.toString()
-                                )
+                            binding.playlistInfo.text =
+                                binding.playlistInfo.text.split(TextUtils.SEPARATOR).first() + TextUtils.SEPARATOR + getString(
+                                R.string.videoCount,
+                                playlistAdapter!!.itemCount.toString()
+                            )
                         }
                     })
 
@@ -130,7 +187,7 @@ class PlaylistFragment : BaseFragment() {
                 /**
                  * listener for swiping to the left or right
                  */
-                if (isOwner) {
+                if (playlistType != PlaylistType.PUBLIC) {
                     val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                         0,
                         ItemTouchHelper.LEFT
@@ -148,7 +205,7 @@ class PlaylistFragment : BaseFragment() {
                             direction: Int
                         ) {
                             val position = viewHolder.absoluteAdapterPosition
-                            playlistAdapter!!.removeFromPlaylist(position)
+                            playlistAdapter!!.removeFromPlaylist(requireContext(), position)
                         }
                     }
 
@@ -160,34 +217,27 @@ class PlaylistFragment : BaseFragment() {
     }
 
     private fun fetchNextPage() {
-        fun run() {
-            lifecycleScope.launchWhenCreated {
-                val response = try {
-                    // load locally stored playlists with the auth api
-                    if (isOwner) {
-                        RetrofitInstance.authApi.getPlaylistNextPage(
-                            playlistId!!,
-                            nextPage!!
-                        )
-                    } else {
-                        RetrofitInstance.api.getPlaylistNextPage(
-                            playlistId!!,
-                            nextPage!!
-                        )
-                    }
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
-                    return@launchWhenCreated
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                // load locally stored playlists with the auth api
+                if (playlistType == PlaylistType.PRIVATE) {
+                    RetrofitInstance.authApi.getPlaylistNextPage(
+                        playlistId!!,
+                        nextPage!!
+                    )
+                } else {
+                    RetrofitInstance.api.getPlaylistNextPage(
+                        playlistId!!,
+                        nextPage!!
+                    )
                 }
-                nextPage = response.nextpage
-                playlistAdapter?.updateItems(response.relatedStreams!!)
-                isLoading = false
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                return@launchWhenCreated
             }
+            nextPage = response.nextpage
+            playlistAdapter?.updateItems(response.relatedStreams!!)
+            isLoading = false
         }
-        run()
     }
 }

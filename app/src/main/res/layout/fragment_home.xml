@@ -1,35 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment">
+    android:layout_height="match_parent">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/home_refresh"
+    <com.github.libretube.ui.views.CustomSwipeToRefresh
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recview"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar"
-            app:layout_constraintTop_toTopOf="parent" />
+        <ScrollView
+            android:id="@+id/scroll"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/featuredTV"
+                    style="@style/HomeCategoryTitle"
+                    android:text="@string/featured" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/featuredRV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/trendingTV"
+                    style="@style/HomeCategoryTitle"
+                    android:text="@string/trending" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/trendingRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/bookmarksTV"
+                    style="@style/HomeCategoryTitle"
+                    android:text="@string/bookmarks" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bookmarksRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/playlistsTV"
+                    style="@style/HomeCategoryTitle"
+                    android:text="@string/playlists" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/playlistsRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </com.github.libretube.ui.views.CustomSwipeToRefresh>
+
+</FrameLayout>

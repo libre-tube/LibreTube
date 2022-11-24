@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -16,7 +15,6 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
-import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.PreferenceHelper
@@ -96,7 +94,7 @@ class SearchResultFragment : BaseFragment() {
             runOnUiThread {
                 if (response.items?.isNotEmpty() == true) {
                     binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
-                    searchAdapter = SearchAdapter(response.items, childFragmentManager)
+                    searchAdapter = SearchAdapter(response.items)
                     binding.searchRecycler.adapter = searchAdapter
                 } else {
                     binding.searchContainer.visibility = View.GONE
@@ -142,15 +140,5 @@ class SearchResultFragment : BaseFragment() {
                 )
             )
         }
-    }
-
-    override fun onStop() {
-        if (findNavController().currentDestination?.id != R.id.searchFragment) {
-            // remove the search focus
-            (activity as MainActivity)
-                .binding.toolbar.menu
-                .findItem(R.id.action_search).collapseActionView()
-        }
-        super.onStop()
     }
 }

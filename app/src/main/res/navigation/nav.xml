@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/homeFragment">
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.github.libretube.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/trendsFragment"
+        android:name="com.github.libretube.ui.fragments.TrendsFragment"
+        android:label="fragment_trends"
+        tools:layout="@layout/fragment_trends" />
     <fragment
         android:id="@+id/subscriptionsFragment"
         android:name="com.github.libretube.ui.fragments.SubscriptionsFragment"
@@ -50,4 +54,9 @@
         android:name="com.github.libretube.ui.fragments.DownloadsFragment"
         android:label="@string/downloads"
         tools:layout="@layout/fragment_downloads" />
+    <fragment
+        android:id="@+id/bookmarksFragment"
+        android:name="com.github.libretube.ui.fragments.BookmarksFragment"
+        android:label="@string/bookmarks"
+        tools:layout="@layout/fragment_bookmarks" />
 </navigation>

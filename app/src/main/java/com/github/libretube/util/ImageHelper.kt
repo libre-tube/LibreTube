@@ -9,6 +9,7 @@ import android.widget.ImageView
 import coil.ImageLoader
 import coil.disk.DiskCache
 import coil.load
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
@@ -25,17 +26,24 @@ object ImageHelper {
     fun initializeImageLoader(context: Context) {
         val maxImageCacheSize = PreferenceHelper.getString(
             PreferenceKeys.MAX_IMAGE_CACHE,
-            "128"
-        ).toInt()
-
-        val diskCache = DiskCache.Builder()
-            .directory(context.filesDir.resolve("coil"))
-            .maxSizeBytes(maxImageCacheSize * 1024 * 1024L)
-            .build()
+            ""
+        )
 
         imageLoader = ImageLoader.Builder(context)
             .callFactory(CronetHelper.callFactory)
-            .diskCache(diskCache)
+            .apply {
+                when (maxImageCacheSize) {
+                    "" -> {
+                        diskCachePolicy(CachePolicy.DISABLED)
+                    }
+                    else -> diskCache(
+                        DiskCache.Builder()
+                            .directory(context.filesDir.resolve("coil"))
+                            .maxSizeBytes(maxImageCacheSize.toInt() * 1024 * 1024L)
+                            .build()
+                    )
+                }
+            }
             .build()
     }
 
@@ -56,16 +64,11 @@ object ImageHelper {
             .data(url)
             .target { result ->
                 val bitmap = (result as BitmapDrawable).bitmap
-                saveImage(
-                    context,
-                    bitmap,
-                    Uri.fromFile(
-                        File(
-                            DownloadHelper.getThumbnailDir(context),
-                            fileName
-                        )
-                    )
+                val file = File(
+                    DownloadHelper.getDownloadDir(context, DownloadHelper.THUMBNAIL_DIR),
+                    fileName
                 )
+                saveImage(context, bitmap, Uri.fromFile(file))
             }
             .build()
 
@@ -73,15 +76,12 @@ object ImageHelper {
     }
 
     fun getDownloadedImage(context: Context, fileName: String): Bitmap? {
-        return getImage(
-            context,
-            Uri.fromFile(
-                File(
-                    DownloadHelper.getThumbnailDir(context),
-                    fileName
-                )
-            )
+        val file = File(
+            DownloadHelper.getDownloadDir(context, DownloadHelper.THUMBNAIL_DIR),
+            fileName
         )
+        if (!file.exists()) return null
+        return getImage(context, Uri.fromFile(file))
     }
 
     private fun saveImage(context: Context, bitmapImage: Bitmap, imagePath: Uri) {

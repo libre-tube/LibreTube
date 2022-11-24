@@ -31,6 +31,7 @@
         android:id="@+id/arrow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="5dp"
         android:src="@drawable/ic_arrow_up_left"
         app:layout_constraintEnd_toEndOf="parent"

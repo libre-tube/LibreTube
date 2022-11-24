@@ -15,7 +15,7 @@ import com.github.libretube.R
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_FAILURE_NOTIFICATION_ID
 import com.github.libretube.constants.DOWNLOAD_SUCCESS_NOTIFICATION_ID
-import com.github.libretube.constants.DownloadType
+import com.github.libretube.enums.DownloadType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.DownloadHelper
 import java.io.File
@@ -25,7 +25,7 @@ class DownloadService : Service() {
     private lateinit var videoName: String
     private lateinit var videoUrl: String
     private lateinit var audioUrl: String
-    private var downloadType: Int = 3
+    private var downloadType: DownloadType = DownloadType.NONE
 
     private var videoDownloadId: Long? = null
     private var audioDownloadId: Long? = null
@@ -63,8 +63,8 @@ class DownloadService : Service() {
     private fun downloadManager() {
         // initialize and create the directories to download into
 
-        val videoDownloadDir = DownloadHelper.getVideoDir(this)
-        val audioDownloadDir = DownloadHelper.getAudioDir(this)
+        val videoDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.VIDEO_DIR)
+        val audioDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.AUDIO_DIR)
 
         // start download
         try {
@@ -74,7 +74,7 @@ class DownloadService : Service() {
             )
             if (downloadType in listOf(DownloadType.VIDEO, DownloadType.AUDIO_VIDEO)) {
                 videoDownloadId = downloadManagerRequest(
-                    getString(R.string.video),
+                    "[${getString(R.string.video)}] $videoName",
                     getString(R.string.downloading),
                     videoUrl,
                     Uri.fromFile(
@@ -84,7 +84,7 @@ class DownloadService : Service() {
             }
             if (downloadType in listOf(DownloadType.AUDIO, DownloadType.AUDIO_VIDEO)) {
                 audioDownloadId = downloadManagerRequest(
-                    getString(R.string.audio),
+                    "[${getString(R.string.audio)}] $videoName",
                     getString(R.string.downloading),
                     audioUrl,
                     Uri.fromFile(

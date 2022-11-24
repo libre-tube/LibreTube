@@ -5,12 +5,13 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
-import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.PreferenceHelper
 
 object DatabaseHelper {
+    private const val MAX_SEARCH_HISTORY_SIZE = 20
+
     fun addToWatchHistory(videoId: String, streams: Streams) {
         val watchHistoryItem = WatchHistoryItem(
             videoId,
@@ -37,40 +38,13 @@ object DatabaseHelper {
         }
     }
 
-    fun removeFromWatchHistory(index: Int) {
-        query {
-            Database.watchHistoryDao().delete(
-                Database.watchHistoryDao().getAll()[index]
-            )
-        }
-    }
-
-    fun saveWatchPosition(videoId: String, position: Long) {
-        val watchPosition = WatchPosition(
-            videoId,
-            position
-        )
-        query {
-            Database.watchPositionDao().insertAll(watchPosition)
-        }
-    }
-
-    fun removeWatchPosition(videoId: String) {
-        query {
-            Database.watchPositionDao().findById(videoId)?.let {
-                Database.watchPositionDao().delete(it)
-            }
-        }
-    }
-
     fun addToSearchHistory(searchHistoryItem: SearchHistoryItem) {
         query {
             Database.searchHistoryDao().insertAll(searchHistoryItem)
-            val maxHistorySize = 20
 
             // delete the first watch history entry if the limit is reached
             val searchHistory = Database.searchHistoryDao().getAll()
-            if (searchHistory.size > maxHistorySize) {
+            if (searchHistory.size > MAX_SEARCH_HISTORY_SIZE) {
                 Database.searchHistoryDao()
                     .delete(searchHistory.first())
             }

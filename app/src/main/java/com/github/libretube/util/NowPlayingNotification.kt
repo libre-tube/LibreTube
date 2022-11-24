@@ -5,19 +5,27 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.os.Bundle
+import android.support.v4.media.MediaDescriptionCompat
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
+import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
+import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
 class NowPlayingNotification(
@@ -67,7 +75,11 @@ class NowPlayingNotification(
             //  that's the only way to launch back into the previous activity (e.g. the player view
             val intent = Intent(context, MainActivity::class.java).apply {
                 if (isBackgroundPlayerNotification) {
-                    putExtra(IntentData.videoId, videoId)
+                    if (PreferenceHelper.getBoolean(PreferenceKeys.NOTIFICATION_OPEN_QUEUE, true)) {
+                        putExtra(IntentData.openQueueOnce, true)
+                    } else {
+                        putExtra(IntentData.videoId, videoId)
+                    }
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 }
             }
@@ -98,26 +110,31 @@ class NowPlayingNotification(
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? {
             var bitmap: Bitmap? = null
-            var resizedBitmap: Bitmap? = null
 
             val request = ImageRequest.Builder(context)
                 .data(streams?.thumbnailUrl)
                 .target { result ->
                     bitmap = (result as BitmapDrawable).bitmap
-                    resizedBitmap = Bitmap.createScaledBitmap(
-                        bitmap!!,
-                        bitmap!!.width,
-                        bitmap!!.width,
-                        false
-                    )
                 }
                 .build()
 
             ImageHelper.imageLoader.enqueue(request)
 
-            // returns the scaled bitmap if it got fetched successfully
-            return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) resizedBitmap else bitmap
+            // returns the bitmap on Android 13+, for everything below scaled down to a square
+            return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) getSquareBitmap(bitmap) else bitmap
         }
+    }
+
+    private fun getSquareBitmap(bitmap: Bitmap?): Bitmap? {
+        bitmap ?: return null
+        val newSize = minOf(bitmap.width, bitmap.height)
+        return Bitmap.createBitmap(
+            bitmap,
+            (bitmap.width - newSize) / 2,
+            (bitmap.height - newSize) / 2,
+            newSize,
+            newSize
+        )
     }
 
     /**
@@ -129,6 +146,27 @@ class NowPlayingNotification(
         mediaSession.isActive = true
 
         mediaSessionConnector = MediaSessionConnector(mediaSession)
+        mediaSessionConnector.setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
+            override fun getMediaDescription(
+                player: Player,
+                windowIndex: Int
+            ): MediaDescriptionCompat {
+                return MediaDescriptionCompat.Builder().apply {
+                    setTitle(streams?.title!!)
+                    setSubtitle(streams?.uploader)
+                    val extras = Bundle()
+                    val appIcon = BitmapFactory.decodeResource(
+                        Resources.getSystem(),
+                        R.drawable.ic_launcher_monochrome
+                    )
+                    extras.putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
+                    extras.putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
+                    extras.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
+                    setIconBitmap(appIcon)
+                    setExtras(extras)
+                }.build()
+            }
+        })
         mediaSessionConnector.setPlayer(player)
     }
 
@@ -175,17 +213,17 @@ class NowPlayingNotification(
      * Destroy the [NowPlayingNotification]
      */
     fun destroySelfAndPlayer() {
+        playerNotification?.setPlayer(null)
+
         mediaSession.isActive = false
         mediaSession.release()
-        mediaSessionConnector.setPlayer(null)
-        playerNotification?.setPlayer(null)
+
+        player.stop()
+        player.release()
 
         val notificationManager = context.getSystemService(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
         notificationManager.cancel(PLAYER_NOTIFICATION_ID)
-
-        player.stop()
-        player.release()
     }
 }

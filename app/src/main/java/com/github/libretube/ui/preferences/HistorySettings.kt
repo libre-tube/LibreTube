@@ -44,6 +44,14 @@ class HistorySettings : BasePreferenceFragment() {
             }
             true
         }
+
+        val resetBookmarks = findPreference<Preference>(PreferenceKeys.CLEAR_BOOKMARKS)
+        resetBookmarks?.setOnPreferenceClickListener {
+            showClearDialog(R.string.clear_bookmarks) {
+                Database.playlistBookmarkDao().deleteAll()
+            }
+            true
+        }
     }
 
     private fun showClearDialog(title: Int, action: () -> Unit) {

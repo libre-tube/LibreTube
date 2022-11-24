@@ -12,5 +12,6 @@ data class Channel(
     var nextpage: String? = null,
     var subscriberCount: Long = 0,
     var verified: Boolean = false,
-    var relatedStreams: List<StreamItem>? = null
+    var relatedStreams: List<StreamItem>? = listOf(),
+    var tabs: List<ChannelTab>? = listOf()
 )

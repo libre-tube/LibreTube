@@ -33,9 +33,9 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/channel_image"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -45,30 +45,25 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/channel_name"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3.5dp">
-
-                        <TextView
-                            android:id="@+id/channel_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:drawablePadding="3dip"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            tools:text="Channel Name" />
-
-                    </LinearLayout>
+                        android:layout_gravity="start"
+                        android:layout_marginTop="3.5dp"
+                        android:drawablePadding="3dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Channel Name" />
 
                     <TextView
                         android:id="@+id/channel_subs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:maxLines="1"
                         android:text="@string/app_name"
                         android:textSize="12sp" />
 
@@ -76,16 +71,14 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/channel_share"
-                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:drawableTint="?android:attr/textColorPrimary"
-                    android:paddingHorizontal="15dp"
-                    android:stateListAnimator="@null"
-                    app:cornerRadius="20dp"
-                    app:elevation="20dp"
+                    style="@style/ElevatedIconButton"
                     app:icon="@drawable/ic_share"
+                    tools:targetApi="m" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/notification_bell"
+                    style="@style/ElevatedIconButton"
+                    app:icon="@drawable/ic_notification"
                     tools:targetApi="m" />
 
                 <com.google.android.material.button.MaterialButton
@@ -114,6 +107,51 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:padding="10dp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/tab_chips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checkedChip="@+id/videos"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@id/videos"
+                        style="@style/channelChip"
+                        android:text="@string/videos"
+                        android:visibility="visible" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/playlists"
+                        style="@style/channelChip"
+                        android:text="@string/playlists" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/shorts"
+                        style="@style/channelChip"
+                        android:text="@string/yt_shorts" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/channels"
+                        style="@style/channelChip"
+                        android:text="@string/channels" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/livestreams"
+                        style="@style/channelChip"
+                        android:text="@string/livestreams" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
 
             <RelativeLayout
                 android:layout_width="match_parent"

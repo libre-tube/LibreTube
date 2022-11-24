@@ -68,28 +68,26 @@ class OfflinePlayerActivity : BaseActivity() {
         }
 
         binding.player.initialize(
-            supportFragmentManager,
             null,
             binding.doubleTapOverlay.binding,
             null
         )
     }
 
+    private fun File.toUri(): Uri? {
+        return if (this.exists()) Uri.fromFile(this) else null
+    }
+
     private fun playVideo() {
-        val videoDownloadDir = DownloadHelper.getVideoDir(this)
-        val videoFile = File(
-            videoDownloadDir,
+        val videoUri = File(
+            DownloadHelper.getDownloadDir(this, DownloadHelper.VIDEO_DIR),
             fileName
-        )
+        ).toUri()
 
-        val audioDownloadDir = DownloadHelper.getAudioDir(this)
-        val audioFile = File(
-            audioDownloadDir,
+        val audioUri = File(
+            DownloadHelper.getDownloadDir(this, DownloadHelper.AUDIO_DIR),
             fileName
-        )
-
-        val videoUri = if (videoFile.exists()) Uri.fromFile(videoFile) else null
-        val audioUri = if (audioFile.exists()) Uri.fromFile(audioFile) else null
+        ).toUri()
 
         setMediaSource(
             videoUri,
