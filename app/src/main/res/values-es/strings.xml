@@ -393,4 +393,6 @@
     <string name="clear_bookmarks">Borrar marcadores</string>
     <string name="queue_insert_related_videos">Insertar videos relacionados</string>
     <string name="local_playlists">Listas de reproducción locales</string>
+    <string name="select_other_start_tab">¡Seleccione otra pestaña para el inicio primero!</string>
+    <string name="not_enabled">¡Elemento del menú no habilitado!</string>
 </resources>
