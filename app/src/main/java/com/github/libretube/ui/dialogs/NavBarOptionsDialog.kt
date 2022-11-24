@@ -20,7 +20,7 @@ class NavBarOptionsDialog : DialogFragment() {
 
         val options = NavBarHelper.getNavBarItems(requireContext())
 
-        val adapter = NavBarOptionsAdapter(options.toMutableList())
+        val adapter = NavBarOptionsAdapter(options.toMutableList(), NavBarHelper.getStartFragmentId(requireContext()))
 
         val itemTouchCallback = object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
@@ -63,6 +63,7 @@ class NavBarOptionsDialog : DialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.okay) { _, _ ->
                 NavBarHelper.setNavBarItems(adapter.items, requireContext())
+                NavBarHelper.setStartFragment(requireContext(), adapter.selectedHomeTabId)
                 RequireRestartDialog()
                     .show(requireParentFragment().childFragmentManager, null)
             }
