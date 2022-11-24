@@ -25,6 +25,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -158,7 +159,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * user preferences
      */
-    private val token = PreferenceHelper.getToken()
     private var videoShownInExternalPlayer = false
 
     /**
@@ -283,6 +283,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.playerMotionLayout.setTransitionDuration(300)
             binding.playerMotionLayout.transitionToStart()
         }
+
+        if (usePiP()) (activity as MainActivity).setPictureInPictureParams(getPipParams())
     }
 
     // actions that don't depend on video information
@@ -521,13 +523,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
         if (!PlayerHelper.watchPositionsEnabled) return
-        Log.e(
-            "watchpositions",
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.WATCH_POSITION_TOGGLE,
-                true
-            ).toString()
-        )
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         query {
             Database.watchPositionDao().insertAll(watchPosition)
@@ -626,7 +621,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
-                    if (!(SDK_INT >= Build.VERSION_CODES.O && activity?.isInPictureInPictureMode!!)) {
+                    if (!(usePiP() && activity?.isInPictureInPictureMode!!)) {
                         exoPlayerView.useController = true
                     }
                 }
@@ -643,6 +638,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
             }
         }
+    }
+
+    /**
+     * Detect whether PiP is supported and enabled
+     */
+    private fun usePiP(): Boolean {
+        return SDK_INT >= Build.VERSION_CODES.O && PlayerHelper.pipEnabled
     }
 
     /**
@@ -858,7 +860,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
 
                 // listen for the stop button in the notification
-                if (playbackState == PlaybackState.STATE_STOPPED && SDK_INT >= Build.VERSION_CODES.O) {
+                if (playbackState == PlaybackState.STATE_STOPPED && usePiP()) {
                     // finish PiP by finishing the activity
                     if (activity?.isInPictureInPictureMode!!) activity?.finish()
                 }
@@ -1421,14 +1423,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     fun onUserLeaveHint() {
-        if (SDK_INT >= Build.VERSION_CODES.O && shouldStartPiP()) {
-            activity?.enterPictureInPictureMode(
-                PictureInPictureParams.Builder()
-                    .setActions(emptyList())
-                    .build()
-            )
+        if (usePiP() && shouldStartPiP()) {
+            activity?.enterPictureInPictureMode(getPipParams())
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getPipParams(): PictureInPictureParams = PictureInPictureParams.Builder()
+        .setActions(emptyList())
+        .apply {
+            if (SDK_INT >= Build.VERSION_CODES.S) {
+                setAutoEnterEnabled(true)
+            }
+        }
+        .build()
 
     private fun shouldStartPiP(): Boolean {
         if (!PlayerHelper.pipEnabled ||
