@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.graphics.Rect
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
@@ -1390,12 +1389,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
-            // set portrait mode
-            unsetFullscreen()
-
             // hide and disable exoPlayer controls
             exoPlayerView.hideController()
             exoPlayerView.useController = false
+
+            // set portrait mode
+            unsetFullscreen()
+
+            if (viewModel.isMiniPlayerVisible.value == true) {
+                binding.playerMotionLayout.transitionToStart()
+                viewModel.isMiniPlayerVisible.value = false
+            }
 
             with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
@@ -1446,15 +1450,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return false
         }
 
-        val bounds = Rect()
-        binding.playerScrollView.getHitRect(bounds)
-
         val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
 
-        return (
-            binding.playerScrollView.getLocalVisibleRect(bounds) ||
-                viewModel.isFullscreen.value == true
-            ) && (exoPlayer.isPlaying || !backgroundModeRunning)
+        return viewModel.isFullscreen.value == true &&
+            (exoPlayer.isPlaying || !backgroundModeRunning)
     }
 
     private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
