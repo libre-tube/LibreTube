@@ -45,12 +45,15 @@ object PlayingQueue {
     }
 
     fun getPrev(): String? {
-        val index = queue.indexOf(currentStream)
-        return if (index > 0) queue[index - 1].url?.toID() else null
+        return if (currentIndex() > 0) queue[currentIndex() - 1].url?.toID() else null
     }
 
     fun hasPrev(): Boolean {
-        return queue.indexOf(currentStream) > 0
+        return currentIndex() > 0
+    }
+
+    fun hasNext(): Boolean {
+        return currentIndex() + 1 < size()
     }
 
     fun updateCurrent(streamItem: StreamItem) {

@@ -72,6 +72,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.setInvisible
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
@@ -953,19 +954,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // next and previous buttons
-        playerBinding.skipPrev.visibility = if (
-            PlayerHelper.skipButtonsEnabled && PlayingQueue.hasPrev()
-        ) {
-            View.VISIBLE
-        } else {
-            View.INVISIBLE
+        if (PlayerHelper.skipButtonsEnabled) {
+            playerBinding.skipPrev.setInvisible(!PlayingQueue.hasPrev())
+            playerBinding.skipNext.setInvisible(!PlayingQueue.hasNext())
         }
-        playerBinding.skipNext.visibility =
-            if (PlayerHelper.skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            videoId = PlayingQueue.getPrev()
-            playVideo()
+            playNextVideo(PlayingQueue.getPrev())
         }
 
         playerBinding.skipNext.setOnClickListener {
