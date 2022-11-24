@@ -37,6 +37,10 @@ object PreferenceHelper {
         editor.putBoolean(key, value).commit()
     }
 
+    fun putInt(key: String, value: Int) {
+        editor.putInt(key, value).commit()
+    }
+
     fun getString(key: String?, defValue: String): String {
         return settings.getString(key, defValue) ?: defValue
     }

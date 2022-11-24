@@ -11,6 +11,14 @@
     android:paddingEnd="0dp"
     tools:gravity="start|center_vertical">
 
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/ic_home_outlined"/>
+
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkbox"
         style="@style/Widget.Material3.CompoundButton.CheckBox"
