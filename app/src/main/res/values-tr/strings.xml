@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">Henüz yer imi yok!</string>
     <string name="queue_insert_related_videos">İlgili videoları ekle</string>
     <string name="local_playlists">Yerel oynatma listeleri</string>
+    <string name="not_enabled">Menü ögesi etkinleştirilmedi!</string>
+    <string name="select_other_start_tab">Lütfen önce başka bir başlangıç sekmesi seçin!</string>
 </resources>
