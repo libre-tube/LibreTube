@@ -387,4 +387,10 @@
     <string name="trends">På vei opp</string>
     <string name="alternative_player_layout">Alternativ avspillertilpasning</string>
     <string name="featured">Framhevet</string>
+    <string name="local_playlists">Lokale spillelister</string>
+    <string name="queue_insert_related_videos">Legg til relaterte videoer</string>
+    <string name="bookmarks">Bokmerke</string>
+    <string name="bookmark">Bokmerke</string>
+    <string name="clear_bookmarks">Tøm bokmerker</string>
+    <string name="bookmarks_empty">Ingen bokmerker enda.</string>
 </resources>

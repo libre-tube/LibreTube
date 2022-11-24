@@ -266,7 +266,7 @@
     <string name="best_quality">Mejor</string>
     <string name="worst_quality">Peor calidad</string>
     <string name="default_subtitle_language">Idioma subtítulo</string>
-    <string name="notify_new_streams">Norificaciones para nuevos directos</string>
+    <string name="notify_new_streams">Notificaciones para nuevos directos</string>
     <string name="checking_frequency">Comprobando todo …</string>
     <string name="new_streams_count">%1$s nuevo directo disponible</string>
     <string name="most_recent">Novedades</string>
@@ -392,4 +392,5 @@
     <string name="bookmarks_empty">¡Aún no hay marcadores!</string>
     <string name="clear_bookmarks">Borrar marcadores</string>
     <string name="queue_insert_related_videos">Insertar videos relacionados</string>
+    <string name="local_playlists">Listas de reproducción locales</string>
 </resources>
