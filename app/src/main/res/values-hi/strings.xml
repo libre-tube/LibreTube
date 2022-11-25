@@ -402,4 +402,5 @@
     <string name="playerAudioQuality">ऑडियो गुणवत्ता</string>
     <string name="best_quality">श्रेष्ठ</string>
     <string name="worst_quality">न्यूनतम</string>
+    <string name="show_open_with_summary">वीडियो को तीसरे पक्ष के ऐप्लिकेशन के साथ प्लेयर पर खोलने के लिए बटन दिखाएं।</string>
 </resources>
