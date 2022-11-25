@@ -395,4 +395,9 @@
     <string name="local_playlists">Локальні добірки</string>
     <string name="not_enabled">Пункт меню не увімкнено!</string>
     <string name="select_other_start_tab">Спочатку виберіть іншу вкладку для запуску!</string>
+    <string name="brightness">Яскравість</string>
+    <string name="auto">Авто</string>
+    <string name="swipe_controls">Керування посуваннями</string>
+    <string name="swipe_controls_summary">Для регулювання яскравості та гучності використовувати жест посування.</string>
+    <string name="volume">Гучність</string>
 </resources>
