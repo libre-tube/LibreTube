@@ -389,6 +389,11 @@
     <string name="local_playlists">Local playlists</string>
     <string name="not_enabled">Menu item not enabled!</string>
     <string name="select_other_start_tab">Please select an other start tab first!</string>
+    <string name="brightness">Brightness</string>
+    <string name="volume">Volume</string>
+    <string name="auto">Auto</string>
+    <string name="swipe_controls">Swipe controls</string>
+    <string name="swipe_controls_summary">Use swipe gesture to adjust the brightness and volume.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

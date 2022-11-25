@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="#40ffffff" />
+            <corners android:radius="20dip" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <scale
+            android:scaleWidth="0%"
+            android:scaleHeight="100%"
+            android:scaleGravity="bottom">
+            <shape>
+                <solid android:color="?attr/colorPrimary" />
+                <corners android:radius="20dip" />
+            </shape>
+        </scale>
+    </item>
+</layer-list>

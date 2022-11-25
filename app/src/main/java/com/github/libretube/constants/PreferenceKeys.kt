@@ -83,6 +83,7 @@ object PreferenceKeys {
     const val ALTERNATIVE_PLAYER_LAYOUT = "alternative_player_layout"
     const val USE_HLS_OVER_DASH = "use_hls"
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
+    const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
 
     /**
      * Background mode
