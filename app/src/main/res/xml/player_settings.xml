@@ -86,6 +86,13 @@
             app:title="@string/picture_in_picture" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_swipe_gesture"
+            android:summary="@string/swipe_control_summary"
+            app:key="player_swipe_control"
+            app:title="@string/swipe_control" />
+
+        <SwitchPreferenceCompat
             android:icon="@drawable/ic_pause_filled"
             android:summary="@string/pauseOnScreenOff_summary"
             app:defaultValue="false"

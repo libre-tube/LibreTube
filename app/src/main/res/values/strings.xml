@@ -392,6 +392,8 @@
     <string name="brightness">Brightness</string>
     <string name="volume">Volume</string>
     <string name="auto">Auto</string>
+    <string name="swipe_control">Swipe control</string>
+    <string name="swipe_control_summary">Use swipe gesture to adjust the brightness and volume.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

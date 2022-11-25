@@ -294,6 +294,12 @@ object PlayerHelper {
             true
         )
 
+    val swipeGestureEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PLAYER_SWIPE_CONTROL,
+            true
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(

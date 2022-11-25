@@ -102,13 +102,15 @@ internal class CustomExoPlayerView(
         }
 
         override fun onSwipeLeftScreen(distanceY: Float) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+            if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+
             if (isControllerFullyVisible) hideController()
             updateBrightness(distanceY)
         }
 
         override fun onSwipeRightScreen(distanceY: Float) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+            if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+
             if (isControllerFullyVisible) hideController()
             updateVolume(distanceY)
         }
