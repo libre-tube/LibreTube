@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">Ще немає закладок!</string>
     <string name="queue_insert_related_videos">Вставити пов\'язані відео</string>
     <string name="local_playlists">Локальні добірки</string>
+    <string name="not_enabled">Пункт меню не увімкнено!</string>
+    <string name="select_other_start_tab">Спочатку виберіть іншу вкладку для запуску!</string>
 </resources>

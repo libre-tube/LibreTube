@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">Hələ əlfəcin yoxdur!</string>
     <string name="queue_insert_related_videos">Əlaqədar videoları yerləşdir</string>
     <string name="local_playlists">Yerli pleylistlər</string>
+    <string name="select_other_start_tab">Lütfən, əvvəla başqa başlanğıc paneli seç!</string>
+    <string name="not_enabled">Menyu elementi aktiv deyil!</string>
 </resources>

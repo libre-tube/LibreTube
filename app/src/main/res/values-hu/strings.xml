@@ -393,4 +393,6 @@
     <string name="local_playlists">Helyi lejátszási listák</string>
     <string name="queue_insert_related_videos">Kapcsolódó videók beillesztése</string>
     <string name="trends">Felkapottak</string>
+    <string name="select_other_start_tab">Válasszon egy másik kezdőlapot először!</string>
+    <string name="not_enabled">Menüelem nincs engedélyezve!</string>
 </resources>

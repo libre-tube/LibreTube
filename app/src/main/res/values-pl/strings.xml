@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">Nie dodano zakładek.</string>
     <string name="queue_insert_related_videos">Wstaw powiązane filmy</string>
     <string name="local_playlists">Lokalne playlisty</string>
+    <string name="not_enabled">Najpierw włącz kartę!</string>
+    <string name="select_other_start_tab">Najpierw wybierz inną kartę główną!</string>
 </resources>

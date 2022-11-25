@@ -393,4 +393,6 @@
     <string name="bookmark">Bokmerke</string>
     <string name="clear_bookmarks">Tøm bokmerker</string>
     <string name="bookmarks_empty">Ingen bokmerker enda.</string>
+    <string name="not_enabled">Menyelementet er ikke påskrudd.</string>
+    <string name="select_other_start_tab">Velg en annen startfane først.</string>
 </resources>

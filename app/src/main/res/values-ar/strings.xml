@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">لا توجد إشارات مرجعية حتى الآن!</string>
     <string name="local_playlists">قوائم التشغيل المحلية</string>
     <string name="queue_insert_related_videos">إدراج مقاطع فيديو ذات صلة</string>
+    <string name="not_enabled">لم يتم تمكين عنصر القائمة!</string>
+    <string name="select_other_start_tab">يرجى تحديد علامة تبويب بدء أخرى أولا!</string>
 </resources>

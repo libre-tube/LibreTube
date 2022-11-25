@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">Dar nėra jokių žymų!</string>
     <string name="queue_insert_related_videos">Įterpti susijusius vaizdo įrašus</string>
     <string name="local_playlists">Vietiniai grojaraščiai</string>
+    <string name="not_enabled">Meniu elementas neįjungtas!</string>
+    <string name="select_other_start_tab">Pirmiausia pasirinkite kitą pradžios kortelę!</string>
 </resources>
