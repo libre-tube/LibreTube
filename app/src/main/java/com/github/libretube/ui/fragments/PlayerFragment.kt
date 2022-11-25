@@ -503,6 +503,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
         try {
+            // disable the auto PiP mode for SDK >= 32
+            if (SDK_INT >= Build.VERSION_CODES.S) {
+                activity?.setPictureInPictureParams(
+                    PictureInPictureParams.Builder().setAutoEnterEnabled(false).build()
+                )
+            }
+
             saveWatchPosition()
 
             // clear the playing queue and release the player
