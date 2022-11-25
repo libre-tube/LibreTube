@@ -2,88 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/player">
-
-        <com.github.libretube.ui.views.SliderPreference
-            android:icon="@drawable/ic_speed"
-            app:defValue="1.0"
-            app:key="playback_speed"
-            app:stepSize="0.1"
-            app:title="@string/playback_speed"
-            app:valueFrom="0.2"
-            app:valueTo="4.0" />
-
-        <com.github.libretube.ui.views.SliderPreference
-            android:icon="@drawable/ic_skip"
-            app:defValue="10.0"
-            app:key="seek_increment"
-            app:stepSize="5.0"
-            app:title="@string/seek_increment"
-            app:valueFrom="5.0"
-            app:valueTo="60.0" />
-
-        <ListPreference
-            android:icon="@drawable/ic_time"
-            app:defaultValue="50"
-            app:entries="@array/bufferingGoal"
-            app:entryValues="@array/bufferingGoalValues"
-            app:key="buffering_goal"
-            app:summary="@string/buffering_goal_summary"
-            app:title="@string/buffering_goal" />
-
-        <ListPreference
-            android:defaultValue=""
-            android:icon="@drawable/ic_caption"
-            app:key="default_subtitle"
-            app:title="@string/default_subtitle_language" />
-
-        <ListPreference
-            android:defaultValue="fit"
-            android:entries="@array/resizeMode"
-            android:entryValues="@array/resizeModeValues"
-            android:icon="@drawable/ic_zoom"
-            app:key="player_resize_mode"
-            app:title="@string/player_resize_mode"
-            app:useSimpleSummaryProvider="true" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:icon="@drawable/ic_next"
-            android:summary="@string/skip_buttons_summary"
-            app:key="skip_buttons"
-            app:title="@string/skip_buttons" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/appearance">
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_caption"
-            app:defaultValue="true"
-            app:key="system_caption_style"
-            app:title="@string/system_caption_style" />
-
-        <Preference
-            android:icon="@drawable/ic_settings"
-            app:key="caption_settings"
-            app:title="@string/caption_settings" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/behavior">
-
-        <SwitchPreferenceCompat
-            android:icon="@drawable/ic_play_filled"
-            android:summary="@string/autoplay_summary"
-            app:defaultValue="true"
-            app:key="autoplay"
-            app:title="@string/player_autoplay" />
-
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_window"
-            app:key="picture_in_picture"
-            app:title="@string/picture_in_picture" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -93,11 +12,17 @@
             app:title="@string/swipe_controls" />
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_pause_filled"
-            android:summary="@string/pauseOnScreenOff_summary"
-            app:defaultValue="false"
-            app:key="pause_screen_off"
-            app:title="@string/pauseOnScreenOff" />
+            android:defaultValue="false"
+            android:icon="@drawable/ic_next"
+            android:summary="@string/skip_buttons_summary"
+            app:key="skip_buttons"
+            app:title="@string/skip_buttons" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_window"
+            app:key="picture_in_picture"
+            app:title="@string/picture_in_picture" />
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
@@ -117,6 +42,43 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/player">
+
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_skip"
+            app:defValue="10.0"
+            app:key="seek_increment"
+            app:stepSize="5.0"
+            app:title="@string/seek_increment"
+            app:valueFrom="5.0"
+            app:valueTo="60.0" />
+
+        <ListPreference
+            android:icon="@drawable/ic_time"
+            app:defaultValue="50"
+            app:entries="@array/bufferingGoal"
+            app:entryValues="@array/bufferingGoalValues"
+            app:key="buffering_goal"
+            app:summary="@string/buffering_goal_summary"
+            app:title="@string/buffering_goal" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/appearance">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_caption"
+            app:defaultValue="true"
+            app:key="system_caption_style"
+            app:title="@string/system_caption_style" />
+
+        <Preference
+            android:icon="@drawable/ic_settings"
+            app:key="caption_settings"
+            app:title="@string/caption_settings" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/queue">
 
         <SwitchPreferenceCompat
@@ -124,6 +86,53 @@
             android:icon="@drawable/ic_list"
             android:title="@string/queue_insert_related_videos"
             app:key="queue_insert_related_videos" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/defaults">
+
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_speed"
+            app:defValue="1.0"
+            app:key="playback_speed"
+            app:stepSize="0.1"
+            app:title="@string/playback_speed"
+            app:valueFrom="0.2"
+            app:valueTo="4.0" />
+
+        <ListPreference
+            android:defaultValue=""
+            android:icon="@drawable/ic_caption"
+            app:key="default_subtitle"
+            app:title="@string/default_subtitle_language" />
+
+        <ListPreference
+            android:defaultValue="fit"
+            android:entries="@array/resizeMode"
+            android:entryValues="@array/resizeModeValues"
+            android:icon="@drawable/ic_zoom"
+            app:key="player_resize_mode"
+            app:title="@string/player_resize_mode"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_play_filled"
+            android:summary="@string/autoplay_summary"
+            app:defaultValue="true"
+            app:key="autoplay"
+            app:title="@string/player_autoplay" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/misc">
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_pause_filled"
+            android:summary="@string/pauseOnScreenOff_summary"
+            app:defaultValue="false"
+            app:key="pause_screen_off"
+            app:title="@string/pauseOnScreenOff" />
 
     </PreferenceCategory>
 
