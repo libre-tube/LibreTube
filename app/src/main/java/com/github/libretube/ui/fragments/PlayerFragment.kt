@@ -403,6 +403,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.SHOW_OPEN_WITH, false)) {
+            binding.relPlayerOpen.visibility = View.GONE
+            binding.optionsLL.weightSum = 4f
+        }
     }
 
     private fun setFullscreen() {
