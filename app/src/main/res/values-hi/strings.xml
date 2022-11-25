@@ -290,4 +290,21 @@
     <string name="download_channel_name">डाउनलोड सेवा</string>
     <string name="download_channel_description">मीडिया डाउनलोड करते समय एक सूचना दिखाता है।</string>
     <string name="queue_insert_related_videos">संबंधित वीडियो डालें</string>
+    <string name="push_channel_description">नई स्ट्रीमें उपलब्ध होने पर एक सूचना दिखाता है।</string>
+    <string name="related_streams_summary">आप जो देखते हैं उसके साथ मिलती-जुलती स्ट्रीम दिखाएं.</string>
+    <string name="empty_instance">नाम और एपीआई यूआरएल भरें।</string>
+    <string name="invalid_url">कृपया वह URL दर्ज करें जो काम करता हो</string>
+    <string name="hide_chapters">अध्याय छुपाएं</string>
+    <string name="buffering_goal">प्रीलोडिंग</string>
+    <string name="buffering_goal_summary">बफ़र करने के लिए वीडियो की सेकंडस में उच्चतम मात्रा।</string>
+    <string name="instance_summary">पाइप्ड, लॉगिन और सब्सक्रिप्शन</string>
+    <string name="clear_customInstances">जोड़े गये हटाएं</string>
+    <string name="version">वर्शन %1$s</string>
+    <string name="about_summary">टीम लिब्रेट्यूब के बारे में जानें और जानें कि यह सब कैसे होता है।</string>
+    <string name="show_chapters">अध्याय दिखाएँ</string>
+    <string name="customInstance_summary">जोड़ें…</string>
+    <string name="instance_name">इंस्टेंस का नाम</string>
+    <string name="instance_api_url">इंस्टेंस API के लिए URL</string>
+    <string name="addInstance">इंस्टेंस जोड़ें</string>
+    <string name="related_streams">संबंधित सामग्री</string>
 </resources>
