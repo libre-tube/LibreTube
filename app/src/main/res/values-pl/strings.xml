@@ -402,4 +402,5 @@
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
     <string name="defaults">Domyślne</string>
     <string name="show_open_with">Przycisk „Otwórz w…”</string>
+    <string name="show_open_with_summary">Pozwala pzekierować odtwarzanie do zewnętrznej aplikacji.</string>
 </resources>
