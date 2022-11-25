@@ -393,4 +393,6 @@
     <string name="bookmarks_empty">Belum ada markah!</string>
     <string name="queue_insert_related_videos">Masukkan video terkait</string>
     <string name="local_playlists">Daftar putar lokal</string>
+    <string name="not_enabled">Item menu tidak diaktifkan!</string>
+    <string name="select_other_start_tab">Mohon pilih tab mulai yang lain terlebih dahulu!</string>
 </resources>
