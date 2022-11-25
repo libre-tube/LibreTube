@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="yes">हाँ</string>
-    <string name="search_hint">सर्च</string>
-    <string name="subscribe">सदस्यता ले</string>
+    <string name="search_hint">खोज करें</string>
+    <string name="subscribe">सब्सक्राइब</string>
     <string name="unsubscribe">अनसब्सक्राइब</string>
     <string name="share">शेयर</string>
     <string name="download">डाउनलोड</string>
-    <string name="save">सेव</string>
+    <string name="save">स॔भालें</string>
     <string name="username">यूज़रनेम</string>
     <string name="password">पासवर्ड</string>
     <string name="login">लॉगिन</string>
     <string name="register">रजिस्टर</string>
     <string name="logout">लॉगआउट</string>
-    <string name="cancel">कैंसल</string>
+    <string name="cancel">रद्द करें</string>
     <string name="loggedIn">सफलतापूर्वक लॉग इन हो चुका है!</string>
     <string name="loggedout">सफलतापूर्वक लॉग आउट किया!</string>
     <string name="registered">सफलतापूर्वक रजिस्टर हो गया! अब आप अपने मनचाहे चैनल को सब्सक्राइब कर सकते हैं।</string>
@@ -26,7 +26,7 @@
     <string name="downloadfailed">डाउनलोड विफल!</string>
     <string name="vlc">वीएलसी में खोलें</string>
     <string name="vlcerror">वीएलसी में नहीं खुल सका। शायद यह अभी तक इंस्टॉल्ड नहीं है\?</string>
-    <string name="import_from_yt">यूट्यूब से सब्सक्रिप्शन आयात करें</string>
+    <string name="import_from_yt">सब्सक्रिप्शन आयात करें</string>
     <string name="app_theme">ऐप थीम</string>
     <string name="server_error">सर्वर में समस्या है। शायद कोई और इंस्टेंस चुनकर प्रयास करें\?</string>
     <string name="error">कुछ गलत हो गया!</string>
@@ -51,9 +51,25 @@
     <string name="dlisinprogress">एक और डाउनलोड पहले से ही हो रहा है कृपया इसके समाप्त होने तक प्रतीक्षा करें!</string>
     <string name="choose_quality_dialog">क्वालिटी चुनें:</string>
     <string name="about">के बारे में</string>
-    <string name="startpage">होम</string>
-    <string name="subscriptions">सदस्यता</string>
-    <string name="library">लायब्ररी</string>
+    <string name="startpage">घर</string>
+    <string name="subscriptions">सब्सक्रिप्शनें</string>
+    <string name="library">लायब्रेरी</string>
     <string name="videos">वीडियो</string>
     <string name="import_from_yt_summary">YouTube किंवा NewPipe वरून</string>
+    <string name="customization">समायोजन</string>
+    <string name="noInternet">पहले इंटरनेट से कनेक्ट करें।</string>
+    <string name="emptyPlaylistName">प्लेलिस्ट का नाम खाली नहीं छोड़ा जा सकता</string>
+    <string name="changeLanguage">भाषा</string>
+    <string name="systemLanguage">सिस्टम</string>
+    <string name="systemDefault">सिस्टम डिफ़ॉल्ट</string>
+    <string name="lightTheme">हलका</string>
+    <string name="darkTheme">गहरा</string>
+    <string name="subscribers">%1$s सब्सक्राइब्रस</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="location">स्थान</string>
+    <string name="instance">इंस्टेंस</string>
+    <string name="website">वैबसाइट</string>
+    <string name="videoCount">%1$s वीडियोज</string>
+    <string name="retry">फिर से कोशिश करें</string>
+    <string name="comments">टिॅपणीयां</string>
 </resources>
