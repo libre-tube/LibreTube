@@ -88,9 +88,9 @@
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_swipe_gesture"
-            android:summary="@string/swipe_control_summary"
-            app:key="player_swipe_control"
-            app:title="@string/swipe_control" />
+            android:summary="@string/swipe_controls_summary"
+            app:key="player_swipe_controls"
+            app:title="@string/swipe_controls" />
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_pause_filled"

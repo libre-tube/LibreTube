@@ -13,7 +13,7 @@ import android.view.WindowManager
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
-import com.github.libretube.databinding.PlayerGestureControlViewBinding
+import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.toDp
 import com.github.libretube.obj.BottomSheetItem
@@ -40,13 +40,13 @@ import com.google.android.exoplayer2.util.RepeatModeUtil
 internal class CustomExoPlayerView(
     context: Context,
     attributeSet: AttributeSet? = null
-) : StyledPlayerView(context, attributeSet), PlayerOptions {
+) : StyledPlayerView(context, attributeSet), PlayerOptions, PlayerGestureOptions {
     val binding: ExoStyledPlayerControlViewBinding = ExoStyledPlayerControlViewBinding.bind(this)
 
     /**
      * Objects for player tap and swipe gesture
      */
-    private lateinit var gestureViewBinding: PlayerGestureControlViewBinding
+    private lateinit var gestureViewBinding: PlayerGestureControlsViewBinding
     private lateinit var playerGestureController: PlayerGestureController
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
@@ -76,62 +76,17 @@ internal class CustomExoPlayerView(
         if (isControllerFullyVisible) hideController() else showController()
     }
 
-    private val playerGestureListner = object : PlayerGestureOptions {
-        override fun onSingleTap() {
-            toggleController()
-        }
-
-        override fun onDoubleTapCenterScreen() {
-            player?.let { player ->
-                if (player.isPlaying) {
-                    player.pause()
-                    if (!isControllerFullyVisible) showController()
-                } else {
-                    player.play()
-                    if (isControllerFullyVisible) hideController()
-                }
-            }
-        }
-
-        override fun onDoubleTapLeftScreen() {
-            rewind()
-        }
-
-        override fun onDoubleTapRightScreen() {
-            forward()
-        }
-
-        override fun onSwipeLeftScreen(distanceY: Float) {
-            if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
-
-            if (isControllerFullyVisible) hideController()
-            updateBrightness(distanceY)
-        }
-
-        override fun onSwipeRightScreen(distanceY: Float) {
-            if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
-
-            if (isControllerFullyVisible) hideController()
-            updateVolume(distanceY)
-        }
-
-        override fun onSwipeEnd() {
-            gestureViewBinding.brightnessControlView.visibility = View.GONE
-            gestureViewBinding.volumeControlView.visibility = View.GONE
-        }
-    }
-
     fun initialize(
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
-        playerGestureControlViewBinding: PlayerGestureControlViewBinding,
+        playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
         trackSelector: TrackSelector?
     ) {
         this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
-        this.gestureViewBinding = playerGestureControlViewBinding
-        this.playerGestureController = PlayerGestureController(context, playerGestureListner)
+        this.gestureViewBinding = playerGestureControlsViewBinding
+        this.playerGestureController = PlayerGestureController(context, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
 
@@ -490,5 +445,48 @@ internal class CustomExoPlayerView(
             params.bottomMargin = offset.toInt()
             it.layoutParams = params
         }
+    }
+
+    override fun onSingleTap() {
+        toggleController()
+    }
+
+    override fun onDoubleTapCenterScreen() {
+        player?.let { player ->
+            if (player.isPlaying) {
+                player.pause()
+                if (!isControllerFullyVisible) showController()
+            } else {
+                player.play()
+                if (isControllerFullyVisible) hideController()
+            }
+        }
+    }
+
+    override fun onDoubleTapLeftScreen() {
+        rewind()
+    }
+
+    override fun onDoubleTapRightScreen() {
+        forward()
+    }
+
+    override fun onSwipeLeftScreen(distanceY: Float) {
+        if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+
+        if (isControllerFullyVisible) hideController()
+        updateBrightness(distanceY)
+    }
+
+    override fun onSwipeRightScreen(distanceY: Float) {
+        if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+
+        if (isControllerFullyVisible) hideController()
+        updateVolume(distanceY)
+    }
+
+    override fun onSwipeEnd() {
+        gestureViewBinding.brightnessControlView.visibility = View.GONE
+        gestureViewBinding.volumeControlView.visibility = View.GONE
     }
 }

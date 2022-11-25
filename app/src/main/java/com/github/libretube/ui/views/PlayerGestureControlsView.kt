@@ -4,17 +4,17 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.github.libretube.databinding.PlayerGestureControlViewBinding
+import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 
-class PlayerGestureControlView(
+class PlayerGestureControlsView(
     context: Context,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
-    var binding: PlayerGestureControlViewBinding
+    var binding: PlayerGestureControlsViewBinding
 
     init {
         val layoutInflater = LayoutInflater.from(context)
-        binding = PlayerGestureControlViewBinding.inflate(layoutInflater, this, true)
+        binding = PlayerGestureControlsViewBinding.inflate(layoutInflater, this, true)
     }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {

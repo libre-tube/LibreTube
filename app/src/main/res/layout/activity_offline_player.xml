@@ -19,8 +19,8 @@
             android:layout_gravity="center"
             android:gravity="center" />
 
-        <com.github.libretube.ui.views.PlayerGestureControlView
-            android:id="@+id/playerGestureControlView"
+        <com.github.libretube.ui.views.PlayerGestureControlsView
+            android:id="@+id/playerGestureControlsView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

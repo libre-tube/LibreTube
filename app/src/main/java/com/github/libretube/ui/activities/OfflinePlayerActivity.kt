@@ -70,7 +70,7 @@ class OfflinePlayerActivity : BaseActivity() {
         binding.player.initialize(
             null,
             binding.doubleTapOverlay.binding,
-            binding.playerGestureControlView.binding,
+            binding.playerGestureControlsView.binding,
             null
         )
     }

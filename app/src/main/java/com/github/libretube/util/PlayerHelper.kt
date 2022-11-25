@@ -296,7 +296,7 @@ object PlayerHelper {
 
     val swipeGestureEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.PLAYER_SWIPE_CONTROL,
+            PreferenceKeys.PLAYER_SWIPE_CONTROLS,
             true
         )
 
