@@ -400,4 +400,6 @@
     <string name="swipe_controls">Controles del deslizamiento</string>
     <string name="brightness">Brillo</string>
     <string name="swipe_controls_summary">Use el gesto de deslizar para ajustar el brillo y el volumen.</string>
+    <string name="defaults">Por defecto</string>
+    <string name="show_open_with">Abrir con</string>
 </resources>
