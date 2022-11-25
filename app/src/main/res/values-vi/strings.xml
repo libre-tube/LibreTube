@@ -6,7 +6,7 @@
     <string name="yes">Có</string>
     <string name="choose_quality_dialog">Chất lượng</string>
     <string name="search_hint">Tìm kiếm</string>
-    <string name="videos">Videos</string>
+    <string name="videos">Các video</string>
     <string name="subscribe">Đăng kí</string>
     <string name="unsubscribe">Hủy đăng kí</string>
     <string name="share">Chia sẻ</string>
@@ -50,7 +50,7 @@
     <string name="changeLanguage">Ngôn ngữ</string>
     <string name="systemLanguage">Ngôn ngữ hệ thống</string>
     <string name="instance">Server</string>
-    <string name="videoCount">%1$s videos</string>
+    <string name="videoCount">%1$s các video</string>
     <string name="website">Website</string>
     <string name="noInternet">Kết nối với mạng trước.</string>
     <string name="retry">Thử lại</string>
@@ -82,7 +82,7 @@
     <string name="color_green">Màu xanh lá vui vẻ</string>
     <string name="color_red">Màu đỏ resting</string>
     <string name="sponsorblock_notifications">Thông báo</string>
-    <string name="piped">Piped</string>
+    <string name="piped">Đã thông qua</string>
     <string name="youtube">YouTube</string>
     <string name="update_available">Phiên bản %1$s đã có sẵn</string>
     <string name="downloads">Tải xuống</string>
@@ -131,7 +131,7 @@
     <string name="category_filler">Filler Tangent / Trò đùa</string>
     <string name="category_preview">Xem trước/Tóm tắt</string>
     <string name="category_preview_description">Cho các phân đoạn mà thể hiện điều sắp diễn ra hay ở videos tới ở trong cùng series đó, nhưng không có cung cấp thông tin thêm. Nếu nó bao gồm các clips mà chỉ xuất hiện ở đây thì có thể không phải là một phân loại thích hợp.</string>
-    <string name="material_you">Material You</string>
+    <string name="material_you">Tài liệu bạn</string>
     <string name="app_icon">Biểu tượng app</string>
     <string name="enabled">Kích hoạt</string>
     <string name="disabled">Vô hiệu hóa</string>
@@ -311,7 +311,7 @@
     <string name="resize_mode_zoom">Phóng to</string>
     <string name="repeat_mode_none">Không</string>
     <string name="maximum_image_cache">Dung lượng cache ảnh tối đa</string>
-    <string name="auth_instance_summary">Dùng instance khác để xác minh.</string>
+    <string name="auth_instance_summary">Dùng một yêu cầu khác cho cuộc gọi được xác minh.</string>
     <string name="network_wifi">Chỉ trên Wi-Fi</string>
     <string name="copied">Đã sao chép</string>
     <string name="export_subscriptions">Xuất mục đăng ký</string>
@@ -324,7 +324,7 @@
     <string name="break_reminder">Nhắc nhở nghỉ giải lao</string>
     <string name="take_a_break">Đến lúc nghỉ ngơi</string>
     <string name="already_spent_time">Bạn đã dùng app được %1$s phút rồi, nghỉ ngơi nhá bạn yêu.</string>
-    <string name="yt_shorts">Shorts</string>
+    <string name="yt_shorts">Các đoạn video short</string>
     <string name="backup_restore">Sao lưu và phục hồi</string>
     <string name="backup">Sao lưu</string>
     <string name="picture_in_picture">Ảnh trong ảnh</string>
@@ -388,7 +388,19 @@
     <string name="featured">Tính năng</string>
     <string name="trending">Xu hướng hiện tại</string>
     <string name="queue_insert_related_videos">Chèn thêm các video liên quan</string>
-    <string name="bookmarks">Bookmarks</string>
+    <string name="bookmarks">Đánh dấu trang</string>
     <string name="clear_bookmarks">Xóa tất cả bookmark</string>
     <string name="bookmarks_empty">Chưa có bookmark!</string>
+    <string name="local_playlists">Danh sách phát cục bộ</string>
+    <string name="not_enabled">Mục menu không được kích hoạt!</string>
+    <string name="brightness">Độ sáng</string>
+    <string name="volume">Âm lượng</string>
+    <string name="auto">Tự động</string>
+    <string name="show_open_with">Mở với</string>
+    <string name="defaults">Mặc định</string>
+    <string name="select_other_start_tab">Vui lòng chọn một tab bắt đầu khác trước tiên!</string>
+    <string name="swipe_controls">Điều khiển vuốt</string>
+    <string name="swipe_controls_summary">Sử dụng thao tác vuốt để điều chỉnh độ sáng và âm lượng.</string>
+    <string name="show_open_with_summary">Hiển thị một nút trong trình phát để mở video bằng ứng dụng của bên thứ ba.</string>
+    <string name="bookmark">Đánh dấu trang</string>
 </resources>
