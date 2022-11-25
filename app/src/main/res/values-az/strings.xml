@@ -402,4 +402,5 @@
     <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
     <string name="show_open_with">İlə aç</string>
     <string name="defaults">Defolt</string>
+    <string name="show_open_with_summary">Videonu oynadıcıda 3-cü tərəf tətbiq ilə açmaq üçün düymə göstər.</string>
 </resources>
