@@ -395,4 +395,9 @@
     <string name="local_playlists">Vietiniai grojaraščiai</string>
     <string name="not_enabled">Meniu elementas neįjungtas!</string>
     <string name="select_other_start_tab">Pirmiausia pasirinkite kitą pradžios kortelę!</string>
+    <string name="auto">Automatinis</string>
+    <string name="swipe_controls">Perbraukimo valdikliai</string>
+    <string name="brightness">Ryškumas</string>
+    <string name="volume">Garsas</string>
+    <string name="swipe_controls_summary">Braukimo gestu sureguliuokite ryškumą ir garsumą.</string>
 </resources>

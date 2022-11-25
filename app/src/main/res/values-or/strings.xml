@@ -395,4 +395,9 @@
     <string name="local_playlists">ସ୍ଥାନୀୟ ପ୍ଲେଲିଷ୍ଟଗୁଡିକ</string>
     <string name="not_enabled">ମେନୁ ଆଇଟମ୍ ସକ୍ଷମ ନୁହେଁ!</string>
     <string name="select_other_start_tab">ଦୟାକରି ପ୍ରଥମେ ଅନ୍ୟ ଏକ ଆରମ୍ଭ ଟ୍ୟାବ୍ ଚୟନ କରନ୍ତୁ!</string>
+    <string name="brightness">ଉଜ୍ଜଳତା</string>
+    <string name="volume">ଶବ୍ଦ</string>
+    <string name="auto">ସ୍ଵତଃ</string>
+    <string name="swipe_controls">ସ୍ୱାଇପ୍ ନିୟନ୍ତ୍ରଣ</string>
+    <string name="swipe_controls_summary">ଉଜ୍ଜ୍ୱଳତା ଏବଂ ଭଲ୍ୟୁମ୍ ସଜାଡିବା ପାଇଁ ସ୍ୱାଇପ୍ ଅଙ୍ଗଭଙ୍ଗୀ ବ୍ୟବହାର କରନ୍ତୁ ।</string>
 </resources>
