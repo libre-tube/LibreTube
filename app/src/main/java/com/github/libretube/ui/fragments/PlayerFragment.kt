@@ -49,6 +49,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
+import com.github.libretube.databinding.PlayerGestureControlViewBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
@@ -118,6 +119,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
+    private lateinit var playerGestureControlViewBinding: PlayerGestureControlViewBinding
     private val viewModel: PlayerViewModel by activityViewModels()
 
     /**
@@ -183,6 +185,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         exoPlayerView = binding.player
         playerBinding = binding.player.binding
         doubleTapOverlayBinding = binding.doubleTapOverlay.binding
+        playerGestureControlViewBinding = binding.playerGestureControlView.binding
 
         // Inflate the layout for this fragment
         return binding.root
@@ -775,6 +778,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.player.initialize(
             this,
             doubleTapOverlayBinding,
+            playerGestureControlViewBinding,
             trackSelector
         )
 

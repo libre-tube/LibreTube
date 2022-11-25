@@ -149,6 +149,18 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="SwipeControlString">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="paddingEnd">5dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:text">0</item>
+    </style>
+
     <style name="Chip" parent="Widget.Material3.Chip.Suggestion">
 
         <item name="android:layout_height">wrap_content</item>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/volumeControlView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:background="@drawable/controls_layout_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded">
+
+        <TextView
+            android:id="@+id/volume_textView"
+            style="@style/SwipeControlString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <ProgressBar
+            android:id="@+id/volume_progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="7dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="4dp"
+            android:progressDrawable="@drawable/vertical_progressbar" />
+
+        <ImageView
+            android:id="@+id/volume_imageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/volume"
+            android:src="@drawable/ic_volume_up" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/brightnessControlView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="36dp"
+        android:background="@drawable/controls_layout_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded">
+
+        <TextView
+            android:id="@+id/brightness_textView"
+            style="@style/SwipeControlString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <ProgressBar
+            android:id="@+id/brightness_progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="7dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="4dp"
+            android:progressDrawable="@drawable/vertical_progressbar" />
+
+        <ImageView
+            android:id="@+id/brightness_imageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/brightness"
+            android:src="@drawable/ic_brightness" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
