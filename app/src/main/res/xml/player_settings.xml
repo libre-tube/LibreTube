@@ -134,6 +134,13 @@
             app:key="pause_screen_off"
             app:title="@string/pauseOnScreenOff" />
 
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_open"
+            android:summary="@string/show_open_with_summary"
+            app:defaultValue="false"
+            app:key="show_open_with"
+            app:title="@string/show_open_with" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
