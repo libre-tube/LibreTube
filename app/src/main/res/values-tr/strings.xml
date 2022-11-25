@@ -395,4 +395,9 @@
     <string name="local_playlists">Yerel oynatma listeleri</string>
     <string name="not_enabled">Menü ögesi etkinleştirilmedi!</string>
     <string name="select_other_start_tab">Lütfen önce başka bir başlangıç sekmesi seçin!</string>
+    <string name="volume">Ses</string>
+    <string name="auto">Otomatik</string>
+    <string name="swipe_controls">Kaydırma kontrolleri</string>
+    <string name="brightness">Parlaklık</string>
+    <string name="swipe_controls_summary">Parlaklığı ve sesi ayarlamak için kaydırma hareketini kullan.</string>
 </resources>
