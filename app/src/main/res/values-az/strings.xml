@@ -395,4 +395,9 @@
     <string name="local_playlists">Yerli pleylistlər</string>
     <string name="select_other_start_tab">Lütfən, əvvəla başqa başlanğıc paneli seç!</string>
     <string name="not_enabled">Menyu elementi aktiv deyil!</string>
+    <string name="brightness">Parlaqlıq</string>
+    <string name="auto">Avtomatik</string>
+    <string name="swipe_controls_summary">Parlaqlığı və səs səviyyəsini nizamlamaq üçün sürüşdürmə jesti istifadə et.</string>
+    <string name="volume">Səs səviyyəsi</string>
+    <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
 </resources>
