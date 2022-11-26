@@ -43,7 +43,7 @@ class CommentsSheet(
             }
 
         if (comments.isNotEmpty()) {
-            commentsAdapter = CommentsAdapter(videoId, comments)
+            setCommentsAdapter(comments)
         } else {
             fetchComments()
         }
@@ -52,6 +52,7 @@ class CommentsSheet(
     private fun setCommentsAdapter(comments: MutableList<Comment>) {
         commentsAdapter = CommentsAdapter(videoId, comments)
         binding.optionsRecycler.adapter = commentsAdapter
+        isLoading = false
     }
 
     private fun fetchComments() {
@@ -65,7 +66,6 @@ class CommentsSheet(
             setCommentsAdapter(response.comments)
             nextPage = response.nextpage
             onMoreComments.invoke(response.comments, response.nextpage)
-            isLoading = false
         }
     }
 
