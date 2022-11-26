@@ -340,6 +340,15 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadIntentData() {
+        // If activity is running in PiP mode, then start it in front.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
+            isInPictureInPictureMode
+        ) {
+            moveTaskToBack(true)
+            intent?.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+        }
+
         intent?.getStringExtra(IntentData.channelId)?.let {
             navController.navigate(
                 R.id.channelFragment,
