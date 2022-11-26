@@ -512,11 +512,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onDestroy()
         try {
             // disable the auto PiP mode for SDK >= 32
-            if (SDK_INT >= Build.VERSION_CODES.S) {
-                activity?.setPictureInPictureParams(
-                    PictureInPictureParams.Builder().setAutoEnterEnabled(false).build()
-                )
-            }
+            disableAutoPiP()
 
             saveWatchPosition()
 
@@ -533,6 +529,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun disableAutoPiP() {
+        if (SDK_INT < Build.VERSION_CODES.S) {
+            return
+        }
+        activity?.setPictureInPictureParams(
+            PictureInPictureParams.Builder().setAutoEnterEnabled(false).build()
+        )
     }
 
     // save the watch position if video isn't finished and option enabled
@@ -848,7 +853,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 ) {
                     transitioning = true
                     // check whether autoplay is enabled
-                    if (binding.player.autoplayEnabled) playNextVideo()
+                    playNextVideo()
                 }
 
                 when (playbackState) {
@@ -873,6 +878,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     query {
                         Database.watchPositionDao().insertAll(watchPosition)
                     }
+                    disableAutoPiP()
                 }
 
                 // listen for the stop button in the notification
@@ -1463,8 +1469,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
 
-        return viewModel.isFullscreen.value == true &&
-            (exoPlayer.isPlaying || !backgroundModeRunning)
+        return exoPlayer.isPlaying && !backgroundModeRunning
     }
 
     private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
