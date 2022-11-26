@@ -401,4 +401,5 @@
     <string name="swipe_controls">Sterowanie gestami</string>
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
     <string name="defaults">Domyślne</string>
+    <string name="pop_up">Dymek</string>
 </resources>
