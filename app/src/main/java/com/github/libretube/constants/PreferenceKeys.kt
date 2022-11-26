@@ -85,7 +85,6 @@ object PreferenceKeys {
     const val QUEUE_AUTO_INSERT_RELATED = "queue_insert_related_videos"
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
     const val PLAYER_SCREEN_BRIGHTNESS = "player_screen_brightness"
-    const val SHOW_OPEN_WITH = "show_open_with"
 
     /**
      * Background mode

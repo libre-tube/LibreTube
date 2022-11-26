@@ -314,7 +314,6 @@
     <string name="require_restart_message">नए परिवर्तनों का उपयोग करने के लिए ऐप को पुनरारंभ करें।</string>
     <string name="no_player_found">कोई बाहरी प्लेयर नहीं मिला। कृपया सुनिश्चित करें कि आपके पास एक इन्स्टाल है।</string>
     <string name="defaults">डिफ़ॉल्टस</string>
-    <string name="show_open_with">के साथ खोलें</string>
     <string name="least_recent">सबसे पुराने</string>
     <string name="playerVideoFormat">प्लेयर के लिए विडिओ फॉर्मेट</string>
     <string name="no_video">विडियो नहीं</string>
@@ -402,5 +401,4 @@
     <string name="playerAudioQuality">ऑडियो गुणवत्ता</string>
     <string name="best_quality">श्रेष्ठ</string>
     <string name="worst_quality">न्यूनतम</string>
-    <string name="show_open_with_summary">वीडियो को तीसरे पक्ष के ऐप्लिकेशन के साथ प्लेयर पर खोलने के लिए बटन दिखाएं।</string>
 </resources>

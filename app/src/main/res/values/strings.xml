@@ -395,8 +395,8 @@
     <string name="swipe_controls">Swipe controls</string>
     <string name="swipe_controls_summary">Use swipe gesture to adjust the brightness and volume.</string>
     <string name="defaults">Defaults</string>
-    <string name="show_open_with">Open With</string>
-    <string name="show_open_with_summary">Show a button in the player to open the video with a third-party app.</string>
+    <string name="pop_up">Pop-Up</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

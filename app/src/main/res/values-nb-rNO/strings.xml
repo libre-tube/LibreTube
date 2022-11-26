@@ -397,10 +397,8 @@
     <string name="select_other_start_tab">Velg en annen startfane først.</string>
     <string name="swipe_controls">Dragningskontroller</string>
     <string name="swipe_controls_summary">Bruk dragnings-håndvendinger for å justere lys- og lydstyrke.</string>
-    <string name="show_open_with">Åpne med</string>
     <string name="defaults">Forvalg</string>
     <string name="brightness">Lysstyrke</string>
     <string name="volume">Lydstyrke</string>
     <string name="auto">Auto</string>
-    <string name="show_open_with_summary">Vis en knapp i avspilleren for å åpne video med tredjepartsprogram.</string>
 </resources>

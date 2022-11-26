@@ -399,8 +399,6 @@
     <string name="auto">Otomatis</string>
     <string name="swipe_controls">Kendali usap</string>
     <string name="swipe_controls_summary">Gunakan gestur usap untuk mengatur kecerahan dan volume.</string>
-    <string name="show_open_with">Buka Dengan</string>
     <string name="defaults">Bawaan</string>
-    <string name="show_open_with_summary">Tampilkan tombol dalam pemain untuk membuka video dengan aplikasi pihak ketiga.</string>
     <string name="brightness">Kecerahan</string>
 </resources>
