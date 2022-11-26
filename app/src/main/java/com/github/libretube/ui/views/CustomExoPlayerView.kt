@@ -445,7 +445,7 @@ internal class CustomExoPlayerView(
         if (PlayerHelper.swipeGestureEnabled) {
             when (newConfig?.orientation) {
                 Configuration.ORIENTATION_LANDSCAPE -> brightnessHelper.restoreSavedBrightness()
-                else -> brightnessHelper.resetToSystemBrightness(true)
+                else -> brightnessHelper.resetToSystemBrightness(false)
             }
         }
     }

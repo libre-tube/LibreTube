@@ -1,11 +1,12 @@
 package com.github.libretube.util
 
 import android.app.Activity
+import android.os.Build
 import android.view.WindowManager
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.normalize
 
-class BrightnessHelper(activity: Activity) {
+class BrightnessHelper(private val activity: Activity) {
 
     private val window = activity.window
     private val minBrightness = 0.0f
@@ -31,15 +32,13 @@ class BrightnessHelper(activity: Activity) {
 
     /**
      * Restore screen brightness to device system brightness.
-     * [saveOldValue] determines whether the old value should be persisted or not.
+     * if [forced] is false then value will be stored only if it's not
+     * [WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE] value.
      */
-    fun resetToSystemBrightness(saveOldValue: Boolean = false) {
-        savedBrightness = if (saveOldValue) {
-            brightness
-        } else {
-            WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+    fun resetToSystemBrightness(forced: Boolean = true) {
+        if (forced || brightness != WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE) {
+            savedBrightness = brightness
         }
-
         brightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
     }
 
@@ -47,6 +46,9 @@ class BrightnessHelper(activity: Activity) {
      * Set current screen brightness to saved brightness value.
      */
     fun restoreSavedBrightness() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && activity.isInPictureInPictureMode) {
+            return
+        }
         brightness = savedBrightness
     }
 
