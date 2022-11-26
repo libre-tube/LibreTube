@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
+import android.text.util.Linkify
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
@@ -893,6 +894,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (description.contains("<") && description.contains(">")) {
             binding.playerDescription.setFormattedHtml(description)
         } else {
+            // Links can be present as plain text
+            binding.playerDescription.autoLinkMask = Linkify.WEB_URLS
             binding.playerDescription.text = description
         }
 
