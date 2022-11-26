@@ -53,7 +53,7 @@ class MainActivity : BaseActivity() {
     val autoRotationEnabled = PreferenceHelper.getBoolean(PreferenceKeys.AUTO_ROTATION, false)
 
     lateinit var searchView: SearchView
-    lateinit var searchItem: MenuItem
+    private lateinit var searchItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,9 +131,20 @@ class MainActivity : BaseActivity() {
 
         setupSubscriptionsBadge()
 
+        val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
+
         // new way of handling back presses
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                if (playerViewModel.isFullscreen.value == true) {
+                    for (fragment in supportFragmentManager.fragments) {
+                        if (fragment is PlayerFragment) {
+                            fragment.unsetFullscreen()
+                            return
+                        }
+                    }
+                }
+
                 if (binding.mainMotionLayout.progress == 0F) {
                     try {
                         minimizePlayer()
