@@ -58,8 +58,10 @@ class CommentsAdapter(
         val comment = comments[position]
         holder.binding.apply {
             if (isRepliesAdapter) {
-                root.scaleX = 0.9f
-                root.scaleY = 0.9f
+                root.scaleX = REPLIES_ADAPTER_SCALE
+                root.scaleY = REPLIES_ADAPTER_SCALE
+                commentorImage.scaleX = REPLIES_ADAPTER_SCALE
+                commentorImage.scaleY = REPLIES_ADAPTER_SCALE
             }
 
             commentInfos.text = comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
@@ -81,8 +83,7 @@ class CommentsAdapter(
             }
 
             repliesRecView.layoutManager = LinearLayoutManager(root.context)
-            lateinit var repliesAdapter: CommentsAdapter
-            repliesAdapter = CommentsAdapter(
+            val repliesAdapter = CommentsAdapter(
                 videoId,
                 mutableListOf(),
                 true
@@ -103,8 +104,8 @@ class CommentsAdapter(
     }
 
     private fun showMoreReplies(nextPage: String, showMoreBtn: Button, repliesAdapter: CommentsAdapter) {
-        when {
-            repliesAdapter.itemCount.equals(0) -> {
+        when (repliesAdapter.itemCount) {
+            0 -> {
                 fetchReplies(nextPage) {
                     repliesAdapter.updateItems(it.comments)
                     if (repliesPage.nextpage == null) {
@@ -112,9 +113,9 @@ class CommentsAdapter(
                         return@fetchReplies
                     }
                     showMoreBtn.visibility = View.VISIBLE
-                    showMoreBtn.setOnClickListener {
+                    showMoreBtn.setOnClickListener { view ->
                         if (repliesPage.nextpage == null) {
-                            it.visibility = View.GONE
+                            view.visibility = View.GONE
                             return@setOnClickListener
                         }
                         fetchReplies(
@@ -151,5 +152,9 @@ class CommentsAdapter(
             }
             isLoading = false
         }
+    }
+
+    companion object {
+        private const val REPLIES_ADAPTER_SCALE = 0.9f
     }
 }
