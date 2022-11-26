@@ -492,4 +492,12 @@ internal class CustomExoPlayerView(
         gestureViewBinding.brightnessControlView.visibility = View.GONE
         gestureViewBinding.volumeControlView.visibility = View.GONE
     }
+
+    override fun onZoom() {
+        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+    }
+
+    override fun onMinimize() {
+        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+    }
 }

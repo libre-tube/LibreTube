@@ -9,6 +9,7 @@ import android.os.Looper
 import android.os.SystemClock
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import kotlin.math.abs
@@ -24,11 +25,13 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
 
     private val handler: Handler = Handler(Looper.getMainLooper())
     private val gestureDetector: GestureDetector
+    private val scaleGestureDetector: ScaleGestureDetector
     private var isMoving = false
     var isEnabled = true
 
     init {
         gestureDetector = GestureDetector(context, GestureListener(), handler)
+        scaleGestureDetector = ScaleGestureDetector(context, ScaleGestureListener(), handler)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -40,11 +43,33 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
 
         // Event can be already consumed by some view which may lead to NPE.
         try {
-            gestureDetector.onTouchEvent(event)
+            val consumed = gestureDetector.onTouchEvent(event)
+            if (!consumed) scaleGestureDetector.onTouchEvent(event)
         } catch (_: Exception) { }
 
         // If orientation is landscape then allow `onScroll` to consume event and return true.
         return orientation == Configuration.ORIENTATION_LANDSCAPE
+    }
+
+    private inner class ScaleGestureListener : ScaleGestureDetector.OnScaleGestureListener {
+        var scaleFactor: Float = 1f
+
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
+            scaleFactor *= detector.scaleFactor
+            return true
+        }
+
+        override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
+            return true
+        }
+
+        override fun onScaleEnd(detector: ScaleGestureDetector) {
+            when {
+                scaleFactor < 0.8 -> listner.onMinimize()
+                scaleFactor > 1.2 -> listner.onZoom()
+            }
+            scaleFactor = 1f
+        }
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
