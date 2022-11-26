@@ -401,4 +401,5 @@
     <string name="swipe_controls_summary">Для регулювання яскравості та гучності використовувати жест посування.</string>
     <string name="volume">Гучність</string>
     <string name="defaults">Типові</string>
+    <string name="pop_up">Спливне вікно</string>
 </resources>
