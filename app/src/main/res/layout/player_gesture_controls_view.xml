@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:id="@+id/volumeControlView"
-        android:layout_width="wrap_content"
+        android:layout_width="42dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
         android:background="@drawable/controls_layout_bg"
@@ -22,9 +22,7 @@
         <TextView
             android:id="@+id/volume_textView"
             style="@style/SwipeControlString"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            app:autoSizeTextType="uniform" />
 
         <ProgressBar
             android:id="@+id/volume_progressBar"
@@ -45,7 +43,7 @@
 
     <LinearLayout
         android:id="@+id/brightnessControlView"
-        android:layout_width="wrap_content"
+        android:layout_width="42dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="36dp"
         android:background="@drawable/controls_layout_bg"
@@ -60,9 +58,7 @@
         <TextView
             android:id="@+id/brightness_textView"
             style="@style/SwipeControlString"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            app:autoSizeTextType="uniform" />
 
         <ProgressBar
             android:id="@+id/brightness_progressBar"
