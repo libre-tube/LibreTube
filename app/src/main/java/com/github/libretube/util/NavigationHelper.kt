@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import android.app.NotificationManager
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -22,7 +23,7 @@ object NavigationHelper {
     ) {
         if (channelId == null) return
 
-        val activity = context as MainActivity
+        val activity = unwrap(context)
         val bundle = bundleOf(IntentData.channelId to channelId)
         activity.navController.navigate(R.id.channelFragment, bundle)
         try {
@@ -34,6 +35,14 @@ object NavigationHelper {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun unwrap(context: Context): MainActivity {
+        var correctContext: Context? = context
+        while (correctContext !is MainActivity && correctContext is ContextWrapper) {
+            correctContext = correctContext.baseContext
+        }
+        return correctContext as MainActivity
     }
 
     fun navigateVideo(
@@ -64,7 +73,7 @@ object NavigationHelper {
     ) {
         if (playlistId == null) return
 
-        val activity = context as MainActivity
+        val activity = unwrap(context)
         val bundle = Bundle()
         bundle.putString(IntentData.playlistId, playlistId)
         bundle.putSerializable(IntentData.playlistType, playlistType)
