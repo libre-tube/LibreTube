@@ -1,10 +1,12 @@
 package com.github.libretube.util
 
 import android.app.Activity
+import android.os.Build
 import android.view.WindowManager
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.normalize
 
-class BrightnessHelper(activity: Activity) {
+class BrightnessHelper(private val activity: Activity) {
 
     private val window = activity.window
     private val minBrightness = 0.0f
@@ -13,26 +15,61 @@ class BrightnessHelper(activity: Activity) {
     /**
      * Wrapper for the current screen brightness
      */
-    var brightness: Float
+    private var brightness: Float
         get() = window.attributes.screenBrightness
-        private set(value) {
+        set(value) {
             val lp = window.attributes
             lp.screenBrightness = value
             window.attributes = lp
         }
 
     /**
-     * Restore screen brightness to device system brightness.
+     * Wrapper for the brightness persisted in the shared preferences.
      */
-    fun resetToSystemBrightness() {
+    private var savedBrightness: Float
+        get() = PreferenceHelper.getFloat(PreferenceKeys.PLAYER_SCREEN_BRIGHTNESS, brightness)
+        set(value) = PreferenceHelper.putFloat(PreferenceKeys.PLAYER_SCREEN_BRIGHTNESS, value)
+
+    /**
+     * Restore screen brightness to device system brightness.
+     * if [forced] is false then value will be stored only if it's not
+     * [WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE] value.
+     */
+    fun resetToSystemBrightness(forced: Boolean = true) {
+        if (forced || brightness != WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE) {
+            savedBrightness = brightness
+        }
         brightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
     }
 
-    fun setBrightnessWithScale(value: Float, maxValue: Float, minValue: Float = 0.0f) {
-        brightness = value.normalize(minValue, maxValue, minBrightness, maxBrightness)
+    /**
+     * Set current screen brightness to saved brightness value.
+     */
+    fun restoreSavedBrightness() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && activity.isInPictureInPictureMode) {
+            return
+        }
+        brightness = savedBrightness
     }
 
-    fun getBrightnessWithScale(maxValue: Float, minValue: Float = 0.0f): Float {
-        return brightness.normalize(minBrightness, maxBrightness, minValue, maxValue)
+    /**
+     * Set current brightness value with scaling to given range.
+     * [shouldSave] determines whether the value should be persisted.
+     */
+    fun setBrightnessWithScale(value: Float, maxValue: Float, minValue: Float = 0.0f, shouldSave: Boolean = false) {
+        brightness = value.normalize(minValue, maxValue, minBrightness, maxBrightness)
+        if (shouldSave) savedBrightness = brightness
+    }
+
+    /**
+     * Get scaled brightness with given range. if [saved] is
+     * ture value will be retrived from shared preferences.
+     */
+    fun getBrightnessWithScale(maxValue: Float, minValue: Float = 0.0f, saved: Boolean = false): Float {
+        return if (saved) {
+            savedBrightness.normalize(minBrightness, maxBrightness, minValue, maxValue)
+        } else {
+            brightness.normalize(minBrightness, maxBrightness, minValue, maxValue)
+        }
     }
 }

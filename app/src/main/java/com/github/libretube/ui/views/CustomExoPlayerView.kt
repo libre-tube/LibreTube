@@ -9,7 +9,6 @@ import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.view.WindowManager
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -320,15 +319,12 @@ internal class CustomExoPlayerView(
     }
 
     private fun initializeGestureProgress() {
-        val brightnessBar = gestureViewBinding.brightnessProgressBar
-        val volumeBar = gestureViewBinding.volumeProgressBar
-
-        brightnessBar.progress = if (brightnessHelper.brightness == WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE) {
-            25.normalize(0, 100, 0, volumeBar.max)
-        } else {
-            brightnessHelper.getBrightnessWithScale(brightnessBar.max.toFloat()).toInt()
+        gestureViewBinding.brightnessProgressBar.let { bar ->
+            bar.progress = brightnessHelper.getBrightnessWithScale(bar.max.toFloat(), saved = true).toInt()
         }
-        volumeBar.progress = audioHelper.getVolumeWithScale(volumeBar.max)
+        gestureViewBinding.volumeProgressBar.let { bar ->
+            bar.progress = audioHelper.getVolumeWithScale(bar.max)
+        }
     }
 
     private fun updateBrightness(distance: Float) {
@@ -444,6 +440,13 @@ internal class CustomExoPlayerView(
             val params = it.layoutParams as MarginLayoutParams
             params.bottomMargin = offset.toInt()
             it.layoutParams = params
+        }
+
+        if (PlayerHelper.swipeGestureEnabled) {
+            when (newConfig?.orientation) {
+                Configuration.ORIENTATION_LANDSCAPE -> brightnessHelper.restoreSavedBrightness()
+                else -> brightnessHelper.resetToSystemBrightness(false)
+            }
         }
     }
 
