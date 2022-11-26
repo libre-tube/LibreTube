@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
-import android.text.Html
 import android.text.format.DateUtils
 import android.util.Base64
 import android.util.Log
@@ -73,6 +72,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.setFormattedHtml
 import com.github.libretube.ui.extensions.setInvisible
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
@@ -940,19 +940,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         initializeRelatedVideos(response.relatedStreams)
         // set video description
         val description = response.description!!
-        binding.playerDescription.text =
-            // detect whether the description is html formatted
-            if (description.contains("<") && description.contains(">")) {
-                if (SDK_INT >= Build.VERSION_CODES.N) {
-                    Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
-                        .trim()
-                } else {
-                    @Suppress("DEPRECATION")
-                    Html.fromHtml(description).trim()
-                }
-            } else {
-                description
-            }
+
+        // detect whether the description is html formatted
+        if (description.contains("<") && description.contains(">")) {
+            binding.playerDescription.setFormattedHtml(description)
+        } else {
+            binding.playerDescription.text = description
+        }
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity

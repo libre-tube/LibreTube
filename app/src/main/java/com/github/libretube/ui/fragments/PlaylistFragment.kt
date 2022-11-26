@@ -53,7 +53,7 @@ class PlaylistFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             playlistId = it.getString(IntentData.playlistId)
-            playlistType = it.serializable(IntentData.playlistType)!!
+            playlistType = it.serializable(IntentData.playlistType) ?: PlaylistType.PUBLIC
         }
     }
 
