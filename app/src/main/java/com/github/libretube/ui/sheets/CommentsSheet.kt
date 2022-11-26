@@ -50,7 +50,9 @@ class CommentsSheet(
     }
 
     private fun setCommentsAdapter(comments: MutableList<Comment>) {
-        commentsAdapter = CommentsAdapter(videoId, comments)
+        commentsAdapter = CommentsAdapter(videoId, comments) {
+            dialog?.dismiss()
+        }
         binding.optionsRecycler.adapter = commentsAdapter
         isLoading = false
     }

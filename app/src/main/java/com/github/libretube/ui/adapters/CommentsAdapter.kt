@@ -29,7 +29,8 @@ import kotlinx.coroutines.withContext
 class CommentsAdapter(
     private val videoId: String,
     private val comments: MutableList<Comment>,
-    private val isRepliesAdapter: Boolean = false
+    private val isRepliesAdapter: Boolean = false,
+    private val dismiss: () -> Unit
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
 
     private var isLoading = false
@@ -80,14 +81,11 @@ class CommentsAdapter(
 
             commentorImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, comment.commentorUrl)
+                dismiss.invoke()
             }
 
             repliesRecView.layoutManager = LinearLayoutManager(root.context)
-            val repliesAdapter = CommentsAdapter(
-                videoId,
-                mutableListOf(),
-                true
-            )
+            val repliesAdapter = CommentsAdapter(videoId, mutableListOf(), true, dismiss)
             repliesRecView.adapter = repliesAdapter
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
