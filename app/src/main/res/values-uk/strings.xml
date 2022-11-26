@@ -400,4 +400,7 @@
     <string name="swipe_controls">Керування посуваннями</string>
     <string name="swipe_controls_summary">Для регулювання яскравості та гучності використовувати жест посування.</string>
     <string name="volume">Гучність</string>
+    <string name="defaults">Типові</string>
+    <string name="show_open_with">Відкрити в</string>
+    <string name="show_open_with_summary">Показувати на програвачі кнопку для відкриття відео за допомогою стороннього застосунку.</string>
 </resources>

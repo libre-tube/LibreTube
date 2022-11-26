@@ -395,4 +395,12 @@
     <string name="local_playlists">Lokalne playlisty</string>
     <string name="not_enabled">Najpierw włącz kartę!</string>
     <string name="select_other_start_tab">Najpierw wybierz inną kartę główną!</string>
+    <string name="brightness">Jasność</string>
+    <string name="volume">Głośność</string>
+    <string name="auto">Auto</string>
+    <string name="swipe_controls">Sterowanie gestami</string>
+    <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
+    <string name="defaults">Domyślne</string>
+    <string name="show_open_with">Przycisk „Otwórz w…”</string>
+    <string name="show_open_with_summary">Pozwala pzekierować odtwarzanie do zewnętrznej aplikacji.</string>
 </resources>

@@ -81,7 +81,7 @@
     <string name="authors">Autoriai</string>
     <string name="download_folder_summary">Aplanko, kuriame saugoma atsisiųsta medija, pavadinimas.</string>
     <string name="internal_storage">Vidinė atmintis</string>
-    <string name="defaultIcon">Numatytoji</string>
+    <string name="defaultIcon">Numatyta</string>
     <string name="instance_summary">Piped, prisijungimas ir prenumeratos</string>
     <string name="customInstance_summary">Pridėti…</string>
     <string name="instance_name">Perdavimo šaltinio pavadinimas</string>
@@ -106,7 +106,7 @@
     <string name="pauseOnScreenOff">Automatinis pristabdymas</string>
     <string name="pauseOnScreenOff_summary">Pristabdyti atkūrimą, kai ekranas išjungtas.</string>
     <string name="autoplay_summary">Automatiškai paleisti kitą vaizdo įrašą po dabartinio.</string>
-    <string name="reset">Atkurti numatytuosius nustatymus</string>
+    <string name="reset">Atkurti numatytus nustatymus</string>
     <string name="account">Paskyra</string>
     <string name="watch_positions_summary">Tęsti nuo paskutinės buvusios atkūrimo pozicijos</string>
     <string name="auth_instance">Autentifikavimo perdavimo šaltinis</string>
@@ -179,7 +179,7 @@
     <string name="change_region">Atrodo, kad dabartiniame regione tendencijos yra neprieinamos. Nustatymuose pasirinkite kitą.</string>
     <string name="limit_hls">Apriboti HLS iki 1080p</string>
     <string name="progressive_load_interval_summary">Mažesnė vertė gali pagreitinti pradinį vaizdo įrašų įkėlimą.</string>
-    <string name="default_load_interval">Numatytoji</string>
+    <string name="default_load_interval">Numatyta</string>
     <string name="playback_pitch">Pikinė</string>
     <string name="filename">Failo pavadinimas</string>
     <string name="invalid_filename">Netinkamas failo pavadinimas!</string>
@@ -295,7 +295,7 @@
     <string name="customization">Pritaikymas</string>
     <string name="videoCount">%1$s vaizdo įrašai</string>
     <string name="retry">Bandyti dar kartą</string>
-    <string name="defaultTab">Numatytoji kortelė</string>
+    <string name="defaultTab">Numatyta kortelė</string>
     <string name="category_sponsor_description">Apmokama reklama, apmokamos rekomendacijos ir tiesioginė reklama. Ne savireklama ar neapmokamas nuoširdus, kūrėjų, svetainių ir produktų reklamavimas.</string>
     <string name="category_interaction">Sąveikos priminimas (skatinimas pamėgti ir prenumeruoti)</string>
     <string name="category_intro">Pertrauka / įžanginė animacija</string>
@@ -326,7 +326,7 @@
     <string name="clear_customInstances">Ištrinti pridėtą</string>
     <string name="related_streams_summary">Rodyti panašias transliacijas šalia to, ką žiūrite.</string>
     <string name="buffering_goal_summary">Didžiausias užkrauto vaizdo įrašo sekundžių skaičius atmintyje.</string>
-    <string name="player_summary">Numatytieji nustatymai ir elgsena</string>
+    <string name="player_summary">Numatyti nustatymai ir elgsena</string>
     <string name="seek_increment">Prasukimo žingsnio dydis</string>
     <string name="hls">HLS</string>
     <string name="fullscreen_orientation">Viso ekrano padėtis</string>
@@ -360,7 +360,7 @@
     <string name="sb_markers_summary">Žymėti segmentus laiko juostoje.</string>
     <string name="livestreams">Tiesioginės transliacijos</string>
     <string name="alternative_videos_layout">Alternatyvus vaizdo įrašų išdėstymas</string>
-    <string name="defaultIconLight">Numatytoji šviesi</string>
+    <string name="defaultIconLight">Numatyta šviesi</string>
     <string name="playlistCloned">Grojaraštis klonuotas</string>
     <string name="confirm_unsubscribe">Ar tikrai norite atšaukti %1$s prenumeratą\?</string>
     <string name="confirm_unsubscribing">Patvirtinkite prenumeratos atšaukimą</string>
@@ -377,7 +377,7 @@
     <string name="alternative_trending_layout">Alternatyvus tendencijų išdėstymas</string>
     <string name="alternative_player_layout">Alternatyvus grotuvo išdėstymas</string>
     <string name="audio_track">Garso takelis</string>
-    <string name="default_audio_track">Numatytasis</string>
+    <string name="default_audio_track">Numatytas</string>
     <string name="unsupported_file_format">Nepalaikomas failo formatas!</string>
     <string name="auto_quality">Automatinė</string>
     <string name="hls_instead_of_dash">Naudoti HLS</string>
@@ -400,4 +400,7 @@
     <string name="brightness">Ryškumas</string>
     <string name="volume">Garsas</string>
     <string name="swipe_controls_summary">Braukimo gestu sureguliuokite ryškumą ir garsumą.</string>
+    <string name="defaults">Numatyti</string>
+    <string name="show_open_with">Atidaryti naudojant</string>
+    <string name="show_open_with_summary">Rodyti mygtuką grotuve, kad galima būtų atidaryti vaizdo įrašą naudojant trečiosios šalies programėlę.</string>
 </resources>
