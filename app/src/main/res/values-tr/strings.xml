@@ -400,4 +400,7 @@
     <string name="swipe_controls">Kaydırma kontrolleri</string>
     <string name="brightness">Parlaklık</string>
     <string name="swipe_controls_summary">Parlaklığı ve sesi ayarlamak için kaydırma hareketini kullan.</string>
+    <string name="show_open_with">Bununla aç</string>
+    <string name="show_open_with_summary">Videoyu üçüncü taraf uygulamayla açmak için oynatıcıda düğme göster.</string>
+    <string name="defaults">Varsayılanlar</string>
 </resources>
