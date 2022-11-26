@@ -402,5 +402,5 @@
     <string name="volume">Гучність</string>
     <string name="defaults">Типові</string>
     <string name="show_open_with">Відкрити в</string>
-    <string name="show_open_with_summary">Показувати на програвачі кнопку для відкриття відео за допомогою стороннього застосунку.</string>
+    <string name="show_open_with_summary">Показувати у програвачі кнопку для відкриття відео за допомогою стороннього застосунку.</string>
 </resources>
