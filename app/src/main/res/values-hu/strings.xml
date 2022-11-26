@@ -225,7 +225,7 @@
     <string name="empty_instance">Töltse be a nevet és az API URL-t.</string>
     <string name="buffering_goal_summary">Maximális másodpercnyi videó a puffereléshez.</string>
     <string name="seek_increment">Léptetés időköze</string>
-    <string name="require_restart_message">Ehhez a módosításhoz az alkalmazás újraindítása szükséges. Nyomja meg az \'OK\' gombot az újraindításhoz.</string>
+    <string name="require_restart_message">Indítsa újra az alkalmazást a változtatások használatához.</string>
     <string name="pure_theme_summary">Tiszta fehér/fekete téma</string>
     <string name="data_saver_mode">Adattakarékos üzemmód</string>
     <string name="seekbar_preview">Videó előnézet</string>
@@ -390,4 +390,9 @@
     <string name="bookmark">Könyvjelző</string>
     <string name="bookmarks_empty">Nincsenek még könyvjelzők!</string>
     <string name="clear_bookmarks">Könyvjelzők törlése</string>
+    <string name="local_playlists">Helyi lejátszási listák</string>
+    <string name="queue_insert_related_videos">Kapcsolódó videók beillesztése</string>
+    <string name="trends">Felkapottak</string>
+    <string name="select_other_start_tab">Válasszon egy másik kezdőlapot először!</string>
+    <string name="not_enabled">Menüelem nincs engedélyezve!</string>
 </resources>

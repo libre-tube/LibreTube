@@ -37,6 +37,14 @@ object PreferenceHelper {
         editor.putBoolean(key, value).commit()
     }
 
+    fun putInt(key: String, value: Int) {
+        editor.putInt(key, value).commit()
+    }
+
+    fun putFloat(key: String, value: Float) {
+        editor.putFloat(key, value).commit()
+    }
+
     fun getString(key: String?, defValue: String): String {
         return settings.getString(key, defValue) ?: defValue
     }
@@ -47,6 +55,10 @@ object PreferenceHelper {
 
     fun getInt(key: String?, defValue: Int): Int {
         return settings.getInt(key, defValue)
+    }
+
+    fun getFloat(key: String?, defValue: Float): Float {
+        return settings.getFloat(key, defValue)
     }
 
     fun clearPreferences() {

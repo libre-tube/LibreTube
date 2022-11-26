@@ -392,4 +392,15 @@
     <string name="clear_bookmarks">Очистити закладки</string>
     <string name="bookmarks_empty">Ще немає закладок!</string>
     <string name="queue_insert_related_videos">Вставити пов\'язані відео</string>
+    <string name="local_playlists">Локальні добірки</string>
+    <string name="not_enabled">Пункт меню не увімкнено!</string>
+    <string name="select_other_start_tab">Спочатку виберіть іншу вкладку для запуску!</string>
+    <string name="brightness">Яскравість</string>
+    <string name="auto">Авто</string>
+    <string name="swipe_controls">Керування посуваннями</string>
+    <string name="swipe_controls_summary">Для регулювання яскравості та гучності використовувати жест посування.</string>
+    <string name="volume">Гучність</string>
+    <string name="defaults">Типові</string>
+    <string name="show_open_with">Відкрити в</string>
+    <string name="show_open_with_summary">Показувати на програвачі кнопку для відкриття відео за допомогою стороннього застосунку.</string>
 </resources>

@@ -392,4 +392,15 @@
     <string name="clear_bookmarks">Əlfəcinləri təmizlə</string>
     <string name="bookmarks_empty">Hələ əlfəcin yoxdur!</string>
     <string name="queue_insert_related_videos">Əlaqədar videoları yerləşdir</string>
+    <string name="local_playlists">Yerli pleylistlər</string>
+    <string name="select_other_start_tab">Lütfən, əvvəla başqa başlanğıc paneli seç!</string>
+    <string name="not_enabled">Menyu elementi aktiv deyil!</string>
+    <string name="brightness">Parlaqlıq</string>
+    <string name="auto">Avtomatik</string>
+    <string name="swipe_controls_summary">Parlaqlığı və səs səviyyəsini nizamlamaq üçün sürüşdürmə jesti istifadə et.</string>
+    <string name="volume">Səs səviyyəsi</string>
+    <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
+    <string name="show_open_with">İlə aç</string>
+    <string name="defaults">Defolt</string>
+    <string name="show_open_with_summary">Videonu oynadıcıda 3-cü tərəf tətbiq ilə açmaq üçün düymə göstər.</string>
 </resources>

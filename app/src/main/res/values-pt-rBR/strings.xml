@@ -391,4 +391,13 @@
     <string name="bookmark">Favorito</string>
     <string name="clear_bookmarks">Limpar favoritos</string>
     <string name="bookmarks_empty">Ainda não há favoritos!</string>
+    <string name="local_playlists">Playlists locais</string>
+    <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
+    <string name="not_enabled">Item de menu não ativado!</string>
+    <string name="auto">Auto</string>
+    <string name="swipe_controls">Controles deslizantes</string>
+    <string name="swipe_controls_summary">Use o gesto de deslizar para ajustar o brilho e o volume.</string>
+    <string name="select_other_start_tab">Selecione outra aba inicial primeiro!</string>
+    <string name="brightness">Brilho</string>
+    <string name="volume">Volume</string>
 </resources>

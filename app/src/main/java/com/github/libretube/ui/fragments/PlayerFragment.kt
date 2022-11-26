@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.graphics.Rect
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
@@ -25,6 +24,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -49,6 +49,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
+import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
@@ -72,6 +73,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.setInvisible
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
@@ -117,6 +119,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     lateinit var binding: FragmentPlayerBinding
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
+    private lateinit var playerGestureControlsViewBinding: PlayerGestureControlsViewBinding
     private val viewModel: PlayerViewModel by activityViewModels()
 
     /**
@@ -158,7 +161,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * user preferences
      */
-    private val token = PreferenceHelper.getToken()
     private var videoShownInExternalPlayer = false
 
     /**
@@ -183,6 +185,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         exoPlayerView = binding.player
         playerBinding = binding.player.binding
         doubleTapOverlayBinding = binding.doubleTapOverlay.binding
+        playerGestureControlsViewBinding = binding.playerGestureControlsView.binding
 
         // Inflate the layout for this fragment
         return binding.root
@@ -283,6 +286,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.playerMotionLayout.setTransitionDuration(300)
             binding.playerMotionLayout.transitionToStart()
         }
+
+        if (usePiP()) (activity as MainActivity).setPictureInPictureParams(getPipParams())
     }
 
     // actions that don't depend on video information
@@ -398,6 +403,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.SHOW_OPEN_WITH, false)) {
+            binding.relPlayerOpen.visibility = View.GONE
+            binding.optionsLL.weightSum = 4f
+        }
     }
 
     private fun setFullscreen() {
@@ -422,7 +432,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
-    private fun unsetFullscreen() {
+    fun unsetFullscreen() {
         // leave fullscreen mode
         with(binding.playerMotionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
@@ -501,6 +511,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     override fun onDestroy() {
         super.onDestroy()
         try {
+            // disable the auto PiP mode for SDK >= 32
+            disableAutoPiP()
+
             saveWatchPosition()
 
             // clear the playing queue and release the player
@@ -518,16 +531,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
     }
 
+    private fun disableAutoPiP() {
+        if (SDK_INT < Build.VERSION_CODES.S) {
+            return
+        }
+        activity?.setPictureInPictureParams(
+            PictureInPictureParams.Builder().setAutoEnterEnabled(false).build()
+        )
+    }
+
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
         if (!PlayerHelper.watchPositionsEnabled) return
-        Log.e(
-            "watchpositions",
-            PreferenceHelper.getBoolean(
-                PreferenceKeys.WATCH_POSITION_TOGGLE,
-                true
-            ).toString()
-        )
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         query {
             Database.watchPositionDao().insertAll(watchPosition)
@@ -626,7 +641,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
-                    if (!(SDK_INT >= Build.VERSION_CODES.O && activity?.isInPictureInPictureMode!!)) {
+                    if (!(usePiP() && activity?.isInPictureInPictureMode!!)) {
                         exoPlayerView.useController = true
                     }
                 }
@@ -643,6 +658,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
             }
         }
+    }
+
+    /**
+     * Detect whether PiP is supported and enabled
+     */
+    private fun usePiP(): Boolean {
+        return SDK_INT >= Build.VERSION_CODES.O && PlayerHelper.pipEnabled
     }
 
     /**
@@ -766,6 +788,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.player.initialize(
             this,
             doubleTapOverlayBinding,
+            playerGestureControlsViewBinding,
             trackSelector
         )
 
@@ -830,7 +853,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 ) {
                     transitioning = true
                     // check whether autoplay is enabled
-                    if (binding.player.autoplayEnabled) playNextVideo()
+                    playNextVideo()
                 }
 
                 when (playbackState) {
@@ -855,10 +878,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     query {
                         Database.watchPositionDao().insertAll(watchPosition)
                     }
+                    disableAutoPiP()
                 }
 
                 // listen for the stop button in the notification
-                if (playbackState == PlaybackState.STATE_STOPPED && SDK_INT >= Build.VERSION_CODES.O) {
+                if (playbackState == PlaybackState.STATE_STOPPED && usePiP()) {
                     // finish PiP by finishing the activity
                     if (activity?.isInPictureInPictureMode!!) activity?.finish()
                 }
@@ -952,19 +976,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // next and previous buttons
-        playerBinding.skipPrev.visibility = if (
-            PlayerHelper.skipButtonsEnabled && PlayingQueue.hasPrev()
-        ) {
-            View.VISIBLE
-        } else {
-            View.INVISIBLE
+        if (PlayerHelper.skipButtonsEnabled) {
+            playerBinding.skipPrev.setInvisible(!PlayingQueue.hasPrev())
+            playerBinding.skipNext.setInvisible(!PlayingQueue.hasNext())
         }
-        playerBinding.skipNext.visibility =
-            if (PlayerHelper.skipButtonsEnabled) View.VISIBLE else View.INVISIBLE
 
         playerBinding.skipPrev.setOnClickListener {
-            videoId = PlayingQueue.getPrev()
-            playVideo()
+            playNextVideo(PlayingQueue.getPrev())
         }
 
         playerBinding.skipNext.setOnClickListener {
@@ -1388,12 +1406,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
-            // set portrait mode
-            unsetFullscreen()
-
             // hide and disable exoPlayer controls
             exoPlayerView.hideController()
             exoPlayerView.useController = false
+
+            // set portrait mode
+            unsetFullscreen()
+
+            if (viewModel.isMiniPlayerVisible.value == true) {
+                binding.playerMotionLayout.transitionToStart()
+                viewModel.isMiniPlayerVisible.value = false
+            }
 
             with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, -1)
@@ -1421,14 +1444,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     fun onUserLeaveHint() {
-        if (SDK_INT >= Build.VERSION_CODES.O && shouldStartPiP()) {
-            activity?.enterPictureInPictureMode(
-                PictureInPictureParams.Builder()
-                    .setActions(emptyList())
-                    .build()
-            )
+        if (usePiP() && shouldStartPiP()) {
+            activity?.enterPictureInPictureMode(getPipParams())
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getPipParams(): PictureInPictureParams = PictureInPictureParams.Builder()
+        .setActions(emptyList())
+        .apply {
+            if (SDK_INT >= Build.VERSION_CODES.S) {
+                setAutoEnterEnabled(true)
+            }
+        }
+        .build()
 
     private fun shouldStartPiP(): Boolean {
         if (!PlayerHelper.pipEnabled ||
@@ -1438,15 +1467,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return false
         }
 
-        val bounds = Rect()
-        binding.playerScrollView.getHitRect(bounds)
-
         val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
 
-        return (
-            binding.playerScrollView.getLocalVisibleRect(bounds) ||
-                viewModel.isFullscreen.value == true
-            ) && (exoPlayer.isPlaying || !backgroundModeRunning)
+        return exoPlayer.isPlaying && !backgroundModeRunning
     }
 
     private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {

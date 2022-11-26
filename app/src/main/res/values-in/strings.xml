@@ -392,4 +392,15 @@
     <string name="clear_bookmarks">Hapus markah</string>
     <string name="bookmarks_empty">Belum ada markah!</string>
     <string name="queue_insert_related_videos">Masukkan video terkait</string>
+    <string name="local_playlists">Daftar putar lokal</string>
+    <string name="not_enabled">Item menu tidak diaktifkan!</string>
+    <string name="select_other_start_tab">Mohon pilih tab mulai yang lain terlebih dahulu!</string>
+    <string name="volume">Volume</string>
+    <string name="auto">Otomatis</string>
+    <string name="swipe_controls">Kendali usap</string>
+    <string name="swipe_controls_summary">Gunakan gestur usap untuk mengatur kecerahan dan volume.</string>
+    <string name="show_open_with">Buka Dengan</string>
+    <string name="defaults">Bawaan</string>
+    <string name="show_open_with_summary">Tampilkan tombol dalam pemain untuk membuka video dengan aplikasi pihak ketiga.</string>
+    <string name="brightness">Kecerahan</string>
 </resources>

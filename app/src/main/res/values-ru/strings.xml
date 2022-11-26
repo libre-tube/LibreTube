@@ -158,7 +158,7 @@
     <string name="instance_api_url">URL-адрес API экземпляра</string>
     <string name="buffering_goal_summary">Максимальное количество секунд видео для буферизации</string>
     <string name="clear_customInstances">Очистить добавленные</string>
-    <string name="related_streams_summary">Показывать похожие видео рядом с тем, что вы смотрите.</string>
+    <string name="related_streams_summary">Показывать связанные видео рядом с тем, что вы смотрите.</string>
     <string name="invalid_url">Пожалуйста, введите рабочий URL</string>
     <string name="buffering_goal">Предзагрузка</string>
     <string name="downloads">Загрузки</string>
@@ -391,4 +391,8 @@
     <string name="bookmarks_empty">Закладок пока нет!</string>
     <string name="featured">Рекомендации</string>
     <string name="bookmark">Закладка</string>
+    <string name="select_other_start_tab">Сначала выберите другую начальную вкладку!</string>
+    <string name="local_playlists">Локальные плейлисты</string>
+    <string name="not_enabled">Пункт меню не включен!</string>
+    <string name="queue_insert_related_videos">Вставить связанные видео</string>
 </resources>

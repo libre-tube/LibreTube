@@ -106,6 +106,21 @@ object NavBarHelper {
                 ).icon = menuItem.icon
             }
         }
-        return navBarItems.first { it.isVisible }.itemId
+        return getStartFragmentId(bottomNav.context)
+    }
+
+    fun getStartFragmentId(context: Context): Int {
+        val pref = PreferenceHelper.getInt(PreferenceKeys.START_FRAGMENT, Int.MAX_VALUE)
+        val defaultNavItems = getDefaultNavBarItems(context)
+        return if (pref == Int.MAX_VALUE) {
+            getNavBarItems(context).first { it.isVisible }.itemId
+        } else {
+            defaultNavItems.get(pref).itemId
+        }
+    }
+
+    fun setStartFragment(context: Context, itemId: Int) {
+        val index = getDefaultNavBarItems(context).indexOfFirst { it.itemId == itemId }
+        PreferenceHelper.putInt(PreferenceKeys.START_FRAGMENT, index)
     }
 }

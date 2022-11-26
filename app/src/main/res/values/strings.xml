@@ -387,7 +387,16 @@
     <string name="bookmarks_empty">No bookmarks yet!</string>
     <string name="queue_insert_related_videos">Insert related videos</string>
     <string name="local_playlists">Local playlists</string>
-
+    <string name="not_enabled">Menu item not enabled!</string>
+    <string name="select_other_start_tab">Please select an other start tab first!</string>
+    <string name="brightness">Brightness</string>
+    <string name="volume">Volume</string>
+    <string name="auto">Auto</string>
+    <string name="swipe_controls">Swipe controls</string>
+    <string name="swipe_controls_summary">Use swipe gesture to adjust the brightness and volume.</string>
+    <string name="defaults">Defaults</string>
+    <string name="show_open_with">Open With</string>
+    <string name="show_open_with_summary">Show a button in the player to open the video with a third-party app.</string>
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

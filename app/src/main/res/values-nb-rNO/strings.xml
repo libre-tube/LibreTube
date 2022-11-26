@@ -387,4 +387,20 @@
     <string name="trends">På vei opp</string>
     <string name="alternative_player_layout">Alternativ avspillertilpasning</string>
     <string name="featured">Framhevet</string>
+    <string name="local_playlists">Lokale spillelister</string>
+    <string name="queue_insert_related_videos">Legg til relaterte videoer</string>
+    <string name="bookmarks">Bokmerke</string>
+    <string name="bookmark">Bokmerke</string>
+    <string name="clear_bookmarks">Tøm bokmerker</string>
+    <string name="bookmarks_empty">Ingen bokmerker enda.</string>
+    <string name="not_enabled">Menyelementet er ikke påskrudd.</string>
+    <string name="select_other_start_tab">Velg en annen startfane først.</string>
+    <string name="swipe_controls">Dragningskontroller</string>
+    <string name="swipe_controls_summary">Bruk dragnings-håndvendinger for å justere lys- og lydstyrke.</string>
+    <string name="show_open_with">Åpne med</string>
+    <string name="defaults">Forvalg</string>
+    <string name="brightness">Lysstyrke</string>
+    <string name="volume">Lydstyrke</string>
+    <string name="auto">Auto</string>
+    <string name="show_open_with_summary">Vis en knapp i avspilleren for å åpne video med tredjepartsprogram.</string>
 </resources>

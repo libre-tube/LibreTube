@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +23,12 @@ import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
+import com.github.libretube.extensions.toDp
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.extensions.serializable
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -42,6 +46,8 @@ class PlaylistFragment : BaseFragment() {
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
     private var isBookmarked = false
+
+    private val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +78,12 @@ class PlaylistFragment : BaseFragment() {
             DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId!!)
         }
         updateBookmarkRes()
+
+        playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
+            binding.playlistRecView.updatePadding(
+                bottom = if (it) (64).toDp(resources).toInt() else 0
+            )
+        }
 
         fetchPlaylist()
     }
