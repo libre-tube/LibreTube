@@ -25,6 +25,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.LocaleHelper
 import com.github.libretube.util.PreferenceHelper
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -141,6 +142,9 @@ class HomeFragment : BaseFragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 action.invoke()
+                // Can be caused due to activity launch in front view from PiP mode.
+            } catch (e: CancellationException) {
+                Log.e("fetching home tab", e.toString())
             } catch (e: Exception) {
                 e.localizedMessage?.let { context?.toastFromMainThread(it) }
                 Log.e("fetching home tab", e.toString())
