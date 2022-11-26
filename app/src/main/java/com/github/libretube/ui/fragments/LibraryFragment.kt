@@ -21,6 +21,7 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.PreferenceHelper
 
 class LibraryFragment : BaseFragment() {
@@ -66,6 +67,11 @@ class LibraryFragment : BaseFragment() {
 
         binding.downloads.setOnClickListener {
             findNavController().navigate(R.id.downloadsFragment)
+        }
+
+        val navBarItems = NavBarHelper.getNavBarItems(requireContext())
+        if (navBarItems.filter { it.isVisible }.any { it.itemId == R.id.downloadsFragment }) {
+            binding.downloads.visibility = View.GONE
         }
 
         fetchPlaylists()
