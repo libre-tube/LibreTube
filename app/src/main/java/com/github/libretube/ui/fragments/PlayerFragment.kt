@@ -432,7 +432,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
-    private fun unsetFullscreen() {
+    fun unsetFullscreen() {
         // leave fullscreen mode
         with(binding.playerMotionLayout) {
             getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
