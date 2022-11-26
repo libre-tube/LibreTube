@@ -14,7 +14,7 @@ import android.view.View
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import kotlin.math.abs
 
-class PlayerGestureController(context: Context, private val listner: PlayerGestureOptions) :
+class PlayerGestureController(context: Context, private val listener: PlayerGestureOptions) :
     View.OnTouchListener {
 
     // width and height should be obtained each time using getter to adopt layout size changes.
@@ -38,13 +38,13 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP && isMoving) {
             isMoving = false
-            listner.onSwipeEnd()
+            listener.onSwipeEnd()
         }
 
         // Event can be already consumed by some view which may lead to NPE.
         try {
-            val consumed = gestureDetector.onTouchEvent(event)
-            if (!consumed) scaleGestureDetector.onTouchEvent(event)
+            scaleGestureDetector.onTouchEvent(event)
+            gestureDetector.onTouchEvent(event)
         } catch (_: Exception) { }
 
         // If orientation is landscape then allow `onScroll` to consume event and return true.
@@ -65,8 +65,8 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
 
         override fun onScaleEnd(detector: ScaleGestureDetector) {
             when {
-                scaleFactor < 0.8 -> listner.onMinimize()
-                scaleFactor > 1.2 -> listner.onZoom()
+                scaleFactor < 0.8 -> listener.onMinimize()
+                scaleFactor > 1.2 -> listener.onZoom()
             }
             scaleFactor = 1f
         }
@@ -78,7 +78,7 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
         private var xPos = 0.0F
 
         override fun onDown(e: MotionEvent): Boolean {
-            if (isMoving) return false
+            if (isMoving || scaleGestureDetector.isInProgress) return false
 
             if (isEnabled && isSecondClick()) {
                 handler.removeCallbacks(runnable)
@@ -86,9 +86,9 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
                 val eventPositionPercentageX = xPos / width
 
                 when {
-                    eventPositionPercentageX < 0.4 -> listner.onDoubleTapLeftScreen()
-                    eventPositionPercentageX > 0.6 -> listner.onDoubleTapRightScreen()
-                    else -> listner.onDoubleTapCenterScreen()
+                    eventPositionPercentageX < 0.4 -> listener.onDoubleTapLeftScreen()
+                    eventPositionPercentageX > 0.6 -> listener.onDoubleTapRightScreen()
+                    else -> listener.onDoubleTapCenterScreen()
                 }
             } else {
                 if (recentDoubleClick()) return true
@@ -106,7 +106,7 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
             distanceX: Float,
             distanceY: Float
         ): Boolean {
-            if (!isEnabled) return false
+            if (!isEnabled || scaleGestureDetector.isInProgress) return false
 
             val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
             val insideBorder = (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
@@ -126,8 +126,8 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
             isMoving = true
 
             when {
-                width * 0.5 > e1.x -> listner.onSwipeLeftScreen(distanceY)
-                width * 0.5 < e1.x -> listner.onSwipeRightScreen(distanceY)
+                width * 0.5 > e1.x -> listener.onSwipeLeftScreen(distanceY)
+                width * 0.5 < e1.x -> listener.onSwipeRightScreen(distanceY)
             }
             return true
         }
@@ -135,7 +135,7 @@ class PlayerGestureController(context: Context, private val listner: PlayerGestu
         private val runnable = Runnable {
             // If user is scrolling then avoid single tap call
             if (isMoving || isSecondClick()) return@Runnable
-            listner.onSingleTap()
+            listener.onSingleTap()
         }
 
         private fun isSecondClick(): Boolean {
