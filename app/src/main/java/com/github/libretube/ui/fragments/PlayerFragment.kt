@@ -37,6 +37,7 @@ import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
+import com.github.libretube.api.obj.Comment
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.SegmentData
@@ -143,6 +144,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private lateinit var trackSelector: DefaultTrackSelector
     private lateinit var segmentData: SegmentData
     private lateinit var chapters: List<ChapterSegment>
+    private val comments: MutableList<Comment> = mutableListOf()
+    private var commentsNextPage: String? = null
 
     /**
      * for the player view
@@ -323,7 +326,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
-            CommentsSheet(videoId!!).show(childFragmentManager)
+            CommentsSheet(videoId!!, comments, commentsNextPage) { comments, nextPage ->
+                this.comments.addAll(comments)
+                this.commentsNextPage = nextPage
+            }.show(childFragmentManager)
         }
 
         playerBinding.queueToggle.visibility = View.VISIBLE
@@ -705,7 +711,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (nextVideoId != null) {
             videoId = nextVideoId
 
-            // TODO Reset comments
+            // reset the comments to be reloaded later
+            comments.clear()
+            commentsNextPage = null
+
+            // play the next video
             playVideo()
         }
     }

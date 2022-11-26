@@ -5,24 +5,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Comment
 import com.github.libretube.databinding.BottomSheetBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.adapters.CommentsAdapter
-import retrofit2.HttpException
-import java.io.IOException
 
 class CommentsSheet(
-    private val videoId: String
+    private val videoId: String,
+    private val comments: MutableList<Comment>,
+    private var nextPage: String?,
+    private val onMoreComments: (comments: List<Comment>, nextPage: String?) -> Unit
 ) : ExpandedBottomSheet() {
     private lateinit var binding: BottomSheetBinding
 
     private var commentsAdapter: CommentsAdapter? = null
-    private var nextPage: String? = null
     private var isLoading = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -43,47 +42,47 @@ class CommentsSheet(
                 }
             }
 
-        fetchComments()
+        if (comments.isNotEmpty()) {
+            commentsAdapter = CommentsAdapter(videoId, comments)
+        } else {
+            fetchComments()
+        }
+    }
+
+    private fun setCommentsAdapter(comments: MutableList<Comment>) {
+        commentsAdapter = CommentsAdapter(videoId, comments)
+        binding.optionsRecycler.adapter = commentsAdapter
     }
 
     private fun fetchComments() {
         lifecycleScope.launchWhenCreated {
-            val commentsResponse = try {
+            val response = try {
                 RetrofitInstance.api.getComments(videoId)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
-            commentsAdapter = CommentsAdapter(videoId, commentsResponse.comments)
-            binding.optionsRecycler.adapter = commentsAdapter
-            nextPage = commentsResponse.nextpage
+            setCommentsAdapter(response.comments)
+            nextPage = response.nextpage
+            onMoreComments.invoke(response.comments, response.nextpage)
             isLoading = false
         }
     }
 
     private fun fetchNextComments() {
         lifecycleScope.launchWhenCreated {
-            if (!isLoading) {
-                isLoading = true
-                val response = try {
-                    RetrofitInstance.api.getCommentsNextPage(videoId, nextPage!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
-                    return@launchWhenCreated
-                }
-                nextPage = response.nextpage
-                commentsAdapter?.updateItems(response.comments)
-                isLoading = false
+            if (isLoading || nextPage == null) return@launchWhenCreated
+            isLoading = true
+            val response = try {
+                RetrofitInstance.api.getCommentsNextPage(videoId, nextPage!!)
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                return@launchWhenCreated
             }
+            nextPage = response.nextpage
+            commentsAdapter?.updateItems(response.comments)
+            onMoreComments.invoke(response.comments, response.nextpage)
+            isLoading = false
         }
     }
 }
