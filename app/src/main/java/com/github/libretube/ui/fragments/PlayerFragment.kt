@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.PictureInPictureParams
 import android.content.Context
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.session.PlaybackState
@@ -154,11 +153,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var subtitles = mutableListOf<SubtitleConfiguration>()
 
     /**
-     * user preferences
-     */
-    private var videoShownInExternalPlayer = false
-
-    /**
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
@@ -283,6 +277,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         if (usePiP()) (activity as MainActivity).setPictureInPictureParams(getPipParams())
+
+        if (SDK_INT < Build.VERSION_CODES.O) {
+            binding.relPlayerPip.visibility = View.GONE
+            binding.optionsLL.weightSum = 4f
+        }
     }
 
     // actions that don't depend on video information
@@ -388,11 +387,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             LinearLayoutManager.HORIZONTAL,
             false
         )
-
-        if (!PreferenceHelper.getBoolean(PreferenceKeys.SHOW_OPEN_WITH, false)) {
-            binding.relPlayerOpen.visibility = View.GONE
-            binding.optionsLL.weightSum = 4f
-        }
     }
 
     private fun setFullscreen() {
@@ -457,13 +451,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
             chaptersAdapter.updateSelectedPosition(chapterIndex)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        // Assuming the video is not playing in external player when returning to app
-        videoShownInExternalPlayer = false
     }
 
     override fun onPause() {
@@ -889,25 +876,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         if (response.hls != null) {
-            binding.relPlayerOpen.setOnClickListener {
-                // Do not start picture in picture when playing in external player
-                videoShownInExternalPlayer = true
-
-                // start an intent with video as mimetype using the hls stream
-                val uri: Uri = Uri.parse(response.hls)
-                val intent = Intent()
-
-                intent.action = Intent.ACTION_VIEW
-                intent.setDataAndType(uri, "video/*")
-                intent.putExtra(Intent.EXTRA_TITLE, streams.title)
-                intent.putExtra("title", streams.title)
-                intent.putExtra("artist", streams.uploader)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
+            binding.relPlayerPip.setOnClickListener {
+                if (SDK_INT < Build.VERSION_CODES.O) return@setOnClickListener
                 try {
-                    startActivity(intent)
+                    activity?.enterPictureInPictureMode(getPipParams())
                 } catch (e: Exception) {
-                    Toast.makeText(context, R.string.no_player_found, Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
                 }
             }
         }
@@ -1388,8 +1362,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     private fun shouldStartPiP(): Boolean {
         if (!PlayerHelper.pipEnabled ||
-            exoPlayer.playbackState == PlaybackState.STATE_PAUSED ||
-            videoShownInExternalPlayer
+            exoPlayer.playbackState == PlaybackState.STATE_PAUSED
         ) {
             return false
         }

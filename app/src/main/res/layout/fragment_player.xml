@@ -184,7 +184,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/relPlayer_open"
+                        android:id="@+id/relPlayer_pip"
                         style="@style/PlayerActionsLayout"
                         android:layout_weight="1">
 
@@ -198,7 +198,7 @@
                             style="@style/PlayerActionsText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/open" />
+                            android:text="@string/pop_up" />
                     </LinearLayout>
 
                     <LinearLayout

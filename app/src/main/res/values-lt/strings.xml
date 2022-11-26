@@ -401,6 +401,4 @@
     <string name="volume">Garsas</string>
     <string name="swipe_controls_summary">Braukimo gestu sureguliuokite ryškumą ir garsumą.</string>
     <string name="defaults">Numatyti</string>
-    <string name="show_open_with">Atidaryti naudojant</string>
-    <string name="show_open_with_summary">Rodyti mygtuką grotuve, kad galima būtų atidaryti vaizdo įrašą naudojant trečiosios šalies programėlę.</string>
 </resources>

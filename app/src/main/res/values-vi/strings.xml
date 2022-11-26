@@ -396,11 +396,9 @@
     <string name="brightness">Độ sáng</string>
     <string name="volume">Âm lượng</string>
     <string name="auto">Tự động</string>
-    <string name="show_open_with">Mở với</string>
     <string name="defaults">Mặc định</string>
     <string name="select_other_start_tab">Vui lòng chọn một tab bắt đầu khác trước tiên!</string>
     <string name="swipe_controls">Điều khiển vuốt</string>
     <string name="swipe_controls_summary">Sử dụng thao tác vuốt để điều chỉnh độ sáng và âm lượng.</string>
-    <string name="show_open_with_summary">Hiển thị một nút trong trình phát để mở video bằng ứng dụng của bên thứ ba.</string>
     <string name="bookmark">Đánh dấu trang</string>
 </resources>
