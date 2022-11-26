@@ -27,7 +27,6 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
-import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -66,7 +65,6 @@ import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.ChaptersAdapter
-import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
@@ -78,6 +76,7 @@ import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
+import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.DashHelper
@@ -136,13 +135,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var sId: Int = 0
     private var eId: Int = 0
     private var transitioning = false
-
-    /**
-     * for the comments
-     */
-    private var commentsAdapter: CommentsAdapter? = null
-    private var nextPage: String? = null
-    private var isLoading = true
 
     /**
      * for the player
@@ -331,7 +323,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
-            toggleComments()
+            CommentsSheet(videoId!!).show(childFragmentManager)
         }
 
         playerBinding.queueToggle.visibility = View.VISIBLE
@@ -382,19 +374,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 playlistId
             )
         }
-
-        binding.playerScrollView.viewTreeObserver
-            .addOnScrollChangedListener {
-                if (binding.playerScrollView.getChildAt(0).bottom
-                    == (binding.playerScrollView.height + binding.playerScrollView.scrollY) &&
-                    nextPage != null
-                ) {
-                    fetchNextComments()
-                }
-            }
-
-        binding.commentsRecView.layoutManager = LinearLayoutManager(view?.context)
-        binding.commentsRecView.setItemViewCacheSize(20)
 
         binding.relatedRecView.layoutManager = VideosAdapter.getLayout(requireContext())
 
@@ -471,17 +450,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             // set selected
             val chaptersAdapter = binding.chaptersRecView.adapter as ChaptersAdapter
             chaptersAdapter.updateSelectedPosition(chapterIndex)
-        }
-    }
-
-    private fun toggleComments() {
-        if (binding.commentsRecView.isVisible) {
-            binding.commentsRecView.visibility = View.GONE
-            binding.relatedRecView.visibility = View.VISIBLE
-        } else {
-            binding.commentsRecView.visibility = View.VISIBLE
-            binding.relatedRecView.visibility = View.GONE
-            if (binding.commentsRecView.isEmpty()) fetchComments()
         }
     }
 
@@ -649,9 +617,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 initializePlayerNotification()
                 if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
 
-                // show comments if related streams are disabled or the alternative related streams layout is chosen
-                if (!PlayerHelper.relatedStreamsEnabled || PlayerHelper.alternativeVideoLayout) toggleComments()
-
                 // add the video to the watch history
                 if (PlayerHelper.watchHistoryEnabled) {
                     DatabaseHelper.addToWatchHistory(videoId!!, streams)
@@ -740,8 +705,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (nextVideoId != null) {
             videoId = nextVideoId
 
-            // forces the comments to reload for the new video
-            binding.commentsRecView.adapter = null
+            // TODO Reset comments
             playVideo()
         }
     }
@@ -1263,47 +1227,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             nowPlayingNotification = NowPlayingNotification(requireContext(), exoPlayer, false)
         }
         nowPlayingNotification.updatePlayerNotification(videoId!!, streams)
-    }
-
-    private fun fetchComments() {
-        lifecycleScope.launchWhenCreated {
-            val commentsResponse = try {
-                RetrofitInstance.api.getComments(videoId!!)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                return@launchWhenCreated
-            }
-            commentsAdapter = CommentsAdapter(videoId!!, commentsResponse.comments)
-            binding.commentsRecView.adapter = commentsAdapter
-            nextPage = commentsResponse.nextpage
-            isLoading = false
-        }
-    }
-
-    private fun fetchNextComments() {
-        lifecycleScope.launchWhenCreated {
-            if (!isLoading) {
-                isLoading = true
-                val response = try {
-                    RetrofitInstance.api.getCommentsNextPage(videoId!!, nextPage!!)
-                } catch (e: IOException) {
-                    println(e)
-                    Log.e(TAG(), "IOException, you might not have internet connection")
-                    return@launchWhenCreated
-                } catch (e: HttpException) {
-                    Log.e(TAG(), "HttpException, unexpected response," + e.response())
-                    return@launchWhenCreated
-                }
-                nextPage = response.nextpage
-                commentsAdapter?.updateItems(response.comments)
-                isLoading = false
-            }
-        }
     }
 
     /**
