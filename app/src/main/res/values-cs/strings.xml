@@ -395,4 +395,12 @@
     <string name="local_playlists">Místní playlisty</string>
     <string name="not_enabled">Položka nabídky není povolena!</string>
     <string name="select_other_start_tab">Nejprve vyberte jinou kartu spuštění!</string>
+    <string name="brightness">Jas</string>
+    <string name="auto">Auto</string>
+    <string name="swipe_controls">Ovládání přejetím prstem</string>
+    <string name="show_open_with">Otevřít pomocí</string>
+    <string name="defaults">Výchozí</string>
+    <string name="show_open_with_summary">Zobrazit tlačítko v přehrávači pro otevření videa pomocí aplikace třetí strany.</string>
+    <string name="volume">Hlasitost</string>
+    <string name="swipe_controls_summary">Pomocí gesta přejetí prstem upravit jas a hlasitost.</string>
 </resources>
