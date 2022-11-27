@@ -395,4 +395,16 @@
     <string name="trends">Felkapottak</string>
     <string name="select_other_start_tab">Válasszon egy másik kezdőlapot először!</string>
     <string name="not_enabled">Menüelem nincs engedélyezve!</string>
+    <string name="volume">Hangerő</string>
+    <string name="auto">Automatikus</string>
+    <string name="brightness">Fényerő</string>
+    <string name="swipe_controls_summary">Húzási gesztusok használata a hangerő és a fényerő beállításához.</string>
+    <string name="swipe_controls">Húzási vezérlők</string>
+    <string name="defaults">Alapértelmezett</string>
+    <string name="pop_up">Felugró</string>
+    <string name="no_comments_available">Nincsenek elérhető hozzászólások a videóhoz.</string>
+    <string name="comments_disabled">A hozzászólásokat a feltöltő letiltotta.</string>
+    <string name="double_tap_seek_summary">Érintse meg kétszer bal- vagy jobboldalt, hogy megváltoztassa a lejátszó helyzetét.</string>
+    <string name="captions_size">Feliratok mérete</string>
+    <string name="double_tap_seek">Dupla érintéses keresés</string>
 </resources>
