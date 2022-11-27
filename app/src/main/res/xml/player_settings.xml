@@ -19,6 +19,13 @@
             app:title="@string/skip_buttons" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_skip"
+            android:summary="@string/double_tap_seek_summary"
+            app:key="double_tap_seek"
+            app:title="@string/double_tap_seek" />
+
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:icon="@drawable/ic_window"
             app:key="picture_in_picture"
@@ -27,7 +34,7 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:key="auto_fullscreen"
             app:title="@string/autoRotatePlayer" />
 

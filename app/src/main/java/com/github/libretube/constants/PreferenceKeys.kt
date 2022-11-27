@@ -86,6 +86,7 @@ object PreferenceKeys {
     const val PLAYER_SWIPE_CONTROLS = "player_swipe_controls"
     const val PLAYER_SCREEN_BRIGHTNESS = "player_screen_brightness"
     const val CAPTIONS_SIZE = "captions_size"
+    const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
 
     /**
      * Background mode
