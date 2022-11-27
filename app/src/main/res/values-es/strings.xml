@@ -401,4 +401,7 @@
     <string name="brightness">Brillo</string>
     <string name="swipe_controls_summary">Use el gesto de deslizar para ajustar el brillo y el volumen.</string>
     <string name="defaults">Por defecto</string>
+    <string name="pop_up">Ventana emergente</string>
+    <string name="no_comments_available">Este vídeo no tiene comentarios disponibles.</string>
+    <string name="comments_disabled">Los comentarios están desactivados por el autor.</string>
 </resources>
