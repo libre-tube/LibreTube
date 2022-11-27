@@ -402,4 +402,7 @@
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
     <string name="defaults">Domyślne</string>
     <string name="pop_up">Dymek</string>
+    <string name="no_comments_available">Nie skomentowano jeszcze tego materiału.</string>
+    <string name="comments_disabled">Komentarze zostały wyłączone przez twórcę.</string>
+    <string name="captions_size">Rozmiar napisów</string>
 </resources>
