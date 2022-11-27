@@ -403,4 +403,5 @@
     <string name="show_open_with_summary">Zobrazit tlačítko v přehrávači pro otevření videa pomocí aplikace třetí strany.</string>
     <string name="volume">Hlasitost</string>
     <string name="swipe_controls_summary">Pomocí gesta přejetí prstem upravit jas a hlasitost.</string>
+    <string name="pop_up">Vyskakovací okno</string>
 </resources>

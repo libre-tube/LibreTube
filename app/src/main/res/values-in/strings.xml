@@ -401,4 +401,5 @@
     <string name="swipe_controls_summary">Gunakan gestur usap untuk mengatur kecerahan dan volume.</string>
     <string name="defaults">Bawaan</string>
     <string name="brightness">Kecerahan</string>
+    <string name="pop_up">Hamparan</string>
 </resources>

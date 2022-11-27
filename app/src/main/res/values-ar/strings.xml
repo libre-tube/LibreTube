@@ -395,4 +395,11 @@
     <string name="queue_insert_related_videos">إدراج مقاطع فيديو ذات صلة</string>
     <string name="not_enabled">لم يتم تمكين عنصر القائمة!</string>
     <string name="select_other_start_tab">يرجى تحديد علامة تبويب بدء أخرى أولا!</string>
+    <string name="brightness">السطوع</string>
+    <string name="volume">مستوى الصوت</string>
+    <string name="auto">تلقائي</string>
+    <string name="swipe_controls">عناصر التحكم في السحب</string>
+    <string name="defaults">الإفتراضي</string>
+    <string name="pop_up">نافذة منبثقة</string>
+    <string name="swipe_controls_summary">استخدم إيماءة السحب لضبط السطوع ومستوى الصوت.</string>
 </resources>

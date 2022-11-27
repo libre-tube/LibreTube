@@ -395,4 +395,11 @@
     <string name="local_playlists">רשימות נגינה מקומיות</string>
     <string name="not_enabled">פריט התפריט לא פעיל!</string>
     <string name="select_other_start_tab">נא לבחור לשונית התחלה אחרת תחילה!</string>
+    <string name="brightness">בהירות</string>
+    <string name="volume">עצמת שמע</string>
+    <string name="auto">אוטומטי</string>
+    <string name="swipe_controls">בקרי החלקה</string>
+    <string name="defaults">ברירות מחדל</string>
+    <string name="pop_up">צף</string>
+    <string name="swipe_controls_summary">להשתמש במחוות החלקה כדי לכוון את הבהירות ואת עצמת השמע.</string>
 </resources>
