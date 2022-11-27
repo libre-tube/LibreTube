@@ -62,6 +62,15 @@
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />
 
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_text"
+            android:key="captions_size"
+            android:title="@string/captions_size"
+            app:defValue="18"
+            app:stepSize="1"
+            app:valueFrom="8"
+            app:valueTo="30" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/appearance">

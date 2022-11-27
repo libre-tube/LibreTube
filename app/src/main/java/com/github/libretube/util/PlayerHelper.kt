@@ -300,6 +300,12 @@ object PlayerHelper {
             true
         )
 
+    val captionsTextSize: Float
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.CAPTIONS_SIZE,
+            "18"
+        ).toFloat()
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(
