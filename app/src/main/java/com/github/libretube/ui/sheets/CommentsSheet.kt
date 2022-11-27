@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 
 class CommentsSheet(
     private val videoId: String,
-    private val comments: MutableList<Comment>,
+    private val comments: List<Comment>,
     private var nextPage: String?,
     private val onMoreComments: (comments: List<Comment>, nextPage: String?) -> Unit
 ) : ExpandedBottomSheet() {
@@ -45,7 +45,7 @@ class CommentsSheet(
                 }
             }
 
-        commentsAdapter = CommentsAdapter(videoId, comments) {
+        commentsAdapter = CommentsAdapter(videoId, comments.toMutableList()) {
             dialog?.dismiss()
         }
         binding.commentsRV.adapter = commentsAdapter
@@ -60,7 +60,6 @@ class CommentsSheet(
             val response = try {
                 RetrofitInstance.api.getComments(videoId)
             } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
             binding.progress.visibility = View.GONE
