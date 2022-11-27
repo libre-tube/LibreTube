@@ -399,6 +399,8 @@
     <string name="comments_disabled">Comments are disabled by the uploader.</string>
     <string name="no_comments_available">This video has no comments available.</string>
     <string name="captions_size">Captions size</string>
+    <string name="double_tap_seek">Double tap to seek</string>
+    <string name="double_tap_seek_summary">Tap twice at the left or right to rewind or forward the player position.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

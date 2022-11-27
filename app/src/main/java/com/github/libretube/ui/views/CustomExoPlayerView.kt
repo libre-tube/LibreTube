@@ -92,7 +92,8 @@ internal class CustomExoPlayerView(
         // Set touch listner for tap and swipe gestures.
         setOnTouchListener(playerGestureController)
         initializeGestureProgress()
-        enableDoubleTapToSeek()
+
+        initRewindAndForward()
 
         initializeAdvancedOptions(context)
 
@@ -136,6 +137,29 @@ internal class CustomExoPlayerView(
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return false
+    }
+
+    private fun initRewindAndForward() {
+        val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
+        listOf(
+            doubleTapOverlayBinding?.rewindTV,
+            doubleTapOverlayBinding?.forwardTV,
+            binding.forwardTV,
+            binding.rewindTV
+        ).forEach {
+            it?.text = seekIncrementText
+        }
+        binding.forwardBTN.setOnClickListener {
+            player?.seekTo(player!!.currentPosition + PlayerHelper.seekIncrement)
+        }
+        binding.rewindBTN.setOnClickListener {
+            player?.seekTo(player!!.currentPosition - PlayerHelper.seekIncrement)
+        }
+        if (PlayerHelper.doubleTapToSeek) return
+
+        listOf(binding.forwardBTN, binding.rewindBTN).forEach {
+            it.visibility = View.VISIBLE
+        }
     }
 
     private fun initializeAdvancedOptions(context: Context) {
@@ -254,13 +278,6 @@ internal class CustomExoPlayerView(
         playerGestureController.isEnabled = isLocked
     }
 
-    private fun enableDoubleTapToSeek() {
-        // set seek increment text
-        val seekIncrementText = (PlayerHelper.seekIncrement / 1000).toString()
-        doubleTapOverlayBinding?.rewindTV?.text = seekIncrementText
-        doubleTapOverlayBinding?.forwardTV?.text = seekIncrementText
-    }
-
     private fun rewind() {
         player?.seekTo((player?.currentPosition ?: 0L) - PlayerHelper.seekIncrement)
 
@@ -322,7 +339,8 @@ internal class CustomExoPlayerView(
 
     private fun initializeGestureProgress() {
         gestureViewBinding.brightnessProgressBar.let { bar ->
-            bar.progress = brightnessHelper.getBrightnessWithScale(bar.max.toFloat(), saved = true).toInt()
+            bar.progress =
+                brightnessHelper.getBrightnessWithScale(bar.max.toFloat(), saved = true).toInt()
         }
         gestureViewBinding.volumeProgressBar.let { bar ->
             bar.progress = audioHelper.getVolumeWithScale(bar.max)
@@ -469,10 +487,12 @@ internal class CustomExoPlayerView(
     }
 
     override fun onDoubleTapLeftScreen() {
+        if (!PlayerHelper.doubleTapToSeek) return
         rewind()
     }
 
     override fun onDoubleTapRightScreen() {
+        if (!PlayerHelper.doubleTapToSeek) return
         forward()
     }
 
