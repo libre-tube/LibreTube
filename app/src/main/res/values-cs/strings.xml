@@ -402,4 +402,9 @@
     <string name="volume">Hlasitost</string>
     <string name="swipe_controls_summary">Pomocí gesta přejetí prstem upravit jas a hlasitost.</string>
     <string name="pop_up">Vyskakovací okno</string>
+    <string name="no_comments_available">Toto video nemá žádné komentáře.</string>
+    <string name="double_tap_seek">Dvojitým klepnutím vyhledáte</string>
+    <string name="captions_size">Velikost titulků</string>
+    <string name="comments_disabled">Komentáře jsou zakázány autorem videa.</string>
+    <string name="double_tap_seek_summary">Klepnutím dvakrát vlevo nebo vpravo přetočíte pozici přehrávače zpět nebo dopředu.</string>
 </resources>
