@@ -21,8 +21,8 @@ class CommentsSheet(
 ) : ExpandedBottomSheet() {
     private lateinit var binding: BottomSheetBinding
 
-    private var commentsAdapter: CommentsAdapter? = null
-    private var isLoading = true
+    private lateinit var commentsAdapter: CommentsAdapter
+    private var isLoading = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = BottomSheetBinding.inflate(layoutInflater)
@@ -42,38 +42,33 @@ class CommentsSheet(
                 }
             }
 
-        if (comments.isNotEmpty()) {
-            setCommentsAdapter(comments)
-        } else {
-            fetchComments()
-        }
-    }
-
-    private fun setCommentsAdapter(comments: MutableList<Comment>) {
         commentsAdapter = CommentsAdapter(videoId, comments) {
             dialog?.dismiss()
         }
         binding.optionsRecycler.adapter = commentsAdapter
-        isLoading = false
+
+        if (comments.isEmpty()) fetchComments()
     }
 
     private fun fetchComments() {
         lifecycleScope.launchWhenCreated {
+            isLoading = true
             val response = try {
                 RetrofitInstance.api.getComments(videoId)
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
-            setCommentsAdapter(response.comments)
+            commentsAdapter.updateItems(response.comments)
             nextPage = response.nextpage
             onMoreComments.invoke(response.comments, response.nextpage)
+            isLoading = false
         }
     }
 
     private fun fetchNextComments() {
+        if (isLoading || nextPage == null) return
         lifecycleScope.launchWhenCreated {
-            if (isLoading || nextPage == null) return@launchWhenCreated
             isLoading = true
             val response = try {
                 RetrofitInstance.api.getCommentsNextPage(videoId, nextPage!!)
@@ -82,7 +77,7 @@ class CommentsSheet(
                 return@launchWhenCreated
             }
             nextPage = response.nextpage
-            commentsAdapter?.updateItems(response.comments)
+            commentsAdapter.updateItems(response.comments)
             onMoreComments.invoke(response.comments, response.nextpage)
             isLoading = false
         }
