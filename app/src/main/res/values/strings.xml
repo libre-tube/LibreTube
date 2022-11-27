@@ -396,6 +396,8 @@
     <string name="swipe_controls_summary">Use swipe gesture to adjust the brightness and volume.</string>
     <string name="defaults">Defaults</string>
     <string name="pop_up">Pop-Up</string>
+    <string name="comments_disabled">Comments are disabled by the author.</string>
+    <string name="no_comments_available">This video has no comments available.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
