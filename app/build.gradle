@@ -35,7 +35,6 @@ android {
         if (variant.name == 'debug') {
             variant.outputs.each { output ->
                 output.versionCodeOverride = getUnixTime()
-                output.versionNameOverride = getUnixTime()
             }
         }
     }
