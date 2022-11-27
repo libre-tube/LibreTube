@@ -124,7 +124,7 @@ class DownloadDialog(
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
         binding.download.setOnClickListener {
-            if (binding.fileName.text.toString().length < 1) {
+            if (binding.fileName.text.toString().isEmpty()) {
                 Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
