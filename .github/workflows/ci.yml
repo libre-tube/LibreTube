@@ -73,7 +73,7 @@ jobs:
           echo "GH_REPO = '${{ github.repository }}'" > tgconfig.py
           git clone https://github.com/LibreTubeAlpha/Archive archive
           rm -rf archive/*.apk
-          mv app/build/outputs/apk/debug/*-signed.apk archive/
+          mv app/build/outputs/apk/debug/*.apk archive/
           cd archive
           python ../uploader.py
       
