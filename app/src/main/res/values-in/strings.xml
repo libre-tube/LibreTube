@@ -402,4 +402,6 @@
     <string name="defaults">Bawaan</string>
     <string name="brightness">Kecerahan</string>
     <string name="pop_up">Hamparan</string>
+    <string name="no_comments_available">Video ini tidak ada komentar yang tersedia.</string>
+    <string name="comments_disabled">Komentar dinonaktifkan oleh pengunggah.</string>
 </resources>
