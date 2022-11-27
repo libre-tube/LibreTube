@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
@@ -144,6 +145,15 @@ class SubscriptionsFragment : BaseFragment() {
             4 -> feed.sortedBy { it.uploaderName }
             5 -> feed.sortedBy { it.uploaderName }.reversed()
             else -> feed
+        }.toMutableList()
+
+        // add an "all caught up item"
+        if (sortOrder == 0) {
+            val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
+            val caughtUpIndex = feed.indexOfFirst { (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime }
+            if (caughtUpIndex > 0) {
+                sortedFeed.add(caughtUpIndex, StreamItem(type = "caught"))
+            }
         }
 
         binding.subChannelsContainer.visibility = View.GONE
@@ -158,6 +168,8 @@ class SubscriptionsFragment : BaseFragment() {
             showAllAtOnce = false
         )
         binding.subFeed.adapter = subscriptionAdapter
+
+        PreferenceHelper.updateLastFeedWatchedTime()
     }
 
     private fun showSubscriptions() {

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class StreamItem(
     var url: String? = null,
+    val type: String? = null,
     var title: String? = null,
     var thumbnail: String? = null,
     var uploaderName: String? = null,
@@ -15,5 +16,6 @@ data class StreamItem(
     var views: Long? = null,
     var uploaderVerified: Boolean? = null,
     var uploaded: Long? = null,
-    var shortDescription: String? = null
+    var shortDescription: String? = null,
+    val isShort: Boolean = false
 )

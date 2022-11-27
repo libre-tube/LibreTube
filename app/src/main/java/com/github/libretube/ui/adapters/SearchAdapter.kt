@@ -71,10 +71,10 @@ class SearchAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when {
-            searchItems[position].url!!.startsWith("/watch", false) -> 0
-            searchItems[position].url!!.startsWith("/channel", false) -> 1
-            searchItems[position].url!!.startsWith("/playlist", false) -> 2
+        return when (searchItems[position].type) {
+            "stream" -> 0
+            "channel" -> 1
+            "playlist" -> 2
             else -> 3
         }
     }

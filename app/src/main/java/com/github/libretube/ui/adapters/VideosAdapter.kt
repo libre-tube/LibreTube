@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.databinding.AllCaughtUpRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
@@ -44,6 +45,10 @@ class VideosAdapter(
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (streamItems[position].type == "caught") CAUGHT_UP_TYPE else NORMAL_TYPE
+    }
+
     fun updateItems() {
         val oldSize = index
         index += 10
@@ -59,6 +64,7 @@ class VideosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when {
+            viewType == CAUGHT_UP_TYPE -> VideosViewHolder(AllCaughtUpRowBinding.inflate(layoutInflater, parent, false))
             forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED, ForceMode.HOME) -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
             forceMode == ForceMode.CHANNEL -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
             PreferenceHelper.getBoolean(
@@ -74,7 +80,7 @@ class VideosAdapter(
         val video = streamItems[position]
 
         // hide the item if there was an extractor error
-        if (video.title == null) {
+        if (video.title == null && video.type != "caught") {
             holder.itemView.visibility = View.GONE
             holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
             return
@@ -191,5 +197,8 @@ class VideosAdapter(
                 )
             }
         }
+
+        private const val NORMAL_TYPE = 0
+        private const val CAUGHT_UP_TYPE = 1
     }
 }

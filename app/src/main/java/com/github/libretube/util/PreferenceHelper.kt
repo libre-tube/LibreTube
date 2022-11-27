@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.github.libretube.constants.PreferenceKeys
+import java.time.Instant
 
 object PreferenceHelper {
     /**
@@ -45,6 +46,10 @@ object PreferenceHelper {
         editor.putFloat(key, value).commit()
     }
 
+    fun putLong(key: String, value: Long) {
+        editor.putLong(key, value).commit()
+    }
+
     fun getString(key: String?, defValue: String): String {
         return settings.getString(key, defValue) ?: defValue
     }
@@ -55,6 +60,10 @@ object PreferenceHelper {
 
     fun getInt(key: String?, defValue: Int): Int {
         return settings.getInt(key, defValue)
+    }
+
+    fun getLong(key: String?, defValue: Long): Long {
+        return settings.getLong(key, defValue)
     }
 
     fun getFloat(key: String?, defValue: Float): Float {
@@ -87,6 +96,14 @@ object PreferenceHelper {
 
     fun getLastSeenVideoId(): String {
         return getString(PreferenceKeys.LAST_STREAM_VIDEO_ID, "")
+    }
+
+    fun updateLastFeedWatchedTime() {
+        putLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, Instant.now().epochSecond)
+    }
+
+    fun getLastCheckedFeedTime(): Long {
+        return getLong(PreferenceKeys.LAST_WATCHED_FEED_TIME, 0)
     }
 
     fun saveErrorLog(log: String) {
