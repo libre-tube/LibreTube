@@ -401,8 +401,12 @@
     <string name="swipe_controls">Sterowanie gestami</string>
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
     <string name="defaults">Domyślne</string>
-    <string name="pop_up">Dymek</string>
+    <string name="pop_up">Obraz w obrazie</string>
     <string name="no_comments_available">Nie skomentowano jeszcze tego materiału.</string>
     <string name="comments_disabled">Komentarze zostały wyłączone przez twórcę.</string>
     <string name="captions_size">Rozmiar napisów</string>
+    <string name="double_tap_seek">Gest przewijania</string>
+    <string name="all_caught_up">To już jest koniec</string>
+    <string name="double_tap_seek_summary">Stuknij dwukrotnie po lewej lub prawej, aby przewinąć materiał do tyłu lub do przodu.</string>
+    <string name="all_caught_up_summary">Obejrzono wszystkie nowe materiały</string>
 </resources>
