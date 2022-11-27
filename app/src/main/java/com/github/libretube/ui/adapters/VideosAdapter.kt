@@ -128,7 +128,7 @@ class VideosAdapter(
             videoInfo.text =
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                TextUtils.SEPARATOR + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
+                TextUtils.SEPARATOR + video.uploadedDate
 
             thumbnailDuration.text =
                 video.duration?.let { DateUtils.formatElapsedTime(it) }
