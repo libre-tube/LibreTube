@@ -407,4 +407,6 @@
     <string name="no_comments_available">Це відео не має коментарів.</string>
     <string name="comments_disabled">Коментарі вимкнені завантажувачем.</string>
     <string name="captions_size">Розмір підписів</string>
+    <string name="all_caught_up">Ви все переглянули</string>
+    <string name="all_caught_up_summary">Ви переглянули всі нові відео</string>
 </resources>
