@@ -377,9 +377,7 @@
     <string name="volume">Volume</string>
     <string name="auto">Automatico</string>
     <string name="swipe_controls_summary">Usa i gesti per regolare la luminosità e il volume.</string>
-    <string name="show_open_with">Apri con</string>
     <string name="defaults">Predefiniti</string>
-    <string name="show_open_with_summary">Mostra un pulsante nel player per aprire il video con un\'app di terze parti.</string>
     <string name="swipe_controls">Gesti</string>
     <string name="select_other_start_tab">Prima seleziona un\'altra scheda iniziale!</string>
     <string name="alternative_player_layout_summary">Mostra i video correlati su una riga al di sopra dei commenti, anziché al di sotto.</string>
