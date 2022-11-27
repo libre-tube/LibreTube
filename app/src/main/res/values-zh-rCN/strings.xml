@@ -402,6 +402,6 @@
     <string name="swipe_controls_summary">使用滑动手势调整亮度和音量。</string>
     <string name="swipe_controls">滑动操控</string>
     <string name="pop_up">弹窗</string>
-    <string name="comments_disabled">作者禁止评论。</string>
+    <string name="comments_disabled">上传者禁止评论。</string>
     <string name="no_comments_available">此视频无评论。</string>
 </resources>
