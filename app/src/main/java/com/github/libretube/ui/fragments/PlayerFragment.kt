@@ -71,6 +71,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.extensions.setFormattedHtml
 import com.github.libretube.ui.extensions.setInvisible
 import com.github.libretube.ui.extensions.setupSubscriptionButton
@@ -1361,6 +1362,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 setAutoEnterEnabled(true)
             }
         }
+        .setAspectRatio(exoPlayer.videoSize.width, exoPlayer.videoSize.height)
         .build()
 
     private fun shouldStartPiP(): Boolean {
