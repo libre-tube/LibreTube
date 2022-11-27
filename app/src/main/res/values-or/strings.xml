@@ -400,8 +400,6 @@
     <string name="auto">ସ୍ଵତଃ</string>
     <string name="swipe_controls">ସ୍ୱାଇପ୍ ନିୟନ୍ତ୍ରଣ</string>
     <string name="swipe_controls_summary">ଉଜ୍ଜ୍ୱଳତା ଏବଂ ଭଲ୍ୟୁମ୍ ସଜାଡିବା ପାଇଁ ସ୍ୱାଇପ୍ ଅଙ୍ଗଭଙ୍ଗୀ ବ୍ୟବହାର କରନ୍ତୁ ।</string>
-    <string name="show_open_with">ଏଥିରେ ଖୋଲନ୍ତୁ</string>
     <string name="defaults">ଡିଫଲ୍ଟ ଗୁଡ଼ିକ</string>
-    <string name="show_open_with_summary">ଏକ ତୃତୀୟ-ପକ୍ଷ ଆପ୍ ସହିତ ଭିଡିଓ ଖୋଲିବାକୁ ପ୍ଲେୟାରରେ ଏକ ବଟନ୍ ଦେଖାନ୍ତୁ ।</string>
     <string name="pop_up">ପପ୍-ଅପ୍</string>
 </resources>
