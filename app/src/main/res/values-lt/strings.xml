@@ -402,4 +402,6 @@
     <string name="swipe_controls_summary">Braukimo gestu sureguliuokite ryškumą ir garsumą.</string>
     <string name="defaults">Numatyti</string>
     <string name="pop_up">Iššokantis langas</string>
+    <string name="no_comments_available">Šis vaizdo įrašas neturi prieinamų komentarų.</string>
+    <string name="comments_disabled">Įkėlėjas išjungė komentarus.</string>
 </resources>

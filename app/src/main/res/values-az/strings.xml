@@ -402,4 +402,6 @@
     <string name="swipe_controls">Sürüşdürmə nəzarətləri</string>
     <string name="defaults">Defolt</string>
     <string name="pop_up">Ani pəncərə</string>
+    <string name="no_comments_available">Bu videoda şərhlər əlçatan deyil.</string>
+    <string name="comments_disabled">Şərhlər yükləyici tərəfindən deaktiv edilib.</string>
 </resources>

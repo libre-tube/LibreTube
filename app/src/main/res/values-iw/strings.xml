@@ -402,4 +402,6 @@
     <string name="defaults">ברירות מחדל</string>
     <string name="pop_up">צף</string>
     <string name="swipe_controls_summary">להשתמש במחוות החלקה כדי לכוון את הבהירות ואת עצמת השמע.</string>
+    <string name="no_comments_available">התגובות לא זמינות לסרטון הזה.</string>
+    <string name="comments_disabled">הערות הושבתו על ידי מעלה הסרטון.</string>
 </resources>
