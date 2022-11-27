@@ -729,7 +729,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
         exoPlayerView.subtitleView?.apply {
             setApplyEmbeddedFontSizes(false)
-            setFixedTextSize(TEXT_SIZE_TYPE_ABSOLUTE, 18F)
+            setFixedTextSize(TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
             if (!PlayerHelper.useSystemCaptionStyle) return
             setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             setStyle(captionStyle)
