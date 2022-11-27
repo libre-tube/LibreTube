@@ -406,4 +406,7 @@
     <string name="comments_disabled">Los comentarios están desactivados por el creador del contenido.</string>
     <string name="captions_size">Tamaño de los subtítulos</string>
     <string name="all_caught_up">Estás al día</string>
+    <string name="double_tap_seek_summary">Toque dos veces a la izquierda o a la derecha para rebobinar o avanzar la posición del reproductor.</string>
+    <string name="double_tap_seek">Toca dos veces para buscar</string>
+    <string name="all_caught_up_summary">Has visto todos los vídeos nuevos</string>
 </resources>
