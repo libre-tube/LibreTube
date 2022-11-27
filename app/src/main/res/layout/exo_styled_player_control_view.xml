@@ -68,6 +68,14 @@
                 android:layoutDirection="ltr">
 
                 <ImageButton
+                    android:id="@+id/sb_toggle"
+                    style="@style/PlayerControlTop"
+                    android:layout_marginEnd="2dp"
+                    android:src="@drawable/ic_sb_enabled"
+                    android:visibility="gone"
+                    app:tint="@android:color/white" />
+
+                <ImageButton
                     android:id="@+id/queue_toggle"
                     style="@style/PlayerControlTop"
                     android:layout_marginEnd="2dp"

@@ -143,7 +143,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
-    private lateinit var segmentData: SegmentData
+
+    /**
+     * Chapters and comments
+     */
     private lateinit var chapters: List<ChapterSegment>
     private val comments: MutableList<Comment> = mutableListOf()
     private var commentsNextPage: String? = null
@@ -158,6 +161,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
+
+    /**
+     * SponsorBlock
+     */
+    private lateinit var segmentData: SegmentData
+    private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -354,6 +363,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
         }
 
+        val updateSbImageResource = {
+            playerBinding.sbToggle.setImageResource(
+                if (sponsorBlockEnabled) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
+            )
+        }
+        updateSbImageResource()
+        playerBinding.sbToggle.setOnClickListener {
+            sponsorBlockEnabled = !sponsorBlockEnabled
+            updateSbImageResource()
+        }
+
         // share button
         binding.relPlayerShare.setOnClickListener {
             if (!this::streams.isInitialized) return@setOnClickListener
@@ -517,6 +537,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
 
+        if (!sponsorBlockEnabled) return
+
         if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) return
 
         val currentPosition = exoPlayer.currentPosition
@@ -535,12 +557,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
 
                 if (PlayerHelper.sponsorBlockNotifications) {
-                    Toast
-                        .makeText(
-                            context,
-                            R.string.segment_skipped,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
                 }
 
                 // skip the segment automatically
@@ -553,7 +570,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun playVideo() {
+        // reset the player view
         playerBinding.exoProgress.clearSegments()
+        playerBinding.sbToggle.visibility = View.GONE
 
         lifecycleScope.launchWhenCreated {
             streams = try {
@@ -641,6 +660,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         ObjectMapper().writeValueAsString(categories)
                     )
                 playerBinding.exoProgress.setSegments(segmentData.segments)
+                runOnUiThread {
+                    playerBinding.sbToggle.visibility = View.VISIBLE
+                }
             }
         }
     }
