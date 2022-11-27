@@ -247,6 +247,8 @@ internal class CustomExoPlayerView(
         binding.exoCenterControls.visibility = visibility
         binding.exoBottomBar.visibility = visibility
         binding.closeImageButton.visibility = visibility
+        binding.exoTitle.visibility = visibility
+        binding.exoPlayPause.visibility = visibility
 
         // disable tap and swipe gesture if the player is locked
         playerGestureController.isEnabled = isLocked
