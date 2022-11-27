@@ -278,7 +278,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.playerMotionLayout.transitionToStart()
         }
 
-        if (usePiP()) (activity as MainActivity).setPictureInPictureParams(getPipParams())
+        if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
 
         if (SDK_INT < Build.VERSION_CODES.O) {
             binding.relPlayerPip.visibility = View.GONE
@@ -824,6 +824,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         // media actually playing
                         transitioning = false
                         binding.playImageView.setImageResource(R.drawable.ic_pause)
+                        // update the PiP params to use the correct aspect ratio
+                        if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
                     }
                     Player.STATE_ENDED -> {
                         // video has finished
@@ -1361,8 +1363,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             if (SDK_INT >= Build.VERSION_CODES.S) {
                 setAutoEnterEnabled(true)
             }
+            if (exoPlayer.isPlaying) {
+                setAspectRatio(exoPlayer.videoSize.width, exoPlayer.videoSize.height)
+            }
         }
-        .setAspectRatio(exoPlayer.videoSize.width, exoPlayer.videoSize.height)
         .build()
 
     private fun shouldStartPiP(): Boolean {
