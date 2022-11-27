@@ -63,6 +63,7 @@ class CommentsSheet(
                 Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
+            binding.progress.visibility = View.GONE
             if (response.disabled == true) {
                 withContext(Dispatchers.Main) {
                     binding.errorTV.visibility = View.VISIBLE
@@ -76,7 +77,6 @@ class CommentsSheet(
                 }
                 return@launchWhenCreated
             }
-            binding.progress.visibility = View.GONE
             commentsAdapter.updateItems(response.comments)
             nextPage = response.nextpage
             onMoreComments.invoke(response.comments, response.nextpage)
