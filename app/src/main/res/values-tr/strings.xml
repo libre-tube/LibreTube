@@ -401,4 +401,11 @@
     <string name="brightness">Parlaklık</string>
     <string name="swipe_controls_summary">Parlaklığı ve sesi ayarlamak için kaydırma hareketini kullan.</string>
     <string name="defaults">Varsayılanlar</string>
+    <string name="pop_up">Açılır pencere</string>
+    <string name="comments_disabled">Yorumlar yükleyici tarafından devre dışı bırakıldı.</string>
+    <string name="no_comments_available">Bu videoda yorum yok.</string>
+    <string name="all_caught_up_summary">Tüm yeni videoları gördünüz</string>
+    <string name="captions_size">Altyazı boyutu</string>
+    <string name="double_tap_seek">Aramak için iki kez dokun</string>
+    <string name="double_tap_seek_summary">Oynatıcı konumunu ileri veya geri sarmak için sola veya sağa iki kez dokun.</string>
 </resources>
