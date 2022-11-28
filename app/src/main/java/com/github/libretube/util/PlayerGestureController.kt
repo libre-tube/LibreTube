@@ -18,15 +18,18 @@ import kotlin.math.abs
 class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :
     View.OnTouchListener {
 
-    // width and height should be obtained each time using getter to adopt layout size changes.
+    // width and height should be obtained each time using getter to adopt layout
+    // size changes.
     private val width get() = Resources.getSystem().displayMetrics.widthPixels
     private val height get() = Resources.getSystem().displayMetrics.heightPixels
     private val elapsedTime get() = SystemClock.elapsedRealtime()
-    private val playerViewModel: PlayerViewModel by activity.viewModels()
 
+    private val playerViewModel: PlayerViewModel by activity.viewModels()
     private val handler: Handler = Handler(Looper.getMainLooper())
+
     private val gestureDetector: GestureDetector
     private val scaleGestureDetector: ScaleGestureDetector
+
     private var isFullscreen = false
     private var isMoving = false
     var isEnabled = true
@@ -54,7 +57,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             gestureDetector.onTouchEvent(event)
         } catch (_: Exception) { }
 
-        // If video is playing in full-screen then allow `onScroll` to consume event and return true.
+        // If video is playing in full-screen mode, then allow `onScroll` to consume
+        // event and return true.
         return isFullscreen
     }
 

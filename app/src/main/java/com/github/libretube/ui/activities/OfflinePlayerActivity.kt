@@ -17,6 +17,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.PlayerHelper
@@ -182,6 +183,7 @@ class OfflinePlayerActivity : BaseActivity() {
         enterPictureInPictureMode(
             PictureInPictureParams.Builder()
                 .setActions(emptyList())
+                .setAspectRatio(player.videoSize.width, player.videoSize.height)
                 .build()
         )
 
