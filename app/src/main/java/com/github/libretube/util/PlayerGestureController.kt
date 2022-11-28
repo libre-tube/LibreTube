@@ -1,8 +1,6 @@
 package com.github.libretube.util
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Handler
 import android.os.Looper
@@ -11,27 +9,36 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import androidx.activity.viewModels
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
+import com.github.libretube.ui.models.PlayerViewModel
 import kotlin.math.abs
 
-class PlayerGestureController(context: Context, private val listener: PlayerGestureOptions) :
+class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :
     View.OnTouchListener {
 
     // width and height should be obtained each time using getter to adopt layout size changes.
     private val width get() = Resources.getSystem().displayMetrics.widthPixels
     private val height get() = Resources.getSystem().displayMetrics.heightPixels
-    private val orientation get() = Resources.getSystem().configuration.orientation
     private val elapsedTime get() = SystemClock.elapsedRealtime()
+    private val playerViewModel: PlayerViewModel by activity.viewModels()
 
     private val handler: Handler = Handler(Looper.getMainLooper())
     private val gestureDetector: GestureDetector
     private val scaleGestureDetector: ScaleGestureDetector
+    private var isFullscreen = false
     private var isMoving = false
     var isEnabled = true
 
     init {
-        gestureDetector = GestureDetector(context, GestureListener(), handler)
-        scaleGestureDetector = ScaleGestureDetector(context, ScaleGestureListener(), handler)
+        gestureDetector = GestureDetector(activity, GestureListener(), handler)
+        scaleGestureDetector = ScaleGestureDetector(activity, ScaleGestureListener(), handler)
+
+        playerViewModel.isFullscreen.observe(activity) {
+            isFullscreen = it
+            listener.onFullscreenChange(it)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -47,8 +54,8 @@ class PlayerGestureController(context: Context, private val listener: PlayerGest
             gestureDetector.onTouchEvent(event)
         } catch (_: Exception) { }
 
-        // If orientation is landscape then allow `onScroll` to consume event and return true.
-        return orientation == Configuration.ORIENTATION_LANDSCAPE
+        // If video is playing in full-screen then allow `onScroll` to consume event and return true.
+        return isFullscreen
     }
 
     private inner class ScaleGestureListener : ScaleGestureDetector.OnScaleGestureListener {

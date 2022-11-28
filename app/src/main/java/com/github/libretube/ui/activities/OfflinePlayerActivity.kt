@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -16,6 +17,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.ui.base.BaseActivity
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.PlayerHelper
 import com.google.android.exoplayer2.ExoPlayer
@@ -32,6 +34,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var player: ExoPlayer
     private lateinit var playerView: StyledPlayerView
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
+    private val playerViewModel: PlayerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         hideSystemBars()
@@ -152,6 +155,16 @@ class OfflinePlayerActivity : BaseActivity() {
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+    }
+
+    override fun onResume() {
+        playerViewModel.isFullscreen.value = true
+        super.onResume()
+    }
+
+    override fun onPause() {
+        playerViewModel.isFullscreen.value = false
+        super.onPause()
     }
 
     override fun onDestroy() {

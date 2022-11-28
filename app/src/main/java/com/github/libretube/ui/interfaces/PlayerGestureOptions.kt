@@ -19,4 +19,6 @@ interface PlayerGestureOptions {
     fun onZoom()
 
     fun onMinimize()
+
+    fun onFullscreenChange(isFullscreen: Boolean)
 }
