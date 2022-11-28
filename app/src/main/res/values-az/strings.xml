@@ -58,7 +58,7 @@
     <string name="segment_skipped">Seqment ötürüldü</string>
     <string name="sponsorblock_state">Açıq</string>
     <string name="category_sponsor_description">Ödənişli reklam, tövsiyələr və birbaşa reklamlar.Öz reklamı və ya səbəblərə, yaradıcılara, veb saytlara və məhsullara pulsuz orijinal elanlar üçün deyil.</string>
-    <string name="category_interaction">İnteraksiya xatırlatma(bəyən və abunə ol)</string>
+    <string name="category_interaction">İnteraksiya xatırlat(bəyən və abunə ol)</string>
     <string name="category_intro">Fasilə/Giriş Animasiyası</string>
     <string name="login_register">Daxil ol/qeydiyyatdan keç</string>
     <string name="please_login">Zəhmət olmasa, əvvəlcə tənzimləmələrdə daxil ol və ya qeydiyyatdan keç.</string>
@@ -179,7 +179,7 @@
     <string name="playerVideoFormat">Oynadıcı üçün video formatı</string>
     <string name="buffering_goal_summary">Buferlənəcək video saniyələrin maksimum miqdarı.</string>
     <string name="buffering_goal">Ön yükləmə</string>
-    <string name="player_autoplay">Avtomatik oynatma</string>
+    <string name="player_autoplay">Avtomatik oynat</string>
     <string name="no_video">Video yoxdur</string>
     <string name="downloading">Endirilir…</string>
     <string name="video">Video</string>
@@ -212,7 +212,7 @@
     <string name="audio_video">Səs və video</string>
     <string name="fullscreen_orientation">Tam ekran istiqaməti</string>
     <string name="aspect_ratio">Video görünüş nisbəti</string>
-    <string name="auto_rotation">Avtomatik fırlanma</string>
+    <string name="auto_rotation">Avtomatik fırlanmaq</string>
     <string name="portrait">Portret</string>
     <string name="landscape">Landşaft</string>
     <string name="community">İctimaiyyət</string>
@@ -404,4 +404,9 @@
     <string name="pop_up">Ani pəncərə</string>
     <string name="no_comments_available">Bu videoda şərhlər əlçatan deyil.</string>
     <string name="comments_disabled">Şərhlər yükləyici tərəfindən deaktiv edilib.</string>
+    <string name="double_tap_seek">Axtarmaq üçün iki dəfə kliklə</string>
+    <string name="double_tap_seek_summary">Oynadıcı mövqeyini geri və ya irəli çəkmək üçün sola yaxud sağa iki dəfə kliklə.</string>
+    <string name="all_caught_up">Hamınız tutulmusunuz</string>
+    <string name="all_caught_up_summary">Bütün yeni videolara baxmısınız</string>
+    <string name="captions_size">Altyazı ölçüsü</string>
 </resources>
