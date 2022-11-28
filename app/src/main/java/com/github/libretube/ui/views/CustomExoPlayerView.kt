@@ -85,11 +85,11 @@ internal class CustomExoPlayerView(
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
         this.gestureViewBinding = playerGestureControlsViewBinding
-        this.playerGestureController = PlayerGestureController(context, this)
+        this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
 
-        // Set touch listner for tap and swipe gestures.
+        // Set touch listener for tap and swipe gestures.
         setOnTouchListener(playerGestureController)
         initializeGestureProgress()
 
@@ -461,13 +461,6 @@ internal class CustomExoPlayerView(
             params.bottomMargin = offset.toInt()
             it.layoutParams = params
         }
-
-        if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
-            when (newConfig?.orientation) {
-                Configuration.ORIENTATION_LANDSCAPE -> brightnessHelper.restoreSavedBrightness()
-                else -> brightnessHelper.resetToSystemBrightness(false)
-            }
-        }
     }
 
     override fun onSingleTap() {
@@ -497,14 +490,14 @@ internal class CustomExoPlayerView(
     }
 
     override fun onSwipeLeftScreen(distanceY: Float) {
-        if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+        if (!PlayerHelper.swipeGestureEnabled) return
 
         if (isControllerFullyVisible) hideController()
         updateBrightness(distanceY)
     }
 
     override fun onSwipeRightScreen(distanceY: Float) {
-        if (!PlayerHelper.swipeGestureEnabled || resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) return
+        if (!PlayerHelper.swipeGestureEnabled) return
 
         if (isControllerFullyVisible) hideController()
         updateVolume(distanceY)
@@ -521,5 +514,15 @@ internal class CustomExoPlayerView(
 
     override fun onMinimize() {
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+    }
+
+    override fun onFullscreenChange(isFullscreen: Boolean) {
+        if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
+            if (isFullscreen) {
+                brightnessHelper.restoreSavedBrightness()
+            } else {
+                brightnessHelper.resetToSystemBrightness(false)
+            }
+        }
     }
 }
