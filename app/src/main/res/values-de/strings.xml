@@ -398,4 +398,15 @@
     <string name="volume">Lautstärke</string>
     <string name="not_enabled">Menüelement nicht aktiviert!</string>
     <string name="select_other_start_tab">Bitte wähle zuerst einen anderen Start-Tab!</string>
+    <string name="swipe_controls">Wischgesten-Steuerung</string>
+    <string name="defaults">Standardwerte</string>
+    <string name="pop_up">Pop-Up</string>
+    <string name="no_comments_available">Zu diesem Video gibt es keine Kommentare.</string>
+    <string name="comments_disabled">Kommentare sind durch den Uploader deaktiviert.</string>
+    <string name="all_caught_up_summary">Du hast alle neuen Videos gesehen</string>
+    <string name="swipe_controls_summary">Verwende eine Wischgeste, um Helligkeit und Lautstärke anzupassen.</string>
+    <string name="captions_size">Untertitelgröße</string>
+    <string name="double_tap_seek">Doppeltippen zum Suchen</string>
+    <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
+    <string name="double_tap_seek_summary">Tippen Sie zweimal links oder rechts, um die Position des Players zurück- oder vorzuspulen.</string>
 </resources>
