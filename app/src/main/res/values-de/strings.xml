@@ -393,4 +393,9 @@
     <string name="bookmark">Lesezeichen</string>
     <string name="clear_bookmarks">Lesezeichen löschen</string>
     <string name="bookmarks_empty">Noch keine Lesezeichen vorhanden!</string>
+    <string name="brightness">Helligkeit</string>
+    <string name="auto">Automatisch</string>
+    <string name="volume">Lautstärke</string>
+    <string name="not_enabled">Menüelement nicht aktiviert!</string>
+    <string name="select_other_start_tab">Bitte wähle zuerst einen anderen Start-Tab!</string>
 </resources>

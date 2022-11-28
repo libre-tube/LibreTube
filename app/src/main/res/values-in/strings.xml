@@ -404,4 +404,9 @@
     <string name="pop_up">Hamparan</string>
     <string name="no_comments_available">Video ini tidak ada komentar yang tersedia.</string>
     <string name="comments_disabled">Komentar dinonaktifkan oleh pengunggah.</string>
+    <string name="captions_size">Ukuran keterangan</string>
+    <string name="double_tap_seek">Ketuk dua kali untuk seek</string>
+    <string name="double_tap_seek_summary">Ketuk dua kali pada sisi kiri atau kanan untuk mundur atau maju posisi pemain.</string>
+    <string name="all_caught_up_summary">Anda telah melihat semua video baru</string>
+    <string name="all_caught_up">Anda telah melihat semuanya</string>
 </resources>
