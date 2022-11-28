@@ -21,8 +21,9 @@ class WatchHistoryAdapter(
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
     fun removeFromWatchHistory(position: Int) {
+        val history = watchHistory[position]
         query {
-            DatabaseHolder.Database.watchHistoryDao().delete(watchHistory[position])
+            DatabaseHolder.Database.watchHistoryDao().delete(history)
         }
         watchHistory.removeAt(position)
         notifyItemRemoved(position)
