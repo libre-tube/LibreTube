@@ -404,4 +404,9 @@
     <string name="pop_up">Iššokantis langas</string>
     <string name="no_comments_available">Šis vaizdo įrašas neturi prieinamų komentarų.</string>
     <string name="comments_disabled">Įkėlėjas išjungė komentarus.</string>
+    <string name="double_tap_seek">Dukart bakstelėti, kad prasukti</string>
+    <string name="all_caught_up">Jūs viską pasivijote</string>
+    <string name="all_caught_up_summary">Peržiūrėjote visus naujus vaizdo įrašus</string>
+    <string name="captions_size">Subtitrų dydis</string>
+    <string name="double_tap_seek_summary">Bakstelėkite du kartus kairėje arba dešinėje, kad prasuktumėte grotuvo padėtį atgal arba pirmyn.</string>
 </resources>

@@ -404,4 +404,9 @@
     <string name="swipe_controls_summary">להשתמש במחוות החלקה כדי לכוון את הבהירות ואת עצמת השמע.</string>
     <string name="no_comments_available">התגובות לא זמינות לסרטון הזה.</string>
     <string name="comments_disabled">הערות הושבתו על ידי מעלה הסרטון.</string>
+    <string name="double_tap_seek">נגיעה כפולה לדילוג</string>
+    <string name="all_caught_up">אין יותר הצעות</string>
+    <string name="captions_size">גודל כתוביות</string>
+    <string name="double_tap_seek_summary">נגיעה כפולה שמאלה או ימינה מחזירה אחורה מקדמת קדימה את מיקום הנגינה.</string>
+    <string name="all_caught_up_summary">ראית את כל הסרטונים החדשים</string>
 </resources>

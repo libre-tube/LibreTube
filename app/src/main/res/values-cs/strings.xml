@@ -407,4 +407,6 @@
     <string name="captions_size">Velikost titulků</string>
     <string name="comments_disabled">Komentáře jsou zakázány autorem videa.</string>
     <string name="double_tap_seek_summary">Klepnutím dvakrát vlevo nebo vpravo přetočíte pozici přehrávače zpět nebo dopředu.</string>
+    <string name="all_caught_up">Už jste v obraze</string>
+    <string name="all_caught_up_summary">Viděli jste všechna nová videa</string>
 </resources>

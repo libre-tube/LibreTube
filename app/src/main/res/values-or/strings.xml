@@ -405,4 +405,8 @@
     <string name="no_comments_available">ଏହି ଭିଡିଓରେ କୌଣସି ମନ୍ତବ୍ୟ ଉପଲବ୍ଧ ନାହିଁ ।</string>
     <string name="comments_disabled">ମନ୍ତବ୍ୟଗୁଡିକ ଅପଲୋଡର୍ ଙ୍କ ଦ୍ୱାରା ଅକ୍ଷମ ହୋଇଛି ।</string>
     <string name="captions_size">କ୍ୟାପସନ୍ ର ଆକାର</string>
+    <string name="double_tap_seek">ଖୋଜିବାକୁ ଦୁଇଥର ଟ୍ୟାପ୍ କରନ୍ତୁ</string>
+    <string name="double_tap_seek_summary">ପ୍ଲେୟାର୍ ସ୍ଥିତିକୁ ରିଭାଇଣ୍ଡ୍ କିମ୍ବା ଅଗ୍ରଗାମୀ କରିବାକୁ ବାମ କିମ୍ବା ଡାହାଣରେ ଦୁଇଥର ଟ୍ୟାପ୍ କରନ୍ତୁ ।</string>
+    <string name="all_caught_up_summary">ଆପଣ ସମସ୍ତ ନୂତନ ଭିଡିଓ ଦେଖିସାରିଛନ୍ତି</string>
+    <string name="all_caught_up">ସମସ୍ତ ନୂତନ ପୋଷ୍ଟ ପାଇସାରିଛ</string>
 </resources>
