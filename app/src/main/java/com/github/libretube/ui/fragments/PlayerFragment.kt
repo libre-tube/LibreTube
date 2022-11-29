@@ -194,9 +194,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
 
-        // Stop [BackgroundMode] service if it is running.
-        BackgroundHelper.stopBackgroundPlay(requireContext())
-
         // clear the playing queue
         PlayingQueue.resetToDefaults()
 
@@ -317,8 +314,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.playImageView.setOnClickListener {
-            // Stop [BackgroundMode] service if it is running.
-            BackgroundHelper.stopBackgroundPlay(requireContext())
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
                 binding.playImageView.setImageResource(R.drawable.ic_pause)
@@ -819,6 +814,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (isPlaying) {
+                    // Stop [BackgroundMode] service if it is running.
+                    BackgroundHelper.stopBackgroundPlay(requireContext())
+                }
+
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                     Handler(Looper.getMainLooper()).postDelayed(
                         this@PlayerFragment::checkForSegments,
