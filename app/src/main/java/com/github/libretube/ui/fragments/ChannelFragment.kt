@@ -216,6 +216,12 @@ class ChannelFragment : BaseFragment() {
                 }
             }
         }
+
+        // Load selected chip content if it's not videos tab.
+        possibleTabs.firstOrNull { binding.tabChips.checkedChipId == it.chipId }?.let {
+            val tab = tabs.first { tab -> tab.name == it.identifierName }
+            loadTab(tab)
+        }
     }
 
     private fun loadTab(tab: ChannelTab) {
