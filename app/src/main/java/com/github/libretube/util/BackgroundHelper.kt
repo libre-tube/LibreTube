@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -10,6 +11,11 @@ import com.github.libretube.services.BackgroundMode
  * Helper for starting a new Instance of the [BackgroundMode]
  */
 object BackgroundHelper {
+
+    /**
+     * Start the foreground service [BackgroundMode] to play in background. [position]
+     * is seek to position specified in milliseconds in the current [videoId].
+     */
     fun playOnBackground(
         context: Context,
         videoId: String,
@@ -28,5 +34,30 @@ object BackgroundHelper {
         } else {
             context.startService(intent)
         }
+    }
+
+    /**
+     * Stop the [BackgroundMode] service if it is running.
+     */
+    fun stopBackgroundPlay(context: Context) {
+        if (!isServiceRunning(context, BackgroundMode::class.java)) return
+
+        // Intent to stop background mode service
+        val intent = Intent(context, BackgroundMode::class.java)
+        context.stopService(intent)
+    }
+
+    /**
+     * Check if the given service as [serviceClass] is currently running.
+     */
+    fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
+        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        @Suppress("DEPRECATION")
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
 }

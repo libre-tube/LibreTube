@@ -1,7 +1,6 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
 import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -195,6 +194,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
 
+        // Stop [BackgroundMode] service if it is running.
+        BackgroundHelper.stopBackgroundPlay(requireContext())
+
         // clear the playing queue
         PlayingQueue.resetToDefaults()
 
@@ -315,6 +317,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.playImageView.setOnClickListener {
+            // Stop [BackgroundMode] service if it is running.
+            BackgroundHelper.stopBackgroundPlay(requireContext())
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
                 binding.playImageView.setImageResource(R.drawable.ic_pause)
@@ -1398,20 +1402,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return false
         }
 
-        val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
+        val backgroundModeRunning = BackgroundHelper.isServiceRunning(requireContext(), BackgroundMode::class.java)
 
         return exoPlayer.isPlaying && !backgroundModeRunning
-    }
-
-    private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
-        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        @Suppress("DEPRECATION")
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
