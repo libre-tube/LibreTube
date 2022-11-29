@@ -408,5 +408,5 @@
     <string name="double_tap_seek">Gest przewijania</string>
     <string name="all_caught_up">To już jest koniec</string>
     <string name="double_tap_seek_summary">Stuknij dwukrotnie po lewej lub prawej, aby przewinąć materiał do tyłu lub do przodu.</string>
-    <string name="all_caught_up_summary">Obejrzono wszystkie nowe materiały</string>
+    <string name="all_caught_up_summary">Obejrzano wszystkie nowe materiały</string>
 </resources>
