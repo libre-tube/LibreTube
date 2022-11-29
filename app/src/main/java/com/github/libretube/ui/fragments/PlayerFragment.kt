@@ -1411,6 +1411,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onConfigurationChanged(newConfig)
 
         if (!PlayerHelper.autoRotationEnabled) return
+
+        // If in PiP mode, orientation is given as landscape.
+        if (SDK_INT >= Build.VERSION_CODES.N && activity?.isInPictureInPictureMode == true) return
+
         when (newConfig.orientation) {
             // go to fullscreen mode
             Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
