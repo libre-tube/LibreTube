@@ -1,7 +1,6 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
 import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -304,6 +303,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
         }
         playerBinding.closeImageButton.setOnClickListener {
             viewModel.isFullscreen.value = false
@@ -312,6 +312,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
         binding.playImageView.setOnClickListener {
@@ -815,6 +816,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (isPlaying) {
+                    // Stop [BackgroundMode] service if it is running.
+                    BackgroundHelper.stopBackgroundPlay(requireContext())
+                }
+
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                     Handler(Looper.getMainLooper()).postDelayed(
                         this@PlayerFragment::checkForSegments,
@@ -1398,26 +1404,19 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return false
         }
 
-        val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
+        val backgroundModeRunning = BackgroundHelper.isServiceRunning(requireContext(), BackgroundMode::class.java)
 
         return exoPlayer.isPlaying && !backgroundModeRunning
-    }
-
-    private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
-        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        @Suppress("DEPRECATION")
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         if (!PlayerHelper.autoRotationEnabled) return
+
+        // If in PiP mode, orientation is given as landscape.
+        if (SDK_INT >= Build.VERSION_CODES.N && activity?.isInPictureInPictureMode == true) return
+
         when (newConfig.orientation) {
             // go to fullscreen mode
             Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()

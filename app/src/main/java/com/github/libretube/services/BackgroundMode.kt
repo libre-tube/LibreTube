@@ -354,6 +354,14 @@ class BackgroundMode : Service() {
     }
 
     /**
+     * Stop the service when app is removed from the task manager.
+     */
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        onDestroy()
+    }
+
+    /**
      * destroy the [BackgroundMode] foreground service
      */
     override fun onDestroy() {
