@@ -303,6 +303,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
         }
         playerBinding.closeImageButton.setOnClickListener {
             viewModel.isFullscreen.value = false
@@ -311,6 +312,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
         binding.playImageView.setOnClickListener {
