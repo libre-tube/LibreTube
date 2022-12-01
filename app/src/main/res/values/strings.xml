@@ -406,7 +406,8 @@
     <string name="import_playlists">Import playlists</string>
     <string name="export_playlists">Export playlists</string>
     <string name="app_backup">App Backup</string>
-    <string name="backup_restore_summary">Import &amp; export subscriptions, playlists, ...</string>
+    <string name="backup_restore_summary">Import &amp; export subscriptions, playlists, …</string>
+    <string name="exportsuccess">Successfully exported!</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

@@ -7,7 +7,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.preference.Preference
 import com.github.libretube.R
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
@@ -29,17 +28,33 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private lateinit var getSubscriptionsFile: ActivityResultLauncher<String>
     private lateinit var createSubscriptionsFile: ActivityResultLauncher<String>
 
+    /**
+     * result listeners for importing and exporting playlists
+     */
+    private lateinit var getPlaylistsFile: ActivityResultLauncher<String>
+    private lateinit var createPlaylistsFile: ActivityResultLauncher<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         getSubscriptionsFile =
             registerForActivityResult(
                 ActivityResultContracts.GetContent()
-            ) { uri: Uri? ->
+            ) { uri ->
                 ImportHelper(requireActivity()).importSubscriptions(uri)
             }
         createSubscriptionsFile = registerForActivityResult(
             CreateDocument("application/json")
-        ) { uri: Uri? ->
+        ) { uri ->
             ImportHelper(requireActivity()).exportSubscriptions(uri)
+        }
+
+        getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            ImportHelper(requireActivity()).importPlaylists(uri)
+        }
+
+        createPlaylistsFile = registerForActivityResult(
+            CreateDocument("application/json")
+        ) { uri ->
+            ImportHelper(requireActivity()).exportPlaylists(uri)
         }
 
         getBackupFile =
@@ -61,16 +76,27 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.import_export_settings, rootKey)
 
-        val importSubscriptions = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
+        val importSubscriptions = findPreference<Preference>("import_subscriptions")
         importSubscriptions?.setOnPreferenceClickListener {
-            // check StorageAccess
             getSubscriptionsFile.launch("*/*")
             true
         }
 
-        val exportSubscriptions = findPreference<Preference>(PreferenceKeys.EXPORT_SUBS)
+        val exportSubscriptions = findPreference<Preference>("export_subscriptions")
         exportSubscriptions?.setOnPreferenceClickListener {
             createSubscriptionsFile.launch("subscriptions.json")
+            true
+        }
+
+        val importPlaylists = findPreference<Preference>("import_playlists")
+        importPlaylists?.setOnPreferenceClickListener {
+            getPlaylistsFile.launch("*/*")
+            true
+        }
+
+        val exportPlaylists = findPreference<Preference>("export_playlists")
+        exportPlaylists?.setOnPreferenceClickListener {
+            createPlaylistsFile.launch("subscriptions.json")
             true
         }
 

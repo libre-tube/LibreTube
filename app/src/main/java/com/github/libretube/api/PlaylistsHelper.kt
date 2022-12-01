@@ -14,6 +14,7 @@ import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toLocalPlaylistItem
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
 import retrofit2.HttpException
@@ -173,6 +174,14 @@ object PlaylistsHelper {
                 index = index
             )
         )
+    }
+
+    suspend fun importPlaylists(playlist: List<ImportPlaylist>) {
+
+    }
+
+    suspend fun exportPlaylists(): List<ImportPlaylist> {
+
     }
 
     fun getPrivateType(): PlaylistType {
