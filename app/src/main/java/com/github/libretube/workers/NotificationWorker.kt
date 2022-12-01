@@ -17,7 +17,6 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
 import com.github.libretube.util.PreferenceHelper
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.time.LocalTime
 
@@ -82,12 +81,9 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         var success = true
 
         runBlocking {
-            val task = async {
-                SubscriptionHelper.getFeed()
-            }
             // fetch the users feed
             val videoFeed = try {
-                task.await()
+                SubscriptionHelper.getFeed()
             } catch (e: Exception) {
                 success = false
                 return@runBlocking

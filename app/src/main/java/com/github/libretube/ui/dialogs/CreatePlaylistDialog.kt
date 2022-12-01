@@ -31,10 +31,9 @@ class CreatePlaylistDialog(
             val listName = binding.playlistName.text.toString()
             if (listName != "") {
                 lifecycleScope.launchWhenCreated {
-                    PlaylistsHelper.createPlaylist(listName, requireContext().applicationContext) {
-                        onSuccess.invoke()
-                        dismiss()
-                    }
+                    PlaylistsHelper.createPlaylist(listName, requireContext().applicationContext)
+                    onSuccess.invoke()
+                    dismiss()
                 }
             } else {
                 Toast.makeText(context, R.string.emptyPlaylistName, Toast.LENGTH_LONG).show()

@@ -1,12 +1,7 @@
 package com.github.libretube.ui.preferences
 
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -22,32 +17,9 @@ import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
-import com.github.libretube.util.ImportHelper
 import com.github.libretube.util.PreferenceHelper
 
 class InstanceSettings : BasePreferenceFragment() {
-
-    /**
-     * result listeners for importing and exporting subscriptions
-     */
-    private lateinit var getContent: ActivityResultLauncher<String>
-    private lateinit var createFile: ActivityResultLauncher<String>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        getContent =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) { uri: Uri? ->
-                ImportHelper(requireActivity()).importSubscriptions(uri)
-            }
-        createFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri: Uri? ->
-            ImportHelper(requireActivity()).exportSubscriptions(uri)
-        }
-
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
@@ -138,19 +110,6 @@ class InstanceSettings : BasePreferenceFragment() {
             newFragment.show(childFragmentManager, DeleteAccountDialog::class.java.name)
             true
         }
-
-        val importSubscriptions = findPreference<Preference>(PreferenceKeys.IMPORT_SUBS)
-        importSubscriptions?.setOnPreferenceClickListener {
-            // check StorageAccess
-            getContent.launch("*/*")
-            true
-        }
-
-        val exportSubscriptions = findPreference<Preference>(PreferenceKeys.EXPORT_SUBS)
-        exportSubscriptions?.setOnPreferenceClickListener {
-            createFile.launch("subscriptions.json")
-            true
-        }
     }
 
     private fun initCustomInstances(instancePref: ListPreference) {
@@ -200,11 +159,5 @@ class InstanceSettings : BasePreferenceFragment() {
     private fun logout() {
         PreferenceHelper.setToken("")
         Toast.makeText(context, getString(R.string.loggedout), Toast.LENGTH_SHORT).show()
-    }
-
-    private fun Fragment?.runOnUiThread(action: () -> Unit) {
-        this ?: return
-        if (!isAdded) return // Fragment not attached to an Activity
-        activity?.runOnUiThread(action)
     }
 }

@@ -123,7 +123,7 @@ class LibraryFragment : BaseFragment() {
 
                 val playlistsAdapter = PlaylistsAdapter(
                     playlists.toMutableList(),
-                    PlaylistsHelper.getPrivateType()
+                    PlaylistsHelper.getPlaylistType()
                 )
 
                 // listen for playlists to become deleted

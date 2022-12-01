@@ -1,6 +1,7 @@
 package com.github.libretube.ui.base
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -69,5 +70,11 @@ open class BasePreferenceFragment : PreferenceFragmentCompat() {
              */
             else -> super.onDisplayPreferenceDialog(preference)
         }
+    }
+
+    fun Fragment?.runOnUiThread(action: () -> Unit) {
+        this ?: return
+        if (!isAdded) return // Fragment not attached to an Activity
+        activity?.runOnUiThread(action)
     }
 }

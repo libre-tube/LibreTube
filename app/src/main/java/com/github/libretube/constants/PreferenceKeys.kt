@@ -49,8 +49,6 @@ object PreferenceKeys {
     const val CLEAR_CUSTOM_INSTANCES = "clearCustomInstances"
     const val LOGIN_REGISTER = "login_register"
     const val DELETE_ACCOUNT = "delete_account"
-    const val IMPORT_SUBS = "import_from_yt"
-    const val EXPORT_SUBS = "export_subs"
 
     /**
      * Player

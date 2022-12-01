@@ -99,7 +99,7 @@ class PlaylistFragment : BaseFragment() {
         binding.playlistScrollview.visibility = View.GONE
         lifecycleScope.launchWhenCreated {
             val response = try {
-                PlaylistsHelper.getPlaylist(playlistType, playlistId!!)
+                PlaylistsHelper.getPlaylist(playlistId!!)
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
