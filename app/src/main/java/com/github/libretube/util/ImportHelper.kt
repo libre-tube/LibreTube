@@ -117,7 +117,7 @@ class ImportHelper(
         playlistFile.playlists.orEmpty().forEach {
             CoroutineScope(Dispatchers.IO).launch {
                 playlistFile.playlists?.let {
-                    PlaylistsHelper.importPlaylists(it)
+                    PlaylistsHelper.importPlaylists(activity, it)
                 }
             }
         }

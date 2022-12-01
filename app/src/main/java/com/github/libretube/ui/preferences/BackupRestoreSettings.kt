@@ -96,7 +96,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val exportPlaylists = findPreference<Preference>("export_playlists")
         exportPlaylists?.setOnPreferenceClickListener {
-            createPlaylistsFile.launch("subscriptions.json")
+            createPlaylistsFile.launch("playlists.json")
             true
         }
 
