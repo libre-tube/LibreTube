@@ -409,4 +409,9 @@
     <string name="all_caught_up_summary">你看过了所有新视频</string>
     <string name="all_caught_up">没什么可看的了</string>
     <string name="captions_size">字幕尺寸</string>
+    <string name="import_playlists">导入播放列表</string>
+    <string name="export_playlists">导出播放列表</string>
+    <string name="app_backup">应用备份</string>
+    <string name="backup_restore_summary">导入和导出订阅、播放列表…</string>
+    <string name="exportsuccess">成功导出！</string>
 </resources>
