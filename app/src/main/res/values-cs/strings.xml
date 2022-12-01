@@ -409,4 +409,12 @@
     <string name="double_tap_seek_summary">Klepnutím dvakrát vlevo nebo vpravo přetočíte pozici přehrávače zpět nebo dopředu.</string>
     <string name="all_caught_up">Už jste v obraze</string>
     <string name="all_caught_up_summary">Viděli jste všechna nová videa</string>
+    <string name="app_backup">Záloha aplikace</string>
+    <string name="backup_restore_summary">Import a export odběrů, playlistů, …</string>
+    <string name="exportsuccess">Úspěšně exportováno!</string>
+    <string name="privacy_alert">Upozornění na soukromí</string>
+    <string name="username_email">Jako uživatelské jméno jste vložili e-mailovou adresu, což se nedoporučuje. Jste si jisti, že chcete pokračovat\?</string>
+    <string name="proceed">Pokračovat</string>
+    <string name="export_playlists">Exportovat playlisty</string>
+    <string name="import_playlists">Importovat playlisty</string>
 </resources>
