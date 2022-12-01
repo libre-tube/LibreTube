@@ -114,15 +114,13 @@ class ImportHelper(
 
         val playlistFile = ObjectMapper().readValue(uri.readText(), ImportPlaylistFile::class.java)
 
-        playlistFile.playlists.orEmpty().forEach {
-            CoroutineScope(Dispatchers.IO).launch {
-                playlistFile.playlists?.let {
-                    PlaylistsHelper.importPlaylists(activity, it)
-                }
+        CoroutineScope(Dispatchers.IO).launch {
+            playlistFile.playlists?.let {
+                PlaylistsHelper.importPlaylists(activity, it)
             }
         }
 
-        activity.toastFromMainThread(R.string.importsuccess)
+        activity.toastFromMainThread(R.string.success)
     }
 
     /**

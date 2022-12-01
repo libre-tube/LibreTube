@@ -185,6 +185,7 @@ object PlaylistsHelper {
 
     suspend fun importPlaylists(appContext: Context, playlists: List<ImportPlaylist>) {
         for (playlist in playlists) {
+            Log.e("playlist", playlist.toString())
             val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
             runBlocking {
                 val tasks = playlist.videos.map { videoId ->
@@ -210,7 +211,7 @@ object PlaylistsHelper {
                             type = "playlist",
                             visibility = "private",
                             videos = list.relatedStreams.orEmpty().map {
-                                YOUTUBE_FRONTEND_URL + it.url!!.toID()
+                                YOUTUBE_FRONTEND_URL + "/watch?v=" + it.url!!.toID()
                             }
                         )
                     )
