@@ -409,4 +409,12 @@
     <string name="all_caught_up_summary">Peržiūrėjote visus naujus vaizdo įrašus</string>
     <string name="captions_size">Subtitrų dydis</string>
     <string name="double_tap_seek_summary">Bakstelėkite du kartus kairėje arba dešinėje, kad prasuktumėte grotuvo padėtį atgal arba pirmyn.</string>
+    <string name="import_playlists">Importuoti grojaraščius</string>
+    <string name="export_playlists">Eksportuoti grojaraščius</string>
+    <string name="app_backup">Programėlės atsarginė kopija</string>
+    <string name="backup_restore_summary">Importuokite ir eksportuokite prenumeratas, grojaraščius, …</string>
+    <string name="exportsuccess">Sėkmingai eksportuota!</string>
+    <string name="proceed">Tęsti</string>
+    <string name="privacy_alert">Įspėjimas apie privatumą</string>
+    <string name="username_email">Kaip naudotojo vardą įrašėte el. pašto adresą, o tai nerekomenduojama. Ar tikrai norite tęsti\?</string>
 </resources>
