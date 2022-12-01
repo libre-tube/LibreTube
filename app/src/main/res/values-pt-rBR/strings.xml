@@ -400,4 +400,13 @@
     <string name="select_other_start_tab">Selecione outra aba inicial primeiro!</string>
     <string name="brightness">Brilho</string>
     <string name="volume">Volume</string>
+    <string name="defaults">Padrões</string>
+    <string name="pop_up">Pop-Up</string>
+    <string name="no_comments_available">Este vídeo não tem comentários disponíveis.</string>
+    <string name="comments_disabled">Os comentários são desativados pelo criador.</string>
+    <string name="captions_size">Tamanho das legendas</string>
+    <string name="double_tap_seek">Toque duas vezes para buscar</string>
+    <string name="all_caught_up">Você está atualizado</string>
+    <string name="all_caught_up_summary">Você viu todos os vídeos novos</string>
+    <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para retroceder ou avançar a posição do player.</string>
 </resources>

@@ -289,7 +289,7 @@
     <string name="repeat_mode_current">Actual</string>
     <string name="backup_restore">Copia de seguridad y restauración</string>
     <string name="backup">Copia de seguridad</string>
-    <string name="picture_in_picture">Reproductor flotante</string>
+    <string name="picture_in_picture">Reproductor emergente</string>
     <string name="break_reminder_time">Minutos antes de ser recordado</string>
     <string name="legacy_subscriptions">Vista de las suscripciones antiguas</string>
     <string name="device_info">Información del dispositivo</string>
