@@ -82,12 +82,9 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         var success = true
 
         runBlocking {
-            val task = async {
-                SubscriptionHelper.getFeed()
-            }
             // fetch the users feed
             val videoFeed = try {
-                task.await()
+                SubscriptionHelper.getFeed()
             } catch (e: Exception) {
                 success = false
                 return@runBlocking
