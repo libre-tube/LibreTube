@@ -408,6 +408,9 @@
     <string name="app_backup">App Backup</string>
     <string name="backup_restore_summary">Import &amp; export subscriptions, playlists, …</string>
     <string name="exportsuccess">Successfully exported!</string>
+    <string name="privacy_alert">Privacy alert</string>
+    <string name="username_email">You inserted an e-mail address as username which is not recommended. Are you sure you want to proceed?</string>
+    <string name="proceed">Proceed</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
