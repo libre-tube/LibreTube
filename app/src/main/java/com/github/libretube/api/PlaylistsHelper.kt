@@ -53,7 +53,7 @@ object PlaylistsHelper {
 
     suspend fun getPlaylist(playlistId: String): Playlist {
         // load locally stored playlists with the auth api
-        return when (getPlaylistType()) {
+        return when (getPrivatePlaylistType(playlistId)) {
             PlaylistType.PRIVATE -> RetrofitInstance.authApi.getPlaylist(playlistId)
             PlaylistType.PUBLIC -> RetrofitInstance.api.getPlaylist(playlistId)
             PlaylistType.LOCAL -> {
@@ -227,11 +227,11 @@ object PlaylistsHelper {
         return importLists
     }
 
-    fun getPlaylistType(): PlaylistType {
+    fun getPrivatePlaylistType(): PlaylistType {
         return if (loggedIn()) PlaylistType.PRIVATE else PlaylistType.LOCAL
     }
 
-    fun getPlaylistType(playlistId: String): PlaylistType {
+    fun getPrivatePlaylistType(playlistId: String): PlaylistType {
         if (playlistId.all { it.isDigit() }) return PlaylistType.LOCAL
         if (playlistId.matches(pipedPlaylistRegex)) return PlaylistType.PRIVATE
         return PlaylistType.PUBLIC
