@@ -819,6 +819,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 if (isPlaying) {
                     // Stop [BackgroundMode] service if it is running.
                     BackgroundHelper.stopBackgroundPlay(requireContext())
+                    // video is playing
+                    binding.playImageView.setImageResource(R.drawable.ic_pause)
+                } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
+                    // video has finished
+                    binding.playImageView.setImageResource(R.drawable.ic_restart)
+                } else {
+                    // player in any other state
+                    binding.playImageView.setImageResource(R.drawable.ic_play)
                 }
 
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
@@ -847,22 +855,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     playNextVideo()
                 }
 
-                when (playbackState) {
-                    Player.STATE_READY -> {
-                        // media actually playing
-                        transitioning = false
-                        binding.playImageView.setImageResource(R.drawable.ic_pause)
-                        // update the PiP params to use the correct aspect ratio
-                        if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
-                    }
-                    Player.STATE_ENDED -> {
-                        // video has finished
-                        binding.playImageView.setImageResource(R.drawable.ic_restart)
-                    }
-                    else -> {
-                        // player in any other state
-                        binding.playImageView.setImageResource(R.drawable.ic_play)
-                    }
+                if (playbackState == Player.STATE_READY) {
+                    // media actually playing
+                    transitioning = false
+                    // update the PiP params to use the correct aspect ratio
+                    if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
                 }
 
                 // save the watch position when paused
