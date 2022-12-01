@@ -17,7 +17,6 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
 import com.github.libretube.util.PreferenceHelper
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.time.LocalTime
 

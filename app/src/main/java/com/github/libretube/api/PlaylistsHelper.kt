@@ -107,23 +107,26 @@ object PlaylistsHelper {
         return null
     }
 
-    suspend fun addToPlaylist(playlistId: String, videoId: String): Boolean {
+    suspend fun addToPlaylist(playlistId: String, vararg videoIds: String): Boolean {
         if (!loggedIn()) {
-            val localPlaylistItem = RetrofitInstance.api.getStreams(videoId).toLocalPlaylistItem(playlistId, videoId)
-            awaitQuery {
-                // avoid duplicated videos in a playlist
-                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByVideoId(playlistId, videoId)
+            val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
+                .first { it.playlist.id.toString() == playlistId }
 
-                // add the new video to the database
-                DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
-                val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
-                    .first { it.playlist.id.toString() == playlistId }
+            for (videoId in videoIds) {
+                val localPlaylistItem = RetrofitInstance.api.getStreams(videoId).toLocalPlaylistItem(playlistId, videoId)
+                awaitQuery {
+                    // avoid duplicated videos in a playlist
+                    DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByVideoId(playlistId, videoId)
 
-                if (localPlaylist.playlist.thumbnailUrl == "") {
-                    // set the new playlist thumbnail URL
-                    localPlaylistItem.thumbnailUrl?.let {
-                        localPlaylist.playlist.thumbnailUrl = it
-                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist.playlist)
+                    // add the new video to the database
+                    DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
+
+                    if (localPlaylist.playlist.thumbnailUrl == "") {
+                        // set the new playlist thumbnail URL
+                        localPlaylistItem.thumbnailUrl?.let {
+                            localPlaylist.playlist.thumbnailUrl = it
+                            DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist.playlist)
+                        }
                     }
                 }
             }
@@ -132,7 +135,10 @@ object PlaylistsHelper {
 
         return RetrofitInstance.authApi.addToPlaylist(
             token,
-            PlaylistId(playlistId, videoId)
+            PlaylistId(
+                playlistId = playlistId,
+                videoIds = videoIds.toList()
+            )
         ).message == "ok"
     }
 
@@ -185,16 +191,13 @@ object PlaylistsHelper {
 
     suspend fun importPlaylists(appContext: Context, playlists: List<ImportPlaylist>) {
         for (playlist in playlists) {
-            Log.e("playlist", playlist.toString())
             val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
-            runBlocking {
-                val tasks = playlist.videos.map { videoId ->
-                    async { addToPlaylist(playlistId, videoId.substringAfter("=")) }
-                }
-                tasks.forEach {
-                    it.await()
-                }
-            }
+            addToPlaylist(
+                playlistId,
+                *playlist.videos.map {
+                    it.substringAfter("=")
+                }.toTypedArray()
+            )
         }
     }
 
