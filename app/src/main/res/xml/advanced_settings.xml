@@ -39,20 +39,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/backup_restore">
-
-        <Preference
-            android:icon="@drawable/ic_backup"
-            app:key="backup"
-            app:title="@string/backup" />
-
-        <Preference
-            android:icon="@drawable/ic_restore"
-            app:key="restore"
-            app:title="@string/restore" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/misc">
 
         <Preference
