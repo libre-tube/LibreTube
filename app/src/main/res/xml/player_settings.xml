@@ -12,6 +12,13 @@
             app:title="@string/swipe_controls" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_pinch_gesture"
+            android:summary="@string/pinch_control_summary"
+            app:key="player_pinch_control"
+            app:title="@string/pinch_control" />
+
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_next"
             android:summary="@string/skip_buttons_summary"
