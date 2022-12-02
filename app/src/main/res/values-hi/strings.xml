@@ -402,4 +402,19 @@
     <string name="best_quality">श्रेष्ठ</string>
     <string name="worst_quality">न्यूनतम</string>
     <string name="pop_up">पॉप अप</string>
+    <string name="no_comments_available">इस वीडियो में कोई टिप्पणी उपलब्ध नहीं है।</string>
+    <string name="captions_size">कैप्शन का आकार</string>
+    <string name="double_tap_seek">तलाश के लिए दो बार टैप करें</string>
+    <string name="double_tap_seek_summary">प्लेयर की स्थिति को रिवाइंड या फॉरवर्ड करने के लिए बाईं या दाईं ओर दो बार टैप करें।</string>
+    <string name="all_caught_up_summary">आपने सभी नए वीडियो देख लिए हैं</string>
+    <string name="all_caught_up">आप सभी काफी अधिक रुचि ले चुके हैं</string>
+    <string name="import_playlists">प्लेलिस्ट आयात करें</string>
+    <string name="export_playlists">प्लेलिस्ट निर्यात करें</string>
+    <string name="app_backup">ऐप बैकअप</string>
+    <string name="backup_restore_summary">आयात और निर्यात सब्सक्रिप्शनस, प्लेलिस्ट, …</string>
+    <string name="privacy_alert">गोपनीयता चेतावनी</string>
+    <string name="username_email">एक ऐसे ई-मेल पते के साथ आगे बढ़ें जो अनुशंसित नहीं है\?</string>
+    <string name="proceed">आगे बढ़ें</string>
+    <string name="exportsuccess">निर्यात किया गया।</string>
+    <string name="comments_disabled">अपलोडर द्वारा टिप्पणियां अक्षम कर दी गई हैं।</string>
 </resources>

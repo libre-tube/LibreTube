@@ -413,8 +413,8 @@
     <string name="export_playlists">Eksportuoti grojaraščius</string>
     <string name="app_backup">Programėlės atsarginė kopija</string>
     <string name="backup_restore_summary">Importuokite ir eksportuokite prenumeratas, grojaraščius, …</string>
-    <string name="exportsuccess">Sėkmingai eksportuota!</string>
+    <string name="exportsuccess">Eksportuota.</string>
     <string name="proceed">Tęsti</string>
     <string name="privacy_alert">Įspėjimas apie privatumą</string>
-    <string name="username_email">Kaip naudotojo vardą įrašėte el. pašto adresą, o tai nerekomenduojama. Ar tikrai norite tęsti\?</string>
+    <string name="username_email">Tęsti naudojant el. pašto adresą, nors tai ir nėra rekomenduojama\?</string>
 </resources>

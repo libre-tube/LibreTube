@@ -401,4 +401,20 @@
     <string name="brightness">Lysstyrke</string>
     <string name="volume">Lydstyrke</string>
     <string name="auto">Auto</string>
+    <string name="pop_up">Oppsprett</string>
+    <string name="no_comments_available">Videoen har ingen tilgjengelige kommentarer.</string>
+    <string name="comments_disabled">Kommentarer er avskrudd av opplasteren.</string>
+    <string name="double_tap_seek">Dobbelttrykk for å blafre</string>
+    <string name="double_tap_seek_summary">Trykk to ganger til venstre eller høyre for å spole frem eller tilbake avspillingen.</string>
+    <string name="all_caught_up">Du er oppdatert</string>
+    <string name="all_caught_up_summary">Du har sett alle nye videoer</string>
+    <string name="import_playlists">Importer spillelister</string>
+    <string name="export_playlists">Eksporter spillelister</string>
+    <string name="app_backup">Legg til sikkerhetskopi</string>
+    <string name="backup_restore_summary">Importer og eksporter abonnementer, spillelister …</string>
+    <string name="exportsuccess">Eksportert.</string>
+    <string name="privacy_alert">Personvernsvarsel</string>
+    <string name="proceed">Fortsett</string>
+    <string name="captions_size">Undertekststørrelse</string>
+    <string name="username_email">Fortsett med en e-postadresse som ikke er anbefalt\?</string>
 </resources>

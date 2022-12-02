@@ -409,4 +409,12 @@
     <string name="double_tap_seek">Doppeltippen zum Suchen</string>
     <string name="all_caught_up">Du bist auf dem neuesten Stand</string>
     <string name="double_tap_seek_summary">Tippen Sie zweimal links oder rechts, um die Position des Players zurück- oder vorzuspulen.</string>
+    <string name="import_playlists">Playlists importieren</string>
+    <string name="export_playlists">Playlists exportieren</string>
+    <string name="app_backup">App-Backup</string>
+    <string name="backup_restore_summary">Import &amp; Export von Abonnements, Playlists, …</string>
+    <string name="privacy_alert">Datenschutz-Warnung</string>
+    <string name="proceed">Fortfahren</string>
+    <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren\?</string>
+    <string name="exportsuccess">Exportiert.</string>
 </resources>

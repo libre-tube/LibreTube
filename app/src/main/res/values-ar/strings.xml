@@ -409,4 +409,12 @@
     <string name="captions_size">حجم التسميات التوضيحية</string>
     <string name="double_tap_seek">انقر نقرا مزدوجا للسعي</string>
     <string name="all_caught_up_summary">لقد شاهدت جميع مقاطع الفيديو الجديدة</string>
+    <string name="import_playlists">استيراد قوائم التشغيل</string>
+    <string name="export_playlists">تصدير قوائم التشغيل</string>
+    <string name="app_backup">النسخ الاحتياطي للتطبيق</string>
+    <string name="backup_restore_summary">استيراد وتصدير الاشتراكات وقوائم التشغيل …</string>
+    <string name="proceed">استمر</string>
+    <string name="privacy_alert">تنبيه الخصوصية</string>
+    <string name="exportsuccess">تم تصديرها بنجاح!</string>
+    <string name="username_email">قمت بإدراج عنوان بريد إلكتروني كاسم مستخدم غير مستحسن. هل أنت متأكد من أنك تريد المتابعة؟</string>
 </resources>
