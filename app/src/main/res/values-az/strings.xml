@@ -409,4 +409,12 @@
     <string name="all_caught_up">Hamınız tutulmusunuz</string>
     <string name="all_caught_up_summary">Bütün yeni videolara baxmısınız</string>
     <string name="captions_size">Altyazı ölçüsü</string>
+    <string name="import_playlists">Pleylistləri idxal et</string>
+    <string name="export_playlists">Pleylistləri ixrac et</string>
+    <string name="app_backup">Tətbiq Nüsxələməsi</string>
+    <string name="backup_restore_summary">Abunəlikləri, pleylistləri idxal &amp; ixrac et …</string>
+    <string name="exportsuccess">Uğurla ixrac edildi!</string>
+    <string name="privacy_alert">Məxfilik xəbərdarlığı</string>
+    <string name="username_email">İstifadəçi adı kimi e-poçt ünvanı daxil etmisiniz, tövsiyə edilmir. Davam etmək istədiyinizə əminsiniz\?</string>
+    <string name="proceed">Davam et</string>
 </resources>

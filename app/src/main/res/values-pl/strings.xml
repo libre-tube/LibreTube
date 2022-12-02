@@ -409,4 +409,12 @@
     <string name="all_caught_up">To już jest koniec</string>
     <string name="double_tap_seek_summary">Stuknij dwukrotnie po lewej lub prawej, aby przewinąć materiał do tyłu lub do przodu.</string>
     <string name="all_caught_up_summary">Obejrzano wszystkie nowe materiały</string>
+    <string name="import_playlists">Importuj playlisty</string>
+    <string name="export_playlists">Eksportuj playlisty</string>
+    <string name="app_backup">Kopia ustawień aplikacji</string>
+    <string name="backup_restore_summary">Importuj lub eksportuj subskrypcje, playlisty, …</string>
+    <string name="exportsuccess">Pomyślnie wyeksportowano!</string>
+    <string name="proceed">Kontynuuj</string>
+    <string name="privacy_alert">Ostrzeżenie o prywatności</string>
+    <string name="username_email">Jako nazwę użytkownika wstawiłeś/aś adres e-mail, lecz nie jest to zalecane. Czy na pewno chcesz kontynuować\?</string>
 </resources>
