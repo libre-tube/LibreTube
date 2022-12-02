@@ -413,8 +413,12 @@
     <string name="export_playlists">Exportar playlists</string>
     <string name="app_backup">Backup do Aplicativo</string>
     <string name="backup_restore_summary">Importar e exportar inscrições, playlists, …</string>
-    <string name="exportsuccess">Exportado com sucesso!</string>
+    <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
     <string name="proceed">Continuar</string>
-    <string name="username_email">Você inseriu um endereço de e-mail como nome de usuário, o que não é recomendado. Tem certeza de que deseja continuar\?</string>
+    <string name="username_email">Continuar com um endereço de e-mail, o qual não é recomendado\?</string>
+    <string name="pinch_control">Controle de pinça</string>
+    <string name="pinch_control_summary">Use o gesto de pinça para aumentar/diminuir o zoom.</string>
+    <string name="theme_monochrome">Monocromático Minimalista</string>
+    <string name="play_latest_videos">Reproduzir vídeos mais recentes</string>
 </resources>
