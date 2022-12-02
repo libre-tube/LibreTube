@@ -412,9 +412,11 @@
     <string name="import_playlists">Impor daftar putar</string>
     <string name="export_playlists">Ekspor daftar putar</string>
     <string name="app_backup">Cadangan Aplikasi</string>
-    <string name="exportsuccess">Berhasil mengekspor!</string>
+    <string name="exportsuccess">Diekspor.</string>
     <string name="privacy_alert">Peringatan privasi</string>
-    <string name="username_email">Anda telah memasukkan sebuah alamat surel sebagai nama pengguna, ini tidak disarankan. Apakah Anda ingin melanjutkan\?</string>
+    <string name="username_email">Lanjutkan dengan alamat surel yang tidak disarankan\?</string>
     <string name="proceed">Lanjutkan</string>
     <string name="backup_restore_summary">Impor &amp; ekspor langganan, daftar putar, …</string>
+    <string name="pinch_control">Kendali cubit</string>
+    <string name="pinch_control_summary">Gunakan gestur cubit untuk perbesar/perkecil.</string>
 </resources>
