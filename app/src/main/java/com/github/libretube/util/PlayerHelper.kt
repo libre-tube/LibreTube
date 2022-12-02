@@ -300,6 +300,12 @@ object PlayerHelper {
             true
         )
 
+    val pinchGestureEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PLAYER_PINCH_CONTROL,
+            true
+        )
+
     val captionsTextSize: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.CAPTIONS_SIZE,

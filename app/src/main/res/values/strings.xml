@@ -394,6 +394,8 @@
     <string name="auto">Auto</string>
     <string name="swipe_controls">Swipe controls</string>
     <string name="swipe_controls_summary">Use swipe gesture to adjust the brightness and volume.</string>
+    <string name="pinch_control">Pinch control</string>
+    <string name="pinch_control_summary">Use pinch gesture to zoom in/out.</string>
     <string name="defaults">Defaults</string>
     <string name="pop_up">Pop-Up</string>
     <string name="comments_disabled">Comments are disabled by the uploader.</string>

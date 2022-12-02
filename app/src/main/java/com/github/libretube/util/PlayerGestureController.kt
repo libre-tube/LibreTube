@@ -34,6 +34,10 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private var isMoving = false
     var isEnabled = true
 
+    // Indicates last touch event was for click or other gesture, used to avoid single click
+    // by runnable when scroll or pinch gesture already completed.
+    var wasClick = true
+
     init {
         gestureDetector = GestureDetector(activity, GestureListener(), handler)
         scaleGestureDetector = ScaleGestureDetector(activity, ScaleGestureListener(), handler)
@@ -66,6 +70,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         var scaleFactor: Float = 1f
 
         override fun onScale(detector: ScaleGestureDetector): Boolean {
+            wasClick = false
             scaleFactor *= detector.scaleFactor
             return true
         }
@@ -89,6 +94,9 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         private var xPos = 0.0F
 
         override fun onDown(e: MotionEvent): Boolean {
+            // Initially assume this event is for click
+            wasClick = true
+
             if (isMoving || scaleGestureDetector.isInProgress) return false
 
             if (isEnabled && isSecondClick()) {
@@ -135,6 +143,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             }
 
             isMoving = true
+            wasClick = false
 
             when {
                 width * 0.5 > e1.x -> listener.onSwipeLeftScreen(distanceY)
@@ -144,8 +153,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         }
 
         private val runnable = Runnable {
-            // If user is scrolling then avoid single tap call
-            if (isMoving || isSecondClick()) return@Runnable
+            // If the last event was for scroll or pinch then avoid single tap call
+            if (!wasClick || isSecondClick()) return@Runnable
             listener.onSingleTap()
         }
 

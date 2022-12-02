@@ -509,10 +509,12 @@ internal class CustomExoPlayerView(
     }
 
     override fun onZoom() {
+        if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
     }
 
     override fun onMinimize() {
+        if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
     }
 
