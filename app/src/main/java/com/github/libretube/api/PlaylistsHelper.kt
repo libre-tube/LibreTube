@@ -142,7 +142,7 @@ object PlaylistsHelper {
         ).message == "ok"
     }
 
-    suspend fun renamePlaylist(playlistId: String, newName: String) {
+    suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
         if (!loggedIn()) {
             val playlist = awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().getAll()
@@ -151,16 +151,16 @@ object PlaylistsHelper {
             awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
             }
-            return
+            return true
         }
 
-        RetrofitInstance.authApi.renamePlaylist(
+        return RetrofitInstance.authApi.renamePlaylist(
             token,
             PlaylistId(
                 playlistId = playlistId,
                 newName = newName
             )
-        )
+        ).playlistId != null
     }
 
     suspend fun removeFromPlaylist(playlistId: String, index: Int) {
