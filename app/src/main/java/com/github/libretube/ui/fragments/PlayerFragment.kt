@@ -315,16 +315,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
-        playerBinding.repeatBTN.setOnClickListener {
-            // Restart video if finished
-            exoPlayer.seekTo(0)
-            exoPlayer.play()
-        }
-
-        binding.playImageView.setOnClickListener {
+        val playPauseClickListner = View.OnClickListener {
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
-                binding.playImageView.setImageResource(R.drawable.ic_pause)
                 if (exoPlayer.playbackState == Player.STATE_ENDED) {
                     // restart video if finished
                     exoPlayer.seekTo(0)
@@ -332,10 +325,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 exoPlayer.play()
             } else {
                 // pause the video
-                binding.playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
             }
         }
+        playerBinding.playPauseBTN.setOnClickListener(playPauseClickListner)
+        binding.playImageView.setOnClickListener(playPauseClickListner)
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
@@ -977,18 +971,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (exoPlayer.isPlaying) {
             // video is playing
             binding.playImageView.setImageResource(R.drawable.ic_pause)
-            playerBinding.exoPlayPause.visibility = View.VISIBLE
-            playerBinding.repeatBTN.visibility = View.GONE
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_pause)
         } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
             // video has finished
             binding.playImageView.setImageResource(R.drawable.ic_restart)
-            playerBinding.exoPlayPause.visibility = View.GONE
-            playerBinding.repeatBTN.visibility = View.VISIBLE
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_restart)
         } else {
             // player in any other state
             binding.playImageView.setImageResource(R.drawable.ic_play)
-            playerBinding.exoPlayPause.visibility = View.VISIBLE
-            playerBinding.repeatBTN.visibility = View.GONE
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_play)
         }
     }
 
