@@ -417,4 +417,7 @@
     <string name="proceed">आगे बढ़ें</string>
     <string name="exportsuccess">निर्यात किया गया।</string>
     <string name="comments_disabled">अपलोडर द्वारा टिप्पणियां अक्षम कर दी गई हैं।</string>
+    <string name="pinch_control">पिंच नियंत्रण</string>
+    <string name="pinch_control_summary">ज़ूम इन/आउट करने के लिए पिंच जेस्चर का उपयोग करें।</string>
+    <string name="theme_monochrome">मिनिमलिस्टिक मोनोक्रोम</string>
 </resources>
