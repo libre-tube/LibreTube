@@ -417,4 +417,6 @@
     <string name="proceed">Pokračovat</string>
     <string name="export_playlists">Exportovat playlisty</string>
     <string name="import_playlists">Importovat playlisty</string>
+    <string name="pinch_control">Ovládání dvěma prsty</string>
+    <string name="pinch_control_summary">Použijte gesto se dvěma prsty pro přiblížení/oddálení.</string>
 </resources>
