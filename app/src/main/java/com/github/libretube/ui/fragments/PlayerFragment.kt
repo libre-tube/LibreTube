@@ -315,6 +315,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
+        playerBinding.repeatBTN.setOnClickListener {
+            // Restart video if finished
+            exoPlayer.seekTo(0)
+            exoPlayer.play()
+        }
+
         binding.playImageView.setOnClickListener {
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
@@ -819,14 +825,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 if (isPlaying) {
                     // Stop [BackgroundMode] service if it is running.
                     BackgroundHelper.stopBackgroundPlay(requireContext())
-                    // video is playing
-                    binding.playImageView.setImageResource(R.drawable.ic_pause)
-                } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
-                    // video has finished
-                    binding.playImageView.setImageResource(R.drawable.ic_restart)
-                } else {
-                    // player in any other state
-                    binding.playImageView.setImageResource(R.drawable.ic_play)
                 }
 
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
@@ -834,6 +832,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         this@PlayerFragment::checkForSegments,
                         100
                     )
+                }
+            }
+
+            override fun onEvents(player: Player, events: Player.Events) {
+                super.onEvents(player, events)
+                if (events.containsAny(
+                        Player.EVENT_PLAYBACK_STATE_CHANGED,
+                        Player.EVENT_IS_PLAYING_CHANGED,
+                        Player.EVENT_PLAY_WHEN_READY_CHANGED
+                    )
+                ) {
+                    updatePlayPauseButton()
                 }
             }
 
@@ -960,6 +970,25 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
+        }
+    }
+
+    private fun updatePlayPauseButton() {
+        if (exoPlayer.isPlaying) {
+            // video is playing
+            binding.playImageView.setImageResource(R.drawable.ic_pause)
+            playerBinding.exoPlayPause.visibility = View.VISIBLE
+            playerBinding.repeatBTN.visibility = View.GONE
+        } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
+            // video has finished
+            binding.playImageView.setImageResource(R.drawable.ic_restart)
+            playerBinding.exoPlayPause.visibility = View.GONE
+            playerBinding.repeatBTN.visibility = View.VISIBLE
+        } else {
+            // player in any other state
+            binding.playImageView.setImageResource(R.drawable.ic_play)
+            playerBinding.exoPlayPause.visibility = View.VISIBLE
+            playerBinding.repeatBTN.visibility = View.GONE
         }
     }
 

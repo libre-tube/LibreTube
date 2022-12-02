@@ -283,6 +283,14 @@
             android:background="?android:selectableItemBackgroundBorderless"
             app:tint="@android:color/white" />
 
+        <ImageButton
+            android:id="@+id/repeatBTN"
+            style="@style/ExoStyledControls.Button.Center.PlayPause"
+            android:layout_marginHorizontal="10dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_restart"
+            app:tint="@android:color/white" />
+
         <FrameLayout
             android:id="@+id/forwardBTN"
             android:layout_width="wrap_content"
