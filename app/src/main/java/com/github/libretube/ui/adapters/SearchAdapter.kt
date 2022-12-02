@@ -17,6 +17,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.extensions.setupSubscriptionButton
+import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
@@ -125,6 +126,12 @@ class SearchAdapter(
             ) + TextUtils.SEPARATOR + root.context.getString(R.string.videoCount, item.videos.toString())
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
+            }
+
+            root.setOnLongClickListener {
+                ChannelOptionsBottomSheet(item.url!!.toID(), item.name)
+                    .show((root.context as BaseActivity).supportFragmentManager)
+                true
             }
 
             binding.searchSubButton.setupSubscriptionButton(item.url?.toID(), item.name?.toID())

@@ -110,16 +110,37 @@ object PlayingQueue {
     fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val playlistType = PlaylistsHelper.getPrivatePlaylistType(playlistId)
                 val playlist = PlaylistsHelper.getPlaylist(playlistId)
-                add(
-                    *playlist.relatedStreams
-                        .orEmpty()
-                        .toTypedArray()
-                )
+                add(*playlist.relatedStreams.orEmpty().toTypedArray())
                 updateCurrent(newCurrentStream)
                 if (playlist.nextpage == null) return@launch
                 fetchMoreFromPlaylist(playlistId, playlist.nextpage)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun fetchMoreFromChannel(channelId: String, nextPage: String?) {
+        var channelNextPage: String? = nextPage
+        CoroutineScope(Dispatchers.IO).launch {
+            while (channelNextPage != null) {
+                RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).apply {
+                    add(*relatedStreams.orEmpty().toTypedArray())
+                    channelNextPage = this.nextpage
+                }
+            }
+        }
+    }
+
+    fun insertChannel(channelId: String, newCurrentStream: StreamItem) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val channel = RetrofitInstance.api.getChannel(channelId)
+                add(*channel.relatedStreams.orEmpty().toTypedArray())
+                updateCurrent(newCurrentStream)
+                if (channel.nextpage == null) return@launch
+                fetchMoreFromChannel(channelId, channel.nextpage)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -127,6 +127,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private var videoId: String? = null
     private var playlistId: String? = null
+    private var channelId: String? = null
     private var isLive = false
     private lateinit var streams: Streams
 
@@ -172,6 +173,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         arguments?.let {
             videoId = it.getString(IntentData.videoId)!!.toID()
             playlistId = it.getString(IntentData.playlistId)
+            channelId = it.getString(IntentData.channelId)
         }
     }
 
@@ -399,7 +401,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 requireContext(),
                 videoId!!,
                 exoPlayer.currentPosition,
-                playlistId
+                playlistId,
+                channelId
             )
         }
 
@@ -593,6 +596,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (playlistId != null) {
                         PlayingQueue.insertPlaylist(playlistId!!, streams.toStreamItem(videoId!!))
+                    } else if (channelId != null) {
+                        PlayingQueue.insertChannel(channelId!!, streams.toStreamItem(videoId!!))
                     } else {
                         PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
                         if (PlayerHelper.autoInsertRelatedVideos) {

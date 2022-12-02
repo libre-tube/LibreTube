@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.databinding.ChannelSubscriptionRowBinding
 import com.github.libretube.extensions.toID
+import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setupSubscriptionButton
+import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SubscriptionChannelViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -36,6 +38,12 @@ class SubscriptionChannelAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, subscription.url)
             }
+            root.setOnLongClickListener {
+                ChannelOptionsBottomSheet(subscription.url!!.toID(), subscription.name)
+                    .show((root.context as BaseActivity).supportFragmentManager)
+                true
+            }
+
             subscriptionSubscribe.setupSubscriptionButton(
                 subscription.url?.toID(),
                 subscription.name,
