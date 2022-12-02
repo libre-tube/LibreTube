@@ -400,6 +400,7 @@
     <string name="pop_up">Pop-Up</string>
     <string name="comments_disabled">Comments are disabled by the uploader.</string>
     <string name="no_comments_available">This video has no comments available.</string>
+    <string name="theme_monochrome">Minimalistic Monochrome</string>
     <string name="captions_size">Captions size</string>
     <string name="double_tap_seek">Double tap to seek</string>
     <string name="double_tap_seek_summary">Tap twice at the left or right to rewind or forward the player position.</string>
@@ -413,6 +414,7 @@
     <string name="privacy_alert">Privacy alert</string>
     <string name="username_email">Proceed with an e-mail address that isn\'t recommended\?</string>
     <string name="proceed">Proceed</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>

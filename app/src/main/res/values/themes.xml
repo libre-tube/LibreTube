@@ -183,6 +183,39 @@
 
     </style>
 
+    <style name="Theme.Monochrome" parent="BaseTheme">
+
+        <item name="colorPrimary">@color/monochrome_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/monochrome_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/monochrome_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/monochrome_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/monochrome_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/monochrome_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/monochrome_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/monochrome_theme_light_onSecondaryContainer
+        </item>
+        <item name="colorTertiary">@color/monochrome_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/monochrome_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/monochrome_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/monochrome_theme_light_onTertiaryContainer
+        </item>
+        <item name="colorError">@color/monochrome_theme_light_error</item>
+        <item name="colorErrorContainer">@color/monochrome_theme_light_errorContainer</item>
+        <item name="colorOnError">@color/monochrome_theme_light_onError</item>
+        <item name="colorOnErrorContainer">@color/monochrome_theme_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/monochrome_theme_light_background</item>
+        <item name="colorOnBackground">@color/monochrome_theme_light_onBackground</item>
+        <item name="colorSurface">@color/monochrome_theme_light_surface</item>
+        <item name="colorOnSurface">@color/monochrome_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/monochrome_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/monochrome_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/monochrome_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/monochrome_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/monochrome_theme_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/monochrome_theme_light_inversePrimary</item>
+
+    </style>
+
     <style name="Pure">
 
         <item name="android:colorBackground">@android:color/white</item>

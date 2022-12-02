@@ -47,6 +47,7 @@ object ThemeHelper {
             "yellow" -> R.style.Theme_Yellow
             "green" -> R.style.Theme_Green
             "purple" -> R.style.Theme_Purple
+            "monochrome" -> R.style.Theme_Monochrome
             else -> R.style.Theme_Purple
         }
         activity.setTheme(theme)
