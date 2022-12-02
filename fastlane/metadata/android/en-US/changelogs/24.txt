@@ -1,0 +1,9 @@
+* Local playlists without an account
+* Support for swipe gestures
+* Pinch to zoom
+* Preview App icons in Appearance Settings
+* Option to set default start tab
+* Indicator that the feed got caught up for subscriptions
+* Option to share channels and play their latest videos
+* Comments redesign
+* Playlists import & export
