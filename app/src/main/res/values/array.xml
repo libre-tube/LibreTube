@@ -176,7 +176,7 @@
         <item>@string/color_yellow</item>
         <item>@string/color_green</item>
         <item>@string/color_purple</item>
-        <item>@string/theme_black_white</item>
+        <item>@string/theme_monochrome</item>
     </string-array>
 
     <string-array name="accentsValue">
@@ -186,7 +186,7 @@
         <item>yellow</item>
         <item>green</item>
         <item>purple</item>
-        <item>bw</item>
+        <item>monochrome</item>
     </string-array>
 
     <string-array name="defres">

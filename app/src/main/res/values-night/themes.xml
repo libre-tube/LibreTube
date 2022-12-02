@@ -180,35 +180,35 @@
 
     </style>
 
-    <style name="Theme.BlackWhite" parent="BaseTheme">
+    <style name="Theme.Monochrome" parent="BaseTheme">
 
-        <item name="colorPrimary">@color/black_white_theme_dark_primary</item>
-        <item name="colorOnPrimary">@color/black_white_theme_dark_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/black_white_theme_dark_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/black_white_theme_dark_onPrimaryContainer</item>
-        <item name="colorSecondary">@color/black_white_theme_dark_secondary</item>
-        <item name="colorOnSecondary">@color/black_white_theme_dark_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/black_white_theme_dark_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/black_white_theme_dark_onSecondaryContainer
+        <item name="colorPrimary">@color/monochrome_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/monochrome_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/monochrome_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/monochrome_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/monochrome_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/monochrome_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/monochrome_theme_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/monochrome_theme_dark_onSecondaryContainer
         </item>
-        <item name="colorTertiary">@color/black_white_theme_dark_tertiary</item>
-        <item name="colorOnTertiary">@color/black_white_theme_dark_onTertiary</item>
-        <item name="colorTertiaryContainer">@color/black_white_theme_dark_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/black_white_theme_dark_onTertiaryContainer</item>
-        <item name="colorError">@color/black_white_theme_dark_error</item>
-        <item name="colorErrorContainer">@color/black_white_theme_dark_errorContainer</item>
-        <item name="colorOnError">@color/black_white_theme_dark_onError</item>
-        <item name="colorOnErrorContainer">@color/black_white_theme_dark_onErrorContainer</item>
-        <item name="android:colorBackground">@color/black_white_theme_dark_background</item>
-        <item name="colorOnBackground">@color/black_white_theme_dark_onBackground</item>
-        <item name="colorSurface">@color/black_white_theme_dark_surface</item>
-        <item name="colorOnSurface">@color/black_white_theme_dark_onSurface</item>
-        <item name="colorSurfaceVariant">@color/black_white_theme_dark_surfaceVariant</item>
-        <item name="colorOnSurfaceVariant">@color/black_white_theme_dark_onSurfaceVariant</item>
-        <item name="colorOutline">@color/black_white_theme_dark_outline</item>
-        <item name="colorOnSurfaceInverse">@color/black_white_theme_dark_inverseOnSurface</item>
-        <item name="colorSurfaceInverse">@color/black_white_theme_dark_inverseSurface</item>
-        <item name="colorPrimaryInverse">@color/black_white_theme_dark_inversePrimary</item>
+        <item name="colorTertiary">@color/monochrome_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/monochrome_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/monochrome_theme_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/monochrome_theme_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/monochrome_theme_dark_error</item>
+        <item name="colorErrorContainer">@color/monochrome_theme_dark_errorContainer</item>
+        <item name="colorOnError">@color/monochrome_theme_dark_onError</item>
+        <item name="colorOnErrorContainer">@color/monochrome_theme_dark_onErrorContainer</item>
+        <item name="android:colorBackground">@color/monochrome_theme_dark_background</item>
+        <item name="colorOnBackground">@color/monochrome_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/monochrome_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/monochrome_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/monochrome_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/monochrome_theme_dark_onSurfaceVariant</item>
+        <item name="colorOutline">@color/monochrome_theme_dark_outline</item>
+        <item name="colorOnSurfaceInverse">@color/monochrome_theme_dark_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/monochrome_theme_dark_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/monochrome_theme_dark_inversePrimary</item>
 
     </style>
 
