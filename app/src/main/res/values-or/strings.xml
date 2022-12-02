@@ -409,4 +409,12 @@
     <string name="double_tap_seek_summary">ପ୍ଲେୟାର୍ ସ୍ଥିତିକୁ ରିଭାଇଣ୍ଡ୍ କିମ୍ବା ଅଗ୍ରଗାମୀ କରିବାକୁ ବାମ କିମ୍ବା ଡାହାଣରେ ଦୁଇଥର ଟ୍ୟାପ୍ କରନ୍ତୁ ।</string>
     <string name="all_caught_up_summary">ଆପଣ ସମସ୍ତ ନୂତନ ଭିଡିଓ ଦେଖିସାରିଛନ୍ତି</string>
     <string name="all_caught_up">ସମସ୍ତ ନୂତନ ପୋଷ୍ଟ ପାଇସାରିଛ</string>
+    <string name="export_playlists">ପ୍ଲେଲିଷ୍ଟ ରପ୍ତାନି କରନ୍ତୁ</string>
+    <string name="import_playlists">ପ୍ଲେଲିଷ୍ଟ ଆମଦାନୀ କରନ୍ତୁ</string>
+    <string name="app_backup">ଆପ୍ ବ୍ୟାକଅପ୍</string>
+    <string name="backup_restore_summary">ସଦସ୍ୟତା, ପ୍ଲେଲିଷ୍ଟ ଆମଦାନି ଏବଂ ରପ୍ତାନି କରନ୍ତୁ,…</string>
+    <string name="exportsuccess">ରପ୍ତାନି ହୋଇଛି ।</string>
+    <string name="privacy_alert">ଗୋପନୀୟତା ସତର୍କତା</string>
+    <string name="username_email">ଏକ ଇ-ମେଲ୍ ଠିକଣା ସହିତ ଅଗ୍ରଗତି କରନ୍ତୁ ଯାହା ସୁପାରିଶ କରାଯାଏ ନାହିଁ\?</string>
+    <string name="proceed">ଅଗ୍ରଗତି କର</string>
 </resources>
