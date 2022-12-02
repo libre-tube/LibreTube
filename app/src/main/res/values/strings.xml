@@ -414,6 +414,7 @@
     <string name="privacy_alert">Privacy alert</string>
     <string name="username_email">Proceed with an e-mail address that isn\'t recommended\?</string>
     <string name="proceed">Proceed</string>
+    <string name="play_latest_videos">Play latest videos</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

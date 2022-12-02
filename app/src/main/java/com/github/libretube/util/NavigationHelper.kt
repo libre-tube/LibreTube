@@ -48,13 +48,16 @@ object NavigationHelper {
     fun navigateVideo(
         context: Context,
         videoId: String?,
-        playlistId: String? = null
+        playlistId: String? = null,
+        channelId: String? = null
     ) {
         if (videoId == null) return
 
         val bundle = Bundle()
         bundle.putString(IntentData.videoId, videoId.toID())
-        if (playlistId != null) bundle.putString(IntentData.playlistId, playlistId)
+        bundle.putString(IntentData.playlistId, playlistId)
+        bundle.putString(IntentData.channelId, channelId)
+
         val frag = PlayerFragment()
         frag.arguments = bundle
         val activity = context as AppCompatActivity

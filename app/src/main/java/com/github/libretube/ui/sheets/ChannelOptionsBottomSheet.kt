@@ -1,10 +1,17 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import android.util.Log
 import com.github.libretube.R
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toID
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.NavigationHelper
+import kotlinx.coroutines.runBlocking
 
 /**
  * Dialog with different options for a selected video.
@@ -21,7 +28,9 @@ class ChannelOptionsBottomSheet(
 
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
-            context?.getString(R.string.share)!!
+            getString(R.string.share),
+            getString(R.string.play_latest_videos),
+            getString(R.string.playOnBackground)
         )
 
         setSimpleItems(optionsList) { which ->
@@ -29,6 +38,38 @@ class ChannelOptionsBottomSheet(
                 getString(R.string.share) -> {
                     ShareDialog(channelId, ShareObjectType.CHANNEL, shareData)
                         .show(parentFragmentManager, null)
+                }
+                getString(R.string.play_latest_videos) -> {
+                    try {
+                        val channel = runBlocking {
+                            RetrofitInstance.api.getChannel(channelId)
+                        }
+                        channel.relatedStreams?.firstOrNull()?.url?.toID()?.let {
+                            NavigationHelper.navigateVideo(
+                                requireContext(),
+                                it,
+                                channelId = channelId
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG(), e.toString())
+                    }
+                }
+                getString(R.string.playOnBackground) -> {
+                    try {
+                        val channel = runBlocking {
+                            RetrofitInstance.api.getChannel(channelId)
+                        }
+                        channel.relatedStreams?.firstOrNull()?.url?.toID()?.let {
+                            BackgroundHelper.playOnBackground(
+                                requireContext(),
+                                videoId = it,
+                                channelId = channelId
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG(), e.toString())
+                    }
                 }
             }
         }

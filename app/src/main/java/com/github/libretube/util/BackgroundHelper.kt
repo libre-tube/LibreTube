@@ -20,13 +20,15 @@ object BackgroundHelper {
         context: Context,
         videoId: String,
         position: Long? = null,
-        playlistId: String? = null
+        playlistId: String? = null,
+        channelId: String? = null
     ) {
         // create an intent for the background mode service
         val intent = Intent(context, BackgroundMode::class.java)
         intent.putExtra(IntentData.videoId, videoId)
-        if (playlistId != null) intent.putExtra(IntentData.playlistId, playlistId)
-        if (position != null) intent.putExtra("position", position)
+        intent.putExtra(IntentData.playlistId, playlistId)
+        intent.putExtra(IntentData.channelId, channelId)
+        intent.putExtra("position", position)
 
         // start the background mode as foreground service
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
