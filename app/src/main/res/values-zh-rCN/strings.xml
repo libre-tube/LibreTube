@@ -417,4 +417,6 @@
     <string name="privacy_alert">隐私警告</string>
     <string name="username_email">你插入了一个电子邮件地址作为用户名，我们不推荐这样做。 你确定要继续吗？</string>
     <string name="proceed">继续</string>
+    <string name="pinch_control_summary">使用伸缩手势进行缩小/放大操作。</string>
+    <string name="pinch_control">手指伸缩控制</string>
 </resources>
