@@ -417,4 +417,6 @@
     <string name="privacy_alert">ଗୋପନୀୟତା ସତର୍କତା</string>
     <string name="username_email">ଏକ ଇ-ମେଲ୍ ଠିକଣା ସହିତ ଅଗ୍ରଗତି କରନ୍ତୁ ଯାହା ସୁପାରିଶ କରାଯାଏ ନାହିଁ\?</string>
     <string name="proceed">ଅଗ୍ରଗତି କର</string>
+    <string name="pinch_control_summary">ଜୁମ୍ ଇନ୍ / ଆଉଟ୍ କରିବାକୁ ପିଞ୍ଚ୍ ଅଙ୍ଗଭଙ୍ଗୀ ବ୍ୟବହାର କରନ୍ତୁ ।</string>
+    <string name="pinch_control">ପିଞ୍ଚ୍ ନିୟନ୍ତ୍ରଣ</string>
 </resources>
