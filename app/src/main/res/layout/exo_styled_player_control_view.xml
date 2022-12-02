@@ -277,7 +277,7 @@
         </FrameLayout>
 
         <ImageButton
-            android:id="@id/exo_play_pause"
+            android:id="@+id/playPauseBTN"
             style="@style/ExoStyledControls.Button.Center.PlayPause"
             android:layout_marginHorizontal="10dp"
             android:background="?android:selectableItemBackgroundBorderless"

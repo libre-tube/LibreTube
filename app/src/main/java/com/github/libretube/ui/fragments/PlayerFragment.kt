@@ -315,10 +315,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
-        binding.playImageView.setOnClickListener {
+        val playPauseClickListner = View.OnClickListener {
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
-                binding.playImageView.setImageResource(R.drawable.ic_pause)
                 if (exoPlayer.playbackState == Player.STATE_ENDED) {
                     // restart video if finished
                     exoPlayer.seekTo(0)
@@ -326,10 +325,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 exoPlayer.play()
             } else {
                 // pause the video
-                binding.playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
             }
         }
+        playerBinding.playPauseBTN.setOnClickListener(playPauseClickListner)
+        binding.playImageView.setOnClickListener(playPauseClickListner)
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
@@ -829,6 +829,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
             }
 
+            override fun onEvents(player: Player, events: Player.Events) {
+                super.onEvents(player, events)
+                if (events.containsAny(
+                        Player.EVENT_PLAYBACK_STATE_CHANGED,
+                        Player.EVENT_IS_PLAYING_CHANGED,
+                        Player.EVENT_PLAY_WHEN_READY_CHANGED
+                    )
+                ) {
+                    updatePlayPauseButton()
+                }
+            }
+
             override fun onPlaybackStateChanged(playbackState: Int) {
                 exoPlayerView.keepScreenOn = !(
                     playbackState == Player.STATE_IDLE ||
@@ -847,22 +859,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     playNextVideo()
                 }
 
-                when (playbackState) {
-                    Player.STATE_READY -> {
-                        // media actually playing
-                        transitioning = false
-                        binding.playImageView.setImageResource(R.drawable.ic_pause)
-                        // update the PiP params to use the correct aspect ratio
-                        if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
-                    }
-                    Player.STATE_ENDED -> {
-                        // video has finished
-                        binding.playImageView.setImageResource(R.drawable.ic_restart)
-                    }
-                    else -> {
-                        // player in any other state
-                        binding.playImageView.setImageResource(R.drawable.ic_play)
-                    }
+                if (playbackState == Player.STATE_READY) {
+                    // media actually playing
+                    transitioning = false
+                    // update the PiP params to use the correct aspect ratio
+                    if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
                 }
 
                 // save the watch position when paused
@@ -963,6 +964,22 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
+        }
+    }
+
+    private fun updatePlayPauseButton() {
+        if (exoPlayer.isPlaying) {
+            // video is playing
+            binding.playImageView.setImageResource(R.drawable.ic_pause)
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_pause)
+        } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
+            // video has finished
+            binding.playImageView.setImageResource(R.drawable.ic_restart)
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_restart)
+        } else {
+            // player in any other state
+            binding.playImageView.setImageResource(R.drawable.ic_play)
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_play)
         }
     }
 
