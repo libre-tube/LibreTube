@@ -413,8 +413,8 @@
     <string name="export_playlists">Pleylistləri ixrac et</string>
     <string name="app_backup">Tətbiq Nüsxələməsi</string>
     <string name="backup_restore_summary">Abunəlikləri, pleylistləri idxal &amp; ixrac et …</string>
-    <string name="exportsuccess">Uğurla ixrac edildi!</string>
+    <string name="exportsuccess">İxrac edildi.</string>
     <string name="privacy_alert">Məxfilik xəbərdarlığı</string>
-    <string name="username_email">İstifadəçi adı kimi e-poçt ünvanı daxil etmisiniz, tövsiyə edilmir. Davam etmək istədiyinizə əminsiniz\?</string>
+    <string name="username_email">Tövsiyə olunmayan e-poçt ünvanı ilə davam edilsin\?</string>
     <string name="proceed">Davam et</string>
 </resources>
