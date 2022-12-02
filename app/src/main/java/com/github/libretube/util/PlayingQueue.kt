@@ -110,8 +110,8 @@ object PlayingQueue {
     fun insertPlaylist(playlistId: String, newCurrentStream: StreamItem) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val playlistType = PlaylistsHelper.getPrivateType(playlistId)
-                val playlist = PlaylistsHelper.getPlaylist(playlistType, playlistId)
+                val playlistType = PlaylistsHelper.getPrivatePlaylistType(playlistId)
+                val playlist = PlaylistsHelper.getPlaylist(playlistId)
                 add(
                     *playlist.relatedStreams
                         .orEmpty()

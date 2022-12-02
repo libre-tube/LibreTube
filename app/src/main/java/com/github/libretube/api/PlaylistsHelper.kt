@@ -6,16 +6,21 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.Playlists
+import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toLocalPlaylistItem
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -46,9 +51,9 @@ object PlaylistsHelper {
         return playlists
     }
 
-    suspend fun getPlaylist(playlistType: PlaylistType, playlistId: String): Playlist {
+    suspend fun getPlaylist(playlistId: String): Playlist {
         // load locally stored playlists with the auth api
-        return when (playlistType) {
+        return when (getPrivatePlaylistType(playlistId)) {
             PlaylistType.PRIVATE -> RetrofitInstance.authApi.getPlaylist(playlistId)
             PlaylistType.PUBLIC -> RetrofitInstance.api.getPlaylist(playlistId)
             PlaylistType.LOCAL -> {
@@ -65,7 +70,10 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun createPlaylist(playlistName: String, appContext: Context, onSuccess: () -> Unit) {
+    suspend fun createPlaylist(
+        playlistName: String,
+        appContext: Context
+    ): String? {
         if (!loggedIn()) {
             awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().createPlaylist(
@@ -75,8 +83,9 @@ object PlaylistsHelper {
                     )
                 )
             }
-            onSuccess.invoke()
-            return
+            return awaitQuery {
+                DatabaseHolder.Database.localPlaylistsDao().getAll()
+            }.last().playlist.id.toString()
         }
         val response = try {
             RetrofitInstance.authApi.createPlaylist(
@@ -85,37 +94,39 @@ object PlaylistsHelper {
             )
         } catch (e: IOException) {
             appContext.toastFromMainThread(R.string.unknown_error)
-            return
+            return null
         } catch (e: HttpException) {
             Log.e(TAG(), e.toString())
             appContext.toastFromMainThread(R.string.server_error)
-            return
+            return null
         }
         if (response.playlistId != null) {
             appContext.toastFromMainThread(R.string.playlistCreated)
-            onSuccess.invoke()
-        } else {
-            appContext.toastFromMainThread(R.string.unknown_error)
+            return response.playlistId!!
         }
+        return null
     }
 
-    suspend fun addToPlaylist(playlistId: String, videoId: String): Boolean {
+    suspend fun addToPlaylist(playlistId: String, vararg videoIds: String): Boolean {
         if (!loggedIn()) {
-            val localPlaylistItem = RetrofitInstance.api.getStreams(videoId).toLocalPlaylistItem(playlistId, videoId)
-            awaitQuery {
-                // avoid duplicated videos in a playlist
-                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByVideoId(playlistId, videoId)
+            val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
+                .first { it.playlist.id.toString() == playlistId }
 
-                // add the new video to the database
-                DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
-                val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
-                    .first { it.playlist.id.toString() == playlistId }
+            for (videoId in videoIds) {
+                val localPlaylistItem = RetrofitInstance.api.getStreams(videoId).toLocalPlaylistItem(playlistId, videoId)
+                awaitQuery {
+                    // avoid duplicated videos in a playlist
+                    DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByVideoId(playlistId, videoId)
 
-                if (localPlaylist.playlist.thumbnailUrl == "") {
-                    // set the new playlist thumbnail URL
-                    localPlaylistItem.thumbnailUrl?.let {
-                        localPlaylist.playlist.thumbnailUrl = it
-                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist.playlist)
+                    // add the new video to the database
+                    DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
+
+                    if (localPlaylist.playlist.thumbnailUrl == "") {
+                        // set the new playlist thumbnail URL
+                        localPlaylistItem.thumbnailUrl?.let {
+                            localPlaylist.playlist.thumbnailUrl = it
+                            DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist.playlist)
+                        }
                     }
                 }
             }
@@ -124,11 +135,14 @@ object PlaylistsHelper {
 
         return RetrofitInstance.authApi.addToPlaylist(
             token,
-            PlaylistId(playlistId, videoId)
+            PlaylistId(
+                playlistId = playlistId,
+                videoIds = videoIds.toList()
+            )
         ).message == "ok"
     }
 
-    suspend fun renamePlaylist(playlistId: String, newName: String) {
+    suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
         if (!loggedIn()) {
             val playlist = awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().getAll()
@@ -137,16 +151,16 @@ object PlaylistsHelper {
             awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(playlist)
             }
-            return
+            return true
         }
 
-        RetrofitInstance.authApi.renamePlaylist(
+        return RetrofitInstance.authApi.renamePlaylist(
             token,
             PlaylistId(
                 playlistId = playlistId,
                 newName = newName
             )
-        )
+        ).playlistId != null
     }
 
     suspend fun removeFromPlaylist(playlistId: String, index: Int) {
@@ -175,11 +189,49 @@ object PlaylistsHelper {
         )
     }
 
-    fun getPrivateType(): PlaylistType {
+    suspend fun importPlaylists(appContext: Context, playlists: List<ImportPlaylist>) {
+        for (playlist in playlists) {
+            val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
+            addToPlaylist(
+                playlistId,
+                *playlist.videos.map {
+                    it.substringAfter("=")
+                }.toTypedArray()
+            )
+        }
+    }
+
+    suspend fun exportPlaylists(): List<ImportPlaylist> {
+        val playlists = getPlaylists()
+        val importLists = mutableListOf<ImportPlaylist>()
+        runBlocking {
+            val tasks = playlists.map {
+                async {
+                    val list = getPlaylist(it.id!!)
+                    importLists.add(
+                        ImportPlaylist(
+                            name = list.name,
+                            type = "playlist",
+                            visibility = "private",
+                            videos = list.relatedStreams.orEmpty().map {
+                                YOUTUBE_FRONTEND_URL + "/watch?v=" + it.url!!.toID()
+                            }
+                        )
+                    )
+                }
+            }
+            tasks.forEach {
+                it.await()
+            }
+        }
+        return importLists
+    }
+
+    fun getPrivatePlaylistType(): PlaylistType {
         return if (loggedIn()) PlaylistType.PRIVATE else PlaylistType.LOCAL
     }
 
-    fun getPrivateType(playlistId: String): PlaylistType {
+    fun getPrivatePlaylistType(playlistId: String): PlaylistType {
         if (playlistId.all { it.isDigit() }) return PlaylistType.LOCAL
         if (playlistId.matches(pipedPlaylistRegex)) return PlaylistType.PRIVATE
         return PlaylistType.PUBLIC

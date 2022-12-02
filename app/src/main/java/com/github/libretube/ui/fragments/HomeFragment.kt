@@ -108,7 +108,7 @@ class HomeFragment : BaseFragment() {
             runOnUiThread {
                 makeVisible(binding.playlistsRV, binding.playlistsTV)
                 binding.playlistsRV.layoutManager = LinearLayoutManager(context)
-                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), PlaylistsHelper.getPrivateType())
+                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), PlaylistsHelper.getPrivatePlaylistType())
                 binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
                         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {

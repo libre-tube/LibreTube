@@ -89,7 +89,7 @@ class WatchHistoryFragment : BaseFragment() {
         // observe changes
         watchHistoryAdapter.registerAdapterDataObserver(object :
                 RecyclerView.AdapterDataObserver() {
-                override fun onChanged() {
+                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                     if (watchHistoryAdapter.itemCount == 0) {
                         binding.watchHistoryRecView.visibility = View.GONE
                         binding.historyEmpty.visibility = View.VISIBLE

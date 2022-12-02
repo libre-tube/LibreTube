@@ -300,6 +300,24 @@ object PlayerHelper {
             true
         )
 
+    val pinchGestureEnabled: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PLAYER_PINCH_CONTROL,
+            true
+        )
+
+    val captionsTextSize: Float
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.CAPTIONS_SIZE,
+            "18"
+        ).toFloat()
+
+    val doubleTapToSeek: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.DOUBLE_TAP_TO_SEEK,
+            true
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(

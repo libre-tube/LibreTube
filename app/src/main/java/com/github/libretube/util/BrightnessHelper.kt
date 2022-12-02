@@ -1,7 +1,6 @@
 package com.github.libretube.util
 
 import android.app.Activity
-import android.os.Build
 import android.view.WindowManager
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.normalize
@@ -46,9 +45,6 @@ class BrightnessHelper(private val activity: Activity) {
      * Set current screen brightness to saved brightness value.
      */
     fun restoreSavedBrightness() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && activity.isInPictureInPictureMode) {
-            return
-        }
         brightness = savedBrightness
     }
 

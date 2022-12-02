@@ -112,7 +112,7 @@
     <string name="music_videos">YT Music (Teledyski)</string>
     <string name="music_albums">YT Music (Albumy)</string>
     <string name="music_playlists">YT Music (Playlisty)</string>
-    <string name="playOnBackground">Odtwarzanie w tle</string>
+    <string name="playOnBackground">Odtwórz w tle</string>
     <string name="piped">Piped</string>
     <string name="enabled">Włączono</string>
     <string name="disabled">Wyłączono</string>
@@ -196,7 +196,7 @@
     <string name="legacy_subscriptions">Starszy widok subskrybcji</string>
     <string name="device_info">Informacje o urządzeniu</string>
     <string name="downloading">Pobieranie…</string>
-    <string name="autoplay_summary">Odtwórz kolejny filmik po obejrzeniu bieżącego.</string>
+    <string name="autoplay_summary">Automatycznie odtwórz kolejny filmik po obejrzeniu bieżącego.</string>
     <string name="seekbar_preview">Podgląd wideo</string>
     <string name="seekbar_preview_summary">Pokaż ujęcie podczas przesuwania wskaźnika odtwarzania.</string>
     <string name="playingOnBackground">Odtwarzanie w tle…</string>
@@ -280,7 +280,7 @@
     <string name="repeat_mode_current">Aktualny</string>
     <string name="backup_restore">Kopia zapasowa i przywracanie</string>
     <string name="backup">Wykonaj kopię zapasową</string>
-    <string name="picture_in_picture">Obraz w obrazie</string>
+    <string name="picture_in_picture">Tryb PIP (obraz w obrazie)</string>
     <string name="player_resize_mode">Rozmiar obrazu</string>
     <string name="maximum_image_cache">Maks. rozmiar pamięci podręcznej obrazów</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
@@ -401,5 +401,20 @@
     <string name="swipe_controls">Sterowanie gestami</string>
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
     <string name="defaults">Domyślne</string>
-    <string name="pop_up">Dymek</string>
+    <string name="pop_up">Tryb PIP</string>
+    <string name="no_comments_available">Nie skomentowano jeszcze tego materiału.</string>
+    <string name="comments_disabled">Komentarze zostały wyłączone przez twórcę.</string>
+    <string name="captions_size">Rozmiar napisów</string>
+    <string name="double_tap_seek">Gest przewijania</string>
+    <string name="all_caught_up">To już jest koniec</string>
+    <string name="double_tap_seek_summary">Stuknij dwukrotnie po lewej lub prawej, aby przewinąć materiał do tyłu lub do przodu.</string>
+    <string name="all_caught_up_summary">Obejrzano wszystkie nowe materiały</string>
+    <string name="import_playlists">Importuj playlisty</string>
+    <string name="export_playlists">Eksportuj playlisty</string>
+    <string name="app_backup">Kopia ustawień aplikacji</string>
+    <string name="backup_restore_summary">Importuj lub eksportuj subskrypcje, playlisty, …</string>
+    <string name="exportsuccess">Pomyślnie wyeksportowano!</string>
+    <string name="proceed">Kontynuuj</string>
+    <string name="privacy_alert">Ostrzeżenie o prywatności</string>
+    <string name="username_email">Jako nazwę użytkownika wstawiłeś/aś adres e-mail, lecz nie jest to zalecane. Czy na pewno chcesz kontynuować\?</string>
 </resources>

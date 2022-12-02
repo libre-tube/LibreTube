@@ -12,10 +12,9 @@ import com.github.libretube.api.obj.Login
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.TextUtils
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.HttpException
-import java.io.IOException
 
 class LoginDialog : DialogFragment() {
     private lateinit var binding: DialogLoginBinding
@@ -34,7 +33,20 @@ class LoginDialog : DialogFragment() {
             }
         }
         binding.register.setOnClickListener {
-            if (isInsertionValid()) {
+            if (isEmail(binding.username.text.toString())) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.privacy_alert)
+                    .setMessage(R.string.username_email)
+                    .setNegativeButton(R.string.proceed) { _, _ ->
+                        signIn(
+                            binding.username.text.toString(),
+                            binding.password.text.toString(),
+                            true
+                        )
+                    }
+                    .setPositiveButton(R.string.cancel, null)
+                    .show()
+            } else if (isInsertionValid()) {
                 signIn(
                     binding.username.text.toString(),
                     binding.password.text.toString(),
@@ -65,15 +77,9 @@ class LoginDialog : DialogFragment() {
                 } else {
                     RetrofitInstance.authApi.login(login)
                 }
-            } catch (e: IOException) {
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                return@launchWhenCreated
             } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
 
@@ -95,5 +101,9 @@ class LoginDialog : DialogFragment() {
             dialog?.dismiss()
             activity?.recreate()
         }
+    }
+
+    private fun isEmail(text: String): Boolean {
+        return TextUtils.EMAIL_REGEX.toRegex().matches(text)
     }
 }

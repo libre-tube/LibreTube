@@ -56,7 +56,7 @@
     <string name="videos">Videa</string>
     <string name="darkTheme">Tmavý</string>
     <string name="lightTheme">Světlý</string>
-    <string name="startpage">Trendy</string>
+    <string name="startpage">Domů</string>
     <string name="library">Knihovna</string>
     <string name="subscriptions">Odběry</string>
     <string name="systemDefault">Systém</string>
@@ -283,7 +283,7 @@
     <string name="error_occurred">Chyba</string>
     <string name="copied">Zkopírováno</string>
     <string name="downloadsucceeded">Stahování bylo úspěšné</string>
-    <string name="share_with_time">Sdílet s časovou značkou</string>
+    <string name="share_with_time">Sdílet s časem</string>
     <string name="export_subscriptions">Exportovat odběry</string>
     <string name="skip_buttons">Tlačítka přeskočení</string>
     <string name="history_size">Maximální velikost historie</string>
@@ -292,11 +292,11 @@
     <string name="unlimited">Neomezená</string>
     <string name="add_to_queue">Přidat do fronty</string>
     <string name="misc">Různé</string>
-    <string name="break_reminder">Připominka přestávky</string>
+    <string name="break_reminder">Připomínka přestávky</string>
     <string name="take_a_break">Čas na přestávku</string>
     <string name="already_spent_time">V aplikaci jste strávili již %1$s minut, dejte si chvíli pauzu.</string>
     <string name="yt_shorts">Shorts</string>
-    <string name="repeat_mode_current">Současný</string>
+    <string name="repeat_mode_current">Aktuální</string>
     <string name="repeat_mode_none">Žádný</string>
     <string name="resize_mode_fit">Vejít se</string>
     <string name="no_subtitles_available">Nejsou dostupné žádné titulky</string>
@@ -327,7 +327,7 @@
     <string name="push_channel_name">Pracovník oznámení</string>
     <string name="download_channel_name">Služba stahování</string>
     <string name="skip_segment">Přeskočit segment</string>
-    <string name="sb_skip_manual_summary">Nepřeskakovat segmenty automaticky, vždy se předtím zeptat.</string>
+    <string name="sb_skip_manual_summary">Nepřeskakovat segmenty automaticky, vždy se nejprve zeptat.</string>
     <string name="download_channel_description">Zobrazí oznámení při stahování médií.</string>
     <string name="push_channel_description">Zobrazí oznámení, když jsou k dispozici nové videa.</string>
     <string name="local_subscriptions">Lokální odběry</string>
@@ -351,7 +351,7 @@
     <string name="playlistNameReversed">Název playlistu (obráceně)</string>
     <string name="recentlyUpdated">Nedávno aktualizované</string>
     <string name="recentlyUpdatedReversed">Nedávno aktualizované (obráceně)</string>
-    <string name="time_code">Časové razítko (sekundy)</string>
+    <string name="time_code">Čas (sekundy)</string>
     <string name="show_more">Zobrazit více</string>
     <string name="added_to_playlist">Přidáno do playlistu</string>
     <string name="queue">Fronta</string>
@@ -359,7 +359,7 @@
     <string name="livestreams">Živé přenosy</string>
     <string name="alternative_videos_layout">Alternativní rozvržení videí</string>
     <string name="sb_markers">Značky</string>
-    <string name="sb_markers_summary">Označte si úseky na časové liště.</string>
+    <string name="sb_markers_summary">Označit úseky na časové liště.</string>
     <string name="defaultIconLight">Výchozí světlá</string>
     <string name="confirm_unsubscribing_summary">Zobrazit potvrzovací dialog před zrušením odběru.</string>
     <string name="confirm_unsubscribe">Opravdu chcete zrušit odběr %1$s\?</string>
@@ -402,4 +402,19 @@
     <string name="volume">Hlasitost</string>
     <string name="swipe_controls_summary">Pomocí gesta přejetí prstem upravit jas a hlasitost.</string>
     <string name="pop_up">Vyskakovací okno</string>
+    <string name="no_comments_available">Toto video nemá žádné komentáře.</string>
+    <string name="double_tap_seek">Dvojitým klepnutím vyhledáte</string>
+    <string name="captions_size">Velikost titulků</string>
+    <string name="comments_disabled">Komentáře jsou zakázány autorem videa.</string>
+    <string name="double_tap_seek_summary">Klepnutím dvakrát vlevo nebo vpravo přetočíte pozici přehrávače zpět nebo dopředu.</string>
+    <string name="all_caught_up">Už jste v obraze</string>
+    <string name="all_caught_up_summary">Viděli jste všechna nová videa</string>
+    <string name="app_backup">Záloha aplikace</string>
+    <string name="backup_restore_summary">Import a export odběrů, playlistů, …</string>
+    <string name="exportsuccess">Exportováno.</string>
+    <string name="privacy_alert">Upozornění na soukromí</string>
+    <string name="username_email">Pokračovat s e-mailovou adresou\? (není doporučeno)</string>
+    <string name="proceed">Pokračovat</string>
+    <string name="export_playlists">Exportovat playlisty</string>
+    <string name="import_playlists">Importovat playlisty</string>
 </resources>

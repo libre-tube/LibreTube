@@ -154,7 +154,7 @@ interface PipedApi {
     suspend fun renamePlaylist(
         @Header("Authorization") token: String,
         @Body playlistId: PlaylistId
-    )
+    ): PlaylistId
 
     @POST("user/playlists/delete")
     suspend fun deletePlaylist(

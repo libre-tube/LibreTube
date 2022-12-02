@@ -402,4 +402,19 @@
     <string name="defaults">الإفتراضي</string>
     <string name="pop_up">نافذة منبثقة</string>
     <string name="swipe_controls_summary">استخدم إيماءة السحب لضبط السطوع ومستوى الصوت.</string>
+    <string name="no_comments_available">لا يحتوي هذا الفيديو على تعليقات متوفرة.</string>
+    <string name="comments_disabled">التعليقات معطلة من قبل القائم بالتحميل.</string>
+    <string name="double_tap_seek_summary">اضغط مرتين على اليسار أو اليمين لترجيع موضع المشغل أو إعادة تقديمه.</string>
+    <string name="all_caught_up">لقد وصلت الى النهاية</string>
+    <string name="captions_size">حجم التسميات التوضيحية</string>
+    <string name="double_tap_seek">انقر نقرا مزدوجا للسعي</string>
+    <string name="all_caught_up_summary">لقد شاهدت جميع مقاطع الفيديو الجديدة</string>
+    <string name="import_playlists">استيراد قوائم التشغيل</string>
+    <string name="export_playlists">تصدير قوائم التشغيل</string>
+    <string name="app_backup">النسخ الاحتياطي للتطبيق</string>
+    <string name="backup_restore_summary">استيراد وتصدير الاشتراكات وقوائم التشغيل …</string>
+    <string name="proceed">استمر</string>
+    <string name="privacy_alert">تنبيه الخصوصية</string>
+    <string name="exportsuccess">تم تصديرها بنجاح!</string>
+    <string name="username_email">قمت بإدراج عنوان بريد إلكتروني كاسم مستخدم غير مستحسن. هل أنت متأكد من أنك تريد المتابعة؟</string>
 </resources>

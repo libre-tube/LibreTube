@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
+import com.github.libretube.extensions.normalize
 
 class PlayerGestureControlsView(
     context: Context,
@@ -20,7 +21,21 @@ class PlayerGestureControlsView(
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldHeight, oldHeight)
 
-        binding.brightnessProgressBar.max = (height * 0.7).toInt()
-        binding.volumeProgressBar.max = (height * 0.7).toInt()
+        // Set new max value of progress bar corresponding to the new height and
+        // make progress accordingly, store oldProgress before changing it to avoid
+        // inconsistency when old progress > new max
+        binding.brightnessProgressBar.apply {
+            val oldMax = max
+            val oldProgress = progress
+            max = (height * 0.7).toInt()
+            progress = oldProgress.normalize(0, oldMax, 0, max)
+        }
+
+        binding.volumeProgressBar.apply {
+            val oldMax = max
+            val oldProgress = progress
+            max = (height * 0.7).toInt()
+            progress = oldProgress.normalize(0, oldMax, 0, max)
+        }
     }
 }

@@ -65,7 +65,7 @@
     <string name="darkTheme">Scuro</string>
     <string name="comments">Commenti</string>
     <string name="videoCount">%1$s video</string>
-    <string name="noInternet">Connettiti ad internet prima.</string>
+    <string name="noInternet">Prima connettiti ad internet.</string>
     <string name="retry">Riprova</string>
     <string name="instance">Istanza</string>
     <string name="settings">Impostazioni</string>
@@ -251,10 +251,10 @@
     <string name="yt_shorts">Short</string>
     <string name="add_to_queue">Aggiungi alla coda</string>
     <string name="notifications">Notifiche</string>
-    <string name="notify_new_streams">Notifiche per nuove stream</string>
+    <string name="notify_new_streams">Notifiche per nuovi video</string>
     <string name="notify_new_streams_summary">Notifiche su nuovi contenuti dai creatore che segui.</string>
     <string name="checking_frequency">Controlla ogni…</string>
-    <string name="new_streams_count">%1$s nuove stream disponibili</string>
+    <string name="new_streams_count">%1$s nuovi video disponibili</string>
     <string name="new_streams_by">Nuova stream di %1$s…</string>
     <string name="most_views">Più visti</string>
     <string name="least_views">Meno visti</string>
@@ -300,7 +300,7 @@
     <string name="repeat_mode_current">Attuale</string>
     <string name="picture_in_picture">Picture in Picture</string>
     <string name="player_resize_mode">Modalità ridimensionamento</string>
-    <string name="maximum_image_cache">Dimensione massima della cache delle immagini</string>
+    <string name="maximum_image_cache">Dimensione massima cache immagini</string>
     <string name="open_copied">Apri</string>
     <string name="reset_watch_positions">Ripristina</string>
     <string name="system_caption_style">Stile dei sottotitoli di sistema</string>
@@ -317,7 +317,7 @@
     <string name="trending_layout">Layout tendenze alternativo</string>
     <string name="renamePlaylist">Rinomina la playlist</string>
     <string name="new_videos_badge">Indicatore per i nuovi video</string>
-    <string name="new_videos_badge_summary">Mostra un badge con il numero dei nuovi video, se ce ne sono.</string>
+    <string name="new_videos_badge_summary">Mostra una notifica con il numero dei nuovi video, se ce ne sono.</string>
     <string name="wifi">Wi-Fi</string>
     <string name="mobile_data">Dati mobili</string>
     <string name="skip_segment">Salta il segmento</string>
@@ -332,7 +332,7 @@
     <string name="background_channel_name">Modalità in sottofondo</string>
     <string name="download_channel_name">Servizio di Download</string>
     <string name="push_channel_name">Operatore di notifica</string>
-    <string name="push_channel_description">Mostra una notifica quando sono disponibili nuove stream.</string>
+    <string name="push_channel_description">Mostra una notifica quando sono disponibili nuovi video.</string>
     <string name="save_feed">Carica flusso in secondo piano</string>
     <string name="save_feed_summary">Carica il flusso di iscrizioni in secondo piano e impedisci che venga aggiornato automaticamente.</string>
     <string name="legacy_subscriptions">Vista delle iscrizioni obsoleta</string>
@@ -363,14 +363,14 @@
     <string name="time_code">Codice temporale (secondi)</string>
     <string name="playlistCloned">Playlist clonata</string>
     <string name="confirm_unsubscribe">Sei sicuro di voler annullare l\'iscrizione a %1$s\?</string>
-    <string name="confirm_unsubscribing">Conferma l\'annullamento dell\'iscrizione</string>
+    <string name="confirm_unsubscribing">Conferma la disiscrizione</string>
     <string name="play_all">Riproduci tutti</string>
     <string name="confirm_unsubscribing_summary">Mostra una finestra di conferma prima di annullare l\'iscrizione.</string>
     <string name="start_time">Ora di inizio</string>
-    <string name="notification_time">Tempo di notifica</string>
+    <string name="notification_time">Orari di notifica</string>
     <string name="time">Tempo</string>
     <string name="end_time">Ora di fine</string>
-    <string name="notification_time_summary">L\'intervallo di tempo in cui le notifiche possono essere visualizzate.</string>
+    <string name="notification_time_summary">L\'intervallo di ore in cui le notifiche possono essere mostrate.</string>
     <string name="local_playlists">Playlist locali</string>
     <string name="not_enabled">Elemento del menu non attivo!</string>
     <string name="brightness">Luminosità</string>
@@ -402,4 +402,11 @@
     <string name="clear_bookmarks">Cancella segnalibri</string>
     <string name="bookmarks_empty">Ancora nessun segnalibro!</string>
     <string name="pop_up">Pop-up</string>
+    <string name="no_comments_available">Questo video non ha commenti disponibili.</string>
+    <string name="comments_disabled">I commenti sono disattivati dall\'autore del video.</string>
+    <string name="captions_size">Dimensione sottotitoli</string>
+    <string name="double_tap_seek">Doppio tocco per cercare</string>
+    <string name="double_tap_seek_summary">Tocca due volte a sinistra o a destra per riavvolgere o avanzare la posizione del lettore.</string>
+    <string name="all_caught_up">Tutto a posto</string>
+    <string name="all_caught_up_summary">Hai visto tutti i video nuovi</string>
 </resources>

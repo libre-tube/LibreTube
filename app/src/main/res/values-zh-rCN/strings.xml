@@ -404,4 +404,19 @@
     <string name="pop_up">弹窗</string>
     <string name="comments_disabled">上传者禁止评论。</string>
     <string name="no_comments_available">此视频无评论。</string>
+    <string name="double_tap_seek">轻按两次查找</string>
+    <string name="double_tap_seek_summary">在左侧或右侧轻按两次倒退或前进播放器位置。</string>
+    <string name="all_caught_up_summary">你看过了所有新视频</string>
+    <string name="all_caught_up">没什么可看的了</string>
+    <string name="captions_size">字幕尺寸</string>
+    <string name="import_playlists">导入播放列表</string>
+    <string name="export_playlists">导出播放列表</string>
+    <string name="app_backup">应用备份</string>
+    <string name="backup_restore_summary">导入和导出订阅、播放列表…</string>
+    <string name="exportsuccess">成功导出。</string>
+    <string name="privacy_alert">隐私警告</string>
+    <string name="username_email">你插入了一个电子邮件地址作为用户名，我们不推荐这样做。 你确定要继续吗？</string>
+    <string name="proceed">继续</string>
+    <string name="pinch_control_summary">使用伸缩手势进行缩小/放大操作。</string>
+    <string name="pinch_control">手指伸缩控制</string>
 </resources>

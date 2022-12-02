@@ -12,11 +12,25 @@
             app:title="@string/swipe_controls" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:icon="@drawable/ic_pinch_gesture"
+            android:summary="@string/pinch_control_summary"
+            app:key="player_pinch_control"
+            app:title="@string/pinch_control" />
+
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:icon="@drawable/ic_next"
             android:summary="@string/skip_buttons_summary"
             app:key="skip_buttons"
             app:title="@string/skip_buttons" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_skip"
+            android:summary="@string/double_tap_seek_summary"
+            app:key="double_tap_seek"
+            app:title="@string/double_tap_seek" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -27,7 +41,7 @@
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:key="auto_fullscreen"
             app:title="@string/autoRotatePlayer" />
 
@@ -61,6 +75,15 @@
             app:key="buffering_goal"
             app:summary="@string/buffering_goal_summary"
             app:title="@string/buffering_goal" />
+
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_text"
+            android:key="captions_size"
+            android:title="@string/captions_size"
+            app:defValue="18"
+            app:stepSize="1"
+            app:valueFrom="8"
+            app:valueTo="30" />
 
     </PreferenceCategory>
 

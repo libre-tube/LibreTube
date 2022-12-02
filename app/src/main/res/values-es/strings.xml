@@ -110,7 +110,7 @@
     <string name="oledTheme">Negro</string>
     <string name="material_you">Tu Material</string>
     <string name="app_icon">Icono</string>
-    <string name="piped">Hilo</string>
+    <string name="piped">Piped</string>
     <string name="youtube">Google YouTube</string>
     <string name="sponsorblock_notifications">Notificaciones</string>
     <string name="enabled">Activado</string>
@@ -219,7 +219,7 @@
     <string name="telegram">Telegram</string>
     <string name="reddit">Reddit</string>
     <string name="community">Comunidad</string>
-    <string name="discord">Discord (Servicio de mensajería instantánea)</string>
+    <string name="discord">Discord</string>
     <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>
@@ -267,7 +267,7 @@
     <string name="worst_quality">Peor calidad</string>
     <string name="default_subtitle_language">Idioma subtítulo</string>
     <string name="notify_new_streams">Notificaciones para nuevos directos</string>
-    <string name="checking_frequency">Comprobando todo …</string>
+    <string name="checking_frequency">Comprobar cada…</string>
     <string name="new_streams_count">%1$s nuevo directo disponible</string>
     <string name="most_recent">Novedades</string>
     <string name="least_recent">Antiguo</string>
@@ -289,7 +289,7 @@
     <string name="repeat_mode_current">Actual</string>
     <string name="backup_restore">Copia de seguridad y restauración</string>
     <string name="backup">Copia de seguridad</string>
-    <string name="picture_in_picture">Imagen en imagen</string>
+    <string name="picture_in_picture">Reproductor emergente</string>
     <string name="break_reminder_time">Minutos antes de ser recordado</string>
     <string name="legacy_subscriptions">Vista de las suscripciones antiguas</string>
     <string name="device_info">Información del dispositivo</string>
@@ -306,7 +306,7 @@
     <string name="background_mode">Modo de segundo plano</string>
     <string name="add_to_queue">Añadir a la cola</string>
     <string name="misc">Miscelánea</string>
-    <string name="break_reminder">Recordatorio de tomate un descanso</string>
+    <string name="break_reminder">Recordatorio de descanso</string>
     <string name="yt_shorts">Vídeos Cortos</string>
     <string name="no_subtitles_available">No hay subtítulos disponibles</string>
     <string name="player_resize_mode">Modo de redimensión</string>
@@ -324,11 +324,11 @@
     <string name="sb_skip_manual">Salto manual</string>
     <string name="download_channel_name">Servicio de descarga</string>
     <string name="skip_segment">Saltar segmento</string>
-    <string name="download_channel_description">Muestra una notificación cuando se descargan medios.</string>
+    <string name="download_channel_description">Muestra una notificación al descargar medios.</string>
     <string name="background_channel_name">Modo de fondo</string>
     <string name="push_channel_name">Trabajador de notificación</string>
     <string name="sb_skip_manual_summary">No omita segmentos automáticamente, siempre pregunte antes.</string>
-    <string name="push_channel_description">Muestra una notificación cuando haya nuevos flujos disponibles.</string>
+    <string name="push_channel_description">Muestra una notificación cuando hay nuevas transmisiones disponibles.</string>
     <string name="background_channel_description">Mostrar una notificación con botones para controlar el reproductor de audio.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
@@ -371,7 +371,7 @@
     <string name="end_time">Hora de finalización</string>
     <string name="notification_time">Hora de la notificación</string>
     <string name="notification_time_summary">Periodo de tiempo en el que se permite mostrar las notificaciones.</string>
-    <string name="alternative_player_layout_summary">Muestre los videos relacionados como una fila encima de los comentarios en lugar de debajo.</string>
+    <string name="alternative_player_layout_summary">Muestra los videos relacionados como una fila encima de los comentarios en lugar de debajo.</string>
     <string name="alternative_trending_layout">Diseño de tendencias alternativas</string>
     <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
     <string name="navbar_order">Ordenar</string>
@@ -401,7 +401,12 @@
     <string name="brightness">Brillo</string>
     <string name="swipe_controls_summary">Use el gesto de deslizar para ajustar el brillo y el volumen.</string>
     <string name="defaults">Por defecto</string>
-    <string name="pop_up">Ventana emergente</string>
+    <string name="pop_up">Emergente</string>
     <string name="no_comments_available">Este vídeo no tiene comentarios disponibles.</string>
-    <string name="comments_disabled">Los comentarios están desactivados por el autor.</string>
+    <string name="comments_disabled">Los comentarios están desactivados por el creador del contenido.</string>
+    <string name="captions_size">Tamaño de los subtítulos</string>
+    <string name="all_caught_up">Estás al día</string>
+    <string name="double_tap_seek_summary">Toque dos veces a la izquierda o a la derecha para rebobinar o avanzar la posición del reproductor.</string>
+    <string name="double_tap_seek">Toca dos veces para buscar</string>
+    <string name="all_caught_up_summary">Has visto todos los vídeos nuevos</string>
 </resources>

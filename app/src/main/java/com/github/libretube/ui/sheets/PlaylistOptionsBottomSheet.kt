@@ -1,23 +1,20 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Toast
 import com.github.libretube.R
-import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.PlaylistId
-import com.github.libretube.databinding.DialogTextPreferenceBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
+import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.PreferenceHelper
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +24,7 @@ import java.io.IOException
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
-    playlistName: String,
+    private val playlistName: String,
     private val playlistType: PlaylistType
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
@@ -87,32 +84,8 @@ class PlaylistOptionsBottomSheet(
                         .show(parentFragmentManager, null)
                 }
                 context?.getString(R.string.renamePlaylist) -> {
-                    val binding = DialogTextPreferenceBinding.inflate(layoutInflater)
-                    binding.input.hint = context?.getString(R.string.playlistName)
-                    binding.input.inputType = InputType.TYPE_CLASS_TEXT
-
-                    MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(R.string.renamePlaylist)
-                        .setView(binding.root)
-                        .setPositiveButton(R.string.okay) { _, _ ->
-                            if (binding.input.text.toString() == "") {
-                                Toast.makeText(
-                                    context,
-                                    R.string.emptyPlaylistName,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                return@setPositiveButton
-                            }
-                            CoroutineScope(Dispatchers.IO).launch {
-                                try {
-                                    PlaylistsHelper.renamePlaylist(playlistId, binding.input.text.toString())
-                                } catch (e: Exception) {
-                                    return@launch
-                                }
-                            }
-                        }
-                        .setNegativeButton(R.string.cancel, null)
-                        .show()
+                    RenamePlaylistDialog(playlistId, playlistName)
+                        .show(parentFragmentManager, null)
                 }
             }
         }

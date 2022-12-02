@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ContentItem(
     var url: String? = null,
+    val type: String? = null,
     var thumbnail: String? = null,
     var uploaderName: String? = null,
     var uploaded: Long? = null,
@@ -16,6 +17,7 @@ data class ContentItem(
     var uploadedDate: String? = null,
     var duration: Long? = null,
     var views: Long? = null,
+    var isShort: Boolean? = null,
     var uploaderVerified: Boolean? = null,
     // Channel and Playlist attributes
     var name: String? = null,

@@ -402,4 +402,19 @@
     <string name="volume">Гучність</string>
     <string name="defaults">Типові</string>
     <string name="pop_up">Спливне вікно</string>
+    <string name="double_tap_seek">Двічі торкніться, щоб шукати</string>
+    <string name="double_tap_seek_summary">Двічі торкніться ліворуч або праворуч, щоб перемотати назад або вперед.</string>
+    <string name="no_comments_available">Це відео не має коментарів.</string>
+    <string name="comments_disabled">Коментарі вимкнені завантажувачем.</string>
+    <string name="captions_size">Розмір підписів</string>
+    <string name="all_caught_up">Ви все переглянули</string>
+    <string name="all_caught_up_summary">Ви переглянули всі нові відео</string>
+    <string name="app_backup">Резервне копіювання застосунку</string>
+    <string name="privacy_alert">Оповіщення про приватність</string>
+    <string name="username_email">Ви ввели адресу електронної пошти як ім\'я користувача, що не рекомендується. Ви впевнені, що хочете продовжити\?</string>
+    <string name="import_playlists">Імпорт добірок</string>
+    <string name="backup_restore_summary">Імпорт та експорт підписок, добірок, …</string>
+    <string name="exportsuccess">Успішно експортовано!</string>
+    <string name="proceed">Продовжити</string>
+    <string name="export_playlists">Експорт добірок</string>
 </resources>

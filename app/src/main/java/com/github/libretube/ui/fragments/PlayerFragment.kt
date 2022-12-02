@@ -1,7 +1,6 @@
 package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
 import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -143,7 +142,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
-    private lateinit var segmentData: SegmentData
+
+    /**
+     * Chapters and comments
+     */
     private lateinit var chapters: List<ChapterSegment>
     private val comments: MutableList<Comment> = mutableListOf()
     private var commentsNextPage: String? = null
@@ -158,6 +160,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * for the player notification
      */
     private lateinit var nowPlayingNotification: NowPlayingNotification
+
+    /**
+     * SponsorBlock
+     */
+    private lateinit var segmentData: SegmentData
+    private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -295,6 +303,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
         }
         playerBinding.closeImageButton.setOnClickListener {
             viewModel.isFullscreen.value = false
@@ -303,12 +312,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             mainActivity.supportFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
-        binding.playImageView.setOnClickListener {
+        val playPauseClickListner = View.OnClickListener {
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
-                binding.playImageView.setImageResource(R.drawable.ic_pause)
                 if (exoPlayer.playbackState == Player.STATE_ENDED) {
                     // restart video if finished
                     exoPlayer.seekTo(0)
@@ -316,10 +325,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 exoPlayer.play()
             } else {
                 // pause the video
-                binding.playImageView.setImageResource(R.drawable.ic_play)
                 exoPlayer.pause()
             }
         }
+        playerBinding.playPauseBTN.setOnClickListener(playPauseClickListner)
+        binding.playImageView.setOnClickListener(playPauseClickListner)
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
@@ -352,6 +362,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 // exit fullscreen mode
                 unsetFullscreen()
             }
+        }
+
+        val updateSbImageResource = {
+            playerBinding.sbToggle.setImageResource(
+                if (sponsorBlockEnabled) R.drawable.ic_sb_enabled else R.drawable.ic_sb_disabled
+            )
+        }
+        updateSbImageResource()
+        playerBinding.sbToggle.setOnClickListener {
+            sponsorBlockEnabled = !sponsorBlockEnabled
+            updateSbImageResource()
         }
 
         // share button
@@ -517,6 +538,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
 
+        if (!sponsorBlockEnabled) return
+
         if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) return
 
         val currentPosition = exoPlayer.currentPosition
@@ -535,12 +558,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
 
                 if (PlayerHelper.sponsorBlockNotifications) {
-                    Toast
-                        .makeText(
-                            context,
-                            R.string.segment_skipped,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
                 }
 
                 // skip the segment automatically
@@ -553,7 +571,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun playVideo() {
+        // reset the player view
         playerBinding.exoProgress.clearSegments()
+        playerBinding.sbToggle.visibility = View.GONE
 
         lifecycleScope.launchWhenCreated {
             streams = try {
@@ -641,6 +661,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         ObjectMapper().writeValueAsString(categories)
                     )
                 playerBinding.exoProgress.setSegments(segmentData.segments)
+                runOnUiThread {
+                    playerBinding.sbToggle.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -729,7 +752,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
         exoPlayerView.subtitleView?.apply {
             setApplyEmbeddedFontSizes(false)
-            setFixedTextSize(TEXT_SIZE_TYPE_ABSOLUTE, 18F)
+            setFixedTextSize(TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
             if (!PlayerHelper.useSystemCaptionStyle) return
             setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             setStyle(captionStyle)
@@ -793,11 +816,28 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (isPlaying) {
+                    // Stop [BackgroundMode] service if it is running.
+                    BackgroundHelper.stopBackgroundPlay(requireContext())
+                }
+
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
                     Handler(Looper.getMainLooper()).postDelayed(
                         this@PlayerFragment::checkForSegments,
                         100
                     )
+                }
+            }
+
+            override fun onEvents(player: Player, events: Player.Events) {
+                super.onEvents(player, events)
+                if (events.containsAny(
+                        Player.EVENT_PLAYBACK_STATE_CHANGED,
+                        Player.EVENT_IS_PLAYING_CHANGED,
+                        Player.EVENT_PLAY_WHEN_READY_CHANGED
+                    )
+                ) {
+                    updatePlayPauseButton()
                 }
             }
 
@@ -819,22 +859,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     playNextVideo()
                 }
 
-                when (playbackState) {
-                    Player.STATE_READY -> {
-                        // media actually playing
-                        transitioning = false
-                        binding.playImageView.setImageResource(R.drawable.ic_pause)
-                        // update the PiP params to use the correct aspect ratio
-                        if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
-                    }
-                    Player.STATE_ENDED -> {
-                        // video has finished
-                        binding.playImageView.setImageResource(R.drawable.ic_restart)
-                    }
-                    else -> {
-                        // player in any other state
-                        binding.playImageView.setImageResource(R.drawable.ic_play)
-                    }
+                if (playbackState == Player.STATE_READY) {
+                    // media actually playing
+                    transitioning = false
+                    // update the PiP params to use the correct aspect ratio
+                    if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
                 }
 
                 // save the watch position when paused
@@ -935,6 +964,22 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
+        }
+    }
+
+    private fun updatePlayPauseButton() {
+        if (exoPlayer.isPlaying) {
+            // video is playing
+            binding.playImageView.setImageResource(R.drawable.ic_pause)
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_pause)
+        } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
+            // video has finished
+            binding.playImageView.setImageResource(R.drawable.ic_restart)
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_restart)
+        } else {
+            // player in any other state
+            binding.playImageView.setImageResource(R.drawable.ic_play)
+            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_play)
         }
     }
 
@@ -1376,26 +1421,19 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return false
         }
 
-        val backgroundModeRunning = isServiceRunning(requireContext(), BackgroundMode::class.java)
+        val backgroundModeRunning = BackgroundHelper.isServiceRunning(requireContext(), BackgroundMode::class.java)
 
         return exoPlayer.isPlaying && !backgroundModeRunning
-    }
-
-    private fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
-        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        @Suppress("DEPRECATION")
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         if (!PlayerHelper.autoRotationEnabled) return
+
+        // If in PiP mode, orientation is given as landscape.
+        if (SDK_INT >= Build.VERSION_CODES.N && activity?.isInPictureInPictureMode == true) return
+
         when (newConfig.orientation) {
             // go to fullscreen mode
             Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()

@@ -23,65 +23,52 @@ class MainSettings : BasePreferenceFragment() {
 
         val general = findPreference<Preference>("general")
         general?.setOnPreferenceClickListener {
-            val newFragment = GeneralSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(GeneralSettings())
         }
 
         val instance = findPreference<Preference>("instance")
         instance?.setOnPreferenceClickListener {
-            val newFragment = InstanceSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(InstanceSettings())
         }
 
         val appearance = findPreference<Preference>("appearance")
         appearance?.setOnPreferenceClickListener {
-            val newFragment = AppearanceSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(AppearanceSettings())
         }
 
         val sponsorBlock = findPreference<Preference>("sponsorblock")
         sponsorBlock?.setOnPreferenceClickListener {
-            val newFragment = SponsorBlockSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(SponsorBlockSettings())
         }
 
         val player = findPreference<Preference>("player")
         player?.setOnPreferenceClickListener {
-            val newFragment = PlayerSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(PlayerSettings())
         }
 
         val audioVideo = findPreference<Preference>("audio_video")
         audioVideo?.setOnPreferenceClickListener {
-            val newFragment = AudioVideoSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(AudioVideoSettings())
         }
 
         val history = findPreference<Preference>("history")
         history?.setOnPreferenceClickListener {
-            val newFragment = HistorySettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(HistorySettings())
         }
 
         val notifications = findPreference<Preference>("notifications")
         notifications?.setOnPreferenceClickListener {
-            val newFragment = NotificationSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(NotificationSettings())
+        }
+
+        val backupRestore = findPreference<Preference>("backup_restore")
+        backupRestore?.setOnPreferenceClickListener {
+            navigateToSettingsFragment(BackupRestoreSettings())
         }
 
         val advanced = findPreference<Preference>("advanced")
         advanced?.setOnPreferenceClickListener {
-            val newFragment = AdvancedSettings()
-            navigateToSettingsFragment(newFragment)
-            true
+            navigateToSettingsFragment(AdvancedSettings())
         }
 
         val update = findPreference<Preference>("update")
@@ -131,9 +118,10 @@ class MainSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun navigateToSettingsFragment(newFragment: Fragment) {
+    private fun navigateToSettingsFragment(newFragment: Fragment): Boolean {
         parentFragmentManager.beginTransaction()
             .replace(R.id.settings, newFragment)
             .commitNow()
+        return true
     }
 }

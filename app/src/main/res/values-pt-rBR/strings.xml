@@ -400,4 +400,21 @@
     <string name="select_other_start_tab">Selecione outra aba inicial primeiro!</string>
     <string name="brightness">Brilho</string>
     <string name="volume">Volume</string>
+    <string name="defaults">Padrões</string>
+    <string name="pop_up">Pop-Up</string>
+    <string name="no_comments_available">Este vídeo não tem comentários disponíveis.</string>
+    <string name="comments_disabled">Os comentários são desativados pelo criador.</string>
+    <string name="captions_size">Tamanho das legendas</string>
+    <string name="double_tap_seek">Toque duas vezes para buscar</string>
+    <string name="all_caught_up">Você está atualizado</string>
+    <string name="all_caught_up_summary">Você viu todos os vídeos novos</string>
+    <string name="double_tap_seek_summary">Toque duas vezes à esquerda ou à direita para retroceder ou avançar a posição do player.</string>
+    <string name="import_playlists">Importar playlists</string>
+    <string name="export_playlists">Exportar playlists</string>
+    <string name="app_backup">Backup do Aplicativo</string>
+    <string name="backup_restore_summary">Importar e exportar inscrições, playlists, …</string>
+    <string name="exportsuccess">Exportado com sucesso!</string>
+    <string name="privacy_alert">Alerta de privacidade</string>
+    <string name="proceed">Continuar</string>
+    <string name="username_email">Você inseriu um endereço de e-mail como nome de usuário, o que não é recomendado. Tem certeza de que deseja continuar\?</string>
 </resources>
