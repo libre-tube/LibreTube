@@ -170,11 +170,11 @@
     <string name="related_streams">Contenuti correlati</string>
     <string name="hide_chapters">Nascondi capitoli</string>
     <string name="show_chapters">Mostra capitoli</string>
-    <string name="category_filler">Tangente filler/scherzi</string>
+    <string name="category_filler">Riempitivi/Scherzi</string>
     <string name="category_music_offtopic">Musica: sezione non musicale</string>
-    <string name="category_filler_description">Per le scene tangenziali aggiunte solo per filler o umorismo non necessarie per comprendere il contenuto principale del video.</string>
+    <string name="category_filler_description">Per le scene marginali aggiunte solo come riempitivo o umorismo, non necessarie per comprendere il contenuto principale del video.</string>
     <string name="category_music_offtopic_description">Solo per l\'uso in video musicali. Dovrebbe coprire parti del video non parte di mix ufficiali. Alla fine, il video dovrebbe assomigliare il più vicino possibile alla versione di Spotify o a qualsiasi altra versione mixata, o riducendo la conversazione o altre distrazioni.</string>
-    <string name="category_preview">Anteprima/riepilogo</string>
+    <string name="category_preview">Anteprima/Riepilogo</string>
     <string name="category_preview_description">Per i segmenti che mostrano in dettaglio i prossimi contenuti in questo o futuri video della serie, ma non forniscono ulteriori informazioni. Se include clip che appaiono solo qui, questa probabilmente è la categoria sbagliata.</string>
     <string name="buffering_goal">Precaricamento</string>
     <string name="buffering_goal_summary">La quantità massima di secondi che viene bufferizzata nei video.</string>
@@ -201,8 +201,8 @@
     <string name="deleteAccount_summary">Elimina l\'account Piped</string>
     <string name="restore">Ripristina</string>
     <string name="account">Account</string>
-    <string name="watch_history">Guarda la cronologia</string>
-    <string name="watch_positions">Ricorda posizione</string>
+    <string name="watch_history">Cronologia delle visualizzazioni</string>
+    <string name="watch_positions">Posizioni da ricordare</string>
     <string name="watch_positions_summary">Continua dall\'ultima posizione di riproduzione</string>
     <string name="auth_instance">Istanza di autenticazione</string>
     <string name="auth_instance_summary">Usa un\'istanza diversa per le chiamate di autenticazione.</string>
@@ -409,4 +409,16 @@
     <string name="double_tap_seek_summary">Tocca due volte a sinistra o a destra per riavvolgere o avanzare la posizione del lettore.</string>
     <string name="all_caught_up">Tutto a posto</string>
     <string name="all_caught_up_summary">Hai visto tutti i video nuovi</string>
+    <string name="export_playlists">Esporta playlist</string>
+    <string name="app_backup">Backup dell\'app</string>
+    <string name="backup_restore_summary">Importa ed esporta iscrizioni, playlist, …</string>
+    <string name="exportsuccess">Esportato.</string>
+    <string name="privacy_alert">Avviso sulla privacy</string>
+    <string name="pinch_control">Controllo pinch</string>
+    <string name="pinch_control_summary">Usa il pinch to zoom per ingrandire.</string>
+    <string name="import_playlists">Importa playlist</string>
+    <string name="username_email">Procedere con un indirizzo email che non è consigliato\?</string>
+    <string name="theme_monochrome">Monocromatico minimalista</string>
+    <string name="proceed">Procedi</string>
+    <string name="play_latest_videos">Riproduci i video più recenti</string>
 </resources>
