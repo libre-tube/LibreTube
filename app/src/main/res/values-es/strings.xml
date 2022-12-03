@@ -327,7 +327,7 @@
     <string name="download_channel_description">Muestra una notificación al descargar medios.</string>
     <string name="background_channel_name">Modo de fondo</string>
     <string name="push_channel_name">Trabajador de notificación</string>
-    <string name="sb_skip_manual_summary">No omita segmentos automáticamente, siempre pregunte antes.</string>
+    <string name="sb_skip_manual_summary">No omitir segmentos automáticamente, siempre preguntar antes.</string>
     <string name="push_channel_description">Muestra una notificación cuando hay nuevas transmisiones disponibles.</string>
     <string name="background_channel_description">Mostrar una notificación con botones para controlar el reproductor de audio.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
@@ -396,7 +396,7 @@
     <string name="select_other_start_tab">¡Seleccione otra pestaña para el inicio primero!</string>
     <string name="not_enabled">¡Elemento del menú no habilitado!</string>
     <string name="volume">Volumen</string>
-    <string name="auto">Automático</string>
+    <string name="auto">Auto</string>
     <string name="swipe_controls">Controles del deslizamiento</string>
     <string name="brightness">Brillo</string>
     <string name="swipe_controls_summary">Use el gesto de deslizar para ajustar el brillo y el volumen.</string>
@@ -409,4 +409,16 @@
     <string name="double_tap_seek_summary">Toque dos veces a la izquierda o a la derecha para rebobinar o avanzar la posición del reproductor.</string>
     <string name="double_tap_seek">Toca dos veces para buscar</string>
     <string name="all_caught_up_summary">Has visto todos los vídeos nuevos</string>
+    <string name="import_playlists">Importar listas de reproducción</string>
+    <string name="export_playlists">Exportar listas de reproducción</string>
+    <string name="app_backup">Respaldo de aplicación</string>
+    <string name="pinch_control">Control de pellizco</string>
+    <string name="pinch_control_summary">Use un gesto de pellizco para acercar o alejar.</string>
+    <string name="theme_monochrome">Monocromo Minimalista</string>
+    <string name="backup_restore_summary">Importar y exportar suscripciones, listas de reproducción, …</string>
+    <string name="exportsuccess">Exportado</string>
+    <string name="privacy_alert">Alerta de privacidad</string>
+    <string name="proceed">Continuar</string>
+    <string name="username_email">Continuar con una dirección de correo aunque no sea recomendado\?</string>
+    <string name="play_latest_videos">Reproducir los últimos videos</string>
 </resources>
