@@ -417,4 +417,8 @@
     <string name="proceed">Tęsti</string>
     <string name="privacy_alert">Įspėjimas apie privatumą</string>
     <string name="username_email">Tęsti naudojant el. pašto adresą, nors tai ir nėra rekomenduojama\?</string>
+    <string name="pinch_control">Valdymas dviem pirštais</string>
+    <string name="pinch_control_summary">Norėdami padidinti / sumažinti, sutraukite pirštais arba atvirkščiai.</string>
+    <string name="theme_monochrome">Minimalistinė vienspalvė</string>
+    <string name="play_latest_videos">Groti naujausius vaizdo įrašus</string>
 </resources>

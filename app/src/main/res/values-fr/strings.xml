@@ -391,4 +391,9 @@
     <string name="bookmark">Marque-page</string>
     <string name="clear_bookmarks">Effacer les marque-pages</string>
     <string name="bookmarks_empty">Aucun marque-page !</string>
+    <string name="brightness">Luminosité</string>
+    <string name="volume">Volume</string>
+    <string name="no_comments_available">Cette vidéo n\'a pas de commentaires.</string>
+    <string name="comments_disabled">Les commentaires ont été désactivés par le propriétaire de la chaîne.</string>
+    <string name="proceed">Continuer</string>
 </resources>

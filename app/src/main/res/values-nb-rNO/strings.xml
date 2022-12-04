@@ -417,4 +417,8 @@
     <string name="proceed">Fortsett</string>
     <string name="captions_size">Undertekststørrelse</string>
     <string name="username_email">Fortsett med en e-postadresse som ikke er anbefalt\?</string>
+    <string name="pinch_control">Knipekontroll</string>
+    <string name="pinch_control_summary">Bruk knipehåndvending for forminskelse/forstørrelse.</string>
+    <string name="theme_monochrome">Minimalistisk monokrom</string>
+    <string name="play_latest_videos">Spill nyeste videoer</string>
 </resources>

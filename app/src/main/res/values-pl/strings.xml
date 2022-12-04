@@ -413,8 +413,12 @@
     <string name="export_playlists">Eksportuj playlisty</string>
     <string name="app_backup">Kopia ustawień aplikacji</string>
     <string name="backup_restore_summary">Importuj lub eksportuj subskrypcje, playlisty, …</string>
-    <string name="exportsuccess">Pomyślnie wyeksportowano!</string>
+    <string name="exportsuccess">Wyeksportowano.</string>
     <string name="proceed">Kontynuuj</string>
     <string name="privacy_alert">Ostrzeżenie o prywatności</string>
-    <string name="username_email">Jako nazwę użytkownika wstawiłeś/aś adres e-mail, lecz nie jest to zalecane. Czy na pewno chcesz kontynuować\?</string>
+    <string name="username_email">Użycie adresu e-mail jako nazwy użytkownika nie jest zalecane. Kontynuować\?</string>
+    <string name="pinch_control">Gesty zmiany rozmiaru obrazu</string>
+    <string name="pinch_control_summary">Użyj gestu rozciągnięcia/uszczypania, aby powiększyć/zmniejszyć rozmiar obrazu.</string>
+    <string name="theme_monochrome">Monochromatyczny</string>
+    <string name="play_latest_videos">Odtwórz najnowsze filmy</string>
 </resources>

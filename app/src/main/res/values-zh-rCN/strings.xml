@@ -420,4 +420,5 @@
     <string name="pinch_control_summary">使用伸缩手势进行缩小/放大操作。</string>
     <string name="pinch_control">手指伸缩控制</string>
     <string name="theme_monochrome">简约单色</string>
+    <string name="play_latest_videos">播放最新视频</string>
 </resources>

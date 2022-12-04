@@ -324,7 +324,7 @@
     <string name="audio_video_summary">মান এবং ফর্ম্যাট</string>
     <string name="renamePlaylist">প্লেলিস্ট পুনঃনামকরণ</string>
     <string name="sb_skip_manual_summary">সরাসরি সেগমেন্ট স্কিপ না করে প্রমট দেখান।</string>
-    <string name="network_metered">Metered</string>
+    <string name="network_metered">মিটারযুক্ত</string>
     <string name="new_videos_badge_summary">নতুন ভিডিওর সংখ্যাসহ ব্যাজ দেখান।</string>
     <string name="preferences">পছন্দসমূহ</string>
     <string name="save_feed">ফিড ব্যাকগ্রাউন্ডে লোড করুন</string>
@@ -383,6 +383,16 @@
     <string name="limit_to_runtime">রানটাইম লিমিট</string>
     <string name="open_queue_from_notification">নোটিফিকেশন থেকে কিউ খুলুন</string>
     <string name="trends">জনপ্রিয়গুলো</string>
-    <string name="featured">ফিচার্ড</string>
+    <string name="featured">বৈশিষ্ট্যযুক্ত</string>
     <string name="trending">এখন যা যা জনপ্রিয়</string>
+    <string name="local_playlists">স্থানীয় প্লেলিস্ট</string>
+    <string name="navbar_order">ক্রম</string>
+    <string name="username_email">ই-মেইল ঠিকানা প্রস্তাবিত নয়।</string>
+    <string name="exportsuccess">রপ্তানি করা।</string>
+    <string name="alternative_player_layout_summary">নীচের পরিবর্তে মন্তব্যের উপরে একটি সারি হিসাবে সম্পর্কযুক্ত ভিডিওগুলি দেখান৷</string>
+    <string name="queue_insert_related_videos">সম্পর্কিত ভিডিও ঢোকান</string>
+    <string name="bookmarks">বুকমার্ক</string>
+    <string name="bookmark">বুকমার্ক</string>
+    <string name="clear_bookmarks">বুকমার্ক মুছে দিন</string>
+    <string name="bookmarks_empty">কোনো বুকমার্ক নেই!</string>
 </resources>

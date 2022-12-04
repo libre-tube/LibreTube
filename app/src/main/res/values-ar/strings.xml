@@ -415,6 +415,10 @@
     <string name="backup_restore_summary">استيراد وتصدير الاشتراكات وقوائم التشغيل …</string>
     <string name="proceed">استمر</string>
     <string name="privacy_alert">تنبيه الخصوصية</string>
-    <string name="exportsuccess">تم تصديرها بنجاح!</string>
-    <string name="username_email">قمت بإدراج عنوان بريد إلكتروني كاسم مستخدم غير مستحسن. هل أنت متأكد من أنك تريد المتابعة؟</string>
+    <string name="exportsuccess">تم التصدير.</string>
+    <string name="username_email">هل تريد المتابعة باستخدام عنوان بريد إلكتروني غير مستحسن؟</string>
+    <string name="pinch_control">التحكم في ايماءة القرص</string>
+    <string name="pinch_control_summary">استخدم إيماءة القرص للتكبير / التصغير.</string>
+    <string name="theme_monochrome">أضيق الحدود أحادية اللون</string>
+    <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
 </resources>

@@ -419,4 +419,6 @@
     <string name="proceed">Davam et</string>
     <string name="pinch_control">Çimdik nəzarəti</string>
     <string name="pinch_control_summary">Böyütmək/kiçiltmək üçün çimdik jesti istifadə et.</string>
+    <string name="theme_monochrome">Minimalist Tək rəngli</string>
+    <string name="play_latest_videos">Ən son videoları oynat</string>
 </resources>
