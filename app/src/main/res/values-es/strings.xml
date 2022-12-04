@@ -306,7 +306,7 @@
     <string name="background_mode">Modo de segundo plano</string>
     <string name="add_to_queue">Añadir a la cola</string>
     <string name="misc">Miscelánea</string>
-    <string name="break_reminder">Recordatorio de descanso</string>
+    <string name="break_reminder">Recuerdarme que descanse</string>
     <string name="yt_shorts">Vídeos Cortos</string>
     <string name="no_subtitles_available">No hay subtítulos disponibles</string>
     <string name="player_resize_mode">Modo de redimensión</string>
@@ -416,7 +416,7 @@
     <string name="pinch_control_summary">Use un gesto de pellizco para acercar o alejar.</string>
     <string name="theme_monochrome">Monocromo Minimalista</string>
     <string name="backup_restore_summary">Importar y exportar suscripciones, listas de reproducción, …</string>
-    <string name="exportsuccess">Exportado</string>
+    <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidad</string>
     <string name="proceed">Continuar</string>
     <string name="username_email">Continuar con una dirección de correo aunque no sea recomendado\?</string>
