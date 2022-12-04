@@ -409,4 +409,16 @@
     <string name="captions_size">גודל כתוביות</string>
     <string name="double_tap_seek_summary">נגיעה כפולה שמאלה או ימינה מחזירה אחורה מקדמת קדימה את מיקום הנגינה.</string>
     <string name="all_caught_up_summary">ראית את כל הסרטונים החדשים</string>
+    <string name="import_playlists">ייבוא רשימות נגינה</string>
+    <string name="export_playlists">ייצוא רשימות נגינה</string>
+    <string name="pinch_control_summary">להשתמש בבקרת צביטה כדי להתקרב/להתרחק.</string>
+    <string name="pinch_control">בקרת צביטה</string>
+    <string name="theme_monochrome">מונוכרום פשטני</string>
+    <string name="app_backup">גיבוי היישומון</string>
+    <string name="backup_restore_summary">ייבוא וייצוא מינויים, רשימות נגינה ועוד…</string>
+    <string name="exportsuccess">הייצוא הושלם.</string>
+    <string name="username_email">להמשיך עם כתובת דוא״ל שאינה מומלצת\?</string>
+    <string name="proceed">להמשיך</string>
+    <string name="play_latest_videos">לנגן את הסרטונים העדכניים ביותר</string>
+    <string name="privacy_alert">התראת פרטיות</string>
 </resources>
