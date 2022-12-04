@@ -420,4 +420,5 @@
     <string name="pinch_control">पिंच नियंत्रण</string>
     <string name="pinch_control_summary">ज़ूम इन/आउट करने के लिए पिंच जेस्चर का उपयोग करें।</string>
     <string name="theme_monochrome">मिनिमलिस्टिक मोनोक्रोम</string>
+    <string name="play_latest_videos">नवीनतम वीडियो चलाएँ</string>
 </resources>
