@@ -16,6 +16,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 class BackupRestoreSettings : BasePreferenceFragment() {
+    override val titleResourceId: Int = R.string.backup_restore
 
     // backup and restore database
     private lateinit var getBackupFile: ActivityResultLauncher<String>
