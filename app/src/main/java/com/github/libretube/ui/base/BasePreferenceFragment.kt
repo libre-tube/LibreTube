@@ -1,6 +1,5 @@
 package com.github.libretube.ui.base
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
@@ -8,14 +7,20 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogTextPreferenceBinding
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * PreferenceFragmentCompat using the [MaterialAlertDialogBuilder] instead of the old dialog builder
  */
-open class BasePreferenceFragment : PreferenceFragmentCompat() {
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {}
+abstract class BasePreferenceFragment : PreferenceFragmentCompat() {
+    abstract val titleResourceId: Int
+
+    override fun onStart() {
+        super.onStart()
+        (activity as? SettingsActivity)?.changeTopBarText(getString(titleResourceId))
+    }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
         when (preference) {

@@ -6,17 +6,14 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.query
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HistorySettings : BasePreferenceFragment() {
+    override val titleResourceId: Int = R.string.history
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.history_settings, rootKey)
-
-        val settingsActivity = activity as? SettingsActivity
-        settingsActivity?.changeTopBarText(getString(R.string.history))
 
         // clear search history
         val clearHistory = findPreference<Preference>(PreferenceKeys.CLEAR_SEARCH_HISTORY)

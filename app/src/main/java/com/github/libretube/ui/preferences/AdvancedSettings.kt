@@ -5,19 +5,16 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AdvancedSettings : BasePreferenceFragment() {
+    override val titleResourceId: Int = R.string.advanced
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.advanced_settings, rootKey)
-
-        val settingsActivity = activity as? SettingsActivity
-        settingsActivity?.changeTopBarText(getString(R.string.advanced))
 
         val maxImageCache = findPreference<ListPreference>(PreferenceKeys.MAX_IMAGE_CACHE)
         maxImageCache?.setOnPreferenceChangeListener { _, _ ->

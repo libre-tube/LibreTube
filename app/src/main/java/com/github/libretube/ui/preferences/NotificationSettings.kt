@@ -6,18 +6,15 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.views.TimePickerPreference
 import com.github.libretube.util.NotificationHelper
 
 class NotificationSettings : BasePreferenceFragment() {
+    override val titleResourceId: Int = R.string.notifications
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.notification_settings, rootKey)
-
-        val settingsActivity = activity as? SettingsActivity
-        settingsActivity?.changeTopBarText(getString(R.string.notifications))
 
         val notificationsEnabled =
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_ENABLED)

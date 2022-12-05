@@ -6,7 +6,6 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.IconsSheetAdapter
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
@@ -16,11 +15,9 @@ import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.color.DynamicColors
 
 class AppearanceSettings : BasePreferenceFragment() {
+    override val titleResourceId: Int = R.string.appearance
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.appearance_settings, rootKey)
-
-        val settingsActivity = activity as? SettingsActivity
-        settingsActivity?.changeTopBarText(getString(R.string.appearance))
 
         val themeToggle = findPreference<ListPreference>(PreferenceKeys.THEME_MODE)
         themeToggle?.setOnPreferenceChangeListener { _, _ ->

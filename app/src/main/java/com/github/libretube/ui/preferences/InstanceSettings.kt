@@ -11,7 +11,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
@@ -20,12 +19,10 @@ import com.github.libretube.ui.dialogs.LogoutDialog
 import com.github.libretube.util.PreferenceHelper
 
 class InstanceSettings : BasePreferenceFragment() {
+    override val titleResourceId: Int = R.string.instance
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
-
-        val settingsActivity = activity as? SettingsActivity
-        settingsActivity?.changeTopBarText(getString(R.string.instance))
 
         val instance = findPreference<ListPreference>(PreferenceKeys.FETCH_INSTANCE)
         // fetchInstance()
