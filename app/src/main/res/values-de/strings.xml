@@ -4,8 +4,8 @@
     <string name="subscriptions">Abos</string>
     <string name="library">Bibliothek</string>
     <string name="search_hint">Suche</string>
-    <string name="subscribe">ABONNIEREN</string>
-    <string name="unsubscribe">ABONNIERT</string>
+    <string name="subscribe">Abonnieren</string>
+    <string name="unsubscribe">Abonniert</string>
     <string name="videos">Videos</string>
     <string name="share">Teilen</string>
     <string name="username">Benutzername</string>
@@ -27,7 +27,7 @@
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="vlcerror">Konnte nicht in VLC geöffnet werden, möglicherweise ist es nicht installiert.</string>
     <string name="app_theme">Design</string>
-    <string name="server_error">Der Server meldet Schwierigkeiten. Versuche eine andere Instanz\?</string>
+    <string name="server_error">Serverfehler. Eine andere Instanz versuchen\?</string>
     <string name="unknown_error">Netzwerkfehler.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
     <string name="notgmail">Dies ist für ein Piped-Konto.</string>
@@ -53,7 +53,7 @@
     <string name="import_from_yt">Abos importieren</string>
     <string name="empty">Benutzername und Passwort können nicht leer sein.</string>
     <string name="deletePlaylist">Playlist löschen</string>
-    <string name="areYouSure">Bist du sicher, dass du die Playlist löschen möchtest\?</string>
+    <string name="areYouSure">Playlist löschen\?</string>
     <string name="about">Über</string>
     <string name="systemDefault">System</string>
     <string name="lightTheme">Hell</string>
@@ -79,10 +79,10 @@
     <string name="history">Verlauf</string>
     <string name="search_history">Suchverlauf</string>
     <string name="clear_history">Verlauf löschen</string>
-    <string name="music_songs">YT Musik-Lieder</string>
-    <string name="music_videos">YT Musik-Videos</string>
-    <string name="music_albums">YT Musik-Alben</string>
-    <string name="music_playlists">YT Musik-Playlists</string>
+    <string name="music_songs">YT Music-Lieder</string>
+    <string name="music_videos">YT Music-Videos</string>
+    <string name="music_albums">YT Music-Alben</string>
+    <string name="music_playlists">YT Music-Playlists</string>
     <string name="playlists">Playlists</string>
     <string name="category_intro">Pause/Intro-Animation</string>
     <string name="category_outro">Endkarten und Abspann</string>
@@ -94,8 +94,8 @@
     <string name="segment_skipped">Abschnitt übersprungen</string>
     <string name="category_sponsor">Sponsor</string>
     <string name="sponsorblock_state">Ein</string>
-    <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Verweise und direkte Anzeigen. Nicht für Eigenwerbung oder kostenlose echte Shoutouts für Ursachen, Creator, Websites und Produkte.</string>
-    <string name="category_selfpromo">Unbezahlte/Selbst Promotion</string>
+    <string name="category_sponsor_description">Bezahlte Werbung, bezahlte Empfehlungen und Direktwerbung. Nicht für Eigenwerbung oder kostenlose positive Erwähnungen für Anliegen, Kanäle, Webseiten und Produkte.</string>
+    <string name="category_selfpromo">Unbezahlt/Eigenwerbung</string>
     <string name="category_interaction">Interaktionserinnerung (Liken und Abonnieren)</string>
     <string name="category_outro_description">Infos nach dem Ende. Nicht für Schlussfolgerungen mit Infos.</string>
     <string name="category_interaction_description">Wenn in der Mitte des Inhalts eine kurze Aufforderung steht, ihn zu Liken, zu abonnieren oder ihm zu folgen. Wenn er lang ist oder sich auf etwas Bestimmtes bezieht, sollte er eher der Eigenwerbung dienen.</string>
@@ -157,7 +157,7 @@
     <string name="invalid_url">Bitte eine funktionierende URL angeben</string>
     <string name="instance_summary">Piped, Anmeldung &amp; Abonnements</string>
     <string name="customInstance_summary">Hinzufügen…</string>
-    <string name="category_music_offtopic">Musik: Nicht-musikalische Sektion</string>
+    <string name="category_music_offtopic">Musik: Nicht-musikalischer Abschnitt</string>
     <string name="category_preview">Vorschau/Rückblick</string>
     <string name="hide_chapters">Kapitel ausblenden</string>
     <string name="show_chapters">Kapitel anzeigen</string>
@@ -245,7 +245,7 @@
     <string name="best_quality">Beste Qualität</string>
     <string name="seekbar_preview">Video-Vorschau</string>
     <string name="watch_positions_summary">Von letzter Position weiter abspielen</string>
-    <string name="navLabelVisibility">Label-Sichtbarkeit</string>
+    <string name="navLabelVisibility">Labelsichtbarkeit</string>
     <string name="watch_history_summary">Angesehene Videos lokal speichern</string>
     <string name="history_summary">Wiedergabe- und Suchverlauf</string>
     <string name="captions">Untertitel</string>
@@ -417,4 +417,8 @@
     <string name="proceed">Fortfahren</string>
     <string name="username_email">Mit einer nicht empfohlenen E-Mail-Adresse fortfahren\?</string>
     <string name="exportsuccess">Exportiert.</string>
+    <string name="pinch_control">Zwei-Finger-Gestensteuerung</string>
+    <string name="pinch_control_summary">Verwende eine Zwei-Finger-Geste, um den Zoom anzupassen.</string>
+    <string name="theme_monochrome">Minimalistisch Monochrom</string>
+    <string name="play_latest_videos">Neueste Videos abspielen</string>
 </resources>
