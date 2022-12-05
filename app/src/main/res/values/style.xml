@@ -178,7 +178,7 @@
         <item name="android:paddingRight">6dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:background">@drawable/rounded_ripple</item>
         <item name="android:orientation">horizontal</item>
 
     </style>
