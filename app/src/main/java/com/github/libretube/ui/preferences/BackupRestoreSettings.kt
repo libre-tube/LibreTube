@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.obj.BackupFile
+import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
 import com.github.libretube.util.BackupHelper
@@ -75,6 +76,9 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.import_export_settings, rootKey)
+
+        val settingsActivity = activity as? SettingsActivity
+        settingsActivity?.changeTopBarText(getString(R.string.backup_restore))
 
         val importSubscriptions = findPreference<Preference>("import_subscriptions")
         importSubscriptions?.setOnPreferenceClickListener {
