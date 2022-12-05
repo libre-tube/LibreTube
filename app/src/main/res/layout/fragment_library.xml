@@ -98,20 +98,18 @@
                         android:visibility="gone">
 
                         <ImageView
-                            android:id="@+id/boogh"
+                            android:id="@+id/listIV"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:layout_marginBottom="16dp"
                             android:src="@drawable/ic_list" />
 
                         <TextView
                             android:id="@+id/text_like"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/boogh"
+                            android:layout_below="@id/listIV"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginHorizontal="10dp"
                             android:gravity="center"
                             android:text="@string/emptyList"
                             android:textSize="20sp"
