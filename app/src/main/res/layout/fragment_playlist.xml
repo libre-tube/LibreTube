@@ -32,7 +32,7 @@
                 android:layout_marginVertical="10dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <LinearLayout
