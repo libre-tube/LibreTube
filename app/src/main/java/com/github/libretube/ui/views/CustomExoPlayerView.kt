@@ -33,6 +33,7 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.ui.SubtitleView
 import com.google.android.exoplayer2.util.RepeatModeUtil
 
 @SuppressLint("ClickableViewAccessibility")
@@ -511,19 +512,28 @@ internal class CustomExoPlayerView(
     override fun onZoom() {
         if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            subtitleView?.setBottomPaddingFraction(0.158f)
+        }
     }
 
     override fun onMinimize() {
         if (!PlayerHelper.pinchGestureEnabled) return
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+        subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
     }
 
     override fun onFullscreenChange(isFullscreen: Boolean) {
         if (PlayerHelper.swipeGestureEnabled && this::brightnessHelper.isInitialized) {
             if (isFullscreen) {
                 brightnessHelper.restoreSavedBrightness()
+                if (resizeMode == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
+                    subtitleView?.setBottomPaddingFraction(0.158f)
+                }
             } else {
                 brightnessHelper.resetToSystemBrightness(false)
+                subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
             }
         }
     }
