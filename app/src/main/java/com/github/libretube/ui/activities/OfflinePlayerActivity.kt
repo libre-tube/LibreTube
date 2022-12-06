@@ -13,7 +13,6 @@ import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -24,7 +23,6 @@ import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.PlayerHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -72,19 +70,6 @@ class OfflinePlayerActivity : BaseActivity() {
         playerBinding.closeImageButton.setOnClickListener {
             finish()
         }
-        playerBinding.playPauseBTN.setOnClickListener {
-            if (!player.isPlaying) {
-                // start or go on playing
-                if (player.playbackState == Player.STATE_ENDED) {
-                    // restart video if finished
-                    player.seekTo(0)
-                }
-                player.play()
-            } else {
-                // pause the video
-                player.pause()
-            }
-        }
 
         binding.player.initialize(
             null,
@@ -92,33 +77,6 @@ class OfflinePlayerActivity : BaseActivity() {
             binding.playerGestureControlsView.binding,
             null
         )
-
-        player.addListener(object : Player.Listener {
-            override fun onEvents(player: Player, events: Player.Events) {
-                super.onEvents(player, events)
-                if (events.containsAny(
-                        Player.EVENT_PLAYBACK_STATE_CHANGED,
-                        Player.EVENT_IS_PLAYING_CHANGED,
-                        Player.EVENT_PLAY_WHEN_READY_CHANGED
-                    )
-                ) {
-                    updatePlayPauseButton()
-                }
-            }
-        })
-    }
-
-    private fun updatePlayPauseButton() {
-        if (player.isPlaying) {
-            // video is playing
-            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_pause)
-        } else if (player.playbackState == Player.STATE_ENDED) {
-            // video has finished
-            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_restart)
-        } else {
-            // player in any other state
-            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_play)
-        }
     }
 
     private fun File.toUri(): Uri? {
