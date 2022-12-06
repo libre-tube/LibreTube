@@ -463,10 +463,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
             binding.descLinLayout.visibility = View.GONE
+
+            // show formated short view count
+            val viewInfo = context?.getString(R.string.views, streams.views.formatShort()) +
+                if (!isLive) TextUtils.SEPARATOR + streams.uploadDate else ""
+            binding.playerViewsInfo.text = viewInfo
         } else {
             // show the description and chapters
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
             binding.descLinLayout.visibility = View.VISIBLE
+
+            // show exact view count
+            val viewInfo = context?.getString(R.string.views, String.format("%,d", streams.views)) +
+                if (!isLive) TextUtils.SEPARATOR + streams.uploadDate else ""
+            binding.playerViewsInfo.text = viewInfo
         }
         if (this::chapters.isInitialized && chapters.isNotEmpty()) {
             val chapterIndex = getCurrentChapterIndex()
