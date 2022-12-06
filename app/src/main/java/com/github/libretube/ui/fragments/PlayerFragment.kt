@@ -457,15 +457,24 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun toggleDescription() {
+        var viewInfo = if (!isLive) TextUtils.SEPARATOR + streams.uploadDate else ""
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
             binding.descLinLayout.visibility = View.GONE
+
+            // show formated short view count
+            viewInfo = getString(R.string.views, streams.views.formatShort()) + viewInfo
         } else {
             // show the description and chapters
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
             binding.descLinLayout.visibility = View.VISIBLE
+
+            // show exact view count
+            viewInfo = getString(R.string.views, String.format("%,d", streams.views)) + viewInfo
         }
+        binding.playerViewsInfo.text = viewInfo
+
         if (this::chapters.isInitialized && chapters.isNotEmpty()) {
             val chapterIndex = getCurrentChapterIndex()
             // scroll to the current chapter in the chapterRecView in the description
