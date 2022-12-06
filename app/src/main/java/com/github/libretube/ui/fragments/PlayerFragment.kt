@@ -659,6 +659,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         videoId!!,
                         ObjectMapper().writeValueAsString(categories)
                     )
+                if (segmentData.segments.isEmpty()) return@runCatching
                 playerBinding.exoProgress.setSegments(segmentData.segments)
                 runOnUiThread {
                     playerBinding.sbToggle.visibility = View.VISIBLE
