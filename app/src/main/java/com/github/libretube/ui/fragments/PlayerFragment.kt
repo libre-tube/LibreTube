@@ -18,7 +18,6 @@ import android.text.util.Linkify
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -275,18 +274,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         binding.playerMotionLayout.progress = 1.toFloat()
         binding.playerMotionLayout.transitionToStart()
-
-        // quitting miniPlayer on single click
-
-        binding.titleTextView.setOnTouchListener { view, motionEvent ->
-            view.onTouchEvent(motionEvent)
-            if (motionEvent.action == MotionEvent.ACTION_UP) view.performClick()
-            binding.root.onTouchEvent(motionEvent)
-        }
-        binding.titleTextView.setOnClickListener {
-            binding.playerMotionLayout.setTransitionDuration(300)
-            binding.playerMotionLayout.transitionToStart()
-        }
 
         if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
 
