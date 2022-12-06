@@ -14,7 +14,7 @@ import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.normalize
-import com.github.libretube.extensions.toDp
+import com.github.libretube.extensions.toPixel
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
@@ -494,8 +494,8 @@ internal class CustomExoPlayerView(
         super.onConfigurationChanged(newConfig)
 
         val offset = when (newConfig?.orientation) {
-            Configuration.ORIENTATION_LANDSCAPE -> 20.toDp(resources)
-            else -> 10.toDp(resources)
+            Configuration.ORIENTATION_LANDSCAPE -> 20.toPixel()
+            else -> 10.toPixel()
         }
 
         binding.progressBar.let {
