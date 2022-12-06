@@ -70,7 +70,13 @@ If creating a pull request, please make sure to format your code (preferred ktli
 > **Note** <br>
 > Any issue avoiding the issue template will be ignored and forced to be closed.
 
-### 📜️ Credits
+## 📝 Translations
+
+<a href="https://hosted.weblate.org/projects/libretube/#languages">
+<img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
+</a>
+
+## 📜️ Credits
 
 - Readme Design and Banners by [XelXen](https://github.com/XelXen)
 
@@ -78,12 +84,6 @@ If creating a pull request, please make sure to format your code (preferred ktli
 
 - [Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)
 - [Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)
-
-## 📝 Translation
-
-<a href="https://hosted.weblate.org/projects/libretube/#languages">
-<img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
-</a>
 
 ## 🌗 Differences to NewPipe
 
@@ -106,10 +106,11 @@ Any trademark, service mark, trade name, or other intellectual property rights u
 
 LibreTube is an open source software built for learning and research purposes.
 
-## 🪞 Mirrors (read-only)
+## License
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](http://www.gnu.org/licenses/gpl-3.0.en.html)
 
-<a href="https://gitlab.com/libretube/LibreTube">GitLab</a></p>
-<a href="https://notabug.org/LibreTube/LibreTube">NotABug</a></p>
+LibreTube is Free Software: You can use, study, share and modify it at your will. The app can be redistributed and/or modified under the terms of the
+[GNU General Public License](https://www.gnu.org/licenses/gpl.html) version 3 or later published by the Free Software Foundation.
 
 <div align="right">
 <table><td>
