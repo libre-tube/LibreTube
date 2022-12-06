@@ -81,18 +81,20 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
         transitionListenerList += listener
     }
 
-    private val gestureDetector = GestureDetector(
-        context,
-        object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                transitionToEnd()
-                return false
-            }
+    private inner class Listener : GestureDetector.SimpleOnGestureListener() {
+        override fun onSingleTapUp(e: MotionEvent): Boolean {
+            setTransitionDuration(200)
+            transitionToStart()
+            return true
         }
-    )
+    }
+
+    val gestureDetector = GestureDetector(context, Listener())
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        gestureDetector.onTouchEvent(event)
+
         // gestureDetector.onTouchEvent(event)
         when (event.actionMasked) {
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
