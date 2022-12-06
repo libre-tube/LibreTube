@@ -514,7 +514,7 @@ internal class CustomExoPlayerView(
         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            subtitleView?.setBottomPaddingFraction(0.158f)
+            subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
         }
     }
 
@@ -529,12 +529,16 @@ internal class CustomExoPlayerView(
             if (isFullscreen) {
                 brightnessHelper.restoreSavedBrightness()
                 if (resizeMode == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
-                    subtitleView?.setBottomPaddingFraction(0.158f)
+                    subtitleView?.setBottomPaddingFraction(SUBTITLE_BOTTOM_PADDING_FRACTION)
                 }
             } else {
                 brightnessHelper.resetToSystemBrightness(false)
                 subtitleView?.setBottomPaddingFraction(SubtitleView.DEFAULT_BOTTOM_PADDING_FRACTION)
             }
         }
+    }
+
+    companion object {
+        private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
     }
 }
