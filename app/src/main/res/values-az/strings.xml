@@ -421,4 +421,5 @@
     <string name="pinch_control_summary">Böyütmək/kiçiltmək üçün çimdik jesti istifadə et.</string>
     <string name="theme_monochrome">Minimalist Tək rəngli</string>
     <string name="play_latest_videos">Ən son videoları oynat</string>
+    <string name="nothing_selected">Heç nə seçilməyib!</string>
 </resources>
