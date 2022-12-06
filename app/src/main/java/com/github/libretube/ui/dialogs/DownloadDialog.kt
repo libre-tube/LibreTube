@@ -132,7 +132,10 @@ class DownloadDialog(
             val vidUrl = videoUrl[binding.videoSpinner.selectedItemPosition]
             val audUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
 
-            if (audUrl == "" && vidUrl == "") return@setOnClickListener
+            if (audUrl == "" && vidUrl == "") {
+                Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val fileName = binding.fileName.text.toString().sanitize()
 
