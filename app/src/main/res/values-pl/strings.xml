@@ -421,4 +421,5 @@
     <string name="pinch_control_summary">Użyj gestu rozciągnięcia/uszczypania, aby powiększyć/zmniejszyć rozmiar obrazu.</string>
     <string name="theme_monochrome">Monochromatyczny</string>
     <string name="play_latest_videos">Odtwórz najnowsze filmy</string>
+    <string name="nothing_selected">Nic nie zostało wybrane!</string>
 </resources>
