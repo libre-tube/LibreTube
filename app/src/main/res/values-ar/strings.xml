@@ -421,4 +421,5 @@
     <string name="pinch_control_summary">استخدم إيماءة القرص للتكبير / التصغير.</string>
     <string name="theme_monochrome">أضيق الحدود أحادية اللون</string>
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
+    <string name="nothing_selected">لا شيء محدد!</string>
 </resources>

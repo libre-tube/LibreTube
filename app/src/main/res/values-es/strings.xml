@@ -99,7 +99,7 @@
     <string name="category_intro">Intermedio/Animación de entrada</string>
     <string name="category_outro">Fin de las tarjetas y los créditos</string>
     <string name="category_outro_description">Información después del final. No para conclusiones con información.</string>
-    <string name="category_intro_description">Un intervalo sin contenido real. Puede ser una pausa, un fotograma estático, una animación que se repite. No debe utilizarse para transiciones que contengan información.</string>
+    <string name="category_intro_description">Un intervalo sin contenido real. Puede ser una pausa, un fotograma estático, una animación que se repite. No debe usarse para transiciones que contengan información.</string>
     <string name="license">Licencia</string>
     <string name="color_red">Rojo</string>
     <string name="color_accent">Acentos</string>
@@ -148,7 +148,7 @@
     <string name="related_streams">Contenido relacionado</string>
     <string name="related_streams_summary">Mostrar transmisiones similares a lo que ves.</string>
     <string name="movies_directory">Carpeta de películas</string>
-    <string name="no_update_available">Estás utilizando la última versión.</string>
+    <string name="no_update_available">Estás usando la última versión.</string>
     <string name="advanced_summary">Descargas y restablecimiento</string>
     <string name="legacyIcon">Antiguo</string>
     <string name="download_folder_summary">El nombre de la carpeta en la que se almacenan los medios descargados.</string>
@@ -224,7 +224,7 @@
     <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
-    <string name="require_restart_message">Reinicie la aplicación para utilizar los nuevos cambios.</string>
+    <string name="require_restart_message">Reinicie la aplicación para usar los nuevos cambios.</string>
     <string name="change_playback_speed">Velocidad de reproducción</string>
     <string name="require_restart">Es necesario reiniciar la aplicación</string>
     <string name="selected">Seleccionado</string>
@@ -275,7 +275,7 @@
     <string name="network_all">Todos</string>
     <string name="downloading_apk">Descargando APK…</string>
     <string name="seekbar_preview_summary">Muestra una instantánea al arrastrar el indicador de reproducción.</string>
-    <string name="notify_new_streams_summary">Notificaciones acerca del nuevo contenido de los creadores a los que sigues.</string>
+    <string name="notify_new_streams_summary">Notificaciones del nuevo contenido de los creadores a los que sigues.</string>
     <string name="general">General</string>
     <string name="general_summary">Idioma y región</string>
     <string name="playerAudioFormat">Formato de audio para el reproductor</string>
@@ -306,7 +306,7 @@
     <string name="background_mode">Modo de segundo plano</string>
     <string name="add_to_queue">Añadir a la cola</string>
     <string name="misc">Miscelánea</string>
-    <string name="break_reminder">Recuerdarme que descanse</string>
+    <string name="break_reminder">Recordatorio de descanso</string>
     <string name="yt_shorts">Vídeos Cortos</string>
     <string name="no_subtitles_available">No hay subtítulos disponibles</string>
     <string name="player_resize_mode">Modo de redimensión</string>
@@ -399,26 +399,27 @@
     <string name="auto">Auto</string>
     <string name="swipe_controls">Controles del deslizamiento</string>
     <string name="brightness">Brillo</string>
-    <string name="swipe_controls_summary">Use el gesto de deslizar para ajustar el brillo y el volumen.</string>
+    <string name="swipe_controls_summary">Usar el gesto de deslizar para ajustar el brillo y el volumen.</string>
     <string name="defaults">Por defecto</string>
     <string name="pop_up">Emergente</string>
     <string name="no_comments_available">Este vídeo no tiene comentarios disponibles.</string>
     <string name="comments_disabled">Los comentarios están desactivados por el creador del contenido.</string>
     <string name="captions_size">Tamaño de los subtítulos</string>
     <string name="all_caught_up">Estás al día</string>
-    <string name="double_tap_seek_summary">Toque dos veces a la izquierda o a la derecha para rebobinar o avanzar la posición del reproductor.</string>
+    <string name="double_tap_seek_summary">Tocar dos veces a la izquierda o a la derecha para rebobinar o avanzar la posición del reproductor.</string>
     <string name="double_tap_seek">Toca dos veces para buscar</string>
     <string name="all_caught_up_summary">Has visto todos los vídeos nuevos</string>
     <string name="import_playlists">Importar listas de reproducción</string>
     <string name="export_playlists">Exportar listas de reproducción</string>
     <string name="app_backup">Respaldo de aplicación</string>
     <string name="pinch_control">Control de pellizco</string>
-    <string name="pinch_control_summary">Use un gesto de pellizco para acercar o alejar.</string>
+    <string name="pinch_control_summary">Usar un gesto de pellizco para acercar o alejar.</string>
     <string name="theme_monochrome">Monocromo Minimalista</string>
     <string name="backup_restore_summary">Importar y exportar suscripciones, listas de reproducción, …</string>
     <string name="exportsuccess">Exportado.</string>
     <string name="privacy_alert">Alerta de privacidad</string>
     <string name="proceed">Continuar</string>
-    <string name="username_email">Continuar con una dirección de correo aunque no sea recomendado\?</string>
+    <string name="username_email">¿Continuar con una dirección de correo aunque no sea recomendado\?</string>
     <string name="play_latest_videos">Reproducir los últimos videos</string>
+    <string name="nothing_selected">¡Nada seleccionado!</string>
 </resources>
