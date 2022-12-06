@@ -1,6 +1,7 @@
 package com.github.libretube.api
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlist
@@ -195,7 +196,7 @@ object PlaylistsHelper {
             addToPlaylist(
                 playlistId,
                 *playlist.videos.map {
-                    it.substringAfter("=")
+                    Uri.parse(it).getQueryParameter("v")!!
                 }.toTypedArray()
             )
         }
@@ -231,7 +232,7 @@ object PlaylistsHelper {
         return if (loggedIn()) PlaylistType.PRIVATE else PlaylistType.LOCAL
     }
 
-    fun getPrivatePlaylistType(playlistId: String): PlaylistType {
+    private fun getPrivatePlaylistType(playlistId: String): PlaylistType {
         if (playlistId.all { it.isDigit() }) return PlaylistType.LOCAL
         if (playlistId.matches(pipedPlaylistRegex)) return PlaylistType.PRIVATE
         return PlaylistType.PUBLIC
