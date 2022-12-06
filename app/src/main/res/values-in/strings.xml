@@ -421,4 +421,5 @@
     <string name="pinch_control_summary">Gunakan gestur cubit untuk perbesar/perkecil.</string>
     <string name="theme_monochrome">Monokrom Minimalis</string>
     <string name="play_latest_videos">Putar video terkini</string>
+    <string name="nothing_selected">Tidak ada yang dipilih!</string>
 </resources>
