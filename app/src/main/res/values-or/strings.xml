@@ -7,7 +7,7 @@
     <string name="videos">ଭିଡିଓ</string>
     <string name="subscribe">ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ</string>
     <string name="share">ଅଂଶୀଦାର</string>
-    <string name="download">ଡାନଲୋଡ୍୍</string>
+    <string name="download">ଡାଉନଲୋଡ୍</string>
     <string name="save">ତାଲିକା ରେ ଯୋଡ଼ନ୍ତୁ</string>
     <string name="username">ବ୍ୟବହରକାରୀଙ୍କର ନାମ</string>
     <string name="password">ପାଶୱାର୍ଡ</string>
@@ -83,7 +83,7 @@
     <string name="piped">ପାଇପ୍</string>
     <string name="youtube">ୟୁଟିଉବ</string>
     <string name="playOnBackground">ପୃଷ୍ଠଭୂମି ରେ ପ୍ଲେ କରନ୍ତୁ</string>
-    <string name="update_available_text">ରିଲିଜ୍ ରୁ ଡାନଲୋଡ୍୍ କରିବେ କି \?</string>
+    <string name="update_available_text">ରିଲିଜ୍ ରୁ ଡାଉନଲୋଡ୍ କରିବେ କି \?</string>
     <string name="appearance">ରୂପ</string>
     <string name="video_format">ଭିଡିଓ ଫର୍ମାଟ</string>
     <string name="video_format_summary">ଡାଉନଲୋଡ ପରେ ଭିଡିଓ ଓ ସ୍ଵର ମିଶିବ ।</string>
