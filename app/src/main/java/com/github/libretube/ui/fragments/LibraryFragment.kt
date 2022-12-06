@@ -16,7 +16,7 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.toDp
+import com.github.libretube.extensions.toPixel
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
@@ -91,7 +91,7 @@ class LibraryFragment : BaseFragment() {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
         val bottomMargin = if (isMiniPlayerVisible) 64 else 16
         val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = bottomMargin.toDp(resources).toInt()
+        layoutParams.bottomMargin = bottomMargin.toPixel().toInt()
         binding.createPlaylist.layoutParams = layoutParams
     }
 

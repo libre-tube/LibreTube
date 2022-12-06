@@ -17,7 +17,7 @@ import com.github.libretube.databinding.AllCaughtUpRowBinding
 import com.github.libretube.databinding.TrendingRowBinding
 import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.formatShort
-import com.github.libretube.extensions.toDp
+import com.github.libretube.extensions.toPixel
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
@@ -91,8 +91,8 @@ class VideosAdapter(
             // set a fixed width for better visuals
             val params = root.layoutParams
             when (forceMode) {
-                ForceMode.RELATED -> params.width = (180).toDp(root.context.resources).toInt()
-                ForceMode.HOME -> params.width = (250).toDp(root.context.resources).toInt()
+                ForceMode.RELATED -> params.width = (180).toPixel().toInt()
+                ForceMode.HOME -> params.width = (250).toPixel().toInt()
                 else -> {}
             }
             root.layoutParams = params

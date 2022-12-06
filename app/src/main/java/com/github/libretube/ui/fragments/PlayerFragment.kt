@@ -463,7 +463,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
             binding.descLinLayout.visibility = View.GONE
 
-            // show formated short view count
+            // show formatted short view count
             viewInfo = getString(R.string.views, streams.views.formatShort()) + viewInfo
         } else {
             // show the description and chapters
@@ -880,10 +880,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
                 // save the watch position when paused
                 if (playbackState == PlaybackState.STATE_PAUSED) {
-                    val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
-                    query {
-                        Database.watchPositionDao().insertAll(watchPosition)
-                    }
+                    saveWatchPosition()
                     disableAutoPiP()
                 }
 

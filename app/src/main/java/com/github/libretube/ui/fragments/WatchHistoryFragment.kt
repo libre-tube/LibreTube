@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.toDp
+import com.github.libretube.extensions.toPixel
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.PlayerViewModel
@@ -37,7 +37,7 @@ class WatchHistoryFragment : BaseFragment() {
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.watchHistoryRecView.updatePadding(
-                bottom = if (it) (64).toDp(resources).toInt() else 0
+                bottom = if (it) (64).toPixel().toInt() else 0
             )
         }
 
