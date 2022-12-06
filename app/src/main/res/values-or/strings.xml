@@ -21,7 +21,7 @@
     <string name="loggedIn">ସଂଶ୍ଳିଷ୍ଟ ଅଛନ୍ତି ।</string>
     <string name="already_logged_in">ଆଗରୁ ସଂଶ୍ଳିଷ୍ଟ ଅଛନ୍ତି। ଆପଣ ଅଣ ସଂଶ୍ଳିଷ୍ଟ ହୋଇପାରନ୍ତି।</string>
     <string name="instances">ଚୟନ କରନ୍ତୁ…</string>
-    <string name="customInstance">କଷ୍ଟମ</string>
+    <string name="customInstance">ଅନୁକୂଳ</string>
     <string name="region">ଜାଗା</string>
     <string name="login_register">ସଂଶ୍ଳିଷ୍ଟ/ପଞ୍ଜିକରଣ</string>
     <string name="registered">ପଞ୍ଜୀକୃତ । ଏବେ ଆପଣ ନୂଆ ଧାରାବାହିକ କୁ ଅନୁସରଣ କରିପାରିବେ ।</string>
@@ -40,7 +40,7 @@
     <string name="error">କିଛି ଭୁଲ୍ ଘଟିଛି ।</string>
     <string name="notgmail">ଏହା ପାଇପ୍ ଆକାଉଣ୍ଟ ଅଟେ ।</string>
     <string name="defres">ଭିଡିଓ ର ଆକାର</string>
-    <string name="grid">ଗ୍ରିଡ କଲମ</string>
+    <string name="grid">ଗ୍ରିଡ ସ୍ତମ୍ଭ</string>
     <string name="emptyList">ଏଠାରେ କିଛି ନାହିଁ ।</string>
     <string name="settings">ସେଟିଂ</string>
     <string name="location">ଜାଗା</string>
@@ -184,8 +184,8 @@
     <string name="instance_frontend_url">ଫ୍ରଣ୍ଟେଣ୍ଡ୍ ପାଇଁ URL</string>
     <string name="player_summary">ଡିଫଲ୍ଟ ଏବଂ ଆଚରଣ</string>
     <string name="seek_increment">ବୃଦ୍ଧି ଖୋଜ</string>
-    <string name="pauseOnScreenOff">ଅଟୋ-ବିରାମ</string>
-    <string name="autoplay_summary">ସାମ୍ପ୍ରତିକ ଭିଡିଓ ପରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ଅଟୋ-ଚଲାନ୍ତୁ ।</string>
+    <string name="pauseOnScreenOff">ସ୍ଵତଃ-ବିରାମ</string>
+    <string name="autoplay_summary">ସାମ୍ପ୍ରତିକ ଭିଡିଓ ପରେ ପରବର୍ତ୍ତୀ ଭିଡିଓକୁ ସ୍ଵତଃ-ଚଲାନ୍ତୁ ।</string>
     <string name="clonePlaylist">କ୍ଲୋନ୍ ପ୍ଲେଲିଷ୍ଟ୍</string>
     <string name="deleteAccount">ଖାତା ବିଲୋପ କରନ୍ତୁ</string>
     <string name="account">ଆକାଉଣ୍ଟ</string>
@@ -234,7 +234,7 @@
     <string name="repeat_mode">ପୁନରାବୃତ୍ତି ମୋଡ</string>
     <string name="resize_mode_fit">ଫିଟ୍</string>
     <string name="resize_mode_fill">ପୂରଣ କରନ୍ତୁ</string>
-    <string name="resize_mode_zoom">ଯୁମ୍</string>
+    <string name="resize_mode_zoom">ବର୍ଦ୍ଧିତ</string>
     <string name="repeat_mode_none">ଦରକାର ନାହିଁ</string>
     <string name="repeat_mode_current">ବର୍ତ୍ତମାନର</string>
     <string name="preferences">ପସନ୍ଦ</string>
@@ -246,7 +246,7 @@
     <string name="queue">ଧାଡ଼ି</string>
     <string name="sb_markers">ମାର୍କର ଗୁଡ଼ିକ</string>
     <string name="instance_summary">ପାଇପ୍, ଲଗ୍ ଇନ୍, ଆଉ ସଦସ୍ୟତା ଗୁଡ଼ିକ</string>
-    <string name="clear_customInstances">ଖାଲି ଯୋଡା ଯାଇଛି</string>
+    <string name="clear_customInstances">ଯୋଡ଼ାଯାଇଥିବା ଗୁଡ଼ିକୁ ବିଲୋପ କରନ୍ତୁ</string>
     <string name="related_streams">ସମ୍ବନ୍ଧିତ ବିଷୟବସ୍ତୁ</string>
     <string name="pauseOnScreenOff_summary">ସ୍କ୍ରିନ୍ ବନ୍ଦ ହୋଇଗଲେ ପ୍ଲେ-ବକ୍ ବନ୍ଦ କରନ୍ତୁ ।</string>
     <string name="behavior">ବ୍ୟବହାର</string>
@@ -271,10 +271,10 @@
     <string name="sb_skip_manual">ମେନୁଆଲି ଏଡାନ୍ତୁ</string>
     <string name="sb_skip_manual_summary">ସ୍ଵତଃ ଏଡାନ୍ତୁ ନାହିଁ।</string>
     <string name="local_subscriptions">ସ୍ଥାନୀୟ ସଦସ୍ୟତା</string>
-    <string name="backup_customInstances">କଷ୍ଟମ୍ ଇନଷ୍ଟାନ୍ସ</string>
+    <string name="backup_customInstances">ଅନୁକୂଳ୍ ଇନଷ୍ଟାନ୍ସ</string>
     <string name="save_feed">ପୃଷ୍ଠଭୂମିରେ ଫିଡ୍ ଲୋଡ୍ କରନ୍ତୁ</string>
     <string name="play_next">ପରବର୍ତ୍ତୀ ଖେଳନ୍ତୁ</string>
-    <string name="save_feed_summary">ସବସ୍କ୍ରିପସନ୍ ଫିଡ୍ ପୃଷ୍ଠଭୂମିରେ ଲୋଡ୍ କରନ୍ତୁ ଏବଂ ଏହାକୁ ଅଟୋ-ସତେଜ ହେବାକୁ ପ୍ରତିରୋଧ କରନ୍ତୁ ।</string>
+    <string name="save_feed_summary">ସବସ୍କ୍ରିପସନ୍ ଫିଡ୍ ପୃଷ୍ଠଭୂମିରେ ଲୋଡ୍ କରନ୍ତୁ ଏବଂ ଏହାକୁ ସ୍ଵତଃ-ସତେଜ ହେବାକୁ ପ୍ରତିରୋଧ କରନ୍ତୁ ।</string>
     <string name="navigation_bar">ନାଭିଗେସନ୍ ବାର୍</string>
     <string name="select_at_least_one">ଦୟାକରି ଅତିକମରେ ଗୋଟିଏ ଆଇଟମ୍ ଚୟନ କରନ୍ତୁ</string>
     <string name="limit_hls">HLS କୁ 1080p ପର୍ଯ୍ୟନ୍ତ ସୀମିତ କରନ୍ତୁ</string>
@@ -294,7 +294,7 @@
     <string name="invalid_filename">Invalid ନାମ!</string>
     <string name="auth_instances">ଏକ auth ଉଦାହରଣ ବାଛନ୍ତୁ</string>
     <string name="fullscreen_orientation">ଫୁଲ୍ ସ୍କ୍ରିନ୍ ଆରିଏଣ୍ଟେସନ୍</string>
-    <string name="auto_rotation">ଅଟୋ-ଘୂର୍ଣ୍ଣନ</string>
+    <string name="auto_rotation">ସ୍ଵତଃ-ଘୂର୍ଣ୍ଣନ</string>
     <string name="landscape">ଲ୍ୟାଣ୍ଡସ୍କେପ୍</string>
     <string name="turnInternetOn">ଇଣ୍ଟରନେଟ୍ ସହିତ ସଂଯୋଗ କରିବାକୁ ଦୟାକରି ୱାଇ-ଫାଇ କିମ୍ବା ମୋବାଇଲ୍ ଡାଟା ଟର୍ନ୍ ଅନ୍ କରନ୍ତୁ ।</string>
     <string name="community">ସମ୍ପ୍ରଦାୟ</string>
@@ -306,11 +306,11 @@
     <string name="chapters">ଅଧ୍ୟାୟ ଗୁଡ଼ିକ</string>
     <string name="require_restart_message">ନୂତନ ପରିବର୍ତ୍ତନଗୁଡିକ ବ୍ୟବହାର କରିବାକୁ ଆପ୍ ପୁନଃଆରମ୍ଭ କରନ୍ତୁ ।</string>
     <string name="playerAudioQuality">ସ୍ୱର ଗୁଣବତ୍ତା</string>
-    <string name="navLabelVisibility">ଲେବଲ୍ ଭିଜିବିଲିଟି</string>
-    <string name="autoRotatePlayer">ଅଟୋ-ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
+    <string name="navLabelVisibility">ଲେବଲ୍ ଦୃଶ୍ୟମାନତା</string>
+    <string name="autoRotatePlayer">ସ୍ଵତଃ-ଫୁଲ୍ ସ୍କ୍ରିନ୍</string>
     <string name="search_history_summary">ସନ୍ଧାନଗୁଡିକ ମନେରଖ</string>
     <string name="no_player_found">କୌଣସି ବାହ୍ୟ ଖେଳାଳି ମିଳିଲା ନାହିଁ । ଦୟାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ ଆପଣଙ୍କର ଗୋଟିଏ ସଂସ୍ଥାପିତ ହୋଇଛି ।</string>
-    <string name="data_saver_mode">ଡାଟା-ସେଭର୍ ମୋଡ୍</string>
+    <string name="data_saver_mode">ଡାଟା-ସେଭର୍ ସ୍ଥିତି</string>
     <string name="data_saver_mode_summary">ଥମ୍ବନେଲ ଏବଂ ଅନ୍ୟାନ୍ୟ ପ୍ରତିଛବିଗୁଡ଼ିକୁ ଏଡ଼ାଇଦିଅ ।</string>
     <string name="watch_positions_title">ପ୍ଲେବ୍ୟାକ୍ ସ୍ଥିତିକୁ ମନେରଖ</string>
     <string name="none">କିଛି ବି ନାହିଁ</string>
@@ -342,7 +342,7 @@
     <string name="error_occurred">ଭୁଲ୍</string>
     <string name="share_with_time">ସମୟ କୋଡ୍ ସହିତ ଅଂଶୀଦାର କରନ୍ତୁ</string>
     <string name="misc">ବିବିଧ</string>
-    <string name="background_mode">ପୃଷ୍ଠଭୂମି ମୋଡ୍</string>
+    <string name="background_mode">ପୃଷ୍ଠଭୂମି ସ୍ଥିତି</string>
     <string name="backup">ନକଲ</string>
     <string name="skip_buttons_summary">ପରବର୍ତ୍ତୀ କିମ୍ବା ପୂର୍ବ ଭିଡିଓକୁ ଯିବାକୁ ବଟନ୍ ଦେଖାନ୍ତୁ ।</string>
     <string name="break_reminder">ବିରତି ପାଇଁ ମନେ ପକାନ୍ତୁ</string>
