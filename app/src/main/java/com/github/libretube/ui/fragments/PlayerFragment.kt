@@ -880,10 +880,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
                 // save the watch position when paused
                 if (playbackState == PlaybackState.STATE_PAUSED) {
-                    val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
-                    query {
-                        Database.watchPositionDao().insertAll(watchPosition)
-                    }
+                    saveWatchPosition()
                     disableAutoPiP()
                 }
 
