@@ -125,6 +125,47 @@ internal class CustomExoPlayerView(
             "zoom" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
             else -> AspectRatioFrameLayout.RESIZE_MODE_FIT
         }
+
+        binding.playPauseBTN.setOnClickListener {
+            if (player?.isPlaying == false) {
+                // start or go on playing
+                if (player?.playbackState == Player.STATE_ENDED) {
+                    // restart video if finished
+                    player?.seekTo(0)
+                }
+                player?.play()
+            } else {
+                // pause the video
+                player?.pause()
+            }
+        }
+
+        player?.addListener(object : Player.Listener {
+            override fun onEvents(player: Player, events: Player.Events) {
+                super.onEvents(player, events)
+                if (events.containsAny(
+                        Player.EVENT_PLAYBACK_STATE_CHANGED,
+                        Player.EVENT_IS_PLAYING_CHANGED,
+                        Player.EVENT_PLAY_WHEN_READY_CHANGED
+                    )
+                ) {
+                    updatePlayPauseButton()
+                }
+            }
+        })
+    }
+
+    private fun updatePlayPauseButton() {
+        if (player?.isPlaying == true) {
+            // video is playing
+            binding.playPauseBTN.setImageResource(R.drawable.ic_pause)
+        } else if (player?.playbackState == Player.STATE_ENDED) {
+            // video has finished
+            binding.playPauseBTN.setImageResource(R.drawable.ic_restart)
+        } else {
+            // player in any other state
+            binding.playPauseBTN.setImageResource(R.drawable.ic_play)
+        }
     }
 
     override fun hideController() {

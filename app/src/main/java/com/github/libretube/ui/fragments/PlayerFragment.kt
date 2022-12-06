@@ -317,7 +317,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
         }
 
-        val playPauseClickListner = View.OnClickListener {
+        binding.playImageView.setOnClickListener {
             if (!exoPlayer.isPlaying) {
                 // start or go on playing
                 if (exoPlayer.playbackState == Player.STATE_ENDED) {
@@ -330,8 +330,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 exoPlayer.pause()
             }
         }
-        playerBinding.playPauseBTN.setOnClickListener(playPauseClickListner)
-        binding.playImageView.setOnClickListener(playPauseClickListner)
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
@@ -976,15 +974,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (exoPlayer.isPlaying) {
             // video is playing
             binding.playImageView.setImageResource(R.drawable.ic_pause)
-            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_pause)
         } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
             // video has finished
             binding.playImageView.setImageResource(R.drawable.ic_restart)
-            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_restart)
         } else {
             // player in any other state
             binding.playImageView.setImageResource(R.drawable.ic_play)
-            playerBinding.playPauseBTN.setImageResource(R.drawable.ic_play)
         }
     }
 
