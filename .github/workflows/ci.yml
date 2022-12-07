@@ -95,5 +95,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: archive/*.apk
+          path: archive/*arm64-v8a*.apk
 
