@@ -11,7 +11,7 @@ object TextUtils {
      */
     const val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
 
-    const val TIMESTAMP_REGEX = "(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)([0-5]?\\d)"
+    const val TIMESTAMP_REGEX = "(?:(?:(\\d+):)?([0-5]?\\d):)([0-5]?\\d)"
 
     fun toTwoDecimalsString(num: Int): String {
         return if (num >= 10) num.toString() else "0$num"
