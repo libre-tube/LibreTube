@@ -421,4 +421,5 @@
     <string name="pinch_control_summary">Norėdami padidinti / sumažinti, sutraukite pirštais arba atvirkščiai.</string>
     <string name="theme_monochrome">Minimalistinė vienspalvė</string>
     <string name="play_latest_videos">Groti naujausius vaizdo įrašus</string>
+    <string name="nothing_selected">Niekas nepasirinkta!</string>
 </resources>
