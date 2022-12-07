@@ -421,4 +421,5 @@
     <string name="pinch_control_summary">Použijte gesto se dvěma prsty pro přiblížení/oddálení.</string>
     <string name="theme_monochrome">Minimalistický monochromatický</string>
     <string name="play_latest_videos">Přehrát nejnovější videa</string>
+    <string name="nothing_selected">Nic není vybráno!</string>
 </resources>
