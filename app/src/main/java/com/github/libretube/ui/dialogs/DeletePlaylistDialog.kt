@@ -40,6 +40,7 @@ class DeletePlaylistDialog(
                 DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
                 DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
             }
+            onSuccess.invoke()
             return
         }
 
