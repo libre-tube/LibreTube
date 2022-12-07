@@ -324,10 +324,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
-            CommentsSheet(videoId!!, comments, commentsNextPage) { comments, nextPage ->
-                this.comments.addAll(comments)
-                this.commentsNextPage = nextPage
-            }.show(childFragmentManager)
+            CommentsSheet(
+                videoId!!,
+                comments,
+                commentsNextPage,
+                onTimestampClick = { exoPlayer.seekTo(it * 1000) },
+                onMoreComments = { comments, nextPage ->
+                    this.comments.addAll(comments)
+                    this.commentsNextPage = nextPage
+                }
+            ).show(childFragmentManager)
         }
 
         playerBinding.queueToggle.visibility = View.VISIBLE

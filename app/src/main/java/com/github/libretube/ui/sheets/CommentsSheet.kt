@@ -20,6 +20,7 @@ class CommentsSheet(
     private val videoId: String,
     private val comments: List<Comment>,
     private var nextPage: String?,
+    private val onTimestampClick: (time: Long) -> Unit,
     private val onMoreComments: (comments: List<Comment>, nextPage: String?) -> Unit
 ) : ExpandedBottomSheet() {
     private lateinit var binding: CommentsSheetBinding
@@ -45,7 +46,11 @@ class CommentsSheet(
                 }
             }
 
-        commentsAdapter = CommentsAdapter(videoId, comments.toMutableList()) {
+        commentsAdapter = CommentsAdapter(
+            videoId,
+            comments.toMutableList(),
+            onTimestampClick = onTimestampClick
+        ) {
             dialog?.dismiss()
         }
         binding.commentsRV.adapter = commentsAdapter

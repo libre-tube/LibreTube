@@ -16,6 +16,7 @@ import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.ui.extensions.setFormattedTimestamp
 import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.ClipboardHelper
 import com.github.libretube.util.ImageHelper
@@ -30,6 +31,7 @@ class CommentsAdapter(
     private val videoId: String,
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
+    private val onTimestampClick: (time: Long) -> Unit,
     private val dismiss: () -> Unit
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
 
@@ -66,7 +68,7 @@ class CommentsAdapter(
             }
 
             commentInfos.text = comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
-            commentText.text = comment.commentText.toString()
+            commentText.setFormattedTimestamp(comment.commentText.toString(), onTimestampClick)
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
@@ -85,7 +87,7 @@ class CommentsAdapter(
             }
 
             repliesRecView.layoutManager = LinearLayoutManager(root.context)
-            val repliesAdapter = CommentsAdapter(videoId, mutableListOf(), true, dismiss)
+            val repliesAdapter = CommentsAdapter(videoId, mutableListOf(), true, onTimestampClick, dismiss)
             repliesRecView.adapter = repliesAdapter
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 root.setOnClickListener {
