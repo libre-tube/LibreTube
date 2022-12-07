@@ -421,4 +421,5 @@
     <string name="theme_monochrome">Monocromatico minimalista</string>
     <string name="proceed">Procedi</string>
     <string name="play_latest_videos">Riproduci i video più recenti</string>
+    <string name="nothing_selected">Niente di selezionato!</string>
 </resources>

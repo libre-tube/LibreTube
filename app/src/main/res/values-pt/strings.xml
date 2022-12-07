@@ -226,7 +226,7 @@
     <string name="change_playback_speed">Velocidade de reprodução</string>
     <string name="require_restart_message">Esta alteração exige que a aplicação seja reiniciada.</string>
     <string name="require_restart">Tem que reiniciar a aplicação</string>
-    <string name="navLabelVisibility">Visibilidade do rótulo</string>
+    <string name="navLabelVisibility">Visibilidade da etiqueta</string>
     <string name="autoRotatePlayer_summary">Ativar modo de ecrã completo ao ligar o ecrã.</string>
     <string name="pure_theme">Tema</string>
     <string name="pure_theme_summary">Branco/preto puro</string>
@@ -400,7 +400,7 @@
     <string name="auto">Auto</string>
     <string name="swipe_controls">Controlo de deslize</string>
     <string name="defaults">Padrão</string>
-    <string name="pop_up">Pop-Up</string>
+    <string name="pop_up">Popup</string>
     <string name="double_tap_seek">Dois toques para procurar</string>
     <string name="all_caught_up_summary">Já viu todos os novos vídeos</string>
     <string name="pinch_control">Apertar</string>
@@ -420,4 +420,6 @@
     <string name="username_email">Não recomendamos a partilha do endereço de e-mail. Deseja continuar\?</string>
     <string name="play_latest_videos">Reproduzir últimos vídeos</string>
     <string name="swipe_controls_summary">Utilizar gestos para controlar o volume e o brilho.</string>
+    <string name="all_caught_up">É tudo por hoje</string>
+    <string name="nothing_selected">Nada selecionado!</string>
 </resources>
