@@ -101,8 +101,8 @@
     <style name="PlayerControlBottom">
 
         <item name="android:padding">9dp</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_width">42dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
 
