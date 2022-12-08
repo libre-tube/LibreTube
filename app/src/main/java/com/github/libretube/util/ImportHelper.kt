@@ -40,7 +40,7 @@ class ImportHelper(
             Log.e(TAG(), e.toString())
             activity.toastFromMainThread(
                 activity.getString(R.string.unsupported_file_format) +
-                    " (${activity.contentResolver.getType(uri)}"
+                    " (${activity.contentResolver.getType(uri)})"
             )
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
@@ -53,7 +53,7 @@ class ImportHelper(
      */
     private fun getChannelsFromUri(uri: Uri): List<String> {
         return when (val fileType = activity.contentResolver.getType(uri)) {
-            "application/json", "application/octet-stream" -> {
+            "application/json", "application/*", "application/octet-stream" -> {
                 // NewPipe subscriptions format
                 val subscriptions = ObjectMapper().readValue(uri.readText(), NewPipeSubscriptions::class.java)
                 subscriptions.subscriptions.orEmpty().map {
