@@ -85,18 +85,17 @@ class MainActivity : BaseActivity() {
         navController = findNavController(R.id.fragment)
         binding.bottomNav.setupWithNavController(navController)
 
-        // gets the surface color of the bottom navigation view
-        val color = SurfaceColors.getColorForElevation(this, 10F)
-
-        // sets the navigation bar color to the previously calculated color
-        window.navigationBarColor = color
-
         // save start tab fragment id and apply navbar style
         startFragmentId = try {
             NavBarHelper.applyNavBarStyle(binding.bottomNav)
         } catch (e: Exception) {
             R.id.homeFragment
         }
+
+        // sets the navigation bar color to the previously calculated color
+        window.navigationBarColor = if (binding.bottomNav.menu.size() > 0) {
+            SurfaceColors.getColorForElevation(this, 10F)
+        } else ThemeHelper.getThemeColor(this, android.R.attr.colorBackground)
 
         // set default tab as start fragment
         navController.graph.setStartDestination(startFragmentId)
