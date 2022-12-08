@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.PopupMenu
 import androidx.core.view.forEach
 import androidx.core.view.get
@@ -106,6 +107,8 @@ object NavBarHelper {
                 ).icon = menuItem.icon
             }
         }
+        if (navBarItems.filter { it.isVisible }.isEmpty()) bottomNav.visibility = View.GONE
+
         return getStartFragmentId(bottomNav.context)
     }
 
@@ -113,7 +116,7 @@ object NavBarHelper {
         val pref = PreferenceHelper.getInt(PreferenceKeys.START_FRAGMENT, Int.MAX_VALUE)
         val defaultNavItems = getDefaultNavBarItems(context)
         return if (pref == Int.MAX_VALUE) {
-            getNavBarItems(context).first { it.isVisible }.itemId
+            getNavBarItems(context).firstOrNull { it.isVisible }?.itemId ?: R.id.homeFragment
         } else {
             defaultNavItems.get(pref).itemId
         }

@@ -3,7 +3,6 @@ package com.github.libretube.ui.adapters
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.NavOptionsItemBinding
@@ -39,10 +38,6 @@ class NavBarOptionsAdapter(
                 if (selectedHomeTabId == item.itemId) {
                     return@setOnClickListener
                 }
-                if (!item.isVisible) {
-                    Toast.makeText(root.context, R.string.not_enabled, Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
                 val oldSelection = items.indexOfFirst { it.itemId == selectedHomeTabId }
                 selectedHomeTabId = item.itemId
                 listOf(position, oldSelection).forEach {
@@ -50,25 +45,8 @@ class NavBarOptionsAdapter(
                 }
             }
             checkbox.setOnClickListener {
-                if (item.itemId == selectedHomeTabId) {
-                    Toast.makeText(root.context, R.string.select_other_start_tab, Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                if (!checkbox.isChecked && getVisibleItemsCount() < 2) {
-                    checkbox.isChecked = true
-                    Toast.makeText(
-                        root.context,
-                        R.string.select_at_least_one,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
                 item.isVisible = checkbox.isChecked
             }
         }
-    }
-
-    private fun getVisibleItemsCount(): Int {
-        return items.filter { it.isVisible }.size
     }
 }
