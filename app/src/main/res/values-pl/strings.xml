@@ -230,7 +230,7 @@
     <string name="behavior">Zachowanie</string>
     <string name="pauseOnScreenOff">Wstrzymaj odtwarzanie</string>
     <string name="clonePlaylist">Sklonuj playlistę</string>
-    <string name="watch_history">Historia oglądania</string>
+    <string name="watch_history">Obejrzane</string>
     <string name="auth_instance">Instancja uwierzytelniająca</string>
     <string name="auth_instance_summary">Użyj innej instancji do obsługi konta Piped.</string>
     <string name="auth_instances">Wybierz instancję autoryzacyjną</string>
@@ -248,7 +248,7 @@
     <string name="data_saver_mode_summary">Pomiń miniatury i inne obrazy.</string>
     <string name="search_history_summary">Zapamiętaj wyszukiwania</string>
     <string name="watch_history_summary">Przechowuj lokalnie historię obejrzanych filmów</string>
-    <string name="history_summary">Historia oglądania i wyszukiwania</string>
+    <string name="history_summary">Ostatnio obejrzane i wyszukiwane</string>
     <string name="watch_positions_title">Zapamiętane pozycje odtwarzania</string>
     <string name="reset_watch_positions">Zresetuj</string>
     <string name="system_caption_style">Styl napisów systemowych</string>
