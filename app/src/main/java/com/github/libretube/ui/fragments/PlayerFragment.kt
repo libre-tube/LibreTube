@@ -1392,7 +1392,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     fun onUserLeaveHint() {
         if (usePiP() && shouldStartPiP()) {
             activity?.enterPictureInPictureMode(getPipParams())
+            return
         }
+        if (!PlayerHelper.pipEnabled) exoPlayer.pause()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
