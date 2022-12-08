@@ -115,8 +115,15 @@ class ImportHelper(
         val playlistFile = ObjectMapper().readValue(uri.readText(), ImportPlaylistFile::class.java)
 
         CoroutineScope(Dispatchers.IO).launch {
-            playlistFile.playlists?.let {
-                PlaylistsHelper.importPlaylists(activity, it)
+            try {
+                playlistFile.playlists?.let {
+                    PlaylistsHelper.importPlaylists(activity, it)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
+                e.localizedMessage?.let {
+                    activity.applicationContext.toastFromMainThread(it)
+                }
             }
         }
 
