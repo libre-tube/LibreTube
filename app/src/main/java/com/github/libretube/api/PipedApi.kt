@@ -142,7 +142,7 @@ interface PipedApi {
     ): Message
 
     @POST("import/playlist")
-    suspend fun importPlaylist(
+    suspend fun clonePlaylist(
         @Header("Authorization") token: String,
         @Body playlistId: PlaylistId
     ): PlaylistId

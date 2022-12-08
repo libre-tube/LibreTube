@@ -1,26 +1,18 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
-import android.widget.Toast
 import com.github.libretube.R
+import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.PreferenceHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import retrofit2.HttpException
-import java.io.IOException
 
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
@@ -62,16 +54,7 @@ class PlaylistOptionsBottomSheet(
                 }
                 // Clone the playlist to the users Piped account
                 context?.getString(R.string.clonePlaylist) -> {
-                    val token = PreferenceHelper.getToken()
-                    if (token != "") {
-                        importPlaylist(token, playlistId)
-                    } else {
-                        Toast.makeText(
-                            context,
-                            R.string.login_first,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    PlaylistsHelper.clonePlaylist(requireContext(), playlistId)
                 }
                 // share the playlist
                 context?.getString(R.string.share) -> {
@@ -90,23 +73,5 @@ class PlaylistOptionsBottomSheet(
             }
         }
         super.onCreate(savedInstanceState)
-    }
-
-    private fun importPlaylist(token: String, playlistId: String) {
-        val appContext = context?.applicationContext
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = try {
-                RetrofitInstance.authApi.importPlaylist(
-                    token,
-                    PlaylistId(playlistId)
-                )
-            } catch (e: IOException) {
-                println(e)
-                return@launch
-            } catch (e: HttpException) {
-                return@launch
-            }
-            appContext?.toastFromMainThread(if (response.playlistId != null) R.string.playlistCloned else R.string.server_error)
-        }
     }
 }
