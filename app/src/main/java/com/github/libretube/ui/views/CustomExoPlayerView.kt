@@ -76,6 +76,9 @@ internal class CustomExoPlayerView(
         if (isControllerFullyVisible) hideController() else showController()
     }
 
+    // saved to only load the playback speed once (for the first video)
+    private var playbackPrefSet = false
+
     fun initialize(
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
@@ -98,10 +101,13 @@ internal class CustomExoPlayerView(
 
         initializeAdvancedOptions(context)
 
-        player?.playbackParameters = PlaybackParameters(
-            PlayerHelper.playbackSpeed.toFloat(),
-            1.0f
-        )
+        if (!playbackPrefSet) {
+            player?.playbackParameters = PlaybackParameters(
+                PlayerHelper.playbackSpeed.toFloat(),
+                1.0f
+            )
+            playbackPrefSet = true
+        }
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
