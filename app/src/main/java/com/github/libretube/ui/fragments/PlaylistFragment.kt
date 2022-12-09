@@ -185,17 +185,16 @@ class PlaylistFragment : BaseFragment() {
                             }
 
                             val info = binding.playlistInfo.text.split(TextUtils.SEPARATOR)
-                            val countInfo = getString(
-                                R.string.videoCount,
-                                playlistAdapter!!.itemCount.toString()
-                            )
                             binding.playlistInfo.text = (
                                 if (info.size == 2) {
                                     info[0] + TextUtils.SEPARATOR
                                 } else {
                                     ""
                                 }
-                                ) + countInfo
+                                ) + getString(
+                                R.string.videoCount,
+                                playlistAdapter!!.itemCount.toString()
+                            )
                             super.onItemRangeRemoved(positionStart, itemCount)
                         }
                     })

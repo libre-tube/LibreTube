@@ -178,7 +178,9 @@ object PlaylistsHelper {
             if (transaction.videos.size > 1) {
                 if (index == 0) {
                     transaction.videos[1].thumbnailUrl?.let { transaction.playlist.thumbnailUrl = it }
-                    DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+                    awaitQuery {
+                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+                    }
                 }
                 return
             }
