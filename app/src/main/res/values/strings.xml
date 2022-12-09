@@ -416,6 +416,7 @@
     <string name="proceed">Proceed</string>
     <string name="play_latest_videos">Play latest videos</string>
     <string name="nothing_selected">Nothing selected!</string>
+    <string name="color_violet">Versatile Violet</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
