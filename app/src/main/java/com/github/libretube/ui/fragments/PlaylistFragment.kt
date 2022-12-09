@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.db.DatabaseHolder
@@ -46,6 +47,7 @@ class PlaylistFragment : BaseFragment() {
     private var playlistAdapter: PlaylistAdapter? = null
     private var isLoading = true
     private var isBookmarked = false
+    private val playlistFeed = mutableListOf<StreamItem>()
 
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
@@ -108,6 +110,7 @@ class PlaylistFragment : BaseFragment() {
                 Log.e(TAG(), "HttpException, unexpected response")
                 return@launchWhenCreated
             }
+            playlistFeed.addAll(response.relatedStreams.orEmpty())
             binding.playlistScrollview.visibility = View.VISIBLE
             nextPage = response.nextpage
             playlistName = response.name
@@ -133,7 +136,7 @@ class PlaylistFragment : BaseFragment() {
                 }
 
                 binding.playAll.setOnClickListener {
-                    if (response.relatedStreams.orEmpty().isEmpty()) return@setOnClickListener
+                    if (playlistFeed.isEmpty()) return@setOnClickListener
                     NavigationHelper.navigateVideo(
                         requireContext(),
                         response.relatedStreams!!.first().url?.toID(),
@@ -165,7 +168,7 @@ class PlaylistFragment : BaseFragment() {
                 }
 
                 playlistAdapter = PlaylistAdapter(
-                    response.relatedStreams.orEmpty().toMutableList(),
+                    playlistFeed,
                     playlistId!!,
                     playlistType
                 )
@@ -173,12 +176,27 @@ class PlaylistFragment : BaseFragment() {
                 // listen for playlist items to become deleted
                 playlistAdapter!!.registerAdapterDataObserver(object :
                         RecyclerView.AdapterDataObserver() {
-                        override fun onChanged() {
-                            binding.playlistInfo.text =
-                                binding.playlistInfo.text.split(TextUtils.SEPARATOR).first() + TextUtils.SEPARATOR + getString(
+                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                            if (positionStart == 0) {
+                                ImageHelper.loadImage(
+                                    playlistFeed.firstOrNull()?.thumbnail ?: "",
+                                    binding.thumbnail
+                                )
+                            }
+
+                            val info = binding.playlistInfo.text.split(TextUtils.SEPARATOR)
+                            val countInfo = getString(
                                 R.string.videoCount,
                                 playlistAdapter!!.itemCount.toString()
                             )
+                            binding.playlistInfo.text = (
+                                if (info.size == 2) {
+                                    info[0] + TextUtils.SEPARATOR
+                                } else {
+                                    ""
+                                }
+                                ) + countInfo
+                            super.onItemRangeRemoved(positionStart, itemCount)
                         }
                     })
 
