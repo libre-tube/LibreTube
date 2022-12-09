@@ -175,7 +175,15 @@ object PlaylistsHelper {
             awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(transaction.videos[index])
             }
-            if (transaction.videos.size > 1) return
+            if (transaction.videos.size > 1) {
+                if (index == 0) {
+                    transaction.videos[1].thumbnailUrl?.let { transaction.playlist.thumbnailUrl = it }
+                    awaitQuery {
+                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+                    }
+                }
+                return
+            }
             // remove thumbnail if playlist now empty
             awaitQuery {
                 transaction.playlist.thumbnailUrl = ""
