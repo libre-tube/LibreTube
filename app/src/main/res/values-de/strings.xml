@@ -421,4 +421,6 @@
     <string name="pinch_control_summary">Verwende eine Zwei-Finger-Geste, um den Zoom anzupassen.</string>
     <string name="theme_monochrome">Minimalistisch Monochrom</string>
     <string name="play_latest_videos">Neueste Videos abspielen</string>
+    <string name="color_violet">Vielseitiges Violett</string>
+    <string name="nothing_selected">Nichts ausgewählt!</string>
 </resources>
