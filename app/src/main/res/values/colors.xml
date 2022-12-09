@@ -297,7 +297,8 @@
     <color name="purple_md_theme_dark_shadow">#000000</color>
     <color name="purple_md_theme_dark_surfaceTint">#FFACE7</color>
     <color name="purple_md_theme_dark_surfaceTintColor">#FFACE7</color>
-                                                                                 // Colors without comments seem to be not used
+
+    // Colors without comments seem to be not used
     <color name="monochrome_theme_light_primary">#616161</color>                // LibreTube Logo, Hyperlinks and on-off switch (on status: filling) (also influence on the navbar colour)
     <color name="monochrome_theme_light_onPrimary">#FFFFFF</color>              // on-off switch (on status: circle)
     <color name="monochrome_theme_light_primaryContainer">#DCDCDC</color>
@@ -356,5 +357,64 @@
     <color name="monochrome_theme_dark_shadow">#000000</color>
     <color name="monochrome_theme_dark_surfaceTint">#C3C3C3</color>
     <color name="monochrome_theme_dark_surfaceTintColor">#C3C3C3</color>
+
+    <color name="violet_theme_light_primary">#714AAA</color>
+    <color name="violet_theme_light_onPrimary">#FFFFFF</color>
+    <color name="violet_theme_light_primaryContainer">#EDDCFF</color>
+    <color name="violet_theme_light_onPrimaryContainer">#290055</color>
+    <color name="violet_theme_light_secondary">#714AAA</color>
+    <color name="violet_theme_light_onSecondary">#FFFFFF</color>
+    <color name="violet_theme_light_secondaryContainer">#EDDCFF</color>
+    <color name="violet_theme_light_onSecondaryContainer">#290055</color>
+    <color name="violet_theme_light_tertiary">#714AAA</color>
+    <color name="violet_theme_light_onTertiary">#FFFFFF</color>
+    <color name="violet_theme_light_tertiaryContainer">#EDDCFF</color>
+    <color name="violet_theme_light_onTertiaryContainer">#290055</color>
+    <color name="violet_theme_light_error">#BA1A1A</color>
+    <color name="violet_theme_light_errorContainer">#FFDAD6</color>
+    <color name="violet_theme_light_onError">#FFFFFF</color>
+    <color name="violet_theme_light_onErrorContainer">#410002</color>
+    <color name="violet_theme_light_background">#FFFBFF</color>
+    <color name="violet_theme_light_onBackground">#2B0052</color>
+    <color name="violet_theme_light_surface">#FFFBFF</color>
+    <color name="violet_theme_light_onSurface">#2B0052</color>
+    <color name="violet_theme_light_surfaceVariant">#E8E0EB</color>
+    <color name="violet_theme_light_onSurfaceVariant">#4A454E</color>
+    <color name="violet_theme_light_outline">#7B757F</color>
+    <color name="violet_theme_light_inverseOnSurface">#F9ECFF</color>
+    <color name="violet_theme_light_inverseSurface">#421A6C</color>
+    <color name="violet_theme_light_inversePrimary">#D7BAFF</color>
+    <color name="violet_theme_light_shadow">#000000</color>
+    <color name="violet_theme_light_surfaceTint">#714AAA</color>
+    <color name="violet_theme_light_surfaceTintColor">#714AAA</color>
+    <color name="violet_theme_dark_primary">#D7BAFF</color>
+    <color name="violet_theme_dark_onPrimary">#411478</color>
+    <color name="violet_theme_dark_primaryContainer">#593090</color>
+    <color name="violet_theme_dark_onPrimaryContainer">#EDDCFF</color>
+    <color name="violet_theme_dark_secondary">#D7BAFF</color>
+    <color name="violet_theme_dark_onSecondary">#411478</color>
+    <color name="violet_theme_dark_secondaryContainer">#593090</color>
+    <color name="violet_theme_dark_onSecondaryContainer">#EDDCFF</color>
+    <color name="violet_theme_dark_tertiary">#D7BAFF</color>
+    <color name="violet_theme_dark_onTertiary">#411478</color>
+    <color name="violet_theme_dark_tertiaryContainer">#593090</color>
+    <color name="violet_theme_dark_onTertiaryContainer">#EDDCFF</color>
+    <color name="violet_theme_dark_error">#FFB4AB</color>
+    <color name="violet_theme_dark_errorContainer">#93000A</color>
+    <color name="violet_theme_dark_onError">#690005</color>
+    <color name="violet_theme_dark_onErrorContainer">#FFDAD6</color>
+    <color name="violet_theme_dark_background">#2B0052</color>
+    <color name="violet_theme_dark_onBackground">#EFDBFF</color>
+    <color name="violet_theme_dark_surface">#2B0052</color>
+    <color name="violet_theme_dark_onSurface">#EFDBFF</color>
+    <color name="violet_theme_dark_surfaceVariant">#4A454E</color>
+    <color name="violet_theme_dark_onSurfaceVariant">#CCC4CF</color>
+    <color name="violet_theme_dark_outline">#958E99</color>
+    <color name="violet_theme_dark_inverseOnSurface">#2B0052</color>
+    <color name="violet_theme_dark_inverseSurface">#EFDBFF</color>
+    <color name="violet_theme_dark_inversePrimary">#714AAA</color>
+    <color name="violet_theme_dark_shadow">#000000</color>
+    <color name="violet_theme_dark_surfaceTint">#D7BAFF</color>
+    <color name="violet_theme_dark_surfaceTintColor">#D7BAFF</color>
 
 </resources>
