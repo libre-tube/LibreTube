@@ -401,7 +401,7 @@
     <string name="defaults">Výchozí</string>
     <string name="volume">Hlasitost</string>
     <string name="swipe_controls_summary">Pomocí gesta přejetí prstem upravit jas a hlasitost.</string>
-    <string name="pop_up">Vyskakovací okno</string>
+    <string name="pop_up">Pop-Up</string>
     <string name="no_comments_available">Toto video nemá žádné komentáře.</string>
     <string name="double_tap_seek">Dvojitým klepnutím vyhledáte</string>
     <string name="captions_size">Velikost titulků</string>
@@ -422,4 +422,5 @@
     <string name="theme_monochrome">Minimalistický monochromatický</string>
     <string name="play_latest_videos">Přehrát nejnovější videa</string>
     <string name="nothing_selected">Nic není vybráno!</string>
+    <string name="color_violet">Všestranná fialová</string>
 </resources>
