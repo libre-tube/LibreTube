@@ -224,6 +224,18 @@ class PlaylistFragment : BaseFragment() {
                     val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
                     itemTouchHelper.attachToRecyclerView(binding.playlistRecView)
                 }
+
+                // update the playlist thumbnail if bookmarked
+                val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
+                    .firstOrNull { it.playlistId == playlistId }
+                playlistBookmark?.let {
+                    if (playlistBookmark.thumbnailUrl != response.thumbnailUrl) {
+                        playlistBookmark.thumbnailUrl = response.thumbnailUrl
+                        query {
+                            DatabaseHolder.Database.playlistBookmarkDao().update(playlistBookmark)
+                        }
+                    }
+                }
             }
         }
     }
