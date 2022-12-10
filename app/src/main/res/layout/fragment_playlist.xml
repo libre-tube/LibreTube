@@ -84,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
+                    android:maxLines="1"
                     android:text="@string/play_all"
                     app:icon="@drawable/ic_playlist" />
 
@@ -94,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
+                    android:maxLines="1"
                     android:text="@string/bookmark"
                     app:icon="@drawable/ic_bookmark_outlined" />
 
