@@ -112,7 +112,7 @@
     <string name="customization">Kiigazítások</string>
     <string name="instance">Példány</string>
     <string name="website">Weboldal</string>
-    <string name="open">Megnyitás</string>
+    <string name="open">Megnyit…</string>
     <string name="reset">Alapértelmezések visszaállítása</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -256,7 +256,7 @@
     <string name="copied_to_clipboard">Másolva a vágólapra</string>
     <string name="open_copied">Megnyitás</string>
     <string name="add_to_queue">Sorba állítás</string>
-    <string name="yt_shorts">Shorts</string>
+    <string name="yt_shorts">Rövidek</string>
     <string name="no_subtitles_available">Nincs elérhető felirat</string>
     <string name="always">Mindig</string>
     <string name="autoRotatePlayer">Automatikus teljes képernyő</string>
@@ -404,7 +404,7 @@
     <string name="pop_up">Felugró</string>
     <string name="no_comments_available">Nincsenek elérhető hozzászólások a videóhoz.</string>
     <string name="comments_disabled">A hozzászólásokat a feltöltő letiltotta.</string>
-    <string name="double_tap_seek_summary">Érintse meg kétszer bal- vagy jobboldalt, hogy megváltoztassa a lejátszó helyzetét.</string>
+    <string name="double_tap_seek_summary">Koppintson kétszer balra vagy jobbra a lejátszó a vissza- vagy előretekeréshez.</string>
     <string name="captions_size">Feliratok mérete</string>
     <string name="double_tap_seek">Dupla érintéses keresés</string>
     <string name="exportsuccess">Exportálva.</string>
@@ -418,5 +418,9 @@
     <string name="pinch_control">Csípésvezérlés</string>
     <string name="pinch_control_summary">Használjon csípés gesztust, a nagyításhoz/kicsinyítéshez.</string>
     <string name="all_caught_up_summary">Már látta az összes új videót</string>
-    <string name="all_caught_up">Teljesen felzárkózott</string>
+    <string name="all_caught_up">Mostmár felzárkózott</string>
+    <string name="color_violet">Változékony lila</string>
+    <string name="nothing_selected">Nincs kiválasztva semmi!</string>
+    <string name="theme_monochrome">Minimalista monokróm</string>
+    <string name="play_latest_videos">A legújabb videókat játssza</string>
 </resources>
