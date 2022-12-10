@@ -25,6 +25,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -167,6 +168,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private lateinit var segmentData: SegmentData
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
+    val handler = Handler(Looper.getMainLooper())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -215,7 +218,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (this::playerBinding.isInitialized && !binding.player.isPlayerLocked) {
             playerBinding.exoBottomBar.visibility = View.VISIBLE
         }
-        Handler(Looper.getMainLooper()).postDelayed(this::showBottomBar, 100)
+        handler.postDelayed(this::showBottomBar, 100)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -533,7 +536,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun checkForSegments() {
         if (!exoPlayer.isPlaying || !PlayerHelper.sponsorBlockEnabled) return
 
-        Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
+        handler.postDelayed(this::checkForSegments, 100)
 
         if (!sponsorBlockEnabled) return
 
@@ -685,7 +688,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             playerBinding.liveDiff.text = "-$diffText"
         }
         // call it again
-        Handler(Looper.getMainLooper())
+        handler
             .postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
@@ -822,7 +825,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
 
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
-                    Handler(Looper.getMainLooper()).postDelayed(
+                    handler.postDelayed(
                         this@PlayerFragment::checkForSegments,
                         100
                     )
@@ -949,11 +952,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             )
         }
 
-        // next and previous buttons
-        if (PlayerHelper.skipButtonsEnabled) {
-            playerBinding.skipPrev.setInvisible(!PlayingQueue.hasPrev())
-            playerBinding.skipNext.setInvisible(!PlayingQueue.hasNext())
-        }
+        syncQueueButtons()
 
         playerBinding.skipPrev.setOnClickListener {
             playNextVideo(PlayingQueue.getPrev())
@@ -962,6 +961,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
         }
+    }
+
+    private fun syncQueueButtons() {
+        if (!PlayerHelper.skipButtonsEnabled) return
+
+        // next and previous buttons
+        playerBinding.skipPrev.setInvisible(!PlayingQueue.hasPrev())
+        playerBinding.skipNext.setInvisible(!PlayingQueue.hasNext())
+
+        handler.postDelayed(this::syncQueueButtons, 100)
     }
 
     private fun updatePlayPauseButton() {
