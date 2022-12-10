@@ -416,8 +416,15 @@ internal class CustomExoPlayerView(
     }
 
     private fun updateVolume(distance: Float) {
-        gestureViewBinding.volumeControlView.visibility = View.VISIBLE
         val bar = gestureViewBinding.volumeProgressBar
+        gestureViewBinding.volumeControlView.apply {
+            if (visibility == View.GONE) {
+                visibility = View.VISIBLE
+                // Volume could be changed using other mediums, sync progress
+                // bar with new value.
+                bar.progress = audioHelper.getVolumeWithScale(bar.max)
+            }
+        }
 
         if (bar.progress == 0) {
             gestureViewBinding.volumeImageView.setImageResource(
