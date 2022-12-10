@@ -102,15 +102,12 @@ class DownloadService : Service() {
         override fun onReceive(context: Context, intent: Intent) {
             // Fetching the download id received with the broadcast
             // Checking if the received broadcast is for our enqueued download by matching download id
-            when (
-                intent.getLongExtra(
-                    DownloadManager.EXTRA_DOWNLOAD_ID,
-                    -1
-                )
-            ) {
-                videoDownloadId -> videoDownloadId = null
-                audioDownloadId -> audioDownloadId = null
-            }
+            val downloadId = intent.getLongExtra(
+                DownloadManager.EXTRA_DOWNLOAD_ID,
+                -1
+            )
+            if (downloadId == audioDownloadId) audioDownloadId = null
+            else if (downloadId == videoDownloadId) videoDownloadId = null
 
             if (audioDownloadId != null || videoDownloadId != null) return
 
