@@ -619,7 +619,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 initializePlayerView(streams)
                 if (!isLive) seekToWatchPosition()
                 exoPlayer.prepare()
-                exoPlayer.play()
+                if (!PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) exoPlayer.play()
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
