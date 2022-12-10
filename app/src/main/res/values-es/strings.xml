@@ -397,7 +397,7 @@
     <string name="not_enabled">¡Elemento del menú no habilitado!</string>
     <string name="volume">Volumen</string>
     <string name="auto">Auto</string>
-    <string name="swipe_controls">Controles del deslizamiento</string>
+    <string name="swipe_controls">Controles de deslizamiento</string>
     <string name="brightness">Brillo</string>
     <string name="swipe_controls_summary">Usa el gesto de deslizar para ajustar el brillo y el volumen.</string>
     <string name="defaults">Por defecto</string>
@@ -422,4 +422,5 @@
     <string name="username_email">¿Continuar con una dirección de correo aunque no sea recomendado\?</string>
     <string name="play_latest_videos">Reproducir los últimos videos</string>
     <string name="nothing_selected">¡Nada seleccionado!</string>
+    <string name="color_violet">Violeta Versátil</string>
 </resources>

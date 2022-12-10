@@ -226,7 +226,7 @@
     <string name="change_playback_speed">Velocidade de reprodução</string>
     <string name="require_restart_message">Esta alteração exige que a aplicação seja reiniciada.</string>
     <string name="require_restart">Tem que reiniciar a aplicação</string>
-    <string name="navLabelVisibility">Visibilidade da etiqueta</string>
+    <string name="navLabelVisibility">Visibilidade da barra de navegação</string>
     <string name="autoRotatePlayer_summary">Ativar modo de ecrã completo ao ligar o ecrã.</string>
     <string name="pure_theme">Tema</string>
     <string name="pure_theme_summary">Branco/preto puro</string>
