@@ -243,8 +243,10 @@ class PlaylistFragment : BaseFragment() {
                 }
 
                 // update the playlist thumbnail if bookmarked
-                val playlistBookmark = DatabaseHolder.Database.playlistBookmarkDao().getAll()
-                    .firstOrNull { it.playlistId == playlistId }
+                val playlistBookmark = awaitQuery {
+                    DatabaseHolder.Database.playlistBookmarkDao().getAll()
+                        .firstOrNull { it.playlistId == playlistId }
+                }
                 playlistBookmark?.let {
                     if (playlistBookmark.thumbnailUrl != response.thumbnailUrl) {
                         playlistBookmark.thumbnailUrl = response.thumbnailUrl
