@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.github.libretube.db.obj.PlaylistBookmark
 
 @Dao
@@ -20,6 +21,9 @@ interface PlaylistBookmarkDao {
 
     @Delete
     fun delete(playlistBookmark: PlaylistBookmark)
+
+    @Update
+    fun update(playlistBookmark: PlaylistBookmark)
 
     @Query("DELETE FROM playlistBookmark WHERE playlistId = :playlistId")
     fun deleteById(playlistId: String)

@@ -95,7 +95,9 @@ class MainActivity : BaseActivity() {
         // sets the navigation bar color to the previously calculated color
         window.navigationBarColor = if (binding.bottomNav.menu.size() > 0) {
             SurfaceColors.getColorForElevation(this, 10F)
-        } else ThemeHelper.getThemeColor(this, android.R.attr.colorBackground)
+        } else {
+            ThemeHelper.getThemeColor(this, android.R.attr.colorBackground)
+        }
 
         // set default tab as start fragment
         navController.graph.setStartDestination(startFragmentId)
