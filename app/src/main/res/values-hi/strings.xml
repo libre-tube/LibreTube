@@ -421,4 +421,6 @@
     <string name="pinch_control_summary">ज़ूम इन/आउट करने के लिए पिंच जेस्चर का उपयोग करें।</string>
     <string name="theme_monochrome">मिनिमलिस्टिक मोनोक्रोम</string>
     <string name="play_latest_videos">नवीनतम वीडियो चलाएँ</string>
+    <string name="color_violet">बहुमुखी बैंगनी</string>
+    <string name="nothing_selected">कुछ चुना नहीं!</string>
 </resources>
