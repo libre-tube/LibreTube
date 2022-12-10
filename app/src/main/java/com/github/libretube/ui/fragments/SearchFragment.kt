@@ -69,14 +69,13 @@ class SearchFragment : BaseFragment() {
             val response = try {
                 RetrofitInstance.api.getSuggestions(query)
             } catch (e: Exception) {
-                println(e)
                 Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
             // only load the suggestions if the input field didn't get cleared yet
             val suggestionsAdapter =
                 SearchSuggestionsAdapter(
-                    response,
+                    response.reversed(),
                     (activity as MainActivity).searchView
                 )
             runOnUiThread {
