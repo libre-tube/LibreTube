@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="registered">Sikeres regisztráció! Mostantól feliratkozhatsz csatornákra.</string>
+    <string name="registered">Sikeres regisztráció! Mostantól feliratkozhat csatornákra.</string>
     <string name="already_logged_in">Már be van jelentkezve. Kijelentkezhet a fiókjából.</string>
     <string name="search_hint">Keresés</string>
     <string name="unsubscribe">Leiratkozás</string>
@@ -41,7 +41,7 @@
     <string name="emptyList">Itt nincs semmi.</string>
     <string name="dlisinprogress">Egy másik letöltés már folyamatban van, várjon amíg befejeződik.</string>
     <string name="customInstance">Egyéni</string>
-    <string name="dlcomplete">A letöltés kész.</string>
+    <string name="dlcomplete">A letöltés befejezve.</string>
     <string name="importsuccess">Sikeres feliratkozás</string>
     <string name="subscribeIsEmpty">Iratkozzon fel előbb néhány csatornára.</string>
     <string name="error">Valami gond van.</string>
@@ -49,7 +49,7 @@
     <string name="grid">Rács oszlopok</string>
     <string name="notgmail">Ez a Piped fiók számára van.</string>
     <string name="playlistName">Lejátszási lista neve</string>
-    <string name="fail">Nem sikerült :(</string>
+    <string name="fail">Sikertelen :(</string>
     <string name="about">Névjegy</string>
     <string name="emptyPlaylistName">A lejátszási lista neve nem lehet üres</string>
     <string name="import_from_yt_summary">YouTube-ról vagy NewPipe-ból</string>
@@ -96,7 +96,7 @@
     <string name="category_intro">Szünet/bevezető animáció</string>
     <string name="category_intro_description">Egy tényleges tartalom nélküli rész. Lehet szünet, statikus képkocka, ismétlődő animáció. Nem szabad információt tartalmazó átmenetekhez használni.</string>
     <string name="category_outro">Végső kártyák és köszönet</string>
-    <string name="category_outro_description">Köszönetnyilvánítás vagy a videóvégi kártyák megjelenése. Nem a videó összefoglalása, vagy információ.</string>
+    <string name="category_outro_description">Köszönetnyilvánítás vagy a videóvégi kártyák megjelenése. Nem a videó informatív összefoglalása.</string>
     <string name="license">Licenc</string>
     <string name="color_accent">Kiemelés</string>
     <string name="color_red">Pihentető vörös</string>
@@ -112,7 +112,7 @@
     <string name="customization">Kiigazítások</string>
     <string name="instance">Példány</string>
     <string name="website">Weboldal</string>
-    <string name="open">Megnyit…</string>
+    <string name="open">Megnyitás…</string>
     <string name="reset">Alapértelmezések visszaállítása</string>
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
@@ -158,7 +158,7 @@
     <string name="category_music_offtopic">Zene: nem zenés rész</string>
     <string name="appearance">Megjelenés</string>
     <string name="app_behavior">Működés</string>
-    <string name="download_directory_summary">Ahol a letöltött média lesz tárolva.</string>
+    <string name="download_directory_summary">Ahol a letöltött média tárolva lesz.</string>
     <string name="category_filler">Időkitöltés/viccek</string>
     <string name="category_preview">Előnézet/visszatekintés</string>
     <string name="update_available_text">A letöltéshez ellátogasson a kiadásokra a GitHubon\?</string>
@@ -243,7 +243,7 @@
     <string name="unlimited">Végtelen</string>
     <string name="break_reminder">Szünet emlékeztető</string>
     <string name="take_a_break">Itt az idő szünetet tartani</string>
-    <string name="already_spent_time">Már %1$s töltött az alkalmazásban, itt az idő szünetet tartani.</string>
+    <string name="already_spent_time">Már %1$s percet töltött az alkalmazásban, itt az idő szünetet tartani.</string>
     <string name="resize_mode_fit">Illeszkedés</string>
     <string name="resize_mode_fill">Kitöltés</string>
     <string name="resize_mode_zoom">Nagyítás</string>
@@ -255,7 +255,7 @@
     <string name="maximum_image_cache">Maximális képgyorsítótár méret</string>
     <string name="copied_to_clipboard">Másolva a vágólapra</string>
     <string name="open_copied">Megnyitás</string>
-    <string name="add_to_queue">Sorba állítás</string>
+    <string name="add_to_queue">Sorbaállítás</string>
     <string name="yt_shorts">Rövidek</string>
     <string name="no_subtitles_available">Nincs elérhető felirat</string>
     <string name="always">Mindig</string>
@@ -266,7 +266,7 @@
     <string name="search_history_summary">Keresések megjegyzése</string>
     <string name="reset_watch_positions">Visszaállítás</string>
     <string name="none">Egyik sem</string>
-    <string name="update_now">Telepíti az új LibreTube verziót most\?</string>
+    <string name="update_now">Telepíti most az új LibreTube verziót\?</string>
     <string name="watch_history_summary">A megtekintett videók nyomon követése helyben</string>
     <string name="watch_positions_title">Lejátszási pozíció megjegyzése</string>
     <string name="captions">Feliratok</string>
@@ -360,7 +360,7 @@
     <string name="sb_markers_summary">Szakaszok megjelölése az idősávon.</string>
     <string name="livestreams">Élő közvetítések</string>
     <string name="alternative_videos_layout">Alternatív videók elrendezés</string>
-    <string name="defaultIconLight">Alapért. világos</string>
+    <string name="defaultIconLight">Alapértelmezett világos</string>
     <string name="playlistCloned">Lejátszási lista klónozva</string>
     <string name="confirm_unsubscribing">Leiratkozás megerősítése</string>
     <string name="confirm_unsubscribe">Biztosan le szeretne iratkozni erről: %1$s\?</string>
@@ -391,7 +391,7 @@
     <string name="bookmarks_empty">Nincsenek még könyvjelzők!</string>
     <string name="clear_bookmarks">Könyvjelzők törlése</string>
     <string name="local_playlists">Helyi lejátszási listák</string>
-    <string name="queue_insert_related_videos">Kapcsolódó videók beillesztése</string>
+    <string name="queue_insert_related_videos">Kapcsolódó videók beszúrása</string>
     <string name="trends">Felkapottak</string>
     <string name="select_other_start_tab">Válasszon egy másik kezdőlapot először!</string>
     <string name="not_enabled">Menüelem nincs engedélyezve!</string>
@@ -418,9 +418,9 @@
     <string name="pinch_control">Csípésvezérlés</string>
     <string name="pinch_control_summary">Használjon csípés gesztust, a nagyításhoz/kicsinyítéshez.</string>
     <string name="all_caught_up_summary">Már látta az összes új videót</string>
-    <string name="all_caught_up">Mostmár felzárkózott</string>
+    <string name="all_caught_up">Most már felzárkózott</string>
     <string name="color_violet">Változékony lila</string>
-    <string name="nothing_selected">Nincs kiválasztva semmi!</string>
+    <string name="nothing_selected">Nincs semmi kiválasztva!</string>
     <string name="theme_monochrome">Minimalista monokróm</string>
     <string name="play_latest_videos">A legújabb videókat játssza</string>
 </resources>
