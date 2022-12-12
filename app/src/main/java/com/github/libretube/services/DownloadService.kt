@@ -106,8 +106,9 @@ class DownloadService : Service() {
                 DownloadManager.EXTRA_DOWNLOAD_ID,
                 -1
             )
-            if (downloadId == audioDownloadId) audioDownloadId = null
-            else if (downloadId == videoDownloadId) videoDownloadId = null
+            if (downloadId == audioDownloadId) {
+                audioDownloadId = null
+            } else if (downloadId == videoDownloadId) videoDownloadId = null
 
             if (audioDownloadId != null || videoDownloadId != null) return
 
