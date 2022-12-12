@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
@@ -66,7 +67,7 @@ class CommentsAdapter(
             }
 
             commentInfos.text = comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
-            commentText.text = comment.commentText.toString()
+            commentText.text = HtmlCompat.fromHtml(comment.commentText.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
