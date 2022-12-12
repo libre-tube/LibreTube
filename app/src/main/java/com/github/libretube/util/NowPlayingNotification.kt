@@ -109,6 +109,8 @@ class NowPlayingNotification(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? {
+            if (PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) return null
+
             var bitmap: Bitmap? = null
 
             val request = ImageRequest.Builder(context)
