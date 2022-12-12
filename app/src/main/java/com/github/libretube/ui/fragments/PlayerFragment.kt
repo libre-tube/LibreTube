@@ -1133,11 +1133,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (resolutions.isEmpty()) {
             return listOf(
-                VideoResolution(getString(R.string.hls), adaptiveSourceUrl = streams.hls)
+                VideoResolution(getString(R.string.hls), resolution = Int.MAX_VALUE, adaptiveSourceUrl = streams.hls)
             )
+        } else {
+            resolutions.add(0, VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
         }
-
-        resolutions.add(0, VideoResolution(getString(R.string.auto_quality), null))
 
         return resolutions
     }
@@ -1176,12 +1176,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         )
     }
 
-    private fun setPlayerResolution(resolution: Int?) {
+    private fun setPlayerResolution(resolution: Int) {
         val params = trackSelector.buildUponParameters()
-        when (resolution) {
-            null -> params.setMaxVideoSize(Int.MAX_VALUE, Int.MAX_VALUE).setMinVideoSize(0, 0)
-            else -> params.setMaxVideoSize(Int.MAX_VALUE, resolution).setMinVideoSize(Int.MIN_VALUE, resolution)
-        }
+        params.setMaxVideoSize(Int.MAX_VALUE, resolution).setMinVideoSize(Int.MIN_VALUE, resolution)
         trackSelector.setParameters(params)
     }
 
@@ -1327,13 +1324,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     override fun onQualityClicked() {
         // get the available resolutions
         val resolutions = getAvailableResolutions()
+        val currentQuality = trackSelector.parameters.maxVideoHeight
 
         // Dialog for quality selection
         BaseBottomSheet()
             .setSimpleItems(
-                resolutions.map { it.name }
+                resolutions.map {
+                    if (currentQuality == it.resolution) "${it.name} ✓" else it.name
+                }
             ) { which ->
-                setPlayerResolution(resolutions[which].resolution)
+                resolutions[which].resolution?.let {
+                    setPlayerResolution(it)
+                }
             }
             .show(childFragmentManager)
     }
