@@ -91,7 +91,6 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         private var lastClick = 0L
         private var lastDoubleClick = 0L
-        private var xPos = 0.0F
 
         override fun onDown(e: MotionEvent): Boolean {
             // Initially assume this event is for click
@@ -99,10 +98,15 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
 
             if (isMoving || scaleGestureDetector.isInProgress) return false
 
+            if (!PlayerHelper.doubleTapToSeek) {
+                listener.onSingleTap()
+                return true
+            }
+
             if (isEnabled && isSecondClick()) {
                 handler.removeCallbacks(runnable)
                 lastDoubleClick = elapsedTime
-                val eventPositionPercentageX = xPos / width
+                val eventPositionPercentageX = e.x / width
 
                 when {
                     eventPositionPercentageX < 0.4 -> listener.onDoubleTapLeftScreen()
@@ -114,7 +118,6 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
                 handler.removeCallbacks(runnable)
                 handler.postDelayed(runnable, MAX_TIME_DIFF)
                 lastClick = elapsedTime
-                xPos = e.x
             }
             return true
         }
@@ -131,14 +134,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             val insideBorder = (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
 
             // If the movement is inside threshold or scroll is horizontal then return false
-            if (
-                !isMoving && (
-                    insideThreshHold || insideBorder ||
-                        abs(distanceX) > abs(
-                            distanceY
-                        )
-                    )
-            ) {
+            if (!isMoving && (insideThreshHold || insideBorder || abs(distanceX) > abs(distanceY))) {
                 return false
             }
 
