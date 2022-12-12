@@ -93,8 +93,8 @@ class BackupHelper(private val context: Context) {
                 when (it.value) {
                     is Boolean -> putBoolean(it.key, it.value)
                     is Float -> putFloat(it.key, it.value)
-                    is Int -> putInt(it.key, it.value)
                     is Long -> putLong(it.key, it.value)
+                    is Int -> putInt(it.key, it.value)
                     is String -> putString(it.key, it.value)
                 }
             }
