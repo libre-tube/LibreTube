@@ -421,4 +421,6 @@
     <string name="exportsuccess">Экспортировано.</string>
     <string name="privacy_alert">Предупреждение о конфиденциальности</string>
     <string name="play_latest_videos">Воспроизвести последние видео</string>
+    <string name="color_violet">Универсальный фиолетовый</string>
+    <string name="nothing_selected">Ничего не выбрано!</string>
 </resources>
