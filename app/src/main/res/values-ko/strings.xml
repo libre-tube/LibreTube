@@ -314,4 +314,19 @@
     <string name="background_channel_name">백그라운드 모드</string>
     <string name="background_channel_description">오디오 플레이어 제어 버튼이 있는 알림을 표시한다.</string>
     <string name="wifi">와이파이</string>
+    <string name="play_all">모두 재생</string>
+    <string name="auto">자동</string>
+    <string name="swipe_controls">컨트롤 변경</string>
+    <string name="swipe_controls_summary">스와이프 제스처를 사용하여 밝기와 음량을 조정하십시오.</string>
+    <string name="skip_segment">세그먼트 건너뛰기</string>
+    <string name="telegram">텔레그램</string>
+    <string name="reddit">레딧</string>
+    <string name="selected">선택된</string>
+    <string name="copied_to_clipboard">클립보드에 복사됨</string>
+    <string name="volume">음량</string>
+    <string name="network_wifi">와이파이로만 네트워크 연결</string>
+    <string name="nothing_selected">아무것도 선택되지 않음!</string>
+    <string name="username_email">권장하지 않는 이메일 주소로 진행하시겠습니까\?</string>
+    <string name="proceed">진행하다</string>
+    <string name="play_latest_videos">최신 동영상 재생</string>
 </resources>
