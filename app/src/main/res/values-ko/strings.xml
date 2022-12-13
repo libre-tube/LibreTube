@@ -131,7 +131,7 @@
     <string name="contributing">기여</string>
     <string name="donate">기부</string>
     <string name="update">새 버전을 찾습니다</string>
-    <string name="update_summary">앱이 최신 버전인지 확인하려면 클릭하세요.</string>
+    <string name="update_summary">앱이 최신 버전인지 확인하세요</string>
     <string name="app_uptodate">최신 버전을 실행 중입니다.</string>
     <string name="no_update_available">최신 버전을 실행하고 있습니다.</string>
     <string name="playback_speed">재생 속도</string>
