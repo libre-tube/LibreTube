@@ -152,7 +152,7 @@
     <string name="addInstance">인스턴스 추가</string>
     <string name="customInstance_summary">추가…</string>
     <string name="instance_name">인스턴스 이름</string>
-    <string name="clear_customInstances">커스텀 인스턴스 지우기</string>
+    <string name="clear_customInstances">지우기 추가됨</string>
     <string name="instance_api_url">인스턴스 API에 대한 URL</string>
     <string name="empty_instance">이름과 API URL을 입력합니다.</string>
     <string name="invalid_url">작동하는 URL을 입력하세요</string>
@@ -203,7 +203,7 @@
     <string name="watch_positions_summary">마지막 재생 위치부터 계속</string>
     <string name="auth_instance">인증 인스턴스</string>
     <string name="auth_instance_summary">인증된 호출에 다른 인스턴스를 사용합니다.</string>
-    <string name="hls">자동</string>
+    <string name="hls">HLS</string>
     <string name="audio_video">오디오 및 비디오</string>
     <string name="aspect_ratio">비디오 종횡비</string>
     <string name="auto_rotation">자동 회전</string>
@@ -217,7 +217,7 @@
     <string name="autoRotatePlayer_summary">장치를 돌리면 전체 화면이 재생됩니다.</string>
     <string name="autoRotatePlayer">자동 전체화면</string>
     <string name="data_saver_mode">데이터 세이버 모드</string>
-    <string name="search_history_summary">검색 기억</string>
+    <string name="search_history_summary">검색 기록 남기기</string>
     <string name="history_summary">시청 및 검색 기록</string>
     <string name="pure_theme_summary">순수한 흰색/검은색 테마</string>
     <string name="no_player_found">외부 플레이어를 찾을 수 없습니다. 하나가 설치되어 있는지 확인하십시오.</string>
@@ -358,4 +358,22 @@
     <string name="defaultIconLight">기본 조명</string>
     <string name="time_code">시간 코드(초)</string>
     <string name="show_more">더 보기</string>
+    <string name="local_playlists">로컬 플레이리스트</string>
+    <string name="shapedIcon">웃긴 모양</string>
+    <string name="captions_size">캡션 크기</string>
+    <string name="sb_skip_manual">수동으로 건너뛰기</string>
+    <string name="sb_skip_manual_summary">세그먼트를 자동으로 건너뛰지 말고, 항상 건너뛰기 전에 확인하십시오.</string>
+    <string name="gradientIcon">glib 기울기</string>
+    <string name="views_placeholder">조회수</string>
+    <string name="open">열기…</string>
+    <string name="alternative_player_layout_summary">아래가 아닌 댓글 위에 관련 동영상을 행으로 표시합니다.</string>
+    <string name="seek_increment">증가분 찾기</string>
+    <string name="open_queue_from_notification">알림에서 대기열 열기</string>
+    <string name="backup_restore_summary">구독, 재생 목록 가져오기 및 내보내기, …</string>
+    <string name="privacy_alert">개인 정보 보호 경고</string>
+    <string name="auto_quality">자동</string>
+    <string name="featured">추천</string>
+    <string name="bookmarks">북마크</string>
+    <string name="clear_bookmarks">북마크 초기화</string>
+    <string name="bookmarks_empty">아직 북마크가 없습니다!</string>
 </resources>
