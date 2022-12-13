@@ -271,4 +271,26 @@
     <string name="backup">백업</string>
     <string name="general">일반</string>
     <string name="general_summary">언어 및 지역</string>
+    <string name="audio_video_summary">품질 및 형식</string>
+    <string name="queue">대기열</string>
+    <string name="twitter">트위터</string>
+    <string name="none">없음</string>
+    <string name="open_copied">열다</string>
+    <string name="device_info">기기 정보</string>
+    <string name="delete">다운로드에서 삭제</string>
+    <string name="legacy_subscriptions">기존 구독 보기</string>
+    <string name="added_to_playlist">플레이리스트에 추가하세요</string>
+    <string name="filename">파일이름</string>
+    <string name="invalid_filename">유효하지 않은 파일이름!</string>
+    <string name="playlists_order">재생목록 순서</string>
+    <string name="playlistNameReversed">재생목록 이름(역순)</string>
+    <string name="import_playlists">재생목록을 가져오다</string>
+    <string name="export_playlists">재생목록을 내보내다</string>
+    <string name="audio_track">오디오 트랙</string>
+    <string name="default_audio_track">기본값</string>
+    <string name="unsupported_file_format">지원하지 않는 파일형식!</string>
+    <string name="hls_instead_of_dash">HLS를 사용하세요</string>
+    <string name="limit_to_runtime">런타임으로 제한</string>
+    <string name="trends">트렌드</string>
+    <string name="queue_insert_related_videos">관련된 비디오를 삽입하시오</string>
 </resources>
