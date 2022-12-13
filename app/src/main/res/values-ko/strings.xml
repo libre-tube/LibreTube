@@ -296,7 +296,6 @@
     <string name="pop_up">팝업</string>
     <string name="no_comments_available">이 비디오에는 이용할 수 있는 댓글이 없습니다.</string>
     <string name="all_caught_up_summary">새로운 비디오를 모두 시청함</string>
-    <string name="views_placeholder"></string>
     <string name="landscape">풍경</string>
     <string name="double_tap_seek">찾으려면 더블 탭</string>
     <string name="push_channel_description">새 스트림이 열렸을 때 알림을 표시합니다.</string>
