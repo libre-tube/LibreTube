@@ -29,7 +29,7 @@
     <string name="dlcomplete">다운로드가 완료되었습니다.</string>
     <string name="downloadfailed">다운로드에 실패했습니다.</string>
     <string name="vlc">VLC에서 열기</string>
-    <string name="vlcerror">VLC에서 열 수 없습니다. 설치되어 있지 않을 수 있습니다.</string>
+    <string name="vlcerror">VLC에서 열 수 없습니다. 설치되어 있지 않습니다.</string>
     <string name="import_from_yt">구독 가져오기</string>
     <string name="app_theme">앱 테마</string>
     <string name="server_error">서버에 문제가 발생했습니다. 다른 인스턴스를 시도할까요\?</string>
@@ -113,7 +113,7 @@
     <string name="enabled">켬</string>
     <string name="disabled">끔</string>
     <string name="app_icon">아이콘</string>
-    <string name="youtube">YouTube</string>
+    <string name="youtube">유튜브</string>
     <string name="playOnBackground">백그라운드에서 재생</string>
     <string name="piped">Piped</string>
     <string name="authors">저자</string>
@@ -159,7 +159,7 @@
     <string name="instance_summary">Piped, 로그인 및 구독</string>
     <string name="related_streams">관련된 컨텐츠</string>
     <string name="related_streams_summary">시청하는 내용과 함께 유사한 스트림을 표시합니다.</string>
-    <string name="version">V %1$s</string>
+    <string name="version">버전 %1$s</string>
     <string name="about_summary">LibreTube 팀과 그 모든 일이 어떻게 일어나는지 알아보세요.</string>
     <string name="show_chapters">챕터 보기</string>
     <string name="hide_chapters">챕터 숨기기</string>
@@ -212,7 +212,7 @@
     <string name="turnInternetOn">인터넷에 연결하려면 Wi-Fi 또는 모바일 데이터를 켜십시오.</string>
     <string name="change_playback_speed">재생 속도</string>
     <string name="require_restart">앱 다시 시작 필요</string>
-    <string name="require_restart_message">앱을 다시 시작하시겠습니까\?</string>
+    <string name="require_restart_message">변경사항을 적용하기 위해 앱을 다시 시작하세요.</string>
     <string name="update_now">지금 새 LibreTube 버전을 설치하시겠습니까\?</string>
     <string name="autoRotatePlayer_summary">장치를 돌리면 전체 화면이 재생됩니다.</string>
     <string name="autoRotatePlayer">자동 전체화면</string>
@@ -293,4 +293,25 @@
     <string name="limit_to_runtime">런타임으로 제한</string>
     <string name="trends">트렌드</string>
     <string name="queue_insert_related_videos">관련된 비디오를 삽입하시오</string>
+    <string name="pop_up">팝업</string>
+    <string name="no_comments_available">이 비디오에는 이용할 수 있는 댓글이 없습니다.</string>
+    <string name="all_caught_up_summary">새로운 비디오를 모두 시청함</string>
+    <string name="views_placeholder"></string>
+    <string name="landscape">풍경</string>
+    <string name="double_tap_seek">찾으려면 더블 탭</string>
+    <string name="push_channel_description">새 스트림이 열렸을 때 알림을 표시합니다.</string>
+    <string name="download_channel_description">다운로드 중에 알림을 표시합니다.</string>
+    <string name="download_channel_name">다운로드 서비스</string>
+    <string name="portrait">인물 사진</string>
+    <string name="community">공동체</string>
+    <string name="comments_disabled">게시자에 의해 댓글이 제한되었습니다.</string>
+    <string name="defaults">기본값</string>
+    <string name="pinch_control_summary">핀치 제스처를 이용하여 확대/축소합니다.</string>
+    <string name="push_channel_name">채널 이름 입력</string>
+    <string name="exportsuccess">내보내기 완료.</string>
+    <string name="app_backup">앱 백업</string>
+    <string name="double_tap_seek_summary">왼쪽이나 오른쪽을 두 번 눌러 플레이어 위치를 되감거나 앞으로 이동합니다.</string>
+    <string name="background_channel_name">백그라운드 모드</string>
+    <string name="background_channel_description">오디오 플레이어 제어 버튼이 있는 알림을 표시한다.</string>
+    <string name="wifi">와이파이</string>
 </resources>
