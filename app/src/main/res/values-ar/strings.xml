@@ -422,4 +422,5 @@
     <string name="theme_monochrome">أضيق الحدود أحادية اللون</string>
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
     <string name="nothing_selected">لا شيء محدد!</string>
+    <string name="color_violet">البنفسج</string>
 </resources>

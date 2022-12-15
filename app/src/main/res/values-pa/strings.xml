@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library">ਲਾਇਬ੍ਰੇਰੀ</string>
+    <string name="yes">ਠੀਕ</string>
+    <string name="choose_quality_dialog">ਗੁਣਵੱਤਾ</string>
+    <string name="search_hint">ਖੋਜ</string>
+    <string name="videos">ਵੀਡੀਓਜ਼</string>
+    <string name="subscribe">ਸਬਸਕ੍ਰਾਈਬ</string>
+    <string name="unsubscribe">ਅਨ-ਸਬਸਕ੍ਰਾਈਬ</string>
+    <string name="share">ਸਾਂਝਾ ਕਰੋ</string>
+    <string name="download">ਡਾਊਨਲੋਡ</string>
+    <string name="save">ਸਹੇਜੋ</string>
+    <string name="username">ਵਰਤੋਂਕਾਰ-ਨਾਮ</string>
+    <string name="password">ਪਾਸਵਰਡ</string>
+    <string name="login">ਲਾਗ ਇਨ</string>
+    <string name="startpage">ਘਰ</string>
+    <string name="subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ</string>
+</resources>
