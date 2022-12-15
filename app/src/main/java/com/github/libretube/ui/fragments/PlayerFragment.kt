@@ -25,7 +25,6 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
-import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -1421,7 +1420,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         .build()
 
     private fun shouldStartPiP(): Boolean {
-        if (!PlayerHelper.pipEnabled || Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (!PlayerHelper.pipEnabled || SDK_INT >= Build.VERSION_CODES.S) {
             return false
         }
 
