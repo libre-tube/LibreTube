@@ -26,5 +26,6 @@ data class Streams(
     val livestream: Boolean? = null,
     val proxyUrl: String? = null,
     val chapters: List<ChapterSegment>? = null,
-    val uploaderSubscriberCount: Long? = null
+    val uploaderSubscriberCount: Long? = null,
+    val previewFrames: List<PreviewFrames>? = null
 )
