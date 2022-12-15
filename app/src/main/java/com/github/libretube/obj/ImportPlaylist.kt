@@ -1,8 +1,8 @@
 package com.github.libretube.obj
 
 data class ImportPlaylist(
-    val name: String? = null,
+    var name: String? = null,
     val type: String? = null,
     val visibility: String? = null,
-    val videos: List<String> = listOf()
+    var videos: List<String> = listOf()
 )

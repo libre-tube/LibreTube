@@ -1,7 +1,6 @@
 package com.github.libretube.api
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlist
@@ -207,7 +206,7 @@ object PlaylistsHelper {
             addToPlaylist(
                 playlistId,
                 *playlist.videos.map {
-                    Uri.parse(it).getQueryParameter("v")!!
+                    it.substring(it.length - 11, it.length)
                 }.toTypedArray()
             )
         }
