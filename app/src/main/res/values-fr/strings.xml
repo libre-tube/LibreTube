@@ -376,7 +376,7 @@
     <string name="navbar_order">Ordre</string>
     <string name="layout">Mise en page</string>
     <string name="alternative_player_layout_summary">Afficher les vidéos connexes en une ligne au-dessus des commentaires, à la place d\'au-dessous.</string>
-    <string name="audio_track">Piste audio</string>
+    <string name="audio_track">Audio pista</string>
     <string name="default_audio_track">Par défaut</string>
     <string name="unsupported_file_format">Format de fichier non supporté !</string>
     <string name="hls_instead_of_dash">Utiliser HLS</string>
