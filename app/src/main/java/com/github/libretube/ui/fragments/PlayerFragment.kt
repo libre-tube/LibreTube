@@ -822,6 +822,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 if (isPlaying) {
                     // Stop [BackgroundMode] service if it is running.
                     BackgroundHelper.stopBackgroundPlay(requireContext())
+                    if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
+                } else {
+                    disableAutoPiP()
                 }
 
                 if (isPlaying && PlayerHelper.sponsorBlockEnabled) {
@@ -850,6 +853,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         playbackState == Player.STATE_ENDED
                     )
 
+                // save the watch position every time the state changes
+                saveWatchPosition()
+
                 // check if video has ended, next video is available and autoplay is enabled.
                 @Suppress("DEPRECATION")
                 if (
@@ -858,7 +864,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     binding.player.autoplayEnabled
                 ) {
                     transitioning = true
-                    // check whether autoplay is enabled
                     playNextVideo()
                 }
 
@@ -867,12 +872,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     transitioning = false
                     // update the PiP params to use the correct aspect ratio
                     if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
-                }
-
-                // save the watch position when paused
-                if (playbackState == PlaybackState.STATE_PAUSED) {
-                    saveWatchPosition()
-                    disableAutoPiP()
                 }
 
                 // listen for the stop button in the notification
@@ -1422,9 +1421,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         .build()
 
     private fun shouldStartPiP(): Boolean {
-        if (!PlayerHelper.pipEnabled ||
-            exoPlayer.playbackState == PlaybackState.STATE_PAUSED
-        ) {
+        if (!PlayerHelper.pipEnabled || Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             return false
         }
 
