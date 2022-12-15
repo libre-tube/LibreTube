@@ -11,6 +11,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
@@ -112,13 +113,37 @@ class ImportHelper(
     fun importPlaylists(uri: Uri?) {
         if (uri == null) return
 
-        val playlistFile = ObjectMapper().readValue(uri.readText(), ImportPlaylistFile::class.java)
+        val importPlaylists = mutableListOf<ImportPlaylist>()
+
+        when (val fileType = activity.contentResolver.getType(uri)) {
+            "text/csv", "text/comma-separated-values" -> {
+                val playlist = ImportPlaylist()
+                activity.contentResolver.openInputStream(uri)?.use {
+                    val lines = it.bufferedReader().readLines()
+                    playlist.name = lines[1].split(",").reversed()[2]
+                    val splitIndex = lines.indexOfFirst { line -> line.startsWith("Video ID") }
+                    lines.subList(splitIndex + 1, lines.size).forEach { line ->
+                        line.split(",").firstOrNull()?.let { videoId ->
+                            if (videoId.isNotBlank()) playlist.videos = playlist.videos + videoId
+                        }
+                    }
+                    importPlaylists.add(playlist)
+                }
+            }
+            "application/json", "application/*", "application/octet-stream" -> {
+                val playlistFile = ObjectMapper().readValue(uri.readText(), ImportPlaylistFile::class.java)
+                importPlaylists.addAll(playlistFile.playlists.orEmpty())
+            }
+            else -> {
+                activity.applicationContext.toastFromMainThread("Unsupported file type $fileType")
+                return
+            }
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                playlistFile.playlists?.let {
-                    PlaylistsHelper.importPlaylists(activity, it)
-                }
+                PlaylistsHelper.importPlaylists(activity, importPlaylists)
+                activity.applicationContext.toastFromMainThread(R.string.success)
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 e.localizedMessage?.let {
@@ -126,8 +151,6 @@ class ImportHelper(
                 }
             }
         }
-
-        activity.toastFromMainThread(R.string.success)
     }
 
     /**
