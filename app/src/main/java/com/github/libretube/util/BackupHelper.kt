@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
@@ -94,7 +95,12 @@ class BackupHelper(private val context: Context) {
                     is Boolean -> putBoolean(it.key, it.value)
                     is Float -> putFloat(it.key, it.value)
                     is Long -> putLong(it.key, it.value)
-                    is Int -> putInt(it.key, it.value)
+                    is Int -> {
+                        when (it.key) {
+                            PreferenceKeys.START_FRAGMENT -> putInt(it.key, it.value)
+                            else -> putLong(it.key, it.value.toLong())
+                        }
+                    }
                     is String -> putString(it.key, it.value)
                 }
             }
