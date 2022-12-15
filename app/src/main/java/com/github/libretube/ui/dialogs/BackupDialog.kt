@@ -44,8 +44,8 @@ class BackupDialog(
             it.localPlaylists = Database.localPlaylistsDao().getAll()
         })
 
-        object Preferences : BackupOption(R.string.preferences, onSelected = {
-            it.preferences = PreferenceHelper.settings.all.map {
+        object Preferences : BackupOption(R.string.preferences, onSelected = { file ->
+            file.preferences = PreferenceHelper.settings.all.map {
                 PreferenceItem(it.key, it.value)
             }
         })
@@ -64,7 +64,7 @@ class BackupDialog(
 
         val backupItems = backupOptions.map { context?.getString(it.name)!! }.toTypedArray()
 
-        val selected = BooleanArray(backupOptions.size) { false }
+        val selected = BooleanArray(backupOptions.size) { true }
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.backup)
