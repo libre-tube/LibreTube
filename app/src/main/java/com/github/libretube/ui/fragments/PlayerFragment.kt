@@ -1047,7 +1047,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // enable the chapters dialog in the player
         val titles = chapters.map { chapter ->
-            "${chapter.title} (${chapter.start?.let { DateUtils.formatElapsedTime(it) }})"
+            "(${chapter.start?.let { DateUtils.formatElapsedTime(it) }}) ${chapter.title}"
         }
         playerBinding.chapterLL.setOnClickListener {
             if (viewModel.isFullscreen.value!!) {
