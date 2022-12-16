@@ -3,6 +3,7 @@ package com.github.libretube.ui.fragments
 import android.annotation.SuppressLint
 import android.app.PictureInPictureParams
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.session.PlaybackState
@@ -377,6 +378,27 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     )
                 )
             shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
+        }
+
+        binding.relPlayerShare.setOnLongClickListener {
+            streams.hls ?: return@setOnLongClickListener true
+
+            // start an intent with video as mimetype using the hls stream
+            val uri: Uri = Uri.parse(streams.hls)
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "video/*")
+                putExtra(Intent.EXTRA_TITLE, streams.title)
+                putExtra("title", streams.title)
+                putExtra("artist", streams.uploader)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(context, R.string.no_player_found, Toast.LENGTH_SHORT).show()
+            }
+            true
         }
 
         binding.relPlayerBackground.setOnClickListener {
