@@ -327,7 +327,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
-            CommentsSheet(videoId!!, comments, commentsNextPage) { comments, nextPage ->
+            CommentsSheet(
+                videoId!!,
+                comments,
+                commentsNextPage,
+                binding.root.height - binding.player.height
+            ) { comments, nextPage ->
                 this.comments.addAll(comments)
                 this.commentsNextPage = nextPage
             }.show(childFragmentManager)

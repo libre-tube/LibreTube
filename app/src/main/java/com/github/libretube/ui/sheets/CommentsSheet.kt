@@ -20,6 +20,7 @@ class CommentsSheet(
     private val videoId: String,
     private val comments: List<Comment>,
     private var nextPage: String?,
+    private val maxHeight: Int,
     private val onMoreComments: (comments: List<Comment>, nextPage: String?) -> Unit
 ) : ExpandedBottomSheet() {
     private lateinit var binding: CommentsSheetBinding
@@ -29,6 +30,8 @@ class CommentsSheet(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = CommentsSheetBinding.inflate(layoutInflater)
+        // set a fixed maximum height
+        binding.root.maxHeight = maxHeight
         return binding.root
     }
 
