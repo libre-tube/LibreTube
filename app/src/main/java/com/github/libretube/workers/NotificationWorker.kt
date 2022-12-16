@@ -128,7 +128,6 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 )
 
                 streams.forEach { streamItem ->
-                    notificationId += 1
                     createNotification(
                         title = streamItem.title.toString(),
                         description = streamItem.uploaderName.toString(),
@@ -152,13 +151,15 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         description: String? = null,
         isSummary: Boolean = false
     ) {
-        val intent = Intent(applicationContext, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
+        // increase the notification ID to guarantee uniqueness
+        notificationId += 1
+
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             applicationContext,
             0,
-            intent,
+            Intent(applicationContext, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            },
             PendingIntent.FLAG_IMMUTABLE
         )
 
