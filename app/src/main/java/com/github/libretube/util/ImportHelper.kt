@@ -121,8 +121,8 @@ class ImportHelper(
                 activity.contentResolver.openInputStream(uri)?.use {
                     val lines = it.bufferedReader().readLines()
                     playlist.name = lines[1].split(",").reversed()[2]
-                    val splitIndex = lines.indexOfFirst { line -> line.startsWith("Video ID") }
-                    lines.subList(splitIndex + 1, lines.size).forEach { line ->
+                    val splitIndex = lines.indexOfFirst { line -> line.isBlank() }
+                    lines.subList(splitIndex + 2, lines.size).forEach { line ->
                         line.split(",").firstOrNull()?.let { videoId ->
                             if (videoId.isNotBlank()) playlist.videos = playlist.videos + videoId
                         }
