@@ -1,0 +1,7 @@
+* Library fragment redesign
+* Playlists import from YouTube
+* Clone playlists without account
+* Dracula/Versatile Violet theme
+* Highlight the current resolution in the quality selection
+* Show/Hide exact view count with description toggle
+* Use the translated language name for the language preferences
