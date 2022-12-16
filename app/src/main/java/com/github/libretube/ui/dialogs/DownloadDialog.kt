@@ -13,12 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.sanitize
 import com.github.libretube.services.DownloadService
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.MetadataHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
@@ -71,34 +70,29 @@ class DownloadDialog(
         binding.fileName.setText(streams.title.toString())
 
         val vidName = arrayListOf<String>()
-        val videoUrl = arrayListOf<String>()
 
         // add empty selection
         vidName.add(getString(R.string.no_video))
-        videoUrl.add("")
 
         // add all available video streams
         for (vid in streams.videoStreams!!) {
             if (vid.url != null) {
                 val name = vid.quality + " " + vid.format
                 vidName.add(name)
-                videoUrl.add(vid.url!!)
             }
         }
 
         val audioName = arrayListOf<String>()
-        val audioUrl = arrayListOf<String>()
+//        val audioUrl = arrayListOf<String>()
 
         // add empty selection
         audioName.add(getString(R.string.no_audio))
-        audioUrl.add("")
 
         // add all available audio streams
         for (audio in streams.audioStreams!!) {
             if (audio.url != null) {
                 val name = audio.quality + " " + audio.format
                 audioName.add(name)
-                audioUrl.add(audio.url!!)
             }
         }
 
@@ -129,40 +123,28 @@ class DownloadDialog(
                 return@setOnClickListener
             }
 
-            val vidUrl = videoUrl[binding.videoSpinner.selectedItemPosition]
-            val audUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
+            val videoPosition = binding.videoSpinner.selectedItemPosition - 1
+            val audioPosition = binding.audioSpinner.selectedItemPosition - 1
 
-            if (audUrl == "" && vidUrl == "") {
+            if (videoPosition == -1 && audioPosition == -1) {
                 Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val fileName = binding.fileName.text.toString().sanitize()
 
-            val metadataHelper = MetadataHelper(requireContext())
-            metadataHelper.createMetadata(fileName, streams)
-            streams.thumbnailUrl?.let { thumbnailUrl ->
-                ImageHelper.downloadImage(
-                    requireContext(),
-                    thumbnailUrl,
-                    fileName
-                )
-            }
-
             val intent = Intent(context, DownloadService::class.java)
 
-            intent.putExtra(
-                "videoName",
-                fileName
-            )
-            intent.putExtra(
-                "videoUrl",
-                vidUrl
-            )
-            intent.putExtra(
-                "audioUrl",
-                audUrl
-            )
+            intent.putExtra(IntentData.videoId, videoId)
+            intent.putExtra(IntentData.fileName, fileName)
+            if (videoPosition != -1) {
+                intent.putExtra(IntentData.videoFormate, streams.videoStreams[videoPosition].format)
+                intent.putExtra(IntentData.videoQuality, streams.videoStreams[videoPosition].quality)
+            }
+            if (audioPosition != -1) {
+                intent.putExtra(IntentData.audioFormate, streams.audioStreams[audioPosition].format)
+                intent.putExtra(IntentData.audioQuality, streams.audioStreams[audioPosition].quality)
+            }
 
             context?.startService(intent)
             dismiss()
