@@ -1,8 +1,11 @@
 package com.github.libretube.util
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
+import com.github.libretube.constants.IntentData
 import com.github.libretube.obj.DownloadedFile
+import com.github.libretube.services.DownloadService
 import java.io.File
 
 object DownloadHelper {
@@ -53,5 +56,32 @@ object DownloadHelper {
         }
 
         return files
+    }
+
+    fun startDownloadService(
+        context: Context,
+        videoId: String? = null,
+        fileName: String? = null,
+        videoFormat: String? = null,
+        videoQuality: String? = null,
+        audioFormat: String? = null,
+        audioQuality: String? = null,
+        subtitleCode: String? = null
+    ) {
+        val intent = Intent(context, DownloadService::class.java)
+
+        intent.putExtra(IntentData.videoId, videoId)
+        intent.putExtra(IntentData.fileName, fileName)
+        intent.putExtra(IntentData.videoFormat, videoFormat)
+        intent.putExtra(IntentData.videoQuality, videoQuality)
+        intent.putExtra(IntentData.audioFormat, audioFormat)
+        intent.putExtra(IntentData.audioQuality, audioQuality)
+        intent.putExtra(IntentData.subtitleCode, subtitleCode)
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            context.startForegroundService(intent)
+        } else {
+            context.startService(intent)
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,11 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Streams
-import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.sanitize
-import com.github.libretube.services.DownloadService
+import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
@@ -133,20 +131,26 @@ class DownloadDialog(
 
             val fileName = binding.fileName.text.toString().sanitize()
 
-            val intent = Intent(context, DownloadService::class.java)
-
-            intent.putExtra(IntentData.videoId, videoId)
-            intent.putExtra(IntentData.fileName, fileName)
-            if (videoPosition != -1) {
-                intent.putExtra(IntentData.videoFormate, streams.videoStreams[videoPosition].format)
-                intent.putExtra(IntentData.videoQuality, streams.videoStreams[videoPosition].quality)
+            val videoStream = when (videoPosition) {
+                -1 -> null
+                else -> streams.videoStreams[videoPosition]
             }
-            if (audioPosition != -1) {
-                intent.putExtra(IntentData.audioFormate, streams.audioStreams[audioPosition].format)
-                intent.putExtra(IntentData.audioQuality, streams.audioStreams[audioPosition].quality)
+            val audioStream = when (audioPosition) {
+                -1 -> null
+                else -> streams.audioStreams[audioPosition]
             }
 
-            context?.startService(intent)
+            DownloadHelper.startDownloadService(
+                context = requireContext(),
+                videoId = videoId,
+                fileName = fileName,
+                videoFormat = videoStream?.format,
+                videoQuality = videoStream?.quality,
+                audioFormat = audioStream?.format,
+                audioQuality = audioStream?.quality,
+                subtitleCode = null
+            )
+
             dismiss()
         }
     }
