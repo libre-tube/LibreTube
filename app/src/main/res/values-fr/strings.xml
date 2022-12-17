@@ -401,7 +401,7 @@
     <string name="auto">Auto</string>
     <string name="swipe_controls">Contrôles de défilement</string>
     <string name="swipe_controls_summary">Balayez pour ajuster la luminosité et le volume.</string>
-    <string name="pop_up">Dialogue</string>
+    <string name="pop_up">Pop-Up</string>
     <string name="double_tap_seek_summary">Tapez deux fois à gauche ou à droite pour avancer ou reculer la position de la lecture.</string>
     <string name="double_tap_seek">Tapoter deux fois pour sauter</string>
     <string name="all_caught_up_summary">Vous avez vu toutes les nouvelles vidéos</string>
