@@ -195,14 +195,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/seekbar_preview"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:translationY="30dp"
+            android:translationY="27dp"
             android:translationZ="1dp"
             android:visibility="gone"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
 
         <LinearLayout
             android:layout_width="match_parent"
