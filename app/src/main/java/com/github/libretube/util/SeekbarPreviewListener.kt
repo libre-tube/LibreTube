@@ -24,23 +24,16 @@ class SeekbarPreviewListener(
      */
     override fun onScrubMove(timeBar: TimeBar, position: Long) {
         moving = true
-        val preview = getPreviewFrame(position) ?: return
+        val previewFrame = getPreviewFrame(position) ?: return
+
+        // update the offset of the preview image view
         updatePreviewX(position)
 
         val request = ImageRequest.Builder(previewIv.context)
-            .data(preview.previewUrl)
+            .data(previewFrame.previewUrl)
             .target {
                 if (!moving) return@target
-                val bitmap = it.toBitmap()
-                val heightPerFrame = bitmap.height / preview.framesPerPageY
-                val widthPerFrame = bitmap.width / preview.framesPerPageX
-                val frame = Bitmap.createBitmap(
-                    bitmap,
-                    preview.positionX * widthPerFrame,
-                    preview.positionY * heightPerFrame,
-                    widthPerFrame,
-                    heightPerFrame
-                )
+                val frame = cutOutBitmap(it.toBitmap(), previewFrame)
                 previewIv.setImageBitmap(frame)
                 previewIv.visibility = View.VISIBLE
             }
@@ -54,6 +47,7 @@ class SeekbarPreviewListener(
      */
     override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {
         moving = false
+        // animate the disappearance of the preview image
         previewIv.animate()
             .alpha(0f)
             .translationYBy(30f)
@@ -71,8 +65,10 @@ class SeekbarPreviewListener(
      */
     private fun getPreviewFrame(position: Long): PreviewFrame? {
         var startPosition: Long = 0
+        // get the frames with the best quality
         val frames = previewFrames.sortedBy { it.frameHeight }.lastOrNull()
         frames?.urls?.forEach { url ->
+            // iterate over all available positions and find the one matching the current position
             for (y in 0 until frames.framesPerPageY!!) {
                 for (x in 0 until frames.framesPerPageX!!) {
                     val endPosition = startPosition + frames.durationPerFrame!!.toLong()
@@ -86,6 +82,24 @@ class SeekbarPreviewListener(
         return null
     }
 
+    /**
+     * Cut off a new bitmap from the image that contains multiple preview thumbnails
+     */
+    private fun cutOutBitmap(bitmap: Bitmap, previewFrame: PreviewFrame): Bitmap {
+        val heightPerFrame = bitmap.height / previewFrame.framesPerPageY
+        val widthPerFrame = bitmap.width / previewFrame.framesPerPageX
+        return Bitmap.createBitmap(
+            bitmap,
+            previewFrame.positionX * widthPerFrame,
+            previewFrame.positionY * heightPerFrame,
+            widthPerFrame,
+            heightPerFrame
+        )
+    }
+
+    /**
+     * Update the offset of the preview image to fit the current scrubber position
+     */
     private fun updatePreviewX(position: Long) {
         val params = previewIv.layoutParams as MarginLayoutParams
         val parentWidth = (previewIv.parent as View).width
@@ -100,11 +114,18 @@ class SeekbarPreviewListener(
         previewIv.layoutParams = params
     }
 
+    /**
+     * Normalize the offset to not overflow the screen
+     */
+    @Suppress("SameParameterValue")
     private fun normalizeOffset(offset: Int, min: Int, max: Int): Int {
         return maxOf(min, minOf(max, offset))
     }
 
     companion object {
+        /**
+         * The minimum start and end padding for the seekbar preview
+         */
         const val MIN_PADDING = 20
     }
 }
