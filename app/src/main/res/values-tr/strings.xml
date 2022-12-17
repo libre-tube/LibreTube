@@ -408,4 +408,9 @@
     <string name="captions_size">Altyazı boyutu</string>
     <string name="double_tap_seek">Aramak için iki kez dokun</string>
     <string name="double_tap_seek_summary">Oynatıcı konumunu ileri veya geri sarmak için sola veya sağa iki kez dokun.</string>
+    <string name="all_caught_up">Hepiniz yakalanmışsınız</string>
+    <string name="import_playlists">Oynatma listelerini içe aktar</string>
+    <string name="export_playlists">Oynatma listelerini dışa aktar</string>
+    <string name="app_backup">Uygulama Yedekle</string>
+    <string name="backup_restore_summary">Abonelikleri, oynatma listelerini içe ve dışa aktar…</string>
 </resources>
