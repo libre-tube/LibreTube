@@ -36,7 +36,7 @@
     <string name="vlcerror">ଭିଏଲ୍ସି ରେ ଖୋଲିହେବ ନାହିଁ। ତାହା ଇନ୍ସ୍ତାଲ ହୋଇନଥାଇପାରେ ।</string>
     <string name="import_from_yt_summary">ୟୁ ଟିଉବ କିମ୍ବା ନିଉପାଇପ ରୁ</string>
     <string name="app_theme">ଥିମ୍</string>
-    <string name="unknown_error">ନେଟୱର୍କ ଏରର ।</string>
+    <string name="unknown_error">ନେଟୱର୍କ ତ୍ରୁଟି ।</string>
     <string name="error">କିଛି ଭୁଲ୍ ଘଟିଛି ।</string>
     <string name="notgmail">ଏହା ପାଇପ୍ ଆକାଉଣ୍ଟ ଅଟେ ।</string>
     <string name="defres">ଭିଡିଓ ର ଆକାର</string>
@@ -55,10 +55,10 @@
     <string name="playlists">ପ୍ଲେଲିଷ୍ଟ ଗୁଡ଼ିକ</string>
     <string name="okay">ଠିକ୍ ଅଛି</string>
     <string name="search_history">ଇତିହାସ ସନ୍ଧାନ କରନ୍ତୁ</string>
-    <string name="music_songs">ୟୁଟିଉବ ମିଉଜିକ ଗୀତ</string>
-    <string name="music_videos">ୟୁଟିଉବ ମିଉଜିକ ଭିଡିଓ</string>
-    <string name="music_albums">ୟୁଟିଉବ ମିଉଜିକ ଆଲବମ୍</string>
-    <string name="music_playlists">ୟୁଟିଉବ ମିଉଜିକ ପ୍ଲେଲିଷ୍ଟ</string>
+    <string name="music_songs">ୟୁଟିଉବ ସଙ୍ଗୀତ</string>
+    <string name="music_videos">ୟୁଟିଉବ ସଙ୍ଗୀତ ଭିଡିଓ</string>
+    <string name="music_albums">ୟୁଟିଉବ ସଙ୍ଗୀତ ଆଲବମ୍</string>
+    <string name="music_playlists">ୟୁଟିଉବ ସଙ୍ଗୀତ ପ୍ଲେଲିଷ୍ଟ</string>
     <string name="sponsorblock">ସ୍ପନ୍ସର୍ ବ୍ଲକ</string>
     <string name="segment_skipped">ଛଡାଯାଇଥିଲା ଖଣ୍ଡ ଗୁଡିକ</string>
     <string name="sponsorblock_state">ଅନ୍</string>
@@ -69,7 +69,7 @@
     <string name="category_outro">ଶେଷ କାର୍ଡ</string>
     <string name="category_outro_description">ଶେଷରେ ସଦସ୍ୟତା ବିଷୟରେ ।</string>
     <string name="category_filler">ହସକଥା</string>
-    <string name="category_music_offtopic">ଅଣ ମିଉଜିକ୍</string>
+    <string name="category_music_offtopic">ଅଣ ସଙ୍ଗୀତ</string>
     <string name="color_accent">ଆସେଣ୍ଟ</string>
     <string name="color_red">ଲାଲ୍</string>
     <string name="color_blue">ନୀଳ</string>
@@ -124,11 +124,11 @@
     <string name="category_selfpromo_description">ସ୍ପନ୍ସର୍ ଭଳି ।</string>
     <string name="category_filler_description">ଅନାବଶ୍ୟକ ଗୁଡ଼ିକ ।</string>
     <string name="app_behavior">ବ୍ୟବହାର</string>
-    <string name="category_music_offtopic_description">କେବଳ ମିଉଜିକ୍ ଭିଡିଓ ପାଇଁ ।</string>
+    <string name="category_music_offtopic_description">କେବଳ ସଙ୍ଗୀତ ଭିଡିଓ ପାଇଁ ।</string>
     <string name="material_you">ମିଟରିଆଲ ୟୁ</string>
     <string name="category_preview">ରିକେପ୍</string>
     <string name="license">ଲାଇସେନ୍ସ</string>
-    <string name="category_preview_description">ଆଗକୁ ଆସିବା ଧାରାବାହିକ ବିଷୟରେ ।</string>
+    <string name="category_preview_description">ସଂକ୍ଷିପ୍ତ ରୂପରେ ପୁନରାବୃତ୍ତି କରେ ।</string>
     <string name="sponsorblock_notifications">ବିଜ୍ଞପ୍ତି ଗୁଡ଼ିକ</string>
     <string name="update_available">ବର୍ଶନ %1$s ଉପଲବ୍ଧ</string>
     <string name="downloads">ଡାଉନଲୋଡ୍</string>
@@ -142,7 +142,7 @@
     <string name="download_folder_summary">ଫୋଲ୍ଡର ନାମ ।</string>
     <string name="downloads_directory">ଡାଉନଲୋଡ୍ ଫୋଲ୍ଡର</string>
     <string name="gradientIcon">ଗ୍ଲିବ୍ ଗ୍ରେଡିଏଣ୍ଟ୍</string>
-    <string name="music_directory">ମିଉଜିକ୍ ଫୋଲ୍ଡର</string>
+    <string name="music_directory">ସଙ୍ଗୀତ ଫୋଲ୍ଡର</string>
     <string name="views_placeholder">ଦୃଶ୍ୟ</string>
     <string name="views">%1$s ଦୃଶ୍ୟ</string>
     <string name="legacyIcon">ହଜିଯାଇଥିବା ଉତ୍ତରାଧିକାରୀ</string>
