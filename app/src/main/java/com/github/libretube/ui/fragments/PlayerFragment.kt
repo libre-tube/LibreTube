@@ -86,6 +86,7 @@ import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.SeekbarPreviewListener
 import com.github.libretube.util.TextUtils
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
@@ -645,7 +646,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 // set media sources for the player
                 setResolutionAndSubtitles()
                 prepareExoPlayerView()
-                initializePlayerView(streams)
+                initializePlayerView()
+                setupSeekbarPreview()
                 if (!isLive) seekToWatchPosition()
                 exoPlayer.prepare()
                 if (!PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) exoPlayer.play()
@@ -798,7 +800,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initializePlayerView(response: Streams) {
+    private fun initializePlayerView() {
         // initialize the player view actions
         binding.player.initialize(
             this,
@@ -809,36 +811,36 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         binding.apply {
             playerViewsInfo.text =
-                context?.getString(R.string.views, response.views.formatShort()) +
-                if (!isLive) TextUtils.SEPARATOR + response.uploadDate else ""
+                context?.getString(R.string.views, streams.views.formatShort()) +
+                if (!isLive) TextUtils.SEPARATOR + streams.uploadDate else ""
 
-            textLike.text = response.likes.formatShort()
-            textDislike.text = response.dislikes.formatShort()
-            ImageHelper.loadImage(response.uploaderAvatar, binding.playerChannelImage)
-            playerChannelName.text = response.uploader
+            textLike.text = streams.likes.formatShort()
+            textDislike.text = streams.dislikes.formatShort()
+            ImageHelper.loadImage(streams.uploaderAvatar, binding.playerChannelImage)
+            playerChannelName.text = streams.uploader
 
-            titleTextView.text = response.title
+            titleTextView.text = streams.title
 
-            playerTitle.text = response.title
-            playerDescription.text = response.description
+            playerTitle.text = streams.title
+            playerDescription.text = streams.description
 
             playerChannelSubCount.text = context?.getString(
                 R.string.subscribers,
-                response.uploaderSubscriberCount?.formatShort()
+                streams.uploaderSubscriberCount?.formatShort()
             )
         }
 
         // duration that's not greater than 0 indicates that the video is live
-        if (response.duration!! <= 0) {
+        if (streams.duration!! <= 0) {
             isLive = true
             handleLiveVideo()
         }
 
-        playerBinding.exoTitle.text = response.title
+        playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        if (response.chapters != null) {
-            chapters = response.chapters
+        if (streams.chapters != null) {
+            chapters = streams.chapters.orEmpty()
             initializeChapters()
         }
 
@@ -922,7 +924,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         })
 
         binding.relPlayerDownload.setOnClickListener {
-            if (response.duration <= 0) {
+            if (streams.duration!! <= 0) {
                 Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
             } else if (!DownloadService.IS_DOWNLOAD_RUNNING) {
                 val newFragment = DownloadDialog(videoId!!)
@@ -933,7 +935,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
         }
 
-        if (response.hls != null) {
+        if (streams.hls != null) {
             binding.relPlayerPip.setOnClickListener {
                 if (SDK_INT < Build.VERSION_CODES.O) return@setOnClickListener
                 try {
@@ -943,9 +945,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
             }
         }
-        initializeRelatedVideos(response.relatedStreams)
+        initializeRelatedVideos(streams.relatedStreams)
         // set video description
-        val description = response.description!!
+        val description = streams.description!!
 
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
@@ -958,7 +960,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
-            val bundle = bundleOf(IntentData.channelId to response.uploaderUrl)
+            val bundle = bundleOf(IntentData.channelId to streams.uploaderUrl)
             activity.navController.navigate(R.id.channelFragment, bundle)
             activity.binding.mainMotionLayout.transitionToEnd()
             binding.playerMotionLayout.transitionToEnd()
@@ -966,8 +968,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // update the subscribed state
         binding.playerSubscribe.setupSubscriptionButton(
-            streams.uploaderUrl?.toID(),
-            streams.uploader
+            this.streams.uploaderUrl?.toID(),
+            this.streams.uploader
         )
 
         binding.relPlayerSave.setOnClickListener {
@@ -1445,6 +1447,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
         }
         .build()
+
+    private fun setupSeekbarPreview() {
+        playerBinding.seekbarPreview.visibility = View.GONE
+        playerBinding.exoProgress.addListener(
+            SeekbarPreviewListener(
+                streams.previewFrames.orEmpty(),
+                playerBinding.seekbarPreview,
+                streams.duration!! * 1000
+            )
+        )
+    }
 
     private fun shouldStartPiP(): Boolean {
         if (!PlayerHelper.pipEnabled || SDK_INT >= Build.VERSION_CODES.S) {
