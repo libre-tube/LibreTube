@@ -96,12 +96,113 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@id/exo_center_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/skip_prev"
+            style="@style/PlayerControlCenter"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_prev"
+            android:visibility="invisible"
+            app:tint="@android:color/white" />
+
+        <FrameLayout
+            android:id="@+id/rewindBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_rewind"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/rewindTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/playPauseBTN"
+            style="@style/ExoStyledControls.Button.Center.PlayPause"
+            android:layout_marginHorizontal="10dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            app:tint="@android:color/white" />
+
+        <FrameLayout
+            android:id="@+id/forwardBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_forward"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/forwardTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/skip_next"
+            style="@style/PlayerControlCenter"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_next"
+            android:visibility="invisible"
+            app:tint="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@id/exo_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/seekbar_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:translationY="27dp"
+            android:translationZ="1dp"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -228,96 +329,6 @@
                 app:scrubber_enabled_size="12dp" />
 
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@id/exo_center_controls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:padding="20dp">
-
-        <ImageView
-            android:id="@+id/skip_prev"
-            style="@style/PlayerControlCenter"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_prev"
-            android:visibility="invisible"
-            app:tint="@android:color/white" />
-
-        <FrameLayout
-            android:id="@+id/rewindBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_rewind"
-                app:tint="@android:color/white" />
-
-            <TextView
-                android:id="@+id/rewindTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-        </FrameLayout>
-
-        <ImageButton
-            android:id="@+id/playPauseBTN"
-            style="@style/ExoStyledControls.Button.Center.PlayPause"
-            android:layout_marginHorizontal="10dp"
-            android:background="?android:selectableItemBackgroundBorderless"
-            app:tint="@android:color/white" />
-
-        <FrameLayout
-            android:id="@+id/forwardBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_forward"
-                app:tint="@android:color/white" />
-
-            <TextView
-                android:id="@+id/forwardTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-        </FrameLayout>
-
-        <ImageView
-            android:id="@+id/skip_next"
-            style="@style/PlayerControlCenter"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_next"
-            android:visibility="invisible"
-            app:tint="@android:color/white" />
 
     </LinearLayout>
 
