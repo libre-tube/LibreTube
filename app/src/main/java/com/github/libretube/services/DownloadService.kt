@@ -7,8 +7,6 @@ import android.content.Intent
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import android.os.SystemClock
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -20,9 +18,11 @@ import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toDownloadItems
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.NotificationReceiver
 import com.github.libretube.ui.activities.MainActivity
@@ -56,7 +56,6 @@ class DownloadService : Service() {
     private val scope = CoroutineScope(Dispatchers.IO + jobMain)
 
     private lateinit var notificationManager: NotificationManager
-    private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var summaryNotificationBuilder: NotificationCompat.Builder
 
     private val jobs = mutableMapOf<Int, Job>()
@@ -87,7 +86,7 @@ class DownloadService : Service() {
             try {
                 val streams = RetrofitInstance.api.getStreams(videoId)
 
-                query {
+                awaitQuery {
                     DatabaseHolder.Database.downloadDao().insertDownload(
                         Download(
                             videoId = videoId,
@@ -123,18 +122,31 @@ class DownloadService : Service() {
         return START_NOT_STICKY
     }
 
+    /**
+     * Initiate download [Job] using [DownloadItem] by creating file according to [FileType]
+     * for the requested file.
+     */
     private fun start(item: DownloadItem) {
         val file: File = when (item.type) {
             FileType.AUDIO -> {
-                val audioDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.AUDIO_DIR)
+                val audioDownloadDir = DownloadHelper.getDownloadDir(
+                    this,
+                    DownloadHelper.AUDIO_DIR
+                )
                 File(audioDownloadDir, item.fileName)
             }
             FileType.VIDEO -> {
-                val videoDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.VIDEO_DIR)
+                val videoDownloadDir = DownloadHelper.getDownloadDir(
+                    this,
+                    DownloadHelper.VIDEO_DIR
+                )
                 File(videoDownloadDir, item.fileName)
             }
             FileType.SUBTITLE -> {
-                val subtitleDownloadDir = DownloadHelper.getDownloadDir(this, DownloadHelper.SUBTITLE_DIR)
+                val subtitleDownloadDir = DownloadHelper.getDownloadDir(
+                    this,
+                    DownloadHelper.SUBTITLE_DIR
+                )
                 File(subtitleDownloadDir, item.fileName)
             }
         }
@@ -150,12 +162,13 @@ class DownloadService : Service() {
         }
     }
 
+    /**
+     * Download file and emit [DownloadStatus] to the collectors of [downloadFlow]
+     * and notification.
+     */
     private suspend fun downloadFile(item: DownloadItem) {
-        notificationBuilder
-            .setContentText(item.fileName)
-            .setWhen(System.currentTimeMillis())
-            .clearActions()
-            .addAction(getPauseAction(item.id))
+        val notificationBuilder = getNotificationBuilder(item)
+        setResumeNotification(notificationBuilder, item)
 
         val okHttpClient = OkHttpClient.Builder()
             .connectTimeout(DownloadHelper.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -175,6 +188,7 @@ class DownloadService : Service() {
             }
         }
 
+        // Set start range where last downloading was held.
         val request = Request.Builder()
             .url(url)
             .addHeader("Range", "bytes=$totalRead-").build()
@@ -186,6 +200,7 @@ class DownloadService : Service() {
             val response = okHttpClient.newCall(request).execute()
             val sourceBytes = response.body!!.source()
 
+            // Check if job is still active and read next bytes.
             while (coroutineContext.isActive &&
                 sourceBytes
                     .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
@@ -196,39 +211,43 @@ class DownloadService : Service() {
                 _downloadFlow.emit(item.id to DownloadStatus.Progress(totalRead, item.downloadSize))
 
                 if (item.downloadSize != -1L &&
-                    System.currentTimeMillis() / 1000 > lastTime) {
-                    notificationBuilder.setProgress(item.downloadSize.toInt(), totalRead.toInt(), false)
+                    System.currentTimeMillis() / 1000 > lastTime
+                ) {
+                    notificationBuilder
+                        .setContentText("${totalRead.formatAsFileSize()} / ${item.downloadSize.formatAsFileSize()}")
+                        .setProgress(item.downloadSize.toInt(), totalRead.toInt(), false)
                     notificationManager.notify(item.id, notificationBuilder.build())
-                    lastTime = SystemClock.elapsedRealtime()
+                    lastTime = System.currentTimeMillis() / 1000
                 }
             }
-            sourceBytes.close()
         } catch (e: Exception) {
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT)
-                .show()
+            toastFromMainThread("${getString(R.string.download)}: ${e.message.toString()}")
             _downloadFlow.emit(item.id to DownloadStatus.Error(e.message.toString(), e))
         } finally {
             sink.flush()
             sink.close()
         }
 
-        notificationBuilder
-            .setOngoing(false)
-            .clearActions()
-        if (totalRead == item.downloadSize) {
-            _downloadFlow.emit(item.id to DownloadStatus.Completed)
-            notificationBuilder
-                .setContentTitle("Completed")
-        } else {
-            _downloadFlow.emit(item.id to DownloadStatus.Paused)
-            notificationBuilder
-                .setContentTitle("Paused")
-                .addAction(getResumeAction(item.id))
+        val completed = when (totalRead) {
+            item.downloadSize -> {
+                _downloadFlow.emit(item.id to DownloadStatus.Completed)
+                true
+            }
+            else -> {
+                _downloadFlow.emit(item.id to DownloadStatus.Paused)
+                false
+            }
         }
-        notificationManager.notify(item.id, notificationBuilder.build())
+        pause(item.id)
+        setPauseNotification(notificationBuilder, item, completed)
     }
 
+    /**
+     * Resume download which may have been paused.
+     */
     fun resume(id: Int) {
+        // Cancel last job if it is still active to avoid multiple
+        // jobs for same file.
         jobs[id]?.cancel()
         val downloadItem = awaitQuery {
             DatabaseHolder.Database.downloadDao().findDownloadItemById(id)
@@ -238,10 +257,24 @@ class DownloadService : Service() {
         }
     }
 
+    /**
+     * Pause downloading job for given [id]. If no [jobs] are active, stop the service.
+     */
     fun pause(id: Int) {
         jobs[id]?.cancel()
+
+        // Stop the service if no downloads are active.
+        if (jobs.values.none { it.isActive }) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                stopForeground(STOP_FOREGROUND_DETACH)
+            }
+            stopSelf()
+        }
     }
 
+    /**
+     * Check whether the file downloading job is active or not.
+     */
     fun isDownloading(id: Int): Boolean {
         return jobs[id]?.isActive ?: false
     }
@@ -249,6 +282,20 @@ class DownloadService : Service() {
     private fun notifyForeground() {
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
+        summaryNotificationBuilder = NotificationCompat
+            .Builder(this, DOWNLOAD_CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(getString(R.string.downloading))
+            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+            .setGroup(DOWNLOAD_NOTIFICATION_GROUP)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setOnlyAlertOnce(true)
+            .setGroupSummary(true)
+
+        startForeground(DOWNLOAD_PROGRESS_NOTIFICATION_ID, summaryNotificationBuilder.build())
+    }
+
+    private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
         val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PendingIntent.FLAG_IMMUTABLE
         } else {
@@ -265,25 +312,46 @@ class DownloadService : Service() {
                 flag
             )
 
-        notificationBuilder = NotificationCompat
+        return NotificationCompat
             .Builder(this, DOWNLOAD_CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.stat_sys_download)
             .setContentTitle(getString(R.string.downloading))
-            .setProgress(0, 100, true)
-            .setContentIntent(activityIntent)
+            .setProgress(0, 0, true)
             .setOngoing(true)
-            .setOnlyAlertOnce(true)
-            .setGroup(GROUP_KEY_DOWNLOADS)
-
-        summaryNotificationBuilder = NotificationCompat
-            .Builder(this, DOWNLOAD_CHANNEL_ID)
+            .setContentIntent(activityIntent)
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
-            .setGroup(GROUP_KEY_DOWNLOADS)
             .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
-            .setOnlyAlertOnce(true)
-            .setGroupSummary(true)
+            .setGroup(DOWNLOAD_NOTIFICATION_GROUP)
+    }
 
-        startForeground(DOWNLOAD_PROGRESS_NOTIFICATION_ID, summaryNotificationBuilder.build())
+    private fun setResumeNotification(notificationBuilder: NotificationCompat.Builder, item: DownloadItem) {
+        notificationBuilder
+            .setContentTitle(item.fileName)
+            .setSmallIcon(android.R.drawable.stat_sys_download)
+            .setWhen(System.currentTimeMillis())
+            .setOngoing(true)
+            .clearActions()
+            .addAction(getPauseAction(item.id))
+
+        notificationManager.notify(item.id, notificationBuilder.build())
+    }
+
+    private fun setPauseNotification(notificationBuilder: NotificationCompat.Builder, item: DownloadItem, isCompleted: Boolean = false) {
+        notificationBuilder
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+            .clearActions()
+
+        if (isCompleted) {
+            notificationBuilder
+                .setSmallIcon(R.drawable.ic_done)
+                .setContentText(getString(R.string.download_completed))
+        } else {
+            notificationBuilder
+                .setSmallIcon(R.drawable.ic_pause)
+                .setContentText(getString(R.string.download_paused))
+                .addAction(getResumeAction(item.id))
+        }
+        notificationManager.notify(item.id, notificationBuilder.build())
     }
 
     private fun getResumeAction(id: Int): NotificationCompat.Action {
@@ -299,9 +367,9 @@ class DownloadService : Service() {
         }
 
         return NotificationCompat.Action.Builder(
-            R.drawable.ic_pause,
-            "Resume",
-            PendingIntent.getBroadcast(this, id + 1, intent, flags)
+            R.drawable.ic_play,
+            getString(R.string.resume),
+            PendingIntent.getBroadcast(this, id, intent, flags)
         ).build()
     }
 
@@ -319,8 +387,8 @@ class DownloadService : Service() {
 
         return NotificationCompat.Action.Builder(
             R.drawable.ic_pause,
-            "Pause",
-            PendingIntent.getBroadcast(this, id + 2, intent, flags)
+            getString(R.string.pause),
+            PendingIntent.getBroadcast(this, id, intent, flags)
         ).build()
     }
 
@@ -339,7 +407,7 @@ class DownloadService : Service() {
     }
 
     companion object {
-        private const val GROUP_KEY_DOWNLOADS = "downloads"
+        private const val DOWNLOAD_NOTIFICATION_GROUP = "download_notification_group"
         const val ACTION_RESUME = "com.github.libretube.services.DownloadService.ACTION_RESUME"
         const val ACTION_PAUSE = "com.github.libretube.services.DownloadService.ACTION_PAUSE"
         var IS_DOWNLOAD_RUNNING = false
