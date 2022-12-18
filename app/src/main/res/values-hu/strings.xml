@@ -422,5 +422,5 @@
     <string name="color_violet">Változékony lila</string>
     <string name="nothing_selected">Nincs semmi kiválasztva!</string>
     <string name="theme_monochrome">Minimalista monokróm</string>
-    <string name="play_latest_videos">A legújabb videókat játssza</string>
+    <string name="play_latest_videos">Legújabb videók lejátszása</string>
 </resources>
