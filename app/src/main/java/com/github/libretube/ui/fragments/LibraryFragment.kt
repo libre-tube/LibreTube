@@ -128,13 +128,13 @@ class LibraryFragment : BaseFragment() {
 
                 // listen for playlists to become deleted
                 playlistsAdapter.registerAdapterDataObserver(object :
-                        RecyclerView.AdapterDataObserver() {
-                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                            binding.nothingHere.visibility =
-                                if (playlistsAdapter.itemCount == 0) View.VISIBLE else View.GONE
-                            super.onItemRangeRemoved(positionStart, itemCount)
-                        }
-                    })
+                    RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                        binding.nothingHere.visibility =
+                            if (playlistsAdapter.itemCount == 0) View.VISIBLE else View.GONE
+                        super.onItemRangeRemoved(positionStart, itemCount)
+                    }
+                })
 
                 binding.nothingHere.visibility = View.GONE
                 binding.playlistRecView.adapter = playlistsAdapter

@@ -52,7 +52,12 @@ class BrightnessHelper(private val activity: Activity) {
      * Set current brightness value with scaling to given range.
      * [shouldSave] determines whether the value should be persisted.
      */
-    fun setBrightnessWithScale(value: Float, maxValue: Float, minValue: Float = 0.0f, shouldSave: Boolean = false) {
+    fun setBrightnessWithScale(
+        value: Float,
+        maxValue: Float,
+        minValue: Float = 0.0f,
+        shouldSave: Boolean = false
+    ) {
         brightness = value.normalize(minValue, maxValue, minBrightness, maxBrightness)
         if (shouldSave) savedBrightness = brightness
     }

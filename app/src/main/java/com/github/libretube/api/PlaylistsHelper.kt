@@ -6,6 +6,7 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
 import com.github.libretube.api.obj.Playlists
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.LocalPlaylist
@@ -19,13 +20,13 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
-import java.io.IOException
 
 object PlaylistsHelper {
     private val pipedPlaylistRegex = "[\\da-fA-F]{8}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{4}-[\\da-fA-F]{12}".toRegex()
@@ -110,16 +111,17 @@ object PlaylistsHelper {
         return null
     }
 
-    suspend fun addToPlaylist(playlistId: String, vararg videoIds: String): Boolean {
+    suspend fun addToPlaylist(playlistId: String, vararg videos: StreamItem): Boolean {
         if (!loggedIn) {
             val localPlaylist = DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .first { it.playlist.id.toString() == playlistId }
 
-            for (videoId in videoIds) {
-                val localPlaylistItem = RetrofitInstance.api.getStreams(videoId).toLocalPlaylistItem(playlistId, videoId)
+            for (video in videos) {
+                val localPlaylistItem = video.toLocalPlaylistItem(playlistId)
                 awaitQuery {
                     // avoid duplicated videos in a playlist
-                    DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByVideoId(playlistId, videoId)
+                    DatabaseHolder.Database.localPlaylistsDao()
+                        .deletePlaylistItemsByVideoId(playlistId, localPlaylistItem.videoId)
 
                     // add the new video to the database
                     DatabaseHolder.Database.localPlaylistsDao().addPlaylistVideo(localPlaylistItem)
@@ -128,7 +130,9 @@ object PlaylistsHelper {
                         // set the new playlist thumbnail URL
                         localPlaylistItem.thumbnailUrl?.let {
                             localPlaylist.playlist.thumbnailUrl = it
-                            DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(localPlaylist.playlist)
+                            DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(
+                                localPlaylist.playlist
+                            )
                         }
                     }
                 }
@@ -140,7 +144,7 @@ object PlaylistsHelper {
             token,
             PlaylistId(
                 playlistId = playlistId,
-                videoIds = videoIds.toList()
+                videoIds = videos.toList().map { it.url!!.toID() }
             )
         ).message == "ok"
     }
@@ -172,13 +176,19 @@ object PlaylistsHelper {
                 DatabaseHolder.Database.localPlaylistsDao().getAll()
             }.first { it.playlist.id.toString() == playlistId }
             awaitQuery {
-                DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(transaction.videos[index])
+                DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
+                    transaction.videos[index]
+                )
             }
             if (transaction.videos.size > 1) {
                 if (index == 0) {
-                    transaction.videos[1].thumbnailUrl?.let { transaction.playlist.thumbnailUrl = it }
+                    transaction.videos[1].thumbnailUrl?.let {
+                        transaction.playlist.thumbnailUrl = it
+                    }
                     awaitQuery {
-                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+                        DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(
+                            transaction.playlist
+                        )
                     }
                 }
                 return
@@ -203,11 +213,27 @@ object PlaylistsHelper {
     suspend fun importPlaylists(appContext: Context, playlists: List<ImportPlaylist>) {
         for (playlist in playlists) {
             val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
-            addToPlaylist(
-                playlistId,
-                *playlist.videos.map {
-                    it.substring(it.length - 11, it.length)
-                }.toTypedArray()
+            // if logged in, add the playlists by their ID via an api call
+            val success: Boolean = if (loggedIn) {
+                addToPlaylist(
+                    playlistId,
+                    *playlist.videos.map {
+                        StreamItem(url = it)
+                    }.toTypedArray()
+                )
+            } else {
+                // if not logged in, all video information needs to become fetched manually
+                try {
+                    val streamItems = playlist.videos.map {
+                        RetrofitInstance.api.getStreams(it).toStreamItem(it)
+                    }
+                    addToPlaylist(playlistId, *streamItems.toTypedArray())
+                } catch (e: Exception) {
+                    false
+                }
+            }
+            appContext.toastFromMainThread(
+                if (success) R.string.importsuccess else R.string.server_error
             )
         }
     }
@@ -253,9 +279,7 @@ object PlaylistsHelper {
 
                 addToPlaylist(
                     newPlaylist,
-                    *playlist.relatedStreams.orEmpty()
-                        .map { it.url!!.toID() }
-                        .toTypedArray()
+                    *playlist.relatedStreams.orEmpty().toTypedArray()
                 )
 
                 var nextPage = playlist.nextpage
@@ -264,9 +288,7 @@ object PlaylistsHelper {
                         RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage).apply {
                             addToPlaylist(
                                 newPlaylist,
-                                *relatedStreams.orEmpty()
-                                    .map { it.url!!.toID() }
-                                    .toTypedArray()
+                                *relatedStreams.orEmpty().toTypedArray()
                             )
                         }.nextpage
                     } catch (e: Exception) {

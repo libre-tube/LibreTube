@@ -124,7 +124,13 @@ object PreferenceHelper {
 
     fun toggleIgnorableNotificationChannel(channelId: String) {
         val ignorableChannels = getIgnorableNotificationChannels().toMutableList()
-        if (ignorableChannels.contains(channelId)) ignorableChannels.remove(channelId) else ignorableChannels.add(channelId)
+        if (ignorableChannels.contains(channelId)) {
+            ignorableChannels.remove(channelId)
+        } else {
+            ignorableChannels.add(
+                channelId
+            )
+        }
         editor.putString(
             PreferenceKeys.IGNORED_NOTIFICATION_CHANNELS,
             ignorableChannels.joinToString(",")

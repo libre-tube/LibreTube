@@ -35,7 +35,10 @@ class SliderPreference(
             )
         }
 
-    private val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.SliderPreference)
+    private val typedArray = context.obtainStyledAttributes(
+        attributeSet,
+        R.styleable.SliderPreference
+    )
 
     override fun onAttached() {
         super.onAttached()

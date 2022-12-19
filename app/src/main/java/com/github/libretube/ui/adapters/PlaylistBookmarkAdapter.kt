@@ -18,7 +18,11 @@ class PlaylistBookmarkAdapter(
     private val bookmarkMode: BookmarkMode = BookmarkMode.FRAGMENT
 ) : RecyclerView.Adapter<PlaylistBookmarkViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistBookmarkViewHolder {
-        val binding = PlaylistBookmarkRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = PlaylistBookmarkRowBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return PlaylistBookmarkViewHolder(binding)
     }
 
@@ -40,7 +44,11 @@ class PlaylistBookmarkAdapter(
             uploaderName.text = bookmark.uploader
 
             root.setOnClickListener {
-                NavigationHelper.navigatePlaylist(root.context, bookmark.playlistId, PlaylistType.PUBLIC)
+                NavigationHelper.navigatePlaylist(
+                    root.context,
+                    bookmark.playlistId,
+                    PlaylistType.PUBLIC
+                )
             }
 
             root.setOnLongClickListener {

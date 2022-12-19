@@ -61,7 +61,12 @@ object SubscriptionHelper {
         }
     }
 
-    fun handleUnsubscribe(context: Context, channelId: String, channelName: String?, onUnsubscribe: () -> Unit) {
+    fun handleUnsubscribe(
+        context: Context,
+        channelId: String,
+        channelName: String?,
+        onUnsubscribe: () -> Unit
+    ) {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.CONFIRM_UNSUBSCRIBE, false)) {
             unsubscribe(channelId)
             onUnsubscribe.invoke()

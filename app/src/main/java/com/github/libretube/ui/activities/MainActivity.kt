@@ -286,7 +286,9 @@ class MainActivity : BaseActivity() {
                     searchViewModel.setQuery(null)
                     navController.navigate(R.id.searchFragment)
                 }
-                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+                item.setShowAsAction(
+                    MenuItem.SHOW_AS_ACTION_ALWAYS or MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
+                )
                 return true
             }
 
@@ -300,8 +302,8 @@ class MainActivity : BaseActivity() {
                 }
                 // Handover back press to `BackPressedDispatcher`
                 else if (binding.bottomNav.menu.children.none {
-                    it.itemId == navController.currentDestination?.id
-                }
+                        it.itemId == navController.currentDestination?.id
+                    }
                 ) {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }

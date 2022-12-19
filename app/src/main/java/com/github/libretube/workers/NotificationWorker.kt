@@ -17,8 +17,8 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
 import com.github.libretube.util.PreferenceHelper
-import kotlinx.coroutines.runBlocking
 import java.time.LocalTime
+import kotlinx.coroutines.runBlocking
 
 /**
  * The notification worker which checks for new streams in a certain frequency

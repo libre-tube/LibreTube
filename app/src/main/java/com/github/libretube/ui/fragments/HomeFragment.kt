@@ -79,7 +79,11 @@ class HomeFragment : BaseFragment() {
             if (feed.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.featuredRV, binding.featuredTV)
-                binding.featuredRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.featuredRV.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 binding.featuredRV.adapter = VideosAdapter(
                     feed.toMutableList(),
                     forceMode = VideosAdapter.Companion.ForceMode.HOME
@@ -108,17 +112,20 @@ class HomeFragment : BaseFragment() {
             runOnUiThread {
                 makeVisible(binding.playlistsRV, binding.playlistsTV)
                 binding.playlistsRV.layoutManager = LinearLayoutManager(context)
-                binding.playlistsRV.adapter = PlaylistsAdapter(playlists.toMutableList(), PlaylistsHelper.getPrivatePlaylistType())
+                binding.playlistsRV.adapter = PlaylistsAdapter(
+                    playlists.toMutableList(),
+                    PlaylistsHelper.getPrivatePlaylistType()
+                )
                 binding.playlistsRV.adapter?.registerAdapterDataObserver(object :
-                        RecyclerView.AdapterDataObserver() {
-                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                            super.onItemRangeRemoved(positionStart, itemCount)
-                            if (itemCount == 0) {
-                                binding.playlistsRV.visibility = View.GONE
-                                binding.playlistsTV.visibility = View.GONE
-                            }
+                    RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeRemoved(positionStart, itemCount)
+                        if (itemCount == 0) {
+                            binding.playlistsRV.visibility = View.GONE
+                            binding.playlistsTV.visibility = View.GONE
                         }
-                    })
+                    }
+                })
             }
         }
 
@@ -129,7 +136,11 @@ class HomeFragment : BaseFragment() {
             if (bookmarkedPlaylists.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.bookmarksTV, binding.bookmarksRV)
-                binding.bookmarksRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.bookmarksRV.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(
                     bookmarkedPlaylists,
                     PlaylistBookmarkAdapter.Companion.BookmarkMode.HOME

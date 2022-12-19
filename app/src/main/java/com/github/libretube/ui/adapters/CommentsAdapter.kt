@@ -67,7 +67,10 @@ class CommentsAdapter(
             }
 
             commentInfos.text = comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
-            commentText.text = HtmlCompat.fromHtml(comment.commentText.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+            commentText.text = HtmlCompat.fromHtml(
+                comment.commentText.toString(),
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
@@ -102,7 +105,11 @@ class CommentsAdapter(
         }
     }
 
-    private fun showMoreReplies(nextPage: String, showMoreBtn: Button, repliesAdapter: CommentsAdapter) {
+    private fun showMoreReplies(
+        nextPage: String,
+        showMoreBtn: Button,
+        repliesAdapter: CommentsAdapter
+    ) {
         when (repliesAdapter.itemCount) {
             0 -> {
                 fetchReplies(nextPage) {

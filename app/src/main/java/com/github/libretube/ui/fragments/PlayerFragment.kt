@@ -105,15 +105,15 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
@@ -1136,8 +1136,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         for (vid in videoStreams) {
             if (resolutions.any {
-                it.resolution == vid.quality.qualityToInt()
-            } || vid.url == null
+                    it.resolution == vid.quality.qualityToInt()
+                } || vid.url == null
             ) {
                 continue
             }
@@ -1160,7 +1160,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (resolutions.isEmpty()) {
             return listOf(
-                VideoResolution(getString(R.string.hls), resolution = Int.MAX_VALUE, adaptiveSourceUrl = streams.hls)
+                VideoResolution(
+                    getString(R.string.hls),
+                    resolution = Int.MAX_VALUE,
+                    adaptiveSourceUrl = streams.hls
+                )
             )
         } else {
             resolutions.add(0, VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
@@ -1187,7 +1191,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // set the default subtitle if available
         val newParams = trackSelector.buildUponParameters()
-        if (PlayerHelper.defaultSubtitleCode != "" && subtitleCodesList.contains(PlayerHelper.defaultSubtitleCode)) {
+        if (PlayerHelper.defaultSubtitleCode != "" && subtitleCodesList.contains(
+                PlayerHelper.defaultSubtitleCode
+            )
+        ) {
             newParams
                 .setPreferredTextLanguage(PlayerHelper.defaultSubtitleCode)
                 .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
@@ -1464,7 +1471,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return false
         }
 
-        val backgroundModeRunning = BackgroundHelper.isServiceRunning(requireContext(), BackgroundMode::class.java)
+        val backgroundModeRunning = BackgroundHelper.isServiceRunning(
+            requireContext(),
+            BackgroundMode::class.java
+        )
 
         return exoPlayer.isPlaying && !backgroundModeRunning
     }

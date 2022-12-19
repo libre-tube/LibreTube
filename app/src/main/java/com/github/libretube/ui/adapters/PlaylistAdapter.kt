@@ -20,10 +20,10 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 class PlaylistAdapter(
     private val videoFeed: MutableList<StreamItem>,

@@ -80,7 +80,9 @@ class UpdateService : Service() {
     }
 
     private fun getDownloadDirectory(): File {
-        val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val downloadsDir = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS
+        )
         if (!downloadsDir.canWrite()) return DownloadHelper.getOfflineStorageDir(this)
         return downloadsDir
     }

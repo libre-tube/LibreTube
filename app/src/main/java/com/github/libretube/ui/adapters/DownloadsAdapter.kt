@@ -61,8 +61,14 @@ class DownloadsAdapter(
                     ) { _, index ->
                         when (index) {
                             0 -> {
-                                val audioDir = DownloadHelper.getDownloadDir(root.context, DownloadHelper.AUDIO_DIR)
-                                val videoDir = DownloadHelper.getDownloadDir(root.context, DownloadHelper.VIDEO_DIR)
+                                val audioDir = DownloadHelper.getDownloadDir(
+                                    root.context,
+                                    DownloadHelper.AUDIO_DIR
+                                )
+                                val videoDir = DownloadHelper.getDownloadDir(
+                                    root.context,
+                                    DownloadHelper.VIDEO_DIR
+                                )
 
                                 listOf(audioDir, videoDir).forEach {
                                     val f = File(it, file.name)

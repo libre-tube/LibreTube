@@ -38,7 +38,9 @@ class DeletePlaylistDialog(
         if (playlistType == PlaylistType.LOCAL) {
             awaitQuery {
                 DatabaseHolder.Database.localPlaylistsDao().deletePlaylistById(playlistId)
-                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(playlistId)
+                DatabaseHolder.Database.localPlaylistsDao().deletePlaylistItemsByPlaylistId(
+                    playlistId
+                )
             }
             onSuccess.invoke()
             return
