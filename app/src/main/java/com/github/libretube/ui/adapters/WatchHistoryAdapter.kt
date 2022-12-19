@@ -59,7 +59,10 @@ class WatchHistoryAdapter(
             }
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(video.videoId, video.title!!)
-                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show(
+                        (root.context as BaseActivity).supportFragmentManager,
+                        VideoOptionsBottomSheet::class.java.name
+                    )
                 true
             }
 

@@ -13,9 +13,9 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
-import okio.use
 import java.io.File
 import java.io.FileOutputStream
+import okio.use
 
 object ImageHelper {
     lateinit var imageLoader: ImageLoader

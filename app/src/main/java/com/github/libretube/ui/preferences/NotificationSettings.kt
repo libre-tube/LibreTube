@@ -40,9 +40,15 @@ class NotificationSettings : BasePreferenceFragment() {
             true
         }
 
-        val notificationTime = findPreference<SwitchPreferenceCompat>(PreferenceKeys.NOTIFICATION_TIME_ENABLED)
-        val notificationStartTime = findPreference<TimePickerPreference>(PreferenceKeys.NOTIFICATION_START_TIME)
-        val notificationEndTime = findPreference<TimePickerPreference>(PreferenceKeys.NOTIFICATION_END_TIME)
+        val notificationTime = findPreference<SwitchPreferenceCompat>(
+            PreferenceKeys.NOTIFICATION_TIME_ENABLED
+        )
+        val notificationStartTime = findPreference<TimePickerPreference>(
+            PreferenceKeys.NOTIFICATION_START_TIME
+        )
+        val notificationEndTime = findPreference<TimePickerPreference>(
+            PreferenceKeys.NOTIFICATION_END_TIME
+        )
         listOf(notificationStartTime, notificationEndTime).forEach {
             it?.isEnabled = notificationTime?.isChecked == true
         }

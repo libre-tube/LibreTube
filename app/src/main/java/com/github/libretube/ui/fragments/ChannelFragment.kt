@@ -27,11 +27,11 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.util.ImageHelper
+import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 class ChannelFragment : BaseFragment() {
     private lateinit var binding: FragmentChannelBinding
@@ -134,7 +134,11 @@ class ChannelFragment : BaseFragment() {
             if (isSubscribed == null) return@launchWhenCreated
 
             runOnUiThread {
-                binding.channelSubscribe.setupSubscriptionButton(channelId, channelName, binding.notificationBell)
+                binding.channelSubscribe.setupSubscriptionButton(
+                    channelId,
+                    channelName,
+                    binding.notificationBell
+                )
 
                 binding.channelShare.setOnClickListener {
                     val shareDialog = ShareDialog(

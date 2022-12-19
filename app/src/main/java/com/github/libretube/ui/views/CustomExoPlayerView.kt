@@ -244,8 +244,12 @@ internal class CustomExoPlayerView(
                     R.drawable.ic_aspect_ratio,
                     {
                         when (resizeMode) {
-                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(R.string.resize_mode_fit)
-                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(R.string.resize_mode_fill)
+                            AspectRatioFrameLayout.RESIZE_MODE_FIT -> context.getString(
+                                R.string.resize_mode_fit
+                            )
+                            AspectRatioFrameLayout.RESIZE_MODE_FILL -> context.getString(
+                                R.string.resize_mode_fill
+                            )
                             else -> context.getString(R.string.resize_mode_zoom)
                         }
                     }
@@ -257,9 +261,9 @@ internal class CustomExoPlayerView(
                     R.drawable.ic_speed,
                     {
                         "${
-                        player?.playbackParameters?.speed
-                            .toString()
-                            .replace(".0", "")
+                            player?.playbackParameters?.speed
+                                .toString()
+                                .replace(".0", "")
                         }x"
                     }
                 ) {
@@ -403,7 +407,9 @@ internal class CustomExoPlayerView(
             // If brightness progress goes to below 0, set to system brightness
             if (distance <= 0) {
                 brightnessHelper.resetToSystemBrightness()
-                gestureViewBinding.brightnessImageView.setImageResource(R.drawable.ic_brightness_auto)
+                gestureViewBinding.brightnessImageView.setImageResource(
+                    R.drawable.ic_brightness_auto
+                )
                 gestureViewBinding.brightnessTextView.text = resources.getString(R.string.auto)
                 return
             }

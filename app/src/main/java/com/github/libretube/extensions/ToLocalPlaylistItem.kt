@@ -1,18 +1,18 @@
 package com.github.libretube.extensions
 
-import com.github.libretube.api.obj.Streams
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.db.obj.LocalPlaylistItem
 
-fun Streams.toLocalPlaylistItem(playlistId: String, videoId: String): LocalPlaylistItem {
+fun StreamItem.toLocalPlaylistItem(playlistId: String): LocalPlaylistItem {
     return LocalPlaylistItem(
         playlistId = playlistId.toInt(),
-        videoId = videoId,
+        videoId = url!!.toID(),
         title = title,
-        thumbnailUrl = thumbnailUrl,
-        uploader = uploader,
+        thumbnailUrl = thumbnail,
+        uploader = uploaderName,
         uploaderUrl = uploaderUrl,
         uploaderAvatar = uploaderAvatar,
-        uploadDate = uploadDate,
+        uploadDate = uploadedDate,
         duration = duration
     )
 }

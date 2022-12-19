@@ -64,9 +64,15 @@ class VideosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when {
-            viewType == CAUGHT_UP_TYPE -> VideosViewHolder(AllCaughtUpRowBinding.inflate(layoutInflater, parent, false))
-            forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED, ForceMode.HOME) -> VideosViewHolder(TrendingRowBinding.inflate(layoutInflater, parent, false))
-            forceMode == ForceMode.CHANNEL -> VideosViewHolder(VideoRowBinding.inflate(layoutInflater, parent, false))
+            viewType == CAUGHT_UP_TYPE -> VideosViewHolder(
+                AllCaughtUpRowBinding.inflate(layoutInflater, parent, false)
+            )
+            forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED, ForceMode.HOME) -> VideosViewHolder(
+                TrendingRowBinding.inflate(layoutInflater, parent, false)
+            )
+            forceMode == ForceMode.CHANNEL -> VideosViewHolder(
+                VideoRowBinding.inflate(layoutInflater, parent, false)
+            )
             PreferenceHelper.getBoolean(
                 PreferenceKeys.ALTERNATIVE_VIDEOS_LAYOUT,
                 false
@@ -102,7 +108,9 @@ class VideosAdapter(
                 video.uploaderName + TextUtils.SEPARATOR +
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                TextUtils.SEPARATOR + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
+                TextUtils.SEPARATOR + video.uploaded?.let {
+                    DateUtils.getRelativeTimeSpanString(it)
+                }
             video.duration?.let { thumbnailDuration.setFormattedDuration(it) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
@@ -118,7 +126,10 @@ class VideosAdapter(
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
 
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show(
+                        (root.context as BaseActivity).supportFragmentManager,
+                        VideoOptionsBottomSheet::class.java.name
+                    )
 
                 true
             }
@@ -134,7 +145,9 @@ class VideosAdapter(
             videoInfo.text =
                 video.views.formatShort() + " " +
                 root.context.getString(R.string.views_placeholder) +
-                TextUtils.SEPARATOR + video.uploaded?.let { DateUtils.getRelativeTimeSpanString(it) }
+                TextUtils.SEPARATOR + video.uploaded?.let {
+                    DateUtils.getRelativeTimeSpanString(it)
+                }
 
             thumbnailDuration.text =
                 video.duration?.let { DateUtils.formatElapsedTime(it) }
@@ -159,7 +172,10 @@ class VideosAdapter(
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show(
+                        (root.context as BaseActivity).supportFragmentManager,
+                        VideoOptionsBottomSheet::class.java.name
+                    )
 
                 true
             }

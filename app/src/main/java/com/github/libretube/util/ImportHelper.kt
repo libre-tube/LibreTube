@@ -15,11 +15,11 @@ import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
+import java.io.FileOutputStream
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.FileOutputStream
 
 class ImportHelper(
     private val activity: Activity
@@ -56,7 +56,10 @@ class ImportHelper(
         return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json", "application/*", "application/octet-stream" -> {
                 // NewPipe subscriptions format
-                val subscriptions = ObjectMapper().readValue(uri.readText(), NewPipeSubscriptions::class.java)
+                val subscriptions = ObjectMapper().readValue(
+                    uri.readText(),
+                    NewPipeSubscriptions::class.java
+                )
                 subscriptions.subscriptions.orEmpty().map {
                     it.url!!.replace("https://www.youtube.com/channel/", "")
                 }
@@ -131,7 +134,10 @@ class ImportHelper(
                 }
             }
             "application/json", "application/*", "application/octet-stream" -> {
-                val playlistFile = ObjectMapper().readValue(uri.readText(), ImportPlaylistFile::class.java)
+                val playlistFile = ObjectMapper().readValue(
+                    uri.readText(),
+                    ImportPlaylistFile::class.java
+                )
                 importPlaylists.addAll(playlistFile.playlists.orEmpty())
             }
             else -> {

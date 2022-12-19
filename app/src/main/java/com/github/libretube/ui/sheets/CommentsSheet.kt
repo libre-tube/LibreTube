@@ -28,7 +28,11 @@ class CommentsSheet(
     private lateinit var commentsAdapter: CommentsAdapter
     private var isLoading = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = CommentsSheetBinding.inflate(layoutInflater)
         // set a fixed maximum height
         binding.root.maxHeight = maxHeight

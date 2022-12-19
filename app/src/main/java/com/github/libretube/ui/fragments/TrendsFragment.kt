@@ -17,8 +17,8 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.LocaleHelper
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class TrendsFragment : BaseFragment() {
     private lateinit var binding: FragmentTrendsBinding

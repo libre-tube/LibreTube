@@ -18,8 +18,8 @@ import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.PreferenceHelper
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 class SearchResultFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchResultBinding

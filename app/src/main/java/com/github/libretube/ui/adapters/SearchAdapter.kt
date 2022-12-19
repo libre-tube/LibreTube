@@ -102,7 +102,10 @@ class SearchAdapter(
             val videoName = item.title!!
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(videoId, videoName)
-                    .show((root.context as BaseActivity).supportFragmentManager, VideoOptionsBottomSheet::class.java.name)
+                    .show(
+                        (root.context as BaseActivity).supportFragmentManager,
+                        VideoOptionsBottomSheet::class.java.name
+                    )
                 true
             }
             channelContainer.setOnClickListener {
@@ -123,7 +126,10 @@ class SearchAdapter(
             searchViews.text = root.context.getString(
                 R.string.subscribers,
                 item.subscribers.formatShort()
-            ) + TextUtils.SEPARATOR + root.context.getString(R.string.videoCount, item.videos.toString())
+            ) + TextUtils.SEPARATOR + root.context.getString(
+                R.string.videoCount,
+                item.videos.toString()
+            )
             root.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.url)
             }
@@ -155,7 +161,10 @@ class SearchAdapter(
                 val playlistId = item.url!!.toID()
                 val playlistName = item.name!!
                 PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
-                    .show((root.context as BaseActivity).supportFragmentManager, PlaylistOptionsBottomSheet::class.java.name)
+                    .show(
+                        (root.context as BaseActivity).supportFragmentManager,
+                        PlaylistOptionsBottomSheet::class.java.name
+                    )
                 true
             }
         }

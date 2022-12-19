@@ -20,7 +20,10 @@ class NavBarOptionsDialog : DialogFragment() {
 
         val options = NavBarHelper.getNavBarItems(requireContext())
 
-        val adapter = NavBarOptionsAdapter(options.toMutableList(), NavBarHelper.getStartFragmentId(requireContext()))
+        val adapter = NavBarOptionsAdapter(
+            options.toMutableList(),
+            NavBarHelper.getStartFragmentId(requireContext())
+        )
 
         val itemTouchCallback = object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(

@@ -2,13 +2,13 @@ package com.github.libretube.util
 
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.net.URI
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 object ProxyHelper {
     private fun getImageProxyUrl(): String? {

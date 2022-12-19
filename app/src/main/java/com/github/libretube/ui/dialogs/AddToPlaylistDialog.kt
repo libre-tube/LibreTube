@@ -11,8 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
+import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.ThemeHelper
@@ -86,7 +88,10 @@ class AddToPlaylistDialog(
         val appContext = context?.applicationContext ?: return
         CoroutineScope(Dispatchers.IO).launch {
             val success = try {
-                PlaylistsHelper.addToPlaylist(playlistId, videoId)
+                PlaylistsHelper.addToPlaylist(
+                    playlistId,
+                    RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
+                )
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 appContext.toastFromMainThread(R.string.unknown_error)

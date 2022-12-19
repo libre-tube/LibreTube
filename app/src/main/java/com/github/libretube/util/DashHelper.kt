@@ -2,14 +2,14 @@ package com.github.libretube.util
 
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Streams
-import org.w3c.dom.Document
-import org.w3c.dom.Element
 import java.io.StringWriter
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 
 // Based off of https://github.com/TeamPiped/Piped/blob/master/src/utils/DashUtils.js
 
@@ -66,7 +66,9 @@ object DashHelper {
 
         for (stream in streams.audioStreams!!) {
             val adapSetInfo =
-                adapSetInfos.find { it.mimeType == stream.mimeType && it.audioTrackId == stream.audioTrackId }
+                adapSetInfos.find {
+                    it.mimeType == stream.mimeType && it.audioTrackId == stream.audioTrackId
+                }
             if (adapSetInfo != null) {
                 adapSetInfo.formats.add(stream)
                 continue
