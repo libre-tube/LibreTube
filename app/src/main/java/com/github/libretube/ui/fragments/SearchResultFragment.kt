@@ -18,8 +18,8 @@ import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.util.PreferenceHelper
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class SearchResultFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchResultBinding
@@ -46,6 +46,8 @@ class SearchResultFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         // add the query to the history
         addToHistory(query)
@@ -92,13 +94,12 @@ class SearchResultFragment : BaseFragment() {
                 return@launchWhenCreated
             }
             runOnUiThread {
-                if (response.items?.isNotEmpty() == true) {
-                    binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
-                    searchAdapter = SearchAdapter(response.items)
-                    binding.searchRecycler.adapter = searchAdapter
+                searchAdapter = SearchAdapter(response.items.orEmpty().toMutableList())
+                binding.searchRecycler.adapter = searchAdapter
+                binding.noSearchResult.visibility = if (response.items.orEmpty().isEmpty()) {
+                    View.VISIBLE
                 } else {
-                    binding.searchContainer.visibility = View.GONE
-                    binding.noSearchResult.visibility = View.VISIBLE
+                    View.GONE
                 }
             }
             nextPage = response.nextpage
