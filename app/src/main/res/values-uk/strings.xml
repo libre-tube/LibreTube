@@ -135,7 +135,7 @@
     <string name="app_uptodate">Це остання версія.</string>
     <string name="playback_speed">Швидкість відтворення</string>
     <string name="player">Програвач</string>
-    <string name="appearance_summary">Змініть додаток так, як вам до вподоби.</string>
+    <string name="appearance_summary">Змініть застосунок так, як вам до вподоби.</string>
     <string name="advanced_summary">Завантаження та історія</string>
     <string name="live">Пряма трансляція</string>
     <string name="advanced">Розширене</string>
@@ -223,7 +223,7 @@
     <string name="audio">Аудіо</string>
     <string name="autoRotatePlayer_summary">Поноекранний режим при обертанні пристрою.</string>
     <string name="watch_positions_summary">Продовжувати з останньої позиції відео</string>
-    <string name="require_restart">Додатку потрібен перезапуск</string>
+    <string name="require_restart">Застосунку потрібен перезапуск</string>
     <string name="navLabelVisibility">Видимість міток</string>
     <string name="always">Завжди</string>
     <string name="selected">Вибране</string>
