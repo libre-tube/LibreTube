@@ -15,4 +15,17 @@
     <string name="login">ਲਾਗ ਇਨ</string>
     <string name="startpage">ਘਰ</string>
     <string name="subscriptions">ਸਬਸਕ੍ਰਿਪਸ਼ਨਾਂ</string>
+    <string name="instances">ਚੁਣੋ…</string>
+    <string name="please_login">ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਲੌਗ ਇਨ ਕਰੋ ਜਾਂ ਪੰਜੀਕਰਣ ਕਰੋ।</string>
+    <string name="register">ਪੰਜੀਕਰਣ ਕਰੋ</string>
+    <string name="logout">ਲਾਗ ਆਊਟ</string>
+    <string name="cancel">ਰੱਦ ਕਰੋ</string>
+    <string name="loggedIn">ਲੌਗ ਇਨ ਕੀਤਾ।</string>
+    <string name="loggedout">ਲੌਗ ਆਊਟ ਕੀਤਾ।</string>
+    <string name="registered">ਪੰਜੀਕਰਣ ਹੋਇਆ। ਹੁਣ ਤੁਸੀਂ ਚੈਨਲਾਂ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰ ਸਕਦੇ ਹੋ।</string>
+    <string name="already_logged_in">ਪਹਿਲਾਂ ਹੀ ਲੌਗਇਨ ਕੀਤਾ ਹੋਇਆ ਹੈ। ਤੁਸੀਂ ਆਪਣੇ ਖਾਤੇ ਤੋਂ ਲੌਗ ਆਊਟ ਕਰ ਸਕਦੇ ਹੋ।</string>
+    <string name="login_first">ਕਿਰਪਾ ਕਰਕੇ ਲੌਗ ਇਨ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
+    <string name="customInstance">ਕਸਟਮ</string>
+    <string name="region">ਖੇਤਰ</string>
+    <string name="login_register">ਲੌਗ ਇਨ/ਪੰਜੀਕਰਣ ਕਰੋ</string>
 </resources>
