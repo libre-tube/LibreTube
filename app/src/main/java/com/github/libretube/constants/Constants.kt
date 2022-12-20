@@ -34,6 +34,7 @@ const val YOUTUBE_FRONTEND_URL = "https://www.youtube.com"
  */
 const val PIPED_API_URL = "https://pipedapi.kavin.rocks/"
 const val PIPED_INSTANCES_URL = "https://piped-instances.kavin.rocks/"
+const val FALLBACK_INSTANCES_URL = "https://instances.tokhmi.xyz"
 
 /**
  * Notification IDs
