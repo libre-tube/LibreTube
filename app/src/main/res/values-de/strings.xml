@@ -299,9 +299,9 @@
     <string name="sb_skip_manual">Manuell überspringen</string>
     <string name="navigation_bar">Navigationsleiste</string>
     <string name="download_channel_name">Download-Service</string>
-    <string name="background_channel_description">Zeigt eine Benachrichtigung mit Knöpfen zur Steuerung des Audioplayers an.</string>
+    <string name="background_channel_description">Zeigt eine Benachrichtigung mit Schaltflächen zur Steuerung des Audioplayers an.</string>
     <string name="push_channel_name">Benachrichtigungs-dienst</string>
-    <string name="skip_buttons">Überspringungs Knöpfe</string>
+    <string name="skip_buttons">Überspringen-Buttons</string>
     <string name="history_size">Maximale Verlaufsgröße</string>
     <string name="already_spent_time">Du hast bereits %1$s Minuten in der App verbracht, Zeit für eine Pause.</string>
     <string name="resize_mode_fill">Ausfüllen</string>
@@ -326,7 +326,7 @@
     <string name="save_feed_summary">Lade den Abo-Feed im Hintergrund und verhindere, dass er automatisch aktualisiert wird.</string>
     <string name="delete">Aus Downloads löschen</string>
     <string name="views_placeholder">Aufrufe</string>
-    <string name="skip_buttons_summary">Knöpfe um zum nächsten oder letzten Video zu kommen anzeigen.</string>
+    <string name="skip_buttons_summary">Schaltflächen anzeigen, um zum nächsten oder vorherigen Video zu springen.</string>
     <string name="resize_mode_zoom">Vergrößern</string>
     <string name="repeat_mode">Dauerschleife</string>
     <string name="resize_mode_fit">Anpassen</string>
@@ -423,4 +423,5 @@
     <string name="play_latest_videos">Neueste Videos abspielen</string>
     <string name="color_violet">Vielseitiges Violett</string>
     <string name="nothing_selected">Nichts ausgewählt!</string>
+    <string name="failed_fetching_instances">Verfügbare Instanzen konnten nicht abgerufen werden.</string>
 </resources>
