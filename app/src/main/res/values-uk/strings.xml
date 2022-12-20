@@ -423,4 +423,5 @@
     <string name="play_latest_videos">Грати останні відео</string>
     <string name="nothing_selected">Нічого не вибрано!</string>
     <string name="color_violet">Універсальний фіолетовий</string>
+    <string name="failed_fetching_instances">Не вдалося отримати доступні екземпляри.</string>
 </resources>
