@@ -404,7 +404,7 @@
     <string name="pop_up">Felugró</string>
     <string name="no_comments_available">Nincsenek elérhető hozzászólások a videóhoz.</string>
     <string name="comments_disabled">A hozzászólásokat a feltöltő letiltotta.</string>
-    <string name="double_tap_seek_summary">Koppintson kétszer balra vagy jobbra a lejátszó a vissza- vagy előretekeréshez.</string>
+    <string name="double_tap_seek_summary">Koppintson kétszer balra vagy jobbra a lejátszás a vissza- vagy előretekeréshez.</string>
     <string name="captions_size">Feliratok mérete</string>
     <string name="double_tap_seek">Dupla érintéses keresés</string>
     <string name="exportsuccess">Exportálva.</string>
@@ -423,4 +423,5 @@
     <string name="nothing_selected">Nincs semmi kiválasztva!</string>
     <string name="theme_monochrome">Minimalista monokróm</string>
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
+    <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
 </resources>
