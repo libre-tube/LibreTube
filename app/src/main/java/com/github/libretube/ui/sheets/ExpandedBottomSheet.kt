@@ -33,4 +33,10 @@ open class ExpandedBottomSheet : BottomSheetDialogFragment() {
         fragmentManager,
         null
     )
+
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
+        // ensure that the sheet doesn't hide parts of the video
+        dialog?.dismiss()
+    }
 }
