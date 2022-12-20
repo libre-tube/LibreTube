@@ -283,7 +283,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (SDK_INT < Build.VERSION_CODES.O) {
             binding.relPlayerPip.visibility = View.GONE
-            binding.optionsLL.weightSum = 4f
         }
     }
 
