@@ -417,6 +417,7 @@
     <string name="play_latest_videos">Play latest videos</string>
     <string name="nothing_selected">Nothing selected!</string>
     <string name="color_violet">Versatile Violet</string>
+    <string name="failed_fetching_instances">Failed to fetch available instances.</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

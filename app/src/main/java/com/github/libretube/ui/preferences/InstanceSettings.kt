@@ -8,9 +8,12 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.FALLBACK_INSTANCES_URL
+import com.github.libretube.constants.PIPED_INSTANCES_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
@@ -110,6 +113,7 @@ class InstanceSettings : BasePreferenceFragment() {
     }
 
     private fun initCustomInstances(instancePref: ListPreference) {
+        val appContext = requireContext().applicationContext
         lifecycleScope.launchWhenCreated {
             val customInstances = awaitQuery {
                 Database.customInstanceDao().getAll()
@@ -118,23 +122,23 @@ class InstanceSettings : BasePreferenceFragment() {
             val instanceNames = arrayListOf<String>()
             val instanceValues = arrayListOf<String>()
 
-            // fetch official public instances
+            // fetch official public instances from kavin.rocks as well as tokhmi.xyz as fallback
+            val response = runCatching {
+                RetrofitInstance.externalApi.getInstances(PIPED_INSTANCES_URL).toMutableList()
+            }.getOrNull() ?: runCatching {
+                RetrofitInstance.externalApi.getInstances(FALLBACK_INSTANCES_URL).toMutableList()
+            }.getOrNull()
 
-            val response = try {
-                RetrofitInstance.externalApi.getInstances().toMutableList()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                mutableListOf()
+            if (response == null) {
+                appContext.toastFromMainThread(R.string.failed_fetching_instances)
+                instanceNames.addAll(resources.getStringArray(R.array.instances))
+                instanceValues.addAll(resources.getStringArray(R.array.instancesValue))
             }
 
-            response.sortBy { it.name }
+            response?.sortBy { it.name }
 
-            response.forEach {
-                if (it.name != null && it.api_url != null) {
-                    instanceNames += it.name!!
-                    instanceValues += it.api_url!!
-                }
-            }
+            instanceNames.addAll(response.orEmpty().map { it.name ?: "" })
+            instanceValues.addAll(response.orEmpty().map { it.api_url ?: "" })
 
             customInstances.forEach { instance ->
                 instanceNames += instance.name
