@@ -146,95 +146,37 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:id="@+id/relPlayer_share"
-                        style="@style/PlayerActionsLayout"
-                        android:layout_weight="1">
+                        style="@style/PlayerActionsText"
+                        android:text="@string/share"
+                        app:drawableTopCompat="@drawable/ic_share" />
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_share" />
-
-                        <TextView
-                            style="@style/PlayerActionsText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/share" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:id="@+id/relPlayer_download"
-                        style="@style/PlayerActionsLayout"
-                        android:layout_weight="1">
+                        style="@style/PlayerActionsText"
+                        android:text="@string/download"
+                        app:drawableTopCompat="@drawable/ic_download" />
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_download" />
-
-                        <TextView
-                            style="@style/PlayerActionsText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/download" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:id="@+id/relPlayer_pip"
-                        style="@style/PlayerActionsLayout"
-                        android:layout_weight="1">
+                        style="@style/PlayerActionsText"
+                        android:text="@string/pop_up"
+                        app:drawableTopCompat="@drawable/ic_open" />
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="25dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_open" />
-
-                        <TextView
-                            style="@style/PlayerActionsText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pop_up" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:id="@+id/relPlayer_background"
-                        style="@style/PlayerActionsLayout"
-                        android:layout_weight="1">
+                        style="@style/PlayerActionsText"
+                        android:text="@string/audio"
+                        app:drawableTopCompat="@drawable/ic_headphones" />
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_headphones" />
-
-                        <TextView
-                            style="@style/PlayerActionsText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/audio" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:id="@+id/relPlayer_save"
-                        style="@style/PlayerActionsLayout"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_save" />
-
-                        <TextView
-                            style="@style/PlayerActionsText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/save" />
-                    </LinearLayout>
-
+                        style="@style/PlayerActionsText"
+                        android:text="@string/save"
+                        app:drawableTopCompat="@drawable/ic_save" />
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
