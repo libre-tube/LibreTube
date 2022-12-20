@@ -18,7 +18,9 @@ class CustomSwipeToRefresh(context: Context?, attrs: AttributeSet?) :
 
     init {
         setColorSchemeColors(ThemeHelper.getThemeColor(this.context, R.attr.colorPrimary))
-        setProgressBackgroundColorSchemeColor(ThemeHelper.getThemeColor(this.context, R.attr.colorSurface))
+        setProgressBackgroundColorSchemeColor(
+            ThemeHelper.getThemeColor(this.context, R.attr.colorSurface)
+        )
     }
 
     @SuppressLint("Recycle")

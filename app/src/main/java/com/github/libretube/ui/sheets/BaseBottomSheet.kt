@@ -45,9 +45,4 @@ open class BaseBottomSheet : ExpandedBottomSheet() {
             dialog?.dismiss()
         }
     }
-
-    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
-        super.onPictureInPictureModeChanged(isInPictureInPictureMode)
-        dialog?.dismiss()
-    }
 }
