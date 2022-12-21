@@ -116,8 +116,8 @@ class LibraryFragment : BaseFragment() {
                 ) {
                     "recent" -> playlists
                     "recent_reversed" -> playlists.reversed()
-                    "name" -> playlists.sortedBy { it.name }
-                    "name_reversed" -> playlists.sortedBy { it.name }.reversed()
+                    "name" -> playlists.sortedBy { it.name?.lowercase() }
+                    "name_reversed" -> playlists.sortedBy { it.name?.lowercase() }.reversed()
                     else -> playlists
                 }
 
