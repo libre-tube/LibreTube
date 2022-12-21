@@ -97,7 +97,7 @@ class VideosAdapter(
             // set a fixed width for better visuals
             val params = root.layoutParams
             when (forceMode) {
-                ForceMode.RELATED -> params.width = (180).toPixel().toInt()
+                ForceMode.RELATED -> params.width = (210).toPixel().toInt()
                 ForceMode.HOME -> params.width = (250).toPixel().toInt()
                 else -> {}
             }
