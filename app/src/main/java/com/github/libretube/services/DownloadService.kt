@@ -325,10 +325,10 @@ class DownloadService : Service() {
     }
 
     private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
-        val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.FLAG_IMMUTABLE
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_CANCEL_CURRENT
         } else {
-            0
+            PendingIntent.FLAG_CANCEL_CURRENT
         }
 
         val activityIntent =
@@ -338,7 +338,7 @@ class DownloadService : Service() {
                 Intent(this@DownloadService, MainActivity::class.java).apply {
                     putExtra("fragmentToOpen", "downloads")
                 },
-                flag
+                flags
             )
 
         return NotificationCompat
