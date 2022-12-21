@@ -27,7 +27,7 @@ interface DownloadDao {
     @Query("SELECT * FROM downloadItem WHERE path = :path")
     fun findDownloadItemByFilePath(path: String): DownloadItem
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertDownload(download: Download)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

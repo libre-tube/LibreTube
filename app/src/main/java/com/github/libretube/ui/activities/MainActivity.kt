@@ -21,6 +21,7 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
@@ -30,6 +31,7 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.services.ClosingService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
+import com.github.libretube.ui.fragments.DownloadsFragment
 import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
@@ -382,10 +384,18 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.subscriptionsFragment)
             "library" ->
                 navController.navigate(R.id.libraryFragment)
+            "downloads" ->
+                navController.navigate(R.id.downloadsFragment)
         }
         if (intent?.getBooleanExtra(IntentData.openQueueOnce, false) == true) {
             PlayingQueueSheet()
                 .show(supportFragmentManager)
+        }
+        if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
+            (supportFragmentManager.fragments.find { it is NavHostFragment })
+                ?.childFragmentManager?.fragments?.forEach { fragment ->
+                    (fragment as? DownloadsFragment)?.bindDownloadService()
+                }
         }
     }
 

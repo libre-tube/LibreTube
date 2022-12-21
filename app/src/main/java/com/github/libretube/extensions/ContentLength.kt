@@ -8,13 +8,14 @@ import java.net.URL
 suspend fun URL.getContentLength(def: Long = -1): Long {
     try {
         return withContext(Dispatchers.IO) {
-            val con = openConnection() as HttpURLConnection
-            con.setRequestProperty("Range", "bytes=0-")
+            val connection = openConnection() as HttpURLConnection
+            connection.setRequestProperty("Range", "bytes=0-")
 
-            val value = con.getHeaderField("content-length")
+            val value = connection.getHeaderField("content-length")
                 // If connection accepts range header, try to get total bytes
-                ?: con.getHeaderField("content-range").split("/")[1]
+                ?: connection.getHeaderField("content-range").split("/")[1]
 
+            connection.disconnect()
             value.toLong()
         }
     } catch (e: Exception) { e.printStackTrace() }

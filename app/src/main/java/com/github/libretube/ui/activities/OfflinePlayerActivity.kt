@@ -33,7 +33,6 @@ import java.io.File
 
 class OfflinePlayerActivity : BaseActivity() {
     private lateinit var binding: ActivityOfflinePlayerBinding
-    private lateinit var fileName: String
     private lateinit var videoId: String
     private lateinit var player: ExoPlayer
     private lateinit var playerView: StyledPlayerView

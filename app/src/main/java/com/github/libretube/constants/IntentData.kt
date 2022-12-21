@@ -15,4 +15,5 @@ object IntentData {
     const val audioFormat = "audioFormate"
     const val audioQuality = "audioQuality"
     const val subtitleCode = "subtitleCode"
+    const val downloading = "downloading"
 }

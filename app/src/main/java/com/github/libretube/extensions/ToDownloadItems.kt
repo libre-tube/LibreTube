@@ -23,7 +23,9 @@ fun Streams.toDownloadItems(
                 videoId = videoId,
                 fileName = fileName + "." + stream?.mimeType?.split("/")?.last(),
                 path = "",
-                url = stream?.url
+                url = stream?.url,
+                format = videoFormat,
+                quality = videoQuality
             )
         )
     }
@@ -36,7 +38,9 @@ fun Streams.toDownloadItems(
                 videoId = videoId,
                 fileName = fileName + "." + stream?.mimeType?.split("/")?.last(),
                 path = "",
-                url = stream?.url
+                url = stream?.url,
+                format = audioFormat,
+                quality = audioQuality
             )
         )
     }
