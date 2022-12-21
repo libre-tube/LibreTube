@@ -423,4 +423,5 @@
     <string name="play_latest_videos">Odtwórz najnowsze filmy</string>
     <string name="nothing_selected">Nic nie zostało wybrane!</string>
     <string name="color_violet">Wszechstronny fiolet</string>
+    <string name="failed_fetching_instances">Nie udało się uzyskać dostępnych instancji.</string>
 </resources>

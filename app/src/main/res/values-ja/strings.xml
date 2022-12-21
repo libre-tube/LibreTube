@@ -423,4 +423,5 @@
     <string name="bookmark">ブックマーク</string>
     <string name="clear_bookmarks">ブックマークを消去</string>
     <string name="bookmarks_empty">まだブックマークがありません！</string>
+    <string name="failed_fetching_instances">利用可能なインスタンスの取得に失敗しました。</string>
 </resources>

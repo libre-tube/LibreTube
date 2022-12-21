@@ -423,4 +423,5 @@
     <string name="play_latest_videos">播放最新视频</string>
     <string name="nothing_selected">什么也没选中！</string>
     <string name="color_violet">Versatile Violet</string>
+    <string name="failed_fetching_instances">未能获取可用的实例。</string>
 </resources>

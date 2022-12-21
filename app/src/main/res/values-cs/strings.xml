@@ -423,4 +423,5 @@
     <string name="play_latest_videos">Přehrát nejnovější videa</string>
     <string name="nothing_selected">Nic není vybráno!</string>
     <string name="color_violet">Všestranná fialová</string>
+    <string name="failed_fetching_instances">Nepodařilo se načíst dostupné instance.</string>
 </resources>
