@@ -239,7 +239,7 @@
     <string name="no_player_found">Xarici oynadıcı tapılmadı. Zəhmət olmasa, birinin quraşdırıldığından əmin olun.</string>
     <string name="data_saver_mode">Dataya qənaət rejimi</string>
     <string name="autoRotatePlayer_summary">Cihaz fırladıldıqda tam ekran oynat.</string>
-    <string name="search_history_summary">Saxlanılan axtarışlar</string>
+    <string name="search_history_summary">Axtarışları saxla</string>
     <string name="watch_history_summary">Baxılan videoları yerli olaraq saxla</string>
     <string name="reset_watch_positions">Sıfırla</string>
     <string name="system_caption_style">Sistem altyazı üsulu</string>
@@ -335,7 +335,7 @@
     <string name="push_channel_name">Bildiriş İşçisi</string>
     <string name="push_channel_description">Yeni yayımlar mövcuddursa bildiriş göstərir.</string>
     <string name="background_channel_description">Səs oynadıcını idarə etmək üçün düymələrlə bildiriş göstərir.</string>
-    <string name="play_next">Sonrakın oynatmaq</string>
+    <string name="play_next">Sonrakında oynat</string>
     <string name="navigation_bar">Naviqasiya çubuğu</string>
     <string name="select_at_least_one">Lütfən, ən az bir element seç</string>
     <string name="change_region">Trend\'in cari ölkə üçün əlçatan olmadığı görünür.Lütfən, tənzimləmələrdə başqasını seç.</string>
