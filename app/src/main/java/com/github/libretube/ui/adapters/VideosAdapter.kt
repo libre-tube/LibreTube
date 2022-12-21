@@ -32,7 +32,8 @@ import com.github.libretube.util.TextUtils
 class VideosAdapter(
     private val streamItems: MutableList<StreamItem>,
     private val showAllAtOnce: Boolean = true,
-    private val forceMode: ForceMode = ForceMode.NONE
+    private val forceMode: ForceMode = ForceMode.NONE,
+    private val hideWatched: Boolean = false
 ) : RecyclerView.Adapter<VideosViewHolder>() {
 
     var index = 10
@@ -81,15 +82,31 @@ class VideosAdapter(
         }
     }
 
+    private fun hideItemView(holder: VideosViewHolder) {
+        holder.itemView.visibility = View.GONE
+        holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
         val video = streamItems[position]
 
+        val videoId = video.url?.toID()
+        val videoName = video.title
+
         // hide the item if there was an extractor error
         if (video.title == null && video.type != "caught") {
-            holder.itemView.visibility = View.GONE
-            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+            hideItemView(holder)
             return
+        }
+
+        videoId?.let {
+            val shouldHide = (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
+                .setWatchProgressLength(it, video.duration ?: 0L)
+            if (hideWatched && shouldHide) {
+                hideItemView(holder)
+                return
+            }
         }
 
         // Trending layout
@@ -120,8 +137,6 @@ class VideosAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, video.url)
             }
-            val videoId = video.url?.toID()
-            val videoName = video.title
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
 
@@ -132,9 +147,6 @@ class VideosAdapter(
                     )
 
                 true
-            }
-            if (videoId != null) {
-                watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
             }
         }
 
@@ -167,8 +179,6 @@ class VideosAdapter(
                 NavigationHelper.navigateVideo(root.context, video.url)
             }
 
-            val videoId = video.url?.toID()
-            val videoName = video.title
             root.setOnLongClickListener {
                 if (videoId == null || videoName == null) return@setOnLongClickListener true
                 VideoOptionsBottomSheet(videoId, videoName)
@@ -176,12 +186,7 @@ class VideosAdapter(
                         (root.context as BaseActivity).supportFragmentManager,
                         VideoOptionsBottomSheet::class.java.name
                     )
-
                 true
-            }
-
-            if (videoId != null) {
-                watchProgress.setWatchProgressLength(videoId, video.duration ?: 0L)
             }
         }
     }
