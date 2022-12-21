@@ -99,7 +99,8 @@ class DownloadService : Service() {
                                 fileName
                             ).absolutePath,
                             description = streams.description ?: "",
-                            uploadDate = streams.uploadDate
+                            uploadDate = streams.uploadDate,
+                            uploader = streams.uploader ?: ""
                         )
                     )
                 }

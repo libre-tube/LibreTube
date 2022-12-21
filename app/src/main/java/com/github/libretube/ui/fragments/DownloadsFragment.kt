@@ -163,7 +163,7 @@ class DownloadsFragment : BaseFragment() {
                     if (progressBar.isIndeterminate) return
                     progressBar.incrementProgressBy(status.progress.toInt())
                     val progressInfo = progressBar.progress.formatAsFileSize() +
-                        " / " + progressBar.max.formatAsFileSize()
+                        " /\n" + progressBar.max.formatAsFileSize()
                     fileSize.text = progressInfo
                 }
                 is DownloadStatus.Error -> {
