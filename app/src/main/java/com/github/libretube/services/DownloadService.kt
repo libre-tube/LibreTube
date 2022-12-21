@@ -29,6 +29,7 @@ import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWN
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.DownloadHelper.getNotificationId
 import com.github.libretube.util.ImageHelper
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -238,7 +239,7 @@ class DownloadService : Service() {
                         notificationBuilder
                             .setContentText("${totalRead.formatAsFileSize()} / ${item.downloadSize.formatAsFileSize()}")
                             .setProgress(item.downloadSize.toInt(), totalRead.toInt(), false)
-                        notificationManager.notify(item.id, notificationBuilder.build())
+                        notificationManager.notify(item.getNotificationId(), notificationBuilder.build())
                         lastTime = System.currentTimeMillis() / 1000
                     }
                 }
@@ -358,7 +359,7 @@ class DownloadService : Service() {
             .clearActions()
             .addAction(getPauseAction(item.id))
 
-        notificationManager.notify(item.id, notificationBuilder.build())
+        notificationManager.notify(item.getNotificationId(), notificationBuilder.build())
     }
 
     private fun setPauseNotification(
@@ -381,7 +382,7 @@ class DownloadService : Service() {
                 .setContentText(getString(R.string.download_paused))
                 .addAction(getResumeAction(item.id))
         }
-        notificationManager.notify(item.id, notificationBuilder.build())
+        notificationManager.notify(item.getNotificationId(), notificationBuilder.build())
     }
 
     private fun getResumeAction(id: Int): NotificationCompat.Action {

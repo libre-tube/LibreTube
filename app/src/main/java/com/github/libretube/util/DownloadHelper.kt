@@ -62,4 +62,8 @@ object DownloadHelper {
             context.startService(intent)
         }
     }
+
+    fun DownloadItem.getNotificationId(): Int {
+        return Int.MAX_VALUE - id
+    }
 }
