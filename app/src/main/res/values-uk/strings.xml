@@ -424,4 +424,6 @@
     <string name="nothing_selected">Нічого не вибрано!</string>
     <string name="color_violet">Універсальний фіолетовий</string>
     <string name="failed_fetching_instances">Не вдалося отримати доступні екземпляри.</string>
+    <string name="hide_watched_from_feed">Сховати зі стрічки переглянуті відео</string>
+    <string name="hide_watched_from_feed_summary">Не показувати у вкладці підписок відео, переглянуті більше ніж на 90%.</string>
 </resources>
