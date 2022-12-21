@@ -167,7 +167,8 @@ class SubscriptionsFragment : BaseFragment() {
         binding.subProgress.visibility = View.GONE
         subscriptionAdapter = VideosAdapter(
             sortedFeed.toMutableList(),
-            showAllAtOnce = false
+            showAllAtOnce = false,
+            hideWatched = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
         )
         binding.subFeed.adapter = subscriptionAdapter
 

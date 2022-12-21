@@ -18,7 +18,7 @@
             app:key="image_cache_size"
             app:title="@string/maximum_image_cache"
             app:useSimpleSummaryProvider="true" />
-        
+
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_badge"
             android:summary="@string/new_videos_badge_summary"
@@ -36,6 +36,12 @@
             android:summary="@string/confirm_unsubscribing_summary"
             app:key="confirm_unsubscribing"
             app:title="@string/confirm_unsubscribing" />
+
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_invisible"
+            android:summary="@string/hide_watched_from_feed_summary"
+            android:title="@string/hide_watched_from_feed"
+            app:key="hide_watched_from_feed" />
 
     </PreferenceCategory>
 
