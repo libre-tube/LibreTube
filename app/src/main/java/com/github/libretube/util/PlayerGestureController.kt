@@ -55,6 +55,9 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             listener.onSwipeEnd()
         }
 
+        // ignore touches to the top of the player
+        if (event.y < height * 0.1) return false
+
         // Event can be already consumed by some view which may lead to NPE.
         try {
             scaleGestureDetector.onTouchEvent(event)
