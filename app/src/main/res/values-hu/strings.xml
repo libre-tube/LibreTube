@@ -424,6 +424,6 @@
     <string name="theme_monochrome">Minimalista monokróm</string>
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
     <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
-    <string name="hide_watched_from_feed">Megnézett videó elrejtése a feedből</string>
-    <string name="hide_watched_from_feed_summary">Ne mutassa azokot a videókat a feedben, amiket már 90%ig megnézett.</string>
+    <string name="hide_watched_from_feed">Megnézett videó elrejtése a hírfolyamból</string>
+    <string name="hide_watched_from_feed_summary">Ne mutassa a már 90%-ig megnézett videókat a feliratkozások lapon.</string>
 </resources>
