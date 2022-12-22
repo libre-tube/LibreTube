@@ -51,11 +51,7 @@ class PlaylistsAdapter(
 
             deletePlaylist.setOnClickListener {
                 DeletePlaylistDialog(playlist.id!!, playlistType) {
-                    playlists.removeAt(position)
-                    (root.context as BaseActivity).runOnUiThread {
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, itemCount)
-                    }
+                    onDelete(position, root.context as BaseActivity)
                 }.show(
                     (root.context as BaseActivity).supportFragmentManager,
                     null
@@ -69,7 +65,10 @@ class PlaylistsAdapter(
                 val playlistOptionsDialog = PlaylistOptionsBottomSheet(
                     playlistId = playlist.id!!,
                     playlistName = playlist.name!!,
-                    playlistType = playlistType
+                    playlistType = playlistType,
+                    onDelete = {
+                        onDelete(position, root.context as BaseActivity)
+                    }
                 )
                 playlistOptionsDialog.show(
                     (root.context as BaseActivity).supportFragmentManager,
@@ -77,6 +76,14 @@ class PlaylistsAdapter(
                 )
                 true
             }
+        }
+    }
+
+    private fun onDelete(position: Int, activity: BaseActivity) {
+        playlists.removeAt(position)
+        activity.runOnUiThread {
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
         }
     }
 }
