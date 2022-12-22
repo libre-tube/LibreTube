@@ -206,6 +206,7 @@ class NowPlayingNotification(
             setUseStopAction(true)
             setColorized(true)
             setMediaSessionToken(mediaSession.sessionToken)
+            setSmallIcon(R.drawable.ic_launcher_lockscreen)
             setUseFastForwardActionInCompactView(true)
             setUseRewindActionInCompactView(true)
         }
