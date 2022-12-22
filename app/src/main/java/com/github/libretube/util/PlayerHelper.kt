@@ -225,12 +225,14 @@ object PlayerHelper {
             true
         )
 
-    val defaultSubtitleCode: String
+    val defaultSubtitleCode: String?
         get() {
             val code = PreferenceHelper.getString(
                 PreferenceKeys.DEFAULT_SUBTITLE,
                 ""
             )
+
+            if (code == "") return null
 
             if (code.contains("-")) {
                 return code.split("-")[0]
