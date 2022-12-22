@@ -423,4 +423,7 @@
     <string name="play_latest_videos">ସର୍ବଶେଷ ଭିଡିଓଗୁଡିକ ଚଲାନ୍ତୁ</string>
     <string name="nothing_selected">କିଛି ମନୋନୀତ ହୋଇନାହିଁ!</string>
     <string name="color_violet">ବହୁମୁଖୀ ବାଇଗଣୀ</string>
+    <string name="failed_fetching_instances">ଉପଲବ୍ଧ ଉଦାହରଣ ଆଣିବାରେ ବିଫଳ ।</string>
+    <string name="hide_watched_from_feed">ଫିଡ୍ ରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
+    <string name="hide_watched_from_feed_summary">ସଦସ୍ୟତା ଟ୍ୟାବରେ 90% ରୁ ଅଧିକ ଦେଖାଯାଉଥିବା ଭିଡିଓ ଦେଖାନ୍ତୁ ନାହିଁ ।</string>
 </resources>

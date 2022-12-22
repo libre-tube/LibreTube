@@ -424,4 +424,6 @@
     <string name="nothing_selected">Nic není vybráno!</string>
     <string name="color_violet">Všestranná fialová</string>
     <string name="failed_fetching_instances">Nepodařilo se načíst dostupné instance.</string>
+    <string name="hide_watched_from_feed">Skrýt zhlédnutá videa ze zdroje</string>
+    <string name="hide_watched_from_feed_summary">Na kartě odběry nezobrazovat videa, která jsou zhlédnuta z více než 90 %.</string>
 </resources>
