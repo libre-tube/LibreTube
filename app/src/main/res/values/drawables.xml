@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Replaces the drawables of the default exoplayer controls (see https://github.com/google/ExoPlayer/blob/release-v2/library/ui/src/main/res/values/drawables.xml) -->
-<resources>
-
-    <drawable name="exo_notification_small_icon">@drawable/ic_launcher_lockscreen</drawable>
-
-</resources>

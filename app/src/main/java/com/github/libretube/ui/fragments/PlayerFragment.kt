@@ -59,6 +59,7 @@ import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.BackgroundMode
@@ -144,6 +145,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private lateinit var exoPlayer: ExoPlayer
     private lateinit var trackSelector: DefaultTrackSelector
+    private var captionLanguage: String? = PlayerHelper.defaultSubtitleCode
 
     /**
      * Chapters and comments
@@ -226,14 +228,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun initializeTransitionLayout() {
         val mainActivity = activity as MainActivity
         mainActivity.binding.container.visibility = View.VISIBLE
+        val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
         binding.playerMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int
-            ) {
-            }
+            ) {}
 
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
@@ -241,8 +243,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 endId: Int,
                 progress: Float
             ) {
-                val mainMotionLayout =
-                    mainActivity.binding.mainMotionLayout
                 mainMotionLayout.progress = abs(progress)
                 exoPlayerView.hideController()
                 exoPlayerView.useController = false
@@ -251,16 +251,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                println(currentId)
-                val mainMotionLayout =
-                    mainActivity.binding.mainMotionLayout
                 if (currentId == eId) {
                     viewModel.isMiniPlayerVisible.value = true
+                    // disable captions
+                    updateCaptionsLanguage(null)
                     exoPlayerView.useController = false
                     mainMotionLayout.progress = 1F
                     (activity as MainActivity).requestOrientationChange()
                 } else if (currentId == sId) {
                     viewModel.isMiniPlayerVisible.value = false
+                    // re-enable captions
+                    updateCaptionsLanguage(captionLanguage)
                     exoPlayerView.useController = true
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
@@ -272,8 +273,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 triggerId: Int,
                 positive: Boolean,
                 progress: Float
-            ) {
-            }
+            ) {}
         })
 
         binding.playerMotionLayout.progress = 1.toFloat()
@@ -1189,33 +1189,20 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // set the default subtitle if available
-        val newParams = trackSelector.buildUponParameters()
-        if (PlayerHelper.defaultSubtitleCode != "" && subtitleCodesList.contains(
-                PlayerHelper.defaultSubtitleCode
-            )
-        ) {
-            newParams
-                .setPreferredTextLanguage(PlayerHelper.defaultSubtitleCode)
-                .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-        } else {
-            newParams.setPreferredTextLanguage(null)
-        }
-
-        trackSelector.setParameters(newParams)
+        updateCaptionsLanguage(captionLanguage)
 
         // set media source and resolution in the beginning
-        setStreamSource(
-            streams
-        )
+        setStreamSource()
     }
 
     private fun setPlayerResolution(resolution: Int) {
-        val params = trackSelector.buildUponParameters()
-        params.setMaxVideoSize(Int.MAX_VALUE, resolution).setMinVideoSize(Int.MIN_VALUE, resolution)
-        trackSelector.setParameters(params)
+        trackSelector.updateParameters {
+            setMaxVideoSize(Int.MAX_VALUE, resolution)
+            setMinVideoSize(Int.MIN_VALUE, resolution)
+        }
     }
 
-    private fun setStreamSource(streams: Streams) {
+    private fun setStreamSource() {
         val defaultResolution = PlayerHelper.getDefaultResolution(requireContext()).replace("p", "")
         if (defaultResolution != "") setPlayerResolution(defaultResolution.toInt())
 
@@ -1235,7 +1222,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
             this.setMediaSource(uri, MimeTypes.APPLICATION_MPD)
         } else if (streams.hls != null) {
-            setMediaSource(streams.hls.toUri(), MimeTypes.APPLICATION_M3U8)
+            setMediaSource(streams.hls!!.toUri(), MimeTypes.APPLICATION_M3U8)
         } else {
             Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
         }
@@ -1272,10 +1259,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
-        val params = trackSelector.buildUponParameters().setPreferredAudioLanguage(
-            Locale.getDefault().language.lowercase().substring(0, 2)
-        )
-        trackSelector.setParameters(params)
+        val params = trackSelector.updateParameters {
+            setPreferredAudioLanguage(
+                Locale.getDefault().language.lowercase().substring(0, 2)
+            )
+        }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
@@ -1331,25 +1319,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         BaseBottomSheet()
             .setSimpleItems(subtitlesNamesList) { index ->
-                val newParams = if (index != 0) {
-                    // caption selected
-
-                    // get the caption language code
-                    val captionLanguageCode = subtitleCodesList[index]
-
-                    // select the new caption preference
-                    trackSelector.buildUponParameters()
-                        .setPreferredTextLanguage(captionLanguageCode)
-                        .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-                } else {
-                    // none selected
-                    // disable captions
-                    trackSelector.buildUponParameters()
-                        .setPreferredTextLanguage(null)
-                }
-
-                // set the new caption language
-                trackSelector.setParameters(newParams)
+                val language = if (index > 0) subtitleCodesList[index] else null
+                updateCaptionsLanguage(language)
+                this.captionLanguage = language
             }
             .show(childFragmentManager)
     }
@@ -1386,9 +1358,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
                 val lang = audioStreams.firstOrNull()?.audioTrackId?.substring(0, 2)
-                val newParams = trackSelector.buildUponParameters()
-                    .setPreferredAudioLanguage(lang)
-                trackSelector.setParameters(newParams)
+                trackSelector.updateParameters {
+                    setPreferredAudioLanguage(lang)
+                }
             }
             .show(childFragmentManager)
     }
@@ -1415,6 +1387,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.linLayout.visibility = View.GONE
 
             viewModel.isFullscreen.value = false
+
+            updateCaptionsLanguage(null)
         } else if (lifecycle.currentState == Lifecycle.State.CREATED) {
             // close button got clicked in PiP mode
             // destroying the fragment, player and notification
@@ -1430,6 +1404,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 enableTransition(R.id.yt_transition, true)
             }
             binding.linLayout.visibility = View.VISIBLE
+
+            updateCaptionsLanguage(captionLanguage)
+        }
+    }
+
+    private fun updateCaptionsLanguage(language: String?) {
+        trackSelector.updateParameters {
+            setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+            setPreferredTextLanguage(language)
         }
     }
 
