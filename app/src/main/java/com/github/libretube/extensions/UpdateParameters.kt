@@ -1,6 +1,10 @@
 package com.github.libretube.extensions
 
-import com.google.android.exoplayer2.trackselection.TrackSelector
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 
-fun TrackSelector.updateParameters() {
+fun DefaultTrackSelector.updateParameters(
+    actions: DefaultTrackSelector.Parameters.Builder.() -> Unit
+) = apply {
+    val params = buildUponParameters().apply(actions)
+    setParameters(params)
 }

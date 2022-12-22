@@ -59,6 +59,7 @@ import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.BackgroundMode
@@ -1195,9 +1196,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun setPlayerResolution(resolution: Int) {
-        val params = trackSelector.buildUponParameters()
-        params.setMaxVideoSize(Int.MAX_VALUE, resolution).setMinVideoSize(Int.MIN_VALUE, resolution)
-        trackSelector.setParameters(params)
+        trackSelector.updateParameters {
+            setMaxVideoSize(Int.MAX_VALUE, resolution)
+            setMinVideoSize(Int.MIN_VALUE, resolution)
+        }
     }
 
     private fun setStreamSource() {
@@ -1257,10 +1259,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
-        val params = trackSelector.buildUponParameters().setPreferredAudioLanguage(
-            Locale.getDefault().language.lowercase().substring(0, 2)
-        )
-        trackSelector.setParameters(params)
+        val params = trackSelector.updateParameters {
+            setPreferredAudioLanguage(
+                Locale.getDefault().language.lowercase().substring(0, 2)
+            )
+        }
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
@@ -1355,9 +1358,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             .setSimpleItems(audioLanguages) { index ->
                 val audioStreams = audioGroups.values.elementAt(index)
                 val lang = audioStreams.firstOrNull()?.audioTrackId?.substring(0, 2)
-                val newParams = trackSelector.buildUponParameters()
-                    .setPreferredAudioLanguage(lang)
-                trackSelector.setParameters(newParams)
+                trackSelector.updateParameters {
+                    setPreferredAudioLanguage(lang)
+                }
             }
             .show(childFragmentManager)
     }
@@ -1407,10 +1410,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun updateCaptionsLanguage(language: String?) {
-        val params = trackSelector.buildUponParameters()
-            .setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-            .setPreferredTextLanguage(language)
-        trackSelector.setParameters(params)
+        trackSelector.updateParameters {
+            setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+            setPreferredTextLanguage(language)
+        }
     }
 
     fun onUserLeaveHint() {
