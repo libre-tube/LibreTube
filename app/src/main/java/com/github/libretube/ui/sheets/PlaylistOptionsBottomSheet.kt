@@ -17,7 +17,8 @@ import kotlinx.coroutines.runBlocking
 class PlaylistOptionsBottomSheet(
     private val playlistId: String,
     private val playlistName: String,
-    private val playlistType: PlaylistType
+    private val playlistType: PlaylistType,
+    private val onDelete: () -> Unit = {}
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentPlaylist = playlistName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,8 +64,10 @@ class PlaylistOptionsBottomSheet(
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
                 context?.getString(R.string.deletePlaylist) -> {
-                    DeletePlaylistDialog(playlistId, playlistType)
-                        .show(parentFragmentManager, null)
+                    DeletePlaylistDialog(playlistId, playlistType) {
+                        // try to refresh the playlists in the library on deletion success
+                        onDelete.invoke()
+                    }.show(parentFragmentManager, null)
                 }
                 context?.getString(R.string.renamePlaylist) -> {
                     RenamePlaylistDialog(playlistId, playlistName)
