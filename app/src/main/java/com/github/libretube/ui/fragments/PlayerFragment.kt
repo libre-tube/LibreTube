@@ -323,7 +323,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // video description and chapters toggle
         binding.playerTitleLayout.setOnClickListener {
-            toggleDescription()
+            if (this::streams.isInitialized) toggleDescription()
         }
 
         binding.commentsToggle.setOnClickListener {
