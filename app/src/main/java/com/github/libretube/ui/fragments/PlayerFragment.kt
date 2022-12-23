@@ -235,7 +235,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int
-            ) {}
+            ) {
+            }
 
             override fun onTransitionChange(
                 motionLayout: MotionLayout?,
@@ -273,7 +274,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 triggerId: Int,
                 positive: Boolean,
                 progress: Float
-            ) {}
+            ) {
+            }
         })
 
         binding.playerMotionLayout.progress = 1.toFloat()
@@ -649,7 +651,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 setupSeekbarPreview()
                 if (!isLive) seekToWatchPosition()
                 exoPlayer.prepare()
-                if (!PreferenceHelper.getBoolean(PreferenceKeys.DATA_SAVER_MODE, false)) exoPlayer.play()
+                if (!PreferenceHelper.getBoolean(
+                        PreferenceKeys.DATA_SAVER_MODE,
+                        false
+                    )
+                ) {
+                    exoPlayer.play()
+                }
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode

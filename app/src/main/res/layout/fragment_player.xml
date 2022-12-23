@@ -192,12 +192,13 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/player_channelImage"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="4dp" />
+                    android:layout_marginEnd="4dp"
+                    app:shapeAppearance="@style/CircleImageView" />
 
                 <LinearLayout
                     android:layout_width="0dp"

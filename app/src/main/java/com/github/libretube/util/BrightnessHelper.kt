@@ -66,7 +66,11 @@ class BrightnessHelper(private val activity: Activity) {
      * Get scaled brightness with given range. if [saved] is
      * ture value will be retrived from shared preferences.
      */
-    fun getBrightnessWithScale(maxValue: Float, minValue: Float = 0.0f, saved: Boolean = false): Float {
+    fun getBrightnessWithScale(
+        maxValue: Float,
+        minValue: Float = 0.0f,
+        saved: Boolean = false
+    ): Float {
         return if (saved) {
             savedBrightness.normalize(minBrightness, maxBrightness, minValue, maxValue)
         } else {

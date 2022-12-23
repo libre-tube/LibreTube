@@ -121,10 +121,12 @@ class PlaylistFragment : BaseFragment() {
                 binding.playlistName.text = response.name
 
                 binding.playlistName.setOnClickListener {
-                    binding.playlistName.maxLines = if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
+                    binding.playlistName.maxLines =
+                        if (binding.playlistName.maxLines == 2) Int.MAX_VALUE else 2
                 }
 
-                binding.playlistInfo.text = (if (response.uploader != null) response.uploader + TextUtils.SEPARATOR else "") +
+                binding.playlistInfo.text =
+                    (if (response.uploader != null) response.uploader + TextUtils.SEPARATOR else "") +
                     getString(R.string.videoCount, response.videos.toString())
 
                 // show playlist options

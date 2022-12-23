@@ -299,14 +299,21 @@
     <color name="purple_md_theme_dark_surfaceTintColor">#FFACE7</color>
 
     // Colors without comments seem to be not used
-    <color name="monochrome_theme_light_primary">#616161</color>                // LibreTube Logo, Hyperlinks and on-off switch (on status: filling) (also influence on the navbar colour)
-    <color name="monochrome_theme_light_onPrimary">#FFFFFF</color>              // on-off switch (on status: circle)
+    <color name="monochrome_theme_light_primary">#616161</color>
+    // LibreTube Logo, Hyperlinks and on-off switch (on status: filling) (also influence on the
+    navbar colour)
+    <color name="monochrome_theme_light_onPrimary">#FFFFFF</color>
+    // on-off switch (on status: circle)
     <color name="monochrome_theme_light_primaryContainer">#DCDCDC</color>
     <color name="monochrome_theme_light_onPrimaryContainer">#272727</color>
-    <color name="monochrome_theme_light_secondary">#797979</color>              // Headline Text
-    <color name="monochrome_theme_light_onSecondary">#B39494</color>            // SponsorBlock marker
-    <color name="monochrome_theme_light_secondaryContainer">#DCDCDC</color>     // NavBar Icon Container (selected)
-    <color name="monochrome_theme_light_onSecondaryContainer">#272727</color>   // Navbar Icon (selected)
+    <color name="monochrome_theme_light_secondary">#797979</color>
+    // Headline Text
+    <color name="monochrome_theme_light_onSecondary">#B39494</color>
+    // SponsorBlock marker
+    <color name="monochrome_theme_light_secondaryContainer">#DCDCDC</color>
+    // NavBar Icon Container (selected)
+    <color name="monochrome_theme_light_onSecondaryContainer">#272727</color>
+    // Navbar Icon (selected)
     <color name="monochrome_theme_light_tertiary">#DCDCDC</color>
     <color name="monochrome_theme_light_onTertiary">#272727</color>
     <color name="monochrome_theme_light_tertiaryContainer">#DCDCDC</color>
@@ -315,27 +322,40 @@
     <color name="monochrome_theme_light_errorContainer">#DCDCDC</color>
     <color name="monochrome_theme_light_onError">#272727</color>
     <color name="monochrome_theme_light_onErrorContainer">#272727</color>
-    <color name="monochrome_theme_light_background">#FFFFFF</color>             // Background (Settings and home)
+    <color name="monochrome_theme_light_background">#FFFFFF</color>
+    // Background (Settings and home)
     <color name="monochrome_theme_light_onBackground">#272727</color>
-    <color name="monochrome_theme_light_surface">#FFFFFF</color>                // Navbar and Flyouts (uses also the "primary" color)
-    <color name="monochrome_theme_light_onSurface">#272727</color>              // NavBar Text (selected) and some Flyout Headlines
-    <color name="monochrome_theme_light_surfaceVariant">#DCDCDC</color>         // on-off switch (off status: filling)
-    <color name="monochrome_theme_light_onSurfaceVariant">#353535</color>       // text in Flyouts, Animation color (subscription button)
-    <color name="monochrome_theme_light_outline">#797979</color>                // on-off switch (off status: border)
+    <color name="monochrome_theme_light_surface">#FFFFFF</color>
+    // Navbar and Flyouts (uses also the "primary" color)
+    <color name="monochrome_theme_light_onSurface">#272727</color>
+    // NavBar Text (selected) and some Flyout Headlines
+    <color name="monochrome_theme_light_surfaceVariant">#DCDCDC</color>
+    // on-off switch (off status: filling)
+    <color name="monochrome_theme_light_onSurfaceVariant">#353535</color>
+    // text in Flyouts, Animation color (subscription button)
+    <color name="monochrome_theme_light_outline">#797979</color>
+    // on-off switch (off status: border)
     <color name="monochrome_theme_light_inverseOnSurface">#DCDCDC</color>
     <color name="monochrome_theme_light_inverseSurface">#606060</color>
     <color name="monochrome_theme_light_inversePrimary">#C1C1C1</color>
     <color name="monochrome_theme_light_shadow">#000000</color>
     <color name="monochrome_theme_light_surfaceTint">#717171</color>
     <color name="monochrome_theme_light_surfaceTintColor">#717171</color>
-    <color name="monochrome_theme_dark_primary">#959595</color>                // LibreTube Logo, Hyperlinks and on-off switch (on status: filling) (also influence on the navbar colour)
-    <color name="monochrome_theme_dark_onPrimary">#161616</color>              // on-off switch (on status: circle)
+    <color name="monochrome_theme_dark_primary">#959595</color>
+    // LibreTube Logo, Hyperlinks and on-off switch (on status: filling) (also influence on the
+    navbar colour)
+    <color name="monochrome_theme_dark_onPrimary">#161616</color>
+    // on-off switch (on status: circle)
     <color name="monochrome_theme_dark_primaryContainer">#4D4D4D</color>
     <color name="monochrome_theme_dark_onPrimaryContainer">#A3A3A3</color>
-    <color name="monochrome_theme_dark_secondary">#A3A3A3</color>              // Headline Text
-    <color name="monochrome_theme_dark_onSecondary">#886A6A</color>            // SponsorBlock marker
-    <color name="monochrome_theme_dark_secondaryContainer">#4D4D4D</color>     // NavBar Icon Container (selected)
-    <color name="monochrome_theme_dark_onSecondaryContainer">#CCCCCC</color>   // Navbar Icon Color (selected)
+    <color name="monochrome_theme_dark_secondary">#A3A3A3</color>
+    // Headline Text
+    <color name="monochrome_theme_dark_onSecondary">#886A6A</color>
+    // SponsorBlock marker
+    <color name="monochrome_theme_dark_secondaryContainer">#4D4D4D</color>
+    // NavBar Icon Container (selected)
+    <color name="monochrome_theme_dark_onSecondaryContainer">#CCCCCC</color>
+    // Navbar Icon Color (selected)
     <color name="monochrome_theme_dark_tertiary">#4D4D4D</color>
     <color name="monochrome_theme_dark_onTertiary">#A3A3A3</color>
     <color name="monochrome_theme_dark_tertiaryContainer">#4D4D4D</color>
@@ -344,13 +364,19 @@
     <color name="monochrome_theme_dark_errorContainer">#4D4D4D</color>
     <color name="monochrome_theme_dark_onError">#A3A3A3</color>
     <color name="monochrome_theme_dark_onErrorContainer">#A3A3A3</color>
-    <color name="monochrome_theme_dark_background">#161616</color>             // Background (Settings and home)
+    <color name="monochrome_theme_dark_background">#161616</color>
+    // Background (Settings and home)
     <color name="monochrome_theme_dark_onBackground">#A3A3A3</color>
-    <color name="monochrome_theme_dark_surface">#161616</color>                // Navbar and Flyouts (uses also the "primary" color)
-    <color name="monochrome_theme_dark_onSurface">#BDBDBD</color>              // NavBar Text (selected) and some Flyout Headlines
-    <color name="monochrome_theme_dark_surfaceVariant">#4D4D4D</color>         // on-off switch (off status: filling)
-    <color name="monochrome_theme_dark_onSurfaceVariant">#A3A3A3</color>       // text in Flyouts, Animation color (subscription button)
-    <color name="monochrome_theme_dark_outline">#A3A3A3</color>                // on-off switch (off status: border)
+    <color name="monochrome_theme_dark_surface">#161616</color>
+    // Navbar and Flyouts (uses also the "primary" color)
+    <color name="monochrome_theme_dark_onSurface">#BDBDBD</color>
+    // NavBar Text (selected) and some Flyout Headlines
+    <color name="monochrome_theme_dark_surfaceVariant">#4D4D4D</color>
+    // on-off switch (off status: filling)
+    <color name="monochrome_theme_dark_onSurfaceVariant">#A3A3A3</color>
+    // text in Flyouts, Animation color (subscription button)
+    <color name="monochrome_theme_dark_outline">#A3A3A3</color>
+    // on-off switch (off status: border)
     <color name="monochrome_theme_dark_inverseOnSurface">#404040</color>
     <color name="monochrome_theme_dark_inverseSurface">#C3C3C3</color>
     <color name="monochrome_theme_dark_inversePrimary">#707070</color>

@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:paddingHorizontal="10dp"
-        android:src="@drawable/ic_home_outlined"/>
+        android:src="@drawable/ic_home_outlined" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkbox"

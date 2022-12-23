@@ -50,6 +50,7 @@ class BackupDialog(
             }
         })
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val backupOptions = listOf(
             BackupOption.WatchHistory,
