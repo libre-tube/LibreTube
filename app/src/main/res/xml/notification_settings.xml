@@ -34,10 +34,9 @@
     <PreferenceCategory app:title="@string/time">
 
         <SwitchPreferenceCompat
-            app:title="@string/notification_time"
             android:summary="@string/notification_time_summary"
             app:key="notification_time"
-            />
+            app:title="@string/notification_time" />
 
         <com.github.libretube.ui.views.TimePickerPreference
             app:key="notification_start_time"

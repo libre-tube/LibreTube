@@ -103,7 +103,7 @@
             android:id="@+id/channel_image"
             android:layout_width="27dp"
             android:layout_height="27dp"
-            app:shapeAppearance="@style/CircleImageView"/>
+            app:shapeAppearance="@style/CircleImageView" />
 
         <TextView
             android:id="@+id/channel_name"

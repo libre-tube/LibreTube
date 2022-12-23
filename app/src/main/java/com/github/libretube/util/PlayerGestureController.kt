@@ -64,7 +64,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
         try {
             scaleGestureDetector.onTouchEvent(event)
             gestureDetector.onTouchEvent(event)
-        } catch (_: Exception) { }
+        } catch (_: Exception) {
+        }
 
         // If video is playing in full-screen mode, then allow `onScroll` to consume
         // event and return true.
@@ -136,7 +137,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             if (!isEnabled || scaleGestureDetector.isInProgress) return false
 
             val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
-            val insideBorder = (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
+            val insideBorder =
+                (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
 
             // If the movement is inside threshold or scroll is horizontal then return false
             if (!isMoving && (insideThreshHold || insideBorder || abs(distanceX) > abs(distanceY))) {

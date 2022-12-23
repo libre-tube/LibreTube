@@ -194,7 +194,8 @@
         <item name="colorTertiary">@color/monochrome_theme_dark_tertiary</item>
         <item name="colorOnTertiary">@color/monochrome_theme_dark_onTertiary</item>
         <item name="colorTertiaryContainer">@color/monochrome_theme_dark_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/monochrome_theme_dark_onTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/monochrome_theme_dark_onTertiaryContainer
+        </item>
         <item name="colorError">@color/monochrome_theme_dark_error</item>
         <item name="colorErrorContainer">@color/monochrome_theme_dark_errorContainer</item>
         <item name="colorOnError">@color/monochrome_theme_dark_onError</item>

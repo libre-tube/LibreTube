@@ -81,8 +81,8 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:paddingTop="150dp"
         android:orientation="vertical"
+        android:paddingTop="150dp"
         android:visibility="gone">
 
         <ImageView

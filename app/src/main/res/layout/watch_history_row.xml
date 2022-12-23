@@ -95,7 +95,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/video_info"
-        app:shapeAppearance="@style/CircleImageView"/>
+        app:shapeAppearance="@style/CircleImageView" />
 
     <TextView
         android:id="@+id/channel_name"

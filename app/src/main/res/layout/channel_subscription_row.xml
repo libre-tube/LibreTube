@@ -14,7 +14,7 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        app:shapeAppearance="@style/CircleImageView"/>
+        app:shapeAppearance="@style/CircleImageView" />
 
     <TextView
         android:id="@+id/subscription_channel_name"

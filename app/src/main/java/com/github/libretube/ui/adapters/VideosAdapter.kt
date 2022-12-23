@@ -68,7 +68,11 @@ class VideosAdapter(
             viewType == CAUGHT_UP_TYPE -> VideosViewHolder(
                 AllCaughtUpRowBinding.inflate(layoutInflater, parent, false)
             )
-            forceMode in listOf(ForceMode.TRENDING, ForceMode.RELATED, ForceMode.HOME) -> VideosViewHolder(
+            forceMode in listOf(
+                ForceMode.TRENDING,
+                ForceMode.RELATED,
+                ForceMode.HOME
+            ) -> VideosViewHolder(
                 TrendingRowBinding.inflate(layoutInflater, parent, false)
             )
             forceMode == ForceMode.CHANNEL -> VideosViewHolder(
@@ -101,8 +105,9 @@ class VideosAdapter(
         }
 
         videoId?.let {
-            val shouldHide = (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
-                .setWatchProgressLength(it, video.duration ?: 0L)
+            val shouldHide =
+                (holder.trendingRowBinding?.watchProgress ?: holder.videoRowBinding!!.watchProgress)
+                    .setWatchProgressLength(it, video.duration ?: 0L)
             if (hideWatched && shouldHide) {
                 hideItemView(holder)
                 return

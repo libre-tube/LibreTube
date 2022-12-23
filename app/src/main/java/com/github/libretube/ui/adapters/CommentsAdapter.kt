@@ -66,7 +66,8 @@ class CommentsAdapter(
                 commentorImage.scaleY = REPLIES_ADAPTER_SCALE
             }
 
-            commentInfos.text = comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
+            commentInfos.text =
+                comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
             commentText.text = HtmlCompat.fromHtml(
                 comment.commentText.toString(),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
