@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:src="@mipmap/ic_launcher_round"
-            app:shapeAppearanceOverlay="@style/CircleImageView" />
+            app:shapeAppearance="@style/CircleImageView" />
 
         <TextView
             android:layout_width="wrap_content"

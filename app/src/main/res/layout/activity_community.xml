@@ -23,7 +23,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
             android:src="@mipmap/ic_launcher_round"
-            app:shapeAppearanceOverlay="@style/CircleImageView" />
+            app:shapeAppearance="@style/CircleImageView" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/telegram"

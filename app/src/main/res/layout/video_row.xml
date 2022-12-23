@@ -99,10 +99,11 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/video_info">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/channel_image"
             android:layout_width="27dp"
-            android:layout_height="27dp" />
+            android:layout_height="27dp"
+            app:shapeAppearance="@style/CircleImageView"/>
 
         <TextView
             android:id="@+id/channel_name"
