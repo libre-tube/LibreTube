@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.github.libretube.R
+import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
@@ -36,9 +37,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okio.BufferedSink
 import okio.buffer
 import okio.sink
@@ -46,6 +49,7 @@ import okio.source
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.concurrent.Executors
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -53,8 +57,9 @@ import java.net.URL
 class DownloadService : Service() {
 
     private val binder = LocalBinder()
+    private val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
     private val jobMain = SupervisorJob()
-    private val scope = CoroutineScope(Dispatchers.IO + jobMain)
+    private val scope = CoroutineScope(dispatcher + jobMain)
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var summaryNotificationBuilder: NotificationCompat.Builder
@@ -199,12 +204,14 @@ class DownloadService : Service() {
 
         try {
             // Set start range where last downloading was held.
-            val con = url.openConnection() as HttpURLConnection
+            val con = CronetHelper.getCronetEngine().openConnection(url) as HttpURLConnection
             con.requestMethod = "GET"
             con.setRequestProperty("Range", "bytes=$totalRead-")
             con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
             con.readTimeout = DownloadHelper.DEFAULT_TIMEOUT
-            con.connect()
+            withContext(Dispatchers.IO) {
+                con.connect()
+            }
 
             if (con.responseCode !in 200..299) {
                 val message = getString(R.string.downloadfailed) + ": " + con.responseMessage
@@ -250,10 +257,12 @@ class DownloadService : Service() {
                 _downloadFlow.emit(item.id to DownloadStatus.Error(e.message.toString(), e))
             }
 
-            sink.flush()
-            sink.close()
-            sourceByte.close()
-            con.disconnect()
+            withContext(Dispatchers.IO) {
+                sink.flush()
+                sink.close()
+                sourceByte.close()
+                con.disconnect()
+            }
         } catch (_: Exception) { }
 
         val completed = when (totalRead) {
