@@ -48,6 +48,7 @@ import okio.sink
 import okio.source
 import java.io.File
 import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
 import java.net.URL
 import java.util.concurrent.Executors
 
@@ -209,8 +210,19 @@ class DownloadService : Service() {
             con.setRequestProperty("Range", "bytes=$totalRead-")
             con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
             con.readTimeout = DownloadHelper.DEFAULT_TIMEOUT
+
             withContext(Dispatchers.IO) {
-                con.connect()
+                // Retry connecting to server for n times.
+                for (i in 1..DownloadHelper.DEFAULT_RETRY) {
+                    try {
+                        con.connect()
+                        break
+                    } catch (_: SocketTimeoutException) {
+                        val message = getString(R.string.downloadfailed) + " " + i
+                        _downloadFlow.emit(item.id to DownloadStatus.Error(message))
+                        toastFromMainThread(message)
+                    }
+                }
             }
 
             // If link is expired try to regenerate using available info.

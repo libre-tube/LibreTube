@@ -16,6 +16,7 @@ object DownloadHelper {
     const val THUMBNAIL_DIR = "thumbnail"
     const val DOWNLOAD_CHUNK_SIZE = 8L * 1024
     const val DEFAULT_TIMEOUT = 15 * 1000
+    const val DEFAULT_RETRY = 3
 
     fun getOfflineStorageDir(context: Context): File {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return context.filesDir
