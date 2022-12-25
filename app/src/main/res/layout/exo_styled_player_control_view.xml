@@ -298,11 +298,11 @@
             <com.github.libretube.ui.views.MarkableTimeBar
                 android:id="@id/exo_progress"
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
+                android:layout_height="16dp"
                 app:bar_height="2dp"
                 app:played_color="?attr/colorSecondary"
                 app:scrubber_color="?attr/colorSecondary"
-                app:scrubber_dragged_size="15dp"
+                app:scrubber_dragged_size="16dp"
                 app:scrubber_enabled_size="12dp" />
 
         </LinearLayout>

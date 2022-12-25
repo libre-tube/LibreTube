@@ -8,10 +8,12 @@ import android.util.AttributeSet
 import com.github.libretube.R
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.toPixel
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.DefaultTimeBar
+import kotlin.math.roundToInt
 
 /**
  * TimeBar that can be marked with SponsorBlock Segments
@@ -44,7 +46,7 @@ class MarkableTimeBar(
             canvas.drawRect(
                 Rect(
                     (it.segment.first() + HORIZONTAL_OFFSET).toLength(),
-                    marginY - 1,
+                    marginY,
                     (it.segment.last() + HORIZONTAL_OFFSET).toLength(),
                     canvas.height - marginY
                 ),
@@ -74,6 +76,6 @@ class MarkableTimeBar(
 
     companion object {
         const val HORIZONTAL_OFFSET = 10
-        const val PROGRESS_BAR_HEIGHT = 4
+        val PROGRESS_BAR_HEIGHT = (2).toPixel().roundToInt()
     }
 }
