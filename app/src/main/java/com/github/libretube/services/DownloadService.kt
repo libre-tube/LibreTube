@@ -213,10 +213,19 @@ class DownloadService : Service() {
                 con.connect()
             }
 
-            if (con.responseCode !in 200..299) {
+            // If link is expired try to regenerate using available info.
+            if (con.responseCode == 403) {
+                regenerateLink(item)
+                con.disconnect()
+                downloadFile(item)
+                return
+            } else if (con.responseCode !in 200..299) {
                 val message = getString(R.string.downloadfailed) + ": " + con.responseMessage
                 _downloadFlow.emit(item.id to DownloadStatus.Error(message))
                 toastFromMainThread(message)
+                con.disconnect()
+                pause(item.id)
+                return
             }
 
             val sink: BufferedSink = file.sink(true).buffer()
@@ -307,6 +316,24 @@ class DownloadService : Service() {
             }
             sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
             stopSelf()
+        }
+    }
+
+    /**
+     * Regenerate stream url using available info format and quality.
+     */
+    private suspend fun regenerateLink(item: DownloadItem) {
+        val streams = RetrofitInstance.api.getStreams(item.videoId)
+        val stream = when (item.type) {
+            FileType.AUDIO -> streams.audioStreams
+            FileType.VIDEO -> streams.videoStreams
+            else -> null
+        }
+        stream?.find { it.format == item.format && it.quality == item.quality }?.let {
+            item.url = it.url
+        }
+        query {
+            Database.downloadDao().updateDownloadItem(item)
         }
     }
 
