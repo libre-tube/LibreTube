@@ -35,7 +35,7 @@ class MarkableTimeBar(
     private fun drawSegments(canvas: Canvas) {
         if (player == null) return
 
-        if (!PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, false)) return
+        if (!PreferenceHelper.getBoolean(PreferenceKeys.SB_SHOW_MARKERS, true)) return
 
         canvas.save()
         length = canvas.width - 2 * HORIZONTAL_OFFSET
