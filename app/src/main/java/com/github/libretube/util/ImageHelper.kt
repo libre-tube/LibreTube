@@ -52,11 +52,7 @@ object ImageHelper {
      */
     fun loadImage(url: String?, target: ImageView) {
         // only load the image if the data saver mode is disabled
-        val dataSaverModeEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.DATA_SAVER_MODE,
-            false
-        )
-        if (!dataSaverModeEnabled) target.load(url, imageLoader)
+        if (!DataSaverMode.isEnabled(target.context)) target.load(url, imageLoader)
     }
 
     fun downloadImage(context: Context, url: String, fileName: String) {

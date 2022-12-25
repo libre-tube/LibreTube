@@ -82,6 +82,7 @@ import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.DashHelper
+import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -651,13 +652,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 setupSeekbarPreview()
                 if (!isLive) seekToWatchPosition()
                 exoPlayer.prepare()
-                if (!PreferenceHelper.getBoolean(
-                        PreferenceKeys.DATA_SAVER_MODE,
-                        false
-                    )
-                ) {
-                    exoPlayer.play()
-                }
+                if (!DataSaverMode.isEnabled(requireContext())) exoPlayer.play()
 
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
