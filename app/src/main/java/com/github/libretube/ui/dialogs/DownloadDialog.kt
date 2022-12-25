@@ -113,6 +113,20 @@ class DownloadDialog(
             }
         }
 
+        val subtitleName = arrayListOf<String>()
+
+        // add empty selection
+        subtitleName.add(getString(R.string.no_subtitle))
+
+        // add all available subtitles
+        for (subtitle in streams.subtitles!!) {
+            if (subtitle.url != null) {
+                subtitleName.add(subtitle.name.toString())
+            }
+        }
+
+        if (subtitleName.size == 1) binding.subtitleSpinner.visibility = View.GONE
+
         // initialize the video sources
         val videoArrayAdapter = ArrayAdapter(
             requireContext(),
@@ -123,6 +137,7 @@ class DownloadDialog(
         binding.videoSpinner.adapter = videoArrayAdapter
         if (binding.videoSpinner.size >= 1) binding.videoSpinner.setSelection(1)
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
+        if (binding.subtitleSpinner.size >= 1) binding.subtitleSpinner.setSelection(1)
 
         // initialize the audio sources
         val audioArrayAdapter = ArrayAdapter(
@@ -134,6 +149,16 @@ class DownloadDialog(
         binding.audioSpinner.adapter = audioArrayAdapter
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
+        // initialize the subtitle sources
+        val subtitleArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            subtitleName
+        )
+        subtitleArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.subtitleSpinner.adapter = subtitleArrayAdapter
+        if (binding.subtitleSpinner.size >= 1) binding.subtitleSpinner.setSelection(1)
+
         binding.download.setOnClickListener {
             if (binding.fileName.text.toString().isEmpty()) {
                 Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
@@ -142,8 +167,9 @@ class DownloadDialog(
 
             val videoPosition = binding.videoSpinner.selectedItemPosition - 1
             val audioPosition = binding.audioSpinner.selectedItemPosition - 1
+            val subtitlePosition = binding.subtitleSpinner.selectedItemPosition - 1
 
-            if (videoPosition == -1 && audioPosition == -1) {
+            if (videoPosition == -1 && audioPosition == -1 && subtitlePosition == -1) {
                 Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -156,6 +182,10 @@ class DownloadDialog(
                 -1 -> null
                 else -> streams.audioStreams[audioPosition]
             }
+            val subtitle = when (subtitlePosition) {
+                -1 -> null
+                else -> streams.subtitles[subtitlePosition]
+            }
 
             DownloadHelper.startDownloadService(
                 context = requireContext(),
@@ -165,7 +195,7 @@ class DownloadDialog(
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
                 audioQuality = audioStream?.quality,
-                subtitleCode = null
+                subtitleCode = subtitle?.code
             )
 
             dismiss()

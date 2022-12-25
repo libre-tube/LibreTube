@@ -61,6 +61,12 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp" />
 
+    <Spinner
+        android:id="@+id/subtitle_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp" />
+
     <Button
         android:id="@+id/download"
         style="@style/CustomDialogButton"

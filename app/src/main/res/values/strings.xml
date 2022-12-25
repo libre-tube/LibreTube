@@ -182,6 +182,7 @@
     <string name="playerVideoFormat">Video format for player</string>
     <string name="no_audio">No audio</string>
     <string name="no_video">No video</string>
+    <string name="no_subtitle">No subtitle</string>
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="downloading">Downloading…</string>

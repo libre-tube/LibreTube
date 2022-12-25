@@ -286,14 +286,14 @@ class DownloadService : Service() {
             }
         } catch (_: Exception) { }
 
-        val completed = when (totalRead) {
-            item.downloadSize -> {
-                _downloadFlow.emit(item.id to DownloadStatus.Completed)
-                true
-            }
-            else -> {
+        val completed = when {
+            totalRead < item.downloadSize -> {
                 _downloadFlow.emit(item.id to DownloadStatus.Paused)
                 false
+            }
+            else -> {
+                _downloadFlow.emit(item.id to DownloadStatus.Completed)
+                true
             }
         }
         setPauseNotification(notificationBuilder, item, completed)
