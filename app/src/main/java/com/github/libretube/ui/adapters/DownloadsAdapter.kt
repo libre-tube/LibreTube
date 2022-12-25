@@ -53,13 +53,18 @@ class DownloadsAdapter(
                 progressBar.progress = currentSize.toInt()
             }
 
+            val totalSizeInfo = if (downloadSize > 0) {
+                downloadSize.formatAsFileSize()
+            } else {
+                context.getString(R.string.unknown)
+            }
             if (downloadSize > currentSize) {
                 downloadOverlay.visibility = View.VISIBLE
                 resumePauseBtn.setImageResource(R.drawable.ic_download)
-                fileSize.text = "${currentSize.formatAsFileSize()} / ${downloadSize.formatAsFileSize()}"
+                fileSize.text = "${currentSize.formatAsFileSize()} / $totalSizeInfo"
             } else {
                 downloadOverlay.visibility = View.GONE
-                fileSize.text = downloadSize.formatAsFileSize()
+                fileSize.text = totalSizeInfo
             }
 
             download.thumbnailPath?.let { path ->

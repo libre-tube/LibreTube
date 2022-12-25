@@ -307,6 +307,14 @@ class DownloadService : Service() {
         // If file is already downloading then avoid new download job.
         if (downloadQueue[id] == true) return
 
+        if (downloadQueue.values.count { it } >= DownloadHelper.getMaxConcurrentDownloads()) {
+            toastFromMainThread(getString(R.string.concurrent_downloads_limit_reached))
+            scope.launch {
+                _downloadFlow.emit(id to DownloadStatus.Paused)
+            }
+            return
+        }
+
         val downloadItem = awaitQuery {
             Database.downloadDao().findDownloadItemById(id)
         }

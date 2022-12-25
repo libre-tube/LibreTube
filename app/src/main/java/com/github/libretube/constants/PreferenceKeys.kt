@@ -123,6 +123,7 @@ object PreferenceKeys {
     const val SHARE_WITH_TIME_CODE = "share_with_time_code"
     const val CONFIRM_UNSUBSCRIBE = "confirm_unsubscribing"
     const val CLEAR_BOOKMARKS = "clear_bookmarks"
+    const val MAX_CONCURRENT_DOWNLOADS = "max_concurrent_downloads"
 
     /**
      * History

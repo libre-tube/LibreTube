@@ -188,6 +188,9 @@
     <string name="downloading">Downloading…</string>
     <string name="download_paused">Download paused</string>
     <string name="download_completed">Download completed</string>
+    <string name="concurrent_downloads">Max concurrent downloads</string>
+    <string name="concurrent_downloads_limit_reached">Max concurrent downloads limit reached.</string>
+    <string name="unknown">Unknown</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="player_autoplay">Autoplay</string>

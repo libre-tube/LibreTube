@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.services.DownloadService
 import java.io.File
@@ -35,6 +36,13 @@ object DownloadHelper {
         ).apply {
             if (!this.exists()) this.mkdirs()
         }
+    }
+
+    fun getMaxConcurrentDownloads(): Int {
+        return PreferenceHelper.getString(
+            PreferenceKeys.MAX_CONCURRENT_DOWNLOADS,
+            "6"
+        ).toFloat().toInt()
     }
 
     fun startDownloadService(
