@@ -225,44 +225,21 @@
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    style="@style/TimeString"
-                    android:text="  •  "
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@id/exo_duration"
-                    style="@style/TimeString"
-                    android:text="00:00"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/liveLL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:visibility="gone">
-
-                <TextView
                     android:id="@+id/liveDiff"
                     style="@style/TimeString"
-                    tools:text="05:10" />
+                    tools:text="05:10"
+                    android:visibility="gone" />
 
                 <TextView
-                    android:id="@+id/liveSeparator"
+                    android:id="@+id/time_separator"
                     style="@style/TimeString"
-                    android:layout_marginHorizontal="5dp"
-                    android:paddingHorizontal="0dp"
                     android:text="  •  "
-                    android:visibility="gone"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/liveIndicator"
+                    android:id="@+id/duration"
                     style="@style/TimeString"
-                    android:text="@string/live" />
+                    tools:text="00:00" />
 
             </LinearLayout>
 

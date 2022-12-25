@@ -701,6 +701,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 playerBinding.exoProgress.setSegments(segmentData.segments)
                 runOnUiThread {
                     playerBinding.sbToggle.visibility = View.VISIBLE
+                    updateDisplayedDuration()
                 }
             }
         }
@@ -711,18 +712,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // switch back to normal speed when on the end of live stream
         if (exoPlayer.duration - exoPlayer.currentPosition < 7000) {
             exoPlayer.setPlaybackSpeed(1F)
-            playerBinding.liveSeparator.visibility = View.GONE
+            playerBinding.timeSeparator.visibility = View.GONE
             playerBinding.liveDiff.text = ""
         } else {
-            Log.e(TAG(), "changing the time")
             // live stream but not watching at the end/live position
-            playerBinding.liveSeparator.visibility = View.VISIBLE
+            playerBinding.timeSeparator.visibility = View.VISIBLE
             val diffText = DateUtils.formatElapsedTime(
                 (exoPlayer.duration - exoPlayer.currentPosition) / 1000
             )
             playerBinding.liveDiff.text = "-$diffText"
         }
-        // call it again
+        // call the function again after 100ms
         handler
             .postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
@@ -745,9 +745,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
         // position is almost the end of the video => don't seek, start from beginning
         if (position != null && position < streams.duration!! * 1000 * 0.9) {
-            exoPlayer.seekTo(
-                position
-            )
+            exoPlayer.seekTo(position)
         }
     }
 
@@ -798,10 +796,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun handleLiveVideo() {
-        playerBinding.exoTime.visibility = View.GONE
-        playerBinding.liveLL.visibility = View.VISIBLE
-        playerBinding.liveIndicator.setOnClickListener {
-            exoPlayer.seekTo(exoPlayer.duration - 1000)
+        playerBinding.exoPosition.visibility = View.GONE
+        playerBinding.liveDiff.visibility = View.VISIBLE
+        playerBinding.duration.text = getString(R.string.live)
+        playerBinding.exoTime.setOnClickListener {
+            exoPlayer.seekTo(exoPlayer.duration)
         }
         refreshLiveStatus()
     }
@@ -883,6 +882,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
+                updateDisplayedDuration()
+
                 exoPlayerView.keepScreenOn = !(
                     playbackState == Player.STATE_IDLE ||
                         playbackState == Player.STATE_ENDED
@@ -995,6 +996,29 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
         }
+    }
+
+    /**
+     * Update the displayed duration of the video
+     */
+    @SuppressLint("SetTextI18n")
+    private fun updateDisplayedDuration() {
+        if (exoPlayer.duration == Long.MAX_VALUE || isLive) return
+
+        val durationWithSponsorBlock = if (
+            !this::segmentData.isInitialized || this.segmentData.segments.isEmpty()
+        ) {
+            null
+        } else {
+            val difference = segmentData.segments.sumOf {
+                it.segment[1] - it.segment[0]
+            }.toInt()
+            DateUtils.formatElapsedTime(exoPlayer.duration.div(1000) - difference)
+        }
+
+        playerBinding.duration.text = DateUtils.formatElapsedTime(
+            exoPlayer.duration.div(1000)
+        ) + if (durationWithSponsorBlock != null) " ($durationWithSponsorBlock)" else ""
     }
 
     private fun syncQueueButtons() {
@@ -1267,7 +1291,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
-        val params = trackSelector.updateParameters {
+        trackSelector.updateParameters {
             setPreferredAudioLanguage(
                 Locale.getDefault().language.lowercase().substring(0, 2)
             )
