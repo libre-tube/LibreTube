@@ -4,7 +4,10 @@
 
     <PreferenceCategory app:title="@string/advanced">
 
-        <SwitchPreferenceCompat
+        <ListPreference
+            android:defaultValue="disabled"
+            android:entries="@array/dataSaverModeOptions"
+            android:entryValues="@array/dataSaverModeValues"
             android:icon="@drawable/ic_data_saver"
             android:summary="@string/data_saver_mode_summary"
             app:key="data_saver_mode"
