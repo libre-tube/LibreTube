@@ -32,6 +32,11 @@ import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.DownloadHelper.getNotificationId
 import com.github.libretube.util.ImageHelper
+import java.io.File
+import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
+import java.net.URL
+import java.util.concurrent.Executors
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,11 +51,6 @@ import okio.BufferedSink
 import okio.buffer
 import okio.sink
 import okio.source
-import java.io.File
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
-import java.util.concurrent.Executors
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
@@ -101,7 +101,10 @@ class DownloadService : Service() {
                             videoId = videoId,
                             title = streams.title ?: "",
                             thumbnailPath = File(
-                                DownloadHelper.getDownloadDir(this@DownloadService, DownloadHelper.THUMBNAIL_DIR),
+                                DownloadHelper.getDownloadDir(
+                                    this@DownloadService,
+                                    DownloadHelper.THUMBNAIL_DIR
+                                ),
                                 fileName
                             ).absolutePath,
                             description = streams.description ?: "",
@@ -266,9 +269,19 @@ class DownloadService : Service() {
                         System.currentTimeMillis() / 1000 > lastTime
                     ) {
                         notificationBuilder
-                            .setContentText("${totalRead.formatAsFileSize()} / ${item.downloadSize.formatAsFileSize()}")
-                            .setProgress(item.downloadSize.toInt(), totalRead.toInt(), false)
-                        notificationManager.notify(item.getNotificationId(), notificationBuilder.build())
+                            .setContentText(
+                                totalRead.formatAsFileSize() + " / " +
+                                    item.downloadSize.formatAsFileSize()
+                            )
+                            .setProgress(
+                                item.downloadSize.toInt(),
+                                totalRead.toInt(),
+                                false
+                            )
+                        notificationManager.notify(
+                            item.getNotificationId(),
+                            notificationBuilder.build()
+                        )
                         lastTime = System.currentTimeMillis() / 1000
                     }
                 }
@@ -408,7 +421,10 @@ class DownloadService : Service() {
             .setGroup(DOWNLOAD_NOTIFICATION_GROUP)
     }
 
-    private fun setResumeNotification(notificationBuilder: NotificationCompat.Builder, item: DownloadItem) {
+    private fun setResumeNotification(
+        notificationBuilder: NotificationCompat.Builder,
+        item: DownloadItem
+    ) {
         notificationBuilder
             .setSmallIcon(android.R.drawable.stat_sys_download)
             .setWhen(System.currentTimeMillis())

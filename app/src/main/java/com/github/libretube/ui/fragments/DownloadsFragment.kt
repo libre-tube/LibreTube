@@ -26,10 +26,10 @@ import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.github.libretube.util.DownloadHelper
+import java.io.File
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.io.File
 
 class DownloadsFragment : BaseFragment() {
     private lateinit var binding: FragmentDownloadsBinding

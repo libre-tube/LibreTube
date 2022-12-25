@@ -25,7 +25,9 @@ class NotificationReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        const val ACTION_DOWNLOAD_RESUME = "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_RESUME"
-        const val ACTION_DOWNLOAD_PAUSE = "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_PAUSE"
+        const val ACTION_DOWNLOAD_RESUME =
+            "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_RESUME"
+        const val ACTION_DOWNLOAD_PAUSE =
+            "com.github.libretube.receivers.NotificationReceiver.ACTION_DOWNLOAD_PAUSE"
     }
 }
