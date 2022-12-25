@@ -2,6 +2,7 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -14,12 +15,12 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.sanitize
 import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.TextUtils
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class DownloadDialog(
     private val videoId: String
@@ -39,6 +40,25 @@ class DownloadDialog(
 
         binding.videoRadio.setOnClickListener {
             binding.videoSpinner.visibility = View.VISIBLE
+        }
+
+        binding.fileName.filters += InputFilter { source, start, end, _, _, _ ->
+            if (source.isNullOrBlank()) {
+                return@InputFilter null
+            }
+
+            // Extract actual source
+            val actualSource = source.subSequence(start, end)
+            // Filter out unsupported characters
+            val filtered = actualSource.filterNot {
+                TextUtils.RESERVED_CHARS.contains(it, true)
+            }
+            // Check if something was filtered out
+            return@InputFilter if (actualSource.length != filtered.length) {
+                filtered
+            } else {
+                null
+            }
         }
 
         return MaterialAlertDialogBuilder(requireContext())
@@ -81,7 +101,6 @@ class DownloadDialog(
         }
 
         val audioName = arrayListOf<String>()
-//        val audioUrl = arrayListOf<String>()
 
         // add empty selection
         audioName.add(getString(R.string.no_audio))
@@ -129,8 +148,6 @@ class DownloadDialog(
                 return@setOnClickListener
             }
 
-            val fileName = binding.fileName.text.toString().sanitize()
-
             val videoStream = when (videoPosition) {
                 -1 -> null
                 else -> streams.videoStreams[videoPosition]
@@ -143,7 +160,7 @@ class DownloadDialog(
             DownloadHelper.startDownloadService(
                 context = requireContext(),
                 videoId = videoId,
-                fileName = fileName,
+                fileName = binding.fileName.text.toString(),
                 videoFormat = videoStream?.format,
                 videoQuality = videoStream?.quality,
                 audioFormat = audioStream?.format,
