@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
+import com.github.libretube.util.TextUtils
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -20,6 +21,15 @@ class CreatePlaylistDialog(
         binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
 
         binding.title.text = ThemeHelper.getStyledAppName(requireContext())
+
+        binding.clonePlaylist.setOnClickListener {
+            val playlistUrl = binding.playlistUrl.text.toString()
+            if (!TextUtils.validateUrl(playlistUrl)) {
+                Toast.makeText(context, R.string.invalid_url, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            PlaylistsHelper.clonePlaylist(requireContext().applicationContext, playlistUrl)
+        }
 
         binding.cancelButton.setOnClickListener {
             dismiss()
