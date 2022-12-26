@@ -61,7 +61,7 @@
     <string name="playlistName">Назва добірки</string>
     <string name="emptyList">Тут нічого.</string>
     <string name="emptyPlaylistName">Назва добірки не може бути порожньою</string>
-    <string name="addToPlaylist">Додати</string>
+    <string name="addToPlaylist">Додати в добірку</string>
     <string name="success">Готово.</string>
     <string name="fail">Невдача :(</string>
     <string name="about">Про</string>
