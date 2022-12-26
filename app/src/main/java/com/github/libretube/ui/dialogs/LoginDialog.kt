@@ -13,7 +13,6 @@ import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.TextUtils
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LoginDialog : DialogFragment() {
@@ -56,8 +55,6 @@ class LoginDialog : DialogFragment() {
                 Toast.makeText(context, R.string.empty, Toast.LENGTH_SHORT).show()
             }
         }
-
-        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)

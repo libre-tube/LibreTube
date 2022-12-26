@@ -4,14 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
+    <com.github.libretube.ui.views.AppNameTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="20sp" />
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/user"
@@ -24,7 +21,7 @@
     <Button
         android:id="@+id/logout"
         style="@style/CustomDialogButton"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/logout" />
 
 </LinearLayout>

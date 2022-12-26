@@ -53,7 +53,7 @@
     <string name="playlistCreated">Playlist created.</string>
     <string name="playlistName">Playlist name</string>
     <string name="emptyPlaylistName">The playlist name can\'t be empty</string>
-    <string name="addToPlaylist">Add</string>
+    <string name="addToPlaylist">Add to playlist</string>
     <string name="success">Done.</string>
     <string name="fail">Failed :(</string>
     <string name="about">About</string>

@@ -5,14 +5,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
+    <com.github.libretube.ui.views.AppNameTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="20sp" />
+        android:gravity="center" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/CustomDialogTextInputLayout"
