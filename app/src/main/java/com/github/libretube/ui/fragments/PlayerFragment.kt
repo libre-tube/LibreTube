@@ -36,7 +36,6 @@ import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
-import com.github.libretube.api.obj.Comment
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.SegmentData
@@ -76,6 +75,7 @@ import com.github.libretube.ui.extensions.setFormattedHtml
 import com.github.libretube.ui.extensions.setInvisible
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
+import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
@@ -124,6 +124,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
     private lateinit var playerGestureControlsViewBinding: PlayerGestureControlsViewBinding
     private val viewModel: PlayerViewModel by activityViewModels()
+    private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     /**
      * video information
@@ -152,8 +153,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * Chapters and comments
      */
     private lateinit var chapters: List<ChapterSegment>
-    private val comments: MutableList<Comment> = mutableListOf()
-    private var commentsNextPage: String? = null
 
     /**
      * for the player view
@@ -330,15 +329,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         binding.commentsToggle.setOnClickListener {
-            CommentsSheet(
-                videoId!!,
-                comments,
-                commentsNextPage,
-                binding.root.height - binding.player.height
-            ) { comments, nextPage ->
-                this.comments.addAll(comments)
-                this.commentsNextPage = nextPage
-            }.show(childFragmentManager)
+            videoId ?: return@setOnClickListener
+            // set the max height to not cover the currently playing video
+            commentsViewModel.maxHeight = binding.root.height - binding.player.height
+            commentsViewModel.videoId = videoId
+            CommentsSheet().show(childFragmentManager)
         }
 
         playerBinding.queueToggle.visibility = View.VISIBLE
@@ -604,6 +599,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.exoProgress.clearSegments()
         playerBinding.sbToggle.visibility = View.GONE
 
+        // reset the comments to become reloaded later
+        commentsViewModel.reset()
+
         lifecycleScope.launchWhenCreated {
             streams = try {
                 RetrofitInstance.api.getStreams(videoId!!)
@@ -753,10 +751,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // save the id of the next stream as videoId and load the next video
         if (nextVideoId != null) {
             videoId = nextVideoId
-
-            // reset the comments to be reloaded later
-            comments.clear()
-            commentsNextPage = null
 
             // play the next video
             playVideo()
