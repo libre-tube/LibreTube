@@ -53,7 +53,7 @@
     <string name="playlistCreated">Playlist created.</string>
     <string name="playlistName">Playlist name</string>
     <string name="emptyPlaylistName">The playlist name can\'t be empty</string>
-    <string name="addToPlaylist">Add to playlist</string>
+    <string name="addToPlaylist">Add</string>
     <string name="success">Done.</string>
     <string name="fail">Failed :(</string>
     <string name="about">About</string>
@@ -420,6 +420,7 @@
     <string name="failed_fetching_instances">Failed to fetch available instances.</string>
     <string name="hide_watched_from_feed">Hide watched videos from feed</string>
     <string name="hide_watched_from_feed_summary">Don\'t show videos being watched more than 90% in the subscriptions tab.</string>
+    <string name="playlistUrl">Playlist URL</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
