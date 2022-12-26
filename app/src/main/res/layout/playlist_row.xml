@@ -93,7 +93,7 @@
         android:id="@+id/delete_playlist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
         android:src="@drawable/ic_delete"
         android:visibility="gone"

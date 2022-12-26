@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.databinding.FragmentBookmarksBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
@@ -32,7 +33,7 @@ class BookmarksFragment : BaseFragment() {
 
         if (bookmarks.isEmpty()) return
 
-        binding.bookmarksRV.layoutManager = GridLayoutManager(context, 2)
+        binding.bookmarksRV.layoutManager = LinearLayoutManager(context)
         binding.bookmarksRV.adapter = PlaylistBookmarkAdapter(bookmarks)
 
         binding.bookmarksRV.visibility = View.VISIBLE
