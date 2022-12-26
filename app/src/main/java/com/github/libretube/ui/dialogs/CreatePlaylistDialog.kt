@@ -9,7 +9,6 @@ import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
 import com.github.libretube.util.TextUtils
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CreatePlaylistDialog(
@@ -19,8 +18,6 @@ class CreatePlaylistDialog(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
-
-        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         binding.clonePlaylist.setOnClickListener {
             val playlistUrl = binding.playlistUrl.text.toString()

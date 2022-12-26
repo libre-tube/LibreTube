@@ -1,5 +1,6 @@
 package com.github.libretube.ui.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
@@ -7,12 +8,12 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogLogoutBinding
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LogoutDialog : DialogFragment() {
     private lateinit var binding: DialogLogoutBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogLogoutBinding.inflate(layoutInflater)
 
@@ -26,8 +27,6 @@ class LogoutDialog : DialogFragment() {
             dialog?.dismiss()
             activity?.recreate()
         }
-
-        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)

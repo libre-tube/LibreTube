@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.databinding.FragmentBookmarksBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
