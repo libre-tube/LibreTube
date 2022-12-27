@@ -426,4 +426,5 @@
     <string name="failed_fetching_instances">Nie udało się uzyskać dostępnych instancji.</string>
     <string name="hide_watched_from_feed">Ukryj obejrzane filmy</string>
     <string name="hide_watched_from_feed_summary">Zmiana najbardziej widoczna w karcie subskrypcje.</string>
+    <string name="playlistUrl">Link do playlisty</string>
 </resources>
