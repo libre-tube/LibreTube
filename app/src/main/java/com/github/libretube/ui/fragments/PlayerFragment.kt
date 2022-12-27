@@ -877,8 +877,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                         playbackState == Player.STATE_ENDED
                     )
 
-                // save the watch position every time the state changes
-                saveWatchPosition()
+                // save the watch position to the database
+                // only called when the position is unequal to 0, otherwise it would become reset
+                // before the player can seek to the saved position from videos of the queue
+                if (exoPlayer.currentPosition != 0L) saveWatchPosition()
 
                 // check if video has ended, next video is available and autoplay is enabled.
                 @Suppress("DEPRECATION")
