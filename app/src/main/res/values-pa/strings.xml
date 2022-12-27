@@ -427,4 +427,5 @@
     <string name="hide_watched_from_feed_summary">ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਟੈਬ ਵਿੱਚ 90% ਤੋਂ ਵੱਧ ਦੇਖੇ ਜਾ ਰਹੇ ਵੀਡੀਓ ਨਾ ਦਿਖਾਓ।</string>
     <string name="download_channel_name">ਸੇਵਾ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="playlistUrl">ਪਲੇਲਿਸਟ URL</string>
+    <string name="pause_on_quit">ਛੱਡਣ \'ਤੇ ਰੁਕੋ</string>
 </resources>
