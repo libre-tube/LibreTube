@@ -7,6 +7,7 @@ import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -23,6 +24,7 @@ import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.PlayerHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -58,7 +60,17 @@ class OfflinePlayerActivity : BaseActivity() {
     private fun initializePlayer() {
         player = ExoPlayer.Builder(this)
             .setHandleAudioBecomingNoisy(true)
-            .build()
+            .build().apply {
+                addListener(object : Player.Listener {
+                    override fun onEvents(player: Player, events: Player.Events) {
+                        super.onEvents(player, events)
+                        // update the displayed duration on changes
+                        playerBinding.duration.text = DateUtils.formatElapsedTime(
+                            player.duration / 1000
+                        )
+                    }
+                })
+            }
 
         playerView = binding.player
 
