@@ -859,6 +859,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
 
             override fun onEvents(player: Player, events: Player.Events) {
+                updateDisplayedDuration()
                 super.onEvents(player, events)
                 if (events.containsAny(
                         Player.EVENT_PLAYBACK_STATE_CHANGED,
@@ -871,8 +872,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
-                updateDisplayedDuration()
-
                 exoPlayerView.keepScreenOn = !(
                     playbackState == Player.STATE_IDLE ||
                         playbackState == Player.STATE_ENDED
@@ -992,22 +991,21 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     @SuppressLint("SetTextI18n")
     private fun updateDisplayedDuration() {
-        if (exoPlayer.duration == Long.MAX_VALUE || isLive) return
-
-        val durationWithSponsorBlock = if (
-            !this::segmentData.isInitialized || this.segmentData.segments.isEmpty()
-        ) {
-            null
-        } else {
-            val difference = segmentData.segments.sumOf {
-                it.segment[1] - it.segment[0]
-            }.toInt()
-            DateUtils.formatElapsedTime(exoPlayer.duration.div(1000) - difference)
-        }
+        if (exoPlayer.duration < 0 || isLive) return
 
         playerBinding.duration.text = DateUtils.formatElapsedTime(
             exoPlayer.duration.div(1000)
-        ) + if (durationWithSponsorBlock != null) " ($durationWithSponsorBlock)" else ""
+        )
+        if (!this::segmentData.isInitialized || this.segmentData.segments.isEmpty()) {
+            return
+        }
+
+        val durationWithSb = DateUtils.formatElapsedTime(
+            exoPlayer.duration.div(1000) - segmentData.segments.sumOf {
+                it.segment[1] - it.segment[0]
+            }.toInt()
+        )
+        playerBinding.duration.text = playerBinding.duration.text.toString() + " ($durationWithSb)"
     }
 
     private fun syncQueueButtons() {

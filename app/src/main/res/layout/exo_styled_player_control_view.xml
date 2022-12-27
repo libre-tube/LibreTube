@@ -227,8 +227,8 @@
                 <TextView
                     android:id="@+id/liveDiff"
                     style="@style/TimeString"
-                    tools:text="05:10"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:text="05:10" />
 
                 <TextView
                     android:id="@+id/time_separator"
@@ -239,7 +239,8 @@
                 <TextView
                     android:id="@+id/duration"
                     style="@style/TimeString"
-                    tools:text="00:00" />
+                    android:text="00:00"
+                    tools:ignore="HardcodedText" />
 
             </LinearLayout>
 
