@@ -421,6 +421,7 @@
     <string name="hide_watched_from_feed">Hide watched videos from feed</string>
     <string name="hide_watched_from_feed_summary">Don\'t show videos being watched more than 90% in the subscriptions tab.</string>
     <string name="playlistUrl">Playlist URL</string>
+    <string name="pause_on_quit">Pause on quit</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

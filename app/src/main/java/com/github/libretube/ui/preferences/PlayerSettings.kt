@@ -2,6 +2,8 @@ package com.github.libretube.ui.preferences
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
@@ -57,6 +59,18 @@ class PlayerSettings : BasePreferenceFragment() {
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
             }
+            true
+        }
+
+        val pictureInPicture = findPreference<SwitchPreferenceCompat>(
+            PreferenceKeys.PICTURE_IN_PICTURE
+        )!!
+        val pauseOnQuit = findPreference<SwitchPreferenceCompat>(PreferenceKeys.PAUSE_ON_QUIT)
+        pictureInPicture.isVisible = SDK_INT >= Build.VERSION_CODES.O
+        pauseOnQuit?.isVisible = !pictureInPicture.isVisible || !pictureInPicture.isChecked
+
+        pictureInPicture.setOnPreferenceChangeListener { _, newValue ->
+            pauseOnQuit?.isVisible = !(newValue as Boolean)
             true
         }
     }

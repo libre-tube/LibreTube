@@ -320,6 +320,12 @@ object PlayerHelper {
             true
         )
 
+    val pauseOnQuit: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PAUSE_ON_QUIT,
+            false
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(
