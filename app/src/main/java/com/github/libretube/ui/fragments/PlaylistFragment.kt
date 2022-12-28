@@ -33,6 +33,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
 import java.io.IOException
 import retrofit2.HttpException
@@ -146,26 +147,42 @@ class PlaylistFragment : BaseFragment() {
                     )
                 }
 
-                if (playlistType != PlaylistType.PUBLIC) binding.bookmark.visibility = View.GONE
-
-                binding.bookmark.setOnClickListener {
-                    isBookmarked = !isBookmarked
-                    updateBookmarkRes()
-                    query {
-                        if (!isBookmarked) {
-                            DatabaseHolder.Database.playlistBookmarkDao().deleteById(playlistId!!)
-                        } else {
-                            DatabaseHolder.Database.playlistBookmarkDao().insertAll(
-                                PlaylistBookmark(
-                                    playlistId = playlistId!!,
-                                    playlistName = response.name,
-                                    thumbnailUrl = response.thumbnailUrl,
-                                    uploader = response.uploader,
-                                    uploaderAvatar = response.uploaderAvatar,
-                                    uploaderUrl = response.uploaderUrl
+                if (playlistType == PlaylistType.PUBLIC) {
+                    binding.bookmark.setOnClickListener {
+                        isBookmarked = !isBookmarked
+                        updateBookmarkRes()
+                        query {
+                            if (!isBookmarked) {
+                                DatabaseHolder.Database.playlistBookmarkDao()
+                                    .deleteById(playlistId!!)
+                            } else {
+                                DatabaseHolder.Database.playlistBookmarkDao().insertAll(
+                                    PlaylistBookmark(
+                                        playlistId = playlistId!!,
+                                        playlistName = response.name,
+                                        thumbnailUrl = response.thumbnailUrl,
+                                        uploader = response.uploader,
+                                        uploaderAvatar = response.uploaderAvatar,
+                                        uploaderUrl = response.uploaderUrl
+                                    )
                                 )
-                            )
+                            }
                         }
+                    }
+                } else {
+                    // private playlist, means shuffle is possible because all videos are received at once
+                    binding.bookmark.setIconResource(R.drawable.ic_shuffle)
+                    binding.bookmark.text = getString(R.string.shuffle)
+                    binding.bookmark.setOnClickListener {
+                        val queue = playlistFeed.shuffled()
+                        PlayingQueue.resetToDefaults()
+                        PlayingQueue.add(*queue.toTypedArray())
+                        NavigationHelper.navigateVideo(
+                            requireContext(),
+                            queue.first().url?.toID(),
+                            playlistId = playlistId,
+                            keepQueue = true
+                        )
                     }
                 }
 
