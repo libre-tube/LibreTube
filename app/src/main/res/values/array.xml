@@ -331,6 +331,12 @@
         <item>@string/channel_name_za</item>
     </string-array>
 
+    <string-array name="filterOptions">
+        <item>@string/all</item>
+        <item>@string/videos</item>
+        <item>@string/yt_shorts</item>
+    </string-array>
+
     <string-array name="requiredNetwork">
         <item>@string/network_all</item>
         <item>@string/network_wifi</item>

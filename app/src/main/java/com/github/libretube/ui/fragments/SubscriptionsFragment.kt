@@ -26,7 +26,8 @@ class SubscriptionsFragment : BaseFragment() {
     private val viewModel: SubscriptionsViewModel by activityViewModels()
 
     private var subscriptionAdapter: VideosAdapter? = null
-    private var sortOrder = 0
+    private var selectedSortOrder = 0
+    private var selectedFilter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +83,27 @@ class SubscriptionsFragment : BaseFragment() {
         }
 
         binding.sortTV.setOnClickListener {
-            showSortDialog()
+            val sortOptions = resources.getStringArray(R.array.sortOptions)
+
+            BaseBottomSheet().apply {
+                setSimpleItems(sortOptions.toList()) { index ->
+                    binding.sortTV.text = sortOptions[index]
+                    selectedSortOrder = index
+                    showFeed()
+                }
+            }.show(childFragmentManager)
+        }
+
+        binding.filterTV.setOnClickListener {
+            val filterOptions = resources.getStringArray(R.array.filterOptions)
+
+            BaseBottomSheet().apply {
+                setSimpleItems(filterOptions.toList()) { index ->
+                    binding.filterTV.text = filterOptions[index]
+                    selectedFilter = index
+                    showFeed()
+                }
+            }.show(childFragmentManager)
         }
 
         binding.toggleSubs.visibility = View.VISIBLE
@@ -117,27 +138,21 @@ class SubscriptionsFragment : BaseFragment() {
             }
     }
 
-    private fun showSortDialog() {
-        val sortOptions = resources.getStringArray(R.array.sortOptions)
-
-        val bottomSheet = BaseBottomSheet().apply {
-            setSimpleItems(sortOptions.toList()) { index ->
-                binding.sortTV.text = sortOptions[index]
-                sortOrder = index
-                showFeed()
-            }
-        }
-
-        bottomSheet.show(childFragmentManager, null)
-    }
-
     private fun showFeed() {
         if (viewModel.videoFeed.value == null) return
 
         binding.subRefresh.isRefreshing = false
-        val feed = viewModel.videoFeed.value!!
+        val feed = viewModel.videoFeed.value!!.filter {
+            // apply the selected filter
+            when (selectedFilter) {
+                0 -> true
+                1 -> !it.isShort
+                2 -> it.isShort
+                else -> throw IllegalArgumentException()
+            }
+        }
         // sort the feed
-        val sortedFeed = when (sortOrder) {
+        val sortedFeed = when (selectedSortOrder) {
             0 -> feed
             1 -> feed.reversed()
             2 -> feed.sortedBy { it.views }.reversed()
@@ -148,7 +163,7 @@ class SubscriptionsFragment : BaseFragment() {
         }.toMutableList()
 
         // add an "all caught up item"
-        if (sortOrder == 0) {
+        if (selectedSortOrder == 0) {
             val lastCheckedFeedTime = PreferenceHelper.getLastCheckedFeedTime()
             val caughtUpIndex = feed.indexOfFirst {
                 (it.uploaded ?: 0L) / 1000 < lastCheckedFeedTime
