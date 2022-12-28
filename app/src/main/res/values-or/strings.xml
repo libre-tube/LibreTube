@@ -427,4 +427,5 @@
     <string name="hide_watched_from_feed">ଫିଡ୍ ରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
     <string name="hide_watched_from_feed_summary">ସଦସ୍ୟତା ଟ୍ୟାବରେ 90% ରୁ ଅଧିକ ଦେଖାଯାଉଥିବା ଭିଡିଓ ଦେଖାନ୍ତୁ ନାହିଁ ।</string>
     <string name="playlistUrl">ପ୍ଲେଲିଷ୍ଟ୍ URL</string>
+    <string name="pause_on_quit">ଆପ୍ ଛାଡିବା ପରେ ଭିଡିଓକୁ ବିରତି ଦିଅନ୍ତୁ</string>
 </resources>
