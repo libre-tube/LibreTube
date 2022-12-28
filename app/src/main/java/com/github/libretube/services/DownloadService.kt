@@ -133,7 +133,18 @@ class DownloadService : Service() {
 
         val downloadManager: DownloadManager =
             applicationContext.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        return downloadManager.enqueue(request)
+
+        try {
+            return downloadManager.enqueue(request)
+        } catch (ex: SecurityException) {
+            var message: String
+            if ((Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) && ((ex.message.also { message = (it)!! }) != null) && message.contains("WRITE_EXTERNAL_STORAGE")) {
+                //Toast.makeText(this, "Please grant the writing permission in the OS application settings.", Toast.LENGTH_LONG).show()
+            } else {
+                ex.printStackTrace()
+            }
+            return null
+        }
     }
 
     private fun downloadFailedNotification() {
