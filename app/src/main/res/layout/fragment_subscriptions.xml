@@ -124,6 +124,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
+                            android:layout_marginStart="5dp"
                             android:drawablePadding="5dp"
                             android:paddingHorizontal="10dp"
                             android:text="@string/all"
