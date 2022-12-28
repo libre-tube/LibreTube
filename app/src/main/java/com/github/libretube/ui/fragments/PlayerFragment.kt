@@ -127,11 +127,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
     /**
-     * video information
+     * Video information passed by the intent
      */
     private var videoId: String? = null
     private var playlistId: String? = null
     private var channelId: String? = null
+    private var keepQueue: Boolean = false
+
+    /**
+     * Video information fetched at runtime
+     */
     private var isLive = false
     private lateinit var streams: Streams
 
@@ -179,6 +184,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             videoId = it.getString(IntentData.videoId)!!.toID()
             playlistId = it.getString(IntentData.playlistId)
             channelId = it.getString(IntentData.channelId)
+            keepQueue = it.getBoolean(IntentData.keepQueue, false)
         }
     }
 
@@ -202,7 +208,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         context?.hideKeyboard(view)
 
         // clear the playing queue
-        PlayingQueue.resetToDefaults()
+        if (!keepQueue) PlayingQueue.resetToDefaults()
 
         changeOrientationMode()
 
