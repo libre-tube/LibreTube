@@ -105,6 +105,7 @@ object PlaylistsHelper {
             appContext.toastFromMainThread(R.string.server_error)
             return null
         }
+        Log.e("created pl", response.playlistId.toString())
         if (response.playlistId != null) {
             appContext.toastFromMainThread(R.string.playlistCreated)
             return response.playlistId!!

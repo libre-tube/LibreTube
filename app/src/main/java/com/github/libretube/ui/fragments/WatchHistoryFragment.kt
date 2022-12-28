@@ -89,7 +89,11 @@ class WatchHistoryFragment : BaseFragment() {
                     )
                 }.toTypedArray()
             )
-            NavigationHelper.navigateVideo(requireContext(), watchHistory.last().videoId, keepQueue = true)
+            NavigationHelper.navigateVideo(
+                requireContext(),
+                watchHistory.last().videoId,
+                keepQueue = true
+            )
         }
 
         // reversed order
@@ -128,14 +132,14 @@ class WatchHistoryFragment : BaseFragment() {
 
         // observe changes
         watchHistoryAdapter.registerAdapterDataObserver(object :
-                RecyclerView.AdapterDataObserver() {
-                override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                    if (watchHistoryAdapter.itemCount == 0) {
-                        binding.historyScrollView.visibility = View.GONE
-                        binding.historyEmpty.visibility = View.VISIBLE
-                    }
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                if (watchHistoryAdapter.itemCount == 0) {
+                    binding.historyScrollView.visibility = View.GONE
+                    binding.historyEmpty.visibility = View.VISIBLE
                 }
-            })
+            }
+        })
 
         binding.watchHistoryRecView.adapter = watchHistoryAdapter
         binding.historyEmpty.visibility = View.GONE
