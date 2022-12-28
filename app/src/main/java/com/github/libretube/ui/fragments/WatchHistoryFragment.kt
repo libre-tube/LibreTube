@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
@@ -18,6 +19,8 @@ import com.github.libretube.extensions.toPixel
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.ProxyHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -44,6 +47,17 @@ class WatchHistoryFragment : BaseFragment() {
             )
         }
 
+        val watchHistory = awaitQuery {
+            Database.watchHistoryDao().getAll()
+        }
+
+        if (watchHistory.isEmpty()) return
+
+        watchHistory.forEach {
+            it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
+            it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
+        }
+
         binding.clear.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.clear_history)
@@ -59,15 +73,23 @@ class WatchHistoryFragment : BaseFragment() {
                 .show()
         }
 
-        val watchHistory = awaitQuery {
-            Database.watchHistoryDao().getAll()
-        }
-
-        if (watchHistory.isEmpty()) return
-
-        watchHistory.forEach {
-            it.thumbnailUrl = ProxyHelper.rewriteUrl(it.thumbnailUrl)
-            it.uploaderAvatar = ProxyHelper.rewriteUrl(it.uploaderAvatar)
+        binding.playAll.setOnClickListener {
+            PlayingQueue.resetToDefaults()
+            PlayingQueue.add(
+                *watchHistory.reversed().map {
+                    StreamItem(
+                        url = "/watch?v=${it.videoId}",
+                        title = it.title,
+                        thumbnail = it.thumbnailUrl,
+                        uploaderName = it.uploader,
+                        uploaderUrl = it.uploaderUrl,
+                        uploaderAvatar = it.uploaderAvatar,
+                        uploadedDate = it.uploadDate,
+                        duration = it.duration
+                    )
+                }.toTypedArray()
+            )
+            NavigationHelper.navigateVideo(requireContext(), watchHistory.last().videoId, keepQueue = true)
         }
 
         // reversed order
