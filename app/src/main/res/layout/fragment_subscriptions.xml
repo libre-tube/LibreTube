@@ -114,17 +114,35 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/sortTV"
-                        android:layout_width="wrap_content"
+                    <FrameLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginBottom="5dp"
-                        android:drawablePadding="5dp"
-                        android:paddingHorizontal="10dp"
-                        android:text="@string/most_recent"
-                        android:textSize="16sp"
-                        app:drawableEndCompat="@drawable/ic_arrow_downward" />
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:id="@+id/filterTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="5dp"
+                            android:drawablePadding="5dp"
+                            android:paddingHorizontal="10dp"
+                            android:text="@string/all"
+                            android:textSize="16sp"
+                            app:drawableEndCompat="@drawable/ic_filter" />
+
+                        <TextView
+                            android:id="@+id/sortTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:drawablePadding="5dp"
+                            android:paddingHorizontal="10dp"
+                            android:text="@string/most_recent"
+                            android:textSize="16sp"
+                            app:drawableEndCompat="@drawable/ic_arrow_downward" />
+
+                    </FrameLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"

@@ -9,6 +9,7 @@ object IntentData {
     const val position = "position"
     const val fileName = "fileName"
     const val openQueueOnce = "openQueue"
+    const val keepQueue = "keepQueue"
     const val playlistType = "playlistType"
     const val videoFormat = "videoFormate"
     const val videoQuality = "videoQuality"

@@ -17,7 +17,6 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,6 @@ class AddToPlaylistDialog(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogAddtoplaylistBinding.inflate(layoutInflater)
-        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         binding.createPlaylist.setOnClickListener {
             CreatePlaylistDialog {

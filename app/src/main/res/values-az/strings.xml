@@ -424,4 +424,8 @@
     <string name="nothing_selected">Heç nə seçilməyib!</string>
     <string name="color_violet">Hərtərəfli Bənövşəyi</string>
     <string name="failed_fetching_instances">Mövcud nümunələri əldə etmək alınmadı.</string>
+    <string name="hide_watched_from_feed">Baxılan videoları axından gizlət</string>
+    <string name="hide_watched_from_feed_summary">Abunəliklər panelində 90% daha çox baxılan videoları göstərmə.</string>
+    <string name="playlistUrl">Pleylist URL\'si</string>
+    <string name="pause_on_quit">Çıxanda dayandır</string>
 </resources>

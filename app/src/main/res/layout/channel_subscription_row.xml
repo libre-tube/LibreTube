@@ -8,12 +8,13 @@
     android:paddingHorizontal="8dp"
     android:paddingVertical="4dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/subscription_channel_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp" />
+        android:layout_marginStart="8dp"
+        app:shapeAppearance="@style/CircleImageView" />
 
     <TextView
         android:id="@+id/subscription_channel_name"

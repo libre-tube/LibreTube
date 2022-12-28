@@ -52,14 +52,16 @@ Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped),
 
 | Feature           |     |
 | ----------------- | --- |
-| User Accounts     | ✅  |
-| Subscriptions     | ✅  |
-| User Playlists    | ✅  |
-| Channel Playlists | ✅  |
-| Search Filters    | ✅  |
-| SponsorBlock      | ✅  |
-| Subtitles         | ✅  |
-| Comments          | ✅  |
+| User Accounts     | ✅ |
+| Subscriptions     | ✅ |
+| User Playlists    | ✅ |
+| Playlist Bookmarks| ✅ |
+| Channel Tabs      | ✅ |
+| Search Filters    | ✅ |
+| Player Gestures   | ✅ |
+| SponsorBlock      | ✅ |
+| Comments          | ✅ |
+| Captions          | ✅ |
 
 ## 😇 Contributing
 

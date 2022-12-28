@@ -86,6 +86,7 @@ object PreferenceKeys {
     const val PLAYER_PINCH_CONTROL = "player_pinch_control"
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
+    const val PAUSE_ON_QUIT = "pause_on_quit"
 
     /**
      * Background mode

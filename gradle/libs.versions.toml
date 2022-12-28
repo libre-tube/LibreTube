@@ -9,7 +9,6 @@ preference = "1.2.0"
 extJunit = "1.1.4"
 espresso = "3.5.0"
 workRuntime = "2.7.1"
-circleimageview = "3.1.0"
 exoplayer = "2.18.2"
 multidex = "2.0.1"
 retrofit = "2.9.0"
@@ -32,7 +31,6 @@ androidx-preference = { group = "androidx.preference", name = "preference-ktx", 
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
 androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", version.ref="workRuntime" }
-circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
 androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }

@@ -42,8 +42,8 @@
     <string name="loggedIn">Sessão iniciada.</string>
     <string name="password">Palavra-passe</string>
     <string name="registered">Registo efetuado. Agora já pode subscrever canais.</string>
-    <string name="login_register">Entrar/Registar</string>
-    <string name="please_login">Deve iniciar sessão ou registar-se nas definições.</string>
+    <string name="login_register">Entrar / registar</string>
+    <string name="please_login">Deve iniciar sessão ou criar uma conta nas configurações.</string>
     <string name="dlisinprogress">Já existe uma descarga em curso. Por favor aguarde.</string>
     <string name="vlc">Abrir no VLC</string>
     <string name="vlcerror">Não foi possível abrir no VLC, pode não estar instalado.</string>
@@ -69,7 +69,7 @@
     <string name="lightTheme">Claro</string>
     <string name="darkTheme">Escuro</string>
     <string name="subscribers">%1$s subscritores</string>
-    <string name="settings">Definições</string>
+    <string name="settings">Configurações</string>
     <string name="location">Localização</string>
     <string name="website">Site</string>
     <string name="piped">Piped</string>
@@ -161,7 +161,7 @@
     <string name="download_directory_summary">Local para guardar os ficheiros.</string>
     <string name="video_format_summary">Conversão de ficheiros se tanto o áudio como o vídeo forem descarregados.</string>
     <string name="open">Abrir…</string>
-    <string name="reset_message">Repor todas as definições e terminar sessão\?</string>
+    <string name="reset_message">Repor todas as configurações e terminar a sessão\?</string>
     <string name="clonePlaylist">Clonar lista de reprodução</string>
     <string name="pauseOnScreenOff">Pausa automática</string>
     <string name="behavior">Comportamento</string>
@@ -234,7 +234,7 @@
     <string name="notifications">Notificações</string>
     <string name="notify_new_streams">Notificação para novos vídeos</string>
     <string name="notify_new_streams_summary">Notificar se existirem novos vídeos nos canais subscritos.</string>
-    <string name="checking_frequency">Verificar a cada …</string>
+    <string name="checking_frequency">Verificar a cada…</string>
     <string name="new_streams_count">Estão disponíveis %1$s novo(s) vídeo(s)</string>
     <string name="new_streams_by">Novos vídeos de %1$s…</string>
     <string name="irreversible">Tem a certeza\? Não pode reverter!</string>
@@ -249,7 +249,7 @@
     <string name="translate">Tradução</string>
     <string name="error_occurred">Erro</string>
     <string name="network_all">Todas</string>
-    <string name="required_network">Requer uma ligação</string>
+    <string name="required_network">Conexão necessária</string>
     <string name="network_metered">Móvel</string>
     <string name="network_wifi">Apenas Wi-Fi</string>
     <string name="no_search_result">Não há resultados.</string>
@@ -286,7 +286,7 @@
     <string name="player_resize_mode">Redimensionamento</string>
     <string name="skip_buttons">Botões para avançar/recuar</string>
     <string name="skip_buttons_summary">Mostrar botões para avançar/recuar para o vídeo seguinte/anterior.</string>
-    <string name="unlimited">Ilimitado</string>
+    <string name="unlimited">Sem limite</string>
     <string name="background_mode">Modo de segundo plano</string>
     <string name="misc">Outras</string>
     <string name="break_reminder">Lembrete para pausa</string>
@@ -329,7 +329,7 @@
     <string name="play_next">Reproduzir seguinte</string>
     <string name="navigation_bar">Barra de navegação</string>
     <string name="select_at_least_one">Selecione, pelo menos, um item</string>
-    <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas definições.</string>
+    <string name="change_region">Parece que as tendências não estão disponíveis na sua região. Selecione outra região nas configurações.</string>
     <string name="limit_hls">Limitar a 1080p</string>
     <string name="trending_layout">Esquema alternativo de tendências</string>
     <string name="renamePlaylist">Mudar nome da lista de reprodução</string>
@@ -384,7 +384,7 @@
     <string name="unsupported_file_format">Formato de ficheiro não suportado!</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>
-    <string name="auto_quality">Auto</string>
+    <string name="auto_quality">Automático</string>
     <string name="limit_to_runtime">Limite de tempo de execução</string>
     <string name="open_queue_from_notification">Fila aberta de notificação</string>
     <string name="trends">Tendências</string>
@@ -393,11 +393,11 @@
     <string name="queue_insert_related_videos">Inserir vídeos relacionados</string>
     <string name="bookmarks">Marcadores</string>
     <string name="bookmark">Marcadores</string>
-    <string name="clear_bookmarks">Limpar Marcadores</string>
+    <string name="clear_bookmarks">Limpar marcadores</string>
     <string name="bookmarks_empty">Ainda sem marcadores!</string>
     <string name="brightness">Brilho</string>
     <string name="volume">Volume</string>
-    <string name="auto">Auto</string>
+    <string name="auto">Automático</string>
     <string name="swipe_controls">Controlo de deslize</string>
     <string name="defaults">Padrão</string>
     <string name="pop_up">Popup</string>
@@ -411,10 +411,10 @@
     <string name="theme_monochrome">Monocromático minimalista</string>
     <string name="captions_size">Tamanho das legendas</string>
     <string name="double_tap_seek_summary">Toque duas vezes à direita ou à esquerda para recuar ou avançar o vídeo.</string>
-    <string name="import_playlists">Importar lista de reprodução</string>
-    <string name="export_playlists">Exportar lista de reprodução</string>
+    <string name="import_playlists">Importar listas de reprodução</string>
+    <string name="export_playlists">Exportar listas de reprodução</string>
     <string name="app_backup">Backup</string>
-    <string name="backup_restore_summary">Importar/Exportar subscrições, listas de reprodução…</string>
+    <string name="backup_restore_summary">Importar / exportar subscrições, listas de reprodução…</string>
     <string name="exportsuccess">Exportação com sucesso.</string>
     <string name="privacy_alert">Alerta de privacidade</string>
     <string name="username_email">Não recomendamos a partilha do endereço de e-mail. Deseja continuar\?</string>
@@ -423,4 +423,9 @@
     <string name="all_caught_up">É tudo por hoje</string>
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta Versátil</string>
+    <string name="failed_fetching_instances">Falha na recolha de instâncias disponíveis.</string>
+    <string name="hide_watched_from_feed_summary">Não mostrar vídeos a serem vistos mais de 90% no separador das subscrições.</string>
+    <string name="hide_watched_from_feed">Ocultar vídeos assistidos do feed</string>
+    <string name="playlistUrl">URL da lista de reprodução</string>
+    <string name="pause_on_quit">Pausar ao sair</string>
 </resources>

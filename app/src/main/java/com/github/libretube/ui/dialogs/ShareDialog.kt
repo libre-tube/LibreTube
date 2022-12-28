@@ -107,6 +107,7 @@ class ShareDialog(
         }
         return ""
     }
+
     private fun getShareableTitle(shareData: ShareData): String {
         shareData.apply {
             currentChannel?.let {

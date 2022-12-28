@@ -23,11 +23,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/commentor_image"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginEnd="16dp"
+                app:shapeAppearance="@style/CircleImageView"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <LinearLayout

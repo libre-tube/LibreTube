@@ -7,10 +7,10 @@
         android:title="@string/startpage" />
 
     <item
-        android:visible="false"
         android:id="@+id/trendsFragment"
         android:icon="@drawable/ic_trending"
-        android:title="@string/trends" />
+        android:title="@string/trends"
+        android:visible="false" />
 
     <item
         android:id="@+id/subscriptionsFragment"
@@ -24,8 +24,8 @@
 
     <item
         android:id="@+id/downloadsFragment"
-        android:visible="false"
         android:icon="@drawable/ic_download_filled"
-        android:title="@string/downloads" />
+        android:title="@string/downloads"
+        android:visible="false" />
 
 </menu>

@@ -31,11 +31,12 @@
                 android:layout_margin="10dp"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/channel_image"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    app:shapeAppearance="@style/CircleImageView" />
 
                 <LinearLayout
                     android:layout_width="0dp"

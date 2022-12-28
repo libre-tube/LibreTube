@@ -17,7 +17,6 @@ import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.TextUtils
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 import retrofit2.HttpException
@@ -31,8 +30,6 @@ class DownloadDialog(
         binding = DialogDownloadBinding.inflate(layoutInflater)
 
         fetchAvailableSources()
-
-        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         binding.audioRadio.setOnClickListener {
             binding.videoSpinner.visibility = View.GONE

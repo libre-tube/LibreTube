@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_title"
         tools:text="Channel Name" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/channel_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -98,6 +98,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:shapeAppearance="@style/CircleImageView"
+        tools:srcCompat="@mipmap/ic_launcher" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

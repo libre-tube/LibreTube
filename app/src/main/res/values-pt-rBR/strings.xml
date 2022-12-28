@@ -424,4 +424,8 @@
     <string name="nothing_selected">Nada selecionado!</string>
     <string name="color_violet">Violeta Versátil</string>
     <string name="failed_fetching_instances">Falha ao buscar as instâncias disponíveis.</string>
+    <string name="hide_watched_from_feed">Ocultar vídeos assistidos do feed</string>
+    <string name="hide_watched_from_feed_summary">Não mostrar vídeos assistidos com mais de 90% na aba de inscrições.</string>
+    <string name="playlistUrl">URL da Playlist</string>
+    <string name="pause_on_quit">Pausar ao sair</string>
 </resources>

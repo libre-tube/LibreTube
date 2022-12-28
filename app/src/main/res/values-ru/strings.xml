@@ -423,4 +423,7 @@
     <string name="play_latest_videos">Воспроизвести последние видео</string>
     <string name="color_violet">Универсальный фиолетовый</string>
     <string name="nothing_selected">Ничего не выбрано!</string>
+    <string name="failed_fetching_instances">Не удалось получить доступные инстансы.</string>
+    <string name="hide_watched_from_feed">Скрыть просмотренные видео из ленты</string>
+    <string name="hide_watched_from_feed_summary">Не показывайте видео, которые просматривают более 90%, на вкладке подписки.</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.github.libretube.util
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Handler
 import android.os.Looper
@@ -22,6 +23,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     // size changes.
     private val width get() = Resources.getSystem().displayMetrics.widthPixels
     private val height get() = Resources.getSystem().displayMetrics.heightPixels
+    private val orientation get() = Resources.getSystem().configuration.orientation
     private val elapsedTime get() = SystemClock.elapsedRealtime()
 
     private val playerViewModel: PlayerViewModel by activity.viewModels()
@@ -55,11 +57,15 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             listener.onSwipeEnd()
         }
 
+        // ignore touches to the top of the player when in landscape mode
+        if (event.y < height * 0.1 && orientation == Configuration.ORIENTATION_LANDSCAPE) return false
+
         // Event can be already consumed by some view which may lead to NPE.
         try {
             scaleGestureDetector.onTouchEvent(event)
             gestureDetector.onTouchEvent(event)
-        } catch (_: Exception) { }
+        } catch (_: Exception) {
+        }
 
         // If video is playing in full-screen mode, then allow `onScroll` to consume
         // event and return true.
@@ -131,7 +137,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             if (!isEnabled || scaleGestureDetector.isInProgress) return false
 
             val insideThreshHold = abs(e2.y - e1.y) <= MOVEMENT_THRESHOLD
-            val insideBorder = (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
+            val insideBorder =
+                (e1.x < BORDER_THRESHOLD || e1.y < BORDER_THRESHOLD || e1.x > width - BORDER_THRESHOLD || e1.y > height - BORDER_THRESHOLD)
 
             // If the movement is inside threshold or scroll is horizontal then return false
             if (!isMoving && (insideThreshHold || insideBorder || abs(distanceX) > abs(distanceY))) {

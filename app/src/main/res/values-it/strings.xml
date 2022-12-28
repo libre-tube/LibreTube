@@ -423,4 +423,7 @@
     <string name="play_latest_videos">Riproduci i video più recenti</string>
     <string name="nothing_selected">Niente di selezionato!</string>
     <string name="color_violet">Violetto versatile</string>
+    <string name="failed_fetching_instances">Impossibile recuperare le istanze disponibili.</string>
+    <string name="hide_watched_from_feed">Nascondi i video guardati dal feed</string>
+    <string name="hide_watched_from_feed_summary">Non mostrare i video guardati oltre il 90% nella scheda delle iscrizioni.</string>
 </resources>

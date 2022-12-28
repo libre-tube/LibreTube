@@ -16,11 +16,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DeletePlaylistDialog(
     private val playlistId: String,
     private val playlistType: PlaylistType,
-    private val onSuccess: () -> Unit = {}
+    private val onSuccess: () -> Unit
 ) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return MaterialAlertDialogBuilder(requireContext())
@@ -58,7 +59,9 @@ class DeletePlaylistDialog(
             }
             try {
                 if (response.message == "ok") {
-                    onSuccess.invoke()
+                    withContext(Dispatchers.Main) {
+                        onSuccess.invoke()
+                    }
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())

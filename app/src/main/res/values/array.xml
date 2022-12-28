@@ -331,6 +331,12 @@
         <item>@string/channel_name_za</item>
     </string-array>
 
+    <string-array name="filterOptions">
+        <item>@string/all</item>
+        <item>@string/videos</item>
+        <item>@string/yt_shorts</item>
+    </string-array>
+
     <string-array name="requiredNetwork">
         <item>@string/network_all</item>
         <item>@string/network_wifi</item>
@@ -423,6 +429,18 @@
         <item>recent_reversed</item>
         <item>name</item>
         <item>name_reversed</item>
+    </string-array>
+
+    <string-array name="dataSaverModeOptions">
+        <item>@string/disabled</item>
+        <item>@string/network_metered</item>
+        <item>@string/enabled</item>
+    </string-array>
+
+    <string-array name="dataSaverModeValues">
+        <item>disabled</item>
+        <item>metered</item>
+        <item>enabled</item>
     </string-array>
 
 </resources>

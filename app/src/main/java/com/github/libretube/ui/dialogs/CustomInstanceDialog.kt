@@ -9,7 +9,6 @@ import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.extensions.query
-import com.github.libretube.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.net.URL
 
@@ -63,8 +62,6 @@ class CustomInstanceDialog : DialogFragment() {
                 ).show()
             }
         }
-
-        binding.title.text = ThemeHelper.getStyledAppName(requireContext())
 
         return MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)

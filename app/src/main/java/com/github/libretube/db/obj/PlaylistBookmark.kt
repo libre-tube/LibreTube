@@ -1,4 +1,3 @@
-
 package com.github.libretube.db.obj
 
 import androidx.room.Entity

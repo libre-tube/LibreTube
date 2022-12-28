@@ -49,23 +49,29 @@ object NavigationHelper {
         context: Context,
         videoId: String?,
         playlistId: String? = null,
-        channelId: String? = null
+        channelId: String? = null,
+        keepQueue: Boolean = false
     ) {
         if (videoId == null) return
 
-        val bundle = Bundle()
-        bundle.putString(IntentData.videoId, videoId.toID())
-        bundle.putString(IntentData.playlistId, playlistId)
-        bundle.putString(IntentData.channelId, channelId)
+        val bundle = Bundle().apply {
+            putString(IntentData.videoId, videoId.toID())
+            putString(IntentData.playlistId, playlistId)
+            putString(IntentData.channelId, channelId)
+            putBoolean(IntentData.keepQueue, keepQueue)
+        }
 
-        val frag = PlayerFragment()
-        frag.arguments = bundle
         val activity = context as AppCompatActivity
         activity.supportFragmentManager.beginTransaction()
             .remove(PlayerFragment())
             .commit()
         activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.container, frag)
+            .replace(
+                R.id.container,
+                PlayerFragment().apply {
+                    arguments = bundle
+                }
+            )
             .commitNow()
     }
 

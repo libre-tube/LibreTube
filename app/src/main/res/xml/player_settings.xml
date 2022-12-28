@@ -39,6 +39,12 @@
             app:title="@string/picture_in_picture" />
 
         <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_pause_filled"
+            app:key="pause_on_quit"
+            app:title="@string/pause_on_quit" />
+
+        <SwitchPreferenceCompat
             android:icon="@drawable/ic_rotating_circle"
             android:summary="@string/autoRotatePlayer_summary"
             app:defaultValue="true"

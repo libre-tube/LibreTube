@@ -225,12 +225,14 @@ object PlayerHelper {
             true
         )
 
-    val defaultSubtitleCode: String
+    val defaultSubtitleCode: String?
         get() {
             val code = PreferenceHelper.getString(
                 PreferenceKeys.DEFAULT_SUBTITLE,
                 ""
             )
+
+            if (code == "") return null
 
             if (code.contains("-")) {
                 return code.split("-")[0]
@@ -316,6 +318,12 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.DOUBLE_TAP_TO_SEEK,
             true
+        )
+
+    val pauseOnQuit: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.PAUSE_ON_QUIT,
+            false
         )
 
     fun getDefaultResolution(context: Context): String {
