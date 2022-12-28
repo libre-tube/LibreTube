@@ -427,4 +427,5 @@
     <string name="hide_watched_from_feed">Skrýt zhlédnutá videa ze zdroje</string>
     <string name="hide_watched_from_feed_summary">Na kartě odběry nezobrazovat videa, která jsou zhlédnuta z více než 90 %.</string>
     <string name="playlistUrl">URL playlistu</string>
+    <string name="pause_on_quit">Pozastavit při ukončení</string>
 </resources>
