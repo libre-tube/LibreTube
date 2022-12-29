@@ -427,4 +427,6 @@
     <string name="hide_watched_from_feed">הסתרת סרטונים שנצפו מערוץ העדכונים</string>
     <string name="hide_watched_from_feed_summary">לא להציג סרטונים שצפית בלמעלה מ־90% מהם בלשונית המינויים.</string>
     <string name="playlistUrl">כתובת רשימת נגינה</string>
+    <string name="pause_on_quit">השהיה עם היציאה</string>
+    <string name="shuffle">ערבול</string>
 </resources>
