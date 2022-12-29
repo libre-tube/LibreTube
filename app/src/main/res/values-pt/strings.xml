@@ -428,4 +428,5 @@
     <string name="hide_watched_from_feed">Ocultar vídeos assistidos do feed</string>
     <string name="playlistUrl">URL da lista de reprodução</string>
     <string name="pause_on_quit">Pausar ao sair</string>
+    <string name="shuffle">Baralhar</string>
 </resources>

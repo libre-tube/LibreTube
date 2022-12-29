@@ -428,4 +428,5 @@
     <string name="hide_watched_from_feed">在 feed 中隐藏看过的视频</string>
     <string name="playlistUrl">播放列表 URL</string>
     <string name="pause_on_quit">退出时暂停</string>
+    <string name="shuffle">随机播放</string>
 </resources>

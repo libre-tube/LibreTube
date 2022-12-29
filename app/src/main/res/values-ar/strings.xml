@@ -427,4 +427,6 @@
     <string name="hide_watched_from_feed_summary">لا تعرض الفيديوهات التي تتم مشاهدتها بنسبة تزيد عن 90٪ في علامة التبويب \"الاشتراكات\".</string>
     <string name="hide_watched_from_feed">إخفاء مقاطع الفيديو التي تمت مشاهدتها من الخلاصة</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
+    <string name="pause_on_quit">توقف عند الخروج</string>
+    <string name="shuffle">خلط</string>
 </resources>
