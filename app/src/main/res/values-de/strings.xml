@@ -426,4 +426,7 @@
     <string name="failed_fetching_instances">Verfügbare Instanzen konnten nicht abgerufen werden.</string>
     <string name="hide_watched_from_feed">Angesehene Videos aus dem Feed ausblenden</string>
     <string name="hide_watched_from_feed_summary">Zeige auf dem Tab \"Abos\" keine Videos an, welche bereits zu mehr als 90% angesehen worden sind.</string>
+    <string name="playlistUrl">Playlist-URL</string>
+    <string name="pause_on_quit">Pause beim Beenden</string>
+    <string name="shuffle">Zufallswiedergabe</string>
 </resources>
