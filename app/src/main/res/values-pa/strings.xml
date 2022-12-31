@@ -428,4 +428,5 @@
     <string name="download_channel_name">ਸੇਵਾ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="playlistUrl">ਪਲੇਲਿਸਟ URL</string>
     <string name="pause_on_quit">ਛੱਡਣ \'ਤੇ ਰੁਕੋ</string>
+    <string name="shuffle">ਸ਼ਫਲ</string>
 </resources>
