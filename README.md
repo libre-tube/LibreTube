@@ -15,7 +15,28 @@
 
 </div>
 
-## 📔 About
+<details>
+  <summary>📜️ Credits</summary>
+
+<sub>Readme Design and Banners by [XelXen](https://github.com/XelXen)</sub> <br>
+<sub>Readme Screenshots by [ARBoyGo](https://github.com/ARBoyGo)</sub> <br>
+<sub>Readme Emoji is from [openmoji](https://openmoji.org)</sub>
+
+  <summary>Icons</summary>
+
+<sub>[Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)</sub> <br>
+<sub>[Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)</sub>
+
+</details>
+
+<h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/about.svg"
+      height="30"
+      width="30">
+</sub>
+About
+</h2>
 
 YouTube has an extremely invasive [privacy policy](https://support.google.com/youtube/answer/10364219) which relies on using user data in unethical ways. They store a lot of your personal data - ranging from ideas, music taste, content, political opinions, and much more than you think.
 
@@ -32,23 +53,33 @@ Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped),
 <td><a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=enhancement&template=feature-request.yml">⭐ Request Feature</a>
 </td></table>
 
-## 📱 Screenshots
+<h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/phone.svg"
+      height="30"
+      width="30">
+</sub>
+Screenshots
+</h2>
 
 <div style="width:100%; display:flex; justify-content:space-between;">
 
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png" width=30% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png" width=30% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png" width=30% alt="Search">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png" width=30% alt="Channel filters">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png" width=30% alt="Player">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png" width=30% alt="Playlist videos">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png" width=30% alt="Settings">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png" width=30% alt="About">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png" width=20% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png" width=20% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png" width=20% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png" width=20% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png)
 
 </div>
 
-## ⭐ Features
+<h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/feature.svg"
+      height="30"
+      width="30">
+</sub>
+Features
+</h2>
+
 
 | Feature           |     |
 | ----------------- | --- |
@@ -63,7 +94,14 @@ Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped),
 | Comments          | ✅ |
 | Captions          | ✅ |
 
-## 😇 Contributing
+<h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/community.svg"
+      height="30"
+      width="30">
+</sub>
+Contributing
+</h2>
 
 Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets!
 
@@ -72,22 +110,23 @@ If creating a pull request, please make sure to format your code (preferred ktli
 > **Note** <br>
 > Any issue avoiding the issue template will be ignored and forced to be closed.
 
-## 📝 Translations
+<h2 align="left">
+📝 Translations
+</h2>
 
 <a href="https://hosted.weblate.org/projects/libretube/#languages">
 <img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
 </a>
 
-## 📜️ Credits
+<h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/ltvnp.svg"
+      height="30"
+      width="30">
+</sub>
+Differences to NewPipe
+</h2>
 
-- Readme Design and Banners by [XelXen](https://github.com/XelXen)
-
-##### Icons
-
-- [Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)
-- [Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)
-
-## 🌗 Differences to NewPipe
 
 With NewPipe, the extraction is done locally on your phone, and all the requests sent towards YouTube/Google are done directly from the network you're connected to, which doesn't use a middleman server in between. Therefore, Google can still access information such as the user's IP address. Aside from that, subscriptions can only be stored locally.
 
@@ -99,7 +138,14 @@ If the NewPipeExtractor breaks, it only requires an update of Piped and not Libr
 While LibreTube only supports YouTube, NewPipe also allows the use of other platforms like SoundCloud, PeerTube, Bandcamp and media.ccc.de.<br>
 Both are great clients for watching YouTube videos. It depends on the individual's use case which one fits their needs better.
 
-## 🔒 Privacy Policy and Disclaimer
+<h2 align="left">
+<sub>
+<img  src="fastlane/metadata/android/en-US/images/readme/privacy.svg"
+      height="30"
+      width="30">
+</sub>
+Privacy Policy and Disclaimer
+</h2>
 
 The LibreTube project aims to provide a private, anonymous experience for using web-based media services. Therefore, the app does not collect any data without your consent.
 
