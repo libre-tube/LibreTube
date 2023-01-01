@@ -17,7 +17,7 @@
 
 <h2 align="left">
 <sub>
-<img  src="\fastlane\metadata\android\en-US\images\readme\about.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/about.svg"
       height="30"
       width="30">
 </sub>
@@ -41,7 +41,7 @@ Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped),
 
 <h2 align="left">
 <sub>
-<img  src="\fastlane\metadata\android\en-US\images\readme\phone.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/phone.svg"
       height="30"
       width="30">
 </sub>
@@ -64,7 +64,7 @@ Screenshots
 
 <h2 align="left">
 <sub>
-<img  src="\fastlane\metadata\android\en-US\images\readme\feature.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/feature.svg"
       height="30"
       width="30">
 </sub>
@@ -87,7 +87,7 @@ Features
 
 <h2 align="left">
 <sub>
-<img  src="\fastlane\metadata\android\en-US\images\readme\community.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/community.svg"
       height="30"
       width="30">
 </sub>
@@ -148,7 +148,7 @@ Both are great clients for watching YouTube videos. It depends on the individual
 
 <h2 align="left">
 <sub>
-<img  src="\fastlane\metadata\android\en-US\images\readme\privacy.svg"
+<img  src="fastlane/metadata/android/en-US/images/readme/privacy.svg"
       height="30"
       width="30">
 </sub>
