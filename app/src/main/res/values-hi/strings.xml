@@ -428,4 +428,5 @@
     <string name="hide_watched_from_feed_summary">सदस्यता टैब में 90% से अधिक देखे जा रहे वीडियो न दिखाएं।</string>
     <string name="playlistUrl">प्लेलिस्ट URL</string>
     <string name="pause_on_quit">छोड़ने पर रुकें</string>
+    <string name="shuffle">शफल</string>
 </resources>
