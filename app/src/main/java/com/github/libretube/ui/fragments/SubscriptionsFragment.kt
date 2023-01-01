@@ -26,8 +26,16 @@ class SubscriptionsFragment : BaseFragment() {
     private val viewModel: SubscriptionsViewModel by activityViewModels()
 
     private var subscriptionAdapter: VideosAdapter? = null
-    private var selectedSortOrder = 0
-    private var selectedFilter = 0
+    private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
+        set(value) {
+            PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
+            field = value
+        }
+    private var selectedFilter = PreferenceHelper.getInt(PreferenceKeys.SELECTED_FEED_FILTER, 0)
+        set(value) {
+            PreferenceHelper.putInt(PreferenceKeys.SELECTED_FEED_FILTER, value)
+            field = value
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +54,10 @@ class SubscriptionsFragment : BaseFragment() {
             false
         )
 
+        // update the text according to the current order and filter
+        binding.sortTV.text = resources.getStringArray(R.array.sortOptions)[selectedSortOrder]
+        binding.filterTV.text = resources.getStringArray(R.array.filterOptions)[selectedFilter]
+
         binding.subRefresh.isEnabled = true
 
         binding.subProgress.visibility = View.VISIBLE
@@ -59,10 +71,9 @@ class SubscriptionsFragment : BaseFragment() {
 
         // listen for error responses
         viewModel.errorResponse.observe(viewLifecycleOwner) {
-            if (it) {
-                Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
-                viewModel.errorResponse.value = false
-            }
+            if (!it) return@observe
+            Toast.makeText(context, R.string.server_error, Toast.LENGTH_SHORT).show()
+            viewModel.errorResponse.value = false
         }
 
         viewModel.videoFeed.observe(viewLifecycleOwner) {

@@ -111,6 +111,8 @@ object PreferenceKeys {
     const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
     const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
+    const val SELECTED_FEED_FILTER = "selected_feed_filer"
+    const val FEED_SORT_ORDER = "feed_sort_oder"
 
     /**
      * Advanced
