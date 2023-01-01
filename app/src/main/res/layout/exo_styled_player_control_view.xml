@@ -67,6 +67,15 @@
                 android:layout_gravity="center"
                 android:layoutDirection="ltr">
 
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/autoPlay"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="gone"
+                    app:trackTint="#88ffffff"
+                    app:thumbTint="@android:color/white"/>
+
                 <ImageButton
                     android:id="@+id/sb_toggle"
                     style="@style/PlayerControlTop"
