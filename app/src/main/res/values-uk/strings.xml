@@ -287,7 +287,7 @@
     <string name="error_occurred">Помилка</string>
     <string name="break_reminder_time">Хвилин до нагадування</string>
     <string name="change_region">Здається, тренди недоступні для поточного регіону. Виберіть інший у налаштуваннях.</string>
-    <string name="legacy_subscriptions">Застарілий перегляд підписок</string>
+    <string name="legacy_subscriptions">Застарілий вигляд підписок</string>
     <string name="device_info">Відомості про пристрій</string>
     <string name="seekbar_preview">Попередній перегляд відео</string>
     <string name="best_quality">Найвища</string>
@@ -301,7 +301,7 @@
     <string name="translate">Переклад</string>
     <string name="share_with_time">Поділитися з часовим кодом</string>
     <string name="no_search_result">Результатів немає.</string>
-    <string name="export_subscriptions">Експорт Підписок</string>
+    <string name="export_subscriptions">Експорт підписок</string>
     <string name="push_channel_description">Показує сповіщення, коли доступні нові трансляції.</string>
     <string name="unlimited">Необмежено</string>
     <string name="add_to_queue">Додати в чергу</string>
@@ -333,7 +333,7 @@
     <string name="system_caption_style">Системний стиль субтитрів</string>
     <string name="captions">Субтитри</string>
     <string name="none">Немає</string>
-    <string name="update_now">Встановити нову версію LibreTube зараз\?</string>
+    <string name="update_now">Установити нову версію LibreTube зараз\?</string>
     <string name="general">Загальні</string>
     <string name="instance_frontend_url">URL-адреса сервера</string>
     <string name="audio_video_summary">Якість і формат</string>
