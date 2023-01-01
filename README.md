@@ -88,8 +88,8 @@ Features
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/community.svg"
-      height="30"
-      width="30">
+      height="35"
+      width="35">
 </sub>
 Contributing
 </h2>
@@ -121,10 +121,13 @@ If creating a pull request, please make sure to format your code (preferred ktli
 
 </details>
 
-##### Icons
+<details>
+  <summary>Icons</summary>
 
-- [Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)
-- [Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)
+<sub>[Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)</sub> <br>
+<sub>[Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)</sub>
+
+</details>
 
 <h2 align="left">
 <sub>
