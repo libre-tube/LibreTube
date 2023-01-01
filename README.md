@@ -18,8 +18,8 @@
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/about.svg"
-      height="50"
-      width="50">
+      height="30"
+      width="30">
 </sub>
 About
 </h2>
@@ -42,8 +42,8 @@ Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped),
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/phone.svg"
-      height="50"
-      width="50">
+      height="30"
+      width="30">
 </sub>
 Screenshots
 </h2>
@@ -65,8 +65,8 @@ Screenshots
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/feature.svg"
-      height="50"
-      width="50">
+      height="30"
+      width="30">
 </sub>
 Features
 </h2>
@@ -88,8 +88,8 @@ Features
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/community.svg"
-      height="50"
-      width="50">
+      height="30"
+      width="30">
 </sub>
 Contributing
 </h2>
@@ -132,8 +132,8 @@ If creating a pull request, please make sure to format your code (preferred ktli
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/ltvnp.svg"
-      height="50"
-      width="50">
+      height="30"
+      width="30">
 </sub>
 Differences to NewPipe
 </h2>
@@ -152,8 +152,8 @@ Both are great clients for watching YouTube videos. It depends on the individual
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/privacy.svg"
-      height="50"
-      width="50">
+      height="30"
+      width="30">
 </sub>
 Privacy Policy and Disclaimer
 </h2>
