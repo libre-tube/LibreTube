@@ -50,10 +50,10 @@ Screenshots
 
 <div style="width:100%; display:flex; justify-content:space-between;">
 
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png" width=30% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png" width=30% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png" width=20% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_1.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png" width=20% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_2.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png" width=20% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_3.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png" width=20% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/Screenshot_4.png)
 
 </div>
 
