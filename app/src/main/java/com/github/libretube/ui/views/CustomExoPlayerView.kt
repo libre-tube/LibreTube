@@ -127,6 +127,12 @@ internal class CustomExoPlayerView(
             isPlayerLocked = !isPlayerLocked
         }
 
+        binding.autoPlay.isChecked = autoplayEnabled
+
+        binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
+            autoplayEnabled = isChecked
+        }
+
         resizeMode = when (resizeModePref) {
             "fill" -> AspectRatioFrameLayout.RESIZE_MODE_FILL
             "zoom" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
@@ -213,19 +219,6 @@ internal class CustomExoPlayerView(
     private fun initializeAdvancedOptions(context: Context) {
         binding.toggleOptions.setOnClickListener {
             val items = mutableListOf(
-                BottomSheetItem(
-                    context.getString(R.string.player_autoplay),
-                    R.drawable.ic_play,
-                    {
-                        if (autoplayEnabled) {
-                            context.getString(R.string.enabled)
-                        } else {
-                            context.getString(R.string.disabled)
-                        }
-                    }
-                ) {
-                    onAutoplayClicked()
-                },
                 BottomSheetItem(
                     context.getString(R.string.repeat_mode),
                     R.drawable.ic_repeat,
@@ -444,23 +437,6 @@ internal class CustomExoPlayerView(
         audioHelper.setVolumeWithScale(bar.progress, bar.max)
 
         gestureViewBinding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
-    }
-
-    override fun onAutoplayClicked() {
-        // autoplay options dialog
-        BaseBottomSheet()
-            .setSimpleItems(
-                listOf(
-                    context.getString(R.string.enabled),
-                    context.getString(R.string.disabled)
-                )
-            ) { index ->
-                when (index) {
-                    0 -> autoplayEnabled = true
-                    1 -> autoplayEnabled = false
-                }
-            }
-            .show(supportFragmentManager)
     }
 
     override fun onPlaybackSpeedClicked() {
