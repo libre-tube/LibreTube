@@ -287,7 +287,7 @@
     <string name="error_occurred">Помилка</string>
     <string name="break_reminder_time">Хвилин до нагадування</string>
     <string name="change_region">Здається, тренди недоступні для поточного регіону. Виберіть інший у налаштуваннях.</string>
-    <string name="legacy_subscriptions">Застаріле подання підписок</string>
+    <string name="legacy_subscriptions">Застарілий перегляд підписок</string>
     <string name="device_info">Відомості про пристрій</string>
     <string name="seekbar_preview">Попередній перегляд відео</string>
     <string name="best_quality">Найвища</string>
