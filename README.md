@@ -128,7 +128,7 @@ If creating a pull request, please make sure to format your code (preferred ktli
 
 <h2 align="left">
 <sub>
-<img  src="\fastlane\metadata\android\en-US\images\readme\ltvnp.svg"
+<img  src="/fastlane/metadata/android/en-US/images/readme/ltvnp.svg"
       height="30"
       width="30">
 </sub>
