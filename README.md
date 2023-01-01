@@ -19,6 +19,7 @@
   <summary>📜️ Credits</summary>
 
 <sub>Readme Design and Banners by [XelXen](https://github.com/XelXen)</sub> <br>
+<sub>Readme Screenshots by [ARBoyGo](https://github.com/ARBoyGo)</sub> <br>
 <sub>Readme Emoji is from [openmoji](https://openmoji.org)</sub>
 
   <summary>Icons</summary>
