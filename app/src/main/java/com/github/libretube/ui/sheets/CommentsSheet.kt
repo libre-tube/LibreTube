@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
+import com.github.libretube.extensions.toPixel
 import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.models.CommentsViewModel
 
@@ -24,13 +26,21 @@ class CommentsSheet : ExpandedBottomSheet() {
         savedInstanceState: Bundle?
     ): View {
         binding = CommentsSheetBinding.inflate(layoutInflater)
-        // set a fixed maximum height
-        binding.root.maxHeight = viewModel.maxHeight
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.dragHandle.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                binding.dragHandle.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                // limit the recyclerview height to not cover the video
+                binding.commentsRV.layoutParams = binding.commentsRV.layoutParams.apply {
+                    height = viewModel.maxHeight - (binding.dragHandle.height + (20).toPixel().toInt())
+                }
+            }
+        })
 
         binding.commentsRV.layoutManager = LinearLayoutManager(requireContext())
         binding.commentsRV.setItemViewCacheSize(20)
