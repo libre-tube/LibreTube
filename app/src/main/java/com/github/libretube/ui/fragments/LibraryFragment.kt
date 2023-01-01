@@ -26,7 +26,6 @@ import com.github.libretube.util.PreferenceHelper
 
 class LibraryFragment : BaseFragment() {
 
-    lateinit var token: String
     private lateinit var binding: FragmentLibraryBinding
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
@@ -48,7 +47,6 @@ class LibraryFragment : BaseFragment() {
         }
 
         binding.playlistRecView.layoutManager = LinearLayoutManager(requireContext())
-        token = PreferenceHelper.getToken()
 
         // hide watch history button of history disabled
         val watchHistoryEnabled =
