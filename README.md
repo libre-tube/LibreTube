@@ -15,6 +15,19 @@
 
 </div>
 
+<details>
+  <summary>📜️ Credits</summary>
+
+<sub>Readme Design and Banners by [XelXen](https://github.com/XelXen)</sub> <br>
+<sub>Readme Emoji is from [openmoji](https://openmoji.org)</sub>
+
+  <summary>Icons</summary>
+
+<sub>[Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)</sub> <br>
+<sub>[Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)</sub>
+
+</details>
+
 <h2 align="left">
 <sub>
 <img  src="fastlane/metadata/android/en-US/images/readme/about.svg"
@@ -103,26 +116,6 @@ If creating a pull request, please make sure to format your code (preferred ktli
 <a href="https://hosted.weblate.org/projects/libretube/#languages">
 <img src="https://hosted.weblate.org/widgets/libretube/-/287x66-grey.png" alt="Translation status" />
 </a>
-
-## 
-
-
-
-<details>
-  <summary>📜️ Credits</summary>
-
-<sub>Readme Design and Banners by [XelXen](https://github.com/XelXen)</sub> <br>
-<sub>Readme Emoji is from [openmoji](https://openmoji.org)</sub>
-
-</details>
-
-<details>
-  <summary>Icons</summary>
-
-<sub>[Default App Icon](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png) by [XelXen](https://github.com/XelXen)</sub> <br>
-<sub>[Boosted Bird](https://github.com/libre-tube/LibreTube/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_bird_round.png) by [Margot Albert-Heuzey](https://margotdesign.ovh)</sub>
-
-</details>
 
 <h2 align="left">
 <sub>
