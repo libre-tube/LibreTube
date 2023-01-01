@@ -50,15 +50,10 @@ Screenshots
 
 <div style="width:100%; display:flex; justify-content:space-between;">
 
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_1.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png" width=30% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_2.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png" width=30% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_3.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png" width=30% alt="Search">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_4.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png" width=30% alt="Channel filters">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_5.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png" width=30% alt="Player">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_6.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png" width=30% alt="Playlist videos">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_7.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png" width=30% alt="Settings">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_8.png)
-[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png" width=30% alt="About">](fastlane/metadata/android/en-US/images/phoneScreenshots/shot_9.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_1.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.png" width=30% alt="Home">](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_2.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.png" width=30% alt="Subscriptions">](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_3.png)
+[<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_4.png" width=30% alt="Library">](fastlane/metadata/android/en-US/images/phoneScreenshots/screenshot_4.png)
 
 </div>
 
