@@ -42,5 +42,5 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long): Boolean {
             }
         })
 
-    return (progress ?: 0f) / duration.toFloat() > 0.9
+    return progress / duration.toFloat() > 0.9
 }
