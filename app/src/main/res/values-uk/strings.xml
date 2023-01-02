@@ -55,7 +55,7 @@
     <string name="defres">Роздільність відео</string>
     <string name="grid">Стовпці сітки</string>
     <string name="deletePlaylist">Видалити добірку</string>
-    <string name="areYouSure">Видалити добірку\?</string>
+    <string name="areYouSure">Видалити цю добірку\?</string>
     <string name="createPlaylist">Створити добірку</string>
     <string name="playlistCreated">Добірку створено.</string>
     <string name="playlistName">Назва добірки</string>
@@ -94,9 +94,9 @@
     <string name="defaultTab">Типова вкладка</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Використовує АРІ з https://sponsor.ajay.app/</string>
-    <string name="segment_skipped">Пропущений відтинок</string>
+    <string name="segment_skipped">Пропущений сегмент</string>
     <string name="sponsorblock_state">Увімкнено</string>
-    <string name="category_segments">Відтинки</string>
+    <string name="category_segments">Сегменти</string>
     <string name="category_sponsor">Спонсор</string>
     <string name="category_sponsor_description">Платні промоції, платні реферали та пряма реклама. Не для самореклами або чесних відгуків про творців, вебсайти та продукти які їм подобаються.</string>
     <string name="category_selfpromo">Неоплачена/Самореклама</string>
@@ -344,7 +344,7 @@
     <string name="trending_layout">Альтернативний вигляд трендів</string>
     <string name="renamePlaylist">Перейменувати добірку</string>
     <string name="mobile_data">Мобільні дані</string>
-    <string name="views_placeholder">погляди</string>
+    <string name="views_placeholder">перегляди</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
     <string name="recentlyUpdated">Нещодавно оновлені</string>
