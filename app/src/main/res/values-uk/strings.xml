@@ -94,7 +94,7 @@
     <string name="defaultTab">Типова вкладка</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Використовує АРІ з https://sponsor.ajay.app/</string>
-    <string name="segment_skipped">Пропущено сегмент</string>
+    <string name="segment_skipped">Пропущений сегмент</string>
     <string name="sponsorblock_state">Увімкнено</string>
     <string name="category_segments">Сегменти</string>
     <string name="category_sponsor">Спонсор</string>
