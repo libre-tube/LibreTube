@@ -55,7 +55,7 @@
     <string name="defres">Роздільність відео</string>
     <string name="grid">Стовпці сітки</string>
     <string name="deletePlaylist">Видалити добірку</string>
-    <string name="areYouSure">Видалити добірку\?</string>
+    <string name="areYouSure">Видалити цю добірку\?</string>
     <string name="createPlaylist">Створити добірку</string>
     <string name="playlistCreated">Добірку створено.</string>
     <string name="playlistName">Назва добірки</string>
@@ -94,7 +94,7 @@
     <string name="defaultTab">Типова вкладка</string>
     <string name="sponsorblock">SponsorBlock</string>
     <string name="sponsorblock_summary">Використовує АРІ з https://sponsor.ajay.app/</string>
-    <string name="segment_skipped">Пропущений відтинок</string>
+    <string name="segment_skipped">Пропущено сегмент</string>
     <string name="sponsorblock_state">Увімкнено</string>
     <string name="category_segments">Відтинки</string>
     <string name="category_sponsor">Спонсор</string>
