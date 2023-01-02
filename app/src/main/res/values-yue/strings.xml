@@ -30,7 +30,7 @@
     <string name="error">有啲嘢出左問題.</string>
     <string name="notgmail">呢個係 for Piped.</string>
     <string name="defres">影片解析度</string>
-    <string name="createPlaylist">"起個  Playlist"</string>
+    <string name="createPlaylist">起個 Playlist</string>
     <string name="playlistCreated">條 Playlist 已經成功起咗.</string>
     <string name="playlistName">Playlist 名</string>
     <string name="success">搞掂.</string>
@@ -67,8 +67,20 @@
     <string name="empty">你已經打左帳號或者密碼.</string>
     <string name="deletePlaylist">刪條 Playlist</string>
     <string name="areYouSure">你確定要刪左條 Playlist\?</string>
-    <string name="emptyPlaylistName">Playlist 嘅名唔可以空白喎.</string>
+    <string name="emptyPlaylistName">Playlist 嘅名唔可以空白喎</string>
     <string name="addToPlaylist">加去 Playlist</string>
     <string name="all">全部</string>
     <string name="playlists">Playlists</string>
+    <string name="category_selfpromo_description">呢樣類似 “Sponsor” 除咗無俾或者自我推銷。包括呢件 Product，Donate 或者關於佢地同邊個合作嘅資料</string>
+    <string name="oledTheme">純黑色</string>
+    <string name="okay">搞掂</string>
+    <string name="history">記錄</string>
+    <string name="search_history">搵記錄</string>
+    <string name="clear_history">清哂啲記錄</string>
+    <string name="music_videos">YT Music 片</string>
+    <string name="defaultTab">預設 Tab</string>
+    <string name="sponsorblock_summary">用 https://sponsor.ajay.app 嘅 API</string>
+    <string name="music_songs">YT Music 歌</string>
+    <string name="sponsorblock_state">喺</string>
+    <string name="category_sponsor">Sponsor</string>
 </resources>
