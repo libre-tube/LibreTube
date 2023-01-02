@@ -75,7 +75,7 @@
     <string name="location">Місце знаходження</string>
     <string name="instance">Сервер</string>
     <string name="customization">Коригування</string>
-    <string name="website">Вебсторінка</string>
+    <string name="website">Вебсайт</string>
     <string name="videoCount">%1$s відео</string>
     <string name="noInternet">Спочатку під\'єднайтеся до інтернету.</string>
     <string name="retry">Повторити</string>
@@ -147,7 +147,7 @@
     <string name="legacyIcon">Загублена спадщина</string>
     <string name="no_update_available">Ви користуєтесь найновішою версією.</string>
     <string name="gradientIcon">Градієнт Glib</string>
-    <string name="flameIcon">Літаючий вогонь</string>
+    <string name="flameIcon">Летючий вогонь</string>
     <string name="birdIcon">Посилений птах</string>
     <string name="category_filler">Катсцени/Жарти</string>
     <string name="category_filler_description">Для катсцен доданих лише для заповнення або гумор який не потребується для розуміння основного змісту відео.</string>
@@ -344,7 +344,7 @@
     <string name="trending_layout">Альтернативний вигляд трендів</string>
     <string name="renamePlaylist">Перейменувати добірку</string>
     <string name="mobile_data">Мобільні дані</string>
-    <string name="views_placeholder">перегляди</string>
+    <string name="views_placeholder">переглядів</string>
     <string name="filename">Назва файлу</string>
     <string name="invalid_filename">Неприпустима назва файлу!</string>
     <string name="recentlyUpdated">Нещодавно оновлені</string>
@@ -423,7 +423,7 @@
     <string name="play_latest_videos">Грати останні відео</string>
     <string name="nothing_selected">Нічого не вибрано!</string>
     <string name="color_violet">Універсальний фіолетовий</string>
-    <string name="failed_fetching_instances">Не вдалося отримати доступні екземпляри.</string>
+    <string name="failed_fetching_instances">Неможливо отримати доступні екземпляри.</string>
     <string name="hide_watched_from_feed">Сховати зі стрічки переглянуті відео</string>
     <string name="hide_watched_from_feed_summary">Не показувати у вкладці підписок відео, переглянуті більше ніж на 90%.</string>
     <string name="playlistUrl">URL добірки</string>
