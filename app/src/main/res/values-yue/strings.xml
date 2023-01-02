@@ -69,4 +69,6 @@
     <string name="areYouSure">你確定要刪左條 Playlist\?</string>
     <string name="emptyPlaylistName">Playlist 嘅名唔可以空白喎.</string>
     <string name="addToPlaylist">加去 Playlist</string>
+    <string name="all">全部</string>
+    <string name="playlists">Playlists</string>
 </resources>
