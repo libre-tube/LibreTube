@@ -155,7 +155,7 @@
     <string name="category_preview">Огляд/Підсумок</string>
     <string name="fireIcon">Красивий вогонь</string>
     <string name="torchIcon">Популярний факел</string>
-    <string name="shapedIcon">Безглуздої форми</string>
+    <string name="shapedIcon">Безглузда форма</string>
     <string name="category_music_offtopic_description">Тільки для використання в музичних кліпах. Він повинен охоплювати частини відео, а не частину офіційних міксів. Зрештою, відео має максимально нагадувати Spotify або будь-яку іншу змішану версію, або зменшувати розмови чи інші відволікання.</string>
     <string name="category_preview_description">Для відтинків, які докладно описують майбутній контент у цьому або майбутніх відео в його серії, але не надають додаткових подробиць. Якщо він включає кліпи, які з\'являються тільки тут, це, швидше за все, неправильна категорія.</string>
     <string name="appearance">Вигляд</string>
