@@ -54,9 +54,4 @@
         android:name="com.github.libretube.ui.fragments.DownloadsFragment"
         android:label="@string/downloads"
         tools:layout="@layout/fragment_downloads" />
-    <fragment
-        android:id="@+id/bookmarksFragment"
-        android:name="com.github.libretube.ui.fragments.BookmarksFragment"
-        android:label="@string/bookmarks"
-        tools:layout="@layout/fragment_bookmarks" />
 </navigation>

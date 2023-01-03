@@ -24,7 +24,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.PreferenceHelper
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +56,7 @@ class HomeFragment : BaseFragment() {
         }
 
         binding.bookmarksTV.setOnClickListener {
-            findNavController().navigate(R.id.bookmarksFragment)
+            findNavController().navigate(R.id.libraryFragment)
         }
 
         binding.refresh.setOnRefreshListener {
@@ -73,7 +72,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private suspend fun fetchHome() {
-        val token = PreferenceHelper.getToken()
         runOrError {
             val feed = SubscriptionHelper.getFeed().withMaxSize(20)
             if (feed.isEmpty()) return@runOrError
