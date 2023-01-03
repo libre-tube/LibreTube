@@ -488,6 +488,7 @@ internal class CustomExoPlayerView(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
 
+        // add a larger bottom margin to the time bar in landscape mode
         val offset = when (newConfig?.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> 20.toPixel()
             else -> 10.toPixel()
@@ -496,6 +497,22 @@ internal class CustomExoPlayerView(
         binding.progressBar.let {
             val params = it.layoutParams as MarginLayoutParams
             params.bottomMargin = offset.toInt()
+            it.layoutParams = params
+        }
+
+        // add a margin to the top and the bottom bar in landscape mode for notches
+        val newMargin = if (
+            newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
+        ) {
+            LANDSCAPE_MARGIN_HORIZONTAL
+        } else {
+            0
+        }
+
+        listOf(binding.exoTopBar, binding.exoBottomBar).forEach {
+            val params = it.layoutParams as MarginLayoutParams
+            params.marginStart = newMargin
+            params.marginEnd = newMargin
             it.layoutParams = params
         }
     }
@@ -576,5 +593,6 @@ internal class CustomExoPlayerView(
 
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
+        private val LANDSCAPE_MARGIN_HORIZONTAL = (30).toPixel().toInt()
     }
 }
