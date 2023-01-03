@@ -426,4 +426,7 @@
     <string name="failed_fetching_instances">Не удалось получить доступные инстансы.</string>
     <string name="hide_watched_from_feed">Скрыть просмотренные видео из ленты</string>
     <string name="hide_watched_from_feed_summary">Не показывайте видео, которые просматривают более 90%, на вкладке подписки.</string>
+    <string name="playlistUrl">URL плейлиста</string>
+    <string name="pause_on_quit">Пауза при выходе</string>
+    <string name="shuffle">Перемешать</string>
 </resources>
