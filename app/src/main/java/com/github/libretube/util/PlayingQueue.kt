@@ -79,7 +79,8 @@ object PlayingQueue {
 
     fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
 
-    fun getStreams() = queue
+    // only returns a copy of the queue, no write access
+    fun getStreams() = queue.toList()
 
     fun setStreams(streams: List<StreamItem>) {
         queue.clear()
