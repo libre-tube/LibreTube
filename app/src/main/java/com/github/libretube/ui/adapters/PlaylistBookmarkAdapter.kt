@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.PlaylistBookmarkRowBinding
-import com.github.libretube.databinding.PlaylistRowBinding
+import com.github.libretube.databinding.PlaylistsRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.PlaylistType
@@ -28,7 +28,7 @@ class PlaylistBookmarkAdapter(
                 PlaylistBookmarkRowBinding.inflate(layoutInflater, parent, false)
             )
             BookmarkMode.FRAGMENT -> PlaylistBookmarkViewHolder(
-                PlaylistRowBinding.inflate(layoutInflater, parent, false)
+                PlaylistsRowBinding.inflate(layoutInflater, parent, false)
             )
         }
     }
@@ -64,7 +64,10 @@ class PlaylistBookmarkAdapter(
             }
         }
 
-        holder.playlistBinding?.apply {
+        holder.playlistsBinding?.apply {
+            // hide the count of videos inside the playlist as it's not stored in the database
+            videoCount.visibility = View.GONE
+
             var isBookmarked = true
 
             ImageHelper.loadImage(bookmark.thumbnailUrl, playlistThumbnail)
