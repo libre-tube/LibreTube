@@ -423,6 +423,9 @@
     <string name="playlistUrl">Playlist URL</string>
     <string name="pause_on_quit">Pause on quit</string>
     <string name="shuffle">Shuffle</string>
+    <string name="add_to_bookmarks">Add to bookmarks</string>
+    <string name="remove_bookmark">Remove bookmark</string>
+
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
