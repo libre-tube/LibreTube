@@ -26,7 +26,7 @@
             app:title="@string/skip_buttons" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:icon="@drawable/ic_skip"
             android:summary="@string/double_tap_seek_summary"
             app:key="double_tap_seek"
