@@ -1,9 +1,10 @@
 package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.WatchHistoryRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.query
@@ -32,7 +33,7 @@ class WatchHistoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = WatchHistoryRowBinding.inflate(layoutInflater, parent, false)
+        val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return WatchHistoryViewHolder(binding)
     }
 
@@ -50,7 +51,8 @@ class WatchHistoryAdapter(
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }
 
-            deleteBTN.setOnClickListener {
+            deleteVideo.visibility = View.VISIBLE
+            deleteVideo.setOnClickListener {
                 removeFromWatchHistory(position)
             }
 
