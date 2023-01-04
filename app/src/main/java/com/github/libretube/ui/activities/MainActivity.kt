@@ -210,8 +210,10 @@ class MainActivity : BaseActivity() {
                 lastSeenVideoId == it.url?.toID()
             } ?: return@observe
             if (lastSeenVideoIndex < 1) return@observe
-            binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).number =
-                lastSeenVideoIndex
+            binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
+                number = lastSeenVideoIndex
+                backgroundColor = ThemeHelper.getThemeColor(this@MainActivity, R.attr.colorPrimary)
+            }
         }
     }
 
