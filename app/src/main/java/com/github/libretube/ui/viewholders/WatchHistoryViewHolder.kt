@@ -1,8 +1,8 @@
 package com.github.libretube.ui.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.WatchHistoryRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 
 class WatchHistoryViewHolder(
-    val binding: WatchHistoryRowBinding
+    val binding: VideoRowBinding
 ) : RecyclerView.ViewHolder(binding.root)

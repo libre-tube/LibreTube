@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.obj.StreamItem
-import com.github.libretube.databinding.PlaylistRowBinding
+import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
@@ -43,17 +43,18 @@ class PlaylistAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = PlaylistRowBinding.inflate(layoutInflater, parent, false)
+        val binding = VideoRowBinding.inflate(layoutInflater, parent, false)
         return PlaylistViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val streamItem = videoFeed[position]
         holder.binding.apply {
-            playlistTitle.text = streamItem.title
-            playlistDescription.text = streamItem.uploaderName
+            videoTitle.text = streamItem.title
+            videoInfo.text = streamItem.uploaderName
+            channelImage.visibility = View.GONE
             thumbnailDuration.setFormattedDuration(streamItem.duration!!)
-            ImageHelper.loadImage(streamItem.thumbnail, playlistThumbnail)
+            ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
             }
@@ -68,9 +69,13 @@ class PlaylistAdapter(
                 true
             }
 
+            channelContainer.setOnClickListener {
+                streamItem.url?.toID()?.let { NavigationHelper.navigateChannel(root.context, it) }
+            }
+
             if (playlistType != PlaylistType.PUBLIC) {
-                deletePlaylist.visibility = View.VISIBLE
-                deletePlaylist.setOnClickListener {
+                deleteVideo.visibility = View.VISIBLE
+                deleteVideo.setOnClickListener {
                     removeFromPlaylist(root.context, position)
                 }
             }
