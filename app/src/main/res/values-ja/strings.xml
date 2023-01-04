@@ -423,5 +423,10 @@
     <string name="bookmark">ブックマーク</string>
     <string name="clear_bookmarks">ブックマークを消去</string>
     <string name="bookmarks_empty">まだブックマークがありません！</string>
-    <string name="failed_fetching_instances">利用可能なインスタンスの取得に失敗しました。</string>
+    <string name="failed_fetching_instances">利用可能なインスタンスを取得できませんでした。</string>
+    <string name="hide_watched_from_feed">再生済みの動画をフィードから非表示</string>
+    <string name="playlistUrl">プレイリストのURL</string>
+    <string name="hide_watched_from_feed_summary">90%以上まで再生した動画を、登録チャンネルタブから非表示にします。</string>
+    <string name="pause_on_quit">終了時に一時停止</string>
+    <string name="shuffle">シャッフル再生</string>
 </resources>
