@@ -423,7 +423,7 @@
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
     <string name="nothing_selected">لا شيء محدد!</string>
     <string name="color_violet">البنفسج</string>
-    <string name="failed_fetching_instances">فشل في جلب المثيلات المتاحة.</string>
+    <string name="failed_fetching_instances">تعذر جلب المثيلات المتاحة.</string>
     <string name="hide_watched_from_feed_summary">لا تعرض الفيديوهات التي تتم مشاهدتها بنسبة تزيد عن 90٪ في علامة التبويب \"الاشتراكات\".</string>
     <string name="hide_watched_from_feed">إخفاء مقاطع الفيديو التي تمت مشاهدتها من الخلاصة</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
