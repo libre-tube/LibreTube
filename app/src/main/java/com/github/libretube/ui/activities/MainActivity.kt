@@ -8,20 +8,26 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import android.widget.ScrollView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.children
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -112,6 +118,13 @@ class MainActivity : BaseActivity() {
         binding.bottomNav.setOnItemReselectedListener {
             if (it.itemId != navController.currentDestination?.id) {
                 navigateToBottomSelectedItem(it)
+            } else {
+                // get the host fragment containing the current fragment
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment?
+                // get the current fragment
+                val fragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
+                tryScrollToTop(fragment?.requireView() as? ViewGroup)
             }
         }
 
@@ -171,6 +184,31 @@ class MainActivity : BaseActivity() {
         })
 
         loadIntentData()
+    }
+
+    /**
+     * Try to find a scroll or recycler view and scroll it back to the top
+     */
+    private fun tryScrollToTop(viewGroup: ViewGroup?) {
+        (viewGroup as? ScrollView)?.scrollTo(0, 0)
+
+        if (viewGroup == null || viewGroup.childCount == 0) return
+
+        viewGroup.children.forEach {
+            (it as? ScrollView)?.let {
+                it.smoothScrollTo(0, 0)
+                return
+            }
+            (it as? NestedScrollView)?.let {
+                it.smoothScrollTo(0, 0)
+                return
+            }
+            (it as? RecyclerView)?.let {
+                it.smoothScrollToPosition(0)
+                return
+            }
+            tryScrollToTop(it as? ViewGroup)
+        }
     }
 
     /**
@@ -304,8 +342,8 @@ class MainActivity : BaseActivity() {
                 }
                 // Handover back press to `BackPressedDispatcher`
                 else if (binding.bottomNav.menu.children.none {
-                        it.itemId == navController.currentDestination?.id
-                    }
+                    it.itemId == navController.currentDestination?.id
+                }
                 ) {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
