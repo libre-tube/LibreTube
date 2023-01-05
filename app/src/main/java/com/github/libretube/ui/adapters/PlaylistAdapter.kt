@@ -31,14 +31,26 @@ class PlaylistAdapter(
     private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
+    var visibleCount = minOf(20, videoFeed.size)
+
     override fun getItemCount(): Int {
-        return videoFeed.size
+        return when (playlistType) {
+            PlaylistType.PUBLIC -> videoFeed.size
+            else -> visibleCount
+        }
     }
 
     fun updateItems(newItems: List<StreamItem>) {
         val oldSize = videoFeed.size
         videoFeed.addAll(newItems)
         notifyItemRangeInserted(oldSize, videoFeed.size)
+    }
+
+    fun showMoreItems() {
+        val oldSize = visibleCount
+        visibleCount += minOf(10, videoFeed.size - oldSize)
+        if (visibleCount == oldSize) return
+        notifyItemRangeInserted(oldSize, visibleCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {

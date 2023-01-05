@@ -41,15 +41,19 @@ import retrofit2.HttpException
 class PlaylistFragment : BaseFragment() {
     private lateinit var binding: FragmentPlaylistBinding
 
+    // general playlist information
     private var playlistId: String? = null
     private var playlistName: String? = null
     private var playlistType: PlaylistType = PlaylistType.PUBLIC
-    private var nextPage: String? = null
+
+    // runtime variables
+    private val playlistFeed = mutableListOf<StreamItem>()
     private var playlistAdapter: PlaylistAdapter? = null
+    private var nextPage: String? = null
     private var isLoading = true
     private var isBookmarked = false
-    private val playlistFeed = mutableListOf<StreamItem>()
 
+    // view models
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +108,6 @@ class PlaylistFragment : BaseFragment() {
             val response = try {
                 PlaylistsHelper.getPlaylist(playlistId!!)
             } catch (e: IOException) {
-                println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launchWhenCreated
             } catch (e: HttpException) {
@@ -217,17 +220,20 @@ class PlaylistFragment : BaseFragment() {
                         if (binding.playlistScrollview.getChildAt(0).bottom
                             == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
                         ) {
-                            // scroll view is at bottom
-                            if (nextPage != null && !isLoading) {
+                            if (isLoading) return@addOnScrollChangedListener
+
+                            // append more playlists to the recycler view
+                            if (playlistType != PlaylistType.PUBLIC) {
                                 isLoading = true
+                                playlistAdapter?.showMoreItems()
+                                isLoading = false
+                            } else {
                                 fetchNextPage()
                             }
                         }
                     }
 
-                /**
-                 * listener for swiping to the left or right
-                 */
+                // listener for swiping to the left or right
                 if (playlistType != PlaylistType.PUBLIC) {
                     val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                         0,
@@ -271,6 +277,9 @@ class PlaylistFragment : BaseFragment() {
     }
 
     private fun fetchNextPage() {
+        if (nextPage == null || isLoading) return
+        isLoading = true
+
         lifecycleScope.launchWhenCreated {
             val response = try {
                 // load locally stored playlists with the auth api
@@ -289,6 +298,7 @@ class PlaylistFragment : BaseFragment() {
                 Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
+
             nextPage = response.nextpage
             playlistAdapter?.updateItems(response.relatedStreams!!)
             isLoading = false
