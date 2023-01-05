@@ -117,7 +117,7 @@ object PreferenceKeys {
     /**
      * Advanced
      */
-    const val DATA_SAVER_MODE = "data_saver_mode"
+    const val DATA_SAVER_MODE = "data_saver_mode_key"
     const val MAX_IMAGE_CACHE = "image_cache_size"
     const val RESET_SETTINGS = "reset_settings"
     const val CLEAR_SEARCH_HISTORY = "clear_search_history"
