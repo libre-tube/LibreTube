@@ -102,6 +102,7 @@ class PlaylistAdapter(
 
     fun removeFromPlaylist(context: Context, position: Int) {
         videoFeed.removeAt(position)
+        visibleCount -= 1
         (context as Activity).runOnUiThread {
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
