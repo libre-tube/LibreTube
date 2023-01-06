@@ -15,7 +15,7 @@
     <string name="already_logged_in">Sessão já iniciada. Pode sair da sua conta.</string>
     <string name="instances">Escolher…</string>
     <string name="customInstance">Customizada</string>
-    <string name="login_register">Entrar/registrar</string>
+    <string name="login_register">Iniciar sessão/registrar</string>
     <string name="please_login">Inicie sessão ou se registre nas configurações primeiro.</string>
     <string name="subscribeIsEmpty">Inscreva-se nalguns canais primeiro.</string>
     <string name="cannotDownload">Não se pode baixar esta transmissão.</string>
@@ -73,7 +73,7 @@
     <string name="noInternet">Conecte-se à Internet primeiro.</string>
     <string name="retry">Tentar de novo</string>
     <string name="defaultTab">Aba padrão</string>
-    <string name="sponsorblock">Bloqueador de propaganda</string>
+    <string name="sponsorblock">Bloqueador de Patrocinadores</string>
     <string name="sponsorblock_summary">Usa a API https://sponsor.ajay.app</string>
     <string name="channels">Canais</string>
     <string name="choose_filter">Escolher filtro de pesquisa</string>
@@ -87,7 +87,7 @@
     <string name="music_videos">Vídeos do YT Music</string>
     <string name="music_albums">Álbuns do YT Music</string>
     <string name="music_playlists">Listas de reprodução do YT Music</string>
-    <string name="segment_skipped">Segmento ignorado</string>
+    <string name="segment_skipped">Segmento pulado</string>
     <string name="sponsorblock_state">Ligado</string>
     <string name="category_segments">Segmentos</string>
     <string name="category_sponsor">Patrocinador</string>
@@ -174,7 +174,7 @@
     <string name="update_available">A versão %1$s está disponível</string>
     <string name="contributing">Contribuindo</string>
     <string name="donate">Doar</string>
-    <string name="advanced_summary">Transferências, e redefinir</string>
+    <string name="advanced_summary">Transferências e redefinição</string>
     <string name="player_summary">Padrões e comportamento</string>
     <string name="hide_chapters">Ocultar capítulos</string>
     <string name="related_streams_summary">Exibir transmissões semelhantes ao que você assiste.</string>
@@ -429,4 +429,6 @@
     <string name="playlistUrl">URL da lista de reprodução</string>
     <string name="pause_on_quit">Pausar ao sair</string>
     <string name="shuffle">Aleatório</string>
+    <string name="add_to_bookmarks">Adicionar aos favoritos</string>
+    <string name="remove_bookmark">Remover favorito</string>
 </resources>

@@ -429,4 +429,6 @@
     <string name="playlistUrl">Lejátszási lista URL</string>
     <string name="pause_on_quit">Szüneteltet bezárásnál</string>
     <string name="shuffle">Keverés</string>
+    <string name="add_to_bookmarks">Hozzáadás a könyvjelzőkhöz</string>
+    <string name="remove_bookmark">Könyvjelző eltávolítása</string>
 </resources>

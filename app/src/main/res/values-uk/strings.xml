@@ -429,4 +429,6 @@
     <string name="playlistUrl">URL добірки</string>
     <string name="pause_on_quit">Пауза під час виходу</string>
     <string name="shuffle">Перетасувати</string>
+    <string name="add_to_bookmarks">Додати до закладок</string>
+    <string name="remove_bookmark">Вилучити закладку</string>
 </resources>

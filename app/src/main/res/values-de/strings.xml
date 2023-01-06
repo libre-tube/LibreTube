@@ -429,4 +429,6 @@
     <string name="playlistUrl">Playlist-URL</string>
     <string name="pause_on_quit">Pause beim Beenden</string>
     <string name="shuffle">Zufallswiedergabe</string>
+    <string name="add_to_bookmarks">Zu Lesezeichen hinzufügen</string>
+    <string name="remove_bookmark">Lesezeichen entfernen</string>
 </resources>

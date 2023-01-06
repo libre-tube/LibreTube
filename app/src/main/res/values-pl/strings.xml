@@ -429,4 +429,6 @@
     <string name="playlistUrl">Link do playlisty</string>
     <string name="pause_on_quit">Zatrzymaj przy wyjściu</string>
     <string name="shuffle">Szuflada</string>
+    <string name="add_to_bookmarks">Dodaj do zakładek</string>
+    <string name="remove_bookmark">Usuń zakładkę</string>
 </resources>

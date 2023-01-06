@@ -413,4 +413,14 @@
     <string name="export_playlists">Oynatma listelerini dışa aktar</string>
     <string name="app_backup">Uygulama Yedekle</string>
     <string name="backup_restore_summary">Abonelikleri, oynatma listelerini içe ve dışa aktar…</string>
+    <string name="nothing_selected">Hiçbir şey seçilmedi!</string>
+    <string name="privacy_alert">Gizlilik uyarısı</string>
+    <string name="username_email">Tavsiye edilmeyen e-posta adresiyle devam edilsin mi\?</string>
+    <string name="proceed">Devam et</string>
+    <string name="play_latest_videos">En yeni videoları oynat</string>
+    <string name="playlistUrl">Oynatma listesi URL\'si</string>
+    <string name="pause_on_quit">Çıkınca duraklat</string>
+    <string name="shuffle">Karıştır</string>
+    <string name="remove_bookmark">Yer imini kaldır</string>
+    <string name="add_to_bookmarks">Yer imlerine ekle</string>
 </resources>
