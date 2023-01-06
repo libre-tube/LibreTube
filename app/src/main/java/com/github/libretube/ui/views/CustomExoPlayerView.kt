@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -318,6 +320,14 @@ internal class CustomExoPlayerView(
         binding.closeImageButton.visibility = visibility
         binding.exoTitle.visibility = visibility
         binding.playPauseBTN.visibility = visibility
+
+        // hide the dimming background overlay if locked
+        binding.exoControlsBackground.setBackgroundColor(
+            if (isLocked) ContextCompat.getColor(
+                context,
+                com.google.android.exoplayer2.R.color.exo_black_opacity_60
+            ) else Color.TRANSPARENT
+        )
 
         // disable tap and swipe gesture if the player is locked
         playerGestureController.isEnabled = isLocked
