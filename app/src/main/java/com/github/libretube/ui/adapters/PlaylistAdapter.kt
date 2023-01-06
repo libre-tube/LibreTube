@@ -65,6 +65,7 @@ class PlaylistAdapter(
             videoTitle.text = streamItem.title
             videoInfo.text = streamItem.uploaderName
             channelImage.visibility = View.GONE
+
             thumbnailDuration.setFormattedDuration(streamItem.duration!!)
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             root.setOnClickListener {
@@ -81,8 +82,12 @@ class PlaylistAdapter(
                 true
             }
 
-            channelContainer.setOnClickListener {
-                streamItem.url?.toID()?.let { NavigationHelper.navigateChannel(root.context, it) }
+            if (!streamItem.uploaderUrl.isNullOrBlank()) {
+                channelContainer.setOnClickListener {
+                    streamItem.uploaderUrl?.toID()?.let {
+                        NavigationHelper.navigateChannel(root.context, it)
+                    }
+                }
             }
 
             if (playlistType != PlaylistType.PUBLIC) {
