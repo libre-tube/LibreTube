@@ -429,4 +429,6 @@
     <string name="playlistUrl">URL da lista de reprodução</string>
     <string name="pause_on_quit">Pausar ao sair</string>
     <string name="shuffle">Baralhar</string>
+    <string name="add_to_bookmarks">Adicionar aos marcadores</string>
+    <string name="remove_bookmark">Remover marcador</string>
 </resources>
