@@ -285,7 +285,7 @@
     <string name="local_subscriptions">ローカルの登録チャンネル</string>
     <string name="backup_customInstances">カスタムインスタンス</string>
     <string name="save_feed">バックグラウンドでフィードを読み込み</string>
-    <string name="play_next">次の動画を再生</string>
+    <string name="play_next">次に再生</string>
     <string name="select_at_least_one">一つ以上の項目を選択してください</string>
     <string name="playing_queue">再生キュー</string>
     <string name="new_videos_badge_summary">新しい動画の数をバッジに表示します。</string>
@@ -414,7 +414,7 @@
     <string name="hls_instead_of_dash_summary">DASHの代わりにHLSを使用します (低速、非推奨)</string>
     <string name="hls_instead_of_dash">HLSを使う</string>
     <string name="auto_quality">自動</string>
-    <string name="limit_to_runtime">実行時間制限</string>
+    <string name="limit_to_runtime">ランタイムの上限</string>
     <string name="trends">トレンド</string>
     <string name="featured">注目</string>
     <string name="trending">現在のトレンド</string>
@@ -429,4 +429,6 @@
     <string name="hide_watched_from_feed_summary">90%以上まで再生した動画を、登録チャンネルタブから非表示にします。</string>
     <string name="pause_on_quit">終了時に一時停止</string>
     <string name="shuffle">シャッフル再生</string>
+    <string name="add_to_bookmarks">ブックマークに追加</string>
+    <string name="remove_bookmark">ブックマークを削除</string>
 </resources>
