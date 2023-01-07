@@ -8,7 +8,7 @@
     <string name="unsubscribe">Abunəlikdən çıx</string>
     <string name="share">Paylaş</string>
     <string name="save">Saxla</string>
-    <string name="download">Endir</string>
+    <string name="download">Yüklə</string>
     <string name="username">İstifadəçi adı</string>
     <string name="password">Şifrə</string>
     <string name="login">Daxil ol</string>
@@ -120,9 +120,9 @@
     <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsinmi\?</string>
     <string name="appearance">Xarici Görünüş</string>
     <string name="app_behavior">Davranış</string>
-    <string name="downloads">Endirilənlər</string>
+    <string name="downloads">Yüklənənlər</string>
     <string name="video_format">Video formatı</string>
-    <string name="video_format_summary">Səs və video birlikdə endirilirsə, faylların dönüşdürülməsi.</string>
+    <string name="video_format_summary">Səs və video birlikdə endirildisə, faylların dönüşdürülməsi.</string>
     <string name="download_directory">Bura endir</string>
     <string name="download_directory_summary">Endirilmiş medianın saxlanıldığı yer.</string>
     <string name="contributing">Töhfə</string>
@@ -133,7 +133,7 @@
     <string name="advanced">Qabaqcıl</string>
     <string name="player">Oynadıcı</string>
     <string name="appearance_summary">Tətbiqi zövqünüzə uyğunlaşdırın.</string>
-    <string name="advanced_summary">Endirilənlər və sıfırla</string>
+    <string name="advanced_summary">Yüklənənlər və sıfırla</string>
     <string name="update_summary">Yeniləməni yoxla</string>
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
@@ -152,7 +152,7 @@
     <string name="legacyIcon">İtmiş miras</string>
     <string name="fireIcon">Dəbdəbəli yanğın</string>
     <string name="gradientIcon">Pərgar meyli</string>
-    <string name="shapedIcon">Axmaq formaya salınmış</string>
+    <string name="shapedIcon">Axmaq formalı</string>
     <string name="flameIcon">Uçan alov</string>
     <string name="birdIcon">Sürətləndirilmiş quş</string>
     <string name="torchIcon">Dəbli məşəl</string>
@@ -222,11 +222,11 @@
     <string name="twitter">Twitter</string>
     <string name="discord">Discord</string>
     <string name="open">Aç…</string>
-    <string name="turnInternetOn">Lütfən, İnternetə qoşulmaq üçün Wi-Fi və ya mobil məlumatı aç.</string>
+    <string name="turnInternetOn">Lütfən, İnternetə qoşulmaq üçün Wi-Fi və ya mobil məlumatı açın.</string>
     <string name="chapters">Bölmələr</string>
     <string name="change_playback_speed">Oynatma sürəti</string>
     <string name="require_restart_message">Yeni dəyişiklikləri işlətmək üçün tətbiqi yenidən başlat.</string>
-    <string name="require_restart">Tətbiqi yenidən başlatmaq tələb olunur</string>
+    <string name="require_restart">Tətbiqi yenidən başlatmaq tələb olundu</string>
     <string name="data_saver_mode_summary">Miniatürləri və digər şəkilləri ötür.</string>
     <string name="history_summary">Baxış və axtarış tarixçəsi</string>
     <string name="navLabelVisibility">Etiket görünməsi</string>
@@ -271,7 +271,7 @@
     <string name="least_views">Ən az baxış</string>
     <string name="channel_name_az">Kanal Adı (A-Z)</string>
     <string name="channel_name_za">Kanal Adı (Z-A)</string>
-    <string name="sort">Çeşidlə</string>
+    <string name="sort">Çeşidləyici</string>
     <string name="new_streams_by">%1$s tərəfindən yeni yayımlar…</string>
     <string name="history_empty">Hələ ki, tarixçə boşdur.</string>
     <string name="required_network">Tələb olunan bağlantı</string>
@@ -285,7 +285,7 @@
     <string name="downloadsucceeded">Uğurla endirildi</string>
     <string name="share_with_time">Vaxt kodu ilə paylaşım</string>
     <string name="export_subscriptions">Abunəlikləri ixrac et</string>
-    <string name="skip_buttons">Ötürmə düymələri</string>
+    <string name="skip_buttons">Ötür düymələri</string>
     <string name="skip_buttons_summary">Növbəti və ya əvvəlki videoya ötürmək üçün düymələr göstər.</string>
     <string name="history_size">Maksimum tarixçə ölçüsü</string>
     <string name="unlimited">Qeyri-məhdud</string>
@@ -316,7 +316,7 @@
     <string name="audio_video_summary">Keyfiyyət və format</string>
     <string name="new_videos_badge">Yeni videolar üçün göstərici</string>
     <string name="new_videos_badge_summary">Yeni videolar varsa, sayı ilə nişan göstər.</string>
-    <string name="delete">Endirilənlərdən sil</string>
+    <string name="delete">Yüklənənlərdən sil</string>
     <string name="trending_layout">Alternativ trend səhifəsi tərtibatı</string>
     <string name="renamePlaylist">Pleylist adını dəyiş</string>
     <string name="mobile_data">Mobil məlumat</string>
@@ -344,7 +344,7 @@
     <string name="progressive_load_interval">Qabaqcıl, yükləmə intervalı ölçüsü</string>
     <string name="progressive_load_interval_summary">Daha aşağı dəyər ilkin video yükləməni sürətləndirə bilər.</string>
     <string name="views_placeholder">baxış</string>
-    <string name="playback_pitch">Səs ucalığı</string>
+    <string name="playback_pitch">Ucalıq</string>
     <string name="filename">Fayl adı</string>
     <string name="invalid_filename">Yanlış fayl adı!</string>
     <string name="playlistNameReversed">Pleylist adı (əks)</string>
@@ -372,7 +372,7 @@
     <string name="notification_time">Bildiriş vaxtı</string>
     <string name="notification_time_summary">Bildirişlərin göstərilməsinə icazə verilən vaxt aralığı.</string>
     <string name="alternative_trending_layout">Alternativ trend tərtibatı</string>
-    <string name="navbar_order">Sıra</string>
+    <string name="navbar_order">Ardıcıllıq</string>
     <string name="layout">Tərtibat</string>
     <string name="alternative_player_layout">Alternativ oynadıcı tərtibatı</string>
     <string name="alternative_player_layout_summary">Əlaqəli videoları aşağıda deyil, şərhlərin üstündə cərgə kimi göstər.</string>
