@@ -293,22 +293,23 @@ class BackgroundMode : Service() {
      * Sets the [MediaItem] with the [streams] into the [player]
      */
     private fun setMediaItem() {
-        streams?.let {
-            val uri = if (streams!!.hls != null) {
-                streams!!.hls
-            } else if (streams!!.audioStreams!!.isNotEmpty()) {
-                PlayerHelper.getAudioSource(
-                    this,
-                    streams!!.audioStreams!!
-                )
-            } else {
-                return
-            }
-            val mediaItem = MediaItem.Builder()
-                .setUri(uri)
-                .build()
-            player?.setMediaItem(mediaItem)
+        streams ?: return
+
+        val uri = if (streams!!.audioStreams.orEmpty().isNotEmpty()) {
+            PlayerHelper.getAudioSource(
+                this,
+                streams!!.audioStreams!!
+            )
+        } else if (streams!!.hls != null) {
+            streams!!.hls
+        } else {
+            return
         }
+
+        val mediaItem = MediaItem.Builder()
+            .setUri(uri)
+            .build()
+        player?.setMediaItem(mediaItem)
     }
 
     /**

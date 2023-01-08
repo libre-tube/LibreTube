@@ -323,10 +323,14 @@ internal class CustomExoPlayerView(
 
         // hide the dimming background overlay if locked
         binding.exoControlsBackground.setBackgroundColor(
-            if (isLocked) ContextCompat.getColor(
-                context,
-                com.google.android.exoplayer2.R.color.exo_black_opacity_60
-            ) else Color.TRANSPARENT
+            if (isLocked) {
+                ContextCompat.getColor(
+                    context,
+                    com.google.android.exoplayer2.R.color.exo_black_opacity_60
+                )
+            } else {
+                Color.TRANSPARENT
+            }
         )
 
         // disable tap and swipe gesture if the player is locked
