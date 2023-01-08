@@ -25,6 +25,51 @@
         <item>https://piped-api.privacy.com.de/</item>
     </string-array>
 
+    <string-array name="languages">
+        <item>@string/systemLanguage</item>
+        <item>العربية</item>
+        <item>Azərbaycan dili</item>
+        <item>Euskara</item>
+        <item>বাংলা</item>
+        <item>Català</item>
+        <item>简体中文</item>
+        <item>繁體中文</item>
+        <item>čeština</item>
+        <item>Dansk</item>
+        <item>English</item>
+        <item>Wikang Filipino</item>
+        <item>Suomi</item>
+        <item>Français</item>
+        <item>Deutsch</item>
+        <item>Ελληνικά</item>
+        <item>ગુજરાતી</item>
+        <item>עברית</item>
+        <item>हिन्दी</item>
+        <item>Magyar</item>
+        <item>Bahasa Indonesia</item>
+        <item>Italiano</item>
+        <item>日本語</item>
+        <item>조선말</item>
+        <item>latviešu</item>
+        <item>മലയാളം</item>
+        <item>मराठी</item>
+        <item>Norsk</item>
+        <item>فارسی</item>
+        <item>ଓଡ଼ିଆ</item>
+        <item>Polski</item>
+        <item>Português</item>
+        <item>Português (BR)</item>
+        <item>Română</item>
+        <item>Русский</item>
+        <item>Slovenčina</item>
+        <item>سۆرانی</item>
+        <item>Español</item>
+        <item>ภาษาไทย</item>
+        <item>Türkçe</item>
+        <item>Türkmençe</item>
+        <item>Українська</item>
+    </string-array>
+
     <string-array name="languagesValue">
         <item>sys</item>
         <item>ar</item>
