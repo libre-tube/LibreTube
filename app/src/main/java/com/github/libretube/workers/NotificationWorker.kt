@@ -27,12 +27,12 @@ import kotlinx.coroutines.runBlocking
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     Worker(appContext, parameters) {
 
-    private val notificationManager =
-        appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private val notificationManager = NotificationManagerCompat.from(appContext)
 
     // the id where notification channels start
     private var notificationId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        notificationManager.activeNotifications.size + 5
+        val nManager = appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        nManager.activeNotifications.size + 5
     } else {
         5
     }
@@ -93,7 +93,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
             val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return@runBlocking
 
-            // first time notifications enabled or no new video available
+            // first time notifications are enabled or no new video available
             if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
                 PreferenceHelper.setLatestVideoId(lastSeenStreamId)
                 return@runBlocking
@@ -117,6 +117,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
             // group the new streams by the uploader
             val channelGroups = filteredVideos.groupBy { it.uploaderUrl }
+
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
                 createNotification(
@@ -176,9 +177,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             builder.setContentText(description)
         }
 
-        with(NotificationManagerCompat.from(applicationContext)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(notificationId, builder.build())
-        }
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(notificationId, builder.build())
     }
 }
