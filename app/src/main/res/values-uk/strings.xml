@@ -120,7 +120,7 @@
     <string name="authors">Автори</string>
     <string name="download_folder_summary">Назва теки, у яку будуть збережені завантажені матеріали.</string>
     <string name="download_folder">Назва</string>
-    <string name="internal_storage">Пам\'ять телефона</string>
+    <string name="internal_storage">Внутрішня пам\'ять</string>
     <string name="downloads_directory">Тека завантажень</string>
     <string name="movies_directory">Відео тека</string>
     <string name="music_directory">Музична тека</string>
