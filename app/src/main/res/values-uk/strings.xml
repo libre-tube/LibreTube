@@ -157,7 +157,7 @@
     <string name="torchIcon">Популярний факел</string>
     <string name="shapedIcon">Безглузда форма</string>
     <string name="category_music_offtopic_description">Тільки для використання в музичних кліпах. Він повинен охоплювати частини відео, а не частину офіційних міксів. Зрештою, відео має максимально нагадувати Spotify або будь-яку іншу змішану версію, або зменшувати розмови чи інші відволікання.</string>
-    <string name="category_preview_description">Для відтинків, які докладно описують майбутній контент у цьому або майбутніх відео в його серії, але не надають додаткових подробиць. Якщо він включає кліпи, які з\'являються тільки тут, це, швидше за все, неправильна категорія.</string>
+    <string name="category_preview_description">Для сегментів, які докладно описують майбутній контент у цьому або майбутніх відео в його серії, але не надають додаткових подробиць. Якщо він включає кліпи, які з\'являються тільки тут, це, швидше за все, неправильна категорія.</string>
     <string name="appearance">Вигляд</string>
     <string name="app_behavior">Поведінка</string>
     <string name="download_directory">Завантажити до</string>
@@ -241,7 +241,7 @@
     <string name="new_videos_badge">Індикатор нових відео</string>
     <string name="notify_new_streams_summary">Сповіщення про нові матеріали від авторів, на яких ви підписані.</string>
     <string name="new_streams_count">Доступно %1$s нових трансляцій</string>
-    <string name="irreversible">Ви впевнені\? Це не можна відмінити!</string>
+    <string name="irreversible">Ви впевнені\? Цю дію не можна скасувати!</string>
     <string name="history_empty">Історія порожня.</string>
     <string name="progressive_load_interval">Прогресивний розмір інтервалу завантаження</string>
     <string name="backup_restore">Резервне копіювання та відновлення</string>
