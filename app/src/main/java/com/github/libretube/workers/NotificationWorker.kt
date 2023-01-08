@@ -13,6 +13,7 @@ import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.filterUntil
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
@@ -90,7 +91,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             }
 
             val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
-            val latestFeedStreamId = videoFeed[0].url!!.toID()
+            val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return@runBlocking
 
             // first time notifications enabled or no new video available
             if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
@@ -98,20 +99,17 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 return@runBlocking
             }
 
-            // filter the new videos out
-            val lastSeenStreamItem = videoFeed.filter { it.url!!.toID() == lastSeenStreamId }
+            // filter the new videos until the last seen video in the feed
+            val newStreams = videoFeed.filterUntil {
+                it.url!!.toID() == lastSeenStreamId
+            } ?: return@runBlocking
 
-            // previous video not found
-            if (lastSeenStreamItem.isEmpty()) return@runBlocking
-
-            val lastStreamIndex = videoFeed.indexOf(lastSeenStreamItem[0])
-            val newVideos = videoFeed.filterIndexed { index, _ ->
-                index < lastStreamIndex
-            }
+            // return if the previous video didn't get found
+            if (newStreams.isEmpty()) return@runBlocking
 
             // hide for notifications unsubscribed channels
             val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
-            val filteredVideos = newVideos.filter {
+            val filteredVideos = newStreams.filter {
                 channelsToIgnore.none { channelId ->
                     channelId == it.uploaderUrl?.toID()
                 }
@@ -122,9 +120,9 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
                 createNotification(
-                    group = streams[0].uploaderUrl!!.toID(),
-                    title = streams[0].uploaderName.toString(),
-                    isSummary = true
+                    group = streams.first().uploaderUrl!!.toID(),
+                    title = streams.first().uploaderName.toString(),
+                    isGroupSummary = true
                 )
 
                 streams.forEach { streamItem ->
@@ -136,7 +134,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                 }
             }
             // save the latest streams that got notified about
-            PreferenceHelper.setLatestVideoId(videoFeed[0].url!!.toID())
+            PreferenceHelper.setLatestVideoId(videoFeed.first().url!!.toID())
         }
         // return whether the work succeeded
         return success
@@ -149,7 +147,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         title: String,
         group: String,
         description: String? = null,
-        isSummary: Boolean = false
+        isGroupSummary: Boolean = false
     ) {
         // increase the notification ID to guarantee uniqueness
         notificationId += 1
@@ -172,7 +170,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        if (isSummary) {
+        if (isGroupSummary) {
             builder.setGroupSummary(true)
         } else {
             builder.setContentText(description)
