@@ -185,29 +185,29 @@ class PlaylistFragment : BaseFragment() {
 
                 // listen for playlist items to become deleted
                 playlistAdapter!!.registerAdapterDataObserver(object :
-                        RecyclerView.AdapterDataObserver() {
-                        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                            if (positionStart == 0) {
-                                ImageHelper.loadImage(
-                                    playlistFeed.firstOrNull()?.thumbnail ?: "",
-                                    binding.thumbnail
-                                )
-                            }
-
-                            val info = binding.playlistInfo.text.split(TextUtils.SEPARATOR)
-                            binding.playlistInfo.text = (
-                                if (info.size == 2) {
-                                    info[0] + TextUtils.SEPARATOR
-                                } else {
-                                    ""
-                                }
-                                ) + getString(
-                                R.string.videoCount,
-                                playlistAdapter!!.itemCount.toString()
+                    RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                        if (positionStart == 0) {
+                            ImageHelper.loadImage(
+                                playlistFeed.firstOrNull()?.thumbnail ?: "",
+                                binding.thumbnail
                             )
-                            super.onItemRangeRemoved(positionStart, itemCount)
                         }
-                    })
+
+                        val info = binding.playlistInfo.text.split(TextUtils.SEPARATOR)
+                        binding.playlistInfo.text = (
+                            if (info.size == 2) {
+                                info[0] + TextUtils.SEPARATOR
+                            } else {
+                                ""
+                            }
+                            ) + getString(
+                            R.string.videoCount,
+                            playlistAdapter!!.itemCount.toString()
+                        )
+                        super.onItemRangeRemoved(positionStart, itemCount)
+                    }
+                })
 
                 binding.playlistRecView.adapter = playlistAdapter
                 binding.playlistScrollview.viewTreeObserver
