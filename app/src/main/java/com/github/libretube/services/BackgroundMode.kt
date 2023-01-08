@@ -94,7 +94,7 @@ class BackgroundMode : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 BACKGROUND_CHANNEL_ID,
-                "Background Service",
+                getString(R.string.background_mode),
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -139,8 +139,13 @@ class BackgroundMode : Service() {
 
     private fun updateWatchPosition() {
         player?.currentPosition?.let {
+            val watchPosition = WatchPosition(videoId, it)
+
+            // indicator that a new video is getting loaded
+            this.streams ?: return@let
+
             query {
-                Database.watchPositionDao().insertAll(WatchPosition(videoId, it))
+                Database.watchPositionDao().insertAll(watchPosition)
             }
         }
         handler.postDelayed(this::updateWatchPosition, 500)
@@ -154,11 +159,9 @@ class BackgroundMode : Service() {
         seekToPosition: Long = 0
     ) {
         CoroutineScope(Dispatchers.IO).launch {
-            try {
-                streams = RetrofitInstance.api.getStreams(videoId)
-            } catch (e: Exception) {
-                return@launch
-            }
+            streams = runCatching {
+                RetrofitInstance.api.getStreams(videoId)
+            }.getOrNull() ?: return@launch
 
             // add the playlist video to the queue
             if (PlayingQueue.isEmpty() && playlistId != null) {
@@ -205,7 +208,7 @@ class BackgroundMode : Service() {
         if (seekToPosition != 0L) {
             player?.seekTo(seekToPosition)
         } else if (PlayerHelper.watchPositionsEnabled) {
-            try {
+            runCatching {
                 val watchPosition = awaitQuery {
                     Database.watchPositionDao().findById(videoId)
                 }
@@ -214,8 +217,6 @@ class BackgroundMode : Service() {
                         player?.seekTo(watchPosition.position)
                     }
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
         }
 
@@ -276,15 +277,14 @@ class BackgroundMode : Service() {
     }
 
     /**
-     * Plays the first related video to the current (used when the playback of the current video ended)
+     * Plays the next video from the queue
      */
     private fun playNextVideo(nextId: String? = null) {
-        val nextVideo = nextId ?: PlayingQueue.getNext()
+        val nextVideo = nextId ?: PlayingQueue.getNext() ?: return
 
         // play new video on background
-        if (nextVideo != null) {
-            this.videoId = nextVideo
-        }
+        this.videoId = nextVideo
+        this.streams = null
         this.segmentData = null
         loadAudio(videoId)
     }
@@ -344,11 +344,9 @@ class BackgroundMode : Service() {
             val currentPosition = player?.currentPosition
             if (currentPosition in segmentStart until segmentEnd) {
                 if (PlayerHelper.sponsorBlockNotifications) {
-                    try {
+                    runCatching {
                         Toast.makeText(this, R.string.segment_skipped, Toast.LENGTH_SHORT)
                             .show()
-                    } catch (e: Exception) {
-                        // Do nothing.
                     }
                 }
                 player?.seekTo(segmentEnd)
