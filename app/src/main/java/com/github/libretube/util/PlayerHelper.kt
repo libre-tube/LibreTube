@@ -5,64 +5,57 @@ import android.content.pm.ActivityInfo
 import android.view.accessibility.CaptioningManager
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.enums.AudioQuality
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.video.VideoSize
 import kotlin.math.roundToInt
 
 object PlayerHelper {
-    // get the audio source following the users preferences
+    /**
+     * Get the audio source following the users preferences
+     */
     fun getAudioSource(
         context: Context,
         audios: List<PipedStream>
     ): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
-        val audioQuality = if (
+        val audioPrefKey = if (
             NetworkHelper.isNetworkMobile(context)
         ) {
-            PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE, "best")
+            PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE
         } else {
-            PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_QUALITY, "best")
+            PreferenceKeys.PLAYER_AUDIO_QUALITY
         }
 
-        val mutableAudios = audios.toMutableList()
-        if (audioFormat != "all") {
-            audios.forEach {
-                val audioMimeType = "audio/$audioFormat"
-                if (it.mimeType != audioMimeType) mutableAudios.remove(it)
-            }
+        val audioQuality = PreferenceHelper.getString(audioPrefKey, "best")
+
+        val filteredAudios = audios.filter {
+            val audioMimeType = "audio/$audioFormat"
+            it.mimeType != audioMimeType || audioFormat == "all"
         }
 
-        return if (audioQuality == "worst") {
-            getLeastBitRate(mutableAudios)
-        } else {
-            getMostBitRate(mutableAudios)
-        }
+        return getBitRate(
+            filteredAudios,
+            if (audioQuality == "best") AudioQuality.BEST else AudioQuality.WORST
+        )
     }
 
-    // get the best bit rate from audio streams
-    private fun getMostBitRate(audios: List<PipedStream>): String {
-        var bitrate = 0
-        var audioUrl = ""
-        audios.forEach {
-            if (it.bitrate != null && it.bitrate!! > bitrate) {
-                bitrate = it.bitrate!!
-                audioUrl = it.url.toString()
-            }
+    /**
+     * Get the best or worst bitrate from a list of audio streams
+     * @param audios list of the audio streams
+     * @param getLeast whether the least bitrate should be returned
+     * @return Url of the audio source
+     */
+    private fun getBitRate(audios: List<PipedStream>, quality: AudioQuality): String {
+        val filteredAudios = audios.filter {
+            it.bitrate != null
+        }.sortedBy {
+            it.bitrate
         }
-        return audioUrl
-    }
-
-    // get the best bit rate from audio streams
-    private fun getLeastBitRate(audios: List<PipedStream>): String {
-        var bitrate = 1000000000
-        var audioUrl = ""
-        audios.forEach {
-            if (it.bitrate != null && it.bitrate!! < bitrate) {
-                bitrate = it.bitrate!!
-                audioUrl = it.url.toString()
-            }
-        }
-        return audioUrl
+        return when (quality) {
+            AudioQuality.BEST -> filteredAudios.last()
+            AudioQuality.WORST -> filteredAudios.first()
+        }.url!!
     }
 
     // get the system default caption style
