@@ -143,7 +143,7 @@
     <string name="views">%1$s переглядів</string>
     <string name="defaultIcon">Типова</string>
     <string name="download_directory_summary">Тека, в яку зберігатимуться всі завантажені медіа.</string>
-    <string name="video_format_summary">Формат, у який будуть конвертовані завантажені відео (застосовується лише за умови, якщо аудіо і відео будуть завантажені).</string>
+    <string name="video_format_summary">Перетворення файлів, якщо аудіо і відео завантажені.</string>
     <string name="legacyIcon">Загублена спадщина</string>
     <string name="no_update_available">Ви користуєтесь найновішою версією.</string>
     <string name="gradientIcon">Градієнт Glib</string>
