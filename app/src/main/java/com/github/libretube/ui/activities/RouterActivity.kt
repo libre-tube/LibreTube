@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.base.BaseActivity
@@ -15,26 +14,16 @@ import kotlin.time.Duration
 class RouterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent.getStringExtra(Intent.EXTRA_TEXT) != null && checkHost(intent)) {
-            // start the main activity using the given URI as data if the host is known
-            val uri = Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT)!!)
-            handleSendText(uri)
+        if (intent.getStringExtra(Intent.EXTRA_TEXT) != null) {
+            // start processing the given text
+            handleSendText(Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT)!!))
         } else if (intent.data != null) {
             val uri = intent.data
             handleSendText(uri!!)
         } else {
-            // start app as normal if URI not in host list
+            // start app as normal if unknown action, shouldn't be reachable
             NavigationHelper.restartMainActivity(this)
         }
-    }
-
-    private fun checkHost(intent: Intent): Boolean {
-        // check whether the host is known, current solution to replace the broken intent filter
-        val hostsList = resources.getStringArray(R.array.shareHostsList)
-        val intentDataUri: Uri = Uri.parse(intent.getStringExtra(Intent.EXTRA_TEXT))
-        val intentDataHost = intentDataUri.host
-        Log.d(TAG(), "$intentDataHost")
-        return hostsList.contains(intentDataHost)
     }
 
     /**
