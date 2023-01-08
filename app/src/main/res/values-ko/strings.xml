@@ -104,7 +104,7 @@
     <string name="oledTheme">검정</string>
     <string name="color_accent">액센트</string>
     <string name="color_blue">파란색</string>
-    <string name="material_you">머터리얼 유</string>
+    <string name="material_you">머티리얼 유</string>
     <string name="color_green">초록색</string>
     <string name="color_red">빨간색</string>
     <string name="color_yellow">노란색</string>
@@ -284,8 +284,8 @@
     <string name="invalid_filename">유효하지 않은 파일이름!</string>
     <string name="playlists_order">재생목록 순서</string>
     <string name="playlistNameReversed">재생목록 이름(역순)</string>
-    <string name="import_playlists">재생목록을 가져오다</string>
-    <string name="export_playlists">재생목록을 내보내다</string>
+    <string name="import_playlists">재생목록 가져오기</string>
+    <string name="export_playlists">재생목록 내보내기</string>
     <string name="audio_track">오디오 트랙</string>
     <string name="default_audio_track">기본값</string>
     <string name="unsupported_file_format">지원하지 않는 파일형식!</string>
@@ -302,7 +302,7 @@
     <string name="download_channel_description">다운로드 중에 알림을 표시합니다.</string>
     <string name="download_channel_name">다운로드 서비스</string>
     <string name="portrait">인물 사진</string>
-    <string name="community">공동체</string>
+    <string name="community">커뮤니티</string>
     <string name="comments_disabled">게시자에 의해 댓글이 제한되었습니다.</string>
     <string name="defaults">기본값</string>
     <string name="pinch_control_summary">핀치 제스처를 이용하여 확대/축소합니다.</string>
@@ -417,4 +417,17 @@
     <string name="hls_instead_of_dash_summary">DASH 대신 HLS 사용(속도가 느리고 권장되지 않음)</string>
     <string name="trending">최신 유행</string>
     <string name="mobile_data">모바일 데이터</string>
+    <string name="color_violet">화려한 보라색</string>
+    <string name="failed_fetching_instances">사용가능한 인스턴스를 불러올 수 없습니다.</string>
+    <string name="hide_watched_from_feed">시청한 영상 피드에서 숨기기</string>
+    <string name="hide_watched_from_feed_summary">구독 탭에 90% 이상 시청한 비디오를 보여주지 않습니다.</string>
+    <string name="sb_markers">마커</string>
+    <string name="discord">디스코드</string>
+    <string name="pinch_control">핀치 컨트롤</string>
+    <string name="misc">기타</string>
+    <string name="playlistUrl">재생목록 URL</string>
+    <string name="pause_on_quit">종료 시 일시정지</string>
+    <string name="shuffle">셔플</string>
+    <string name="add_to_bookmarks">북마크에 추가</string>
+    <string name="remove_bookmark">북마크 제거</string>
 </resources>
