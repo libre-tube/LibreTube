@@ -241,7 +241,7 @@
     <string name="new_videos_badge">Індикатор нових відео</string>
     <string name="notify_new_streams_summary">Сповіщення про нові матеріали від авторів, на яких ви підписані.</string>
     <string name="new_streams_count">Доступно %1$s нових трансляцій</string>
-    <string name="irreversible">Ви впевнені\? Дію не можна скасувати!</string>
+    <string name="irreversible">Ви впевнені\? Це не можна відмінити!</string>
     <string name="history_empty">Історія порожня.</string>
     <string name="progressive_load_interval">Прогресивний розмір інтервалу завантаження</string>
     <string name="backup_restore">Резервне копіювання та відновлення</string>
@@ -357,10 +357,10 @@
     <string name="playing_queue">Черга відтворення</string>
     <string name="queue">Черга</string>
     <string name="sb_markers">Маркери</string>
-    <string name="sb_markers_summary">Позначте відтинки на панелі часу.</string>
+    <string name="sb_markers_summary">Позначте сегменти на панелі часу.</string>
     <string name="livestreams">Трансляції наживо</string>
     <string name="alternative_videos_layout">Альтернативні макети відео</string>
-    <string name="defaultIconLight">Типове світло</string>
+    <string name="defaultIconLight">Типова світла</string>
     <string name="playlistCloned">Добірку клоновано</string>
     <string name="confirm_unsubscribe">Ви впевнені, що хочете відписатися від %1$s\?</string>
     <string name="confirm_unsubscribing">Підтвердити відписку</string>
