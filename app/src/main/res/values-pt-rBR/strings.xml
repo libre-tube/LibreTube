@@ -431,4 +431,9 @@
     <string name="shuffle">Aleatório</string>
     <string name="add_to_bookmarks">Adicionar aos favoritos</string>
     <string name="remove_bookmark">Remover favorito</string>
+    <string name="rewind">Retroceder</string>
+    <string name="forward">Avançar</string>
+    <string name="pause">Pausar</string>
+    <string name="alternative_pip_controls">Controles PiP alternativos</string>
+    <string name="alternative_pip_controls_summary">Mostrar controles de apenas áudio e pular no PiP em vez de avançar e retroceder</string>
 </resources>
