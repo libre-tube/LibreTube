@@ -431,4 +431,9 @@
     <string name="shuffle">Перетасувати</string>
     <string name="add_to_bookmarks">Додати до закладок</string>
     <string name="remove_bookmark">Вилучити закладку</string>
+    <string name="rewind">Відмотати назад</string>
+    <string name="forward">Уперед</string>
+    <string name="pause">Призупинити</string>
+    <string name="alternative_pip_controls">Альтернативні елементи керування PiP</string>
+    <string name="alternative_pip_controls_summary">Показувати лише аудіо та пропускати елементи керування в PiP замість перемотування вперед та назад</string>
 </resources>
