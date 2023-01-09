@@ -431,4 +431,7 @@
     <string name="shuffle">Keverés</string>
     <string name="add_to_bookmarks">Hozzáadás a könyvjelzőkhöz</string>
     <string name="remove_bookmark">Könyvjelző eltávolítása</string>
+    <string name="forward">Előretekerés</string>
+    <string name="pause">Megállítás</string>
+    <string name="rewind">Visszatekerés</string>
 </resources>
