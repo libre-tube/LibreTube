@@ -1,6 +1,10 @@
 package com.github.libretube.util
 
 import java.net.URL
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.*
 
 object TextUtils {
     /**
@@ -28,5 +32,23 @@ object TextUtils {
             return true
         }
         return false
+    }
+
+    /**
+     * Localize the date from a time string
+     * @param date The date to parse
+     * @param locale The locale to use, otherwise uses system default
+     * return Localized date string
+     */
+    fun localizeDate(date: String?, locale: Locale? = null): String? {
+        date ?: return null
+
+        // relative time span
+        if (!date.contains("-")) return date
+
+        val dateObj = LocalDate.parse(date)
+
+        val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale)
+        return dateObj.format(formatter)
     }
 }
