@@ -28,6 +28,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -181,6 +182,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     val handler = Handler(Looper.getMainLooper())
 
+    /**
+     * Receiver for all actions in the PiP mode
+     */
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val action = intent?.getIntExtra(PlayerHelper.CONTROL_TYPE, 0) ?: return
@@ -196,6 +200,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 }
                 PlayerEvent.Rewind -> {
                     exoPlayer.seekTo(exoPlayer.currentPosition - PlayerHelper.seekIncrement)
+                }
+                PlayerEvent.Next -> {
+                    playNextVideo()
+                }
+                PlayerEvent.Background -> {
+                    playOnBackground()
+                    // wait some time in order for the service to get started properly
+                    handler.postDelayed({
+                        activity?.finish()
+                    }, 500)
                 }
                 else -> {
                 }
@@ -447,13 +461,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             exoPlayer.pause()
 
             // start the background mode
-            BackgroundHelper.playOnBackground(
-                requireContext(),
-                videoId!!,
-                exoPlayer.currentPosition,
-                playlistId,
-                channelId
-            )
+            playOnBackground()
         }
 
         binding.relatedRecView.layoutManager = VideosAdapter.getLayout(requireContext())
@@ -462,6 +470,16 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             context,
             LinearLayoutManager.HORIZONTAL,
             false
+        )
+    }
+
+    private fun playOnBackground() {
+        BackgroundHelper.playOnBackground(
+            requireContext(),
+            videoId!!,
+            exoPlayer.currentPosition,
+            playlistId,
+            channelId
         )
     }
 
@@ -1497,7 +1515,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getPipParams(): PictureInPictureParams = PictureInPictureParams.Builder()
-        .setActions(PlayerHelper.getPIPModeActions(requireActivity(), exoPlayer.isPlaying))
+        .setActions(PlayerHelper.getPiPModeActions(requireActivity(), exoPlayer.isPlaying))
         .apply {
             if (SDK_INT >= Build.VERSION_CODES.S) {
                 setAutoEnterEnabled(true)

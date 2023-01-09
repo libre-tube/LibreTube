@@ -40,6 +40,13 @@
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
+            android:icon="@drawable/ic_headphones"
+            app:key="alternative_pip_controls"
+            app:title="@string/alternative_pip_controls"
+            android:summary="@string/alternative_pip_controls_summary"/>
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
             android:icon="@drawable/ic_pause_filled"
             app:key="pause_on_quit"
             app:title="@string/pause_on_quit" />

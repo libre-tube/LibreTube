@@ -87,6 +87,7 @@ object PreferenceKeys {
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
     const val PAUSE_ON_QUIT = "pause_on_quit"
+    const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
 
     /**
      * Background mode

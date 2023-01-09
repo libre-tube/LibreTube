@@ -332,6 +332,12 @@ object PlayerHelper {
             false
         )
 
+    val alternativePiPControls: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.ALTERNATIVE_PIP_CONTROLS,
+            false
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(
@@ -384,16 +390,28 @@ object PlayerHelper {
         )
     }
 
+    /**
+     * Create controls to use in the PiP window
+     */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getPIPModeActions(activity: Activity, isPlaying: Boolean): ArrayList<RemoteAction> {
+    fun getPiPModeActions(activity: Activity, isPlaying: Boolean, isOfflinePlayer: Boolean = false): ArrayList<RemoteAction> {
         val actions: ArrayList<RemoteAction> = ArrayList()
         actions.add(
-            getRemoteAction(
-                activity,
-                R.drawable.ic_rewind,
-                R.string.rewind,
-                PlayerEvent.Rewind
-            )
+            if (!isOfflinePlayer && alternativePiPControls) {
+                getRemoteAction(
+                    activity,
+                    R.drawable.ic_headphones,
+                    R.string.background_mode,
+                    PlayerEvent.Background
+                )
+            } else {
+                getRemoteAction(
+                    activity,
+                    R.drawable.ic_rewind,
+                    R.string.rewind,
+                    PlayerEvent.Rewind
+                )
+            }
         )
 
         actions.add(
@@ -406,12 +424,21 @@ object PlayerHelper {
         )
 
         actions.add(
-            getRemoteAction(
-                activity,
-                R.drawable.ic_forward,
-                R.string.forward,
-                PlayerEvent.Forward
-            )
+            if (!isOfflinePlayer && alternativePiPControls) {
+                getRemoteAction(
+                    activity,
+                    R.drawable.ic_next,
+                    R.string.play_next,
+                    PlayerEvent.Next
+                )
+            } else {
+                getRemoteAction(
+                    activity,
+                    R.drawable.ic_forward,
+                    R.string.forward,
+                    PlayerEvent.Forward
+                )
+            }
         )
         return actions
     }
