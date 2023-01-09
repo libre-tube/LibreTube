@@ -425,6 +425,9 @@
     <string name="shuffle">Shuffle</string>
     <string name="add_to_bookmarks">Add to bookmarks</string>
     <string name="remove_bookmark">Remove bookmark</string>
+    <string name="rewind">Rewind</string>
+    <string name="forward">Forward</string>
+    <string name="pause">Pause</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>

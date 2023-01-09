@@ -2,8 +2,10 @@ package com.github.libretube.ui.fragments
 
 import android.annotation.SuppressLint
 import android.app.PictureInPictureParams
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.media.session.PlaybackState
@@ -50,6 +52,7 @@ import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
@@ -107,15 +110,15 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
@@ -178,6 +181,28 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     val handler = Handler(Looper.getMainLooper())
 
+    private val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val action = intent?.getIntExtra(PlayerHelper.CONTROL_TYPE, 0) ?: return
+            when (PlayerEvent.fromInt(action)) {
+                PlayerEvent.Play -> {
+                    exoPlayer.play()
+                }
+                PlayerEvent.Pause -> {
+                    exoPlayer.pause()
+                }
+                PlayerEvent.Forward -> {
+                    exoPlayer.seekTo(exoPlayer.currentPosition + PlayerHelper.seekIncrement)
+                }
+                PlayerEvent.Rewind -> {
+                    exoPlayer.seekTo(exoPlayer.currentPosition - PlayerHelper.seekIncrement)
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -186,6 +211,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             channelId = it.getString(IntentData.channelId)
             keepQueue = it.getBoolean(IntentData.keepQueue, false)
         }
+
+        // broadcast receiver for PiP actions
+        context?.registerReceiver(
+            broadcastReceiver,
+            IntentFilter(PlayerHelper.getIntentActon(requireContext()))
+        )
     }
 
     override fun onCreateView(
@@ -529,6 +560,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             // disable the auto PiP mode for SDK >= 32
             disableAutoPiP()
 
+            // unregister the receiver for player actions
+            context?.unregisterReceiver(broadcastReceiver)
+
             saveWatchPosition()
 
             // clear the playing queue and release the player
@@ -794,7 +828,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun localizedDate(date: String?): String? {
         return if (SDK_INT >= Build.VERSION_CODES.N) {
             TextUtils.localizeDate(date, resources.configuration.locales[0])
-        } else TextUtils.localizeDate(date)
+        } else {
+            TextUtils.localizeDate(date)
+        }
     }
 
     private fun handleLiveVideo() {
@@ -855,10 +891,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
             override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
+
                 if (isPlaying) {
                     // Stop [BackgroundMode] service if it is running.
                     BackgroundHelper.stopBackgroundPlay(requireContext())
-                    if (usePiP()) activity?.setPictureInPictureParams(getPipParams())
                 } else {
                     disableAutoPiP()
                 }
@@ -1169,8 +1206,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         for (vid in videoStreams) {
             if (resolutions.any {
-                it.resolution == vid.quality.qualityToInt()
-            } || vid.url == null
+                    it.resolution == vid.quality.qualityToInt()
+                } || vid.url == null
             ) {
                 continue
             }
@@ -1460,7 +1497,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getPipParams(): PictureInPictureParams = PictureInPictureParams.Builder()
-        .setActions(emptyList())
+        .setActions(PlayerHelper.getPIPModeActions(requireActivity(), exoPlayer.isPlaying))
         .apply {
             if (SDK_INT >= Build.VERSION_CODES.S) {
                 setAutoEnterEnabled(true)
