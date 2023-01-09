@@ -387,8 +387,8 @@
     <string name="featured">متميز</string>
     <string name="trending">ما هو الشائع الآن</string>
     <string name="open_queue_from_notification">فتح قائمة الانتظار من الإشعار</string>
-    <string name="bookmarks">الاشارات المرجعيه</string>
-    <string name="bookmark">الاشاره المرجعيه</string>
+    <string name="bookmarks">الإشارات المرجعية</string>
+    <string name="bookmark">الإشارة المرجعية</string>
     <string name="clear_bookmarks">مسح الإشارات المرجعية</string>
     <string name="bookmarks_empty">لا توجد إشارات مرجعية حتى الآن!</string>
     <string name="local_playlists">قوائم التشغيل المحلية</string>
