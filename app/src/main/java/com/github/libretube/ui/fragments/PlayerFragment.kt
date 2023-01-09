@@ -107,15 +107,15 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
@@ -478,7 +478,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun toggleDescription() {
-        var viewInfo = if (!isLive) TextUtils.SEPARATOR + streams.uploadDate else ""
+        var viewInfo = if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
@@ -791,6 +791,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
     }
 
+    private fun localizedDate(date: String?): String? {
+        return if (SDK_INT >= Build.VERSION_CODES.N) {
+            TextUtils.localizeDate(date, resources.configuration.locales[0])
+        } else TextUtils.localizeDate(date)
+    }
+
     private fun handleLiveVideo() {
         playerBinding.exoPosition.visibility = View.GONE
         playerBinding.liveDiff.visibility = View.VISIBLE
@@ -814,7 +820,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, streams.views.formatShort()) +
-                if (!isLive) TextUtils.SEPARATOR + streams.uploadDate else ""
+                if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
 
             textLike.text = streams.likes.formatShort()
             textDislike.text = streams.dislikes.formatShort()
@@ -1163,8 +1169,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         for (vid in videoStreams) {
             if (resolutions.any {
-                    it.resolution == vid.quality.qualityToInt()
-                } || vid.url == null
+                it.resolution == vid.quality.qualityToInt()
+            } || vid.url == null
             ) {
                 continue
             }
