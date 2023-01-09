@@ -431,4 +431,9 @@
     <string name="shuffle">خلط</string>
     <string name="remove_bookmark">إزالة الإشارة المرجعية</string>
     <string name="add_to_bookmarks">إضافة إلى الإشارات المرجعية</string>
+    <string name="pause">إيقاف مؤقت</string>
+    <string name="rewind">الترجيع</string>
+    <string name="forward">التقديم</string>
+    <string name="alternative_pip_controls">ضوابط \"صورة داخل صورة\" البديلة</string>
+    <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
 </resources>
