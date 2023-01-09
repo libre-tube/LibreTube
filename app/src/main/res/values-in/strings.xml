@@ -431,4 +431,9 @@
     <string name="shuffle">Acak</string>
     <string name="add_to_bookmarks">Tambahkan ke markah</string>
     <string name="remove_bookmark">Hapus markah</string>
+    <string name="rewind">Mundur</string>
+    <string name="forward">Maju</string>
+    <string name="pause">Jeda</string>
+    <string name="alternative_pip_controls">Kontrol gambar dalam gambar alternatif</string>
+    <string name="alternative_pip_controls_summary">Hanya tampilkan audio dan kontrol lewati dalam mode gambar dalam gambar daripada maju dan mundur</string>
 </resources>

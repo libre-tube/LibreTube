@@ -431,4 +431,9 @@
     <string name="shuffle">Aleatorio</string>
     <string name="add_to_bookmarks">Añadir a favoritos</string>
     <string name="remove_bookmark">Eliminar favorito</string>
+    <string name="forward">Adelante</string>
+    <string name="pause">Pausa</string>
+    <string name="alternative_pip_controls_summary">Mostrar solo audio y controles de salto en el modo de imagen en imagen en lugar de hacia adelante y hacia atrás</string>
+    <string name="rewind">Rebobinar</string>
+    <string name="alternative_pip_controls">Controles alternativos de imágenes incrustadas</string>
 </resources>

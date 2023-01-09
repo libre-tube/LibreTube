@@ -431,4 +431,9 @@
     <string name="shuffle">ସଫଲ୍</string>
     <string name="add_to_bookmarks">ବୁକମାର୍କରେ ଯୋଡନ୍ତୁ</string>
     <string name="remove_bookmark">ବୁକମାର୍କ ଅପସାରଣ କରନ୍ତୁ</string>
+    <string name="rewind">ପଛ କୁ ନିଅ</string>
+    <string name="forward">ଆଗ କୁ ନିଅ</string>
+    <string name="pause">ବିରାମ</string>
+    <string name="alternative_pip_controls">ବିକଳ୍ପ PIP ନିୟନ୍ତ୍ରଣ</string>
+    <string name="alternative_pip_controls_summary">କେବଳ ଅଡିଓ ଦେଖାନ୍ତୁ ଏବଂ ଆଗକୁ ଏବଂ ପଛକୁ ନେବା ପରିବର୍ତ୍ତେ PiP ରେ କଣ୍ଟ୍ରୋଲ୍ ଛାଡିଦିଅ</string>
 </resources>
