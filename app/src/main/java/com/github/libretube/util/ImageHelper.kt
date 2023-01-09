@@ -38,7 +38,7 @@ object ImageHelper {
                     }
                     else -> diskCache(
                         DiskCache.Builder()
-                            .directory(context.filesDir.resolve("coil"))
+                            .directory(context.cacheDir.resolve("coil"))
                             .maxSizeBytes(maxImageCacheSize.toInt() * 1024 * 1024L)
                             .build()
                     )
