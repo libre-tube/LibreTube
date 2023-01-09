@@ -41,7 +41,7 @@
     <string name="notgmail">Для аккаунта Piped.</string>
     <string name="defres">Разрешение видео</string>
     <string name="grid">Столбцы сетки</string>
-    <string name="emptyList">Здесь ничего нет</string>
+    <string name="emptyList">Здесь ничего нет.</string>
     <string name="deletePlaylist">Удалить плейлист</string>
     <string name="areYouSure">Удалить этот плейлист\?</string>
     <string name="createPlaylist">Создать плейлист</string>
@@ -169,7 +169,7 @@
     <string name="donate">Пожертвовать</string>
     <string name="contributing">Внести вклад</string>
     <string name="update">Найти новую версию</string>
-    <string name="update_summary">Проверить обновления</string>
+    <string name="update_summary">Проверить наличие обновлений</string>
     <string name="app_uptodate">Используется последняя версия.</string>
     <string name="no_update_available">Вы используете последнюю версию.</string>
     <string name="playback_speed">Скорость воспроизведения</string>
@@ -433,4 +433,7 @@
     <string name="forward">Отмотать вперед</string>
     <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
     <string name="alternative_pip_controls_summary">Показывать только аудио и пропускать элементы управления в PiP вместо перемотки вперед и назад</string>
+    <string name="pause">Пауза</string>
+    <string name="add_to_bookmarks">Добавить в закладки</string>
+    <string name="remove_bookmark">Удалить закладку</string>
 </resources>
