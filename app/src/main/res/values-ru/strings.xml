@@ -429,4 +429,8 @@
     <string name="playlistUrl">URL плейлиста</string>
     <string name="pause_on_quit">Пауза при выходе</string>
     <string name="shuffle">Перемешать</string>
+    <string name="rewind">Отмотать назад</string>
+    <string name="forward">Отмотать вперед</string>
+    <string name="alternative_pip_controls">Альтернативные элементы управления PiP</string>
+    <string name="alternative_pip_controls_summary">Показывать только аудио и пропускать элементы управления в PiP вместо перемотки вперед и назад</string>
 </resources>
