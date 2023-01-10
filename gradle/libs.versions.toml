@@ -10,7 +10,6 @@ extJunit = "1.1.5"
 espresso = "3.5.1"
 workRuntime = "2.7.1"
 exoplayer = "2.18.2"
-multidex = "2.0.1"
 retrofit = "2.9.0"
 jacksonAnnotations = "2.13.4"
 desugaring = "1.2.2"
@@ -33,7 +32,6 @@ androidx-test-espressoCore = { group = "androidx.test.espresso", name = "espress
 androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", version.ref="workRuntime" }
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
-androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 square-retrofit-converterJackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
 jacksonAnnotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jacksonAnnotations" }
