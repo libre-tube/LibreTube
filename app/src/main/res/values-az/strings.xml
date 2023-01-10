@@ -78,7 +78,7 @@
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
     <string name="notgmail">Bu Piped hesabı üçündür.</string>
-    <string name="defres">Video görünmə imkanı</string>
+    <string name="defres">Video görüntü imkanı</string>
     <string name="grid">Şəbəkə sütunları</string>
     <string name="emptyList">Burada heç nə yoxdur.</string>
     <string name="deletePlaylist">Pleylisti sil</string>
@@ -119,14 +119,14 @@
     <string name="update_available">%1$s Versiyası Mövcuddur</string>
     <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsinmi\?</string>
     <string name="appearance">Xarici Görünüş</string>
-    <string name="app_behavior">Davranış</string>
+    <string name="app_behavior">Davranma</string>
     <string name="downloads">Yüklənənlər</string>
     <string name="video_format">Video formatı</string>
     <string name="video_format_summary">Səs və video birlikdə endirildisə, faylların dönüşdürülməsi.</string>
     <string name="download_directory">Bura endir</string>
     <string name="download_directory_summary">Endirilmiş medianın saxlanıldığı yer.</string>
     <string name="contributing">Töhfə</string>
-    <string name="donate">İanə Et</string>
+    <string name="donate">İanə Ver</string>
     <string name="update">Yeni versiya axtar</string>
     <string name="app_uptodate">Ən son versiya işlədilir.</string>
     <string name="playback_speed">Oynatma sürəti</string>
@@ -134,7 +134,7 @@
     <string name="player">Oynadıcı</string>
     <string name="appearance_summary">Tətbiqi zövqünüzə uyğunlaşdırın.</string>
     <string name="advanced_summary">Yüklənənlər və sıfırla</string>
-    <string name="update_summary">Yeniləməni yoxla</string>
+    <string name="update_summary">Yeniləmə üçün yoxla</string>
     <string name="no_update_available">Ən son versiyanı işlədirsiniz.</string>
     <string name="live">Canlı</string>
     <string name="authors">Müəlliflər</string>
@@ -431,4 +431,9 @@
     <string name="shuffle">Qarışdır</string>
     <string name="remove_bookmark">Əlfəcini sil</string>
     <string name="add_to_bookmarks">Əlfəcinlərə əlavə et</string>
+    <string name="forward">İrəli</string>
+    <string name="pause">Fasilə ver</string>
+    <string name="alternative_pip_controls">Alternativ PiP nəzarətləri</string>
+    <string name="alternative_pip_controls_summary">Yalnız səsi göstər və irəli və geri çevirmək əvəzinə PiP-də idarəetmələri ötür</string>
+    <string name="rewind">Geri sar</string>
 </resources>
