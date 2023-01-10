@@ -28,7 +28,6 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
-import androidx.core.os.postDelayed
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -1207,7 +1206,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private fun getAvailableResolutions(): List<VideoResolution> {
         val resolutions = exoPlayer.currentTracks.groups.map { group ->
-            (0..group.length - 1).map {
+            (0 until group.length).map {
                 group.getTrackFormat(it).width
             }
         }.flatten()
