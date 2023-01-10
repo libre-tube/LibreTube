@@ -1202,63 +1202,34 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         exoPlayer.setMediaItem(mediaItem)
     }
 
-    private fun String?.qualityToInt(): Int {
-        this ?: return 0
-        return this.toString().split("p").first().toInt()
-    }
-
+    /**
+     * Get all available player resolutions
+     */
     private fun getAvailableResolutions(): List<VideoResolution> {
-        if (!this::streams.isInitialized) return listOf()
-
-        val resolutions = mutableListOf<VideoResolution>()
-
-        val videoStreams = try {
-            // attempt to sort the qualities, catch if there was an error ih parsing
-            streams.videoStreams?.sortedBy {
-                it.quality?.toLong() ?: 0L
-            }?.reversed()
-                .orEmpty()
-        } catch (_: Exception) {
-            streams.videoStreams.orEmpty()
-        }
-
-        for (vid in videoStreams) {
-            if (resolutions.any {
-                    it.resolution == vid.quality.qualityToInt()
-                } || vid.url == null
-            ) {
-                continue
+        val resolutions = exoPlayer.currentTracks.groups.map { group ->
+            (0..group.length - 1).map {
+                group.getTrackFormat(it).width
             }
+        }.flatten()
+            .filter { it > 0 }
+            .sortedDescending()
+            .toSet()
+            .toList()
 
-            runCatching {
-                resolutions.add(
-                    VideoResolution(
-                        name = "${vid.quality.qualityToInt()}p",
-                        resolution = vid.quality.qualityToInt()
-                    )
-                )
-            }
-
-            /*
-            // append quality to list if it has the preferred format (e.g. MPEG)
-            val preferredMimeType = "video/${PlayerHelper.videoFormatPreference}"
-            if (vid.url != null && vid.mimeType == preferredMimeType)
-             */
-        }
-
-        if (resolutions.isEmpty()) {
-            return listOf(
+        return resolutions.map {
+            VideoResolution(
+                name = "${it}p",
+                resolution = it
+            )
+        }.toMutableList().also {
+            it.add(
+                0,
                 VideoResolution(
-                    getString(R.string.hls),
-                    resolution = Int.MAX_VALUE,
-                    adaptiveSourceUrl = streams.hls
+                    getString(R.string.auto_quality),
+                    resolution = Int.MAX_VALUE
                 )
             )
-        } else {
-            resolutions.add(0, VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
         }
-
-        return resolutions
     }
 
     private fun setResolutionAndSubtitles() {
