@@ -431,4 +431,9 @@
     <string name="shuffle">ערבול</string>
     <string name="add_to_bookmarks">הוספה למועדפים</string>
     <string name="remove_bookmark">הסרת סימנייה</string>
+    <string name="rewind">אחורה</string>
+    <string name="forward">קדימה</string>
+    <string name="pause">השהיה</string>
+    <string name="alternative_pip_controls">בקרים חלופיים לתמונה בתוך תמונה</string>
+    <string name="alternative_pip_controls_summary">להציג בקרי שמע בלבד ודילוג בתמונה בתוך תמונה במקום קדימה ואחורה</string>
 </resources>
