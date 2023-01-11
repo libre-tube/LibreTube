@@ -64,12 +64,22 @@ object NotificationHelper {
             .setConstraints(constraints)
             .build()
 
-        // enqueue the task
+        // enqueue the task to the work manager instance
         WorkManager.getInstance(context)
             .enqueueUniquePeriodicWork(
                 NOTIFICATION_WORK_NAME,
                 existingPeriodicWorkPolicy,
                 notificationWorker
             )
+
+        // for testing the notifications by the work manager
+        /*
+        WorkManager.getInstance(context)
+            .enqueue(
+                OneTimeWorkRequest.Builder(NotificationWorker::class.java)
+                    .setConstraints(constraints)
+                    .build()
+            )
+        */
     }
 }

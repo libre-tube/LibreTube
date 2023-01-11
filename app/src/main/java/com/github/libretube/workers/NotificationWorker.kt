@@ -5,14 +5,17 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.filterUntil
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
@@ -81,6 +84,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private fun checkForNewStreams(): Boolean {
         var success = true
 
+        Log.d(TAG(), "Work manager started")
+
         runBlocking {
             // fetch the users feed
             val videoFeed = try {
@@ -118,11 +123,14 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             // group the new streams by the uploader
             val channelGroups = filteredVideos.groupBy { it.uploaderUrl }
 
+            Log.d(TAG(), "Create notifications for new videos")
+
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
                 createNotification(
                     group = streams.first().uploaderUrl!!.toID(),
                     title = streams.first().uploaderName.toString(),
+                    urlPath = streams.first().uploaderUrl!!,
                     isGroupSummary = true
                 )
 
@@ -130,6 +138,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
                     createNotification(
                         title = streamItem.title.toString(),
                         description = streamItem.uploaderName.toString(),
+                        urlPath = streamItem.url!!,
                         group = streamItem.uploaderUrl!!.toID()
                     )
                 }
@@ -147,19 +156,27 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private fun createNotification(
         title: String,
         group: String,
+        urlPath: String,
         description: String? = null,
         isGroupSummary: Boolean = false
     ) {
         // increase the notification ID to guarantee uniqueness
         notificationId += 1
 
+        val intent = Intent(applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            if (isGroupSummary) {
+                putExtra(IntentData.channelId, urlPath.toID())
+            } else {
+                putExtra(IntentData.videoId, urlPath.toID())
+            }
+        }
+
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             applicationContext,
-            0,
-            Intent(applicationContext, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            },
-            PendingIntent.FLAG_IMMUTABLE
+            notificationId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         val builder = NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_ID)
@@ -167,7 +184,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setGroup(group)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            // Set the intent that will fire when the user taps the notification
+            // The intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
@@ -177,7 +194,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             builder.setContentText(description)
         }
 
-        // notificationId is a unique int for each notification that you must define
+        // [notificationId] is a unique int for each notification that you must define
         notificationManager.notify(notificationId, builder.build())
     }
 }
