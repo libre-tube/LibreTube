@@ -17,7 +17,7 @@ cronetEmbedded = "108.5359.79"
 cronetOkHttp = "0.1.0"
 coil = "2.2.2"
 leakcanary = "2.10"
-room = "2.4.3"
+room = "2.5.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
