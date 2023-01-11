@@ -165,8 +165,11 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            if (isGroupSummary) putExtra(IntentData.channelId, urlPath.toID())
-            else putExtra(IntentData.videoId, urlPath.toID())
+            if (isGroupSummary) {
+                putExtra(IntentData.channelId, urlPath.toID())
+            } else {
+                putExtra(IntentData.videoId, urlPath.toID())
+            }
         }
 
         val pendingIntent: PendingIntent = PendingIntent.getActivity(

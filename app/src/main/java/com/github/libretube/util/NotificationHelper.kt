@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequest
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.github.libretube.constants.NOTIFICATION_WORK_NAME
