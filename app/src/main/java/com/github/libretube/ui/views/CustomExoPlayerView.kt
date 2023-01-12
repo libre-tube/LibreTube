@@ -259,9 +259,9 @@ internal class CustomExoPlayerView(
                     R.drawable.ic_speed,
                     {
                         "${
-                        player?.playbackParameters?.speed
-                            .toString()
-                            .replace(".0", "")
+                            player?.playbackParameters?.speed
+                                .toString()
+                                .replace(".0", "")
                         }x"
                     }
                 ) {
@@ -366,17 +366,30 @@ internal class CustomExoPlayerView(
         }
     }
 
-    private fun animateSeeking(container: FrameLayout, imageView: ImageView, textView: TextView, isRewind: Boolean) {
+    private fun animateSeeking(
+        container: FrameLayout,
+        imageView: ImageView,
+        textView: TextView,
+        isRewind: Boolean
+    ) {
         container.visibility = View.VISIBLE
+        // the direction of the action
+        val direction = if (isRewind) -1 else 1
+
         // clear previous animation
         imageView.animate()
             .rotation(0F)
             .setDuration(0)
             .start()
 
+        textView.animate()
+            .translationX(0f)
+            .setDuration(0)
+            .start()
+
         // start the rotate animation of the drawable
         imageView.animate()
-            .rotation(if (isRewind) -30F else 30F)
+            .rotation(direction * 30F)
             .setDuration(ANIMATION_DURATION)
             .withEndAction {
                 // reset the animation when finished
@@ -386,16 +399,30 @@ internal class CustomExoPlayerView(
                     .start()
             }
             .start()
+
+        // animate the text view to move outside the image view
+        textView.animate()
+            .translationX(direction * 100f)
+            .setDuration((ANIMATION_DURATION * 1.5).toLong())
+            .withEndAction {
+                // move the text back into the button
+                handler.postDelayed({
+                    textView.animate()
+                        .setDuration(ANIMATION_DURATION / 2)
+                        .translationX(0f)
+                        .start()
+                }, 100)
+            }
     }
 
     private val hideForwardButtonRunnable = Runnable {
-        doubleTapOverlayBinding?.forwardBTN.apply {
-            this!!.visibility = View.GONE
+        doubleTapOverlayBinding?.forwardBTN?.apply {
+            this.visibility = View.GONE
         }
     }
     private val hideRewindButtonRunnable = Runnable {
-        doubleTapOverlayBinding?.rewindBTN.apply {
-            this!!.visibility = View.GONE
+        doubleTapOverlayBinding?.rewindBTN?.apply {
+            this.visibility = View.GONE
         }
     }
 

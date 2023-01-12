@@ -12,6 +12,8 @@
         android:layout_height="match_parent"
         android:layout_weight=".40"
         android:clickable="false"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:focusable="false">
 
         <FrameLayout
@@ -33,7 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:translationZ="1dp" />
 
         </FrameLayout>
 
@@ -52,6 +55,8 @@
         android:layout_height="match_parent"
         android:layout_weight=".40"
         android:clickable="false"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:focusable="false">
 
         <FrameLayout
@@ -73,7 +78,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:translationZ="1dp" />
 
         </FrameLayout>
 
