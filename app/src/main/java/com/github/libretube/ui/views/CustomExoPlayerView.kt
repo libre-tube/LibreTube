@@ -10,6 +10,9 @@ import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -341,19 +344,8 @@ internal class CustomExoPlayerView(
         player?.seekTo((player?.currentPosition ?: 0L) - PlayerHelper.seekIncrement)
 
         // show the rewind button
-        doubleTapOverlayBinding?.rewindBTN.apply {
-            this!!.visibility = View.VISIBLE
-            // clear previous animation
-            this.animate().rotation(0F).setDuration(0).start()
-            // start new animation
-            this.animate()
-                .rotation(-30F)
-                .setDuration(100)
-                .withEndAction {
-                    // reset the animation when finished
-                    animate().rotation(0F).setDuration(100).start()
-                }
-                .start()
+        doubleTapOverlayBinding?.apply {
+            animateSeeking(rewindBTN, rewindIV, rewindTV, true)
 
             runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             // start callback to hide the button
@@ -365,19 +357,8 @@ internal class CustomExoPlayerView(
         player?.seekTo(player!!.currentPosition + PlayerHelper.seekIncrement)
 
         // show the forward button
-        doubleTapOverlayBinding?.forwardBTN.apply {
-            this!!.visibility = View.VISIBLE
-            // clear previous animation
-            this.animate().rotation(0F).setDuration(0).start()
-            // start new animation
-            this.animate()
-                .rotation(30F)
-                .setDuration(100)
-                .withEndAction {
-                    // reset the animation when finished
-                    animate().rotation(0F).setDuration(100).start()
-                }
-                .start()
+        doubleTapOverlayBinding?.apply {
+            animateSeeking(forwardBTN, forwardIV, forwardTV, false)
 
             // start callback to hide the button
             runnableHandler.removeCallbacks(hideForwardButtonRunnable)
@@ -385,14 +366,63 @@ internal class CustomExoPlayerView(
         }
     }
 
+    private fun animateSeeking(
+        container: FrameLayout,
+        imageView: ImageView,
+        textView: TextView,
+        isRewind: Boolean
+    ) {
+        container.visibility = View.VISIBLE
+        // the direction of the action
+        val direction = if (isRewind) -1 else 1
+
+        // clear previous animation
+        imageView.animate()
+            .rotation(0F)
+            .setDuration(0)
+            .start()
+
+        textView.animate()
+            .translationX(0f)
+            .setDuration(0)
+            .start()
+
+        // start the rotate animation of the drawable
+        imageView.animate()
+            .rotation(direction * 30F)
+            .setDuration(ANIMATION_DURATION)
+            .withEndAction {
+                // reset the animation when finished
+                imageView.animate()
+                    .rotation(0F)
+                    .setDuration(ANIMATION_DURATION)
+                    .start()
+            }
+            .start()
+
+        // animate the text view to move outside the image view
+        textView.animate()
+            .translationX(direction * 100f)
+            .setDuration((ANIMATION_DURATION * 1.5).toLong())
+            .withEndAction {
+                // move the text back into the button
+                handler.postDelayed({
+                    textView.animate()
+                        .setDuration(ANIMATION_DURATION / 2)
+                        .translationX(0f)
+                        .start()
+                }, 100)
+            }
+    }
+
     private val hideForwardButtonRunnable = Runnable {
-        doubleTapOverlayBinding?.forwardBTN.apply {
-            this!!.visibility = View.GONE
+        doubleTapOverlayBinding?.forwardBTN?.apply {
+            this.visibility = View.GONE
         }
     }
     private val hideRewindButtonRunnable = Runnable {
-        doubleTapOverlayBinding?.rewindBTN.apply {
-            this!!.visibility = View.GONE
+        doubleTapOverlayBinding?.rewindBTN?.apply {
+            this.visibility = View.GONE
         }
     }
 
@@ -607,6 +637,7 @@ internal class CustomExoPlayerView(
 
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
+        private const val ANIMATION_DURATION = 100L
         private val LANDSCAPE_MARGIN_HORIZONTAL = (30).toPixel().toInt()
     }
 }

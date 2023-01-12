@@ -12,6 +12,8 @@
         android:layout_height="match_parent"
         android:layout_weight=".40"
         android:clickable="false"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:focusable="false">
 
         <FrameLayout
@@ -22,6 +24,7 @@
             android:visibility="invisible">
 
             <ImageView
+                android:id="@+id/rewindIV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_rewind"
@@ -32,9 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="2dp"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:translationZ="1dp" />
 
         </FrameLayout>
 
@@ -53,6 +55,8 @@
         android:layout_height="match_parent"
         android:layout_weight=".40"
         android:clickable="false"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:focusable="false">
 
         <FrameLayout
@@ -63,6 +67,7 @@
             android:visibility="invisible">
 
             <ImageView
+                android:id="@+id/forwardIV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_forward"
@@ -73,9 +78,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="2dp"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:translationZ="1dp" />
 
         </FrameLayout>
 
