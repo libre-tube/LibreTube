@@ -280,7 +280,7 @@
     <string name="repeat_mode_current">Aktualny</string>
     <string name="backup_restore">Kopia zapasowa i przywracanie</string>
     <string name="backup">Wykonaj kopię zapasową</string>
-    <string name="picture_in_picture">Tryb PIP (obraz w obrazie)</string>
+    <string name="picture_in_picture">Tryb PiP (obraz w obrazie)</string>
     <string name="player_resize_mode">Rozmiar obrazu</string>
     <string name="maximum_image_cache">Maks. rozmiar pamięci podręcznej obrazów</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
@@ -401,7 +401,7 @@
     <string name="swipe_controls">Sterowanie gestami</string>
     <string name="swipe_controls_summary">Steruj jasnością i głośnością za pomocą gestów.</string>
     <string name="defaults">Domyślne</string>
-    <string name="pop_up">Tryb PIP</string>
+    <string name="pop_up">Tryb PiP</string>
     <string name="no_comments_available">Nie skomentowano jeszcze tego materiału.</string>
     <string name="comments_disabled">Komentarze zostały wyłączone przez twórcę.</string>
     <string name="captions_size">Rozmiar napisów</string>
@@ -431,4 +431,9 @@
     <string name="shuffle">Szuflada</string>
     <string name="add_to_bookmarks">Dodaj do zakładek</string>
     <string name="remove_bookmark">Usuń zakładkę</string>
+    <string name="rewind">Do tyłu</string>
+    <string name="forward">Do przodu</string>
+    <string name="pause">Wstrzymaj</string>
+    <string name="alternative_pip_controls">Alternatywne sterowanie PiP</string>
+    <string name="alternative_pip_controls_summary">Zastąp przyciski „przewiń do tyłu” i „przwiń do przodu” na „tylko dźwięk” i „pomiń film”.</string>
 </resources>

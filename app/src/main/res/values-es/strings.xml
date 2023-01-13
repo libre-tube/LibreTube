@@ -274,7 +274,7 @@
     <string name="required_network">Requiere conexión</string>
     <string name="network_all">Todos</string>
     <string name="downloading_apk">Descargando APK…</string>
-    <string name="seekbar_preview_summary">Muestra una instantánea al arrastrar el indicador de reproducción.</string>
+    <string name="seekbar_preview_summary">Mostrar una instantánea al arrastrar el indicador de reproducción.</string>
     <string name="notify_new_streams_summary">Notificaciones del nuevo contenido de los creadores a los que sigues.</string>
     <string name="general">General</string>
     <string name="general_summary">Idioma y región</string>
@@ -300,7 +300,7 @@
     <string name="error_occurred">Error</string>
     <string name="copied">Copiado</string>
     <string name="skip_buttons">Botones para omitir</string>
-    <string name="skip_buttons_summary">Muestra los botones para pasar al vídeo siguiente o al anterior.</string>
+    <string name="skip_buttons_summary">Mostrar los botones para pasar al vídeo siguiente o al anterior.</string>
     <string name="history_size">Tamaño máximo del historial</string>
     <string name="unlimited">Ilimitado</string>
     <string name="background_mode">Modo de segundo plano</string>
@@ -314,7 +314,7 @@
     <string name="copied_to_clipboard">Copiado en el portapapeles</string>
     <string name="open_copied">Abrir</string>
     <string name="audio_video_summary">Calidad y formato</string>
-    <string name="new_videos_badge_summary">Muestra una notificación con la cantidad de videos nuevos si hay algunos.</string>
+    <string name="new_videos_badge_summary">Mostrar una notificación con la cantidad de videos nuevos si hay algunos.</string>
     <string name="new_videos_badge">Indicador para nuevos vídeos</string>
     <string name="delete">Eliminar de las descargas</string>
     <string name="trending_layout">Diseño de tendencias alternativo</string>
@@ -324,11 +324,11 @@
     <string name="sb_skip_manual">Salto manual</string>
     <string name="download_channel_name">Servicio de descarga</string>
     <string name="skip_segment">Saltar segmento</string>
-    <string name="download_channel_description">Muestra una notificación al descargar medios.</string>
+    <string name="download_channel_description">Mostrar una notificación al descargar medios.</string>
     <string name="background_channel_name">Modo de fondo</string>
     <string name="push_channel_name">Trabajador de notificación</string>
     <string name="sb_skip_manual_summary">No omitir segmentos automáticamente, siempre preguntar antes.</string>
-    <string name="push_channel_description">Muestra una notificación cuando hay nuevas transmisiones disponibles.</string>
+    <string name="push_channel_description">Mostrar una notificación cuando hay nuevas transmisiones disponibles.</string>
     <string name="background_channel_description">Mostrar una notificación con botones para controlar el reproductor de audio.</string>
     <string name="local_subscriptions">Suscripciones locales</string>
     <string name="preferences">Preferencias</string>
@@ -371,7 +371,7 @@
     <string name="end_time">Hora de finalización</string>
     <string name="notification_time">Hora de la notificación</string>
     <string name="notification_time_summary">Periodo de tiempo en el que se permite mostrar las notificaciones.</string>
-    <string name="alternative_player_layout_summary">Muestra los videos relacionados como una fila encima de los comentarios en lugar de debajo.</string>
+    <string name="alternative_player_layout_summary">Mostrar los videos relacionados como una fila encima de los comentarios en lugar de debajo.</string>
     <string name="alternative_trending_layout">Diseño de tendencias alternativas</string>
     <string name="alternative_player_layout">Diseño alternativo del reproductor</string>
     <string name="navbar_order">Ordenar</string>
@@ -425,7 +425,7 @@
     <string name="color_violet">Violeta Versátil</string>
     <string name="failed_fetching_instances">No se pudieron recuperar las instancias disponibles.</string>
     <string name="hide_watched_from_feed">Ocultar los videos vistos de la fuente</string>
-    <string name="hide_watched_from_feed_summary">No muestres los vídeos vistos en más de un 90% en la pestaña de las suscripciones.</string>
+    <string name="hide_watched_from_feed_summary">No mostrar en la pestaña de suscripciones los vídeos vistos más de un 90%.</string>
     <string name="playlistUrl">URL de la lista de reproducción</string>
     <string name="pause_on_quit">Pausar al salir</string>
     <string name="shuffle">Aleatorio</string>
@@ -433,7 +433,7 @@
     <string name="remove_bookmark">Eliminar favorito</string>
     <string name="forward">Adelante</string>
     <string name="pause">Pausa</string>
-    <string name="alternative_pip_controls_summary">Mostrar solo audio y controles de salto en el modo de imagen en imagen en lugar de hacia adelante y hacia atrás</string>
+    <string name="alternative_pip_controls_summary">Mostrar sólo audio y controles de salto en el modo de imagen en imagen en lugar de hacia adelante y hacia atrás</string>
     <string name="rewind">Rebobinar</string>
-    <string name="alternative_pip_controls">Controles alternativos de imágenes incrustadas</string>
+    <string name="alternative_pip_controls">Controles alternativos de imagen en imagen</string>
 </resources>

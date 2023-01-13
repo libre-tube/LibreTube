@@ -431,4 +431,9 @@
     <string name="shuffle">Mischia</string>
     <string name="add_to_bookmarks">Aggiungi ai segnalibri</string>
     <string name="remove_bookmark">Rimuovi segnalibro</string>
+    <string name="rewind">Riavvolgi</string>
+    <string name="forward">Avanti</string>
+    <string name="pause">Pausa</string>
+    <string name="alternative_pip_controls">Controlli PiP alternativi</string>
+    <string name="alternative_pip_controls_summary">Mostra solo l\'audio e salta i controlli nel PiP, invece di avanti e riavvolgi</string>
 </resources>

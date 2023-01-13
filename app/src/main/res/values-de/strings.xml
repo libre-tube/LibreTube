@@ -431,4 +431,8 @@
     <string name="shuffle">Zufallswiedergabe</string>
     <string name="add_to_bookmarks">Zu Lesezeichen hinzufügen</string>
     <string name="remove_bookmark">Lesezeichen entfernen</string>
+    <string name="rewind">Zurückspulen</string>
+    <string name="forward">Vorspulen</string>
+    <string name="pause">Pause</string>
+    <string name="alternative_pip_controls">Alternative BiB-Steuerungen</string>
 </resources>
