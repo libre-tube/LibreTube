@@ -17,6 +17,7 @@ import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.extensions.toID
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.PlayingQueue
@@ -76,10 +77,14 @@ class AudioPlayerFragment : BaseFragment() {
             PlayingQueue.onQueueItemSelected(currentIndex + 1)
         }
 
+        binding.thumbnail.setOnClickListener {
+            PlayingQueueSheet().show(childFragmentManager)
+        }
+
         PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
 
         binding.playPause.setOnClickListener {
-            if (mBound == false) return@setOnClickListener
+            if (!mBound) return@setOnClickListener
             if (isPaused) playerService.play() else playerService.pause()
         }
 
@@ -112,7 +117,10 @@ class AudioPlayerFragment : BaseFragment() {
     }
 
     private fun updateCurrentPosition() {
-        binding.timeBar.value = (playerService.getCurrentPosition()?.toFloat() ?: 0f) / 1000
+        binding.timeBar.value = minOf(
+            (playerService.getCurrentPosition()?.toFloat() ?: 0f) / 1000,
+            binding.timeBar.valueTo
+        )
         handler.postDelayed(this::updateCurrentPosition, 200)
     }
 
