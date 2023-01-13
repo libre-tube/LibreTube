@@ -20,7 +20,6 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
@@ -75,11 +74,7 @@ class NowPlayingNotification(
             //  that's the only way to launch back into the previous activity (e.g. the player view
             val intent = Intent(context, MainActivity::class.java).apply {
                 if (isBackgroundPlayerNotification) {
-                    if (PreferenceHelper.getBoolean(PreferenceKeys.NOTIFICATION_OPEN_QUEUE, true)) {
-                        putExtra(IntentData.openQueueOnce, true)
-                    } else {
-                        putExtra(IntentData.videoId, videoId)
-                    }
+                    putExtra(IntentData.openAudioPlayer, true)
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 }
             }

@@ -25,10 +25,4 @@
         android:title="@string/about"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_queue"
-        android:title="@string/queue"
-        android:visible="false"
-        app:showAsAction="never" />
-
 </menu>

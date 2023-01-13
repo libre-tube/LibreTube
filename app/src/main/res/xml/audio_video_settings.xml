@@ -89,12 +89,6 @@
             app:valueFrom="0.2"
             app:valueTo="4.0" />
 
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:icon="@drawable/ic_grid"
-            android:title="@string/open_queue_from_notification"
-            app:key="notification_open_queue" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

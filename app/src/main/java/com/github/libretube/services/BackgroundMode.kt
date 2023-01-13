@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
+import android.os.Binder
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -86,6 +87,16 @@ class BackgroundMode : Service() {
      * Autoplay Preference
      */
     private val handler = Handler(Looper.getMainLooper())
+
+    /**
+     * Used for connecting to the AudioPlayerFragment
+     */
+    private val binder = LocalBinder()
+
+    /**
+     * Listener for passing playback state changes to the AudioPlayerFragment
+     */
+    var onIsPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
 
     /**
      * Setting the required [Notification] for running as a foreground service
@@ -251,6 +262,11 @@ class BackgroundMode : Service() {
          * Plays the next video when the current one ended
          */
         player?.addListener(object : Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+                onIsPlayingChanged?.invoke(isPlaying)
+            }
+
             override fun onPlaybackStateChanged(state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
@@ -381,7 +397,26 @@ class BackgroundMode : Service() {
         super.onDestroy()
     }
 
-    override fun onBind(p0: Intent?): IBinder? {
-        return null
+    inner class LocalBinder : Binder() {
+        // Return this instance of [BackgroundMode] so clients can call public methods
+        fun getService(): BackgroundMode = this@BackgroundMode
+    }
+
+    override fun onBind(p0: Intent?): IBinder {
+        return binder
+    }
+
+    fun getCurrentPosition() = player?.currentPosition
+
+    fun getDuration() = player?.duration
+
+    fun seekToPosition(position: Long) = player?.seekTo(position)
+
+    fun pause() {
+        player?.pause()
+    }
+
+    fun play() {
+        player?.play()
     }
 }
