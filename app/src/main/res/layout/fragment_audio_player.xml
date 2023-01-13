@@ -59,6 +59,27 @@
         app:labelBehavior="gone"
         android:layout_marginHorizontal="20dp" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            android:id="@+id/current_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            tools:text="00:00"/>
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            tools:text="10:15"/>
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

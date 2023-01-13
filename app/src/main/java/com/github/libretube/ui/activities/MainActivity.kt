@@ -334,8 +334,8 @@ class MainActivity : BaseActivity() {
                 }
                 // Handover back press to `BackPressedDispatcher`
                 else if (binding.bottomNav.menu.children.none {
-                    it.itemId == navController.currentDestination?.id
-                }
+                        it.itemId == navController.currentDestination?.id
+                    }
                 ) {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }

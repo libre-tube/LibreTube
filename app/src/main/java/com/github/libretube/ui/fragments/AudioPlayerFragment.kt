@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.extensions.toID
 import com.github.libretube.services.BackgroundMode
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.ImageHelper
@@ -31,7 +33,6 @@ class AudioPlayerFragment : BaseFragment() {
     private var isPaused: Boolean = false
 
     private lateinit var playerService: BackgroundMode
-    private var mBound: Boolean = false
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private val connection = object : ServiceConnection {
@@ -40,11 +41,17 @@ class AudioPlayerFragment : BaseFragment() {
             val binder = service as BackgroundMode.LocalBinder
             playerService = binder.getService()
             handleServiceConnection()
-            mBound = true
         }
 
         override fun onServiceDisconnected(arg0: ComponentName) {
-            mBound = false
+            val mainActivity = activity as MainActivity
+            if (mainActivity.navController.currentDestination?.id == R.id.audioPlayerFragment) {
+                mainActivity.navController.popBackStack()
+            } else {
+                mainActivity.navController.backQueue.removeAll {
+                    it.destination.id == R.id.audioPlayerFragment
+                }
+            }
         }
     }
 
@@ -69,11 +76,13 @@ class AudioPlayerFragment : BaseFragment() {
 
         binding.prev.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
+            if (!PlayingQueue.hasPrev()) return@setOnClickListener
             PlayingQueue.onQueueItemSelected(currentIndex - 1)
         }
 
         binding.next.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
+            if (!PlayingQueue.hasNext()) return@setOnClickListener
             PlayingQueue.onQueueItemSelected(currentIndex + 1)
         }
 
@@ -84,7 +93,7 @@ class AudioPlayerFragment : BaseFragment() {
         PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
 
         binding.playPause.setOnClickListener {
-            if (!mBound) return@setOnClickListener
+            if (!this::playerService.isInitialized) return@setOnClickListener
             if (isPaused) playerService.play() else playerService.pause()
         }
 
@@ -109,7 +118,10 @@ class AudioPlayerFragment : BaseFragment() {
     private fun initializeSeekBar() {
         if (!this::playerService.isInitialized) return
 
-        binding.timeBar.valueTo = (playerService.getDuration()?.toFloat() ?: return) / 1000
+        val duration = playerService.getDuration()?.toFloat() ?: return
+        binding.timeBar.valueTo = duration / 1000
+        binding.duration.text = DateUtils.formatElapsedTime((duration / 1000).toLong())
+
         binding.timeBar.addOnChangeListener { _, value, fromUser ->
             if (fromUser) playerService.seekToPosition(value.toLong() * 1000)
         }
@@ -117,9 +129,13 @@ class AudioPlayerFragment : BaseFragment() {
     }
 
     private fun updateCurrentPosition() {
+        val currentPosition = playerService.getCurrentPosition()?.toFloat() ?: 0f
         binding.timeBar.value = minOf(
-            (playerService.getCurrentPosition()?.toFloat() ?: 0f) / 1000,
+            currentPosition / 1000,
             binding.timeBar.valueTo
+        )
+        binding.currentPosition.text = DateUtils.formatElapsedTime(
+            (currentPosition / 1000).toLong()
         )
         handler.postDelayed(this::updateCurrentPosition, 200)
     }

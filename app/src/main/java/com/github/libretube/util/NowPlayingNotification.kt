@@ -20,7 +20,6 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
