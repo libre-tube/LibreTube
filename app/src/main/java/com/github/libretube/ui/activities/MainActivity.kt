@@ -39,11 +39,9 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.tools.BreakReminder
 import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NetworkHelper
-import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.elevation.SurfaceColors
@@ -221,11 +219,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_queue)?.isVisible = PlayingQueue.isNotEmpty()
-        return super.onPrepareOptionsMenu(menu)
-    }
-
     /**
      * Initialize the notification badge showing the amount of new videos
      */
@@ -371,10 +364,6 @@ class MainActivity : BaseActivity() {
             R.id.action_community -> {
                 val communityIntent = Intent(this, CommunityActivity::class.java)
                 startActivity(communityIntent)
-                true
-            }
-            R.id.action_queue -> {
-                PlayingQueueSheet().show(supportFragmentManager, null)
                 true
             }
             else -> super.onOptionsItemSelected(item)
