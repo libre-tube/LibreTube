@@ -68,7 +68,9 @@ object PlayingQueue {
     fun updateCurrent(streamItem: StreamItem) {
         currentStream = streamItem
         onTrackChangedListeners.forEach {
-            it.invoke(streamItem)
+            runCatching {
+                it.invoke(streamItem)
+            }
         }
         if (!contains(streamItem)) queue.add(streamItem)
     }

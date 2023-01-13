@@ -81,7 +81,7 @@
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
-            app:icon="@drawable/ic_play"
+            app:icon="@drawable/ic_pause"
             app:iconSize="24dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
