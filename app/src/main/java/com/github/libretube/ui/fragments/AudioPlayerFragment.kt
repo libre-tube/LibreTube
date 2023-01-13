@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ class AudioPlayerFragment : BaseFragment() {
     private val onTrackChangeListener: (StreamItem) -> Unit = {
         updateStreamInfo()
     }
+    private var handler = Handler(Looper.getMainLooper())
     private var isPaused: Boolean = false
 
     private lateinit var playerService: BackgroundMode
@@ -78,8 +81,6 @@ class AudioPlayerFragment : BaseFragment() {
         binding.playPause.setOnClickListener {
             if (mBound == false) return@setOnClickListener
             if (isPaused) playerService.play() else playerService.pause()
-            binding.playPause.setIconResource(if (isPaused) R.drawable.ic_pause else R.drawable.ic_play)
-            isPaused = !isPaused
         }
 
         updateStreamInfo()
@@ -98,6 +99,19 @@ class AudioPlayerFragment : BaseFragment() {
         ImageHelper.loadImage(current.thumbnail, binding.thumbnail)
     }
 
+    private fun initializeSeekBar() {
+        binding.timeBar.valueTo = playerService.getDuration()?.toFloat() ?: return
+        binding.timeBar.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) playerService.seekToPosition(value.toLong())
+        }
+        updateCurrentPosition()
+    }
+
+    private fun updateCurrentPosition() {
+        binding.timeBar.value = playerService.getCurrentPosition()?.toFloat() ?: 0f
+        handler.postDelayed(this::updateCurrentPosition, 200)
+    }
+
     private fun handleServiceConnection() {
         playerService.onIsPlayingChanged = { isPlaying ->
             binding.playPause.setIconResource(
@@ -105,6 +119,7 @@ class AudioPlayerFragment : BaseFragment() {
             )
             isPaused = !isPlaying
         }
+        initializeSeekBar()
     }
 
     override fun onDestroy() {
