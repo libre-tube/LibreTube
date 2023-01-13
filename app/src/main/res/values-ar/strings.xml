@@ -436,4 +436,5 @@
     <string name="forward">التقديم</string>
     <string name="alternative_pip_controls">ضوابط \"صورة داخل صورة\" البديلة</string>
     <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
+    <string name="audio_player">مشغل الصوت</string>
 </resources>
