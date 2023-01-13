@@ -436,4 +436,5 @@
     <string name="alternative_pip_controls">Alternativ PiP nəzarətləri</string>
     <string name="alternative_pip_controls_summary">Yalnız səsi göstər və irəli və geri çevirmək əvəzinə PiP-də idarəetmələri ötür</string>
     <string name="rewind">Geri sar</string>
+    <string name="audio_player">Səs oynadıcı</string>
 </resources>
