@@ -110,15 +110,15 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
@@ -350,13 +350,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
         }
         playerBinding.closeImageButton.setOnClickListener {
-            viewModel.isFullscreen.value = false
-            binding.playerMotionLayout.transitionToEnd()
-            val mainActivity = activity as MainActivity
-            mainActivity.supportFragmentManager.beginTransaction()
-                .remove(this)
-                .commit()
-            BackgroundHelper.stopBackgroundPlay(requireContext())
+            killFragment()
         }
         playerBinding.autoPlay.visibility = View.VISIBLE
 
@@ -473,6 +467,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun playOnBackground() {
+        BackgroundHelper.stopBackgroundPlay(requireContext())
         BackgroundHelper.playOnBackground(
             requireContext(),
             videoId!!,
@@ -480,6 +475,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             playlistId,
             channelId
         )
+        handler.postDelayed({
+            (activity as MainActivity).navController.navigate(R.id.audioPlayerFragment)
+            killFragment()
+        }, 500)
     }
 
     private fun setFullscreen() {
@@ -1518,6 +1517,15 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         )
 
         return exoPlayer.isPlaying && !backgroundModeRunning
+    }
+
+    private fun killFragment() {
+        viewModel.isFullscreen.value = false
+        binding.playerMotionLayout.transitionToEnd()
+        val mainActivity = activity as MainActivity
+        mainActivity.supportFragmentManager.beginTransaction()
+            .remove(this)
+            .commit()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
