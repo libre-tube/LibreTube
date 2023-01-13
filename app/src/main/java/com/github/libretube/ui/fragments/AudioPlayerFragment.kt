@@ -35,6 +35,7 @@ class AudioPlayerFragment : BaseFragment() {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
             val binder = service as BackgroundMode.LocalBinder
             playerService = binder.getService()
+            handleServiceConnection()
             mBound = true
         }
 
@@ -97,9 +98,19 @@ class AudioPlayerFragment : BaseFragment() {
         ImageHelper.loadImage(current.thumbnail, binding.thumbnail)
     }
 
+    private fun handleServiceConnection() {
+        playerService.onIsPlayingChanged = { isPlaying ->
+            binding.playPause.setIconResource(
+                if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play
+            )
+            isPaused = !isPlaying
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
+        playerService.onIsPlayingChanged = null
         activity?.unbindService(connection)
         // unregister the listener
         PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)

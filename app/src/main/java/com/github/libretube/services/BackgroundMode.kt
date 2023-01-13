@@ -94,6 +94,11 @@ class BackgroundMode : Service() {
     private val binder = LocalBinder()
 
     /**
+     * Listener for passing playback state changes to the AudioPlayerFragment
+     */
+    var onIsPlayingChanged: ((isPlaying: Boolean) -> Unit)? = null
+
+    /**
      * Setting the required [Notification] for running as a foreground service
      */
     override fun onCreate() {
@@ -257,6 +262,11 @@ class BackgroundMode : Service() {
          * Plays the next video when the current one ended
          */
         player?.addListener(object : Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+                onIsPlayingChanged?.invoke(isPlaying)
+            }
+
             override fun onPlaybackStateChanged(state: Int) {
                 when (state) {
                     Player.STATE_ENDED -> {
@@ -397,6 +407,8 @@ class BackgroundMode : Service() {
     }
 
     fun getCurrentPosition() = player?.currentPosition
+
+    fun getDuration() = player?.duration
 
     fun seekToPosition(position: Long) = player?.seekTo(position)
 
