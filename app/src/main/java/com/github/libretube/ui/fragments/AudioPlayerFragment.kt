@@ -97,18 +97,22 @@ class AudioPlayerFragment : BaseFragment() {
         }
 
         ImageHelper.loadImage(current.thumbnail, binding.thumbnail)
+
+        initializeSeekBar()
     }
 
     private fun initializeSeekBar() {
-        binding.timeBar.valueTo = playerService.getDuration()?.toFloat() ?: return
+        if (!this::playerService.isInitialized) return
+
+        binding.timeBar.valueTo = (playerService.getDuration()?.toFloat() ?: return) / 1000
         binding.timeBar.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) playerService.seekToPosition(value.toLong())
+            if (fromUser) playerService.seekToPosition(value.toLong() * 1000)
         }
         updateCurrentPosition()
     }
 
     private fun updateCurrentPosition() {
-        binding.timeBar.value = playerService.getCurrentPosition()?.toFloat() ?: 0f
+        binding.timeBar.value = (playerService.getCurrentPosition()?.toFloat() ?: 0f) / 1000
         handler.postDelayed(this::updateCurrentPosition, 200)
     }
 
