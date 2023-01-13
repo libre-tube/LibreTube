@@ -93,7 +93,6 @@ object PreferenceKeys {
      * Background mode
      */
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
-    const val NOTIFICATION_OPEN_QUEUE = "notification_open_queue"
 
     /**
      * Notifications

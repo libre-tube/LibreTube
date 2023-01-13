@@ -341,8 +341,8 @@ class MainActivity : BaseActivity() {
                 }
                 // Handover back press to `BackPressedDispatcher`
                 else if (binding.bottomNav.menu.children.none {
-                        it.itemId == navController.currentDestination?.id
-                    }
+                    it.itemId == navController.currentDestination?.id
+                }
                 ) {
                     this@MainActivity.onBackPressedDispatcher.onBackPressed()
                 }
@@ -391,6 +391,11 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
+        if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
+            navController.navigate(R.id.audioPlayerFragment)
+            return
+        }
+
         intent?.getStringExtra(IntentData.channelId)?.let {
             navController.navigate(
                 R.id.channelFragment,
@@ -412,6 +417,7 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.videoId)?.let {
             loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
         }
+
         when (intent?.getStringExtra("fragmentToOpen")) {
             "home" ->
                 navController.navigate(R.id.homeFragment)
@@ -421,10 +427,6 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.subscriptionsFragment)
             "library" ->
                 navController.navigate(R.id.libraryFragment)
-        }
-        if (intent?.getBooleanExtra(IntentData.openQueueOnce, false) == true) {
-            PlayingQueueSheet()
-                .show(supportFragmentManager)
         }
     }
 
