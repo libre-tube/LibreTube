@@ -90,6 +90,7 @@ class AudioPlayerFragment : BaseFragment() {
             PlayingQueueSheet().show(childFragmentManager)
         }
 
+        // Listen for track changes due to autoplay or the notification
         PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
 
         binding.playPause.setOnClickListener {
@@ -97,9 +98,13 @@ class AudioPlayerFragment : BaseFragment() {
             if (isPaused) playerService.play() else playerService.pause()
         }
 
+        // load the stream info into the UI
         updateStreamInfo()
     }
 
+    /**
+     * Load the information from a new stream into the UI
+     */
     private fun updateStreamInfo() {
         val current = PlayingQueue.getCurrent()
         current ?: return
@@ -118,18 +123,24 @@ class AudioPlayerFragment : BaseFragment() {
     private fun initializeSeekBar() {
         if (!this::playerService.isInitialized) return
 
-        val duration = playerService.getDuration()?.toFloat() ?: return
-        binding.timeBar.valueTo = duration / 1000
-        binding.duration.text = DateUtils.formatElapsedTime((duration / 1000).toLong())
-
         binding.timeBar.addOnChangeListener { _, value, fromUser ->
             if (fromUser) playerService.seekToPosition(value.toLong() * 1000)
         }
-        updateCurrentPosition()
+        updateSeekBar()
     }
 
-    private fun updateCurrentPosition() {
+    /**
+     * Update the position, duration and text views belonging to the seek bar
+     */
+    private fun updateSeekBar() {
+        val duration = playerService.getDuration()?.toFloat() ?: return
         val currentPosition = playerService.getCurrentPosition()?.toFloat() ?: 0f
+
+        // set the text for the indicators
+        binding.timeBar.valueTo = duration / 1000
+        binding.duration.text = DateUtils.formatElapsedTime((duration / 1000).toLong())
+
+        // update the time bar current value and maximum value
         binding.timeBar.value = minOf(
             currentPosition / 1000,
             binding.timeBar.valueTo
@@ -137,7 +148,7 @@ class AudioPlayerFragment : BaseFragment() {
         binding.currentPosition.text = DateUtils.formatElapsedTime(
             (currentPosition / 1000).toLong()
         )
-        handler.postDelayed(this::updateCurrentPosition, 200)
+        handler.postDelayed(this::updateSeekBar, 200)
     }
 
     private fun handleServiceConnection() {
@@ -151,11 +162,11 @@ class AudioPlayerFragment : BaseFragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
+        // unregister all listeners and the connected [playerService]
         playerService.onIsPlayingChanged = null
         activity?.unbindService(connection)
-        // unregister the listener
         PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)
+
+        super.onDestroy()
     }
 }
