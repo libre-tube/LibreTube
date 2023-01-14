@@ -17,7 +17,7 @@ object LocaleHelper {
         val languageName = PreferenceHelper.getString(PreferenceKeys.LANGUAGE, "sys")
         val locale = when {
             languageName == "sys" -> Locale.getDefault()
-            languageName.contains("-") == true -> {
+            languageName.contains("-") -> {
                 val languageParts = languageName.split("-")
                 Locale(
                     languageParts[0],
@@ -41,9 +41,9 @@ object LocaleHelper {
     private fun updateResourcesLegacy(context: Context, locale: Locale) {
         Locale.setDefault(locale)
         val resources: Resources = context.resources
-        val configuration: Configuration = resources.getConfiguration()
+        val configuration = resources.configuration
         configuration.locale = locale
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics())
+        resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
     private fun getDetectedCountry(context: Context): String {
