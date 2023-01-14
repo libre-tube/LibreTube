@@ -25,6 +25,8 @@ object PlayingQueue {
     private val onTrackChangedListeners: MutableList<(StreamItem) -> Unit> = mutableListOf()
     var repeatQueue: Boolean = false
 
+    fun clear() = queue.clear()
+
     fun add(vararg streamItem: StreamItem) {
         streamItem.forEach {
             if (currentStream != it) {
@@ -72,7 +74,7 @@ object PlayingQueue {
                 it.invoke(streamItem)
             }
         }
-        if (!contains(streamItem)) queue.add(streamItem)
+        if (!contains(streamItem)) queue.add(0, streamItem)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
@@ -190,6 +192,5 @@ object PlayingQueue {
         repeatQueue = false
         onQueueTapListener = {}
         onTrackChangedListeners.clear()
-        queue.clear()
     }
 }

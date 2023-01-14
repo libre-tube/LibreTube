@@ -86,6 +86,7 @@ import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.DashHelper
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
@@ -349,7 +350,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             BackgroundHelper.stopBackgroundPlay(requireContext())
         }
         playerBinding.closeImageButton.setOnClickListener {
-            killFragment()
+            killPlayerFragment()
         }
         playerBinding.autoPlay.visibility = View.VISIBLE
 
@@ -476,8 +477,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             true
         )
         handler.postDelayed({
-            (activity as MainActivity).navController.navigate(R.id.audioPlayerFragment)
-            killFragment()
+            NavigationHelper.startAudioPlayer(requireContext())
+            killPlayerFragment()
         }, 500)
     }
 
@@ -1530,7 +1531,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         return exoPlayer.isPlaying && !backgroundModeRunning
     }
 
-    private fun killFragment() {
+    private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
         val mainActivity = activity as MainActivity

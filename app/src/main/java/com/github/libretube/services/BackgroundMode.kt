@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ServiceCompat
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -24,6 +25,7 @@ import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
@@ -127,7 +129,7 @@ class BackgroundMode : Service() {
      */
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         try {
-            // clear the playing queue
+            // reset the playing queue listeners
             PlayingQueue.resetToDefaults()
 
             // get the intent arguments
@@ -145,6 +147,7 @@ class BackgroundMode : Service() {
 
             if (PlayerHelper.watchPositionsEnabled) updateWatchPosition()
         } catch (e: Exception) {
+            Log.e(TAG(), e.toString())
             onDestroy()
         }
         return super.onStartCommand(intent, flags, startId)
@@ -177,13 +180,15 @@ class BackgroundMode : Service() {
                 RetrofitInstance.api.getStreams(videoId)
             }.getOrNull() ?: return@launch
 
+            // clear the queue if it shouldn't be kept explicitly
+            if (!keepQueue) PlayingQueue.clear()
+
+            if (PlayingQueue.isEmpty()) updateQueue()
+
             // save the current stream to the queue
             streams?.toStreamItem(videoId)?.let {
                 PlayingQueue.updateCurrent(it)
             }
-
-            // add the playlist video to the queue
-            if (PlayingQueue.isEmpty() && !keepQueue) updateQueue()
 
             handler.post {
                 playAudio(seekToPosition)
@@ -191,9 +196,7 @@ class BackgroundMode : Service() {
         }
     }
 
-    private fun playAudio(
-        seekToPosition: Long
-    ) {
+    private fun playAudio(seekToPosition: Long) {
         initializePlayer()
         setMediaItem()
 
