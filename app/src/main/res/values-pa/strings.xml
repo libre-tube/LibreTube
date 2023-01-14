@@ -431,4 +431,12 @@
     <string name="shuffle">ਸ਼ਫਲ</string>
     <string name="remove_bookmark">ਬੁੱਕਮਾਰਕ ਹਟਾਓ</string>
     <string name="add_to_bookmarks">ਬੁੱਕਮਾਰਕਸ \'ਚ ਸ਼ਾਮਿਲ ਕਰੋ</string>
+    <string name="rewind">ਪਿੱਛੇ ਮੋੜੋ</string>
+    <string name="forward">ਅੱਗੇ ਕਰੋ</string>
+    <string name="pause">ਰੋਕੋ</string>
+    <string name="alternative_pip_controls_summary">ਸਿਰਫ਼ ਆਡੀਓ ਦਿਖਾਓ ਅਤੇ ਅੱਗੇ ਅਤੇ ਪਿੱਛੇ ਦੀ ਬਜਾਏ PiP ਵਿੱਚ ਕੰਟਰੋਲ ਛੱਡੋ</string>
+    <string name="alternative_pip_controls">ਵਿਕਲਪਿਕ PiP ਨਿਯੰਤਰਣ</string>
+    <string name="audio_player">ਆਡੀਓ ਪਲੇਅਰ</string>
+    <string name="audio_only_mode">ਸਿਰਫ ਆਡੀਓ ਮੋਡ</string>
+    <string name="audio_only_mode_summary">LibreTube ਨੂੰ ਇੱਕ ਸੰਗੀਤ ਪਲੇਅਰ ਵਿੱਚ ਬਦਲੋ।</string>
 </resources>

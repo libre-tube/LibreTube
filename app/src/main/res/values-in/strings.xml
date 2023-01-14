@@ -437,4 +437,6 @@
     <string name="alternative_pip_controls">Kontrol gambar dalam gambar alternatif</string>
     <string name="alternative_pip_controls_summary">Hanya tampilkan audio dan kontrol lewati dalam mode gambar dalam gambar daripada maju dan mundur</string>
     <string name="audio_player">Pemutar audio</string>
+    <string name="audio_only_mode_summary">Jadikan LibreTube menjadi pemutar musik.</string>
+    <string name="audio_only_mode">Mode hanya audio</string>
 </resources>

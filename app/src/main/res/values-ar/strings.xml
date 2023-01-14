@@ -438,4 +438,5 @@
     <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
     <string name="audio_player">مشغل الصوت</string>
     <string name="audio_only_mode">وضع الصوت فقط</string>
+    <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى.</string>
 </resources>
