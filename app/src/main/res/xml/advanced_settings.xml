@@ -13,6 +13,15 @@
             app:key="data_saver_mode_key"
             app:title="@string/data_saver_mode" />
 
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_download"
+            android:key="max_concurrent_downloads"
+            android:title="@string/concurrent_downloads"
+            app:defValue="6"
+            app:stepSize="1"
+            app:valueFrom="1"
+            app:valueTo="20" />
+
         <ListPreference
             android:entries="@array/cacheSize"
             android:entryValues="@array/cacheSizeValues"

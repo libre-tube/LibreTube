@@ -77,7 +77,7 @@ class LibreTubeApp : Application() {
     private fun initializeNotificationChannels() {
         val downloadChannel = NotificationChannelCompat.Builder(
             DOWNLOAD_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_NONE
+            NotificationManagerCompat.IMPORTANCE_LOW
         )
             .setName(getString(R.string.download_channel_name))
             .setDescription(getString(R.string.download_channel_description))

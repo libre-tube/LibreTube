@@ -1,24 +1,29 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.DownloadedMediaRowBinding
-import com.github.libretube.extensions.formatShort
-import com.github.libretube.obj.DownloadedFile
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.DownloadWithItems
+import com.github.libretube.extensions.formatAsFileSize
+import com.github.libretube.extensions.query
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import com.github.libretube.util.DownloadHelper
-import com.github.libretube.util.TextUtils
+import com.github.libretube.util.ImageHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
 class DownloadsAdapter(
-    private val files: MutableList<DownloadedFile>
+    private val context: Context,
+    private val downloads: MutableList<DownloadWithItems>,
+    private val toogleDownload: (DownloadWithItems) -> Boolean
 ) : RecyclerView.Adapter<DownloadsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadsViewHolder {
         val binding = DownloadedMediaRowBinding.inflate(
@@ -31,24 +36,56 @@ class DownloadsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DownloadsViewHolder, position: Int) {
-        val file = files[position]
+        val download = downloads[position].download
+        val items = downloads[position].downloadItems
         holder.binding.apply {
-            fileName.text = file.name
-            fileSize.text = "${file.size / (1024 * 1024)} MiB"
+            title.text = download.title
+            uploaderName.text = download.uploader
+            videoInfo.text = download.uploadDate
 
-            file.metadata?.let {
-                uploaderName.text = it.uploader
-                videoInfo.text = it.views.formatShort() + " " +
-                    root.context.getString(R.string.views_placeholder) +
-                    TextUtils.SEPARATOR + it.uploadDate
+            val downloadSize = items.sumOf { it.downloadSize }
+            val currentSize = items.sumOf { File(it.path).length() }
+
+            if (downloadSize == -1L) {
+                progressBar.isIndeterminate = true
+            } else {
+                progressBar.max = downloadSize.toInt()
+                progressBar.progress = currentSize.toInt()
             }
 
-            thumbnailImage.setImageBitmap(file.thumbnail)
+            val totalSizeInfo = if (downloadSize > 0) {
+                downloadSize.formatAsFileSize()
+            } else {
+                context.getString(R.string.unknown)
+            }
+            if (downloadSize > currentSize) {
+                downloadOverlay.visibility = View.VISIBLE
+                resumePauseBtn.setImageResource(R.drawable.ic_download)
+                fileSize.text = "${currentSize.formatAsFileSize()} / $totalSizeInfo"
+            } else {
+                downloadOverlay.visibility = View.GONE
+                fileSize.text = totalSizeInfo
+            }
+
+            download.thumbnailPath?.let { path ->
+                thumbnailImage.setImageBitmap(ImageHelper.getDownloadedImage(context, path))
+            }
+
+            progressBar.setOnClickListener {
+                val isDownloading = toogleDownload(downloads[position])
+
+                resumePauseBtn.setImageResource(
+                    if (isDownloading) {
+                        R.drawable.ic_pause
+                    } else {
+                        R.drawable.ic_download
+                    }
+                )
+            }
 
             root.setOnClickListener {
-                val intent = Intent(root.context, OfflinePlayerActivity::class.java).also {
-                    it.putExtra(IntentData.fileName, file.name)
-                }
+                val intent = Intent(root.context, OfflinePlayerActivity::class.java)
+                intent.putExtra(IntentData.videoId, download.videoId)
                 root.context.startActivity(intent)
             }
 
@@ -61,27 +98,18 @@ class DownloadsAdapter(
                     ) { _, index ->
                         when (index) {
                             0 -> {
-                                val audioDir = DownloadHelper.getDownloadDir(
-                                    root.context,
-                                    DownloadHelper.AUDIO_DIR
-                                )
-                                val videoDir = DownloadHelper.getDownloadDir(
-                                    root.context,
-                                    DownloadHelper.VIDEO_DIR
-                                )
-
-                                listOf(audioDir, videoDir).forEach {
-                                    val f = File(it, file.name)
-                                    if (f.exists()) {
+                                items.map { File(it.path) }.forEach { file ->
+                                    if (file.exists()) {
                                         try {
-                                            f.delete()
-                                        } catch (e: Exception) {
-                                            e.printStackTrace()
-                                        }
+                                            file.delete()
+                                        } catch (_: Exception) { }
                                     }
                                 }
 
-                                files.removeAt(position)
+                                query {
+                                    DatabaseHolder.Database.downloadDao().deleteDownload(download)
+                                }
+                                downloads.removeAt(position)
                                 notifyItemRemoved(position)
                                 notifyItemRangeChanged(position, itemCount)
                             }
@@ -95,6 +123,6 @@ class DownloadsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return files.size
+        return downloads.size
     }
 }

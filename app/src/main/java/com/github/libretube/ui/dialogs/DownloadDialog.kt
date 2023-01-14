@@ -1,8 +1,8 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -15,10 +15,8 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.sanitize
-import com.github.libretube.services.DownloadService
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.MetadataHelper
+import com.github.libretube.util.DownloadHelper
+import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
 import retrofit2.HttpException
@@ -39,6 +37,25 @@ class DownloadDialog(
 
         binding.videoRadio.setOnClickListener {
             binding.videoSpinner.visibility = View.VISIBLE
+        }
+
+        binding.fileName.filters += InputFilter { source, start, end, _, _, _ ->
+            if (source.isNullOrBlank()) {
+                return@InputFilter null
+            }
+
+            // Extract actual source
+            val actualSource = source.subSequence(start, end)
+            // Filter out unsupported characters
+            val filtered = actualSource.filterNot {
+                TextUtils.RESERVED_CHARS.contains(it, true)
+            }
+            // Check if something was filtered out
+            return@InputFilter if (actualSource.length != filtered.length) {
+                filtered
+            } else {
+                null
+            }
         }
 
         return MaterialAlertDialogBuilder(requireContext())
@@ -68,36 +85,44 @@ class DownloadDialog(
         binding.fileName.setText(streams.title.toString())
 
         val vidName = arrayListOf<String>()
-        val videoUrl = arrayListOf<String>()
 
         // add empty selection
         vidName.add(getString(R.string.no_video))
-        videoUrl.add("")
 
         // add all available video streams
         for (vid in streams.videoStreams!!) {
             if (vid.url != null) {
                 val name = vid.quality + " " + vid.format
                 vidName.add(name)
-                videoUrl.add(vid.url!!)
             }
         }
 
         val audioName = arrayListOf<String>()
-        val audioUrl = arrayListOf<String>()
 
         // add empty selection
         audioName.add(getString(R.string.no_audio))
-        audioUrl.add("")
 
         // add all available audio streams
         for (audio in streams.audioStreams!!) {
             if (audio.url != null) {
                 val name = audio.quality + " " + audio.format
                 audioName.add(name)
-                audioUrl.add(audio.url!!)
             }
         }
+
+        val subtitleName = arrayListOf<String>()
+
+        // add empty selection
+        subtitleName.add(getString(R.string.no_subtitle))
+
+        // add all available subtitles
+        for (subtitle in streams.subtitles!!) {
+            if (subtitle.url != null) {
+                subtitleName.add(subtitle.name.toString())
+            }
+        }
+
+        if (subtitleName.size == 1) binding.subtitleSpinner.visibility = View.GONE
 
         // initialize the video sources
         val videoArrayAdapter = ArrayAdapter(
@@ -109,6 +134,7 @@ class DownloadDialog(
         binding.videoSpinner.adapter = videoArrayAdapter
         if (binding.videoSpinner.size >= 1) binding.videoSpinner.setSelection(1)
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
+        if (binding.subtitleSpinner.size >= 1) binding.subtitleSpinner.setSelection(1)
 
         // initialize the audio sources
         val audioArrayAdapter = ArrayAdapter(
@@ -120,48 +146,55 @@ class DownloadDialog(
         binding.audioSpinner.adapter = audioArrayAdapter
         if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
 
+        // initialize the subtitle sources
+        val subtitleArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            subtitleName
+        )
+        subtitleArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.subtitleSpinner.adapter = subtitleArrayAdapter
+        if (binding.subtitleSpinner.size >= 1) binding.subtitleSpinner.setSelection(1)
+
         binding.download.setOnClickListener {
             if (binding.fileName.text.toString().isEmpty()) {
                 Toast.makeText(context, R.string.invalid_filename, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val vidUrl = videoUrl[binding.videoSpinner.selectedItemPosition]
-            val audUrl = audioUrl[binding.audioSpinner.selectedItemPosition]
+            val videoPosition = binding.videoSpinner.selectedItemPosition - 1
+            val audioPosition = binding.audioSpinner.selectedItemPosition - 1
+            val subtitlePosition = binding.subtitleSpinner.selectedItemPosition - 1
 
-            if (audUrl == "" && vidUrl == "") {
+            if (videoPosition == -1 && audioPosition == -1 && subtitlePosition == -1) {
                 Toast.makeText(context, R.string.nothing_selected, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val fileName = binding.fileName.text.toString().sanitize()
-
-            val metadataHelper = MetadataHelper(requireContext())
-            metadataHelper.createMetadata(fileName, streams)
-            streams.thumbnailUrl?.let { thumbnailUrl ->
-                ImageHelper.downloadImage(
-                    requireContext(),
-                    thumbnailUrl,
-                    fileName
-                )
+            val videoStream = when (videoPosition) {
+                -1 -> null
+                else -> streams.videoStreams[videoPosition]
+            }
+            val audioStream = when (audioPosition) {
+                -1 -> null
+                else -> streams.audioStreams[audioPosition]
+            }
+            val subtitle = when (subtitlePosition) {
+                -1 -> null
+                else -> streams.subtitles[subtitlePosition]
             }
 
-            val intent = Intent(context, DownloadService::class.java)
-
-            intent.putExtra(
-                "videoName",
-                fileName
-            )
-            intent.putExtra(
-                "videoUrl",
-                vidUrl
-            )
-            intent.putExtra(
-                "audioUrl",
-                audUrl
+            DownloadHelper.startDownloadService(
+                context = requireContext(),
+                videoId = videoId,
+                fileName = binding.fileName.text.toString(),
+                videoFormat = videoStream?.format,
+                videoQuality = videoStream?.quality,
+                audioFormat = audioStream?.format,
+                audioQuality = audioStream?.quality,
+                subtitleCode = subtitle?.code
             )
 
-            context?.startService(intent)
             dismiss()
         }
     }

@@ -17,10 +17,12 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
+import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.enums.FileType
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.util.DownloadHelper
 import com.github.libretube.util.PlayerHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -33,7 +35,7 @@ import java.io.File
 
 class OfflinePlayerActivity : BaseActivity() {
     private lateinit var binding: ActivityOfflinePlayerBinding
-    private lateinit var fileName: String
+    private lateinit var videoId: String
     private lateinit var player: ExoPlayer
     private lateinit var playerView: StyledPlayerView
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
@@ -46,7 +48,7 @@ class OfflinePlayerActivity : BaseActivity() {
 
         super.onCreate(savedInstanceState)
 
-        fileName = intent?.getStringExtra(IntentData.fileName)!!
+        videoId = intent?.getStringExtra(IntentData.videoId)!!
 
         binding = ActivityOfflinePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -96,15 +98,17 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     private fun playVideo() {
-        val videoUri = File(
-            DownloadHelper.getDownloadDir(this, DownloadHelper.VIDEO_DIR),
-            fileName
-        ).toUri()
+        val downloadFiles = awaitQuery {
+            Database.downloadDao().findById(videoId).downloadItems
+        }
 
-        val audioUri = File(
-            DownloadHelper.getDownloadDir(this, DownloadHelper.AUDIO_DIR),
-            fileName
-        ).toUri()
+        val video = downloadFiles.firstOrNull { it.type == FileType.VIDEO }
+        val audio = downloadFiles.firstOrNull { it.type == FileType.AUDIO }
+        val subtitle = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
+
+        val videoUri = video?.path?.let { File(it).toUri() }
+        val audioUri = audio?.path?.let { File(it).toUri() }
+        val subtitleUri = subtitle?.path?.let { File(it).toUri() }
 
         setMediaSource(
             videoUri,

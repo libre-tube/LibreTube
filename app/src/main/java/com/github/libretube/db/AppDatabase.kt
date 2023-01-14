@@ -4,6 +4,7 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.github.libretube.db.dao.CustomInstanceDao
+import com.github.libretube.db.dao.DownloadDao
 import com.github.libretube.db.dao.LocalPlaylistsDao
 import com.github.libretube.db.dao.LocalSubscriptionDao
 import com.github.libretube.db.dao.PlaylistBookmarkDao
@@ -11,6 +12,8 @@ import com.github.libretube.db.dao.SearchHistoryDao
 import com.github.libretube.db.dao.WatchHistoryDao
 import com.github.libretube.db.dao.WatchPositionDao
 import com.github.libretube.db.obj.CustomInstance
+import com.github.libretube.db.obj.Download
+import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.db.obj.LocalPlaylistItem
 import com.github.libretube.db.obj.LocalSubscription
@@ -28,12 +31,15 @@ import com.github.libretube.db.obj.WatchPosition
         LocalSubscription::class,
         PlaylistBookmark::class,
         LocalPlaylist::class,
-        LocalPlaylistItem::class
+        LocalPlaylistItem::class,
+        Download::class,
+        DownloadItem::class
     ],
-    version = 9,
+    version = 10,
     autoMigrations = [
         AutoMigration(from = 7, to = 8),
-        AutoMigration(from = 8, to = 9)
+        AutoMigration(from = 8, to = 9),
+        AutoMigration(from = 9, to = 10)
     ]
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -71,4 +77,9 @@ abstract class AppDatabase : RoomDatabase() {
      * Local playlists
      */
     abstract fun localPlaylistsDao(): LocalPlaylistsDao
+
+    /**
+     * Downloads
+     */
+    abstract fun downloadDao(): DownloadDao
 }

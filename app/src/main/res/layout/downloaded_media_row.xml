@@ -23,6 +23,34 @@
             android:scaleType="fitXY"
             tools:src="@tools:sample/backgrounds/scenic" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/downloadOverlay"
+            android:layout_width="140dp"
+            android:layout_height="80dp"
+            android:background="#BF000000">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circular_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/resumePauseBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_download"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toLeftOf="@id/progressBar"
+                app:layout_constraintRight_toRightOf="@id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
@@ -33,7 +61,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/fileName"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"
@@ -58,8 +86,9 @@
 
     <TextView
         android:id="@+id/fileSize"
-        android:layout_width="wrap_content"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="bottom"
+        android:textSize="13sp"/>
 
 </LinearLayout>

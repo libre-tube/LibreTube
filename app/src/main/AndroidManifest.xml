@@ -352,6 +352,11 @@
             android:name=".services.BackgroundMode"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver
+            android:name=".receivers.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
