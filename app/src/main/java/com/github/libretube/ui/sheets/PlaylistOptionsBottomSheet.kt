@@ -4,14 +4,21 @@ import android.os.Bundle
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
+import com.github.libretube.extensions.toPlaylistBookmark
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.util.BackgroundHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class PlaylistOptionsBottomSheet(
@@ -24,12 +31,21 @@ class PlaylistOptionsBottomSheet(
     override fun onCreate(savedInstanceState: Bundle?) {
         // options for the dialog
         val optionsList = mutableListOf(
-            context?.getString(R.string.playOnBackground)!!
+            getString(R.string.playOnBackground)
         )
 
+        val isBookmarked = awaitQuery {
+            DatabaseHolder.Database.playlistBookmarkDao().includes(playlistId)
+        }
+
         if (playlistType == PlaylistType.PUBLIC) {
-            optionsList.add(context?.getString(R.string.share)!!)
-            optionsList.add(context?.getString(R.string.clonePlaylist)!!)
+            optionsList.add(getString(R.string.share))
+            optionsList.add(getString(R.string.clonePlaylist))
+
+            // only add the bookmark option to the playlist if public
+            optionsList.add(
+                getString(if (isBookmarked) R.string.remove_bookmark else R.string.add_to_bookmarks)
+            )
         } else {
             optionsList.add(context?.getString(R.string.renamePlaylist)!!)
             optionsList.add(context?.getString(R.string.deletePlaylist)!!)
@@ -38,7 +54,7 @@ class PlaylistOptionsBottomSheet(
         setSimpleItems(optionsList) { which ->
             when (optionsList[which]) {
                 // play the playlist in the background
-                context?.getString(R.string.playOnBackground) -> {
+                getString(R.string.playOnBackground) -> {
                     runBlocking {
                         val playlist =
                             if (playlistType == PlaylistType.PRIVATE) {
@@ -54,24 +70,42 @@ class PlaylistOptionsBottomSheet(
                     }
                 }
                 // Clone the playlist to the users Piped account
-                context?.getString(R.string.clonePlaylist) -> {
+                getString(R.string.clonePlaylist) -> {
                     PlaylistsHelper.clonePlaylist(requireContext(), playlistId)
                 }
                 // share the playlist
-                context?.getString(R.string.share) -> {
+                getString(R.string.share) -> {
                     val shareDialog = ShareDialog(playlistId, ShareObjectType.PLAYLIST, shareData)
                     // using parentFragmentManager, childFragmentManager doesn't work here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
-                context?.getString(R.string.deletePlaylist) -> {
+                getString(R.string.deletePlaylist) -> {
                     DeletePlaylistDialog(playlistId, playlistType) {
                         // try to refresh the playlists in the library on deletion success
                         onDelete.invoke()
                     }.show(parentFragmentManager, null)
                 }
-                context?.getString(R.string.renamePlaylist) -> {
+                getString(R.string.renamePlaylist) -> {
                     RenamePlaylistDialog(playlistId, playlistName)
                         .show(parentFragmentManager, null)
+                }
+                else -> {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        if (isBookmarked) {
+                            query {
+                                DatabaseHolder.Database.playlistBookmarkDao()
+                                    .deleteById(playlistId)
+                            }
+                        } else {
+                            val bookmark = try {
+                                RetrofitInstance.api.getPlaylist(playlistId)
+                            } catch (e: Exception) {
+                                return@launch
+                            }.toPlaylistBookmark(playlistId)
+                            DatabaseHolder.Database.playlistBookmarkDao().insertAll(bookmark)
+                        }
+                    }
+                    dismiss()
                 }
             }
         }

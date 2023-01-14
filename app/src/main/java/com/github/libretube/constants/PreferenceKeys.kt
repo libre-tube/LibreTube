@@ -87,12 +87,13 @@ object PreferenceKeys {
     const val CAPTIONS_SIZE = "captions_size"
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
     const val PAUSE_ON_QUIT = "pause_on_quit"
+    const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
 
     /**
      * Background mode
      */
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
-    const val NOTIFICATION_OPEN_QUEUE = "notification_open_queue"
+    const val AUDIO_ONLY_MODE = "audio_only_mode"
 
     /**
      * Notifications
@@ -111,11 +112,13 @@ object PreferenceKeys {
     const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
     const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
+    const val SELECTED_FEED_FILTER = "selected_feed_filer"
+    const val FEED_SORT_ORDER = "feed_sort_oder"
 
     /**
      * Advanced
      */
-    const val DATA_SAVER_MODE = "data_saver_mode"
+    const val DATA_SAVER_MODE = "data_saver_mode_key"
     const val MAX_IMAGE_CACHE = "image_cache_size"
     const val RESET_SETTINGS = "reset_settings"
     const val CLEAR_SEARCH_HISTORY = "clear_search_history"

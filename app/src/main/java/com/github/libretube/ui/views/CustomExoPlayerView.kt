@@ -4,11 +4,16 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -127,6 +132,12 @@ internal class CustomExoPlayerView(
             isPlayerLocked = !isPlayerLocked
         }
 
+        binding.autoPlay.isChecked = autoplayEnabled
+
+        binding.autoPlay.setOnCheckedChangeListener { _, isChecked ->
+            autoplayEnabled = isChecked
+        }
+
         resizeMode = when (resizeModePref) {
             "fill" -> AspectRatioFrameLayout.RESIZE_MODE_FILL
             "zoom" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM
@@ -213,19 +224,6 @@ internal class CustomExoPlayerView(
     private fun initializeAdvancedOptions(context: Context) {
         binding.toggleOptions.setOnClickListener {
             val items = mutableListOf(
-                BottomSheetItem(
-                    context.getString(R.string.player_autoplay),
-                    R.drawable.ic_play,
-                    {
-                        if (autoplayEnabled) {
-                            context.getString(R.string.enabled)
-                        } else {
-                            context.getString(R.string.disabled)
-                        }
-                    }
-                ) {
-                    onAutoplayClicked()
-                },
                 BottomSheetItem(
                     context.getString(R.string.repeat_mode),
                     R.drawable.ic_repeat,
@@ -326,6 +324,18 @@ internal class CustomExoPlayerView(
         binding.exoTitle.visibility = visibility
         binding.playPauseBTN.visibility = visibility
 
+        // hide the dimming background overlay if locked
+        binding.exoControlsBackground.setBackgroundColor(
+            if (isLocked) {
+                ContextCompat.getColor(
+                    context,
+                    com.google.android.exoplayer2.R.color.exo_black_opacity_60
+                )
+            } else {
+                Color.TRANSPARENT
+            }
+        )
+
         // disable tap and swipe gesture if the player is locked
         playerGestureController.isEnabled = isLocked
     }
@@ -334,19 +344,8 @@ internal class CustomExoPlayerView(
         player?.seekTo((player?.currentPosition ?: 0L) - PlayerHelper.seekIncrement)
 
         // show the rewind button
-        doubleTapOverlayBinding?.rewindBTN.apply {
-            this!!.visibility = View.VISIBLE
-            // clear previous animation
-            this.animate().rotation(0F).setDuration(0).start()
-            // start new animation
-            this.animate()
-                .rotation(-30F)
-                .setDuration(100)
-                .withEndAction {
-                    // reset the animation when finished
-                    animate().rotation(0F).setDuration(100).start()
-                }
-                .start()
+        doubleTapOverlayBinding?.apply {
+            animateSeeking(rewindBTN, rewindIV, rewindTV, true)
 
             runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             // start callback to hide the button
@@ -358,19 +357,8 @@ internal class CustomExoPlayerView(
         player?.seekTo(player!!.currentPosition + PlayerHelper.seekIncrement)
 
         // show the forward button
-        doubleTapOverlayBinding?.forwardBTN.apply {
-            this!!.visibility = View.VISIBLE
-            // clear previous animation
-            this.animate().rotation(0F).setDuration(0).start()
-            // start new animation
-            this.animate()
-                .rotation(30F)
-                .setDuration(100)
-                .withEndAction {
-                    // reset the animation when finished
-                    animate().rotation(0F).setDuration(100).start()
-                }
-                .start()
+        doubleTapOverlayBinding?.apply {
+            animateSeeking(forwardBTN, forwardIV, forwardTV, false)
 
             // start callback to hide the button
             runnableHandler.removeCallbacks(hideForwardButtonRunnable)
@@ -378,14 +366,63 @@ internal class CustomExoPlayerView(
         }
     }
 
+    private fun animateSeeking(
+        container: FrameLayout,
+        imageView: ImageView,
+        textView: TextView,
+        isRewind: Boolean
+    ) {
+        container.visibility = View.VISIBLE
+        // the direction of the action
+        val direction = if (isRewind) -1 else 1
+
+        // clear previous animation
+        imageView.animate()
+            .rotation(0F)
+            .setDuration(0)
+            .start()
+
+        textView.animate()
+            .translationX(0f)
+            .setDuration(0)
+            .start()
+
+        // start the rotate animation of the drawable
+        imageView.animate()
+            .rotation(direction * 30F)
+            .setDuration(ANIMATION_DURATION)
+            .withEndAction {
+                // reset the animation when finished
+                imageView.animate()
+                    .rotation(0F)
+                    .setDuration(ANIMATION_DURATION)
+                    .start()
+            }
+            .start()
+
+        // animate the text view to move outside the image view
+        textView.animate()
+            .translationX(direction * 100f)
+            .setDuration((ANIMATION_DURATION * 1.5).toLong())
+            .withEndAction {
+                // move the text back into the button
+                handler.postDelayed({
+                    textView.animate()
+                        .setDuration(ANIMATION_DURATION / 2)
+                        .translationX(0f)
+                        .start()
+                }, 100)
+            }
+    }
+
     private val hideForwardButtonRunnable = Runnable {
-        doubleTapOverlayBinding?.forwardBTN.apply {
-            this!!.visibility = View.GONE
+        doubleTapOverlayBinding?.forwardBTN?.apply {
+            this.visibility = View.GONE
         }
     }
     private val hideRewindButtonRunnable = Runnable {
-        doubleTapOverlayBinding?.rewindBTN.apply {
-            this!!.visibility = View.GONE
+        doubleTapOverlayBinding?.rewindBTN?.apply {
+            this.visibility = View.GONE
         }
     }
 
@@ -446,23 +483,6 @@ internal class CustomExoPlayerView(
         gestureViewBinding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
     }
 
-    override fun onAutoplayClicked() {
-        // autoplay options dialog
-        BaseBottomSheet()
-            .setSimpleItems(
-                listOf(
-                    context.getString(R.string.enabled),
-                    context.getString(R.string.disabled)
-                )
-            ) { index ->
-                when (index) {
-                    0 -> autoplayEnabled = true
-                    1 -> autoplayEnabled = false
-                }
-            }
-            .show(supportFragmentManager)
-    }
-
     override fun onPlaybackSpeedClicked() {
         player?.let { PlaybackSpeedSheet(it).show(supportFragmentManager) }
     }
@@ -512,6 +532,7 @@ internal class CustomExoPlayerView(
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
 
+        // add a larger bottom margin to the time bar in landscape mode
         val offset = when (newConfig?.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> 20.toPixel()
             else -> 10.toPixel()
@@ -520,6 +541,22 @@ internal class CustomExoPlayerView(
         binding.progressBar.let {
             val params = it.layoutParams as MarginLayoutParams
             params.bottomMargin = offset.toInt()
+            it.layoutParams = params
+        }
+
+        // add a margin to the top and the bottom bar in landscape mode for notches
+        val newMargin = if (
+            newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
+        ) {
+            LANDSCAPE_MARGIN_HORIZONTAL
+        } else {
+            0
+        }
+
+        listOf(binding.exoTopBar, binding.exoBottomBar).forEach {
+            val params = it.layoutParams as MarginLayoutParams
+            params.marginStart = newMargin
+            params.marginEnd = newMargin
             it.layoutParams = params
         }
     }
@@ -600,5 +637,7 @@ internal class CustomExoPlayerView(
 
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
+        private const val ANIMATION_DURATION = 100L
+        private val LANDSCAPE_MARGIN_HORIZONTAL = (30).toPixel().toInt()
     }
 }

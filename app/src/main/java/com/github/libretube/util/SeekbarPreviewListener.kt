@@ -17,29 +17,19 @@ class SeekbarPreviewListener(
 ) : TimeBar.OnScrubListener {
     private var moving = false
 
-    override fun onScrubStart(timeBar: TimeBar, position: Long) {}
+    override fun onScrubStart(timeBar: TimeBar, position: Long) {
+        moving = true
+
+        processPreview(position)
+    }
 
     /**
      * Show a preview of the scrubber position
      */
     override fun onScrubMove(timeBar: TimeBar, position: Long) {
         moving = true
-        val previewFrame = getPreviewFrame(position) ?: return
 
-        // update the offset of the preview image view
-        updatePreviewX(position)
-
-        val request = ImageRequest.Builder(previewIv.context)
-            .data(previewFrame.previewUrl)
-            .target {
-                if (!moving) return@target
-                val frame = cutOutBitmap(it.toBitmap(), previewFrame)
-                previewIv.setImageBitmap(frame)
-                previewIv.visibility = View.VISIBLE
-            }
-            .build()
-
-        ImageHelper.imageLoader.enqueue(request)
+        processPreview(position)
     }
 
     /**
@@ -58,6 +48,28 @@ class SeekbarPreviewListener(
                 previewIv.alpha = 1f
             }
             .start()
+    }
+
+    /**
+     * Make a request to get the image frame and update its position
+     */
+    private fun processPreview(position: Long) {
+        val previewFrame = getPreviewFrame(position) ?: return
+
+        // update the offset of the preview image view
+        updatePreviewX(position)
+
+        val request = ImageRequest.Builder(previewIv.context)
+            .data(previewFrame.previewUrl)
+            .target {
+                if (!moving) return@target
+                val frame = cutOutBitmap(it.toBitmap(), previewFrame)
+                previewIv.setImageBitmap(frame)
+                previewIv.visibility = View.VISIBLE
+            }
+            .build()
+
+        ImageHelper.imageLoader.enqueue(request)
     }
 
     /**

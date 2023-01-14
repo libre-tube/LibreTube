@@ -25,48 +25,6 @@
         <item>https://piped-api.privacy.com.de/</item>
     </string-array>
 
-    <string-array name="shareHostsList">
-        <item>youtube.com"</item>
-        <item>m.youtube.com"</item>
-        <item>www.youtube.com"</item>
-        <item>music.youtube.com"</item>
-        <item>youtu.be"</item>
-        <item>tubus.eduvid.org"</item>
-        <item>invidio.us"</item>
-        <item>dev.invidio.us"</item>
-        <item>www.invidio.us"</item>
-        <item>redirect.invidious.io"</item>
-        <item>invidious.snopyta.org"</item>
-        <item>yewtu.be"</item>
-        <item>tube.connect.cafe"</item>
-        <item>invidious.kavin.rocks"</item>
-        <item>invidious-us.kavin.rocks"</item>
-        <item>invidious.site"</item>
-        <item>vid.mint.lgbt"</item>
-        <item>invidiou.site"</item>
-        <item>invidious.fdn.fr"</item>
-        <item>invidious.048596.xyz"</item>
-        <item>invidious.zee.li"</item>
-        <item>vid.puffyan.us"</item>
-        <item>ytprivate.com"</item>
-        <item>invidious.namazso.eu"</item>
-        <item>invidious.silkky.cloud"</item>
-        <item>invidious.exonip.de"</item>
-        <item>inv.riverside.rocks"</item>
-        <item>invidious.blamefran.net"</item>
-        <item>invidious.moomoo.me"</item>
-        <item>ytb.trom.tf"</item>
-        <item>yt.cyberhost.uk"</item>
-        <item>y.com.cm"</item>
-        <item>piped.video"</item>
-        <item>piped.tokhmi.xyz"</item>
-        <item>piped.kavin.rocks"</item>
-        <item>piped.silkky.cloud"</item>
-        <item>piped.silkky.cloud"</item>
-        <item>piped.mint.lgbt"</item>
-        <item>il.ax"</item>
-    </string-array>
-
     <string-array name="languages">
         <item>@string/systemLanguage</item>
         <item>العربية</item>

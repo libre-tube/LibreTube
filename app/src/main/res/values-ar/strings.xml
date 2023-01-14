@@ -387,8 +387,8 @@
     <string name="featured">متميز</string>
     <string name="trending">ما هو الشائع الآن</string>
     <string name="open_queue_from_notification">فتح قائمة الانتظار من الإشعار</string>
-    <string name="bookmarks">الاشارات المرجعيه</string>
-    <string name="bookmark">الاشاره المرجعيه</string>
+    <string name="bookmarks">الإشارات المرجعية</string>
+    <string name="bookmark">الإشارة المرجعية</string>
     <string name="clear_bookmarks">مسح الإشارات المرجعية</string>
     <string name="bookmarks_empty">لا توجد إشارات مرجعية حتى الآن!</string>
     <string name="local_playlists">قوائم التشغيل المحلية</string>
@@ -423,8 +423,19 @@
     <string name="play_latest_videos">تشغيل أحدث مقاطع الفيديو</string>
     <string name="nothing_selected">لا شيء محدد!</string>
     <string name="color_violet">البنفسج</string>
-    <string name="failed_fetching_instances">فشل في جلب المثيلات المتاحة.</string>
+    <string name="failed_fetching_instances">تعذر جلب المثيلات المتاحة.</string>
     <string name="hide_watched_from_feed_summary">لا تعرض الفيديوهات التي تتم مشاهدتها بنسبة تزيد عن 90٪ في علامة التبويب \"الاشتراكات\".</string>
     <string name="hide_watched_from_feed">إخفاء مقاطع الفيديو التي تمت مشاهدتها من الخلاصة</string>
     <string name="playlistUrl">عنوان URL لقائمة التشغيل</string>
+    <string name="pause_on_quit">توقف عند الخروج</string>
+    <string name="shuffle">خلط</string>
+    <string name="remove_bookmark">إزالة الإشارة المرجعية</string>
+    <string name="add_to_bookmarks">إضافة إلى الإشارات المرجعية</string>
+    <string name="pause">إيقاف مؤقت</string>
+    <string name="rewind">الترجيع</string>
+    <string name="forward">التقديم</string>
+    <string name="alternative_pip_controls">ضوابط \"صورة داخل صورة\" البديلة</string>
+    <string name="alternative_pip_controls_summary">إظهار الصوت فقط وتخطي ضوابط \"صورة داخل صورة\" بدلاً من التقديم والترجيع</string>
+    <string name="audio_player">مشغل الصوت</string>
+    <string name="audio_only_mode">وضع الصوت فقط</string>
 </resources>

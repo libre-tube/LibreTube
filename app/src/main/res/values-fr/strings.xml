@@ -397,9 +397,9 @@
     <string name="comments_disabled">Les commentaires sont désactivés par le propriétaire de la chaîne.</string>
     <string name="proceed">Continuer</string>
     <string name="local_playlists">Playlists locales</string>
-    <string name="select_other_start_tab">Veuillez d\'abord sélectionner un autre onglet de départ !</string>
+    <string name="select_other_start_tab">Veuillez d\'abord sélectionner un autre écran de démarrage !</string>
     <string name="auto">Auto</string>
-    <string name="swipe_controls">Contrôles de défilement</string>
+    <string name="swipe_controls">Commandes de balayage</string>
     <string name="swipe_controls_summary">Balayez pour ajuster la luminosité et le volume.</string>
     <string name="pop_up">Pop-Up</string>
     <string name="double_tap_seek_summary">Tapez deux fois à gauche ou à droite pour avancer ou reculer la position de la lecture.</string>
@@ -423,4 +423,18 @@
     <string name="queue_insert_related_videos">Insérer les vidéos similaires</string>
     <string name="captions_size">Taille des sous-titres</string>
     <string name="color_violet">Violet Versatile</string>
+    <string name="failed_fetching_instances">Impossible de récupérer les instances disponibles.</string>
+    <string name="remove_bookmark">Retirer le marque-page</string>
+    <string name="hide_watched_from_feed">Masquer les vidéos regardées du flux</string>
+    <string name="hide_watched_from_feed_summary">N\'affichez pas les vidéos regardées à plus de 90 % dans l\'onglet des abonnements.</string>
+    <string name="playlistUrl">URL de la liste de lecture</string>
+    <string name="pause_on_quit">Pause en quittant</string>
+    <string name="shuffle">Aléatoire</string>
+    <string name="add_to_bookmarks">Ajouter aux marque-pages</string>
+    <string name="rewind">Rembobiner</string>
+    <string name="forward">Avance rapide</string>
+    <string name="pause">Pause</string>
+    <string name="alternative_pip_controls">Contrôles alternatifs de la PiP</string>
+    <string name="alternative_pip_controls_summary">Afficher uniquement l\'audio et les commandes de saut dans PiP au lieu de l\'avance et du retour en arrière</string>
+    <string name="audio_player">Lecteur audio</string>
 </resources>

@@ -427,5 +427,13 @@
     <string name="hide_watched_from_feed">Megnézett videó elrejtése a hírfolyamból</string>
     <string name="hide_watched_from_feed_summary">Ne mutassa a már 90%-ig megnézett videókat a feliratkozások lapon.</string>
     <string name="playlistUrl">Lejátszási lista URL</string>
-    <string name="pause_on_quit">Szüneteltetés bezárásnál</string>
+    <string name="pause_on_quit">Szüneteltet bezárásnál</string>
+    <string name="shuffle">Keverés</string>
+    <string name="add_to_bookmarks">Hozzáadás a könyvjelzőkhöz</string>
+    <string name="remove_bookmark">Könyvjelző eltávolítása</string>
+    <string name="forward">Előretekerés</string>
+    <string name="pause">Megállítás</string>
+    <string name="rewind">Visszatekerés</string>
+    <string name="alternative_pip_controls">Alternatív PiP irányítás</string>
+    <string name="alternative_pip_controls_summary">Csak hang és átlépés gombok megjelenítése a PiP-ben az előretekerés és a visszatekerés helyett</string>
 </resources>

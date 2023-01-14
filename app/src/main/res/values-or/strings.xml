@@ -49,7 +49,7 @@
     <string name="website">ୱେବ୍ ସାଇଟ୍</string>
     <string name="videoCount">%1$s ଭିଡିଓ</string>
     <string name="retry">ପୁନର୍ଚେଷ୍ଟା</string>
-    <string name="comments">କମେନ୍ତ୍</string>
+    <string name="comments">ମନ୍ତବ୍ୟ ଗୁଡ଼ିକ</string>
     <string name="channels">ଧାରାବାହିକ</string>
     <string name="all">ସମସ୍ତ</string>
     <string name="playlists">ପ୍ଲେଲିଷ୍ଟ ଗୁଡ଼ିକ</string>
@@ -423,9 +423,18 @@
     <string name="play_latest_videos">ସର୍ବଶେଷ ଭିଡିଓଗୁଡିକ ଚଲାନ୍ତୁ</string>
     <string name="nothing_selected">କିଛି ମନୋନୀତ ହୋଇନାହିଁ!</string>
     <string name="color_violet">ବହୁମୁଖୀ ବାଇଗଣୀ</string>
-    <string name="failed_fetching_instances">ଉପଲବ୍ଧ ଉଦାହରଣ ଆଣିବାରେ ବିଫଳ ।</string>
+    <string name="failed_fetching_instances">ଉପଲବ୍ଧ ଉଦାହରଣଗୁଡିକ ଆଣିପାରିଲା ନାହିଁ ।</string>
     <string name="hide_watched_from_feed">ଫିଡ୍ ରୁ ଦେଖାଯାଇଥିବା ଭିଡିଓଗୁଡିକ ଲୁଚାନ୍ତୁ</string>
     <string name="hide_watched_from_feed_summary">ସଦସ୍ୟତା ଟ୍ୟାବରେ 90% ରୁ ଅଧିକ ଦେଖାଯାଉଥିବା ଭିଡିଓ ଦେଖାନ୍ତୁ ନାହିଁ ।</string>
     <string name="playlistUrl">ପ୍ଲେଲିଷ୍ଟ୍ URL</string>
     <string name="pause_on_quit">ଆପ୍ ଛାଡିବା ପରେ ଭିଡିଓକୁ ବିରତି ଦିଅନ୍ତୁ</string>
+    <string name="shuffle">ସଫଲ୍</string>
+    <string name="add_to_bookmarks">ବୁକମାର୍କରେ ଯୋଡନ୍ତୁ</string>
+    <string name="remove_bookmark">ବୁକମାର୍କ ଅପସାରଣ କରନ୍ତୁ</string>
+    <string name="rewind">ପଛ କୁ ନିଅ</string>
+    <string name="forward">ଆଗ କୁ ନିଅ</string>
+    <string name="pause">ବିରାମ</string>
+    <string name="alternative_pip_controls">ବିକଳ୍ପ PIP ନିୟନ୍ତ୍ରଣ</string>
+    <string name="alternative_pip_controls_summary">କେବଳ ଅଡିଓ ଦେଖାନ୍ତୁ ଏବଂ ଆଗକୁ ଏବଂ ପଛକୁ ନେବା ପରିବର୍ତ୍ତେ PiP ରେ କଣ୍ଟ୍ରୋଲ୍ ଛାଡିଦିଅ</string>
+    <string name="audio_player">ଅଡିଓ ପ୍ଲେୟାର</string>
 </resources>

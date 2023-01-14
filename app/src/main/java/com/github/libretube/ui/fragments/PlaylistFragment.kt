@@ -19,13 +19,13 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentPlaylistBinding
 import com.github.libretube.db.DatabaseHolder
-import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toPixel
+import com.github.libretube.extensions.toPlaylistBookmark
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.extensions.serializable
@@ -35,21 +35,23 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.TextUtils
-import java.io.IOException
-import retrofit2.HttpException
 
 class PlaylistFragment : BaseFragment() {
     private lateinit var binding: FragmentPlaylistBinding
 
+    // general playlist information
     private var playlistId: String? = null
     private var playlistName: String? = null
     private var playlistType: PlaylistType = PlaylistType.PUBLIC
-    private var nextPage: String? = null
+
+    // runtime variables
+    private var playlistFeed = mutableListOf<StreamItem>()
     private var playlistAdapter: PlaylistAdapter? = null
+    private var nextPage: String? = null
     private var isLoading = true
     private var isBookmarked = false
-    private val playlistFeed = mutableListOf<StreamItem>()
 
+    // view models
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,15 +105,11 @@ class PlaylistFragment : BaseFragment() {
         lifecycleScope.launchWhenCreated {
             val response = try {
                 PlaylistsHelper.getPlaylist(playlistId!!)
-            } catch (e: IOException) {
-                println(e)
-                Log.e(TAG(), "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG(), "HttpException, unexpected response")
+            } catch (e: Exception) {
+                Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
-            playlistFeed.addAll(response.relatedStreams.orEmpty())
+            playlistFeed = response.relatedStreams.orEmpty().toMutableList()
             binding.playlistScrollview.visibility = View.VISIBLE
             nextPage = response.nextpage
             playlistName = response.name
@@ -157,14 +155,7 @@ class PlaylistFragment : BaseFragment() {
                                     .deleteById(playlistId!!)
                             } else {
                                 DatabaseHolder.Database.playlistBookmarkDao().insertAll(
-                                    PlaylistBookmark(
-                                        playlistId = playlistId!!,
-                                        playlistName = response.name,
-                                        thumbnailUrl = response.thumbnailUrl,
-                                        uploader = response.uploader,
-                                        uploaderAvatar = response.uploaderAvatar,
-                                        uploaderUrl = response.uploaderUrl
-                                    )
+                                    response.toPlaylistBookmark(playlistId!!)
                                 )
                             }
                         }
@@ -224,17 +215,20 @@ class PlaylistFragment : BaseFragment() {
                         if (binding.playlistScrollview.getChildAt(0).bottom
                             == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
                         ) {
-                            // scroll view is at bottom
-                            if (nextPage != null && !isLoading) {
+                            if (isLoading) return@addOnScrollChangedListener
+
+                            // append more playlists to the recycler view
+                            if (playlistType != PlaylistType.PUBLIC) {
                                 isLoading = true
+                                playlistAdapter?.showMoreItems()
+                                isLoading = false
+                            } else {
                                 fetchNextPage()
                             }
                         }
                     }
 
-                /**
-                 * listener for swiping to the left or right
-                 */
+                // listener for swiping to the left or right
                 if (playlistType != PlaylistType.PUBLIC) {
                     val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
                         0,
@@ -266,10 +260,10 @@ class PlaylistFragment : BaseFragment() {
                     DatabaseHolder.Database.playlistBookmarkDao().getAll()
                 }.firstOrNull { it.playlistId == playlistId }
                 playlistBookmark?.let {
-                    if (playlistBookmark.thumbnailUrl != response.thumbnailUrl) {
-                        playlistBookmark.thumbnailUrl = response.thumbnailUrl
+                    if (it.thumbnailUrl != response.thumbnailUrl) {
+                        it.thumbnailUrl = response.thumbnailUrl
                         query {
-                            DatabaseHolder.Database.playlistBookmarkDao().update(playlistBookmark)
+                            DatabaseHolder.Database.playlistBookmarkDao().update(it)
                         }
                     }
                 }
@@ -278,6 +272,9 @@ class PlaylistFragment : BaseFragment() {
     }
 
     private fun fetchNextPage() {
+        if (nextPage == null || isLoading) return
+        isLoading = true
+
         lifecycleScope.launchWhenCreated {
             val response = try {
                 // load locally stored playlists with the auth api
@@ -296,6 +293,7 @@ class PlaylistFragment : BaseFragment() {
                 Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
+
             nextPage = response.nextpage
             playlistAdapter?.updateItems(response.relatedStreams!!)
             isLoading = false

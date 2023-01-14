@@ -188,7 +188,7 @@
     <string name="quality">清晰度</string>
     <string name="behavior">布局</string>
     <string name="player_summary">默认和行为</string>
-    <string name="seek_increment">快进增量</string>
+    <string name="seek_increment">跳转时长</string>
     <string name="pauseOnScreenOff">自动暂停</string>
     <string name="pauseOnScreenOff_summary">屏幕关闭时暂停播放。</string>
     <string name="autoplay_summary">当前的视频播完后，自动播放下一个视频。</string>
@@ -276,14 +276,14 @@
     <string name="most_recent">最新发布</string>
     <string name="network_all">所有网络</string>
     <string name="required_network">所需连接</string>
-    <string name="network_metered">计费网络</string>
+    <string name="network_metered">按流量计费的网络</string>
     <string name="network_wifi">仅 WiFi</string>
     <string name="translate">翻译</string>
     <string name="no_search_result">无结果。</string>
     <string name="error_occurred">出错</string>
     <string name="copied">已复制</string>
     <string name="downloadsucceeded">下载成功</string>
-    <string name="share_with_time">用时间码共享</string>
+    <string name="share_with_time">带时间码分享</string>
     <string name="export_subscriptions">导出订阅</string>
     <string name="skip_buttons_summary">显示按钮跳到下一个或上一个视频。</string>
     <string name="skip_buttons">跳跃按钮</string>
@@ -401,10 +401,10 @@
     <string name="volume">音量</string>
     <string name="swipe_controls_summary">使用滑动手势调整亮度和音量。</string>
     <string name="swipe_controls">滑动操控</string>
-    <string name="pop_up">弹窗</string>
+    <string name="pop_up">悬浮窗</string>
     <string name="comments_disabled">上传者禁止评论。</string>
     <string name="no_comments_available">此视频无评论。</string>
-    <string name="double_tap_seek">轻按两次查找</string>
+    <string name="double_tap_seek">点按两次跳转</string>
     <string name="double_tap_seek_summary">在左侧或右侧轻按两次倒退或前进播放器位置。</string>
     <string name="all_caught_up_summary">你看过了所有新视频</string>
     <string name="all_caught_up">没什么可看的了</string>
@@ -415,7 +415,7 @@
     <string name="backup_restore_summary">导入和导出订阅、播放列表…</string>
     <string name="exportsuccess">成功导出。</string>
     <string name="privacy_alert">隐私警告</string>
-    <string name="username_email">你插入了一个电子邮件地址作为用户名，我们不推荐这样做。 你确定要继续吗？</string>
+    <string name="username_email">不推荐用电子邮箱地址作为用户名。确定要继续吗？</string>
     <string name="proceed">继续</string>
     <string name="pinch_control_summary">使用伸缩手势进行缩小/放大操作。</string>
     <string name="pinch_control">手指伸缩控制</string>
@@ -423,9 +423,18 @@
     <string name="play_latest_videos">播放最新视频</string>
     <string name="nothing_selected">什么也没选中！</string>
     <string name="color_violet">Versatile Violet</string>
-    <string name="failed_fetching_instances">未能获取可用的实例。</string>
+    <string name="failed_fetching_instances">无法获取可用实例。</string>
     <string name="hide_watched_from_feed_summary">不要在订阅选项卡中显示观看比例超过 90% 的视频。</string>
     <string name="hide_watched_from_feed">在 feed 中隐藏看过的视频</string>
     <string name="playlistUrl">播放列表 URL</string>
     <string name="pause_on_quit">退出时暂停</string>
+    <string name="shuffle">随机播放</string>
+    <string name="add_to_bookmarks">添加到书签</string>
+    <string name="remove_bookmark">移除书签</string>
+    <string name="forward">前进</string>
+    <string name="pause">暂停</string>
+    <string name="rewind">后退</string>
+    <string name="alternative_pip_controls">备选 PiP （画中画）操控</string>
+    <string name="alternative_pip_controls_summary">仅显示音频并跳过画中画操控而非前进和后退</string>
+    <string name="audio_player">音频播放器</string>
 </resources>

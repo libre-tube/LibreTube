@@ -428,4 +428,13 @@
     <string name="hide_watched_from_feed_summary">Na kartě odběry nezobrazovat videa, která jsou zhlédnuta z více než 90 %.</string>
     <string name="playlistUrl">URL playlistu</string>
     <string name="pause_on_quit">Pozastavit při ukončení</string>
+    <string name="shuffle">Náhodně</string>
+    <string name="add_to_bookmarks">Přidat do záložek</string>
+    <string name="remove_bookmark">Odstranit záložku</string>
+    <string name="rewind">Přetočit</string>
+    <string name="pause">Pozastavit</string>
+    <string name="alternative_pip_controls_summary">V PiP místo přetočení zpět a vpřed zobrazit ovládání režimu pouze zvuku a přeskočení</string>
+    <string name="forward">Vpřed</string>
+    <string name="alternative_pip_controls">Alternativní ovládací prvky PiP</string>
+    <string name="audio_player">Přehrávač zvuku</string>
 </resources>

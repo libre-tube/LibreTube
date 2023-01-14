@@ -36,13 +36,12 @@ class VideosAdapter(
     private val hideWatched: Boolean = false
 ) : RecyclerView.Adapter<VideosViewHolder>() {
 
-    var index = 10
+    private var visibleCount = minOf(10, streamItems.size)
 
     override fun getItemCount(): Int {
         return when {
             showAllAtOnce -> streamItems.size
-            index >= streamItems.size -> streamItems.size - 1
-            else -> index
+            else -> visibleCount
         }
     }
 
@@ -51,9 +50,10 @@ class VideosAdapter(
     }
 
     fun updateItems() {
-        val oldSize = index
-        index += 10
-        notifyItemRangeInserted(oldSize, index)
+        val oldSize = visibleCount
+        visibleCount += minOf(10, streamItems.size - oldSize)
+        if (visibleCount == oldSize) return
+        notifyItemRangeInserted(oldSize, visibleCount)
     }
 
     fun insertItems(newItems: List<StreamItem>) {

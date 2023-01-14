@@ -10,7 +10,7 @@
             android:entryValues="@array/dataSaverModeValues"
             android:icon="@drawable/ic_data_saver"
             android:summary="@string/data_saver_mode_summary"
-            app:key="data_saver_mode"
+            app:key="data_saver_mode_key"
             app:title="@string/data_saver_mode" />
 
         <com.github.libretube.ui.views.SliderPreference

@@ -1,0 +1,9 @@
+* Preview on SeekBar for videos
+* Option to hide watched videos from the feed
+* Splash screen animation for A12+
+* Playlist bookmarks in the library fragment
+* Play all and clear actions to the watch history
+* Clone Playlist action to the create playlist dialog
+* Bookmark option to playlist options bottom sheet
+* Shorts filter to the feed
+* Shuffle button for private playlists

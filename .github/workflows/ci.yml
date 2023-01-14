@@ -47,11 +47,8 @@ jobs:
           git config --global credential.helper store
           echo "https://alefvanoon:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
 
-      - name: Patch and Compile
+      - name: Compile
         run: |
-          cd .github
-          python patch.py
-          cd ..
           ./gradlew assembleDebug
 
       - name: Sign Apk

@@ -16,9 +16,8 @@
         android:layout_gravity="top"
         android:animateLayoutChanges="true"
         android:orientation="vertical"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp">
+        android:paddingHorizontal="5dp"
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,8 +40,8 @@
                 <ImageView
                     android:id="@+id/lock_player"
                     style="@style/PlayerControlTop"
-                    android:scaleX=".8"
-                    android:scaleY=".8"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
                     android:src="@drawable/ic_unlocked" />
 
             </LinearLayout>
@@ -66,6 +65,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layoutDirection="ltr">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/autoPlay"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="gone"
+                    app:trackTint="#88ffffff"
+                    app:thumbTint="@android:color/white"/>
 
                 <ImageButton
                     android:id="@+id/sb_toggle"
@@ -134,9 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textColor="@android:color/white" />
 
         </FrameLayout>
 
@@ -169,9 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textColor="@android:color/white" />
 
         </FrameLayout>
 

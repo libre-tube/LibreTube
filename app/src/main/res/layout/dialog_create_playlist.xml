@@ -42,23 +42,22 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_new_playlist"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_copy"
+        android:text="@string/createPlaylist" />
 
-        <Button
-            android:id="@+id/cancel_button"
-            style="@style/CustomDialogButton"
-            android:text="@string/cancel" />
-
-        <Button
-            android:id="@+id/create_new_playlist"
-            style="@style/CustomDialogButton"
-            android:layout_marginEnd="16dp"
-            android:text="@string/createPlaylist" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/cancel_button"
+        style="@style/CustomDialogButton"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/cancel" />
 
 </LinearLayout>

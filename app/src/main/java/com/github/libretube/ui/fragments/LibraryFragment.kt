@@ -15,8 +15,11 @@ import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentLibraryBinding
+import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toPixel
+import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
@@ -26,7 +29,6 @@ import com.github.libretube.util.PreferenceHelper
 
 class LibraryFragment : BaseFragment() {
 
-    lateinit var token: String
     private lateinit var binding: FragmentLibraryBinding
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
@@ -42,13 +44,14 @@ class LibraryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // initialize the layout managers
+        binding.bookmarksRecView.layoutManager = LinearLayoutManager(context)
+        binding.playlistRecView.layoutManager = LinearLayoutManager(context)
+
         // listen for the mini player state changing
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             updateFABMargin(it)
         }
-
-        binding.playlistRecView.layoutManager = LinearLayoutManager(requireContext())
-        token = PreferenceHelper.getToken()
 
         // hide watch history button of history disabled
         val watchHistoryEnabled =
@@ -61,10 +64,6 @@ class LibraryFragment : BaseFragment() {
             }
         }
 
-        binding.bookmarks.setOnClickListener {
-            findNavController().navigate(R.id.bookmarksFragment)
-        }
-
         binding.downloads.setOnClickListener {
             findNavController().navigate(R.id.downloadsFragment)
         }
@@ -75,16 +74,29 @@ class LibraryFragment : BaseFragment() {
         }
 
         fetchPlaylists()
+        initBookmarks()
 
         binding.playlistRefresh.isEnabled = true
         binding.playlistRefresh.setOnRefreshListener {
             fetchPlaylists()
+            initBookmarks()
         }
         binding.createPlaylist.setOnClickListener {
             CreatePlaylistDialog {
                 fetchPlaylists()
             }.show(childFragmentManager, CreatePlaylistDialog::class.java.name)
         }
+    }
+
+    private fun initBookmarks() {
+        val bookmarks = awaitQuery {
+            DatabaseHolder.Database.playlistBookmarkDao().getAll()
+        }
+
+        binding.bookmarksCV.visibility = if (bookmarks.isEmpty()) View.GONE else View.VISIBLE
+        if (bookmarks.isEmpty()) return
+
+        binding.bookmarksRecView.adapter = PlaylistBookmarkAdapter(bookmarks)
     }
 
     private fun updateFABMargin(isMiniPlayerVisible: Boolean) {

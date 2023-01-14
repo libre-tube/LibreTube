@@ -11,18 +11,22 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import android.widget.ScrollView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.children
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -36,11 +40,10 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.tools.BreakReminder
 import com.github.libretube.util.NavBarHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NetworkHelper
-import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.elevation.SurfaceColors
@@ -56,6 +59,8 @@ class MainActivity : BaseActivity() {
 
     lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
+
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +119,13 @@ class MainActivity : BaseActivity() {
         binding.bottomNav.setOnItemReselectedListener {
             if (it.itemId != navController.currentDestination?.id) {
                 navigateToBottomSelectedItem(it)
+            } else {
+                // get the host fragment containing the current fragment
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment?
+                // get the current fragment
+                val fragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
+                tryScrollToTop(fragment?.requireView() as? ViewGroup)
             }
         }
 
@@ -176,6 +188,31 @@ class MainActivity : BaseActivity() {
     }
 
     /**
+     * Try to find a scroll or recycler view and scroll it back to the top
+     */
+    private fun tryScrollToTop(viewGroup: ViewGroup?) {
+        (viewGroup as? ScrollView)?.scrollTo(0, 0)
+
+        if (viewGroup == null || viewGroup.childCount == 0) return
+
+        viewGroup.children.forEach {
+            (it as? ScrollView)?.let {
+                it.smoothScrollTo(0, 0)
+                return
+            }
+            (it as? NestedScrollView)?.let {
+                it.smoothScrollTo(0, 0)
+                return
+            }
+            (it as? RecyclerView)?.let {
+                it.smoothScrollToPosition(0)
+                return
+            }
+            tryScrollToTop(it as? ViewGroup)
+        }
+    }
+
+    /**
      * Rotate according to the preference
      */
     fun requestOrientationChange() {
@@ -184,11 +221,6 @@ class MainActivity : BaseActivity() {
         } else {
             ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_queue)?.isVisible = PlayingQueue.isNotEmpty()
-        return super.onPrepareOptionsMenu(menu)
     }
 
     /**
@@ -212,8 +244,10 @@ class MainActivity : BaseActivity() {
                 lastSeenVideoId == it.url?.toID()
             } ?: return@observe
             if (lastSeenVideoIndex < 1) return@observe
-            binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).number =
-                lastSeenVideoIndex
+            binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
+                number = lastSeenVideoIndex
+                backgroundColor = ThemeHelper.getThemeColor(this@MainActivity, R.attr.colorPrimary)
+            }
         }
     }
 
@@ -336,10 +370,6 @@ class MainActivity : BaseActivity() {
                 startActivity(communityIntent)
                 true
             }
-            R.id.action_queue -> {
-                PlayingQueueSheet().show(supportFragmentManager, null)
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -352,6 +382,11 @@ class MainActivity : BaseActivity() {
             moveTaskToBack(true)
             intent?.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
+        }
+
+        if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
+            NavigationHelper.startAudioPlayer(this)
+            return
         }
 
         intent?.getStringExtra(IntentData.channelId)?.let {
@@ -373,8 +408,13 @@ class MainActivity : BaseActivity() {
             )
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
-            loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
+            NavigationHelper.navigateVideo(
+                context = this,
+                videoId = it,
+                timeStamp = intent?.getLongExtra(IntentData.timeStamp, 0L)
+            )
         }
+
         when (intent?.getStringExtra("fragmentToOpen")) {
             "home" ->
                 navController.navigate(R.id.homeFragment)
@@ -387,42 +427,12 @@ class MainActivity : BaseActivity() {
             "downloads" ->
                 navController.navigate(R.id.downloadsFragment)
         }
-        if (intent?.getBooleanExtra(IntentData.openQueueOnce, false) == true) {
-            PlayingQueueSheet()
-                .show(supportFragmentManager)
-        }
         if (intent?.getBooleanExtra(IntentData.downloading, false) == true) {
             (supportFragmentManager.fragments.find { it is NavHostFragment })
                 ?.childFragmentManager?.fragments?.forEach { fragment ->
                     (fragment as? DownloadsFragment)?.bindDownloadService()
                 }
         }
-    }
-
-    private fun loadVideo(videoId: String, timeStamp: Long?) {
-        val bundle = Bundle()
-
-        bundle.putString(IntentData.videoId, videoId)
-        if (timeStamp != null) bundle.putLong(IntentData.timeStamp, timeStamp)
-
-        val frag = PlayerFragment()
-        frag.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .remove(PlayerFragment())
-            .commit()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, frag)
-            .commitNow()
-        Handler(Looper.getMainLooper()).postDelayed({
-            supportFragmentManager.fragments.forEach { fragment ->
-                (fragment as? PlayerFragment)
-                    ?.binding?.playerMotionLayout?.apply {
-                        transitionToEnd()
-                        transitionToStart()
-                    }
-            }
-        }, 300)
     }
 
     private fun minimizePlayer() {

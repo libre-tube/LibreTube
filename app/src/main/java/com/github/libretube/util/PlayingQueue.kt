@@ -13,8 +13,19 @@ import kotlinx.coroutines.launch
 object PlayingQueue {
     private val queue = mutableListOf<StreamItem>()
     private var currentStream: StreamItem? = null
+
+    /**
+     * Listener that gets called when the user selects an item from the queue
+     */
     private var onQueueTapListener: (StreamItem) -> Unit = {}
+
+    /**
+     * Listener that gets called when the current playing video changes
+     */
+    private val onTrackChangedListeners: MutableList<(StreamItem) -> Unit> = mutableListOf()
     var repeatQueue: Boolean = false
+
+    fun clear() = queue.clear()
 
     fun add(vararg streamItem: StreamItem) {
         streamItem.forEach {
@@ -58,7 +69,12 @@ object PlayingQueue {
 
     fun updateCurrent(streamItem: StreamItem) {
         currentStream = streamItem
-        if (!contains(streamItem)) queue.add(streamItem)
+        onTrackChangedListeners.forEach {
+            runCatching {
+                it.invoke(streamItem)
+            }
+        }
+        if (!contains(streamItem)) queue.add(0, streamItem)
     }
 
     fun isNotEmpty() = queue.isNotEmpty()
@@ -77,9 +93,12 @@ object PlayingQueue {
         }
     }
 
+    fun getCurrent(): StreamItem? = currentStream
+
     fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
 
-    fun getStreams() = queue
+    // only returns a copy of the queue, no write access
+    fun getStreams() = queue.toList()
 
     fun setStreams(streams: List<StreamItem>) {
         queue.clear()
@@ -161,9 +180,17 @@ object PlayingQueue {
         onQueueTapListener = listener
     }
 
+    fun addOnTrackChangedListener(listener: (StreamItem) -> Unit) {
+        onTrackChangedListeners.add(listener)
+    }
+
+    fun removeOnTrackChangedListener(listener: (StreamItem) -> Unit) {
+        onTrackChangedListeners.remove(listener)
+    }
+
     fun resetToDefaults() {
         repeatQueue = false
         onQueueTapListener = {}
-        queue.clear()
+        onTrackChangedListeners.clear()
     }
 }

@@ -26,7 +26,7 @@
             app:title="@string/skip_buttons" />
 
         <SwitchPreferenceCompat
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:icon="@drawable/ic_skip"
             android:summary="@string/double_tap_seek_summary"
             app:key="double_tap_seek"
@@ -37,6 +37,13 @@
             android:icon="@drawable/ic_window"
             app:key="picture_in_picture"
             app:title="@string/picture_in_picture" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:icon="@drawable/ic_headphones"
+            app:key="alternative_pip_controls"
+            app:title="@string/alternative_pip_controls"
+            android:summary="@string/alternative_pip_controls_summary"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="false"

@@ -61,7 +61,7 @@
     <string name="darkTheme">پوسته تیره</string>
     <string name="subscribers">%1$s مشترکین</string>
     <string name="videos">ویدیو ها</string>
-    <string name="subscriptions">اشتراک ها</string>
+    <string name="subscriptions">اشتراک‌ها</string>
     <string name="systemLanguage">زبان سیستم</string>
     <string name="history">تاریخچه</string>
     <string name="search_history">تاریخچه جستجو</string>
@@ -112,4 +112,18 @@
     <string name="music_videos">آهنگ های موسیقی یوتیوب</string>
     <string name="category_intro">وقفه / انیمیشن ورودی</string>
     <string name="sponsorblock_summary">استفاده از https://sponsor.ajay.app API</string>
+    <string name="category_selfpromo_description">شبیه به \"اسپانسر\" ولی بدون حقوق یا خود تبلیغی. این شامل بخش‌هایی مربوط به کالاها، کمک‌های مالی، یا اطلاعات در مورد هم‌کاری هایش می‌شود.</string>
+    <string name="playOnBackground">پخش در پس‌زمینه</string>
+    <string name="category_interaction_description">وقتی در وسط محتوا یاداور کوتاهی برای لایک و فالو وجود دارد. اگر طولانی یا در مورد چیز بخصوصی باشد، باید خود تبلیغی درنظر گرفته شود.</string>
+    <string name="category_intro_description">یک بازه بدون محتوای واقعی. میتواند یک مکس، فریم ثابت، یا انیمیشن تکراری باشد. برای گذار شامل اطلاعات استفاده نشود</string>
+    <string name="app_uptodate">برنامه بروز است</string>
+    <string name="category_music_offtopic">موسیقی: بخش غیر موسیقی</string>
+    <string name="category_music_offtopic_description">فقط برای استفاده در موزیک ویدیوها. باید بخش هایی از ویدیو را پوشش دهد نه بخشی از میکس های رسمی. در پایان، ویدیو باید تا حد امکان شبیه Spotify یا هر نسخه ترکیبی دیگری باشد یا صحبت کردن یا سایر موارد حواس پرتی را کاهش دهد.</string>
+    <string name="category_preview">پیش نمایش / خلاصه</string>
+    <string name="video_format_summary">تبدیل فایل‌ها در صوری موجودی هر دو فایل تصویر و صدا</string>
+    <string name="donate">حمایت</string>
+    <string name="playback_speed">سرعت پخش</string>
+    <string name="advanced">پیشرفته</string>
+    <string name="player">پخش کننده</string>
+    <string name="live">زنده</string>
 </resources>

@@ -125,7 +125,7 @@
     <string name="playOnBackground">ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਚਲਾਓ</string>
     <string name="update_available">ਸੰਸਕਰਣ %1$s ਉਪਲਬਧ ਹੈ</string>
     <string name="appearance">ਦਿੱਖ</string>
-    <string name="failed_fetching_instances">ਉਪਲਬਧ ਉਦਾਹਰਨਾਂ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।</string>
+    <string name="failed_fetching_instances">ਉਪਲੱਬਧ ਉਦਾਹਰਨਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਿਆ।</string>
     <string name="background_channel_description">ਆਡੀਓ ਪਲੇਅਰ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਨ ਲਈ ਬਟਨਾਂ ਨਾਲ ਇੱਕ ਸੂਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।</string>
     <string name="hide_watched_from_feed">ਫੀਡ ਤੋਂ ਦੇਖੇ ਗਏ ਵੀਡੀਓ ਨੂੰ ਲੁਕਾਓ</string>
     <string name="shapedIcon">ਮੂਰਖ ਆਕਾਰ</string>
@@ -383,7 +383,7 @@
     <string name="play_latest_videos">ਨਵੀਨਤਮ ਵੀਡੀਓ ਚਲਾਓ</string>
     <string name="nothing_selected">ਕੁਝ ਵੀ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ!</string>
     <string name="color_violet">ਬਹੁਮੁਖੀ ਵੈਂਗਣੀ</string>
-    <string name="push_channel_name">ਸੂਚਨਾ ਕਰਮਚਾਰੀ</string>
+    <string name="push_channel_name">ਸੂਚਨਾ ਵਰਕਰ</string>
     <string name="push_channel_description">ਨਵੀਆਂ ਸਟ੍ਰੀਮਾਂ ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਇੱਕ ਸੂਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।</string>
     <string name="seekbar_preview_summary">ਪਲੇਬੈਕ ਸੰਕੇਤਕ ਨੂੰ ਖਿੱਚਣ ਵੇਲੇ ਇੱਕ ਸਨੈਪਸ਼ਾਟ ਦਿਖਾਓ।</string>
     <string name="irreversible">ਯਕੀਨਨ ਤੁਸੀਂ ਇਹ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ\? ਇਸਨੂੰ ਅਣਕੀਤਾ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ!</string>
@@ -396,7 +396,7 @@
     <string name="play_next">ਅਗਲਾ ਚਲਾਓ</string>
     <string name="livestreams">ਲਾਈਵ ਸਟ੍ਰੀਮਾਂ</string>
     <string name="defaultIconLight">ਡਿਫ਼ਾਲਟ ਲਾਈਟ</string>
-    <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕ ਸਾਫ਼ ਕਰੋ</string>
+    <string name="clear_bookmarks">ਬੁੱਕਮਾਰਕਸ ਸਾਫ਼ ਕਰੋ</string>
     <string name="auto_quality">ਆਟੋ</string>
     <string name="hls_instead_of_dash_summary">DASH ਦੀ ਬਜਾਏ HLS ਦੀ ਵਰਤੋਂ ਕਰੋ (ਹੌਲੀ ਹੋਵੇਗੀ, ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਗਈ)</string>
     <string name="alternative_trending_layout">ਵਿਕਲਪਿਕ ਰੁਝਾਨ ਵਾਲਾ ਲੇਆਊਟ</string>
@@ -428,4 +428,7 @@
     <string name="download_channel_name">ਸੇਵਾ ਡਾਊਨਲੋਡ ਕਰੋ</string>
     <string name="playlistUrl">ਪਲੇਲਿਸਟ URL</string>
     <string name="pause_on_quit">ਛੱਡਣ \'ਤੇ ਰੁਕੋ</string>
+    <string name="shuffle">ਸ਼ਫਲ</string>
+    <string name="remove_bookmark">ਬੁੱਕਮਾਰਕ ਹਟਾਓ</string>
+    <string name="add_to_bookmarks">ਬੁੱਕਮਾਰਕਸ \'ਚ ਸ਼ਾਮਿਲ ਕਰੋ</string>
 </resources>

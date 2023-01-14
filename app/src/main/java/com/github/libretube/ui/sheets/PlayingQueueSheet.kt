@@ -33,13 +33,18 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
         binding.optionsRecycler.adapter = adapter
 
         binding.shuffle.setOnClickListener {
-            var streams = PlayingQueue.getStreams()
+            val streams = PlayingQueue.getStreams().toMutableList()
             val currentIndex = PlayingQueue.currentIndex()
-            val current = streams[currentIndex]
 
-            streams = streams.shuffled().toMutableList()
-            streams.remove(current)
-            streams.add(currentIndex, current)
+            // save all streams that need to be shuffled to a copy of the list
+            val toShuffle = streams.filterIndexed { index, _ ->
+                index > currentIndex
+            }
+
+            // re-add all streams in the new, shuffled order after removing them
+            streams.removeAll(toShuffle)
+            streams.addAll(toShuffle.shuffled())
+
             PlayingQueue.setStreams(streams)
 
             adapter.notifyDataSetChanged()
@@ -84,11 +89,8 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
                 val from = viewHolder.absoluteAdapterPosition
                 val to = target.absoluteAdapterPosition
 
-                val currentPosition = PlayingQueue.currentIndex()
-                if (to <= currentPosition) return false
-
-                adapter.notifyItemMoved(from, to)
                 PlayingQueue.move(from, to)
+                adapter.notifyItemMoved(from, to)
                 return true
             }
 

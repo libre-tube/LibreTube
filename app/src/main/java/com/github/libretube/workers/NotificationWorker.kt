@@ -5,14 +5,18 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.extensions.TAG
+import com.github.libretube.extensions.filterUntil
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
@@ -26,12 +30,12 @@ import kotlinx.coroutines.runBlocking
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     Worker(appContext, parameters) {
 
-    private val notificationManager =
-        appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    private val notificationManager = NotificationManagerCompat.from(appContext)
 
     // the id where notification channels start
     private var notificationId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        notificationManager.activeNotifications.size + 5
+        val nManager = appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        nManager.activeNotifications.size + 5
     } else {
         5
     }
@@ -80,6 +84,8 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private fun checkForNewStreams(): Boolean {
         var success = true
 
+        Log.d(TAG(), "Work manager started")
+
         runBlocking {
             // fetch the users feed
             val videoFeed = try {
@@ -90,28 +96,25 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             }
 
             val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
-            val latestFeedStreamId = videoFeed[0].url!!.toID()
+            val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return@runBlocking
 
-            // first time notifications enabled or no new video available
+            // first time notifications are enabled or no new video available
             if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
                 PreferenceHelper.setLatestVideoId(lastSeenStreamId)
                 return@runBlocking
             }
 
-            // filter the new videos out
-            val lastSeenStreamItem = videoFeed.filter { it.url!!.toID() == lastSeenStreamId }
+            // filter the new videos until the last seen video in the feed
+            val newStreams = videoFeed.filterUntil {
+                it.url!!.toID() == lastSeenStreamId
+            } ?: return@runBlocking
 
-            // previous video not found
-            if (lastSeenStreamItem.isEmpty()) return@runBlocking
-
-            val lastStreamIndex = videoFeed.indexOf(lastSeenStreamItem[0])
-            val newVideos = videoFeed.filterIndexed { index, _ ->
-                index < lastStreamIndex
-            }
+            // return if the previous video didn't get found
+            if (newStreams.isEmpty()) return@runBlocking
 
             // hide for notifications unsubscribed channels
             val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
-            val filteredVideos = newVideos.filter {
+            val filteredVideos = newStreams.filter {
                 channelsToIgnore.none { channelId ->
                     channelId == it.uploaderUrl?.toID()
                 }
@@ -119,24 +122,29 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
 
             // group the new streams by the uploader
             val channelGroups = filteredVideos.groupBy { it.uploaderUrl }
+
+            Log.d(TAG(), "Create notifications for new videos")
+
             // create a notification for each new stream
             channelGroups.forEach { (_, streams) ->
                 createNotification(
-                    group = streams[0].uploaderUrl!!.toID(),
-                    title = streams[0].uploaderName.toString(),
-                    isSummary = true
+                    group = streams.first().uploaderUrl!!.toID(),
+                    title = streams.first().uploaderName.toString(),
+                    urlPath = streams.first().uploaderUrl!!,
+                    isGroupSummary = true
                 )
 
                 streams.forEach { streamItem ->
                     createNotification(
                         title = streamItem.title.toString(),
                         description = streamItem.uploaderName.toString(),
+                        urlPath = streamItem.url!!,
                         group = streamItem.uploaderUrl!!.toID()
                     )
                 }
             }
             // save the latest streams that got notified about
-            PreferenceHelper.setLatestVideoId(videoFeed[0].url!!.toID())
+            PreferenceHelper.setLatestVideoId(videoFeed.first().url!!.toID())
         }
         // return whether the work succeeded
         return success
@@ -148,19 +156,27 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     private fun createNotification(
         title: String,
         group: String,
+        urlPath: String,
         description: String? = null,
-        isSummary: Boolean = false
+        isGroupSummary: Boolean = false
     ) {
         // increase the notification ID to guarantee uniqueness
         notificationId += 1
 
+        val intent = Intent(applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            if (isGroupSummary) {
+                putExtra(IntentData.channelId, urlPath.toID())
+            } else {
+                putExtra(IntentData.videoId, urlPath.toID())
+            }
+        }
+
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             applicationContext,
-            0,
-            Intent(applicationContext, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            },
-            PendingIntent.FLAG_IMMUTABLE
+            notificationId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         val builder = NotificationCompat.Builder(applicationContext, PUSH_CHANNEL_ID)
@@ -168,19 +184,17 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             .setGroup(group)
             .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            // Set the intent that will fire when the user taps the notification
+            // The intent that will fire when the user taps the notification
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        if (isSummary) {
+        if (isGroupSummary) {
             builder.setGroupSummary(true)
         } else {
             builder.setContentText(description)
         }
 
-        with(NotificationManagerCompat.from(applicationContext)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(notificationId, builder.build())
-        }
+        // [notificationId] is a unique int for each notification that you must define
+        notificationManager.notify(notificationId, builder.build())
     }
 }
