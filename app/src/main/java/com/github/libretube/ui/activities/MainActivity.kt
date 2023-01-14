@@ -41,6 +41,7 @@ import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.tools.BreakReminder
 import com.github.libretube.util.NavBarHelper
+import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
@@ -57,6 +58,8 @@ class MainActivity : BaseActivity() {
 
     lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
+
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -381,7 +384,7 @@ class MainActivity : BaseActivity() {
         }
 
         if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
-            navController.navigate(R.id.audioPlayerFragment)
+            NavigationHelper.startAudioPlayer(this)
             return
         }
 
@@ -404,7 +407,11 @@ class MainActivity : BaseActivity() {
             )
         }
         intent?.getStringExtra(IntentData.videoId)?.let {
-            loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
+            NavigationHelper.navigateVideo(
+                context = this,
+                videoId = it,
+                timeStamp = intent?.getLongExtra(IntentData.timeStamp, 0L)
+            )
         }
 
         when (intent?.getStringExtra("fragmentToOpen")) {
@@ -417,32 +424,6 @@ class MainActivity : BaseActivity() {
             "library" ->
                 navController.navigate(R.id.libraryFragment)
         }
-    }
-
-    private fun loadVideo(videoId: String, timeStamp: Long?) {
-        val bundle = Bundle()
-
-        bundle.putString(IntentData.videoId, videoId)
-        if (timeStamp != null) bundle.putLong(IntentData.timeStamp, timeStamp)
-
-        val frag = PlayerFragment()
-        frag.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .remove(PlayerFragment())
-            .commit()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, frag)
-            .commitNow()
-        Handler(Looper.getMainLooper()).postDelayed({
-            supportFragmentManager.fragments.forEach { fragment ->
-                (fragment as? PlayerFragment)
-                    ?.binding?.playerMotionLayout?.apply {
-                        transitionToEnd()
-                        transitionToStart()
-                    }
-            }
-        }, 300)
     }
 
     private fun minimizePlayer() {

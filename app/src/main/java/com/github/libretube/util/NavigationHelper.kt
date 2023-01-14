@@ -6,10 +6,13 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
@@ -17,6 +20,8 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.views.SingleViewTouchableMotionLayout
 
 object NavigationHelper {
+    private val handler = Handler(Looper.getMainLooper())
+
     fun navigateChannel(
         context: Context,
         channelId: String?
@@ -45,20 +50,35 @@ object NavigationHelper {
         return correctContext as MainActivity
     }
 
+    /**
+     * Navigate to the given video using the other provided parameters as well
+     * If the audio only mode is enabled, play it in the background, else as a normal video
+     */
     fun navigateVideo(
         context: Context,
         videoId: String?,
         playlistId: String? = null,
         channelId: String? = null,
-        keepQueue: Boolean = false
+        keepQueue: Boolean = false,
+        timeStamp: Long? = null
     ) {
         if (videoId == null) return
+
+        if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)) {
+            BackgroundHelper.stopBackgroundPlay(context)
+            BackgroundHelper.playOnBackground(context, videoId.toID(), timeStamp, playlistId, channelId, keepQueue)
+            handler.postDelayed({
+                startAudioPlayer(context)
+            }, 500)
+            return
+        }
 
         val bundle = Bundle().apply {
             putString(IntentData.videoId, videoId.toID())
             putString(IntentData.playlistId, playlistId)
             putString(IntentData.channelId, channelId)
             putBoolean(IntentData.keepQueue, keepQueue)
+            timeStamp?.let { putLong(IntentData.timeStamp, it) }
         }
 
         val activity = context as AppCompatActivity
@@ -87,6 +107,14 @@ object NavigationHelper {
         bundle.putString(IntentData.playlistId, playlistId)
         bundle.putSerializable(IntentData.playlistType, playlistType)
         activity.navController.navigate(R.id.playlistFragment, bundle)
+    }
+
+    /**
+     * Start the audio player fragment
+     */
+    fun startAudioPlayer(context: Context) {
+        val activity = unwrap(context)
+        activity.navController.navigate(R.id.audioPlayerFragment)
     }
 
     /**

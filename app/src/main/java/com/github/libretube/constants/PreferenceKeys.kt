@@ -93,6 +93,7 @@ object PreferenceKeys {
      * Background mode
      */
     const val BACKGROUND_PLAYBACK_SPEED = "background_playback_speed"
+    const val AUDIO_ONLY_MODE = "audio_only_mode"
 
     /**
      * Notifications

@@ -25,6 +25,13 @@
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
+            android:icon="@drawable/ic_headphones"
+            android:summary="@string/audio_only_mode_summary"
+            android:title="@string/audio_only_mode"
+            app:key="audio_only_mode" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
             android:icon="@drawable/ic_screen_rotation"
             app:key="auto_rotation"
             app:title="@string/auto_rotation" />
