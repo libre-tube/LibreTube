@@ -10,12 +10,6 @@ TEXT=$(printf "${TEXT[@]}" | sed 's/.*Weblate.*//g' | sed 's/.*dependency.*//g')
 # go through all the lines inside the file
 readarray -t y <<< "${TEXT[@]}"
 
-echoall() {
-for line in "$@"; do
-    echo "$line"
-done
-}
-
 FIXES=()
 FEATURES=()
 IMPROVEMENTS=()
@@ -34,21 +28,37 @@ for line in "${y[@]}" ; do
   fi
 done
 
+# function for echoing all items of an array, one per line
+echoall() {
+  for line in "$@"; do
+      echo "$line"
+  done
+}
+
 # Print all the found and categorized changes
-echo "## New features"
-echoall "${FEATURES[@]}"
-echo ""
+create_changelog() {
+  echo "## New features"
+  echoall "${FEATURES[@]}"
+  echo ""
 
-echo "## Minor changes"
-echoall "${IMPROVEMENTS[@]}"
-echo ""
+  echo "## Minor changes"
+  echoall "${IMPROVEMENTS[@]}"
+  echo ""
 
-echo "## Bug fixes"
-echoall "${FIXES[@]}"
-echo ""
+  echo "## Bug fixes"
+  echoall "${FIXES[@]}"
+  echo ""
 
-echo "## Repo changes"
-echoall "${REPOCHANGES[@]}"
-echo ""
+  echo "## Repo changes"
+  echoall "${REPOCHANGES[@]}"
+  echo ""
 
-echo "$FULLCHANGELOG"
+  echo "$FULLCHANGELOG"
+}
+
+# generate a new changelog
+CHANGELOG=$(create_changelog)
+# write the changelog into the file
+echo "$CHANGELOG" > "$1"
+
+echo "Done."
