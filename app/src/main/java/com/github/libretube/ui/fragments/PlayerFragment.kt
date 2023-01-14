@@ -581,8 +581,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
             saveWatchPosition()
 
-            // clear the playing queue and release the player
-            PlayingQueue.resetToDefaults()
+            // release the player
             nowPlayingNotification.destroySelfAndPlayer()
 
             activity?.requestedOrientation =
