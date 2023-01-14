@@ -431,4 +431,9 @@
     <string name="shuffle">Baralhar</string>
     <string name="add_to_bookmarks">Adicionar aos marcadores</string>
     <string name="remove_bookmark">Remover marcador</string>
+    <string name="rewind">Rebobinar</string>
+    <string name="forward">Avançar</string>
+    <string name="pause">Pausa</string>
+    <string name="alternative_pip_controls">Controlos PiP alternativos</string>
+    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e saltar controlos em PiP em vez de avançar e rebobinar</string>
 </resources>

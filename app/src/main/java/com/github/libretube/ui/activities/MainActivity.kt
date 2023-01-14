@@ -39,11 +39,9 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.tools.BreakReminder
 import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NetworkHelper
-import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.material.elevation.SurfaceColors
@@ -221,11 +219,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_queue)?.isVisible = PlayingQueue.isNotEmpty()
-        return super.onPrepareOptionsMenu(menu)
-    }
-
     /**
      * Initialize the notification badge showing the amount of new videos
      */
@@ -373,10 +366,6 @@ class MainActivity : BaseActivity() {
                 startActivity(communityIntent)
                 true
             }
-            R.id.action_queue -> {
-                PlayingQueueSheet().show(supportFragmentManager, null)
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -389,6 +378,11 @@ class MainActivity : BaseActivity() {
             moveTaskToBack(true)
             intent?.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
+        }
+
+        if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
+            navController.navigate(R.id.audioPlayerFragment)
+            return
         }
 
         intent?.getStringExtra(IntentData.channelId)?.let {
@@ -412,6 +406,7 @@ class MainActivity : BaseActivity() {
         intent?.getStringExtra(IntentData.videoId)?.let {
             loadVideo(it, intent?.getLongExtra(IntentData.timeStamp, 0L))
         }
+
         when (intent?.getStringExtra("fragmentToOpen")) {
             "home" ->
                 navController.navigate(R.id.homeFragment)
@@ -421,10 +416,6 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.subscriptionsFragment)
             "library" ->
                 navController.navigate(R.id.libraryFragment)
-        }
-        if (intent?.getBooleanExtra(IntentData.openQueueOnce, false) == true) {
-            PlayingQueueSheet()
-                .show(supportFragmentManager)
         }
     }
 

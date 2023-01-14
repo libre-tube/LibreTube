@@ -431,4 +431,9 @@
     <string name="shuffle">随机播放</string>
     <string name="add_to_bookmarks">添加到书签</string>
     <string name="remove_bookmark">移除书签</string>
+    <string name="forward">前进</string>
+    <string name="pause">暂停</string>
+    <string name="rewind">后退</string>
+    <string name="alternative_pip_controls">备选 PiP （画中画）操控</string>
+    <string name="alternative_pip_controls_summary">仅显示音频并跳过画中画操控而非前进和后退</string>
 </resources>

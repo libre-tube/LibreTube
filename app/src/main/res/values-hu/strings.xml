@@ -434,4 +434,6 @@
     <string name="forward">Előretekerés</string>
     <string name="pause">Megállítás</string>
     <string name="rewind">Visszatekerés</string>
+    <string name="alternative_pip_controls">Alternatív PiP irányítás</string>
+    <string name="alternative_pip_controls_summary">Csak hang és átlépés gombok megjelenítése a PiP-ben az előretekerés és a visszatekerés helyett</string>
 </resources>

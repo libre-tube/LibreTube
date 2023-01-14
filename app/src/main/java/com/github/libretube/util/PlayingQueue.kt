@@ -13,7 +13,16 @@ import kotlinx.coroutines.launch
 object PlayingQueue {
     private val queue = mutableListOf<StreamItem>()
     private var currentStream: StreamItem? = null
+
+    /**
+     * Listener that gets called when the user selects an item from the queue
+     */
     private var onQueueTapListener: (StreamItem) -> Unit = {}
+
+    /**
+     * Listener that gets called when the current playing video changes
+     */
+    private val onTrackChangedListeners: MutableList<(StreamItem) -> Unit> = mutableListOf()
     var repeatQueue: Boolean = false
 
     fun add(vararg streamItem: StreamItem) {
@@ -58,6 +67,11 @@ object PlayingQueue {
 
     fun updateCurrent(streamItem: StreamItem) {
         currentStream = streamItem
+        onTrackChangedListeners.forEach {
+            runCatching {
+                it.invoke(streamItem)
+            }
+        }
         if (!contains(streamItem)) queue.add(streamItem)
     }
 
@@ -76,6 +90,8 @@ object PlayingQueue {
             0
         }
     }
+
+    fun getCurrent(): StreamItem? = currentStream
 
     fun contains(streamItem: StreamItem) = queue.any { it.url?.toID() == streamItem.url?.toID() }
 
@@ -162,9 +178,18 @@ object PlayingQueue {
         onQueueTapListener = listener
     }
 
+    fun addOnTrackChangedListener(listener: (StreamItem) -> Unit) {
+        onTrackChangedListeners.add(listener)
+    }
+
+    fun removeOnTrackChangedListener(listener: (StreamItem) -> Unit) {
+        onTrackChangedListeners.remove(listener)
+    }
+
     fun resetToDefaults() {
         repeatQueue = false
         onQueueTapListener = {}
+        onTrackChangedListeners.clear()
         queue.clear()
     }
 }

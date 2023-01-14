@@ -430,6 +430,7 @@
     <string name="pause">Pause</string>
     <string name="alternative_pip_controls">Alternative PiP controls</string>
     <string name="alternative_pip_controls_summary">Show audio only and skip controls in PiP instead of forward and rewind</string>
+    <string name="audio_player">Audio player</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
