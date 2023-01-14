@@ -435,7 +435,6 @@
     <string name="remove_bookmark">Remove bookmark</string>
     <string name="rewind">Rewind</string>
     <string name="forward">Forward</string>
-    <string name="pause">Pause</string>
     <string name="alternative_pip_controls">Alternative PiP controls</string>
     <string name="alternative_pip_controls_summary">Show audio only and skip controls in PiP instead of forward and rewind</string>
     <string name="audio_player">Audio player</string>
