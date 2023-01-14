@@ -436,4 +436,5 @@
     <string name="rewind">后退</string>
     <string name="alternative_pip_controls">备选 PiP （画中画）操控</string>
     <string name="alternative_pip_controls_summary">仅显示音频并跳过画中画操控而非前进和后退</string>
+    <string name="audio_player">音频播放器</string>
 </resources>
