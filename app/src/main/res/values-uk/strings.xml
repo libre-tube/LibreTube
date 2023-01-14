@@ -437,4 +437,13 @@
     <string name="alternative_pip_controls">Альтернативні елементи керування PiP</string>
     <string name="alternative_pip_controls_summary">Показувати лише аудіо та пропускати елементи керування в PiP замість перемотування вперед та назад</string>
     <string name="audio_player">Аудіопрогравач</string>
+    <string name="audio_only_mode">Режим лише аудіо</string>
+    <string name="audio_only_mode_summary">Перетворіть LibreTube на музичний програвач.</string>
+    <string name="no_subtitle">Субтитрів немає</string>
+    <string name="download_paused">Завантаження призупинено</string>
+    <string name="concurrent_downloads">Максимальна кількість одночасних завантажень</string>
+    <string name="concurrent_downloads_limit_reached">Досягнуто максимальної кількості одночасних завантажень.</string>
+    <string name="unknown">Невідомо</string>
+    <string name="download_completed">Завантаження завершено</string>
+    <string name="resume">Продовжити</string>
 </resources>
