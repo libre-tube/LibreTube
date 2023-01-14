@@ -67,37 +67,16 @@ object LocaleHelper {
     }
 
     fun getAvailableCountries(): List<Country> {
-        val isoCountries = Locale.getISOCountries()
-        val countries = mutableListOf<Country>()
-        isoCountries.forEach { countryCode ->
-            val locale = Locale("", countryCode)
-            val countryName = locale.displayCountry
-            countries.add(
-                Country(
-                    countryName,
-                    countryCode
-                )
-            )
-        }
-        countries.sortBy { it.name }
-        return countries
+        return Locale.getISOCountries()
+            .map { Country(Locale("", it).displayCountry, it) }
+            .sortedBy { it.name }
     }
 
     fun getAvailableLocales(): List<Country> {
-        val availableLocales: Array<Locale> = Locale.getAvailableLocales()
-        val locales = mutableListOf<Country>()
-
-        availableLocales.forEach { locale ->
-            if (locales.filter { it.code == locale.language }.isEmpty()) {
-                locales.add(
-                    Country(
-                        locale.displayLanguage,
-                        locale.language
-                    )
-                )
-            }
-        }
-        return locales
+        return Locale.getAvailableLocales()
+            .distinctBy { it.language }
+            .map { Country(it.displayLanguage, it.language) }
+            .sortedBy { it.name }
     }
 
     fun getTrendingRegion(context: Context): String {
