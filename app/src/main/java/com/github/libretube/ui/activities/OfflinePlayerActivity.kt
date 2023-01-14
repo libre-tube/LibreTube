@@ -20,17 +20,22 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.updateParameters
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PlayerHelper
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.FileDataSource
+import com.google.android.exoplayer2.util.MimeTypes
 import java.io.File
 
 class OfflinePlayerActivity : BaseActivity() {
@@ -38,6 +43,8 @@ class OfflinePlayerActivity : BaseActivity() {
     private lateinit var videoId: String
     private lateinit var player: ExoPlayer
     private lateinit var playerView: StyledPlayerView
+    private lateinit var trackSelector: DefaultTrackSelector
+
     private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
     private val playerViewModel: PlayerViewModel by viewModels()
 
@@ -60,8 +67,11 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     private fun initializePlayer() {
+        trackSelector = DefaultTrackSelector(this)
+
         player = ExoPlayer.Builder(this)
             .setHandleAudioBecomingNoisy(true)
+            .setTrackSelector(trackSelector)
             .build().apply {
                 addListener(object : Player.Listener {
                     override fun onEvents(player: Player, events: Player.Events) {
@@ -75,9 +85,9 @@ class OfflinePlayerActivity : BaseActivity() {
             }
 
         playerView = binding.player
-
+        playerView.setShowSubtitleButton(true)
+        playerView.subtitleView?.visibility = View.VISIBLE
         playerView.player = player
-
         playerBinding = binding.player.binding
 
         playerBinding.fullscreen.visibility = View.GONE
@@ -85,11 +95,13 @@ class OfflinePlayerActivity : BaseActivity() {
             finish()
         }
 
+        PlayerHelper.applyCaptionsStyle(this, playerView.subtitleView)
+
         binding.player.initialize(
             null,
             binding.doubleTapOverlay.binding,
             binding.playerGestureControlsView.binding,
-            null
+            trackSelector
         )
     }
 
@@ -110,40 +122,59 @@ class OfflinePlayerActivity : BaseActivity() {
         val audioUri = audio?.path?.let { File(it).toUri() }
         val subtitleUri = subtitle?.path?.let { File(it).toUri() }
 
-        setMediaSource(
-            videoUri,
-            audioUri
-        )
+        setMediaSource(videoUri, audioUri, subtitleUri)
+
+        trackSelector.updateParameters {
+            setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+            setPreferredTextLanguage("en")
+        }
 
         player.prepare()
         player.play()
     }
 
-    private fun setMediaSource(videoUri: Uri?, audioUri: Uri?) {
+    private fun setMediaSource(videoUri: Uri?, audioUri: Uri?, subtitleUri: Uri?) {
+        val subtitle = subtitleUri?.let {
+            SubtitleConfiguration.Builder(it)
+                .setMimeType(MimeTypes.APPLICATION_SUBRIP)
+                .build()
+        }
+        subtitle?.id
+
         when {
             videoUri != null && audioUri != null -> {
+                val videoItem = MediaItem.Builder()
+                    .setUri(videoUri)
+                    .apply {
+                        if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
+                    }
+                    .build()
+
                 val videoSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
-                    .createMediaSource(
-                        MediaItem.fromUri(videoUri)
-                    )
+                    .createMediaSource(videoItem)
 
                 val audioSource = ProgressiveMediaSource.Factory(FileDataSource.Factory())
-                    .createMediaSource(
-                        MediaItem.fromUri(audioUri)
-                    )
+                    .createMediaSource(MediaItem.fromUri(audioUri))
 
-                val mediaSource = MergingMediaSource(
-                    audioSource,
-                    videoSource
-                )
+                val mediaSource = MergingMediaSource(audioSource, videoSource)
 
                 player.setMediaSource(mediaSource)
             }
             videoUri != null -> player.setMediaItem(
-                MediaItem.fromUri(videoUri)
+                MediaItem.Builder()
+                    .setUri(videoUri)
+                    .apply {
+                        if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
+                    }
+                    .build()
             )
             audioUri != null -> player.setMediaItem(
-                MediaItem.fromUri(audioUri)
+                MediaItem.Builder()
+                    .setUri(audioUri)
+                    .apply {
+                        if (subtitle != null) setSubtitleConfigurations(listOf(subtitle))
+                    }
+                    .build()
             )
         }
     }

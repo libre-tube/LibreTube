@@ -103,9 +103,7 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
-import com.google.android.exoplayer2.text.Cue.TEXT_SIZE_TYPE_ABSOLUTE
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
@@ -816,7 +814,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     private fun prepareExoPlayerView() {
         exoPlayerView.apply {
-            setShowSubtitleButton(true)
+            setShowSubtitleButton(false)
             setShowNextButton(false)
             setShowPreviousButton(false)
             // controllerShowTimeoutMs = 1500
@@ -827,18 +825,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.exoProgress.setPlayer(exoPlayer)
 
-        applyCaptionStyle()
-    }
-
-    private fun applyCaptionStyle() {
-        val captionStyle = PlayerHelper.getCaptionStyle(requireContext())
-        exoPlayerView.subtitleView?.apply {
-            setApplyEmbeddedFontSizes(false)
-            setFixedTextSize(TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
-            if (!PlayerHelper.useSystemCaptionStyle) return
-            setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
-            setStyle(captionStyle)
-        }
+        PlayerHelper.applyCaptionsStyle(requireContext(), exoPlayerView.subtitleView)
     }
 
     private fun localizedDate(date: String?): String? {
