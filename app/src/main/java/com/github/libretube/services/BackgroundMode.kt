@@ -177,11 +177,13 @@ class BackgroundMode : Service() {
                 RetrofitInstance.api.getStreams(videoId)
             }.getOrNull() ?: return@launch
 
-            // add the playlist video to the queue
-            if (PlayingQueue.isEmpty() && !keepQueue) updateQueue()
+            // save the current stream to the queue
             streams?.toStreamItem(videoId)?.let {
                 PlayingQueue.updateCurrent(it)
             }
+
+            // add the playlist video to the queue
+            if (PlayingQueue.isEmpty() && !keepQueue) updateQueue()
 
             handler.post {
                 playAudio(seekToPosition)

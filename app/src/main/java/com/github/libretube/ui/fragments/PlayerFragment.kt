@@ -472,7 +472,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             videoId!!,
             exoPlayer.currentPosition,
             playlistId,
-            channelId
+            channelId,
+            true
         )
         handler.postDelayed({
             (activity as MainActivity).navController.navigate(R.id.audioPlayerFragment)
