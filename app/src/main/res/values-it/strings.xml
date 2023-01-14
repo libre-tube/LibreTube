@@ -436,4 +436,14 @@
     <string name="pause">Pausa</string>
     <string name="alternative_pip_controls">Controlli PiP alternativi</string>
     <string name="alternative_pip_controls_summary">Mostra solo l\'audio e salta i controlli nel PiP, invece di avanti e riavvolgi</string>
+    <string name="audio_player">Riproduttore audio</string>
+    <string name="no_subtitle">Nessun sottotitolo</string>
+    <string name="download_paused">Scaricamento in pausa</string>
+    <string name="download_completed">Scaricamento completato</string>
+    <string name="concurrent_downloads">Max download simultanei</string>
+    <string name="concurrent_downloads_limit_reached">Limite massimo di download simultanei raggiunto.</string>
+    <string name="unknown">Sconosciuto</string>
+    <string name="resume">Riprendi</string>
+    <string name="audio_only_mode">Modalità solo audio</string>
+    <string name="audio_only_mode_summary">Trasforma LibreTube in un riproduttore musicale.</string>
 </resources>
