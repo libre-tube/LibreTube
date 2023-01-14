@@ -436,4 +436,5 @@
     <string name="pause">Pausa</string>
     <string name="alternative_pip_controls">Controlos PiP alternativos</string>
     <string name="alternative_pip_controls_summary">Mostrar apenas áudio e saltar controlos em PiP em vez de avançar e rebobinar</string>
+    <string name="audio_player">Reprodutor de áudio</string>
 </resources>
