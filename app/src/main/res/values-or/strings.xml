@@ -436,4 +436,5 @@
     <string name="pause">ବିରାମ</string>
     <string name="alternative_pip_controls">ବିକଳ୍ପ PIP ନିୟନ୍ତ୍ରଣ</string>
     <string name="alternative_pip_controls_summary">କେବଳ ଅଡିଓ ଦେଖାନ୍ତୁ ଏବଂ ଆଗକୁ ଏବଂ ପଛକୁ ନେବା ପରିବର୍ତ୍ତେ PiP ରେ କଣ୍ଟ୍ରୋଲ୍ ଛାଡିଦିଅ</string>
+    <string name="audio_player">ଅଡିଓ ପ୍ଲେୟାର</string>
 </resources>
