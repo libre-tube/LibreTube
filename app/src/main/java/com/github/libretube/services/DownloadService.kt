@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
@@ -95,18 +96,14 @@ class DownloadService : Service() {
             try {
                 val streams = RetrofitInstance.api.getStreams(videoId)
 
+                val thumbnailTargetFile = getDownloadFile(DownloadHelper.THUMBNAIL_DIR, fileName)
+
                 awaitQuery {
                     Database.downloadDao().insertDownload(
                         Download(
                             videoId = videoId,
                             title = streams.title ?: "",
-                            thumbnailPath = File(
-                                DownloadHelper.getDownloadDir(
-                                    this@DownloadService,
-                                    DownloadHelper.THUMBNAIL_DIR
-                                ),
-                                fileName
-                            ).absolutePath,
+                            thumbnailPath = thumbnailTargetFile.absolutePath,
                             description = streams.description ?: "",
                             uploadDate = streams.uploadDate,
                             uploader = streams.uploader ?: ""
@@ -117,13 +114,7 @@ class DownloadService : Service() {
                     ImageHelper.downloadImage(
                         this@DownloadService,
                         url,
-                        File(
-                            DownloadHelper.getDownloadDir(
-                                this@DownloadService,
-                                DownloadHelper.THUMBNAIL_DIR
-                            ),
-                            fileName
-                        ).absolutePath
+                        thumbnailTargetFile.absolutePath
                     )
                 }
 
@@ -151,27 +142,9 @@ class DownloadService : Service() {
      */
     private fun start(item: DownloadItem) {
         val file: File = when (item.type) {
-            FileType.AUDIO -> {
-                val audioDownloadDir = DownloadHelper.getDownloadDir(
-                    this,
-                    DownloadHelper.AUDIO_DIR
-                )
-                File(audioDownloadDir, item.fileName)
-            }
-            FileType.VIDEO -> {
-                val videoDownloadDir = DownloadHelper.getDownloadDir(
-                    this,
-                    DownloadHelper.VIDEO_DIR
-                )
-                File(videoDownloadDir, item.fileName)
-            }
-            FileType.SUBTITLE -> {
-                val subtitleDownloadDir = DownloadHelper.getDownloadDir(
-                    this,
-                    DownloadHelper.SUBTITLE_DIR
-                )
-                File(subtitleDownloadDir, item.fileName)
-            }
+            FileType.AUDIO -> getDownloadFile(DownloadHelper.AUDIO_DIR, item.fileName)
+            FileType.VIDEO -> getDownloadFile(DownloadHelper.VIDEO_DIR, item.fileName)
+            FileType.SUBTITLE -> getDownloadFile(DownloadHelper.SUBTITLE_DIR, item.fileName)
         }
         file.createNewFile()
         item.path = file.absolutePath
@@ -382,7 +355,7 @@ class DownloadService : Service() {
 
         summaryNotificationBuilder = NotificationCompat
             .Builder(this, DOWNLOAD_CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_launcher_lockscreen)
             .setContentTitle(getString(R.string.downloading))
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .setGroup(DOWNLOAD_NOTIFICATION_GROUP)
@@ -394,12 +367,6 @@ class DownloadService : Service() {
     }
 
     private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
-        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_CANCEL_CURRENT
-        } else {
-            PendingIntent.FLAG_CANCEL_CURRENT
-        }
-
         val activityIntent =
             PendingIntent.getActivity(
                 this@DownloadService,
@@ -407,7 +374,7 @@ class DownloadService : Service() {
                 Intent(this@DownloadService, MainActivity::class.java).apply {
                     putExtra("fragmentToOpen", "downloads")
                 },
-                flags
+                PendingIntentCompat.cancelCurrentFlags
             )
 
         return NotificationCompat
@@ -459,41 +426,42 @@ class DownloadService : Service() {
     }
 
     private fun getResumeAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java)
-
-        intent.action = ACTION_DOWNLOAD_RESUME
-        intent.putExtra("id", id)
-
-        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            (PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-        } else {
-            PendingIntent.FLAG_UPDATE_CURRENT
+        val intent = Intent(this, NotificationReceiver::class.java).apply {
+            action = ACTION_DOWNLOAD_RESUME
+            putExtra("id", id)
         }
 
         return NotificationCompat.Action.Builder(
             R.drawable.ic_play,
             getString(R.string.resume),
-            PendingIntent.getBroadcast(this, id, intent, flags)
+            PendingIntent.getBroadcast(this, id, intent, PendingIntentCompat.updateCurrentFlags)
         ).build()
     }
 
     private fun getPauseAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java)
-
-        intent.action = ACTION_DOWNLOAD_PAUSE
-        intent.putExtra("id", id)
-
-        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            (PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-        } else {
-            PendingIntent.FLAG_UPDATE_CURRENT
+        val intent = Intent(this, NotificationReceiver::class.java).apply {
+            action = ACTION_DOWNLOAD_PAUSE
+            putExtra("id", id)
         }
 
         return NotificationCompat.Action.Builder(
             R.drawable.ic_pause,
             getString(R.string.pause),
-            PendingIntent.getBroadcast(this, id, intent, flags)
+            PendingIntent.getBroadcast(this, id, intent, PendingIntentCompat.updateCurrentFlags)
         ).build()
+    }
+
+    /**
+     * Get a [File] from the corresponding download directory and the file name
+     */
+    private fun getDownloadFile(directory: String, fileName: String): File {
+        return File(
+            DownloadHelper.getDownloadDir(
+                this@DownloadService,
+                directory
+            ),
+            fileName
+        )
     }
 
     override fun onDestroy() {

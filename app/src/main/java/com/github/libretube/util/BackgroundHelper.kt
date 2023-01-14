@@ -3,7 +3,7 @@ package com.github.libretube.util
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build
+import com.github.libretube.compat.ServiceCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.services.BackgroundMode
 
@@ -33,11 +33,7 @@ object BackgroundHelper {
         intent.putExtra(IntentData.keepQueue, keepQueue)
 
         // start the background mode as foreground service
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            context.startForegroundService(intent)
-        } else {
-            context.startService(intent)
-        }
+        ServiceCompat(context).startForeground(intent)
     }
 
     /**

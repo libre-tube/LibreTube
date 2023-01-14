@@ -3,7 +3,7 @@ package com.github.libretube.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
+import com.github.libretube.compat.ServiceCompat
 import com.github.libretube.services.DownloadService
 
 class NotificationReceiver : BroadcastReceiver() {
@@ -17,10 +17,8 @@ class NotificationReceiver : BroadcastReceiver() {
         if (id == -1) return
         serviceIntent.putExtra("id", id)
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            context?.startForegroundService(serviceIntent)
-        } else {
-            context?.startService(serviceIntent)
+        context?.let {
+            ServiceCompat(it).startForeground(serviceIntent)
         }
     }
 

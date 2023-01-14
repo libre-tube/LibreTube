@@ -3,6 +3,7 @@ package com.github.libretube.util
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import com.github.libretube.compat.ServiceCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.obj.DownloadItem
@@ -65,11 +66,7 @@ object DownloadHelper {
         intent.putExtra(IntentData.audioQuality, audioQuality)
         intent.putExtra(IntentData.subtitleCode, subtitleCode)
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            context.startForegroundService(intent)
-        } else {
-            context.startService(intent)
-        }
+        ServiceCompat(context).startForeground(intent)
     }
 
     fun DownloadItem.getNotificationId(): Int {
