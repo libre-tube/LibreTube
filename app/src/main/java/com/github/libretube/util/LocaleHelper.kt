@@ -5,6 +5,8 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.telephony.TelephonyManager
+import androidx.core.content.getSystemService
+import androidx.core.os.ConfigurationCompat
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.obj.Country
 import java.util.*
@@ -44,53 +46,24 @@ object LocaleHelper {
         resources.updateConfiguration(configuration, resources.getDisplayMetrics())
     }
 
-    fun getDetectedCountry(context: Context, defaultCountryIsoCode: String): String {
-        detectSIMCountry(context)?.let {
-            if (it != "") return it
-        }
-
-        detectNetworkCountry(context)?.let {
-            if (it != "") return it
-        }
-
-        detectLocaleCountry(context)?.let {
-            if (it != "") return it
-        }
-
-        return defaultCountryIsoCode
-    }
-
-    private fun detectSIMCountry(context: Context): String? {
-        try {
-            val telephonyManager =
-                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            return telephonyManager.simCountryIso
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
-
-    private fun detectNetworkCountry(context: Context): String? {
-        try {
-            val telephonyManager =
-                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            return telephonyManager.networkCountryIso
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
-
-    private fun detectLocaleCountry(context: Context): String? {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                return context.resources.configuration.locales[0].country
+    private fun getDetectedCountry(context: Context): String {
+        return detectSIMCountry(context).ifEmpty {
+            detectNetworkCountry(context).ifEmpty {
+                detectLocaleCountry(context).ifEmpty { "UK" }
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
-        return null
+    }
+
+    private fun detectSIMCountry(context: Context): String {
+        return context.getSystemService<TelephonyManager>()?.simCountryIso.orEmpty()
+    }
+
+    private fun detectNetworkCountry(context: Context): String {
+        return context.getSystemService<TelephonyManager>()?.networkCountryIso.orEmpty()
+    }
+
+    private fun detectLocaleCountry(context: Context): String {
+        return ConfigurationCompat.getLocales(context.resources.configuration)[0]!!.country
     }
 
     fun getAvailableCountries(): List<Country> {
@@ -132,8 +105,7 @@ object LocaleHelper {
 
         // get the system default country if auto region selected
         return if (regionPref == "sys") {
-            getDetectedCountry(context, "UK")
-                .uppercase()
+            getDetectedCountry(context).uppercase()
         } else {
             regionPref
         }
