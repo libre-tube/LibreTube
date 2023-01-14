@@ -25,27 +25,6 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checkedButton="@id/video_radio"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/video_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/video" />
-
-        <RadioButton
-            android:id="@+id/audio_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/audio" />
-
-    </RadioGroup>
-
     <Spinner
         android:id="@+id/video_spinner"
         android:layout_width="match_parent"

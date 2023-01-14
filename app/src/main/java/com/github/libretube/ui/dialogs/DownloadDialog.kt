@@ -31,14 +31,6 @@ class DownloadDialog(
 
         fetchAvailableSources()
 
-        binding.audioRadio.setOnClickListener {
-            binding.videoSpinner.visibility = View.GONE
-        }
-
-        binding.videoRadio.setOnClickListener {
-            binding.videoSpinner.visibility = View.VISIBLE
-        }
-
         binding.fileName.filters += InputFilter { source, start, end, _, _, _ ->
             if (source.isNullOrBlank()) {
                 return@InputFilter null
