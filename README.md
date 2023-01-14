@@ -44,14 +44,7 @@ This project is aimed at improving the users' privacy by being independent from 
 
 Therefore, the app is using the [Piped API](https://github.com/TeamPiped/Piped), which uses proxies to circumvent Google's data collection and includes some other additional features.
 
-> **Warning** <br>
-> The project is still in beta, therefore you may encounter bugs. If you do so, please open an issue via our GitHub repository.
-
-<table><td>
-<a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=bug&template=report_bug.yml">🐞 Report Bug</a>
-</td>
-<td><a href="https://github.com/libre-tube/LibreTube/issues/new?assignees=&labels=enhancement&template=feature-request.yml">⭐ Request Feature</a>
-</td></table>
+If you have questions or need help, please make sure to read the [FAQ](https://libre-tube.github.io/#faq) before asking for help at the community channels. The [Matrix room](https://matrix.to/#/#LibreTube:matrix.org) is considered as the main communication channel, all other forums or social media accounts are maintained by volunteers from the community but not the developer(s).
 
 <h2 align="left">
 <sub>
@@ -103,7 +96,7 @@ Features
 Contributing
 </h2>
 
-Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets!
+Whether you have ideas, translations, design changes, code cleaning or really heavy code changes, help is always welcome. The more is done, the better it gets! Please respect our [Code of Conduct](https://github.com/libre-tube/LibreTube/blob/master/CODE_OF_CONDUCT.md) in order to keep all interactions and dicussions healthy.
 
 If creating a pull request, please make sure to format your code (preferred ktlint) before.
 
