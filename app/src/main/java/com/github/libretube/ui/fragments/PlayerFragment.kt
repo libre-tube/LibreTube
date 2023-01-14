@@ -1206,7 +1206,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun getAvailableResolutions(): List<VideoResolution> {
         val resolutions = exoPlayer.currentTracks.groups.map { group ->
             (0 until group.length).map {
-                group.getTrackFormat(it).width
+                group.getTrackFormat(it).height
             }
         }.flatten()
             .filter { it > 0 }
