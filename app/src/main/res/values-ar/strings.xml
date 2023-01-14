@@ -439,4 +439,11 @@
     <string name="audio_player">مشغل الصوت</string>
     <string name="audio_only_mode">وضع الصوت فقط</string>
     <string name="audio_only_mode_summary">حول LibreTube إلى مشغل موسيقى.</string>
+    <string name="no_subtitle">لا توجد ترجمة</string>
+    <string name="download_paused">إيقاف التنزيل مؤقتًا</string>
+    <string name="download_completed">اكتمل التنزيل</string>
+    <string name="concurrent_downloads">أقصى عدد من التنزيلات المتزامنة</string>
+    <string name="concurrent_downloads_limit_reached">تم الوصول إلى الحد الأقصى من التنزيلات المتزامنة.</string>
+    <string name="unknown">غير معروف</string>
+    <string name="resume">استئناف</string>
 </resources>
