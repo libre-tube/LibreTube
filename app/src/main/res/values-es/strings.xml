@@ -436,4 +436,5 @@
     <string name="alternative_pip_controls_summary">Mostrar sólo audio y controles de salto en el modo de imagen en imagen en lugar de hacia adelante y hacia atrás</string>
     <string name="rewind">Rebobinar</string>
     <string name="alternative_pip_controls">Controles alternativos de imagen en imagen</string>
+    <string name="audio_player">Reproductor de audio</string>
 </resources>

@@ -436,4 +436,5 @@
     <string name="pause">Призупинити</string>
     <string name="alternative_pip_controls">Альтернативні елементи керування PiP</string>
     <string name="alternative_pip_controls_summary">Показувати лише аудіо та пропускати елементи керування в PiP замість перемотування вперед та назад</string>
+    <string name="audio_player">Аудіопрогравач</string>
 </resources>

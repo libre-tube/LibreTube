@@ -436,4 +436,5 @@
     <string name="pause">Jeda</string>
     <string name="alternative_pip_controls">Kontrol gambar dalam gambar alternatif</string>
     <string name="alternative_pip_controls_summary">Hanya tampilkan audio dan kontrol lewati dalam mode gambar dalam gambar daripada maju dan mundur</string>
+    <string name="audio_player">Pemutar audio</string>
 </resources>
