@@ -438,4 +438,5 @@
     <string name="rewind">Geri sar</string>
     <string name="audio_player">Səs oynadıcı</string>
     <string name="audio_only_mode">Yalnız səs rejimi</string>
+    <string name="audio_only_mode_summary">LibreTube-u musiqi oynadıcıya dəyiş.</string>
 </resources>
