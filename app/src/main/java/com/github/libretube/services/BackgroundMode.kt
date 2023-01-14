@@ -134,9 +134,10 @@ class BackgroundMode : Service() {
             videoId = intent?.getStringExtra(IntentData.videoId)!!
             playlistId = intent.getStringExtra(IntentData.playlistId)
             val position = intent.getLongExtra(IntentData.position, 0L)
+            val keepQueue = intent.getBooleanExtra(IntentData.keepQueue, false)
 
             // play the audio in the background
-            loadAudio(videoId, position)
+            loadAudio(videoId, position, keepQueue)
 
             PlayingQueue.setOnQueueTapListener { streamItem ->
                 streamItem.url?.toID()?.let { playNextVideo(it) }
@@ -168,7 +169,8 @@ class BackgroundMode : Service() {
      */
     private fun loadAudio(
         videoId: String,
-        seekToPosition: Long = 0
+        seekToPosition: Long = 0,
+        keepQueue: Boolean = false
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             streams = runCatching {
@@ -176,21 +178,9 @@ class BackgroundMode : Service() {
             }.getOrNull() ?: return@launch
 
             // add the playlist video to the queue
-            if (PlayingQueue.isEmpty() && playlistId != null) {
-                streams?.toStreamItem(videoId)?.let {
-                    PlayingQueue.insertPlaylist(playlistId!!, it)
-                }
-            } else if (PlayingQueue.isEmpty() && channelId != null) {
-                streams?.toStreamItem(videoId)?.let {
-                    PlayingQueue.insertChannel(channelId!!, it)
-                }
-            } else {
-                streams?.toStreamItem(videoId)?.let {
-                    PlayingQueue.updateCurrent(it)
-                }
-                streams?.relatedStreams?.toTypedArray()?.let {
-                    if (PlayerHelper.autoInsertRelatedVideos) PlayingQueue.add(*it)
-                }
+            if (PlayingQueue.isEmpty() && !keepQueue) updateQueue()
+            streams?.toStreamItem(videoId)?.let {
+                PlayingQueue.updateCurrent(it)
             }
 
             handler.post {
@@ -367,6 +357,22 @@ class BackgroundMode : Service() {
                     }
                 }
                 player?.seekTo(segmentEnd)
+            }
+        }
+    }
+
+    private fun updateQueue() {
+        if (playlistId != null) {
+            streams?.toStreamItem(videoId)?.let {
+                PlayingQueue.insertPlaylist(playlistId!!, it)
+            }
+        } else if (channelId != null) {
+            streams?.toStreamItem(videoId)?.let {
+                PlayingQueue.insertChannel(channelId!!, it)
+            }
+        } else {
+            streams?.relatedStreams?.toTypedArray()?.let {
+                if (PlayerHelper.autoInsertRelatedVideos) PlayingQueue.add(*it)
             }
         }
     }
