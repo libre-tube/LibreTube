@@ -75,7 +75,6 @@ import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.extensions.setFormattedHtml
-import com.github.libretube.ui.extensions.setInvisible
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.CommentsViewModel
@@ -1078,9 +1077,21 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun syncQueueButtons() {
         if (!PlayerHelper.skipButtonsEnabled) return
 
-        // next and previous buttons
-        playerBinding.skipPrev.setInvisible(!PlayingQueue.hasPrev())
-        playerBinding.skipNext.setInvisible(!PlayingQueue.hasNext())
+        // toggle the visibility of next and prev buttons based on queue and whether the player view is locked
+        playerBinding.skipPrev.visibility = if (
+            PlayingQueue.hasPrev() && !binding.player.isPlayerLocked
+        ) {
+            View.VISIBLE
+        } else {
+            View.INVISIBLE
+        }
+        playerBinding.skipNext.visibility = if (
+            PlayingQueue.hasNext() && !binding.player.isPlayerLocked
+        ) {
+            View.VISIBLE
+        } else {
+            View.INVISIBLE
+        }
 
         handler.postDelayed(this::syncQueueButtons, 100)
     }
@@ -1203,7 +1214,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * Get all available player resolutions
      */
     private fun getAvailableResolutions(): List<VideoResolution> {
-        val resolutions = exoPlayer.currentTracks.groups.map { group ->
+        val resolutions = exoPlayer.currentTracks.groups.asSequence().map { group ->
             (0 until group.length).map {
                 group.getTrackFormat(it).height
             }
