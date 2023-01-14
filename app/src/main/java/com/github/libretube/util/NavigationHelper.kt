@@ -66,7 +66,14 @@ object NavigationHelper {
 
         if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)) {
             BackgroundHelper.stopBackgroundPlay(context)
-            BackgroundHelper.playOnBackground(context, videoId.toID(), timeStamp, playlistId, channelId, keepQueue)
+            BackgroundHelper.playOnBackground(
+                context,
+                videoId.toID(),
+                timeStamp,
+                playlistId,
+                channelId,
+                keepQueue
+            )
             handler.postDelayed({
                 startAudioPlayer(context)
             }, 500)
