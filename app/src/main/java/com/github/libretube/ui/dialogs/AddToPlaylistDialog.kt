@@ -17,13 +17,18 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
+import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Dialog to insert new videos to a playlist
+ * @param videoId The id of the video to add. If non is provided, insert the whole playing queue
+ */
 class AddToPlaylistDialog(
-    private val videoId: String
+    private val videoId: String? = null
 ) : DialogFragment() {
     private lateinit var binding: DialogAddtoplaylistBinding
     private val viewModel: PlaylistViewModel by activityViewModels()
@@ -53,30 +58,27 @@ class AddToPlaylistDialog(
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 return@launchWhenCreated
             }
-            if (response.isNotEmpty()) {
-                val names = response.map { it.name }
-                val arrayAdapter =
-                    ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
-                arrayAdapter.setDropDownViewResource(
-                    android.R.layout.simple_spinner_dropdown_item
+            if (response.isEmpty()) return@launchWhenCreated
+            val names = response.map { it.name }
+            val arrayAdapter =
+                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, names)
+            arrayAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+            )
+            binding.playlistsSpinner.adapter = arrayAdapter
+
+            // select the last used playlist
+            viewModel.lastSelectedPlaylistId?.let { id ->
+                binding.playlistsSpinner.setSelection(
+                    response.indexOfFirst { it.id == id }.takeIf { it >= 0 } ?: 0
                 )
-                binding.playlistsSpinner.adapter = arrayAdapter
-                if (viewModel.lastSelectedPlaylistId != null) {
-                    var selectionIndex = 0
-                    response.forEachIndexed { index, playlist ->
-                        if (playlist.id == viewModel.lastSelectedPlaylistId) {
-                            selectionIndex = index
-                        }
-                    }
-                    binding.playlistsSpinner.setSelection(selectionIndex)
-                }
-                runOnUiThread {
-                    binding.addToPlaylist.setOnClickListener {
-                        val index = binding.playlistsSpinner.selectedItemPosition
-                        viewModel.lastSelectedPlaylistId = response[index].id!!
-                        addToPlaylist(response[index].id!!)
-                        dialog?.dismiss()
-                    }
+            }
+            runOnUiThread {
+                binding.addToPlaylist.setOnClickListener {
+                    val index = binding.playlistsSpinner.selectedItemPosition
+                    viewModel.lastSelectedPlaylistId = response[index].id!!
+                    addToPlaylist(response[index].id!!)
+                    dialog?.dismiss()
                 }
             }
         }
@@ -85,11 +87,15 @@ class AddToPlaylistDialog(
     private fun addToPlaylist(playlistId: String) {
         val appContext = context?.applicationContext ?: return
         CoroutineScope(Dispatchers.IO).launch {
-            val success = try {
-                PlaylistsHelper.addToPlaylist(
-                    playlistId,
+            val streams = when {
+                videoId != null -> listOf(
                     RetrofitInstance.api.getStreams(videoId).toStreamItem(videoId)
                 )
+                else -> PlayingQueue.getStreams()
+            }
+
+            val success = try {
+                PlaylistsHelper.addToPlaylist(playlistId, *streams.toTypedArray())
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 appContext.toastFromMainThread(R.string.unknown_error)
