@@ -88,4 +88,20 @@ object ImageHelper {
         }
         return null
     }
+
+    /**
+     * Get a squared bitmap with the same width and height from a bitmap
+     * @param bitmap The bitmap to resize
+     */
+    fun getSquareBitmap(bitmap: Bitmap?): Bitmap? {
+        bitmap ?: return null
+        val newSize = minOf(bitmap.width, bitmap.height)
+        return Bitmap.createBitmap(
+            bitmap,
+            (bitmap.width - newSize) / 2,
+            (bitmap.height - newSize) / 2,
+            newSize,
+            newSize
+        )
+    }
 }

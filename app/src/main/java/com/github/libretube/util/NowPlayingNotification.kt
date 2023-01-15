@@ -118,20 +118,10 @@ class NowPlayingNotification(
             ImageHelper.imageLoader.enqueue(request)
 
             // returns the bitmap on Android 13+, for everything below scaled down to a square
-            return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) getSquareBitmap(bitmap) else bitmap
+            return if (
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+            ) ImageHelper.getSquareBitmap(bitmap) else bitmap
         }
-    }
-
-    private fun getSquareBitmap(bitmap: Bitmap?): Bitmap? {
-        bitmap ?: return null
-        val newSize = minOf(bitmap.width, bitmap.height)
-        return Bitmap.createBitmap(
-            bitmap,
-            (bitmap.width - newSize) / 2,
-            (bitmap.height - newSize) / 2,
-            newSize,
-            newSize
-        )
     }
 
     /**
