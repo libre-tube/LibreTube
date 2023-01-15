@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
@@ -14,6 +13,10 @@ import android.os.Bundle
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
+import androidx.annotation.DrawableRes
+import androidx.core.app.NotificationCompat
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
@@ -27,6 +30,7 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
+import com.google.android.exoplayer2.ui.PlayerNotificationManager.CustomActionReceiver
 
 class NowPlayingNotification(
     private val context: Context,
@@ -52,11 +56,10 @@ class NowPlayingNotification(
     private var playerNotification: PlayerNotificationManager? = null
 
     /**
-     * The [DescriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
+     * The [descriptionAdapter] is used to show title, uploaderName and thumbnail of the video in the notification
      * Basic example [here](https://github.com/AnthonyMarkD/AudioPlayerSampleTest)
      */
-    inner class DescriptionAdapter :
-        PlayerNotificationManager.MediaDescriptionAdapter {
+    private val descriptionAdapter = object : PlayerNotificationManager.MediaDescriptionAdapter {
         /**
          * sets the title of the notification
          */
@@ -125,6 +128,51 @@ class NowPlayingNotification(
         }
     }
 
+    private val customActionReceiver = object : CustomActionReceiver {
+        override fun createCustomActions(
+            context: Context,
+            instanceId: Int
+        ): MutableMap<String, NotificationCompat.Action> {
+            return mutableMapOf(
+                PREV to createNotificationAction(R.drawable.ic_prev, PREV, instanceId),
+                NEXT to createNotificationAction(R.drawable.ic_next, NEXT, instanceId),
+                REWIND to createNotificationAction(R.drawable.ic_rewind, REWIND, instanceId),
+                FORWARD to createNotificationAction(R.drawable.ic_forward, FORWARD, instanceId)
+            )
+        }
+
+        override fun getCustomActions(player: Player): MutableList<String> {
+            return mutableListOf(PREV, NEXT, REWIND, FORWARD)
+        }
+
+        override fun onCustomAction(player: Player, action: String, intent: Intent) {
+            handlePlayerAction(action)
+        }
+    }
+
+    private fun createNotificationAction(drawableRes: Int, actionName: String, instanceId: Int): NotificationCompat.Action {
+        val intent: Intent = Intent(actionName).setPackage(context.packageName)
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            instanceId,
+            intent,
+            PendingIntentCompat.cancelCurrentFlags
+        )
+        return NotificationCompat.Action.Builder(drawableRes, actionName, pendingIntent).build()
+    }
+
+    private fun createMediaSessionAction(@DrawableRes drawableRes: Int, actionName: String): MediaSessionConnector.CustomActionProvider {
+        return object : MediaSessionConnector.CustomActionProvider {
+            override fun getCustomAction(player: Player): PlaybackStateCompat.CustomAction? {
+                return PlaybackStateCompat.CustomAction.Builder(actionName, actionName, drawableRes).build()
+            }
+
+            override fun onCustomAction(player: Player, action: String, extras: Bundle?) {
+                handlePlayerAction(action)
+            }
+        }
+    }
+
     /**
      * Creates a [MediaSessionCompat] amd a [MediaSessionConnector] for the player
      */
@@ -142,20 +190,48 @@ class NowPlayingNotification(
                 return MediaDescriptionCompat.Builder().apply {
                     setTitle(streams?.title!!)
                     setSubtitle(streams?.uploader)
-                    val extras = Bundle()
                     val appIcon = BitmapFactory.decodeResource(
-                        Resources.getSystem(),
+                        context.resources,
                         R.drawable.ic_launcher_monochrome
                     )
-                    extras.putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
-                    extras.putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
-                    extras.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
+                    val extras = Bundle().apply {
+                        putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
+                        putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
+                        putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
+                    }
                     setIconBitmap(appIcon)
                     setExtras(extras)
                 }.build()
             }
         })
+        mediaSessionConnector.setCustomActionProviders(
+            createMediaSessionAction(R.drawable.ic_prev, PREV),
+            createMediaSessionAction(R.drawable.ic_next, NEXT),
+            createMediaSessionAction(R.drawable.ic_rewind, REWIND),
+            createMediaSessionAction(R.drawable.ic_forward, FORWARD)
+        )
         mediaSessionConnector.setPlayer(player)
+    }
+
+    private fun handlePlayerAction(action: String) {
+        when (action) {
+            NEXT -> {
+                if (PlayingQueue.hasNext()) PlayingQueue.onQueueItemSelected(
+                    PlayingQueue.currentIndex() + 1
+                )
+            }
+            PREV -> {
+                if (PlayingQueue.hasPrev()) PlayingQueue.onQueueItemSelected(
+                    PlayingQueue.currentIndex() - 1
+                )
+            }
+            REWIND -> {
+                player.seekTo(player.currentPosition - PlayerHelper.seekIncrement)
+            }
+            FORWARD -> {
+                player.seekTo(player.currentPosition + PlayerHelper.seekIncrement)
+            }
+        }
     }
 
     /**
@@ -181,21 +257,18 @@ class NowPlayingNotification(
         playerNotification = PlayerNotificationManager
             .Builder(context, PLAYER_NOTIFICATION_ID, BACKGROUND_CHANNEL_ID)
             // set the description of the notification
-            .setMediaDescriptionAdapter(
-                DescriptionAdapter()
-            )
-            .build()
-        playerNotification?.apply {
-            setPlayer(player)
-            setUseNextAction(false)
-            setUsePreviousAction(false)
-            setUseStopAction(true)
-            setColorized(true)
-            setMediaSessionToken(mediaSession.sessionToken)
-            setSmallIcon(R.drawable.ic_launcher_lockscreen)
-            setUseFastForwardActionInCompactView(true)
-            setUseRewindActionInCompactView(true)
-        }
+            .setMediaDescriptionAdapter(descriptionAdapter)
+            // register the receiver for custom actions, doesn't seem to change anything
+            .setCustomActionReceiver(customActionReceiver)
+            .build().apply {
+                setPlayer(player)
+                setColorized(true)
+                setMediaSessionToken(mediaSession.sessionToken)
+                setSmallIcon(R.drawable.ic_launcher_lockscreen)
+                setUseNextAction(false)
+                setUsePreviousAction(false)
+                setUseStopAction(true)
+            }
     }
 
     /**
@@ -214,5 +287,12 @@ class NowPlayingNotification(
             Context.NOTIFICATION_SERVICE
         ) as NotificationManager
         notificationManager.cancel(PLAYER_NOTIFICATION_ID)
+    }
+
+    companion object {
+        private const val PREV = "prev"
+        private const val NEXT = "next"
+        private const val REWIND = "rewind"
+        private const val FORWARD = "forward"
     }
 }
