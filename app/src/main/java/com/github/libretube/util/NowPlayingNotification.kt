@@ -17,6 +17,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
+import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
@@ -71,23 +72,19 @@ class NowPlayingNotification(
             // starts a new MainActivity Intent when the player notification is clicked
             // it doesn't start a completely new MainActivity because the MainActivity's launchMode
             // is set to "singleTop" in the AndroidManifest (important!!!)
-            //  that's the only way to launch back into the previous activity (e.g. the player view
+            // that's the only way to launch back into the previous activity (e.g. the player view
             val intent = Intent(context, MainActivity::class.java).apply {
                 if (isBackgroundPlayerNotification) {
                     putExtra(IntentData.openAudioPlayer, true)
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 }
             }
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                PendingIntent.getActivity(
-                    context,
-                    0,
-                    intent,
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            } else {
-                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            }
+            return PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntentCompat.updateCurrentFlags
+            )
         }
 
         /**
@@ -120,7 +117,11 @@ class NowPlayingNotification(
             // returns the bitmap on Android 13+, for everything below scaled down to a square
             return if (
                 Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
-            ) ImageHelper.getSquareBitmap(bitmap) else bitmap
+            ) {
+                ImageHelper.getSquareBitmap(bitmap)
+            } else {
+                bitmap
+            }
         }
     }
 
