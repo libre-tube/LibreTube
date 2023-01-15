@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.QueueBottomSheetBinding
 import com.github.libretube.ui.adapters.PlayingQueueAdapter
+import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.util.PlayingQueue
 
 class PlayingQueueSheet : ExpandedBottomSheet() {
@@ -50,15 +51,8 @@ class PlayingQueueSheet : ExpandedBottomSheet() {
             adapter.notifyDataSetChanged()
         }
 
-        binding.clear.setOnClickListener {
-            val currentIndex = PlayingQueue.currentIndex()
-
-            val streams = PlayingQueue.getStreams().filterIndexed { position, _ ->
-                position <= currentIndex
-            }
-
-            PlayingQueue.setStreams(streams)
-            adapter.notifyDataSetChanged()
+        binding.addToPlaylist.setOnClickListener {
+            AddToPlaylistDialog().show(childFragmentManager, null)
         }
 
         binding.reverse.setOnClickListener {
