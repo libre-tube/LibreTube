@@ -2,7 +2,6 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.telephony.TelephonyManager
 import androidx.core.content.getSystemService
@@ -40,30 +39,30 @@ object LocaleHelper {
     @Suppress("DEPRECATION")
     private fun updateResourcesLegacy(context: Context, locale: Locale) {
         Locale.setDefault(locale)
-        val resources: Resources = context.resources
+        val resources = context.resources
         val configuration = resources.configuration
         configuration.locale = locale
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
     private fun getDetectedCountry(context: Context): String {
-        return detectSIMCountry(context).ifEmpty {
-            detectNetworkCountry(context).ifEmpty {
-                detectLocaleCountry(context).ifEmpty { "UK" }
-            }
-        }
+        return detectSIMCountry(context)
+            ?: detectNetworkCountry(context)
+            ?: detectLocaleCountry(context)
+            ?: "UK"
     }
 
-    private fun detectSIMCountry(context: Context): String {
-        return context.getSystemService<TelephonyManager>()?.simCountryIso.orEmpty()
+    private fun detectSIMCountry(context: Context): String? {
+        return context.getSystemService<TelephonyManager>()?.simCountryIso?.ifEmpty { null }
     }
 
-    private fun detectNetworkCountry(context: Context): String {
-        return context.getSystemService<TelephonyManager>()?.networkCountryIso.orEmpty()
+    private fun detectNetworkCountry(context: Context): String? {
+        return context.getSystemService<TelephonyManager>()?.networkCountryIso?.ifEmpty { null }
     }
 
-    private fun detectLocaleCountry(context: Context): String {
+    private fun detectLocaleCountry(context: Context): String? {
         return ConfigurationCompat.getLocales(context.resources.configuration)[0]!!.country
+            .ifEmpty { null }
     }
 
     fun getAvailableCountries(): List<Country> {
