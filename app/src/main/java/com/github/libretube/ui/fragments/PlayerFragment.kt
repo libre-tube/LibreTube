@@ -27,6 +27,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
+import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -842,11 +843,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun localizedDate(date: String?): String? {
-        return if (SDK_INT >= Build.VERSION_CODES.N) {
-            TextUtils.localizeDate(date, resources.configuration.locales[0])
-        } else {
-            TextUtils.localizeDate(date)
-        }
+        val locale = ConfigurationCompat.getLocales(resources.configuration)[0]!!
+        return TextUtils.localizeDate(date, locale)
     }
 
     private fun handleLiveVideo() {

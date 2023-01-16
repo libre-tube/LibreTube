@@ -40,7 +40,7 @@ object TextUtils {
      * @param locale The locale to use, otherwise uses system default
      * return Localized date string
      */
-    fun localizeDate(date: String?, locale: Locale? = null): String? {
+    fun localizeDate(date: String?, locale: Locale): String? {
         date ?: return null
 
         // relative time span
