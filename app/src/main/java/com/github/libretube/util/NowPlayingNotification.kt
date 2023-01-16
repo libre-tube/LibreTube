@@ -110,20 +110,19 @@ class NowPlayingNotification(
             val request = ImageRequest.Builder(context)
                 .data(streams?.thumbnailUrl)
                 .target { result ->
-                    bitmap = (result as BitmapDrawable).bitmap
+                    val bm = (result as BitmapDrawable).bitmap
+                    // returns the bitmap on Android 13+, for everything below scaled down to a square
+                    bitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                        ImageHelper.getSquareBitmap(bm)
+                    } else bm
+                    callback.onBitmap(bitmap!!)
                 }
                 .build()
 
+            // enqueue the thumbnail loading request
             ImageHelper.imageLoader.enqueue(request)
 
-            // returns the bitmap on Android 13+, for everything below scaled down to a square
-            return if (
-                Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
-            ) {
-                ImageHelper.getSquareBitmap(bitmap)
-            } else {
-                bitmap
-            }
+            return bitmap
         }
 
         override fun getCurrentSubText(player: Player): CharSequence? {
