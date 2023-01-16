@@ -1209,8 +1209,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }.flatten()
             .filter { it > 0 }
             .sortedDescending()
-            .toSet()
-            .toList()
+            .distinct()
 
         return resolutions.map {
             VideoResolution(
@@ -1359,8 +1358,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     override fun onCaptionsClicked() {
         if (!this@PlayerFragment::streams.isInitialized ||
-            streams.subtitles == null ||
-            streams.subtitles!!.isEmpty()
+            streams.subtitles.isNullOrEmpty()
         ) {
             Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
             return
@@ -1375,7 +1373,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         BaseBottomSheet()
             .setSimpleItems(subtitlesNamesList) { index ->
-                val language = if (index > 0) subtitleCodesList[index] else null
+                val language = subtitleCodesList.getOrNull(index)
                 updateCaptionsLanguage(language)
                 this.captionLanguage = language
             }
