@@ -247,6 +247,7 @@ class MainActivity : BaseActivity() {
             binding.bottomNav.getOrCreateBadge(R.id.subscriptionsFragment).apply {
                 number = lastSeenVideoIndex
                 backgroundColor = ThemeHelper.getThemeColor(this@MainActivity, R.attr.colorPrimary)
+                badgeTextColor = ThemeHelper.getThemeColor(this@MainActivity, R.attr.colorOnPrimary)
             }
         }
     }
