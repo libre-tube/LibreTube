@@ -189,7 +189,7 @@ internal class CustomExoPlayerView(
     override fun hideController() {
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // hide all the navigation bars that potentially could have been reopened manually ba the user
-            (context as? MainActivity)?.setFullscreen()
+            (context as? MainActivity)?.windowHelper?.setFullscreen()
         }
         super.hideController()
     }
