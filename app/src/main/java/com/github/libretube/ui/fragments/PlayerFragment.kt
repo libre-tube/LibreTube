@@ -31,7 +31,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -1033,12 +1033,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
             descTextView.movementMethod = LinkMovementMethod.getInstance()
-            descTextView.text = HtmlCompat.fromHtml(
-                description,
-                HtmlCompat.FROM_HTML_MODE_LEGACY,
-                null,
-                HtmlParser(LinkHandler { link -> handleLink(link) })
-            )
+            descTextView.text = description
+                .parseAsHtml(tagHandler = HtmlParser(LinkHandler(this::handleLink)))
         } else {
             // Links can be present as plain text
             descTextView.autoLinkMask = Linkify.WEB_URLS
