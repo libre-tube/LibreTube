@@ -2,18 +2,13 @@ package com.github.libretube.ui.activities
 
 import android.app.PictureInPictureParams
 import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
-import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
@@ -25,6 +20,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.WindowHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -49,7 +45,7 @@ class OfflinePlayerActivity : BaseActivity() {
     private val playerViewModel: PlayerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        hideSystemBars()
+        WindowHelper(this).setFullscreen()
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
 
@@ -177,32 +173,6 @@ class OfflinePlayerActivity : BaseActivity() {
                     .build()
             )
         }
-    }
-
-    @Suppress("DEPRECATION")
-    private fun hideSystemBars() {
-        window?.decorView?.systemUiVisibility = (
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            )
-        window.statusBarColor = Color.TRANSPARENT
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-        )
-
-        val windowInsetsController =
-            WindowCompat.getInsetsController(window, window.decorView)
-        windowInsetsController.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
-
-        supportActionBar?.hide()
-
-        windowInsetsController.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
     }
 
     override fun onResume() {

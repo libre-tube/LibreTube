@@ -6,15 +6,10 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import android.view.WindowManager
 import android.widget.ScrollView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
@@ -46,6 +41,7 @@ import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NetworkHelper
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
+import com.github.libretube.util.WindowHelper
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {
@@ -60,7 +56,7 @@ class MainActivity : BaseActivity() {
     lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
 
-    private val handler = Handler(Looper.getMainLooper())
+    val windowHelper = WindowHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -468,68 +464,8 @@ class MainActivity : BaseActivity() {
         super.onConfigurationChanged(newConfig)
 
         when (newConfig.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> unsetFullscreen()
-            Configuration.ORIENTATION_LANDSCAPE -> setFullscreen()
-        }
-    }
-
-    fun setFullscreen() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            window.attributes.layoutInDisplayCutoutMode =
-                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.apply {
-                hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                )
-        }
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-    }
-
-    private fun unsetFullscreen() {
-        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-            @Suppress("DEPRECATION")
-            window.clearFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            window.attributes.layoutInDisplayCutoutMode =
-                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(true)
-            window.insetsController?.apply {
-                show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
-                }
-            }
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility =
-                (View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            Configuration.ORIENTATION_PORTRAIT -> windowHelper.unsetFullscreen()
+            Configuration.ORIENTATION_LANDSCAPE -> windowHelper.setFullscreen()
         }
     }
 
