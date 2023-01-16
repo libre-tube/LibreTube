@@ -343,15 +343,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
-            viewModel.isMiniPlayerVisible.value = false
-            binding.playerMotionLayout.transitionToEnd()
-            val mainActivity = activity as MainActivity
-            mainActivity.supportFragmentManager.beginTransaction()
-                .remove(this)
-                .commit()
+            PlayingQueue.clear()
             BackgroundHelper.stopBackgroundPlay(requireContext())
+            killPlayerFragment()
         }
         playerBinding.closeImageButton.setOnClickListener {
+            PlayingQueue.clear()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
             killPlayerFragment()
         }
         playerBinding.autoPlay.visibility = View.VISIBLE
@@ -1526,6 +1524,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         mainActivity.supportFragmentManager.beginTransaction()
             .remove(this)
             .commit()
+
+        onDestroy()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
