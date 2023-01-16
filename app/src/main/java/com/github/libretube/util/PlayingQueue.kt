@@ -30,11 +30,11 @@ object PlayingQueue {
     fun clear() = queue.clear()
 
     fun add(vararg streamItem: StreamItem) {
-        streamItem.forEach {
-            if (currentStream != it) {
-                if (queue.contains(it)) queue.remove(it)
-                queue.add(it)
-            }
+        for (stream in streamItem) {
+            if (currentStream?.url?.toID() == stream.url?.toID()) continue
+            // remove if already present
+            queue.remove(stream)
+            queue.add(stream)
         }
     }
 
