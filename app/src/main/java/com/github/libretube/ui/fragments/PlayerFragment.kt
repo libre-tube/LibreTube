@@ -17,12 +17,14 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
+import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -82,17 +84,7 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.DashHelper
-import com.github.libretube.util.DataSaverMode
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.SeekbarPreviewListener
-import com.github.libretube.util.TextUtils
+import com.github.libretube.util.*
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -859,7 +851,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, streams.views.formatShort()) +
-                if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
+                        if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
 
             textLike.text = streams.likes.formatShort()
             textDislike.text = streams.dislikes.formatShort()
@@ -926,9 +918,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
             override fun onPlaybackStateChanged(playbackState: Int) {
                 exoPlayerView.keepScreenOn = !(
-                    playbackState == Player.STATE_IDLE ||
-                        playbackState == Player.STATE_ENDED
-                    )
+                        playbackState == Player.STATE_IDLE ||
+                                playbackState == Player.STATE_ENDED
+                        )
 
                 // save the watch position to the database
                 // only called when the position is unequal to 0, otherwise it would become reset
@@ -1000,14 +992,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // set video description
         val description = streams.description!!
 
-        // detect whether the description is html formatted
-        if (description.contains("<") && description.contains(">")) {
-            binding.playerDescription.setFormattedHtml(description)
-        } else {
-            // Links can be present as plain text
-            binding.playerDescription.autoLinkMask = Linkify.WEB_URLS
-            binding.playerDescription.text = description
-        }
+        setupDescription(binding.playerDescription, description, exoPlayer)
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
@@ -1039,6 +1024,116 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
         }
+    }
+
+    private fun setupDescription(descTextView: TextView, description: String, exoPlayer: ExoPlayer) {
+        // detect whether the description is html formatted
+        if (description.contains("<") && description.contains(">")) {
+            descTextView.movementMethod = LinkMovementMethod.getInstance()
+            descTextView.text = HtmlParser.createSpannedText(
+                description,
+                LinkHandler { link ->
+                    // check if the link is a youtube link
+                    if (link.contains("youtube.com") || link.contains("youtu.be")) {
+                        // check if the link is a video link
+                        val videoId = getVideoIdIfVideoLink(link)
+                        if (!videoId.isNullOrEmpty()) {
+                            // check if the video is the current video
+                            if (videoId == this.videoId) {
+                                // get the time from the link
+                                val time = link.substringAfter("t=").substringBefore("&")
+                                // check if the time is valid
+                                if (time.isNotEmpty() && time != link) {
+                                    // get the time in seconds
+                                    val timeInSeconds = getTimeInMillis(time)
+                                    if (timeInSeconds != -1L) {
+                                        // seek to the time
+                                        exoPlayer.seekTo(timeInSeconds)
+                                    }
+                                }
+                                // youtube link without time
+                                // open new player
+                                playNextVideo(videoId)
+                            } else {
+                                // not the current video
+                                // open new player
+                                playNextVideo(videoId)
+                            }
+                        } else {
+                            // not a video link, might be channel or playlist link
+                            // handle normally
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                            startActivity(intent)
+                        }
+
+                    } else {
+                        // not a youtube link
+                        // handle normally
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                        startActivity(intent)
+                    }
+                }
+            )
+        } else {
+            // Links can be present as plain text
+            descTextView.autoLinkMask = Linkify.WEB_URLS
+            descTextView.text = description
+        }
+    }
+
+    private fun getVideoIdIfVideoLink(link: String): String? {
+        if (link.contains("youtube.com")) {
+            // check if the link is a channel link
+            val videoId = link.substringAfter("v=").substringBefore("&")
+            if (videoId.isNotEmpty() && videoId != link) {
+                return videoId
+            }
+        } else if (link.contains("youtu.be")) {
+            val videoId = link.substringAfter("be/").substringBefore("&")
+            if (videoId.isNotEmpty() && videoId != link) {
+                return videoId
+            }
+        }
+        return null
+    }
+
+    private fun getTimeInMillis(time: String): Long {
+        var timeInSeconds = 0L
+        var found = false
+        // check if the time is in seconds
+        if (time.contains("s")) {
+            val longOrNull = time.substringBefore("s").toLongOrNull()
+            if (longOrNull != null) {
+                timeInSeconds += longOrNull
+                found = true
+            }
+        }
+        // check if the time is in minutes
+        if (time.contains("m")) {
+            val longOrNull = time.substringBefore("m").substringAfter("s").toLongOrNull()
+            if (longOrNull != null) {
+                timeInSeconds += longOrNull * 60
+                found = true
+            }
+        }
+        // check if the time is in hours
+        if (time.contains("h")) {
+            val longOrNull = time.substringBefore("h").substringAfter("m").toLongOrNull()
+            if (longOrNull != null) {
+                timeInSeconds += longOrNull * 60 * 60
+                found = true
+            }
+        }
+
+        if (!found) {
+            val longOrNull = time.toLongOrNull()
+            if (longOrNull != null) {
+                timeInSeconds += longOrNull
+                found = true
+            }
+        }
+
+        return if (found) timeInSeconds * 1000 else -1
     }
 
     /**
