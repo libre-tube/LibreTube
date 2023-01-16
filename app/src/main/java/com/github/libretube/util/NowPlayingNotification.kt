@@ -14,7 +14,6 @@ import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
 import coil.request.ImageRequest
@@ -134,8 +133,8 @@ class NowPlayingNotification(
             instanceId: Int
         ): MutableMap<String, NotificationCompat.Action> {
             return mutableMapOf(
-                PREV to createNotificationAction(R.drawable.ic_prev, PREV, instanceId),
-                NEXT to createNotificationAction(R.drawable.ic_next, NEXT, instanceId),
+                PREV to createNotificationAction(R.drawable.ic_prev_outlined, PREV, instanceId),
+                NEXT to createNotificationAction(R.drawable.ic_next_outlined, NEXT, instanceId),
                 REWIND to createNotificationAction(R.drawable.ic_rewind, REWIND, instanceId),
                 FORWARD to createNotificationAction(R.drawable.ic_forward, FORWARD, instanceId)
             )
@@ -178,52 +177,62 @@ class NowPlayingNotification(
      */
     private fun createMediaSession() {
         if (this::mediaSession.isInitialized) return
-        mediaSession = MediaSessionCompat(context, this.javaClass.name)
-        mediaSession.isActive = true
+        mediaSession = MediaSessionCompat(context, this.javaClass.name).apply {
+            isActive = true
+        }
 
-        mediaSessionConnector = MediaSessionConnector(mediaSession)
-        mediaSessionConnector.setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
-            override fun getMediaDescription(
-                player: Player,
-                windowIndex: Int
-            ): MediaDescriptionCompat {
-                return MediaDescriptionCompat.Builder().apply {
-                    setTitle(streams?.title!!)
-                    setSubtitle(streams?.uploader)
-                    val appIcon = BitmapFactory.decodeResource(
-                        context.resources,
-                        R.drawable.ic_launcher_monochrome
-                    )
-                    val extras = Bundle().apply {
-                        putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
-                        putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
-                        putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
-                    }
-                    setIconBitmap(appIcon)
-                    setExtras(extras)
-                }.build()
-            }
-        })
-        mediaSessionConnector.setCustomActionProviders(
-            createMediaSessionAction(R.drawable.ic_prev, PREV),
-            createMediaSessionAction(R.drawable.ic_next, NEXT),
-            createMediaSessionAction(R.drawable.ic_rewind, REWIND),
-            createMediaSessionAction(R.drawable.ic_forward, FORWARD)
-        )
-        mediaSessionConnector.setPlayer(player)
+        mediaSessionConnector = MediaSessionConnector(mediaSession).apply {
+            setPlayer(player)
+            setQueueNavigator(object : TimelineQueueNavigator(mediaSession) {
+                override fun getMediaDescription(
+                    player: Player,
+                    windowIndex: Int
+                ): MediaDescriptionCompat {
+                    return MediaDescriptionCompat.Builder().apply {
+                        setTitle(streams?.title!!)
+                        setSubtitle(streams?.uploader)
+                        val appIcon = BitmapFactory.decodeResource(
+                            context.resources,
+                            R.drawable.ic_launcher_monochrome
+                        )
+                        val extras = Bundle().apply {
+                            putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
+                            putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
+                            putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
+                        }
+                        setIconBitmap(appIcon)
+                        setExtras(extras)
+                    }.build()
+                }
+
+                override fun getSupportedQueueNavigatorActions(player: Player): Long {
+                    return PlaybackStateCompat.ACTION_PLAY_PAUSE
+                }
+            })
+            setCustomActionProviders(
+                createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
+                createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
+                createMediaSessionAction(R.drawable.ic_rewind, REWIND),
+                createMediaSessionAction(R.drawable.ic_forward, FORWARD)
+            )
+        }
     }
 
     private fun handlePlayerAction(action: String) {
         when (action) {
             NEXT -> {
-                if (PlayingQueue.hasNext()) PlayingQueue.onQueueItemSelected(
-                    PlayingQueue.currentIndex() + 1
-                )
+                if (PlayingQueue.hasNext()) {
+                    PlayingQueue.onQueueItemSelected(
+                        PlayingQueue.currentIndex() + 1
+                    )
+                }
             }
             PREV -> {
-                if (PlayingQueue.hasPrev()) PlayingQueue.onQueueItemSelected(
-                    PlayingQueue.currentIndex() - 1
-                )
+                if (PlayingQueue.hasPrev()) {
+                    PlayingQueue.onQueueItemSelected(
+                        PlayingQueue.currentIndex() - 1
+                    )
+                }
             }
             REWIND -> {
                 player.seekTo(player.currentPosition - PlayerHelper.seekIncrement)
