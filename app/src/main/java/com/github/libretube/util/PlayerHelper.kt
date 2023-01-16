@@ -397,52 +397,47 @@ object PlayerHelper {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     fun getPiPModeActions(activity: Activity, isPlaying: Boolean, isOfflinePlayer: Boolean = false): ArrayList<RemoteAction> {
-        val actions: ArrayList<RemoteAction> = ArrayList()
-        actions.add(
-            if (!isOfflinePlayer && alternativePiPControls) {
-                getRemoteAction(
-                    activity,
-                    R.drawable.ic_headphones,
-                    R.string.background_mode,
-                    PlayerEvent.Background
-                )
-            } else {
-                getRemoteAction(
-                    activity,
-                    R.drawable.ic_rewind,
-                    R.string.rewind,
-                    PlayerEvent.Rewind
-                )
-            }
+        val audioModeAction = getRemoteAction(
+            activity,
+            R.drawable.ic_headphones,
+            R.string.background_mode,
+            PlayerEvent.Background
         )
 
-        actions.add(
-            getRemoteAction(
-                activity,
-                if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
-                R.string.pause,
-                if (isPlaying) PlayerEvent.Pause else PlayerEvent.Play
-            )
+        val rewindAction = getRemoteAction(
+            activity,
+            R.drawable.ic_rewind,
+            R.string.rewind,
+            PlayerEvent.Rewind
         )
 
-        actions.add(
-            if (!isOfflinePlayer && alternativePiPControls) {
-                getRemoteAction(
-                    activity,
-                    R.drawable.ic_next,
-                    R.string.play_next,
-                    PlayerEvent.Next
-                )
-            } else {
-                getRemoteAction(
-                    activity,
-                    R.drawable.ic_forward,
-                    R.string.forward,
-                    PlayerEvent.Forward
-                )
-            }
+        val playPauseAction = getRemoteAction(
+            activity,
+            if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
+            R.string.pause,
+            if (isPlaying) PlayerEvent.Pause else PlayerEvent.Play
         )
-        return actions
+
+        val skipNextAction = getRemoteAction(
+            activity,
+            R.drawable.ic_next,
+            R.string.play_next,
+            PlayerEvent.Next
+        )
+
+        val forwardAction = getRemoteAction(
+            activity,
+            R.drawable.ic_forward,
+            R.string.forward,
+            PlayerEvent.Forward
+        )
+        return if (
+            !isOfflinePlayer && alternativePiPControls
+        ) {
+            arrayListOf(audioModeAction, playPauseAction, skipNextAction)
+        } else {
+            arrayListOf(rewindAction, playPauseAction, forwardAction)
+        }
     }
 
     /**
