@@ -135,8 +135,8 @@ class NowPlayingNotification(
             return mutableMapOf(
                 PREV to createNotificationAction(R.drawable.ic_prev_outlined, PREV, instanceId),
                 NEXT to createNotificationAction(R.drawable.ic_next_outlined, NEXT, instanceId),
-                REWIND to createNotificationAction(R.drawable.ic_rewind, REWIND, instanceId),
-                FORWARD to createNotificationAction(R.drawable.ic_forward, FORWARD, instanceId)
+                REWIND to createNotificationAction(R.drawable.ic_rewind_md, REWIND, instanceId),
+                FORWARD to createNotificationAction(R.drawable.ic_forward_md, FORWARD, instanceId)
             )
         }
 
@@ -212,8 +212,8 @@ class NowPlayingNotification(
             setCustomActionProviders(
                 createMediaSessionAction(R.drawable.ic_prev_outlined, PREV),
                 createMediaSessionAction(R.drawable.ic_next_outlined, NEXT),
-                createMediaSessionAction(R.drawable.ic_rewind, REWIND),
-                createMediaSessionAction(R.drawable.ic_forward, FORWARD)
+                createMediaSessionAction(R.drawable.ic_rewind_md, REWIND),
+                createMediaSessionAction(R.drawable.ic_forward_md, FORWARD)
             )
         }
     }
