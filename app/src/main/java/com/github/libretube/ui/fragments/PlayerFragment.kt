@@ -250,8 +250,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
 
+        // reset the callbacks of the playing queue
+        PlayingQueue.resetToDefaults()
+
         // clear the playing queue
-        if (!keepQueue) PlayingQueue.resetToDefaults()
+        if (!keepQueue) PlayingQueue.clear()
 
         changeOrientationMode()
 
