@@ -114,7 +114,9 @@ class NowPlayingNotification(
                     // returns the bitmap on Android 13+, for everything below scaled down to a square
                     bitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                         ImageHelper.getSquareBitmap(bm)
-                    } else bm
+                    } else {
+                        bm
+                    }
                     callback.onBitmap(bitmap!!)
                 }
                 .build()
