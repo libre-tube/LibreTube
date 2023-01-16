@@ -437,4 +437,13 @@
     <string name="rewind">Rebobinar</string>
     <string name="alternative_pip_controls">Controles alternativos de imagen en imagen</string>
     <string name="audio_player">Reproductor de audio</string>
+    <string name="audio_only_mode_summary">Convierte LibreTube en un reproductor de música.</string>
+    <string name="no_subtitle">Sin subtítulos</string>
+    <string name="download_paused">Descarga pausada</string>
+    <string name="download_completed">Descarga completa</string>
+    <string name="concurrent_downloads">Número máximo de descargas simultáneas</string>
+    <string name="concurrent_downloads_limit_reached">Límite máximo de descargas simultáneas alcanzado.</string>
+    <string name="resume">Reanudar</string>
+    <string name="audio_only_mode">Sólo audio</string>
+    <string name="unknown">Desconocido</string>
 </resources>

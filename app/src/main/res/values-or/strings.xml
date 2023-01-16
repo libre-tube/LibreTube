@@ -437,4 +437,13 @@
     <string name="alternative_pip_controls">ବିକଳ୍ପ PIP ନିୟନ୍ତ୍ରଣ</string>
     <string name="alternative_pip_controls_summary">କେବଳ ଅଡିଓ ଦେଖାନ୍ତୁ ଏବଂ ଆଗକୁ ଏବଂ ପଛକୁ ନେବା ପରିବର୍ତ୍ତେ PiP ରେ କଣ୍ଟ୍ରୋଲ୍ ଛାଡିଦିଅ</string>
     <string name="audio_player">ଅଡିଓ ପ୍ଲେୟାର</string>
+    <string name="no_subtitle">କୌଣସି ଉପ-ଆଖ୍ୟା ନାହିଁ</string>
+    <string name="download_paused">ଡାଉନଲୋଡ୍ ବିରତ ହୋଇଛି</string>
+    <string name="download_completed">ଡାଉନଲୋଡ୍ ସମାପ୍ତ ହୋଇଛି</string>
+    <string name="concurrent_downloads">ସର୍ବାଧିକ ଏକକାଳୀନ ଡାଉନଲୋଡ୍</string>
+    <string name="concurrent_downloads_limit_reached">ସର୍ବାଧିକ ଏକକାଳୀନ ଡାଉନଲୋଡ୍ ସୀମା ପହଞ୍ଚିଲା ।</string>
+    <string name="unknown">ଅଜ୍ଞାତ</string>
+    <string name="resume">ପୁଣି ଆରମ୍ଭ କରନ୍ତୁ</string>
+    <string name="audio_only_mode">କେବଳ ଅଡିଓ ମୋଡ୍</string>
+    <string name="audio_only_mode_summary">LibreTube କୁ ଏକ ମ୍ୟୁଜିକ୍ ପ୍ଲେୟାରରେ ପରିଣତ କର ।</string>
 </resources>

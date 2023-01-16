@@ -436,4 +436,14 @@
     <string name="pause">Пауза</string>
     <string name="add_to_bookmarks">Добавить в закладки</string>
     <string name="remove_bookmark">Удалить закладку</string>
+    <string name="audio_player">Аудиоплеер</string>
+    <string name="no_subtitle">Без субтитров</string>
+    <string name="download_paused">Загрузка приостановлена</string>
+    <string name="download_completed">Загрузка завершена</string>
+    <string name="concurrent_downloads">Максимальное количество одновременных загрузок</string>
+    <string name="concurrent_downloads_limit_reached">Достигнут максимальный предел одновременных загрузок.</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="resume">Продолжить</string>
+    <string name="audio_only_mode">Режим только аудио</string>
+    <string name="audio_only_mode_summary">Превратите LibreTube в музыкальный проигрыватель.</string>
 </resources>

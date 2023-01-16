@@ -439,4 +439,11 @@
     <string name="audio_player">ऑडियो प्लेयर</string>
     <string name="audio_only_mode">ऑडियो केवल मोड</string>
     <string name="audio_only_mode_summary">LibreTube को म्यूजिक प्लेयर में बदलें।</string>
+    <string name="no_subtitle">कोई उपशीर्षक नहीं</string>
+    <string name="download_paused">डाउनलोड रोका गया</string>
+    <string name="download_completed">डाउनलोड पूरा हुआ</string>
+    <string name="concurrent_downloads">अधिकतम समवर्ती डाउनलोड</string>
+    <string name="unknown">अनजान</string>
+    <string name="concurrent_downloads_limit_reached">अधिकतम समवर्ती डाउनलोड सीमा पूरी हो गई है।</string>
+    <string name="resume">फिर शुरू करें</string>
 </resources>
