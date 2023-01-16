@@ -250,8 +250,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
 
+        // reset the callbacks of the playing queue
+        PlayingQueue.resetToDefaults()
+
         // clear the playing queue
-        if (!keepQueue) PlayingQueue.resetToDefaults()
+        if (!keepQueue) PlayingQueue.clear()
 
         changeOrientationMode()
 
@@ -340,15 +343,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
-            viewModel.isMiniPlayerVisible.value = false
-            binding.playerMotionLayout.transitionToEnd()
-            val mainActivity = activity as MainActivity
-            mainActivity.supportFragmentManager.beginTransaction()
-                .remove(this)
-                .commit()
+            PlayingQueue.clear()
             BackgroundHelper.stopBackgroundPlay(requireContext())
+            killPlayerFragment()
         }
         playerBinding.closeImageButton.setOnClickListener {
+            PlayingQueue.clear()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
             killPlayerFragment()
         }
         playerBinding.autoPlay.visibility = View.VISIBLE
@@ -1208,8 +1209,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }.flatten()
             .filter { it > 0 }
             .sortedDescending()
-            .toSet()
-            .toList()
+            .distinct()
 
         return resolutions.map {
             VideoResolution(
@@ -1358,8 +1358,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     override fun onCaptionsClicked() {
         if (!this@PlayerFragment::streams.isInitialized ||
-            streams.subtitles == null ||
-            streams.subtitles!!.isEmpty()
+            streams.subtitles.isNullOrEmpty()
         ) {
             Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
             return
@@ -1374,7 +1373,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         BaseBottomSheet()
             .setSimpleItems(subtitlesNamesList) { index ->
-                val language = if (index > 0) subtitleCodesList[index] else null
+                val language = subtitleCodesList.getOrNull(index)
                 updateCaptionsLanguage(language)
                 this.captionLanguage = language
             }
@@ -1523,6 +1522,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         mainActivity.supportFragmentManager.beginTransaction()
             .remove(this)
             .commit()
+
+        onDestroy()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
