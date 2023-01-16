@@ -15,6 +15,9 @@ import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import android.view.WindowCompat
+import android.view.WindowInsetsControllerCompat
+import android.view.WindowInsetsCompat
 import android.widget.ScrollView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
@@ -480,10 +483,11 @@ class MainActivity : BaseActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.apply {
-                hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            WindowInsetsControllerCompat(window, mainContainer).let { controller ->
+                controller.hide(WindowInsetsCompat.Type.systemBars())
+                controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
             }
         } else {
             @Suppress("DEPRECATION")
