@@ -2,9 +2,10 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.telephony.TelephonyManager
+import androidx.core.content.getSystemService
+import androidx.core.os.ConfigurationCompat
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.obj.Country
 import java.util.*
@@ -15,7 +16,7 @@ object LocaleHelper {
         val languageName = PreferenceHelper.getString(PreferenceKeys.LANGUAGE, "sys")
         val locale = when {
             languageName == "sys" -> Locale.getDefault()
-            languageName.contains("-") == true -> {
+            languageName.contains("-") -> {
                 val languageParts = languageName.split("-")
                 Locale(
                     languageParts[0],
@@ -38,93 +39,43 @@ object LocaleHelper {
     @Suppress("DEPRECATION")
     private fun updateResourcesLegacy(context: Context, locale: Locale) {
         Locale.setDefault(locale)
-        val resources: Resources = context.resources
-        val configuration: Configuration = resources.getConfiguration()
+        val resources = context.resources
+        val configuration = resources.configuration
         configuration.locale = locale
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics())
+        resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
-    fun getDetectedCountry(context: Context, defaultCountryIsoCode: String): String {
-        detectSIMCountry(context)?.let {
-            if (it != "") return it
-        }
-
-        detectNetworkCountry(context)?.let {
-            if (it != "") return it
-        }
-
-        detectLocaleCountry(context)?.let {
-            if (it != "") return it
-        }
-
-        return defaultCountryIsoCode
+    private fun getDetectedCountry(context: Context): String {
+        return detectSIMCountry(context)
+            ?: detectNetworkCountry(context)
+            ?: detectLocaleCountry(context)
+            ?: "UK"
     }
 
     private fun detectSIMCountry(context: Context): String? {
-        try {
-            val telephonyManager =
-                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            return telephonyManager.simCountryIso
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
+        return context.getSystemService<TelephonyManager>()?.simCountryIso?.ifEmpty { null }
     }
 
     private fun detectNetworkCountry(context: Context): String? {
-        try {
-            val telephonyManager =
-                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            return telephonyManager.networkCountryIso
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
+        return context.getSystemService<TelephonyManager>()?.networkCountryIso?.ifEmpty { null }
     }
 
     private fun detectLocaleCountry(context: Context): String? {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                return context.resources.configuration.locales[0].country
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
+        return ConfigurationCompat.getLocales(context.resources.configuration)[0]!!.country
+            .ifEmpty { null }
     }
 
     fun getAvailableCountries(): List<Country> {
-        val isoCountries = Locale.getISOCountries()
-        val countries = mutableListOf<Country>()
-        isoCountries.forEach { countryCode ->
-            val locale = Locale("", countryCode)
-            val countryName = locale.displayCountry
-            countries.add(
-                Country(
-                    countryName,
-                    countryCode
-                )
-            )
-        }
-        countries.sortBy { it.name }
-        return countries
+        return Locale.getISOCountries()
+            .map { Country(Locale("", it).displayCountry, it) }
+            .sortedBy { it.name }
     }
 
     fun getAvailableLocales(): List<Country> {
-        val availableLocales: Array<Locale> = Locale.getAvailableLocales()
-        val locales = mutableListOf<Country>()
-
-        availableLocales.forEach { locale ->
-            if (locales.filter { it.code == locale.language }.isEmpty()) {
-                locales.add(
-                    Country(
-                        locale.displayLanguage,
-                        locale.language
-                    )
-                )
-            }
-        }
-        return locales
+        return Locale.getAvailableLocales()
+            .distinctBy { it.language }
+            .map { Country(it.displayLanguage, it.language) }
+            .sortedBy { it.name }
     }
 
     fun getTrendingRegion(context: Context): String {
@@ -132,8 +83,7 @@ object LocaleHelper {
 
         // get the system default country if auto region selected
         return if (regionPref == "sys") {
-            getDetectedCountry(context, "UK")
-                .uppercase()
+            getDetectedCountry(context).uppercase()
         } else {
             regionPref
         }
