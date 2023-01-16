@@ -76,7 +76,6 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setAspectRatio
-import com.github.libretube.ui.extensions.setFormattedHtml
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.CommentsViewModel
@@ -84,7 +83,19 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.util.*
+import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.util.DashHelper
+import com.github.libretube.util.DataSaverMode
+import com.github.libretube.util.HtmlParser
+import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.LinkHandler
+import com.github.libretube.util.NavigationHelper
+import com.github.libretube.util.NowPlayingNotification
+import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.util.SeekbarPreviewListener
+import com.github.libretube.util.TextUtils
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
@@ -851,7 +862,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, streams.views.formatShort()) +
-                        if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
+                if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
 
             textLike.text = streams.likes.formatShort()
             textDislike.text = streams.dislikes.formatShort()
@@ -918,9 +929,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
             override fun onPlaybackStateChanged(playbackState: Int) {
                 exoPlayerView.keepScreenOn = !(
-                        playbackState == Player.STATE_IDLE ||
-                                playbackState == Player.STATE_ENDED
-                        )
+                    playbackState == Player.STATE_IDLE ||
+                        playbackState == Player.STATE_ENDED
+                    )
 
                 // save the watch position to the database
                 // only called when the position is unequal to 0, otherwise it would become reset
@@ -1026,7 +1037,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
     }
 
-    private fun setupDescription(descTextView: TextView, description: String, exoPlayer: ExoPlayer) {
+    private fun setupDescription(
+        descTextView: TextView,
+        description: String,
+        exoPlayer: ExoPlayer
+    ) {
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
             descTextView.movementMethod = LinkMovementMethod.getInstance()
@@ -1065,7 +1080,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
                             startActivity(intent)
                         }
-
                     } else {
                         // not a youtube link
                         // handle normally
