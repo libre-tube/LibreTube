@@ -125,6 +125,10 @@ class NowPlayingNotification(
                 bitmap
             }
         }
+
+        override fun getCurrentSubText(player: Player): CharSequence? {
+            return streams?.uploader
+        }
     }
 
     private val customActionReceiver = object : CustomActionReceiver {
