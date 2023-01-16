@@ -48,6 +48,21 @@
             android:label="@string/settings" />
 
         <activity
+            android:name=".ui.activities.AddToQueueActivity"
+            android:enabled="true"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="@string/add_to_queue">
+
+            <intent-filter android:label="@string/add_to_queue">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
             android:name=".ui.activities.OfflinePlayerActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:label="@string/player"
@@ -251,7 +266,7 @@
             android:exported="true"
             android:launchMode="singleInstance">
 
-            <intent-filter>
+            <intent-filter android:label="@string/open">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
