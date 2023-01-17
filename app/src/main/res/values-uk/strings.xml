@@ -449,5 +449,5 @@
     <string name="help">Довідка</string>
     <string name="faq">ЧаП</string>
     <string name="sleep_timer">Таймер сну</string>
-    <string name="skip_silence">Пропустити тишу</string>
+    <string name="skip_silence">Пропускати тишу</string>
 </resources>
