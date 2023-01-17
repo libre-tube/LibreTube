@@ -4,7 +4,8 @@
     android:tint="?attr/colorControlNormal"
     android:viewportWidth="52"
     android:viewportHeight="52">
+
     <path
-        android:fillColor="#FF000000"
+        android:fillColor="@color/shortcut_color"
         android:pathData="M50.1,30.56a1.16,1.16 0,0 1,-2 0.82L42.73,26 30.32,36.65a3.39,3.39 0,0 1,-4.92 0l-7.49,-8.54L4.57,39.81a1.13,1.13 0,0 1,-1.64 0l-0.59,-0.59a1.13,1.13 0,0 1,0 -1.64L15.46,19.68a3.39,3.39 0,0 1,4.92 0l7.49,7.49 7.61,-8.78 -4.92,-4.45a1.26,1.26 0,0 1,0.82 -2.11H47.76A2.35,2.35 0,0 1,50 14.3Z" />
 </vector>
