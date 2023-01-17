@@ -4,32 +4,37 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.github.libretube.constants.DISCORD_URL
+import com.github.libretube.constants.FAQ_URL
 import com.github.libretube.constants.MATRIX_URL
 import com.github.libretube.constants.REDDIT_URL
 import com.github.libretube.constants.TELEGRAM_URL
 import com.github.libretube.constants.TWITTER_URL
-import com.github.libretube.databinding.ActivityCommunityBinding
+import com.github.libretube.databinding.ActivityHelpBinding
 import com.github.libretube.ui.base.BaseActivity
 
-class CommunityActivity : BaseActivity() {
-    private lateinit var binding: ActivityCommunityBinding
+class HelpActivity : BaseActivity() {
+    private lateinit var binding: ActivityHelpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityCommunityBinding.inflate(layoutInflater)
+        binding = ActivityHelpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        binding.telegram.setOnClickListener {
-            openLinkFromHref(TELEGRAM_URL)
+        binding.faq.setOnClickListener {
+            openLinkFromHref(FAQ_URL)
         }
 
         binding.matrix.setOnClickListener {
             openLinkFromHref(MATRIX_URL)
+        }
+
+        binding.telegram.setOnClickListener {
+            openLinkFromHref(TELEGRAM_URL)
         }
 
         binding.discord.setOnClickListener {

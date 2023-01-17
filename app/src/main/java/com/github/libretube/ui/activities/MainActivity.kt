@@ -359,9 +359,9 @@ class MainActivity : BaseActivity() {
                 startActivity(aboutIntent)
                 true
             }
-            R.id.action_community -> {
-                val communityIntent = Intent(this, CommunityActivity::class.java)
-                startActivity(communityIntent)
+            R.id.action_help -> {
+                val helpIntent = Intent(this, HelpActivity::class.java)
+                startActivity(helpIntent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

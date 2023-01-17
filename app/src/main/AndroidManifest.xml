@@ -44,7 +44,7 @@
             android:label="@string/settings" />
 
         <activity
-            android:name=".ui.activities.CommunityActivity"
+            android:name=".ui.activities.HelpActivity"
             android:label="@string/settings" />
 
         <activity

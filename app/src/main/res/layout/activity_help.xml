@@ -26,18 +26,18 @@
             app:shapeAppearance="@style/CircleImageView" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/telegram"
+            android:id="@+id/faq"
             style="@style/AboutCard">
 
             <LinearLayout style="@style/AboutItem">
 
                 <ImageView
                     style="@style/AboutImageView"
-                    android:src="@drawable/ic_telegram" />
+                    android:src="@drawable/ic_help" />
 
                 <TextView
                     style="@style/AboutTextView"
-                    android:text="@string/telegram" />
+                    android:text="@string/faq" />
 
             </LinearLayout>
 
@@ -56,6 +56,24 @@
                 <TextView
                     style="@style/AboutTextView"
                     android:text="@string/matrix" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/telegram"
+            style="@style/AboutCard">
+
+            <LinearLayout style="@style/AboutItem">
+
+                <ImageView
+                    style="@style/AboutImageView"
+                    android:src="@drawable/ic_telegram" />
+
+                <TextView
+                    style="@style/AboutTextView"
+                    android:text="@string/telegram" />
 
             </LinearLayout>
 
