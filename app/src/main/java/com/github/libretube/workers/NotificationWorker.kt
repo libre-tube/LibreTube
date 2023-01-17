@@ -12,6 +12,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
@@ -35,9 +36,9 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     // the id where notification channels start
     private var notificationId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val nManager = appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nManager.activeNotifications.size + 5
+        nManager.activeNotifications.size + DOWNLOAD_PROGRESS_NOTIFICATION_ID
     } else {
-        5
+        DOWNLOAD_PROGRESS_NOTIFICATION_ID
     }
 
     override fun doWork(): Result {
