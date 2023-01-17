@@ -17,6 +17,7 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NotificationHelper
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
+import com.github.libretube.util.ShortcutHelper
 
 class LibreTubeApp : Application() {
     override fun onCreate() {
@@ -69,6 +70,11 @@ class LibreTubeApp : Application() {
         val defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
         val exceptionHandler = ExceptionHandler(defaultExceptionHandler)
         Thread.setDefaultUncaughtExceptionHandler(exceptionHandler)
+
+        /**
+         * Dynamically create App Shortcuts
+         */
+        ShortcutHelper.createShortcuts(this)
     }
 
     /**
