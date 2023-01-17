@@ -441,6 +441,7 @@
     <string name="audio_only_mode">Audio only mode</string>
     <string name="audio_only_mode_summary">Turn LibreTube into a music player.</string>
     <string name="sleep_timer">Sleep timer</string>
+    <string name="skip_silence">Skip silence</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
