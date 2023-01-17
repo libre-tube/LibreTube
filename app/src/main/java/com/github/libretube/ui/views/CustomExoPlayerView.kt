@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.github.libretube.R
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
@@ -33,6 +34,8 @@ import com.github.libretube.util.BrightnessHelper
 import com.github.libretube.util.PlayerGestureController
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
+import com.github.libretube.util.PreferenceHelper
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -111,6 +114,9 @@ internal class CustomExoPlayerView(
                 PlayerHelper.playbackSpeed.toFloat(),
                 1.0f
             )
+            PreferenceHelper.getBoolean(PreferenceKeys.SKIP_SILENCE, false).let {
+                (player as ExoPlayer).skipSilenceEnabled = true
+            }
             playbackPrefSet = true
         }
 
@@ -189,7 +195,7 @@ internal class CustomExoPlayerView(
     override fun hideController() {
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // hide all the navigation bars that potentially could have been reopened manually ba the user
-            (context as? MainActivity)?.setFullscreen()
+            (context as? MainActivity)?.windowHelper?.setFullscreen()
         }
         super.hideController()
     }
@@ -484,7 +490,9 @@ internal class CustomExoPlayerView(
     }
 
     override fun onPlaybackSpeedClicked() {
-        player?.let { PlaybackSpeedSheet(it).show(supportFragmentManager) }
+        player?.let {
+            PlaybackSpeedSheet(it as ExoPlayer).show(supportFragmentManager)
+        }
     }
 
     override fun onResizeModeClicked() {

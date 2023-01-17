@@ -436,4 +436,15 @@
     <string name="pause">השהיה</string>
     <string name="alternative_pip_controls">בקרים חלופיים לתמונה בתוך תמונה</string>
     <string name="alternative_pip_controls_summary">להציג בקרי שמע בלבד ודילוג בתמונה בתוך תמונה במקום קדימה ואחורה</string>
+    <string name="audio_player">נגן שמע</string>
+    <string name="download_completed">ההורדה הושלמה</string>
+    <string name="concurrent_downloads">כמות ההורדות המרבית במקביל</string>
+    <string name="no_subtitle">אין כתובית</string>
+    <string name="download_paused">ההורדה מושהית</string>
+    <string name="concurrent_downloads_limit_reached">הגעת למגבלת ההורדות במקביל.</string>
+    <string name="unknown">לא ידוע</string>
+    <string name="resume">המשך</string>
+    <string name="audio_only_mode">מצב שמע בלבד</string>
+    <string name="audio_only_mode_summary">הפיכת LibreTube לנגן מוזיקה.</string>
+    <string name="sleep_timer">מתזמן שינה</string>
 </resources>

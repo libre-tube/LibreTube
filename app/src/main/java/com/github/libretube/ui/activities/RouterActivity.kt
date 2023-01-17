@@ -84,10 +84,8 @@ class RouterActivity : BaseActivity() {
         val pm: PackageManager = this.packageManager
         val intent = pm.getLaunchIntentForPackage(this.packageName)
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        this.startActivity(
-            resolveType(intent!!, uri)
-        )
-        this.finishAndRemoveTask()
+        startActivity(resolveType(intent!!, uri))
+        finishAndRemoveTask()
     }
 
     private fun parseTimestamp(t: String): Long? {

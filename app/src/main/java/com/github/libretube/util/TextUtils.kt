@@ -22,10 +22,6 @@ object TextUtils {
      */
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
 
-    fun toTwoDecimalsString(num: Int): String {
-        return if (num >= 10) num.toString() else "0$num"
-    }
-
     /**
      * Check whether an Url is valid
      * @param url The url to test
@@ -45,7 +41,7 @@ object TextUtils {
      * @param locale The locale to use, otherwise uses system default
      * return Localized date string
      */
-    fun localizeDate(date: String?, locale: Locale? = null): String? {
+    fun localizeDate(date: String?, locale: Locale): String? {
         date ?: return null
 
         // relative time span

@@ -436,4 +436,14 @@
     <string name="rewind">Visszatekerés</string>
     <string name="alternative_pip_controls">Alternatív PiP irányítás</string>
     <string name="alternative_pip_controls_summary">Csak hang és átlépés gombok megjelenítése a PiP-ben az előretekerés és a visszatekerés helyett</string>
+    <string name="audio_player">Hanglejátszó</string>
+    <string name="no_subtitle">Nincs felirat</string>
+    <string name="download_paused">Letöltés szüneteltetve</string>
+    <string name="download_completed">Letöltés befejezve</string>
+    <string name="concurrent_downloads">Maximális egyidejű letöltések</string>
+    <string name="unknown">Ismeretlen</string>
+    <string name="resume">Folytatás</string>
+    <string name="concurrent_downloads_limit_reached">Az egyidejű letöltések maximális száma elérve.</string>
+    <string name="audio_only_mode">Csak hang mód</string>
+    <string name="audio_only_mode_summary">Változtassa a LibreTube-ot zenelejátszóvá.</string>
 </resources>

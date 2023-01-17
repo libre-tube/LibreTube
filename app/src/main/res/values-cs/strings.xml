@@ -437,4 +437,13 @@
     <string name="forward">Vpřed</string>
     <string name="alternative_pip_controls">Alternativní ovládací prvky PiP</string>
     <string name="audio_player">Přehrávač zvuku</string>
+    <string name="no_subtitle">Bez titulků</string>
+    <string name="download_paused">Stahování pozastaveno</string>
+    <string name="download_completed">Stahování dokončeno</string>
+    <string name="concurrent_downloads">Maximální počet souběžných stahování</string>
+    <string name="concurrent_downloads_limit_reached">Dosažen limit maximálního počtu souběžných stahování.</string>
+    <string name="unknown">Neznámý</string>
+    <string name="resume">Pokračovat</string>
+    <string name="audio_only_mode">Režim pouze zvuku</string>
+    <string name="audio_only_mode_summary">Proměňte LibreTube v hudební přehrávač.</string>
 </resources>

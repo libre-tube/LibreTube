@@ -169,6 +169,9 @@ class BackgroundMode : Service() {
 
     /**
      * Gets the video data and prepares the [player].
+     * @param videoId The id of the video to play
+     * @param seekToPosition The position of the video to seek to
+     * @param keepQueue Whether to keep the queue or clear it instead
      */
     private fun loadAudio(
         videoId: String,
@@ -298,7 +301,7 @@ class BackgroundMode : Service() {
         this.videoId = nextVideo
         this.streams = null
         this.segmentData = null
-        loadAudio(videoId)
+        loadAudio(videoId, keepQueue = true)
     }
 
     /**

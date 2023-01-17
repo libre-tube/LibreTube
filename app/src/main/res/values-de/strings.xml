@@ -435,4 +435,10 @@
     <string name="forward">Vorspulen</string>
     <string name="pause">Pause</string>
     <string name="alternative_pip_controls">Alternative BiB-Steuerungen</string>
+    <string name="audio_only_mode">Nur-Audio-Modus</string>
+    <string name="no_subtitle">Kein Untertitel</string>
+    <string name="download_paused">Herunterladen pausiert</string>
+    <string name="download_completed">Herunterladen abgeschlossen</string>
+    <string name="unknown">Unbekannt</string>
+    <string name="resume">Fortsetzen</string>
 </resources>

@@ -29,6 +29,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
+import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -252,8 +253,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
 
+        // reset the callbacks of the playing queue
+        PlayingQueue.resetToDefaults()
+
         // clear the playing queue
-        if (!keepQueue) PlayingQueue.resetToDefaults()
+        if (!keepQueue) PlayingQueue.clear()
 
         changeOrientationMode()
 
@@ -342,15 +346,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     // actions that don't depend on video information
     private fun initializeOnClickActions() {
         binding.closeImageView.setOnClickListener {
-            viewModel.isMiniPlayerVisible.value = false
-            binding.playerMotionLayout.transitionToEnd()
-            val mainActivity = activity as MainActivity
-            mainActivity.supportFragmentManager.beginTransaction()
-                .remove(this)
-                .commit()
+            PlayingQueue.clear()
             BackgroundHelper.stopBackgroundPlay(requireContext())
+            killPlayerFragment()
         }
         playerBinding.closeImageButton.setOnClickListener {
+            PlayingQueue.clear()
+            BackgroundHelper.stopBackgroundPlay(requireContext())
             killPlayerFragment()
         }
         playerBinding.autoPlay.visibility = View.VISIBLE
@@ -832,11 +834,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun localizedDate(date: String?): String? {
-        return if (SDK_INT >= Build.VERSION_CODES.N) {
-            TextUtils.localizeDate(date, resources.configuration.locales[0])
-        } else {
-            TextUtils.localizeDate(date)
-        }
+        val locale = ConfigurationCompat.getLocales(resources.configuration)[0]!!
+        return TextUtils.localizeDate(date, locale)
     }
 
     private fun handleLiveVideo() {
@@ -1319,8 +1318,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }.flatten()
             .filter { it > 0 }
             .sortedDescending()
-            .toSet()
-            .toList()
+            .distinct()
 
         return resolutions.map {
             VideoResolution(
@@ -1469,8 +1467,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     override fun onCaptionsClicked() {
         if (!this@PlayerFragment::streams.isInitialized ||
-            streams.subtitles == null ||
-            streams.subtitles!!.isEmpty()
+            streams.subtitles.isNullOrEmpty()
         ) {
             Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
             return
@@ -1485,7 +1482,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         BaseBottomSheet()
             .setSimpleItems(subtitlesNamesList) { index ->
-                val language = if (index > 0) subtitleCodesList[index] else null
+                val language = subtitleCodesList.getOrNull(index)
                 updateCaptionsLanguage(language)
                 this.captionLanguage = language
             }
@@ -1634,6 +1631,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         mainActivity.supportFragmentManager.beginTransaction()
             .remove(this)
             .commit()
+
+        onDestroy()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

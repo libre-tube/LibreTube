@@ -18,8 +18,8 @@ object PreferenceKeys {
     const val LANGUAGE = "language"
     const val REGION = "region"
     const val AUTO_ROTATION = "auto_rotation"
-    const val BREAK_REMINDER_TOGGLE = "break_reminder_toggle"
-    const val BREAK_REMINDER = "break_reminder"
+    const val SLEEP_TIMER = "sleep_timer_toggle"
+    const val SLEEP_TIMER_DELAY = "sleep_timer_delay"
     const val SAVE_FEED = "save_feed"
     const val NAVBAR_ITEMS = "navbar_items"
     const val START_FRAGMENT = "start_fragment"
@@ -88,6 +88,7 @@ object PreferenceKeys {
     const val DOUBLE_TAP_TO_SEEK = "double_tap_seek"
     const val PAUSE_ON_QUIT = "pause_on_quit"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
+    const val SKIP_SILENCE = "skip_silence"
 
     /**
      * Background mode

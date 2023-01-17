@@ -6,60 +6,39 @@ import android.util.AttributeSet
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.TextUtils
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.time.LocalTime
 
 class TimePickerPreference(
     context: Context,
     attributeSet: AttributeSet
 ) : Preference(context, attributeSet) {
     override fun getSummary(): CharSequence {
-        val prefStr = PreferenceHelper.getString(key, "")
-        return if (prefStr != "") prefStr else DEFAULT_VALUE
+        return PreferenceHelper.getString(key, DEFAULT_VALUE)
     }
 
     override fun onClick() {
+        val prefTime = LocalTime.parse(PreferenceHelper.getString(key, DEFAULT_VALUE))
         val picker = MaterialTimePicker.Builder()
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
-            .setTimeFormat(getTimeFormat())
-            .setHour(getHour())
-            .setMinute(getMinutes())
+            .setTimeFormat(timeFormat)
+            .setHour(prefTime.hour)
+            .setMinute(prefTime.minute)
             .build()
 
         picker.addOnPositiveButtonClickListener {
-            val timeStr = getTimeStr(picker)
+            val timeStr = LocalTime.of(picker.hour, picker.minute).toString()
             PreferenceHelper.putString(key, timeStr)
             summary = timeStr
         }
         picker.show((context as AppCompatActivity).supportFragmentManager, null)
     }
 
-    private fun getTimeFormat(): Int {
-        return if (is24HourFormat(context)) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
-    }
-
-    private fun getPrefStringPart(index: Int): String? {
-        val prefStr = PreferenceHelper.getString(key, "").split(SEPARATOR).getOrNull(index)
-        return if (prefStr != "") prefStr else null
-    }
-
-    private fun getHour(): Int {
-        return getPrefStringPart(0)?.toInt() ?: 0
-    }
-
-    private fun getMinutes(): Int {
-        return getPrefStringPart(1)?.toInt() ?: 0
-    }
-
-    private fun getTimeStr(picker: MaterialTimePicker): String {
-        val hour = TextUtils.toTwoDecimalsString(picker.hour)
-        val minute = TextUtils.toTwoDecimalsString(picker.minute)
-        return "$hour$SEPARATOR$minute"
-    }
+    private val timeFormat: Int
+        get() = if (is24HourFormat(context)) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
 
     companion object {
-        const val SEPARATOR = ":"
         const val DEFAULT_VALUE = "12:00"
     }
 }

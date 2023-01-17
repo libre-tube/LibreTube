@@ -434,9 +434,16 @@
     <string name="forward">İrəli</string>
     <string name="pause">Fasilə ver</string>
     <string name="alternative_pip_controls">Alternativ PiP nəzarətləri</string>
-    <string name="alternative_pip_controls_summary">Yalnız səsi göstər və irəli və geri çevirmək əvəzinə PiP-də idarəetmələri ötür</string>
+    <string name="alternative_pip_controls_summary">Yalnız səsi göstər və irəli və geri çevirmək əvəzində PiP-də idarəetmələri ötür</string>
     <string name="rewind">Geri sar</string>
     <string name="audio_player">Səs oynadıcı</string>
     <string name="audio_only_mode">Yalnız səs rejimi</string>
     <string name="audio_only_mode_summary">LibreTube-u musiqi oynadıcıya dəyiş.</string>
+    <string name="no_subtitle">Altyazı yoxdur</string>
+    <string name="download_paused">Endirməyə fasilə verildi</string>
+    <string name="download_completed">Endirmə tamamlandı</string>
+    <string name="concurrent_downloads">Maksimal paralel endirmələr</string>
+    <string name="concurrent_downloads_limit_reached">Maksimal paralel endirmə limitinə çatıldı.</string>
+    <string name="unknown">Naməlum</string>
+    <string name="resume">Davam et</string>
 </resources>

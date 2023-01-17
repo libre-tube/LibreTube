@@ -17,4 +17,5 @@ object IntentData {
     const val subtitleCode = "subtitleCode"
     const val downloading = "downloading"
     const val openAudioPlayer = "openAudioPlayer"
+    const val fragmentToOpen = "fragmentToOpen"
 }
