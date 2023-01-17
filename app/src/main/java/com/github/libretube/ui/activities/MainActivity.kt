@@ -35,7 +35,7 @@ import com.github.libretube.ui.fragments.PlayerFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import com.github.libretube.ui.tools.BreakReminder
+import com.github.libretube.ui.tools.SleepTimer
 import com.github.libretube.util.NavBarHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NetworkHelper
@@ -132,13 +132,12 @@ class MainActivity : BaseActivity() {
 
         binding.toolbar.title = ThemeHelper.getStyledAppName(this)
 
-        /**
-         * handle error logs
-         */
-        val log = PreferenceHelper.getErrorLog()
-        if (log != "") ErrorDialog().show(supportFragmentManager, null)
+        // handle error logs
+        PreferenceHelper.getErrorLog().ifBlank { null }?.let {
+            ErrorDialog().show(supportFragmentManager, null)
+        }
 
-        BreakReminder.setupBreakReminder(applicationContext)
+        SleepTimer.setup(this)
 
         setupSubscriptionsBadge()
 
@@ -157,11 +156,9 @@ class MainActivity : BaseActivity() {
                 }
 
                 if (binding.mainMotionLayout.progress == 0F) {
-                    try {
+                    runCatching {
                         minimizePlayer()
                         return
-                    } catch (e: Exception) {
-                        // current fragment isn't the player fragment
                     }
                 }
 

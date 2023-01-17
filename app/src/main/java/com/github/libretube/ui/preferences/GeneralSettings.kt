@@ -30,21 +30,26 @@ class GeneralSettings : BasePreferenceFragment() {
 
         val autoRotation = findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTO_ROTATION)
         autoRotation?.setOnPreferenceChangeListener { _, _ ->
-            val restartDialog = RequireRestartDialog()
-            restartDialog.show(childFragmentManager, RequireRestartDialog::class.java.name)
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
 
         val breakReminder =
-            findPreference<SwitchPreferenceCompat>(PreferenceKeys.BREAK_REMINDER_TOGGLE)
-        val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.BREAK_REMINDER)
+            findPreference<SwitchPreferenceCompat>(PreferenceKeys.SLEEP_TIMER)
+        val breakReminderTime = findPreference<EditTextPreference>(PreferenceKeys.SLEEP_TIMER_DELAY)
         breakReminderTime?.isEnabled = PreferenceHelper.getBoolean(
-            PreferenceKeys.BREAK_REMINDER_TOGGLE,
+            PreferenceKeys.SLEEP_TIMER,
             false
         )
 
         breakReminder?.setOnPreferenceChangeListener { _, newValue ->
             breakReminderTime?.isEnabled = newValue as Boolean
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
+            true
+        }
+
+        breakReminderTime?.setOnPreferenceChangeListener { _, _ ->
+            RequireRestartDialog().show(childFragmentManager, RequireRestartDialog::class.java.name)
             true
         }
     }
