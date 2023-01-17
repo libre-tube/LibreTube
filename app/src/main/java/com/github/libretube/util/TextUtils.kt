@@ -22,10 +22,6 @@ object TextUtils {
      */
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
 
-    fun toTwoDecimalsString(num: Int): String {
-        return if (num >= 10) num.toString() else "0$num"
-    }
-
     /**
      * Check whether an Url is valid
      * @param url The url to test
