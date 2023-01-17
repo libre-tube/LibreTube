@@ -437,4 +437,13 @@
     <string name="alternative_pip_controls">备选 PiP （画中画）操控</string>
     <string name="alternative_pip_controls_summary">仅显示音频并跳过画中画操控而非前进和后退</string>
     <string name="audio_player">音频播放器</string>
+    <string name="audio_only_mode_summary">将 LibreTube 作为音乐播放器。</string>
+    <string name="no_subtitle">无字幕</string>
+    <string name="download_paused">下载已暂停</string>
+    <string name="download_completed">下载已完成</string>
+    <string name="concurrent_downloads">最大并发下载</string>
+    <string name="concurrent_downloads_limit_reached">已达到最大并发下载限制。</string>
+    <string name="unknown">未知</string>
+    <string name="resume">恢复</string>
+    <string name="audio_only_mode">仅音频模式</string>
 </resources>
