@@ -446,4 +446,8 @@
     <string name="unknown">अनजान</string>
     <string name="concurrent_downloads_limit_reached">अधिकतम समवर्ती डाउनलोड सीमा पूरी हो गई है।</string>
     <string name="resume">फिर शुरू करें</string>
+    <string name="sleep_timer">सलीप टाइम्र</string>
+    <string name="skip_silence">चुप्पी छोड़ें</string>
+    <string name="help">सहायता</string>
+    <string name="faq">आम सवाल</string>
 </resources>
