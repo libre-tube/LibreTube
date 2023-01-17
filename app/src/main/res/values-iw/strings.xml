@@ -446,4 +446,5 @@
     <string name="resume">המשך</string>
     <string name="audio_only_mode">מצב שמע בלבד</string>
     <string name="audio_only_mode_summary">הפיכת LibreTube לנגן מוזיקה.</string>
+    <string name="sleep_timer">מתזמן שינה</string>
 </resources>

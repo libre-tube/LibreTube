@@ -446,4 +446,6 @@
     <string name="resume">Retomar</string>
     <string name="audio_only_mode_summary">Transforme o LibreTube em um reprodutor de música.</string>
     <string name="audio_only_mode">Modo somente áudio</string>
+    <string name="sleep_timer">Temporizador</string>
+    <string name="skip_silence">Pular silêncio</string>
 </resources>
