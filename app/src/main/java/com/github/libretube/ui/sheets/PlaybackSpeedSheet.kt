@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.PlaybackBottomSheetBinding
 import com.github.libretube.extensions.round
+import com.github.libretube.util.PreferenceHelper
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.PlaybackParameters
-import com.google.android.exoplayer2.Player
 
 class PlaybackSpeedSheet(
-    private val player: Player
+    private val player: ExoPlayer
 ) : ExpandedBottomSheet() {
     private lateinit var binding: PlaybackBottomSheetBinding
 
@@ -28,6 +30,9 @@ class PlaybackSpeedSheet(
 
         binding.speed.value = player.playbackParameters.speed
         binding.pitch.value = player.playbackParameters.pitch
+        PreferenceHelper.getBoolean(PreferenceKeys.SKIP_SILENCE, false).let {
+            binding.skipSilence.isChecked = it
+        }
 
         binding.speed.addOnChangeListener { _, _, _ ->
             onChange()
@@ -45,6 +50,11 @@ class PlaybackSpeedSheet(
         binding.resetPitch.setOnClickListener {
             binding.pitch.value = 1f
             onChange()
+        }
+
+        binding.skipSilence.setOnCheckedChangeListener { _, isChecked ->
+            player.skipSilenceEnabled = isChecked
+            PreferenceHelper.putBoolean(PreferenceKeys.SKIP_SILENCE, isChecked)
         }
     }
 
