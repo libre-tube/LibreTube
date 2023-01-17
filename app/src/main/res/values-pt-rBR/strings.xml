@@ -448,4 +448,6 @@
     <string name="audio_only_mode">Modo somente áudio</string>
     <string name="sleep_timer">Temporizador</string>
     <string name="skip_silence">Pular silêncio</string>
+    <string name="help">Ajuda</string>
+    <string name="faq">FAQ</string>
 </resources>
