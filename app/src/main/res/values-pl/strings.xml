@@ -446,4 +446,6 @@
     <string name="no_subtitle">Bez napisów</string>
     <string name="audio_only_mode_summary">Zmień LibreTube w odtwarzacz muzyczny.</string>
     <string name="audio_only_mode">Tryb „tylko dźwięk”</string>
+    <string name="sleep_timer">Wyłącz po czasie</string>
+    <string name="skip_silence">Pomiń cisze</string>
 </resources>

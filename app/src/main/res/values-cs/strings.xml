@@ -446,4 +446,6 @@
     <string name="resume">Pokračovat</string>
     <string name="audio_only_mode">Režim pouze zvuku</string>
     <string name="audio_only_mode_summary">Proměňte LibreTube v hudební přehrávač.</string>
+    <string name="sleep_timer">Časovač spánku</string>
+    <string name="skip_silence">Přeskočit ticho</string>
 </resources>
