@@ -16,8 +16,8 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_community"
-        android:title="@string/community"
+        android:id="@+id/action_help"
+        android:title="@string/help"
         app:showAsAction="never" />
 
     <item
