@@ -448,4 +448,6 @@
     <string name="resume">Продовжити</string>
     <string name="help">Довідка</string>
     <string name="faq">FAQ</string>
+    <string name="sleep_timer">Таймер сну</string>
+    <string name="skip_silence">Пропустити тишу</string>
 </resources>
