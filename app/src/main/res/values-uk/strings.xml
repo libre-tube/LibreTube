@@ -446,4 +446,6 @@
     <string name="unknown">Невідомо</string>
     <string name="download_completed">Завантаження завершено</string>
     <string name="resume">Продовжити</string>
+    <string name="help">Довідка</string>
+    <string name="faq">FAQ</string>
 </resources>
