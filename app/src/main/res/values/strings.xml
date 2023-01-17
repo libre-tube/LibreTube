@@ -210,7 +210,7 @@
     <string name="deleteAccount_summary">Delete your Piped account</string>
     <string name="account">Account</string>
     <string name="restore">Restore</string>
-    <string name="watch_history">Watch History</string>
+    <string name="watch_history">View History</string>
     <string name="watch_positions">Remember position</string>
     <string name="watch_positions_summary">Continue from last playback position</string>
     <string name="auth_instance">Authentication instance</string>
