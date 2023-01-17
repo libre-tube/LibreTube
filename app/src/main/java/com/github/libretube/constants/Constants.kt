@@ -41,10 +41,7 @@ const val FALLBACK_INSTANCES_URL = "https://instances.tokhmi.xyz"
  * Notification IDs
  */
 const val PLAYER_NOTIFICATION_ID = 1
-const val DOWNLOAD_PENDING_NOTIFICATION_ID = 2
-const val DOWNLOAD_FAILURE_NOTIFICATION_ID = 3
-const val DOWNLOAD_SUCCESS_NOTIFICATION_ID = 4
-const val DOWNLOAD_PROGRESS_NOTIFICATION_ID = 5
+const val DOWNLOAD_PROGRESS_NOTIFICATION_ID = 2
 
 /**
  * Notification Channel IDs
