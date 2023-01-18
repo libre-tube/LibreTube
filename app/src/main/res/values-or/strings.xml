@@ -446,4 +446,8 @@
     <string name="resume">ପୁଣି ଆରମ୍ଭ କରନ୍ତୁ</string>
     <string name="audio_only_mode">କେବଳ ଅଡିଓ ମୋଡ୍</string>
     <string name="audio_only_mode_summary">LibreTube କୁ ଏକ ମ୍ୟୁଜିକ୍ ପ୍ଲେୟାରରେ ପରିଣତ କର ।</string>
+    <string name="sleep_timer">ଶୋଇବା ସମୟ</string>
+    <string name="skip_silence">ନୀରବତା ଛାଡିଦିଅ</string>
+    <string name="help">ସାହାଯ୍ୟ</string>
+    <string name="faq">FAQ</string>
 </resources>
