@@ -48,7 +48,7 @@ class CommentsViewModel : ViewModel() {
                 return@launch
             }
             val updatedPage = commentsPage.value?.apply {
-                comments = comments.plus(response.comments).toMutableList()
+                comments += response.comments
             }
             nextPage = response.nextpage
             commentsPage.postValue(updatedPage)
