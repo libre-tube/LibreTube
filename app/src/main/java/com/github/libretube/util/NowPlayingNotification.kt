@@ -70,7 +70,7 @@ class NowPlayingNotification(
          * overrides the action when clicking the notification
          */
         @SuppressLint("UnspecifiedImmutableFlag")
-        override fun createCurrentContentIntent(player: Player): PendingIntent? {
+        override fun createCurrentContentIntent(player: Player): PendingIntent {
             // starts a new MainActivity Intent when the player notification is clicked
             // it doesn't start a completely new MainActivity because the MainActivity's launchMode
             // is set to "singleTop" in the AndroidManifest (important!!!)
@@ -81,11 +81,11 @@ class NowPlayingNotification(
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 }
             }
-            return PendingIntent.getActivity(
+            return PendingIntentCompat.getActivity(
                 context,
                 0,
                 intent,
-                PendingIntentCompat.updateCurrentFlags
+                PendingIntent.FLAG_UPDATE_CURRENT
             )
         }
 
@@ -155,12 +155,12 @@ class NowPlayingNotification(
     }
 
     private fun createNotificationAction(drawableRes: Int, actionName: String, instanceId: Int): NotificationCompat.Action {
-        val intent: Intent = Intent(actionName).setPackage(context.packageName)
-        val pendingIntent = PendingIntent.getBroadcast(
+        val intent = Intent(actionName).setPackage(context.packageName)
+        val pendingIntent = PendingIntentCompat.getBroadcast(
             context,
             instanceId,
             intent,
-            PendingIntentCompat.cancelCurrentFlags
+            PendingIntent.FLAG_CANCEL_CURRENT
         )
         return NotificationCompat.Action.Builder(drawableRes, actionName, pendingIntent).build()
     }

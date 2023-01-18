@@ -367,15 +367,13 @@ class DownloadService : Service() {
     }
 
     private fun getNotificationBuilder(item: DownloadItem): NotificationCompat.Builder {
-        val activityIntent =
-            PendingIntent.getActivity(
-                this@DownloadService,
-                0,
-                Intent(this@DownloadService, MainActivity::class.java).apply {
-                    putExtra("fragmentToOpen", "downloads")
-                },
-                PendingIntentCompat.cancelCurrentFlags
-            )
+        val activityIntent = PendingIntentCompat.getActivity(
+            this@DownloadService,
+            0,
+            Intent(this@DownloadService, MainActivity::class.java)
+                .putExtra("fragmentToOpen", "downloads"),
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
 
         return NotificationCompat
             .Builder(this, DOWNLOAD_CHANNEL_ID)
@@ -434,20 +432,19 @@ class DownloadService : Service() {
         return NotificationCompat.Action.Builder(
             R.drawable.ic_play,
             getString(R.string.resume),
-            PendingIntent.getBroadcast(this, id, intent, PendingIntentCompat.updateCurrentFlags)
+            PendingIntentCompat.getBroadcast(this, id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         ).build()
     }
 
     private fun getPauseAction(id: Int): NotificationCompat.Action {
-        val intent = Intent(this, NotificationReceiver::class.java).apply {
-            action = ACTION_DOWNLOAD_PAUSE
-            putExtra("id", id)
-        }
+        val intent = Intent(this, NotificationReceiver::class.java)
+            .setAction(ACTION_DOWNLOAD_PAUSE)
+            .putExtra("id", id)
 
         return NotificationCompat.Action.Builder(
             R.drawable.ic_pause,
             getString(R.string.pause),
-            PendingIntent.getBroadcast(this, id, intent, PendingIntentCompat.updateCurrentFlags)
+            PendingIntentCompat.getBroadcast(this, id, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         ).build()
     }
 
