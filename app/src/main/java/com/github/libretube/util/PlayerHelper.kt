@@ -16,9 +16,7 @@ import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
-import com.google.android.exoplayer2.text.Cue
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
-import com.google.android.exoplayer2.ui.SubtitleView
 import com.google.android.exoplayer2.video.VideoSize
 import kotlin.math.roundToInt
 
@@ -437,20 +435,6 @@ object PlayerHelper {
             arrayListOf(audioModeAction, playPauseAction, skipNextAction)
         } else {
             arrayListOf(rewindAction, playPauseAction, forwardAction)
-        }
-    }
-
-    /**
-     * Load the captions style according to the users preferences
-     */
-    fun applyCaptionsStyle(context: Context, subtitleView: SubtitleView?) {
-        val captionStyle = getCaptionStyle(context)
-        subtitleView?.apply {
-            setApplyEmbeddedFontSizes(false)
-            setFixedTextSize(Cue.TEXT_SIZE_TYPE_ABSOLUTE, captionsTextSize)
-            if (!useSystemCaptionStyle) return
-            setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
-            setStyle(captionStyle)
         }
     }
 }

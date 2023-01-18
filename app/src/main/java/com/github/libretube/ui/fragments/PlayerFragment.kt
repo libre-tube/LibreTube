@@ -826,8 +826,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         playerBinding.exoProgress.setPlayer(exoPlayer)
-
-        PlayerHelper.applyCaptionsStyle(requireContext(), exoPlayerView.subtitleView)
     }
 
     private fun localizedDate(date: String?): String? {
