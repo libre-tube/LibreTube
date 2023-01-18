@@ -4,6 +4,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -111,6 +112,9 @@ dependencies {
     implementation libs.square.retrofit
     implementation libs.square.retrofit.converterJackson
     implementation libs.jacksonAnnotations
+    implementation libs.kotlinx.serialization
+    implementation libs.kotlinx.datetime
+    implementation libs.kotlinx.serialization.retrofit
 
     /* Cronet and Coil */
     coreLibraryDesugaring libs.desugaring
