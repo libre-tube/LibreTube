@@ -91,8 +91,6 @@ class OfflinePlayerActivity : BaseActivity() {
             finish()
         }
 
-        PlayerHelper.applyCaptionsStyle(this, playerView.subtitleView)
-
         binding.player.initialize(
             null,
             binding.doubleTapOverlay.binding,

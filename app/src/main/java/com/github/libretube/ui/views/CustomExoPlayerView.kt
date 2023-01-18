@@ -38,8 +38,10 @@ import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.text.Cue
 import com.google.android.exoplayer2.trackselection.TrackSelector
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.SubtitleView
 import com.google.android.exoplayer2.util.RepeatModeUtil
@@ -106,7 +108,7 @@ internal class CustomExoPlayerView(
         initializeGestureProgress()
 
         initRewindAndForward()
-
+        applyCaptionsStyle()
         initializeAdvancedOptions(context)
 
         if (!playbackPrefSet) {
@@ -115,7 +117,7 @@ internal class CustomExoPlayerView(
                 1.0f
             )
             PreferenceHelper.getBoolean(PreferenceKeys.SKIP_SILENCE, false).let {
-                (player as ExoPlayer).skipSilenceEnabled = true
+                (player as ExoPlayer).skipSilenceEnabled = it
             }
             playbackPrefSet = true
         }
@@ -566,6 +568,20 @@ internal class CustomExoPlayerView(
             params.marginStart = newMargin
             params.marginEnd = newMargin
             it.layoutParams = params
+        }
+    }
+
+    /**
+     * Load the captions style according to the users preferences
+     */
+    fun applyCaptionsStyle() {
+        val captionStyle = PlayerHelper.getCaptionStyle(context)
+        subtitleView?.apply {
+            setApplyEmbeddedFontSizes(false)
+            setFixedTextSize(Cue.TEXT_SIZE_TYPE_ABSOLUTE, PlayerHelper.captionsTextSize)
+            if (!PlayerHelper.useSystemCaptionStyle) return
+            setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
+            setStyle(captionStyle)
         }
     }
 
