@@ -358,22 +358,14 @@ object PlayerHelper {
         return context.packageName + "." + ACTION_MEDIA_CONTROL
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getPendingIntent(activity: Activity, code: Int): PendingIntent {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.getBroadcast(
-                activity,
-                code,
-                Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code),
-                PendingIntent.FLAG_IMMUTABLE
-            )
-        } else {
-            PendingIntent.getBroadcast(
-                activity,
-                code,
-                Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code),
-                0
-            )
-        }
+        return PendingIntent.getBroadcast(
+            activity,
+            code,
+            Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code),
+            PendingIntent.FLAG_IMMUTABLE
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
