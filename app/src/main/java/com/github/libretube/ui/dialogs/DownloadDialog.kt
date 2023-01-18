@@ -74,7 +74,7 @@ class DownloadDialog(
     }
 
     private fun initDownloadOptions(streams: Streams) {
-        binding.fileName.setText(streams.title.toString())
+        binding.fileName.setText(streams.title)
 
         val vidName = arrayListOf<String>()
 
@@ -82,7 +82,7 @@ class DownloadDialog(
         vidName.add(getString(R.string.no_video))
 
         // add all available video streams
-        for (vid in streams.videoStreams!!) {
+        for (vid in streams.videoStreams) {
             if (vid.url != null) {
                 val name = vid.quality + " " + vid.format
                 vidName.add(name)
@@ -95,7 +95,7 @@ class DownloadDialog(
         audioName.add(getString(R.string.no_audio))
 
         // add all available audio streams
-        for (audio in streams.audioStreams!!) {
+        for (audio in streams.audioStreams) {
             if (audio.url != null) {
                 val name = audio.quality + " " + audio.format
                 audioName.add(name)
@@ -108,7 +108,7 @@ class DownloadDialog(
         subtitleName.add(getString(R.string.no_subtitle))
 
         // add all available subtitles
-        for (subtitle in streams.subtitles!!) {
+        for (subtitle in streams.subtitles) {
             if (subtitle.url != null) {
                 subtitleName.add(subtitle.name.toString())
             }

@@ -116,6 +116,7 @@ import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
@@ -682,9 +683,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     } else {
                         PlayingQueue.updateCurrent(streams.toStreamItem(videoId!!))
                         if (PlayerHelper.autoInsertRelatedVideos) {
-                            PlayingQueue.add(
-                                *streams.relatedStreams.orEmpty().toTypedArray()
-                            )
+                            PlayingQueue.add(*streams.relatedStreams.toTypedArray())
                         }
                     }
                 }
@@ -773,8 +772,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             playerBinding.liveDiff.text = "-$diffText"
         }
         // call the function again after 100ms
-        handler
-            .postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
+        handler.postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
     // seek to saved watch position if available
@@ -794,7 +792,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             return
         }
         // position is almost the end of the video => don't seek, start from beginning
-        if (position != null && position < streams.duration!! * 1000 * 0.9) {
+        if (position != null && position < streams.duration * 1000 * 0.9) {
             exoPlayer.seekTo(position)
         }
     }
@@ -828,7 +826,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.exoProgress.setPlayer(exoPlayer)
     }
 
-    private fun localizedDate(date: String?): String? {
+    private fun localizedDate(date: LocalDate): String {
         val locale = ConfigurationCompat.getLocales(resources.configuration)[0]!!
         return TextUtils.localizeDate(date, locale)
     }
@@ -870,12 +868,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
             playerChannelSubCount.text = context?.getString(
                 R.string.subscribers,
-                streams.uploaderSubscriberCount?.formatShort()
+                streams.uploaderSubscriberCount.formatShort()
             )
         }
 
         // duration that's not greater than 0 indicates that the video is live
-        if (streams.duration!! <= 0) {
+        if (streams.duration <= 0) {
             isLive = true
             handleLiveVideo()
         }
@@ -883,10 +881,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.exoTitle.text = streams.title
 
         // init the chapters recyclerview
-        if (streams.chapters != null) {
-            chapters = streams.chapters.orEmpty()
-            initializeChapters()
-        }
+        chapters = streams.chapters
+        initializeChapters()
 
         // Listener for play and pause icon change
         exoPlayer.addListener(object : Player.Listener {
@@ -972,7 +968,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         })
 
         binding.relPlayerDownload.setOnClickListener {
-            if (streams.duration!! <= 0) {
+            if (streams.duration <= 0) {
                 Toast.makeText(context, R.string.cannotDownload, Toast.LENGTH_SHORT).show()
             } else if (!DownloadService.IS_DOWNLOAD_RUNNING) {
                 val newFragment = DownloadDialog(videoId!!)
@@ -995,7 +991,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
         initializeRelatedVideos(streams.relatedStreams)
         // set video description
-        val description = streams.description!!
+        val description = streams.description
 
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
@@ -1016,7 +1012,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         // update the subscribed state
         binding.playerSubscribe.setupSubscriptionButton(
-            this.streams.uploaderUrl?.toID(),
+            this.streams.uploaderUrl.toID(),
             this.streams.uploader
         )
 
@@ -1228,9 +1224,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun setResolutionAndSubtitles() {
         // create a list of subtitles
         subtitles = mutableListOf()
-        val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
+        val subtitlesNamesList = mutableListOf(getString(R.string.none))
         val subtitleCodesList = mutableListOf("")
-        streams.subtitles.orEmpty().forEach {
+        streams.subtitles.forEach {
             subtitles.add(
                 SubtitleConfiguration.Builder(it.url!!.toUri())
                     .setMimeType(it.mimeType!!) // The correct MIME type (required).
@@ -1260,7 +1256,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (defaultResolution != "") setPlayerResolution(defaultResolution.toInt())
 
         if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
-            streams.videoStreams.orEmpty().isNotEmpty()
+            streams.videoStreams.isNotEmpty()
         ) {
             val uri = let {
                 streams.dash?.toUri()
@@ -1355,16 +1351,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     override fun onCaptionsClicked() {
-        if (!this@PlayerFragment::streams.isInitialized ||
-            streams.subtitles.isNullOrEmpty()
-        ) {
+        if (!this@PlayerFragment::streams.isInitialized || streams.subtitles.isEmpty()) {
             Toast.makeText(context, R.string.no_subtitles_available, Toast.LENGTH_SHORT).show()
             return
         }
 
-        val subtitlesNamesList = mutableListOf(context?.getString(R.string.none)!!)
+        val subtitlesNamesList = mutableListOf(getString(R.string.none))
         val subtitleCodesList = mutableListOf("")
-        streams.subtitles!!.forEach {
+        streams.subtitles.forEach {
             subtitlesNamesList += it.name!!
             subtitleCodesList += it.code!!
         }
@@ -1493,9 +1487,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.seekbarPreview.visibility = View.GONE
         playerBinding.exoProgress.addListener(
             SeekbarPreviewListener(
-                streams.previewFrames.orEmpty(),
+                streams.previewFrames,
                 playerBinding.seekbarPreview,
-                streams.duration!! * 1000
+                streams.duration * 1000
             )
         )
     }

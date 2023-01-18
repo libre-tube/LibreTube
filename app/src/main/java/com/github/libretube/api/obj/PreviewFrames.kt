@@ -1,8 +1,8 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class PreviewFrames(
     val urls: List<String>? = null,
     val frameWidth: Int? = null,
