@@ -14,7 +14,7 @@ class LinkHandler(private val clickCallback: ((String) -> Unit)?) {
         opening: Boolean,
         tag: String?,
         output: Editable?,
-        attributes: Attributes?,
+        attributes: Attributes?
     ): Boolean {
         // if the tag is not an anchor link, ignore for the default handler
         if (output == null || "a" != tag) {
