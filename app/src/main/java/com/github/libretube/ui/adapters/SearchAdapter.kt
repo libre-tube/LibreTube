@@ -83,13 +83,13 @@ class SearchAdapter(
     private fun bindWatch(item: ContentItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
-            thumbnailDuration.setFormattedDuration(item.duration!!)
+            thumbnailDuration.setFormattedDuration(item.duration)
             ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
-            val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
-            val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
+            val viewsString = if (item.views != -1L) item.views.formatShort() else ""
+            val uploadDate = item.uploadedDate.orEmpty()
             videoInfo.text =
-                if (viewsString != "" && uploadDate != "") {
+                if (viewsString.isNotEmpty() && uploadDate.isNotEmpty()) {
                     "$viewsString • $uploadDate"
                 } else {
                     viewsString + uploadDate
@@ -111,7 +111,7 @@ class SearchAdapter(
             channelContainer.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
-            watchProgress.setWatchProgressLength(videoId, item.duration!!)
+            watchProgress.setWatchProgressLength(videoId, item.duration)
         }
     }
 
@@ -150,7 +150,7 @@ class SearchAdapter(
     ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
-            if (item.videos?.toInt() != -1) videoCount.text = item.videos.toString()
+            if (item.videos != -1L) videoCount.text = item.videos.toString()
             playlistTitle.text = item.name
             playlistDescription.text = item.uploaderName
             root.setOnClickListener {
