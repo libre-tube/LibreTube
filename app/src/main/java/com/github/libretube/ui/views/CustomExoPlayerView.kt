@@ -115,7 +115,7 @@ internal class CustomExoPlayerView(
                 1.0f
             )
             PreferenceHelper.getBoolean(PreferenceKeys.SKIP_SILENCE, false).let {
-                (player as ExoPlayer).skipSilenceEnabled = true
+                (player as ExoPlayer).skipSilenceEnabled = it
             }
             playbackPrefSet = true
         }
