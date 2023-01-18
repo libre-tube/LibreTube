@@ -447,4 +447,7 @@
     <string name="audio_only_mode">מצב שמע בלבד</string>
     <string name="audio_only_mode_summary">הפיכת LibreTube לנגן מוזיקה.</string>
     <string name="sleep_timer">מתזמן שינה</string>
+    <string name="skip_silence">דילוג על שקט</string>
+    <string name="help">עזרה</string>
+    <string name="faq">שו״ת</string>
 </resources>

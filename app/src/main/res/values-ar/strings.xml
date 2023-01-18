@@ -446,4 +446,8 @@
     <string name="concurrent_downloads_limit_reached">تم الوصول إلى الحد الأقصى من التنزيلات المتزامنة.</string>
     <string name="unknown">غير معروف</string>
     <string name="resume">استئناف</string>
+    <string name="sleep_timer">مؤقت النوم</string>
+    <string name="skip_silence">تخطي الصمت</string>
+    <string name="help">التعليمات</string>
+    <string name="faq">الأسئلة المتداولة</string>
 </resources>

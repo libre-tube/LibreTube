@@ -446,4 +446,8 @@
     <string name="concurrent_downloads_limit_reached">Maksimal paralel endirmə limitinə çatıldı.</string>
     <string name="unknown">Naməlum</string>
     <string name="resume">Davam et</string>
+    <string name="sleep_timer">Yuxu taymeri</string>
+    <string name="skip_silence">Səssizliyi ötür</string>
+    <string name="help">Kömək</string>
+    <string name="faq">T-TSS</string>
 </resources>

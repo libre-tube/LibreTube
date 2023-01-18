@@ -446,4 +446,8 @@
     <string name="resume">Reanudar</string>
     <string name="audio_only_mode">Sólo audio</string>
     <string name="unknown">Desconocido</string>
+    <string name="sleep_timer">Temporizador de apagado</string>
+    <string name="skip_silence">Saltar silencio</string>
+    <string name="help">Ayuda</string>
+    <string name="faq">Preguntas frecuentes</string>
 </resources>

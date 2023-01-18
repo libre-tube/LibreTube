@@ -446,4 +446,8 @@
     <string name="resume">ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ</string>
     <string name="concurrent_downloads">ਅਧਿਕਤਮ ਸਮਕਾਲੀ ਡਾਊਨਲੋਡ</string>
     <string name="concurrent_downloads_limit_reached">ਅਧਿਕਤਮ ਸਮਕਾਲੀ ਡਾਊਨਲੋਡ ਸੀਮਾ ਪੂਰੀ ਹੋ ਗਈ ਹੈ।</string>
+    <string name="skip_silence">ਚੁੱਪ ਤੇ ਸਕਿੱਪ ਕਰੋ</string>
+    <string name="help">ਸਹਾਇਤਾ</string>
+    <string name="faq">ਆਮ ਸਵਾਲ</string>
+    <string name="sleep_timer">ਸਲੀਪ ਟਾਈਮਰ</string>
 </resources>
