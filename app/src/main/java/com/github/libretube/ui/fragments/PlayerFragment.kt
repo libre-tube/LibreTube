@@ -31,6 +31,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -1002,7 +1003,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // set video description
         val description = streams.description!!
 
-        setupDescription(binding.playerDescription, description, exoPlayer)
+        setupDescription(binding.playerDescription, description)
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
@@ -1036,56 +1037,21 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
     }
 
+    /**
+     * Set up the description text with video links and timestamps
+     */
     private fun setupDescription(
         descTextView: TextView,
-        description: String,
-        exoPlayer: ExoPlayer
+        description: String
     ) {
         // detect whether the description is html formatted
         if (description.contains("<") && description.contains(">")) {
             descTextView.movementMethod = LinkMovementMethod.getInstance()
-            descTextView.text = HtmlParser.createSpannedText(
+            descTextView.text = HtmlCompat.fromHtml(
                 description,
-                LinkHandler { link ->
-                    // check if the link is a youtube link
-                    if (link.contains("youtube.com") || link.contains("youtu.be")) {
-                        // check if the link is a video link
-                        val videoId = getVideoIdIfVideoLink(link)
-                        if (!videoId.isNullOrEmpty()) {
-                            // check if the video is the current video
-                            if (videoId == this.videoId) {
-                                // get the time from the link
-                                val time = link.substringAfter("t=").substringBefore("&")
-                                // check if the time is valid
-                                if (time.isNotEmpty() && time != link) {
-                                    // get the time in seconds
-                                    val timeInSeconds = getTimeInMillis(time)
-                                    if (timeInSeconds != -1L) {
-                                        // seek to the time
-                                        exoPlayer.seekTo(timeInSeconds)
-                                    }
-                                }
-                                // youtube link without time
-                                // open new player
-                                playNextVideo(videoId)
-                            } else {
-                                // not the current video
-                                // open new player
-                                playNextVideo(videoId)
-                            }
-                        } else {
-                            // not a video link, might be channel or playlist link
-                            // handle normally
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-                            startActivity(intent)
-                        }
-                    } else {
-                        // not a youtube link
-                        // handle normally
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-                        startActivity(intent)
-                    }
-                }
+                HtmlCompat.FROM_HTML_MODE_LEGACY,
+                null,
+                HtmlParser(LinkHandler { link -> handleLink(link) })
             )
         } else {
             // Links can be present as plain text
@@ -1094,54 +1060,92 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
     }
 
-    private fun getVideoIdIfVideoLink(link: String): String? {
+    /**
+     * Handle a link clicked in the description
+     */
+    private fun handleLink(link: String) {
+        val uri = Uri.parse(link)
+        // get video id if the link is a valid youtube video link
+        val videoId = getVideoIdIfVideoLink(link, uri)
+        if (!videoId.isNullOrEmpty()) {
+            // check if the video is the current video and has a valid time
+            if (videoId == this.videoId) {
+                val timeInMillis = getTimeInMillis(uri)
+                if (timeInMillis != -1L) {
+                    // seek to the time
+                    exoPlayer.seekTo(timeInMillis)
+                }
+                // else do nothing as the video is already playing
+            } else {
+                // youtube video link without time or not the current video
+                // open new player
+                playNextVideo(videoId)
+            }
+        } else {
+            // not a youtube video link
+            // handle normally
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+            startActivity(intent)
+        }
+    }
+
+    /**
+     * Get video id if the link is a valid youtube video link
+     */
+    private fun getVideoIdIfVideoLink(link: String, uri: Uri): String? {
         if (link.contains("youtube.com")) {
-            // check if the link is a channel link
-            val videoId = link.substringAfter("v=").substringBefore("&")
-            if (videoId.isNotEmpty() && videoId != link) {
-                return videoId
+            // the link may be in an unsupported format, so we should try/catch it
+            return try {
+                uri.getQueryParameter("v")
+            } catch (e: Exception) {
+                null
             }
         } else if (link.contains("youtu.be")) {
-            val videoId = link.substringAfter("be/").substringBefore("&")
-            if (videoId.isNotEmpty() && videoId != link) {
-                return videoId
-            }
+            return uri.lastPathSegment
         }
+
         return null
     }
 
-    private fun getTimeInMillis(time: String): Long {
+    /**
+     * Get time in milliseconds from a youtube video link
+     */
+    private fun getTimeInMillis(uri: Uri): Long {
+        var time = uri.getQueryParameter("t") ?: return -1L
+
         var timeInSeconds = 0L
         var found = false
-        // check if the time is in seconds
-        if (time.contains("s")) {
-            val longOrNull = time.substringBefore("s").toLongOrNull()
-            if (longOrNull != null) {
-                timeInSeconds += longOrNull
-                found = true
-            }
-        }
-        // check if the time is in minutes
-        if (time.contains("m")) {
-            val longOrNull = time.substringBefore("m").substringAfter("s").toLongOrNull()
-            if (longOrNull != null) {
-                timeInSeconds += longOrNull * 60
-                found = true
-            }
-        }
-        // check if the time is in hours
+
+        // Check if the time has hours
         if (time.contains("h")) {
-            val longOrNull = time.substringBefore("h").substringAfter("m").toLongOrNull()
-            if (longOrNull != null) {
-                timeInSeconds += longOrNull * 60 * 60
+            time.substringBefore("h").toLongOrNull()?.let {
+                timeInSeconds += it * 60 * 60
+                time = time.substringAfter("h")
                 found = true
             }
         }
 
+        // Check if the time has minutes
+        if (time.contains("m")) {
+            time.substringBefore("m").toLongOrNull()?.let {
+                timeInSeconds += it * 60
+                time = time.substringAfter("m")
+                found = true
+            }
+        }
+
+        // Check if the time has seconds
+        if (time.contains("s")) {
+            time.substringBefore("s").toLongOrNull()?.let {
+                timeInSeconds += it
+                found = true
+            }
+        }
+
+        // Time may not contain h, m or s. In that case, it is just a number of seconds
         if (!found) {
-            val longOrNull = time.toLongOrNull()
-            if (longOrNull != null) {
-                timeInSeconds += longOrNull
+            time.toLongOrNull()?.let {
+                timeInSeconds += it
                 found = true
             }
         }

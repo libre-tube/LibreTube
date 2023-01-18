@@ -5,31 +5,32 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
-import com.github.libretube.util.HtmlParser.Companion.getValue
 import org.xml.sax.Attributes
 
-class LinkHandler(private val clickCallback: ((String) -> Unit)?) : HtmlParser.TagHandler {
+class LinkHandler(private val clickCallback: ((String) -> Unit)?) {
     private var linkTagStartIndex = -1
     private var link: String? = null
-    override fun handleTag(
+    fun handleTag(
         opening: Boolean,
         tag: String?,
         output: Editable?,
         attributes: Attributes?
     ): Boolean {
-        if (output != null) {
-            if ("a" == tag) {
-                if (opening && attributes != null) {
-                    linkTagStartIndex = output.length
-                    link = getValue(attributes, "href")
-                } else {
-                    val refTagEndIndex = output.length
-                    setLinkSpans(output, linkTagStartIndex, refTagEndIndex, link)
-                }
-                return true
-            }
+        // if the tag is not an anchor link, ignore for the default handler
+        if (output == null || "a" != tag) {
+            return false
         }
-        return false
+
+        if (opening) {
+            if (attributes != null) {
+                linkTagStartIndex = output.length
+                link = attributes.getValue("href")
+            }
+        } else {
+            val refTagEndIndex = output.length
+            setLinkSpans(output, linkTagStartIndex, refTagEndIndex, link)
+        }
+        return true
     }
 
     private fun setLinkSpans(output: Editable, start: Int, end: Int, link: String?) {
