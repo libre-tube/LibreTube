@@ -14,7 +14,7 @@ class LinkHandler(private val clickCallback: ((String) -> Unit)?) {
         opening: Boolean,
         tag: String?,
         output: Editable?,
-        attributes: Attributes?
+        attributes: Attributes?,
     ): Boolean {
         // if the tag is not an anchor link, ignore for the default handler
         if (output == null || "a" != tag) {
@@ -27,19 +27,21 @@ class LinkHandler(private val clickCallback: ((String) -> Unit)?) {
                 link = attributes.getValue("href")
             }
         } else {
-            val refTagEndIndex = output.length
-            setLinkSpans(output, linkTagStartIndex, refTagEndIndex, link)
+            if (linkTagStartIndex >= 0 && link != null) {
+                setLinkSpans(output, linkTagStartIndex, output.length, link!!)
+
+                linkTagStartIndex = -1
+                link = null
+            }
         }
         return true
     }
 
-    private fun setLinkSpans(output: Editable, start: Int, end: Int, link: String?) {
+    private fun setLinkSpans(output: Editable, start: Int, end: Int, link: String) {
         output.setSpan(
             object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    if (clickCallback != null && link != null) {
-                        clickCallback.invoke(link)
-                    }
+                    clickCallback?.invoke(link)
                 }
 
                 override fun updateDrawState(ds: TextPaint) {
