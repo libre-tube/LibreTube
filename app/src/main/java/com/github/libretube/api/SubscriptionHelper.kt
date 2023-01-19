@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
@@ -25,7 +26,7 @@ object SubscriptionHelper {
                 try {
                     RetrofitInstance.authApi.subscribe(
                         PreferenceHelper.getToken(),
-                        com.github.libretube.api.obj.Subscribe(channelId)
+                        Subscribe(channelId)
                     )
                 } catch (e: Exception) {
                     Log.e(TAG(), e.toString())
@@ -46,7 +47,7 @@ object SubscriptionHelper {
                 try {
                     RetrofitInstance.authApi.unsubscribe(
                         PreferenceHelper.getToken(),
-                        com.github.libretube.api.obj.Subscribe(channelId)
+                        Subscribe(channelId)
                     )
                 } catch (e: Exception) {
                     Log.e(TAG(), e.toString())
