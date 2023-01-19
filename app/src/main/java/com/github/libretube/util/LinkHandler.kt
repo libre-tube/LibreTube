@@ -7,7 +7,9 @@ import android.text.style.ClickableSpan
 import android.view.View
 import org.xml.sax.Attributes
 
-class LinkHandler(private val clickCallback: ((String) -> Unit)?) {
+class LinkHandler(
+    private val clickCallback: ((String) -> Unit)?
+) {
     private var linkTagStartIndex = -1
     private var link: String? = null
     fun handleTag(
@@ -17,22 +19,17 @@ class LinkHandler(private val clickCallback: ((String) -> Unit)?) {
         attributes: Attributes?
     ): Boolean {
         // if the tag is not an anchor link, ignore for the default handler
-        if (output == null || "a" != tag) {
+        if (output == null || tag != "a") {
             return false
         }
 
-        if (opening) {
-            if (attributes != null) {
-                linkTagStartIndex = output.length
-                link = attributes.getValue("href")
-            }
-        } else {
-            if (linkTagStartIndex >= 0 && link != null) {
-                setLinkSpans(output, linkTagStartIndex, output.length, link!!)
-
-                linkTagStartIndex = -1
-                link = null
-            }
+        if (opening && attributes != null) {
+            linkTagStartIndex = output.length
+            link = attributes.getValue("href")
+        } else if (!opening && linkTagStartIndex >= 0 && link != null) {
+            setLinkSpans(output, linkTagStartIndex, output.length, link!!)
+            linkTagStartIndex = -1
+            link = null
         }
         return true
     }

@@ -1076,7 +1076,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
             TextUtils.getTimeInSeconds(uri)?.let {
-                exoPlayer.seekTo(it)
+                exoPlayer.seekTo(it * 1000)
             }
         } else {
             // youtube video link without time or not the current video, thus open new player

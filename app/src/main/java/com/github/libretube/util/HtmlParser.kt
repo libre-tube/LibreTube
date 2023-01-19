@@ -5,10 +5,11 @@ import android.text.Html
 import org.xml.sax.Attributes
 import org.xml.sax.ContentHandler
 import org.xml.sax.Locator
-import org.xml.sax.SAXException
 import org.xml.sax.XMLReader
 
-class HtmlParser constructor(private val handler: LinkHandler) : Html.TagHandler, ContentHandler {
+class HtmlParser(
+    private val handler: LinkHandler
+) : Html.TagHandler, ContentHandler {
     private val tagStatus = ArrayDeque<Boolean>()
     private var wrapped: ContentHandler? = null
     private var text: Editable? = null
@@ -25,7 +26,6 @@ class HtmlParser constructor(private val handler: LinkHandler) : Html.TagHandler
         }
     }
 
-    @Throws(SAXException::class)
     override fun startElement(
         uri: String,
         localName: String,
@@ -40,7 +40,6 @@ class HtmlParser constructor(private val handler: LinkHandler) : Html.TagHandler
         }
     }
 
-    @Throws(SAXException::class)
     override fun endElement(uri: String, localName: String, qName: String) {
         if (!tagStatus.removeLast()) {
             wrapped?.endElement(uri, localName, qName)
@@ -52,42 +51,34 @@ class HtmlParser constructor(private val handler: LinkHandler) : Html.TagHandler
         wrapped?.setDocumentLocator(locator)
     }
 
-    @Throws(SAXException::class)
     override fun startDocument() {
         wrapped?.startDocument()
     }
 
-    @Throws(SAXException::class)
     override fun endDocument() {
         wrapped?.endDocument()
     }
 
-    @Throws(SAXException::class)
     override fun startPrefixMapping(prefix: String, uri: String) {
         wrapped?.startPrefixMapping(prefix, uri)
     }
 
-    @Throws(SAXException::class)
     override fun endPrefixMapping(prefix: String) {
         wrapped?.endPrefixMapping(prefix)
     }
 
-    @Throws(SAXException::class)
     override fun characters(ch: CharArray, start: Int, length: Int) {
         wrapped?.characters(ch, start, length)
     }
 
-    @Throws(SAXException::class)
     override fun ignorableWhitespace(ch: CharArray, start: Int, length: Int) {
         wrapped?.ignorableWhitespace(ch, start, length)
     }
 
-    @Throws(SAXException::class)
     override fun processingInstruction(target: String, data: String) {
         wrapped?.processingInstruction(target, data)
     }
 
-    @Throws(SAXException::class)
     override fun skippedEntity(name: String) {
         wrapped?.skippedEntity(name)
     }
