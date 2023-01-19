@@ -93,10 +93,7 @@ object PlaylistsHelper {
             }.last().playlist.id.toString()
         }
         val response = try {
-            RetrofitInstance.authApi.createPlaylist(
-                token,
-                Playlists(name = playlistName)
-            )
+            RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName))
         } catch (e: IOException) {
             appContext.toastFromMainThread(R.string.unknown_error)
             return null
@@ -107,7 +104,7 @@ object PlaylistsHelper {
         }
         if (response.playlistId != null) {
             appContext.toastFromMainThread(R.string.playlistCreated)
-            return response.playlistId!!
+            return response.playlistId
         }
         return null
     }
@@ -141,13 +138,8 @@ object PlaylistsHelper {
             return true
         }
 
-        return RetrofitInstance.authApi.addToPlaylist(
-            token,
-            PlaylistId(
-                playlistId = playlistId,
-                videoIds = videos.toList().map { it.url!!.toID() }
-            )
-        ).message == "ok"
+        val playlist = PlaylistId(playlistId, videoIds = videos.map { it.url!!.toID() })
+        return RetrofitInstance.authApi.addToPlaylist(token, playlist).message == "ok"
     }
 
     suspend fun renamePlaylist(playlistId: String, newName: String): Boolean {
@@ -164,10 +156,7 @@ object PlaylistsHelper {
 
         return RetrofitInstance.authApi.renamePlaylist(
             token,
-            PlaylistId(
-                playlistId = playlistId,
-                newName = newName
-            )
+            PlaylistId(playlistId, newName = newName)
         ).playlistId != null
     }
 
@@ -251,8 +240,8 @@ object PlaylistsHelper {
                             name = list.name,
                             type = "playlist",
                             visibility = "private",
-                            videos = list.relatedStreams.orEmpty().map {
-                                YOUTUBE_FRONTEND_URL + "/watch?v=" + it.url!!.toID()
+                            videos = list.relatedStreams.map {
+                                "$YOUTUBE_FRONTEND_URL/watch?v=${it.url!!.toID()}"
                             }
                         )
                     )
@@ -278,19 +267,13 @@ object PlaylistsHelper {
                 val newPlaylist = createPlaylist(playlist.name ?: "Unknown name", appContext)
                 newPlaylist ?: return@launch
 
-                addToPlaylist(
-                    newPlaylist,
-                    *playlist.relatedStreams.orEmpty().toTypedArray()
-                )
+                addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
 
                 var nextPage = playlist.nextpage
                 while (nextPage != null) {
                     nextPage = try {
                         RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage).apply {
-                            addToPlaylist(
-                                newPlaylist,
-                                *relatedStreams.orEmpty().toTypedArray()
-                            )
+                            addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
                         }.nextpage
                     } catch (e: Exception) {
                         return@launch

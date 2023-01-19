@@ -1,12 +1,12 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class Playlists(
-    var id: String? = null,
-    var name: String? = null,
-    var shortDescription: String? = null,
-    var thumbnail: String? = null,
-    var videos: Long? = null
+    val id: String? = null,
+    val name: String? = null,
+    val shortDescription: String? = null,
+    val thumbnail: String? = null,
+    val videos: Long = 0
 )
