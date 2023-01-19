@@ -17,18 +17,21 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.text.format.DateUtils
+import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -75,7 +78,6 @@ import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setAspectRatio
-import com.github.libretube.ui.extensions.setFormattedHtml
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.models.CommentsViewModel
@@ -86,7 +88,9 @@ import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.DashHelper
 import com.github.libretube.util.DataSaverMode
+import com.github.libretube.util.HtmlParser
 import com.github.libretube.util.ImageHelper
+import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
@@ -997,14 +1001,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // set video description
         val description = streams.description!!
 
-        // detect whether the description is html formatted
-        if (description.contains("<") && description.contains(">")) {
-            binding.playerDescription.setFormattedHtml(description)
-        } else {
-            // Links can be present as plain text
-            binding.playerDescription.autoLinkMask = Linkify.WEB_URLS
-            binding.playerDescription.text = description
-        }
+        setupDescription(binding.playerDescription, description)
 
         binding.playerChannel.setOnClickListener {
             val activity = view?.context as MainActivity
@@ -1035,6 +1032,53 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         playerBinding.skipNext.setOnClickListener {
             playNextVideo()
+        }
+    }
+
+    /**
+     * Set up the description text with video links and timestamps
+     */
+    private fun setupDescription(
+        descTextView: TextView,
+        description: String
+    ) {
+        // detect whether the description is html formatted
+        if (description.contains("<") && description.contains(">")) {
+            descTextView.movementMethod = LinkMovementMethod.getInstance()
+            descTextView.text = HtmlCompat.fromHtml(
+                description,
+                HtmlCompat.FROM_HTML_MODE_LEGACY,
+                null,
+                HtmlParser(LinkHandler { link -> handleLink(link) })
+            )
+        } else {
+            // Links can be present as plain text
+            descTextView.autoLinkMask = Linkify.WEB_URLS
+            descTextView.text = description
+        }
+    }
+
+    /**
+     * Handle a link clicked in the description
+     */
+    private fun handleLink(link: String) {
+        val uri = Uri.parse(link)
+        // get video id if the link is a valid youtube video link
+        val videoId = TextUtils.getVideoIdFromUri(link)
+        if (videoId.isNullOrEmpty()) {
+            // not a youtube video link, thus handle normally
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+        // check if the video is the current video and has a valid time
+        if (videoId == this.videoId) {
+            // try finding the time stamp of the url and seek to it if found
+            TextUtils.getTimeInSeconds(uri)?.let {
+                exoPlayer.seekTo(it * 1000)
+            }
+        } else {
+            // youtube video link without time or not the current video, thus open new player
+            playNextVideo(videoId)
         }
     }
 
