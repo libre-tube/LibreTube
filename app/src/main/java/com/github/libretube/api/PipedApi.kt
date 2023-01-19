@@ -15,6 +15,7 @@ import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.api.obj.Subscribe
+import com.github.libretube.api.obj.Subscribed
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.api.obj.Token
 import retrofit2.http.Body
@@ -114,7 +115,7 @@ interface PipedApi {
     suspend fun isSubscribed(
         @Query("channelId") channelId: String,
         @Header("Authorization") token: String
-    ): com.github.libretube.api.obj.Subscribed
+    ): Subscribed
 
     @GET("subscriptions")
     suspend fun subscriptions(@Header("Authorization") token: String): List<Subscription>
