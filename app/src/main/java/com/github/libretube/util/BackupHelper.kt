@@ -13,7 +13,6 @@ import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
 import kotlinx.serialization.json.booleanOrNull
-import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import kotlinx.serialization.json.floatOrNull
@@ -92,23 +91,26 @@ class BackupHelper(private val context: Context) {
             clear()
 
             // decide for each preference which type it is and save it to the preferences
-            preferences.forEach {
-                val value = it.value.booleanOrNull
-                    ?: it.value.floatOrNull
-                    ?: it.value.longOrNull
-                    ?: it.value.intOrNull
-                    ?: it.value.contentOrNull
+            preferences.forEach { (key, jsonValue) ->
+                val value = if (jsonValue.isString) {
+                    jsonValue.content
+                } else {
+                    jsonValue.booleanOrNull
+                        ?: jsonValue.intOrNull
+                        ?: jsonValue.longOrNull
+                        ?: jsonValue.floatOrNull
+                }
                 when (value) {
-                    is Boolean -> putBoolean(it.key, value)
-                    is Float -> putFloat(it.key, value)
-                    is Long -> putLong(it.key, value)
+                    is Boolean -> putBoolean(key, value)
+                    is Float -> putFloat(key, value)
+                    is Long -> putLong(key, value)
                     is Int -> {
-                        when (it.key) {
-                            PreferenceKeys.START_FRAGMENT -> putInt(it.key, value)
-                            else -> putLong(it.key, value.toLong())
+                        when (key) {
+                            PreferenceKeys.START_FRAGMENT -> putInt(key, value)
+                            else -> putLong(key, value.toLong())
                         }
                     }
-                    is String -> putString(it.key, value)
+                    is String -> putString(key, value)
                 }
             }
         }
