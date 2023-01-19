@@ -29,7 +29,7 @@ class UpdateDialog(
                     intent.putExtra("downloadUrl", downloadUrl)
                     context?.startService(intent)
                 } else {
-                    val uri = Uri.parse(updateInfo.html_url)
+                    val uri = Uri.parse(updateInfo.htmlUrl)
                     val intent = Intent(Intent.ACTION_VIEW).setData(uri)
                     startActivity(intent)
                 }
@@ -40,8 +40,10 @@ class UpdateDialog(
     private fun getDownloadUrl(updateInfo: UpdateInfo): String? {
         val supportedArchitectures = Build.SUPPORTED_ABIS
         supportedArchitectures.forEach { arch ->
-            updateInfo.assets?.forEach { asset ->
-                if (asset.name?.contains(arch) == true) return asset.browser_download_url
+            updateInfo.assets.forEach { asset ->
+                if (asset.name.contains(arch)) {
+                    return asset.browserDownloadUrl
+                }
             }
         }
         return null
