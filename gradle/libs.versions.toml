@@ -11,7 +11,6 @@ espresso = "3.5.1"
 workRuntime = "2.7.1"
 exoplayer = "2.18.2"
 retrofit = "2.9.0"
-jacksonAnnotations = "2.13.4"
 desugaring = "1.2.2"
 cronetEmbedded = "108.5359.79"
 cronetOkHttp = "0.1.0"
@@ -36,8 +35,6 @@ androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", vers
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-square-retrofit-converterJackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
-jacksonAnnotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jacksonAnnotations" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
 exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
 exoplayer-dash = { group = "com.google.android.exoplayer", name = "exoplayer-dash", version.ref = "exoplayer" }

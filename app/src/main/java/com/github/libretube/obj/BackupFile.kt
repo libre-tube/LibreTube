@@ -7,14 +7,16 @@ import com.github.libretube.db.obj.PlaylistBookmark
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.db.obj.WatchPosition
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class BackupFile(
-    var watchHistory: List<WatchHistoryItem>? = null,
-    var watchPositions: List<WatchPosition>? = null,
-    var searchHistory: List<SearchHistoryItem>? = null,
-    var localSubscriptions: List<LocalSubscription>? = null,
-    var customInstances: List<CustomInstance>? = null,
-    var playlistBookmarks: List<PlaylistBookmark>? = null,
-    var localPlaylists: List<LocalPlaylistWithVideos>? = null,
-    var preferences: List<PreferenceItem>? = null
+    var watchHistory: List<WatchHistoryItem> = emptyList(),
+    var watchPositions: List<WatchPosition> = emptyList(),
+    var searchHistory: List<SearchHistoryItem> = emptyList(),
+    var localSubscriptions: List<LocalSubscription> = emptyList(),
+    var customInstances: List<CustomInstance> = emptyList(),
+    var playlistBookmarks: List<PlaylistBookmark> = emptyList(),
+    var localPlaylists: List<LocalPlaylistWithVideos> = emptyList(),
+    var preferences: List<PreferenceItem> = emptyList()
 )

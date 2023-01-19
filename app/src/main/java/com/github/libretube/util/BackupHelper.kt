@@ -2,15 +2,23 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
-import java.io.FileOutputStream
+import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.decodeFromStream
+import kotlinx.serialization.json.encodeToStream
+import kotlinx.serialization.json.floatOrNull
+import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.longOrNull
 
 /**
  * Backup and restore the preferences
@@ -19,18 +27,15 @@ class BackupHelper(private val context: Context) {
     /**
      * Write a [BackupFile] containing the database content as well as the preferences
      */
-    fun advancedBackup(uri: Uri?, backupFile: BackupFile) {
-        if (uri == null) return
-        try {
-            context.contentResolver.openFileDescriptor(uri, "w")?.use {
-                FileOutputStream(it.fileDescriptor).use { fileOutputStream ->
-                    fileOutputStream.write(
-                        ObjectMapper().writeValueAsBytes(backupFile)
-                    )
+    fun createAdvancedBackup(uri: Uri?, backupFile: BackupFile) {
+        uri?.let {
+            try {
+                context.contentResolver.openOutputStream(it)?.use { outputStream ->
+                    JsonHelper.json.encodeToStream(backupFile, outputStream)
                 }
+            } catch (e: Exception) {
+                Log.e(TAG(), "Error while writing backup: $e")
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
@@ -38,36 +43,33 @@ class BackupHelper(private val context: Context) {
      * Restore data from a [BackupFile]
      */
     fun restoreAdvancedBackup(uri: Uri?) {
-        if (uri == null) return
-
-        val mapper = ObjectMapper()
-        val json = context.contentResolver.openInputStream(uri)?.use {
-            it.bufferedReader().use { reader -> reader.readText() }
-        }.orEmpty()
-
-        val backupFile = mapper.readValue(json, BackupFile::class.java)
+        val backupFile = uri?.let {
+            context.contentResolver.openInputStream(it)?.use { inputStream ->
+                JsonHelper.json.decodeFromStream<BackupFile>(inputStream)
+            }
+        } ?: return
 
         query {
             Database.watchHistoryDao().insertAll(
-                *backupFile.watchHistory.orEmpty().toTypedArray()
+                *backupFile.watchHistory.toTypedArray()
             )
             Database.searchHistoryDao().insertAll(
-                *backupFile.searchHistory.orEmpty().toTypedArray()
+                *backupFile.searchHistory.toTypedArray()
             )
             Database.watchPositionDao().insertAll(
-                *backupFile.watchPositions.orEmpty().toTypedArray()
+                *backupFile.watchPositions.toTypedArray()
             )
             Database.localSubscriptionDao().insertAll(
-                *backupFile.localSubscriptions.orEmpty().toTypedArray()
+                *backupFile.localSubscriptions.toTypedArray()
             )
             Database.customInstanceDao().insertAll(
-                *backupFile.customInstances.orEmpty().toTypedArray()
+                *backupFile.customInstances.toTypedArray()
             )
             Database.playlistBookmarkDao().insertAll(
-                *backupFile.playlistBookmarks.orEmpty().toTypedArray()
+                *backupFile.playlistBookmarks.toTypedArray()
             )
 
-            backupFile.localPlaylists?.forEach {
+            backupFile.localPlaylists.forEach {
                 Database.localPlaylistsDao().createPlaylist(it.playlist)
                 val playlistId = Database.localPlaylistsDao().getAll().last().playlist.id
                 it.videos.forEach {
@@ -91,17 +93,22 @@ class BackupHelper(private val context: Context) {
 
             // decide for each preference which type it is and save it to the preferences
             preferences.forEach {
-                when (it.value) {
-                    is Boolean -> putBoolean(it.key, it.value)
-                    is Float -> putFloat(it.key, it.value)
-                    is Long -> putLong(it.key, it.value)
+                val value = it.value.booleanOrNull
+                    ?: it.value.floatOrNull
+                    ?: it.value.longOrNull
+                    ?: it.value.intOrNull
+                    ?: it.value.contentOrNull
+                when (value) {
+                    is Boolean -> putBoolean(it.key, value)
+                    is Float -> putFloat(it.key, value)
+                    is Long -> putLong(it.key, value)
                     is Int -> {
                         when (it.key) {
-                            PreferenceKeys.START_FRAGMENT -> putInt(it.key, it.value)
-                            else -> putLong(it.key, it.value.toLong())
+                            PreferenceKeys.START_FRAGMENT -> putInt(it.key, value)
+                            else -> putLong(it.key, value.toLong())
                         }
                     }
-                    is String -> putString(it.key, it.value)
+                    is String -> putString(it.key, value)
                 }
             }
         }

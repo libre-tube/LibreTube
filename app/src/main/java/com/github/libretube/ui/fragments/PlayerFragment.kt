@@ -34,9 +34,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.PipedStream
@@ -117,6 +117,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.encodeToString
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
@@ -744,7 +745,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 segmentData =
                     RetrofitInstance.api.getSegments(
                         videoId!!,
-                        ObjectMapper().writeValueAsString(categories)
+                        JsonHelper.json.encodeToString(categories)
                     )
                 if (segmentData.segments.isEmpty()) return@runCatching
                 playerBinding.exoProgress.setSegments(segmentData.segments)

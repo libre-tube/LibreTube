@@ -3,6 +3,8 @@ package com.github.libretube.obj.update
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
 
 @Serializable
 data class Asset(
@@ -11,7 +13,7 @@ data class Asset(
     @SerialName("created_at") val createdAt: Instant,
     @SerialName("download_count") val downloadCount: Int,
     val id: Int,
-    val label: String? = null,
+    val label: JsonElement = JsonNull,
     val name: String,
     @SerialName("node_id") val nodeId: String,
     val size: Int,
