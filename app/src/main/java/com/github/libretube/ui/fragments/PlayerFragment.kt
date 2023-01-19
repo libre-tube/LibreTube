@@ -99,13 +99,11 @@ import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.SeekbarPreviewListener
 import com.github.libretube.util.TextUtils
 import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaItem.SubtitleConfiguration
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
@@ -1335,24 +1333,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             cronetDataSourceFactory
         )
 
-        // handles the audio focus
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(C.USAGE_MEDIA)
-            .setContentType(C.AUDIO_CONTENT_TYPE_MOVIE)
-            .build()
-
-        // handles the duration of media to retain in the buffer prior to the current playback position (for fast backward seeking)
-        val loadControl = DefaultLoadControl.Builder()
-            // cache the last three minutes
-            .setBackBuffer(1000 * 60 * 3, true)
-            .setBufferDurationsMs(
-                1000 * 10, // exo default is 50s
-                PlayerHelper.bufferingGoal,
-                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
-                DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
-            )
-            .build()
-
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
 
@@ -1364,12 +1344,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         exoPlayer = ExoPlayer.Builder(requireContext())
             .setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory))
-            .setLoadControl(loadControl)
+            .setLoadControl(PlayerHelper.getLoadControl())
             .setTrackSelector(trackSelector)
             .setHandleAudioBecomingNoisy(true)
+            .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .build()
-
-        exoPlayer.setAudioAttributes(audioAttributes, true)
     }
 
     /**

@@ -68,6 +68,8 @@ class OfflinePlayerActivity : BaseActivity() {
         player = ExoPlayer.Builder(this)
             .setHandleAudioBecomingNoisy(true)
             .setTrackSelector(trackSelector)
+            .setLoadControl(PlayerHelper.getLoadControl())
+            .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .build().apply {
                 addListener(object : Player.Listener {
                     override fun onEvents(player: Player, events: Player.Events) {
