@@ -1,9 +1,9 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class Login(
-    val username: String? = null,
-    val password: String? = null
+    val username: String,
+    val password: String
 )
