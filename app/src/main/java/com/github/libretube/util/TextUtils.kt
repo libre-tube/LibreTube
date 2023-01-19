@@ -1,5 +1,6 @@
 package com.github.libretube.util
 
+import android.net.Uri
 import java.net.URL
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -51,5 +52,53 @@ object TextUtils {
 
         val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale)
         return dateObj.format(formatter)
+    }
+
+    /**
+     * Get time in seconds from a youtube video link
+     */
+    fun getTimeInSeconds(uri: Uri): Long? {
+        var time = uri.getQueryParameter("t") ?: return -1L
+
+        var timeInSeconds: Long? = null
+
+        // Find all spans containing hours, minutes or seconds
+        listOf(Pair("h", 60 * 60), Pair("m", 60), Pair("s", 1)).forEach { (separator, timeFactor) ->
+            if (time.contains(separator)) {
+                time.substringBefore(separator).toLongOrNull()?.let {
+                    timeInSeconds = (timeInSeconds ?: 0L) + it * timeFactor
+                    time = time.substringAfter(separator)
+                }
+            }
+        }
+
+        // Time may not contain h, m or s. In that case, it is just a number of seconds
+        if (timeInSeconds == null) {
+            time.toLongOrNull()?.let {
+                timeInSeconds = it
+            }
+        }
+
+        return timeInSeconds
+    }
+
+    /**
+     * Get video id if the link is a valid youtube video link
+     */
+    fun getVideoIdFromUri(link: String): String? {
+        val uri = Uri.parse(link)
+
+        if (link.contains("youtube.com")) {
+            // the link may be in an unsupported format, so we should try/catch it
+            return try {
+                uri.getQueryParameter("v")
+            } catch (e: Exception) {
+                null
+            }
+        } else if (link.contains("youtu.be")) {
+            return uri.lastPathSegment
+        }
+
+        return null
     }
 }

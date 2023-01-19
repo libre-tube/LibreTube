@@ -113,15 +113,15 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
@@ -1066,91 +1066,22 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun handleLink(link: String) {
         val uri = Uri.parse(link)
         // get video id if the link is a valid youtube video link
-        val videoId = getVideoIdIfVideoLink(link, uri)
-        if (!videoId.isNullOrEmpty()) {
-            // check if the video is the current video and has a valid time
-            if (videoId == this.videoId) {
-                val timeInMillis = getTimeInMillis(uri)
-                if (timeInMillis != -1L) {
-                    // seek to the time
-                    exoPlayer.seekTo(timeInMillis)
-                }
-                // else do nothing as the video is already playing
-            } else {
-                // youtube video link without time or not the current video
-                // open new player
-                playNextVideo(videoId)
-            }
-        } else {
-            // not a youtube video link
-            // handle normally
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        val videoId = TextUtils.getVideoIdFromUri(link)
+        if (videoId.isNullOrEmpty()) {
+            // not a youtube video link, thus handle normally
+            val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-    }
-
-    /**
-     * Get video id if the link is a valid youtube video link
-     */
-    private fun getVideoIdIfVideoLink(link: String, uri: Uri): String? {
-        if (link.contains("youtube.com")) {
-            // the link may be in an unsupported format, so we should try/catch it
-            return try {
-                uri.getQueryParameter("v")
-            } catch (e: Exception) {
-                null
+        // check if the video is the current video and has a valid time
+        if (videoId == this.videoId) {
+            // try finding the time stamp of the url and seek to it if found
+            TextUtils.getTimeInSeconds(uri)?.let {
+                exoPlayer.seekTo(it)
             }
-        } else if (link.contains("youtu.be")) {
-            return uri.lastPathSegment
+        } else {
+            // youtube video link without time or not the current video, thus open new player
+            playNextVideo(videoId)
         }
-
-        return null
-    }
-
-    /**
-     * Get time in milliseconds from a youtube video link
-     */
-    private fun getTimeInMillis(uri: Uri): Long {
-        var time = uri.getQueryParameter("t") ?: return -1L
-
-        var timeInSeconds = 0L
-        var found = false
-
-        // Check if the time has hours
-        if (time.contains("h")) {
-            time.substringBefore("h").toLongOrNull()?.let {
-                timeInSeconds += it * 60 * 60
-                time = time.substringAfter("h")
-                found = true
-            }
-        }
-
-        // Check if the time has minutes
-        if (time.contains("m")) {
-            time.substringBefore("m").toLongOrNull()?.let {
-                timeInSeconds += it * 60
-                time = time.substringAfter("m")
-                found = true
-            }
-        }
-
-        // Check if the time has seconds
-        if (time.contains("s")) {
-            time.substringBefore("s").toLongOrNull()?.let {
-                timeInSeconds += it
-                found = true
-            }
-        }
-
-        // Time may not contain h, m or s. In that case, it is just a number of seconds
-        if (!found) {
-            time.toLongOrNull()?.let {
-                timeInSeconds += it
-                found = true
-            }
-        }
-
-        return if (found) timeInSeconds * 1000 else -1
     }
 
     /**
