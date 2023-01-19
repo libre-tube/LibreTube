@@ -111,15 +111,15 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.chromium.net.CronetEngine
 import retrofit2.HttpException
-import java.io.IOException
-import java.util.*
-import java.util.concurrent.Executors
-import kotlin.math.abs
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
