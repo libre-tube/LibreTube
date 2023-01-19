@@ -1,6 +1,7 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.libretube.R
@@ -41,7 +42,7 @@ class AdvancedSettings : BasePreferenceFragment() {
                 // clear login token
                 PreferenceHelper.setToken("")
 
-                activity?.recreate()
+                ActivityCompat.recreate(requireActivity())
             }
             .show()
     }

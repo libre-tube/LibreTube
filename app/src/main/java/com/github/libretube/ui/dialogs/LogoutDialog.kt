@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogLogoutBinding
@@ -25,7 +26,7 @@ class LogoutDialog : DialogFragment() {
             Toast.makeText(context, R.string.loggedout, Toast.LENGTH_SHORT).show()
             PreferenceHelper.setToken("")
             dialog?.dismiss()
-            activity?.recreate()
+            ActivityCompat.recreate(requireActivity())
         }
 
         return MaterialAlertDialogBuilder(requireContext())

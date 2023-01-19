@@ -2,6 +2,7 @@ package com.github.libretube.ui.preferences
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -37,7 +38,7 @@ class InstanceSettings : BasePreferenceFragment() {
                 logout()
             }
             RetrofitInstance.lazyMgr.reset()
-            activity?.recreate()
+            ActivityCompat.recreate(requireActivity())
             true
         }
 
@@ -52,7 +53,7 @@ class InstanceSettings : BasePreferenceFragment() {
             RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
             logout()
-            activity?.recreate()
+            ActivityCompat.recreate(requireActivity())
             true
         }
 
@@ -68,7 +69,7 @@ class InstanceSettings : BasePreferenceFragment() {
                 authInstance.value
             }
             RetrofitInstance.lazyMgr.reset()
-            activity?.recreate()
+            ActivityCompat.recreate(requireActivity())
             true
         }
 
@@ -84,7 +85,7 @@ class InstanceSettings : BasePreferenceFragment() {
             awaitQuery {
                 Database.customInstanceDao().deleteAll()
             }
-            activity?.recreate()
+            ActivityCompat.recreate(requireActivity())
             true
         }
 

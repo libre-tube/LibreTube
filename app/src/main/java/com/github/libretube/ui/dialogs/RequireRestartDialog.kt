@@ -2,6 +2,7 @@ package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.util.NavigationHelper
@@ -14,7 +15,7 @@ class RequireRestartDialog : DialogFragment() {
             .setTitle(R.string.require_restart)
             .setMessage(R.string.require_restart_message)
             .setPositiveButton(R.string.okay) { _, _ ->
-                activity?.recreate()
+                ActivityCompat.recreate(requireActivity())
                 NavigationHelper.restartMainActivity(requireContext())
             }
             .setNegativeButton(R.string.cancel, null)
