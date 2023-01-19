@@ -98,7 +98,7 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
-            val videoId = item.url!!.toID()
+            val videoId = item.url.toID()
             val videoName = item.title!!
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(videoId, videoName)
@@ -135,12 +135,12 @@ class SearchAdapter(
             }
 
             root.setOnLongClickListener {
-                ChannelOptionsBottomSheet(item.url!!.toID(), item.name)
+                ChannelOptionsBottomSheet(item.url.toID(), item.name)
                     .show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
 
-            binding.searchSubButton.setupSubscriptionButton(item.url?.toID(), item.name?.toID())
+            binding.searchSubButton.setupSubscriptionButton(item.url.toID(), item.name?.toID())
         }
     }
 
@@ -158,7 +158,7 @@ class SearchAdapter(
             }
             deletePlaylist.visibility = View.GONE
             root.setOnLongClickListener {
-                val playlistId = item.url!!.toID()
+                val playlistId = item.url.toID()
                 val playlistName = item.name!!
                 PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
                     .show(

@@ -1,9 +1,9 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class ChannelTab(
-    val name: String? = null,
-    val data: String? = null
+    val name: String,
+    val data: String
 )

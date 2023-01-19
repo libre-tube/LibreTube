@@ -142,7 +142,7 @@ class ChannelFragment : BaseFragment() {
 
                 binding.channelShare.setOnClickListener {
                     val shareDialog = ShareDialog(
-                        response.id!!.toID(),
+                        response.id.toID(),
                         ShareObjectType.CHANNEL,
                         shareData
                     )
@@ -169,10 +169,10 @@ class ChannelFragment : BaseFragment() {
                     R.string.subscribers,
                     response.subscriberCount.formatShort()
                 )
-                if (response.description?.trim() == "") {
+                if (response.description.isBlank()) {
                     binding.channelDescription.visibility = View.GONE
                 } else {
-                    binding.channelDescription.text = response.description?.trim()
+                    binding.channelDescription.text = response.description.trim()
                 }
 
                 binding.channelDescription.setOnClickListener {
@@ -186,13 +186,13 @@ class ChannelFragment : BaseFragment() {
 
                 // recyclerview of the videos by the channel
                 channelAdapter = VideosAdapter(
-                    response.relatedStreams.orEmpty().toMutableList(),
+                    response.relatedStreams.toMutableList(),
                     forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
                 )
                 binding.channelRecView.adapter = channelAdapter
             }
 
-            response.tabs?.let { setupTabs(it) }
+            setupTabs(response.tabs)
         }
     }
 
@@ -230,16 +230,13 @@ class ChannelFragment : BaseFragment() {
 
     private fun loadTab(tab: ChannelTab) {
         scope.launch {
-            tab.data ?: return@launch
             val response = try {
                 RetrofitInstance.api.getChannelTab(tab.data)
             } catch (e: Exception) {
                 return@launch
             }
 
-            val adapter = SearchAdapter(
-                response.content.toMutableList()
-            )
+            val adapter = SearchAdapter(response.content.toMutableList())
 
             runOnUiThread {
                 binding.channelRecView.adapter = adapter
@@ -275,7 +272,7 @@ class ChannelFragment : BaseFragment() {
                     return@launchWhenCreated
                 }
                 nextPage = response.nextpage
-                channelAdapter?.insertItems(response.relatedStreams.orEmpty())
+                channelAdapter?.insertItems(response.relatedStreams)
                 isLoading = false
                 binding.channelRefresh.isRefreshing = false
             }
@@ -291,9 +288,9 @@ class ChannelFragment : BaseFragment() {
     ) {
         scope.launch {
             val newContent = try {
-                RetrofitInstance.api.getChannelTab(tab.data ?: "", nextPage)
+                RetrofitInstance.api.getChannelTab(tab.data, nextPage)
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e(TAG(), "Exception: $e")
                 null
             }
             onNewNextPage.invoke(newContent?.nextpage)

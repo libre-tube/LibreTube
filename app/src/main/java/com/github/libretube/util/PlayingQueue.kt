@@ -147,7 +147,7 @@ object PlayingQueue {
         scope.launch {
             while (channelNextPage != null) {
                 RetrofitInstance.api.getChannelNextPage(channelId, nextPage!!).apply {
-                    add(*relatedStreams.orEmpty().toTypedArray())
+                    add(*relatedStreams.toTypedArray())
                     channelNextPage = this.nextpage
                 }
             }
@@ -158,7 +158,7 @@ object PlayingQueue {
         scope.launch {
             runCatching {
                 val channel = RetrofitInstance.api.getChannel(channelId)
-                add(*channel.relatedStreams.orEmpty().toTypedArray())
+                add(*channel.relatedStreams.toTypedArray())
                 updateCurrent(newCurrentStream)
                 if (channel.nextpage == null) return@launch
                 fetchMoreFromChannel(channelId, channel.nextpage)

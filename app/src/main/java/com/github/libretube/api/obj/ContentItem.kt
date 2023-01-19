@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ContentItem(
-    val url: String? = null,
-    val type: String? = null,
-    val thumbnail: String? = null,
+    val url: String,
+    val type: String,
+    val thumbnail: String,
     val uploaderName: String? = null,
     val uploaded: Long? = null,
     val shortDescription: String? = null,
