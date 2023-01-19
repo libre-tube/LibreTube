@@ -189,16 +189,16 @@ class MainActivity : BaseActivity() {
         if (viewGroup == null || viewGroup.childCount == 0) return
 
         viewGroup.children.forEach {
-            (it as? ScrollView)?.let {
-                it.smoothScrollTo(0, 0)
+            (it as? ScrollView)?.let { scrollView ->
+                scrollView.smoothScrollTo(0, 0)
                 return
             }
-            (it as? NestedScrollView)?.let {
-                it.smoothScrollTo(0, 0)
+            (it as? NestedScrollView)?.let { scrollView ->
+                scrollView.smoothScrollTo(0, 0)
                 return
             }
-            (it as? RecyclerView)?.let {
-                it.smoothScrollToPosition(0)
+            (it as? RecyclerView)?.let { recyclerView ->
+                recyclerView.smoothScrollToPosition(0)
                 return
             }
             tryScrollToTop(it as? ViewGroup)
@@ -373,9 +373,9 @@ class MainActivity : BaseActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
             isInPictureInPictureMode
         ) {
-            moveTaskToBack(true)
-            intent?.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            startActivity(intent)
+            val nIntent = Intent(this, MainActivity::class.java)
+            nIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(nIntent)
         }
 
         if (intent?.getBooleanExtra(IntentData.openAudioPlayer, false) == true) {
