@@ -205,6 +205,7 @@ internal class CustomExoPlayerView(
         // remove the callback to hide the controller
         handler.removeCallbacks(hideControllerRunnable)
         super.hideController()
+        (context as? MainActivity)?.windowHelper?.hideStatusBar()
     }
 
     override fun showController() {
