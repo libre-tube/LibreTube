@@ -72,6 +72,7 @@
             android:name=".ui.activities.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:exported="true"
+            android:launchMode="singleTask"
             android:screenOrientation="user"
             android:supportsPictureInPicture="true"
             android:windowSoftInputMode="adjustPan">
