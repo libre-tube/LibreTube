@@ -446,4 +446,8 @@
     <string name="resume">Continuar</string>
     <string name="download_completed">Descarga terminada</string>
     <string name="concurrent_downloads_limit_reached">Atingiu o limite máximo de descargas em simultâneo.</string>
+    <string name="help">Ajuda</string>
+    <string name="faq">FAQ</string>
+    <string name="sleep_timer">Temporizador de sono</string>
+    <string name="skip_silence">Ignorar o silêncio</string>
 </resources>
