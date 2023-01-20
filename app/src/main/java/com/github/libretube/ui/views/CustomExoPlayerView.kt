@@ -591,6 +591,16 @@ internal class CustomExoPlayerView(
             it.layoutParams = params
         }
 
+        // add padding to the top bar to not overlap the status bar
+        binding.topBar.let {
+            setPadding(
+                it.paddingLeft,
+                (if (newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE) 25 else 5).toPixel().toInt(),
+                it.paddingRight,
+                it.paddingBottom
+            )
+        }
+
         // don't add extra padding if there's no cutout
         if ((context as? MainActivity)?.windowHelper?.hasCutout() == false) return
 
