@@ -1503,7 +1503,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     fun getPipParams(): PictureInPictureParams = PictureInPictureParams.Builder()
         .setActions(PlayerHelper.getPiPModeActions(requireActivity(), exoPlayer.isPlaying))
         .apply {
-            if (SDK_INT >= Build.VERSION_CODES.S) {
+            if (SDK_INT >= Build.VERSION_CODES.S && PlayerHelper.pipEnabled) {
                 setAutoEnterEnabled(true)
             }
             if (exoPlayer.isPlaying) {
