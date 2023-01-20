@@ -35,6 +35,7 @@ import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -1510,9 +1511,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
-        mainActivity.supportFragmentManager.beginTransaction()
-            .remove(this)
-            .commit()
+        mainActivity.supportFragmentManager.commit {
+            remove(this@PlayerFragment)
+        }
 
         onDestroy()
     }

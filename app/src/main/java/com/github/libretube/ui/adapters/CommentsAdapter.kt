@@ -1,17 +1,19 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -26,6 +28,7 @@ import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
 import com.github.libretube.util.TextUtils
+import kotlinx.serialization.encodeToString
 
 class CommentsAdapter(
     private val fragment: Fragment?,
@@ -94,21 +97,15 @@ class CommentsAdapter(
             }
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
-                val repliesFragment = CommentsRepliesFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(IntentData.videoId, videoId)
-                        putString(
-                            IntentData.comment,
-                            JsonHelper.json.encodeToString(Comment.serializer(), comment)
-                        )
-                    }
-                }
                 root.setOnClickListener {
-                    fragment!!.parentFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.commentFragContainer, repliesFragment)
-                        .addToBackStack(null)
-                        .commit()
+                    val args = bundleOf(
+                        IntentData.videoId to videoId,
+                        IntentData.comment to JsonHelper.json.encodeToString(comment)
+                    )
+                    fragment!!.parentFragmentManager.commit {
+                        replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
+                        addToBackStack(null)
+                    }
                 }
             }
 

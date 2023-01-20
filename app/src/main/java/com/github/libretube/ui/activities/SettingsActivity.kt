@@ -24,10 +24,9 @@ class SettingsActivity : BaseActivity() {
         }
 
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.settings, MainSettings())
-                .commit()
+            supportFragmentManager.commit {
+                replace<MainSettings>(R.id.settings)
+            }
         }
 
         // new way of dealing with back presses instead of onBackPressed()
