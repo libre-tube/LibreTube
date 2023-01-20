@@ -14,6 +14,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -27,6 +28,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackSpeedSheet
 import com.github.libretube.util.AudioHelper
@@ -61,6 +63,7 @@ internal class CustomExoPlayerView(
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
+    private var playerViewModel: PlayerViewModel? = null
 
     /**
      * Objects from the parent fragment
@@ -79,6 +82,9 @@ internal class CustomExoPlayerView(
 
     private var resizeModePref = PlayerHelper.resizeModePref
 
+    private val windowHelper
+        get() = (context as? MainActivity)?.windowHelper
+
     private val supportFragmentManager
         get() = (context as BaseActivity).supportFragmentManager
 
@@ -89,16 +95,23 @@ internal class CustomExoPlayerView(
     // saved to only load the playback speed once (for the first video)
     private var playbackPrefSet = false
 
+    private val hideControllerRunnable = Runnable {
+        hideController()
+    }
+
     fun initialize(
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
-        trackSelector: TrackSelector?
+        trackSelector: TrackSelector?,
+        playerViewModel: PlayerViewModel? = null,
+        viewLifecycleOwner: LifecycleOwner? = null
     ) {
         this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
         this.gestureViewBinding = playerGestureControlsViewBinding
+        this.playerViewModel = playerViewModel
         this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
@@ -110,6 +123,9 @@ internal class CustomExoPlayerView(
         initRewindAndForward()
         applyCaptionsStyle()
         initializeAdvancedOptions(context)
+
+        // don't let the player view hide its controls automatically
+        controllerShowTimeoutMs = -1
 
         if (!playbackPrefSet) {
             player?.playbackParameters = PlaybackParameters(
@@ -179,6 +195,14 @@ internal class CustomExoPlayerView(
                 }
             }
         })
+
+        playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
+            if (isFullscreen) {
+                windowHelper?.setFullscreen()
+            } else {
+                windowHelper?.unsetFullscreen()
+            }
+        }
     }
 
     private fun updatePlayPauseButton() {
@@ -195,11 +219,24 @@ internal class CustomExoPlayerView(
     }
 
     override fun hideController() {
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // hide all the navigation bars that potentially could have been reopened manually ba the user
-            (context as? MainActivity)?.windowHelper?.setFullscreen()
-        }
+        // remove the callback to hide the controller
+        handler.removeCallbacks(hideControllerRunnable)
         super.hideController()
+
+        // hide system bars if in fullscreen
+        playerViewModel?.let {
+            if (it.isFullscreen.value == true) {
+                windowHelper?.setFullscreen()
+            }
+        }
+    }
+
+    override fun showController() {
+        // remove the previous callback from the queue to prevent a flashing behavior
+        handler.removeCallbacks(hideControllerRunnable)
+        // automatically hide the controller after 2 seconds
+        handler.postDelayed(hideControllerRunnable, 2000)
+        super.showController()
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -327,7 +364,7 @@ internal class CustomExoPlayerView(
 
         binding.exoTopBarRight.visibility = visibility
         binding.exoCenterControls.visibility = visibility
-        binding.exoBottomBar.visibility = visibility
+        binding.bottomBar.visibility = visibility
         binding.closeImageButton.visibility = visibility
         binding.exoTitle.visibility = visibility
         binding.playPauseBTN.visibility = visibility
@@ -554,27 +591,37 @@ internal class CustomExoPlayerView(
             it.layoutParams = params
         }
 
-        // add a margin to the top and the bottom bar in landscape mode for notches
-        val newMargin = if (
-            newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
-        ) {
-            LANDSCAPE_MARGIN_HORIZONTAL
-        } else {
-            0
+        // add padding to the top bar to not overlap the status bar
+        binding.topBar.let {
+            setPadding(
+                it.paddingLeft,
+                (if (newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE) 25 else 5).toPixel().toInt(),
+                it.paddingRight,
+                it.paddingBottom
+            )
         }
 
-        listOf(binding.exoTopBar, binding.exoBottomBar).forEach {
-            val params = it.layoutParams as MarginLayoutParams
-            params.marginStart = newMargin
-            params.marginEnd = newMargin
-            it.layoutParams = params
+        // don't add extra padding if there's no cutout
+        if ((context as? MainActivity)?.windowHelper?.hasCutout() == false) return
+
+        // add a margin to the top and the bottom bar in landscape mode for notches
+        val newMargin = when (newConfig?.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> LANDSCAPE_MARGIN_HORIZONTAL
+            else -> 0
+        }
+
+        listOf(binding.topBar, binding.bottomBar).forEach {
+            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+                marginStart = newMargin
+                marginEnd = newMargin
+            }
         }
     }
 
     /**
      * Load the captions style according to the users preferences
      */
-    fun applyCaptionsStyle() {
+    private fun applyCaptionsStyle() {
         val captionStyle = PlayerHelper.getCaptionStyle(context)
         subtitleView?.apply {
             setApplyEmbeddedFontSizes(false)
@@ -662,6 +709,6 @@ internal class CustomExoPlayerView(
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
-        private val LANDSCAPE_MARGIN_HORIZONTAL = (30).toPixel().toInt()
+        private val LANDSCAPE_MARGIN_HORIZONTAL = (20).toPixel().toInt()
     }
 }

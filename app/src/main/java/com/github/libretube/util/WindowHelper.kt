@@ -46,4 +46,12 @@ class WindowHelper(private val activity: BaseActivity) {
 
         window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
+
+    fun hasCutout(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            activity.window.decorView.rootWindowInsets.displayCutout != null
+        } else {
+            return false
+        }
+    }
 }

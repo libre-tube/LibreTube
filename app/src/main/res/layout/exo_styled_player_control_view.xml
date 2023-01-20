@@ -10,7 +10,7 @@
         android:background="@color/exo_black_opacity_60" />
 
     <LinearLayout
-        android:id="@+id/exo_top_bar"
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
@@ -190,7 +190,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@id/exo_bottom_bar"
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -301,7 +301,7 @@
             android:layout_marginBottom="10dp">
 
             <com.github.libretube.ui.views.MarkableTimeBar
-                android:id="@id/exo_progress"
+                android:id="@+id/exo_progress"
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 app:bar_height="2dp"

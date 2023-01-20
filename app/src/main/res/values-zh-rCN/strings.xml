@@ -446,4 +446,8 @@
     <string name="unknown">未知</string>
     <string name="resume">恢复</string>
     <string name="audio_only_mode">仅音频模式</string>
+    <string name="sleep_timer">睡眠定时器</string>
+    <string name="skip_silence">跳过静音</string>
+    <string name="help">帮助</string>
+    <string name="faq">常见问题</string>
 </resources>

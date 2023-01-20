@@ -386,7 +386,7 @@
     <string name="open_queue_from_notification">Bildirimden kuyruğu aç</string>
     <string name="trends">Trendler</string>
     <string name="featured">Öne Çıkanlar</string>
-    <string name="trending">Şu anda trend olan şey</string>
+    <string name="trending">Şu anda popüler</string>
     <string name="bookmarks">Yer imleri</string>
     <string name="bookmark">Yer imi</string>
     <string name="clear_bookmarks">Yer imlerini temizle</string>

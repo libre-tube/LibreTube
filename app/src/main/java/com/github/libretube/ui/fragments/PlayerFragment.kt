@@ -275,7 +275,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private fun showBottomBar() {
         if (this::playerBinding.isInitialized && !binding.player.isPlayerLocked) {
-            playerBinding.exoBottomBar.visibility = View.VISIBLE
+            playerBinding.bottomBar.visibility = View.VISIBLE
         }
         handler.postDelayed(this::showBottomBar, 100)
     }
@@ -817,11 +817,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     private fun prepareExoPlayerView() {
         exoPlayerView.apply {
-            setShowSubtitleButton(false)
-            setShowNextButton(false)
-            setShowPreviousButton(false)
-            // controllerShowTimeoutMs = 1500
-            controllerHideOnTouch = true
             useController = false
             player = exoPlayer
         }
@@ -851,7 +846,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             this,
             doubleTapOverlayBinding,
             playerGestureControlsViewBinding,
-            trackSelector
+            trackSelector,
+            viewModel,
+            viewLifecycleOwner
         )
 
         binding.apply {
@@ -1498,7 +1495,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     fun getPipParams(): PictureInPictureParams = PictureInPictureParams.Builder()
         .setActions(PlayerHelper.getPiPModeActions(requireActivity(), exoPlayer.isPlaying))
         .apply {
-            if (SDK_INT >= Build.VERSION_CODES.S) {
+            if (SDK_INT >= Build.VERSION_CODES.S && PlayerHelper.pipEnabled) {
                 setAutoEnterEnabled(true)
             }
             if (exoPlayer.isPlaying) {
