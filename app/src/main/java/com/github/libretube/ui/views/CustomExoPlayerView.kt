@@ -89,6 +89,10 @@ internal class CustomExoPlayerView(
     // saved to only load the playback speed once (for the first video)
     private var playbackPrefSet = false
 
+    private val hideControllerRunnable = Runnable {
+        hideController()
+    }
+
     fun initialize(
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
@@ -110,6 +114,9 @@ internal class CustomExoPlayerView(
         initRewindAndForward()
         applyCaptionsStyle()
         initializeAdvancedOptions(context)
+
+        // don't let the player view hide its controls automatically
+        controllerShowTimeoutMs = -1
 
         if (!playbackPrefSet) {
             player?.playbackParameters = PlaybackParameters(
@@ -196,10 +203,20 @@ internal class CustomExoPlayerView(
 
     override fun hideController() {
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // hide all the navigation bars that potentially could have been reopened manually ba the user
+            // hide all the navigation bars that potentially could have been reopened manually by the user
             (context as? MainActivity)?.windowHelper?.setFullscreen()
         }
+        // remove the callback to hide the controller
+        handler.removeCallbacks(hideControllerRunnable)
         super.hideController()
+    }
+
+    override fun showController() {
+        // remove the previous callback from the queue to prevent a flashing behavior
+        handler.removeCallbacks(hideControllerRunnable)
+        // automatically hide the controller after 2 seconds
+        handler.postDelayed(hideControllerRunnable, 2000)
+        super.showController()
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -327,7 +344,7 @@ internal class CustomExoPlayerView(
 
         binding.exoTopBarRight.visibility = visibility
         binding.exoCenterControls.visibility = visibility
-        binding.exoBottomBar.visibility = visibility
+        binding.bottomBar.visibility = visibility
         binding.closeImageButton.visibility = visibility
         binding.exoTitle.visibility = visibility
         binding.playPauseBTN.visibility = visibility
@@ -555,15 +572,12 @@ internal class CustomExoPlayerView(
         }
 
         // add a margin to the top and the bottom bar in landscape mode for notches
-        val newMargin = if (
-            newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
-        ) {
-            LANDSCAPE_MARGIN_HORIZONTAL
-        } else {
-            0
+        val newMargin = when (newConfig?.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> LANDSCAPE_MARGIN_HORIZONTAL
+            else -> 0
         }
 
-        listOf(binding.exoTopBar, binding.exoBottomBar).forEach {
+        listOf(binding.topBar, binding.bottomBar).forEach {
             val params = it.layoutParams as MarginLayoutParams
             params.marginStart = newMargin
             params.marginEnd = newMargin
@@ -574,7 +588,7 @@ internal class CustomExoPlayerView(
     /**
      * Load the captions style according to the users preferences
      */
-    fun applyCaptionsStyle() {
+    private fun applyCaptionsStyle() {
         val captionStyle = PlayerHelper.getCaptionStyle(context)
         subtitleView?.apply {
             setApplyEmbeddedFontSizes(false)

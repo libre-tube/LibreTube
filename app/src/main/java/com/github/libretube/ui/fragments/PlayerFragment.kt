@@ -273,7 +273,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private fun showBottomBar() {
         if (this::playerBinding.isInitialized && !binding.player.isPlayerLocked) {
-            playerBinding.exoBottomBar.visibility = View.VISIBLE
+            playerBinding.bottomBar.visibility = View.VISIBLE
         }
         handler.postDelayed(this::showBottomBar, 100)
     }
@@ -818,11 +818,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     private fun prepareExoPlayerView() {
         exoPlayerView.apply {
-            setShowSubtitleButton(false)
-            setShowNextButton(false)
-            setShowPreviousButton(false)
-            // controllerShowTimeoutMs = 1500
-            controllerHideOnTouch = true
             useController = false
             player = exoPlayer
         }
