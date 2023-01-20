@@ -202,13 +202,10 @@ internal class CustomExoPlayerView(
     }
 
     override fun hideController() {
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // hide all the navigation bars that potentially could have been reopened manually by the user
-            (context as? MainActivity)?.windowHelper?.setFullscreen()
-        }
         // remove the callback to hide the controller
         handler.removeCallbacks(hideControllerRunnable)
         super.hideController()
+        (context as? MainActivity)?.windowHelper?.hideStatusBar()
     }
 
     override fun showController() {
@@ -578,10 +575,10 @@ internal class CustomExoPlayerView(
         }
 
         listOf(binding.topBar, binding.bottomBar).forEach {
-            val params = it.layoutParams as MarginLayoutParams
-            params.marginStart = newMargin
-            params.marginEnd = newMargin
-            it.layoutParams = params
+            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+                marginStart = newMargin
+                marginEnd = newMargin
+            }
         }
     }
 
@@ -676,6 +673,6 @@ internal class CustomExoPlayerView(
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
-        private val LANDSCAPE_MARGIN_HORIZONTAL = (30).toPixel().toInt()
+        private val LANDSCAPE_MARGIN_HORIZONTAL = (20).toPixel().toInt()
     }
 }
