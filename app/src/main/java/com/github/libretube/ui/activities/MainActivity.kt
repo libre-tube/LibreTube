@@ -269,9 +269,7 @@ class MainActivity : BaseActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val bundle = Bundle()
-                bundle.putString("query", query)
-                navController.navigate(R.id.searchResultFragment, bundle)
+                navController.navigate(R.id.searchResultFragment, bundleOf("query" to query))
                 searchViewModel.setQuery("")
                 searchView.clearFocus()
                 return true
@@ -299,9 +297,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 if (navController.currentDestination?.id != R.id.searchFragment) {
-                    val bundle = Bundle()
-                    bundle.putString("query", newText)
-                    navController.navigate(R.id.searchFragment, bundle)
+                    navController.navigate(R.id.searchFragment, bundleOf("query" to newText))
                 } else {
                     searchViewModel.setQuery(newText)
                 }

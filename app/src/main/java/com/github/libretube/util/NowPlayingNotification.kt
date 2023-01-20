@@ -16,6 +16,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.os.bundleOf
 import coil.request.ImageRequest
 import com.github.libretube.R
 import com.github.libretube.api.obj.Streams
@@ -196,21 +197,23 @@ class NowPlayingNotification(
                     player: Player,
                     windowIndex: Int
                 ): MediaDescriptionCompat {
-                    return MediaDescriptionCompat.Builder().apply {
-                        setTitle(streams?.title!!)
-                        setSubtitle(streams?.uploader)
-                        val appIcon = BitmapFactory.decodeResource(
-                            context.resources,
-                            R.drawable.ic_launcher_monochrome
-                        )
-                        val extras = Bundle().apply {
-                            putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, appIcon)
-                            putString(MediaMetadataCompat.METADATA_KEY_TITLE, streams?.title!!)
-                            putString(MediaMetadataCompat.METADATA_KEY_ARTIST, streams?.uploader)
-                        }
-                        setIconBitmap(appIcon)
-                        setExtras(extras)
-                    }.build()
+                    val appIcon = BitmapFactory.decodeResource(
+                        context.resources,
+                        R.drawable.ic_launcher_monochrome
+                    )
+                    val title = streams?.title!!
+                    val uploader = streams?.uploader
+                    val extras = bundleOf(
+                        MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON to appIcon,
+                        MediaMetadataCompat.METADATA_KEY_TITLE to title,
+                        MediaMetadataCompat.METADATA_KEY_ARTIST to uploader
+                    )
+                    return MediaDescriptionCompat.Builder()
+                        .setTitle(title)
+                        .setSubtitle(uploader)
+                        .setIconBitmap(appIcon)
+                        .setExtras(extras)
+                        .build()
                 }
 
                 override fun getSupportedQueueNavigatorActions(player: Player): Long {

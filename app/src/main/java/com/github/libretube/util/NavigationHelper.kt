@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
@@ -81,13 +80,13 @@ object NavigationHelper {
             return
         }
 
-        val bundle = Bundle().apply {
-            putString(IntentData.videoId, videoId.toID())
-            putString(IntentData.playlistId, playlistId)
-            putString(IntentData.channelId, channelId)
-            putBoolean(IntentData.keepQueue, keepQueue)
-            timeStamp?.let { putLong(IntentData.timeStamp, it) }
-        }
+        val bundle = bundleOf(
+            IntentData.videoId to videoId.toID(),
+            IntentData.playlistId to playlistId,
+            IntentData.channelId to channelId,
+            IntentData.keepQueue to keepQueue,
+            IntentData.timeStamp to timeStamp
+        )
 
         val activity = context as AppCompatActivity
         activity.supportFragmentManager.beginTransaction()
@@ -111,9 +110,10 @@ object NavigationHelper {
         if (playlistId == null) return
 
         val activity = unwrap(context)
-        val bundle = Bundle()
-        bundle.putString(IntentData.playlistId, playlistId)
-        bundle.putSerializable(IntentData.playlistType, playlistType)
+        val bundle = bundleOf(
+            IntentData.playlistId to playlistId,
+            IntentData.playlistType to playlistType
+        )
         activity.navController.navigate(R.id.playlistFragment, bundle)
     }
 
