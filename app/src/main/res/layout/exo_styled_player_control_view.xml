@@ -17,7 +17,7 @@
         android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:paddingHorizontal="5dp"
-        android:paddingTop="5dp" >
+        android:paddingTop="25dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
