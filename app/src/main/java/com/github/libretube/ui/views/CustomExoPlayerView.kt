@@ -568,6 +568,9 @@ internal class CustomExoPlayerView(
             it.layoutParams = params
         }
 
+        // don't add extra padding if there's no cutout
+        if ((context as? MainActivity)?.windowHelper?.hasCutout() == false) return
+
         // add a margin to the top and the bottom bar in landscape mode for notches
         val newMargin = when (newConfig?.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> LANDSCAPE_MARGIN_HORIZONTAL

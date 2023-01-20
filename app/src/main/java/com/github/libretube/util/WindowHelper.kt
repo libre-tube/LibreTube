@@ -54,4 +54,12 @@ class WindowHelper(private val activity: BaseActivity) {
     fun showStatusBar() = activity.apply {
         WindowInsetsControllerCompat(window, window.decorView).show(WindowInsetsCompat.Type.statusBars())
     }
+
+    fun hasCutout(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            activity.window.decorView.rootWindowInsets.displayCutout != null
+        } else {
+            return false
+        }
+    }
 }
