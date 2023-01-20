@@ -14,6 +14,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -27,6 +28,7 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
+import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackSpeedSheet
 import com.github.libretube.util.AudioHelper
@@ -61,6 +63,7 @@ internal class CustomExoPlayerView(
     private lateinit var brightnessHelper: BrightnessHelper
     private lateinit var audioHelper: AudioHelper
     private var doubleTapOverlayBinding: DoubleTapOverlayBinding? = null
+    private var playerViewModel: PlayerViewModel? = null
 
     /**
      * Objects from the parent fragment
@@ -78,6 +81,9 @@ internal class CustomExoPlayerView(
     var autoplayEnabled = PlayerHelper.autoPlayEnabled
 
     private var resizeModePref = PlayerHelper.resizeModePref
+
+    private val windowHelper
+        get() = (context as? MainActivity)?.windowHelper
 
     private val supportFragmentManager
         get() = (context as BaseActivity).supportFragmentManager
@@ -97,12 +103,15 @@ internal class CustomExoPlayerView(
         playerViewInterface: OnlinePlayerOptions?,
         doubleTapOverlayBinding: DoubleTapOverlayBinding,
         playerGestureControlsViewBinding: PlayerGestureControlsViewBinding,
-        trackSelector: TrackSelector?
+        trackSelector: TrackSelector?,
+        playerViewModel: PlayerViewModel? = null,
+        viewLifecycleOwner: LifecycleOwner? = null
     ) {
         this.playerOptionsInterface = playerViewInterface
         this.doubleTapOverlayBinding = doubleTapOverlayBinding
         this.trackSelector = trackSelector
         this.gestureViewBinding = playerGestureControlsViewBinding
+        this.playerViewModel = playerViewModel
         this.playerGestureController = PlayerGestureController(context as BaseActivity, this)
         this.brightnessHelper = BrightnessHelper(context as Activity)
         this.audioHelper = AudioHelper(context)
@@ -186,6 +195,14 @@ internal class CustomExoPlayerView(
                 }
             }
         })
+
+        playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
+            if (isFullscreen) {
+                windowHelper?.setFullscreen()
+            } else {
+                windowHelper?.unsetFullscreen()
+            }
+        }
     }
 
     private fun updatePlayPauseButton() {
@@ -205,7 +222,13 @@ internal class CustomExoPlayerView(
         // remove the callback to hide the controller
         handler.removeCallbacks(hideControllerRunnable)
         super.hideController()
-        (context as? MainActivity)?.windowHelper?.hideStatusBar()
+
+        // hide system bars if in fullscreen
+        playerViewModel?.let {
+            if (it.isFullscreen.value == true) {
+                windowHelper?.setFullscreen()
+            }
+        }
     }
 
     override fun showController() {
