@@ -446,4 +446,8 @@
     <string name="resume">Продолжить</string>
     <string name="audio_only_mode">Режим только аудио</string>
     <string name="audio_only_mode_summary">Превратите LibreTube в музыкальный проигрыватель.</string>
+    <string name="sleep_timer">Таймер сна</string>
+    <string name="skip_silence">Пропускать тишину</string>
+    <string name="help">Помощь</string>
+    <string name="faq">FAQ</string>
 </resources>

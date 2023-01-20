@@ -429,4 +429,25 @@
     <string name="playlistUrl">Spilleliste-nettadresse</string>
     <string name="pause_on_quit">Pause ved avslutning</string>
     <string name="shuffle">Stokk om</string>
+    <string name="rewind">Spol tilbake</string>
+    <string name="pause">Pause</string>
+    <string name="alternative_pip_controls">Alternative BiB-kontroller</string>
+    <string name="alternative_pip_controls_summary">Vis kun lyd og hopp over kontroller i PiP istedenfor spoling tilbake og forover</string>
+    <string name="audio_player">Lydspiller</string>
+    <string name="audio_only_mode">Modus for kun lyd</string>
+    <string name="no_subtitle">Ingen undertekst</string>
+    <string name="download_paused">Nedlasting pauset</string>
+    <string name="download_completed">Nedlasting fullført</string>
+    <string name="concurrent_downloads">Maks. samtidige nedlastinger</string>
+    <string name="concurrent_downloads_limit_reached">Utfører maks. antall samtidige nedlastinger</string>
+    <string name="unknown">Ukjent</string>
+    <string name="resume">Fortsett</string>
+    <string name="forward">Spol forover</string>
+    <string name="audio_only_mode_summary">Gjør LibreTube til en musikkspiller.</string>
+    <string name="sleep_timer">Søvntidsur</string>
+    <string name="skip_silence">Hopp over stillhet</string>
+    <string name="help">Hjelp</string>
+    <string name="faq">O-S-S</string>
+    <string name="add_to_bookmarks">Bokmerk</string>
+    <string name="remove_bookmark">Fjern bokmerke</string>
 </resources>

@@ -448,4 +448,6 @@
     <string name="audio_only_mode_summary">Proměňte LibreTube v hudební přehrávač.</string>
     <string name="sleep_timer">Časovač spánku</string>
     <string name="skip_silence">Přeskočit ticho</string>
+    <string name="help">Nápověda</string>
+    <string name="faq">Často kladené dotazy</string>
 </resources>

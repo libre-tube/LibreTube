@@ -446,4 +446,8 @@
     <string name="resume">Lanjutkan</string>
     <string name="download_completed">Unduhan selesai</string>
     <string name="concurrent_downloads">Unduhan berlangsungan maksimal</string>
+    <string name="sleep_timer">Pewaktu tidur</string>
+    <string name="skip_silence">Lewati keheningan</string>
+    <string name="help">Bantuan</string>
+    <string name="faq">SSD</string>
 </resources>

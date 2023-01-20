@@ -447,7 +447,7 @@
     <string name="download_completed">Завантаження завершено</string>
     <string name="resume">Продовжити</string>
     <string name="help">Довідка</string>
-    <string name="faq">ЧаП</string>
+    <string name="faq">ЧаПи</string>
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Пропускати тишу</string>
 </resources>
