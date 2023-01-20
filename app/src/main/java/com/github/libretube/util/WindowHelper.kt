@@ -47,14 +47,6 @@ class WindowHelper(private val activity: BaseActivity) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
-    fun hideStatusBar() = activity.apply {
-        WindowInsetsControllerCompat(window, window.decorView).hide(WindowInsetsCompat.Type.statusBars())
-    }
-
-    fun showStatusBar() = activity.apply {
-        WindowInsetsControllerCompat(window, window.decorView).show(WindowInsetsCompat.Type.statusBars())
-    }
-
     fun hasCutout(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             activity.window.decorView.rootWindowInsets.displayCutout != null

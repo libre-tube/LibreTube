@@ -847,7 +847,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             this,
             doubleTapOverlayBinding,
             playerGestureControlsViewBinding,
-            trackSelector
+            trackSelector,
+            viewModel,
+            viewLifecycleOwner
         )
 
         binding.apply {
