@@ -228,6 +228,7 @@ internal class CustomExoPlayerView(
             if (it.isFullscreen.value == true) {
                 windowHelper?.setFullscreen()
             }
+            updateTopBarMargin()
         }
     }
 
@@ -591,15 +592,7 @@ internal class CustomExoPlayerView(
             it.layoutParams = params
         }
 
-        // add padding to the top bar to not overlap the status bar
-        binding.topBar.let {
-            setPadding(
-                it.paddingLeft,
-                (if (newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE) 25 else 5).toPixel().toInt(),
-                it.paddingRight,
-                it.paddingBottom
-            )
-        }
+        updateTopBarMargin()
 
         // don't add extra padding if there's no cutout
         if ((context as? MainActivity)?.windowHelper?.hasCutout() == false) return
@@ -629,6 +622,19 @@ internal class CustomExoPlayerView(
             if (!PlayerHelper.useSystemCaptionStyle) return
             setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             setStyle(captionStyle)
+        }
+    }
+
+    /**
+     * Add extra margin to the top bar to not overlap the status bar
+     */
+    private fun updateTopBarMargin() {
+        val isFullscreen = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+            playerViewModel?.isFullscreen?.value == true
+        binding.topBar.let {
+            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+                topMargin = (if (isFullscreen) 25 else 5).toPixel().toInt()
+            }
         }
     }
 
