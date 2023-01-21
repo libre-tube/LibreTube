@@ -236,7 +236,7 @@ internal class CustomExoPlayerView(
         // remove the previous callback from the queue to prevent a flashing behavior
         handler.removeCallbacks(hideControllerRunnable)
         // automatically hide the controller after 2 seconds
-        handler.postDelayed(hideControllerRunnable, 2000)
+        handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
         super.showController()
     }
 
@@ -712,9 +712,22 @@ internal class CustomExoPlayerView(
         }
     }
 
+    /**
+     * Listen for all child touch events
+     */
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        // when a control is clicked, restart the countdown to hide the controller
+        if (isControllerFullyVisible) {
+            handler.removeCallbacks(hideControllerRunnable)
+            handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
+        }
+        return super.onInterceptTouchEvent(ev)
+    }
+
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
+        private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
         private val LANDSCAPE_MARGIN_HORIZONTAL = (20).toPixel().toInt()
     }
 }
