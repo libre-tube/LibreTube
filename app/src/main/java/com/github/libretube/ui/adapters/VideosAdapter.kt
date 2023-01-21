@@ -133,7 +133,7 @@ class VideosAdapter(
                 TextUtils.SEPARATOR + video.uploaded?.let {
                     DateUtils.getRelativeTimeSpanString(it)
                 }
-            video.duration?.let { thumbnailDuration.setFormattedDuration(it) }
+            video.duration?.let { thumbnailDuration.setFormattedDuration(it, video.isShort) }
             channelImage.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, video.uploaderUrl)
             }

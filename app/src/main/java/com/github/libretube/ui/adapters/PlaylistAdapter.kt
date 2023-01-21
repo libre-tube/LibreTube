@@ -66,7 +66,7 @@ class PlaylistAdapter(
             videoInfo.text = streamItem.uploaderName
             channelImage.visibility = View.GONE
 
-            thumbnailDuration.setFormattedDuration(streamItem.duration!!)
+            thumbnailDuration.setFormattedDuration(streamItem.duration!!, streamItem.isShort)
             ImageHelper.loadImage(streamItem.thumbnail, thumbnail)
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, streamItem.url, playlistId)
