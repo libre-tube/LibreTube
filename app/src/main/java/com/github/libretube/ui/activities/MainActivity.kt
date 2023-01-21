@@ -11,7 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.children
@@ -144,38 +144,36 @@ class MainActivity : BaseActivity() {
         val playerViewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
 
         // new way of handling back presses
-        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (playerViewModel.isFullscreen.value == true) {
-                    for (fragment in supportFragmentManager.fragments) {
-                        if (fragment is PlayerFragment) {
-                            fragment.unsetFullscreen()
-                            return
-                        }
+        onBackPressedDispatcher.addCallback {
+            if (playerViewModel.isFullscreen.value == true) {
+                supportFragmentManager.fragments.filterIsInstance<PlayerFragment>()
+                    .firstOrNull()
+                    ?.let {
+                        it.unsetFullscreen()
+                        return@addCallback
                     }
-                }
+            }
 
-                if (binding.mainMotionLayout.progress == 0F) {
-                    runCatching {
-                        minimizePlayer()
-                        return
-                    }
-                }
-
-                when (navController.currentDestination?.id) {
-                    startFragmentId -> {
-                        moveTaskToBack(true)
-                    }
-                    R.id.searchResultFragment -> {
-                        navController.popBackStack(R.id.searchFragment, true) ||
-                            navController.popBackStack()
-                    }
-                    else -> {
-                        navController.popBackStack()
-                    }
+            if (binding.mainMotionLayout.progress == 0F) {
+                runCatching {
+                    minimizePlayer()
+                    return@addCallback
                 }
             }
-        })
+
+            when (navController.currentDestination?.id) {
+                startFragmentId -> {
+                    moveTaskToBack(true)
+                }
+                R.id.searchResultFragment -> {
+                    navController.popBackStack(R.id.searchFragment, true) ||
+                            navController.popBackStack()
+                }
+                else -> {
+                    navController.popBackStack()
+                }
+            }
+        }
 
         loadIntentData()
     }

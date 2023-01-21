@@ -2,7 +2,8 @@ package com.github.libretube.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.fragment.app.commit
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
 import com.github.libretube.ui.base.BaseActivity
@@ -40,21 +41,15 @@ class NoInternetActivity : BaseActivity() {
 
         setContentView(binding.root)
 
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    supportFragmentManager.fragments.forEach {
-                        if (it is DownloadsFragment) {
-                            supportFragmentManager.beginTransaction()
-                                .remove(it)
-                                .commit()
-                            return
-                        }
+        onBackPressedDispatcher.addCallback(this) {
+            supportFragmentManager.fragments.filterIsInstance<DownloadsFragment>()
+                .firstOrNull()
+                ?.let {
+                    supportFragmentManager.commit {
+                        remove(it)
                     }
-                    finishAffinity()
                 }
-            }
-        )
+                ?: finishAffinity()
+        }
     }
 }
