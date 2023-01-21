@@ -19,7 +19,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import okio.use
@@ -63,7 +62,7 @@ class ImportHelper(
                     JsonHelper.json.decodeFromStream<NewPipeSubscriptions>(it)
                 }
                 subscriptions?.subscriptions.orEmpty().map {
-                    it.url!!.replace("https://www.youtube.com/channel/", "")
+                    it.url.replace("https://www.youtube.com/channel/", "")
                 }
             }
             "text/csv", "text/comma-separated-values" -> {
@@ -93,21 +92,13 @@ class ImportHelper(
                     SubscriptionHelper.getFormattedLocalSubscriptions()
                 )
             }
-            val newPipeChannels = mutableListOf<NewPipeSubscription>()
-            subs.forEach {
-                newPipeChannels += NewPipeSubscription(
-                    name = it.name,
-                    service_id = 0,
-                    url = "https://www.youtube.com" + it.url
-                )
+            val newPipeChannels = subs.map {
+                NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
             }
-
-            val newPipeSubscriptions = NewPipeSubscriptions(
-                subscriptions = newPipeChannels
-            )
+            val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
 
             activity.contentResolver.openOutputStream(uri)?.use {
-                JsonHelper.json.encodeToStream<Any>(newPipeSubscriptions, it)
+                JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
             }
 
             activity.toastFromMainThread(R.string.exportsuccess)
@@ -138,9 +129,10 @@ class ImportHelper(
                 }
             }
             "application/json", "application/*", "application/octet-stream" -> {
-                val playlistFile = JsonHelper.json
-                    .decodeFromString<ImportPlaylistFile>(uri.readText())
-                importPlaylists.addAll(playlistFile.playlists)
+                val playlistFile = activity.contentResolver.openInputStream(uri)?.use {
+                    JsonHelper.json.decodeFromStream<ImportPlaylistFile>(it)
+                }
+                importPlaylists.addAll(playlistFile?.playlists.orEmpty())
             }
             else -> {
                 activity.applicationContext.toastFromMainThread("Unsupported file type $fileType")
@@ -169,23 +161,13 @@ class ImportHelper(
 
         runBlocking {
             val playlists = PlaylistsHelper.exportPlaylists()
-            val playlistFile = ImportPlaylistFile(
-                format = "Piped",
-                version = 1,
-                playlists = playlists
-            )
+            val playlistFile = ImportPlaylistFile("Piped", 1, playlists)
 
             activity.contentResolver.openOutputStream(uri)?.use {
-                JsonHelper.json.encodeToStream<Any>(playlistFile, it)
+                JsonHelper.json.encodeToStream(playlistFile, it)
             }
 
             activity.toastFromMainThread(R.string.exportsuccess)
         }
-    }
-
-    private fun Uri.readText(): String {
-        return activity.contentResolver.openInputStream(this)?.use {
-            it.bufferedReader().use { reader -> reader.readText() }
-        }.orEmpty()
     }
 }
