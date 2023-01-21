@@ -43,7 +43,7 @@ class WatchHistoryAdapter(
             videoTitle.text = video.title
             channelName.text = video.uploader
             videoInfo.text = video.uploadDate
-            thumbnailDuration.setFormattedDuration(video.duration!!)
+            thumbnailDuration.setFormattedDuration(video.duration!!, null)
             ImageHelper.loadImage(video.thumbnailUrl, thumbnail)
             ImageHelper.loadImage(video.uploaderAvatar, channelImage)
 

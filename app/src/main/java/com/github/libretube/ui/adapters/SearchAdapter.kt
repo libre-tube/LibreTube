@@ -83,7 +83,7 @@ class SearchAdapter(
     private fun bindWatch(item: ContentItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
-            thumbnailDuration.setFormattedDuration(item.duration!!)
+            thumbnailDuration.setFormattedDuration(item.duration!!, item.isShort)
             ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
             val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
