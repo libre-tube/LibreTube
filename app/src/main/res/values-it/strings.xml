@@ -446,4 +446,8 @@
     <string name="resume">Riprendi</string>
     <string name="audio_only_mode">Modalità solo audio</string>
     <string name="audio_only_mode_summary">Trasforma LibreTube in un riproduttore musicale.</string>
+    <string name="sleep_timer">Promemoria per dormire</string>
+    <string name="skip_silence">Salta il silenzio</string>
+    <string name="help">Aiuto</string>
+    <string name="faq">Domande frequenti</string>
 </resources>
