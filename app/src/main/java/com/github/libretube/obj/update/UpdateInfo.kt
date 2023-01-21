@@ -1,27 +1,29 @@
 package com.github.libretube.obj.update
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.datetime.Instant
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class UpdateInfo(
-    val assets: List<Asset>? = null,
-    val assets_url: String? = null,
-    val author: Author? = null,
-    val body: String? = null,
-    val created_at: String? = null,
-    val draft: Boolean? = null,
-    val html_url: String? = null,
-    val id: Int? = null,
-    val mentions_count: Int? = null,
-    val name: String? = null,
-    val node_id: String? = null,
-    val prerelease: Boolean? = null,
-    val published_at: String? = null,
-    val reactions: Reactions? = null,
-    val tag_name: String? = null,
-    val tarball_url: String? = null,
-    val target_commitish: String? = null,
-    val upload_url: String? = null,
-    val url: String? = null,
-    val zipball_url: String? = null
+    val assets: List<Asset> = emptyList(),
+    @SerialName("assets_url") val assetsUrl: String,
+    val author: User,
+    val body: String,
+    @SerialName("created_at") val createdAt: Instant,
+    val draft: Boolean,
+    @SerialName("html_url") val htmlUrl: String,
+    val id: Int,
+    @SerialName("mentions_count") val mentionsCount: Int,
+    val name: String,
+    @SerialName("node_id") val nodeId: String,
+    val prerelease: Boolean,
+    @SerialName("published_at") val publishedAt: Instant,
+    val reactions: Reactions,
+    @SerialName("tag_name") val tagName: String,
+    @SerialName("tarball_url") val tarballUrl: String,
+    @SerialName("target_commitish") val targetCommitish: String,
+    @SerialName("upload_url") val uploadUrl: String,
+    val url: String,
+    @SerialName("zipball_url") val zipballUrl: String
 )

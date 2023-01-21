@@ -1,20 +1,24 @@
 package com.github.libretube.obj.update
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.datetime.Instant
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class Asset(
-    val browser_download_url: String? = null,
-    val content_type: String? = null,
-    val created_at: String? = null,
-    val download_count: Int? = null,
-    val id: Int? = null,
-    val label: Any? = null,
-    val name: String? = null,
-    val node_id: String? = null,
-    val size: Int? = null,
-    val state: String? = null,
-    val updated_at: String? = null,
-    val uploader: Uploader? = null,
-    val url: String? = null
+    @SerialName("browser_download_url") val browserDownloadUrl: String,
+    @SerialName("content_type") val contentType: String,
+    @SerialName("created_at") val createdAt: Instant,
+    @SerialName("download_count") val downloadCount: Int,
+    val id: Int,
+    val label: JsonElement = JsonNull,
+    val name: String,
+    @SerialName("node_id") val nodeId: String,
+    val size: Int,
+    val state: String,
+    @SerialName("updated_at") val updatedAt: Instant,
+    val uploader: User,
+    val url: String
 )

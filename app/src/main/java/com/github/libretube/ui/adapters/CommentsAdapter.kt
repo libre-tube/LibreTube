@@ -66,22 +66,21 @@ class CommentsAdapter(
                 commentorImage.scaleY = REPLIES_ADAPTER_SCALE
             }
 
-            commentInfos.text =
-                comment.author.toString() + TextUtils.SEPARATOR + comment.commentedTime.toString()
+            commentInfos.text = comment.author + TextUtils.SEPARATOR + comment.commentedTime
             commentText.text = HtmlCompat.fromHtml(
-                comment.commentText.toString(),
+                comment.commentText,
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
 
             ImageHelper.loadImage(comment.thumbnail, commentorImage)
             likesTextView.text = comment.likeCount.formatShort()
 
-            if (comment.verified == true) verifiedImageView.visibility = View.VISIBLE
-            if (comment.pinned == true) pinnedImageView.visibility = View.VISIBLE
-            if (comment.hearted == true) heartedImageView.visibility = View.VISIBLE
+            if (comment.verified) verifiedImageView.visibility = View.VISIBLE
+            if (comment.pinned) pinnedImageView.visibility = View.VISIBLE
+            if (comment.hearted) heartedImageView.visibility = View.VISIBLE
             if (comment.repliesPage != null) repliesAvailable.visibility = View.VISIBLE
-            if ((comment.replyCount ?: -1L) > 0L) {
-                repliesCount.text = comment.replyCount?.formatShort()
+            if (comment.replyCount > 0L) {
+                repliesCount.text = comment.replyCount.formatShort()
             }
 
             commentorImage.setOnClickListener {
@@ -99,7 +98,7 @@ class CommentsAdapter(
             }
 
             root.setOnLongClickListener {
-                ClipboardHelper(root.context).save(comment.commentText.toString())
+                ClipboardHelper(root.context).save(comment.commentText)
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
             }

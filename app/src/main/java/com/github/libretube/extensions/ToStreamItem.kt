@@ -13,7 +13,7 @@ fun Streams.toStreamItem(videoId: String): StreamItem {
         uploaderName = uploader,
         uploaderUrl = uploaderUrl,
         uploaderAvatar = uploaderAvatar,
-        uploadedDate = uploadDate,
+        uploadedDate = uploadDate.toString(),
         uploaded = null,
         duration = duration,
         views = views,

@@ -11,6 +11,8 @@ import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonPrimitive
 
 class BackupDialog(
     private val createBackupFile: (BackupFile) -> Unit
@@ -45,8 +47,14 @@ class BackupDialog(
         })
 
         object Preferences : BackupOption(R.string.preferences, onSelected = { file ->
-            file.preferences = PreferenceHelper.settings.all.map {
-                PreferenceItem(it.key, it.value)
+            file.preferences = PreferenceHelper.settings.all.map { (key, value) ->
+                val jsonValue = when (value) {
+                    is Number -> JsonPrimitive(value)
+                    is Boolean -> JsonPrimitive(value)
+                    is String -> JsonPrimitive(value)
+                    else -> JsonNull
+                }
+                PreferenceItem(key, jsonValue)
             }
         })
     }

@@ -83,13 +83,13 @@ class SearchAdapter(
     private fun bindWatch(item: ContentItem, binding: VideoRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, thumbnail)
-            thumbnailDuration.setFormattedDuration(item.duration!!, item.isShort)
+            thumbnailDuration.setFormattedDuration(item.duration, item.isShort)
             ImageHelper.loadImage(item.uploaderAvatar, channelImage)
             videoTitle.text = item.title
-            val viewsString = if (item.views?.toInt() != -1) item.views.formatShort() else ""
-            val uploadDate = if (item.uploadedDate != null) item.uploadedDate else ""
+            val viewsString = if (item.views != -1L) item.views.formatShort() else ""
+            val uploadDate = item.uploadedDate.orEmpty()
             videoInfo.text =
-                if (viewsString != "" && uploadDate != "") {
+                if (viewsString.isNotEmpty() && uploadDate.isNotEmpty()) {
                     "$viewsString • $uploadDate"
                 } else {
                     viewsString + uploadDate
@@ -98,7 +98,7 @@ class SearchAdapter(
             root.setOnClickListener {
                 NavigationHelper.navigateVideo(root.context, item.url)
             }
-            val videoId = item.url!!.toID()
+            val videoId = item.url.toID()
             val videoName = item.title!!
             root.setOnLongClickListener {
                 VideoOptionsBottomSheet(videoId, videoName)
@@ -111,7 +111,7 @@ class SearchAdapter(
             channelContainer.setOnClickListener {
                 NavigationHelper.navigateChannel(root.context, item.uploaderUrl)
             }
-            watchProgress.setWatchProgressLength(videoId, item.duration!!)
+            watchProgress.setWatchProgressLength(videoId, item.duration)
         }
     }
 
@@ -135,12 +135,12 @@ class SearchAdapter(
             }
 
             root.setOnLongClickListener {
-                ChannelOptionsBottomSheet(item.url!!.toID(), item.name)
+                ChannelOptionsBottomSheet(item.url.toID(), item.name)
                     .show((root.context as BaseActivity).supportFragmentManager)
                 true
             }
 
-            binding.searchSubButton.setupSubscriptionButton(item.url?.toID(), item.name?.toID())
+            binding.searchSubButton.setupSubscriptionButton(item.url.toID(), item.name?.toID())
         }
     }
 
@@ -150,7 +150,7 @@ class SearchAdapter(
     ) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
-            if (item.videos?.toInt() != -1) videoCount.text = item.videos.toString()
+            if (item.videos != -1L) videoCount.text = item.videos.toString()
             playlistTitle.text = item.name
             playlistDescription.text = item.uploaderName
             root.setOnClickListener {
@@ -158,7 +158,7 @@ class SearchAdapter(
             }
             deletePlaylist.visibility = View.GONE
             root.setOnLongClickListener {
-                val playlistId = item.url!!.toID()
+                val playlistId = item.url.toID()
                 val playlistName = item.name!!
                 PlaylistOptionsBottomSheet(playlistId, playlistName, PlaylistType.PUBLIC)
                     .show(

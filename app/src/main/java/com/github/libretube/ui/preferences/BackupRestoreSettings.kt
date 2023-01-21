@@ -68,7 +68,7 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         createBackupFile = registerForActivityResult(
             CreateDocument("application/json")
         ) { uri: Uri? ->
-            BackupHelper(requireContext()).advancedBackup(uri, backupFile)
+            BackupHelper(requireContext()).createAdvancedBackup(uri, backupFile)
         }
 
         super.onCreate(savedInstanceState)

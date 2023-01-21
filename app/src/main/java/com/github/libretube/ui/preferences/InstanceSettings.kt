@@ -137,8 +137,8 @@ class InstanceSettings : BasePreferenceFragment() {
 
             response?.sortBy { it.name }
 
-            instanceNames.addAll(response.orEmpty().map { it.name ?: "" })
-            instanceValues.addAll(response.orEmpty().map { it.api_url ?: "" })
+            instanceNames.addAll(response.orEmpty().map { it.name })
+            instanceValues.addAll(response.orEmpty().map { it.apiUrl })
 
             customInstances.forEach { instance ->
                 instanceNames += instance.name

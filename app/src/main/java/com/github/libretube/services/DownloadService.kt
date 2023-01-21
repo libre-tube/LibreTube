@@ -102,21 +102,19 @@ class DownloadService : Service() {
                     Database.downloadDao().insertDownload(
                         Download(
                             videoId = videoId,
-                            title = streams.title ?: "",
+                            title = streams.title,
                             thumbnailPath = thumbnailTargetFile.absolutePath,
-                            description = streams.description ?: "",
-                            uploadDate = streams.uploadDate,
-                            uploader = streams.uploader ?: ""
+                            description = streams.description,
+                            uploadDate = streams.uploadDate.toString(),
+                            uploader = streams.uploader
                         )
                     )
                 }
-                streams.thumbnailUrl?.let { url ->
-                    ImageHelper.downloadImage(
-                        this@DownloadService,
-                        url,
-                        thumbnailTargetFile.absolutePath
-                    )
-                }
+                ImageHelper.downloadImage(
+                    this@DownloadService,
+                    streams.thumbnailUrl,
+                    thumbnailTargetFile.absolutePath
+                )
 
                 val downloadItems = streams.toDownloadItems(
                     videoId,

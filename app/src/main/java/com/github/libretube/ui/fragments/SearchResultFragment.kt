@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -94,13 +95,9 @@ class SearchResultFragment : BaseFragment() {
                 return@launchWhenCreated
             }
             runOnUiThread {
-                searchAdapter = SearchAdapter(response.items.orEmpty().toMutableList())
+                searchAdapter = SearchAdapter(response.items.toMutableList())
                 binding.searchRecycler.adapter = searchAdapter
-                binding.noSearchResult.visibility = if (response.items.orEmpty().isEmpty()) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+                binding.noSearchResult.isVisible = response.items.isEmpty()
             }
             nextPage = response.nextpage
         }
@@ -124,8 +121,8 @@ class SearchResultFragment : BaseFragment() {
             }
             nextPage = response.nextpage!!
             kotlin.runCatching {
-                if (response.items?.isNotEmpty() == true) {
-                    searchAdapter.updateItems(response.items.toMutableList())
+                if (response.items.isNotEmpty()) {
+                    searchAdapter.updateItems(response.items)
                 }
             }
         }

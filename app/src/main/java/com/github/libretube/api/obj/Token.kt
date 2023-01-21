@@ -1,9 +1,9 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class Token(
-    var token: String? = null,
-    var error: String? = null
+    val token: String? = null,
+    val error: String? = null
 )

@@ -29,3 +29,26 @@
 # Keep data classes used for Retrofit
 -keep class com.github.libretube.obj.** { *; }
 -keep class com.github.libretube.obj.update.** { *; }
+
+# Keep rules required by Kotlinx Serialization
+-if @kotlinx.serialization.Serializable class **
+-keepclassmembers class <1> {
+    static <1>$Companion Companion;
+}
+
+-if @kotlinx.serialization.Serializable class ** {
+    static **$* *;
+}
+-keepclassmembers class <2>$<3> {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+-if @kotlinx.serialization.Serializable class ** {
+    public static ** INSTANCE;
+}
+-keepclassmembers class <1> {
+    public static <1> INSTANCE;
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+-keepattributes RuntimeVisibleAnnotations,AnnotationDefault

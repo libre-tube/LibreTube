@@ -1,8 +1,6 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class Subscribed(
-    var subscribed: Boolean? = null
-)
+@Serializable
+data class Subscribed(val subscribed: Boolean? = null)

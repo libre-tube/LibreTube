@@ -1,11 +1,11 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class SearchResult(
-    val items: MutableList<ContentItem>? = arrayListOf(),
+    val items: List<ContentItem> = emptyList(),
     val nextpage: String? = null,
-    val suggestion: String? = "",
+    val suggestion: String? = null,
     val corrected: Boolean? = null
 )

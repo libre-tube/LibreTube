@@ -1,23 +1,23 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class PipedStream(
-    var url: String? = null,
-    var format: String? = null,
-    var quality: String? = null,
-    var mimeType: String? = null,
-    var codec: String? = null,
-    var videoOnly: Boolean? = null,
-    var bitrate: Int? = null,
-    var initStart: Int? = null,
-    var initEnd: Int? = null,
-    var indexStart: Int? = null,
-    var indexEnd: Int? = null,
-    var width: Int? = null,
-    var height: Int? = null,
-    var fps: Int? = null,
+    val url: String? = null,
+    val format: String? = null,
+    val quality: String? = null,
+    val mimeType: String? = null,
+    val codec: String? = null,
+    val videoOnly: Boolean? = null,
+    val bitrate: Int? = null,
+    val initStart: Int? = null,
+    val initEnd: Int? = null,
+    val indexStart: Int? = null,
+    val indexEnd: Int? = null,
+    val width: Int? = null,
+    val height: Int? = null,
+    val fps: Int? = null,
     val audioTrackName: String? = null,
     val audioTrackId: String? = null
 )

@@ -1,10 +1,10 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class ChapterSegment(
-    var title: String? = null,
-    var image: String? = null,
-    var start: Long? = null
+    val title: String? = null,
+    val image: String? = null,
+    val start: Long? = null
 )

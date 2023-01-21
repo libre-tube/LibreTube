@@ -1,28 +1,28 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class ContentItem(
-    var url: String? = null,
-    val type: String? = null,
-    var thumbnail: String? = null,
-    var uploaderName: String? = null,
-    var uploaded: Long? = null,
-    var shortDescription: String? = null,
+    val url: String,
+    val type: String,
+    val thumbnail: String,
+    val uploaderName: String? = null,
+    val uploaded: Long? = null,
+    val shortDescription: String? = null,
     // Video only attributes
-    var title: String? = null,
-    var uploaderUrl: String? = null,
-    var uploaderAvatar: String? = null,
-    var uploadedDate: String? = null,
-    var duration: Long? = null,
-    var views: Long? = null,
-    var isShort: Boolean? = null,
-    var uploaderVerified: Boolean? = null,
+    val title: String? = null,
+    val uploaderUrl: String? = null,
+    val uploaderAvatar: String? = null,
+    val uploadedDate: String? = null,
+    val duration: Long = -1,
+    val views: Long = -1,
+    val isShort: Boolean? = null,
+    val uploaderVerified: Boolean? = null,
     // Channel and Playlist attributes
-    var name: String? = null,
-    var description: String? = null,
-    var subscribers: Long? = -1,
-    var videos: Long? = -1,
-    var verified: Boolean? = null
+    val name: String? = null,
+    val description: String? = null,
+    val subscribers: Long = -1,
+    val videos: Long = -1,
+    val verified: Boolean? = null
 )

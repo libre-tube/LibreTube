@@ -11,13 +11,15 @@ espresso = "3.5.1"
 workRuntime = "2.7.1"
 exoplayer = "2.18.2"
 retrofit = "2.9.0"
-jacksonAnnotations = "2.13.4"
 desugaring = "2.0.0"
 cronetEmbedded = "108.5359.79"
 cronetOkHttp = "0.1.0"
 coil = "2.2.2"
 leakcanary = "2.10"
 room = "2.5.0"
+kotlinxSerialization = "1.4.1"
+kotlinxDatetime = "0.4.0"
+kotlinxRetrofit = "0.8.0"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -33,8 +35,6 @@ androidx-work-runtime = { group = "androidx.work", name="work-runtime-ktx", vers
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 exoplayer-extension-mediasession = { group = "com.google.android.exoplayer", name = "extension-mediasession", version.ref = "exoplayer" }
 square-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-square-retrofit-converterJackson = { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
-jacksonAnnotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jacksonAnnotations" }
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
 exoplayer-extension-cronet = { group = "com.google.android.exoplayer", name = "extension-cronet", version.ref = "exoplayer" }
 exoplayer-dash = { group = "com.google.android.exoplayer", name = "exoplayer-dash", version.ref = "exoplayer" }
@@ -47,3 +47,6 @@ lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-kt
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 room = { group = "androidx.room", name="room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-serialization-retrofit = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "kotlinxRetrofit" }

@@ -1,5 +1,6 @@
 package com.github.libretube.api.obj
 
-data class DeleteUserRequest(
-    var password: String? = null
-)
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class DeleteUserRequest(val password: String)

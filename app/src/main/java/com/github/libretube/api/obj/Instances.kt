@@ -1,15 +1,16 @@
 package com.github.libretube.api.obj
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Serializable
 data class Instances(
-    var name: String? = null,
-    var api_url: String? = null,
-    var locations: String? = null,
-    var version: String? = null,
-    var up_to_date: Boolean? = null,
-    var cdn: Boolean? = null,
-    var registered: Long? = null,
-    var last_checked: Long? = null
+    val name: String,
+    @SerialName("api_url") val apiUrl: String,
+    val locations: String,
+    val version: String,
+    @SerialName("up_to_date") val upToDate: Boolean,
+    val cdn: Boolean,
+    val registered: Long,
+    @SerialName("last_checked") val lastChecked: Long
 )

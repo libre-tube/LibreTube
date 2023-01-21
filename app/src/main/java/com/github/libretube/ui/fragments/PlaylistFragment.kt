@@ -109,7 +109,7 @@ class PlaylistFragment : BaseFragment() {
                 Log.e(TAG(), e.toString())
                 return@launchWhenCreated
             }
-            playlistFeed = response.relatedStreams.orEmpty().toMutableList()
+            playlistFeed = response.relatedStreams.toMutableList()
             binding.playlistScrollview.visibility = View.VISIBLE
             nextPage = response.nextpage
             playlistName = response.name
@@ -140,7 +140,7 @@ class PlaylistFragment : BaseFragment() {
                     if (playlistFeed.isEmpty()) return@setOnClickListener
                     NavigationHelper.navigateVideo(
                         requireContext(),
-                        response.relatedStreams!!.first().url?.toID(),
+                        response.relatedStreams.first().url?.toID(),
                         playlistId
                     )
                 }
@@ -279,15 +279,9 @@ class PlaylistFragment : BaseFragment() {
             val response = try {
                 // load locally stored playlists with the auth api
                 if (playlistType == PlaylistType.PRIVATE) {
-                    RetrofitInstance.authApi.getPlaylistNextPage(
-                        playlistId!!,
-                        nextPage!!
-                    )
+                    RetrofitInstance.authApi.getPlaylistNextPage(playlistId!!, nextPage!!)
                 } else {
-                    RetrofitInstance.api.getPlaylistNextPage(
-                        playlistId!!,
-                        nextPage!!
-                    )
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId!!, nextPage!!)
                 }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
@@ -295,7 +289,7 @@ class PlaylistFragment : BaseFragment() {
             }
 
             nextPage = response.nextpage
-            playlistAdapter?.updateItems(response.relatedStreams!!)
+            playlistAdapter?.updateItems(response.relatedStreams)
             isLoading = false
         }
     }

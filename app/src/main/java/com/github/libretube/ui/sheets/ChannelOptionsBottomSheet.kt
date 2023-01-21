@@ -20,7 +20,7 @@ import kotlinx.coroutines.runBlocking
  */
 class ChannelOptionsBottomSheet(
     private val channelId: String,
-    private val channelName: String?
+    channelName: String?
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentChannel = channelName)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class ChannelOptionsBottomSheet(
                         val channel = runBlocking {
                             RetrofitInstance.api.getChannel(channelId)
                         }
-                        channel.relatedStreams?.firstOrNull()?.url?.toID()?.let {
+                        channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
                             NavigationHelper.navigateVideo(
                                 requireContext(),
                                 it,
@@ -60,7 +60,7 @@ class ChannelOptionsBottomSheet(
                         val channel = runBlocking {
                             RetrofitInstance.api.getChannel(channelId)
                         }
-                        channel.relatedStreams?.firstOrNull()?.url?.toID()?.let {
+                        channel.relatedStreams.firstOrNull()?.url?.toID()?.let {
                             BackgroundHelper.playOnBackground(
                                 requireContext(),
                                 videoId = it,

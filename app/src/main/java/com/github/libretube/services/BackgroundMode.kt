@@ -13,8 +13,8 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ServiceCompat
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.SegmentData
@@ -40,6 +40,7 @@ import com.google.android.exoplayer2.Player
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
@@ -318,11 +319,10 @@ class BackgroundMode : Service() {
             runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
                 if (categories.isEmpty()) return@runCatching
-                segmentData =
-                    RetrofitInstance.api.getSegments(
-                        videoId,
-                        ObjectMapper().writeValueAsString(categories)
-                    )
+                segmentData = RetrofitInstance.api.getSegments(
+                    videoId,
+                    JsonHelper.json.encodeToString(categories)
+                )
                 checkForSegments()
             }
         }

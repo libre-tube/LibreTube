@@ -1,5 +1,6 @@
 package com.github.libretube.api.obj
 
-data class Message(
-    var message: String? = null
-)
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Message(val message: String? = null)
