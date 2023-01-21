@@ -56,12 +56,17 @@ object ImageHelper {
     }
 
     fun downloadImage(context: Context, url: String, path: String) {
+        getAsync(context, url) { bitmap ->
+            saveImage(context, bitmap, Uri.fromFile(File(path)))
+        }
+    }
+
+    fun getAsync(context: Context, url: String?, onSuccess: (Bitmap) -> Unit) {
         val request = ImageRequest.Builder(context)
             .data(url)
             .target { result ->
                 val bitmap = (result as BitmapDrawable).bitmap
-                val file = File(path)
-                saveImage(context, bitmap, Uri.fromFile(file))
+                onSuccess.invoke(bitmap)
             }
             .build()
 
