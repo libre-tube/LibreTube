@@ -2,6 +2,7 @@ package com.github.libretube.util
 
 import android.os.Build
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -48,10 +49,6 @@ class WindowHelper(private val activity: BaseActivity) {
     }
 
     fun hasCutout(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            activity.window.decorView.rootWindowInsets.displayCutout != null
-        } else {
-            return false
-        }
+        return ViewCompat.getRootWindowInsets(activity.window.decorView)?.displayCutout != null
     }
 }
