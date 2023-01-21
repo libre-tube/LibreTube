@@ -39,21 +39,17 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/TextViewMarquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:textAlignment="center"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/uploader"
+            style="@style/TextViewMarquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textAlignment="center"
             android:textSize="18sp" />
 
     </LinearLayout>
