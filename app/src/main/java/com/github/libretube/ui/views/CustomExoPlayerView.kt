@@ -16,7 +16,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
@@ -30,15 +29,13 @@ import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
-import com.github.libretube.ui.sheets.PlaybackSpeedSheet
+import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.util.AudioHelper
 import com.github.libretube.util.BrightnessHelper
 import com.github.libretube.util.PlayerGestureController
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.text.Cue
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -92,9 +89,6 @@ internal class CustomExoPlayerView(
         if (isControllerFullyVisible) hideController() else showController()
     }
 
-    // saved to only load the playback speed once (for the first video)
-    private var playbackPrefSet = false
-
     private val hideControllerRunnable = Runnable {
         hideController()
     }
@@ -126,17 +120,6 @@ internal class CustomExoPlayerView(
 
         // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
-
-        if (!playbackPrefSet) {
-            player?.playbackParameters = PlaybackParameters(
-                PlayerHelper.playbackSpeed.toFloat(),
-                1.0f
-            )
-            PreferenceHelper.getBoolean(PreferenceKeys.SKIP_SILENCE, false).let {
-                (player as ExoPlayer).skipSilenceEnabled = it
-            }
-            playbackPrefSet = true
-        }
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
@@ -218,9 +201,15 @@ internal class CustomExoPlayerView(
         }
     }
 
+    private fun cancelHideControllerTask() {
+        runCatching {
+            handler.removeCallbacks(hideControllerRunnable)
+        }
+    }
+
     override fun hideController() {
         // remove the callback to hide the controller
-        handler.removeCallbacks(hideControllerRunnable)
+        cancelHideControllerTask()
         super.hideController()
 
         // hide system bars if in fullscreen
@@ -228,14 +217,15 @@ internal class CustomExoPlayerView(
             if (it.isFullscreen.value == true) {
                 windowHelper?.setFullscreen()
             }
+            updateTopBarMargin()
         }
     }
 
     override fun showController() {
         // remove the previous callback from the queue to prevent a flashing behavior
-        handler.removeCallbacks(hideControllerRunnable)
+        cancelHideControllerTask()
         // automatically hide the controller after 2 seconds
-        handler.postDelayed(hideControllerRunnable, 2000)
+        handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
         super.showController()
     }
 
@@ -392,8 +382,8 @@ internal class CustomExoPlayerView(
         doubleTapOverlayBinding?.apply {
             animateSeeking(rewindBTN, rewindIV, rewindTV, true)
 
-            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             // start callback to hide the button
+            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             runnableHandler.postDelayed(hideRewindButtonRunnable, 700)
         }
     }
@@ -530,7 +520,7 @@ internal class CustomExoPlayerView(
 
     override fun onPlaybackSpeedClicked() {
         player?.let {
-            PlaybackSpeedSheet(it as ExoPlayer).show(supportFragmentManager)
+            PlaybackOptionsSheet(it as ExoPlayer).show(supportFragmentManager)
         }
     }
 
@@ -591,15 +581,7 @@ internal class CustomExoPlayerView(
             it.layoutParams = params
         }
 
-        // add padding to the top bar to not overlap the status bar
-        binding.topBar.let {
-            setPadding(
-                it.paddingLeft,
-                (if (newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE) 25 else 5).toPixel().toInt(),
-                it.paddingRight,
-                it.paddingBottom
-            )
-        }
+        updateTopBarMargin()
 
         // don't add extra padding if there's no cutout
         if ((context as? MainActivity)?.windowHelper?.hasCutout() == false) return
@@ -629,6 +611,19 @@ internal class CustomExoPlayerView(
             if (!PlayerHelper.useSystemCaptionStyle) return
             setApplyEmbeddedStyles(captionStyle == CaptionStyleCompat.DEFAULT)
             setStyle(captionStyle)
+        }
+    }
+
+    /**
+     * Add extra margin to the top bar to not overlap the status bar
+     */
+    private fun updateTopBarMargin() {
+        val isFullscreen = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+            playerViewModel?.isFullscreen?.value == true
+        binding.topBar.let {
+            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+                topMargin = (if (isFullscreen) 25 else 5).toPixel().toInt()
+            }
         }
     }
 
@@ -706,9 +701,22 @@ internal class CustomExoPlayerView(
         }
     }
 
+    /**
+     * Listen for all child touch events
+     */
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        // when a control is clicked, restart the countdown to hide the controller
+        if (isControllerFullyVisible) {
+            cancelHideControllerTask()
+            handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
+        }
+        return super.onInterceptTouchEvent(ev)
+    }
+
     companion object {
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
+        private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
         private val LANDSCAPE_MARGIN_HORIZONTAL = (20).toPixel().toInt()
     }
 }

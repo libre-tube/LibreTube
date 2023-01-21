@@ -94,6 +94,7 @@ import com.github.libretube.util.LinkHandler
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayerHelper.loadPlaybackParams
 import com.github.libretube.util.PlayingQueue
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.SeekbarPreviewListener
@@ -1343,6 +1344,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             .setHandleAudioBecomingNoisy(true)
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .build()
+            .loadPlaybackParams()
     }
 
     /**
