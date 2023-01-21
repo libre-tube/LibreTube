@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.QueueRowBinding
+import com.github.libretube.extensions.toID
 import com.github.libretube.ui.viewholders.PlayingQueueViewHolder
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.PlayingQueue
@@ -46,10 +47,16 @@ class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
             )
 
             root.setOnClickListener {
-                val oldIndex = PlayingQueue.currentIndex()
-                PlayingQueue.onQueueItemSelected(position)
-                notifyItemChanged(oldIndex)
-                notifyItemChanged(position)
+                val oldPosition = PlayingQueue.currentIndex()
+                // get the new position from the queue to work properly after reordering the queue
+                val newPosition = PlayingQueue.getStreams().indexOfFirst {
+                    it.url?.toID() == streamItem.url?.toID()
+                }.takeIf { it >= 0 } ?: return@setOnClickListener
+
+                // select the new item in the queue and update the selected item in the UI
+                PlayingQueue.onQueueItemSelected(newPosition)
+                notifyItemChanged(oldPosition)
+                notifyItemChanged(newPosition)
             }
         }
     }
