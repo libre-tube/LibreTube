@@ -148,9 +148,20 @@ class AudioPlayerFragment : BaseFragment() {
             NavigationHelper.navigateChannel(requireContext(), current.uploaderUrl?.toID())
         }
 
-        ImageHelper.loadImage(current.thumbnail, binding.thumbnail)
+        current.thumbnail?.let { updateThumbnailAsync(it) }
 
         initializeSeekBar()
+    }
+
+    private fun updateThumbnailAsync(thumbnailUrl: String) {
+        binding.progress.visibility = View.VISIBLE
+        binding.thumbnail.visibility = View.GONE
+
+        ImageHelper.getAsync(requireContext(), thumbnailUrl) {
+            binding.thumbnail.setImageBitmap(it)
+            binding.thumbnail.visibility = View.VISIBLE
+            binding.progress.visibility = View.GONE
+        }
     }
 
     private fun initializeSeekBar() {
