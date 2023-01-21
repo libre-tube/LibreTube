@@ -225,7 +225,7 @@ class BackgroundMode : Service() {
 
         // set the playback speed
         val playbackSpeed = PreferenceHelper.getString(
-            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED,
+            PreferenceKeys.PLAYBACK_SPEED,
             "1"
         ).toFloat()
         player?.setPlaybackSpeed(playbackSpeed)
