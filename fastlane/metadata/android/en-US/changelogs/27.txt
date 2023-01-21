@@ -1,0 +1,9 @@
+* New custom downloader
+* Picture in Picture: Forward and Rewind actions
+* Improved player notification
+* New audio player, when clicking the notification from background mode
+* New audio only mode, behaving similar to a music player
+* [Audio Mode] Share, playback, queue and open video controls
+* Option to convert queued videos in a playlist
+* Ability to skip silence when playing videos
+* Netflix-like animation for double tap to seek
