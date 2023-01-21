@@ -14,6 +14,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
@@ -577,10 +578,8 @@ internal class CustomExoPlayerView(
             else -> 10.dpToPx()
         }
 
-        binding.progressBar.let {
-            val params = it.layoutParams as MarginLayoutParams
-            params.bottomMargin = offset.toInt()
-            it.layoutParams = params
+        binding.progressBar.updateLayoutParams<MarginLayoutParams> {
+            bottomMargin = offset.toInt()
         }
 
         updateTopBarMargin()
@@ -595,7 +594,7 @@ internal class CustomExoPlayerView(
         }
 
         listOf(binding.topBar, binding.bottomBar).forEach {
-            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+            it.updateLayoutParams<MarginLayoutParams> {
                 marginStart = newMargin
                 marginEnd = newMargin
             }
@@ -622,10 +621,8 @@ internal class CustomExoPlayerView(
     private fun updateTopBarMargin() {
         val isFullscreen = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
             playerViewModel?.isFullscreen?.value == true
-        binding.topBar.let {
-            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
-                topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
-            }
+        binding.topBar.updateLayoutParams<MarginLayoutParams> {
+            topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
         }
     }
 

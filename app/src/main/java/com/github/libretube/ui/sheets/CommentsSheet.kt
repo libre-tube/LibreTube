@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -36,8 +37,8 @@ class CommentsSheet : ExpandedBottomSheet() {
             override fun onGlobalLayout() {
                 binding.dragHandle.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 // limit the recyclerview height to not cover the video
-                binding.commentsRV.layoutParams = binding.commentsRV.layoutParams.apply {
-                    height = viewModel.maxHeight - (binding.dragHandle.height + (20).dpToPx().toInt())
+                binding.commentsRV.updateLayoutParams {
+                    height = viewModel.maxHeight - (binding.dragHandle.height + 20.dpToPx().toInt())
                 }
             }
         })

@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.math.MathUtils
+import androidx.core.view.updateLayoutParams
 import coil.request.ImageRequest
 import com.github.libretube.api.obj.PreviewFrames
 import com.github.libretube.obj.PreviewFrame
@@ -113,25 +115,15 @@ class SeekbarPreviewListener(
      * Update the offset of the preview image to fit the current scrubber position
      */
     private fun updatePreviewX(position: Long) {
-        val params = previewIv.layoutParams as MarginLayoutParams
-        val parentWidth = (previewIv.parent as View).width
-        // calculate the center-offset of the preview image view
-        val offset = parentWidth * (position.toFloat() / duration.toFloat()) - previewIv.width / 2
-        // normalize the offset to keep a minimum distance at left and right
-        params.marginStart = normalizeOffset(
-            offset.toInt(),
-            MIN_PADDING,
-            parentWidth - MIN_PADDING - previewIv.width
-        )
-        previewIv.layoutParams = params
-    }
-
-    /**
-     * Normalize the offset to not overflow the screen
-     */
-    @Suppress("SameParameterValue")
-    private fun normalizeOffset(offset: Int, min: Int, max: Int): Int {
-        return maxOf(min, minOf(max, offset))
+        previewIv.updateLayoutParams<MarginLayoutParams> {
+            val parentWidth = (previewIv.parent as View).width
+            // calculate the center-offset of the preview image view
+            val offset = parentWidth * (position.toFloat() / duration.toFloat()) -
+                previewIv.width / 2
+            // normalize the offset to keep a minimum distance at left and right
+            val maxPadding = parentWidth - MIN_PADDING - previewIv.width
+            marginStart = MathUtils.clamp(offset.toInt(), MIN_PADDING, maxPadding)
+        }
     }
 
     companion object {
