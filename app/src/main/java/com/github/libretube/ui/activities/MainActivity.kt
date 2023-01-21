@@ -97,7 +97,7 @@ class MainActivity : BaseActivity() {
 
         // sets the navigation bar color to the previously calculated color
         window.navigationBarColor = if (binding.bottomNav.menu.size() > 0) {
-            SurfaceColors.getColorForElevation(this, 10F)
+            SurfaceColors.getColorForElevation(this, 9F)
         } else {
             ThemeHelper.getThemeColor(this, android.R.attr.colorBackground)
         }
@@ -120,7 +120,7 @@ class MainActivity : BaseActivity() {
                 val navHostFragment =
                     supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment?
                 // get the current fragment
-                val fragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
+                val fragment = navHostFragment?.childFragmentManager?.fragments?.getOrNull(0)
                 tryScrollToTop(fragment?.requireView() as? ViewGroup)
             }
         }
