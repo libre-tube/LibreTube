@@ -80,6 +80,10 @@ class AudioPlayerFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // select the title TV in order for it to automatically scroll
+        binding.title.isSelected = true
+        binding.uploader.isSelected = true
+
         binding.prev.setOnClickListener {
             val currentIndex = PlayingQueue.currentIndex()
             if (!PlayingQueue.hasPrev()) return@setOnClickListener
