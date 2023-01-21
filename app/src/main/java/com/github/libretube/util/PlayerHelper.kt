@@ -33,14 +33,9 @@ object PlayerHelper {
     /**
      * Get the audio source following the users preferences
      */
-    fun getAudioSource(
-        context: Context,
-        audios: List<PipedStream>
-    ): String {
+    fun getAudioSource(context: Context, audios: List<PipedStream>): String {
         val audioFormat = PreferenceHelper.getString(PreferenceKeys.PLAYER_AUDIO_FORMAT, "all")
-        val audioPrefKey = if (
-            NetworkHelper.isNetworkMobile(context)
-        ) {
+        val audioPrefKey = if (NetworkHelper.isNetworkMetered(context)) {
             PreferenceKeys.PLAYER_AUDIO_QUALITY_MOBILE
         } else {
             PreferenceKeys.PLAYER_AUDIO_QUALITY
@@ -351,17 +346,12 @@ object PlayerHelper {
         )
 
     fun getDefaultResolution(context: Context): String {
-        return if (NetworkHelper.isNetworkMobile(context)) {
-            PreferenceHelper.getString(
-                PreferenceKeys.DEFAULT_RESOLUTION_MOBILE,
-                ""
-            )
+        val prefKey = if (NetworkHelper.isNetworkMetered(context)) {
+            PreferenceKeys.DEFAULT_RESOLUTION_MOBILE
         } else {
-            PreferenceHelper.getString(
-                PreferenceKeys.DEFAULT_RESOLUTION,
-                ""
-            )
+            PreferenceKeys.DEFAULT_RESOLUTION
         }
+        return PreferenceHelper.getString(prefKey, "")
     }
 
     fun getIntentActon(context: Context): String {
