@@ -6,6 +6,7 @@
 [![Telegram](https://libre-tube.github.io/images/tg-widget.svg)](https://t.me/libretube)
 [![Twitter](https://libre-tube.github.io/images/tw-widget.svg)](https://twitter.com/libretube)
 [![Reddit](https://libre-tube.github.io/images/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
+[![Discord](https://libre-tube.github.io/images/discord-widget.svg)](https://discord.gg/Qc34xCj2GV)
 
 </div><div align="center" style="width:100%; display:flex; justify-content:space-between;">
 
