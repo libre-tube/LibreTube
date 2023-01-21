@@ -60,11 +60,12 @@ object NavigationHelper {
         playlistId: String? = null,
         channelId: String? = null,
         keepQueue: Boolean = false,
-        timeStamp: Long? = null
+        timeStamp: Long? = null,
+        forceVideo: Boolean = false
     ) {
         if (videoId == null) return
 
-        if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false)) {
+        if (PreferenceHelper.getBoolean(PreferenceKeys.AUDIO_ONLY_MODE, false) && !forceVideo) {
             BackgroundHelper.stopBackgroundPlay(context)
             BackgroundHelper.playOnBackground(
                 context,

@@ -11,7 +11,7 @@ import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.PlaybackParameters
 
-class PlaybackSpeedSheet(
+class PlaybackOptionsSheet(
     private val player: ExoPlayer
 ) : ExpandedBottomSheet() {
     private lateinit var binding: PlaybackBottomSheetBinding

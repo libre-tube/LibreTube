@@ -30,7 +30,7 @@ import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
-import com.github.libretube.ui.sheets.PlaybackSpeedSheet
+import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.util.AudioHelper
 import com.github.libretube.util.BrightnessHelper
 import com.github.libretube.util.PlayerGestureController
@@ -531,7 +531,7 @@ internal class CustomExoPlayerView(
 
     override fun onPlaybackSpeedClicked() {
         player?.let {
-            PlaybackSpeedSheet(it as ExoPlayer).show(supportFragmentManager)
+            PlaybackOptionsSheet(it as ExoPlayer).show(supportFragmentManager)
         }
     }
 
