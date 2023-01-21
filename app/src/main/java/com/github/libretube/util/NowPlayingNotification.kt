@@ -38,6 +38,7 @@ class NowPlayingNotification(
 ) {
     private var videoId: String? = null
     private var streams: Streams? = null
+    private var bitmap: Bitmap? = null
 
     /**
      * The [MediaSessionCompat] for the [streams].
@@ -105,24 +106,7 @@ class NowPlayingNotification(
         ): Bitmap? {
             if (DataSaverMode.isEnabled(context)) return null
 
-            var bitmap: Bitmap? = null
-
-            val request = ImageRequest.Builder(context)
-                .data(streams?.thumbnailUrl)
-                .target { result ->
-                    val bm = (result as BitmapDrawable).bitmap
-                    // returns the bitmap on Android 13+, for everything below scaled down to a square
-                    bitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                        ImageHelper.getSquareBitmap(bm)
-                    } else {
-                        bm
-                    }
-                    callback.onBitmap(bitmap!!)
-                }
-                .build()
-
-            // enqueue the thumbnail loading request
-            ImageHelper.imageLoader.enqueue(request)
+            if (bitmap == null) enqueueThumbnailRequest(callback)
 
             return bitmap
         }
@@ -130,6 +114,25 @@ class NowPlayingNotification(
         override fun getCurrentSubText(player: Player): CharSequence? {
             return streams?.uploader
         }
+    }
+
+    private fun enqueueThumbnailRequest(callback: PlayerNotificationManager.BitmapCallback) {
+        val request = ImageRequest.Builder(context)
+            .data(streams?.thumbnailUrl)
+            .target { result ->
+                val bm = (result as BitmapDrawable).bitmap
+                // returns the bitmap on Android 13+, for everything below scaled down to a square
+                bitmap = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    ImageHelper.getSquareBitmap(bm)
+                } else {
+                    bm
+                }
+                callback.onBitmap(bitmap!!)
+            }
+            .build()
+
+        // enqueue the thumbnail loading request
+        ImageHelper.imageLoader.enqueue(request)
     }
 
     private val customActionReceiver = object : CustomActionReceiver {
@@ -257,6 +260,8 @@ class NowPlayingNotification(
     ) {
         this.videoId = videoId
         this.streams = streams
+        // reset the thumbnail bitmap in order to become reloaded for the new video
+        this.bitmap = null
 
         if (playerNotification == null) {
             createMediaSession()
