@@ -218,9 +218,15 @@ internal class CustomExoPlayerView(
         }
     }
 
+    private fun cancelHideControllerTask() {
+        runCatching {
+            handler.removeCallbacks(hideControllerRunnable)
+        }
+    }
+
     override fun hideController() {
         // remove the callback to hide the controller
-        handler.removeCallbacks(hideControllerRunnable)
+        cancelHideControllerTask()
         super.hideController()
 
         // hide system bars if in fullscreen
@@ -234,7 +240,7 @@ internal class CustomExoPlayerView(
 
     override fun showController() {
         // remove the previous callback from the queue to prevent a flashing behavior
-        handler.removeCallbacks(hideControllerRunnable)
+        cancelHideControllerTask()
         // automatically hide the controller after 2 seconds
         handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
         super.showController()
@@ -393,8 +399,8 @@ internal class CustomExoPlayerView(
         doubleTapOverlayBinding?.apply {
             animateSeeking(rewindBTN, rewindIV, rewindTV, true)
 
-            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             // start callback to hide the button
+            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             runnableHandler.postDelayed(hideRewindButtonRunnable, 700)
         }
     }
@@ -718,7 +724,7 @@ internal class CustomExoPlayerView(
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         // when a control is clicked, restart the countdown to hide the controller
         if (isControllerFullyVisible) {
-            handler.removeCallbacks(hideControllerRunnable)
+            cancelHideControllerTask()
             handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
         }
         return super.onInterceptTouchEvent(ev)
