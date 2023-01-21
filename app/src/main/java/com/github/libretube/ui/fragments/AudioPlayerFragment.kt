@@ -15,10 +15,14 @@ import android.view.ViewGroup
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
+import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
+import com.github.libretube.obj.ShareData
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseFragment
+import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -32,7 +36,7 @@ class AudioPlayerFragment : BaseFragment() {
     private var handler = Handler(Looper.getMainLooper())
     private var isPaused: Boolean = false
 
-    private lateinit var playerService: BackgroundMode
+    private var playerService: BackgroundMode? = null
 
     /** Defines callbacks for service binding, passed to bindService()  */
     private val connection = object : ServiceConnection {
@@ -86,16 +90,31 @@ class AudioPlayerFragment : BaseFragment() {
             PlayingQueue.onQueueItemSelected(currentIndex + 1)
         }
 
-        binding.thumbnail.setOnClickListener {
+        binding.openQueue.setOnClickListener {
             PlayingQueueSheet().show(childFragmentManager)
+        }
+
+        binding.playbackOptions.setOnClickListener {
+            playerService?.player?.let {
+                PlaybackOptionsSheet(it)
+                    .show(childFragmentManager)
+            }
+        }
+
+        binding.share.setOnClickListener {
+            val currentVideo = PlayingQueue.getCurrent() ?: return@setOnClickListener
+            ShareDialog(
+                id = currentVideo.url!!.toID(),
+                shareObjectType = ShareObjectType.VIDEO,
+                shareData = ShareData(currentVideo = currentVideo.title)
+            ).show(childFragmentManager, null)
         }
 
         // Listen for track changes due to autoplay or the notification
         PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
 
         binding.playPause.setOnClickListener {
-            if (!this::playerService.isInitialized) return@setOnClickListener
-            if (isPaused) playerService.play() else playerService.pause()
+            if (isPaused) playerService?.play() else playerService?.pause()
         }
 
         // load the stream info into the UI
@@ -121,10 +140,8 @@ class AudioPlayerFragment : BaseFragment() {
     }
 
     private fun initializeSeekBar() {
-        if (!this::playerService.isInitialized) return
-
         binding.timeBar.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) playerService.seekToPosition(value.toLong() * 1000)
+            if (fromUser) playerService?.seekToPosition(value.toLong() * 1000)
         }
         updateSeekBar()
     }
@@ -133,7 +150,7 @@ class AudioPlayerFragment : BaseFragment() {
      * Update the position, duration and text views belonging to the seek bar
      */
     private fun updateSeekBar() {
-        val duration = playerService.getDuration()?.toFloat() ?: return
+        val duration = playerService?.getDuration()?.toFloat() ?: return
 
         // when the video is not loaded yet, retry in 100 ms
         if (duration <= 0) {
@@ -142,7 +159,7 @@ class AudioPlayerFragment : BaseFragment() {
         }
 
         // get the current position from the player service
-        val currentPosition = playerService.getCurrentPosition()?.toFloat() ?: 0f
+        val currentPosition = playerService?.getCurrentPosition()?.toFloat() ?: 0f
 
         // set the text for the indicators
         binding.duration.text = DateUtils.formatElapsedTime((duration / 1000).toLong())
@@ -161,7 +178,7 @@ class AudioPlayerFragment : BaseFragment() {
     }
 
     private fun handleServiceConnection() {
-        playerService.onIsPlayingChanged = { isPlaying ->
+        playerService?.onIsPlayingChanged = { isPlaying ->
             binding.playPause.setIconResource(
                 if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play
             )
@@ -172,7 +189,7 @@ class AudioPlayerFragment : BaseFragment() {
 
     override fun onDestroy() {
         // unregister all listeners and the connected [playerService]
-        playerService.onIsPlayingChanged = null
+        playerService?.onIsPlayingChanged = null
         activity?.unbindService(connection)
         PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)
 

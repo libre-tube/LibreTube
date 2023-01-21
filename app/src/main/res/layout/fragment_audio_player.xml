@@ -47,8 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -56,8 +56,8 @@
         android:id="@+id/time_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:labelBehavior="gone"
-        android:layout_marginHorizontal="20dp" />
+        android:layout_marginHorizontal="20dp"
+        app:labelBehavior="gone" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -69,14 +69,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
-            tools:text="00:00"/>
+            tools:text="00:00" />
 
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
-            tools:text="10:15"/>
+            tools:text="10:15" />
 
     </FrameLayout>
 
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginVertical="50dp">
+        android:layout_marginVertical="36dp">
 
         <ImageView
             android:id="@+id/prev"
@@ -117,5 +117,45 @@
             android:src="@drawable/ic_next" />
 
     </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Material3.CardView.Elevated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="18dp"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/open_queue"
+                style="@style/AudioPlayerButton"
+                android:src="@drawable/ic_queue" />
+
+            <ImageView
+                android:id="@+id/playback_options"
+                style="@style/AudioPlayerButton"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:src="@drawable/ic_speed" />
+
+            <ImageView
+                android:id="@+id/open_video"
+                style="@style/AudioPlayerButton"
+                android:src="@drawable/ic_video" />
+
+            <ImageView
+                android:id="@+id/share"
+                style="@style/AudioPlayerButton"
+                android:src="@drawable/ic_share" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

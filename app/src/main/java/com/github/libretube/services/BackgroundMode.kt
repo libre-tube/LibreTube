@@ -65,7 +65,7 @@ class BackgroundMode : Service() {
     /**
      * The [ExoPlayer] player. Followed tutorial [here](https://developer.android.com/codelabs/exoplayer-intro)
      */
-    private var player: ExoPlayer? = null
+    var player: ExoPlayer? = null
     private var playWhenReadyPlayer = true
 
     /**
