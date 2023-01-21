@@ -179,25 +179,24 @@ class AudioPlayerFragment : BaseFragment() {
      * Update the position, duration and text views belonging to the seek bar
      */
     private fun updateSeekBar() {
-        val duration = playerService?.getDuration()?.toFloat() ?: return
-
-        // when the video is not loaded yet, retry in 100 ms
-        if (duration <= 0) {
+        val duration = playerService?.getDuration()?.takeIf { it > 0 } ?: let {
+            // if there's no duration available, clear everything
+            binding.timeBar.value = 0f
+            binding.duration.text = ""
+            binding.currentPosition.text = ""
             handler.postDelayed(this::updateSeekBar, 100)
             return
         }
-
-        // get the current position from the player service
         val currentPosition = playerService?.getCurrentPosition()?.toFloat() ?: 0f
 
         // set the text for the indicators
-        binding.duration.text = DateUtils.formatElapsedTime((duration / 1000).toLong())
+        binding.duration.text = DateUtils.formatElapsedTime(duration / 1000)
         binding.currentPosition.text = DateUtils.formatElapsedTime(
             (currentPosition / 1000).toLong()
         )
 
         // update the time bar current value and maximum value
-        binding.timeBar.valueTo = duration / 1000
+        binding.timeBar.valueTo = (duration / 1000).toFloat()
         binding.timeBar.value = minOf(
             currentPosition / 1000,
             binding.timeBar.valueTo
