@@ -12,6 +12,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
@@ -24,6 +25,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
+import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.PlayingQueue
@@ -99,6 +101,17 @@ class AudioPlayerFragment : BaseFragment() {
                 PlaybackOptionsSheet(it)
                     .show(childFragmentManager)
             }
+        }
+
+        binding.openVideo.setOnClickListener {
+            NavigationHelper.navigateVideo(
+                context = requireContext(),
+                videoId = PlayingQueue.getCurrent()?.url?.toID(),
+                keepQueue = true,
+                forceVideo = true
+            )
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            findNavController().popBackStack()
         }
 
         binding.share.setOnClickListener {
