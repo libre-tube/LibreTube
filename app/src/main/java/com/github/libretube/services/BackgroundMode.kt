@@ -22,7 +22,6 @@ import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.TAG
@@ -32,8 +31,8 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayerHelper
+import com.github.libretube.util.PlayerHelper.loadPlaybackParams
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
@@ -223,13 +222,6 @@ class BackgroundMode : Service() {
             }
         }
 
-        // set the playback speed
-        val playbackSpeed = PreferenceHelper.getString(
-            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED,
-            "1"
-        ).toFloat()
-        player?.setPlaybackSpeed(playbackSpeed)
-
         fetchSponsorBlockSegments()
     }
 
@@ -244,6 +236,7 @@ class BackgroundMode : Service() {
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .setLoadControl(PlayerHelper.getLoadControl())
             .build()
+            .loadPlaybackParams()
 
         /**
          * Listens for changed playbackStates (e.g. pause, end)

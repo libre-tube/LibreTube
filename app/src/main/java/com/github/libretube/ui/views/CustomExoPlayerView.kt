@@ -16,7 +16,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.github.libretube.R
-import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
@@ -36,9 +35,7 @@ import com.github.libretube.util.BrightnessHelper
 import com.github.libretube.util.PlayerGestureController
 import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.text.Cue
 import com.google.android.exoplayer2.trackselection.TrackSelector
@@ -92,9 +89,6 @@ internal class CustomExoPlayerView(
         if (isControllerFullyVisible) hideController() else showController()
     }
 
-    // saved to only load the playback speed once (for the first video)
-    private var playbackPrefSet = false
-
     private val hideControllerRunnable = Runnable {
         hideController()
     }
@@ -126,17 +120,6 @@ internal class CustomExoPlayerView(
 
         // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
-
-        if (!playbackPrefSet) {
-            player?.playbackParameters = PlaybackParameters(
-                PlayerHelper.playbackSpeed.toFloat(),
-                1.0f
-            )
-            PreferenceHelper.getBoolean(PreferenceKeys.SKIP_SILENCE, false).let {
-                (player as ExoPlayer).skipSilenceEnabled = it
-            }
-            playbackPrefSet = true
-        }
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
@@ -218,9 +201,15 @@ internal class CustomExoPlayerView(
         }
     }
 
+    private fun cancelHideControllerTask() {
+        runCatching {
+            handler.removeCallbacks(hideControllerRunnable)
+        }
+    }
+
     override fun hideController() {
         // remove the callback to hide the controller
-        handler.removeCallbacks(hideControllerRunnable)
+        cancelHideControllerTask()
         super.hideController()
 
         // hide system bars if in fullscreen
@@ -234,7 +223,7 @@ internal class CustomExoPlayerView(
 
     override fun showController() {
         // remove the previous callback from the queue to prevent a flashing behavior
-        handler.removeCallbacks(hideControllerRunnable)
+        cancelHideControllerTask()
         // automatically hide the controller after 2 seconds
         handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
         super.showController()
@@ -393,8 +382,8 @@ internal class CustomExoPlayerView(
         doubleTapOverlayBinding?.apply {
             animateSeeking(rewindBTN, rewindIV, rewindTV, true)
 
-            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             // start callback to hide the button
+            runnableHandler.removeCallbacks(hideRewindButtonRunnable)
             runnableHandler.postDelayed(hideRewindButtonRunnable, 700)
         }
     }
@@ -718,7 +707,7 @@ internal class CustomExoPlayerView(
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         // when a control is clicked, restart the countdown to hide the controller
         if (isControllerFullyVisible) {
-            handler.removeCallbacks(hideControllerRunnable)
+            cancelHideControllerTask()
             handler.postDelayed(hideControllerRunnable, AUTO_HIDE_CONTROLLER_DELAY)
         }
         return super.onInterceptTouchEvent(ev)

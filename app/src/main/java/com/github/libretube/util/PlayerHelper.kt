@@ -18,7 +18,9 @@ import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.DefaultLoadControl
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.LoadControl
+import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.video.VideoSize
@@ -342,6 +344,12 @@ object PlayerHelper {
             false
         )
 
+    private val skipSilence: Boolean
+        get() = PreferenceHelper.getBoolean(
+            PreferenceKeys.SKIP_SILENCE,
+            false
+        )
+
     fun getDefaultResolution(context: Context): String {
         return if (NetworkHelper.isNetworkMobile(context)) {
             PreferenceHelper.getString(
@@ -458,5 +466,17 @@ object PlayerHelper {
                 DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS
             )
             .build()
+    }
+
+    /**
+     * Load playback parameters such as speed and skip silence
+     */
+    fun ExoPlayer.loadPlaybackParams(): ExoPlayer {
+        skipSilenceEnabled = skipSilence
+        playbackParameters = PlaybackParameters(
+            playbackSpeed.toFloat(),
+            1.0f
+        )
+        return this
     }
 }
