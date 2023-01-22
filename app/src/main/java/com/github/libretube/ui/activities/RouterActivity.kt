@@ -9,7 +9,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.util.NavigationHelper
-import kotlin.time.Duration
+import com.github.libretube.util.TextUtils
 
 class RouterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,14 +65,14 @@ class RouterActivity : BaseActivity() {
 
                 intent.putExtra(IntentData.videoId, videoId)
                 uri.getQueryParameter("t")
-                    ?.let { intent.putExtra(IntentData.timeStamp, parseTimestamp(it)) }
+                    ?.let { intent.putExtra(IntentData.timeStamp, TextUtils.parseTimestamp(it)) }
             }
             else -> {
                 val videoId = uri.path!!.replace("/", "")
 
                 intent.putExtra(IntentData.videoId, videoId)
                 uri.getQueryParameter("t")
-                    ?.let { intent.putExtra(IntentData.timeStamp, parseTimestamp(it)) }
+                    ?.let { intent.putExtra(IntentData.timeStamp, TextUtils.parseTimestamp(it)) }
             }
         }
         return intent
@@ -86,13 +86,5 @@ class RouterActivity : BaseActivity() {
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(resolveType(intent!!, uri))
         finishAndRemoveTask()
-    }
-
-    private fun parseTimestamp(t: String): Long? {
-        if (t.all { c -> c.isDigit() }) {
-            return t.toLong()
-        }
-
-        return Duration.parseOrNull(t)?.inWholeSeconds
     }
 }

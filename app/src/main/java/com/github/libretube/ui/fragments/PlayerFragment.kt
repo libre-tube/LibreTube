@@ -1063,7 +1063,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // check if the video is the current video and has a valid time
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
-            TextUtils.getTimeInSeconds(uri)?.let {
+            TextUtils.parseTimestamp(uri.getQueryParameter("t") ?: return)?.let {
                 exoPlayer.seekTo(it * 1000)
             }
         } else {
