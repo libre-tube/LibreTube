@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Channel(
-    val id: String,
-    val name: String,
-    val avatarUrl: String,
+    val id: String? = null,
+    val name: String? = null,
+    val avatarUrl: String? = null,
     val bannerUrl: String? = null,
-    val description: String,
+    val description: String = "",
     val nextpage: String? = null,
     val subscriberCount: Long = 0,
     val verified: Boolean = false,
