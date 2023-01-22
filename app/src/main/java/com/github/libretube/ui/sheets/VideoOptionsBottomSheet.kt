@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
  */
 class VideoOptionsBottomSheet(
     private val videoId: String,
-    private val videoName: String
+    videoName: String
 ) : BaseBottomSheet() {
     private val shareData = ShareData(currentVideo = videoName)
     override fun onCreate(savedInstanceState: Bundle?) {
