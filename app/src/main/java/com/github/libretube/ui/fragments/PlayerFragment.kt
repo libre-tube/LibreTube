@@ -919,11 +919,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
-                exoPlayerView.keepScreenOn = !(
-                    playbackState == Player.STATE_IDLE ||
-                        playbackState == Player.STATE_ENDED
-                    )
-
                 // save the watch position to the database
                 // only called when the position is unequal to 0, otherwise it would become reset
                 // before the player can seek to the saved position from videos of the queue
@@ -1120,16 +1115,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun updatePlayPauseButton() {
-        if (exoPlayer.isPlaying) {
-            // video is playing
-            binding.playImageView.setImageResource(R.drawable.ic_pause)
-        } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
-            // video has finished
-            binding.playImageView.setImageResource(R.drawable.ic_restart)
-        } else {
-            // player in any other state
-            binding.playImageView.setImageResource(R.drawable.ic_play)
-        }
+        binding.playImageView.setImageResource(
+            when {
+                exoPlayer.isPlaying -> R.drawable.ic_pause
+                exoPlayer.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
+                else -> R.drawable.ic_play
+            }
+        )
     }
 
     private fun initializeRelatedVideos(relatedStreams: List<StreamItem>?) {
