@@ -25,6 +25,7 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
+import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.util.BackgroundHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
@@ -126,6 +127,14 @@ class AudioPlayerFragment : BaseFragment() {
                 shareObjectType = ShareObjectType.VIDEO,
                 shareData = ShareData(currentVideo = currentVideo.title)
             ).show(childFragmentManager, null)
+        }
+
+        binding.thumbnail.setOnClickListener {
+            val current = PlayingQueue.getCurrent()
+            current?.let {
+                VideoOptionsBottomSheet(it.url!!.toID(), it.title!!)
+                    .show(childFragmentManager)
+            }
         }
 
         // Listen for track changes due to autoplay or the notification
