@@ -152,16 +152,12 @@ internal class CustomExoPlayerView(
         }
 
         binding.playPauseBTN.setOnClickListener {
-            if (player?.isPlaying == false) {
-                // start or go on playing
-                if (player?.playbackState == Player.STATE_ENDED) {
-                    // restart video if finished
+            when {
+                player?.isPlaying == false && player?.playbackState == Player.STATE_ENDED -> {
                     player?.seekTo(0)
                 }
-                player?.play()
-            } else {
-                // pause the video
-                player?.pause()
+                player?.isPlaying == false -> player?.play()
+                else -> player?.pause()
             }
         }
 
@@ -198,16 +194,13 @@ internal class CustomExoPlayerView(
     }
 
     private fun updatePlayPauseButton() {
-        if (player?.isPlaying == true) {
-            // video is playing
-            binding.playPauseBTN.setImageResource(R.drawable.ic_pause)
-        } else if (player?.playbackState == Player.STATE_ENDED) {
-            // video has finished
-            binding.playPauseBTN.setImageResource(R.drawable.ic_restart)
-        } else {
-            // player in any other state
-            binding.playPauseBTN.setImageResource(R.drawable.ic_play)
-        }
+        binding.playPauseBTN.setImageResource(
+            when {
+                player?.isPlaying == true -> R.drawable.ic_pause
+                player?.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
+                else -> R.drawable.ic_play
+            }
+        )
     }
 
     private fun cancelHideControllerTask() {

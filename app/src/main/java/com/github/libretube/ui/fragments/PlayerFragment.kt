@@ -1115,16 +1115,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun updatePlayPauseButton() {
-        if (exoPlayer.isPlaying) {
-            // video is playing
-            binding.playImageView.setImageResource(R.drawable.ic_pause)
-        } else if (exoPlayer.playbackState == Player.STATE_ENDED) {
-            // video has finished
-            binding.playImageView.setImageResource(R.drawable.ic_restart)
-        } else {
-            // player in any other state
-            binding.playImageView.setImageResource(R.drawable.ic_play)
-        }
+        binding.playImageView.setImageResource(
+            when {
+                exoPlayer.isPlaying -> R.drawable.ic_pause
+                exoPlayer.playbackState == Player.STATE_ENDED -> R.drawable.ic_restart
+                else -> R.drawable.ic_play
+            }
+        )
     }
 
     private fun initializeRelatedVideos(relatedStreams: List<StreamItem>?) {
