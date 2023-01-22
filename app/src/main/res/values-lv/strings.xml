@@ -346,4 +346,7 @@
     <string name="save_feed">Ielādēt plūsmu fonā</string>
     <string name="save_feed_summary">Ielādē abonementu plūsmu fonā un neļauj tai automātiski atjaunoties.</string>
     <string name="play_next">Atskaņot nākamo</string>
+    <string name="no_subtitle">Bez subtitriem</string>
+    <string name="download_paused">Lejupielāde iepauzēta</string>
+    <string name="download_completed">Lejupielāde pabeigta</string>
 </resources>
