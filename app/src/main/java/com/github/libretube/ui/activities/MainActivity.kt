@@ -167,7 +167,7 @@ class MainActivity : BaseActivity() {
                 }
                 R.id.searchResultFragment -> {
                     navController.popBackStack(R.id.searchFragment, true) ||
-                            navController.popBackStack()
+                        navController.popBackStack()
                 }
                 else -> {
                     navController.popBackStack()

@@ -919,11 +919,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
-                exoPlayerView.keepScreenOn = !(
-                    playbackState == Player.STATE_IDLE ||
-                        playbackState == Player.STATE_ENDED
-                    )
-
                 // save the watch position to the database
                 // only called when the position is unequal to 0, otherwise it would become reset
                 // before the player can seek to the saved position from videos of the queue
