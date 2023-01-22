@@ -5,6 +5,7 @@ import java.net.URL
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
+import kotlin.time.Duration
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toJavaLocalDate
 
@@ -50,30 +51,15 @@ object TextUtils {
 
     /**
      * Get time in seconds from a youtube video link
+     * @param t The time string to parse
+     * @return Time in seconds
      */
-    fun getTimeInSeconds(uri: Uri): Long? {
-        var time = uri.getQueryParameter("t") ?: return -1L
-
-        var timeInSeconds: Long? = null
-
-        // Find all spans containing hours, minutes or seconds
-        listOf(Pair("h", 60 * 60), Pair("m", 60), Pair("s", 1)).forEach { (separator, timeFactor) ->
-            if (time.contains(separator)) {
-                time.substringBefore(separator).toLongOrNull()?.let {
-                    timeInSeconds = (timeInSeconds ?: 0L) + it * timeFactor
-                    time = time.substringAfter(separator)
-                }
-            }
+    fun parseTimestamp(t: String): Long? {
+        if (t.all { c -> c.isDigit() }) {
+            return t.toLong()
         }
 
-        // Time may not contain h, m or s. In that case, it is just a number of seconds
-        if (timeInSeconds == null) {
-            time.toLongOrNull()?.let {
-                timeInSeconds = it
-            }
-        }
-
-        return timeInSeconds
+        return Duration.parseOrNull(t)?.inWholeSeconds
     }
 
     /**

@@ -1057,15 +1057,17 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             // not a youtube video link, thus handle normally
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
+            return
         }
+
         // check if the video is the current video and has a valid time
         if (videoId == this.videoId) {
             // try finding the time stamp of the url and seek to it if found
-            TextUtils.getTimeInSeconds(uri)?.let {
+            TextUtils.parseTimestamp(uri.getQueryParameter("t") ?: return)?.let {
                 exoPlayer.seekTo(it * 1000)
             }
         } else {
-            // youtube video link without time or not the current video, thus open new player
+            // youtube video link without time or not the current video, thus load in player
             playNextVideo(videoId)
         }
     }
