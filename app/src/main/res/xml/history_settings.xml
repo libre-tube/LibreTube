@@ -28,7 +28,7 @@
             app:title="@string/watch_history" />
 
         <ListPreference
-            android:defaultValue="unlimited"
+            android:defaultValue="100"
             android:entries="@array/historySize"
             android:entryValues="@array/historySizeValues"
             android:icon="@drawable/ic_list"
