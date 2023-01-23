@@ -212,9 +212,7 @@ class PlaylistFragment : BaseFragment() {
                 binding.playlistRecView.adapter = playlistAdapter
                 binding.playlistScrollview.viewTreeObserver
                     .addOnScrollChangedListener {
-                        if (binding.playlistScrollview.getChildAt(0).bottom
-                            == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
-                        ) {
+                        if (!binding.playlistScrollview.canScrollVertically(1)) {
                             if (isLoading) return@addOnScrollChangedListener
 
                             // append more playlists to the recycler view

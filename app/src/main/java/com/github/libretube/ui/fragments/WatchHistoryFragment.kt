@@ -1,6 +1,8 @@
 package com.github.libretube.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ class WatchHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentWatchHistoryBinding
 
     private val playerViewModel: PlayerViewModel by activityViewModels()
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +52,7 @@ class WatchHistoryFragment : BaseFragment() {
 
         val watchHistory = awaitQuery {
             Database.watchHistoryDao().getAll()
-        }
+        }.reversed()
 
         if (watchHistory.isEmpty()) return
 
@@ -96,15 +99,14 @@ class WatchHistoryFragment : BaseFragment() {
             )
         }
 
-        // reversed order
-        binding.watchHistoryRecView.layoutManager = LinearLayoutManager(requireContext()).apply {
-            reverseLayout = true
-            stackFromEnd = true
-        }
-
         val watchHistoryAdapter = WatchHistoryAdapter(
             watchHistory.toMutableList()
         )
+
+        binding.watchHistoryRecView.layoutManager = LinearLayoutManager(context)
+        binding.watchHistoryRecView.adapter = watchHistoryAdapter
+        binding.historyEmpty.visibility = View.GONE
+        binding.historyScrollView.visibility = View.VISIBLE
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
@@ -130,7 +132,7 @@ class WatchHistoryFragment : BaseFragment() {
         val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
         itemTouchHelper.attachToRecyclerView(binding.watchHistoryRecView)
 
-        // observe changes
+        // observe changes to indicate if the history is empty
         watchHistoryAdapter.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
@@ -141,8 +143,15 @@ class WatchHistoryFragment : BaseFragment() {
             }
         })
 
-        binding.watchHistoryRecView.adapter = watchHistoryAdapter
-        binding.historyEmpty.visibility = View.GONE
-        binding.historyScrollView.visibility = View.VISIBLE
+        // add a listener for scroll end, delay needed to prevent loading new ones the first time
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.historyScrollView.viewTreeObserver.addOnScrollChangedListener {
+                if (!binding.historyScrollView.canScrollVertically(1) && !isLoading) {
+                    isLoading = true
+                    watchHistoryAdapter.showMoreItems()
+                    isLoading = false
+                }
+            }
+        }, 200)
     }
 }
