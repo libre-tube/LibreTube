@@ -446,4 +446,8 @@
     <string name="concurrent_downloads_limit_reached">Az egyidejű letöltések maximális száma elérve.</string>
     <string name="audio_only_mode">Csak hang mód</string>
     <string name="audio_only_mode_summary">Változtassa a LibreTube-ot zenelejátszóvá.</string>
+    <string name="sleep_timer">Elalvási időzítő</string>
+    <string name="skip_silence">Csend átugrása</string>
+    <string name="help">Súgó</string>
+    <string name="faq">GYIK</string>
 </resources>
