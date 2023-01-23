@@ -1159,17 +1159,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             "(${chapter.start?.let { DateUtils.formatElapsedTime(it) }}) ${chapter.title}"
         }
         playerBinding.chapterLL.setOnClickListener {
-            if (viewModel.isFullscreen.value!!) {
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle(R.string.chapters)
-                    .setItems(titles.toTypedArray()) { _, index ->
-                        exoPlayer.seekTo(chapters[index].start!! * 1000)
-                    }
-                    .show()
-            } else {
-                toggleDescription()
-            }
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.chapters)
+                .setItems(titles.toTypedArray()) { _, index ->
+                    exoPlayer.seekTo(chapters[index].start!! * 1000)
+                }
+                .show()
         }
+
         setCurrentChapterName()
     }
 
