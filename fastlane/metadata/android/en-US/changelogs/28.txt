@@ -1,0 +1,8 @@
+* Fix channel crashes
+* Fix backup backwards compatibility
+* Fix unresponsiveness when opening watch history
+* Fix that clicking description links plays next video
+* Keep the screen on while playing in the offline player
+* [Audio mode] Show video options when clicking thumbnail
+* Reduce the player top bar margin
+* Minor player view improvements
