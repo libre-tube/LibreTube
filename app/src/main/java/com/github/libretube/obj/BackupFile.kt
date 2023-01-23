@@ -11,12 +11,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BackupFile(
-    var watchHistory: List<WatchHistoryItem> = emptyList(),
-    var watchPositions: List<WatchPosition> = emptyList(),
-    var searchHistory: List<SearchHistoryItem> = emptyList(),
-    var localSubscriptions: List<LocalSubscription> = emptyList(),
-    var customInstances: List<CustomInstance> = emptyList(),
-    var playlistBookmarks: List<PlaylistBookmark> = emptyList(),
-    var localPlaylists: List<LocalPlaylistWithVideos> = emptyList(),
-    var preferences: List<PreferenceItem> = emptyList()
+    var watchHistory: List<WatchHistoryItem>? = emptyList(),
+    var watchPositions: List<WatchPosition>? = emptyList(),
+    var searchHistory: List<SearchHistoryItem>? = emptyList(),
+    var localSubscriptions: List<LocalSubscription>? = emptyList(),
+    var customInstances: List<CustomInstance>? = emptyList(),
+    var playlistBookmarks: List<PlaylistBookmark>? = emptyList(),
+    var localPlaylists: List<LocalPlaylistWithVideos>? = emptyList(),
+    var preferences: List<PreferenceItem>? = emptyList()
 )

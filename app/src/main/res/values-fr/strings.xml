@@ -437,4 +437,17 @@
     <string name="alternative_pip_controls">Contrôles alternatifs de la PiP</string>
     <string name="alternative_pip_controls_summary">Afficher uniquement l\'audio et les commandes de saut dans PiP au lieu de l\'avance et du retour en arrière</string>
     <string name="audio_player">Lecteur audio</string>
+    <string name="faq">FAQ</string>
+    <string name="concurrent_downloads">Maximum de téléchargements simultanés</string>
+    <string name="skip_silence">Saute les silences</string>
+    <string name="concurrent_downloads_limit_reached">Limite maximum de téléchargements simultanés atteinte.</string>
+    <string name="unknown">Inconnu</string>
+    <string name="resume">Reprendre</string>
+    <string name="help">Aide</string>
+    <string name="audio_only_mode">Mode audio seulement</string>
+    <string name="audio_only_mode_summary">Transforme LibreTube en lecteur de musique.</string>
+    <string name="no_subtitle">Pas de sous-titre</string>
+    <string name="download_paused">Téléchargement en pause</string>
+    <string name="download_completed">Téléchargement terminé</string>
+    <string name="sleep_timer">Minuteur de sommeil</string>
 </resources>

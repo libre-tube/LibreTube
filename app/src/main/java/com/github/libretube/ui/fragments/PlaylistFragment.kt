@@ -22,9 +22,9 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toPixel
 import com.github.libretube.extensions.toPlaylistBookmark
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
@@ -86,7 +86,7 @@ class PlaylistFragment : BaseFragment() {
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(
-                bottom = if (it) (64).toPixel().toInt() else 0
+                bottom = if (it) (64).dpToPx().toInt() else 0
             )
         }
 
@@ -212,9 +212,7 @@ class PlaylistFragment : BaseFragment() {
                 binding.playlistRecView.adapter = playlistAdapter
                 binding.playlistScrollview.viewTreeObserver
                     .addOnScrollChangedListener {
-                        if (binding.playlistScrollview.getChildAt(0).bottom
-                            == (binding.playlistScrollview.height + binding.playlistScrollview.scrollY)
-                        ) {
+                        if (!binding.playlistScrollview.canScrollVertically(1)) {
                             if (isLoading) return@addOnScrollChangedListener
 
                             // append more playlists to the recycler view

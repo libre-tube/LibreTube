@@ -137,9 +137,7 @@ class SubscriptionsFragment : BaseFragment() {
 
         binding.scrollviewSub.viewTreeObserver
             .addOnScrollChangedListener {
-                if (binding.scrollviewSub.getChildAt(0).bottom
-                    == (binding.scrollviewSub.height + binding.scrollviewSub.scrollY)
-                ) {
+                if (!binding.scrollviewSub.canScrollVertically(1)) {
                     // scroll view is at bottom
                     if (viewModel.videoFeed.value == null) return@addOnScrollChangedListener
                     binding.subRefresh.isRefreshing = true

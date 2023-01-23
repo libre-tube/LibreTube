@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
 import com.github.libretube.databinding.CommentsSheetBinding
-import com.github.libretube.extensions.toPixel
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.ui.adapters.CommentsAdapter
 import com.github.libretube.ui.models.CommentsViewModel
 
@@ -37,7 +37,7 @@ class CommentsSheet : ExpandedBottomSheet() {
                 binding.dragHandle.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 // limit the recyclerview height to not cover the video
                 binding.commentsRV.layoutParams = binding.commentsRV.layoutParams.apply {
-                    height = viewModel.maxHeight - (binding.dragHandle.height + (20).toPixel().toInt())
+                    height = viewModel.maxHeight - (binding.dragHandle.height + (20).dpToPx().toInt())
                 }
             }
         })

@@ -10,7 +10,7 @@ import androidx.core.view.marginLeft
 import com.github.libretube.R
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.extensions.toPixel
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ThemeHelper
 import com.google.android.exoplayer2.Player
@@ -28,7 +28,7 @@ class MarkableTimeBar(
     private var player: Player? = null
     private var length: Int = 0
 
-    private val progressBarHeight = (2).toPixel().toInt()
+    private val progressBarHeight = (2).dpToPx().toInt()
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

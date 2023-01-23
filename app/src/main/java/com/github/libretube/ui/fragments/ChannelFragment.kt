@@ -91,9 +91,7 @@ class ChannelFragment : BaseFragment() {
 
         binding.channelScrollView.viewTreeObserver
             .addOnScrollChangedListener {
-                if (binding.channelScrollView.getChildAt(0).bottom
-                    == (binding.channelScrollView.height + binding.channelScrollView.scrollY)
-                ) {
+                if (!binding.channelScrollView.canScrollVertically(1)) {
                     try {
                         onScrollEnd.invoke()
                     } catch (e: Exception) {
