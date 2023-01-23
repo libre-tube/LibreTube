@@ -129,4 +129,6 @@
     <string name="sponsorblock_notifications">آگاه‌سازها</string>
     <string name="category_selfpromo">بدون حقوق/تبلیغ خود</string>
     <string name="app_icon">آیکون</string>
+    <string name="no_update_available">شما در حال اجرای جدیدترین نسخه هستید.</string>
+    <string name="update_summary">بررسی برای بروزرسانی</string>
 </resources>
