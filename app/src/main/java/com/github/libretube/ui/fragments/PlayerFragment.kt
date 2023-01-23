@@ -184,6 +184,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     val handler = Handler(Looper.getMainLooper())
+    private val mainActivity get() = activity as MainActivity
 
     /**
      * Receiver for all actions in the PiP mode
@@ -283,7 +284,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initializeTransitionLayout() {
-        val mainActivity = activity as MainActivity
         mainActivity.binding.container.visibility = View.VISIBLE
         val mainMotionLayout = mainActivity.binding.mainMotionLayout
 
@@ -360,16 +360,12 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.autoPlay.visibility = View.VISIBLE
 
         binding.playImageView.setOnClickListener {
-            if (!exoPlayer.isPlaying) {
-                // start or go on playing
-                if (exoPlayer.playbackState == Player.STATE_ENDED) {
-                    // restart video if finished
+            when {
+                !exoPlayer.isPlaying && exoPlayer.playbackState == Player.STATE_ENDED -> {
                     exoPlayer.seekTo(0)
                 }
-                exoPlayer.play()
-            } else {
-                // pause the video
-                exoPlayer.pause()
+                !exoPlayer.isPlaying -> exoPlayer.play()
+                else -> exoPlayer.pause()
             }
         }
 
@@ -498,7 +494,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.fullscreen.setImageResource(R.drawable.ic_fullscreen_exit)
         playerBinding.exoTitle.visibility = View.VISIBLE
 
-        val mainActivity = activity as MainActivity
         if (!PlayerHelper.autoRotationEnabled) {
             // different orientations of the video are only available when auto rotation is disabled
             val orientation = PlayerHelper.getOrientation(exoPlayer.videoSize)
@@ -523,7 +518,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (!PlayerHelper.autoRotationEnabled) {
             // switch back to portrait mode if auto rotation disabled
-            val mainActivity = activity as MainActivity
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT
         }
 
@@ -550,7 +544,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.playerViewsInfo.text = viewInfo
 
         if (this::chapters.isInitialized && chapters.isNotEmpty()) {
-            val chapterIndex = getCurrentChapterIndex()
+            val chapterIndex = getCurrentChapterIndex() ?: return
             // scroll to the current chapter in the chapterRecView in the description
             val layoutManager = binding.chaptersRecView.layoutManager as LinearLayoutManager
             layoutManager.scrollToPositionWithOffset(chapterIndex, 0)
@@ -1169,9 +1163,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.chapters)
                     .setItems(titles.toTypedArray()) { _, index ->
-                        exoPlayer.seekTo(
-                            chapters[index].start!! * 1000
-                        )
+                        exoPlayer.seekTo(chapters[index].start!! * 1000)
                     }
                     .show()
             } else {
@@ -1189,7 +1181,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         // call the function again in 100ms
         exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
 
-        val chapterIndex = getCurrentChapterIndex()
+        val chapterIndex = getCurrentChapterIndex() ?: return
         val chapterName = chapters[chapterIndex].title?.trim()
 
         // change the chapter name textView text to the chapterName
@@ -1204,18 +1196,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * Get the name of the currently played chapter
      */
-    private fun getCurrentChapterIndex(): Int {
-        val currentPosition = exoPlayer.currentPosition
-        var chapterIndex = 0
-
-        chapters.forEachIndexed { index, chapter ->
-            // check whether the chapter start is greater than the current player position
-            if (currentPosition >= chapter.start!! * 1000) {
-                // save chapter title if found
-                chapterIndex = index
-            }
-        }
-        return chapterIndex
+    private fun getCurrentChapterIndex(): Int? {
+        val currentPosition = exoPlayer.currentPosition / 1000
+        return chapters.indexOfFirst { currentPosition >= it.start!! }.takeIf { it >= 0 }
     }
 
     private fun setMediaSource(uri: Uri, mimeType: String) {
@@ -1356,7 +1339,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     @SuppressLint("SourceLockedOrientationActivity")
     private fun changeOrientationMode() {
-        val mainActivity = activity as MainActivity
         if (PlayerHelper.autoRotationEnabled) {
             // enable auto rotation
             mainActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
@@ -1527,7 +1509,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
-        val mainActivity = activity as MainActivity
         mainActivity.supportFragmentManager.beginTransaction()
             .remove(this)
             .commit()

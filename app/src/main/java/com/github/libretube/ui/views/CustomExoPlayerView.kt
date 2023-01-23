@@ -624,7 +624,7 @@ internal class CustomExoPlayerView(
             playerViewModel?.isFullscreen?.value == true
         binding.topBar.let {
             it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
-                topMargin = (if (isFullscreen) 10 else 5).dpToPx().toInt()
+                topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
             }
         }
     }
