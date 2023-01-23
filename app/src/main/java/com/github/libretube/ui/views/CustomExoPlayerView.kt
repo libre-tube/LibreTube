@@ -19,8 +19,8 @@ import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.normalize
-import com.github.libretube.extensions.toPixel
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
@@ -573,8 +573,8 @@ internal class CustomExoPlayerView(
 
         // add a larger bottom margin to the time bar in landscape mode
         val offset = when (newConfig?.orientation) {
-            Configuration.ORIENTATION_LANDSCAPE -> 20.toPixel()
-            else -> 10.toPixel()
+            Configuration.ORIENTATION_LANDSCAPE -> 20.dpToPx()
+            else -> 10.dpToPx()
         }
 
         binding.progressBar.let {
@@ -624,7 +624,7 @@ internal class CustomExoPlayerView(
             playerViewModel?.isFullscreen?.value == true
         binding.topBar.let {
             it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
-                topMargin = (if (isFullscreen) 25 else 5).toPixel().toInt()
+                topMargin = (if (isFullscreen) 10 else 5).dpToPx().toInt()
             }
         }
     }
@@ -719,6 +719,6 @@ internal class CustomExoPlayerView(
         private const val SUBTITLE_BOTTOM_PADDING_FRACTION = 0.158f
         private const val ANIMATION_DURATION = 100L
         private const val AUTO_HIDE_CONTROLLER_DELAY = 2000L
-        private val LANDSCAPE_MARGIN_HORIZONTAL = (20).toPixel().toInt()
+        private val LANDSCAPE_MARGIN_HORIZONTAL = (20).dpToPx().toInt()
     }
 }
