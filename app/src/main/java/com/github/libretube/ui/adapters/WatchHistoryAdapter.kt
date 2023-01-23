@@ -21,6 +21,10 @@ class WatchHistoryAdapter(
 ) :
     RecyclerView.Adapter<WatchHistoryViewHolder>() {
 
+    var visibleCount = minOf(10, watchHistory.size)
+
+    override fun getItemCount(): Int = visibleCount
+
     fun removeFromWatchHistory(position: Int) {
         val history = watchHistory[position]
         query {
@@ -29,6 +33,13 @@ class WatchHistoryAdapter(
         watchHistory.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, itemCount)
+    }
+
+    fun showMoreItems() {
+        val oldSize = visibleCount
+        visibleCount += minOf(10, watchHistory.size - oldSize)
+        if (visibleCount == oldSize) return
+        notifyItemRangeInserted(oldSize, visibleCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchHistoryViewHolder {
@@ -70,9 +81,5 @@ class WatchHistoryAdapter(
 
             watchProgress.setWatchProgressLength(video.videoId, video.duration)
         }
-    }
-
-    override fun getItemCount(): Int {
-        return watchHistory.size
     }
 }
