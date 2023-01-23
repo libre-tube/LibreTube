@@ -10,20 +10,14 @@ import com.github.libretube.db.obj.LocalSubscription
 @Dao
 interface LocalSubscriptionDao {
     @Query("SELECT * FROM localSubscription")
-    fun getAll(): List<LocalSubscription>
-
-    @Query("SELECT * FROM localSubscription WHERE channelId LIKE :channelId LIMIT 1")
-    fun findById(channelId: String): LocalSubscription
+    suspend fun getAll(): List<LocalSubscription>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg localSubscriptions: LocalSubscription)
+    suspend fun insertAll(localSubscriptions: List<LocalSubscription>)
 
     @Delete
-    fun delete(localSubscription: LocalSubscription)
-
-    @Query("DELETE FROM localSubscription")
-    fun deleteAll()
+    suspend fun delete(localSubscription: LocalSubscription)
 
     @Query("SELECT EXISTS(SELECT * FROM localSubscription WHERE channelId = :channelId)")
-    fun includes(channelId: String): Boolean
+    suspend fun includes(channelId: String): Boolean
 }

@@ -3,13 +3,13 @@ package com.github.libretube.ui.models
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.util.PreferenceHelper
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,7 +27,7 @@ class SubscriptionsViewModel : ViewModel() {
     }
 
     fun fetchFeed() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val videoFeed = try {
                 SubscriptionHelper.getFeed()
             } catch (e: Exception) {
@@ -44,7 +44,7 @@ class SubscriptionsViewModel : ViewModel() {
     }
 
     fun fetchSubscriptions() {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val subscriptions = try {
                 SubscriptionHelper.getSubscriptions()
             } catch (e: Exception) {

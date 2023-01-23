@@ -84,9 +84,10 @@ class ImportHelper(
      */
     fun exportSubscriptions(uri: Uri?) {
         if (uri == null) return
-        runBlocking {
-            val subs = if (PreferenceHelper.getToken() != "") {
-                RetrofitInstance.authApi.subscriptions(PreferenceHelper.getToken())
+        runBlocking(Dispatchers.IO) {
+            val token = PreferenceHelper.getToken()
+            val subs = if (token.isNotEmpty()) {
+                RetrofitInstance.authApi.subscriptions(token)
             } else {
                 RetrofitInstance.authApi.unauthenticatedSubscriptions(
                     SubscriptionHelper.getFormattedLocalSubscriptions()
