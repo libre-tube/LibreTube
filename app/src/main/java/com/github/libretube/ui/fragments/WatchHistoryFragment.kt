@@ -16,8 +16,8 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.extensions.query
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.PlayerViewModel

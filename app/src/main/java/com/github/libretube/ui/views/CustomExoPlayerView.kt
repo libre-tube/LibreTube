@@ -19,8 +19,8 @@ import com.github.libretube.R
 import com.github.libretube.databinding.DoubleTapOverlayBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
-import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.extensions.normalize
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
