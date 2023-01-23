@@ -127,4 +127,6 @@
     <string name="player">پخش کننده</string>
     <string name="live">زنده</string>
     <string name="sponsorblock_notifications">آگاه‌سازها</string>
+    <string name="category_selfpromo">بدون حقوق/تبلیغ خود</string>
+    <string name="app_icon">آیکون</string>
 </resources>
