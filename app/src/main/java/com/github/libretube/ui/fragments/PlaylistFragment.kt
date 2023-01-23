@@ -24,7 +24,7 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toPixel
+import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.toPlaylistBookmark
 import com.github.libretube.ui.adapters.PlaylistAdapter
 import com.github.libretube.ui.base.BaseFragment
@@ -86,7 +86,7 @@ class PlaylistFragment : BaseFragment() {
 
         playerViewModel.isMiniPlayerVisible.observe(viewLifecycleOwner) {
             binding.playlistRecView.updatePadding(
-                bottom = if (it) (64).toPixel().toInt() else 0
+                bottom = if (it) (64).dpToPx().toInt() else 0
             )
         }
 
