@@ -101,11 +101,11 @@
     <string name="disabled">خاموش</string>
     <string name="appearance">ظاهر</string>
     <string name="app_behavior">رفتار</string>
-    <string name="download_directory">دانلود در...</string>
+    <string name="download_directory">دانلود در</string>
     <string name="download_directory_summary">جایی که فایل دانلود شده ذخیره میشود.</string>
     <string name="update_available">نسخه %1$s موجود است</string>
     <string name="downloads">دانلودها</string>
-    <string name="video_format">فرمت ویدئو</string>
+    <string name="video_format">فرمت ویدیو</string>
     <string name="contributing">کمک کردن</string>
     <string name="choose_filter">انتخاب فیلتر جستجو</string>
     <string name="music_songs">آهنگ های موسیقی یوتیوب</string>
