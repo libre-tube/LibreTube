@@ -5,14 +5,12 @@ from pyrogram.types import (
     InputMediaDocument,
 )
 from requests import get
-from tgconfig import TG_API_HASH, TG_API_ID, TG_CID, TG_TOKEN
+from tgconfig import TG_API_HASH, TG_API_ID, TG_TOKEN
 
 url = "https://api.github.com/repos/Libre-Tube/LibreTube/releases/latest"
 
 req = get(url).json()
-
-if TG_CID.isdecimal():
-    TG_CID = int(TG_CID)
+TG_CHANNEL = "LibreTube"
 
 
 def get_changelog():
@@ -56,9 +54,9 @@ for file in _files:
 caption = f"**LibreTube {tag} // Privacy Simplified**\n\n<u>What's Changed?</u>\n```{get_changelog()}```"
 with Client("bot", TG_API_ID, TG_API_HASH, bot_token=TG_TOKEN) as app:
     app.send_photo(
-        TG_CID,
+        TG_CHANNEL,
         "https://i.ibb.co/LJ9r4hP/LT.jpg",
         caption,
         reply_markup=buttons,
     )
-    app.send_media_group(TG_CID, files)
+    app.send_media_group(TG_CHANNEL, files)
