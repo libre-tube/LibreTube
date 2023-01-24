@@ -18,7 +18,6 @@ jobs:
           git clone https://github.com/${{ github.repository }} && cd LibreTube
           echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
           echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
-          echo "TG_CID = '${{ secrets.TG_CID }}'" >> tgconfig.py
           echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
           pip install pyrogram TgCrypto requests
           mv .github/runOnRelease.py .
