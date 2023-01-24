@@ -531,12 +531,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
             binding.descLinLayout.visibility = View.GONE
 
+            // limit the title height to two lines
+            binding.playerTitle.maxLines = 2
+
             // show formatted short view count
             viewInfo = getString(R.string.views, streams.views.formatShort()) + viewInfo
         } else {
             // show the description and chapters
             binding.playerDescriptionArrow.animate().rotation(180F).setDuration(250).start()
             binding.descLinLayout.visibility = View.VISIBLE
+
+            // show the whole title
+            binding.playerTitle.maxLines = Int.MAX_VALUE
 
             // show exact view count
             viewInfo = getString(R.string.views, String.format("%,d", streams.views)) + viewInfo
