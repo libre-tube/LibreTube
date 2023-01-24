@@ -9,9 +9,10 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.query
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
@@ -48,7 +49,7 @@ class BackupHelper(private val context: Context) {
             }
         } ?: return
 
-        query {
+        runBlocking(Dispatchers.IO) {
             Database.watchHistoryDao().insertAll(
                 *backupFile.watchHistory.orEmpty().toTypedArray()
             )
@@ -58,9 +59,7 @@ class BackupHelper(private val context: Context) {
             Database.watchPositionDao().insertAll(
                 *backupFile.watchPositions.orEmpty().toTypedArray()
             )
-            Database.localSubscriptionDao().insertAll(
-                *backupFile.localSubscriptions.orEmpty().toTypedArray()
-            )
+            Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
             Database.customInstanceDao().insertAll(
                 *backupFile.customInstances.orEmpty().toTypedArray()
             )

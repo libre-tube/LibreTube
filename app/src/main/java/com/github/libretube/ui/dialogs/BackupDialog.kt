@@ -4,20 +4,25 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
 import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
 
 class BackupDialog(
     private val createBackupFile: (BackupFile) -> Unit
 ) : DialogFragment() {
-    sealed class BackupOption(@StringRes val name: Int, val onSelected: (BackupFile) -> Unit) {
+    sealed class BackupOption(
+        @StringRes val name: Int,
+        val onSelected: suspend (BackupFile) -> Unit
+    ) {
         object WatchHistory : BackupOption(R.string.watch_history, onSelected = {
             it.watchHistory = Database.watchHistoryDao().getAll()
         })
@@ -83,9 +88,9 @@ class BackupDialog(
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.backup) { _, _ ->
                 val backupFile = BackupFile()
-                awaitQuery {
+                lifecycleScope.launch(Dispatchers.IO) {
                     backupOptions.forEachIndexed { index, option ->
-                        if (selected[index]) option.onSelected.invoke(backupFile)
+                        if (selected[index]) option.onSelected(backupFile)
                     }
                 }
                 createBackupFile(backupFile)

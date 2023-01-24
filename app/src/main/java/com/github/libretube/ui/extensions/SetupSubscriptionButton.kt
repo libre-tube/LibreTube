@@ -8,6 +8,7 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 fun TextView.setupSubscriptionButton(
@@ -42,10 +43,12 @@ fun TextView.setupSubscriptionButton(
                 subscribed = false
             }
         } else {
-            SubscriptionHelper.subscribe(channelId)
-            this.text = context.getString(R.string.unsubscribe)
-            notificationBell?.visibility = View.VISIBLE
-            subscribed = true
+            runBlocking {
+                SubscriptionHelper.subscribe(channelId)
+                text = context.getString(R.string.unsubscribe)
+                notificationBell?.visibility = View.VISIBLE
+                subscribed = true
+            }
         }
     }
 }
