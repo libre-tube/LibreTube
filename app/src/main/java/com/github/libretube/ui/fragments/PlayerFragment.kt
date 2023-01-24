@@ -1195,7 +1195,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     private fun getCurrentChapterIndex(): Int? {
         val currentPosition = exoPlayer.currentPosition / 1000
-        return chapters.indexOfFirst { currentPosition >= it.start!! }.takeIf { it >= 0 }
+        return chapters.indexOfLast { currentPosition >= it.start!! }.takeIf { it >= 0 }
     }
 
     private fun setMediaSource(uri: Uri, mimeType: String) {
