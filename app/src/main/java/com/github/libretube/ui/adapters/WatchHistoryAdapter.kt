@@ -31,6 +31,7 @@ class WatchHistoryAdapter(
             DatabaseHolder.Database.watchHistoryDao().delete(history)
         }
         watchHistory.removeAt(position)
+        visibleCount -= 1
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, itemCount)
     }
