@@ -1,0 +1,26 @@
+name: Telegram Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  debug-builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      - name: Upload to Telegram
+        run: |
+          git clone https://github.com/${{ github.repository }} && cd LibreTube
+          echo "TG_API_ID = '${{ secrets.TG_API_ID }}'" >> tgconfig.py
+          echo "TG_API_HASH = '${{ secrets.TG_API_HASH }}'" >> tgconfig.py
+          echo "TG_CID = '${{ secrets.TG_CID }}'" >> tgconfig.py
+          echo "TG_TOKEN = '${{ secrets.TG_TOKEN }}'" >> tgconfig.py
+          pip install pyrogram TgCrypto requests
+          mv .github/runOnRelease.py .
+          python runOnRelease.py
+      
