@@ -9,7 +9,7 @@ object DataSaverMode {
         return when (pref) {
             "enabled" -> true
             "disabled" -> false
-            "metered" -> NetworkHelper.isNetworkMobile(context)
+            "metered" -> NetworkHelper.isNetworkMetered(context)
             else -> throw IllegalArgumentException()
         }
     }

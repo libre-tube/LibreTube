@@ -2,16 +2,14 @@ package com.github.libretube.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
+import androidx.core.content.getSystemService
 
 object NetworkHelper {
     /**
      * Detect whether network is available
      */
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = context.getSystemService<ConnectivityManager>()
 
         // this seems to not recognize vpn connections
         /*
@@ -37,27 +35,15 @@ object NetworkHelper {
          */
 
         @Suppress("DEPRECATION")
-        return connectivityManager.activeNetworkInfo?.isConnected ?: false
+        return connectivityManager?.activeNetworkInfo?.isConnected ?: false
     }
 
     /**
-     * Detect whether the current network is mobile data
+     * Detect whether the current network is metered
      * @param context Context of the application
-     * @return isNetworkMobile
+     * @return whether the network is metered or not
      */
-    @Suppress("DEPRECATION")
-    fun isNetworkMobile(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val networkCapabilities = connectivityManager.getNetworkCapabilities(
-                connectivityManager.activeNetwork ?: return false
-            )
-            return networkCapabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-                ?: false
-        } else {
-            val activeNetwork = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-            return activeNetwork != null && activeNetwork.isConnected
-        }
+    fun isNetworkMetered(context: Context): Boolean {
+        return context.getSystemService<ConnectivityManager>()!!.isActiveNetworkMetered
     }
 }
