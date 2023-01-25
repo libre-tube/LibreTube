@@ -388,7 +388,7 @@
     <string name="trending">时下热门</string>
     <string name="open_queue_from_notification">从通知打开队列</string>
     <string name="bookmarks">书签</string>
-    <string name="bookmark">加书签</string>
+    <string name="bookmark">加入书签</string>
     <string name="clear_bookmarks">清除书签</string>
     <string name="bookmarks_empty">尚无书签！</string>
     <string name="queue_insert_related_videos">插入相关视频</string>
