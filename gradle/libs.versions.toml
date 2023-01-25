@@ -2,7 +2,7 @@
 appcompat = "1.6.0"
 lifecycle = "2.5.1"
 constraintlayout = "2.1.4"
-material = "1.8.0-rc01"
+material = "1.8.0"
 navigation = "2.5.3"
 legacySupport = "1.0.0"
 preference = "1.2.0"
