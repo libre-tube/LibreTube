@@ -13,12 +13,13 @@ import com.github.libretube.databinding.DownloadedMediaRowBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.formatAsFileSize
-import com.github.libretube.extensions.query
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class DownloadsAdapter(
     private val context: Context,
@@ -105,7 +106,7 @@ class DownloadsAdapter(
                             }
                         }
 
-                        query {
+                        runBlocking(Dispatchers.IO) {
                             DatabaseHolder.Database.downloadDao().deleteDownload(download)
                         }
                         downloads.removeAt(position)

@@ -23,10 +23,8 @@ import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
-import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toDownloadItems
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
@@ -101,18 +99,15 @@ class DownloadService : LifecycleService() {
 
                 val thumbnailTargetFile = getDownloadFile(DownloadHelper.THUMBNAIL_DIR, fileName)
 
-                awaitQuery {
-                    Database.downloadDao().insertDownload(
-                        Download(
-                            videoId = videoId,
-                            title = streams.title,
-                            thumbnailPath = thumbnailTargetFile.absolutePath,
-                            description = streams.description,
-                            uploadDate = streams.uploadDate.toString(),
-                            uploader = streams.uploader
-                        )
-                    )
-                }
+                val download = Download(
+                    videoId,
+                    streams.title,
+                    streams.description,
+                    streams.uploader,
+                    streams.uploadDate.toString(),
+                    thumbnailTargetFile.absolutePath
+                )
+                Database.downloadDao().insertDownload(download)
                 ImageHelper.downloadImage(
                     this@DownloadService,
                     streams.thumbnailUrl,
@@ -142,7 +137,7 @@ class DownloadService : LifecycleService() {
      * for the requested file.
      */
     private fun start(item: DownloadItem) {
-        val file: File = when (item.type) {
+        val file = when (item.type) {
             FileType.AUDIO -> getDownloadFile(DownloadHelper.AUDIO_DIR, item.fileName)
             FileType.VIDEO -> getDownloadFile(DownloadHelper.VIDEO_DIR, item.fileName)
             FileType.SUBTITLE -> getDownloadFile(DownloadHelper.SUBTITLE_DIR, item.fileName)
@@ -150,11 +145,8 @@ class DownloadService : LifecycleService() {
         file.createNewFile()
         item.path = file.absolutePath
 
-        item.id = awaitQuery {
-            Database.downloadDao().insertDownloadItem(item)
-        }.toInt()
-
         lifecycleScope.launch(coroutineContext) {
+            item.id = Database.downloadDao().insertDownloadItem(item).toInt()
             downloadFile(item)
         }
     }
@@ -174,9 +166,7 @@ class DownloadService : LifecycleService() {
         url.getContentLength().let { size ->
             if (size > 0 && size != item.downloadSize) {
                 item.downloadSize = size
-                query {
-                    Database.downloadDao().updateDownloadItem(item)
-                }
+                Database.downloadDao().updateDownloadItem(item)
             }
         }
 
@@ -305,11 +295,8 @@ class DownloadService : LifecycleService() {
             return
         }
 
-        val downloadItem = awaitQuery {
-            Database.downloadDao().findDownloadItemById(id)
-        }
         lifecycleScope.launch(coroutineContext) {
-            downloadFile(downloadItem)
+            downloadFile(Database.downloadDao().findDownloadItemById(id))
         }
     }
 
@@ -340,9 +327,7 @@ class DownloadService : LifecycleService() {
         stream?.find { it.format == item.format && it.quality == item.quality }?.let {
             item.url = it.url
         }
-        query {
-            Database.downloadDao().updateDownloadItem(item)
-        }
+        Database.downloadDao().updateDownloadItem(item)
     }
 
     /**
