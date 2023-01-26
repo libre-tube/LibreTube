@@ -3,6 +3,7 @@ package com.github.libretube.ui.extensions
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
+import androidx.core.view.updateLayoutParams
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
 
@@ -35,9 +36,9 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long): Boolean {
                 this@setWatchProgressLength.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val fullWidth = (parent as LinearLayout).width
                 val newWidth = fullWidth * (progress / duration.toFloat())
-                val lp = view.layoutParams
-                lp.width = newWidth.toInt()
-                view.layoutParams = lp
+                view.updateLayoutParams {
+                    width = newWidth.toInt()
+                }
                 view.visibility = View.VISIBLE
             }
         })

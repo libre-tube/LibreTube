@@ -6,6 +6,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -117,13 +118,13 @@ class VideosAdapter(
         // Trending layout
         holder.trendingRowBinding?.apply {
             // set a fixed width for better visuals
-            val params = root.layoutParams
-            when (forceMode) {
-                ForceMode.RELATED -> params.width = (210).dpToPx().toInt()
-                ForceMode.HOME -> params.width = (250).dpToPx().toInt()
-                else -> {}
+            root.updateLayoutParams {
+                when (forceMode) {
+                    ForceMode.RELATED -> width = 210.dpToPx().toInt()
+                    ForceMode.HOME -> width = 250.dpToPx().toInt()
+                    else -> {}
+                }
             }
-            root.layoutParams = params
 
             textViewTitle.text = video.title
             textViewChannel.text =

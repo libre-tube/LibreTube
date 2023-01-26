@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -102,9 +104,9 @@ class LibraryFragment : BaseFragment() {
     private fun updateFABMargin(isMiniPlayerVisible: Boolean) {
         // optimize CreatePlaylistFab bottom margin if miniPlayer active
         val bottomMargin = if (isMiniPlayerVisible) 64 else 16
-        val layoutParams = binding.createPlaylist.layoutParams as ViewGroup.MarginLayoutParams
-        layoutParams.bottomMargin = bottomMargin.dpToPx().toInt()
-        binding.createPlaylist.layoutParams = layoutParams
+        binding.createPlaylist.updateLayoutParams<MarginLayoutParams> {
+            this.bottomMargin = bottomMargin.dpToPx().toInt()
+        }
     }
 
     private fun fetchPlaylists() {
