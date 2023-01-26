@@ -8,10 +8,11 @@ import android.view.View
 import org.xml.sax.Attributes
 
 class LinkHandler(
-    private val clickCallback: ((String) -> Unit)?
+    private val clickCallback: (String) -> Unit
 ) {
     private var linkTagStartIndex = -1
     private var link: String? = null
+
     fun handleTag(
         opening: Boolean,
         tag: String?,
@@ -38,7 +39,7 @@ class LinkHandler(
         output.setSpan(
             object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    clickCallback?.invoke(link)
+                    clickCallback(link)
                 }
 
                 override fun updateDrawState(ds: TextPaint) {

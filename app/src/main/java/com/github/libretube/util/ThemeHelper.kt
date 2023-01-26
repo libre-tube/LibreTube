@@ -9,6 +9,7 @@ import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.adapters.IconsSheetAdapter
@@ -133,9 +134,7 @@ object ThemeHelper {
     fun getStyledAppName(context: Context): Spanned {
         val colorPrimary = getThemeColor(context, R.attr.colorPrimaryDark)
         val hexColor = String.format("#%06X", (0xFFFFFF and colorPrimary))
-        return HtmlCompat.fromHtml(
-            "Libre<span  style='color:$hexColor';>Tube</span>",
-            HtmlCompat.FROM_HTML_MODE_COMPACT
-        )
+        return "Libre<span  style='color:$hexColor';>Tube</span>"
+            .parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
     }
 }
