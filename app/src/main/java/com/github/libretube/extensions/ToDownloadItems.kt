@@ -16,12 +16,12 @@ fun Streams.toDownloadItems(
     val items = mutableListOf<DownloadItem>()
 
     if (!videoQuality.isNullOrEmpty() && !videoFormat.isNullOrEmpty()) {
-        val stream = videoStreams?.find { it.quality == videoQuality && it.format == videoFormat }
+        val stream = videoStreams.find { it.quality == videoQuality && it.format == videoFormat }
         items.add(
             DownloadItem(
                 type = FileType.VIDEO,
                 videoId = videoId,
-                fileName = fileName + "." + stream?.mimeType?.split("/")?.last(),
+                fileName = stream.qualityString(fileName),
                 path = "",
                 url = stream?.url,
                 format = videoFormat,
@@ -31,12 +31,12 @@ fun Streams.toDownloadItems(
     }
 
     if (!audioQuality.isNullOrEmpty() && !audioFormat.isNullOrEmpty()) {
-        val stream = audioStreams?.find { it.quality == audioQuality && it.format == audioFormat }
+        val stream = audioStreams.find { it.quality == audioQuality && it.format == audioFormat }
         items.add(
             DownloadItem(
                 type = FileType.AUDIO,
                 videoId = videoId,
-                fileName = fileName + "." + stream?.mimeType?.split("/")?.last(),
+                fileName = stream.qualityString(fileName),
                 path = "",
                 url = stream?.url,
                 format = audioFormat,
@@ -50,9 +50,9 @@ fun Streams.toDownloadItems(
             DownloadItem(
                 type = FileType.SUBTITLE,
                 videoId = videoId,
-                fileName = "$fileName.srt",
+                fileName = "${fileName}_$subtitleCode.srt",
                 path = "",
-                url = subtitles?.find { it.code == subtitleCode }?.url
+                url = subtitles.find { it.code == subtitleCode }?.url
             )
         )
     }
