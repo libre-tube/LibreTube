@@ -1437,11 +1437,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             viewModel.isFullscreen.value = false
 
             updateCaptionsLanguage(null)
-        } else if (lifecycle.currentState == Lifecycle.State.CREATED) {
+        } else {
             // close button got clicked in PiP mode
             // pause the video and keep the app alive
-            exoPlayer.pause()
-        } else {
+            if (lifecycle.currentState == Lifecycle.State.CREATED) exoPlayer.pause()
+
             // enable exoPlayer controls again
             exoPlayerView.useController = true
 
