@@ -1439,10 +1439,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             updateCaptionsLanguage(null)
         } else if (lifecycle.currentState == Lifecycle.State.CREATED) {
             // close button got clicked in PiP mode
-            // destroying the fragment, player and notification
-            onDestroy()
-            // finish the activity
-            activity?.finishAndRemoveTask()
+            // pause the video and keep the app alive
+            exoPlayer.pause()
         } else {
             // enable exoPlayer controls again
             exoPlayerView.useController = true
