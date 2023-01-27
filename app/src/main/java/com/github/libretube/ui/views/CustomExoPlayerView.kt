@@ -172,16 +172,8 @@ internal class CustomExoPlayerView(
                     )
                 ) {
                     updatePlayPauseButton()
+                    updateScreenOnState()
                 }
-            }
-
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                // keep the screen on if the video is not ended or paused
-                keepScreenOn = !(
-                    listOf(Player.STATE_IDLE, Player.STATE_ENDED)
-                        .contains(playbackState)
-                    )
-                super.onPlaybackStateChanged(playbackState)
             }
         })
 
@@ -192,6 +184,11 @@ internal class CustomExoPlayerView(
                 windowHelper?.unsetFullscreen()
             }
         }
+    }
+
+    private fun updateScreenOnState() {
+        // keep screen on if the video is playing
+        keepScreenOn = player?.isPlaying == true
     }
 
     private fun updatePlayPauseButton() {
