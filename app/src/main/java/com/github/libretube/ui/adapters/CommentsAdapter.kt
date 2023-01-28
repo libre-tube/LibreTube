@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.Comment
@@ -27,7 +26,7 @@ class CommentsAdapter(
     private val videoId: String,
     private val comments: MutableList<Comment>,
     private val isRepliesAdapter: Boolean = false,
-    private val dismiss: () -> Unit,
+    private val dismiss: () -> Unit
 ) : RecyclerView.Adapter<CommentsViewHolder>() {
     fun clear() {
         val size: Int = comments.size
