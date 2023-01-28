@@ -36,7 +36,7 @@
     <string name="empty">Морате да унесете корисничко име и лозинку.</string>
     <string name="defres">Видео резолуција</string>
     <string name="grid">Мрежне колоне</string>
-    <string name="emptyList">Нема ништа овде.</string>
+    <string name="emptyList">Нема ништа.</string>
     <string name="addToPlaylist">Додај на листу</string>
     <string name="createPlaylist">Направи листу</string>
     <string name="library">Библиотека</string>
@@ -88,7 +88,7 @@
     <string name="color_red">Црвена</string>
     <string name="material_you">Системска</string>
     <string name="sponsorblock_notifications">Обавештења</string>
-    <string name="app_icon">Иконица</string>
+    <string name="app_icon">Икона</string>
     <string name="enabled">Укључено</string>
     <string name="disabled">Искључено</string>
     <string name="piped">Пајпед</string>
@@ -127,7 +127,7 @@
     <string name="version">Верзија %1$s</string>
     <string name="about_summary">Упознајте LibreTube тим и како све то функцијонише.</string>
     <string name="related_streams">Сличан садржај</string>
-    <string name="related_streams_summary">Прикажите сличне садржаје испод оног што тренутно гледате.</string>
+    <string name="related_streams_summary">Прикажите сличан садржај испод тренутног гледања.</string>
     <string name="show_chapters">Прикажи поглавља</string>
     <string name="hide_chapters">Сакриј поглавља</string>
     <string name="buffering_goal">Предучитавање</string>
@@ -182,8 +182,8 @@
     <string name="pure_theme_summary">Чиста бело/црна тема</string>
     <string name="no_player_found">Није пронађен екстерни плејер. Проверите да ли имате неки инсталиран.</string>
     <string name="data_saver_mode">Режим уштеде података</string>
-    <string name="search_history_summary">Запамти претраге</string>
-    <string name="watch_history_summary">Чувајте историју прегледа видеа локално</string>
+    <string name="search_history_summary">Памти претраге</string>
+    <string name="watch_history_summary">Чувајте историју прегледа снимака локално</string>
     <string name="watch_positions_title">Запамћене позиције репродукције</string>
     <string name="reset_watch_positions">Ресетуј</string>
     <string name="captions">Наслови</string>
@@ -267,7 +267,7 @@
     <string name="notify_new_streams">Обавештења о новим стримовима</string>
     <string name="checking_frequency">Провера на сваких …</string>
     <string name="new_streams_count">%1$s нових стримова је доступно</string>
-    <string name="notify_new_streams_summary">Обавештења када буду доступни нови стримови из ваших претплата.</string>
+    <string name="notify_new_streams_summary">Обавештења када буду доступни нови стримови из ваших праћења.</string>
     <string name="new_streams_by">Нови стримови од %1$s…</string>
     <string name="irreversible">Да ли сте сигурни\? Ово не може бити опозвано!</string>
     <string name="required_network">Потребна веза</string>
@@ -335,13 +335,13 @@
     <string name="play_next">Пусти следеће</string>
     <string name="playback_pitch">Висина тона</string>
     <string name="default_load_interval">Аутоматски</string>
-    <string name="break_reminder_time">Неколико минута пре подсећања</string>
+    <string name="break_reminder_time">Минута пре подсећања</string>
     <string name="change_region">Чини се да трендови нису доступни за тренутни регион. Молимо изаберите другу у подешавањима.</string>
     <string name="limit_hls">Ограничи HLS на 1080p</string>
     <string name="filename">Назив фајла</string>
     <string name="invalid_filename">Непостојеће име фајла!</string>
-    <string name="playlists_order">Редослед плејлиста</string>
-    <string name="playlistNameReversed">Назив плејлисте (обрнуто)</string>
+    <string name="playlists_order">Редослед листи</string>
+    <string name="playlistNameReversed">Назив листе (обрнуто)</string>
     <string name="recentlyUpdated">Недавно ажуриран</string>
     <string name="recentlyUpdatedReversed">Недавно ажурирано (обрнуто)</string>
     <string name="download_channel_name">Преузми услугу</string>
@@ -380,7 +380,7 @@
     <string name="defaultIconLight">Подразумевано светло</string>
     <string name="unsupported_file_format">Неподржан формат датотеке!</string>
     <string name="hls_instead_of_dash">Користи HLS</string>
-    <string name="hls_instead_of_dash_summary">Користи HLS уместо DASH (биће спорије, не препоручује се)</string>
+    <string name="hls_instead_of_dash_summary">Користи HLS уместо DASH (спорије, не препоручује се)</string>
     <string name="auto_quality">Аутоматски</string>
     <string name="limit_to_runtime">Ограничење времена коришћења</string>
     <string name="open_queue_from_notification">Отвори редослед из обавештења</string>
@@ -432,7 +432,7 @@
     <string name="forward">Премотај унапред</string>
     <string name="alternative_pip_controls">Алтернативне PiP контроле</string>
     <string name="alternative_pip_controls_summary">Приказивање само звука и прескакање контрола у PiP-у уместо унапред и уназад</string>
-    <string name="audio_only_mode">Режим само звука</string>
+    <string name="audio_only_mode">Режим аудио плејера</string>
     <string name="audio_only_mode_summary">Претвори LibreTube у музички плејер.</string>
     <string name="concurrent_downloads_limit_reached">Максимално истовремених преузимања је достигнуто.</string>
     <string name="pinch_control_summary">Користите покрет штипања за увећавање/умањивање.</string>
@@ -446,4 +446,8 @@
     <string name="shuffle">Насумично</string>
     <string name="remove_bookmark">Обриши обележивач</string>
     <string name="add_to_bookmarks">Додај у обележиваче</string>
+    <string name="sleep_timer">Аутоматско искључење</string>
+    <string name="skip_silence">Прескочи тишину</string>
+    <string name="help">Помоћ</string>
+    <string name="faq">Често постављена питања</string>
 </resources>
