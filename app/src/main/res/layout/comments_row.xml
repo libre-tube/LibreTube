@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_ripple">
+    android:background="?selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,9 +25,10 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/commentor_image"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginEnd="16dp"
+                android:background="@android:color/darker_gray"
                 app:shapeAppearance="@style/CircleImageView"
                 app:srcCompat="@mipmap/ic_launcher" />
 
@@ -47,8 +48,8 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_color_secondary"
                         tools:text="Author and Time" />
 
                     <ImageView
@@ -74,7 +75,9 @@
                     android:id="@+id/comment_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="15sp"
                     android:autoLink="web"
                     tools:text="Comment Text" />
 
@@ -120,34 +123,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        tools:text="LikeCount" />
+                        tools:text="ReplyCount" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/replies_recView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:nestedScrollingEnabled="false" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/show_more"
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="8dp"
-            android:stateListAnimator="@null"
-            android:text="@string/show_more"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="12sp"
-            android:visibility="gone"
-            app:cornerRadius="20dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

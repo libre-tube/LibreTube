@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text_color_secondary">#BFBFBF</color>
+    <color name="drag_handle_color">#3A3A3A</color>
+</resources>
