@@ -12,10 +12,12 @@ import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
 import com.github.libretube.util.BackupHelper
 import com.github.libretube.util.ImportHelper
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BackupRestoreSettings : BasePreferenceFragment() {
+    private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
+
     override val titleResourceId: Int = R.string.backup_restore
 
     // backup and restore database
@@ -105,7 +107,8 @@ class BackupRestoreSettings : BasePreferenceFragment() {
         advancesBackup?.setOnPreferenceClickListener {
             BackupDialog {
                 backupFile = it
-                createBackupFile.launch(getBackupFileName())
+                val timestamp = backupDateTimeFormatter.format(LocalDateTime.now())
+                createBackupFile.launch("libretube-backup-$timestamp.json")
             }
                 .show(childFragmentManager, null)
             true
@@ -116,10 +119,5 @@ class BackupRestoreSettings : BasePreferenceFragment() {
             getBackupFile.launch("application/json")
             true
         }
-    }
-
-    private fun getBackupFileName(): String {
-        val time = LocalTime.now().toString().split(".").firstOrNull()
-        return "libretube-backup-${LocalDate.now()}-$time.json"
     }
 }
