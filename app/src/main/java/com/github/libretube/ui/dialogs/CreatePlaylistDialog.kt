@@ -1,6 +1,7 @@
 package com.github.libretube.ui.dialogs
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -24,11 +25,12 @@ class CreatePlaylistDialog(
 
         binding.clonePlaylist.setOnClickListener {
             val playlistUrl = binding.playlistUrl.text.toString()
-            if (!TextUtils.validateUrl(playlistUrl)) {
+            val playlistId = Uri.parse(playlistUrl).getQueryParameter("list")
+            if (!TextUtils.validateUrl(playlistUrl) || playlistId == null) {
                 Toast.makeText(context, R.string.invalid_url, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            PlaylistsHelper.clonePlaylist(requireContext().applicationContext, playlistUrl)
+            PlaylistsHelper.clonePlaylist(requireContext().applicationContext, playlistId)
             dismiss()
         }
 
