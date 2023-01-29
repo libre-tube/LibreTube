@@ -144,7 +144,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * Video information fetched at runtime
      */
-    private var isLive = false
     private lateinit var streams: Streams
 
     /**
@@ -525,7 +524,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun toggleDescription() {
-        var viewInfo = if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
+        var viewInfo = if (!streams.livestream) TextUtils.SEPARATOR + localizedDate(
+            streams.uploadDate
+        ) else ""
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()
@@ -708,7 +709,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 prepareExoPlayerView()
                 initializePlayerView()
                 setupSeekbarPreview()
-                if (!isLive) seekToWatchPosition()
+
+                if (!streams.livestream) seekToWatchPosition()
                 exoPlayer.prepare()
                 if (!DataSaverMode.isEnabled(requireContext())) exoPlayer.play()
 
@@ -855,7 +857,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         binding.apply {
             playerViewsInfo.text =
                 context?.getString(R.string.views, streams.views.formatShort()) +
-                if (!isLive) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
+                if (!streams.livestream) TextUtils.SEPARATOR + localizedDate(streams.uploadDate) else ""
 
             textLike.text = streams.likes.formatShort()
             textDislike.text = streams.dislikes.formatShort()
@@ -874,10 +876,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         }
 
         // duration that's not greater than 0 indicates that the video is live
-        if (streams.duration <= 0) {
-            isLive = true
-            handleLiveVideo()
-        }
+        if (streams.livestream) handleLiveVideo()
 
         playerBinding.exoTitle.text = streams.title
 
@@ -925,7 +924,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 if (exoPlayer.currentPosition != 0L) saveWatchPosition()
 
                 // check if video has ended, next video is available and autoplay is enabled.
-                @Suppress("DEPRECATION")
                 if (
                     playbackState == Player.STATE_ENDED &&
                     !transitioning &&
@@ -1073,7 +1071,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      */
     @SuppressLint("SetTextI18n")
     private fun updateDisplayedDuration() {
-        if (exoPlayer.duration < 0 || isLive) return
+        if (exoPlayer.duration < 0 || streams.livestream) return
 
         playerBinding.duration.text = DateUtils.formatElapsedTime(
             exoPlayer.duration.div(1000)
@@ -1275,9 +1273,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (!PreferenceHelper.getBoolean(PreferenceKeys.USE_HLS_OVER_DASH, false) &&
             streams.videoStreams.isNotEmpty()
         ) {
-            val uri = let {
-                streams.dash?.toUri()
-
+            val uri = streams.dash?.toUri() ?: let {
                 val manifest = DashHelper.createManifest(streams)
 
                 // encode to base64
