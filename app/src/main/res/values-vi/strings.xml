@@ -401,4 +401,8 @@
     <string name="swipe_controls">Điều khiển vuốt</string>
     <string name="swipe_controls_summary">Sử dụng thao tác vuốt để điều chỉnh độ sáng và âm lượng.</string>
     <string name="bookmark">Đánh dấu trang</string>
+    <string name="download_paused">Tạm dừng tải xuống</string>
+    <string name="download_completed">Tải xuống hoàn tất</string>
+    <string name="concurrent_downloads">Tải xuống đồng thời tối đa</string>
+    <string name="no_subtitle">Không có phụ đề</string>
 </resources>

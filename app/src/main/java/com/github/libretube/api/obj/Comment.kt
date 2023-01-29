@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class Comment(
     val author: String,
     val commentId: String,
-    val commentText: String,
+    val commentText: String?,
     val commentedTime: String,
     val commentorUrl: String,
     val repliesPage: String? = null,

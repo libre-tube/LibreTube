@@ -18,4 +18,5 @@ object IntentData {
     const val downloading = "downloading"
     const val openAudioPlayer = "openAudioPlayer"
     const val fragmentToOpen = "fragmentToOpen"
+    const val replyPage = "replyPage"
 }

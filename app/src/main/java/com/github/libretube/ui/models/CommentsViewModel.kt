@@ -20,6 +20,7 @@ class CommentsViewModel : ViewModel() {
 
     var videoId: String? = null
     var maxHeight: Int = 0
+    var commentsSheetDismiss: (() -> Unit)? = null
 
     fun fetchComments() {
         videoId ?: return
