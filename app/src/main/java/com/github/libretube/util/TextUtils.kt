@@ -1,13 +1,12 @@
 package com.github.libretube.util
 
-import android.net.Uri
-import java.net.URL
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
 import kotlin.time.Duration
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toJavaLocalDate
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 object TextUtils {
     /**
@@ -24,19 +23,6 @@ object TextUtils {
      * Reserved characters by unix which can not be used for file name.
      */
     const val RESERVED_CHARS = "?:\"*|/\\<>\u0000"
-
-    /**
-     * Check whether an Url is valid
-     * @param url The url to test
-     * @return Whether the URL is valid
-     */
-    fun validateUrl(url: String): Boolean {
-        runCatching {
-            URL(url).toURI()
-            return true
-        }
-        return false
-    }
 
     /**
      * Localize the date from a time string
@@ -66,19 +52,12 @@ object TextUtils {
      * Get video id if the link is a valid youtube video link
      */
     fun getVideoIdFromUri(link: String): String? {
-        val uri = Uri.parse(link)
-
-        if (link.contains("youtube.com")) {
-            // the link may be in an unsupported format, so we should try/catch it
-            return try {
-                uri.getQueryParameter("v")
-            } catch (e: Exception) {
-                null
+        return link.toHttpUrlOrNull()?.let {
+            when (it.host) {
+                "www.youtube.com" -> it.queryParameter("v")
+                "youtu.be" -> it.pathSegments.lastOrNull()
+                else -> null
             }
-        } else if (link.contains("youtu.be")) {
-            return uri.lastPathSegment
         }
-
-        return null
     }
 }
