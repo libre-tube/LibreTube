@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -51,7 +52,7 @@ class DeleteAccountDialog : DialogFragment() {
             Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
 
             PreferenceHelper.setToken("")
-            activity?.recreate()
+            ActivityCompat.recreate(requireActivity())
             dialog?.dismiss()
         }
     }

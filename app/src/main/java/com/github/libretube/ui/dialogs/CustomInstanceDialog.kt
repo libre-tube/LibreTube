@@ -3,6 +3,7 @@ package com.github.libretube.ui.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogCustomInstanceBinding
@@ -43,7 +44,7 @@ class CustomInstanceDialog : DialogFragment() {
                         Database.customInstanceDao().insertAll(customInstance)
                     }
 
-                    activity?.recreate()
+                    ActivityCompat.recreate(requireActivity())
                     dismiss()
                 } catch (e: Exception) {
                     // invalid URL
