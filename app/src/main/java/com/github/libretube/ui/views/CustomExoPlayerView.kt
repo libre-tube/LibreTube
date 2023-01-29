@@ -172,7 +172,9 @@ internal class CustomExoPlayerView(
                     )
                 ) {
                     updatePlayPauseButton()
-                    updateScreenOnState()
+
+                    // keep screen on if the video is playing
+                    keepScreenOn = player.isPlaying == true
                 }
             }
         })
@@ -184,11 +186,6 @@ internal class CustomExoPlayerView(
                 windowHelper?.unsetFullscreen()
             }
         }
-    }
-
-    private fun updateScreenOnState() {
-        // keep screen on if the video is playing
-        keepScreenOn = player?.isPlaying == true
     }
 
     private fun updatePlayPauseButton() {
