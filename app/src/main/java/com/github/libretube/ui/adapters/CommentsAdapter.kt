@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.text.parseAsHtml
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
@@ -20,6 +25,7 @@ import com.github.libretube.util.ClipboardHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.TextUtils
+import com.github.libretube.util.ThemeHelper
 
 class CommentsAdapter(
     private val fragment: Fragment?,
@@ -69,11 +75,30 @@ class CommentsAdapter(
                 dismiss.invoke()
             }
 
+            if (isRepliesAdapter) {
+                repliesCount.visibility = View.GONE
+                repliesAvailable.visibility = View.GONE
+
+                // highlight the comment that is being replied to
+                if (comment == comments.firstOrNull()) {
+                    root.setBackgroundColor(
+                        ThemeHelper.getThemeColor(root.context, R.attr.colorSurface)
+                    )
+                    root.updatePadding(top = 20)
+                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
+                } else {
+                    root.background = AppCompatResources.getDrawable(root.context, R.drawable.rounded_ripple)
+                }
+            }
+
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 val repliesFragment = CommentsRepliesFragment().apply {
                     arguments = Bundle().apply {
                         putString(IntentData.videoId, videoId)
-                        putString(IntentData.replyPage, comment.repliesPage)
+                        putString(
+                            IntentData.comment,
+                            JsonHelper.json.encodeToString(Comment.serializer(), comment)
+                        )
                     }
                 }
                 root.setOnClickListener {

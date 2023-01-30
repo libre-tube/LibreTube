@@ -3,8 +3,6 @@
     <color name="duration_background_color">#AA000000</color>
     <color name="duration_text_color">#EEFFFFFF</color>
     <color name="shortcut_color">#0061A6</color>
-    <color name="text_color_secondary">#505050</color>
-    <color name="drag_handle_color">#CCCCCC</color>
 
     <color name="blue_md_theme_light_primary">#0058CB</color>
     <color name="blue_md_theme_light_onPrimary">#FFFFFF</color>
