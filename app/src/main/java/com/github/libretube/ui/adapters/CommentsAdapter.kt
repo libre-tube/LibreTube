@@ -78,7 +78,12 @@ class CommentsAdapter(
                 repliesAvailable.visibility = View.GONE
 
                 if (position == 0) {
-                    root.setBackgroundColor(ContextCompat.getColor(root.context, R.color.replies_original_comment_background))
+                    root.setBackgroundColor(
+                        ContextCompat.getColor(
+                            root.context,
+                            R.color.replies_original_comment_background
+                        )
+                    )
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 40 }
                     divider.visibility = View.VISIBLE
                 } else {
