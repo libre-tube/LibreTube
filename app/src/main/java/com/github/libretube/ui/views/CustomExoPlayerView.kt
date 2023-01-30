@@ -439,12 +439,12 @@ internal class CustomExoPlayerView(
             .setDuration((ANIMATION_DURATION * 1.5).toLong())
             .withEndAction {
                 // move the text back into the button
-                handler.postDelayed({
+                handler.postDelayed(100) {
                     textView.animate()
                         .setDuration(ANIMATION_DURATION / 2)
                         .translationX(0f)
                         .start()
-                }, 100)
+                }
             }
     }
 
