@@ -524,9 +524,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun toggleDescription() {
-        var viewInfo = if (!streams.livestream) TextUtils.SEPARATOR + localizedDate(
-            streams.uploadDate
-        ) else ""
+        var viewInfo = if (!streams.livestream) {
+            TextUtils.SEPARATOR + localizedDate(
+                streams.uploadDate
+            )
+        } else {
+            ""
+        }
         if (binding.descLinLayout.isVisible) {
             // hide the description and chapters
             binding.playerDescriptionArrow.animate().rotation(0F).setDuration(250).start()

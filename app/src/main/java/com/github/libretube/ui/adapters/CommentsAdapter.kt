@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.text.parseAsHtml
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
@@ -79,12 +80,14 @@ class CommentsAdapter(
                 repliesAvailable.visibility = View.GONE
 
                 // highlight the comment that is being replied to
-                if (position == 0) {
+                if (comment == comments.firstOrNull()) {
                     root.setBackgroundColor(
                         ThemeHelper.getThemeColor(root.context, R.attr.colorSurface)
                     )
                     root.updatePadding(top = 20)
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
+                } else {
+                    root.background = AppCompatResources.getDrawable(root.context, R.drawable.rounded_ripple)
                 }
             }
 
