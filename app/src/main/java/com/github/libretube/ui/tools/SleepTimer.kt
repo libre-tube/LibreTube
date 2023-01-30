@@ -3,6 +3,8 @@ package com.github.libretube.ui.tools
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.os.Process
+import androidx.core.os.postDelayed
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.MainActivity
@@ -25,38 +27,32 @@ object SleepTimer {
             ""
         ).ifEmpty { return }
 
-        handler.postDelayed(
-            {
-                var killApp = true
-                val mainActivity = context as? MainActivity ?: return@postDelayed
-                val snackBar = Snackbar.make(
-                    mainActivity.binding.root,
-                    R.string.take_a_break,
-                    Snackbar.LENGTH_INDEFINITE
-                )
-                    .setAction(R.string.cancel) {
-                        killApp = false
-                    }
-                snackBar.show()
-                (0..REACTION_INTERVAL).forEach {
-                    handler.postDelayed({
-                        val remainingTime = " (${REACTION_INTERVAL - it})"
-                        snackBar.setText(context.getString(R.string.take_a_break) + remainingTime)
-                    }, it * 1000)
+        handler.postDelayed(breakReminderPref.toLong() * 60 * 1000) {
+            var killApp = true
+            val mainActivity = context as? MainActivity ?: return@postDelayed
+            val snackBar = Snackbar.make(
+                mainActivity.binding.root,
+                R.string.take_a_break,
+                Snackbar.LENGTH_INDEFINITE
+            )
+                .setAction(R.string.cancel) {
+                    killApp = false
                 }
-                handler.postDelayed(
-                    killApp@{
-                        if (!killApp) return@killApp
-
-                        // kill the application
-                        mainActivity.finishAffinity()
-                        mainActivity.finish()
-                        android.os.Process.killProcess(android.os.Process.myPid())
-                    },
-                    REACTION_INTERVAL * 1000
-                )
-            },
-            breakReminderPref.toLong() * 60 * 1000
-        )
+            snackBar.show()
+            for (i in 0..REACTION_INTERVAL) {
+                handler.postDelayed(i * 1000) {
+                    val remainingTime = " (${REACTION_INTERVAL - i})"
+                    snackBar.setText(context.getString(R.string.take_a_break) + remainingTime)
+                }
+            }
+            handler.postDelayed(REACTION_INTERVAL * 1000) {
+                if (killApp) {
+                    // kill the application
+                    mainActivity.finishAffinity()
+                    mainActivity.finish()
+                    Process.killProcess(Process.myPid())
+                }
+            }
+        }
     }
 }

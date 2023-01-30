@@ -31,6 +31,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.net.toUri
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -210,9 +211,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 PlayerEvent.Background -> {
                     playOnBackground()
                     // wait some time in order for the service to get started properly
-                    handler.postDelayed({
+                    handler.postDelayed(500) {
                         activity?.finish()
-                    }, 500)
+                    }
                 }
                 else -> {
                 }
@@ -476,10 +477,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             channelId,
             true
         )
-        handler.postDelayed({
+        handler.postDelayed(500) {
             NavigationHelper.startAudioPlayer(requireContext())
             killPlayerFragment()
-        }, 500)
+        }
     }
 
     private fun setFullscreen() {

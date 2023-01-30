@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.os.postDelayed
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -74,9 +75,9 @@ object NavigationHelper {
                 channelId,
                 keepQueue
             )
-            handler.postDelayed({
+            handler.postDelayed(500) {
                 startAudioPlayer(context)
-            }, 500)
+            }
             return
         }
 

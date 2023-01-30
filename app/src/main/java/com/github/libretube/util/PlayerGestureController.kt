@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.os.postDelayed
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.PlayerViewModel
@@ -27,7 +28,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private val elapsedTime get() = SystemClock.elapsedRealtime()
 
     private val playerViewModel: PlayerViewModel by activity.viewModels()
-    private val handler: Handler = Handler(Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
 
     private val gestureDetector: GestureDetector
     private val scaleGestureDetector: ScaleGestureDetector
@@ -110,7 +111,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             }
 
             if (isEnabled && isSecondClick()) {
-                handler.removeCallbacks(runnable)
+                handler.removeCallbacksAndMessages(SINGLE_TAP_TOKEN)
                 lastDoubleClick = elapsedTime
                 val eventPositionPercentageX = e.x / width
 
@@ -121,8 +122,12 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
                 }
             } else {
                 if (recentDoubleClick()) return true
-                handler.removeCallbacks(runnable)
-                handler.postDelayed(runnable, MAX_TIME_DIFF)
+                handler.removeCallbacksAndMessages(SINGLE_TAP_TOKEN)
+                handler.postDelayed(MAX_TIME_DIFF, SINGLE_TAP_TOKEN) {
+                    // If the last event was for scroll or pinch then avoid single tap call
+                    if (!wasClick || isSecondClick()) return@postDelayed
+                    listener.onSingleTap()
+                }
                 lastClick = elapsedTime
             }
             return true
@@ -155,12 +160,6 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             return true
         }
 
-        private val runnable = Runnable {
-            // If the last event was for scroll or pinch then avoid single tap call
-            if (!wasClick || isSecondClick()) return@Runnable
-            listener.onSingleTap()
-        }
-
         private fun isSecondClick(): Boolean {
             return elapsedTime - lastClick < MAX_TIME_DIFF
         }
@@ -171,6 +170,8 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     }
 
     companion object {
+        private const val SINGLE_TAP_TOKEN = "singleTap"
+
         private const val MAX_TIME_DIFF = 400L
         private const val MOVEMENT_THRESHOLD = 30
         private const val BORDER_THRESHOLD = 90

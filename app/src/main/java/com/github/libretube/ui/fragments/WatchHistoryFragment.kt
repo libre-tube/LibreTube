@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.postDelayed
 import androidx.core.view.updatePadding
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -144,7 +145,7 @@ class WatchHistoryFragment : BaseFragment() {
         })
 
         // add a listener for scroll end, delay needed to prevent loading new ones the first time
-        Handler(Looper.getMainLooper()).postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed(200) {
             binding.historyScrollView.viewTreeObserver.addOnScrollChangedListener {
                 if (!binding.historyScrollView.canScrollVertically(1) && !isLoading) {
                     isLoading = true
@@ -152,6 +153,6 @@ class WatchHistoryFragment : BaseFragment() {
                     isLoading = false
                 }
             }
-        }, 200)
+        }
     }
 }
