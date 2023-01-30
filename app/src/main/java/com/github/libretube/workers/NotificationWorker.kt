@@ -18,7 +18,6 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.filterUntil
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
@@ -107,9 +106,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
             }
 
             // filter the new videos until the last seen video in the feed
-            val newStreams = videoFeed.filterUntil {
-                it.url!!.toID() == lastSeenStreamId
-            } ?: return@runBlocking
+            val newStreams = videoFeed.takeWhile { it.url!!.toID() != lastSeenStreamId }
 
             // return if the previous video didn't get found
             if (newStreams.isEmpty()) return@runBlocking
