@@ -24,7 +24,7 @@
                 android:layout_height="20dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="0dp"
-                app:tint="@color/drag_handle_color" />
+                app:tint="?android:attr/textColorSecondaryInverse" />
 
             <LinearLayout
                 android:layout_width="match_parent"

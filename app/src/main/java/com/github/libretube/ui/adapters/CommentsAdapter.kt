@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
@@ -23,6 +22,7 @@ import com.github.libretube.util.ClipboardHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.TextUtils
+import com.github.libretube.util.ThemeHelper
 import kotlinx.serialization.json.Json
 
 class CommentsAdapter(
@@ -79,17 +79,12 @@ class CommentsAdapter(
 
                 if (position == 0) {
                     root.setBackgroundColor(
-                        ContextCompat.getColor(
-                            root.context,
-                            R.color.replies_original_comment_background
-                        )
+                        ThemeHelper.getThemeColor(root.context, R.attr.colorSurface)
                     )
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 40 }
-                    divider.visibility = View.VISIBLE
                 } else {
                     root.background = null
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 0 }
-                    divider.visibility = View.GONE
                 }
             }
 

@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -50,7 +50,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:textSize="14sp"
-                        android:textColor="@color/text_color_secondary"
+                        android:textColor="?android:attr/textColorSecondary"
                         tools:text="Author and Time" />
 
                     <ImageView
@@ -133,11 +133,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
