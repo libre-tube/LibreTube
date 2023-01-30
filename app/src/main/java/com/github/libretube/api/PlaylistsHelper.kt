@@ -24,8 +24,9 @@ import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 object PlaylistsHelper {
@@ -228,30 +229,16 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun exportPlaylists(): List<ImportPlaylist> {
-        val playlists = getPlaylists()
-        val importLists = mutableListOf<ImportPlaylist>()
-        runBlocking {
-            val tasks = playlists.map {
-                async {
-                    val list = getPlaylist(it.id!!)
-                    importLists.add(
-                        ImportPlaylist(
-                            name = list.name,
-                            type = "playlist",
-                            visibility = "private",
-                            videos = list.relatedStreams.map {
-                                "$YOUTUBE_FRONTEND_URL/watch?v=${it.url!!.toID()}"
-                            }
-                        )
-                    )
+    suspend fun exportPlaylists(): List<ImportPlaylist> = withContext(Dispatchers.IO) {
+        getPlaylists()
+            .map { async { getPlaylist(it.id!!) } }
+            .awaitAll()
+            .map {
+                val videos = it.relatedStreams.map { item ->
+                    "$YOUTUBE_FRONTEND_URL/watch?v=${item.url!!.toID()}"
                 }
+                ImportPlaylist(it.name, "playlist", "private", videos)
             }
-            tasks.forEach {
-                it.await()
-            }
-        }
-        return importLists
     }
 
     fun clonePlaylist(context: Context, playlistId: String) {
