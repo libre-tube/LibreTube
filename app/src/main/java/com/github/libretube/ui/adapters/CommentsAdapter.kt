@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.text.parseAsHtml
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
@@ -20,6 +23,7 @@ import com.github.libretube.util.ClipboardHelper
 import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.TextUtils
+import kotlinx.serialization.json.Json
 
 class CommentsAdapter(
     private val fragment: Fragment?,
@@ -69,11 +73,26 @@ class CommentsAdapter(
                 dismiss.invoke()
             }
 
+            if (isRepliesAdapter) {
+                repliesCount.visibility = View.GONE
+                repliesAvailable.visibility = View.GONE
+
+                if (position == 0) {
+                    root.setBackgroundColor(ContextCompat.getColor(root.context, R.color.replies_original_comment_background))
+                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 40 }
+                    divider.visibility = View.VISIBLE
+                } else {
+                    root.background = null
+                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 0 }
+                    divider.visibility = View.GONE
+                }
+            }
+
             if (!isRepliesAdapter && comment.repliesPage != null) {
                 val repliesFragment = CommentsRepliesFragment().apply {
                     arguments = Bundle().apply {
                         putString(IntentData.videoId, videoId)
-                        putString(IntentData.replyPage, comment.repliesPage)
+                        putString(IntentData.comment, Json.encodeToString(Comment.serializer(), comment))
                     }
                 }
                 root.setOnClickListener {

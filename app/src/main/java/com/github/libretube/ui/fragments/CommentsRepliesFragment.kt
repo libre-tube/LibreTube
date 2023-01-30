@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.api.obj.Comment
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
@@ -19,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 
 class CommentsRepliesFragment : Fragment() {
     private lateinit var binding: FragmentCommentsBinding
@@ -40,12 +43,16 @@ class CommentsRepliesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val videoId = arguments?.getString(IntentData.videoId) ?: ""
-        val nextPage = arguments?.getString(IntentData.replyPage) ?: ""
+        val comment = Json.decodeFromString(
+            Comment.serializer(),
+            arguments?.getString(IntentData.comment) ?: """{}""",
+        )
 
-        repliesAdapter = CommentsAdapter(null, videoId, mutableListOf(), true) {
+        repliesAdapter = CommentsAdapter(null, videoId, mutableListOf(comment), true) {
             viewModel.commentsSheetDismiss?.invoke()
         }
 
+        binding.commentsRV.updatePadding(top = 0)
         binding.commentsRV.layoutManager = LinearLayoutManager(view.context)
         binding.commentsRV.adapter = repliesAdapter
 
@@ -61,7 +68,7 @@ class CommentsRepliesFragment : Fragment() {
                 }
             }
 
-        loadInitialReplies(videoId, nextPage, repliesAdapter)
+        loadInitialReplies(videoId, comment.repliesPage ?: "", repliesAdapter)
     }
 
     private fun loadInitialReplies(
@@ -69,17 +76,10 @@ class CommentsRepliesFragment : Fragment() {
         nextPage: String,
         repliesAdapter: CommentsAdapter
     ) {
-        when (repliesAdapter.itemCount) {
-            0 -> {
-                binding.progress.visibility = View.VISIBLE
-                fetchReplies(videoId, nextPage) {
-                    repliesAdapter.updateItems(it.comments)
-                    binding.progress.visibility = View.GONE
-                }
-            }
-            else -> {
-                repliesAdapter.clear()
-            }
+        binding.progress.visibility = View.VISIBLE
+        fetchReplies(videoId, nextPage) {
+            repliesAdapter.updateItems(it.comments)
+            binding.progress.visibility = View.GONE
         }
     }
 
