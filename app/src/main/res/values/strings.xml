@@ -138,6 +138,7 @@
     <string name="update_summary">Check for update</string>
     <string name="app_uptodate">Running the latest version.</string>
     <string name="no_update_available">You are running the latest version.</string>
+    <string name="update_disabled_debug">Updater is disabled for debug versions!</string>
     <string name="playback_speed">Playback speed</string>
     <string name="advanced">Advanced</string>
     <string name="player">Player</string>

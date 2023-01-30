@@ -85,11 +85,8 @@ class MainSettings : BasePreferenceFragment() {
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
             if (BuildConfig.DEBUG) {
-                Toast.makeText(
-                    context,
-                    "Updater is disabled for debug versions!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), R.string.update_disabled_debug, Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnPreferenceClickListener true
             }
             CoroutineScope(Dispatchers.IO).launch {
