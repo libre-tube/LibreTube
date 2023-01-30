@@ -9,6 +9,7 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.api.obj.CommentsPage
@@ -43,7 +44,7 @@ class CommentsRepliesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val videoId = arguments?.getString(IntentData.videoId) ?: ""
-        val comment = Json.decodeFromString(
+        val comment = JsonHelper.json.decodeFromString(
             Comment.serializer(),
             arguments?.getString(IntentData.comment) ?: """{}"""
         )
@@ -53,7 +54,7 @@ class CommentsRepliesFragment : Fragment() {
         }
 
         binding.commentsRV.updatePadding(top = 0)
-        binding.commentsRV.layoutManager = LinearLayoutManager(view.context)
+        binding.commentsRV.layoutManager = LinearLayoutManager(context)
         binding.commentsRV.adapter = repliesAdapter
 
         binding.commentsRV.viewTreeObserver

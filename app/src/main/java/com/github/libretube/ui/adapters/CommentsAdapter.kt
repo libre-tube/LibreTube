@@ -9,9 +9,11 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.core.text.parseAsHtml
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
@@ -23,7 +25,6 @@ import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.TextUtils
 import com.github.libretube.util.ThemeHelper
-import kotlinx.serialization.json.Json
 
 class CommentsAdapter(
     private val fragment: Fragment?,
@@ -77,14 +78,13 @@ class CommentsAdapter(
                 repliesCount.visibility = View.GONE
                 repliesAvailable.visibility = View.GONE
 
+                // highlight the comment that is being replied to
                 if (position == 0) {
                     root.setBackgroundColor(
                         ThemeHelper.getThemeColor(root.context, R.attr.colorSurface)
                     )
-                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 40 }
-                } else {
-                    root.background = null
-                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 0 }
+                    root.updatePadding(top = 20)
+                    root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
                 }
             }
 
@@ -94,7 +94,7 @@ class CommentsAdapter(
                         putString(IntentData.videoId, videoId)
                         putString(
                             IntentData.comment,
-                            Json.encodeToString(Comment.serializer(), comment)
+                            JsonHelper.json.encodeToString(Comment.serializer(), comment)
                         )
                     }
                 }
