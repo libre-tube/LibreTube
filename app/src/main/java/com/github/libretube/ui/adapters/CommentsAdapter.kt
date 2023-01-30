@@ -87,7 +87,10 @@ class CommentsAdapter(
                     root.updatePadding(top = 20)
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
                 } else {
-                    root.background = AppCompatResources.getDrawable(root.context, R.drawable.rounded_ripple)
+                    root.background = AppCompatResources.getDrawable(
+                        root.context,
+                        R.drawable.rounded_ripple
+                    )
                 }
             }
 
