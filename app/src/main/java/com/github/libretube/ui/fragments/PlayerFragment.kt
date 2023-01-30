@@ -816,6 +816,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
             // play the next video
             playVideo()
+
+            // close comment bottom-sheet for next video
+            commentsViewModel.commentsSheetDismiss?.invoke()
         }
     }
 
