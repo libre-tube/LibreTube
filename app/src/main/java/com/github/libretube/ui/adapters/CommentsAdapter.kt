@@ -92,7 +92,10 @@ class CommentsAdapter(
                 val repliesFragment = CommentsRepliesFragment().apply {
                     arguments = Bundle().apply {
                         putString(IntentData.videoId, videoId)
-                        putString(IntentData.comment, Json.encodeToString(Comment.serializer(), comment))
+                        putString(
+                            IntentData.comment,
+                            Json.encodeToString(Comment.serializer(), comment)
+                        )
                     }
                 }
                 root.setOnClickListener {

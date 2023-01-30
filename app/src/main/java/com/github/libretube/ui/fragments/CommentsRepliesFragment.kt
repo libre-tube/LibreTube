@@ -45,7 +45,7 @@ class CommentsRepliesFragment : Fragment() {
         val videoId = arguments?.getString(IntentData.videoId) ?: ""
         val comment = Json.decodeFromString(
             Comment.serializer(),
-            arguments?.getString(IntentData.comment) ?: """{}""",
+            arguments?.getString(IntentData.comment) ?: """{}"""
         )
 
         repliesAdapter = CommentsAdapter(null, videoId, mutableListOf(comment), true) {
