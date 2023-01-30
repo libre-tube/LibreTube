@@ -22,7 +22,6 @@ import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.ui.extensions.withMaxSize
 import com.github.libretube.util.LocaleHelper
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -73,7 +72,7 @@ class HomeFragment : BaseFragment() {
 
     private suspend fun fetchHome() {
         runOrError {
-            val feed = SubscriptionHelper.getFeed().withMaxSize(20)
+            val feed = SubscriptionHelper.getFeed().take(20)
             if (feed.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.featuredRV, binding.featuredTV)
@@ -90,9 +89,8 @@ class HomeFragment : BaseFragment() {
         }
 
         runOrError {
-            val trending = RetrofitInstance.api.getTrending(
-                LocaleHelper.getTrendingRegion(requireContext())
-            ).withMaxSize(10)
+            val region = LocaleHelper.getTrendingRegion(requireContext())
+            val trending = RetrofitInstance.api.getTrending(region).take(10)
             if (trending.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.trendingRV, binding.trendingTV)
@@ -105,7 +103,7 @@ class HomeFragment : BaseFragment() {
         }
 
         runOrError {
-            val playlists = PlaylistsHelper.getPlaylists().withMaxSize(20)
+            val playlists = PlaylistsHelper.getPlaylists().take(20)
             if (playlists.isEmpty()) return@runOrError
             runOnUiThread {
                 makeVisible(binding.playlistsRV, binding.playlistsTV)
