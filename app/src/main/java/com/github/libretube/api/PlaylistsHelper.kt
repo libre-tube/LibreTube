@@ -157,8 +157,9 @@ object PlaylistsHelper {
 
     suspend fun importPlaylists(playlists: List<ImportPlaylist>) = withContext(Dispatchers.IO) {
         playlists.map { playlist ->
+            val playlistId = createPlaylist(playlist.name!!, null)
             async {
-                val playlistId = createPlaylist(playlist.name!!, null) ?: return@async
+                playlistId ?: return@async
                 // if logged in, add the playlists by their ID via an api call
                 if (loggedIn) {
                     addToPlaylist(
@@ -171,8 +172,17 @@ object PlaylistsHelper {
                     // if not logged in, all video information needs to become fetched manually
                     runCatching {
                         val streamItems = playlist.videos.map {
-                            async { RetrofitInstance.api.getStreams(it).toStreamItem(it) }
-                        }.awaitAll()
+                            async {
+                                try {
+                                    RetrofitInstance.api.getStreams(it).toStreamItem(it)
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            }
+                        }
+                            .awaitAll()
+                            .filterNotNull()
+
                         addToPlaylist(playlistId, *streamItems.toTypedArray())
                     }
                 }
