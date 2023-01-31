@@ -19,6 +19,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
+import gen._base._base_java__assetres.srcjar.R.id.async
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -154,24 +155,29 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun importPlaylists(playlists: List<ImportPlaylist>) {
-        for (playlist in playlists) {
-            val playlistId = createPlaylist(playlist.name!!, null) ?: continue
-            // if logged in, add the playlists by their ID via an api call
-            if (loggedIn) {
-                addToPlaylist(playlistId, *playlist.videos.map {
-                    StreamItem(url = it)
-                }.toTypedArray())
-            } else {
-                // if not logged in, all video information needs to become fetched manually
-                runCatching {
-                    val streamItems = playlist.videos.map {
-                        RetrofitInstance.api.getStreams(it).toStreamItem(it)
+    suspend fun importPlaylists(playlists: List<ImportPlaylist>) = withContext(Dispatchers.IO) {
+        playlists.map { playlist ->
+            async {
+                val playlistId = createPlaylist(playlist.name!!, null) ?: return@async
+                // if logged in, add the playlists by their ID via an api call
+                if (loggedIn) {
+                    addToPlaylist(
+                        playlistId,
+                        *playlist.videos.map {
+                            StreamItem(url = it)
+                        }.toTypedArray()
+                    )
+                } else {
+                    // if not logged in, all video information needs to become fetched manually
+                    runCatching {
+                        val streamItems = playlist.videos.map {
+                            async { RetrofitInstance.api.getStreams(it).toStreamItem(it) }
+                        }.awaitAll()
+                        addToPlaylist(playlistId, *streamItems.toTypedArray())
                     }
-                    addToPlaylist(playlistId, *streamItems.toTypedArray())
                 }
             }
-        }
+        }.awaitAll()
     }
 
     suspend fun exportPlaylists(): List<ImportPlaylist> = withContext(Dispatchers.IO) {
