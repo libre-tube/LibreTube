@@ -11,6 +11,7 @@ import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toPlaylistBookmark
+import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.dialogs.RenamePlaylistDialog
@@ -64,14 +65,23 @@ class PlaylistOptionsBottomSheet(
                             }
                         BackgroundHelper.playOnBackground(
                             context = requireContext(),
-                            videoId = playlist.relatedStreams!![0].url!!.toID(),
+                            videoId = playlist.relatedStreams[0].url!!.toID(),
                             playlistId = playlistId
                         )
                     }
                 }
                 // Clone the playlist to the users Piped account
                 getString(R.string.clonePlaylist) -> {
-                    PlaylistsHelper.clonePlaylist(requireContext(), playlistId)
+                    val appContext = context?.applicationContext
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val playlistId = PlaylistsHelper.clonePlaylist(
+                            requireContext().applicationContext,
+                            playlistId
+                        )
+                        appContext?.toastFromMainThread(
+                            if (playlistId != null) R.string.playlistCloned else R.string.server_error
+                        )
+                    }
                 }
                 // share the playlist
                 getString(R.string.share) -> {
