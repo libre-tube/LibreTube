@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogNavbarOptionsBinding
-import com.github.libretube.ui.adapters.NavBarOptionsAdapter
 import com.github.libretube.helpers.NavBarHelper
+import com.github.libretube.ui.adapters.NavBarOptionsAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NavBarOptionsDialog : DialogFragment() {

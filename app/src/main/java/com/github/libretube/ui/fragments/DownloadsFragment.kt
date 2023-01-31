@@ -19,13 +19,13 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.formatAsFileSize
+import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.obj.DownloadStatus
 import com.github.libretube.receivers.DownloadReceiver
 import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import com.github.libretube.helpers.DownloadHelper
 import java.io.File
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

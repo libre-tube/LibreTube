@@ -10,7 +10,6 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.toID
 import com.github.libretube.helpers.AudioHelper
 import com.github.libretube.helpers.BackgroundHelper
@@ -138,7 +138,7 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
             ).show(childFragmentManager, null)
         }
 
-        val listener = AudioPlayerThumbnailListener(binding.thumbnail, this)
+        val listener = AudioPlayerThumbnailListener(requireContext(), this)
         binding.thumbnail.setOnTouchListener(listener)
 
         // Listen for track changes due to autoplay or the notification
@@ -150,6 +150,11 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
 
         // load the stream info into the UI
         updateStreamInfo()
+
+        // update the currently shown volume
+        binding.volumeProgressBar.let { bar ->
+            bar.progress = audioHelper.getVolumeWithScale(bar.max)
+        }
     }
 
     /**
@@ -244,10 +249,36 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
     }
 
     override fun onSwipe(distanceY: Float) {
-        Log.e("swiping", distanceY.toString())
+        binding.volumeControls.visibility = View.VISIBLE
+        updateVolume(distanceY)
     }
 
     override fun onSwipeEnd() {
-        Log.e("ended", "ended")
+        binding.volumeControls.visibility = View.GONE
+    }
+
+    private fun updateVolume(distance: Float) {
+        val bar = binding.volumeProgressBar
+        binding.volumeControls.apply {
+            if (visibility == View.GONE) {
+                visibility = View.VISIBLE
+                // Volume could be changed using other mediums, sync progress
+                // bar with new value.
+                bar.progress = audioHelper.getVolumeWithScale(bar.max)
+            }
+        }
+
+        if (bar.progress == 0) {
+            binding.volumeImageView.setImageResource(
+                when {
+                    distance > 0 -> R.drawable.ic_volume_up
+                    else -> R.drawable.ic_volume_off
+                }
+            )
+        }
+        bar.incrementProgressBy(distance.toInt() / 3)
+        audioHelper.setVolumeWithScale(bar.progress, bar.max)
+
+        binding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
     }
 }

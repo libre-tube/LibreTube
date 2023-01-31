@@ -1,6 +1,7 @@
 package com.github.libretube.ui.listeners
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.view.GestureDetector
@@ -10,29 +11,19 @@ import androidx.core.os.postDelayed
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import kotlin.math.abs
 
-class AudioPlayerThumbnailListener(private val view: View, private val listener: AudioPlayerOptions) :
+class AudioPlayerThumbnailListener(context: Context, private val listener: AudioPlayerOptions) :
     View.OnTouchListener {
 
-    private val width get() = view.width
-    private val height get() = view.height
-
     private val handler = Handler(Looper.getMainLooper())
-
-    private val gestureDetector: GestureDetector
-
+    private val gestureDetector = GestureDetector(context, GestureListener(), handler)
     private var isMoving = false
-
-    var wasClick = true
-
-    init {
-        gestureDetector = GestureDetector(view.context, GestureListener(), handler)
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP && isMoving) {
             isMoving = false
             listener.onSwipeEnd()
+            return false
         }
 
         runCatching {
@@ -46,11 +37,10 @@ class AudioPlayerThumbnailListener(private val view: View, private val listener:
 
         override fun onDown(e: MotionEvent): Boolean {
             // Initially assume this event is for click
-            wasClick = true
             if (isMoving) return false
 
-            handler.postDelayed(100) {
-                if (wasClick) listener.onSingleTap()
+            handler.postDelayed(300) {
+                if (!isMoving) listener.onSingleTap()
             }
 
             return true
@@ -70,7 +60,6 @@ class AudioPlayerThumbnailListener(private val view: View, private val listener:
             }
 
             isMoving = true
-            wasClick = false
 
             listener.onSwipe(distanceY)
             return true

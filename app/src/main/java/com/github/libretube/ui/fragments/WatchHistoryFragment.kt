@@ -19,12 +19,12 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.query
+import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.helpers.ProxyHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class WatchHistoryFragment : BaseFragment() {

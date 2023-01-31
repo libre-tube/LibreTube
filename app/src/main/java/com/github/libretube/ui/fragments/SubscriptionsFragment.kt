@@ -13,13 +13,13 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentSubscriptionsBinding
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
-import com.github.libretube.helpers.PreferenceHelper
 
 class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
