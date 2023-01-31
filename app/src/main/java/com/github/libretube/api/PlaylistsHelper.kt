@@ -19,6 +19,7 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
+import gen._base._base_java__assetres.srcjar.R.id.async
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -68,30 +69,25 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun createPlaylist(
-        playlistName: String,
-        appContext: Context
-    ): String? {
+    suspend fun createPlaylist(playlistName: String, appContext: Context?): String? {
         if (!loggedIn) {
             val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
             DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist)
             return DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .last().playlist.id.toString()
         } else {
-            val response = try {
+            return try {
                 RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName))
             } catch (e: IOException) {
-                appContext.toastFromMainThread(R.string.unknown_error)
+                appContext?.toastFromMainThread(R.string.unknown_error)
                 return null
             } catch (e: HttpException) {
                 Log.e(TAG(), e.toString())
-                appContext.toastFromMainThread(R.string.server_error)
+                appContext?.toastFromMainThread(R.string.server_error)
                 return null
+            }.playlistId.also {
+                appContext?.toastFromMainThread(R.string.playlistCreated)
             }
-            if (response.playlistId != null) {
-                appContext.toastFromMainThread(R.string.playlistCreated)
-            }
-            return response.playlistId
         }
     }
 
@@ -138,57 +134,60 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun removeFromPlaylist(playlistId: String, index: Int) {
-        if (!loggedIn) {
+    suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
+        return if (!loggedIn) {
             val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .first { it.playlist.id.toString() == playlistId }
             DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
                 transaction.videos[index]
             )
-            if (transaction.videos.size > 1) {
-                if (index == 0) {
-                    transaction.videos[1].thumbnailUrl?.let {
-                        transaction.playlist.thumbnailUrl = it
-                    }
-                    DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
-                }
-                return
+            // set a new playlist thumbnail if the first video got removed
+            if (index == 0) {
+                transaction.playlist.thumbnailUrl = transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
             }
-            // remove thumbnail if playlist now empty
-            transaction.playlist.thumbnailUrl = ""
             DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+            true
         } else {
-            val playlist = PlaylistId(playlistId = playlistId, index = index)
-            RetrofitInstance.authApi.removeFromPlaylist(PreferenceHelper.getToken(), playlist)
+            RetrofitInstance.authApi.removeFromPlaylist(
+                PreferenceHelper.getToken(),
+                PlaylistId(playlistId = playlistId, index = index)
+            ).message == "ok"
         }
     }
 
-    suspend fun importPlaylists(appContext: Context, playlists: List<ImportPlaylist>) {
-        for (playlist in playlists) {
-            val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
-            // if logged in, add the playlists by their ID via an api call
-            val success: Boolean = if (loggedIn) {
-                addToPlaylist(
-                    playlistId,
-                    *playlist.videos.map {
-                        StreamItem(url = it)
-                    }.toTypedArray()
-                )
-            } else {
-                // if not logged in, all video information needs to become fetched manually
-                try {
-                    val streamItems = playlist.videos.map {
-                        RetrofitInstance.api.getStreams(it).toStreamItem(it)
+    suspend fun importPlaylists(playlists: List<ImportPlaylist>) = withContext(Dispatchers.IO) {
+        playlists.map { playlist ->
+            val playlistId = createPlaylist(playlist.name!!, null)
+            async {
+                playlistId ?: return@async
+                // if logged in, add the playlists by their ID via an api call
+                if (loggedIn) {
+                    addToPlaylist(
+                        playlistId,
+                        *playlist.videos.map {
+                            StreamItem(url = it)
+                        }.toTypedArray()
+                    )
+                } else {
+                    // if not logged in, all video information needs to become fetched manually
+                    runCatching {
+                        val streamItems = playlist.videos.map {
+                            async {
+                                try {
+                                    RetrofitInstance.api.getStreams(it).toStreamItem(it)
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            }
+                        }
+                            .awaitAll()
+                            .filterNotNull()
+
+                        addToPlaylist(playlistId, *streamItems.toTypedArray())
                     }
-                    addToPlaylist(playlistId, *streamItems.toTypedArray())
-                } catch (e: Exception) {
-                    false
                 }
             }
-            appContext.toastFromMainThread(
-                if (success) R.string.importsuccess else R.string.server_error
-            )
-        }
+        }.awaitAll()
     }
 
     suspend fun exportPlaylists(): List<ImportPlaylist> = withContext(Dispatchers.IO) {
