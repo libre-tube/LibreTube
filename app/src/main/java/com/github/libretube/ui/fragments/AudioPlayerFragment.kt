@@ -243,6 +243,10 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
     }
 
     override fun onSingleTap() {
+        if (isPaused) playerService?.play() else playerService?.pause()
+    }
+
+    override fun onLongTap() {
         val current = PlayingQueue.getCurrent()
         VideoOptionsBottomSheet(current?.url?.toID() ?: return, current.title ?: return)
             .show(childFragmentManager)

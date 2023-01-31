@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.core.os.postDelayed
 import com.github.libretube.ui.interfaces.AudioPlayerOptions
 import kotlin.math.abs
@@ -36,10 +37,9 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
         override fun onDown(e: MotionEvent): Boolean {
-            // Initially assume this event is for click
             if (isMoving) return false
 
-            handler.postDelayed(300) {
+            handler.postDelayed(ACTION_INTERVAL, SINGLE_PRESS_TOKEN) {
                 if (!isMoving) listener.onSingleTap()
             }
 
@@ -64,9 +64,18 @@ class AudioPlayerThumbnailListener(context: Context, private val listener: Audio
             listener.onSwipe(distanceY)
             return true
         }
+
+        override fun onLongPress(e: MotionEvent) {
+            // remove to single press action from the queue
+            handler.removeCallbacksAndMessages(SINGLE_PRESS_TOKEN)
+
+            listener.onLongTap()
+        }
     }
 
     companion object {
         private const val MOVEMENT_THRESHOLD = 10
+        private val ACTION_INTERVAL = ViewConfiguration.getLongPressTimeout().toLong()
+        private const val SINGLE_PRESS_TOKEN = "singlePress"
     }
 }
