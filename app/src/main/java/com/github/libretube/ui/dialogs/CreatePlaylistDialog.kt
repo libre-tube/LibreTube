@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.databinding.DialogCreatePlaylistBinding
+import com.github.libretube.extensions.toastFromMainThread
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,8 +25,19 @@ class CreatePlaylistDialog(
 
         binding.clonePlaylist.setOnClickListener {
             val playlistUrl = binding.playlistUrl.text.toString().toHttpUrlOrNull()
+            val appContext = context?.applicationContext
+
             playlistUrl?.queryParameter("list")?.let {
-                PlaylistsHelper.clonePlaylist(requireContext(), it)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val playlistId = PlaylistsHelper.clonePlaylist(requireContext(), it)?.also {
+                        withContext(Dispatchers.Main) {
+                            onSuccess.invoke()
+                        }
+                    }
+                    appContext?.toastFromMainThread(
+                        if (playlistId != null) R.string.playlistCloned else R.string.server_error
+                    )
+                }
                 dismiss()
             } ?: run {
                 Toast.makeText(context, R.string.invalid_url, Toast.LENGTH_SHORT).show()

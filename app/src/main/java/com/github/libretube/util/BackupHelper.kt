@@ -13,6 +13,7 @@ import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
@@ -27,6 +28,7 @@ class BackupHelper(private val context: Context) {
     /**
      * Write a [BackupFile] containing the database content as well as the preferences
      */
+    @OptIn(ExperimentalSerializationApi::class)
     fun createAdvancedBackup(uri: Uri?, backupFile: BackupFile) {
         uri?.let {
             try {
@@ -42,6 +44,7 @@ class BackupHelper(private val context: Context) {
     /**
      * Restore data from a [BackupFile]
      */
+    @OptIn(ExperimentalSerializationApi::class)
     fun restoreAdvancedBackup(uri: Uri?) {
         val backupFile = uri?.let {
             context.contentResolver.openInputStream(it)?.use { inputStream ->

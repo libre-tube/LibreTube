@@ -20,11 +20,9 @@ import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
 import java.io.IOException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
@@ -205,49 +203,35 @@ object PlaylistsHelper {
             }
     }
 
-    fun clonePlaylist(context: Context, playlistId: String) {
+    suspend fun clonePlaylist(context: Context, playlistId: String): String? {
         val appContext = context.applicationContext
         if (!loggedIn) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val playlist = try {
-                    RetrofitInstance.api.getPlaylist(playlistId)
-                } catch (e: Exception) {
-                    appContext.toastFromMainThread(R.string.server_error)
-                    return@launch
-                }
-                val newPlaylist = createPlaylist(playlist.name ?: "Unknown name", appContext)
-                newPlaylist ?: return@launch
-
-                addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
-
-                var nextPage = playlist.nextpage
-                while (nextPage != null) {
-                    nextPage = try {
-                        RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage).apply {
-                            addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
-                        }.nextpage
-                    } catch (e: Exception) {
-                        return@launch
-                    }
-                }
-            }
-            return
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = try {
-                RetrofitInstance.authApi.clonePlaylist(
-                    token,
-                    PlaylistId(playlistId)
-                )
+            val playlist = try {
+                RetrofitInstance.api.getPlaylist(playlistId)
             } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                return@launch
+                appContext.toastFromMainThread(R.string.server_error)
+                return null
             }
-            appContext?.toastFromMainThread(
-                if (response.playlistId != null) R.string.playlistCloned else R.string.server_error
-            )
+            val newPlaylist = createPlaylist(playlist.name ?: "Unknown name", appContext) ?: return null
+
+            addToPlaylist(newPlaylist, *playlist.relatedStreams.toTypedArray())
+
+            var nextPage = playlist.nextpage
+            while (nextPage != null) {
+                nextPage = try {
+                    RetrofitInstance.api.getPlaylistNextPage(playlistId, nextPage).apply {
+                        addToPlaylist(newPlaylist, *relatedStreams.toTypedArray())
+                    }.nextpage
+                } catch (e: Exception) {
+                    break
+                }
+            }
+            return playlistId
         }
+
+        return runCatching {
+            RetrofitInstance.authApi.clonePlaylist(token, PlaylistId(playlistId))
+        }.getOrNull()?.playlistId
     }
 
     fun getPrivatePlaylistType(): PlaylistType {
