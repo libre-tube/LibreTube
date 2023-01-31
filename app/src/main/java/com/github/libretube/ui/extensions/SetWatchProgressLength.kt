@@ -12,15 +12,11 @@ import com.github.libretube.extensions.awaitQuery
  * @param duration The duration of the video in seconds
  * @return Whether the video is already watched more than 90%
  */
-fun View?.setWatchProgressLength(videoId: String, duration: Long): Boolean {
-    val view = this!!
-
-    view.apply {
-        updateLayoutParams<ConstraintLayout.LayoutParams> {
-            matchConstraintPercentWidth = 0f
-        }
-        visibility = View.GONE
+fun View.setWatchProgressLength(videoId: String, duration: Long): Boolean {
+    updateLayoutParams<ConstraintLayout.LayoutParams> {
+        matchConstraintPercentWidth = 0f
     }
+    visibility = View.GONE
 
     val progress = try {
         awaitQuery {
@@ -35,12 +31,10 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long): Boolean {
         return false
     }
 
-    view.apply {
-        updateLayoutParams<ConstraintLayout.LayoutParams> {
-            matchConstraintPercentWidth = (progress / duration.toFloat())
-        }
-        visibility = View.VISIBLE
+    updateLayoutParams<ConstraintLayout.LayoutParams> {
+        matchConstraintPercentWidth = progress / duration.toFloat()
     }
+    visibility = View.VISIBLE
 
     return progress / duration.toFloat() > 0.9
 }
