@@ -39,17 +39,10 @@
             android:id="@+id/website"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_region" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/website" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/website"
+                app:drawableStartCompat="@drawable/ic_region" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -57,17 +50,10 @@
             android:id="@+id/github"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_github" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/github" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/github"
+                app:drawableStartCompat="@drawable/ic_github" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -75,17 +61,10 @@
             android:id="@+id/piped"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_piped" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/piped" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/piped"
+                app:drawableStartCompat="@drawable/ic_piped" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -93,17 +72,10 @@
             android:id="@+id/translate"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_weblate" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/translate" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/translate"
+                app:drawableStartCompat="@drawable/ic_weblate" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -111,17 +83,10 @@
             android:id="@+id/license"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_license" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/license" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/license"
+                app:drawableStartCompat="@drawable/ic_license" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -129,17 +94,10 @@
             android:id="@+id/device"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_device" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/device_info" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/device_info"
+                app:drawableStartCompat="@drawable/ic_device" />
 
         </com.google.android.material.card.MaterialCardView>
 
