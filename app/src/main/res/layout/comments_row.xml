@@ -45,10 +45,11 @@
 
                     <TextView
                         android:id="@+id/comment_infos"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
+                        android:textAlignment="viewStart"
                         android:textSize="14sp"
                         android:textColor="?android:attr/textColorSecondary"
                         tools:text="Author and Time" />
@@ -80,6 +81,7 @@
                     android:layout_marginBottom="8dp"
                     android:textSize="15sp"
                     android:autoLink="web"
+                    android:textAlignment="viewStart"
                     tools:text="Comment Text" />
 
                 <LinearLayout

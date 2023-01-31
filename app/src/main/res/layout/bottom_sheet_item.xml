@@ -6,6 +6,7 @@
     android:background="?attr/selectableItemBackground"
     android:orientation="horizontal"
     android:paddingHorizontal="30dp"
+    android:gravity="center_vertical"
     android:paddingVertical="12dp">
 
     <ImageView
@@ -20,8 +21,8 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:textSize="16sp"
+        android:textAlignment="viewStart"
         tools:text="Option" />
 
 </LinearLayout>

@@ -17,8 +17,8 @@
 
     <style name="AboutCard" parent="Widget.Material3.CardView.Elevated">
 
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="strokeWidth">0dp</item>
@@ -31,32 +31,16 @@
 
     <style name="AboutItem">
 
-        <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:layout_marginRight">20dp</item>
-        <item name="android:layout_marginTop">15dp</item>
-        <item name="android:layout_marginBottom">15dp</item>
-
-    </style>
-
-    <style name="AboutTextView">
-
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-
-    </style>
-
-    <style name="AboutImageView">
-
-        <item name="android:layout_height">24dp</item>
-        <item name="android:layout_width">24dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
     </style>
 
     <style name="CustomDialogButton" parent="@style/Widget.Material3.Button.TextButton">
@@ -181,10 +165,7 @@
 
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">6dp</item>
-        <item name="android:paddingRight">6dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
+        <item name="android:padding">8dp</item>
         <item name="android:background">@drawable/rounded_ripple</item>
         <item name="android:orientation">horizontal</item>
 
@@ -231,6 +212,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:textAlignment">viewStart</item>
         <item name="android:padding">15dp</item>
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:visibility">gone</item>
