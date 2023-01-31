@@ -179,7 +179,7 @@ class DownloadService : Service() {
 
         try {
             // Set start range where last downloading was held.
-            val con = CronetHelper.getCronetEngine().openConnection(url) as HttpURLConnection
+            val con = CronetHelper.cronetEngine.openConnection(url) as HttpURLConnection
             con.requestMethod = "GET"
             con.setRequestProperty("Range", "bytes=$totalRead-")
             con.connectTimeout = DownloadHelper.DEFAULT_TIMEOUT
