@@ -14,29 +14,26 @@ import com.github.libretube.db.obj.LocalPlaylistWithVideos
 interface LocalPlaylistsDao {
     @Transaction
     @Query("SELECT * FROM LocalPlaylist")
-    fun getAll(): List<LocalPlaylistWithVideos>
+    suspend fun getAll(): List<LocalPlaylistWithVideos>
 
     @Insert
-    fun createPlaylist(playlist: LocalPlaylist)
+    suspend fun createPlaylist(playlist: LocalPlaylist)
 
     @Update
-    fun updatePlaylist(playlist: LocalPlaylist)
-
-    @Delete
-    fun deletePlaylist(playlist: LocalPlaylist)
+    suspend fun updatePlaylist(playlist: LocalPlaylist)
 
     @Query("DELETE FROM localPlaylist WHERE id = :playlistId")
-    fun deletePlaylistById(playlistId: String)
+    suspend fun deletePlaylistById(playlistId: String)
 
     @Insert
-    fun addPlaylistVideo(playlistVideo: LocalPlaylistItem)
+    suspend fun addPlaylistVideo(playlistVideo: LocalPlaylistItem)
 
     @Delete
-    fun removePlaylistVideo(playlistVideo: LocalPlaylistItem)
+    suspend fun removePlaylistVideo(playlistVideo: LocalPlaylistItem)
 
     @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId")
-    fun deletePlaylistItemsByPlaylistId(playlistId: String)
+    suspend fun deletePlaylistItemsByPlaylistId(playlistId: String)
 
     @Query("DELETE FROM localPlaylistItem WHERE playlistId = :playlistId AND videoId = :videoId")
-    fun deletePlaylistItemsByVideoId(playlistId: String, videoId: String)
+    suspend fun deletePlaylistItemsByVideoId(playlistId: String, videoId: String)
 }
