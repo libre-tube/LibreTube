@@ -430,4 +430,16 @@
     <string name="shuffle">셔플</string>
     <string name="add_to_bookmarks">북마크에 추가</string>
     <string name="remove_bookmark">북마크 제거</string>
+    <string name="replies">답글</string>
+    <string name="unknown">알 수 없음</string>
+    <string name="faq">FAQ</string>
+    <string name="concurrent_downloads">최대 동시 다운로드 수</string>
+    <string name="skip_silence">무음 건너뛰기</string>
+    <string name="concurrent_downloads_limit_reached">최대 동시 다운로드 수에 도달하였습니다.</string>
+    <string name="download_completed">다운로드 완료</string>
+    <string name="pause">일시정지</string>
+    <string name="sleep_timer">취침 타이머</string>
+    <string name="audio_player">오디오 플레이어</string>
+    <string name="audio_only_mode">오디오 모드</string>
+    <string name="audio_only_mode_summary">LibreTube 를 음악 플에어이로 바꿉니다.</string>
 </resources>
