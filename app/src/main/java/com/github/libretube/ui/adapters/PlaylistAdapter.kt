@@ -26,9 +26,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PlaylistAdapter(
-    private val videoFeed: MutableList<StreamItem>,
-    private val playlistId: String,
-    private val playlistType: PlaylistType
+        private val videoFeed: MutableList<StreamItem>,
+        private val playlistId: String,
+        private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     var visibleCount = minOf(20, videoFeed.size)
@@ -84,9 +84,7 @@ class PlaylistAdapter(
 
             if (!streamItem.uploaderUrl.isNullOrBlank()) {
                 channelContainer.setOnClickListener {
-                    streamItem.uploaderUrl?.toID()?.let {
-                        NavigationHelper.navigateChannel(root.context, it)
-                    }
+                    NavigationHelper.navigateChannel(root.context, streamItem.uploaderUrl.toID())
                 }
             }
 
@@ -96,7 +94,7 @@ class PlaylistAdapter(
                     removeFromPlaylist(root.context, position)
                 }
             }
-            watchProgress.setWatchProgressLength(videoId, streamItem.duration!!)
+            watchProgress.setWatchProgressLength(videoId, streamItem.duration)
         }
     }
 
