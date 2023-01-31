@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.helpers
 
 import android.content.ClipData
 import android.content.ClipboardManager

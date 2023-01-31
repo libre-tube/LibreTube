@@ -11,8 +11,8 @@ import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.DeletePlaylistDialog
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.viewholders.PlaylistsViewHolder
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 
 class PlaylistsAdapter(
     private val playlists: MutableList<Playlists>,

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.ThemeHelper
 
 class AppNameTextView : AppCompatTextView {
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet)

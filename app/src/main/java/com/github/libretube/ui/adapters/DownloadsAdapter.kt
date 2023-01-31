@@ -16,7 +16,7 @@ import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.query
 import com.github.libretube.ui.activities.OfflinePlayerActivity
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import com.github.libretube.util.ImageHelper
+import com.github.libretube.helpers.ImageHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 

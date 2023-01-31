@@ -8,7 +8,7 @@ import androidx.core.os.postDelayed
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.snackbar.Snackbar
 
 object SleepTimer {

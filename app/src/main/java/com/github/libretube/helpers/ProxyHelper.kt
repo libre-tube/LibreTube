@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.helpers
 
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.PreferenceKeys

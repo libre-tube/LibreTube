@@ -26,9 +26,9 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
-import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
+import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.util.PlayingQueue
 
 class AudioPlayerFragment : BaseFragment() {

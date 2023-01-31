@@ -9,8 +9,8 @@ import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.AppIconItemBinding
 import com.github.libretube.ui.viewholders.IconsSheetViewHolder
-import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.ThemeHelper
 
 class IconsSheetAdapter : RecyclerView.Adapter<IconsSheetViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IconsSheetViewHolder {

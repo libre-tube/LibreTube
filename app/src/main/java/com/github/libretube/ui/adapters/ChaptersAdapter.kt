@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.databinding.ChapterColumnBinding
 import com.github.libretube.ui.viewholders.ChaptersViewHolder
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.ThemeHelper
 import com.google.android.exoplayer2.ExoPlayer
 
 class ChaptersAdapter(

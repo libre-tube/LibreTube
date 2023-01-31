@@ -11,7 +11,7 @@ import android.os.Environment
 import android.os.IBinder
 import android.widget.Toast
 import com.github.libretube.R
-import com.github.libretube.util.DownloadHelper
+import com.github.libretube.helpers.DownloadHelper
 import java.io.File
 
 class UpdateService : Service() {

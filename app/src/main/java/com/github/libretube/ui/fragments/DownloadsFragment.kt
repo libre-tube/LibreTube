@@ -25,7 +25,7 @@ import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.adapters.DownloadsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.viewholders.DownloadsViewHolder
-import com.github.libretube.util.DownloadHelper
+import com.github.libretube.helpers.DownloadHelper
 import java.io.File
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

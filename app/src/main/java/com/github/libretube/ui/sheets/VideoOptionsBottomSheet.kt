@@ -9,7 +9,7 @@ import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.util.BackgroundHelper
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

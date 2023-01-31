@@ -2,7 +2,7 @@ package com.github.libretube.api
 
 import com.github.libretube.constants.PIPED_API_URL
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit

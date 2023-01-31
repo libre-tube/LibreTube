@@ -1,7 +1,7 @@
 package com.github.libretube.ui.extensions
 
 import com.github.libretube.R
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.button.MaterialButton
 
 fun MaterialButton.setupNotificationBell(channelId: String) {

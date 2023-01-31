@@ -12,7 +12,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Login
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

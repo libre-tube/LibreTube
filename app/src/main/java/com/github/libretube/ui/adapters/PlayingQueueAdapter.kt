@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.QueueRowBinding
 import com.github.libretube.extensions.toID
 import com.github.libretube.ui.viewholders.PlayingQueueViewHolder
-import com.github.libretube.util.ImageHelper
+import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.ThemeHelper
 
 class PlayingQueueAdapter : RecyclerView.Adapter<PlayingQueueViewHolder>() {
 
