@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,21 +20,26 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.AudioHelper
+import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.interfaces.AudioPlayerOptions
+import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
-import com.github.libretube.helpers.BackgroundHelper
-import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.util.PlayingQueue
 
-class AudioPlayerFragment : BaseFragment() {
+class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
     private lateinit var binding: FragmentAudioPlayerBinding
+    private lateinit var audioHelper: AudioHelper
+
     private val onTrackChangeListener: (StreamItem) -> Unit = {
         updateStreamInfo()
     }
@@ -64,6 +71,7 @@ class AudioPlayerFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        audioHelper = AudioHelper(requireContext())
         Intent(activity, BackgroundMode::class.java).also { intent ->
             activity?.bindService(intent, connection, Context.BIND_AUTO_CREATE)
         }
@@ -78,6 +86,7 @@ class AudioPlayerFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -129,13 +138,8 @@ class AudioPlayerFragment : BaseFragment() {
             ).show(childFragmentManager, null)
         }
 
-        binding.thumbnail.setOnClickListener {
-            val current = PlayingQueue.getCurrent()
-            current?.let {
-                VideoOptionsBottomSheet(it.url!!.toID(), it.title!!)
-                    .show(childFragmentManager)
-            }
-        }
+        val listener = AudioPlayerThumbnailListener(binding.thumbnail, this)
+        binding.thumbnail.setOnTouchListener(listener)
 
         // Listen for track changes due to autoplay or the notification
         PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
@@ -231,5 +235,19 @@ class AudioPlayerFragment : BaseFragment() {
         PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)
 
         super.onDestroy()
+    }
+
+    override fun onSingleTap() {
+        val current = PlayingQueue.getCurrent()
+        VideoOptionsBottomSheet(current?.url?.toID() ?: return, current.title ?: return)
+            .show(childFragmentManager)
+    }
+
+    override fun onSwipe(distanceY: Float) {
+        Log.e("swiping", distanceY.toString())
+    }
+
+    override fun onSwipeEnd() {
+        Log.e("ended", "ended")
     }
 }
