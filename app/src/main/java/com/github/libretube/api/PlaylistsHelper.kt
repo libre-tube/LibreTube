@@ -19,12 +19,12 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import java.io.IOException
 
 object PlaylistsHelper {
     private val pipedPlaylistRegex =
@@ -68,30 +68,25 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun createPlaylist(
-        playlistName: String,
-        appContext: Context
-    ): String? {
+    suspend fun createPlaylist(playlistName: String, appContext: Context?): String? {
         if (!loggedIn) {
             val playlist = LocalPlaylist(name = playlistName, thumbnailUrl = "")
             DatabaseHolder.Database.localPlaylistsDao().createPlaylist(playlist)
             return DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .last().playlist.id.toString()
         } else {
-            val response = try {
+            return try {
                 RetrofitInstance.authApi.createPlaylist(token, Playlists(name = playlistName))
             } catch (e: IOException) {
-                appContext.toastFromMainThread(R.string.unknown_error)
+                appContext?.toastFromMainThread(R.string.unknown_error)
                 return null
             } catch (e: HttpException) {
                 Log.e(TAG(), e.toString())
-                appContext.toastFromMainThread(R.string.server_error)
+                appContext?.toastFromMainThread(R.string.server_error)
                 return null
+            }.playlistId.also {
+                appContext?.toastFromMainThread(R.string.playlistCreated)
             }
-            if (response.playlistId != null) {
-                appContext.toastFromMainThread(R.string.playlistCreated)
-            }
-            return response.playlistId
         }
     }
 
@@ -159,26 +154,23 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun importPlaylists(appContext: Context, playlists: List<ImportPlaylist>) {
+    suspend fun importPlaylists(playlists: List<ImportPlaylist>) {
         for (playlist in playlists) {
-            val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
+            val playlistId = createPlaylist(playlist.name!!, null) ?: continue
             // if logged in, add the playlists by their ID via an api call
-            val success = if (loggedIn) {
-                addToPlaylist(playlistId, *playlist.videos.map { StreamItem(url = it) }.toTypedArray())
+            if (loggedIn) {
+                addToPlaylist(playlistId, *playlist.videos.map {
+                    StreamItem(url = it)
+                }.toTypedArray())
             } else {
                 // if not logged in, all video information needs to become fetched manually
-                try {
+                runCatching {
                     val streamItems = playlist.videos.map {
                         RetrofitInstance.api.getStreams(it).toStreamItem(it)
                     }
                     addToPlaylist(playlistId, *streamItems.toTypedArray())
-                } catch (e: Exception) {
-                    false
                 }
             }
-            appContext.toastFromMainThread(
-                if (success) R.string.importsuccess else R.string.server_error
-            )
         }
     }
 

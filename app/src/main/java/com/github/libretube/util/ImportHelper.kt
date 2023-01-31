@@ -19,6 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import okio.use
@@ -109,6 +110,7 @@ class ImportHelper(
     /**
      * Import Playlists
      */
+    @OptIn(ExperimentalSerializationApi::class)
     fun importPlaylists(uri: Uri?) {
         if (uri == null) return
 
@@ -141,9 +143,13 @@ class ImportHelper(
             }
         }
 
+        // convert the YouTube URLs to videoIds
+        importPlaylists.forEach { playlist ->
+            playlist.videos = playlist.videos.map { it.takeLast(11) }
+        }
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                PlaylistsHelper.importPlaylists(activity, importPlaylists)
+                PlaylistsHelper.importPlaylists(importPlaylists)
                 activity.applicationContext.toastFromMainThread(R.string.success)
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
