@@ -84,9 +84,7 @@ class PlaylistAdapter(
 
             if (!streamItem.uploaderUrl.isNullOrBlank()) {
                 channelContainer.setOnClickListener {
-                    streamItem.uploaderUrl?.toID()?.let {
-                        NavigationHelper.navigateChannel(root.context, it)
-                    }
+                    NavigationHelper.navigateChannel(root.context, streamItem.uploaderUrl.toID())
                 }
             }
 
@@ -96,7 +94,7 @@ class PlaylistAdapter(
                     removeFromPlaylist(root.context, position)
                 }
             }
-            watchProgress.setWatchProgressLength(videoId, streamItem.duration!!)
+            watchProgress.setWatchProgressLength(videoId, streamItem.duration)
         }
     }
 
