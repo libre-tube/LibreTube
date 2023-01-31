@@ -15,7 +15,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.databinding.DialogDownloadBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.util.DownloadHelper
+import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException

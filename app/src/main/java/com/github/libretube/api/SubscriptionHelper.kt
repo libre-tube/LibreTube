@@ -10,7 +10,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

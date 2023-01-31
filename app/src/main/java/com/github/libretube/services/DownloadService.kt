@@ -30,9 +30,9 @@ import com.github.libretube.receivers.NotificationReceiver
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_PAUSE
 import com.github.libretube.receivers.NotificationReceiver.Companion.ACTION_DOWNLOAD_RESUME
 import com.github.libretube.ui.activities.MainActivity
-import com.github.libretube.util.DownloadHelper
-import com.github.libretube.util.DownloadHelper.getNotificationId
-import com.github.libretube.util.ImageHelper
+import com.github.libretube.helpers.DownloadHelper
+import com.github.libretube.helpers.DownloadHelper.getNotificationId
+import com.github.libretube.helpers.ImageHelper
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException

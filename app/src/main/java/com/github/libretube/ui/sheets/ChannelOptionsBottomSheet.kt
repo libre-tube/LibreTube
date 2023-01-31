@@ -9,8 +9,8 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.dialogs.ShareDialog
-import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.NavigationHelper
+import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.NavigationHelper
 import kotlinx.coroutines.runBlocking
 
 /**

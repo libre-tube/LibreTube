@@ -2,8 +2,8 @@ package com.github.libretube.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.LocaleHelper
+import com.github.libretube.helpers.ThemeHelper
 
 /**
  * Activity that applies the LibreTube theme and the in-app language

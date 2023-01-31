@@ -36,12 +36,12 @@ import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.models.SearchViewModel
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.tools.SleepTimer
-import com.github.libretube.util.NavBarHelper
-import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.NetworkHelper
-import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.ThemeHelper
-import com.github.libretube.util.WindowHelper
+import com.github.libretube.helpers.NavBarHelper
+import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.NetworkHelper
+import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.ThemeHelper
+import com.github.libretube.helpers.WindowHelper
 import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : BaseActivity() {

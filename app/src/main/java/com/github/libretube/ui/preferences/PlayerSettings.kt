@@ -13,8 +13,8 @@ import androidx.preference.SwitchPreferenceCompat
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.util.LocaleHelper
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.LocaleHelper
+import com.github.libretube.helpers.PreferenceHelper
 
 class PlayerSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.player

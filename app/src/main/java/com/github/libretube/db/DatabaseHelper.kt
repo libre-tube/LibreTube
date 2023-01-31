@@ -7,7 +7,7 @@ import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 
 object DatabaseHelper {
     private const val MAX_SEARCH_HISTORY_SIZE = 20

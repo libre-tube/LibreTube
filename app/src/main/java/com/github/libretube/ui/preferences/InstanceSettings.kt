@@ -20,7 +20,7 @@ import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 
 class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance

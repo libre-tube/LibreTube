@@ -21,8 +21,8 @@ import com.github.libretube.ui.sheets.ChannelOptionsBottomSheet
 import com.github.libretube.ui.sheets.PlaylistOptionsBottomSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.util.TextUtils
 
 class SearchAdapter(

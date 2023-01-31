@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.helpers
 
 import android.os.Build
 import android.view.WindowManager

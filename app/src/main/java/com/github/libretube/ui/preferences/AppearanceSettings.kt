@@ -12,7 +12,7 @@ import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.NavBarOptionsDialog
 import com.github.libretube.ui.dialogs.RequireRestartDialog
 import com.github.libretube.ui.sheets.IconsBottomSheet
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 
 class AppearanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.appearance

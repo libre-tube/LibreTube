@@ -26,8 +26,8 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.util.NavBarHelper
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.NavBarHelper
+import com.github.libretube.helpers.PreferenceHelper
 
 class LibraryFragment : BaseFragment() {
 

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
-import com.github.libretube.util.NavigationHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RequireRestartDialog : DialogFragment() {

@@ -32,10 +32,10 @@ import com.github.libretube.ui.interfaces.PlayerOptions
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
-import com.github.libretube.util.AudioHelper
-import com.github.libretube.util.BrightnessHelper
-import com.github.libretube.util.PlayerGestureController
-import com.github.libretube.util.PlayerHelper
+import com.github.libretube.helpers.AudioHelper
+import com.github.libretube.helpers.BrightnessHelper
+import com.github.libretube.ui.listeners.PlayerGestureController
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.util.PlayingQueue
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player

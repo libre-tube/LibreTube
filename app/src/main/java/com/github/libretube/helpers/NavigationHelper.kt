@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.helpers
 
 import android.app.NotificationManager
 import android.content.Context

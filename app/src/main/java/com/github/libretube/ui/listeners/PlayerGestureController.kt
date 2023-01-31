@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.ui.listeners
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -15,6 +15,7 @@ import androidx.core.os.postDelayed
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.PlayerViewModel
+import com.github.libretube.helpers.PlayerHelper
 import kotlin.math.abs
 
 class PlayerGestureController(activity: BaseActivity, private val listener: PlayerGestureOptions) :

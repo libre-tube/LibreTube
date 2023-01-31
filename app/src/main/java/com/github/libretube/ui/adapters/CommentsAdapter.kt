@@ -21,11 +21,11 @@ import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
-import com.github.libretube.util.ClipboardHelper
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
+import com.github.libretube.helpers.ClipboardHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.util.TextUtils
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.ThemeHelper
 
 class CommentsAdapter(
     private val fragment: Fragment?,

@@ -9,7 +9,7 @@ import com.github.libretube.R
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

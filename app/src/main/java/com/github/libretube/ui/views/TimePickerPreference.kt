@@ -5,7 +5,7 @@ import android.text.format.DateFormat.is24HourFormat
 import android.util.AttributeSet
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.time.LocalTime
