@@ -26,9 +26,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PlaylistAdapter(
-        private val videoFeed: MutableList<StreamItem>,
-        private val playlistId: String,
-        private val playlistType: PlaylistType
+    private val videoFeed: MutableList<StreamItem>,
+    private val playlistId: String,
+    private val playlistType: PlaylistType
 ) : RecyclerView.Adapter<PlaylistViewHolder>() {
 
     var visibleCount = minOf(20, videoFeed.size)
