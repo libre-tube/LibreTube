@@ -19,12 +19,12 @@ import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.ProxyHelper
-import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import java.io.IOException
 
 object PlaylistsHelper {
     private val pipedPlaylistRegex =
@@ -138,28 +138,24 @@ object PlaylistsHelper {
         }
     }
 
-    suspend fun removeFromPlaylist(playlistId: String, index: Int) {
-        if (!loggedIn) {
+    suspend fun removeFromPlaylist(playlistId: String, index: Int): Boolean {
+        return if (!loggedIn) {
             val transaction = DatabaseHolder.Database.localPlaylistsDao().getAll()
                 .first { it.playlist.id.toString() == playlistId }
             DatabaseHolder.Database.localPlaylistsDao().removePlaylistVideo(
                 transaction.videos[index]
             )
-            if (transaction.videos.size > 1) {
-                if (index == 0) {
-                    transaction.videos[1].thumbnailUrl?.let {
-                        transaction.playlist.thumbnailUrl = it
-                    }
-                    DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
-                }
-                return
+            // set a new playlist thumbnail if the first video got removed
+            if (index == 0) {
+                transaction.playlist.thumbnailUrl = transaction.videos.getOrNull(1)?.thumbnailUrl ?: ""
             }
-            // remove thumbnail if playlist now empty
-            transaction.playlist.thumbnailUrl = ""
             DatabaseHolder.Database.localPlaylistsDao().updatePlaylist(transaction.playlist)
+            true
         } else {
-            val playlist = PlaylistId(playlistId = playlistId, index = index)
-            RetrofitInstance.authApi.removeFromPlaylist(PreferenceHelper.getToken(), playlist)
+            RetrofitInstance.authApi.removeFromPlaylist(
+                PreferenceHelper.getToken(),
+                PlaylistId(playlistId = playlistId, index = index)
+            ).message == "ok"
         }
     }
 
@@ -167,13 +163,8 @@ object PlaylistsHelper {
         for (playlist in playlists) {
             val playlistId = createPlaylist(playlist.name!!, appContext) ?: continue
             // if logged in, add the playlists by their ID via an api call
-            val success: Boolean = if (loggedIn) {
-                addToPlaylist(
-                    playlistId,
-                    *playlist.videos.map {
-                        StreamItem(url = it)
-                    }.toTypedArray()
-                )
+            val success = if (loggedIn) {
+                addToPlaylist(playlistId, *playlist.videos.map { StreamItem(url = it) }.toTypedArray())
             } else {
                 // if not logged in, all video information needs to become fetched manually
                 try {
