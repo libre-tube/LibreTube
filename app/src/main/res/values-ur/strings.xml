@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="share">شیئر کریں</string>
+    <string name="download">ڈاؤن لوڈ کریں</string>
+    <string name="login">لاگ ان کریں</string>
+    <string name="save">محفوظ کریں</string>
+    <string name="register">رجسٹر کریں</string>
+    <string name="logout">لاگ آؤٹ کریں</string>
+    <string name="loggedIn">لاگ ان ہو گیا۔</string>
+    <string name="registered">رجسٹر ہو گیا. اب آپ چینل سبسکرائب کر سکتے ہیں۔</string>
+    <string name="login_first">براہ کرم لاگ ان کریں اور دوبارہ کوشش کریں۔</string>
+    <string name="instances">منتخب کریں…</string>
+    <string name="already_logged_in">پہلے سے لاگ ان ہے۔ آپ اپنے اکاؤنٹ سے لاگ آؤٹ کر سکتے ہیں۔</string>
+    <string name="videos">ویڈیوز</string>
+    <string name="subscribe">سبسکرائب</string>
+    <string name="loggedout">لاگ آؤٹ ہو گیا۔</string>
+    <string name="search_hint">تلاش کریں</string>
+    <string name="startpage">گھر</string>
+    <string name="subscriptions">سبسکرپشنز</string>
+    <string name="choose_quality_dialog">معیار</string>
+    <string name="yes">ہاں</string>
+    <string name="password">پاس ورڈ</string>
+    <string name="cancel">منسوخ کریں</string>
+</resources>
