@@ -17,9 +17,9 @@ import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toLocalPlaylistItem
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
-import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.obj.ImportPlaylist
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -19,6 +19,7 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.SearchAdapter
@@ -26,7 +27,6 @@ import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
-import com.github.libretube.helpers.ImageHelper
 import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -29,9 +29,9 @@ import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
-import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
+import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
