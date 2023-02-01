@@ -2,6 +2,7 @@ package com.github.libretube.api
 
 import android.content.Context
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 import com.github.libretube.R
 import com.github.libretube.api.obj.Playlist
 import com.github.libretube.api.obj.PlaylistId
@@ -237,8 +238,8 @@ object PlaylistsHelper {
     }
 
     private fun getPrivatePlaylistType(playlistId: String): PlaylistType {
-        if (playlistId.all { it.isDigit() }) return PlaylistType.LOCAL
-        if (playlistId.matches(pipedPlaylistRegex)) return PlaylistType.PRIVATE
-        return PlaylistType.PUBLIC
+        return if (playlistId.isDigitsOnly()) PlaylistType.LOCAL
+        else if (playlistId.matches(pipedPlaylistRegex)) PlaylistType.PRIVATE
+        else PlaylistType.PUBLIC
     }
 }
