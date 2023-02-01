@@ -17,6 +17,7 @@ import com.github.libretube.constants.WEBLATE_URL
 import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
 import com.github.libretube.ui.base.BaseActivity
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -44,37 +45,10 @@ class AboutActivity : BaseActivity() {
             startActivity(shareIntent)
         }
 
-        binding.website.setOnClickListener {
-            openLinkFromHref(WEBSITE_URL)
-        }
-        binding.website.setOnLongClickListener {
-            onLongClick(WEBSITE_URL)
-            true
-        }
-
-        binding.piped.setOnClickListener {
-            openLinkFromHref(PIPED_GITHUB_URL)
-        }
-        binding.piped.setOnLongClickListener {
-            onLongClick(PIPED_GITHUB_URL)
-            true
-        }
-
-        binding.translate.setOnClickListener {
-            openLinkFromHref(WEBLATE_URL)
-        }
-        binding.translate.setOnLongClickListener {
-            onLongClick(WEBLATE_URL)
-            true
-        }
-
-        binding.github.setOnClickListener {
-            openLinkFromHref(GITHUB_URL)
-        }
-        binding.github.setOnLongClickListener {
-            onLongClick(GITHUB_URL)
-            true
-        }
+        setupCard(binding.website, WEBSITE_URL)
+        setupCard(binding.piped, PIPED_GITHUB_URL)
+        setupCard(binding.translate, WEBLATE_URL)
+        setupCard(binding.github, GITHUB_URL)
 
         binding.license.setOnClickListener {
             showLicense()
@@ -86,6 +60,16 @@ class AboutActivity : BaseActivity() {
 
         binding.device.setOnClickListener {
             showDeviceInfo()
+        }
+    }
+
+    private fun setupCard(card: MaterialCardView, link: String) {
+        card.setOnClickListener {
+            openLinkFromHref(link)
+        }
+        card.setOnLongClickListener {
+            onLongClick(link)
+            true
         }
     }
 
