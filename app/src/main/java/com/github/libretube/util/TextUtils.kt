@@ -41,11 +41,7 @@ object TextUtils {
      * @return Time in seconds
      */
     fun parseTimestamp(t: String): Long? {
-        if (t.all { c -> c.isDigit() }) {
-            return t.toLong()
-        }
-
-        return Duration.parseOrNull(t)?.inWholeSeconds
+        return t.toLongOrNull() ?: Duration.parseOrNull(t)?.inWholeSeconds
     }
 
     /**
