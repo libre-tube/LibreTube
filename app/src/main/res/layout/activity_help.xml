@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -42,8 +43,22 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/AboutItem"
-                android:text="@string/matrix"
-                app:drawableStartCompat="@drawable/ic_matrix" />
+                android:text="Matrix"
+                app:drawableStartCompat="@drawable/ic_matrix"
+                tools:ignore="HardcodedText" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mastodon"
+            style="@style/AboutCard">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="Mastodon"
+                app:drawableStartCompat="@drawable/ic_mastodon"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -53,8 +68,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/AboutItem"
-                android:text="@string/telegram"
-                app:drawableStartCompat="@drawable/ic_telegram" />
+                android:text="Telegram"
+                app:drawableStartCompat="@drawable/ic_telegram"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -64,8 +80,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/AboutItem"
-                android:text="@string/discord"
-                app:drawableStartCompat="@drawable/ic_discord" />
+                android:text="Discord"
+                app:drawableStartCompat="@drawable/ic_discord"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -75,19 +92,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/AboutItem"
-                android:text="@string/reddit"
-                app:drawableStartCompat="@drawable/ic_reddit" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/twitter"
-            style="@style/AboutCard">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/AboutItem"
-                android:text="@string/twitter"
-                app:drawableStartCompat="@drawable/ic_twitter" />
+                android:text="Reddit"
+                app:drawableStartCompat="@drawable/ic_reddit"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
