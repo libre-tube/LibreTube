@@ -7,10 +7,10 @@ import com.github.libretube.constants.DISCORD_URL
 import com.github.libretube.constants.FAQ_URL
 import com.github.libretube.constants.MASTODON_URL
 import com.github.libretube.constants.MATRIX_URL
-import com.github.libretube.constants.REDDIT_URL
 import com.github.libretube.constants.TELEGRAM_URL
 import com.github.libretube.databinding.ActivityHelpBinding
 import com.github.libretube.ui.base.BaseActivity
+import com.google.android.material.card.MaterialCardView
 
 class HelpActivity : BaseActivity() {
     private lateinit var binding: ActivityHelpBinding
@@ -25,28 +25,17 @@ class HelpActivity : BaseActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        binding.faq.setOnClickListener {
-            openLinkFromHref(FAQ_URL)
-        }
+        setupCard(binding.faq, FAQ_URL)
+        setupCard(binding.matrix, MATRIX_URL)
+        setupCard(binding.mastodon, MASTODON_URL)
+        setupCard(binding.telegram, TELEGRAM_URL)
+        setupCard(binding.discord, DISCORD_URL)
+        setupCard(binding.mastodon, MASTODON_URL)
+    }
 
-        binding.matrix.setOnClickListener {
-            openLinkFromHref(MATRIX_URL)
-        }
-
-        binding.telegram.setOnClickListener {
-            openLinkFromHref(TELEGRAM_URL)
-        }
-
-        binding.discord.setOnClickListener {
-            openLinkFromHref(DISCORD_URL)
-        }
-
-        binding.reddit.setOnClickListener {
-            openLinkFromHref(REDDIT_URL)
-        }
-
-        binding.mastodon.setOnClickListener {
-            openLinkFromHref(MASTODON_URL)
+    private fun setupCard(card: MaterialCardView, link: String) {
+        card.setOnClickListener {
+            openLinkFromHref(link)
         }
     }
 
