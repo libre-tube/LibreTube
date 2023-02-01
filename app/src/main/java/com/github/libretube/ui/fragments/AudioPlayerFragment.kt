@@ -1,5 +1,6 @@
 package com.github.libretube.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -17,22 +18,28 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentAudioPlayerBinding
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.normalize
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.AudioHelper
+import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.services.BackgroundMode
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.interfaces.AudioPlayerOptions
+import com.github.libretube.ui.listeners.AudioPlayerThumbnailListener
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
-import com.github.libretube.helpers.BackgroundHelper
-import com.github.libretube.helpers.ImageHelper
-import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.util.PlayingQueue
 
-class AudioPlayerFragment : BaseFragment() {
+class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
     private lateinit var binding: FragmentAudioPlayerBinding
+    private lateinit var audioHelper: AudioHelper
+
     private val onTrackChangeListener: (StreamItem) -> Unit = {
         updateStreamInfo()
     }
@@ -64,6 +71,7 @@ class AudioPlayerFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        audioHelper = AudioHelper(requireContext())
         Intent(activity, BackgroundMode::class.java).also { intent ->
             activity?.bindService(intent, connection, Context.BIND_AUTO_CREATE)
         }
@@ -78,6 +86,7 @@ class AudioPlayerFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -129,13 +138,8 @@ class AudioPlayerFragment : BaseFragment() {
             ).show(childFragmentManager, null)
         }
 
-        binding.thumbnail.setOnClickListener {
-            val current = PlayingQueue.getCurrent()
-            current?.let {
-                VideoOptionsBottomSheet(it.url!!.toID(), it.title!!)
-                    .show(childFragmentManager)
-            }
-        }
+        val listener = AudioPlayerThumbnailListener(requireContext(), this)
+        binding.thumbnail.setOnTouchListener(listener)
 
         // Listen for track changes due to autoplay or the notification
         PlayingQueue.addOnTrackChangedListener(onTrackChangeListener)
@@ -146,6 +150,11 @@ class AudioPlayerFragment : BaseFragment() {
 
         // load the stream info into the UI
         updateStreamInfo()
+
+        // update the currently shown volume
+        binding.volumeProgressBar.let { bar ->
+            bar.progress = audioHelper.getVolumeWithScale(bar.max)
+        }
     }
 
     /**
@@ -231,5 +240,49 @@ class AudioPlayerFragment : BaseFragment() {
         PlayingQueue.removeOnTrackChangedListener(onTrackChangeListener)
 
         super.onDestroy()
+    }
+
+    override fun onSingleTap() {
+        if (isPaused) playerService?.play() else playerService?.pause()
+    }
+
+    override fun onLongTap() {
+        val current = PlayingQueue.getCurrent()
+        VideoOptionsBottomSheet(current?.url?.toID() ?: return, current.title ?: return)
+            .show(childFragmentManager)
+    }
+
+    override fun onSwipe(distanceY: Float) {
+        binding.volumeControls.visibility = View.VISIBLE
+        updateVolume(distanceY)
+    }
+
+    override fun onSwipeEnd() {
+        binding.volumeControls.visibility = View.GONE
+    }
+
+    private fun updateVolume(distance: Float) {
+        val bar = binding.volumeProgressBar
+        binding.volumeControls.apply {
+            if (visibility == View.GONE) {
+                visibility = View.VISIBLE
+                // Volume could be changed using other mediums, sync progress
+                // bar with new value.
+                bar.progress = audioHelper.getVolumeWithScale(bar.max)
+            }
+        }
+
+        if (bar.progress == 0) {
+            binding.volumeImageView.setImageResource(
+                when {
+                    distance > 0 -> R.drawable.ic_volume_up
+                    else -> R.drawable.ic_volume_off
+                }
+            )
+        }
+        bar.incrementProgressBy(distance.toInt() / 3)
+        audioHelper.setVolumeWithScale(bar.progress, bar.max)
+
+        binding.volumeTextView.text = "${bar.progress.normalize(0, bar.max, 0, 100)}"
     }
 }

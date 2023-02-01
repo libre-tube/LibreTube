@@ -9,8 +9,8 @@ import androidx.core.math.MathUtils
 import androidx.core.view.updateLayoutParams
 import coil.request.ImageRequest
 import com.github.libretube.api.obj.PreviewFrames
-import com.github.libretube.obj.PreviewFrame
 import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.obj.PreviewFrame
 import com.google.android.exoplayer2.ui.TimeBar
 
 class SeekbarPreviewListener(

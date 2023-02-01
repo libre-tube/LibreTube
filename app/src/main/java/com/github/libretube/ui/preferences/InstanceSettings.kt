@@ -15,12 +15,12 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
-import com.github.libretube.helpers.PreferenceHelper
 
 class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance

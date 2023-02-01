@@ -7,10 +7,10 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.obj.ShareData
-import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.dialogs.ShareDialog
 import kotlinx.coroutines.runBlocking
 
 /**

@@ -19,9 +19,9 @@ import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
-import com.github.libretube.helpers.PreferenceHelper
 import java.time.LocalTime
 import kotlinx.coroutines.runBlocking
 

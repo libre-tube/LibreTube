@@ -23,6 +23,41 @@
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
             tools:src="@tools:sample/backgrounds/scenic" />
 
+        <LinearLayout
+            android:id="@+id/volumeControls"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/controls_layout_bg"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded">
+
+            <TextView
+                android:id="@+id/volume_textView"
+                style="@style/SwipeControlString"
+                android:layout_gravity="center"
+                app:autoSizeTextType="uniform" />
+
+            <ProgressBar
+                android:id="@+id/volume_progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="7dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="4dp"
+                android:progressDrawable="@drawable/vertical_progressbar" />
+
+            <ImageView
+                android:id="@+id/volume_imageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/volume"
+                android:src="@drawable/ic_volume_up" />
+
+        </LinearLayout>
+
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
