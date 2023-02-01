@@ -29,7 +29,12 @@ class BottomSheetAdapter(
             setCompoundDrawablesRelative(
                 if (item.drawable != null) {
                     AppCompatResources.getDrawable(context, item.drawable)
-                } else null, null, null, null
+                } else {
+                    null
+                },
+                null,
+                null,
+                null
             )
 
             setOnClickListener {
