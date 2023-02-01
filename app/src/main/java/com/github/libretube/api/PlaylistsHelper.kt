@@ -238,8 +238,12 @@ object PlaylistsHelper {
     }
 
     private fun getPrivatePlaylistType(playlistId: String): PlaylistType {
-        return if (playlistId.isDigitsOnly()) PlaylistType.LOCAL
-        else if (playlistId.matches(pipedPlaylistRegex)) PlaylistType.PRIVATE
-        else PlaylistType.PUBLIC
+        return if (playlistId.isDigitsOnly()) {
+            PlaylistType.LOCAL
+        } else if (playlistId.matches(pipedPlaylistRegex)) {
+            PlaylistType.PRIVATE
+        } else {
+            PlaylistType.PUBLIC
+        }
     }
 }
