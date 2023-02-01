@@ -113,7 +113,7 @@ class CommentsAdapter(
             }
 
             root.setOnLongClickListener {
-                ClipboardHelper(root.context).save(comment.commentText ?: "")
+                ClipboardHelper.save(root.context, comment.commentText ?: "")
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
             }

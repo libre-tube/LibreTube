@@ -22,7 +22,7 @@ class ErrorDialog : DialogFragment() {
             .setMessage(errorLog)
             .setNegativeButton(R.string.okay, null)
             .setPositiveButton(R.string.copy) { _, _ ->
-                ClipboardHelper(requireContext()).save(errorLog)
+                ClipboardHelper.save(requireContext(), errorLog)
                 Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
             }
             .show()
