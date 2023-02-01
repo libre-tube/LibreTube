@@ -1,14 +1,14 @@
 package com.github.libretube.ui.activities
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import com.github.libretube.constants.DISCORD_URL
 import com.github.libretube.constants.FAQ_URL
 import com.github.libretube.constants.MASTODON_URL
 import com.github.libretube.constants.MATRIX_URL
+import com.github.libretube.constants.REDDIT_URL
 import com.github.libretube.constants.TELEGRAM_URL
 import com.github.libretube.databinding.ActivityHelpBinding
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.card.MaterialCardView
 
@@ -30,18 +30,12 @@ class HelpActivity : BaseActivity() {
         setupCard(binding.mastodon, MASTODON_URL)
         setupCard(binding.telegram, TELEGRAM_URL)
         setupCard(binding.discord, DISCORD_URL)
-        setupCard(binding.mastodon, MASTODON_URL)
+        setupCard(binding.reddit, REDDIT_URL)
     }
 
     private fun setupCard(card: MaterialCardView, link: String) {
         card.setOnClickListener {
-            openLinkFromHref(link)
+            IntentHelper.openLinkFromHref(this, link)
         }
-    }
-
-    private fun openLinkFromHref(link: String) {
-        val uri = Uri.parse(link)
-        val intent = Intent(Intent.ACTION_VIEW).setData(uri)
-        startActivity(intent)
     }
 }

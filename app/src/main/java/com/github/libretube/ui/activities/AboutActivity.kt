@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
@@ -16,6 +15,7 @@ import com.github.libretube.constants.PIPED_GITHUB_URL
 import com.github.libretube.constants.WEBLATE_URL
 import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -65,18 +65,12 @@ class AboutActivity : BaseActivity() {
 
     private fun setupCard(card: MaterialCardView, link: String) {
         card.setOnClickListener {
-            openLinkFromHref(link)
+            IntentHelper.openLinkFromHref(this, link)
         }
         card.setOnLongClickListener {
             onLongClick(link)
             true
         }
-    }
-
-    private fun openLinkFromHref(link: String) {
-        val uri = Uri.parse(link)
-        val intent = Intent(Intent.ACTION_VIEW).setData(uri)
-        startActivity(intent)
     }
 
     private fun onLongClick(href: String) {
@@ -92,7 +86,7 @@ class AboutActivity : BaseActivity() {
             Snackbar.LENGTH_LONG
         )
             .setAction(R.string.open_copied) {
-                openLinkFromHref(href)
+                IntentHelper.openLinkFromHref(this, href)
             }
             .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
             .show()
