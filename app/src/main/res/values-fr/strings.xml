@@ -215,12 +215,7 @@
     <string name="landscape">Paysage</string>
     <string name="portrait">Portrait</string>
     <string name="aspect_ratio">Rapport d\'aspect vidéo</string>
-    <string name="matrix">Matrix</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
-    <string name="telegram">Telegram</string>
     <string name="community">Communauté</string>
-    <string name="discord">Discord</string>
     <string name="open">Ouvrir …</string>
     <string name="turnInternetOn">Veuillez activer le Wi-Fi ou les données mobiles pour vous connecter à internet.</string>
     <string name="chapters">Chapitres</string>

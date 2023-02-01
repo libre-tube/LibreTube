@@ -213,14 +213,9 @@
     <string name="fullscreen_orientation">כיוון מסך מלא</string>
     <string name="landscape">לרוחב</string>
     <string name="community">קהילה</string>
-    <string name="discord">דיסקורד</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">טלגרם</string>
-    <string name="reddit">Reddit</string>
     <string name="auto_rotation">הטיה אוטומטית</string>
     <string name="portrait">לאורך</string>
     <string name="aspect_ratio">יחס רוחב-גובה של סרטון</string>
-    <string name="twitter">טוויטר</string>
     <string name="turnInternetOn">נא להפעיל את הרשת האלחוטית או החיבור הסלולרי כדי להתחבר לאינטרנט.</string>
     <string name="open">פתיחה…</string>
     <string name="chapters">פרקים</string>

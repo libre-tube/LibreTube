@@ -198,11 +198,6 @@
     <string name="landscape">横</string>
     <string name="portrait">縦</string>
     <string name="community">コミュニティ</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="downloads">ダウンロード</string>
     <string name="video_format">動画の形式</string>
     <string name="video_format_summary">音声と動画の両方をダウンロードした場合のファイル形式の変換。</string>
