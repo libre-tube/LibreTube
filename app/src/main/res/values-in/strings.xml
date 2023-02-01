@@ -224,11 +224,6 @@
     <string name="aspect_ratio">Rasio aspek video</string>
     <string name="auto_rotation">Putar secara otomatis</string>
     <string name="community">Komunitas</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="misc">Lainnya</string>
     <string name="break_reminder">Pengingat istirahat</string>
     <string name="take_a_break">Waktunya istirahat</string>

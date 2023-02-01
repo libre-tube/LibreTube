@@ -215,12 +215,7 @@
     <string name="portrait">Dikey</string>
     <string name="landscape">Yatay</string>
     <string name="audio_video">Ses ve video</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="community">Topluluk</string>
-    <string name="discord">Discord</string>
     <string name="open">Açın…</string>
     <string name="turnInternetOn">İnternete bağlanmak için lütfen Wi-Fi veya mobil verileri açın.</string>
     <string name="chapters">Bölümler</string>

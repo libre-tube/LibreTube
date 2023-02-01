@@ -188,12 +188,7 @@
     <string name="auto_rotation">Automatické otáčení</string>
     <string name="landscape">Na šířku</string>
     <string name="portrait">Na výšku</string>
-    <string name="twitter">Twitter</string>
     <string name="community">Komunita</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
     <string name="update_available">Je dostupná verze %1$s</string>
     <string name="update_available_text">Přejít na vydání na GitHubu a stáhnout ji\?</string>
     <string name="appearance">Vzhled</string>

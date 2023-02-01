@@ -5,10 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import com.github.libretube.constants.DISCORD_URL
 import com.github.libretube.constants.FAQ_URL
+import com.github.libretube.constants.MASTODON_URL
 import com.github.libretube.constants.MATRIX_URL
 import com.github.libretube.constants.REDDIT_URL
 import com.github.libretube.constants.TELEGRAM_URL
-import com.github.libretube.constants.TWITTER_URL
 import com.github.libretube.databinding.ActivityHelpBinding
 import com.github.libretube.ui.base.BaseActivity
 
@@ -45,8 +45,8 @@ class HelpActivity : BaseActivity() {
             openLinkFromHref(REDDIT_URL)
         }
 
-        binding.twitter.setOnClickListener {
-            openLinkFromHref(TWITTER_URL)
+        binding.mastodon.setOnClickListener {
+            openLinkFromHref(MASTODON_URL)
         }
     }
 

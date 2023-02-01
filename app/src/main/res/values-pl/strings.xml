@@ -238,8 +238,6 @@
     <string name="fullscreen_orientation">Wyświetlanie pełnoekranowe</string>
     <string name="portrait">Wymuś tryb pionowy</string>
     <string name="community">Społeczność</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
     <string name="chapters">Rozdziały</string>
     <string name="change_playback_speed">Prędkość odtwarzania</string>
     <string name="pure_theme_summary">Czysty biały/czarny motyw</string>
@@ -303,12 +301,9 @@
     <string name="worst_quality">Najgorsza</string>
     <string name="torchIcon">Modna lampka</string>
     <string name="aspect_ratio">Użyj proporcji obrazu wideo</string>
-    <string name="reddit">Reddit</string>
     <string name="pauseOnScreenOff_summary">Zatrzymaj odtwarzanie, gdy ekran jest wyłączony.</string>
     <string name="unlimited">Bez limitu</string>
     <string name="auto_rotation">Automatyczne obracanie</string>
-    <string name="telegram">Telegram</string>
-    <string name="twitter">Twitter</string>
     <string name="none">Brak</string>
     <string name="history_size">Maksymalny rozmiar historii</string>
     <string name="update_now">Zainstalować teraz nową wersję LibreTube\?</string>

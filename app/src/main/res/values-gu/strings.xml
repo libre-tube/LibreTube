@@ -112,11 +112,6 @@
     <string name="audio_video">ઓડિયો અને વિડિયો</string>
     <string name="fullscreen_orientation">સંપૂર્ણસ્ક્રીન દિશા</string>
     <string name="aspect_ratio">વિડિયો એસ્પેક્ટ રેશિયો</string>
-    <string name="discord">ઝઘડો</string>
-    <string name="matrix">મેટ્રિક્સ</string>
-    <string name="telegram">ટેલિગ્રામ</string>
-    <string name="reddit">રેડિટ</string>
-    <string name="twitter">Twitter</string>
     <string name="chapters">પ્રકરણો</string>
     <string name="require_restart">એપ્લિકેશન પુનઃપ્રારંભ જરૂરી</string>
     <string name="navLabelVisibility">લેબલ દૃશ્યતા</string>
