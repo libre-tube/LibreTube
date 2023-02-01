@@ -8,4 +8,13 @@
         <attr name="defValue" format="float" />
     </declare-styleable>
 
+    <declare-styleable name="DrawableTextView">
+        <attr name="drawableStartDimen" format="dimension" />
+        <attr name="drawableTopDimen" format="dimension" />
+        <attr name="drawableEndDimen" format="dimension" />
+        <attr name="drawableBottomDimen" format="dimension" />
+        <attr name="android:drawablePadding" />
+        <attr name="android:gravity" />
+    </declare-styleable>
+
 </resources>

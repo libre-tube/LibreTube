@@ -58,7 +58,7 @@ class CommentsMainFragment : Fragment() {
         viewModel.commentsPage.observe(viewLifecycleOwner) {
             it ?: return@observe
             binding.progress.visibility = View.GONE
-            if (it.disabled == true) {
+            if (it.disabled) {
                 binding.errorTV.visibility = View.VISIBLE
                 return@observe
             }

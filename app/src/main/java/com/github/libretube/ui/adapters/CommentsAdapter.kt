@@ -65,7 +65,7 @@ class CommentsAdapter(
             if (comment.verified) verifiedImageView.visibility = View.VISIBLE
             if (comment.pinned) pinnedImageView.visibility = View.VISIBLE
             if (comment.hearted) heartedImageView.visibility = View.VISIBLE
-            if (comment.repliesPage != null) repliesAvailable.visibility = View.VISIBLE
+            if (comment.repliesPage != null) repliesCount.visibility = View.VISIBLE
             if (comment.replyCount > 0L) {
                 repliesCount.text = comment.replyCount.formatShort()
             }
@@ -77,7 +77,6 @@ class CommentsAdapter(
 
             if (isRepliesAdapter) {
                 repliesCount.visibility = View.GONE
-                repliesAvailable.visibility = View.GONE
 
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {
