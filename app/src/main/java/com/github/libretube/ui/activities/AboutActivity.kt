@@ -34,7 +34,7 @@ class AboutActivity : BaseActivity() {
         }
 
         binding.appIcon.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
+            val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
                 type = "text/plain"
