@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
@@ -16,7 +15,9 @@ import com.github.libretube.constants.PIPED_GITHUB_URL
 import com.github.libretube.constants.WEBLATE_URL
 import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
+import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.ui.base.BaseActivity
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -34,7 +35,7 @@ class AboutActivity : BaseActivity() {
         }
 
         binding.appIcon.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
+            val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, GITHUB_URL)
                 type = "text/plain"
@@ -44,37 +45,10 @@ class AboutActivity : BaseActivity() {
             startActivity(shareIntent)
         }
 
-        binding.website.setOnClickListener {
-            openLinkFromHref(WEBSITE_URL)
-        }
-        binding.website.setOnLongClickListener {
-            onLongClick(WEBSITE_URL)
-            true
-        }
-
-        binding.piped.setOnClickListener {
-            openLinkFromHref(PIPED_GITHUB_URL)
-        }
-        binding.piped.setOnLongClickListener {
-            onLongClick(PIPED_GITHUB_URL)
-            true
-        }
-
-        binding.translate.setOnClickListener {
-            openLinkFromHref(WEBLATE_URL)
-        }
-        binding.translate.setOnLongClickListener {
-            onLongClick(WEBLATE_URL)
-            true
-        }
-
-        binding.github.setOnClickListener {
-            openLinkFromHref(GITHUB_URL)
-        }
-        binding.github.setOnLongClickListener {
-            onLongClick(GITHUB_URL)
-            true
-        }
+        setupCard(binding.website, WEBSITE_URL)
+        setupCard(binding.piped, PIPED_GITHUB_URL)
+        setupCard(binding.translate, WEBLATE_URL)
+        setupCard(binding.github, GITHUB_URL)
 
         binding.license.setOnClickListener {
             showLicense()
@@ -89,10 +63,14 @@ class AboutActivity : BaseActivity() {
         }
     }
 
-    private fun openLinkFromHref(link: String) {
-        val uri = Uri.parse(link)
-        val intent = Intent(Intent.ACTION_VIEW).setData(uri)
-        startActivity(intent)
+    private fun setupCard(card: MaterialCardView, link: String) {
+        card.setOnClickListener {
+            IntentHelper.openLinkFromHref(this, link)
+        }
+        card.setOnLongClickListener {
+            onLongClick(link)
+            true
+        }
     }
 
     private fun onLongClick(href: String) {
@@ -108,7 +86,7 @@ class AboutActivity : BaseActivity() {
             Snackbar.LENGTH_LONG
         )
             .setAction(R.string.open_copied) {
-                openLinkFromHref(href)
+                IntentHelper.openLinkFromHref(this, href)
             }
             .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
             .show()
