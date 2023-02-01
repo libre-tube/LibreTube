@@ -113,7 +113,7 @@
     <string name="color_blue">ਅਨੰਦਮਈ ਨੀਲਾ</string>
     <string name="color_yellow">ਜ਼ੋਰਦਾਰ ਪੀਲਾ</string>
     <string name="color_green">ਆਕਰਸ਼ਕ ਹਰਾ</string>
-    <string name="color_purple">ਅਨੰਦਦਾਇਕ ਜਾਮਨੀ</string>
+    <string name="color_purple">ਅਨੰਦਦਾਇਕ ਜਾਮਣੀ</string>
     <string name="oledTheme">ਕਾਲ੍ਹਾ</string>
     <string name="material_you">ਮਟੀਰੀਅਲ ਯੂ</string>
     <string name="sponsorblock_notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
@@ -450,4 +450,5 @@
     <string name="help">ਸਹਾਇਤਾ</string>
     <string name="faq">ਆਮ ਸਵਾਲ</string>
     <string name="sleep_timer">ਸਲੀਪ ਟਾਈਮਰ</string>
+    <string name="replies">ਜਵਾਬ</string>
 </resources>

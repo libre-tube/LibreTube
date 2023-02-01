@@ -196,9 +196,7 @@ internal class CustomExoPlayerView(
     }
 
     private fun cancelHideControllerTask() {
-        runCatching {
-            handler.removeCallbacksAndMessages(HIDE_CONTROLLER_TOKEN)
-        }
+        handler?.removeCallbacksAndMessages(HIDE_CONTROLLER_TOKEN)
     }
 
     override fun hideController() {

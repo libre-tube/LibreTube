@@ -441,4 +441,14 @@
     <string name="download_completed">Herunterladen abgeschlossen</string>
     <string name="unknown">Unbekannt</string>
     <string name="resume">Fortsetzen</string>
+    <string name="alternative_pip_controls_summary">\"Nur Audio\"- und Skip-Steuerung anzeigen im Bild-in-Bild-Modus anstelle von Vor- und Zurückspulen</string>
+    <string name="replies">Antworten</string>
+    <string name="concurrent_downloads_limit_reached">Maximale Anzahl gleichzeitiger Downloads erreicht.</string>
+    <string name="audio_only_mode_summary">LibreTube in einen Musikplayer umwandeln.</string>
+    <string name="faq">Häufig gestellte Fragen</string>
+    <string name="audio_player">Audio-Player</string>
+    <string name="help">Hilfe</string>
+    <string name="concurrent_downloads">Maximale Anzahl gleichzeitiger Downloads</string>
+    <string name="sleep_timer">Einschlaf-Timer</string>
+    <string name="skip_silence">Stille überspringen</string>
 </resources>

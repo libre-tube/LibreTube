@@ -15,7 +15,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,6 +43,7 @@
                             android:text="@string/watch_history"
                             android:textSize="18sp"
                             android:textStyle="bold"
+                            android:textAlignment="viewStart"
                             app:drawableStartCompat="@drawable/ic_time_outlined" />
 
                         <TextView
@@ -56,6 +57,7 @@
                             android:text="@string/downloads"
                             android:textSize="18sp"
                             android:textStyle="bold"
+                            android:textAlignment="viewStart"
                             app:drawableStartCompat="@drawable/ic_download" />
 
                     </LinearLayout>
@@ -82,6 +84,7 @@
                             android:text="@string/playlists"
                             android:padding="8dp"
                             android:textSize="18sp"
+                            android:textAlignment="viewStart"
                             android:textStyle="bold" />
 
                         <RelativeLayout
@@ -113,7 +116,7 @@
                             android:id="@+id/playlist_recView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"/>
+                            android:nestedScrollingEnabled="false" />
 
                     </LinearLayout>
 
@@ -147,7 +150,7 @@
                             android:id="@+id/bookmarks_recView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"/>
+                            android:nestedScrollingEnabled="false" />
 
                     </LinearLayout>
 

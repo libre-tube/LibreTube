@@ -395,4 +395,5 @@
     <string name="bookmark">বুকমার্ক</string>
     <string name="clear_bookmarks">বুকমার্ক মুছে দিন</string>
     <string name="bookmarks_empty">কোনো বুকমার্ক নেই!</string>
+    <string name="pop_up">পপ-আপ</string>
 </resources>

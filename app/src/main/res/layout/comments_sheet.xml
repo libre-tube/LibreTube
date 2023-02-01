@@ -49,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="10dp"
+                    android:textAlignment="viewStart"
                     tools:text="Title" />
 
                 <androidx.appcompat.widget.AppCompatImageView

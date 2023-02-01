@@ -69,27 +69,14 @@
                     android:layout_marginBottom="12dp"
                     app:cardCornerRadius="18dp">
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/subscriptions"
-                            android:textSize="17sp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="3dp"
-                            android:src="@drawable/ic_arrow_up_down" />
-
-                    </LinearLayout>
+                        android:layout_margin="8dp"
+                        android:paddingHorizontal="8dp"
+                        android:text="@string/subscriptions"
+                        android:textAlignment="viewStart"
+                        app:drawableEndCompat="@drawable/ic_arrow_up_down" />
 
                 </com.google.android.material.card.MaterialCardView>
 
