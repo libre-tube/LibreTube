@@ -59,31 +59,18 @@ class DrawableTextView(
     }
 
     private fun adjust(drawables: Array<Drawable?>): Array<Drawable?> {
-        val startDimen = drawableStartDimen.toInt()
-        val start = drawables[0]
-        if (startDimen > 0 && start != null) {
-            start.setBounds(0, 0, startDimen, startDimen)
-            drawables[0] = start
-        }
-        val tDimen = drawableTopDimen.toInt()
-        val top = drawables[1]
-        if (tDimen > 0 && top != null) {
-            top.setBounds(0, 0, tDimen, tDimen)
-            drawables[1] = top
-        }
-        val endDimen = drawableEndDimen.toInt()
-        val end = drawables[2]
-        if (endDimen > 0 && end != null) {
-            end.setBounds(0, 0, endDimen, endDimen)
-            drawables[2] = end
-        }
-        val bDimen = drawableBottomDimen.toInt()
-        val bottom = drawables[3]
-        if (bDimen > 0 && bottom != null) {
-            bottom.setBounds(0, 0, bDimen, bDimen)
-            drawables[3] = bottom
+        listOf(drawableStartDimen, drawableTopDimen, drawableEndDimen, drawableBottomDimen).forEachIndexed { index, dimen ->
+            drawables[index] = drawables[index].getAdjustedDrawable(dimen)
         }
         return drawables
+    }
+
+    private fun Drawable?.getAdjustedDrawable(dimen: Float): Drawable? {
+        this ?: return null
+        dimen.toInt().let {
+            if (it > 0) setBounds(0, 0, it, it)
+        }
+        return this
     }
 
     fun setDrawables(
