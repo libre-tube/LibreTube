@@ -2,10 +2,10 @@ package com.github.libretube.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.databinding.BottomSheetItemBinding
 import com.github.libretube.obj.BottomSheetItem
+import com.github.libretube.ui.extensions.setDrawables
 import com.github.libretube.ui.viewholders.BottomSheetViewHolder
 
 class BottomSheetAdapter(
@@ -23,19 +23,10 @@ class BottomSheetAdapter(
 
     override fun onBindViewHolder(holder: BottomSheetViewHolder, position: Int) {
         val item = items[position]
-        holder.binding.sheetItem.apply {
+        holder.binding.root.apply {
             val current = item.getCurrent()
             text = if (current != null) "${item.title} ($current)" else item.title
-            setCompoundDrawablesRelative(
-                if (item.drawable != null) {
-                    AppCompatResources.getDrawable(context, item.drawable)
-                } else {
-                    null
-                },
-                null,
-                null,
-                null
-            )
+            setDrawables(start = item.drawable)
 
             setOnClickListener {
                 item.onClick.invoke()

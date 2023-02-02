@@ -236,7 +236,6 @@
     <string name="audio_video">Audio a video</string>
     <string name="fullscreen_orientation">Orientácia na celú obrazovku</string>
     <string name="landscape">Nastavenie zobrazenia</string>
-    <string name="telegram">Telegram</string>
     <string name="add_to_queue">Pridať do radu</string>
     <string name="misc">Rôzne</string>
     <string name="break_reminder">Pripomienka prestávky</string>
@@ -250,8 +249,6 @@
     <string name="repeat_mode_current">Aktuálne</string>
     <string name="auth_instance_summary">Použi inú inštanciu pre overené hovory.</string>
     <string name="community">Komunita</string>
-    <string name="matrix">Matrix</string>
-    <string name="twitter">Twitter</string>
     <string name="playerVideoFormat">Video formát pre prehrávač</string>
     <string name="no_audio">Bez zvuku</string>
     <string name="no_video">bez videa</string>

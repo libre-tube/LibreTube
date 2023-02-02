@@ -11,6 +11,7 @@ import com.github.libretube.R
 
 /**
  * TextView with custom sizable drawable support.
+ * It may only be used for icons as it gives same width and height to the drawable.
  */
 class DrawableTextView(
     context: Context,
@@ -88,7 +89,7 @@ class DrawableTextView(
         )
     }
 
-    fun setDrawableStartDimension(
+    fun setDrawablesDimension(
         start: Float = drawableStartDimen,
         top: Float = drawableTopDimen,
         end: Float = drawableEndDimen,
@@ -98,5 +99,7 @@ class DrawableTextView(
         drawableTopDimen = top
         drawableEndDimen = end
         drawableBottomDimen = bottom
+
+        invalidate()
     }
 }

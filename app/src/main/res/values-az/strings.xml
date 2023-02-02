@@ -216,11 +216,6 @@
     <string name="portrait">Portret</string>
     <string name="landscape">Landşaft</string>
     <string name="community">Cəmiyyət</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
-    <string name="discord">Discord</string>
     <string name="open">Aç…</string>
     <string name="turnInternetOn">Zəhmət olmasa, İnternetə qoşulmaq üçün Wi-Fi və ya mobil məlumatı açın.</string>
     <string name="chapters">Bölmələr</string>

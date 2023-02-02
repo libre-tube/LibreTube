@@ -215,12 +215,7 @@
     <string name="auto_rotation">Αυτόματη περιστροφή</string>
     <string name="landscape">Τοπίο</string>
     <string name="portrait">Πορτρέτο</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
     <string name="community">Κοινότητα</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="twitter">Twitter</string>
     <string name="system_caption_style">Στυλ λεζάντας συστήματος</string>
     <string name="always">Πάντα</string>
     <string name="selected">Επιλεγμένα</string>

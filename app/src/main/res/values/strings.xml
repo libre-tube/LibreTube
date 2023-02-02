@@ -226,11 +226,6 @@
     <string name="landscape">Landscape</string>
     <string name="portrait">Portrait</string>
     <string name="community">Community</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Please turn on Wi-Fi or mobile data to connect to the Internet.</string>
     <string name="open">Open…</string>
     <string name="chapters">Chapters</string>

@@ -114,11 +114,6 @@
     <string name="audio_video">Garsas ir vaizdas</string>
     <string name="portrait">Portretas</string>
     <string name="community">Bendruomenė</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Norėdami prisijungti prie interneto, įjunkite Wi-Fi arba mobiliuosius duomenis.</string>
     <string name="chapters">Skirsniai</string>
     <string name="require_restart">Būtina iš naujo paleisti programėlę</string>
