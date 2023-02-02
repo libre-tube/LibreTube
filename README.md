@@ -2,10 +2,9 @@
   <img src="https://libre-tube.github.io/images/gh-banner.png" width="auto" height="auto" alt="LibreTube">
 
 [![GPL-v3](https://libre-tube.github.io/assets/widgets/license-widget.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![Mastodon](https://libre-tube.github.io/assets/widgets/mast-widget.svg)](https://fosstodon.org/@libretube)
 [![Matrix](https://libre-tube.github.io/assets/widgets/mat-widget.svg)](https://matrix.to/#/#LibreTube:matrix.org)
+[![Mastodon](https://libre-tube.github.io/assets/widgets/mast-widget.svg)](https://fosstodon.org/@libretube)
 [![Telegram](https://libre-tube.github.io/assets/widgets/tg-widget.svg)](https://t.me/libretube)
-[![Twitter](https://libre-tube.github.io/assets/widgets/tw-widget.svg)](https://twitter.com/libretube)
 [![Reddit](https://libre-tube.github.io/assets/widgets/rd-widget.svg)](https://www.reddit.com/r/Libretube/)
 [![Discord](https://libre-tube.github.io/assets/widgets/discord-widget.svg)](https://discord.gg/Qc34xCj2GV)
 
