@@ -227,12 +227,7 @@
     <string name="required_network">Yêu cầu kết nối mạng</string>
     <string name="network_all">Tất cả</string>
     <string name="landscape">Ngang</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="community">Cộng đồng</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
     <string name="watch_history">Lịch sử xem</string>
     <string name="watch_positions">Nhớ vị trí</string>
     <string name="auth_instance">Instance được xác minh</string>

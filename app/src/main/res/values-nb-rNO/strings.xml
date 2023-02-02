@@ -222,11 +222,6 @@
     <string name="landscape">Liggende</string>
     <string name="portrait">Stående</string>
     <string name="community">Gemenskap</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="none">Ingen</string>
     <string name="always">Alltid</string>
     <string name="pure_theme_summary">Ren svarthvitt-drakt</string>

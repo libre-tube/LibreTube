@@ -222,11 +222,6 @@
     <string name="landscape">Horizontāla</string>
     <string name="portrait">Vertikāla</string>
     <string name="community">Kopiena</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="navLabelVisibility">Rādīt tekstu navigācijas panelī</string>
     <string name="always">Vienmēr</string>
     <string name="never">Nekad</string>

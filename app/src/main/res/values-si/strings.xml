@@ -163,11 +163,6 @@
     <string name="fullscreen_orientation">සම්පූර්ණ තිර නැඹුරුව</string>
     <string name="landscape">භූ දර්ශනය</string>
     <string name="community">ප්‍රජාව</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">කරුණාකර අන්තර්ජාලයට සම්බන්ධ වීමට Wi-Fi හෝ ජංගම දත්ත ක්‍රියාත්මක කරන්න.</string>
     <string name="open">විවෘත කරන්න…</string>
     <string name="chapters">පරිච්ඡේද</string>

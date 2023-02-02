@@ -273,7 +273,6 @@
     <string name="general_summary">언어 및 지역</string>
     <string name="audio_video_summary">품질 및 형식</string>
     <string name="queue">대기열</string>
-    <string name="twitter">트위터</string>
     <string name="none">없음</string>
     <string name="open_copied">열다</string>
     <string name="device_info">기기 정보</string>
@@ -318,8 +317,6 @@
     <string name="swipe_controls">컨트롤 변경</string>
     <string name="swipe_controls_summary">스와이프 제스처를 사용하여 밝기와 음량을 조정하십시오.</string>
     <string name="skip_segment">세그먼트 건너뛰기</string>
-    <string name="telegram">텔레그램</string>
-    <string name="reddit">레딧</string>
     <string name="selected">선택된</string>
     <string name="copied_to_clipboard">클립보드에 복사됨</string>
     <string name="volume">음량</string>
@@ -385,7 +382,6 @@
     <string name="resize_mode_fill">채우기</string>
     <string name="always">항상</string>
     <string name="network_metered">미터링됨</string>
-    <string name="matrix">매트릭스</string>
     <string name="never">전혀 아닌</string>
     <string name="repeat_mode_none">없음</string>
     <string name="resize_mode_zoom">확대</string>
@@ -422,7 +418,6 @@
     <string name="hide_watched_from_feed">시청한 영상 피드에서 숨기기</string>
     <string name="hide_watched_from_feed_summary">구독 탭에 90% 이상 시청한 비디오를 보여주지 않습니다.</string>
     <string name="sb_markers">마커</string>
-    <string name="discord">디스코드</string>
     <string name="pinch_control">핀치 컨트롤</string>
     <string name="misc">기타</string>
     <string name="playlistUrl">재생목록 URL</string>
