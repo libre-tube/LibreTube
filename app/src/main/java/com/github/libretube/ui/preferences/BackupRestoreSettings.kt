@@ -3,6 +3,7 @@ package com.github.libretube.ui.preferences
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.helpers.BackupHelper
@@ -10,22 +11,32 @@ import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
+    private var backupFile = BackupFile()
 
     override val titleResourceId: Int = R.string.backup_restore
 
     // backup and restore database
     private val getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        BackupHelper.restoreAdvancedBackup(requireContext(), it)
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                BackupHelper.restoreAdvancedBackup(requireContext(), it)
+            }
+        }
     }
     private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
-        BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
+            }
+        }
     }
-    private var backupFile = BackupFile()
 
     /**
      * result listeners for importing and exporting subscriptions
