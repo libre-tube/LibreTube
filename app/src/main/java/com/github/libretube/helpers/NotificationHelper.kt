@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.github.libretube.constants.NOTIFICATION_WORK_NAME
 import com.github.libretube.constants.PreferenceKeys
@@ -56,8 +56,7 @@ object NotificationHelper {
             .build()
 
         // create the worker
-        val notificationWorker = PeriodicWorkRequest.Builder(
-            NotificationWorker::class.java,
+        val notificationWorker = PeriodicWorkRequestBuilder<NotificationWorker>(
             checkingFrequency,
             TimeUnit.MINUTES
         )
