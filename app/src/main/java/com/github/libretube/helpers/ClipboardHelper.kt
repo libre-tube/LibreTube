@@ -3,15 +3,12 @@ package com.github.libretube.helpers
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.core.content.getSystemService
 import com.github.libretube.R
 
-class ClipboardHelper(
-    private val context: Context
-) {
-    fun save(text: String) {
-        val clipboard: ClipboardManager =
-            context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+object ClipboardHelper {
+    fun save(context: Context, text: String) {
         val clip = ClipData.newPlainText(context.getString(R.string.copied), text)
-        clipboard.setPrimaryClip(clip)
+        context.getSystemService<ClipboardManager>()!!.setPrimaryClip(clip)
     }
 }

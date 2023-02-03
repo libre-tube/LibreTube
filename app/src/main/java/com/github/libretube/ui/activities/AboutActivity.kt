@@ -1,8 +1,5 @@
 package com.github.libretube.ui.activities
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +12,7 @@ import com.github.libretube.constants.PIPED_GITHUB_URL
 import com.github.libretube.constants.WEBLATE_URL
 import com.github.libretube.constants.WEBSITE_URL
 import com.github.libretube.databinding.ActivityAboutBinding
+import com.github.libretube.helpers.ClipboardHelper
 import com.github.libretube.helpers.IntentHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.google.android.material.card.MaterialCardView
@@ -75,10 +73,7 @@ class AboutActivity : BaseActivity() {
 
     private fun onLongClick(href: String) {
         // copy the link to the clipboard
-        val clipboard: ClipboardManager =
-            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText(getString(R.string.copied), href)
-        clipboard.setPrimaryClip(clip)
+        ClipboardHelper.save(this, href)
         // show the snackBar with open action
         Snackbar.make(
             binding.root,
