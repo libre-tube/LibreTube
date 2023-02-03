@@ -44,20 +44,36 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private val getSubscriptionsFile = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) {
-        ImportHelper.importSubscriptions(requireActivity(), it)
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.importSubscriptions(requireActivity(), it)
+            }
+        }
     }
     private val createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
-        ImportHelper.exportSubscriptions(requireActivity(), it)
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.exportSubscriptions(requireActivity(), it)
+            }
+        }
     }
 
     /**
      * result listeners for importing and exporting playlists
      */
     private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        ImportHelper.importPlaylists(requireActivity(), it)
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.importPlaylists(requireActivity(), it)
+            }
+        }
     }
     private val createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
-        ImportHelper.exportPlaylists(requireActivity(), it)
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.exportPlaylists(requireActivity(), it)
+            }
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

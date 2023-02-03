@@ -3,7 +3,6 @@ package com.github.libretube.helpers
 import android.app.Activity
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
@@ -11,15 +10,11 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.toastFromMainThread
+import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.ImportPlaylist
 import com.github.libretube.obj.ImportPlaylistFile
 import com.github.libretube.obj.NewPipeSubscription
 import com.github.libretube.obj.NewPipeSubscriptions
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
@@ -29,25 +24,21 @@ object ImportHelper {
     /**
      * Import subscriptions by a file uri
      */
-    fun importSubscriptions(activity: Activity, uri: Uri?) {
-        if (uri == null) return
+    suspend fun importSubscriptions(activity: Activity, uri: Uri) {
         try {
-            val applicationContext = activity.applicationContext
-            val channels = getChannelsFromUri(activity, uri)
-            CoroutineScope(Dispatchers.IO).launch {
-                SubscriptionHelper.importSubscriptions(channels)
-            }.invokeOnCompletion {
-                applicationContext.toastFromMainThread(R.string.importsuccess)
-            }
+            SubscriptionHelper.importSubscriptions(getChannelsFromUri(activity, uri))
+            activity.toastFromMainDispatcher(R.string.importsuccess)
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), e.toString())
-            activity.toastFromMainThread(
+            activity.toastFromMainDispatcher(
                 activity.getString(R.string.unsupported_file_format) +
                     " (${activity.contentResolver.getType(uri)})"
             )
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
-            Toast.makeText(activity, e.localizedMessage, Toast.LENGTH_SHORT).show()
+            e.localizedMessage?.let {
+                activity.toastFromMainDispatcher(it)
+            }
         }
     }
 
@@ -82,37 +73,31 @@ object ImportHelper {
     /**
      * Write the text to the document
      */
-    @OptIn(ExperimentalSerializationApi::class)
-    fun exportSubscriptions(activity: Activity, uri: Uri?) {
-        if (uri == null) return
-        runBlocking(Dispatchers.IO) {
-            val token = PreferenceHelper.getToken()
-            val subs = if (token.isNotEmpty()) {
-                RetrofitInstance.authApi.subscriptions(token)
-            } else {
-                val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
-                RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
-            }
-            val newPipeChannels = subs.map {
-                NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
-            }
-            val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
-
-            activity.contentResolver.openOutputStream(uri)?.use {
-                JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
-            }
-
-            activity.toastFromMainThread(R.string.exportsuccess)
+    suspend fun exportSubscriptions(activity: Activity, uri: Uri) {
+        val token = PreferenceHelper.getToken()
+        val subs = if (token.isNotEmpty()) {
+            RetrofitInstance.authApi.subscriptions(token)
+        } else {
+            val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
+            RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
         }
+        val newPipeChannels = subs.map {
+            NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
+        }
+        val newPipeSubscriptions = NewPipeSubscriptions(subscriptions = newPipeChannels)
+
+        activity.contentResolver.openOutputStream(uri)?.use {
+            JsonHelper.json.encodeToStream(newPipeSubscriptions, it)
+        }
+
+        activity.toastFromMainDispatcher(R.string.exportsuccess)
     }
 
     /**
      * Import Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun importPlaylists(activity: Activity, uri: Uri?) {
-        if (uri == null) return
-
+    suspend fun importPlaylists(activity: Activity, uri: Uri) {
         val importPlaylists = mutableListOf<ImportPlaylist>()
 
         when (val fileType = activity.contentResolver.getType(uri)) {
@@ -137,7 +122,7 @@ object ImportHelper {
                 importPlaylists.addAll(playlistFile?.playlists.orEmpty())
             }
             else -> {
-                activity.applicationContext.toastFromMainThread("Unsupported file type $fileType")
+                activity.toastFromMainDispatcher("Unsupported file type $fileType")
                 return
             }
         }
@@ -146,15 +131,13 @@ object ImportHelper {
         importPlaylists.forEach { playlist ->
             playlist.videos = playlist.videos.map { it.takeLast(11) }
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                PlaylistsHelper.importPlaylists(importPlaylists)
-                activity.applicationContext.toastFromMainThread(R.string.success)
-            } catch (e: Exception) {
-                Log.e(TAG(), e.toString())
-                e.localizedMessage?.let {
-                    activity.applicationContext.toastFromMainThread(it)
-                }
+        try {
+            PlaylistsHelper.importPlaylists(importPlaylists)
+            activity.toastFromMainDispatcher(R.string.success)
+        } catch (e: Exception) {
+            Log.e(TAG(), e.toString())
+            e.localizedMessage?.let {
+                activity.toastFromMainDispatcher(it)
             }
         }
     }
@@ -162,18 +145,14 @@ object ImportHelper {
     /**
      * Export Playlists
      */
-    fun exportPlaylists(activity: Activity, uri: Uri?) {
-        if (uri == null) return
+    suspend fun exportPlaylists(activity: Activity, uri: Uri) {
+        val playlists = PlaylistsHelper.exportPlaylists()
+        val playlistFile = ImportPlaylistFile("Piped", 1, playlists)
 
-        runBlocking {
-            val playlists = PlaylistsHelper.exportPlaylists()
-            val playlistFile = ImportPlaylistFile("Piped", 1, playlists)
-
-            activity.contentResolver.openOutputStream(uri)?.use {
-                JsonHelper.json.encodeToStream(playlistFile, it)
-            }
-
-            activity.toastFromMainThread(R.string.exportsuccess)
+        activity.contentResolver.openOutputStream(uri)?.use {
+            JsonHelper.json.encodeToStream(playlistFile, it)
         }
+
+        activity.toastFromMainDispatcher(R.string.exportsuccess)
     }
 }
