@@ -1,7 +1,6 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.preference.Preference
@@ -20,43 +19,34 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.backup_restore
 
     // backup and restore database
-    private lateinit var getBackupFile: ActivityResultLauncher<String>
-    private lateinit var createBackupFile: ActivityResultLauncher<String>
+    private val getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        BackupHelper.restoreAdvancedBackup(requireContext(), it)
+    }
+    private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
+        BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
+    }
     private var backupFile = BackupFile()
 
     /**
      * result listeners for importing and exporting subscriptions
      */
-    private lateinit var getSubscriptionsFile: ActivityResultLauncher<String>
-    private lateinit var createSubscriptionsFile: ActivityResultLauncher<String>
+    private val getSubscriptionsFile = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) {
+        ImportHelper.importSubscriptions(requireActivity(), it)
+    }
+    private val createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
+        ImportHelper.exportSubscriptions(requireActivity(), it)
+    }
 
     /**
      * result listeners for importing and exporting playlists
      */
-    private lateinit var getPlaylistsFile: ActivityResultLauncher<String>
-    private lateinit var createPlaylistsFile: ActivityResultLauncher<String>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        getSubscriptionsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            ImportHelper.importSubscriptions(requireActivity(), it)
-        }
-        createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
-            ImportHelper.exportSubscriptions(requireActivity(), it)
-        }
-        getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            ImportHelper.importPlaylists(requireActivity(), it)
-        }
-        createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
-            ImportHelper.exportPlaylists(requireActivity(), it)
-        }
-        getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            BackupHelper.restoreAdvancedBackup(requireContext(), it)
-        }
-        createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
-            BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
-        }
-
-        super.onCreate(savedInstanceState)
+    private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        ImportHelper.importPlaylists(requireActivity(), it)
+    }
+    private val createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
+        ImportHelper.exportPlaylists(requireActivity(), it)
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
