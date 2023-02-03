@@ -24,20 +24,18 @@ import kotlinx.serialization.json.longOrNull
 /**
  * Backup and restore the preferences
  */
-class BackupHelper(private val context: Context) {
+object BackupHelper {
     /**
      * Write a [BackupFile] containing the database content as well as the preferences
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun createAdvancedBackup(uri: Uri?, backupFile: BackupFile) {
-        uri?.let {
-            try {
-                context.contentResolver.openOutputStream(it)?.use { outputStream ->
-                    JsonHelper.json.encodeToStream(backupFile, outputStream)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG(), "Error while writing backup: $e")
+    fun createAdvancedBackup(context: Context, uri: Uri, backupFile: BackupFile) {
+        try {
+            context.contentResolver.openOutputStream(uri)?.use { outputStream ->
+                JsonHelper.json.encodeToStream(backupFile, outputStream)
             }
+        } catch (e: Exception) {
+            Log.e(TAG(), "Error while writing backup: $e")
         }
     }
 
@@ -45,7 +43,7 @@ class BackupHelper(private val context: Context) {
      * Restore data from a [BackupFile]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun restoreAdvancedBackup(uri: Uri?) {
+    fun restoreAdvancedBackup(context: Context, uri: Uri?) {
         val backupFile = uri?.let {
             context.contentResolver.openInputStream(it)?.use { inputStream ->
                 JsonHelper.json.decodeFromStream<BackupFile>(inputStream)
@@ -79,14 +77,14 @@ class BackupHelper(private val context: Context) {
                 }
             }
 
-            restorePreferences(backupFile.preferences)
+            restorePreferences(context, backupFile.preferences)
         }
     }
 
     /**
      * Restore the shared preferences from a backup file
      */
-    private fun restorePreferences(preferences: List<PreferenceItem>?) {
+    private fun restorePreferences(context: Context, preferences: List<PreferenceItem>?) {
         if (preferences == null) return
         PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
             // clear the previous settings

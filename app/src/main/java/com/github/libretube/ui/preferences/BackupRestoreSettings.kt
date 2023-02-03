@@ -1,6 +1,5 @@
 package com.github.libretube.ui.preferences
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,39 +37,23 @@ class BackupRestoreSettings : BasePreferenceFragment() {
     private lateinit var createPlaylistsFile: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getSubscriptionsFile =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) { uri ->
-                ImportHelper(requireActivity()).importSubscriptions(uri)
-            }
-        createSubscriptionsFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri ->
-            ImportHelper(requireActivity()).exportSubscriptions(uri)
+        getSubscriptionsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            ImportHelper.importSubscriptions(requireActivity(), it)
         }
-
-        getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            ImportHelper(requireActivity()).importPlaylists(uri)
+        createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
+            ImportHelper.exportSubscriptions(requireActivity(), it)
         }
-
-        createPlaylistsFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri ->
-            ImportHelper(requireActivity()).exportPlaylists(uri)
+        getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            ImportHelper.importPlaylists(requireActivity(), it)
         }
-
-        getBackupFile =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) { uri: Uri? ->
-                BackupHelper(requireContext()).restoreAdvancedBackup(uri)
-            }
-
-        createBackupFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri: Uri? ->
-            BackupHelper(requireContext()).createAdvancedBackup(uri, backupFile)
+        createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
+            ImportHelper.exportPlaylists(requireActivity(), it)
+        }
+        getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            BackupHelper.restoreAdvancedBackup(requireContext(), it)
+        }
+        createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
+            BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
         }
 
         super.onCreate(savedInstanceState)
@@ -116,8 +99,12 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val restoreAdvancedBackup = findPreference<Preference>("restore")
         restoreAdvancedBackup?.setOnPreferenceClickListener {
-            getBackupFile.launch("application/json")
+            getBackupFile.launch(JSON)
             true
         }
+    }
+
+    companion object {
+        private const val JSON = "application/json"
     }
 }

@@ -25,17 +25,15 @@ import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import okio.use
 
-class ImportHelper(
-    private val activity: Activity
-) {
+object ImportHelper {
     /**
      * Import subscriptions by a file uri
      */
-    fun importSubscriptions(uri: Uri?) {
+    fun importSubscriptions(activity: Activity, uri: Uri?) {
         if (uri == null) return
         try {
             val applicationContext = activity.applicationContext
-            val channels = getChannelsFromUri(uri)
+            val channels = getChannelsFromUri(activity, uri)
             CoroutineScope(Dispatchers.IO).launch {
                 SubscriptionHelper.importSubscriptions(channels)
             }.invokeOnCompletion {
@@ -56,7 +54,7 @@ class ImportHelper(
     /**
      * Get a list of channel IDs from a file [Uri]
      */
-    private fun getChannelsFromUri(uri: Uri): List<String> {
+    private fun getChannelsFromUri(activity: Activity, uri: Uri): List<String> {
         return when (val fileType = activity.contentResolver.getType(uri)) {
             "application/json", "application/*", "application/octet-stream" -> {
                 // NewPipe subscriptions format
@@ -85,7 +83,7 @@ class ImportHelper(
      * Write the text to the document
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun exportSubscriptions(uri: Uri?) {
+    fun exportSubscriptions(activity: Activity, uri: Uri?) {
         if (uri == null) return
         runBlocking(Dispatchers.IO) {
             val token = PreferenceHelper.getToken()
@@ -112,7 +110,7 @@ class ImportHelper(
      * Import Playlists
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun importPlaylists(uri: Uri?) {
+    fun importPlaylists(activity: Activity, uri: Uri?) {
         if (uri == null) return
 
         val importPlaylists = mutableListOf<ImportPlaylist>()
@@ -164,7 +162,7 @@ class ImportHelper(
     /**
      * Export Playlists
      */
-    fun exportPlaylists(uri: Uri?) {
+    fun exportPlaylists(activity: Activity, uri: Uri?) {
         if (uri == null) return
 
         runBlocking {
