@@ -2,19 +2,18 @@ package com.github.libretube.helpers
 
 import android.app.Activity
 import android.app.PendingIntent
-import android.app.RemoteAction
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.graphics.drawable.Icon
-import android.os.Build
 import android.view.accessibility.CaptioningManager
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.core.app.RemoteActionCompat
+import androidx.core.graphics.drawable.IconCompat
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
+import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
@@ -378,26 +377,24 @@ object PlayerHelper {
         return context.packageName + "." + ACTION_MEDIA_CONTROL
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun getPendingIntent(activity: Activity, code: Int): PendingIntent {
-        return PendingIntent.getBroadcast(
+        return PendingIntentCompat.getBroadcast(
             activity,
             code,
             Intent(getIntentActon(activity)).putExtra(CONTROL_TYPE, code),
-            PendingIntent.FLAG_IMMUTABLE
+            0
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun getRemoteAction(
         activity: Activity,
         id: Int,
         @StringRes title: Int,
         event: PlayerEvent
-    ): RemoteAction {
+    ): RemoteActionCompat {
         val text = activity.getString(title)
-        return RemoteAction(
-            Icon.createWithResource(activity, id),
+        return RemoteActionCompat(
+            IconCompat.createWithResource(activity, id),
             text,
             text,
             getPendingIntent(activity, event.value)
@@ -407,8 +404,7 @@ object PlayerHelper {
     /**
      * Create controls to use in the PiP window
      */
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getPiPModeActions(activity: Activity, isPlaying: Boolean, isOfflinePlayer: Boolean = false): ArrayList<RemoteAction> {
+    fun getPiPModeActions(activity: Activity, isPlaying: Boolean): List<RemoteActionCompat> {
         val audioModeAction = getRemoteAction(
             activity,
             R.drawable.ic_headphones,
@@ -443,12 +439,10 @@ object PlayerHelper {
             R.string.forward,
             PlayerEvent.Forward
         )
-        return if (
-            !isOfflinePlayer && alternativePiPControls
-        ) {
-            arrayListOf(audioModeAction, playPauseAction, skipNextAction)
+        return if (alternativePiPControls) {
+            listOf(audioModeAction, playPauseAction, skipNextAction)
         } else {
-            arrayListOf(rewindAction, playPauseAction, forwardAction)
+            listOf(rewindAction, playPauseAction, forwardAction)
         }
     }
 
