@@ -25,5 +25,5 @@ fun TextView.setDrawables(
     end: Drawable? = null,
     bottom: Drawable? = null
 ) {
-    TextViewCompat.setCompoundDrawablesRelative(this, start, top, end, bottom)
+    TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(this, start, top, end, bottom)
 }
