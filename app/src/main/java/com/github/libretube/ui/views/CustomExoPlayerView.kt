@@ -618,10 +618,8 @@ internal class CustomExoPlayerView(
         player?.let { player ->
             if (player.isPlaying) {
                 player.pause()
-                if (!isControllerFullyVisible) showController()
             } else {
                 player.play()
-                if (isControllerFullyVisible) hideController()
             }
         }
     }
