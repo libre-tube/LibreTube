@@ -102,17 +102,13 @@ object SubscriptionHelper {
         }
     }
 
-    suspend fun getFormattedLocalSubscriptions(): String {
-        return Database.localSubscriptionDao().getAll()
-            .joinToString(",") { it.channelId }
-    }
-
     suspend fun getSubscriptions(): List<Subscription> {
         val token = PreferenceHelper.getToken()
         return if (token.isNotEmpty()) {
             RetrofitInstance.authApi.subscriptions(token)
         } else {
-            RetrofitInstance.authApi.unauthenticatedSubscriptions(getFormattedLocalSubscriptions())
+            val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
+            RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
         }
     }
 
@@ -121,7 +117,8 @@ object SubscriptionHelper {
         return if (token.isNotEmpty()) {
             RetrofitInstance.authApi.getFeed(token)
         } else {
-            RetrofitInstance.authApi.getUnauthenticatedFeed(getFormattedLocalSubscriptions())
+            val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
+            RetrofitInstance.authApi.getUnauthenticatedFeed(subscriptions)
         }
     }
 }

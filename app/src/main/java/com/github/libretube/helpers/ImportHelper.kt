@@ -9,6 +9,7 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
+import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.obj.ImportPlaylist
@@ -83,6 +84,7 @@ class ImportHelper(
     /**
      * Write the text to the document
      */
+    @OptIn(ExperimentalSerializationApi::class)
     fun exportSubscriptions(uri: Uri?) {
         if (uri == null) return
         runBlocking(Dispatchers.IO) {
@@ -90,9 +92,8 @@ class ImportHelper(
             val subs = if (token.isNotEmpty()) {
                 RetrofitInstance.authApi.subscriptions(token)
             } else {
-                RetrofitInstance.authApi.unauthenticatedSubscriptions(
-                    SubscriptionHelper.getFormattedLocalSubscriptions()
-                )
+                val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
+                RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
             }
             val newPipeChannels = subs.map {
                 NewPipeSubscription(it.name, 0, "https://www.youtube.com${it.url}")
