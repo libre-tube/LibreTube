@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.widget.TextViewCompat
 import com.github.libretube.R
 
 /**
@@ -72,34 +71,5 @@ class DrawableTextView(
             if (it > 0) setBounds(0, 0, it, it)
         }
         return this
-    }
-
-    fun setDrawables(
-        start: Drawable? = null,
-        top: Drawable? = null,
-        end: Drawable? = null,
-        bottom: Drawable? = null
-    ) {
-        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            this,
-            start,
-            top,
-            end,
-            bottom
-        )
-    }
-
-    fun setDrawablesDimension(
-        start: Float = drawableStartDimen,
-        top: Float = drawableTopDimen,
-        end: Float = drawableEndDimen,
-        bottom: Float = drawableBottomDimen
-    ) {
-        drawableStartDimen = start
-        drawableTopDimen = top
-        drawableEndDimen = end
-        drawableBottomDimen = bottom
-
-        invalidate()
     }
 }
