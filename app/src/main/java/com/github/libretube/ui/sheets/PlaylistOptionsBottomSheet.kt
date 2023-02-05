@@ -57,12 +57,7 @@ class PlaylistOptionsBottomSheet(
                 // play the playlist in the background
                 getString(R.string.playOnBackground) -> {
                     runBlocking {
-                        val playlist =
-                            if (playlistType == PlaylistType.PRIVATE) {
-                                RetrofitInstance.authApi.getPlaylist(playlistId)
-                            } else {
-                                RetrofitInstance.api.getPlaylist(playlistId)
-                            }
+                        val playlist = PlaylistsHelper.getPlaylist(playlistId)
                         BackgroundHelper.playOnBackground(
                             context = requireContext(),
                             videoId = playlist.relatedStreams[0].url!!.toID(),
