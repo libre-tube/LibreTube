@@ -17,6 +17,8 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 object SubscriptionHelper {
+    private const val GET_SUBSCRIPTIONS_LIMIT = 100
+
     suspend fun subscribe(channelId: String) {
         val token = PreferenceHelper.getToken()
         if (token.isNotEmpty()) {
@@ -108,7 +110,14 @@ object SubscriptionHelper {
             RetrofitInstance.authApi.subscriptions(token)
         } else {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
-            RetrofitInstance.authApi.unauthenticatedSubscriptions(subscriptions)
+            when {
+                subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                    subscriptions
+                )
+                else -> RetrofitInstance.authApi.unauthenticatedSubscriptions(
+                    subscriptions.joinToString(",")
+                )
+            }
         }
     }
 
@@ -118,7 +127,14 @@ object SubscriptionHelper {
             RetrofitInstance.authApi.getFeed(token)
         } else {
             val subscriptions = Database.localSubscriptionDao().getAll().map { it.channelId }
-            RetrofitInstance.authApi.getUnauthenticatedFeed(subscriptions)
+            when {
+                subscriptions.size > GET_SUBSCRIPTIONS_LIMIT -> RetrofitInstance.authApi.getUnauthenticatedFeed(
+                    subscriptions
+                )
+                else -> RetrofitInstance.authApi.getUnauthenticatedFeed(
+                    subscriptions.joinToString(",")
+                )
+            }
         }
     }
 }
