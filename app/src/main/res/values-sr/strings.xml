@@ -164,9 +164,6 @@
     <string name="landscape">Хоризонтално</string>
     <string name="portrait">Вертикално</string>
     <string name="community">Заједница</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Укључите WiFi или мобилне податке да би сте се повезали на интернет.</string>
     <string name="open">Отвори…</string>
     <string name="chapters">Поглавља</string>
@@ -242,8 +239,6 @@
     <string name="player_autoplay">Аутоплеј</string>
     <string name="reset_message">Ресетовати сва подешавања и одјавити се\?</string>
     <string name="audio_video">Аудио и видео</string>
-    <string name="discord">Дискорд</string>
-    <string name="matrix">Matrix</string>
     <string name="change_playback_speed">Брзина репродукције</string>
     <string name="data_saver_mode_summary">Прескочи сличице и друге слике.</string>
     <string name="history_summary">Историја прегледа и претрага</string>

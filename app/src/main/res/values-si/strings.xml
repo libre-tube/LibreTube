@@ -163,11 +163,6 @@
     <string name="fullscreen_orientation">සම්පූර්ණ තිර නැඹුරුව</string>
     <string name="landscape">භූ දර්ශනය</string>
     <string name="community">ප්‍රජාව</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">කරුණාකර අන්තර්ජාලයට සම්බන්ධ වීමට Wi-Fi හෝ ජංගම දත්ත ක්‍රියාත්මක කරන්න.</string>
     <string name="open">විවෘත කරන්න…</string>
     <string name="chapters">පරිච්ඡේද</string>
@@ -446,4 +441,9 @@
     <string name="category_sponsor_description">ගෙවුම් ප්‍රවර්ධනය, ගෙවුම් යොමු කිරීම් සහ සෘජු දැන්වීම්. ස්වයං ප්‍රවර්ධනය හෝ නොමිලේ නිර්මාණකරුවන්, වෙබ් අඩවි සහ නිෂ්පාදන සඳහා සත්‍ය ප්‍රචාරක කටයුතු, සඳහා නොවේ.</string>
     <string name="category_preview_description">මෙම හෝ එහි මාලාවේ අනාගත වීඩියෝවල ඉදිරියට එන අන්තර්ගතය විස්තර කරන කොටස් සඳහා, නමුත් අමතර තොරතුරු ලබා නොදේ. මෙහි පමණක් පෙනෙන ක්ලිප් ඇතුළත් නම්, මෙය බොහෝ දුරට වැරදි කාණ්ඩයකි.</string>
     <string name="alternative_pip_controls_summary">ඉදිරියට සහ පසුපසට යැවීම වෙනුවට PiP හි ශබ්ද පමණක් සහ මඟහරින පාලක පෙන්වන්න</string>
+    <string name="replies">පිළිතුරු</string>
+    <string name="skip_silence">නිහඬ කොටස් මඟ හරින්න</string>
+    <string name="help">උදව්</string>
+    <string name="faq">නිතර අසන ප්‍රශ්න</string>
+    <string name="sleep_timer">නින්ද ටයිමරය</string>
 </resources>

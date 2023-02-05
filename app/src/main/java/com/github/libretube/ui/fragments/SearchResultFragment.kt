@@ -16,9 +16,11 @@ import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.hideKeyboard
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.util.PreferenceHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import retrofit2.HttpException
 
@@ -85,7 +87,9 @@ class SearchResultFragment : BaseFragment() {
         lifecycleScope.launchWhenCreated {
             view?.let { context?.hideKeyboard(it) }
             val response = try {
-                RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getSearchResults(query, apiSearchFilter)
+                }
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection $e")
@@ -94,11 +98,10 @@ class SearchResultFragment : BaseFragment() {
                 Log.e(TAG(), "HttpException, unexpected response")
                 return@launchWhenCreated
             }
-            runOnUiThread {
-                searchAdapter = SearchAdapter(response.items.toMutableList())
-                binding.searchRecycler.adapter = searchAdapter
-                binding.noSearchResult.isVisible = response.items.isEmpty()
-            }
+            searchAdapter = SearchAdapter()
+            binding.searchRecycler.adapter = searchAdapter
+            searchAdapter.submitList(response.items)
+            binding.noSearchResult.isVisible = response.items.isEmpty()
             nextPage = response.nextpage
         }
     }
@@ -106,11 +109,13 @@ class SearchResultFragment : BaseFragment() {
     private fun fetchNextSearchItems() {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.api.getSearchResultsNextPage(
-                    query,
-                    apiSearchFilter,
-                    nextPage!!
-                )
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getSearchResultsNextPage(
+                        query,
+                        apiSearchFilter,
+                        nextPage!!
+                    )
+                }
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
@@ -120,10 +125,8 @@ class SearchResultFragment : BaseFragment() {
                 return@launchWhenCreated
             }
             nextPage = response.nextpage!!
-            kotlin.runCatching {
-                if (response.items.isNotEmpty()) {
-                    searchAdapter.updateItems(response.items)
-                }
+            if (response.items.isNotEmpty()) {
+                searchAdapter.submitList(searchAdapter.currentList + response.items)
             }
         }
     }

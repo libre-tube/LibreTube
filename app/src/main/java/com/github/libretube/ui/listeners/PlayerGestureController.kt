@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.ui.listeners
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -12,6 +12,7 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.os.postDelayed
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.models.PlayerViewModel

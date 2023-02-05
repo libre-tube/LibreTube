@@ -199,10 +199,6 @@
     <string name="audio_video">ଅଡିଓ ଏବଂ ଭିଡିଓ</string>
     <string name="aspect_ratio">ଭିଡିଓ ଦିଗ ଅନୁପାତ</string>
     <string name="portrait">ଆନୁଲମ୍ବିକ</string>
-    <string name="discord">ଦିସ୍କର୍ଡ</string>
-    <string name="matrix">ମେଟ୍ରିକ୍</string>
-    <string name="telegram">ଟେଲିଗ୍ରାମ</string>
-    <string name="reddit">ରେଡିଟ</string>
     <string name="always">ସର୍ବଦା</string>
     <string name="selected">ମନୋନୀତ</string>
     <string name="never">କେବେ ନୁହ</string>
@@ -300,7 +296,6 @@
     <string name="community">ସମ୍ପ୍ରଦାୟ</string>
     <string name="change_playback_speed">ପ୍ଲେବେକ୍ ବେଗ</string>
     <string name="require_restart">ଆପ୍ ପୁନଆରମ୍ଭ ଆବଶ୍ୟକ</string>
-    <string name="twitter">ଟୁଇଟର</string>
     <string name="open">ଖୋଲନ୍ତୁ…</string>
     <string name="legacy_subscriptions">ପୁରୁଣା ସଦସ୍ୟତା ଦୃଶ୍ୟ</string>
     <string name="chapters">ଅଧ୍ୟାୟ ଗୁଡ଼ିକ</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">ନୀରବତା ଛାଡିଦିଅ</string>
     <string name="help">ସାହାଯ୍ୟ</string>
     <string name="faq">FAQ</string>
+    <string name="replies">ଉତ୍ତର ଗୁଡିକ</string>
 </resources>

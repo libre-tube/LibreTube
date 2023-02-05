@@ -21,13 +21,13 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.dpToPx
+import com.github.libretube.helpers.NavBarHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.util.NavBarHelper
-import com.github.libretube.util.PreferenceHelper
 
 class LibraryFragment : BaseFragment() {
 

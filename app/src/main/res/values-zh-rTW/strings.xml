@@ -266,9 +266,6 @@
     <string name="resume">繼續</string>
     <string name="pauseOnScreenOff">自動暫停</string>
     <string name="portrait">肖像</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
     <string name="turnInternetOn">請開啟Wifi或行動數據連上網路。</string>
     <string name="never">永不</string>
     <string name="change_playback_speed">播放速度</string>
@@ -388,8 +385,6 @@
     <string name="aspect_ratio">影片比例</string>
     <string name="auto_rotation">自動旋轉</string>
     <string name="landscape">風景</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="pinch_control">調整音高</string>
     <string name="play_latest_videos">播放最新影片</string>
     <string name="audio_track">音訊曲目</string>

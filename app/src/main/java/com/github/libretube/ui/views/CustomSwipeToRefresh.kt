@@ -8,7 +8,8 @@ import android.view.MotionEvent.ACTION_MOVE
 import android.view.ViewConfiguration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.libretube.R
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.ThemeHelper
+import com.google.android.material.elevation.SurfaceColors
 import kotlin.math.abs
 
 class CustomSwipeToRefresh(context: Context?, attrs: AttributeSet?) :
@@ -19,7 +20,7 @@ class CustomSwipeToRefresh(context: Context?, attrs: AttributeSet?) :
     init {
         setColorSchemeColors(ThemeHelper.getThemeColor(this.context, R.attr.colorPrimary))
         setProgressBackgroundColorSchemeColor(
-            ThemeHelper.getThemeColor(this.context, R.attr.colorSurface)
+            SurfaceColors.getColorForElevation(this.context, 20f)
         )
     }
 

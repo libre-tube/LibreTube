@@ -6,9 +6,9 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AdvancedSettings : BasePreferenceFragment() {

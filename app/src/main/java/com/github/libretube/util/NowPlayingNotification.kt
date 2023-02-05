@@ -24,6 +24,8 @@ import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player

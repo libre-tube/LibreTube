@@ -23,19 +23,19 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.normalize
+import com.github.libretube.helpers.AudioHelper
+import com.github.libretube.helpers.BrightnessHelper
+import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.obj.BottomSheetItem
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
 import com.github.libretube.ui.interfaces.PlayerGestureOptions
 import com.github.libretube.ui.interfaces.PlayerOptions
+import com.github.libretube.ui.listeners.PlayerGestureController
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.PlaybackOptionsSheet
-import com.github.libretube.util.AudioHelper
-import com.github.libretube.util.BrightnessHelper
-import com.github.libretube.util.PlayerGestureController
-import com.github.libretube.util.PlayerHelper
 import com.github.libretube.util.PlayingQueue
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
@@ -196,7 +196,7 @@ internal class CustomExoPlayerView(
     }
 
     private fun cancelHideControllerTask() {
-        handler.removeCallbacksAndMessages(HIDE_CONTROLLER_TOKEN)
+        handler?.removeCallbacksAndMessages(HIDE_CONTROLLER_TOKEN)
     }
 
     override fun hideController() {
@@ -618,10 +618,8 @@ internal class CustomExoPlayerView(
         player?.let { player ->
             if (player.isPlaying) {
                 player.pause()
-                if (!isControllerFullyVisible) showController()
             } else {
                 player.play()
-                if (isControllerFullyVisible) hideController()
             }
         }
     }

@@ -3,7 +3,7 @@ package com.github.libretube.extensions
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.db.obj.LocalPlaylistItem
-import com.github.libretube.util.ProxyHelper
+import com.github.libretube.helpers.ProxyHelper
 
 fun Streams.toStreamItem(videoId: String): StreamItem {
     return StreamItem(

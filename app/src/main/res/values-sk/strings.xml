@@ -22,7 +22,7 @@
     <string name="dlisinprogress">Iné sťahovanie práve prebieha, počkajte kým bude ukončené.</string>
     <string name="downloadfailed">Sťahovanie zlyhalo.</string>
     <string name="vlc">Otvoriť vo VLC</string>
-    <string name="vlcerror">Nemožno otvoriť vo VLC. Možno nie je nainštalovaný.</string>
+    <string name="vlcerror">Nepodarilo sa otvoriť vo VLC. Možno nie je nainštalovaný.</string>
     <string name="import_from_yt">Import odberov</string>
     <string name="import_from_yt_summary">Z YouTube alebo NewPipe</string>
     <string name="server_error">Na serveri sa vyskytol problém. Skúsiť inú inštanciu\?</string>
@@ -175,7 +175,7 @@
     <string name="hide_chapters">Skryť kapitoly</string>
     <string name="category_interaction_description">Ak sa uprostred obsahu nachádza krátka pripomienka, aby ste sa prihlásili k odberu alebo sledovaniu. Ak je dlhý alebo o niečom konkrétnom, mal by byť namiesto toho sebapropagáciou.</string>
     <string name="buffering_goal">Cieľ vyrovnávacej pamäte</string>
-    <string name="category_filler_description">Ide o vedľajšie scény pridané len ako výplň alebo humor, ktoré nie sú potrebné na pochopenie hlavného obsahu videa.</string>
+    <string name="category_filler_description">Pre vedľajšie scény pridané len ako výplň alebo humor, ktoré nie sú potrebné na pochopenie hlavného obsahu videa.</string>
     <string name="category_music_offtopic_description">Len na použitie v hudobných videoklipoch. Mal by pokrývať časti videoklipu, ktoré nie sú súčasťou oficiálnych mixov. Nakoniec by sa video malo čo najviac podobať verzii mixu na Spotify alebo akejkoľvek inej verzii mixu, alebo by malo obmedziť hovorenie alebo iné rušivé prvky.</string>
     <string name="category_outro_description">Informácie po skončení. Nie pre závery s informáciami.</string>
     <string name="turnInternetOn">Prosím zapnite si wifi alebo mobilné dáta aby ste sa pripojili na internet.</string>
@@ -236,7 +236,6 @@
     <string name="audio_video">Audio a video</string>
     <string name="fullscreen_orientation">Orientácia na celú obrazovku</string>
     <string name="landscape">Nastavenie zobrazenia</string>
-    <string name="telegram">Telegram</string>
     <string name="add_to_queue">Pridať do radu</string>
     <string name="misc">Rôzne</string>
     <string name="break_reminder">Pripomienka prestávky</string>
@@ -250,8 +249,6 @@
     <string name="repeat_mode_current">Aktuálne</string>
     <string name="auth_instance_summary">Použi inú inštanciu pre overené hovory.</string>
     <string name="community">Komunita</string>
-    <string name="matrix">Matrix</string>
-    <string name="twitter">Twitter</string>
     <string name="playerVideoFormat">Video formát pre prehrávač</string>
     <string name="no_audio">Bez zvuku</string>
     <string name="no_video">bez videa</string>
@@ -292,4 +289,5 @@
     <string name="best_quality">Najlepšia</string>
     <string name="playerAudioFormat">Audio formát pre prehrávač</string>
     <string name="playerAudioQuality">Kvalita zvuku</string>
+    <string name="replies">Odpovede</string>
 </resources>

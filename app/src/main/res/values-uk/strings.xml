@@ -207,11 +207,6 @@
     <string name="landscape">Альбомна</string>
     <string name="portrait">Портретна</string>
     <string name="community">Спільнота</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="instance_name">Ім\'я екземпляра</string>
     <string name="playerVideoFormat">Формат відео для програвача</string>
     <string name="auth_instance">Сервер аутентифікації</string>
@@ -450,4 +445,5 @@
     <string name="faq">ЧаПи</string>
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Пропускати тишу</string>
+    <string name="replies">Відповіді</string>
 </resources>

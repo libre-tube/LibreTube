@@ -215,12 +215,7 @@
     <string name="auto_rotation">自动旋转</string>
     <string name="landscape">横屏</string>
     <string name="portrait">竖屏</string>
-    <string name="reddit">Reddit</string>
     <string name="community">社区</string>
-    <string name="twitter">Twitter</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
     <string name="turnInternetOn">请打开 Wi-Fi 或移动数据连接到互联网。</string>
     <string name="open">打开…</string>
     <string name="chapters">章节</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">跳过静音</string>
     <string name="help">帮助</string>
     <string name="faq">常见问题</string>
+    <string name="replies">回复</string>
 </resources>

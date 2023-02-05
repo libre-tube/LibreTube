@@ -6,9 +6,9 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.work.ExistingPeriodicWorkPolicy
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.helpers.NotificationHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.views.TimePickerPreference
-import com.github.libretube.util.NotificationHelper
 
 class NotificationSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.notifications

@@ -1,17 +1,19 @@
 package com.github.libretube.ui.adapters
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
@@ -19,13 +21,14 @@ import com.github.libretube.api.obj.Comment
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.CommentsRowBinding
 import com.github.libretube.extensions.formatShort
+import com.github.libretube.helpers.ClipboardHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.ui.fragments.CommentsRepliesFragment
 import com.github.libretube.ui.viewholders.CommentsViewHolder
-import com.github.libretube.util.ClipboardHelper
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.TextUtils
-import com.github.libretube.util.ThemeHelper
+import kotlinx.serialization.encodeToString
 
 class CommentsAdapter(
     private val fragment: Fragment?,
@@ -65,7 +68,7 @@ class CommentsAdapter(
             if (comment.verified) verifiedImageView.visibility = View.VISIBLE
             if (comment.pinned) pinnedImageView.visibility = View.VISIBLE
             if (comment.hearted) heartedImageView.visibility = View.VISIBLE
-            if (comment.repliesPage != null) repliesAvailable.visibility = View.VISIBLE
+            if (comment.repliesPage != null) repliesCount.visibility = View.VISIBLE
             if (comment.replyCount > 0L) {
                 repliesCount.text = comment.replyCount.formatShort()
             }
@@ -77,7 +80,6 @@ class CommentsAdapter(
 
             if (isRepliesAdapter) {
                 repliesCount.visibility = View.GONE
-                repliesAvailable.visibility = View.GONE
 
                 // highlight the comment that is being replied to
                 if (comment == comments.firstOrNull()) {
@@ -87,31 +89,28 @@ class CommentsAdapter(
                     root.updatePadding(top = 20)
                     root.updateLayoutParams<MarginLayoutParams> { bottomMargin = 20 }
                 } else {
-                    root.background = AppCompatResources.getDrawable(root.context, R.drawable.rounded_ripple)
+                    root.background = AppCompatResources.getDrawable(
+                        root.context,
+                        R.drawable.rounded_ripple
+                    )
                 }
             }
 
             if (!isRepliesAdapter && comment.repliesPage != null) {
-                val repliesFragment = CommentsRepliesFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(IntentData.videoId, videoId)
-                        putString(
-                            IntentData.comment,
-                            JsonHelper.json.encodeToString(Comment.serializer(), comment)
-                        )
-                    }
-                }
                 root.setOnClickListener {
-                    fragment!!.parentFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.commentFragContainer, repliesFragment)
-                        .addToBackStack(null)
-                        .commit()
+                    val args = bundleOf(
+                        IntentData.videoId to videoId,
+                        IntentData.comment to JsonHelper.json.encodeToString(comment)
+                    )
+                    fragment!!.parentFragmentManager.commit {
+                        replace<CommentsRepliesFragment>(R.id.commentFragContainer, args = args)
+                        addToBackStack(null)
+                    }
                 }
             }
 
             root.setOnLongClickListener {
-                ClipboardHelper(root.context).save(comment.commentText ?: "")
+                ClipboardHelper.save(root.context, comment.commentText ?: "")
                 Toast.makeText(root.context, R.string.copied, Toast.LENGTH_SHORT).show()
                 true
             }

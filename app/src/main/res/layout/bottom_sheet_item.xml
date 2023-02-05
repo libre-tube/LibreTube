@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
-    android:orientation="horizontal"
     android:paddingHorizontal="30dp"
-    android:paddingVertical="12dp">
-
-    <ImageView
-        android:id="@+id/drawable"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="25dp"
-        tools:src="@drawable/ic_download" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="16sp"
-        tools:text="Option" />
-
-</LinearLayout>
+    android:paddingVertical="12dp"
+    android:gravity="center_vertical"
+    android:drawablePadding="25dp"
+    android:textSize="16sp"
+    tools:drawableStart="@drawable/ic_download"
+    tools:text="Option" />

@@ -7,7 +7,7 @@ import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogSliderBinding
 import com.github.libretube.extensions.round
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**

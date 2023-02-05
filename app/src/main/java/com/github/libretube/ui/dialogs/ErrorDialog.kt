@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
-import com.github.libretube.util.ClipboardHelper
-import com.github.libretube.util.PreferenceHelper
+import com.github.libretube.helpers.ClipboardHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ErrorDialog : DialogFragment() {
@@ -22,7 +22,7 @@ class ErrorDialog : DialogFragment() {
             .setMessage(errorLog)
             .setNegativeButton(R.string.okay, null)
             .setPositiveButton(R.string.copy) { _, _ ->
-                ClipboardHelper(requireContext()).save(errorLog)
+                ClipboardHelper.save(requireContext(), errorLog)
                 Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show()
             }
             .show()

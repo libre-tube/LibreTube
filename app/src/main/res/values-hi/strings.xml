@@ -345,11 +345,6 @@
     <string name="github">गिटहब</string>
     <string name="fullscreen_orientation">फुलस्क्रीन ओरिएंटेशन</string>
     <string name="community">समुदाय</string>
-    <string name="discord">डिसकौरड</string>
-    <string name="matrix">मैट्रिक्स</string>
-    <string name="telegram">टेलीग्राम</string>
-    <string name="reddit">रैडिट</string>
-    <string name="twitter">ट्विटर</string>
     <string name="open">खोलें…</string>
     <string name="chapters">अध्याय</string>
     <string name="change_playback_speed">प्लेबैक गति</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">चुप्पी छोड़ें</string>
     <string name="help">सहायता</string>
     <string name="faq">आम सवाल</string>
+    <string name="replies">जवाब</string>
 </resources>

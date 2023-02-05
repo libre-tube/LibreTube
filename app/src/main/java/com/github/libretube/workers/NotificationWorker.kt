@@ -8,7 +8,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.work.Worker
+import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.libretube.R
 import com.github.libretube.api.SubscriptionHelper
@@ -19,17 +19,18 @@ import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.views.TimePickerPreference
-import com.github.libretube.util.PreferenceHelper
 import java.time.LocalTime
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * The notification worker which checks for new streams in a certain frequency
  */
 class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
-    Worker(appContext, parameters) {
+    CoroutineWorker(appContext, parameters) {
 
     private val notificationManager = NotificationManagerCompat.from(appContext)
 
@@ -41,7 +42,7 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
         DOWNLOAD_PROGRESS_NOTIFICATION_ID
     }
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         if (!checkTime()) Result.success()
         // check whether there are new streams and notify if there are some
         val result = checkForNewStreams()
@@ -82,71 +83,68 @@ class NotificationWorker(appContext: Context, parameters: WorkerParameters) :
     /**
      * check whether new streams are available in subscriptions
      */
-    private fun checkForNewStreams(): Boolean {
-        var success = true
-
+    private suspend fun checkForNewStreams(): Boolean {
         Log.d(TAG(), "Work manager started")
 
-        runBlocking {
-            // fetch the users feed
-            val videoFeed = try {
+        // fetch the users feed
+        val videoFeed = try {
+            withContext(Dispatchers.IO) {
                 SubscriptionHelper.getFeed()
-            } catch (e: Exception) {
-                success = false
-                return@runBlocking
             }
-
-            val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
-            val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return@runBlocking
-
-            // first time notifications are enabled or no new video available
-            if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
-                PreferenceHelper.setLatestVideoId(lastSeenStreamId)
-                return@runBlocking
-            }
-
-            // filter the new videos until the last seen video in the feed
-            val newStreams = videoFeed.takeWhile { it.url!!.toID() != lastSeenStreamId }
-
-            // return if the previous video didn't get found
-            if (newStreams.isEmpty()) return@runBlocking
-
-            // hide for notifications unsubscribed channels
-            val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
-            val filteredVideos = newStreams.filter {
-                channelsToIgnore.none { channelId ->
-                    channelId == it.uploaderUrl?.toID()
-                }
-            }
-
-            // group the new streams by the uploader
-            val channelGroups = filteredVideos.groupBy { it.uploaderUrl }
-
-            Log.d(TAG(), "Create notifications for new videos")
-
-            // create a notification for each new stream
-            channelGroups.forEach { (_, streams) ->
-                createNotification(
-                    group = streams.first().uploaderUrl!!.toID(),
-                    title = streams.first().uploaderName.toString(),
-                    urlPath = streams.first().uploaderUrl!!,
-                    isGroupSummary = true
-                )
-
-                streams.forEach { streamItem ->
-                    createNotification(
-                        title = streamItem.title.toString(),
-                        description = streamItem.uploaderName.toString(),
-                        urlPath = streamItem.url!!,
-                        group = streamItem.uploaderUrl!!.toID()
-                    )
-                }
-            }
-            // save the latest streams that got notified about
-            PreferenceHelper.setLatestVideoId(videoFeed.first().url!!.toID())
+        } catch (e: Exception) {
+            return false
         }
+
+        val lastSeenStreamId = PreferenceHelper.getLastSeenVideoId()
+        val latestFeedStreamId = videoFeed.firstOrNull()?.url?.toID() ?: return true
+
+        // first time notifications are enabled or no new video available
+        if (lastSeenStreamId == "" || lastSeenStreamId == latestFeedStreamId) {
+            PreferenceHelper.setLatestVideoId(lastSeenStreamId)
+            return true
+        }
+
+        // filter the new videos until the last seen video in the feed
+        val newStreams = videoFeed.takeWhile { it.url!!.toID() != lastSeenStreamId }
+
+        // return if the previous video didn't get found
+        if (newStreams.isEmpty()) return true
+
+        // hide for notifications unsubscribed channels
+        val channelsToIgnore = PreferenceHelper.getIgnorableNotificationChannels()
+        val filteredVideos = newStreams.filter {
+            channelsToIgnore.none { channelId ->
+                channelId == it.uploaderUrl?.toID()
+            }
+        }
+
+        // group the new streams by the uploader
+        val channelGroups = filteredVideos.groupBy { it.uploaderUrl }
+
+        Log.d(TAG(), "Create notifications for new videos")
+
+        // create a notification for each new stream
+        channelGroups.forEach { (_, streams) ->
+            createNotification(
+                group = streams.first().uploaderUrl!!.toID(),
+                title = streams.first().uploaderName.toString(),
+                urlPath = streams.first().uploaderUrl!!,
+                isGroupSummary = true
+            )
+
+            streams.forEach { streamItem ->
+                createNotification(
+                    title = streamItem.title.toString(),
+                    description = streamItem.uploaderName.toString(),
+                    urlPath = streamItem.url!!,
+                    group = streamItem.uploaderUrl!!.toID()
+                )
+            }
+        }
+        // save the latest streams that got notified about
+        PreferenceHelper.setLatestVideoId(videoFeed.first().url!!.toID())
         // return whether the work succeeded
-        return success
+        return true
     }
 
     /**

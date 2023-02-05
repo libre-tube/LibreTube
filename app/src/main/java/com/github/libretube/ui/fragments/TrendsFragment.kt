@@ -12,10 +12,10 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentTrendsBinding
 import com.github.libretube.extensions.TAG
+import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
-import com.github.libretube.util.LocaleHelper
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 import retrofit2.HttpException

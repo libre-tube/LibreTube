@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,32 +15,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="?homeAsUpIndicator"
-            app:title="@string/community" />
+            app:title="@string/help" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="40dp"
-            android:src="@mipmap/ic_launcher_round"
-            app:shapeAppearance="@style/CircleImageView" />
+            android:src="@drawable/ic_launcher_lockscreen"
+            app:tint="?attr/colorSecondary"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/faq"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_help" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/faq" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="@string/faq"
+                app:drawableStartCompat="@drawable/ic_help" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -47,17 +42,24 @@
             android:id="@+id/matrix"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="Matrix"
+                app:drawableStartCompat="@drawable/ic_matrix"
+                tools:ignore="HardcodedText" />
 
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_matrix" />
+        </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/matrix" />
 
-            </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mastodon"
+            style="@style/AboutCard">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="Mastodon"
+                app:drawableStartCompat="@drawable/ic_mastodon"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -65,17 +67,11 @@
             android:id="@+id/telegram"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_telegram" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/telegram" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="Telegram"
+                app:drawableStartCompat="@drawable/ic_telegram"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -83,17 +79,11 @@
             android:id="@+id/discord"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_discord" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/discord" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="Discord"
+                app:drawableStartCompat="@drawable/ic_discord"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -101,35 +91,11 @@
             android:id="@+id/reddit"
             style="@style/AboutCard">
 
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_reddit" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/reddit" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/twitter"
-            style="@style/AboutCard">
-
-            <LinearLayout style="@style/AboutItem">
-
-                <ImageView
-                    style="@style/AboutImageView"
-                    android:src="@drawable/ic_twitter" />
-
-                <TextView
-                    style="@style/AboutTextView"
-                    android:text="@string/twitter" />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/AboutItem"
+                android:text="Reddit"
+                app:drawableStartCompat="@drawable/ic_reddit"
+                tools:ignore="HardcodedText" />
 
         </com.google.android.material.card.MaterialCardView>
 

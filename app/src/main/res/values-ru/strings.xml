@@ -214,13 +214,8 @@
     <string name="auth_instances">Выбрать сервер</string>
     <string name="auto_rotation">Автоповорот</string>
     <string name="landscape">Альбомная</string>
-    <string name="reddit">Reddit</string>
     <string name="portrait">Портретная</string>
     <string name="community">Сообщество</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Пожалуйста, включите Wi-Fi или мобильный интернет для подключения.</string>
     <string name="open">Открыть…</string>
     <string name="chapters">Эпизоды</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">Пропускать тишину</string>
     <string name="help">Помощь</string>
     <string name="faq">FAQ</string>
+    <string name="replies">Ответы</string>
 </resources>

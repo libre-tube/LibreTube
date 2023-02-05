@@ -208,12 +208,7 @@
     <string name="auto_rotation">Automatisk rotation</string>
     <string name="landscape">Landskab</string>
     <string name="portrait">Portræt</string>
-    <string name="twitter">Twitter</string>
     <string name="community">Fællesskab</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
     <string name="downloading">Downloader…</string>
     <string name="no_audio">Ingen lyd</string>
     <string name="no_video">Ingen video</string>

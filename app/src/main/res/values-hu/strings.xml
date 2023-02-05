@@ -200,11 +200,6 @@
     <string name="hls">HLS</string>
     <string name="github">GitHub</string>
     <string name="community">Közösség</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="chapters">Fejezetek</string>
     <string name="change_playback_speed">Lejátszási sebesség</string>
     <string name="require_restart">Alkalmazás újraindítása szükséges</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">Csend átugrása</string>
     <string name="help">Súgó</string>
     <string name="faq">GYIK</string>
+    <string name="replies">Válaszok</string>
 </resources>

@@ -18,11 +18,11 @@ const val FAQ_URL = "https://libre-tube.github.io/#faq"
 /**
  * Social media links for the community fragment
  */
-const val TELEGRAM_URL = "https://t.me/libretube"
 const val MATRIX_URL = "https://matrix.to/#/#LibreTube:matrix.org"
+const val MASTODON_URL = "https://fosstodon.org/@libretube"
+const val TELEGRAM_URL = "https://t.me/libretube"
 const val DISCORD_URL = "https://discord.com/invite/Qc34xCj2GV"
 const val REDDIT_URL = "https://www.reddit.com/r/Libretube/"
-const val TWITTER_URL = "https://twitter.com/libretube"
 
 /**
  * Share Dialog

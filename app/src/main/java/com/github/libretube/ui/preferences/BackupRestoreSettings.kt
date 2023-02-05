@@ -1,79 +1,79 @@
 package com.github.libretube.ui.preferences
 
-import android.net.Uri
 import android.os.Bundle
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.R
+import com.github.libretube.helpers.BackupHelper
+import com.github.libretube.helpers.ImportHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.github.libretube.ui.dialogs.BackupDialog
-import com.github.libretube.util.BackupHelper
-import com.github.libretube.util.ImportHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class BackupRestoreSettings : BasePreferenceFragment() {
     private val backupDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss")
+    private var backupFile = BackupFile()
 
     override val titleResourceId: Int = R.string.backup_restore
 
     // backup and restore database
-    private lateinit var getBackupFile: ActivityResultLauncher<String>
-    private lateinit var createBackupFile: ActivityResultLauncher<String>
-    private var backupFile = BackupFile()
+    private val getBackupFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                BackupHelper.restoreAdvancedBackup(requireContext(), it)
+            }
+        }
+    }
+    private val createBackupFile = registerForActivityResult(CreateDocument(JSON)) {
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                BackupHelper.createAdvancedBackup(requireContext(), it, backupFile)
+            }
+        }
+    }
 
     /**
      * result listeners for importing and exporting subscriptions
      */
-    private lateinit var getSubscriptionsFile: ActivityResultLauncher<String>
-    private lateinit var createSubscriptionsFile: ActivityResultLauncher<String>
+    private val getSubscriptionsFile = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) {
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.importSubscriptions(requireActivity(), it)
+            }
+        }
+    }
+    private val createSubscriptionsFile = registerForActivityResult(CreateDocument(JSON)) {
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.exportSubscriptions(requireActivity(), it)
+            }
+        }
+    }
 
     /**
      * result listeners for importing and exporting playlists
      */
-    private lateinit var getPlaylistsFile: ActivityResultLauncher<String>
-    private lateinit var createPlaylistsFile: ActivityResultLauncher<String>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        getSubscriptionsFile =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) { uri ->
-                ImportHelper(requireActivity()).importSubscriptions(uri)
+    private val getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.importPlaylists(requireActivity(), it)
             }
-        createSubscriptionsFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri ->
-            ImportHelper(requireActivity()).exportSubscriptions(uri)
         }
-
-        getPlaylistsFile = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            ImportHelper(requireActivity()).importPlaylists(uri)
-        }
-
-        createPlaylistsFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri ->
-            ImportHelper(requireActivity()).exportPlaylists(uri)
-        }
-
-        getBackupFile =
-            registerForActivityResult(
-                ActivityResultContracts.GetContent()
-            ) { uri: Uri? ->
-                BackupHelper(requireContext()).restoreAdvancedBackup(uri)
+    }
+    private val createPlaylistsFile = registerForActivityResult(CreateDocument(JSON)) {
+        it?.let {
+            lifecycleScope.launch(Dispatchers.IO) {
+                ImportHelper.exportPlaylists(requireActivity(), it)
             }
-
-        createBackupFile = registerForActivityResult(
-            CreateDocument("application/json")
-        ) { uri: Uri? ->
-            BackupHelper(requireContext()).createAdvancedBackup(uri, backupFile)
         }
-
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -116,8 +116,12 @@ class BackupRestoreSettings : BasePreferenceFragment() {
 
         val restoreAdvancedBackup = findPreference<Preference>("restore")
         restoreAdvancedBackup?.setOnPreferenceClickListener {
-            getBackupFile.launch("application/json")
+            getBackupFile.launch(JSON)
             true
         }
+    }
+
+    companion object {
+        private const val JSON = "application/json"
     }
 }

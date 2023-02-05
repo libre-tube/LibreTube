@@ -12,12 +12,12 @@ import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.PUSH_CHANNEL_ID
 import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NotificationHelper
+import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.ProxyHelper
+import com.github.libretube.helpers.ShortcutHelper
 import com.github.libretube.util.ExceptionHandler
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NotificationHelper
-import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.ProxyHelper
-import com.github.libretube.util.ShortcutHelper
 
 class LibreTubeApp : Application() {
     override fun onCreate() {

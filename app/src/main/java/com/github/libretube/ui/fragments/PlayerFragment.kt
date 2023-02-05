@@ -35,6 +35,7 @@ import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,6 +68,13 @@ import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.DashHelper
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.github.libretube.obj.VideoResolution
 import com.github.libretube.services.BackgroundMode
@@ -81,24 +89,17 @@ import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import com.github.libretube.ui.interfaces.OnlinePlayerOptions
+import com.github.libretube.ui.listeners.SeekbarPreviewListener
 import com.github.libretube.ui.models.CommentsViewModel
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import com.github.libretube.ui.sheets.CommentsSheet
 import com.github.libretube.ui.sheets.PlayingQueueSheet
-import com.github.libretube.util.BackgroundHelper
-import com.github.libretube.util.DashHelper
 import com.github.libretube.util.DataSaverMode
 import com.github.libretube.util.HtmlParser
-import com.github.libretube.util.ImageHelper
 import com.github.libretube.util.LinkHandler
-import com.github.libretube.util.NavigationHelper
 import com.github.libretube.util.NowPlayingNotification
-import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.PlayerHelper.loadPlaybackParams
 import com.github.libretube.util.PlayingQueue
-import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.SeekbarPreviewListener
 import com.github.libretube.util.TextUtils
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -1510,9 +1511,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private fun killPlayerFragment() {
         viewModel.isFullscreen.value = false
         binding.playerMotionLayout.transitionToEnd()
-        mainActivity.supportFragmentManager.beginTransaction()
-            .remove(this)
-            .commit()
+        mainActivity.supportFragmentManager.commit {
+            remove(this@PlayerFragment)
+        }
 
         onDestroy()
     }

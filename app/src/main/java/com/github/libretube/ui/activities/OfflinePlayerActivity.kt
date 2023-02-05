@@ -16,12 +16,12 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.updateParameters
+import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
+import com.github.libretube.helpers.WindowHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setAspectRatio
 import com.github.libretube.ui.models.PlayerViewModel
-import com.github.libretube.util.PlayerHelper
-import com.github.libretube.util.PlayerHelper.loadPlaybackParams
-import com.github.libretube.util.WindowHelper
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem

@@ -20,16 +20,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -39,7 +38,9 @@
                 android:layout_marginBottom="5dp"
                 app:cardBackgroundColor="@color/duration_background_color"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toTopOf="@id/watch_progress"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
                     android:id="@+id/thumbnail_duration"
@@ -55,10 +56,11 @@
             <View
                 android:id="@+id/watch_progress"
                 style="@style/WatchProgress"
-                android:layout_height="5dp" />
+                android:layout_height="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 
@@ -73,6 +75,7 @@
         android:maxLines="2"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="@+id/thumbnailcard"
         app:layout_constraintStart_toEndOf="@+id/channel_image"
         app:layout_constraintTop_toBottomOf="@+id/thumbnailcard"
@@ -85,6 +88,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:paddingBottom="16dp"
+        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="@+id/textView_title"
         app:layout_constraintStart_toStartOf="@+id/textView_title"
         app:layout_constraintTop_toBottomOf="@+id/textView_title"

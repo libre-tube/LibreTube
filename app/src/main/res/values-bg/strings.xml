@@ -3,8 +3,6 @@
     <string name="clonePlaylist">Клониране на плейлист</string>
     <string name="deleteAccount">Изтриване на регистрацията</string>
     <string name="community">Общност</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
     <string name="reset_watch_positions">Нулиране</string>
     <string name="startpage">Начало</string>
     <string name="subscriptions">Абонаменти</string>
@@ -83,9 +81,6 @@
     <string name="github">GitHub</string>
     <string name="audio_video">Звук и видео</string>
     <string name="portrait">Портрет</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="selected">Избрано</string>
     <string name="never">Никога</string>
     <string name="library">Библиотека</string>

@@ -13,8 +13,8 @@ import com.github.libretube.databinding.DialogShareBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
-import com.github.libretube.util.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ShareDialog(

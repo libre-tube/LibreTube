@@ -1,4 +1,4 @@
-package com.github.libretube.util
+package com.github.libretube.helpers
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -13,6 +13,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.util.DataSaverMode
 import java.io.File
 import java.io.FileOutputStream
 import okio.use

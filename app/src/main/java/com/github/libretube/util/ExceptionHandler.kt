@@ -1,5 +1,7 @@
 package com.github.libretube.util
 
+import com.github.libretube.helpers.PreferenceHelper
+
 class ExceptionHandler(
     private val defaultExceptionHandler: Thread.UncaughtExceptionHandler?
 ) : Thread.UncaughtExceptionHandler {

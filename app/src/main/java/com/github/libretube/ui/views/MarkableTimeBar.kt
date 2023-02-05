@@ -11,8 +11,8 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.util.PreferenceHelper
-import com.github.libretube.util.ThemeHelper
+import com.github.libretube.helpers.PreferenceHelper
+import com.github.libretube.helpers.ThemeHelper
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.DefaultTimeBar
 

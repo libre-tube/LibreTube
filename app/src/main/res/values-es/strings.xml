@@ -215,12 +215,7 @@
     <string name="portrait">Vertical</string>
     <string name="aspect_ratio">Relación de aspecto del vídeo</string>
     <string name="auto_rotation">Rotación automática</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
     <string name="community">Comunidad</string>
-    <string name="discord">Discord</string>
-    <string name="twitter">Twitter</string>
     <string name="turnInternetOn">Por favor, active la WiFi o los datos móviles para conectarse a Internet.</string>
     <string name="open">Abrir…</string>
     <string name="chapters">Capítulos</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">Saltar silencio</string>
     <string name="help">Ayuda</string>
     <string name="faq">Preguntas frecuentes</string>
+    <string name="replies">Respuestas</string>
 </resources>

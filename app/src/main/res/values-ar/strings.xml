@@ -216,11 +216,6 @@
     <string name="landscape">افقي</string>
     <string name="portrait">عمودي</string>
     <string name="community">المجتمع</string>
-    <string name="discord">ديسكورد</string>
-    <string name="matrix">المصفوفة</string>
-    <string name="telegram">تيليجرام</string>
-    <string name="reddit">ريديت</string>
-    <string name="twitter">تويتر</string>
     <string name="turnInternetOn">يرجى تشغيل Wi-Fi أو بيانات الجوال للاتصال بالإنترنت.</string>
     <string name="open">فتح …</string>
     <string name="chapters">الفصول</string>
@@ -450,4 +445,5 @@
     <string name="skip_silence">تخطي الصمت</string>
     <string name="help">التعليمات</string>
     <string name="faq">الأسئلة المتداولة</string>
+    <string name="replies">الردود</string>
 </resources>

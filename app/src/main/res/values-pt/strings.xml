@@ -195,11 +195,6 @@
     <string name="landscape">Horizontal</string>
     <string name="portrait">Vertical</string>
     <string name="community">Comunidade</string>
-    <string name="discord">Discord</string>
-    <string name="matrix">Matrix</string>
-    <string name="telegram">Telegram</string>
-    <string name="reddit">Reddit</string>
-    <string name="twitter">Twitter</string>
     <string name="no_audio">Sem áudio</string>
     <string name="no_video">Sem vídeo</string>
     <string name="audio">Áudio</string>
@@ -450,4 +445,5 @@
     <string name="faq">FAQ</string>
     <string name="sleep_timer">Temporizador de sono</string>
     <string name="skip_silence">Ignorar o silêncio</string>
+    <string name="replies">Respostas</string>
 </resources>

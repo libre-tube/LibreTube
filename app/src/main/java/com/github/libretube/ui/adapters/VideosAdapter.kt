@@ -20,14 +20,14 @@ import com.github.libretube.databinding.VideoRowBinding
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.formatShort
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.ImageHelper
+import com.github.libretube.helpers.NavigationHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.extensions.setFormattedDuration
 import com.github.libretube.ui.extensions.setWatchProgressLength
 import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.VideosViewHolder
-import com.github.libretube.util.ImageHelper
-import com.github.libretube.util.NavigationHelper
-import com.github.libretube.util.PreferenceHelper
 import com.github.libretube.util.TextUtils
 
 class VideosAdapter(

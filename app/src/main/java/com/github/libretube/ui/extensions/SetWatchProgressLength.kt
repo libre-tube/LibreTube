@@ -1,8 +1,7 @@
 package com.github.libretube.ui.extensions
 
 import android.view.View
-import android.view.ViewTreeObserver
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
 import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.awaitQuery
@@ -13,8 +12,11 @@ import com.github.libretube.extensions.awaitQuery
  * @param duration The duration of the video in seconds
  * @return Whether the video is already watched more than 90%
  */
-fun View?.setWatchProgressLength(videoId: String, duration: Long): Boolean {
-    val view = this!!
+fun View.setWatchProgressLength(videoId: String, duration: Long): Boolean {
+    updateLayoutParams<ConstraintLayout.LayoutParams> {
+        matchConstraintPercentWidth = 0f
+    }
+    visibility = View.GONE
 
     val progress = try {
         awaitQuery {
@@ -26,22 +28,13 @@ fun View?.setWatchProgressLength(videoId: String, duration: Long): Boolean {
         ?.toFloat()?.div(1000)
 
     if (progress == null || duration == 0L) {
-        view.visibility = View.GONE
         return false
     }
 
-    view.viewTreeObserver
-        .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                this@setWatchProgressLength.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val fullWidth = (parent as LinearLayout).width
-                val newWidth = fullWidth * (progress / duration.toFloat())
-                view.updateLayoutParams {
-                    width = newWidth.toInt()
-                }
-                view.visibility = View.VISIBLE
-            }
-        })
+    updateLayoutParams<ConstraintLayout.LayoutParams> {
+        matchConstraintPercentWidth = progress / duration.toFloat()
+    }
+    visibility = View.VISIBLE
 
     return progress / duration.toFloat() > 0.9
 }
