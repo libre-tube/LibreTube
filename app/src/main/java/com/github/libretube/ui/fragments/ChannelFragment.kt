@@ -28,9 +28,9 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import java.io.IOException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class ChannelFragment : BaseFragment() {
@@ -44,8 +44,6 @@ class ChannelFragment : BaseFragment() {
     private var isSubscribed: Boolean? = false
 
     private var onScrollEnd: () -> Unit = {}
-
-    private val scope = CoroutineScope(Dispatchers.IO)
 
     val possibleTabs = listOf(
         ChannelTabs.Channels,
@@ -227,18 +225,18 @@ class ChannelFragment : BaseFragment() {
     }
 
     private fun loadTab(tab: ChannelTab) {
-        scope.launch {
+        lifecycleScope.launch {
             val response = try {
-                RetrofitInstance.api.getChannelTab(tab.data)
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getChannelTab(tab.data)
+                }
             } catch (e: Exception) {
                 return@launch
             }
 
-            val adapter = SearchAdapter(response.content.toMutableList())
-
-            runOnUiThread {
-                binding.channelRecView.adapter = adapter
-            }
+            val adapter = SearchAdapter()
+            binding.channelRecView.adapter = adapter
+            adapter.submitList(response.content)
 
             var tabNextPage = response.nextpage
             onScrollEnd = {
@@ -284,18 +282,18 @@ class ChannelFragment : BaseFragment() {
         adapter: SearchAdapter,
         onNewNextPage: (String?) -> Unit
     ) {
-        scope.launch {
+        lifecycleScope.launch {
             val newContent = try {
-                RetrofitInstance.api.getChannelTab(tab.data, nextPage)
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getChannelTab(tab.data, nextPage)
+                }
             } catch (e: Exception) {
                 Log.e(TAG(), "Exception: $e")
                 null
             }
-            onNewNextPage.invoke(newContent?.nextpage)
-            runOnUiThread {
-                newContent?.content?.let {
-                    adapter.updateItems(it)
-                }
+            onNewNextPage(newContent?.nextpage)
+            newContent?.content?.let {
+                adapter.submitList(adapter.currentList + it)
             }
         }
     }

@@ -4,7 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.github.libretube.R
 import com.github.libretube.api.obj.ContentItem
 import com.github.libretube.databinding.ChannelRowBinding
@@ -25,21 +26,7 @@ import com.github.libretube.ui.sheets.VideoOptionsBottomSheet
 import com.github.libretube.ui.viewholders.SearchViewHolder
 import com.github.libretube.util.TextUtils
 
-class SearchAdapter(
-    private val searchItems: MutableList<ContentItem>
-) :
-    RecyclerView.Adapter<SearchViewHolder>() {
-
-    fun updateItems(newItems: List<ContentItem>) {
-        val searchItemsSize = searchItems.size
-        searchItems.addAll(newItems)
-        notifyItemRangeInserted(searchItemsSize, newItems.size)
-    }
-
-    override fun getItemCount(): Int {
-        return searchItems.size
-    }
-
+class SearchAdapter : ListAdapter<ContentItem, SearchViewHolder>(SearchCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
@@ -58,7 +45,7 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        val searchItem = searchItems[position]
+        val searchItem = currentList[position]
 
         val videoRowBinding = holder.videoRowBinding
         val channelRowBinding = holder.channelRowBinding
@@ -68,11 +55,13 @@ class SearchAdapter(
             bindWatch(searchItem, videoRowBinding)
         } else if (channelRowBinding != null) {
             bindChannel(searchItem, channelRowBinding)
-        } else if (playlistRowBinding != null) bindPlaylist(searchItem, playlistRowBinding)
+        } else if (playlistRowBinding != null) {
+            bindPlaylist(searchItem, playlistRowBinding)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (searchItems[position].type) {
+        return when (currentList[position].type) {
             "stream" -> 0
             "channel" -> 1
             "playlist" -> 2
@@ -116,10 +105,7 @@ class SearchAdapter(
     }
 
     @SuppressLint("SetTextI18n")
-    private fun bindChannel(
-        item: ContentItem,
-        binding: ChannelRowBinding
-    ) {
+    private fun bindChannel(item: ContentItem, binding: ChannelRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, searchChannelImage)
             searchChannelName.text = item.name
@@ -144,10 +130,7 @@ class SearchAdapter(
         }
     }
 
-    private fun bindPlaylist(
-        item: ContentItem,
-        binding: PlaylistsRowBinding
-    ) {
+    private fun bindPlaylist(item: ContentItem, binding: PlaylistsRowBinding) {
         binding.apply {
             ImageHelper.loadImage(item.thumbnail, playlistThumbnail)
             if (item.videos != -1L) videoCount.text = item.videos.toString()
@@ -167,6 +150,16 @@ class SearchAdapter(
                     )
                 true
             }
+        }
+    }
+
+    private object SearchCallback : DiffUtil.ItemCallback<ContentItem>() {
+        override fun areItemsTheSame(oldItem: ContentItem, newItem: ContentItem): Boolean {
+            return oldItem.url == newItem.url
+        }
+
+        override fun areContentsTheSame(oldItem: ContentItem, newItem: ContentItem): Boolean {
+            return true
         }
     }
 }
