@@ -11,8 +11,6 @@ import com.github.libretube.db.DatabaseHolder.Companion.Database
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.decodeFromStream
@@ -24,20 +22,18 @@ import kotlinx.serialization.json.longOrNull
 /**
  * Backup and restore the preferences
  */
-class BackupHelper(private val context: Context) {
+object BackupHelper {
     /**
      * Write a [BackupFile] containing the database content as well as the preferences
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun createAdvancedBackup(uri: Uri?, backupFile: BackupFile) {
-        uri?.let {
-            try {
-                context.contentResolver.openOutputStream(it)?.use { outputStream ->
-                    JsonHelper.json.encodeToStream(backupFile, outputStream)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG(), "Error while writing backup: $e")
+    fun createAdvancedBackup(context: Context, uri: Uri, backupFile: BackupFile) {
+        try {
+            context.contentResolver.openOutputStream(uri)?.use { outputStream ->
+                JsonHelper.json.encodeToStream(backupFile, outputStream)
             }
+        } catch (e: Exception) {
+            Log.e(TAG(), "Error while writing backup: $e")
         }
     }
 
@@ -45,48 +41,44 @@ class BackupHelper(private val context: Context) {
      * Restore data from a [BackupFile]
      */
     @OptIn(ExperimentalSerializationApi::class)
-    fun restoreAdvancedBackup(uri: Uri?) {
-        val backupFile = uri?.let {
-            context.contentResolver.openInputStream(it)?.use { inputStream ->
-                JsonHelper.json.decodeFromStream<BackupFile>(inputStream)
-            }
+    suspend fun restoreAdvancedBackup(context: Context, uri: Uri) {
+        val backupFile = context.contentResolver.openInputStream(uri)?.use {
+            JsonHelper.json.decodeFromStream<BackupFile>(it)
         } ?: return
 
-        runBlocking(Dispatchers.IO) {
-            Database.watchHistoryDao().insertAll(
-                *backupFile.watchHistory.orEmpty().toTypedArray()
-            )
-            Database.searchHistoryDao().insertAll(
-                *backupFile.searchHistory.orEmpty().toTypedArray()
-            )
-            Database.watchPositionDao().insertAll(
-                *backupFile.watchPositions.orEmpty().toTypedArray()
-            )
-            Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
-            Database.customInstanceDao().insertAll(
-                *backupFile.customInstances.orEmpty().toTypedArray()
-            )
-            Database.playlistBookmarkDao().insertAll(
-                *backupFile.playlistBookmarks.orEmpty().toTypedArray()
-            )
+        Database.watchHistoryDao().insertAll(
+            *backupFile.watchHistory.orEmpty().toTypedArray()
+        )
+        Database.searchHistoryDao().insertAll(
+            *backupFile.searchHistory.orEmpty().toTypedArray()
+        )
+        Database.watchPositionDao().insertAll(
+            *backupFile.watchPositions.orEmpty().toTypedArray()
+        )
+        Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
+        Database.customInstanceDao().insertAll(
+            *backupFile.customInstances.orEmpty().toTypedArray()
+        )
+        Database.playlistBookmarkDao().insertAll(
+            *backupFile.playlistBookmarks.orEmpty().toTypedArray()
+        )
 
-            backupFile.localPlaylists.orEmpty().forEach {
-                Database.localPlaylistsDao().createPlaylist(it.playlist)
-                val playlistId = Database.localPlaylistsDao().getAll().last().playlist.id
-                it.videos.forEach {
-                    it.playlistId = playlistId
-                    Database.localPlaylistsDao().addPlaylistVideo(it)
-                }
+        backupFile.localPlaylists.orEmpty().forEach {
+            Database.localPlaylistsDao().createPlaylist(it.playlist)
+            val playlistId = Database.localPlaylistsDao().getAll().last().playlist.id
+            it.videos.forEach {
+                it.playlistId = playlistId
+                Database.localPlaylistsDao().addPlaylistVideo(it)
             }
-
-            restorePreferences(backupFile.preferences)
         }
+
+        restorePreferences(context, backupFile.preferences)
     }
 
     /**
      * Restore the shared preferences from a backup file
      */
-    private fun restorePreferences(preferences: List<PreferenceItem>?) {
+    private fun restorePreferences(context: Context, preferences: List<PreferenceItem>?) {
         if (preferences == null) return
         PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
             // clear the previous settings
