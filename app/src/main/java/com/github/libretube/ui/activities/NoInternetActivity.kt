@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.github.libretube.R
 import com.github.libretube.databinding.ActivityNointernetBinding
 import com.github.libretube.helpers.NavigationHelper
@@ -33,10 +34,10 @@ class NoInternetActivity : BaseActivity() {
         }
 
         binding.downloads.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.noInternet_container, DownloadsFragment())
-                .addToBackStack(null)
-                .commit()
+            supportFragmentManager.commit {
+                replace<DownloadsFragment>(R.id.noInternet_container)
+                addToBackStack(null)
+            }
         }
 
         setContentView(binding.root)

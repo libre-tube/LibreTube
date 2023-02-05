@@ -10,6 +10,8 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
+import androidx.fragment.app.commitNow
+import androidx.fragment.app.replace
 import com.github.libretube.R
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
@@ -90,17 +92,9 @@ object NavigationHelper {
         )
 
         val activity = context as AppCompatActivity
-        activity.supportFragmentManager.beginTransaction()
-            .remove(PlayerFragment())
-            .commit()
-        activity.supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.container,
-                PlayerFragment().apply {
-                    arguments = bundle
-                }
-            )
-            .commitNow()
+        activity.supportFragmentManager.commitNow {
+            replace<PlayerFragment>(R.id.container, args = bundle)
+        }
     }
 
     fun navigatePlaylist(

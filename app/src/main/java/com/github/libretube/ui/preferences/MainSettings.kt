@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commitNow
 import androidx.preference.Preference
 import com.github.libretube.BuildConfig
 import com.github.libretube.R
@@ -124,9 +125,9 @@ class MainSettings : BasePreferenceFragment() {
     }
 
     private fun navigateToSettingsFragment(newFragment: Fragment): Boolean {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.settings, newFragment)
-            .commitNow()
+        parentFragmentManager.commitNow {
+            replace(R.id.settings, newFragment)
+        }
         return true
     }
 }
