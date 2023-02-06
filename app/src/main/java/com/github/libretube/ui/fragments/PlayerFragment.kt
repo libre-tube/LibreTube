@@ -123,7 +123,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.encodeToString
-import org.chromium.net.CronetEngine
 import retrofit2.HttpException
 
 class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
@@ -1300,14 +1299,11 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun createExoPlayer() {
-        val cronetEngine: CronetEngine = CronetHelper.getCronetEngine()
-        val cronetDataSourceFactory: CronetDataSource.Factory =
-            CronetDataSource.Factory(cronetEngine, Executors.newCachedThreadPool())
-
-        val dataSourceFactory = DefaultDataSource.Factory(
-            requireContext(),
-            cronetDataSourceFactory
+        val cronetDataSourceFactory = CronetDataSource.Factory(
+            CronetHelper.cronetEngine,
+            Executors.newCachedThreadPool()
         )
+        val dataSourceFactory = DefaultDataSource.Factory(requireContext(), cronetDataSourceFactory)
 
         // control for the track sources like subtitles and audio source
         trackSelector = DefaultTrackSelector(requireContext())
