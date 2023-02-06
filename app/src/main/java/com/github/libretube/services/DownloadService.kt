@@ -6,7 +6,10 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
+import android.util.SparseBooleanArray
 import androidx.core.app.NotificationCompat
+import androidx.core.util.set
+import androidx.core.util.valueIterator
 import androidx.core.app.ServiceCompat
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
@@ -66,8 +69,7 @@ class DownloadService : Service() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var summaryNotificationBuilder: NotificationCompat.Builder
 
-    private val jobs = mutableMapOf<Int, Job>()
-    private val downloadQueue = mutableMapOf<Int, Boolean>()
+    private val downloadQueue = SparseBooleanArray()
     private val _downloadFlow = MutableSharedFlow<Pair<Int, DownloadStatus>>()
     val downloadFlow: SharedFlow<Pair<Int, DownloadStatus>> = _downloadFlow
 
@@ -151,7 +153,7 @@ class DownloadService : Service() {
             Database.downloadDao().insertDownloadItem(item)
         }.toInt()
 
-        jobs[item.id] = scope.launch {
+        scope.launch {
             downloadFile(item)
         }
     }
@@ -222,8 +224,7 @@ class DownloadService : Service() {
 
             try {
                 // Check if downloading is still active and read next bytes.
-                while (downloadQueue[item.id] == true &&
-                    sourceByte
+                while (downloadQueue[item.id] && sourceByte
                         .read(sink.buffer, DownloadHelper.DOWNLOAD_CHUNK_SIZE)
                         .also { lastRead = it } != -1L
                 ) {
@@ -289,9 +290,12 @@ class DownloadService : Service() {
      */
     fun resume(id: Int) {
         // If file is already downloading then avoid new download job.
-        if (downloadQueue[id] == true) return
+        if (downloadQueue[id]) {
+            return
+        }
 
-        if (downloadQueue.values.count { it } >= DownloadHelper.getMaxConcurrentDownloads()) {
+        val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
+        if (downloadCount >= DownloadHelper.getMaxConcurrentDownloads()) {
             toastFromMainThread(getString(R.string.concurrent_downloads_limit_reached))
             scope.launch {
                 _downloadFlow.emit(id to DownloadStatus.Paused)
@@ -314,7 +318,7 @@ class DownloadService : Service() {
         downloadQueue[id] = false
 
         // Stop the service if no downloads are active.
-        if (downloadQueue.none { it.value }) {
+        if (downloadQueue.valueIterator().asSequence().none { it }) {
             ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
             sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
             stopSelf()
@@ -343,7 +347,7 @@ class DownloadService : Service() {
      * Check whether the file downloading or not.
      */
     fun isDownloading(id: Int): Boolean {
-        return downloadQueue[id] ?: false
+        return downloadQueue[id]
     }
 
     private fun notifyForeground() {
