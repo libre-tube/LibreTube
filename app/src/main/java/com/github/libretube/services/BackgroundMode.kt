@@ -3,7 +3,6 @@ package com.github.libretube.services
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.Build
@@ -13,10 +12,11 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ServiceCompat
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
-import com.github.libretube.api.obj.Segment
 import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
@@ -37,15 +37,15 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
  */
-class BackgroundMode : Service() {
+class BackgroundMode : LifecycleService() {
     /**
      * VideoId of the video
      */
@@ -171,7 +171,7 @@ class BackgroundMode : Service() {
         seekToPosition: Long = 0,
         keepQueue: Boolean = false
     ) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             streams = runCatching {
                 RetrofitInstance.api.getStreams(videoId)
             }.getOrNull() ?: return@launch
@@ -186,7 +186,7 @@ class BackgroundMode : Service() {
                 PlayingQueue.updateCurrent(it)
             }
 
-            handler.post {
+            withContext(Dispatchers.Main) {
                 playAudio(seekToPosition)
             }
         }
@@ -292,18 +292,12 @@ class BackgroundMode : Service() {
      * Sets the [MediaItem] with the [streams] into the [player]
      */
     private fun setMediaItem() {
+        val streams = streams
         streams ?: return
 
-        val uri = if (streams!!.audioStreams.orEmpty().isNotEmpty()) {
-            PlayerHelper.getAudioSource(
-                this,
-                streams!!.audioStreams!!
-            )
-        } else if (streams!!.hls != null) {
-            streams!!.hls
-        } else {
-            return
-        }
+        val uri = if (streams.audioStreams.isNotEmpty()) {
+            PlayerHelper.getAudioSource(this, streams.audioStreams)
+        } else streams.hls ?: return
 
         val mediaItem = MediaItem.Builder()
             .setUri(uri)
@@ -315,7 +309,7 @@ class BackgroundMode : Service() {
      * fetch the segments for SponsorBlock
      */
     private fun fetchSponsorBlockSegments() {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
                 if (categories.isEmpty()) return@runCatching
@@ -336,7 +330,7 @@ class BackgroundMode : Service() {
 
         if (segmentData == null || segmentData!!.segments.isEmpty()) return
 
-        segmentData!!.segments.forEach { segment: Segment ->
+        segmentData!!.segments.forEach { segment ->
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
             val currentPosition = player?.currentPosition
@@ -399,7 +393,8 @@ class BackgroundMode : Service() {
         fun getService(): BackgroundMode = this@BackgroundMode
     }
 
-    override fun onBind(p0: Intent?): IBinder {
+    override fun onBind(intent: Intent): IBinder {
+        super.onBind(intent)
         return binder
     }
 
