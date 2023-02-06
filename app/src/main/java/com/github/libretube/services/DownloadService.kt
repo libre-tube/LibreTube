@@ -5,9 +5,9 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.os.Binder
-import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
@@ -315,9 +315,7 @@ class DownloadService : Service() {
 
         // Stop the service if no downloads are active.
         if (downloadQueue.none { it.value }) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                stopForeground(STOP_FOREGROUND_DETACH)
-            }
+            ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_DETACH)
             sendBroadcast(Intent(ACTION_SERVICE_STOPPED))
             stopSelf()
         }
