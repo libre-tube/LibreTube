@@ -9,7 +9,6 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -109,7 +108,7 @@ class DownloadsFragment : BaseFragment() {
         binding.downloads.adapter?.registerAdapterDataObserver(
             object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                    if (binding.downloads.size == 0) {
+                    if (itemCount == 0) {
                         binding.downloads.visibility = View.GONE
                         binding.downloadsEmpty.visibility = View.VISIBLE
                     }

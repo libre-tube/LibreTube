@@ -19,9 +19,9 @@ import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.IOException
 import retrofit2.HttpException
 
 class SearchResultFragment : BaseFragment() {
