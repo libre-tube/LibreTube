@@ -624,7 +624,6 @@ internal class CustomExoPlayerView(
     }
 
     override fun onDoubleTapCenterScreen() {
-        Log.d("LibreTubeTags", "onDoubleTapCenterScreen")
         player?.let { player ->
             if (player.isPlaying) {
                 player.pause()
