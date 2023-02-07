@@ -108,11 +108,11 @@ class DownloadsFragment : BaseFragment() {
         binding.downloads.adapter?.registerAdapterDataObserver(
             object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                    if (itemCount == 0) {
+                    super.onItemRangeRemoved(positionStart, itemCount)
+                    if (binding.downloads.adapter?.itemCount == 0) {
                         binding.downloads.visibility = View.GONE
                         binding.downloadsEmpty.visibility = View.VISIBLE
                     }
-                    super.onItemRangeRemoved(positionStart, itemCount)
                 }
             }
         )
