@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
@@ -118,6 +119,8 @@ internal class CustomExoPlayerView(
 
         // don't let the player view hide its controls automatically
         controllerShowTimeoutMs = -1
+        // don't let the player view show its controls automatically
+        controllerAutoShow = false
 
         // locking the player
         binding.lockPlayer.setOnClickListener {
@@ -172,6 +175,11 @@ internal class CustomExoPlayerView(
 
                     // keep screen on if the video is playing
                     keepScreenOn = player.isPlaying == true
+
+                    if (player.playbackState == Player.STATE_ENDED && !autoplayEnabled) {
+                        showController()
+                        cancelHideControllerTask()
+                    }
                 }
             }
         })
@@ -603,8 +611,9 @@ internal class CustomExoPlayerView(
      * Add extra margin to the top bar to not overlap the status bar
      */
     private fun updateTopBarMargin() {
-        val isFullscreen = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-            playerViewModel?.isFullscreen?.value == true
+        val isFullscreen =
+            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+                    playerViewModel?.isFullscreen?.value == true
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
             topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
         }
@@ -615,6 +624,7 @@ internal class CustomExoPlayerView(
     }
 
     override fun onDoubleTapCenterScreen() {
+        Log.d("LibreTubeTags", "onDoubleTapCenterScreen")
         player?.let { player ->
             if (player.isPlaying) {
                 player.pause()
