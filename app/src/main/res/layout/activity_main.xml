@@ -5,6 +5,7 @@
     android:id="@+id/mainMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:motionProgress="1"
     app:layoutDescription="@xml/activity_main_scene"
     tools:context=".ui.activities.MainActivity">
 
