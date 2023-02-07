@@ -45,6 +45,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.SubtitleView
+import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.util.RepeatModeUtil
 
 @SuppressLint("ClickableViewAccessibility")
@@ -181,6 +182,19 @@ internal class CustomExoPlayerView(
                     }
                 }
             }
+        })
+
+        // prevent the controls from disappearing while scrubbing the time bar
+        binding.exoProgress.addListener(object : TimeBar.OnScrubListener {
+            override fun onScrubStart(timeBar: TimeBar, position: Long) {
+                cancelHideControllerTask()
+            }
+
+            override fun onScrubMove(timeBar: TimeBar, position: Long) {
+                cancelHideControllerTask()
+            }
+
+            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {}
         })
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
