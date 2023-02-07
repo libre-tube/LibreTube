@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
@@ -613,7 +612,7 @@ internal class CustomExoPlayerView(
     private fun updateTopBarMargin() {
         val isFullscreen =
             resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-                    playerViewModel?.isFullscreen?.value == true
+                playerViewModel?.isFullscreen?.value == true
         binding.topBar.updateLayoutParams<MarginLayoutParams> {
             topMargin = (if (isFullscreen) 10 else 0).dpToPx().toInt()
         }
