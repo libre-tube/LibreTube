@@ -121,7 +121,7 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
             NavigationHelper.navigateVideo(
                 context = requireContext(),
                 videoId = PlayingQueue.getCurrent()?.url?.toID(),
-                timeStamp = playerService?.player?.currentPosition,
+                timeStamp = playerService?.player?.currentPosition?.div(1000),
                 keepQueue = true,
                 forceVideo = true
             )
