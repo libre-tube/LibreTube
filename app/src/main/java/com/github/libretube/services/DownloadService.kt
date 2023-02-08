@@ -244,7 +244,7 @@ class DownloadService : LifecycleService() {
                         notificationBuilder
                             .setContentText(
                                 totalRead.formatAsFileSize() + " / " +
-                                        item.downloadSize.formatAsFileSize()
+                                    item.downloadSize.formatAsFileSize()
                             )
                             .setProgress(
                                 item.downloadSize.toInt(),

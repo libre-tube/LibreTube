@@ -297,7 +297,9 @@ class BackgroundMode : LifecycleService() {
 
         val uri = if (streams.audioStreams.isNotEmpty()) {
             PlayerHelper.getAudioSource(this, streams.audioStreams)
-        } else streams.hls ?: return
+        } else {
+            streams.hls ?: return
+        }
 
         val mediaItem = MediaItem.Builder()
             .setUri(uri)
