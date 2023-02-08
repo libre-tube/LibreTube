@@ -445,4 +445,5 @@
     <string name="download_paused">Téléchargement en pause</string>
     <string name="download_completed">Téléchargement terminé</string>
     <string name="sleep_timer">Minuteur de sommeil</string>
+    <string name="replies">Réponses</string>
 </resources>
