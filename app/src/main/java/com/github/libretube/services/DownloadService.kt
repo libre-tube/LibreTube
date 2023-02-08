@@ -41,6 +41,7 @@ import java.io.File
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URL
+import java.util.concurrent.Executors
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -54,7 +55,6 @@ import okio.BufferedSink
 import okio.buffer
 import okio.sink
 import okio.source
-import java.util.concurrent.Executors
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].

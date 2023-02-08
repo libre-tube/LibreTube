@@ -268,7 +268,6 @@ class MainActivity : BaseActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 navController.navigate(R.id.searchResultFragment, bundleOf("query" to query))
-                searchViewModel.setQuery("")
                 searchView.clearFocus()
                 return true
             }
@@ -318,10 +317,8 @@ class MainActivity : BaseActivity() {
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 if (binding.mainMotionLayout.progress == 0F) {
-                    try {
+                    runCatching {
                         minimizePlayer()
-                    } catch (e: Exception) {
-                        // current fragment isn't the player fragment
                     }
                 }
                 // Handover back press to `BackPressedDispatcher`
