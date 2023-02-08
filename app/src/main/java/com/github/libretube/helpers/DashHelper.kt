@@ -39,7 +39,15 @@ object DashHelper {
 
         val adapSetInfos = ArrayList<AdapSetInfo>()
 
-        for (stream in streams.videoStreams!!) {
+        val enabledVideoCodecs = PlayerHelper.enabledVideoCodecs
+        // filter the codecs according to the user's preferences
+        for (stream in streams.videoStreams.filter {
+            if (enabledVideoCodecs != "all") {
+                it.codec?.lowercase()?.startsWith(enabledVideoCodecs) ?: true
+            } else {
+                true
+            }
+        }) {
             // ignore dual format streams
             if (!stream.videoOnly!!) {
                 continue
@@ -64,7 +72,7 @@ object DashHelper {
             )
         }
 
-        for (stream in streams.audioStreams!!) {
+        for (stream in streams.audioStreams) {
             val adapSetInfo =
                 adapSetInfos.find {
                     it.mimeType == stream.mimeType && it.audioTrackId == stream.audioTrackId

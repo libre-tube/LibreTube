@@ -440,6 +440,7 @@
     <string name="skip_silence">Skip silence</string>
     <string name="help">Help</string>
     <string name="faq">FAQ</string>
+    <string name="codecs">Codecs</string>
 
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
