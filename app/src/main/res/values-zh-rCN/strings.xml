@@ -337,7 +337,7 @@
     <string name="limit_hls">限制 HLS 到 1080P</string>
     <string name="progressive_load_interval_summary">较低的值可加速初始视频加载。</string>
     <string name="default_load_interval">默认</string>
-    <string name="playback_pitch">时间伸缩</string>
+    <string name="playback_pitch">音调</string>
     <string name="progressive_load_interval">渐进加载间隔大小</string>
     <string name="views_placeholder">观看</string>
     <string name="filename">文件名</string>
@@ -429,8 +429,8 @@
     <string name="forward">前进</string>
     <string name="pause">暂停</string>
     <string name="rewind">后退</string>
-    <string name="alternative_pip_controls">备选 PiP （画中画）操控</string>
-    <string name="alternative_pip_controls_summary">仅显示音频并跳过画中画操控而非前进和后退</string>
+    <string name="alternative_pip_controls">备选画中画控件</string>
+    <string name="alternative_pip_controls_summary">在画中画里显示仅音频和跳过控件而非快进和快退控件</string>
     <string name="audio_player">音频播放器</string>
     <string name="audio_only_mode_summary">将 LibreTube 作为音乐播放器。</string>
     <string name="no_subtitle">无字幕</string>
