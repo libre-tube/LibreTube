@@ -445,4 +445,5 @@
     <string name="help">帮助</string>
     <string name="faq">常见问题</string>
     <string name="replies">回复</string>
+    <string name="codecs">编解码器</string>
 </resources>
