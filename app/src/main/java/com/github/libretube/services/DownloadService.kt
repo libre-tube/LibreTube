@@ -44,6 +44,8 @@ import java.net.URL
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -52,12 +54,15 @@ import okio.BufferedSink
 import okio.buffer
 import okio.sink
 import okio.source
+import java.util.concurrent.Executors
 
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
  */
 class DownloadService : LifecycleService() {
     private val binder = LocalBinder()
+    private val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+    private val coroutineContext = dispatcher + SupervisorJob()
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var summaryNotificationBuilder: NotificationCompat.Builder
@@ -88,7 +93,7 @@ class DownloadService : LifecycleService() {
         val audioQuality = intent.getStringExtra(IntentData.audioQuality)
         val subtitleCode = intent.getStringExtra(IntentData.subtitleCode)
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(coroutineContext) {
             try {
                 val streams = withContext(Dispatchers.IO) {
                     RetrofitInstance.api.getStreams(videoId)
@@ -149,7 +154,7 @@ class DownloadService : LifecycleService() {
             Database.downloadDao().insertDownloadItem(item)
         }.toInt()
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(coroutineContext) {
             downloadFile(item)
         }
     }
@@ -239,7 +244,7 @@ class DownloadService : LifecycleService() {
                         notificationBuilder
                             .setContentText(
                                 totalRead.formatAsFileSize() + " / " +
-                                    item.downloadSize.formatAsFileSize()
+                                        item.downloadSize.formatAsFileSize()
                             )
                             .setProgress(
                                 item.downloadSize.toInt(),
@@ -265,7 +270,8 @@ class DownloadService : LifecycleService() {
                 sourceByte.close()
                 con.disconnect()
             }
-        } catch (_: Exception) { }
+        } catch (_: Exception) {
+        }
 
         val completed = when {
             totalRead < item.downloadSize -> {
@@ -293,7 +299,7 @@ class DownloadService : LifecycleService() {
         val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
         if (downloadCount >= DownloadHelper.getMaxConcurrentDownloads()) {
             toastFromMainThread(getString(R.string.concurrent_downloads_limit_reached))
-            lifecycleScope.launch {
+            lifecycleScope.launch(coroutineContext) {
                 _downloadFlow.emit(id to DownloadStatus.Paused)
             }
             return
@@ -302,7 +308,7 @@ class DownloadService : LifecycleService() {
         val downloadItem = awaitQuery {
             Database.downloadDao().findDownloadItemById(id)
         }
-        lifecycleScope.launch {
+        lifecycleScope.launch(coroutineContext) {
             downloadFile(downloadItem)
         }
     }
