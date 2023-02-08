@@ -92,6 +92,7 @@ dependencies {
     implementation libs.lifecycle.viewmodel
     implementation libs.lifecycle.runtime
     implementation libs.lifecycle.livedata
+    implementation libs.lifecycle.service
 
     /* Testing */
     androidTestImplementation libs.androidx.test.junit
