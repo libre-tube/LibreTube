@@ -95,10 +95,13 @@ class DownloadsAdapter(
                     .setMessage(R.string.irreversible)
                     .setPositiveButton(R.string.okay) { _, _ ->
                         items.map { File(it.path) }.forEach { file ->
-                            if (file.exists()) {
-                                try {
-                                    file.delete()
-                                } catch (_: Exception) { }
+                            runCatching {
+                                if (file.exists()) file.delete()
+                            }
+                        }
+                        runCatching {
+                            download.thumbnailPath?.let {
+                                File(it).delete()
                             }
                         }
 
