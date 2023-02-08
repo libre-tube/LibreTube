@@ -141,6 +141,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var playlistId: String? = null
     private var channelId: String? = null
     private var keepQueue: Boolean = false
+    private var timeStamp: Long? = null
 
     /**
      * Video information fetched at runtime
@@ -228,6 +229,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             playlistId = it.getString(IntentData.playlistId)
             channelId = it.getString(IntentData.channelId)
             keepQueue = it.getBoolean(IntentData.keepQueue, false)
+            timeStamp = it.getLong(IntentData.timeStamp, 0L)
         }
 
         // broadcast receiver for PiP actions
@@ -716,6 +718,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 setupSeekbarPreview()
 
                 if (!streams.livestream) seekToWatchPosition()
+                trySeekToTimeStamp()
+
                 exoPlayer.prepare()
                 if (!DataSaverMode.isEnabled(requireContext())) exoPlayer.play()
 
@@ -786,14 +790,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         handler.postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
-    // seek to saved watch position if available
+    /**
+     *  Seek to saved watch position if available */
     private fun seekToWatchPosition() {
-        // support for time stamped links
-        val timeStamp: Long? = arguments?.getLong(IntentData.timeStamp)
-        if (timeStamp != null && timeStamp != 0L) {
-            exoPlayer.seekTo(timeStamp * 1000)
-            return
-        }
         // browse the watch positions
         val position = try {
             awaitQuery {
@@ -806,6 +805,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (position != null && position < streams.duration * 1000 * 0.9) {
             exoPlayer.seekTo(position)
         }
+    }
+
+    /**
+     * Seek to the time stamp passed by the intent arguments if available
+     */
+    private fun trySeekToTimeStamp() {
+        // support for time stamped links
+        timeStamp?.let {
+            if (it != 0L) exoPlayer.seekTo(it * 1000)
+        }
+        // delete the time stamp because it already got consumed
+        timeStamp = null
     }
 
     // used for autoplay and skipping to next video
