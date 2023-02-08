@@ -89,6 +89,7 @@ object PreferenceKeys {
     const val PAUSE_ON_QUIT = "pause_on_quit"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
+    const val ENABLED_VIDEO_CODECS = "video_codecs"
 
     /**
      * Background mode

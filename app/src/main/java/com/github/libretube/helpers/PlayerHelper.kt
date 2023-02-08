@@ -279,7 +279,7 @@ object PlayerHelper {
             .roundToInt()
             .toLong() * 1000
 
-    val playbackSpeed: String
+    private val playbackSpeed: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
@@ -343,6 +343,12 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.SKIP_SILENCE,
             false
+        )
+
+    val enabledVideoCodecs: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.ENABLED_VIDEO_CODECS,
+            "all"
         )
 
     fun getDefaultResolution(context: Context): String {

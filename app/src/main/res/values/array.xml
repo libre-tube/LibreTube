@@ -179,15 +179,6 @@
         <item>5</item>
     </string-array>
 
-    <string-array name="videoFormats">
-        <item>MP4</item>
-        <item>MKV</item>
-    </string-array>
-    <string-array name="videoFormatsValues">
-        <item>.mp4</item>
-        <item>.mkv</item>
-    </string-array>
-
     <string-array name="bufferingGoal">
         <item>50s</item>
         <item>100s</item>
@@ -399,6 +390,18 @@
         <item>disabled</item>
         <item>metered</item>
         <item>enabled</item>
+    </string-array>
+
+    <string-array name="videoCodecs">
+        <item>@string/all</item>
+        <item>VP9</item>
+        <item>AVC</item>
+    </string-array>
+
+    <string-array name="videoCodecValues">
+        <item>all</item>
+        <item>vp9</item>
+        <item>avc</item>
     </string-array>
 
 </resources>
