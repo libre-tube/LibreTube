@@ -445,4 +445,5 @@
     <string name="sleep_timer">Таймер сну</string>
     <string name="skip_silence">Пропускати тишу</string>
     <string name="replies">Відповіді</string>
+    <string name="codecs">Кодеки</string>
 </resources>
