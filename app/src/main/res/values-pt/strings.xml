@@ -445,4 +445,5 @@
     <string name="sleep_timer">Temporizador de sono</string>
     <string name="skip_silence">Ignorar o silêncio</string>
     <string name="replies">Respostas</string>
+    <string name="codecs">Codecs</string>
 </resources>
