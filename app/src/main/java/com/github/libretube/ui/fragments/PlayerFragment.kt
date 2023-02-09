@@ -121,6 +121,7 @@ import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
@@ -707,7 +708,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
-            runOnUiThread {
+            withContext(Dispatchers.Main) {
                 // hide the button to skip SponsorBlock segments manually
                 binding.sbSkipBtn.visibility = View.GONE
 

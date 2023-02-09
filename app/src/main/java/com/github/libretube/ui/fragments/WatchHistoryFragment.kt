@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.postDelayed
 import androidx.core.view.updatePadding
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,7 @@ import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
 import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.dpToPx
-import com.github.libretube.extensions.query
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
@@ -26,6 +25,9 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class WatchHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentWatchHistoryBinding
@@ -51,9 +53,9 @@ class WatchHistoryFragment : BaseFragment() {
             )
         }
 
-        val watchHistory = awaitQuery {
-            Database.watchHistoryDao().getAll()
-        }.reversed()
+        val watchHistory = runBlocking(Dispatchers.IO) {
+            Database.watchHistoryDao().getAll().reversed()
+        }
 
         if (watchHistory.isEmpty()) return
 
@@ -69,7 +71,7 @@ class WatchHistoryFragment : BaseFragment() {
                 .setPositiveButton(R.string.okay) { _, _ ->
                     binding.historyScrollView.visibility = View.GONE
                     binding.historyEmpty.visibility = View.VISIBLE
-                    query {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         Database.watchHistoryDao().deleteAll()
                     }
                 }
