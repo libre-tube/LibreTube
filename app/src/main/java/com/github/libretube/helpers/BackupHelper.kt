@@ -46,9 +46,7 @@ object BackupHelper {
             JsonHelper.json.decodeFromStream<BackupFile>(it)
         } ?: return
 
-        Database.watchHistoryDao().insertAll(
-            *backupFile.watchHistory.orEmpty().toTypedArray()
-        )
+        Database.watchHistoryDao().insertAll(backupFile.watchHistory.orEmpty())
         Database.searchHistoryDao().insertAll(
             *backupFile.searchHistory.orEmpty().toTypedArray()
         )
