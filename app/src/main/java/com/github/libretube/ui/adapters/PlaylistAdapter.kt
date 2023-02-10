@@ -36,7 +36,7 @@ class PlaylistAdapter(
     override fun getItemCount(): Int {
         return when (playlistType) {
             PlaylistType.PUBLIC -> videoFeed.size
-            else -> visibleCount
+            else -> minOf(visibleCount, videoFeed.size)
         }
     }
 

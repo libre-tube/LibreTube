@@ -42,7 +42,7 @@ class VideosAdapter(
     override fun getItemCount(): Int {
         return when {
             showAllAtOnce -> streamItems.size
-            else -> visibleCount
+            else -> minOf(streamItems.size, visibleCount)
         }
     }
 
@@ -61,6 +61,16 @@ class VideosAdapter(
         val feedSize = streamItems.size
         streamItems.addAll(newItems)
         notifyItemRangeInserted(feedSize, newItems.size)
+    }
+
+    fun removeItemById(videoId: String) {
+        val index = streamItems.indexOfFirst {
+            it.url?.toID() == videoId
+        }.takeIf { it > 0 } ?: return
+        streamItems.removeAt(index)
+        visibleCount -= 1
+        notifyItemRemoved(index)
+        notifyItemRangeChanged(index, itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
