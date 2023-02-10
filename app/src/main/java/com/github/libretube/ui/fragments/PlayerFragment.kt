@@ -338,6 +338,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             }
         })
 
+        if (PlayerHelper.swipeGestureEnabled) {
+            binding.playerMotionLayout.addSwipeUpListener {
+                exoPlayerView.hideController()
+                setFullscreen()
+            }
+        }
+
         binding.playerMotionLayout.progress = 1.toFloat()
         binding.playerMotionLayout.transitionToStart()
 
