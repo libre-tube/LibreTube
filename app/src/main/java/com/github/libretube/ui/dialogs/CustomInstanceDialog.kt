@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogCustomInstanceBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.CustomInstance
-import com.github.libretube.extensions.query
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class CustomInstanceDialog : DialogFragment() {
@@ -28,13 +29,12 @@ class CustomInstanceDialog : DialogFragment() {
 
             if (instanceName.isNotEmpty() && apiUrl.isNotEmpty() && frontendUrl.isNotEmpty()) {
                 if (apiUrl.toHttpUrlOrNull() != null && frontendUrl.toHttpUrlOrNull() != null) {
-                    query {
+                    lifecycleScope.launch {
                         Database.customInstanceDao()
-                            .insertAll(CustomInstance(instanceName, apiUrl, frontendUrl))
+                            .insertAll(listOf(CustomInstance(instanceName, apiUrl, frontendUrl)))
+                        ActivityCompat.recreate(requireActivity())
+                        dismiss()
                     }
-
-                    ActivityCompat.recreate(requireActivity())
-                    dismiss()
                 } else {
                     Toast.makeText(requireContext(), R.string.invalid_url, Toast.LENGTH_SHORT)
                         .show()

@@ -54,9 +54,7 @@ object BackupHelper {
             *backupFile.watchPositions.orEmpty().toTypedArray()
         )
         Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
-        Database.customInstanceDao().insertAll(
-            *backupFile.customInstances.orEmpty().toTypedArray()
-        )
+        Database.customInstanceDao().insertAll(backupFile.customInstances.orEmpty())
         Database.playlistBookmarkDao().insertAll(
             *backupFile.playlistBookmarks.orEmpty().toTypedArray()
         )
