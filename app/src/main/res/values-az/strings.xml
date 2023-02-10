@@ -446,4 +446,5 @@
     <string name="faq">T-TSS</string>
     <string name="replies">Cavablar</string>
     <string name="codecs">Kodeklər</string>
+    <string name="unsupported_file_format">Dəstəklənməyən fayl formatı: %1$s</string>
 </resources>
