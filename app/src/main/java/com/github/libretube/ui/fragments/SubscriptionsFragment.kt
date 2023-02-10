@@ -25,7 +25,7 @@ class SubscriptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
     private val viewModel: SubscriptionsViewModel by activityViewModels()
 
-    private var subscriptionAdapter: VideosAdapter? = null
+    var subscriptionsAdapter: VideosAdapter? = null
     private var selectedSortOrder = PreferenceHelper.getInt(PreferenceKeys.FEED_SORT_ORDER, 0)
         set(value) {
             PreferenceHelper.putInt(PreferenceKeys.FEED_SORT_ORDER, value)
@@ -141,7 +141,7 @@ class SubscriptionsFragment : BaseFragment() {
                     // scroll view is at bottom
                     if (viewModel.videoFeed.value == null) return@addOnScrollChangedListener
                     binding.subRefresh.isRefreshing = true
-                    subscriptionAdapter?.updateItems()
+                    subscriptionsAdapter?.updateItems()
                     binding.subRefresh.isRefreshing = false
                 }
             }
@@ -189,12 +189,12 @@ class SubscriptionsFragment : BaseFragment() {
             if (viewModel.videoFeed.value!!.isEmpty()) View.VISIBLE else View.GONE
 
         binding.subProgress.visibility = View.GONE
-        subscriptionAdapter = VideosAdapter(
+        subscriptionsAdapter = VideosAdapter(
             sortedFeed.toMutableList(),
             showAllAtOnce = false,
             hideWatched = PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)
         )
-        binding.subFeed.adapter = subscriptionAdapter
+        binding.subFeed.adapter = subscriptionsAdapter
 
         PreferenceHelper.updateLastFeedWatchedTime()
     }

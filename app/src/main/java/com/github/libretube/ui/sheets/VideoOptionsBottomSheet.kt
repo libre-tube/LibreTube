@@ -1,15 +1,25 @@
 package com.github.libretube.ui.sheets
 
 import android.os.Bundle
+import android.util.Log
+import androidx.navigation.fragment.NavHostFragment
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
+import com.github.libretube.constants.PreferenceKeys
+import com.github.libretube.db.DatabaseHolder
+import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
+import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.helpers.BackgroundHelper
+import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
+import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
+import com.github.libretube.ui.fragments.SubscriptionsFragment
 import com.github.libretube.util.PlayingQueue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,43 +38,46 @@ class VideoOptionsBottomSheet(
     override fun onCreate(savedInstanceState: Bundle?) {
         // List that stores the different menu options. In the future could be add more options here.
         val optionsList = mutableListOf(
-            context?.getString(R.string.playOnBackground)!!,
-            context?.getString(R.string.addToPlaylist)!!,
-            context?.getString(R.string.download)!!,
-            context?.getString(R.string.share)!!
+            getString(R.string.playOnBackground),
+            getString(R.string.addToPlaylist),
+            getString(R.string.download),
+            getString(R.string.share)
         )
 
-        /**
-         * Check whether the player is running and add queue options
-         */
+        // Check whether the player is running and add queue options
         if (PlayingQueue.isNotEmpty()) {
-            optionsList += context?.getString(R.string.play_next)!!
-            optionsList += context?.getString(R.string.add_to_queue)!!
+            optionsList += getString(R.string.play_next)
+            optionsList += getString(R.string.add_to_queue)
+        }
+
+        // show the mark as watched option if watch positions are enabled
+        if (PlayerHelper.watchPositionsEnabled) {
+            optionsList += getString(R.string.mark_as_watched)
         }
 
         setSimpleItems(optionsList) { which ->
             when (optionsList[which]) {
                 // Start the background mode
-                context?.getString(R.string.playOnBackground) -> {
+                getString(R.string.playOnBackground) -> {
                     BackgroundHelper.playOnBackground(requireContext(), videoId)
                 }
                 // Add Video to Playlist Dialog
-                context?.getString(R.string.addToPlaylist) -> {
+                getString(R.string.addToPlaylist) -> {
                     AddToPlaylistDialog(videoId).show(
                         parentFragmentManager,
                         AddToPlaylistDialog::class.java.name
                     )
                 }
-                context?.getString(R.string.download) -> {
+                getString(R.string.download) -> {
                     val downloadDialog = DownloadDialog(videoId)
                     downloadDialog.show(parentFragmentManager, DownloadDialog::class.java.name)
                 }
-                context?.getString(R.string.share) -> {
+                getString(R.string.share) -> {
                     val shareDialog = ShareDialog(videoId, ShareObjectType.VIDEO, shareData)
                     // using parentFragmentManager is important here
                     shareDialog.show(parentFragmentManager, ShareDialog::class.java.name)
                 }
-                context?.getString(R.string.play_next) -> {
+                getString(R.string.play_next) -> {
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
                             PlayingQueue.addAsNext(
@@ -76,7 +89,7 @@ class VideoOptionsBottomSheet(
                         }
                     }
                 }
-                context?.getString(R.string.add_to_queue) -> {
+                getString(R.string.add_to_queue) -> {
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
                             PlayingQueue.add(
@@ -86,6 +99,29 @@ class VideoOptionsBottomSheet(
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
+                    }
+                }
+                getString(R.string.mark_as_watched) -> {
+                    val watchPosition = WatchPosition(videoId, Long.MAX_VALUE)
+                    awaitQuery {
+                        DatabaseHolder.Database.watchPositionDao().insertAll(watchPosition)
+                    }
+                    if (PreferenceHelper.getBoolean(PreferenceKeys.HIDE_WATCHED_FROM_FEED, false)) {
+                        // get the host fragment containing the current fragment
+                        val navHostFragment =
+                            (context as MainActivity).supportFragmentManager.findFragmentById(
+                                R.id.fragment
+                            ) as NavHostFragment?
+                        // get the current fragment
+                        val fragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+                        Log.e(
+                            "fragments",
+                            navHostFragment?.childFragmentManager?.fragments.orEmpty()
+                                .joinToString(", ") { it::class.java.name.toString() }
+                        )
+                        (fragment as? SubscriptionsFragment)?.subscriptionsAdapter?.removeItemById(
+                            videoId
+                        )
                     }
                 }
             }
