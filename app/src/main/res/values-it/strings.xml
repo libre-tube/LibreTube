@@ -445,4 +445,5 @@
     <string name="help">Aiuto</string>
     <string name="faq">Domande frequenti</string>
     <string name="replies">Risposte</string>
+    <string name="codecs">Codec</string>
 </resources>
