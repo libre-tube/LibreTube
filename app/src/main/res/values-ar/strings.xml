@@ -446,4 +446,5 @@
     <string name="faq">الأسئلة المتداولة</string>
     <string name="replies">الردود</string>
     <string name="codecs">الترميز</string>
+    <string name="unsupported_file_format">تنسيق الملف غير المدعوم: %1$s</string>
 </resources>
