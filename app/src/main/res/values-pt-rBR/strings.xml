@@ -447,4 +447,5 @@
     <string name="replies">Respostas</string>
     <string name="codecs">Codecs</string>
     <string name="unsupported_file_format">Formato de arquivo não suportado: %1$s</string>
+    <string name="mark_as_watched">Marcar como visto</string>
 </resources>
