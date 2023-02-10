@@ -374,7 +374,6 @@
     <string name="livestreams">Trực tiếp</string>
     <string name="alternative_videos_layout">Bố cục thay thế cho videos</string>
     <string name="defaultIconLight">Light mặc định</string>
-    <string name="unsupported_file_format">Định dạng file không được hỗ trợ!</string>
     <string name="auto_quality">Tự động</string>
     <string name="limit_to_runtime">Giới hạn trong lượt sử dụng app</string>
     <string name="show_more">Hiển thị thêm</string>

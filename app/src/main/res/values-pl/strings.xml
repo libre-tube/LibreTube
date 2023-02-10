@@ -373,7 +373,6 @@
     <string name="alternative_player_layout">Inny układ powiązanych filmów</string>
     <string name="audio_track">Ścieżka dźwiękowa</string>
     <string name="default_audio_track">Domyślna</string>
-    <string name="unsupported_file_format">Nieobsługowany typ pliku!</string>
     <string name="hls_instead_of_dash">HTTP Live Streaming</string>
     <string name="hls_instead_of_dash_summary">Użyj HLS zamiast DASH (będzie wolniej, nie zalecane)</string>
     <string name="auto_quality">Automatyczna</string>

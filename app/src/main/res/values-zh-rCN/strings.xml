@@ -373,7 +373,6 @@
     <string name="alternative_trending_layout">备选的“时下流行”布局</string>
     <string name="audio_track">音轨</string>
     <string name="default_audio_track">默认</string>
-    <string name="unsupported_file_format">不支持的文件格式！</string>
     <string name="hls_instead_of_dash">使用 HLS</string>
     <string name="hls_instead_of_dash_summary">使用 HLS 而不是 DASH（会更慢，不推荐）</string>
     <string name="auto_quality">自动</string>
