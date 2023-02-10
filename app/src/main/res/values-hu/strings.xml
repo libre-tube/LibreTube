@@ -376,7 +376,6 @@
     <string name="hls_instead_of_dash">HLS használata</string>
     <string name="auto_quality">Automatikus</string>
     <string name="hls_instead_of_dash_summary">HLS használata DASH helyett (lassabb, nem ajánlott)</string>
-    <string name="unsupported_file_format">Nem támogatott fájlformátum!</string>
     <string name="limit_to_runtime">Futás idejére való korlátozás</string>
     <string name="open_queue_from_notification">Lejátszási sor megnyitása értesítésből</string>
     <string name="trending">Ami most felkapott</string>

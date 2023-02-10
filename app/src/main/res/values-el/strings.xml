@@ -430,7 +430,6 @@
     <string name="export_playlists">Εξαγωγή λιστών αναπαραγωγής</string>
     <string name="audio_track">Ηχητικό κομμάτι</string>
     <string name="default_audio_track">Προεπιλογή</string>
-    <string name="unsupported_file_format">Μη υποστηριζόμενη μορφή αρχείου!</string>
     <string name="audio_player">Αναπαραγωγή ήχου</string>
     <string name="open_queue_from_notification">Άνοιγμα ουράς από την ειδοποίηση</string>
     <string name="show_more">Δείτε περισσότερα</string>

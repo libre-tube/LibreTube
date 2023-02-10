@@ -373,7 +373,6 @@
     <string name="alternative_player_layout">פריסת נגן חלופית</string>
     <string name="audio_track">רצועת שמע</string>
     <string name="default_audio_track">ברירת מחדל</string>
-    <string name="unsupported_file_format">סוג הקובץ לא נתמך!</string>
     <string name="auto_quality">אוטומטי</string>
     <string name="hls_instead_of_dash">להשתמש בתזרים</string>
     <string name="hls_instead_of_dash_summary">להשתמש בתזרים (HLS) במקום ב־DASH (אטי יותר, לא מומלץ)</string>

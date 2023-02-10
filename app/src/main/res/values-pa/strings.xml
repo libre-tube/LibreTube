@@ -402,7 +402,6 @@
     <string name="notification_time_summary">ਸਮਾਂ ਮਿਆਦ ਜਿਸ ਵਿੱਚ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿਖਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਹੈ।</string>
     <string name="navbar_order">ਆਰਡਰ</string>
     <string name="default_audio_track">ਡੀਫ਼ਾਲਟ</string>
-    <string name="unsupported_file_format">ਅਸਮਰਥਿਤ ਫ਼ਾਈਲ ਫਾਰਮੈਟ!</string>
     <string name="alternative_player_layout">ਵਿਕਲਪਿਕ ਪਲੇਅਰ ਲੇਆਊਟ</string>
     <string name="trending">ਹੁਣ ਕੀ ਰੁਝਾਨ ਹੈ</string>
     <string name="hls_instead_of_dash">HLS ਦੀ ਵਰਤੋਂ ਕਰੋ</string>

@@ -372,7 +372,6 @@
     <string name="default_audio_track">Standard</string>
     <string name="livestreams">Livestreams</string>
     <string name="alternative_videos_layout">Alternatives Video-Layout</string>
-    <string name="unsupported_file_format">Nicht unterstütztes Dateiformat!</string>
     <string name="hls_instead_of_dash">Verwende HLS</string>
     <string name="hls_instead_of_dash_summary">Verwende HLS statt DASH (wird langsamer sein, nicht empfohlen)</string>
     <string name="auto_quality">Automatisch</string>
