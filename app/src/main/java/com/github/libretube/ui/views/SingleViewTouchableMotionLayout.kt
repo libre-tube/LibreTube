@@ -19,6 +19,7 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
     private val viewRect = Rect()
     private var touchStarted = false
     private val transitionListenerList = mutableListOf<TransitionListener?>()
+    private val swipeUpListener = mutableListOf<() -> Unit>()
 
     init {
         addTransitionListener(object : TransitionListener {
@@ -87,9 +88,26 @@ class SingleViewTouchableMotionLayout(context: Context, attributeSet: AttributeS
             transitionToStart()
             return true
         }
+
+        override fun onScroll(
+            e1: MotionEvent,
+            e2: MotionEvent,
+            distanceX: Float,
+            distanceY: Float
+        ): Boolean {
+            if (progress != 0F || distanceY < 30F) return false
+            swipeUpListener.forEach {
+                it.invoke()
+            }
+            return true
+        }
     }
 
-    val gestureDetector = GestureDetector(context, Listener())
+    fun addSwipeUpListener(listener: () -> Unit) {
+        swipeUpListener.add(listener)
+    }
+
+    private val gestureDetector = GestureDetector(context, Listener())
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {

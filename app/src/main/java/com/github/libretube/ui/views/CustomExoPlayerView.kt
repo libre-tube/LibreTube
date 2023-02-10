@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.updateLayoutParams
@@ -668,6 +669,18 @@ internal class CustomExoPlayerView(
 
         if (isControllerFullyVisible) hideController()
         updateVolume(distanceY)
+    }
+
+    override fun onSwipeCenterScreen(distanceY: Float) {
+        if (!PlayerHelper.swipeGestureEnabled) return
+
+        if (isControllerFullyVisible) hideController()
+
+        if (distanceY < 0) {
+            playerGestureController.isMoving = false
+            (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
+            playerViewModel?.isFullscreen?.value = false
+        }
     }
 
     override fun onSwipeEnd() {

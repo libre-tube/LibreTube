@@ -35,7 +35,7 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
     private val scaleGestureDetector: ScaleGestureDetector
 
     private var isFullscreen = false
-    private var isMoving = false
+    var isMoving = false
     var isEnabled = true
 
     // Indicates last touch event was for click or other gesture, used to avoid single click
@@ -155,8 +155,9 @@ class PlayerGestureController(activity: BaseActivity, private val listener: Play
             wasClick = false
 
             when {
-                width * 0.5 > e1.x -> listener.onSwipeLeftScreen(distanceY)
-                width * 0.5 < e1.x -> listener.onSwipeRightScreen(distanceY)
+                e1.x < width * 0.4 -> listener.onSwipeLeftScreen(distanceY)
+                e1.x > width * 0.6 -> listener.onSwipeRightScreen(distanceY)
+                else -> listener.onSwipeCenterScreen(distanceY)
             }
             return true
         }
