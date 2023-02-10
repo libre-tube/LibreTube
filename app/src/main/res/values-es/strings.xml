@@ -446,4 +446,6 @@
     <string name="faq">Preguntas frecuentes</string>
     <string name="replies">Respuestas</string>
     <string name="codecs">Códecs</string>
+    <string name="mark_as_watched">Marcar como visto</string>
+    <string name="unsupported_file_format">Formato de archivo no compatible: %1$s</string>
 </resources>
