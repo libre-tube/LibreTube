@@ -12,7 +12,7 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.FALLBACK_INSTANCES_URL
 import com.github.libretube.constants.PIPED_INSTANCES_URL
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper

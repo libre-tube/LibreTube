@@ -12,7 +12,7 @@ import androidx.activity.viewModels
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.updateParameters

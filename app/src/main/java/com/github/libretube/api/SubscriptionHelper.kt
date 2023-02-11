@@ -7,7 +7,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Subscribe
 import com.github.libretube.api.obj.Subscription
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.LocalSubscription
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
