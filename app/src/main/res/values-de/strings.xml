@@ -445,4 +445,7 @@
     <string name="concurrent_downloads">Maximale Anzahl gleichzeitiger Downloads</string>
     <string name="sleep_timer">Einschlaf-Timer</string>
     <string name="skip_silence">Stille überspringen</string>
+    <string name="mark_as_watched">Als gesehen markieren</string>
+    <string name="unsupported_file_format">Nicht unterstütztes Dateiformat: %1$s</string>
+    <string name="codecs">Codecs</string>
 </resources>
