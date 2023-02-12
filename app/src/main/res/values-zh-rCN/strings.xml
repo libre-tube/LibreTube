@@ -446,4 +446,6 @@
     <string name="faq">常见问题</string>
     <string name="replies">回复</string>
     <string name="codecs">编解码器</string>
+    <string name="mark_as_watched">标记为已观看</string>
+    <string name="unsupported_file_format">不支持的文件格式：%1$s</string>
 </resources>
