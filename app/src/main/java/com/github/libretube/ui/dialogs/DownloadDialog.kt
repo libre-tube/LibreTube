@@ -190,4 +190,9 @@ class DownloadDialog(
             dismiss()
         }
     }
+
+    companion object {
+        const val AUDIO_DOWNLOAD_PREF_KEY = "audio_download_selection"
+        const val VIDEO_DOWNLOAD_PREF_KEY = "video_download_selection"
+    }
 }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +17,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.FragmentHomeBinding
 import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.extensions.awaitQuery
+import com.github.libretube.extensions.launchWhenCreatedIO
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
@@ -25,8 +25,6 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -69,24 +67,21 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun fetchHomeFeed() {
-        lifecycleScope.launchWhenCreated {
-            withContext(Dispatchers.IO) {
-                loadTrending()
-                loadBookmarks()
-            }
+        launchWhenCreatedIO {
+            loadTrending()
+            loadBookmarks()
         }
-        lifecycleScope.launchWhenCreated {
-            withContext(Dispatchers.IO) {
-                loadFeed()
-                loadPlaylists()
-            }
+        launchWhenCreatedIO {
+            loadFeed()
+            loadPlaylists()
         }
     }
 
     private suspend fun loadTrending() {
         val region = LocaleHelper.getTrendingRegion(requireContext())
-        val trending = RetrofitInstance.api.getTrending(region).take(10)
-        if (trending.isEmpty()) return
+        val trending = runCatching {
+            RetrofitInstance.api.getTrending(region).take(10)
+        }.getOrNull().takeIf { it?.isNotEmpty() == true } ?: return
 
         runOnUiThread {
             makeVisible(binding.trendingRV, binding.trendingTV)
@@ -105,9 +100,11 @@ class HomeFragment : BaseFragment() {
         ) {
             subscriptionsViewModel.videoFeed.value.orEmpty()
         } else {
-            SubscriptionHelper.getFeed()
-        }.take(20)
-        if (feed.isEmpty()) return
+            runCatching {
+                SubscriptionHelper.getFeed()
+            }.getOrElse { return }
+        }.takeIf { it.isNotEmpty() }?.take(20) ?: return
+
         runOnUiThread {
             makeVisible(binding.featuredRV, binding.featuredTV)
             binding.featuredRV.layoutManager = LinearLayoutManager(
@@ -142,8 +139,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private suspend fun loadPlaylists() {
-        val playlists = PlaylistsHelper.getPlaylists().take(20)
-        if (playlists.isEmpty()) return
+        val playlists = runCatching {
+            PlaylistsHelper.getPlaylists().take(20)
+        }.getOrNull().takeIf { it?.isNotEmpty() == true } ?: return
 
         runOnUiThread {
             makeVisible(binding.playlistsRV, binding.playlistsTV)
