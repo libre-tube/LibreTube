@@ -429,7 +429,7 @@
     <string name="forward">Avançar</string>
     <string name="pause">Pausa</string>
     <string name="alternative_pip_controls">Controlos PiP alternativos</string>
-    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e saltar controlos em PiP em vez de avançar e rebobinar</string>
+    <string name="alternative_pip_controls_summary">Mostrar apenas áudio e ignorar controlos PiP em vez de avançar e recuar</string>
     <string name="audio_player">Reprodutor de áudio</string>
     <string name="no_subtitle">Sem legendas</string>
     <string name="download_paused">Descarga em pausa</string>
@@ -442,8 +442,10 @@
     <string name="concurrent_downloads_limit_reached">Atingiu o limite máximo de descargas em simultâneo.</string>
     <string name="help">Ajuda</string>
     <string name="faq">FAQ</string>
-    <string name="sleep_timer">Temporizador de sono</string>
-    <string name="skip_silence">Ignorar o silêncio</string>
+    <string name="sleep_timer">Temporizador</string>
+    <string name="skip_silence">Ignorar silêncio</string>
     <string name="replies">Respostas</string>
-    <string name="codecs">Codecs</string>
+    <string name="codecs">Codificadores</string>
+    <string name="mark_as_watched">Marcar como visto</string>
+    <string name="unsupported_file_format">Formato não suportado: %1$s</string>
 </resources>
