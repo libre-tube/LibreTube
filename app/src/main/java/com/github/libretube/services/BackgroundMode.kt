@@ -138,7 +138,7 @@ class BackgroundMode : LifecycleService() {
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
-            if (PlayerHelper.watchPositionsEnabled) updateWatchPosition()
+            if (PlayerHelper.watchPositionsAudio) updateWatchPosition()
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             onDestroy()
@@ -210,7 +210,7 @@ class BackgroundMode : LifecycleService() {
         // seek to the previous position if available
         if (seekToPosition != 0L) {
             player?.seekTo(seekToPosition)
-        } else if (PlayerHelper.watchPositionsEnabled) {
+        } else if (PlayerHelper.watchPositionsAudio) {
             runCatching {
                 val watchPosition = awaitQuery {
                     Database.watchPositionDao().findById(videoId)

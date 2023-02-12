@@ -190,11 +190,17 @@ object PlayerHelper {
             false
         )
 
-    val watchPositionsEnabled: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.WATCH_POSITION_TOGGLE,
-            true
+    private val watchPositionsPref: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.WATCH_POSITIONS,
+            "always"
         )
+
+    val watchPositionsVideo: Boolean
+        get() = watchPositionsPref in listOf("always", "videos")
+
+    val watchPositionsAudio: Boolean
+        get() = watchPositionsPref == "always"
 
     val watchHistoryEnabled: Boolean
         get() = PreferenceHelper.getBoolean(

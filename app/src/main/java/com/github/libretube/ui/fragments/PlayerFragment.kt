@@ -628,7 +628,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!PlayerHelper.watchPositionsEnabled) return
+        if (!PlayerHelper.watchPositionsVideo) return
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         query {
             Database.watchPositionDao().insertAll(watchPosition)

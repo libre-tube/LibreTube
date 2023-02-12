@@ -404,4 +404,16 @@
         <item>avc</item>
     </string-array>
 
+    <string-array name="watchPosition">
+        <item>@string/always</item>
+        <item>@string/videos</item>
+        <item>@string/never</item>
+    </string-array>
+
+    <string-array name="watchPositionValues">
+        <item>always</item>
+        <item>videos</item>
+        <item>never</item>
+    </string-array>
+
 </resources>
