@@ -1,0 +1,9 @@
+* Multi-level comments and replies display
+* [Audio Player] Gesture controls on the video thumbnail
+* Preference to choose video codecs
+* Enter/Exit Fullscreen swipe gestures
+* Remember the last download selections
+* Option to mark videos as watched
+* Original comment as the first item in replies
+* New Autoplay switch design
+* Option to disable watch positions in audio mode
