@@ -446,4 +446,6 @@
     <string name="faq">FAQ</string>
     <string name="replies">Ответы</string>
     <string name="codecs">Кодеки</string>
+    <string name="mark_as_watched">Пометить как просмотренное</string>
+    <string name="unsupported_file_format">Неподдерживаемый формат файла: %1$s</string>
 </resources>

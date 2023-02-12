@@ -446,4 +446,6 @@
     <string name="faq">שו״ת</string>
     <string name="replies">תגובות</string>
     <string name="codecs">מפענחים</string>
+    <string name="mark_as_watched">סימון כנצפה</string>
+    <string name="unsupported_file_format">סוג הקובץ לא נתמך: %1$s</string>
 </resources>

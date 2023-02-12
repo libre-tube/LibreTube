@@ -446,4 +446,6 @@
     <string name="skip_silence">Пропускати тишу</string>
     <string name="replies">Відповіді</string>
     <string name="codecs">Кодеки</string>
+    <string name="mark_as_watched">Позначити переглянутим</string>
+    <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
 </resources>

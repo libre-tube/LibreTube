@@ -446,4 +446,6 @@
     <string name="faq">SSS</string>
     <string name="replies">Cevaplar</string>
     <string name="codecs">Kodekler</string>
+    <string name="mark_as_watched">İzlendi olarak işaretle</string>
+    <string name="unsupported_file_format">Desteklenmeyen dosya biçimi: %1$s</string>
 </resources>

@@ -446,4 +446,6 @@
     <string name="faq">Často kladené dotazy</string>
     <string name="replies">Odpovědi</string>
     <string name="codecs">Kodeky</string>
+    <string name="mark_as_watched">Označit jako zhlédnuté</string>
+    <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
 </resources>

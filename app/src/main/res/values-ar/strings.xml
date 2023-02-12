@@ -447,4 +447,5 @@
     <string name="replies">الردود</string>
     <string name="codecs">الترميز</string>
     <string name="unsupported_file_format">تنسيق الملف غير المدعوم: %1$s</string>
+    <string name="mark_as_watched">علّمه كفيديو تمت مشاهدته</string>
 </resources>
