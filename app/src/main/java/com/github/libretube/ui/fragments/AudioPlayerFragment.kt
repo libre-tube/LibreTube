@@ -138,6 +138,11 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
             ).show(childFragmentManager, null)
         }
 
+        binding.close.setOnClickListener {
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            findNavController().popBackStack()
+        }
+
         val listener = AudioPlayerThumbnailListener(requireContext(), this)
         binding.thumbnail.setOnTouchListener(listener)
 
