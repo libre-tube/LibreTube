@@ -27,12 +27,14 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.databinding.ActivityMainBinding
 import com.github.libretube.extensions.toID
+import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.NetworkHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ThemeHelper
 import com.github.libretube.helpers.WindowHelper
+import com.github.libretube.services.BackgroundMode
 import com.github.libretube.services.ClosingService
 import com.github.libretube.ui.base.BaseActivity
 import com.github.libretube.ui.dialogs.ErrorDialog
@@ -254,6 +256,12 @@ class MainActivity : BaseActivity() {
         searchView.onActionViewCollapsed()
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_audio)?.isVisible = BackgroundHelper
+            .isServiceRunning(this, BackgroundMode::class.java)
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.action_bar, menu)
@@ -353,6 +361,10 @@ class MainActivity : BaseActivity() {
             R.id.action_help -> {
                 val helpIntent = Intent(this, HelpActivity::class.java)
                 startActivity(helpIntent)
+                true
+            }
+            R.id.action_audio -> {
+                navController.navigate(R.id.audioPlayerFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)
