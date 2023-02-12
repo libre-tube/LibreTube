@@ -3,31 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:paddingHorizontal="16dp"
     android:gravity="center_vertical"
-    android:paddingVertical="8dp"
-    android:layout_height="wrap_content">
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
 
     <com.github.libretube.ui.views.DrawableTextView
-        android:id="@+id/history_text"
+        android:id="@+id/suggestion_text"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textAlignment="viewStart"
-        android:drawablePadding="15dp"
         android:layout_marginEnd="10dp"
-        app:drawableStartCompat="@drawable/ic_history"
+        android:layout_weight="1"
+        android:drawablePadding="15dp"
+        android:textAlignment="viewStart"
+        app:drawableStartCompat="@drawable/ic_search"
         tools:text="Suggestion item" />
 
     <ImageView
         android:id="@+id/delete_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="5dp"
         android:src="@drawable/ic_close"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/ic_arrow_up_left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
