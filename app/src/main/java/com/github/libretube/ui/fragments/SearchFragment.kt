@@ -20,7 +20,9 @@ import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SearchViewModel
 
 class SearchFragment : BaseFragment() {
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: SearchViewModel by activityViewModels()
 
     private var query: String? = null
@@ -35,7 +37,7 @@ class SearchFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
