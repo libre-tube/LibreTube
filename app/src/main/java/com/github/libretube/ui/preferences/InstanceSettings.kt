@@ -13,7 +13,6 @@ import com.github.libretube.constants.FALLBACK_INSTANCES_URL
 import com.github.libretube.constants.PIPED_INSTANCES_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.db.DatabaseHolder.Database
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
@@ -21,6 +20,9 @@ import com.github.libretube.ui.dialogs.CustomInstanceDialog
 import com.github.libretube.ui.dialogs.DeleteAccountDialog
 import com.github.libretube.ui.dialogs.LoginDialog
 import com.github.libretube.ui.dialogs.LogoutDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance
@@ -82,10 +84,10 @@ class InstanceSettings : BasePreferenceFragment() {
 
         val clearCustomInstances = findPreference<Preference>(PreferenceKeys.CLEAR_CUSTOM_INSTANCES)
         clearCustomInstances?.setOnPreferenceClickListener {
-            awaitQuery {
+            lifecycleScope.launch {
                 Database.customInstanceDao().deleteAll()
+                ActivityCompat.recreate(requireActivity())
             }
-            ActivityCompat.recreate(requireActivity())
             true
         }
 
@@ -116,7 +118,7 @@ class InstanceSettings : BasePreferenceFragment() {
     private fun initCustomInstances(instancePref: ListPreference) {
         val appContext = requireContext().applicationContext
         lifecycleScope.launchWhenCreated {
-            val customInstances = awaitQuery {
+            val customInstances = withContext(Dispatchers.IO) {
                 Database.customInstanceDao().getAll()
             }
 
