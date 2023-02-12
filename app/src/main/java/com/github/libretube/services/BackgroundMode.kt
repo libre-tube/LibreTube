@@ -112,6 +112,7 @@ class BackgroundMode : LifecycleService() {
             val notification: Notification = Notification.Builder(this, BACKGROUND_CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.playingOnBackground))
+                .setSmallIcon(R.drawable.ic_launcher_lockscreen)
                 .build()
 
             startForeground(PLAYER_NOTIFICATION_ID, notification)

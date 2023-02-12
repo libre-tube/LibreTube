@@ -26,6 +26,7 @@ import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.video.VideoSize
+import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 object PlayerHelper {
@@ -485,10 +486,18 @@ object PlayerHelper {
      * @param skipManually Whether the event gets handled by the function caller
      * @return If segment found and [skipManually] is true, the end position of the segment in ms, otherwise null
      */
-    fun ExoPlayer.checkForSegments(context: Context, segments: List<Segment>, skipManually: Boolean = false): Long? {
-        segments.forEach { segment ->
+    fun ExoPlayer.checkForSegments(
+        context: Context,
+        segments: List<Segment>,
+        skipManually: Boolean = false
+    ): Long? {
+        for (segment in segments) {
             val segmentStart = (segment.segment[0] * 1000f).toLong()
             val segmentEnd = (segment.segment[1] * 1000f).toLong()
+
+            // avoid seeking to the same segment multiple times, e.g. when the SB segment is at the end of the video
+            if ((duration - currentPosition).absoluteValue < 500) continue
+
             if (currentPosition in segmentStart until segmentEnd) {
                 if (!skipManually) {
                     if (sponsorBlockNotifications) {
