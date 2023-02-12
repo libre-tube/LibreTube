@@ -9,10 +9,12 @@ import android.content.pm.ActivityInfo
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.view.accessibility.CaptioningManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
+import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
@@ -214,12 +216,6 @@ object PlayerHelper {
             true
         )
 
-    val videoFormatPreference: String
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.PLAYER_VIDEO_FORMAT,
-            "webm"
-        )
-
     private val bufferingGoal: Int
         get() = PreferenceHelper.getString(
             PreferenceKeys.BUFFERING_GOAL,
@@ -232,7 +228,7 @@ object PlayerHelper {
             true
         )
 
-    val sponsorBlockNotifications: Boolean
+    private val sponsorBlockNotifications: Boolean
         get() = PreferenceHelper.getBoolean(
             "sb_notifications_key",
             true
@@ -480,5 +476,33 @@ object PlayerHelper {
             1.0f
         )
         return this
+    }
+
+    /**
+     * Check for SponsorBlock segments matching the current player position
+     * @param context A main dispatcher context
+     * @param segments List of the SponsorBlock segments
+     * @param skipManually Whether the event gets handled by the function caller
+     * @return If segment found and [skipManually] is true, the end position of the segment in ms, otherwise null
+     */
+    fun ExoPlayer.checkForSegments(context: Context, segments: List<Segment>, skipManually: Boolean = false): Long? {
+        segments.forEach { segment ->
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000f).toLong()
+            if (currentPosition in segmentStart until segmentEnd) {
+                if (!skipManually) {
+                    if (sponsorBlockNotifications) {
+                        runCatching {
+                            Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                    seekTo(segmentEnd)
+                } else {
+                    return segmentEnd
+                }
+            }
+        }
+        return null
     }
 }

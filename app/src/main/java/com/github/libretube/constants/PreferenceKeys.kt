@@ -65,7 +65,6 @@ object PreferenceKeys {
     const val SYSTEM_CAPTION_STYLE = "system_caption_style"
     const val CAPTION_SETTINGS = "caption_settings"
     const val SEEK_INCREMENT = "seek_increment"
-    const val PLAYER_VIDEO_FORMAT = "player_video_format"
     const val DEFAULT_RESOLUTION = "default_res"
     const val DEFAULT_RESOLUTION_MOBILE = "default_res_mobile"
     const val BUFFERING_GOAL = "buffering_goal"
