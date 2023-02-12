@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.view.size
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -166,26 +165,69 @@ class DownloadDialog(
         }
     }
 
+    /**
+     * Save the download selection to the preferences
+     */
     private fun saveSelections(
         videoStream: PipedStream?,
         audioStream: PipedStream?,
         subtitle: Subtitle?
     ) {
         PreferenceHelper.putString(SUBTITLE_LANGUAGE, subtitle?.code.orEmpty())
+        PreferenceHelper.putString(VIDEO_DOWNLOAD_FORMAT, videoStream?.format.orEmpty())
+        PreferenceHelper.putString(VIDEO_DOWNLOAD_QUALITY, videoStream?.quality.orEmpty())
+        PreferenceHelper.putString(AUDIO_DOWNLOAD_FORMAT, audioStream?.format.orEmpty())
+        PreferenceHelper.putString(AUDIO_DOWNLOAD_QUALITY, audioStream?.quality.orEmpty())
     }
 
+    private fun getSel(key: String) = PreferenceHelper.getString(key, "")
+
+    /**
+     * Restore the download selections from a previous session
+     */
     private fun restorePreviousSelections(
         videoStreams: List<PipedStream>,
-        audioStream: List<PipedStream>,
+        audioStreams: List<PipedStream>,
         subtitles: List<Subtitle>
     ) {
-        if (binding.videoSpinner.size >= 1) binding.videoSpinner.setSelection(1)
-        if (binding.audioSpinner.size >= 1) binding.audioSpinner.setSelection(1)
-
-        val lastSubtitleSelection = PreferenceHelper.getString(SUBTITLE_LANGUAGE, "")
-        subtitles.indexOfFirst { it.code == lastSubtitleSelection }.takeIf { it > 0 }?.let {
-            binding.subtitleSpinner.setSelection(it)
+        getStreamSelection(
+            videoStreams,
+            getSel(VIDEO_DOWNLOAD_QUALITY),
+            getSel(VIDEO_DOWNLOAD_FORMAT)
+        )?.let {
+            binding.videoSpinner.setSelection(it + 1)
         }
+        getStreamSelection(
+            audioStreams,
+            getSel(AUDIO_DOWNLOAD_QUALITY),
+            getSel(AUDIO_DOWNLOAD_FORMAT)
+        )?.let {
+            binding.audioSpinner.setSelection(it + 1)
+        }
+
+        subtitles.indexOfFirst { it.code == getSel(SUBTITLE_LANGUAGE) }.takeIf { it != -1 }?.let {
+            binding.subtitleSpinner.setSelection(it + 1)
+        }
+    }
+
+    private fun getStreamSelection(streams: List<PipedStream>, quality: String, format: String): Int? {
+        if (quality.isBlank()) return null
+
+        streams.forEachIndexed { index, pipedStream ->
+            if (quality == pipedStream.quality && format == pipedStream.format) return index
+        }
+
+        streams.forEachIndexed { index, pipedStream ->
+            if (quality == pipedStream.quality) return index
+        }
+
+        val qualityInt = quality.getWhileDigit() ?: return null
+
+        streams.forEachIndexed { index, pipedStream ->
+            if ((pipedStream.quality.getWhileDigit() ?: Int.MAX_VALUE) < qualityInt) return index
+        }
+
+        return null
     }
 
     companion object {
