@@ -46,7 +46,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
@@ -73,6 +72,7 @@ import com.github.libretube.helpers.DashHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
@@ -182,7 +182,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * SponsorBlock
      */
-    private lateinit var segmentData: SegmentData
+    private var segments = listOf<Segment>()
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     val handler = Handler(Looper.getMainLooper())
@@ -642,31 +642,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (!sponsorBlockEnabled) return
 
-        if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) return
+        if (segments.isEmpty()) return
 
-        val currentPosition = exoPlayer.currentPosition
-        segmentData.segments.forEach { segment: Segment ->
-            val segmentStart = (segment.segment[0] * 1000f).toLong()
-            val segmentEnd = (segment.segment[1] * 1000f).toLong()
-
-            // show the button to manually skip the segment
-            if (currentPosition in segmentStart until segmentEnd) {
-                if (PlayerHelper.skipSegmentsManually) {
-                    binding.sbSkipBtn.visibility = View.VISIBLE
-                    binding.sbSkipBtn.setOnClickListener {
-                        exoPlayer.seekTo(segmentEnd)
-                    }
-                    return
-                }
-
-                if (PlayerHelper.sponsorBlockNotifications) {
-                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
-                }
-
-                // skip the segment automatically
+        exoPlayer.checkForSegments(requireContext(), segments, PlayerHelper.skipSegmentsManually)?.let { segmentEnd ->
+            binding.sbSkipBtn.visibility = View.VISIBLE
+            binding.sbSkipBtn.setOnClickListener {
                 exoPlayer.seekTo(segmentEnd)
-                return
             }
+            return
         }
 
         if (PlayerHelper.skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
@@ -764,13 +747,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
                 if (categories.isEmpty()) return@runCatching
-                segmentData =
+                segments =
                     RetrofitInstance.api.getSegments(
                         videoId!!,
                         JsonHelper.json.encodeToString(categories)
-                    )
-                if (segmentData.segments.isEmpty()) return@runCatching
-                playerBinding.exoProgress.setSegments(segmentData.segments)
+                    ).segments
+                if (segments.isEmpty()) return@runCatching
+                playerBinding.exoProgress.setSegments(segments)
                 runOnUiThread {
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
@@ -1103,12 +1086,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.duration.text = DateUtils.formatElapsedTime(
             exoPlayer.duration.div(1000)
         )
-        if (!this::segmentData.isInitialized || this.segmentData.segments.isEmpty()) {
-            return
-        }
+        if (segments.isEmpty()) return
 
         val durationWithSb = DateUtils.formatElapsedTime(
-            exoPlayer.duration.div(1000) - segmentData.segments.sumOf {
+            exoPlayer.duration.div(1000) - segments.sumOf {
                 it.segment[1] - it.segment[0]
             }.toInt()
         )
