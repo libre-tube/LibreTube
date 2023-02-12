@@ -51,7 +51,7 @@ class VideoOptionsBottomSheet(
         }
 
         // show the mark as watched option if watch positions are enabled
-        if (PlayerHelper.watchPositionsEnabled) {
+        if (PlayerHelper.watchPositionsVideo) {
             optionsList += getString(R.string.mark_as_watched)
         }
 

@@ -59,7 +59,7 @@ object PreferenceKeys {
     const val PLAYBACK_SPEED = "playback_speed"
     const val FULLSCREEN_ORIENTATION = "fullscreen_orientation"
     const val PAUSE_ON_SCREEN_OFF = "pause_screen_off"
-    const val WATCH_POSITION_TOGGLE = "watch_position_toggle"
+    const val WATCH_POSITIONS = "watch_positions"
     const val WATCH_HISTORY_TOGGLE = "watch_history_toggle"
     const val SEARCH_HISTORY_TOGGLE = "search_history_toggle"
     const val SYSTEM_CAPTION_STYLE = "system_caption_style"

@@ -45,10 +45,12 @@
 
     <PreferenceCategory app:title="@string/watch_positions_title">
 
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
+        <ListPreference
+            android:defaultValue="always"
+            android:entries="@array/watchPosition"
+            android:entryValues="@array/watchPositionValues"
             android:icon="@drawable/ic_play_filled"
-            app:key="watch_position_toggle"
+            app:key="watch_positions"
             app:summary="@string/watch_positions_summary"
             app:title="@string/watch_positions" />
 
