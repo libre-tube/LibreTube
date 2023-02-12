@@ -2,7 +2,7 @@ package com.github.libretube.db
 
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.SearchHistoryItem
 import com.github.libretube.db.obj.WatchHistoryItem
 import com.github.libretube.extensions.query

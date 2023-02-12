@@ -19,7 +19,7 @@ import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType

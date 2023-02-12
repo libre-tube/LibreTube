@@ -10,7 +10,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.PUSH_CHANNEL_ID
-import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NotificationHelper
 import com.github.libretube.helpers.PreferenceHelper
@@ -32,11 +31,6 @@ class LibreTubeApp : Application() {
          * Initialize the [PreferenceHelper]
          */
         PreferenceHelper.initialize(applicationContext)
-
-        /**
-         * Initialize the [DatabaseHolder]
-         */
-        DatabaseHolder().initializeDatabase(this)
 
         /**
          * Bypassing fileUriExposedException, see https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed

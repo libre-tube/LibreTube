@@ -7,7 +7,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogCustomInstanceBinding
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.CustomInstance
 import com.github.libretube.extensions.query
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

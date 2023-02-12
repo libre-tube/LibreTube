@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.databinding.FragmentWatchHistoryBinding
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.ProxyHelper
