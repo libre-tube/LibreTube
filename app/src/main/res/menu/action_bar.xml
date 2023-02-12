@@ -25,4 +25,10 @@
         android:title="@string/about"
         app:showAsAction="never" />
 
+    <item
+        android:visible="false"
+        android:id="@+id/action_audio"
+        android:title="@string/audio_player"
+        app:showAsAction="never" />
+
 </menu>
