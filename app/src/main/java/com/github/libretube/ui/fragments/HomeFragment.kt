@@ -25,6 +25,8 @@ import com.github.libretube.ui.adapters.PlaylistsAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
 import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -94,12 +96,13 @@ class HomeFragment : BaseFragment() {
     }
 
     private suspend fun loadFeed() {
+        val savedFeed = withContext(Dispatchers.Main) {
+            subscriptionsViewModel.videoFeed.value
+        }
         val feed = if (
             PreferenceHelper.getBoolean(PreferenceKeys.SAVE_FEED, false) &&
-            !subscriptionsViewModel.videoFeed.value.isNullOrEmpty()
-        ) {
-            subscriptionsViewModel.videoFeed.value.orEmpty()
-        } else {
+            !savedFeed.isNullOrEmpty()
+        ) { savedFeed } else {
             runCatching {
                 SubscriptionHelper.getFeed()
             }.getOrElse { return }
@@ -122,8 +125,8 @@ class HomeFragment : BaseFragment() {
     private fun loadBookmarks() {
         val bookmarkedPlaylists = awaitQuery {
             DatabaseHolder.Database.playlistBookmarkDao().getAll()
-        }
-        if (bookmarkedPlaylists.isEmpty()) return
+        }.takeIf { it.isNotEmpty() } ?: return
+
         runOnUiThread {
             makeVisible(binding.bookmarksTV, binding.bookmarksRV)
             binding.bookmarksRV.layoutManager = LinearLayoutManager(
