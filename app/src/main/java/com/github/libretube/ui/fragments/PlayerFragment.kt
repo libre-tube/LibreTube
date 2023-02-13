@@ -21,9 +21,7 @@ import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Base64
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -34,11 +32,13 @@ import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.JsonHelper
@@ -50,10 +50,7 @@ import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.databinding.DoubleTapOverlayBinding
-import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
-import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.db.DatabaseHelper
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
@@ -82,7 +79,6 @@ import com.github.libretube.services.DownloadService
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.ChaptersAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.AddToPlaylistDialog
 import com.github.libretube.ui.dialogs.DownloadDialog
 import com.github.libretube.ui.dialogs.ShareDialog
@@ -110,7 +106,6 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.cronet.CronetDataSource
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -126,12 +121,16 @@ import kotlinx.datetime.LocalDate
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
 
-class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
+class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
+    val binding by viewBinding(FragmentPlayerBinding::bind)
+    private val playerBinding by viewBinding { it.binding.player.binding }
+    private val doubleTapOverlayBinding by viewBinding {
+        it.binding.doubleTapOverlay.binding
+    }
+    private val playerGestureControlsViewBinding by viewBinding {
+        it.binding.playerGestureControlsView.binding
+    }
 
-    lateinit var binding: FragmentPlayerBinding
-    private lateinit var playerBinding: ExoStyledPlayerControlViewBinding
-    private lateinit var doubleTapOverlayBinding: DoubleTapOverlayBinding
-    private lateinit var playerGestureControlsViewBinding: PlayerGestureControlsViewBinding
     private val viewModel: PlayerViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
 
@@ -171,7 +170,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * for the player view
      */
-    private lateinit var exoPlayerView: StyledPlayerView
     private var subtitles = mutableListOf<SubtitleConfiguration>()
 
     /**
@@ -185,7 +183,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var segments = listOf<Segment>()
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
-    val handler = Handler(Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
     private val mainActivity get() = activity as MainActivity
 
     /**
@@ -240,21 +238,6 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         )
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentPlayerBinding.inflate(layoutInflater, container, false)
-        exoPlayerView = binding.player
-        playerBinding = binding.player.binding
-        doubleTapOverlayBinding = binding.doubleTapOverlay.binding
-        playerGestureControlsViewBinding = binding.playerGestureControlsView.binding
-
-        // Inflate the layout for this fragment
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.hideKeyboard(view)
@@ -279,8 +262,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
      * somehow the bottom bar is invisible on low screen resolutions, this fixes it
      */
     private fun showBottomBar() {
-        if (this::playerBinding.isInitialized && !binding.player.isPlayerLocked) {
-            playerBinding.bottomBar.visibility = View.VISIBLE
+        if (isAdded && binding.player.isPlayerLocked) {
+            binding.player.binding.bottomBar.isVisible = true
         }
         handler.postDelayed(this::showBottomBar, 100)
     }
@@ -305,8 +288,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 progress: Float
             ) {
                 mainMotionLayout.progress = abs(progress)
-                exoPlayerView.hideController()
-                exoPlayerView.useController = false
+                binding.player.hideController()
+                binding.player.useController = false
                 eId = endId
                 sId = startId
             }
@@ -316,14 +299,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     viewModel.isMiniPlayerVisible.value = true
                     // disable captions
                     updateCaptionsLanguage(null)
-                    exoPlayerView.useController = false
+                    binding.player.useController = false
                     mainMotionLayout.progress = 1F
                     (activity as MainActivity).requestOrientationChange()
                 } else if (currentId == sId) {
                     viewModel.isMiniPlayerVisible.value = false
                     // re-enable captions
                     updateCaptionsLanguage(captionLanguage)
-                    exoPlayerView.useController = true
+                    binding.player.useController = true
                     mainMotionLayout.progress = 0F
                     changeOrientationMode()
                 }
@@ -340,7 +323,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (PlayerHelper.swipeGestureEnabled) {
             binding.playerMotionLayout.addSwipeUpListener {
-                exoPlayerView.hideController()
+                binding.player.hideController()
                 setFullscreen()
             }
         }
@@ -403,7 +386,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             if (PlayerHelper.autoRotationEnabled) View.INVISIBLE else View.VISIBLE
         playerBinding.fullscreen.setOnClickListener {
             // hide player controller
-            exoPlayerView.hideController()
+            binding.player.hideController()
             if (viewModel.isFullscreen.value == false) {
                 // go to fullscreen mode
                 setFullscreen()
@@ -717,7 +700,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 if (binding.playerMotionLayout.progress != 1.0f) {
                     // show controllers when not in picture in picture mode
                     if (!(usePiP() && activity?.isInPictureInPictureMode!!)) {
-                        exoPlayerView.useController = true
+                        binding.player.useController = true
                     }
                 }
                 // show the player notification
@@ -754,7 +737,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                     ).segments
                 if (segments.isEmpty()) return@runCatching
                 playerBinding.exoProgress.setSegments(segments)
-                runOnUiThread {
+                withContext(Dispatchers.Main) {
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
                 }
@@ -829,7 +812,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     }
 
     private fun prepareExoPlayerView() {
-        exoPlayerView.apply {
+        binding.player.apply {
             useController = false
             player = exoPlayer
         }
@@ -1184,7 +1167,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (chapters.isEmpty()) return
 
         // call the function again in 100ms
-        exoPlayerView.postDelayed(this::setCurrentChapterName, 100)
+        binding.player.postDelayed(this::setCurrentChapterName, 100)
 
         val chapterIndex = getCurrentChapterIndex() ?: return
         val chapterName = chapters[chapterIndex].title?.trim()
@@ -1414,8 +1397,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode)
         if (isInPictureInPictureMode) {
             // hide and disable exoPlayer controls
-            exoPlayerView.hideController()
-            exoPlayerView.useController = false
+            binding.player.hideController()
+            binding.player.useController = false
 
             // set portrait mode
             unsetFullscreen()
@@ -1440,7 +1423,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             if (lifecycle.currentState == Lifecycle.State.CREATED) exoPlayer.pause()
 
             // enable exoPlayer controls again
-            exoPlayerView.useController = true
+            binding.player.useController = true
 
             with(binding.playerMotionLayout) {
                 getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)

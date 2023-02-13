@@ -20,6 +20,7 @@ room = "2.5.0"
 kotlinxSerialization = "1.4.1"
 kotlinxDatetime = "0.4.0"
 kotlinxRetrofit = "0.8.0"
+viewBindingDelegate = "1.5.8"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -51,3 +52,4 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-retrofit = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "kotlinxRetrofit" }
+viewBindingPropertyDelegate = { group = "com.github.kirich1409", name = "viewbindingpropertydelegate-noreflection", version.ref = "viewBindingDelegate" }
