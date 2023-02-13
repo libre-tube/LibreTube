@@ -2,15 +2,16 @@ package com.github.libretube.services
 
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.SparseBooleanArray
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.util.set
 import androidx.core.util.valueIterator
-import androidx.core.app.ServiceCompat
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
@@ -18,7 +19,7 @@ import com.github.libretube.compat.PendingIntentCompat
 import com.github.libretube.constants.DOWNLOAD_CHANNEL_ID
 import com.github.libretube.constants.DOWNLOAD_PROGRESS_NOTIFICATION_ID
 import com.github.libretube.constants.IntentData
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.Download
 import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
@@ -42,7 +43,6 @@ import java.net.SocketTimeoutException
 import java.net.URL
 import java.util.concurrent.Executors
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -59,12 +59,10 @@ import okio.source
 /**
  * Download service with custom implementation of downloading using [HttpURLConnection].
  */
-class DownloadService : Service() {
-
+class DownloadService : LifecycleService() {
     private val binder = LocalBinder()
     private val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
-    private val jobMain = SupervisorJob()
-    private val scope = CoroutineScope(dispatcher + jobMain)
+    private val coroutineContext = dispatcher + SupervisorJob()
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var summaryNotificationBuilder: NotificationCompat.Builder
@@ -81,6 +79,7 @@ class DownloadService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        super.onStartCommand(intent, flags, startId)
         when (intent?.action) {
             ACTION_DOWNLOAD_RESUME -> resume(intent.getIntExtra("id", -1))
             ACTION_DOWNLOAD_PAUSE -> pause(intent.getIntExtra("id", -1))
@@ -94,9 +93,11 @@ class DownloadService : Service() {
         val audioQuality = intent.getStringExtra(IntentData.audioQuality)
         val subtitleCode = intent.getStringExtra(IntentData.subtitleCode)
 
-        scope.launch {
+        lifecycleScope.launch(coroutineContext) {
             try {
-                val streams = RetrofitInstance.api.getStreams(videoId)
+                val streams = withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getStreams(videoId)
+                }
 
                 val thumbnailTargetFile = getDownloadFile(DownloadHelper.THUMBNAIL_DIR, fileName)
 
@@ -153,7 +154,7 @@ class DownloadService : Service() {
             Database.downloadDao().insertDownloadItem(item)
         }.toInt()
 
-        scope.launch {
+        lifecycleScope.launch(coroutineContext) {
             downloadFile(item)
         }
     }
@@ -269,7 +270,8 @@ class DownloadService : Service() {
                 sourceByte.close()
                 con.disconnect()
             }
-        } catch (_: Exception) { }
+        } catch (_: Exception) {
+        }
 
         val completed = when {
             totalRead < item.downloadSize -> {
@@ -297,7 +299,7 @@ class DownloadService : Service() {
         val downloadCount = downloadQueue.valueIterator().asSequence().count { it }
         if (downloadCount >= DownloadHelper.getMaxConcurrentDownloads()) {
             toastFromMainThread(getString(R.string.concurrent_downloads_limit_reached))
-            scope.launch {
+            lifecycleScope.launch(coroutineContext) {
                 _downloadFlow.emit(id to DownloadStatus.Paused)
             }
             return
@@ -306,7 +308,7 @@ class DownloadService : Service() {
         val downloadItem = awaitQuery {
             Database.downloadDao().findDownloadItemById(id)
         }
-        scope.launch {
+        lifecycleScope.launch(coroutineContext) {
             downloadFile(downloadItem)
         }
     }
@@ -468,9 +470,9 @@ class DownloadService : Service() {
         super.onDestroy()
     }
 
-    override fun onBind(intent: Intent?): IBinder {
-        val ids = intent?.getIntArrayExtra("ids")
-        ids?.forEach { id -> resume(id) }
+    override fun onBind(intent: Intent): IBinder {
+        super.onBind(intent)
+        intent.getIntArrayExtra("ids")?.forEach { resume(it) }
         return binder
     }
 

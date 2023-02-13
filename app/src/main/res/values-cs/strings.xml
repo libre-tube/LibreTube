@@ -373,7 +373,6 @@
     <string name="alternative_player_layout">Alternativní rozložení přehrávače</string>
     <string name="audio_track">Zvuková stopa</string>
     <string name="default_audio_track">Výchozí</string>
-    <string name="unsupported_file_format">Nepodporovaný formát souboru!</string>
     <string name="auto_quality">Auto</string>
     <string name="hls_instead_of_dash">Použít HLS</string>
     <string name="hls_instead_of_dash_summary">Použít HLS místo DASH (bude pomalejší, nedoporučuje se)</string>
@@ -446,4 +445,7 @@
     <string name="help">Nápověda</string>
     <string name="faq">Často kladené dotazy</string>
     <string name="replies">Odpovědi</string>
+    <string name="codecs">Kodeky</string>
+    <string name="mark_as_watched">Označit jako zhlédnuté</string>
+    <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
 </resources>

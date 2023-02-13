@@ -14,8 +14,8 @@ android {
         applicationId 'com.github.libretube'
         minSdk 21
         targetSdk 33
-        versionCode 28
-        versionName '0.11.1'
+        versionCode 29
+        versionName '0.12.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         resValue "string", "app_name", "LibreTube"
 
@@ -92,6 +92,7 @@ dependencies {
     implementation libs.lifecycle.viewmodel
     implementation libs.lifecycle.runtime
     implementation libs.lifecycle.livedata
+    implementation libs.lifecycle.service
 
     /* Testing */
     androidTestImplementation libs.androidx.test.junit

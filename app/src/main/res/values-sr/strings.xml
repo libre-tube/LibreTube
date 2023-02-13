@@ -373,7 +373,6 @@
     <string name="livestreams">Стримови уживо</string>
     <string name="alternative_videos_layout">Алтернативни изглед видео записа</string>
     <string name="defaultIconLight">Подразумевано светло</string>
-    <string name="unsupported_file_format">Неподржан формат датотеке!</string>
     <string name="hls_instead_of_dash">Користи HLS</string>
     <string name="hls_instead_of_dash_summary">Користи HLS уместо DASH (спорије, не препоручује се)</string>
     <string name="auto_quality">Аутоматски</string>

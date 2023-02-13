@@ -9,10 +9,12 @@ import android.content.pm.ActivityInfo
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.view.accessibility.CaptioningManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import com.github.libretube.R
 import com.github.libretube.api.obj.PipedStream
+import com.github.libretube.api.obj.Segment
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.enums.AudioQuality
 import com.github.libretube.enums.PlayerEvent
@@ -24,6 +26,7 @@ import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.video.VideoSize
+import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 object PlayerHelper {
@@ -190,11 +193,17 @@ object PlayerHelper {
             false
         )
 
-    val watchPositionsEnabled: Boolean
-        get() = PreferenceHelper.getBoolean(
-            PreferenceKeys.WATCH_POSITION_TOGGLE,
-            true
+    private val watchPositionsPref: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.WATCH_POSITIONS,
+            "always"
         )
+
+    val watchPositionsVideo: Boolean
+        get() = watchPositionsPref in listOf("always", "videos")
+
+    val watchPositionsAudio: Boolean
+        get() = watchPositionsPref == "always"
 
     val watchHistoryEnabled: Boolean
         get() = PreferenceHelper.getBoolean(
@@ -206,12 +215,6 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.SYSTEM_CAPTION_STYLE,
             true
-        )
-
-    val videoFormatPreference: String
-        get() = PreferenceHelper.getString(
-            PreferenceKeys.PLAYER_VIDEO_FORMAT,
-            "webm"
         )
 
     private val bufferingGoal: Int
@@ -226,7 +229,7 @@ object PlayerHelper {
             true
         )
 
-    val sponsorBlockNotifications: Boolean
+    private val sponsorBlockNotifications: Boolean
         get() = PreferenceHelper.getBoolean(
             "sb_notifications_key",
             true
@@ -279,7 +282,7 @@ object PlayerHelper {
             .roundToInt()
             .toLong() * 1000
 
-    val playbackSpeed: String
+    private val playbackSpeed: String
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
@@ -343,6 +346,12 @@ object PlayerHelper {
         get() = PreferenceHelper.getBoolean(
             PreferenceKeys.SKIP_SILENCE,
             false
+        )
+
+    val enabledVideoCodecs: String
+        get() = PreferenceHelper.getString(
+            PreferenceKeys.ENABLED_VIDEO_CODECS,
+            "all"
         )
 
     fun getDefaultResolution(context: Context): String {
@@ -468,5 +477,41 @@ object PlayerHelper {
             1.0f
         )
         return this
+    }
+
+    /**
+     * Check for SponsorBlock segments matching the current player position
+     * @param context A main dispatcher context
+     * @param segments List of the SponsorBlock segments
+     * @param skipManually Whether the event gets handled by the function caller
+     * @return If segment found and [skipManually] is true, the end position of the segment in ms, otherwise null
+     */
+    fun ExoPlayer.checkForSegments(
+        context: Context,
+        segments: List<Segment>,
+        skipManually: Boolean = false
+    ): Long? {
+        for (segment in segments) {
+            val segmentStart = (segment.segment[0] * 1000f).toLong()
+            val segmentEnd = (segment.segment[1] * 1000f).toLong()
+
+            // avoid seeking to the same segment multiple times, e.g. when the SB segment is at the end of the video
+            if ((duration - currentPosition).absoluteValue < 500) continue
+
+            if (currentPosition in segmentStart until segmentEnd) {
+                if (!skipManually) {
+                    if (sponsorBlockNotifications) {
+                        runCatching {
+                            Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                    seekTo(segmentEnd)
+                } else {
+                    return segmentEnd
+                }
+            }
+        }
+        return null
     }
 }

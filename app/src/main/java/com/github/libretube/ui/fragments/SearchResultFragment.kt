@@ -19,13 +19,14 @@ import com.github.libretube.extensions.hideKeyboard
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.base.BaseFragment
+import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.IOException
 import retrofit2.HttpException
 
 class SearchResultFragment : BaseFragment() {
-    private lateinit var binding: FragmentSearchResultBinding
+    private var _binding: FragmentSearchResultBinding? = null
+    private val binding get() = _binding!!
 
     private var nextPage: String? = null
     private var query: String = ""
@@ -43,7 +44,7 @@ class SearchResultFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchResultBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSearchResultBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -75,12 +76,18 @@ class SearchResultFragment : BaseFragment() {
 
         fetchSearch()
 
-        binding.searchRecycler.viewTreeObserver
-            .addOnScrollChangedListener {
-                if (!binding.searchRecycler.canScrollVertically(1)) {
-                    if (nextPage != null) fetchNextSearchItems()
-                }
+        binding.searchRecycler.viewTreeObserver.addOnScrollChangedListener {
+            if (_binding?.searchRecycler?.canScrollVertically(1) == false &&
+                nextPage != null
+            ) {
+                fetchNextSearchItems()
             }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun fetchSearch() {

@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import androidx.core.view.updateLayoutParams
@@ -45,6 +46,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.CaptionStyleCompat
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.ui.SubtitleView
+import com.google.android.exoplayer2.ui.TimeBar
 import com.google.android.exoplayer2.util.RepeatModeUtil
 
 @SuppressLint("ClickableViewAccessibility")
@@ -181,6 +183,19 @@ internal class CustomExoPlayerView(
                     }
                 }
             }
+        })
+
+        // prevent the controls from disappearing while scrubbing the time bar
+        binding.exoProgress.addListener(object : TimeBar.OnScrubListener {
+            override fun onScrubStart(timeBar: TimeBar, position: Long) {
+                cancelHideControllerTask()
+            }
+
+            override fun onScrubMove(timeBar: TimeBar, position: Long) {
+                cancelHideControllerTask()
+            }
+
+            override fun onScrubStop(timeBar: TimeBar, position: Long, canceled: Boolean) {}
         })
 
         playerViewModel?.isFullscreen?.observe(viewLifecycleOwner!!) { isFullscreen ->
@@ -654,6 +669,18 @@ internal class CustomExoPlayerView(
 
         if (isControllerFullyVisible) hideController()
         updateVolume(distanceY)
+    }
+
+    override fun onSwipeCenterScreen(distanceY: Float) {
+        if (!PlayerHelper.swipeGestureEnabled) return
+
+        if (isControllerFullyVisible) hideController()
+
+        if (distanceY < 0) {
+            playerGestureController.isMoving = false
+            (context as? AppCompatActivity)?.onBackPressedDispatcher?.onBackPressed()
+            playerViewModel?.isFullscreen?.value = false
+        }
     }
 
     override fun onSwipeEnd() {

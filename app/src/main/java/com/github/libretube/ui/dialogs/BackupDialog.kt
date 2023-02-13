@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem

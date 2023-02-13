@@ -1,13 +1,15 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.github.libretube.R
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder.Companion.Database
-import com.github.libretube.extensions.query
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.ui.base.BasePreferenceFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HistorySettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.history
@@ -51,14 +53,16 @@ class HistorySettings : BasePreferenceFragment() {
         }
     }
 
-    private fun showClearDialog(title: Int, action: () -> Unit) {
+    private fun showClearDialog(title: Int, action: suspend () -> Unit) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(title)
             .setMessage(R.string.irreversible)
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.okay) { _, _ ->
                 // clear the selected preference preferences
-                query(action)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    action()
+                }
             }
             .show()
     }

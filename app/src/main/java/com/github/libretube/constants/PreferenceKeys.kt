@@ -59,13 +59,12 @@ object PreferenceKeys {
     const val PLAYBACK_SPEED = "playback_speed"
     const val FULLSCREEN_ORIENTATION = "fullscreen_orientation"
     const val PAUSE_ON_SCREEN_OFF = "pause_screen_off"
-    const val WATCH_POSITION_TOGGLE = "watch_position_toggle"
+    const val WATCH_POSITIONS = "watch_positions"
     const val WATCH_HISTORY_TOGGLE = "watch_history_toggle"
     const val SEARCH_HISTORY_TOGGLE = "search_history_toggle"
     const val SYSTEM_CAPTION_STYLE = "system_caption_style"
     const val CAPTION_SETTINGS = "caption_settings"
     const val SEEK_INCREMENT = "seek_increment"
-    const val PLAYER_VIDEO_FORMAT = "player_video_format"
     const val DEFAULT_RESOLUTION = "default_res"
     const val DEFAULT_RESOLUTION_MOBILE = "default_res_mobile"
     const val BUFFERING_GOAL = "buffering_goal"
@@ -89,6 +88,7 @@ object PreferenceKeys {
     const val PAUSE_ON_QUIT = "pause_on_quit"
     const val ALTERNATIVE_PIP_CONTROLS = "alternative_pip_controls"
     const val SKIP_SILENCE = "skip_silence"
+    const val ENABLED_VIDEO_CODECS = "video_codecs"
 
     /**
      * Background mode
@@ -112,8 +112,8 @@ object PreferenceKeys {
     const val LAST_STREAM_VIDEO_ID = "last_stream_video_id"
     const val LAST_WATCHED_FEED_TIME = "last_watched_feed_time"
     const val HIDE_WATCHED_FROM_FEED = "hide_watched_from_feed"
-    const val SELECTED_FEED_FILTER = "selected_feed_filer"
-    const val FEED_SORT_ORDER = "feed_sort_oder"
+    const val SELECTED_FEED_FILTER = "selected_filer_feed"
+    const val FEED_SORT_ORDER = "sort_oder_feed"
 
     /**
      * Advanced

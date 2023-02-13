@@ -3,7 +3,6 @@ package com.github.libretube.services
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.Build
@@ -13,16 +12,17 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ServiceCompat
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.BACKGROUND_CHANNEL_ID
 import com.github.libretube.constants.IntentData
 import com.github.libretube.constants.PLAYER_NOTIFICATION_ID
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.awaitQuery
@@ -30,6 +30,7 @@ import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
 import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.util.NowPlayingNotification
 import com.github.libretube.util.PlayingQueue
@@ -37,15 +38,15 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
 /**
  * Loads the selected videos audio in background mode with a notification area.
  */
-class BackgroundMode : Service() {
+class BackgroundMode : LifecycleService() {
     /**
      * VideoId of the video
      */
@@ -71,7 +72,7 @@ class BackgroundMode : Service() {
     /**
      * SponsorBlock Segment data
      */
-    private var segmentData: SegmentData? = null
+    private var segments: List<Segment> = listOf()
 
     /**
      * [Notification] for the player
@@ -111,6 +112,7 @@ class BackgroundMode : Service() {
             val notification: Notification = Notification.Builder(this, BACKGROUND_CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.playingOnBackground))
+                .setSmallIcon(R.drawable.ic_launcher_lockscreen)
                 .build()
 
             startForeground(PLAYER_NOTIFICATION_ID, notification)
@@ -138,7 +140,7 @@ class BackgroundMode : Service() {
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
-            if (PlayerHelper.watchPositionsEnabled) updateWatchPosition()
+            if (PlayerHelper.watchPositionsAudio) updateWatchPosition()
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             onDestroy()
@@ -171,7 +173,7 @@ class BackgroundMode : Service() {
         seekToPosition: Long = 0,
         keepQueue: Boolean = false
     ) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             streams = runCatching {
                 RetrofitInstance.api.getStreams(videoId)
             }.getOrNull() ?: return@launch
@@ -186,7 +188,7 @@ class BackgroundMode : Service() {
                 PlayingQueue.updateCurrent(it)
             }
 
-            handler.post {
+            withContext(Dispatchers.Main) {
                 playAudio(seekToPosition)
             }
         }
@@ -210,7 +212,7 @@ class BackgroundMode : Service() {
         // seek to the previous position if available
         if (seekToPosition != 0L) {
             player?.seekTo(seekToPosition)
-        } else if (PlayerHelper.watchPositionsEnabled) {
+        } else if (PlayerHelper.watchPositionsAudio) {
             runCatching {
                 val watchPosition = awaitQuery {
                     Database.watchPositionDao().findById(videoId)
@@ -223,7 +225,7 @@ class BackgroundMode : Service() {
             }
         }
 
-        fetchSponsorBlockSegments()
+        if (PlayerHelper.sponsorBlockEnabled) fetchSponsorBlockSegments()
     }
 
     /**
@@ -284,7 +286,7 @@ class BackgroundMode : Service() {
         // play new video on background
         this.videoId = nextVideo
         this.streams = null
-        this.segmentData = null
+        this.segments = emptyList()
         loadAudio(videoId, keepQueue = true)
     }
 
@@ -292,17 +294,13 @@ class BackgroundMode : Service() {
      * Sets the [MediaItem] with the [streams] into the [player]
      */
     private fun setMediaItem() {
+        val streams = streams
         streams ?: return
 
-        val uri = if (streams!!.audioStreams.orEmpty().isNotEmpty()) {
-            PlayerHelper.getAudioSource(
-                this,
-                streams!!.audioStreams!!
-            )
-        } else if (streams!!.hls != null) {
-            streams!!.hls
+        val uri = if (streams.audioStreams.isNotEmpty()) {
+            PlayerHelper.getAudioSource(this, streams.audioStreams)
         } else {
-            return
+            streams.hls ?: return
         }
 
         val mediaItem = MediaItem.Builder()
@@ -315,14 +313,14 @@ class BackgroundMode : Service() {
      * fetch the segments for SponsorBlock
      */
     private fun fetchSponsorBlockSegments() {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
                 if (categories.isEmpty()) return@runCatching
-                segmentData = RetrofitInstance.api.getSegments(
+                segments = RetrofitInstance.api.getSegments(
                     videoId,
                     JsonHelper.json.encodeToString(categories)
-                )
+                ).segments
                 checkForSegments()
             }
         }
@@ -332,24 +330,9 @@ class BackgroundMode : Service() {
      * check for SponsorBlock segments
      */
     private fun checkForSegments() {
-        Handler(Looper.getMainLooper()).postDelayed(this::checkForSegments, 100)
+        handler.postDelayed(this::checkForSegments, 100)
 
-        if (segmentData == null || segmentData!!.segments.isEmpty()) return
-
-        segmentData!!.segments.forEach { segment: Segment ->
-            val segmentStart = (segment.segment[0] * 1000f).toLong()
-            val segmentEnd = (segment.segment[1] * 1000f).toLong()
-            val currentPosition = player?.currentPosition
-            if (currentPosition in segmentStart until segmentEnd) {
-                if (PlayerHelper.sponsorBlockNotifications) {
-                    runCatching {
-                        Toast.makeText(this, R.string.segment_skipped, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-                player?.seekTo(segmentEnd)
-            }
-        }
+        player?.checkForSegments(this, segments)
     }
 
     private fun updateQueue() {
@@ -399,7 +382,8 @@ class BackgroundMode : Service() {
         fun getService(): BackgroundMode = this@BackgroundMode
     }
 
-    override fun onBind(p0: Intent?): IBinder {
+    override fun onBind(intent: Intent): IBinder {
+        super.onBind(intent)
         return binder
     }
 

@@ -376,7 +376,6 @@
     <string name="alternative_player_layout_summary">Mostrar os vídeos relacionados como uma linha acima dos comentários em vez de abaixo.</string>
     <string name="audio_track">Faixa de áudio</string>
     <string name="default_audio_track">Padrão</string>
-    <string name="unsupported_file_format">Formato de ficheiro não suportado!</string>
     <string name="hls_instead_of_dash">Usar HLS</string>
     <string name="hls_instead_of_dash_summary">Usar HLS em vez de DASH (será mais lento, não recomendado)</string>
     <string name="auto_quality">Automático</string>
@@ -446,4 +445,5 @@
     <string name="sleep_timer">Temporizador de sono</string>
     <string name="skip_silence">Ignorar o silêncio</string>
     <string name="replies">Respostas</string>
+    <string name="codecs">Codecs</string>
 </resources>

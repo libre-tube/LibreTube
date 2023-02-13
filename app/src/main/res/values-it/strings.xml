@@ -382,7 +382,6 @@
     <string name="alternative_trending_layout">Layout alternativo delle tendenze</string>
     <string name="audio_track">Traccia audio</string>
     <string name="default_audio_track">Predefinita</string>
-    <string name="unsupported_file_format">Formato del file non supportato!</string>
     <string name="hls_instead_of_dash">Usa HLS</string>
     <string name="hls_instead_of_dash_summary">Usa HLS invece di DASH (sarà più lento, non consigliato)</string>
     <string name="auto_quality">Automatica</string>
@@ -446,4 +445,5 @@
     <string name="help">Aiuto</string>
     <string name="faq">Domande frequenti</string>
     <string name="replies">Risposte</string>
+    <string name="codecs">Codec</string>
 </resources>

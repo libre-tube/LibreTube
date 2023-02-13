@@ -46,7 +46,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.ChapterSegment
 import com.github.libretube.api.obj.PipedStream
 import com.github.libretube.api.obj.Segment
-import com.github.libretube.api.obj.SegmentData
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.api.obj.Streams
 import com.github.libretube.constants.IntentData
@@ -56,7 +55,7 @@ import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.databinding.FragmentPlayerBinding
 import com.github.libretube.databinding.PlayerGestureControlsViewBinding
 import com.github.libretube.db.DatabaseHelper
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.PlayerEvent
 import com.github.libretube.enums.ShareObjectType
@@ -73,6 +72,7 @@ import com.github.libretube.helpers.DashHelper
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.PlayerHelper
+import com.github.libretube.helpers.PlayerHelper.checkForSegments
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
@@ -121,6 +121,7 @@ import kotlin.math.abs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.encodeToString
 import retrofit2.HttpException
@@ -141,6 +142,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     private var playlistId: String? = null
     private var channelId: String? = null
     private var keepQueue: Boolean = false
+    private var timeStamp: Long? = null
 
     /**
      * Video information fetched at runtime
@@ -180,7 +182,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
     /**
      * SponsorBlock
      */
-    private lateinit var segmentData: SegmentData
+    private var segments = listOf<Segment>()
     private var sponsorBlockEnabled = PlayerHelper.sponsorBlockEnabled
 
     val handler = Handler(Looper.getMainLooper())
@@ -228,6 +230,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             playlistId = it.getString(IntentData.playlistId)
             channelId = it.getString(IntentData.channelId)
             keepQueue = it.getBoolean(IntentData.keepQueue, false)
+            timeStamp = it.getLong(IntentData.timeStamp, 0L)
         }
 
         // broadcast receiver for PiP actions
@@ -334,6 +337,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             ) {
             }
         })
+
+        if (PlayerHelper.swipeGestureEnabled) {
+            binding.playerMotionLayout.addSwipeUpListener {
+                exoPlayerView.hideController()
+                setFullscreen()
+            }
+        }
 
         binding.playerMotionLayout.progress = 1.toFloat()
         binding.playerMotionLayout.transitionToStart()
@@ -618,7 +628,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
     // save the watch position if video isn't finished and option enabled
     private fun saveWatchPosition() {
-        if (!PlayerHelper.watchPositionsEnabled) return
+        if (!PlayerHelper.watchPositionsVideo) return
         val watchPosition = WatchPosition(videoId!!, exoPlayer.currentPosition)
         query {
             Database.watchPositionDao().insertAll(watchPosition)
@@ -632,31 +642,14 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
 
         if (!sponsorBlockEnabled) return
 
-        if (!::segmentData.isInitialized || segmentData.segments.isEmpty()) return
+        if (segments.isEmpty()) return
 
-        val currentPosition = exoPlayer.currentPosition
-        segmentData.segments.forEach { segment: Segment ->
-            val segmentStart = (segment.segment[0] * 1000f).toLong()
-            val segmentEnd = (segment.segment[1] * 1000f).toLong()
-
-            // show the button to manually skip the segment
-            if (currentPosition in segmentStart until segmentEnd) {
-                if (PlayerHelper.skipSegmentsManually) {
-                    binding.sbSkipBtn.visibility = View.VISIBLE
-                    binding.sbSkipBtn.setOnClickListener {
-                        exoPlayer.seekTo(segmentEnd)
-                    }
-                    return
-                }
-
-                if (PlayerHelper.sponsorBlockNotifications) {
-                    Toast.makeText(context, R.string.segment_skipped, Toast.LENGTH_SHORT).show()
-                }
-
-                // skip the segment automatically
+        exoPlayer.checkForSegments(requireContext(), segments, PlayerHelper.skipSegmentsManually)?.let { segmentEnd ->
+            binding.sbSkipBtn.visibility = View.VISIBLE
+            binding.sbSkipBtn.setOnClickListener {
                 exoPlayer.seekTo(segmentEnd)
-                return
             }
+            return
         }
 
         if (PlayerHelper.skipSegmentsManually) binding.sbSkipBtn.visibility = View.GONE
@@ -705,7 +698,7 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 streamItem.url?.toID()?.let { playNextVideo(it) }
             }
 
-            runOnUiThread {
+            withContext(Dispatchers.Main) {
                 // hide the button to skip SponsorBlock segments manually
                 binding.sbSkipBtn.visibility = View.GONE
 
@@ -716,6 +709,8 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
                 setupSeekbarPreview()
 
                 if (!streams.livestream) seekToWatchPosition()
+                trySeekToTimeStamp()
+
                 exoPlayer.prepare()
                 if (!DataSaverMode.isEnabled(requireContext())) exoPlayer.play()
 
@@ -752,13 +747,13 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
             runCatching {
                 val categories = PlayerHelper.getSponsorBlockCategories()
                 if (categories.isEmpty()) return@runCatching
-                segmentData =
+                segments =
                     RetrofitInstance.api.getSegments(
                         videoId!!,
                         JsonHelper.json.encodeToString(categories)
-                    )
-                if (segmentData.segments.isEmpty()) return@runCatching
-                playerBinding.exoProgress.setSegments(segmentData.segments)
+                    ).segments
+                if (segments.isEmpty()) return@runCatching
+                playerBinding.exoProgress.setSegments(segments)
                 runOnUiThread {
                     playerBinding.sbToggle.visibility = View.VISIBLE
                     updateDisplayedDuration()
@@ -786,14 +781,9 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         handler.postDelayed(this@PlayerFragment::refreshLiveStatus, 100)
     }
 
-    // seek to saved watch position if available
+    /**
+     *  Seek to saved watch position if available */
     private fun seekToWatchPosition() {
-        // support for time stamped links
-        val timeStamp: Long? = arguments?.getLong(IntentData.timeStamp)
-        if (timeStamp != null && timeStamp != 0L) {
-            exoPlayer.seekTo(timeStamp * 1000)
-            return
-        }
         // browse the watch positions
         val position = try {
             awaitQuery {
@@ -806,6 +796,18 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         if (position != null && position < streams.duration * 1000 * 0.9) {
             exoPlayer.seekTo(position)
         }
+    }
+
+    /**
+     * Seek to the time stamp passed by the intent arguments if available
+     */
+    private fun trySeekToTimeStamp() {
+        // support for time stamped links
+        timeStamp?.let {
+            if (it != 0L) exoPlayer.seekTo(it * 1000)
+        }
+        // delete the time stamp because it already got consumed
+        timeStamp = null
     }
 
     // used for autoplay and skipping to next video
@@ -1084,12 +1086,10 @@ class PlayerFragment : BaseFragment(), OnlinePlayerOptions {
         playerBinding.duration.text = DateUtils.formatElapsedTime(
             exoPlayer.duration.div(1000)
         )
-        if (!this::segmentData.isInitialized || this.segmentData.segments.isEmpty()) {
-            return
-        }
+        if (segments.isEmpty()) return
 
         val durationWithSb = DateUtils.formatElapsedTime(
-            exoPlayer.duration.div(1000) - segmentData.segments.sumOf {
+            exoPlayer.duration.div(1000) - segments.sumOf {
                 it.segment[1] - it.segment[0]
             }.toInt()
         )

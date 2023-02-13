@@ -396,7 +396,6 @@
     <string name="copied">已複製</string>
     <string name="alternative_videos_layout">另一種影片版面</string>
     <string name="defaultIconLight">預設亮色</string>
-    <string name="unsupported_file_format">檔案格式不支援！</string>
     <string name="open_copied">開啟</string>
     <string name="general">一般</string>
     <string name="audio_player">音訊播放器</string>

@@ -5,62 +5,43 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.databinding.DialogCustomInstanceBinding
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.CustomInstance
-import com.github.libretube.extensions.query
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.net.URL
+import kotlinx.coroutines.launch
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 class CustomInstanceDialog : DialogFragment() {
-    private lateinit var binding: DialogCustomInstanceBinding
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogCustomInstanceBinding.inflate(layoutInflater)
+        val binding = DialogCustomInstanceBinding.inflate(layoutInflater)
 
         binding.cancel.setOnClickListener {
             dismiss()
         }
 
         binding.addInstance.setOnClickListener {
-            val customInstance = CustomInstance(
-                name = binding.instanceName.text.toString(),
-                apiUrl = binding.instanceApiUrl.text.toString(),
-                frontendUrl = binding.instanceFrontendUrl.text.toString()
-            )
+            val instanceName = binding.instanceName.text.toString()
+            val apiUrl = binding.instanceApiUrl.text.toString()
+            val frontendUrl = binding.instanceFrontendUrl.text.toString()
 
-            if (
-                customInstance.name != "" &&
-                customInstance.apiUrl != "" &&
-                customInstance.frontendUrl != ""
-            ) {
-                try {
-                    // check whether the URL is valid, otherwise catch
-                    URL(customInstance.apiUrl).toURI()
-                    URL(customInstance.frontendUrl).toURI()
-
-                    query {
-                        Database.customInstanceDao().insertAll(customInstance)
+            if (instanceName.isNotEmpty() && apiUrl.isNotEmpty() && frontendUrl.isNotEmpty()) {
+                if (apiUrl.toHttpUrlOrNull() != null && frontendUrl.toHttpUrlOrNull() != null) {
+                    lifecycleScope.launch {
+                        Database.customInstanceDao()
+                            .insertAll(listOf(CustomInstance(instanceName, apiUrl, frontendUrl)))
+                        ActivityCompat.recreate(requireActivity())
+                        dismiss()
                     }
-
-                    ActivityCompat.recreate(requireActivity())
-                    dismiss()
-                } catch (e: Exception) {
-                    // invalid URL
-                    Toast.makeText(
-                        context,
-                        getString(R.string.invalid_url),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                } else {
+                    Toast.makeText(requireContext(), R.string.invalid_url, Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
                 // at least one empty input
-                Toast.makeText(
-                    context,
-                    context?.getString(R.string.empty_instance),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), R.string.empty_instance, Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -7,7 +7,7 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.github.libretube.api.JsonHelper
 import com.github.libretube.constants.PreferenceKeys
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.TAG
 import com.github.libretube.obj.BackupFile
 import com.github.libretube.obj.PreferenceItem
@@ -46,9 +46,7 @@ object BackupHelper {
             JsonHelper.json.decodeFromStream<BackupFile>(it)
         } ?: return
 
-        Database.watchHistoryDao().insertAll(
-            *backupFile.watchHistory.orEmpty().toTypedArray()
-        )
+        Database.watchHistoryDao().insertAll(backupFile.watchHistory.orEmpty())
         Database.searchHistoryDao().insertAll(
             *backupFile.searchHistory.orEmpty().toTypedArray()
         )
@@ -56,9 +54,7 @@ object BackupHelper {
             *backupFile.watchPositions.orEmpty().toTypedArray()
         )
         Database.localSubscriptionDao().insertAll(backupFile.localSubscriptions.orEmpty())
-        Database.customInstanceDao().insertAll(
-            *backupFile.customInstances.orEmpty().toTypedArray()
-        )
+        Database.customInstanceDao().insertAll(backupFile.customInstances.orEmpty())
         Database.playlistBookmarkDao().insertAll(
             *backupFile.playlistBookmarks.orEmpty().toTypedArray()
         )

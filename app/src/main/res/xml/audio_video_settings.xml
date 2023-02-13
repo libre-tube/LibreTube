@@ -78,4 +78,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/advanced">
+
+        <ListPreference
+            android:entries="@array/videoCodecs"
+            android:entryValues="@array/videoCodecValues"
+            android:icon="@drawable/ic_equalizer"
+            android:key="video_codecs"
+            app:defaultValue="all"
+            app:title="@string/codecs"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

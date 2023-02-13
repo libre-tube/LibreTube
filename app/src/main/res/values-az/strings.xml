@@ -373,7 +373,6 @@
     <string name="alternative_player_layout_summary">Əlaqəli videoları aşağıda deyil, şərhlərin üstündə cərgə kimi göstər.</string>
     <string name="audio_track">Səs treki</string>
     <string name="default_audio_track">Standart</string>
-    <string name="unsupported_file_format">Dəstəklənməyən fayl formatı!</string>
     <string name="auto_quality">Avtomatik</string>
     <string name="hls_instead_of_dash">HLS istifadə et</string>
     <string name="hls_instead_of_dash_summary">DASH əvəzinə HLS istifadə et (daha yavaş olacaq, tövsiyə edilmədi)</string>
@@ -446,4 +445,7 @@
     <string name="help">Kömək</string>
     <string name="faq">T-TSS</string>
     <string name="replies">Cavablar</string>
+    <string name="codecs">Kodeklər</string>
+    <string name="unsupported_file_format">Dəstəklənməyən fayl formatı: %1$s</string>
+    <string name="mark_as_watched">Baxılmış kimi nişanla</string>
 </resources>
