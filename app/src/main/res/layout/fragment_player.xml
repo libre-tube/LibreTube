@@ -128,8 +128,9 @@
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="17dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="17dp"
                 app:cardCornerRadius="27dp">
 
                 <LinearLayout
@@ -137,36 +138,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_marginVertical="12dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <com.github.libretube.ui.views.DrawableTextView
                         android:id="@+id/relPlayer_share"
                         style="@style/PlayerActionsText"
                         android:text="@string/share"
                         app:drawableTopCompat="@drawable/ic_share" />
 
-                    <TextView
+                    <com.github.libretube.ui.views.DrawableTextView
                         android:id="@+id/relPlayer_download"
                         style="@style/PlayerActionsText"
                         android:text="@string/download"
                         app:drawableTopCompat="@drawable/ic_download" />
 
-                    <TextView
+                    <com.github.libretube.ui.views.DrawableTextView
                         android:id="@+id/relPlayer_pip"
                         style="@style/PlayerActionsText"
                         android:text="@string/pop_up"
                         app:drawableTopCompat="@drawable/ic_open" />
 
-                    <TextView
+                    <com.github.libretube.ui.views.DrawableTextView
                         android:id="@+id/relPlayer_background"
                         style="@style/PlayerActionsText"
                         android:text="@string/audio"
                         app:drawableTopCompat="@drawable/ic_headphones" />
 
-                    <TextView
+                    <com.github.libretube.ui.views.DrawableTextView
                         android:id="@+id/relPlayer_save"
                         style="@style/PlayerActionsText"
                         android:text="@string/save"
