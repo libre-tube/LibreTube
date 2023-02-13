@@ -17,6 +17,7 @@ import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.FragmentCommentsBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.ui.adapters.CommentsAdapter
+import com.github.libretube.ui.extensions.filterNonEmptyComments
 import com.github.libretube.ui.models.CommentsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -97,6 +98,7 @@ class CommentsRepliesFragment : Fragment() {
                 Log.e(TAG(), "IOException, you might not have internet connection")
                 return@launch
             }
+            repliesPage.comments = repliesPage.comments.filterNonEmptyComments()
             withContext(Dispatchers.Main) {
                 onFinished.invoke(repliesPage)
             }

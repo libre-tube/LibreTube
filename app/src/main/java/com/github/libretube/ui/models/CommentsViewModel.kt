@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.CommentsPage
 import com.github.libretube.extensions.TAG
+import com.github.libretube.ui.extensions.filterNonEmptyComments
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +34,7 @@ class CommentsViewModel : ViewModel() {
                 return@launch
             }
             nextPage = response.nextpage
+            response.comments = response.comments.filterNonEmptyComments()
             commentsPage.postValue(response)
             isLoading = false
         }
@@ -49,7 +51,7 @@ class CommentsViewModel : ViewModel() {
                 return@launch
             }
             val updatedPage = commentsPage.value?.apply {
-                comments += response.comments
+                comments += response.comments.filterNonEmptyComments()
             }
             nextPage = response.nextpage
             commentsPage.postValue(updatedPage)

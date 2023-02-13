@@ -8,9 +8,9 @@ import android.os.Binder
 import android.os.IBinder
 import android.util.SparseBooleanArray
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.util.set
 import androidx.core.util.valueIterator
-import androidx.core.app.ServiceCompat
 import com.github.libretube.R
 import com.github.libretube.api.CronetHelper
 import com.github.libretube.api.RetrofitInstance
