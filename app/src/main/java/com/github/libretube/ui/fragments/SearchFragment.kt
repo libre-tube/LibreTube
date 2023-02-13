@@ -2,12 +2,13 @@ package com.github.libretube.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.FragmentSearchBinding
 import com.github.libretube.db.DatabaseHolder.Database
@@ -16,12 +17,10 @@ import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.ui.activities.MainActivity
 import com.github.libretube.ui.adapters.SearchHistoryAdapter
 import com.github.libretube.ui.adapters.SearchSuggestionsAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SearchViewModel
 
-class SearchFragment : BaseFragment() {
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
+class SearchFragment : Fragment(R.layout.fragment_search) {
+    private val binding by viewBinding(FragmentSearchBinding::bind)
 
     private val viewModel: SearchViewModel by activityViewModels()
 
@@ -30,15 +29,6 @@ class SearchFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         query = arguments?.getString("query")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,15 +65,12 @@ class SearchFragment : BaseFragment() {
                 return@launchWhenCreated
             }
             // only load the suggestions if the input field didn't get cleared yet
-            val suggestionsAdapter =
-                SearchSuggestionsAdapter(
-                    response.reversed(),
-                    (activity as MainActivity).searchView
-                )
-            runOnUiThread {
-                if (viewModel.searchQuery.value != "") {
-                    binding.suggestionsRecycler.adapter = suggestionsAdapter
-                }
+            val suggestionsAdapter = SearchSuggestionsAdapter(
+                response.reversed(),
+                (activity as MainActivity).searchView
+            )
+            if (isAdded && viewModel.searchQuery.value != "") {
+                binding.suggestionsRecycler.adapter = suggestionsAdapter
             }
         }
     }
