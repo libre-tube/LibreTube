@@ -371,7 +371,6 @@
     <string name="alternative_player_layout">বিকল্প প্লেয়ার লেয়াউট</string>
     <string name="audio_track">অডিও ট্র্যাক</string>
     <string name="default_audio_track">ডিফল্ট</string>
-    <string name="unsupported_file_format">অসমর্থিত ফাইল ফর্ম্যাট!</string>
     <string name="hls_instead_of_dash">HLS ব্যাবহার করুন</string>
     <string name="hls_instead_of_dash_summary">DASH এর বদলে HLS ব্যাবহার করুন (ধীরগতিসম্পন্ন হতে পারে, সুপারিশকৃত নয়)</string>
     <string name="auto_quality">স্বয়ংক্রিয়</string>

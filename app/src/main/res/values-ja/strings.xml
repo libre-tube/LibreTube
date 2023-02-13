@@ -405,7 +405,6 @@
     <string name="play_latest_videos">最新の動画を再生</string>
     <string name="audio_track">オーディオトラック</string>
     <string name="default_audio_track">デフォルト</string>
-    <string name="unsupported_file_format">サポートされていないファイル形式です！</string>
     <string name="hls_instead_of_dash_summary">DASHの代わりにHLSを使用します (低速、非推奨)</string>
     <string name="hls_instead_of_dash">HLSを使う</string>
     <string name="auto_quality">自動</string>

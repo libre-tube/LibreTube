@@ -10,12 +10,13 @@ import com.github.libretube.constants.PIPED_FRONTEND_URL
 import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.constants.YOUTUBE_FRONTEND_URL
 import com.github.libretube.databinding.DialogShareBinding
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.ShareObjectType
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.obj.ShareData
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class ShareDialog(
     private val id: String,
@@ -32,7 +33,9 @@ class ShareDialog(
         val instanceUrl = getCustomInstanceFrontendUrl()
         val shareableTitle = getShareableTitle(shareData)
         // add instanceUrl option if custom instance frontend url available
-        if (instanceUrl != "") shareOptions += getString(R.string.instance)
+        if (instanceUrl.isNotEmpty()) {
+            shareOptions += getString(R.string.instance)
+        }
 
         if (shareObjectType == ShareObjectType.VIDEO) {
             setupTimeStampBinding()
@@ -97,15 +100,12 @@ class ShareDialog(
         )
 
         // get the api urls of the other custom instances
-        val customInstances = awaitQuery {
+        val customInstances = runBlocking(Dispatchers.IO) {
             Database.customInstanceDao().getAll()
         }
 
         // return the custom instance frontend url if available
-        customInstances.forEach { instance ->
-            if (instance.apiUrl == instancePref) return instance.frontendUrl
-        }
-        return ""
+        return customInstances.firstOrNull { it.apiUrl == instancePref }?.frontendUrl.orEmpty()
     }
 
     private fun getShareableTitle(shareData: ShareData): String {

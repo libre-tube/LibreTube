@@ -14,6 +14,8 @@ interface PlayerGestureOptions {
 
     fun onSwipeRightScreen(distanceY: Float)
 
+    fun onSwipeCenterScreen(distanceY: Float)
+
     fun onSwipeEnd()
 
     fun onZoom()

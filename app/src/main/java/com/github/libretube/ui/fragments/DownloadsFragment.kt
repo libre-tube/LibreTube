@@ -9,13 +9,12 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.libretube.R
 import com.github.libretube.databinding.FragmentDownloadsBinding
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.db.obj.DownloadWithItems
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.formatAsFileSize
@@ -109,11 +108,11 @@ class DownloadsFragment : BaseFragment() {
         binding.downloads.adapter?.registerAdapterDataObserver(
             object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                    if (binding.downloads.size == 0) {
+                    super.onItemRangeRemoved(positionStart, itemCount)
+                    if (binding.downloads.adapter?.itemCount == 0) {
                         binding.downloads.visibility = View.GONE
                         binding.downloadsEmpty.visibility = View.VISIBLE
                     }
-                    super.onItemRangeRemoved(positionStart, itemCount)
                 }
             }
         )

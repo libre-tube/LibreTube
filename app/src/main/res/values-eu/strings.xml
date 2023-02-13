@@ -378,7 +378,6 @@
     <string name="alternative_player_layout">Erreproduzitzailearen diseinu alternatiboa</string>
     <string name="pinch_control">Atximur kontrola</string>
     <string name="pinch_control_summary">Erabil atximur egiteko keinua, hurbiltzeko/ urruntzeko.</string>
-    <string name="unsupported_file_format">Fitxategiaren formatua ez da bateragarria!</string>
     <string name="open_queue_from_notification">Jakinarazpenetik ilara ireki</string>
     <string name="select_other_start_tab">Mesedez, hautatu beste hasiera-fitxa bat lehenbizi!</string>
     <string name="playback_pitch">Tonua</string>

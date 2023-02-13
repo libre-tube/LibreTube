@@ -4,26 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
-import com.github.libretube.databinding.SearchsuggestionRowBinding
-import com.github.libretube.ui.viewholders.SearchSuggestionsViewHolder
+import com.github.libretube.databinding.SuggestionRowBinding
+import com.github.libretube.ui.viewholders.SuggestionsViewHolder
 
 class SearchSuggestionsAdapter(
     private var suggestionsList: List<String>,
     private val searchView: SearchView
 ) :
-    RecyclerView.Adapter<SearchSuggestionsViewHolder>() {
+    RecyclerView.Adapter<SuggestionsViewHolder>() {
 
     override fun getItemCount(): Int {
         return suggestionsList.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchSuggestionsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = SearchsuggestionRowBinding.inflate(layoutInflater, parent, false)
-        return SearchSuggestionsViewHolder(binding)
+        val binding = SuggestionRowBinding.inflate(layoutInflater, parent, false)
+        return SuggestionsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: SearchSuggestionsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SuggestionsViewHolder, position: Int) {
         val suggestion = suggestionsList[position]
         holder.binding.apply {
             suggestionText.text = suggestion

@@ -121,7 +121,7 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
             NavigationHelper.navigateVideo(
                 context = requireContext(),
                 videoId = PlayingQueue.getCurrent()?.url?.toID(),
-                timeStamp = playerService?.player?.currentPosition,
+                timeStamp = playerService?.player?.currentPosition?.div(1000),
                 keepQueue = true,
                 forceVideo = true
             )
@@ -136,6 +136,11 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
                 shareObjectType = ShareObjectType.VIDEO,
                 shareData = ShareData(currentVideo = currentVideo.title)
             ).show(childFragmentManager, null)
+        }
+
+        binding.close.setOnClickListener {
+            BackgroundHelper.stopBackgroundPlay(requireContext())
+            findNavController().popBackStack()
         }
 
         val listener = AudioPlayerThumbnailListener(requireContext(), this)

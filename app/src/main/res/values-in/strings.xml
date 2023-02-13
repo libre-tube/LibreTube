@@ -373,7 +373,6 @@
     <string name="alternative_player_layout_summary">Tampilkan video terkait sebagai baris di atas komentar, bukan di bawah.</string>
     <string name="audio_track">Trek audio</string>
     <string name="default_audio_track">Bawaan</string>
-    <string name="unsupported_file_format">Format berkas tidak didukung!</string>
     <string name="hls_instead_of_dash">Gunakan HLS</string>
     <string name="auto_quality">Otomatis</string>
     <string name="hls_instead_of_dash_summary">Gunakan HLS daripada DASH (akan lebih lambat, tidak disarankan)</string>
@@ -446,4 +445,7 @@
     <string name="help">Bantuan</string>
     <string name="faq">SSD</string>
     <string name="replies">Balasan</string>
+    <string name="codecs">Kodek</string>
+    <string name="mark_as_watched">Tandai sebagai ditonton</string>
+    <string name="unsupported_file_format">Format berkas tidak didukung: %1$s</string>
 </resources>

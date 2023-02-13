@@ -3,7 +3,7 @@ package com.github.libretube.ui.extensions
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.awaitQuery
 
 /**

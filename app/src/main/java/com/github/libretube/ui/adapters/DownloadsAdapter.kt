@@ -91,29 +91,26 @@ class DownloadsAdapter(
 
             root.setOnLongClickListener {
                 MaterialAlertDialogBuilder(root.context)
-                    .setItems(
-                        arrayOf(
-                            root.context.getString(R.string.delete)
-                        )
-                    ) { _, index ->
-                        when (index) {
-                            0 -> {
-                                items.map { File(it.path) }.forEach { file ->
-                                    if (file.exists()) {
-                                        try {
-                                            file.delete()
-                                        } catch (_: Exception) { }
-                                    }
-                                }
-
-                                query {
-                                    DatabaseHolder.Database.downloadDao().deleteDownload(download)
-                                }
-                                downloads.removeAt(position)
-                                notifyItemRemoved(position)
-                                notifyItemRangeChanged(position, itemCount)
+                    .setTitle(R.string.delete)
+                    .setMessage(R.string.irreversible)
+                    .setPositiveButton(R.string.okay) { _, _ ->
+                        items.map { File(it.path) }.forEach { file ->
+                            runCatching {
+                                if (file.exists()) file.delete()
                             }
                         }
+                        runCatching {
+                            download.thumbnailPath?.let {
+                                File(it).delete()
+                            }
+                        }
+
+                        query {
+                            DatabaseHolder.Database.downloadDao().deleteDownload(download)
+                        }
+                        downloads.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, itemCount)
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()

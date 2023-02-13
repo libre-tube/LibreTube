@@ -17,7 +17,7 @@
         android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:paddingHorizontal="5dp"
-        android:paddingTop="5dp" >
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,12 +68,16 @@
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/autoPlay"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="2dp"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:thumb="@drawable/player_switch_thumb"
                     android:visibility="gone"
-                    app:trackTint="#88ffffff"
-                    app:thumbTint="@android:color/white"/>
+                    app:thumbTint="@android:color/white"
+                    app:track="@drawable/player_switch_track"
+                    app:trackTint="#88ffffff" />
 
                 <ImageButton
                     android:id="@+id/sb_toggle"

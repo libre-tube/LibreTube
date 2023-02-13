@@ -8,7 +8,7 @@ import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.SubscriptionHelper
-import com.github.libretube.db.DatabaseHolder.Companion.Database
+import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toastFromMainDispatcher
 import com.github.libretube.obj.ImportPlaylist
@@ -30,10 +30,9 @@ object ImportHelper {
             activity.toastFromMainDispatcher(R.string.importsuccess)
         } catch (e: IllegalArgumentException) {
             Log.e(TAG(), e.toString())
-            activity.toastFromMainDispatcher(
-                activity.getString(R.string.unsupported_file_format) +
-                    " (${activity.contentResolver.getType(uri)})"
-            )
+            val type = activity.contentResolver.getType(uri)
+            val message = activity.getString(R.string.unsupported_file_format, type)
+            activity.toastFromMainDispatcher(message)
         } catch (e: Exception) {
             Log.e(TAG(), e.toString())
             e.localizedMessage?.let {
@@ -122,7 +121,8 @@ object ImportHelper {
                 importPlaylists.addAll(playlistFile?.playlists.orEmpty())
             }
             else -> {
-                activity.toastFromMainDispatcher("Unsupported file type $fileType")
+                val message = activity.getString(R.string.unsupported_file_format, fileType)
+                activity.toastFromMainDispatcher(message)
                 return
             }
         }

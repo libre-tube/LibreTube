@@ -192,6 +192,11 @@
                 style="@style/AudioPlayerButton"
                 android:src="@drawable/ic_share" />
 
+            <ImageView
+                android:id="@+id/close"
+                style="@style/AudioPlayerButton"
+                android:src="@drawable/ic_close" />
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

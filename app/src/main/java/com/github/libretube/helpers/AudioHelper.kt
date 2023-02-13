@@ -2,42 +2,22 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.media.AudioManager
-import android.os.Build
+import androidx.core.content.getSystemService
 import androidx.core.math.MathUtils
+import androidx.media.AudioManagerCompat
 import com.github.libretube.extensions.normalize
 
-class AudioHelper(
-    context: Context,
-    private val stream: Int = AudioManager.STREAM_MUSIC
-) {
-
-    private lateinit var audioManager: AudioManager
-    private var minimumVolumeIndex = 0
-    private var maximumVolumeIndex = 16
-
-    init {
-        (context.getSystemService(Context.AUDIO_SERVICE) as? AudioManager)?.let {
-            audioManager = it
-            maximumVolumeIndex = it.getStreamMaxVolume(stream)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                minimumVolumeIndex = it.getStreamMinVolume(stream)
-            }
-        }
-    }
+class AudioHelper(context: Context) {
+    private val audioManager = context.getSystemService<AudioManager>()!!
+    private val minimumVolumeIndex = AudioManagerCompat
+        .getStreamMinVolume(audioManager, AudioManager.STREAM_MUSIC)
+    private val maximumVolumeIndex = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
     var volume: Int
-        get() {
-            return if (this::audioManager.isInitialized) {
-                audioManager.getStreamVolume(stream) - minimumVolumeIndex
-            } else {
-                0
-            }
-        }
+        get() = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) - minimumVolumeIndex
         set(value) {
-            if (this::audioManager.isInitialized) {
-                val vol = MathUtils.clamp(value, minimumVolumeIndex, maximumVolumeIndex)
-                audioManager.setStreamVolume(stream, vol, 0)
-            }
+            val vol = MathUtils.clamp(value, minimumVolumeIndex, maximumVolumeIndex)
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, vol, 0)
         }
 
     fun setVolumeWithScale(value: Int, maxValue: Int, minValue: Int = 0) {
