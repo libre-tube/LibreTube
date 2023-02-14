@@ -90,7 +90,7 @@
         <item name="android:layout_marginStart">3dp</item>
         <item name="android:layout_marginEnd">3dp</item>
         <item name="drawableTopDimen">24dp</item>
-        <item name="android:drawablePadding">5dp</item>
+        <item name="android:drawablePadding">3dp</item>
 
     </style>
 
