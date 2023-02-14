@@ -62,7 +62,7 @@ class AudioPlayerFragment : BaseFragment(), AudioPlayerOptions {
             if (mainActivity.navController.currentDestination?.id == R.id.audioPlayerFragment) {
                 mainActivity.navController.popBackStack()
             } else {
-                mainActivity.navController.backQueue.removeAll {
+                mainActivity.navController.backQueue.removeIf {
                     it.destination.id == R.id.audioPlayerFragment
                 }
             }
