@@ -1419,6 +1419,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             binding.linLayout.visibility = View.VISIBLE
 
             updateCaptionsLanguage(captionLanguage)
+
+            binding.optionsLL.post {
+                binding.optionsLL.requestLayout()
+            }
         }
     }
 
