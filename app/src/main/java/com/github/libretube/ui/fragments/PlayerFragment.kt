@@ -577,6 +577,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        handler.removeCallbacksAndMessages(null)
+
         try {
             // disable the auto PiP mode for SDK >= 32
             disableAutoPiP()

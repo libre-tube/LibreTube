@@ -19,8 +19,8 @@ open class ExpandedBottomSheet : BottomSheetDialogFragment() {
 
         dialog.setOnShowListener {
             (it as BottomSheetDialog).let { d ->
-                (d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout?)?.let {
-                    BottomSheetBehavior.from(it).state =
+                (d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout?)?.let { fl ->
+                    BottomSheetBehavior.from(fl).state =
                         BottomSheetBehavior.STATE_EXPANDED
                 }
             }
