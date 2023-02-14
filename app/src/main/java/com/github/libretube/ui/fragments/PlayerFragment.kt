@@ -1202,29 +1202,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
      * Get all available player resolutions
      */
     private fun getAvailableResolutions(): List<VideoResolution> {
-        val resolutions = exoPlayer.currentTracks.groups.asSequence().map { group ->
-            (0 until group.length).map {
-                group.getTrackFormat(it).height
+        val resolutions = exoPlayer.currentTracks.groups.asSequence()
+            .flatMap { group ->
+                (0 until group.length).map {
+                    group.getTrackFormat(it).height
+                }
             }
-        }.flatten()
             .filter { it > 0 }
-            .sortedDescending()
-            .distinct()
+            .map { VideoResolution("${it}p", it) }
+            .toSortedSet(compareByDescending { it.resolution })
 
-        return resolutions.map {
-            VideoResolution(
-                name = "${it}p",
-                resolution = it
-            )
-        }.toMutableList().also {
-            it.add(
-                0,
-                VideoResolution(
-                    getString(R.string.auto_quality),
-                    resolution = Int.MAX_VALUE
-                )
-            )
-        }
+        resolutions.add(VideoResolution(getString(R.string.auto_quality), Int.MAX_VALUE))
+        return resolutions.toList()
     }
 
     private fun setResolutionAndSubtitles() {
@@ -1366,9 +1355,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
                     if (currentQuality == it.resolution) "${it.name} ✓" else it.name
                 }
             ) { which ->
-                resolutions[which].resolution?.let {
-                    setPlayerResolution(it)
-                }
+                setPlayerResolution(resolutions[which].resolution)
             }
             .show(childFragmentManager)
     }
