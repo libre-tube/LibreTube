@@ -156,12 +156,10 @@
         <item name="android:text">0</item>
     </style>
 
-    <style name="Chip" parent="Widget.Material3.Chip.Suggestion">
+    <style name="Chip" parent="Widget.Material3.Chip.Filter">
 
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="chipStrokeWidth">0dp</item>
-        <item name="chipCornerRadius">20dp</item>
 
     </style>
 
