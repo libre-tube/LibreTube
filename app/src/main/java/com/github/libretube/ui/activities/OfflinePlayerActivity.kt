@@ -9,12 +9,12 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.github.libretube.constants.IntentData
 import com.github.libretube.databinding.ActivityOfflinePlayerBinding
 import com.github.libretube.databinding.ExoStyledPlayerControlViewBinding
 import com.github.libretube.db.DatabaseHolder.Database
 import com.github.libretube.enums.FileType
-import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.updateParameters
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PlayerHelper.loadPlaybackParams
@@ -34,6 +34,9 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.FileDataSource
 import com.google.android.exoplayer2.util.MimeTypes
 import java.io.File
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OfflinePlayerActivity : BaseActivity() {
     private lateinit var binding: ActivityOfflinePlayerBinding
@@ -108,27 +111,29 @@ class OfflinePlayerActivity : BaseActivity() {
     }
 
     private fun playVideo() {
-        val downloadFiles = awaitQuery {
-            Database.downloadDao().findById(videoId).downloadItems
+        lifecycleScope.launch {
+            val downloadFiles = withContext(Dispatchers.IO) {
+                Database.downloadDao().findById(videoId).downloadItems
+            }
+
+            val video = downloadFiles.firstOrNull { it.type == FileType.VIDEO }
+            val audio = downloadFiles.firstOrNull { it.type == FileType.AUDIO }
+            val subtitle = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
+
+            val videoUri = video?.path?.let { File(it).toUri() }
+            val audioUri = audio?.path?.let { File(it).toUri() }
+            val subtitleUri = subtitle?.path?.let { File(it).toUri() }
+
+            setMediaSource(videoUri, audioUri, subtitleUri)
+
+            trackSelector.updateParameters {
+                setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
+                setPreferredTextLanguage("en")
+            }
+
+            player.prepare()
+            player.play()
         }
-
-        val video = downloadFiles.firstOrNull { it.type == FileType.VIDEO }
-        val audio = downloadFiles.firstOrNull { it.type == FileType.AUDIO }
-        val subtitle = downloadFiles.firstOrNull { it.type == FileType.SUBTITLE }
-
-        val videoUri = video?.path?.let { File(it).toUri() }
-        val audioUri = audio?.path?.let { File(it).toUri() }
-        val subtitleUri = subtitle?.path?.let { File(it).toUri() }
-
-        setMediaSource(videoUri, audioUri, subtitleUri)
-
-        trackSelector.updateParameters {
-            setPreferredTextRoleFlags(C.ROLE_FLAG_CAPTION)
-            setPreferredTextLanguage("en")
-        }
-
-        player.prepare()
-        player.play()
     }
 
     private fun setMediaSource(videoUri: Uri?, audioUri: Uri?, subtitleUri: Uri?) {
