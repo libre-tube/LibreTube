@@ -262,8 +262,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
      * somehow the bottom bar is invisible on low screen resolutions, this fixes it
      */
     private fun showBottomBar() {
-        if (isAdded && binding.player.isPlayerLocked) {
-            binding.player.binding.bottomBar.isVisible = true
+        if (isAdded && !binding.player.isPlayerLocked) {
+            playerBinding.bottomBar.isVisible = true
         }
         handler.postDelayed(this::showBottomBar, 100)
     }
@@ -1387,9 +1387,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             binding.player.hideController()
             binding.player.useController = false
 
-            // set portrait mode
-            unsetFullscreen()
-
             if (viewModel.isMiniPlayerVisible.value == true) {
                 binding.playerMotionLayout.transitionToStart()
                 viewModel.isMiniPlayerVisible.value = false
@@ -1401,8 +1398,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             }
             binding.linLayout.visibility = View.GONE
 
-            viewModel.isFullscreen.value = false
-
             updateCaptionsLanguage(null)
         } else {
             // close button got clicked in PiP mode
@@ -1412,11 +1407,14 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             // enable exoPlayer controls again
             binding.player.useController = true
 
-            with(binding.playerMotionLayout) {
-                getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
-                enableTransition(R.id.yt_transition, true)
+            // set back to protrait mode
+            if (viewModel.isFullscreen.value != true) {
+                with(binding.playerMotionLayout) {
+                    getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
+                    enableTransition(R.id.yt_transition, true)
+                }
+                binding.linLayout.visibility = View.VISIBLE
             }
-            binding.linLayout.visibility = View.VISIBLE
 
             updateCaptionsLanguage(captionLanguage)
 
