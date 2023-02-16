@@ -73,7 +73,7 @@
     <string name="import_from_yt">Abunəlikləri idxal et</string>
     <string name="import_from_yt_summary">YouTube və ya NewPipe\'dan</string>
     <string name="app_theme">Tema</string>
-    <string name="server_error">Serverlə problem yaşanır. Başqa nümunə sınansın\?</string>
+    <string name="server_error">Seçilmiş serverlə problem olacaq. Başqa nümunə sınayın.</string>
     <string name="unknown_error">Şəbəkə xətası.</string>
     <string name="error">Nəsə xəta baş verdi.</string>
     <string name="empty">İstifadəçi adı və şifrə daxil etməlisiniz.</string>
@@ -117,7 +117,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arxa planda oynat</string>
     <string name="update_available">%1$s Versiyası Mövcuddur</string>
-    <string name="update_available_text">Onu endirmək üçün GitHub\'da buraxılışlara keçilsinmi\?</string>
+    <string name="update_available_text">Yeni yeniləmə mövcuddur. GitHub buraxılışları səhifəsin açmaq üçün kliklə.</string>
     <string name="appearance">Xarici Görünüş</string>
     <string name="app_behavior">Davranış</string>
     <string name="downloads">Yüklənənlər</string>
