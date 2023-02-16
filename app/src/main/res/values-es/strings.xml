@@ -45,7 +45,7 @@
     <string name="success">Hecho.</string>
     <string name="fail">Error :(</string>
     <string name="dlisinprogress">Otra descarga ya está en curso, por favor espere hasta que termine.</string>
-    <string name="server_error">Hay un problema con el servidor. ¿Probar con otra instancia\?</string>
+    <string name="server_error">Parece que hay un problema con el servidor seleccionado. Pruebe con otra instancia.</string>
     <string name="unknown_error">Error de red.</string>
     <string name="deletePlaylist">Eliminar lista de reproducción</string>
     <string name="createPlaylist">Crear lista de reproducción</string>
@@ -117,7 +117,7 @@
     <string name="disabled">Desactivado</string>
     <string name="playOnBackground">Reproducir en segundo plano</string>
     <string name="views">%1$s visualizaciones</string>
-    <string name="update_available_text">¿Ir a los lanzamientos en GitHub para descargarla\?</string>
+    <string name="update_available_text">Nueva actualización disponible. Haga clic para abrir la página de las versiones de GitHub.</string>
     <string name="update_available">La versión %1$s está disponible</string>
     <string name="app_behavior">Comportamiento</string>
     <string name="appearance">Apariencia</string>

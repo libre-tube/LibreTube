@@ -4,7 +4,7 @@
     <string name="piped">Piped</string>
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Грати у фоновому режимі</string>
-    <string name="server_error">Проблема з сервером. Спробувати інший\?</string>
+    <string name="server_error">Здається, виникла проблема з вибраним сервером. Спробуйте інший.</string>
     <string name="share">Поділитися</string>
     <string name="register">Реєстрація</string>
     <string name="downloadfailed">Невдале завантаження.</string>
@@ -126,7 +126,7 @@
     <string name="music_directory">Музична тека</string>
     <string name="shareTo">Поділитися посиланням з</string>
     <string name="update_available">Версія %1$s доступна</string>
-    <string name="update_available_text">Перейти до релізів на GitHub, щоб завантажити\?</string>
+    <string name="update_available_text">Доступне нове оновлення. Натисніть, щоб відкрити сторінку релізів на GitHub.</string>
     <string name="downloads">Завантаження</string>
     <string name="video_format">Формат відео</string>
     <string name="contributing">Внесок</string>

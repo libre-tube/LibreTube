@@ -444,4 +444,7 @@
     <string name="help">सहायता</string>
     <string name="faq">आम सवाल</string>
     <string name="replies">जवाब</string>
+    <string name="unsupported_file_format">असमर्थित फ़ाइल प्रारूप: %1$s</string>
+    <string name="mark_as_watched">देखा गया चिह्नित करें</string>
+    <string name="codecs">कोडेक्स</string>
 </resources>

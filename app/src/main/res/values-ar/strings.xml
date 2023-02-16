@@ -47,7 +47,7 @@
     <string name="dlisinprogress">هناك تنزيل آخر قيد التقدم بالفعل، يرجى الانتظار حتى ينتهي.</string>
     <string name="vlc">فتح باستخدام VLC</string>
     <string name="unknown_error">خطأ في الشبكة.</string>
-    <string name="server_error">هنالك مشكلة في الخادم. لمَ لا تجرب نظيرا آخر؟</string>
+    <string name="server_error">يبدو أن هناك مشكلة في هذا الخادم المحدد. جرب خادم أخر.</string>
     <string name="error">حدث خطأ ما.</string>
     <string name="addToPlaylist">إضافة إلى قائمة التشغيل</string>
     <string name="about">حول</string>
@@ -165,7 +165,7 @@
     <string name="clear_customInstances">مسح المضاف</string>
     <string name="live">مباشر</string>
     <string name="player_autoplay">التشغيل التلقائي</string>
-    <string name="update_available_text">انتقل إلى الإصدارات على GitHub لتنزيله؟</string>
+    <string name="update_available_text">تحديث جديد متاح. انقر لفتح صفحة إصدارات GitHub.</string>
     <string name="appearance">المظهر</string>
     <string name="app_behavior">السلوك</string>
     <string name="video_format">تنسيق الفيديو</string>

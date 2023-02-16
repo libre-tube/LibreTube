@@ -39,7 +39,7 @@
     <string name="import_from_yt">Import subscriptions</string>
     <string name="import_from_yt_summary">From YouTube or NewPipe</string>
     <string name="app_theme">Theme</string>
-    <string name="server_error">There is a problem with the server. Try another instance?</string>
+    <string name="server_error">There seem to be a problem with the selected server. Try another instance.</string>
     <string name="unknown_error">Network error.</string>
     <string name="error">Something went wrong.</string>
     <string name="empty">You have to enter a username and password.</string>
@@ -124,7 +124,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Play in the background</string>
     <string name="update_available">Version %1$s is available</string>
-    <string name="update_available_text">Go to releases on GitHub to download it?</string>
+    <string name="update_available_text">New update available. Click to open the GitHub releases page.</string>
     <string name="appearance">Appearance</string>
     <string name="app_behavior">Behavior</string>
     <string name="downloads">Downloads</string>
@@ -441,7 +441,6 @@
     <string name="faq">FAQ</string>
     <string name="codecs">Codecs</string>
     <string name="mark_as_watched">Mark as watched</string>
-
     <!-- Notification channel strings -->
     <string name="download_channel_name">Download Service</string>
     <string name="download_channel_description">Shows a notification when downloading media.</string>
