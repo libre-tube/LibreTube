@@ -15,6 +15,7 @@ import com.github.libretube.constants.PreferenceKeys
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.base.BasePreferenceFragment
+import com.github.libretube.ui.views.SliderPreference
 
 class PlayerSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.player
@@ -68,6 +69,19 @@ class PlayerSettings : BasePreferenceFragment() {
 
         pictureInPicture.setOnPreferenceChangeListener { _, newValue ->
             pauseOnQuit?.isVisible = !(newValue as Boolean)
+            true
+        }
+
+        val customBackgroundSpeed = findPreference<SwitchPreferenceCompat>(
+            PreferenceKeys.CUSTOM_PLAYBACK_SPEED
+        )
+        val backgroundSpeed = findPreference<SliderPreference>(
+            PreferenceKeys.BACKGROUND_PLAYBACK_SPEED
+        )
+        backgroundSpeed?.isEnabled = customBackgroundSpeed?.isChecked == true
+
+        customBackgroundSpeed?.setOnPreferenceChangeListener { _, newValue ->
+            backgroundSpeed?.isEnabled = newValue as Boolean
             true
         }
     }
