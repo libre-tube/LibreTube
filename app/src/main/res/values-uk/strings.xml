@@ -126,7 +126,7 @@
     <string name="music_directory">Музична тека</string>
     <string name="shareTo">Поділитися посиланням з</string>
     <string name="update_available">Версія %1$s доступна</string>
-    <string name="update_available_text">Доступне нове оновлення. Натисніть, щоб відкрити сторінку релізів на GitHub.</string>
+    <string name="update_available_text">Доступне нове оновлення. Натисніть, щоб відкрити сторінку випусків на GitHub.</string>
     <string name="downloads">Завантаження</string>
     <string name="video_format">Формат відео</string>
     <string name="contributing">Внесок</string>
@@ -447,4 +447,6 @@
     <string name="codecs">Кодеки</string>
     <string name="mark_as_watched">Позначити переглянутим</string>
     <string name="unsupported_file_format">Непідтримуваний формат файлу: %1$s</string>
+    <string name="custom_playback_speed">Користувацька швидкість</string>
+    <string name="custom_playback_speed_summary">Використовувати іншу швидкість відтворення, ніж для звичайного програвача.</string>
 </resources>
