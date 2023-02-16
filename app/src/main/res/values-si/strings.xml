@@ -444,4 +444,7 @@
     <string name="help">උදව්</string>
     <string name="faq">නිතර අසන ප්‍රශ්න</string>
     <string name="sleep_timer">නින්ද ටයිමරය</string>
+    <string name="mark_as_watched">නැරඹූ ලෙස ලකුණු කරන්න</string>
+    <string name="unsupported_file_format">සහාය නොදක්වන ගොනු ආකෘතියකි: %1$s</string>
+    <string name="codecs">කෝඩෙක්ස්</string>
 </resources>
