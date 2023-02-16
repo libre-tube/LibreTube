@@ -227,7 +227,6 @@
     <string name="none">Hiçbiri</string>
     <string name="reset_watch_positions">Sıfırla</string>
     <string name="data_saver_mode_summary">Küçük resimleri ve diğer resimleri gösterme.</string>
-    <string name="update_now">Yeni LibreTube sürümü şimdi yüklensin mi\?</string>
     <string name="navLabelVisibility">Etiket görünürlüğü</string>
     <string name="always">Her zaman</string>
     <string name="selected">Seçilen</string>

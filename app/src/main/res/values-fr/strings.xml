@@ -239,7 +239,6 @@
     <string name="none">Aucun</string>
     <string name="selected">Sélectionné</string>
     <string name="data_saver_mode_summary">Ignorer les miniatures et autres images.</string>
-    <string name="update_now">Installer la nouvelle version de LibreTube maintenant \?</string>
     <string name="never">Jamais</string>
     <string name="pure_theme_summary">Thème blanc/noir pur</string>
     <string name="seekbar_preview">Aperçu des vidéos</string>

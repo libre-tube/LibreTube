@@ -213,7 +213,6 @@
     <string name="change_playback_speed">재생 속도</string>
     <string name="require_restart">앱 다시 시작 필요</string>
     <string name="require_restart_message">변경사항을 적용하기 위해 앱을 다시 시작하세요.</string>
-    <string name="update_now">지금 새 LibreTube 버전을 설치하시겠습니까\?</string>
     <string name="autoRotatePlayer_summary">장치를 돌리면 전체 화면이 재생됩니다.</string>
     <string name="autoRotatePlayer">자동 전체화면</string>
     <string name="data_saver_mode">데이터 세이버 모드</string>

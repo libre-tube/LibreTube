@@ -356,7 +356,6 @@
     <string name="always">હંમેશા</string>
     <string name="watch_history_summary">સ્થાનિક રીતે જોયેલી વિડિયો પર નજર રાખો</string>
     <string name="watch_positions_title">યાદ રાખેલ પ્લેબેક સ્થાનો</string>
-    <string name="update_now">શું હવે નવી LibreTube આવૃત્તિ સ્થાપિત કરવી છે\?</string>
     <string name="autoplay_summary">વર્તમાન વિડિઓ પછી આગલી વિડિઓને સ્વતઃ ચલાવો.</string>
     <string name="clonePlaylist">ક્લોન પ્લેલીસ્ટ</string>
     <string name="deleteAccount_summary">તમારું પાઇપ થયેલ ખાતું કાઢી નાંખો</string>

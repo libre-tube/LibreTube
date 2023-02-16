@@ -243,7 +243,6 @@
     <string name="data_saver_mode_summary">Прескочи сличице и друге слике.</string>
     <string name="history_summary">Историја прегледа и претрага</string>
     <string name="system_caption_style">Системски стил наслова</string>
-    <string name="update_now">Да ли желите да ажурирате LibreTube сада\?</string>
     <string name="general">Опште</string>
     <string name="general_summary">Језик, и регион</string>
     <string name="default_subtitle_language">Језик титлова</string>

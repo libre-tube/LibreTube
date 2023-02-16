@@ -263,7 +263,6 @@
     <string name="error_occurred">Feil</string>
     <string name="share_with_time">Del med starttid</string>
     <string name="downloadsucceeded">Nedlastet</string>
-    <string name="update_now">Installer den nye LibreTube-versjonen nå\?</string>
     <string name="selected">Valgte</string>
     <string name="autoRotatePlayer_summary">Fullskjerm når enheten ligger.</string>
     <string name="no_player_found">Installer et avspillerprogram først.</string>

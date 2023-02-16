@@ -181,7 +181,6 @@
     <string name="change_playback_speed">වාදන වේගය</string>
     <string name="autoRotatePlayer_summary">උපාංගය හැරවූ විට සම්පූර්ණ තිර වාදනය.</string>
     <string name="watch_positions_title">මතක වාදන ස්ථාන</string>
-    <string name="update_now">නව LibreTube අනුවාදය දැන් පිහිටු වන්නද\?</string>
     <string name="general_summary">භාෂාව සහ ප්‍රදේශය</string>
     <string name="caption_settings">සිරස්තල</string>
     <string name="playerAudioFormat">වාදකය සඳහා ශ්‍රව්‍ය ආකෘතිය</string>

@@ -241,7 +241,6 @@
     <string name="none">لاشيء</string>
     <string name="data_saver_mode_summary">تخطي الصور المصغرة والصور الأخرى.</string>
     <string name="history_summary">سجل المشاهدة والبحث</string>
-    <string name="update_now">قم بتثبيت إصدار LibreTube الجديد الآن؟</string>
     <string name="seekbar_preview">معاينة الفيديو</string>
     <string name="seekbar_preview_summary">إظهار معاينة عند سحب مؤشر التشغيل.</string>
     <string name="general">عام</string>

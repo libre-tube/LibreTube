@@ -1,7 +1,6 @@
 package com.github.libretube.ui.preferences
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
@@ -11,7 +10,7 @@ import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.base.BasePreferenceFragment
-import com.github.libretube.ui.dialogs.UpdateDialog
+import com.github.libretube.ui.dialogs.UpdateAvailableDialog
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -85,14 +84,6 @@ class MainSettings : BasePreferenceFragment() {
 
         // checking for update: yes -> dialog, no -> snackBar
         update?.setOnPreferenceClickListener {
-            if (BuildConfig.DEBUG) {
-                Toast.makeText(
-                    context,
-                    "Updater is disabled for debug versions!",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnPreferenceClickListener true
-            }
             CoroutineScope(Dispatchers.IO).launch {
                 // check for update
                 val updateInfo = try {
@@ -104,9 +95,9 @@ class MainSettings : BasePreferenceFragment() {
 
                 if (BuildConfig.VERSION_NAME != updateInfo.name) {
                     // show the UpdateAvailableDialog if there's an update available
-                    UpdateDialog(updateInfo).show(
+                    UpdateAvailableDialog(updateInfo).show(
                         childFragmentManager,
-                        UpdateDialog::class.java.name
+                        UpdateAvailableDialog::class.java.name
                     )
                 } else {
                     // otherwise show the no update available snackBar

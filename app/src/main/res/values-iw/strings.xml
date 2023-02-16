@@ -242,7 +242,6 @@
     <string name="none">ללא</string>
     <string name="seekbar_preview">תצוגה מקדימה של הסרטון</string>
     <string name="seekbar_preview_summary">להציג תמונה מהסרטון בעת גרירת מחוון הנגינה.</string>
-    <string name="update_now">להתקין את הגרסה החדשה של LibreTube כעת\?</string>
     <string name="data_saver_mode_summary">לדלג על תמונות ממוזערות ותמונות אחרות.</string>
     <string name="general">כללי</string>
     <string name="general_summary">שפה ואזור</string>

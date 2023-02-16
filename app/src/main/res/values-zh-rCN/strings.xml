@@ -240,7 +240,6 @@
     <string name="system_caption_style">系统字幕样式</string>
     <string name="captions">字幕</string>
     <string name="none">无</string>
-    <string name="update_now">立即安装新版本的 LibreTube 吗？</string>
     <string name="data_saver_mode_summary">不加载缩略图和其他图像。</string>
     <string name="seekbar_preview">视频预览</string>
     <string name="seekbar_preview_summary">拖动播放指示器时显示快照。</string>

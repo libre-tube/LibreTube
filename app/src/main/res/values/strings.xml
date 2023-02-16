@@ -251,7 +251,6 @@
     <string name="system_caption_style">System caption style</string>
     <string name="captions">Captions</string>
     <string name="none">None</string>
-    <string name="update_now">Install the new LibreTube version now?</string>
     <string name="seekbar_preview">Video preview</string>
     <string name="seekbar_preview_summary">Show a snapshot when dragging the playback indicator.</string>
     <string name="general">General</string>

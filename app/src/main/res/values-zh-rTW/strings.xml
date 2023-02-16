@@ -325,7 +325,6 @@
     <string name="reset_watch_positions">重設</string>
     <string name="none">無</string>
     <string name="system_caption_style">系統說明文字樣式</string>
-    <string name="update_now">現在安裝新版本LibreTube嗎？</string>
     <string name="playingOnBackground">在背景播放…</string>
     <string name="downloading_apk">下載APK…</string>
     <string name="playerAudioFormat">播放器的音訊格式</string>
