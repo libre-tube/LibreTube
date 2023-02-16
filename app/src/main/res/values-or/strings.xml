@@ -83,7 +83,7 @@
     <string name="piped">ପାଇପ୍</string>
     <string name="youtube">ୟୁଟିଉବ</string>
     <string name="playOnBackground">ପୃଷ୍ଠଭୂମି ରେ ପ୍ଲେ କରନ୍ତୁ</string>
-    <string name="update_available_text">ରିଲିଜ୍ ରୁ ଡାଉନଲୋଡ୍ କରିବେ କି \?</string>
+    <string name="update_available_text">ନୂତନ ଅଦ୍ୟତନ ଉପଲବ୍ଧ । GitHub ରିଲିଜ୍ ପୃଷ୍ଠା ଖୋଲିବାକୁ କ୍ଲିକ୍ କରନ୍ତୁ ।</string>
     <string name="appearance">ରୂପ</string>
     <string name="video_format">ଭିଡିଓ ଫର୍ମାଟ</string>
     <string name="video_format_summary">ଡାଉନଲୋଡ ପରେ ଭିଡିଓ ଓ ସ୍ଵର ମିଶିବ ।</string>
@@ -94,7 +94,7 @@
     <string name="subscribeIsEmpty">କିଛି ଧାରାବାହିକ ରେ ପ୍ରଥମେ ସଦସ୍ୟତା ଯୋଡ଼ନ୍ତୁ ।</string>
     <string name="dlisinprogress">ଆଉ ଗୋଟିଏ ଡାଉନଲୋଡ ପ୍ରକ୍ରିୟାରତ ।ଦୟା କରି ଅପେକ୍ଷା କରନ୍ତୁ ।</string>
     <string name="import_from_yt">ସଦସ୍ୟତା ଗୁଡ଼ିକୁ ଆମଦାନୀ କରନ୍ତୁ</string>
-    <string name="server_error">ଏହି ସର୍ଭର ରେ କିଛି ସମସ୍ୟା ଅଛି । ଆଉ ଗୋଟିଏ ଇଂସ୍ତନ୍ସ କୁ ଚେଷ୍ଟା କରିବେ \?</string>
+    <string name="server_error">ମନୋନୀତ ସର୍ଭର ସହିତ ଏକ ସମସ୍ୟା ଥିବା ପରି ମନେହୁଏ । ଅନ୍ୟ ଏକ ଉଦାହରଣ ଚେଷ୍ଟା କରନ୍ତୁ ।</string>
     <string name="empty">ଆପଣଙ୍କୁ ନିଜର ପଞ୍ଜୀକୃତ ନାମ ଓ ପାସ୍ ୱାର୍ଡ ଦେବାକୁ ହେବ ।</string>
     <string name="areYouSure">ପ୍ଲେଲିଷ୍ଟ ଡିଲିଟ କରିବେ କି \?</string>
     <string name="deletePlaylist">ପ୍ଲେଲିଷ୍ଟ ଡିଲିଟ କରନ୍ତୁ</string>
