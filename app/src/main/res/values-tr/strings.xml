@@ -49,7 +49,7 @@
     <string name="vlcerror">VLC\'de açılamadı. Kurulu olmayabilir.</string>
     <string name="instances">Seç…</string>
     <string name="customInstance">Özel</string>
-    <string name="server_error">Sunucuyla ilgili bir sorun var. Başka bir örnek denensin mi\?</string>
+    <string name="server_error">Seçilen sunucu ile ilgili bir sorun olacaktır. Başka bir örnek dene.</string>
     <string name="grid">Ağ sütunları</string>
     <string name="import_from_yt_summary">YouTube veya NewPipe\'tan</string>
     <string name="emptyPlaylistName">Oynatma listesi adı boş olamaz</string>
@@ -117,7 +117,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Arka planda oynat</string>
     <string name="update_available">%1$s Sürümü mevcut</string>
-    <string name="update_available_text">İndirmek için GitHub\'daki sürümlere geçilsin mi\?</string>
+    <string name="update_available_text">Yeni güncelleme mevcut. GitHub sürümleri sayfasın açmak için tıkla.</string>
     <string name="appearance">Görünüm</string>
     <string name="app_behavior">Davranış</string>
     <string name="downloads">İndirilenler</string>
@@ -447,4 +447,6 @@
     <string name="codecs">Kodekler</string>
     <string name="mark_as_watched">İzlendi olarak işaretle</string>
     <string name="unsupported_file_format">Desteklenmeyen dosya biçimi: %1$s</string>
+    <string name="custom_playback_speed">Özel hız</string>
+    <string name="custom_playback_speed_summary">Normal oynatıcıdan farklı oynatma hızı kullan.</string>
 </resources>
