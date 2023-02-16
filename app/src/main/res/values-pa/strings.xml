@@ -444,4 +444,7 @@
     <string name="faq">ਆਮ ਸਵਾਲ</string>
     <string name="sleep_timer">ਸਲੀਪ ਟਾਈਮਰ</string>
     <string name="replies">ਜਵਾਬ</string>
+    <string name="unsupported_file_format">ਅਸਮਰਥਿਤ ਫ਼ਾਈਲ ਫਾਰਮੈਟ: %1$s</string>
+    <string name="mark_as_watched">ਵੇਖੇ ਗਏ ਵਜੋਂ ਮਾਰਕ ਕਰੋ</string>
+    <string name="codecs">ਕੋਡੈਕਸ</string>
 </resources>
