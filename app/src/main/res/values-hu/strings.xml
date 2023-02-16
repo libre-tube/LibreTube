@@ -17,7 +17,7 @@
     <string name="vlc">Megnyitás VLC-ben</string>
     <string name="vlcerror">Nem sikerült megnyitni VLC-ben. Lehetséges, hogy nincs telepítve.</string>
     <string name="import_from_yt">Feliratkozások importálása</string>
-    <string name="server_error">Probláma van a szerverrel. Megpróbálja egy másik példánnyal\?</string>
+    <string name="server_error">Úgy tűnik, hogy probléma van a kiválasztott szerverrel. Próbálj meg egy másik példányt.</string>
     <string name="unknown_error">Hálózati hiba.</string>
     <string name="empty">Meg kell adnia egy felhasználónevet és jelszót.</string>
     <string name="defres">Videófelbontás</string>
@@ -161,7 +161,7 @@
     <string name="download_directory_summary">Ahol a letöltött média tárolva lesz.</string>
     <string name="category_filler">Időkitöltés/viccek</string>
     <string name="category_preview">Előnézet/visszatekintés</string>
-    <string name="update_available_text">A letöltéshez ellátogasson a kiadásokra a GitHubon\?</string>
+    <string name="update_available_text">Új frissítés érhető el. Kattints a Github kiadások oldalának a megnyitásához.</string>
     <string name="watch_history">Megtekintési előzmények</string>
     <string name="skip_buttons">Kihagyás gombok</string>
     <string name="skip_buttons_summary">Gombok megjelenítése a következő vagy az előző videóra való ugráshoz.</string>
