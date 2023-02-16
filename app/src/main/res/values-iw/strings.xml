@@ -16,7 +16,7 @@
     <string name="subscribeIsEmpty">עליך להירשם לכמה ערוצים תחילה.</string>
     <string name="import_from_yt_summary">מ־YouTube או NewPipe</string>
     <string name="app_theme">ערכת עיצוב</string>
-    <string name="server_error">יש תקלה עם השרת. לנסות עותק אחר\?</string>
+    <string name="server_error">נראה שיש תקלה עם השרת הנבחר. נא לנסות אחד אחר.</string>
     <string name="error">משהו השתבש.</string>
     <string name="empty">עליך למלא שם משתמש וסיסמה.</string>
     <string name="notgmail">זה לחשבון Piped.</string>
@@ -59,7 +59,7 @@
     <string name="app_icon">סמל</string>
     <string name="enabled">פעיל</string>
     <string name="playOnBackground">ניגון ברקע</string>
-    <string name="update_available_text">לעבור ל־releases (מהדורות) ב־GitHub כדי להוריד אותה\?</string>
+    <string name="update_available_text">עדכון חדש זמין. יש לפתוח את עמוד הגרסאות ב־GitHub.</string>
     <string name="appearance">מראה</string>
     <string name="app_behavior">התנהגות</string>
     <string name="video_format">תצורת סרטונים</string>
