@@ -23,7 +23,7 @@
     <string name="dlcomplete">Descarga terminada.</string>
     <string name="downloadfailed">Falha ao descarregar.</string>
     <string name="app_theme">Tema</string>
-    <string name="server_error">Existe um problema com o servidor. Deseja tentar com outra instância\?</string>
+    <string name="server_error">Parece que existe um problema com o servidor selecionado. Deseja tentar com outra instância\?</string>
     <string name="unknown_error">Erro de rede.</string>
     <string name="error">Ocorreu um erro.</string>
     <string name="notgmail">Apenas com uma conta Piped.</string>
@@ -108,7 +108,7 @@
     <string name="category_outro">Ecrã final e créditos</string>
     <string name="color_accent">Destaque</string>
     <string name="color_red">Vermelho</string>
-    <string name="update_available_text">Deseja aceder a GitHub para a descarregar\?</string>
+    <string name="update_available_text">Está disponível uma atualização. Toque para abrir a página no GitHub.</string>
     <string name="app_icon">Ícone</string>
     <string name="playOnBackground">Reproduzir em segundo plano</string>
     <string name="update">Procurar atualizações</string>
@@ -447,4 +447,6 @@
     <string name="codecs">Codificadores</string>
     <string name="mark_as_watched">Marcar como visto</string>
     <string name="unsupported_file_format">Formato não suportado: %1$s</string>
+    <string name="custom_playback_speed">Personalizada</string>
+    <string name="custom_playback_speed_summary">Utilizar velocidade de reprodução personalizada.</string>
 </resources>
