@@ -328,7 +328,6 @@
     <string name="system_caption_style">Системний стиль субтитрів</string>
     <string name="captions">Субтитри</string>
     <string name="none">Немає</string>
-    <string name="update_now">Установити нову версію LibreTube зараз\?</string>
     <string name="general">Загальні</string>
     <string name="instance_frontend_url">URL-адреса сервера</string>
     <string name="audio_video_summary">Якість і формат</string>

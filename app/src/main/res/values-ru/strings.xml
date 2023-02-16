@@ -239,7 +239,6 @@
     <string name="data_saver_mode_summary">Пропускать миниатюры и другие изображения.</string>
     <string name="history_summary">История просмотра и поиска</string>
     <string name="reset_watch_positions">Сбросить</string>
-    <string name="update_now">Установить новую версию LibreTube\?</string>
     <string name="captions">Субтитры</string>
     <string name="general">Общие</string>
     <string name="general_summary">Язык и регион</string>

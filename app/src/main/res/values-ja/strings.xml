@@ -233,7 +233,6 @@
     <string name="system_caption_style">システムの字幕スタイル</string>
     <string name="captions">字幕</string>
     <string name="none">なし</string>
-    <string name="update_now">新しいバージョンのLibreTubeをインストールしますか？</string>
     <string name="general">一般</string>
     <string name="general_summary">言語と地域</string>
     <string name="seekbar_preview">動画プレビュー</string>

@@ -306,7 +306,6 @@
     <string name="auto_rotation">Automatyczne obracanie</string>
     <string name="none">Brak</string>
     <string name="history_size">Maksymalny rozmiar historii</string>
-    <string name="update_now">Zainstalować teraz nową wersję LibreTube\?</string>
     <string name="background_mode">Działanie w tle</string>
     <string name="share_with_time">Udostępnij z uwzględnieniem czasu</string>
     <string name="break_reminder_time">Minuty przed przypomnieniem</string>

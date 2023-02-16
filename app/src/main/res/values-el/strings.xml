@@ -254,7 +254,6 @@
     <string name="seekbar_preview_summary">Εμφάνιση ενός στιγμιότυπου όταν σύρετε την ένδειξη αναπαραγωγής.</string>
     <string name="playingOnBackground">Αναπαραγωγή στο παρασκήνιο…</string>
     <string name="open">Άνοιγμα…</string>
-    <string name="update_now">Εγκατάσταση της νέας έκδοσης του LibreTube τώρα;</string>
     <string name="seekbar_preview">Προεπισκόπηση βίντεο</string>
     <string name="caption_settings">Λεζάντες</string>
     <string name="worst_quality">Χειρότερη</string>

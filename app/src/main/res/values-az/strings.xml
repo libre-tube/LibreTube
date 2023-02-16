@@ -241,7 +241,6 @@
     <string name="captions">Altyazılar</string>
     <string name="none">Heç biri</string>
     <string name="watch_positions_title">Saxlanılmış oynatma mövqeləri</string>
-    <string name="update_now">Yeni LibreTube versiyası indi quraşdırılsınmı\?</string>
     <string name="seekbar_preview">Video önizləməsi</string>
     <string name="seekbar_preview_summary">Oynatma göstəricisini sürükləyərkən fotoqrafiya göstər.</string>
     <string name="general_summary">Dil və ölkə</string>

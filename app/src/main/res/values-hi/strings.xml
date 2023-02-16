@@ -362,7 +362,6 @@
     <string name="system_caption_style">सिस्टम कैप्शन शैली</string>
     <string name="captions">कैप्शनज</string>
     <string name="none">कोई भी नहीं</string>
-    <string name="update_now">नया लिब्रेट्यूब संस्करण अभी इंस्टाल करें\?</string>
     <string name="seekbar_preview">वीडियो पूर्वावलोकन</string>
     <string name="seekbar_preview_summary">प्लेबैक सूचक को खींचते समय एक स्नैपशॉट दिखाएँ।</string>
     <string name="general_summary">भाषा और क्षेत्र</string>

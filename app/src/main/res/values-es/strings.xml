@@ -241,7 +241,6 @@
     <string name="system_caption_style">Estilo de subtítulos del sistema</string>
     <string name="captions">Subtítulos</string>
     <string name="none">Ninguno</string>
-    <string name="update_now">¿Instalar la nueva versión de LibreTube ahora\?</string>
     <string name="seekbar_preview">Vista previa del video</string>
     <string name="notifications">Notificaciones</string>
     <string name="irreversible">¿Está seguro\? ¡Esto no se puede deshacer!</string>

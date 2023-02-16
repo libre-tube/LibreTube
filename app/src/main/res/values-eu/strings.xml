@@ -238,7 +238,6 @@
     <string name="reset_watch_positions">Ezabatu posizioa</string>
     <string name="system_caption_style">Sistemaren azpitituluen estiloa</string>
     <string name="none">Bat ere ez</string>
-    <string name="update_now">Libretube bertsio berria instalatu nahi duzu orain\?</string>
     <string name="seekbar_preview">Bideoaren aurrebista</string>
     <string name="seekbar_preview_summary">Aurreikusi bideoa erreprodukzio barra arrastatzean.</string>
     <string name="watch_history_summary">Gailuan ikusitako bideoen jarraipena egitea</string>

@@ -260,7 +260,6 @@
     <string name="system_caption_style">Estilo do sistema</string>
     <string name="captions">Legendas</string>
     <string name="none">Nada</string>
-    <string name="update_now">Instalar agora a nova versão\?</string>
     <string name="general">Geral</string>
     <string name="general_summary">Idioma e região</string>
     <string name="seekbar_preview_summary">Mostrar previsão ao mover o indicador de posição.</string>

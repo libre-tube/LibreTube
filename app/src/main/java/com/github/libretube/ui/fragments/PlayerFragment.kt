@@ -1407,7 +1407,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player), OnlinePlayerOptions {
             // enable exoPlayer controls again
             binding.player.useController = true
 
-            // set back to protrait mode
+            // set back to portrait mode
             if (viewModel.isFullscreen.value != true) {
                 with(binding.playerMotionLayout) {
                     getConstraintSet(R.id.start).constrainHeight(R.id.player, 0)
