@@ -239,7 +239,7 @@ class BackgroundMode : LifecycleService() {
             .setAudioAttributes(PlayerHelper.getAudioAttributes(), true)
             .setLoadControl(PlayerHelper.getLoadControl())
             .build()
-            .loadPlaybackParams()
+            .loadPlaybackParams(isBackgroundMode = true)
 
         /**
          * Listens for changed playbackStates (e.g. pause, end)

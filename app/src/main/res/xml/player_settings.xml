@@ -161,6 +161,26 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/background_mode">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="custom_playback_speed"
+            app:title="@string/custom_playback_speed"
+            android:summary="@string/custom_playback_speed_summary"
+            android:icon="@drawable/ic_headphones" />
+
+        <com.github.libretube.ui.views.SliderPreference
+            android:icon="@drawable/ic_speed"
+            app:defValue="1.0"
+            app:key="background_playback_speed"
+            app:stepSize="0.1"
+            app:title="@string/playback_speed"
+            app:valueFrom="0.2"
+            app:valueTo="4.0" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/misc">
 
         <SwitchPreferenceCompat

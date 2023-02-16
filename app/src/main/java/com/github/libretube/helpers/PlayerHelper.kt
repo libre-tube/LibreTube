@@ -282,11 +282,17 @@ object PlayerHelper {
             .roundToInt()
             .toLong() * 1000
 
-    private val playbackSpeed: String
+    private val playbackSpeed: Float
         get() = PreferenceHelper.getString(
             PreferenceKeys.PLAYBACK_SPEED,
             "1"
-        ).replace("F", "")
+        ).replace("F", "").toFloat()
+
+    private val backgroundSpeed: Float
+        get() = when (PreferenceHelper.getBoolean(PreferenceKeys.CUSTOM_PLAYBACK_SPEED, false)) {
+            true -> PreferenceHelper.getString(PreferenceKeys.BACKGROUND_PLAYBACK_SPEED, "1").toFloat()
+            else -> playbackSpeed
+        }
 
     val resizeModePref: String
         get() = PreferenceHelper.getString(
@@ -470,12 +476,10 @@ object PlayerHelper {
     /**
      * Load playback parameters such as speed and skip silence
      */
-    fun ExoPlayer.loadPlaybackParams(): ExoPlayer {
+    fun ExoPlayer.loadPlaybackParams(isBackgroundMode: Boolean = false): ExoPlayer {
         skipSilenceEnabled = skipSilence
-        playbackParameters = PlaybackParameters(
-            playbackSpeed.toFloat(),
-            1.0f
-        )
+        val speed = if (isBackgroundMode) backgroundSpeed else playbackSpeed
+        playbackParameters = PlaybackParameters(speed, 1.0f)
         return this
     }
 
