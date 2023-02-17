@@ -14,8 +14,6 @@ import com.github.libretube.db.obj.LocalPlaylist
 import com.github.libretube.enums.PlaylistType
 import com.github.libretube.extensions.TAG
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toLocalPlaylistItem
-import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.helpers.ProxyHelper

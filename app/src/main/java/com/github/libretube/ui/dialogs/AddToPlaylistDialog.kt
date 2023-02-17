@@ -14,7 +14,6 @@ import com.github.libretube.api.PlaylistsHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.databinding.DialogAddtoplaylistBinding
 import com.github.libretube.extensions.TAG
-import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.ui.models.PlaylistViewModel
 import com.github.libretube.util.PlayingQueue

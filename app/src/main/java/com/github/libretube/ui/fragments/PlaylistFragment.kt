@@ -25,7 +25,6 @@ import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.dpToPx
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toPlaylistBookmark
 import com.github.libretube.helpers.ImageHelper
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.ui.adapters.PlaylistAdapter

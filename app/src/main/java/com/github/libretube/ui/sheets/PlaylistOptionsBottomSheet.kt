@@ -10,7 +10,6 @@ import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.awaitQuery
 import com.github.libretube.extensions.query
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toPlaylistBookmark
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.obj.ShareData

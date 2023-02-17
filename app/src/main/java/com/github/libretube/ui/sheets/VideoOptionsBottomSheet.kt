@@ -10,7 +10,6 @@ import com.github.libretube.db.DatabaseHolder
 import com.github.libretube.db.obj.WatchPosition
 import com.github.libretube.enums.ShareObjectType
 import com.github.libretube.extensions.awaitQuery
-import com.github.libretube.extensions.toStreamItem
 import com.github.libretube.helpers.BackgroundHelper
 import com.github.libretube.helpers.PlayerHelper
 import com.github.libretube.helpers.PreferenceHelper
