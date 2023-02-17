@@ -44,7 +44,9 @@ data class Streams(
         val items = mutableListOf<DownloadItem>()
 
         if (!videoQuality.isNullOrEmpty() && !videoFormat.isNullOrEmpty()) {
-            val stream = videoStreams.find { it.quality == videoQuality && it.format == videoFormat }
+            val stream = videoStreams.find {
+                it.quality == videoQuality && it.format == videoFormat
+            }
             items.add(
                 DownloadItem(
                     type = FileType.VIDEO,
@@ -59,7 +61,9 @@ data class Streams(
         }
 
         if (!audioQuality.isNullOrEmpty() && !audioFormat.isNullOrEmpty()) {
-            val stream = audioStreams.find { it.quality == audioQuality && it.format == audioFormat }
+            val stream = audioStreams.find {
+                it.quality == audioQuality && it.format == audioFormat
+            }
             items.add(
                 DownloadItem(
                     type = FileType.AUDIO,

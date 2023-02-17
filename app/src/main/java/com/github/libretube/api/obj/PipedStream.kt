@@ -23,6 +23,6 @@ data class PipedStream(
 ) {
     fun getQualityString(fileName: String): String {
         return "${fileName}_${quality?.replace(" ", "_")}_$format." +
-                mimeType?.split("/")?.last()
+            mimeType?.split("/")?.last()
     }
 }
