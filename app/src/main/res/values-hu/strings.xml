@@ -328,7 +328,7 @@
     <string name="select_at_least_one">Válasszon ki legalább egy elemet</string>
     <string name="views_placeholder">megtekintés</string>
     <string name="progressive_load_interval_summary">Egy alacsonyabb érték lehet, hogy felgyorsítja a kezdeti videóbetöltést.</string>
-    <string name="save_feed_summary">Töltse be az előfizetési hírcsatornát a háttérben, és akadályozza meg az automatikus frissítést.</string>
+    <string name="save_feed_summary">Töltse be az feliratkozott videófolyamot a háttérben, és akadályozza meg az automatikus frissítést.</string>
     <string name="background_channel_description">Megjelenít egy értesítést a lejátszó vezérlésére szolgáló gombokkal.</string>
     <string name="skip_segment">Szakasz kihagyása</string>
     <string name="sb_skip_manual">Manuális kihagyás</string>
@@ -417,7 +417,7 @@
     <string name="theme_monochrome">Minimalista monokróm</string>
     <string name="play_latest_videos">Legújabb videók lejátszása</string>
     <string name="failed_fetching_instances">Nem sikerült lekérni az elérhető példányokat.</string>
-    <string name="hide_watched_from_feed">Megnézett videó elrejtése a hírfolyamból</string>
+    <string name="hide_watched_from_feed">Megnézett videó elrejtése a videófolyamból</string>
     <string name="hide_watched_from_feed_summary">Ne mutassa a már 90%-ig megnézett videókat a feliratkozások lapon.</string>
     <string name="playlistUrl">Lejátszási lista URL</string>
     <string name="pause_on_quit">Szüneteltet bezárásnál</string>
@@ -444,4 +444,9 @@
     <string name="help">Súgó</string>
     <string name="faq">GYIK</string>
     <string name="replies">Válaszok</string>
+    <string name="mark_as_watched">Megtekintettként jelölés</string>
+    <string name="custom_playback_speed">Egyéni sebesség</string>
+    <string name="custom_playback_speed_summary">A normális lejátszótól való különböző sebesség használata.</string>
+    <string name="unsupported_file_format">Nem támogatott fájlformátum: %1$s</string>
+    <string name="codecs">Kodekek</string>
 </resources>
