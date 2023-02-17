@@ -43,7 +43,7 @@
     <string name="createPlaylist">Buat daftar putar</string>
     <string name="playlistName">Nama daftar putar</string>
     <string name="import_from_yt_summary">Dari YouTube atau NewPipe</string>
-    <string name="server_error">Ada masalah dengan server. Cobalah instance lain\?</string>
+    <string name="server_error">Sepertinya ada masalah dengan server yang dipilih. Coba server lain.</string>
     <string name="unknown_error">Terjadi kesalahan jaringan.</string>
     <string name="error">Ada yang salah.</string>
     <string name="empty">Anda harus memasukkan nama pengguna dan kata sandi.</string>
@@ -203,7 +203,7 @@
     <string name="category_preview">Tampilan/Rekap</string>
     <string name="music_directory">Folder musik</string>
     <string name="update_available">Versi %1$s tersedia</string>
-    <string name="update_available_text">Pergi ke rilis di GitHub untuk mengunduhnya\?</string>
+    <string name="update_available_text">Pembaruan baru tersedia. Klik untuk membuka laman rilis GitHub.</string>
     <string name="appearance">Tampilan</string>
     <string name="app_behavior">Perilaku</string>
     <string name="downloads">Unduhan</string>
@@ -447,4 +447,6 @@
     <string name="codecs">Kodek</string>
     <string name="mark_as_watched">Tandai sebagai ditonton</string>
     <string name="unsupported_file_format">Format berkas tidak didukung: %1$s</string>
+    <string name="custom_playback_speed">Kecepatan kustom</string>
+    <string name="custom_playback_speed_summary">Gunakan kecepatan pemutaran yang berbeda daripada pemutar yang normal.</string>
 </resources>
