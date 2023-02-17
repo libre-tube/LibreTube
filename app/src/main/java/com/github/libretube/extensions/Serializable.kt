@@ -1,4 +1,4 @@
-package com.github.libretube.ui.extensions
+package com.github.libretube.extensions
 
 import android.os.Build
 import android.os.Bundle
