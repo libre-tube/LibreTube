@@ -6,7 +6,6 @@ import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.StreamItem
 import com.github.libretube.extensions.move
 import com.github.libretube.extensions.toID
-import com.github.libretube.extensions.toStreamItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -3,6 +3,8 @@ package com.github.libretube.db.obj
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.github.libretube.api.obj.StreamItem
+import com.github.libretube.helpers.ProxyHelper
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -18,4 +20,18 @@ data class LocalPlaylistItem(
     @ColumnInfo val uploaderAvatar: String? = null,
     @ColumnInfo val thumbnailUrl: String? = null,
     @ColumnInfo val duration: Long? = null
-)
+) {
+    fun toStreamItem(): StreamItem {
+        return StreamItem(
+            url = videoId,
+            title = title,
+            thumbnail = ProxyHelper.rewriteUrl(thumbnailUrl),
+            uploaderName = uploader,
+            uploaderUrl = uploaderUrl,
+            uploaderAvatar = ProxyHelper.rewriteUrl(uploaderAvatar),
+            uploadedDate = uploadDate,
+            uploaded = null,
+            duration = duration
+        )
+    }
+}

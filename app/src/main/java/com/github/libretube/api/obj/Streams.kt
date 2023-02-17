@@ -1,5 +1,7 @@
 package com.github.libretube.api.obj
 
+import com.github.libretube.db.obj.DownloadItem
+import com.github.libretube.enums.FileType
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
 
@@ -29,4 +31,81 @@ data class Streams(
     val chapters: List<ChapterSegment> = emptyList(),
     val uploaderSubscriberCount: Long = 0,
     val previewFrames: List<PreviewFrames> = emptyList()
-)
+) {
+    fun toDownloadItems(
+        videoId: String,
+        fileName: String,
+        videoFormat: String?,
+        videoQuality: String?,
+        audioFormat: String?,
+        audioQuality: String?,
+        subtitleCode: String?
+    ): List<DownloadItem> {
+        val items = mutableListOf<DownloadItem>()
+
+        if (!videoQuality.isNullOrEmpty() && !videoFormat.isNullOrEmpty()) {
+            val stream = videoStreams.find {
+                it.quality == videoQuality && it.format == videoFormat
+            }
+            items.add(
+                DownloadItem(
+                    type = FileType.VIDEO,
+                    videoId = videoId,
+                    fileName = stream?.getQualityString(fileName).orEmpty(),
+                    path = "",
+                    url = stream?.url,
+                    format = videoFormat,
+                    quality = videoQuality
+                )
+            )
+        }
+
+        if (!audioQuality.isNullOrEmpty() && !audioFormat.isNullOrEmpty()) {
+            val stream = audioStreams.find {
+                it.quality == audioQuality && it.format == audioFormat
+            }
+            items.add(
+                DownloadItem(
+                    type = FileType.AUDIO,
+                    videoId = videoId,
+                    fileName = stream?.getQualityString(fileName).orEmpty(),
+                    path = "",
+                    url = stream?.url,
+                    format = audioFormat,
+                    quality = audioQuality
+                )
+            )
+        }
+
+        if (!subtitleCode.isNullOrEmpty()) {
+            items.add(
+                DownloadItem(
+                    type = FileType.SUBTITLE,
+                    videoId = videoId,
+                    fileName = "${fileName}_$subtitleCode.srt",
+                    path = "",
+                    url = subtitles.find { it.code == subtitleCode }?.url
+                )
+            )
+        }
+
+        return items
+    }
+
+    fun toStreamItem(videoId: String): StreamItem {
+        return StreamItem(
+            url = videoId,
+            title = title,
+            thumbnail = thumbnailUrl,
+            uploaderName = uploader,
+            uploaderUrl = uploaderUrl,
+            uploaderAvatar = uploaderAvatar,
+            uploadedDate = uploadDate.toString(),
+            uploaded = null,
+            duration = duration,
+            views = views,
+            uploaderVerified = uploaderVerified,
+            shortDescription = description
+        )
+    }
+}

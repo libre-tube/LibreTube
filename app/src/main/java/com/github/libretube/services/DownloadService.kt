@@ -25,7 +25,6 @@ import com.github.libretube.db.obj.DownloadItem
 import com.github.libretube.enums.FileType
 import com.github.libretube.extensions.formatAsFileSize
 import com.github.libretube.extensions.getContentLength
-import com.github.libretube.extensions.toDownloadItems
 import com.github.libretube.extensions.toastFromMainThread
 import com.github.libretube.helpers.DownloadHelper
 import com.github.libretube.helpers.DownloadHelper.getNotificationId
