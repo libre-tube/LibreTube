@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.postDelayed
 import androidx.core.view.updatePadding
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,7 +22,6 @@ import com.github.libretube.extensions.dpToPx
 import com.github.libretube.helpers.NavigationHelper
 import com.github.libretube.helpers.ProxyHelper
 import com.github.libretube.ui.adapters.WatchHistoryAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.PlayerViewModel
 import com.github.libretube.util.PlayingQueue
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -29,7 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class WatchHistoryFragment : BaseFragment() {
+class WatchHistoryFragment : Fragment() {
     private lateinit var binding: FragmentWatchHistoryBinding
 
     private val playerViewModel: PlayerViewModel by activityViewModels()

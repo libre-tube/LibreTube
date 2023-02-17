@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.libretube.R
@@ -24,7 +25,6 @@ import com.github.libretube.obj.ChannelTabs
 import com.github.libretube.obj.ShareData
 import com.github.libretube.ui.adapters.SearchAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.ShareDialog
 import com.github.libretube.ui.extensions.setupSubscriptionButton
 import java.io.IOException
@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class ChannelFragment : BaseFragment() {
+class ChannelFragment : Fragment() {
     private lateinit var binding: FragmentChannelBinding
 
     private var channelId: String? = null
@@ -102,10 +102,12 @@ class ChannelFragment : BaseFragment() {
     private fun fetchChannel() {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                if (channelId != null) {
-                    RetrofitInstance.api.getChannel(channelId!!)
-                } else {
-                    RetrofitInstance.api.getChannelByName(channelName!!)
+                withContext(Dispatchers.IO) {
+                    if (channelId != null) {
+                        RetrofitInstance.api.getChannel(channelId!!)
+                    } else {
+                        RetrofitInstance.api.getChannelByName(channelName!!)
+                    }
                 }
             } catch (e: IOException) {
                 binding.channelRefresh.isRefreshing = false
@@ -129,64 +131,60 @@ class ChannelFragment : BaseFragment() {
             isSubscribed = SubscriptionHelper.isSubscribed(channelId!!)
             if (isSubscribed == null) return@launchWhenCreated
 
-            runOnUiThread {
-                binding.channelSubscribe.setupSubscriptionButton(
-                    channelId,
-                    channelName,
-                    binding.notificationBell
-                )
+            binding.channelSubscribe.setupSubscriptionButton(
+                channelId,
+                channelName,
+                binding.notificationBell
+            )
 
-                binding.channelShare.setOnClickListener {
-                    val shareDialog = ShareDialog(
-                        response.id!!.toID(),
-                        ShareObjectType.CHANNEL,
-                        shareData
-                    )
-                    shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
-                }
+            binding.channelShare.setOnClickListener {
+                val shareDialog = ShareDialog(
+                    response.id!!.toID(),
+                    ShareObjectType.CHANNEL,
+                    shareData
+                )
+                shareDialog.show(childFragmentManager, ShareDialog::class.java.name)
             }
 
             nextPage = response.nextpage
             isLoading = false
             binding.channelRefresh.isRefreshing = false
 
-            runOnUiThread {
-                binding.channelScrollView.visibility = View.VISIBLE
-                binding.channelName.text = response.name
-                if (response.verified) {
-                    binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        0,
-                        R.drawable.ic_verified,
-                        0
-                    )
-                }
-                binding.channelSubs.text = resources.getString(
-                    R.string.subscribers,
-                    response.subscriberCount.formatShort()
+            binding.channelScrollView.visibility = View.VISIBLE
+            binding.channelName.text = response.name
+            if (response.verified) {
+                binding.channelName.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    0,
+                    R.drawable.ic_verified,
+                    0
                 )
-                if (response.description.isBlank()) {
-                    binding.channelDescription.visibility = View.GONE
-                } else {
-                    binding.channelDescription.text = response.description.trim()
-                }
-
-                binding.channelDescription.setOnClickListener {
-                    (it as TextView).apply {
-                        it.maxLines = if (it.maxLines == Int.MAX_VALUE) 2 else Int.MAX_VALUE
-                    }
-                }
-
-                ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
-                ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
-
-                // recyclerview of the videos by the channel
-                channelAdapter = VideosAdapter(
-                    response.relatedStreams.toMutableList(),
-                    forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
-                )
-                binding.channelRecView.adapter = channelAdapter
             }
+            binding.channelSubs.text = resources.getString(
+                R.string.subscribers,
+                response.subscriberCount.formatShort()
+            )
+            if (response.description.isBlank()) {
+                binding.channelDescription.visibility = View.GONE
+            } else {
+                binding.channelDescription.text = response.description.trim()
+            }
+
+            binding.channelDescription.setOnClickListener {
+                (it as TextView).apply {
+                    it.maxLines = if (it.maxLines == Int.MAX_VALUE) 2 else Int.MAX_VALUE
+                }
+            }
+
+            ImageHelper.loadImage(response.bannerUrl, binding.channelBanner)
+            ImageHelper.loadImage(response.avatarUrl, binding.channelImage)
+
+            // recyclerview of the videos by the channel
+            channelAdapter = VideosAdapter(
+                response.relatedStreams.toMutableList(),
+                forceMode = VideosAdapter.Companion.ForceMode.CHANNEL
+            )
+            binding.channelRecView.adapter = channelAdapter
 
             setupTabs(response.tabs)
         }

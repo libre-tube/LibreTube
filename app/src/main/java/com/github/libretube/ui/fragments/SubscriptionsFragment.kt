@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,13 +20,12 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.LegacySubscriptionAdapter
 import com.github.libretube.ui.adapters.SubscriptionChannelAdapter
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.models.SubscriptionsViewModel
 import com.github.libretube.ui.sheets.BaseBottomSheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
-class SubscriptionsFragment : BaseFragment() {
+class SubscriptionsFragment : Fragment() {
     private lateinit var binding: FragmentSubscriptionsBinding
     private val viewModel: SubscriptionsViewModel by activityViewModels()
 

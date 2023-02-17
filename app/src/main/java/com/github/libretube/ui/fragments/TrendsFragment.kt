@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
 import com.github.libretube.api.RetrofitInstance
@@ -15,12 +16,13 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.LocaleHelper
 import com.github.libretube.ui.activities.SettingsActivity
 import com.github.libretube.ui.adapters.VideosAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import retrofit2.HttpException
 
-class TrendsFragment : BaseFragment() {
+class TrendsFragment : Fragment() {
     private lateinit var binding: FragmentTrendsBinding
 
     override fun onCreateView(
@@ -45,9 +47,11 @@ class TrendsFragment : BaseFragment() {
     private fun fetchTrending() {
         lifecycleScope.launchWhenCreated {
             val response = try {
-                RetrofitInstance.api.getTrending(
-                    LocaleHelper.getTrendingRegion(requireContext())
-                )
+                withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getTrending(
+                        LocaleHelper.getTrendingRegion(requireContext())
+                    )
+                }
             } catch (e: IOException) {
                 println(e)
                 Log.e(TAG(), "IOException, you might not have internet connection")
@@ -60,36 +64,20 @@ class TrendsFragment : BaseFragment() {
             } finally {
                 binding.homeRefresh.isRefreshing = false
             }
-            runOnUiThread {
-                binding.progressBar.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
 
-                // show a [SnackBar] if there are no trending videos available
-                if (response.isEmpty()) {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.change_region,
-                        Snackbar.LENGTH_LONG
-                    )
-                        .setAction(
-                            R.string.settings
-                        ) {
-                            startActivity(
-                                Intent(
-                                    context,
-                                    SettingsActivity::class.java
-                                )
-                            )
-                        }
-                        .show()
-                    return@runOnUiThread
-                }
-
-                binding.recview.adapter = VideosAdapter(
-                    response.toMutableList()
-                )
-
-                binding.recview.layoutManager = VideosAdapter.getLayout(requireContext())
+            // show a [SnackBar] if there are no trending videos available
+            if (response.isEmpty()) {
+                Snackbar.make(binding.root, R.string.change_region, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.settings) {
+                        startActivity(Intent(context, SettingsActivity::class.java))
+                    }
+                    .show()
+                return@launchWhenCreated
             }
+
+            binding.recview.adapter = VideosAdapter(response.toMutableList())
+            binding.recview.layoutManager = VideosAdapter.getLayout(requireContext())
         }
     }
 }

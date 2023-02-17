@@ -9,6 +9,7 @@ import android.view.ViewGroup.MarginLayoutParams
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,15 +26,13 @@ import com.github.libretube.helpers.NavBarHelper
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.ui.adapters.PlaylistBookmarkAdapter
 import com.github.libretube.ui.adapters.PlaylistsAdapter
-import com.github.libretube.ui.base.BaseFragment
 import com.github.libretube.ui.dialogs.CreatePlaylistDialog
 import com.github.libretube.ui.models.PlayerViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LibraryFragment : BaseFragment() {
-
+class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
     private val playerViewModel: PlayerViewModel by activityViewModels()
 
@@ -118,7 +117,9 @@ class LibraryFragment : BaseFragment() {
         binding.playlistRefresh.isRefreshing = true
         lifecycleScope.launchWhenCreated {
             var playlists = try {
-                PlaylistsHelper.getPlaylists()
+                withContext(Dispatchers.IO) {
+                    PlaylistsHelper.getPlaylists()
+                }
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
@@ -128,10 +129,7 @@ class LibraryFragment : BaseFragment() {
             }
             if (playlists.isNotEmpty()) {
                 playlists = when (
-                    PreferenceHelper.getString(
-                        PreferenceKeys.PLAYLISTS_ORDER,
-                        "recent"
-                    )
+                    PreferenceHelper.getString(PreferenceKeys.PLAYLISTS_ORDER, "recent")
                 ) {
                     "recent" -> playlists
                     "recent_reversed" -> playlists.reversed()
@@ -158,9 +156,7 @@ class LibraryFragment : BaseFragment() {
                 binding.nothingHere.visibility = View.GONE
                 binding.playlistRecView.adapter = playlistsAdapter
             } else {
-                runOnUiThread {
-                    binding.nothingHere.visibility = View.VISIBLE
-                }
+                binding.nothingHere.visibility = View.VISIBLE
             }
         }
     }
