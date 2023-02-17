@@ -28,7 +28,7 @@
     <string name="import_from_yt">导入订阅列表</string>
     <string name="import_from_yt_summary">从 YouTube 或 NewPipe</string>
     <string name="app_theme">主题</string>
-    <string name="server_error">服务器有问题。试试其他实例？</string>
+    <string name="server_error">所选的服务器似乎有问题。请试试其他实例。</string>
     <string name="unknown_error">网络错误。</string>
     <string name="error">出了点问题。</string>
     <string name="videoCount">%1$s 个视频</string>
@@ -117,7 +117,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">后台播放</string>
     <string name="update_available">版本 %1$s 可用</string>
-    <string name="update_available_text">是否前往GitHub下载最新版本？</string>
+    <string name="update_available_text">有更新可用。单击打开 Github 发布页面。</string>
     <string name="download_directory_summary">选择下载视频（音频）的存储位置。</string>
     <string name="video_format_summary">如果同时下载了音频与视频，则转换成视频文件。</string>
     <string name="download_directory">下载到</string>
