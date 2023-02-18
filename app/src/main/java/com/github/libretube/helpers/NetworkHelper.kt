@@ -2,6 +2,8 @@ package com.github.libretube.helpers
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.core.content.getSystemService
 
 object NetworkHelper {
@@ -9,33 +11,24 @@ object NetworkHelper {
      * Detect whether network is available
      */
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService<ConnectivityManager>()
+        // In case we are using a VPN, we return true since we might be using reverse tethering
+        val connectivityManager = context.getSystemService<ConnectivityManager>() ?: return false
 
-        // this seems to not recognize vpn connections
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val nw = connectivityManager.activeNetwork ?: return false
-            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
-            return when {
-                // WiFi
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                // Mobile
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                // Ethernet
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                // Bluetooth
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
-                // VPN
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> true
-                else -> false
-            }
+        if (Build.VERSION.SDK_INT >= 23) {
+            val activeNetwork = connectivityManager.activeNetwork
+            val caps = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+            val hasConnection = caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            val isVpn = caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+            return hasConnection || isVpn
         } else {
-            return connectivityManager.activeNetworkInfo?.isConnected ?: false
-        }
-         */
+            if (connectivityManager.activeNetworkInfo?.isConnected == true) {
+                return true
+            }
 
-        @Suppress("DEPRECATION")
-        return connectivityManager?.activeNetworkInfo?.isConnected ?: false
+            // activeNetworkInfo might return null instead of the VPN, so better check it explicitly
+            val vpnInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_VPN)
+            return vpnInfo?.isConnected == true
+        }
     }
 
     /**
