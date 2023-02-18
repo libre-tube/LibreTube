@@ -116,7 +116,7 @@
     <string name="piped">Piped</string>
     <string name="enabled">Włączono</string>
     <string name="disabled">Wyłączono</string>
-    <string name="update_available_text">Przejść do najnowszego wydania na GitHubie, aby ją pobrać\?</string>
+    <string name="update_available_text">Dostępna nowa wersja. Kliknij, aby otworzyć stronę wydań na GitHubie.</string>
     <string name="update_available">Dostępna jest wersja %1$s</string>
     <string name="no_replies">Na ten komentarz nikt nie odpowiedział.</string>
     <string name="authors">Autorzy</string>
@@ -447,4 +447,6 @@
     <string name="mark_as_watched">Oznacz jako obejrzane</string>
     <string name="replies">Odpowiedzi</string>
     <string name="codecs">Kodeki</string>
+    <string name="custom_playback_speed">Niestandardowa prędkość</string>
+    <string name="custom_playback_speed_summary">Użyj innej prędkości odtwarzania.</string>
 </resources>
