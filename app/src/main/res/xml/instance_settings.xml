@@ -49,6 +49,13 @@
             app:title="@string/login_register" />
 
         <Preference
+            android:icon="@drawable/ic_login_filled"
+            android:summary="@string/notgmail"
+            app:isPreferenceVisible="false"
+            app:key="logout"
+            app:title="@string/logout" />
+
+        <Preference
             android:icon="@drawable/ic_reset"
             android:summary="@string/deleteAccount_summary"
             app:key="delete_account"

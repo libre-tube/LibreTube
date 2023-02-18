@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -16,7 +15,9 @@ import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class LoginDialog : DialogFragment() {
+class LoginDialog(
+    private val onLogin: () -> Unit
+) : DialogFragment() {
     private lateinit var binding: DialogLoginBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -96,8 +97,8 @@ class LoginDialog : DialogFragment() {
             PreferenceHelper.setToken(response.token)
             PreferenceHelper.setUsername(login.username)
 
+            onLogin.invoke()
             dialog?.dismiss()
-            ActivityCompat.recreate(requireActivity())
         }
     }
 

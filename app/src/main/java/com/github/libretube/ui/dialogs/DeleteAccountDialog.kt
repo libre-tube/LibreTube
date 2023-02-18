@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
@@ -15,7 +14,9 @@ import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class DeleteAccountDialog : DialogFragment() {
+class DeleteAccountDialog(
+    private val onLogout: () -> Unit
+) : DialogFragment() {
     private lateinit var binding: DialogDeleteAccountBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -51,8 +52,7 @@ class DeleteAccountDialog : DialogFragment() {
             }
             Toast.makeText(context, R.string.success, Toast.LENGTH_SHORT).show()
 
-            PreferenceHelper.setToken("")
-            ActivityCompat.recreate(requireActivity())
+            onLogout.invoke()
             dialog?.dismiss()
         }
     }
