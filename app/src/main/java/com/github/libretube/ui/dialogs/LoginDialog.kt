@@ -4,19 +4,24 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.github.libretube.R
+import com.github.libretube.api.JsonHelper
 import com.github.libretube.api.RetrofitInstance
 import com.github.libretube.api.obj.Login
+import com.github.libretube.api.obj.Token
 import com.github.libretube.databinding.DialogLoginBinding
 import com.github.libretube.extensions.TAG
 import com.github.libretube.helpers.PreferenceHelper
 import com.github.libretube.util.TextUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.serialization.decodeFromString
+import retrofit2.HttpException
 
-class LoginDialog : DialogFragment() {
+class LoginDialog(
+    private val onLogin: () -> Unit
+) : DialogFragment() {
     private lateinit var binding: DialogLoginBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -75,6 +80,12 @@ class LoginDialog : DialogFragment() {
                 } else {
                     RetrofitInstance.authApi.login(login)
                 }
+            } catch (e: HttpException) {
+                val errorMessage = e.response()?.errorBody()?.string()?.let {
+                    JsonHelper.json.decodeFromString<Token>(it).error
+                } ?: context?.getString(R.string.server_error) ?: ""
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                return@launchWhenCreated
             } catch (e: Exception) {
                 Log.e(TAG(), e.toString())
                 Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -96,8 +107,8 @@ class LoginDialog : DialogFragment() {
             PreferenceHelper.setToken(response.token)
             PreferenceHelper.setUsername(login.username)
 
+            onLogin.invoke()
             dialog?.dismiss()
-            ActivityCompat.recreate(requireActivity())
         }
     }
 

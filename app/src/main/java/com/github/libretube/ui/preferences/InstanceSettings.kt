@@ -27,6 +27,7 @@ import kotlinx.coroutines.withContext
 
 class InstanceSettings : BasePreferenceFragment() {
     override val titleResourceId: Int = R.string.instance
+    private val token get() = PreferenceHelper.getToken()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.instance_settings, rootKey)
@@ -37,7 +38,7 @@ class InstanceSettings : BasePreferenceFragment() {
             RetrofitInstance.url = newValue.toString()
             if (!PreferenceHelper.getBoolean(PreferenceKeys.AUTH_INSTANCE_TOGGLE, false)) {
                 RetrofitInstance.authUrl = newValue.toString()
-                logout()
+                logoutAndUpdateUI()
             }
             RetrofitInstance.lazyMgr.reset()
             ActivityCompat.recreate(requireActivity())
@@ -54,8 +55,7 @@ class InstanceSettings : BasePreferenceFragment() {
             // save new auth url
             RetrofitInstance.authUrl = newValue.toString()
             RetrofitInstance.lazyMgr.reset()
-            logout()
-            ActivityCompat.recreate(requireActivity())
+            logoutAndUpdateUI()
             true
         }
 
@@ -63,7 +63,6 @@ class InstanceSettings : BasePreferenceFragment() {
             findPreference<SwitchPreferenceCompat>(PreferenceKeys.AUTH_INSTANCE_TOGGLE)
         authInstanceToggle?.setOnPreferenceChangeListener { _, newValue ->
             authInstance.isVisible = newValue == true
-            logout()
             // either use new auth url or the normal api url if auth instance disabled
             RetrofitInstance.authUrl = if (newValue == false) {
                 RetrofitInstance.url
@@ -71,14 +70,14 @@ class InstanceSettings : BasePreferenceFragment() {
                 authInstance.value
             }
             RetrofitInstance.lazyMgr.reset()
-            ActivityCompat.recreate(requireActivity())
+            logoutAndUpdateUI()
             true
         }
 
         val customInstance = findPreference<Preference>(PreferenceKeys.CUSTOM_INSTANCE)
         customInstance?.setOnPreferenceClickListener {
-            val newFragment = CustomInstanceDialog()
-            newFragment.show(childFragmentManager, CustomInstanceDialog::class.java.name)
+            CustomInstanceDialog()
+                .show(childFragmentManager, CustomInstanceDialog::class.java.name)
             true
         }
 
@@ -92,25 +91,32 @@ class InstanceSettings : BasePreferenceFragment() {
         }
 
         val login = findPreference<Preference>(PreferenceKeys.LOGIN_REGISTER)
-        val token = PreferenceHelper.getToken()
-        if (token != "") login?.setTitle(R.string.logout)
-        login?.setOnPreferenceClickListener {
-            if (token == "") {
-                val newFragment = LoginDialog()
-                newFragment.show(childFragmentManager, LoginDialog::class.java.name)
-            } else {
-                val newFragment = LogoutDialog()
-                newFragment.show(childFragmentManager, LogoutDialog::class.java.name)
-            }
+        val logout = findPreference<Preference>(PreferenceKeys.LOGOUT)
+        val deleteAccount = findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)
 
+        login?.isVisible = token.isEmpty()
+        logout?.isVisible = token.isNotEmpty()
+        deleteAccount?.isEnabled = token.isNotEmpty()
+
+        login?.setOnPreferenceClickListener {
+            LoginDialog {
+                login.isVisible = false
+                logout?.isVisible = true
+                deleteAccount?.isEnabled = true
+            }
+                .show(childFragmentManager, LoginDialog::class.java.name)
             true
         }
 
-        val deleteAccount = findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)
-        deleteAccount?.isEnabled = PreferenceHelper.getToken() != ""
+        logout?.setOnPreferenceClickListener {
+            LogoutDialog(this::logoutAndUpdateUI)
+                .show(childFragmentManager, LogoutDialog::class.java.name)
+            true
+        }
+
         deleteAccount?.setOnPreferenceClickListener {
-            val newFragment = DeleteAccountDialog()
-            newFragment.show(childFragmentManager, DeleteAccountDialog::class.java.name)
+            DeleteAccountDialog(this::logoutAndUpdateUI)
+                .show(childFragmentManager, DeleteAccountDialog::class.java.name)
             true
         }
     }
@@ -153,8 +159,11 @@ class InstanceSettings : BasePreferenceFragment() {
         }
     }
 
-    private fun logout() {
+    private fun logoutAndUpdateUI() {
         PreferenceHelper.setToken("")
         Toast.makeText(context, getString(R.string.loggedout), Toast.LENGTH_SHORT).show()
+        findPreference<Preference>(PreferenceKeys.LOGIN_REGISTER)?.isVisible = true
+        findPreference<Preference>(PreferenceKeys.LOGOUT)?.isVisible = false
+        findPreference<Preference>(PreferenceKeys.DELETE_ACCOUNT)?.isEnabled = false
     }
 }
