@@ -21,7 +21,7 @@
     <string name="dlcomplete">Stahování dokončeno.</string>
     <string name="downloadfailed">Stahování se nezdařilo.</string>
     <string name="app_theme">Motiv aplikace</string>
-    <string name="server_error">Server zaznamenal problém. Možná zkuste jinou instanci.</string>
+    <string name="server_error">Zdá se, že s vybraným serverem je problém. Zkuste jinou instanci.</string>
     <string name="vlcerror">Nepodařilo se otevřít ve VLC. Možná není nainstalované.</string>
     <string name="unknown_error">Chyba sítě.</string>
     <string name="grid">Sloupce mřížky</string>
@@ -190,7 +190,7 @@
     <string name="portrait">Na výšku</string>
     <string name="community">Komunita</string>
     <string name="update_available">Je dostupná verze %1$s</string>
-    <string name="update_available_text">Přejít na vydání na GitHubu a stáhnout ji\?</string>
+    <string name="update_available_text">K dispozici je nová aktualizace. Klepnutím otevřete stránku s novinkami na GitHubu.</string>
     <string name="appearance">Vzhled</string>
     <string name="app_behavior">Chování</string>
     <string name="downloads">Stahování</string>
@@ -447,4 +447,6 @@
     <string name="codecs">Kodeky</string>
     <string name="mark_as_watched">Označit jako zhlédnuté</string>
     <string name="unsupported_file_format">Nepodporovaný formát souboru: %1$s</string>
+    <string name="custom_playback_speed">Vlastní rychlost</string>
+    <string name="custom_playback_speed_summary">Použít jinou rychlost přehrávání než u běžného přehrávače.</string>
 </resources>

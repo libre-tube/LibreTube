@@ -447,4 +447,6 @@
     <string name="codecs">Кодеки</string>
     <string name="mark_as_watched">Пометить как просмотренное</string>
     <string name="unsupported_file_format">Неподдерживаемый формат файла: %1$s</string>
+    <string name="custom_playback_speed">Пользовательская скорость</string>
+    <string name="custom_playback_speed_summary">Используйте скорость воспроизведения, отличную от скорости обычного плеера.</string>
 </resources>
