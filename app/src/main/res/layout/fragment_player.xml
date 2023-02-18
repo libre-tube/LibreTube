@@ -29,7 +29,6 @@
                 android:id="@+id/player_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -71,8 +70,8 @@
                         android:id="@+id/player_views_info"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
                         tools:text="10M views    2 days ago " />
 
                     <com.github.libretube.ui.views.DrawableTextView
@@ -331,12 +330,12 @@
                 android:id="@+id/sb_skip_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="20dp"
                 android:padding="10dp"
-                android:visibility="gone"
                 android:text="@string/skip_segment"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
-                android:drawablePadding="20dp"
+                android:visibility="gone"
                 app:drawableEndCompat="@drawable/ic_next"
                 app:drawableEndDimen="20dp"
                 app:drawableTint="@android:color/white" />
