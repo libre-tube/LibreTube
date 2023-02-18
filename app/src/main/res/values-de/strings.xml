@@ -27,7 +27,7 @@
     <string name="downloadfailed">Herunterladen fehlgeschlagen.</string>
     <string name="vlcerror">Konnte nicht in VLC geöffnet werden, möglicherweise ist es nicht installiert.</string>
     <string name="app_theme">Design</string>
-    <string name="server_error">Serverfehler. Eine andere Instanz versuchen\?</string>
+    <string name="server_error">Es scheint ein Problem mit dem ausgewählten Server zu geben. Versuchen Sie eine andere Instanz.</string>
     <string name="unknown_error">Netzwerkfehler.</string>
     <string name="error">Etwas ist schiefgelaufen.</string>
     <string name="notgmail">Dies ist für ein Piped-Konto.</string>
@@ -117,7 +117,7 @@
     <string name="youtube">YouTube</string>
     <string name="playOnBackground">Im Hintergrund abspielen</string>
     <string name="update_available">Version %1$s ist verfügbar</string>
-    <string name="update_available_text">Releases auf GitHub aufrufen, um sie herunterzuladen\?</string>
+    <string name="update_available_text">Neue Aktualisierung verfügbar. Klicken Sie, um die Veröffentlichungsseite auf GitHub zu öffnen.</string>
     <string name="advanced_summary">Sichern &amp; Wiederherstellen</string>
     <string name="appearance">Design</string>
     <string name="app_behavior">Verhalten</string>
@@ -447,4 +447,5 @@
     <string name="mark_as_watched">Als gesehen markieren</string>
     <string name="unsupported_file_format">Nicht unterstütztes Dateiformat: %1$s</string>
     <string name="codecs">Codecs</string>
+    <string name="custom_playback_speed">Benutzerdefinierte Geschwindigkeit</string>
 </resources>
